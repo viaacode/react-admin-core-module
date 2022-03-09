@@ -88,20 +88,7 @@ pipeline {
 
     }
     post {
-        success {
-            script {
-                if (env.BRANCH_NAME.startsWith('PR')) {
-                    setGitHubBuildStatus('Build', 'SUCCESS')
-                }
-            }
-        }
-        failure {
-            script {
-                if (env.BRANCH_NAME.startsWith('PR')) {
-                    setGitHubBuildStatus('Build', 'FAILURE')
-                }
-            }
-        }
+
         always {
 
             container('default') {
