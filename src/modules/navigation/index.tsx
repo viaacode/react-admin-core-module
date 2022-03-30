@@ -4,7 +4,7 @@ import { ModuleRouteConfig, RouteConfigComponentProps } from '../../core/routes'
 import { RenderChildRoutes } from '../shared/components';
 
 import { NAVIGATION_PATHS } from './const';
-import { NavigationDetail, NavigationElement, NavigationOverview } from './pages';
+import { NavigationOverview } from './pages';
 
 export * from './const';
 
