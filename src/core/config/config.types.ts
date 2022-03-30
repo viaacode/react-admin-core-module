@@ -1,20 +1,41 @@
+import { TableSortingIcons } from '@meemoo/react-components';
 import { ComponentType } from 'react';
 
+import { NavigationConfig } from '../../modules/navigation/types';
+
 export interface ConfigValue {
-	navigation?: {
-		// TODO: add service api
-	};
+	// Core module configurations
+	navigation?: NavigationConfig;
 	// Secondary services and config
-	icon?: {
-		component: ComponentType;
-		list: { label: string; value: string }[];
+	components?: {
+		loader: {
+			component: ComponentType;
+		};
+		table: {
+			sortingIcons: TableSortingIcons;
+		};
 	};
-	fileService?: FileService;
-	[key: string]: unknown;
+	icon?: IconConfig;
+	file?: FileConfig;
 }
 
-export interface CoreModuleConfig {
-	name: string;
+export interface IconConfig {
+	component: ComponentType;
+	componentProps: {
+		add: IconComponentProps;
+		angleUp: IconComponentProps;
+		angleDown: IconComponentProps;
+		delete: IconComponentProps;
+		edit: IconComponentProps;
+		view: IconComponentProps;
+	};
+	list: { label: string; value: string }[];
+}
+
+export type IconComponentProps = Record<string, unknown>;
+
+export interface FileConfig {
+	service: FileService;
 }
 
 export interface FileService {

@@ -1,4 +1,4 @@
-import { equals } from 'ramda';
+import { isEqual } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +16,7 @@ const useModuleRoutes = (modulesLoading = true): [ModuleRouteConfig[]] => {
 
 		const destroyed$: Subject<boolean> = new Subject<boolean>();
 		Core.routes.routesChanges.pipe(takeUntil(destroyed$)).subscribe((newRoutes) => {
-			if (equals(routes, newRoutes) || !newRoutes) {
+			if (isEqual(routes, newRoutes) || !newRoutes) {
 				return;
 			}
 

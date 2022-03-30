@@ -17,13 +17,10 @@ export interface ChildRouteConfigComponentProps<
 }
 
 export interface RouteNavigationConfig {
-	context?: string;
-	renderContext?: string;
 	label: string;
 	order?: number;
 	parentPath?: string;
 	isVisible?: IsVisibleFunction[];
-	logoUrl?: string;
 	params?: Record<string, string>;
 }
 
