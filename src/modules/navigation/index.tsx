@@ -1,31 +1,49 @@
 import React, { FC } from 'react';
 
-import { RouteConfigComponentProps } from '../../core/routes';
+import { ModuleRouteConfig, RouteConfigComponentProps } from '../../core/routes';
 import { RenderChildRoutes } from '../shared/components';
 
 import { NAVIGATION_PATHS } from './const';
-import { NavigationDetail, NavigationOverview } from './pages';
+import { NavigationDetail, NavigationElement, NavigationOverview } from './pages';
+
+export * from './const';
 
 // TODO: This is necessary when having nested routes but maybe it's better to just have a flat
 // list of routes, this will make the RenderChildRoutes obsolete
 const NavigationRoot: FC<RouteConfigComponentProps> = ({ route }) => {
-	console.log(route);
-
 	return <RenderChildRoutes routes={route.routes} />;
 };
 
-export const NAVIGATION_ROUTES_CONFIG = {
-	path: '/navigatie',
+export const NAVIGATION_ROUTES_CONFIG: ModuleRouteConfig = {
+	path: NAVIGATION_PATHS.overview,
+	navigation: {
+		label: 'Navigatie',
+		order: 2,
+	},
 	component: NavigationRoot,
-	redirect: NAVIGATION_PATHS.overview,
+	redirect: NAVIGATION_PATHS.overview + '/overzicht',
 	routes: [
 		{
-			path: '/navigatie/overzicht',
+			path: NAVIGATION_PATHS.overview + '/overzicht',
 			component: NavigationOverview,
+			exact: true,
 		},
 		{
-			path: '/navigatie/:navigationId',
+			path: NAVIGATION_PATHS.create,
+			component: NavigationElement,
+		},
+		{
+			path: NAVIGATION_PATHS.detail,
 			component: NavigationDetail,
+			exact: true,
+		},
+		{
+			path: NAVIGATION_PATHS.detailCreate,
+			component: NavigationElement,
+		},
+		{
+			path: NAVIGATION_PATHS.detailEdit,
+			component: NavigationElement,
 		},
 	],
 };
