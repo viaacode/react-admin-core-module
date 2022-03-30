@@ -1,23 +1,26 @@
-import { useModuleRoutes, AdminCore } from '@meemoo/react-admin';
+import { useModuleRoutes, AdminCore, useNavigation } from '@meemoo/react-admin';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Switch } from 'react-router-dom';
 
-AdminCore.routes.register({
-	path: '/users',
-	component: () => <h1>Users</h1>
-});
+const queryClient = new QueryClient();
 
 function App() {
 	const [routes] = useModuleRoutes(false);
-	console.log(routes);
+	const [loadingNavItems, navItems] = useNavigation(routes);
+
+	console.log(loadingNavItems, navItems);
+
 
 	return (
-		<BrowserRouter>
-			<div className="App">
-				<Switch>
-					{routes && AdminCore.routes.render(routes)}
-				</Switch>
-			</div>
-		</BrowserRouter>
+		<QueryClientProvider client={queryClient}>
+			<BrowserRouter >
+				<div className="App">
+					<Switch>
+						{routes?.length > 0 && AdminCore.routes.render(routes)}
+					</Switch>
+				</div>
+			</BrowserRouter>
+		</QueryClientProvider>
 	);
 }
 

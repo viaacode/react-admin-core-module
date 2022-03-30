@@ -28,22 +28,5 @@ export const NAVIGATION_ROUTES_CONFIG: ModuleRouteConfig = {
 			component: NavigationOverview,
 			exact: true,
 		},
-		{
-			path: NAVIGATION_PATHS.create,
-			component: NavigationElement,
-		},
-		{
-			path: NAVIGATION_PATHS.detail,
-			component: NavigationDetail,
-			exact: true,
-		},
-		{
-			path: NAVIGATION_PATHS.detailCreate,
-			component: NavigationElement,
-		},
-		{
-			path: NAVIGATION_PATHS.detailEdit,
-			component: NavigationElement,
-		},
 	],
 };
