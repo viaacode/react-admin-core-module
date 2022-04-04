@@ -4,7 +4,7 @@ import { ModuleRouteConfig, RouteConfigComponentProps } from '../../core/routes'
 import { RenderChildRoutes } from '../shared/components';
 
 import { NAVIGATION_PATHS } from './const';
-import { NavigationDetail, NavigationElement, NavigationOverview } from './pages';
+import { NavigationOverview } from './pages';
 
 export * from './const';
 
@@ -27,23 +27,6 @@ export const NAVIGATION_ROUTES_CONFIG: ModuleRouteConfig = {
 			path: NAVIGATION_PATHS.overview + '/overzicht',
 			component: NavigationOverview,
 			exact: true,
-		},
-		{
-			path: NAVIGATION_PATHS.create,
-			component: NavigationElement,
-		},
-		{
-			path: NAVIGATION_PATHS.detail,
-			component: NavigationDetail,
-			exact: true,
-		},
-		{
-			path: NAVIGATION_PATHS.detailCreate,
-			component: NavigationElement,
-		},
-		{
-			path: NAVIGATION_PATHS.detailEdit,
-			component: NavigationElement,
 		},
 	],
 };
