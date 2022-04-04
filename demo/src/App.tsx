@@ -1,19 +1,23 @@
-import { useModuleRoutes, AdminCore } from '@meemoo/react-admin';
+import React from 'react';
+import { AdminCore } from './react-admin';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Switch } from 'react-router-dom';
+import { NavigationOverview } from './react-admin/modules/navigation/pages';
 
 const queryClient = new QueryClient();
 
 function App() {
-	const [routes] = useModuleRoutes(false);
+	// const [routes] = useModuleRoutes(false);
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter >
+			<BrowserRouter>
 				<div className="App">
-					<Switch>
-						{routes?.length > 0 && AdminCore.routes.render(routes)}
-					</Switch>
+					react admin demo app
+					{/*<Switch>*/}
+					{/*{routes?.length > 0 && AdminCore.routes.render(routes)}*/}
+					<NavigationOverview />
+					{/*</Switch>*/}
 				</div>
 			</BrowserRouter>
 		</QueryClientProvider>
@@ -21,3 +25,4 @@ function App() {
 }
 
 export default App;
+

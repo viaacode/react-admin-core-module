@@ -1,4 +1,4 @@
-import { AdminCore } from '@meemoo/react-admin';
+import { AdminCore } from './react-admin';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
