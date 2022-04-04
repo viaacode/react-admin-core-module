@@ -1,0 +1,7 @@
+mutation insertContentPageLabel($contentPageLabel: cms_content_labels_insert_input!) {
+	insert_cms_content_labels(objects: [$contentPageLabel]) {
+		returning {
+			id
+		}
+	}
+}

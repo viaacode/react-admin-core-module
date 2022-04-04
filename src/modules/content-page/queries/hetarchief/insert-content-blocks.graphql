@@ -1,0 +1,7 @@
+mutation insertContentBlocks($contentBlocks: [cms_content_blocks_insert_input!]!) {
+	insert_cms_content_blocks(objects: $contentBlocks) {
+		returning {
+			id
+		}
+	}
+}

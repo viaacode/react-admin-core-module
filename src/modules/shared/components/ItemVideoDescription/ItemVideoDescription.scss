@@ -1,0 +1,39 @@
+@import '../../styles/settings/variables';
+@import '../../styles/settings/colors';
+
+.c-item-video-description {
+	.c-button-toolbar .c-button + .c-button {
+		margin-left: 0;
+	}
+
+	.c-button-toolbar .c-button {
+		margin-bottom: 0.8rem;
+
+		&:not(:last-child) {
+			margin-right: 0.8rem;
+		}
+	}
+
+	.c-description-timecode {
+		color: $color-teal-bright;
+		padding: 5px;
+		cursor: pointer;
+		border-radius: 3px;
+
+		&:hover {
+			background-color: $color-gray-50;
+		}
+	}
+
+	@media (max-width: $g-bp2) {
+		.c-video-column {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		.c-item-view__main .c-video-player {
+			margin-left: 0;
+			width: 100%;
+		}
+	}
+}

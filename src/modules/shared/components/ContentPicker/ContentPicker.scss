@@ -1,0 +1,26 @@
+.c-content-picker {
+	> .o-form-group__controls {
+		> .o-flex {
+			> .o-flex__item:first-child {
+				min-width: 200px;
+			}
+		}
+	}
+}
+
+.c-content-picker {
+	.c-select {
+		.c-select__value-container > div {
+			width: 100% !important;
+
+			.c-select__input {
+				width: 100% !important;
+			}
+		}
+
+		input {
+			text-overflow: ellipsis;
+			width: 100% !important;
+		}
+	}
+}

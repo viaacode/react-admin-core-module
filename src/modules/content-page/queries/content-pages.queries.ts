@@ -1,0 +1,92 @@
+import { AvoOrHetArchief } from '../../shared/types';
+
+import {
+	DeleteContentBlockDocument as DeleteContentBlockDocumentAvo,
+	DeleteContentLabelLinksDocument as DeleteContentLabelLinksDocumentAvo,
+	GetContentByIdDocument as GetContentByIdDocumentAvo,
+	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentAvo,
+	GetContentPagesDocument as GetContentPagesDocumentAvo,
+	GetContentTypesDocument as GetContentTypesDocumentAvo,
+	GetPublicContentPagesByTitleDocument as GetPublicContentPagesByTitleDocumentAvo,
+	GetPublicProjectContentPagesByTitleDocument as GetPublicProjectContentPagesByTitleDocumentAvo,
+	GetPublicProjectContentPagesDocument as GetPublicProjectContentPagesDocumentAvo,
+	InsertContentBlocksDocument as InsertContentBlocksDocumentAvo,
+	InsertContentDocument as InsertContentDocumentAvo,
+	InsertContentLabelLinksDocument as InsertContentLabelLinksDocumentAvo,
+	SoftDeleteContentDocument as SoftDeleteContentDocumentAvo,
+	UpdateContentBlockDocument as UpdateContentBlockDocumentAvo,
+	UpdateContentByIdDocument as UpdateContentByIdDocumentAvo,
+} from 'generated/graphql-db-types-avo';
+import {
+	DeleteContentBlockDocument as DeleteContentBlockDocumentHetArchief,
+	DeleteContentLabelLinksDocument as DeleteContentLabelLinksDocumentHetArchief,
+	GetContentByIdDocument as GetContentByIdDocumentHetArchief,
+	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentHetArchief,
+	GetContentPagesDocument as GetContentPagesDocumentHetArchief,
+	GetContentTypesDocument as GetContentTypesDocumentHetArchief,
+	GetPublicContentPagesByTitleDocument as GetPublicContentPagesByTitleDocumentHetArchief,
+	GetPublicProjectContentPagesByTitleDocument as GetPublicProjectContentPagesByTitleDocumentHetArchief,
+	GetPublicProjectContentPagesDocument as GetPublicProjectContentPagesDocumentHetArchief,
+	InsertContentBlocksDocument as InsertContentBlocksDocumentHetArchief,
+	InsertContentDocument as InsertContentDocumentHetArchief,
+	InsertContentLabelLinksDocument as InsertContentLabelLinksDocumentHetArchief,
+	SoftDeleteContentDocument as SoftDeleteContentDocumentHetArchief,
+	UpdateContentBlockDocument as UpdateContentBlockDocumentHetArchief,
+	UpdateContentByIdDocument as UpdateContentByIdDocumentHetArchief,
+} from 'generated/graphql-db-types-hetarchief';
+
+type ContentPageQueries = {
+	SoftDeleteContentDocument: string;
+	UpdateContentByIdDocument: string;
+	InsertContentDocument: string;
+	DeleteContentLabelLinksDocument: string;
+	InsertContentLabelLinksDocument: string;
+	GetContentLabelsByContentTypeDocument: string;
+	GetContentTypesDocument: string;
+	GetContentByIdDocument: string;
+	GetPublicProjectContentPagesByTitleDocument: string;
+	GetPublicContentPagesByTitleDocument: string;
+	InsertContentBlocksDocument: string;
+	DeleteContentBlockDocument: string;
+	UpdateContentBlockDocument: string;
+	GetContentPagesDocument: string;
+	GetPublicProjectContentPagesDocument: string;
+};
+
+export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> = {
+	[AvoOrHetArchief.avo]: {
+		GetContentPagesDocument: GetContentPagesDocumentAvo,
+		GetPublicProjectContentPagesDocument: GetPublicProjectContentPagesDocumentAvo,
+		UpdateContentBlockDocument: UpdateContentBlockDocumentAvo,
+		DeleteContentBlockDocument: DeleteContentBlockDocumentAvo,
+		InsertContentBlocksDocument: InsertContentBlocksDocumentAvo,
+		GetPublicContentPagesByTitleDocument: GetPublicContentPagesByTitleDocumentAvo,
+		SoftDeleteContentDocument: SoftDeleteContentDocumentAvo,
+		UpdateContentByIdDocument: UpdateContentByIdDocumentAvo,
+		InsertContentDocument: InsertContentDocumentAvo,
+		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentAvo,
+		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentAvo,
+		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentAvo,
+		GetContentTypesDocument: GetContentTypesDocumentAvo,
+		GetContentByIdDocument: GetContentByIdDocumentAvo,
+		GetPublicProjectContentPagesByTitleDocument: GetPublicProjectContentPagesByTitleDocumentAvo,
+	},
+	[AvoOrHetArchief.hetArchief]: {
+		GetContentPagesDocument: GetContentPagesDocumentHetArchief,
+		GetPublicProjectContentPagesDocument: GetPublicProjectContentPagesDocumentHetArchief,
+		UpdateContentBlockDocument: UpdateContentBlockDocumentHetArchief,
+		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
+		InsertContentBlocksDocument: InsertContentBlocksDocumentHetArchief,
+		GetPublicContentPagesByTitleDocument: GetPublicContentPagesByTitleDocumentHetArchief,
+		SoftDeleteContentDocument: SoftDeleteContentDocumentHetArchief,
+		UpdateContentByIdDocument: UpdateContentByIdDocumentHetArchief,
+		InsertContentDocument: InsertContentDocumentHetArchief,
+		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentHetArchief,
+		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentHetArchief,
+		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentHetArchief,
+		GetContentTypesDocument: GetContentTypesDocumentHetArchief,
+		GetContentByIdDocument: GetContentByIdDocumentHetArchief,
+		GetPublicProjectContentPagesByTitleDocument:
+			GetPublicProjectContentPagesByTitleDocumentHetArchief,
+	},
+};
