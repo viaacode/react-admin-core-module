@@ -23,10 +23,11 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { toastService } from '@shared/services/toast-service';
-
+import { ToastType } from '../../../../core/config';
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
+
+import { useConfig } from '~modules/shared/hooks';
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -63,6 +64,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 	onChange,
 }) => {
 	const { t } = useTranslation();
+	const configServices = useConfig('services');
 
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);
@@ -89,7 +91,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 		}
 	}, [dateControls, setRangeState]);
 
-	const resetInternalRangeState = async (tagId?: ReactText, evt?: MouseEvent): Promise<void> => {
+	const resetInternalRangeState = async (_tagId?: ReactText, evt?: MouseEvent): Promise<void> => {
 		evt && evt.stopPropagation();
 		applyDefaultRangeState();
 	};
@@ -106,7 +108,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 		await closeDropdown();
 	};
 
-	const removeFilter = (tagId: ReactText, evt: MouseEvent) => {
+	const removeFilter = (_tagId: ReactText, evt: MouseEvent) => {
 		evt.stopPropagation();
 		setRangeState(DEFAULT_DATE_RANGE);
 		setYearInputGte('');
@@ -150,13 +152,14 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				await handleDateChange(null, rangeId);
 			}
 		} catch (err) {
-			toastService.notify({
+			configServices.services.toastService.showToast({
 				title: t(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),
 				description: `${t(
 					'shared/components/date-range-dropdown/date-range-dropdown___ongeldig-jaar'
 				)} ${value}`,
+				type: ToastType.ERROR,
 			});
 		}
 	};

@@ -1,4 +1,4 @@
-import { AdminLayout } from '@admin/shared/layouts';
+import { AdminLayout } from '~modules/shared/layouts';
 
 import {
 	Button,
@@ -22,8 +22,6 @@ import React, {
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { toastService } from '@shared/services/toast-service';
-
 import './ContentOverview.scss';
 import ConfirmModal from '../../../shared/components/ConfirmModal/ConfirmModal';
 import FilterTable, {
@@ -46,28 +44,28 @@ import {
 	ContentTableState,
 } from '../../types/content-pages.types';
 
-import { useContentPageLabelOptions } from '@admin/content-page-labels/hooks/useContentPageLabelOptions';
-import { CheckboxOption } from '@admin/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
+import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '@admin/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '@admin/shared/helpers/custom-error';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getQueryFilter,
-} from '@admin/shared/helpers/filters';
-import { getFullName } from '@admin/shared/helpers/formatters/avatar';
-import { formatDate } from '@admin/shared/helpers/formatters/date';
-import { getUserGroupLabel } from '@admin/shared/helpers/get-profile-info';
-import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '@admin/shared/helpers/link';
-import { setSelectedCheckboxes } from '@admin/shared/helpers/set-selected-checkboxes';
-import { truncateTableValue } from '@admin/shared/helpers/truncate';
-import { SpecialPermissionGroups } from '@admin/shared/types/authentication.types';
-import { DefaultSecureRouteProps } from '@admin/shared/types/secure-route.types';
-import { Permission } from '@admin/user/user.types';
+} from '~modules/shared/helpers/filters';
+import { getFullName } from '~modules/shared/helpers/formatters/avatar';
+import { formatDate } from '~modules/shared/helpers/formatters/date';
+import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
+import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
+import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
+import { truncateTableValue } from '~modules/shared/helpers/truncate';
+import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
+import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
+import { Permission } from '~modules/user/user.types';
 
 type ContentPageOverviewProps = DefaultSecureRouteProps;
 

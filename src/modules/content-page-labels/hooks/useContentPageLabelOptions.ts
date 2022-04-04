@@ -1,15 +1,11 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
-import { i18n } from 'next-i18next';
+import { CheckboxOption } from 'modules/admin/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
 import { ContentPageLabelService } from '../services/content-page-label.service';
-
-import { CheckboxOption } from 'modules/admin/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

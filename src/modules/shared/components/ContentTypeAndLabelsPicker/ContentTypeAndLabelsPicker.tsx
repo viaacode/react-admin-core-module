@@ -11,11 +11,8 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
 import { compact, isNumber } from 'lodash-es';
-import { i18n } from 'next-i18next';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';

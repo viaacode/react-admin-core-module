@@ -10,6 +10,8 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
+import FileUpload from 'modules/admin/shared/components/FileUpload/FileUpload';
+import { i18n } from 'modules/admin/shared/helpers/i18n';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
 import { ContentTypeAndLabelsPicker } from '../../shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
@@ -100,9 +102,7 @@ import {
 	WidthOption,
 } from '../types/content-block.types';
 
-import { IconPicker } from '@admin/shared/components/IconPicker/IconPicker';
-import FileUpload from 'modules/admin/shared/components/FileUpload/FileUpload';
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 
 // TODO investigate why these cannot be loaded from the barrel file: src/admin/shared/components/index.ts
 // More info on the bug that occurs:

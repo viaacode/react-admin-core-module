@@ -10,12 +10,9 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
-import { i18n } from 'next-i18next';
 import queryString from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';

@@ -1,6 +1,12 @@
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
+import { CustomError } from '../shared/helpers/custom-error';
+import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
+import { performQuery } from '../shared/helpers/gql';
+import { dataService } from '../shared/services/data-service';
+import { RelationService } from '../shared/services/relation-service/relation.service';
+
 import {
 	FetchItemUuidByExternalIdDocument,
 	GetItemByExternalIdDocument,
@@ -8,12 +14,7 @@ import {
 	GetItemDepublishReasonDocument,
 	GetPublicItemsByTitleOrExternalIdDocument,
 	GetPublicItemsDocument,
-} from '../../../generated/graphql-db-types-avo';
-import { CustomError } from '../shared/helpers/custom-error';
-import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
-import { performQuery } from '../shared/helpers/gql';
-import { dataService } from '../shared/services/data-service';
-import { RelationService } from '../shared/services/relation-service/relation.service';
+} from '~generated/graphql-db-types-avo';
 
 export class ItemsService {
 	public static async fetchItemByUuid(uuid: string): Promise<Avo.Item.Item> {

@@ -2,12 +2,13 @@ import { Avo } from '@viaa/avo2-types';
 import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { get } from 'lodash-es';
 
+import { CustomError } from '../../helpers/custom-error';
+import { dataService } from '../data-service';
+
 import {
 	FetchCollectionRelationsBySubjectsDocument,
 	FetchItemRelationsBySubjectsDocument,
-} from '../../../../../generated/graphql-db-types-avo';
-import { CustomError } from '../../helpers/custom-error';
-import { dataService } from '../data-service';
+} from '~generated/graphql-db-types-avo';
 
 export class RelationService {
 	public static async fetchRelationsBySubject(

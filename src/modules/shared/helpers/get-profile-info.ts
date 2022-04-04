@@ -7,7 +7,7 @@ import { SpecialPermissionGroups } from '../types/authentication.types';
 import { CustomError } from './custom-error';
 import { getFullName, getProfile } from './formatters/avatar';
 
-import { User } from '@admin/user/user.types';
+import { User } from '~modules/user/user.types';
 
 export const getFirstName = (user: Avo.User.User | undefined, defaultName = ''): string => {
 	if (!user) {

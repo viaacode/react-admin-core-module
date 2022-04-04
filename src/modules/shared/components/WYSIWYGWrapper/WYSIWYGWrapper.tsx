@@ -9,8 +9,6 @@ import { isEqual } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { toastService } from '@shared/services/toast-service';
-
 import { WYSIWYG_OPTIONS_DEFAULT } from '../../consts/wysiwyg';
 import { CustomError } from '../../helpers/custom-error';
 import { i18n } from '../../helpers/i18n';

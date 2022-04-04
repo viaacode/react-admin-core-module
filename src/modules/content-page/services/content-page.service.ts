@@ -1,22 +1,17 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isFunction, kebabCase, omit } from 'lodash-es';
+import { CustomError } from 'modules/admin/shared/helpers/custom-error';
+import { getEnv } from 'modules/admin/shared/helpers/env';
+import { performQuery } from 'modules/admin/shared/helpers/gql';
 import moment from 'moment';
-import { i18n } from 'next-i18next';
-import getConfig from 'next/config';
 import queryString from 'query-string';
 
-import { getOrderObject } from '@shared/helpers/generate-order-gql-query';
-import { ApiService } from '@shared/services/api-service';
-import { toastService } from '@shared/services/toast-service';
-import { ApiResponseWrapper } from '@shared/types';
-
-import { GET_CONTENT_TYPES } from '../../shared/components/ContentPicker/ContentPicker.const';
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
-import { dataService } from '../../shared/services/data-service';
+import { dataService, GraphQlResponse } from '../../shared/services/data-service';
 import { AvoOrHetArchief } from '../../shared/types';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
@@ -42,11 +37,9 @@ import {
 import { ContentBlockService } from './content-block.service';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from './content-page.const';
 
-import { CustomError } from 'modules/admin/shared/helpers/custom-error';
-import { getEnv } from 'modules/admin/shared/helpers/env';
-import { performQuery } from 'modules/admin/shared/helpers/gql';
-
-const { publicRuntimeConfig } = getConfig();
+import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { i18n } from '~modules/shared/helpers/i18n';
+import { ApiResponseWrapper } from '~modules/shared/types/api';
 
 export class ContentPageService {
 	private static queries =
@@ -174,7 +167,9 @@ export class ContentPageService {
 				})
 			);
 		} catch (err) {
-			console.error('Failed to retrieve content types.', err, { query: 'GET_CONTENT_TYPES' });
+			console.error('Failed to retrieve content types.', err, {
+				query: this.queries.GetContentTypesDocument,
+			});
 			toastService.notify({
 				title: i18n?.t('modules/admin/content-page/services/content-page___error') || '',
 				description:
@@ -617,19 +612,18 @@ export class ContentPageService {
 		size: number,
 		orderProp: string,
 		orderDirection: 'asc' | 'desc'
-	): Promise<ApiResponseWrapper<ContentPageInfo>> {
-		const parsed = await ApiService.getApi()
-			.post(CONTENT_PAGE_SERVICE_BASE_URL, {
-				body: JSON.stringify({
-					filters,
-					page,
-					size,
-					orderProp,
-					orderDirection,
-				}),
-			})
-			.json();
-		return parsed as ApiResponseWrapper<ContentPageInfo>;
+	): Promise<GraphQlResponse<ContentPageInfo[]>> {
+		const parsed = await dataService.query({
+			query: this.queries.GetContentPagesDocument,
+			variables: {
+				filters,
+				page,
+				size,
+				orderProp,
+				orderDirection,
+			},
+		});
+		return parsed;
 	}
 
 	/**

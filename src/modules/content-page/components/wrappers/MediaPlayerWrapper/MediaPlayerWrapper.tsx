@@ -5,15 +5,13 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { toastService } from '@shared/services/toast-service';
-
-import { ItemsService } from '@admin/item/items.service';
-import { FlowPlayerWrapper } from '@admin/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import { ItemsService } from '~modules/item/items.service';
+import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '@admin/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '@admin/shared/helpers/custom-error';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;

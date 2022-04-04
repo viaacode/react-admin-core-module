@@ -2,11 +2,6 @@ import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 import queryString from 'query-string';
 
-import {
-	GetPublicCollectionsByIdDocument,
-	GetPublicCollectionsByTitleDocument,
-	GetPublicCollectionsDocument,
-} from '../../../generated/graphql-db-types-avo';
 import { CustomError } from '../shared/helpers/custom-error';
 import { getEnv } from '../shared/helpers/env';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
@@ -15,6 +10,12 @@ import { isUuid } from '../shared/helpers/uuid';
 import { dataService } from '../shared/services/data-service';
 
 import { ContentTypeNumber } from './collection.types';
+
+import {
+	GetPublicCollectionsByIdDocument,
+	GetPublicCollectionsByTitleDocument,
+	GetPublicCollectionsDocument,
+} from '~generated/graphql-db-types-avo';
 
 export class CollectionService {
 	/**

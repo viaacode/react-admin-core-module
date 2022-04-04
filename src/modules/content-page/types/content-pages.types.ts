@@ -6,6 +6,13 @@ import { FilterableTableState } from '../../shared/components/FilterTable/Filter
 
 import { ContentBlockConfig } from './content-block.types';
 
+export interface ContentPageConfig {
+	// TODO add config values
+	services?: {
+		// Add services
+	};
+}
+
 // Pages
 export enum PageType {
 	Create = 'create',

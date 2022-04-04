@@ -2,19 +2,19 @@ import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-componen
 import { Avo } from '@viaa/avo2-types';
 import { History } from 'history';
 import { fromPairs, get, isArray, isEmpty, isNil, isString, map, noop } from 'lodash-es';
-import { i18n } from 'next-i18next';
 import getConfig from 'next/config';
 import queryString from 'query-string';
 import React, { Fragment, ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { toastService } from '@shared/services/toast-service';
-
+import { ToastType } from '../../../core/config';
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
 import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
+
+import { useConfig } from '~modules/shared/hooks';
 
 type RouteParams = { [key: string]: string | number | undefined };
 const { publicRuntimeConfig } = getConfig();
@@ -59,16 +59,17 @@ export const navigate = (
 	search?: string | { [paramName: string]: string }
 ) => {
 	const missingParams = getMissingParams(route);
+	const config = useConfig('services');
 
 	// Abort navigation when params were expected but none were given
 	if (missingParams.length > 0 && (isNil(params) || isEmpty(params))) {
 		navigationConsoleError(route, missingParams);
-		toastService.notify({
-			title: i18n?.t('modules/admin/shared/helpers/link___error') || '',
-			description:
-				i18n?.t(
-					'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
-				) || '',
+		config.toastService.showToast({
+			title: config.i18n.t('modules/admin/shared/helpers/link___error') || '',
+			description: config.i18n.t(
+				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
+			),
+			type: ToastType.ERROR,
 		});
 
 		return;
@@ -78,12 +79,12 @@ export const navigate = (
 	const builtLink = buildLink(route, params, search);
 
 	if (isEmpty(builtLink)) {
-		toastService.notify({
-			title: i18n?.t('modules/admin/shared/helpers/link___error') || '',
-			description:
-				i18n?.t(
-					'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
-				) || '',
+		config.toastService.showToast({
+			title: config.i18n.t('modules/admin/shared/helpers/link___error'),
+			description: config.i18n.t(
+				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
+			),
+			type: ToastType.ERROR,
 		});
 
 		return;
@@ -156,36 +157,40 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				navigateToAbsoluteOrRelativeUrl(String(value), history, resolvedTarget);
 				break;
 
-			case 'COLLECTION':
+			case 'COLLECTION': {
 				const collectionUrl = buildLink(APP_PATH.COLLECTION_DETAIL.route, {
 					id: value as string,
 				});
 				navigateToAbsoluteOrRelativeUrl(collectionUrl, history, resolvedTarget);
 				break;
+			}
 
-			case 'ITEM':
+			case 'ITEM': {
 				const itemUrl = buildLink(APP_PATH.ITEM_DETAIL.route, {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(itemUrl, history, resolvedTarget);
 				break;
+			}
 
-			case 'BUNDLE':
+			case 'BUNDLE': {
 				const bundleUrl = buildLink(BUNDLE_PATH.BUNDLE_DETAIL, {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(bundleUrl, history, resolvedTarget);
 				break;
+			}
 
-			case 'EXTERNAL_LINK':
+			case 'EXTERNAL_LINK': {
 				const externalUrl = ((value as string) || '').replace(
 					'{{PROXY_URL}}',
 					publicRuntimeConfig.PROXY_URL || ''
 				);
 				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
 				break;
+			}
 
-			case 'ANCHOR_LINK':
+			case 'ANCHOR_LINK': {
 				const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
 				navigateToAbsoluteOrRelativeUrl(
 					`${urlWithoutQueryOrAnchor}#${value}`,
@@ -193,12 +198,13 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 					resolvedTarget
 				);
 				break;
+			}
 
 			case 'FILE':
 				navigateToAbsoluteOrRelativeUrl(value as string, history, LinkTarget.Blank);
 				break;
 
-			case 'SEARCH_QUERY':
+			case 'SEARCH_QUERY': {
 				const queryParams = JSON.parse(value as string);
 				navigateToAbsoluteOrRelativeUrl(
 					buildLink(
@@ -217,6 +223,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 					resolvedTarget
 				);
 				break;
+			}
 
 			default:
 				break;

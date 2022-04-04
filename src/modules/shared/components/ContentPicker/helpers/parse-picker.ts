@@ -1,8 +1,5 @@
 import { LinkTarget } from '@viaa/avo2-components';
-import { i18n } from 'next-i18next';
 import queryString from 'query-string';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { PickerItem } from '../../../types/content-picker';
 import { ContentPickerType } from '../ContentPicker.const';

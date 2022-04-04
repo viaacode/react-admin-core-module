@@ -1,10 +1,10 @@
 import { compact, sortBy } from 'lodash-es';
+import { PickerSelectItem } from 'modules/admin/shared/types/content-picker';
 
 import { APP_PATH, RouteId } from '../../../consts/routes.consts';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '@admin/shared/components/ContentPicker/ContentPicker.const';
-import { PickerSelectItem } from 'modules/admin/shared/types/content-picker';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 // Return InternalLinkItems items from APP_PATH
 export const retrieveInternalLinks = async (

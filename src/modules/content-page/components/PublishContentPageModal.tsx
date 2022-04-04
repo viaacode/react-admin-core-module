@@ -25,8 +25,6 @@ import { getPublishedState } from '../helpers/get-published-state';
 import './PublishContentPageModal.scss';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
-import { toastService } from '@shared/services/toast-service';
-
 import Html from 'modules/admin/shared/components/Html/Html';
 
 interface PublishContentPageModalProps {

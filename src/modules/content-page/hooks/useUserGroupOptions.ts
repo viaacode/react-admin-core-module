@@ -1,15 +1,12 @@
 import { TagInfo } from '@viaa/avo2-components';
+import { i18n } from 'modules/admin/shared/helpers/i18n';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { CheckboxOption } from '../../shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { GET_SPECIAL_USER_GROUPS } from '../../user-group/user-group.const';
 import { UserGroupService } from '../../user-group/user-group.service';
-
-import { i18n } from 'modules/admin/shared/helpers/i18n';
 
 type UseUserGroupsTuple = [TagInfo[] | CheckboxOption[], boolean];
 

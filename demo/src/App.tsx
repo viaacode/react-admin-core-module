@@ -1,8 +1,8 @@
 import React from 'react';
+import { ContentPageOverview } from './react-admin/modules/content-page/pages';
 import { AdminCore } from './react-admin';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import { NavigationOverview } from './react-admin/modules/navigation/pages';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +16,7 @@ function App() {
 					react admin demo app
 					{/*<Switch>*/}
 					{/*{routes?.length > 0 && AdminCore.routes.render(routes)}*/}
-					<NavigationOverview />
+					<ContentPageOverview />
 					{/*</Switch>*/}
 				</div>
 			</BrowserRouter>

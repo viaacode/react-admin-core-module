@@ -17,12 +17,9 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, isEqual, isNil } from 'lodash-es';
-import { i18n } from 'next-i18next';
 import React, { FunctionComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { validateContentBlockField } from '../../../shared/helpers/validation';
 import {

@@ -8,7 +8,6 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { i18n } from 'next-i18next';
 import React, { FunctionComponent } from 'react';
 
 import { sanitizeHtml } from '../../helpers/sanitize';

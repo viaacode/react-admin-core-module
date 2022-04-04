@@ -1,6 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-import { User } from '@admin/user/user.types';
+import { User } from '~modules/user/user.types';
 
 export interface DefaultSecureRouteProps<T = {}> extends RouteComponentProps<T> {
 	// technically this type is incorrect, it should be Avo.User.User | undefined

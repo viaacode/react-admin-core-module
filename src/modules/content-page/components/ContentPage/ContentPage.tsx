@@ -1,6 +1,10 @@
 import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
+import {
+	BlockClickHandler,
+	ContentPageInfo,
+} from 'modules/admin/content-page/types/content-pages.types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,14 +18,10 @@ import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '@admin/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '@admin/shared/helpers/custom-error';
-import { getUserGroupIds } from '@admin/shared/helpers/get-profile-info';
-import { UserProps } from '@admin/shared/types';
-import {
-	BlockClickHandler,
-	ContentPageInfo,
-} from 'modules/admin/content-page/types/content-pages.types';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { getUserGroupIds } from '~modules/shared/helpers/get-profile-info';
+import { UserProps } from '~modules/shared/types';
 
 type ContentPageDetailProps =
 	| {

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { i18n } from '../../helpers/i18n';
 
-import { Permissions, PermissionService } from '@admin/shared/services/permission-service';
-import { User } from '@admin/user/user.types';
+import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
+import { User } from '~modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 

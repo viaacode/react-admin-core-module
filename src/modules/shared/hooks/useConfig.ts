@@ -7,7 +7,7 @@ export const useConfig = <Key extends keyof ConfigValue>(key: Key) => {
 	const [configValue, setConfigValue] = useState<ConfigValue[Key]>();
 
 	useEffect(() => {
-		const sub = Core.config.selectValue(key).subscribe((nextConfig) => {
+		const sub = Core.config.getConfig(key).subscribe((nextConfig) => {
 			setConfigValue(nextConfig as ConfigValue[Key]);
 		});
 
@@ -16,5 +16,5 @@ export const useConfig = <Key extends keyof ConfigValue>(key: Key) => {
 		};
 	}, [key]);
 
-	return configValue;
+	return configValue as ConfigValue[Key];
 };

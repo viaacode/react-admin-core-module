@@ -15,10 +15,10 @@ import {
 import { RichEditorState } from '@viaa/avo2-components/dist/esm/wysiwyg';
 import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
+import { getProfileId } from 'modules/admin/shared/helpers/get-profile-id';
+import { PickerItem } from 'modules/admin/shared/types/content-picker';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import FileUpload from '../../../shared/components/FileUpload/FileUpload';
 import WYSIWYGWrapper from '../../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
@@ -32,15 +32,13 @@ import {
 	ContentWidth,
 } from '../../types/content-pages.types';
 
-import { ContentPicker } from '@admin/shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '@admin/shared/components/ContentPicker/ContentPicker.const';
-import { UserGroupSelect } from '@admin/shared/components/UserGroupSelect/UserGroupSelect';
-import { WYSIWYG_OPTIONS_FULL } from '@admin/shared/consts/wysiwyg';
-import { getFullName } from '@admin/shared/helpers/formatters/avatar';
-import { ValueOf } from '@admin/shared/types';
-import { Permission, User } from '@admin/user/user.types';
-import { getProfileId } from 'modules/admin/shared/helpers/get-profile-id';
-import { PickerItem } from 'modules/admin/shared/types/content-picker';
+import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
+import { WYSIWYG_OPTIONS_FULL } from '~modules/shared/consts/wysiwyg';
+import { getFullName } from '~modules/shared/helpers/formatters/avatar';
+import { ValueOf } from '~modules/shared/types';
+import { Permission, User } from '~modules/user/user.types';
 
 import './ContentEditForm.scss';
 

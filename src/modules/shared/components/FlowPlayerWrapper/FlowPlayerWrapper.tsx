@@ -32,19 +32,19 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 // import { useTranslation } from 'react-i18next';
 //
 // import { useGetMediaTicketInfo } from '@media/hooks/get-media-ticket-url';
-// import { toastService } from '@shared/services/toast-service';
 //
-// import { CustomError } from '@admin/shared/helpers/custom-error';
-// import { getValidStartAndEnd } from '@admin/shared/helpers/cut-start-and-end';
-// import { getEnv } from '@admin/shared/helpers/env';
-// import { reorderDate } from '@admin/shared/helpers/formatters/date';
-// import { formatDurationHoursMinutesSeconds } from '@admin/shared/helpers/formatters/duration';
-// import { getSubtitles } from '@admin/shared/helpers/get-subtitles';
-// import { toSeconds } from '@admin/shared/helpers/parsers/duration';
-// import { UserProps } from '@admin/shared/types';
+//
+// import { CustomError } from '~modules/shared/helpers/custom-error';
+// import { getValidStartAndEnd } from '~modules/shared/helpers/cut-start-and-end';
+// import { getEnv } from '~modules/shared/helpers/env';
+// import { reorderDate } from '~modules/shared/helpers/formatters/date';
+// import { formatDurationHoursMinutesSeconds } from '~modules/shared/helpers/formatters/duration';
+// import { getSubtitles } from '~modules/shared/helpers/get-subtitles';
+// import { toSeconds } from '~modules/shared/helpers/parsers/duration';
+// import { UserProps } from '~modules/shared/types';
 //
 // import './FlowPlayerWrapper.scss';
-// import { i18n } from '@admin/shared/helpers/i18n';
+// import { i18n } from '~modules/shared/helpers/i18n';
 //
 // type FlowPlayerWrapperProps = {
 // 	item?: Avo.Item.Item;

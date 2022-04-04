@@ -2,7 +2,7 @@ import { get } from 'lodash-es';
 
 import { CustomError } from './custom-error';
 
-import { User } from '@admin/user/user.types';
+import { User } from '~modules/user/user.types';
 
 export function getProfileId(user: User | undefined): string {
 	if (!user) {

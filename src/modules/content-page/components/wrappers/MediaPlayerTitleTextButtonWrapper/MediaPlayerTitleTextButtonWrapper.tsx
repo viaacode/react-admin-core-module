@@ -8,15 +8,15 @@ import {
 	IconName,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import React, { FC, FunctionComponent } from 'react';
+import React, { FC } from 'react';
 
 import { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
-import { generateSmartLink } from '@admin/shared/helpers/link';
-import { UserProps } from '@admin/shared/types';
-import { Permission } from '@admin/user/user.types';
+import { generateSmartLink } from '~modules/shared/helpers/link';
+import { UserProps } from '~modules/shared/types';
+import { Permission } from '~modules/user/user.types';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;

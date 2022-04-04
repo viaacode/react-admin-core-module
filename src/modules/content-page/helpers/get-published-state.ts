@@ -1,15 +1,11 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
+import { CustomError } from 'modules/admin/shared/helpers/custom-error';
 import moment from 'moment';
-import { i18n } from 'next-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { CONTENT_BLOCK_CONFIG_MAP } from '../const/content-block.consts';
 import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
-
-import { CustomError } from 'modules/admin/shared/helpers/custom-error';
 
 export function getPublishedState(
 	contentPage: ContentPageInfo | Partial<ContentPageInfo> | undefined | null

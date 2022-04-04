@@ -1,9 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, has, omit, without } from 'lodash-es';
+import { i18n } from 'modules/admin/shared/helpers/i18n';
 
-import { toastService } from '@shared/services/toast-service';
-
-import { UpdateContentBlockMutation } from '../../../../generated/graphql-db-types-avo';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getEnv } from '../../shared/helpers/env';
 import { dataService } from '../../shared/services/data-service';
@@ -16,7 +14,7 @@ import {
 import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { UpdateContentBlockMutation } from '~generated/graphql-db-types-avo';
 
 export class ContentBlockService {
 	private static queries =

@@ -21,7 +21,16 @@
     "noEmit": true,
     "outDir": "dist",
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~modules/*": [
+        "modules/*"
+      ],
+      "~generated/*": [
+        "generated/*"
+      ]
+    }
   },
   "include": [
     "src"

@@ -1,5 +1,6 @@
 import { BlockSpotlight, ButtonAction, ImageInfo, RenderLinkFunction } from '@viaa/avo2-components';
 import { get } from 'lodash-es';
+import { DefaultSecureRouteProps } from 'modules/admin/shared/types/secure-route.types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,9 +10,8 @@ import { ContentPageInfo } from '../../../types/content-pages.types';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '@admin/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '@admin/shared/helpers/custom-error';
-import { DefaultSecureRouteProps } from 'modules/admin/shared/types/secure-route.types';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;

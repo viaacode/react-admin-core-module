@@ -1,10 +1,7 @@
 import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
-import { i18n } from 'next-i18next';
 import getConfig from 'next/config';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getEnv } from '../../shared/helpers/env';

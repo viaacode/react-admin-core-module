@@ -5,8 +5,6 @@ import { useTranslation } from 'react-i18next';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
 
-import { toastService } from '@shared/services/toast-service';
-
 import { CustomError } from '../../helpers/custom-error';
 import { i18n } from '../../helpers/i18n';
 import { PickerItem, PickerSelectItem, PickerTypeOption } from '../../types/content-picker';

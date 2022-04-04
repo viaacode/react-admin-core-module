@@ -12,7 +12,7 @@ import {
 } from '../types/content-block.types';
 import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
-import { ValueOf } from '@admin/shared/types';
+import { ValueOf } from '~modules/shared/types';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;

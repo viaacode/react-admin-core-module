@@ -12,17 +12,14 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { get, uniqBy } from 'lodash-es';
-import { i18n } from 'next-i18next';
+import { UserService } from 'modules/admin/user/user.service';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { toastService } from '@shared/services/toast-service';
 
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
-import { ContentPickerType } from '@admin/shared/components/ContentPicker/ContentPicker.const';
-import { UserService } from 'modules/admin/user/user.service';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 import './MultiUserSelectDropdown.scss';
 

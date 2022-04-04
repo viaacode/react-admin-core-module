@@ -3,7 +3,7 @@ import { LinkTarget } from '@viaa/avo2-components';
 import { CustomError } from '../../../helpers/custom-error';
 import { PickerSelectItem } from '../../../types/content-picker';
 
-import { ContentPickerType } from '@admin/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 export const retrieveAnchors = async (
 	name: string | null,

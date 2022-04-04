@@ -8,12 +8,12 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { cloneDeep, get, isNumber } from 'lodash-es';
+import { ContentTypeAndLabelsValue } from 'modules/admin/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import { i18n } from 'modules/admin/shared/helpers/i18n';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
-
-import { toastService } from '@shared/services/toast-service';
 
 import {
 	GET_DARK_BACKGROUND_COLOR_OPTIONS,
@@ -25,20 +25,18 @@ import { Color } from '../../../types/content-block.types';
 import { ContentPageInfo } from '../../../types/content-pages.types';
 import ContentPage from '../../ContentPage/ContentPage';
 
-import { ContentPageLabelService } from '@admin/content-page-labels/services/content-page-label.service';
+import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '@admin/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { ROUTE_PARTS } from '@admin/shared/consts/routes';
-import { CustomError } from '@admin/shared/helpers/custom-error';
-import { getEnv } from '@admin/shared/helpers/env';
-import { fetchWithLogout } from '@admin/shared/helpers/fetch-with-logout';
-import { CheckboxListParam } from '@admin/shared/helpers/query-string-converters';
-import { useDebounce } from '@admin/shared/hooks/useDebounce';
-import { UserProps } from '@admin/shared/types';
-import { ContentTypeAndLabelsValue } from 'modules/admin/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { getEnv } from '~modules/shared/helpers/env';
+import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
+import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
+import { useDebounce } from '~modules/shared/hooks/useDebounce';
+import { UserProps } from '~modules/shared/types';
 
 export interface ContentPageOverviewParams {
 	withBlock: boolean;

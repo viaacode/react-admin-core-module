@@ -1,17 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
+const pathAliases = require('./scripts/path-aliases');
+
+const modulesPathGroupPattern = `@{${pathAliases.join(',')}}/**`;
+
 module.exports = {
-	env: {
-		browser: true,
-		node: true,
-		jest: true,
-	},
+	parser: '@typescript-eslint/parser',
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:import/recommended',
 		'plugin:import/typescript',
-		'plugin:react/recommended',
-		'plugin:react-hooks/recommended',
-		'plugin:jsx-a11y/recommended',
 		'plugin:prettier/recommended',
 	],
 	rules: {
@@ -26,13 +24,11 @@ module.exports = {
 				},
 			},
 		],
-		'@typescript-eslint/no-explicit-any': 'off',
 
 		'import/first': 'error',
 		'import/no-duplicates': 'error',
-		'import/no-named-as-default-member': 'off',
 		'import/order': [
-			'error',
+			'warn',
 			{
 				alphabetize: {
 					order: 'asc',
@@ -40,17 +36,13 @@ module.exports = {
 				'newlines-between': 'always',
 				pathGroups: [
 					{
-						pattern: '@{shared}/**',
+						pattern: modulesPathGroupPattern,
 						group: 'parent',
 						position: 'before',
 					},
 				],
 			},
 		],
-		'import/no-cycle': 'error',
-
-		'react/display-name': 'off',
-		'react/self-closing-comp': 'warn',
 
 		'sort-imports': [
 			'warn',
@@ -59,18 +51,5 @@ module.exports = {
 				ignoreDeclarationSort: true,
 			},
 		],
-	},
-	overrides: [
-		{
-			files: ['*.ts', '*.tsx'],
-			rules: {
-				'react/prop-types': 'off',
-			},
-		},
-	],
-	settings: {
-		react: {
-			version: 'detect',
-		},
 	},
 };

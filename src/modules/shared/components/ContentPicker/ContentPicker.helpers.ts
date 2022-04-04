@@ -7,7 +7,7 @@ import {
 	PickerTypeOption,
 } from '../../types/content-picker';
 
-import { ContentPickerType } from '@admin/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 export const filterTypes = (
 	types: PickerTypeOption<ContentPickerType>[],
