@@ -1,13 +1,13 @@
 import { TagInfo } from '@viaa/avo2-components';
 import { useEffect, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../core/config';
 import { CheckboxOption } from '../../shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { GET_SPECIAL_USER_GROUPS } from '../../user-group/user-group.const';
 import { UserGroupService } from '../../user-group/user-group.service';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 type UseUserGroupsTuple = [TagInfo[] | CheckboxOption[], boolean];
 

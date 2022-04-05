@@ -14,6 +14,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "sourceMap": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "declaration": true,
@@ -22,17 +23,9 @@
     "outDir": "dist",
     "allowJs": true,
     "isolatedModules": true,
-    "baseUrl": "./src",
-    "paths": {
-      "~modules/*": [
-        "modules/*"
-      ],
-      "~generated/*": [
-        "generated/*"
-      ]
-    }
+    "baseUrl": "src"
   },
-  "include": [
+  "files": [
     "src/**/*.ts",
     "src/**/*.tsx"
   ],

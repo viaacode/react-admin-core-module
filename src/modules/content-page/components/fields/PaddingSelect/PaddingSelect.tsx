@@ -1,10 +1,11 @@
 import { Form, FormGroup, Select, SelectOption, SpacerOption } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { PaddingFieldState } from '../../../types/content-block.types';
+
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './PaddingSelect.scss';
-import { PaddingFieldState } from '../../../types/content-block.types';
 
 interface PaddingSelectProps {
 	onChange: (value: PaddingFieldState) => void;

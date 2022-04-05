@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-import { useConfig } from '../../hooks';
+import { Config } from '../../../../core/config';
 import { DefaultComponentProps } from '../../types';
 
 const Loader: FC<DefaultComponentProps> = (props) => {
-	const componentsConfig = useConfig('components');
+	const componentsConfig = Config.getConfig().components;
 	const LoaderComponent =
 		componentsConfig?.loader.component ?? (() => <span {...props}>Laden...</span>);
 

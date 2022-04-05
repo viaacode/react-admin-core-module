@@ -17,12 +17,9 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, isEqual, isNil } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../../core/config';
 import { validateContentBlockField } from '../../../shared/helpers/validation';
 import {
 	ContentBlockBlockConfig,
@@ -36,6 +33,9 @@ import {
 } from '../../types/content-block.types';
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
 import { REPEATABLE_CONTENT_BLOCKS } from '../ContentBlockPreview/ContentBlockPreview.const';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './ContentBlockForm.scss';
 
@@ -308,7 +308,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 	return <Form className="c-content-block-form">{renderBlockForm(config)}</Form>;
 };
 
-export default React.memo(ContentBlockForm, (prevProps, nextProps) => {
+export default memo(ContentBlockForm, (prevProps, nextProps) => {
 	// We don't need to check the other props because they are functions which will never change
 	// The component will rerender when false is returned
 	return (

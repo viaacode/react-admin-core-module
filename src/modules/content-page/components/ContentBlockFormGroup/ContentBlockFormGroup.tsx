@@ -1,6 +1,6 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
 import { get, isNumber } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 
 import { createKey } from '../../../shared/helpers/create-key';
 import {
@@ -78,4 +78,4 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 	</div>
 );
 
-export default React.memo(ContentBlockFormGroup);
+export default memo(ContentBlockFormGroup);

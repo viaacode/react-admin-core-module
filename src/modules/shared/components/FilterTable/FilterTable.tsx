@@ -1,4 +1,3 @@
-import { KeyCode } from '@shared/types';
 import {
 	Button,
 	ButtonType,
@@ -43,11 +42,9 @@ import React, {
 import { RouteComponentProps, withRouter } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
+import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
-
 import './FilterTable.scss';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
 import {
@@ -58,6 +55,8 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
+
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 export interface FilterableTableState {
 	query?: string;

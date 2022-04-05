@@ -1,4 +1,3 @@
-import { Config } from '../../../../core/config';
 import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/content-block.consts';
 import {
 	AnchorLinksBlockComponentState,
@@ -9,6 +8,8 @@ import {
 } from '../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
+
+import { Config } from 'core/config';
 
 export const INITIAL_ANCHOR_LINKS_COMPONENTS_STATE = (): AnchorLinksBlockComponentState[] => [
 	{

@@ -5,11 +5,10 @@ import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { EducationOrganisationService } from '~modules/shared/services/educational-organsiation-service/education-organizations-service';
-
-import { Config, ToastType } from '../../../../core/config';
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './EducationalOrganisationsSelect.scss';
 
@@ -45,7 +44,8 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	}>({});
 
 	useEffect(() => {
-		EducationOrganisationService.fetchCities()
+		Config.getConfig()
+			.services.educationOrganisationService.fetchCities()
 			.then(setCities)
 			.catch((err: any) => {
 				console.error(err);
@@ -76,10 +76,11 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					orgs = [...organisationsCache[selectedCity]];
 				} else {
 					// fetch from server
-					orgs = await EducationOrganisationService.fetchEducationOrganisations(
-						city,
-						zipCode
-					);
+					orgs =
+						await Config.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
+							city,
+							zipCode
+						);
 					setOrganisationsCache({
 						...organisationsCache,
 						...{ [selectedCity]: orgs },

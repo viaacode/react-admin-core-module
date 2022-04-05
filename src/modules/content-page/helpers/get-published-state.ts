@@ -2,13 +2,12 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import moment from 'moment';
 
-import { CustomError } from '~modules/shared/helpers/custom-error';
-
 import { CONTENT_BLOCK_CONFIG_MAP } from '../const/content-block.consts';
 import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 import { Config, ToastType } from 'core/config';
+import { CustomError } from 'modules/shared/helpers/custom-error';
 
 export function getPublishedState(
 	contentPage: ContentPageInfo | Partial<ContentPageInfo> | undefined | null

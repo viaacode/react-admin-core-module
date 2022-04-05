@@ -17,29 +17,29 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { getProfileId } from '~modules/collection/shared/helpers/get-profile-id';
-import { PickerItem } from '~modules/collection/shared/types/content-picker';
-import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
-import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
-import { WYSIWYG_OPTIONS_FULL } from '~modules/shared/consts/wysiwyg';
-import { getFullName } from '~modules/shared/helpers/formatters/avatar';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { ValueOf } from '~modules/shared/types';
-import { Permission, User } from '~modules/user/user.types';
-
-import { Config, ToastType } from '../../../../core/config';
-import FileUpload from '../../../shared/components/FileUpload/FileUpload';
-import WYSIWYGWrapper from '../../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
 import { DEFAULT_PAGES_WIDTH, GET_CONTENT_WIDTH_OPTIONS } from '../../const/content-page.consts';
-import { ContentEditAction } from '../../helpers/content-edit.reducer';
-import { ContentPageService } from '../../services/content-page.service';
 import {
 	ContentEditActionType,
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentWidth,
 } from '../../types/content-pages.types';
+
+import { Config, ToastType } from 'core/config';
+import { ContentEditAction } from 'modules/content-page/helpers/content-edit.reducer';
+import { ContentPageService } from 'modules/content-page/services/content-page.service';
+import { ContentPicker } from 'modules/shared/components/ContentPicker/ContentPicker';
+import { ContentPickerType } from 'modules/shared/components/ContentPicker/ContentPicker.const';
+import FileUpload from 'modules/shared/components/FileUpload/FileUpload';
+import { UserGroupSelect } from 'modules/shared/components/UserGroupSelect/UserGroupSelect';
+import WYSIWYGWrapper from 'modules/shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
+import { WYSIWYG_OPTIONS_FULL } from 'modules/shared/consts/wysiwyg';
+import { getFullName } from 'modules/shared/helpers/formatters/avatar';
+import { getProfileId } from 'modules/shared/helpers/get-profile-id';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { ValueOf } from 'modules/shared/types';
+import { PickerItem } from 'modules/shared/types/content-picker';
+import { Permission, User } from 'modules/user/user.types';
 
 import './ContentEditForm.scss';
 

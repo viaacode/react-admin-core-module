@@ -1,4 +1,3 @@
-import { getOrderObject } from '@shared/helpers/generate-order-gql-query';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { get, isNil } from 'lodash-es';
@@ -10,7 +9,8 @@ import { dataService, GraphQlResponse } from '../shared/services/data-service';
 import { ITEMS_PER_PAGE } from './user.consts';
 import { DeleteContentCountsRaw, UserOverviewTableCol, UserSummaryView } from './user.types';
 
-import { GetProfileNamesDocument, GetUsersDocument } from '~generated/graphql-db-types-avo';
+import { GetProfileNamesDocument, GetUsersDocument } from 'generated/graphql-db-types-avo';
+import { getOrderObject } from 'modules/shared/helpers/generate-order-gql-query';
 
 export class UserService {
 	static async getProfiles(

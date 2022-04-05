@@ -2,9 +2,9 @@ import { CustomError } from '../../../helpers/custom-error';
 import { PickerSelectItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPageInfo } from '~modules/collection/content-page/types/content-pages.types';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPageService } from 'modules/content-page/services/content-page.service';
+import { ContentPageInfo } from 'modules/content-page/types/content-pages.types';
+import { ContentPickerType } from 'modules/shared/components/ContentPicker/ContentPicker.const';
 
 // Fetch content items from GQL
 export const retrieveContentPages = async (

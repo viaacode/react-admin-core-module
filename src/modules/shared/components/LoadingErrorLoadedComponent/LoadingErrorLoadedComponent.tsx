@@ -2,11 +2,10 @@ import { Container, Flex, IconName, Spinner } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactElement } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
-import { User } from '~modules/user/user.types';
-
-import { Config } from '../../../../core/config';
+import { Config } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Permissions, PermissionService } from 'modules/shared/services/permission-service';
+import { User } from 'modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 

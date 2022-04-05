@@ -2,16 +2,16 @@ import { BlockSpotlight, ButtonAction, ImageInfo, RenderLinkFunction } from '@vi
 import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { DefaultSecureRouteProps } from '~modules/collection/shared/types/secure-route.types';
+import { ContentPageService } from '../../../services/content-page.service';
+import { ContentPageInfo } from '../../../types/content-pages.types';
+
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { ContentPageService } from '../../../services/content-page.service';
-import { ContentPageInfo } from '../../../types/content-pages.types';
+} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from 'modules/shared/helpers/custom-error';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { DefaultSecureRouteProps } from 'modules/shared/types/secure-route.types';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;

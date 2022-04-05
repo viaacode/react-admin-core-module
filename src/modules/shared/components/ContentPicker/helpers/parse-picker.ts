@@ -1,9 +1,10 @@
 import { LinkTarget } from '@viaa/avo2-components';
-import queryString from 'query-string';
+import { parse } from 'query-string';
 
-import { Config, ToastType } from '../../../../../core/config';
 import { PickerItem } from '../../../types/content-picker';
 import { ContentPickerType } from '../ContentPicker.const';
+
+import { Config, ToastType } from 'core/config';
 
 export const parseSearchQuery = (input: string): string => {
 	try {
@@ -18,7 +19,7 @@ export const parseSearchQuery = (input: string): string => {
 		// parse as objects
 		let filterDefinition: any;
 		if (splitString.trim()[0] !== '{') {
-			filterDefinition = queryString.parse(splitString);
+			filterDefinition = parse(splitString);
 			filterDefinition.filters = JSON.parse(filterDefinition.filters as string);
 		} else {
 			filterDefinition = JSON.parse(splitString);

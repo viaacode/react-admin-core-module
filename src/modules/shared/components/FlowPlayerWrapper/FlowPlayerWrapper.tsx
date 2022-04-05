@@ -29,19 +29,19 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 // import { Avo } from '@viaa/avo2-types';
 // import { get, isNil } from 'lodash-es';
 // import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-// import { useTranslation } from '~modules/shared/hooks/useTranslation';
+// import { useTranslation } from 'modules/shared/hooks/useTranslation';
 //
 // import { useGetMediaTicketInfo } from '@media/hooks/get-media-ticket-url';
 //
 //
-// import { CustomError } from '~modules/shared/helpers/custom-error';
-// import { getValidStartAndEnd } from '~modules/shared/helpers/cut-start-and-end';
-// import { getEnv } from '~modules/shared/helpers/env';
-// import { reorderDate } from '~modules/shared/helpers/formatters/date';
-// import { formatDurationHoursMinutesSeconds } from '~modules/shared/helpers/formatters/duration';
-// import { getSubtitles } from '~modules/shared/helpers/get-subtitles';
-// import { toSeconds } from '~modules/shared/helpers/parsers/duration';
-// import { UserProps } from '~modules/shared/types';
+// import { CustomError } from 'modules/shared/helpers/custom-error';
+// import { getValidStartAndEnd } from 'modules/shared/helpers/cut-start-and-end';
+// import { getEnv } from 'modules/shared/helpers/env';
+// import { reorderDate } from 'modules/shared/helpers/formatters/date';
+// import { formatDurationHoursMinutesSeconds } from 'modules/shared/helpers/formatters/duration';
+// import { getSubtitles } from 'modules/shared/helpers/get-subtitles';
+// import { toSeconds } from 'modules/shared/helpers/parsers/duration';
+// import { UserProps } from 'modules/shared/types';
 //
 // import './FlowPlayerWrapper.scss';
 //

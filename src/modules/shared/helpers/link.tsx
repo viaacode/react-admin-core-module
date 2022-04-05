@@ -2,20 +2,19 @@ import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-componen
 import { Avo } from '@viaa/avo2-types';
 import { History } from 'history';
 import { fromPairs, get, isArray, isEmpty, isNil, isString, map, noop } from 'lodash-es';
-import getConfig from 'next/config';
-import queryString from 'query-string';
+import { stringify } from 'query-string';
 import React, { Fragment, ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Config, ToastType } from '../../../core/config';
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
 import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
 
+import { Config, ToastType } from 'core/config';
+
 type RouteParams = { [key: string]: string | number | undefined };
-const { publicRuntimeConfig } = getConfig();
 
 const getMissingParams = (route: string): string[] => route.split('/').filter((r) => r.match(/^:/));
 const navigationConsoleError = (route: string, missingParams: string[] = []) => {
@@ -45,9 +44,7 @@ export const buildLink = (
 	}
 
 	// Add search query if present
-	return search
-		? `${builtLink}?${isString(search) ? search : queryString.stringify(search)}`
-		: builtLink;
+	return search ? `${builtLink}?${isString(search) ? search : stringify(search)}` : builtLink;
 };
 
 export const navigate = (
@@ -129,11 +126,10 @@ export function navigateToAbsoluteOrRelativeUrl(
 export const generateSmartLink = (
 	action: ButtonAction | null | undefined,
 	children: ReactNode,
-	label?: string,
 	title?: string
 ): ReactElement<any, any> | null => {
 	return (
-		<SmartLink action={action} label={label} title={title}>
+		<SmartLink action={action} title={title}>
 			{children}
 		</SmartLink>
 	);
@@ -183,7 +179,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			case 'EXTERNAL_LINK': {
 				const externalUrl = ((value as string) || '').replace(
 					'{{PROXY_URL}}',
-					publicRuntimeConfig.PROXY_URL || ''
+					Config.getConfig().database.proxyUrl || ''
 				);
 				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
 				break;
@@ -209,7 +205,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 					buildLink(
 						APP_PATH.SEARCH.route,
 						{},
-						queryString.stringify(
+						stringify(
 							fromPairs(
 								map(queryParams, (queryParamValue, queryParam) => [
 									queryParam,
@@ -286,7 +282,7 @@ export function generateSearchLinkString(
 		queryParamObject.orderDirection = orderDirection;
 	}
 
-	return buildLink(APP_PATH.SEARCH.route, {}, queryString.stringify(queryParamObject));
+	return buildLink(APP_PATH.SEARCH.route, {}, stringify(queryParamObject));
 }
 
 export function generateContentLinkString(contentType: Avo.Core.ContentType, id: string): string {

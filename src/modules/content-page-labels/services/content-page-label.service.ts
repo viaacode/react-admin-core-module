@@ -1,24 +1,19 @@
 import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
-import getConfig from 'next/config';
 
 import { CustomError } from '../../shared/helpers/custom-error';
-import { getEnv } from '../../shared/helpers/env';
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { dataService } from '../../shared/services/data-service';
-import { AvoOrHetArchief } from '../../shared/types';
 import { ITEMS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
 import { CONTENT_PAGE_LABEL_QUERIES } from '../queries/content-page-label.queries';
 
 import { Config, ToastType } from 'core/config';
 
-const { publicRuntimeConfig } = getConfig();
-
 export class ContentPageLabelService {
 	private static queries =
-		CONTENT_PAGE_LABEL_QUERIES[getEnv('DATABASE_APPLICATION_TYPE') as AvoOrHetArchief];
+		CONTENT_PAGE_LABEL_QUERIES[Config.getConfig().database.databaseApplicationType];
 
 	public static async fetchContentPageLabels(
 		page: number,
@@ -209,7 +204,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${publicRuntimeConfig.PROXY_URL}/content-pages/labels`,
+				`${Config.getConfig().database.proxyUrl}/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {
@@ -243,7 +238,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${publicRuntimeConfig.PROXY_URL}/content-pages/labels`,
+				`${Config.getConfig().database.proxyUrl}/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {

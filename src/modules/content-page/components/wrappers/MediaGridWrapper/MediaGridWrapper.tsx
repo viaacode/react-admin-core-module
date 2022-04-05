@@ -9,18 +9,6 @@ import { get, isEmpty, isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
-import { formatDate } from '~modules/collection/shared/helpers/formatters/date';
-import { parseIntOrDefault } from '~modules/collection/shared/helpers/parsers/number';
-import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { isMobileWidth } from '~modules/shared/helpers/media-query';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
-
 import { ContentPageService } from '../../../services/content-page.service';
 import {
 	MediaGridBlockComponentState,
@@ -28,6 +16,18 @@ import {
 } from '../../../types/content-block.types';
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
+
+import { ContentTypeString, toEnglishContentType } from 'modules/collection/collection.types';
+import ItemVideoDescription from 'modules/shared/components/ItemVideoDescription/ItemVideoDescription';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { formatDate } from 'modules/shared/helpers/formatters/date';
+import { isMobileWidth } from 'modules/shared/helpers/media-query';
+import { parseIntOrDefault } from 'modules/shared/helpers/parsers/number';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { UserProps } from 'modules/shared/types';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;

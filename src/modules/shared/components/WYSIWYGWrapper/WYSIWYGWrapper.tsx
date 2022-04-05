@@ -8,12 +8,12 @@ import { Avo } from '@viaa/avo2-types';
 import { isEqual } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../../core/config';
 import { WYSIWYG_OPTIONS_DEFAULT } from '../../consts/wysiwyg';
 import { CustomError } from '../../helpers/custom-error';
 import { FileUploadService } from '../../services/file-upload-service';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './WYSIWYGWrapper.scss';
 

@@ -23,11 +23,11 @@ import { Trans } from 'react-i18next';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Scrollbar } from 'react-scrollbars-custom';
 
-import { Color } from '~modules/content-page/types/content-block.types';
-import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
-import Html from '~modules/shared/components/Html/Html';
-import { stripHtml } from '~modules/shared/helpers/formatters/strip-html';
-import { parseDuration } from '~modules/shared/helpers/parsers/duration';
+import { Color } from 'modules/content-page/types/content-block.types';
+import { FlowPlayerWrapper } from 'modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import Html from 'modules/shared/components/Html/Html';
+import { stripHtml } from 'modules/shared/helpers/formatters/strip-html';
+import { parseDuration } from 'modules/shared/helpers/parsers/duration';
 
 import './ItemVideoDescription.scss';
 

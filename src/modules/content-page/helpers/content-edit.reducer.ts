@@ -1,4 +1,4 @@
-import produce, { Draft } from 'immer';
+import { Draft, produce } from 'immer';
 import { cloneDeep, isEqual, isNil } from 'lodash-es';
 import moment from 'moment';
 
@@ -12,7 +12,7 @@ import {
 } from '../types/content-block.types';
 import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
-import { ValueOf } from '~modules/shared/types';
+import { ValueOf } from 'modules/shared/types';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;

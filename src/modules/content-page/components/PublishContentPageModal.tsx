@@ -19,15 +19,14 @@ import {
 } from '@viaa/avo2-components';
 import React, { FunctionComponent, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../core/config';
 import { getPublishedState } from '../helpers/get-published-state';
-
-import './PublishContentPageModal.scss';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
-import Html from '~modules/collection/shared/components/Html/Html';
+import { Config, ToastType } from 'core/config';
+import Html from 'modules/shared/components/Html/Html';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+
+import './PublishContentPageModal.scss';
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;

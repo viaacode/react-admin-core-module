@@ -1,17 +1,16 @@
 import { TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 
-import {
-	CheckboxDropdownModalProps,
-	CheckboxOption,
-} from '~modules/collection/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { NULL_FILTER } from '../../shared/helpers/filters';
 import { ContentOverviewTableCols, ContentWidth } from '../types/content-pages.types';
 
 import { Config } from 'core/config';
+import {
+	CheckboxDropdownModalProps,
+	CheckboxOption,
+} from 'modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 const ROOT = 'navigatie';
 const DETAIL = ':navigationName';

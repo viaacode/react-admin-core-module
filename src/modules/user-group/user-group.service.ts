@@ -1,10 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
 
+import { Config } from '../../core/config';
 import { CustomError } from '../shared/helpers/custom-error';
-import { getEnv } from '../shared/helpers/env';
 import { dataService } from '../shared/services/data-service';
-import { AvoOrHetArchief } from '../shared/types';
 
 import { USER_GROUP_QUERIES } from './queries/user-group.queries';
 import { ITEMS_PER_PAGE } from './user-group.const';
@@ -12,7 +11,7 @@ import { UserGroup } from './user-group.types';
 
 export class UserGroupService {
 	private static queries =
-		USER_GROUP_QUERIES[getEnv('DATABASE_APPLICATION_TYPE') as AvoOrHetArchief];
+		USER_GROUP_QUERIES[Config.getConfig().database.databaseApplicationType];
 
 	public static async fetchUserGroups(
 		page: number,
@@ -177,7 +176,7 @@ export class UserGroupService {
 		}
 	}
 
-	static async updateUserGroup(userGroup: UserGroup) {
+	static async updateUserGroup(userGroup: UserGroup): Promise<void> {
 		try {
 			const response = await dataService.query({
 				query: this.queries.UpdateUserGroupDocument,
@@ -203,7 +202,7 @@ export class UserGroupService {
 		}
 	}
 
-	public static async deleteUserGroup(userGroupId: number) {
+	public static async deleteUserGroup(userGroupId: number): Promise<void> {
 		try {
 			const response = await dataService.query({
 				query: this.queries.DeleteUserGroupDocument,

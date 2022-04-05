@@ -13,12 +13,12 @@ import { get } from 'lodash';
 import { compact, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../../core/config';
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
 import { CustomError } from '../../helpers/custom-error';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;

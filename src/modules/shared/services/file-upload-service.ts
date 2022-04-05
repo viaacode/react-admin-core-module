@@ -1,10 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
-import getConfig from 'next/config';
 
 import { CustomError } from '../helpers/custom-error';
 import { fetchWithLogout } from '../helpers/fetch-with-logout';
-
-const { publicRuntimeConfig } = getConfig();
 
 export class FileUploadService {
 	private static fileToBase64(file: File): Promise<string | null> {
@@ -31,7 +28,7 @@ export class FileUploadService {
 		let url: string | undefined;
 		let body: Avo.FileUpload.ZendeskFileInfo | undefined;
 		try {
-			url = `${publicRuntimeConfig.PROXY_URL}/zendesk/upload-attachment`;
+			url = `${Config.getConfig().database.proxyUrl}/zendesk/upload-attachment`;
 			const base64 = await this.fileToBase64(file);
 			if (!base64) {
 				throw new CustomError("Failed to upload file: file doesn't have any content", null);
@@ -72,7 +69,7 @@ export class FileUploadService {
 	): Promise<string> {
 		let url: string | undefined;
 		try {
-			url = `${publicRuntimeConfig.PROXY_URL}/assets/upload`;
+			url = `${Config.getConfig().database.proxyUrl}/assets/upload`;
 
 			const formData = new FormData();
 			formData.append('ownerId', ownerId);
@@ -108,7 +105,7 @@ export class FileUploadService {
 		let url: string | undefined;
 		let body: any;
 		try {
-			url = `${publicRuntimeConfig.PROXY_URL}/assets/delete`;
+			url = `${Config.getConfig().database.proxyUrl}/assets/delete`;
 
 			body = {
 				url: fileUrl,

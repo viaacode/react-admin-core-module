@@ -1,9 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 
-import { Config } from '../../../core/config';
-
 import { ROUTE_PARTS } from './routes';
+
+import { Config } from 'core/config';
 
 export interface RouteInfo {
 	route: string;

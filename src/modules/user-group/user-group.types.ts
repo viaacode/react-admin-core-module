@@ -1,6 +1,6 @@
 import { FilterableTableState } from '../shared/components/FilterTable/FilterTable';
 
-import { Permission } from '~modules/user/user.types';
+import { Permission } from 'modules/user/user.types';
 
 export interface UserGroup {
 	id: number;

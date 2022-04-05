@@ -1,5 +1,5 @@
 import { isNumber } from 'lodash-es';
-import moment, { Moment } from 'moment';
+import moment, { isMoment, Moment, parseZone } from 'moment';
 
 type DateLike = string | Moment | Date | number;
 type DateLikeNullable = DateLike | undefined | null;
@@ -12,7 +12,7 @@ export function reorderDate(dateString: string | null, separator = '/'): string 
 }
 
 export function normalizeTimestamp(timestamp: DateLike): Moment {
-	if (moment.isMoment(timestamp)) {
+	if (isMoment(timestamp)) {
 		return timestamp;
 	}
 	if (timestamp instanceof Date || isNumber(timestamp)) {
@@ -23,7 +23,7 @@ export function normalizeTimestamp(timestamp: DateLike): Moment {
 			/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{2}:[0-9]{2}/g
 		)
 	) {
-		return moment.parseZone(timestamp);
+		return parseZone(timestamp);
 	}
 	return moment(timestamp);
 }

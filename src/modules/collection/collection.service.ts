@@ -1,9 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
-import queryString from 'query-string';
+import { stringify } from 'query-string';
 
+import { Config } from '../../core/config';
 import { CustomError } from '../shared/helpers/custom-error';
-import { getEnv } from '../shared/helpers/env';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
 import { performQuery } from '../shared/helpers/gql';
 import { isUuid } from '../shared/helpers/uuid';
@@ -15,7 +15,7 @@ import {
 	GetPublicCollectionsByIdDocument,
 	GetPublicCollectionsByTitleDocument,
 	GetPublicCollectionsDocument,
-} from '~generated/graphql-db-types-avo';
+} from 'generated/graphql-db-types-avo';
 
 export class CollectionService {
 	/**
@@ -131,7 +131,9 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${getEnv('PROXY_URL')}/collections/fetch-with-items-by-id?${queryString.stringify({
+				`${
+					Config.getConfig().database.proxyUrl
+				}/collections/fetch-with-items-by-id?${stringify({
 					type,
 					assignmentUuid,
 					id: collectionId,

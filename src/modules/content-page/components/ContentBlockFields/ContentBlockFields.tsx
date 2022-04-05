@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 
 import { createKey } from '../../../shared/helpers/create-key';
 import {
@@ -55,4 +55,4 @@ const ContentBlockFields: FunctionComponent<ContentBlockFieldProps> = ({
 	);
 };
 
-export default React.memo(ContentBlockFields);
+export default memo(ContentBlockFields);

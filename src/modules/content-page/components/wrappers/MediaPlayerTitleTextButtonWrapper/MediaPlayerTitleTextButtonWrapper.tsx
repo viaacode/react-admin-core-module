@@ -14,9 +14,9 @@ import { AlignOption, HeadingTypeOption } from '../../../types/content-block.typ
 import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
-import { generateSmartLink } from '~modules/shared/helpers/link';
-import { UserProps } from '~modules/shared/types';
-import { Permission } from '~modules/user/user.types';
+import { generateSmartLink } from 'modules/shared/helpers/link';
+import { UserProps } from 'modules/shared/types';
+import { Permission } from 'modules/user/user.types';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;
@@ -95,7 +95,6 @@ export const MediaPlayerTitleTextButtonWrapper: FC<
 					generateSmartLink(
 						buttonAction,
 						<Button icon={buttonIcon} label={buttonLabel} type={buttonType} />,
-						buttonLabel,
 						buttonAltTitle || buttonLabel
 					)}
 			</Column>

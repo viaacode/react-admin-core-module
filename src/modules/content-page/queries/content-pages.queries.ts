@@ -16,7 +16,7 @@ import {
 	SoftDeleteContentDocument as SoftDeleteContentDocumentAvo,
 	UpdateContentBlockDocument as UpdateContentBlockDocumentAvo,
 	UpdateContentByIdDocument as UpdateContentByIdDocumentAvo,
-} from '~generated/graphql-db-types-avo';
+} from 'generated/graphql-db-types-avo';
 import {
 	DeleteContentBlockDocument as DeleteContentBlockDocumentHetArchief,
 	DeleteContentLabelLinksDocument as DeleteContentLabelLinksDocumentHetArchief,
@@ -33,7 +33,7 @@ import {
 	SoftDeleteContentDocument as SoftDeleteContentDocumentHetArchief,
 	UpdateContentBlockDocument as UpdateContentBlockDocumentHetArchief,
 	UpdateContentByIdDocument as UpdateContentByIdDocumentHetArchief,
-} from '~generated/graphql-db-types-hetarchief';
+} from 'generated/graphql-db-types-hetarchief';
 
 type ContentPageQueries = {
 	SoftDeleteContentDocument: string;

@@ -1,23 +1,20 @@
 import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { fromPairs, map } from 'lodash-es';
-import getConfig from 'next/config';
-import queryString from 'query-string';
+import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Config } from '../../../../core/config';
 import { BUNDLE_PATH } from '../../consts/bundle.const';
 import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { buildLink } from '../../helpers/link';
 import { ContentPickerType } from '../ContentPicker/ContentPicker.const';
 
-const { publicRuntimeConfig } = getConfig();
-
 export interface SmartLinkProps {
 	action?: ButtonAction | null;
 	removeStyles?: boolean;
-	label?: string;
 	title?: string;
 	children: ReactNode;
 }
@@ -25,15 +22,9 @@ export interface SmartLinkProps {
 const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	action,
 	removeStyles = true,
-	label,
 	title,
 	children,
 }) => {
-	const handleAdditionalTriggers = (url: string) => {
-		// TODO re-enable this when integrating this into the avo repo
-		// SmartschoolAnalyticsService.triggerUrlEvent(toAbsoluteUrl(url), label);
-	};
-
 	const renderLink = (
 		url: string,
 		target: LinkTarget = LinkTarget.Self
@@ -54,7 +45,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_self"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
 							title={title}
-							onClick={() => handleAdditionalTriggers(fullUrl)}
+							onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
 						>
 							{children}
 						</a>
@@ -65,7 +56,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					<Link
 						to={fullUrl}
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => handleAdditionalTriggers(fullUrl)}
+						onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
 						title={title}
 					>
 						{children}
@@ -83,7 +74,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_blank"
 							rel="noopener noreferrer"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
-							onClick={() => handleAdditionalTriggers(fullUrl)}
+							onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
 							title={title}
 						>
 							{children}
@@ -97,7 +88,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => handleAdditionalTriggers(fullUrl)}
+						onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
 						title={title}
 					>
 						{children}
@@ -147,7 +138,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				case ContentPickerType.EXTERNAL_LINK: {
 					const externalUrl = ((value as string) || '').replace(
 						'{{PROXY_URL}}',
-						publicRuntimeConfig.PROXY_URL || ''
+						Config.getConfig().database.proxyUrl || ''
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}
@@ -166,7 +157,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						buildLink(
 							APP_PATH.SEARCH.route,
 							{},
-							queryString.stringify(
+							stringify(
 								fromPairs(
 									map(queryParams, (queryParamValue, queryParam) => [
 										queryParam,

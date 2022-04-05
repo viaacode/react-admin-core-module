@@ -2,9 +2,7 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get, has, omit, without } from 'lodash-es';
 
 import { CustomError } from '../../shared/helpers/custom-error';
-import { getEnv } from '../../shared/helpers/env';
 import { dataService } from '../../shared/services/data-service';
-import { AvoOrHetArchief } from '../../shared/types';
 import { CONTENT_BLOCKS_RESULT_PATH } from '../const/content-block.consts';
 import {
 	convertBlocksToDatabaseFormat,
@@ -17,7 +15,7 @@ import { Config, ToastType } from 'core/config';
 
 export class ContentBlockService {
 	private static queries =
-		CONTENT_PAGE_QUERIES[getEnv('DATABASE_APPLICATION_TYPE') as AvoOrHetArchief];
+		CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
 
 	/**
 	 * Update content block.

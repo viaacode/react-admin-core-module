@@ -4,9 +4,6 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../../core/config';
 import { CustomError } from '../../helpers/custom-error';
 import { PickerItem, PickerSelectItem, PickerTypeOption } from '../../types/content-picker';
 import FileUpload from '../FileUpload/FileUpload';
@@ -20,6 +17,9 @@ import {
 import { filterTypes, setInitialInput, setInitialItem } from './ContentPicker.helpers';
 import './ContentPicker.scss';
 import { parseSearchQuery } from './helpers/parse-picker';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
 	allowedTypes?: ContentPickerType[];

@@ -1,5 +1,3 @@
-import { AdminLayout } from '~modules/shared/layouts';
-
 import {
 	Button,
 	ButtonToolbar,
@@ -24,30 +22,6 @@ import { Link } from 'react-router-dom';
 
 import './ContentOverview.scss';
 
-import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
-import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import {
-	getBooleanFilters,
-	getDateRangeFilters,
-	getMultiOptionFilters,
-	getQueryFilter,
-} from '~modules/shared/helpers/filters';
-import { getFullName } from '~modules/shared/helpers/formatters/avatar';
-import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
-import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
-import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
-import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
-import { Permission } from '~modules/user/user.types';
-
-import { Config, ToastType } from '../../../../core/config';
 import ConfirmModal from '../../../shared/components/ConfirmModal/ConfirmModal';
 import FilterTable, {
 	FilterableColumn,
@@ -68,6 +42,31 @@ import {
 	ContentPageInfo,
 	ContentTableState,
 } from '../../types/content-pages.types';
+
+import { Config, ToastType } from 'core/config';
+import { useContentPageLabelOptions } from 'modules/content-page-labels/hooks/useContentPageLabelOptions';
+import { CheckboxOption } from 'modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from 'modules/shared/helpers/custom-error';
+import {
+	getBooleanFilters,
+	getDateRangeFilters,
+	getMultiOptionFilters,
+	getQueryFilter,
+} from 'modules/shared/helpers/filters';
+import { getFullName } from 'modules/shared/helpers/formatters/avatar';
+import { formatDate } from 'modules/shared/helpers/formatters/date';
+import { getUserGroupLabel } from 'modules/shared/helpers/get-profile-info';
+import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from 'modules/shared/helpers/link';
+import { setSelectedCheckboxes } from 'modules/shared/helpers/set-selected-checkboxes';
+import { truncateTableValue } from 'modules/shared/helpers/truncate';
+import { AdminLayout } from 'modules/shared/layouts';
+import { SpecialPermissionGroups } from 'modules/shared/types/authentication.types';
+import { DefaultSecureRouteProps } from 'modules/shared/types/secure-route.types';
+import { Permission } from 'modules/user/user.types';
 
 type ContentPageOverviewProps = DefaultSecureRouteProps;
 

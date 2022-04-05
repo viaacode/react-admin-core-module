@@ -1,6 +1,5 @@
 import { ContentPickerTypeSchema, LinkTargetSchema } from '@viaa/avo2-types/types/core';
 
-import { Config } from '../../../../core/config';
 import { PickerTypeOption } from '../../types/content-picker';
 
 import { retrieveAnchors } from './item-providers/anchors';
@@ -9,6 +8,8 @@ import { retrieveContentPages, retrieveProjectContentPages } from './item-provid
 import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
+
+import { Config } from 'core/config';
 
 export enum ContentPickerType {
 	CONTENT_PAGE = 'CONTENT_PAGE',

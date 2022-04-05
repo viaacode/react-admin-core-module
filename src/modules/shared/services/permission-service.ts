@@ -5,7 +5,7 @@ import { ContentPageService } from '../../content-page/services/content-page.ser
 import { ContentPageInfo } from '../../content-page/types/content-pages.types';
 import { getProfileId } from '../helpers/get-profile-id';
 
-import { Permission, User } from '~modules/collection/user/user.types';
+import { Permission, User } from 'modules/user/user.types';
 
 export { Permission };
 

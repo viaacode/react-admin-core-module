@@ -10,9 +10,10 @@ import {
 } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
 
-import { Config } from '../../../../core/config';
 import { sanitizeHtml } from '../../helpers/sanitize';
 import Html from '../Html/Html';
+
+import { Config } from 'core/config';
 
 interface ConfirmModalProps {
 	title?: string;

@@ -10,16 +10,16 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
-import queryString from 'query-string';
+import { parse } from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Config, ToastType } from '../../../../core/config';
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import { FileUploadService } from '../../services/file-upload-service';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
+
+import { Config, ToastType } from 'core/config';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './FileUpload.scss';
 
@@ -213,7 +213,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 			let fileName: string | undefined;
 			if (url.includes('?')) {
-				const queryParams = queryString.parse(url.split('?').pop() || '');
+				const queryParams = parse(url.split('?').pop() || '');
 				if (queryParams && queryParams.name && isString(queryParams.name)) {
 					fileName = queryParams.name as string;
 				}

@@ -3,10 +3,7 @@ import React, { FunctionComponent } from 'react';
 
 import { formatLookup } from '../ImageGridWrapper/ImageGridWrapper';
 
-import {
-	BlockGridFormatOption,
-	FillOption,
-} from '~modules/collection/content-page/types/content-block.types';
+import { BlockGridFormatOption, FillOption } from 'modules/content-page/types/content-block.types';
 
 export interface BlockLogoGridWrapperProps {
 	elements: GridItem[];

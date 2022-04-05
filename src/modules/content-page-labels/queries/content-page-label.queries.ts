@@ -6,14 +6,14 @@ import {
 	GetContentPageLabelsDocument as GetContentPageLabelsDocumentAvo,
 	InsertContentPageLabelDocument as InsertContentPageLabelDocumentAvo,
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentAvo,
-} from '~generated/graphql-db-types-avo';
+} from 'generated/graphql-db-types-avo';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentHetArchief,
 	GetContentPageLabelByIdDocument as GetContentPageLabelByIdDocumentHetArchief,
 	GetContentPageLabelsDocument as GetContentPageLabelsDocumentHetArchief,
 	InsertContentPageLabelDocument as InsertContentPageLabelDocumentHetArchief,
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentHetArchief,
-} from '~generated/graphql-db-types-hetarchief';
+} from 'generated/graphql-db-types-hetarchief';
 
 type ContentPageLabelQueries = {
 	GetContentPageLabelsDocument: string;

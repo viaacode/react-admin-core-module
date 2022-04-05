@@ -3,13 +3,13 @@ import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { ContentPageInfo } from '~modules/collection/content-page/types/content-pages.types';
-import { getProfileName } from '~modules/collection/shared/helpers/get-profile-info';
-import { navigateToContentType } from '~modules/collection/shared/helpers/link';
-import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
 import { getPublishedDate } from '../../../helpers/get-published-state';
+
+import { ContentPageInfo } from 'modules/content-page/types/content-pages.types';
+import { normalizeTimestamp } from 'modules/shared/helpers/formatters/date';
+import { getProfileName } from 'modules/shared/helpers/get-profile-info';
+import { navigateToContentType } from 'modules/shared/helpers/link';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;

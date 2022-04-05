@@ -16,8 +16,8 @@ import {
 	REPEATABLE_CONTENT_BLOCKS,
 } from './ContentBlockPreview.const';
 
-import { UserProps } from '~modules/collection/shared/types';
-import { generateSmartLink } from '~modules/shared/helpers/link';
+import { generateSmartLink } from 'modules/shared/helpers/link';
+import { UserProps } from 'modules/shared/types';
 
 import './ContentBlockPreview.scss';
 

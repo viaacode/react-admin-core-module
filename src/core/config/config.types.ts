@@ -1,8 +1,11 @@
 import { TableSortingIcons } from '@meemoo/react-components';
+import { Avo } from '@viaa/avo2-types';
 import { ComponentType } from 'react';
 
-import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
-import { NavigationConfig } from '~modules/navigation/types';
+import { AvoOrHetArchief } from '../../modules/shared/types';
+
+import { ContentPageConfig } from 'modules/content-page/types/content-pages.types';
+import { NavigationConfig } from 'modules/navigation/types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -33,6 +36,7 @@ export interface ConfigValue {
 	services: {
 		toastService: ToastService;
 		i18n: I18n;
+		educationOrganisationService: EducationOrganisationService;
 	};
 	components: {
 		loader: {
@@ -44,6 +48,15 @@ export interface ConfigValue {
 	};
 	icon?: IconConfig;
 	file?: FileConfig;
+	handlers: {
+		onExternalLink: (url: string) => void;
+	};
+	database: {
+		databaseApplicationType: AvoOrHetArchief;
+		proxyUrl: string;
+		graphqlUrl: string;
+		graphqlSecret: string;
+	};
 }
 
 export interface IconConfig {
@@ -68,4 +81,15 @@ export interface FileConfig {
 export interface FileService {
 	uploadFile: (file: File) => Promise<unknown>;
 	deleteFile: (url: string) => Promise<unknown>;
+}
+
+export interface EducationOrganisationService {
+	fetchCities(): Promise<string[]>;
+
+	fetchEducationOrganisations(
+		city: string | null,
+		zipCode: string | null
+	): Promise<Avo.EducationOrganization.Organization[]>;
+
+	fetchEducationOrganisationName(organisationId: string, unitId?: string): Promise<string | null>;
 }

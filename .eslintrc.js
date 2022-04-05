@@ -1,8 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
-const pathAliases = require('./scripts/path-aliases');
-
-const modulesPathGroupPattern = `~{${pathAliases.join(',')}}/**`;
-
 module.exports = {
 	env: {
 		node: true,
@@ -16,16 +11,17 @@ module.exports = {
 		'plugin:import/warnings',
 		'plugin:import/typescript',
 		'plugin:prettier/recommended',
+		'plugin:react-hooks/recommended',
 	],
 	settings: {
 		'import/resolver': {
-			node: {
-				extensions: ['.js', '.jsx', '.ts', '.tsx'],
-				moduleDirectory: ['node_modules', 'src/'],
-			},
+			typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
 		},
 	},
+	ignorePatterns: ['src/generated/*.ts'],
 	rules: {
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/naming-convention': [
 			'error',
 			{
@@ -47,13 +43,6 @@ module.exports = {
 					order: 'asc',
 				},
 				'newlines-between': 'always',
-				pathGroups: [
-					{
-						pattern: modulesPathGroupPattern,
-						group: 'parent',
-						position: 'before',
-					},
-				],
 			},
 		],
 

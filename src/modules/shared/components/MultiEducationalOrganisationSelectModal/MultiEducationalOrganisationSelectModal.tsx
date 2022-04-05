@@ -12,10 +12,10 @@ import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-or
 import clsx from 'clsx';
 import React, { FunctionComponent, MouseEvent, useEffect, useState } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
+
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
 
 import './MultiEducationalOrganisationSelectModal.scss';
 

@@ -2,19 +2,13 @@ import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isFunction, kebabCase, omit } from 'lodash-es';
 import moment from 'moment';
-import queryString from 'query-string';
-
-import { CustomError } from '~modules/collection/shared/helpers/custom-error';
-import { getEnv } from '~modules/collection/shared/helpers/env';
-import { performQuery } from '~modules/collection/shared/helpers/gql';
-import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { stringify } from 'query-string';
 
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { dataService, GraphQlResponse } from '../../shared/services/data-service';
-import { AvoOrHetArchief } from '../../shared/types';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
 	CONTENT_RESULT_PATH,
@@ -39,10 +33,13 @@ import {
 import { ContentBlockService } from './content-block.service';
 
 import { Config, ToastType } from 'core/config';
+import { CustomError } from 'modules/shared/helpers/custom-error';
+import { getOrderObject } from 'modules/shared/helpers/generate-order-gql-query';
+import { performQuery } from 'modules/shared/helpers/gql';
 
 export class ContentPageService {
 	private static queries =
-		CONTENT_PAGE_QUERIES[getEnv('DATABASE_APPLICATION_TYPE') as AvoOrHetArchief];
+		CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
 		const query = {
@@ -634,7 +631,7 @@ export class ContentPageService {
 	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${publicRuntimeConfig.PROXY_URL}/content-pages?${queryString.stringify({
+				`${Config.getConfig().database.proxyUrl}/content-pages?${stringify({
 					path,
 				})}`,
 				{
@@ -679,7 +676,7 @@ export class ContentPageService {
 	): Promise<string | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${publicRuntimeConfig.PROXY_URL}/content-pages/path-exist?${queryString.stringify({
+				`${Config.getConfig().database.proxyUrl}/content-pages/path-exist?${stringify({
 					path,
 				})}`,
 				{
@@ -728,7 +725,7 @@ export class ContentPageService {
 		let url: string | undefined;
 		let body: any | undefined;
 		try {
-			url = `${publicRuntimeConfig.PROXY_URL}/content-pages`;
+			url = `${Config.getConfig().database.proxyUrl}/content-pages`;
 			body = {
 				searchQuery,
 				searchQueryLimit,

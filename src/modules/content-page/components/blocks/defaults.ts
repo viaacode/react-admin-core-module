@@ -1,7 +1,6 @@
 import { SelectOption } from '@viaa/avo2-components';
 import { isEmpty, isNil } from 'lodash-es';
 
-import { Config } from '../../../../core/config';
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
 import { WYSIWYGWrapperProps } from '../../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
@@ -18,6 +17,8 @@ import {
 	DefaultContentBlockState,
 	PaddingFieldState,
 } from '../../types/content-block.types';
+
+import { Config } from 'core/config';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (

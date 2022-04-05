@@ -14,7 +14,7 @@ import {
 	GetItemDepublishReasonDocument,
 	GetPublicItemsByTitleOrExternalIdDocument,
 	GetPublicItemsDocument,
-} from '~generated/graphql-db-types-avo';
+} from 'generated/graphql-db-types-avo';
 
 export class ItemsService {
 	public static async fetchItemByUuid(uuid: string): Promise<Avo.Item.Item> {

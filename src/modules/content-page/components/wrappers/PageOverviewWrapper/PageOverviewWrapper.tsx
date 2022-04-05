@@ -12,22 +12,6 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { RouteComponentProps } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
-import { ContentTypeAndLabelsValue } from '~modules/collection/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { getEnv } from '~modules/shared/helpers/env';
-import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
-import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
-import { useDebounce } from '~modules/shared/hooks/useDebounce';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
-
-import { Config, ToastType } from '../../../../../core/config';
 import {
 	GET_DARK_BACKGROUND_COLOR_OPTIONS,
 	PageOverviewOrderOptions,
@@ -37,6 +21,21 @@ import { ContentPageService } from '../../../services/content-page.service';
 import { Color } from '../../../types/content-block.types';
 import { ContentPageInfo } from '../../../types/content-pages.types';
 import ContentPage from '../../ContentPage/ContentPage';
+
+import { Config, ToastType } from 'core/config';
+import { ContentPageLabelService } from 'modules/content-page-labels/services/content-page-label.service';
+import { ContentTypeAndLabelsValue } from 'modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { ROUTE_PARTS } from 'modules/shared/consts/routes';
+import { CustomError } from 'modules/shared/helpers/custom-error';
+import { fetchWithLogout } from 'modules/shared/helpers/fetch-with-logout';
+import { CheckboxListParam } from 'modules/shared/helpers/query-string-converters';
+import { useDebounce } from 'modules/shared/hooks/useDebounce';
+import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { UserProps } from 'modules/shared/types';
 
 export interface ContentPageOverviewParams {
 	withBlock: boolean;
@@ -230,14 +229,17 @@ const PageOverviewWrapper: FunctionComponent<
 				offset: queryParamsState.page * debouncedItemsPerPage,
 				limit: debouncedItemsPerPage,
 			};
-			const reply = await fetchWithLogout(`${getEnv('PROXY_URL')}/content-pages/overview`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
-				body: JSON.stringify(body),
-			});
+			const reply = await fetchWithLogout(
+				`${Config.getConfig().database.proxyUrl}/content-pages/overview`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					credentials: 'include',
+					body: JSON.stringify(body),
+				}
+			);
 
 			const response = await reply.json();
 
