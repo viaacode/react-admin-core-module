@@ -496,51 +496,52 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 		}
 		return (
 			<>
-				<FilterTable
-					data={contentPages}
-					itemsPerPage={ITEMS_PER_PAGE}
-					columns={tableColumns}
-					dataCount={contentPageCount}
-					searchTextPlaceholder={t(
-						'admin/content/views/content-overview___zoeken-op-auteur-titel-rol'
-					)}
-					noContentMatchingFiltersMessage={t(
-						'admin/content/views/content-overview___er-is-geen-content-gevonden-die-voldoen-aan-uw-filters'
-					)}
-					renderNoResults={renderNoResults}
-					renderCell={renderTableCell as any}
-					className="c-content-overview__table"
-					onTableStateChanged={setTableState}
-					isLoading={isLoading}
-				/>
-				<ConfirmModal
-					deleteObjectCallback={handleDelete}
-					isOpen={isConfirmModalOpen}
-					onClose={() => setIsConfirmModalOpen(false)}
-					body={
-						get(contentToDelete, 'is_protected', null)
-							? t(
-									'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'
-							  )
-							: ''
-					}
-				/>
-				<Modal
-					isOpen={isNotAdminModalOpen}
-					onClose={() => setIsNotAdminModalOpen(false)}
-					size="small"
-					title={t(
-						'admin/content/views/content-overview___u-heeft-niet-de-juiste-rechten'
-					)}
-				>
-					<ModalBody>
-						<p>
-							<Trans i18nKey="admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen">
-								Contacteer een van de admins om deze pagina te kunnen verwijderen.
-							</Trans>
-						</p>
-					</ModalBody>
-				</Modal>
+				{/*<FilterTable*/}
+				{/*	data={contentPages}*/}
+				{/*	itemsPerPage={ITEMS_PER_PAGE}*/}
+				{/*	columns={tableColumns}*/}
+				{/*	dataCount={contentPageCount}*/}
+				{/*	searchTextPlaceholder={t(*/}
+				{/*		'admin/content/views/content-overview___zoeken-op-auteur-titel-rol'*/}
+				{/*	)}*/}
+				{/*	noContentMatchingFiltersMessage={t(*/}
+				{/*		'admin/content/views/content-overview___er-is-geen-content-gevonden-die-voldoen-aan-uw-filters'*/}
+				{/*	)}*/}
+				{/*	renderNoResults={renderNoResults}*/}
+				{/*	renderCell={renderTableCell as any}*/}
+				{/*	className="c-content-overview__table"*/}
+				{/*	onTableStateChanged={setTableState}*/}
+				{/*	isLoading={isLoading}*/}
+				{/*/>*/}
+				{/*<ConfirmModal*/}
+				{/*	deleteObjectCallback={handleDelete}*/}
+				{/*	isOpen={isConfirmModalOpen}*/}
+				{/*	onClose={() => setIsConfirmModalOpen(false)}*/}
+				{/*	body={*/}
+				{/*		get(contentToDelete, 'is_protected', null)*/}
+				{/*			? t(*/}
+				{/*					'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'*/}
+				{/*			  )*/}
+				{/*			: ''*/}
+				{/*	}*/}
+				{/*/>*/}
+				{/*<Modal*/}
+				{/*	isOpen={isNotAdminModalOpen}*/}
+				{/*	onClose={() => setIsNotAdminModalOpen(false)}*/}
+				{/*	size="small"*/}
+				{/*	title={t(*/}
+				{/*		'admin/content/views/content-overview___u-heeft-niet-de-juiste-rechten'*/}
+				{/*	)}*/}
+				{/*>*/}
+				{/*	<ModalBody>*/}
+				{/*		<p>*/}
+				{/*			<Trans i18nKey="admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen">*/}
+				{/*				Contacteer een van de admins om deze pagina te kunnen verwijderen.*/}
+				{/*			</Trans>*/}
+				{/*		</p>*/}
+				{/*	</ModalBody>*/}
+				{/*</Modal>*/}
+				test1234
 			</>
 		);
 	};

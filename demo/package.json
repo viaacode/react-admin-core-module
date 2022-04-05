@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "copy-to-demo": "copy-and-watch --watch ../src/**/*.{ts,tsx} ../src/**/*.{ts,tsx} ./src/react-admin/",
     "predemo:start": "rimraf ./src/react-admin && cp -r ../src ./src/react-admin",
     "demo:start": "react-app-rewired start",
     "demo:build": "react-app-rewired build",
@@ -71,6 +72,7 @@
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
     "autoprefixer": "10.4.2",
+    "copy-and-watch": "github:zont/copy-and-watch#pull/5/head",
     "customize-cra": "1.0.0",
     "eslint": "8.8.0",
     "eslint-config-prettier": "8.3.0",
