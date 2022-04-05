@@ -1,6 +1,6 @@
 import React from 'react';
-import { Permission } from 'react-admin/modules/user/user.types';
-import { Idp } from 'react-admin/modules/user/user.types';
+import { Permission } from '~modules/user/user.types';
+import { Idp } from '~modules/user/user.types';
 import { ContentPageOverview } from './react-admin/modules/content-page/pages';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';

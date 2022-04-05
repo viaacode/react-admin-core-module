@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predemo:start": "rimraf ./src/react-admin && cp -r ../src ./src/react-admin && npx replace \" from '~\" \" from 'react-admin/\" src --recursive --silent",
-    "demo:start": "react-scripts start",
-    "demo:build": "react-scripts build",
-    "demo:test": "react-scripts test",
+    "predemo:start": "rimraf ./src/react-admin && cp -r ../src ./src/react-admin",
+    "demo:start": "react-app-rewired start",
+    "demo:build": "react-app-rewired build",
+    "demo:test": "react-app-rewired test",
     "demo:eject": "react-scripts eject"
   },
   "dependencies": {
@@ -71,6 +71,7 @@
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
     "autoprefixer": "10.4.2",
+    "customize-cra": "1.0.0",
     "eslint": "8.8.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.4",
@@ -83,6 +84,7 @@
     "jest": "27.5.1",
     "lint-staged": "12.3.3",
     "prettier": "2.5.1",
+    "react-app-rewired": "2.2.1",
     "react-router": "5.2.1",
     "react-router-dom": "5.3.0",
     "replace": "1.2.1",

@@ -19,7 +19,17 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src"
+    "paths": {
+      "~modules/*": [
+        "./src/react-admin/modules/*"
+      ],
+      "~generated/*": [
+        "./src/react-admin/generated/*"
+      ],
+      "~core/*": [
+        "./src/react-admin/core/*"
+      ]
+    }
   },
   "include": [
     "src"

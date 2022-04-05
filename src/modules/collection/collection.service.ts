@@ -1,5 +1,4 @@
 import { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash-es';
 import { stringify } from 'query-string';
 
 import { Config } from '~core/config';
@@ -7,7 +6,6 @@ import { CustomError } from '../shared/helpers/custom-error';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
 import { performQuery } from '../shared/helpers/gql';
 import { isUuid } from '../shared/helpers/uuid';
-import { dataService } from '../shared/services/data-service';
 
 import { ContentTypeNumber } from './collection.types';
 

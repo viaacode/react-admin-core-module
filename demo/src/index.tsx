@@ -1,4 +1,4 @@
-import { AvoOrHetArchief } from 'react-admin/modules/shared/types';
+import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminCore } from './react-admin';
 import React from 'react';
 import ReactDOM from 'react-dom';
