@@ -18,14 +18,16 @@ import {
 	TooltipTrigger,
 } from '@viaa/avo2-components';
 import React, { FunctionComponent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../core/config';
 import { getPublishedState } from '../helpers/get-published-state';
 
 import './PublishContentPageModal.scss';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
-import Html from 'modules/admin/shared/components/Html/Html';
+import Html from '~modules/collection/shared/components/Html/Html';
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;
@@ -68,13 +70,14 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 			setValidationError(undefined);
 			closeModal(newContent);
 		} catch (err) {
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/components/publish-content-page-modal___error'
 				),
 				description: t(
 					'admin/content/components/share-content-page-modal___de-aanpassingen-kunnen-niet-worden-opgeslagen'
 				),
+				type: ToastType.ERROR,
 			});
 		}
 	};

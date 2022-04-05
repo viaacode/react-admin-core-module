@@ -9,7 +9,7 @@ import {
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_INTRO_COMPONENTS_STATE = (): IntroBlockComponentState => ({
 	title: '',
@@ -24,22 +24,32 @@ export const INITIAL_INTRO_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/intro___intro'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/intro___intro'
+	),
 	type: ContentBlockType.Intro,
 	components: {
 		state: INITIAL_INTRO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/intro___titel-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/intro___titel-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/intro___titel'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/intro___titel'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			content: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/intro___tekst-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/intro___tekst-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/defaults___tekst'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/defaults___tekst'
+					),
 					editorType: ContentBlockEditor.WYSIWYG,
 					editorProps: {
 						controls: [...WYSIWYG_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
@@ -47,7 +57,11 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					},
 				}
 			),
-			align: ALIGN_FIELD(i18n.t('admin/content-block/helpers/generators/intro___uitlijning')),
+			align: ALIGN_FIELD(
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/intro___uitlijning'
+				)
+			),
 		},
 	},
 	block: {

@@ -12,6 +12,8 @@ import { ITEMS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
 import { CONTENT_PAGE_LABEL_QUERIES } from '../queries/content-page-label.queries';
 
+import { Config, ToastType } from 'core/config';
+
 const { publicRuntimeConfig } = getConfig();
 
 export class ContentPageLabelService {
@@ -189,15 +191,14 @@ export class ContentPageLabelService {
 					query: 'DELETE_CONTENT_PAGE_LABEL',
 				})
 			);
-			toastService.notify({
-				title:
-					i18n?.t(
-						'modules/admin/content-page-labels/services/content-page-label___error'
-					) || '',
-				description:
-					i18n?.t(
-						'admin/content-page-labels/content-page-label___het-verwijderen-van-de-content-pagina-label-is-mislukt'
-					) || '',
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page-labels/services/content-page-label___error'
+				),
+				description: Config.getConfig().services.i18n.t(
+					'admin/content-page-labels/content-page-label___het-verwijderen-van-de-content-pagina-label-is-mislukt'
+				),
+				type: ToastType.ERROR,
 			});
 		}
 	}

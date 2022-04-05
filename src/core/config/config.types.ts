@@ -14,7 +14,7 @@ export enum ToastType {
 export interface ToastInfo {
 	title?: string;
 	description?: string;
-	type?: ToastType;
+	type: ToastType;
 }
 
 export interface ToastService {

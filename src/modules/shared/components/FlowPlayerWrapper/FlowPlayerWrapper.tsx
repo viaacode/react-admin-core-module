@@ -29,7 +29,7 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 // import { Avo } from '@viaa/avo2-types';
 // import { get, isNil } from 'lodash-es';
 // import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-// import { useTranslation } from 'react-i18next';
+// import { useTranslation } from '~modules/shared/hooks/useTranslation';
 //
 // import { useGetMediaTicketInfo } from '@media/hooks/get-media-ticket-url';
 //
@@ -44,7 +44,6 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 // import { UserProps } from '~modules/shared/types';
 //
 // import './FlowPlayerWrapper.scss';
-// import { i18n } from '~modules/shared/helpers/i18n';
 //
 // type FlowPlayerWrapperProps = {
 // 	item?: Avo.Item.Item;
@@ -102,9 +101,9 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 // 					item,
 // 				})
 // 			);
-// 			toastService.notify({
-// 				title: i18n.t('modules/admin/shared/components/flow-player-wrapper/flow-player-wrapper___error'),
-// 				description: i18n.t(
+// 			Config.getConfig().services.toastService.showToast({
+// 				title: Config.getConfig().services.i18n.t('modules/admin/shared/components/flow-player-wrapper/flow-player-wrapper___error'),
+// 				description: Config.getConfig().services.i18n.t(
 // 					'item/components/item-video-description___het-ophalen-van-de-mediaplayer-ticket-is-mislukt'
 // 				),
 // 			});

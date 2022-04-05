@@ -3,7 +3,8 @@ import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
 import { getEnv } from './env';
-import { i18n } from './i18n';
+
+import { Config } from 'core/config';
 
 export function getSubtitles(
 	item: Avo.Item.Item | undefined | null
@@ -17,7 +18,9 @@ export function getSubtitles(
 			id: collateral.external_id,
 			default: index === 0,
 			src: `${getEnv('PROXY_URL')}/subtitles/convert-srt-to-vtt${collateral.path}`,
-			label: i18n.t('shared/helpers/get-subtitles___nederlands') + (index + 1),
+			label:
+				Config.getConfig().services.i18n.t('shared/helpers/get-subtitles___nederlands') +
+				(index + 1),
 		};
 	});
 }

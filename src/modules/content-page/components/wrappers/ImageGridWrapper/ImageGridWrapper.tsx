@@ -4,7 +4,7 @@ import React, { FunctionComponent } from 'react';
 import {
 	BlockGridFormatOption,
 	FillOption,
-} from 'modules/admin/content-page/types/content-block.types';
+} from '~modules/collection/content-page/types/content-block.types';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

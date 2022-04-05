@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 
-import { i18n } from '../helpers/i18n';
+import { Config } from '../../../core/config';
 
 import { ROUTE_PARTS } from './routes';
 
@@ -277,4 +277,7 @@ export const CONTENT_TYPE_TO_ROUTE: { [contentType in Avo.Core.ContentType]: str
 } as any; // TODO remove cast once this task is complete: https://meemoo.atlassian.net/browse/DEV-729
 
 export const GENERATE_SITE_TITLE = (...pageTitleParts: (string | null | undefined)[]) =>
-	compact([...pageTitleParts, i18n.t('constants___het-archief-voor-onderwijs')]).join(' | ');
+	compact([
+		...pageTitleParts,
+		Config.getConfig().services.i18n.t('constants___het-archief-voor-onderwijs'),
+	]).join(' | ');

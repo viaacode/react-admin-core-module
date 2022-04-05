@@ -1,7 +1,6 @@
 import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, noop, omit } from 'lodash-es';
-import { UserProps } from 'modules/admin/shared/types';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ import {
 	REPEATABLE_CONTENT_BLOCKS,
 } from './ContentBlockPreview.const';
 
+import { UserProps } from '~modules/collection/shared/types';
 import { generateSmartLink } from '~modules/shared/helpers/link';
 
 import './ContentBlockPreview.scss';

@@ -1,6 +1,6 @@
 import { ContentPickerTypeSchema, LinkTargetSchema } from '@viaa/avo2-types/types/core';
 
-import { i18n } from '../../helpers/i18n';
+import { Config } from '../../../../core/config';
 import { PickerTypeOption } from '../../types/content-picker';
 
 import { retrieveAnchors } from './item-providers/anchors';
@@ -32,27 +32,35 @@ export interface PickerItem {
 }
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = () => ({
-	[ContentPickerType.CONTENT_PAGE]: i18n.t('admin/content/content___content'),
-	[ContentPickerType.INTERNAL_LINK]: i18n.t('admin/content/content___statisch'),
-	[ContentPickerType.COLLECTION]: i18n.t('admin/content/content___collecties'),
-	[ContentPickerType.ITEM]: i18n.t('admin/content/content___items'),
-	[ContentPickerType.BUNDLE]: i18n.t('admin/content/content___bundels'),
-	[ContentPickerType.EXTERNAL_LINK]: i18n.t(
+	[ContentPickerType.CONTENT_PAGE]: Config.getConfig().services.i18n.t(
+		'admin/content/content___content'
+	),
+	[ContentPickerType.INTERNAL_LINK]: Config.getConfig().services.i18n.t(
+		'admin/content/content___statisch'
+	),
+	[ContentPickerType.COLLECTION]: Config.getConfig().services.i18n.t(
+		'admin/content/content___collecties'
+	),
+	[ContentPickerType.ITEM]: Config.getConfig().services.i18n.t('admin/content/content___items'),
+	[ContentPickerType.BUNDLE]: Config.getConfig().services.i18n.t(
+		'admin/content/content___bundels'
+	),
+	[ContentPickerType.EXTERNAL_LINK]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___externe-url'
 	),
-	[ContentPickerType.SEARCH_QUERY]: i18n.t(
+	[ContentPickerType.SEARCH_QUERY]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___zoekfilters'
 	),
-	[ContentPickerType.PROJECTS]: i18n.t(
+	[ContentPickerType.PROJECTS]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___projecten'
 	),
-	[ContentPickerType.PROFILE]: i18n.t(
+	[ContentPickerType.PROFILE]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___gebruiker'
 	),
-	[ContentPickerType.ANCHOR_LINK]: i18n.t(
+	[ContentPickerType.ANCHOR_LINK]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___anchors'
 	),
-	[ContentPickerType.FILE]: i18n.t(
+	[ContentPickerType.FILE]: Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___bestand'
 	),
 });
@@ -107,7 +115,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels[ContentPickerType.SEARCH_QUERY],
 			disabled: false,
 			picker: 'TEXT_INPUT',
-			placeholder: i18n.t(
+			placeholder: Config.getConfig().services.i18n.t(
 				'admin/shared/components/content-picker/content-picker___plak-hier-uw-zoekpagina-url'
 			),
 		},

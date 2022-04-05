@@ -2,7 +2,7 @@ import { Config } from './config';
 import { Routes } from './routes';
 
 const Core = {
-	config: new Config(),
+	config: Config,
 	routes: new Routes(),
 };
 

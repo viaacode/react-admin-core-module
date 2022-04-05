@@ -1,7 +1,11 @@
-import { i18n } from './i18n';
+import { Config } from 'core/config';
 
 export function getPageNotFoundError(loggedIn: boolean): string {
 	return loggedIn
-		? i18n.t('error/views/error-view___de-pagina-werd-niet-gevonden-ingelogd')
-		: i18n.t('error/views/error-view___de-pagina-werd-niet-gevonden-niet-ingelogd');
+		? Config.getConfig().services.i18n.t(
+				'error/views/error-view___de-pagina-werd-niet-gevonden-ingelogd'
+		  )
+		: Config.getConfig().services.i18n.t(
+				'error/views/error-view___de-pagina-werd-niet-gevonden-niet-ingelogd'
+		  );
 }

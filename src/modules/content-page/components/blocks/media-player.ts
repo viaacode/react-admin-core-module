@@ -20,7 +20,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_MEDIA_PLAYER_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
 	title: '',
@@ -37,13 +37,15 @@ export const INITIAL_MEDIA_PLAYER_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/media-player___media-speler'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/media-player___media-speler'
+	),
 	type: ContentBlockType.MediaPlayer,
 	components: {
 		state: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___toegankelijkheidstitel'
 				),
 				validator: undefined,
@@ -53,19 +55,19 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				validator: undefined,
 			}),
 			src: TEXT_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___eigen-video-url-van-flowplayer-com-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: i18n.t(
+					placeholder: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___eigen-poster-uploaden-optioneel'
 				),
 				validator: undefined,
@@ -77,19 +79,23 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				} as FileUploadProps,
 			}),
 			annotationTitle: {
-				label: i18n.t('admin/content-block/helpers/generators/image___bijschift-titel'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image___bijschift-titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			annotationText: {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			width: {
-				label: i18n.t('admin/content-block/helpers/generators/media-player___breedte'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/media-player___breedte'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_MEDIA_PLAYER_WIDTH_OPTIONS(),
@@ -98,7 +104,7 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 			autoplay: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: i18n.t(
+					label: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player___automatisch-afspelen'
 					),
 				} as CheckboxProps,

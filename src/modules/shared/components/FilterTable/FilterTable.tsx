@@ -1,3 +1,4 @@
+import { KeyCode } from '@shared/types';
 import {
 	Button,
 	ButtonType,
@@ -39,11 +40,10 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
-import { KeyCode } from '@shared/types';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';

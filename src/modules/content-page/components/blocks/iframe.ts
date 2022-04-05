@@ -8,7 +8,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_IFRAME_COMPONENTS_STATE = (): IFrameBlockComponentState => ({
 	title: '',
@@ -25,22 +25,32 @@ export const INITIAL_IFRAME_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const IFRAME_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/iframe___i-frame'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/iframe___i-frame'
+	),
 	type: ContentBlockType.IFrame,
 	components: {
 		state: INITIAL_IFRAME_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/iframe___titel-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/iframe___titel-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/iframe___titel'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/iframe___titel'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			src: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/iframe___url-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/iframe___url-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/iframe___url'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/iframe___url'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),

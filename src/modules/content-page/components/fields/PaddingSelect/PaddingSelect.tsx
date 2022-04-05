@@ -1,6 +1,7 @@
 import { Form, FormGroup, Select, SelectOption, SpacerOption } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
+
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './PaddingSelect.scss';
 import { PaddingFieldState } from '../../../types/content-block.types';

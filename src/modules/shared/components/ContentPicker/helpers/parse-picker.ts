@@ -1,6 +1,7 @@
 import { LinkTarget } from '@viaa/avo2-components';
 import queryString from 'query-string';
 
+import { Config, ToastType } from '../../../../../core/config';
 import { PickerItem } from '../../../types/content-picker';
 import { ContentPickerType } from '../ContentPicker.const';
 
@@ -26,15 +27,14 @@ export const parseSearchQuery = (input: string): string => {
 		return JSON.stringify(filterDefinition);
 	} catch (err) {
 		console.error('Failed to parse search query input', err);
-		toastService.notify({
-			title:
-				i18n?.t(
-					'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
-				) || '',
-			description:
-				i18n?.t(
-					'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
-				) || '',
+		Config.getConfig().services.toastService.showToast({
+			title: Config.getConfig().services.i18n.t(
+				'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
+			),
+			description: Config.getConfig().services.i18n.t(
+				'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
+			),
+			type: ToastType.ERROR,
 		});
 
 		return 'Ongeldige zoekfilter';

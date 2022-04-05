@@ -20,9 +20,8 @@ import React, {
 	useState,
 } from 'react';
 import { Trans } from 'react-i18next';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { Scrollbar } from 'react-scrollbars-custom';
-import { compose } from 'redux';
 
 import { Color } from '~modules/content-page/types/content-block.types';
 import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';

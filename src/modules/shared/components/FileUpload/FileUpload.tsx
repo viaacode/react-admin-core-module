@@ -12,8 +12,10 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
 import queryString from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import { FileUploadService } from '../../services/file-upload-service';
@@ -47,6 +49,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	onChange,
 }) => {
 	const { t } = useTranslation();
+
 	const [urlToDelete, setUrlToDelete] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -69,15 +72,14 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					? files.filter((file) => !allowedTypes.includes(file.type))
 					: [];
 				if (notAllowedFiles.length) {
-					toastService.notify({
-						title:
-							i18n?.t(
-								'modules/admin/shared/components/file-upload/file-upload___error'
-							) || '',
-						description:
-							i18n?.t(
-								'shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten'
-							) || '',
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t(
+							'modules/admin/shared/components/file-upload/file-upload___error'
+						),
+						description: Config.getConfig().services.i18n.t(
+							'shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten'
+						),
+						type: ToastType.ERROR,
 					});
 					return;
 				}
@@ -97,26 +99,24 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				new CustomError('Failed to upload files in FileUpload component', err, { files })
 			);
 			if (files && files.length > 1 && allowMulti) {
-				toastService.notify({
-					title:
-						i18n?.t(
-							'modules/admin/shared/components/file-upload/file-upload___error'
-						) || '',
-					description:
-						i18n?.t(
-							'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
-						) || '',
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/shared/components/file-upload/file-upload___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
+					),
+					type: ToastType.ERROR,
 				});
 			} else {
-				toastService.notify({
-					title:
-						i18n?.t(
-							'modules/admin/shared/components/file-upload/file-upload___error'
-						) || '',
-					description:
-						i18n?.t(
-							'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
-						) || '',
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/shared/components/file-upload/file-upload___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
+					),
+					type: ToastType.ERROR,
 				});
 			}
 		}
@@ -150,14 +150,14 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 		} catch (err) {
 			console.error(new CustomError('Failed to delete asset', err, { urls }));
-			toastService.notify({
-				title:
-					i18n?.t('modules/admin/shared/components/file-upload/file-upload___error') ||
-					'',
-				description:
-					i18n?.t(
-						'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'
-					) || '',
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/shared/components/file-upload/file-upload___error'
+				),
+				description: Config.getConfig().services.i18n.t(
+					'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'
+				),
+				type: ToastType.ERROR,
 			});
 		}
 
@@ -257,10 +257,10 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 								label={
 									label ||
 									(allowMulti
-										? i18n?.t(
+										? Config.getConfig().services.i18n.t(
 												'shared/components/file-upload/file-upload___selecteer-bestanden'
 										  )
-										: i18n?.t(
+										: Config.getConfig().services.i18n.t(
 												'shared/components/file-upload/file-upload___selecteer-een-bestand'
 										  ))
 								}

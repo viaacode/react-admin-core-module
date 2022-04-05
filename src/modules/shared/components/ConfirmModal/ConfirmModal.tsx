@@ -10,6 +10,7 @@ import {
 } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
 
+import { Config } from '../../../../core/config';
 import { sanitizeHtml } from '../../helpers/sanitize';
 import Html from '../Html/Html';
 
@@ -25,12 +26,8 @@ interface ConfirmModalProps {
 }
 
 const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
-	title = i18n?.t(
-		'shared/components/delete-object-modal/delete-object-modal___ben-je-zeker-dat-je-deze-actie-wil-uitvoeren'
-	),
-	body = i18n?.t(
-		'shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden'
-	),
+	title,
+	body,
 	cancelLabel = 'Annuleer',
 	confirmLabel = 'Verwijder',
 	confirmButtonType = 'danger',
@@ -40,6 +37,17 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	isOpen,
 	deleteObjectCallback,
 }) => {
+	const modalTitle =
+		title ||
+		Config.getConfig().services.i18n.t(
+			'shared/components/delete-object-modal/delete-object-modal___ben-je-zeker-dat-je-deze-actie-wil-uitvoeren'
+		);
+	const modalBody =
+		body ||
+		Config.getConfig().services.i18n.t(
+			'shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden'
+		);
+
 	const handleDelete = () => {
 		onClose();
 		deleteObjectCallback();
@@ -48,13 +56,13 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	return (
 		<Modal
 			isOpen={isOpen}
-			title={title && sanitizeHtml(title, 'basic')}
+			title={modalTitle && sanitizeHtml(modalTitle, 'basic')}
 			size="small"
 			onClose={onClose}
 			scrollable
 		>
 			<ModalBody>
-				{!!body && <Html content={body} />}
+				{!!modalBody && <Html content={modalBody} />}
 				<Toolbar spaced>
 					<ToolbarRight>
 						<ToolbarItem>

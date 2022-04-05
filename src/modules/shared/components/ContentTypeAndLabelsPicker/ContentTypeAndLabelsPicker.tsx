@@ -12,8 +12,10 @@ import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
 import { compact, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
 import { CustomError } from '../../helpers/custom-error';
@@ -57,15 +59,14 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						}
 					)
 				);
-				toastService.notify({
-					title:
-						i18n?.t(
-							'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
-						) || '',
-					description:
-						i18n?.t(
-							'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
-						) || '',
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
+					),
+					type: ToastType.ERROR,
 				});
 			})
 			.finally(() => setIsLoading(false));

@@ -19,8 +19,10 @@ import clsx from 'clsx';
 import { get, isEqual, isNil } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { validateContentBlockField } from '../../../shared/helpers/validation';
 import {
 	ContentBlockBlockConfig,
@@ -250,15 +252,14 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 						<CopyToClipboard
 							text={JSON.stringify({ block: config })}
 							onCopy={() =>
-								toastService.notify({
-									title:
-										i18n?.t(
-											'modules/admin/content-page/components/content-block-form/content-block-form___error'
-										) || '',
-									description:
-										i18n?.t(
-											'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
-										) || '',
+								Config.getConfig().services.toastService.showToast({
+									title: Config.getConfig().services.i18n.t(
+										'modules/admin/content-page/components/content-block-form/content-block-form___error'
+									),
+									description: Config.getConfig().services.i18n.t(
+										'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
+									),
+									type: ToastType.ERROR,
 								})
 							}
 						>

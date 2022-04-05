@@ -1,8 +1,10 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
-import { CheckboxOption } from 'modules/admin/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { CheckboxOption } from '~modules/collection/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../core/config';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
 import { ContentPageLabelService } from '../services/content-page-label.service';
@@ -34,15 +36,14 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get user group options', err));
-				toastService.notify({
-					title:
-						i18n?.t(
-							'modules/admin/content-page-labels/hooks/use-content-page-label-options___error'
-						) || '',
-					description:
-						i18n?.t(
-							'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
-						) || '',
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/content-page-labels/hooks/use-content-page-label-options___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
+					),
+					type: ToastType.ERROR,
 				});
 			})
 			.finally(() => {

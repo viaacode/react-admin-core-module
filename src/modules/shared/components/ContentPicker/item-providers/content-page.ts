@@ -1,9 +1,8 @@
-import { ContentPageInfo } from 'modules/admin/content-page/types/content-pages.types';
-
 import { CustomError } from '../../../helpers/custom-error';
 import { PickerSelectItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
+import { ContentPageInfo } from '~modules/collection/content-page/types/content-pages.types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 

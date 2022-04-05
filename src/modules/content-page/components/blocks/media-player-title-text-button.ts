@@ -25,7 +25,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE =
 	(): MediaPlayerTitleTextButtonBlockComponentState => ({
@@ -44,7 +44,7 @@ export const INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_STATE = (): DefaultCon
 
 export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t(
+	name: Config.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/media-player-title-text-button___media-speler-met-titel-tekst-en-knop'
 	),
 	type: ContentBlockType.MediaPlayerTitleTextButton,
@@ -52,26 +52,26 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 		state: INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE(),
 		fields: {
 			mediaTitle: {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player-title-text-button___video-of-audio-item-toegankelijkheidstitel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			mediaItem: ITEM_PICKER_FIELD(),
 			mediaSrc: TEXT_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-video-url-van-flowplayer-com-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: i18n.t(
+					placeholder: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player-title-text-button___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			mediaPoster: FILE_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-poster-uploaden-optioneel'
 				),
 				validator: undefined,
@@ -85,20 +85,26 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 			mediaAutoplay: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: i18n.t(
+					label: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player-title-text-button___automatisch-afspelen'
 					),
 				} as CheckboxProps,
 			},
 			headingTitle: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/heading___titel-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/heading___titel-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/heading___titel'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/heading___titel'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingType: {
-				label: i18n.t('admin/content-block/helpers/generators/heading___stijl'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/heading___stijl'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_TYPE_OPTIONS(),
@@ -106,36 +112,46 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 			},
 			content: TEXT_FIELD(),
 			buttonType: {
-				label: i18n.t('admin/content-block/helpers/generators/ctas___knop-type'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/ctas___knop-type'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_BUTTON_TYPE_OPTIONS(),
 				},
 			},
 			buttonLabel: {
-				label: i18n.t('admin/content-block/helpers/generators/ctas___knop-tekst'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/ctas___knop-tekst'
+				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonAltTitle: TEXT_FIELD('', {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
-				label: i18n.t('admin/content-block/helpers/generators/ctas___knop-icoon'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/ctas___knop-icoon'
+				),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player-title-text-button___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			align: ALIGN_FIELD(),
+			align: ALIGN_FIELD(
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/defaults___uitlijning'
+				)
+			),
 		},
 	},
 	block: {

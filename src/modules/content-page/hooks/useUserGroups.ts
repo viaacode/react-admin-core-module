@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { GET_SPECIAL_USER_GROUPS } from 'modules/admin/user-group/user-group.const';
-import { UserGroupService } from 'modules/admin/user-group/user-group.service';
-import { UserGroup } from 'modules/admin/user-group/user-group.types';
+import { GET_SPECIAL_USER_GROUPS } from '~modules/collection/user-group/user-group.const';
+import { UserGroupService } from '~modules/collection/user-group/user-group.service';
+import { UserGroup } from '~modules/collection/user-group/user-group.types';
 
 type UseUserGroupsTuple = [Partial<UserGroup>[], boolean];
 

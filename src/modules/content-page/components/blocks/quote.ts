@@ -9,7 +9,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_QUOTE_COMPONENTS_STATE = (): QuoteBlockComponentState => ({
 	quote: '',
@@ -27,38 +27,54 @@ export const INITIAL_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/quote___quote'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/quote___quote'
+	),
 	type: ContentBlockType.Quote,
 	components: {
 		state: INITIAL_QUOTE_COMPONENTS_STATE(),
 		fields: {
 			quote: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/quote___quote-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/quote___quote-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/quote___quote'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/quote___quote'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			authorName: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/quote___auteur-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/quote___auteur-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/quote___auteur'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/quote___auteur'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			authorInitials: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/quote___initialen-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/quote___initialen-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/quote___initialen'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/quote___initialen'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			authorImage: FILE_FIELD(
-				i18n.t(
+				Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'
 				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/image___afbeelding'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/image___afbeelding'
+					),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),

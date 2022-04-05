@@ -1,6 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, has, omit, without } from 'lodash-es';
-import { i18n } from 'modules/admin/shared/helpers/i18n';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getEnv } from '../../shared/helpers/env';
@@ -14,7 +13,7 @@ import {
 import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 
-import { UpdateContentBlockMutation } from '~generated/graphql-db-types-avo';
+import { Config, ToastType } from 'core/config';
 
 export class ContentBlockService {
 	private static queries =
@@ -40,11 +39,14 @@ export class ContentBlockService {
 				})
 			);
 
-			toastService.notify({
-				title: i18n.t('modules/admin/content-page/services/content-block___error'),
-				description: i18n.t(
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page/services/content-block___error'
+				),
+				description: Config.getConfig().services.i18n.t(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-updaten-van-de-content-blocks'
 				),
+				type: ToastType.ERROR,
 			});
 		}
 	}
@@ -63,11 +65,14 @@ export class ContentBlockService {
 		} catch (err) {
 			console.error(new CustomError('Failed to delete content block', err, { id }));
 
-			toastService.notify({
-				title: i18n.t('modules/admin/content-page/services/content-block___error'),
-				description: i18n.t(
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page/services/content-block___error'
+				),
+				description: Config.getConfig().services.i18n.t(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-verwijderen-van-de-content-blocks'
 				),
+				type: ToastType.ERROR,
 			});
 
 			return null;
@@ -119,11 +124,14 @@ export class ContentBlockService {
 				})
 			);
 
-			toastService.notify({
-				title: i18n.t('modules/admin/content-page/services/content-block___error'),
-				description: i18n.t(
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page/services/content-block___error'
+				),
+				description: Config.getConfig().services.i18n.t(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
+				type: ToastType.ERROR,
 			});
 
 			return null;
@@ -200,11 +208,14 @@ export class ContentBlockService {
 				})
 			);
 
-			toastService.notify({
-				title: i18n.t('modules/admin/content-page/services/content-block___error'),
-				description: i18n.t(
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page/services/content-block___error'
+				),
+				description: Config.getConfig().services.i18n.t(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
+				type: ToastType.ERROR,
 			});
 
 			return null;

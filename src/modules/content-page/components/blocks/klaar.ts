@@ -11,7 +11,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_KLAAR_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
 	titles: [''],
@@ -28,26 +28,34 @@ export const INITIAL_KLAAR_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/klaar___klaar'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/klaar___klaar'
+	),
 	type: ContentBlockType.Klaar,
 	components: {
-		name: i18n.t('admin/content-block/helpers/generators/klaar___klaar-titel'),
+		name: Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/klaar___klaar-titel'
+		),
 		limits: {
 			max: 3,
 		},
 		state: INITIAL_KLAAR_COMPONENTS_STATE(),
 		fields: {
 			titles: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/klaar___titel-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/klaar___titel-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/klaar___titel'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/klaar___titel'
+					),
 					editorType: ContentBlockEditor.TextInput,
 					repeat: {
 						defaultState: '',
-						addButtonLabel: i18n.t(
+						addButtonLabel: Config.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/klaar___voeg-titel-toe'
 						),
-						deleteButtonLabel: i18n.t(
+						deleteButtonLabel: Config.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/klaar___verwijder-titel'
 						),
 					},
@@ -61,7 +69,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (isNil(value) || isEmpty(value)) {
 						errorArray.push(
-							i18n.t(
+							Config.getConfig().services.i18n.t(
 								'admin/content-block/helpers/generators/klaar___datum-is-verplicht'
 							)
 						);

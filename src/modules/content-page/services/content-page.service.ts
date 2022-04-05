@@ -1,11 +1,13 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isFunction, kebabCase, omit } from 'lodash-es';
-import { CustomError } from 'modules/admin/shared/helpers/custom-error';
-import { getEnv } from 'modules/admin/shared/helpers/env';
-import { performQuery } from 'modules/admin/shared/helpers/gql';
 import moment from 'moment';
 import queryString from 'query-string';
+
+import { CustomError } from '~modules/collection/shared/helpers/custom-error';
+import { getEnv } from '~modules/collection/shared/helpers/env';
+import { performQuery } from '~modules/collection/shared/helpers/gql';
+import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep';
@@ -35,11 +37,8 @@ import {
 } from '../types/content-pages.types';
 
 import { ContentBlockService } from './content-block.service';
-import { CONTENT_PAGE_SERVICE_BASE_URL } from './content-page.const';
 
-import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
-import { i18n } from '~modules/shared/helpers/i18n';
-import { ApiResponseWrapper } from '~modules/shared/types/api';
+import { Config, ToastType } from 'core/config';
 
 export class ContentPageService {
 	private static queries =
@@ -170,12 +169,14 @@ export class ContentPageService {
 			console.error('Failed to retrieve content types.', err, {
 				query: this.queries.GetContentTypesDocument,
 			});
-			toastService.notify({
-				title: i18n?.t('modules/admin/content-page/services/content-page___error') || '',
-				description:
-					i18n?.t(
-						'admin/content/content___er-ging-iets-mis-tijdens-het-ophalen-van-de-content-types'
-					) || '',
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
+					'modules/admin/content-page/services/content-page___error'
+				),
+				description: Config.getConfig().services.i18n.t(
+					'admin/content/content___er-ging-iets-mis-tijdens-het-ophalen-van-de-content-types'
+				),
+				type: ToastType.ERROR,
 			});
 
 			return null;
@@ -401,7 +402,7 @@ export class ContentPageService {
 
 	public static async updateContentPage(
 		contentPage: Partial<ContentPageInfo>,
-		initialContentPage?: Partial<ContentPageInfo>
+		initialContentPage: Partial<ContentPageInfo> | undefined
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
 			const dbContentPage = this.cleanupBeforeInsert(
@@ -613,7 +614,7 @@ export class ContentPageService {
 		orderProp: string,
 		orderDirection: 'asc' | 'desc'
 	): Promise<GraphQlResponse<ContentPageInfo[]>> {
-		const parsed = await dataService.query({
+		const parsed = await dataService.query<ContentPageInfo[]>({
 			query: this.queries.GetContentPagesDocument,
 			variables: {
 				filters,

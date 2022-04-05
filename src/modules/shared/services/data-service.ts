@@ -1,7 +1,4 @@
-import { DocumentNode } from 'graphql';
-
-import { ApiService } from '@shared/services/api-service';
-
+import { ApiService } from './api-service/api.service';
 import { DATA_SERVICE_BASE_URL } from './data-service.consts';
 
 export interface QueryInfo {

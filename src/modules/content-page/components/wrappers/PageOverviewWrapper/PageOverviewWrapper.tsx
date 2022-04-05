@@ -8,23 +8,11 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { cloneDeep, get, isNumber } from 'lodash-es';
-import { ContentTypeAndLabelsValue } from 'modules/admin/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import { i18n } from 'modules/admin/shared/helpers/i18n';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
-import {
-	GET_DARK_BACKGROUND_COLOR_OPTIONS,
-	PageOverviewOrderOptions,
-} from '../../../const/content-block.consts';
-import { convertToContentPageInfos } from '../../../helpers/parsers';
-import { ContentPageService } from '../../../services/content-page.service';
-import { Color } from '../../../types/content-block.types';
-import { ContentPageInfo } from '../../../types/content-pages.types';
-import ContentPage from '../../ContentPage/ContentPage';
-
+import { ContentTypeAndLabelsValue } from '~modules/collection/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
 import {
 	LoadingErrorLoadedComponent,
@@ -36,7 +24,19 @@ import { getEnv } from '~modules/shared/helpers/env';
 import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
 import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
 import { useDebounce } from '~modules/shared/hooks/useDebounce';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { UserProps } from '~modules/shared/types';
+
+import { Config, ToastType } from '../../../../../core/config';
+import {
+	GET_DARK_BACKGROUND_COLOR_OPTIONS,
+	PageOverviewOrderOptions,
+} from '../../../const/content-block.consts';
+import { convertToContentPageInfos } from '../../../helpers/parsers';
+import { ContentPageService } from '../../../services/content-page.service';
+import { Color } from '../../../types/content-block.types';
+import { ContentPageInfo } from '../../../types/content-pages.types';
+import ContentPage from '../../ContentPage/ContentPage';
 
 export interface ContentPageOverviewParams {
 	withBlock: boolean;
@@ -82,7 +82,7 @@ const PageOverviewWrapper: FunctionComponent<
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	buttonLabel = i18n.t(
+	buttonLabel = Config.getConfig().services.i18n.t(
 		'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___lees-meer'
 	),
 	buttonAltTitle = '',
@@ -205,13 +205,14 @@ const PageOverviewWrapper: FunctionComponent<
 						)
 					);
 
-					toastService.notify({
-						title: i18n.t(
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t(
 							'modules/admin/content-page/components/wrappers/page-overview-wrapper/page-overview-wrapper___error'
 						),
-						description: i18n.t(
+						description: Config.getConfig().services.i18n.t(
 							'admin/content-block/components/wrappers/page-overview-wrapper/page-overview-wrapper___het-opgegeven-item-kon-niet-worden-gevonden'
 						),
+						type: ToastType.ERROR,
 					});
 				}
 			}

@@ -13,7 +13,7 @@ import { BlockUspGridWrapperProps } from '../wrappers/UspGridWrapper/UspGridWrap
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{
@@ -40,18 +40,24 @@ export const INITIAL_USP_GRID_BLOCK_STATE = (): BlockUspGridWrapperProps &
 
 export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/usp-grid___usp'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/usp-grid___usp'
+	),
 	type: ContentBlockType.UspGrid,
 	components: {
-		name: i18n.t('admin/content-block/helpers/generators/image-grid___item'),
+		name: Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/image-grid___item'
+		),
 		state: INITIAL_USP_GRID_COMPONENTS_STATE(),
 		fields: {
 			source: FILE_FIELD(
-				i18n.t(
+				Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'
 				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/image-grid___afbeelding'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/image-grid___afbeelding'
+					),
 					editorProps: {
 						assetType: 'CONTENT_BLOCK_IMAGE',
 						allowMulti: false,
@@ -60,27 +66,35 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___titel'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			text: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___tekst'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___tekst'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___knop-tekst'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___knop-tekst'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___knop-tooltip'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonType: {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image-grid___knop-type-kleur'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -89,11 +103,15 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAltTitle: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/usp-grid___alt-title-text'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/usp-grid___alt-title-text'
+				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			action: {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___link'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___link'
+				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},
@@ -104,14 +122,18 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			align: {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___alignatie'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___alignatie'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
 			textAlign: {
-				label: i18n.t('admin/content-block/helpers/generators/image-grid___text-alignatie'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/image-grid___text-alignatie'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),

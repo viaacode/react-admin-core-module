@@ -1,7 +1,6 @@
 import { CheckboxProps } from '@viaa/avo2-components';
 
 import { WYSIWYG_OPTIONS_FULL } from '../../../shared/consts/wysiwyg';
-import { i18n } from '../../../shared/helpers/i18n';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -11,6 +10,8 @@ import {
 } from '../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
+
+import { Config } from 'core/config';
 
 export const INITIAL_RICH_TEXT_COMPONENTS_STATE = (): RichTextBlockComponentState => ({
 	content: '',
@@ -27,7 +28,9 @@ export const INITIAL_RICH_TEXT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/rich-text___tekst'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/rich-text___tekst'
+	),
 	type: ContentBlockType.RichText,
 	components: {
 		limits: {
@@ -36,7 +39,9 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_RICH_TEXT_COMPONENTS_STATE(),
 		fields: {
 			content: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/rich-text___tekst-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/rich-text___tekst-is-verplicht'
+				),
 				{
 					editorProps: {
 						controls: [...WYSIWYG_OPTIONS_FULL, 'media'],
@@ -52,7 +57,7 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			limitWidth: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: i18n.t(
+					label: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/rich-text___limiteer-breedte-tot-800-px'
 					),
 				} as CheckboxProps,

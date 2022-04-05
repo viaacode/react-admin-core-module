@@ -1,27 +1,27 @@
 import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
-import {
-	BlockClickHandler,
-	ContentPageInfo,
-} from 'modules/admin/content-page/types/content-pages.types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import './ContentPage.scss';
 import { RouteComponentProps } from 'react-router';
 
-import { ContentPageService } from '../../services/content-page.service';
-import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
-import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
-
+import {
+	BlockClickHandler,
+	ContentPageInfo,
+} from '~modules/collection/content-page/types/content-pages.types';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { getUserGroupIds } from '~modules/shared/helpers/get-profile-info';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { UserProps } from '~modules/shared/types';
+
+import { ContentPageService } from '../../services/content-page.service';
+import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
+import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 
 type ContentPageDetailProps =
 	| {

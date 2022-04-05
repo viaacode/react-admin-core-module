@@ -6,11 +6,20 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
-import { formatDate } from 'modules/admin/shared/helpers/formatters/date';
-import { parseIntOrDefault } from 'modules/admin/shared/helpers/parsers/number';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router-dom';
+
+import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
+import { formatDate } from '~modules/collection/shared/helpers/formatters/date';
+import { parseIntOrDefault } from '~modules/collection/shared/helpers/parsers/number';
+import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { isMobileWidth } from '~modules/shared/helpers/media-query';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserProps } from '~modules/shared/types';
 
 import { ContentPageService } from '../../../services/content-page.service';
 import {
@@ -19,15 +28,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
-
-import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
-import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { isMobileWidth } from '~modules/shared/helpers/media-query';
-import { UserProps } from '~modules/shared/types';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;

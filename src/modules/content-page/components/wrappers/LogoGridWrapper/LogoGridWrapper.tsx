@@ -6,7 +6,7 @@ import { formatLookup } from '../ImageGridWrapper/ImageGridWrapper';
 import {
 	BlockGridFormatOption,
 	FillOption,
-} from 'modules/admin/content-page/types/content-block.types';
+} from '~modules/collection/content-page/types/content-block.types';
 
 export interface BlockLogoGridWrapperProps {
 	elements: GridItem[];

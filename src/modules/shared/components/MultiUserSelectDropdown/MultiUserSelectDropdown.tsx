@@ -12,14 +12,15 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { get, uniqBy } from 'lodash-es';
-import { UserService } from 'modules/admin/user/user.service';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { UserService } from '~modules/collection/user/user.service';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
-
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 import './MultiUserSelectDropdown.scss';
 
@@ -83,15 +84,14 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							})
 						)
 					);
-					toastService.notify({
-						title:
-							i18n?.t(
-								'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
-							) || '',
-						description:
-							i18n?.t(
-								'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
-							) || '',
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t(
+							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
+						),
+						description: Config.getConfig().services.i18n.t(
+							'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
+						),
+						type: ToastType.ERROR,
 					});
 				});
 		}

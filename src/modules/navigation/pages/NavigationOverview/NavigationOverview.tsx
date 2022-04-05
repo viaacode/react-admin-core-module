@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Icon, Loader } from '../../../shared/components';
-import { useConfig } from '../../../shared/hooks';
 import { AdminLayout } from '../../../shared/layouts';
 import { NAVIGATION_PATHS } from '../../const';
 import { useGetNavigations } from '../../hooks';

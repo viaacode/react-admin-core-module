@@ -3,13 +3,13 @@ import React, { FunctionComponent } from 'react';
 
 import { AlignOption } from '../../../types/content-block.types';
 
-interface AlignSelectProps {
+export interface AlignSelectProps {
 	onChange: (value: string) => void;
 	options: { label: string; value: AlignOption }[];
 	value: AlignOption;
 }
 
-const AlignSelect: FunctionComponent<AlignSelectProps> = ({ onChange, options, value }) => {
+export const AlignSelect: FunctionComponent<AlignSelectProps> = ({ onChange, options, value }) => {
 	return (
 		<ButtonGroup>
 			{options.map((option) => (
@@ -25,5 +25,3 @@ const AlignSelect: FunctionComponent<AlignSelectProps> = ({ onChange, options, v
 		</ButtonGroup>
 	);
 };
-
-export default AlignSelect;

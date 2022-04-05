@@ -27,7 +27,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	title: '',
@@ -50,62 +50,78 @@ export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/hero___hero'),
+	name: Config.getConfig().services.i18n.t('admin/content-block/helpers/generators/hero___hero'),
 	type: ContentBlockType.Hero,
 	components: {
 		state: INITIAL_HERO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/hero___titel'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
-				i18n.t('admin/content-block/helpers/generators/hero___titel-kleur')
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___titel-kleur'
+				)
 			),
 			content: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/hero___beschrijving'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___beschrijving'
+				),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				i18n.t('admin/content-block/helpers/generators/hero___beschrijving-kleur')
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___beschrijving-kleur'
+				)
 			),
 
 			buttons: {
-				label: i18n.t('admin/content-block/helpers/generators/hero___knop'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___knop'
+				),
 				fields: {
 					type: {
-						label: i18n.t('admin/content-block/helpers/generators/buttons___type'),
+						label: Config.getConfig().services.i18n.t(
+							'admin/content-block/helpers/generators/buttons___type'
+						),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: GET_BUTTON_TYPE_OPTIONS(),
 						},
 					},
 					label: TEXT_FIELD(
-						i18n.t(
+						Config.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 						),
 						{
-							label: i18n.t('admin/content-block/helpers/generators/buttons___tekst'),
+							label: Config.getConfig().services.i18n.t(
+								'admin/content-block/helpers/generators/buttons___tekst'
+							),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
 					altTitle: TEXT_FIELD('', {
-						label: i18n.t(
+						label: Config.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/hero___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
 					}),
 					icon: {
-						label: i18n.t('admin/content-block/helpers/generators/buttons___icoon'),
+						label: Config.getConfig().services.i18n.t(
+							'admin/content-block/helpers/generators/buttons___icoon'
+						),
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
 					buttonAction: {
-						label: i18n.t(
+						label: Config.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___knop-actie'
 						),
 						editorType: ContentBlockEditor.ContentPicker,
@@ -114,35 +130,37 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: i18n.t(
+					addButtonLabel: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe'
 					),
-					deleteButtonLabel: i18n.t(
+					deleteButtonLabel: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop'
 					),
 				},
 			} as ContentBlockFieldGroup,
 
 			textBelowButtons: TEXT_FIELD(undefined, {
-				label: i18n.t('admin/content-block/helpers/generators/hero___text-onder-knoppen'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/hero___text-onder-knoppen'
+				),
 				editorProps: {
 					controls: WYSIWYG_OPTIONS_FULL,
 				},
 			}),
 			src: TEXT_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: i18n.t(
+					placeholder: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/hero___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___eigen-poster-uploaden'
 				),
 				validator: undefined,
@@ -154,7 +172,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as Partial<FileUploadProps>,
 			}),
 			altText: TEXT_FIELD(undefined, {
-				label: i18n.t(
+				label: Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
@@ -166,7 +184,9 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: i18n.t('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/defaults___achtergrondkleur'
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_HERO_BACKGROUND_COLOR_OPTIONS(),

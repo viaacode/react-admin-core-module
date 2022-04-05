@@ -1,12 +1,14 @@
-import { EducationOrganisationService } from '@shared/services/educational-organsiation-service/education-organizations-service';
 import { Alert, Select, Spacer } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { EducationOrganisationService } from '~modules/shared/services/educational-organsiation-service/education-organizations-service';
+
+import { Config, ToastType } from '../../../../core/config';
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
 import './EducationalOrganisationsSelect.scss';
@@ -45,16 +47,17 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	useEffect(() => {
 		EducationOrganisationService.fetchCities()
 			.then(setCities)
-			.catch((err) => {
+			.catch((err: any) => {
 				console.error(err);
 				console.error(new Error('Failed to get cities'));
-				toastService.notify({
+				Config.getConfig().services.toastService.showToast({
 					title: t(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
 					),
 					description: t(
 						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt'
 					),
+					type: ToastType.ERROR,
 				});
 			});
 	}, [setCities, t]);
@@ -91,13 +94,14 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error('Failed to get educational organizations', err, {
 					selectedCity,
 				});
-				toastService.notify({
+				Config.getConfig().services.toastService.showToast({
 					title: t(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 					),
 					description: t(
 						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt'
 					),
+					type: ToastType.ERROR,
 				});
 			}
 		})();
@@ -120,13 +124,14 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			(org: ClientEducationOrganization) => org.label === orgLabel
 		);
 		if (!selectedOrg) {
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 				),
 				description: t(
 					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden'
 				),
+				type: ToastType.ERROR,
 			});
 			return;
 		}

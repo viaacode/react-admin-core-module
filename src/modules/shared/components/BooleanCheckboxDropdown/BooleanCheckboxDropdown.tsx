@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
+
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { NULL_FILTER } from '../../helpers/filters';
 import {

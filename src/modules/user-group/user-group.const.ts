@@ -1,8 +1,6 @@
-import { TableColumn } from '@viaa/avo2-components';
-
+import { Config } from '../../core/config';
 import { FilterableColumn } from '../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '../shared/consts/routes';
-import { i18n } from '../shared/helpers/i18n';
 import { SpecialPermissionGroups } from '../shared/types/authentication.types';
 
 import { UserGroup } from './user-group.types';
@@ -18,13 +16,15 @@ export const ITEMS_PER_PAGE = 20;
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
-		label: i18n.t(
+		label: Config.getConfig().services.i18n.t(
 			'admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedOutUsers,
 	},
 	{
-		label: i18n.t('admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'),
+		label: Config.getConfig().services.i18n.t(
+			'admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'
+		),
 		id: SpecialPermissionGroups.loggedInUsers,
 	},
 ];
@@ -32,21 +32,21 @@ export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 export const GET_USER_GROUP_OVERVIEW_TABLE_COLS: () => FilterableColumn[] = () => [
 	{
 		id: 'label',
-		label: i18n.t('admin/user-groups/user-group___label'),
+		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___label'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'description',
-		label: i18n.t('admin/user-groups/user-group___beschrijving'),
+		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___beschrijving'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'created_at',
-		label: i18n.t('admin/user-groups/user-group___aangemaakt-op'),
+		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___aangemaakt-op'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -54,7 +54,7 @@ export const GET_USER_GROUP_OVERVIEW_TABLE_COLS: () => FilterableColumn[] = () =
 	},
 	{
 		id: 'updated_at',
-		label: i18n.t('admin/user-groups/user-group___aangepast-op'),
+		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___aangepast-op'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -62,7 +62,7 @@ export const GET_USER_GROUP_OVERVIEW_TABLE_COLS: () => FilterableColumn[] = () =
 	},
 	{
 		id: 'actions',
-		tooltip: i18n.t('admin/user-groups/user-group___acties'),
+		tooltip: Config.getConfig().services.i18n.t('admin/user-groups/user-group___acties'),
 		visibleByDefault: true,
 	},
 ];

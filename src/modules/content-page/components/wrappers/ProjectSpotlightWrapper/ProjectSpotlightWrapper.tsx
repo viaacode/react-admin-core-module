@@ -1,17 +1,17 @@
 import { BlockSpotlight, ButtonAction, ImageInfo, RenderLinkFunction } from '@viaa/avo2-components';
 import { get } from 'lodash-es';
-import { DefaultSecureRouteProps } from 'modules/admin/shared/types/secure-route.types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { ContentPageService } from '../../../services/content-page.service';
-import { ContentPageInfo } from '../../../types/content-pages.types';
-
+import { DefaultSecureRouteProps } from '~modules/collection/shared/types/secure-route.types';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { ContentPageService } from '../../../services/content-page.service';
+import { ContentPageInfo } from '../../../types/content-pages.types';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;
@@ -36,7 +36,7 @@ const ProjectSpotlightWrapper: FunctionComponent<
 
 	const fetchContentPages = useCallback(async () => {
 		try {
-			const promises = elements.map((projectInfo) => {
+			const promises = elements.map((projectInfo: ProjectSpotlightProps) => {
 				const projectPath = get(projectInfo, 'project.value');
 				if (projectPath && projectPath.toString && projectPath.toString()) {
 					return ContentPageService.getContentPageByPath(

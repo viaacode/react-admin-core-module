@@ -1,12 +1,13 @@
 import { Button, Flex, FlexItem, FormGroup, LinkTarget, TextInput } from '@viaa/avo2-components';
 import { get, isNull } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { CustomError } from '../../helpers/custom-error';
-import { i18n } from '../../helpers/i18n';
 import { PickerItem, PickerSelectItem, PickerTypeOption } from '../../types/content-picker';
 import FileUpload from '../FileUpload/FileUpload';
 
@@ -34,7 +35,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
 	initialValue,
 	onSelect,
-	placeholder = i18n.t(
+	placeholder = Config.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___selecteer-een-item'
 	),
 	hideTypeDropdown = false,
@@ -104,13 +105,14 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 						selectedType,
 					})
 				);
-				toastService.notify({
-					title: i18n.t(
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
 						'modules/admin/shared/components/content-picker/content-picker___error'
 					),
-					description: i18n.t(
+					description: Config.getConfig().services.i18n.t(
 						'modules/admin/shared/components/content-picker/content-picker___het-ophalen-van-de-opties-is-mislukt'
 					),
+					type: ToastType.ERROR,
 				});
 				return [];
 			}
@@ -163,13 +165,14 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					selectedItem,
 				})
 			);
-			toastService.notify({
-				title: i18n.t(
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t(
 					'modules/admin/shared/components/content-picker/content-picker___error'
 				),
-				description: i18n.t(
+				description: Config.getConfig().services.i18n.t(
 					'admin/shared/components/content-picker/content-picker___voor-deze-content-pagina-is-geen-pad-geconfigureerd'
 				),
+				type: ToastType.ERROR,
 			});
 			return null;
 		}

@@ -1,11 +1,11 @@
 import { Avo } from '@viaa/avo2-types';
-import { CollectionService } from 'modules/admin/collection/collection.service';
-import { PickerSelectItem } from 'modules/admin/shared/types/content-picker';
 
 import { ContentPickerType } from '../ContentPicker.const';
 import { parsePickerItem } from '../helpers/parse-picker';
 
+import { CollectionService } from '~modules/collection/collection.service';
 import { ContentTypeNumber } from '~modules/collection/collection.types';
+import { PickerSelectItem } from '~modules/collection/shared/types/content-picker';
 
 // TODO: move fetchBundles and fetchBundlesByTitle to a separate bundle service, not collection service.
 

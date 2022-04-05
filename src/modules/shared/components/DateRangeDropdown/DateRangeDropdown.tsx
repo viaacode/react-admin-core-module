@@ -21,13 +21,12 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { ToastType } from '../../../../core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-
-import { useConfig } from '~modules/shared/hooks';
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -64,7 +63,6 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 	onChange,
 }) => {
 	const { t } = useTranslation();
-	const configServices = useConfig('services');
 
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);
@@ -152,7 +150,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				await handleDateChange(null, rangeId);
 			}
 		} catch (err) {
-			configServices.services.toastService.showToast({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),

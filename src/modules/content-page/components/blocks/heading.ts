@@ -15,7 +15,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_HEADING_COMPONENTS_STATE = (): HeadingBlockComponentState => ({
 	children: '',
@@ -33,29 +33,43 @@ export const INITIAL_HEADING_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/heading___titel'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/heading___titel'
+	),
 	type: ContentBlockType.Heading,
 	components: {
 		state: INITIAL_HEADING_COMPONENTS_STATE(),
 		fields: {
 			children: TEXT_FIELD(
-				i18n.t('admin/content-block/helpers/generators/heading___titel-is-verplicht'),
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/heading___titel-is-verplicht'
+				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/heading___titel'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/heading___titel'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			color: FOREGROUND_COLOR_FIELD(
-				i18n.t('admin/content-block/helpers/generators/heading___titel-kleur')
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/heading___titel-kleur'
+				)
 			),
 			type: {
-				label: i18n.t('admin/content-block/helpers/generators/heading___stijl'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/heading___stijl'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			align: ALIGN_FIELD(),
+			align: ALIGN_FIELD(
+				Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/defaults___uitlijning'
+				)
+			),
 		},
 	},
 	block: {

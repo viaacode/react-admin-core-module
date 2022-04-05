@@ -1,12 +1,12 @@
 import { Container, Flex, IconName, Spinner } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactElement } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { i18n } from '../../helpers/i18n';
-
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
 import { User } from '~modules/user/user.types';
+
+import { Config } from '../../../../core/config';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -107,7 +107,7 @@ export async function checkPermissions(
 				state: 'error',
 				message:
 					noPermissionsMessage ||
-					i18n.t(
+					Config.getConfig().services.i18n.t(
 						'shared/components/loading-error-loaded-component/loading-error-loaded-component___je-hebt-geen-rechten-voor-deze-pagina'
 					),
 				icon: 'lock',
@@ -117,7 +117,7 @@ export async function checkPermissions(
 		console.error('Failed to check permissions', err, { permissions, user });
 		setLoadingInfo({
 			state: 'error',
-			message: i18n.t(
+			message: Config.getConfig().services.i18n.t(
 				'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account'
 			),
 			icon: 'alert-triangle',

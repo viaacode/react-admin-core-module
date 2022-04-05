@@ -7,11 +7,12 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { isEqual } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../core/config';
 import { WYSIWYG_OPTIONS_DEFAULT } from '../../consts/wysiwyg';
 import { CustomError } from '../../helpers/custom-error';
-import { i18n } from '../../helpers/i18n';
 import { FileUploadService } from '../../services/file-upload-service';
 
 import './WYSIWYGWrapper.scss';
@@ -71,13 +72,14 @@ const WYSIWYGWrapper: FunctionComponent<WYSIWYGWrapperProps> = (props) => {
 						return true;
 					}
 
-					toastService.notify({
-						title: i18n.t(
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t(
 							'modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error'
 						),
-						description: i18n.t(
+						description: Config.getConfig().services.i18n.t(
 							'shared/components/wysiwyg-wrapper/wysiwyg-wrapper___dit-bestand-is-te-groot-max-10-mb'
 						),
+						type: ToastType.ERROR,
 					});
 					return false;
 				},

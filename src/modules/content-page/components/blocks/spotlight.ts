@@ -11,7 +11,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { i18n } from 'modules/admin/shared/helpers/i18n';
+import { Config } from 'core/config';
 
 export const INITIAL_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 	times(
@@ -34,10 +34,14 @@ export const INITIAL_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: i18n.t('admin/content-block/helpers/generators/spotlight___in-de-kijker'),
+	name: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/spotlight___in-de-kijker'
+	),
 	type: ContentBlockType.Spotlight,
 	components: {
-		name: i18n.t('admin/content-block/helpers/generators/spotlight___item'),
+		name: Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/spotlight___item'
+		),
 		limits: {
 			min: 3,
 			max: 3,
@@ -45,11 +49,13 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			image: FILE_FIELD(
-				i18n.t(
+				Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/spotlight___een-afbeelding-is-verplicht'
 				),
 				{
-					label: i18n.t('admin/content-block/helpers/generators/spotlight___afbeelding'),
+					label: Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/spotlight___afbeelding'
+					),
 					editorProps: {
 						assetType: 'CONTENT_BLOCK_IMAGE',
 						allowMulti: false,
@@ -57,12 +63,16 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD('', {
-				label: i18n.t('admin/content-block/helpers/generators/spotlight___titel'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/spotlight___titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: i18n.t('admin/content-block/helpers/generators/spotlight___link'),
+				label: Config.getConfig().services.i18n.t(
+					'admin/content-block/helpers/generators/spotlight___link'
+				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},

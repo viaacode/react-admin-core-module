@@ -1,11 +1,14 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
-import { CustomError } from 'modules/admin/shared/helpers/custom-error';
 import moment from 'moment';
+
+import { CustomError } from '~modules/shared/helpers/custom-error';
 
 import { CONTENT_BLOCK_CONFIG_MAP } from '../const/content-block.consts';
 import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
+
+import { Config, ToastType } from 'core/config';
 
 export function getPublishedState(
 	contentPage: ContentPageInfo | Partial<ContentPageInfo> | undefined | null
@@ -112,14 +115,14 @@ export const parseContentBlocks = (
 						CONTENT_BLOCK_CONFIG_MAP,
 					})
 				);
-				toastService.notify({
-					title:
-						i18n?.t('modules/admin/content-page/helpers/get-published-state___error') ||
-						'',
-					description:
-						i18n?.t(
-							'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
-						) || '',
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/content-page/helpers/get-published-state___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
+					),
+					type: ToastType.ERROR,
 				});
 				return null;
 			}

@@ -7,14 +7,12 @@ import queryString from 'query-string';
 import React, { Fragment, ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ToastType } from '../../../core/config';
+import { Config, ToastType } from '../../../core/config';
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
 import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
-
-import { useConfig } from '~modules/shared/hooks';
 
 type RouteParams = { [key: string]: string | number | undefined };
 const { publicRuntimeConfig } = getConfig();
@@ -59,14 +57,15 @@ export const navigate = (
 	search?: string | { [paramName: string]: string }
 ) => {
 	const missingParams = getMissingParams(route);
-	const config = useConfig('services');
 
 	// Abort navigation when params were expected but none were given
 	if (missingParams.length > 0 && (isNil(params) || isEmpty(params))) {
 		navigationConsoleError(route, missingParams);
-		config.toastService.showToast({
-			title: config.i18n.t('modules/admin/shared/helpers/link___error') || '',
-			description: config.i18n.t(
+		Config.getConfig().services.toastService.showToast({
+			title:
+				Config.getConfig().services.i18n.t('modules/admin/shared/helpers/link___error') ||
+				'',
+			description: Config.getConfig().services.i18n.t(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,
@@ -79,9 +78,9 @@ export const navigate = (
 	const builtLink = buildLink(route, params, search);
 
 	if (isEmpty(builtLink)) {
-		config.toastService.showToast({
-			title: config.i18n.t('modules/admin/shared/helpers/link___error'),
-			description: config.i18n.t(
+		Config.getConfig().services.toastService.showToast({
+			title: Config.getConfig().services.i18n.t('modules/admin/shared/helpers/link___error'),
+			description: Config.getConfig().services.i18n.t(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,

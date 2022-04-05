@@ -1,15 +1,15 @@
 import { Button } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { normalizeTimestamp } from '../../../../shared/helpers/formatters/date';
-import { getPublishedDate } from '../../../helpers/get-published-state';
+import { ContentPageInfo } from '~modules/collection/content-page/types/content-pages.types';
+import { getProfileName } from '~modules/collection/shared/helpers/get-profile-info';
+import { navigateToContentType } from '~modules/collection/shared/helpers/link';
+import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
-import { ContentPageInfo } from 'modules/admin/content-page/types/content-pages.types';
-import { getProfileName } from 'modules/admin/shared/helpers/get-profile-info';
-import { navigateToContentType } from 'modules/admin/shared/helpers/link';
+import { getPublishedDate } from '../../../helpers/get-published-state';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;
@@ -45,22 +45,24 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps & RouteComponentPr
 				{`${t(
 					'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in'
 				)} `}
-				{contentPageInfo.labels.map((labelObj, index) => {
-					if (index === contentPageInfo.labels.length - 1) {
-						return renderLabel(labelObj);
+				{contentPageInfo.labels.map(
+					(labelObj: Partial<Avo.ContentPage.Label>, index: number) => {
+						if (index === contentPageInfo.labels.length - 1) {
+							return renderLabel(labelObj);
+						}
+						if (index === contentPageInfo.labels.length - 2) {
+							return (
+								<>
+									{renderLabel(labelObj)}{' '}
+									{t(
+										'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
+									)}{' '}
+								</>
+							);
+						}
+						return <>{renderLabel(labelObj)}, </>;
 					}
-					if (index === contentPageInfo.labels.length - 2) {
-						return (
-							<>
-								{renderLabel(labelObj)}{' '}
-								{t(
-									'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
-								)}{' '}
-							</>
-						);
-					}
-					return <>{renderLabel(labelObj)}, </>;
-				})}{' '}
+				)}{' '}
 			</>
 		);
 	};

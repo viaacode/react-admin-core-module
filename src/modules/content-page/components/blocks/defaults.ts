@@ -1,6 +1,7 @@
 import { SelectOption } from '@viaa/avo2-components';
 import { isEmpty, isNil } from 'lodash-es';
 
+import { Config } from '../../../../core/config';
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
 import { WYSIWYGWrapperProps } from '../../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
@@ -17,8 +18,6 @@ import {
 	DefaultContentBlockState,
 	PaddingFieldState,
 } from '../../types/content-block.types';
-
-import { i18n } from 'modules/admin/shared/helpers/i18n';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -44,20 +43,42 @@ export const BLOCK_STATE_DEFAULTS = (
 };
 
 export const BLOCK_FIELD_DEFAULTS = () => ({
-	backgroundColor: BACKGROUND_COLOR_FIELD(),
-	padding: PADDING_FIELD(),
-	margin: PADDING_FIELD(i18n.t('admin/content-block/helpers/generators/defaults___marge')),
-	userGroupIds: USER_GROUP_SELECT(),
+	backgroundColor: BACKGROUND_COLOR_FIELD(
+		Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
+		),
+		GET_BACKGROUND_COLOR_OPTIONS()[1]
+	),
+	padding: PADDING_FIELD(
+		Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___padding'
+		)
+	),
+	margin: PADDING_FIELD(
+		Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___marge'
+		)
+	),
+	userGroupIds: USER_GROUP_SELECT(
+		Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___zichtbaar-voor'
+		),
+		Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina'
+		)
+	),
 
 	// Used to link to this block from inside the same page using the anchors-block
 	anchor: INPUT_FIELD({
-		label: i18n.t('admin/content-block/helpers/generators/defaults___anchor-id'),
+		label: Config.getConfig().services.i18n.t(
+			'admin/content-block/helpers/generators/defaults___anchor-id'
+		),
 	}),
 });
 
 // Recurring fields
 export const FOREGROUND_COLOR_FIELD = (
-	label: string = i18n.t('admin/content-block/helpers/generators/defaults___tekst-kleur'),
+	label?: string,
 	defaultValue?: SelectOption<Color>
 ): ContentBlockField => ({
 	label,
@@ -69,8 +90,8 @@ export const FOREGROUND_COLOR_FIELD = (
 });
 
 export const BACKGROUND_COLOR_FIELD = (
-	label: string = i18n.t('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
-	defaultValue?: SelectOption<Color>
+	label: string,
+	defaultValue: SelectOption<Color>
 ): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
@@ -80,29 +101,20 @@ export const BACKGROUND_COLOR_FIELD = (
 	},
 });
 
-export const PADDING_FIELD = (
-	label = i18n.t('admin/content-block/helpers/generators/defaults___padding')
-): ContentBlockField => ({
+export const PADDING_FIELD = (label: string): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.PaddingSelect,
 });
 
-export const USER_GROUP_SELECT = (
-	label = i18n.t('admin/content-block/helpers/generators/defaults___zichtbaar-voor')
-): ContentBlockField => ({
+export const USER_GROUP_SELECT = (label: string, placeholder: string): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.UserGroupSelect,
 	editorProps: {
-		placeholder: i18n.t(
-			'admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina'
-		),
+		placeholder,
 	} as UserGroupSelectProps,
 });
 
-export const ALIGN_FIELD = (
-	label: string = i18n.t('admin/content-block/helpers/generators/defaults___uitlijning') ||
-		'uitlijning'
-): ContentBlockField => ({
+export const ALIGN_FIELD = (label: string): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.AlignSelect,
 	editorProps: {
@@ -111,18 +123,23 @@ export const ALIGN_FIELD = (
 });
 
 export const TEXT_FIELD = (
-	emptyFieldValidatorMessage = i18n.t(
-		'admin/content-block/helpers/generators/defaults___tekst-is-verplicht'
-	),
+	emptyFieldValidatorMessage?: string,
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: i18n.t('admin/content-block/helpers/generators/defaults___tekst'),
+	label: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/defaults___tekst'
+	),
 	editorType: ContentBlockEditor.WYSIWYG,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
 		if (isNil(value) || isEmpty(value)) {
-			errorArray.push(emptyFieldValidatorMessage);
+			errorArray.push(
+				emptyFieldValidatorMessage ||
+					Config.getConfig().services.i18n.t(
+						'admin/content-block/helpers/generators/defaults___tekst-is-verplicht'
+					)
+			);
 		}
 
 		return errorArray;
@@ -135,18 +152,22 @@ export const TEXT_FIELD = (
 });
 
 export const INPUT_FIELD = (propOverride?: Partial<ContentBlockField>): ContentBlockField => ({
-	label: i18n.t('admin/content-block/helpers/generators/defaults___tekst'),
+	label: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/defaults___tekst'
+	),
 	editorType: ContentBlockEditor.TextInput,
 	...propOverride,
 });
 
 export const FILE_FIELD = (
-	emptyFieldValidatorMessage = i18n.t(
+	emptyFieldValidatorMessage = Config.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/defaults___een-bestand-is-verplicht'
 	) || 'een-bestand-is-verplicht',
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: i18n.t('admin/content-block/helpers/generators/defaults___bestand'),
+	label: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/defaults___bestand'
+	),
 	editorType: ContentBlockEditor.FileUpload,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
@@ -162,12 +183,14 @@ export const FILE_FIELD = (
 });
 
 export const ITEM_PICKER_FIELD = (
-	emptyFieldValidatorMessage = i18n.t(
+	emptyFieldValidatorMessage = Config.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/defaults___selecteren-van-video-item-is-verplicht'
 	),
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: i18n.t('admin/content-block/helpers/generators/media-player___video-of-audio-item'),
+	label: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/media-player___video-of-audio-item'
+	),
 	editorType: ContentBlockEditor.ContentPicker,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
@@ -188,7 +211,9 @@ export const ITEM_PICKER_FIELD = (
 export const CONTENT_TYPE_AND_LABELS_INPUT = (
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: i18n.t('admin/content-block/helpers/generators/defaults___type-en-labels'),
+	label: Config.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/defaults___type-en-labels'
+	),
 	editorType: ContentBlockEditor.ContentTypeAndLabelsPicker,
 	validator: undefined,
 	...propOverride,

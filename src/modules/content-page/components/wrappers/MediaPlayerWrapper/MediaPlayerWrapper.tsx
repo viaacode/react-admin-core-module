@@ -3,7 +3,6 @@ import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { ItemsService } from '~modules/item/items.service';
 import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
@@ -12,6 +11,9 @@ import {
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { Config, ToastType } from '../../../../../core/config';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;
@@ -66,13 +68,14 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 			console.error(
 				new CustomError('Failed to fetch item info from the database', err, { item })
 			);
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
 				),
 				description: t(
 					'admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper___het-ophalen-van-het-fragment-is-mislukt'
 				),
+				type: ToastType.ERROR,
 			});
 		}
 	}, [item, src, poster, t]);

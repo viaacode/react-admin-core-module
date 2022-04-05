@@ -23,26 +23,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import './ContentOverview.scss';
-import ConfirmModal from '../../../shared/components/ConfirmModal/ConfirmModal';
-import FilterTable, {
-	FilterableColumn,
-	getFilters,
-} from '../../../shared/components/FilterTable/FilterTable';
-import {
-	CONTENT_PATH,
-	GET_CONTENT_PAGE_OVERVIEW_COLUMNS,
-	ITEMS_PER_PAGE,
-} from '../../const/content-page.consts';
-import { isPublic } from '../../helpers/get-published-state';
-import { useContentTypes } from '../../hooks/useContentTypes';
-import { useUserGroupOptions } from '../../hooks/useUserGroupOptions';
-import { useUserGroups } from '../../hooks/useUserGroups';
-import { ContentPageService } from '../../services/content-page.service';
-import {
-	ContentOverviewTableCols,
-	ContentPageInfo,
-	ContentTableState,
-} from '../../types/content-pages.types';
 
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
@@ -66,6 +46,28 @@ import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
+
+import { Config, ToastType } from '../../../../core/config';
+import ConfirmModal from '../../../shared/components/ConfirmModal/ConfirmModal';
+import FilterTable, {
+	FilterableColumn,
+	getFilters,
+} from '../../../shared/components/FilterTable/FilterTable';
+import {
+	CONTENT_PATH,
+	GET_CONTENT_PAGE_OVERVIEW_COLUMNS,
+	ITEMS_PER_PAGE,
+} from '../../const/content-page.consts';
+import { isPublic } from '../../helpers/get-published-state';
+import { useContentTypes } from '../../hooks/useContentTypes';
+import { useUserGroupOptions } from '../../hooks/useUserGroupOptions';
+import { useUserGroups } from '../../hooks/useUserGroups';
+import { ContentPageService } from '../../services/content-page.service';
+import {
+	ContentOverviewTableCols,
+	ContentPageInfo,
+	ContentTableState,
+} from '../../types/content-pages.types';
 
 type ContentPageOverviewProps = DefaultSecureRouteProps;
 
@@ -246,25 +248,27 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			fetchContentPages();
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
 				),
 				description: t(
 					'admin/content/views/content-overview___het-content-item-is-succesvol-verwijderd'
 				),
+				type: ToastType.ERROR,
 			});
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to delete content page', err, { contentToDelete })
 			);
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
 				description: t(
 					'admin/content/views/content-overview___het-verwijderen-van-het-content-item-is-mislukt'
 				),
+				type: ToastType.ERROR,
 			});
 		}
 	};
@@ -289,13 +293,14 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 		if (page && page.path) {
 			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
-			toastService.notify({
+			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
 				description: t(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
 				),
+				type: ToastType.ERROR,
 			});
 		}
 	}
