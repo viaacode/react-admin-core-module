@@ -18,8 +18,8 @@ import { filterTypes, setInitialInput, setInitialItem } from './ContentPicker.he
 import './ContentPicker.scss';
 import { parseSearchQuery } from './helpers/parse-picker';
 
-import { Config, ToastType } from 'core/config';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
 	allowedTypes?: ContentPickerType[];

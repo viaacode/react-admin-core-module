@@ -1,4 +1,4 @@
-import { ModuleRouteConfig } from '../../../../core/routes';
+import { ModuleRouteConfig } from '~core/routes';
 
 export interface RenderChildRoutesProps {
 	routes?: ModuleRouteConfig[];

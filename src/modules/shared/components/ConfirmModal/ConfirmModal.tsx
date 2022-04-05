@@ -13,7 +13,7 @@ import React, { FunctionComponent } from 'react';
 import { sanitizeHtml } from '../../helpers/sanitize';
 import Html from '../Html/Html';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 interface ConfirmModalProps {
 	title?: string;

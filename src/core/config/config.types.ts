@@ -4,8 +4,8 @@ import { ComponentType } from 'react';
 
 import { AvoOrHetArchief } from '../../modules/shared/types';
 
-import { ContentPageConfig } from 'modules/content-page/types/content-pages.types';
-import { NavigationConfig } from 'modules/navigation/types';
+import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
+import { NavigationConfig } from '~modules/navigation/types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -30,6 +30,10 @@ export interface I18n {
 
 export interface ConfigValue {
 	// Core module configurations
+	flowplayer: {
+		FLOW_PLAYER_TOKEN: string;
+		FLOW_PLAYER_ID: string
+	};
 	navigation?: NavigationConfig;
 	contentPage?: ContentPageConfig;
 	// Secondary services and config

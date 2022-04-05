@@ -1,5 +1,5 @@
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { WYSIWYG_OPTIONS_FULL } from '../../../shared/consts/wysiwyg';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
 import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
@@ -13,7 +13,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
 	{
@@ -59,7 +59,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					),
 					{
 						editorProps: {
-							controls: [...WYSIWYG_OPTIONS_FULL, 'media'],
+							controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
 							fileType: 'CONTENT_BLOCK_IMAGE',
 						},
 					}

@@ -1,7 +1,7 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
 
-import { EDITOR_TYPES_MAP } from '../../const/content-block.consts';
+import { GET_EDITOR_TYPES_MAP } from '../../const/content-block.consts';
 import { generateFieldAttributes } from '../../helpers/field-attributes';
 import {
 	ContentBlockComponentState,
@@ -65,7 +65,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 					),
 				};
 
-				const EditorComponents = (EDITOR_TYPES_MAP as any)[fieldState[1].editorType];
+				const EditorComponents = GET_EDITOR_TYPES_MAP()[fieldState[1].editorType];
 
 				return (
 					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>

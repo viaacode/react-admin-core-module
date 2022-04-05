@@ -21,7 +21,7 @@ import {
 	CONTENT_TYPE_AND_LABELS_INPUT,
 } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 	(): PageOverviewBlockComponentStateFields => ({

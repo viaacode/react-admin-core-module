@@ -23,9 +23,19 @@
     "outDir": "dist",
     "allowJs": true,
     "isolatedModules": true,
-    "baseUrl": "src"
+    "paths": {
+      "~core/*": [
+        "./src/core/*"
+      ],
+      "~modules/*": [
+        "./src/modules/*"
+      ],
+      "~generated/*": [
+        "./src/generated/*"
+      ]
+    }
   },
-  "files": [
+  "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
   ],

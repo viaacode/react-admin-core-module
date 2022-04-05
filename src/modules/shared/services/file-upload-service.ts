@@ -1,4 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
+import { Config } from '~core/config';
 
 import { CustomError } from '../helpers/custom-error';
 import { fetchWithLogout } from '../helpers/fetch-with-logout';

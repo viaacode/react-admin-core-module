@@ -1,4 +1,4 @@
-import { WYSIWYG_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/wysiwyg';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -9,7 +9,7 @@ import {
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_INTRO_COMPONENTS_STATE = (): IntroBlockComponentState => ({
 	title: '',
@@ -50,9 +50,9 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					label: Config.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/defaults___tekst'
 					),
-					editorType: ContentBlockEditor.WYSIWYG,
+					editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
 					editorProps: {
-						controls: [...WYSIWYG_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
+						controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 						fileType: 'CONTENT_BLOCK_IMAGE',
 					},
 				}

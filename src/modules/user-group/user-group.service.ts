@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
 
-import { Config } from '../../core/config';
+import { Config } from '~core/config';
 import { CustomError } from '../shared/helpers/custom-error';
 import { dataService } from '../shared/services/data-service';
 
@@ -10,8 +10,9 @@ import { ITEMS_PER_PAGE } from './user-group.const';
 import { UserGroup } from './user-group.types';
 
 export class UserGroupService {
-	private static queries =
-		USER_GROUP_QUERIES[Config.getConfig().database.databaseApplicationType];
+	private static getQueries() {
+		return USER_GROUP_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
 
 	public static async fetchUserGroups(
 		page: number,
@@ -29,10 +30,13 @@ export class UserGroupService {
 			};
 			const response = await dataService.query({
 				variables,
-				query: this.queries.GetUserGroupsWithFiltersDocument,
+				query: this.getQueries().GetUserGroupsWithFiltersDocument,
 			});
-			const userGroups = get(response, 'data.users_groups');
-			const userGroupCount = get(response, 'data.users_groups_aggregate.aggregate.count');
+			const userGroups =
+				get(response, 'data.users_groups') || get(response, 'data.users_group');
+			const userGroupCount =
+				get(response, 'data.users_groups_aggregate.aggregate.count') ||
+				get(response, 'data.users_group_aggregate.aggregate.count');
 
 			if (!userGroups) {
 				throw new CustomError(
@@ -64,7 +68,7 @@ export class UserGroupService {
 			};
 			const response = await dataService.query({
 				variables,
-				query: this.queries.GetUserGroupByIdDocument,
+				query: this.getQueries().GetUserGroupByIdDocument,
 			});
 
 			if (response.errors) {
@@ -145,7 +149,7 @@ export class UserGroupService {
 	public static async insertUserGroup(userGroup: UserGroup): Promise<number> {
 		try {
 			const response = await dataService.query({
-				query: this.queries.InsertUserGroupDocument,
+				query: this.getQueries().InsertUserGroupDocument,
 				variables: {
 					userGroup: {
 						label: userGroup.label,
@@ -179,7 +183,7 @@ export class UserGroupService {
 	static async updateUserGroup(userGroup: UserGroup): Promise<void> {
 		try {
 			const response = await dataService.query({
-				query: this.queries.UpdateUserGroupDocument,
+				query: this.getQueries().UpdateUserGroupDocument,
 				variables: {
 					userGroup: {
 						label: userGroup.label,
@@ -205,7 +209,7 @@ export class UserGroupService {
 	public static async deleteUserGroup(userGroupId: number): Promise<void> {
 		try {
 			const response = await dataService.query({
-				query: this.queries.DeleteUserGroupDocument,
+				query: this.getQueries().DeleteUserGroupDocument,
 				variables: {
 					userGroupId,
 				},

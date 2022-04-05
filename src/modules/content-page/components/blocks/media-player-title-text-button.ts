@@ -25,7 +25,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE =
 	(): MediaPlayerTitleTextButtonBlockComponentState => ({

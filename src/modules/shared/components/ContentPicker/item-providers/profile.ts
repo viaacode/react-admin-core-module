@@ -5,7 +5,7 @@ import { CustomError } from '../../../helpers/custom-error';
 import { PickerSelectItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from 'modules/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 // Fetch profiles from GQL
 export const retrieveProfiles = async (

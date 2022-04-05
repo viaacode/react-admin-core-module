@@ -7,8 +7,8 @@ import React, { FunctionComponent, ReactText, useEffect, useState } from 'react'
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
-import { Config, ToastType } from 'core/config';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './EducationalOrganisationsSelect.scss';
 

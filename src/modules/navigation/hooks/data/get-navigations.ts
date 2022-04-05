@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 import { useQuery, UseQueryOptions } from 'react-query';
 
-import { Config } from '../../../../core/config';
+import { Config } from '~core/config';
 import { NAVIGATION_QUERY_KEYS } from '../../const';
 import { Navigation } from '../../types';
 

@@ -34,8 +34,8 @@ import {
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
 import { REPEATABLE_CONTENT_BLOCKS } from '../ContentBlockPreview/ContentBlockPreview.const';
 
-import { Config, ToastType } from 'core/config';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ContentBlockForm.scss';
 

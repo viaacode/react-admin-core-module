@@ -5,7 +5,7 @@ import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Config } from '../../../../core/config';
+import { Config } from '~core/config';
 import { BUNDLE_PATH } from '../../consts/bundle.const';
 import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';

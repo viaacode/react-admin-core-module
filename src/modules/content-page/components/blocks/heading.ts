@@ -15,7 +15,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_HEADING_COMPONENTS_STATE = (): HeadingBlockComponentState => ({
 	children: '',

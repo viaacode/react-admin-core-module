@@ -1,7 +1,7 @@
 import ky from 'ky-universal';
 import { KyInstance } from 'ky/distribution/types/ky';
 
-import { Config } from '../../../../core/config';
+import { Config } from '~core/config';
 
 export abstract class ApiService {
 	private static api: KyInstance | null = null;

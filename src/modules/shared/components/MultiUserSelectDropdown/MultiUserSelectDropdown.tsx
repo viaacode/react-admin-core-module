@@ -17,10 +17,10 @@ import React, { FunctionComponent, ReactText, useEffect, useState } from 'react'
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
-import { Config, ToastType } from 'core/config';
-import { ContentPickerType } from 'modules/shared/components/ContentPicker/ContentPicker.const';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
-import { UserService } from 'modules/user/user.service';
+import { Config, ToastType } from '~core/config';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserService } from '~modules/user/user.service';
 
 import './MultiUserSelectDropdown.scss';
 

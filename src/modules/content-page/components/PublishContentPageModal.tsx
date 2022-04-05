@@ -22,9 +22,9 @@ import React, { FunctionComponent, useState } from 'react';
 import { getPublishedState } from '../helpers/get-published-state';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
-import { Config, ToastType } from 'core/config';
-import Html from 'modules/shared/components/Html/Html';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import Html from '~modules/shared/components/Html/Html';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './PublishContentPageModal.scss';
 

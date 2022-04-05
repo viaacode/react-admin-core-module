@@ -1,6 +1,6 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-import { User } from 'modules/user/user.types';
+import { User } from '~modules/user/user.types';
 
 export interface DefaultSecureRouteProps<
 	T = {

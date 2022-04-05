@@ -1,4 +1,4 @@
-import { RichEditorState } from '@viaa/avo2-components/dist/esm/wysiwyg';
+import { RichEditorState } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
 
 import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
@@ -110,7 +110,7 @@ export enum ContentEditActionType {
 export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
 
 export interface ContentPageOverviewCellProps {
-	row: {
-		original: ContentPageInfo;
-	};
+  row: {
+    original: ContentPageInfo;
+  };
 }

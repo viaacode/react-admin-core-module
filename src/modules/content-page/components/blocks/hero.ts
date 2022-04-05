@@ -2,7 +2,7 @@ import { BlockHeroProps, TextInputProps } from '@viaa/avo2-components';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { WYSIWYG_OPTIONS_FULL } from '../../../shared/consts/wysiwyg';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
 import {
@@ -27,7 +27,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	title: '',
@@ -144,7 +144,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/hero___text-onder-knoppen'
 				),
 				editorProps: {
-					controls: WYSIWYG_OPTIONS_FULL,
+					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
 			}),
 			src: TEXT_FIELD(undefined, {

@@ -9,7 +9,7 @@ import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export enum ContentPickerType {
 	CONTENT_PAGE = 'CONTENT_PAGE',

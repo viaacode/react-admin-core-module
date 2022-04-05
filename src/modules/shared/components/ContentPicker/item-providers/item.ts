@@ -3,8 +3,8 @@ import { Avo } from '@viaa/avo2-types';
 import { PickerSelectItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ItemsService } from 'modules/item/items.service';
-import { ContentPickerType } from 'modules/shared/components/ContentPicker/ContentPicker.const';
+import { ItemsService } from '~modules/item/items.service';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 
 // Fetch content items from GQL
 export const retrieveItems = async (

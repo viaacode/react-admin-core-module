@@ -8,7 +8,7 @@ import { dataService } from '../data-service';
 import {
 	FetchCollectionRelationsBySubjectsDocument,
 	FetchItemRelationsBySubjectsDocument,
-} from 'generated/graphql-db-types-avo';
+} from '~generated/graphql-db-types-avo';
 
 export class RelationService {
 	public static async fetchRelationsBySubject(

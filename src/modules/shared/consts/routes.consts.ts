@@ -3,7 +3,7 @@ import { compact } from 'lodash-es';
 
 import { ROUTE_PARTS } from './routes';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export interface RouteInfo {
 	route: string;

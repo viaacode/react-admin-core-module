@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-import { User } from 'modules/user/user.types';
+import { User } from '~modules/user/user.types';
 
 export type ReactSelectOption<T = any> = {
 	label: string;

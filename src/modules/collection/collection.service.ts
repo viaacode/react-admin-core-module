@@ -2,7 +2,7 @@ import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 import { stringify } from 'query-string';
 
-import { Config } from '../../core/config';
+import { Config } from '~core/config';
 import { CustomError } from '../shared/helpers/custom-error';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
 import { performQuery } from '../shared/helpers/gql';
@@ -15,7 +15,7 @@ import {
 	GetPublicCollectionsByIdDocument,
 	GetPublicCollectionsByTitleDocument,
 	GetPublicCollectionsDocument,
-} from 'generated/graphql-db-types-avo';
+} from '~generated/graphql-db-types-avo';
 
 export class CollectionService {
 	/**
@@ -31,12 +31,16 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		try {
 			// retrieve collections
-			const response = await dataService.query({
-				query: GetPublicCollectionsDocument,
-				variables: { limit, typeId },
-			});
+			const response = await performQuery(
+				{
+					query: GetPublicCollectionsDocument,
+					variables: { limit, typeId },
+				},
+				['data.app_collections'],
+				'Het ophalen van de collecties is mislukt.'
+			);
 
-			return get(response, 'data.app_collections', []);
+			return response || [];
 		} catch (err) {
 			throw new CustomError('Het ophalen van de collecties is mislukt.', err, {
 				query: 'GET_PUBLIC_COLLECTIONS',

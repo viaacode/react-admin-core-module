@@ -12,7 +12,6 @@ import { dataService, GraphQlResponse } from '../../shared/services/data-service
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
 	CONTENT_RESULT_PATH,
-	CONTENT_TYPES_LOOKUP_PATH,
 	ITEMS_PER_PAGE,
 	RichEditorStateKey,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
@@ -32,18 +31,19 @@ import {
 
 import { ContentBlockService } from './content-block.service';
 
-import { Config, ToastType } from 'core/config';
-import { CustomError } from 'modules/shared/helpers/custom-error';
-import { getOrderObject } from 'modules/shared/helpers/generate-order-gql-query';
-import { performQuery } from 'modules/shared/helpers/gql';
+import { Config, ToastType } from '~core/config';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { performQuery } from '~modules/shared/helpers/gql';
 
 export class ContentPageService {
-	private static queries =
-		CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+	private static getQueries() {
+		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
 		const query = {
-			query: ContentPageService.queries.GetContentPagesDocument,
+			query: this.getQueries().GetContentPagesDocument,
 			variables: {
 				limit,
 				orderBy: { title: 'asc' },
@@ -64,7 +64,7 @@ export class ContentPageService {
 		limit: number
 	): Promise<ContentPageInfo[] | null> {
 		const query = {
-			query: ContentPageService.queries.GetPublicProjectContentPagesDocument,
+			query: this.getQueries().GetPublicProjectContentPagesDocument,
 			variables: {
 				limit,
 				orderBy: { title: 'asc' },
@@ -85,7 +85,7 @@ export class ContentPageService {
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const query = {
-			query: this.queries.GetPublicContentPagesByTitleDocument,
+			query: this.getQueries().GetPublicContentPagesByTitleDocument,
 			variables: {
 				limit: limit || null,
 				orderBy: { title: 'asc' },
@@ -111,7 +111,7 @@ export class ContentPageService {
 		limit: number
 	): Promise<Partial<ContentPageInfo>[] | null> {
 		const query = {
-			query: this.queries.GetPublicProjectContentPagesByTitleDocument,
+			query: this.getQueries().GetPublicProjectContentPagesByTitleDocument,
 			variables: {
 				title,
 				limit,
@@ -128,7 +128,7 @@ export class ContentPageService {
 
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo> {
 		const query = {
-			query: this.queries.GetContentByIdDocument,
+			query: this.getQueries().GetContentByIdDocument,
 			variables: {
 				id,
 			},
@@ -152,11 +152,15 @@ export class ContentPageService {
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
 		try {
-			const response = await dataService.query({
-				query: this.queries.GetContentTypesDocument,
-			});
+			const contentTypes = await performQuery(
+				{
+					query: this.getQueries().GetContentTypesDocument,
+				},
+				['data.lookup_enum_content_types', 'data.lookup_cms_content_type'],
+				'Failed to retrieve content types.'
+			);
 
-			return get(response, `data.${CONTENT_TYPES_LOOKUP_PATH}`, []).map(
+			return (contentTypes || []).map(
 				(obj: { value: Avo.ContentPage.Type; description: string }) => ({
 					value: obj.value,
 					label: obj.description,
@@ -164,7 +168,7 @@ export class ContentPageService {
 			);
 		} catch (err) {
 			console.error('Failed to retrieve content types.', err, {
-				query: this.queries.GetContentTypesDocument,
+				query: this.getQueries().GetContentTypesDocument,
 			});
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t(
@@ -192,7 +196,7 @@ export class ContentPageService {
 
 			const response = await dataService.query({
 				variables,
-				query: this.queries.GetContentLabelsByContentTypeDocument,
+				query: this.getQueries().GetContentLabelsByContentTypeDocument,
 			});
 
 			if (response.errors) {
@@ -239,7 +243,7 @@ export class ContentPageService {
 
 			const response = await dataService.query({
 				variables,
-				query: this.queries.InsertContentLabelLinksDocument,
+				query: this.getQueries().InsertContentLabelLinksDocument,
 			});
 
 			if (response.errors) {
@@ -267,7 +271,7 @@ export class ContentPageService {
 
 			const response = await dataService.query({
 				variables,
-				query: this.queries.DeleteContentLabelLinksDocument,
+				query: this.getQueries().DeleteContentLabelLinksDocument,
 			});
 
 			if (response.errors) {
@@ -304,7 +308,7 @@ export class ContentPageService {
 
 			const response = await dataService.query({
 				variables,
-				query: this.queries.GetContentPagesDocument,
+				query: this.getQueries().GetContentPagesDocument,
 			});
 
 			const dbContentPages: Avo.ContentPage.Page[] | null = get(
@@ -356,7 +360,7 @@ export class ContentPageService {
 				convertToDatabaseContentPage(contentPage)
 			);
 			const response = await dataService.query({
-				query: this.queries.InsertContentDocument,
+				query: this.getQueries().InsertContentDocument,
 				variables: {
 					contentPage: dbContentPage,
 				},
@@ -406,7 +410,7 @@ export class ContentPageService {
 				convertToDatabaseContentPage(contentPage)
 			);
 			const response = await dataService.query({
-				query: this.queries.UpdateContentByIdDocument,
+				query: this.getQueries().UpdateContentByIdDocument,
 				variables: {
 					contentPage: dbContentPage,
 					id: contentPage.id,
@@ -580,7 +584,7 @@ export class ContentPageService {
 		try {
 			const response = await dataService.query({
 				variables: { id },
-				query: this.queries.SoftDeleteContentDocument,
+				query: this.getQueries().SoftDeleteContentDocument,
 			});
 
 			if (response.errors) {
@@ -612,7 +616,7 @@ export class ContentPageService {
 		orderDirection: 'asc' | 'desc'
 	): Promise<GraphQlResponse<ContentPageInfo[]>> {
 		const parsed = await dataService.query<ContentPageInfo[]>({
-			query: this.queries.GetContentPagesDocument,
+			query: this.getQueries().GetContentPagesDocument,
 			variables: {
 				filters,
 				page,

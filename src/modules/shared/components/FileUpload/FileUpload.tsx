@@ -18,8 +18,8 @@ import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import { FileUploadService } from '../../services/file-upload-service';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-import { Config, ToastType } from 'core/config';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './FileUpload.scss';
 

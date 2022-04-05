@@ -17,17 +17,17 @@ import {
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
 
-import { ContentTypeString, toEnglishContentType } from 'modules/collection/collection.types';
-import ItemVideoDescription from 'modules/shared/components/ItemVideoDescription/ItemVideoDescription';
+import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
+import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { formatDate } from 'modules/shared/helpers/formatters/date';
-import { isMobileWidth } from 'modules/shared/helpers/media-query';
-import { parseIntOrDefault } from 'modules/shared/helpers/parsers/number';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
-import { UserProps } from 'modules/shared/types';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { formatDate } from '~modules/shared/helpers/formatters/date';
+import { isMobileWidth } from '~modules/shared/helpers/media-query';
+import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserProps } from '~modules/shared/types';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;

@@ -2,7 +2,7 @@ import { isNumber, pick, pickBy } from 'lodash-es';
 
 import { ContentBlockErrors } from '../../content-page/types/content-block.types';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (

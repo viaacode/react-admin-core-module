@@ -19,6 +19,7 @@ import React, {
 } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 import './ContentOverview.scss';
 
@@ -43,30 +44,30 @@ import {
 	ContentTableState,
 } from '../../types/content-pages.types';
 
-import { Config, ToastType } from 'core/config';
-import { useContentPageLabelOptions } from 'modules/content-page-labels/hooks/useContentPageLabelOptions';
-import { CheckboxOption } from 'modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { Config, ToastType } from '~core/config';
+import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
+import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from 'modules/shared/helpers/custom-error';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getQueryFilter,
-} from 'modules/shared/helpers/filters';
-import { getFullName } from 'modules/shared/helpers/formatters/avatar';
-import { formatDate } from 'modules/shared/helpers/formatters/date';
-import { getUserGroupLabel } from 'modules/shared/helpers/get-profile-info';
-import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from 'modules/shared/helpers/link';
-import { setSelectedCheckboxes } from 'modules/shared/helpers/set-selected-checkboxes';
-import { truncateTableValue } from 'modules/shared/helpers/truncate';
-import { AdminLayout } from 'modules/shared/layouts';
-import { SpecialPermissionGroups } from 'modules/shared/types/authentication.types';
-import { DefaultSecureRouteProps } from 'modules/shared/types/secure-route.types';
-import { Permission } from 'modules/user/user.types';
+} from '~modules/shared/helpers/filters';
+import { getFullName } from '~modules/shared/helpers/formatters/avatar';
+import { formatDate } from '~modules/shared/helpers/formatters/date';
+import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
+import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
+import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
+import { truncateTableValue } from '~modules/shared/helpers/truncate';
+import { AdminLayout } from '~modules/shared/layouts';
+import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
+import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
+import { Permission } from '~modules/user/user.types';
 
 type ContentPageOverviewProps = DefaultSecureRouteProps;
 
@@ -98,36 +99,28 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 	const { t } = useTranslation();
 
-	const contentTypeOptions = useMemo(
-		() =>
-			contentTypes.map(
-				(option): CheckboxOption => ({
-					id: option.value,
-					label: option.label,
-					checked: get(tableState, 'content_type', [] as string[]).includes(option.value),
-				})
-			),
-		[contentTypes, tableState]
-	);
+	const contentTypeOptions = useMemo(() => {
+		return contentTypes.map(
+			(option): CheckboxOption => ({
+				id: option.value,
+				label: option.label,
+				checked: get(tableState, 'content_type', [] as string[]).includes(option.value),
+			})
+		);
+	}, [contentTypes, tableState]);
 
-	const tableColumns = useMemo(
-		() =>
-			GET_CONTENT_PAGE_OVERVIEW_COLUMNS(
-				contentTypeOptions,
-				setSelectedCheckboxes(
-					userGroupOptions,
-					get(tableState, 'user_group', []) as string[]
-				),
-				setSelectedCheckboxes(
-					contentPageLabelOptions,
-					get(tableState, 'label', []) as string[]
-				)
-			),
-		[contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]
-	);
+	const tableColumns = useMemo(() => {
+		return GET_CONTENT_PAGE_OVERVIEW_COLUMNS(
+			contentTypeOptions,
+			setSelectedCheckboxes(userGroupOptions, get(tableState, 'user_group', []) as string[]),
+			setSelectedCheckboxes(contentPageLabelOptions, get(tableState, 'label', []) as string[])
+		);
+	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
 	const hasPerm = useCallback(
-		(permission: Permission) => user.permissions.includes(permission),
+		(permission: Permission) => {
+			return user.permissions.includes(permission);
+		},
 		[user]
 	);
 
@@ -230,7 +223,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 	useEffect(() => {
 		fetchContentPages();
-	}, [fetchContentPages]);
+	}, []);
 
 	useEffect(() => {
 		if (contentPages) {
@@ -576,4 +569,4 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 	);
 };
 
-export default ContentPageOverview;
+export default withRouter(ContentPageOverview);

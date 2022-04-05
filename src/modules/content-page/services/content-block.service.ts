@@ -1,5 +1,6 @@
 import { Avo } from '@viaa/avo2-types';
-import { compact, get, has, omit, without } from 'lodash-es';
+import { compact, has, omit, without } from 'lodash-es';
+import { performQuery } from '~modules/shared/helpers/gql';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
@@ -11,11 +12,12 @@ import {
 import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 
-import { Config, ToastType } from 'core/config';
+import { Config, ToastType } from '~core/config';
 
 export class ContentBlockService {
-	private static queries =
-		CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+	private static getQueries() {
+		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
 
 	/**
 	 * Update content block.
@@ -27,7 +29,7 @@ export class ContentBlockService {
 			const contentBlock = convertBlockToDatabaseFormat(contentBlockConfig);
 
 			await dataService.query({
-				query: this.queries.UpdateContentBlockDocument,
+				query: this.getQueries().UpdateContentBlockDocument,
 				variables: { contentBlock, id: contentBlockConfig.id },
 			});
 		} catch (err) {
@@ -57,7 +59,7 @@ export class ContentBlockService {
 	public static async deleteContentBlock(id: number) {
 		try {
 			return await dataService.query({
-				query: this.queries.DeleteContentBlockDocument,
+				query: this.getQueries().DeleteContentBlockDocument,
 				variables: { id },
 			});
 		} catch (err) {
@@ -101,15 +103,17 @@ export class ContentBlockService {
 			const dbBlocks: Partial<Avo.ContentPage.Block>[] =
 				convertBlocksToDatabaseFormat(contentBlockConfigs);
 			(dbBlocks || []).forEach((block) => (block.content_id = contentId));
-			const response = await dataService.query({
-				query: this.queries.InsertContentBlocksDocument,
-				variables: {
-					contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(dbBlocks),
+			const ids: number[] = await performQuery(
+				{
+					query: this.getQueries().InsertContentBlocksDocument,
+					variables: {
+						contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(dbBlocks),
+					},
 				},
-			});
+				CONTENT_BLOCKS_RESULT_PATH.INSERT,
+				'Failed to insert content blocks'
+			);
 
-			const ids: number[] =
-				get(response, `data.${CONTENT_BLOCKS_RESULT_PATH.INSERT}.returning`) || [];
 			return contentBlockConfigs.map((block, index) => ({
 				...block,
 				id: ids[index],

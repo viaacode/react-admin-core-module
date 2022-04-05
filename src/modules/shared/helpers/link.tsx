@@ -12,7 +12,7 @@ import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
 
-import { Config, ToastType } from 'core/config';
+import { Config, ToastType } from '~core/config';
 
 type RouteParams = { [key: string]: string | number | undefined };
 

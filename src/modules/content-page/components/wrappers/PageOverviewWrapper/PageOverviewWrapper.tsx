@@ -22,20 +22,20 @@ import { Color } from '../../../types/content-block.types';
 import { ContentPageInfo } from '../../../types/content-pages.types';
 import ContentPage from '../../ContentPage/ContentPage';
 
-import { Config, ToastType } from 'core/config';
-import { ContentPageLabelService } from 'modules/content-page-labels/services/content-page-label.service';
-import { ContentTypeAndLabelsValue } from 'modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import { Config, ToastType } from '~core/config';
+import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
+import { ContentTypeAndLabelsValue } from '~modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { ROUTE_PARTS } from 'modules/shared/consts/routes';
-import { CustomError } from 'modules/shared/helpers/custom-error';
-import { fetchWithLogout } from 'modules/shared/helpers/fetch-with-logout';
-import { CheckboxListParam } from 'modules/shared/helpers/query-string-converters';
-import { useDebounce } from 'modules/shared/hooks/useDebounce';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
-import { UserProps } from 'modules/shared/types';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
+import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
+import { useDebounce } from '~modules/shared/hooks/useDebounce';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserProps } from '~modules/shared/types';
 
 export interface ContentPageOverviewParams {
 	withBlock: boolean;

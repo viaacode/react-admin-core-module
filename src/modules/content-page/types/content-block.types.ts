@@ -10,7 +10,7 @@ import {
 	ImageInfo,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import { RichEditorState } from '@viaa/avo2-components/dist/esm/wysiwyg';
+import { RichEditorState } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
 
 // OPTIONS
@@ -131,7 +131,7 @@ export enum ContentBlockEditor {
 	Select = 'Select',
 	TextArea = 'TextArea',
 	TextInput = 'TextInput',
-	WYSIWYG = 'WYSIWYG',
+	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
 	UserGroupSelect = 'UserGroupSelect',
 }
 
@@ -380,13 +380,13 @@ export interface ContentBlockConfig {
 }
 
 export interface ContentBlockMeta {
-	index: number;
-	config: ContentBlockConfig;
+  index: number;
+  config: ContentBlockConfig;
 }
 
 export const DEFAULT_BUTTON_PROPS = {
-	type: 'primary',
-	label: '',
-	icon: undefined,
-	buttonAction: undefined,
+  type: 'primary',
+  label: '',
+  icon: undefined,
+  buttonAction: undefined
 };

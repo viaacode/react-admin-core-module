@@ -3,11 +3,11 @@ import React, { FunctionComponent } from 'react';
 
 import { PaddingFieldState } from '../../../types/content-block.types';
 
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './PaddingSelect.scss';
 
-interface PaddingSelectProps {
+export interface PaddingSelectProps {
 	onChange: (value: PaddingFieldState) => void;
 	value: PaddingFieldState;
 }

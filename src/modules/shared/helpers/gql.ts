@@ -22,7 +22,7 @@ export const performQuery = async (
 				responseObject = get(response, subResponse[0], null);
 			}
 			if (subResponse[1]) {
-				responseObject = get(response, subResponse[1], null);
+				responseObject = responseObject || get(response, subResponse[1], null);
 			}
 
 			return responseObject;

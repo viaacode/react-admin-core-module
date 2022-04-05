@@ -14,9 +14,9 @@ import { AlignOption, HeadingTypeOption } from '../../../types/content-block.typ
 import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
-import { generateSmartLink } from 'modules/shared/helpers/link';
-import { UserProps } from 'modules/shared/types';
-import { Permission } from 'modules/user/user.types';
+import { generateSmartLink } from '~modules/shared/helpers/link';
+import { UserProps } from '~modules/shared/types';
+import { Permission } from '~modules/user/user.types';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;

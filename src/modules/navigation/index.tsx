@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { ModuleRouteConfig, RouteConfigComponentProps } from '../../core/routes';
+import { ModuleRouteConfig, RouteConfigComponentProps } from '~core/routes';
 import { RenderChildRoutes } from '../shared/components';
 
 import { NAVIGATION_PATHS } from './const';

@@ -2,7 +2,7 @@ import { IconName } from '@viaa/avo2-components';
 
 import { ReactSelectOption } from '../types';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const GET_ADMIN_ICON_OPTIONS: () => ReactSelectOption<IconName>[] = () => {
 	return [

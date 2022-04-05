@@ -1,6 +1,6 @@
 import { CheckboxProps } from '@viaa/avo2-components';
 
-import { WYSIWYG_OPTIONS_FULL } from '../../../shared/consts/wysiwyg';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -11,7 +11,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const INITIAL_RICH_TEXT_COMPONENTS_STATE = (): RichTextBlockComponentState => ({
 	content: '',
@@ -44,7 +44,7 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				{
 					editorProps: {
-						controls: [...WYSIWYG_OPTIONS_FULL, 'media'],
+						controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL, 'media'],
 						fileType: 'CONTENT_BLOCK_IMAGE',
 					},
 				}

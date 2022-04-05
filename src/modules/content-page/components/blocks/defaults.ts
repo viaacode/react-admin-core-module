@@ -3,8 +3,8 @@ import { isEmpty, isNil } from 'lodash-es';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
-import { WYSIWYGWrapperProps } from '../../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
-import { WYSIWYG_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/wysiwyg';
+import { RichTextEditorWrapperProps } from '../../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	GET_ALIGN_OPTIONS,
 	GET_BACKGROUND_COLOR_OPTIONS,
@@ -18,7 +18,7 @@ import {
 	PaddingFieldState,
 } from '../../types/content-block.types';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -130,7 +130,7 @@ export const TEXT_FIELD = (
 	label: Config.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/defaults___tekst'
 	),
-	editorType: ContentBlockEditor.WYSIWYG,
+	editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
@@ -146,9 +146,9 @@ export const TEXT_FIELD = (
 		return errorArray;
 	},
 	editorProps: {
-		controls: [...WYSIWYG_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
+		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',
-	} as Partial<WYSIWYGWrapperProps>,
+	} as Partial<RichTextEditorWrapperProps>,
 	...propOverride,
 });
 

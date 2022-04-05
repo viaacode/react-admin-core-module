@@ -1,6 +1,9 @@
 import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
+import { ContentPageTypeSchema } from '@viaa/avo2-types/types/content-page';
 import { get, isNil } from 'lodash-es';
+import { GetContentPageLabelsQuery as GetContentPageLabelsQueryAvo } from '~generated/graphql-db-types-avo';
+import { GetContentPageLabelsQuery as GetContentPageLabelsQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
@@ -9,11 +12,12 @@ import { ITEMS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
 import { CONTENT_PAGE_LABEL_QUERIES } from '../queries/content-page-label.queries';
 
-import { Config, ToastType } from 'core/config';
+import { Config, ToastType } from '~core/config';
 
 export class ContentPageLabelService {
-	private static queries =
-		CONTENT_PAGE_LABEL_QUERIES[Config.getConfig().database.databaseApplicationType];
+	private static getQueries() {
+		return CONTENT_PAGE_LABEL_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
 
 	public static async fetchContentPageLabels(
 		page: number,
@@ -30,15 +34,31 @@ export class ContentPageLabelService {
 				limit: itemsPerPage,
 				orderBy: [{ [sortColumn]: sortOrder }],
 			};
-			const response = await dataService.query({
+			const response = await dataService.query<
+				GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief
+			>({
 				variables,
-				query: this.queries.GetContentPageLabelsDocument,
+				query: this.getQueries().GetContentPageLabelsDocument,
 			});
-			const contentPageLabel = get(response, 'data.app_content_labels');
-			const contentPageLabelCount = get(
-				response,
-				'data.app_content_labels_aggregate.aggregate.count'
+			const contentPageLabel: ContentPageLabel[] = (
+				(response.data as GetContentPageLabelsQueryAvo)?.app_content_labels ||
+				(response.data as GetContentPageLabelsQueryHetArchief)?.cms_content_labels
+			).map(
+				(labelObj): ContentPageLabel => ({
+					label: labelObj.label,
+					content_type: labelObj.content_type as ContentPageTypeSchema,
+					id: labelObj.id,
+					link_to: labelObj.link_to,
+					created_at: labelObj.created_at,
+					updated_at: labelObj.updated_at,
+				})
 			);
+			const contentPageLabelCount: number =
+				(response.data as GetContentPageLabelsQueryAvo)?.app_content_labels_aggregate
+					?.aggregate?.count ||
+				(response.data as GetContentPageLabelsQueryHetArchief)?.cms_content_labels_aggregate
+					?.aggregate?.count ||
+				0;
 
 			if (!contentPageLabel) {
 				throw new CustomError('Response does not contain any content page labels', null, {
@@ -58,7 +78,7 @@ export class ContentPageLabelService {
 	public static async fetchContentPageLabel(id: string): Promise<ContentPageLabel> {
 		try {
 			const response = await dataService.query({
-				query: this.queries.GetContentPageLabelByIdDocument,
+				query: this.getQueries().GetContentPageLabelByIdDocument,
 				variables: { id },
 			});
 
@@ -91,7 +111,7 @@ export class ContentPageLabelService {
 	): Promise<number> {
 		try {
 			const response = await dataService.query({
-				query: this.queries.InsertContentPageLabelDocument,
+				query: this.getQueries().InsertContentPageLabelDocument,
 				variables: {
 					contentPageLabel: {
 						label: contentPageLabel.label,
@@ -128,7 +148,7 @@ export class ContentPageLabelService {
 	static async updateContentPageLabel(contentPageLabelInfo: ContentPageLabel) {
 		try {
 			const response = await dataService.query({
-				query: this.queries.UpdateContentPageLabelDocument,
+				query: this.getQueries().UpdateContentPageLabelDocument,
 				variables: {
 					contentPageLabel: {
 						label: contentPageLabelInfo.label,
@@ -164,7 +184,7 @@ export class ContentPageLabelService {
 				);
 			}
 			const response = await dataService.query({
-				query: this.queries.DeleteContentPageLabelByIdDocument,
+				query: this.getQueries().DeleteContentPageLabelByIdDocument,
 				variables: {
 					id: contentPageLabelId,
 				},

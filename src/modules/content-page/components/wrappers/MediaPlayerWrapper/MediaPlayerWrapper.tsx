@@ -4,15 +4,15 @@ import clsx from 'clsx';
 import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { Config, ToastType } from 'core/config';
-import { ItemsService } from 'modules/item/items.service';
-import { FlowPlayerWrapper } from 'modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import { Config, ToastType } from '~core/config';
+import { ItemsService } from '~modules/item/items.service';
+import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from 'modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from 'modules/shared/helpers/custom-error';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;

@@ -21,7 +21,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',

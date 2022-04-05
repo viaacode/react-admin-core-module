@@ -1,5 +1,5 @@
 import { SelectOption } from '@viaa/avo2-components';
-import { WYSIWYGProps } from '@viaa/avo2-components/dist/esm/wysiwyg';
+import { RichTextEditorProps } from '@meemoo/react-components';
 import { debounce, get, isArray, isNil } from 'lodash-es';
 
 import { PickerItem } from '../../shared/types/content-picker';
@@ -52,7 +52,7 @@ export const generateFieldAttributes = (
 				),
 			};
 
-		case ContentBlockEditor.WYSIWYG: {
+		case ContentBlockEditor.RICH_TEXT_EDITOR: {
 			const html = (state as any)[`${key}`] || '';
 			const richEditorState = (state as any)[`${key}${RichEditorStateKey}`];
 			return {
@@ -62,7 +62,7 @@ export const generateFieldAttributes = (
 				onChange: (editorState: any) => {
 					onChange(editorState, `${key}${RichEditorStateKey}`);
 				},
-			} as Partial<WYSIWYGProps>;
+			} as Partial<RichTextEditorProps>;
 		}
 
 		case ContentBlockEditor.FileUpload: {

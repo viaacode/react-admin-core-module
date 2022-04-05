@@ -2,7 +2,7 @@ import { Button, Table } from '@meemoo/react-components';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Config } from '../../../../core/config';
+import { Config } from '~core/config';
 import { Icon, Loader } from '../../../shared/components';
 import { AdminLayout } from '../../../shared/layouts';
 import { NAVIGATION_PATHS } from '../../const';

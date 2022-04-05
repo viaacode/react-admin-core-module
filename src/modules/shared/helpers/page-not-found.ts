@@ -1,4 +1,4 @@
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export function getPageNotFoundError(loggedIn: boolean): string {
 	return loggedIn

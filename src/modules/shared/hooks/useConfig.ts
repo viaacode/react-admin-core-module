@@ -2,7 +2,7 @@ export {};
 // import { useEffect, useState } from 'react';
 //
 // import Core from '../../../core';
-// import { ConfigValue } from 'core/config';
+// import { ConfigValue } from '~core/config';
 //
 // export const useConfig = <Key extends keyof ConfigValue>(key: Key) => {
 // 	const [configValue, setConfigValue] = useState<ConfigValue[Key]>();

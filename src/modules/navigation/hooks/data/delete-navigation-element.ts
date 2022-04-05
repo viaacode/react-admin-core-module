@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 import { useMutation, UseMutationOptions, UseMutationResult } from 'react-query';
 
-import { Config } from '../../../../core/config';
+import { Config } from '~core/config';
 
 export const useDeleteNavigationElement = (
 	options?: UseMutationOptions<unknown, HTTPError, string>

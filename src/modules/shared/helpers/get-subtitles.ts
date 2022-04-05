@@ -2,7 +2,7 @@ import { FlowplayerTrack } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export function getSubtitles(
 	item: Avo.Item.Item | undefined | null

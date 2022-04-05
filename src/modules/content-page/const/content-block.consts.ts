@@ -10,11 +10,12 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
+import { FunctionComponent } from 'react';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
 import { ContentTypeAndLabelsPicker } from '../../shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import { UserGroupSelect } from '../../shared/components/UserGroupSelect/UserGroupSelect';
-import WYSIWYGWrapper from '../../shared/components/WYSIWYGWrapper/WYSIWYGWrapper';
+import RICH_TEXT_EDITORWrapper from '../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components';
 import {
 	ANCHOR_LINKS_BLOCK_CONFIG,
@@ -100,17 +101,17 @@ import {
 	WidthOption,
 } from '../types/content-block.types';
 
-import { Config } from 'core/config';
-import FileUpload from 'modules/shared/components/FileUpload/FileUpload';
-import { IconPicker } from 'modules/shared/components/IconPicker/IconPicker';
+import { Config } from '~core/config';
+import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
+import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 
 // TODO investigate why these cannot be loaded from the barrel file: src/admin/shared/components/index.ts
 // More info on the bug that occurs:
 // https://github.com/viaacode/avo2-client/commit/7112c51cc1a84d482b5f67b21326784be8df42f3
 
 export const CONTENT_BLOCKS_RESULT_PATH: Record<string, [string, string]> = {
-	GET: ['app_content_blocks', 'cms_content_blocks'],
-	INSERT: ['insert_app_content_blocks', 'insert_cms_content_blocks'],
+	GET: ['data.app_content_blocks', 'data.cms_content_blocks'],
+	INSERT: ['data.insert_app_content_blocks', 'data.insert_cms_content_blocks'],
 };
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => [
@@ -241,7 +242,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 	},
 ];
 
-export const EDITOR_TYPES_MAP = {
+export const GET_EDITOR_TYPES_MAP = (): Record<string, FunctionComponent<any>> => ({
 	AlignSelect,
 	Checkbox,
 	ColorSelect,
@@ -256,8 +257,8 @@ export const EDITOR_TYPES_MAP = {
 	TextArea,
 	TextInput,
 	UserGroupSelect,
-	WYSIWYG: WYSIWYGWrapper,
-};
+	RICH_TEXT_EDITOR: RICH_TEXT_EDITORWrapper,
+});
 
 export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	ContentBlockType,

@@ -17,8 +17,8 @@ import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
 import { CustomError } from '../../helpers/custom-error';
 
-import { Config, ToastType } from 'core/config';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import Core from '../../core';
-import { ModuleRouteConfig } from '../../core/routes';
+import { ModuleRouteConfig } from '~core/routes';
 
 const useModuleRoutes = (modulesLoading = true): [ModuleRouteConfig[]] => {
 	const [routes, setRoutes] = useState<ModuleRouteConfig[]>([]);

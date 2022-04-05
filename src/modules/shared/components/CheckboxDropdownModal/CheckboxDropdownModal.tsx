@@ -27,7 +27,7 @@ import React, { FunctionComponent, MouseEvent, useState } from 'react';
 
 import { isMobileWidth } from '../../helpers/media-query';
 
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './CheckboxDropdownModal.scss';
 

@@ -1,7 +1,7 @@
 import { AlignOptions, BlockImageGrid, ButtonAction, GridItem } from '@viaa/avo2-components';
 import React, { FunctionComponent } from 'react';
 
-import { BlockGridFormatOption, FillOption } from 'modules/content-page/types/content-block.types';
+import { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

@@ -2,7 +2,7 @@ import { Button, Flex, FlexItem, FormGroup, Spacer } from '@viaa/avo2-components
 import { get } from 'lodash-es';
 import React, { Fragment, FunctionComponent } from 'react';
 
-import { EDITOR_TYPES_MAP } from '../../const/content-block.consts';
+import { GET_EDITOR_TYPES_MAP } from '../../const/content-block.consts';
 import { generateFieldAttributes } from '../../helpers/field-attributes';
 import {
 	ContentBlockComponentState,
@@ -91,7 +91,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 	};
 
 	const handleField = (field: ContentBlockField, currentState: any) => {
-		const EditorComponent = (EDITOR_TYPES_MAP as any)[(field as ContentBlockField).editorType];
+		const EditorComponent = GET_EDITOR_TYPES_MAP()[(field as ContentBlockField).editorType];
 
 		const handleStateChange = (index: any, value: any, key?: string) => {
 			const newState = [...currentState];

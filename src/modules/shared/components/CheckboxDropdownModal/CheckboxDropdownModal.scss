@@ -1,4 +1,4 @@
-@import '../../../styles/settings/colors';
+@import "../../../shared/styles/settings/colors";
 
 .c-button.c-checkbox-dropdown-modal__trigger {
 	padding: 0 1.6rem;
@@ -21,7 +21,6 @@
 	&__checked {
 		display: flex;
 		flex-wrap: wrap;
-
 		align-items: center;
 		padding: 8px 0;
 		border-bottom: 1px solid $color-gray-100;

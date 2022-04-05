@@ -4,7 +4,7 @@ import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query';
 import { NAVIGATION_QUERY_KEYS } from '../../const';
 import { NavigationElement } from '../../types';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const useGetNavigationElement = <TData = NavigationElement>(
 	id: string,

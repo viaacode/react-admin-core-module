@@ -5,9 +5,9 @@ import { CustomError } from '../../shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
 import { ContentPageLabelService } from '../services/content-page-label.service';
 
-import { Config, ToastType } from 'core/config';
-import { CheckboxOption } from 'modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { Config, ToastType } from '~core/config';
+import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

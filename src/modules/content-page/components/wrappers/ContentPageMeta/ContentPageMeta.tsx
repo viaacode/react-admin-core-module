@@ -5,11 +5,11 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { getPublishedDate } from '../../../helpers/get-published-state';
 
-import { ContentPageInfo } from 'modules/content-page/types/content-pages.types';
-import { normalizeTimestamp } from 'modules/shared/helpers/formatters/date';
-import { getProfileName } from 'modules/shared/helpers/get-profile-info';
-import { navigateToContentType } from 'modules/shared/helpers/link';
-import { useTranslation } from 'modules/shared/hooks/useTranslation';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
+import { getProfileName } from '~modules/shared/helpers/get-profile-info';
+import { navigateToContentType } from '~modules/shared/helpers/link';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;

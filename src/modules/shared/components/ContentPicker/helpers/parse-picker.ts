@@ -4,7 +4,7 @@ import { parse } from 'query-string';
 import { PickerItem } from '../../../types/content-picker';
 import { ContentPickerType } from '../ContentPicker.const';
 
-import { Config, ToastType } from 'core/config';
+import { Config, ToastType } from '~core/config';
 
 export const parseSearchQuery = (input: string): string => {
 	try {

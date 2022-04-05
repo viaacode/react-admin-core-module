@@ -4,7 +4,7 @@ import { SpecialPermissionGroups } from '../shared/types/authentication.types';
 
 import { UserGroup } from './user-group.types';
 
-import { Config } from 'core/config';
+import { Config } from '~core/config';
 
 export const USER_GROUP_PATH = {
 	USER_GROUP_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,

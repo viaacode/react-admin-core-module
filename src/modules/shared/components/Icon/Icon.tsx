@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Config, IconConfig } from 'core/config';
+import { Config, IconConfig } from '~core/config';
 
 interface IconProps {
 	name: keyof IconConfig['componentProps'];
