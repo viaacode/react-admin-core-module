@@ -496,23 +496,23 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 		}
 		return (
 			<>
-				{/*<FilterTable*/}
-				{/*	data={contentPages}*/}
-				{/*	itemsPerPage={ITEMS_PER_PAGE}*/}
-				{/*	columns={tableColumns}*/}
-				{/*	dataCount={contentPageCount}*/}
-				{/*	searchTextPlaceholder={t(*/}
-				{/*		'admin/content/views/content-overview___zoeken-op-auteur-titel-rol'*/}
-				{/*	)}*/}
-				{/*	noContentMatchingFiltersMessage={t(*/}
-				{/*		'admin/content/views/content-overview___er-is-geen-content-gevonden-die-voldoen-aan-uw-filters'*/}
-				{/*	)}*/}
-				{/*	renderNoResults={renderNoResults}*/}
-				{/*	renderCell={renderTableCell as any}*/}
-				{/*	className="c-content-overview__table"*/}
-				{/*	onTableStateChanged={setTableState}*/}
-				{/*	isLoading={isLoading}*/}
-				{/*/>*/}
+				<FilterTable
+					data={contentPages}
+					itemsPerPage={ITEMS_PER_PAGE}
+					columns={tableColumns}
+					dataCount={contentPageCount}
+					searchTextPlaceholder={t(
+						'admin/content/views/content-overview___zoeken-op-auteur-titel-rol'
+					)}
+					noContentMatchingFiltersMessage={t(
+						'admin/content/views/content-overview___er-is-geen-content-gevonden-die-voldoen-aan-uw-filters'
+					)}
+					renderNoResults={renderNoResults}
+					renderCell={renderTableCell as any}
+					className="c-content-overview__table"
+					onTableStateChanged={setTableState}
+					isLoading={isLoading}
+				/>
 				{/*<ConfirmModal*/}
 				{/*	deleteObjectCallback={handleDelete}*/}
 				{/*	isOpen={isConfirmModalOpen}*/}
@@ -541,7 +541,6 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 				{/*		</p>*/}
 				{/*	</ModalBody>*/}
 				{/*</Modal>*/}
-				test1234
 			</>
 		);
 	};

@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "copy-to-demo": "copy-and-watch --watch ../src/**/*.{ts,tsx} ../src/**/*.{ts,tsx} ./src/react-admin/",
-    "predemo:start": "rimraf ./src/react-admin && cp -r ../src ./src/react-admin",
+    "copy-to-demo": "copy-and-watch --watch ../src/**/*.{ts,tsx,scss,css,woff} ../src/**/*.{ts,tsx,scss,css,woff} ./src/react-admin/",
     "demo:start": "react-app-rewired start",
     "demo:build": "react-app-rewired build",
     "demo:test": "react-app-rewired test",
@@ -25,6 +24,7 @@
     "clsx": "1.1.1",
     "copy-to-clipboard": "3.3.1",
     "date-fns": "2.28.0",
+    "i18next-xhr-backend": "3.2.2",
     "immer": "9.0.12",
     "ky": "0.30.0",
     "ky-universal": "0.10.1",
@@ -50,6 +50,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/i18next-xhr-backend": "^1.4.2",
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
     "@graphql-codegen/cli": "2.6.2",

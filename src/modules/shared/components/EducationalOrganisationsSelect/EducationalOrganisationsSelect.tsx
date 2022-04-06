@@ -10,8 +10,6 @@ import { stringsToTagList } from '../../helpers/strings-to-taglist';
 import { Config, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
-import './EducationalOrganisationsSelect.scss';
-
 export interface Tag {
 	label: string;
 	id: string;

@@ -21,8 +21,6 @@ import { getUserGroupIds } from '~modules/shared/helpers/get-profile-info';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { UserProps } from '~modules/shared/types';
 
-import './ContentPage.scss';
-
 type ContentPageDetailProps =
 	| {
 			contentPageInfo: Partial<ContentPageInfo>;

@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import I18n, { initI18n } from './translations/i18n';
 
 const navItem = {
 	content_path: 'content_path',
@@ -21,86 +22,101 @@ const navItem = {
 	tooltip: '',
 };
 
-AdminCore.config.setConfig({
-	navigation: {
-		service: {
-			getAll: async () => {
-				return [navItem];
-			},
-			getByPlacement: async () => [navItem],
-			getById: async (id) => {
-				return navItem;
-			},
-			delete: async () => null,
-			insert: async () => '12345',
-			updateById: async () => navItem,
-		},
-		views: {
-			overview: {
-				labels: { tableHeads: {} },
-			},
-		},
-	},
-	icon: {
-		component: ({ name }: any) => <span>{name}</span>,
-		componentProps: {
-			add: { name: 'add' },
-			view: { name: 'view' },
-			angleDown: { name: 'down' },
-			angleUp: { name: 'up' },
-			delete: { name: 'delete' },
-			edit: { name: 'edit' },
-		},
-		list: [],
-	},
-	components: {
-		loader: {
-			component: () => <></>,
-		},
-		table: {
-			sortingIcons: {
-				asc: <></>,
-				desc: <></>,
-				default: <></>,
-			},
-		},
-	},
-	services: {
-		toastService: {
-			showToast: () => {},
-		},
-		i18n: {
-			t: () => '',
-		},
-		educationOrganisationService: {
-			fetchEducationOrganisationName: () => Promise.resolve(null),
-			fetchCities: () => Promise.resolve([]),
-			fetchEducationOrganisations: () => Promise.resolve([]),
-		},
-	},
-	database: {
-		databaseApplicationType: AvoOrHetArchief.hetArchief,
-		graphqlUrl: '',
-		graphqlSecret: '',
-		proxyUrl: 'http://localhost:3100',
-	},
-	flowplayer: {
-		FLOW_PLAYER_ID: '',
-		FLOW_PLAYER_TOKEN: '',
-	},
-	handlers: {
-		onExternalLink: () => {},
-	},
-});
+const proxyUrl = 'http://localhost:3100';
 
-AdminCore.routes.register({
-	path: '/users',
-	component: () => <h1>Users</h1>,
-});
+function setConfig() {
+	AdminCore.config.setConfig({
+		navigation: {
+			service: {
+				getAll: async () => {
+					return [navItem];
+				},
+				getByPlacement: async () => [navItem],
+				getById: async (id) => {
+					return navItem;
+				},
+				delete: async () => null,
+				insert: async () => '12345',
+				updateById: async () => navItem,
+			},
+			views: {
+				overview: {
+					labels: { tableHeads: {} },
+				},
+			},
+		},
+		icon: {
+			component: ({ name }: any) => <span>{name}</span>,
+			componentProps: {
+				add: { name: 'add' },
+				view: { name: 'view' },
+				angleDown: { name: 'down' },
+				angleUp: { name: 'up' },
+				delete: { name: 'delete' },
+				edit: { name: 'edit' },
+			},
+			list: [],
+		},
+		components: {
+			loader: {
+				component: () => <></>,
+			},
+			table: {
+				sortingIcons: {
+					asc: <></>,
+					desc: <></>,
+					default: <></>,
+				},
+			},
+		},
+		services: {
+			toastService: {
+				showToast: () => {},
+			},
+			i18n: I18n,
+			educationOrganisationService: {
+				fetchEducationOrganisationName: () => Promise.resolve(null),
+				fetchCities: () => Promise.resolve([]),
+				fetchEducationOrganisations: () => Promise.resolve([]),
+			},
+		},
+		database: {
+			databaseApplicationType: AvoOrHetArchief.hetArchief,
+			graphqlUrl: '',
+			graphqlSecret: '',
+			proxyUrl,
+		},
+		flowplayer: {
+			FLOW_PLAYER_ID: '',
+			FLOW_PLAYER_TOKEN: '',
+		},
+		handlers: {
+			onExternalLink: () => {},
+		},
+	});
+}
 
-ReactDOM.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>,
-	document.getElementById('root')
-);
+function registerRoutes() {
+	AdminCore.routes.register({
+		path: '/users',
+		component: () => <h1>Users</h1>,
+	});
+}
+
+function renderApp() {
+	ReactDOM.render(
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>,
+		document.getElementById('root')
+	);
+}
+
+async function bootstrapApp() {
+	await initI18n(proxyUrl);
+	setConfig();
+	registerRoutes();
+	renderApp();
+}
+
+bootstrapApp().catch(err => console.error(err));

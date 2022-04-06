@@ -63,128 +63,131 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
   contentTypeOptions: CheckboxOption[],
   userGroupOptions: CheckboxOption[],
   contentPageLabelOptions: CheckboxOption[]
-) => FilterableColumn[] = (contentTypeOptions, userGroupOptions, contentPageLabelOptions) => [
-  {
-    id: 'title',
-    label: Config.getConfig().services.i18n.t('admin/content/content___titel'),
-    sortable: true,
-    visibleByDefault: true,
-    dataType: 'string'
-  },
-  {
-    id: 'content_type',
-    label: Config.getConfig().services.i18n.t('admin/content/content___content-type'),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'CheckboxDropdownModal',
-    // filterProps: {
-    //   options: contentTypeOptions
-    // } as CheckboxDropdownModalProps,
-    dataType: 'string'
-  },
-  {
-    id: 'user_profile_id',
-    label: Config.getConfig().services.i18n.t('admin/content/content___auteur'),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'MultiUserSelectDropdown',
-    dataType: 'string'
-  },
-  {
-    id: 'author_user_group',
-    label: Config.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
-    sortable: true,
-    visibleByDefault: false,
-    // filterType: 'CheckboxDropdownModal',
-    // filterProps: {
-    //   options: [
-    //     ...userGroupOptions,
-    //     {
-    //       label: Config.getConfig().services.i18n.t('admin/content/content___leeg'),
-    //       id: NULL_FILTER
-    //     }
-    //   ]
-    // } as CheckboxDropdownModalProps,
-    dataType: 'string'
-  },
-  {
-    id: 'created_at',
-    label: Config.getConfig().services.i18n.t('admin/content/content___aangemaakt'),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'DateRangeDropdown',
-    dataType: 'dateTime'
-  },
-  {
-    id: 'updated_at',
-    label: Config.getConfig().services.i18n.t('admin/content/content___laatst-bewerkt'),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'DateRangeDropdown',
-    dataType: 'dateTime'
-  },
-  {
-    id: 'is_public',
-    label: Config.getConfig().services.i18n.t('admin/content/content___publiek'),
-    sortable: true,
-    visibleByDefault: false,
-    // filterType: 'BooleanCheckboxDropdown',
-    dataType: 'boolean'
-  },
-  {
-    id: 'published_at',
-    label: Config.getConfig().services.i18n.t(
-      'admin/content/views/content-overview___publicatie'
-    ),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'DateRangeDropdown',
-    dataType: 'dateTime'
-  },
-  {
-    id: 'publish_at',
-    label: Config.getConfig().services.i18n.t(
-      'admin/content/views/content-overview___publiceer-op'
-    ),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'DateRangeDropdown',
-    dataType: 'dateTime'
-  },
-  {
-    id: 'depublish_at',
-    label: Config.getConfig().services.i18n.t(
-      'admin/content/views/content-overview___depubliceer-op'
-    ),
-    sortable: true,
-    visibleByDefault: true,
-    // filterType: 'DateRangeDropdown',
-    dataType: 'dateTime'
-  },
-  {
-    id: 'labels',
-    label: Config.getConfig().services.i18n.t('admin/content/content___labels'),
-    sortable: false,
-    visibleByDefault: false
-    // filterType: 'CheckboxDropdownModal',
-    // filterProps: {
-    //   options: contentPageLabelOptions
-    // } as CheckboxDropdownModalProps
-  },
-  {
-    id: 'user_group_ids',
-    label: Config.getConfig().services.i18n.t('admin/content/content___zichtbaar-voor'),
-    sortable: false,
-    visibleByDefault: false
-  },
-  {
-    id: 'actions',
-    tooltip: Config.getConfig().services.i18n.t(
-      'admin/content/views/content-overview___acties'
-    ),
-    visibleByDefault: true
-  }
-];
+) => FilterableColumn[] = (contentTypeOptions, userGroupOptions, contentPageLabelOptions) => {
+  const i18n = Config.getConfig().services.i18n;
+  return [
+    {
+      id: 'title',
+      label: i18n.t('admin/content/content___titel'),
+      sortable: true,
+      visibleByDefault: true,
+      dataType: 'string'
+    },
+    {
+      id: 'content_type',
+      label: i18n.t('admin/content/content___content-type'),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'CheckboxDropdownModal',
+      // filterProps: {
+      //   options: contentTypeOptions
+      // } as CheckboxDropdownModalProps,
+      dataType: 'string'
+    },
+    {
+      id: 'user_profile_id',
+      label: i18n.t('admin/content/content___auteur'),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'MultiUserSelectDropdown',
+      dataType: 'string'
+    },
+    {
+      id: 'author_user_group',
+      label: i18n.t('admin/users/user___gebruikersgroep'),
+      sortable: true,
+      visibleByDefault: false,
+      // filterType: 'CheckboxDropdownModal',
+      // filterProps: {
+      //   options: [
+      //     ...userGroupOptions,
+      //     {
+      //       label: i18n.t('admin/content/content___leeg'),
+      //       id: NULL_FILTER
+      //     }
+      //   ]
+      // } as CheckboxDropdownModalProps,
+      dataType: 'string'
+    },
+    {
+      id: 'created_at',
+      label: i18n.t('admin/content/content___aangemaakt'),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'DateRangeDropdown',
+      dataType: 'dateTime'
+    },
+    {
+      id: 'updated_at',
+      label: i18n.t('admin/content/content___laatst-bewerkt'),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'DateRangeDropdown',
+      dataType: 'dateTime'
+    },
+    {
+      id: 'is_public',
+      label: i18n.t('admin/content/content___publiek'),
+      sortable: true,
+      visibleByDefault: false,
+      // filterType: 'BooleanCheckboxDropdown',
+      dataType: 'boolean'
+    },
+    {
+      id: 'published_at',
+      label: i18n.t(
+        'admin/content/views/content-overview___publicatie'
+      ),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'DateRangeDropdown',
+      dataType: 'dateTime'
+    },
+    {
+      id: 'publish_at',
+      label: i18n.t(
+        'admin/content/views/content-overview___publiceer-op'
+      ),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'DateRangeDropdown',
+      dataType: 'dateTime'
+    },
+    {
+      id: 'depublish_at',
+      label: i18n.t(
+        'admin/content/views/content-overview___depubliceer-op'
+      ),
+      sortable: true,
+      visibleByDefault: true,
+      // filterType: 'DateRangeDropdown',
+      dataType: 'dateTime'
+    },
+    {
+      id: 'labels',
+      label: i18n.t('admin/content/content___labels'),
+      sortable: false,
+      visibleByDefault: false
+      // filterType: 'CheckboxDropdownModal',
+      // filterProps: {
+      //   options: contentPageLabelOptions
+      // } as CheckboxDropdownModalProps
+    },
+    {
+      id: 'user_group_ids',
+      label: i18n.t('admin/content/content___zichtbaar-voor'),
+      sortable: false,
+      visibleByDefault: false
+    },
+    {
+      id: 'actions',
+      tooltip: i18n.t(
+        'admin/content/views/content-overview___acties'
+      ),
+      visibleByDefault: true
+    }
+  ];
+};
 
 export const CONTENT_RESULT_PATH: Record<string, [string, string]> = {
   COUNT: ['app_content_aggregate', 'cms_content_aggregate'],

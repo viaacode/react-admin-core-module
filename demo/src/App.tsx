@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
 import { Route } from 'react-router-dom';
 
+import './react-admin/modules/shared/styles/main.scss';
+
 const queryClient = new QueryClient();
 
 const mockUser = {
