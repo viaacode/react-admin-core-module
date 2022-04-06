@@ -3,8 +3,6 @@ import {
 	ButtonToolbar,
 	LabelObj,
 	LinkTarget,
-	Modal,
-	ModalBody,
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
@@ -17,32 +15,31 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 import './ContentOverview.scss';
 
-import ConfirmModal from '../../../shared/components/ConfirmModal/ConfirmModal';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
-} from '../../../shared/components/FilterTable/FilterTable';
+} from '../../shared/components/FilterTable/FilterTable';
 import {
 	CONTENT_PATH,
 	GET_CONTENT_PAGE_OVERVIEW_COLUMNS,
 	ITEMS_PER_PAGE,
-} from '../../const/content-page.consts';
-import { isPublic } from '../../helpers/get-published-state';
-import { useContentTypes } from '../../hooks/useContentTypes';
-import { useUserGroupOptions } from '../../hooks/useUserGroupOptions';
-import { useUserGroups } from '../../hooks/useUserGroups';
-import { ContentPageService } from '../../services/content-page.service';
+} from '../const/content-page.consts';
+import { isPublic } from '../helpers/get-published-state';
+import { useContentTypes } from '../hooks/useContentTypes';
+import { useUserGroupOptions } from '../hooks/useUserGroupOptions';
+import { useUserGroups } from '../hooks/useUserGroups';
+import { ContentPageService } from '../services/content-page.service';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
-} from '../../types/content-pages.types';
+} from '../types/content-pages.types';
 
 import { Config, ToastType } from '~core/config';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';

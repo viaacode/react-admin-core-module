@@ -29,6 +29,8 @@ export enum Permission {
 	EDIT_ASSIGNMENTS = 'EDIT_ASSIGNMENTS',
 	DELETE_OWN_BUNDLES = 'DELETE_OWN_BUNDLES',
 	DELETE_OWN_COLLECTIONS = 'DELETE_OWN_COLLECTIONS',
+	PUBLISH_ANY_CONTENT_PAGE = 'PUBLISH_ANY_CONTENT_PAGE',
+	UNPUBLISH_ANY_CONTENT_PAGE = 'UNPUBLISH_ANY_CONTENT_PAGE',
 }
 
 export interface User {
@@ -207,6 +209,6 @@ export interface UserSummaryView {
 
 // TODO: use typings version
 export interface UserTempAccess {
-	from: string | null;
-	until: string | null;
+  from: string | null;
+  until: string | null;
 }

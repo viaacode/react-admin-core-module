@@ -580,7 +580,7 @@ export class ContentPageService {
 		}
 	}
 
-	public static async deleteContentPage(id: number) {
+	public static async deleteContentPage(id: number | string): Promise<void> {
 		try {
 			const response = await dataService.query({
 				variables: { id },
@@ -593,7 +593,7 @@ export class ContentPageService {
 		} catch (err) {
 			throw new CustomError('Failed to delete content page from the database', err, {
 				id,
-				query: 'SOFT_DELETE_CONTENT',
+				query: this.getQueries().SoftDeleteContentDocument,
 			});
 		}
 	}

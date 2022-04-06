@@ -7,8 +7,6 @@ import { getProfileId } from '../helpers/get-profile-id';
 
 import { Permission, User } from '~modules/user/user.types';
 
-export { Permission };
-
 type PermissionInfo = { name: Permission; obj?: any | null };
 
 export type Permissions = Permission | PermissionInfo | (Permission | PermissionInfo)[];

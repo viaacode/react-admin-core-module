@@ -2,7 +2,7 @@ import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -201,4 +201,4 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps & RouteC
 	);
 };
 
-export default ContentPage;
+export default withRouter(ContentPage);

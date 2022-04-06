@@ -90,7 +90,7 @@ export interface ContentPageInfo {
 	labels: Partial<Avo.ContentPage.Label>[];
 }
 
-export type ContentDetailParams = { id: string };
+export type ContentPageDetailParams = { id: string };
 
 export type ContentEditFormErrors = Partial<{ [key in keyof ContentPageInfo]: string }>;
 
