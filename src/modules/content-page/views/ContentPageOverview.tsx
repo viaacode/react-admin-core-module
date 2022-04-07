@@ -18,9 +18,6 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-
-import './ContentOverview.scss';
-
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
@@ -65,6 +62,8 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
+
+import './ContentPageOverview.scss';
 
 type ContentPageOverviewProps = DefaultSecureRouteProps;
 

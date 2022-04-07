@@ -3,9 +3,9 @@ import { Route } from 'react-router-dom';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 import {
-	ContentDetail,
-	ContentEdit,
-	ContentOverview,
+	ContentPageDetail,
+	ContentPageEdit,
+	ContentPageOverview,
 } from '../../react-admin/modules/content-page/views';
 
 export const CONTENT_PATH = {
@@ -24,25 +24,25 @@ export const CONTENT_PATH = {
 export const renderAdminContentRoutes = (): ReactNode[] => [
 	<Route
 		key={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
-		component={ContentOverview}
+		component={ContentPageOverview}
 		exact
 		path={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
 	/>,
 	<Route
 		key={CONTENT_PATH.CONTENT_PAGE_CREATE}
-		component={ContentEdit}
+		component={ContentPageEdit}
 		exact
 		path={CONTENT_PATH.CONTENT_PAGE_CREATE}
 	/>,
 	<Route
 		key={CONTENT_PATH.CONTENT_PAGE_DETAIL}
-		component={ContentDetail}
+		component={ContentPageDetail}
 		exact
 		path={CONTENT_PATH.CONTENT_PAGE_DETAIL}
 	/>,
 	<Route
 		key={CONTENT_PATH.CONTENT_PAGE_EDIT}
-		component={ContentEdit}
+		component={ContentPageEdit}
 		exact
 		path={CONTENT_PATH.CONTENT_PAGE_EDIT}
 	/>,

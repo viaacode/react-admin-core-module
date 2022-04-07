@@ -2,20 +2,20 @@ import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { renderAdminRoutes } from './admin.routes';
-import { ResizablePanels } from './shared/components/ResizablePanels/ResizablePanels';
-import { QueryParamProvider } from 'use-query-params';
-import { Config, ToastType } from '~core/config';
-import { Sidebar } from './shared/components/Sidebar/Sidebar';
-import { LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { PermissionService } from '~modules/shared/services/permission-service';
-import { Idp, Permission } from '~modules/user/user.types';
-import { GET_NAV_ITEMS } from './app.const';
-import { ContentPageOverview } from './react-admin/modules/content-page/pages';
 
 import './react-admin/modules/shared/styles/main.scss';
+import { ContentPageOverview } from './react-admin/modules/content-page/views';
+import { Sidebar } from './react-admin/modules/shared/components/Sidebar/Sidebar';
+import { Config, ToastType } from './react-admin/core/config';
+import { LoadingInfo } from './react-admin/modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from './react-admin/modules/shared/helpers/custom-error';
+import { PermissionService } from './react-admin/modules/shared/services/permission-service';
+import { Idp, Permission } from './react-admin/modules/user/user.types';
+import { renderAdminRoutes } from './admin.routes';
+import { GET_NAV_ITEMS } from './app.const';
+import { ResizablePanels } from './react-admin/modules/shared/components/ResizablePanels/ResizablePanels';
 import { NavigationItemInfo } from './shared/types';
+import { QueryParamProvider } from 'use-query-params';
 
 const queryClient = new QueryClient();
 

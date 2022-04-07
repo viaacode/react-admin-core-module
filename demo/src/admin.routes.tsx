@@ -1,7 +1,7 @@
 import { every, some } from 'lodash-es';
 import React, { ReactNode } from 'react';
 import { Switch } from 'react-router';
-import { Permission } from '~modules/user/user.types';
+import { Permission } from './react-admin/modules/user/user.types';
 import { renderAdminDashboardRoutes } from './admin/dashboard/dashboard.routes';
 import { renderAdminContentRoutes } from './modules/content-page/content.routes';
 

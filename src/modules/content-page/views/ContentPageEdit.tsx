@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import './ContentEdit.scss';
+import { withRouter } from 'react-router';
 import { Config, ToastType } from '~core/config';
 import ContentEditForm from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
@@ -57,6 +57,8 @@ import { PermissionService } from '~modules/shared/services/permission-service';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
+
+import './ContentPageEdit.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
@@ -529,6 +531,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 						changeContentPageState={changeContentPageState}
 						onRemove={openDeleteModal}
 						onSave={handleStateSave}
+						user={user}
 					/>
 				);
 			case 'metadata':
@@ -604,4 +607,4 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 	);
 };
 
-export default ContentPageEdit;
+export default withRouter(ContentPageEdit);

@@ -6,8 +6,8 @@ import { Trans } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 
 import './Sidebar.scss';
-import { CustomError } from '../../../../../src/modules/shared/helpers/custom-error';
-import { NavigationItemInfo } from '../../types';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { NavigationItemInfo } from '../../../shared/types';
 
 interface SidebarProps {
 	className?: string;
@@ -56,8 +56,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 				<NavLink
 					className={classnames('o-sidebar__nav-item')}
 					activeClassName="o-sidebar__nav-item--active"
-					// @ts-ignore
-					isActive={(match, location) => isActiveClass(navItem, location)}
+					isActive={(_match, location) => isActiveClass(navItem, location)}
 					to={navItem.location || '/'}
 				>
 					{navItem.label}

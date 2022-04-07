@@ -4,23 +4,28 @@ import { useTranslation } from 'react-i18next';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 
-import { ContentPage } from '../../../content-page/views';
-import { ResizablePanels } from '../../../shared/components';
-import { ContentBlockForm } from '../../content-block/components';
+import { ContentBlockForm } from '~modules/content-page/components';
+import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 import {
 	CONTENT_BLOCK_CONFIG_MAP,
 	GET_CONTENT_BLOCK_TYPE_OPTIONS,
-} from '../../content-block/content-block.const';
-import { Sidebar } from '../../shared/components';
-import { createKey } from '../../shared/helpers';
+} from '~modules/content-page/const/content-block.consts';
+import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import {
 	ContentBlockErrors,
 	ContentBlockStateOption,
 	ContentBlockStateType,
 	ContentBlockType,
-} from '../../shared/types';
-import { BlockClickHandler, ContentEditActionType, ContentPageInfo } from '../content.types';
-import { ContentEditAction } from '../helpers/reducers';
+} from '~modules/content-page/types/content-block.types';
+import {
+	BlockClickHandler,
+	ContentEditActionType,
+	ContentPageInfo,
+} from '~modules/content-page/types/content-pages.types';
+import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
+import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
+import { createKey } from '~modules/shared/helpers/create-key';
+import { User } from '~modules/user/user.types';
 
 import './ContentEditContentBlocks.scss';
 
@@ -37,6 +42,7 @@ interface ContentEditContentBlocksProps {
 	) => void;
 	addComponentToState: (index: number, blockType: ContentBlockType) => void;
 	removeComponentFromState: (index: number, stateIndex: number) => void;
+	user: User | undefined;
 }
 
 const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({
@@ -47,6 +53,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	onSave,
 	addComponentToState,
 	removeComponentFromState,
+	user,
 }) => {
 	const [t] = useTranslation();
 
@@ -185,6 +192,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
+						user={user}
 					/>
 				</div>
 				<Sidebar className="c-content-edit-view__sidebar" light>

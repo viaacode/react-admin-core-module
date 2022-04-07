@@ -90,9 +90,6 @@ const PageOverviewWrapper: FunctionComponent<
 	headerBackgroundColor,
 	renderLink,
 	user,
-	history,
-	location,
-	match,
 }) => {
 	const { t } = useTranslation();
 
@@ -127,13 +124,7 @@ const PageOverviewWrapper: FunctionComponent<
 			title: contentPageInfo.title,
 			id: contentPageInfo.id,
 			blocks: contentPageInfo.contentBlockConfigs ? (
-				<ContentPage
-					contentPageInfo={contentPageInfo}
-					user={user}
-					history={history}
-					location={location}
-					match={match}
-				/>
+				<ContentPage contentPageInfo={contentPageInfo} user={user} />
 			) : null,
 			content_width: contentPageInfo.content_width,
 			path: contentPageInfo.path as string, // TODO enforce path in database

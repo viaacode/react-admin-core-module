@@ -1,9 +1,9 @@
 import { get, isBoolean, isNil, isString } from 'lodash-es';
 import React, { ReactElement, ReactNode } from 'react';
 
-import { formatDate } from '../../../shared/helpers/formatters';
-import { sanitizeHtml, sanitizePresets } from '../../../shared/helpers/sanitize';
-import { stringsToTagList } from '../../../shared/helpers/strings-to-taglist';
+import { formatDate } from './formatters/date';
+import { sanitizeHtml, sanitizePresets } from './sanitize';
+import { stringsToTagList } from './strings-to-taglist';
 
 export function renderDetailRow(value: ReactNode, label: string): ReactElement {
 	return (

@@ -1,4 +1,5 @@
-import { CSSProperties } from 'react';
+import { IconName } from '@viaa/avo2-components';
+import { CSSProperties, ReactElement } from 'react';
 
 import { User } from '~modules/user/user.types';
 
@@ -23,3 +24,15 @@ export interface DefaultComponentProps {
 	className?: string;
 	style?: CSSProperties;
 }
+
+export type NavigationItemInfo = {
+	label: string | ReactElement;
+	key: string;
+	location?: string;
+	exact?: boolean;
+	target?: string;
+	component?: ReactElement;
+	icon?: IconName;
+	subLinks?: NavigationItemInfo[];
+	tooltip?: string;
+};
