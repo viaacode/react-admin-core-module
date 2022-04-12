@@ -24,7 +24,7 @@
   "homepage": "https://github.com/viaacode/react-admin-core-module#readme",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "prepare": "husky install",
+    "--prepare": "husky install",
     "dev": "rimraf meemoo-react-admin-0.1.0.tgz && npm run build && npm pack",
     "prebuild": "rimraf dist",
     "build": "rollup -c",

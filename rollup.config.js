@@ -5,22 +5,22 @@ import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
 
-const getOutput = (path, root = 'dist') => {
-	const formats = ['esm', 'cjs'];
-
-	return formats.map((format) => ({
-		dir: path ? `${root}/${path}/${format}` : `${root}/${format}`,
-		format,
-	}));
-};
-
 // It's possible to pass custom cli arguments through rollup
 // For more info: https://rollupjs.org/guide/en/#configuration-files
 export default (cliArgs) => {
 	return [
 		{
 			input: ['src/index.ts'],
-			output: getOutput(),
+			output: [
+				{
+					dir: 'dist/esm',
+					format: 'esm',
+				},
+				{
+					dir: 'dist/cjs',
+					format: 'cjs',
+				},
+			],
 			plugins: [
 				postcss({
 					extensions: ['.scss', '.css'],
@@ -30,6 +30,7 @@ export default (cliArgs) => {
 				typescript({
 					clean: true,
 					check: true,
+					tsconfig: './tsconfig.json',
 				}),
 				commonjs(),
 				terser(),
