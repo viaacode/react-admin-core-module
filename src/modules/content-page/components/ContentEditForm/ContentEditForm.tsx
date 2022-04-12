@@ -32,7 +32,7 @@ import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentP
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
 import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
-import RICH_TEXT_EDITORWrapper from '~modules/shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import RichTextEditorWrapper from '~modules/shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
 import { getFullName } from '~modules/shared/helpers/formatters/avatar';
 import { getProfileId } from '~modules/shared/helpers/get-profile-id';
@@ -207,7 +207,7 @@ const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___omschrijving'
 									)}
 								>
-									<RICH_TEXT_EDITORWrapper
+									<RichTextEditorWrapper
 										initialHtml={contentPageInfo.description_html || ''}
 										state={contentPageInfo.description_state || undefined}
 										onChange={(state: RichEditorState) =>

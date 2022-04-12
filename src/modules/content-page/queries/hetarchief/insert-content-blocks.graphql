@@ -1,5 +1,5 @@
-mutation insertContentBlocks($contentBlocks: [cms_content_blocks_insert_input!]!) {
-	insert_cms_content_blocks(objects: $contentBlocks) {
+mutation insertContentBlocks($contentBlocks: [app_content_block_insert_input!]!) {
+	insert_app_content_block(objects: $contentBlocks) {
 		returning {
 			id
 		}

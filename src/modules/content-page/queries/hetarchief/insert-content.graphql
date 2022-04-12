@@ -1,5 +1,5 @@
-mutation insertContent($contentPage: cms_content_insert_input!) {
-	insert_cms_content(objects: [$contentPage]) {
+mutation insertContent($contentPage: app_content_page_insert_input!) {
+	insert_app_content_page(objects: [$contentPage]) {
 		returning {
 			id
 		}

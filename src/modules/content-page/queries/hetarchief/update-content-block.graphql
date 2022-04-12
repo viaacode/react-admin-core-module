@@ -1,5 +1,5 @@
-mutation updateContentBlock($id: uuid!, $contentBlock: cms_content_blocks_set_input!) {
-	update_cms_content_blocks(where: { id: { _eq: $id } }, _set: $contentBlock) {
+mutation updateContentBlock($id: uuid!, $contentBlock: app_content_block_set_input!) {
+	update_app_content_block(where: { id: { _eq: $id } }, _set: $contentBlock) {
 		affected_rows
 	}
 }

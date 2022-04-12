@@ -1,5 +1,5 @@
 mutation deleteContentLabelLinks($contentPageId: uuid!, $labelIds: [uuid!]!) {
-	delete_cms_content_content_labels(
+	delete_app_content_page_content_label(
 		where: { label_id: { _in: $labelIds }, content_id: { _eq: $contentPageId } }
 	) {
 		affected_rows

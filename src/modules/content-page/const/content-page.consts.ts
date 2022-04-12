@@ -190,10 +190,10 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 };
 
 export const CONTENT_RESULT_PATH: Record<string, [string, string]> = {
-  COUNT: ['app_content_aggregate', 'cms_content_aggregate'],
-  GET: ['data.app_content', 'data.cms_content'],
-  INSERT: ['insert_app_content', 'insert_cms_content'],
-  UPDATE: ['update_app_content', 'update_cms_content']
+  COUNT: ['app_content_aggregate', 'app_content_page_aggregate'],
+  GET: ['data.app_content', 'data.app_content_page'],
+  INSERT: ['insert_app_content', 'insert_app_content_page'],
+  UPDATE: ['update_app_content', 'update_app_content_page']
 };
 
 export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{

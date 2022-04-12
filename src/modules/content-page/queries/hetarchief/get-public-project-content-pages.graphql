@@ -1,5 +1,5 @@
-query getPublicProjectContentPages($limit: Int = 20, $orderBy: [cms_content_order_by!] = {}) {
-	cms_content(
+query getPublicProjectContentPages($limit: Int = 20, $orderBy: [app_content_page_order_by!] = {}) {
+	app_content_page(
 		limit: $limit
 		order_by: $orderBy
 		where: {

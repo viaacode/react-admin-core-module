@@ -156,7 +156,7 @@ export class ContentPageService {
 				{
 					query: this.getQueries().GetContentTypesDocument,
 				},
-				['data.lookup_enum_content_types', 'data.lookup_cms_content_type'],
+				['data.lookup_enum_content_types', 'data.lookup_app_content_page_type'],
 				'Failed to retrieve content types.'
 			);
 

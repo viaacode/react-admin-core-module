@@ -1,5 +1,5 @@
-mutation insertContentLabelLinks($objects: [cms_content_content_labels_insert_input!]!) {
-	insert_cms_content_content_labels(objects: $objects) {
+mutation insertContentLabelLinks($objects: [app_content_page_content_label_insert_input!]!) {
+	insert_app_content_page_content_label(objects: $objects) {
 		affected_rows
 	}
 }

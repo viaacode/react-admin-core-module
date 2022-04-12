@@ -1,9 +1,9 @@
 query getPublicProjectContentPagesByTitle(
 	$title: String!
 	$limit: Int = 20
-	$orderBy: [cms_content_order_by!] = {}
+	$orderBy: [app_content_page_order_by!] = {}
 ) {
-	cms_content(
+	app_content_page(
 		where: {
 			title: { _ilike: $title }
 			content_type: { _eq: "PROJECT" }

@@ -1,5 +1,5 @@
 query getContentPageLabelById($id: uuid!) {
-	cms_content_labels(where: { id: { _eq: $id } }) {
+	app_content_label(where: { id: { _eq: $id } }) {
 		label
 		id
 		content_type

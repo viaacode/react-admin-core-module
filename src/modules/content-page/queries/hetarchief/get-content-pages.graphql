@@ -1,5 +1,5 @@
-query getContentPages($where: cms_content_bool_exp, $offset: Int = 0, $limit: Int = 10, $orderBy: [cms_content_order_by!] = {}) {
-  cms_content(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
+query getContentPages($where: app_content_page_bool_exp, $offset: Int = 0, $limit: Int = 10, $orderBy: [app_content_page_order_by!] = {}) {
+  app_content_page(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
     id
     content_type
     created_at
@@ -45,7 +45,7 @@ query getContentPages($where: cms_content_bool_exp, $offset: Int = 0, $limit: In
       }
     }
   }
-  cms_content_aggregate(where: $where) {
+  app_content_page_aggregate(where: $where) {
     aggregate {
       count
     }

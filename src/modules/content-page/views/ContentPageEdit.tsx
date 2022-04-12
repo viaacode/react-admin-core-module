@@ -136,8 +136,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 		} catch (err) {
 			console.error(new CustomError('Failed to load content page', err, { id }));
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
-				description: Config.getConfig().services.i18n.t(
+				title: t('Error'),
+				description: t(
 					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -164,8 +164,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 						});
 
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('Success'),
-							description: Config.getConfig().services.i18n.t(
+							title: t('Success'),
+							description: t(
 								'admin/content/views/content-edit___de-blok-is-toegevoegd'
 							),
 							type: ToastType.SUCCESS,
@@ -175,8 +175,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 			} catch (err) {
 				console.error(new CustomError('Failed to paste content block', err));
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
-					description: Config.getConfig().services.i18n.t(
+					title: t('Error'),
+					description: t(
 						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -291,8 +291,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				setIsSaving(false);
 				if (!isFormValid) {
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
-						description: Config.getConfig().services.i18n.t(
+						title: t('Error'),
+						description: t(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
 						),
 						type: ToastType.ERROR,
@@ -300,8 +300,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				}
 				if (!areConfigsValid) {
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
-						description: Config.getConfig().services.i18n.t(
+						title: t('Error'),
+						description: t(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
 						),
 						type: ToastType.ERROR,
@@ -382,8 +382,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 			]);
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
-				description: Config.getConfig().services.i18n.t(
+				title: t('Error'),
+				description: t(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
 				type: ToastType.ERROR,
@@ -394,8 +394,8 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
-				description: Config.getConfig().services.i18n.t(
+				title: t('Error'),
+				description: t(
 					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
