@@ -8,7 +8,6 @@ import React, {
 	useReducer,
 	useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { withRouter } from 'react-router';
 import { Config, ToastType } from '~core/config';
@@ -59,6 +58,7 @@ import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
@@ -84,7 +84,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');

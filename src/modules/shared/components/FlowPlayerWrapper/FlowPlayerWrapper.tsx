@@ -2,26 +2,26 @@ import { Avo } from '@viaa/avo2-types';
 import { FC } from 'react';
 
 type FlowPlayerWrapperProps = {
-	item?: Avo.Item.Item;
-	src?: string;
-	poster?: string;
-	external_id?: string;
-	title?: string;
-	duration?: string;
-	organisationName?: string;
-	organisationLogo?: string;
-	issuedDate?: string;
-	annotationTitle?: string;
-	annotationText?: string;
-	canPlay?: boolean;
-	cuePoints?: {
-		start: number | null;
-		end: number | null;
-	};
-	seekTime?: number;
-	autoplay?: boolean;
-	onPlay?: () => void;
-	onEnded?: () => void;
+  item?: Avo.Item.Item;
+  src?: string;
+  poster?: string;
+  external_id?: string;
+  title?: string;
+  duration?: string;
+  organisationName?: string;
+  organisationLogo?: string;
+  issuedDate?: string;
+  annotationTitle?: string;
+  annotationText?: string;
+  canPlay?: boolean;
+  cuePoints?: {
+    start: number | null;
+    end: number | null;
+  };
+  seekTime?: number;
+  autoplay?: boolean;
+  onPlay?: () => void;
+  onEnded?: () => void;
 };
 
 export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO pass this component from the client application
@@ -71,7 +71,7 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 //  * @constructor
 //  */
 // const FlowPlayerWrapper: FunctionComponent<FlowPlayerWrapperProps & UserProps> = (props) => {
-// 	const [t] = useTranslation();
+// 	const { t } = useTranslation();
 //
 // 	const item: Avo.Item.Item | undefined = props.item;
 // 	const poster: string | undefined = props.poster || get(item, 'thumbnail_path');

@@ -1,6 +1,6 @@
 import { Avo } from '@viaa/avo2-types';
 
-import { ContentPickerType } from '../ContentPicker.const';
+import { ContentPickerType } from '../ContentPicker.types';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { CollectionService } from '~modules/collection/collection.service';

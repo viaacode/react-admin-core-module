@@ -17,6 +17,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "declarationDir": "dist/dts",
     "jsx": "react",
     "noEmit": true,
     "outDir": "dist",

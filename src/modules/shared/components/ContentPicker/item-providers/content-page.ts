@@ -4,7 +4,7 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
 // Fetch content items from GQL
 export const retrieveContentPages = async (

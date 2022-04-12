@@ -9,8 +9,7 @@ import {
 	TagsInput,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash';
-import { compact, isNumber } from 'lodash-es';
+import { compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';

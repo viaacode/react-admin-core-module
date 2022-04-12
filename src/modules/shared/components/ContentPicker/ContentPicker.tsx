@@ -3,13 +3,13 @@ import { get, isNull } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
+import { ContentPickerType } from './ContentPicker.types';
 
 import { CustomError } from '../../helpers/custom-error';
 import { PickerItem, PickerSelectItem, PickerTypeOption } from '../../types/content-picker';
 import FileUpload from '../FileUpload/FileUpload';
 
 import {
-	ContentPickerType,
 	DEFAULT_ALLOWED_TYPES,
 	GET_CONTENT_TYPES,
 	REACT_SELECT_DEFAULT_OPTIONS,

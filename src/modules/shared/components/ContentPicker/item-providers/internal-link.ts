@@ -3,7 +3,7 @@ import { compact, sortBy } from 'lodash-es';
 import { APP_PATH, RouteId } from '../../../consts/routes.consts';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import { PickerSelectItem } from '~modules/shared/types/content-picker';
 
 // Return InternalLinkItems items from APP_PATH

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { useTranslation } from 'react-i18next';
+
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import {
 	Button,
@@ -25,7 +26,7 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 	menuItems,
 	onOptionClicked,
 }) => {
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 
 	return !!menuItems && !!menuItems.length ? (
 		<Dropdown

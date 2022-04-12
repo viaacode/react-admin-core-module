@@ -1,9 +1,9 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { Location } from 'history';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Trans } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './Sidebar.scss';
 import { CustomError } from '~modules/shared/helpers/custom-error';
@@ -23,6 +23,8 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
+	const { t } = useTranslation();
+
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
 			(!!item.location && item.location === location.pathname && !item.exact) ||
@@ -49,12 +51,12 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 		return (
 			<li
 				key={`${navItem.location}-${index}`}
-				className={classnames('o-sidebar__nav-item-wrapper', {
+				className={clsx('o-sidebar__nav-item-wrapper', {
 					'o-sidebar__nav-item-sublink': isSubLink || false,
 				})}
 			>
 				<NavLink
-					className={classnames('o-sidebar__nav-item')}
+					className={clsx('o-sidebar__nav-item')}
 					activeClassName="o-sidebar__nav-item--active"
 					isActive={(_match, location) => isActiveClass(navItem, location)}
 					to={navItem.location || '/'}
@@ -78,13 +80,11 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	};
 
 	return (
-		<div className={classnames(className, 'o-sidebar', { 'o-sidebar--light': light })}>
+		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
-						<Trans i18nKey="admin/shared/components/sidebar/sidebar___beheer">
-							Beheer
-						</Trans>
+						{t("admin/shared/components/sidebar/sidebar___beheer")}
 					</Link>
 				</div>
 			)}

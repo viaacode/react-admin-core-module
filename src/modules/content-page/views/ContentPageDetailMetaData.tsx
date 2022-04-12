@@ -1,7 +1,6 @@
-import { compact, get } from 'lodash';
+import { compact, get } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
 
 import {
 	BlockHeading,
@@ -27,6 +26,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -35,7 +35,7 @@ interface ContentDetailMetaDataProps {
 export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataProps> = ({
 	contentPageInfo,
 }) => {
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 
 	const [contentTypes] = useContentTypes();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
@@ -113,9 +113,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 				{!!description && (
 					<Spacer margin="bottom-large">
 						<BlockHeading type="h4">
-							<Trans i18nKey="admin/content/views/content-detail___omschrijving">
-								Omschrijving:
-							</Trans>
+							{t('admin/content/views/content-detail___omschrijving')}
 						</BlockHeading>
 						<Html content={description || '-'} sanitizePreset="full" />
 					</Spacer>

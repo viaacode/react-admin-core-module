@@ -14,48 +14,57 @@ export default (cliArgs) => {
 			output: [
 				{
 					dir: 'dist/esm',
-					format: 'esm',
+					format: 'esm'
 				},
 				{
 					dir: 'dist/cjs',
-					format: 'cjs',
-				},
+					format: 'cjs'
+				}
 			],
 			plugins: [
 				postcss({
 					extensions: ['.scss', '.css'],
 					plugins: [autoprefixer()],
-					minimize: true,
+					minimize: true
 				}),
 				typescript({
 					clean: true,
 					check: true,
-					tsconfig: './tsconfig.json',
+					tsconfig: './tsconfig.build.json'
 				}),
 				commonjs(),
 				terser(),
 				visualizer({
 					open: cliArgs['config-analyze'],
 					filename: 'bundle-stats.html',
-					title: '@meemoo/react-admin | Rollup Visualizer',
-				}),
+					title: '@meemoo/react-admin | Rollup Visualizer'
+				})
 			],
 			external: [
 				'@hookform/resolvers/yup',
 				'@meemoo/react-components',
+				'@viaa/avo2-components',
 				'clsx',
+				'moment',
+				'query-string',
+				'use-query-params',
+				'sanitize-html',
+				'react-select',
+				'react-select/async',
+				'ky-universal',
+				'react-copy-to-clipboard',
+				'react-scrollbars-custom',
+				'immer',
 				'lodash-es',
-				'ramda',
 				'react-dom',
 				'react-hook-form',
 				'react-query',
+				'react-router',
 				'react-router-dom',
-				'react-router-guards',
 				'react',
-				'rxjs',
 				'rxjs/operators',
-				'yup',
-			],
-		},
+				'yup'
+			]
+		}
 	];
 };

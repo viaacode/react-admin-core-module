@@ -19,7 +19,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { Trans } from 'react-i18next';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Scrollbar } from 'react-scrollbars-custom';
 
@@ -28,6 +27,7 @@ import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/
 import Html from '~modules/shared/components/Html/Html';
 import { stripHtml } from '~modules/shared/helpers/formatters/strip-html';
 import { parseDuration } from '~modules/shared/helpers/parsers/duration';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ItemVideoDescription.scss';
 
@@ -76,6 +76,8 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteC
 	const TIMESTAMP_REGEX = /([0-9]{2}:[0-9]{2}:[0-9]{2})/g;
 
 	const videoRef: RefObject<HTMLVideoElement> = createRef();
+
+	const { t } = useTranslation();
 
 	const [time, setTime] = useState<number>(seekTime);
 	const [videoHeight, setVideoHeight] = useState<number>(DEFAULT_VIDEO_HEIGHT); // correct height for desktop screens
@@ -191,9 +193,7 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteC
 					renderTitle()
 				) : (
 					<BlockHeading type="h4">
-						<Trans i18nKey="item/components/item-video-description___beschrijving">
-							Beschrijving
-						</Trans>
+						{t('item/components/item-video-description___beschrijving')}
 					</BlockHeading>
 				)}
 				<p className="c-content">{formatTimestamps(convertToHtml(description))}</p>

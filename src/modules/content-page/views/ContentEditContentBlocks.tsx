@@ -1,6 +1,5 @@
 import { get } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 
@@ -25,6 +24,7 @@ import {
 import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
 import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
 import { createKey } from '~modules/shared/helpers/create-key';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { CommonUser } from '~modules/user/user.types';
 
 import './ContentEditContentBlocks.scss';
@@ -55,7 +55,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	removeComponentFromState,
 	user,
 }) => {
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 
 	// Hooks
 	const [activeBlockPosition, setActiveBlockPosition] = useState<number | null>(null);

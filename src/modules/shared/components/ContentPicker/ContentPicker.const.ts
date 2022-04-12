@@ -8,22 +8,9 @@ import { retrieveContentPages, retrieveProjectContentPages } from './item-provid
 import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
+import { ContentPickerType } from './ContentPicker.types';
 
 import { Config } from '~core/config';
-
-export enum ContentPickerType {
-	CONTENT_PAGE = 'CONTENT_PAGE',
-	INTERNAL_LINK = 'INTERNAL_LINK',
-	COLLECTION = 'COLLECTION',
-	ITEM = 'ITEM',
-	BUNDLE = 'BUNDLE',
-	EXTERNAL_LINK = 'EXTERNAL_LINK',
-	SEARCH_QUERY = 'SEARCH_QUERY',
-	PROJECTS = 'PROJECTS',
-	PROFILE = 'PROFILE',
-	ANCHOR_LINK = 'ANCHOR_LINK',
-	FILE = 'FILE',
-}
 
 export interface PickerItem {
 	label?: string;
@@ -162,6 +149,6 @@ export const DEFAULT_ALLOWED_TYPES: ContentPickerType[] = [
 ];
 
 export const REACT_SELECT_DEFAULT_OPTIONS = {
-	className: 'c-select',
-	classNamePrefix: 'c-select',
+  className: 'c-select',
+  classNamePrefix: 'c-select'
 };

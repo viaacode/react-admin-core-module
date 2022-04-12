@@ -29,7 +29,7 @@ import { Config, ToastType } from '~core/config';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~modules/shared/components/RichTextEditorWrapper/RichTextEditorWrapper';

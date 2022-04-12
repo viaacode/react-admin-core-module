@@ -17,7 +17,6 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
@@ -66,6 +65,7 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ContentPageOverview.scss';
 
@@ -535,9 +535,9 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 				>
 					<ModalBody>
 						<p>
-							<Trans i18nKey="admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen">
-								Contacteer een van de admins om deze pagina te kunnen verwijderen.
-							</Trans>
+							{t(
+								'admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen'
+							)}
 						</p>
 					</ModalBody>
 				</Modal>

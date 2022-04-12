@@ -7,7 +7,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -53,6 +52,7 @@ import { UserProps } from '~modules/shared/types';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { SpecialUserGroup } from '~modules/user-group/user-group.const';
 import { Permission } from '~modules/user/user.types';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -71,7 +71,7 @@ const ContentPageDetail: FunctionComponent<
 	const { id } = match.params;
 
 	// Hooks
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });

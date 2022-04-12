@@ -10,7 +10,7 @@ import { BUNDLE_PATH } from '../../consts/bundle.const';
 import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { buildLink } from '../../helpers/link';
-import { ContentPickerType } from '../ContentPicker/ContentPicker.const';
+import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
 
 export interface SmartLinkProps {
 	action?: ButtonAction | null;

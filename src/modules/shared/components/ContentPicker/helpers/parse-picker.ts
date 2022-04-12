@@ -2,7 +2,7 @@ import { LinkTarget } from '@viaa/avo2-components';
 import { parse } from 'query-string';
 
 import { PickerItem } from '../../../types/content-picker';
-import { ContentPickerType } from '../ContentPicker.const';
+import { ContentPickerType } from '../ContentPicker.types';
 
 import { Config, ToastType } from '~core/config';
 
