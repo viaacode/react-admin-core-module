@@ -9,10 +9,10 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get, uniqBy } from 'lodash-es';
+import { uniqBy } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
+import { CommonUser } from '~modules/user/user.types';
 
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
@@ -63,12 +63,12 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	useEffect(() => {
 		if (values.length) {
 			UserService.getNamesByProfileIds(values)
-				.then((users: Avo.User.User[]) => {
+				.then((users: Partial<CommonUser>[]) => {
 					setSelectedProfiles(
 						users.map(
 							(user): PickerItem => ({
-								label: `${get(user, 'full_name')} (${get(user, 'mail')})`,
-								value: get(user, 'profile.id') as string,
+								label: `${user?.fullName} (${user?.email})`,
+								value: user?.profileId as string,
 								type: ContentPickerType.PROFILE,
 							})
 						)

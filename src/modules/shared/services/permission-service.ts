@@ -5,30 +5,33 @@ import { ContentPageService } from '../../content-page/services/content-page.ser
 import { ContentPageInfo } from '../../content-page/types/content-pages.types';
 import { getProfileId } from '../helpers/get-profile-id';
 
-import { Permission, User } from '~modules/user/user.types';
+import { CommonUser, Permission } from '~modules/user/user.types';
 
 type PermissionInfo = { name: Permission; obj?: any | null };
 
 export type Permissions = Permission | PermissionInfo | (Permission | PermissionInfo)[];
 
 export class PermissionService {
-	public static hasPerm(user: User | undefined, permName: Permission): boolean {
+	public static hasPerm(user: CommonUser | undefined, permName: Permission): boolean {
 		return PermissionService.getUserPermissions(user).includes(permName);
 	}
 
-	public static hasAtLeastOnePerm(user: User | undefined, permNames: Permission[]): boolean {
+	public static hasAtLeastOnePerm(
+		user: CommonUser | undefined,
+		permNames: Permission[]
+	): boolean {
 		return some(permNames, (permName) =>
 			PermissionService.getUserPermissions(user).includes(permName)
 		);
 	}
 
-	public static getUserPermissions(user: User | undefined): Permission[] {
-		return get(user, 'profile.permissions', []);
+	public static getUserPermissions(user: CommonUser | undefined): Permission[] {
+		return get(user, 'permissions') || get(user, 'profile.permissions') || [];
 	}
 
 	public static async hasPermissions(
 		permissions: Permissions,
-		user: User | null
+		user: CommonUser | null
 	): Promise<boolean> {
 		// Reformat all permissions to format: PermissionInfo[]
 		let permissionList: PermissionInfo[];
@@ -70,7 +73,7 @@ export class PermissionService {
 	public static async hasPermission(
 		permission: Permission,
 		obj: any | null | undefined,
-		user: User
+		user: CommonUser
 	): Promise<boolean> {
 		const userPermissions = PermissionService.getUserPermissions(user);
 		if (!user || !userPermissions) {

@@ -7,7 +7,7 @@ import { SpecialPermissionGroups } from '../types/authentication.types';
 import { CustomError } from './custom-error';
 import { getFullName, getProfile } from './formatters/avatar';
 
-import { User } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 
 export const getFirstName = (user: Avo.User.User | undefined, defaultName = ''): string => {
 	if (!user) {
@@ -154,7 +154,7 @@ export function isProfileComplete(user: Avo.User.User): boolean {
 	);
 }
 
-export function getUserGroupIds(user: User | null | undefined): number[] {
+export function getUserGroupIds(user: CommonUser | null | undefined): number[] {
 	return [
 		...get(user, 'profile.userGroupIds', []),
 		user ? SpecialPermissionGroups.loggedInUsers : SpecialPermissionGroups.loggedOutUsers,

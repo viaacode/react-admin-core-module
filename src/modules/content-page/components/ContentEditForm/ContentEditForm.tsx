@@ -39,7 +39,7 @@ import { getProfileId } from '~modules/shared/helpers/get-profile-id';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ValueOf } from '~modules/shared/types';
 import { PickerItem } from '~modules/shared/types/content-picker';
-import { Permission, User } from '~modules/user/user.types';
+import { CommonUser, Permission } from '~modules/user/user.types';
 
 import './ContentEditForm.scss';
 
@@ -48,7 +48,7 @@ interface ContentEditFormProps {
 	formErrors: ContentEditFormErrors;
 	contentPageInfo: Partial<ContentPageInfo>;
 	changeContentPageState: (action: ContentEditAction) => void;
-	user: User;
+	user: CommonUser;
 }
 
 const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({

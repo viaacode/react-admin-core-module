@@ -5,7 +5,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { Config } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
-import { User } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -89,7 +89,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 
 export async function checkPermissions(
 	permissions: Permissions,
-	user: User | undefined,
+	user: CommonUser | undefined,
 	successFunc: () => void,
 	setLoadingInfo: (info: LoadingInfo) => void,
 	noPermissionsMessage?: string

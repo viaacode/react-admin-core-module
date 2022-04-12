@@ -8,6 +8,7 @@ import React, {
 	useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import {
@@ -48,6 +49,7 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/help
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
+import { UserProps } from '~modules/shared/types';
 import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { SpecialUserGroup } from '~modules/user-group/user-group.const';
 import { Permission } from '~modules/user/user.types';
@@ -63,11 +65,9 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FunctionComponent<DefaultSecureRouteProps<ContentPageDetailParams>> = ({
-	history,
-	match,
-	user,
-}) => {
+const ContentPageDetail: FunctionComponent<
+	DefaultSecureRouteProps<ContentPageDetailParams> & UserProps
+> = ({ history, match, user }) => {
 	const { id } = match.params;
 
 	// Hooks
@@ -470,4 +470,4 @@ const ContentPageDetail: FunctionComponent<DefaultSecureRouteProps<ContentPageDe
 	);
 };
 
-export default ContentPageDetail;
+export default withRouter(ContentPageDetail);

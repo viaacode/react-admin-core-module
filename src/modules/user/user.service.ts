@@ -1,18 +1,32 @@
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { get, isNil } from 'lodash-es';
+import { get } from 'lodash-es';
+import { Config } from '~core/config';
+
+import {
+	GetProfileNamesQuery as GetProfileNamesQueryAvo,
+	GetUsersQuery as GetUsersQueryAvo,
+} from '~generated/graphql-db-types-avo';
+import {
+	GetProfileNamesQuery as GetProfileNamesQueryHetArchief,
+	GetUsersQuery as GetUsersQueryHetArchief,
+} from '~generated/graphql-db-types-hetarchief';
+import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { AvoOrHetArchief } from '~modules/shared/types';
+import { USER_QUERIES } from '~modules/user/queries/users.queries';
 
 import { TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from '../content-page/const/content-page.consts';
 import { CustomError } from '../shared/helpers/custom-error';
-import { dataService, GraphQlResponse } from '../shared/services/data-service';
+import { dataService } from '../shared/services/data-service';
 
 import { ITEMS_PER_PAGE } from './user.consts';
-import { DeleteContentCountsRaw, UserOverviewTableCol, UserSummaryView } from './user.types';
-
-import { GetProfileNamesDocument, GetUsersDocument } from '~generated/graphql-db-types-avo';
-import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { CommonUser, Idp, UserOverviewTableCol } from './user.types';
 
 export class UserService {
+	private static getQueries() {
+		return USER_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
+
 	static async getProfiles(
 		page: number,
 		sortColumn: UserOverviewTableCol,
@@ -23,10 +37,14 @@ export class UserService {
 	): Promise<[Avo.User.Profile[], number]> {
 		let variables: any;
 		try {
-			const whereWithoutDeleted = {
-				...where,
-				is_deleted: { _eq: false },
-			};
+			// Hetarchief doesn't have a is_deleted column yet
+			const whereWithoutDeleted =
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+					? where
+					: {
+							...where,
+							is_deleted: { _eq: false },
+					  };
 
 			variables = {
 				offset: itemsPerPage * page,
@@ -40,31 +58,60 @@ export class UserService {
 				),
 			};
 
-			const response = await dataService.query({
+			const response = await dataService.query<GetUsersQueryAvo & GetUsersQueryHetArchief>({
 				variables,
-				query: GetUsersDocument,
+				query: this.getQueries().GetUsersDocument,
 			});
 
 			if (response.errors) {
-				throw new CustomError('Response from gragpql contains errors', null, {
+				throw new CustomError('Response from graphql contains errors', null, {
 					response,
 				});
 			}
 
-			const users: UserSummaryView[] = get(response, 'data.users_summary_view');
-
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
-			const profiles: Partial<Avo.User.Profile>[] = users.map(
-				(user: UserSummaryView): Avo.User.Profile =>
-					({
-						id: user.profile_id,
-						stamboek: user.stamboek,
+			let profiles: CommonUser[];
+
+			/* istanbul ignore next */
+			if (
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+			) {
+				profiles = (response?.data as GetUsersQueryHetArchief).users_profile.map(
+					(user): CommonUser => {
+						return {
+							profileId: user.id,
+							email: user.mail || undefined,
+							firstName: user.first_name || undefined,
+							lastName: user.last_name || undefined,
+							fullName: user.full_name || undefined,
+							userGroup: user.group_id,
+							idps: user.identities.map(
+								(identity) => identity.identity_provider_name as Idp
+							),
+							organisation: {
+								name:
+									user.maintainer_users_profiles?.[0]?.maintainer.schema_name ||
+									undefined,
+								or_id: user.maintainer_users_profiles?.[0]?.maintainer
+									.schema_identifier,
+								logo_url:
+									user.maintainer_users_profiles?.[0]?.maintainer.information?.[0]
+										?.logo?.iri,
+							},
+						};
+					}
+				);
+			} else {
+				profiles = (response?.data as GetUsersQueryAvo).users_summary_view.map(
+					(user: GetUsersQueryAvo['users_summary_view'][0]): CommonUser => ({
+						profileId: user.profile_id,
+						stamboek: user.stamboek || undefined,
 						organisation: user.company_name
 							? ({
 									name: user.company_name,
 							  } as Avo.Organization.Organization)
-							: null,
-						educational_organisations: user.organisations.map(
+							: undefined,
+						educational_organisations: (user.organisations || []).map(
 							(org): ClientEducationOrganization => ({
 								organizationId: org.organization_id,
 								unitId: org.unit_id || null,
@@ -73,35 +120,30 @@ export class UserService {
 						),
 						subjects: user.classifications.map((classification) => classification.key),
 						education_levels: user.contexts.map((context) => context.key),
-						is_exception: user.is_exception,
-						business_category: user.business_category,
+						is_exception: user.is_exception || undefined,
+						business_category: user.business_category || undefined,
 						created_at: user.acc_created_at,
-						userGroupIds: isNil(user.group_id) ? [] : [user.group_id],
-						user_id: user.user_id,
-						profile_user_group: {
-							group: {
-								label: user.group_name,
-								id: user.group_id,
-							},
-						},
-						user: {
-							uid: user.user_id,
-							mail: user.mail,
-							full_name: user.full_name,
-							first_name: user.first_name,
-							last_name: user.last_name,
-							is_blocked: user.is_blocked,
-							blocked_at: get(user, 'blocked_at.date'),
-							unblocked_at: get(user, 'unblocked_at.date'),
-							created_at: user.acc_created_at,
-							last_access_at: user.last_access_at,
-							temp_access: user.user.temp_access,
-							idpmaps: user.idps.map((idp) => idp.idp),
-						},
-					} as any)
-			);
+						userGroup: user.group_name || undefined,
+						userId: user.user_id,
+						uid: user.user_id,
+						email: user.mail || undefined,
+						fullName: user.full_name || undefined,
+						firstName: user.first_name || undefined,
+						lastName: user.last_name || undefined,
+						is_blocked: user.is_blocked || undefined,
+						blocked_at: get(user, 'blocked_at.date'),
+						unblocked_at: get(user, 'unblocked_at.date'),
+						last_access_at: user.last_access_at,
+						temp_access: user?.user?.temp_access || undefined,
+						idps: user.idps.map((idp) => idp.idp as unknown as Idp),
+					})
+				);
+			}
 
-			const profileCount = get(response, 'data.users_summary_view_aggregate.aggregate.count');
+			const profileCount =
+				response?.data?.users_summary_view_aggregate?.aggregate?.count ||
+				response?.data?.users_profile_aggregate?.aggregate?.count ||
+				0;
 
 			if (!profiles) {
 				throw new CustomError('Response does not contain any profiles', null, {
@@ -118,29 +160,47 @@ export class UserService {
 		}
 	}
 
-	static async getNamesByProfileIds(profileIds: string[]): Promise<Avo.User.User[]> {
+	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<CommonUser>[]> {
 		try {
-			const response: GraphQlResponse<DeleteContentCountsRaw> =
-				await dataService.query<DeleteContentCountsRaw>({
-					query: GetProfileNamesDocument,
-					variables: {
-						profileIds,
-					},
-				});
+			const response = await dataService.query<
+				GetProfileNamesQueryAvo & GetProfileNamesQueryHetArchief
+			>({
+				query: this.getQueries().GetProfileNamesDocument,
+				variables: {
+					profileIds,
+				},
+			});
 
 			if (response.errors) {
-				throw new CustomError('Response from gragpql contains errors', null, {
+				throw new CustomError('Response from graphql contains errors', null, {
 					response,
 				});
 			}
 
-			return get(response, 'data.users_summary_view').map((profileEntry: any) => ({
-				profile: {
-					id: profileEntry.profile_id,
-				},
-				full_name: profileEntry.full_name,
-				mail: profileEntry.mail,
-			}));
+			/* istanbul ignore next */
+			if (
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+			) {
+				return (response?.data?.users_profile || []).map(
+					(
+						profileEntry: GetProfileNamesQueryHetArchief['users_profile'][0]
+					): Partial<CommonUser> => ({
+						profileId: profileEntry.id,
+						fullName: profileEntry.full_name || undefined,
+						email: profileEntry.mail || undefined,
+					})
+				);
+			} else {
+				return (response?.data?.users_summary_view || []).map(
+					(
+						profileEntry: GetProfileNamesQueryAvo['users_summary_view'][0]
+					): Partial<CommonUser> => ({
+						profileId: profileEntry.profile_id,
+						fullName: profileEntry.full_name || undefined,
+						email: profileEntry.mail || undefined,
+					})
+				);
+			}
 		} catch (err) {
 			throw new CustomError('Failed to get profile names from the database', err, {
 				profileIds,

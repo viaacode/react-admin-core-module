@@ -1,7 +1,7 @@
 import { IconName } from '@viaa/avo2-components';
 import { CSSProperties, ReactElement } from 'react';
 
-import { User } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 
 export type ReactSelectOption<T = any> = {
 	label: string;
@@ -9,7 +9,7 @@ export type ReactSelectOption<T = any> = {
 };
 
 export interface UserProps {
-	user: User | undefined;
+	user: CommonUser | undefined;
 }
 
 export enum AvoOrHetArchief {

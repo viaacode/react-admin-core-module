@@ -53,9 +53,7 @@ import {
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
-import {
-	MultiEducationalOrganisationSelectModal
-} from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
+import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -205,7 +203,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 		setTableState(newTableState, 'replace');
 	};
 
-	const handleKeyUp = (e: KeyboardEvent) => {
+	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.keyCode === KeyCode.Enter) {
 			handleTableStateChanged(searchTerm, 'query');
 		}
@@ -288,7 +286,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								placeholder={searchTextPlaceholder}
 								icon="search"
 								onChange={setSearchTerm}
-								onKeyUp={handleKeyUp}
+								onKeyUp={handleKeyUp as any}
 								value={searchTerm}
 							/>
 						</FormGroup>
@@ -309,134 +307,134 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 					</Form>
 				</Spacer>
 
-				{/*<Spacer margin="bottom">*/}
-				{/*	<Toolbar className="c-filter-table__toolbar">*/}
-				{/*		<ToolbarLeft>*/}
-				{/*			<Flex spaced="regular" wrap>*/}
-				{/*				{columns.map((col) => {*/}
-				{/*					if (!col.filterType || !col.id) {*/}
-				{/*						return null;*/}
-				{/*					}*/}
+				<Spacer margin="bottom">
+					<Toolbar className="c-filter-table__toolbar">
+						<ToolbarLeft>
+							<Flex spaced="regular" wrap>
+								{columns.map((col) => {
+									if (!col.filterType || !col.id) {
+										return null;
+									}
 
-				{/*					switch (col.filterType) {*/}
-				{/*						case 'CheckboxDropdownModal':*/}
-				{/*							return (*/}
-				{/*								<CheckboxDropdownModal*/}
-				{/*									{...(col.filterProps || {})}*/}
-				{/*									id={col.id}*/}
-				{/*									label={col.label}*/}
-				{/*									onChange={(value) =>*/}
-				{/*										handleTableStateChanged(value, col.id)*/}
-				{/*									}*/}
-				{/*									options={get(*/}
-				{/*										col,*/}
-				{/*										'filterProps.options',*/}
-				{/*										[]*/}
-				{/*									).map((option: CheckboxOption) => ({*/}
-				{/*										...option,*/}
-				{/*										checked: (*/}
-				{/*											(tableState as any)[col.id] || []*/}
-				{/*										).includes(option.id),*/}
-				{/*									}))}*/}
-				{/*									key={`filter-${col.id}`}*/}
-				{/*								/>*/}
-				{/*							);*/}
+									switch (col.filterType) {
+										case 'CheckboxDropdownModal':
+											return (
+												<CheckboxDropdownModal
+													{...(col.filterProps || {})}
+													id={col.id}
+													label={col.label}
+													onChange={(value) =>
+														handleTableStateChanged(value, col.id)
+													}
+													options={get(
+														col,
+														'filterProps.options',
+														[]
+													).map((option: CheckboxOption) => ({
+														...option,
+														checked: (
+															(tableState as any)[col.id] || []
+														).includes(option.id),
+													}))}
+													key={`filter-${col.id}`}
+												/>
+											);
 
-				{/*						case 'DateRangeDropdown':*/}
-				{/*							return (*/}
-				{/*								<DateRangeDropdown*/}
-				{/*									{...(col.filterProps || {})}*/}
-				{/*									id={col.id}*/}
-				{/*									label={col.label}*/}
-				{/*									onChange={(value) =>*/}
-				{/*										handleTableStateChanged(value, col.id)*/}
-				{/*									}*/}
-				{/*									range={(tableState as any)[col.id]}*/}
-				{/*									key={`filter-${col.id}`}*/}
-				{/*								/>*/}
-				{/*							);*/}
+										case 'DateRangeDropdown':
+											return (
+												<DateRangeDropdown
+													{...(col.filterProps || {})}
+													id={col.id}
+													label={col.label}
+													onChange={(value) =>
+														handleTableStateChanged(value, col.id)
+													}
+													range={(tableState as any)[col.id]}
+													key={`filter-${col.id}`}
+												/>
+											);
 
-				{/*						case 'BooleanCheckboxDropdown':*/}
-				{/*							return (*/}
-				{/*								<BooleanCheckboxDropdown*/}
-				{/*									{...(col.filterProps || {})}*/}
-				{/*									id={col.id}*/}
-				{/*									label={col.label}*/}
-				{/*									value={(tableState as any)[col.id]}*/}
-				{/*									onChange={(value) =>*/}
-				{/*										handleTableStateChanged(value, col.id)*/}
-				{/*									}*/}
-				{/*									trueLabel={get(col, 'filterProps.trueLabel')}*/}
-				{/*									falseLabel={get(col, 'filterProps.falseLabel')}*/}
-				{/*									includeEmpty={get(*/}
-				{/*										col,*/}
-				{/*										'filterProps.includeEmpty'*/}
-				{/*									)}*/}
-				{/*									key={`filter-${col.id}`}*/}
-				{/*								/>*/}
-				{/*							);*/}
+										case 'BooleanCheckboxDropdown':
+											return (
+												<BooleanCheckboxDropdown
+													{...(col.filterProps || {})}
+													id={col.id}
+													label={col.label}
+													value={(tableState as any)[col.id]}
+													onChange={(value) =>
+														handleTableStateChanged(value, col.id)
+													}
+													trueLabel={get(col, 'filterProps.trueLabel')}
+													falseLabel={get(col, 'filterProps.falseLabel')}
+													includeEmpty={get(
+														col,
+														'filterProps.includeEmpty'
+													)}
+													key={`filter-${col.id}`}
+												/>
+											);
 
-				{/*						case 'MultiUserSelectDropdown':*/}
-				{/*							return (*/}
-				{/*								<MultiUserSelectDropdown*/}
-				{/*									{...(col.filterProps || {})}*/}
-				{/*									id={col.id}*/}
-				{/*									label={col.label}*/}
-				{/*									values={(tableState as any)[col.id]}*/}
-				{/*									onChange={(value: any) =>*/}
-				{/*										handleTableStateChanged(value, col.id)*/}
-				{/*									}*/}
-				{/*									key={`filter-${col.id}`}*/}
-				{/*								/>*/}
-				{/*							);*/}
+										case 'MultiUserSelectDropdown':
+											return (
+												<MultiUserSelectDropdown
+													{...(col.filterProps || {})}
+													id={col.id}
+													label={col.label}
+													values={(tableState as any)[col.id]}
+													onChange={(value: any) =>
+														handleTableStateChanged(value, col.id)
+													}
+													key={`filter-${col.id}`}
+												/>
+											);
 
-				{/*						case 'MultiEducationalOrganisationSelectModal':*/}
-				{/*							return (*/}
-				{/*								<MultiEducationalOrganisationSelectModal*/}
-				{/*									{...(col.filterProps || {})}*/}
-				{/*									id={col.id}*/}
-				{/*									label={col.label || ''}*/}
-				{/*									values={eduOrgToClientOrg(*/}
-				{/*										(tableState as any)[col.id]*/}
-				{/*									)}*/}
-				{/*									onChange={(value) =>*/}
-				{/*										handleTableStateChanged(value, col.id)*/}
-				{/*									}*/}
-				{/*									key={`filter-${col.id}`}*/}
-				{/*								/>*/}
-				{/*							);*/}
+										case 'MultiEducationalOrganisationSelectModal':
+											return (
+												<MultiEducationalOrganisationSelectModal
+													{...(col.filterProps || {})}
+													id={col.id}
+													label={col.label || ''}
+													values={eduOrgToClientOrg(
+														(tableState as any)[col.id]
+													)}
+													onChange={(value) =>
+														handleTableStateChanged(value, col.id)
+													}
+													key={`filter-${col.id}`}
+												/>
+											);
 
-				{/*						default:*/}
-				{/*							return null;*/}
-				{/*					}*/}
-				{/*				})}*/}
-				{/*				{!!bulkActions && !!bulkActions.length && (*/}
-				{/*					<Select*/}
-				{/*						options={bulkActions}*/}
-				{/*						onChange={handleSelectBulkAction}*/}
-				{/*						placeholder={t(*/}
-				{/*							'admin/shared/components/filter-table/filter-table___bulkactie'*/}
-				{/*						)}*/}
-				{/*						disabled={!(selectedItemIds || []).length}*/}
-				{/*						className="c-bulk-action-select"*/}
-				{/*					/>*/}
-				{/*				)}*/}
-				{/*			</Flex>*/}
-				{/*		</ToolbarLeft>*/}
-				{/*		<ToolbarRight>*/}
-				{/*			<CheckboxDropdownModal*/}
-				{/*				label={t(*/}
-				{/*					'admin/shared/components/filter-table/filter-table___kolommen'*/}
-				{/*				)}*/}
-				{/*				id="table_columns"*/}
-				{/*				options={getColumnOptions()}*/}
-				{/*				onChange={updateSelectedColumns}*/}
-				{/*				showSelectedValuesOnCollapsed={false}*/}
-				{/*				showSearch={false}*/}
-				{/*			/>*/}
-				{/*		</ToolbarRight>*/}
-				{/*	</Toolbar>*/}
-				{/*</Spacer>*/}
+										default:
+											return null;
+									}
+								})}
+								{!!bulkActions && !!bulkActions.length && (
+									<Select
+										options={bulkActions}
+										onChange={handleSelectBulkAction}
+										placeholder={t(
+											'admin/shared/components/filter-table/filter-table___bulkactie'
+										)}
+										disabled={!(selectedItemIds || []).length}
+										className="c-bulk-action-select"
+									/>
+								)}
+							</Flex>
+						</ToolbarLeft>
+						<ToolbarRight>
+							<CheckboxDropdownModal
+								label={t(
+									'admin/shared/components/filter-table/filter-table___kolommen'
+								)}
+								id="table_columns"
+								options={getColumnOptions()}
+								onChange={updateSelectedColumns}
+								showSelectedValuesOnCollapsed={false}
+								showSearch={false}
+							/>
+						</ToolbarRight>
+					</Toolbar>
+				</Spacer>
 			</>
 		);
 	};
@@ -525,12 +523,12 @@ export function getFilters(tableState: any | undefined): any {
 
 // Removes all props where the value is undefined, null, [], {}, ''
 export function cleanupObject(obj: any): any {
-	return omitBy(
-		obj,
-		(value: any) =>
-			isNil(value) ||
-			(isString(value) && !value.length) ||
-			((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
-			(isPlainObject(value) && value.gte === '' && value.lte === '')
-	);
+  return omitBy(
+    obj,
+    (value: any) =>
+      isNil(value) ||
+      (isString(value) && !value.length) ||
+      ((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
+      (isPlainObject(value) && value.gte === '' && value.lte === '')
+  );
 }

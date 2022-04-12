@@ -1,10 +1,11 @@
-@import '../../shared/styles/settings/colors';
+@import "../../shared/styles/settings/colors";
+@use "sass:color";
 
 @keyframes flash {
 	from,
 	50%,
 	to {
-		background-color: lighten($color-teal-bright, 30%);
+		background-color: color.adjust($color-teal-bright, $lightness: -30%);
 	}
 
 	25%,

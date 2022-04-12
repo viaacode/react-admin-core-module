@@ -111,7 +111,7 @@ async function getContentPageDetailRouteByPath(path: string): Promise<string | u
 	try {
 		const page = await ContentPageService.getContentPageByPath(path);
 		if (!page) {
-			throw new CustomError('Failed to fetch content page by path, reponse was null', null, {
+			throw new CustomError('Failed to fetch content page by path, response was null', null, {
 				page,
 			});
 		}
@@ -185,29 +185,29 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 						key: 'faqs',
 						exact: true,
 					},
-					// Only show the startpages to the users that can edit all pages
-					...(userPermissions.includes(Permission.EDIT_ANY_CONTENT_PAGES)
-						? [
-								{
-									label: i18n.t('admin/admin___start-uitgelogd'),
-									location: await getContentPageDetailRouteByPath('/'),
-									key: 'faqs',
-									exact: true,
-								},
-								{
-									label: i18n.t('admin/admin___start-uitgelogd-leerlingen'),
-									location: await getContentPageDetailRouteByPath('/leerlingen'),
-									key: 'faqs',
-									exact: true,
-								},
-								{
-									label: i18n.t('admin/admin___start-ingelogd-lesgever'),
-									location: await getContentPageDetailRouteByPath('/start'),
-									key: 'faqs',
-									exact: true,
-								},
-						  ]
-						: []),
+					// // Only show the startpages to the users that can edit all pages
+					// ...(userPermissions.includes(Permission.EDIT_ANY_CONTENT_PAGES)
+					// 	? [
+					// 			{
+					// 				label: i18n.t('admin/admin___start-uitgelogd'),
+					// 				location: await getContentPageDetailRouteByPath('/'),
+					// 				key: 'faqs',
+					// 				exact: true,
+					// 			},
+					// 			{
+					// 				label: i18n.t('admin/admin___start-uitgelogd-leerlingen'),
+					// 				location: await getContentPageDetailRouteByPath('/leerlingen'),
+					// 				key: 'faqs',
+					// 				exact: true,
+					// 			},
+					// 			{
+					// 				label: i18n.t('admin/admin___start-ingelogd-lesgever'),
+					// 				location: await getContentPageDetailRouteByPath('/start'),
+					// 				key: 'faqs',
+					// 				exact: true,
+					// 			},
+					// 	  ]
+					// 	: []),
 				],
 			}
 		),

@@ -1,4 +1,4 @@
-@import '../../shared/styles/settings/colors';
+@import "../../shared/styles/settings/colors";
 
 $content-top-bar-and-tabs-height: 113px;
 
@@ -38,9 +38,6 @@ $content-top-bar-and-tabs-height: 113px;
 	width: 100%;
 	height: calc(100vh - #{$content-top-bar-and-tabs-height});
 	overflow-y: auto;
-}
-
-.c-content-edit-view__preview {
 	overflow-x: hidden;
 
 	.c-content-block-preview > .o-container {

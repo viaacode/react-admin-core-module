@@ -1,4 +1,5 @@
 import { AvoOrHetArchief } from '~modules/shared/types';
+import { ToastInfo } from '../../src/core/config';
 import { AdminCore } from './react-admin';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -71,7 +72,7 @@ function setConfig() {
 		},
 		services: {
 			toastService: {
-				showToast: () => {},
+				showToast: (toastInfo: ToastInfo) => {},
 			},
 			i18n: I18n,
 			educationOrganisationService: {

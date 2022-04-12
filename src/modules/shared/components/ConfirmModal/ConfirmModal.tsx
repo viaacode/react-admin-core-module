@@ -38,12 +38,12 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	isOpen,
 	deleteObjectCallback,
 }) => {
-	const modalTitle =
+	const modalTitle = () =>
 		title ||
 		Config.getConfig().services.i18n.t(
 			'shared/components/delete-object-modal/delete-object-modal___ben-je-zeker-dat-je-deze-actie-wil-uitvoeren'
 		);
-	const modalBody =
+	const modalBody = () =>
 		body ||
 		Config.getConfig().services.i18n.t(
 			'shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden'
@@ -57,13 +57,13 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	return (
 		<Modal
 			isOpen={isOpen}
-			title={modalTitle && sanitizeHtml(modalTitle, 'basic')}
+			title={modalTitle && sanitizeHtml(modalTitle(), 'basic')}
 			size="small"
 			onClose={onClose}
 			scrollable
 		>
 			<ModalBody>
-				{!!modalBody && <Html content={modalBody} />}
+				{!!modalBody && <Html content={modalBody()} />}
 				<Toolbar spaced>
 					<ToolbarRight>
 						<ToolbarItem>

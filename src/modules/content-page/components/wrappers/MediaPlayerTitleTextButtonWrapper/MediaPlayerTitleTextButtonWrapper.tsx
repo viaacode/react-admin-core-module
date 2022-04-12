@@ -9,6 +9,7 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FC } from 'react';
+import { PermissionService } from '~modules/shared/services/permission-service';
 
 import { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
@@ -63,7 +64,7 @@ export const MediaPlayerTitleTextButtonWrapper: FC<
 	user,
 }) => {
 	const shouldTitleLink =
-		user?.permissions.includes(Permission.VIEW_ANY_PUBLISHED_ITEMS) && !!mediaItem;
+		PermissionService.hasPerm(user, Permission.VIEW_ANY_PUBLISHED_ITEMS) && !!mediaItem;
 
 	return (
 		<Grid className="c-item-video-description">

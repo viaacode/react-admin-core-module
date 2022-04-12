@@ -25,7 +25,7 @@ import {
 import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
 import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
 import { createKey } from '~modules/shared/helpers/create-key';
-import { User } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 
 import './ContentEditContentBlocks.scss';
 
@@ -42,7 +42,7 @@ interface ContentEditContentBlocksProps {
 	) => void;
 	addComponentToState: (index: number, blockType: ContentBlockType) => void;
 	removeComponentFromState: (index: number, stateIndex: number) => void;
-	user: User | undefined;
+	user: CommonUser | undefined;
 }
 
 const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({

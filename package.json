@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/viaacode/react-admin-core-module#readme",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "prepare": "husky install",
     "dev": "rimraf meemoo-react-admin-0.1.0.tgz && npm run build && npm pack",
     "prebuild": "rimraf dist",
@@ -42,8 +43,8 @@
   "peerDependencies": {
     "@hookform/resolvers": "^2.8.8",
     "@meemoo/react-components": "2.12.15",
-    "react": "^16.14.0 || ^17.0.2",
-    "react-dom": "^16.14.0 || ^17.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-hook-form": "^7.25.0",
     "react-query": "^3.34.14",
     "react-router-dom": "^5.3.0",
@@ -51,7 +52,7 @@
     "date-fns": "^2.28.0"
   },
   "dependencies": {
-    "@viaa/avo2-components": "1.83.2",
+    "@viaa/avo2-components": "1.83.3",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "1.1.1",
@@ -124,5 +125,10 @@
     "stylelint-config-standard-scss": "3.0.0",
     "ts-jest": "27.1.3",
     "typescript": "4.5.5"
+  },
+  "resolutions": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "mini-css-extract-plugin": "2.4.7"
   }
 }

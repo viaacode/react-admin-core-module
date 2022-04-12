@@ -1,7 +1,6 @@
 import {
 	RichTextEditor,
 	RichTextEditorControl,
-	RichTextEditorMedia,
 	RichTextEditorProps,
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
@@ -43,7 +42,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 		);
 	}
 
-	const media: RichTextEditorMedia | undefined = fileType
+	const media = fileType
 		? {
 				uploadFn: async (param: RichTextEditorUploadInfo) => {
 					try {
@@ -91,7 +90,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 		<RichTextEditor
 			{...rest}
 			controls={(controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT) as RichTextEditorControl[]} // TODO remove this cast once react-components v2.12.16 is released
-			media={media}
+			media={media as any}
 			state={state}
 			onChange={(newState) => {
 				if (!!onChange && !isEqual(newState, state)) {

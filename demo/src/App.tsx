@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
-import { ContentPageOverview } from './react-admin/modules/content-page/views';
+import { CommonUser } from '../../src/modules/user/user.types';
 import { Sidebar } from './react-admin/modules/shared/components/Sidebar/Sidebar';
 import { Config, ToastType } from './react-admin/core/config';
 import { LoadingInfo } from './react-admin/modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
@@ -16,18 +16,52 @@ import { GET_NAV_ITEMS } from './app.const';
 import { ResizablePanels } from './react-admin/modules/shared/components/ResizablePanels/ResizablePanels';
 import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import './App.scss';
 
 const queryClient = new QueryClient();
 
-const mockUser = {
-	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
+const mockUser: CommonUser = {
+	profileId: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
 	fullName: 'Test Testers',
 	email: 'test.testers@meemoo.be',
 	idp: Idp.HETARCHIEF,
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
-	permissions: [Permission.EDIT_ANY_CONTENT_PAGES, Permission.VIEW_ADMIN_DASHBOARD],
+	permissions: [
+		Permission.VIEW_ADMIN_DASHBOARD,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_CONTENT_PAGE_LABELS,
+		Permission.CREATE_CONTENT_PAGES,
+		Permission.CAN_READ_ALL_VISIT_REQUESTS,
+		Permission.CAN_APPROVE_DENY_ALL_VISIT_REQUESTS,
+		Permission.CAN_READ_CP_VISIT_REQUESTS,
+		Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+		Permission.CAN_READ_PERSONAL_APPROVED_VISIT_REQUESTS,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+		Permission.SEARCH,
+		Permission.EDIT_PROTECTED_PAGE_STATUS,
+		Permission.EDIT_CONTENT_PAGE_AUTHOR,
+		Permission.VIEW_ANY_PUBLISHED_ITEMS,
+		Permission.DELETE_ANY_CONTENT_PAGES,
+		Permission.CREATE_CONTENT_PAGES,
+		Permission.EDIT_OWN_COLLECTIONS,
+		Permission.PUBLISH_OWN_COLLECTIONS,
+		Permission.VIEW_OWN_COLLECTIONS,
+		Permission.EDIT_OWN_BUNDLES,
+		Permission.PUBLISH_OWN_BUNDLES,
+		Permission.VIEW_OWN_BUNDLES,
+		Permission.EDIT_OWN_ASSIGNMENTS,
+		Permission.EDIT_ASSIGNMENTS,
+		Permission.DELETE_OWN_BUNDLES,
+		Permission.DELETE_OWN_COLLECTIONS,
+		Permission.PUBLISH_ANY_CONTENT_PAGE,
+		Permission.UNPUBLISH_ANY_CONTENT_PAGE,
+		Permission.VIEW_ADMIN_DASHBOARD,
+	],
 };
 
 function App() {
@@ -35,6 +69,8 @@ function App() {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [userPermissions, setUserPermissions] = useState<Permission[] | null>(null);
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
+
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		if (!mockUser) {
@@ -44,14 +80,14 @@ function App() {
 			const tempUserPermissions = PermissionService.getUserPermissions(mockUser);
 			setUserPermissions(tempUserPermissions);
 			GET_NAV_ITEMS(tempUserPermissions)
-				.then(setNavigationItems)
+				.then((items) => {
+					setNavigationItems(items);
+				})
 				.catch((err) => {
 					console.error(new CustomError('Failed to get nav items', err));
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
-						description: Config.getConfig().services.i18n.t(
-							'Het ophalen van de navigatie items is mislukt'
-						),
+						title: t('Error'),
+						description: t('Het ophalen van de navigatie items is mislukt'),
 						type: ToastType.ERROR,
 					});
 				});
@@ -59,7 +95,7 @@ function App() {
 			setLoadingInfo({
 				state: 'error',
 				icon: 'lock',
-				message: Config.getConfig().services.i18n.t(
+				message: t(
 					'admin/admin___je-hebt-geen-rechten-om-het-beheer-dashboard-te-bekijken-view-admin-dashboard'
 				),
 				actionButtons: ['home', 'helpdesk'],
@@ -93,14 +129,14 @@ function App() {
 									className="o-app--admin__main u-flex-auto u-scroll"
 									orientation="vertical"
 								>
-									{!!userPermissions && renderAdminRoutes(userPermissions)}
+									{renderAdminRoutes(mockUser)}
 								</Flex>
 							</ResizablePanels>
 						</div>
-						<Sidebar />
-						{/*<Switch>*/}
-						{/*{routes?.length > 0 && AdminCore.routes.render(routes)}*/}
-						<ContentPageOverview user={mockUser} />
+						{/*<Sidebar />*/}
+						{/*/!*<Switch>*!/*/}
+						{/*/!*{routes?.length > 0 && AdminCore.routes.render(routes)}*!/*/}
+						{/*<ContentPageOverview user={mockUser} />*/}
 						{/*</Switch>*/}
 					</div>
 				</QueryParamProvider>

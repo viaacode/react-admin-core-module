@@ -78,10 +78,10 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/content/content___content-type'),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'CheckboxDropdownModal',
-      // filterProps: {
-      //   options: contentTypeOptions
-      // } as CheckboxDropdownModalProps,
+      filterType: 'CheckboxDropdownModal',
+      filterProps: {
+        options: contentTypeOptions
+      } as CheckboxDropdownModalProps,
       dataType: 'string'
     },
     {
@@ -89,7 +89,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/content/content___auteur'),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'MultiUserSelectDropdown',
+      filterType: 'MultiUserSelectDropdown',
       dataType: 'string'
     },
     {
@@ -97,16 +97,16 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/users/user___gebruikersgroep'),
       sortable: true,
       visibleByDefault: false,
-      // filterType: 'CheckboxDropdownModal',
-      // filterProps: {
-      //   options: [
-      //     ...userGroupOptions,
-      //     {
-      //       label: i18n.t('admin/content/content___leeg'),
-      //       id: NULL_FILTER
-      //     }
-      //   ]
-      // } as CheckboxDropdownModalProps,
+      filterType: 'CheckboxDropdownModal',
+      filterProps: {
+        options: [
+          ...userGroupOptions,
+          {
+            label: i18n.t('admin/content/content___leeg'),
+            id: NULL_FILTER
+          }
+        ]
+      } as CheckboxDropdownModalProps,
       dataType: 'string'
     },
     {
@@ -114,7 +114,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/content/content___aangemaakt'),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'DateRangeDropdown',
+      filterType: 'DateRangeDropdown',
       dataType: 'dateTime'
     },
     {
@@ -122,7 +122,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/content/content___laatst-bewerkt'),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'DateRangeDropdown',
+      filterType: 'DateRangeDropdown',
       dataType: 'dateTime'
     },
     {
@@ -130,7 +130,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       label: i18n.t('admin/content/content___publiek'),
       sortable: true,
       visibleByDefault: false,
-      // filterType: 'BooleanCheckboxDropdown',
+      filterType: 'BooleanCheckboxDropdown',
       dataType: 'boolean'
     },
     {
@@ -140,7 +140,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       ),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'DateRangeDropdown',
+      filterType: 'DateRangeDropdown',
       dataType: 'dateTime'
     },
     {
@@ -150,7 +150,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       ),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'DateRangeDropdown',
+      filterType: 'DateRangeDropdown',
       dataType: 'dateTime'
     },
     {
@@ -160,18 +160,18 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
       ),
       sortable: true,
       visibleByDefault: true,
-      // filterType: 'DateRangeDropdown',
+      filterType: 'DateRangeDropdown',
       dataType: 'dateTime'
     },
     {
       id: 'labels',
       label: i18n.t('admin/content/content___labels'),
       sortable: false,
-      visibleByDefault: false
-      // filterType: 'CheckboxDropdownModal',
-      // filterProps: {
-      //   options: contentPageLabelOptions
-      // } as CheckboxDropdownModalProps
+      visibleByDefault: false,
+      filterType: 'CheckboxDropdownModal',
+      filterProps: {
+        options: contentPageLabelOptions
+      } as CheckboxDropdownModalProps
     },
     {
       id: 'user_group_ids',
@@ -264,3 +264,4 @@ export const DEFAULT_PAGES_WIDTH: { [key in ContentWidth]: Avo.ContentPage.Type[
   [ContentWidth.MEDIUM]: ['NIEUWS_ITEM']
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
+

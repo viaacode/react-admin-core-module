@@ -3,6 +3,8 @@ import {
 	ButtonToolbar,
 	LabelObj,
 	LinkTarget,
+	Modal,
+	ModalBody,
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
@@ -15,9 +17,11 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { PermissionService } from '~modules/shared/services/permission-service';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
@@ -115,7 +119,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 	const hasPerm = useCallback(
 		(permission: Permission) => {
-			return user.permissions.includes(permission);
+			return PermissionService.hasPerm(user, permission);
 		},
 		[user]
 	);
@@ -219,7 +223,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 	useEffect(() => {
 		fetchContentPages();
-	}, []);
+	}, [fetchContentPages]);
 
 	useEffect(() => {
 		if (contentPages) {
@@ -235,7 +239,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 			}
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
-			fetchContentPages();
+			await fetchContentPages();
 			Config.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
@@ -509,34 +513,34 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 					onTableStateChanged={setTableState}
 					isLoading={isLoading}
 				/>
-				{/*<ConfirmModal*/}
-				{/*	deleteObjectCallback={handleDelete}*/}
-				{/*	isOpen={isConfirmModalOpen}*/}
-				{/*	onClose={() => setIsConfirmModalOpen(false)}*/}
-				{/*	body={*/}
-				{/*		get(contentToDelete, 'is_protected', null)*/}
-				{/*			? t(*/}
-				{/*					'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'*/}
-				{/*			  )*/}
-				{/*			: ''*/}
-				{/*	}*/}
-				{/*/>*/}
-				{/*<Modal*/}
-				{/*	isOpen={isNotAdminModalOpen}*/}
-				{/*	onClose={() => setIsNotAdminModalOpen(false)}*/}
-				{/*	size="small"*/}
-				{/*	title={t(*/}
-				{/*		'admin/content/views/content-overview___u-heeft-niet-de-juiste-rechten'*/}
-				{/*	)}*/}
-				{/*>*/}
-				{/*	<ModalBody>*/}
-				{/*		<p>*/}
-				{/*			<Trans i18nKey="admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen">*/}
-				{/*				Contacteer een van de admins om deze pagina te kunnen verwijderen.*/}
-				{/*			</Trans>*/}
-				{/*		</p>*/}
-				{/*	</ModalBody>*/}
-				{/*</Modal>*/}
+				<ConfirmModal
+					deleteObjectCallback={handleDelete}
+					isOpen={isConfirmModalOpen}
+					onClose={() => setIsConfirmModalOpen(false)}
+					body={
+						get(contentToDelete, 'is_protected', null)
+							? t(
+									'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'
+							  )
+							: ''
+					}
+				/>
+				<Modal
+					isOpen={isNotAdminModalOpen}
+					onClose={() => setIsNotAdminModalOpen(false)}
+					size="small"
+					title={t(
+						'admin/content/views/content-overview___u-heeft-niet-de-juiste-rechten'
+					)}
+				>
+					<ModalBody>
+						<p>
+							<Trans i18nKey="admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen">
+								Contacteer een van de admins om deze pagina te kunnen verwijderen.
+							</Trans>
+						</p>
+					</ModalBody>
+				</Modal>
 			</>
 		);
 	};

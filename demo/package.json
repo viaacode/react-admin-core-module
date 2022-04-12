@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "copy-to-demo": "copy-and-watch --watch ../src/**/*.{ts,tsx,scss,css,woff} ../src/**/*.{ts,tsx,scss,css,woff} ./src/react-admin/",
+    "preinstall": "npx npm-force-resolutions",
+    "predemo:start": "copy-and-watch ../src/**/*.{ts,tsx,scss,css,woff} ../src/**/*.{ts,tsx,scss,css,woff} ./src/react-admin/",
     "demo:start": "react-app-rewired start",
     "demo:build": "react-app-rewired build",
     "demo:test": "react-app-rewired test",
@@ -18,7 +19,7 @@
     "@types/node": "^16.11.22",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "@viaa/avo2-components": "1.83.2",
+    "@viaa/avo2-components": "1.83.3",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "1.1.1",
@@ -30,8 +31,9 @@
     "ky-universal": "0.10.1",
     "lodash-es": "4.17.21",
     "next-i18next": "11.0.0",
+    "npm-force-resolutions": "0.0.10",
     "query-string": "7.1.1",
-    "react": "^17.0.2",
+    "react": "17.0.2",
     "react-copy-to-clipboard": "5.0.4",
     "react-dom": "^17.0.2",
     "react-i18next": "11.16.2",
@@ -50,7 +52,6 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@types/i18next-xhr-backend": "^1.4.2",
     "@commitlint/cli": "16.1.0",
     "@commitlint/config-conventional": "16.0.0",
     "@graphql-codegen/cli": "2.6.2",
@@ -63,6 +64,7 @@
     "@rollup/plugin-commonjs": "21.0.1",
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",
+    "@types/i18next-xhr-backend": "^1.4.2",
     "@types/lodash-es": "4.17.6",
     "@types/react": "17.0.39",
     "@types/react-dom": "17.0.11",
@@ -72,6 +74,7 @@
     "@types/sanitize-html": "2.6.2",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
+    "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
     "copy-and-watch": "github:zont/copy-and-watch#pull/5/head",
     "customize-cra": "1.0.0",
@@ -105,12 +108,6 @@
     "ts-jest": "27.1.3",
     "typescript": "4.5.5"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -122,5 +119,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "mini-css-extract-plugin": "2.4.7"
   }
 }

@@ -1,8 +1,12 @@
+import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { FilterableTableState } from '~modules/shared/components/FilterTable/FilterTable';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',
 	MEEMOO = 'MEEMOO',
+	SMARTSCHOOL = 'SMARTSCHOOL',
+	KLASCEMENT = 'KLASCEMENT',
+	VLAAMSEOVERHEID = 'VLAAMSEOVERHEID',
 }
 
 export enum Permission {
@@ -32,16 +36,71 @@ export enum Permission {
 	PUBLISH_ANY_CONTENT_PAGE = 'PUBLISH_ANY_CONTENT_PAGE',
 	UNPUBLISH_ANY_CONTENT_PAGE = 'UNPUBLISH_ANY_CONTENT_PAGE',
 	VIEW_ADMIN_DASHBOARD = 'VIEW_ADMIN_DASHBOARD',
+	EDIT_CONTENT_PAGE_LABELS = 'EDIT_CONTENT_PAGE_LABELS',
 }
 
-export interface User {
-	email: string;
-	firstName: string;
-	id: string;
-	lastName: string;
-	acceptedTosAt: string | null;
-	idp: Idp;
-	permissions: Permission[];
+export interface OrganizationContactInfo {
+	phone?: string;
+	website?: string;
+	email?: string;
+	logoUrl?: string;
+	form_url?: string;
+}
+
+export interface OrganizationData {
+	or_id: string;
+	cp_name: string;
+	category?: string;
+	sector?: string;
+	cp_name_catpro?: string;
+	description?: string;
+	contact_information: OrganizationContactInfo;
+	accountmanager?: string;
+}
+
+export interface OrganizationSchema {
+	or_id: string;
+	name?: string;
+	logo_url?: string;
+	description?: string;
+	website?: string;
+	data?: OrganizationData;
+}
+
+export interface UserTempAccess {
+	from?: string | null;
+	until?: string | null;
+}
+
+/**
+ * User model for both hetarchief and avo
+ */
+export interface CommonUser {
+	profileId: string;
+	email?: string;
+	firstName?: string;
+	lastName?: string;
+	fullName?: string;
+	acceptedTosAt?: string | null;
+	idp?: Idp;
+	permissions?: Permission[];
+	stamboek?: string;
+	organisation?: OrganizationSchema;
+	educational_organisations?: ClientEducationOrganization[];
+	subjects?: string[];
+	education_levels?: string[];
+	is_exception?: boolean;
+	business_category?: string;
+	created_at?: string;
+	userGroup?: string;
+	userId?: string;
+	uid?: string;
+	is_blocked?: boolean;
+	blocked_at?: string;
+	unblocked_at?: string;
+	last_access_at?: string;
+	temp_access?: UserTempAccess;
+	idps?: Idp[];
 }
 
 export type UserOverviewTableCol =
@@ -161,55 +220,4 @@ export interface DeleteContentCountsRaw {
 			count: number;
 		};
 	};
-}
-
-export interface UserSummaryView {
-	user_id: string;
-	full_name: string;
-	first_name: string;
-	last_name: string;
-	mail: string;
-	last_access_at: string | null;
-	user: {
-		temp_access: UserTempAccess | null;
-	};
-	is_blocked: boolean;
-	blocked_at: {
-		date: string;
-	};
-	unblocked_at: {
-		date: string;
-	};
-	profile_id: string;
-	stamboek: string | null;
-	acc_created_at: string;
-	role_id: number | null;
-	role_name: string | null;
-	group_id: number | null;
-	group_name: string | null;
-	company_name: string | null;
-	is_exception: boolean;
-	business_category: string | null;
-	idps: {
-		idp: string;
-	}[];
-	classifications: {
-		key: string;
-	}[];
-	contexts: {
-		key: string;
-	}[];
-	organisations: {
-		organization_id: string;
-		unit_id?: string;
-		organization?: {
-			ldap_description: string;
-		};
-	}[];
-}
-
-// TODO: use typings version
-export interface UserTempAccess {
-  from: string | null;
-  until: string | null;
 }

@@ -2,9 +2,9 @@ import { get } from 'lodash-es';
 
 import { CustomError } from './custom-error';
 
-import { User } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 
-export function getProfileId(user: User | undefined): string {
+export function getProfileId(user: CommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile id because the logged in user is undefined');
 	}

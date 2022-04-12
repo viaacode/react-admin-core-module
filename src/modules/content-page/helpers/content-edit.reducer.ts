@@ -1,6 +1,7 @@
 import { Draft, produce } from 'immer';
 import { cloneDeep, isEqual, isNil } from 'lodash-es';
 import moment from 'moment';
+import { Reducer } from 'react';
 
 import {
 	ContentBlockComponentsConfig,
@@ -135,7 +136,7 @@ const repositionConfigs = (updatedConfigs: ContentBlockConfig[]) => {
 };
 
 // Reducer
-export const contentEditReducer = produce(
+export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction> = produce(
 	(draft: Draft<ContentPageEditState>, action: ContentEditAction) => {
 		// Because we use immer, we have to mutate the draft state in place for it to work properly
 		// We don't have to return anything because our produce() will automagically do that for us
