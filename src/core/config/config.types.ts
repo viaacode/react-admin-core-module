@@ -2,7 +2,7 @@ import { TableSortingIcons } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
 import { ComponentType } from 'react';
 
-import { AvoOrHetArchief } from '../../modules/shared/types';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
@@ -32,7 +32,7 @@ export interface ConfigValue {
 	// Core module configurations
 	flowplayer: {
 		FLOW_PLAYER_TOKEN: string;
-		FLOW_PLAYER_ID: string
+		FLOW_PLAYER_ID: string;
 	};
 	navigation?: NavigationConfig;
 	contentPage?: ContentPageConfig;

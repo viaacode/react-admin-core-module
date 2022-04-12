@@ -44,6 +44,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@meemoo/react-components": "2.12.15",
     "@viaa/avo2-components": "1.83.3",
+    "@viaa/avo2-types": "2.36.1",
     "clsx": "1.1.1",
     "moment": "2.29.2",
     "date-fns": "^2.28.0",
