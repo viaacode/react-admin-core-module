@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "predemo:start": "copy-and-watch ../src/**/*.{ts,tsx,scss,css,woff} ../src/**/*.{ts,tsx,scss,css,woff} ./src/react-admin/",
+    "predemo:start": "rimraf ./src/react-admin && copy-and-watch ../src/**/*.{ts,tsx,scss,css,woff} ../src/**/*.{ts,tsx,scss,css,woff} ./src/react-admin/",
     "demo:start": "react-app-rewired start",
     "demo:build": "react-app-rewired build",
     "demo:test": "react-app-rewired test",
@@ -19,7 +19,7 @@
     "@types/node": "^16.11.22",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "@viaa/avo2-components": "1.83.3",
+    "@viaa/avo2-components": "1.83.4",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "1.1.1",

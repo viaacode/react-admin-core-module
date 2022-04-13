@@ -33,7 +33,7 @@ function setConfig() {
 					return [navItem];
 				},
 				getByPlacement: async () => [navItem],
-				getById: async (id) => {
+				getById: async () => {
 					return navItem;
 				},
 				delete: async () => null,
@@ -72,7 +72,10 @@ function setConfig() {
 		},
 		services: {
 			toastService: {
-				showToast: (toastInfo: ToastInfo) => {},
+				showToast: (toastInfo: ToastInfo) => {
+					// Client decides how the toast messages are shown
+					console.log('show toast: ', toastInfo);
+				},
 			},
 			i18n: I18n,
 			educationOrganisationService: {
@@ -92,15 +95,10 @@ function setConfig() {
 			FLOW_PLAYER_TOKEN: '',
 		},
 		handlers: {
-			onExternalLink: () => {},
+			onExternalLink: () => {
+				// Client decides what should happen when an external link is clicked
+			},
 		},
-	});
-}
-
-function registerRoutes() {
-	AdminCore.routes.register({
-		path: '/users',
-		component: () => <h1>Users</h1>,
 	});
 }
 
@@ -116,7 +114,6 @@ function renderApp() {
 async function bootstrapApp() {
 	await initI18n(proxyUrl);
 	setConfig();
-	registerRoutes();
 	renderApp();
 }
 
