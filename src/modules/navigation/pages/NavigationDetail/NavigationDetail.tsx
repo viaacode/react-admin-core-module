@@ -24,21 +24,20 @@ const NavigationDetail: FC = () => {
 	// const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const [navigationElements, setNavigationElements] = useState<NavigationElement[]>([]);
 
-	const getNavigationNameFromUrl = () => {
-		return Config.getConfig().services.router.getUrlParam('navigationName');
-	};
+	const history = Config.getConfig().services.router.useHistory();
+	const { navigationName } = Config.getConfig().services.router.useParams();
 
 	// Data
 
 	const queryClient = useQueryClient();
 	const { data: initialData, isLoading } = useGetNavigationByPlacement(
-		getNavigationNameFromUrl(),
+		navigationName,
 		{
 			onSuccess: (data) => setNavigationElements(data),
 		}
 	);
 	const invalidateNavigation = () =>
-		queryClient.invalidateQueries(NAVIGATION_QUERY_KEYS.list(getNavigationNameFromUrl()));
+		queryClient.invalidateQueries(NAVIGATION_QUERY_KEYS.list(navigationName));
 	const { mutate: deleteOne } = useDeleteNavigationElement({
 		onSuccess: invalidateNavigation,
 	});
@@ -51,7 +50,7 @@ const NavigationDetail: FC = () => {
 
 	const getEditLink = (navigationElementId: string) =>
 		NAVIGATION_PATHS.detailEdit
-			.replace(':navigationName', getNavigationNameFromUrl())
+			.replace(':navigationName', navigationName)
 			.replace(':navigationElementId', navigationElementId);
 
 	const onDeleteElement = (id: string) => {
@@ -88,12 +87,12 @@ const NavigationDetail: FC = () => {
 
 	if (!isLoading && !initialData?.length) {
 		// Navigate back to overview when there are no elements after fetch
-		Config.getConfig().services.router.push(NAVIGATION_PATHS.overview);
+		history.push(NAVIGATION_PATHS.overview);
 	}
 
 	const Link = Config.getConfig().services.router.Link;
 	return (
-		<AdminLayout pageTitle={startCase(getNavigationNameFromUrl())}>
+		<AdminLayout pageTitle={startCase(navigationName)}>
 			<AdminLayout.Actions>
 				<Link to={NAVIGATION_PATHS.overview}>
 					<Button label="Annuleer" tabIndex={-1} variants={['outline']} />
@@ -127,7 +126,7 @@ const NavigationDetail: FC = () => {
 					<Link
 						to={NAVIGATION_PATHS.detailCreate.replace(
 							':navigationName',
-							getNavigationNameFromUrl()
+							navigationName
 						)}
 					>
 						<Button

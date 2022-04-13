@@ -9,13 +9,7 @@ import { useGetNavigations } from '../../hooks';
 import { Config } from '~core/config';
 
 const NavigationElement: FC = () => {
-	const getNavigationNameFromUrl = () => {
-		return Config.getConfig().services.router.getUrlParam('navigationName');
-	};
-
-	const getNavigationElementIdFromUrl = () => {
-		return Config.getConfig().services.router.getUrlParam('navigationElementId');
-	};
+	const { navigationName, navigationElementId } = Config.getConfig().services.router.useParams();
 
 	const { data: navigations, isLoading } = useGetNavigations();
 	const placementOptions = useMemo(() => {
@@ -38,15 +32,15 @@ const NavigationElement: FC = () => {
 
 	// Computed
 
-	const cleanName = startCase(getNavigationNameFromUrl());
-	const isEditing = !!getNavigationElementIdFromUrl();
-	const pageTitle = !getNavigationNameFromUrl()
+	const cleanName = startCase(navigationName);
+	const isEditing = !!navigationElementId;
+	const pageTitle = !navigationName
 		? 'Navigatie toevoegen'
 		: isEditing
 		? `${cleanName}: item aanpassen`
 		: `${cleanName}: item toevoegen`;
-	const cancelLink = getNavigationNameFromUrl()
-		? NAVIGATION_PATHS.detail.replace(':navigationName', getNavigationNameFromUrl())
+	const cancelLink = navigationName
+		? NAVIGATION_PATHS.detail.replace(':navigationName', navigationName)
 		: NAVIGATION_PATHS.overview;
 	const Link = Config.getConfig().services.router.Link;
 

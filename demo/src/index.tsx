@@ -1,11 +1,13 @@
-import { AvoOrHetArchief } from '~modules/shared/types';
-import { ToastInfo } from '../../src/core/config';
+import { LinkInfo, ToastInfo } from '../../src/core/config';
 import { AdminCore } from './react-admin';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
 import I18n, { initI18n } from './translations/i18n';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import { AvoOrHetArchief } from '~modules/shared/types';
+import { ConfigValue } from '~core/config';
 
 const navItem = {
 	content_path: 'content_path',
@@ -24,6 +26,13 @@ const navItem = {
 };
 
 const proxyUrl = 'http://localhost:3100';
+
+const routerConfig: ConfigValue['services']['router'] = {
+	Link: Link as FunctionComponent<LinkInfo>,
+	useHistory: useHistory,
+	useLocation: useLocation,
+	useParams: useParams,
+};
 
 function setConfig() {
 	AdminCore.config.setConfig({
@@ -83,6 +92,7 @@ function setConfig() {
 				fetchCities: () => Promise.resolve([]),
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
+			router: routerConfig as any,
 		},
 		database: {
 			databaseApplicationType: AvoOrHetArchief.hetArchief,

@@ -62,10 +62,6 @@ import { UserProps } from '~modules/shared/types';
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
 const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
-	const getContentPageIdFromUrl = () => {
-		return Config.getConfig().services.router.getUrlParam('id');
-	};
-
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -82,6 +78,8 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
 	const { t } = useTranslation();
+	const history = Config.getConfig().services.router.useHistory();
+	const { id } = Config.getConfig().services.router.useParams();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
@@ -93,7 +91,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 
 	const fetchContentPage = useCallback(async () => {
 		try {
-			if (isNil(getContentPageIdFromUrl())) {
+			if (isNil(id)) {
 				return;
 			}
 			if (
@@ -109,9 +107,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 				});
 				return;
 			}
-			const contentPageObj = await ContentPageService.getContentPageById(
-				getContentPageIdFromUrl()
-			);
+			const contentPageObj = await ContentPageService.getContentPageById(id);
 			if (
 				!hasPerm(Permission.EDIT_ANY_CONTENT_PAGES) &&
 				contentPageObj.user_profile_id !== getProfileId(user)
@@ -135,7 +131,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to load content page', err, {
-					id: getContentPageIdFromUrl(),
+					id,
 				})
 			);
 			Config.getConfig().services.toastService.showToast({
@@ -208,7 +204,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 	}, [onPasteContentBlock]);
 
 	// Computed
-	const pageType = getContentPageIdFromUrl() ? PageType.Edit : PageType.Create;
+	const pageType = id ? PageType.Edit : PageType.Create;
 	let pageTitle = t('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
 		pageTitle = `${t('admin/content/views/content-edit___content-aanpassen')}: ${get(
@@ -326,11 +322,11 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 				};
 				insertedOrUpdatedContent = await ContentPageService.insertContentPage(contentBody);
 			} else {
-				if (!isNil(getContentPageIdFromUrl())) {
+				if (!isNil(id)) {
 					const contentBody = {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
-						id: parseInt(getContentPageIdFromUrl(), 10),
+						id: parseInt(id, 10),
 						contentBlockConfigs: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo
@@ -345,7 +341,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 						'failed to update content page because the id is undefined',
 						null,
 						{
-							id: getContentPageIdFromUrl(),
+							id,
 							contentPageInfo: contentPageState.currentContentPageInfo,
 						}
 					);
@@ -391,7 +387,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 				),
 				type: ToastType.ERROR,
 			});
-			navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
+			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -463,9 +459,9 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 		} else {
-			navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id: getContentPageIdFromUrl() });
+			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, { id });
 		}
 	};
 

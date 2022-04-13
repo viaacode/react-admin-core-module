@@ -56,7 +56,7 @@ import {
 import { getFullName } from '~modules/shared/helpers/formatters/avatar';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
-import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
+import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { AdminLayout } from '~modules/shared/layouts';
@@ -94,6 +94,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
 	const { t } = useTranslation();
+	const history = Config.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
 		return contentTypes.map(
@@ -279,7 +280,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 
 	function handlePreviewClicked(page: ContentPageInfo) {
 		if (page && page.path) {
-			navigateToAbsoluteOrRelativeUrl(page.path, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
 				title: t(
@@ -391,14 +392,17 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 			case 'actions':
 				return (
 					<ButtonToolbar>
-						<Button
-							icon="info"
-							onClick={() => navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })}
-							size="small"
-							title={t('admin/content/views/content-overview___bekijk-content')}
-							ariaLabel={t('admin/content/views/content-overview___bekijk-content')}
-							type="secondary"
-						/>
+						<Link to={buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })}>
+							<Button
+								icon="info"
+								size="small"
+								title={t('admin/content/views/content-overview___bekijk-content')}
+								ariaLabel={t(
+									'admin/content/views/content-overview___bekijk-content'
+								)}
+								type="secondary"
+							/>
+						</Link>
 						<Button
 							icon="eye"
 							onClick={() => handlePreviewClicked(rowData)}
@@ -422,14 +426,17 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 							type="secondary"
 							disabled
 						/>
-						<Button
-							icon="edit"
-							onClick={() => navigate(CONTENT_PATH.CONTENT_PAGE_EDIT, { id })}
-							size="small"
-							title={t('admin/content/views/content-overview___pas-content-aan')}
-							ariaLabel={t('admin/content/views/content-overview___pas-content-aan')}
-							type="secondary"
-						/>
+						<Link to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, { id })}>
+							<Button
+								icon="edit"
+								size="small"
+								title={t('admin/content/views/content-overview___pas-content-aan')}
+								ariaLabel={t(
+									'admin/content/views/content-overview___pas-content-aan'
+								)}
+								type="secondary"
+							/>
+						</Link>
 						{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 							<Button
 								icon="delete"
@@ -538,21 +545,19 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 		);
 	};
 
+	const Link = Config.getConfig().services.router.Link;
 	return (
 		<AdminLayout pageTitle={t('admin/content/views/content-overview___content-overzicht')}>
 			<AdminLayout.Actions>
 				{hasPerm(CREATE_CONTENT_PAGES) && (
-					<Button
-						label={t('admin/content/views/content-overview___content-toevoegen')}
-						title={t(
-							'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
-						)}
-						onClick={() =>
-							Config.getConfig().services.router.push(
-								CONTENT_PATH.CONTENT_PAGE_CREATE
-							)
-						}
-					/>
+					<Link to={CONTENT_PATH.CONTENT_PAGE_CREATE}>
+						<Button
+							label={t('admin/content/views/content-overview___content-toevoegen')}
+							title={t(
+								'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
+							)}
+						/>
+					</Link>
 				)}
 			</AdminLayout.Actions>
 			<AdminLayout.Content>

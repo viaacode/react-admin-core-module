@@ -36,6 +36,8 @@ export interface LinkInfo {
 	children: ReactNode;
 }
 
+export type History = ReturnType<ConfigValue['services']['router']['useHistory']>;
+
 export interface ConfigValue {
 	// Core module configurations
 	flowplayer: {
@@ -50,17 +52,19 @@ export interface ConfigValue {
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
 		router: {
-			// Adds a new route to the browser history, just like history.push()
-			push: (_path: string) => void;
+			// Function that returns a history like object with functions push and replace
+			useHistory: () => {
+				push: (path: string) => void;
+				replace: (path: string) => void;
+			};
 
-			// Replaces the last route in the browser history, just like history.replace()
-			replace: (_path: string) => void;
+			// Function that returns a location like object with a search string property
+			useLocation: () => {
+				search: string;
+			};
 
-			// Returns a query param by name, just like match.params[paramName]
-			getUrlParam: (paramName: string) => string;
-
-			// Returns the query params string, just like location.search
-			getQueryParams: () => string;
+			// Function that returns the params for the current url
+			useParams: () => Record<string, string>;
 
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;

@@ -60,12 +60,10 @@ const {
 } = Permission;
 
 const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
-	const getContentPageIdFromUrl = () => {
-		return Config.getConfig().services.router.getUrlParam('id');
-	};
-
 	// Hooks
 	const { t } = useTranslation();
+	const history = Config.getConfig().services.router.useHistory();
+	const { id } = Config.getConfig().services.router.useParams();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -101,9 +99,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 				});
 				return;
 			}
-			const contentPageObj = await ContentPageService.getContentPageById(
-				getContentPageIdFromUrl()
-			);
+			const contentPageObj = await ContentPageService.getContentPageById(id);
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
@@ -120,7 +116,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 				new CustomError('Failed to get content page by id', err, {
 					query: 'GET_CONTENT_PAGE_BY_ID',
 					variables: {
-						id: getContentPageIdFromUrl(),
+						id,
 					},
 				})
 			);
@@ -137,7 +133,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 				icon: notFound ? 'search' : 'alert-triangle',
 			});
 		}
-	}, [setContentPageInfo, setLoadingInfo, user, t]);
+	}, [id, setContentPageInfo, setLoadingInfo, user, t]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -153,9 +149,9 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 
 	const handleDelete = async () => {
 		try {
-			await softDeleteContentPage(getContentPageIdFromUrl());
+			await softDeleteContentPage(id);
 
-			Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
@@ -177,7 +173,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
-			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Error'),
@@ -288,7 +284,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 						return;
 					}
 
-					Config.getConfig().services.router.push(
+					history.push(
 						buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 							id: duplicateContentPage.id,
 						})
@@ -363,7 +359,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 				{isAllowedToEdit && (
 					<Link
 						to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, {
-							i: getContentPageIdFromUrl(),
+							id,
 						})}
 						className="a-link__no-styles"
 					>
