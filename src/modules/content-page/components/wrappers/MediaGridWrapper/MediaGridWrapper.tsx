@@ -7,7 +7,6 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 
 import { ContentPageService } from '../../../services/content-page.service';
 import {
@@ -39,9 +38,7 @@ interface MediaGridWrapperProps extends MediaGridBlockState {
 	ctaButtonAltTitle?: string;
 }
 
-const MediaGridWrapper: FunctionComponent<
-	MediaGridWrapperProps & RouteComponentProps & UserProps
-> = ({
+const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & UserProps> = ({
 	title,
 	buttonLabel,
 	buttonAltTitle,
@@ -66,9 +63,6 @@ const MediaGridWrapper: FunctionComponent<
 	results,
 	user,
 	renderLink,
-	history,
-	location,
-	match,
 }) => {
 	const { t } = useTranslation();
 
@@ -237,9 +231,6 @@ const MediaGridWrapper: FunctionComponent<
 					verticalLayout
 					showTitle
 					collapseDescription={false}
-					history={history}
-					location={location}
-					match={match}
 				/>
 			)
 		);

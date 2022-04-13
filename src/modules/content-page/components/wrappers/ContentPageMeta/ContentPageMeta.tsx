@@ -1,7 +1,6 @@
 import { Button } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactNode } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { getPublishedDate } from '../../../helpers/get-published-state';
 
@@ -15,17 +14,14 @@ export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;
 }
 
-const ContentPageMeta: FunctionComponent<ContentPageMetaProps & RouteComponentProps> = ({
-	contentPageInfo,
-	history,
-}) => {
+const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageInfo }) => {
 	const { t } = useTranslation();
 
 	const renderLabel = (labelObj: Partial<Avo.ContentPage.Label>) => {
 		return (labelObj as any).link_to ? (
 			<Button
 				type="inline-link"
-				onClick={() => navigateToContentType((labelObj as any).link_to, history)}
+				onClick={() => navigateToContentType((labelObj as any).link_to)}
 				key={`label-link-${labelObj.label}`}
 			>
 				{labelObj.label}
@@ -83,4 +79,4 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps & RouteComponentPr
 	);
 };
 
-export default withRouter(ContentPageMeta) as unknown as FunctionComponent<ContentPageMetaProps>;
+export default ContentPageMeta;

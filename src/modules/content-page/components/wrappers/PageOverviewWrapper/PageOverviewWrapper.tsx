@@ -9,7 +9,6 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { cloneDeep, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
 import {
@@ -67,9 +66,7 @@ interface PageOverviewWrapperProps {
 	renderLink: RenderLinkFunction;
 }
 
-const PageOverviewWrapper: FunctionComponent<
-	PageOverviewWrapperProps & UserProps & RouteComponentProps
-> = ({
+const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps & UserProps> = ({
 	contentTypeAndTabs = {
 		selectedContentType: 'PROJECT',
 		selectedLabels: null,

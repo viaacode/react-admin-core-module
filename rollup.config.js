@@ -14,31 +14,31 @@ export default (cliArgs) => {
 			output: [
 				{
 					dir: 'dist/esm',
-					format: 'esm'
+					format: 'esm',
 				},
 				{
 					dir: 'dist/cjs',
-					format: 'cjs'
-				}
+					format: 'cjs',
+				},
 			],
 			plugins: [
 				postcss({
 					extensions: ['.scss', '.css'],
 					plugins: [autoprefixer()],
-					minimize: true
+					minimize: true,
 				}),
 				typescript({
 					clean: true,
 					check: true,
-					tsconfig: './tsconfig.build.json'
+					tsconfig: './tsconfig.build.json',
 				}),
 				commonjs(),
 				terser(),
 				visualizer({
 					open: cliArgs['config-analyze'],
 					filename: 'bundle-stats.html',
-					title: '@meemoo/react-admin | Rollup Visualizer'
-				})
+					title: '@meemoo/react-admin | Rollup Visualizer',
+				}),
 			],
 			external: [
 				'@hookform/resolvers/yup',
@@ -59,12 +59,10 @@ export default (cliArgs) => {
 				'react-dom',
 				'react-hook-form',
 				'react-query',
-				'react-router',
-				'react-router-dom',
 				'react',
 				'rxjs/operators',
-				'yup'
-			]
-		}
+				'yup',
+			],
+		},
 	];
 };

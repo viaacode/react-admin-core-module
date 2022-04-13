@@ -11,7 +11,6 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;
@@ -24,9 +23,10 @@ interface ProjectSpotlightWrapperProps {
 	renderLink: RenderLinkFunction;
 }
 
-const ProjectSpotlightWrapper: FunctionComponent<
-	ProjectSpotlightWrapperProps & DefaultSecureRouteProps
-> = ({ elements, renderLink }) => {
+const ProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
+	elements,
+	renderLink,
+}) => {
 	const { t } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });

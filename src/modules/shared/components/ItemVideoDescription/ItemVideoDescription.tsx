@@ -19,7 +19,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
 import { Scrollbar } from 'react-scrollbars-custom';
 
 import { Color } from '~modules/content-page/types/content-block.types';
@@ -30,6 +29,7 @@ import { parseDuration } from '~modules/shared/helpers/parsers/duration';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ItemVideoDescription.scss';
+import { Config } from '~core/config';
 
 export interface CuePoints {
 	start: number | null;
@@ -56,7 +56,7 @@ interface ItemVideoDescriptionProps {
 
 const DEFAULT_VIDEO_HEIGHT = 421;
 
-const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteComponentProps> = ({
+const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps> = ({
 	itemMetaData,
 	showTitle = false,
 	showDescription = true,
@@ -70,7 +70,6 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteC
 	canPlay = true,
 	verticalLayout = false,
 	titleLink,
-	location,
 	onPlay,
 }) => {
 	const TIMESTAMP_REGEX = /([0-9]{2}:[0-9]{2}:[0-9]{2})/g;
@@ -85,10 +84,10 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteC
 	useEffect(() => {
 		// Set video current time from the query params once the video has loaded its meta data
 		// If this happens sooner, the time will be ignored by the video player
-		const queryParams = parse(location.search);
+		const queryParams = parse(Config.getConfig().services.router.getQueryParams());
 
 		setTime(parseInt((queryParams.time as string) || String(seekTime || 0), 10));
-	}, [location.search, setTime, seekTime]);
+	}, [setTime, seekTime]);
 
 	useEffect(() => {
 		if (seekTime) {
@@ -166,6 +165,8 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps & RouteC
 	};
 
 	const renderTitle = () => {
+		const Link = Config.getConfig().services.router.Link;
+
 		const titleElement = (
 			<BlockHeading
 				type="h3"

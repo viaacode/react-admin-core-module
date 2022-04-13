@@ -9,7 +9,6 @@ import React, {
 	useState,
 } from 'react';
 
-import { withRouter } from 'react-router';
 import { Config, ToastType } from '~core/config';
 import ContentEditForm from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
@@ -53,21 +52,19 @@ import { validateContentBlockField } from '~modules/shared/helpers/validation';
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserProps } from '~modules/shared/types';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
-const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }>> = ({
-	history,
-	match,
-	user,
-}) => {
-	const { id } = match.params;
+const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
+	const getContentPageIdFromUrl = () => {
+		return Config.getConfig().services.router.getUrlParam('id');
+	};
 
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
@@ -96,7 +93,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 
 	const fetchContentPage = useCallback(async () => {
 		try {
-			if (isNil(id)) {
+			if (isNil(getContentPageIdFromUrl())) {
 				return;
 			}
 			if (
@@ -112,7 +109,9 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				});
 				return;
 			}
-			const contentPageObj = await ContentPageService.getContentPageById(id);
+			const contentPageObj = await ContentPageService.getContentPageById(
+				getContentPageIdFromUrl()
+			);
 			if (
 				!hasPerm(Permission.EDIT_ANY_CONTENT_PAGES) &&
 				contentPageObj.user_profile_id !== getProfileId(user)
@@ -134,7 +133,11 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				},
 			});
 		} catch (err) {
-			console.error(new CustomError('Failed to load content page', err, { id }));
+			console.error(
+				new CustomError('Failed to load content page', err, {
+					id: getContentPageIdFromUrl(),
+				})
+			);
 			Config.getConfig().services.toastService.showToast({
 				title: t('Error'),
 				description: t(
@@ -143,7 +146,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, user, hasPerm, t]);
+	}, [user, hasPerm, t]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
@@ -205,7 +208,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 	}, [onPasteContentBlock]);
 
 	// Computed
-	const pageType = id ? PageType.Edit : PageType.Create;
+	const pageType = getContentPageIdFromUrl() ? PageType.Edit : PageType.Create;
 	let pageTitle = t('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
 		pageTitle = `${t('admin/content/views/content-edit___content-aanpassen')}: ${get(
@@ -323,11 +326,11 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				};
 				insertedOrUpdatedContent = await ContentPageService.insertContentPage(contentBody);
 			} else {
-				if (!isNil(id)) {
+				if (!isNil(getContentPageIdFromUrl())) {
 					const contentBody = {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
-						id: parseInt(id, 10),
+						id: parseInt(getContentPageIdFromUrl(), 10),
 						contentBlockConfigs: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo
@@ -342,7 +345,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 						'failed to update content page because the id is undefined',
 						null,
 						{
-							id,
+							id: getContentPageIdFromUrl(),
 							contentPageInfo: contentPageState.currentContentPageInfo,
 						}
 					);
@@ -388,7 +391,7 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 				),
 				type: ToastType.ERROR,
 			});
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
+			navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -460,9 +463,9 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 		} else {
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, { id });
+			navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id: getContentPageIdFromUrl() });
 		}
 	};
 
@@ -607,4 +610,4 @@ const ContentPageEdit: FunctionComponent<DefaultSecureRouteProps<{ id?: string }
 	);
 };
 
-export default withRouter(ContentPageEdit);
+export default ContentPageEdit;

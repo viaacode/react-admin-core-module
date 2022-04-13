@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { fromPairs, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Config } from '~core/config';
 import { BUNDLE_PATH } from '../../consts/bundle.const';
@@ -34,6 +33,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			fullUrl = `//${url}`;
 		}
 
+		const Link = Config.getConfig().services.router.Link;
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab

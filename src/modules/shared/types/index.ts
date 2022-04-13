@@ -9,7 +9,7 @@ export type ReactSelectOption<T = any> = {
 };
 
 export interface UserProps {
-	user: CommonUser | undefined;
+	user: CommonUser;
 }
 
 export enum AvoOrHetArchief {

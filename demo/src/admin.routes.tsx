@@ -1,13 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router';
-import { renderAdminDashboardRoutes } from './admin/dashboard/dashboard.routes';
 import { renderAdminContentPageRoutes } from './modules/content-page/content.routes';
 import { CommonUser } from './react-admin/modules/user/user.types';
 
 export const renderAdminRoutes = (user: CommonUser) => {
 	return (
 		<Switch>
-			{renderAdminDashboardRoutes()}
 			{/*{renderWithPermissions(renderAdminUserRoutes, [Permission.VIEW_USERS])}*/}
 			{/*{renderWithPermissions(renderAdminUserGroupRoutes, [Permission.EDIT_USER_GROUPS])}*/}
 			{/*{renderWithPermissions(renderAdminPermissionGroupRoutes, [*/}

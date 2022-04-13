@@ -1,10 +1,8 @@
 import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { History } from 'history';
 import { fromPairs, get, isArray, isEmpty, isNil, isString, map, noop } from 'lodash-es';
 import { stringify } from 'query-string';
 import React, { Fragment, ReactElement, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
@@ -48,7 +46,6 @@ export const buildLink = (
 };
 
 export const navigate = (
-	history: History,
 	route: string,
 	params: RouteParams = {},
 	search?: string | { [paramName: string]: string }
@@ -86,15 +83,11 @@ export const navigate = (
 		return;
 	}
 
-	history.push(builtLink);
+	Config.getConfig().services.router.push(builtLink);
 };
 
 // TODO see if we can replace this method completely by the new SmartLink component
-export function navigateToAbsoluteOrRelativeUrl(
-	url: string,
-	history: History,
-	target: LinkTarget = LinkTarget.Self
-) {
+export function navigateToAbsoluteOrRelativeUrl(url: string, target: LinkTarget = LinkTarget.Self) {
 	let fullUrl = url;
 	if (url.startsWith('www.')) {
 		fullUrl = `//${url}`;
@@ -106,7 +99,7 @@ export function navigateToAbsoluteOrRelativeUrl(
 				window.location.href = fullUrl;
 			} else {
 				// relative url
-				history.push(fullUrl);
+				Config.getConfig().services.router.push(fullUrl);
 			}
 			break;
 
@@ -135,7 +128,7 @@ export const generateSmartLink = (
 	);
 };
 
-export const navigateToContentType = (action: ButtonAction, history: History) => {
+export const navigateToContentType = (action: ButtonAction) => {
 	if (action) {
 		const { type, value, target } = action;
 
@@ -149,14 +142,14 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			case 'INTERNAL_LINK':
 			case 'CONTENT_PAGE':
 			case 'PROJECTS':
-				navigateToAbsoluteOrRelativeUrl(String(value), history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(String(value), resolvedTarget);
 				break;
 
 			case 'COLLECTION': {
 				const collectionUrl = buildLink(APP_PATH.COLLECTION_DETAIL.route, {
 					id: value as string,
 				});
-				navigateToAbsoluteOrRelativeUrl(collectionUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(collectionUrl, resolvedTarget);
 				break;
 			}
 
@@ -164,7 +157,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const itemUrl = buildLink(APP_PATH.ITEM_DETAIL.route, {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(itemUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(itemUrl, resolvedTarget);
 				break;
 			}
 
@@ -172,7 +165,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const bundleUrl = buildLink(BUNDLE_PATH.BUNDLE_DETAIL, {
 					id: value,
 				});
-				navigateToAbsoluteOrRelativeUrl(bundleUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(bundleUrl, resolvedTarget);
 				break;
 			}
 
@@ -181,7 +174,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 					'{{PROXY_URL}}',
 					Config.getConfig().database.proxyUrl || ''
 				);
-				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
+				navigateToAbsoluteOrRelativeUrl(externalUrl, resolvedTarget);
 				break;
 			}
 
@@ -189,14 +182,13 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				const urlWithoutQueryOrAnchor = window.location.href.split('?')[0].split('#')[0];
 				navigateToAbsoluteOrRelativeUrl(
 					`${urlWithoutQueryOrAnchor}#${value}`,
-					history,
 					resolvedTarget
 				);
 				break;
 			}
 
 			case 'FILE':
-				navigateToAbsoluteOrRelativeUrl(value as string, history, LinkTarget.Blank);
+				navigateToAbsoluteOrRelativeUrl(value as string, LinkTarget.Blank);
 				break;
 
 			case 'SEARCH_QUERY': {
@@ -214,7 +206,6 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 							)
 						)
 					),
-					history,
 					resolvedTarget
 				);
 				break;
@@ -250,6 +241,7 @@ export function generateSearchLink(
 	className = '',
 	onClick: () => void = noop
 ) {
+	const Link = Config.getConfig().services.router.Link;
 	return filterValue ? (
 		<Link
 			className={className}
@@ -259,7 +251,7 @@ export function generateSearchLink(
 			{filterValue}
 		</Link>
 	) : (
-		<Fragment />
+		<></>
 	);
 }
 

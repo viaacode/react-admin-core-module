@@ -39,7 +39,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
 import { KeyCode } from '../../consts/keycode';
@@ -86,7 +85,7 @@ const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {
 	MultiEducationalOrganisationSelectModal: CheckboxListParam,
 };
 
-interface FilterTableProps extends RouteComponentProps {
+interface FilterTableProps {
 	data: any[];
 	dataCount: number;
 	itemsPerPage: number;
@@ -508,7 +507,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	);
 };
 
-export default withRouter(FilterTable);
+export default FilterTable;
 
 export function getFilters(tableState: any | undefined): any {
 	if (!tableState) {
@@ -523,12 +522,12 @@ export function getFilters(tableState: any | undefined): any {
 
 // Removes all props where the value is undefined, null, [], {}, ''
 export function cleanupObject(obj: any): any {
-  return omitBy(
-    obj,
-    (value: any) =>
-      isNil(value) ||
-      (isString(value) && !value.length) ||
-      ((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
-      (isPlainObject(value) && value.gte === '' && value.lte === '')
-  );
+	return omitBy(
+		obj,
+		(value: any) =>
+			isNil(value) ||
+			(isString(value) && !value.length) ||
+			((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
+			(isPlainObject(value) && value.gte === '' && value.lte === '')
+	);
 }

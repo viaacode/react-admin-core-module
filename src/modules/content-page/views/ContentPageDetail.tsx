@@ -7,8 +7,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 
 import {
 	Blankslate,
@@ -30,10 +28,7 @@ import {
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import {
-	ContentPageDetailParams,
-	ContentPageInfo,
-} from '~modules/content-page/types/content-pages.types';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import {
@@ -49,7 +44,6 @@ import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { UserProps } from '~modules/shared/types';
-import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { SpecialUserGroup } from '~modules/user-group/user-group.const';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -65,10 +59,10 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FunctionComponent<
-	DefaultSecureRouteProps<ContentPageDetailParams> & UserProps
-> = ({ history, match, user }) => {
-	const { id } = match.params;
+const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
+	const getContentPageIdFromUrl = () => {
+		return Config.getConfig().services.router.getUrlParam('id');
+	};
 
 	// Hooks
 	const { t } = useTranslation();
@@ -107,7 +101,9 @@ const ContentPageDetail: FunctionComponent<
 				});
 				return;
 			}
-			const contentPageObj = await ContentPageService.getContentPageById(id);
+			const contentPageObj = await ContentPageService.getContentPageById(
+				getContentPageIdFromUrl()
+			);
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
@@ -124,7 +120,7 @@ const ContentPageDetail: FunctionComponent<
 				new CustomError('Failed to get content page by id', err, {
 					query: 'GET_CONTENT_PAGE_BY_ID',
 					variables: {
-						id,
+						id: getContentPageIdFromUrl(),
 					},
 				})
 			);
@@ -141,7 +137,7 @@ const ContentPageDetail: FunctionComponent<
 				icon: notFound ? 'search' : 'alert-triangle',
 			});
 		}
-	}, [setContentPageInfo, setLoadingInfo, user, t, id]);
+	}, [setContentPageInfo, setLoadingInfo, user, t]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -157,9 +153,9 @@ const ContentPageDetail: FunctionComponent<
 
 	const handleDelete = async () => {
 		try {
-			await softDeleteContentPage(id);
+			await softDeleteContentPage(getContentPageIdFromUrl());
 
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
@@ -181,7 +177,7 @@ const ContentPageDetail: FunctionComponent<
 
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
-			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Error'),
@@ -292,7 +288,7 @@ const ContentPageDetail: FunctionComponent<
 						return;
 					}
 
-					history.push(
+					Config.getConfig().services.router.push(
 						buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 							id: duplicateContentPage.id,
 						})
@@ -333,6 +329,7 @@ const ContentPageDetail: FunctionComponent<
 		const isOwner = get(user, 'profile.id') === contentPageOwner;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
+		const Link = Config.getConfig().services.router.Link;
 
 		return (
 			<ButtonToolbar>
@@ -365,7 +362,9 @@ const ContentPageDetail: FunctionComponent<
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, { id })}
+						to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, {
+							i: getContentPageIdFromUrl(),
+						})}
 						className="a-link__no-styles"
 					>
 						<Button
@@ -470,4 +469,4 @@ const ContentPageDetail: FunctionComponent<
 	);
 };
 
-export default withRouter(ContentPageDetail);
+export default ContentPageDetail;

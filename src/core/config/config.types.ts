@@ -1,6 +1,6 @@
 import { TableSortingIcons } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
-import { ComponentType } from 'react';
+import { ComponentType, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import { AvoOrHetArchief } from '~modules/shared/types';
 
@@ -28,6 +28,14 @@ export interface I18n {
 	t: (translationKey: string, variables?: Record<string, string>) => string;
 }
 
+export interface LinkInfo {
+	className?: string;
+	to?: string;
+	onClick?: (evt: MouseEvent) => void;
+	title?: string;
+	children: ReactNode;
+}
+
 export interface ConfigValue {
 	// Core module configurations
 	flowplayer: {
@@ -41,6 +49,22 @@ export interface ConfigValue {
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
+		router: {
+			// Adds a new route to the browser history, just like history.push()
+			push: (_path: string) => void;
+
+			// Replaces the last route in the browser history, just like history.replace()
+			replace: (_path: string) => void;
+
+			// Returns a query param by name, just like match.params[paramName]
+			getUrlParam: (paramName: string) => string;
+
+			// Returns the query params string, just like location.search
+			getQueryParams: () => string;
+
+			// A link component, just like <Link to="">click here</Link>
+			Link: FunctionComponent<LinkInfo>;
+		};
 	};
 	components: {
 		loader: {

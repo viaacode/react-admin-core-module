@@ -2,7 +2,6 @@ import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -29,9 +28,7 @@ type ContentPageDetailProps =
 	  }
 	| { path: string };
 
-const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps & RouteComponentProps> = (
-	props
-) => {
+const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (props) => {
 	const { t } = useTranslation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -180,9 +177,6 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps & RouteC
 										'preview'
 									)
 								}
-								history={props.history}
-								location={props.location}
-								match={props.match}
 								user={props.user}
 							/>
 						);
@@ -201,4 +195,4 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps & RouteC
 	);
 };
 
-export default withRouter(ContentPage);
+export default ContentPage;

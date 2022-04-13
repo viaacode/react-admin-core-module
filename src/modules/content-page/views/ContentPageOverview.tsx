@@ -17,8 +17,6 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import FilterTable, {
@@ -63,13 +61,11 @@ import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-chec
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { AdminLayout } from '~modules/shared/layouts';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { DefaultSecureRouteProps } from '~modules/shared/types/secure-route.types';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { UserProps } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
-
-type ContentPageOverviewProps = DefaultSecureRouteProps;
 
 const {
 	EDIT_ANY_CONTENT_PAGES,
@@ -78,7 +74,7 @@ const {
 	CREATE_CONTENT_PAGES,
 } = Permission;
 
-const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ history, user }) => {
+const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	// Hooks
 	const [contentPages, setContentPages] = useState<ContentPageInfo[] | null>(null);
 	const [contentPageCount, setContentPageCount] = useState<number>(0);
@@ -283,7 +279,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 
 	function handlePreviewClicked(page: ContentPageInfo) {
 		if (page && page.path) {
-			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(page.path, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
 				title: t(
@@ -300,6 +296,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 	// Render
 	const renderTableCell = (rowData: any, columnId: ContentOverviewTableCols): ReactNode => {
 		const { id, profile, title } = rowData;
+		const Link = Config.getConfig().services.router.Link;
 
 		switch (columnId) {
 			case 'title':
@@ -396,9 +393,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 					<ButtonToolbar>
 						<Button
 							icon="info"
-							onClick={() =>
-								navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })
-							}
+							onClick={() => navigate(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })}
 							size="small"
 							title={t('admin/content/views/content-overview___bekijk-content')}
 							ariaLabel={t('admin/content/views/content-overview___bekijk-content')}
@@ -429,9 +424,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 						/>
 						<Button
 							icon="edit"
-							onClick={() =>
-								navigate(history, CONTENT_PATH.CONTENT_PAGE_EDIT, { id })
-							}
+							onClick={() => navigate(CONTENT_PATH.CONTENT_PAGE_EDIT, { id })}
 							size="small"
 							title={t('admin/content/views/content-overview___pas-content-aan')}
 							ariaLabel={t('admin/content/views/content-overview___pas-content-aan')}
@@ -482,7 +475,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 		// 				title={t(
 		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 		// 				)}
-		// 				onClick={() => history.push(CONTENT_PATH.CONTENT_PAGE_CREATE)}
+		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_CREATE)}
 		// 			/>
 		// 		</Spacer>
 		// 	)}
@@ -554,7 +547,11 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 						title={t(
 							'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 						)}
-						onClick={() => history.push(CONTENT_PATH.CONTENT_PAGE_CREATE)}
+						onClick={() =>
+							Config.getConfig().services.router.push(
+								CONTENT_PATH.CONTENT_PAGE_CREATE
+							)
+						}
 					/>
 				)}
 			</AdminLayout.Actions>
@@ -569,4 +566,4 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ hist
 	);
 };
 
-export default withRouter(ContentPageOverview);
+export default ContentPageOverview;

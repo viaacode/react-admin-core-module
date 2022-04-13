@@ -2,7 +2,6 @@ import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/content-block.consts';
 import { Color, ContentBlockConfig } from '../../types/content-block.types';
@@ -37,9 +36,13 @@ enum ContentWidthMap {
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const ContentBlockPreview: FunctionComponent<
-	ContentBlockPreviewProps & UserProps & RouteComponentProps
-> = ({ contentBlockConfig, contentPageInfo, onClick = noop, className, user }) => {
+const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps & UserProps> = ({
+	contentBlockConfig,
+	contentPageInfo,
+	onClick = noop,
+	className,
+	user,
+}) => {
 	const blockState = get(contentBlockConfig, 'block.state');
 	const componentState = get(contentBlockConfig, 'components.state');
 	const containerSize = ContentWidthMap[contentPageInfo.content_width || 'REGULAR'];
