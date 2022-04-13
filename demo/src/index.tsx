@@ -1,11 +1,11 @@
-import { LinkInfo, ToastInfo } from '../../src/core/config';
+import { LinkInfo, ToastInfo } from '~core/config/config.types';
 import { AdminCore } from './react-admin';
 import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
 import I18n, { initI18n } from './translations/i18n';
-import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { ConfigValue } from '~core/config';
 
@@ -30,7 +30,6 @@ const proxyUrl = 'http://localhost:3100';
 const routerConfig: ConfigValue['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
 	useHistory: useHistory,
-	useLocation: useLocation,
 	useParams: useParams,
 };
 

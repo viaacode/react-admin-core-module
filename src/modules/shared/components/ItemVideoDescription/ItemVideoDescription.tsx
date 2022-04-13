@@ -78,15 +78,13 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps> = ({
 
 	const { t } = useTranslation();
 
-	const { search } = Config.getConfig().services.router.useLocation();
-
 	const [time, setTime] = useState<number>(seekTime);
 	const [videoHeight, setVideoHeight] = useState<number>(DEFAULT_VIDEO_HEIGHT); // correct height for desktop screens
 
 	useEffect(() => {
 		// Set video current time from the query params once the video has loaded its meta data
 		// If this happens sooner, the time will be ignored by the video player
-		const queryParams = parse(search);
+		const queryParams = parse(location.search);
 
 		setTime(parseInt((queryParams.time as string) || String(seekTime || 0), 10));
 	}, [setTime, seekTime]);

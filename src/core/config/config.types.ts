@@ -58,11 +58,6 @@ export interface ConfigValue {
 				replace: (path: string) => void;
 			};
 
-			// Function that returns a location like object with a search string property
-			useLocation: () => {
-				search: string;
-			};
-
 			// Function that returns the params for the current url
 			useParams: () => Record<string, string>;
 

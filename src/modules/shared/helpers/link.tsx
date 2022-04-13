@@ -3,7 +3,6 @@ import { Avo } from '@viaa/avo2-types';
 import { fromPairs, get, isArray, isEmpty, isNil, isString, map, noop } from 'lodash-es';
 import { stringify } from 'query-string';
 import React, { Fragment, ReactElement, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
@@ -249,6 +248,7 @@ export function generateSearchLink(
 	className = '',
 	onClick: () => void = noop
 ) {
+	const Link = Config.getConfig().services.router.Link;
 	return filterValue ? (
 		<Link
 			className={className}
