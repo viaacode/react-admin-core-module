@@ -407,9 +407,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 											return null;
 									}
 								})}
-								{!!bulkActions && !!bulkActions.length && (
+								{!!bulkActions && !!bulkActions?.length && (
 									<Select
-										options={bulkActions}
+										options={bulkActions || []}
 										onChange={handleSelectBulkAction}
 										placeholder={t(
 											'admin/shared/components/filter-table/filter-table___bulkactie'

@@ -3,7 +3,7 @@
 
 import { ConfigValue } from './config.types';
 
-export default class Config {
+export class Config {
 	private static config: ConfigValue;
 	// private static dataSubject = new BehaviorSubject<ConfigValue | null>(null);
 	// private static observable = this.dataSubject.asObservable().pipe(skip(1));

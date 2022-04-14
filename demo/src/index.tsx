@@ -1,5 +1,4 @@
 import { LinkInfo, ToastInfo } from '~core/config/config.types';
-import { AdminCore } from './react-admin';
 import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -7,7 +6,7 @@ import App from './App';
 import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { ConfigValue } from '~core/config';
+import { Config, ConfigValue } from '~core/config';
 
 const navItem = {
 	content_path: 'content_path',
@@ -34,7 +33,7 @@ const routerConfig: ConfigValue['services']['router'] = {
 };
 
 function setConfig() {
-	AdminCore.config.setConfig({
+	Config.setConfig({
 		navigation: {
 			service: {
 				getAll: async () => {
