@@ -3,7 +3,7 @@ import { FilterableTableState } from '../shared/components/FilterTable/FilterTab
 import { Permission } from '~modules/user/user.types';
 
 export interface UserGroup {
-	id: number;
+	id: number | string;
 	label: string;
 	description: string | null;
 	created_at: string;
@@ -36,3 +36,11 @@ export type PermissionGroupTableCols =
 	| 'created_at'
 	| 'updated_at'
 	| 'actions';
+
+export interface PermissionData {
+	id: string;
+	label: string;
+	name: string;
+}
+
+export type PermissionRow = { row: { original: PermissionData } };

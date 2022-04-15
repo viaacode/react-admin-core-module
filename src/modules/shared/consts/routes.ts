@@ -58,4 +58,5 @@ export const ROUTE_PARTS = Object.freeze({
 	cookiePolicy: 'cookiebeleid',
 	linkedAccounts: 'koppelingen',
 	quickLane: 'bekijk',
+	permissions: 'permissies',
 });

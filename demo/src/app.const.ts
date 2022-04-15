@@ -6,7 +6,6 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
 import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
-import { Permission } from '~modules/user/user.types';
 import { NavigationItemInfo } from './shared/types';
 
 export const ADMIN_PATH = Object.freeze({
@@ -217,6 +216,14 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			key: 'content-page-labels',
 			exact: false,
 		}),
+		// ...hasPermissions([], 'OR', userPermissions,
+		{
+			label: i18n.t('Gebruikersgroep'),
+			location: ADMIN_PATH.USER_GROUP_OVERVIEW,
+			key: 'user-group',
+			exact: false,
+		}
+		// ),
 		// ...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
 		// 	label: i18n.t('admin/admin___vertaling'),
 		// 	location: ADMIN_PATH.TRANSLATIONS,
