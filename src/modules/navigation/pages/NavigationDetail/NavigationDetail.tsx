@@ -2,7 +2,6 @@ import { Button, Table } from '@meemoo/react-components';
 import { startCase } from 'lodash-es';
 import React, { FC, useState } from 'react';
 import { useQueryClient } from 'react-query';
-import { generatePath, Link, useHistory, useParams } from 'react-router-dom';
 
 import { Icon } from '../../../shared/components';
 import { useHasChanges } from '../../../shared/hooks';
@@ -16,7 +15,8 @@ import {
 import { NavigationElement } from '../../types';
 
 import { NAVIGATION_DETAIL_COLS } from './NavigationDetail.const';
-import { NavigationDetailParams, ReorderRowFunc } from './NavigationDetail.types';
+import { ReorderRowFunc } from './NavigationDetail.types';
+import { Config } from '~core/config';
 
 const NavigationDetail: FC = () => {
 	// TODO: uncomment once modal is available
@@ -24,15 +24,18 @@ const NavigationDetail: FC = () => {
 	// const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const [navigationElements, setNavigationElements] = useState<NavigationElement[]>([]);
 
-	const history = useHistory();
-	const { navigationName } = useParams<NavigationDetailParams>();
+	const history = Config.getConfig().services.router.useHistory();
+	const { navigationName } = Config.getConfig().services.router.useParams();
 
 	// Data
 
 	const queryClient = useQueryClient();
-	const { data: initialData, isLoading } = useGetNavigationByPlacement(navigationName, {
-		onSuccess: (data) => setNavigationElements(data),
-	});
+	const { data: initialData, isLoading } = useGetNavigationByPlacement(
+		navigationName,
+		{
+			onSuccess: (data) => setNavigationElements(data),
+		}
+	);
 	const invalidateNavigation = () =>
 		queryClient.invalidateQueries(NAVIGATION_QUERY_KEYS.list(navigationName));
 	const { mutate: deleteOne } = useDeleteNavigationElement({
@@ -46,7 +49,9 @@ const NavigationDetail: FC = () => {
 	// Methods
 
 	const getEditLink = (navigationElementId: string) =>
-		generatePath(NAVIGATION_PATHS.detailEdit, { navigationName, navigationElementId });
+		NAVIGATION_PATHS.detailEdit
+			.replace(':navigationName', navigationName)
+			.replace(':navigationElementId', navigationElementId);
 
 	const onDeleteElement = (id: string) => {
 		deleteOne(id);
@@ -85,6 +90,7 @@ const NavigationDetail: FC = () => {
 		history.push(NAVIGATION_PATHS.overview);
 	}
 
+	const Link = Config.getConfig().services.router.Link;
 	return (
 		<AdminLayout pageTitle={startCase(navigationName)}>
 			<AdminLayout.Actions>
@@ -117,7 +123,12 @@ const NavigationDetail: FC = () => {
 				/>
 
 				<div className="c-admin-table-footer u-text-center u-mt-16">
-					<Link to={generatePath(NAVIGATION_PATHS.detailCreate, { navigationName })}>
+					<Link
+						to={NAVIGATION_PATHS.detailCreate.replace(
+							':navigationName',
+							navigationName
+						)}
+					>
 						<Button
 							iconStart={<Icon name="add" />}
 							label="Voeg een navigatie-item toe"

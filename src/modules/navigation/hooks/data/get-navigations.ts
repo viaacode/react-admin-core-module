@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 import { useQuery, UseQueryOptions } from 'react-query';
 
-import { useConfig } from '../../../shared/hooks';
+import { Config } from '~core/config';
 import { NAVIGATION_QUERY_KEYS } from '../../const';
 import { Navigation } from '../../types';
 
@@ -10,7 +10,7 @@ export const useGetNavigations = <TData = Navigation[]>(
 		enabled: true,
 	}
 ) => {
-	const navConfig = useConfig('navigation');
+	const navConfig = Config.getConfig().navigation;
 	const navService = navConfig?.service;
 
 	return useQuery(

@@ -1,0 +1,21 @@
+@use "sass:color";
+
+@import "../../shared/styles/settings/colors";
+
+@keyframes flash {
+	from,
+	50%,
+	to {
+		background-color: color.adjust($color-teal-bright, $lightness: -30%);
+	}
+
+	25%,
+	75% {
+		background-color: white;
+	}
+}
+
+.c-content-block__active {
+	animation: flash 1s ease-in-out 2;
+	background-color: inherit;
+}

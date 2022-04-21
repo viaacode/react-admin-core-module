@@ -1,16 +1,35 @@
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import React, { FunctionComponent } from 'react';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
-import { SidebarProps } from './Sidebar.types';
+import './Sidebar.scss';
+import { Config } from '~core/config';
 
-// TODO: move Sidebar component from hetarchief 2 to @meemoo/react-components
-const Sidebar: FC<SidebarProps> = ({ className, children, title, heading }) => {
+interface SidebarProps {
+	className?: string;
+	headerLink?: string;
+	light?: boolean;
+}
+
+export const Sidebar: FunctionComponent<SidebarProps> = ({
+	children,
+	className,
+	headerLink,
+	light = false,
+}) => {
+	const { t } = useTranslation();
+	const Link = Config.getConfig().services.router.Link;
+
 	return (
-		<aside className={clsx(className, 'c-sidebar')}>
-			{heading ?? <h2 className="c-sidebar__title">{title}</h2>}
-			{children}
-		</aside>
+		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
+			{headerLink && (
+				<div className="o-sidebar__header">
+					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
+						{t('admin/shared/components/sidebar/sidebar___beheer')}
+					</Link>
+				</div>
+			)}
+			<div className="o-sidebar__content">{children}</div>
+		</div>
 	);
 };
-
-export default Sidebar;

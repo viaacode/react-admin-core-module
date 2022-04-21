@@ -1,9 +1,8 @@
 import { Button, Table } from '@meemoo/react-components';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 
+import { Config } from '~core/config';
 import { Icon, Loader } from '../../../shared/components';
-import { useConfig } from '../../../shared/hooks';
 import { AdminLayout } from '../../../shared/layouts';
 import { NAVIGATION_PATHS } from '../../const';
 import { useGetNavigations } from '../../hooks';
@@ -11,10 +10,11 @@ import { useGetNavigations } from '../../hooks';
 import { NAVIGATION_OVERVIEW_COLS } from './NavigationOverview.const';
 
 const NavigationOverview: FC = () => {
-	const componensConfig = useConfig('components');
-	const sortingIcons = componensConfig?.table.sortingIcons;
+	const componentsConfig = Config.getConfig().components;
+	const sortingIcons = componentsConfig?.table.sortingIcons;
 
 	const { data: navigations, isLoading } = useGetNavigations();
+	const Link = Config.getConfig().services.router.Link;
 
 	return (
 		<AdminLayout pageTitle="Navigatie">

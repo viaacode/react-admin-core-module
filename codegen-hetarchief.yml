@@ -1,0 +1,19 @@
+overwrite: true
+schema: ${GRAPHQL_URL}
+documents:
+  - "./src/**/*.graphql"
+  # avo specific types are generated using a separate codegen config file, otherwise we have naming conflicts between the queries
+  - "!./src/modules/content-page/queries/avo/*.graphql"
+  - "!./src/modules/collection/queries/avo/*.graphql"
+  - "!./src/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "!./src/modules/item/queries/avo/*.graphql"
+  - "!./src/modules/user/queries/avo/*.graphql"
+  - "!./src/modules/user-group/queries/avo/*.graphql"
+  - "!./src/modules/content-page-labels/queries/avo/*.graphql"
+  - "!./demo/**/*.graphql"
+generates:
+  src/generated/graphql-db-types-hetarchief.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query

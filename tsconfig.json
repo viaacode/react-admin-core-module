@@ -17,11 +17,23 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "declarationDir": "dist/dts",
     "jsx": "react",
     "noEmit": true,
     "outDir": "dist",
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "~core/*": [
+        "./src/core/*"
+      ],
+      "~modules/*": [
+        "./src/modules/*"
+      ],
+      "~generated/*": [
+        "./src/generated/*"
+      ]
+    }
   },
   "include": [
     "src"

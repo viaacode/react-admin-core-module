@@ -5,22 +5,22 @@ import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import { visualizer } from 'rollup-plugin-visualizer';
 
-const getOutput = (path, root = 'dist') => {
-	const formats = ['esm', 'cjs'];
-
-	return formats.map((format) => ({
-		dir: path ? `${root}/${path}/${format}` : `${root}/${format}`,
-		format,
-	}));
-};
-
 // It's possible to pass custom cli arguments through rollup
 // For more info: https://rollupjs.org/guide/en/#configuration-files
 export default (cliArgs) => {
 	return [
 		{
 			input: ['src/index.ts'],
-			output: getOutput(),
+			output: [
+				{
+					dir: 'dist/esm',
+					format: 'esm',
+				},
+				{
+					dir: 'dist/cjs',
+					format: 'cjs',
+				},
+			],
 			plugins: [
 				postcss({
 					extensions: ['.scss', '.css'],
@@ -30,6 +30,7 @@ export default (cliArgs) => {
 				typescript({
 					clean: true,
 					check: true,
+					tsconfig: './tsconfig.build.json',
 				}),
 				commonjs(),
 				terser(),
@@ -42,16 +43,23 @@ export default (cliArgs) => {
 			external: [
 				'@hookform/resolvers/yup',
 				'@meemoo/react-components',
+				'@viaa/avo2-components',
 				'clsx',
+				'moment',
+				'query-string',
+				'use-query-params',
+				'sanitize-html',
+				'react-select',
+				'react-select/async',
+				'ky-universal',
+				'react-copy-to-clipboard',
+				'react-scrollbars-custom',
+				'immer',
 				'lodash-es',
-				'ramda',
 				'react-dom',
 				'react-hook-form',
 				'react-query',
-				'react-router-dom',
-				'react-router-guards',
 				'react',
-				'rxjs',
 				'rxjs/operators',
 				'yup',
 			],

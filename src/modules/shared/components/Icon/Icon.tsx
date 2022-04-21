@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 
-import { IconConfig } from '../../../../core/config';
-import { useConfig } from '../../hooks';
+import { Config, IconConfig } from '~core/config';
 
 interface IconProps {
 	name: keyof IconConfig['componentProps'];
 }
 
 const Icon: FC<IconProps> = ({ name }) => {
-	const iconConfig = useConfig('icon');
+	const iconConfig = Config.getConfig().icon;
 	const iconProps = iconConfig?.componentProps?.[name];
 	const IconComponent = iconConfig?.component ?? (() => null);
 

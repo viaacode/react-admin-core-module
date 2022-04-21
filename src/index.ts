@@ -1,8 +1,20 @@
-import { default as AdminCore } from './core';
-import { NAVIGATION_ROUTES_CONFIG } from './modules/navigation';
+export { Config } from './core/config/config.class';
+export type {
+	ConfigValue,
+	EducationOrganisationService,
+	FileConfig,
+	FileService,
+	History,
+	I18n,
+	IconComponentProps,
+	IconConfig,
+	LinkInfo,
+	ToastInfo,
+	ToastService,
+} from '~core/config/config.types';
 
-AdminCore.routes.initialize([NAVIGATION_ROUTES_CONFIG]);
+export { AvoOrHetArchief } from './modules/shared/types';
 
-export { AdminCore };
+export * from '~modules/shared/types';
 
-export * from './hooks';
+export * from './modules';

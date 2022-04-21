@@ -1,16 +1,16 @@
 import { Button } from '@meemoo/react-components';
 import { startCase, uniqBy } from 'lodash-es';
 import React, { FC, useMemo } from 'react';
-import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { AdminLayout } from '../../../shared/layouts';
 import { NavigationElementForm } from '../../components';
 import { NAVIGATION_PATHS } from '../../const';
 import { useGetNavigations } from '../../hooks';
-import { NavigationElementParams } from '../../types';
+import { Config } from '~core/config';
 
 const NavigationElement: FC = () => {
-	const { navigationName, navigationElementId } = useParams<NavigationElementParams>();
+	const { navigationName, navigationElementId } = Config.getConfig().services.router.useParams();
+
 	const { data: navigations, isLoading } = useGetNavigations();
 	const placementOptions = useMemo(() => {
 		return isLoading && navigations
@@ -40,8 +40,9 @@ const NavigationElement: FC = () => {
 		? `${cleanName}: item aanpassen`
 		: `${cleanName}: item toevoegen`;
 	const cancelLink = navigationName
-		? generatePath(NAVIGATION_PATHS.detail, { navigationName })
+		? NAVIGATION_PATHS.detail.replace(':navigationName', navigationName)
 		: NAVIGATION_PATHS.overview;
+	const Link = Config.getConfig().services.router.Link;
 
 	return (
 		<AdminLayout pageTitle={pageTitle}>

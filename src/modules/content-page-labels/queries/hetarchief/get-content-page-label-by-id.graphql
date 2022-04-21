@@ -1,0 +1,10 @@
+query getContentPageLabelById($id: uuid!) {
+	app_content_label(where: { id: { _eq: $id } }) {
+		label
+		id
+		content_type
+		link_to
+		created_at
+		updated_at
+	}
+}

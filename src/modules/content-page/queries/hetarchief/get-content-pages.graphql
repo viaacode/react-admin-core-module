@@ -1,0 +1,53 @@
+query getContentPages($where: app_content_page_bool_exp, $offset: Int = 0, $limit: Int = 10, $orderBy: [app_content_page_order_by!] = {}) {
+  app_content_page(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    content_type
+    created_at
+    depublish_at
+    description
+    seo_description
+    meta_description
+    thumbnail_path
+    is_protected
+    is_public
+    path
+    user_profile_id
+    owner_profile {
+      id
+      full_name
+      maintainer_users_profiles {
+        maintainer {
+          schema_identifier
+          schema_name
+          information {
+            logo {
+              iri
+            }
+          }
+        }
+      }
+      group {
+        id
+        label
+      }
+    }
+    publish_at
+    published_at
+    title
+    updated_at
+    user_group_ids
+    user_profile_id
+    content_content_labels {
+      content_label {
+        id
+        label
+        link_to
+      }
+    }
+  }
+  app_content_page_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}

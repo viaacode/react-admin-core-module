@@ -1,0 +1,6 @@
+query getContentTypes {
+	lookup_app_content_type {
+		value
+		comment
+	}
+}
