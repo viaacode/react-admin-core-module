@@ -64,6 +64,9 @@ export interface ConfigValue {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
+		queryCache: {
+			clear: (key: string) => Promise<void>;
+		}
 	};
 	components: {
 		loader: {
