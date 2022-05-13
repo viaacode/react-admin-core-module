@@ -3,6 +3,13 @@ import { FilterableTableState } from '../../shared/components/FilterTable/Filter
 import { Permission } from '~modules/user/user.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
+export enum UserGroups {
+	KIOSK_VISITOR = 'KIOSK_VISITOR',
+	MEEMOO_ADMIN = 'MEEMOO_ADMIN',
+	VISITOR = 'VISITOR',
+	CP_ADMIN = 'CP_ADMIN',
+}
+
 export interface UserGroup {
 	id: number | string;
 	label: string;
