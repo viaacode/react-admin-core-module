@@ -64,6 +64,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
+	const defaultSortColumn = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief ? 'last_name' : 'last_access_at';
 
 	const [profiles, setProfiles] = useState<Avo.User.Profile[] | null>(null);
 	const [profileCount, setProfileCount] = useState<number>(0);
@@ -246,7 +247,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
 				tableState.page || 0,
-				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
+				(tableState.sort_column || defaultSortColumn) as UserOverviewTableCol,
 				tableState.sort_order || 'desc',
 				columnDataType,
 				generateWhereObject(getFilters(tableState), false)
