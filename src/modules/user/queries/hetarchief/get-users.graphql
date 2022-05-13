@@ -10,7 +10,9 @@ query getUsers(
 		first_name
 		last_name
 		mail
-		group_id
+		group {
+			label
+		}
 		identities {
 			identity_provider_name
 		}

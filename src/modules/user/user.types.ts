@@ -107,11 +107,11 @@ export interface CommonUser {
 }
 
 export type UserOverviewTableCol =
-	| 'id'
-	| 'first_name'
-	| 'last_name'
-	| 'mail'
-	| 'user_group'
+	| 'profileId'
+	| 'firstName'
+	| 'lastName'
+	| 'email'
+	| 'userGroup'
 	| 'business_category'
 	| 'is_exception'
 	| 'is_blocked'
