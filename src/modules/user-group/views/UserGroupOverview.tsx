@@ -1,4 +1,5 @@
 import React, {
+	ChangeEvent,
 	FunctionComponent, useEffect, useState,
 } from 'react';
 
@@ -10,7 +11,7 @@ import { UserProps } from '~modules/shared/types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { Column, TableOptions } from 'react-table';
-import { Button, Table } from '@meemoo/react-components';
+import { Button, keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-user-groups';
@@ -18,6 +19,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import { UserGroupArchief, UserGroupUpdate } from '../types/user-group.types';
 import { cloneDeep, findIndex, remove } from 'lodash-es';
+import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 const UserGroupOverview: FunctionComponent<UserProps> = ({ user }) => {
 	/**
@@ -36,6 +38,8 @@ const UserGroupOverview: FunctionComponent<UserProps> = ({ user }) => {
 	const [currentState, setCurrentState] = useState<UserGroupArchief[] | undefined>(undefined);
 	// Updated checkboxes are saved separately
 	const [userGroupUpdates, setUserGroupUpdates] = useState<UserGroupUpdate[]>([]);
+	const [search, setSearch] = useState<string | undefined>(undefined);
+	const [searchResults, setSearchResults] = useState<PermissionData[] | undefined>(undefined);
 
 	/**
 	 * Callbacks
@@ -92,17 +96,29 @@ const UserGroupOverview: FunctionComponent<UserProps> = ({ user }) => {
 
 	const onClickSave = () => {
 		updateUserGroups({updates: userGroupUpdates})
-			.then(() => {
-				refetchUserGroups()
-				setUserGroupUpdates([]);
-			})
-			.catch((err) => {
-				console.error(
-					new CustomError('Failed to save permissions', err, {
-						query: 'UserGroupService.updateUserGroups',
-					})
-				);
-			});
+		.then(() => {
+			refetchUserGroups()
+			setUserGroupUpdates([]);
+		})
+		.catch((err) => {
+			console.error(
+				new CustomError('Failed to save permissions', err, {
+					query: 'UserGroupService.updateUserGroups',
+				})
+			);
+		});
+	}
+
+	const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value);
+	}
+
+	const onSearchSubmit = (search: string | undefined) => {
+		if (search) {
+			setSearchResults(permissions?.filter((permission) => permission.label.toLowerCase().indexOf(search.toLowerCase()) != -1))
+		} else {
+			setSearchResults(undefined);
+		}
 	}
 
 	/**
@@ -161,13 +177,35 @@ const UserGroupOverview: FunctionComponent<UserProps> = ({ user }) => {
 
 		return (
 			<>
+				<TextInput
+					value={search}
+					onChange={onSearchChange}
+					onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}
+					iconEnd={
+						<>
+							{search && (
+								<Button
+									label={t('Reset')}
+									onClick={() => {
+										setSearch(undefined);
+										onSearchSubmit(undefined);
+									}}
+								/>
+							)}
+							<Button
+								label={t('Zoek')}
+								onClick={() => onSearchSubmit(search)}
+							/>
+						</>
+					}
+				/>
 				<Table
 					options={
 						// TODO: fix type hinting
 						/* eslint-disable @typescript-eslint/ban-types */
 						{
 							columns: UserGroupTableColumns(currentState, updateUserGroup) as Column<object>[],
-							data: permissions || [],
+							data: searchResults || permissions || [],
 							initialState: {
 								pageSize: permissions?.length,
 							},
