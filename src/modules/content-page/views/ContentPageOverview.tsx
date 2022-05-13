@@ -59,7 +59,6 @@ import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { AdminLayout } from '~modules/shared/layouts';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -67,12 +66,7 @@ import { UserProps } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
 
-const {
-	EDIT_ANY_CONTENT_PAGES,
-	DELETE_ANY_CONTENT_PAGES,
-	EDIT_PROTECTED_PAGE_STATUS,
-	CREATE_CONTENT_PAGES,
-} = Permission;
+const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } = Permission;
 
 const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	// Hooks
@@ -545,29 +539,12 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 		);
 	};
 
-	const Link = Config.getConfig().services.router.Link;
 	return (
-		<AdminLayout pageTitle={t('admin/content/views/content-overview___content-overzicht')}>
-			<AdminLayout.Actions>
-				{hasPerm(CREATE_CONTENT_PAGES) && (
-					<Link to={CONTENT_PATH.CONTENT_PAGE_CREATE}>
-						<Button
-							label={t('admin/content/views/content-overview___content-toevoegen')}
-							title={t(
-								'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
-							)}
-						/>
-					</Link>
-				)}
-			</AdminLayout.Actions>
-			<AdminLayout.Content>
-				<LoadingErrorLoadedComponent
-					loadingInfo={loadingInfo}
-					dataObject={contentPages}
-					render={renderContentOverview}
-				/>
-			</AdminLayout.Content>
-		</AdminLayout>
+		<LoadingErrorLoadedComponent
+			loadingInfo={loadingInfo}
+			dataObject={contentPages}
+			render={renderContentOverview}
+		/>
 	);
 };
 
