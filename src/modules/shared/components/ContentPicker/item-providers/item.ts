@@ -1,6 +1,6 @@
 import { Avo } from '@viaa/avo2-types';
 
-import { PickerSelectItem } from '../../../types/content-picker';
+import { PickerItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ItemsService } from '~modules/item/items.service';
@@ -10,7 +10,7 @@ import { ContentPickerType } from '~modules/shared/components/ContentPicker/Cont
 export const retrieveItems = async (
 	titleOrExternalId: string | null,
 	limit = 5
-): Promise<PickerSelectItem[]> => {
+): Promise<PickerItem[]> => {
 	const items: Avo.Item.Item[] | null = titleOrExternalId
 		? await ItemsService.fetchPublicItemsByTitleOrExternalId(titleOrExternalId, limit)
 		: await ItemsService.fetchPublicItems(limit);
@@ -19,11 +19,11 @@ export const retrieveItems = async (
 };
 
 // Parse raw content items to react-select options
-const parseItems = (raw: Avo.Item.Item[]): PickerSelectItem[] => {
-	return raw.map((item: Avo.Item.Item): PickerSelectItem => {
+const parseItems = (raw: Avo.Item.Item[]): PickerItem[] => {
+	return raw.map((item: Avo.Item.Item): PickerItem => {
 		return {
 			label: item.title,
-			value: parsePickerItem(ContentPickerType.ITEM, item.external_id.toString()),
+			...parsePickerItem(ContentPickerType.ITEM, item.external_id.toString()),
 		};
 	});
 };

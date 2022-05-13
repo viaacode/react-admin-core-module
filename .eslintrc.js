@@ -9,6 +9,7 @@ module.exports = {
 		'plugin:react-hooks/recommended',
 		'prettier',
 	],
+	ignorePatterns: ["generated/*.ts"],
 	rules: {
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',

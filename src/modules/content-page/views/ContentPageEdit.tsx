@@ -142,7 +142,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 				type: ToastType.ERROR,
 			});
 		}
-	}, [user, hasPerm, t]);
+	}, [id, user, hasPerm, t]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
