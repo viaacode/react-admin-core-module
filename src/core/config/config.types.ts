@@ -66,7 +66,11 @@ export interface ConfigValue {
 		};
 		queryCache: {
 			clear: (key: string) => Promise<void>;
-		}
+		};
+		translationsService: {
+			getAll: () => Promise<Record<string, string>>;
+			updateAll: (newTranslations: Record<string, string>) => Promise<Record<string, string>>;
+		};
 	};
 	components: {
 		loader: {
@@ -95,6 +99,8 @@ export interface IconConfig {
 		add: IconComponentProps;
 		angleUp: IconComponentProps;
 		angleDown: IconComponentProps;
+		angleLeft: IconComponentProps;
+		angleRight: IconComponentProps;
 		delete: IconComponentProps;
 		edit: IconComponentProps;
 		view: IconComponentProps;

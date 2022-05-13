@@ -4,6 +4,7 @@ import { renderAdminContentPageRoutes } from './modules/content-page/content.rou
 import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
 import { renderAdminUserRoutes } from './modules/user/user';
 import { CommonUser } from './react-admin/modules/user/user.types';
+import { renderAdminTranslationRoutes } from './modules/translations/translation.routes';
 
 export const renderAdminRoutes = (user: CommonUser) => {
 	return (
@@ -17,6 +18,7 @@ export const renderAdminRoutes = (user: CommonUser) => {
 			{renderAdminContentPageRoutes(user)}
 			{renderAdminUserGroupRoutes(user)}
 			{renderAdminUserRoutes(user)}
+			{renderAdminTranslationRoutes(user)}
 			{/*{renderAdminContentPageLabelRoutes()}*/}
 			{/*{renderWithPermissions(renderItemRoutes, [Permission.VIEW_ITEMS_OVERVIEW])}*/}
 			{/*{renderWithPermissions(renderPublishItemRoutes, [Permission.PUBLISH_ITEMS])}*/}

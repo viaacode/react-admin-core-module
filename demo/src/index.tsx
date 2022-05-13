@@ -5,8 +5,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { AvoOrHetArchief } from '~modules/shared/types';
 import { Config, ConfigValue } from '~core/config';
+import nlJson from './translations/nl.json';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 const navItem = {
 	content_path: 'content_path',
@@ -60,6 +61,8 @@ function setConfig() {
 				view: { name: 'view' },
 				angleDown: { name: 'down' },
 				angleUp: { name: 'up' },
+				angleLeft: { name: 'left' },
+				angleRight: { name: 'right' },
 				delete: { name: 'delete' },
 				edit: { name: 'edit' },
 			},
@@ -93,7 +96,11 @@ function setConfig() {
 			router: routerConfig as any,
 			queryCache: {
 				clear: async (key: string) => Promise.resolve(),
-			}
+			},
+			translationsService: {
+				getAll: async () => nlJson,
+				updateAll: async () => nlJson,
+			},
 		},
 		database: {
 			databaseApplicationType: AvoOrHetArchief.hetArchief,

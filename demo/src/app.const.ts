@@ -7,6 +7,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
 import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
 import { USER_PATH } from '~modules/user/user.consts';
+import { TRANSLATION_PATH } from './modules/translations/translation.routes';
 import { NavigationItemInfo } from './shared/types';
 
 export const ADMIN_PATH = Object.freeze({
@@ -16,6 +17,7 @@ export const ADMIN_PATH = Object.freeze({
 	// ...MENU_PATH,
 	...CONTENT_PATH,
 	...CONTENT_PAGE_LABEL_PATH,
+	...TRANSLATION_PATH,
 	// ...TRANSLATIONS_PATH,
 	// ...PERMISSION_GROUP_PATH,
 	// ...COLLECTIONS_OR_BUNDLES_PATH,
@@ -229,7 +231,13 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			location: ADMIN_PATH.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
-		}
+		},
+		{
+			label: i18n.t('Vertalingen'),
+			location: ADMIN_PATH.TRANSLATIONS_OVERVIEW,
+			key: 'translations',
+			exact: false,
+		},
 		// ),
 		// ...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
 		// 	label: i18n.t('admin/admin___vertaling'),

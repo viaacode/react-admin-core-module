@@ -1,9 +1,8 @@
-import React, {
-	FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import {
-	LoadingErrorLoadedComponent, LoadingInfo,
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { AdminLayout } from '~modules/shared/layouts';
 import { UserProps } from '~modules/shared/types';
@@ -12,13 +11,13 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { UserGroupService } from '~modules/user-group/user-group.service';
 import { UserGroup } from '~modules/user-group/user-group.types';
 
-import { permissionDataMock, userGroupDataMock } from '../mocks';
+import { permissionDataMock } from '../mocks';
 import { PermissionData } from '../user-group.types';
 import { Column, TableOptions } from 'react-table';
 import { Table } from '@meemoo/react-components';
 import { UserGroupTableColumns } from '../user-group.const';
 
-const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
+const ContentPageOverview: FunctionComponent<UserProps> = () => {
 	/**
 	 * Hooks
 	 */
@@ -36,13 +35,12 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 		console.log(groupId, permissionId, value);
 
 		// Refetch permissions
-	}
+	};
 
 	const fetchUserGroups = useCallback(async () => {
 		try {
 			// setIsLoading(true);
-			const [userGroupArray] =
-				await UserGroupService.fetchUserGroups(0, 'label', 'asc', {});
+			const [userGroupArray] = await UserGroupService.fetchUserGroups(0, 'label', 'asc', {});
 
 			setUserGroups(userGroupArray);
 		} catch (err) {
@@ -65,7 +63,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	/**
 	 * Effects
 	 */
-	 useEffect(() => {
+	useEffect(() => {
 		setPermissions(permissionDataMock.data.users_permission);
 	}, []);
 
@@ -88,27 +86,31 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 			return null;
 		}
 
-		return <Table
-		options={
-			// TODO: fix type hinting
-			/* eslint-disable @typescript-eslint/ban-types */
-			{
-				columns: UserGroupTableColumns(userGroups, updateUserGroup) as Column<object>[],
-				data: permissionDataMock.data.users_permission || [],
-			} as TableOptions<object>
-			/* eslint-enable @typescript-eslint/ban-types */
-		}
-	/>
+		return (
+			<Table
+				options={
+					// TODO: fix type hinting
+					/* eslint-disable @typescript-eslint/ban-types */
+					{
+						columns: UserGroupTableColumns(
+							userGroups,
+							updateUserGroup
+						) as Column<object>[],
+						data: permissionDataMock.data.users_permission || [],
+					} as TableOptions<object>
+					/* eslint-enable @typescript-eslint/ban-types */
+				}
+			/>
+		);
 	};
 
 	return (
 		<AdminLayout pageTitle={t('User groups')}>
-			<AdminLayout.Actions>
-			</AdminLayout.Actions>
+			<AdminLayout.Actions></AdminLayout.Actions>
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
-					dataObject={{...permissions}}
+					dataObject={{ ...permissions }}
 					render={renderUserGroupOverview}
 				/>
 			</AdminLayout.Content>
