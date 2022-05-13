@@ -5,7 +5,7 @@ import { CONTENT_PATH } from '~modules/content-page/const/content-page.consts';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
-import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
+import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
 import { NavigationItemInfo } from './shared/types';
 
 export const ADMIN_PATH = Object.freeze({

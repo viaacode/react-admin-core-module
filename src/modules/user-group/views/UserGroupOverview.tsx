@@ -1,5 +1,5 @@
 import React, {
-	FunctionComponent, useCallback, useEffect, useState,
+	FunctionComponent, useEffect, useState,
 } from 'react';
 
 import {
@@ -8,47 +8,119 @@ import {
 import { AdminLayout } from '~modules/shared/layouts';
 import { UserProps } from '~modules/shared/types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { UserGroupService } from '~modules/user-group/user-group.service';
-import { UserGroup } from '~modules/user-group/user-group.types';
 
-import { permissionDataMock, userGroupDataMock } from '../mocks';
-import { PermissionData } from '../user-group.types';
 import { Column, TableOptions } from 'react-table';
-import { Table } from '@meemoo/react-components';
-import { UserGroupTableColumns } from '../user-group.const';
+import { Button, Table } from '@meemoo/react-components';
+import { UserGroupTableColumns } from '../const/user-group.const';
+import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
+import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-user-groups';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
+import { UserGroupArchief, UserGroupUpdate } from '../types/user-group.types';
+import { cloneDeep, findIndex, remove } from 'lodash-es';
 
-const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
+const UserGroupOverview: FunctionComponent<UserProps> = ({ user }) => {
 	/**
 	 * Hooks
 	 */
 	const { t } = useTranslation();
 
-	const [userGroups, setUserGroups] = useState<UserGroup[] | null>(null);
-	const [permissions, setPermissions] = useState<PermissionData[] | null>(null);
+	const { data: userGroups, isError: isErrorUserGroups, error: userGroupError, refetch: refetchUserGroups } = useGetUserGroups();
+	const { data: permissions, isError: isErrorPermissions, error: permissionsError } = useGetPermissions();
+	const { mutateAsync: updateUserGroups } = useUpdateUserGroups();
+
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+
+	// Use data (userGroups) as original state
+	// Current state keeps track of table state
+	const [currentState, setCurrentState] = useState<UserGroupArchief[] | undefined>(undefined);
+	// Updated checkboxes are saved separately
+	const [userGroupUpdates, setUserGroupUpdates] = useState<UserGroupUpdate[]>([]);
 
 	/**
 	 * Callbacks
 	 */
+	const updateUserGroup = (userGroupId: string, permissionId: string, hasPermission: boolean) => {
+		if (!userGroupId || !permissionId || !currentState || !permissions) {
+			return;
+		}
 
-	const updateUserGroup = (groupId: string, permissionId: string, value: boolean) => {
-		console.log(groupId, permissionId, value);
+		const newState = cloneDeep(currentState);
+		const userGroup = newState.find((group) => group.id === userGroupId);
 
-		// Refetch permissions
+		if (!userGroup) {
+			return;
+		}
+
+		// Filter out permission (if present)
+		const removed = remove(userGroup.permissions, (permission) => permission.id === permissionId);
+
+		if (removed.length) {
+			// Permission was removed
+			setCurrentState(newState);
+		} else {
+
+			// Permission was not present
+			const newPermission = permissions.find((permission) => permission.id === permissionId);
+			newPermission && userGroup.permissions.push(newPermission);
+			setCurrentState(newState);
+		}
+
+		// Update changelog
+		updateUserGroupUpdates(userGroupId, permissionId, hasPermission);
 	}
 
-	const fetchUserGroups = useCallback(async () => {
-		try {
-			// setIsLoading(true);
-			const [userGroupArray] =
-				await UserGroupService.fetchUserGroups(0, 'label', 'asc', {});
+	// Add updated permission to changelog
+	const updateUserGroupUpdates = (userGroupId: string, permissionId: string, hasPermission: boolean) => {
+		if (!userGroupId || !permissionId) {
+			return;
+		}
 
-			setUserGroups(userGroupArray);
-		} catch (err) {
+		const newUpdates = cloneDeep(userGroupUpdates);
+		const currentUpdate = newUpdates?.find((update) => update.permissionId === permissionId && update.userGroupId === userGroupId);
+		if (currentUpdate) {
+			newUpdates.splice(newUpdates.indexOf(currentUpdate), 1);
+		}
+		newUpdates.push({userGroupId, permissionId, hasPermission});
+		setUserGroupUpdates(newUpdates);
+	}
+
+	const onClickCancel = () => {
+		setCurrentState(cloneDeep(userGroups));
+		setUserGroupUpdates([]);
+	}
+
+	const onClickSave = () => {
+		updateUserGroups({updates: userGroupUpdates})
+			.then(() => {
+				refetchUserGroups()
+				setUserGroupUpdates([]);
+			})
+			.catch((err) => {
+				console.error(
+					new CustomError('Failed to save permissions', err, {
+						query: 'UserGroupService.updateUserGroups',
+					})
+				);
+			});
+	}
+
+	/**
+	 * Effects
+	 */
+	useEffect(() => {
+		if (userGroups && permissions) {
+			// Initialize states
+			!currentState && setCurrentState(cloneDeep(userGroups));
+			setLoadingInfo({ state: 'loaded' });
+		}
+	}, [userGroups, permissions]);
+
+	useEffect(() => {
+		if ( isErrorUserGroups ) {
 			console.error(
-				new CustomError('Failed to get content pages from graphql', err, {
-					query: 'GET_USER_GROUPS_WITH_FILTERS',
+				new CustomError('Failed to get user groups', userGroupError, {
+					query: 'UserGroupService.getAllUserGroups',
 				})
 			);
 			setLoadingInfo({
@@ -59,46 +131,58 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 				icon: 'alert-triangle',
 			});
 		}
-		// setIsLoading(false);
-	}, [t]);
-
-	/**
-	 * Effects
-	 */
-	 useEffect(() => {
-		setPermissions(permissionDataMock.data.users_permission);
-	}, []);
+	}, [isErrorUserGroups, t, userGroupError])
 
 	useEffect(() => {
-		if (userGroups && permissions) {
-			setLoadingInfo({ state: 'loaded' });
+		if (isErrorPermissions) {
+			console.error(
+				new CustomError('Failed to get permissions', permissionsError, {
+					query: 'PermissionsService.getAllPermissions',
+				})
+			);
+			setLoadingInfo({
+				state: 'error',
+				message: t(
+					'admin/content/views/content-overview___het-ophalen-van-de-content-paginas-is-mislukt'
+				),
+				icon: 'alert-triangle',
+			});
 		}
-	}, [userGroups, permissions]);
-
-	useEffect(() => {
-		fetchUserGroups();
-	}, [fetchUserGroups]);
+	}, [isErrorPermissions, isErrorUserGroups, permissionsError, t, userGroupError])
 
 	/**
 	 * Render
 	 */
 
 	const renderUserGroupOverview = () => {
-		if (!userGroups) {
+		if (!currentState) {
 			return null;
 		}
 
-		return <Table
-		options={
-			// TODO: fix type hinting
-			/* eslint-disable @typescript-eslint/ban-types */
-			{
-				columns: UserGroupTableColumns(userGroups, updateUserGroup) as Column<object>[],
-				data: permissionDataMock.data.users_permission || [],
-			} as TableOptions<object>
-			/* eslint-enable @typescript-eslint/ban-types */
-		}
-	/>
+		return (
+			<>
+				<Table
+					options={
+						// TODO: fix type hinting
+						/* eslint-disable @typescript-eslint/ban-types */
+						{
+							columns: UserGroupTableColumns(currentState, updateUserGroup) as Column<object>[],
+							data: permissions || [],
+							initialState: {
+								pageSize: permissions?.length,
+							},
+						} as TableOptions<object>
+						/* eslint-enable @typescript-eslint/ban-types */
+					}
+				/>
+				{!!userGroupUpdates.length &&
+					<>
+						<Button onClick={onClickCancel} label={t('Annuleren')}/>
+						<Button onClick={onClickSave} label={t('Wijzigingen opslaan')}/>
+					</>
+				}
+			</>
+		);
 	};
 
 	return (
@@ -116,4 +200,4 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	);
 };
 
-export default ContentPageOverview;
+export default UserGroupOverview;

@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
-import { SpecialUserGroup } from '../../user-group/user-group.const';
+import { SpecialUserGroup } from '../../user-group/const/user-group.const';
 import { SpecialPermissionGroups } from '../types/authentication.types';
 
 import { CustomError } from './custom-error';
