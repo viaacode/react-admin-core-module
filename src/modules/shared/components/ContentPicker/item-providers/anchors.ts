@@ -1,14 +1,11 @@
 import { LinkTarget } from '@viaa/avo2-components';
 
 import { CustomError } from '../../../helpers/custom-error';
-import { PickerSelectItem } from '../../../types/content-picker';
+import { PickerItem } from '../../../types/content-picker';
 
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
-export const retrieveAnchors = async (
-	name: string | null,
-	limit = 5
-): Promise<PickerSelectItem[]> => {
+export const retrieveAnchors = async (name: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {
 		const anchorIds: string[] = [];
 		document.querySelectorAll('[data-anchor]').forEach((block) => {
@@ -27,16 +24,13 @@ export const retrieveAnchors = async (
 };
 
 // Convert anchors to react-select options
-const parseAnchors = (anchorIds: string[]): PickerSelectItem[] => {
+const parseAnchors = (anchorIds: string[]): PickerItem[] => {
 	return anchorIds.map(
-		(anchorId): PickerSelectItem => ({
+		(anchorId): PickerItem => ({
 			label: anchorId,
-			value: {
-				type: ContentPickerType.ANCHOR_LINK,
-				value: anchorId,
-				label: anchorId,
-				target: LinkTarget.Self,
-			},
+			type: ContentPickerType.ANCHOR_LINK,
+			value: anchorId,
+			target: LinkTarget.Self,
 		})
 	);
 };

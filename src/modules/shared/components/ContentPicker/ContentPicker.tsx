@@ -6,7 +6,7 @@ import AsyncSelect from 'react-select/async';
 import { ContentPickerType } from './ContentPicker.types';
 
 import { CustomError } from '../../helpers/custom-error';
-import { PickerItem, PickerSelectItem, PickerTypeOption } from '../../types/content-picker';
+import { PickerItem, PickerTypeOption } from '../../types/content-picker';
 import FileUpload from '../FileUpload/FileUpload';
 
 import {
@@ -54,7 +54,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	);
 
 	// available options for the item picker.
-	const [itemOptions, setItemOptions] = useState<PickerSelectItem[]>([]);
+	const [itemOptions, setItemOptions] = useState<PickerItem[]>([]);
 
 	// selected option, keep track of whether initial item from `initialValue` has been applied
 	const [selectedItem, setSelectedItem] = useState<PickerItem | null>(null);
@@ -71,24 +71,22 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 	// inflate item picker
 	const fetchPickerOptions = useCallback(
-		async (keyword: string | null): Promise<PickerSelectItem[]> => {
+		async (keyword: string | null): Promise<PickerItem[]> => {
 			try {
 				if (!selectedType || !selectedType.fetch) {
 					return []; // Search query and external link don't have a fetch function
 				}
-				let items: PickerSelectItem[] = await selectedType.fetch(keyword, 20);
+				let items: PickerItem[] = await selectedType.fetch(keyword, 20);
 
 				if (!hasAppliedInitialItem && initialValue) {
 					items = [
 						{
 							label: get(initialValue, 'label', ''),
-							value: {
-								type: get(initialValue, 'type') as ContentPickerType,
-								value: get(initialValue, 'value', ''),
-							},
+							type: get(initialValue, 'type') as ContentPickerType,
+							value: get(initialValue, 'value', ''),
 						},
 						...items.filter(
-							(item: PickerSelectItem) => item.label !== get(initialValue, 'label')
+							(item: PickerItem) => item.label !== get(initialValue, 'label')
 						),
 					];
 				}

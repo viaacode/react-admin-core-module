@@ -1,5 +1,5 @@
 import { CustomError } from '../../../helpers/custom-error';
-import { PickerSelectItem } from '../../../types/content-picker';
+import { PickerItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -10,7 +10,7 @@ import { ContentPickerType } from '~modules/shared/components/ContentPicker/Cont
 export const retrieveContentPages = async (
 	title: string | null,
 	limit = 5
-): Promise<PickerSelectItem[]> => {
+): Promise<PickerItem[]> => {
 	try {
 		const contentItems: ContentPageInfo[] | null = title
 			? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
@@ -29,7 +29,7 @@ export const retrieveContentPages = async (
 export const retrieveProjectContentPages = async (
 	title: string | null,
 	limit = 5
-): Promise<PickerSelectItem[]> => {
+): Promise<PickerItem[]> => {
 	const contentItems: Partial<ContentPageInfo>[] | null = title
 		? await ContentPageService.getPublicProjectContentItemsByTitle(`%${title}%`, limit)
 		: await ContentPageService.getPublicProjectContentItems(limit);
@@ -38,11 +38,11 @@ export const retrieveProjectContentPages = async (
 };
 
 // Parse raw content items to react-select options
-const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerSelectItem[] => {
+const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 	return raw.map(
-		(item: Partial<ContentPageInfo>): PickerSelectItem => ({
+		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
-			value: parsePickerItem(ContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
+			...parsePickerItem(ContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
 		})
 	);
 };

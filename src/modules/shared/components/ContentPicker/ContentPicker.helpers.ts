@@ -1,11 +1,6 @@
 import { get } from 'lodash-es';
 
-import {
-	PickerItem,
-	PickerItemControls,
-	PickerSelectItem,
-	PickerTypeOption,
-} from '../../types/content-picker';
+import { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
@@ -27,11 +22,10 @@ export function setInitialInput(type?: PickerTypeOption, initialValue?: PickerIt
 }
 
 export function setInitialItem(
-	options: PickerSelectItem[],
+	options: PickerItem[],
 	initialValue?: PickerItem
 ): PickerItem | undefined {
 	return options.find(
-		(option: PickerSelectItem) =>
-			option.value.value === get(initialValue, 'value', 'EMPTY_SELECTION')
-	)?.value;
+		(option: PickerItem) => option.value === get(initialValue, 'value', 'EMPTY_SELECTION')
+	);
 }
