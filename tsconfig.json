@@ -25,17 +25,17 @@
     "isolatedModules": true,
     "paths": {
       "~core/*": [
-        "./src/core/*"
+        "./demo/src/react-admin/core/*"
       ],
       "~modules/*": [
-        "./src/modules/*"
+        "./demo/src/react-admin/modules/*"
       ],
       "~generated/*": [
-        "./src/generated/*"
+        "./demo/src/react-admin/generated/*"
       ]
     }
   },
   "include": [
-    "src"
+    "demo/src/react-admin"
   ]
 }
