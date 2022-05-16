@@ -7,7 +7,9 @@ documents:
   # Only generate types for avo specific queries. This code should eventually be moved to the admin core package
   - "./src/modules/content-page/queries/avo/*.graphql"
   - "./src/modules/collection/queries/avo/*.graphql"
+  - "./src/modules/shared/services/organization-service/queries/avo/*.graphql"
   - "./src/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "./src/modules/shared/services/settings-service/queries/avo/*.graphql"
   - "./src/modules/item/queries/avo/*.graphql"
   - "./src/modules/user/queries/avo/*.graphql"
   - "./src/modules/user-group/queries/avo/*.graphql"

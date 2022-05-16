@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
 import { CommonUser } from '../../src/modules/user/user.types';
-import { Config, ToastType } from './react-admin/core/config';
+import { Config, ToastType } from '~core/config';
 import { LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { PermissionService } from '~modules/shared/services/permission-service';

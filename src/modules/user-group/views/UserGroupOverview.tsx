@@ -4,7 +4,8 @@ import React, {
 } from 'react';
 
 import {
-	LoadingErrorLoadedComponent, LoadingInfo,
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { AdminLayout } from '~modules/shared/layouts';
 import { UserProps } from '~modules/shared/types';
@@ -225,12 +226,11 @@ const UserGroupOverview: FunctionComponent<UserProps> = () => {
 
 	return (
 		<AdminLayout pageTitle={t('User groups')}>
-			<AdminLayout.Actions>
-			</AdminLayout.Actions>
+			<AdminLayout.Actions></AdminLayout.Actions>
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
-					dataObject={{...permissions}}
+					dataObject={{ ...permissions }}
 					render={renderUserGroupOverview}
 				/>
 			</AdminLayout.Content>

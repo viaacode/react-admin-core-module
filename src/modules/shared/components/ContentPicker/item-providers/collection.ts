@@ -5,7 +5,7 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { CollectionService } from '~modules/collection/collection.service';
 import { ContentTypeNumber } from '~modules/collection/collection.types';
-import { PickerSelectItem } from '~modules/shared/types/content-picker';
+import { PickerItem } from '~modules/shared/types/content-picker';
 
 // TODO: move fetchBundles and fetchBundlesByTitle to a separate bundle service, not collection service.
 
@@ -13,7 +13,7 @@ import { PickerSelectItem } from '~modules/shared/types/content-picker';
 export const retrieveCollections = async (
 	titleOrId: string | null,
 	limit = 5
-): Promise<PickerSelectItem[]> => {
+): Promise<PickerItem[]> => {
 	const collections: Avo.Collection.Collection[] | null = titleOrId
 		? await CollectionService.fetchCollectionsByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.collection);
@@ -25,7 +25,7 @@ export const retrieveCollections = async (
 export const retrieveBundles = async (
 	titleOrId: string | null,
 	limit = 5
-): Promise<PickerSelectItem[]> => {
+): Promise<PickerItem[]> => {
 	const bundles: Avo.Collection.Collection[] | null = titleOrId
 		? await CollectionService.fetchBundlesByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.bundle);
@@ -37,11 +37,11 @@ export const retrieveBundles = async (
 const parseCollections = (
 	type: ContentPickerType,
 	raw: Avo.Collection.Collection[]
-): PickerSelectItem[] => {
+): PickerItem[] => {
 	return raw.map(
-		(item: Avo.Collection.Collection): PickerSelectItem => ({
+		(item: Avo.Collection.Collection): PickerItem => ({
 			label: item.title,
-			value: parsePickerItem(type, item.id.toString()),
+			...parsePickerItem(type, item.id.toString()),
 		})
 	);
 };

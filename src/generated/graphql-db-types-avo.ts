@@ -37732,6 +37732,11 @@ export type GetPublicItemsQueryVariables = Exact<{
 
 export type GetPublicItemsQuery = { __typename?: 'query_root', app_item_meta: Array<{ __typename?: 'app_item_meta', external_id: any, title: string, is_published?: boolean | null, is_deleted?: boolean | null }> };
 
+export type GetOrganizationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrganizationsWithUsersQuery = { __typename?: 'query_root', shared_organisations_with_users: Array<{ __typename?: 'shared_organisations_with_users', name?: string | null, or_id?: string | null }> };
+
 export type FetchCollectionRelationsBySubjectsQueryVariables = Exact<{
   subjectIds: Array<Scalars['uuid']> | Scalars['uuid'];
   relationType: Lookup_Enum_Relation_Types_Enum;
@@ -37747,6 +37752,16 @@ export type FetchItemRelationsBySubjectsQueryVariables = Exact<{
 
 
 export type FetchItemRelationsBySubjectsQuery = { __typename?: 'query_root', app_item_relations: Array<{ __typename?: 'app_item_relations', id: number, object: any, subject: any, predicate: Lookup_Enum_Relation_Types_Enum, created_at?: any | null, updated_at?: any | null }> };
+
+export type GetEducationLevelsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetEducationLevelsQuery = { __typename?: 'query_root', lookup_enum_lom_context: Array<{ __typename?: 'lookup_enum_lom_context', description?: string | null }> };
+
+export type GetSubjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSubjectsQuery = { __typename?: 'query_root', lookup_enum_lom_classification: Array<{ __typename?: 'lookup_enum_lom_classification', description: string }> };
 
 export type DeleteUserGroupMutationVariables = Exact<{
   userGroupId: Scalars['Int'];
@@ -37786,6 +37801,45 @@ export type UpdateUserGroupMutationVariables = Exact<{
 
 
 export type UpdateUserGroupMutation = { __typename?: 'mutation_root', update_users_groups?: { __typename?: 'users_groups_mutation_response', affected_rows: number } | null };
+
+export type BulkAddSubjectsToProfilesMutationVariables = Exact<{
+  subjects: Array<Users_Profile_Classifications_Insert_Input> | Users_Profile_Classifications_Insert_Input;
+}>;
+
+
+export type BulkAddSubjectsToProfilesMutation = { __typename?: 'mutation_root', insert_users_profile_classifications?: { __typename?: 'users_profile_classifications_mutation_response', affected_rows: number } | null };
+
+export type BulkDeleteSubjectsFromProfilesMutationVariables = Exact<{
+  subjects: Array<Scalars['String']> | Scalars['String'];
+  profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
+}>;
+
+
+export type BulkDeleteSubjectsFromProfilesMutation = { __typename?: 'mutation_root', delete_users_profile_classifications?: { __typename?: 'users_profile_classifications_mutation_response', affected_rows: number } | null };
+
+export type GetContentCountsForUsersQueryVariables = Exact<{
+  profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
+}>;
+
+
+export type GetContentCountsForUsersQuery = { __typename?: 'query_root', publicCollections: { __typename?: 'app_collections_aggregate', aggregate?: { __typename?: 'app_collections_aggregate_fields', count?: number | null } | null }, publicContentPages: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count?: number | null } | null }, privateCollections: { __typename?: 'app_collections_aggregate', aggregate?: { __typename?: 'app_collections_aggregate_fields', count?: number | null } | null }, assignments: { __typename?: 'app_assignments_aggregate', aggregate?: { __typename?: 'app_assignments_aggregate_fields', count?: number | null } | null }, collectionBookmarks: { __typename?: 'app_collection_bookmarks_aggregate', aggregate?: { __typename?: 'app_collection_bookmarks_aggregate_fields', count?: number | null } | null }, itemBookmarks: { __typename?: 'app_item_bookmarks_aggregate', aggregate?: { __typename?: 'app_item_bookmarks_aggregate_fields', count?: number | null } | null }, privateContentPages: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count?: number | null } | null } };
+
+export type GetDistinctBusinessCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetDistinctBusinessCategoriesQuery = { __typename?: 'query_root', users_profiles: Array<{ __typename?: 'users_profiles', business_category?: string | null }> };
+
+export type GetIdpsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetIdpsQuery = { __typename?: 'query_root', users_idps: Array<{ __typename?: 'users_idps', value: string }> };
+
+export type GetProfileIdsQueryVariables = Exact<{
+  where: Users_Summary_View_Bool_Exp;
+}>;
+
+
+export type GetProfileIdsQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null }> };
 
 export type GetProfileNamesQueryVariables = Exact<{
   profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
@@ -38711,6 +38765,27 @@ export const useGetPublicItemsQuery = <
       fetcher<GetPublicItemsQuery, GetPublicItemsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPublicItemsDocument, variables),
       options
     );
+export const GetOrganizationsWithUsersDocument = `
+    query getOrganizationsWithUsers {
+  shared_organisations_with_users {
+    or_id: company_id
+    name
+  }
+}
+    `;
+export const useGetOrganizationsWithUsersQuery = <
+      TData = GetOrganizationsWithUsersQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetOrganizationsWithUsersQueryVariables,
+      options?: UseQueryOptions<GetOrganizationsWithUsersQuery, TError, TData>
+    ) =>
+    useQuery<GetOrganizationsWithUsersQuery, TError, TData>(
+      variables === undefined ? ['getOrganizationsWithUsers'] : ['getOrganizationsWithUsers', variables],
+      fetcher<GetOrganizationsWithUsersQuery, GetOrganizationsWithUsersQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetOrganizationsWithUsersDocument, variables),
+      options
+    );
 export const FetchCollectionRelationsBySubjectsDocument = `
     query fetchCollectionRelationsBySubjects($subjectIds: [uuid!]!, $relationType: lookup_enum_relation_types_enum!) {
   app_collection_relations(
@@ -38763,6 +38838,46 @@ export const useFetchItemRelationsBySubjectsQuery = <
     useQuery<FetchItemRelationsBySubjectsQuery, TError, TData>(
       ['FetchItemRelationsBySubjects', variables],
       fetcher<FetchItemRelationsBySubjectsQuery, FetchItemRelationsBySubjectsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, FetchItemRelationsBySubjectsDocument, variables),
+      options
+    );
+export const GetEducationLevelsDocument = `
+    query getEducationLevels {
+  lookup_enum_lom_context {
+    description
+  }
+}
+    `;
+export const useGetEducationLevelsQuery = <
+      TData = GetEducationLevelsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetEducationLevelsQueryVariables,
+      options?: UseQueryOptions<GetEducationLevelsQuery, TError, TData>
+    ) =>
+    useQuery<GetEducationLevelsQuery, TError, TData>(
+      variables === undefined ? ['getEducationLevels'] : ['getEducationLevels', variables],
+      fetcher<GetEducationLevelsQuery, GetEducationLevelsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetEducationLevelsDocument, variables),
+      options
+    );
+export const GetSubjectsDocument = `
+    query getSubjects {
+  lookup_enum_lom_classification {
+    description
+  }
+}
+    `;
+export const useGetSubjectsQuery = <
+      TData = GetSubjectsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetSubjectsQueryVariables,
+      options?: UseQueryOptions<GetSubjectsQuery, TError, TData>
+    ) =>
+    useQuery<GetSubjectsQuery, TError, TData>(
+      variables === undefined ? ['getSubjects'] : ['getSubjects', variables],
+      fetcher<GetSubjectsQuery, GetSubjectsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetSubjectsDocument, variables),
       options
     );
 export const DeleteUserGroupDocument = `
@@ -38891,6 +39006,175 @@ export const useUpdateUserGroupMutation = <
     useMutation<UpdateUserGroupMutation, TError, UpdateUserGroupMutationVariables, TContext>(
       ['updateUserGroup'],
       (variables?: UpdateUserGroupMutationVariables) => fetcher<UpdateUserGroupMutation, UpdateUserGroupMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateUserGroupDocument, variables)(),
+      options
+    );
+export const BulkAddSubjectsToProfilesDocument = `
+    mutation bulkAddSubjectsToProfiles($subjects: [users_profile_classifications_insert_input!]!) {
+  insert_users_profile_classifications(objects: $subjects) {
+    affected_rows
+  }
+}
+    `;
+export const useBulkAddSubjectsToProfilesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<BulkAddSubjectsToProfilesMutation, TError, BulkAddSubjectsToProfilesMutationVariables, TContext>
+    ) =>
+    useMutation<BulkAddSubjectsToProfilesMutation, TError, BulkAddSubjectsToProfilesMutationVariables, TContext>(
+      ['bulkAddSubjectsToProfiles'],
+      (variables?: BulkAddSubjectsToProfilesMutationVariables) => fetcher<BulkAddSubjectsToProfilesMutation, BulkAddSubjectsToProfilesMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, BulkAddSubjectsToProfilesDocument, variables)(),
+      options
+    );
+export const BulkDeleteSubjectsFromProfilesDocument = `
+    mutation bulkDeleteSubjectsFromProfiles($subjects: [String!]!, $profileIds: [uuid!]!) {
+  delete_users_profile_classifications(
+    where: {key: {_in: $subjects}, profile_id: {_in: $profileIds}}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const useBulkDeleteSubjectsFromProfilesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<BulkDeleteSubjectsFromProfilesMutation, TError, BulkDeleteSubjectsFromProfilesMutationVariables, TContext>
+    ) =>
+    useMutation<BulkDeleteSubjectsFromProfilesMutation, TError, BulkDeleteSubjectsFromProfilesMutationVariables, TContext>(
+      ['bulkDeleteSubjectsFromProfiles'],
+      (variables?: BulkDeleteSubjectsFromProfilesMutationVariables) => fetcher<BulkDeleteSubjectsFromProfilesMutation, BulkDeleteSubjectsFromProfilesMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, BulkDeleteSubjectsFromProfilesDocument, variables)(),
+      options
+    );
+export const GetContentCountsForUsersDocument = `
+    query getContentCountsForUsers($profileIds: [uuid!]!) {
+  publicCollections: app_collections_aggregate(
+    where: {profile: {id: {_in: $profileIds}}, is_public: {_eq: true}, is_deleted: {_eq: false}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  publicContentPages: app_content_aggregate(
+    where: {user_profile_id: {_in: $profileIds}, is_public: {_eq: true}, is_deleted: {_eq: false}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  privateCollections: app_collections_aggregate(
+    where: {profile: {id: {_in: $profileIds}}, is_public: {_eq: false}, is_deleted: {_eq: false}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  assignments: app_assignments_aggregate(
+    where: {owner_profile_id: {_in: $profileIds}, is_deleted: {_eq: false}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  collectionBookmarks: app_collection_bookmarks_aggregate(
+    where: {profile_id: {_in: $profileIds}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  itemBookmarks: app_item_bookmarks_aggregate(
+    where: {profile_id: {_in: $profileIds}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  privateContentPages: app_content_aggregate(
+    where: {user_profile_id: {_in: $profileIds}, is_public: {_eq: false}, is_deleted: {_eq: false}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetContentCountsForUsersQuery = <
+      TData = GetContentCountsForUsersQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetContentCountsForUsersQueryVariables,
+      options?: UseQueryOptions<GetContentCountsForUsersQuery, TError, TData>
+    ) =>
+    useQuery<GetContentCountsForUsersQuery, TError, TData>(
+      ['getContentCountsForUsers', variables],
+      fetcher<GetContentCountsForUsersQuery, GetContentCountsForUsersQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetContentCountsForUsersDocument, variables),
+      options
+    );
+export const GetDistinctBusinessCategoriesDocument = `
+    query getDistinctBusinessCategories {
+  users_profiles(
+    distinct_on: business_category
+    where: {business_category: {_is_null: false}, is_deleted: {_eq: false}}
+  ) {
+    business_category
+  }
+}
+    `;
+export const useGetDistinctBusinessCategoriesQuery = <
+      TData = GetDistinctBusinessCategoriesQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetDistinctBusinessCategoriesQueryVariables,
+      options?: UseQueryOptions<GetDistinctBusinessCategoriesQuery, TError, TData>
+    ) =>
+    useQuery<GetDistinctBusinessCategoriesQuery, TError, TData>(
+      variables === undefined ? ['getDistinctBusinessCategories'] : ['getDistinctBusinessCategories', variables],
+      fetcher<GetDistinctBusinessCategoriesQuery, GetDistinctBusinessCategoriesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetDistinctBusinessCategoriesDocument, variables),
+      options
+    );
+export const GetIdpsDocument = `
+    query getIdps {
+  users_idps {
+    value
+  }
+}
+    `;
+export const useGetIdpsQuery = <
+      TData = GetIdpsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetIdpsQueryVariables,
+      options?: UseQueryOptions<GetIdpsQuery, TError, TData>
+    ) =>
+    useQuery<GetIdpsQuery, TError, TData>(
+      variables === undefined ? ['getIdps'] : ['getIdps', variables],
+      fetcher<GetIdpsQuery, GetIdpsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetIdpsDocument, variables),
+      options
+    );
+export const GetProfileIdsDocument = `
+    query getProfileIds($where: users_summary_view_bool_exp!) {
+  users_summary_view(where: $where) {
+    profile_id
+  }
+}
+    `;
+export const useGetProfileIdsQuery = <
+      TData = GetProfileIdsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetProfileIdsQueryVariables,
+      options?: UseQueryOptions<GetProfileIdsQuery, TError, TData>
+    ) =>
+    useQuery<GetProfileIdsQuery, TError, TData>(
+      ['getProfileIds', variables],
+      fetcher<GetProfileIdsQuery, GetProfileIdsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProfileIdsDocument, variables),
       options
     );
 export const GetProfileNamesDocument = `
