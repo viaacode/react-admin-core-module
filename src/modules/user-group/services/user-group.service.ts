@@ -2,14 +2,12 @@ import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
 
 import { Config } from '~core/config';
-import { ApiService } from '~modules/shared/services/api-service';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
 
 import { USER_GROUP_QUERIES } from '../queries/user-group.queries';
 import { ITEMS_PER_PAGE } from '../const/user-group.const';
-import { UserGroup, UserGroupArchief, UserGroupUpdateResponse, UserGroupUpdates } from '../types/user-group.types';
-import { USER_GROUP_SERVICE_BASE_URL } from './user-group.const';
+import { UserGroup } from '../types/user-group.types';
 
 export class UserGroupService {
 	private static getQueries() {
@@ -228,17 +226,5 @@ export class UserGroupService {
 				query: 'DELETE_USER_GROUP',
 			});
 		}
-	}
-
-	// Archief
-
-	public static async getAllUserGroups(): Promise<UserGroupArchief[]> {
-		return await ApiService.getApi()
-			.get(USER_GROUP_SERVICE_BASE_URL).json();
-	}
-
-	public static async updateUserGroups(json: UserGroupUpdates): Promise<UserGroupUpdateResponse[]> {
-		return await ApiService.getApi()
-			.patch(USER_GROUP_SERVICE_BASE_URL, {json}).json();
 	}
 }

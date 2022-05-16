@@ -1,1 +1,1 @@
-export * from './views';
+export { default as UserGroupOverview } from './views/UserGroupOverview';

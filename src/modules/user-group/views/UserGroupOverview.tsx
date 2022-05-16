@@ -1,6 +1,8 @@
 import React, {
 	ChangeEvent,
-	FunctionComponent, useEffect, useState,
+	FC,
+	useEffect,
+	useState,
 } from 'react';
 
 import {
@@ -8,21 +10,20 @@ import {
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { AdminLayout } from '~modules/shared/layouts';
-import { UserProps } from '~modules/shared/types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { Column, TableOptions } from 'react-table';
 import { Button, keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
-import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-user-groups';
+import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import { UserGroupArchief, UserGroupUpdate } from '../types/user-group.types';
 import { cloneDeep, remove } from 'lodash-es';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-const UserGroupOverview: FunctionComponent<UserProps> = () => {
+const UserGroupOverview: FC = () => {
 	/**
 	 * Hooks
 	 */
