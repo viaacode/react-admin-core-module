@@ -1,17 +1,14 @@
 import { Avo } from '@viaa/avo2-types';
 
-import { UserService } from '../../../../user/user.service';
+import { UserService } from '~modules/user/user.service';
 import { CustomError } from '../../../helpers/custom-error';
-import { PickerSelectItem } from '../../../types/content-picker';
+import { PickerItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
 // Fetch profiles from GQL
-export const retrieveProfiles = async (
-	name: string | null,
-	limit = 5
-): Promise<PickerSelectItem[]> => {
+export const retrieveProfiles = async (name: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {
 		const response: [Avo.User.Profile[], number] = await UserService.getProfiles(
 			0,
@@ -38,11 +35,11 @@ export const retrieveProfiles = async (
 };
 
 // Convert profiles to react-select options
-const parseProfiles = (profiles: Avo.User.Profile[]): PickerSelectItem[] => {
+const parseProfiles = (profiles: Avo.User.Profile[]): PickerItem[] => {
 	return profiles.map(
-		(profile): PickerSelectItem => ({
+		(profile): PickerItem => ({
 			label: `${profile.user.full_name} (${profile.user.mail})`,
-			value: parsePickerItem(ContentPickerType.PROFILE, profile.id),
+			...parsePickerItem(ContentPickerType.PROFILE, profile.id),
 		})
 	);
 };

@@ -6,12 +6,12 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
 import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
-import { Permission } from '~modules/user/user.types';
+import { USER_PATH } from '~modules/user/user.consts';
 import { NavigationItemInfo } from './shared/types';
 
 export const ADMIN_PATH = Object.freeze({
 	// ...DASHBOARD_PATH,
-	// ...USER_PATH,
+	...USER_PATH,
 	...USER_GROUP_PATH,
 	// ...MENU_PATH,
 	...CONTENT_PATH,
@@ -217,6 +217,20 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			key: 'content-page-labels',
 			exact: false,
 		}),
+		// ...hasPermissions([], 'OR', userPermissions,
+		{
+			label: i18n.t('Gebruikersgroep'),
+			location: ADMIN_PATH.USER_GROUP_OVERVIEW,
+			key: 'user-group',
+			exact: false,
+		},
+		{
+			label: i18n.t('Gebruikers'),
+			location: ADMIN_PATH.USER_OVERVIEW,
+			key: 'users',
+			exact: false,
+		}
+		// ),
 		// ...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
 		// 	label: i18n.t('admin/admin___vertaling'),
 		// 	location: ADMIN_PATH.TRANSLATIONS,

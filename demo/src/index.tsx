@@ -91,6 +91,9 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
+			queryCache: {
+				clear: async (key: string) => Promise.resolve(),
+			}
 		},
 		database: {
 			databaseApplicationType: AvoOrHetArchief.hetArchief,

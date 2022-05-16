@@ -13020,6 +13020,18 @@ export type UpdateUserGroupMutationVariables = Exact<{
 
 export type UpdateUserGroupMutation = { __typename?: 'mutation_root', update_users_group?: { __typename?: 'users_group_mutation_response', affected_rows: number } | null };
 
+export type GetIdpsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetIdpsQuery = { __typename?: 'query_root', users_identity_provider: Array<{ __typename?: 'users_identity_provider', name: string }> };
+
+export type GetProfileIdsQueryVariables = Exact<{
+  where: Users_Profile_Bool_Exp;
+}>;
+
+
+export type GetProfileIdsQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any }> };
+
 export type GetProfileNamesQueryVariables = Exact<{
   profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
 }>;
@@ -13741,6 +13753,46 @@ export const useUpdateUserGroupMutation = <
     useMutation<UpdateUserGroupMutation, TError, UpdateUserGroupMutationVariables, TContext>(
       ['updateUserGroup'],
       (variables?: UpdateUserGroupMutationVariables) => fetcher<UpdateUserGroupMutation, UpdateUserGroupMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateUserGroupDocument, variables)(),
+      options
+    );
+export const GetIdpsDocument = `
+    query getIdps {
+  users_identity_provider {
+    name
+  }
+}
+    `;
+export const useGetIdpsQuery = <
+      TData = GetIdpsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetIdpsQueryVariables,
+      options?: UseQueryOptions<GetIdpsQuery, TError, TData>
+    ) =>
+    useQuery<GetIdpsQuery, TError, TData>(
+      variables === undefined ? ['getIdps'] : ['getIdps', variables],
+      fetcher<GetIdpsQuery, GetIdpsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetIdpsDocument, variables),
+      options
+    );
+export const GetProfileIdsDocument = `
+    query getProfileIds($where: users_profile_bool_exp!) {
+  users_profile(where: $where) {
+    id
+  }
+}
+    `;
+export const useGetProfileIdsQuery = <
+      TData = GetProfileIdsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetProfileIdsQueryVariables,
+      options?: UseQueryOptions<GetProfileIdsQuery, TError, TData>
+    ) =>
+    useQuery<GetProfileIdsQuery, TError, TData>(
+      ['getProfileIds', variables],
+      fetcher<GetProfileIdsQuery, GetProfileIdsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProfileIdsDocument, variables),
       options
     );
 export const GetProfileNamesDocument = `

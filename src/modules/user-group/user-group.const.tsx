@@ -1,10 +1,13 @@
-import { FilterableColumn } from '../shared/components/FilterTable/FilterTable';
+import React from 'react';
+import { Checkbox } from '@meemoo/react-components';
+import { Column } from 'react-table';
+import { UserGroup } from '~modules/user-group/user-group.types';
 import { ROUTE_PARTS } from '../shared/consts/routes';
-import { SpecialPermissionGroups } from '../shared/types/authentication.types';
-
-import { UserGroup } from './user-group.types';
-
+import { PermissionData, PermissionRow } from './user-group.types';
 import { Config } from '~core/config';
+import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
+import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
+import { Permission } from '~modules/user/user.types';
 
 export const USER_GROUP_PATH = {
 	USER_GROUP_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
@@ -14,6 +17,35 @@ export const USER_GROUP_PATH = {
 };
 
 export const ITEMS_PER_PAGE = 20;
+
+export const UserGroupTableColumns = (
+	userGroups: UserGroup[],
+	updateUserGroup: (groupId: string, permissionId: string, value: boolean) => void,
+): Column<PermissionData>[] => [
+	{
+		Header: '',
+		accessor: 'label',
+	},
+	...userGroups.map((group) => {
+		return {
+			Header: group.label,
+			id: `${group.label}-${group.id}`,
+			accessor: (row: PermissionData) => row.label ,
+			Cell: ({row}: PermissionRow) => {
+				const isChecked = group.permissions
+					? !!group.permissions.filter((permission: Permission) => permission === row.original.name).length
+					: false;
+
+				return <Checkbox
+					checked={isChecked}
+					value={`${group.label}-${row.original.label}`}
+					onChange={() => updateUserGroup(String(group.id), row.original.id, !isChecked)}
+				/>
+			},
+		}
+	}),
+]
+
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{

@@ -146,6 +146,7 @@ export const DEFAULT_ALLOWED_TYPES: ContentPickerType[] = [
 	ContentPickerType.EXTERNAL_LINK,
 	ContentPickerType.ANCHOR_LINK,
 	ContentPickerType.FILE,
+	ContentPickerType.PROFILE,
 ];
 
 export const REACT_SELECT_DEFAULT_OPTIONS = {

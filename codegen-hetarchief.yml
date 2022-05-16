@@ -5,7 +5,9 @@ documents:
   # avo specific types are generated using a separate codegen config file, otherwise we have naming conflicts between the queries
   - "!./src/modules/content-page/queries/avo/*.graphql"
   - "!./src/modules/collection/queries/avo/*.graphql"
+  - "!./src/modules/shared/services/organization-service/queries/avo/*.graphql"
   - "!./src/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "!./src/modules/shared/services/settings-service/queries/avo/*.graphql"
   - "!./src/modules/item/queries/avo/*.graphql"
   - "!./src/modules/user/queries/avo/*.graphql"
   - "!./src/modules/user-group/queries/avo/*.graphql"
