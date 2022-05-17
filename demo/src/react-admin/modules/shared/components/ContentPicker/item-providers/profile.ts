@@ -35,11 +35,13 @@ export const retrieveProfiles = async (name: string | null, limit = 5): Promise<
 };
 
 // Convert profiles to react-select options
-const parseProfiles = (profiles: Avo.User.Profile[]): PickerItem[] => {
-	return profiles.map(
-		(profile): PickerItem => ({
-			label: `${profile.user.full_name} (${profile.user.mail})`,
+const parseProfiles = (profiles: any[]): PickerItem[] => {
+	return profiles.map((profile): PickerItem => {
+		const fullName = profile?.user?.full_name || profile?.fullName;
+		const mail = profile?.user?.mail || profile?.email;
+		return {
+			label: `${fullName} (${mail})`,
 			...parsePickerItem(ContentPickerType.PROFILE, profile.id),
-		})
-	);
+		};
+	});
 };

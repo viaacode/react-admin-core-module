@@ -53,16 +53,15 @@ import {
 	getMultiOptionFilters,
 	getQueryFilter,
 } from '~modules/shared/helpers/filters';
-import { getFullName } from '~modules/shared/helpers/formatters/avatar';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
+import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
+import { AvoOrHetArchief, UserProps } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
 
@@ -155,12 +154,21 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 						'depublish_at',
 					])
 				);
+				let userGroupPath: string;
+				if (
+					Config.getConfig().database.databaseApplicationType ===
+					AvoOrHetArchief.hetArchief
+				) {
+					userGroupPath = 'owner_profile.group_id';
+				} else {
+					userGroupPath = 'profile.profile_user_group.group.id';
+				}
 				andFilters.push(
 					...getMultiOptionFilters(
 						filters,
 						['author_user_group', 'content_type', 'user_profile_id', 'labels'],
 						[
-							'profile.profile_user_group.group.id',
+							userGroupPath,
 							'content_type',
 							'user_profile_id',
 							'content_content_labels.content_label.id',
@@ -171,7 +179,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 				// When you get to this point we assume you already have either the EDIT_ANY_CONTENT_PAGES or EDIT_OWN_CONTENT_PAGES permission
 				if (!hasPerm(EDIT_ANY_CONTENT_PAGES)) {
 					// Add filter to only allow the content pages for which the user is the author
-					andFilters.push({ user_profile_id: { _eq: get(user, 'profile.id') } });
+					andFilters.push({ user_profile_id: { _eq: user.profileId } });
 				}
 
 				andFilters.push({ is_deleted: { _eq: false } });

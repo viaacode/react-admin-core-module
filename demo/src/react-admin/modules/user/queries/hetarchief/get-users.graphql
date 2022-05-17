@@ -1,34 +1,35 @@
 query getUsers(
-	$offset: Int!
-	$limit: Int!
-	$orderBy: [users_profile_order_by!]!
-	$where: users_profile_bool_exp!
+    $offset: Int!
+    $limit: Int!
+    $orderBy: [users_profile_order_by!]!
+    $where: users_profile_bool_exp!
 ) {
-	users_profile(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
-		id
-		full_name
-		first_name
-		last_name
-		mail
-		group_id
-		identities {
-			identity_provider_name
-		}
-		maintainer_users_profiles {
-			maintainer {
-				schema_identifier
-				schema_name
+    users_profile(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
+        id
+        full_name
+        first_name
+        last_name
+        mail
+        group_id
+        identities {
+            identity_provider_name
+        }
+        maintainer_users_profiles {
+            maintainer {
+                schema_identifier
+                schema_name
+            }
+        }
+    }
+    users_profile_aggregate(where: $where) {
+        aggregate {
+            count
+        }
+    }
+}
+# TODO add the information fetch back to maintainer once org api is back up and running
 #				information {
 #					logo {
 #						iri
 #					}
 #				}
-			}
-		}
-	}
-	users_profile_aggregate(where: $where) {
-		aggregate {
-			count
-		}
-	}
-}

@@ -12886,7 +12886,7 @@ export type GetContentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, owner_profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', content_block_type: Lookup_App_Content_Block_Type_Enum, content_id: any, created_at: any, id: any, position: number, updated_at: any, variables?: any | null }> }> };
+export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', content_block_type: Lookup_App_Content_Block_Type_Enum, content_id: any, created_at: any, id: any, position: number, updated_at: any, variables?: any | null }> }> };
 
 export type GetContentLabelsByContentTypeQueryVariables = Exact<{
   contentType: Lookup_App_Content_Type_Enum;
@@ -12910,7 +12910,7 @@ export type GetContentPagesQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, owner_profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null } };
+export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null } };
 
 export type GetContentTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -13060,7 +13060,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, group_id?: any | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, group_id?: any | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
 export const DeleteContentPageLabelByIdDocument = `
@@ -13241,18 +13241,13 @@ export const GetContentByIdDocument = `
     is_public
     path
     user_profile_id
-    owner_profile {
+    profile: owner_profile {
       id
       full_name
       maintainer_users_profiles {
         maintainer {
           schema_identifier
           schema_name
-          information {
-            logo {
-              iri
-            }
-          }
         }
       }
       group {
@@ -13362,18 +13357,13 @@ export const GetContentPagesDocument = `
     is_public
     path
     user_profile_id
-    owner_profile {
+    profile: owner_profile {
       id
       full_name
       maintainer_users_profiles {
         maintainer {
           schema_identifier
           schema_name
-          information {
-            logo {
-              iri
-            }
-          }
         }
       }
       group {
@@ -13846,11 +13836,6 @@ export const GetUsersDocument = `
       maintainer {
         schema_identifier
         schema_name
-        information {
-          logo {
-            iri
-          }
-        }
       }
     }
   }

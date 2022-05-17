@@ -76,7 +76,7 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 			{`${t(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'
 			)}`}{' '}
-			{getProfileName(contentPageInfo.profile.user)}
+			{getProfileName(contentPageInfo.profile)}
 		</span>
 	);
 };

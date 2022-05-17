@@ -156,58 +156,11 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 						exact: true,
 					},
 					{
-						label: i18n.t('admin/admin___projecten'),
-						location: ADMIN_PATH.PROJECTS,
-						key: 'projects',
-						exact: true,
-					},
-					{
-						label: i18n.t('admin/admin___nieuws'),
-						location: ADMIN_PATH.NEWS,
-						key: 'news',
-						exact: true,
-					},
-					{
-						label: i18n.t('admin/admin___screencasts'),
-						location: ADMIN_PATH.SCREENCASTS,
-						key: 'screencasts',
-						exact: true,
-					},
-					{
 						label: i18n.t('admin/admin___fa-qs'),
 						location: ADMIN_PATH.FAQS,
 						key: 'faqs',
 						exact: true,
 					},
-					{
-						label: i18n.t('admin/admin___overzichtspaginas'),
-						location: ADMIN_PATH.OVERVIEWS,
-						key: 'faqs',
-						exact: true,
-					},
-					// // Only show the startpages to the users that can edit all pages
-					// ...(userPermissions.includes(Permission.EDIT_ANY_CONTENT_PAGES)
-					// 	? [
-					// 			{
-					// 				label: i18n.t('admin/admin___start-uitgelogd'),
-					// 				location: await getContentPageDetailRouteByPath('/'),
-					// 				key: 'faqs',
-					// 				exact: true,
-					// 			},
-					// 			{
-					// 				label: i18n.t('admin/admin___start-uitgelogd-leerlingen'),
-					// 				location: await getContentPageDetailRouteByPath('/leerlingen'),
-					// 				key: 'faqs',
-					// 				exact: true,
-					// 			},
-					// 			{
-					// 				label: i18n.t('admin/admin___start-ingelogd-lesgever'),
-					// 				location: await getContentPageDetailRouteByPath('/start'),
-					// 				key: 'faqs',
-					// 				exact: true,
-					// 			},
-					// 	  ]
-					// 	: []),
 				],
 			}
 		),
@@ -229,7 +182,7 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			location: ADMIN_PATH.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
-		}
+		},
 		// ),
 		// ...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
 		// 	label: i18n.t('admin/admin___vertaling'),

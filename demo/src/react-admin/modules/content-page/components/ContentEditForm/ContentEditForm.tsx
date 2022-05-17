@@ -34,7 +34,6 @@ import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~modules/shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
-import { getFullName } from '~modules/shared/helpers/formatters/avatar';
 import { getProfileId } from '~modules/shared/helpers/get-profile-id';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ValueOf } from '~modules/shared/types';
@@ -42,6 +41,7 @@ import { PickerItem } from '~modules/shared/types/content-picker';
 import { CommonUser, Permission } from '~modules/user/user.types';
 
 import './ContentEditForm.scss';
+import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -148,7 +148,7 @@ const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const owner: PickerItem | undefined =
 		contentPageInfo.profile && ownerId
 			? {
-					label: getFullName(get(contentPageInfo, 'profile'), false, true) || '-',
+					label: getFullName(contentPageInfo?.profile, false, true) || '-',
 					type: ContentPickerType.PROFILE,
 					value: ownerId,
 			  }

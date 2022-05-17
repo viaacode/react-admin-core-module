@@ -1,10 +1,12 @@
 import { Avo } from '@viaa/avo2-types';
 
-import { ContentPageInfo, ContentWidth } from '../types/content-pages.types';
+import { ContentPageDb, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
 import { parseContentBlocks } from './get-published-state';
+import { UserService } from '~modules/user/user.service';
+import { CommonUser } from '~modules/user/user.types';
 
-export function convertToContentPageInfo(dbContentPage: Avo.ContentPage.Page): ContentPageInfo {
+export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentPageInfo {
 	const labels = (dbContentPage.content_content_labels || []).map(
 		(labelLink: Avo.ContentPage.LabelLink) => labelLink.content_label
 	);
@@ -33,20 +35,18 @@ export function convertToContentPageInfo(dbContentPage: Avo.ContentPage.Page): C
 		created_at: dbContentPage.created_at,
 		updated_at: dbContentPage.updated_at || dbContentPage.created_at || null,
 		user_group_ids: dbContentPage.user_group_ids,
-		profile: dbContentPage.profile,
+		profile: UserService.adaptProfile(dbContentPage.profile) as CommonUser,
 		user_profile_id: dbContentPage.user_profile_id,
 	};
 }
 
-export function convertToContentPageInfos(
-	dbContentPages: Avo.ContentPage.Page[]
-): ContentPageInfo[] {
+export function convertToContentPageInfos(dbContentPages: ContentPageDb[]): ContentPageInfo[] {
 	return (dbContentPages || []).map(convertToContentPageInfo);
 }
 
 export function convertToDatabaseContentPage(
 	contentPageInfo: Partial<ContentPageInfo>
-): Avo.ContentPage.Page {
+): ContentPageDb {
 	return {
 		id: contentPageInfo.id,
 		thumbnail_path: contentPageInfo.thumbnail_path,
@@ -68,7 +68,6 @@ export function convertToDatabaseContentPage(
 		created_at: contentPageInfo.created_at || null,
 		updated_at: contentPageInfo.updated_at || null,
 		user_group_ids: contentPageInfo.user_group_ids,
-		profile: contentPageInfo.profile,
 		user_profile_id: contentPageInfo.user_profile_id,
-	} as Avo.ContentPage.Page;
+	} as ContentPageDb;
 }
