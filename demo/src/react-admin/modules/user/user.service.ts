@@ -21,11 +21,10 @@ import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { USER_QUERIES } from '~modules/user/queries/users.queries';
 
-import { TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from '../content-page/const/content-page.consts';
 import { CustomError } from '../shared/helpers/custom-error';
 import { dataService } from '../shared/services/data-service';
 
-import { ITEMS_PER_PAGE } from './user.consts';
+import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT, ITEMS_PER_PAGE } from './user.consts';
 import { CommonUser, DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types';
 
 export class UserService {
@@ -61,7 +60,7 @@ export class UserService {
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
-					TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT
+					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
 				),
 			};
 
