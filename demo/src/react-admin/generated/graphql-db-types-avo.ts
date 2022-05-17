@@ -2368,6 +2368,7 @@ export type App_Collection_Counts = {
   in_assignment?: Maybe<Scalars['bigint']>;
   in_collection?: Maybe<Scalars['bigint']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -2425,6 +2426,7 @@ export type App_Collection_Counts_Avg_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2436,6 +2438,7 @@ export type App_Collection_Counts_Avg_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2451,6 +2454,7 @@ export type App_Collection_Counts_Bool_Exp = {
   in_assignment?: InputMaybe<Bigint_Comparison_Exp>;
   in_collection?: InputMaybe<Bigint_Comparison_Exp>;
   plays?: InputMaybe<Int_Comparison_Exp>;
+  quick_lane_links?: InputMaybe<Bigint_Comparison_Exp>;
   views?: InputMaybe<Int_Comparison_Exp>;
 };
 
@@ -2464,6 +2468,7 @@ export type App_Collection_Counts_Max_Fields = {
   in_assignment?: Maybe<Scalars['bigint']>;
   in_collection?: Maybe<Scalars['bigint']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -2476,6 +2481,7 @@ export type App_Collection_Counts_Max_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2489,6 +2495,7 @@ export type App_Collection_Counts_Min_Fields = {
   in_assignment?: Maybe<Scalars['bigint']>;
   in_collection?: Maybe<Scalars['bigint']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -2501,6 +2508,7 @@ export type App_Collection_Counts_Min_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2513,6 +2521,7 @@ export type App_Collection_Counts_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2533,6 +2542,8 @@ export enum App_Collection_Counts_Select_Column {
   /** column name */
   Plays = 'plays',
   /** column name */
+  QuickLaneLinks = 'quick_lane_links',
+  /** column name */
   Views = 'views'
 }
 
@@ -2545,6 +2556,7 @@ export type App_Collection_Counts_Stddev_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2556,6 +2568,7 @@ export type App_Collection_Counts_Stddev_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2568,6 +2581,7 @@ export type App_Collection_Counts_Stddev_Pop_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2579,6 +2593,7 @@ export type App_Collection_Counts_Stddev_Pop_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2591,6 +2606,7 @@ export type App_Collection_Counts_Stddev_Samp_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2602,6 +2618,7 @@ export type App_Collection_Counts_Stddev_Samp_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2614,6 +2631,7 @@ export type App_Collection_Counts_Sum_Fields = {
   in_assignment?: Maybe<Scalars['bigint']>;
   in_collection?: Maybe<Scalars['bigint']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -2625,6 +2643,7 @@ export type App_Collection_Counts_Sum_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2637,6 +2656,7 @@ export type App_Collection_Counts_Var_Pop_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2648,6 +2668,7 @@ export type App_Collection_Counts_Var_Pop_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2660,6 +2681,7 @@ export type App_Collection_Counts_Var_Samp_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2671,6 +2693,7 @@ export type App_Collection_Counts_Var_Samp_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -2683,6 +2706,7 @@ export type App_Collection_Counts_Variance_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -2694,6 +2718,7 @@ export type App_Collection_Counts_Variance_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11504,6 +11529,7 @@ export type App_Item_Counts = {
   in_collection?: Maybe<Scalars['bigint']>;
   item_uuid?: Maybe<Scalars['uuid']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -11559,6 +11585,7 @@ export type App_Item_Counts_Avg_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11568,6 +11595,7 @@ export type App_Item_Counts_Avg_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11581,6 +11609,7 @@ export type App_Item_Counts_Bool_Exp = {
   in_collection?: InputMaybe<Bigint_Comparison_Exp>;
   item_uuid?: InputMaybe<Uuid_Comparison_Exp>;
   plays?: InputMaybe<Int_Comparison_Exp>;
+  quick_lane_links?: InputMaybe<Bigint_Comparison_Exp>;
   views?: InputMaybe<Int_Comparison_Exp>;
 };
 
@@ -11592,6 +11621,7 @@ export type App_Item_Counts_Max_Fields = {
   in_collection?: Maybe<Scalars['bigint']>;
   item_uuid?: Maybe<Scalars['uuid']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -11602,6 +11632,7 @@ export type App_Item_Counts_Max_Order_By = {
   in_collection?: InputMaybe<Order_By>;
   item_uuid?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11613,6 +11644,7 @@ export type App_Item_Counts_Min_Fields = {
   in_collection?: Maybe<Scalars['bigint']>;
   item_uuid?: Maybe<Scalars['uuid']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -11623,6 +11655,7 @@ export type App_Item_Counts_Min_Order_By = {
   in_collection?: InputMaybe<Order_By>;
   item_uuid?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11633,6 +11666,7 @@ export type App_Item_Counts_Order_By = {
   in_collection?: InputMaybe<Order_By>;
   item_uuid?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11649,6 +11683,8 @@ export enum App_Item_Counts_Select_Column {
   /** column name */
   Plays = 'plays',
   /** column name */
+  QuickLaneLinks = 'quick_lane_links',
+  /** column name */
   Views = 'views'
 }
 
@@ -11659,6 +11695,7 @@ export type App_Item_Counts_Stddev_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11668,6 +11705,7 @@ export type App_Item_Counts_Stddev_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11678,6 +11716,7 @@ export type App_Item_Counts_Stddev_Pop_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11687,6 +11726,7 @@ export type App_Item_Counts_Stddev_Pop_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11697,6 +11737,7 @@ export type App_Item_Counts_Stddev_Samp_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11706,6 +11747,7 @@ export type App_Item_Counts_Stddev_Samp_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11716,6 +11758,7 @@ export type App_Item_Counts_Sum_Fields = {
   in_assignment?: Maybe<Scalars['bigint']>;
   in_collection?: Maybe<Scalars['bigint']>;
   plays?: Maybe<Scalars['Int']>;
+  quick_lane_links?: Maybe<Scalars['bigint']>;
   views?: Maybe<Scalars['Int']>;
 };
 
@@ -11725,6 +11768,7 @@ export type App_Item_Counts_Sum_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11735,6 +11779,7 @@ export type App_Item_Counts_Var_Pop_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11744,6 +11789,7 @@ export type App_Item_Counts_Var_Pop_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11754,6 +11800,7 @@ export type App_Item_Counts_Var_Samp_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11763,6 +11810,7 @@ export type App_Item_Counts_Var_Samp_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -11773,6 +11821,7 @@ export type App_Item_Counts_Variance_Fields = {
   in_assignment?: Maybe<Scalars['Float']>;
   in_collection?: Maybe<Scalars['Float']>;
   plays?: Maybe<Scalars['Float']>;
+  quick_lane_links?: Maybe<Scalars['Float']>;
   views?: Maybe<Scalars['Float']>;
 };
 
@@ -11782,6 +11831,7 @@ export type App_Item_Counts_Variance_Order_By = {
   in_assignment?: InputMaybe<Order_By>;
   in_collection?: InputMaybe<Order_By>;
   plays?: InputMaybe<Order_By>;
+  quick_lane_links?: InputMaybe<Order_By>;
   views?: InputMaybe<Order_By>;
 };
 
@@ -14120,8 +14170,6 @@ export type App_Quick_Lanes_Bool_Exp = {
 
 /** unique or primary key constraints on table "app.quick_lanes" */
 export enum App_Quick_Lanes_Constraint {
-  /** unique or primary key constraint */
-  QuickLanesOwnerProfileIdContentLabelContentIdKey = 'quick_lanes_owner_profile_id_content_label_content_id_key',
   /** unique or primary key constraint */
   QuickLanesPkey = 'quick_lanes_pkey'
 }
