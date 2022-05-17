@@ -16,7 +16,7 @@ documents:
   - "./demo/src/react-admin/modules/user-group/queries/avo/*.graphql"
   - "./demo/src/react-admin/modules/content-page-labels/queries/avo/*.graphql"
 generates:
-  src/generated/graphql-db-types-avo.ts:
+  demo/src/react-admin/generated/graphql-db-types-avo.ts:
     plugins:
       - typescript
       - typescript-operations
