@@ -13,7 +13,7 @@ import {
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { Column, TableOptions } from 'react-table';
-import { Button, keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
+import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
@@ -23,7 +23,7 @@ import { UserGroupArchief, UserGroupOverviewProps, UserGroupOverviewRef, UserGro
 import { cloneDeep, remove } from 'lodash-es';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(({ onChangePermissions }, ref) => {
+const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(({ className, onChangePermissions, renderSearchButtons }, ref) => {
 	/**
 	 * Hooks
 	 */
@@ -129,17 +129,20 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			setSearchResults(permissions?.filter((permission) => permission.label.toLowerCase().indexOf(search.toLowerCase()) != -1))
 		} else {
 			setSearchResults(undefined);
+			setSearch(undefined);
 		}
 	}
 
 	/**
 	 * Ref
 	 */
+	// Pass functions to parent component
 	 useImperativeHandle(
 		ref,
 		() => ({
 			onCancel: onClickCancel,
 			onSave: onClickSave,
+			onSearch: onSearchSubmit,
 		})
 	)
 
@@ -198,28 +201,14 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		}
 
 		return (
-			<>
+			<div className={className}>
 				<TextInput
+					placeholder={t('Zoek...')}
 					value={search}
 					onChange={onSearchChange}
 					onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}
-					iconEnd={
-						<>
-							{search && (
-								<Button
-									label={t('Reset')}
-									onClick={() => {
-										setSearch(undefined);
-										onSearchSubmit(undefined);
-									}}
-								/>
-							)}
-							<Button
-								label={t('Zoek')}
-								onClick={() => onSearchSubmit(search)}
-							/>
-						</>
-					}
+					iconEnd={renderSearchButtons?.(search)}
+					variants={['md', 'rounded', 'grey-border', 'icon--double', 'icon-clickable', search ? 'black-border' : '']}
 				/>
 				<Table
 					options={
@@ -235,7 +224,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						/* eslint-enable @typescript-eslint/ban-types */
 					}
 				/>
-			</>
+			</div>
 		);
 	};
 
