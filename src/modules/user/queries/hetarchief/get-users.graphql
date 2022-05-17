@@ -10,6 +10,7 @@ query getUsers(
 		first_name
 		last_name
 		mail
+		last_access_at
 		group {
 			label
 		}

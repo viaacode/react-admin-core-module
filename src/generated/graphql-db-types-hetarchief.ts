@@ -12051,6 +12051,7 @@ export type Users_Profile = {
   identities: Array<Users_Identity>;
   /** An aggregate relationship */
   identities_aggregate: Users_Identity_Aggregate;
+  last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
   mail?: Maybe<Scalars['String']>;
   /** An array relationship */
@@ -12228,6 +12229,7 @@ export type Users_Profile_Bool_Exp = {
   group_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   identities?: InputMaybe<Users_Identity_Bool_Exp>;
+  last_access_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   last_name?: InputMaybe<String_Comparison_Exp>;
   mail?: InputMaybe<String_Comparison_Exp>;
   maintainer_users_profiles?: InputMaybe<Maintainer_Users_Profile_Bool_Exp>;
@@ -12253,6 +12255,7 @@ export type Users_Profile_Insert_Input = {
   group_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
   identities?: InputMaybe<Users_Identity_Arr_Rel_Insert_Input>;
+  last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
   mail?: InputMaybe<Scalars['String']>;
   maintainer_users_profiles?: InputMaybe<Maintainer_Users_Profile_Arr_Rel_Insert_Input>;
@@ -12270,6 +12273,7 @@ export type Users_Profile_Max_Fields = {
   first_name?: Maybe<Scalars['String']>;
   group_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
   mail?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamp']>;
@@ -12283,6 +12287,7 @@ export type Users_Profile_Min_Fields = {
   first_name?: Maybe<Scalars['String']>;
   group_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
   mail?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamp']>;
@@ -12322,6 +12327,7 @@ export type Users_Profile_Order_By = {
   group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   identities_aggregate?: InputMaybe<Users_Identity_Aggregate_Order_By>;
+  last_access_at?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
   mail?: InputMaybe<Order_By>;
   maintainer_users_profiles_aggregate?: InputMaybe<Maintainer_Users_Profile_Aggregate_Order_By>;
@@ -12349,6 +12355,8 @@ export enum Users_Profile_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  LastAccessAt = 'last_access_at',
+  /** column name */
   LastName = 'last_name',
   /** column name */
   Mail = 'mail',
@@ -12363,6 +12371,7 @@ export type Users_Profile_Set_Input = {
   first_name?: InputMaybe<Scalars['String']>;
   group_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
   mail?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
@@ -12380,6 +12389,8 @@ export enum Users_Profile_Update_Column {
   GroupId = 'group_id',
   /** column name */
   Id = 'id',
+  /** column name */
+  LastAccessAt = 'last_access_at',
   /** column name */
   LastName = 'last_name',
   /** column name */
@@ -12639,7 +12650,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, group?: { __typename?: 'users_group', label: string } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, group?: { __typename?: 'users_group', label: string } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
 export const DeleteContentPageLabelByIdDocument = `
@@ -13440,6 +13451,7 @@ export const GetUsersDocument = `
     first_name
     last_name
     mail
+    last_access_at
     group {
       label
     }

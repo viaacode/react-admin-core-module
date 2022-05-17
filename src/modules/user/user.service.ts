@@ -92,6 +92,7 @@ export class UserService {
 							lastName: user.last_name || undefined,
 							fullName: user.full_name || undefined,
 							userGroup: user.group?.label || undefined,
+							last_access_at: user.last_access_at,
 							idps: user.identities.map(
 								(identity) => identity.identity_provider_name as Idp
 							),

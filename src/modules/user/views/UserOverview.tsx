@@ -64,7 +64,6 @@ const UserOverview: FunctionComponent<UserProps> = ({
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const defaultSortColumn = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief ? 'last_name' : 'last_access_at';
 
 	const [profiles, setProfiles] = useState<CommonUser[] | null>(null);
 	const [profileCount, setProfileCount] = useState<number>(0);
@@ -297,7 +296,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
 				tableState.page || 0,
-				(tableState.sort_column || defaultSortColumn) as UserOverviewTableCol,
+				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
 				tableState.sort_order || 'desc',
 				columnDataType,
 				generateWhereObject(getFilters(tableState), false)
@@ -317,7 +316,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			});
 		}
 		setIsLoading(false);
-	}, [columns, defaultSortColumn, tableState, generateWhereObject, t]);
+	}, [columns, tableState, generateWhereObject, t]);
 
 	useEffect(() => {
 		fetchProfiles();
@@ -462,7 +461,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp] = await UserService.getProfiles(
 				0,
-				(tableState.sort_column || defaultSortColumn) as UserOverviewTableCol,
+				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
 				tableState.sort_order || 'desc',
 				columnDataType,
 				generateWhereObject(getFilters(tableState), true),
@@ -574,8 +573,10 @@ const UserOverview: FunctionComponent<UserProps> = ({
 				) : get(commonUser, 'firstName') || '-';
 
 			case 'lastName':
+				return truncateTableValue(get(commonUser, 'lastName'));
+
 			case 'email':
-				return truncateTableValue(get(commonUser, columnId));
+				return truncateTableValue(get(commonUser, 'email'));
 
 			case 'is_blocked':
 				return isBlocked ? 'Ja' : 'Nee';
@@ -594,7 +595,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 				return formatDate(commonUser.created_at) || '-';
 
 			case 'last_access_at': {
-				const lastAccessDate = get(commonUser, 'user.last_access_at');
+				const lastAccessDate = get(commonUser, 'last_access_at');
 				return !isNil(lastAccessDate) ? formatDate(lastAccessDate) : '-';
 			}
 			case 'temp_access': {
