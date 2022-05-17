@@ -399,7 +399,7 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 	{
 		id: 'organisation',
 		label: Config.getConfig().services.i18n.t('admin/users/user___organisatie'),
-		sortable: true,
+		sortable: false,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
