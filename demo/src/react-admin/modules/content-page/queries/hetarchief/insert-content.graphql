@@ -1,0 +1,7 @@
+mutation insertContent($contentPage: app_content_page_insert_input!) {
+	insert_app_content_page(objects: [$contentPage]) {
+		returning {
+			id
+		}
+	}
+}

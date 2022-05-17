@@ -1,0 +1,19 @@
+query getUserGroupsWithFilters(
+	$limit: Int!
+	$offset: Int!
+	$orderBy: [users_group_order_by!]!
+	$where: users_group_bool_exp!
+) {
+	users_group(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
+		label
+		id
+		created_at
+		description
+		updated_at
+	}
+	users_group_aggregate(where: $where) {
+		aggregate {
+			count
+		}
+	}
+}

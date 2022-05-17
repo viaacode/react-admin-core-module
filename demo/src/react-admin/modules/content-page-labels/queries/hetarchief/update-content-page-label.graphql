@@ -1,0 +1,11 @@
+mutation updateContentPageLabel(
+	$contentPageLabel: app_content_label_set_input!
+	$contentPageLabelId: uuid!
+) {
+	update_app_content_label(
+		where: { id: { _eq: $contentPageLabelId } }
+		_set: $contentPageLabel
+	) {
+		affected_rows
+	}
+}
