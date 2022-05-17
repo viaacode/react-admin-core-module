@@ -135,7 +135,7 @@ export class CollectionService {
 			const response = await fetchWithLogout(
 				`${
 					Config.getConfig().database.proxyUrl
-				}/collections/fetch-with-items-by-id?${stringify({
+				}/admin/collections/fetch-with-items-by-id?${stringify({
 					type,
 					assignmentUuid,
 					id: collectionId,

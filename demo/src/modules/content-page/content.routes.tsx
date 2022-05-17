@@ -9,6 +9,7 @@ import {
 	ContentPageEdit,
 	ContentPageOverview,
 } from '../../react-admin/modules/content-page/views';
+import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 
 export const CONTENT_PATH = {
 	CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
@@ -27,7 +28,7 @@ export const renderAdminContentPageRoutes = (user: CommonUser): ReactNode[] => {
 	return [
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
-			render={() => <ContentPageOverview user={user} />}
+			render={() => <ContentPageOverviewPage user={user} />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
 		/>,

@@ -234,15 +234,15 @@ export class UserService {
 			}
 			if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 				return compact(
-					get(response, 'data.users_summary_view' || []).map((user: Partial<Avo.User.User>) =>
-						get(user, 'profile_id')
+					get(response, 'data.users_summary_view' || []).map(
+						(user: Partial<Avo.User.User>) => get(user, 'profile_id')
 					)
 				);
 			}
 			// archief
 			return compact(
-				get(response, 'data.users_profile' || []).map((user: GetProfileIdsQuery["users_profile"]) =>
-					get(user, 'id')
+				get(response, 'data.users_profile' || []).map(
+					(user: GetProfileIdsQuery['users_profile']) => get(user, 'id')
 				)
 			);
 		} catch (err) {
@@ -263,7 +263,7 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/user/bulk-block`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -330,7 +330,9 @@ export class UserService {
 			if (
 				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
 			) {
-				return get(response, 'data.users_identity_provider', []).map((idp: { name: string }) => idp.name);
+				return get(response, 'data.users_identity_provider', []).map(
+					(idp: { name: string }) => idp.name
+				);
 			}
 
 			return get(response, 'data.users_idps', []).map((idp: { value: string }) => idp.value);
@@ -350,7 +352,7 @@ export class UserService {
 		const isAvo = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/user/bulk-delete`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
@@ -387,7 +389,7 @@ export class UserService {
 				privateCollections: 0,
 				assignments: 0,
 				bookmarks: 0,
-				publicContentPages:0,
+				publicContentPages: 0,
 				privateContentPages: 0,
 			};
 		}

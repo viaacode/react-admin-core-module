@@ -6,6 +6,7 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
+import { CommonUser } from '~modules/user/user.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -66,7 +67,7 @@ export interface ConfigValue {
 		};
 		queryCache: {
 			clear: (key: string) => Promise<void>;
-		}
+		};
 	};
 	components: {
 		loader: {
@@ -87,6 +88,7 @@ export interface ConfigValue {
 		graphqlUrl: string;
 		graphqlSecret: string;
 	};
+	user: CommonUser;
 }
 
 export interface IconConfig {

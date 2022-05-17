@@ -635,7 +635,7 @@ export class ContentPageService {
 	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/content-pages?${stringify({
+				`${Config.getConfig().database.proxyUrl}/admin/content-pages?${stringify({
 					path,
 				})}`,
 				{
@@ -680,9 +680,11 @@ export class ContentPageService {
 	): Promise<string | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/content-pages/path-exist?${stringify({
-					path,
-				})}`,
+				`${Config.getConfig().database.proxyUrl}/admin/content-pages/path-exist?${stringify(
+					{
+						path,
+					}
+				)}`,
 				{
 					method: 'GET',
 					headers: {
@@ -729,7 +731,7 @@ export class ContentPageService {
 		let url: string | undefined;
 		let body: any | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/content-pages`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/content-pages`;
 			body = {
 				searchQuery,
 				searchQueryLimit,
