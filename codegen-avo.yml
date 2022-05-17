@@ -5,16 +5,15 @@ schema:
         x-hasura-admin-secret: ${GRAPHQL_SECRET_AVO}
 documents:
   # Only generate types for avo specific queries. This code should eventually be moved to the admin core package
-  - "./src/modules/content-page/queries/avo/*.graphql"
-  - "./src/modules/collection/queries/avo/*.graphql"
-  - "./src/modules/shared/services/organization-service/queries/avo/*.graphql"
-  - "./src/modules/shared/services/relation-service/queries/avo/*.graphql"
-  - "./src/modules/shared/services/settings-service/queries/avo/*.graphql"
-  - "./src/modules/item/queries/avo/*.graphql"
-  - "./src/modules/user/queries/avo/*.graphql"
-  - "./src/modules/user-group/queries/avo/*.graphql"
-  - "./src/modules/content-page-labels/queries/avo/*.graphql"
-  - "!./demo/**/*.graphql"
+  - "./demo/src/react-admin/modules/content-page/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/collection/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/shared/services/organization-service/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/shared/services/settings-service/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/item/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/user/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/user-group/queries/avo/*.graphql"
+  - "./demo/src/react-admin/modules/content-page-labels/queries/avo/*.graphql"
 generates:
   src/generated/graphql-db-types-avo.ts:
     plugins:

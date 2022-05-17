@@ -10,7 +10,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default (cliArgs) => {
 	return [
 		{
-			input: ['src/index.ts'],
+			input: ['demo/src/react-admin/index.ts'],
 			output: [
 				{
 					dir: 'dist/esm',
