@@ -16,7 +16,7 @@ export const renderAdminUserGroupRoutes = (user: CommonUser): ReactNode[] => {
 	return [
 		<Route
 			key={USER_GROUP_PATH.USER_GROUP_OVERVIEW}
-			render={() => <UserGroupOverview user={user} />}
+			render={() => <UserGroupOverview />}
 			exact
 			path={USER_GROUP_PATH.USER_GROUP_OVERVIEW}
 		/>,

@@ -10,6 +10,15 @@ export enum UserGroups {
 	CP_ADMIN = 'CP_ADMIN',
 }
 
+export interface UserGroupOverviewProps {
+	onChangePermissions?: (hasChanges: boolean) => void;
+}
+
+export interface UserGroupOverviewRef {
+	onCancel: () => void;
+	onSave: () => void;
+}
+
 export interface UserGroup {
 	id: number | string;
 	label: string;

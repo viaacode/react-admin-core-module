@@ -1,7 +1,8 @@
 import React, {
 	ChangeEvent,
-	FC,
+	forwardRef,
 	useEffect,
+	useImperativeHandle,
 	useState,
 } from 'react';
 
@@ -9,7 +10,6 @@ import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { AdminLayout } from '~modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import { Column, TableOptions } from 'react-table';
@@ -19,11 +19,11 @@ import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
-import { UserGroupArchief, UserGroupUpdate } from '../types/user-group.types';
+import { UserGroupArchief, UserGroupOverviewProps, UserGroupOverviewRef, UserGroupUpdate } from '../types/user-group.types';
 import { cloneDeep, remove } from 'lodash-es';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-const UserGroupOverview: FC = () => {
+const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(({ onChangePermissions }, ref) => {
 	/**
 	 * Hooks
 	 */
@@ -89,11 +89,17 @@ const UserGroupOverview: FC = () => {
 		}
 		newUpdates.push({userGroupId, permissionId, hasPermission});
 		setUserGroupUpdates(newUpdates);
+
+		// Fire onChange for parent component
+		onChangePermissions?.(!!newUpdates.length);
 	}
 
 	const onClickCancel = () => {
 		setCurrentState(cloneDeep(userGroups));
 		setUserGroupUpdates([]);
+
+		// Fire onChange for parent component
+		onChangePermissions?.(false);
 	}
 
 	const onClickSave = () => {
@@ -101,6 +107,9 @@ const UserGroupOverview: FC = () => {
 		.then(() => {
 			refetchUserGroups()
 			setUserGroupUpdates([]);
+
+			// Fire onChange for parent component
+			onChangePermissions?.(false);
 		})
 		.catch((err) => {
 			console.error(
@@ -122,6 +131,17 @@ const UserGroupOverview: FC = () => {
 			setSearchResults(undefined);
 		}
 	}
+
+	/**
+	 * Ref
+	 */
+	 useImperativeHandle(
+		ref,
+		() => ({
+			onCancel: onClickCancel,
+			onSave: onClickSave,
+		})
+	)
 
 	/**
 	 * Effects
@@ -215,28 +235,17 @@ const UserGroupOverview: FC = () => {
 						/* eslint-enable @typescript-eslint/ban-types */
 					}
 				/>
-				{!!userGroupUpdates.length &&
-					<>
-						<Button onClick={onClickCancel} label={t('Annuleren')}/>
-						<Button onClick={onClickSave} label={t('Wijzigingen opslaan')}/>
-					</>
-				}
 			</>
 		);
 	};
 
 	return (
-		<AdminLayout pageTitle={t('User groups')}>
-			<AdminLayout.Actions></AdminLayout.Actions>
-			<AdminLayout.Content>
-				<LoadingErrorLoadedComponent
-					loadingInfo={loadingInfo}
-					dataObject={{ ...permissions }}
-					render={renderUserGroupOverview}
-				/>
-			</AdminLayout.Content>
-		</AdminLayout>
+		<LoadingErrorLoadedComponent
+			loadingInfo={loadingInfo}
+			dataObject={{ ...permissions }}
+			render={renderUserGroupOverview}
+		/>
 	);
-};
+});
 
 export default UserGroupOverview;
