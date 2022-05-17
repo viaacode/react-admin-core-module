@@ -1,5 +1,0 @@
-query getContentPagesByIds($ids: [uuid!]) {
-	app_content_page(where: { id: { _in: $ids }, is_deleted: { _eq: false } }) {
-		user_profile_id
-	}
-}

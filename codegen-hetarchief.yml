@@ -1,20 +1,19 @@
 overwrite: true
 schema: ${GRAPHQL_URL}
 documents:
-  - "./src/**/*.graphql"
+  - "./demo/src/react-admin/**/*.graphql"
   # avo specific types are generated using a separate codegen config file, otherwise we have naming conflicts between the queries
-  - "!./src/modules/content-page/queries/avo/*.graphql"
-  - "!./src/modules/collection/queries/avo/*.graphql"
-  - "!./src/modules/shared/services/organization-service/queries/avo/*.graphql"
-  - "!./src/modules/shared/services/relation-service/queries/avo/*.graphql"
-  - "!./src/modules/shared/services/settings-service/queries/avo/*.graphql"
-  - "!./src/modules/item/queries/avo/*.graphql"
-  - "!./src/modules/user/queries/avo/*.graphql"
-  - "!./src/modules/user-group/queries/avo/*.graphql"
-  - "!./src/modules/content-page-labels/queries/avo/*.graphql"
-  - "!./demo/**/*.graphql"
+  - "!./demo/src/react-admin/modules/content-page/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/collection/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/shared/services/organization-service/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/shared/services/settings-service/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/item/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/user/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/user-group/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/content-page-labels/queries/avo/*.graphql"
 generates:
-  src/generated/graphql-db-types-hetarchief.ts:
+  demo/src/react-admin/generated/graphql-db-types-hetarchief.ts:
     plugins:
       - typescript
       - typescript-operations

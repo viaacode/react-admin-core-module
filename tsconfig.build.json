@@ -1,4 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "src/**/__mocks__/**", "src/**/*.stories.*", "src/**/*.test.*"]
+  "exclude": [
+    "node_modules",
+    "demo/src/react-admin/**/__mocks__/**",
+    "demo/src/react-admin/**/*.stories.*",
+    "demo/src/react-admin/**/*.test.*"
+  ]
 }

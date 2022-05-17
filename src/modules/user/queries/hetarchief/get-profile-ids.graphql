@@ -1,5 +1,0 @@
-query getProfileIds($where: users_profile_bool_exp!) {
-	users_profile(where:$where) {
-		id
-	}
-}

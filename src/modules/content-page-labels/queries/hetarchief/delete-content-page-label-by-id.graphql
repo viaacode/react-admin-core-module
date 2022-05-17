@@ -1,5 +1,0 @@
-mutation deleteContentPageLabelById($id: uuid!) {
-	delete_app_content_label(where: { id: { _eq: $id } }) {
-		affected_rows
-	}
-}
