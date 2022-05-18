@@ -299,7 +299,13 @@ export type _Text_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['_text']>>;
 };
 
-/** Sitebrede variabelen zoals vertalingen */
+/**
+ * Sitebrede variabelen zoals vertalingen
+ *
+ *
+ * columns and relationships of "app.config"
+ *
+ */
 export type App_Config = {
   __typename?: 'app_config';
   created_at: Scalars['timestamp'];
@@ -309,7 +315,13 @@ export type App_Config = {
 };
 
 
-/** Sitebrede variabelen zoals vertalingen */
+/**
+ * Sitebrede variabelen zoals vertalingen
+ *
+ *
+ * columns and relationships of "app.config"
+ *
+ */
 export type App_ConfigValueArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -463,7 +475,13 @@ export enum App_Config_Update_Column {
   Value = 'value'
 }
 
-/** information for the blocks out of which the content pages are build */
+/**
+ * information for the blocks out of which the content pages are build
+ *
+ *
+ * columns and relationships of "app.content_block"
+ *
+ */
 export type App_Content_Block = {
   __typename?: 'app_content_block';
   /** An object relationship */
@@ -480,7 +498,13 @@ export type App_Content_Block = {
 };
 
 
-/** information for the blocks out of which the content pages are build */
+/**
+ * information for the blocks out of which the content pages are build
+ *
+ *
+ * columns and relationships of "app.content_block"
+ *
+ */
 export type App_Content_BlockVariablesArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -809,7 +833,13 @@ export type App_Content_Block_Variance_Order_By = {
   position?: InputMaybe<Order_By>;
 };
 
-/** labels to marks certain content pages and group them together */
+/**
+ * labels to marks certain content pages and group them together
+ *
+ *
+ * columns and relationships of "app.content_label"
+ *
+ */
 export type App_Content_Label = {
   __typename?: 'app_content_label';
   /** An object relationship */
@@ -827,7 +857,13 @@ export type App_Content_Label = {
 };
 
 
-/** labels to marks certain content pages and group them together */
+/**
+ * labels to marks certain content pages and group them together
+ *
+ *
+ * columns and relationships of "app.content_label"
+ *
+ */
 export type App_Content_LabelContent_Content_LabelsArgs = {
   distinct_on?: InputMaybe<Array<App_Content_Page_Content_Label_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -837,7 +873,13 @@ export type App_Content_LabelContent_Content_LabelsArgs = {
 };
 
 
-/** labels to marks certain content pages and group them together */
+/**
+ * labels to marks certain content pages and group them together
+ *
+ *
+ * columns and relationships of "app.content_label"
+ *
+ */
 export type App_Content_LabelContent_Content_Labels_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Content_Page_Content_Label_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -847,7 +889,13 @@ export type App_Content_LabelContent_Content_Labels_AggregateArgs = {
 };
 
 
-/** labels to marks certain content pages and group them together */
+/**
+ * labels to marks certain content pages and group them together
+ *
+ *
+ * columns and relationships of "app.content_label"
+ *
+ */
 export type App_Content_LabelLink_ToArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -1194,7 +1242,13 @@ export enum App_Content_Page_Constraint {
   ContentPkey = 'content_pkey'
 }
 
-/** linking table between content pages and the content_labels */
+/**
+ * linking table between content pages and the content_labels
+ *
+ *
+ * columns and relationships of "app.content_page_content_label"
+ *
+ */
 export type App_Content_Page_Content_Label = {
   __typename?: 'app_content_page_content_label';
   /** An object relationship */
@@ -2049,7 +2103,13 @@ export type App_Navigation_Variance_Fields = {
   position?: Maybe<Scalars['Float']>;
 };
 
-/** Meldingen voor eindgebruikers over bepaalde activiteit */
+/**
+ * Meldingen voor eindgebruikers over bepaalde activiteit
+ *
+ *
+ * columns and relationships of "app.notification"
+ *
+ */
 export type App_Notification = {
   __typename?: 'app_notification';
   created_at: Scalars['timestamptz'];
@@ -2342,13 +2402,8 @@ export type Json_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['json']>>;
 };
 
-export type Jsonb_Cast_Exp = {
-  String?: InputMaybe<String_Comparison_Exp>;
-};
-
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
-  _cast?: InputMaybe<Jsonb_Cast_Exp>;
   /** is the column contained in the given json value */
   _contained_in?: InputMaybe<Scalars['jsonb']>;
   /** does the column contain the given json value at the top level */
@@ -2370,7 +2425,13 @@ export type Jsonb_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['jsonb']>>;
 };
 
-/** Graphql enum types for content blocks */
+/**
+ * Graphql enum types for content blocks
+ *
+ *
+ * columns and relationships of "lookup.app_content_block_type"
+ *
+ */
 export type Lookup_App_Content_Block_Type = {
   __typename?: 'lookup_app_content_block_type';
   comment?: Maybe<Scalars['String']>;
@@ -2534,7 +2595,13 @@ export enum Lookup_App_Content_Block_Type_Update_Column {
   Value = 'value'
 }
 
-/** GraphQL enum type for content types, e.g. pages, news, projects. */
+/**
+ * GraphQL enum type for content types, e.g. pages, news, projects.
+ *
+ *
+ * columns and relationships of "lookup.app_content_type"
+ *
+ */
 export type Lookup_App_Content_Type = {
   __typename?: 'lookup_app_content_type';
   comment?: Maybe<Scalars['String']>;
@@ -2579,6 +2646,8 @@ export enum Lookup_App_Content_Type_Constraint {
 }
 
 export enum Lookup_App_Content_Type_Enum {
+  /** Frequently asked question item */
+  FaqItem = 'FAQ_ITEM',
   /** Pagina */
   Pagina = 'PAGINA'
 }
@@ -2668,7 +2737,13 @@ export enum Lookup_App_Content_Type_Update_Column {
   Value = 'value'
 }
 
-/** Types van notificaties aan eindgebruikers */
+/**
+ * Types van notificaties aan eindgebruikers
+ *
+ *
+ * columns and relationships of "lookup.app_notification_type"
+ *
+ */
 export type Lookup_App_Notification_Type = {
   __typename?: 'lookup_app_notification_type';
   comment?: Maybe<Scalars['String']>;
@@ -2781,201 +2856,13 @@ export enum Lookup_App_Notification_Type_Update_Column {
   Value = 'value'
 }
 
-/** de circle of life van een bezoek */
-export type Lookup_Maintainer_Visitor_Space_Request_Status = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status';
-  comment: Scalars['String'];
-  sort_order: Scalars['Int'];
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_aggregate';
-  aggregate?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_Fields>;
-  nodes: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-};
-
-/** aggregate fields of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_aggregate_fields';
-  avg?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Max_Fields>;
-  min?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Min_Fields>;
-  stddev?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Fields>;
-  stddev_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Samp_Fields>;
-  sum?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Sum_Fields>;
-  var_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Var_Pop_Fields>;
-  var_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Var_Samp_Fields>;
-  variance?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Variance_Fields>;
-};
-
-
-/** aggregate fields of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Avg_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_avg_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "lookup.maintainer_visitor_space_request_status". All fields are combined with a logical 'AND'. */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp = {
-  _and?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>>;
-  _not?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-  _or?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>>;
-  comment?: InputMaybe<String_Comparison_Exp>;
-  sort_order?: InputMaybe<Int_Comparison_Exp>;
-  value?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Constraint {
-  /** unique or primary key constraint */
-  CpVisitStatusPkey = 'cp_visit_status_pkey',
-  /** unique or primary key constraint */
-  MaintainerVisitorSpaceRequestStatusSortOrderKey = 'maintainer_visitor_space_request_status_sort_order_key'
-}
-
-/** input type for incrementing numeric columns in table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input = {
-  sort_order?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  sort_order?: InputMaybe<Scalars['Int']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Max_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_max_fields';
-  comment?: Maybe<Scalars['String']>;
-  sort_order?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Min_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_min_fields';
-  comment?: Maybe<Scalars['String']>;
-  sort_order?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-};
-
-/** input type for inserting object relation for remote table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Obj_Rel_Insert_Input = {
-  data: Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
-};
-
-/** on_conflict condition type for table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict = {
-  constraint: Lookup_Maintainer_Visitor_Space_Request_Status_Constraint;
-  update_columns?: Array<Lookup_Maintainer_Visitor_Space_Request_Status_Update_Column>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "lookup.maintainer_visitor_space_request_status". */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Order_By = {
-  comment?: InputMaybe<Order_By>;
-  sort_order?: InputMaybe<Order_By>;
-  value?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: lookup_maintainer_visitor_space_request_status */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  SortOrder = 'sort_order',
-  /** column name */
-  Value = 'value'
-}
-
-/** input type for updating data in table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  sort_order?: InputMaybe<Scalars['Int']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate stddev on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Pop_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_pop_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Samp_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_samp_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Sum_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_sum_fields';
-  sort_order?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Update_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  SortOrder = 'sort_order',
-  /** column name */
-  Value = 'value'
-}
-
-/** aggregate var_pop on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Var_Pop_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_var_pop_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Var_Samp_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_var_samp_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Variance_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_variance_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** Enum waardes voor de status van een bezoekersruimte */
+/**
+ * Enum waardes voor de status van een bezoekersruimte
+ *
+ *
+ * columns and relationships of "lookup.maintainer_visitor_space_status"
+ *
+ */
 export type Lookup_Maintainer_Visitor_Space_Status = {
   __typename?: 'lookup_maintainer_visitor_space_status';
   comment?: Maybe<Scalars['String']>;
@@ -3106,7 +2993,13 @@ export enum Lookup_Maintainer_Visitor_Space_Status_Update_Column {
   Value = 'value'
 }
 
-/** The target group associated with a given audience.. */
+/**
+ * The target group associated with a given audience..
+ *
+ *
+ * columns and relationships of "lookup.schema_audience_type"
+ *
+ */
 export type Lookup_Schema_Audience_Type = {
   __typename?: 'lookup_schema_audience_type';
   comment?: Maybe<Scalars['String']>;
@@ -3235,7 +3128,13 @@ export enum Lookup_Schema_Audience_Type_Update_Column {
   Value = 'value'
 }
 
-/** Informatie over de organisatie die content beheert en aanbiedt, aka CP */
+/**
+ * Informatie over de organisatie die content beheert en aanbiedt, aka CP
+ *
+ *
+ * columns and relationships of "maintainer.content_partner"
+ *
+ */
 export type Maintainer_Content_Partner = {
   __typename?: 'maintainer_content_partner';
   created_at: Scalars['timestamp'];
@@ -3256,7 +3155,13 @@ export type Maintainer_Content_Partner = {
 };
 
 
-/** Informatie over de organisatie die content beheert en aanbiedt, aka CP */
+/**
+ * Informatie over de organisatie die content beheert en aanbiedt, aka CP
+ *
+ *
+ * columns and relationships of "maintainer.content_partner"
+ *
+ */
 export type Maintainer_Content_PartnerInformationArgs = {
   iri?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3264,7 +3169,13 @@ export type Maintainer_Content_PartnerInformationArgs = {
 };
 
 
-/** Informatie over de organisatie die content beheert en aanbiedt, aka CP */
+/**
+ * Informatie over de organisatie die content beheert en aanbiedt, aka CP
+ *
+ *
+ * columns and relationships of "maintainer.content_partner"
+ *
+ */
 export type Maintainer_Content_PartnerMaintainer_Users_ProfilesArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Users_Profile_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3274,7 +3185,13 @@ export type Maintainer_Content_PartnerMaintainer_Users_ProfilesArgs = {
 };
 
 
-/** Informatie over de organisatie die content beheert en aanbiedt, aka CP */
+/**
+ * Informatie over de organisatie die content beheert en aanbiedt, aka CP
+ *
+ *
+ * columns and relationships of "maintainer.content_partner"
+ *
+ */
 export type Maintainer_Content_PartnerMaintainer_Users_Profiles_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Users_Profile_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3441,7 +3358,13 @@ export enum Maintainer_Content_Partner_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** Informatie over de zoekindex per CP */
+/**
+ * Informatie over de zoekindex per CP
+ *
+ *
+ * columns and relationships of "maintainer.index"
+ *
+ */
 export type Maintainer_Index = {
   __typename?: 'maintainer_index';
   /** An object relationship */
@@ -3497,6 +3420,7 @@ export type Maintainer_Index_Insert_Input = {
   content_partner?: InputMaybe<Maintainer_Content_Partner_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamp']>;
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
+  schema_name?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
 };
 
@@ -3571,6 +3495,7 @@ export enum Maintainer_Index_Select_Column {
 export type Maintainer_Index_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamp']>;
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
+  schema_name?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
 };
 
@@ -3581,10 +3506,18 @@ export enum Maintainer_Index_Update_Column {
   /** column name */
   SchemaMaintainerId = 'schema_maintainer_id',
   /** column name */
+  SchemaName = 'schema_name',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
-/** The user profiles that will manage this reading room */
+/**
+ * The user profiles that will manage this reading room
+ *
+ *
+ * columns and relationships of "maintainer.users_profile"
+ *
+ */
 export type Maintainer_Users_Profile = {
   __typename?: 'maintainer_users_profile';
   id: Scalars['uuid'];
@@ -3748,7 +3681,13 @@ export enum Maintainer_Users_Profile_Update_Column {
   UsersProfileId = 'users_profile_id'
 }
 
-/** Bezoekersruimte aka leeszaal van een CP */
+/**
+ * Bezoekersruimte aka leeszaal van een CP
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space"
+ *
+ */
 export type Maintainer_Visitor_Space = {
   __typename?: 'maintainer_visitor_space';
   /** An object relationship */
@@ -3773,7 +3712,13 @@ export type Maintainer_Visitor_Space = {
 };
 
 
-/** Bezoekersruimte aka leeszaal van een CP */
+/**
+ * Bezoekersruimte aka leeszaal van een CP
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space"
+ *
+ */
 export type Maintainer_Visitor_SpaceVisitor_Space_RequestsArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3783,7 +3728,13 @@ export type Maintainer_Visitor_SpaceVisitor_Space_RequestsArgs = {
 };
 
 
-/** Bezoekersruimte aka leeszaal van een CP */
+/**
+ * Bezoekersruimte aka leeszaal van een CP
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space"
+ *
+ */
 export type Maintainer_Visitor_SpaceVisitor_Space_Requests_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3940,7 +3891,13 @@ export type Maintainer_Visitor_Space_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
-/** Bezoekaanvragen van gebruikers */
+/**
+ * Bezoekaanvragen van gebruikers
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request"
+ *
+ */
 export type Maintainer_Visitor_Space_Request = {
   __typename?: 'maintainer_visitor_space_request';
   cp_space_id: Scalars['uuid'];
@@ -3957,8 +3914,6 @@ export type Maintainer_Visitor_Space_Request = {
   requested_by: Users_Profile;
   start_date?: Maybe<Scalars['timestamp']>;
   status: Scalars['String'];
-  /** An object relationship */
-  status_info: Lookup_Maintainer_Visitor_Space_Request_Status;
   updated_at: Scalars['timestamp'];
   updated_by?: Maybe<Scalars['uuid']>;
   user_accepted_tos?: Maybe<Scalars['Boolean']>;
@@ -3974,7 +3929,13 @@ export type Maintainer_Visitor_Space_Request = {
 };
 
 
-/** Bezoekaanvragen van gebruikers */
+/**
+ * Bezoekaanvragen van gebruikers
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request"
+ *
+ */
 export type Maintainer_Visitor_Space_RequestNotificationsArgs = {
   distinct_on?: InputMaybe<Array<App_Notification_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3984,7 +3945,13 @@ export type Maintainer_Visitor_Space_RequestNotificationsArgs = {
 };
 
 
-/** Bezoekaanvragen van gebruikers */
+/**
+ * Bezoekaanvragen van gebruikers
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request"
+ *
+ */
 export type Maintainer_Visitor_Space_RequestNotifications_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Notification_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3994,7 +3961,13 @@ export type Maintainer_Visitor_Space_RequestNotifications_AggregateArgs = {
 };
 
 
-/** Bezoekaanvragen van gebruikers */
+/**
+ * Bezoekaanvragen van gebruikers
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request"
+ *
+ */
 export type Maintainer_Visitor_Space_RequestVisitor_Space_Request_NotesArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Note_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4004,7 +3977,13 @@ export type Maintainer_Visitor_Space_RequestVisitor_Space_Request_NotesArgs = {
 };
 
 
-/** Bezoekaanvragen van gebruikers */
+/**
+ * Bezoekaanvragen van gebruikers
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request"
+ *
+ */
 export type Maintainer_Visitor_Space_RequestVisitor_Space_Request_Notes_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Note_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4063,7 +4042,6 @@ export type Maintainer_Visitor_Space_Request_Bool_Exp = {
   requested_by?: InputMaybe<Users_Profile_Bool_Exp>;
   start_date?: InputMaybe<Timestamp_Comparison_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
   updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
   updated_by?: InputMaybe<Uuid_Comparison_Exp>;
   user_accepted_tos?: InputMaybe<Boolean_Comparison_Exp>;
@@ -4091,7 +4069,6 @@ export type Maintainer_Visitor_Space_Request_Insert_Input = {
   requested_by?: InputMaybe<Users_Profile_Obj_Rel_Insert_Input>;
   start_date?: InputMaybe<Scalars['timestamp']>;
   status?: InputMaybe<Scalars['String']>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Obj_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
   updated_by?: InputMaybe<Scalars['uuid']>;
   user_accepted_tos?: InputMaybe<Scalars['Boolean']>;
@@ -4173,7 +4150,13 @@ export type Maintainer_Visitor_Space_Request_Mutation_Response = {
   returning: Array<Maintainer_Visitor_Space_Request>;
 };
 
-/** Notities en bemerkingen van een beheerder tijdens de levensduur van een bezoek, van aanvraag tot afronding */
+/**
+ * Notities en bemerkingen van een beheerder tijdens de levensduur van een bezoek, van aanvraag tot afronding
+ *
+ *
+ * columns and relationships of "maintainer.visitor_space_request_note"
+ *
+ */
 export type Maintainer_Visitor_Space_Request_Note = {
   __typename?: 'maintainer_visitor_space_request_note';
   created_at: Scalars['timestamp'];
@@ -4406,7 +4389,6 @@ export type Maintainer_Visitor_Space_Request_Order_By = {
   requested_by?: InputMaybe<Users_Profile_Order_By>;
   start_date?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   updated_by?: InputMaybe<Order_By>;
   user_accepted_tos?: InputMaybe<Order_By>;
@@ -4614,10 +4596,6 @@ export type Mutation_Root = {
   delete_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_notification_type" */
   delete_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** delete data from the table: "lookup.maintainer_visitor_space_request_status" */
-  delete_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** delete single row from the table: "lookup.maintainer_visitor_space_request_status" */
-  delete_lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** delete data from the table: "lookup.maintainer_visitor_space_status" */
   delete_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** delete single row from the table: "lookup.maintainer_visitor_space_status" */
@@ -4746,10 +4724,6 @@ export type Mutation_Root = {
   insert_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_notification_type" */
   insert_lookup_app_notification_type_one?: Maybe<Lookup_App_Notification_Type>;
-  /** insert data into the table: "lookup.maintainer_visitor_space_request_status" */
-  insert_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** insert a single row into the table: "lookup.maintainer_visitor_space_request_status" */
-  insert_lookup_maintainer_visitor_space_request_status_one?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** insert data into the table: "lookup.maintainer_visitor_space_status" */
   insert_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** insert a single row into the table: "lookup.maintainer_visitor_space_status" */
@@ -4878,10 +4852,6 @@ export type Mutation_Root = {
   update_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_notification_type" */
   update_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** update data of the table: "lookup.maintainer_visitor_space_request_status" */
-  update_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** update single row of the table: "lookup.maintainer_visitor_space_request_status" */
-  update_lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** update data of the table: "lookup.maintainer_visitor_space_status" */
   update_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** update single row of the table: "lookup.maintainer_visitor_space_status" */
@@ -5089,18 +5059,6 @@ export type Mutation_RootDelete_Lookup_App_Notification_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  where: Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -5507,20 +5465,6 @@ export type Mutation_RootInsert_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootInsert_Lookup_App_Notification_Type_OneArgs = {
   object: Lookup_App_Notification_Type_Insert_Input;
   on_conflict?: InputMaybe<Lookup_App_Notification_Type_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  objects: Array<Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input>;
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_Status_OneArgs = {
-  object: Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input;
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
 };
 
 
@@ -6027,22 +5971,6 @@ export type Mutation_RootUpdate_Lookup_App_Notification_Type_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input>;
-  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input>;
-  where: Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
-  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input>;
-  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input>;
-  pk_columns: Lookup_Maintainer_Visitor_Space_Request_Status_Pk_Columns_Input;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_StatusArgs = {
   _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Set_Input>;
   where: Lookup_Maintainer_Visitor_Space_Status_Bool_Exp;
@@ -6391,7 +6319,13 @@ export type Mutation_RootUpdate_Users_Profile_By_PkArgs = {
   pk_columns: Users_Profile_Pk_Columns_Input;
 };
 
-/** Bestanden die deel uitmaken van de representaties van ie's. */
+/**
+ * Bestanden die deel uitmaken van de representaties van ie's.
+ *
+ *
+ * columns and relationships of "object.file"
+ *
+ */
 export type Object_File = {
   __typename?: 'object_file';
   ebucore_is_media_fragment_of?: Maybe<Scalars['String']>;
@@ -6703,11 +6637,17 @@ export type Object_Ie = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
-  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name: Scalars['String'];
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: Maybe<Scalars['Int']>;
+  schema_part_of_archive?: Maybe<Scalars['_text']>;
+  /** Aflevering */
+  schema_part_of_episode?: Maybe<Scalars['_text']>;
+  /** Seizoen */
+  schema_part_of_season?: Maybe<Scalars['_text']>;
+  /** Serie */
+  schema_part_of_series?: Maybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: Maybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -6910,9 +6850,12 @@ export type Object_Ie_Bool_Exp = {
   schema_license?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_maintainer_id?: InputMaybe<String_Comparison_Exp>;
   schema_maintainer_id_lower?: InputMaybe<String_Comparison_Exp>;
-  schema_maintainer_name?: InputMaybe<String_Comparison_Exp>;
   schema_name?: InputMaybe<String_Comparison_Exp>;
   schema_number_of_pages?: InputMaybe<Int_Comparison_Exp>;
+  schema_part_of_archive?: InputMaybe<_Text_Comparison_Exp>;
+  schema_part_of_episode?: InputMaybe<_Text_Comparison_Exp>;
+  schema_part_of_season?: InputMaybe<_Text_Comparison_Exp>;
+  schema_part_of_series?: InputMaybe<_Text_Comparison_Exp>;
   schema_publisher?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_spatial_coverage?: InputMaybe<_Text_Comparison_Exp>;
   schema_temporal_coverage?: InputMaybe<_Text_Comparison_Exp>;
@@ -7109,6 +7052,7 @@ export type Object_Ie_Insert_Input = {
   schema_creator?: InputMaybe<Scalars['jsonb']>;
   /** Datum waarop de IE werd aangemaakt */
   schema_date_created?: InputMaybe<Scalars['daterange']>;
+  schema_date_created_lower_bound?: InputMaybe<Scalars['date']>;
   /** Datum waarop de IE voor het eerst werd uitgegeven, uitgezonden of vertoond */
   schema_date_published?: InputMaybe<Scalars['date']>;
   /** Een korte omschrijving van de IE */
@@ -7128,11 +7072,18 @@ export type Object_Ie_Insert_Input = {
   schema_license?: InputMaybe<Scalars['jsonb']>;
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
-  schema_maintainer_name?: InputMaybe<Scalars['String']>;
+  schema_maintainer_id_lower?: InputMaybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: InputMaybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: InputMaybe<Scalars['Int']>;
+  schema_part_of_archive?: InputMaybe<Scalars['_text']>;
+  /** Aflevering */
+  schema_part_of_episode?: InputMaybe<Scalars['_text']>;
+  /** Seizoen */
+  schema_part_of_season?: InputMaybe<Scalars['_text']>;
+  /** Serie */
+  schema_part_of_series?: InputMaybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: InputMaybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -7187,7 +7138,6 @@ export type Object_Ie_Max_Fields = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
-  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: Maybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
@@ -7240,7 +7190,6 @@ export type Object_Ie_Min_Fields = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
-  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: Maybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
@@ -7315,9 +7264,12 @@ export type Object_Ie_Order_By = {
   schema_license?: InputMaybe<Order_By>;
   schema_maintainer_id?: InputMaybe<Order_By>;
   schema_maintainer_id_lower?: InputMaybe<Order_By>;
-  schema_maintainer_name?: InputMaybe<Order_By>;
   schema_name?: InputMaybe<Order_By>;
   schema_number_of_pages?: InputMaybe<Order_By>;
+  schema_part_of_archive?: InputMaybe<Order_By>;
+  schema_part_of_episode?: InputMaybe<Order_By>;
+  schema_part_of_season?: InputMaybe<Order_By>;
+  schema_part_of_series?: InputMaybe<Order_By>;
   schema_publisher?: InputMaybe<Order_By>;
   schema_spatial_coverage?: InputMaybe<Order_By>;
   schema_temporal_coverage?: InputMaybe<Order_By>;
@@ -7425,11 +7377,17 @@ export enum Object_Ie_Select_Column {
   /** column name */
   SchemaMaintainerIdLower = 'schema_maintainer_id_lower',
   /** column name */
-  SchemaMaintainerName = 'schema_maintainer_name',
-  /** column name */
   SchemaName = 'schema_name',
   /** column name */
   SchemaNumberOfPages = 'schema_number_of_pages',
+  /** column name */
+  SchemaPartOfArchive = 'schema_part_of_archive',
+  /** column name */
+  SchemaPartOfEpisode = 'schema_part_of_episode',
+  /** column name */
+  SchemaPartOfSeason = 'schema_part_of_season',
+  /** column name */
+  SchemaPartOfSeries = 'schema_part_of_series',
   /** column name */
   SchemaPublisher = 'schema_publisher',
   /** column name */
@@ -7484,6 +7442,7 @@ export type Object_Ie_Set_Input = {
   schema_creator?: InputMaybe<Scalars['jsonb']>;
   /** Datum waarop de IE werd aangemaakt */
   schema_date_created?: InputMaybe<Scalars['daterange']>;
+  schema_date_created_lower_bound?: InputMaybe<Scalars['date']>;
   /** Datum waarop de IE voor het eerst werd uitgegeven, uitgezonden of vertoond */
   schema_date_published?: InputMaybe<Scalars['date']>;
   /** Een korte omschrijving van de IE */
@@ -7503,11 +7462,18 @@ export type Object_Ie_Set_Input = {
   schema_license?: InputMaybe<Scalars['jsonb']>;
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
-  schema_maintainer_name?: InputMaybe<Scalars['String']>;
+  schema_maintainer_id_lower?: InputMaybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: InputMaybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: InputMaybe<Scalars['Int']>;
+  schema_part_of_archive?: InputMaybe<Scalars['_text']>;
+  /** Aflevering */
+  schema_part_of_episode?: InputMaybe<Scalars['_text']>;
+  /** Seizoen */
+  schema_part_of_season?: InputMaybe<Scalars['_text']>;
+  /** Serie */
+  schema_part_of_series?: InputMaybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: InputMaybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -7606,6 +7572,8 @@ export enum Object_Ie_Update_Column {
   /** column name */
   SchemaDateCreated = 'schema_date_created',
   /** column name */
+  SchemaDateCreatedLowerBound = 'schema_date_created_lower_bound',
+  /** column name */
   SchemaDatePublished = 'schema_date_published',
   /** column name */
   SchemaDescription = 'schema_description',
@@ -7628,11 +7596,19 @@ export enum Object_Ie_Update_Column {
   /** column name */
   SchemaMaintainerId = 'schema_maintainer_id',
   /** column name */
-  SchemaMaintainerName = 'schema_maintainer_name',
+  SchemaMaintainerIdLower = 'schema_maintainer_id_lower',
   /** column name */
   SchemaName = 'schema_name',
   /** column name */
   SchemaNumberOfPages = 'schema_number_of_pages',
+  /** column name */
+  SchemaPartOfArchive = 'schema_part_of_archive',
+  /** column name */
+  SchemaPartOfEpisode = 'schema_part_of_episode',
+  /** column name */
+  SchemaPartOfSeason = 'schema_part_of_season',
+  /** column name */
+  SchemaPartOfSeries = 'schema_part_of_series',
   /** column name */
   SchemaPublisher = 'schema_publisher',
   /** column name */
@@ -7672,7 +7648,13 @@ export type Object_Ie_Variance_Fields = {
   schema_number_of_pages?: Maybe<Scalars['Float']>;
 };
 
-/** de digitalRepresentation van de IE inclusief mediaResource */
+/**
+ * de digitalRepresentation van de IE inclusief mediaResource
+ *
+ *
+ * columns and relationships of "object.representation"
+ *
+ */
 export type Object_Representation = {
   __typename?: 'object_representation';
   /** het bestandstype van de represenatatie, container */
@@ -7700,7 +7682,13 @@ export type Object_Representation = {
 };
 
 
-/** de digitalRepresentation van de IE inclusief mediaResource */
+/**
+ * de digitalRepresentation van de IE inclusief mediaResource
+ *
+ *
+ * columns and relationships of "object.representation"
+ *
+ */
 export type Object_RepresentationPremis_IncludesArgs = {
   distinct_on?: InputMaybe<Array<Object_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -7710,7 +7698,13 @@ export type Object_RepresentationPremis_IncludesArgs = {
 };
 
 
-/** de digitalRepresentation van de IE inclusief mediaResource */
+/**
+ * de digitalRepresentation van de IE inclusief mediaResource
+ *
+ *
+ * columns and relationships of "object.representation"
+ *
+ */
 export type Object_RepresentationPremis_Includes_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Object_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -8067,12 +8061,6 @@ export type Query_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status_aggregate: Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" using primary key columns */
-  lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" */
   lookup_maintainer_visitor_space_status: Array<Lookup_Maintainer_Visitor_Space_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status" */
@@ -8452,29 +8440,6 @@ export type Query_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Query_RootLookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_Status_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -9090,12 +9055,6 @@ export type Subscription_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status_aggregate: Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" using primary key columns */
-  lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" */
   lookup_maintainer_visitor_space_status: Array<Lookup_Maintainer_Visitor_Space_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status" */
@@ -9461,29 +9420,6 @@ export type Subscription_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Subscription_RootLookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Status_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -10486,7 +10422,13 @@ export enum Sync_Film_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** Sync table for video objects */
+/**
+ * Sync table for video objects
+ *
+ *
+ * columns and relationships of "sync.video"
+ *
+ */
 export type Sync_Video = {
   __typename?: 'sync_video';
   created_at: Scalars['timestamptz'];
@@ -10505,7 +10447,13 @@ export type Sync_Video = {
 };
 
 
-/** Sync table for video objects */
+/**
+ * Sync table for video objects
+ *
+ *
+ * columns and relationships of "sync.video"
+ *
+ */
 export type Sync_VideoDataArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -10762,7 +10710,13 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-/** Verzamelingen van items aangemaakt door gebruikers zoals favorieten */
+/**
+ * Verzamelingen van items aangemaakt door gebruikers zoals favorieten
+ *
+ *
+ * columns and relationships of "users.folder"
+ *
+ */
 export type Users_Folder = {
   __typename?: 'users_folder';
   created_at: Scalars['timestamp'];
@@ -10780,7 +10734,13 @@ export type Users_Folder = {
 };
 
 
-/** Verzamelingen van items aangemaakt door gebruikers zoals favorieten */
+/**
+ * Verzamelingen van items aangemaakt door gebruikers zoals favorieten
+ *
+ *
+ * columns and relationships of "users.folder"
+ *
+ */
 export type Users_FolderIesArgs = {
   distinct_on?: InputMaybe<Array<Users_Folder_Ie_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -10790,7 +10750,13 @@ export type Users_FolderIesArgs = {
 };
 
 
-/** Verzamelingen van items aangemaakt door gebruikers zoals favorieten */
+/**
+ * Verzamelingen van items aangemaakt door gebruikers zoals favorieten
+ *
+ *
+ * columns and relationships of "users.folder"
+ *
+ */
 export type Users_FolderIes_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Folder_Ie_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -10856,7 +10822,13 @@ export enum Users_Folder_Constraint {
   CollectionPkey = 'collection_pkey'
 }
 
-/** Koppeltabel tussen user collections en object ie */
+/**
+ * Koppeltabel tussen user collections en object ie
+ *
+ *
+ * columns and relationships of "users.folder_ie"
+ *
+ */
 export type Users_Folder_Ie = {
   __typename?: 'users_folder_ie';
   /** An object relationship */
@@ -11172,7 +11144,13 @@ export enum Users_Folder_Update_Column {
   UserProfileId = 'user_profile_id'
 }
 
-/** Gebruikersgroepen */
+/**
+ * Gebruikersgroepen
+ *
+ *
+ * columns and relationships of "users.group"
+ *
+ */
 export type Users_Group = {
   __typename?: 'users_group';
   created_at: Scalars['timestamp'];
@@ -11188,7 +11166,13 @@ export type Users_Group = {
 };
 
 
-/** Gebruikersgroepen */
+/**
+ * Gebruikersgroepen
+ *
+ *
+ * columns and relationships of "users.group"
+ *
+ */
 export type Users_GroupPermissionsArgs = {
   distinct_on?: InputMaybe<Array<Users_Group_Permission_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11198,7 +11182,13 @@ export type Users_GroupPermissionsArgs = {
 };
 
 
-/** Gebruikersgroepen */
+/**
+ * Gebruikersgroepen
+ *
+ *
+ * columns and relationships of "users.group"
+ *
+ */
 export type Users_GroupPermissions_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Group_Permission_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11316,7 +11306,13 @@ export type Users_Group_Order_By = {
   updated_at?: InputMaybe<Order_By>;
 };
 
-/** Koppeltabel voor het koppelen van permissies aan gebruikersgroepen */
+/**
+ * Koppeltabel voor het koppelen van permissies aan gebruikersgroepen
+ *
+ *
+ * columns and relationships of "users.group_permission"
+ *
+ */
 export type Users_Group_Permission = {
   __typename?: 'users_group_permission';
   /** An object relationship */
@@ -11527,7 +11523,13 @@ export enum Users_Group_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** List of user idps and id */
+/**
+ * List of user idps and id
+ *
+ *
+ * columns and relationships of "users.identity"
+ *
+ */
 export type Users_Identity = {
   __typename?: 'users_identity';
   created_at: Scalars['timestamptz'];
@@ -11840,7 +11842,13 @@ export enum Users_Identity_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** Wat een gebruiker mag doen */
+/**
+ * Wat een gebruiker mag doen
+ *
+ *
+ * columns and relationships of "users.permission"
+ *
+ */
 export type Users_Permission = {
   __typename?: 'users_permission';
   created_at: Scalars['timestamp'];
@@ -11856,7 +11864,13 @@ export type Users_Permission = {
 };
 
 
-/** Wat een gebruiker mag doen */
+/**
+ * Wat een gebruiker mag doen
+ *
+ *
+ * columns and relationships of "users.permission"
+ *
+ */
 export type Users_PermissionGroupsArgs = {
   distinct_on?: InputMaybe<Array<Users_Group_Permission_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11866,7 +11880,13 @@ export type Users_PermissionGroupsArgs = {
 };
 
 
-/** Wat een gebruiker mag doen */
+/**
+ * Wat een gebruiker mag doen
+ *
+ *
+ * columns and relationships of "users.permission"
+ *
+ */
 export type Users_PermissionGroups_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Group_Permission_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12031,7 +12051,13 @@ export enum Users_Permission_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_Profile = {
   __typename?: 'users_profile';
   accepted_tos_at?: Maybe<Scalars['timestamptz']>;
@@ -12074,7 +12100,13 @@ export type Users_Profile = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileCollectionsArgs = {
   distinct_on?: InputMaybe<Array<Users_Folder_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12084,7 +12116,13 @@ export type Users_ProfileCollectionsArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileCollections_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Folder_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12094,7 +12132,13 @@ export type Users_ProfileCollections_AggregateArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileIdentitiesArgs = {
   distinct_on?: InputMaybe<Array<Users_Identity_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12104,7 +12148,13 @@ export type Users_ProfileIdentitiesArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileIdentities_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Identity_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12114,7 +12164,13 @@ export type Users_ProfileIdentities_AggregateArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileMaintainer_Users_ProfilesArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Users_Profile_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12124,7 +12180,13 @@ export type Users_ProfileMaintainer_Users_ProfilesArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileMaintainer_Users_Profiles_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Users_Profile_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12134,7 +12196,13 @@ export type Users_ProfileMaintainer_Users_Profiles_AggregateArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileNotesArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Note_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12144,7 +12212,13 @@ export type Users_ProfileNotesArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileNotes_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Note_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12154,7 +12228,13 @@ export type Users_ProfileNotes_AggregateArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileNotificationsArgs = {
   distinct_on?: InputMaybe<Array<App_Notification_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12164,7 +12244,13 @@ export type Users_ProfileNotificationsArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileNotifications_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Notification_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12174,7 +12260,13 @@ export type Users_ProfileNotifications_AggregateArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileVisitor_Space_RequestsArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12184,7 +12276,13 @@ export type Users_ProfileVisitor_Space_RequestsArgs = {
 };
 
 
-/** A user his identifying attributes aka profile information */
+/**
+ * A user his identifying attributes aka profile information
+ *
+ *
+ * columns and relationships of "users.profile"
+ *
+ */
 export type Users_ProfileVisitor_Space_Requests_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -12579,6 +12677,11 @@ export type UpdateContentByIdMutationVariables = Exact<{
 
 export type UpdateContentByIdMutation = { __typename?: 'mutation_root', update_app_content_page?: { __typename?: 'app_content_page_mutation_response', affected_rows: number } | null };
 
+export type GetOrganizationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrganizationsWithUsersQuery = { __typename?: 'query_root', maintainer_users_profile: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null } }> };
+
 export type GetTranslationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12658,7 +12761,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, group_id?: any | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, group?: { __typename?: 'users_group', label: string } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
 export const DeleteContentPageLabelByIdDocument = `
@@ -13246,6 +13349,29 @@ export const useUpdateContentByIdMutation = <
       (variables?: UpdateContentByIdMutationVariables) => fetcher<UpdateContentByIdMutation, UpdateContentByIdMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateContentByIdDocument, variables)(),
       options
     );
+export const GetOrganizationsWithUsersDocument = `
+    query getOrganizationsWithUsers {
+  maintainer_users_profile(distinct_on: maintainer_identifier) {
+    maintainer {
+      schema_identifier
+      schema_name
+    }
+  }
+}
+    `;
+export const useGetOrganizationsWithUsersQuery = <
+      TData = GetOrganizationsWithUsersQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetOrganizationsWithUsersQueryVariables,
+      options?: UseQueryOptions<GetOrganizationsWithUsersQuery, TError, TData>
+    ) =>
+    useQuery<GetOrganizationsWithUsersQuery, TError, TData>(
+      variables === undefined ? ['getOrganizationsWithUsers'] : ['getOrganizationsWithUsers', variables],
+      fetcher<GetOrganizationsWithUsersQuery, GetOrganizationsWithUsersQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetOrganizationsWithUsersDocument, variables),
+      options
+    );
 export const GetTranslationsDocument = `
     query getTranslations {
   app_config(where: {name: {_ilike: "translations_%"}}) {
@@ -13476,7 +13602,10 @@ export const GetUsersDocument = `
     first_name
     last_name
     mail
-    group_id
+    last_access_at
+    group {
+      label
+    }
     identities {
       identity_provider_name
     }
