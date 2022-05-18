@@ -6,32 +6,45 @@ import { Config } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '../data-service';
-import { GetOrganizationsWithUsersDocument } from '~generated/graphql-db-types-avo';
+
+import { ORGANIZATION_QUERIES } from './queries/organization.queries';
+import { GetOrganizationsWithUsersQuery as  GetOrganizationsWithUsersQueryAvo} from '~generated/graphql-db-types-avo';
+import { GetOrganizationsWithUsersQuery as GetOrganizationsWithUsersQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 
 export class OrganisationService {
+	private static getQueries() {
+		return ORGANIZATION_QUERIES[Config.getConfig().database.databaseApplicationType];
+	}
+
 	public static async fetchOrganisationsWithUsers(): Promise<
 		Partial<Avo.Organization.Organization>[]
 	> {
-		if(Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
-			return [];
-		}
-
 		try {
-			const response = await dataService.query({ query: GetOrganizationsWithUsersDocument });
+			const response = await dataService.query<GetOrganizationsWithUsersQueryAvo & GetOrganizationsWithUsersQueryHetArchief>({
+				query: this.getQueries().GetOrganizationsWithUsersDocument
+			});
 
 			if (response.errors) {
 				throw new CustomError('GraphQL response contains errors', null, { response });
 			}
 
-			const organisations: Partial<Avo.Organization.Organization>[] | null = get(
-				response,
-				'data.shared_organisations_with_users'
-			);
-
-			if (!organisations) {
-				throw new CustomError('Response does not contain any organisations', null, {
+			let organisations: Partial<Avo.Organization.Organization>[] = [];
+			if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+				organisations = get(
 					response,
-				});
+					'data.shared_organisations_with_users'
+				);
+
+				if (!organisations) {
+					throw new CustomError('Response does not contain any organisations', null, {
+						response,
+					});
+				}
+			} else {
+				organisations = (response.data as GetOrganizationsWithUsersQueryHetArchief).maintainer_users_profile.map((maintainerWrap) => ({
+					name: maintainerWrap.maintainer.schema_name || undefined,
+					or_id: maintainerWrap.maintainer.schema_identifier,
+				}));
 			}
 
 			return sortBy(organisations, 'name');

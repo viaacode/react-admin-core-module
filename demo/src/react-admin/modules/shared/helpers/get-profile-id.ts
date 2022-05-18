@@ -8,7 +8,7 @@ export function getProfileId(user: CommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile id because the logged in user is undefined');
 	}
-	const profileId = get(user, 'profile.id') || get(user, 'profileId');
+	const profileId = get(user, 'profileId');
 	if (!profileId) {
 		throw new CustomError('No profile id could be found for the logged in user');
 	}

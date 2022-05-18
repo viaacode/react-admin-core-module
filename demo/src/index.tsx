@@ -118,7 +118,11 @@ function setConfig() {
 			lastName: 'Verhelst3',
 			email: 'bert.verhelst@studiohyperdrive.be',
 			acceptedTosAt: '2022-05-16T10:06:58.282+00:00',
-			userGroup: 'MEEMOO_ADMIN',
+			userGroup: {
+				name: 'MEEMOO_ADMIN',
+				label: 'Sitebeheerder',
+				id: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
+			},
 			permissions: [
 				Permission.APPROVE_DENY_ALL_VISIT_REQUESTS,
 				Permission.CREATE_VISIT_REQUEST,

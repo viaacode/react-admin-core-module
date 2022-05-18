@@ -37811,6 +37811,19 @@ export type GetSubjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetSubjectsQuery = { __typename?: 'query_root', lookup_enum_lom_classification: Array<{ __typename?: 'lookup_enum_lom_classification', description: string }> };
 
+export type GetTranslationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTranslationsQuery = { __typename?: 'query_root', app_site_variables: Array<{ __typename?: 'app_site_variables', name: string, value: any }> };
+
+export type UpdateTranslationsMutationVariables = Exact<{
+  name: Scalars['String'];
+  translations: App_Site_Variables_Set_Input;
+}>;
+
+
+export type UpdateTranslationsMutation = { __typename?: 'mutation_root', update_app_site_variables?: { __typename?: 'app_site_variables_mutation_response', affected_rows: number } | null };
+
 export type DeleteUserGroupMutationVariables = Exact<{
   userGroupId: Scalars['Int'];
 }>;
@@ -38926,6 +38939,46 @@ export const useGetSubjectsQuery = <
     useQuery<GetSubjectsQuery, TError, TData>(
       variables === undefined ? ['getSubjects'] : ['getSubjects', variables],
       fetcher<GetSubjectsQuery, GetSubjectsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetSubjectsDocument, variables),
+      options
+    );
+export const GetTranslationsDocument = `
+    query getTranslations {
+  app_site_variables(where: {name: {_ilike: "translations-%"}}) {
+    name
+    value
+  }
+}
+    `;
+export const useGetTranslationsQuery = <
+      TData = GetTranslationsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetTranslationsQueryVariables,
+      options?: UseQueryOptions<GetTranslationsQuery, TError, TData>
+    ) =>
+    useQuery<GetTranslationsQuery, TError, TData>(
+      variables === undefined ? ['getTranslations'] : ['getTranslations', variables],
+      fetcher<GetTranslationsQuery, GetTranslationsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetTranslationsDocument, variables),
+      options
+    );
+export const UpdateTranslationsDocument = `
+    mutation updateTranslations($name: String!, $translations: app_site_variables_set_input!) {
+  update_app_site_variables(where: {name: {_eq: $name}}, _set: $translations) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateTranslationsMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<UpdateTranslationsMutation, TError, UpdateTranslationsMutationVariables, TContext>
+    ) =>
+    useMutation<UpdateTranslationsMutation, TError, UpdateTranslationsMutationVariables, TContext>(
+      ['updateTranslations'],
+      (variables?: UpdateTranslationsMutationVariables) => fetcher<UpdateTranslationsMutation, UpdateTranslationsMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateTranslationsDocument, variables)(),
       options
     );
 export const DeleteUserGroupDocument = `

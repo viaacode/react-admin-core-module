@@ -1,0 +1,9 @@
+query getOrganizationsWithUsers {
+	maintainer_users_profile(distinct_on: maintainer_identifier) {
+		maintainer {
+			schema_identifier
+			schema_name
+		}
+	}
+}
+

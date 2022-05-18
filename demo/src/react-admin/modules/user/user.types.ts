@@ -45,6 +45,7 @@ export enum Permission {
 	EDIT_ANY_USER = 'EDIT_ANY_USER',
 	DELETE_ANY_USER = 'DELETE_ANY_USER',
 	EDIT_USER_TEMP_ACCESS = 'EDIT_USER_TEMP_ACCESS',
+	EDIT_TRANSLATIONS = 'EDIT_TRANSLATIONS',
 	APPROVE_DENY_ALL_VISIT_REQUESTS = 'APPROVE_DENY_ALL_VISIT_REQUESTS',
 	CREATE_VISIT_REQUEST = 'CREATE_VISIT_REQUEST',
 	EDIT_PERMISSION_GROUPS = 'EDIT_PERMISSION_GROUPS',
@@ -94,6 +95,12 @@ export interface UserTempAccess {
 	until?: string | null;
 }
 
+export interface UserGroupInfo {
+	label: string;
+	name: string;
+	id: string | number; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+}
+
 /**
  * User model for both hetarchief and avo
  */
@@ -114,7 +121,7 @@ export interface CommonUser {
 	is_exception?: boolean;
 	business_category?: string;
 	created_at?: string;
-	userGroup?: string;
+	userGroup?: Partial<UserGroupInfo>;
 	userId?: string;
 	uid?: string;
 	is_blocked?: boolean;
@@ -126,11 +133,11 @@ export interface CommonUser {
 }
 
 export type UserOverviewTableCol =
-	| 'id'
-	| 'first_name'
-	| 'last_name'
-	| 'mail'
-	| 'user_group'
+	| 'profileId'
+	| 'firstName'
+	| 'lastName'
+	| 'email'
+	| 'userGroup'
 	| 'business_category'
 	| 'is_exception'
 	| 'is_blocked'

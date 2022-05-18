@@ -21,11 +21,10 @@ import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { USER_QUERIES } from '~modules/user/queries/users.queries';
 
-import { TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from '../content-page/const/content-page.consts';
 import { CustomError } from '../shared/helpers/custom-error';
 import { dataService } from '../shared/services/data-service';
 
-import { ITEMS_PER_PAGE } from './user.consts';
+import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT, ITEMS_PER_PAGE } from './user.consts';
 import {
 	CommonUser,
 	DeleteContentCounts,
@@ -54,7 +53,11 @@ export class UserService {
 				firstName: user.first_name || undefined,
 				lastName: user.last_name || undefined,
 				fullName: user.full_name || undefined,
-				userGroup: user.group_id,
+				userGroup: {
+					id: user.group?.id,
+					name: user.group?.name,
+					label: user.group?.label,
+				},
 				idps: user.identities?.map((identity) => identity.identity_provider_name as Idp),
 				organisation: {
 					name: user.maintainer_users_profiles?.[0]?.maintainer.schema_name || undefined,
@@ -85,7 +88,11 @@ export class UserService {
 				is_exception: user.is_exception || undefined,
 				business_category: user.business_category || undefined,
 				created_at: user.acc_created_at,
-				userGroup: user.group_name || undefined,
+				userGroup: {
+					name: user.group_name || undefined,
+					label: user.group_name || undefined,
+					id: user.group_id || undefined,
+				},
 				userId: user.user_id,
 				uid: user.user_id,
 				email: user.mail || undefined,
@@ -109,8 +116,9 @@ export class UserService {
 		tableColumnDataType: string,
 		where: any = {},
 		itemsPerPage: number = ITEMS_PER_PAGE
-	): Promise<[Avo.User.Profile[], number]> {
+	): Promise<[CommonUser[], number]> {
 		let variables: any;
+		console.log('input where', where);
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted =
@@ -129,7 +137,7 @@ export class UserService {
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
-					TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT
+					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
 				),
 			};
 
