@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { CheckboxOption } from '../../shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { CustomError } from '../../shared/helpers/custom-error';
-import { GET_SPECIAL_USER_GROUPS } from '../../user-group/user-group.const';
-import { UserGroupService } from '../../user-group/user-group.service';
+import { GET_SPECIAL_USER_GROUPS } from '../../user-group/const/user-group.const';
+import { UserGroupService } from '../../user-group/services/user-group.service';
 
 import { Config, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
