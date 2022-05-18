@@ -32,12 +32,15 @@ import {
 } from '../../shared/helpers/filters';
 import { AdminLayout } from '../../shared/layouts';
 import { UserService } from '../user.service';
-import { UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
+import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
 import './UserOverview.scss';
 import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { LoadingErrorLoadedComponent, LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
@@ -53,20 +56,23 @@ import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useIdps } from '~modules/shared/hooks/useIdps';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
-import AddOrRemoveLinkedElementsModal, { AddOrRemove } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import AddOrRemoveLinkedElementsModal, {
+	AddOrRemove,
+} from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import UserDeleteModal from '../components/UserDeleteModal';
-import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, ITEMS_PER_PAGE } from '../user.consts';
+import {
+	GET_USER_BULK_ACTIONS,
+	GET_USER_OVERVIEW_TABLE_COLS,
+	ITEMS_PER_PAGE,
+} from '../user.consts';
 
-const UserOverview: FunctionComponent<UserProps> = ({
-	user,
-}) => {
+const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const defaultSortColumn = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief ? 'last_name' : 'last_access_at';
 
-	const [profiles, setProfiles] = useState<Avo.User.Profile[] | null>(null);
+	const [profiles, setProfiles] = useState<CommonUser[] | null>(null);
 	const [profileCount, setProfileCount] = useState<number>(0);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [tableState, setTableState] = useState<Partial<UserTableState>>({});
@@ -132,110 +138,176 @@ const UserOverview: FunctionComponent<UserProps> = ({
 
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
-			const andFilters: any[] = [];
-
-			if (filters.query) {
-				const query = `%${filters.query}%`;
-
-				andFilters.push({
-					_or: [
-						{ stamboek: { _ilike: query } },
-						{ mail: { _ilike: query } },
-						{ full_name: { _ilike: query } },
-						{ company_name: { _ilike: query } },
-						{ group_name: { _ilike: query } },
-						{ business_category: { _ilike: query } },
-					],
-				});
-			}
-
-			andFilters.push(...getBooleanFilters(filters, ['is_blocked', 'is_exception']));
-
-			andFilters.push(
-				...getDateRangeFilters(
+			if (
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+			) {
+				return generateWhereObjectArchief(
 					filters,
-					['blocked_at', 'unblocked_at'],
-					['blocked_at.max', 'unblocked_at.max']
-				)
-			);
-
-			andFilters.push(
-				...getMultiOptionFilters(
-					filters,
-					['user_group', 'organisation', 'business_category'],
-					['group_id', 'company_id', 'business_category']
-				)
-			);
-
-			andFilters.push(
-				...getMultiOptionsFilters(
-					filters,
-					['education_levels', 'subjects', 'idps'],
-					['contexts', 'classifications', 'idps'],
-					['key', 'key', 'idp'],
-					true
-				)
-			);
-
-			andFilters.push(
-				...getMultiOptionFilters(
-					filters,
-					['temp_access'],
-					['user.temp_access.current.status']
-				)
-			);
-
-			andFilters.push(
-				...getDateRangeFilters(
-					filters,
-					['created_at', 'last_access_at'],
-					['acc_created_at', 'last_access_at']
-				)
-			);
-
-			if (filters.educational_organisations && filters.educational_organisations.length) {
-				const orFilters: any[] = [];
-
-				eduOrgToClientOrg(without(filters.educational_organisations, NULL_FILTER)).forEach(
-					(org) => {
-						orFilters.push({
-							organisations: {
-								organization_id: { _eq: org.organizationId },
-								unit_id: org.unitId ? { _eq: org.unitId } : { _is_null: true },
-							},
-						});
-					}
+					onlySelectedProfiles,
+					selectedProfileIds
 				);
-
-				if (filters.educational_organisations.includes(NULL_FILTER)) {
-					orFilters.push({
-						_not: {
-							organisations: {},
-						},
-					});
-				}
-
-				andFilters.push({
-					_or: orFilters,
-				});
 			}
-
-			if (onlySelectedProfiles) {
-				andFilters.push({ profile_id: { _in: selectedProfileIds } });
-			}
-
-			// Filter users by wether the user has a Stamboeknummer or not.
-			if (!isNil(filters.stamboek)) {
-				const hasStamboek = first(filters.stamboek) === 'true';
-				const isStamboekNull = !hasStamboek;
-
-				andFilters.push({ stamboek: { _is_null: isStamboekNull } });
-			}
-
-			return { _and: andFilters };
+			return generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 		},
 		[selectedProfileIds]
 	);
+
+	const generateWhereObjectAvo = (
+		filters: Partial<UserTableState>,
+		onlySelectedProfiles: boolean,
+		theSelectedProfileIds: string[]
+	) => {
+		const andFilters: any[] = [];
+
+		if (filters.query) {
+			const query = `%${filters.query}%`;
+
+			andFilters.push({
+				_or: [
+					{ stamboek: { _ilike: query } },
+					{ mail: { _ilike: query } },
+					{ full_name: { _ilike: query } },
+					{ company_name: { _ilike: query } },
+					{ group_name: { _ilike: query } },
+					{ business_category: { _ilike: query } },
+				],
+			});
+		}
+
+		andFilters.push(...getBooleanFilters(filters, ['is_blocked', 'is_exception']));
+
+		andFilters.push(
+			...getDateRangeFilters(
+				filters,
+				['blocked_at', 'unblocked_at'],
+				['blocked_at.max', 'unblocked_at.max']
+			)
+		);
+
+		andFilters.push(
+			...getMultiOptionFilters(
+				filters,
+				['userGroup', 'organisation', 'business_category'],
+				['group_id', 'company_id', 'business_category']
+			)
+		);
+
+		andFilters.push(
+			...getMultiOptionsFilters(
+				filters,
+				['education_levels', 'subjects', 'idps'],
+				['contexts', 'classifications', 'idps'],
+				['key', 'key', 'idp'],
+				true
+			)
+		);
+
+		andFilters.push(
+			...getMultiOptionFilters(filters, ['temp_access'], ['user.temp_access.current.status'])
+		);
+
+		andFilters.push(
+			...getDateRangeFilters(
+				filters,
+				['created_at', 'last_access_at'],
+				['acc_created_at', 'last_access_at']
+			)
+		);
+
+		if (filters.educational_organisations && filters.educational_organisations.length) {
+			const orFilters: any[] = [];
+
+			eduOrgToClientOrg(without(filters.educational_organisations, NULL_FILTER)).forEach(
+				(org) => {
+					orFilters.push({
+						organisations: {
+							organization_id: { _eq: org.organizationId },
+							unit_id: org.unitId ? { _eq: org.unitId } : { _is_null: true },
+						},
+					});
+				}
+			);
+
+			if (filters.educational_organisations.includes(NULL_FILTER)) {
+				orFilters.push({
+					_not: {
+						organisations: {},
+					},
+				});
+			}
+
+			andFilters.push({
+				_or: orFilters,
+			});
+		}
+
+		if (onlySelectedProfiles) {
+			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
+		}
+
+		// Filter users by wether the user has a Stamboeknummer or not.
+		if (!isNil(filters.stamboek)) {
+			const hasStamboek = first(filters.stamboek) === 'true';
+			const isStamboekNull = !hasStamboek;
+
+			andFilters.push({ stamboek: { _is_null: isStamboekNull } });
+		}
+
+		return { _and: andFilters };
+	};
+
+	const generateWhereObjectArchief = (
+		filters: Partial<UserTableState>,
+		onlySelectedProfiles: boolean,
+		theSelectedProfileIds: string[]
+	) => {
+		const andFilters: any[] = [];
+
+		if (filters.query) {
+			const query = `%${filters.query}%`;
+
+			andFilters.push({
+				_or: [
+					{ mail: { _ilike: query } },
+					{ full_name: { _ilike: query } },
+					{
+						maintainer_users_profiles: {
+							maintainer: {
+								schema_name: {
+									_ilike: query,
+								},
+							},
+						},
+					},
+					{
+						group: {
+							name: {
+								_ilike: query,
+							},
+						},
+					},
+				],
+			});
+		}
+
+		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
+
+		andFilters.push(
+			...getMultiOptionsFilters(
+				filters,
+				['idps', 'organisation'],
+				['identities', 'maintainer_users_profiles'],
+				['identity_provider_name', 'maintainer_identifier'],
+				true
+			)
+		);
+
+		if (onlySelectedProfiles) {
+			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
+		}
+
+		return { _and: andFilters };
+	};
 
 	const fetchProfiles = useCallback(async () => {
 		try {
@@ -247,7 +319,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
 				tableState.page || 0,
-				(tableState.sort_column || defaultSortColumn) as UserOverviewTableCol,
+				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
 				tableState.sort_order || 'desc',
 				columnDataType,
 				generateWhereObject(getFilters(tableState), false)
@@ -309,7 +381,6 @@ const UserOverview: FunctionComponent<UserProps> = ({
 					),
 					type: ToastType.SUCCESS,
 				});
-
 			}
 		} catch (err) {
 			console.error(
@@ -378,7 +449,9 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
-					blockOrUnblock ? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd' : 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
+					blockOrUnblock
+						? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
+						: 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
 				),
 				type: ToastType.SUCCESS,
 			});
@@ -505,53 +578,52 @@ const UserOverview: FunctionComponent<UserProps> = ({
 		}
 	};
 
-	const renderTableCell = (
-		rowData: Partial<Avo.User.Profile>,
-		columnId: UserOverviewTableCol
-	) => {
+	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const Link = Config.getConfig().services.router.Link;
 
-		const { id, user, created_at, organisation } = rowData;
-
-		const isBlocked = get(rowData, 'user.is_blocked');
+		const isBlocked = get(commonUser, 'user.is_blocked');
 
 		switch (columnId) {
-			case 'first_name':
-				return (
-					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id })}>
-						{truncateTableValue(get(user, columnId))}
+			case 'firstName':
+				// no user detail for archief yet
+
+				return Config.getConfig().database.databaseApplicationType ===
+					AvoOrHetArchief.avo ? (
+					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
+						{truncateTableValue(get(commonUser, columnId))}
 					</Link>
+				) : (
+					get(commonUser, 'firstName') || '-'
 				);
 
-			case 'last_name':
-			case 'mail':
-				return truncateTableValue(get(user, columnId));
+			case 'lastName':
+				return truncateTableValue(get(commonUser, 'lastName'));
 
-			case 'user_group':
-				return get(rowData, 'profile_user_group.group.label') || '-';
+			case 'email':
+				return truncateTableValue(get(commonUser, 'email'));
 
 			case 'is_blocked':
 				return isBlocked ? 'Ja' : 'Nee';
 
 			case 'blocked_at':
 			case 'unblocked_at':
-				return formatDate(get(rowData, ['user', columnId])) || '-';
+				return formatDate(get(commonUser, ['user', columnId])) || '-';
 
 			case 'is_exception':
-				return get(rowData, 'is_exception') ? 'Ja' : 'Nee';
+				return get(commonUser, 'is_exception') ? 'Ja' : 'Nee';
 
 			case 'organisation':
-				return get(organisation, 'name') || '-';
+				return get(commonUser, 'organisation.name') || '-';
 
 			case 'created_at':
-				return formatDate(created_at) || '-';
+				return formatDate(commonUser.created_at) || '-';
 
 			case 'last_access_at': {
-				const lastAccessDate = get(rowData, 'user.last_access_at');
+				const lastAccessDate = get(commonUser, 'last_access_at');
 				return !isNil(lastAccessDate) ? formatDate(lastAccessDate) : '-';
 			}
 			case 'temp_access': {
-				const tempAccess = get(rowData, 'user.temp_access.current.status');
+				const tempAccess = get(commonUser, 'user.temp_access.current.status');
 
 				switch (tempAccess) {
 					case 0:
@@ -563,27 +635,27 @@ const UserOverview: FunctionComponent<UserProps> = ({
 				}
 			}
 			case 'temp_access_from':
-				return formatDate(get(rowData, 'user.temp_access.from')) || '-';
+				return formatDate(get(commonUser, 'user.temp_access.from')) || '-';
 
 			case 'temp_access_until':
-				return formatDate(get(rowData, 'user.temp_access.until')) || '-';
+				return formatDate(get(commonUser, 'user.temp_access.until')) || '-';
 
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						get(rowData, 'user.idpmaps', []),
-						`user_${get(rowData, 'user.uid')}`,
+						get(commonUser, 'idps', []),
+						`user_${get(commonUser, 'user.profileId')}`,
 						navigateFilterToOption(columnId)
 					) || '-'
 				);
 
 			case 'education_levels':
 			case 'subjects': {
-				const labels = get(rowData, columnId, []);
+				const labels = get(commonUser, columnId, []);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 			case 'educational_organisations': {
-				const orgs: ClientEducationOrganization[] = get(rowData, columnId, []);
+				const orgs: ClientEducationOrganization[] = get(commonUser, columnId, []);
 				const tags = orgs.map(
 					(org): TagOption => ({
 						id: `${org.organizationId}:${org.unitId || ''}`,
@@ -598,8 +670,14 @@ const UserOverview: FunctionComponent<UserProps> = ({
 					/>
 				);
 			}
+
+			case 'userGroup':
+				return truncateTableValue(
+					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
+				);
+
 			default:
-				return truncateTableValue(rowData[columnId] || '-');
+				return truncateTableValue(commonUser[columnId] || '-');
 		}
 	};
 
@@ -628,7 +706,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 					columns={columns}
 					data={profiles}
 					dataCount={profileCount}
-					renderCell={(rowData: Partial<Avo.User.Profile>, columnId: string) =>
+					renderCell={(rowData: CommonUser, columnId: string) =>
 						renderTableCell(rowData, columnId as UserOverviewTableCol)
 					}
 					searchTextPlaceholder={t(
@@ -679,11 +757,8 @@ const UserOverview: FunctionComponent<UserProps> = ({
 	};
 
 	return (
-		<AdminLayout
-			pageTitle={t('admin/users/views/user-overview___gebruikers')}
-		>
-			<AdminLayout.Actions>
-			</AdminLayout.Actions>
+		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
+			<AdminLayout.Actions></AdminLayout.Actions>
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}

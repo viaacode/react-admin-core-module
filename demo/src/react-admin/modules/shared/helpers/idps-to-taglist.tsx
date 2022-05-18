@@ -2,20 +2,21 @@ import { noop } from 'lodash-es';
 import React, { ReactText } from 'react';
 
 import { TagList, TagOption } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import { Idp } from '~modules/user/user.types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export const IDP_COLORS: { [idp in Avo.Auth.IdpType]: string } = {
+export const IDP_COLORS: { [idp in Idp]: string } = {
 	HETARCHIEF: '#25a4cf',
 	KLASCEMENT: '#f7931b',
 	SMARTSCHOOL: '#f05a1a',
 	VLAAMSEOVERHEID: '#ffe612',
+	MEEMOO: '#00c8aa',
 };
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 export function idpMapsToTagList(
-	idpMaps: Avo.Auth.IdpType[],
+	idpMaps: Idp[],
 	key: string,
 	onTagClicked: (tagId: ReactText) => void = noop
 ) {
@@ -25,7 +26,7 @@ export function idpMapsToTagList(
 	return (
 		<TagList
 			tags={idpMaps.map(
-				(idpMap: Avo.Auth.IdpType): TagOption => {
+				(idpMap: Idp): TagOption => {
 					return {
 						color: IDP_COLORS[idpMap],
 						label: idpMap,
