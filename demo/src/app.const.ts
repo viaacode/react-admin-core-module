@@ -6,7 +6,7 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
-import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
+import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
 import { USER_PATH } from '~modules/user/user.consts';
 import { NavigationItemInfo } from './shared/types';
 

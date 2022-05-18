@@ -62,8 +62,9 @@ export class UserService {
 				organisation: {
 					name: user.maintainer_users_profiles?.[0]?.maintainer.schema_name || undefined,
 					or_id: user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-					logo_url: (user.maintainer_users_profiles?.[0]?.maintainer as any)
-						?.information?.[0]?.logo?.iri, // TODO fix query and regenerate db type and remove any cast when org api is back up
+					logo_url:
+						user.maintainer_users_profiles?.[0]?.maintainer?.information?.[0]?.logo
+							?.iri,
 				},
 			};
 		} else {

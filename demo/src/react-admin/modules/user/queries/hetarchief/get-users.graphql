@@ -23,6 +23,11 @@ query getUsers(
             maintainer {
                 schema_identifier
                 schema_name
+                information {
+                    logo {
+                        iri
+                    }
+                }
             }
         }
     }
@@ -32,9 +37,3 @@ query getUsers(
         }
     }
 }
-# TODO add the information fetch back to maintainer once org api is back up and running
-#				information {
-#					logo {
-#						iri
-#					}
-#				}

@@ -19,13 +19,13 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;

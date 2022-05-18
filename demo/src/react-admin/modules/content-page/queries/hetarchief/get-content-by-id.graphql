@@ -20,6 +20,11 @@ query getContentById($id: uuid!) {
                 maintainer {
                     schema_identifier
                     schema_name
+                    information {
+                        logo {
+                            iri
+                        }
+                    }
                 }
             }
             group {
@@ -52,9 +57,3 @@ query getContentById($id: uuid!) {
         }
     }
 }
-# TODO add the information fetch back to maintainer once org api is back up and running
-#information {
-#logo {
-#iri
-#}
-#}

@@ -6,26 +6,6 @@ import { CustomError } from './custom-error';
 
 import { CommonUser } from '~modules/user/user.types';
 
-export const getFullName = (
-	profile: CommonUser | null | undefined,
-	includeCompany: boolean,
-	includeEmail: boolean
-): string | null => {
-	if (!profile) {
-		return null;
-	}
-
-	const firstName = profile.firstName;
-	const lastName = profile.lastName;
-	const fullName = profile.fullName || `${firstName} ${lastName}`;
-	const email = includeEmail ? profile.email : '';
-	const organisationName = includeCompany ? profile.organisation?.name : '';
-
-	return `${fullName}${organisationName ? ` (${organisationName})` : ''}${
-		includeEmail ? ` (${email})` : ''
-	}`;
-};
-
 export const getUserGroupLabel = (profile: CommonUser | null | undefined): string => {
 	if (!profile) {
 		console.error(
@@ -77,3 +57,23 @@ export function getUserGroupIds(user: CommonUser | null | undefined): number[] {
 		user ? SpecialPermissionGroups.loggedInUsers : SpecialPermissionGroups.loggedOutUsers,
 	];
 }
+
+export const getFullName = (
+	profile: CommonUser | null | undefined,
+	includeCompany: boolean,
+	includeEmail: boolean
+): string | null => {
+	if (!profile) {
+		return null;
+	}
+
+	const firstName = profile.firstName;
+	const lastName = profile.lastName;
+	const fullName = profile.fullName || `${firstName} ${lastName}`;
+	const email = includeEmail ? profile.email : '';
+	const organisationName = includeCompany ? profile.organisation?.name : '';
+
+	return `${fullName}${organisationName ? ` (${organisationName})` : ''}${
+		includeEmail ? ` (${email})` : ''
+	}`;
+};
