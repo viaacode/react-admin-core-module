@@ -604,26 +604,6 @@ export class ContentPageService {
 		return description ? sanitizeHtml(description, sanitizePreset) : null;
 	}
 
-	// public static async getContentPages(
-	// 	filters: Partial<ContentTableState> | undefined,
-	// 	page: number,
-	// 	size: number,
-	// 	orderProp: string,
-	// 	orderDirection: 'asc' | 'desc'
-	// ): Promise<GraphQlResponse<ContentPageInfo[]>> {
-	// 	const parsed = await dataService.query<ContentPageInfo[]>({
-	// 		query: this.getQueries().GetContentPagesDocument,
-	// 		variables: {
-	// 			filters,
-	// 			page,
-	// 			size,
-	// 			orderProp,
-	// 			orderDirection,
-	// 		},
-	// 	});
-	// 	return parsed;
-	// }
-
 	/**
 	 * Get a content page with all of its content without the user having o be logged in
 	 * @param path The path to identify the content page including the leading slash. eg: /over
