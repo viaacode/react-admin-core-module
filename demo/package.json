@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
@@ -18,7 +18,7 @@
     "@types/node": "^16.11.22",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "@viaa/avo2-components": "2.0.0",
+    "@viaa/avo2-components": "2.0.3",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "1.1.1",

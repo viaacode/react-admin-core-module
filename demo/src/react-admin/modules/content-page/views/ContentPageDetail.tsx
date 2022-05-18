@@ -44,7 +44,7 @@ import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { UserProps } from '~modules/shared/types';
-import { SpecialUserGroup } from '~modules/user-group/user-group.const';
+import { SpecialUserGroup } from '~modules/user-group/const/user-group.const';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
