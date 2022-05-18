@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from '@meemoo/react-components';
 import { Column, UseSortByColumnOptions } from 'react-table';
-import { UserGroup, UserGroupArchief, UserGroups } from '~modules/user-group/types/user-group.types';
+import { UserGroup, UserGroupArchief } from '~modules/user-group/types/user-group.types';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { PermissionRow } from '../types/user-group.types';
 import { Config } from '~core/config';
@@ -22,33 +22,6 @@ export const USER_GROUP_PATH = {
 
 export const ITEMS_PER_PAGE = 20;
 
-export const GET_USER_GROUPS = () => [
-	{
-		name: UserGroups.MEEMOO_ADMIN,
-		label: Config.getConfig().services.i18n.t(
-			'Admin meemoo'
-		),
-	},
-	{
-		name: UserGroups.CP_ADMIN,
-		label: Config.getConfig().services.i18n.t(
-			'CP admin'
-		),
-	},
-	{
-		name: UserGroups.VISITOR,
-		label: Config.getConfig().services.i18n.t(
-			'Visitor'
-		),
-	},
-	{
-		name: UserGroups.KIOSK_VISITOR,
-		label: Config.getConfig().services.i18n.t(
-			'Kiosk visitor'
-		),
-	},
-]
-
 export const UserGroupTableColumns = (
 	userGroups: UserGroupArchief[],
 	updateUserGroup: (groupId: string, permissionId: string, value: boolean) => void,
@@ -58,11 +31,10 @@ export const UserGroupTableColumns = (
 		accessor: 'label',
 		disableSortBy: true,
 	},
-	...GET_USER_GROUPS().map((groupLabel) => {
-		const group = userGroups.find((group) => group.name === groupLabel.name);
+	...userGroups.map((group) => {
 
 		return {
-			Header: groupLabel.label || group?.name,
+			Header: group?.label || '',
 			id: `${group?.name}-${group?.id}`,
 			accessor: (row: PermissionData) => row.name ,
 			disableSortBy: true,

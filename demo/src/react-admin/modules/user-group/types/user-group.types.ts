@@ -61,6 +61,7 @@ export type PermissionGroupTableCols =
 export interface UserGroupArchief {
 	id: number | string;
 	name: string;
+	label: string;
 	permissions: PermissionData[];
 }
 

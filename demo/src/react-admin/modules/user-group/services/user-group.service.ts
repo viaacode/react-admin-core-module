@@ -84,68 +84,6 @@ export class UserGroupService {
 		}
 	}
 
-	// TODO convert to addPermissionToUserGroup
-	// public static async addPermissionGroupsToUserGroup(
-	// 	permissionGroupIds: number[],
-	// 	userGroupId: number | string
-	// ): Promise<void> {
-	// 	try {
-	// 		const response = await dataService.mutate({
-	// 			mutation: ADD_PERMISSION_GROUPS_TO_USER_GROUP,
-	// 			variables: {
-	// 				objs: permissionGroupIds.map((permissionGroupId) => ({
-	// 					user_permission_group_id: permissionGroupId,
-	// 					user_group_id: userGroupId,
-	// 				})),
-	// 			},
-	// 			update: ApolloCacheManager.clearUserGroupCache,
-	// 		});
-	// 		if (response.errors) {
-	// 			throw new CustomError('Failed to add permission groups to user group', null, {
-	// 				errors: response.errors,
-	// 			});
-	// 		}
-	// 	} catch (err) {
-	// 		throw new CustomError('Failed to add permission groups to user group', err, {
-	// 			query: 'ADD_PERMISSION_GROUPS_TO_USER_GROUP',
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 		});
-	// 	}
-	// }
-
-	// TODO convert to removePermissionsFromUserGroup
-	// public static async removePermissionGroupsFromUserGroup(
-	// 	permissionGroupIds: number[],
-	// 	userGroupId: number | string
-	// ): Promise<void> {
-	// 	try {
-	// 		const response = await dataService.mutate({
-	// 			mutation: REMOVE_PERMISSION_GROUPS_FROM_USER_GROUP,
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 			update: ApolloCacheManager.clearUserGroupCache,
-	// 		});
-	// 		if (response.errors) {
-	// 			throw new CustomError('Failed to remove permission groups from user group', null, {
-	// 				errors: response.errors,
-	// 			});
-	// 		}
-	// 	} catch (err) {
-	// 		throw new CustomError('Failed to remove permission groups from user group', err, {
-	// 			query: 'REMOVE_PERMISSION_GROUPS_FROM_USER_GROUP',
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 		});
-	// 	}
-	// }
-
 	public static async insertUserGroup(userGroup: UserGroup): Promise<number> {
 		try {
 			const response = await dataService.query({

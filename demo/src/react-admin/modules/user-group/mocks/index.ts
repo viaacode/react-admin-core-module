@@ -76,7 +76,8 @@ export const permissionDataMock = {
 
 export const userGroupDataMock: UserGroupArchief[] = [
 	{
-		name: "Contentpartner medewerker",
+		name: "CP_ADMIN",
+		label: "cp admin",
 		id: "c56d95aa-e918-47ca-b102-486c9449fc4a",
 		permissions: [
 			{
@@ -103,7 +104,8 @@ export const userGroupDataMock: UserGroupArchief[] = [
 		],
 	},
 	{
-		name: "Gebruiker",
+		name: "VISITOR",
+		label: "gebruiker",
 		id: "0213c8d4-f459-45ef-8bbc-96268ab56d01",
 		permissions: [
 			{
@@ -116,12 +118,14 @@ export const userGroupDataMock: UserGroupArchief[] = [
 		],
 	},
 	{
-		name: "Kioskgebruiker",
+		name: "KIOSK_VISITOR",
+		label: "kiosk gebruiker",
 		id: "04150e6e-b779-4125-84e5-6ee6fc580757",
 		permissions: [],
 	},
 	{
-		name: "Sitebeheerder",
+		name: "MEEMOO_ADMIN",
+		label: "Site beheerder",
 		id: "0b281484-76cd-45a9-b6ce-68a0ea7f4b26",
 		permissions: [
 			{
