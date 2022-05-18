@@ -37,7 +37,10 @@ import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from
 import './UserOverview.scss';
 import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { LoadingErrorLoadedComponent, LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
@@ -53,14 +56,18 @@ import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useIdps } from '~modules/shared/hooks/useIdps';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
-import AddOrRemoveLinkedElementsModal, { AddOrRemove } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import AddOrRemoveLinkedElementsModal, {
+	AddOrRemove,
+} from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import UserDeleteModal from '../components/UserDeleteModal';
-import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, ITEMS_PER_PAGE } from '../user.consts';
+import {
+	GET_USER_BULK_ACTIONS,
+	GET_USER_OVERVIEW_TABLE_COLS,
+	ITEMS_PER_PAGE,
+} from '../user.consts';
 
-const UserOverview: FunctionComponent<UserProps> = ({
-	user,
-}) => {
+const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -131,15 +138,25 @@ const UserOverview: FunctionComponent<UserProps> = ({
 
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
-			if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
-				return generateWhereObjectArchief(filters, onlySelectedProfiles, selectedProfileIds);
+			if (
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+			) {
+				return generateWhereObjectArchief(
+					filters,
+					onlySelectedProfiles,
+					selectedProfileIds
+				);
 			}
 			return generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 		},
 		[selectedProfileIds]
 	);
 
-	const generateWhereObjectAvo = (filters: Partial<UserTableState>, onlySelectedProfiles: boolean, theSelectedProfileIds: string[]) => {
+	const generateWhereObjectAvo = (
+		filters: Partial<UserTableState>,
+		onlySelectedProfiles: boolean,
+		theSelectedProfileIds: string[]
+	) => {
 		const andFilters: any[] = [];
 
 		if (filters.query) {
@@ -171,7 +188,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			...getMultiOptionFilters(
 				filters,
 				['userGroup', 'organisation', 'business_category'],
-				['group_id', 'company_id',  'business_category']
+				['group_id', 'company_id', 'business_category']
 			)
 		);
 
@@ -186,11 +203,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 		);
 
 		andFilters.push(
-			...getMultiOptionFilters(
-				filters,
-				['temp_access'],
-				['user.temp_access.current.status']
-			)
+			...getMultiOptionFilters(filters, ['temp_access'], ['user.temp_access.current.status'])
 		);
 
 		andFilters.push(
@@ -241,9 +254,13 @@ const UserOverview: FunctionComponent<UserProps> = ({
 		}
 
 		return { _and: andFilters };
-	}
+	};
 
-	const generateWhereObjectArchief = (filters: Partial<UserTableState>, onlySelectedProfiles: boolean, theSelectedProfileIds: string[]) => {
+	const generateWhereObjectArchief = (
+		filters: Partial<UserTableState>,
+		onlySelectedProfiles: boolean,
+		theSelectedProfileIds: string[]
+	) => {
 		const andFilters: any[] = [];
 
 		if (filters.query) {
@@ -251,23 +268,29 @@ const UserOverview: FunctionComponent<UserProps> = ({
 
 			andFilters.push({
 				_or: [
-					{ stamboek: { _ilike: query } },
 					{ mail: { _ilike: query } },
 					{ full_name: { _ilike: query } },
-					{ company_name: { _ilike: query } },
-					{ group_name: { _ilike: query } },
-					{ business_category: { _ilike: query } },
+					{
+						maintainer_users_profiles: {
+							maintainer: {
+								schema_name: {
+									_ilike: query,
+								},
+							},
+						},
+					},
+					{
+						group: {
+							name: {
+								_ilike: query,
+							},
+						},
+					},
 				],
 			});
 		}
 
-		andFilters.push(
-			...getMultiOptionFilters(
-				filters,
-				['userGroup'],
-				['group_id']
-			)
-		);
+		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
 
 		andFilters.push(
 			...getMultiOptionsFilters(
@@ -284,7 +307,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 		}
 
 		return { _and: andFilters };
-	}
+	};
 
 	const fetchProfiles = useCallback(async () => {
 		try {
@@ -358,7 +381,6 @@ const UserOverview: FunctionComponent<UserProps> = ({
 					),
 					type: ToastType.SUCCESS,
 				});
-
 			}
 		} catch (err) {
 			console.error(
@@ -427,7 +449,9 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
-					blockOrUnblock ? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd' : 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
+					blockOrUnblock
+						? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
+						: 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
 				),
 				type: ToastType.SUCCESS,
 			});
@@ -554,10 +578,7 @@ const UserOverview: FunctionComponent<UserProps> = ({
 		}
 	};
 
-	const renderTableCell = (
-		commonUser: CommonUser,
-		columnId: UserOverviewTableCol
-	) => {
+	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const Link = Config.getConfig().services.router.Link;
 
 		const isBlocked = get(commonUser, 'user.is_blocked');
@@ -566,11 +587,14 @@ const UserOverview: FunctionComponent<UserProps> = ({
 			case 'firstName':
 				// no user detail for archief yet
 
-				return Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? (
+				return Config.getConfig().database.databaseApplicationType ===
+					AvoOrHetArchief.avo ? (
 					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
 						{truncateTableValue(get(commonUser, columnId))}
 					</Link>
-				) : get(commonUser, 'firstName') || '-';
+				) : (
+					get(commonUser, 'firstName') || '-'
+				);
 
 			case 'lastName':
 				return truncateTableValue(get(commonUser, 'lastName'));
@@ -727,11 +751,8 @@ const UserOverview: FunctionComponent<UserProps> = ({
 	};
 
 	return (
-		<AdminLayout
-			pageTitle={t('admin/users/views/user-overview___gebruikers')}
-		>
-			<AdminLayout.Actions>
-			</AdminLayout.Actions>
+		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
+			<AdminLayout.Actions></AdminLayout.Actions>
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
