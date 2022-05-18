@@ -5,6 +5,7 @@ import { CONTENT_PATH } from '~modules/content-page/const/content-page.consts';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
+import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
 import { USER_GROUP_PATH } from '~modules/user-group/user-group.const';
 import { USER_PATH } from '~modules/user/user.consts';
 import { NavigationItemInfo } from './shared/types';
@@ -16,7 +17,7 @@ export const ADMIN_PATH = Object.freeze({
 	// ...MENU_PATH,
 	...CONTENT_PATH,
 	...CONTENT_PAGE_LABEL_PATH,
-	// ...TRANSLATIONS_PATH,
+	...TRANSLATIONS_PATH,
 	// ...PERMISSION_GROUP_PATH,
 	// ...COLLECTIONS_OR_BUNDLES_PATH,
 	// ...ITEMS_PATH,
@@ -229,13 +230,13 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 			location: ADMIN_PATH.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
-		}
+		},
 		// ),
-		// ...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
-		// 	label: i18n.t('admin/admin___vertaling'),
-		// 	location: ADMIN_PATH.TRANSLATIONS,
-		// 	key: 'translations',
-		// 	exact: false,
-		// }),
+		...hasPermissions(['EDIT_TRANSLATIONS'], 'OR', userPermissions, {
+			label: i18n.t('admin/admin___vertaling'),
+			location: ADMIN_PATH.TRANSLATIONS,
+			key: 'translations',
+			exact: false,
+		}),
 	];
 };

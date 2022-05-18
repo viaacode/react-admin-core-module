@@ -2857,206 +2857,6 @@ export enum Lookup_App_Notification_Type_Update_Column {
 }
 
 /**
- * de circle of life van een bezoek
- *
- *
- * columns and relationships of "lookup.maintainer_visitor_space_request_status"
- *
- */
-export type Lookup_Maintainer_Visitor_Space_Request_Status = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status';
-  comment: Scalars['String'];
-  sort_order: Scalars['Int'];
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_aggregate';
-  aggregate?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_Fields>;
-  nodes: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-};
-
-/** aggregate fields of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_aggregate_fields';
-  avg?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Max_Fields>;
-  min?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Min_Fields>;
-  stddev?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Fields>;
-  stddev_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Samp_Fields>;
-  sum?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Sum_Fields>;
-  var_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Var_Pop_Fields>;
-  var_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Var_Samp_Fields>;
-  variance?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Variance_Fields>;
-};
-
-
-/** aggregate fields of "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Avg_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_avg_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "lookup.maintainer_visitor_space_request_status". All fields are combined with a logical 'AND'. */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp = {
-  _and?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>>;
-  _not?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-  _or?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>>;
-  comment?: InputMaybe<String_Comparison_Exp>;
-  sort_order?: InputMaybe<Int_Comparison_Exp>;
-  value?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Constraint {
-  /** unique or primary key constraint */
-  CpVisitStatusPkey = 'cp_visit_status_pkey',
-  /** unique or primary key constraint */
-  MaintainerVisitorSpaceRequestStatusSortOrderKey = 'maintainer_visitor_space_request_status_sort_order_key'
-}
-
-/** input type for incrementing numeric columns in table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input = {
-  sort_order?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  sort_order?: InputMaybe<Scalars['Int']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Max_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_max_fields';
-  comment?: Maybe<Scalars['String']>;
-  sort_order?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Min_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_min_fields';
-  comment?: Maybe<Scalars['String']>;
-  sort_order?: Maybe<Scalars['Int']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-};
-
-/** input type for inserting object relation for remote table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Obj_Rel_Insert_Input = {
-  data: Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
-};
-
-/** on_conflict condition type for table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict = {
-  constraint: Lookup_Maintainer_Visitor_Space_Request_Status_Constraint;
-  update_columns?: Array<Lookup_Maintainer_Visitor_Space_Request_Status_Update_Column>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "lookup.maintainer_visitor_space_request_status". */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Order_By = {
-  comment?: InputMaybe<Order_By>;
-  sort_order?: InputMaybe<Order_By>;
-  value?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: lookup_maintainer_visitor_space_request_status */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  SortOrder = 'sort_order',
-  /** column name */
-  Value = 'value'
-}
-
-/** input type for updating data in table "lookup.maintainer_visitor_space_request_status" */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  sort_order?: InputMaybe<Scalars['Int']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate stddev on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Pop_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_pop_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Stddev_Samp_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_stddev_samp_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Sum_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_sum_fields';
-  sort_order?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "lookup.maintainer_visitor_space_request_status" */
-export enum Lookup_Maintainer_Visitor_Space_Request_Status_Update_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  SortOrder = 'sort_order',
-  /** column name */
-  Value = 'value'
-}
-
-/** aggregate var_pop on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Var_Pop_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_var_pop_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Var_Samp_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_var_samp_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Lookup_Maintainer_Visitor_Space_Request_Status_Variance_Fields = {
-  __typename?: 'lookup_maintainer_visitor_space_request_status_variance_fields';
-  sort_order?: Maybe<Scalars['Float']>;
-};
-
-/**
  * Enum waardes voor de status van een bezoekersruimte
  *
  *
@@ -4114,8 +3914,6 @@ export type Maintainer_Visitor_Space_Request = {
   requested_by: Users_Profile;
   start_date?: Maybe<Scalars['timestamp']>;
   status: Scalars['String'];
-  /** An object relationship */
-  status_info: Lookup_Maintainer_Visitor_Space_Request_Status;
   updated_at: Scalars['timestamp'];
   updated_by?: Maybe<Scalars['uuid']>;
   user_accepted_tos?: Maybe<Scalars['Boolean']>;
@@ -4244,7 +4042,6 @@ export type Maintainer_Visitor_Space_Request_Bool_Exp = {
   requested_by?: InputMaybe<Users_Profile_Bool_Exp>;
   start_date?: InputMaybe<Timestamp_Comparison_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
   updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
   updated_by?: InputMaybe<Uuid_Comparison_Exp>;
   user_accepted_tos?: InputMaybe<Boolean_Comparison_Exp>;
@@ -4272,7 +4069,6 @@ export type Maintainer_Visitor_Space_Request_Insert_Input = {
   requested_by?: InputMaybe<Users_Profile_Obj_Rel_Insert_Input>;
   start_date?: InputMaybe<Scalars['timestamp']>;
   status?: InputMaybe<Scalars['String']>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Obj_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
   updated_by?: InputMaybe<Scalars['uuid']>;
   user_accepted_tos?: InputMaybe<Scalars['Boolean']>;
@@ -4593,7 +4389,6 @@ export type Maintainer_Visitor_Space_Request_Order_By = {
   requested_by?: InputMaybe<Users_Profile_Order_By>;
   start_date?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
-  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   updated_by?: InputMaybe<Order_By>;
   user_accepted_tos?: InputMaybe<Order_By>;
@@ -4801,10 +4596,6 @@ export type Mutation_Root = {
   delete_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_notification_type" */
   delete_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** delete data from the table: "lookup.maintainer_visitor_space_request_status" */
-  delete_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** delete single row from the table: "lookup.maintainer_visitor_space_request_status" */
-  delete_lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** delete data from the table: "lookup.maintainer_visitor_space_status" */
   delete_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** delete single row from the table: "lookup.maintainer_visitor_space_status" */
@@ -4933,10 +4724,6 @@ export type Mutation_Root = {
   insert_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_notification_type" */
   insert_lookup_app_notification_type_one?: Maybe<Lookup_App_Notification_Type>;
-  /** insert data into the table: "lookup.maintainer_visitor_space_request_status" */
-  insert_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** insert a single row into the table: "lookup.maintainer_visitor_space_request_status" */
-  insert_lookup_maintainer_visitor_space_request_status_one?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** insert data into the table: "lookup.maintainer_visitor_space_status" */
   insert_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** insert a single row into the table: "lookup.maintainer_visitor_space_status" */
@@ -5065,10 +4852,6 @@ export type Mutation_Root = {
   update_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_notification_type" */
   update_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** update data of the table: "lookup.maintainer_visitor_space_request_status" */
-  update_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
-  /** update single row of the table: "lookup.maintainer_visitor_space_request_status" */
-  update_lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** update data of the table: "lookup.maintainer_visitor_space_status" */
   update_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** update single row of the table: "lookup.maintainer_visitor_space_status" */
@@ -5276,18 +5059,6 @@ export type Mutation_RootDelete_Lookup_App_Notification_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  where: Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -5694,20 +5465,6 @@ export type Mutation_RootInsert_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootInsert_Lookup_App_Notification_Type_OneArgs = {
   object: Lookup_App_Notification_Type_Insert_Input;
   on_conflict?: InputMaybe<Lookup_App_Notification_Type_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  objects: Array<Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input>;
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_Status_OneArgs = {
-  object: Lookup_Maintainer_Visitor_Space_Request_Status_Insert_Input;
-  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_On_Conflict>;
 };
 
 
@@ -6210,22 +5967,6 @@ export type Mutation_RootUpdate_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootUpdate_Lookup_App_Notification_Type_By_PkArgs = {
   _set?: InputMaybe<Lookup_App_Notification_Type_Set_Input>;
   pk_columns: Lookup_App_Notification_Type_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input>;
-  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input>;
-  where: Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
-  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Inc_Input>;
-  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Set_Input>;
-  pk_columns: Lookup_Maintainer_Visitor_Space_Request_Status_Pk_Columns_Input;
 };
 
 
@@ -8320,12 +8061,6 @@ export type Query_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status_aggregate: Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" using primary key columns */
-  lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" */
   lookup_maintainer_visitor_space_status: Array<Lookup_Maintainer_Visitor_Space_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status" */
@@ -8705,29 +8440,6 @@ export type Query_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Query_RootLookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_Status_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -9343,12 +9055,6 @@ export type Subscription_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
-  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
-  lookup_maintainer_visitor_space_request_status_aggregate: Lookup_Maintainer_Visitor_Space_Request_Status_Aggregate;
-  /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" using primary key columns */
-  lookup_maintainer_visitor_space_request_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" */
   lookup_maintainer_visitor_space_status: Array<Lookup_Maintainer_Visitor_Space_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status" */
@@ -9714,29 +9420,6 @@ export type Subscription_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Subscription_RootLookup_App_Notification_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_StatusArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Status_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Status_Order_By>>;
-  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Status_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Status_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -12994,6 +12677,24 @@ export type UpdateContentByIdMutationVariables = Exact<{
 
 export type UpdateContentByIdMutation = { __typename?: 'mutation_root', update_app_content_page?: { __typename?: 'app_content_page_mutation_response', affected_rows: number } | null };
 
+export type GetOrganizationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrganizationsWithUsersQuery = { __typename?: 'query_root', maintainer_users_profile: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null } }> };
+
+export type GetTranslationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTranslationsQuery = { __typename?: 'query_root', app_config: Array<{ __typename?: 'app_config', name: string, value: any }> };
+
+export type UpdateTranslationsMutationVariables = Exact<{
+  name: Scalars['String'];
+  translations: App_Config_Set_Input;
+}>;
+
+
+export type UpdateTranslationsMutation = { __typename?: 'mutation_root', update_app_config?: { __typename?: 'app_config_mutation_response', affected_rows: number } | null };
+
 export type DeleteUserGroupMutationVariables = Exact<{
   userGroupId: Scalars['uuid'];
 }>;
@@ -13060,7 +12761,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, group_id?: any | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, group?: { __typename?: 'users_group', label: string } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }> }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
 export const DeleteContentPageLabelByIdDocument = `
@@ -13648,6 +13349,69 @@ export const useUpdateContentByIdMutation = <
       (variables?: UpdateContentByIdMutationVariables) => fetcher<UpdateContentByIdMutation, UpdateContentByIdMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateContentByIdDocument, variables)(),
       options
     );
+export const GetOrganizationsWithUsersDocument = `
+    query getOrganizationsWithUsers {
+  maintainer_users_profile(distinct_on: maintainer_identifier) {
+    maintainer {
+      schema_identifier
+      schema_name
+    }
+  }
+}
+    `;
+export const useGetOrganizationsWithUsersQuery = <
+      TData = GetOrganizationsWithUsersQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetOrganizationsWithUsersQueryVariables,
+      options?: UseQueryOptions<GetOrganizationsWithUsersQuery, TError, TData>
+    ) =>
+    useQuery<GetOrganizationsWithUsersQuery, TError, TData>(
+      variables === undefined ? ['getOrganizationsWithUsers'] : ['getOrganizationsWithUsers', variables],
+      fetcher<GetOrganizationsWithUsersQuery, GetOrganizationsWithUsersQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetOrganizationsWithUsersDocument, variables),
+      options
+    );
+export const GetTranslationsDocument = `
+    query getTranslations {
+  app_config(where: {name: {_ilike: "translations_%"}}) {
+    name
+    value
+  }
+}
+    `;
+export const useGetTranslationsQuery = <
+      TData = GetTranslationsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetTranslationsQueryVariables,
+      options?: UseQueryOptions<GetTranslationsQuery, TError, TData>
+    ) =>
+    useQuery<GetTranslationsQuery, TError, TData>(
+      variables === undefined ? ['getTranslations'] : ['getTranslations', variables],
+      fetcher<GetTranslationsQuery, GetTranslationsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetTranslationsDocument, variables),
+      options
+    );
+export const UpdateTranslationsDocument = `
+    mutation updateTranslations($name: String!, $translations: app_config_set_input!) {
+  update_app_config(where: {name: {_eq: $name}}, _set: $translations) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateTranslationsMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<UpdateTranslationsMutation, TError, UpdateTranslationsMutationVariables, TContext>
+    ) =>
+    useMutation<UpdateTranslationsMutation, TError, UpdateTranslationsMutationVariables, TContext>(
+      ['updateTranslations'],
+      (variables?: UpdateTranslationsMutationVariables) => fetcher<UpdateTranslationsMutation, UpdateTranslationsMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateTranslationsDocument, variables)(),
+      options
+    );
 export const DeleteUserGroupDocument = `
     mutation deleteUserGroup($userGroupId: uuid!) {
   delete_users_group(where: {id: {_eq: $userGroupId}}) {
@@ -13838,7 +13602,10 @@ export const GetUsersDocument = `
     first_name
     last_name
     mail
-    group_id
+    last_access_at
+    group {
+      label
+    }
     identities {
       identity_provider_name
     }

@@ -40,6 +40,7 @@ export enum Permission {
 	EDIT_ANY_USER = 'EDIT_ANY_USER',
 	DELETE_ANY_USER = 'DELETE_ANY_USER',
 	EDIT_USER_TEMP_ACCESS = 'EDIT_USER_TEMP_ACCESS',
+	EDIT_TRANSLATIONS = 'EDIT_TRANSLATIONS',
 	APPROVE_DENY_ALL_VISIT_REQUESTS = 'APPROVE_DENY_ALL_VISIT_REQUESTS',
 	CREATE_VISIT_REQUEST = 'CREATE_VISIT_REQUEST',
 	EDIT_PERMISSION_GROUPS = 'EDIT_PERMISSION_GROUPS',
@@ -121,11 +122,11 @@ export interface CommonUser {
 }
 
 export type UserOverviewTableCol =
-	| 'id'
-	| 'first_name'
-	| 'last_name'
-	| 'mail'
-	| 'user_group'
+	| 'profileId'
+	| 'firstName'
+	| 'lastName'
+	| 'email'
+	| 'userGroup'
 	| 'business_category'
 	| 'is_exception'
 	| 'is_blocked'
