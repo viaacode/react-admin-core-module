@@ -7,7 +7,8 @@ import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { Config, ConfigValue } from '~core/config';
-import { promises } from 'stream';
+import { PermissionsService } from './modules/permissions/permissions.service';
+import { UserGroupsService } from './modules/user-group/user-groups.service';
 
 const navItem = {
 	content_path: 'content_path',
@@ -92,25 +93,11 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
-			UserGroupsService: {
-				getAllUserGroups: () => {
-					console.log('get all user groups');
-					return Promise.resolve([]);
-				},
-				updateUserGroups: (values) => {
-					console.log('update user groups: ', values);
-					return Promise.resolve([])
-				}
-			},
-			PermissionsService: {
-				getAllPermissions: () => {
-					console.log('get all permissions');
-					return Promise.resolve([]);
-				},
-			},
+			UserGroupsService,
+			PermissionsService,
 			queryCache: {
 				clear: async (key: string) => Promise.resolve(),
-			}
+			},
 		},
 		database: {
 			databaseApplicationType: AvoOrHetArchief.hetArchief,
