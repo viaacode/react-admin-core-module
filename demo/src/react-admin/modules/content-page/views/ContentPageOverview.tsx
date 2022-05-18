@@ -54,7 +54,7 @@ import {
 	getQueryFilter,
 } from '~modules/shared/helpers/filters';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
+import { getFullName } from '~modules/shared/helpers/get-profile-info';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
@@ -313,7 +313,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 				return getFullName(profile, false, false) || '-';
 
 			case 'author_user_group':
-				return profile ? getUserGroupLabel(profile) || '-' : '-';
+				return profile ? profile?.userGroup?.label || '-' : '-';
 
 			case 'content_type':
 				return (

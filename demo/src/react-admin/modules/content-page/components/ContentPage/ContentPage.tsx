@@ -160,7 +160,12 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (prop
 					(contentBlockConfig: ContentBlockConfig) => {
 						return (
 							<ContentBlockPreview
-								key={contentBlockConfig.id}
+								key={
+									'content-block-preview-' +
+									contentBlockConfig.type +
+									'-' +
+									contentBlockConfig.position
+								}
 								contentBlockConfig={contentBlockConfig}
 								contentPageInfo={contentPageInfo as ContentPageInfo}
 								className={clsx(

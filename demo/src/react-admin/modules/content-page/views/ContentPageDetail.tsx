@@ -38,7 +38,6 @@ import {
 import MoreOptionsDropdown from '~modules/shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~modules/shared/helpers/dropdown';
-import { getUserGroupId } from '~modules/shared/helpers/get-profile-info';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
@@ -78,7 +77,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 		GET_CONTENT_DETAIL_TABS()[0].id
 	);
 
-	const isAdminUser = getUserGroupId(user as any) === SpecialUserGroup.Admin;
+	const isAdminUser = user?.userGroup?.id === SpecialUserGroup.Admin;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
 	const pageTitle = `Content: ${get(contentPageInfo, 'title', '')}`;
 
