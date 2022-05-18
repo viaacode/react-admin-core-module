@@ -15,7 +15,7 @@ export function getSubtitles(
 		return {
 			id: collateral.external_id,
 			default: index === 0,
-			src: `${Config.getConfig().database.proxyUrl}/subtitles/convert-srt-to-vtt${
+			src: `${Config.getConfig().database.proxyUrl}/admin/subtitles/convert-srt-to-vtt${
 				collateral.path
 			}`,
 			label:

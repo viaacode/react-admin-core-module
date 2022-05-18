@@ -29,7 +29,7 @@ export class FileUploadService {
 		let url: string | undefined;
 		let body: Avo.FileUpload.ZendeskFileInfo | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/zendesk/upload-attachment`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/zendesk/upload-attachment`;
 			const base64 = await this.fileToBase64(file);
 			if (!base64) {
 				throw new CustomError("Failed to upload file: file doesn't have any content", null);
@@ -70,7 +70,7 @@ export class FileUploadService {
 	): Promise<string> {
 		let url: string | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/assets/upload`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/assets/upload`;
 
 			const formData = new FormData();
 			formData.append('ownerId', ownerId);
@@ -106,7 +106,7 @@ export class FileUploadService {
 		let url: string | undefined;
 		let body: any;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/assets/delete`;
+			url = `${Config.getConfig().database.proxyUrl}/admin/assets/delete`;
 
 			body = {
 				url: fileUrl,

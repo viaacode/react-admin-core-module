@@ -218,7 +218,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps & UserProp
 				limit: debouncedItemsPerPage,
 			};
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/content-pages/overview`,
+				`${Config.getConfig().database.proxyUrl}/admin/content-pages/overview`,
 				{
 					method: 'POST',
 					headers: {

@@ -227,7 +227,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/content-pages/labels`,
+				`${Config.getConfig().database.proxyUrl}/admin/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {
@@ -261,7 +261,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/content-pages/labels`,
+				`${Config.getConfig().database.proxyUrl}/admin/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {

@@ -21,11 +21,11 @@ query getUsers(
 			maintainer {
 				schema_identifier
 				schema_name
-				information {
-					logo {
-						iri
-					}
-				}
+#				information {
+#					logo {
+#						iri
+#					}
+#				}
 			}
 		}
 	}

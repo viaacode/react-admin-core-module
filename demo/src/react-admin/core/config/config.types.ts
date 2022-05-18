@@ -6,6 +6,7 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
+import { CommonUser } from '~modules/user/user.types';
 import { UserGroupArchief, UserGroupUpdateResponse, UserGroupUpdates } from '~modules/user-group/types/user-group.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
@@ -79,7 +80,7 @@ export interface ConfigValue {
 		PermissionsService: PermissionsService
 		queryCache: {
 			clear: (key: string) => Promise<void>;
-		}
+		};
 	};
 	components: {
 		loader: {
@@ -100,6 +101,7 @@ export interface ConfigValue {
 		graphqlUrl: string;
 		graphqlSecret: string;
 	};
+	user: CommonUser;
 }
 
 export interface IconConfig {
