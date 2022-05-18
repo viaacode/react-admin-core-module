@@ -49,6 +49,14 @@ export interface ConfigValue {
 	contentPage?: ContentPageConfig;
 	// Secondary services and config
 	services: {
+		assetService: {
+			uploadFile: (
+				file: File,
+				assetType: Avo.FileUpload.AssetType,
+				ownerId: string
+			) => Promise<string>;
+			deleteFile: (fileUrl: string) => Promise<void>;
+		};
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
