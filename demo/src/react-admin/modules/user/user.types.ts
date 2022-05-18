@@ -39,7 +39,8 @@ export enum Permission {
 	EDIT_CONTENT_PAGE_LABELS = 'EDIT_CONTENT_PAGE_LABELS',
 	EDIT_ANY_USER = 'EDIT_ANY_USER',
 	DELETE_ANY_USER = 'DELETE_ANY_USER',
-	EDIT_USER_TEMP_ACCESS = 'EDIT_USER_TEMP_ACCESS'
+	EDIT_USER_TEMP_ACCESS = 'EDIT_USER_TEMP_ACCESS',
+	EDIT_TRANSLATIONS = 'EDIT_TRANSLATIONS'
 }
 
 export interface OrganizationContactInfo {
@@ -107,11 +108,11 @@ export interface CommonUser {
 }
 
 export type UserOverviewTableCol =
-	| 'id'
-	| 'first_name'
-	| 'last_name'
-	| 'mail'
-	| 'user_group'
+	| 'profileId'
+	| 'firstName'
+	| 'lastName'
+	| 'email'
+	| 'userGroup'
 	| 'business_category'
 	| 'is_exception'
 	| 'is_blocked'
