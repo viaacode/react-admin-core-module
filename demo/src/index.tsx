@@ -10,6 +10,8 @@ import { Config, ConfigValue } from '~core/config';
 import { Idp, Permission } from '~modules/user/user.types';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
+import { PermissionsService } from './modules/permissions/permissions.service';
+import { UserGroupsService } from './modules/user-group/user-groups.service';
 
 const navItem = {
 	content_path: 'content_path',
@@ -95,6 +97,8 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
+			UserGroupsService,
+			PermissionsService,
 			queryCache: {
 				clear: async (key: string) => Promise.resolve(),
 			},

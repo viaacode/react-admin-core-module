@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 import { CommonUser } from '../../react-admin/modules/user/user.types';
-import { USER_GROUP_PATH } from "~modules/user-group/user-group.const";
+import { USER_GROUP_PATH } from "~modules/user-group/const/user-group.const";
 import { UserGroupOverview } from "~modules/user-group/views";
 
 export const PERMISSIONS_PATH = {
@@ -16,7 +16,7 @@ export const renderAdminUserGroupRoutes = (user: CommonUser): ReactNode[] => {
 	return [
 		<Route
 			key={USER_GROUP_PATH.USER_GROUP_OVERVIEW}
-			render={() => <UserGroupOverview user={user} />}
+			render={() => <UserGroupOverview />}
 			exact
 			path={USER_GROUP_PATH.USER_GROUP_OVERVIEW}
 		/>,

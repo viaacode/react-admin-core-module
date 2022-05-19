@@ -2,12 +2,12 @@ import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
 
 import { Config } from '~core/config';
-import { CustomError } from '../shared/helpers/custom-error';
-import { dataService } from '../shared/services/data-service';
+import { CustomError } from '../../shared/helpers/custom-error';
+import { dataService } from '../../shared/services/data-service';
 
-import { USER_GROUP_QUERIES } from './queries/user-group.queries';
-import { ITEMS_PER_PAGE } from './user-group.const';
-import { UserGroup } from './user-group.types';
+import { USER_GROUP_QUERIES } from '../queries/user-group.queries';
+import { ITEMS_PER_PAGE } from '../const/user-group.const';
+import { UserGroup } from '../types/user-group.types';
 
 export class UserGroupService {
 	private static getQueries() {
@@ -83,68 +83,6 @@ export class UserGroupService {
 			});
 		}
 	}
-
-	// TODO convert to addPermissionToUserGroup
-	// public static async addPermissionGroupsToUserGroup(
-	// 	permissionGroupIds: number[],
-	// 	userGroupId: number | string
-	// ): Promise<void> {
-	// 	try {
-	// 		const response = await dataService.mutate({
-	// 			mutation: ADD_PERMISSION_GROUPS_TO_USER_GROUP,
-	// 			variables: {
-	// 				objs: permissionGroupIds.map((permissionGroupId) => ({
-	// 					user_permission_group_id: permissionGroupId,
-	// 					user_group_id: userGroupId,
-	// 				})),
-	// 			},
-	// 			update: ApolloCacheManager.clearUserGroupCache,
-	// 		});
-	// 		if (response.errors) {
-	// 			throw new CustomError('Failed to add permission groups to user group', null, {
-	// 				errors: response.errors,
-	// 			});
-	// 		}
-	// 	} catch (err) {
-	// 		throw new CustomError('Failed to add permission groups to user group', err, {
-	// 			query: 'ADD_PERMISSION_GROUPS_TO_USER_GROUP',
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 		});
-	// 	}
-	// }
-
-	// TODO convert to removePermissionsFromUserGroup
-	// public static async removePermissionGroupsFromUserGroup(
-	// 	permissionGroupIds: number[],
-	// 	userGroupId: number | string
-	// ): Promise<void> {
-	// 	try {
-	// 		const response = await dataService.mutate({
-	// 			mutation: REMOVE_PERMISSION_GROUPS_FROM_USER_GROUP,
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 			update: ApolloCacheManager.clearUserGroupCache,
-	// 		});
-	// 		if (response.errors) {
-	// 			throw new CustomError('Failed to remove permission groups from user group', null, {
-	// 				errors: response.errors,
-	// 			});
-	// 		}
-	// 	} catch (err) {
-	// 		throw new CustomError('Failed to remove permission groups from user group', err, {
-	// 			query: 'REMOVE_PERMISSION_GROUPS_FROM_USER_GROUP',
-	// 			variables: {
-	// 				permissionGroupIds,
-	// 				userGroupId,
-	// 			},
-	// 		});
-	// 	}
-	// }
 
 	public static async insertUserGroup(userGroup: UserGroup): Promise<number> {
 		try {

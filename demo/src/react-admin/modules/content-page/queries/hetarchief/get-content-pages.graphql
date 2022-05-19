@@ -19,6 +19,11 @@ query getContentPages($where: app_content_page_bool_exp, $offset: Int = 0, $limi
                 maintainer {
                     schema_identifier
                     schema_name
+                    information {
+                        logo {
+                            iri
+                        }
+                    }
                 }
             }
             group {
@@ -47,9 +52,3 @@ query getContentPages($where: app_content_page_bool_exp, $offset: Int = 0, $limi
         }
     }
 }
-# TODO add the information fetch back to maintainer once org api is back up and running
-#information {
-#logo {
-#iri
-#}
-#}

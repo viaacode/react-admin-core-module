@@ -7,6 +7,8 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
 import { CommonUser } from '~modules/user/user.types';
+import { UserGroupArchief, UserGroupUpdateResponse, UserGroupUpdates } from '~modules/user-group/types/user-group.types';
+import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -27,6 +29,15 @@ export interface ToastService {
 
 export interface I18n {
 	t: (translationKey: string, variables?: Record<string, string>) => string;
+}
+
+export interface UserGroupsService {
+	getAllUserGroups: () => Promise<UserGroupArchief[]>;
+	updateUserGroups: (json: UserGroupUpdates) => Promise<UserGroupUpdateResponse[]>;
+}
+
+export interface PermissionsService {
+	getAllPermissions: () => Promise<PermissionData[]>;
 }
 
 export interface LinkInfo {
@@ -73,6 +84,8 @@ export interface ConfigValue {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
+		UserGroupsService: UserGroupsService;
+		PermissionsService: PermissionsService
 		queryCache: {
 			clear: (key: string) => Promise<void>;
 		};
