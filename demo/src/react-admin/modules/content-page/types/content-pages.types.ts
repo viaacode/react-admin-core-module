@@ -84,14 +84,14 @@ export interface ContentPageDb {
 	profile: ProfileAvo | ProfileHetArchief;
 	user_profile_id: string | null;
 	user_group_ids: number[] | null;
-	contentBlockssBycontentId: ContentBlockSchema[];
+	content_blocks: ContentBlockSchema[];
 	content_content_labels: ContentPageLabelLinkSchema[];
 }
 
 /**
  * Convenience type with certain fields converted to be easier to manipulate
  * eg:
- * - contentBlockConfigs: ContentBlockConfig[]; instead of contentBlockssBycontentId: ContentBlockSchema[];
+ * - contentBlockConfigs: ContentBlockConfig[]; instead of content_blocks: ContentBlockSchema[];
  * - labels: Avo.ContentPage.Label[] instead of content_content_labels: ContentLabelLinkSchema[];
  */
 

@@ -10,8 +10,8 @@ export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentP
 	const labels = (dbContentPage.content_content_labels || []).map(
 		(labelLink: Avo.ContentPage.LabelLink) => labelLink.content_label
 	);
-	const contentBlockConfigs = dbContentPage.contentBlockssBycontentId
-		? parseContentBlocks(dbContentPage.contentBlockssBycontentId)
+	const contentBlockConfigs = dbContentPage.content_blocks
+		? parseContentBlocks(dbContentPage.content_blocks)
 		: [];
 
 	return {

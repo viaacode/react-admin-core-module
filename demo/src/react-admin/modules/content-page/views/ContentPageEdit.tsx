@@ -381,11 +381,11 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 			]);
 
 			Config.getConfig().services.toastService.showToast({
-				title: t('Error'),
+				title: t('Success'),
 				description: t(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
-				type: ToastType.ERROR,
+				type: ToastType.SUCCESS,
 			});
 			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 				id: insertedOrUpdatedContent.id,
