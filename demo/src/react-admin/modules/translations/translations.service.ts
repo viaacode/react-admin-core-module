@@ -31,8 +31,6 @@ export class TranslationsService {
 	}
 
 	static async updateTranslations(name: string, translations: any) {
-		console.log('Update Translation input: ', name, translations);
-		console.log('Disabled for now');
 		try {
 			// update translation by name
 			await dataService.query({
