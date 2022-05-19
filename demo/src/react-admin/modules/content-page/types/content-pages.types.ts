@@ -5,6 +5,12 @@ import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDr
 import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
 
 import { ContentBlockConfig } from './content-block.types';
+import { CommonUser, ProfileAvo, ProfileHetArchief } from '~modules/user/user.types';
+import { ContentBlockSchema } from '@viaa/avo2-types/types/content-blocks';
+import {
+	ContentPageLabelLinkSchema,
+	ContentWidthSchema,
+} from '@viaa/avo2-types/types/content-page';
 
 export interface ContentPageConfig {
 	// TODO add config values
@@ -58,6 +64,30 @@ export interface ContentTableState extends FilterableTableState {
 }
 
 // Content Detail
+export interface ContentPageDb {
+	id: number;
+	thumbnail_path: string | null;
+	title: string;
+	description: string | null;
+	seo_description: string | null;
+	meta_description: string | null;
+	path: string | null;
+	is_public: boolean;
+	published_at: string;
+	publish_at: string | null;
+	depublish_at: string | null;
+	created_at: string;
+	updated_at: string | null;
+	is_protected: boolean;
+	content_type: string;
+	content_width: ContentWidthSchema;
+	profile: ProfileAvo | ProfileHetArchief;
+	user_profile_id: string | null;
+	user_group_ids: number[] | null;
+	contentBlockssBycontentId: ContentBlockSchema[];
+	content_content_labels: ContentPageLabelLinkSchema[];
+}
+
 /**
  * Convenience type with certain fields converted to be easier to manipulate
  * eg:
@@ -66,7 +96,7 @@ export interface ContentTableState extends FilterableTableState {
  */
 
 export interface ContentPageInfo {
-	id: number;
+	id: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	thumbnail_path: string | null;
 	title: string;
 	description_html: string | null;
@@ -83,7 +113,7 @@ export interface ContentPageInfo {
 	is_protected: boolean;
 	content_type: Avo.ContentPage.Type;
 	content_width: Avo.ContentPage.Width;
-	profile: Avo.User.Profile;
+	profile: CommonUser;
 	user_profile_id: string | null;
 	user_group_ids: number[] | null;
 	contentBlockConfigs: ContentBlockConfig[];
@@ -110,7 +140,7 @@ export enum ContentEditActionType {
 export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
 
 export interface ContentPageOverviewCellProps {
-  row: {
-    original: ContentPageInfo;
-  };
+	row: {
+		original: ContentPageInfo;
+	};
 }

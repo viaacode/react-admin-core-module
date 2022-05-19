@@ -10,6 +10,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AvoOrHetArchief, UserProps } from '~modules/shared/types';
 import { Config, ToastType } from '~core/config';
 import { TranslationsService } from '../translations.service';
+import React from 'react';
 
 const TranslationsOverview: FunctionComponent<UserProps> = () => {
 	const { t } = useTranslation();

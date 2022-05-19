@@ -18,15 +18,14 @@ import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOpt
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
-import { getFullName } from '~modules/shared/helpers/formatters/avatar';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -170,13 +169,13 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							t('admin/content/views/content-detail___breedte')
 						)}
 						{renderDetailRow(
-							get(contentPageInfo, 'profile.user')
-								? getFullName(get(contentPageInfo, 'profile'), false, false)
+							contentPageInfo?.profile
+								? getFullName(contentPageInfo.profile, false, false)
 								: '-',
 							t('admin/content/views/content-detail___auteur')
 						)}
 						{renderDetailRow(
-							getUserGroupLabel(contentPageInfo) || '-',
+							getUserGroupLabel(contentPageInfo?.profile) || '-',
 							t('admin/content/views/content-detail___auteur-rol')
 						)}
 						{renderDateDetailRows(contentPageInfo, [

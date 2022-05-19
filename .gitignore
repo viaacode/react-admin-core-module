@@ -248,3 +248,5 @@ yarn-error.log*
 # Generated outputs
 licenses.csv
 bundle-stats.html
+.graphqlconfig
+schema.graphql

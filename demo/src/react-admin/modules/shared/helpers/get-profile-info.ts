@@ -1,17 +1,13 @@
-import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
 import { SpecialPermissionGroups } from '../types/authentication.types';
 
 import { CustomError } from './custom-error';
-import { getFullName, getProfile } from './formatters/avatar';
 
 import { CommonUser } from '~modules/user/user.types';
 
-export const getUserGroupLabel = (
-	userOrProfile: Avo.User.Profile | { profile: Avo.User.Profile } | null | undefined
-): string => {
-	if (!userOrProfile) {
+export const getUserGroupLabel = (profile: CommonUser | null | undefined): string => {
+	if (!profile) {
 		console.error(
 			new CustomError(
 				'Failed to get profile user group label because the provided profile is undefined'
@@ -20,17 +16,14 @@ export const getUserGroupLabel = (
 		return '';
 	}
 
-	const profile = getProfile(userOrProfile);
-	return get(userOrProfile, 'group_name') || get(profile, 'profile_user_group.group.label') || '';
+	return profile?.userGroup || get(profile, 'profile_user_group.group.label') || '';
 };
 
-export const getUserGroupId = (
-	userOrProfile: Avo.User.Profile | { profile: Avo.User.Profile } | null | undefined
-): number => {
-	if (get(userOrProfile, 'userGroupIds[0]')) {
-		return get(userOrProfile, 'userGroupIds[0]');
+export const getUserGroupId = (profile: CommonUser | null | undefined): number => {
+	if (get(profile, 'userGroupIds[0]')) {
+		return get(profile, 'userGroupIds[0]');
 	}
-	if (!userOrProfile) {
+	if (!profile) {
 		console.error(
 			new CustomError(
 				'Failed to get profile user group id because the provided profile is undefined'
@@ -39,7 +32,6 @@ export const getUserGroupId = (
 		return 0;
 	}
 
-	const profile = getProfile(userOrProfile);
 	const userGroupId =
 		get(profile, 'userGroupIds[0]') || get(profile, 'profile_user_group.group.id') || '';
 	if (!userGroupId) {
@@ -48,11 +40,11 @@ export const getUserGroupId = (
 	return userGroupId;
 };
 
-export function getProfileName(user: Avo.User.User | undefined): string {
+export function getProfileName(user: CommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile name because the logged in user is undefined');
 	}
-	const profileName = getFullName(user as any, true, false);
+	const profileName = getFullName(user, true, false);
 	if (!profileName) {
 		throw new CustomError('No profile name could be found for the logged in user');
 	}
@@ -65,3 +57,23 @@ export function getUserGroupIds(user: CommonUser | null | undefined): number[] {
 		user ? SpecialPermissionGroups.loggedInUsers : SpecialPermissionGroups.loggedOutUsers,
 	];
 }
+
+export const getFullName = (
+	profile: CommonUser | null | undefined,
+	includeCompany: boolean,
+	includeEmail: boolean
+): string | null => {
+	if (!profile) {
+		return null;
+	}
+
+	const firstName = profile.firstName;
+	const lastName = profile.lastName;
+	const fullName = profile.fullName || `${firstName} ${lastName}`;
+	const email = includeEmail ? profile.email : '';
+	const organisationName = includeCompany ? profile.organisation?.name : '';
+
+	return `${fullName}${organisationName ? ` (${organisationName})` : ''}${
+		includeEmail ? ` (${email})` : ''
+	}`;
+};

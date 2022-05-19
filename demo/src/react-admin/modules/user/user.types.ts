@@ -1,5 +1,7 @@
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { FilterableTableState } from '~modules/shared/components/FilterTable/FilterTable';
+import { GetUsersQuery as GetUsersQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
+import { GetUsersQuery as GetUsersQueryAvo } from '~generated/graphql-db-types-avo';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',
@@ -8,6 +10,9 @@ export enum Idp {
 	KLASCEMENT = 'KLASCEMENT',
 	VLAAMSEOVERHEID = 'VLAAMSEOVERHEID',
 }
+
+export type ProfileHetArchief = GetUsersQueryHetArchief['users_profile'][0];
+export type ProfileAvo = GetUsersQueryAvo['users_summary_view'][0];
 
 export enum Permission {
 	CAN_READ_ALL_VISIT_REQUESTS = 'CAN_READ_ALL_VISIT_REQUESTS',
@@ -90,6 +95,12 @@ export interface UserTempAccess {
 	until?: string | null;
 }
 
+export interface UserGroupInfo {
+	label: string;
+	name: string;
+	id: string | number; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+}
+
 /**
  * User model for both hetarchief and avo
  */
@@ -110,7 +121,7 @@ export interface CommonUser {
 	is_exception?: boolean;
 	business_category?: string;
 	created_at?: string;
-	userGroup?: string;
+	userGroup?: Partial<UserGroupInfo>;
 	userId?: string;
 	uid?: string;
 	is_blocked?: boolean;
