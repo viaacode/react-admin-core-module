@@ -35,6 +35,8 @@
   "FetchItemRelationsBySubjects": "query FetchItemRelationsBySubjects( $subjectIds: [uuid!]! $relationType: lookup_enum_relation_types_enum! ) { app_item_relations( where: { subject: { _in: $subjectIds }, predicate: { _eq: $relationType } } ) { id object subject predicate created_at updated_at } }",
   "getEducationLevels": "query getEducationLevels { lookup_enum_lom_context { description } }",
   "getSubjects": "query getSubjects { lookup_enum_lom_classification { description } }",
+  "getTranslations": "query getTranslations { app_site_variables(where: { name: { _ilike: \"translations-%\" } }) { name value } }",
+  "updateTranslations": "mutation updateTranslations($name: String!, $translations: app_site_variables_set_input!) { update_app_site_variables(where: { name: { _eq: $name } }, _set: $translations) { affected_rows } }",
   "deleteUserGroup": "mutation deleteUserGroup($userGroupId: Int!) { delete_users_groups(where: { id: { _eq: $userGroupId } }) { affected_rows } }",
   "getUserGroupById": "query getUserGroupById($id: Int!) { users_groups(where: { id: { _eq: $id } }) { label id description created_at updated_at group_user_permission_groups(order_by: { permission_group: { label: asc } }) { permission_group { label id created_at description updated_at permission_group_user_permissions( order_by: { permission: { description: asc } } ) { permission { label description id } } } } } }",
   "getUserGroupsWithFilters": "query getUserGroupsWithFilters( $limit: Int! $offset: Int! $orderBy: [users_groups_order_by!]! $where: users_groups_bool_exp! ) { users_groups(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) { label id created_at description updated_at } users_groups_aggregate(where: $where) { aggregate { count } } }",

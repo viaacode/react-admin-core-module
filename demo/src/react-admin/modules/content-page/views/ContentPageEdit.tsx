@@ -326,7 +326,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 					const contentBody = {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
-						id: parseInt(id, 10),
+						id: id.includes('-') ? id : parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
 						contentBlockConfigs: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo

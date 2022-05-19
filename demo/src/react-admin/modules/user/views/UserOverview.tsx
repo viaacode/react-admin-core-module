@@ -670,6 +670,12 @@ const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 					/>
 				);
 			}
+
+			case 'userGroup':
+				return truncateTableValue(
+					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
+				);
+
 			default:
 				return truncateTableValue(commonUser[columnId] || '-');
 		}

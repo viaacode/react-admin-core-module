@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/react-admin",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "React admin app for meemoo projects",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/viaacode/react-admin-core-module#readme",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
+    "preinstall": "npx force-resolutions",
     "prepare----disabled-since-it-is-throwing-errors": "husky install",
     "start": "cd demo && npm run demo:start",
     "prebuild": "rimraf dist",

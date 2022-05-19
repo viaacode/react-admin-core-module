@@ -8,7 +8,7 @@ import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
-import { dataService, GraphQlResponse } from '../../shared/services/data-service';
+import { dataService } from '../../shared/services/data-service';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
 	CONTENT_RESULT_PATH,
@@ -25,8 +25,8 @@ import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
+	ContentPageDb,
 	ContentPageInfo,
-	ContentTableState,
 } from '../types/content-pages.types';
 
 import { ContentBlockService } from './content-block.service';
@@ -134,7 +134,7 @@ export class ContentPageService {
 			},
 		};
 
-		const dbContentPage: Avo.ContentPage.Page | null = ((await performQuery(
+		const dbContentPage: ContentPageDb | null = ((await performQuery(
 			query,
 			CONTENT_RESULT_PATH.GET,
 			`Failed to retrieve content page by id: ${id}.`
@@ -156,14 +156,14 @@ export class ContentPageService {
 				{
 					query: this.getQueries().GetContentTypesDocument,
 				},
-				['data.lookup_enum_content_types', 'data.lookup_app_content_page_type'],
+				['data.lookup_enum_content_types', 'data.lookup_app_content_type'],
 				'Failed to retrieve content types.'
 			);
 
 			return (contentTypes || []).map(
-				(obj: { value: Avo.ContentPage.Type; description: string }) => ({
+				(obj: { value: Avo.ContentPage.Type; description?: string; comment?: string }) => ({
 					value: obj.value,
-					label: obj.description,
+					label: obj.description || obj.comment,
 				})
 			);
 		} catch (err) {
@@ -229,7 +229,7 @@ export class ContentPageService {
 	}
 
 	public static async insertContentLabelsLinks(
-		contentPageId: number,
+		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
 		let variables: any;
@@ -258,7 +258,7 @@ export class ContentPageService {
 	}
 
 	public static async deleteContentLabelsLinks(
-		contentPageId: number,
+		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
 		let variables: any;
@@ -311,17 +311,15 @@ export class ContentPageService {
 				query: this.getQueries().GetContentPagesDocument,
 			});
 
-			const dbContentPages: Avo.ContentPage.Page[] | null = get(
-				response,
-				'data.app_content',
-				[]
-			);
+			const dbContentPages: ContentPageDb[] | null =
+				get(response, CONTENT_RESULT_PATH.GET[0]) ||
+				get(response, CONTENT_RESULT_PATH.GET[1]) ||
+				[];
 
-			const dbContentPageCount: number = get(
-				response,
-				'data.app_content_aggregate.aggregate.count',
-				0
-			);
+			const dbContentPageCount: number =
+				get(response, CONTENT_RESULT_PATH.COUNT[0]) ||
+				get(response, CONTENT_RESULT_PATH.COUNT[1]) ||
+				0;
 
 			if (!dbContentPages) {
 				throw new CustomError('Response did not contain any content pages', null, {
@@ -339,13 +337,12 @@ export class ContentPageService {
 	}
 
 	private static cleanupBeforeInsert(
-		dbContentPage: Partial<Avo.ContentPage.Page>
-	): Partial<Avo.ContentPage.Page> {
+		dbContentPage: Partial<ContentPageDb>
+	): Partial<ContentPageDb> {
 		return omit(dbContentPage, [
 			'contentBlockssBycontentId',
 			'content_blocks',
 			'profile',
-			'owner_profile',
 			'__typename',
 			'content_content_labels',
 			'id',
@@ -370,11 +367,10 @@ export class ContentPageService {
 				throw new CustomError('Response contains errors', null, { response });
 			}
 
-			const id: number | null = get(
-				response,
-				`data.${CONTENT_RESULT_PATH.INSERT}.returning[0].id`,
-				null
-			);
+			const id: number | null =
+				get(response, `data.${CONTENT_RESULT_PATH.INSERT[0]}.returning[0].id`) ||
+				get(response, `data.${CONTENT_RESULT_PATH.INSERT[1]}.returning[0].id`) ||
+				null;
 
 			if (id) {
 				// Insert content-blocks
@@ -608,26 +604,6 @@ export class ContentPageService {
 		return description ? sanitizeHtml(description, sanitizePreset) : null;
 	}
 
-	public static async getContentPages(
-		filters: Partial<ContentTableState> | undefined,
-		page: number,
-		size: number,
-		orderProp: string,
-		orderDirection: 'asc' | 'desc'
-	): Promise<GraphQlResponse<ContentPageInfo[]>> {
-		const parsed = await dataService.query<ContentPageInfo[]>({
-			query: this.getQueries().GetContentPagesDocument,
-			variables: {
-				filters,
-				page,
-				size,
-				orderProp,
-				orderDirection,
-			},
-		});
-		return parsed;
-	}
-
 	/**
 	 * Get a content page with all of its content without the user having o be logged in
 	 * @param path The path to identify the content page including the leading slash. eg: /over
@@ -676,7 +652,7 @@ export class ContentPageService {
 	 */
 	public static async doesContentPagePathExist(
 		path: string,
-		id?: number
+		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
 			const response = await fetchWithLogout(
