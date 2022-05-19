@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/react-admin",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "React admin app for meemoo projects",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -34,6 +34,7 @@
     "start": "cd demo && npm run demo:start",
     "prebuild": "rimraf dist",
     "build": "rollup -c",
+    "build-and-copy-to-client": "rimraf ../hetarchief-client/node_modules/@meemoo/react-admin/dist && npm run build && cp -r dist package.json ../hetarchief-client/node_modules/@meemoo/react-admin",
     "build:analyze": "npm run build -- --config-analyze",
     "format": "npm run lint:ts -- --fix",
     "lint": "npm run lint:ts && npm run lint:scss",
@@ -50,7 +51,7 @@
   "peerDependencies": {
     "@hookform/resolvers": "^2.8.8",
     "@meemoo/react-components": "2.15.0",
-    "@viaa/avo2-components": "2.0.3",
+    "@viaa/avo2-components": "^2.0.4",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "1.1.1",
