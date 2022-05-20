@@ -2,7 +2,7 @@ import { get } from 'lodash-es';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { Config } from '../..';
+import { Config } from '~core/config';
 import { TRANSLATIONS_QUERIES } from './queries/translations.queries';
 
 export class TranslationsService {
@@ -31,8 +31,6 @@ export class TranslationsService {
 	}
 
 	static async updateTranslations(name: string, translations: any) {
-		console.log('Update Translation input: ', name, translations);
-		console.log('Disabled for now');
 		try {
 			// update translation by name
 			await dataService.query({
