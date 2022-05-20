@@ -1,3 +1,1 @@
-import TranslationsOverview from './TranslationsOverview';
-
-export { TranslationsOverview };
+export { default as TranslationsOverview } from './TranslationsOverview';
