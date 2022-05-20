@@ -35,6 +35,7 @@ import { Config, ToastType } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 import { performQuery } from '~modules/shared/helpers/gql';
+import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
 
 export class ContentPageService {
 	private static getQueries() {
@@ -615,7 +616,9 @@ export class ContentPageService {
 	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/admin/content-pages?${stringify({
+				`${
+					Config.getConfig().database.proxyUrl
+				}/${CONTENT_PAGE_SERVICE_BASE_URL}?${stringify({
 					path,
 				})}`,
 				{
@@ -632,15 +635,15 @@ export class ContentPageService {
 			} catch (err) {
 				// Ignore bad parse errors, error is still handled below
 			}
-			if (response.status < 200 || response.status >= 400) {
+			if (!responseContent || response.status < 200 || response.status >= 400) {
 				throw new CustomError('Failed to get content page from /content-pages', null, {
 					path,
 					response,
 					responseContent,
 				});
 			}
-			if (responseContent.error) {
-				return responseContent.error;
+			if (responseContent?.error) {
+				return responseContent?.error;
 			}
 			return convertToContentPageInfo(responseContent);
 		} catch (err) {

@@ -380,13 +380,13 @@ export interface ContentBlockConfig {
 }
 
 export interface ContentBlockMeta {
-  index: number;
-  config: ContentBlockConfig;
+	index: number;
+	config: ContentBlockConfig;
 }
 
 export const DEFAULT_BUTTON_PROPS = {
-  type: 'primary',
-  label: '',
-  icon: undefined,
-  buttonAction: undefined
+	type: 'primary',
+	label: '',
+	icon: undefined,
+	buttonAction: undefined
 };
