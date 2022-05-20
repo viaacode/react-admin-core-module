@@ -1,17 +1,20 @@
+import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import React, { ChangeEvent, forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { cloneDeep, remove } from 'lodash-es';
+import { Column, TableOptions } from 'react-table';
 
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import { Column, TableOptions } from 'react-table';
-import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
-import { UserGroupTableColumns } from '../const/user-group.const';
-import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~modules/shared/helpers/custom-error';
+import { PermissionData } from '~modules/permissions/types/permissions.types';
+
+import { Config, ToastType } from '../../../core/config';
+import { UserGroupTableColumns } from '../const/user-group.const';
+import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import {
 	UserGroupArchief,
@@ -19,8 +22,6 @@ import {
 	UserGroupOverviewRef,
 	UserGroupUpdate,
 } from '../types/user-group.types';
-import { cloneDeep, remove } from 'lodash-es';
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(
 	({ className, onChangePermissions, renderSearchButtons }, ref) => {
@@ -134,6 +135,13 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 					// Fire onChange for parent component
 					onChangePermissions?.(false);
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t('Success'),
+						description: Config.getConfig().services.i18n.t(
+							'De permissies werden succesvol bewaard.'
+						),
+						type: ToastType.ERROR,
+					});
 				})
 				.catch((err) => {
 					console.error(
@@ -141,6 +149,13 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							query: 'UserGroupService.updateUserGroups',
 						})
 					);
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t('Error'),
+						description: Config.getConfig().services.i18n.t(
+							'Er ging iets mis bij het bewaren van de permissies.'
+						),
+						type: ToastType.ERROR,
+					});
 				});
 		};
 
@@ -190,10 +205,17 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'UserGroupService.getAllUserGroups',
 					})
 				);
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t('Error'),
+					description: Config.getConfig().services.i18n.t(
+						'Er ging iets mis bij het ophalen van de gebruikersgroepen.'
+					),
+					type: ToastType.ERROR,
+				});
 				setLoadingInfo({
 					state: 'error',
 					message: t(
-						'admin/content/views/content-overview___het-ophalen-van-de-content-paginas-is-mislukt'
+						'Het ophalen van de gebruikersgroepen is mislukt.'
 					),
 					icon: 'alert-triangle',
 				});
@@ -207,10 +229,17 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'PermissionsService.getAllPermissions',
 					})
 				);
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t('Error'),
+					description: Config.getConfig().services.i18n.t(
+						'Er ging iets mis bij het ophalen van de permissies.'
+					),
+					type: ToastType.ERROR,
+				});
 				setLoadingInfo({
 					state: 'error',
 					message: t(
-						'admin/content/views/content-overview___het-ophalen-van-de-content-paginas-is-mislukt'
+						'Het ophalen van de permissies is mislukt.'
 					),
 					icon: 'alert-triangle',
 				});
