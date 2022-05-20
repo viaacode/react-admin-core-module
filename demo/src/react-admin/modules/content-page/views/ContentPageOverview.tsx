@@ -85,7 +85,6 @@ const ContentPageOverview: FunctionComponent = () => {
 	const [userGroups] = useUserGroups(true);
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
-	const user = Config.getConfig().user;
 
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -108,12 +107,11 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
-	const hasPerm = useCallback(
-		(permission: Permission) => {
-			return PermissionService.hasPerm(user, permission);
-		},
-		[user]
-	);
+	const getUser = () => Config.getConfig().user;
+
+	const hasPerm = useCallback((permission: Permission) => {
+		return PermissionService.hasPerm(getUser(), permission);
+	}, []);
 
 	const fetchContentPages = useCallback(async () => {
 		try {
@@ -180,7 +178,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				// When you get to this point we assume you already have either the EDIT_ANY_CONTENT_PAGES or EDIT_OWN_CONTENT_PAGES permission
 				if (!hasPerm(EDIT_ANY_CONTENT_PAGES)) {
 					// Add filter to only allow the content pages for which the user is the author
-					andFilters.push({ user_profile_id: { _eq: user.profileId } });
+					andFilters.push({ user_profile_id: { _eq: getUser().profileId } });
 				}
 
 				andFilters.push({ is_deleted: { _eq: false } });
@@ -219,7 +217,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			});
 		}
 		setIsLoading(false);
-	}, [tableColumns, tableState, hasPerm, user, t]);
+	}, [tableColumns, tableState, hasPerm, t]);
 
 	useEffect(() => {
 		fetchContentPages();

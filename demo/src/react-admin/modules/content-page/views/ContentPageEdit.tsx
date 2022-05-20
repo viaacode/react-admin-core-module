@@ -1,13 +1,6 @@
 import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
-import React, {
-	FunctionComponent,
-	Reducer,
-	useCallback,
-	useEffect,
-	useReducer,
-	useState,
-} from 'react';
+import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
 import { Config, ToastType } from '~core/config';
 import ContentEditForm from '~modules/content-page/components/ContentEditForm/ContentEditForm';
@@ -60,7 +53,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
-const ContentPageEdit: FunctionComponent = () => {
+const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -78,7 +71,6 @@ const ContentPageEdit: FunctionComponent = () => {
 
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const { id } = Config.getConfig().services.router.useParams();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
