@@ -12,6 +12,7 @@ import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
 import { UserGroupsService } from './modules/user-group/user-groups.service';
+import { ContentBlockType } from '~modules/content-page';
 
 const navItem = {
 	content_path: 'content_path',
@@ -57,6 +58,15 @@ function setConfig() {
 					labels: { tableHeads: {} },
 				},
 			},
+		},
+		contentPage: {
+			availableContentBlocks: [
+				ContentBlockType.Heading,
+				ContentBlockType.RichText,
+				ContentBlockType.RichTextTwoColumns,
+				ContentBlockType.Buttons,
+				ContentBlockType.Image,
+			],
 		},
 		icon: {
 			component: ({ name }: any) => <span>{name}</span>,
