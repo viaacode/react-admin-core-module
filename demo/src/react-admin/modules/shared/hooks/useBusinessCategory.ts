@@ -24,7 +24,7 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 				);
 
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-business-category___error'),
 					description: Config.getConfig().services.i18n.t(
 						'shared/hooks/use-business-category___het-ophalen-van-de-oormerken-is-mislukt'
 					),

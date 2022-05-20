@@ -7,7 +7,6 @@ import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { Config, ConfigValue } from '~core/config';
-import { Idp, Permission } from '~modules/user/user.types';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
@@ -110,7 +109,7 @@ function setConfig() {
 			UserGroupsService,
 			PermissionsService,
 			queryCache: {
-				clear: async (key: string) => Promise.resolve(),
+				clear: async (_key: string) => Promise.resolve(),
 			},
 		},
 		database: {
