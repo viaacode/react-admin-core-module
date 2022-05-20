@@ -39,5 +39,6 @@ export const mockUser: CommonUser = {
 		Permission.PUBLISH_ANY_CONTENT_PAGE,
 		Permission.UNPUBLISH_ANY_CONTENT_PAGE,
 		Permission.VIEW_ADMIN_DASHBOARD,
+		Permission.EDIT_TRANSLATIONS,
 	],
 };
