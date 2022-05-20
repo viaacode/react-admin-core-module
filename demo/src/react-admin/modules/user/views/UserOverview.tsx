@@ -30,7 +30,6 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { AdminLayout } from '../../shared/layouts';
 import { UserService } from '../user.service';
 import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
@@ -91,6 +90,9 @@ const UserOverview: FunctionComponent = () => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
+	const app = Config.getConfig().database.databaseApplicationType;
+	const bulkActions = Config.getConfig().users?.bulkActions || [];
+
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
@@ -138,7 +140,7 @@ const UserOverview: FunctionComponent = () => {
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
 			if (
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				app === AvoOrHetArchief.hetArchief
 			) {
 				return generateWhereObjectArchief(
 					filters,
@@ -586,7 +588,7 @@ const UserOverview: FunctionComponent = () => {
 			case 'firstName':
 				// no user detail for archief yet
 
-				return Config.getConfig().database.databaseApplicationType ===
+				return app ===
 					AvoOrHetArchief.avo ? (
 					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
 						{truncateTableValue(get(commonUser, columnId))}
@@ -718,12 +720,12 @@ const UserOverview: FunctionComponent = () => {
 					onTableStateChanged={(newTableState) => setTableState(newTableState)}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
-					showCheckboxes
+					showCheckboxes={!!bulkActions.length}
 					selectedItemIds={selectedProfileIds}
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user)}
+					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user, bulkActions)}
 					rowKey={(row: Avo.User.Profile) => row.id || get(row, 'user.mail')}
 				/>
 				<UserDeleteModal
@@ -756,16 +758,11 @@ const UserOverview: FunctionComponent = () => {
 	};
 
 	return (
-		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
-			<AdminLayout.Actions></AdminLayout.Actions>
-			<AdminLayout.Content>
-				<LoadingErrorLoadedComponent
-					loadingInfo={loadingInfo}
-					dataObject={profiles}
-					render={renderUserOverview}
-				/>
-			</AdminLayout.Content>
-		</AdminLayout>
+		<LoadingErrorLoadedComponent
+			loadingInfo={loadingInfo}
+			dataObject={profiles}
+			render={renderUserOverview}
+		/>
 	);
 };
 
