@@ -4,11 +4,15 @@ import { ComponentType, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import { AvoOrHetArchief } from '~modules/shared/types';
 
-import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
-import { UserGroupArchief, UserGroupUpdateResponse, UserGroupUpdates } from '~modules/user-group/types/user-group.types';
+import {
+	UserGroupArchief,
+	UserGroupUpdateResponse,
+	UserGroupUpdates,
+} from '~modules/user-group/types/user-group.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -57,7 +61,9 @@ export interface ConfigValue {
 		FLOW_PLAYER_ID: string;
 	};
 	navigation?: NavigationConfig;
-	contentPage?: ContentPageConfig;
+	contentPage?: {
+		availableContentBlocks: ContentBlockType[];
+	};
 	// Secondary services and config
 	services: {
 		assetService: {
@@ -85,7 +91,7 @@ export interface ConfigValue {
 			Link: FunctionComponent<LinkInfo>;
 		};
 		UserGroupsService: UserGroupsService;
-		PermissionsService: PermissionsService
+		PermissionsService: PermissionsService;
 		queryCache: {
 			clear: (key: string) => Promise<void>;
 		};
@@ -105,7 +111,7 @@ export interface ConfigValue {
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];
-	}
+	};
 	database: {
 		databaseApplicationType: AvoOrHetArchief;
 		proxyUrl: string;
