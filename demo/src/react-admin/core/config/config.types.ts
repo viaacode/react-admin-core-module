@@ -6,7 +6,7 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { ContentPageConfig } from '~modules/content-page/types/content-pages.types';
 import { NavigationConfig } from '~modules/navigation/types';
-import { CommonUser } from '~modules/user/user.types';
+import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 import { UserGroupArchief, UserGroupUpdateResponse, UserGroupUpdates } from '~modules/user-group/types/user-group.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
@@ -103,6 +103,9 @@ export interface ConfigValue {
 	handlers: {
 		onExternalLink: (url: string) => void;
 	};
+	users?: {
+		bulkActions?: UserBulkAction[];
+	}
 	database: {
 		databaseApplicationType: AvoOrHetArchief;
 		proxyUrl: string;
