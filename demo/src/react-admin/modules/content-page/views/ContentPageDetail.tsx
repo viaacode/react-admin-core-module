@@ -42,7 +42,6 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/help
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { UserProps } from '~modules/shared/types';
 import { SpecialUserGroup } from '~modules/user-group/const/user-group.const';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -58,7 +57,7 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
+const ContentPageDetail: FunctionComponent = () => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -77,6 +76,7 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 		GET_CONTENT_DETAIL_TABS()[0].id
 	);
 
+	const user = Config.getConfig().user;
 	const isAdminUser = user?.userGroup?.id === SpecialUserGroup.Admin;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
 	const pageTitle = `Content: ${get(contentPageInfo, 'title', '')}`;
@@ -397,7 +397,12 @@ const ContentPageDetail: FunctionComponent<UserProps> = ({ user }) => {
 
 		switch (currentTab) {
 			case 'inhoud':
-				return <ContentPage contentPageInfo={contentPageInfo} user={user} />;
+				return (
+					<ContentPage
+						contentPageInfo={contentPageInfo}
+						userGroupId={Config.getConfig()?.user?.userGroup?.id}
+					/>
+				);
 			case 'metadata':
 				return <ContentPageDetailMetaData contentPageInfo={contentPageInfo} />;
 			default:

@@ -16,9 +16,9 @@ import {
 } from './ContentBlockPreview.const';
 
 import { generateSmartLink } from '~modules/shared/helpers/link';
-import { UserProps } from '~modules/shared/types';
 
 import './ContentBlockPreview.scss';
+import { Config } from '~core/config';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -36,12 +36,11 @@ enum ContentWidthMap {
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps & UserProps> = ({
+const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	contentBlockConfig,
 	contentPageInfo,
 	onClick = noop,
 	className,
-	user,
 }) => {
 	const blockState = get(contentBlockConfig, 'block.state');
 	const componentState = get(contentBlockConfig, 'components.state');
@@ -98,7 +97,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps & UserProp
 		// Set profile to current user for unsaved pages
 		blockStateProps.contentPageInfo = {
 			...contentPageInfo,
-			profile: contentPageInfo.profile || ({ ...get(user, 'profile', {}), user } as any),
+			profile: contentPageInfo.profile || Config.getConfig().user,
 		};
 	}
 

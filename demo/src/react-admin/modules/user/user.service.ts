@@ -119,7 +119,6 @@ export class UserService {
 		itemsPerPage: number = ITEMS_PER_PAGE
 	): Promise<[CommonUser[], number]> {
 		let variables: any;
-		console.log('input where', where);
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted =

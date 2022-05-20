@@ -4,12 +4,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
-import { CommonUser } from '~modules/user/user.types';
 import { Config, ToastType } from '~core/config';
-import { LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { Idp, Permission } from '~modules/user/user.types';
+import { Permission } from '~modules/user/user.types';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
 import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
@@ -25,8 +23,8 @@ const queryClient = new QueryClient();
 
 function App() {
 	// const [routes] = useModuleRoutes(false);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	const [userPermissions, setUserPermissions] = useState<Permission[] | null>(null);
+	// const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+	// const [userPermissions, setUserPermissions] = useState<Permission[] | null>(null);
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
 
 	const { t } = useTranslation();
@@ -37,7 +35,7 @@ function App() {
 		}
 		if (PermissionService.hasPerm(mockUser, Permission.VIEW_ADMIN_DASHBOARD)) {
 			const tempUserPermissions = PermissionService.getUserPermissions(mockUser);
-			setUserPermissions(tempUserPermissions);
+			// setUserPermissions(tempUserPermissions);
 			GET_NAV_ITEMS(tempUserPermissions)
 				.then((items) => {
 					setNavigationItems(items);
@@ -51,14 +49,14 @@ function App() {
 					});
 				});
 		} else {
-			setLoadingInfo({
-				state: 'error',
-				icon: 'lock',
-				message: t(
-					'admin/admin___je-hebt-geen-rechten-om-het-beheer-dashboard-te-bekijken-view-admin-dashboard'
-				),
-				actionButtons: ['home', 'helpdesk'],
-			});
+			// setLoadingInfo({
+			// 	state: 'error',
+			// 	icon: 'lock',
+			// 	message: t(
+			// 		'admin/admin___je-hebt-geen-rechten-om-het-beheer-dashboard-te-bekijken-view-admin-dashboard'
+			// 	),
+			// 	actionButtons: ['home', 'helpdesk'],
+			// });
 		}
 
 		// Remove zendesk when loading beheer after visiting the client side of the app
@@ -66,7 +64,7 @@ function App() {
 		if (zendeskWidget) {
 			zendeskWidget.remove();
 		}
-	}, [setLoadingInfo, t]);
+	}, [t]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -88,7 +86,7 @@ function App() {
 									className="o-app--admin__main u-flex-auto u-scroll"
 									orientation="vertical"
 								>
-									{renderAdminRoutes(mockUser)}
+									{renderAdminRoutes()}
 								</Flex>
 							</ResizablePanels>
 						</div>

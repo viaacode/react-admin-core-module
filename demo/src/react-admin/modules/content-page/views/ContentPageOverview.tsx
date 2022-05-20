@@ -61,13 +61,13 @@ import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { AvoOrHetArchief, UserProps } from '~modules/shared/types';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } = Permission;
 
-const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
+const ContentPageOverview: FunctionComponent = () => {
 	// Hooks
 	const [contentPages, setContentPages] = useState<ContentPageInfo[] | null>(null);
 	const [contentPageCount, setContentPageCount] = useState<number>(0);
@@ -85,6 +85,7 @@ const ContentPageOverview: FunctionComponent<UserProps> = ({ user }) => {
 	const [userGroups] = useUserGroups(true);
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
+	const user = Config.getConfig().user;
 
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();

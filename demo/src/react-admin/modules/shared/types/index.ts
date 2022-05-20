@@ -1,15 +1,9 @@
 import { CSSProperties } from 'react';
 
-import { CommonUser } from '~modules/user/user.types';
-
 export type ReactSelectOption<T = any> = {
 	label: string;
 	value: T;
 };
-
-export interface UserProps {
-	user: CommonUser;
-}
 
 export enum AvoOrHetArchief {
 	avo = 'avo',

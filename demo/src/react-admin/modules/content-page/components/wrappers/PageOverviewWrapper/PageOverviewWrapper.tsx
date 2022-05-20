@@ -34,7 +34,6 @@ import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
 import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
 import { useDebounce } from '~modules/shared/hooks/useDebounce';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
 
 export interface ContentPageOverviewParams {
 	withBlock: boolean;
@@ -66,7 +65,7 @@ interface PageOverviewWrapperProps {
 	renderLink: RenderLinkFunction;
 }
 
-const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps & UserProps> = ({
+const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	contentTypeAndTabs = {
 		selectedContentType: 'PROJECT',
 		selectedLabels: null,
@@ -86,7 +85,6 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps & UserProp
 	sortOrder = 'published_at__desc',
 	headerBackgroundColor,
 	renderLink,
-	user,
 }) => {
 	const { t } = useTranslation();
 
@@ -121,7 +119,10 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps & UserProp
 			title: contentPageInfo.title,
 			id: contentPageInfo.id,
 			blocks: contentPageInfo.contentBlockConfigs ? (
-				<ContentPage contentPageInfo={contentPageInfo} user={user} />
+				<ContentPage
+					contentPageInfo={contentPageInfo}
+					userGroupId={Config.getConfig()?.user?.userGroup?.id}
+				/>
 			) : null,
 			content_width: contentPageInfo.content_width,
 			path: contentPageInfo.path as string, // TODO enforce path in database
