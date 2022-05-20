@@ -1,6 +1,6 @@
 import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
+import { cloneDeep, compact, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ContentPageService } from '../../services/content-page.service';
@@ -16,19 +16,21 @@ import {
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { getUserGroupIds } from '~modules/shared/helpers/get-profile-info';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
 
 type ContentPageDetailProps =
 	| {
 			contentPageInfo: Partial<ContentPageInfo>;
 			activeBlockPosition?: number | null;
 			onBlockClicked?: BlockClickHandler;
+			userGroupId: number | string | undefined;
 	  }
-	| { path: string };
+	| {
+			path: string;
+			userGroupId: number | string | undefined;
+	  };
 
-const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (props) => {
+const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const { t } = useTranslation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -133,12 +135,11 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (prop
 		contentBlockBlockConfigs = compact(
 			contentBlockBlockConfigs.map(
 				(contentBlockConfig: ContentBlockConfig): ContentBlockConfig | null => {
-					const blockUserGroupIds: number[] =
+					const blockUserGroupIds: (string | number)[] =
 						contentBlockConfig.block.state.userGroupIds || [];
-					const userGroupIds = getUserGroupIds(props.user);
 					if (blockUserGroupIds.length) {
 						// Block has special restrictions set
-						if (!intersection(blockUserGroupIds, userGroupIds).length) {
+						if (!props.userGroupId || !blockUserGroupIds.includes(props.userGroupId)) {
 							// The user doesn't have the right permissions to see this block
 							return null;
 						}
@@ -160,7 +161,12 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (prop
 					(contentBlockConfig: ContentBlockConfig) => {
 						return (
 							<ContentBlockPreview
-								key={contentBlockConfig.id}
+								key={
+									'content-block-preview-' +
+									contentBlockConfig.type +
+									'-' +
+									contentBlockConfig.position
+								}
 								contentBlockConfig={contentBlockConfig}
 								contentPageInfo={contentPageInfo as ContentPageInfo}
 								className={clsx(
@@ -177,7 +183,6 @@ const ContentPage: FunctionComponent<ContentPageDetailProps & UserProps> = (prop
 										'preview'
 									)
 								}
-								user={props.user}
 							/>
 						);
 					}

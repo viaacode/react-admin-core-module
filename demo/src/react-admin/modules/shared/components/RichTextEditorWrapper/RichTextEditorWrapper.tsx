@@ -10,7 +10,6 @@ import React, { FunctionComponent } from 'react';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
 import { CustomError } from '../../helpers/custom-error';
-import { FileUploadService } from '../../services/file-upload-service';
 
 import { Config, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -46,7 +45,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 		? {
 				uploadFn: async (param: RichTextEditorUploadInfo) => {
 					try {
-						const url = await FileUploadService.uploadFile(
+						const url = await Config.getConfig().services.assetService.uploadFile(
 							param.file,
 							fileType,
 							ownerId || ''

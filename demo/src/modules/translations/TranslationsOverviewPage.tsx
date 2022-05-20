@@ -1,6 +1,5 @@
 import { Button } from '@viaa/avo2-components';
 import { FC, useRef } from 'react';
-import { CommonUser } from '~modules/user/user.types';
 
 import { AdminLayout } from '~modules/shared/layouts';
 import { TranslationsOverview } from '~modules/translations/views';
@@ -9,7 +8,7 @@ interface TranslationsOverviewRef {
 	onSave: () => void;
 }
 
-export const TranslationsOverviewPage: FC<{ user: CommonUser }> = ({ user }) => {
+export const TranslationsOverviewPage: FC = () => {
 	// Access child functions
 	const translationsRef = useRef<TranslationsOverviewRef>();
 
@@ -22,7 +21,7 @@ export const TranslationsOverviewPage: FC<{ user: CommonUser }> = ({ user }) => 
 				/>
 			</AdminLayout.Actions>
 			<AdminLayout.Content>
-				<TranslationsOverview user={user} ref={translationsRef} />
+				<TranslationsOverview ref={translationsRef} />
 			</AdminLayout.Content>
 		</AdminLayout>
 	);

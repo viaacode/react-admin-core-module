@@ -2,13 +2,7 @@ import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
-import { CommonUser } from '../../react-admin/modules/user/user.types';
-
-import {
-	ContentPageDetail,
-	ContentPageEdit,
-	ContentPageOverview,
-} from '../../react-admin/modules/content-page/views';
+import { ContentPageDetail, ContentPageEdit } from '../../react-admin/modules/content-page/views';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 
 export const CONTENT_PATH = {
@@ -24,29 +18,29 @@ export const CONTENT_PATH = {
 	OVERVIEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=OVERZICHT`,
 };
 
-export const renderAdminContentPageRoutes = (user: CommonUser): ReactNode[] => {
+export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
-			render={() => <ContentPageOverviewPage user={user} />}
+			render={() => <ContentPageOverviewPage />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_CREATE}
-			render={() => <ContentPageEdit user={user} />}
+			render={() => <ContentPageEdit />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_CREATE}
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_DETAIL}
-			render={() => <ContentPageDetail user={user} />}
+			render={() => <ContentPageDetail />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_DETAIL}
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_EDIT}
-			render={() => <ContentPageEdit user={user} />}
+			render={() => <ContentPageEdit />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_EDIT}
 		/>,

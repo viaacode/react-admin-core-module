@@ -49,7 +49,7 @@ import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { AvoOrHetArchief, UserProps } from '~modules/shared/types';
+import { AvoOrHetArchief } from '~modules/shared/types';
 import { useBusinessCategories } from '~modules/shared/hooks/useBusinessCategory';
 import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
@@ -67,7 +67,7 @@ import {
 	ITEMS_PER_PAGE,
 } from '../user.consts';
 
-const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
+const UserOverview: FunctionComponent = () => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -94,7 +94,7 @@ const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
-				user,
+				Config.getConfig().user,
 				setSelectedCheckboxes(
 					userGroupOptions,
 					get(tableState, 'author.user_groups', []) as string[]
@@ -131,7 +131,6 @@ const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 			idps,
 			subjects,
 			tableState,
-			user,
 			userGroupOptions,
 		]
 	);
@@ -724,7 +723,7 @@ const UserOverview: FunctionComponent<UserProps> = ({ user }) => {
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(user)}
+					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user)}
 					rowKey={(row: Avo.User.Profile) => row.id || get(row, 'user.mail')}
 				/>
 				<UserDeleteModal

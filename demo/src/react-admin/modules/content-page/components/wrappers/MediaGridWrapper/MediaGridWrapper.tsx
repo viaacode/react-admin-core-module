@@ -26,7 +26,7 @@ import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { isMobileWidth } from '~modules/shared/helpers/media-query';
 import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
+import { Config } from '~core/config';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;
@@ -38,7 +38,7 @@ interface MediaGridWrapperProps extends MediaGridBlockState {
 	ctaButtonAltTitle?: string;
 }
 
-const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & UserProps> = ({
+const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	title,
 	buttonLabel,
 	buttonAltTitle,
@@ -61,7 +61,6 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & UserProps> = (
 	searchQueryLimit,
 	elements,
 	results,
-	user,
 	renderLink,
 }) => {
 	const { t } = useTranslation();
@@ -85,7 +84,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & UserProps> = (
 				setResolvedResults(results);
 				return;
 			}
-			if (user) {
+			if (Config.getConfig().user) {
 				// If we are logged in and get no results, but we do get elements, then the block is loaded in preview mode,
 				// and we should resolve the results ourselves using a separate route on the server
 				const searchQueryLimitNumber =
@@ -144,7 +143,6 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & UserProps> = (
 	}, [
 		results,
 		elements,
-		user,
 		searchQuery,
 		searchQueryLimit,
 		lastSearchQuery,

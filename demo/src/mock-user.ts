@@ -8,6 +8,11 @@ export const mockUser: CommonUser = {
 	email: 'meemoo.admin@example.com',
 	idp: Idp.HETARCHIEF,
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
+	userGroup: {
+		name: 'MEEMOO_ADMIN',
+		label: 'Sitebeheerder',
+		id: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
+	},
 	permissions: [
 		Permission.VIEW_ADMIN_DASHBOARD,
 		Permission.EDIT_ANY_CONTENT_PAGES,

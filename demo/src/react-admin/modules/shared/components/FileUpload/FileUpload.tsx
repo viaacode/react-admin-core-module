@@ -15,7 +15,6 @@ import React, { FunctionComponent, useState } from 'react';
 
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
-import { FileUploadService } from '../../services/file-upload-service';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 import { Config, ToastType } from '~core/config';
@@ -89,7 +88,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const uploadedUrls: string[] = [];
 				for (let i = 0; i < (allowMulti ? files.length : 1); i += 1) {
 					uploadedUrls.push(
-						await FileUploadService.uploadFile(files[i], assetType, ownerId)
+						await Config.getConfig().services.assetService.uploadFile(
+							files[i],
+							assetType,
+							ownerId
+						)
 					);
 				}
 				onChange(allowMulti ? [...(urls || []), ...uploadedUrls] : uploadedUrls);
@@ -140,7 +143,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const newUrls = [...urls];
 				for (let i = newUrls.length - 1; i >= 0; i -= 1) {
 					if (newUrls[i] === url) {
-						await FileUploadService.deleteFile(url);
+						await Config.getConfig().services.assetService.deleteFile(url);
 						newUrls.splice(i, 1);
 					}
 				}

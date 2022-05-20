@@ -4,9 +4,8 @@ import { renderAdminContentPageRoutes } from './modules/content-page/content.rou
 import { renderAdminTranslationsRoutes } from './modules/translations/translations';
 import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
 import { renderAdminUserRoutes } from './modules/user/user';
-import { CommonUser } from './react-admin/modules/user/user.types';
 
-export const renderAdminRoutes = (user: CommonUser) => {
+export const renderAdminRoutes = () => {
 	return (
 		<Switch>
 			{/*{renderWithPermissions(renderAdminUserRoutes, [Permission.VIEW_USERS])}*/}
@@ -15,10 +14,10 @@ export const renderAdminRoutes = (user: CommonUser) => {
 			{/*	Permission.EDIT_PERMISSION_GROUPS,*/}
 			{/*])}*/}
 			{/*{renderWithPermissions(renderAdminMenuRoutes, [Permission.EDIT_NAVIGATION_BARS])}*/}
-			{renderAdminContentPageRoutes(user)}
-			{renderAdminUserGroupRoutes(user)}
-			{renderAdminTranslationsRoutes(user)}
-			{renderAdminUserRoutes(user)}
+			{renderAdminContentPageRoutes()}
+			{renderAdminUserGroupRoutes()}
+			{renderAdminTranslationsRoutes()}
+			{renderAdminUserRoutes()}
 			{/*{renderAdminContentPageLabelRoutes()}*/}
 			{/*{renderWithPermissions(renderItemRoutes, [Permission.VIEW_ITEMS_OVERVIEW])}*/}
 			{/*{renderWithPermissions(renderPublishItemRoutes, [Permission.PUBLISH_ITEMS])}*/}

@@ -19,13 +19,13 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
+import { getFullName } from '~modules/shared/helpers/get-profile-info';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { getFullName, getUserGroupLabel } from '~modules/shared/helpers/get-profile-info';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -175,7 +175,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							t('admin/content/views/content-detail___auteur')
 						)}
 						{renderDetailRow(
-							getUserGroupLabel(contentPageInfo?.profile) || '-',
+							contentPageInfo?.profile?.userGroup?.label || '-',
 							t('admin/content/views/content-detail___auteur-rol')
 						)}
 						{renderDateDetailRows(contentPageInfo, [

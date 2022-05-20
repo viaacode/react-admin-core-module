@@ -29,6 +29,7 @@ query getContentById($id: uuid!) {
             }
             group {
                 id
+                name
                 label
             }
         }

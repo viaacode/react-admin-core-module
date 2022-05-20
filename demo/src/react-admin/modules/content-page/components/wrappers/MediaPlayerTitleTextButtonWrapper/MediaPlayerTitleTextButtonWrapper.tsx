@@ -16,8 +16,8 @@ import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
 import { generateSmartLink } from '~modules/shared/helpers/link';
-import { UserProps } from '~modules/shared/types';
 import { Permission } from '~modules/user/user.types';
+import { Config } from '~core/config';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;
@@ -40,9 +40,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	align: AlignOption;
 }
 
-export const MediaPlayerTitleTextButtonWrapper: FC<
-	MediaPlayerTitleTextButtonWrapperProps & UserProps
-> = ({
+export const MediaPlayerTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrapperProps> = ({
 	mediaItem,
 	mediaSrc,
 	mediaPoster,
@@ -61,10 +59,10 @@ export const MediaPlayerTitleTextButtonWrapper: FC<
 	buttonAction,
 	align,
 	mediaAutoplay,
-	user,
 }) => {
 	const shouldTitleLink =
-		PermissionService.hasPerm(user, Permission.VIEW_ANY_PUBLISHED_ITEMS) && !!mediaItem;
+		PermissionService.hasPerm(Config.getConfig().user, Permission.VIEW_ANY_PUBLISHED_ITEMS) &&
+		!!mediaItem;
 
 	return (
 		<Grid className="c-item-video-description">

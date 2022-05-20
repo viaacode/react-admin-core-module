@@ -6,40 +6,6 @@ import { CustomError } from './custom-error';
 
 import { CommonUser } from '~modules/user/user.types';
 
-export const getUserGroupLabel = (profile: CommonUser | null | undefined): string => {
-	if (!profile) {
-		console.error(
-			new CustomError(
-				'Failed to get profile user group label because the provided profile is undefined'
-			)
-		);
-		return '';
-	}
-
-	return profile?.userGroup || get(profile, 'profile_user_group.group.label') || '';
-};
-
-export const getUserGroupId = (profile: CommonUser | null | undefined): number => {
-	if (get(profile, 'userGroupIds[0]')) {
-		return get(profile, 'userGroupIds[0]');
-	}
-	if (!profile) {
-		console.error(
-			new CustomError(
-				'Failed to get profile user group id because the provided profile is undefined'
-			)
-		);
-		return 0;
-	}
-
-	const userGroupId =
-		get(profile, 'userGroupIds[0]') || get(profile, 'profile_user_group.group.id') || '';
-	if (!userGroupId) {
-		console.error('Failed to get user group id from profile');
-	}
-	return userGroupId;
-};
-
 export function getProfileName(user: CommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile name because the logged in user is undefined');

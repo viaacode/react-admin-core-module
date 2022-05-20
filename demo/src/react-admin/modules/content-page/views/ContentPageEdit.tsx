@@ -57,11 +57,10 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
-const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
+const ContentPageEdit: FunctionComponent = () => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -84,6 +83,7 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
 
+	const user = Config.getConfig().user;
 	const hasPerm = useCallback(
 		(permission: Permission) => PermissionService.hasPerm(user, permission),
 		[user]
@@ -381,11 +381,11 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 			]);
 
 			Config.getConfig().services.toastService.showToast({
-				title: t('Error'),
+				title: t('Success'),
 				description: t(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
-				type: ToastType.ERROR,
+				type: ToastType.SUCCESS,
 			});
 			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
 				id: insertedOrUpdatedContent.id,
@@ -530,7 +530,6 @@ const ContentPageEdit: FunctionComponent<UserProps> = ({ user }) => {
 						changeContentPageState={changeContentPageState}
 						onRemove={openDeleteModal}
 						onSave={handleStateSave}
-						user={user}
 					/>
 				);
 			case 'metadata':

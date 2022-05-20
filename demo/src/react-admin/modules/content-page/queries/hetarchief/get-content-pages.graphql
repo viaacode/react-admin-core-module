@@ -28,6 +28,7 @@ query getContentPages($where: app_content_page_bool_exp, $offset: Int = 0, $limi
             }
             group {
                 id
+                name
                 label
             }
         }

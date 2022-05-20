@@ -25,9 +25,9 @@ import { ResizablePanels } from '~modules/shared/components/ResizablePanels/Resi
 import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
 import { createKey } from '~modules/shared/helpers/create-key';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { UserProps } from '~modules/shared/types';
 
 import './ContentEditContentBlocks.scss';
+import { Config } from '~core/config';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -44,7 +44,7 @@ interface ContentEditContentBlocksProps {
 	removeComponentFromState: (index: number, stateIndex: number) => void;
 }
 
-const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps & UserProps> = ({
+const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({
 	contentPageInfo,
 	hasSubmitted,
 	changeContentPageState,
@@ -52,7 +52,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps 
 	onSave,
 	addComponentToState,
 	removeComponentFromState,
-	user,
 }) => {
 	const { t } = useTranslation();
 
@@ -191,7 +190,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps 
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
-						user={user}
+						userGroupId={Config.getConfig()?.user?.userGroup?.id}
 					/>
 				</div>
 				<Sidebar className="c-content-edit-view__sidebar" light>
