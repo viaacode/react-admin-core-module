@@ -1,12 +1,5 @@
 import { get } from 'lodash-es';
-import React, {
-	FunctionComponent,
-	ReactElement,
-	ReactText,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 
 import {
 	Blankslate,
@@ -57,11 +50,10 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FunctionComponent = () => {
+const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const { id } = Config.getConfig().services.router.useParams();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });

@@ -2,8 +2,9 @@ import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
-import { ContentPageDetail, ContentPageEdit } from '../../react-admin/modules/content-page/views';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';
+import ContentPageEditPage from './ContentPageEditPage';
+import ContentPageDetailPage from './ContentPageDetailPage';
 
 export const CONTENT_PATH = {
 	CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
@@ -28,19 +29,19 @@ export const renderAdminContentPageRoutes = (): ReactNode[] => {
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_CREATE}
-			render={() => <ContentPageEdit />}
+			render={() => <ContentPageEditPage />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_CREATE}
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_DETAIL}
-			render={() => <ContentPageDetail />}
+			render={() => <ContentPageDetailPage />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_DETAIL}
 		/>,
 		<Route
 			key={CONTENT_PATH.CONTENT_PAGE_EDIT}
-			render={() => <ContentPageEdit />}
+			render={() => <ContentPageEditPage />}
 			exact
 			path={CONTENT_PATH.CONTENT_PAGE_EDIT}
 		/>,
