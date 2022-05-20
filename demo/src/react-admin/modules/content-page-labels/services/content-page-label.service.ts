@@ -85,7 +85,9 @@ export class ContentPageLabelService {
 				variables: { id },
 			});
 
-			const contentPageLabelObj = get(response, 'data.app_content_labels[0]');
+			const contentPageLabelObj =
+				get(response, 'data.app_content_labels[0]') ||
+				get(response, 'data.app_content_label[0]');
 
 			if (!contentPageLabelObj) {
 				throw new CustomError('Failed to find content page label by id', null, {
@@ -128,10 +130,9 @@ export class ContentPageLabelService {
 					errors: response.errors,
 				});
 			}
-			const contentPageLabelId = get(
-				response,
-				'data.insert_app_content_labels.returning[0].id'
-			);
+			const contentPageLabelId =
+				get(response, 'data.insert_app_content_labels.returning[0].id') ||
+				get(response, 'data.insert_app_content_label.returning[0].id');
 			if (isNil(contentPageLabelId)) {
 				throw new CustomError(
 					'Response from database does not contain the id of the inserted content page label',

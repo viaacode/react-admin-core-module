@@ -207,7 +207,8 @@ export class ContentPageService {
 				);
 			}
 
-			const labels = get(response, 'data.app_content_labels');
+			const labels =
+				get(response, 'data.app_content_labels') || get(response, 'data.app_content_label');
 
 			if (!labels) {
 				throw new CustomError('The response does not contain any labels', null, {
@@ -368,8 +369,8 @@ export class ContentPageService {
 			}
 
 			const id: number | null =
-				get(response, `data.${CONTENT_RESULT_PATH.INSERT[0]}.returning[0].id`) ||
-				get(response, `data.${CONTENT_RESULT_PATH.INSERT[1]}.returning[0].id`) ||
+				get(response, CONTENT_RESULT_PATH.INSERT[0]) ||
+				get(response, CONTENT_RESULT_PATH.INSERT[1]) ||
 				null;
 
 			if (id) {
@@ -417,7 +418,10 @@ export class ContentPageService {
 				throw new CustomError('Response contains errors', null, { response });
 			}
 
-			const updatedContent = get(response, 'data.update_app_content.affected_rows', null);
+			const updatedContent =
+				get(response, CONTENT_RESULT_PATH.UPDATE[0]) ||
+				get(response, CONTENT_RESULT_PATH.UPDATE[1]) ||
+				null;
 			if (!updatedContent) {
 				throw new CustomError(
 					'Content page update returned empty response',
