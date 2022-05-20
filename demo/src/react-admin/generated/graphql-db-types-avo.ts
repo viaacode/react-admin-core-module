@@ -37628,7 +37628,7 @@ export type GetContentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetContentByIdQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', id: number, full_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, contentBlockssBycontentId: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
+export type GetContentByIdQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', id: number, full_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
 
 export type GetContentLabelsByContentTypeQueryVariables = Exact<{
   contentType: Scalars['String'];
@@ -37779,6 +37779,47 @@ export type GetPublicItemsQueryVariables = Exact<{
 
 
 export type GetPublicItemsQuery = { __typename?: 'query_root', app_item_meta: Array<{ __typename?: 'app_item_meta', external_id: any, title: string, is_published?: boolean | null, is_deleted?: boolean | null }> };
+
+export type DeleteNavigationItemMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type DeleteNavigationItemMutation = { __typename?: 'mutation_root', delete_app_content_nav_elements?: { __typename?: 'app_content_nav_elements_mutation_response', affected_rows: number } | null };
+
+export type GetNavigationElementsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNavigationElementsQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, description?: string | null, placement: string, tooltip?: string | null }> };
+
+export type GetNavigationItemByIdQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetNavigationItemByIdQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+
+export type GetNavigationItemsByPlacementQueryVariables = Exact<{
+  placement: Scalars['String'];
+}>;
+
+
+export type GetNavigationItemsByPlacementQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+
+export type InsertNavigationItemMutationVariables = Exact<{
+  navigationItem: App_Content_Nav_Elements_Insert_Input;
+}>;
+
+
+export type InsertNavigationItemMutation = { __typename?: 'mutation_root', insert_app_content_nav_elements?: { __typename?: 'app_content_nav_elements_mutation_response', returning: Array<{ __typename?: 'app_content_nav_elements', id: number }> } | null };
+
+export type UpdateNavigationItemByIdMutationVariables = Exact<{
+  id: Scalars['Int'];
+  navigationItem: App_Content_Nav_Elements_Set_Input;
+}>;
+
+
+export type UpdateNavigationItemByIdMutation = { __typename?: 'mutation_root', update_app_content_nav_elements?: { __typename?: 'app_content_nav_elements_mutation_response', affected_rows: number } | null };
 
 export type GetOrganizationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -38204,7 +38245,7 @@ export const GetContentByIdDocument = `
         link_to
       }
     }
-    contentBlockssBycontentId(order_by: {position: asc}) {
+    content_blocks: contentBlockssBycontentId(order_by: {position: asc}) {
       content_block_type
       content_id
       created_at
@@ -38824,6 +38865,155 @@ export const useGetPublicItemsQuery = <
     useQuery<GetPublicItemsQuery, TError, TData>(
       ['getPublicItems', variables],
       fetcher<GetPublicItemsQuery, GetPublicItemsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPublicItemsDocument, variables),
+      options
+    );
+export const DeleteNavigationItemDocument = `
+    mutation deleteNavigationItem($id: Int!) {
+  delete_app_content_nav_elements(where: {id: {_eq: $id}}) {
+    affected_rows
+  }
+}
+    `;
+export const useDeleteNavigationItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<DeleteNavigationItemMutation, TError, DeleteNavigationItemMutationVariables, TContext>
+    ) =>
+    useMutation<DeleteNavigationItemMutation, TError, DeleteNavigationItemMutationVariables, TContext>(
+      ['deleteNavigationItem'],
+      (variables?: DeleteNavigationItemMutationVariables) => fetcher<DeleteNavigationItemMutation, DeleteNavigationItemMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, DeleteNavigationItemDocument, variables)(),
+      options
+    );
+export const GetNavigationElementsDocument = `
+    query getNavigationElements {
+  app_content_nav_elements(distinct_on: placement, order_by: {placement: asc}) {
+    id
+    description
+    placement
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationElementsQuery = <
+      TData = GetNavigationElementsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetNavigationElementsQueryVariables,
+      options?: UseQueryOptions<GetNavigationElementsQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationElementsQuery, TError, TData>(
+      variables === undefined ? ['getNavigationElements'] : ['getNavigationElements', variables],
+      fetcher<GetNavigationElementsQuery, GetNavigationElementsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationElementsDocument, variables),
+      options
+    );
+export const GetNavigationItemByIdDocument = `
+    query getNavigationItemById($id: Int!) {
+  app_content_nav_elements(where: {id: {_eq: $id}}) {
+    id
+    created_at
+    description
+    user_group_ids
+    icon_name
+    label
+    link_target
+    placement
+    position
+    updated_at
+    content_type
+    content_path
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationItemByIdQuery = <
+      TData = GetNavigationItemByIdQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetNavigationItemByIdQueryVariables,
+      options?: UseQueryOptions<GetNavigationItemByIdQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationItemByIdQuery, TError, TData>(
+      ['getNavigationItemById', variables],
+      fetcher<GetNavigationItemByIdQuery, GetNavigationItemByIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationItemByIdDocument, variables),
+      options
+    );
+export const GetNavigationItemsByPlacementDocument = `
+    query getNavigationItemsByPlacement($placement: String!) {
+  app_content_nav_elements(
+    order_by: {position: asc}
+    where: {placement: {_eq: $placement}}
+  ) {
+    id
+    created_at
+    description
+    user_group_ids
+    icon_name
+    label
+    link_target
+    placement
+    position
+    updated_at
+    content_type
+    content_path
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationItemsByPlacementQuery = <
+      TData = GetNavigationItemsByPlacementQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetNavigationItemsByPlacementQueryVariables,
+      options?: UseQueryOptions<GetNavigationItemsByPlacementQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationItemsByPlacementQuery, TError, TData>(
+      ['getNavigationItemsByPlacement', variables],
+      fetcher<GetNavigationItemsByPlacementQuery, GetNavigationItemsByPlacementQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationItemsByPlacementDocument, variables),
+      options
+    );
+export const InsertNavigationItemDocument = `
+    mutation insertNavigationItem($navigationItem: app_content_nav_elements_insert_input!) {
+  insert_app_content_nav_elements(objects: [$navigationItem]) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const useInsertNavigationItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<InsertNavigationItemMutation, TError, InsertNavigationItemMutationVariables, TContext>
+    ) =>
+    useMutation<InsertNavigationItemMutation, TError, InsertNavigationItemMutationVariables, TContext>(
+      ['insertNavigationItem'],
+      (variables?: InsertNavigationItemMutationVariables) => fetcher<InsertNavigationItemMutation, InsertNavigationItemMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, InsertNavigationItemDocument, variables)(),
+      options
+    );
+export const UpdateNavigationItemByIdDocument = `
+    mutation updateNavigationItemById($id: Int!, $navigationItem: app_content_nav_elements_set_input!) {
+  update_app_content_nav_elements(where: {id: {_eq: $id}}, _set: $navigationItem) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateNavigationItemByIdMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<UpdateNavigationItemByIdMutation, TError, UpdateNavigationItemByIdMutationVariables, TContext>
+    ) =>
+    useMutation<UpdateNavigationItemByIdMutation, TError, UpdateNavigationItemByIdMutationVariables, TContext>(
+      ['updateNavigationItemById'],
+      (variables?: UpdateNavigationItemByIdMutationVariables) => fetcher<UpdateNavigationItemByIdMutation, UpdateNavigationItemByIdMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateNavigationItemByIdDocument, variables)(),
       options
     );
 export const GetOrganizationsWithUsersDocument = `
