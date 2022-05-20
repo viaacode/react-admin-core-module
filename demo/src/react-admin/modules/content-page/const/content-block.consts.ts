@@ -13,9 +13,7 @@ import {
 import { FunctionComponent } from 'react';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
-import {
-	ContentTypeAndLabelsPicker
-} from '../../shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import { ContentTypeAndLabelsPicker } from '../../shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import { UserGroupSelect } from '../../shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components';
@@ -116,133 +114,154 @@ export const CONTENT_BLOCKS_RESULT_PATH: Record<string, [string, string]> = {
 	INSERT: ['data.insert_app_content_blocks', 'data.insert_app_content_block'],
 };
 
-export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => [
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___voeg-een-content-blok-toe'
-		),
-		value: '',
-		disabled: true,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___titel'),
-		value: ContentBlockType.Heading,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___tekst'),
-		value: ContentBlockType.RichText,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___tekst-2-kolommen'
-		),
-		value: ContentBlockType.RichTextTwoColumns,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___knoppen'),
-		value: ContentBlockType.Buttons,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___intro'),
-		value: ContentBlockType.Intro,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___2-ct-as'),
-		value: ContentBlockType.CTAs,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___i-frame'),
-		value: ContentBlockType.IFrame,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___klaar'),
-		value: ContentBlockType.Klaar,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___media-tegels'
-		),
-		value: ContentBlockType.MediaGrid,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___media-speler'
-		),
-		value: ContentBlockType.MediaPlayer,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'
-		),
-		value: ContentBlockType.MediaPlayerTitleTextButton,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___afbeelding'),
-		value: ContentBlockType.Image,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___afbeelding-grid'
-		),
-		value: ContentBlockType.ImageGrid,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___pagina-overzicht'
-		),
-		value: ContentBlockType.PageOverview,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___projecten-in-de-kijker'
-		),
-		value: ContentBlockType.ProjectsSpotlight,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___in-de-kijker'
-		),
-		value: ContentBlockType.Spotlight,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___quote'),
-		value: ContentBlockType.Quote,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/helpers/generators/anchor-links___links'
-		),
-		value: ContentBlockType.AnchorLinks,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___hero'),
-		value: ContentBlockType.Hero,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___zoek'),
-		value: ContentBlockType.Search,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___pagina-metadata'
-		),
-		value: ContentBlockType.ContentPageMeta,
-	},
-	{
-		label: Config.getConfig().services.i18n.t(
-			'admin/content-block/content-block___logos-sign-off'
-		),
-		value: ContentBlockType.LogoGrid,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___usp'),
-		value: ContentBlockType.UspGrid,
-	},
-	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___eventbrite'),
-		value: ContentBlockType.Eventbrite,
-	},
-];
+export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
+	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___titel'),
+			value: ContentBlockType.Heading,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___tekst'),
+			value: ContentBlockType.RichText,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___tekst-2-kolommen'
+			),
+			value: ContentBlockType.RichTextTwoColumns,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___knoppen'
+			),
+			value: ContentBlockType.Buttons,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___intro'),
+			value: ContentBlockType.Intro,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___2-ct-as'
+			),
+			value: ContentBlockType.CTAs,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___i-frame'
+			),
+			value: ContentBlockType.IFrame,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___klaar'),
+			value: ContentBlockType.Klaar,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___media-tegels'
+			),
+			value: ContentBlockType.MediaGrid,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___media-speler'
+			),
+			value: ContentBlockType.MediaPlayer,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'
+			),
+			value: ContentBlockType.MediaPlayerTitleTextButton,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___afbeelding'
+			),
+			value: ContentBlockType.Image,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___afbeelding-grid'
+			),
+			value: ContentBlockType.ImageGrid,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___pagina-overzicht'
+			),
+			value: ContentBlockType.PageOverview,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___projecten-in-de-kijker'
+			),
+			value: ContentBlockType.ProjectsSpotlight,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___in-de-kijker'
+			),
+			value: ContentBlockType.Spotlight,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___quote'),
+			value: ContentBlockType.Quote,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/helpers/generators/anchor-links___links'
+			),
+			value: ContentBlockType.AnchorLinks,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___hero'),
+			value: ContentBlockType.Hero,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___zoek'),
+			value: ContentBlockType.Search,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___pagina-metadata'
+			),
+			value: ContentBlockType.ContentPageMeta,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___logos-sign-off'
+			),
+			value: ContentBlockType.LogoGrid,
+		},
+		{
+			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___usp'),
+			value: ContentBlockType.UspGrid,
+		},
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___eventbrite'
+			),
+			value: ContentBlockType.Eventbrite,
+		},
+	];
+
+	// Only show the content blocks that the client enabled through the config object
+	return [
+		{
+			label: Config.getConfig().services.i18n.t(
+				'admin/content-block/content-block___voeg-een-content-blok-toe'
+			),
+			value: '',
+			disabled: true,
+		},
+		...allContentBlocks.filter((contentBlock) => {
+			return Config.getConfig()?.contentPage?.availableContentBlocks?.includes(
+				contentBlock.value
+			);
+		}),
+	];
+};
 
 export const GET_EDITOR_TYPES_MAP = (): Record<string, FunctionComponent<any>> => ({
 	AlignSelect,
@@ -262,8 +281,10 @@ export const GET_EDITOR_TYPES_MAP = (): Record<string, FunctionComponent<any>> =
 	RICH_TEXT_EDITOR: RichTextEditorWrapper,
 });
 
-export const CONTENT_BLOCK_CONFIG_MAP: Record<ContentBlockType,
-	(position?: number) => ContentBlockConfig> = {
+export const CONTENT_BLOCK_CONFIG_MAP: Record<
+	ContentBlockType,
+	(position?: number) => ContentBlockConfig
+> = {
 	[ContentBlockType.AnchorLinks]: ANCHOR_LINKS_BLOCK_CONFIG,
 	[ContentBlockType.Buttons]: BUTTONS_BLOCK_CONFIG,
 	[ContentBlockType.CTAs]: CTAS_BLOCK_CONFIG,
@@ -308,7 +329,7 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.MediaGrid]: INITIAL_MEDIA_GRID_COMPONENTS_STATE,
 	[ContentBlockType.MediaPlayer]: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE,
 	[ContentBlockType.MediaPlayerTitleTextButton]:
-	INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE,
+		INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE,
 	[ContentBlockType.PageOverview]: INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE,
 	[ContentBlockType.ProjectsSpotlight]: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE,
 	[ContentBlockType.Spotlight]: INITIAL_SPOTLIGHT_COMPONENTS_STATE,

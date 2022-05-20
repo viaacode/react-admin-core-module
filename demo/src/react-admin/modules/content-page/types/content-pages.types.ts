@@ -12,13 +12,6 @@ import {
 	ContentWidthSchema,
 } from '@viaa/avo2-types/types/content-page';
 
-export interface ContentPageConfig {
-	// TODO add config values
-	services?: {
-		// Add services
-	};
-}
-
 // Pages
 export enum PageType {
 	Create = 'create',
