@@ -1,1 +1,1 @@
-export const ASSETS_SERVICE_BASE_URL = '/assets';
+export const ASSETS_SERVICE_BASE_URL = 'assets';
