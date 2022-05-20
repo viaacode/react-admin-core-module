@@ -19,7 +19,7 @@ export const useGetNavigationByPlacement = <TData = NavigationElement[]>(
 
 	return useQuery(
 		NAVIGATION_QUERY_KEYS.list(placement),
-		async () => navService?.getByPlacement(placement) ?? [],
-		{ ...options, enabled: !!options.enabled && !!navService }
+		() => navService?.getByPlacement(placement) ?? [],
+		{ ...options, enabled: !!navService }
 	);
 };

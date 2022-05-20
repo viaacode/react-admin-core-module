@@ -18,7 +18,7 @@ export const useGetNavigations = <TData = Navigation[]>(
 		() => navService?.getAll() as Promise<Navigation[]>,
 		{
 			...options,
-			enabled: !!options.enabled && !!navService,
+			enabled: !!navService,
 		}
 	);
 };

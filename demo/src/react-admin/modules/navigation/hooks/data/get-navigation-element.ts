@@ -23,7 +23,7 @@ export const useGetNavigationElement = <TData = NavigationElement>(
 		() => navService?.getById(id) as Promise<NavigationElement>,
 		{
 			...options,
-			enabled: !!options.enabled && !!navService,
+			enabled: !!navService,
 		}
 	);
 };

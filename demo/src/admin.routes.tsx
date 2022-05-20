@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router';
 import { renderAdminContentPageRoutes } from './modules/content-page/content.routes';
+import { renderAdminNavigationRoutes } from './modules/navigation/navigation';
 import { renderAdminTranslationsRoutes } from './modules/translations/translations';
 import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
 import { renderAdminUserRoutes } from './modules/user/user';
@@ -17,6 +18,7 @@ export const renderAdminRoutes = (user: CommonUser) => {
 			{/*{renderWithPermissions(renderAdminMenuRoutes, [Permission.EDIT_NAVIGATION_BARS])}*/}
 			{renderAdminContentPageRoutes(user)}
 			{renderAdminUserGroupRoutes(user)}
+			{renderAdminNavigationRoutes()}
 			{renderAdminTranslationsRoutes(user)}
 			{renderAdminUserRoutes(user)}
 			{/*{renderAdminContentPageLabelRoutes()}*/}

@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { Config } from '~core/config';
 import { Icon, Loader } from '../../../shared/components';
 import { AdminLayout } from '../../../shared/layouts';
-import { NAVIGATION_PATHS } from '../../const';
+import { NAVIGATION_PATH } from '../../const';
 import { useGetNavigations } from '../../hooks';
 
 import { NAVIGATION_OVERVIEW_COLS } from './NavigationOverview.const';
@@ -19,7 +19,7 @@ const NavigationOverview: FC = () => {
 	return (
 		<AdminLayout pageTitle="Navigatie">
 			<AdminLayout.Actions>
-				<Link to={NAVIGATION_PATHS.create}>
+				<Link to={NAVIGATION_PATH.NAVIGATION_CREATE}>
 					<Button
 						iconStart={<Icon name="add" />}
 						label="Navigatie toevoegen"

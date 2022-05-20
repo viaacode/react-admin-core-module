@@ -4,7 +4,7 @@ import React from 'react';
 import { CellProps, Column } from 'react-table';
 
 import { Icon } from '../../../shared/components';
-import { NAVIGATION_PATHS } from '../../const';
+import { NAVIGATION_PATH } from '../../const';
 import { Navigation, NavigationOverviewCellProps } from '../../types';
 import { Config } from '~core/config';
 
@@ -20,7 +20,7 @@ export const NAVIGATION_OVERVIEW_COLS = (): Column<Navigation>[] => {
 				const { placement } = row.original;
 
 				return (
-					<Link to={NAVIGATION_PATHS.detail.replace(':navigationName', placement)}>
+					<Link to={NAVIGATION_PATH.NAVIGATION_DETAIL.replace(':navigationName', placement)}>
 						{startCase(placement)}
 					</Link>
 				);
@@ -37,14 +37,14 @@ export const NAVIGATION_OVERVIEW_COLS = (): Column<Navigation>[] => {
 				const placement = row.original.placement ?? '';
 				return (
 					<div>
-						<Link to={NAVIGATION_PATHS.detail.replace(':navigationName', placement)}>
+						<Link to={NAVIGATION_PATH.NAVIGATION_DETAIL.replace(':navigationName', placement)}>
 							<Button
 								icon={<Icon name="view" />}
 								tabIndex={-1}
 								variants={['text', 'small']}
 							/>
 						</Link>
-						<Link to={NAVIGATION_PATHS.detail.replace(':navigationName', placement)}>
+						<Link to={NAVIGATION_PATH.NAVIGATION_DETAIL.replace(':navigationName', placement)}>
 							<Button
 								icon={<Icon name="add" />}
 								tabIndex={-1}

@@ -4,7 +4,7 @@ import React, { FC, useMemo } from 'react';
 
 import { AdminLayout } from '../../../shared/layouts';
 import { NavigationElementForm } from '../../components';
-import { NAVIGATION_PATHS } from '../../const';
+import { NAVIGATION_PATH } from '../../const';
 import { useGetNavigations } from '../../hooks';
 import { Config } from '~core/config';
 
@@ -40,8 +40,8 @@ const NavigationElement: FC = () => {
 		? `${cleanName}: item aanpassen`
 		: `${cleanName}: item toevoegen`;
 	const cancelLink = navigationName
-		? NAVIGATION_PATHS.detail.replace(':navigationName', navigationName)
-		: NAVIGATION_PATHS.overview;
+		? NAVIGATION_PATH.NAVIGATION_DETAIL.replace(':navigationName', navigationName)
+		: NAVIGATION_PATH.NAVIGATION_OVERVIEW;
 	const Link = Config.getConfig().services.router.Link;
 
 	return (

@@ -3,6 +3,7 @@ import { Config, ToastType } from '~core/config';
 import { CONTENT_PAGE_LABEL_PATH } from '~modules/content-page-labels/content-page-label.const';
 import { CONTENT_PATH } from '~modules/content-page/const/content-page.consts';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { NAVIGATION_PATH } from '~modules/navigation/const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { buildLink } from '~modules/shared/helpers/link';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
@@ -18,6 +19,7 @@ export const ADMIN_PATH = Object.freeze({
 	...CONTENT_PATH,
 	...CONTENT_PAGE_LABEL_PATH,
 	...TRANSLATIONS_PATH,
+	...NAVIGATION_PATH
 	// ...PERMISSION_GROUP_PATH,
 	// ...COLLECTIONS_OR_BUNDLES_PATH,
 	// ...ITEMS_PATH,
@@ -181,6 +183,12 @@ export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<Navigati
 		{
 			label: i18n.t('Gebruikers'),
 			location: ADMIN_PATH.USER_OVERVIEW,
+			key: 'users',
+			exact: false,
+		},
+		{
+			label: i18n.t('Navigatie'),
+			location: ADMIN_PATH.NAVIGATION_OVERVIEW,
 			key: 'users',
 			exact: false,
 		},

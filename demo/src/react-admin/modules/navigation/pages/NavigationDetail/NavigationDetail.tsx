@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import { Icon } from '../../../shared/components';
 import { useHasChanges } from '../../../shared/hooks';
 import { AdminLayout } from '../../../shared/layouts';
-import { NAVIGATION_PATHS, NAVIGATION_QUERY_KEYS } from '../../const';
+import { NAVIGATION_PATH, NAVIGATION_QUERY_KEYS } from '../../const';
 import {
 	useDeleteNavigationElement,
 	useGetNavigationByPlacement,
@@ -49,7 +49,7 @@ const NavigationDetail: FC = () => {
 	// Methods
 
 	const getEditLink = (navigationElementId: string) =>
-		NAVIGATION_PATHS.detailEdit
+		NAVIGATION_PATH.NAVIGATION_DETAIL_EDIT
 			.replace(':navigationName', navigationName)
 			.replace(':navigationElementId', navigationElementId);
 
@@ -84,17 +84,17 @@ const NavigationDetail: FC = () => {
 	};
 
 	// Render
-
 	if (!isLoading && !initialData?.length) {
 		// Navigate back to overview when there are no elements after fetch
-		history.push(NAVIGATION_PATHS.overview);
+		history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW);
 	}
 
 	const Link = Config.getConfig().services.router.Link;
+	console.log('nav detail. NavigationName:', navigationName);
 	return (
 		<AdminLayout pageTitle={startCase(navigationName)}>
 			<AdminLayout.Actions>
-				<Link to={NAVIGATION_PATHS.overview}>
+				<Link to={NAVIGATION_PATH.NAVIGATION_OVERVIEW}>
 					<Button label="Annuleer" tabIndex={-1} variants={['outline']} />
 				</Link>
 				<Button
@@ -121,10 +121,9 @@ const NavigationDetail: FC = () => {
 						} as any
 					}
 				/>
-
 				<div className="c-admin-table-footer u-text-center u-mt-16">
 					<Link
-						to={NAVIGATION_PATHS.detailCreate.replace(
+						to={NAVIGATION_PATH.NAVIGATION_DETAIL_CREATE.replace(
 							':navigationName',
 							navigationName
 						)}
