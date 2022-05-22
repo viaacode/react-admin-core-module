@@ -12,7 +12,7 @@ import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permi
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-import { Config, ToastType } from '../../../core/config';
+import { Config, ToastType } from '~core/config';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
@@ -172,7 +172,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				setSearchResults(
 					permissions?.filter(
 						(permission) =>
-							permission.label.toLowerCase().indexOf(search.toLowerCase()) != -1
+							permission.label.toLowerCase().includes(search.toLowerCase()) ||
+							permission.description.toLowerCase().includes(search.toLowerCase()) ||
+							permission.name.toLowerCase().includes(search.toLowerCase())
 					)
 				);
 			} else {
