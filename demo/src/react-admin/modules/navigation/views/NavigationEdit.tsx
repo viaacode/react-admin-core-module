@@ -1,4 +1,4 @@
-import { compact, get, isEqual, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
+import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import {
@@ -59,9 +59,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
-	const [initialNavigationItems, setInitialNavigationItems] = useState<NavigationItem[] | null>(
-		null
-	);
 
 	const getQueries = () => {
 		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
@@ -73,7 +70,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		NavigationService.fetchNavigationItems(navigationBarId)
 			.then((menuItemsByPosition) => {
 				if (menuItemsByPosition && menuItemsByPosition.length) {
-					setInitialNavigationItems(menuItemsByPosition);
 					setNavigationItems(menuItemsByPosition);
 				} else {
 					// Go back to overview if no menu items are present
