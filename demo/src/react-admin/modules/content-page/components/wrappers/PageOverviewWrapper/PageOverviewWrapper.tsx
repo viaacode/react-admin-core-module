@@ -42,10 +42,10 @@ export interface ContentPageOverviewParams {
 	labelIds: number[];
 	// Selected tabs for which we should fetch content page items
 	selectedLabelIds: number[];
-	orderByProp?: string;
-	orderByDirection?: 'asc' | 'desc';
-	offset: number;
-	limit: number;
+	orderProp?: string;
+	orderDirection?: 'asc' | 'desc';
+	page: number;
+	size: number;
 }
 
 interface PageOverviewWrapperProps {
@@ -213,10 +213,10 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 					selectedTabs && selectedTabs.length
 						? selectedTabs.map((tab) => tab.id)
 						: getSelectedLabelIds(),
-				orderByProp: sortOrder.split('__')[0],
-				orderByDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-				offset: queryParamsState.page * debouncedItemsPerPage,
-				limit: debouncedItemsPerPage,
+				orderProp: sortOrder.split('__')[0],
+				orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+				page: queryParamsState.page,
+				size: debouncedItemsPerPage,
 			};
 			const reply = await fetchWithLogout(
 				`${Config.getConfig().database.proxyUrl}/admin/content-pages/overview`,
@@ -234,19 +234,19 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 
 			// Set the pages on the state after removing the page that will be shown at the top (?item=/path)
 			setPages(
-				convertToContentPageInfos(response.pages).filter(
+				convertToContentPageInfos(response.items).filter(
 					(page) => page.id !== get(tempFocusedPage, 'id')
 				)
 			);
-			setPageCount(Math.ceil(response.count / debouncedItemsPerPage));
+			setPageCount(response.pages);
 			setLabelPageCounts(response.labelCounts);
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to fetch pages', err, {
 					query: 'GET_CONTENT_PAGES',
 					variables: {
-						offset: queryParamsState.page * debouncedItemsPerPage,
-						limit: debouncedItemsPerPage,
+						page: queryParamsState.page,
+						size: debouncedItemsPerPage,
 					},
 				})
 			);
