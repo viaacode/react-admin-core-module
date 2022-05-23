@@ -13,6 +13,7 @@ import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import { NavigationItem } from '~modules/navigation/navigation.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -32,8 +33,8 @@ export interface ToastService {
 }
 
 export interface NavigationsService {
-	getAllNavigationBars: () => Promise<Avo.Menu.Menu[]>;
-	createNavigationItem: (navigationItem: Avo.Menu.Menu) => Promise<Avo.Menu.Menu>;
+	getAllNavigationBars: () => Promise<NavigationItem[]>;
+	createNavigationItem: (navigationItem: NavigationItem) => Promise<NavigationItem>;
 }
 
 export interface I18n {

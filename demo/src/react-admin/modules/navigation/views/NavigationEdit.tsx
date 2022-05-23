@@ -1,5 +1,5 @@
 import { compact, get, isEqual, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import React, { FC, FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import {
 	Badge,
@@ -11,9 +11,7 @@ import {
 	Spinner,
 	TagInfo,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 
-// import { GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH } from '../../content/content.gql';
 import { NavigationEditForm } from '../components';
 import {
 	GET_PAGE_TYPES_LANG,
@@ -21,7 +19,11 @@ import {
 	NAVIGATION_PATH,
 } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
-import { NavigationEditFormErrorState, NavigationEditPageType } from '../navigation.types';
+import {
+	NavigationEditFormErrorState,
+	NavigationEditPageType,
+	NavigationItem,
+} from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Config, ToastType } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
@@ -44,19 +46,22 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
 
-	const menuName = startCase(navigationBarId);
+	const navigationBarName = startCase(navigationBarId);
 
 	// Hooks
-	const [menuForm, setMenuForm] = useState<Avo.Menu.Menu>(
-		INITIAL_NAVIGATION_FORM(navigationBarId ? String(navigationBarId) : '0') as Avo.Menu.Menu
+	const [navigationItem, setNavigationItem] = useState<NavigationItem>(
+		INITIAL_NAVIGATION_FORM(navigationBarId ? String(navigationBarId) : '0') as NavigationItem
 	);
-	const [initialNavigationItem, setInitialNavigationItem] = useState<Avo.Menu.Menu | null>(null);
-	const [menuItems, setMenuItems] = useState<Avo.Menu.Menu[]>([]);
+	const [initialNavigationItem, setInitialNavigationItem] = useState<NavigationItem | null>(null);
+	const [navigationItems, setNavigationItems] = useState<NavigationItem[]>([]);
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
+	const [initialNavigationItems, setInitialNavigationItems] = useState<NavigationItem[] | null>(
+		null
+	);
 
 	const getQueries = () => {
 		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
@@ -68,7 +73,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		NavigationService.fetchNavigationItems(navigationBarId)
 			.then((menuItemsByPosition) => {
 				if (menuItemsByPosition && menuItemsByPosition.length) {
-					setMenuItems(menuItemsByPosition);
+					setInitialNavigationItems(menuItemsByPosition);
+					setNavigationItems(menuItemsByPosition);
 				} else {
 					// Go back to overview if no menu items are present
 					Config.getConfig().services.toastService.showToast({
@@ -76,7 +82,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						description: Config.getConfig().services.i18n.t(
 							'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 							{
-								menuName,
+								menuName: navigationBarName,
 							}
 						),
 						type: ToastType.ERROR,
@@ -94,21 +100,21 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					type: ToastType.ERROR,
 				});
 			});
-	}, [history, menuName, navigationBarId, t]);
+	}, [history, navigationBarName, navigationBarId, t]);
 
 	// Fetch menu item by id
 	useEffect(() => {
 		if (navigationItemId) {
 			setIsLoading(true);
 			// Fetch menu item by id so we can populate our form for editing
-			NavigationService.fetchNavigationItemById(Number(navigationItemId))
-				.then((menuItem: Avo.Menu.Menu | null) => {
+			NavigationService.fetchNavigationItemById(navigationItemId)
+				.then((menuItem: NavigationItem | null) => {
 					if (menuItem) {
 						// Remove unnecessary props for saving
 						delete (menuItem as any).__typename;
 
 						setInitialNavigationItem(menuItem);
-						setMenuForm({
+						setNavigationItem({
 							description: menuItem.description || '',
 							icon_name: menuItem.icon_name as IconName,
 							label: menuItem.label,
@@ -118,7 +124,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 							user_group_ids: menuItem.user_group_ids || [],
 							placement: menuItem.placement || null,
 							tooltip: menuItem.tooltip,
-						} as Avo.Menu.Menu);
+						} as NavigationItem);
 					}
 				})
 				.finally(() => {
@@ -129,13 +135,12 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
-			let contentUserGroupIds: number[] = get(
-				response,
-				'data.app_content[0].user_group_ids',
-				[]
-			);
-			const navItemUserGroupIds: number[] = menuForm.user_group_ids || [];
-			const allUserGroupIds: number[] = allUserGroups.map((ug) => ug.value as number);
+			let contentUserGroupIds: string[] =
+				get(response, 'data.app_content[0].user_group_ids') ||
+				get(response, 'data.app_content_page[0].user_group_ids') ||
+				[];
+			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
+			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged in users
 			if (contentUserGroupIds.includes(SpecialPermissionGroups.loggedInUsers)) {
@@ -182,19 +187,19 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, menuForm.user_group_ids, allUserGroups, t]
+		[setPermissionWarning, navigationItem.user_group_ids, allUserGroups, t]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
 	// TODO -- skipped for  now
 	useEffect(() => {
-		if (menuForm.content_type === 'CONTENT_PAGE' && menuForm.content_path) {
+		if (navigationItem.content_type === 'CONTENT_PAGE' && navigationItem.content_path) {
 			// Check if permissions are more strict than the permissions on the content_page
 			dataService
 				.query({
 					query: getQueries().GetPermissionsFromContentPageByPathDocument,
 					variables: {
-						path: menuForm.content_path,
+						path: navigationItem.content_path,
 					},
 				})
 				.then((response) => {
@@ -205,7 +210,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						new CustomError('Failed to get permissions from page', err, {
 							query: 'GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH',
 							variables: {
-								path: menuForm.content_path,
+								path: navigationItem.content_path,
 							},
 						})
 					);
@@ -219,9 +224,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				});
 		}
 	}, [
-		menuForm.content_type,
-		menuForm.content_path,
-		menuForm.user_group_ids,
+		navigationItem.content_type,
+		navigationItem.content_path,
+		navigationItem.user_group_ids,
 		checkMenuItemContentPagePermissionsMismatch,
 		t,
 	]);
@@ -230,7 +235,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const pageType: NavigationEditPageType = navigationItemId ? 'edit' : 'create';
 	const menuParentOptions = uniqBy(
 		compact(
-			menuItems.map((menuItem) => {
+			navigationItems.map((menuItem) => {
 				if (!menuItem.placement) {
 					return null;
 				}
@@ -245,19 +250,19 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	// Methods
 	const handleChange = (
-		key: keyof Avo.Menu.Menu | 'content',
-		value: ValueOf<Avo.Menu.Menu> | PickerItem | null
+		key: keyof NavigationItem | 'content',
+		value: ValueOf<NavigationItem> | PickerItem | null
 	): void => {
 		if (key === 'content') {
-			setMenuForm({
-				...menuForm,
+			setNavigationItem({
+				...navigationItem,
 				content_type: get(value, 'type'),
 				content_path: get(value, 'value'),
 				link_target: get(value, 'target', '_self'),
 			});
 		} else {
-			setMenuForm({
-				...menuForm,
+			setNavigationItem({
+				...navigationItem,
 				[key]: value,
 			});
 		}
@@ -276,26 +281,30 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				return;
 			}
 
-			const menuItem: Partial<Avo.Menu.Menu> = {
-				icon_name: menuForm.icon_name,
-				label: menuForm.label,
-				content_path: menuForm.content_path,
-				content_type: menuForm.content_type,
-				link_target: menuForm.link_target,
-				user_group_ids: menuForm.user_group_ids,
-				placement: menuForm.placement,
-				tooltip: menuForm.tooltip,
+			const menuItem: Partial<NavigationItem> = {
+				icon_name: navigationItem.icon_name,
+				label: navigationItem.label,
+				content_path: navigationItem.content_path,
+				content_type: navigationItem.content_type,
+				link_target: navigationItem.link_target,
+				user_group_ids: navigationItem.user_group_ids,
+				placement: navigationItem.placement,
+				tooltip: navigationItem.tooltip,
 			};
 
 			if (pageType === 'create') {
 				await NavigationService.insertNavigationItem({
 					...menuItem,
 					// Get description from existing items or use form description field
-					description: get(menuItems, '[0].description', menuForm.description),
-					position: menuItems.length,
+					description: get(
+						navigationItems,
+						'[0].description',
+						navigationItem.description
+					),
+					position: navigationItems.length,
 				});
 				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
-					navigationBarId: menuForm.placement as string,
+					navigationBarId: navigationItem.placement as string,
 				});
 				Config.getConfig().services.toastService.showToast({
 					title: Config.getConfig().services.i18n.t('Success'),
@@ -314,12 +323,12 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					{
 						...initialNavigationItem,
 						...menuItem,
-						id: +navigationItemId,
+						id: navigationItemId as string,
 						updated_at: new Date().toISOString(),
-					} as Avo.Menu.Menu,
+					} as NavigationItem,
 				]);
 				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
-					menu: menuForm.placement as string,
+					navigationBarId: navigationItem.placement as string,
 				});
 				Config.getConfig().services.toastService.showToast({
 					title: Config.getConfig().services.i18n.t('Success'),
@@ -332,7 +341,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to save menu item', err, {
-					menuForm,
+					menuForm: navigationItem,
 				})
 			);
 			Config.getConfig().services.toastService.showToast({
@@ -349,11 +358,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const handleValidation = (): boolean => {
 		const errors: NavigationEditFormErrorState = {};
 
-		if (!navigationBarId && !menuForm.placement) {
+		if (!navigationBarId && !navigationItem.placement) {
 			errors.placement = t('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
 		}
 
-		if (!menuForm.content_path) {
+		if (!navigationItem.content_path) {
 			errors.content_path = t('admin/menu/views/menu-edit___link-is-verplicht');
 		}
 
@@ -364,7 +373,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	// Render
 	const pageTitle = navigationBarId
-		? `${menuName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
+		? `${navigationBarName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
 		: t('admin/menu/views/menu-edit___navigatie-toevoegen');
 	return isLoading ? (
 		<Flex orientation="horizontal" center>
@@ -380,7 +389,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						type="tertiary"
 					/>
 					<Button
-						// disabled={isEqual(initialNavigationItems, navigationItems) || isSaving}
+						disabled={isSaving}
 						label={t('admin/menu/views/menu-detail___opslaan')}
 						onClick={() => handleSave()}
 					/>
@@ -389,7 +398,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			<AdminLayout.Content>
 				<NavigationEditForm
 					formErrors={formErrors}
-					formState={menuForm}
+					formState={navigationItem}
 					navigationParentId={navigationBarId}
 					navigationParentOptions={menuParentOptions}
 					onChange={handleChange}

@@ -3,10 +3,9 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
 
 import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 
 import { IconPicker } from '../../../shared/components/IconPicker/IconPicker';
-import { NavigationEditFormErrorState } from '../../navigation.types';
+import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
 import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
@@ -19,12 +18,12 @@ import { ContentPickerType } from '~modules/shared/components/ContentPicker/Cont
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;
-	formState: Avo.Menu.Menu;
+	formState: NavigationItem;
 	navigationParentId: string | undefined;
 	navigationParentOptions: ReactSelectOption<string>[];
 	onChange: (
-		key: keyof Avo.Menu.Menu | 'content',
-		value: ValueOf<Avo.Menu.Menu> | PickerItem | null
+		key: keyof NavigationItem | 'content',
+		value: ValueOf<NavigationItem> | PickerItem | null
 	) => void;
 	permissionWarning: ReactNode | null;
 }
@@ -137,7 +136,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				placeholder={t('admin/menu/components/menu-edit-form/menu-edit-form___niemand')}
 				values={formState.user_group_ids || []}
 				required={false}
-				onChange={(userGroupIds: number[]) => onChange('user_group_ids', userGroupIds)}
+				onChange={(userGroupIds: string[]) => onChange('user_group_ids', userGroupIds)}
 			/>
 			{permissionWarning && <Alert message={permissionWarning} type="danger" />}
 		</Form>

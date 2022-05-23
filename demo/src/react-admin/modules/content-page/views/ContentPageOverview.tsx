@@ -361,7 +361,7 @@ const ContentPageOverview: FunctionComponent = () => {
 								if (userGroup.id === SpecialPermissionGroups.loggedInUsers) {
 									return {
 										label: t('admin/content/views/content-overview___ingelogd'),
-										id: userGroup.id as number,
+										id: userGroup.id as string,
 									};
 								}
 								if (userGroup.id === SpecialPermissionGroups.loggedOutUsers) {
@@ -369,12 +369,12 @@ const ContentPageOverview: FunctionComponent = () => {
 										label: t(
 											'admin/content/views/content-overview___niet-ingelogd'
 										),
-										id: userGroup.id as number,
+										id: userGroup.id as string,
 									};
 								}
 								return {
 									label: userGroup.label as string,
-									id: userGroup.id as number,
+									id: userGroup.id as string,
 								};
 							})
 						)}

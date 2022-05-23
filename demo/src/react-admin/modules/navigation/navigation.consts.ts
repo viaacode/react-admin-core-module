@@ -1,9 +1,10 @@
+import { NavigationItem } from '~modules/navigation/navigation.types';
+
 export enum NAVIGATIONS_QUERY_KEYS {
 	getAllNavigations = 'getAllNavigations',
 }
 
 import { TableColumn } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 import { Config } from '~core/config';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
@@ -24,7 +25,7 @@ export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{ id: 'actions', tooltip: Config.getConfig().services.i18n.t('admin/menu/menu___acties') },
 ];
 
-export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<Avo.Menu.Menu> => ({
+export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem> => ({
 	placement,
 	description: '',
 	icon_name: '',

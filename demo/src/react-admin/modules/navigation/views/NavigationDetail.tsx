@@ -10,7 +10,6 @@ import {
 	Spacer,
 	Table,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 
 import { NAVIGATION_PATH } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
@@ -24,6 +23,7 @@ import { navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { Loader } from '~modules/shared/components';
+import { NavigationItem } from '../navigation.types';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -33,11 +33,11 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
 
-	const [activeRow, setActiveRow] = useState<number | null>(null);
+	const [activeItemId, setActiveItemId] = useState<string | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
-	const [idToDelete, setIdToDelete] = useState<number | null>(null);
-	const [navigationItems, setNavigationItems] = useState<Avo.Menu.Menu[] | null>(null);
-	const [initialNavigationItems, setInitialNavigationItems] = useState<Avo.Menu.Menu[] | null>(
+	const [idToDelete, setIdToDelete] = useState<string | null>(null);
+	const [navigationItems, setNavigationItems] = useState<NavigationItem[] | null>(null);
+	const [initialNavigationItems, setInitialNavigationItems] = useState<NavigationItem[] | null>(
 		null
 	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -76,7 +76,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	useEffect(() => {
 		// Reset active row to clear styling
 		timeout.current = setTimeout(() => {
-			setActiveRow(null);
+			setActiveItemId(null);
 		}, 1000);
 
 		return () => {
@@ -84,7 +84,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				clearTimeout(timeout.current);
 			}
 		};
-	}, [activeRow]);
+	}, [activeItemId]);
 
 	// Methods
 	const handleDelete = async (): Promise<void> => {
@@ -148,12 +148,12 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		}
 	};
 
-	const openConfirmModal = (id: number): void => {
+	const openConfirmModal = (id: string): void => {
 		setIdToDelete(id);
 		setIsConfirmModalOpen(true);
 	};
 
-	const reindexNavigationItems = (items: Avo.Menu.Menu[]): Avo.Menu.Menu[] =>
+	const reindexNavigationItems = (items: NavigationItem[]): NavigationItem[] =>
 		items.map((item, index) => {
 			item.position = index;
 			// Remove properties that we don't need for save
@@ -162,7 +162,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			return item;
 		});
 
-	const reorderMenuItem = (currentIndex: number, indexUpdate: number, id: number): void => {
+	const reorderMenuItem = (currentIndex: number, indexUpdate: number, id: string): void => {
 		if (!navigationItems) {
 			return;
 		}
@@ -173,7 +173,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		// Add item back at new index
 		navigationItemsCopy.splice(newIndex, 0, updatedItem);
 
-		setActiveRow(id);
+		setActiveItemId(id);
 		setNavigationItems(reindexNavigationItems(navigationItemsCopy));
 	};
 
@@ -181,7 +181,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const renderReorderButton = (
 		dir: 'up' | 'down',
 		index: number,
-		id: number,
+		id: string,
 		disabled: boolean
 	) => {
 		const decrease = dir === 'up';
@@ -232,7 +232,9 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							<tr
 								key={`nav-edit-${item.id}`}
 								className={
-									activeRow === item.id ? 'c-menu-detail__table-row--active' : ''
+									activeItemId === item.id
+										? 'c-menu-detail__table-row--active'
+										: ''
 								}
 							>
 								<td className="o-table-col-1">

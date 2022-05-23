@@ -2,9 +2,8 @@ import { startCase } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
 import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 
-import { NavigationOverviewTableCols } from '../navigation.types';
+import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Config } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
@@ -26,7 +25,7 @@ const NavigationOverview: FunctionComponent = () => {
 	} = useGetAllNavigations();
 
 	const renderTableCell = (
-		rowData: Partial<Avo.Menu.Menu>,
+		rowData: Partial<NavigationItem>,
 		columnId: NavigationOverviewTableCols
 	) => {
 		const placement = rowData.placement || undefined;
@@ -49,7 +48,7 @@ const NavigationOverview: FunctionComponent = () => {
 							icon="eye"
 							onClick={() =>
 								navigate(history, NAVIGATION_PATH.NAVIGATION_DETAIL, {
-									menu: placement,
+									navigationBarId: placement,
 								})
 							}
 							size="small"
@@ -65,7 +64,7 @@ const NavigationOverview: FunctionComponent = () => {
 							icon="plus"
 							onClick={() =>
 								navigate(history, NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
-									menu: placement,
+									navigationBarId: placement,
 								})
 							}
 							size="small"
@@ -106,7 +105,7 @@ const NavigationOverview: FunctionComponent = () => {
 			<Table
 				columns={GET_NAVIGATION_OVERVIEW_TABLE_COLS()}
 				data={navigationItems}
-				renderCell={(rowData: Partial<Avo.Menu.Menu>, columnId: string) =>
+				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
 					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
 				}
 				rowKey="id"

@@ -389,7 +389,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									)}
 									values={contentPageInfo.user_group_ids || []}
 									required={false}
-									onChange={(userGroupIds: number[]) =>
+									onChange={(userGroupIds: string[]) =>
 										changeContentPageProp('user_group_ids', userGroupIds)
 									}
 								/>

@@ -1,7 +1,5 @@
 import { get, isNil } from 'lodash-es';
 
-import { Avo } from '@viaa/avo2-types';
-
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { Config } from '~core/config';
@@ -12,17 +10,18 @@ import {
 	InsertNavigationItemMutation,
 	UpdateNavigationItemByIdMutation,
 } from '~generated/graphql-db-types-avo';
+import { NavigationItem } from './navigation.types';
 
 export class NavigationService {
 	private static getQueries() {
 		return NAVIGATION_QUERIES[Config.getConfig().database.databaseApplicationType];
 	}
 
-	public static async fetchNavigationItemById(id: number): Promise<Avo.Menu.Menu | null> {
+	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {
 		try {
 			const response = await dataService.query<GetNavigationItemByIdQueryAvo>({
 				query: this.getQueries().GetNavigationItemByIdDocument,
-				variables: { id },
+				variables: { id: id.includes('-') ? id : Number(id) },
 			});
 
 			if (!response) {
@@ -45,7 +44,7 @@ export class NavigationService {
 		}
 	}
 
-	public static async fetchNavigationItems(placement?: string): Promise<Avo.Menu.Menu[]> {
+	public static async fetchNavigationItems(placement?: string): Promise<NavigationItem[]> {
 		try {
 			const queryOptions = {
 				query: placement
@@ -76,7 +75,7 @@ export class NavigationService {
 	}
 
 	public static async insertNavigationItem(
-		navigationItem: Partial<Avo.Menu.Menu>
+		navigationItem: Partial<NavigationItem>
 	): Promise<number> {
 		try {
 			const response = await dataService.query<InsertNavigationItemMutation>({
@@ -105,7 +104,7 @@ export class NavigationService {
 		}
 	}
 
-	public static async updateNavigationItems(navigationItems: Avo.Menu.Menu[]): Promise<void> {
+	public static async updateNavigationItems(navigationItems: NavigationItem[]): Promise<void> {
 		try {
 			const promises: Promise<any>[] = navigationItems.map((navigationItem) => {
 				return dataService.query<UpdateNavigationItemByIdMutation>({
@@ -130,7 +129,7 @@ export class NavigationService {
 		}
 	}
 
-	public static async deleteNavigationItem(id: number): Promise<void> {
+	public static async deleteNavigationItem(id: string): Promise<void> {
 		try {
 			const response = await dataService.query<DeleteNavigationItemMutation>({
 				query: this.getQueries().DeleteNavigationItemDocument,
