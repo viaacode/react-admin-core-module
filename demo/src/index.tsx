@@ -30,6 +30,7 @@ function setConfig() {
 				ContentBlockType.RichTextTwoColumns,
 				ContentBlockType.Buttons,
 				ContentBlockType.Image,
+				ContentBlockType.PageOverview,
 			],
 		},
 		icon: {
