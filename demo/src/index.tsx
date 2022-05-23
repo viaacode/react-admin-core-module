@@ -13,22 +13,6 @@ import { PermissionsService } from './modules/permissions/permissions.service';
 import { UserGroupsService } from './modules/user-group/user-groups.service';
 import { ContentBlockType } from '~modules/content-page';
 
-const navItem = {
-	content_path: 'content_path',
-	content_type: 'faq',
-	created_at: 'now',
-	description: 'description',
-	id: '224242',
-	label: 'label',
-	icon_name: '',
-	user_group_ids: [],
-	link_target: null,
-	position: 0,
-	placement: 'nav',
-	updated_at: 'now',
-	tooltip: '',
-};
-
 const proxyUrl = 'http://localhost:3100';
 
 const routerConfig: ConfigValue['services']['router'] = {
@@ -39,25 +23,6 @@ const routerConfig: ConfigValue['services']['router'] = {
 
 function setConfig() {
 	Config.setConfig({
-		navigation: {
-			service: {
-				getAll: async () => {
-					return [navItem];
-				},
-				getByPlacement: async () => [navItem],
-				getById: async () => {
-					return navItem;
-				},
-				delete: async () => null,
-				insert: async () => '12345',
-				updateById: async () => navItem,
-			},
-			views: {
-				overview: {
-					labels: { tableHeads: {} },
-				},
-			},
-		},
 		contentPage: {
 			availableContentBlocks: [
 				ContentBlockType.Heading,
@@ -109,7 +74,8 @@ function setConfig() {
 			UserGroupsService,
 			PermissionsService,
 			queryCache: {
-				clear: async (_key: string) => Promise.resolve(),
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				clear: async (key: string) => Promise.resolve(),
 			},
 		},
 		database: {

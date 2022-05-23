@@ -1,25 +1,34 @@
 import { startCase } from 'lodash-es';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 
-import { Button, ButtonToolbar, Spacer, Table } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 
-// import { DataQueryComponent } from '../../../shared/components';
-import { GET_NAVIGATION_OVERVIEW_TABLE_COLS, NAVIGATION_PATH } from '../navigation.const';
-import { GET_MENUS } from '../menu.gql';
 import { NavigationOverviewTableCols } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Config } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
+import { useGetAllNavigations } from '~modules/navigation/hooks/get-all-navigations';
+import {
+	GET_NAVIGATION_OVERVIEW_TABLE_COLS,
+	NAVIGATION_PATH,
+} from '~modules/navigation/navigation.consts';
+import { Loader } from '~modules/shared/components';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { t } = useTranslation();
 	const Link = Config.getConfig().services.router.Link;
 	const history = Config.getConfig().services.router.useHistory();
+	const {
+		data: navigationItems,
+		isLoading: isLoadingNavigationItems,
+		isError: isErrorNavigationItems,
+	} = useGetAllNavigations();
 
-	const [menus, setMenus] = useState<any>([]);
-
-	const renderTableCell = (rowData: Partial<Avo.Menu.Menu>, columnId: NavigationOverviewTableCols) => {
+	const renderTableCell = (
+		rowData: Partial<Avo.Menu.Menu>,
+		columnId: NavigationOverviewTableCols
+	) => {
 		const placement = rowData.placement || undefined;
 
 		switch (columnId) {
@@ -35,7 +44,9 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="eye"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH.NAVIGATION_DETAIL, { menu: placement })
+								navigate(history, NAVIGATION_PATH.NAVIGATION_DETAIL, {
+									menu: placement,
+								})
 							}
 							size="small"
 							title={t(
@@ -49,7 +60,9 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="plus"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, { menu: placement })
+								navigate(history, NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
+									menu: placement,
+								})
 							}
 							size="small"
 							title={t(
@@ -67,36 +80,28 @@ const NavigationOverview: FunctionComponent = () => {
 		}
 	};
 
-	const renderMenuOverview = (data: Partial<Avo.Menu.Menu>[]) => {
-		if (!data.length) {
-			return <>{t('admin/menu/views/menu-overview___beschrijving-hoe-navigatie-items-toe-te-voegen')}</>;
-			// return (
-			// 	<ErrorView
-			// 		message={t(
-			// 			'admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt'
-			// 		)}
-			// 	>
-			// 		<p>
-			// 			<>{t('admin/menu/views/menu-overview___beschrijving-hoe-navigatie-items-toe-te-voegen')}</>
-			// 		</p>
-			// 		<Spacer margin="top">
-			// 			<Button
-			// 				icon="plus"
-			// 				label={t('admin/menu/views/menu-overview___navigatie-toevoegen')}
-			// 				onClick={() => history.push(MENU_PATH.MENU_CREATE)}
-			// 				type="primary"
-			// 			/>
-			// 		</Spacer>
-			// 	</ErrorView>
-			// );
+	const renderMenuOverview = () => {
+		if (!navigationItems?.length) {
+			return (
+				<>
+					<div>
+						{t(
+							'admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt'
+						)}
+					</div>
+					<div>
+						{t(
+							'admin/menu/views/menu-overview___beschrijving-hoe-navigatie-items-toe-te-voegen'
+						)}
+					</div>
+				</>
+			);
 		}
-
-		setMenus(data);
 
 		return (
 			<Table
 				columns={GET_NAVIGATION_OVERVIEW_TABLE_COLS()}
-				data={data}
+				data={navigationItems}
 				renderCell={(rowData: Partial<Avo.Menu.Menu>, columnId: string) =>
 					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
 				}
@@ -106,29 +111,17 @@ const NavigationOverview: FunctionComponent = () => {
 		);
 	};
 
-	return (
-		// TODO demo page
-		// <AdminLayout
-		// 	pageTitle={t('admin/menu/views/menu-overview___navigatie-overzicht')}
-		// 	size="large"
-		// >
-		// 	{!!menus.length && (
-		// 		<AdminLayoutTopBarRight>
-		// 			<Button
-		// 				label={t('admin/menu/views/menu-overview___navigatie-toevoegen')}
-		// 				onClick={() => history.push(MENU_PATH.MENU_CREATE)}
-		// 			/>
-		// 		</AdminLayoutTopBarRight>
-		// 	)}
-		// 	<AdminLayoutBody>
-				<DataQueryComponent
-					renderData={renderMenuOverview}
-					resultPath="app_content_nav_elements"
-					query={GET_MENUS}
-				/>
-		// 	</AdminLayoutBody>
-		// </AdminLayout>
-	);
+	const renderPageContent = () => {
+		if (isLoadingNavigationItems) {
+			return <Loader />;
+		}
+		if (isErrorNavigationItems) {
+			return <div>{t('Het ophalen van de navigatie balken is mislukt')}</div>;
+		}
+		return renderMenuOverview();
+	};
+
+	return renderPageContent();
 };
 
 export default NavigationOverview;

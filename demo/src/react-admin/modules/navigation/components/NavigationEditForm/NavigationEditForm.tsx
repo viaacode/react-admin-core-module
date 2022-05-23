@@ -8,7 +8,7 @@ import { Avo } from '@viaa/avo2-types';
 import { IconPicker } from '../../../shared/components/IconPicker/IconPicker';
 import { NavigationEditFormErrorState } from '../../navigation.types';
 
-import './MenuEditForm.scss';
+import './NavigationEditForm.scss';
 import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
@@ -58,9 +58,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					value={navigationParentOptions.find((opt) => opt.value === navigationParentId)}
 					formatCreateLabel={(inputValue) => `Aanmaken: ${inputValue}`}
 					getNewOptionData={handleMenuCreate}
-					onChange={(option: any) =>
-						onChange('placement', get(option, 'value', ''))
-					}
+					onChange={(option: any) => onChange('placement', get(option, 'value', ''))}
 					options={navigationParentOptions}
 					placeholder={t(
 						'admin/menu/components/menu-edit-form/menu-edit-form___selecteer-of-maak-een-navigatie-aan'
@@ -84,9 +82,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			<FormGroup label={t('admin/menu/components/menu-edit-form/menu-edit-form___icoon')}>
 				<IconPicker
 					options={GET_ADMIN_ICON_OPTIONS()}
-					onChange={(option: any) =>
-						onChange('icon_name', get(option, 'value', ''))
-					}
+					onChange={(option: any) => onChange('icon_name', get(option, 'value', ''))}
 					value={GET_ADMIN_ICON_OPTIONS().find(
 						(option: ReactSelectOption<string>) => option.value === formState.icon_name
 					)}
@@ -116,7 +112,11 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				required
 			>
 				<ContentPicker
-					allowedTypes={[ContentPickerType.CONTENT_PAGE, ContentPickerType.INTERNAL_LINK, ContentPickerType.EXTERNAL_LINK]}
+					allowedTypes={[
+						ContentPickerType.CONTENT_PAGE,
+						ContentPickerType.INTERNAL_LINK,
+						ContentPickerType.EXTERNAL_LINK,
+					]}
 					onSelect={(item: any) => {
 						onChange('content', item);
 					}}

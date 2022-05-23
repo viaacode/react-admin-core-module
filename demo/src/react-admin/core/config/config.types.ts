@@ -31,6 +31,11 @@ export interface ToastService {
 	showToast: (toastInfo: ToastInfo) => void;
 }
 
+export interface NavigationsService {
+	getAllNavigationBars: () => Promise<Avo.Menu.Menu[]>;
+	createNavigationItem: (navigationItem: Avo.Menu.Menu) => Promise<Avo.Menu.Menu>;
+}
+
 export interface I18n {
 	t: (translationKey: string, variables?: Record<string, string>) => string;
 }

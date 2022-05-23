@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
-import { NAVIGATION_PATH } from '~modules/navigation/navigation.const';
-import { NavigationDetail, NavigationEdit, NavigationOverview } from '~modules/navigation/views';
-
+import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
+import { NavigationDetail, NavigationEdit } from '~modules/navigation/views';
+import NavigationOverviewPage from './NavigationOverviewPage';
 
 export const renderAdminNavigationRoutes = (): ReactNode[] => [
 	<Route
 		key={NAVIGATION_PATH.NAVIGATION_OVERVIEW}
-		render={() => <NavigationOverview />}
+		render={() => <NavigationOverviewPage />}
 		exact
 		path={NAVIGATION_PATH.NAVIGATION_OVERVIEW}
 	/>,

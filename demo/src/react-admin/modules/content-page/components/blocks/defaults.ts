@@ -9,7 +9,7 @@ import {
 	GET_ALIGN_OPTIONS,
 	GET_BACKGROUND_COLOR_OPTIONS,
 	GET_FOREGROUND_COLOR_OPTIONS,
-} from '../../const/content-block.consts';
+} from '../../const/content-block.common.consts';
 import {
 	Color,
 	ContentBlockEditor,

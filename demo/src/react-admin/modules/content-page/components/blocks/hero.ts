@@ -5,10 +5,7 @@ import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import {
-	GET_BUTTON_TYPE_OPTIONS,
-	GET_HERO_BACKGROUND_COLOR_OPTIONS,
-} from '../../const/content-block.consts';
+import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	Color,
 	ContentBlockConfig,
@@ -28,6 +25,7 @@ import {
 } from './defaults';
 
 import { Config } from '~core/config';
+import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	title: '',

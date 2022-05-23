@@ -4,7 +4,7 @@ import { performQuery } from '~modules/shared/helpers/gql';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
-import { CONTENT_BLOCKS_RESULT_PATH } from '../const/content-block.consts';
+import { CONTENT_BLOCKS_RESULT_PATH } from '../const/content-block.common.consts';
 import {
 	convertBlocksToDatabaseFormat,
 	convertBlockToDatabaseFormat,

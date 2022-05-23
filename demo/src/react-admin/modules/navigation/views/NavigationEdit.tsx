@@ -14,7 +14,11 @@ import { Avo } from '@viaa/avo2-types';
 
 // import { GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH } from '../../content/content.gql';
 import { NavigationEditForm } from '../components';
-import { GET_PAGE_TYPES_LANG, INITIAL_NAVIGATION_FORM, NAVIGATION_PATH } from '../navigation.const';
+import {
+	GET_PAGE_TYPES_LANG,
+	INITIAL_NAVIGATION_FORM,
+	NAVIGATION_PATH,
+} from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
 import { NavigationEditFormErrorState, NavigationEditPageType } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -22,7 +26,6 @@ import { Config, ToastType } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { navigate } from '~modules/shared/helpers/link';
-// import { dataService } from '~modules/shared/services/data-service';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
@@ -143,10 +146,18 @@ const NavigationEdit: FunctionComponent = () => {
 				setPermissionWarning(
 					<div>
 						<Spacer margin="bottom-small">
-							<>{t('admin/menu/views/menu-edit___het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina')}</>
+							<>
+								{t(
+									'admin/menu/views/menu-edit___het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina'
+								)}
+							</>
 						</Spacer>
 						<Spacer margin="bottom-small">
-							<>{t('admin/menu/views/menu-edit___de-geselecteerde-pagina-is-niet-toegankelijk-voor')}</>
+							<>
+								{t(
+									'admin/menu/views/menu-edit___de-geselecteerde-pagina-is-niet-toegankelijk-voor'
+								)}
+							</>
 							<ButtonToolbar>
 								{faultyUserGroups.map((group) => (
 									<Badge text={group} key={`badge-${group}`} />

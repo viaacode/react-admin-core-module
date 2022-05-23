@@ -1,3 +1,7 @@
+export enum NAVIGATIONS_QUERY_KEYS {
+	getAllNavigations = 'getAllNavigations',
+}
+
 import { TableColumn } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { Config } from '~core/config';
@@ -13,7 +17,10 @@ export const NAVIGATION_PATH = {
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{ id: 'placement', label: Config.getConfig().services.i18n.t('admin/menu/menu___naam') },
-	{ id: 'description', label: Config.getConfig().services.i18n.t('admin/menu/menu___omschrijving') },
+	{
+		id: 'description',
+		label: Config.getConfig().services.i18n.t('admin/menu/menu___omschrijving'),
+	},
 	{ id: 'actions', tooltip: Config.getConfig().services.i18n.t('admin/menu/menu___acties') },
 ];
 

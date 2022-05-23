@@ -8,12 +8,14 @@ import {
 	InsertNavigationItemDocument as InsertNavigationItemDocumentAvo,
 	UpdateNavigationItemByIdDocument as UpdateNavigationItemByIdDocumentAvo,
 } from '~generated/graphql-db-types-avo';
-// import {
-// 	GetIdpsDocument as GetIdpsDocumentHetArchief,
-// 	GetProfileIdsDocument as GetProfileIdsDocumentHetArchief,
-// 	GetProfileNamesDocument as GetProfileNamesDocumentHetArchief,
-// 	GetUsersDocument as GetUsersDocumentHetArchief,
-// } from '~generated/graphql-db-types-hetarchief';
+import {
+	DeleteNavigationItemDocument as DeleteNavigationItemDocumentHetArchief,
+	GetNavigationElementsDocument as GetNavigationElementsDocumentHetArchief,
+	GetNavigationItemByIdDocument as GetNavigationItemByIdDocumentHetArchief,
+	GetNavigationItemsByPlacementDocument as GetNavigationItemsByPlacementDocumentHetArchief,
+	InsertNavigationItemDocument as InsertNavigationItemDocumentHetArchief,
+	UpdateNavigationItemByIdDocument as UpdateNavigationItemByIdDocumentHetArchief,
+} from '~generated/graphql-db-types-avo';
 
 type NavigationQueries = {
 	DeleteNavigationItemDocument: string;
@@ -33,13 +35,12 @@ export const NAVIGATION_QUERIES: Record<AvoOrHetArchief, NavigationQueries> = {
 		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
 	},
-	// TODO replace with archief queries
 	[AvoOrHetArchief.hetArchief]: {
-		DeleteNavigationItemDocument: DeleteNavigationItemDocumentAvo,
-		GetNavigationElementsDocument: GetNavigationElementsDocumentAvo,
-		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentAvo,
-		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentAvo,
-		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
-		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
+		DeleteNavigationItemDocument: DeleteNavigationItemDocumentHetArchief,
+		GetNavigationElementsDocument: GetNavigationElementsDocumentHetArchief,
+		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentHetArchief,
+		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentHetArchief,
+		InsertNavigationItemDocument: InsertNavigationItemDocumentHetArchief,
+		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentHetArchief,
 	},
 };

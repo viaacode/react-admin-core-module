@@ -2,11 +2,6 @@ import { GridItem, MultiRangeProps } from '@viaa/avo2-components';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import {
-	GET_ALIGN_OPTIONS,
-	GET_FILL_OPTIONS,
-	GET_IMAGE_GRID_FORMAT_OPTIONS,
-} from '../../const/content-block.consts';
-import {
 	ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
@@ -18,6 +13,11 @@ import { BlockLogoGridWrapperProps } from '../wrappers/LogoGridWrapper/LogoGridW
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
 import { Config } from '~core/config';
+import {
+	GET_ALIGN_OPTIONS,
+	GET_FILL_OPTIONS,
+	GET_IMAGE_GRID_FORMAT_OPTIONS,
+} from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_LOGO_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

@@ -51,7 +51,7 @@ interface ContentEditFormProps {
 	user: CommonUser;
 }
 
-const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
+export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	contentTypes = [],
 	formErrors,
 	contentPageInfo,
@@ -401,5 +401,3 @@ const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		</Container>
 	);
 };
-
-export default ContentEditForm;

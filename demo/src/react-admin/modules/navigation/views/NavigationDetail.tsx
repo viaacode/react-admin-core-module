@@ -12,12 +12,15 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 
-import { NAVIGATION_PATH } from '../navigation.const';
+import { NAVIGATION_PATH } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
 
-import './MenuDetail.scss';
+import './NavigationDetail.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { LoadingErrorLoadedComponent, LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import {
+	LoadingErrorLoadedComponent,
+	LoadingInfo,
+} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { Config, ToastType } from '~core/config';
 import { navigate } from '~modules/shared/helpers/link';
@@ -32,7 +35,9 @@ const NavigationDetail: FunctionComponent = () => {
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [idToDelete, setIdToDelete] = useState<number | null>(null);
 	const [navigationItems, setNavigationItems] = useState<Avo.Menu.Menu[] | null>(null);
-	const [initialNavigationItems, setInitialNavigationItems] = useState<Avo.Menu.Menu[] | null>(null);
+	const [initialNavigationItems, setInitialNavigationItems] = useState<Avo.Menu.Menu[] | null>(
+		null
+	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
@@ -128,7 +133,9 @@ const NavigationDetail: FunctionComponent = () => {
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
-			console.error(new CustomError('Failed to update menu items', err, { menuItems: navigationItems }));
+			console.error(
+				new CustomError('Failed to update menu items', err, { menuItems: navigationItems })
+			);
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Error'),
 				description: Config.getConfig().services.i18n.t(
@@ -245,25 +252,13 @@ const NavigationDetail: FunctionComponent = () => {
 							<tr
 								key={`nav-edit-${item.id}`}
 								className={
-									activeRow === item.id
-										? 'c-menu-detail__table-row--active'
-										: ''
+									activeRow === item.id ? 'c-menu-detail__table-row--active' : ''
 								}
 							>
 								<td className="o-table-col-1">
 									<ButtonGroup>
-										{renderReorderButton(
-											'up',
-											index,
-											item.id,
-											isFirst(index)
-										)}
-										{renderReorderButton(
-											'down',
-											index,
-											item.id,
-											isLast(index)
-										)}
+										{renderReorderButton('up', index, item.id, isFirst(index))}
+										{renderReorderButton('down', index, item.id, isLast(index))}
 									</ButtonGroup>
 								</td>
 								<td>{item.label || item.tooltip || item.content_path}</td>
@@ -272,10 +267,13 @@ const NavigationDetail: FunctionComponent = () => {
 										<Button
 											icon="edit-2"
 											onClick={() =>
-												handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_EDIT, {
-													menu: navigationId,
-													id: String(item.id),
-												})
+												handleNavigate(
+													NAVIGATION_PATH.NAVIGATION_ITEM_EDIT,
+													{
+														menu: navigationId,
+														id: String(item.id),
+													}
+												)
 											}
 											title={t(
 												'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'

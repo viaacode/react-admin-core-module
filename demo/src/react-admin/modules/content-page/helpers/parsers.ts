@@ -2,9 +2,16 @@ import { Avo } from '@viaa/avo2-types';
 
 import { ContentPageDb, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
-import { parseContentBlocks } from './get-published-state';
 import { UserService } from '~modules/user/user.service';
 import { CommonUser } from '~modules/user/user.types';
+import {
+	ContentBlockConfig,
+	ContentBlockType,
+} from '~modules/content-page/types/content-block.types';
+import { compact, get } from 'lodash-es';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block.consts';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { Config, ToastType } from '~core/config';
 
 export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentPageInfo {
 	const labels = (dbContentPage.content_content_labels || []).map(
@@ -71,3 +78,58 @@ export function convertToDatabaseContentPage(
 		user_profile_id: contentPageInfo.user_profile_id,
 	} as ContentPageDb;
 }
+
+// Parse content-blocks to configs
+export const parseContentBlocks = (
+	contentBlocks: Avo.ContentPage.Block[]
+): ContentBlockConfig[] => {
+	const sortedContentBlocks = contentBlocks.sort((a, b) => a.position - b.position);
+
+	return compact(
+		(sortedContentBlocks || []).map((contentBlock) => {
+			const { content_block_type, id, variables } = contentBlock;
+			const configForType = CONTENT_BLOCK_CONFIG_MAP[content_block_type as ContentBlockType];
+			if (!configForType) {
+				console.error(
+					new CustomError('Failed to find content block config for type', null, {
+						content_block_type,
+						contentBlock,
+						CONTENT_BLOCK_CONFIG_MAP,
+					})
+				);
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t(
+						'modules/admin/content-page/helpers/get-published-state___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
+					),
+					type: ToastType.ERROR,
+				});
+				return null;
+			}
+			const cleanConfig = configForType(contentBlock.position);
+
+			const rawComponentState = get(variables, 'componentState', null);
+			const componentState = Array.isArray(rawComponentState)
+				? rawComponentState
+				: { ...cleanConfig.components.state, ...rawComponentState };
+
+			return {
+				...cleanConfig,
+				id,
+				components: {
+					...cleanConfig.components,
+					state: componentState,
+				},
+				block: {
+					...cleanConfig.block,
+					state: {
+						...cleanConfig.block.state,
+						...get(variables, 'blockState', {}),
+					},
+				},
+			} as ContentBlockConfig;
+		})
+	);
+};

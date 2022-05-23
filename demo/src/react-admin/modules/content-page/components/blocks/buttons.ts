@@ -1,5 +1,5 @@
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.consts';
+import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ButtonsBlockComponentState,
 	ContentBlockConfig,
