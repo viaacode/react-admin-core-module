@@ -6,8 +6,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './react-admin/modules/shared/styles/main.scss';
 import { Config, ToastType } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { PermissionService } from '~modules/shared/services/permission-service';
-import { Permission } from '~modules/user/user.types';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
 import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
@@ -22,9 +20,6 @@ import { mockUser } from './mock-user';
 const queryClient = new QueryClient();
 
 function App() {
-	// const [routes] = useModuleRoutes(false);
-	// const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	// const [userPermissions, setUserPermissions] = useState<Permission[] | null>(null);
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
 
 	const { t } = useTranslation();
@@ -33,37 +28,18 @@ function App() {
 		if (!mockUser) {
 			return;
 		}
-		if (PermissionService.hasPerm(mockUser, Permission.VIEW_ADMIN_DASHBOARD)) {
-			const tempUserPermissions = PermissionService.getUserPermissions(mockUser);
-			// setUserPermissions(tempUserPermissions);
-			GET_NAV_ITEMS(tempUserPermissions)
-				.then((items) => {
-					setNavigationItems(items);
-				})
-				.catch((err) => {
-					console.error(new CustomError('Failed to get nav items', err));
-					Config.getConfig().services.toastService.showToast({
-						title: t('Error'),
-						description: t('Het ophalen van de navigatie items is mislukt'),
-						type: ToastType.ERROR,
-					});
+		GET_NAV_ITEMS()
+			.then((items) => {
+				setNavigationItems(items);
+			})
+			.catch((err) => {
+				console.error(new CustomError('Failed to get nav items', err));
+				Config.getConfig().services.toastService.showToast({
+					title: t('Error'),
+					description: t('Het ophalen van de navigatie items is mislukt'),
+					type: ToastType.ERROR,
 				});
-		} else {
-			// setLoadingInfo({
-			// 	state: 'error',
-			// 	icon: 'lock',
-			// 	message: t(
-			// 		'admin/admin___je-hebt-geen-rechten-om-het-beheer-dashboard-te-bekijken-view-admin-dashboard'
-			// 	),
-			// 	actionButtons: ['home', 'helpdesk'],
-			// });
-		}
-
-		// Remove zendesk when loading beheer after visiting the client side of the app
-		const zendeskWidget = document.querySelector('iframe#launcher');
-		if (zendeskWidget) {
-			zendeskWidget.remove();
-		}
+			});
 	}, [t]);
 
 	return (

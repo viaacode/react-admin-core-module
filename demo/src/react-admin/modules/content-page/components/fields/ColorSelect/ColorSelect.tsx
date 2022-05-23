@@ -16,7 +16,7 @@ export interface ColorSelectProps extends Props {
 	options: ColorOption[];
 }
 
-const ColorSelect: FunctionComponent<ColorSelectProps> = ({
+export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 	className,
 	noOptionsMessage = ({ inputValue }) => `Geen kleuren gevonden: ${inputValue}`,
 	placeholder = '',
@@ -52,5 +52,3 @@ const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 		/>
 	);
 };
-
-export default ColorSelect;

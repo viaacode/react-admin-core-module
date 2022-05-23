@@ -1,4 +1,4 @@
-import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -6896,17 +6896,11 @@ export type Object_Ie = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
+  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name: Scalars['String'];
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: Maybe<Scalars['Int']>;
-  schema_part_of_archive?: Maybe<Scalars['_text']>;
-  /** Aflevering */
-  schema_part_of_episode?: Maybe<Scalars['_text']>;
-  /** Seizoen */
-  schema_part_of_season?: Maybe<Scalars['_text']>;
-  /** Serie */
-  schema_part_of_series?: Maybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: Maybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -7109,12 +7103,9 @@ export type Object_Ie_Bool_Exp = {
   schema_license?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_maintainer_id?: InputMaybe<String_Comparison_Exp>;
   schema_maintainer_id_lower?: InputMaybe<String_Comparison_Exp>;
+  schema_maintainer_name?: InputMaybe<String_Comparison_Exp>;
   schema_name?: InputMaybe<String_Comparison_Exp>;
   schema_number_of_pages?: InputMaybe<Int_Comparison_Exp>;
-  schema_part_of_archive?: InputMaybe<_Text_Comparison_Exp>;
-  schema_part_of_episode?: InputMaybe<_Text_Comparison_Exp>;
-  schema_part_of_season?: InputMaybe<_Text_Comparison_Exp>;
-  schema_part_of_series?: InputMaybe<_Text_Comparison_Exp>;
   schema_publisher?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_spatial_coverage?: InputMaybe<_Text_Comparison_Exp>;
   schema_temporal_coverage?: InputMaybe<_Text_Comparison_Exp>;
@@ -7332,17 +7323,11 @@ export type Object_Ie_Insert_Input = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
   schema_maintainer_id_lower?: InputMaybe<Scalars['String']>;
+  schema_maintainer_name?: InputMaybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: InputMaybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: InputMaybe<Scalars['Int']>;
-  schema_part_of_archive?: InputMaybe<Scalars['_text']>;
-  /** Aflevering */
-  schema_part_of_episode?: InputMaybe<Scalars['_text']>;
-  /** Seizoen */
-  schema_part_of_season?: InputMaybe<Scalars['_text']>;
-  /** Serie */
-  schema_part_of_series?: InputMaybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: InputMaybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -7397,6 +7382,7 @@ export type Object_Ie_Max_Fields = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
+  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: Maybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
@@ -7449,6 +7435,7 @@ export type Object_Ie_Min_Fields = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: Maybe<Scalars['String']>;
   schema_maintainer_id_lower?: Maybe<Scalars['String']>;
+  schema_maintainer_name?: Maybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: Maybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
@@ -7523,12 +7510,9 @@ export type Object_Ie_Order_By = {
   schema_license?: InputMaybe<Order_By>;
   schema_maintainer_id?: InputMaybe<Order_By>;
   schema_maintainer_id_lower?: InputMaybe<Order_By>;
+  schema_maintainer_name?: InputMaybe<Order_By>;
   schema_name?: InputMaybe<Order_By>;
   schema_number_of_pages?: InputMaybe<Order_By>;
-  schema_part_of_archive?: InputMaybe<Order_By>;
-  schema_part_of_episode?: InputMaybe<Order_By>;
-  schema_part_of_season?: InputMaybe<Order_By>;
-  schema_part_of_series?: InputMaybe<Order_By>;
   schema_publisher?: InputMaybe<Order_By>;
   schema_spatial_coverage?: InputMaybe<Order_By>;
   schema_temporal_coverage?: InputMaybe<Order_By>;
@@ -7636,17 +7620,11 @@ export enum Object_Ie_Select_Column {
   /** column name */
   SchemaMaintainerIdLower = 'schema_maintainer_id_lower',
   /** column name */
+  SchemaMaintainerName = 'schema_maintainer_name',
+  /** column name */
   SchemaName = 'schema_name',
   /** column name */
   SchemaNumberOfPages = 'schema_number_of_pages',
-  /** column name */
-  SchemaPartOfArchive = 'schema_part_of_archive',
-  /** column name */
-  SchemaPartOfEpisode = 'schema_part_of_episode',
-  /** column name */
-  SchemaPartOfSeason = 'schema_part_of_season',
-  /** column name */
-  SchemaPartOfSeries = 'schema_part_of_series',
   /** column name */
   SchemaPublisher = 'schema_publisher',
   /** column name */
@@ -7722,17 +7700,11 @@ export type Object_Ie_Set_Input = {
   /** De ID van de beherende instelling of aanbieder van de IE, aka de CP (tbv relatie met org API v2) */
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
   schema_maintainer_id_lower?: InputMaybe<Scalars['String']>;
+  schema_maintainer_name?: InputMaybe<Scalars['String']>;
   /** De primaire titel van de IE */
   schema_name?: InputMaybe<Scalars['String']>;
   /** Aantal paginas van geschreven media */
   schema_number_of_pages?: InputMaybe<Scalars['Int']>;
-  schema_part_of_archive?: InputMaybe<Scalars['_text']>;
-  /** Aflevering */
-  schema_part_of_episode?: InputMaybe<Scalars['_text']>;
-  /** Seizoen */
-  schema_part_of_season?: InputMaybe<Scalars['_text']>;
-  /** Serie */
-  schema_part_of_series?: InputMaybe<Scalars['_text']>;
   /** Persoon of organisatie die verantwoordelijk was voor de publicatie van de IE */
   schema_publisher?: InputMaybe<Scalars['jsonb']>;
   /** Plaatsen of locaties waarover de IE handelt of betrekking op heeft */
@@ -7857,17 +7829,11 @@ export enum Object_Ie_Update_Column {
   /** column name */
   SchemaMaintainerIdLower = 'schema_maintainer_id_lower',
   /** column name */
+  SchemaMaintainerName = 'schema_maintainer_name',
+  /** column name */
   SchemaName = 'schema_name',
   /** column name */
   SchemaNumberOfPages = 'schema_number_of_pages',
-  /** column name */
-  SchemaPartOfArchive = 'schema_part_of_archive',
-  /** column name */
-  SchemaPartOfEpisode = 'schema_part_of_episode',
-  /** column name */
-  SchemaPartOfSeason = 'schema_part_of_season',
-  /** column name */
-  SchemaPartOfSeries = 'schema_part_of_series',
   /** column name */
   SchemaPublisher = 'schema_publisher',
   /** column name */
@@ -12886,7 +12852,7 @@ export type GetContentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', content_block_type: Lookup_App_Content_Block_Type_Enum, content_id: any, created_at: any, id: any, position: number, updated_at: any, variables?: any | null }> }> };
+export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', content_block_type: Lookup_App_Content_Block_Type_Enum, content_id: any, created_at: any, id: any, position: number, updated_at: any, variables?: any | null }> }> };
 
 export type GetContentLabelsByContentTypeQueryVariables = Exact<{
   contentType: Lookup_App_Content_Type_Enum;
@@ -12910,7 +12876,7 @@ export type GetContentPagesQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null } };
+export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, maintainer_users_profiles: Array<{ __typename?: 'maintainer_users_profile', maintainer: { __typename?: 'maintainer_content_partner', schema_identifier: string, schema_name?: string | null, information?: Array<{ __typename?: 'ContentPartner', logo?: { __typename?: 'Logo', iri: string } | null } | null> | null } }>, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null } };
 
 export type GetContentTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12993,6 +12959,47 @@ export type UpdateContentByIdMutationVariables = Exact<{
 
 
 export type UpdateContentByIdMutation = { __typename?: 'mutation_root', update_app_content_page?: { __typename?: 'app_content_page_mutation_response', affected_rows: number } | null };
+
+export type DeleteNavigationItemMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type DeleteNavigationItemMutation = { __typename?: 'mutation_root', delete_app_navigation?: { __typename?: 'app_navigation_mutation_response', affected_rows: number } | null };
+
+export type GetNavigationElementsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNavigationElementsQuery = { __typename?: 'query_root', app_navigation: Array<{ __typename?: 'app_navigation', id: any, description?: string | null, placement: string, tooltip?: string | null }> };
+
+export type GetNavigationItemByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetNavigationItemByIdQuery = { __typename?: 'query_root', app_navigation: Array<{ __typename?: 'app_navigation', id: any, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+
+export type GetNavigationItemsByPlacementQueryVariables = Exact<{
+  placement: Scalars['String'];
+}>;
+
+
+export type GetNavigationItemsByPlacementQuery = { __typename?: 'query_root', app_navigation: Array<{ __typename?: 'app_navigation', id: any, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+
+export type InsertNavigationItemMutationVariables = Exact<{
+  navigationItem: App_Navigation_Insert_Input;
+}>;
+
+
+export type InsertNavigationItemMutation = { __typename?: 'mutation_root', insert_app_navigation?: { __typename?: 'app_navigation_mutation_response', returning: Array<{ __typename?: 'app_navigation', id: any }> } | null };
+
+export type UpdateNavigationItemByIdMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  navigationItem: App_Navigation_Set_Input;
+}>;
+
+
+export type UpdateNavigationItemByIdMutation = { __typename?: 'mutation_root', update_app_navigation?: { __typename?: 'app_navigation_mutation_response', affected_rows: number } | null };
 
 export type GetOrganizationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -13275,6 +13282,7 @@ export const GetContentByIdDocument = `
       }
       group {
         id
+        name
         label
       }
     }
@@ -13396,6 +13404,7 @@ export const GetContentPagesDocument = `
       }
       group {
         id
+        name
         label
       }
     }
@@ -13664,6 +13673,152 @@ export const useUpdateContentByIdMutation = <
     useMutation<UpdateContentByIdMutation, TError, UpdateContentByIdMutationVariables, TContext>(
       ['updateContentById'],
       (variables?: UpdateContentByIdMutationVariables) => fetcher<UpdateContentByIdMutation, UpdateContentByIdMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateContentByIdDocument, variables)(),
+      options
+    );
+export const DeleteNavigationItemDocument = `
+    mutation deleteNavigationItem($id: uuid!) {
+  delete_app_navigation(where: {id: {_eq: $id}}) {
+    affected_rows
+  }
+}
+    `;
+export const useDeleteNavigationItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<DeleteNavigationItemMutation, TError, DeleteNavigationItemMutationVariables, TContext>
+    ) =>
+    useMutation<DeleteNavigationItemMutation, TError, DeleteNavigationItemMutationVariables, TContext>(
+      ['deleteNavigationItem'],
+      (variables?: DeleteNavigationItemMutationVariables) => fetcher<DeleteNavigationItemMutation, DeleteNavigationItemMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, DeleteNavigationItemDocument, variables)(),
+      options
+    );
+export const GetNavigationElementsDocument = `
+    query getNavigationElements {
+  app_navigation(distinct_on: placement, order_by: {placement: asc}) {
+    id
+    description
+    placement
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationElementsQuery = <
+      TData = GetNavigationElementsQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetNavigationElementsQueryVariables,
+      options?: UseQueryOptions<GetNavigationElementsQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationElementsQuery, TError, TData>(
+      variables === undefined ? ['getNavigationElements'] : ['getNavigationElements', variables],
+      fetcher<GetNavigationElementsQuery, GetNavigationElementsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationElementsDocument, variables),
+      options
+    );
+export const GetNavigationItemByIdDocument = `
+    query getNavigationItemById($id: uuid!) {
+  app_navigation(where: {id: {_eq: $id}}) {
+    id
+    created_at
+    description
+    user_group_ids
+    icon_name
+    label
+    link_target
+    placement
+    position
+    updated_at
+    content_type
+    content_path
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationItemByIdQuery = <
+      TData = GetNavigationItemByIdQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetNavigationItemByIdQueryVariables,
+      options?: UseQueryOptions<GetNavigationItemByIdQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationItemByIdQuery, TError, TData>(
+      ['getNavigationItemById', variables],
+      fetcher<GetNavigationItemByIdQuery, GetNavigationItemByIdQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationItemByIdDocument, variables),
+      options
+    );
+export const GetNavigationItemsByPlacementDocument = `
+    query getNavigationItemsByPlacement($placement: String!) {
+  app_navigation(order_by: {position: asc}, where: {placement: {_eq: $placement}}) {
+    id
+    created_at
+    description
+    user_group_ids
+    icon_name
+    label
+    link_target
+    placement
+    position
+    updated_at
+    content_type
+    content_path
+    tooltip
+  }
+}
+    `;
+export const useGetNavigationItemsByPlacementQuery = <
+      TData = GetNavigationItemsByPlacementQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables: GetNavigationItemsByPlacementQueryVariables,
+      options?: UseQueryOptions<GetNavigationItemsByPlacementQuery, TError, TData>
+    ) =>
+    useQuery<GetNavigationItemsByPlacementQuery, TError, TData>(
+      ['getNavigationItemsByPlacement', variables],
+      fetcher<GetNavigationItemsByPlacementQuery, GetNavigationItemsByPlacementQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetNavigationItemsByPlacementDocument, variables),
+      options
+    );
+export const InsertNavigationItemDocument = `
+    mutation insertNavigationItem($navigationItem: app_navigation_insert_input!) {
+  insert_app_navigation(objects: [$navigationItem]) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const useInsertNavigationItemMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<InsertNavigationItemMutation, TError, InsertNavigationItemMutationVariables, TContext>
+    ) =>
+    useMutation<InsertNavigationItemMutation, TError, InsertNavigationItemMutationVariables, TContext>(
+      ['insertNavigationItem'],
+      (variables?: InsertNavigationItemMutationVariables) => fetcher<InsertNavigationItemMutation, InsertNavigationItemMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, InsertNavigationItemDocument, variables)(),
+      options
+    );
+export const UpdateNavigationItemByIdDocument = `
+    mutation updateNavigationItemById($id: uuid!, $navigationItem: app_navigation_set_input!) {
+  update_app_navigation(where: {id: {_eq: $id}}, _set: $navigationItem) {
+    affected_rows
+  }
+}
+    `;
+export const useUpdateNavigationItemByIdMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      options?: UseMutationOptions<UpdateNavigationItemByIdMutation, TError, UpdateNavigationItemByIdMutationVariables, TContext>
+    ) =>
+    useMutation<UpdateNavigationItemByIdMutation, TError, UpdateNavigationItemByIdMutationVariables, TContext>(
+      ['updateNavigationItemById'],
+      (variables?: UpdateNavigationItemByIdMutationVariables) => fetcher<UpdateNavigationItemByIdMutation, UpdateNavigationItemByIdMutationVariables>(dataSource.endpoint, dataSource.fetchParams || {}, UpdateNavigationItemByIdDocument, variables)(),
       options
     );
 export const GetOrganizationsWithUsersDocument = `

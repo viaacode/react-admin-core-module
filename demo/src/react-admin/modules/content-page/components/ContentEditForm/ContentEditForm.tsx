@@ -39,9 +39,9 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ValueOf } from '~modules/shared/types';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { CommonUser, Permission } from '~modules/user/user.types';
+import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 import './ContentEditForm.scss';
-import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -51,7 +51,7 @@ interface ContentEditFormProps {
 	user: CommonUser;
 }
 
-const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
+export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	contentTypes = [],
 	formErrors,
 	contentPageInfo,
@@ -389,7 +389,7 @@ const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									)}
 									values={contentPageInfo.user_group_ids || []}
 									required={false}
-									onChange={(userGroupIds: number[]) =>
+									onChange={(userGroupIds: string[]) =>
 										changeContentPageProp('user_group_ids', userGroupIds)
 									}
 								/>
@@ -401,5 +401,3 @@ const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		</Container>
 	);
 };
-
-export default ContentEditForm;

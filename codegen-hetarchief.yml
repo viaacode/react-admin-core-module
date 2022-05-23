@@ -9,6 +9,7 @@ documents:
   - "!./demo/src/react-admin/modules/shared/services/relation-service/queries/avo/*.graphql"
   - "!./demo/src/react-admin/modules/shared/services/settings-service/queries/avo/*.graphql"
   - "!./demo/src/react-admin/modules/item/queries/avo/*.graphql"
+  - "!./demo/src/react-admin/modules/navigation/queries/avo/*.graphql"
   - "!./demo/src/react-admin/modules/translations/queries/avo/*.graphql"
   - "!./demo/src/react-admin/modules/user/queries/avo/*.graphql"
   - "!./demo/src/react-admin/modules/user-group/queries/avo/*.graphql"

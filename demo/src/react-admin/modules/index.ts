@@ -1,4 +1,5 @@
 export * from './content-page';
 export * from './translations';
-export * from './user';
+export { UserOverview } from './user/views/UserOverview';
 export * from './user-group';
+export * from './navigation';

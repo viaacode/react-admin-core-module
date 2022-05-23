@@ -1,5 +1,4 @@
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
-import { GET_ALIGN_OPTIONS, GET_WIDTH_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -11,6 +10,10 @@ import {
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD } from './defaults';
 
 import { Config } from '~core/config';
+import {
+	GET_ALIGN_OPTIONS,
+	GET_WIDTH_OPTIONS,
+} from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',

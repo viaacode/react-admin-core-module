@@ -3,7 +3,7 @@ import { get, has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
 import { Config, ToastType } from '~core/config';
-import ContentEditForm from '~modules/content-page/components/ContentEditForm/ContentEditForm';
+import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
 	CONTENT_PATH,

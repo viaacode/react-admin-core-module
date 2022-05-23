@@ -1,1 +1,1 @@
-export * from './NavigationElementForm';
+export { default as NavigationEditForm } from './NavigationEditForm/NavigationEditForm';

@@ -14,7 +14,7 @@ export interface PaddingSelectProps {
 
 type PaddingDirection = 'top' | 'bottom';
 
-const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value }) => {
+export const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value }) => {
 	const { t } = useTranslation();
 
 	const generateOptions = (direction: PaddingDirection) =>
@@ -74,5 +74,3 @@ const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value 
 		</Form>
 	);
 };
-
-export default PaddingSelect;

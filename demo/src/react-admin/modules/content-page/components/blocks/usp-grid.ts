@@ -1,7 +1,7 @@
 import { GridItem } from '@viaa/avo2-components';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
-import { GET_ALIGN_OPTIONS, GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.consts';
+import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -14,6 +14,7 @@ import { BlockUspGridWrapperProps } from '../wrappers/UspGridWrapper/UspGridWrap
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
 import { Config } from '~core/config';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

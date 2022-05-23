@@ -6,6 +6,7 @@ import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
 import { renderAdminUserRoutes } from './modules/user/user';
 import { Route } from 'react-router-dom';
 import ContentPageWrapper from './modules/content-page/ContentPageWrapper';
+import { renderAdminNavigationRoutes } from './modules/navigations/navigation.routes';
 
 export const renderAdminRoutes = () => {
 	return (
@@ -13,6 +14,7 @@ export const renderAdminRoutes = () => {
 			{renderAdminContentPageRoutes()}
 			{renderAdminUserGroupRoutes()}
 			{renderAdminTranslationsRoutes()}
+			{renderAdminNavigationRoutes()}
 			{renderAdminUserRoutes()}
 			<Route
 				key="content-page-resolve-routes"

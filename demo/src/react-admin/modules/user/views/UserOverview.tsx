@@ -66,7 +66,7 @@ import {
 	ITEMS_PER_PAGE,
 } from '../user.consts';
 
-const UserOverview: FunctionComponent = () => {
+export const UserOverview: FunctionComponent = () => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -779,5 +779,3 @@ const UserOverview: FunctionComponent = () => {
 		/>
 	);
 };
-
-export default UserOverview;

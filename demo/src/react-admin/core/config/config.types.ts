@@ -4,15 +4,16 @@ import { ComponentType, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import { AvoOrHetArchief } from '~modules/shared/types';
 
-import { NavigationConfig } from '~modules/navigation/types';
-import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 import {
 	UserGroupArchief,
 	UserGroupUpdateResponse,
 	UserGroupUpdates,
 } from '~modules/user-group/types/user-group.types';
+import { CommonUser, UserBulkAction } from '~modules/user/user.types';
+
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import { NavigationItem } from '~modules/navigation/navigation.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -29,6 +30,11 @@ export interface ToastInfo {
 
 export interface ToastService {
 	showToast: (toastInfo: ToastInfo) => void;
+}
+
+export interface NavigationsService {
+	getAllNavigationBars: () => Promise<NavigationItem[]>;
+	createNavigationItem: (navigationItem: NavigationItem) => Promise<NavigationItem>;
 }
 
 export interface I18n {
@@ -60,7 +66,6 @@ export interface ConfigValue {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
-	navigation?: NavigationConfig;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 	};

@@ -8,9 +8,9 @@ export interface UserGroupSelectProps {
 	label: string;
 	error: string | undefined;
 	placeholder: string;
-	values: number[];
+	values: string[];
 	required: boolean;
-	onChange: (selectedUserGroupIds: number[]) => void;
+	onChange: (selectedUserGroupIds: string[]) => void;
 }
 
 export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
@@ -24,11 +24,11 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	const [userGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
 
 	const handleSelectOnChange = (values: TagInfo[] | null) => {
-		onChange((values || []).map((val) => val.value as number));
+		onChange((values || []).map((val) => val.value as string));
 	};
 
 	const selectedOptions = userGroupOptions.filter((userGroupOption: TagInfo) => {
-		return values.includes(userGroupOption.value as number);
+		return values.includes(userGroupOption.value as string);
 	});
 
 	if (isEmpty(userGroupOptions)) {

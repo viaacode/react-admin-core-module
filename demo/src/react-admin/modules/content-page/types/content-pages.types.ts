@@ -76,7 +76,7 @@ export interface ContentPageDb {
 	content_width: ContentWidthSchema;
 	profile: ProfileAvo | ProfileHetArchief;
 	user_profile_id: string | null;
-	user_group_ids: number[] | null;
+	user_group_ids: string[] | null;
 	content_blocks: ContentBlockSchema[];
 	content_content_labels: ContentPageLabelLinkSchema[];
 }
@@ -108,7 +108,7 @@ export interface ContentPageInfo {
 	content_width: Avo.ContentPage.Width;
 	profile: CommonUser;
 	user_profile_id: string | null;
-	user_group_ids: number[] | null;
+	user_group_ids: string[] | null;
 	contentBlockConfigs: ContentBlockConfig[];
 	labels: Partial<Avo.ContentPage.Label>[];
 }

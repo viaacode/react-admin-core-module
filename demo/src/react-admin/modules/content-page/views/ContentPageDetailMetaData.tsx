@@ -43,7 +43,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	const getUserGroups = (contentPageInfo: ContentPageInfo): TagOption[] => {
 		const tagInfos: TagInfo[] = compact(
 			(contentPageInfo.user_group_ids || []).map(
-				(userGroupId: number): TagInfo | undefined => {
+				(userGroupId: string): TagInfo | undefined => {
 					return allUserGroupOptions.find(
 						(userGroup: TagInfo) => userGroup.value === userGroupId
 					);

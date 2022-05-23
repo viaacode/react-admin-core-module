@@ -1,0 +1,7 @@
+mutation insertNavigationItem($navigationItem: app_navigation_insert_input!) {
+	insert_app_navigation(objects: [$navigationItem]) {
+		returning {
+			id
+		}
+	}
+}
