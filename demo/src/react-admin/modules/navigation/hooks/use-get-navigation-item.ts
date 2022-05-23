@@ -4,18 +4,23 @@ import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
 import { NavigationService } from '~modules/navigation/navigation.service';
 import { NavigationItem } from '../navigation.types';
 
-export const useGetAllNavigations = (
-	placement?: string,
+export const useGetNavigationItem = (
+	id: string | undefined,
 	options?: UseQueryOptions<
-		NavigationItem[],
+		NavigationItem | null,
 		HTTPError,
-		NavigationItem[],
-		typeof NAVIGATIONS_QUERY_KEYS.getAllNavigations
+		NavigationItem | null,
+		typeof NAVIGATIONS_QUERY_KEYS.getNavigationItem
 	>
 ) => {
 	return useQuery(
-		NAVIGATIONS_QUERY_KEYS.getAllNavigations,
-		() => NavigationService.fetchNavigationItems(placement),
+		NAVIGATIONS_QUERY_KEYS.getNavigationItem,
+		() => {
+			if (!id) {
+				return null;
+			}
+			return NavigationService.fetchNavigationItemById(id);
+		},
 		options
 	);
 };

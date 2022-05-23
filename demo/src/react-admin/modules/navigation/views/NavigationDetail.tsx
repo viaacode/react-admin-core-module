@@ -1,5 +1,5 @@
-import { cloneDeep, isEqual, isNil, startCase } from 'lodash-es';
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { cloneDeep, isNil, startCase } from 'lodash-es';
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
 import {
 	Button,
@@ -16,7 +16,6 @@ import { NavigationService } from '../navigation.service';
 
 import './NavigationDetail.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { Config, ToastType } from '~core/config';
 import { navigate } from '~modules/shared/helpers/link';
@@ -24,6 +23,9 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { Loader } from '~modules/shared/components';
 import { NavigationItem } from '../navigation.types';
+import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
+import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
+import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -37,41 +39,20 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [idToDelete, setIdToDelete] = useState<string | null>(null);
 	const [navigationItems, setNavigationItems] = useState<NavigationItem[] | null>(null);
-	const [initialNavigationItems, setInitialNavigationItems] = useState<NavigationItem[] | null>(
-		null
-	);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+	const {
+		data: initialNavigationItems,
+		isLoading: isLoadingNavigationItems,
+		isError: isErrorNavigationItems,
+	} = useGetNavigations(navigationBarId);
 
 	const timeout = useRef<NodeJS.Timeout | null>(null);
 
-	const fetchNavigationItems = useCallback(async () => {
-		try {
-			const tempMenuItems = await NavigationService.fetchNavigationItems(navigationBarId);
-
-			// Set items position property equal to index in array
-			const reindexedMenuItems = reindexNavigationItems(tempMenuItems);
-
-			setInitialNavigationItems(reindexedMenuItems);
-			setNavigationItems(reindexedMenuItems);
-		} catch (err) {
-			console.error('Failed to fetch menu items', err, { navigationBarId });
-			setLoadingInfo({
-				state: 'error',
-				message: t('admin/menu/views/menu-detail___het-laden-van-de-menu-items-is-mislukt'),
-			});
-		}
-	}, [navigationBarId, setNavigationItems, setLoadingInfo, t]);
-
 	useEffect(() => {
-		fetchNavigationItems();
-	}, [fetchNavigationItems]);
-
-	useEffect(() => {
-		if (navigationItems) {
-			setLoadingInfo({ state: 'loaded' });
+		if (!isLoadingNavigationItems && !isErrorNavigationItems && initialNavigationItems) {
+			setNavigationItems(initialNavigationItems);
 		}
-	}, [navigationItems, setLoadingInfo]);
+	}, [isLoadingNavigationItems, isErrorNavigationItems, initialNavigationItems]);
 
 	useEffect(() => {
 		// Reset active row to clear styling
@@ -93,7 +74,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				throw new CustomError('The idToDelete is not defined', null, { idToDelete });
 			}
 			await NavigationService.deleteNavigationItem(idToDelete);
-			fetchNavigationItems();
+			await invalidateNavigationQueries();
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
@@ -125,8 +106,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			setIsSaving(true);
 
 			await NavigationService.updateNavigationItems(navigationItems);
-
-			fetchNavigationItems();
+			await invalidateNavigationQueries();
 			Config.getConfig().services.toastService.showToast({
 				title: Config.getConfig().services.i18n.t('Success'),
 				description: Config.getConfig().services.i18n.t(
@@ -152,15 +132,6 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		setIdToDelete(id);
 		setIsConfirmModalOpen(true);
 	};
-
-	const reindexNavigationItems = (items: NavigationItem[]): NavigationItem[] =>
-		items.map((item, index) => {
-			item.position = index;
-			// Remove properties that we don't need for save
-			delete (item as any).__typename;
-
-			return item;
-		});
 
 	const reorderMenuItem = (currentIndex: number, indexUpdate: number, id: string): void => {
 		if (!navigationItems) {
@@ -207,81 +178,77 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		);
 	};
 
-	const renderNavigationDetail = () => {
-		// Return to overview if menu is empty
-		if (!navigationItems) {
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
-				description: Config.getConfig().services.i18n.t(
-					'admin/menu/views/menu-detail___er-werden-geen-navigatie-items-gevonden'
-				),
-				type: ToastType.ERROR,
-			});
-			handleNavigate(NAVIGATION_PATH.NAVIGATION_OVERVIEW);
-			return null;
+	const renderTableCell = (rowData: any, columnId: string, rowIndex: number): ReactNode => {
+		switch (columnId) {
+			case 'sort': {
+				const isFirst = (i: number) => i === 0;
+				const isLast = (i: number) => i === (navigationItems || []).length - 1;
+				return (
+					<ButtonGroup>
+						{renderReorderButton('up', rowIndex, rowData.id, isFirst(rowIndex))}
+						{renderReorderButton('down', rowIndex, rowData.id, isLast(rowIndex))}
+					</ButtonGroup>
+				);
+			}
+
+			case 'label':
+				return rowData.label || rowData.tooltip || rowData.content_path;
+
+			case 'actions':
+				return (
+					<ButtonToolbar>
+						<Button
+							icon="edit-2"
+							onClick={() =>
+								handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_EDIT, {
+									navigationBarId,
+									navigationItemId: String(rowData.id),
+								})
+							}
+							title={t('admin/menu/views/menu-detail___bewerk-dit-navigatie-item')}
+							ariaLabel={t(
+								'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
+							)}
+							type="secondary"
+						/>
+						<Button
+							icon="delete"
+							title={t('admin/menu/views/menu-detail___verwijder-dit-navigatie-item')}
+							ariaLabel={t(
+								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
+							)}
+							onClick={() => openConfirmModal(rowData.id)}
+							type="danger-hover"
+						/>
+					</ButtonToolbar>
+				);
 		}
+	};
 
-		const isFirst = (i: number) => i === 0;
-		const isLast = (i: number) => i === navigationItems.length - 1;
-
+	const renderNavigationDetail = () => {
 		return (
 			<>
-				<Table align className="c-menu-detail__table" variant="styled">
-					<tbody>
-						{navigationItems.map((item, index) => (
-							<tr
-								key={`nav-edit-${item.id}`}
-								className={
-									activeItemId === item.id
-										? 'c-menu-detail__table-row--active'
-										: ''
-								}
-							>
-								<td className="o-table-col-1">
-									<ButtonGroup>
-										{renderReorderButton('up', index, item.id, isFirst(index))}
-										{renderReorderButton('down', index, item.id, isLast(index))}
-									</ButtonGroup>
-								</td>
-								<td>{item.label || item.tooltip || item.content_path}</td>
-								<td>
-									<ButtonToolbar>
-										<Button
-											icon="edit-2"
-											onClick={() =>
-												handleNavigate(
-													NAVIGATION_PATH.NAVIGATION_ITEM_EDIT,
-													{
-														navigationBarId,
-														navigationItemId: String(item.id),
-													}
-												)
-											}
-											title={t(
-												'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
-											)}
-											ariaLabel={t(
-												'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
-											)}
-											type="secondary"
-										/>
-										<Button
-											icon="delete"
-											title={t(
-												'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
-											)}
-											ariaLabel={t(
-												'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
-											)}
-											onClick={() => openConfirmModal(item.id)}
-											type="danger-hover"
-										/>
-									</ButtonToolbar>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
+				<Table
+					align
+					className="c-menu-detail__table"
+					variant="styled"
+					emptyStateMessage={t('Deze navigatie balk heeft nog geen items')}
+					data={navigationItems || []}
+					columns={[
+						{
+							id: 'sort',
+						},
+						{
+							id: 'label',
+							label: t('Label'),
+						},
+						{
+							id: 'actions',
+						},
+					]}
+					renderCell={renderTableCell}
+					rowKey="id"
+				/>
 				<Spacer margin="top">
 					<Flex center>
 						<Button
@@ -306,8 +273,11 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	};
 
 	const renderPageContent = () => {
-		if (loadingInfo.state === 'loading') {
+		if (isLoadingNavigationItems) {
 			return <Loader />;
+		}
+		if (isErrorNavigationItems) {
+			return <p>{t('HetLaden van de navigatie balk items is mislukt')}</p>;
 		}
 		return (
 			<AdminLayout pageTitle={t('Navigatie balk: ') + startCase(navigationBarId)}>
@@ -319,7 +289,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							type="tertiary"
 						/>
 						<Button
-							disabled={isEqual(initialNavigationItems, navigationItems) || isSaving}
+							disabled={isSaving}
 							label={t('admin/menu/views/menu-detail___opslaan')}
 							onClick={() => handleSave()}
 						/>

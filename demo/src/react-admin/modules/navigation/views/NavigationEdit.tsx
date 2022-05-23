@@ -6,7 +6,6 @@ import {
 	Button,
 	ButtonToolbar,
 	Flex,
-	IconName,
 	Spacer,
 	Spinner,
 	TagInfo,
@@ -36,6 +35,8 @@ import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { dataService } from '~modules/shared/services/data-service';
 import { CONTENT_PAGE_QUERIES } from '~modules/content-page/queries/content-pages.queries';
 import { AdminLayout } from '~modules/shared/layouts';
+import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
+import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
 
 interface NavigationEditProps {
 	navigationBarId: string;
@@ -52,82 +53,53 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const [navigationItem, setNavigationItem] = useState<NavigationItem>(
 		INITIAL_NAVIGATION_FORM(navigationBarId ? String(navigationBarId) : '0') as NavigationItem
 	);
-	const [initialNavigationItem, setInitialNavigationItem] = useState<NavigationItem | null>(null);
-	const [navigationItems, setNavigationItems] = useState<NavigationItem[]>([]);
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
+	const {
+		data: navigationItems,
+		isLoading: isLoadingNavigationItems,
+		isError: isErrorNavigationItems,
+	} = useGetNavigations(navigationBarId);
+	const {
+		data: initialNavigationItem,
+		isLoading: isLoadingNavigationItem,
+		isError: isErrorNavigationItem,
+	} = useGetNavigationItem(navigationItemId);
 
 	const getQueries = () => {
 		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
 	};
 
-	// Fetch menu items depending on menu parent param
-	// This is necessary for populating the menu parent options for our form
 	useEffect(() => {
-		NavigationService.fetchNavigationItems(navigationBarId)
-			.then((menuItemsByPosition) => {
-				if (menuItemsByPosition && menuItemsByPosition.length) {
-					setNavigationItems(menuItemsByPosition);
-				} else {
-					// Go back to overview if no menu items are present
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
-						description: Config.getConfig().services.i18n.t(
-							'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
-							{
-								menuName: navigationBarName,
-							}
-						),
-						type: ToastType.ERROR,
-					});
-					history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW);
-				}
-			})
-			.catch((err) => {
-				console.error(new CustomError('Failed to fetch menu items', err));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
-					description: Config.getConfig().services.i18n.t(
-						'admin/menu/views/menu-edit___het-ophalen-van-de-menu-items-is-mislukt'
-					),
-					type: ToastType.ERROR,
-				});
-			});
-	}, [history, navigationBarName, navigationBarId, t]);
-
-	// Fetch menu item by id
-	useEffect(() => {
-		if (navigationItemId) {
-			setIsLoading(true);
-			// Fetch menu item by id so we can populate our form for editing
-			NavigationService.fetchNavigationItemById(navigationItemId)
-				.then((menuItem: NavigationItem | null) => {
-					if (menuItem) {
-						// Remove unnecessary props for saving
-						delete (menuItem as any).__typename;
-
-						setInitialNavigationItem(menuItem);
-						setNavigationItem({
-							description: menuItem.description || '',
-							icon_name: menuItem.icon_name as IconName,
-							label: menuItem.label,
-							content_type: menuItem.content_type || 'COLLECTION',
-							content_path: String(menuItem.content_path || ''),
-							link_target: menuItem.link_target || '_self',
-							user_group_ids: menuItem.user_group_ids || [],
-							placement: menuItem.placement || null,
-							tooltip: menuItem.tooltip,
-						} as NavigationItem);
-					}
-				})
-				.finally(() => {
-					setIsLoading(false);
-				});
+		if (initialNavigationItem) {
+			setNavigationItem(initialNavigationItem);
 		}
-	}, [navigationItemId, navigationBarId]);
+	}, [initialNavigationItem]);
+
+	useEffect(() => {
+		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
+			// Go back to overview if no menu items are present
+			Config.getConfig().services.toastService.showToast({
+				title: Config.getConfig().services.i18n.t('Error'),
+				description: Config.getConfig().services.i18n.t(
+					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
+					{
+						menuName: navigationBarName,
+					}
+				),
+				type: ToastType.ERROR,
+			});
+			history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW);
+		}
+	}, [
+		isLoadingNavigationItems,
+		isErrorNavigationItems,
+		navigationItems,
+		navigationBarName,
+		history,
+	]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
@@ -229,15 +201,15 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	// Computed
 	const pageType: NavigationEditPageType = navigationItemId ? 'edit' : 'create';
-	const menuParentOptions = uniqBy(
+	const navigationParentOptions = uniqBy(
 		compact(
-			navigationItems.map((menuItem) => {
-				if (!menuItem.placement) {
+			(navigationItems || []).map((navigationItem) => {
+				if (!navigationItem.placement) {
 					return null;
 				}
 				return {
-					label: startCase(menuItem.placement || ''),
-					value: menuItem.placement,
+					label: startCase(navigationItem.placement || ''),
+					value: navigationItem.placement,
 				};
 			})
 		),
@@ -266,6 +238,17 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const handleSave = async () => {
 		try {
+			if (!navigationItems) {
+				Config.getConfig().services.toastService.showToast({
+					title: Config.getConfig().services.i18n.t('Error'),
+					description: Config.getConfig().services.i18n.t(
+						'Er zijn geen navigatie items om op te slaan'
+					),
+					type: ToastType.ERROR,
+				});
+				return;
+			}
+
 			setIsSaving(true);
 
 			// Validate form
@@ -367,42 +350,55 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		return Object.keys(errors).length === 0;
 	};
 
-	// Render
-	const pageTitle = navigationBarId
-		? `${navigationBarName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
-		: t('admin/menu/views/menu-edit___navigatie-toevoegen');
-	return isLoading ? (
-		<Flex orientation="horizontal" center>
-			<Spinner size="large" />
-		</Flex>
-	) : (
-		<AdminLayout pageTitle={pageTitle}>
-			<AdminLayout.Actions>
-				<ButtonToolbar>
-					<Button
-						label={t('admin/menu/views/menu-detail___annuleer')}
-						onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
-						type="tertiary"
+	const renderPageContent = () => {
+		if (isLoadingNavigationItems || isLoadingNavigationItem) {
+			return (
+				<Flex orientation="horizontal" center>
+					<Spinner size="large" />
+				</Flex>
+			);
+		}
+		if (isErrorNavigationItems || isErrorNavigationItem) {
+			return (
+				<Flex orientation="horizontal" center>
+					{t('admin/menu/views/menu-edit___het-ophalen-van-de-menu-items-is-mislukt')}
+				</Flex>
+			);
+		}
+		const pageTitle = navigationBarId
+			? `${navigationBarName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
+			: t('admin/menu/views/menu-edit___navigatie-toevoegen');
+		return (
+			<AdminLayout pageTitle={pageTitle}>
+				<AdminLayout.Actions>
+					<ButtonToolbar>
+						<Button
+							label={t('admin/menu/views/menu-detail___annuleer')}
+							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
+							type="tertiary"
+						/>
+						<Button
+							disabled={isSaving}
+							label={t('admin/menu/views/menu-detail___opslaan')}
+							onClick={() => handleSave()}
+						/>
+					</ButtonToolbar>
+				</AdminLayout.Actions>
+				<AdminLayout.Content>
+					<NavigationEditForm
+						formErrors={formErrors}
+						formState={navigationItem}
+						navigationParentId={navigationBarId}
+						navigationParentOptions={navigationParentOptions}
+						onChange={handleChange}
+						permissionWarning={permissionWarning}
 					/>
-					<Button
-						disabled={isSaving}
-						label={t('admin/menu/views/menu-detail___opslaan')}
-						onClick={() => handleSave()}
-					/>
-				</ButtonToolbar>
-			</AdminLayout.Actions>
-			<AdminLayout.Content>
-				<NavigationEditForm
-					formErrors={formErrors}
-					formState={navigationItem}
-					navigationParentId={navigationBarId}
-					navigationParentOptions={menuParentOptions}
-					onChange={handleChange}
-					permissionWarning={permissionWarning}
-				/>
-			</AdminLayout.Content>
-		</AdminLayout>
-	);
+				</AdminLayout.Content>
+			</AdminLayout>
+		);
+	};
+
+	return renderPageContent();
 };
 
 export default NavigationEdit;

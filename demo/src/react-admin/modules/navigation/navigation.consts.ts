@@ -1,7 +1,8 @@
 import { NavigationItem } from '~modules/navigation/navigation.types';
 
 export enum NAVIGATIONS_QUERY_KEYS {
-	getAllNavigations = 'getAllNavigations',
+	getNavigations = 'getNavigations',
+	getNavigationItem = 'getNavigationItem',
 }
 
 import { TableColumn } from '@viaa/avo2-components';

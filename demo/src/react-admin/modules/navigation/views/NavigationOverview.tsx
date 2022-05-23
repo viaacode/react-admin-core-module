@@ -7,7 +7,7 @@ import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Config } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
-import { useGetAllNavigations } from '~modules/navigation/hooks/get-all-navigations';
+import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import {
 	GET_NAVIGATION_OVERVIEW_TABLE_COLS,
 	NAVIGATION_PATH,
@@ -22,7 +22,7 @@ const NavigationOverview: FunctionComponent = () => {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetAllNavigations();
+	} = useGetNavigations();
 
 	const renderTableCell = (
 		rowData: Partial<NavigationItem>,
