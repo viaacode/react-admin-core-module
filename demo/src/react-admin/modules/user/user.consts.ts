@@ -423,13 +423,13 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 	},
 ];
 
-export const GET_USER_BULK_ACTIONS = (user: CommonUser | undefined): UserBulkActionOption[] => {
-	if (!user) {
+export const GET_USER_BULK_ACTIONS = (user: CommonUser | undefined, bulkActions: UserBulkAction[]): UserBulkActionOption[] => {
+	if (!user || !bulkActions) {
 		return [];
 	}
 	const actions: UserBulkActionOption[] = [];
 
-	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER)) {
+	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) && bulkActions.includes('block')) {
 		actions.push({
 			label: Config.getConfig().services.i18n.t('admin/users/user___blokkeren'),
 			value: 'block',
@@ -439,22 +439,24 @@ export const GET_USER_BULK_ACTIONS = (user: CommonUser | undefined): UserBulkAct
 			value: 'unblock',
 		});
 	}
-	if (PermissionService.hasPerm(user, Permission.DELETE_ANY_USER)) {
+	if (PermissionService.hasPerm(user, Permission.DELETE_ANY_USER) && bulkActions.includes('delete')) {
 		actions.push({
 			label: Config.getConfig().services.i18n.t('admin/users/user___verwijderen'),
 			value: 'delete',
 		});
 	}
-	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER)) {
+	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) && bulkActions.includes('change_subjects')) {
 		actions.push({
 			label: Config.getConfig().services.i18n.t('admin/users/user___vakken-aanpassen'),
 			value: 'change_subjects',
 		});
 	}
-	actions.push({
-		label: Config.getConfig().services.i18n.t('admin/users/user___exporteren'),
-		value: 'export',
-	});
+	if (bulkActions.includes('export')) {
+		actions.push({
+			label: Config.getConfig().services.i18n.t('admin/users/user___exporteren'),
+			value: 'export',
+		});
+	}
 
 	return actions;
 };

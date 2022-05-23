@@ -1,5 +1,5 @@
 export const ROUTE_PARTS = Object.freeze({
-	admin: 'beheer',
+	admin: 'admin', // TODO make this configurable for hetarchief / avo by passing the routes through the Config object
 	assignment: 'opdracht',
 	assignments: 'opdrachten',
 	bookmarks: 'bladwijzers',

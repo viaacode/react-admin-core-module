@@ -12,7 +12,7 @@ import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permi
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-import { Config, ToastType } from '../../../core/config';
+import { Config, ToastType } from '~core/config';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
@@ -136,9 +136,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					// Fire onChange for parent component
 					onChangePermissions?.(false);
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Success'),
+						title: Config.getConfig().services.i18n.t(
+							'modules/user-group/views/user-group-overview___success'
+						),
 						description: Config.getConfig().services.i18n.t(
-							'De permissies werden succesvol bewaard.'
+							'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 						),
 						type: ToastType.ERROR,
 					});
@@ -150,9 +152,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						})
 					);
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
+						title: Config.getConfig().services.i18n.t(
+							'modules/user-group/views/user-group-overview___error'
+						),
 						description: Config.getConfig().services.i18n.t(
-							'Er ging iets mis bij het bewaren van de permissies.'
+							'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 						),
 						type: ToastType.ERROR,
 					});
@@ -168,7 +172,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				setSearchResults(
 					permissions?.filter(
 						(permission) =>
-							permission.label.toLowerCase().indexOf(search.toLowerCase()) != -1
+							permission.label.toLowerCase().includes(search.toLowerCase()) ||
+							permission.description.toLowerCase().includes(search.toLowerCase()) ||
+							permission.name.toLowerCase().includes(search.toLowerCase())
 					)
 				);
 			} else {
@@ -206,16 +212,18 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/user-group/views/user-group-overview___error'
+					),
 					description: Config.getConfig().services.i18n.t(
-						'Er ging iets mis bij het ophalen van de gebruikersgroepen.'
+						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
 					type: ToastType.ERROR,
 				});
 				setLoadingInfo({
 					state: 'error',
 					message: t(
-						'Het ophalen van de gebruikersgroepen is mislukt.'
+						'modules/user-group/views/user-group-overview___het-ophalen-van-de-gebruikersgroepen-is-mislukt'
 					),
 					icon: 'alert-triangle',
 				});
@@ -230,16 +238,18 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/user-group/views/user-group-overview___error'
+					),
 					description: Config.getConfig().services.i18n.t(
-						'Er ging iets mis bij het ophalen van de permissies.'
+						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
 					type: ToastType.ERROR,
 				});
 				setLoadingInfo({
 					state: 'error',
 					message: t(
-						'Het ophalen van de permissies is mislukt.'
+						'modules/user-group/views/user-group-overview___het-ophalen-van-de-permissies-is-mislukt'
 					),
 					icon: 'alert-triangle',
 				});
@@ -258,7 +268,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			return (
 				<div className={className}>
 					<TextInput
-						placeholder={t('Zoek...')}
+						placeholder={t('modules/user-group/views/user-group-overview___zoek')}
 						value={search}
 						onChange={onSearchChange}
 						onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}

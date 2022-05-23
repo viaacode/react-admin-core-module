@@ -23,7 +23,7 @@ export const useIdps = (): UseIdpsTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get idps from the database', err));
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-idps___error'),
 					description: Config.getConfig().services.i18n.t(
 						'shared/hooks/use-idps___ophalen-van-de-idps-is-mislukt'
 					),

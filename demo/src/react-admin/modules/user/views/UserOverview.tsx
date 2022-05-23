@@ -30,7 +30,6 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { AdminLayout } from '../../shared/layouts';
 import { UserService } from '../user.service';
 import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
@@ -91,6 +90,9 @@ const UserOverview: FunctionComponent = () => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
+	const app = Config.getConfig().database.databaseApplicationType;
+	const bulkActions = Config.getConfig().users?.bulkActions || [];
+
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
@@ -137,9 +139,7 @@ const UserOverview: FunctionComponent = () => {
 
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
-			if (
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
-			) {
+			if (app === AvoOrHetArchief.hetArchief) {
 				return generateWhereObjectArchief(
 					filters,
 					onlySelectedProfiles,
@@ -148,7 +148,7 @@ const UserOverview: FunctionComponent = () => {
 			}
 			return generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 		},
-		[selectedProfileIds]
+		[app, selectedProfileIds]
 	);
 
 	const generateWhereObjectAvo = (
@@ -361,7 +361,9 @@ const UserOverview: FunctionComponent = () => {
 			if (addOrRemove === 'add') {
 				await UserService.bulkAddSubjectsToProfiles(subjects, compact(selectedProfileIds));
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Success'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/user/views/user-overview___success'
+					),
 					description: Config.getConfig().services.i18n.t(
 						'admin/users/views/user-overview___de-vakken-zijn-toegevoegd-aan-de-geselecteerde-gebruikers'
 					),
@@ -374,7 +376,9 @@ const UserOverview: FunctionComponent = () => {
 					compact(selectedProfileIds)
 				);
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Success'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/user/views/user-overview___success'
+					),
 					description: Config.getConfig().services.i18n.t(
 						'admin/users/views/user-overview___de-vakken-zijn-verwijderd-van-de-geselecteerde-gebruikers'
 					),
@@ -389,7 +393,9 @@ const UserOverview: FunctionComponent = () => {
 				})
 			);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-aanpassen-van-de-vakken-is-mislukt'
 				),
@@ -405,7 +411,9 @@ const UserOverview: FunctionComponent = () => {
 				generateWhereObject(getFilters(tableState), false)
 			);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Success'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___success'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebuikers-geselecteerd',
 					{
@@ -425,7 +433,9 @@ const UserOverview: FunctionComponent = () => {
 			);
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-ophalen-van-alle-geselecteerde-gebruiker-ids-is-mislukt'
 				),
@@ -446,7 +456,9 @@ const UserOverview: FunctionComponent = () => {
 			await UserService.updateBlockStatusByProfileIds(selectedProfileIds, blockOrUnblock);
 			await fetchProfiles();
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Success'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___success'
+				),
 				description: Config.getConfig().services.i18n.t(
 					blockOrUnblock
 						? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
@@ -456,7 +468,9 @@ const UserOverview: FunctionComponent = () => {
 			});
 		} catch (err) {
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-blokkeren-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
@@ -523,7 +537,9 @@ const UserOverview: FunctionComponent = () => {
 			);
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/user/views/user-overview___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-exporteren-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
@@ -566,7 +582,9 @@ const UserOverview: FunctionComponent = () => {
 							new CustomError('Failed to get subjects from the database', err)
 						);
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('Error'),
+							title: Config.getConfig().services.i18n.t(
+								'modules/user/views/user-overview___error'
+							),
 							description: Config.getConfig().services.i18n.t(
 								'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 							),
@@ -586,8 +604,7 @@ const UserOverview: FunctionComponent = () => {
 			case 'firstName':
 				// no user detail for archief yet
 
-				return Config.getConfig().database.databaseApplicationType ===
-					AvoOrHetArchief.avo ? (
+				return app === AvoOrHetArchief.avo ? (
 					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
 						{truncateTableValue(get(commonUser, columnId))}
 					</Link>
@@ -687,9 +704,8 @@ const UserOverview: FunctionComponent = () => {
 		// 		message={t('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
 		// 	>
 		// 		<p>
-		// 			<Trans i18nKey="admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn">
-		// 				Beschrijving wanneer er nog geen gebruikers zijn
-		// 			</Trans>
+		// 			<Trans i18nKey="admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn">//  Beschrijving wanneer er nog geen gebruikers zijn
+		//</Trans>
 		// 		</p>
 		// 	</ErrorView>
 		// );
@@ -718,12 +734,12 @@ const UserOverview: FunctionComponent = () => {
 					onTableStateChanged={(newTableState) => setTableState(newTableState)}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
-					showCheckboxes
+					showCheckboxes={!!bulkActions.length}
 					selectedItemIds={selectedProfileIds}
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user)}
+					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user, bulkActions)}
 					rowKey={(row: Avo.User.Profile) => row.id || get(row, 'user.mail')}
 				/>
 				<UserDeleteModal
@@ -756,16 +772,11 @@ const UserOverview: FunctionComponent = () => {
 	};
 
 	return (
-		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
-			<AdminLayout.Actions></AdminLayout.Actions>
-			<AdminLayout.Content>
-				<LoadingErrorLoadedComponent
-					loadingInfo={loadingInfo}
-					dataObject={profiles}
-					render={renderUserOverview}
-				/>
-			</AdminLayout.Content>
-		</AdminLayout>
+		<LoadingErrorLoadedComponent
+			loadingInfo={loadingInfo}
+			dataObject={profiles}
+			render={renderUserOverview}
+		/>
 	);
 };
 

@@ -50,7 +50,6 @@ function getNavWithSubLinks(
 }
 
 function getUserNavItems(userPermissions: string[]): NavigationItemInfo[] {
-	const i18n = Config.getConfig().services.i18n;
 	return getNavWithSubLinks(
 		[
 			// {
@@ -106,28 +105,6 @@ function hasPermissions(
 		}
 	}
 	return [];
-}
-
-async function getContentPageDetailRouteByPath(path: string): Promise<string | undefined> {
-	try {
-		const page = await ContentPageService.getContentPageByPath(path);
-		if (!page) {
-			throw new CustomError('Failed to fetch content page by path, response was null', null, {
-				page,
-			});
-		}
-		return buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id: page.id });
-	} catch (err) {
-		console.error(new CustomError('Failed to fetch content page by pad', err, { path }));
-		Config.getConfig().services.toastService.showToast({
-			title: Config.getConfig().services.i18n.t('Error'),
-			description: `${Config.getConfig().services.i18n.t(
-				'admin/admin___het-ophalen-van-de-route-adhv-het-pagina-pad-is-mislukt'
-			)}: ${path}`,
-			type: ToastType.ERROR,
-		});
-		return undefined;
-	}
 }
 
 export const GET_NAV_ITEMS = async (userPermissions: string[]): Promise<NavigationItemInfo[]> => {

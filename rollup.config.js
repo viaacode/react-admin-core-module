@@ -45,6 +45,7 @@ export default (cliArgs) => {
 				'@meemoo/react-components',
 				'@viaa/avo2-components',
 				'clsx',
+				'file-saver',
 				'moment',
 				'query-string',
 				'use-query-params',

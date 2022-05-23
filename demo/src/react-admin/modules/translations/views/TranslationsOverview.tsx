@@ -49,7 +49,7 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
 				),
@@ -120,7 +120,7 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 			await getTranslations();
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Success'),
+				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___success'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/translations/views/translations-overview___de-vertalingen-zijn-opgeslagen'
 				),
@@ -129,7 +129,7 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 		} catch (err) {
 			console.error(new CustomError('Failed to save translations', err));
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/translations/views/translations-overview___het-opslaan-van-de-vertalingen-is-mislukt'
 				),

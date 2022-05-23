@@ -23,7 +23,7 @@ export const useSubjects = (): UseSubjectsTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get subjects from the database', err));
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-subjects___error'),
 					description: Config.getConfig().services.i18n.t(
 						'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 					),

@@ -1,12 +1,5 @@
 import { get } from 'lodash-es';
-import React, {
-	FunctionComponent,
-	ReactElement,
-	ReactText,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 
 import {
 	Blankslate,
@@ -57,11 +50,10 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FunctionComponent = () => {
+const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const { id } = Config.getConfig().services.router.useParams();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -152,7 +144,7 @@ const ContentPageDetail: FunctionComponent = () => {
 
 			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Success'),
+				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-content-item-is-succesvol-verwijderd'
 				),
@@ -161,7 +153,7 @@ const ContentPageDetail: FunctionComponent = () => {
 		} catch (err) {
 			console.error(err);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-verwijderen-van-het-content-item-is-mislukt'
 				),
@@ -175,7 +167,7 @@ const ContentPageDetail: FunctionComponent = () => {
 			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
 				),
@@ -201,7 +193,7 @@ const ContentPageDetail: FunctionComponent = () => {
 				} as ContentPageInfo);
 
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Success'),
+					title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
 					description: Config.getConfig().services.i18n.t(
 						isPublic(newContentPage)
 							? 'admin/content/views/content-detail___de-content-pagina-is-nu-publiek'
@@ -217,7 +209,7 @@ const ContentPageDetail: FunctionComponent = () => {
 			});
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-opslaan-van-de-publiek-status-van-de-content-pagina-is-mislukt'
 				),
@@ -256,7 +248,7 @@ const ContentPageDetail: FunctionComponent = () => {
 				try {
 					if (!contentPageInfo) {
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('Error'),
+							title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 							description: Config.getConfig().services.i18n.t(
 								'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gedupliceerd'
 							),
@@ -274,7 +266,7 @@ const ContentPageDetail: FunctionComponent = () => {
 
 					if (!duplicateContentPage) {
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('Error'),
+							title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 							description: Config.getConfig().services.i18n.t(
 								'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
 							),
@@ -289,7 +281,7 @@ const ContentPageDetail: FunctionComponent = () => {
 						})
 					);
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Success'),
+						title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
 						description: Config.getConfig().services.i18n.t(
 							'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
 						),
@@ -301,7 +293,7 @@ const ContentPageDetail: FunctionComponent = () => {
 					});
 
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('Error'),
+						title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 						description: Config.getConfig().services.i18n.t(
 							'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
 						),
@@ -385,7 +377,7 @@ const ContentPageDetail: FunctionComponent = () => {
 	const renderContentDetail = (contentPageInfo: ContentPageInfo | null): ReactElement | null => {
 		if (!contentPageInfo) {
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('Error'),
+				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-ingeladen'
 				),
