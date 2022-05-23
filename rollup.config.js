@@ -52,6 +52,7 @@ export default (cliArgs) => {
 				'sanitize-html',
 				'react-select',
 				'react-select/async',
+				'react-select/creatable',
 				'ky-universal',
 				'react-copy-to-clipboard',
 				'react-scrollbars-custom',

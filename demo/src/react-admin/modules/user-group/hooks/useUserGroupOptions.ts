@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { TagInfo } from '@viaa/avo2-components';
 
@@ -8,6 +7,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { Config, ToastType } from '~core/config';
 import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';
 import { UserGroupService } from '../services/user-group.service';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 type UseUserGroupsTuple = [TagInfo[] | CheckboxOption[], boolean];
 
@@ -15,7 +15,7 @@ export const useUserGroupOptions = (
 	type: 'CheckboxOption' | 'TagInfo',
 	includeSpecialGroups: boolean
 ): UseUserGroupsTuple => {
-	const [t] = useTranslation();
+	const { t } = useTranslation();
 	const [userGroupOptions, setUserGroupOptions] = useState<TagInfo[] | CheckboxOption[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
