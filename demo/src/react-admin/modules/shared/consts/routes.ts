@@ -24,7 +24,7 @@ export const ROUTE_PARTS = Object.freeze({
 	logout: 'uitloggen',
 	manualAccessRequest: 'manuele-toegangsaanvraag',
 	studentTeacher: 'student-leerkracht',
-	menu: 'navigatie',
+	navigation: 'navigatie',
 	news: 'nieuws',
 	projects: 'projecten',
 	pupilOrTeacher: 'leerling-of-leerkracht',

@@ -1,8 +1,9 @@
-import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { compact, get, isEqual, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
+import React, { FC, FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import {
 	Badge,
+	Button,
 	ButtonToolbar,
 	Flex,
 	IconName,
@@ -30,19 +31,26 @@ import { PickerItem } from '~modules/shared/types/content-picker';
 import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
+import { dataService } from '~modules/shared/services/data-service';
+import { CONTENT_PAGE_QUERIES } from '~modules/content-page/queries/content-pages.queries';
+import { AdminLayout } from '~modules/shared/layouts';
 
-const NavigationEdit: FunctionComponent = () => {
+interface NavigationEditProps {
+	navigationBarId: string;
+	navigationItemId: string | undefined;
+}
+
+const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
 
-	const { menu: menuParentId, id: menuItemId } = Config.getConfig().services.router.useParams(); // TODO test
-	const menuName = startCase(menuParentId);
+	const menuName = startCase(navigationBarId);
 
 	// Hooks
 	const [menuForm, setMenuForm] = useState<Avo.Menu.Menu>(
-		INITIAL_NAVIGATION_FORM(menuParentId ? String(menuParentId) : '0') as Avo.Menu.Menu
+		INITIAL_NAVIGATION_FORM(navigationBarId ? String(navigationBarId) : '0') as Avo.Menu.Menu
 	);
-	const [initialMenuItem, setInitialMenuItem] = useState<Avo.Menu.Menu | null>(null);
+	const [initialNavigationItem, setInitialNavigationItem] = useState<Avo.Menu.Menu | null>(null);
 	const [menuItems, setMenuItems] = useState<Avo.Menu.Menu[]>([]);
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -50,10 +58,14 @@ const NavigationEdit: FunctionComponent = () => {
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
 
+	const getQueries = () => {
+		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+	};
+
 	// Fetch menu items depending on menu parent param
 	// This is necessary for populating the menu parent options for our form
 	useEffect(() => {
-		NavigationService.fetchNavigationItems(menuParentId)
+		NavigationService.fetchNavigationItems(navigationBarId)
 			.then((menuItemsByPosition) => {
 				if (menuItemsByPosition && menuItemsByPosition.length) {
 					setMenuItems(menuItemsByPosition);
@@ -82,20 +94,20 @@ const NavigationEdit: FunctionComponent = () => {
 					type: ToastType.ERROR,
 				});
 			});
-	}, [history, menuName, menuParentId, t]);
+	}, [history, menuName, navigationBarId, t]);
 
 	// Fetch menu item by id
 	useEffect(() => {
-		if (menuItemId) {
+		if (navigationItemId) {
 			setIsLoading(true);
 			// Fetch menu item by id so we can populate our form for editing
-			NavigationService.fetchNavigationItemById(Number(menuItemId))
+			NavigationService.fetchNavigationItemById(Number(navigationItemId))
 				.then((menuItem: Avo.Menu.Menu | null) => {
 					if (menuItem) {
 						// Remove unnecessary props for saving
 						delete (menuItem as any).__typename;
 
-						setInitialMenuItem(menuItem);
+						setInitialNavigationItem(menuItem);
 						setMenuForm({
 							description: menuItem.description || '',
 							icon_name: menuItem.icon_name as IconName,
@@ -113,7 +125,7 @@ const NavigationEdit: FunctionComponent = () => {
 					setIsLoading(false);
 				});
 		}
-	}, [menuItemId, menuParentId]);
+	}, [navigationItemId, navigationBarId]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
@@ -175,50 +187,47 @@ const NavigationEdit: FunctionComponent = () => {
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
 	// TODO -- skipped for  now
-	// useEffect(() => {
-	// 	if (menuForm.content_type === 'CONTENT_PAGE' && menuForm.content_path) {
-	// 		// Check if permissions are more strict than the permissions on the content_page
-	// 		dataService
-	// 			.query({
-	// 				query: GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH,
-	// 				variables: {
-	// 					path: menuForm.content_path,
-	// 				},
-	// 			})
-	// 			.then((response) => {
-	// 				checkMenuItemContentPagePermissionsMismatch(response);
-	// 			})
-	// 			.catch((err) => {
-	// 				console.error(
-	// 					new CustomError('Failed to get permissions from page', err, {
-	// 						query: 'GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH',
-	// 						variables: {
-	// 							path: menuForm.content_path,
-	// 						},
-	// 					})
-	// 				);
-	// 				Config.getConfig().services.toastService.showToast({
-	// 					title: Config.getConfig().services.i18n.t('Error'),
-	// 					description: Config.getConfig().services.i18n.t(
-	// 						'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
-	// 					),
-	// 					type: ToastType.ERROR,
-	// 				});
-	// 			});
-	// 	}
-	// }, [
-	// 	menuForm.content_type,
-	// 	menuForm.content_path,
-	// 	menuForm.user_group_ids,
-	// 	checkMenuItemContentPagePermissionsMismatch,
-	// 	t,
-	// ]);
+	useEffect(() => {
+		if (menuForm.content_type === 'CONTENT_PAGE' && menuForm.content_path) {
+			// Check if permissions are more strict than the permissions on the content_page
+			dataService
+				.query({
+					query: getQueries().GetPermissionsFromContentPageByPathDocument,
+					variables: {
+						path: menuForm.content_path,
+					},
+				})
+				.then((response) => {
+					checkMenuItemContentPagePermissionsMismatch(response);
+				})
+				.catch((err) => {
+					console.error(
+						new CustomError('Failed to get permissions from page', err, {
+							query: 'GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH',
+							variables: {
+								path: menuForm.content_path,
+							},
+						})
+					);
+					Config.getConfig().services.toastService.showToast({
+						title: Config.getConfig().services.i18n.t('Error'),
+						description: Config.getConfig().services.i18n.t(
+							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
+						),
+						type: ToastType.ERROR,
+					});
+				});
+		}
+	}, [
+		menuForm.content_type,
+		menuForm.content_path,
+		menuForm.user_group_ids,
+		checkMenuItemContentPagePermissionsMismatch,
+		t,
+	]);
 
 	// Computed
-	const pageType: NavigationEditPageType = menuItemId ? 'edit' : 'create';
-	const pageTitle = menuParentId
-		? `${menuName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
-		: t('admin/menu/views/menu-edit___navigatie-toevoegen');
+	const pageType: NavigationEditPageType = navigationItemId ? 'edit' : 'create';
 	const menuParentOptions = uniqBy(
 		compact(
 			menuItems.map((menuItem) => {
@@ -286,7 +295,7 @@ const NavigationEdit: FunctionComponent = () => {
 					position: menuItems.length,
 				});
 				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
-					menu: menuForm.placement as string,
+					navigationBarId: menuForm.placement as string,
 				});
 				Config.getConfig().services.toastService.showToast({
 					title: Config.getConfig().services.i18n.t('Success'),
@@ -296,16 +305,16 @@ const NavigationEdit: FunctionComponent = () => {
 					type: ToastType.SUCCESS,
 				});
 			} else {
-				if (isNil(menuItemId)) {
+				if (isNil(navigationItemId)) {
 					throw new CustomError('cannot update menu item because id is undefined', null, {
-						menuItemId,
+						navigationItemId,
 					});
 				}
 				await NavigationService.updateNavigationItems([
 					{
-						...initialMenuItem,
+						...initialNavigationItem,
 						...menuItem,
-						id: +menuItemId,
+						id: +navigationItemId,
 						updated_at: new Date().toISOString(),
 					} as Avo.Menu.Menu,
 				]);
@@ -340,7 +349,7 @@ const NavigationEdit: FunctionComponent = () => {
 	const handleValidation = (): boolean => {
 		const errors: NavigationEditFormErrorState = {};
 
-		if (!menuParentId && !menuForm.placement) {
+		if (!navigationBarId && !menuForm.placement) {
 			errors.placement = t('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
 		}
 
@@ -353,51 +362,41 @@ const NavigationEdit: FunctionComponent = () => {
 		return Object.keys(errors).length === 0;
 	};
 
-	const navigateBack = (): void => {
-		if (menuParentId) {
-			navigate(history, NAVIGATION_PATH.NAVIGATION_DETAIL, {
-				menu: menuParentId,
-			});
-		} else {
-			navigate(history, NAVIGATION_PATH.NAVIGATION_OVERVIEW);
-		}
-	};
-
 	// Render
+	const pageTitle = navigationBarId
+		? `${menuName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
+		: t('admin/menu/views/menu-edit___navigatie-toevoegen');
 	return isLoading ? (
 		<Flex orientation="horizontal" center>
 			<Spinner size="large" />
 		</Flex>
 	) : (
-		// TODO demo page
-		// <AdminLayout
-		// 	onClickBackButton={() => navigate(history, ADMIN_PATH.MENU_OVERVIEW)}
-		// 	pageTitle={pageTitle}
-		// 	size="large"
-		// >
-		// 	<AdminLayoutTopBarRight>
-		// 		<ButtonToolbar>
-		// 			<Button
-		// 				label={t('admin/menu/views/menu-edit___annuleer')}
-		// 				onClick={navigateBack}
-		// 				type="tertiary"
-		// 			/>
-		// 			<Button
-		// 				disabled={isSaving}
-		// 				label={t('admin/menu/views/menu-edit___opslaan')}
-		// 				onClick={handleSave}
-		// 			/>
-		// 		</ButtonToolbar>
-		// 	</AdminLayoutTopBarRight>
-		// 	<AdminLayoutBody>
-		<NavigationEditForm
-			formErrors={formErrors}
-			formState={menuForm}
-			navigationParentId={menuParentId}
-			navigationParentOptions={menuParentOptions}
-			onChange={handleChange}
-			permissionWarning={permissionWarning}
-		/>
+		<AdminLayout pageTitle={pageTitle}>
+			<AdminLayout.Actions>
+				<ButtonToolbar>
+					<Button
+						label={t('admin/menu/views/menu-detail___annuleer')}
+						onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
+						type="tertiary"
+					/>
+					<Button
+						// disabled={isEqual(initialNavigationItems, navigationItems) || isSaving}
+						label={t('admin/menu/views/menu-detail___opslaan')}
+						onClick={() => handleSave()}
+					/>
+				</ButtonToolbar>
+			</AdminLayout.Actions>
+			<AdminLayout.Content>
+				<NavigationEditForm
+					formErrors={formErrors}
+					formState={menuForm}
+					navigationParentId={navigationBarId}
+					navigationParentOptions={menuParentOptions}
+					onChange={handleChange}
+					permissionWarning={permissionWarning}
+				/>
+			</AdminLayout.Content>
+		</AdminLayout>
 	);
 };
 

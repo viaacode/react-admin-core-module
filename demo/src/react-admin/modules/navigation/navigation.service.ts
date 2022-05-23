@@ -6,9 +6,12 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { Config } from '~core/config';
 import { NAVIGATION_QUERIES } from './queries/navigation.queries';
-import { DeleteNavigationItemMutation, GetNavigationItemByIdQuery as GetNavigationItemByIdQueryAvo, InsertNavigationItemMutation, UpdateNavigationItemByIdMutation } from '~generated/graphql-db-types-avo';
-
-const NAV_RESULT_PATH = 'app_content_nav_elements';
+import {
+	DeleteNavigationItemMutation,
+	GetNavigationItemByIdQuery as GetNavigationItemByIdQueryAvo,
+	InsertNavigationItemMutation,
+	UpdateNavigationItemByIdMutation,
+} from '~generated/graphql-db-types-avo';
 
 export class NavigationService {
 	private static getQueries() {
@@ -29,7 +32,11 @@ export class NavigationService {
 				throw new CustomError('Response contains errors', null, { response });
 			}
 
-			return get(response, `data.${NAV_RESULT_PATH}[0]`, null);
+			return (
+				get(response, `data.app_content_nav_elements[0]`) ||
+				get(response, `data.app_navigation[0]`) ||
+				null
+			);
 		} catch (err) {
 			throw new CustomError(`Failed to fetch navigation item by id`, err, {
 				id,
@@ -41,7 +48,9 @@ export class NavigationService {
 	public static async fetchNavigationItems(placement?: string): Promise<Avo.Menu.Menu[]> {
 		try {
 			const queryOptions = {
-				query: placement ? this.getQueries().GetNavigationItemsByPlacementDocument : this.getQueries().GetNavigationElementsDocument,
+				query: placement
+					? this.getQueries().GetNavigationItemsByPlacementDocument
+					: this.getQueries().GetNavigationElementsDocument,
 				variables: placement ? { placement } : {},
 			};
 			const response = await dataService.query(queryOptions);
@@ -53,7 +62,11 @@ export class NavigationService {
 				throw new CustomError('Response contains errors', null, { response });
 			}
 
-			return get(response, `data.${NAV_RESULT_PATH}`, []);
+			return (
+				get(response, `data.app_content_nav_elements`) ||
+				get(response, `data.app_navigation`) ||
+				[]
+			);
 		} catch (err) {
 			throw new CustomError('Failed to fetch navigation items', err, {
 				placement,
@@ -62,7 +75,9 @@ export class NavigationService {
 		}
 	}
 
-	public static async insertNavigationItem(navigationItem: Partial<Avo.Menu.Menu>): Promise<number> {
+	public static async insertNavigationItem(
+		navigationItem: Partial<Avo.Menu.Menu>
+	): Promise<number> {
 		try {
 			const response = await dataService.query<InsertNavigationItemMutation>({
 				query: this.getQueries().InsertNavigationItemDocument,
@@ -75,7 +90,9 @@ export class NavigationService {
 			if (response.errors) {
 				throw new CustomError('GraphQL response contains errors', null, { response });
 			}
-			const id = get(response, 'data.insert_app_content_nav_elements.returning[0].id');
+			const id =
+				get(response, 'data.insert_app_content_nav_elements.returning[0].id') ||
+				get(response, 'data.insert_app_navigation.returning[0].id');
 			if (isNil(id)) {
 				throw new CustomError('Response does not contain inserted id', null, { response });
 			}

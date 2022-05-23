@@ -7,6 +7,7 @@ import {
 	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentAvo,
 	GetContentPagesDocument as GetContentPagesDocumentAvo,
 	GetContentTypesDocument as GetContentTypesDocumentAvo,
+	GetPermissionsFromContentPageByPathDocument as GetPermissionsFromContentPageByPathDocumentAvo,
 	GetPublicContentPagesByTitleDocument as GetPublicContentPagesByTitleDocumentAvo,
 	GetPublicProjectContentPagesByTitleDocument as GetPublicProjectContentPagesByTitleDocumentAvo,
 	GetPublicProjectContentPagesDocument as GetPublicProjectContentPagesDocumentAvo,
@@ -24,6 +25,7 @@ import {
 	GetContentLabelsByContentTypeDocument as GetContentLabelsByContentTypeDocumentHetArchief,
 	GetContentPagesDocument as GetContentPagesDocumentHetArchief,
 	GetContentTypesDocument as GetContentTypesDocumentHetArchief,
+	GetPermissionsFromContentPageByPathDocument as GetPermissionsFromContentPageByPathDocumentHetArchief,
 	GetPublicContentPagesByTitleDocument as GetPublicContentPagesByTitleDocumentHetArchief,
 	GetPublicProjectContentPagesByTitleDocument as GetPublicProjectContentPagesByTitleDocumentHetArchief,
 	GetPublicProjectContentPagesDocument as GetPublicProjectContentPagesDocumentHetArchief,
@@ -44,6 +46,7 @@ type ContentPageQueries = {
 	GetContentLabelsByContentTypeDocument: string;
 	GetContentTypesDocument: string;
 	GetContentByIdDocument: string;
+	GetPermissionsFromContentPageByPathDocument: string;
 	GetPublicProjectContentPagesByTitleDocument: string;
 	GetPublicContentPagesByTitleDocument: string;
 	InsertContentBlocksDocument: string;
@@ -70,6 +73,7 @@ export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> =
 		GetContentTypesDocument: GetContentTypesDocumentAvo,
 		GetContentByIdDocument: GetContentByIdDocumentAvo,
 		GetPublicProjectContentPagesByTitleDocument: GetPublicProjectContentPagesByTitleDocumentAvo,
+		GetPermissionsFromContentPageByPathDocument: GetPermissionsFromContentPageByPathDocumentAvo,
 	},
 	[AvoOrHetArchief.hetArchief]: {
 		GetContentPagesDocument: GetContentPagesDocumentHetArchief,
@@ -88,5 +92,7 @@ export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> =
 		GetContentByIdDocument: GetContentByIdDocumentHetArchief,
 		GetPublicProjectContentPagesByTitleDocument:
 			GetPublicProjectContentPagesByTitleDocumentHetArchief,
+		GetPermissionsFromContentPageByPathDocument:
+			GetPermissionsFromContentPageByPathDocumentHetArchief,
 	},
 };

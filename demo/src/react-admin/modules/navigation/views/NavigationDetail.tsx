@@ -1,5 +1,5 @@
-import { cloneDeep, isNil } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useRef, useState } from 'react';
+import { cloneDeep, isEqual, isNil, startCase } from 'lodash-es';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 import {
 	Button,
@@ -17,19 +17,21 @@ import { NavigationService } from '../navigation.service';
 
 import './NavigationDetail.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingInfo } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { Config, ToastType } from '~core/config';
 import { navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
+import { AdminLayout } from '~modules/shared/layouts';
+import { Loader } from '~modules/shared/components';
 
-const NavigationDetail: FunctionComponent = () => {
+export interface NavigationDetailProps {
+	navigationBarId: string;
+}
+
+const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
-	const { navigationId } = Config.getConfig().services.router.useParams(); // TODO test
 
 	const [activeRow, setActiveRow] = useState<number | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -45,7 +47,7 @@ const NavigationDetail: FunctionComponent = () => {
 
 	const fetchNavigationItems = useCallback(async () => {
 		try {
-			const tempMenuItems = await NavigationService.fetchNavigationItems(navigationId);
+			const tempMenuItems = await NavigationService.fetchNavigationItems(navigationBarId);
 
 			// Set items position property equal to index in array
 			const reindexedMenuItems = reindexNavigationItems(tempMenuItems);
@@ -53,13 +55,13 @@ const NavigationDetail: FunctionComponent = () => {
 			setInitialNavigationItems(reindexedMenuItems);
 			setNavigationItems(reindexedMenuItems);
 		} catch (err) {
-			console.error('Failed to fetch menu items', err, { navigationId });
+			console.error('Failed to fetch menu items', err, { navigationBarId });
 			setLoadingInfo({
 				state: 'error',
 				message: t('admin/menu/views/menu-detail___het-laden-van-de-menu-items-is-mislukt'),
 			});
 		}
-	}, [navigationId, setNavigationItems, setLoadingInfo, t]);
+	}, [navigationBarId, setNavigationItems, setLoadingInfo, t]);
 
 	useEffect(() => {
 		fetchNavigationItems();
@@ -223,28 +225,6 @@ const NavigationDetail: FunctionComponent = () => {
 		const isLast = (i: number) => i === navigationItems.length - 1;
 
 		return (
-			// TODO demo page
-			// <AdminLayout
-			// 	onClickBackButton={() => navigate(history, ADMIN_PATH.MENU_OVERVIEW)}
-			// 	className="c-menu-detail"
-			// 	pageTitle={startCase(navigationId)}
-			// 	size="full-width"
-			// >
-			// 	<AdminLayoutTopBarRight>
-			// 		<ButtonToolbar>
-			// 			<Button
-			// 				label={t('admin/menu/views/menu-detail___annuleer')}
-			// 				onClick={() => handleNavigate(NAVIGATION_PATH.MENU_OVERVIEW)}
-			// 				type="tertiary"
-			// 			/>
-			// 			<Button
-			// 				disabled={isEqual(initialNavigationItems, navigationItems) || isSaving}
-			// 				label={t('admin/menu/views/menu-detail___opslaan')}
-			// 				onClick={() => handleSave()}
-			// 			/>
-			// 		</ButtonToolbar>
-			// 	</AdminLayoutTopBarRight>
-			// 	<AdminLayoutBody>
 			<>
 				<Table align className="c-menu-detail__table" variant="styled">
 					<tbody>
@@ -270,8 +250,8 @@ const NavigationDetail: FunctionComponent = () => {
 												handleNavigate(
 													NAVIGATION_PATH.NAVIGATION_ITEM_EDIT,
 													{
-														menu: navigationId,
-														id: String(item.id),
+														navigationBarId,
+														navigationItemId: String(item.id),
 													}
 												)
 											}
@@ -307,7 +287,7 @@ const NavigationDetail: FunctionComponent = () => {
 							label={t('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
 								handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
-									menu: navigationId,
+									navigationBarId,
 								})
 							}
 							type="primary"
@@ -323,15 +303,32 @@ const NavigationDetail: FunctionComponent = () => {
 		);
 	};
 
-	return (
-		<>
-			<LoadingErrorLoadedComponent
-				loadingInfo={loadingInfo}
-				dataObject={navigationItems}
-				render={renderNavigationDetail}
-			/>
-		</>
-	);
+	const renderPageContent = () => {
+		if (loadingInfo.state === 'loading') {
+			return <Loader />;
+		}
+		return (
+			<AdminLayout pageTitle={t('Navigatie balk: ') + startCase(navigationBarId)}>
+				<AdminLayout.Actions>
+					<ButtonToolbar>
+						<Button
+							label={t('admin/menu/views/menu-detail___annuleer')}
+							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
+							type="tertiary"
+						/>
+						<Button
+							disabled={isEqual(initialNavigationItems, navigationItems) || isSaving}
+							label={t('admin/menu/views/menu-detail___opslaan')}
+							onClick={() => handleSave()}
+						/>
+					</ButtonToolbar>
+				</AdminLayout.Actions>
+				<AdminLayout.Content>{renderNavigationDetail()}</AdminLayout.Content>
+			</AdminLayout>
+		);
+	};
+
+	return renderPageContent();
 };
 
 export default NavigationDetail;

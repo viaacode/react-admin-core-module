@@ -15,7 +15,7 @@ import {
 	GetNavigationItemsByPlacementDocument as GetNavigationItemsByPlacementDocumentHetArchief,
 	InsertNavigationItemDocument as InsertNavigationItemDocumentHetArchief,
 	UpdateNavigationItemByIdDocument as UpdateNavigationItemByIdDocumentHetArchief,
-} from '~generated/graphql-db-types-avo';
+} from '~generated/graphql-db-types-hetarchief';
 
 type NavigationQueries = {
 	DeleteNavigationItemDocument: string;

@@ -34,7 +34,11 @@ const NavigationOverview: FunctionComponent = () => {
 		switch (columnId) {
 			case 'placement':
 				return (
-					<Link to={buildLink(NAVIGATION_PATH.NAVIGATION_DETAIL, { menu: placement })}>
+					<Link
+						to={buildLink(NAVIGATION_PATH.NAVIGATION_DETAIL, {
+							navigationBarId: placement,
+						})}
+					>
 						{startCase(placement || '')}
 					</Link>
 				);
