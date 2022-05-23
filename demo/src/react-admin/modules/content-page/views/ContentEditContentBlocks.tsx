@@ -3,7 +3,6 @@ import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 
-import { ContentBlockForm } from '~modules/content-page/components';
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 import {
 	CONTENT_BLOCK_CONFIG_MAP,
@@ -28,6 +27,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ContentEditContentBlocks.scss';
 import { Config } from '~core/config';
+import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;

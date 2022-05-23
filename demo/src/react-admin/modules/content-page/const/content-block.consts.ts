@@ -13,7 +13,7 @@ import { ContentPicker } from '../../shared/components/ContentPicker/ContentPick
 import { ContentTypeAndLabelsPicker } from '../../shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import { UserGroupSelect } from '../../shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
-import { AlignSelect, ColorSelect, PaddingSelect } from '../components';
+import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';
 import {
 	ANCHOR_LINKS_BLOCK_CONFIG,
 	INITIAL_ANCHOR_LINKS_COMPONENTS_STATE,

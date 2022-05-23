@@ -1,3 +1,3 @@
 export { AlignSelect } from './AlignSelect/AlignSelect';
-export { default as ColorSelect } from './ColorSelect/ColorSelect';
-export { default as PaddingSelect } from './PaddingSelect/PaddingSelect';
+export { ColorSelect } from './ColorSelect/ColorSelect';
+export { PaddingSelect } from './PaddingSelect/PaddingSelect';
