@@ -52,7 +52,7 @@ export const useUserGroupOptions = (
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get user group options', err));
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('Error'),
+					title: Config.getConfig().services.i18n.t('modules/user-group/hooks/use-user-group-options___error'),
 					description: Config.getConfig().services.i18n.t(
 						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
 					),

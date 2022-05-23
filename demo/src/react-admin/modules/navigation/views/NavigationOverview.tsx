@@ -119,7 +119,7 @@ const NavigationOverview: FunctionComponent = () => {
 			return <Loader />;
 		}
 		if (isErrorNavigationItems) {
-			return <div>{t('Het ophalen van de navigatie balken is mislukt')}</div>;
+			return <div>{t('modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt')}</div>;
 		}
 		return renderMenuOverview();
 	};
