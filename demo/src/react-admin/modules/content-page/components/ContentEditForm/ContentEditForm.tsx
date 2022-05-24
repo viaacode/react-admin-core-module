@@ -302,13 +302,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
 												allowedTypes={[ContentPickerType.PROFILE]}
-												onSelect={(value: PickerItem | null) => {
-													if (!value) {
+												onSelect={(item: PickerItem | null) => {
+													if (!item) {
 														return;
 													}
 													changeContentPageProp(
 														'user_profile_id',
-														value.value
+														item.value
 													);
 												}}
 											/>
