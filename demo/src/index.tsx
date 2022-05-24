@@ -33,6 +33,12 @@ function setConfig() {
 				ContentBlockType.PageOverview,
 			],
 		},
+		staticPages: [
+			'/admin/content',
+			'/admin/navigatie',
+			'/admin/gebruikersgroep',
+			'/admin/gebruikers',
+		],
 		icon: {
 			component: ({ name }: any) => <span>{name}</span>,
 			componentProps: {

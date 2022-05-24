@@ -81,18 +81,16 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				if (!hasAppliedInitialItem && initialValue) {
 					items = [
 						{
-							label: get(initialValue, 'label', ''),
-							type: get(initialValue, 'type') as ContentPickerType,
-							value: get(initialValue, 'value', ''),
+							label: initialValue?.label || '',
+							type: initialValue?.type as ContentPickerType,
+							value: initialValue?.value || '',
 						},
-						...items.filter(
-							(item: PickerItem) => item.label !== get(initialValue, 'label')
-						),
+						...items.filter((item: PickerItem) => item.label !== initialValue?.label),
 					];
 				}
 
 				setItemOptions(items);
-				if (keyword && keyword.length && get(items[0], 'value.value', null) === keyword) {
+				if (keyword && keyword.length && (items[0]?.value || null) === keyword) {
 					setSelectedItem(items[0] as any);
 				}
 				return items;
@@ -152,10 +150,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 			return null;
 		}
 
-		const value = get(selectedItem, 'value', null);
+		const value = selectedItem?.value || null;
 
 		// if value of selected item is `null`, throw error
-		if (!get(value, 'value')) {
+		if (!value) {
 			propertyChanged('value', null);
 			setSelectedItem(null);
 			console.error(
@@ -202,13 +200,13 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		if (prop === 'value') {
 			newValue = propValue as string | null;
 		} else if (prop === 'selectedItem') {
-			newValue = get(propValue, 'value.value', null);
-			newLabel = get(propValue, 'label');
+			newValue = (propValue as PickerItem)?.value || null;
+			newLabel = (propValue as PickerItem)?.label;
 		} else if (selectedType.picker === 'TEXT_INPUT') {
 			newValue = input;
 		} else if (selectedType.picker === 'SELECT' && selectedItem) {
-			newLabel = get(selectedItem, 'label');
-			newValue = get(selectedItem, 'value.value');
+			newLabel = selectedItem?.label;
+			newValue = selectedItem?.value;
 		} else {
 			newValue = null;
 		}

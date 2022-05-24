@@ -66,6 +66,7 @@ export interface ConfigValue {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
+	staticPages: string[];
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 	};
