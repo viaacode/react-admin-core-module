@@ -50,6 +50,7 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
@@ -83,7 +84,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	const fetchContentPage = useCallback(async () => {
 		try {
-			if (isNil(id)) {
+			if (isNil(id) || id === ROUTE_PARTS.create) {
 				return;
 			}
 			if (
