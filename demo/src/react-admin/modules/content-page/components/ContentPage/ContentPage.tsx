@@ -156,7 +156,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const renderContentPage = () => {
 		// TODO render <InteractiveTour showButton={false} /> manually in AVO above the content page
 		return (
-			<>
+			<div className="c-content-page-preview">
 				{getContentBlocks(contentPageInfo as ContentPageInfo).map(
 					(contentBlockConfig: ContentBlockConfig) => {
 						return (
@@ -187,7 +187,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 						);
 					}
 				)}
-			</>
+			</div>
 		);
 	};
 

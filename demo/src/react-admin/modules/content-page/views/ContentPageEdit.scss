@@ -1,4 +1,4 @@
-@import "../../shared/styles/settings/colors";
+@import '../../shared/styles/settings/colors';
 
 $content-top-bar-and-tabs-height: 113px;
 
@@ -39,6 +39,7 @@ $content-top-bar-and-tabs-height: 113px;
 	height: calc(100vh - #{$content-top-bar-and-tabs-height});
 	overflow-y: auto;
 	overflow-x: hidden;
+	background-color: white;
 
 	.c-content-block-preview > .o-container {
 		overflow-wrap: break-word;

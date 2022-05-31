@@ -113,6 +113,41 @@ const ContentPageOverview: FunctionComponent = () => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
+	const ownerFilter = (queryWildcard: string): any[] => {
+		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+			return [
+				{
+					owner: {
+						full_name: { _ilike: queryWildcard },
+					},
+				},
+				{
+					owner: {
+						group_name: { _ilike: queryWildcard },
+					},
+				},
+			];
+		}
+		return [
+			{
+				owner_profile: {
+					full_name: {
+						_ilike: queryWildcard,
+					},
+				},
+			},
+			{
+				owner_profile: {
+					group: {
+						label: {
+							_ilike: queryWildcard,
+						},
+					},
+				},
+			},
+		];
+	};
+
 	const fetchContentPages = useCallback(async () => {
 		try {
 			setIsLoading(true);
@@ -123,16 +158,7 @@ const ContentPageOverview: FunctionComponent = () => {
 						{ title: { _ilike: queryWildcard } },
 						{ title: { _ilike: queryWildcard } },
 						{ path: { _ilike: queryWildcard } },
-						{
-							owner: {
-								full_name: { _ilike: queryWildcard },
-							},
-						},
-						{
-							owner: {
-								group_name: { _ilike: queryWildcard },
-							},
-						},
+						...ownerFilter(queryWildcard),
 						{
 							content_content_labels: {
 								content_label: {
