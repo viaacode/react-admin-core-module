@@ -30,7 +30,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		allowMultiple: false,
 		centerHeader: false,
 		headerBackgroundColor: Color.Transparent,
-		contentType: 'PROJECT',
+		contentType: 'FAQ_ITEM',
 		itemStyle: 'NEWS_LIST',
 		showTitle: true,
 		showDescription: true,

@@ -32,7 +32,7 @@ export interface ContentTypeAndLabelsProps {
 
 export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsProps> = ({
 	value = {
-		selectedContentType: 'PROJECT',
+		selectedContentType: 'FAQ_ITEM',
 		selectedLabels: null,
 	},
 	onChange,
