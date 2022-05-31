@@ -30,7 +30,7 @@ import * as path from 'path';
 
 import glob from 'glob';
 import { intersection, kebabCase, keys, without } from 'lodash';
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import sortObject from 'sort-object-keys';
 
 import localTranslations from '../demo/src/translations/nl.json';
@@ -86,7 +86,11 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 	// Find and extract translations, replace strings with translation keys
 	codeFiles.forEach((relativeFilePath: string) => {
 		try {
-			const absoluteFilePath = path.resolve(__dirname, '../demo/src/react-admin', relativeFilePath);
+			const absoluteFilePath = path.resolve(
+				__dirname,
+				'../demo/src/react-admin',
+				relativeFilePath
+			);
 			const content: string = fs.readFileSync(absoluteFilePath).toString();
 
 			// Replace Trans objects
@@ -165,8 +169,8 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 					if ((translationParams || '').includes('(')) {
 						console.warn(
 							'WARNING: Translation params should not contain any function calls, ' +
-							'since the regex replacement cannot deal with brackets inside the t() function. ' +
-							'Store the translation params in a variable before calling the t() function.',
+								'since the regex replacement cannot deal with brackets inside the t() function. ' +
+								'Store the translation params in a variable before calling the t() function.',
 							{
 								match,
 								prefix,
@@ -204,17 +208,19 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 	return newTranslations;
 }
 
-// TODO: re-enable this once online translations are available
-// async function getOnlineTranslations() {
-// 	const response = await fetch(`https://avo2-proxy-qas.hetarchief.be/translations/nl.json`, {
-// 		method: 'GET',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	});
+async function getOnlineTranslations() {
+	const response = await fetch(
+		`https://hetarchief-proxy-qas.hetarchief.be/translations/nl.json`,
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
 
-// 	return (await response.json()).value;
-// }
+	return (await response.json()) as Record<string, string>;
+}
 
 function checkTranslationsForKeysAsValue(translationJson: string) {
 	// Identify  if any translations contain "___", then something went wrong with the translations
@@ -237,8 +243,7 @@ function checkTranslationsForKeysAsValue(translationJson: string) {
 }
 
 async function updateTranslations(): Promise<void> {
-	// const onlineTranslations = await getOnlineTranslations();
-	const onlineTranslations: Record<string, string> = {};
+	const onlineTranslations = await getOnlineTranslations();
 
 	// Extract translations from code and replace code by reference to translation key
 	const codeFiles = await getFilesByGlob('**/*.@(ts|tsx)');
