@@ -170,11 +170,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		const onSearchSubmit = (search: string | undefined) => {
 			if (search) {
 				setSearchResults(
-					permissions?.filter(
-						(permission) =>
-							permission.label.toLowerCase().includes(search.toLowerCase()) ||
-							permission.description.toLowerCase().includes(search.toLowerCase()) ||
-							permission.name.toLowerCase().includes(search.toLowerCase())
+					permissions?.filter((permission) =>
+						permission.label.toLowerCase().includes(search.toLowerCase())
 					)
 				);
 			} else {
