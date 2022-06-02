@@ -8,6 +8,7 @@ import { Config } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
+import { sortBy } from 'lodash-es';
 
 export const USER_GROUP_QUERY_KEYS = {
 	all: ['user-group'] as const,
@@ -24,34 +25,39 @@ export const ITEMS_PER_PAGE = 20;
 
 export const UserGroupTableColumns = (
 	userGroups: UserGroupArchief[],
-	updateUserGroup: (groupId: string, permissionId: string, value: boolean) => void,
+	updateUserGroup: (groupId: string, permissionId: string, value: boolean) => void
 ): (Column<PermissionData> & UseSortByColumnOptions<PermissionData>)[] => [
 	{
 		Header: '',
 		accessor: 'label',
 		disableSortBy: true,
 	},
-	...userGroups.map((group) => {
-
+	...sortBy(userGroups, (userGroup) => userGroup.permissions.length).map((group) => {
 		return {
 			Header: group?.label || '',
 			id: `${group?.name}-${group?.id}`,
-			accessor: (row: PermissionData) => row.name ,
+			accessor: (row: PermissionData) => row.name,
 			disableSortBy: true,
-			Cell: ({row}: PermissionRow) => {
+			Cell: ({ row }: PermissionRow) => {
 				const isChecked = group?.permissions
-					? !!group?.permissions.find((permission: PermissionData) => permission.id === row.original.id)
+					? !!group?.permissions.find(
+							(permission: PermissionData) => permission.id === row.original.id
+					  )
 					: false;
 
-				return <Checkbox
-					checked={isChecked}
-					value={`${group?.name}-${row.original.name}`}
-					onChange={() => updateUserGroup(String(group?.id), row.original.id, !isChecked)}
-				/>
+				return (
+					<Checkbox
+						checked={isChecked}
+						value={`${group?.name}-${row.original.name}`}
+						onChange={() =>
+							updateUserGroup(String(group?.id), row.original.id, !isChecked)
+						}
+					/>
+				);
 			},
-		}
+		};
 	}),
-]
+];
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
