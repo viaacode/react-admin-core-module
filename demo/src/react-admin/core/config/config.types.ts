@@ -70,6 +70,9 @@ export interface ConfigValue {
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 	};
+	navigationBars?: {
+		enableIcons: boolean;
+	};
 	// Secondary services and config
 	services: {
 		assetService: {

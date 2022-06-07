@@ -82,7 +82,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
 			// Go back to overview if no menu items are present
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-edit___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
@@ -183,7 +185,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						})
 					);
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___error'),
+						title: Config.getConfig().services.i18n.t(
+							'modules/navigation/views/navigation-edit___error'
+						),
 						description: Config.getConfig().services.i18n.t(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
 						),
@@ -240,8 +244,12 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		try {
 			if (!navigationItems) {
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___error'),
-					description: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/navigation/views/navigation-edit___error'
+					),
+					description: Config.getConfig().services.i18n.t(
+						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
+					),
 					type: ToastType.ERROR,
 				});
 				return;
@@ -284,7 +292,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					navigationBarId: navigationItem.placement as string,
 				});
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___success'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/navigation/views/navigation-edit___success'
+					),
 					description: Config.getConfig().services.i18n.t(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
 					),
@@ -308,7 +318,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					navigationBarId: navigationItem.placement as string,
 				});
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___success'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/navigation/views/navigation-edit___success'
+					),
 					description: Config.getConfig().services.i18n.t(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
 					),
@@ -322,7 +334,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				})
 			);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-edit___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-edit___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
 				),
@@ -390,6 +404,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						navigationParentOptions={navigationParentOptions}
 						onChange={handleChange}
 						permissionWarning={permissionWarning}
+						enableIcons={Config.getConfig().navigationBars?.enableIcons ?? true}
 					/>
 				</AdminLayout.Content>
 			</AdminLayout>

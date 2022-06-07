@@ -33,6 +33,9 @@ function setConfig() {
 				ContentBlockType.PageOverview,
 			],
 		},
+		navigationBars: {
+			enableIcons: false,
+		},
 		staticPages: [
 			'/admin/content',
 			'/admin/navigatie',
@@ -119,4 +122,4 @@ async function bootstrapApp() {
 	renderApp();
 }
 
-bootstrapApp().catch(err => console.error(err));
+bootstrapApp().catch((err) => console.error(err));
