@@ -374,14 +374,6 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		dataType: 'string',
 	},
 	{
-		id: 'last_access_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
-		sortable: true,
-		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
-	},
-	{
 		id: 'userGroup',
 		label: Config.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
 		sortable: true,
@@ -395,7 +387,6 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
-
 	{
 		id: 'organisation',
 		label: Config.getConfig().services.i18n.t('admin/users/user___organisatie'),
@@ -410,7 +401,14 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
-
+	{
+		id: 'last_access_at',
+		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
+		sortable: true,
+		visibleByDefault: true,
+		filterType: 'DateRangeDropdown',
+		dataType: 'dateTime',
+	},
 	{
 		id: 'idps',
 		label: Config.getConfig().services.i18n.t('admin/users/user___toegang-via'),
