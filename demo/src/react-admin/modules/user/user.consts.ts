@@ -43,7 +43,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 		return getAvoColumns(user, userGroupOptions, companyOptions, businessCategoryOptions, educationLevels, subjects, idps);
 	}
-	return getHetArchiefColumns(userGroupOptions, companyOptions, idps);
+	return getHetArchiefColumns(userGroupOptions, companyOptions);
 };
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<
@@ -343,9 +343,10 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 ];
 
-const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
+const getHetArchiefColumns = (
+	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
-	idps: CheckboxOption[]): FilterableColumn[] => [
+	): FilterableColumn[] => [
 	{
 		id: 'profileId',
 		label: Config.getConfig().services.i18n.t('admin/users/user___id'),

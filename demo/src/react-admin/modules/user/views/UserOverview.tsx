@@ -1,7 +1,7 @@
 import FileSaver from 'file-saver';
 import { compact, first, get, isNil, without } from 'lodash-es';
 import React, {
-	FunctionComponent,
+	FC,
 	ReactText,
 	useCallback,
 	useEffect,
@@ -65,8 +65,9 @@ import {
 	GET_USER_OVERVIEW_TABLE_COLS,
 	ITEMS_PER_PAGE,
 } from '../user.consts';
+import { UserOverviewProps } from './UserOverview.types';
 
-export const UserOverview: FunctionComponent = () => {
+export const UserOverview: FC<UserOverviewProps> = ({customFormatDate}) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -636,7 +637,11 @@ export const UserOverview: FunctionComponent = () => {
 
 			case 'last_access_at': {
 				const lastAccessDate = get(commonUser, 'last_access_at');
-				return !isNil(lastAccessDate) ? formatDate(lastAccessDate) : '-';
+				return !isNil(lastAccessDate)
+					? customFormatDate
+						? customFormatDate(lastAccessDate)
+						: formatDate(lastAccessDate)
+					: '-';
 			}
 			case 'temp_access': {
 				const tempAccess = get(commonUser, 'user.temp_access.current.status');

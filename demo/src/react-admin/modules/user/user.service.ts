@@ -66,6 +66,7 @@ export class UserService {
 						user.maintainer_users_profiles?.[0]?.maintainer?.information?.[0]?.logo
 							?.iri,
 				},
+				last_access_at: user.last_access_at,
 			};
 		} else {
 			const user = userProfile as ProfileAvo;
