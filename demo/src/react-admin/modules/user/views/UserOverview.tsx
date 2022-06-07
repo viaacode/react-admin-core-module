@@ -280,7 +280,7 @@ export const UserOverview: FunctionComponent = () => {
 					},
 					{
 						group: {
-							name: {
+							label: {
 								_ilike: query,
 							},
 						},
