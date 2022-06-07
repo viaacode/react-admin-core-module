@@ -409,16 +409,6 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		filterType: 'DateRangeDropdown',
 		dataType: 'dateTime',
 	},
-	{
-		id: 'idps',
-		label: Config.getConfig().services.i18n.t('admin/users/user___toegang-via'),
-		sortable: false,
-		visibleByDefault: false,
-		filterType: 'CheckboxDropdownModal',
-		filterProps: {
-			options: [...idps, { label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
-		} as CheckboxDropdownModalProps,
-	},
 ];
 
 export const GET_USER_BULK_ACTIONS = (user: CommonUser | undefined, bulkActions: UserBulkAction[]): UserBulkActionOption[] => {
