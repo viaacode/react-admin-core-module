@@ -2796,6 +2796,8 @@ export type Lookup_Maintainer_Visitor_Space_Request_Status_Variance_Fields = {
 export type Lookup_Maintainer_Visitor_Space_Status = {
   __typename?: 'lookup_maintainer_visitor_space_status';
   comment?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  sort_order?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   value: Scalars['String'];
 };
 
@@ -2827,6 +2829,7 @@ export type Lookup_Maintainer_Visitor_Space_Status_Bool_Exp = {
   _not?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Bool_Exp>;
   _or?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Bool_Exp>>;
   comment?: InputMaybe<String_Comparison_Exp>;
+  sort_order?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -2857,6 +2860,7 @@ export type Lookup_Maintainer_Visitor_Space_Status_Enum_Comparison_Exp = {
 /** input type for inserting data into table "lookup.maintainer_visitor_space_status" */
 export type Lookup_Maintainer_Visitor_Space_Status_Insert_Input = {
   comment?: InputMaybe<Scalars['String']>;
+  sort_order?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Obj_Rel_Insert_Input>;
   value?: InputMaybe<Scalars['String']>;
 };
 
@@ -2883,6 +2887,13 @@ export type Lookup_Maintainer_Visitor_Space_Status_Mutation_Response = {
   returning: Array<Lookup_Maintainer_Visitor_Space_Status>;
 };
 
+/** input type for inserting object relation for remote table "lookup.maintainer_visitor_space_status" */
+export type Lookup_Maintainer_Visitor_Space_Status_Obj_Rel_Insert_Input = {
+  data: Lookup_Maintainer_Visitor_Space_Status_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_On_Conflict>;
+};
+
 /** on_conflict condition type for table "lookup.maintainer_visitor_space_status" */
 export type Lookup_Maintainer_Visitor_Space_Status_On_Conflict = {
   constraint: Lookup_Maintainer_Visitor_Space_Status_Constraint;
@@ -2893,6 +2904,7 @@ export type Lookup_Maintainer_Visitor_Space_Status_On_Conflict = {
 /** Ordering options when selecting data from "lookup.maintainer_visitor_space_status". */
 export type Lookup_Maintainer_Visitor_Space_Status_Order_By = {
   comment?: InputMaybe<Order_By>;
+  sort_order?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -2913,6 +2925,187 @@ export enum Lookup_Maintainer_Visitor_Space_Status_Select_Column {
 export type Lookup_Maintainer_Visitor_Space_Status_Set_Input = {
   comment?: InputMaybe<Scalars['String']>;
   value?: InputMaybe<Scalars['String']>;
+};
+
+/** columns and relationships of "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order';
+  sort_order: Scalars['Int'];
+  status: Lookup_Maintainer_Visitor_Space_Status_Enum;
+};
+
+/** aggregated selection of "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_aggregate';
+  aggregate?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate_Fields>;
+  nodes: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
+};
+
+/** aggregate fields of "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_aggregate_fields';
+  avg?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Max_Fields>;
+  min?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Min_Fields>;
+  stddev?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Fields>;
+  stddev_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Samp_Fields>;
+  sum?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Sum_Fields>;
+  var_pop?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Var_Pop_Fields>;
+  var_samp?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Var_Samp_Fields>;
+  variance?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Variance_Fields>;
+};
+
+
+/** aggregate fields of "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Avg_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_avg_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.maintainer_visitor_space_status_sort_order". All fields are combined with a logical 'AND'. */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>>;
+  sort_order?: InputMaybe<Int_Comparison_Exp>;
+  status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.maintainer_visitor_space_status_sort_order" */
+export enum Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Constraint {
+  /** unique or primary key constraint */
+  MaintainerVisitorSpaceStatusSortOrderPkey = 'maintainer_visitor_space_status_sort_order_pkey',
+  /** unique or primary key constraint */
+  MaintainerVisitorSpaceStatusSortOrderSortOrderKey = 'maintainer_visitor_space_status_sort_order_sort_order_key'
+}
+
+/** input type for incrementing numeric columns in table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Inc_Input = {
+  sort_order?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Insert_Input = {
+  sort_order?: InputMaybe<Scalars['Int']>;
+  status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum>;
+};
+
+/** aggregate max on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Max_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_max_fields';
+  sort_order?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Min_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_min_fields';
+  sort_order?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Mutation_Response = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
+};
+
+/** input type for inserting object relation for remote table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Obj_Rel_Insert_Input = {
+  data: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_On_Conflict>;
+};
+
+/** on_conflict condition type for table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_On_Conflict = {
+  constraint: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Constraint;
+  update_columns?: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Update_Column>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.maintainer_visitor_space_status_sort_order". */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By = {
+  sort_order?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup_maintainer_visitor_space_status_sort_order */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Pk_Columns_Input = {
+  status: Lookup_Maintainer_Visitor_Space_Status_Enum;
+};
+
+/** select columns of table "lookup.maintainer_visitor_space_status_sort_order" */
+export enum Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column {
+  /** column name */
+  SortOrder = 'sort_order',
+  /** column name */
+  Status = 'status'
+}
+
+/** input type for updating data in table "lookup.maintainer_visitor_space_status_sort_order" */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Set_Input = {
+  sort_order?: InputMaybe<Scalars['Int']>;
+  status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum>;
+};
+
+/** aggregate stddev on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_stddev_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Pop_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_stddev_pop_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Stddev_Samp_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_stddev_samp_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Sum_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_sum_fields';
+  sort_order?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "lookup.maintainer_visitor_space_status_sort_order" */
+export enum Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Update_Column {
+  /** column name */
+  SortOrder = 'sort_order',
+  /** column name */
+  Status = 'status'
+}
+
+/** aggregate var_pop on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Var_Pop_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_var_pop_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Var_Samp_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_var_samp_fields';
+  sort_order?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Variance_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_status_sort_order_variance_fields';
+  sort_order?: Maybe<Scalars['Float']>;
 };
 
 /** update columns of table "lookup.maintainer_visitor_space_status" */
@@ -3800,6 +3993,8 @@ export type Maintainer_Visitor_Space = {
   schema_service_description?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   status: Lookup_Maintainer_Visitor_Space_Status_Enum;
+  /** An object relationship */
+  status_info: Lookup_Maintainer_Visitor_Space_Status;
   updated_at?: Maybe<Scalars['timestamp']>;
   /** An array relationship */
   visitor_space_requests: Array<Maintainer_Visitor_Space_Request>;
@@ -3867,6 +4062,7 @@ export type Maintainer_Visitor_Space_Bool_Exp = {
   schema_service_description?: InputMaybe<String_Comparison_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum_Comparison_Exp>;
+  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Bool_Exp>;
   updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
   visitor_space_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
 };
@@ -3896,6 +4092,7 @@ export type Maintainer_Visitor_Space_Insert_Input = {
   schema_service_description?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum>;
+  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Obj_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
   visitor_space_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Arr_Rel_Insert_Input>;
 };
@@ -3968,6 +4165,7 @@ export type Maintainer_Visitor_Space_Order_By = {
   schema_service_description?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
+  status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   visitor_space_requests_aggregate?: InputMaybe<Maintainer_Visitor_Space_Request_Aggregate_Order_By>;
 };
@@ -4659,6 +4857,10 @@ export type Mutation_Root = {
   delete_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** delete single row from the table: "lookup.maintainer_visitor_space_status" */
   delete_lookup_maintainer_visitor_space_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status>;
+  /** delete data from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  delete_lookup_maintainer_visitor_space_status_sort_order?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Mutation_Response>;
+  /** delete single row from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  delete_lookup_maintainer_visitor_space_status_sort_order_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   /** delete data from the table: "lookup.schema_audience_type" */
   delete_lookup_schema_audience_type?: Maybe<Lookup_Schema_Audience_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.schema_audience_type" */
@@ -4795,6 +4997,10 @@ export type Mutation_Root = {
   insert_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** insert a single row into the table: "lookup.maintainer_visitor_space_status" */
   insert_lookup_maintainer_visitor_space_status_one?: Maybe<Lookup_Maintainer_Visitor_Space_Status>;
+  /** insert data into the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  insert_lookup_maintainer_visitor_space_status_sort_order?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Mutation_Response>;
+  /** insert a single row into the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  insert_lookup_maintainer_visitor_space_status_sort_order_one?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   /** insert data into the table: "lookup.schema_audience_type" */
   insert_lookup_schema_audience_type?: Maybe<Lookup_Schema_Audience_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.schema_audience_type" */
@@ -4931,6 +5137,10 @@ export type Mutation_Root = {
   update_lookup_maintainer_visitor_space_status?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Mutation_Response>;
   /** update single row of the table: "lookup.maintainer_visitor_space_status" */
   update_lookup_maintainer_visitor_space_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status>;
+  /** update data of the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  update_lookup_maintainer_visitor_space_status_sort_order?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Mutation_Response>;
+  /** update single row of the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  update_lookup_maintainer_visitor_space_status_sort_order_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   /** update data of the table: "lookup.schema_audience_type" */
   update_lookup_schema_audience_type?: Maybe<Lookup_Schema_Audience_Type_Mutation_Response>;
   /** update single row of the table: "lookup.schema_audience_type" */
@@ -5163,6 +5373,18 @@ export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_StatusArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Status_By_PkArgs = {
   value: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Status_Sort_OrderArgs = {
+  where: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Status_Sort_Order_By_PkArgs = {
+  status: Lookup_Maintainer_Visitor_Space_Status_Enum;
 };
 
 
@@ -5596,6 +5818,20 @@ export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_StatusArgs = {
 export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Status_OneArgs = {
   object: Lookup_Maintainer_Visitor_Space_Status_Insert_Input;
   on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Status_Sort_OrderArgs = {
+  objects: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Status_Sort_Order_OneArgs = {
+  object: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_On_Conflict>;
 };
 
 
@@ -6128,6 +6364,22 @@ export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_StatusArgs = {
 export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Status_By_PkArgs = {
   _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Set_Input>;
   pk_columns: Lookup_Maintainer_Visitor_Space_Status_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Status_Sort_OrderArgs = {
+  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Inc_Input>;
+  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Set_Input>;
+  where: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Status_Sort_Order_By_PkArgs = {
+  _inc?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Inc_Input>;
+  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Set_Input>;
+  pk_columns: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Pk_Columns_Input;
 };
 
 
@@ -8368,6 +8620,12 @@ export type Query_Root = {
   lookup_maintainer_visitor_space_status_aggregate: Lookup_Maintainer_Visitor_Space_Status_Aggregate;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" using primary key columns */
   lookup_maintainer_visitor_space_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status>;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  lookup_maintainer_visitor_space_status_sort_order: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
+  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  lookup_maintainer_visitor_space_status_sort_order_aggregate: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_status_sort_order" using primary key columns */
+  lookup_maintainer_visitor_space_status_sort_order_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   /** fetch data from the table: "lookup.schema_audience_type" */
   lookup_schema_audience_type: Array<Lookup_Schema_Audience_Type>;
   /** fetch aggregated fields from the table: "lookup.schema_audience_type" */
@@ -8784,6 +9042,29 @@ export type Query_RootLookup_Maintainer_Visitor_Space_Status_AggregateArgs = {
 
 export type Query_RootLookup_Maintainer_Visitor_Space_Status_By_PkArgs = {
   value: Scalars['String'];
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Status_Sort_OrderArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Status_Sort_Order_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Status_Sort_Order_By_PkArgs = {
+  status: Lookup_Maintainer_Visitor_Space_Status_Enum;
 };
 
 
@@ -9403,6 +9684,12 @@ export type Subscription_Root = {
   lookup_maintainer_visitor_space_status_aggregate: Lookup_Maintainer_Visitor_Space_Status_Aggregate;
   /** fetch data from the table: "lookup.maintainer_visitor_space_status" using primary key columns */
   lookup_maintainer_visitor_space_status_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status>;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  lookup_maintainer_visitor_space_status_sort_order: Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
+  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_status_sort_order" */
+  lookup_maintainer_visitor_space_status_sort_order_aggregate: Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Aggregate;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_status_sort_order" using primary key columns */
+  lookup_maintainer_visitor_space_status_sort_order_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order>;
   /** fetch data from the table: "lookup.schema_audience_type" */
   lookup_schema_audience_type: Array<Lookup_Schema_Audience_Type>;
   /** fetch aggregated fields from the table: "lookup.schema_audience_type" */
@@ -9819,6 +10106,29 @@ export type Subscription_RootLookup_Maintainer_Visitor_Space_Status_AggregateArg
 
 export type Subscription_RootLookup_Maintainer_Visitor_Space_Status_By_PkArgs = {
   value: Scalars['String'];
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Status_Sort_OrderArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Status_Sort_Order_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Sort_Order_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Status_Sort_Order_By_PkArgs = {
+  status: Lookup_Maintainer_Visitor_Space_Status_Enum;
 };
 
 
