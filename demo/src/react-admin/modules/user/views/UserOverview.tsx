@@ -1,13 +1,6 @@
 import FileSaver from 'file-saver';
 import { compact, first, get, isNil, without } from 'lodash-es';
-import React, {
-	FunctionComponent,
-	ReactText,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import React, { FC, ReactText, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Config, ToastType } from '~core/config';
 
@@ -65,8 +58,9 @@ import {
 	GET_USER_OVERVIEW_TABLE_COLS,
 	ITEMS_PER_PAGE,
 } from '../user.consts';
+import { UserOverviewProps } from './UserOverview.types';
 
-export const UserOverview: FunctionComponent = () => {
+export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -280,7 +274,7 @@ export const UserOverview: FunctionComponent = () => {
 					},
 					{
 						group: {
-							name: {
+							label: {
 								_ilike: query,
 							},
 						},
@@ -300,6 +294,8 @@ export const UserOverview: FunctionComponent = () => {
 				true
 			)
 		);
+
+		andFilters.push(...getDateRangeFilters(filters, ['last_access_at'], ['last_access_at']));
 
 		if (onlySelectedProfiles) {
 			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
@@ -636,7 +632,11 @@ export const UserOverview: FunctionComponent = () => {
 
 			case 'last_access_at': {
 				const lastAccessDate = get(commonUser, 'last_access_at');
-				return !isNil(lastAccessDate) ? formatDate(lastAccessDate) : '-';
+				return !isNil(lastAccessDate)
+					? customFormatDate
+						? customFormatDate(lastAccessDate)
+						: formatDate(lastAccessDate)
+					: '-';
 			}
 			case 'temp_access': {
 				const tempAccess = get(commonUser, 'user.temp_access.current.status');
@@ -740,7 +740,9 @@ export const UserOverview: FunctionComponent = () => {
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
 					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user, bulkActions)}
-					rowKey={(row: Avo.User.Profile) => row.id || get(row, 'user.mail')}
+					rowKey={(row: CommonUser) =>
+						row?.profileId || row?.userId || get(row, 'user.mail')
+					}
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}

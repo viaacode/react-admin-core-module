@@ -43,7 +43,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 		return getAvoColumns(user, userGroupOptions, companyOptions, businessCategoryOptions, educationLevels, subjects, idps);
 	}
-	return getHetArchiefColumns(userGroupOptions, companyOptions, idps);
+	return getHetArchiefColumns(userGroupOptions, companyOptions);
 };
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<
@@ -343,9 +343,10 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 ];
 
-const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
+const getHetArchiefColumns = (
+	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
-	idps: CheckboxOption[]): FilterableColumn[] => [
+	): FilterableColumn[] => [
 	{
 		id: 'profileId',
 		label: Config.getConfig().services.i18n.t('admin/users/user___id'),
@@ -374,14 +375,6 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		dataType: 'string',
 	},
 	{
-		id: 'last_access_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
-		sortable: true,
-		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
-	},
-	{
 		id: 'userGroup',
 		label: Config.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
 		sortable: true,
@@ -395,7 +388,6 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
-
 	{
 		id: 'organisation',
 		label: Config.getConfig().services.i18n.t('admin/users/user___organisatie'),
@@ -410,16 +402,13 @@ const getHetArchiefColumns = (userGroupOptions: CheckboxOption[],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
-
 	{
-		id: 'idps',
-		label: Config.getConfig().services.i18n.t('admin/users/user___toegang-via'),
-		sortable: false,
-		visibleByDefault: false,
-		filterType: 'CheckboxDropdownModal',
-		filterProps: {
-			options: [...idps, { label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
-		} as CheckboxDropdownModalProps,
+		id: 'last_access_at',
+		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
+		sortable: true,
+		visibleByDefault: true,
+		filterType: 'DateRangeDropdown',
+		dataType: 'dateTime',
 	},
 ];
 
