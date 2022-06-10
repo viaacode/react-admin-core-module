@@ -47,7 +47,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 		// Use data (userGroups) as original state
 		// Current state keeps track of table state
-		const [currentState, setCurrentState] = useState<UserGroupArchief[] | undefined>(undefined);
+		const [currentUserGroups, setCurrentUserGroups] = useState<UserGroupArchief[] | undefined>(
+			undefined
+		);
 		// Updated checkboxes are saved separately
 		const [userGroupUpdates, setUserGroupUpdates] = useState<UserGroupUpdate[]>([]);
 		const [search, setSearch] = useState<string | undefined>(undefined);
@@ -61,12 +63,12 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			permissionId: string,
 			hasPermission: boolean
 		) => {
-			if (!userGroupId || !permissionId || !currentState || !permissions) {
+			if (!userGroupId || !permissionId || !currentUserGroups || !permissions) {
 				return;
 			}
 
-			const newState = cloneDeep(currentState);
-			const userGroup = newState.find((group) => group.id === userGroupId);
+			const userGroups = cloneDeep(currentUserGroups);
+			const userGroup = userGroups.find((group) => group.id === userGroupId);
 
 			if (!userGroup) {
 				return;
@@ -80,14 +82,14 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 			if (removed.length) {
 				// Permission was removed
-				setCurrentState(newState);
+				setCurrentUserGroups(userGroups);
 			} else {
 				// Permission was not present
 				const newPermission = permissions.find(
 					(permission) => permission.id === permissionId
 				);
 				newPermission && userGroup.permissions.push(newPermission);
-				setCurrentState(newState);
+				setCurrentUserGroups(userGroups);
 			}
 
 			// Update changelog
@@ -120,7 +122,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		};
 
 		const onClickCancel = () => {
-			setCurrentState(cloneDeep(userGroups));
+			setCurrentUserGroups(cloneDeep(userGroups));
 			setUserGroupUpdates([]);
 
 			// Fire onChange for parent component
@@ -196,7 +198,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		useEffect(() => {
 			if (userGroups?.length && permissions) {
 				// Initialize states
-				!currentState && setCurrentState(cloneDeep(userGroups));
+				!currentUserGroups && setCurrentUserGroups(cloneDeep(userGroups));
 				setLoadingInfo({ state: 'loaded' });
 			}
 		}, [userGroups, permissions]);
@@ -258,7 +260,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		 */
 
 		const renderUserGroupOverview = () => {
-			if (!currentState) {
+			if (!currentUserGroups) {
 				return null;
 			}
 
@@ -285,7 +287,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							/* eslint-disable @typescript-eslint/ban-types */
 							{
 								columns: UserGroupTableColumns(
-									currentState,
+									currentUserGroups,
 									updateUserGroup
 								) as Column<object>[],
 								data: searchResults || permissions || [],
