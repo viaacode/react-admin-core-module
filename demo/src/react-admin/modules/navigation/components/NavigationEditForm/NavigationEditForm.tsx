@@ -26,6 +26,7 @@ interface NavigationEditFormProps {
 		value: ValueOf<NavigationItem> | PickerItem | null
 	) => void;
 	permissionWarning: ReactNode | null;
+	enableIcons: boolean;
 }
 
 const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
@@ -35,6 +36,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	navigationParentOptions,
 	onChange,
 	permissionWarning,
+	enableIcons,
 }) => {
 	const { t } = useTranslation();
 
@@ -78,15 +80,18 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					/>
 				</FormGroup>
 			)}
-			<FormGroup label={t('admin/menu/components/menu-edit-form/menu-edit-form___icoon')}>
-				<IconPicker
-					options={GET_ADMIN_ICON_OPTIONS()}
-					onChange={(option: any) => onChange('icon_name', get(option, 'value', ''))}
-					value={GET_ADMIN_ICON_OPTIONS().find(
-						(option: ReactSelectOption<string>) => option.value === formState.icon_name
-					)}
-				/>
-			</FormGroup>
+			{enableIcons && (
+				<FormGroup label={t('admin/menu/components/menu-edit-form/menu-edit-form___icoon')}>
+					<IconPicker
+						options={GET_ADMIN_ICON_OPTIONS()}
+						onChange={(option: any) => onChange('icon_name', get(option, 'value', ''))}
+						value={GET_ADMIN_ICON_OPTIONS().find(
+							(option: ReactSelectOption<string>) =>
+								option.value === formState.icon_name
+						)}
+					/>
+				</FormGroup>
+			)}
 			<FormGroup
 				error={formErrors.label}
 				label={t('admin/menu/components/menu-edit-form/menu-edit-form___label')}

@@ -63,8 +63,7 @@ export class UserService {
 					name: user.maintainer_users_profiles?.[0]?.maintainer.schema_name || undefined,
 					or_id: user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
 					logo_url:
-						user.maintainer_users_profiles?.[0]?.maintainer?.information?.[0]?.logo
-							?.iri,
+						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
 				},
 				last_access_at: user.last_access_at,
 			};
