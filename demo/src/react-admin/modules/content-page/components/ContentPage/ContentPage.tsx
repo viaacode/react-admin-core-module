@@ -7,6 +7,7 @@ import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 
+import { Config } from "~core/config";
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -17,6 +18,7 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 type ContentPageDetailProps =
 	| {
@@ -100,8 +102,8 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 			return contentBlockConfig;
 		});
 
-		// Add page title as header block for faq items
-		if (contentPageInfo.content_type === 'FAQ_ITEM') {
+		// Add page title as header block for faq items. Only for Avo
+		if (contentPageInfo.content_type === 'FAQ_ITEM' && Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 			contentBlockBlockConfigs = [
 				{
 					position: 0,
