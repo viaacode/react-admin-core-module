@@ -21,7 +21,7 @@ import {
 } from './defaults';
 
 import { Config } from '~core/config';
-import { GET_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF, GET_BACKGROUND_COLOR_OPTIONS_AVO } from '~modules/content-page/const/content-block.common.consts';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',
@@ -131,7 +131,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/ctas___achtergrond-kleur'
 				),
-				GET_BACKGROUND_COLOR_OPTIONS()[1]
+				Config.getConfig().database.databaseApplicationType === 'avo' ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1],
 			),
 		},
 	},

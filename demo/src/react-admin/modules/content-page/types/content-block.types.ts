@@ -56,6 +56,7 @@ export enum Color {
 	Blue = '#4D76F3',
 	SoftBlue = '#8AC1CE',
 	OceanGreen = '#00C8AA',
+	SeaGreen = '#009690',
 	Silver = '#DBDBDB',
 	Tapestry = '#B75B99',
 	WineRed = '#98485C',
@@ -71,6 +72,9 @@ export enum Color {
 	BorderColor = '#3FB1D6',
 	InputBoxShadow = '#69C2dF',
 	Transparent = 'transparent',
+	Platinum = '#f8f8f8',
+	Neutral = '#727272',
+	Zinc = '#adadad',
 }
 
 export interface PaddingFieldState {

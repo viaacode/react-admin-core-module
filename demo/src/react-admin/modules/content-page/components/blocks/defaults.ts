@@ -7,8 +7,10 @@ import { RichTextEditorWrapperProps } from '../../../shared/components/RichTextE
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	GET_ALIGN_OPTIONS,
-	GET_BACKGROUND_COLOR_OPTIONS,
-	GET_FOREGROUND_COLOR_OPTIONS,
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '../../const/content-block.common.consts';
 import {
 	Color,
@@ -19,6 +21,7 @@ import {
 } from '../../types/content-block.types';
 
 import { Config } from '~core/config';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -48,7 +51,7 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 		Config.getConfig().services.i18n.t(
 			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
 		),
-		GET_BACKGROUND_COLOR_OPTIONS()[1]
+		Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
 	padding: PADDING_FIELD(
 		Config.getConfig().services.i18n.t(
@@ -85,8 +88,8 @@ export const FOREGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: GET_FOREGROUND_COLOR_OPTIONS(),
-		defaultValue: defaultValue || GET_FOREGROUND_COLOR_OPTIONS()[0],
+		options: Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_FOREGROUND_COLOR_OPTIONS_AVO() : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue: defaultValue || Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0] : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
 });
 
@@ -97,8 +100,8 @@ export const BACKGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: GET_BACKGROUND_COLOR_OPTIONS(),
-		defaultValue: defaultValue || GET_BACKGROUND_COLOR_OPTIONS()[0],
+		options: Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue: defaultValue || Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
 });
 
