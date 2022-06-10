@@ -26,11 +26,15 @@ function setConfig() {
 		contentPage: {
 			availableContentBlocks: [
 				ContentBlockType.Heading,
+				ContentBlockType.Intro,
 				ContentBlockType.RichText,
 				ContentBlockType.RichTextTwoColumns,
 				ContentBlockType.Buttons,
 				ContentBlockType.Image,
+				ContentBlockType.ImageGrid,
 				ContentBlockType.PageOverview,
+				ContentBlockType.UspGrid,
+				ContentBlockType.Quote,
 			],
 		},
 		navigationBars: {
