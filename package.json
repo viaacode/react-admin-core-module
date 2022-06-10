@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/react-admin",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "description": "React admin app for meemoo projects",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -51,7 +51,7 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "^2.8.8",
-    "@meemoo/react-components": "2.15.0",
+    "@meemoo/react-components": "2.16.1",
     "@viaa/avo2-components": "^2.0.5",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
