@@ -1,13 +1,6 @@
 import FileSaver from 'file-saver';
 import { compact, first, get, isNil, without } from 'lodash-es';
-import React, {
-	FC,
-	ReactText,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import React, { FC, ReactText, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Config, ToastType } from '~core/config';
 
@@ -67,7 +60,7 @@ import {
 } from '../user.consts';
 import { UserOverviewProps } from './UserOverview.types';
 
-export const UserOverview: FC<UserOverviewProps> = ({customFormatDate}) => {
+export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
 	const { t } = useTranslation();
 	const history = Config.getConfig().services.router.useHistory();
@@ -301,6 +294,8 @@ export const UserOverview: FC<UserOverviewProps> = ({customFormatDate}) => {
 				true
 			)
 		);
+
+		andFilters.push(...getDateRangeFilters(filters, ['last_access_at'], ['last_access_at']));
 
 		if (onlySelectedProfiles) {
 			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
@@ -745,7 +740,9 @@ export const UserOverview: FC<UserOverviewProps> = ({customFormatDate}) => {
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
 					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user, bulkActions)}
-					rowKey={(row: Avo.User.Profile) => row.id || get(row, 'user.mail')}
+					rowKey={(row: CommonUser) =>
+						row?.profileId || row?.userId || get(row, 'user.mail')
+					}
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}
