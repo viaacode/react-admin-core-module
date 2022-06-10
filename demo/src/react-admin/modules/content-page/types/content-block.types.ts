@@ -252,6 +252,7 @@ export interface KlaarBlockComponentState {
 
 export interface IntroBlockComponentState {
 	title: string;
+	headingType: HeadingTypeOption
 	content: string;
 	align: AlignOption;
 }
