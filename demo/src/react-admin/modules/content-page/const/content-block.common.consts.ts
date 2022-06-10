@@ -53,14 +53,35 @@ const oceanGreenOption = () => ({
 	label: Config.getConfig().services.i18n.t('admin/content-block/content-block___oceaangroen'),
 	value: Color.OceanGreen,
 });
+const seaGreenOption = () => ({
+	label: Config.getConfig().services.i18n.t('Zeegroen'),
+	value: Color.SeaGreen,
+});
 const yellowOption = () => ({
 	label: Config.getConfig().services.i18n.t(
 		'admin/content-block/content-block___leerlingen-geel'
 	),
 	value: Color.Yellow,
 });
+const platinumOption = () => ({
+	label: Config.getConfig().services.i18n.t('Platinum'),
+	value: Color.Platinum,
+});
+const blackOption = () => ({
+	label: Config.getConfig().services.i18n.t('Zwart'),
+	value: Color.Black,
+});
+const neutralOption = () => ({
+	label: Config.getConfig().services.i18n.t('Neutraal'),
+	value: Color.Neutral,
+});
+const zincOption = () => ({
+	label: Config.getConfig().services.i18n.t('Zinc'),
+	value: Color.Zinc,
+});
 
-export const GET_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
+//
+export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	transparentOption(),
 	whiteOption(),
 	gray50Option(),
@@ -70,6 +91,15 @@ export const GET_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
 	tealBrightOption(),
 	oceanGreenOption(),
 	yellowOption(),
+];
+
+export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
+	transparentOption(),
+	whiteOption(),
+	oceanGreenOption(),
+	seaGreenOption(),
+	platinumOption(),
+	blackOption(),
 ];
 
 export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
@@ -87,7 +117,9 @@ export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => Color[] = () => [
 	Color.Teal,
 	Color.TealBright,
 	Color.OceanGreen,
+	Color.SeaGreen,
 	Color.Yellow,
+	Color.Black,
 ];
 
 export const GET_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [
@@ -274,7 +306,7 @@ export const GET_PAGE_OVERVIEW_ORDER_OPTIONS: () => SelectOption<PageOverviewOrd
 		},
 	];
 
-export const GET_FOREGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
+export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{
 		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___zwart'),
 		value: Color.Black,
@@ -293,6 +325,15 @@ export const GET_FOREGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
 		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___wit'),
 		value: Color.White,
 	},
+];
+
+export const GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
+	blackOption(),
+	whiteOption(),
+	neutralOption(),
+	zincOption(),
+	oceanGreenOption(),
+	seaGreenOption(),
 ];
 
 export const GET_ALIGN_OPTIONS: () => { label: string; value: AlignOption }[] = () => [

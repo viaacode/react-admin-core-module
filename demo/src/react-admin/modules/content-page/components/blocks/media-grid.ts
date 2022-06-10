@@ -3,7 +3,8 @@ import { CheckboxProps, ContentPickerType, MultiRangeProps } from '@viaa/avo2-co
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import {
-	GET_BACKGROUND_COLOR_OPTIONS,
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 	GET_BUTTON_TYPE_OPTIONS,
 	GET_FULL_HEADING_TYPE_OPTIONS,
 } from '../../const/content-block.common.consts';
@@ -24,6 +25,7 @@ import {
 } from './defaults';
 
 import { Config } from '~core/config';
+import { AvoOrHetArchief } from '~modules/shared/types';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 
@@ -238,7 +240,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				Config.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'
 				),
-				GET_BACKGROUND_COLOR_OPTIONS()[1]
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			ctaBackgroundImage: {
 				label: Config.getConfig().services.i18n.t(
