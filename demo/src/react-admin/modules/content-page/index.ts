@@ -1,3 +1,5 @@
+export { ContentWidth } from '~modules/content-page/types/content-pages.types';
+
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
 export { default as ContentPageOverview } from './views/ContentPageOverview';

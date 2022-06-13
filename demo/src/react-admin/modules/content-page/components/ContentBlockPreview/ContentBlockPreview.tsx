@@ -5,7 +5,7 @@ import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } f
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/content-block.common.consts';
 import { Color, ContentBlockConfig } from '../../types/content-block.types';
-import { ContentPageInfo } from '../../types/content-pages.types';
+import { ContentPageInfo, ContentWidth } from '../../types/content-pages.types';
 
 import {
 	COMPONENT_PREVIEW_MAP,
@@ -27,13 +27,6 @@ interface ContentBlockPreviewProps {
 	className?: string;
 }
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-enum ContentWidthMap {
-	REGULAR = 'regular',
-	LARGE = 'large',
-	MEDIUM = 'medium',
-}
-
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
 const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
@@ -44,7 +37,10 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 }) => {
 	const blockState = get(contentBlockConfig, 'block.state');
 	const componentState = get(contentBlockConfig, 'components.state');
-	const containerSize = ContentWidthMap[contentPageInfo.content_width || 'REGULAR'];
+	const containerSize =
+		contentPageInfo.content_width?.toUpperCase() ||
+		Config.getConfig().contentPage?.defaultPageWidth ||
+		ContentWidth.EXTRA_LARGE;
 	const PreviewComponent = COMPONENT_PREVIEW_MAP[contentBlockConfig.type];
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
 	const componentStateProps: any = needsElements ? { elements: componentState } : componentState;
@@ -141,7 +137,11 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 				) : (
 					<Container
 						mode="horizontal"
-						size={containerSize === ContentWidthMap.REGULAR ? undefined : containerSize}
+						size={
+							containerSize?.toUpperCase() === ContentWidth.EXTRA_LARGE
+								? undefined
+								: (containerSize?.toLowerCase() as 'medium' | 'large')
+						}
 					>
 						<PreviewComponent {...componentStateProps} {...blockStateProps} />
 					</Container>

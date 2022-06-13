@@ -9,7 +9,7 @@ import { ContentOverviewTableCols, ContentWidth } from '../types/content-pages.t
 import { Config } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
-	CheckboxOption
+	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
@@ -20,7 +20,7 @@ export const CONTENT_PAGE_PATHS = {
 	overview: `/${ROOT}`,
 	detail: `/${ROOT}/${DETAIL}`,
 	create: `/${ROOT}/${DETAIL}/aanmaken`,
-	edit: `/${ROOT}/${DETAIL}/bewerken`
+	edit: `/${ROOT}/${DETAIL}/bewerken`,
 };
 
 export const CONTENT_PAGE_CONFIG = {
@@ -28,7 +28,7 @@ export const CONTENT_PAGE_CONFIG = {
 		overview: {
 			meta: {
 				title: 'Navigatie - beheer',
-				description: 'Navigatie overzicht beheerpagina'
+				description: 'Navigatie overzicht beheerpagina',
 			},
 			labels: {
 				pageTitle: 'Navigatie: overzicht',
@@ -36,26 +36,26 @@ export const CONTENT_PAGE_CONFIG = {
 				tableHeads: {
 					name: 'Naam',
 					description: 'Beschrijving',
-					actions: ''
+					actions: '',
 				},
 				tableActions: {
 					add: {
-						title: 'Voeg een navigatie-item toe aan deze navigatiebalk.'
+						title: 'Voeg een navigatie-item toe aan deze navigatiebalk.',
 					},
 					view: {
-						title: 'Bekijk de navigatie-items voor deze navigatiebalk'
-					}
-				}
+						title: 'Bekijk de navigatie-items voor deze navigatiebalk',
+					},
+				},
 			},
-			error: {}
+			error: {},
 		},
 		detail: {
-			labels: {}
+			labels: {},
 		},
 		edit: {
-			labels: {}
-		}
-	}
+			labels: {},
+		},
+	},
 };
 
 export const RichEditorStateKey = 'RichEditorState';
@@ -72,7 +72,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			label: i18n.t('admin/content/content___titel'),
 			sortable: true,
 			visibleByDefault: true,
-			dataType: 'string'
+			dataType: 'string',
 		},
 		{
 			id: 'content_type',
@@ -81,9 +81,9 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			visibleByDefault: true,
 			filterType: 'CheckboxDropdownModal',
 			filterProps: {
-				options: contentTypeOptions
+				options: contentTypeOptions,
 			} as CheckboxDropdownModalProps,
-			dataType: 'string'
+			dataType: 'string',
 		},
 		{
 			id: 'user_profile_id',
@@ -91,7 +91,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'MultiUserSelectDropdown',
-			dataType: 'string'
+			dataType: 'string',
 		},
 		{
 			id: 'author_user_group',
@@ -104,11 +104,11 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 					...userGroupOptions,
 					{
 						label: i18n.t('admin/content/content___leeg'),
-						id: NULL_FILTER
-					}
-				]
+						id: NULL_FILTER,
+					},
+				],
 			} as CheckboxDropdownModalProps,
-			dataType: 'string'
+			dataType: 'string',
 		},
 		{
 			id: 'created_at',
@@ -116,7 +116,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime'
+			dataType: 'dateTime',
 		},
 		{
 			id: 'updated_at',
@@ -124,7 +124,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime'
+			dataType: 'dateTime',
 		},
 		{
 			id: 'is_public',
@@ -132,37 +132,31 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: false,
 			filterType: 'BooleanCheckboxDropdown',
-			dataType: 'boolean'
+			dataType: 'boolean',
 		},
 		{
 			id: 'published_at',
-			label: i18n.t(
-				'admin/content/views/content-overview___publicatie'
-			),
+			label: i18n.t('admin/content/views/content-overview___publicatie'),
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime'
+			dataType: 'dateTime',
 		},
 		{
 			id: 'publish_at',
-			label: i18n.t(
-				'admin/content/views/content-overview___publiceer-op'
-			),
+			label: i18n.t('admin/content/views/content-overview___publiceer-op'),
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime'
+			dataType: 'dateTime',
 		},
 		{
 			id: 'depublish_at',
-			label: i18n.t(
-				'admin/content/views/content-overview___depubliceer-op'
-			),
+			label: i18n.t('admin/content/views/content-overview___depubliceer-op'),
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime'
+			dataType: 'dateTime',
 		},
 		{
 			id: 'labels',
@@ -171,59 +165,59 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			visibleByDefault: false,
 			filterType: 'CheckboxDropdownModal',
 			filterProps: {
-				options: contentPageLabelOptions
-			} as CheckboxDropdownModalProps
+				options: contentPageLabelOptions,
+			} as CheckboxDropdownModalProps,
 		},
 		{
 			id: 'user_group_ids',
 			label: i18n.t('admin/content/content___zichtbaar-voor'),
 			sortable: false,
-			visibleByDefault: false
+			visibleByDefault: false,
 		},
 		{
 			id: 'actions',
-			tooltip: i18n.t(
-				'admin/content/views/content-overview___acties'
-			),
-			visibleByDefault: true
-		}
+			tooltip: i18n.t('admin/content/views/content-overview___acties'),
+			visibleByDefault: true,
+		},
 	];
 };
 
 export const CONTENT_RESULT_PATH: Record<string, [string, string]> = {
-	COUNT: ['data.app_content_aggregate.aggregate.count', 'data.app_content_page_aggregate.aggregate.count'],
+	COUNT: [
+		'data.app_content_aggregate.aggregate.count',
+		'data.app_content_page_aggregate.aggregate.count',
+	],
 	GET: ['data.app_content', 'data.app_content_page'],
-	INSERT: ['data.insert_app_content.returning[0].id', 'data.insert_app_content_page.returning[0].id'],
-	UPDATE: ['data.update_app_content.affected_rows', 'data.update_app_content_page.affected_rows']
+	INSERT: [
+		'data.insert_app_content.returning[0].id',
+		'data.insert_app_content_page.returning[0].id',
+	],
+	UPDATE: ['data.update_app_content.affected_rows', 'data.update_app_content_page.affected_rows'],
 };
 
 export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
 }> = {
 	user_profile_id: (order: Avo.Search.OrderDirection) => {
-		if (
-			Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
-		) {
+		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return {
-				owner_profile: { first_name: order }
+				owner_profile: { first_name: order },
 			};
 		}
 		return {
-			profile: { first_name: order }
+			profile: { first_name: order },
 		};
 	},
 	author_user_group: (order: Avo.Search.OrderDirection) => {
-		if (
-			Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
-		) {
+		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return {
-				owner_profile: { group: { name: order } }
+				owner_profile: { group: { name: order } },
 			};
 		}
 		return {
-			profile: { profile_user_group: { group: { label: order } } }
+			profile: { profile_user_group: { group: { label: order } } },
 		};
-	}
+	},
 };
 
 export const CONTENT_PATH = {
@@ -236,7 +230,7 @@ export const CONTENT_PATH = {
 	FAQS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=FAQ_ITEM`,
 	SCREENCASTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=SCREENCAST`,
 	PROJECTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PROJECT`,
-	OVERVIEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=OVERZICHT`
+	OVERVIEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=OVERZICHT`,
 };
 
 export const ITEMS_PER_PAGE = 10;
@@ -245,13 +239,13 @@ export const GET_CONTENT_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
 		label: Config.getConfig().services.i18n.t('admin/content/content___inhoud'),
-		icon: 'layout'
+		icon: 'layout',
 	},
 	{
 		id: 'metadata',
 		label: Config.getConfig().services.i18n.t('admin/content/content___metadata'),
-		icon: 'file-text'
-	}
+		icon: 'file-text',
+	},
 ];
 
 export const GET_CONTENT_WIDTH_OPTIONS = () => [
@@ -260,27 +254,26 @@ export const GET_CONTENT_WIDTH_OPTIONS = () => [
 			'admin/content/content___kies-een-content-breedte'
 		),
 		value: '',
-		disabled: true
+		disabled: true,
 	},
 	{
 		label: Config.getConfig().services.i18n.t('admin/content/content___max-1300-px'),
-		value: 'REGULAR'
+		value: ContentWidth.EXTRA_LARGE,
 	},
 	{
 		label: Config.getConfig().services.i18n.t('admin/content/content___breed-940-px'),
-		value: 'LARGE'
+		value: ContentWidth.LARGE,
 	},
 	{
 		label: Config.getConfig().services.i18n.t('admin/content/content___medium-720-px'),
-		value: 'MEDIUM'
-	}
+		value: ContentWidth.MEDIUM,
+	},
 ];
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const DEFAULT_PAGES_WIDTH: { [key in ContentWidth]: Avo.ContentPage.Type[] } = {
-	[ContentWidth.REGULAR]: ['PROJECT'],
+	[ContentWidth.EXTRA_LARGE]: ['PROJECT'],
 	[ContentWidth.LARGE]: [],
-	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM']
+	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM'],
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
-
