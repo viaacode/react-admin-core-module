@@ -54,7 +54,7 @@ const oceanGreenOption = () => ({
 	value: Color.OceanGreen,
 });
 const seaGreenOption = () => ({
-	label: Config.getConfig().services.i18n.t('Zeegroen'),
+	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___zeegroen'),
 	value: Color.SeaGreen,
 });
 const yellowOption = () => ({
@@ -64,19 +64,19 @@ const yellowOption = () => ({
 	value: Color.Yellow,
 });
 const platinumOption = () => ({
-	label: Config.getConfig().services.i18n.t('Platinum'),
+	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___platinum'),
 	value: Color.Platinum,
 });
 const blackOption = () => ({
-	label: Config.getConfig().services.i18n.t('Zwart'),
+	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___zwart'),
 	value: Color.Black,
 });
 const neutralOption = () => ({
-	label: Config.getConfig().services.i18n.t('Neutraal'),
+	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___neutraal'),
 	value: Color.Neutral,
 });
 const zincOption = () => ({
-	label: Config.getConfig().services.i18n.t('Zinc'),
+	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___zinc'),
 	value: Color.Zinc,
 });
 

@@ -1,7 +1,7 @@
 import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ContentPageTypeSchema } from '@viaa/avo2-types/types/content-page';
-import { get, isNil } from 'lodash-es';
+import { compact, get, isNil } from 'lodash-es';
 import { GetContentPageLabelsQuery as GetContentPageLabelsQueryAvo } from '~generated/graphql-db-types-avo';
 import { GetContentPageLabelsQuery as GetContentPageLabelsQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 
@@ -271,7 +271,7 @@ export class ContentPageLabelService {
 					credentials: 'include',
 					body: JSON.stringify({
 						contentType,
-						labelIds,
+						labelIds: compact(labelIds),
 					}),
 				}
 			);
@@ -284,7 +284,7 @@ export class ContentPageLabelService {
 				err,
 				{
 					contentType,
-					labelIds,
+					labelIds: compact(labelIds),
 				}
 			);
 		}

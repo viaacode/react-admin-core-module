@@ -7,7 +7,7 @@ import {
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { cloneDeep, get, isNumber } from 'lodash-es';
+import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
@@ -134,12 +134,14 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 		if (isNumber(contentTypeAndTabs.selectedLabels[0])) {
 			// new format where we save the ids of the labels instead of the full label object
 			// https://meemoo.atlassian.net/browse/AVO-1410
-			return contentTypeAndTabs.selectedLabels || [];
+			return compact(contentTypeAndTabs.selectedLabels || []);
 		}
 		// Old format where we save the whole label object
 		// TODO deprecated remove when all content pages with type overview have been resaved
-		return ((contentTypeAndTabs.selectedLabels || []) as unknown as LabelObj[]).map(
-			(label) => label.id
+		return compact(
+			((contentTypeAndTabs.selectedLabels || []) as unknown as LabelObj[]).map(
+				(label) => label.id
+			)
 		);
 	};
 
