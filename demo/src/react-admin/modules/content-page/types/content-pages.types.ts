@@ -25,9 +25,9 @@ export enum PublishOption {
 }
 
 export enum ContentWidth {
-	MEDIUM = 'MEDIUM',
-	LARGE = 'LARGE',
-	REGULAR = 'REGULAR',
+	MEDIUM = 'MEDIUM', // 720
+	LARGE = 'LARGE', // 940
+	EXTRA_LARGE = 'EXTRA_LARGE', // 1300
 }
 
 // Content Overview

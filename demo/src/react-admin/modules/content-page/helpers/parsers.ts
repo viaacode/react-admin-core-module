@@ -35,7 +35,10 @@ export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentP
 		is_public: dbContentPage.is_public,
 		path: dbContentPage.path,
 		content_type: dbContentPage.content_type as Avo.ContentPage.Type,
-		content_width: dbContentPage.content_width || ContentWidth.REGULAR,
+		content_width:
+			dbContentPage.content_width ||
+			Config.getConfig()?.contentPage?.defaultPageWidth ||
+			ContentWidth.EXTRA_LARGE,
 		publish_at: dbContentPage.publish_at || null,
 		depublish_at: dbContentPage.depublish_at || null,
 		published_at: dbContentPage.published_at || null,

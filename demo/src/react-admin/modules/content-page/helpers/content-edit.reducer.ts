@@ -14,6 +14,7 @@ import {
 import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
 import { ValueOf } from '~modules/shared/types';
+import { Config } from '~core/config';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;
@@ -114,7 +115,8 @@ export const CONTENT_PAGE_INITIAL_STATE = (): ContentPageInfo => {
 		is_protected: false,
 		path: '',
 		content_type: 'PAGINA',
-		content_width: ContentWidth.REGULAR,
+		content_width:
+			Config.getConfig()?.contentPage?.defaultPageWidth || ContentWidth.EXTRA_LARGE,
 		publish_at: '',
 		depublish_at: '',
 		is_public: false,

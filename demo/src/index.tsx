@@ -12,6 +12,7 @@ import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
 import { UserGroupsService } from './modules/user-group/user-groups.service';
 import { ContentBlockType } from '~modules/content-page';
+import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 const proxyUrl = 'http://localhost:3100';
 
@@ -36,6 +37,7 @@ function setConfig() {
 				ContentBlockType.UspGrid,
 				ContentBlockType.Quote,
 			],
+			defaultPageWidth: ContentWidth.LARGE,
 		},
 		navigationBars: {
 			enableIcons: false,
