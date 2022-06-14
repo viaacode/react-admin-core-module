@@ -46,25 +46,23 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			authorName: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
-					'admin/content-block/helpers/generators/quote___auteur-is-verplicht'
-				),
+				undefined,
 				{
-					label: Config.getConfig().services.i18n.t(
-						'admin/content-block/helpers/generators/quote___auteur'
-					),
-					editorType: ContentBlockEditor.TextInput,
+				 label: Config.getConfig().services.i18n.t(
+				  'admin/content-block/helpers/generators/quote___auteur'
+				 ),
+				 editorType: ContentBlockEditor.TextInput,
+				 validator: undefined,
 				}
-			),
-			authorInitials: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
-					'admin/content-block/helpers/generators/quote___initialen-is-verplicht'
-				),
+			   ),
+			   authorInitials: TEXT_FIELD(
+				undefined,
 				{
-					label: Config.getConfig().services.i18n.t(
-						'admin/content-block/helpers/generators/quote___initialen'
-					),
-					editorType: ContentBlockEditor.TextInput,
+				 label: Config.getConfig().services.i18n.t(
+				  'admin/content-block/helpers/generators/quote___initialen'
+				 ),
+				 editorType: ContentBlockEditor.TextInput,
+				 validator: undefined,
 				}
 			),
 			authorImage: FILE_FIELD(
