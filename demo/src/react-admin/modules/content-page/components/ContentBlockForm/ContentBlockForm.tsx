@@ -253,9 +253,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							text={JSON.stringify({ block: config })}
 							onCopy={() =>
 								Config.getConfig().services.toastService.showToast({
-									title: Config.getConfig().services.i18n.t(
-										'modules/admin/content-page/components/content-block-form/content-block-form___error'
-									),
+									title: Config.getConfig().services.i18n.t('modules/content-page/components/content-block-form/content-block-form___gekopieerd'),
 									description: Config.getConfig().services.i18n.t(
 										'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
 									),
