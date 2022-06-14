@@ -373,6 +373,10 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 			]);
 
+			Config.getConfig()?.contentPage?.onSaveContentPage(
+				insertedOrUpdatedContent as ContentPageInfo
+			);
+
 			Config.getConfig().services.toastService.showToast({
 				title: t('modules/content-page/views/content-page-edit___success'),
 				description: t(

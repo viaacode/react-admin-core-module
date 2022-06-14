@@ -14,7 +14,7 @@ import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { NavigationItem } from '~modules/navigation/navigation.types';
-import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -71,6 +71,7 @@ export interface ConfigValue {
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 		defaultPageWidth: ContentWidth;
+		onSaveContentPage: (contentPageInfo: ContentPageInfo) => Promise<void>;
 	};
 	navigationBars?: {
 		enableIcons: boolean;
