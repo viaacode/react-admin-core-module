@@ -1,4 +1,4 @@
-import { cloneDeep, isArray, isPlainObject, keys } from 'lodash-es';
+import { isArray, isPlainObject } from 'lodash-es';
 
 /**
  * Recursively runs over every property, and replaces it with the return value of the mapping function
@@ -11,26 +11,42 @@ export function mapDeep(
 	mappingFunction: (obj: any, key: string, value: any) => void,
 	ignoreKey: (key: string) => boolean
 ): any {
-	const clonedObj = cloneDeep(obj);
-	const propertiesToRunOver: [any, string | number][] = [];
+	const returnObj: any = isPlainObject(obj) ? {} : [];
+	const propertiesToRunOver: [any, any, string | number][] = []; // [source object, destination object, key]
 
 	propertiesToRunOver.push(
-		...keys(clonedObj).map((key: string | number): [any, string | number] => [clonedObj, key])
+		...Object.keys(obj).map((key: string | number): [any, any, string | number] => [
+			obj,
+			returnObj,
+			key,
+		])
 	);
 
 	let propToRunOver = propertiesToRunOver.shift();
 	while (propToRunOver) {
-		const [currentObject, key] = propToRunOver;
-		const value = currentObject[key];
-		if (!ignoreKey(String(key)) && (isPlainObject(value) || isArray(value))) {
-			propertiesToRunOver.push(
-				...keys(value).map((key: string | number): [any, string | number] => [value, key])
-			);
-		}
+		const [currentSubObject, responseSubObj, key] = propToRunOver;
+		const value = currentSubObject[key];
 
-		mappingFunction(currentObject, String(key), value);
+		mappingFunction(responseSubObj, String(key), value);
+
+		// Add next layer of props in object to the processing queue
+		if (!ignoreKey(String(key))) {
+			if (isPlainObject(value) || isArray(value)) {
+				propertiesToRunOver.push(
+					...Object.keys(value).map(
+						(subObjKey: string | number): [any, any, string | number] => [
+							value,
+							responseSubObj[key],
+							subObjKey,
+						]
+					)
+				);
+			}
+		} else {
+			responseSubObj[key] = value;
+		}
 
 		propToRunOver = propertiesToRunOver.shift();
 	}
-	return clonedObj;
+	return returnObj;
 }

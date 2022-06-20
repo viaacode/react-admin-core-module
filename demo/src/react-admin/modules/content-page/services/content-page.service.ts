@@ -1,6 +1,6 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { get, isFunction, kebabCase, omit } from 'lodash-es';
+import { get, isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
 import moment from 'moment';
 import { stringify } from 'query-string';
 
@@ -475,6 +475,12 @@ export class ContentPageService {
 						'full'
 					);
 					delete obj[key];
+				} else if (!isPlainObject(value) && !isArray(value)) {
+					obj[key] = value;
+				} else if (isPlainObject(value)) {
+					obj[key] = {};
+				} else {
+					obj[key] = [];
 				}
 			},
 			(key: string | number) => String(key).endsWith(RichEditorStateKey)

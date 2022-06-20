@@ -254,10 +254,12 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				const setContentBlockError = action as SetContentBlockError;
 				if (
 					!isEqual(
-						action.payload.errors,
-						draft.currentContentPageInfo.contentBlockConfigs[
-							setContentBlockError.payload.configIndex
-						].errors
+						JSON.stringify(action.payload.errors),
+						JSON.stringify(
+							draft.currentContentPageInfo.contentBlockConfigs[
+								setContentBlockError.payload.configIndex
+							].errors
+						)
 					)
 				) {
 					draft.currentContentPageInfo.contentBlockConfigs[

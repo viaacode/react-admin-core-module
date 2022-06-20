@@ -5,7 +5,7 @@ import {
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
-import { isEqual } from 'lodash-es';
+import { isEqual, noop } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
@@ -15,6 +15,7 @@ import { Config, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './RichTextEditorWrapper.scss';
+import * as Immutable from 'immutable';
 
 export type RichTextEditorWrapperProps = RichTextEditorProps & {
 	fileType?: Avo.FileUpload.AssetType; // Required to enable file upload
@@ -91,11 +92,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 			controls={(controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT) as RichTextEditorControl[]} // TODO remove this cast once react-components v2.12.16 is released
 			media={media as any}
 			state={state}
-			onChange={(newState) => {
-				if (!!onChange && !isEqual(newState, state)) {
-					onChange(newState);
-				}
-			}}
+			onChange={onChange || noop}
 		/>
 	);
 };
