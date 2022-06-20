@@ -35,7 +35,6 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/help
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { SpecialUserGroup } from '~modules/user-group/const/user-group.const';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
@@ -69,7 +68,6 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	);
 
 	const user = Config.getConfig().user;
-	const isAdminUser = user?.userGroup?.id === SpecialUserGroup.Admin;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
 	const pageTitle = `Content: ${get(contentPageInfo, 'title', '')}`;
 
@@ -144,7 +142,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/content-page/views/content-page-detail___success'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-content-item-is-succesvol-verwijderd'
 				),
@@ -153,7 +153,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 		} catch (err) {
 			console.error(err);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/content-page/views/content-page-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-verwijderen-van-het-content-item-is-mislukt'
 				),
@@ -167,7 +169,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 		} else {
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/content-page/views/content-page-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
 				),
@@ -193,7 +197,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				} as ContentPageInfo);
 
 				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
+					title: Config.getConfig().services.i18n.t(
+						'modules/content-page/views/content-page-detail___success'
+					),
 					description: Config.getConfig().services.i18n.t(
 						isPublic(newContentPage)
 							? 'admin/content/views/content-detail___de-content-pagina-is-nu-publiek'
@@ -209,7 +215,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			});
 
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/content-page/views/content-page-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___het-opslaan-van-de-publiek-status-van-de-content-pagina-is-mislukt'
 				),
@@ -230,8 +238,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					),
 			  ]
 			: []),
-		...((!isContentProtected || (isContentProtected && isAdminUser)) &&
-		hasPerm(DELETE_ANY_CONTENT_PAGES)
+		...((!isContentProtected || isContentProtected) && hasPerm(DELETE_ANY_CONTENT_PAGES)
 			? [
 					createDropdownMenuItem(
 						'delete',
@@ -248,7 +255,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				try {
 					if (!contentPageInfo) {
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+							title: Config.getConfig().services.i18n.t(
+								'modules/content-page/views/content-page-detail___error'
+							),
 							description: Config.getConfig().services.i18n.t(
 								'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gedupliceerd'
 							),
@@ -266,7 +275,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 					if (!duplicateContentPage) {
 						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+							title: Config.getConfig().services.i18n.t(
+								'modules/content-page/views/content-page-detail___error'
+							),
 							description: Config.getConfig().services.i18n.t(
 								'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
 							),
@@ -281,7 +292,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 						})
 					);
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___success'),
+						title: Config.getConfig().services.i18n.t(
+							'modules/content-page/views/content-page-detail___success'
+						),
 						description: Config.getConfig().services.i18n.t(
 							'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
 						),
@@ -293,7 +306,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					});
 
 					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+						title: Config.getConfig().services.i18n.t(
+							'modules/content-page/views/content-page-detail___error'
+						),
 						description: Config.getConfig().services.i18n.t(
 							'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
 						),
@@ -377,7 +392,9 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	const renderContentDetail = (contentPageInfo: ContentPageInfo | null): ReactElement | null => {
 		if (!contentPageInfo) {
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/content-page/views/content-page-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/content-page/views/content-page-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-ingeladen'
 				),

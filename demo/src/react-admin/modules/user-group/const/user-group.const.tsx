@@ -6,7 +6,6 @@ import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { PermissionRow } from '../types/user-group.types';
 import { Config } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { sortBy } from 'lodash-es';
 
@@ -73,54 +72,3 @@ export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 		id: SpecialPermissionGroups.loggedInUsers,
 	},
 ];
-
-export const GET_USER_GROUP_OVERVIEW_TABLE_COLS: () => FilterableColumn[] = () => [
-	{
-		id: 'label',
-		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___label'),
-		sortable: true,
-		visibleByDefault: true,
-		dataType: 'string',
-	},
-	{
-		id: 'description',
-		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___beschrijving'),
-		sortable: true,
-		visibleByDefault: true,
-		dataType: 'string',
-	},
-	{
-		id: 'created_at',
-		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___aangemaakt-op'),
-		sortable: true,
-		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
-	},
-	{
-		id: 'updated_at',
-		label: Config.getConfig().services.i18n.t('admin/user-groups/user-group___aangepast-op'),
-		sortable: true,
-		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
-	},
-	{
-		id: 'actions',
-		tooltip: Config.getConfig().services.i18n.t('admin/user-groups/user-group___acties'),
-		visibleByDefault: true,
-	},
-];
-
-export enum SpecialUserGroup {
-	Admin = 1,
-	Teacher = 2,
-	TeacherSecondary = 3,
-	Pupil = 4,
-	Editor = 7,
-	EditorInChief = 8,
-	ContentPartner = 9,
-	EducativeAuthor = 10,
-	EducativePublisher = 11,
-	EducativePartner = 12,
-}
