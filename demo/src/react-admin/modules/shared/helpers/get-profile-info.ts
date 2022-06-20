@@ -1,7 +1,3 @@
-import { get } from 'lodash-es';
-
-import { SpecialPermissionGroups } from '../types/authentication.types';
-
 import { CustomError } from './custom-error';
 
 import { CommonUser } from '~modules/user/user.types';
@@ -15,13 +11,6 @@ export function getProfileName(user: CommonUser | undefined): string {
 		throw new CustomError('No profile name could be found for the logged in user');
 	}
 	return profileName;
-}
-
-export function getUserGroupIds(user: CommonUser | null | undefined): number[] {
-	return [
-		...get(user, 'profile.userGroupIds', []),
-		user ? SpecialPermissionGroups.loggedInUsers : SpecialPermissionGroups.loggedOutUsers,
-	];
 }
 
 export const getFullName = (
