@@ -16,7 +16,7 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { get, isNil } from 'lodash-es';
+import { get, isEqual, isNil } from 'lodash-es';
 import React, { FunctionComponent, memo } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
