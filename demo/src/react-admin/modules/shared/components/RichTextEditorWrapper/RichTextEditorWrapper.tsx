@@ -5,7 +5,6 @@ import {
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
-import { isEqual } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
