@@ -1,13 +1,13 @@
 import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { cloneDeep, compact, noop, set } from 'lodash-es';
+import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 
-import { Config } from "~core/config";
+import { Config } from '~core/config';
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -19,6 +19,7 @@ import {
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AvoOrHetArchief } from '~modules/shared/types';
+import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 
 type ContentPageDetailProps =
 	| {
@@ -103,7 +104,10 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 		});
 
 		// Add page title as header block for faq items. Only for Avo
-		if (contentPageInfo.content_type === 'FAQ_ITEM' && Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+		if (
+			contentPageInfo.content_type === 'FAQ_ITEM' &&
+			Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		) {
 			contentBlockBlockConfigs = [
 				{
 					position: 0,
@@ -134,6 +138,15 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 		}
 
 		// Only accept content blocks for which the user is authorized
+		let currentUserGroupIds: string[];
+		if (props.userGroupId) {
+			currentUserGroupIds = [
+				String(props.userGroupId),
+				SpecialPermissionGroups.loggedInUsers,
+			];
+		} else {
+			currentUserGroupIds = [SpecialPermissionGroups.loggedOutUsers];
+		}
 		contentBlockBlockConfigs = compact(
 			contentBlockBlockConfigs.map(
 				(contentBlockConfig: ContentBlockConfig): ContentBlockConfig | null => {
@@ -141,7 +154,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 						contentBlockConfig.block.state.userGroupIds || [];
 					if (blockUserGroupIds.length) {
 						// Block has special restrictions set
-						if (!props.userGroupId || !blockUserGroupIds.includes(props.userGroupId)) {
+						if (intersection(blockUserGroupIds, currentUserGroupIds).length === 0) {
 							// The user doesn't have the right permissions to see this block
 							return null;
 						}
