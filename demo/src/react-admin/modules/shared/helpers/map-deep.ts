@@ -1,4 +1,4 @@
-import { cloneDeep, isArray, isPlainObject, keys } from 'lodash-es';
+import { isArray, isPlainObject, keys } from 'lodash-es';
 
 /**
  * Recursively runs over every property, and replaces it with the return value of the mapping function
@@ -11,7 +11,7 @@ export function mapDeep(
 	mappingFunction: (obj: any, key: string, value: any) => void,
 	ignoreKey: (key: string) => boolean
 ): any {
-	const clonedObj = cloneDeep(obj);
+	const clonedObj = JSON.parse(JSON.stringify(obj));
 	const propertiesToRunOver: [any, string | number][] = [];
 
 	propertiesToRunOver.push(
