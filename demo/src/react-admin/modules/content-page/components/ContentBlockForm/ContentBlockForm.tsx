@@ -253,9 +253,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							text={JSON.stringify({ block: config })}
 							onCopy={() =>
 								Config.getConfig().services.toastService.showToast({
-									title: Config.getConfig().services.i18n.t(
-										'modules/content-page/components/content-block-form/content-block-form___gekopieerd'
-									),
+									title: Config.getConfig().services.i18n.t('modules/content-page/components/content-block-form/content-block-form___gekopieerd'),
 									description: Config.getConfig().services.i18n.t(
 										'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
 									),
@@ -312,7 +310,7 @@ export default memo(ContentBlockForm, (prevProps, nextProps) => {
 	// We don't need to check the other props because they are functions which will never change
 	// The component will rerender when false is returned
 	return (
-		JSON.stringify(prevProps.config) === JSON.stringify(nextProps.config) &&
+		isEqual(prevProps.config, nextProps.config) &&
 		prevProps.isAccordionOpen === nextProps.isAccordionOpen &&
 		prevProps.blockIndex === nextProps.blockIndex &&
 		prevProps.length === nextProps.length &&

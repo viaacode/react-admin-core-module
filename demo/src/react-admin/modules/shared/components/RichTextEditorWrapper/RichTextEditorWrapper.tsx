@@ -91,7 +91,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 			media={media as any}
 			state={state}
 			onChange={(newState) => {
-				if (!!onChange && JSON.stringify(newState) !== JSON.stringify(state)) {
+				if (!!onChange && !isEqual(newState, state)) {
 					onChange(newState);
 				}
 			}}
