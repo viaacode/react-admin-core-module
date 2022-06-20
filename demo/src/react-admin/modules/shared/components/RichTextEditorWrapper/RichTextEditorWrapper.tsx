@@ -5,7 +5,7 @@ import {
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
-import { isEqual, noop } from 'lodash-es';
+import { noop } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
@@ -15,7 +15,6 @@ import { Config, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './RichTextEditorWrapper.scss';
-import * as Immutable from 'immutable';
 
 export type RichTextEditorWrapperProps = RichTextEditorProps & {
 	fileType?: Avo.FileUpload.AssetType; // Required to enable file upload

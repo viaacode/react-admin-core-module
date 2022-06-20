@@ -16,8 +16,8 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { get, isEqual, isNil } from 'lodash-es';
-import React, { FunctionComponent, memo } from 'react';
+import { get, isNil } from 'lodash-es';
+import React, { FunctionComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { validateContentBlockField } from '../../../shared/helpers/validation';

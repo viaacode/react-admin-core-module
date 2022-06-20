@@ -1,5 +1,5 @@
 import { Draft, produce } from 'immer';
-import { cloneDeep, isEqual, isNil } from 'lodash-es';
+import { cloneDeep, isNil } from 'lodash-es';
 import moment from 'moment';
 import { Reducer } from 'react';
 
@@ -253,13 +253,11 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_CONTENT_BLOCK_ERROR: {
 				const setContentBlockError = action as SetContentBlockError;
 				if (
-					!isEqual(
-						JSON.stringify(action.payload.errors),
-						JSON.stringify(
-							draft.currentContentPageInfo.contentBlockConfigs[
-								setContentBlockError.payload.configIndex
-							].errors
-						)
+					JSON.stringify(action.payload.errors) !==
+					JSON.stringify(
+						draft.currentContentPageInfo.contentBlockConfigs[
+							setContentBlockError.payload.configIndex
+						].errors
 					)
 				) {
 					draft.currentContentPageInfo.contentBlockConfigs[
