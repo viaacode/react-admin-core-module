@@ -5,7 +5,7 @@ import moment from 'moment';
 import { stringify } from 'query-string';
 
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
-import { mapDeep } from '../../shared/helpers/map-deep';
+import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { dataService } from '../../shared/services/data-service';
@@ -13,7 +13,6 @@ import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrappe
 import {
 	CONTENT_RESULT_PATH,
 	ITEMS_PER_PAGE,
-	RichEditorStateKey,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../const/content-page.consts';
 import {
@@ -36,6 +35,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 import { performQuery } from '~modules/shared/helpers/gql';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 
 export class ContentPageService {
 	private static getQueries() {
@@ -474,7 +474,6 @@ export class ContentPageService {
 						htmlFromRichTextEditor || obj[htmlKey] || '',
 						'full'
 					);
-					delete obj[key];
 				} else if (!isPlainObject(value) && !isArray(value)) {
 					obj[key] = value;
 				} else if (isPlainObject(value)) {

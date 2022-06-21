@@ -3,8 +3,8 @@ import { RichTextEditorProps } from '@meemoo/react-components';
 import { debounce, get, isArray, isNil } from 'lodash-es';
 
 import { PickerItem } from '../../shared/types/content-picker';
-import { RichEditorStateKey } from '../const/content-page.consts';
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,

@@ -58,8 +58,6 @@ export const CONTENT_PAGE_CONFIG = {
 	},
 };
 
-export const RichEditorStateKey = 'RichEditorState';
-
 export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],

@@ -42,8 +42,6 @@ export function mapDeep(
 					)
 				);
 			}
-		} else {
-			responseSubObj[key] = value;
 		}
 
 		propToRunOver = propertiesToRunOver.shift();
