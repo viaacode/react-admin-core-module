@@ -1,5 +1,5 @@
-mutation softDeleteContent($id: uuid!) {
-	update_app_content_page(where: { id: { _eq: $id } }, _set: { is_deleted: true }) {
+mutation softDeleteContent($id: uuid!, $path: String) {
+	update_app_content_page(where: { id: { _eq: $id } }, _set: { is_deleted: true, path: $path }) {
 		affected_rows
 	}
 }

@@ -588,8 +588,10 @@ export class ContentPageService {
 
 	public static async deleteContentPage(id: number | string): Promise<void> {
 		try {
+			// query path
+			const contentPage = await ContentPageService.getContentPageById(id);
 			const response = await dataService.query({
-				variables: { id },
+				variables: { id, path: `${contentPage.path}-${id}` },
 				query: this.getQueries().SoftDeleteContentDocument,
 			});
 
