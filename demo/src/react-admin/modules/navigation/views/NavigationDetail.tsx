@@ -44,6 +44,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		data: initialNavigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
+		refetch: refetchNavigationItems,
 	} = useGetNavigations(navigationBarId);
 
 	const timeout = useRef<NodeJS.Timeout | null>(null);
@@ -75,8 +76,12 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			}
 			await NavigationService.deleteNavigationItem(idToDelete);
 			await invalidateNavigationQueries();
+			await refetchNavigationItems();
+
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-detail___success'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-detail___success'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-navigatie-item-is-succesvol-verwijderd'
 				),
@@ -85,7 +90,9 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		} catch (err) {
 			console.error(new CustomError('Failed to delete menu item', err, { idToDelete }));
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-verwijderen-van-het-navigatie-item-is-mislukt'
 				),
@@ -108,7 +115,9 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			await NavigationService.updateNavigationItems(navigationItems);
 			await invalidateNavigationQueries();
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-detail___success'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-detail___success'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___de-navigatie-items-zijn-succesvol-opgeslagen'
 				),
@@ -119,7 +128,9 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				new CustomError('Failed to update menu items', err, { menuItems: navigationItems })
 			);
 			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/navigation/views/navigation-detail___error'),
+				title: Config.getConfig().services.i18n.t(
+					'modules/navigation/views/navigation-detail___error'
+				),
 				description: Config.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-opslaan-van-de-navigatie-items-is-mislukt'
 				),
@@ -232,7 +243,9 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					align
 					className="c-menu-detail__table"
 					variant="styled"
-					emptyStateMessage={t('modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items')}
+					emptyStateMessage={t(
+						'modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items'
+					)}
 					data={navigationItems || []}
 					columns={[
 						{
@@ -277,10 +290,21 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			return <Loader />;
 		}
 		if (isErrorNavigationItems) {
-			return <p>{t('modules/navigation/views/navigation-detail___het-laden-van-de-navigatie-balk-items-is-mislukt')}</p>;
+			return (
+				<p>
+					{t(
+						'modules/navigation/views/navigation-detail___het-laden-van-de-navigatie-balk-items-is-mislukt'
+					)}
+				</p>
+			);
 		}
 		return (
-			<AdminLayout pageTitle={t('modules/navigation/views/navigation-detail___navigatie-balk') + startCase(navigationBarId)}>
+			<AdminLayout
+				pageTitle={
+					t('modules/navigation/views/navigation-detail___navigatie-balk') +
+					startCase(navigationBarId)
+				}
+			>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
