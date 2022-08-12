@@ -1,4 +1,4 @@
-import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -13220,6 +13220,7 @@ export type InsertContentMutation = { __typename?: 'mutation_root', insert_app_c
 
 export type SoftDeleteContentMutationVariables = Exact<{
   id: Scalars['uuid'];
+  path?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -13893,8 +13894,11 @@ export const useInsertContentMutation = <
       options
     );
 export const SoftDeleteContentDocument = `
-    mutation softDeleteContent($id: uuid!) {
-  update_app_content_page(where: {id: {_eq: $id}}, _set: {is_deleted: true}) {
+    mutation softDeleteContent($id: uuid!, $path: String) {
+  update_app_content_page(
+    where: {id: {_eq: $id}}
+    _set: {is_deleted: true, path: $path}
+  ) {
     affected_rows
   }
 }
