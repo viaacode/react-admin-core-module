@@ -54,7 +54,9 @@ const oceanGreenOption = () => ({
 	value: Color.OceanGreen,
 });
 const seaGreenOption = () => ({
-	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___zeegroen'),
+	label: Config.getConfig().services.i18n.t(
+		'modules/content-page/const/content-block___zeegroen'
+	),
 	value: Color.SeaGreen,
 });
 const yellowOption = () => ({
@@ -64,7 +66,9 @@ const yellowOption = () => ({
 	value: Color.Yellow,
 });
 const platinumOption = () => ({
-	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___platinum'),
+	label: Config.getConfig().services.i18n.t(
+		'modules/content-page/const/content-block___platinum'
+	),
 	value: Color.Platinum,
 });
 const blackOption = () => ({
@@ -72,7 +76,9 @@ const blackOption = () => ({
 	value: Color.Black,
 });
 const neutralOption = () => ({
-	label: Config.getConfig().services.i18n.t('modules/content-page/const/content-block___neutraal'),
+	label: Config.getConfig().services.i18n.t(
+		'modules/content-page/const/content-block___neutraal'
+	),
 	value: Color.Neutral,
 });
 const zincOption = () => ({
@@ -267,7 +273,7 @@ export const GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS: () => SelectOption<ContentIte
 		value: 'GRID',
 	},
 	{
-		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___accrodions'),
+		label: Config.getConfig().services.i18n.t('admin/content-block/content-block___accordions'),
 		value: 'ACCORDION',
 	},
 ];

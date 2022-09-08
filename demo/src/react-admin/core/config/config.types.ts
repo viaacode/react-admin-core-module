@@ -139,9 +139,15 @@ export interface IconConfig {
 		add: IconComponentProps;
 		angleUp: IconComponentProps;
 		angleDown: IconComponentProps;
+		angleLeft: IconComponentProps;
+		angleRight: IconComponentProps;
 		delete: IconComponentProps;
 		edit: IconComponentProps;
 		view: IconComponentProps;
+		filter: IconComponentProps;
+		arrowUp: IconComponentProps;
+		sortTable: IconComponentProps;
+		arrowDown: IconComponentProps;
 	};
 	list: { label: string; value: string }[];
 }

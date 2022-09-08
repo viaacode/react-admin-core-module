@@ -4,9 +4,10 @@ import { Config, IconConfig } from '~core/config';
 
 interface IconProps {
 	name: keyof IconConfig['componentProps'];
+	className?: string;
 }
 
-const Icon: FC<IconProps> = ({ name }) => {
+const Icon: FC<IconProps> = ({ name, className }) => {
 	const iconConfig = Config.getConfig().icon;
 	const iconProps = iconConfig?.componentProps?.[name];
 	const IconComponent = iconConfig?.component ?? (() => null);

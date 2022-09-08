@@ -17,7 +17,10 @@ export class TranslationsService {
 				query: this.getQueries().GetTranslationsDocument,
 			});
 
-			const path = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief ? 'data.app_config' : 'data.app_site_variables';
+			const path =
+				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+					? 'data.app_config'
+					: 'data.app_site_variables';
 			return get(response, path, null);
 		} catch (err) {
 			const error = new CustomError('Failed to fetch translations', err, {
