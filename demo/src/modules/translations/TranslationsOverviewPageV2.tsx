@@ -1,28 +1,31 @@
 import { FC, ReactNode } from 'react';
 import { TranslationsOverviewV2 } from '~modules/translations/views';
-import { Modal } from '@meemoo/react-components';
+import { Button, Modal } from '@meemoo/react-components';
 
 export const TranslationsOverviewPageV2: FC = () => {
 	const renderPopup = ({
 		title,
 		body,
-		confirmButton,
-		cancelButton,
 		isOpen,
+		onSave,
 		onClose,
 	}: {
 		title: string;
 		body: ReactNode;
-		confirmButton: ReactNode;
-		cancelButton: ReactNode;
 		isOpen: boolean;
+		onSave: () => void;
 		onClose: () => void;
 	}) => {
 		const renderFooter = () => {
 			return (
-				<div className="c-modal__footer">
-					{cancelButton}
-					{confirmButton}
+				<div>
+					<Button
+						variants={['block', 'black']}
+						onClick={onSave}
+						label="Bewaar wijzigingen"
+					/>
+
+					<Button variants={['block', 'text']} onClick={onClose} label="Annuleer" />
 				</div>
 			);
 		};

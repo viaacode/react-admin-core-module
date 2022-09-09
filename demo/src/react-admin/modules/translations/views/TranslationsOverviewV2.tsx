@@ -37,6 +37,7 @@ import {
 	convertFromDatabaseToList,
 	convertFromListToDatabase,
 } from '~modules/translations/helpers/database-conversions';
+import Html from '~modules/shared/components/Html/Html';
 
 export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Props> = ({
 	className,
@@ -106,7 +107,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	const saveActiveTranslation = async () => {
 		try {
 			if (!activeTranslation) {
-				return;
+				throw new Error('Active translation is not defined, failed to save translation');
 			}
 
 			// Fetch database translations and convert to list of objects
@@ -134,7 +135,20 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			}
 
 			// Update value in array
-			freshTranslation.value = activeTranslationEditorState?.toHTML() || '';
+			const newTranslationValue = activeTranslationEditorState?.toHTML() || '';
+			const newTranslationValueWithoutWrappingP = newTranslationValue
+				.replace(/<p>/g, '')
+				.replace(/<\/p>/g, '');
+			if (
+				newTranslationValue.length ===
+				(newTranslationValueWithoutWrappingP + '<p></p>').length
+			) {
+				// There was only one p tag in the translation, so we can safely delete it.
+				freshTranslation.value = newTranslationValueWithoutWrappingP;
+			} else {
+				// There are multiple p tags in the translation, so we cannot delete them
+				freshTranslation.value = newTranslationValue;
+			}
 
 			// Convert array back to database format
 			const dbTranslations = convertFromListToDatabase(freshTranslations);
@@ -254,6 +268,14 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 										'Waarde'
 									),
 									accessor: 'value',
+									Cell: ({ row }: { row: Row<TranslationV2> }) => {
+										return (
+											<Html
+												content={row.original.value}
+												className="c-content"
+											></Html>
+										);
+									},
 								},
 								{
 									Header: '',
@@ -346,7 +368,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				title: AdminConfigManager.getConfig().services.i18n.t('Vertaling aanpassen'),
 				body: renderPopupBody(),
 				isOpen: !!activeTranslation,
-				onSave: () => saveActiveTranslation(),
+				onSave: saveActiveTranslation,
 				onClose: () => {
 					setActiveTranslation(null);
 					setActiveTranslationEditorState(null);
