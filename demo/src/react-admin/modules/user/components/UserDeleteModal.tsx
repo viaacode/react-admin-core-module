@@ -20,7 +20,8 @@ import { ContentPicker } from '../../shared/components/ContentPicker/ContentPick
 import { UserService } from '../user.service';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { buildLink } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
@@ -34,6 +35,7 @@ interface UserDeleteModalProps {
 	onClose: () => void;
 	deleteCallback: () => void;
 }
+
 /**
  * Adds two modals:
  * - select delete option
@@ -49,9 +51,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 
 	const [transferToUser, setTransferToUser] = useState<PickerItem | null>(null);
 	const [transferToUserError, setTransferToUserError] = useState<string | undefined>();
-	const [selectedDeleteOption, setSelectedDeleteOption] = useState<Avo.User.UserDeleteOption>(
-		'DELETE_ALL'
-	);
+	const [selectedDeleteOption, setSelectedDeleteOption] =
+		useState<Avo.User.UserDeleteOption>('DELETE_ALL');
 	const [deleteConfirmModalOpen, setDeleteConfirmModalOpen] = useState<boolean>(false);
 	const [deleteContentCounts, setDeleteContentCounts] = useState<DeleteContentCounts | null>(
 		null
@@ -101,9 +102,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					// selectedUsers: selectedProfileIds,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/user/components/user-delete-modal___error'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/user/components/user-delete-modal___error'
+				),
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -119,7 +122,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	};
 
 	const renderConfirmDeleteMessage = () => {
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		const publicCollections: number = get(deleteContentCounts, 'publicCollections') || 0;
 		const privateCollections: number = get(deleteContentCounts, 'privateCollections') || 0;
@@ -250,9 +253,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				transferToUser?.value
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/user/components/user-delete-modal___success'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/user/components/user-delete-modal___success'
+				),
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-edit___de-gebruiker-is-aangepast'
 				),
 				type: ToastType.SUCCESS,
@@ -260,9 +265,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteCallback();
 		} catch (err) {
 			console.error(new CustomError('Failed to remove users', err));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/user/components/user-delete-modal___error'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/user/components/user-delete-modal___error'
+				),
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-verwijderen-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,

@@ -1,6 +1,6 @@
 import { ButtonType, SelectOption } from "@viaa/avo2-components";
 import { Avo } from "@viaa/avo2-types";
-import { Config } from "~core/config";
+import { AdminConfigManager } from "~core/config";
 import { CheckboxDropdownModalProps, CheckboxOption } from "~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal";
 import { FilterableColumn } from "~modules/shared/components/FilterTable/FilterTable";
 import { ROUTE_PARTS } from "~modules/shared/consts/routes";
@@ -40,7 +40,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
 ) => {
-	if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+	if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 		return getAvoColumns(user, userGroupOptions, companyOptions, businessCategoryOptions, educationLevels, subjects, idps);
 	}
 	return getHetArchiefColumns(userGroupOptions, companyOptions);
@@ -51,7 +51,7 @@ export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<
 		[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any
 	}
 > => {
-	if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+	if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 		return tableColumnToDatabaseOrderObjectAvo;
 	}
 	return tableColumnToDatabaseOrderObjectHetArchief;
@@ -146,62 +146,62 @@ const getAvoColumns = (user: CommonUser | undefined,
 	idps: CheckboxOption[]): FilterableColumn[] => [
 	{
 		id: 'profileId',
-		label: Config.getConfig().services.i18n.t('admin/users/user___id'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___id'),
 		sortable: false,
 		visibleByDefault: false,
 	},
 	{
 		id: 'first_name',
-		label: Config.getConfig().services.i18n.t('admin/users/user___voornaam'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___voornaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'last_name',
-		label: Config.getConfig().services.i18n.t('admin/users/user___achternaam'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___achternaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'mail',
-		label: Config.getConfig().services.i18n.t('admin/users/user___email'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'user_group',
-		label: Config.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...userGroupOptions,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
 	{
 		id: 'business_category',
-		label: Config.getConfig().services.i18n.t('admin/users/user___oormerk'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___oormerk'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...businessCategoryOptions,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
 	{
 		id: 'is_exception',
-		label: Config.getConfig().services.i18n.t('admin/users/user___uitzonderingsaccount'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___uitzonderingsaccount'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
@@ -209,7 +209,7 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'is_blocked',
-		label: Config.getConfig().services.i18n.t('admin/users/user___geblokkeerd'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___geblokkeerd'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
@@ -217,7 +217,7 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'blocked_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___geblokkeerd-op'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___geblokkeerd-op'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -225,7 +225,7 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'unblocked_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___ongeblokkeerd-op'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___ongeblokkeerd-op'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -235,28 +235,28 @@ const getAvoColumns = (user: CommonUser | undefined,
 		? [
 				{
 					id: 'temp_access',
-					label: Config.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang'),
+					label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang'),
 					sortable: true,
 					visibleByDefault: false,
 					filterType: 'CheckboxDropdownModal',
 					filterProps: {
 						options: [
-							{ label: Config.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang-ja'), id: '1' },
-							{ label: Config.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang-nee'), id: '0' },
+							{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang-ja'), id: '1' },
+							{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___tijdelijke-toegang-nee'), id: '0' },
 						],
 					} as CheckboxDropdownModalProps,
 					dataType: 'booleanNullsLast', // Users without a value are always last when sorting
 				},
 				{
 					id: 'temp_access_from',
-					label: Config.getConfig().services.i18n.t('admin/users/user___te-deblokkeren-op'),
+					label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___te-deblokkeren-op'),
 					sortable: true,
 					visibleByDefault: false,
 					dataType: 'dateTime',
 				},
 				{
 					id: 'temp_access_until',
-					label: Config.getConfig().services.i18n.t('admin/users/user___te-blokkeren-op'),
+					label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___te-blokkeren-op'),
 					sortable: true,
 					visibleByDefault: false,
 					dataType: 'dateTime',
@@ -265,7 +265,7 @@ const getAvoColumns = (user: CommonUser | undefined,
 		: []) as FilterableColumn[]),
 	{
 		id: 'stamboek',
-		label: Config.getConfig().services.i18n.t('admin/users/user___stamboek'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___stamboek'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
@@ -273,21 +273,21 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'organisation',
-		label: Config.getConfig().services.i18n.t('admin/users/user___organisatie'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___organisatie'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...companyOptions,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
 	{
 		id: 'created_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___gebruiker-sinds'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___gebruiker-sinds'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -295,7 +295,7 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'last_access_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -303,40 +303,40 @@ const getAvoColumns = (user: CommonUser | undefined,
 	},
 	{
 		id: 'education_levels',
-		label: Config.getConfig().services.i18n.t('admin/users/user___onderwijs-niveaus'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___onderwijs-niveaus'),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...educationLevels,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'subjects',
-		label: Config.getConfig().services.i18n.t('admin/users/user___vakken'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___vakken'),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
-			options: [...subjects, { label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
+			options: [...subjects, { label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
 		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'idps',
-		label: Config.getConfig().services.i18n.t('admin/users/user___toegang-via'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___toegang-via'),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
-			options: [...idps, { label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
+			options: [...idps, { label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER }],
 		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'educational_organisations',
-		label: Config.getConfig().services.i18n.t('admin/users/user___educatieve-organisaties'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___educatieve-organisaties'),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: 'MultiEducationalOrganisationSelectModal',
@@ -349,62 +349,62 @@ const getHetArchiefColumns = (
 	): FilterableColumn[] => [
 	{
 		id: 'profileId',
-		label: Config.getConfig().services.i18n.t('admin/users/user___id'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___id'),
 		sortable: false,
 		visibleByDefault: false,
 	},
 	{
 		id: 'firstName',
-		label: Config.getConfig().services.i18n.t('admin/users/user___voornaam'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___voornaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'lastName',
-		label: Config.getConfig().services.i18n.t('admin/users/user___achternaam'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___achternaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'email',
-		label: Config.getConfig().services.i18n.t('admin/users/user___email'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
 		id: 'userGroup',
-		label: Config.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___gebruikersgroep'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...userGroupOptions,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
 	{
 		id: 'organisation',
-		label: Config.getConfig().services.i18n.t('admin/users/user___organisatie'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___organisatie'),
 		sortable: false,
 		visibleByDefault: true,
 		filterType: 'CheckboxDropdownModal',
 		filterProps: {
 			options: [
 				...companyOptions,
-				{ label: Config.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
+				{ label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___leeg'), id: NULL_FILTER },
 			],
 		} as CheckboxDropdownModalProps,
 		dataType: 'string',
 	},
 	{
 		id: 'last_access_at',
-		label: Config.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___laatste-toegang'),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
@@ -420,29 +420,29 @@ export const GET_USER_BULK_ACTIONS = (user: CommonUser | undefined, bulkActions:
 
 	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) && bulkActions.includes('block')) {
 		actions.push({
-			label: Config.getConfig().services.i18n.t('admin/users/user___blokkeren'),
+			label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___blokkeren'),
 			value: 'block',
 		});
 		actions.push({
-			label: Config.getConfig().services.i18n.t('admin/users/user___deblokkeren'),
+			label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___deblokkeren'),
 			value: 'unblock',
 		});
 	}
 	if (PermissionService.hasPerm(user, Permission.DELETE_ANY_USER) && bulkActions.includes('delete')) {
 		actions.push({
-			label: Config.getConfig().services.i18n.t('admin/users/user___verwijderen'),
+			label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___verwijderen'),
 			value: 'delete',
 		});
 	}
 	if (PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) && bulkActions.includes('change_subjects')) {
 		actions.push({
-			label: Config.getConfig().services.i18n.t('admin/users/user___vakken-aanpassen'),
+			label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___vakken-aanpassen'),
 			value: 'change_subjects',
 		});
 	}
 	if (bulkActions.includes('export')) {
 		actions.push({
-			label: Config.getConfig().services.i18n.t('admin/users/user___exporteren'),
+			label: AdminConfigManager.getConfig().services.i18n.t('admin/users/user___exporteren'),
 			value: 'export',
 		});
 	}

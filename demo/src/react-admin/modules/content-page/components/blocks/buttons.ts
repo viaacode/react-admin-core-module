@@ -10,7 +10,7 @@ import {
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_BUTTONS_COMPONENTS_STATE = (): ButtonsBlockComponentState[] => [
 	{
@@ -29,12 +29,12 @@ export const INITIAL_BUTTONS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/buttons___knoppen'
 	),
 	type: ContentBlockType.Buttons,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.t(
 			'admin/content-block/helpers/generators/buttons___knop'
 		),
 		limits: {
@@ -43,7 +43,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_BUTTONS_COMPONENTS_STATE(),
 		fields: {
 			type: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___type'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -52,25 +52,25 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			label: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/buttons___tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			altTitle: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			icon: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___icoon'
 				),
 				editorType: ContentBlockEditor.IconPicker,
@@ -79,7 +79,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAction: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -90,7 +90,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_BUTTONS_BLOCK_STATE(),
 		fields: {
 			align: ALIGN_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/defaults___uitlijning'
 				)
 			),

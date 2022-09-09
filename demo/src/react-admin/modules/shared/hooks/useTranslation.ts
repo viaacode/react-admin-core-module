@@ -1,5 +1,6 @@
-import { Config, I18n } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { I18n } from '~core/config/config.types';
 
 export const useTranslation = (): I18n => {
-	return Config.getConfig().services.i18n;
+	return AdminConfigManager.getConfig().services.i18n;
 };

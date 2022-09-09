@@ -3,7 +3,7 @@ import { compact } from 'lodash-es';
 
 import { ROUTE_PARTS } from './routes';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export interface RouteInfo {
 	route: string;
@@ -279,5 +279,5 @@ export const CONTENT_TYPE_TO_ROUTE: { [contentType in Avo.Core.ContentType]: str
 export const GENERATE_SITE_TITLE = (...pageTitleParts: (string | null | undefined)[]) =>
 	compact([
 		...pageTitleParts,
-		Config.getConfig().services.i18n.t('constants___het-archief-voor-onderwijs'),
+		AdminConfigManager.getConfig().services.i18n.t('constants___het-archief-voor-onderwijs'),
 	]).join(' | ');

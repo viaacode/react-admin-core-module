@@ -34,7 +34,8 @@ import {
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
 import { REPEATABLE_CONTENT_BLOCKS } from '../ContentBlockPreview/ContentBlockPreview.const';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ContentBlockForm.scss';
@@ -252,11 +253,11 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 						<CopyToClipboard
 							text={JSON.stringify({ block: config })}
 							onCopy={() =>
-								Config.getConfig().services.toastService.showToast({
-									title: Config.getConfig().services.i18n.t(
+								AdminConfigManager.getConfig().services.toastService.showToast({
+									title: AdminConfigManager.getConfig().services.i18n.t(
 										'modules/content-page/components/content-block-form/content-block-form___gekopieerd'
 									),
-									description: Config.getConfig().services.i18n.t(
+									description: AdminConfigManager.getConfig().services.i18n.t(
 										'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
 									),
 									type: ToastType.ERROR,

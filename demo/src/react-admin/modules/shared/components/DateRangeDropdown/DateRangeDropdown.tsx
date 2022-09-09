@@ -25,7 +25,8 @@ import React, {
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface DateRangeDropdownProps {
@@ -150,7 +151,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				await handleDateChange(null, rangeId);
 			}
 		} catch (err) {
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),

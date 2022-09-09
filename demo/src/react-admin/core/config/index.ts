@@ -1,2 +1,2 @@
-export { Config } from './config.class';
-export * from './config.types';
+export { AdminConfigManager } from './config.class';
+export type { AdminConfig } from './config.types';

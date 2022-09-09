@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ItemsService } from '~modules/item/items.service';
 import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 import {
@@ -67,7 +68,7 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 			console.error(
 				new CustomError('Failed to fetch item info from the database', err, { item })
 			);
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
 				),

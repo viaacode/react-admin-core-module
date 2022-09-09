@@ -59,9 +59,9 @@ export interface LinkInfo {
 	children: ReactNode;
 }
 
-export type History = ReturnType<ConfigValue['services']['router']['useHistory']>;
+export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
 
-export interface ConfigValue {
+export interface AdminConfig {
 	// Core module configurations
 	flowplayer: {
 		FLOW_PLAYER_TOKEN: string;
@@ -134,7 +134,7 @@ export interface ConfigValue {
 }
 
 export interface IconConfig {
-	component: ComponentType;
+	component: ComponentType<{ name: string; className?: string }>;
 	componentProps: {
 		add: IconComponentProps;
 		angleUp: IconComponentProps;

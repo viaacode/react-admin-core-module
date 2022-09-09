@@ -24,7 +24,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
@@ -48,43 +48,43 @@ export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t('admin/content-block/helpers/generators/hero___hero'),
+	name: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/helpers/generators/hero___hero'),
 	type: ContentBlockType.Hero,
 	components: {
 		state: INITIAL_HERO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___titel-kleur'
 				)
 			),
 			content: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___beschrijving'
 				),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___beschrijving-kleur'
 				)
 			),
 
 			buttons: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___knop'
 				),
 				fields: {
 					type: {
-						label: Config.getConfig().services.i18n.t(
+						label: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___type'
 						),
 						editorType: ContentBlockEditor.Select,
@@ -93,24 +93,24 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						},
 					},
 					label: TEXT_FIELD(
-						Config.getConfig().services.i18n.t(
+						AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 						),
 						{
-							label: Config.getConfig().services.i18n.t(
+							label: AdminConfigManager.getConfig().services.i18n.t(
 								'admin/content-block/helpers/generators/buttons___tekst'
 							),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
 					altTitle: TEXT_FIELD('', {
-						label: Config.getConfig().services.i18n.t(
+						label: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/hero___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
 					}),
 					icon: {
-						label: Config.getConfig().services.i18n.t(
+						label: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___icoon'
 						),
 						editorType: ContentBlockEditor.IconPicker,
@@ -119,7 +119,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						},
 					},
 					buttonAction: {
-						label: Config.getConfig().services.i18n.t(
+						label: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/helpers/generators/buttons___knop-actie'
 						),
 						editorType: ContentBlockEditor.ContentPicker,
@@ -128,17 +128,17 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: Config.getConfig().services.i18n.t(
+					addButtonLabel: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe'
 					),
-					deleteButtonLabel: Config.getConfig().services.i18n.t(
+					deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop'
 					),
 				},
 			} as ContentBlockFieldGroup,
 
 			textBelowButtons: TEXT_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___text-onder-knoppen'
 				),
 				editorProps: {
@@ -146,19 +146,19 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			}),
 			src: TEXT_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: Config.getConfig().services.i18n.t(
+					placeholder: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/hero___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___eigen-poster-uploaden'
 				),
 				validator: undefined,
@@ -170,7 +170,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as Partial<FileUploadProps>,
 			}),
 			altText: TEXT_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
@@ -182,7 +182,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/defaults___achtergrondkleur'
 				),
 				editorType: ContentBlockEditor.ColorSelect,

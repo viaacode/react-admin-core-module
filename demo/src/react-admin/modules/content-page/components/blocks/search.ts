@@ -7,7 +7,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_SEARCH_COMPONENTS_STATE = () => ({});
 
@@ -23,7 +23,7 @@ export const INITIAL_SEARCH_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const SEARCH_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/search___search'
 	),
 	type: ContentBlockType.Search,

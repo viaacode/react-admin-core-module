@@ -24,7 +24,8 @@ import {
 	NavigationItem,
 } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { navigate } from '~modules/shared/helpers/link';
@@ -45,7 +46,7 @@ interface NavigationEditProps {
 
 const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);
 
@@ -69,7 +70,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	} = useGetNavigationItem(navigationItemId);
 
 	const getQueries = () => {
-		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return CONTENT_PAGE_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	};
 
 	useEffect(() => {
@@ -81,11 +84,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
 			// Go back to overview if no menu items are present
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-edit___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
 						menuName: navigationBarName,
@@ -184,11 +187,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 							},
 						})
 					);
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/navigation/views/navigation-edit___error'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
 						),
 						type: ToastType.ERROR,
@@ -243,11 +246,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const handleSave = async () => {
 		try {
 			if (!navigationItems) {
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/navigation/views/navigation-edit___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
 					),
 					type: ToastType.ERROR,
@@ -291,11 +294,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/navigation/views/navigation-edit___success'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
 					),
 					type: ToastType.SUCCESS,
@@ -317,11 +320,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/navigation/views/navigation-edit___success'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
 					),
 					type: ToastType.SUCCESS,
@@ -333,11 +336,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					menuForm: navigationItem,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-edit___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -404,7 +407,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						navigationParentOptions={navigationParentOptions}
 						onChange={handleChange}
 						permissionWarning={permissionWarning}
-						enableIcons={Config.getConfig().navigationBars?.enableIcons ?? true}
+						enableIcons={
+							AdminConfigManager.getConfig().navigationBars?.enableIcons ?? true
+						}
 					/>
 				</AdminLayout.Content>
 			</AdminLayout>

@@ -9,7 +9,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import {
 	GET_ALIGN_OPTIONS,
 	GET_WIDTH_OPTIONS,
@@ -32,7 +32,7 @@ export const INITIAL_IMAGE_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/image___afbeelding'
 	),
 	type: ContentBlockType.Image,
@@ -40,32 +40,32 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_IMAGE_COMPONENTS_STATE(),
 		fields: {
 			title: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___bijschift-titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			text: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			imageSource: FILE_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/image___afbeelding'
 					),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),
 			width: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___breedte'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -74,7 +74,7 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			align: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___alignatie'
 				),
 				editorType: ContentBlockEditor.Select,

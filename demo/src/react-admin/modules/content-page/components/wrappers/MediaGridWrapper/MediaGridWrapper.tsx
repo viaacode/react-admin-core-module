@@ -26,7 +26,7 @@ import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { isMobileWidth } from '~modules/shared/helpers/media-query';
 import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;
@@ -84,7 +84,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 				setResolvedResults(results);
 				return;
 			}
-			if (Config.getConfig().user) {
+			if (AdminConfigManager.getConfig().user) {
 				// If we are logged in and get no results, but we do get elements, then the block is loaded in preview mode,
 				// and we should resolve the results ourselves using a separate route on the server
 				const searchQueryLimitNumber =

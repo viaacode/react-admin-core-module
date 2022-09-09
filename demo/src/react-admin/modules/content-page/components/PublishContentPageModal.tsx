@@ -22,7 +22,8 @@ import React, { FunctionComponent, useState } from 'react';
 import { getPublishedState } from '../helpers/get-published-state';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import Html from '~modules/shared/components/Html/Html';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
@@ -69,7 +70,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 			setValidationError(undefined);
 			closeModal(newContent);
 		} catch (err) {
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/components/publish-content-page-modal___error'
 				),

@@ -11,7 +11,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 	times(
@@ -34,12 +34,12 @@ export const INITIAL_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/spotlight___in-de-kijker'
 	),
 	type: ContentBlockType.Spotlight,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.t(
 			'admin/content-block/helpers/generators/spotlight___item'
 		),
 		limits: {
@@ -49,11 +49,11 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			image: FILE_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/spotlight___een-afbeelding-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/spotlight___afbeelding'
 					),
 					editorProps: {
@@ -63,14 +63,14 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/spotlight___titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/spotlight___link'
 				),
 				editorType: ContentBlockEditor.ContentPicker,

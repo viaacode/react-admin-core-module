@@ -1,1 +1,1 @@
-export { default as TranslationsOverview } from './views/TranslationsOverview';
+export * from './views';

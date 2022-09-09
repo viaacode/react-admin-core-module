@@ -12,7 +12,8 @@ import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permi
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
@@ -137,11 +138,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 					// Fire onChange for parent component
 					onChangePermissions?.(false);
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/user-group/views/user-group-overview___success'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 						),
 						type: ToastType.ERROR,
@@ -153,11 +154,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							query: 'UserGroupService.updateUserGroups',
 						})
 					);
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/user-group/views/user-group-overview___error'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 						),
 						type: ToastType.ERROR,
@@ -210,11 +211,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'UserGroupService.getAllUserGroups',
 					})
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user-group/views/user-group-overview___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
 					type: ToastType.ERROR,
@@ -236,11 +237,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'PermissionsService.getAllPermissions',
 					})
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user-group/views/user-group-overview___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
 					type: ToastType.ERROR,

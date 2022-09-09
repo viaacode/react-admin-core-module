@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { compact, flatten, get } from 'lodash-es';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 import {
 	BulkAddSubjectsToProfilesDocument,
@@ -36,7 +36,7 @@ import {
 
 export class UserService {
 	private static getQueries() {
-		return USER_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return USER_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
 	}
 
 	public static adaptProfile(
@@ -45,7 +45,7 @@ export class UserService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			const user = userProfile as ProfileHetArchief;
 			return {
 				profileId: user.id,
@@ -122,7 +122,7 @@ export class UserService {
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted =
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
 					? where
 					: {
 							...where,
@@ -196,7 +196,7 @@ export class UserService {
 
 			/* istanbul ignore next */
 			if (
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
 			) {
 				return (response?.data?.users_profile || []).map(
 					(
@@ -243,7 +243,7 @@ export class UserService {
 					response,
 				});
 			}
-			if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+			if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 				return compact(
 					get(response, 'data.users_summary_view' || []).map(
 						(user: Partial<Avo.User.User>) => get(user, 'profile_id')
@@ -268,13 +268,13 @@ export class UserService {
 		profileIds: string[],
 		isBlocked: boolean
 	): Promise<void> {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return;
 		}
 
 		let url: string | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/admin/user/bulk-block`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -308,7 +308,7 @@ export class UserService {
 	}
 
 	static async fetchDistinctBusinessCategories() {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return [];
 		}
 
@@ -339,7 +339,7 @@ export class UserService {
 			}
 			/* istanbul ignore next */
 			if (
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
 			) {
 				return get(response, 'data.users_identity_provider', []).map(
 					(idp: { name: string }) => idp.name
@@ -360,10 +360,10 @@ export class UserService {
 		transferToProfileId?: string
 	): Promise<void> {
 		let url: string | undefined;
-		const isAvo = Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
+		const isAvo = AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
@@ -394,7 +394,7 @@ export class UserService {
 	}
 
 	static async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
@@ -441,7 +441,7 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return;
 		}
 
@@ -463,7 +463,7 @@ export class UserService {
 					),
 				},
 			});
-			await Config.getConfig().services.queryCache.clear('clearUserCache');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
 
 			if (response.errors) {
 				throw new CustomError('GraphQL query has errors', null, { response });
@@ -481,7 +481,7 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return;
 		}
 
@@ -493,7 +493,7 @@ export class UserService {
 					profileIds,
 				},
 			});
-			await Config.getConfig().services.queryCache.clear('clearUserCache');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
 			if (response.errors) {
 				throw new CustomError('GraphQL query has errors', null, { response });
 			}

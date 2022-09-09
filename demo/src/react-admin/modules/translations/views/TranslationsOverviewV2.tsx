@@ -1,7 +1,6 @@
 import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
-	KeyboardEvent,
 	MouseEvent,
 	ReactNode,
 	useCallback,
@@ -10,23 +9,14 @@ import React, {
 	useState,
 } from 'react';
 
-import { TranslationV2 } from '../translations.types';
+import { TranslationsOverviewV2Props, TranslationV2 } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { OrderDirection } from '~modules/shared/types';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
 import {
-	BlockHeading,
-	ModalBody,
-	ModalFooterRight,
-	Toolbar,
-	ToolbarLeft,
-} from '@viaa/avo2-components';
-import {
 	Button,
-	keysEnter,
-	Modal,
-	onKey,
 	Pagination,
 	RichEditorState,
 	RichTextEditor,
@@ -37,6 +27,7 @@ import { Icon } from '~modules/shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
 	ITEMS_PER_PAGE,
+	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_QUERY_PARAM_CONFIG,
 } from '~modules/translations/translations.const';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
@@ -47,7 +38,10 @@ import {
 	convertFromListToDatabase,
 } from '~modules/translations/helpers/database-conversions';
 
-const TranslationsOverviewV2: FunctionComponent = () => {
+export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Props> = ({
+	className,
+	renderPopup,
+}) => {
 	const [translations, setTranslations] = useState<TranslationV2[] | null>(null);
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
 		TranslationV2[] | null
@@ -58,7 +52,6 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 		useState<RichEditorState | null>(null);
 
 	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
-	const [searchTerm, setSearchTerm] = useState<string>('');
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / ITEMS_PER_PAGE);
 
@@ -69,16 +62,17 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 				translation.value.toLowerCase().includes(filters.search.toLowerCase())
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
-		setFilteredAndPaginatedTranslations(
-			orderBy(
-				filteredTranslations.slice(
-					(filters.page - 1) * ITEMS_PER_PAGE,
-					Math.min(translations?.length || 0, filters.page * ITEMS_PER_PAGE)
-				),
-				[filters.orderProp],
-				[filters.orderDirection as OrderDirection]
-			)
+
+		const orderedTranslations = orderBy(
+			filteredTranslations,
+			[filters.orderProp],
+			[filters.orderDirection as OrderDirection]
 		);
+		const paginatedTranslations = orderedTranslations.slice(
+			(filters.page - 1) * ITEMS_PER_PAGE,
+			Math.min(translations?.length || 0, filters.page * ITEMS_PER_PAGE)
+		);
+		setFilteredAndPaginatedTranslations(paginatedTranslations);
 	}, [translations, filters, setFilteredTranslationsCount, setFilteredAndPaginatedTranslations]);
 
 	const getTranslations = useCallback(async () => {
@@ -89,11 +83,11 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 			setTranslations(translationRows);
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/translations/views/translations-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -104,10 +98,6 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 	useEffect(() => {
 		getTranslations();
 	}, [getTranslations]);
-
-	useEffect(() => {
-		setSearchTerm(filters.search);
-	}, [filters.search]);
 
 	useEffect(() => {
 		updateFilteredTranslations();
@@ -131,11 +121,11 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 					trans.key === activeTranslation.key
 			);
 			if (!freshTranslation) {
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/translations/views/translations-overview___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'Deze vertaling kan niet langer gevonden worden in de database. Gelieve de pagina te herladen.'
 					),
 					type: ToastType.ERROR,
@@ -163,20 +153,22 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 			setActiveTranslation(null);
 			setActiveTranslationEditorState(null);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/translations/views/translations-overview___success'
 				),
-				description: Config.getConfig().services.i18n.t('De vertaling is opgeslagen'),
+				description: AdminConfigManager.getConfig().services.i18n.t(
+					'De vertaling is opgeslagen'
+				),
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save translation', err));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/translations/views/translations-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'Het opslaan van de vertaling is mislukt'
 				),
 				type: ToastType.ERROR,
@@ -184,18 +176,14 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 		}
 	};
 
-	const handleSearchTermKeyUp = (e: KeyboardEvent) => {
-		onKey(e, [...keysEnter], () => setFilters({ ...filters, search: searchTerm }));
-	};
-
 	const handleRowClick = (_event: MouseEvent<any, any>, translationRow: Row<TranslationV2>) => {
 		setActiveTranslation(translationRow.original);
 	};
 
-	const handlePageChange = (newPage: number) => {
+	const handlePageChange = (newPageZeroBased: number) => {
 		setFilters({
 			...filters,
-			page: newPage,
+			page: newPageZeroBased + 1,
 		});
 	};
 
@@ -211,17 +199,16 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 	const handleSortChange = useCallback(
 		(rules) => {
 			const orderProp = rules[0]?.id || undefined;
+			const orderDirection = rules[0]?.desc ? OrderDirection.desc : OrderDirection.asc;
 
-			setFilters({
-				...filters,
-				orderProp,
-				orderDirection: rules[0]
-					? rules[0].desc
-						? OrderDirection.desc
-						: OrderDirection.asc
-					: undefined,
-				page: 1,
-			});
+			if (filters.orderProp !== orderProp || filters.orderDirection !== orderDirection) {
+				setFilters({
+					...filters,
+					orderProp,
+					orderDirection,
+					page: 1,
+				});
+			}
 		},
 		[filters, setFilters]
 	);
@@ -231,9 +218,14 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 			return <Loader />;
 		}
 		if (!filteredAndPaginatedTranslations.length) {
-			return <>{Config.getConfig().services.i18n.t('Er zijn geen vertalingen gevonden')}</>;
+			return (
+				<>
+					{AdminConfigManager.getConfig().services.i18n.t(
+						'Er zijn geen vertalingen gevonden'
+					)}
+				</>
+			);
 		}
-
 		return (
 			<>
 				<Table
@@ -242,40 +234,32 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 							columns: [
 								{
 									id: 'key',
-									Header: Config.getConfig().services.i18n.t('id'),
+									Header: AdminConfigManager.getConfig().services.i18n.t('id'),
 									accessor: 'key',
 									Cell: ({ row }: { row: Row<TranslationV2> }) => {
 										const parts = row.original.label?.split('___');
 										return (
 											<>
 												<div>
-													<strong>{parts[0]}</strong>
+													<strong>{parts[1]}</strong>
 												</div>
-												<div>{parts[1]}</div>
+												<div className="u-text-muted">{parts[0]}</div>
 											</>
 										);
 									},
 								},
 								{
 									id: 'value',
-									Header: Config.getConfig().services.i18n.t('Waarde'),
+									Header: AdminConfigManager.getConfig().services.i18n.t(
+										'Waarde'
+									),
 									accessor: 'value',
 								},
 								{
 									Header: '',
 									id: 'cp-visitors-histories-table-actions',
-									Cell: ({ row }: { row: Row<TranslationV2> }) => {
-										return (
-											<Button
-												variants={['block', 'black']}
-												onClick={() => setActiveTranslation(row.original)}
-												icon="edit"
-												aria-label={Config.getConfig().services.i18n.t(
-													'Pas deze vertaling aan: {{translationValue}}',
-													{ translationValue: row.values.value }
-												)}
-											></Button>
-										);
+									Cell: () => {
+										return <Icon name="edit"></Icon>;
 									},
 								},
 							],
@@ -296,9 +280,9 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 									next: (
 										<Button
 											className="u-pl-24:sm u-pl-8"
-											disabled={filters.page + 1 === pageCount}
+											disabled={filters.page === pageCount}
 											variants={['text', 'neutral']}
-											label={Config.getConfig().services.i18n.t(
+											label={AdminConfigManager.getConfig().services.i18n.t(
 												'modules/shared/components/pagination-bar/pagination-bar___volgende'
 											)}
 											iconEnd={<Icon name="angleRight" />}
@@ -307,9 +291,9 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 									previous: (
 										<Button
 											className="u-pr-24:sm u-pr-8"
-											disabled={filters.page + 1 === 1}
+											disabled={filters.page === 1}
 											variants={['text', 'neutral']}
-											label={Config.getConfig().services.i18n.t(
+											label={AdminConfigManager.getConfig().services.i18n.t(
 												'modules/shared/components/pagination-bar/pagination-bar___vorige'
 											)}
 											iconStart={<Icon name="angleLeft" />}
@@ -318,7 +302,7 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 								}}
 								showFirstLastNumbers
 								onPageChange={handlePageChange}
-								currentPage={filters.page}
+								currentPage={filters.page - 1}
 								pageCount={pageCount}
 							/>
 						);
@@ -328,62 +312,46 @@ const TranslationsOverviewV2: FunctionComponent = () => {
 		);
 	};
 
+	const renderPopupBody = () => {
+		if (!activeTranslation) {
+			return null;
+		}
+		return (
+			<>
+				<div>
+					<strong>{activeTranslation.key.split('___')[1]}</strong>
+				</div>
+				<div className="u-text-muted">{activeTranslation.key.split('___')[0]}</div>
+				<RichTextEditor
+					onChange={setActiveTranslationEditorState}
+					state={activeTranslationEditorState || undefined}
+					initialHtml={activeTranslation.value}
+					controls={RICH_TEXT_EDITOR_OPTIONS}
+				></RichTextEditor>
+			</>
+		);
+	};
+
 	return (
-		<>
-			<Toolbar>
-				<ToolbarLeft>
-					<BlockHeading type="h1">
-						{Config.getConfig().services.i18n.t('Vertalingen')}
-					</BlockHeading>
-				</ToolbarLeft>
-			</Toolbar>
+		<div className={className}>
 			<TextInput
 				type="search"
 				iconEnd={<Icon name="filter" />}
-				value={searchTerm}
-				onChange={(e) => setSearchTerm(e.target.value)}
-				onKeyDown={handleSearchTermKeyUp}
+				value={filters.search}
+				onChange={(e) => setFilters({ search: e.target.value, page: 1 })}
+				placeholder={AdminConfigManager.getConfig().services.i18n.t('Zoek op id of waarde')}
 			></TextInput>
 			{renderTranslationsTable()}
-			{!!activeTranslation && (
-				<Modal
-					isOpen={!!activeTranslation}
-					title={Config.getConfig().services.i18n.t('Vertaling aanpassen')}
-					onClose={() => {
-						setActiveTranslation(null);
-						setActiveTranslationEditorState(null);
-					}}
-				>
-					<ModalBody>
-						<div>{activeTranslation.key.split('___')[0]}</div>
-						<div>
-							<strong>{activeTranslation.key.split('___')[1]}</strong>
-						</div>
-						<RichTextEditor
-							onChange={setActiveTranslationEditorState}
-							state={activeTranslationEditorState || undefined}
-							initialHtml={activeTranslation.value}
-						></RichTextEditor>
-					</ModalBody>
-					<ModalFooterRight>
-						<Button
-							variants={['block', 'black']}
-							onClick={() => saveActiveTranslation()}
-							label={Config.getConfig().services.i18n.t('Bewaar wijzigingen')}
-						></Button>
-						<Button
-							variants={['block']}
-							onClick={() => {
-								setActiveTranslation(null);
-								setActiveTranslationEditorState(null);
-							}}
-							label={Config.getConfig().services.i18n.t('Annuleer')}
-						></Button>
-					</ModalFooterRight>
-				</Modal>
-			)}
-		</>
+			{renderPopup({
+				title: AdminConfigManager.getConfig().services.i18n.t('Vertaling aanpassen'),
+				body: renderPopupBody(),
+				isOpen: !!activeTranslation,
+				onSave: () => saveActiveTranslation(),
+				onClose: () => {
+					setActiveTranslation(null);
+					setActiveTranslationEditorState(null);
+				},
+			})}
+		</div>
 	);
 };
-
-export default TranslationsOverviewV2;

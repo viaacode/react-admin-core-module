@@ -6,7 +6,7 @@ import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { NULL_FILTER } from '../../shared/helpers/filters';
 import { ContentOverviewTableCols, ContentWidth } from '../types/content-pages.types';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
@@ -63,7 +63,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	userGroupOptions: CheckboxOption[],
 	contentPageLabelOptions: CheckboxOption[]
 ) => FilterableColumn[] = (contentTypeOptions, userGroupOptions, contentPageLabelOptions) => {
-	const i18n = Config.getConfig().services.i18n;
+	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{
 			id: 'title',
@@ -197,7 +197,7 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
 }> = {
 	user_profile_id: (order: Avo.Search.OrderDirection) => {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return {
 				owner_profile: { first_name: order },
 			};
@@ -207,7 +207,7 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 		};
 	},
 	author_user_group: (order: Avo.Search.OrderDirection) => {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return {
 				owner_profile: { group: { name: order } },
 			};
@@ -236,34 +236,34 @@ export const ITEMS_PER_PAGE = 10;
 export const GET_CONTENT_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
-		label: Config.getConfig().services.i18n.t('admin/content/content___inhoud'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/content/content___inhoud'),
 		icon: 'layout',
 	},
 	{
 		id: 'metadata',
-		label: Config.getConfig().services.i18n.t('admin/content/content___metadata'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/content/content___metadata'),
 		icon: 'file-text',
 	},
 ];
 
 export const GET_CONTENT_WIDTH_OPTIONS = () => [
 	{
-		label: Config.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.t(
 			'admin/content/content___kies-een-content-breedte'
 		),
 		value: '',
 		disabled: true,
 	},
 	{
-		label: Config.getConfig().services.i18n.t('admin/content/content___max-1300-px'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/content/content___max-1300-px'),
 		value: ContentWidth.EXTRA_LARGE,
 	},
 	{
-		label: Config.getConfig().services.i18n.t('admin/content/content___breed-940-px'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/content/content___breed-940-px'),
 		value: ContentWidth.LARGE,
 	},
 	{
-		label: Config.getConfig().services.i18n.t('admin/content/content___medium-720-px'),
+		label: AdminConfigManager.getConfig().services.i18n.t('admin/content/content___medium-720-px'),
 		value: ContentWidth.MEDIUM,
 	},
 ];

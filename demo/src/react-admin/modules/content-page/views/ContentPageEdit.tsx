@@ -2,7 +2,8 @@ import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-compo
 import { get, has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
@@ -71,12 +72,12 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
 
-	const user = Config.getConfig().user;
+	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
 		(permission: Permission) => PermissionService.hasPerm(user, permission),
 		[user]
@@ -127,7 +128,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					id,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t('modules/content-page/views/content-page-edit___error'),
 				description: t(
 					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
@@ -155,7 +156,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 							payload: newConfig,
 						});
 
-						Config.getConfig().services.toastService.showToast({
+						AdminConfigManager.getConfig().services.toastService.showToast({
 							title: t('modules/content-page/views/content-page-edit___success'),
 							description: t(
 								'admin/content/views/content-edit___de-blok-is-toegevoegd'
@@ -166,7 +167,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				}
 			} catch (err) {
 				console.error(new CustomError('Failed to paste content block', err));
-				Config.getConfig().services.toastService.showToast({
+				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: t('modules/content-page/views/content-page-edit___error'),
 					description: t(
 						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
@@ -282,7 +283,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			if (!isFormValid || !areConfigsValid) {
 				setIsSaving(false);
 				if (!isFormValid) {
-					Config.getConfig().services.toastService.showToast({
+					AdminConfigManager.getConfig().services.toastService.showToast({
 						title: t('modules/content-page/views/content-page-edit___error'),
 						description: t(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
@@ -291,7 +292,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					});
 				}
 				if (!areConfigsValid) {
-					Config.getConfig().services.toastService.showToast({
+					AdminConfigManager.getConfig().services.toastService.showToast({
 						title: t('modules/content-page/views/content-page-edit___error'),
 						description: t(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
@@ -373,11 +374,11 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 			]);
 
-			Config.getConfig()?.contentPage?.onSaveContentPage(
+			AdminConfigManager.getConfig()?.contentPage?.onSaveContentPage(
 				insertedOrUpdatedContent as ContentPageInfo
 			);
 
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t('modules/content-page/views/content-page-edit___success'),
 				description: t(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
@@ -389,7 +390,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t('modules/content-page/views/content-page-edit___error'),
 				description: t(
 					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { CustomError } from '../helpers/custom-error';
 
 import { SettingsService } from '../services/settings-service/settings.service';
@@ -24,9 +25,11 @@ export const useEducationLevels = (): UseEducationLevelsTuple => {
 				console.error(
 					new CustomError('Failed to get educationLevels from the database', err)
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-education-levels___error'),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
+						'modules/shared/hooks/use-education-levels___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'shared/hooks/use-education-levels___ophalen-van-de-opleidingsniveaus-is-mislukt'
 					),
 					type: ToastType.ERROR,

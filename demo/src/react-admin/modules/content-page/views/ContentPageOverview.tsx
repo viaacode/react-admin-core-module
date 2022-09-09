@@ -39,7 +39,8 @@ import {
 	ContentTableState,
 } from '../types/content-pages.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import {
@@ -87,7 +88,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
 		return contentTypes.map(
@@ -107,14 +108,16 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
-	const getUser = () => Config.getConfig().user;
+	const getUser = () => AdminConfigManager.getConfig().user;
 
 	const hasPerm = useCallback((permission: Permission) => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
 	const ownerFilter = (queryWildcard: string): any[] => {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		) {
 			return [
 				{
 					owner: {
@@ -181,7 +184,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				);
 				let userGroupPath: string;
 				if (
-					Config.getConfig().database.databaseApplicationType ===
+					AdminConfigManager.getConfig().database.databaseApplicationType ===
 					AvoOrHetArchief.hetArchief
 				) {
 					userGroupPath = 'owner_profile.group_id';
@@ -264,7 +267,7 @@ const ContentPageOverview: FunctionComponent = () => {
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			await fetchContentPages();
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
 				),
@@ -277,7 +280,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			console.error(
 				new CustomError('Failed to delete content page', err, { contentToDelete })
 			);
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
@@ -309,7 +312,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		if (page && page.path) {
 			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
@@ -324,7 +327,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	// Render
 	const renderTableCell = (rowData: any, columnId: ContentOverviewTableCols): ReactNode => {
 		const { id, profile, title } = rowData;
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		switch (columnId) {
 			case 'title':

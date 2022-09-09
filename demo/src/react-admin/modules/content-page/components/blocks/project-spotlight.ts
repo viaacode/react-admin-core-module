@@ -12,7 +12,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 	times(
@@ -35,12 +35,12 @@ export const INITIAL_PROJECTS_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockSta
 
 export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/projects-spotlight___projecten-in-de-kijker'
 	),
 	type: ContentBlockType.ProjectsSpotlight,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.t(
 			'admin/content-block/helpers/generators/projects-spotlight___project'
 		),
 		limits: {
@@ -50,7 +50,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 		state: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			project: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/project-spotlight___project-pagina'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -60,7 +60,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				} as ContentPickerProps,
 			},
 			customImage: FILE_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-afbeelding-optioneel'
 				),
 				editorProps: {
@@ -70,7 +70,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				validator: undefined,
 			}),
 			customTitle: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,

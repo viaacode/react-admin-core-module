@@ -26,7 +26,7 @@ import { createKey } from '~modules/shared/helpers/create-key';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ContentEditContentBlocks.scss';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 interface ContentEditContentBlocksProps {
@@ -190,7 +190,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
-						userGroupId={Config.getConfig()?.user?.userGroup?.id}
+						userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
 					/>
 				</div>
 				<Sidebar className="c-content-edit-view__sidebar" light>

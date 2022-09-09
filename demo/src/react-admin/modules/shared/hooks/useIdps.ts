@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { UserService } from '~modules/user/user.service';
 import { CustomError } from '../helpers/custom-error';
 
@@ -22,9 +23,11 @@ export const useIdps = (): UseIdpsTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get idps from the database', err));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-idps___error'),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
+						'modules/shared/hooks/use-idps___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'shared/hooks/use-idps___ophalen-van-de-idps-is-mislukt'
 					),
 					type: ToastType.ERROR,

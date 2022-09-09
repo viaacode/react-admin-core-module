@@ -2,7 +2,7 @@ import { get, sortBy } from 'lodash-es';
 
 import { Avo } from '@viaa/avo2-types';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '../data-service';
@@ -13,7 +13,7 @@ import { GetOrganizationsWithUsersQuery as GetOrganizationsWithUsersQueryHetArch
 
 export class OrganisationService {
 	private static getQueries() {
-		return ORGANIZATION_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return ORGANIZATION_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
 	}
 
 	public static async fetchOrganisationsWithUsers(): Promise<
@@ -31,7 +31,7 @@ export class OrganisationService {
 			}
 
 			let organisations: Partial<Avo.Organization.Organization>[];
-			if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+			if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
 				organisations = get(response, 'data.shared_organisations_with_users');
 
 				if (!organisations) {

@@ -9,7 +9,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_QUOTE_COMPONENTS_STATE = (): QuoteBlockComponentState => ({
 	quote: '',
@@ -27,7 +27,7 @@ export const INITIAL_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/quote___quote'
 	),
 	type: ContentBlockType.Quote,
@@ -35,11 +35,11 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_QUOTE_COMPONENTS_STATE(),
 		fields: {
 			quote: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/quote___quote-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/quote___quote'
 					),
 					editorType: ContentBlockEditor.TextInput,
@@ -48,7 +48,7 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			authorName: TEXT_FIELD(
 				undefined,
 				{
-				 label: Config.getConfig().services.i18n.t(
+				 label: AdminConfigManager.getConfig().services.i18n.t(
 				  'admin/content-block/helpers/generators/quote___auteur'
 				 ),
 				 editorType: ContentBlockEditor.TextInput,
@@ -58,7 +58,7 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			   authorInitials: TEXT_FIELD(
 				undefined,
 				{
-				 label: Config.getConfig().services.i18n.t(
+				 label: AdminConfigManager.getConfig().services.i18n.t(
 				  'admin/content-block/helpers/generators/quote___initialen'
 				 ),
 				 editorType: ContentBlockEditor.TextInput,
@@ -66,11 +66,11 @@ export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			authorImage: FILE_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/image___afbeelding'
 					),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,

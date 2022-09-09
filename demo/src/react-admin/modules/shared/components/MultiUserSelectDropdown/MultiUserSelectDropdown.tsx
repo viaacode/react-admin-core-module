@@ -17,7 +17,8 @@ import { CommonUser } from '~modules/user/user.types';
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { UserService } from '~modules/user/user.service';
@@ -84,11 +85,11 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							})
 						)
 					);
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.t(
 							'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
 						),
 						type: ToastType.ERROR,

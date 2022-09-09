@@ -1,4 +1,4 @@
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { CONTENT_PAGE_LABEL_PATH } from '~modules/content-page-labels/content-page-label.const';
 import { CONTENT_PATH } from '~modules/content-page/const/content-page.consts';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
@@ -17,7 +17,7 @@ export const ADMIN_PATH = Object.freeze({
 });
 
 export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
-	const i18n = Config.getConfig().services.i18n;
+	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{
 			label: i18n.t('Gebruikers'),

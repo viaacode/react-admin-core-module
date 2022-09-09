@@ -20,7 +20,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_MEDIA_PLAYER_COMPONENTS_STATE = (): MediaPlayerBlockComponentState => ({
 	title: '',
@@ -37,7 +37,7 @@ export const INITIAL_MEDIA_PLAYER_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/helpers/generators/media-player___media-speler'
 	),
 	type: ContentBlockType.MediaPlayer,
@@ -45,7 +45,7 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 		state: INITIAL_MEDIA_PLAYER_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___toegankelijkheidstitel'
 				),
 				validator: undefined,
@@ -55,19 +55,19 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				validator: undefined,
 			}),
 			src: TEXT_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___eigen-video-url-van-flowplayer-com-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: Config.getConfig().services.i18n.t(
+					placeholder: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___eigen-poster-uploaden-optioneel'
 				),
 				validator: undefined,
@@ -79,21 +79,21 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				} as FileUploadProps,
 			}),
 			annotationTitle: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___bijschift-titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			annotationText: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			width: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-player___breedte'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -104,7 +104,7 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 			autoplay: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/content-block/helpers/generators/media-player___automatisch-afspelen'
 					),
 				} as CheckboxProps,

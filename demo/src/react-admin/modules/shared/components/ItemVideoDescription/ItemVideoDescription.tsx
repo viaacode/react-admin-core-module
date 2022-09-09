@@ -29,7 +29,7 @@ import { parseDuration } from '~modules/shared/helpers/parsers/duration';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './ItemVideoDescription.scss';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export interface CuePoints {
 	start: number | null;
@@ -165,7 +165,7 @@ const ItemVideoDescription: FunctionComponent<ItemVideoDescriptionProps> = ({
 	};
 
 	const renderTitle = () => {
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		const titleElement = (
 			<BlockHeading

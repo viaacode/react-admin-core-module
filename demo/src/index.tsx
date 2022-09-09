@@ -6,7 +6,7 @@ import App from './App';
 import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { Config, ConfigValue } from '~core/config';
+import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
@@ -16,14 +16,14 @@ import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/conte
 
 const proxyUrl = 'http://localhost:3100';
 
-const routerConfig: ConfigValue['services']['router'] = {
+const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
 	useHistory: useHistory,
 	useParams: useParams,
 };
 
 function setConfig() {
-	Config.setConfig({
+	AdminConfigManager.setConfig({
 		contentPage: {
 			availableContentBlocks: [
 				ContentBlockType.Heading,

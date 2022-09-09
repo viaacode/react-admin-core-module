@@ -17,7 +17,8 @@ import { NavigationService } from '../navigation.service';
 import './NavigationDetail.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
@@ -33,7 +34,7 @@ export interface NavigationDetailProps {
 
 const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -78,22 +79,22 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			await invalidateNavigationQueries();
 			await refetchNavigationItems();
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-detail___success'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-navigatie-item-is-succesvol-verwijderd'
 				),
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to delete menu item', err, { idToDelete }));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-detail___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-verwijderen-van-het-navigatie-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -114,11 +115,11 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 
 			await NavigationService.updateNavigationItems(navigationItems);
 			await invalidateNavigationQueries();
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-detail___success'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___de-navigatie-items-zijn-succesvol-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -127,11 +128,11 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			console.error(
 				new CustomError('Failed to update menu items', err, { menuItems: navigationItems })
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/navigation/views/navigation-detail___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/menu/views/menu-detail___het-opslaan-van-de-navigatie-items-is-mislukt'
 				),
 				type: ToastType.ERROR,

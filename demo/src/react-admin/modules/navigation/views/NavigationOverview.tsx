@@ -5,7 +5,7 @@ import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import {
@@ -16,8 +16,8 @@ import { Loader } from '~modules/shared/components';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { t } = useTranslation();
-	const Link = Config.getConfig().services.router.Link;
-	const history = Config.getConfig().services.router.useHistory();
+	const Link = AdminConfigManager.getConfig().services.router.Link;
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,

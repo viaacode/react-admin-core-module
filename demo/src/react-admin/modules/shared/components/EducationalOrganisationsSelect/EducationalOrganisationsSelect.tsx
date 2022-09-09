@@ -7,7 +7,8 @@ import React, { FunctionComponent, ReactText, useEffect, useState } from 'react'
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface Tag {
@@ -42,13 +43,13 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	}>({});
 
 	useEffect(() => {
-		Config.getConfig()
+		AdminConfigManager.getConfig()
 			.services.educationOrganisationService.fetchCities()
 			.then(setCities)
 			.catch((err: any) => {
 				console.error(err);
 				console.error(new Error('Failed to get cities'));
-				Config.getConfig().services.toastService.showToast({
+				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: t(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
 					),
@@ -75,7 +76,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				} else {
 					// fetch from server
 					orgs =
-						await Config.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
+						await AdminConfigManager.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
 							city,
 							zipCode
 						);
@@ -93,7 +94,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error('Failed to get educational organizations', err, {
 					selectedCity,
 				});
-				Config.getConfig().services.toastService.showToast({
+				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: t(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 					),
@@ -123,7 +124,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			(org: ClientEducationOrganization) => org.label === orgLabel
 		);
 		if (!selectedOrg) {
-			Config.getConfig().services.toastService.showToast({
+			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: t(
 					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 				),

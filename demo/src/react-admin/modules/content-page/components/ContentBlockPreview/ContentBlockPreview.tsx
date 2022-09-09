@@ -18,7 +18,7 @@ import {
 import { generateSmartLink } from '~modules/shared/helpers/link';
 
 import './ContentBlockPreview.scss';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -39,7 +39,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	const componentState = get(contentBlockConfig, 'components.state');
 	const containerSize =
 		contentPageInfo.content_width?.toUpperCase() ||
-		Config.getConfig().contentPage?.defaultPageWidth ||
+		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
 	const PreviewComponent = COMPONENT_PREVIEW_MAP[contentBlockConfig.type];
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
@@ -93,7 +93,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 		// Set profile to current user for unsaved pages
 		blockStateProps.contentPageInfo = {
 			...contentPageInfo,
-			profile: contentPageInfo.profile || Config.getConfig().user,
+			profile: contentPageInfo.profile || AdminConfigManager.getConfig().user,
 		};
 	}
 

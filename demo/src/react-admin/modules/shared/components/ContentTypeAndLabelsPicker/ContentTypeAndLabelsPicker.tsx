@@ -16,7 +16,8 @@ import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
 import { CustomError } from '../../helpers/custom-error';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentTypeAndLabelsValue {
@@ -58,11 +59,11 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						}
 					)
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 					),
 					type: ToastType.ERROR,

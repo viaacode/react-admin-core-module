@@ -6,7 +6,8 @@ import { CustomError } from '../../shared/helpers/custom-error';
 import { GET_SPECIAL_USER_GROUPS } from '../../user-group/const/user-group.const';
 import { UserGroupService } from '../../user-group/services/user-group.service';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 type UseUserGroupsTuple = [TagInfo[] | CheckboxOption[], boolean];
@@ -53,11 +54,11 @@ export const useUserGroupOptions = (
 			.catch((err) => {
 				console.error(new CustomError('Failed to get user group options', err));
 
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/content-page/hooks/use-user-group-options___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,

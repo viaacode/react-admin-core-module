@@ -2,7 +2,8 @@ import FileSaver from 'file-saver';
 import { compact, first, get, isNil, without } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
@@ -63,7 +64,7 @@ import { UserOverviewProps } from './UserOverview.types';
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [profiles, setProfiles] = useState<CommonUser[] | null>(null);
 	const [profileCount, setProfileCount] = useState<number>(0);
@@ -84,13 +85,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
-	const app = Config.getConfig().database.databaseApplicationType;
-	const bulkActions = Config.getConfig().users?.bulkActions || [];
+	const app = AdminConfigManager.getConfig().database.databaseApplicationType;
+	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
-				Config.getConfig().user,
+				AdminConfigManager.getConfig().user,
 				setSelectedCheckboxes(
 					userGroupOptions,
 					get(tableState, 'author.user_groups', []) as string[]
@@ -356,11 +357,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 			if (addOrRemove === 'add') {
 				await UserService.bulkAddSubjectsToProfiles(subjects, compact(selectedProfileIds));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user/views/user-overview___success'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/users/views/user-overview___de-vakken-zijn-toegevoegd-aan-de-geselecteerde-gebruikers'
 					),
 					type: ToastType.SUCCESS,
@@ -371,11 +372,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					subjects,
 					compact(selectedProfileIds)
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/user/views/user-overview___success'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'admin/users/views/user-overview___de-vakken-zijn-verwijderd-van-de-geselecteerde-gebruikers'
 					),
 					type: ToastType.SUCCESS,
@@ -388,11 +389,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					subjects,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-aanpassen-van-de-vakken-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -406,11 +407,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			const profileIds = await UserService.getProfileIds(
 				generateWhereObject(getFilters(tableState), false)
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___success'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebuikers-geselecteerd',
 					{
 						numOfSelectedProfiles: `${profileIds.length}`,
@@ -428,11 +429,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				)
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-ophalen-van-alle-geselecteerde-gebruiker-ids-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -451,11 +452,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			setIsLoading(true);
 			await UserService.updateBlockStatusByProfileIds(selectedProfileIds, blockOrUnblock);
 			await fetchProfiles();
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___success'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					blockOrUnblock
 						? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
 						: 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
@@ -463,11 +464,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-blokkeren-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -532,11 +533,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				new CustomError('Failed to export users to csv file', err, { tableState })
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/user/views/user-overview___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/users/views/user-overview___het-exporteren-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -577,11 +578,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						console.error(
 							new CustomError('Failed to get subjects from the database', err)
 						);
-						Config.getConfig().services.toastService.showToast({
-							title: Config.getConfig().services.i18n.t(
+						AdminConfigManager.getConfig().services.toastService.showToast({
+							title: AdminConfigManager.getConfig().services.i18n.t(
 								'modules/user/views/user-overview___error'
 							),
-							description: Config.getConfig().services.i18n.t(
+							description: AdminConfigManager.getConfig().services.i18n.t(
 								'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 							),
 							type: ToastType.ERROR,
@@ -592,7 +593,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		const isBlocked = get(commonUser, 'user.is_blocked');
 
@@ -739,7 +740,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(Config.getConfig().user, bulkActions)}
+					bulkActions={GET_USER_BULK_ACTIONS(AdminConfigManager.getConfig().user, bulkActions)}
 					rowKey={(row: CommonUser) =>
 						row?.profileId || row?.userId || get(row, 'user.mail')
 					}

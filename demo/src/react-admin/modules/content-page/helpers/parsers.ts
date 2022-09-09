@@ -11,7 +11,8 @@ import {
 import { compact, get } from 'lodash-es';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block.consts';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 
 export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentPageInfo {
 	const labels = (dbContentPage.content_content_labels || []).map(
@@ -37,7 +38,7 @@ export function convertToContentPageInfo(dbContentPage: ContentPageDb): ContentP
 		content_type: dbContentPage.content_type as Avo.ContentPage.Type,
 		content_width:
 			dbContentPage.content_width ||
-			Config.getConfig()?.contentPage?.defaultPageWidth ||
+			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth ||
 			ContentWidth.EXTRA_LARGE,
 		publish_at: dbContentPage.publish_at || null,
 		depublish_at: dbContentPage.depublish_at || null,
@@ -100,11 +101,11 @@ export const parseContentBlocks = (
 						CONTENT_BLOCK_CONFIG_MAP,
 					})
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/content-page/helpers/get-published-state___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
 					),
 					type: ToastType.ERROR,

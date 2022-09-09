@@ -18,7 +18,8 @@ import { filterTypes, setInitialInput, setInitialItem } from './ContentPicker.he
 import './ContentPicker.scss';
 import { parseSearchQuery } from './helpers/parse-picker';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
@@ -35,7 +36,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
 	initialValue,
 	onSelect,
-	placeholder = Config.getConfig().services.i18n.t(
+	placeholder = AdminConfigManager.getConfig().services.i18n.t(
 		'admin/shared/components/content-picker/content-picker___selecteer-een-item'
 	),
 	hideTypeDropdown = false,
@@ -101,11 +102,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 						selectedType,
 					})
 				);
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/shared/components/content-picker/content-picker___error'
 					),
-					description: Config.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/admin/shared/components/content-picker/content-picker___het-ophalen-van-de-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -161,11 +162,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					selectedItem,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/admin/shared/components/content-picker/content-picker___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/shared/components/content-picker/content-picker___voor-deze-content-pagina-is-geen-pad-geconfigureerd'
 				),
 				type: ToastType.ERROR,

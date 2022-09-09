@@ -2,12 +2,12 @@ import { get } from 'lodash-es';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { TRANSLATIONS_QUERIES } from './queries/translations.queries';
 
 export class TranslationsService {
 	private static getQueries() {
-		return TRANSLATIONS_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return TRANSLATIONS_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
 	}
 
 	static async fetchTranslations(): Promise<any> {
@@ -18,7 +18,7 @@ export class TranslationsService {
 			});
 
 			const path =
-				Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
 					? 'data.app_config'
 					: 'data.app_site_variables';
 			return get(response, path, null);
@@ -43,7 +43,7 @@ export class TranslationsService {
 					translations,
 				},
 			});
-			await Config.getConfig().services.queryCache.clear('clearTranslations');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearTranslations');
 		} catch (err) {
 			const error = new CustomError('Failed to update translations', err, {
 				query: 'UPDATE_TRANSLATIONS',

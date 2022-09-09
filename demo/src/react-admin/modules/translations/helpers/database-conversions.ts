@@ -1,10 +1,10 @@
 import { TranslationsState, TranslationV2 } from '~modules/translations/translations.types';
 import { flatten, fromPairs, get, groupBy, map } from 'lodash-es';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 const getKeyPrefix = () =>
-	Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+	AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 		? 'translations-'
 		: 'TRANSLATIONS_';
 

@@ -9,7 +9,7 @@ import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { getProfileName } from '~modules/shared/helpers/get-profile-info';
 import { navigateToContentType } from '~modules/shared/helpers/link';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;
@@ -17,7 +17,7 @@ export interface ContentPageMetaProps {
 
 const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageInfo }) => {
 	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const renderLabel = (labelObj: Partial<Avo.ContentPage.Label>) => {
 		return (labelObj as any).link_to ? (

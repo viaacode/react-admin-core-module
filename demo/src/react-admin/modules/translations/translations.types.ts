@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+import { DefaultProps } from '@viaa/avo2-components';
+
 export type Translation = [string, string];
 
 export interface TranslationV2 {
@@ -10,4 +13,14 @@ export interface TranslationV2 {
 export interface TranslationsState {
 	name: string;
 	value: any;
+}
+
+export interface TranslationsOverviewV2Props extends DefaultProps {
+	renderPopup: (info: {
+		title: string;
+		body: ReactNode;
+		isOpen: boolean;
+		onSave: () => void;
+		onClose: () => void;
+	}) => ReactNode;
 }

@@ -13,7 +13,7 @@ import React, { FunctionComponent } from 'react';
 import { sanitizeHtml } from '../../helpers/sanitize';
 import Html from '../Html/Html';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface ConfirmModalProps {
 	title?: string;
@@ -40,12 +40,12 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 }) => {
 	const modalTitle = () =>
 		title ||
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.t(
 			'shared/components/delete-object-modal/delete-object-modal___ben-je-zeker-dat-je-deze-actie-wil-uitvoeren'
 		);
 	const modalBody = () =>
 		body ||
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.t(
 			'shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 		);
 

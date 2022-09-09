@@ -30,7 +30,8 @@ import {
 
 import { ContentBlockService } from './content-block.service';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 import { performQuery } from '~modules/shared/helpers/gql';
@@ -39,7 +40,9 @@ import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor
 
 export class ContentPageService {
 	private static getQueries() {
-		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return CONTENT_PAGE_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
@@ -171,11 +174,11 @@ export class ContentPageService {
 			console.error('Failed to retrieve content types.', err, {
 				query: this.getQueries().GetContentTypesDocument,
 			});
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/admin/content-page/services/content-page___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content/content___er-ging-iets-mis-tijdens-het-ophalen-van-de-content-types'
 				),
 				type: ToastType.ERROR,
@@ -624,7 +627,7 @@ export class ContentPageService {
 		try {
 			const response = await fetchWithLogout(
 				`${
-					Config.getConfig().database.proxyUrl
+					AdminConfigManager.getConfig().database.proxyUrl
 				}/${CONTENT_PAGE_SERVICE_BASE_URL}?${stringify({
 					path,
 				})}`,
@@ -670,11 +673,11 @@ export class ContentPageService {
 	): Promise<string | null> {
 		try {
 			const response = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/admin/content-pages/path-exist?${stringify(
-					{
-						path,
-					}
-				)}`,
+				`${
+					AdminConfigManager.getConfig().database.proxyUrl
+				}/admin/content-pages/path-exist?${stringify({
+					path,
+				})}`,
 				{
 					method: 'GET',
 					headers: {
@@ -721,7 +724,7 @@ export class ContentPageService {
 		let url: string | undefined;
 		let body: any | undefined;
 		try {
-			url = `${Config.getConfig().database.proxyUrl}/admin/content-pages`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages`;
 			body = {
 				searchQuery,
 				searchQueryLimit,

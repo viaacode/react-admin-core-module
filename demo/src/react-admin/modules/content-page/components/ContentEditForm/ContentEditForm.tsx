@@ -25,7 +25,8 @@ import {
 	ContentWidth,
 } from '../../types/content-pages.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
@@ -95,7 +96,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				console.error('Failed to fetch content labels by content type', err, {
 					contentType: contentPageInfo.content_type,
 				});
-				Config.getConfig().services.toastService.showToast({
+				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: t(
 						'modules/admin/content-page/components/content-edit-form/content-edit-form___error'
 					),

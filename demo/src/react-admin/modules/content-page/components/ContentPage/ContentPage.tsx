@@ -7,7 +7,7 @@ import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -106,7 +106,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 		// Add page title as header block for faq items. Only for Avo
 		if (
 			contentPageInfo.content_type === 'FAQ_ITEM' &&
-			Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 		) {
 			contentBlockBlockConfigs = [
 				{

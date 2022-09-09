@@ -19,7 +19,8 @@ import { Color } from '../../../types/content-block.types';
 import { ContentPageInfo } from '../../../types/content-pages.types';
 import ContentPage from '../../ContentPage/ContentPage';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
 import { ContentTypeAndLabelsValue } from '~modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import {
@@ -75,7 +76,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	buttonLabel = Config.getConfig().services.i18n.t(
+	buttonLabel = AdminConfigManager.getConfig().services.i18n.t(
 		'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___lees-meer'
 	),
 	buttonAltTitle = '',
@@ -119,7 +120,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 			blocks: contentPageInfo.contentBlockConfigs ? (
 				<ContentPage
 					contentPageInfo={contentPageInfo}
-					userGroupId={Config.getConfig()?.user?.userGroup?.id}
+					userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
 				/>
 			) : null,
 			content_width: contentPageInfo.content_width,
@@ -193,11 +194,11 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 						)
 					);
 
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.t(
 							'modules/admin/content-page/components/wrappers/page-overview-wrapper/page-overview-wrapper___error'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.t(
 							'admin/content-block/components/wrappers/page-overview-wrapper/page-overview-wrapper___het-opgegeven-item-kon-niet-worden-gevonden'
 						),
 						type: ToastType.ERROR,
@@ -219,7 +220,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				size: debouncedItemsPerPage,
 			};
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/admin/content-pages/overview`,
+				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages/overview`,
 				{
 					method: 'POST',
 					headers: {
