@@ -127,7 +127,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 					title: AdminConfigManager.getConfig().services.i18n.t(
 						'modules/translations/views/translations-overview___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___deze-vertaling-kan-niet-langer-gevonden-worden-in-de-database-gelieve-de-pagina-te-herladen'),
+					description: AdminConfigManager.getConfig().services.i18n.t(
+						'modules/translations/views/translations-overview-v-2___deze-vertaling-kan-niet-langer-gevonden-worden-in-de-database-gelieve-de-pagina-te-herladen'
+					),
 					type: ToastType.ERROR,
 				});
 				return;
@@ -170,7 +172,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/translations/views/translations-overview___success'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___de-vertaling-is-opgeslagen'),
+				description: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/translations/views/translations-overview-v-2___de-vertaling-is-opgeslagen'
+				),
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
@@ -179,7 +183,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				title: AdminConfigManager.getConfig().services.i18n.t(
 					'modules/translations/views/translations-overview___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___het-opslaan-van-de-vertaling-is-mislukt'),
+				description: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/translations/views/translations-overview-v-2___het-opslaan-van-de-vertaling-is-mislukt'
+				),
 				type: ToastType.ERROR,
 			});
 		}
@@ -229,7 +235,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		if (!filteredAndPaginatedTranslations.length) {
 			return (
 				<>
-					{AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___er-zijn-geen-vertalingen-gevonden')}
+					{AdminConfigManager.getConfig().services.i18n.t(
+						'modules/translations/views/translations-overview-v-2___er-zijn-geen-vertalingen-gevonden'
+					)}
 				</>
 			);
 		}
@@ -241,7 +249,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 							columns: [
 								{
 									id: 'key',
-									Header: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___id'),
+									Header: AdminConfigManager.getConfig().services.i18n.t(
+										'modules/translations/views/translations-overview-v-2___id'
+									),
 									accessor: 'key',
 									Cell: ({ row }: { row: Row<TranslationV2> }) => {
 										const parts = row.original.label?.split('___');
@@ -257,7 +267,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 								},
 								{
 									id: 'value',
-									Header: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___waarde'),
+									Header: AdminConfigManager.getConfig().services.i18n.t(
+										'modules/translations/views/translations-overview-v-2___waarde'
+									),
 									accessor: 'value',
 									Cell: ({ row }: { row: Row<TranslationV2> }) => {
 										return (
@@ -335,13 +347,17 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 					text={activeTranslation.context + '___' + activeTranslation.key}
 					onCopy={() =>
 						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___gekopieerd'),
-							description: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___de-vertaalsleutel-is-naar-het-klembord-gekopieerd'),
+							title: AdminConfigManager.getConfig().services.i18n.t(
+								'modules/translations/views/translations-overview-v-2___gekopieerd'
+							),
+							description: AdminConfigManager.getConfig().services.i18n.t(
+								'modules/translations/views/translations-overview-v-2___de-vertaalsleutel-is-naar-het-klembord-gekopieerd'
+							),
 							type: ToastType.SUCCESS,
 						})
 					}
 				>
-					<Button variants={['block', 'text']}>
+					<Button variants={['block', 'text']} className="c-button--copy-to-clipboard">
 						<div>
 							<strong>{activeTranslation.key.split('___')[1]}</strong>
 						</div>
@@ -365,11 +381,15 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				iconEnd={<Icon name="filter" />}
 				value={filters.search}
 				onChange={(e) => setFilters({ search: e.target.value, page: 1 })}
-				placeholder={AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde')}
+				placeholder={AdminConfigManager.getConfig().services.i18n.t(
+					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
+				)}
 			></TextInput>
 			{renderTranslationsTable()}
 			{renderPopup({
-				title: AdminConfigManager.getConfig().services.i18n.t('modules/translations/views/translations-overview-v-2___vertaling-aanpassen'),
+				title: AdminConfigManager.getConfig().services.i18n.t(
+					'modules/translations/views/translations-overview-v-2___vertaling-aanpassen'
+				),
 				body: renderPopupBody(),
 				isOpen: !!activeTranslation,
 				onSave: saveActiveTranslation,
