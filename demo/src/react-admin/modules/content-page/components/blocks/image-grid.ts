@@ -2,7 +2,6 @@ import { GridItem } from '@viaa/avo2-components';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import {
-	GET_BUTTON_TYPE_OPTIONS,
 	GET_FILL_OPTIONS,
 	GET_IMAGE_GRID_FORMAT_OPTIONS,
 } from '../../const/content-block.common.consts';
@@ -116,7 +115,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			action: {

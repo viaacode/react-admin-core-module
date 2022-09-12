@@ -115,6 +115,7 @@ export interface AdminConfig {
 		table: {
 			sortingIcons: TableSortingIcons;
 		};
+		buttonTypes: () => { label: string; value: string }[];
 	};
 	icon?: IconConfig;
 	file?: FileConfig;

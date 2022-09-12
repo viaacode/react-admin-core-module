@@ -1,10 +1,7 @@
 import { CTAProps } from '@viaa/avo2-components';
 
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import {
-	GET_BUTTON_TYPE_OPTIONS,
-	GET_HEADING_TYPE_OPTIONS,
-} from '../../const/content-block.common.consts';
+import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -21,7 +18,10 @@ import {
 } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF, GET_BACKGROUND_COLOR_OPTIONS_AVO } from '~modules/content-page/const/content-block.common.consts';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/content-block.common.consts';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',
@@ -43,7 +43,9 @@ export const INITIAL_CTAS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/helpers/generators/ctas___ctas'),
+	name: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/ctas___ctas'
+	),
 	type: ContentBlockType.CTAs,
 	components: {
 		name: AdminConfigManager.getConfig().services.i18n.t(
@@ -92,7 +94,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: TEXT_FIELD(
@@ -131,7 +133,9 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/ctas___achtergrond-kleur'
 				),
-				AdminConfigManager.getConfig().database.databaseApplicationType === 'avo' ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1],
+				AdminConfigManager.getConfig().database.databaseApplicationType === 'avo'
+					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
+					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 		},
 	},

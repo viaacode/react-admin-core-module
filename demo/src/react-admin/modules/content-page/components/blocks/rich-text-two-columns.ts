@@ -1,6 +1,6 @@
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
-import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -76,7 +76,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
-							options: GET_BUTTON_TYPE_OPTIONS(),
+							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
 					label: TEXT_FIELD(

@@ -4,10 +4,7 @@ import { FileUploadProps } from '../../../shared/components/FileUpload/FileUploa
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import {
-	GET_BUTTON_TYPE_OPTIONS,
-	GET_HEADING_TYPE_OPTIONS,
-} from '../../const/content-block.common.consts';
+import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -117,7 +114,7 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: {

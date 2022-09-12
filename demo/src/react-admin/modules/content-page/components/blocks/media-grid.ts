@@ -5,7 +5,6 @@ import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-	GET_BUTTON_TYPE_OPTIONS,
 	GET_FULL_HEADING_TYPE_OPTIONS,
 } from '../../const/content-block.common.consts';
 import {
@@ -94,7 +93,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonAction: {
@@ -227,7 +226,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			ctaButtonAction: {
@@ -240,7 +239,10 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'
 				),
-				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+					AvoOrHetArchief.avo
+					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
+					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			ctaBackgroundImage: {
 				label: AdminConfigManager.getConfig().services.i18n.t(

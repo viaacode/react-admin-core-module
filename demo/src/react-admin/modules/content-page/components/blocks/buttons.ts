@@ -1,5 +1,5 @@
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+
 import {
 	ButtonsBlockComponentState,
 	ContentBlockConfig,
@@ -42,13 +42,13 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		},
 		state: INITIAL_BUTTONS_COMPONENTS_STATE(),
 		fields: {
-			type: {
+			className: {
 				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___type'
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			label: TEXT_FIELD(

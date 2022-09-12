@@ -80,6 +80,114 @@ function setConfig() {
 					default: <></>,
 				},
 			},
+			buttonTypes: () => [
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Zilver'),
+					value: 'c-button--silver',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Blauw groen'),
+					value: 'c-button--teal',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Wit'),
+					value: 'c-button--white',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Zwart'),
+					value: 'c-button--black',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Outline'),
+					value: 'c-button--outline',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Tekst'),
+					value: 'c-button--text',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Neutraal'),
+					value: 'c-button--text c-button--neutral c-button--underline',
+				},
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___primair'
+				// 	),
+				// 	value: 'primary',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___secundair'
+				// 	),
+				// 	value: 'secondary',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___secundair-invers'
+				// 	),
+				// 	value: 'secondary-i',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___tertiair'
+				// 	),
+				// 	value: 'tertiary',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___randloos'
+				// 	),
+				// 	value: 'borderless',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___randloos-invers'
+				// 	),
+				// 	value: 'borderless-i',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___gevaar'
+				// 	),
+				// 	value: 'danger',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___gevaar-hover'
+				// 	),
+				// 	value: 'danger-hover',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___link'
+				// 	),
+				// 	value: 'link',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___link-inline'
+				// 	),
+				// 	value: 'inline-link',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___leerling-primair-geel'
+				// 	),
+				// 	value: 'pupil-primary',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___leerling-link-tekst-in-geel'
+				// 	),
+				// 	value: 'pupil-link',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 		'admin/content-block/content-block___leerling-link-geel-inline'
+				// 	),
+				// 	value: 'pupil-inline-link',
+				// },
+			],
 		},
 		services: {
 			assetService: AssetsService,

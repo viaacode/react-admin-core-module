@@ -18,23 +18,33 @@ export const CONTENT_BLOCKS_RESULT_PATH: Record<string, [string, string]> = {
 
 // Options
 const transparentOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___geen'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___geen'
+	),
 	value: Color.Transparent,
 });
 const whiteOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___wit'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___wit'
+	),
 	value: Color.White,
 });
 const gray50Option = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___grijs'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___grijs'
+	),
 	value: Color.Gray50,
 });
 const softBlueOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___zachtblauw'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___zachtblauw'
+	),
 	value: Color.SoftBlue,
 });
 const nightBlueOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___nachtblauw'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___nachtblauw'
+	),
 	value: Color.NightBlue,
 });
 const tealOption = () => ({
@@ -50,7 +60,9 @@ const tealBrightOption = () => ({
 	value: Color.TealBright,
 });
 const oceanGreenOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___oceaangroen'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/content-block___oceaangroen'
+	),
 	value: Color.OceanGreen,
 });
 const seaGreenOption = () => ({
@@ -72,7 +84,9 @@ const platinumOption = () => ({
 	value: Color.Platinum,
 });
 const blackOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('modules/content-page/const/content-block___zwart'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'modules/content-page/const/content-block___zwart'
+	),
 	value: Color.Black,
 });
 const neutralOption = () => ({
@@ -82,7 +96,9 @@ const neutralOption = () => ({
 	value: Color.Neutral,
 });
 const zincOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.t('modules/content-page/const/content-block___zinc'),
+	label: AdminConfigManager.getConfig().services.i18n.t(
+		'modules/content-page/const/content-block___zinc'
+	),
 	value: Color.Zinc,
 });
 
@@ -130,22 +146,30 @@ export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => Color[] = () => [
 
 export const GET_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___h-2'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___h-2'
+		),
 		value: 'h2',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___h-3'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___h-3'
+		),
 		value: 'h3',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___h-4'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___h-4'
+		),
 		value: 'h4',
 	},
 ];
 
 export const GET_FULL_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___h-1'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___h-1'
+		),
 		value: 'h1',
 	},
 	...GET_HEADING_TYPE_OPTIONS(),
@@ -159,15 +183,21 @@ export const GET_MEDIA_PLAYER_WIDTH_OPTIONS: () => SelectOption<WidthOption>[] =
 		value: '100%',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___groot'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___groot'
+		),
 		value: '700px',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___medium'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___medium'
+		),
 		value: '500px',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___klein'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___klein'
+		),
 		value: '400px',
 	},
 ];
@@ -190,7 +220,9 @@ export const GET_WIDTH_OPTIONS: () => SelectOption<WidthOption>[] = () => [
 
 export const GET_FILL_OPTIONS: () => SelectOption<FillOption>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___opvullen'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___opvullen'
+		),
 		value: 'cover',
 	},
 	{
@@ -239,18 +271,24 @@ export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOp
 		value: '6:9',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___400-x-150'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___400-x-150'
+		),
 		value: '400x150',
 	},
 ];
 
 export const GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS: () => SelectOption<ContentTabStyle>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___menu-balk'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___menu-balk'
+		),
 		value: 'MENU_BAR',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___tags'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___tags'
+		),
 		value: 'ROUNDED_BADGES',
 	},
 ];
@@ -269,11 +307,15 @@ export const GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS: () => SelectOption<ContentIte
 		value: 'PROJECT_LIST',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___grid'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___grid'
+		),
 		value: 'GRID',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___accordions'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___accordions'
+		),
 		value: 'ACCORDION',
 	},
 ];
@@ -314,7 +356,9 @@ export const GET_PAGE_OVERVIEW_ORDER_OPTIONS: () => SelectOption<PageOverviewOrd
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___zwart'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___zwart'
+		),
 		value: Color.Black,
 	},
 	{
@@ -324,11 +368,15 @@ export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 		value: Color.Gray700,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___grijs'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___grijs'
+		),
 		value: Color.Gray50,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___wit'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___wit'
+		),
 		value: Color.White,
 	},
 ];
@@ -344,7 +392,9 @@ export const GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] =
 
 export const GET_ALIGN_OPTIONS: () => { label: string; value: AlignOption }[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___links'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___links'
+		),
 		value: 'left',
 	},
 	{
@@ -354,87 +404,24 @@ export const GET_ALIGN_OPTIONS: () => { label: string; value: AlignOption }[] = 
 		value: 'center',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___rechts'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___rechts'
+		),
 		value: 'right',
 	},
 ];
 
 export const GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS: () => SelectOption<ButtonType>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___blauw'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___blauw'
+		),
 		value: 'underlined-link',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___geel'),
+		label: AdminConfigManager.getConfig().services.i18n.t(
+			'admin/content-block/content-block___geel'
+		),
 		value: 'pupil-underlined-link',
-	},
-];
-
-export const GET_BUTTON_TYPE_OPTIONS: () => SelectOption<ButtonType>[] = () => [
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___primair'),
-		value: 'primary',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___secundair'),
-		value: 'secondary',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___secundair-invers'
-		),
-		value: 'secondary-i',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___tertiair'),
-		value: 'tertiary',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___randloos'),
-		value: 'borderless',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___randloos-invers'
-		),
-		value: 'borderless-i',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___gevaar'),
-		value: 'danger',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___gevaar-hover'
-		),
-		value: 'danger-hover',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/content-block___link'),
-		value: 'link',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___link-inline'
-		),
-		value: 'inline-link',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___leerling-primair-geel'
-		),
-		value: 'pupil-primary',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___leerling-link-tekst-in-geel'
-		),
-		value: 'pupil-link',
-	},
-	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
-			'admin/content-block/content-block___leerling-link-geel-inline'
-		),
-		value: 'pupil-inline-link',
 	},
 ];

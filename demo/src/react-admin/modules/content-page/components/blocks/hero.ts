@@ -5,7 +5,7 @@ import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '../../../shared/consts/rich-text-editor.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+
 import {
 	Color,
 	ContentBlockConfig,
@@ -48,7 +48,9 @@ export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t('admin/content-block/helpers/generators/hero___hero'),
+	name: AdminConfigManager.getConfig().services.i18n.t(
+		'admin/content-block/helpers/generators/hero___hero'
+	),
 	type: ContentBlockType.Hero,
 	components: {
 		state: INITIAL_HERO_COMPONENTS_STATE(),
@@ -89,7 +91,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
-							options: GET_BUTTON_TYPE_OPTIONS(),
+							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
 					label: TEXT_FIELD(

@@ -1,7 +1,7 @@
 import { BlockEventbriteProps } from '@viaa/avo2-components';
 
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { GET_BUTTON_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -48,7 +48,7 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			label: TEXT_FIELD(
