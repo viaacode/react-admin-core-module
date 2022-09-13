@@ -43,10 +43,10 @@ export class ContentBlockService {
 			);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-updaten-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -69,10 +69,10 @@ export class ContentBlockService {
 			console.error(new CustomError('Failed to delete content block', err, { id }));
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-verwijderen-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -130,10 +130,10 @@ export class ContentBlockService {
 			);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -214,10 +214,10 @@ export class ContentBlockService {
 			);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,

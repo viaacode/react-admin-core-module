@@ -33,21 +33,23 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 	includeEmpty = false,
 	onChange,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const getOptions = (): CheckboxOption[] => {
 		return [
 			{
 				label:
 					trueLabel ||
-					t('shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___ja'),
+					tText(
+						'shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___ja'
+					),
 				id: trueValue,
 				checked: value.includes(trueValue),
 			},
 			{
 				label:
 					falseLabel ||
-					t(
+					tText(
 						'shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___nee'
 					),
 				id: falseValue,
@@ -56,7 +58,7 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 			...(includeEmpty
 				? [
 						{
-							label: t('admin/users/user___leeg'),
+							label: tText('admin/users/user___leeg'),
 							id: NULL_FILTER,
 							checked: value.includes(NULL_FILTER),
 						},

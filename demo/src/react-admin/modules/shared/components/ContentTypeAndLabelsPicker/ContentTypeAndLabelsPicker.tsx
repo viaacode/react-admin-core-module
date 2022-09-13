@@ -39,7 +39,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	onChange,
 	errors,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [labels, setLabels] = useState<Avo.ContentPage.Label[]>([]);
@@ -60,10 +60,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 					)
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -118,7 +118,9 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 			<Column size="1">
 				<Select
 					id="content-type-and-label-picker-type"
-					placeholder={t('admin/content/components/content-picker/content-picker___type')}
+					placeholder={tText(
+						'admin/content/components/content-picker/content-picker___type'
+					)}
 					options={contentTypes}
 					value={get(value, 'selectedContentType')}
 					loading={isLoadingContentTypes}
@@ -143,10 +145,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						isLoading={isLoading}
 						placeholder={
 							!value || !value.selectedContentType
-								? t(
+								? tText(
 										'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___kies-eerst-een-content-type'
 								  )
-								: t(
+								: tText(
 										'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___labels'
 								  )
 						}

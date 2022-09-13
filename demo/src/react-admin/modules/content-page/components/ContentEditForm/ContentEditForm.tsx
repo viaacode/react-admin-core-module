@@ -60,7 +60,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	user,
 }) => {
 	// Hooks
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const [contentTypeLabels, setContentTypeLabels] = useState<Avo.ContentPage.Label[]>([]);
 
@@ -97,21 +97,21 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					contentType: contentPageInfo.content_type,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: t(
+					title: tText(
 						'modules/admin/content-page/components/content-edit-form/content-edit-form___error'
 					),
-					description: t(
+					description: tText(
 						'admin/content/components/content-edit-form/content-edit-form___het-ophalen-van-de-content-labels-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			});
-	}, [contentPageInfo.content_type, setContentTypeLabels, t]);
+	}, [contentPageInfo.content_type, setContentTypeLabels, tText]);
 
 	// Computed
 	const contentTypeOptions = [
 		{
-			label: t(
+			label: tText(
 				'admin/content/components/content-edit-form/content-edit-form___kies-een-content-type'
 			),
 			value: '',
@@ -167,7 +167,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.thumbnail_path}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
 									)}
 								>
@@ -176,7 +176,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										urls={compact([contentPageInfo.thumbnail_path])}
 										assetType="CONTENT_PAGE_COVER"
 										allowMulti={false}
-										label={t(
+										label={tText(
 											'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
 										)}
 										onChange={(urls: string[]) =>
@@ -188,7 +188,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.title}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___titel'
 									)}
 									required
@@ -204,7 +204,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.description_html}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___omschrijving'
 									)}
 								>
@@ -223,7 +223,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.seo_description}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___seo-omschrijving'
 									)}
 								>
@@ -233,7 +233,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 											changeContentPageProp('seo_description', newValue)
 										}
 										height="auto"
-										placeholder={t(
+										placeholder={tText(
 											'admin/content/components/content-edit-form/content-edit-form___omschijving-voor-de-google-de-pagina-omschrijving-wordt-gebruikt-indien-dit-veld-niet-ingevuld-is'
 										)}
 									/>
@@ -242,7 +242,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.meta_description}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___beschrijving-voor-export-bv-klaar-nieuwsbrief'
 									)}
 								>
@@ -252,7 +252,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 											changeContentPageProp('meta_description', newValue)
 										}
 										height="auto"
-										placeholder={t(
+										placeholder={tText(
 											'admin/content/components/content-edit-form/content-edit-form___omschrijving-bij-het-exporteren-van-deze-pagina-bijvoorbeeld-als-de-beschrijving-van-de-nieuwsbrief-voor-klaar'
 										)}
 									/>
@@ -263,7 +263,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									<FormGroup error={formErrors.is_protected}>
 										<Checkbox
 											checked={contentPageInfo.is_protected}
-											label={t(
+											label={tText(
 												'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
 											)}
 											onChange={(value) =>
@@ -276,7 +276,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.path}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___url'
 									)}
 									required
@@ -292,14 +292,16 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									<Column size="12">
 										<FormGroup
 											error={formErrors.user_profile_id}
-											label={t('admin/content/views/content-detail___auteur')}
+											label={tText(
+												'admin/content/views/content-detail___auteur'
+											)}
 											required
 										>
 											<ContentPicker
 												initialValue={owner}
 												hideTargetSwitch
 												hideTypeDropdown
-												placeholder={t(
+												placeholder={tText(
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
 												allowedTypes={[ContentPickerType.PROFILE]}
@@ -319,7 +321,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="3-6">
 								<FormGroup
 									error={formErrors.content_type}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___content-type'
 									)}
 									required
@@ -334,7 +336,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="3-6">
 								<FormGroup
 									error={formErrors.content_width}
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___content-breedte'
 									)}
 								>
@@ -349,7 +351,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							<Column size="12">
 								<FormGroup
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___labels'
 									)}
 								>
@@ -358,10 +360,10 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										options={mapLabelsToTags(contentTypeLabels)}
 										placeholder={
 											contentPageInfo.content_type
-												? t(
+												? tText(
 														'admin/content/components/content-edit-form/content-edit-form___kies-of-maak-een-label-optioneel'
 												  )
-												: t(
+												: tText(
 														'admin/content/components/content-edit-form/content-edit-form___kies-eerst-het-type-pagina'
 												  )
 										}
@@ -381,11 +383,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							<Column size="12">
 								<UserGroupSelect
-									label={t(
+									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
 									)}
 									error={formErrors.user_group_ids}
-									placeholder={t(
+									placeholder={tText(
 										'admin/menu/components/menu-edit-form/menu-edit-form___niemand'
 									)}
 									values={contentPageInfo.user_group_ids || []}

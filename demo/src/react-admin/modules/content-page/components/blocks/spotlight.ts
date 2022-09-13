@@ -34,12 +34,12 @@ export const INITIAL_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/spotlight___in-de-kijker'
 	),
 	type: ContentBlockType.Spotlight,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/spotlight___item'
 		),
 		limits: {
@@ -49,11 +49,11 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			image: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/spotlight___een-afbeelding-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/spotlight___afbeelding'
 					),
 					editorProps: {
@@ -63,14 +63,14 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/spotlight___titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/spotlight___link'
 				),
 				editorType: ContentBlockEditor.ContentPicker,

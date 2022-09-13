@@ -29,7 +29,7 @@ export const INITIAL_EVENTBRITE_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/eventbrite___eventbrite'
 	),
 	type: ContentBlockType.Eventbrite,
@@ -37,13 +37,13 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_EVENTBRITE_COMPONENTS_STATE(),
 		fields: {
 			eventId: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/eventbrite___event-id'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			type: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/buttons___type'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -52,18 +52,18 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			label: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/buttons___tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			icon: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/buttons___icoon'
 				),
 				editorType: ContentBlockEditor.IconPicker,
@@ -77,7 +77,7 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_EVENTBRITE_BLOCK_STATE(),
 		fields: {
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/defaults___uitlijning'
 				)
 			),

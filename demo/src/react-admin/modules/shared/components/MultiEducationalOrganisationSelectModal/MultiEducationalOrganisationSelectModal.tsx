@@ -36,7 +36,7 @@ export interface MultiEducationalOrganisationSelectModalProps {
 export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	MultiEducationalOrganisationSelectModalProps
 > = ({ label, id, values, disabled, onChange, showSelectedValuesOnCollapsed = true }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [includeEmpty, setIncludeEmpty] = useState<boolean>(false);
@@ -115,7 +115,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 				<Modal
 					isOpen={isOpen}
 					onClose={closeModal}
-					title={t(
+					title={tText(
 						'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___educatieve-organisaties'
 					)}
 					size={'medium'}
@@ -135,7 +135,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 					</ModalBody>
 					<ModalFooterRight>
 						<Button
-							label={t(
+							label={tText(
 								'shared/components/checkbox-dropdown-modal/checkbox-dropdown-modal___toepassen'
 							)}
 							type="primary"

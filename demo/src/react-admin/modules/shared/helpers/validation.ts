@@ -59,14 +59,14 @@ export function validateFlowplayerVideoUrl(url: string | null | undefined) {
 	}
 	if (!url.startsWith('https://')) {
 		return [
-			AdminConfigManager.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/shared/helpers/validation___video-url-moet-beginnen-met-http'
 			),
 		];
 	}
 	if (!url.endsWith('.m3u8') && !url.endsWith('.mp4')) {
 		return [
-			AdminConfigManager.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/shared/helpers/validation___video-url-moet-eindigen-met-m-3-u-8-of-mp-4'
 			),
 		];

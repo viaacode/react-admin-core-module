@@ -53,7 +53,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	addComponentToState,
 	removeComponentFromState,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	// Hooks
 	const [activeBlockPosition, setActiveBlockPosition] = useState<number | null>(null);
@@ -198,7 +198,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						<Select
 							options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
 							onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
-							placeholder={t(
+							placeholder={tText(
 								'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
 							)}
 							value={null as any}

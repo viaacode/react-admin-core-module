@@ -28,7 +28,7 @@ export type RichTextEditorWrapperProps = RichTextEditorProps & {
  * @constructor
  */
 const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (props) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const { controls, fileType, ownerId, state, onChange, ...rest } = props;
 
@@ -57,7 +57,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 						});
 					} catch (err) {
 						const error = new CustomError(
-							t(
+							tText(
 								'shared/components/wysiwyg-wrapper/wysiwyg-wrapper___het-opladen-van-de-afbeelding-is-mislukt'
 							),
 							err,
@@ -74,10 +74,10 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 					}
 
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: tText(
 							'modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: tText(
 							'shared/components/wysiwyg-wrapper/wysiwyg-wrapper___dit-bestand-is-te-groot-max-10-mb'
 						),
 						type: ToastType.ERROR,

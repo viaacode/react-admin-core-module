@@ -44,7 +44,7 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 	width,
 	autoplay,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [videoStill, setVideoStill] = useState<string>();
@@ -69,10 +69,10 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 				new CustomError('Failed to fetch item info from the database', err, { item })
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t(
+				title: tText(
 					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
 				),
-				description: t(
+				description: tText(
 					'admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper___het-ophalen-van-het-fragment-is-mislukt'
 				),
 				type: ToastType.ERROR,

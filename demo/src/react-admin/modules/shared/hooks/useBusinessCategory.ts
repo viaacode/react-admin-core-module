@@ -25,10 +25,10 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 				);
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/shared/hooks/use-business-category___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'shared/hooks/use-business-category___het-ophalen-van-de-oormerken-is-mislukt'
 					),
 					type: ToastType.ERROR,

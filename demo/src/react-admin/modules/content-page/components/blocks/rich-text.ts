@@ -28,7 +28,7 @@ export const INITIAL_RICH_TEXT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/rich-text___tekst'
 	),
 	type: ContentBlockType.RichText,
@@ -39,7 +39,7 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_RICH_TEXT_COMPONENTS_STATE(),
 		fields: {
 			content: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/rich-text___tekst-is-verplicht'
 				),
 				{
@@ -57,7 +57,7 @@ export const RICH_TEXT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			limitWidth: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/rich-text___limiteer-breedte-tot-800-px'
 					),
 				} as CheckboxProps,

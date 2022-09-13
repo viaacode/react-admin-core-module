@@ -38,7 +38,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	permissionWarning,
 	enableIcons,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const handleMenuCreate = (label: string) => {
 		return {
@@ -51,7 +51,9 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 		<Form className="m-menu-edit-form">
 			<FormGroup
 				error={formErrors.placement}
-				label={t('admin/menu/components/menu-edit-form/menu-edit-form___navigatie-naam')}
+				label={tText(
+					'admin/menu/components/menu-edit-form/menu-edit-form___navigatie-naam'
+				)}
 				required
 			>
 				{/* TODO: Add CreatableSelect to components lib */}
@@ -61,7 +63,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					getNewOptionData={handleMenuCreate}
 					onChange={(option: any) => onChange('placement', get(option, 'value', ''))}
 					options={navigationParentOptions}
-					placeholder={t(
+					placeholder={tText(
 						'admin/menu/components/menu-edit-form/menu-edit-form___selecteer-of-maak-een-navigatie-aan'
 					)}
 					isDisabled={!!navigationParentId}
@@ -70,7 +72,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			{!navigationParentId && (
 				<FormGroup
 					error={formErrors.description}
-					label={t(
+					label={tText(
 						'admin/menu/components/menu-edit-form/menu-edit-form___navigatie-omschrijving'
 					)}
 				>
@@ -81,7 +83,9 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				</FormGroup>
 			)}
 			{enableIcons && (
-				<FormGroup label={t('admin/menu/components/menu-edit-form/menu-edit-form___icoon')}>
+				<FormGroup
+					label={tText('admin/menu/components/menu-edit-form/menu-edit-form___icoon')}
+				>
 					<IconPicker
 						options={GET_ADMIN_ICON_OPTIONS()}
 						onChange={(option: any) => onChange('icon_name', get(option, 'value', ''))}
@@ -94,7 +98,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			)}
 			<FormGroup
 				error={formErrors.label}
-				label={t('admin/menu/components/menu-edit-form/menu-edit-form___label')}
+				label={tText('admin/menu/components/menu-edit-form/menu-edit-form___label')}
 			>
 				<TextInput
 					onChange={(value: string) => onChange('label', value)}
@@ -103,7 +107,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			</FormGroup>
 			<FormGroup
 				error={formErrors.tooltip}
-				label={t('admin/menu/components/menu-edit-form/menu-edit-form___tooltip')}
+				label={tText('admin/menu/components/menu-edit-form/menu-edit-form___tooltip')}
 			>
 				<TextInput
 					onChange={(value: string) => onChange('tooltip', value)}
@@ -112,7 +116,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			</FormGroup>
 			<FormGroup
 				error={formErrors.content_path}
-				label={t('admin/menu/components/menu-edit-form/menu-edit-form___link')}
+				label={tText('admin/menu/components/menu-edit-form/menu-edit-form___link')}
 				required
 			>
 				<ContentPicker
@@ -136,9 +140,11 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				/>
 			</FormGroup>
 			<UserGroupSelect
-				label={t('admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor')}
+				label={tText(
+					'admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor'
+				)}
 				error={formErrors.user_group_ids}
-				placeholder={t('admin/menu/components/menu-edit-form/menu-edit-form___niemand')}
+				placeholder={tText('admin/menu/components/menu-edit-form/menu-edit-form___niemand')}
 				values={formState.user_group_ids || []}
 				required={false}
 				onChange={(userGroupIds: string[]) => onChange('user_group_ids', userGroupIds)}

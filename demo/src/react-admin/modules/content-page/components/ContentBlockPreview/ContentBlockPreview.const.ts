@@ -92,6 +92,11 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 ];
 
 /**
+ * Blocks that must receive a renderMediaCardWrapper function so that a modal can be added to open media items with bookmark functionality
+ */
+export const OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS = [ContentBlockType.MediaGrid];
+
+/**
  * Blocks that need access to the top level content page
  * The contentPageInfo property will be added to these blocks automatically
  */

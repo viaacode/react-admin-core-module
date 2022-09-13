@@ -214,10 +214,10 @@ export class ContentPageLabelService {
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page-labels/services/content-page-label___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-page-labels/content-page-label___het-verwijderen-van-de-content-pagina-label-is-mislukt'
 				),
 				type: ToastType.ERROR,

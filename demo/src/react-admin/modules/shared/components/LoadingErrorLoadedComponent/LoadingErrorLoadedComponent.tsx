@@ -1,6 +1,6 @@
 import { Container, Flex, IconName, Spinner } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -10,7 +10,7 @@ import { CommonUser } from '~modules/user/user.types';
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
 export interface ErrorViewQueryParams {
-	message?: string;
+	message?: ReactNode | string;
 	icon?: IconName;
 	actionButtons?: Avo.Auth.ErrorActionButton[];
 }

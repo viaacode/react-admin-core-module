@@ -15,6 +15,7 @@ import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { NavigationItem } from '~modules/navigation/navigation.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { MediaListItem } from '@viaa/avo2-components';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -39,7 +40,8 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	t: (translationKey: string, variables?: Record<string, string>) => string;
+	t: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
+	tText: (translationKey: string, variables?: Record<string, string>) => string;
 }
 
 export interface UserGroupsService {
@@ -145,6 +147,7 @@ export interface AdminConfig {
 	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
+		mediaItemClicked?: (item: MediaListItem) => void;
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];

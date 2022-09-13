@@ -9,7 +9,7 @@ import { useTranslation } from './useTranslation';
 type UseSubjectsTuple = [string[], boolean];
 
 export const useSubjects = (): UseSubjectsTuple => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const [subjects, setSubjects] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,10 +24,8 @@ export const useSubjects = (): UseSubjectsTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get subjects from the database', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/shared/hooks/use-subjects___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/shared/hooks/use-subjects___error'),
+					description: tText(
 						'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -36,7 +34,7 @@ export const useSubjects = (): UseSubjectsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tText]);
 
 	return [subjects, isLoading];
 };

@@ -10,8 +10,11 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
 import { TranslationsOverviewRef } from '../translations.const';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_props, ref) => {
+	const { tText } = useTranslation();
+
 	const [initialTranslations, setInitialTranslations] = useState<Translation[]>([]);
 	const [translations, setTranslations] = useState<Translation[]>([]);
 	const keyPrefix =
@@ -50,10 +53,8 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -123,10 +124,8 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 			await getTranslations();
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___success'),
+				description: tText(
 					'admin/translations/views/translations-overview___de-vertalingen-zijn-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -134,10 +133,8 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 		} catch (err) {
 			console.error(new CustomError('Failed to save translations', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'admin/translations/views/translations-overview___het-opslaan-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,

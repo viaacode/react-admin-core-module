@@ -33,10 +33,10 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get organisations from database', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/shared/hooks/use-companies___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'settings/components/profile___het-ophalen-van-de-organisaties-is-mislukt'
 					),
 					type: ToastType.ERROR,

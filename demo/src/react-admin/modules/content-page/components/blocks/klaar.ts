@@ -28,12 +28,12 @@ export const INITIAL_KLAAR_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/klaar___klaar'
 	),
 	type: ContentBlockType.Klaar,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/klaar___klaar-titel'
 		),
 		limits: {
@@ -42,20 +42,20 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_KLAAR_COMPONENTS_STATE(),
 		fields: {
 			titles: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/klaar___titel-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/klaar___titel'
 					),
 					editorType: ContentBlockEditor.TextInput,
 					repeat: {
 						defaultState: '',
-						addButtonLabel: AdminConfigManager.getConfig().services.i18n.t(
+						addButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/klaar___voeg-titel-toe'
 						),
-						deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.t(
+						deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/klaar___verwijder-titel'
 						),
 					},
@@ -69,7 +69,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (isNil(value) || isEmpty(value)) {
 						errorArray.push(
-							AdminConfigManager.getConfig().services.i18n.t(
+							AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-block/helpers/generators/klaar___datum-is-verplicht'
 							)
 						);

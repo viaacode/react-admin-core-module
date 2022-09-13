@@ -26,10 +26,10 @@ export const useEducationLevels = (): UseEducationLevelsTuple => {
 					new CustomError('Failed to get educationLevels from the database', err)
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/shared/hooks/use-education-levels___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'shared/hooks/use-education-levels___ophalen-van-de-opleidingsniveaus-is-mislukt'
 					),
 					type: ToastType.ERROR,

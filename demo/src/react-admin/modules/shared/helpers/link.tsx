@@ -59,10 +59,10 @@ export const navigate = (
 		navigationConsoleError(route, missingParams);
 		AdminConfigManager.getConfig().services.toastService.showToast({
 			title:
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/shared/helpers/link___error'
 				) || '',
-			description: AdminConfigManager.getConfig().services.i18n.t(
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,
@@ -76,10 +76,10 @@ export const navigate = (
 
 	if (isEmpty(builtLink)) {
 		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.t(
+			title: AdminConfigManager.getConfig().services.i18n.tText(
 				'modules/admin/shared/helpers/link___error'
 			),
-			description: AdminConfigManager.getConfig().services.i18n.t(
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,

@@ -39,11 +39,14 @@ import {
 } from '~modules/translations/helpers/database-conversions';
 import Html from '~modules/shared/components/Html/Html';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Props> = ({
 	className,
 	renderPopup,
 }) => {
+	const { t, tText } = useTranslation();
+
 	const [translations, setTranslations] = useState<TranslationV2[] | null>(null);
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
 		TranslationV2[] | null
@@ -86,10 +89,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -124,10 +125,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			);
 			if (!freshTranslation) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/translations/views/translations-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/translations/views/translations-overview___error'),
+					description: tText(
 						'modules/translations/views/translations-overview-v-2___deze-vertaling-kan-niet-langer-gevonden-worden-in-de-database-gelieve-de-pagina-te-herladen'
 					),
 					type: ToastType.ERROR,
@@ -169,10 +168,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			setActiveTranslationEditorState(null);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___success'),
+				description: tText(
 					'modules/translations/views/translations-overview-v-2___de-vertaling-is-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -180,10 +177,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		} catch (err) {
 			console.error(new CustomError('Failed to save translation', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/translations/views/translations-overview___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'modules/translations/views/translations-overview-v-2___het-opslaan-van-de-vertaling-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -235,7 +230,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		if (!filteredAndPaginatedTranslations.length) {
 			return (
 				<>
-					{AdminConfigManager.getConfig().services.i18n.t(
+					{t(
 						'modules/translations/views/translations-overview-v-2___er-zijn-geen-vertalingen-gevonden'
 					)}
 				</>
@@ -249,7 +244,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 							columns: [
 								{
 									id: 'key',
-									Header: AdminConfigManager.getConfig().services.i18n.t(
+									Header: t(
 										'modules/translations/views/translations-overview-v-2___id'
 									),
 									accessor: 'key',
@@ -267,7 +262,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 								},
 								{
 									id: 'value',
-									Header: AdminConfigManager.getConfig().services.i18n.t(
+									Header: t(
 										'modules/translations/views/translations-overview-v-2___waarde'
 									),
 									accessor: 'value',
@@ -307,7 +302,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 											className="u-pl-24:sm u-pl-8"
 											disabled={filters.page === pageCount}
 											variants={['text', 'neutral']}
-											label={AdminConfigManager.getConfig().services.i18n.t(
+											label={t(
 												'modules/shared/components/pagination-bar/pagination-bar___volgende'
 											)}
 											iconEnd={<Icon name="angleRight" />}
@@ -318,7 +313,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 											className="u-pr-24:sm u-pr-8"
 											disabled={filters.page === 1}
 											variants={['text', 'neutral']}
-											label={AdminConfigManager.getConfig().services.i18n.t(
+											label={t(
 												'modules/shared/components/pagination-bar/pagination-bar___vorige'
 											)}
 											iconStart={<Icon name="angleLeft" />}
@@ -347,10 +342,10 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 					text={activeTranslation.context + '___' + activeTranslation.key}
 					onCopy={() =>
 						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: AdminConfigManager.getConfig().services.i18n.t(
+							title: tText(
 								'modules/translations/views/translations-overview-v-2___gekopieerd'
 							),
-							description: AdminConfigManager.getConfig().services.i18n.t(
+							description: tText(
 								'modules/translations/views/translations-overview-v-2___de-vertaalsleutel-is-naar-het-klembord-gekopieerd'
 							),
 							type: ToastType.SUCCESS,
@@ -381,13 +376,13 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				iconEnd={<Icon name="filter" />}
 				value={filters.search}
 				onChange={(e) => setFilters({ search: e.target.value, page: 1 })}
-				placeholder={AdminConfigManager.getConfig().services.i18n.t(
+				placeholder={tText(
 					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
 				)}
 			></TextInput>
 			{renderTranslationsTable()}
 			{renderPopup({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText(
 					'modules/translations/views/translations-overview-v-2___vertaling-aanpassen'
 				),
 				body: renderPopupBody(),

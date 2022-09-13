@@ -23,7 +23,7 @@ const queryClient = new QueryClient();
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
 
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	useEffect(() => {
 		if (!mockUser) {
@@ -36,8 +36,8 @@ function App() {
 			.catch((err) => {
 				console.error(new CustomError('Failed to get nav items', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: t('Error'),
-					description: t('Het ophalen van de navigatie items is mislukt'),
+					title: tText('Error'),
+					description: tText('Het ophalen van de navigatie items is mislukt'),
 					type: ToastType.ERROR,
 				});
 			});

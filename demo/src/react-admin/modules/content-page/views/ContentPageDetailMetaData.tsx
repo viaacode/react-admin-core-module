@@ -34,7 +34,7 @@ interface ContentDetailMetaDataProps {
 export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataProps> = ({
 	contentPageInfo,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [contentTypes] = useContentTypes();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
@@ -65,7 +65,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 		return [
 			{
 				id: -3,
-				label: t('admin/menu/components/menu-edit-form/menu-edit-form___niemand'),
+				label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niemand'),
 			},
 		];
 	};
@@ -127,32 +127,32 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 									src={contentPageInfo.thumbnail_path || undefined}
 								/>
 							</div>,
-							t('admin/content/views/content-detail___cover-afbeelding')
+							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
 						{renderSimpleDetailRows(contentPageInfo, [
-							['title', t('admin/content/views/content-detail___titel')],
+							['title', tText('admin/content/views/content-detail___titel')],
 						])}
 						{renderDetailRow(
 							description || '-',
-							t('admin/content/views/content-detail___beschrijving')
+							tText('admin/content/views/content-detail___beschrijving')
 						)}
 						{renderSimpleDetailRows(contentPageInfo, [
 							[
 								'seo_description',
-								t(
+								tText(
 									'admin/content/views/content-detail-meta-data___seo-beschrijving'
 								),
 							],
 							[
 								'meta_description',
-								t(
+								tText(
 									'admin/content/views/content-detail-meta-data___beschrijving-voor-export-bv-klaar-nieuwsbrief'
 								),
 							],
-							['path', t('admin/content/views/content-detail___pad')],
+							['path', tText('admin/content/views/content-detail___pad')],
 							[
 								'is_protected',
-								t('admin/content/views/content-detail___beschermde-pagina'),
+								tText('admin/content/views/content-detail___beschermde-pagina'),
 							],
 						])}
 						{renderDetailRow(
@@ -162,48 +162,51 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								),
 								'label'
 							) || '-',
-							t('admin/content/views/content-detail___content-type')
+							tText('admin/content/views/content-detail___content-type')
 						)}
 						{renderDetailRow(
 							getContentPageWidthLabel(contentPageInfo),
-							t('admin/content/views/content-detail___breedte')
+							tText('admin/content/views/content-detail___breedte')
 						)}
 						{renderDetailRow(
 							contentPageInfo?.profile
 								? getFullName(contentPageInfo.profile, false, false)
 								: '-',
-							t('admin/content/views/content-detail___auteur')
+							tText('admin/content/views/content-detail___auteur')
 						)}
 						{renderDetailRow(
 							contentPageInfo?.profile?.userGroup?.label || '-',
-							t('admin/content/views/content-detail___auteur-rol')
+							tText('admin/content/views/content-detail___auteur-rol')
 						)}
 						{renderDateDetailRows(contentPageInfo, [
-							['created_at', t('admin/content/views/content-detail___aangemaakt')],
+							[
+								'created_at',
+								tText('admin/content/views/content-detail___aangemaakt'),
+							],
 							[
 								'updated_at',
-								t('admin/content/views/content-detail___laatst-bewerkt'),
+								tText('admin/content/views/content-detail___laatst-bewerkt'),
 							],
 						])}
 						{renderDetailRow(
 							<p>{definePublishedAt(contentPageInfo)}</p>,
-							t('admin/content/views/content-detail___gepubliceerd')
+							tText('admin/content/views/content-detail___gepubliceerd')
 						)}
 						{renderDetailRow(
 							<p>
 								{formatDate(contentPageInfo.publish_at) ||
-									t('admin/content/views/content-detail-meta-data___n-v-t')}
+									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
-							t(
+							tText(
 								'admin/content/views/content-detail-meta-data___wordt-gepubliceerd-op'
 							)
 						)}
 						{renderDetailRow(
 							<p>
 								{formatDate(contentPageInfo.depublish_at) ||
-									t('admin/content/views/content-detail-meta-data___n-v-t')}
+									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
-							t(
+							tText(
 								'admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op'
 							)
 						)}
@@ -214,7 +217,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								closable={false}
 								tags={getUserGroups(contentPageInfo)}
 							/>,
-							t('admin/content/views/content-detail___toegankelijk-voor')
+							tText('admin/content/views/content-detail___toegankelijk-voor')
 						)}
 						{renderDetailRow(
 							<TagList
@@ -228,7 +231,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 										id: String(labelObj.id),
 									}))}
 							/>,
-							t('admin/content/views/content-detail___labels')
+							tText('admin/content/views/content-detail___labels')
 						)}
 					</tbody>
 				</Table>

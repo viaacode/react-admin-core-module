@@ -43,12 +43,12 @@ export const INITIAL_CTAS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/ctas___ctas'
 	),
 	type: ContentBlockType.CTAs,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/ctas___cta'
 		),
 		limits: {
@@ -58,7 +58,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_CTAS_COMPONENTS_STATE(),
 		fields: {
 			headingType: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-stijl'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -67,29 +67,29 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			heading: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/ctas___titel-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-kleur'
 				)
 			),
 			content: TEXT_FIELD(),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___tekst-kleur'
 				)
 			),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-type'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -98,24 +98,24 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knoptekst-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/ctas___knop-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			buttonAltTitle: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___alt-button-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-icoon'
 				),
 				editorType: ContentBlockEditor.IconPicker,
@@ -124,13 +124,13 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			backgroundColor: BACKGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___achtergrond-kleur'
 				),
 				AdminConfigManager.getConfig().database.databaseApplicationType === 'avo'
