@@ -42,7 +42,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		},
 		state: INITIAL_BUTTONS_COMPONENTS_STATE(),
 		fields: {
-			className: {
+			type: {
 				label: AdminConfigManager.getConfig().services.i18n.t(
 					'admin/content-block/helpers/generators/buttons___type'
 				),

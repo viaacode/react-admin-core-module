@@ -61,6 +61,18 @@ export interface LinkInfo {
 
 export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
 
+export type EventContentTypeSimplified = 'item' | 'collection';
+export type EventContentType = EventContentTypeSimplified | 'bundle';
+
+export interface BookmarkRequestInfo {
+	type: EventContentTypeSimplified;
+	uuid: string;
+}
+
+export type BookmarkStatusLookup = {
+	[contentType in EventContentTypeSimplified]: { [objectUuid: string]: boolean };
+};
+
 export interface AdminConfig {
 	// Core module configurations
 	flowplayer: {
@@ -89,6 +101,18 @@ export interface AdminConfig {
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
+		bookmarksViewsPlaysService: {
+			getBookmarkStatuses: (
+				profileId: string,
+				objectInfos: BookmarkRequestInfo[]
+			) => Promise<BookmarkStatusLookup>;
+			toggleBookmark: (
+				contentId: string,
+				user: Avo.User.User,
+				type: EventContentType,
+				isBookmarked: boolean
+			) => Promise<void>;
+		};
 		router: {
 			// Function that returns a history like object with functions push and replace
 			useHistory: () => {

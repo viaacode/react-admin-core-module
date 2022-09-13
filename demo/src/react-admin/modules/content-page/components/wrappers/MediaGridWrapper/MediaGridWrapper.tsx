@@ -2,43 +2,50 @@ import {
 	BlockMediaGrid,
 	ButtonAction,
 	MediaListItem,
+	Modal,
+	ModalBody,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-
-import { ContentPageService } from '../../../services/content-page.service';
+import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import {
 	MediaGridBlockComponentState,
 	MediaGridBlockState,
-} from '../../../types/content-block.types';
+} from '~modules/content-page/types/content-block.types';
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
-
-import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
-import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { isMobileWidth } from '~modules/shared/helpers/media-query';
 import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
+import { formatDate } from '~modules/shared/helpers/formatters/date';
+import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
+import { APP_PATH } from '~modules/shared/consts/routes.consts';
+import { isMobileWidth } from '~modules/shared/helpers/media-query';
+import { CustomError } from '~modules/shared/helpers/custom-error';
+import { buildLink } from '~modules/shared/helpers/link';
 import { AdminConfigManager } from '~core/config';
+import { defaultRenderBookmarkButton } from '~modules/shared/helpers/default-render-bookmark-button';
+import { ToastType } from '~core/config/config.types';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;
 	searchQueryLimit: string;
 	elements: { mediaItem: ButtonAction }[];
 	results: ResolvedItemOrCollection[];
-	renderLink?: RenderLinkFunction;
+	renderLink: RenderLinkFunction;
 	buttonAltTitle?: string;
 	ctaButtonAltTitle?: string;
+	user: Avo.User.User;
 }
 
-const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
+const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps & RouteComponentProps> = ({
 	title,
 	buttonLabel,
 	buttonAltTitle,
@@ -55,18 +62,23 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	ctaBackgroundColor,
 	ctaBackgroundImage,
 	ctaWidth,
-	openMediaInModal,
+	openMediaInModal = false,
 	ctaButtonAction,
 	searchQuery,
 	searchQueryLimit,
 	elements,
 	results,
+	user,
 	renderLink,
 }) => {
-	const { t } = useTranslation();
+	const [t] = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [resolvedResults, setResolvedResults] = useState<ResolvedItemOrCollection[] | null>(null);
+	const [activeItem, setActiveItem] = useState<(Avo.Item.Item & ResolvedItemOrCollection) | null>(
+		null
+	);
+	const [activeItemBookmarkStatus, setActiveItemBookmarkStatus] = useState<boolean | null>(null);
 
 	// cache search results
 	const [lastSearchQuery, setLastSearchQuery] = useState<string | null>(null);
@@ -84,7 +96,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 				setResolvedResults(results);
 				return;
 			}
-			if (AdminConfigManager.getConfig().user) {
+			if (user) {
 				// If we are logged in and get no results, but we do get elements, then the block is loaded in preview mode,
 				// and we should resolve the results ourselves using a separate route on the server
 				const searchQueryLimitNumber =
@@ -143,6 +155,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	}, [
 		results,
 		elements,
+		user,
 		searchQuery,
 		searchQueryLimit,
 		lastSearchQuery,
@@ -218,50 +231,156 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		} as any;
 	};
 
-	const renderPlayerModalBody = (item: MediaListItem) => {
-		return (
-			!!item &&
-			!!(item as any).src && ( // TODO remove cast after update to components v1.47.0
-				<ItemVideoDescription
-					src={(item as any).src} // TODO remove cast after update to components v1.47.0
-					poster={get(item, 'thumbnail.src')}
-					itemMetaData={item as unknown as Avo.Item.Item}
-					verticalLayout
-					showTitle
-					collapseDescription={false}
-				/>
-			)
-		);
+	const fetchActiveItemBookmarkStatus = useCallback(async () => {
+		if (!user || !user.profile || !activeItem) {
+			return;
+		}
+		const statuses =
+			await AdminConfigManager.getConfig().services.bookmarksViewsPlaysService.getBookmarkStatuses(
+				user.profile.id,
+				[
+					{
+						type: 'item',
+						uuid: activeItem.uid,
+					},
+				]
+			);
+		setActiveItemBookmarkStatus(statuses['item'][activeItem.uid]);
+	}, [activeItem?.external_id]);
+
+	useEffect(() => {
+		fetchActiveItemBookmarkStatus();
+	}, [fetchActiveItemBookmarkStatus]);
+
+	const toggleBookmark = async () => {
+		if (!user || !activeItem || isNil(activeItemBookmarkStatus)) {
+			return;
+		}
+		try {
+			await AdminConfigManager.getConfig().services.bookmarksViewsPlaysService.toggleBookmark(
+				activeItem.uid,
+				user,
+				'item',
+				activeItemBookmarkStatus
+			);
+
+			setActiveItemBookmarkStatus(!activeItemBookmarkStatus);
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				type: ToastType.SUCCESS,
+				title: AdminConfigManager.getConfig().services.i18n.t('Error'),
+				description: activeItemBookmarkStatus
+					? t('collection/views/collection-detail___de-bladwijzer-is-verwijderd')
+					: t('collection/views/collection-detail___de-bladwijzer-is-aangemaakt'),
+			});
+		} catch (err) {
+			console.error(
+				new CustomError('Failed to toggle bookmark', err, {
+					user,
+					itemId: activeItem.uid,
+					type: 'item',
+					activeItemBookmarkStatus,
+				})
+			);
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				type: ToastType.ERROR,
+				title: AdminConfigManager.getConfig().services.i18n.t('Error'),
+				description: activeItemBookmarkStatus
+					? AdminConfigManager.getConfig().services.i18n.t(
+							'item/views/item-detail___het-verwijderen-van-de-bladwijzer-is-mislukt'
+					  )
+					: AdminConfigManager.getConfig().services.i18n.t(
+							'item/views/item-detail___het-aanmaken-van-de-bladwijzer-is-mislukt'
+					  ),
+			});
+		}
+	};
+
+	const handleItemClicked = (item: MediaListItem) => {
+		const activeItem =
+			(resolvedResults || []).find(
+				(result) => result.external_id === item.itemAction.value
+			) || null;
+		setActiveItem(activeItem as Avo.Item.Item);
+	};
+
+	const renderBookmarkButton = (): ReactNode => {
+		if (!user || isNil(activeItemBookmarkStatus)) {
+			return null;
+		}
+		return defaultRenderBookmarkButton({
+			active: activeItemBookmarkStatus,
+			ariaLabel: t('item/views/item___toggle-bladwijzer'),
+			title: t('item/views/item___toggle-bladwijzer'),
+			onClick: toggleBookmark,
+		});
+	};
+
+	const openInModal = (mediaListItem: MediaListItem): boolean => {
+		return openMediaInModal && get(mediaListItem, 'itemAction.type') === 'ITEM';
+	};
+
+	const renderMediaCardWrapper = (mediaCard: ReactNode, item: MediaListItem) => {
+		if (openInModal(item)) {
+			return <a onClick={() => handleItemClicked(item)}>{mediaCard}</a>;
+		}
+		return renderLink(item.itemAction, mediaCard, item.buttonAltTitle || item.title);
 	};
 
 	// Render
 	const renderMediaGridBlock = () => {
 		const elements = (resolvedResults || []).map(mapCollectionOrItemData);
 		return (
-			<BlockMediaGrid
-				title={title}
-				buttonLabel={buttonLabel}
-				buttonAltTitle={buttonAltTitle}
-				buttonAction={buttonAction || searchQuery}
-				ctaTitle={ctaTitle}
-				ctaTitleColor={ctaTitleColor}
-				ctaTitleSize={ctaTitleSize}
-				ctaContent={ctaContent}
-				ctaContentColor={ctaContentColor}
-				ctaButtonLabel={ctaButtonLabel}
-				ctaButtonAltTitle={ctaButtonAltTitle}
-				ctaButtonType={ctaButtonType}
-				ctaButtonIcon={ctaButtonIcon}
-				ctaBackgroundColor={ctaBackgroundColor}
-				ctaBackgroundImage={ctaBackgroundImage}
-				ctaWidth={ctaWidth}
-				openMediaInModal={openMediaInModal}
-				ctaButtonAction={ctaButtonAction}
-				fullWidth={isMobileWidth()}
-				elements={elements}
-				renderLink={renderLink}
-				renderPlayerModalBody={renderPlayerModalBody}
-			/>
+			<>
+				<BlockMediaGrid
+					title={title}
+					buttonLabel={buttonLabel}
+					buttonAltTitle={buttonAltTitle}
+					buttonAction={buttonAction || searchQuery}
+					ctaTitle={ctaTitle}
+					ctaTitleColor={ctaTitleColor}
+					ctaTitleSize={ctaTitleSize}
+					ctaContent={ctaContent}
+					ctaContentColor={ctaContentColor}
+					ctaButtonLabel={ctaButtonLabel}
+					ctaButtonAltTitle={ctaButtonAltTitle}
+					ctaButtonType={ctaButtonType}
+					ctaButtonIcon={ctaButtonIcon}
+					ctaBackgroundColor={ctaBackgroundColor}
+					ctaBackgroundImage={ctaBackgroundImage}
+					ctaWidth={ctaWidth}
+					ctaButtonAction={ctaButtonAction}
+					fullWidth={isMobileWidth()}
+					elements={elements}
+					renderLink={renderLink}
+					renderMediaCardWrapper={renderMediaCardWrapper}
+				/>
+				<Modal
+					isOpen={!!activeItem && !!activeItem.src}
+					onClose={() => {
+						setActiveItem(null);
+						setActiveItemBookmarkStatus(null);
+					}}
+					scrollable
+					size="medium"
+				>
+					<ModalBody>
+						{!!activeItem && !!activeItem.src && (
+							<ItemVideoDescription
+								src={activeItem.src}
+								poster={get(activeItem, 'thumbnail.src')}
+								itemMetaData={activeItem as unknown as Avo.Item.Item}
+								verticalLayout
+								showTitle
+								titleLink={buildLink(APP_PATH.ITEM_DETAIL.route, {
+									id: activeItem.external_id,
+								})}
+								collapseDescription={false}
+								renderButtons={renderBookmarkButton}
+							/>
+						)}
+					</ModalBody>
+				</Modal>
+			</>
 		);
 	};
 
@@ -274,4 +393,4 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	);
 };
 
-export default MediaGridWrapper;
+export default withRouter(MediaGridWrapper);

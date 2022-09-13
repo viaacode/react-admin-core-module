@@ -81,34 +81,41 @@ function setConfig() {
 				},
 			},
 			buttonTypes: () => [
+				// Het archief buttons
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Zilver'),
-					value: 'c-button--silver',
+					value: 'admin-core-button--silver',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Blauw groen'),
-					value: 'c-button--teal',
+					value: 'admin-core-button--teal',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Wit'),
-					value: 'c-button--white',
+					value: 'admin-core-button--white',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Zwart'),
-					value: 'c-button--black',
+					value: 'admin-core-button--black',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Outline'),
-					value: 'c-button--outline',
+					value: 'admin-core-button--outline',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.t('Tekst'),
-					value: 'c-button--text',
+					value: 'admin-core-button--text',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Neutraal'),
-					value: 'c-button--text c-button--neutral c-button--underline',
+					label: AdminConfigManager.getConfig().services.i18n.t('Rood'),
+					value: 'admin-core-button--red',
 				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.t('Link'),
+					value: 'admin-core-button--link',
+				},
+
+				// Avo buttons
 				// {
 				// 	label: AdminConfigManager.getConfig().services.i18n.t(
 				// 		'admin/content-block/content-block___primair'
@@ -203,6 +210,7 @@ function setConfig() {
 				fetchCities: () => Promise.resolve([]),
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
+			bookmarksViewsPlaysService: {},
 			router: routerConfig as any,
 			UserGroupsService,
 			PermissionsService,
@@ -232,10 +240,10 @@ function setConfig() {
 
 function renderApp() {
 	ReactDOM.render(
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>,
-		document.getElementById('root')
+			<React.StrictMode>
+				<App/>
+			</React.StrictMode>,
+			document.getElementById('root')
 	);
 }
 
