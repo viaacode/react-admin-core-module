@@ -30,10 +30,10 @@ export const parseSearchQuery = (input: string): string => {
 	} catch (err) {
 		console.error('Failed to parse search query input', err);
 		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.t(
+			title: AdminConfigManager.getConfig().services.i18n.tText(
 				'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
 			),
-			description: AdminConfigManager.getConfig().services.i18n.t(
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
 			),
 			type: ToastType.ERROR,

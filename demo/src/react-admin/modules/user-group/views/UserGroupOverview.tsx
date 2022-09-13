@@ -29,7 +29,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		/**
 		 * Hooks
 		 */
-		const { t } = useTranslation();
+		const { t, tText } = useTranslation();
 
 		const {
 			data: userGroups,
@@ -139,10 +139,10 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					// Fire onChange for parent component
 					onChangePermissions?.(false);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/user-group/views/user-group-overview___success'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 						),
 						type: ToastType.ERROR,
@@ -155,10 +155,10 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						})
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/user-group/views/user-group-overview___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 						),
 						type: ToastType.ERROR,
@@ -212,10 +212,10 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
 					type: ToastType.ERROR,
@@ -238,10 +238,10 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
 					type: ToastType.ERROR,
@@ -268,7 +268,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			return (
 				<div className={className}>
 					<TextInput
-						placeholder={t('modules/user-group/views/user-group-overview___zoek')}
+						placeholder={tText('modules/user-group/views/user-group-overview___zoek')}
 						value={search}
 						onChange={onSearchChange}
 						onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}

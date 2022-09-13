@@ -48,7 +48,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	disabled = false,
 	onChange,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [urlToDelete, setUrlToDelete] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -73,10 +73,10 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					: [];
 				if (notAllowedFiles.length) {
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: tText(
 							'modules/admin/shared/components/file-upload/file-upload___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: tText(
 							'shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten'
 						),
 						type: ToastType.ERROR,
@@ -104,20 +104,16 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			);
 			if (files && files.length > 1 && allowMulti) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/admin/shared/components/file-upload/file-upload___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			} else {
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/admin/shared/components/file-upload/file-upload___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -155,10 +151,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 		} catch (err) {
 			console.error(new CustomError('Failed to delete asset', err, { urls }));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/admin/shared/components/file-upload/file-upload___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+				description: tText(
 					'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -178,8 +172,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				className="a-delete-button"
 				type="danger-hover"
 				icon="trash-2"
-				ariaLabel={t('shared/components/file-upload/file-upload___verwijder-bestand')}
-				title={t('shared/components/file-upload/file-upload___verwijder-bestand')}
+				ariaLabel={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
+				title={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
 				autoHeight
 				disabled={isProcessing}
 				onClick={() => openDeleteModal(url)}
@@ -261,10 +255,10 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 								label={
 									label ||
 									(allowMulti
-										? AdminConfigManager.getConfig().services.i18n.t(
+										? tText(
 												'shared/components/file-upload/file-upload___selecteer-bestanden'
 										  )
-										: AdminConfigManager.getConfig().services.i18n.t(
+										: tText(
 												'shared/components/file-upload/file-upload___selecteer-een-bestand'
 										  ))
 								}
@@ -274,7 +268,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 							/>
 							<input
 								type="file"
-								title={t(
+								title={tText(
 									'shared/components/file-upload/file-upload___kies-een-bestand'
 								)}
 								multiple={allowMulti}
@@ -289,7 +283,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					<Spinner size="large" />
 				))}
 			<ConfirmModal
-				title={t(
+				title={tText(
 					'shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen'
 				)}
 				body={t(

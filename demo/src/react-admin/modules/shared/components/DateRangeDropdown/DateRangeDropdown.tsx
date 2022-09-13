@@ -63,7 +63,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 	defaultControls = 'year',
 	onChange,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);
@@ -152,7 +152,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 			}
 		} catch (err) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t(
+				title: tText(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),
 				description: `${t(
@@ -245,7 +245,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				<Spacer className="c-date-range-dropdown__content">
 					<Form>
 						<FormGroup
-							label={t(
+							label={tText(
 								'shared/components/date-range-dropdown/date-range-dropdown___hoe-specifiek'
 							)}
 						>
@@ -253,13 +253,13 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 								inline={!showPastFutureOptions}
 								options={[
 									{
-										label: t(
+										label: tText(
 											'shared/components/date-range-dropdown/date-range-dropdown___op-jaartal'
 										),
 										value: 'year',
 									},
 									{
-										label: t(
+										label: tText(
 											'shared/components/date-range-dropdown/date-range-dropdown___specifieke-datums'
 										),
 										value: 'date',
@@ -267,13 +267,13 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 									...(showPastFutureOptions
 										? [
 												{
-													label: t(
+													label: tText(
 														'shared/components/date-range-dropdown/date-range-dropdown___in-het-verleden'
 													),
 													value: 'past',
 												},
 												{
-													label: t(
+													label: tText(
 														'shared/components/date-range-dropdown/date-range-dropdown___in-de-toekomst'
 													),
 													value: 'future',
@@ -288,13 +288,13 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 								<Grid>
 									<Column size="6">
 										<FormGroup
-											label={t(
+											label={tText(
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
 											<TextInput
 												id={`${id}-gte`}
-												placeholder={t(
+												placeholder={tText(
 													'shared/components/date-range-dropdown/date-range-dropdown___jjjj'
 												)}
 												value={fromYear}
@@ -306,13 +306,13 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 									</Column>
 									<Column size="6">
 										<FormGroup
-											label={t(
+											label={tText(
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
 											<TextInput
 												id={`${id}-lte`}
-												placeholder={t(
+												placeholder={tText(
 													'shared/components/date-range-dropdown/date-range-dropdown___jjjj'
 												)}
 												value={tillYear}
@@ -330,7 +330,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 								<Grid>
 									<Column size="6">
 										<FormGroup
-											label={t(
+											label={tText(
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
@@ -343,7 +343,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 									</Column>
 									<Column size="6">
 										<FormGroup
-											label={t(
+											label={tText(
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
@@ -359,7 +359,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 						</FormGroup>
 						<FormGroup>
 							<Button
-								label={t(
+								label={tText(
 									'shared/components/date-range-dropdown/date-range-dropdown___toepassen'
 								)}
 								type="primary"

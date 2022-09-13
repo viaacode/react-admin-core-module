@@ -60,13 +60,13 @@ export const UserGroupTableColumns = (
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedOutUsers,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedInUsers,

@@ -18,12 +18,18 @@ export const NAVIGATION_PATH = {
 };
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
-	{ id: 'placement', label: AdminConfigManager.getConfig().services.i18n.t('admin/menu/menu___naam') },
+	{
+		id: 'placement',
+		label: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___naam'),
+	},
 	{
 		id: 'description',
-		label: AdminConfigManager.getConfig().services.i18n.t('admin/menu/menu___omschrijving'),
+		label: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___omschrijving'),
 	},
-	{ id: 'actions', tooltip: AdminConfigManager.getConfig().services.i18n.t('admin/menu/menu___acties') },
+	{
+		id: 'actions',
+		tooltip: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___acties'),
+	},
 ];
 
 export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem> => ({

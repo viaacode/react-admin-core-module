@@ -33,7 +33,7 @@ export interface NavigationDetailProps {
 }
 
 const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
@@ -80,10 +80,8 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			await refetchNavigationItems();
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-detail___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-detail___success'),
+				description: tText(
 					'admin/menu/views/menu-detail___het-navigatie-item-is-succesvol-verwijderd'
 				),
 				type: ToastType.SUCCESS,
@@ -91,10 +89,8 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		} catch (err) {
 			console.error(new CustomError('Failed to delete menu item', err, { idToDelete }));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-detail___error'),
+				description: tText(
 					'admin/menu/views/menu-detail___het-verwijderen-van-het-navigatie-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -116,10 +112,8 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			await NavigationService.updateNavigationItems(navigationItems);
 			await invalidateNavigationQueries();
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-detail___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-detail___success'),
+				description: tText(
 					'admin/menu/views/menu-detail___de-navigatie-items-zijn-succesvol-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -129,10 +123,8 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				new CustomError('Failed to update menu items', err, { menuItems: navigationItems })
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-detail___error'),
+				description: tText(
 					'admin/menu/views/menu-detail___het-opslaan-van-de-navigatie-items-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -176,13 +168,13 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				onClick={() => reorderMenuItem(index, indexUpdate, id)}
 				title={
 					dir === 'up'
-						? t('admin/menu/views/menu-detail___verplaats-het-item-naar-boven')
-						: t('admin/menu/views/menu-detail___verplaats-het-item-naar-onder')
+						? tText('admin/menu/views/menu-detail___verplaats-het-item-naar-boven')
+						: tText('admin/menu/views/menu-detail___verplaats-het-item-naar-onder')
 				}
 				ariaLabel={
 					dir === 'up'
-						? t('admin/menu/views/menu-detail___verplaats-het-item-naar-boven')
-						: t('admin/menu/views/menu-detail___verplaats-het-item-naar-onder')
+						? tText('admin/menu/views/menu-detail___verplaats-het-item-naar-boven')
+						: tText('admin/menu/views/menu-detail___verplaats-het-item-naar-onder')
 				}
 				type="secondary"
 				disabled={disabled}
@@ -217,16 +209,20 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 									navigationItemId: String(rowData.id),
 								})
 							}
-							title={t('admin/menu/views/menu-detail___bewerk-dit-navigatie-item')}
-							ariaLabel={t(
+							title={tText(
+								'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
+							)}
+							ariaLabel={tText(
 								'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
 							)}
 							type="secondary"
 						/>
 						<Button
 							icon="delete"
-							title={t('admin/menu/views/menu-detail___verwijder-dit-navigatie-item')}
-							ariaLabel={t(
+							title={tText(
+								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
+							)}
+							ariaLabel={tText(
 								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
 							)}
 							onClick={() => openConfirmModal(rowData.id)}
@@ -244,7 +240,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					align
 					className="c-menu-detail__table"
 					variant="styled"
-					emptyStateMessage={t(
+					emptyStateMessage={tText(
 						'modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items'
 					)}
 					data={navigationItems || []}
@@ -254,7 +250,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 						},
 						{
 							id: 'label',
-							label: t('modules/navigation/views/navigation-detail___label'),
+							label: tText('modules/navigation/views/navigation-detail___label'),
 						},
 						{
 							id: 'actions',
@@ -267,7 +263,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					<Flex center>
 						<Button
 							icon="plus"
-							label={t('admin/menu/views/menu-detail___voeg-een-item-toe')}
+							label={tText('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
 								handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
 									navigationBarId,
@@ -309,13 +305,13 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={t('admin/menu/views/menu-detail___annuleer')}
+							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
 							type="tertiary"
 						/>
 						<Button
 							disabled={isSaving}
-							label={t('admin/menu/views/menu-detail___opslaan')}
+							label={tText('admin/menu/views/menu-detail___opslaan')}
 							onClick={() => handleSave()}
 						/>
 					</ButtonToolbar>

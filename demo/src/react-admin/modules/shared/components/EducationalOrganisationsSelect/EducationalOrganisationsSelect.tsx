@@ -26,7 +26,7 @@ export interface EducationalOrganisationsSelectProps {
 export const EducationalOrganisationsSelect: FunctionComponent<
 	EducationalOrganisationsSelectProps
 > = ({ organisations, onChange, disabled = false }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [cities, setCities] = useState<string[]>([]);
 	const [organisationsInCity, setOrganisationsInCity] = useState<ClientEducationOrganization[]>(
@@ -50,10 +50,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error(err);
 				console.error(new Error('Failed to get cities'));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: t(
+					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
 					),
-					description: t(
+					description: tText(
 						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -95,10 +95,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					selectedCity,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: t(
+					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 					),
-					description: t(
+					description: tText(
 						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -125,10 +125,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		);
 		if (!selectedOrg) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t(
+				title: tText(
 					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 				),
-				description: t(
+				description: tText(
 					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden'
 				),
 				type: ToastType.ERROR,
@@ -149,7 +149,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		if (organisationsInCity.length === 0 && organizationsLoadingState === 'loaded') {
 			return [
 				{
-					label: t(
+					label: tText(
 						'settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente'
 					),
 					value: '',
@@ -159,7 +159,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		}
 		return [
 			{
-				label: t('settings/components/organisation___selecteer-een-instelling'),
+				label: tText('settings/components/organisation___selecteer-een-instelling'),
 				value: '',
 				disabled: true,
 			},
@@ -178,7 +178,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					<Select
 						options={[
 							{
-								label: t('settings/components/profile___voeg-een-organisatie-toe'),
+								label: tText(
+									'settings/components/profile___voeg-een-organisatie-toe'
+								),
 								value: '',
 							},
 							...(cities || []).map((c) => ({ label: c, value: c })),

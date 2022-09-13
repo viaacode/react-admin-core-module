@@ -50,22 +50,22 @@ export const INITIAL_IMAGE_GRID_BLOCK_STATE = (): BlockImageGridWrapperProps &
 
 export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/image-grid___afbeeldingen-grid'
 	),
 	type: ContentBlockType.ImageGrid,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/image-grid___item'
 		),
 		state: INITIAL_IMAGE_GRID_COMPONENTS_STATE(),
 		fields: {
 			source: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/image-grid___afbeelding'
 					),
 					editorProps: {
@@ -76,42 +76,42 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___titel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			text: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___tekst'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___knop-tekst'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAltTitle: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___knop-tooltip'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___knop-type-kleur'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -120,7 +120,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			action: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___link'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -132,7 +132,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			format: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___formaat'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -141,7 +141,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			fill: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___zoom'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -150,7 +150,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			align: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___alignatie'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -159,7 +159,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			textAlign: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___text-alignatie'
 				),
 				editorType: ContentBlockEditor.Select,

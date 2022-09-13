@@ -55,10 +55,10 @@ export const useUserGroupOptions = (
 				console.error(new CustomError('Failed to get user group options', err));
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/admin/content-page/hooks/use-user-group-options___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,

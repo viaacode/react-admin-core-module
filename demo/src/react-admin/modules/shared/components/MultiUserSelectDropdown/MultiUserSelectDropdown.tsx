@@ -49,7 +49,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	onChange,
 	showSelectedValuesOnCollapsed = true,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedProfiles, setSelectedProfiles] = useState<PickerItem[]>([]);
@@ -86,10 +86,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 						)
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.tText(
 							'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
 						),
 						type: ToastType.ERROR,
@@ -202,7 +202,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 										hideTypeDropdown
 										placeholder={
 											placeholder ||
-											t(
+											tText(
 												'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___selecteer-een-gebruiker'
 											)
 										}
@@ -213,7 +213,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 
 							<FormGroup>
 								<Button
-									label={t(
+									label={tText(
 										'shared/components/checkbox-dropdown-modal/checkbox-dropdown-modal___toepassen'
 									)}
 									type="primary"

@@ -6,9 +6,7 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-
-import { ContentPageService } from '../../../services/content-page.service';
+import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
 import {
 	MediaGridBlockComponentState,
 	MediaGridBlockState,
@@ -17,25 +15,27 @@ import {
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
 
 import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
-import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { isMobileWidth } from '~modules/shared/helpers/media-query';
-import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
+import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;
 	searchQueryLimit: string;
 	elements: { mediaItem: ButtonAction }[];
 	results: ResolvedItemOrCollection[];
-	renderLink?: RenderLinkFunction;
+	renderLink: RenderLinkFunction;
 	buttonAltTitle?: string;
 	ctaButtonAltTitle?: string;
+	user: Avo.User.User;
+	mediaItemClicked: (mediaListItem: MediaListItem) => void;
 }
 
 const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
@@ -62,6 +62,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	elements,
 	results,
 	renderLink,
+	mediaItemClicked,
 }) => {
 	const { t } = useTranslation();
 
@@ -218,50 +219,42 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		} as any;
 	};
 
-	const renderPlayerModalBody = (item: MediaListItem) => {
-		return (
-			!!item &&
-			!!(item as any).src && ( // TODO remove cast after update to components v1.47.0
-				<ItemVideoDescription
-					src={(item as any).src} // TODO remove cast after update to components v1.47.0
-					poster={get(item, 'thumbnail.src')}
-					itemMetaData={item as unknown as Avo.Item.Item}
-					verticalLayout
-					showTitle
-					collapseDescription={false}
-				/>
-			)
-		);
+	const renderMediaCardWrapper = (mediaCard: ReactNode, item: MediaListItem) => {
+		if (openMediaInModal) {
+			return <a onClick={() => mediaItemClicked(item)}>{mediaCard}</a>;
+		}
+		return renderLink(item.itemAction, mediaCard, item.buttonAltTitle || item.title);
 	};
 
 	// Render
 	const renderMediaGridBlock = () => {
 		const elements = (resolvedResults || []).map(mapCollectionOrItemData);
 		return (
-			<BlockMediaGrid
-				title={title}
-				buttonLabel={buttonLabel}
-				buttonAltTitle={buttonAltTitle}
-				buttonAction={buttonAction || searchQuery}
-				ctaTitle={ctaTitle}
-				ctaTitleColor={ctaTitleColor}
-				ctaTitleSize={ctaTitleSize}
-				ctaContent={ctaContent}
-				ctaContentColor={ctaContentColor}
-				ctaButtonLabel={ctaButtonLabel}
-				ctaButtonAltTitle={ctaButtonAltTitle}
-				ctaButtonType={ctaButtonType}
-				ctaButtonIcon={ctaButtonIcon}
-				ctaBackgroundColor={ctaBackgroundColor}
-				ctaBackgroundImage={ctaBackgroundImage}
-				ctaWidth={ctaWidth}
-				openMediaInModal={openMediaInModal}
-				ctaButtonAction={ctaButtonAction}
-				fullWidth={isMobileWidth()}
-				elements={elements}
-				renderLink={renderLink}
-				renderPlayerModalBody={renderPlayerModalBody}
-			/>
+			<>
+				<BlockMediaGrid
+					title={title}
+					buttonLabel={buttonLabel}
+					buttonAltTitle={buttonAltTitle}
+					buttonAction={buttonAction || searchQuery}
+					ctaTitle={ctaTitle}
+					ctaTitleColor={ctaTitleColor}
+					ctaTitleSize={ctaTitleSize}
+					ctaContent={ctaContent}
+					ctaContentColor={ctaContentColor}
+					ctaButtonLabel={ctaButtonLabel}
+					ctaButtonAltTitle={ctaButtonAltTitle}
+					ctaButtonType={ctaButtonType}
+					ctaButtonIcon={ctaButtonIcon}
+					ctaBackgroundColor={ctaBackgroundColor}
+					ctaBackgroundImage={ctaBackgroundImage}
+					ctaWidth={ctaWidth}
+					ctaButtonAction={ctaButtonAction}
+					fullWidth={isMobileWidth()}
+					elements={elements}
+					renderLink={renderLink}
+					renderMediaCardWrapper={renderMediaCardWrapper}
+				/>
+			</>
 		);
 	};
 

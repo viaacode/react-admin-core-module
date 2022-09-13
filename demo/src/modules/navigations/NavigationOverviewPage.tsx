@@ -6,11 +6,11 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { NavigationOverview } from '~modules/navigation/views';
 
 const NavigationOverviewPage: FunctionComponent = () => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const renderPageContent = () => {
 		return (
-			<AdminLayout pageTitle={t('admin/menu/views/menu-overview___navigatie-overzicht')}>
+			<AdminLayout pagetitle={tText('admin/menu/views/menu-overview___navigatie-overzicht')}>
 				<AdminLayout.Content>
 					<NavigationOverview />
 				</AdminLayout.Content>

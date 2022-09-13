@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import I18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
@@ -89,7 +88,10 @@ function setConfig() {
 					console.log('show toast: ', toastInfo);
 				},
 			},
-			i18n: I18n,
+			i18n: {
+				t: (key) => key,
+				tText: (key) => key,
+			},
 			educationOrganisationService: {
 				fetchEducationOrganisationName: () => Promise.resolve(null),
 				fetchCities: () => Promise.resolve([]),
@@ -117,6 +119,10 @@ function setConfig() {
 			onExternalLink: () => {
 				// Client decides what should happen when an external link is clicked
 			},
+			mediaItemClicked: () => {
+				// TODO set redux value in the avo client and open a global modal to render the media item
+				// See AVO2-client src/admin/content-block/components/wrappers/MediaGridWrapper/MediaGridWrapper.tsx => handleItemClicked()
+			},
 		},
 		user: mockUser,
 	});
@@ -132,7 +138,6 @@ function renderApp() {
 }
 
 async function bootstrapApp() {
-	await initI18n(proxyUrl);
 	setConfig();
 	renderApp();
 }

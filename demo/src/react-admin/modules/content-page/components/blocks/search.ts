@@ -23,7 +23,7 @@ export const INITIAL_SEARCH_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const SEARCH_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/search___search'
 	),
 	type: ContentBlockType.Search,

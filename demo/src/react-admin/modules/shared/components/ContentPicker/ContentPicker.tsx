@@ -36,14 +36,14 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
 	initialValue,
 	onSelect,
-	placeholder = AdminConfigManager.getConfig().services.i18n.t(
+	placeholder = AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___selecteer-een-item'
 	),
 	hideTypeDropdown = false,
 	hideTargetSwitch = false,
 	errors = [],
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	// filter available options for the type picker
 	const typeOptions = filterTypes(GET_CONTENT_TYPES(), allowedTypes as ContentPickerType[]);
@@ -103,10 +103,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
+					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/admin/shared/components/content-picker/content-picker___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/admin/shared/components/content-picker/content-picker___het-ophalen-van-de-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -163,10 +163,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/shared/components/content-picker/content-picker___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/shared/components/content-picker/content-picker___voor-deze-content-pagina-is-geen-pad-geconfigureerd'
 				),
 				type: ToastType.ERROR,
@@ -247,8 +247,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				<ReactSelect
 					{...REACT_SELECT_DEFAULT_OPTIONS}
 					id="content-picker-type"
-					placeholder={t('admin/shared/components/content-picker/content-picker___type')}
-					aria-label={t(
+					placeholder={tText(
+						'admin/shared/components/content-picker/content-picker___type'
+					)}
+					aria-label={tText(
 						'admin/shared/components/content-picker/content-picker___selecteer-een-type'
 					)}
 					options={typeOptions}
@@ -335,10 +337,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					icon={isTargetSelf ? 'arrow-down-circle' : 'external-link'}
 					title={
 						isTargetSelf
-							? t(
+							? tText(
 									'admin/shared/components/content-picker/content-picker___open-de-link-in-hetzelfde-tablad'
 							  )
-							: t(
+							: tText(
 									'admin/shared/components/content-picker/content-picker___open-de-link-in-een-nieuw-tabblad'
 							  )
 					}

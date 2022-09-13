@@ -175,10 +175,10 @@ export class ContentPageService {
 				query: this.getQueries().GetContentTypesDocument,
 			});
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-page___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content/content___er-ging-iets-mis-tijdens-het-ophalen-van-de-content-types'
 				),
 				type: ToastType.ERROR,

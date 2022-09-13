@@ -24,7 +24,6 @@ import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import Html from '~modules/shared/components/Html/Html';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './PublishContentPageModal.scss';
@@ -40,7 +39,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 	isOpen,
 	contentPage,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const [validationError, setValidationError] = useState<string[] | undefined>(undefined);
 	const [selectedOption, setSelectedOption] = useState<PublishOption>(
@@ -71,10 +70,10 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 			closeModal(newContent);
 		} catch (err) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t(
+				title: tText(
 					'modules/admin/content-page/components/publish-content-page-modal___error'
 				),
-				description: t(
+				description: tText(
 					'admin/content/components/share-content-page-modal___de-aanpassingen-kunnen-niet-worden-opgeslagen'
 				),
 				type: ToastType.ERROR,
@@ -100,7 +99,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 	return (
 		<Modal
 			isOpen={isOpen}
-			title={t(
+			title={tText(
 				'admin/content/components/share-content-page-modal___maak-deze-content-pagina-publiek'
 			)}
 			size="large"
@@ -122,19 +121,19 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 					<RadioButtonGroup
 						options={[
 							{
-								label: t(
+								label: tText(
 									'admin/content/components/share-content-page-modal___prive'
 								),
 								value: 'private',
 							},
 							{
-								label: t(
+								label: tText(
 									'admin/content/components/share-content-page-modal___openbaar'
 								),
 								value: 'public',
 							},
 							{
-								label: t(
+								label: tText(
 									'admin/content/components/share-content-page-modal___tijdsgebonden'
 								),
 								value: 'timebound',
@@ -147,7 +146,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 				<Spacer margin="left-large">
 					<Form>
 						<FormGroup
-							label={t(
+							label={tText(
 								'admin/content/components/share-content-page-modal___publiceren-op'
 							)}
 						>
@@ -159,7 +158,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 							/>
 						</FormGroup>
 						<FormGroup
-							label={t(
+							label={tText(
 								'admin/content/components/share-content-page-modal___depubliceren-op'
 							)}
 						>
@@ -176,7 +175,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 				</Spacer>
 
 				<FormGroup
-					label={t(
+					label={tText(
 						'admin/content/components/publish-content-page-modal___display-datum-optioneel'
 					)}
 					className="c-content-page-publish-modal__display-date"
@@ -191,12 +190,9 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 								<Icon className="a-info-icon" name="info" size="small" />
 							</TooltipTrigger>
 							<TooltipContent>
-								<Html
-									content={t(
-										'admin/content/components/publish-content-page-modal___tooltip-display-date'
-									)}
-									sanitizePreset={'basic'}
-								/>
+								{t(
+									'admin/content/components/publish-content-page-modal___tooltip-display-date'
+								)}
 							</TooltipContent>
 						</Tooltip>
 					</Spacer>
@@ -208,14 +204,14 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 							<ButtonToolbar>
 								<Button
 									type="secondary"
-									label={t(
+									label={tText(
 										'admin/content/components/share-content-page-modal___annuleren'
 									)}
 									onClick={() => closeModal()}
 								/>
 								<Button
 									type="primary"
-									label={t(
+									label={tText(
 										'admin/content/components/share-content-page-modal___opslaan'
 									)}
 									onClick={onSave}

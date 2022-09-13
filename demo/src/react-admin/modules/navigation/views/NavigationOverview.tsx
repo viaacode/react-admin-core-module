@@ -15,7 +15,7 @@ import {
 import { Loader } from '~modules/shared/components';
 
 const NavigationOverview: FunctionComponent = () => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
@@ -52,10 +52,10 @@ const NavigationOverview: FunctionComponent = () => {
 								})
 							}
 							size="small"
-							title={t(
+							title={tText(
 								'admin/menu/views/menu-overview___bekijk-de-navigatie-items-voor-deze-navigatie-balk'
 							)}
-							ariaLabel={t(
+							ariaLabel={tText(
 								'admin/menu/views/menu-overview___bekijk-de-navigatie-items-voor-deze-navigatie-balk'
 							)}
 							type="secondary"
@@ -68,10 +68,10 @@ const NavigationOverview: FunctionComponent = () => {
 								})
 							}
 							size="small"
-							title={t(
+							title={tText(
 								'admin/menu/views/menu-overview___voeg-een-navigatie-item-toe-aan-deze-navigatie-balk'
 							)}
-							ariaLabel={t(
+							ariaLabel={tText(
 								'admin/menu/views/menu-overview___voeg-een-navigatie-item-toe-aan-deze-navigatie-balk'
 							)}
 							type="secondary"
@@ -119,7 +119,13 @@ const NavigationOverview: FunctionComponent = () => {
 			return <Loader />;
 		}
 		if (isErrorNavigationItems) {
-			return <div>{t('modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt')}</div>;
+			return (
+				<div>
+					{t(
+						'modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt'
+					)}
+				</div>
+			);
 		}
 		return renderMenuOverview();
 	};

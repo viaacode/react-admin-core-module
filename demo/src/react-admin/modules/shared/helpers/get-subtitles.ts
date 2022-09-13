@@ -15,11 +15,13 @@ export function getSubtitles(
 		return {
 			id: collateral.external_id,
 			default: index === 0,
-			src: `${AdminConfigManager.getConfig().database.proxyUrl}/admin/subtitles/convert-srt-to-vtt${
-				collateral.path
-			}`,
+			src: `${
+				AdminConfigManager.getConfig().database.proxyUrl
+			}/admin/subtitles/convert-srt-to-vtt${collateral.path}`,
 			label:
-				AdminConfigManager.getConfig().services.i18n.t('shared/helpers/get-subtitles___nederlands') +
+				AdminConfigManager.getConfig().services.i18n.tText(
+					'shared/helpers/get-subtitles___nederlands'
+				) +
 				(index + 1),
 		};
 	});

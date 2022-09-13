@@ -26,7 +26,7 @@ export const INITIAL_INTRO_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/intro___intro'
 	),
 	type: ContentBlockType.Intro,
@@ -34,18 +34,18 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_INTRO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/intro___titel-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/intro___titel'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingType: {
-				label: AdminConfigManager.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/heading___stijl'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -54,11 +54,11 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			content: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/intro___tekst-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/defaults___tekst'
 					),
 					editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
@@ -69,7 +69,7 @@ export const INTRO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/intro___uitlijning'
 				)
 			),

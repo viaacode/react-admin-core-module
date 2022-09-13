@@ -76,7 +76,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	buttonLabel = AdminConfigManager.getConfig().services.i18n.t(
+	buttonLabel = AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___lees-meer'
 	),
 	buttonAltTitle = '',
@@ -85,7 +85,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	headerBackgroundColor,
 	renderLink,
 }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 
 	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
 		page: NumberParam,
@@ -195,10 +195,10 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 					);
 
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
+						title: AdminConfigManager.getConfig().services.i18n.tText(
 							'modules/admin/content-page/components/wrappers/page-overview-wrapper/page-overview-wrapper___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						description: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/components/wrappers/page-overview-wrapper/page-overview-wrapper___het-opgegeven-item-kon-niet-worden-gevonden'
 						),
 						type: ToastType.ERROR,
@@ -333,13 +333,13 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				showTitle={showTitle}
 				showDescription={showDescription}
 				showDate={showDate}
-				dateString={t(
+				dateString={tText(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___geplaatst-label-op-date'
 				)}
-				allLabel={t(
+				allLabel={tText(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___alle'
 				)}
-				noLabel={t(
+				noLabel={tText(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___overige'
 				)}
 				buttonLabel={buttonLabel}

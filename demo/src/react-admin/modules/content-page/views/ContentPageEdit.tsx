@@ -71,7 +71,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
@@ -129,8 +129,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___error'),
-				description: t(
+				title: tText('modules/content-page/views/content-page-edit___error'),
+				description: tText(
 					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -157,8 +157,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 						});
 
 						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: t('modules/content-page/views/content-page-edit___success'),
-							description: t(
+							title: tText('modules/content-page/views/content-page-edit___success'),
+							description: tText(
 								'admin/content/views/content-edit___de-blok-is-toegevoegd'
 							),
 							type: ToastType.SUCCESS,
@@ -168,8 +168,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			} catch (err) {
 				console.error(new CustomError('Failed to paste content block', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: t('modules/content-page/views/content-page-edit___error'),
-					description: t(
+					title: tText('modules/content-page/views/content-page-edit___error'),
+					description: tText(
 						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -284,8 +284,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				setIsSaving(false);
 				if (!isFormValid) {
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: t('modules/content-page/views/content-page-edit___error'),
-						description: t(
+						title: tText('modules/content-page/views/content-page-edit___error'),
+						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
 						),
 						type: ToastType.ERROR,
@@ -293,8 +293,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				}
 				if (!areConfigsValid) {
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: t('modules/content-page/views/content-page-edit___error'),
-						description: t(
+						title: tText('modules/content-page/views/content-page-edit___error'),
+						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
 						),
 						type: ToastType.ERROR,
@@ -379,8 +379,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___success'),
-				description: t(
+				title: tText('modules/content-page/views/content-page-edit___success'),
+				description: tText(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -391,8 +391,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___error'),
-				description: t(
+				title: tText('modules/content-page/views/content-page-edit___error'),
+				description: tText(
 					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -406,11 +406,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 		const errors: ContentEditFormErrors = {};
 
 		if (!contentPageState.currentContentPageInfo.title) {
-			errors.title = t('admin/content/views/content-edit___titel-is-verplicht');
+			errors.title = tText('admin/content/views/content-edit___titel-is-verplicht');
 		}
 
 		if (!contentPageState.currentContentPageInfo.content_type) {
-			errors.content_type = t('admin/content/views/content-edit___content-type-is-verplicht');
+			errors.content_type = tText(
+				'admin/content/views/content-edit___content-type-is-verplicht'
+			);
 		}
 
 		// check if the path is unique
@@ -423,7 +425,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					contentPageState.currentContentPageInfo.id
 				);
 			if (existingContentPageTitle) {
-				errors.path = t(
+				errors.path = tText(
 					'admin/content/views/content-edit___dit-path-is-reeds-gebruikt-door-pagina-page-title',
 					{
 						pageTitle: existingContentPageTitle,
@@ -445,7 +447,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			new Date(contentPageState.currentContentPageInfo.depublish_at) <
 				new Date(contentPageState.currentContentPageInfo.publish_at)
 		) {
-			errors.depublish_at = t(
+			errors.depublish_at = tText(
 				'admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum'
 			);
 		}
@@ -556,14 +558,14 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={t('admin/content/views/content-edit___annuleer')}
+							label={tText('admin/content/views/content-edit___annuleer')}
 							onClick={navigateBack}
 							type="tertiary"
 						/>
 						{isAllowedToSave && (
 							<Button
 								disabled={isSaving}
-								label={t('admin/content/views/content-edit___opslaan')}
+								label={tText('admin/content/views/content-edit___opslaan')}
 								onClick={handleSave}
 							/>
 						)}

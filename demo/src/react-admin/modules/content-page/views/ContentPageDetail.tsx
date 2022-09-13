@@ -52,7 +52,7 @@ const {
 
 const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	// Hooks
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
@@ -143,10 +143,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/content-page/views/content-page-detail___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/content-page/views/content-page-detail___success'),
+				description: tText(
 					'admin/content/views/content-detail___het-content-item-is-succesvol-verwijderd'
 				),
 				type: ToastType.SUCCESS,
@@ -154,10 +152,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 		} catch (err) {
 			console.error(err);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/content-page/views/content-page-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/content-page/views/content-page-detail___error'),
+				description: tText(
 					'admin/content/views/content-detail___het-verwijderen-van-het-content-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -170,10 +166,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 		} else {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/content-page/views/content-page-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/content-page/views/content-page-detail___error'),
+				description: tText(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
 				),
 				type: ToastType.ERROR,
@@ -198,10 +192,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				} as ContentPageInfo);
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/content-page/views/content-page-detail___success'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/content-page/views/content-page-detail___success'),
+					description: tText(
 						isPublic(newContentPage)
 							? 'admin/content/views/content-detail___de-content-pagina-is-nu-publiek'
 							: 'admin/content/views/content-detail___de-content-pagina-is-nu-niet-meer-publiek'
@@ -216,10 +208,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			});
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/content-page/views/content-page-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/content-page/views/content-page-detail___error'),
+				description: tText(
 					'admin/content/views/content-detail___het-opslaan-van-de-publiek-status-van-de-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -234,7 +224,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			? [
 					createDropdownMenuItem(
 						'duplicate',
-						t('collection/views/collection-detail___dupliceer'),
+						tText('collection/views/collection-detail___dupliceer'),
 						'copy'
 					),
 			  ]
@@ -243,7 +233,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			? [
 					createDropdownMenuItem(
 						'delete',
-						t('admin/content/views/content-detail___verwijderen')
+						tText('admin/content/views/content-detail___verwijderen')
 					),
 			  ]
 			: []),
@@ -256,10 +246,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				try {
 					if (!contentPageInfo) {
 						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: AdminConfigManager.getConfig().services.i18n.t(
-								'modules/content-page/views/content-page-detail___error'
-							),
-							description: AdminConfigManager.getConfig().services.i18n.t(
+							title: tText('modules/content-page/views/content-page-detail___error'),
+							description: tText(
 								'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gedupliceerd'
 							),
 							type: ToastType.ERROR,
@@ -276,10 +264,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 					if (!duplicateContentPage) {
 						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: AdminConfigManager.getConfig().services.i18n.t(
-								'modules/content-page/views/content-page-detail___error'
-							),
-							description: AdminConfigManager.getConfig().services.i18n.t(
+							title: tText('modules/content-page/views/content-page-detail___error'),
+							description: tText(
 								'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
 							),
 							type: ToastType.ERROR,
@@ -293,10 +279,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 						})
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
-							'modules/content-page/views/content-page-detail___success'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						title: tText('modules/content-page/views/content-page-detail___success'),
+						description: tText(
 							'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
 						),
 						type: ToastType.SUCCESS,
@@ -307,10 +291,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					});
 
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
-							'modules/content-page/views/content-page-detail___error'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						title: tText('modules/content-page/views/content-page-detail___error'),
+						description: tText(
 							'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
 						),
 						type: ToastType.ERROR,
@@ -341,11 +323,11 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					<Button
 						type="secondary"
 						icon={isPublic(contentPageInfo) ? 'unlock-3' : 'lock'}
-						label={t('admin/content/views/content-detail___publiceren')}
-						title={t(
+						label={tText('admin/content/views/content-detail___publiceren')}
+						title={tText(
 							'admin/content/views/content-detail___maak-de-content-pagina-publiek-niet-publiek'
 						)}
-						ariaLabel={t(
+						ariaLabel={tText(
 							'admin/content/views/content-detail___maak-de-content-pagina-publiek-niet-publiek'
 						)}
 						onClick={() => setIsPublishModalOpen(true)}
@@ -354,11 +336,11 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				<Button
 					type="secondary"
 					icon="eye"
-					label={t('admin/content/views/content-detail___preview')}
-					title={t(
+					label={tText('admin/content/views/content-detail___preview')}
+					title={tText(
 						'admin/content/views/content-detail___bekijk-deze-pagina-in-de-website'
 					)}
-					ariaLabel={t(
+					ariaLabel={tText(
 						'admin/content/views/content-detail___bekijk-deze-pagina-in-de-website'
 					)}
 					onClick={handlePreviewClicked}
@@ -371,8 +353,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 						className="a-link__no-styles"
 					>
 						<Button
-							label={t('admin/content/views/content-detail___bewerken')}
-							title={t(
+							label={tText('admin/content/views/content-detail___bewerken')}
+							title={tText(
 								'admin/content/views/content-detail___bewerk-deze-content-pagina'
 							)}
 						/>
@@ -393,10 +375,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	const renderContentDetail = (contentPageInfo: ContentPageInfo | null): ReactElement | null => {
 		if (!contentPageInfo) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/content-page/views/content-page-detail___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/content-page/views/content-page-detail___error'),
+				description: tText(
 					'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-ingeladen'
 				),
 				type: ToastType.ERROR,
@@ -418,7 +398,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			default:
 				return (
 					<Blankslate
-						title={t(
+						title={tText(
 							'admin/content/views/content-detail___dit-tabblad-kon-niet-gevonden-worden'
 						)}
 					/>

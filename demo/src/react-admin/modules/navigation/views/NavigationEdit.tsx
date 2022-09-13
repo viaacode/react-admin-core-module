@@ -45,7 +45,7 @@ interface NavigationEditProps {
 }
 
 const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
-	const { t } = useTranslation();
+	const { t, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);
@@ -85,10 +85,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
 			// Go back to overview if no menu items are present
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-edit___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-edit___error'),
+				description: tText(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
 						menuName: navigationBarName,
@@ -188,10 +186,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						})
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.t(
-							'modules/navigation/views/navigation-edit___error'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.t(
+						title: tText('modules/navigation/views/navigation-edit___error'),
+						description: tText(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
 						),
 						type: ToastType.ERROR,
@@ -247,10 +243,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		try {
 			if (!navigationItems) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/navigation/views/navigation-edit___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/navigation/views/navigation-edit___error'),
+					description: tText(
 						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
 					),
 					type: ToastType.ERROR,
@@ -295,10 +289,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/navigation/views/navigation-edit___success'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/navigation/views/navigation-edit___success'),
+					description: tText(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
 					),
 					type: ToastType.SUCCESS,
@@ -321,10 +313,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.t(
-						'modules/navigation/views/navigation-edit___success'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.t(
+					title: tText('modules/navigation/views/navigation-edit___success'),
+					description: tText(
 						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
 					),
 					type: ToastType.SUCCESS,
@@ -337,10 +327,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.t(
-					'modules/navigation/views/navigation-edit___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.t(
+				title: tText('modules/navigation/views/navigation-edit___error'),
+				description: tText(
 					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -353,11 +341,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		const errors: NavigationEditFormErrorState = {};
 
 		if (!navigationBarId && !navigationItem.placement) {
-			errors.placement = t('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
+			errors.placement = tText('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
 		}
 
 		if (!navigationItem.content_path) {
-			errors.content_path = t('admin/menu/views/menu-edit___link-is-verplicht');
+			errors.content_path = tText('admin/menu/views/menu-edit___link-is-verplicht');
 		}
 
 		setFormErrors(errors);
@@ -388,13 +376,13 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={t('admin/menu/views/menu-detail___annuleer')}
+							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
 							type="tertiary"
 						/>
 						<Button
 							disabled={isSaving}
-							label={t('admin/menu/views/menu-detail___opslaan')}
+							label={tText('admin/menu/views/menu-detail___opslaan')}
 							onClick={() => handleSave()}
 						/>
 					</ButtonToolbar>
