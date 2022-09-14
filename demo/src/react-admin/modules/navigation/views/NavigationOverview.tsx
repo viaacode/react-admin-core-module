@@ -101,9 +101,10 @@ const NavigationOverview: FunctionComponent = () => {
 			);
 		}
 
+		const columns = GET_NAVIGATION_OVERVIEW_TABLE_COLS();
 		return (
 			<Table
-				columns={GET_NAVIGATION_OVERVIEW_TABLE_COLS()}
+				columns={columns}
 				data={navigationItems}
 				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
 					renderTableCell(rowData, columnId as NavigationOverviewTableCols)

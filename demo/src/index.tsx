@@ -1,9 +1,10 @@
 import { LinkInfo, ToastInfo } from '~core/config/config.types';
 import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { TOptions } from 'i18next';
 
 import App from './App';
-import { initI18n } from './translations/i18n';
+import i18n, { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
@@ -13,6 +14,7 @@ import { PermissionsService } from './modules/permissions/permissions.service';
 import { UserGroupsService } from './modules/user-group/user-groups.service';
 import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
+import Html from '~modules/shared/components/Html/Html';
 
 const proxyUrl = 'http://localhost:3100';
 
@@ -205,8 +207,10 @@ function setConfig() {
 				},
 			},
 			i18n: {
-				tHtml: (key) => key,
-				tText: (key) => key,
+				tHtml: (key: string, params: TOptions | string | undefined) => (
+					<Html content={i18n.t(key, params)} />
+				),
+				tText: (key: string, params: TOptions | string | undefined) => i18n.t(key, params),
 			},
 			educationOrganisationService: {
 				fetchEducationOrganisationName: () => Promise.resolve(null),
