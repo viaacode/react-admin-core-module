@@ -34,7 +34,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 	dataObject,
 	render,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const renderSpinner = () => (
 		<Container mode="vertical">
@@ -57,7 +57,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 		// />
 		<>
 			{loadingInfo.message ||
-				t(
+				tHtml(
 					'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
 				)}
 		</>
@@ -75,7 +75,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 			return (
 				<>
 					{notFoundError ||
-						t(
+						tHtml(
 							'shared/components/loading-error-loaded-component/loading-error-loaded-component___het-gevraagde-object-is-niet-gevonden'
 						)}
 				</>
@@ -106,7 +106,7 @@ export async function checkPermissions(
 				state: 'error',
 				message:
 					noPermissionsMessage ||
-					AdminConfigManager.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.i18n.tHtml(
 						'shared/components/loading-error-loaded-component/loading-error-loaded-component___je-hebt-geen-rechten-voor-deze-pagina'
 					),
 				icon: 'lock',
@@ -116,7 +116,7 @@ export async function checkPermissions(
 		console.error('Failed to check permissions', err, { permissions, user });
 		setLoadingInfo({
 			state: 'error',
-			message: AdminConfigManager.getConfig().services.i18n.t(
+			message: AdminConfigManager.getConfig().services.i18n.tHtml(
 				'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account'
 			),
 			icon: 'alert-triangle',

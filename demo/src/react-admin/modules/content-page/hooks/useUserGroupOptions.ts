@@ -16,7 +16,7 @@ export const useUserGroupOptions = (
 	type: 'CheckboxOption' | 'TagInfo',
 	includeSpecialGroups: boolean
 ): UseUserGroupsTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [userGroupOptions, setUserGroupOptions] = useState<TagInfo[] | CheckboxOption[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -67,7 +67,7 @@ export const useUserGroupOptions = (
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [setIsLoading, setUserGroupOptions, includeSpecialGroups, type, t]);
+	}, [setIsLoading, setUserGroupOptions, includeSpecialGroups, type, tHtml]);
 
 	return [userGroupOptions, isLoading];
 };

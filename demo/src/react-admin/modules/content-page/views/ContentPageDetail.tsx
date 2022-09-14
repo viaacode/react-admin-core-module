@@ -52,7 +52,7 @@ const {
 
 const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	// Hooks
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
@@ -82,7 +82,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-detail___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
 					icon: 'lock',
@@ -93,7 +93,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gevonden-of-je-hebt-geen-rechten-om-deze-te-bekijken'
 					),
 					icon: 'lock',
@@ -114,16 +114,16 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 			setLoadingInfo({
 				state: 'error',
 				message: notFound
-					? t(
+					? tHtml(
 							'admin/content/views/content-detail___een-content-pagina-met-dit-id-kon-niet-worden-gevonden'
 					  )
-					: t(
+					: tHtml(
 							'admin/content/views/content-detail___het-ophalen-van-de-content-pagina-is-mislukt'
 					  ),
 				icon: notFound ? 'search' : 'alert-triangle',
 			});
 		}
-	}, [id, setContentPageInfo, setLoadingInfo, user, t]);
+	}, [id, setContentPageInfo, setLoadingInfo, user, tHtml]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -441,7 +441,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					onClose={() => setIsConfirmModalOpen(false)}
 					body={
 						isContentProtected
-							? t(
+							? tHtml(
 									'admin/content/views/content-detail___opgelet-dit-is-een-beschermde-pagina'
 							  )
 							: ''

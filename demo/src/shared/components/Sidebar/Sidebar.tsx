@@ -22,7 +22,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
@@ -89,7 +89,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
-						{t('admin/shared/components/sidebar/sidebar___beheer')}
+						{tHtml('admin/shared/components/sidebar/sidebar___beheer')}
 					</Link>
 				</div>
 			)}

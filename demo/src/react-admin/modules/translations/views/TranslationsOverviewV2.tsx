@@ -45,7 +45,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	className,
 	renderPopup,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [translations, setTranslations] = useState<TranslationV2[] | null>(null);
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
@@ -230,7 +230,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		if (!filteredAndPaginatedTranslations.length) {
 			return (
 				<>
-					{t(
+					{tHtml(
 						'modules/translations/views/translations-overview-v-2___er-zijn-geen-vertalingen-gevonden'
 					)}
 				</>
@@ -244,7 +244,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 							columns: [
 								{
 									id: 'key',
-									Header: t(
+									Header: tHtml(
 										'modules/translations/views/translations-overview-v-2___id'
 									),
 									accessor: 'key',
@@ -262,7 +262,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 								},
 								{
 									id: 'value',
-									Header: t(
+									Header: tHtml(
 										'modules/translations/views/translations-overview-v-2___waarde'
 									),
 									accessor: 'value',
@@ -302,7 +302,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 											className="u-pl-24:sm u-pl-8"
 											disabled={filters.page === pageCount}
 											variants={['text', 'neutral']}
-											label={t(
+											label={tHtml(
 												'modules/shared/components/pagination-bar/pagination-bar___volgende'
 											)}
 											iconEnd={<Icon name="angleRight" />}
@@ -313,7 +313,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 											className="u-pr-24:sm u-pr-8"
 											disabled={filters.page === 1}
 											variants={['text', 'neutral']}
-											label={t(
+											label={tHtml(
 												'modules/shared/components/pagination-bar/pagination-bar___vorige'
 											)}
 											iconStart={<Icon name="angleLeft" />}

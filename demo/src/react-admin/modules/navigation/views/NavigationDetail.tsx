@@ -33,7 +33,7 @@ export interface NavigationDetailProps {
 }
 
 const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
@@ -289,7 +289,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		if (isErrorNavigationItems) {
 			return (
 				<p>
-					{t(
+					{tHtml(
 						'modules/navigation/views/navigation-detail___het-laden-van-de-navigatie-balk-items-is-mislukt'
 					)}
 				</p>
@@ -298,7 +298,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		return (
 			<AdminLayout
 				pageTitle={
-					t('modules/navigation/views/navigation-detail___navigatie-balk') +
+					tHtml('modules/navigation/views/navigation-detail___navigatie-balk') +
 					startCase(navigationBarId)
 				}
 			>

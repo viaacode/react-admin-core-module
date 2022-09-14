@@ -34,7 +34,7 @@ type ContentPageDetailProps =
 	  };
 
 const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
@@ -56,7 +56,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 				);
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
 					),
 				});
@@ -65,12 +65,12 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 			console.error(new CustomError('Failed to load content page', err, { props }));
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 			});
 		}
-	}, [props, t]);
+	}, [props, tHtml]);
 
 	useEffect(() => {
 		fetchContentPage();

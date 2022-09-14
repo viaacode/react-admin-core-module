@@ -45,6 +45,6 @@ export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem>
 });
 
 export const GET_PAGE_TYPES_LANG = () => ({
-	create: AdminConfigManager.getConfig().services.i18n.t('admin/menu/menu___toevoegen'),
-	edit: AdminConfigManager.getConfig().services.i18n.t('admin/menu/menu___aanpassen'),
+	create: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___toevoegen'),
+	edit: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___aanpassen'),
 });

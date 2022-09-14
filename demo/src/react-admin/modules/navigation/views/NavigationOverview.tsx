@@ -15,7 +15,7 @@ import {
 import { Loader } from '~modules/shared/components';
 
 const NavigationOverview: FunctionComponent = () => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
@@ -88,12 +88,12 @@ const NavigationOverview: FunctionComponent = () => {
 			return (
 				<>
 					<div>
-						{t(
+						{tHtml(
 							'admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt'
 						)}
 					</div>
 					<div>
-						{t(
+						{tHtml(
 							'admin/menu/views/menu-overview___beschrijving-hoe-navigatie-items-toe-te-voegen'
 						)}
 					</div>
@@ -121,7 +121,7 @@ const NavigationOverview: FunctionComponent = () => {
 		if (isErrorNavigationItems) {
 			return (
 				<div>
-					{t(
+					{tHtml(
 						'modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt'
 					)}
 				</div>

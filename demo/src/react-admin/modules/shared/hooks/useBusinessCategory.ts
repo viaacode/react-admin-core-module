@@ -9,7 +9,7 @@ import { useTranslation } from './useTranslation';
 type UseBusinessCategoriesTuple = [string[], boolean];
 
 export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [businessCategories, setBusinessCategories] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tHtml]);
 
 	return [businessCategories, isLoading];
 };

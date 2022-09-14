@@ -29,7 +29,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		/**
 		 * Hooks
 		 */
-		const { t, tText } = useTranslation();
+		const { tHtml, tText } = useTranslation();
 
 		const {
 			data: userGroups,
@@ -222,13 +222,13 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				});
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'modules/user-group/views/user-group-overview___het-ophalen-van-de-gebruikersgroepen-is-mislukt'
 					),
 					icon: 'alert-triangle',
 				});
 			}
-		}, [isErrorUserGroups, t, userGroupError]);
+		}, [isErrorUserGroups, tHtml, userGroupError]);
 
 		useEffect(() => {
 			if (isErrorPermissions) {
@@ -248,13 +248,13 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				});
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'modules/user-group/views/user-group-overview___het-ophalen-van-de-permissies-is-mislukt'
 					),
 					icon: 'alert-triangle',
 				});
 			}
-		}, [isErrorPermissions, isErrorUserGroups, permissionsError, t, userGroupError]);
+		}, [isErrorPermissions, isErrorUserGroups, permissionsError, tHtml, userGroupError]);
 
 		/**
 		 * Render

@@ -34,7 +34,7 @@ interface ContentDetailMetaDataProps {
 export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataProps> = ({
 	contentPageInfo,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [contentTypes] = useContentTypes();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
@@ -100,10 +100,10 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 		}
 
 		if (!publish_at && depublish_at && moment().isBefore(moment(depublish_at))) {
-			return t('admin/content/views/content-detail-meta-data___ja');
+			return tHtml('admin/content/views/content-detail-meta-data___ja');
 		}
 
-		return t('admin/content/views/content-detail-meta-data___nee');
+		return tHtml('admin/content/views/content-detail-meta-data___nee');
 	};
 	const description = ContentPageService.getDescription(contentPageInfo, 'full');
 	return (
@@ -112,7 +112,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 				{!!description && (
 					<Spacer margin="bottom-large">
 						<BlockHeading type="h4">
-							{t('admin/content/views/content-detail___omschrijving')}
+							{tHtml('admin/content/views/content-detail___omschrijving')}
 						</BlockHeading>
 						<Html content={description || '-'} sanitizePreset="full" />
 					</Spacer>

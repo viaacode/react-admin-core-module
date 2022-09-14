@@ -64,7 +64,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	renderLink,
 	mediaItemClicked,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [resolvedResults, setResolvedResults] = useState<ResolvedItemOrCollection[] | null>(null);
@@ -135,7 +135,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		} catch (err) {
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content-block/components/wrappers/media-grid-wrapper/media-grid-wrapper___het-laden-van-deze-media-tegel-grid-is-mislukt'
 				),
 				actionButtons: [],
@@ -151,7 +151,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		lastSearchQueryLimit,
 		setResolvedResults,
 		setLoadingInfo,
-		t,
+		tHtml,
 	]);
 
 	useEffect(() => {

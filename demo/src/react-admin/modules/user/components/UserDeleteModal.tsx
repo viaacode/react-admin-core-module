@@ -47,7 +47,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	onClose,
 	deleteCallback,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [transferToUser, setTransferToUser] = useState<PickerItem | null>(null);
 	const [transferToUserError, setTransferToUserError] = useState<string | undefined>();
@@ -147,7 +147,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${publicCollections} ${t(
+					{`${publicCollections} ${tHtml(
 						'admin/users/views/user-overview___publieke-collecties'
 					)}`}
 				</Link>
@@ -165,7 +165,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${privateCollections} ${t(
+					{`${privateCollections} ${tHtml(
 						'admin/users/views/user-overview___prive-collecties'
 					)}`}
 				</Link>
@@ -183,7 +183,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${publicContentPages} ${t(
+					{`${publicContentPages} ${tHtml(
 						'admin/users/views/user-overview___publieke-content-paginas'
 					)}`}
 				</Link>
@@ -201,7 +201,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${privateContentPages} ${t(
+					{`${privateContentPages} ${tHtml(
 						'admin/users/views/user-overview___prive-content-paginas'
 					)}`}
 				</Link>
@@ -209,15 +209,17 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 		}
 		if (!isTransferAll && assignments) {
 			countOutputs.push(
-				`${assignments} ${t('admin/users/views/user-overview___opdrachten')}`
+				`${assignments} ${tHtml('admin/users/views/user-overview___opdrachten')}`
 			);
 		}
 		if (!isTransferAll && bookmarks) {
-			countOutputs.push(`${bookmarks} ${t('admin/users/views/user-overview___bladwijzers')}`);
+			countOutputs.push(
+				`${bookmarks} ${tHtml('admin/users/views/user-overview___bladwijzers')}`
+			);
 		}
 		return (
 			<>
-				{t(
+				{tHtml(
 					'admin/users/views/user-overview___weet-je-zeker-dat-je-deze-gebruikers-wil-verwijderen'
 				)}
 
@@ -234,7 +236,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 
 				<Spacer margin="top">
 					<Alert
-						message={t(
+						message={tHtml(
 							'admin/users/views/user-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 						)}
 						type="danger"

@@ -43,7 +43,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	hideTargetSwitch = false,
 	errors = [],
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	// filter available options for the type picker
 	const typeOptions = filterTypes(GET_CONTENT_TYPES(), allowedTypes as ContentPickerType[]);
@@ -259,7 +259,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					isSearchable={false}
 					isOptionDisabled={(option: PickerTypeOption) => !!option.disabled}
 					noOptionsMessage={() =>
-						t('admin/shared/components/content-picker/content-picker___geen-types')
+						tHtml('admin/shared/components/content-picker/content-picker___geen-types')
 					}
 				/>
 			</FlexItem>
@@ -296,10 +296,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 			defaultOptions={itemOptions as any} // TODO: type
 			isClearable
 			noOptionsMessage={() =>
-				t('admin/shared/components/content-picker/content-picker___geen-resultaten')
+				tHtml('admin/shared/components/content-picker/content-picker___geen-resultaten')
 			}
 			loadingMessage={() =>
-				t('admin/shared/components/content-picker/content-picker___laden')
+				tHtml('admin/shared/components/content-picker/content-picker___laden')
 			}
 		/>
 	);

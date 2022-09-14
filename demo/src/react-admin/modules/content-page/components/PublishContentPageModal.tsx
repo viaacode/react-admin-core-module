@@ -39,7 +39,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 	isOpen,
 	contentPage,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [validationError, setValidationError] = useState<string[] | undefined>(undefined);
 	const [selectedOption, setSelectedOption] = useState<PublishOption>(
@@ -108,14 +108,16 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 		>
 			<ModalBody>
 				<p>
-					{t(
+					{tHtml(
 						'admin/content/components/share-content-page-modal___bepaald-in-hoevere-je-pagina-zichtbaar-is-voor-andere-gebruikers'
 					)}
 				</p>
 				<FormGroup error={validationError}>
 					<Spacer margin="top-large">
 						<BlockHeading className="u-m-0" type="h4">
-							{t('admin/content/components/share-content-page-modal___zichtbaarheid')}
+							{tHtml(
+								'admin/content/components/share-content-page-modal___zichtbaarheid'
+							)}
 						</BlockHeading>
 					</Spacer>
 					<RadioButtonGroup
@@ -190,7 +192,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 								<Icon className="a-info-icon" name="info" size="small" />
 							</TooltipTrigger>
 							<TooltipContent>
-								{t(
+								{tHtml(
 									'admin/content/components/publish-content-page-modal___tooltip-display-date'
 								)}
 							</TooltipContent>

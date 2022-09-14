@@ -14,7 +14,7 @@ export type BasicOrganisation = {
 type UseCompaniesTuple = [BasicOrganisation[], boolean];
 
 export const useCompaniesWithUsers = (): UseCompaniesTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [companies, setCompanies] = useState<BasicOrganisation[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,7 +45,7 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tHtml]);
 
 	return [companies, isLoading];
 };

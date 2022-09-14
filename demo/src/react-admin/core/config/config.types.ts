@@ -40,7 +40,7 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	t: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
+	tHtml: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
 	tText: (translationKey: string, variables?: Record<string, string>) => string;
 }
 

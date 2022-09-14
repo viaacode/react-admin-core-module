@@ -17,7 +17,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	headerLink,
 	light = false,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 	const Link = AdminConfigManager.getConfig().services.router.Link;
 
 	return (
@@ -25,7 +25,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
-						{t('admin/shared/components/sidebar/sidebar___beheer')}
+						{tHtml('admin/shared/components/sidebar/sidebar___beheer')}
 					</Link>
 				</div>
 			)}

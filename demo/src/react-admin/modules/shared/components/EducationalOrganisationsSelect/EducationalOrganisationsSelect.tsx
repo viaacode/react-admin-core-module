@@ -26,7 +26,7 @@ export interface EducationalOrganisationsSelectProps {
 export const EducationalOrganisationsSelect: FunctionComponent<
 	EducationalOrganisationsSelectProps
 > = ({ organisations, onChange, disabled = false }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [cities, setCities] = useState<string[]>([]);
 	const [organisationsInCity, setOrganisationsInCity] = useState<ClientEducationOrganization[]>(
@@ -193,7 +193,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					{organizationsLoadingState === 'loading' && (
 						<Alert
 							type="spinner"
-							message={t(
+							message={tHtml(
 								'settings/components/profile___bezig-met-ophalen-van-organisaties'
 							)}
 						/>

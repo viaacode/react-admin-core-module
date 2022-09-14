@@ -13,7 +13,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 
 export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 	const [contentPageLabelOptions, setContentPageLabelOptions] = useState<CheckboxOption[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -50,7 +50,7 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [setIsLoading, setContentPageLabelOptions, t]);
+	}, [setIsLoading, setContentPageLabelOptions, tHtml]);
 
 	return [contentPageLabelOptions, isLoading];
 };

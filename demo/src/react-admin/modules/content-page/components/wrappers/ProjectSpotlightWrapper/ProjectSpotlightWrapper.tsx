@@ -27,7 +27,7 @@ const ProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> =
 	elements,
 	renderLink,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<
@@ -50,13 +50,13 @@ const ProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> =
 			console.error(new CustomError('Failed to get projects by path', err, { elements }));
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content-block/components/wrappers/project-spotlight-wrapper/project-spotlight-wrapper___het-ophalen-van-de-projecten-in-de-kijker-is-mislukt'
 				),
 				actionButtons: [],
 			});
 		}
-	}, [elements, setProjectContentPages, setLoadingInfo, t]);
+	}, [elements, setProjectContentPages, setLoadingInfo, tHtml]);
 
 	useEffect(() => {
 		fetchContentPages();

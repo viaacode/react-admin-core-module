@@ -9,7 +9,7 @@ import { useTranslation } from './useTranslation';
 type UseEducationLevelsTuple = [string[], boolean];
 
 export const useEducationLevels = (): UseEducationLevelsTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [educationLevels, setEducationLevels] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export const useEducationLevels = (): UseEducationLevelsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tHtml]);
 
 	return [educationLevels, isLoading];
 };

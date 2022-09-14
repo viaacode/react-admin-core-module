@@ -71,7 +71,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
@@ -94,7 +94,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
 					icon: 'lock',
@@ -108,7 +108,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
 					icon: 'lock',
@@ -136,7 +136,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, user, hasPerm, t, tText]);
+	}, [id, user, hasPerm, tHtml, tText]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
@@ -199,9 +199,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	// Computed
 	const pageType = id ? PageType.Edit : PageType.Create;
-	let pageTitle = t('admin/content/views/content-edit___content-toevoegen');
+	let pageTitle = tHtml('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
-		pageTitle = `${t('admin/content/views/content-edit___content-aanpassen')}: ${get(
+		pageTitle = `${tHtml('admin/content/views/content-edit___content-aanpassen')}: ${get(
 			contentPageState.currentContentPageInfo,
 			'title',
 			''

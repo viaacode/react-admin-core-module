@@ -48,7 +48,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	disabled = false,
 	onChange,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [urlToDelete, setUrlToDelete] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -286,7 +286,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				title={tText(
 					'shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen'
 				)}
-				body={t(
+				body={tHtml(
 					'shared/components/file-upload/file-upload___opgelet-deze-actie-kan-niet-ongedaan-gemaakt-worden'
 				)}
 				isOpen={isDeleteModalOpen}

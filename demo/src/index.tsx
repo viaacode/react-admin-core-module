@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import { initI18n } from './translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
@@ -204,7 +205,7 @@ function setConfig() {
 				},
 			},
 			i18n: {
-				t: (key) => key,
+				tHtml: (key) => key,
 				tText: (key) => key,
 			},
 			educationOrganisationService: {
@@ -217,7 +218,7 @@ function setConfig() {
 			PermissionsService,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				clear: async (key: string) => Promise.resolve(),
+				clear: async (_key: string) => Promise.resolve(),
 			},
 		},
 		database: {
@@ -253,6 +254,7 @@ function renderApp() {
 }
 
 async function bootstrapApp() {
+	await initI18n(proxyUrl);
 	setConfig();
 	renderApp();
 }

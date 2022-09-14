@@ -63,7 +63,7 @@ import { UserOverviewProps } from './UserOverview.types';
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [profiles, setProfiles] = useState<CommonUser[] | null>(null);
@@ -329,13 +329,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			);
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
 				),
 			});
 		}
 		setIsLoading(false);
-	}, [columns, tableState, generateWhereObject, t]);
+	}, [columns, tableState, generateWhereObject, tHtml]);
 
 	useEffect(() => {
 		fetchProfiles();
@@ -626,9 +626,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 				switch (tempAccess) {
 					case 0:
-						return t('admin/users/views/user-overview___tijdelijke-toegang-nee');
+						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 					case 1:
-						return t('admin/users/views/user-overview___tijdelijke-toegang-ja');
+						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 					default:
 						return '-';
 				}
@@ -681,14 +681,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const renderNoResults = () => {
-		return <>{t('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}</>;
+		return <>{tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}</>;
 		// return (
 		// 	<ErrorView
 		// 		message={t('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
 		// 	>
 		// 		<p>
-		// 			<Trans i18nKey="admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn">//  Beschrijving wanneer er nog geen gebruikers zijn
-		//</Trans>
+		// 			{tHtml('admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn')} //  Beschrijving wanneer er nog geen gebruikers zijn
 		// 		</p>
 		// 	</ErrorView>
 		// );

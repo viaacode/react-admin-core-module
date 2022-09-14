@@ -71,7 +71,7 @@ export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = () => null; // TODO
 //  * @constructor
 //  */
 // const FlowPlayerWrapper: FunctionComponent<FlowPlayerWrapperProps & UserProps> = (props) => {
-// 	const { t, tText } = useTranslation();
+// 	const { tHtml, tText } = useTranslation();
 //
 // 	const item: Avo.Item.Item | undefined = props.item;
 // 	const poster: string | undefined = props.poster || get(item, 'thumbnail_path');

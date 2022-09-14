@@ -9,7 +9,7 @@ import { useTranslation } from './useTranslation';
 type UseIdpsTuple = [string[], boolean];
 
 export const useIdps = (): UseIdpsTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [idps, setIdps] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export const useIdps = (): UseIdpsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tHtml]);
 
 	return [idps, isLoading];
 };

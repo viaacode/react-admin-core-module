@@ -85,7 +85,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	headerBackgroundColor,
 	renderLink,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
 		page: NumberParam,
@@ -253,7 +253,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 			);
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___het-ophalen-van-de-paginas-is-mislukt'
 				),
 			});
@@ -271,7 +271,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 		// https://github.com/facebook/react/issues/14476#issuecomment-471199055
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		JSON.stringify(contentTypeAndTabs.selectedLabels),
-		t,
+		tHtml,
 	]);
 
 	useEffect(() => {

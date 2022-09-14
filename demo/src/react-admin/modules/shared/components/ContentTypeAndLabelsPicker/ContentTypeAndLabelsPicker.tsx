@@ -39,7 +39,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	onChange,
 	errors,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [labels, setLabels] = useState<Avo.ContentPage.Label[]>([]);
@@ -70,7 +70,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 				});
 			})
 			.finally(() => setIsLoading(false));
-	}, [value.selectedContentType, setLabels, t]);
+	}, [value.selectedContentType, setLabels, tHtml]);
 
 	const handleContentTypeChanged = (selectedValue: string) => {
 		onChange({

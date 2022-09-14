@@ -279,5 +279,7 @@ export const CONTENT_TYPE_TO_ROUTE: { [contentType in Avo.Core.ContentType]: str
 export const GENERATE_SITE_TITLE = (...pageTitleParts: (string | null | undefined)[]) =>
 	compact([
 		...pageTitleParts,
-		AdminConfigManager.getConfig().services.i18n.t('constants___het-archief-voor-onderwijs'),
+		AdminConfigManager.getConfig().services.i18n.tHtml(
+			'constants___het-archief-voor-onderwijs'
+		),
 	]).join(' | ');

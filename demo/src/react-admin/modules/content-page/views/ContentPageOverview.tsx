@@ -87,7 +87,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
@@ -239,14 +239,14 @@ const ContentPageOverview: FunctionComponent = () => {
 			);
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content/views/content-overview___het-ophalen-van-de-content-paginas-is-mislukt'
 				),
 				icon: 'alert-triangle',
 			});
 		}
 		setIsLoading(false);
-	}, [tableColumns, tableState, hasPerm, t]);
+	}, [tableColumns, tableState, hasPerm, tHtml]);
 
 	useEffect(() => {
 		fetchContentPages();
@@ -508,11 +508,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		// 	)}
 		// >
 		// 	<p>
-		// 		<Trans i18nKey="admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen">//  Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores aliquid ab
-		//  debitis blanditiis vitae molestiae delectus earum asperiores mollitia,
-		//  minima laborum expedita ratione quas impedit repudiandae nisi corrupti quis
-		//  eaque!
-		//</Trans>
+		// 		{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
 		// 	</p>
 		// 	{hasPerm(CREATE_CONTENT_PAGES) && (
 		// 		<Spacer margin="top">
@@ -559,7 +555,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					onClose={() => setIsConfirmModalOpen(false)}
 					body={
 						get(contentToDelete, 'is_protected', null)
-							? t(
+							? tHtml(
 									'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'
 							  )
 							: ''
@@ -575,7 +571,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				>
 					<ModalBody>
 						<p>
-							{t(
+							{tHtml(
 								'admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen'
 							)}
 						</p>

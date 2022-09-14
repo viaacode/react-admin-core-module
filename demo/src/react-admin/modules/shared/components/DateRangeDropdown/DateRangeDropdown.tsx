@@ -63,7 +63,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 	defaultControls = 'year',
 	onChange,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);
@@ -155,7 +155,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				title: tText(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),
-				description: `${t(
+				description: `${tHtml(
 					'shared/components/date-range-dropdown/date-range-dropdown___ongeldig-jaar'
 				)} ${value}`,
 				type: ToastType.ERROR,

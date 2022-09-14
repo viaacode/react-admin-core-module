@@ -49,7 +49,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	onChange,
 	showSelectedValuesOnCollapsed = true,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedProfiles, setSelectedProfiles] = useState<PickerItem[]>([]);
@@ -96,7 +96,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 					});
 				});
 		}
-	}, [values, setSelectedProfiles, t]);
+	}, [values, setSelectedProfiles, tHtml]);
 
 	const closeDropdown = () => {
 		setSelectedProfiles([]);
@@ -146,10 +146,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 											id: 'users',
 											label: `${selectedProfiles.length} ${
 												selectedProfiles.length > 1
-													? t(
+													? tHtml(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruikers'
 													  )
-													: t(
+													: tHtml(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruiker'
 													  )
 											}`,

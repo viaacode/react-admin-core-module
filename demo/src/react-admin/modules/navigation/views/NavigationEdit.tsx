@@ -45,7 +45,7 @@ interface NavigationEditProps {
 }
 
 const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);
@@ -136,14 +136,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					<div>
 						<Spacer margin="bottom-small">
 							<>
-								{t(
+								{tHtml(
 									'admin/menu/views/menu-edit___het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina'
 								)}
 							</>
 						</Spacer>
 						<Spacer margin="bottom-small">
 							<>
-								{t(
+								{tHtml(
 									'admin/menu/views/menu-edit___de-geselecteerde-pagina-is-niet-toegankelijk-voor'
 								)}
 							</>
@@ -159,7 +159,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, navigationItem.user_group_ids, allUserGroups, t]
+		[setPermissionWarning, navigationItem.user_group_ids, allUserGroups, tHtml]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
@@ -365,13 +365,13 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (isErrorNavigationItems || isErrorNavigationItem) {
 			return (
 				<Flex orientation="horizontal" center>
-					{t('admin/menu/views/menu-edit___het-ophalen-van-de-menu-items-is-mislukt')}
+					{tHtml('admin/menu/views/menu-edit___het-ophalen-van-de-menu-items-is-mislukt')}
 				</Flex>
 			);
 		}
 		const pageTitle = navigationBarId
 			? `${navigationBarName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
-			: t('admin/menu/views/menu-edit___navigatie-toevoegen');
+			: tHtml('admin/menu/views/menu-edit___navigatie-toevoegen');
 		return (
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Actions>

@@ -35,7 +35,7 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	isOpen,
 	deleteObjectCallback,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const modalTitle = (): string => {
 		return (
@@ -47,7 +47,7 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	};
 	const modalBody = () =>
 		body ||
-		t(
+		tHtml(
 			'shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 		);
 

@@ -7,10 +7,10 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const UserOverviewPage: FC = () => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	return (
-		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
+		<AdminLayout pageTitle={tHtml('admin/users/views/user-overview___gebruikers')}>
 			<AdminLayout.Content>
 				<UserOverview />
 			</AdminLayout.Content>
