@@ -87,6 +87,7 @@
     "replace": "1.2.1",
     "rimraf": "3.0.2",
     "rollup": "2.68.0",
+    "react-i18next": "11.16.2",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.31.2",
