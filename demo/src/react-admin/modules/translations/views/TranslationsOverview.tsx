@@ -60,7 +60,7 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 				type: ToastType.ERROR,
 			});
 		}
-	}, [convertTranslationsToData]);
+	}, [convertTranslationsToData, tText]);
 
 	useEffect(() => {
 		getTranslations();

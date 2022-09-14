@@ -82,113 +82,113 @@ function setConfig() {
 			buttonTypes: () => [
 				// Het archief buttons
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Zilver'),
-					value: 'admin-core-button--silver',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Zilver'),
+					value: 'content-page-button--silver',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Blauw groen'),
-					value: 'admin-core-button--teal',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Blauw groen'),
+					value: 'content-page-button--teal',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Wit'),
-					value: 'admin-core-button--white',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Wit'),
+					value: 'content-page-button--white',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Zwart'),
-					value: 'admin-core-button--black',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Zwart'),
+					value: 'content-page-button--black',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Outline'),
-					value: 'admin-core-button--outline',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Outline'),
+					value: 'content-page-button--outline',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Tekst'),
-					value: 'admin-core-button--text',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Tekst'),
+					value: 'content-page-button--text',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Rood'),
-					value: 'admin-core-button--red',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Rood'),
+					value: 'content-page-button--red',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.t('Link'),
-					value: 'admin-core-button--link',
+					label: AdminConfigManager.getConfig().services.i18n.tText('Link'),
+					value: 'content-page-button--link',
 				},
 
 				// Avo buttons
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___primair'
 				// 	),
 				// 	value: 'primary',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___secundair'
 				// 	),
 				// 	value: 'secondary',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___secundair-invers'
 				// 	),
 				// 	value: 'secondary-i',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___tertiair'
 				// 	),
 				// 	value: 'tertiary',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___randloos'
 				// 	),
 				// 	value: 'borderless',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___randloos-invers'
 				// 	),
 				// 	value: 'borderless-i',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___gevaar'
 				// 	),
 				// 	value: 'danger',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___gevaar-hover'
 				// 	),
 				// 	value: 'danger-hover',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___link'
 				// 	),
 				// 	value: 'link',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___link-inline'
 				// 	),
 				// 	value: 'inline-link',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___leerling-primair-geel'
 				// 	),
 				// 	value: 'pupil-primary',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___leerling-link-tekst-in-geel'
 				// 	),
 				// 	value: 'pupil-link',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.t(
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
 				// 		'admin/content-block/content-block___leerling-link-geel-inline'
 				// 	),
 				// 	value: 'pupil-inline-link',
@@ -212,7 +212,6 @@ function setConfig() {
 				fetchCities: () => Promise.resolve([]),
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
-			bookmarksViewsPlaysService: {},
 			router: routerConfig as any,
 			UserGroupsService,
 			PermissionsService,
@@ -246,10 +245,10 @@ function setConfig() {
 
 function renderApp() {
 	ReactDOM.render(
-			<React.StrictMode>
-				<App/>
-			</React.StrictMode>,
-			document.getElementById('root')
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>,
+		document.getElementById('root')
 	);
 }
 

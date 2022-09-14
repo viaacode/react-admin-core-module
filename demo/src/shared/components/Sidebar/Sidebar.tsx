@@ -22,7 +22,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
-	const { t, tText } = useTranslation();
+	const { t } = useTranslation();
 
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (

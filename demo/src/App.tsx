@@ -23,7 +23,7 @@ const queryClient = new QueryClient();
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
 
-	const { t, tText } = useTranslation();
+	const { tText } = useTranslation();
 
 	useEffect(() => {
 		if (!mockUser) {
@@ -41,7 +41,7 @@ function App() {
 					type: ToastType.ERROR,
 				});
 			});
-	}, [t]);
+	}, [tText]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -80,4 +80,3 @@ function App() {
 }
 
 export default App;
-

@@ -96,7 +96,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				type: ToastType.ERROR,
 			});
 		}
-	}, [setTranslations]);
+	}, [setTranslations, tText]);
 
 	useEffect(() => {
 		getTranslations();

@@ -59,7 +59,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					type: ToastType.ERROR,
 				});
 			});
-	}, [setCities, t]);
+	}, [setCities, tText]);
 
 	useEffect(() => {
 		(async () => {
@@ -112,7 +112,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		setOrganisationsInCity,
 		setOrganizationsLoadingState,
 		onChange,
-		t,
+		tText,
 	]);
 
 	const onSelectedCityChanged = async (cityAndZipCode: string) => {

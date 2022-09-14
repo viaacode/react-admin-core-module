@@ -102,6 +102,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		navigationItems,
 		navigationBarName,
 		history,
+		tText,
 	]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
@@ -199,7 +200,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		navigationItem.content_path,
 		navigationItem.user_group_ids,
 		checkMenuItemContentPagePermissionsMismatch,
-		t,
+		tText,
 	]);
 
 	// Computed

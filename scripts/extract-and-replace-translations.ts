@@ -124,9 +124,9 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 				}
 			);
 
-			// Replace t() functions ( including i18n.t() )
+			// Replace t() functions ( including TranslationService.t() )
 			const beforeTFunction = '([^a-zA-Z])';
-			const tFuncStart = 't\\(';
+			const tFuncStart = '(t|tText)\\(';
 			const whitespace = '\\s*';
 			const quote = '[\'"]';
 			const translation = '([\\s\\S]+?)';
@@ -151,6 +151,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 				(
 					match: string,
 					prefix: string,
+					tFunction: string,
 					translation: string,
 					translationParams: string | undefined
 				) => {
@@ -174,6 +175,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 							{
 								match,
 								prefix,
+								tFunction,
 								translation,
 								translationParams,
 								absoluteFilePath,
@@ -193,7 +195,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 					if (hasKeyAlready) {
 						return match;
 					} else {
-						return `${prefix}t('${formattedKey}'${translationParams || ''})`;
+						return `${prefix}${tFunction}('${formattedKey}'${translationParams || ''})`;
 					}
 				}
 			);

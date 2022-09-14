@@ -136,7 +136,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, user, hasPerm, t]);
+	}, [id, user, hasPerm, t, tText]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
@@ -176,7 +176,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				});
 			}
 		},
-		[changeContentPageState, contentPageState.currentContentPageInfo.contentBlockConfigs, t]
+		[changeContentPageState, contentPageState.currentContentPageInfo.contentBlockConfigs, tText]
 	);
 
 	useEffect(() => {

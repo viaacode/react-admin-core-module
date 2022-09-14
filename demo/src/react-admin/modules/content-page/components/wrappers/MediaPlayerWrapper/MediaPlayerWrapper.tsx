@@ -44,7 +44,7 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 	width,
 	autoplay,
 }) => {
-	const { t, tText } = useTranslation();
+	const { tText } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [videoStill, setVideoStill] = useState<string>();
@@ -78,7 +78,7 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 				type: ToastType.ERROR,
 			});
 		}
-	}, [item, src, poster, t]);
+	}, [item, src, poster, tText]);
 
 	useEffect(() => {
 		retrieveMediaItem();
