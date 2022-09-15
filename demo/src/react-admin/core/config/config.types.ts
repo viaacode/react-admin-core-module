@@ -15,6 +15,7 @@ import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { NavigationItem } from '~modules/navigation/navigation.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { MediaListItem } from '@viaa/avo2-components';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -39,7 +40,8 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	t: (translationKey: string, variables?: Record<string, string>) => string;
+	tHtml: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
+	tText: (translationKey: string, variables?: Record<string, string>) => string;
 }
 
 export interface UserGroupsService {
@@ -59,9 +61,21 @@ export interface LinkInfo {
 	children: ReactNode;
 }
 
-export type History = ReturnType<ConfigValue['services']['router']['useHistory']>;
+export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
 
-export interface ConfigValue {
+export type EventContentTypeSimplified = 'item' | 'collection';
+export type EventContentType = EventContentTypeSimplified | 'bundle';
+
+export interface BookmarkRequestInfo {
+	type: EventContentTypeSimplified;
+	uuid: string;
+}
+
+export type BookmarkStatusLookup = {
+	[contentType in EventContentTypeSimplified]: { [objectUuid: string]: boolean };
+};
+
+export interface AdminConfig {
 	// Core module configurations
 	flowplayer: {
 		FLOW_PLAYER_TOKEN: string;
@@ -115,11 +129,13 @@ export interface ConfigValue {
 		table: {
 			sortingIcons: TableSortingIcons;
 		};
+		buttonTypes: () => { label: string; value: string }[];
 	};
 	icon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
+		mediaItemClicked?: (item: MediaListItem) => void;
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];
@@ -134,14 +150,20 @@ export interface ConfigValue {
 }
 
 export interface IconConfig {
-	component: ComponentType;
+	component: ComponentType<{ name: string; className?: string }>;
 	componentProps: {
 		add: IconComponentProps;
 		angleUp: IconComponentProps;
 		angleDown: IconComponentProps;
+		angleLeft: IconComponentProps;
+		angleRight: IconComponentProps;
 		delete: IconComponentProps;
 		edit: IconComponentProps;
 		view: IconComponentProps;
+		filter: IconComponentProps;
+		arrowUp: IconComponentProps;
+		sortTable: IconComponentProps;
+		arrowDown: IconComponentProps;
 	};
 	list: { label: string; value: string }[];
 }

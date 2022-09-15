@@ -6,36 +6,35 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-
-import { ContentPageService } from '../../../services/content-page.service';
+import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
 import {
 	MediaGridBlockComponentState,
 	MediaGridBlockState,
-} from '../../../types/content-block.types';
+} from '~modules/content-page/types/content-block.types';
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
 
-import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
-import ItemVideoDescription from '~modules/shared/components/ItemVideoDescription/ItemVideoDescription';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { ContentTypeString, toEnglishContentType } from '~modules/collection/collection.types';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { isMobileWidth } from '~modules/shared/helpers/media-query';
-import { parseIntOrDefault } from '~modules/shared/helpers/parsers/number';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
 
 interface MediaGridWrapperProps extends MediaGridBlockState {
 	searchQuery?: ButtonAction;
 	searchQueryLimit: string;
 	elements: { mediaItem: ButtonAction }[];
 	results: ResolvedItemOrCollection[];
-	renderLink?: RenderLinkFunction;
+	renderLink: RenderLinkFunction;
 	buttonAltTitle?: string;
 	ctaButtonAltTitle?: string;
+	user: Avo.User.User;
+	mediaItemClicked: (mediaListItem: MediaListItem) => void;
 }
 
 const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
@@ -55,15 +54,17 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	ctaBackgroundColor,
 	ctaBackgroundImage,
 	ctaWidth,
-	openMediaInModal,
+	openMediaInModal = false,
 	ctaButtonAction,
 	searchQuery,
 	searchQueryLimit,
 	elements,
 	results,
+	user,
 	renderLink,
+	mediaItemClicked,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [resolvedResults, setResolvedResults] = useState<ResolvedItemOrCollection[] | null>(null);
@@ -84,7 +85,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 				setResolvedResults(results);
 				return;
 			}
-			if (Config.getConfig().user) {
+			if (user) {
 				// If we are logged in and get no results, but we do get elements, then the block is loaded in preview mode,
 				// and we should resolve the results ourselves using a separate route on the server
 				const searchQueryLimitNumber =
@@ -134,7 +135,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		} catch (err) {
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content-block/components/wrappers/media-grid-wrapper/media-grid-wrapper___het-laden-van-deze-media-tegel-grid-is-mislukt'
 				),
 				actionButtons: [],
@@ -143,13 +144,14 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	}, [
 		results,
 		elements,
+		user,
 		searchQuery,
 		searchQueryLimit,
 		lastSearchQuery,
 		lastSearchQueryLimit,
 		setResolvedResults,
 		setLoadingInfo,
-		t,
+		tHtml,
 	]);
 
 	useEffect(() => {
@@ -218,50 +220,46 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		} as any;
 	};
 
-	const renderPlayerModalBody = (item: MediaListItem) => {
-		return (
-			!!item &&
-			!!(item as any).src && ( // TODO remove cast after update to components v1.47.0
-				<ItemVideoDescription
-					src={(item as any).src} // TODO remove cast after update to components v1.47.0
-					poster={get(item, 'thumbnail.src')}
-					itemMetaData={item as unknown as Avo.Item.Item}
-					verticalLayout
-					showTitle
-					collapseDescription={false}
-				/>
-			)
-		);
+	const openInModal = (mediaListItem: MediaListItem): boolean => {
+		return openMediaInModal && get(mediaListItem, 'itemAction.type') === 'ITEM';
+	};
+
+	const renderMediaCardWrapper = (mediaCard: ReactNode, item: MediaListItem) => {
+		if (openInModal(item)) {
+			return <a onClick={() => mediaItemClicked(item)}>{mediaCard}</a>;
+		}
+		return renderLink(item.itemAction, mediaCard, item.buttonAltTitle || item.title);
 	};
 
 	// Render
 	const renderMediaGridBlock = () => {
 		const elements = (resolvedResults || []).map(mapCollectionOrItemData);
 		return (
-			<BlockMediaGrid
-				title={title}
-				buttonLabel={buttonLabel}
-				buttonAltTitle={buttonAltTitle}
-				buttonAction={buttonAction || searchQuery}
-				ctaTitle={ctaTitle}
-				ctaTitleColor={ctaTitleColor}
-				ctaTitleSize={ctaTitleSize}
-				ctaContent={ctaContent}
-				ctaContentColor={ctaContentColor}
-				ctaButtonLabel={ctaButtonLabel}
-				ctaButtonAltTitle={ctaButtonAltTitle}
-				ctaButtonType={ctaButtonType}
-				ctaButtonIcon={ctaButtonIcon}
-				ctaBackgroundColor={ctaBackgroundColor}
-				ctaBackgroundImage={ctaBackgroundImage}
-				ctaWidth={ctaWidth}
-				openMediaInModal={openMediaInModal}
-				ctaButtonAction={ctaButtonAction}
-				fullWidth={isMobileWidth()}
-				elements={elements}
-				renderLink={renderLink}
-				renderPlayerModalBody={renderPlayerModalBody}
-			/>
+			<>
+				<BlockMediaGrid
+					title={title}
+					buttonLabel={buttonLabel}
+					buttonAltTitle={buttonAltTitle}
+					buttonAction={buttonAction || searchQuery}
+					ctaTitle={ctaTitle}
+					ctaTitleColor={ctaTitleColor}
+					ctaTitleSize={ctaTitleSize}
+					ctaContent={ctaContent}
+					ctaContentColor={ctaContentColor}
+					ctaButtonLabel={ctaButtonLabel}
+					ctaButtonAltTitle={ctaButtonAltTitle}
+					ctaButtonType={ctaButtonType}
+					ctaButtonIcon={ctaButtonIcon}
+					ctaBackgroundColor={ctaBackgroundColor}
+					ctaBackgroundImage={ctaBackgroundImage}
+					ctaWidth={ctaWidth}
+					ctaButtonAction={ctaButtonAction}
+					fullWidth={isMobileWidth()}
+					elements={elements}
+					renderLink={renderLink}
+					renderMediaCardWrapper={renderMediaCardWrapper}
+				/>
+			</>
 		);
 	};
 

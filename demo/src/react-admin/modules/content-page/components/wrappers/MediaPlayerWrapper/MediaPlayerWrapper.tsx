@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ItemsService } from '~modules/item/items.service';
 import { FlowPlayerWrapper } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 import {
@@ -43,7 +44,7 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 	width,
 	autoplay,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [videoStill, setVideoStill] = useState<string>();
@@ -67,17 +68,17 @@ const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
 			console.error(
 				new CustomError('Failed to fetch item info from the database', err, { item })
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText(
 					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
 				),
-				description: t(
+				description: tText(
 					'admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper___het-ophalen-van-het-fragment-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
 		}
-	}, [item, src, poster, t]);
+	}, [item, src, poster, tText]);
 
 	useEffect(() => {
 		retrieveMediaItem();

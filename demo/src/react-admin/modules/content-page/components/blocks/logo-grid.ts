@@ -12,7 +12,7 @@ import { BlockLogoGridWrapperProps } from '../wrappers/LogoGridWrapper/LogoGridW
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import {
 	GET_ALIGN_OPTIONS,
 	GET_FILL_OPTIONS,
@@ -47,29 +47,29 @@ export const INITIAL_LOGO_GRID_BLOCK_STATE = (): BlockLogoGridWrapperProps &
 
 export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/logo-grid___logos-sign-off'
 	),
 	type: ContentBlockType.LogoGrid,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/image-grid___item'
 		),
 		state: INITIAL_LOGO_GRID_COMPONENTS_STATE(),
 		fields: {
 			textAbove: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			source: FILE_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/image-grid___afbeelding'
 					),
 					editorProps: {
@@ -80,7 +80,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			action: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___link'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -93,7 +93,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			format: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___formaat'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -102,7 +102,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			itemWidth: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/logo-grid___kolom-breedte'
 				),
 				editorType: ContentBlockEditor.MultiRange,
@@ -114,7 +114,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as MultiRangeProps,
 			},
 			fill: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___zoom'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -123,7 +123,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			align: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___alignatie'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -132,7 +132,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			textAlign: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image-grid___text-alignatie'
 				),
 				editorType: ContentBlockEditor.Select,

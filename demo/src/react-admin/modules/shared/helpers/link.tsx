@@ -10,7 +10,8 @@ import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
 
-import { Config, History, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { History, ToastType } from '~core/config/config.types';
 
 type RouteParams = { [key: string]: string | number | undefined };
 
@@ -56,11 +57,12 @@ export const navigate = (
 	// Abort navigation when params were expected but none were given
 	if (missingParams.length > 0 && (isNil(params) || isEmpty(params))) {
 		navigationConsoleError(route, missingParams);
-		Config.getConfig().services.toastService.showToast({
+		AdminConfigManager.getConfig().services.toastService.showToast({
 			title:
-				Config.getConfig().services.i18n.t('modules/admin/shared/helpers/link___error') ||
-				'',
-			description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
+					'modules/admin/shared/helpers/link___error'
+				) || '',
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,
@@ -73,9 +75,11 @@ export const navigate = (
 	const builtLink = buildLink(route, params, search);
 
 	if (isEmpty(builtLink)) {
-		Config.getConfig().services.toastService.showToast({
-			title: Config.getConfig().services.i18n.t('modules/admin/shared/helpers/link___error'),
-			description: Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title: AdminConfigManager.getConfig().services.i18n.tText(
+				'modules/admin/shared/helpers/link___error'
+			),
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
 			),
 			type: ToastType.ERROR,
@@ -177,7 +181,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			case 'EXTERNAL_LINK': {
 				const externalUrl = ((value as string) || '').replace(
 					'{{PROXY_URL}}',
-					Config.getConfig().database.proxyUrl || ''
+					AdminConfigManager.getConfig().database.proxyUrl || ''
 				);
 				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
 				break;
@@ -248,7 +252,7 @@ export function generateSearchLink(
 	className = '',
 	onClick: () => void = noop
 ) {
-	const Link = Config.getConfig().services.router.Link;
+	const Link = AdminConfigManager.getConfig().services.router.Link;
 	return filterValue ? (
 		<Link
 			className={className}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { CustomError } from '../helpers/custom-error';
 
 import { SettingsService } from '../services/settings-service/settings.service';
@@ -8,7 +9,7 @@ import { useTranslation } from './useTranslation';
 type UseSubjectsTuple = [string[], boolean];
 
 export const useSubjects = (): UseSubjectsTuple => {
-	const  { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	const [subjects, setSubjects] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,9 +23,9 @@ export const useSubjects = (): UseSubjectsTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get subjects from the database', err));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-subjects___error'),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/shared/hooks/use-subjects___error'),
+					description: tText(
 						'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -33,7 +34,7 @@ export const useSubjects = (): UseSubjectsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tText]);
 
 	return [subjects, isLoading];
 };

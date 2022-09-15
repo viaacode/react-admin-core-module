@@ -9,15 +9,15 @@ import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { getProfileName } from '~modules/shared/helpers/get-profile-info';
 import { navigateToContentType } from '~modules/shared/helpers/link';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;
 }
 
 const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageInfo }) => {
-	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const { tHtml } = useTranslation();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const renderLabel = (labelObj: Partial<Avo.ContentPage.Label>) => {
 		return (labelObj as any).link_to ? (
@@ -40,7 +40,7 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 
 		return (
 			<>
-				{`${t(
+				{`${tHtml(
 					'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in'
 				)} `}
 				{contentPageInfo.labels.map(
@@ -52,7 +52,7 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 							return (
 								<>
 									{renderLabel(labelObj)}{' '}
-									{t(
+									{tHtml(
 										'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
 									)}{' '}
 								</>
@@ -68,12 +68,12 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 	const publishedDate = getPublishedDate(contentPageInfo);
 	return (
 		<span>
-			{t(
+			{tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___gepubliceerd-op'
 			)}{' '}
 			{publishedDate ? normalizeTimestamp(publishedDate).local().format('D MMMM YYYY') : '-'}{' '}
 			{renderLabels()}
-			{`${t(
+			{`${tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'
 			)}`}{' '}
 			{getProfileName(contentPageInfo.profile)}

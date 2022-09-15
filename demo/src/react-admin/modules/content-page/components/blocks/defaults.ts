@@ -20,7 +20,7 @@ import {
 	PaddingFieldState,
 } from '../../types/content-block.types';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 // Block config defaults
@@ -48,33 +48,35 @@ export const BLOCK_STATE_DEFAULTS = (
 
 export const BLOCK_FIELD_DEFAULTS = () => ({
 	backgroundColor: BACKGROUND_COLOR_FIELD(
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
 		),
-		Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
+			: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
 	padding: PADDING_FIELD(
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___padding'
 		)
 	),
 	margin: PADDING_FIELD(
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___marge'
 		)
 	),
 	userGroupIds: USER_GROUP_SELECT(
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___zichtbaar-voor'
 		),
-		Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina'
 		)
 	),
 
 	// Used to link to this block from inside the same page using the anchors-block
 	anchor: INPUT_FIELD({
-		label: Config.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___anchor-id'
 		),
 	}),
@@ -88,8 +90,15 @@ export const FOREGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_FOREGROUND_COLOR_OPTIONS_AVO() : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
-		defaultValue: defaultValue || Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0] : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+		options:
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+				? GET_FOREGROUND_COLOR_OPTIONS_AVO()
+				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue:
+			defaultValue ||
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+				? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0]
+				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
 });
 
@@ -100,8 +109,15 @@ export const BACKGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-		defaultValue: defaultValue || Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+		options:
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+				? GET_BACKGROUND_COLOR_OPTIONS_AVO()
+				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue:
+			defaultValue ||
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]
+				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
 });
 
@@ -130,7 +146,7 @@ export const TEXT_FIELD = (
 	emptyFieldValidatorMessage?: string,
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: Config.getConfig().services.i18n.t(
+	label: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___tekst'
 	),
 	editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
@@ -140,7 +156,7 @@ export const TEXT_FIELD = (
 		if (isNil(value) || isEmpty(value)) {
 			errorArray.push(
 				emptyFieldValidatorMessage ||
-					Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/defaults___tekst-is-verplicht'
 					)
 			);
@@ -156,7 +172,7 @@ export const TEXT_FIELD = (
 });
 
 export const INPUT_FIELD = (propOverride?: Partial<ContentBlockField>): ContentBlockField => ({
-	label: Config.getConfig().services.i18n.t(
+	label: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___tekst'
 	),
 	editorType: ContentBlockEditor.TextInput,
@@ -164,12 +180,12 @@ export const INPUT_FIELD = (propOverride?: Partial<ContentBlockField>): ContentB
 });
 
 export const FILE_FIELD = (
-	emptyFieldValidatorMessage = Config.getConfig().services.i18n.t(
+	emptyFieldValidatorMessage = AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___een-bestand-is-verplicht'
 	) || 'een-bestand-is-verplicht',
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: Config.getConfig().services.i18n.t(
+	label: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___bestand'
 	),
 	editorType: ContentBlockEditor.FileUpload,
@@ -187,12 +203,12 @@ export const FILE_FIELD = (
 });
 
 export const ITEM_PICKER_FIELD = (
-	emptyFieldValidatorMessage = Config.getConfig().services.i18n.t(
+	emptyFieldValidatorMessage = AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___selecteren-van-video-item-is-verplicht'
 	),
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: Config.getConfig().services.i18n.t(
+	label: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/media-player___video-of-audio-item'
 	),
 	editorType: ContentBlockEditor.ContentPicker,
@@ -215,7 +231,7 @@ export const ITEM_PICKER_FIELD = (
 export const CONTENT_TYPE_AND_LABELS_INPUT = (
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: Config.getConfig().services.i18n.t(
+	label: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/defaults___type-en-labels'
 	),
 	editorType: ContentBlockEditor.ContentTypeAndLabelsPicker,

@@ -1,7 +1,7 @@
 import { get, sortBy } from 'lodash-es';
 
 import { dataService } from '../data-service';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '../../types';
 import { CustomError } from '../../helpers/custom-error';
 
@@ -13,7 +13,7 @@ import {
 export class SettingsService {
 	public static async fetchSubjects(): Promise<string[]> {
 		// not available for archief
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return [];
 		}
 
@@ -40,7 +40,7 @@ export class SettingsService {
 
 	public static async fetchEducationLevels(): Promise<string[]> {
 		// not available for archief
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
 			return [];
 		}
 

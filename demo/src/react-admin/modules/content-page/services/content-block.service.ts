@@ -12,11 +12,14 @@ import {
 import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 
 export class ContentBlockService {
 	private static getQueries() {
-		return CONTENT_PAGE_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return CONTENT_PAGE_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	}
 
 	/**
@@ -39,11 +42,11 @@ export class ContentBlockService {
 				})
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-updaten-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -65,11 +68,11 @@ export class ContentBlockService {
 		} catch (err) {
 			console.error(new CustomError('Failed to delete content block', err, { id }));
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-verwijderen-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -126,11 +129,11 @@ export class ContentBlockService {
 				})
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,
@@ -210,11 +213,11 @@ export class ContentBlockService {
 				})
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page/services/content-block___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/content-block___er-ging-iets-mis-tijdens-het-opslaan-van-de-content-blocks'
 				),
 				type: ToastType.ERROR,

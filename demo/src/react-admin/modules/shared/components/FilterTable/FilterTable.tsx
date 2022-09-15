@@ -139,7 +139,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	onSelectionChanged,
 	onSelectAll,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
@@ -291,7 +291,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						</FormGroup>
 						<FormGroup inlineMode="shrink">
 							<Button
-								label={t(
+								label={tText(
 									'admin/shared/components/filter-table/filter-table___zoeken'
 								)}
 								type="primary"
@@ -411,7 +411,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 									<Select
 										options={bulkActions || []}
 										onChange={handleSelectBulkAction}
-										placeholder={t(
+										placeholder={tText(
 											'admin/shared/components/filter-table/filter-table___bulkactie'
 										)}
 										disabled={!(selectedItemIds || []).length}
@@ -422,7 +422,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						</ToolbarLeft>
 						<ToolbarRight>
 							<CheckboxDropdownModal
-								label={t(
+								label={tText(
 									'admin/shared/components/filter-table/filter-table___kolommen'
 								)}
 								id="table_columns"
@@ -495,7 +495,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 					confirmLabel={get(
 						bulkActions.find((action) => action.value === selectedBulkAction),
 						'label',
-						t('admin/shared/components/filter-table/filter-table___bevestig')
+						tText('admin/shared/components/filter-table/filter-table___bevestig')
 					)}
 					confirmButtonType={get(
 						bulkActions.find((action) => action.value === selectedBulkAction),

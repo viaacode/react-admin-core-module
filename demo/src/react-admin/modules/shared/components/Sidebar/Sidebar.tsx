@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './Sidebar.scss';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface SidebarProps {
 	className?: string;
@@ -17,15 +17,15 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	headerLink,
 	light = false,
 }) => {
-	const { t } = useTranslation();
-	const Link = Config.getConfig().services.router.Link;
+	const { tHtml } = useTranslation();
+	const Link = AdminConfigManager.getConfig().services.router.Link;
 
 	return (
 		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
-						{t('admin/shared/components/sidebar/sidebar___beheer')}
+						{tHtml('admin/shared/components/sidebar/sidebar___beheer')}
 					</Link>
 				</div>
 			)}

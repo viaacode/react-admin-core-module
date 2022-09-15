@@ -2,7 +2,8 @@ import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-compo
 import { get, has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
@@ -70,13 +71,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const { tHtml, tText } = useTranslation();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
 
-	const user = Config.getConfig().user;
+	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
 		(permission: Permission) => PermissionService.hasPerm(user, permission),
 		[user]
@@ -93,7 +94,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
 					icon: 'lock',
@@ -107,7 +108,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			) {
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
 					icon: 'lock',
@@ -127,15 +128,15 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					id,
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___error'),
-				description: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-edit___error'),
+				description: tText(
 					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, user, hasPerm, t]);
+	}, [id, user, hasPerm, tHtml, tText]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
@@ -155,9 +156,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 							payload: newConfig,
 						});
 
-						Config.getConfig().services.toastService.showToast({
-							title: t('modules/content-page/views/content-page-edit___success'),
-							description: t(
+						AdminConfigManager.getConfig().services.toastService.showToast({
+							title: tText('modules/content-page/views/content-page-edit___success'),
+							description: tText(
 								'admin/content/views/content-edit___de-blok-is-toegevoegd'
 							),
 							type: ToastType.SUCCESS,
@@ -166,16 +167,16 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				}
 			} catch (err) {
 				console.error(new CustomError('Failed to paste content block', err));
-				Config.getConfig().services.toastService.showToast({
-					title: t('modules/content-page/views/content-page-edit___error'),
-					description: t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/content-page/views/content-page-edit___error'),
+					description: tText(
 						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			}
 		},
-		[changeContentPageState, contentPageState.currentContentPageInfo.contentBlockConfigs, t]
+		[changeContentPageState, contentPageState.currentContentPageInfo.contentBlockConfigs, tText]
 	);
 
 	useEffect(() => {
@@ -198,9 +199,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	// Computed
 	const pageType = id ? PageType.Edit : PageType.Create;
-	let pageTitle = t('admin/content/views/content-edit___content-toevoegen');
+	let pageTitle = tHtml('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
-		pageTitle = `${t('admin/content/views/content-edit___content-aanpassen')}: ${get(
+		pageTitle = `${tHtml('admin/content/views/content-edit___content-aanpassen')}: ${get(
 			contentPageState.currentContentPageInfo,
 			'title',
 			''
@@ -282,18 +283,18 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			if (!isFormValid || !areConfigsValid) {
 				setIsSaving(false);
 				if (!isFormValid) {
-					Config.getConfig().services.toastService.showToast({
-						title: t('modules/content-page/views/content-page-edit___error'),
-						description: t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: tText('modules/content-page/views/content-page-edit___error'),
+						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
 						),
 						type: ToastType.ERROR,
 					});
 				}
 				if (!areConfigsValid) {
-					Config.getConfig().services.toastService.showToast({
-						title: t('modules/content-page/views/content-page-edit___error'),
-						description: t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: tText('modules/content-page/views/content-page-edit___error'),
+						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
 						),
 						type: ToastType.ERROR,
@@ -373,13 +374,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 			]);
 
-			Config.getConfig()?.contentPage?.onSaveContentPage(
+			AdminConfigManager.getConfig()?.contentPage?.onSaveContentPage(
 				insertedOrUpdatedContent as ContentPageInfo
 			);
 
-			Config.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___success'),
-				description: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-edit___success'),
+				description: tText(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -389,9 +390,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
-			Config.getConfig().services.toastService.showToast({
-				title: t('modules/content-page/views/content-page-edit___error'),
-				description: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-edit___error'),
+				description: tText(
 					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -405,11 +406,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 		const errors: ContentEditFormErrors = {};
 
 		if (!contentPageState.currentContentPageInfo.title) {
-			errors.title = t('admin/content/views/content-edit___titel-is-verplicht');
+			errors.title = tText('admin/content/views/content-edit___titel-is-verplicht');
 		}
 
 		if (!contentPageState.currentContentPageInfo.content_type) {
-			errors.content_type = t('admin/content/views/content-edit___content-type-is-verplicht');
+			errors.content_type = tText(
+				'admin/content/views/content-edit___content-type-is-verplicht'
+			);
 		}
 
 		// check if the path is unique
@@ -422,7 +425,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					contentPageState.currentContentPageInfo.id
 				);
 			if (existingContentPageTitle) {
-				errors.path = t(
+				errors.path = tText(
 					'admin/content/views/content-edit___dit-path-is-reeds-gebruikt-door-pagina-page-title',
 					{
 						pageTitle: existingContentPageTitle,
@@ -444,7 +447,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			new Date(contentPageState.currentContentPageInfo.depublish_at) <
 				new Date(contentPageState.currentContentPageInfo.publish_at)
 		) {
-			errors.depublish_at = t(
+			errors.depublish_at = tText(
 				'admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum'
 			);
 		}
@@ -555,14 +558,14 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={t('admin/content/views/content-edit___annuleer')}
+							label={tText('admin/content/views/content-edit___annuleer')}
 							onClick={navigateBack}
 							type="tertiary"
 						/>
 						{isAllowedToSave && (
 							<Button
 								disabled={isSaving}
-								label={t('admin/content/views/content-edit___opslaan')}
+								label={tText('admin/content/views/content-edit___opslaan')}
 								onClick={handleSave}
 							/>
 						)}

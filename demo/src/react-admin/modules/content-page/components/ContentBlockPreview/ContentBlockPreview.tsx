@@ -12,13 +12,14 @@ import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
 	IGNORE_BLOCK_LEVEL_PROPS,
 	NAVIGABLE_CONTENT_BLOCKS,
+	OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 } from './ContentBlockPreview.const';
 
 import { generateSmartLink } from '~modules/shared/helpers/link';
 
 import './ContentBlockPreview.scss';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -39,7 +40,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	const componentState = get(contentBlockConfig, 'components.state');
 	const containerSize =
 		contentPageInfo.content_width?.toUpperCase() ||
-		Config.getConfig().contentPage?.defaultPageWidth ||
+		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
 	const PreviewComponent = COMPONENT_PREVIEW_MAP[contentBlockConfig.type];
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
@@ -82,10 +83,16 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	}, [blockState.headerBackgroundColor, getHeaderHeight, headerBgRef]);
 
 	if (NAVIGABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
-		// Pass a function to the block so it can render links without needing to know anything about the app routes
+		// Pass a function to the block, so it can render links without needing to know anything about the app routes
 		// You pass in the buttonAction and the children of the link
 		// And you receive a ReactNode that wraps the children in the correct link tag
 		blockStateProps.renderLink = generateSmartLink;
+	}
+
+	if (OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
+		// Pass a function to the block, so it can render a wrapper to open media items in a modal
+		// Without the admin core needing to know about users, bookmarks, ...
+		blockStateProps.mediaItemClicked = AdminConfigManager.getConfig().handlers.mediaItemClicked;
 	}
 
 	// Pass the content page object to the block
@@ -93,7 +100,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 		// Set profile to current user for unsaved pages
 		blockStateProps.contentPageInfo = {
 			...contentPageInfo,
-			profile: contentPageInfo.profile || Config.getConfig().user,
+			profile: contentPageInfo.profile || AdminConfigManager.getConfig().user,
 		};
 	}
 

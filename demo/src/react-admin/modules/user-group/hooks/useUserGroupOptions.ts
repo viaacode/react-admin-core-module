@@ -4,7 +4,8 @@ import { TagInfo } from '@viaa/avo2-components';
 
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';
 import { UserGroupService } from '../services/user-group.service';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -15,7 +16,7 @@ export const useUserGroupOptions = (
 	type: 'CheckboxOption' | 'TagInfo',
 	includeSpecialGroups: boolean
 ): UseUserGroupsTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 	const [userGroupOptions, setUserGroupOptions] = useState<TagInfo[] | CheckboxOption[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -51,9 +52,11 @@ export const useUserGroupOptions = (
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get user group options', err));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/user-group/hooks/use-user-group-options___error'),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/hooks/use-user-group-options___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -62,7 +65,7 @@ export const useUserGroupOptions = (
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [setIsLoading, setUserGroupOptions, includeSpecialGroups, type, t]);
+	}, [setIsLoading, setUserGroupOptions, includeSpecialGroups, type, tHtml]);
 
 	return [userGroupOptions, isLoading];
 };

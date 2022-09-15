@@ -26,7 +26,7 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 	menuItems,
 	onOptionClicked,
 }) => {
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	return !!menuItems && !!menuItems.length ? (
 		<Dropdown
@@ -40,8 +40,8 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 				<Button
 					icon="more-horizontal"
 					type="secondary"
-					ariaLabel={t('assignment/views/assignment-detail___meer-opties')}
-					title={t('assignment/views/assignment-detail___meer-opties')}
+					ariaLabel={tText('assignment/views/assignment-detail___meer-opties')}
+					title={tText('assignment/views/assignment-detail___meer-opties')}
 				/>
 			</DropdownButton>
 			<DropdownContent>

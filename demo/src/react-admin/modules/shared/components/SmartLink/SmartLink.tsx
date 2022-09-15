@@ -4,7 +4,7 @@ import { fromPairs, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { BUNDLE_PATH } from '../../consts/bundle.const';
 import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';
@@ -33,7 +33,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			fullUrl = `//${url}`;
 		}
 
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab
@@ -45,7 +45,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_self"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
 							title={title}
-							onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
+							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 						>
 							{children}
 						</a>
@@ -56,7 +56,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					<Link
 						to={fullUrl}
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
+						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 						title={title}
 					>
 						{children}
@@ -74,7 +74,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_blank"
 							rel="noopener noreferrer"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
-							onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
+							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 							title={title}
 						>
 							{children}
@@ -88,7 +88,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => Config.getConfig().handlers.onExternalLink(fullUrl)}
+						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
 						title={title}
 					>
 						{children}
@@ -138,7 +138,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				case ContentPickerType.EXTERNAL_LINK: {
 					const externalUrl = ((value as string) || '').replace(
 						'{{PROXY_URL}}',
-						Config.getConfig().database.proxyUrl || ''
+						AdminConfigManager.getConfig().database.proxyUrl || ''
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}

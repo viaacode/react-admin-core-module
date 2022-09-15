@@ -5,7 +5,7 @@ import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import {
@@ -15,9 +15,9 @@ import {
 import { Loader } from '~modules/shared/components';
 
 const NavigationOverview: FunctionComponent = () => {
-	const { t } = useTranslation();
-	const Link = Config.getConfig().services.router.Link;
-	const history = Config.getConfig().services.router.useHistory();
+	const { tHtml, tText } = useTranslation();
+	const Link = AdminConfigManager.getConfig().services.router.Link;
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
@@ -52,10 +52,10 @@ const NavigationOverview: FunctionComponent = () => {
 								})
 							}
 							size="small"
-							title={t(
+							title={tText(
 								'admin/menu/views/menu-overview___bekijk-de-navigatie-items-voor-deze-navigatie-balk'
 							)}
-							ariaLabel={t(
+							ariaLabel={tText(
 								'admin/menu/views/menu-overview___bekijk-de-navigatie-items-voor-deze-navigatie-balk'
 							)}
 							type="secondary"
@@ -68,10 +68,10 @@ const NavigationOverview: FunctionComponent = () => {
 								})
 							}
 							size="small"
-							title={t(
+							title={tText(
 								'admin/menu/views/menu-overview___voeg-een-navigatie-item-toe-aan-deze-navigatie-balk'
 							)}
-							ariaLabel={t(
+							ariaLabel={tText(
 								'admin/menu/views/menu-overview___voeg-een-navigatie-item-toe-aan-deze-navigatie-balk'
 							)}
 							type="secondary"
@@ -88,12 +88,12 @@ const NavigationOverview: FunctionComponent = () => {
 			return (
 				<>
 					<div>
-						{t(
+						{tHtml(
 							'admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt'
 						)}
 					</div>
 					<div>
-						{t(
+						{tHtml(
 							'admin/menu/views/menu-overview___beschrijving-hoe-navigatie-items-toe-te-voegen'
 						)}
 					</div>
@@ -101,9 +101,10 @@ const NavigationOverview: FunctionComponent = () => {
 			);
 		}
 
+		const columns = GET_NAVIGATION_OVERVIEW_TABLE_COLS();
 		return (
 			<Table
-				columns={GET_NAVIGATION_OVERVIEW_TABLE_COLS()}
+				columns={columns}
 				data={navigationItems}
 				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
 					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
@@ -119,7 +120,13 @@ const NavigationOverview: FunctionComponent = () => {
 			return <Loader />;
 		}
 		if (isErrorNavigationItems) {
-			return <div>{t('modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt')}</div>;
+			return (
+				<div>
+					{tHtml(
+						'modules/navigation/views/navigation-overview___het-ophalen-van-de-navigatie-balken-is-mislukt'
+					)}
+				</div>
+			);
 		}
 		return renderMenuOverview();
 	};

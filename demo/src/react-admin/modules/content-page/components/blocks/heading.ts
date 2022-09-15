@@ -15,7 +15,7 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_HEADING_COMPONENTS_STATE = (): HeadingBlockComponentState => ({
 	children: '',
@@ -33,7 +33,7 @@ export const INITIAL_HEADING_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/heading___titel'
 	),
 	type: ContentBlockType.Heading,
@@ -41,23 +41,23 @@ export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_HEADING_COMPONENTS_STATE(),
 		fields: {
 			children: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/heading___titel-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/heading___titel'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			color: FOREGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/heading___titel-kleur'
 				)
 			),
 			type: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/heading___stijl'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -66,7 +66,7 @@ export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			align: ALIGN_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/defaults___uitlijning'
 				)
 			),

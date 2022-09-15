@@ -7,7 +7,8 @@ import React, { FunctionComponent, ReactText, useEffect, useState } from 'react'
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface Tag {
@@ -25,7 +26,7 @@ export interface EducationalOrganisationsSelectProps {
 export const EducationalOrganisationsSelect: FunctionComponent<
 	EducationalOrganisationsSelectProps
 > = ({ organisations, onChange, disabled = false }) => {
-	const { t } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [cities, setCities] = useState<string[]>([]);
 	const [organisationsInCity, setOrganisationsInCity] = useState<ClientEducationOrganization[]>(
@@ -42,23 +43,23 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	}>({});
 
 	useEffect(() => {
-		Config.getConfig()
+		AdminConfigManager.getConfig()
 			.services.educationOrganisationService.fetchCities()
 			.then(setCities)
 			.catch((err: any) => {
 				console.error(err);
 				console.error(new Error('Failed to get cities'));
-				Config.getConfig().services.toastService.showToast({
-					title: t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
 					),
-					description: t(
+					description: tText(
 						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			});
-	}, [setCities, t]);
+	}, [setCities, tText]);
 
 	useEffect(() => {
 		(async () => {
@@ -75,7 +76,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				} else {
 					// fetch from server
 					orgs =
-						await Config.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
+						await AdminConfigManager.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
 							city,
 							zipCode
 						);
@@ -93,11 +94,11 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error('Failed to get educational organizations', err, {
 					selectedCity,
 				});
-				Config.getConfig().services.toastService.showToast({
-					title: t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 					),
-					description: t(
+					description: tText(
 						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -111,7 +112,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		setOrganisationsInCity,
 		setOrganizationsLoadingState,
 		onChange,
-		t,
+		tText,
 	]);
 
 	const onSelectedCityChanged = async (cityAndZipCode: string) => {
@@ -123,11 +124,11 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			(org: ClientEducationOrganization) => org.label === orgLabel
 		);
 		if (!selectedOrg) {
-			Config.getConfig().services.toastService.showToast({
-				title: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText(
 					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 				),
-				description: t(
+				description: tText(
 					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden'
 				),
 				type: ToastType.ERROR,
@@ -148,7 +149,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		if (organisationsInCity.length === 0 && organizationsLoadingState === 'loaded') {
 			return [
 				{
-					label: t(
+					label: tText(
 						'settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente'
 					),
 					value: '',
@@ -158,7 +159,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		}
 		return [
 			{
-				label: t('settings/components/organisation___selecteer-een-instelling'),
+				label: tText('settings/components/organisation___selecteer-een-instelling'),
 				value: '',
 				disabled: true,
 			},
@@ -177,7 +178,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					<Select
 						options={[
 							{
-								label: t('settings/components/profile___voeg-een-organisatie-toe'),
+								label: tText(
+									'settings/components/profile___voeg-een-organisatie-toe'
+								),
 								value: '',
 							},
 							...(cities || []).map((c) => ({ label: c, value: c })),
@@ -190,7 +193,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					{organizationsLoadingState === 'loading' && (
 						<Alert
 							type="spinner"
-							message={t(
+							message={tHtml(
 								'settings/components/profile___bezig-met-ophalen-van-organisaties'
 							)}
 						/>

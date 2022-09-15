@@ -1,5 +1,5 @@
 query getTranslations {
-	app_config(where: { name: { _ilike: "translations_%" } }) {
+	app_config(where: { name: { _ilike: "TRANSLATIONS_%" } }) {
 		name
 		value
 	}

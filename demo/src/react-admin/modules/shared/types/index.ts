@@ -17,3 +17,8 @@ export interface DefaultComponentProps {
 	className?: string;
 	style?: CSSProperties;
 }
+
+export enum OrderDirection {
+	asc = 'asc',
+	desc = 'desc',
+}

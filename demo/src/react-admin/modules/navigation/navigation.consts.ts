@@ -6,7 +6,7 @@ export enum NAVIGATIONS_QUERY_KEYS {
 }
 
 import { TableColumn } from '@viaa/avo2-components';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 export const NAVIGATION_PATH = {
@@ -18,12 +18,18 @@ export const NAVIGATION_PATH = {
 };
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
-	{ id: 'placement', label: Config.getConfig().services.i18n.t('admin/menu/menu___naam') },
+	{
+		id: 'placement',
+		label: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___naam'),
+	},
 	{
 		id: 'description',
-		label: Config.getConfig().services.i18n.t('admin/menu/menu___omschrijving'),
+		label: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___omschrijving'),
 	},
-	{ id: 'actions', tooltip: Config.getConfig().services.i18n.t('admin/menu/menu___acties') },
+	{
+		id: 'actions',
+		tooltip: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___acties'),
+	},
 ];
 
 export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem> => ({
@@ -39,6 +45,6 @@ export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem>
 });
 
 export const GET_PAGE_TYPES_LANG = () => ({
-	create: Config.getConfig().services.i18n.t('admin/menu/menu___toevoegen'),
-	edit: Config.getConfig().services.i18n.t('admin/menu/menu___aanpassen'),
+	create: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___toevoegen'),
+	edit: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___aanpassen'),
 });

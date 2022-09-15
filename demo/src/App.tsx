@@ -4,7 +4,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
@@ -22,7 +23,7 @@ const queryClient = new QueryClient();
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
 
-	const { t } = useTranslation();
+	const { tText } = useTranslation();
 
 	useEffect(() => {
 		if (!mockUser) {
@@ -34,13 +35,13 @@ function App() {
 			})
 			.catch((err) => {
 				console.error(new CustomError('Failed to get nav items', err));
-				Config.getConfig().services.toastService.showToast({
-					title: t('Error'),
-					description: t('Het ophalen van de navigatie items is mislukt'),
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('Error'),
+					description: tText('Het ophalen van de navigatie items is mislukt'),
 					type: ToastType.ERROR,
 				});
 			});
-	}, [t]);
+	}, [tText]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -79,4 +80,3 @@ function App() {
 }
 
 export default App;
-

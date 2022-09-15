@@ -92,7 +92,7 @@ import {
 	ContentBlockType,
 } from '../types/content-block.types';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 
@@ -103,129 +103,145 @@ import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___titel'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___titel'
+			),
 			value: ContentBlockType.Heading,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___tekst'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___tekst'
+			),
 			value: ContentBlockType.RichText,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___tekst-2-kolommen'
 			),
 			value: ContentBlockType.RichTextTwoColumns,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___knoppen'
 			),
 			value: ContentBlockType.Buttons,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___intro'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___intro'
+			),
 			value: ContentBlockType.Intro,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___2-ct-as'
 			),
 			value: ContentBlockType.CTAs,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___i-frame'
 			),
 			value: ContentBlockType.IFrame,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___klaar'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___klaar'
+			),
 			value: ContentBlockType.Klaar,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___media-tegels'
 			),
 			value: ContentBlockType.MediaGrid,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___media-speler'
 			),
 			value: ContentBlockType.MediaPlayer,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'
 			),
 			value: ContentBlockType.MediaPlayerTitleTextButton,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___afbeelding'
 			),
 			value: ContentBlockType.Image,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___afbeelding-grid'
 			),
 			value: ContentBlockType.ImageGrid,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___pagina-overzicht'
 			),
 			value: ContentBlockType.PageOverview,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___projecten-in-de-kijker'
 			),
 			value: ContentBlockType.ProjectsSpotlight,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___in-de-kijker'
 			),
 			value: ContentBlockType.Spotlight,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___quote'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___quote'
+			),
 			value: ContentBlockType.Quote,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/helpers/generators/anchor-links___links'
 			),
 			value: ContentBlockType.AnchorLinks,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___hero'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___hero'
+			),
 			value: ContentBlockType.Hero,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___zoek'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___zoek'
+			),
 			value: ContentBlockType.Search,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___pagina-metadata'
 			),
 			value: ContentBlockType.ContentPageMeta,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___logos-sign-off'
 			),
 			value: ContentBlockType.LogoGrid,
 		},
 		{
-			label: Config.getConfig().services.i18n.t('admin/content-block/content-block___usp'),
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___usp'
+			),
 			value: ContentBlockType.UspGrid,
 		},
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___eventbrite'
 			),
 			value: ContentBlockType.Eventbrite,
@@ -235,14 +251,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 	// Only show the content blocks that the client enabled through the config object
 	return [
 		{
-			label: Config.getConfig().services.i18n.t(
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___voeg-een-content-blok-toe'
 			),
 			value: '',
 			disabled: true,
 		},
 		...allContentBlocks.filter((contentBlock) => {
-			return Config.getConfig()?.contentPage?.availableContentBlocks?.includes(
+			return AdminConfigManager.getConfig()?.contentPage?.availableContentBlocks?.includes(
 				contentBlock.value
 			);
 		}),

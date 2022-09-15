@@ -2,7 +2,7 @@ import { get, isNil } from 'lodash-es';
 
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { NAVIGATION_QUERIES } from './queries/navigation.queries';
 import {
 	DeleteNavigationItemMutation,
@@ -14,7 +14,7 @@ import { NavigationItem } from './navigation.types';
 
 export class NavigationService {
 	private static getQueries() {
-		return NAVIGATION_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return NAVIGATION_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
 	}
 
 	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {
@@ -84,7 +84,7 @@ export class NavigationService {
 					navigationItem,
 				},
 			});
-			await Config.getConfig().services.queryCache.clear('clearNavElementsCache');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 
 			if (response.errors) {
 				throw new CustomError('GraphQL response contains errors', null, { response });
@@ -118,7 +118,7 @@ export class NavigationService {
 					},
 				});
 			});
-			await Config.getConfig().services.queryCache.clear('clearNavElementsCache');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 
 			await Promise.all(promises);
 		} catch (err) {
@@ -135,7 +135,7 @@ export class NavigationService {
 				query: this.getQueries().DeleteNavigationItemDocument,
 				variables: { id },
 			});
-			await Config.getConfig().services.queryCache.clear('clearNavElementsCache');
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 
 			if (!response) {
 				throw new CustomError('Response is undefined');

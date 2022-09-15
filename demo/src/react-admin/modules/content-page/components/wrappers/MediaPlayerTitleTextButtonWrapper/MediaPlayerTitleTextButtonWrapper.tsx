@@ -17,7 +17,7 @@ import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
 import { generateSmartLink } from '~modules/shared/helpers/link';
 import { Permission } from '~modules/user/user.types';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;
@@ -61,7 +61,7 @@ export const MediaPlayerTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWra
 	mediaAutoplay,
 }) => {
 	const shouldTitleLink =
-		PermissionService.hasPerm(Config.getConfig().user, Permission.VIEW_ANY_PUBLISHED_ITEMS) &&
+		PermissionService.hasPerm(AdminConfigManager.getConfig().user, Permission.VIEW_ANY_PUBLISHED_ITEMS) &&
 		!!mediaItem;
 
 	return (

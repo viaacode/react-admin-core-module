@@ -7,7 +7,7 @@ import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -34,7 +34,7 @@ type ContentPageDetailProps =
 	  };
 
 const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
@@ -56,7 +56,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 				);
 				setLoadingInfo({
 					state: 'error',
-					message: t(
+					message: tHtml(
 						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
 					),
 				});
@@ -65,12 +65,12 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 			console.error(new CustomError('Failed to load content page', err, { props }));
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 			});
 		}
-	}, [props, t]);
+	}, [props, tHtml]);
 
 	useEffect(() => {
 		fetchContentPage();
@@ -106,7 +106,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 		// Add page title as header block for faq items. Only for Avo
 		if (
 			contentPageInfo.content_type === 'FAQ_ITEM' &&
-			Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 		) {
 			contentBlockBlockConfigs = [
 				{

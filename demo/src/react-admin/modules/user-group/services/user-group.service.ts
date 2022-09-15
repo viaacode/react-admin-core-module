@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { get, isNil } from 'lodash-es';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
 
@@ -11,7 +11,7 @@ import { UserGroup } from '../types/user-group.types';
 
 export class UserGroupService {
 	private static getQueries() {
-		return USER_GROUP_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return USER_GROUP_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
 	}
 
 	public static async fetchUserGroups(

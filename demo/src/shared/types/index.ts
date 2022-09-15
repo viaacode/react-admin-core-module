@@ -1,16 +1,9 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { IconName } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
-
-export enum KeyCode {
-	Enter = 13,
-}
-
-export type NewsletterList = keyof Avo.Newsletter.Preferences;
 
 export type NavigationItemInfo = {
-	label: string | ReactElement;
+	label: string | ReactNode;
 	key: string;
 	location?: string;
 	exact?: boolean;
@@ -20,16 +13,3 @@ export type NavigationItemInfo = {
 	subLinks?: NavigationItemInfo[];
 	tooltip?: string;
 };
-
-export type ReactSelectOption<T = any> = {
-	label: string;
-	value: T;
-};
-
-export type ReactAction<T, P = any> = {
-	type: T;
-	payload: P;
-};
-
-// Get all possible values from object
-export type ValueOf<T> = T[keyof T];

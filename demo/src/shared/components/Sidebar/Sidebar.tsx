@@ -2,11 +2,11 @@ import classnames from 'classnames';
 import { Location } from 'history';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Trans } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 interface SidebarProps {
 	className?: string;
@@ -22,6 +22,8 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
+	const { tHtml } = useTranslation();
+
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
 			(!!item.location && item.location === location.pathname && !item.exact) ||
@@ -87,9 +89,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>
-						<Trans i18nKey="admin/shared/components/sidebar/sidebar___beheer">
-							Beheer
-						</Trans>
+						{tHtml('admin/shared/components/sidebar/sidebar___beheer')}
 					</Link>
 				</div>
 			)}

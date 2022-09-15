@@ -39,7 +39,8 @@ import {
 	ContentTableState,
 } from '../types/content-pages.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import {
@@ -86,8 +87,8 @@ const ContentPageOverview: FunctionComponent = () => {
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
-	const { t } = useTranslation();
-	const history = Config.getConfig().services.router.useHistory();
+	const { tHtml, tText } = useTranslation();
+	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
 		return contentTypes.map(
@@ -107,14 +108,16 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
-	const getUser = () => Config.getConfig().user;
+	const getUser = () => AdminConfigManager.getConfig().user;
 
 	const hasPerm = useCallback((permission: Permission) => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
 	const ownerFilter = (queryWildcard: string): any[] => {
-		if (Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		) {
 			return [
 				{
 					owner: {
@@ -181,7 +184,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				);
 				let userGroupPath: string;
 				if (
-					Config.getConfig().database.databaseApplicationType ===
+					AdminConfigManager.getConfig().database.databaseApplicationType ===
 					AvoOrHetArchief.hetArchief
 				) {
 					userGroupPath = 'owner_profile.group_id';
@@ -236,14 +239,14 @@ const ContentPageOverview: FunctionComponent = () => {
 			);
 			setLoadingInfo({
 				state: 'error',
-				message: t(
+				message: tHtml(
 					'admin/content/views/content-overview___het-ophalen-van-de-content-paginas-is-mislukt'
 				),
 				icon: 'alert-triangle',
 			});
 		}
 		setIsLoading(false);
-	}, [tableColumns, tableState, hasPerm, t]);
+	}, [tableColumns, tableState, hasPerm, tHtml]);
 
 	useEffect(() => {
 		fetchContentPages();
@@ -264,11 +267,11 @@ const ContentPageOverview: FunctionComponent = () => {
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			await fetchContentPages();
-			Config.getConfig().services.toastService.showToast({
-				title: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
 				),
-				description: t(
+				description: tText(
 					'admin/content/views/content-overview___het-content-item-is-succesvol-verwijderd'
 				),
 				type: ToastType.ERROR,
@@ -277,11 +280,11 @@ const ContentPageOverview: FunctionComponent = () => {
 			console.error(
 				new CustomError('Failed to delete content page', err, { contentToDelete })
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
-				description: t(
+				description: tText(
 					'admin/content/views/content-overview___het-verwijderen-van-het-content-item-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -309,11 +312,11 @@ const ContentPageOverview: FunctionComponent = () => {
 		if (page && page.path) {
 			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
-			Config.getConfig().services.toastService.showToast({
-				title: t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
-				description: t(
+				description: tText(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
 				),
 				type: ToastType.ERROR,
@@ -324,7 +327,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	// Render
 	const renderTableCell = (rowData: any, columnId: ContentOverviewTableCols): ReactNode => {
 		const { id, profile, title } = rowData;
-		const Link = Config.getConfig().services.router.Link;
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		switch (columnId) {
 			case 'title':
@@ -386,13 +389,15 @@ const ContentPageOverview: FunctionComponent = () => {
 								}
 								if (userGroup.id === SpecialPermissionGroups.loggedInUsers) {
 									return {
-										label: t('admin/content/views/content-overview___ingelogd'),
+										label: tText(
+											'admin/content/views/content-overview___ingelogd'
+										),
 										id: userGroup.id as string,
 									};
 								}
 								if (userGroup.id === SpecialPermissionGroups.loggedOutUsers) {
 									return {
-										label: t(
+										label: tText(
 											'admin/content/views/content-overview___niet-ingelogd'
 										),
 										id: userGroup.id as string,
@@ -423,8 +428,10 @@ const ContentPageOverview: FunctionComponent = () => {
 							<Button
 								icon="info"
 								size="small"
-								title={t('admin/content/views/content-overview___bekijk-content')}
-								ariaLabel={t(
+								title={tText(
+									'admin/content/views/content-overview___bekijk-content'
+								)}
+								ariaLabel={tText(
 									'admin/content/views/content-overview___bekijk-content'
 								)}
 								type="secondary"
@@ -434,8 +441,10 @@ const ContentPageOverview: FunctionComponent = () => {
 							icon="eye"
 							onClick={() => handlePreviewClicked(rowData)}
 							size="small"
-							title={t('admin/content/views/content-overview___preview-content')}
-							ariaLabel={t('admin/content/views/content-overview___preview-content')}
+							title={tText('admin/content/views/content-overview___preview-content')}
+							ariaLabel={tText(
+								'admin/content/views/content-overview___preview-content'
+							)}
 							type="secondary"
 						/>
 						<Button
@@ -443,10 +452,10 @@ const ContentPageOverview: FunctionComponent = () => {
 							size="small"
 							title={
 								isPublic(rowData)
-									? t(
+									? tText(
 											'admin/content/views/content-overview___deze-pagina-is-publiek'
 									  )
-									: t(
+									: tText(
 											'admin/content/views/content-overview___deze-pagina-is-prive'
 									  )
 							}
@@ -457,8 +466,10 @@ const ContentPageOverview: FunctionComponent = () => {
 							<Button
 								icon="edit"
 								size="small"
-								title={t('admin/content/views/content-overview___pas-content-aan')}
-								ariaLabel={t(
+								title={tText(
+									'admin/content/views/content-overview___pas-content-aan'
+								)}
+								ariaLabel={tText(
 									'admin/content/views/content-overview___pas-content-aan'
 								)}
 								type="secondary"
@@ -469,10 +480,10 @@ const ContentPageOverview: FunctionComponent = () => {
 								icon="delete"
 								onClick={() => openModal(rowData)}
 								size="small"
-								title={t(
+								title={tText(
 									'admin/content/views/content-overview___verwijder-content'
 								)}
-								ariaLabel={t(
+								ariaLabel={tText(
 									'admin/content/views/content-overview___verwijder-content'
 								)}
 								type="danger-hover"
@@ -487,26 +498,24 @@ const ContentPageOverview: FunctionComponent = () => {
 	};
 
 	const renderNoResults = () => {
-		return <>{t('admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt')}</>;
+		return (
+			<>{tText('admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt')}</>
+		);
 		// return (
 		// <ErrorView
-		// 	message={t(
+		// 	message={tText(
 		// 		'admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt'
 		// 	)}
 		// >
 		// 	<p>
-		// 		<Trans i18nKey="admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen">//  Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores aliquid ab
-		//  debitis blanditiis vitae molestiae delectus earum asperiores mollitia,
-		//  minima laborum expedita ratione quas impedit repudiandae nisi corrupti quis
-		//  eaque!
-		//</Trans>
+		// 		{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
 		// 	</p>
 		// 	{hasPerm(CREATE_CONTENT_PAGES) && (
 		// 		<Spacer margin="top">
 		// 			<Button
 		// 				icon="plus"
-		// 				label={t('admin/content/views/content-overview___content-toevoegen')}
-		// 				title={t(
+		// 				label={tText('admin/content/views/content-overview___content-toevoegen')}
+		// 				title={tText(
 		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 		// 				)}
 		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_CREATE)}
@@ -528,10 +537,10 @@ const ContentPageOverview: FunctionComponent = () => {
 					itemsPerPage={ITEMS_PER_PAGE}
 					columns={tableColumns}
 					dataCount={contentPageCount}
-					searchTextPlaceholder={t(
+					searchTextPlaceholder={tText(
 						'admin/content/views/content-overview___zoeken-op-auteur-titel-rol'
 					)}
-					noContentMatchingFiltersMessage={t(
+					noContentMatchingFiltersMessage={tText(
 						'admin/content/views/content-overview___er-is-geen-content-gevonden-die-voldoen-aan-uw-filters'
 					)}
 					renderNoResults={renderNoResults}
@@ -546,7 +555,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					onClose={() => setIsConfirmModalOpen(false)}
 					body={
 						get(contentToDelete, 'is_protected', null)
-							? t(
+							? tHtml(
 									'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'
 							  )
 							: ''
@@ -556,13 +565,13 @@ const ContentPageOverview: FunctionComponent = () => {
 					isOpen={isNotAdminModalOpen}
 					onClose={() => setIsNotAdminModalOpen(false)}
 					size="small"
-					title={t(
+					title={tText(
 						'admin/content/views/content-overview___u-heeft-niet-de-juiste-rechten'
 					)}
 				>
 					<ModalBody>
 						<p>
-							{t(
+							{tHtml(
 								'admin/content/views/content-overview___contacteer-een-van-de-admins-om-deze-pagina-te-kunnen-verwijderen'
 							)}
 						</p>

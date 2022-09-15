@@ -1,10 +1,7 @@
 import { CTAProps } from '@viaa/avo2-components';
 
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import {
-	GET_BUTTON_TYPE_OPTIONS,
-	GET_HEADING_TYPE_OPTIONS,
-} from '../../const/content-block.common.consts';
+import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -20,8 +17,11 @@ import {
 	TEXT_FIELD,
 } from './defaults';
 
-import { Config } from '~core/config';
-import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF, GET_BACKGROUND_COLOR_OPTIONS_AVO } from '~modules/content-page/const/content-block.common.consts';
+import { AdminConfigManager } from '~core/config';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/content-block.common.consts';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',
@@ -43,10 +43,12 @@ export const INITIAL_CTAS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t('admin/content-block/helpers/generators/ctas___ctas'),
+	name: AdminConfigManager.getConfig().services.i18n.tText(
+		'admin/content-block/helpers/generators/ctas___ctas'
+	),
 	type: ContentBlockType.CTAs,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/ctas___cta'
 		),
 		limits: {
@@ -56,7 +58,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_CTAS_COMPONENTS_STATE(),
 		fields: {
 			headingType: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-stijl'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -65,55 +67,55 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			heading: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/ctas___titel-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingColor: FOREGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___titel-kleur'
 				)
 			),
 			content: TEXT_FIELD(),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___tekst-kleur'
 				)
 			),
 			buttonType: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-type'
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knoptekst-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/ctas___knop-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			buttonAltTitle: TEXT_FIELD('', {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___alt-button-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-icoon'
 				),
 				editorType: ContentBlockEditor.IconPicker,
@@ -122,16 +124,18 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAction: {
-				label: Config.getConfig().services.i18n.t(
+				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			backgroundColor: BACKGROUND_COLOR_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___achtergrond-kleur'
 				),
-				Config.getConfig().database.databaseApplicationType === 'avo' ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1],
+				AdminConfigManager.getConfig().database.databaseApplicationType === 'avo'
+					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
+					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 		},
 	},

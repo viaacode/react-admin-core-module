@@ -10,7 +10,7 @@ import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
 import { ContentPickerType } from './ContentPicker.types';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export interface PickerItem {
 	label?: string;
@@ -20,35 +20,37 @@ export interface PickerItem {
 }
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = () => ({
-	[ContentPickerType.CONTENT_PAGE]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.CONTENT_PAGE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content/content___content'
 	),
-	[ContentPickerType.INTERNAL_LINK]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.INTERNAL_LINK]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content/content___statisch'
 	),
-	[ContentPickerType.COLLECTION]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.COLLECTION]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content/content___collecties'
 	),
-	[ContentPickerType.ITEM]: Config.getConfig().services.i18n.t('admin/content/content___items'),
-	[ContentPickerType.BUNDLE]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.ITEM]: AdminConfigManager.getConfig().services.i18n.tText(
+		'admin/content/content___items'
+	),
+	[ContentPickerType.BUNDLE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content/content___bundels'
 	),
-	[ContentPickerType.EXTERNAL_LINK]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.EXTERNAL_LINK]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___externe-url'
 	),
-	[ContentPickerType.SEARCH_QUERY]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.SEARCH_QUERY]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___zoekfilters'
 	),
-	[ContentPickerType.PROJECTS]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.PROJECTS]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___projecten'
 	),
-	[ContentPickerType.PROFILE]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.PROFILE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___gebruiker'
 	),
-	[ContentPickerType.ANCHOR_LINK]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.ANCHOR_LINK]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___anchors'
 	),
-	[ContentPickerType.FILE]: Config.getConfig().services.i18n.t(
+	[ContentPickerType.FILE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___bestand'
 	),
 });
@@ -103,7 +105,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels[ContentPickerType.SEARCH_QUERY],
 			disabled: false,
 			picker: 'TEXT_INPUT',
-			placeholder: Config.getConfig().services.i18n.t(
+			placeholder: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/shared/components/content-picker/content-picker___plak-hier-uw-zoekpagina-url'
 			),
 		},
@@ -150,6 +152,6 @@ export const DEFAULT_ALLOWED_TYPES: ContentPickerType[] = [
 ];
 
 export const REACT_SELECT_DEFAULT_OPTIONS = {
-  className: 'c-select',
-  classNamePrefix: 'c-select'
+	className: 'c-select',
+	classNamePrefix: 'c-select',
 };

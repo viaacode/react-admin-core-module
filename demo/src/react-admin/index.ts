@@ -1,6 +1,6 @@
-export { Config } from './core/config/config.class';
+export { AdminConfigManager } from './core/config/config.class';
 export type {
-	ConfigValue,
+	AdminConfig,
 	EducationOrganisationService,
 	FileConfig,
 	FileService,

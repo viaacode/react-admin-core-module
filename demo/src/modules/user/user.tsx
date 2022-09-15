@@ -4,13 +4,13 @@ import { Route } from 'react-router-dom';
 import { USER_PATH } from '~modules/shared/consts/user.const';
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~modules/shared/layouts';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const UserOverviewPage: FC = () => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	return (
-		<AdminLayout pageTitle={t('admin/users/views/user-overview___gebruikers')}>
+		<AdminLayout pageTitle={tHtml('admin/users/views/user-overview___gebruikers')}>
 			<AdminLayout.Content>
 				<UserOverview />
 			</AdminLayout.Content>
@@ -28,4 +28,3 @@ export const renderAdminUserRoutes = (): ReactNode[] => {
 		/>,
 	];
 };
-

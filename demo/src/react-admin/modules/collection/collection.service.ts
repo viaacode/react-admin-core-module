@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { stringify } from 'query-string';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { CustomError } from '../shared/helpers/custom-error';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
 import { performQuery } from '../shared/helpers/gql';
@@ -134,7 +134,7 @@ export class CollectionService {
 		try {
 			const response = await fetchWithLogout(
 				`${
-					Config.getConfig().database.proxyUrl
+					AdminConfigManager.getConfig().database.proxyUrl
 				}/admin/collections/fetch-with-items-by-id?${stringify({
 					type,
 					assignmentUuid,

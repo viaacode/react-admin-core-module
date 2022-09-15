@@ -17,7 +17,8 @@ import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 import './FileUpload.scss';
@@ -47,7 +48,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	disabled = false,
 	onChange,
 }) => {
-	const { t } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	const [urlToDelete, setUrlToDelete] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
@@ -71,11 +72,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					? files.filter((file) => !allowedTypes.includes(file.type))
 					: [];
 				if (notAllowedFiles.length) {
-					Config.getConfig().services.toastService.showToast({
-						title: Config.getConfig().services.i18n.t(
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: tText(
 							'modules/admin/shared/components/file-upload/file-upload___error'
 						),
-						description: Config.getConfig().services.i18n.t(
+						description: tText(
 							'shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten'
 						),
 						type: ToastType.ERROR,
@@ -88,7 +89,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const uploadedUrls: string[] = [];
 				for (let i = 0; i < (allowMulti ? files.length : 1); i += 1) {
 					uploadedUrls.push(
-						await Config.getConfig().services.assetService.uploadFile(
+						await AdminConfigManager.getConfig().services.assetService.uploadFile(
 							files[i],
 							assetType,
 							ownerId
@@ -102,21 +103,17 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				new CustomError('Failed to upload files in FileUpload component', err, { files })
 			);
 			if (files && files.length > 1 && allowMulti) {
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
-						'modules/admin/shared/components/file-upload/file-upload___error'
-					),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			} else {
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t(
-						'modules/admin/shared/components/file-upload/file-upload___error'
-					),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -143,7 +140,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const newUrls = [...urls];
 				for (let i = newUrls.length - 1; i >= 0; i -= 1) {
 					if (newUrls[i] === url) {
-						await Config.getConfig().services.assetService.deleteFile(url);
+						await AdminConfigManager.getConfig().services.assetService.deleteFile(url);
 						newUrls.splice(i, 1);
 					}
 				}
@@ -153,11 +150,9 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 		} catch (err) {
 			console.error(new CustomError('Failed to delete asset', err, { urls }));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
-					'modules/admin/shared/components/file-upload/file-upload___error'
-				),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
+				description: tText(
 					'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -177,8 +172,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				className="a-delete-button"
 				type="danger-hover"
 				icon="trash-2"
-				ariaLabel={t('shared/components/file-upload/file-upload___verwijder-bestand')}
-				title={t('shared/components/file-upload/file-upload___verwijder-bestand')}
+				ariaLabel={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
+				title={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
 				autoHeight
 				disabled={isProcessing}
 				onClick={() => openDeleteModal(url)}
@@ -260,10 +255,10 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 								label={
 									label ||
 									(allowMulti
-										? Config.getConfig().services.i18n.t(
+										? tText(
 												'shared/components/file-upload/file-upload___selecteer-bestanden'
 										  )
-										: Config.getConfig().services.i18n.t(
+										: tText(
 												'shared/components/file-upload/file-upload___selecteer-een-bestand'
 										  ))
 								}
@@ -273,7 +268,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 							/>
 							<input
 								type="file"
-								title={t(
+								title={tText(
 									'shared/components/file-upload/file-upload___kies-een-bestand'
 								)}
 								multiple={allowMulti}
@@ -288,10 +283,10 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					<Spinner size="large" />
 				))}
 			<ConfirmModal
-				title={t(
+				title={tText(
 					'shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen'
 				)}
-				body={t(
+				body={tHtml(
 					'shared/components/file-upload/file-upload___opgelet-deze-actie-kan-niet-ongedaan-gemaakt-worden'
 				)}
 				isOpen={isDeleteModalOpen}

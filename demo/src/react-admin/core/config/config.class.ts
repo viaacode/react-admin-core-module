@@ -1,13 +1,13 @@
-import { ConfigValue } from './config.types';
+import { AdminConfig } from './config.types';
 
-export class Config {
-	private static config: ConfigValue;
+export class AdminConfigManager {
+	private static config: AdminConfig;
 
-	public static setConfig(config: ConfigValue): void {
+	public static setConfig(config: AdminConfig): void {
 		this.config = config;
 	}
 
-	public static getConfig(): ConfigValue {
+	public static getConfig(): AdminConfig {
 		return this.config;
 	}
 }

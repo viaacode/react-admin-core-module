@@ -11,7 +11,7 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_KLAAR_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
 	titles: [''],
@@ -28,12 +28,12 @@ export const INITIAL_KLAAR_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: Config.getConfig().services.i18n.t(
+	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/klaar___klaar'
 	),
 	type: ContentBlockType.Klaar,
 	components: {
-		name: Config.getConfig().services.i18n.t(
+		name: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/klaar___klaar-titel'
 		),
 		limits: {
@@ -42,20 +42,20 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_KLAAR_COMPONENTS_STATE(),
 		fields: {
 			titles: TEXT_FIELD(
-				Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/klaar___titel-is-verplicht'
 				),
 				{
-					label: Config.getConfig().services.i18n.t(
+					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/content-block/helpers/generators/klaar___titel'
 					),
 					editorType: ContentBlockEditor.TextInput,
 					repeat: {
 						defaultState: '',
-						addButtonLabel: Config.getConfig().services.i18n.t(
+						addButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/klaar___voeg-titel-toe'
 						),
-						deleteButtonLabel: Config.getConfig().services.i18n.t(
+						deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/klaar___verwijder-titel'
 						),
 					},
@@ -69,7 +69,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (isNil(value) || isEmpty(value)) {
 						errorArray.push(
-							Config.getConfig().services.i18n.t(
+							AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-block/helpers/generators/klaar___datum-is-verplicht'
 							)
 						);

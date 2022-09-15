@@ -4,7 +4,8 @@ import { parse } from 'query-string';
 import { PickerItem } from '../../../types/content-picker';
 import { ContentPickerType } from '../ContentPicker.types';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 
 export const parseSearchQuery = (input: string): string => {
 	try {
@@ -28,11 +29,11 @@ export const parseSearchQuery = (input: string): string => {
 		return JSON.stringify(filterDefinition);
 	} catch (err) {
 		console.error('Failed to parse search query input', err);
-		Config.getConfig().services.toastService.showToast({
-			title: Config.getConfig().services.i18n.t(
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title: AdminConfigManager.getConfig().services.i18n.tText(
 				'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
 			),
-			description: Config.getConfig().services.i18n.t(
+			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
 			),
 			type: ToastType.ERROR,

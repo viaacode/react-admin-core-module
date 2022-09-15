@@ -53,6 +53,7 @@ export const ROUTE_PARTS = Object.freeze({
 	permissionGroups: 'permissie-groepen',
 	user: 'gebruikers',
 	translations: 'vertaling',
+	translationsV2: 'vertaling-v2',
 	userGroup: 'gebruikersgroep',
 	interactiveTours: 'interactieve-tours',
 	cookiePolicy: 'cookiebeleid',

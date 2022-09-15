@@ -6,15 +6,19 @@ import { KeyValueEditor } from '@viaa/avo2-components';
 import { Translation, TranslationsState } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
 import { TranslationsOverviewRef } from '../translations.const';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_props, ref) => {
+	const { tText } = useTranslation();
+
 	const [initialTranslations, setInitialTranslations] = useState<Translation[]>([]);
 	const [translations, setTranslations] = useState<Translation[]>([]);
 	const keyPrefix =
-		Config.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 			? 'translations-'
 			: 'TRANSLATIONS_';
 
@@ -48,15 +52,15 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 			setTranslations(translationRows);
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___error'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
 		}
-	}, [convertTranslationsToData]);
+	}, [convertTranslationsToData, tText]);
 
 	useEffect(() => {
 		getTranslations();
@@ -119,18 +123,18 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 
 			await getTranslations();
 
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___success'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/translations/views/translations-overview___success'),
+				description: tText(
 					'admin/translations/views/translations-overview___de-vertalingen-zijn-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save translations', err));
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t('modules/translations/views/translations-overview___error'),
-				description: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/translations/views/translations-overview___error'),
+				description: tText(
 					'admin/translations/views/translations-overview___het-opslaan-van-de-vertalingen-is-mislukt'
 				),
 				type: ToastType.ERROR,

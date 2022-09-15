@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 import { CustomError } from '../helpers/custom-error';
 import { OrganisationService } from '../services/organization-service/organization-service';
 
@@ -13,7 +14,7 @@ export type BasicOrganisation = {
 type UseCompaniesTuple = [BasicOrganisation[], boolean];
 
 export const useCompaniesWithUsers = (): UseCompaniesTuple => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const [companies, setCompanies] = useState<BasicOrganisation[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,9 +32,11 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get organisations from database', err));
-				Config.getConfig().services.toastService.showToast({
-					title: Config.getConfig().services.i18n.t('modules/shared/hooks/use-companies___error'),
-					description: Config.getConfig().services.i18n.t(
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/shared/hooks/use-companies___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'settings/components/profile___het-ophalen-van-de-organisaties-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -42,7 +45,7 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [t]);
+	}, [tHtml]);
 
 	return [companies, isLoading];
 };

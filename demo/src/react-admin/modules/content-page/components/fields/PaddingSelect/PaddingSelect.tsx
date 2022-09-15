@@ -15,36 +15,36 @@ export interface PaddingSelectProps {
 type PaddingDirection = 'top' | 'bottom';
 
 export const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value }) => {
-	const { t } = useTranslation();
+	const { tHtml } = useTranslation();
 
 	const generateOptions = (direction: PaddingDirection) =>
 		[
 			{
-				label: t(
+				label: tHtml(
 					'admin/content-block/components/fields/padding-select/padding-select___geen'
 				),
 				value: 'none',
 			},
 			{
-				label: t(
+				label: tHtml(
 					'admin/content-block/components/fields/padding-select/padding-select___klein'
 				),
 				value: `${direction}-small`,
 			},
 			{
-				label: t(
+				label: tHtml(
 					'admin/content-block/components/fields/padding-select/padding-select___medium'
 				),
 				value: `${direction}`,
 			},
 			{
-				label: t(
+				label: tHtml(
 					'admin/content-block/components/fields/padding-select/padding-select___groot'
 				),
 				value: `${direction}-large`,
 			},
 			{
-				label: t(
+				label: tHtml(
 					'admin/content-block/components/fields/padding-select/padding-select___extra-groot'
 				),
 				value: `${direction}-extra-large`,

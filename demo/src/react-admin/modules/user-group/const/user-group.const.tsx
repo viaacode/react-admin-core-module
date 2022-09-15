@@ -4,7 +4,7 @@ import { Column, UseSortByColumnOptions } from 'react-table';
 import { UserGroup, UserGroupArchief } from '~modules/user-group/types/user-group.types';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { PermissionRow } from '../types/user-group.types';
-import { Config } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { sortBy } from 'lodash-es';
@@ -60,13 +60,13 @@ export const UserGroupTableColumns = (
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
-		label: Config.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedOutUsers,
 	},
 	{
-		label: Config.getConfig().services.i18n.t(
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedInUsers,

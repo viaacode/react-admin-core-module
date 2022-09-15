@@ -12,11 +12,14 @@ import { ITEMS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
 import { CONTENT_PAGE_LABEL_QUERIES } from '../queries/content-page-label.queries';
 
-import { Config, ToastType } from '~core/config';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
 
 export class ContentPageLabelService {
 	private static getQueries() {
-		return CONTENT_PAGE_LABEL_QUERIES[Config.getConfig().database.databaseApplicationType];
+		return CONTENT_PAGE_LABEL_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	}
 
 	public static async fetchContentPageLabels(
@@ -210,11 +213,11 @@ export class ContentPageLabelService {
 					query: 'DELETE_CONTENT_PAGE_LABEL',
 				})
 			);
-			Config.getConfig().services.toastService.showToast({
-				title: Config.getConfig().services.i18n.t(
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
 					'modules/admin/content-page-labels/services/content-page-label___error'
 				),
-				description: Config.getConfig().services.i18n.t(
+				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-page-labels/content-page-label___het-verwijderen-van-de-content-pagina-label-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -228,7 +231,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/admin/content-pages/labels`,
+				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {
@@ -262,7 +265,7 @@ export class ContentPageLabelService {
 	): Promise<LabelObj[]> {
 		try {
 			const reply = await fetchWithLogout(
-				`${Config.getConfig().database.proxyUrl}/admin/content-pages/labels`,
+				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages/labels`,
 				{
 					method: 'POST',
 					headers: {
