@@ -3,7 +3,7 @@ import { flatten, fromPairs, get, groupBy, map } from 'lodash-es';
 import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
-const getKeyPrefix = () =>
+export const getKeyPrefix = () =>
 	AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 		? 'translations-'
 		: 'TRANSLATIONS_';

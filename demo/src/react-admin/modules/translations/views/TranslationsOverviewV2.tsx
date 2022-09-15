@@ -36,6 +36,7 @@ import Loader from '../../shared/components/Loader/Loader';
 import {
 	convertFromDatabaseToList,
 	convertFromListToDatabase,
+	getKeyPrefix,
 } from '~modules/translations/helpers/database-conversions';
 import Html from '~modules/shared/components/Html/Html';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -339,7 +340,11 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		return (
 			<>
 				<CopyToClipboard
-					text={activeTranslation.context + '___' + activeTranslation.key}
+					text={
+						activeTranslation.context.replace(getKeyPrefix(), '') +
+						'___' +
+						activeTranslation.key
+					}
 					onCopy={() =>
 						AdminConfigManager.getConfig().services.toastService.showToast({
 							title: tText(
