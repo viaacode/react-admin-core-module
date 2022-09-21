@@ -8,6 +8,7 @@ export enum NAVIGATIONS_QUERY_KEYS {
 import { TableColumn } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { ReactNode } from 'react';
 
 export const NAVIGATION_PATH = {
 	NAVIGATION_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
@@ -44,7 +45,7 @@ export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem>
 	tooltip: '',
 });
 
-export const GET_PAGE_TYPES_LANG = () => ({
-	create: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___toevoegen'),
-	edit: AdminConfigManager.getConfig().services.i18n.tHtml('admin/menu/menu___aanpassen'),
+export const GET_PAGE_TYPES_LANG = (): Record<string, ReactNode> => ({
+	create: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___toevoegen'),
+	edit: AdminConfigManager.getConfig().services.i18n.tText('admin/menu/menu___aanpassen'),
 });
