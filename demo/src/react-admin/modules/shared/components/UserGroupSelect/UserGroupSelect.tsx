@@ -50,7 +50,12 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		return null;
 	}
 	return (
-		<FormGroup error={error} label={getLabel()} required={required}>
+		<FormGroup
+			error={error}
+			label={getLabel()}
+			required={required}
+			className="c-user-group-select"
+		>
 			<CheckboxGroup>
 				{userGroupOptions.map((userGroupOption) => {
 					return (
