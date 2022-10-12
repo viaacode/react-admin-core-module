@@ -272,11 +272,17 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 							}
 						}
 					});
-					areConfigsValid = Object.keys(newErrors).length === 0;
-					changeContentPageState({
-						type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
-						payload: { configIndex, errors: newErrors },
-					});
+
+					const hasErrors = Object.keys(newErrors).length > 0;
+
+					if (hasErrors) {
+						changeContentPageState({
+							type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
+							payload: { configIndex, errors: newErrors },
+						});
+
+						areConfigsValid = false;
+					}
 				}
 			});
 
