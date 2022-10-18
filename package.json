@@ -51,7 +51,7 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "^2.8.8",
-    "@meemoo/react-components": "2.21.0",
+    "@meemoo/react-components": "2.21.1",
     "@viaa/avo2-components": "2.3.2",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",

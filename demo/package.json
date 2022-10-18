@@ -10,7 +10,7 @@
     "demo:eject": "react-scripts eject"
   },
   "dependencies": {
-    "@meemoo/react-components": "2.21.0",
+    "@meemoo/react-components": "2.21.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
