@@ -180,19 +180,6 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	];
 };
 
-export const CONTENT_RESULT_PATH: Record<string, [string, string]> = {
-	COUNT: [
-		'data.app_content_aggregate.aggregate.count',
-		'data.app_content_page_aggregate.aggregate.count',
-	],
-	GET: ['data.app_content', 'data.app_content_page'],
-	INSERT: [
-		'data.insert_app_content.returning[0].id',
-		'data.insert_app_content_page.returning[0].id',
-	],
-	UPDATE: ['data.update_app_content.affected_rows', 'data.update_app_content_page.affected_rows'],
-};
-
 export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
 }> = {

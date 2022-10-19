@@ -5,21 +5,28 @@ import { AdminConfigManager } from '~core/config';
 
 import {
 	BulkAddSubjectsToProfilesDocument,
+	BulkAddSubjectsToProfilesMutation,
+	BulkAddSubjectsToProfilesMutationVariables,
 	BulkDeleteSubjectsFromProfilesDocument,
+	BulkDeleteSubjectsFromProfilesMutation,
+	BulkDeleteSubjectsFromProfilesMutationVariables,
 	GetContentCountsForUsersDocument,
+	GetContentCountsForUsersQuery,
+	GetContentCountsForUsersQueryVariables,
 	GetDistinctBusinessCategoriesDocument,
+	GetDistinctBusinessCategoriesQuery,
+	GetDistinctBusinessCategoriesQueryVariables,
 	GetProfileNamesQuery as GetProfileNamesQueryAvo,
 	GetUsersQuery as GetUsersQueryAvo,
 } from '~generated/graphql-db-types-avo';
 import {
-	GetProfileIdsQuery,
 	GetProfileNamesQuery as GetProfileNamesQueryHetArchief,
 	GetUsersQuery as GetUsersQueryHetArchief,
 } from '~generated/graphql-db-types-hetarchief';
 import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
 import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { USER_QUERIES } from '~modules/user/queries/users.queries';
+import { USER_QUERIES, UserQueryTypes } from '~modules/user/queries/users.queries';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { dataService } from '../shared/services/data-service';
@@ -45,7 +52,10 @@ export class UserService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
 			const user = userProfile as ProfileHetArchief;
 			return {
 				profileId: user.id,
@@ -122,7 +132,8 @@ export class UserService {
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted =
-				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.hetArchief
 					? where
 					: {
 							...where,
@@ -146,20 +157,14 @@ export class UserService {
 				query: this.getQueries().GetUsersDocument,
 			});
 
-			if (response.errors) {
-				throw new CustomError('Response from graphql contains errors', null, {
-					response,
-				});
-			}
-
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects =
-				response?.data?.users_profile || response?.data?.users_summary_view || [];
+				response?.users_profile || response?.users_summary_view || [];
 			const profiles: CommonUser[] = compact(userProfileObjects.map(this.adaptProfile));
 
 			const profileCount =
-				response?.data?.users_summary_view_aggregate?.aggregate?.count ||
-				response?.data?.users_profile_aggregate?.aggregate?.count ||
+				response?.users_summary_view_aggregate?.aggregate?.count ||
+				response?.users_profile_aggregate?.aggregate?.count ||
 				0;
 
 			if (!profiles) {
@@ -180,7 +185,8 @@ export class UserService {
 	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<CommonUser>[]> {
 		try {
 			const response = await dataService.query<
-				GetProfileNamesQueryAvo & GetProfileNamesQueryHetArchief
+				UserQueryTypes['GetProfileNamesQuery'],
+				UserQueryTypes['GetProfileNamesQueryVariables']
 			>({
 				query: this.getQueries().GetProfileNamesDocument,
 				variables: {
@@ -188,17 +194,15 @@ export class UserService {
 				},
 			});
 
-			if (response.errors) {
-				throw new CustomError('Response from graphql contains errors', null, {
-					response,
-				});
-			}
-
 			/* istanbul ignore next */
 			if (
-				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.hetArchief
 			) {
-				return (response?.data?.users_profile || []).map(
+				return (
+					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])?.users_profile ||
+					[]
+				).map(
 					(
 						profileEntry: GetProfileNamesQueryHetArchief['users_profile'][0]
 					): Partial<CommonUser> => ({
@@ -208,7 +212,10 @@ export class UserService {
 					})
 				);
 			} else {
-				return (response?.data?.users_summary_view || []).map(
+				return (
+					(response as UserQueryTypes['GetProfileNamesQueryAvo'])?.users_summary_view ||
+					[]
+				).map(
 					(
 						profileEntry: GetProfileNamesQueryAvo['users_summary_view'][0]
 					): Partial<CommonUser> => ({
@@ -226,35 +233,39 @@ export class UserService {
 		}
 	}
 
-	static async getProfileIds(where: any = {}): Promise<string[]> {
-		let variables: any;
+	static async getProfileIds(
+		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
+	): Promise<string[]> {
+		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null;
 		try {
-			variables = where
-				? {
-						where,
-				  }
-				: {};
-			const response = await dataService.query({
+			variables = {
+				where: where || {},
+			};
+			const response = await dataService.query<
+				UserQueryTypes['GetProfileIdsQuery'],
+				UserQueryTypes['GetProfileIdsQueryVariables']
+			>({
 				variables,
-				query: this.getQueries().GetProfileIds,
+				query: this.getQueries().GetProfileIdsDocument,
 			});
-			if (response.errors) {
-				throw new CustomError('Response from gragpql contains errors', null, {
-					response,
-				});
-			}
-			if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+
+			if (
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.avo
+			) {
+				// avo
 				return compact(
-					get(response, 'data.users_summary_view' || []).map(
-						(user: Partial<Avo.User.User>) => get(user, 'profile_id')
-					)
+					(
+						(response as UserQueryTypes['GetProfileIdsQueryAvo']).users_summary_view ||
+						[]
+					).map((user) => user?.profile_id)
 				);
 			}
 			// archief
 			return compact(
-				get(response, 'data.users_profile' || []).map(
-					(user: GetProfileIdsQuery['users_profile']) => get(user, 'id')
-				)
+				(
+					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
+				).map((user) => user?.id)
 			);
 		} catch (err) {
 			throw new CustomError('Failed to get profile ids from the database', err, {
@@ -268,7 +279,10 @@ export class UserService {
 		profileIds: string[],
 		isBlocked: boolean
 	): Promise<void> {
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
 			return;
 		}
 
@@ -307,20 +321,24 @@ export class UserService {
 		}
 	}
 
-	static async fetchDistinctBusinessCategories() {
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+	static async fetchDistinctBusinessCategories(): Promise<string[]> {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
 			return [];
 		}
 
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				GetDistinctBusinessCategoriesQuery,
+				GetDistinctBusinessCategoriesQueryVariables
+			>({
 				query: GetDistinctBusinessCategoriesDocument,
 			});
-			if (response.errors) {
-				throw new CustomError('GraphQL query has errors', null, { response });
-			}
-			return get(response, 'data.users_profiles', []).map(
-				(profile: Partial<Avo.User.Profile>) => profile.business_category
+
+			return compact(
+				(response.users_profiles || []).map((profile) => profile.business_category)
 			);
 		} catch (err) {
 			throw new CustomError('Failed to get distinct business categories from profiles', err, {
@@ -331,22 +349,27 @@ export class UserService {
 
 	static async fetchIdps() {
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				UserQueryTypes['GetIdpsQuery'],
+				UserQueryTypes['GetIdpsQueryVariables']
+			>({
 				query: this.getQueries().GetIdpsDocument,
 			});
-			if (response.errors) {
-				throw new CustomError('GraphQL query has errors', null, { response });
-			}
+
 			/* istanbul ignore next */
 			if (
-				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.hetArchief
 			) {
-				return get(response, 'data.users_identity_provider', []).map(
-					(idp: { name: string }) => idp.name
-				);
+				return (
+					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
+						.users_identity_provider || []
+				).map((idp) => idp.name);
 			}
 
-			return get(response, 'data.users_idps', []).map((idp: { value: string }) => idp.value);
+			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
+				(idp) => idp.value
+			);
 		} catch (err) {
 			throw new CustomError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
@@ -360,7 +383,8 @@ export class UserService {
 		transferToProfileId?: string
 	): Promise<void> {
 		let url: string | undefined;
-		const isAvo = AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
+		const isAvo =
+			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
 			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
@@ -394,7 +418,11 @@ export class UserService {
 	}
 
 	static async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
+			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
@@ -406,28 +434,25 @@ export class UserService {
 		}
 
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				GetContentCountsForUsersQuery,
+				GetContentCountsForUsersQueryVariables
+			>({
 				query: GetContentCountsForUsersDocument,
 				variables: {
 					profileIds,
 				},
 			});
 
-			if (response.errors) {
-				throw new CustomError('Response from gragpql contains errors', null, {
-					response,
-				});
-			}
-
 			return {
-				publicCollections: get(response, 'data.publicCollections.aggregate.count'),
-				privateCollections: get(response, 'data.privateCollections.aggregate.count'),
-				assignments: get(response, 'data.assignments.aggregate.count', '-'),
+				publicCollections: response.publicCollections.aggregate?.count || 0,
+				privateCollections: response.privateCollections.aggregate?.count || 0,
+				assignments: response.assignments.aggregate?.count || 0,
 				bookmarks:
-					get(response, 'data.collectionBookmarks.aggregate.count ', 0) +
-					get(response, 'data.itemBookmarks.aggregate.count', 0),
-				publicContentPages: get(response, 'data.publicContentPages.aggregate.count'),
-				privateContentPages: get(response, 'data.privateContentPages.aggregate.count'),
+					(response.collectionBookmarks.aggregate?.count || 0) +
+					(response.itemBookmarks.aggregate?.count || 0),
+				publicContentPages: response.publicContentPages.aggregate?.count || 0,
+				privateContentPages: response.privateContentPages.aggregate?.count || 0,
 			};
 		} catch (err) {
 			throw new CustomError('Failed to get content counts for users from the database', err, {
@@ -441,7 +466,11 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
+			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
 		}
 
@@ -450,7 +479,10 @@ export class UserService {
 			await UserService.bulkRemoveSubjectsFromProfiles(subjects, profileIds);
 
 			// Add the subjects
-			const response = await dataService.query({
+			await dataService.query<
+				BulkAddSubjectsToProfilesMutation,
+				BulkAddSubjectsToProfilesMutationVariables
+			>({
 				query: BulkAddSubjectsToProfilesDocument,
 				variables: {
 					subjects: flatten(
@@ -464,10 +496,6 @@ export class UserService {
 				},
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
-
-			if (response.errors) {
-				throw new CustomError('GraphQL query has errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to bulk add subjects to profiles', err, {
 				subjects,
@@ -481,12 +509,19 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
+			console.info("removing subjects from profiles isn't supported for hetarchief");
 			return;
 		}
 
 		try {
-			const response = await dataService.query({
+			await dataService.query<
+				BulkDeleteSubjectsFromProfilesMutation,
+				BulkDeleteSubjectsFromProfilesMutationVariables
+			>({
 				query: BulkDeleteSubjectsFromProfilesDocument,
 				variables: {
 					subjects,
@@ -494,9 +529,6 @@ export class UserService {
 				},
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
-			if (response.errors) {
-				throw new CustomError('GraphQL query has errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to bulk delete subjects from profiles', err, {
 				subjects,

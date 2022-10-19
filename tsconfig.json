@@ -23,6 +23,7 @@
     "outDir": "dist",
     "allowJs": true,
     "isolatedModules": true,
+    "strictNullChecks": true,
     "paths": {
       "~core/*": [
         "./demo/src/react-admin/core/*"

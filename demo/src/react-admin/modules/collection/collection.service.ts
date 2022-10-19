@@ -4,16 +4,22 @@ import { stringify } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '../shared/helpers/custom-error';
 import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
-import { performQuery } from '../shared/helpers/gql';
 import { isUuid } from '../shared/helpers/uuid';
 
 import { ContentTypeNumber } from './collection.types';
 
 import {
 	GetPublicCollectionsByIdDocument,
+	GetPublicCollectionsByIdQuery,
+	GetPublicCollectionsByIdQueryVariables,
 	GetPublicCollectionsByTitleDocument,
+	GetPublicCollectionsByTitleQuery,
+	GetPublicCollectionsByTitleQueryVariables,
 	GetPublicCollectionsDocument,
+	GetPublicCollectionsQuery,
+	GetPublicCollectionsQueryVariables,
 } from '~generated/graphql-db-types-avo';
+import { dataService } from '~modules/shared/services/data-service';
 
 export class CollectionService {
 	/**
@@ -29,16 +35,15 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		try {
 			// retrieve collections
-			const response = await performQuery(
-				{
-					query: GetPublicCollectionsDocument,
-					variables: { limit, typeId },
-				},
-				['data.app_collections'],
-				'Het ophalen van de collecties is mislukt.'
-			);
+			const response = await dataService.query<
+				GetPublicCollectionsQuery,
+				GetPublicCollectionsQueryVariables
+			>({
+				query: GetPublicCollectionsDocument,
+				variables: { limit, typeId },
+			});
 
-			return response || [];
+			return (response.app_collections || []) as Avo.Collection.Collection[];
 		} catch (err) {
 			throw new CustomError('Het ophalen van de collecties is mislukt.', err, {
 				query: 'GET_PUBLIC_COLLECTIONS',
@@ -54,28 +59,30 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		try {
 			const isUuidFormat = isUuid(titleOrId);
-			const variables: any = {
+			const variables: Partial<
+				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
+			> = {
 				limit,
 				typeId: isCollection ? ContentTypeNumber.collection : ContentTypeNumber.bundle,
 			};
 			if (isUuidFormat) {
-				variables.id = titleOrId;
+				(variables as GetPublicCollectionsByIdQueryVariables).id = titleOrId;
 			} else {
-				variables.title = `%${titleOrId}%`;
+				(variables as GetPublicCollectionsByTitleQueryVariables).title = `%${titleOrId}%`;
 			}
 
-			return (
-				(await performQuery(
-					{
-						variables,
-						query: isUuidFormat
-							? GetPublicCollectionsByIdDocument
-							: GetPublicCollectionsByTitleDocument,
-					},
-					['data.app_collections'],
-					'Failed to retrieve items by title or external id.'
-				)) || []
-			);
+			const response = await dataService.query<
+				GetPublicCollectionsByIdQuery | GetPublicCollectionsByTitleQuery,
+				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
+			>({
+				query: isUuidFormat
+					? GetPublicCollectionsByIdDocument
+					: GetPublicCollectionsByTitleDocument,
+				variables: variables as
+					| GetPublicCollectionsByIdQueryVariables
+					| GetPublicCollectionsByTitleQueryVariables,
+			});
+			return response.app_collections as Avo.Collection.Collection[];
 		} catch (err) {
 			throw new CustomError('Failed to fetch collections or bundles', err, {
 				query: 'GET_PUBLIC_COLLECTIONS_BY_ID or GET_PUBLIC_COLLECTIONS_BY_TITLE',

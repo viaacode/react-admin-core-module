@@ -1,13 +1,16 @@
 import { Avo } from '@viaa/avo2-types';
 import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
-import { get } from 'lodash-es';
 
 import { CustomError } from '../../helpers/custom-error';
 import { dataService } from '../data-service';
 
 import {
 	FetchCollectionRelationsBySubjectsDocument,
+	FetchCollectionRelationsBySubjectsQuery,
+	FetchCollectionRelationsBySubjectsQueryVariables,
 	FetchItemRelationsBySubjectsDocument,
+	FetchItemRelationsBySubjectsQuery,
+	FetchItemRelationsBySubjectsQueryVariables,
 } from '~generated/graphql-db-types-avo';
 
 export class RelationService {
@@ -23,21 +26,23 @@ export class RelationService {
 				relationType,
 				...(subjectIds ? { subjectIds } : {}),
 			};
-			const response = await dataService.query({
+			const response = await dataService.query<
+				FetchCollectionRelationsBySubjectsQuery | FetchItemRelationsBySubjectsQuery,
+				| FetchCollectionRelationsBySubjectsQueryVariables
+				| FetchItemRelationsBySubjectsQueryVariables
+			>({
 				variables,
 				query: isCollection
 					? FetchCollectionRelationsBySubjectsDocument
 					: FetchItemRelationsBySubjectsDocument,
 			});
-			if (response.errors) {
-				throw new CustomError('Failed due to graphql errors', null, { response });
+			if (isCollection) {
+				return ((response as FetchCollectionRelationsBySubjectsQuery)
+					.app_collection_relations || []) as RelationEntry<Avo.Collection.Collection>[];
+			} else {
+				return ((response as FetchItemRelationsBySubjectsQuery).app_item_relations ||
+					[]) as RelationEntry<Avo.Item.Item>[];
 			}
-			return (
-				get(
-					response,
-					isCollection ? 'data.app_collection_relations' : 'data.app_item_relations'
-				) || []
-			);
 		} catch (err) {
 			throw new CustomError('Failed to get relation from the database', err, {
 				variables,

@@ -1,19 +1,18 @@
 import { Avo } from '@viaa/avo2-types';
 import { compact, has, omit, without } from 'lodash-es';
-import { performQuery } from '~modules/shared/helpers/gql';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
-import { CONTENT_BLOCKS_RESULT_PATH } from '../const/content-block.common.consts';
 import {
 	convertBlocksToDatabaseFormat,
 	convertBlockToDatabaseFormat,
 } from '../helpers/get-published-state';
-import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
+import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { UpdateContentBlockMutationVariables as UpdateContentBlockMutationVariablesAvo } from '~generated/graphql-db-types-avo';
 
 export class ContentBlockService {
 	private static getQueries() {
@@ -31,9 +30,16 @@ export class ContentBlockService {
 		try {
 			const contentBlock = convertBlockToDatabaseFormat(contentBlockConfig);
 
-			await dataService.query({
+			await dataService.query<
+				ContentPageQueryTypes['UpdateContentBlockMutation'],
+				ContentPageQueryTypes['UpdateContentBlockMutationVariables']
+			>({
 				query: this.getQueries().UpdateContentBlockDocument,
-				variables: { contentBlock, id: contentBlockConfig.id },
+				variables: {
+					contentBlock:
+						contentBlock as UpdateContentBlockMutationVariablesAvo['contentBlock'],
+					id: contentBlockConfig.id as number,
+				},
 			});
 		} catch (err) {
 			console.error(
@@ -61,7 +67,10 @@ export class ContentBlockService {
 	 */
 	public static async deleteContentBlock(id: number) {
 		try {
-			return await dataService.query({
+			return await dataService.query<
+				ContentPageQueryTypes['DeleteContentBlockMutation'],
+				ContentPageQueryTypes['DeleteContentBlockMutationVariables']
+			>({
 				query: this.getQueries().DeleteContentBlockDocument,
 				variables: { id },
 			});
@@ -84,10 +93,10 @@ export class ContentBlockService {
 
 	private static cleanContentBlocksBeforeDatabaseInsert(
 		dbContentBlocks: Partial<Avo.ContentPage.Block>[]
-	) {
+	): ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'] {
 		return (dbContentBlocks || []).map((block) =>
 			omit(block, 'enum_content_block_type', '__typename', 'id')
-		);
+		) as ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'];
 	}
 
 	/**
@@ -106,16 +115,23 @@ export class ContentBlockService {
 			const dbBlocks: Partial<Avo.ContentPage.Block>[] =
 				convertBlocksToDatabaseFormat(contentBlockConfigs);
 			(dbBlocks || []).forEach((block) => (block.content_id = contentId));
-			const ids: number[] = await performQuery(
-				{
-					query: this.getQueries().InsertContentBlocksDocument,
-					variables: {
-						contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(dbBlocks),
-					},
+
+			const response = await dataService.query<
+				ContentPageQueryTypes['InsertContentBlocksMutation'],
+				ContentPageQueryTypes['InsertContentBlocksMutationVariables']
+			>({
+				query: this.getQueries().InsertContentBlocksDocument,
+				variables: {
+					contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(dbBlocks) as any, // TODO Figure out why type doesn't work
 				},
-				CONTENT_BLOCKS_RESULT_PATH.INSERT,
-				'Failed to insert content blocks'
-			);
+			});
+			const ids: number[] =
+				(
+					(response as ContentPageQueryTypes['InsertContentBlocksMutationAvo'])
+						.insert_app_content_blocks ||
+					(response as ContentPageQueryTypes['InsertContentBlocksMutationHetArchief'])
+						.insert_app_content_block
+				)?.returning?.map((block) => block.id) || [];
 
 			return contentBlockConfigs.map((block, index) => ({
 				...block,

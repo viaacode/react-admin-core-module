@@ -34,7 +34,10 @@ import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { dataService } from '~modules/shared/services/data-service';
-import { CONTENT_PAGE_QUERIES } from '~modules/content-page/queries/content-pages.queries';
+import {
+	CONTENT_PAGE_QUERIES,
+	ContentPageQueryTypes,
+} from '~modules/content-page/queries/content-pages.queries';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
@@ -108,8 +111,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
 			let contentUserGroupIds: string[] =
-				get(response, 'data.app_content[0].user_group_ids') ||
-				get(response, 'data.app_content_page[0].user_group_ids') ||
+				response.app_content[0].user_group_ids ||
+				response.app_content_page[0].user_group_ids ||
 				[];
 			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
@@ -166,9 +169,12 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	// TODO -- skipped for  now
 	useEffect(() => {
 		if (navigationItem.content_type === 'CONTENT_PAGE' && navigationItem.content_path) {
-			// Check if permissions are more strict than the permissions on the content_page
+			// Check if permissions are stricter than the permissions on the content_page
 			dataService
-				.query({
+				.query<
+					ContentPageQueryTypes['GetPermissionsFromContentPageByPathQuery'],
+					ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryVariables']
+				>({
 					query: getQueries().GetPermissionsFromContentPageByPathDocument,
 					variables: {
 						path: navigationItem.content_path,

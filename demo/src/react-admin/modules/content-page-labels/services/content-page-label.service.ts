@@ -1,7 +1,7 @@
 import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ContentPageTypeSchema } from '@viaa/avo2-types/types/content-page';
-import { compact, get, isNil } from 'lodash-es';
+import { compact, isNil } from 'lodash-es';
 import { GetContentPageLabelsQuery as GetContentPageLabelsQueryAvo } from '~generated/graphql-db-types-avo';
 import { GetContentPageLabelsQuery as GetContentPageLabelsQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 
@@ -10,10 +10,12 @@ import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { dataService } from '../../shared/services/data-service';
 import { ITEMS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
-import { CONTENT_PAGE_LABEL_QUERIES } from '../queries/content-page-label.queries';
+import {
+	CONTENT_PAGE_LABEL_QUERIES,
+	ContentPageLabelQueryTypes,
+} from '../queries/content-page-label.queries';
 
 import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
 
 export class ContentPageLabelService {
 	private static getQueries() {
@@ -29,7 +31,8 @@ export class ContentPageLabelService {
 		where: any,
 		itemsPerPage: number = ITEMS_PER_PAGE
 	): Promise<[ContentPageLabel[], number]> {
-		let variables: any;
+		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null =
+			null;
 		try {
 			variables = {
 				where,
@@ -38,16 +41,17 @@ export class ContentPageLabelService {
 				orderBy: [{ [sortColumn]: sortOrder }],
 			};
 			const response = await dataService.query<
-				GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief
+				ContentPageLabelQueryTypes['GetContentPageLabelsQuery'],
+				ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables']
 			>({
-				variables,
 				query: this.getQueries().GetContentPageLabelsDocument,
+				variables,
 			});
 
 			/* istanbul ignore next */
 			const contentPageLabel: ContentPageLabel[] = (
-				(response?.data as GetContentPageLabelsQueryAvo)?.app_content_labels ||
-				(response?.data as GetContentPageLabelsQueryHetArchief)?.app_content_label ||
+				(response as GetContentPageLabelsQueryAvo)?.app_content_labels ||
+				(response as GetContentPageLabelsQueryHetArchief)?.app_content_label ||
 				[]
 			).map(
 				(labelObj): ContentPageLabel => ({
@@ -60,9 +64,9 @@ export class ContentPageLabelService {
 				})
 			);
 			const contentPageLabelCount: number =
-				(response.data as GetContentPageLabelsQueryAvo)?.app_content_labels_aggregate
-					?.aggregate?.count ||
-				(response.data as GetContentPageLabelsQueryHetArchief)?.app_content_label_aggregate
+				(response as GetContentPageLabelsQueryAvo)?.app_content_labels_aggregate?.aggregate
+					?.count ||
+				(response as GetContentPageLabelsQueryHetArchief)?.app_content_label_aggregate
 					?.aggregate?.count ||
 				0;
 
@@ -81,44 +85,14 @@ export class ContentPageLabelService {
 		}
 	}
 
-	public static async fetchContentPageLabel(id: string): Promise<ContentPageLabel> {
-		try {
-			const response = await dataService.query({
-				query: this.getQueries().GetContentPageLabelByIdDocument,
-				variables: { id },
-			});
-
-			const contentPageLabelObj =
-				get(response, 'data.app_content_labels[0]') ||
-				get(response, 'data.app_content_label[0]');
-
-			if (!contentPageLabelObj) {
-				throw new CustomError('Failed to find content page label by id', null, {
-					response,
-				});
-			}
-
-			return {
-				id: contentPageLabelObj.id,
-				label: contentPageLabelObj.label,
-				content_type: contentPageLabelObj.content_type,
-				link_to: contentPageLabelObj.link_to,
-				created_at: contentPageLabelObj.created_at,
-				updated_at: contentPageLabelObj.updated_at,
-			};
-		} catch (err) {
-			throw new CustomError('Failed to get content page label by id', err, {
-				query: 'GET_CONTENT_PAGE_LABEL_BY_ID',
-				variables: { id },
-			});
-		}
-	}
-
 	public static async insertContentPageLabel(
 		contentPageLabel: ContentPageLabel
 	): Promise<number> {
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				ContentPageLabelQueryTypes['InsertContentPageLabelMutation'],
+				ContentPageLabelQueryTypes['InsertContentPageLabelMutationVariables']
+			>({
 				query: this.getQueries().InsertContentPageLabelDocument,
 				variables: {
 					contentPageLabel: {
@@ -127,15 +101,11 @@ export class ContentPageLabelService {
 					} as Partial<ContentPageLabel>,
 				},
 			});
-			if (response.errors) {
-				throw new CustomError('Failed to insert content page label in the database', null, {
-					response,
-					errors: response.errors,
-				});
-			}
 			const contentPageLabelId =
-				get(response, 'data.insert_app_content_labels.returning[0].id') ||
-				get(response, 'data.insert_app_content_label.returning[0].id');
+				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationAvo'])
+					.insert_app_content_labels?.returning?.[0]?.id ||
+				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationHetArchief'])
+					.insert_app_content_label?.returning?.[0]?.id;
 			if (isNil(contentPageLabelId)) {
 				throw new CustomError(
 					'Response from database does not contain the id of the inserted content page label',
@@ -154,7 +124,10 @@ export class ContentPageLabelService {
 
 	static async updateContentPageLabel(contentPageLabelInfo: ContentPageLabel) {
 		try {
-			const response = await dataService.query({
+			await dataService.query<
+				ContentPageLabelQueryTypes['UpdateContentPageLabelMutation'],
+				ContentPageLabelQueryTypes['UpdateContentPageLabelMutationVariables']
+			>({
 				query: this.getQueries().UpdateContentPageLabelDocument,
 				variables: {
 					contentPageLabel: {
@@ -165,62 +138,10 @@ export class ContentPageLabelService {
 					contentPageLabelId: contentPageLabelInfo.id,
 				},
 			});
-			if (response.errors) {
-				throw new CustomError('Failed to update content page label in the database', null, {
-					response,
-					errors: response.errors,
-				});
-			}
 		} catch (err) {
 			throw new CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
-			});
-		}
-	}
-
-	public static async deleteContentPageLabel(contentPageLabelId: number | null | undefined) {
-		try {
-			if (isNil(contentPageLabelId)) {
-				throw new CustomError(
-					'Failed to delete content page label since the id is nil',
-					null,
-					{
-						contentPageLabelId,
-					}
-				);
-			}
-			const response = await dataService.query({
-				query: this.getQueries().DeleteContentPageLabelByIdDocument,
-				variables: {
-					id: contentPageLabelId,
-				},
-			});
-			if (response.errors) {
-				throw new CustomError(
-					'Failed to delete content page label from the database',
-					null,
-					{
-						response,
-						errors: response.errors,
-					}
-				);
-			}
-		} catch (err) {
-			console.error(
-				new CustomError('Failed to delete content page label from the database', err, {
-					contentPageLabelId,
-					query: 'DELETE_CONTENT_PAGE_LABEL',
-				})
-			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
-					'modules/admin/content-page-labels/services/content-page-label___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/content-page-label___het-verwijderen-van-de-content-pagina-label-is-mislukt'
-				),
-				type: ToastType.ERROR,
 			});
 		}
 	}
@@ -245,8 +166,7 @@ export class ContentPageLabelService {
 				}
 			);
 
-			const labelObj = await reply.json();
-			return labelObj;
+			return await reply.json();
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get content page label objects by content type and labels',
@@ -279,8 +199,7 @@ export class ContentPageLabelService {
 				}
 			);
 
-			const labelObj = await reply.json();
-			return labelObj;
+			return await reply.json();
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get content page labels by content type and label ids',

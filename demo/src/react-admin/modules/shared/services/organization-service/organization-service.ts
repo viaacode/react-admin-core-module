@@ -1,4 +1,4 @@
-import { get, sortBy } from 'lodash-es';
+import { sortBy } from 'lodash-es';
 
 import { Avo } from '@viaa/avo2-types';
 
@@ -13,7 +13,9 @@ import { GetOrganizationsWithUsersQuery as GetOrganizationsWithUsersQueryHetArch
 
 export class OrganisationService {
 	private static getQueries() {
-		return ORGANIZATION_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
+		return ORGANIZATION_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	}
 
 	public static async fetchOrganisationsWithUsers(): Promise<
@@ -26,13 +28,13 @@ export class OrganisationService {
 				query: this.getQueries().GetOrganizationsWithUsersDocument,
 			});
 
-			if (response.errors) {
-				throw new CustomError('GraphQL response contains errors', null, { response });
-			}
-
-			let organisations: Partial<Avo.Organization.Organization>[];
-			if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
-				organisations = get(response, 'data.shared_organisations_with_users');
+			let organisations;
+			if (
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.avo
+			) {
+				organisations = (response as GetOrganizationsWithUsersQueryAvo)
+					.shared_organisations_with_users;
 
 				if (!organisations) {
 					throw new CustomError('Response does not contain any organisations', null, {
@@ -41,14 +43,14 @@ export class OrganisationService {
 				}
 			} else {
 				organisations = (
-					response.data as GetOrganizationsWithUsersQueryHetArchief
+					response as GetOrganizationsWithUsersQueryHetArchief
 				).maintainer_users_profile.map((maintainerWrap) => ({
 					name: maintainerWrap.maintainer.schema_name || undefined,
 					or_id: maintainerWrap.maintainer.schema_identifier,
 				}));
 			}
 
-			return sortBy(organisations, 'name');
+			return sortBy(organisations, 'name') as Partial<Avo.Organization.Organization>[];
 		} catch (err) {
 			throw new CustomError('Failed to get organisations from the database', err, {
 				query: 'GET_ORGANISATIONS_WITH_USERS',

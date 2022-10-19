@@ -23,7 +23,7 @@ export interface NavigationItem {
 	description: string | null;
 	user_group_ids: string[] | null;
 	content_type: ContentPickerTypeSchema | null;
-	content_path: string | number | null;
+	content_path: string | null;
 	link_target: '_blank' | '_self' | null;
 	position: number;
 	placement: string | null;
