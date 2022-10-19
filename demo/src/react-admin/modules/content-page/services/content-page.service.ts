@@ -323,9 +323,9 @@ export class ContentPageService {
 
 			const dbContentPageCount: number =
 				(response as ContentPageQueryTypes['GetContentPagesQueryAvo']).app_content_aggregate
-					.aggregate?.count ||
+					?.aggregate?.count ||
 				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
-					.app_content_page_aggregate.aggregate?.count ||
+					.app_content_page_aggregate?.aggregate?.count ||
 				0;
 
 			if (!dbContentPages) {

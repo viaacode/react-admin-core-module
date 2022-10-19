@@ -250,7 +250,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 									),
 									accessor: 'key',
 									Cell: ({ row }: { row: Row<TranslationV2> }) => {
-										const parts = row.original.label?.split('___');
+										const parts = row.original.label?.split('___') || [];
 										return (
 											<>
 												<div>

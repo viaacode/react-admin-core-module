@@ -50,8 +50,8 @@ export class ContentPageLabelService {
 
 			/* istanbul ignore next */
 			const contentPageLabel: ContentPageLabel[] = (
-				(response as GetContentPageLabelsQueryAvo)?.app_content_labels ||
-				(response as GetContentPageLabelsQueryHetArchief)?.app_content_label ||
+				(response as GetContentPageLabelsQueryAvo).app_content_labels ||
+				(response as GetContentPageLabelsQueryHetArchief).app_content_label ||
 				[]
 			).map(
 				(labelObj): ContentPageLabel => ({
@@ -64,9 +64,9 @@ export class ContentPageLabelService {
 				})
 			);
 			const contentPageLabelCount: number =
-				(response as GetContentPageLabelsQueryAvo)?.app_content_labels_aggregate?.aggregate
+				(response as GetContentPageLabelsQueryAvo).app_content_labels_aggregate?.aggregate
 					?.count ||
-				(response as GetContentPageLabelsQueryHetArchief)?.app_content_label_aggregate
+				(response as GetContentPageLabelsQueryHetArchief).app_content_label_aggregate
 					?.aggregate?.count ||
 				0;
 

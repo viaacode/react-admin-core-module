@@ -58,12 +58,6 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			],
 		},
 		{
-			label: i18n.tHtml('admin/admin___content-pagina-labels'),
-			location: ADMIN_PATH.CONTENT_PAGE_LABEL_OVERVIEW,
-			key: 'content-page-labels',
-			exact: false,
-		},
-		{
 			label: i18n.tHtml('admin/admin___vertaling'),
 			location: ADMIN_PATH.TRANSLATIONS,
 			key: 'translations',
