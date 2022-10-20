@@ -1,0 +1,18 @@
+overwrite: true
+schema:
+  - ${GRAPHQL_URL_HETARCHIEF}:
+      headers:
+        x-hasura-admin-secret: ${GRAPHQL_SECRET_HETARCHIEF}
+
+documents:
+  - "./src/**/*.graphql"
+  # avo specific types are generated using a separate codegen config file, otherwise we have naming conflicts between the queries
+  - "!**/queries/avo/*.graphql"
+  - "!**/queries/avo/*.graphql"
+  - "!**/queries/avo/*.graphql"
+generates:
+  src/modules/admin-core/shared/generated/graphql-db-types-hetarchief.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
