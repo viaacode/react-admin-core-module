@@ -5,7 +5,7 @@ import { DataController } from './controllers/data.controller';
 import { DataPermissionsService } from './services/data-permissions.service';
 import { DataService } from './services/data.service';
 
-import { ContentPagesModule } from '~modules/admin/content-pages';
+import { ContentPagesModule } from '../content-pages/content-pages.module';
 
 @Module({
 	controllers: [DataController],

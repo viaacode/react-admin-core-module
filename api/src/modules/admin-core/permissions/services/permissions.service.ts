@@ -1,28 +1,23 @@
-import { Injectable, Logger } from '@nestjs/common';
-
-import { PermissionResponse } from '../types';
-
+import { Injectable } from '@nestjs/common';
+import { DataService } from '../../data/services/data.service';
 import {
 	GetPermissionsDocument,
 	GetPermissionsQuery,
-} from '~generated/graphql-db-types-hetarchief';
-import { DataService } from '../data/services/data.service';
+	GetPermissionsQueryVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 @Injectable()
 export class PermissionsService {
-	private logger: Logger = new Logger(PermissionsService.name, {
-		timestamp: true,
-	});
-
 	constructor(private dataService: DataService) {}
 
-	public async getPermissions(): Promise<PermissionResponse[]> {
-		const {
-			data: { users_permission: permissions },
-		} = await this.dataService.execute<GetPermissionsQuery>(
-			GetPermissionsDocument,
-		);
+	public async getPermissions(): Promise<
+		GetPermissionsQuery['users_permission']
+	> {
+		const response = await this.dataService.execute<
+			GetPermissionsQuery,
+			GetPermissionsQueryVariables
+		>(GetPermissionsDocument);
 
-		return permissions;
+		return response.users_permission;
 	}
 }

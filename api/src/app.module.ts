@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ContentPagesModule } from './modules/admin-core/content-pages';
-import { AdminNavigationsModule } from './modules/admin-core/navigations';
-import { AdminOrganisationsModule } from './modules/admin-core/organisations';
-import { AdminPermissionsModule } from './modules/admin-core/permissions';
-import { PlayerTicketModule } from './modules/admin-core/player-ticket';
-import { SiteVariablesModule } from './modules/admin-core/site-variables';
-import { AdminTranslationsModule } from './modules/admin-core/translations';
-import { AdminUserGroupsModule } from './modules/admin-core/user-groups';
+import { ContentPagesModule } from './modules/admin-core/content-pages/content-pages.module';
+import { AdminNavigationsModule } from './modules/admin-core/navigations/admin-navigations.module';
+import { AdminOrganisationsModule } from './modules/admin-core/organisations/admin-organisations.module';
+import { AdminPermissionsModule } from './modules/admin-core/permissions/permissions.module';
+import { PlayerTicketModule } from './modules/admin-core/player-ticket/player-ticket.module';
+import { SiteVariablesModule } from './modules/admin-core/site-variables/site-variables.module';
+import { AdminTranslationsModule } from './modules/admin-core/translations/translations.module';
+import { AdminUserGroupsModule } from './modules/admin-core/user-groups/user-groups.module';
+import { StatusModule } from './modules/status';
 
 @Module({
 	imports: [
+		StatusModule,
 		ContentPagesModule,
 		AdminNavigationsModule,
 		AdminOrganisationsModule,
@@ -21,7 +21,5 @@ import { AdminUserGroupsModule } from './modules/admin-core/user-groups';
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
 	],
-	controllers: [AppController],
-	providers: [AppService],
 })
 export class AppModule {}

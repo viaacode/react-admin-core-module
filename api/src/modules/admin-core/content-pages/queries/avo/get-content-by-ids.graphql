@@ -1,5 +1,5 @@
-query getContentById($id: uuid!) {
-	app_content_page(where: { id: { _eq: $id }, is_deleted: { _eq: false } }) {
+query getContentByIds($ids: [Int!]!) {
+	app_content(where: { id: { _in: $ids }, is_deleted: { _eq: false } }) {
 		content_type
 		content_width
 		created_at
@@ -13,32 +13,31 @@ query getContentById($id: uuid!) {
 		is_public
 		path
 		user_profile_id
-		owner_profile {
-			id
-			full_name
-			mail
-			maintainer_users_profiles {
-				maintainer {
-					schema_identifier
-					schema_name
-					information {
-						logo
-					}
-				}
-			}
-			group {
-				label
-				id
-			}
-		}
 		publish_at
 		published_at
 		title
 		updated_at
 		user_group_ids
 		user_profile_id
-		content_width
 		user_group_ids
+		profile {
+			organisation {
+				logo_url
+				name
+				or_id
+			}
+			profile_user_group {
+				group {
+					label
+					id
+				}
+			}
+			user: usersByuserId {
+				id
+				full_name
+				mail
+			}
+		}
 		content_content_labels {
 			content_label {
 				label
@@ -46,7 +45,7 @@ query getContentById($id: uuid!) {
 				link_to
 			}
 		}
-		content_blocks(order_by: { position: asc }) {
+		content_blocks: contentBlockssBycontentId(order_by: { position: asc }) {
 			content_block_type
 			content_id
 			created_at
@@ -54,7 +53,10 @@ query getContentById($id: uuid!) {
 			position
 			updated_at
 			variables
-			content_block_type
+			enum_content_block_type {
+				description
+				value
+			}
 		}
 	}
 }

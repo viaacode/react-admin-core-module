@@ -10,21 +10,25 @@ import { Navigation } from '../types';
 import {
 	DeleteNavigationDocument,
 	DeleteNavigationMutation,
+	DeleteNavigationMutationVariables,
 	FindAllNavigationItemsDocument,
 	FindAllNavigationItemsQuery,
 	FindNavigationByIdDocument,
 	FindNavigationByIdQuery,
+	FindNavigationByIdQueryVariables,
 	FindNavigationByPlacementDocument,
 	FindNavigationByPlacementQuery,
+	FindNavigationByPlacementQueryVariables,
 	InsertNavigationDocument,
 	InsertNavigationMutation,
+	InsertNavigationMutationVariables,
 	UpdateNavigationByIdDocument,
 	UpdateNavigationByIdMutation,
-} from '~generated/graphql-db-types-hetarchief';
-import { DataService } from '../data/services/data.service';
-import { GraphQlResponse } from '../data/types';
-import { NavigationItem } from '~modules/navigations/navigations.types';
-import { DeleteResponse } from '~shared/types/types';
+	UpdateNavigationByIdMutationVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { DataService } from '../../data/services/data.service';
+import { NavigationItem } from '../types';
+import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {
@@ -54,52 +58,48 @@ export class AdminNavigationsService {
 
 	public async createElement(
 		navigationItem: CreateNavigationDto,
-	): Promise<Navigation> {
-		const {
-			data: { insert_app_navigation_one: createdNavigation },
-		} = await this.dataService.execute<InsertNavigationMutation>(
-			InsertNavigationDocument,
-			{
-				navigationItem,
-			},
+	): Promise<InsertNavigationMutation['insert_app_navigation_one']> {
+		const response = await this.dataService.execute<
+			InsertNavigationMutation,
+			InsertNavigationMutationVariables
+		>(InsertNavigationDocument, {
+			navigationItem,
+		});
+		this.logger.debug(
+			`Navigation ${response.insert_app_navigation_one.id} created`,
 		);
-		this.logger.debug(`Navigation ${createdNavigation.id} created`);
 
-		return createdNavigation;
+		return response.insert_app_navigation_one;
 	}
 
 	public async updateElement(
 		id: string,
 		navigationItem: CreateNavigationDto,
-	): Promise<Navigation> {
-		const {
-			data: { update_app_navigation_by_pk: updatedNavigation },
-		} = await this.dataService.execute<UpdateNavigationByIdMutation>(
-			UpdateNavigationByIdDocument,
-			{
-				id,
-				navigationItem,
-			},
+	): Promise<UpdateNavigationByIdMutation['update_app_navigation_by_pk']> {
+		const response = await this.dataService.execute<
+			UpdateNavigationByIdMutation,
+			UpdateNavigationByIdMutationVariables
+		>(UpdateNavigationByIdDocument, {
+			id,
+			navigationItem,
+		});
+		this.logger.debug(
+			`Navigation ${response.update_app_navigation_by_pk.id} updated`,
 		);
-		this.logger.debug(`Navigation ${updatedNavigation.id} updated`);
 
-		return updatedNavigation;
+		return response.update_app_navigation_by_pk;
 	}
 
 	public async deleteElement(id: string): Promise<DeleteResponse> {
-		const {
-			data: {
-				delete_app_navigation: { affected_rows: affectedRows },
-			},
-		} = await this.dataService.execute<DeleteNavigationMutation>(
-			DeleteNavigationDocument,
-			{
-				id,
-			},
-		);
+		const response = await this.dataService.execute<
+			DeleteNavigationMutation,
+			DeleteNavigationMutationVariables
+		>(DeleteNavigationDocument, {
+			id,
+		});
 
 		return {
-			affectedRows,
+			affectedRows: response.delete_app_navigation.affected_rows,
 		};
 	}
 
@@ -107,17 +107,16 @@ export class AdminNavigationsService {
 		navigationsQueryDto: NavigationsQueryDto,
 	): Promise<IPagination<Navigation>> {
 		const { placement } = navigationsQueryDto;
-		let navigationsResponse: GraphQlResponse<
-			FindNavigationByPlacementQuery | FindAllNavigationItemsQuery
-		>;
+		let navigationsResponse:
+			| FindNavigationByPlacementQuery
+			| FindAllNavigationItemsQuery;
 		if (placement) {
-			navigationsResponse =
-				await this.dataService.execute<FindNavigationByPlacementQuery>(
-					FindNavigationByPlacementDocument,
-					{
-						placement,
-					},
-				);
+			navigationsResponse = await this.dataService.execute<
+				FindNavigationByPlacementQuery,
+				FindNavigationByPlacementQueryVariables
+			>(FindNavigationByPlacementDocument, {
+				placement,
+			});
 		} else {
 			navigationsResponse =
 				await this.dataService.execute<FindAllNavigationItemsQuery>(
@@ -126,22 +125,21 @@ export class AdminNavigationsService {
 		}
 
 		return Pagination<Navigation>({
-			items: navigationsResponse.data.app_navigation,
+			items: navigationsResponse.app_navigation,
 			page: 1,
-			size: navigationsResponse.data.app_navigation.length,
-			total: navigationsResponse.data.app_navigation.length,
+			size: navigationsResponse.app_navigation.length,
+			total: navigationsResponse.app_navigation.length,
 		});
 	}
 
 	public async findElementById(id: string): Promise<Navigation> {
-		const navigationResponse =
-			await this.dataService.execute<FindNavigationByIdQuery>(
-				FindNavigationByIdDocument,
-				{ id },
-			);
-		if (!navigationResponse.data.app_navigation[0]) {
+		const navigationResponse = await this.dataService.execute<
+			FindNavigationByIdQuery,
+			FindNavigationByIdQueryVariables
+		>(FindNavigationByIdDocument, { id });
+		if (!navigationResponse.app_navigation?.[0]) {
 			throw new NotFoundException();
 		}
-		return navigationResponse.data.app_navigation[0];
+		return navigationResponse.app_navigation?.[0];
 	}
 }

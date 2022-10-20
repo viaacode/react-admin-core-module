@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AdminOrganisationsService } from './services/admin-organisations.service';
 
-import { DataModule } from '../data';
+import { DataModule } from '../data/data.module';
 
 @Module({
 	controllers: [],

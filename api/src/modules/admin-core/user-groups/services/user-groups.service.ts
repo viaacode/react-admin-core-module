@@ -1,22 +1,18 @@
-import { Injectable, Logger } from '@nestjs/common';
-
-import { UpdatePermission } from '../dto/user-groups.dto';
-import { UserGroupsResponse } from '../types';
-
+import { Injectable } from '@nestjs/common';
+import { DataService } from '../../data/services/data.service';
 import {
 	GetUserGroupsPermissionsDocument,
 	GetUserGroupsPermissionsQuery,
 	UpdateUserGroupsPermissionsDocument,
 	UpdateUserGroupsPermissionsMutation,
-} from '~generated/graphql-db-types-hetarchief';
-import { DataService } from '../data/services/data.service';
+	UpdateUserGroupsPermissionsMutationVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
+
+import { UpdatePermission } from '../dto/user-groups.dto';
+import { UserGroupsResponse } from '../types';
 
 @Injectable()
 export class UserGroupsService {
-	private logger: Logger = new Logger(UserGroupsService.name, {
-		timestamp: true,
-	});
-
 	constructor(private dataService: DataService) {}
 
 	public adapt(
@@ -36,45 +32,42 @@ export class UserGroupsService {
 	}
 
 	public async getUserGroups(): Promise<UserGroupsResponse[]> {
-		const {
-			data: { users_group: userGroups },
-		} = await this.dataService.execute<GetUserGroupsPermissionsQuery>(
-			GetUserGroupsPermissionsDocument,
-		);
+		const response =
+			await this.dataService.execute<GetUserGroupsPermissionsQuery>(
+				GetUserGroupsPermissionsDocument,
+			);
 
-		return userGroups.map((userGroup) => this.adapt(userGroup));
+		return response.users_group.map((userGroup) => this.adapt(userGroup));
 	}
 
 	public async updateUserGroups(
 		updates: UpdatePermission[],
 	): Promise<{ deleted: number; inserted: number }> {
-		const {
-			data: {
-				delete_users_group_permission: { affected_rows: deleted },
-				insert_users_group_permission: { affected_rows: inserted },
-			},
-		} = await this.dataService.execute<UpdateUserGroupsPermissionsMutation>(
-			UpdateUserGroupsPermissionsDocument,
-			{
-				deletions: {
-					_or: updates
-						.filter((update) => !update.hasPermission)
-						.map((update) => ({
-							_and: [
-								{ permission_id: { _eq: update.permissionId } },
-								{ group_id: { _eq: update.userGroupId } },
-							],
-						})),
-				},
-				insertions: updates
-					.filter((update) => update.hasPermission)
+		const response = await this.dataService.execute<
+			UpdateUserGroupsPermissionsMutation,
+			UpdateUserGroupsPermissionsMutationVariables
+		>(UpdateUserGroupsPermissionsDocument, {
+			deletions: {
+				_or: updates
+					.filter((update) => !update.hasPermission)
 					.map((update) => ({
-						group_id: update.userGroupId,
-						permission_id: update.permissionId,
+						_and: [
+							{ permission_id: { _eq: update.permissionId } },
+							{ group_id: { _eq: update.userGroupId } },
+						],
 					})),
 			},
-		);
+			insertions: updates
+				.filter((update) => update.hasPermission)
+				.map((update) => ({
+					group_id: update.userGroupId,
+					permission_id: update.permissionId,
+				})),
+		});
 
-		return { deleted, inserted };
+		return {
+			deleted: response.delete_users_group_permission?.affected_rows || 0,
+			inserted: response.insert_users_group_permission?.affected_rows || 0,
+		};
 	}
 }

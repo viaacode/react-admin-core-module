@@ -4,11 +4,11 @@ import { DataService } from '../services/data.service';
 
 import { DataController } from './data.controller';
 
-import { TranslationsService } from '~modules/translations/services/translations.service';
-import { SessionUserEntity } from '~modules/users/classes/session-user';
-import { Group, GroupIdToName, Permission, User } from '~modules/users/types';
-import { Idp } from '~shared/auth/auth.types';
-import { mockTranslationsService } from '~shared/helpers/mockTranslationsService';
+import { TranslationsService } from '../../translations/services/translations.service';
+import { SessionUserEntity } from '../../users/classes/session-user';
+import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Idp } from '../../shared/auth/auth.types';
+import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 
 const mockDataService = {
 	executeClientQuery: () => ({
@@ -59,7 +59,7 @@ describe('DataController', () => {
 		it('should get a result for a graphQl query', async () => {
 			const result = await dataController.post(
 				{ query: 'query testQuery { username }' },
-				new SessionUserEntity(mockUser)
+				new SessionUserEntity(mockUser),
 			);
 			expect(result).toEqual({
 				data: {

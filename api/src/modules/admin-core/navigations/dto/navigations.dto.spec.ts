@@ -1,7 +1,7 @@
 import {
 	CreateNavigationDto,
 	NavigationsQueryDto,
-} from '~modules/admin/navigations/dto/navigations.dto';
+} from '../../navigations/dto/navigations.dto';
 
 describe('NavigationsDto', () => {
 	describe('NavigationsQueryDto', () => {

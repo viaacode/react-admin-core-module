@@ -1,6 +1,6 @@
 // import config, { DEFAULT_CONFIG } from '~config';
 
-import config, { DEFAULT_CONFIG } from '~config';
+import config, { DEFAULT_CONFIG } from '../../config';
 
 describe('Configuration', () => {
 	// Keep backup of original env vars to make sure our test cases are isolated

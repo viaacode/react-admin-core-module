@@ -5,17 +5,17 @@ import { Cache } from 'cache-manager';
 import { addHours } from 'date-fns';
 import nock from 'nock';
 
-import { Configuration } from '~config';
+import { Configuration } from '../../../../config';
 
+import { AvoOrHetArchief } from '../../content-pages/content-pages.types';
+import { PlayerTicket } from '../player-ticket.types';
+import { PlayerTicketService } from './player-ticket.service';
+import { DataService } from '../../data/services/data.service';
+import { TestingLogger } from '../../shared/logging/test-logger';
 import {
 	GetFileByRepresentationSchemaIdentifierQuery,
 	GetThumbnailUrlByIdQuery,
-} from '~generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '~modules/admin/content-pages/content-pages.types';
-import { PlayerTicket } from '~modules/admin/player-ticket/player-ticket.types';
-import { PlayerTicketService } from '~modules/admin/player-ticket/services/player-ticket.service';
-import { DataService } from '../data/services/data.service';
-import { TestingLogger } from '~shared/logging/test-logger';
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 const mockConfigService: Partial<
 	Record<keyof ConfigService, jest.SpyInstance>

@@ -1,14 +1,14 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '~config';
+import { Configuration } from '../../../../config';
 
-import { ContentPagesController } from '~modules/admin/content-pages/controllers/content-pages.controller';
-import { ContentPagesService } from '~modules/admin/content-pages/services/content-pages.service';
-import { PlayerTicketService } from '~modules/admin/player-ticket/services/player-ticket.service';
-import { Group, GroupIdToName, Permission, User } from '~modules/users/types';
-import { Idp } from '~shared/auth/auth.types';
-import { SessionHelper } from '~shared/auth/session-helper';
+import { ContentPagesController } from './content-pages.controller';
+import { ContentPagesService } from '../services/content-pages.service';
+import { PlayerTicketService } from '../../player-ticket/services/player-ticket.service';
+import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Idp } from '../../shared/auth/auth.types';
+import { SessionHelper } from '../../shared/auth/session-helper';
 
 const mockUser: User = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
@@ -23,7 +23,9 @@ const mockUser: User = {
 	permissions: [Permission.EDIT_ANY_CONTENT_PAGES],
 };
 
-const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
+const mockContentPagesService: Partial<
+	Record<keyof ContentPagesService, jest.SpyInstance>
+> = {
 	adaptContentPage: jest.fn(),
 	adaptContentBlock: jest.fn(),
 	getContentPagesForOverview: jest.fn(),
@@ -37,12 +39,16 @@ const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.Sp
 	getContentPageLabelsByTypeAndIds: jest.fn(),
 };
 
-const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
+const mockPlayerTicketService: Partial<
+	Record<keyof PlayerTicketService, jest.SpyInstance>
+> = {
 	getPlayableUrl: jest.fn(),
 	getEmbedUrl: jest.fn(),
 };
 
-const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
+const mockConfigService: Partial<
+	Record<keyof ConfigService, jest.SpyInstance>
+> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
 		if (key === 'proxyApiKey') {
 			return '';
@@ -75,7 +81,9 @@ describe('ContentPagesController', () => {
 			],
 		}).compile();
 
-		contentPagesController = module.get<ContentPagesController>(ContentPagesController);
+		contentPagesController = module.get<ContentPagesController>(
+			ContentPagesController,
+		);
 
 		sessionHelperSpy = jest
 			.spyOn(SessionHelper, 'getArchiefUserInfo')

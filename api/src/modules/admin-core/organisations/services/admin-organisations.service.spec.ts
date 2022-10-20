@@ -1,14 +1,14 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '~config';
+import { Configuration } from '../../../../config';
 
-import { GetOrganisationQuery } from '~generated/graphql-db-types-avo';
-import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '~modules/admin/content-pages/content-pages.types';
-import { Organisation } from '~modules/admin/organisations/admin-organisations.types';
-import { AdminOrganisationsService } from '~modules/admin/organisations/services/admin-organisations.service';
-import { DataService } from '../data/services/data.service';
+import { GetOrganisationQuery } from '../../shared/generated/graphql-db-types-avo';
+import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
+import { AvoOrHetArchief } from '../../content-pages/content-pages.types';
+import { Organisation } from '../admin-organisations.types';
+import { AdminOrganisationsService } from './admin-organisations.service';
+import { DataService } from '../../data/services/data.service';
 
 const mockGqlHetArchiefOrganisation: { data: GetOrganisationQueryHetArchief } =
 	{

@@ -1,11 +1,18 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import {
+	IsArray,
+	IsBoolean,
+	IsNumber,
+	IsObject,
+	IsOptional,
+	IsString,
+} from 'class-validator';
 
-import { Lookup_App_Content_Type_Enum } from '~generated/graphql-db-types-hetarchief';
-import { SearchDateRange } from '~modules/admin/content-pages/content-pages.types';
-import { commaSeparatedStringToArray } from '~shared/helpers/comma-separated-string-to-array';
-import { SortDirection } from '~shared/types';
+import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
+import { SearchDateRange } from '../content-pages.types';
+import { commaSeparatedStringToArray } from '../../shared/helpers/comma-separated-string-to-array';
+import { SortDirection } from '../../shared/types';
 
 export class ContentPageFiltersDto {
 	@IsString()
@@ -230,7 +237,8 @@ export class ContentPageOverviewParams {
 	@IsString()
 	@ApiProperty({
 		type: String,
-		description: 'Type of the content pages you want to fetch. eg: PAGINA, FAQ_ITEM, ...',
+		description:
+			'Type of the content pages you want to fetch. eg: PAGINA, FAQ_ITEM, ...',
 		example: 'FAQ_ITEM',
 	})
 	contentType: string;

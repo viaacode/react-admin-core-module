@@ -1,25 +1,21 @@
 import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { getConfig } from '~config';
+import { getConfig } from '../../../../config';
 
-import { GetOrganisationQuery as GetOrganisationQueryAvo } from '~generated/graphql-db-types-avo';
-import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
-import { ORGANISATION_QUERIES } from '~modules/admin/organisations/admin-organisations.consts';
+import { ORGANISATION_QUERIES } from '../admin-organisations.consts';
 import {
 	GqlAvoOrganisation,
 	GqlHetArchiefOrganisation,
 	GqlOrganisation,
 	Organisation,
 	OrganisationQueries,
-} from '~modules/admin/organisations/admin-organisations.types';
-import { DataService } from '../data/services/data.service';
+	OrganisationQueryTypes,
+} from '../admin-organisations.types';
+import { DataService } from '../../data/services/data.service';
 
 @Injectable()
 export class AdminOrganisationsService {
-	private logger: Logger = new Logger(AdminOrganisationsService.name, {
-		timestamp: true,
-	});
 	private queries: OrganisationQueries;
 
 	constructor(
@@ -51,16 +47,18 @@ export class AdminOrganisationsService {
 
 	public async getOrganisation(id: string): Promise<Organisation> {
 		const response = await this.dataService.execute<
-			GetOrganisationQueryAvo | GetOrganisationQueryHetArchief
+			OrganisationQueryTypes['GetOrganisationQuery'],
+			OrganisationQueryTypes['GetOrganisationQueryVariables']
 		>(this.queries.GetOrganisationDocument, {
 			id,
 		});
 
 		/* istanbul ignore next */
 		return this.adapt(
-			(response?.data as GetOrganisationQueryHetArchief)
-				?.maintainer_content_partner?.[0] ||
-				(response?.data as GetOrganisationQueryAvo)?.shared_organisations?.[0],
+			(response as OrganisationQueryTypes['GetOrganisationQueryAvo'])
+				?.shared_organisations?.[0] ||
+				(response as OrganisationQueryTypes['GetOrganisationQueryHetArchief'])
+					?.maintainer_content_partner?.[0],
 		);
 	}
 }

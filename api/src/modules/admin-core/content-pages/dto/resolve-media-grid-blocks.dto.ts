@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsOptional, IsString } from 'class-validator';
 
-import { MediaItemType } from '~modules/admin/content-pages/content-pages.types';
+import { MediaItemType } from '../../content-pages/content-pages.types';
 
 export class MediaItemDto {
 	@ApiProperty({
@@ -39,7 +39,7 @@ export class ResolveMediaGridBlocksDto {
 		description: 'Get items based on search query (AvO only)',
 		default: undefined,
 		example:
-			'https://onderwijs-qas.hetarchief.be/zoeken?filters=%7B%22educationLevel%22%3A%5B%22Secundair%20onderwijs%22%5D%7D',
+				'https://onderwijs-qas.hetarchief.be/zoeken?filters=%7B%22educationLevel%22%3A%5B%22Secundair%20onderwijs%22%5D%7D',
 	})
 	searchQuery: string | undefined;
 

@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import got, { Got } from 'got';
-import { DocumentNode } from 'graphql';
 import { print } from 'graphql/language/printer';
 
 import { getConfig } from '../../../../config';
@@ -22,6 +21,8 @@ import { DataPermissionsService } from './data-permissions.service';
 
 import { User } from '../../users/types';
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
+import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { ASTNode } from 'graphql/language/ast';
 
 @Injectable()
 export class DataService {
@@ -80,13 +81,13 @@ export class DataService {
 	/**
 	 * execute a (GraphQl) query
 	 */
-	public async execute<T>(
-		query: string | DocumentNode,
-		variables: { [varName: string]: any } = {},
-	): Promise<GraphQlResponse<T>> {
+	public async execute<QueryType, QueryVariablesType = void>(
+		query: string | TypedDocumentNode,
+		variables?: QueryVariablesType,
+	): Promise<QueryType> {
 		try {
 			const queryData = {
-				query: typeof query === 'string' ? query : print(query),
+				query: typeof query === 'string' ? query : print(query as ASTNode),
 				variables,
 			};
 
@@ -119,7 +120,7 @@ export class DataService {
 				}
 				throw new InternalServerErrorException(data);
 			}
-			return data;
+			return data.data;
 		} catch (err) {
 			if (err instanceof DuplicateKeyException) {
 				throw err;

@@ -39,11 +39,18 @@ import {
 
 import {
 	GetCollectionTileByIdDocument,
+	GetCollectionTileByIdQuery,
+	GetCollectionTileByIdQueryVariables,
 	GetItemByExternalIdDocument,
+	GetItemByExternalIdQuery,
+	GetItemByExternalIdQueryVariables,
 	GetItemTileByIdDocument,
+	GetItemTileByIdQuery,
+	GetItemTileByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	CONTENT_PAGE_QUERIES,
+	ContentPageQueryTypes,
 	DEFAULT_AUDIO_STILL,
 	MEDIA_PLAYER_BLOCKS,
 } from '../content-pages.consts';
@@ -54,6 +61,8 @@ import { AdminOrganisationsService } from '../../organisations/services/admin-or
 import { PlayerTicketService } from '../../player-ticket/services/player-ticket.service';
 import { DataService } from '../../data/services/data.service';
 import { SpecialPermissionGroups } from '../../shared/types/types';
+import { Pagination } from '@studiohyperdrive/pagination';
+import { Navigation } from '../../navigations/types';
 
 @Injectable()
 export class ContentPagesService {
@@ -232,58 +241,63 @@ export class ContentPagesService {
 				content: { user_group_ids: { _contains: userGroupId } },
 			})),
 		};
-		const response = await this.dataService.execute(
+		const response = await this.dataService.execute<
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
+			| ContentPageQueryTypes['GetContentPagesQuery'],
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
 			withBlock
 				? this.queries.GetContentPagesWithBlocksDocument
 				: this.queries.GetContentPagesDocument,
 			variables,
 		);
-		if (response.errors) {
-			throw new InternalServerErrorException({
-				message: 'GraphQL has errors',
-				additionalInfo: { response },
-			});
-		}
+
+		const responseAvo = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
+			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
+		const responseHetArchief = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
+
 		const count =
-			get(response, 'data.app_content_aggregate.aggregate.count') ||
-			get(response, 'data.app_content_page_aggregate.aggregate.count') ||
+			responseAvo.app_content_aggregate.aggregate.count ||
+			responseHetArchief.app_content_page_aggregate.aggregate.count ||
 			0;
 		const contentPageLabels =
-			get(response, 'data.app_content_labels') ||
-			get(response, 'data.app_content_page_content_label') ||
+			responseAvo.app_content_labels ||
+			responseHetArchief.app_content_label ||
 			[];
+
 		return {
-			items:
-				get(response, 'data.app_content') ||
-				get(response, 'data.app_content_page') ||
-				[],
-			page,
-			size,
-			total: count,
-			pages: Math.ceil(count / size),
+			...Pagination<ContentPage>({
+				items: (responseAvo.app_content ||
+					responseHetArchief.app_content_page ||
+					[]) as unknown as ContentPage[],
+				page,
+				size,
+				total: count,
+			}),
 			labelCounts: fromPairs(
 				contentPageLabels.map((labelInfo: any): [number, number] => [
-					get(labelInfo, 'id'),
-					get(labelInfo, 'content_content_labels_aggregate.aggregate.count') ||
-						get(
-							labelInfo,
-							'content_page_content_label_aggregate.aggregate.count',
-						),
+					labelInfo?.id,
+					labelInfo?.content_content_labels_aggregate?.aggregate?.count ||
+						labelInfo?.content_page_content_label_aggregate?.aggregate?.count ||
+						0,
 				]),
 			),
 		};
 	}
 
 	public async getContentPageByPath(path: string): Promise<ContentPage | null> {
-		const response = await this.dataService.execute(
-			this.queries.GetContentPageByPathDocument,
-			{
-				path,
-			},
-		);
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPageByPathQuery'],
+			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
+		>(this.queries.GetContentPageByPathDocument, {
+			path,
+		});
 		const contentPage: GqlContentPage | undefined =
-			get(response, 'data.cms_content[0]') ||
-			get(response, 'data.app_content_page[0]');
+			get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
 
 		return this.adaptContentPage(contentPage);
 	}
@@ -302,12 +316,15 @@ export class ContentPagesService {
 				},
 			});
 		}
-		const response = await this.dataService.execute(
+		const response = await this.dataService.execute<
+			GetItemTileByIdQuery | GetCollectionTileByIdQuery,
+			GetItemTileByIdQueryVariables | GetCollectionTileByIdQueryVariables
+		>(
 			type === 'ITEM' ? GetItemTileByIdDocument : GetCollectionTileByIdDocument,
 			{ id },
 		);
 
-		const itemOrCollection = get(response, 'data.obj[0]', null);
+		const itemOrCollection = get(response, 'obj[0]', null);
 		if (itemOrCollection) {
 			itemOrCollection.count =
 				get(response, 'data.view_counts_aggregate.aggregate.sum.count') || 0;
@@ -329,14 +346,14 @@ export class ContentPagesService {
 			});
 		}
 
-		const response = await this.dataService.execute(
-			GetItemByExternalIdDocument,
-			{
-				externalId,
-			},
-		);
+		const response = await this.dataService.execute<
+			GetItemByExternalIdQuery,
+			GetItemByExternalIdQueryVariables
+		>(GetItemByExternalIdDocument, {
+			externalId,
+		});
 
-		return get(response, 'data.app_item_meta[0]', null);
+		return (response.app_item_meta[0] || null) as Partial<Avo.Item.Item> | null;
 	}
 
 	private static getLabelFilter(labelIds: number[]): any[] {
@@ -399,22 +416,40 @@ export class ContentPagesService {
 				content: { user_group_ids: { _contains: userGroupId } },
 			})),
 		};
-		const response = await this.dataService.execute(
+		const response = await this.dataService.execute<
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
+			| ContentPageQueryTypes['GetContentPagesQuery'],
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
 			withBlock
 				? this.queries.GetContentPagesWithBlocksDocument
 				: this.queries.GetContentPagesDocument,
 			variables,
 		);
+		const responseAvo = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
+			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
+		const responseHetArchief = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
 		return {
-			pages: get(response, 'data.app_content') || [],
-			count: get(response, 'data.app_content_aggregate.aggregate.count', 0),
+			pages: (responseAvo.app_content ||
+				responseHetArchief.app_content_page ||
+				[]) as unknown as ContentPage[],
+			count:
+				responseAvo.app_content_aggregate?.aggregate?.count ||
+				responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
+				0,
 			labelCounts: fromPairs(
-				get(response, 'data.app_content_labels', []).map(
-					(labelInfo: any): [number, number] => [
-						get(labelInfo, 'id'),
-						get(labelInfo, 'content_content_labels_aggregate.aggregate.count'),
-					],
-				),
+				(
+					responseAvo.app_content_labels ||
+					responseHetArchief.app_content_label ||
+					[]
+				).map((labelInfo: any): [number, number] => [
+					labelInfo?.id,
+					labelInfo?.content_content_labels_aggregate?.aggregate?.count,
+				]),
 			),
 		};
 	}
@@ -427,37 +462,41 @@ export class ContentPagesService {
 	> {
 		try {
 			const now = new Date().toISOString();
-			const response = await this.dataService.execute(
-				this.queries.GetPublicContentPagesDocument,
-				{
-					where: {
-						_and: [
-							{
-								user_group_ids: {
-									_contains: SpecialPermissionGroups.loggedOutUsers,
-								},
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['GetPublicContentPagesQuery'],
+				ContentPageQueryTypes['GetPublicContentPagesQueryVariables']
+			>(this.queries.GetPublicContentPagesDocument, {
+				where: {
+					_and: [
+						{
+							user_group_ids: {
+								_contains: SpecialPermissionGroups.loggedOutUsers,
 							},
-							// publish state
-							{
-								_or: [
-									{ is_public: { _eq: true } },
-									{ publish_at: { _eq: null }, depublish_at: { _gte: now } },
-									{ publish_at: { _lte: now }, depublish_at: { _eq: null } },
-									{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
-								],
-							},
-							{ is_deleted: { _eq: false } },
-						],
-					},
+						},
+						// publish state
+						{
+							_or: [
+								{ is_public: { _eq: true } },
+								{ publish_at: { _eq: null }, depublish_at: { _gte: now } },
+								{ publish_at: { _lte: now }, depublish_at: { _eq: null } },
+								{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
+							],
+						},
+						{ is_deleted: { _eq: false } },
+					],
 				},
-			);
-			if (response.errors) {
-				throw new InternalServerErrorException({
-					message: 'GraphQL has errors',
-					additionalInfo: { response },
-				});
-			}
-			return get(response, 'data.app_content') || [];
+			});
+			return (
+				(response as ContentPageQueryTypes['GetPublicContentPagesQueryAvo'])
+					.app_content ||
+				(
+					response as ContentPageQueryTypes['GetPublicContentPagesQueryHetArchief']
+				).app_content_page ||
+				[]
+			).map((contentPage) => ({
+				path: contentPage.path,
+				updated_at: contentPage.updated_at,
+			}));
 		} catch (err) {
 			throw new InternalServerErrorException({
 				message: 'Failed to fetch all public content pages',
@@ -470,50 +509,55 @@ export class ContentPagesService {
 		published: number;
 		unpublished: number;
 	}> {
-		const response = await this.dataService.execute(
-			this.queries.UpdateContentPagePublishDatesDocument,
-			{
-				now: new Date().toISOString(),
-				publishedAt: moment().hours(7).minutes(0).toISOString(),
-			},
-		);
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
+			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
+		>(this.queries.UpdateContentPagePublishDatesDocument, {
+			now: new Date().toISOString(),
+			publishedAt: moment().hours(7).minutes(0).toISOString(),
+		});
 		return {
-			published: get(response, 'data.publish_content_pages.affected_rows', 0),
-			unpublished: get(
-				response,
-				'data.unpublish_content_pages.affected_rows',
-				0,
-			),
+			published: response.publish_content_pages?.affected_rows || 0,
+			unpublished: response.unpublish_content_pages?.affected_rows || 0,
 		};
 	}
 
 	public async getContentPagesByIds(
-		contentPageIds: string[],
+		contentPageIds: number[],
 	): Promise<Avo.ContentPage.Page[]> {
-		const response = await this.dataService.execute(
-			this.queries.GetContentByIdDocument,
-			{
-				ids: contentPageIds,
-			},
-		);
-		return get(response, 'data.app_content') || [];
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentByIdsQuery'],
+			ContentPageQueryTypes['GetContentByIdsQueryVariables']
+		>(this.queries.GetContentByIdsDocument, {
+			ids: contentPageIds,
+		});
+		return ((response as ContentPageQueryTypes['GetContentByIdsQueryAvo'])
+			.app_content ||
+			(response as ContentPageQueryTypes['GetContentByIdsQueryHetArchief'])
+				.app_content_page ||
+			[]) as Avo.ContentPage.Page[];
 	}
 
 	public async getContentPageLabelsByTypeAndLabels(
 		contentType: string,
 		labels: string[],
 	): Promise<LabelObj[]> {
-		const response = await this.dataService.execute(
-			this.queries.GetContentPageLabelsByTypeAndLabelsDocument,
-			{
-				contentType,
-				labels,
-			},
-		);
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
+			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']
+		>(this.queries.GetContentPageLabelsByTypeAndLabelsDocument, {
+			contentType,
+			labels,
+		});
+
+		const responseAvo =
+			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo'];
+		const responseHetArchief =
+			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief'];
 
 		return (
-			get(response, 'data.app_content_labels') ||
-			get(response, 'data.cms_content_labels') ||
+			responseAvo.app_content_labels ||
+			responseHetArchief.app_content_label ||
 			[]
 		);
 	}

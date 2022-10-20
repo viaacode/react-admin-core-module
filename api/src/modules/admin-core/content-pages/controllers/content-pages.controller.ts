@@ -9,7 +9,6 @@ import {
 	Post,
 	Query,
 	Req,
-	Session,
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -18,39 +17,42 @@ import { compact, get, intersection } from 'lodash';
 
 import { ContentPage, LabelObj } from '../content-pages.types';
 
-import { ContentLabelsRequestDto } from '~modules/admin/content-pages/dto/content-labels-request.dto';
-import { ContentPageOverviewParams } from '~modules/admin/content-pages/dto/content-pages.dto';
-import { ResolveMediaGridBlocksDto } from '~modules/admin/content-pages/dto/resolve-media-grid-blocks.dto';
-import { ContentPagesService } from '~modules/admin/content-pages/services/content-pages.service';
-import { SessionUserEntity } from '~modules/users/classes/session-user';
-import { Permission } from '~modules/users/types';
-import { SessionHelper } from '~shared/auth/session-helper';
-import { SessionUser } from '~shared/decorators/user.decorator';
-import { ApiKeyGuard } from '~shared/guards/api-key.guard';
-import { LoggedInGuard } from '~shared/guards/logged-in.guard';
-import { SpecialPermissionGroups } from '~shared/types/types';
+import { ContentLabelsRequestDto } from '../dto/content-labels-request.dto';
+import { ContentPageOverviewParams } from '../dto/content-pages.dto';
+import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto';
+import { ContentPagesService } from '../services/content-pages.service';
+import { SessionUserEntity } from '../../users/classes/session-user';
+import { Permission } from '../../users/types';
+import { SessionHelper } from '../../shared/auth/session-helper';
+import { SessionUser } from '../../shared/decorators/user.decorator';
+import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
+import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
+import { SpecialPermissionGroups } from '../../shared/types/types';
 
 @ApiTags('ContentPages')
 @Controller('admin/content-pages')
 export class ContentPagesController {
-	private logger: Logger = new Logger(ContentPagesController.name, { timestamp: true });
+	private logger: Logger = new Logger(ContentPagesController.name, {
+		timestamp: true,
+	});
 
 	constructor(private contentPagesService: ContentPagesService) {}
 
 	@Post('overview')
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
-		@SessionUser() user?: SessionUserEntity
+		@SessionUser() user?: SessionUserEntity,
 	): Promise<IPagination<ContentPage>> {
-		const contentPages = await this.contentPagesService.getContentPagesForOverview(
-			queryDto,
-			compact([
-				user?.getUser()?.groupId,
-				user?.getUser()
-					? SpecialPermissionGroups.loggedInUsers
-					: SpecialPermissionGroups.loggedOutUsers,
-			])
-		);
+		const contentPages =
+			await this.contentPagesService.getContentPagesForOverview(
+				queryDto,
+				compact([
+					user?.getUser()?.groupId,
+					user?.getUser()
+						? SpecialPermissionGroups.loggedInUsers
+						: SpecialPermissionGroups.loggedOutUsers,
+				]),
+			);
 		return contentPages;
 	}
 
@@ -61,7 +63,7 @@ export class ContentPagesController {
 	public async getContentPageByPath(
 		@Query('path') path: string,
 		@Req() request,
-		@SessionUser() user: SessionUserEntity
+		@SessionUser() user: SessionUserEntity,
 	): Promise<ContentPage> {
 		const contentPage: ContentPage | undefined =
 			await this.contentPagesService.getContentPageByPath(path);
@@ -107,7 +109,7 @@ export class ContentPagesController {
 			if (
 				!intersection(
 					contentPage.userGroupIds.map((id) => String(id)),
-					SessionHelper.getUserGroupIds(user.getUser())
+					SessionHelper.getUserGroupIds(user.getUser()),
 				).length
 			) {
 				return null;
@@ -115,11 +117,17 @@ export class ContentPagesController {
 		}
 
 		// Check if content page contains any search query content bocks (eg: media grids)
-		await this.contentPagesService.resolveMediaTileItemsInPage(contentPage, request);
+		await this.contentPagesService.resolveMediaTileItemsInPage(
+			contentPage,
+			request,
+		);
 
 		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
 		if (request) {
-			await this.contentPagesService.resolveMediaPlayersInPage(contentPage, request);
+			await this.contentPagesService.resolveMediaPlayersInPage(
+				contentPage,
+				request,
+			);
 		}
 
 		return contentPage;
@@ -129,7 +137,7 @@ export class ContentPagesController {
 	async doesContentPageExist(
 		@Query('path') path: string,
 		@Req() request,
-		@SessionUser() user
+		@SessionUser() user,
 	): Promise<{ exists: boolean; title: string; id: number }> {
 		const contentPage = await this.getContentPageByPath(path, request, user);
 		return {
@@ -146,23 +154,26 @@ export class ContentPagesController {
 	})
 	@ApiResponse({
 		status: 200,
-		description: 'the media grid blocks with their content stored under the results property',
+		description:
+			'the media grid blocks with their content stored under the results property',
 		type: Array,
 	})
 	@UseGuards(LoggedInGuard)
 	async resolveMediaGridBlocks(
 		body: ResolveMediaGridBlocksDto,
 		@SessionUser() user: SessionUserEntity,
-		@Req() request
+		@Req() request,
 	): Promise<any[]> {
 		if (user.has(Permission.SEARCH)) {
-			throw new ForbiddenException('You do not have the required permission for this route');
+			throw new ForbiddenException(
+				'You do not have the required permission for this route',
+			);
 		}
 		return await this.contentPagesService.resolveMediaTileItems(
 			body.searchQuery,
 			body.searchQueryLimit,
 			body.mediaItems,
-			request
+			request,
 		);
 	}
 
@@ -170,7 +181,7 @@ export class ContentPagesController {
 	@UseGuards(ApiKeyGuard)
 	async updatePublishDates(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		@Headers('apikey') apikey: string
+		@Headers('apikey') apikey: string,
 	): Promise<{ message: string }> {
 		const response = await this.contentPagesService.updatePublishDates();
 
@@ -181,19 +192,19 @@ export class ContentPagesController {
 
 	@Post('labels')
 	async getContentPageLabelsByTypeAndIds(
-		@Body() body: ContentLabelsRequestDto
+		@Body() body: ContentLabelsRequestDto,
 	): Promise<LabelObj[]> {
 		if ((body as any).labelIds) {
 			return await this.contentPagesService.getContentPageLabelsByTypeAndIds(
 				body.contentType,
-				(body as any).labelIds
+				(body as any).labelIds,
 			);
 		}
 
 		// else labels query param is set
 		return await this.contentPagesService.getContentPageLabelsByTypeAndLabels(
 			body.contentType,
-			(body as any).labels
+			(body as any).labels,
 		);
 	}
 }

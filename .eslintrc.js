@@ -9,8 +9,9 @@ module.exports = {
 		'plugin:react-hooks/recommended',
 		'prettier',
 	],
-	ignorePatterns: ["generated/*.ts"],
+	ignorePatterns: ['.eslintrc.js', 'generated/*.ts'],
 	rules: {
+		'@typescript-eslint/interface-name-prefix': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/naming-convention': [

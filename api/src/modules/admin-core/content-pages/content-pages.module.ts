@@ -4,9 +4,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ContentPagesController } from './controllers/content-pages.controller';
 import { ContentPagesService } from './services/content-pages.service';
 
-import { AdminOrganisationsModule } from '~modules/admin/organisations/admin-organisations.module';
-import { PlayerTicketModule } from '~modules/admin/player-ticket/player-ticket.module';
-import { DataModule } from '../data';
+import { AdminOrganisationsModule } from '../organisations/admin-organisations.module';
+import { PlayerTicketModule } from '../player-ticket/player-ticket.module';
+import { DataModule } from '../data/data.module';
 
 @Module({
 	controllers: [ContentPagesController],

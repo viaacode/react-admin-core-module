@@ -5,14 +5,14 @@ import {
 	GetContentPagesQuery as GetContentPagesQueryAvo,
 	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
 	Lookup_Enum_Content_Types_Enum,
-} from '~generated/graphql-db-types-avo';
+} from '../shared/generated/graphql-db-types-avo';
 import {
 	GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
 	GetContentPagesQuery as GetContentPagesQueryHetArchief,
 	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	Lookup_App_Content_Type_Enum,
-} from '~generated/graphql-db-types-hetarchief';
-import { Media } from '~modules/media/media.types';
+} from '../shared/generated/graphql-db-types-hetarchief';
+import { Media } from '../media/media.types';
 
 export enum AvoOrHetArchief {
 	avo = 'avo',
@@ -121,7 +121,8 @@ export type GqlContentBlock =
 	| GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0]
 	| GetContentPageByPathQueryAvo['app_content'][0]['content_blocks'][0];
 
-export type GqlAvoUser = GetContentPageByPathQueryAvo['app_content'][0]['profile'];
+export type GqlAvoUser =
+	GetContentPageByPathQueryAvo['app_content'][0]['profile'];
 export type GqlHetArchiefUser =
 	GetContentPageByPathQueryHetArchief['app_content_page'][0]['owner_profile'];
 export type GqlUser = GqlAvoUser | GqlHetArchiefUser;
@@ -134,7 +135,9 @@ export interface ContentPageUser {
 	groupId: string | number;
 }
 
-export type ContentPageType = Lookup_App_Content_Type_Enum | Lookup_Enum_Content_Types_Enum;
+export type ContentPageType =
+	| Lookup_App_Content_Type_Enum
+	| Lookup_Enum_Content_Types_Enum;
 export const ContentPageTypeValues = {
 	...Lookup_App_Content_Type_Enum,
 	...Lookup_Enum_Content_Types_Enum,
@@ -180,7 +183,9 @@ export interface SearchDateRange {
 	lte: string | '' | undefined;
 }
 
-export type ResolvedItemOrCollection = Partial<Avo.Item.Item | Avo.Collection.Collection> & {
+export type ResolvedItemOrCollection = Partial<
+	Avo.Item.Item | Avo.Collection.Collection
+> & {
 	src?: string;
 };
 
@@ -188,7 +193,7 @@ export type FetchSearchQueryFunctionAvo = (
 	limit: number,
 	filters: Partial<Avo.Search.Filters>,
 	orderProperty: Avo.Search.OrderProperty,
-	orderDirection: Avo.Search.OrderDirection
+	orderDirection: Avo.Search.OrderDirection,
 ) => Promise<Avo.Search.Search | null>;
 
 export enum MediaItemType {

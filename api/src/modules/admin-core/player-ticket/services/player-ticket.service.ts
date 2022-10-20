@@ -8,26 +8,29 @@ import {
 	NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
 
-import { getConfig } from '~config';
+import { getConfig } from '../../../../config';
 
 import { PlayerTicket } from '../player-ticket.types';
 
-import {
-	GetItemBrowsePathByExternalIdDocument,
-	GetItemBrowsePathByExternalIdQuery,
-} from '~generated/graphql-db-types-avo';
+import { AvoOrHetArchief } from '../../content-pages/content-pages.types';
+import { DataService } from '../../data/services/data.service';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
 	GetFileByRepresentationSchemaIdentifierQuery,
+	GetFileByRepresentationSchemaIdentifierQueryVariables,
 	GetThumbnailUrlByIdDocument,
 	GetThumbnailUrlByIdQuery,
-} from '~generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '~modules/admin/content-pages/content-pages.types';
-import { DataService } from '../data/services/data.service';
+	GetThumbnailUrlByIdQueryVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import {
+	GetItemBrowsePathByExternalIdDocument,
+	GetItemBrowsePathByExternalIdQuery,
+	GetItemBrowsePathByExternalIdQueryVariables,
+} from '../../shared/generated/graphql-db-types-avo';
 
 @Injectable()
 export class PlayerTicketService {
@@ -129,22 +132,20 @@ export class PlayerTicketService {
 			AvoOrHetArchief.hetArchief
 		) {
 			// Het archief
-			response =
-				await this.dataService.execute<GetFileByRepresentationSchemaIdentifierQuery>(
-					GetFileByRepresentationSchemaIdentifierDocument,
-					{
-						id,
-					},
-				);
+			response = await this.dataService.execute<
+				GetFileByRepresentationSchemaIdentifierQuery,
+				GetFileByRepresentationSchemaIdentifierQueryVariables
+			>(GetFileByRepresentationSchemaIdentifierDocument, {
+				id,
+			});
 		} else {
 			// AVO
-			response =
-				await this.dataService.execute<GetItemBrowsePathByExternalIdQuery>(
-					GetItemBrowsePathByExternalIdDocument,
-					{
-						externalId: id,
-					},
-				);
+			response = await this.dataService.execute<
+				GetItemBrowsePathByExternalIdQuery,
+				GetItemBrowsePathByExternalIdQueryVariables
+			>(GetItemBrowsePathByExternalIdDocument, {
+				externalId: id,
+			});
 		}
 
 		/* istanbul ignore next */
@@ -181,18 +182,16 @@ export class PlayerTicketService {
 	}
 
 	public async getThumbnailPath(id: string): Promise<string> {
-		const {
-			data: { object_ie: objectIe },
-		} = await this.dataService.execute<GetThumbnailUrlByIdQuery>(
-			GetThumbnailUrlByIdDocument,
-			{
-				id,
-			},
-		);
-		if (!objectIe[0]) {
+		const response = await this.dataService.execute<
+			GetThumbnailUrlByIdQuery,
+			GetThumbnailUrlByIdQueryVariables
+		>(GetThumbnailUrlByIdDocument, {
+			id,
+		});
+		if (!response.object_ie?.[0]) {
 			throw new NotFoundException(`Object IE with id '${id}' not found`);
 		}
 
-		return objectIe[0].schema_thumbnail_url;
+		return response.object_ie[0].schema_thumbnail_url;
 	}
 }

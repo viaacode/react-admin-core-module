@@ -1,15 +1,15 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '~config';
+import { Configuration } from '../../../../config';
 
 import { QueryOrigin } from '../types';
 
 import { DataPermissionsService } from './data-permissions.service';
 
-import { ContentPagesService } from '~modules/admin/content-pages/services/content-pages.service';
-import { Group, GroupIdToName, Permission, User } from '~modules/users/types';
-import { Idp } from '~shared/auth/auth.types';
+import { ContentPagesService } from '../../content-pages/services/content-pages.service';
+import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Idp } from '../../shared/auth/auth.types';
 
 const mockQuery = { query: 'query testQuery { username }' };
 
@@ -28,7 +28,9 @@ const mockUser: User = {
 
 const mockContentPagesService = jest.fn();
 
-const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
+const mockConfigService: Partial<
+	Record<keyof ConfigService, jest.SpyInstance>
+> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
 		if (key === 'graphQlUrl') {
 			return 'http://localhost/v1/graphql/';
@@ -61,7 +63,9 @@ describe('DataPermissionsService', () => {
 			],
 		}).compile();
 
-		dataPermissionsService = module.get<DataPermissionsService>(DataPermissionsService);
+		dataPermissionsService = module.get<DataPermissionsService>(
+			DataPermissionsService,
+		);
 	});
 
 	it('services should be defined', () => {
@@ -77,7 +81,7 @@ describe('DataPermissionsService', () => {
 			const result = await dataPermissionsService.isAllowedToExecuteQuery(
 				mockUser,
 				mockQuery,
-				QueryOrigin.ADMIN_CORE
+				QueryOrigin.ADMIN_CORE,
 			);
 
 			expect(result).toEqual(true);
@@ -93,7 +97,7 @@ describe('DataPermissionsService', () => {
 			const result = await dataPermissionsService.isAllowedToExecuteQuery(
 				mockUser,
 				mockQuery,
-				QueryOrigin.ADMIN_CORE
+				QueryOrigin.ADMIN_CORE,
 			);
 
 			expect(result).toEqual(false);
@@ -119,7 +123,7 @@ describe('DataPermissionsService', () => {
 				mockUser,
 				'TEST_QUERY',
 				QueryOrigin.ADMIN_CORE,
-				mockQuery
+				mockQuery,
 			);
 			expect(verified).toEqual(true);
 		});
@@ -131,7 +135,7 @@ describe('DataPermissionsService', () => {
 				QueryOrigin.ADMIN_CORE,
 				{
 					query: 'mutation testUpdate',
-				}
+				},
 			);
 			expect(verified).toEqual(true);
 		});

@@ -2,7 +2,7 @@ import { forwardRef, Module } from '@nestjs/common';
 
 import { SiteVariablesService } from './services/site-variables.service';
 
-import { DataModule } from '../data';
+import { DataModule } from '../data/data.module';
 
 @Module({
 	imports: [forwardRef(() => DataModule)],

@@ -9,9 +9,9 @@ import {
 	FindNavigationByPlacementQuery,
 	InsertNavigationMutation,
 	UpdateNavigationByIdMutation,
-} from '~generated/graphql-db-types-hetarchief';
-import { DataService } from '../data/services/data.service';
-import { SpecialPermissionGroups } from '~shared/types/types';
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { DataService } from '../../data/services/data.service';
+import { SpecialPermissionGroups } from '../../shared/types/types';
 
 const mockNavigationElement1 = {
 	content_path: '/gebruiksvoorwaarden',

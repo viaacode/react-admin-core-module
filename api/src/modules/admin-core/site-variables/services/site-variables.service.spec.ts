@@ -5,8 +5,8 @@ import { SiteVariablesService } from './site-variables.service';
 import {
 	GetSiteVariableByNameQuery,
 	UpdateSiteVariableByNameMutation,
-} from '~generated/graphql-db-types-hetarchief';
-import { DataService } from '../data/services/data.service';
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { DataService } from '../../data/services/data.service';
 
 const mockDataService = {
 	execute: jest.fn(),

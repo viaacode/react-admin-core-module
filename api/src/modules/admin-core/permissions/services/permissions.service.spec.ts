@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { PermissionsService } from './permissions.service';
 
-import { DataService } from '../data/services/data.service';
+import { DataService } from '../../data/services/data.service';
 
 const mockDataService = {
 	execute: jest.fn(),
