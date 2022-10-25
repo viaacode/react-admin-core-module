@@ -1,0 +1,9 @@
+.idea
+.env
+src/
+test/
+*rc
+*.js
+*.yml
+nest-cli.json
+**/*.tsbuildinfo

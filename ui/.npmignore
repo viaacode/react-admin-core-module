@@ -1,0 +1,6 @@
+.env
+.idea
+public
+scripts
+*.yml
+*.js
