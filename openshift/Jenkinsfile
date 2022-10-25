@@ -81,7 +81,6 @@ pipeline {
 							sh '''#/bin/bash
 							cp .npmrc ./ui
 							cd ui
-							cat .npmrc
 							npm publish
 							rm -f .npmrc
 							cd ..
@@ -113,9 +112,8 @@ pipeline {
 							  sh "cat $configFile > .npmrc"
 							}
 							sh '''#/bin/bash
-							cp .npmrc ./ui
+							cp .npmrc ./api
 							cd api
-							cat .npmrc
 							npm publish
 							rm -f .npmrc
 							cd ..
