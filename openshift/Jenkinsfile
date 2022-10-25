@@ -79,8 +79,9 @@ pipeline {
 							  sh "cat $configFile > .npmrc"
 							}
 							sh '''#/bin/bash
-							cd ui && npm publish
-							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+							cp ./.npmrc ./ui
+							cd ui
+							npm publish
 							rm -f .npmrc
 							cd ..
 							'''
@@ -111,10 +112,13 @@ pipeline {
 							  sh "cat $configFile > .npmrc"
 							}
 							sh '''#/bin/bash
-							cd api && npm publish
-							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+							cp ./.npmrc ./ui
+							cd api
+							npm publish
 							rm -f .npmrc
 							cd ..
+							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+							rm -f .npmrc
 							'''
 					} // script
 				}// end container
