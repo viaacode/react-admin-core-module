@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 /**
- * This script runs over all files that match *.gql.ts and extracts the gql queries and outputs them to the client-whitelist.json file in /scripts
+ * This script runs over all files that match *.graphql and extracts the gql queries and outputs them to the client-whitelist.json file in /scripts
  */
 import glob from 'glob';
 import * as path from 'path';
@@ -61,10 +61,7 @@ function extractQueriesFromCode(globPattern: string, outputFileName: string) {
 				} queries, outputted to: ${outputFile}. Copy this file to /scripts folder in the avo2 proxy`
 			);
 		} catch (err) {
-			console.error(
-				'Failed to extract graphql query whitelist',
-				JSON.stringify(err)
-			);
+			console.error('Failed to extract graphql query whitelist', JSON.stringify(err));
 		}
 	});
 }

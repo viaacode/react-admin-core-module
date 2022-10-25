@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.10.3",
+  "version": "0.11.2",
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
@@ -10,7 +10,7 @@
     "demo:eject": "react-scripts eject"
   },
   "dependencies": {
-    "@meemoo/react-components": "2.18.1",
+    "@meemoo/react-components": "2.21.1",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

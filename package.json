@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/react-admin",
-  "version": "0.10.3",
+  "version": "0.11.2",
   "description": "React admin app for meemoo projects",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -43,16 +43,17 @@
     "lint:scss:fix": "stylelint --fix --allow-empty-input src/**/*.{css,scss}",
     "test": "jest --cache",
     "type-check": "tsc --noEmit",
+    "whitelist-queries": "ts-node --project ./scripts/tsconfig.json -- scripts/whitelist-gql-queries.ts",
+    "i18n:extract": "ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts && npm run lint:ts -- --fix",
+    "convert-gql-queries-to-separate-files": "ts-node --transpile-only --require dotenv/config --project ./scripts/tsconfig.json -- scripts/convert-gql-queries-to-separate-graphql-files.ts",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
     "generate-hetarchief-database-types": "dotenv -e .env.local graphql-codegen -- --config codegen-hetarchief.yml",
-    "generate-avo-database-types": "dotenv -e .env.local graphql-codegen -- --config codegen-avo.yml",
-    "whitelist-queries": "ts-node --project ./scripts/tsconfig.json -- scripts/whitelist-gql-queries.ts",
-    "i18n:extract": "ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts && npm run lint:ts -- --fix"
+    "generate-avo-database-types": "dotenv -e .env.local graphql-codegen -- --config codegen-avo.yml"
   },
   "peerDependencies": {
     "@hookform/resolvers": "^2.8.8",
-    "@meemoo/react-components": "2.18.1",
-    "@viaa/avo2-components": "2.3.1",
+    "@meemoo/react-components": "2.21.1",
+    "@viaa/avo2-components": "2.3.2",
     "@viaa/avo2-types": "2.36.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "^1.1.1",
