@@ -1,5 +1,5 @@
 import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
-import { isEmpty, remove } from 'lodash-es';
+import { isEmpty } from 'lodash-es';
 import React, { ChangeEvent, FunctionComponent } from 'react';
 
 import { useUserGroupOptions } from '../../../content-page/hooks/useUserGroupOptions';
@@ -27,9 +27,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
 		const userGroup = evt.target.value;
 		if (values.includes(userGroup)) {
-			const newValues = [...values];
-			remove(newValues, (value) => value === userGroup);
-			onChange(newValues);
+			onChange(values.filter((value) => value !== userGroup));
 		} else {
 			onChange([...values, userGroup]);
 		}
