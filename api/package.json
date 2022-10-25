@@ -1,14 +1,15 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
-  "main": "dist/index.js",
-  "private": true,
+  "main": "dist/src/index.js",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "build-and-copy-to-proxy-hetarchief": "rimraf ../../hetarchief-proxy/node_modules/@meemoo/admin-core-api/dist && npm run build && cp -r dist package.json ../../hetarchief-proxy/node_modules/@meemoo/admin-core-api",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "dotenv -e .env/.env.local nest start",
     "start:dev": "dotenv -e .env/.env.local nest start --watch",

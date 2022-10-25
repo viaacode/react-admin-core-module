@@ -39,7 +39,7 @@ pipeline {
     }
     environment {
         OC_PROJECT = 'hetarchief'
-        BASE_IMG = 'node:12-alpine'
+        BASE_IMG = 'node:16-alpine'
         OC_URL = 'https://c113-e.private.eu-de.containers.cloud.ibm.com:30227'
         JIRA_URL = 'meemoo.atlassian.net'
         APP_NAME = 'react-admin-core-module'
@@ -57,54 +57,87 @@ pipeline {
                 }
             }
         }
-        stage('Build code') {
+        stage('Build ui code') {
             steps {
-                  container('npm') {
+                container('npm') {
                     script {
-                          sh'''#!/bin/bash
-                          npm --registry=https://registry.npmjs.org install && npm run build || exit 1
-                          '''
-                      } // script
-                  }
+                        sh'''#!/bin/bash
+                        npm --registry=https://registry.npmjs.org install && cd ui && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+                        '''
+                    } // script
+                }
             }
         }// end stage build
 
-  stage('Publish') {
+        stage('Publish ui code') {
+			steps {
+				container('npm') {
+
+					script {
+							echo "Publishing admin-core-ui package to registry"
+							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+							  sh "cat $configFile > .npmrc"
+							}
+							sh '''#/bin/bash
+							cd ui && npm publish
+							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+							rm -f .npmrc
+							cd ..
+							'''
+					} // script
+				}// end container
+			} // steps
+		} // stage
+
+        stage('Build api code') {
             steps {
-            container('npm') {
-
-                script {
-                        echo "Publishing package to registry"
-                        configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-                          sh "cat $configFile > .npmrc"
-                        }
-                        sh '''#/bin/bash
-                        npm publish
-                        echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
-                        rm -f .npmrc
+                container('npm') {
+                    script {
+                        sh'''#!/bin/bash
+                        cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
                         '''
-                } // script
-              }// end container
-            } // steps
-        } // stage
-
-    }
-    post {
-
-        always {
-
-            container('default') {
-                // Archive tets results
-                script {
-                    if (fileExists('./tests/test_results.xml')) {
-                        junit 'tests/test_results.xml'
-                    } else {
-                        echo 'No test results found'
-                    }
+                    } // script
                 }
             }
-        }
-    }
+        }// end stage build
+
+        stage('Publish api code') {
+			steps {
+				container('npm') {
+
+					script {
+							echo "Publishing admin-core-api package to registry"
+							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+							  sh "cat $configFile > .npmrc"
+							}
+							sh '''#/bin/bash
+							cd api && npm publish
+							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+							rm -f .npmrc
+							cd ..
+							'''
+					} // script
+				}// end container
+			} // steps
+		} // stage
+	} // stages
+
+	post {
+
+		always {
+
+			container('default') {
+				// Archive tets results
+				script {
+					if (fileExists('./tests/test_results.xml')) {
+						junit 'tests/test_results.xml'
+					} else {
+						echo 'No test results found'
+					}
+				}
+			}
+		}
+	}
 }
 
 void getImageFromDockerfile() {

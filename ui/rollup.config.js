@@ -37,7 +37,7 @@ export default (cliArgs) => {
 				visualizer({
 					open: cliArgs['config-analyze'],
 					filename: 'bundle-stats.html',
-					title: '@meemoo/react-admin | Rollup Visualizer',
+					title: '@meemoo/admin-core-ui | Rollup Visualizer',
 				}),
 			],
 			external: [
@@ -62,6 +62,7 @@ export default (cliArgs) => {
 				'react-hook-form',
 				'react-query',
 				'react',
+				'react/jsx-runtime',
 				'rxjs/operators',
 				'yup',
 			],
