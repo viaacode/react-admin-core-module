@@ -1,7 +1,7 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "2.0.0",
-  "private": true,
+  "version": "2.0.1",
+  "private": false,
   "main": "dist/cjs/react-admin/index.js",
   "module": "dist/esm/react-admin/index.js",
   "types": "dist/esm/react-admin/index.d.ts",
