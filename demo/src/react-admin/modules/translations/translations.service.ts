@@ -1,27 +1,43 @@
-import { get } from 'lodash-es';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
-import { TRANSLATIONS_QUERIES } from './queries/translations.queries';
+import { TranslationQueryTypes, TRANSLATIONS_QUERIES } from './queries/translations.queries';
 
 export class TranslationsService {
 	private static getQueries() {
-		return TRANSLATIONS_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
+		return TRANSLATIONS_QUERIES[
+			AdminConfigManager.getConfig().database.databaseApplicationType
+		];
 	}
 
-	static async fetchTranslations(): Promise<any> {
+	static async fetchTranslations(): Promise<
+		| TranslationQueryTypes['GetTranslationsQueryAvo']['app_site_variables']
+		| TranslationQueryTypes['GetTranslationsQueryHetArchief']['app_config']
+	> {
 		try {
 			// retrieve translations
-			const response = await dataService.query({
+			const response = await dataService.query<
+				TranslationQueryTypes['GetTranslationsQuery'],
+				TranslationQueryTypes['GetTranslationsQueryVariables']
+			>({
 				query: this.getQueries().GetTranslationsDocument,
 			});
 
-			const path =
-				AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief
-					? 'data.app_config'
-					: 'data.app_site_variables';
-			return get(response, path, null);
+			if (
+				AdminConfigManager.getConfig().database.databaseApplicationType ===
+				AvoOrHetArchief.avo
+			) {
+				return (
+					(response as TranslationQueryTypes['GetTranslationsQueryAvo'])
+						.app_site_variables || null
+				);
+			} else {
+				return (
+					(response as TranslationQueryTypes['GetTranslationsQueryHetArchief'])
+						.app_config || null
+				);
+			}
 		} catch (err) {
 			const error = new CustomError('Failed to fetch translations', err, {
 				query: 'GET_TRANSLATIONS',
@@ -33,10 +49,17 @@ export class TranslationsService {
 		}
 	}
 
+	/**
+	 * Update translation by name
+	 * @param name
+	 * @param translations
+	 */
 	static async updateTranslations(name: string, translations: any) {
 		try {
-			// update translation by name
-			await dataService.query({
+			await dataService.query<
+				TranslationQueryTypes['UpdateTranslationsMutation'],
+				TranslationQueryTypes['UpdateTranslationsMutationVariables']
+			>({
 				query: this.getQueries().UpdateTranslationsDocument,
 				variables: {
 					name,

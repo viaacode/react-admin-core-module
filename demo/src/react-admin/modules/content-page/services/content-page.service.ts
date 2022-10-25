@@ -1,6 +1,6 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { get, isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
+import { isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
 import moment from 'moment';
 import { stringify } from 'query-string';
 
@@ -11,7 +11,6 @@ import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { dataService } from '../../shared/services/data-service';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
-	CONTENT_RESULT_PATH,
 	ITEMS_PER_PAGE,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../const/content-page.consts';
@@ -20,7 +19,7 @@ import {
 	convertToContentPageInfos,
 	convertToDatabaseContentPage,
 } from '../helpers/parsers';
-import { CONTENT_PAGE_QUERIES } from '../queries/content-pages.queries';
+import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentBlockConfig } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
@@ -34,9 +33,10 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
-import { performQuery } from '~modules/shared/helpers/gql';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
+import { Order_By } from '~generated/graphql-db-types-avo';
+import { App_Content_Page_Insert_Input } from '~generated/graphql-db-types-hetarchief';
 
 export class ContentPageService {
 	private static getQueries() {
@@ -46,130 +46,136 @@ export class ContentPageService {
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const query = {
+		const response = await dataService.query<
+			ContentPageQueryTypes['GetContentPagesQuery'],
+			ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>({
 			query: this.getQueries().GetContentPagesDocument,
 			variables: {
 				limit,
-				orderBy: { title: 'asc' },
+				orderBy: { title: Order_By.Asc },
 				where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
 			},
-		};
+		});
 
 		return convertToContentPageInfos(
-			(await performQuery(
-				query,
-				CONTENT_RESULT_PATH.GET,
-				'Failed to retrieve content pages.'
-			)) || []
+			(response as any).app_content || (response as any).app_content_page
 		) as ContentPageInfo[];
 	}
 
-	public static async getPublicProjectContentItems(
-		limit: number
-	): Promise<ContentPageInfo[] | null> {
-		const query = {
+	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
+		const response = await dataService.query<
+			ContentPageQueryTypes['GetPublicProjectContentPagesQuery'],
+			ContentPageQueryTypes['GetPublicProjectContentPagesQueryVariables']
+		>({
 			query: this.getQueries().GetPublicProjectContentPagesDocument,
 			variables: {
 				limit,
-				orderBy: { title: 'asc' },
+				orderBy: { title: Order_By.Asc },
 			},
-		};
-
-		return (
-			(await performQuery(
-				query,
-				CONTENT_RESULT_PATH.GET,
-				'Failed to retrieve project content pages.'
-			)) || []
-		);
+		});
+		return ((response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo'])
+			.app_content ||
+			(response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief'])
+				.app_content_page ||
+			[]) as ContentPageInfo[];
 	}
 
 	public static async getPublicContentItemsByTitle(
 		title: string,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
-		const query = {
+		const response = await dataService.query<
+			ContentPageQueryTypes['GetPublicContentPagesByTitleQuery'],
+			ContentPageQueryTypes['GetPublicContentPagesByTitleQueryVariables']
+		>({
 			query: this.getQueries().GetPublicContentPagesByTitleDocument,
 			variables: {
 				limit: limit || null,
-				orderBy: { title: 'asc' },
+				orderBy: { title: Order_By.Asc },
 				where: {
 					title: { _ilike: `%${title}%` },
 					is_public: { _eq: true },
 					is_deleted: { _eq: false },
 				},
 			},
-		};
+		});
 
-		return (
-			(await performQuery(
-				query,
-				CONTENT_RESULT_PATH.GET,
-				'Failed to retrieve content pages by title.'
-			)) || []
-		);
+		return ((response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo'])
+			.app_content ||
+			(response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief'])
+				.app_content_page ||
+			[]) as ContentPageInfo[];
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
 		title: string,
 		limit: number
 	): Promise<Partial<ContentPageInfo>[] | null> {
-		const query = {
+		const response = await dataService.query<
+			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQuery'],
+			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryVariables']
+		>({
 			query: this.getQueries().GetPublicProjectContentPagesByTitleDocument,
 			variables: {
 				title,
 				limit,
-				orderBy: { title: 'asc' },
+				orderBy: { title: Order_By.Asc },
 			},
-		};
-
-		return performQuery(
-			query,
-			CONTENT_RESULT_PATH.GET,
-			'Failed to retrieve content pages by title.'
+		});
+		return (
+			(response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryAvo'])
+				.app_content ||
+			(
+				response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryHetArchief']
+			).app_content_page
 		);
 	}
 
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo> {
-		const query = {
+		const response = await dataService.query<
+			ContentPageQueryTypes['GetContentByIdQuery'],
+			ContentPageQueryTypes['GetContentByIdQueryVariables']
+		>({
 			query: this.getQueries().GetContentByIdDocument,
 			variables: {
 				id,
 			},
-		};
+		});
 
-		const dbContentPage: ContentPageDb | null = ((await performQuery(
-			query,
-			CONTENT_RESULT_PATH.GET,
-			`Failed to retrieve content page by id: ${id}.`
-		)) || [])[0];
+		const dbContentPage = ((response as ContentPageQueryTypes['GetContentByIdQueryAvo'])
+			.app_content ||
+			(response as ContentPageQueryTypes['GetContentByIdQueryHetArchief']).app_content_page ||
+			[])?.[0];
+
 		if (!dbContentPage) {
 			throw new CustomError('No content page found with provided id', null, {
 				id,
 				code: 'NOT_FOUND',
 			});
 		}
-		return convertToContentPageInfo(dbContentPage);
+		return convertToContentPageInfo(dbContentPage as unknown as ContentPageDb);
 	}
 
 	public static async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
 		try {
-			const contentTypes = await performQuery(
+			const response = await dataService.query<ContentPageQueryTypes['GetContentTypesQuery']>(
 				{
 					query: this.getQueries().GetContentTypesDocument,
-				},
-				['data.lookup_enum_content_types', 'data.lookup_app_content_type'],
-				'Failed to retrieve content types.'
+				}
 			);
+			const contentTypes =
+				(response as ContentPageQueryTypes['GetContentTypesQueryAvo'])
+					.lookup_enum_content_types ||
+				(response as ContentPageQueryTypes['GetContentTypesQueryHetArchief'])
+					.lookup_app_content_type;
 
-			return (contentTypes || []).map(
-				(obj: { value: Avo.ContentPage.Type; description?: string; comment?: string }) => ({
-					value: obj.value,
-					label: obj.description || obj.comment,
-				})
-			);
+			return (contentTypes || []).map((obj) => ({
+				value: obj.value,
+				label: obj.description || (obj as any).comment,
+			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
 		} catch (err) {
 			console.error('Failed to retrieve content types.', err, {
 				query: this.getQueries().GetContentTypesDocument,
@@ -191,28 +197,19 @@ export class ContentPageService {
 	public static async fetchLabelsByContentType(
 		contentType: string
 	): Promise<Avo.ContentPage.Label[]> {
-		let variables: any;
-
 		try {
-			variables = {
-				contentType,
-			};
-
-			const response = await dataService.query({
-				variables,
+			const response = await dataService.query<
+				ContentPageQueryTypes['GetContentLabelsByContentTypeQuery'],
+				ContentPageQueryTypes['GetContentLabelsByContentTypeQueryVariables']
+			>({
 				query: this.getQueries().GetContentLabelsByContentTypeDocument,
+				variables: {
+					contentType,
+				},
 			});
 
-			if (response.errors) {
-				throw new CustomError(
-					'Failed to get content labels by content type from database because of graphql errors',
-					null,
-					{ response }
-				);
-			}
-
 			const labels =
-				get(response, 'data.app_content_labels') || get(response, 'data.app_content_label');
+				(response as any).app_content_labels || (response as any).app_content_label;
 
 			if (!labels) {
 				throw new CustomError('The response does not contain any labels', null, {
@@ -226,7 +223,9 @@ export class ContentPageService {
 				'Failed to get content labels by content type from database',
 				err,
 				{
-					variables,
+					variables: {
+						contentType,
+					},
 					query: 'GET_CONTENT_LABELS_BY_CONTENT_TYPE',
 				}
 			);
@@ -246,14 +245,13 @@ export class ContentPageService {
 				})),
 			};
 
-			const response = await dataService.query({
+			await dataService.query<
+				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
+				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
+			>({
 				variables,
 				query: this.getQueries().InsertContentLabelLinksDocument,
 			});
-
-			if (response.errors) {
-				throw new CustomError('Failed due to graphql errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to insert content label links in the database', err, {
 				variables,
@@ -266,25 +264,23 @@ export class ContentPageService {
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
-		let variables: any;
-
 		try {
-			variables = {
-				labelIds,
-				contentPageId,
-			};
-
-			const response = await dataService.query({
-				variables,
+			await dataService.query<
+				ContentPageQueryTypes['DeleteContentLabelLinksMutation'],
+				ContentPageQueryTypes['DeleteContentLabelLinksMutationVariables']
+			>({
 				query: this.getQueries().DeleteContentLabelLinksDocument,
+				variables: {
+					labelIds,
+					contentPageId,
+				},
 			});
-
-			if (response.errors) {
-				throw new CustomError('Failed due to graphql errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to insert content label links in the database', err, {
-				variables,
+				variables: {
+					labelIds,
+					contentPageId,
+				},
 				query: 'DELETE_CONTENT_LABEL_LINKS',
 			});
 		}
@@ -297,7 +293,7 @@ export class ContentPageService {
 		tableColumnDataType: string,
 		where: any
 	): Promise<[ContentPageInfo[], number]> {
-		let variables: any;
+		let variables: ContentPageQueryTypes['GetContentPagesQueryVariables'] | null = null;
 		try {
 			variables = {
 				where,
@@ -311,19 +307,25 @@ export class ContentPageService {
 				),
 			};
 
-			const response = await dataService.query({
-				variables,
+			const response = await dataService.query<
+				ContentPageQueryTypes['GetContentPagesQuery'],
+				ContentPageQueryTypes['GetContentPagesQueryVariables']
+			>({
 				query: this.getQueries().GetContentPagesDocument,
+				variables,
 			});
 
-			const dbContentPages: ContentPageDb[] | null =
-				get(response, CONTENT_RESULT_PATH.GET[0]) ||
-				get(response, CONTENT_RESULT_PATH.GET[1]) ||
-				[];
+			const dbContentPages = ((response as ContentPageQueryTypes['GetContentPagesQueryAvo'])
+				.app_content ||
+				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
+					.app_content_page ||
+				[]) as ContentPageDb[];
 
 			const dbContentPageCount: number =
-				get(response, CONTENT_RESULT_PATH.COUNT[0]) ||
-				get(response, CONTENT_RESULT_PATH.COUNT[1]) ||
+				(response as ContentPageQueryTypes['GetContentPagesQueryAvo']).app_content_aggregate
+					?.aggregate?.count ||
+				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
+					.app_content_page_aggregate?.aggregate?.count ||
 				0;
 
 			if (!dbContentPages) {
@@ -361,20 +363,21 @@ export class ContentPageService {
 			const dbContentPage = this.cleanupBeforeInsert(
 				convertToDatabaseContentPage(contentPage)
 			);
-			const response = await dataService.query({
+			const response = await dataService.query<
+				ContentPageQueryTypes['InsertContentMutation'],
+				ContentPageQueryTypes['InsertContentMutationVariables']
+			>({
 				query: this.getQueries().InsertContentDocument,
 				variables: {
-					contentPage: dbContentPage,
+					contentPage: dbContentPage as App_Content_Page_Insert_Input,
 				},
 			});
 
-			if (response.errors) {
-				throw new CustomError('Response contains errors', null, { response });
-			}
-
 			const id: number | null =
-				get(response, CONTENT_RESULT_PATH.INSERT[0]) ||
-				get(response, CONTENT_RESULT_PATH.INSERT[1]) ||
+				(response as ContentPageQueryTypes['InsertContentMutationAvo']).insert_app_content
+					?.returning?.[0]?.id ||
+				(response as ContentPageQueryTypes['InsertContentMutationHetArchief'])
+					.insert_app_content_page?.returning?.[0]?.id ||
 				null;
 
 			if (id) {
@@ -410,7 +413,10 @@ export class ContentPageService {
 			const dbContentPage = this.cleanupBeforeInsert(
 				convertToDatabaseContentPage(contentPage)
 			);
-			const response = await dataService.query({
+			const response = await dataService.query<
+				ContentPageQueryTypes['UpdateContentByIdMutation'],
+				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
+			>({
 				query: this.getQueries().UpdateContentByIdDocument,
 				variables: {
 					contentPage: dbContentPage,
@@ -418,13 +424,11 @@ export class ContentPageService {
 				},
 			});
 
-			if (response.errors) {
-				throw new CustomError('Response contains errors', null, { response });
-			}
-
 			const updatedContent =
-				get(response, CONTENT_RESULT_PATH.UPDATE[0]) ||
-				get(response, CONTENT_RESULT_PATH.UPDATE[1]) ||
+				(response as ContentPageQueryTypes['UpdateContentByIdMutationAvo'])
+					.update_app_content?.affected_rows ||
+				(response as ContentPageQueryTypes['UpdateContentByIdMutationHetArchief'])
+					.update_app_content_page?.affected_rows ||
 				null;
 			if (!updatedContent) {
 				throw new CustomError(
@@ -593,14 +597,13 @@ export class ContentPageService {
 		try {
 			// query path
 			const contentPage = await ContentPageService.getContentPageById(id);
-			const response = await dataService.query({
+			await dataService.query<
+				ContentPageQueryTypes['SoftDeleteContentMutation'],
+				ContentPageQueryTypes['SoftDeleteContentMutationVariables']
+			>({
 				variables: { id, path: `${contentPage.path}-${id}` },
 				query: this.getQueries().SoftDeleteContentDocument,
 			});
-
-			if (response.errors) {
-				throw new CustomError('Failed due to graphql errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to delete content page from the database', err, {
 				id,

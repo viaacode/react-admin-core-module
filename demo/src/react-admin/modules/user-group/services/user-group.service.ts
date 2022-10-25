@@ -1,11 +1,11 @@
 import { Avo } from '@viaa/avo2-types';
-import { get, isNil } from 'lodash-es';
+import { isNil } from 'lodash-es';
 
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
 
-import { USER_GROUP_QUERIES } from '../queries/user-group.queries';
+import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../queries/user-group.queries';
 import { ITEMS_PER_PAGE } from '../const/user-group.const';
 import { UserGroup } from '../types/user-group.types';
 
@@ -28,15 +28,23 @@ export class UserGroupService {
 				limit: ITEMS_PER_PAGE,
 				orderBy: [{ [sortColumn]: sortOrder }],
 			};
-			const response = await dataService.query({
+			const response = await dataService.query<
+				UserGroupQueryTypes['GetUserGroupsWithFiltersQuery'],
+				UserGroupQueryTypes['GetUserGroupsWithFiltersQueryVariables']
+			>({
 				variables,
 				query: this.getQueries().GetUserGroupsWithFiltersDocument,
 			});
 			const userGroups =
-				get(response, 'data.users_groups') || get(response, 'data.users_group');
+				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryAvo'])
+					.users_groups ||
+				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryHetArchief'])
+					.users_group;
 			const userGroupCount =
-				get(response, 'data.users_groups_aggregate.aggregate.count') ||
-				get(response, 'data.users_group_aggregate.aggregate.count');
+				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryAvo'])
+					.users_groups_aggregate.aggregate?.count ||
+				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryHetArchief'])
+					.users_group_aggregate.aggregate?.count;
 
 			if (!userGroups) {
 				throw new CustomError(
@@ -46,7 +54,7 @@ export class UserGroupService {
 				);
 			}
 
-			return [userGroups, userGroupCount];
+			return [userGroups, userGroupCount] as [UserGroup[], number];
 		} catch (err) {
 			throw new CustomError('Failed to fetch user groups from graphql', err, {
 				variables,
@@ -60,48 +68,28 @@ export class UserGroupService {
 		return response[0];
 	}
 
-	public static async fetchUserGroupById(id: string): Promise<UserGroup | undefined> {
-		let variables: any;
-		try {
-			variables = {
-				id,
-			};
-			const response = await dataService.query({
-				variables,
-				query: this.getQueries().GetUserGroupByIdDocument,
-			});
-
-			if (response.errors) {
-				throw new CustomError('response contains errors', null, { response });
-			}
-
-			return get(response, 'data.users_groups[0]') || get(response, 'data.users_group[0]');
-		} catch (err) {
-			throw new CustomError('Failed to fetch user group by id from graphql', err, {
-				variables,
-				query: 'GET_USER_GROUP_BY_ID',
-			});
-		}
-	}
-
 	public static async insertUserGroup(userGroup: UserGroup): Promise<number> {
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				UserGroupQueryTypes['InsertUserGroupMutation'],
+				UserGroupQueryTypes['InsertUserGroupMutationVariables']
+			>({
 				query: this.getQueries().InsertUserGroupDocument,
 				variables: {
 					userGroup: {
 						label: userGroup.label,
 						description: userGroup.description,
-					} as Partial<UserGroup>,
+					} as UserGroupQueryTypes['InsertUserGroupMutationVariables']['userGroup'],
 				},
 			});
-			if (response.errors) {
-				throw new CustomError('Failed to insert user group in the database', null, {
-					response,
-					errors: response.errors,
-				});
-			}
-			const userGroupId = get(response, 'data.insert_users_groups.returning[0].id');
+
+			const userGroupId = (
+				(response as UserGroupQueryTypes['InsertUserGroupMutationAvo'])
+					.insert_users_groups ||
+				(response as UserGroupQueryTypes['InsertUserGroupMutationHetArchief'])
+					.insert_users_group
+			)?.returning?.[0]?.id;
+
 			if (isNil(userGroupId)) {
 				throw new CustomError(
 					'Response from database does not contain the id of the inserted user group',
@@ -120,22 +108,19 @@ export class UserGroupService {
 
 	static async updateUserGroup(userGroup: UserGroup): Promise<void> {
 		try {
-			const response = await dataService.query({
+			await dataService.query<
+				UserGroupQueryTypes['UpdateUserGroupMutation'],
+				UserGroupQueryTypes['UpdateUserGroupMutationVariables']
+			>({
 				query: this.getQueries().UpdateUserGroupDocument,
 				variables: {
 					userGroup: {
 						label: userGroup.label,
 						description: userGroup.description,
-					} as Partial<UserGroup>,
+					},
 					userGroupId: userGroup.id,
 				},
 			});
-			if (response.errors) {
-				throw new CustomError('Failed to update user group in the database', null, {
-					response,
-					errors: response.errors,
-				});
-			}
 		} catch (err) {
 			throw new CustomError('Failed to update user group in the database', err, {
 				userGroup,
@@ -146,18 +131,15 @@ export class UserGroupService {
 
 	public static async deleteUserGroup(userGroupId: number): Promise<void> {
 		try {
-			const response = await dataService.query({
+			await dataService.query<
+				UserGroupQueryTypes['DeleteUserGroupMutation'],
+				UserGroupQueryTypes['DeleteUserGroupMutationVariables']
+			>({
 				query: this.getQueries().DeleteUserGroupDocument,
 				variables: {
 					userGroupId,
 				},
 			});
-			if (response.errors) {
-				throw new CustomError('Failed to delete user group from the database', null, {
-					response,
-					errors: response.errors,
-				});
-			}
 		} catch (err) {
 			throw new CustomError('Failed to delete user group from the database', err, {
 				userGroupId,

@@ -1,4 +1,4 @@
-import { get, sortBy } from 'lodash-es';
+import { compact, sortBy } from 'lodash-es';
 
 import { dataService } from '../data-service';
 import { AdminConfigManager } from '~core/config';
@@ -7,28 +7,33 @@ import { CustomError } from '../../helpers/custom-error';
 
 import {
 	GetEducationLevelsDocument,
-	GetSubjectsDocument
+	GetEducationLevelsQuery,
+	GetEducationLevelsQueryVariables,
+	GetSubjectsDocument,
+	GetSubjectsQuery,
+	GetSubjectsQueryVariables,
 } from '~generated/graphql-db-types-avo';
 
 export class SettingsService {
 	public static async fetchSubjects(): Promise<string[]> {
 		// not available for archief
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
 			return [];
 		}
 
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<GetSubjectsQuery, GetSubjectsQueryVariables>({
 				query: GetSubjectsDocument,
 			});
 
-			if (response.errors) {
-				throw new CustomError('GraphQL response contains errors', null, { response });
-			}
-
-			const subjects = ((get(response, 'data.lookup_enum_lom_classification', []) || []) as {
-				description: string;
-			}[]).map((item: { description: string }) => item.description);
+			const subjects = (
+				(response.lookup_enum_lom_classification || [] || []) as {
+					description: string;
+				}[]
+			).map((item: { description: string }) => item.description);
 
 			return sortBy(subjects, (subject) => subject.toLowerCase());
 		} catch (err) {
@@ -40,22 +45,24 @@ export class SettingsService {
 
 	public static async fetchEducationLevels(): Promise<string[]> {
 		// not available for archief
-		if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.hetArchief) {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType ===
+			AvoOrHetArchief.hetArchief
+		) {
 			return [];
 		}
 
 		try {
-			const response = await dataService.query({
+			const response = await dataService.query<
+				GetEducationLevelsQuery,
+				GetEducationLevelsQueryVariables
+			>({
 				query: GetEducationLevelsDocument,
 			});
 
-			if (response.errors) {
-				throw new CustomError('GraphQL response contains errors', null, { response });
-			}
-
-			return ((get(response, 'data.lookup_enum_lom_context') || []) as {
-				description: string;
-			}[]).map((item: { description: string }) => item.description);
+			return compact(
+				(response.lookup_enum_lom_context || []).map((item) => item.description)
+			);
 		} catch (err) {
 			throw new CustomError('Failed to get education levels from the database', err, {
 				query: 'GET_EDUCATION_LEVELS',

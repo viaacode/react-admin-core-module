@@ -1,15 +1,9 @@
-import { get, isNil } from 'lodash-es';
+import { isNil } from 'lodash-es';
 
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { dataService } from '~modules/shared/services/data-service';
 import { AdminConfigManager } from '~core/config';
-import { NAVIGATION_QUERIES } from './queries/navigation.queries';
-import {
-	DeleteNavigationItemMutation,
-	GetNavigationItemByIdQuery as GetNavigationItemByIdQueryAvo,
-	InsertNavigationItemMutation,
-	UpdateNavigationItemByIdMutation,
-} from '~generated/graphql-db-types-avo';
+import { NAVIGATION_QUERIES, NavigationQueryTypes } from './queries/navigation.queries';
 import { NavigationItem } from './navigation.types';
 
 export class NavigationService {
@@ -19,7 +13,10 @@ export class NavigationService {
 
 	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {
 		try {
-			const response = await dataService.query<GetNavigationItemByIdQueryAvo>({
+			const response: any = await dataService.query<
+				NavigationQueryTypes['GetNavigationItemByIdQuery'],
+				NavigationQueryTypes['GetNavigationItemByIdQueryVariables']
+			>({
 				query: this.getQueries().GetNavigationItemByIdDocument,
 				variables: { id: id.includes('-') ? id : Number(id) },
 			});
@@ -27,15 +24,8 @@ export class NavigationService {
 			if (!response) {
 				throw new CustomError('Response is undefined');
 			}
-			if (response.errors) {
-				throw new CustomError('Response contains errors', null, { response });
-			}
 
-			return (
-				get(response, `data.app_content_nav_elements[0]`) ||
-				get(response, `data.app_navigation[0]`) ||
-				null
-			);
+			return response.app_content_nav_elements?.[0] || response.app_navigation?.[0] || null;
 		} catch (err) {
 			throw new CustomError(`Failed to fetch navigation item by id`, err, {
 				id,
@@ -46,26 +36,23 @@ export class NavigationService {
 
 	public static async fetchNavigationItems(placement?: string): Promise<NavigationItem[]> {
 		try {
-			const queryOptions = {
+			const response: any = await dataService.query<
+				| NavigationQueryTypes['GetNavigationElementsQuery']
+				| NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
+				| NavigationQueryTypes['GetNavigationElementsQueryVariables']
+				| NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
+			>({
 				query: placement
 					? this.getQueries().GetNavigationItemsByPlacementDocument
 					: this.getQueries().GetNavigationElementsDocument,
-				variables: placement ? { placement } : {},
-			};
-			const response = await dataService.query(queryOptions);
+				variables: placement ? { placement } : undefined,
+			});
 
 			if (!response) {
 				throw new CustomError('Response is undefined');
 			}
-			if (response.errors) {
-				throw new CustomError('Response contains errors', null, { response });
-			}
 
-			return (
-				get(response, `data.app_content_nav_elements`) ||
-				get(response, `data.app_navigation`) ||
-				[]
-			);
+			return response.app_content_nav_elements || response.app_navigation || [];
 		} catch (err) {
 			throw new CustomError('Failed to fetch navigation items', err, {
 				placement,
@@ -78,7 +65,10 @@ export class NavigationService {
 		navigationItem: Partial<NavigationItem>
 	): Promise<number> {
 		try {
-			const response = await dataService.query<InsertNavigationItemMutation>({
+			const response = await dataService.query<
+				NavigationQueryTypes['InsertNavigationItemMutation'],
+				NavigationQueryTypes['InsertNavigationItemMutationVariables']
+			>({
 				query: this.getQueries().InsertNavigationItemDocument,
 				variables: {
 					navigationItem,
@@ -86,12 +76,11 @@ export class NavigationService {
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 
-			if (response.errors) {
-				throw new CustomError('GraphQL response contains errors', null, { response });
-			}
 			const id =
-				get(response, 'data.insert_app_content_nav_elements.returning[0].id') ||
-				get(response, 'data.insert_app_navigation.returning[0].id');
+				(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
+					.insert_app_content_nav_elements?.returning?.[0]?.id ||
+				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
+					.insert_app_navigation?.returning?.[0]?.id;
 			if (isNil(id)) {
 				throw new CustomError('Response does not contain inserted id', null, { response });
 			}
@@ -107,7 +96,10 @@ export class NavigationService {
 	public static async updateNavigationItems(navigationItems: NavigationItem[]): Promise<void> {
 		try {
 			const promises: Promise<any>[] = navigationItems.map((navigationItem) => {
-				return dataService.query<UpdateNavigationItemByIdMutation>({
+				return dataService.query<
+					NavigationQueryTypes['UpdateNavigationItemByIdMutation'],
+					NavigationQueryTypes['UpdateNavigationItemByIdMutationVariables']
+				>({
 					query: this.getQueries().UpdateNavigationItemByIdDocument,
 					variables: {
 						id: navigationItem.id,
@@ -131,18 +123,14 @@ export class NavigationService {
 
 	public static async deleteNavigationItem(id: string): Promise<void> {
 		try {
-			const response = await dataService.query<DeleteNavigationItemMutation>({
+			await dataService.query<
+				NavigationQueryTypes['DeleteNavigationItemMutation'],
+				NavigationQueryTypes['DeleteNavigationItemMutationVariables']
+			>({
 				query: this.getQueries().DeleteNavigationItemDocument,
 				variables: { id },
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
-
-			if (!response) {
-				throw new CustomError('Response is undefined');
-			}
-			if (response.errors) {
-				throw new CustomError('Response contains errors', null, { response });
-			}
 		} catch (err) {
 			throw new CustomError('Failed to delete navigation item by id', err, {
 				id,

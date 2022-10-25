@@ -11,11 +11,6 @@ import {
 
 import { AdminConfigManager } from '~core/config';
 
-export const CONTENT_BLOCKS_RESULT_PATH: Record<string, [string, string]> = {
-	GET: ['data.app_content_blocks', 'data.app_content_block'],
-	INSERT: ['data.insert_app_content_blocks', 'data.insert_app_content_block'],
-};
-
 // Options
 const transparentOption = () => ({
 	label: AdminConfigManager.getConfig().services.i18n.tText(
