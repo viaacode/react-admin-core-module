@@ -23,26 +23,24 @@ const mockUser: User = {
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: Group.MEEMOO_ADMIN,
 	groupName: GroupIdToName[Group.MEEMOO_ADMIN],
-	permissions: Object.values(Permission),
+	permissions: Object.values(Permission)
 };
 
 const mockContentPagesService = jest.fn();
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
+const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'graphQlUrl') {
+		if (key === 'GRAPHQL_URL') {
 			return 'http://localhost/v1/graphql/';
 		}
-		if (key === 'graphQlSecret') {
+		if (key === 'GRAPHQL_SECRET') {
 			return 'graphQl-$ecret';
 		}
-		if (key == 'graphQlEnableWhitelist') {
+		if (key == 'GRAPHQL_ENABLE_WHITELIST') {
 			return false; // For testing we disable the whitelist by default
 		}
 		return key;
-	}),
+	})
 };
 
 describe('DataPermissionsService', () => {
@@ -53,18 +51,18 @@ describe('DataPermissionsService', () => {
 			providers: [
 				DataPermissionsService,
 				{
-					provide: ConfigService,
-					useValue: mockConfigService,
+					provide: ConfigService < Configuration >,
+					useValue: mockConfigService
 				},
 				{
 					provide: ContentPagesService,
-					useValue: mockContentPagesService,
-				},
-			],
+					useValue: mockContentPagesService
+				}
+			]
 		}).compile();
 
 		dataPermissionsService = module.get<DataPermissionsService>(
-			DataPermissionsService,
+				DataPermissionsService
 		);
 	});
 
@@ -75,13 +73,13 @@ describe('DataPermissionsService', () => {
 	describe('isAllowedToExecuteQuery', () => {
 		it('should allow a query when permissions are verified', async () => {
 			const verifySpy = jest
-				.spyOn(dataPermissionsService, 'verify')
-				.mockResolvedValueOnce(true);
+					.spyOn(dataPermissionsService, 'verify')
+					.mockResolvedValueOnce(true);
 
 			const result = await dataPermissionsService.isAllowedToExecuteQuery(
-				mockUser,
-				mockQuery,
-				QueryOrigin.ADMIN_CORE,
+					mockUser,
+					mockQuery,
+					QueryOrigin.ADMIN_CORE
 			);
 
 			expect(result).toEqual(true);
@@ -91,13 +89,13 @@ describe('DataPermissionsService', () => {
 
 		it('should NOT allow a query when permissions are not verified', async () => {
 			const verifySpy = jest
-				.spyOn(dataPermissionsService, 'verify')
-				.mockResolvedValueOnce(false);
+					.spyOn(dataPermissionsService, 'verify')
+					.mockResolvedValueOnce(false);
 
 			const result = await dataPermissionsService.isAllowedToExecuteQuery(
-				mockUser,
-				mockQuery,
-				QueryOrigin.ADMIN_CORE,
+					mockUser,
+					mockQuery,
+					QueryOrigin.ADMIN_CORE
 			);
 
 			expect(result).toEqual(false);
@@ -120,22 +118,22 @@ describe('DataPermissionsService', () => {
 	describe('isAllowedToExecuteQuery', () => {
 		it('should verify a query', async () => {
 			const verified = await dataPermissionsService.verify(
-				mockUser,
-				'TEST_QUERY',
-				QueryOrigin.ADMIN_CORE,
-				mockQuery,
+					mockUser,
+					'TEST_QUERY',
+					QueryOrigin.ADMIN_CORE,
+					mockQuery
 			);
 			expect(verified).toEqual(true);
 		});
 
 		it('should allow a query without specific permissions configured', async () => {
 			const verified = await dataPermissionsService.verify(
-				mockUser,
-				'UNKNOWN_QUERY',
-				QueryOrigin.ADMIN_CORE,
-				{
-					query: 'mutation testUpdate',
-				},
+					mockUser,
+					'UNKNOWN_QUERY',
+					QueryOrigin.ADMIN_CORE,
+					{
+						query: 'mutation testUpdate'
+					}
 			);
 			expect(verified).toEqual(true);
 		});

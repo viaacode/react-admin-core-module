@@ -7,11 +7,17 @@ import { TranslationsService } from '../services/translations.service';
 import { Permission } from '../../users/types';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { UpdateResponse } from '../../shared/types/types';
+import { Translations } from '../types';
 
 @ApiTags('Translations')
 @Controller('admin/translations')
 export class TranslationsController {
 	constructor(private translationsService: TranslationsService) {}
+
+	@Get('nl.json')
+	public async getTranslationsJson(): Promise<Translations> {
+		return this.translationsService.getFrontendTranslations();
+	}
 
 	@Get()
 	public async getTranslations(): Promise<

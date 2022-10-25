@@ -11,10 +11,7 @@ export class TranslationsService {
 		];
 	}
 
-	static async fetchTranslations(): Promise<
-		| TranslationQueryTypes['GetTranslationsQueryAvo']['app_site_variables']
-		| TranslationQueryTypes['GetTranslationsQueryHetArchief']['app_config']
-	> {
+	static async fetchTranslations(): Promise<{ name: string; value: Record<string, string> }[]> {
 		try {
 			// retrieve translations
 			const response = await dataService.query<

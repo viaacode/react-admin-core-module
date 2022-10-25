@@ -52,6 +52,7 @@ export const configValidationSchema = Joi.object({
 	ELASTICSEARCH_LOG_QUERIES: Joi.boolean().default(false),
 	GRAPHQL_LOG_QUERIES: Joi.boolean().default(false),
 	CLIENT_API_KEY: Joi.string(),
+	IS_ADMIN_CORE_DEMO_APP: Joi.boolean().default(false),
 });
 
 export const DEFAULT_CONFIG = {

@@ -1,1 +1,1 @@
-export const USER_GROUP_SERVICE_BASE_URL = 'admin/user-groups';
+export const USER_GROUP_SERVICE_BASE_URL = 'user-groups';

@@ -21,37 +21,37 @@
     }
   },
   "targetDefaults": {
-    "start:dev": {
+    "start:api": {
       "dependsOn": [
         "^start:dev"
       ]
     },
-    "demo:start": {
+    "start:ui": {
       "dependsOn": [
-        "^demo:start"
+        "^start"
       ]
     },
-    "build": {
+    "build-api": {
       "outputs": [
         "{projectRoot}/api/dist"
       ]
     },
-    "generate-hetarchief-database-types": {
+    "generate-hetarchief-database-types-api": {
       "outputs": [
         "{projectRoot}/api/src/modules/admin-core/shared/generated/graphql-db-types-hetarchief.ts"
       ]
     },
-    "generate-avo-database-types": {
+    "generate-avo-database-types-api": {
       "outputs": [
         "{projectRoot}/api/src/modules/admin-core/shared/generated/graphql-db-types-avo.ts"
       ]
     },
-    "generate-database-types": {
+    "generate-database-types-api": {
       "outputs": [
         "{projectRoot}/api/src/modules/admin-core/shared/generated"
       ]
     },
-    "preinstall": {
+    "preinstall-ui": {
       "outputs": [
         "{projectRoot}/ui/package-lock.json"
       ]

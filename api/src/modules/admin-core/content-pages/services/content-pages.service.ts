@@ -12,9 +12,8 @@ import { SearchResultItem } from '@viaa/avo2-types/types/search';
 import * as promiseUtils from 'blend-promise-utils';
 import { Request } from 'express';
 import { compact, fromPairs, get, isEmpty, keys, set } from 'lodash';
-import moment from 'moment';
 
-import { getConfig } from '../../../../config';
+import { Configuration } from '../../../../config';
 
 import {
 	AvoOrHetArchief,
@@ -62,7 +61,7 @@ import { PlayerTicketService } from '../../player-ticket/services/player-ticket.
 import { DataService } from '../../data/services/data.service';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { Pagination } from '@studiohyperdrive/pagination';
-import { Navigation } from '../../navigations/types';
+import { setHours, setMinutes } from 'date-fns';
 
 @Injectable()
 export class ContentPagesService {
@@ -77,14 +76,11 @@ export class ContentPagesService {
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		protected configService: ConfigService,
+		protected configService: ConfigService<Configuration>,
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.avoOrHetArchief = getConfig(
-			this.configService,
-			'databaseApplicationType',
-		);
+		this.avoOrHetArchief = this.configService.get('DATABASE_APPLICATION_TYPE');
 		this.queries = CONTENT_PAGE_QUERIES[this.avoOrHetArchief];
 	}
 
@@ -514,7 +510,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
 		>(this.queries.UpdateContentPagePublishDatesDocument, {
 			now: new Date().toISOString(),
-			publishedAt: moment().hours(7).minutes(0).toISOString(),
+			publishedAt: setMinutes(setHours(new Date(), 7), 0).toISOString(),
 		});
 		return {
 			published: response.publish_content_pages?.affected_rows || 0,
@@ -535,7 +531,7 @@ export class ContentPagesService {
 			.app_content ||
 			(response as ContentPageQueryTypes['GetContentByIdsQueryHetArchief'])
 				.app_content_page ||
-			[]) as Avo.ContentPage.Page[];
+			[]) as unknown as Avo.ContentPage.Page[];
 	}
 
 	public async getContentPageLabelsByTypeAndLabels(

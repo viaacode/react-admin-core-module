@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import config, { configValidationSchema } from './config';
 import { ContentPagesModule } from './modules/admin-core/content-pages/content-pages.module';
 import { AdminNavigationsModule } from './modules/admin-core/navigations/admin-navigations.module';
 import { AdminOrganisationsModule } from './modules/admin-core/organisations/admin-organisations.module';
@@ -11,6 +13,15 @@ import { StatusModule } from './modules/status';
 
 @Module({
 	imports: [
+		ConfigModule.forRoot({
+			ignoreEnvFile: true,
+			load: [config],
+			validationSchema: configValidationSchema,
+			validationOptions: {
+				allowUnknown: true,
+				abortEarly: true,
+			},
+		}),
 		StatusModule,
 		ContentPagesModule,
 		AdminNavigationsModule,

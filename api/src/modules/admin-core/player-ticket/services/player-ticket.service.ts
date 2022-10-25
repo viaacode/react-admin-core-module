@@ -12,7 +12,7 @@ import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
 
-import { getConfig } from '../../../../config';
+import { Configuration } from '../../../../config';
 
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -43,32 +43,34 @@ export class PlayerTicketService {
 	private readonly host: string;
 
 	constructor(
-		protected configService: ConfigService,
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+			protected configService: ConfigService<Configuration>,
+			@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+			@Inject(CACHE_MANAGER) private cacheManager: Cache,
 	) {
 		this.playerTicketsGotInstance = got.extend({
-			prefixUrl: getConfig(this.configService, 'ticketServiceUrl'),
+			prefixUrl: this.configService.get('TICKET_SERVICE_URL'),
 			resolveBodyOnly: true,
 			responseType: 'json',
 			https: {
 				rejectUnauthorized: false,
-				certificate: getConfig(this.configService, 'ticketServiceCertificate'),
-				key: getConfig(this.configService, 'ticketServiceKey'),
-				passphrase: getConfig(this.configService, 'ticketServicePassphrase'),
+				certificate:
+						this.configService.get('TICKET_SERVICE_CERTIFICATE',
+						),
+				key: this.configService.get('TICKET_SERVICE_KEY'),
+				passphrase: this.configService.get('TICKET_SERVICE_PASSPHRASE'),
 			},
 		});
-		this.ticketServiceMaxAge = getConfig(
-			this.configService,
-			'ticketServiceMaxAge',
-		);
-		this.mediaServiceUrl = getConfig(this.configService, 'mediaServiceUrl');
-		this.host = getConfig(this.configService, 'host');
+		this.ticketServiceMaxAge =
+				this.configService.get(
+						'TICKET_SERVICE_MAX_AGE',
+				);
+		this.mediaServiceUrl = this.configService.get('MEDIA_SERVICE_URL');
+		this.host = this.configService.get('HOST');
 	}
 
 	protected async getToken(
-		path: string,
-		referer: string,
+			path: string,
+			referer: string,
 	): Promise<PlayerTicket> {
 		const data = {
 			app: 'OR-*',
@@ -78,17 +80,17 @@ export class PlayerTicketService {
 		};
 
 		const playerTicket: PlayerTicket =
-			await this.playerTicketsGotInstance.get<PlayerTicket>(path, {
-				searchParams: data,
-				resolveBodyOnly: true,
-			});
+				await this.playerTicketsGotInstance.get<PlayerTicket>(path, {
+					searchParams: data,
+					resolveBodyOnly: true,
+				});
 
 		return playerTicket;
 	}
 
 	public async getPlayerToken(
-		embedUrl: string,
-		referer: string,
+			embedUrl: string,
+			referer: string,
 	): Promise<string> {
 		// no caching
 		const token = await this.getToken(embedUrl, referer);
@@ -100,14 +102,14 @@ export class PlayerTicketService {
 
 		const options = {
 			ttl: (token) =>
-				differenceInSeconds(new Date(token.context.expiration), new Date()) -
-				60, // 60s margin to get the new token
+					differenceInSeconds(new Date(token.context.expiration), new Date()) -
+					60, // 60s margin to get the new token
 		};
 		try {
 			const token = await this.cacheManager.wrap(
-				`thumbnailToken-${referer}`,
-				() => this.getToken(thumbnailPath, referer),
-				options,
+					`thumbnailToken-${referer}`,
+					() => this.getToken(thumbnailPath, referer),
+					options,
 			);
 			return token.jwt;
 		} catch (err) {
@@ -117,8 +119,8 @@ export class PlayerTicketService {
 	}
 
 	public async getPlayableUrl(
-		embedUrl: string,
-		referer: string,
+			embedUrl: string,
+			referer: string,
 	): Promise<string> {
 		const token = await this.getPlayerToken(embedUrl, referer);
 
@@ -128,33 +130,29 @@ export class PlayerTicketService {
 	public async getEmbedUrl(id: string): Promise<string> {
 		let response;
 		if (
-			getConfig(this.configService, 'databaseApplicationType') ===
-			AvoOrHetArchief.hetArchief
+				this.configService.get('DATABASE_APPLICATION_TYPE') ===
+				AvoOrHetArchief.hetArchief
 		) {
 			// Het archief
-			response = await this.dataService.execute<
-				GetFileByRepresentationSchemaIdentifierQuery,
-				GetFileByRepresentationSchemaIdentifierQueryVariables
-			>(GetFileByRepresentationSchemaIdentifierDocument, {
+			response = await this.dataService.execute<GetFileByRepresentationSchemaIdentifierQuery,
+					GetFileByRepresentationSchemaIdentifierQueryVariables>(GetFileByRepresentationSchemaIdentifierDocument, {
 				id,
 			});
 		} else {
 			// AVO
-			response = await this.dataService.execute<
-				GetItemBrowsePathByExternalIdQuery,
-				GetItemBrowsePathByExternalIdQueryVariables
-			>(GetItemBrowsePathByExternalIdDocument, {
+			response = await this.dataService.execute<GetItemBrowsePathByExternalIdQuery,
+					GetItemBrowsePathByExternalIdQueryVariables>(GetItemBrowsePathByExternalIdDocument, {
 				externalId: id,
 			});
 		}
 
 		/* istanbul ignore next */
 		const browsePath: string =
-			response?.data?.app_item_meta?.[0]?.browse_path ||
-			response?.data?.object_file?.[0]?.schema_embed_url;
+				response?.data?.app_item_meta?.[0]?.browse_path ||
+				response?.data?.object_file?.[0]?.schema_embed_url;
 		if (!browsePath) {
 			throw new NotFoundException(
-				`Object file with representation_id '${id}' not found`,
+					`Object file with representation_id '${id}' not found`,
 			);
 		}
 
@@ -162,8 +160,8 @@ export class PlayerTicketService {
 	}
 
 	public async resolveThumbnailUrl(
-		path: string,
-		referer: string,
+			path: string,
+			referer: string,
 	): Promise<string> {
 		if (!path || !referer) {
 			return path;
@@ -182,10 +180,8 @@ export class PlayerTicketService {
 	}
 
 	public async getThumbnailPath(id: string): Promise<string> {
-		const response = await this.dataService.execute<
-			GetThumbnailUrlByIdQuery,
-			GetThumbnailUrlByIdQueryVariables
-		>(GetThumbnailUrlByIdDocument, {
+		const response = await this.dataService.execute<GetThumbnailUrlByIdQuery,
+				GetThumbnailUrlByIdQueryVariables>(GetThumbnailUrlByIdDocument, {
 			id,
 		});
 		if (!response.object_ie?.[0]) {

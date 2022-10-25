@@ -7,9 +7,21 @@ import { TranslationsService } from './translations.service';
 import { SiteVariablesService } from '../../site-variables/services/site-variables.service';
 import { UpdateResponse } from '../../shared/types/types';
 
-const mockSiteVariablesService = {
+const mockSiteVariablesService: Partial<
+	Record<keyof SiteVariablesService, jest.SpyInstance>
+> = {
 	getSiteVariable: jest.fn(),
-	updateSiteVariable: jest.fn(),
+};
+
+const mockTranslationsResponse = {
+	name: 'TRANSLATIONS_FRONTEND',
+	value: { key1: 'translation 1' },
+};
+
+const mockCacheManager: Partial<Record<'wrap', jest.SpyInstance>> = {
+	wrap: jest.fn().mockImplementation((key: string, func: () => any): any => {
+		return func();
+	}) as any,
 };
 
 describe('TranslationsService', () => {
@@ -31,6 +43,33 @@ describe('TranslationsService', () => {
 
 	it('services should be defined', () => {
 		expect(translationsService).toBeDefined();
+	});
+
+	describe('getFrontendTranslations', () => {
+		it('can get translations', async () => {
+			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(
+				mockTranslationsResponse.value,
+			);
+			// mockCacheManager.wrap.mockResolvedValueOnce(mockTranslationsResponse.value);
+			const translations = await translationsService.getFrontendTranslations();
+
+			expect(translations).toEqual(mockTranslationsResponse.value);
+		});
+
+		it('throws an exception if no translations were set', async () => {
+			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(undefined);
+			mockCacheManager.wrap.mockResolvedValueOnce(undefined);
+			let error;
+			try {
+				await translationsService.getTranslations();
+			} catch (e) {
+				error = e;
+			}
+
+			expect(error.message).toEqual(
+				'No translations have been set in the database',
+			);
+		});
 	});
 
 	describe('getTranslations', () => {

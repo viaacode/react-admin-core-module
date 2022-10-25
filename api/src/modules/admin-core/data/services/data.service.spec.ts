@@ -31,13 +31,13 @@ const mockConfigService: Partial<
 	Record<keyof ConfigService, jest.SpyInstance>
 > = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'graphQlUrl') {
+		if (key === 'GRAPHQL_URL') {
 			return 'http://localhost/v1/graphql/';
 		}
-		if (key === 'graphQlSecret') {
+		if (key === 'GRAPHQL_SECRET') {
 			return 'graphQl-$ecret';
 		}
-		if (key == 'graphQlEnableWhitelist') {
+		if (key === 'GRAPHQL_ENABLE_WHITELIST') {
 			return false; // For testing we disable the whitelist by default
 		}
 		return key;
@@ -63,7 +63,7 @@ const mockQuery: GraphQlQueryDto = {
 
 describe('DataService - no whitelist', () => {
 	let dataService: DataService;
-	let configService: ConfigService;
+	let configService: ConfigService<Configuration>;
 	let dataPermissionsService: DataPermissionsService;
 
 	const mockFiles = {};
@@ -87,7 +87,9 @@ describe('DataService - no whitelist', () => {
 			.compile();
 
 		dataService = module.get<DataService>(DataService);
-		configService = module.get<ConfigService>(ConfigService);
+		configService = module.get<ConfigService>(
+			ConfigService,
+		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
 			DataPermissionsService,
 		);
@@ -301,7 +303,7 @@ describe('DataService - with whitelist', () => {
 
 describe('DataService - no whitelist files', () => {
 	let dataService: DataService;
-	let configService: ConfigService;
+	let configService: ConfigService<Configuration>;
 	let dataPermissionsService: DataPermissionsService;
 
 	beforeEach(async () => {
@@ -322,7 +324,9 @@ describe('DataService - no whitelist files', () => {
 		}).compile();
 
 		dataService = module.get<DataService>(DataService);
-		configService = module.get<ConfigService>(ConfigService);
+		configService = module.get<ConfigService>(
+			ConfigService,
+		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
 			DataPermissionsService,
 		);

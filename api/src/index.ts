@@ -6,3 +6,4 @@ export * from './modules/admin-core/player-ticket/player-ticket.module';
 export * from './modules/admin-core/site-variables/site-variables.module';
 export * from './modules/admin-core/translations/translations.module';
 export * from './modules/admin-core/user-groups/user-groups.module';
+export * from './modules/admin-core/data/data.module';

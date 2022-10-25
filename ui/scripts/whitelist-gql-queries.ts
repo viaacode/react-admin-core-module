@@ -10,7 +10,7 @@ const extractNameRegex = /(query|mutation) ([^\s(]+)(.*)/gm;
 
 function extractQueriesFromCode(globPattern: string, outputFileName: string) {
 	const options = {
-		cwd: path.join(__dirname, '../demo/src/react-admin'),
+		cwd: path.join(__dirname, '../src/react-admin'),
 	};
 
 	glob(globPattern, options, async (err: any, files: string[]) => {

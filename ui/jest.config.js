@@ -15,7 +15,7 @@ module.exports = {
 		/* Handle deps */
 		'^lodash-es$': '<rootDir>/node_modules/lodash/index.js',
 	},
-	roots: ['<rootDir>/demo'],
+	roots: ['<rootDir>'],
 	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.jsx?$': require.resolve('babel-jest'),

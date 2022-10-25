@@ -14,35 +14,33 @@ import { DataService } from '../../data/services/data.service';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import {
 	GetFileByRepresentationSchemaIdentifierQuery,
-	GetThumbnailUrlByIdQuery,
+	GetThumbnailUrlByIdQuery
 } from '../../shared/generated/graphql-db-types-hetarchief';
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
+const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'elasticSearchUrl') {
+		if (key === 'ELASTIC_SEARCH_URL') {
 			return 'http://elasticsearch'; // should be a syntactically valid url
 		}
-		if (key === 'ticketServiceUrl') {
+		if (key === 'TICKET_SERVICE_URL') {
 			return 'http://ticketservice';
 		}
-		if (key === 'mediaServiceUrl') {
+		if (key === 'MEDIA_SERVICE_URL') {
 			return 'http://mediaservice';
 		}
-		if (key === 'databaseApplicationType') {
+		if (key === 'DATABASE_APPLICATION_TYPE') {
 			return AvoOrHetArchief.hetArchief;
 		}
 		return key;
-	}),
+	})
 };
 
 const mockDataService = {
-	execute: jest.fn(),
+	execute: jest.fn()
 };
 
 const mockCacheManager: Partial<Record<keyof Cache, jest.SpyInstance>> = {
-	wrap: jest.fn(),
+	wrap: jest.fn()
 };
 
 const mockPlayerTicket: PlayerTicket = {
@@ -56,8 +54,8 @@ const mockPlayerTicket: PlayerTicket = {
 		expiration: addHours(new Date(), 4).toISOString(),
 		aud: '',
 		exp: new Date().getTime() + 5000000,
-		sub: '',
-	},
+		sub: ''
+	}
 };
 
 describe('PlayerTicketService', () => {
@@ -65,24 +63,24 @@ describe('PlayerTicketService', () => {
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [
-				PlayerTicketService,
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
-				{
-					provide: DataService,
-					useValue: mockDataService,
-				},
-				{
-					provide: CACHE_MANAGER,
-					useValue: mockCacheManager,
-				},
-			],
-		})
-			.setLogger(new TestingLogger())
-			.compile();
+					providers: [
+						PlayerTicketService,
+						{
+							provide: ConfigService < Configuration >,
+							useValue: mockConfigService
+						},
+						{
+							provide: DataService,
+							useValue: mockDataService
+						},
+						{
+							provide: CACHE_MANAGER,
+							useValue: mockCacheManager
+						}
+					]
+				})
+				.setLogger(new TestingLogger())
+				.compile();
 
 		playerTicketService = module.get<PlayerTicketService>(PlayerTicketService);
 	});
@@ -98,34 +96,34 @@ describe('PlayerTicketService', () => {
 	describe('getPlayableUrl', () => {
 		it('returns a playable url', async () => {
 			nock('http://ticketservice/')
-				.get('/vrt/item-1')
-				.query(true)
-				.reply(200, { jwt: 'secret-jwt-token' });
+					.get('/vrt/item-1')
+					.query(true)
+					.reply(200, { jwt: 'secret-jwt-token' });
 			const url = await playerTicketService.getPlayableUrl(
-				'vrt/item-1',
-				'referer',
+					'vrt/item-1',
+					'referer'
 			);
 			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
+					'http://mediaservice/vrt/item-1?token=secret-jwt-token'
 			);
 		});
 
 		it('uses the fallback referer if none was set', async () => {
 			nock('http://ticketservice/')
-				.get('/vrt/item-1')
-				.query({
-					app: 'OR-*',
-					client: '',
-					referer: 'host',
-					maxage: 'ticketServiceMaxAge',
-				})
-				.reply(200, { jwt: 'secret-jwt-token' });
+					.get('/vrt/item-1')
+					.query({
+						app: 'OR-*',
+						client: '',
+						referer: 'host',
+						maxage: 'ticketServiceMaxAge'
+					})
+					.reply(200, { jwt: 'secret-jwt-token' });
 			const url = await playerTicketService.getPlayableUrl(
-				'vrt/item-1',
-				undefined,
+					'vrt/item-1',
+					undefined
 			);
 			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
+					'http://mediaservice/vrt/item-1?token=secret-jwt-token'
 			);
 		});
 	});
@@ -133,7 +131,7 @@ describe('PlayerTicketService', () => {
 	describe('getEmbedUrl', () => {
 		it('returns the embedUrl for an item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_embed_url: 'vrt/item-1' }],
+				object_file: [{ schema_embed_url: 'vrt/item-1' }]
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -142,7 +140,7 @@ describe('PlayerTicketService', () => {
 
 		it('returns the embedUrl for an avo item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_embed_url: 'vrt/item-1' }],
+				object_file: [{ schema_embed_url: 'vrt/item-1' }]
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			mockConfigService.get.mockResolvedValueOnce(AvoOrHetArchief.avo);
@@ -152,7 +150,7 @@ describe('PlayerTicketService', () => {
 
 		it('throws a not found exception if the item was not found', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [],
+				object_file: []
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			let error;
@@ -164,7 +162,7 @@ describe('PlayerTicketService', () => {
 			expect(error.response).toEqual({
 				error: 'Not Found',
 				message: "Object file with representation_id 'unknown-id' not found",
-				statusCode: 404,
+				statusCode: 404
 			});
 		});
 	});
@@ -172,30 +170,30 @@ describe('PlayerTicketService', () => {
 	describe('getPlayerToken', () => {
 		it('returns a token for a playable item', async () => {
 			nock('http://ticketservice/')
-				.get('/vrt/browse.mp4')
-				.query(true)
-				.reply(200, mockPlayerTicket);
+					.get('/vrt/browse.mp4')
+					.query(true)
+					.reply(200, mockPlayerTicket);
 
 			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				'referer',
+					'vrt/browse.mp4',
+					'referer'
 			);
 			expect(token).toEqual('secret-jwt-token');
 		});
 
 		it('uses the fallback referer if none was set', async () => {
 			nock('http://ticketservice/')
-				.get('/vrt/browse.mp4')
-				.query({
-					app: 'OR-*',
-					client: '',
-					referer: 'host',
-					maxage: 'ticketServiceMaxAge',
-				})
-				.reply(200, mockPlayerTicket);
+					.get('/vrt/browse.mp4')
+					.query({
+						app: 'OR-*',
+						client: '',
+						referer: 'host',
+						maxage: 'ticketServiceMaxAge'
+					})
+					.reply(200, mockPlayerTicket);
 			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				undefined,
+					'vrt/browse.mp4',
+					undefined
 			);
 			expect(token).toEqual('secret-jwt-token');
 		});
@@ -204,9 +202,9 @@ describe('PlayerTicketService', () => {
 	describe('getThumbnailToken', () => {
 		it('returns a thumbnail token', async () => {
 			nock('http://ticketservice/')
-				.get('/TESTBEELD/keyframes_all')
-				.query(true)
-				.reply(200, mockPlayerTicket);
+					.get('/TESTBEELD/keyframes_all')
+					.query(true)
+					.reply(200, mockPlayerTicket);
 
 			mockCacheManager.wrap.mockImplementationOnce(async (key, fn, options) => {
 				const ticket = await fn();
@@ -234,20 +232,20 @@ describe('PlayerTicketService', () => {
 		it('returns a thumbnail url', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
 				object_ie: [
-					{ schema_thumbnail_url: 'vrt/item-1' },
-				] as GetThumbnailUrlByIdQuery['object_ie'],
+					{ schema_thumbnail_url: 'vrt/item-1' }
+				] as GetThumbnailUrlByIdQuery['object_ie']
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const getThumbnailTokenSpy = jest
-				.spyOn(playerTicketService, 'getThumbnailToken')
-				.mockResolvedValueOnce('secret-jwt-token');
+					.spyOn(playerTicketService, 'getThumbnailToken')
+					.mockResolvedValueOnce('secret-jwt-token');
 
 			const url = await playerTicketService.getThumbnailUrl(
-				'vrt-id',
-				'referer',
+					'vrt-id',
+					'referer'
 			);
 			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
+					'http://mediaservice/vrt/item-1?token=secret-jwt-token'
 			);
 
 			getThumbnailTokenSpy.mockRestore();
@@ -257,8 +255,8 @@ describe('PlayerTicketService', () => {
 	describe('resolveThumbnailUrl', () => {
 		it('does not get a token for an invalid path', async () => {
 			const getThumbnailTokenSpy = jest.spyOn(
-				playerTicketService,
-				'getThumbnailToken',
+					playerTicketService,
+					'getThumbnailToken'
 			);
 
 			const url = await playerTicketService.resolveThumbnailUrl('', 'referer');
@@ -270,13 +268,13 @@ describe('PlayerTicketService', () => {
 
 		it('does not get a token for an invalid referer', async () => {
 			const getThumbnailTokenSpy = jest.spyOn(
-				playerTicketService,
-				'getThumbnailToken',
+					playerTicketService,
+					'getThumbnailToken'
 			);
 
 			const url = await playerTicketService.resolveThumbnailUrl(
-				'http://thumbnail.jpg',
-				null,
+					'http://thumbnail.jpg',
+					null
 			);
 			expect(url).toEqual('http://thumbnail.jpg');
 			expect(getThumbnailTokenSpy).not.toBeCalled();
@@ -289,8 +287,8 @@ describe('PlayerTicketService', () => {
 		it('returns the thumbnail url for an item', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
 				object_ie: [
-					{ schema_thumbnail_url: 'vrt/item-1' },
-				] as GetThumbnailUrlByIdQuery['object_ie'],
+					{ schema_thumbnail_url: 'vrt/item-1' }
+				] as GetThumbnailUrlByIdQuery['object_ie']
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getThumbnailPath('vrt-id');
@@ -299,7 +297,7 @@ describe('PlayerTicketService', () => {
 
 		it('throws a notfoundexception if the item was not found', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				object_ie: [],
+				object_ie: []
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			let error;
@@ -311,7 +309,7 @@ describe('PlayerTicketService', () => {
 			expect(error.response).toEqual({
 				error: 'Not Found',
 				message: "Object IE with id 'unknown-id' not found",
-				statusCode: 404,
+				statusCode: 404
 			});
 		});
 	});

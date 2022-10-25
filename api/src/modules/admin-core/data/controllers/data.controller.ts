@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { DataService } from '../services/data.service';
@@ -7,8 +8,9 @@ import { DataService } from '../services/data.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 
+@UseGuards(LoggedInGuard)
 @ApiTags('GraphQL')
-@Controller('data')
+@Controller('admin/data')
 export class DataController {
 	constructor(private dataService: DataService) {}
 
@@ -17,7 +19,12 @@ export class DataController {
 		@Body() dataQueryDto: GraphQlQueryDto,
 		@SessionUser() user: SessionUserEntity,
 	): Promise<any> {
-		return this.dataService.execute(dataQueryDto.query, dataQueryDto.variables);
-		// return this.dataService.executeClientQuery(user.getUser(), dataQueryDto);
+		return {
+			data: await this.dataService.execute(
+				dataQueryDto.query,
+				dataQueryDto.variables,
+			),
+			// data: await this.dataService.executeClientQuery(user.getUser(), dataQueryDto);
+		};
 	}
 }

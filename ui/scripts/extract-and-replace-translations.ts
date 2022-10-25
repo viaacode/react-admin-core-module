@@ -1,25 +1,27 @@
 /**
  This script runs over all the code and looks for either:
-tHtml('Aanvraagformulier')
-or
-tText('Aanvraagformulier')
+ <Trans>Aanvraagformulier</Trans>
+ or
+ t('Aanvraagformulier')
 
-and replaces them with:
-tHTml('authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier')
-or
-tText('authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier')
+ and replaces them with:
+ <Trans i18nKey="authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier">Aanvraagformulier</Trans>
+ or
+ t('authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier')
 
+ and it also outputs a json file with the translatable strings:
+ {
+  "authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier": "Aanvraagformulier"
+ }
 
-and it also outputs a json file with the translatable strings:
-{
-	"authentication/views/registration-flow/r-4-manual-registration___aanvraagformulier": "Aanvraagformulier"
-}
+ Every time the `npm run extract-translations` command is run, it will extract new translations that it finds
+ (without i18nKey or not containing "___")
+ and add them to the json file without overwriting the existing strings.
 
-Every time the `npm run extract-translations` command is run, it will extract new translations that it finds
-(without i18nKey or not containing "___")
-and add them to the json file without overwriting the existing strings.
+ We can now give the src/shared/translations/nl.json file to claire to enter the final copy.
 
-We can now give the src/shared/translations/nl.json file to team meemoo to enter the final copy.
+ In the future we could add a build step to replace the translate tags with the actual translations,
+ so we don't have to load the translation framework anymore and do the bindings at runtime, but this is a nice to have.
  */
 
 import * as fs from 'fs';
@@ -27,38 +29,29 @@ import * as path from 'path';
 
 import glob from 'glob';
 import { intersection, kebabCase, keys, without } from 'lodash';
-import fetch from 'node-fetch';
-import sortObject from 'sort-object-keys';
+import { TranslationsService } from '../src/react-admin/modules/translations/translations.service';
 
-import localTranslations from '../demo/src/translations/nl.json';
+import localTranslations from '../src/shared/translations/nl.json';
 
-type keyMap = Record<string, string>;
+type keyMap = { [key: string]: string };
 
 const oldTranslations: keyMap = localTranslations;
 
 function getFormattedKey(filePath: string, key: string) {
-	try {
-		const fileKey = filePath
-			.replace(/[\\/]+/g, '/')
-			.split('.')[0]
-			.split(/[\\/]/g)
-			.map((part) => kebabCase(part))
-			.join('/')
-			.toLowerCase()
-			.replace(/(^\/+|\/+$)/g, '')
-			.trim();
-		const formattedKey = kebabCase(key);
-
-		return `${fileKey}___${formattedKey}`;
-	} catch (err) {
-		console.error('Failed to format key', filePath, key);
-	}
+	const fileKey = filePath
+		.replace(/[\\/]+/g, '/')
+		.split('.')[0]
+		.split(/[\\/]/g)
+		.map((part) => kebabCase(part))
+		.join('/')
+		.toLowerCase()
+		.replace(/(^\/+|\/+$)/g, '')
+		.trim();
+	const formattedKey = kebabCase(key);
+	return `${fileKey}___${formattedKey}`;
 }
 
 function getFormattedTranslation(translation: string) {
-	if (!translation) {
-		return translation;
-	}
 	return translation.trim().replace(/\t\t(\t)+/g, ' ');
 }
 
@@ -66,7 +59,7 @@ async function getFilesByGlob(globPattern: string): Promise<string[]> {
 	return new Promise<string[]>((resolve, reject) => {
 		const options = {
 			ignore: '**/*.d.ts',
-			cwd: path.join(__dirname, '../demo/src/react-admin'),
+			cwd: path.join(__dirname, '../src'),
 		};
 		glob(globPattern, options, (err, files) => {
 			if (err) {
@@ -83,44 +76,29 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 	// Find and extract translations, replace strings with translation keys
 	codeFiles.forEach((relativeFilePath: string) => {
 		try {
-			const absoluteFilePath = path.resolve(
-				__dirname,
-				'../demo/src/react-admin',
-				relativeFilePath
-			);
-			const content: string = fs.readFileSync(absoluteFilePath).toString();
+			const absoluteFilePath = path.resolve(__dirname, '../src', relativeFilePath);
+			let content: string = fs.readFileSync(absoluteFilePath).toString();
 
-			// Replace tHtml() and tText() functions
-			const beforeTFunction = '([^a-zA-Z])';
-			const tFuncStart = '(tHtml|tText)\\(';
-			const whitespace = '\\s*';
-			const quote = '[\'"]';
-			const translation = '([\\s\\S]+?)';
-			const translationVariables = `([s]*|,[^)]*)?`;
-			const tFuncEnd = '\\)';
-			const combinedRegex = [
-				beforeTFunction,
-				tFuncStart,
-				whitespace,
-				quote,
-				translation,
-				quote,
-				whitespace,
-				translationVariables,
-				whitespace,
-				tFuncEnd,
-			].join('');
-			const regex = new RegExp(combinedRegex, 'gim');
-			const newContent = content.replace(
+			// Replace Trans objects
+			content = content.replace(
+				/<Trans( i18nKey="([^"]+)")?>([\s\S]*?)<\/Trans>/g,
+				(match: string, keyAttribute: string, key: string, translation: string) => {
+					let formattedKey: string | undefined = key;
+					const formattedTranslation: string = getFormattedTranslation(translation);
+					if (!key) {
+						// new Trans without a key
+						formattedKey = getFormattedKey(relativeFilePath, formattedTranslation);
+					}
+					newTranslations[formattedKey] = formattedTranslation;
+					return `<Trans i18nKey="${formattedKey}">${formattedTranslation}</Trans>`;
+				}
+			);
+
+			// Replace t() functions ( including i18n.t() )
+			content = content.replace(
 				// Match char before t function to make sure it isn't part of a bigger function name, eg: sent()
-				regex,
-				(
-					match: string,
-					prefix: string,
-					tFunction: string,
-					translation: string,
-					translationParams: string | undefined
-				) => {
+				/([^a-zA-Z])t\(\s*'([\s\S]+?)'([^)]*)\)/g,
+				(match: string, prefix: string, translation: string, translationParams: string) => {
 					let formattedKey: string | undefined;
 					const formattedTranslation: string = getFormattedTranslation(translation);
 					if (formattedTranslation.includes('___')) {
@@ -128,12 +106,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 					} else {
 						formattedKey = getFormattedKey(relativeFilePath, formattedTranslation);
 					}
-
-					if (!formattedKey) {
-						return match; // Do not modify the translations, since we cannot generate a key
-					}
-
-					if ((translationParams || '').includes('(')) {
+					if (translationParams.includes('(')) {
 						console.warn(
 							'WARNING: Translation params should not contain any function calls, ' +
 								'since the regex replacement cannot deal with brackets inside the t() function. ' +
@@ -141,7 +114,6 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 							{
 								match,
 								prefix,
-								tFunction,
 								translation,
 								translationParams,
 								absoluteFilePath,
@@ -149,26 +121,15 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 						);
 					}
 					// If translation contains '___', use original translation, otherwise use translation found by the regexp
-					const hasKeyAlready = formattedTranslation.includes('___');
-					if (hasKeyAlready && !(oldTranslations as keyMap)[formattedKey]) {
-						console.error('Failed to find old translation for key: ', formattedKey);
-					}
 					newTranslations[formattedKey] =
-						(hasKeyAlready
-							? getFormattedTranslation((oldTranslations as keyMap)[formattedKey])
+						(formattedTranslation.includes('___')
+							? (oldTranslations as keyMap)[formattedKey]
 							: formattedTranslation) || '';
-
-					if (hasKeyAlready) {
-						return match;
-					} else {
-						return `${prefix}${tFunction}('${formattedKey}'${translationParams || ''})`;
-					}
+					return `${prefix}t('${formattedKey}'${translationParams})`;
 				}
 			);
 
-			if (content !== newContent) {
-				fs.writeFileSync(absoluteFilePath, newContent);
-			}
+			fs.writeFileSync(absoluteFilePath, content);
 		} catch (err) {
 			console.error(`Failed to find translations in file: ${relativeFilePath}`, err);
 		}
@@ -176,18 +137,13 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]) {
 	return newTranslations;
 }
 
-async function getOnlineTranslations() {
-	const response = await fetch(
-		`https://hetarchief-proxy-qas.hetarchief.be/translations/nl.json`,
-		{
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
-
-	return (await response.json()) as Record<string, string>;
+async function getOnlineTranslations(): Promise<Record<string, string>> {
+	try {
+		const allTranslations = await TranslationsService.fetchTranslations();
+		return allTranslations.find((t) => t.name === 'translations-backend')?.value || {};
+	} catch (err) {
+		throw new Error('Failed to get translations from the database');
+	}
 }
 
 function checkTranslationsForKeysAsValue(translationJson: string) {
@@ -203,14 +159,21 @@ function checkTranslationsForKeysAsValue(translationJson: string) {
 	} while (matches);
 
 	if (faultyTranslations.length) {
-		throw new Error(`
-			Failed to extract translations, the following translations would be overridden by their key:
-				\t${faultyTranslations.join('\n\t')}
-		`);
+		throw new Error(`Failed to extract translations, the following translations would be overridden by their key:
+\t${faultyTranslations.join('\n\t')}`);
 	}
 }
 
-async function updateTranslations(): Promise<void> {
+function sortObjectKeys(objToSort: Record<string, any>): Record<string, any> {
+	return Object.keys(objToSort)
+		.sort()
+		.reduce((obj: Record<string, string>, key) => {
+			obj[key] = objToSort[key];
+			return obj;
+		}, {});
+}
+
+async function updateTranslations() {
 	const onlineTranslations = await getOnlineTranslations();
 
 	// Extract translations from code and replace code by reference to translation key
@@ -225,10 +188,11 @@ async function updateTranslations(): Promise<void> {
 	const existingTranslationKeys: string[] = intersection(newTranslationKeys, oldTranslationKeys);
 
 	// Console log translations that were found in the json file but not in the code
-	console.warn(`
-		The following translation keys were removed:
-			\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}
-	`);
+
+	console.warn(
+		`The following translation keys were removed:
+\t${removedTranslationKeys.join('\n\t')}`
+	);
 
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslations: keyMap = {};
@@ -239,21 +203,24 @@ async function updateTranslations(): Promise<void> {
 		combinedTranslations[key] = onlineTranslations[key] || newTranslations[key];
 	});
 
-	const nlJsonContent = JSON.stringify(sortObject(combinedTranslations), null, 2);
+	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
 	fs.writeFileSync(
-		`${__dirname.replace(/\\/g, '/')}/../demo/src/translations/nl.json`,
+		`${__dirname.replace(/\\/g, '/')}/../src/shared/translations/nl.json`,
 		nlJsonContent
 	);
 
 	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
 
-	console.info(`
-		Wrote ${totalTranslations} demo/src/translations/nl.json file
-			\t${addedTranslationKeys.length} translations added
-			\t${removedTranslationKeys.length} translations deleted
-	`);
+	console.log(
+		`Wrote ${totalTranslations} src/shared/translations/nl.json file
+\t${addedTranslationKeys.length} translations added
+\t${removedTranslationKeys.length} translations deleted`
+	);
 }
 
-updateTranslations().catch((err) => console.error('Update of translations failed: ', err));
+// deepcode ignore UsageOfUndefinedReturnValue: False positive
+updateTranslations().catch((err) => {
+	console.error('Update of translations failed: ', err);
+});

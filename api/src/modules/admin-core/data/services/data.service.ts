@@ -9,10 +9,10 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import got, { Got } from 'got';
+import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
 
-import { getConfig } from '../../../../config';
+import { Configuration } from '../../../../config';
 
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { GraphQlResponse, QueryOrigin } from '../types';
@@ -30,18 +30,19 @@ export class DataService {
 	private gotInstance: Got;
 
 	constructor(
-		private configService: ConfigService,
+		private configService: ConfigService<Configuration>,
 		@Inject(forwardRef(() => DataPermissionsService))
 		private dataPermissionsService: DataPermissionsService,
 	) {
-		this.gotInstance = got.extend({
-			prefixUrl: getConfig(this.configService, 'graphQlUrl'),
+		const dbConfig: Options = {
+			prefixUrl: this.configService.get('GRAPHQL_URL'),
 			headers: {
-				'x-hasura-admin-secret': getConfig(this.configService, 'graphQlSecret'),
+				'x-hasura-admin-secret': this.configService.get('GRAPHQL_SECRET'),
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',
-		});
+		};
+		this.gotInstance = got.extend(dbConfig);
 	}
 
 	/**
@@ -92,7 +93,7 @@ export class DataService {
 			};
 
 			const id = randomUUID();
-			if (getConfig(this.configService, 'graphqlLogQueries')) {
+			if (this.configService.get('GRAPHQL_LOG_QUERIES')) {
 				this.logger.log(
 					`${id}, Executing graphql query: ${
 						queryData.query
@@ -103,7 +104,8 @@ export class DataService {
 				json: queryData,
 				resolveBodyOnly: true, // this is duplicate but fixes a typing error
 			});
-			if (getConfig(this.configService, 'graphqlLogQueries')) {
+			const shouldLogQueries = this.configService.get('GRAPHQL_LOG_QUERIES');
+			if (shouldLogQueries) {
 				this.logger.log(
 					`${id}, Response from graphql query: ${JSON.stringify(data)}`,
 				);

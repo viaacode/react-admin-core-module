@@ -20,12 +20,10 @@ const mockUser: User = {
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: Group.CP_ADMIN,
 	groupName: GroupIdToName[Group.CP_ADMIN],
-	permissions: [Permission.EDIT_ANY_CONTENT_PAGES],
+	permissions: [Permission.EDIT_ANY_CONTENT_PAGES]
 };
 
-const mockContentPagesService: Partial<
-	Record<keyof ContentPagesService, jest.SpyInstance>
-> = {
+const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
 	adaptContentPage: jest.fn(),
 	adaptContentBlock: jest.fn(),
 	getContentPagesForOverview: jest.fn(),
@@ -36,25 +34,21 @@ const mockContentPagesService: Partial<
 	updatePublishDates: jest.fn(),
 	getContentPagesByIds: jest.fn(),
 	getContentPageLabelsByTypeAndLabels: jest.fn(),
-	getContentPageLabelsByTypeAndIds: jest.fn(),
+	getContentPageLabelsByTypeAndIds: jest.fn()
 };
 
-const mockPlayerTicketService: Partial<
-	Record<keyof PlayerTicketService, jest.SpyInstance>
-> = {
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
 	getPlayableUrl: jest.fn(),
-	getEmbedUrl: jest.fn(),
+	getEmbedUrl: jest.fn()
 };
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
+const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'proxyApiKey') {
+		if (key === 'PROXY_API_KEY') {
 			return '';
 		}
 		return key;
-	}),
+	})
 };
 
 describe('ContentPagesController', () => {
@@ -68,26 +62,26 @@ describe('ContentPagesController', () => {
 			providers: [
 				{
 					provide: ContentPagesService,
-					useValue: mockContentPagesService,
+					useValue: mockContentPagesService
 				},
 				{
 					provide: PlayerTicketService,
-					useValue: mockPlayerTicketService,
+					useValue: mockPlayerTicketService
 				},
 				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
-			],
+					provide: ConfigService < Configuration >,
+					useValue: mockConfigService
+				}
+			]
 		}).compile();
 
 		contentPagesController = module.get<ContentPagesController>(
-			ContentPagesController,
+				ContentPagesController
 		);
 
 		sessionHelperSpy = jest
-			.spyOn(SessionHelper, 'getArchiefUserInfo')
-			.mockReturnValue(mockUser);
+				.spyOn(SessionHelper, 'getArchiefUserInfo')
+				.mockReturnValue(mockUser);
 	});
 
 	afterAll(async () => {

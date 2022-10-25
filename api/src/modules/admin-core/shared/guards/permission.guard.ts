@@ -3,10 +3,11 @@ import {
 	ExecutionContext,
 	ForbiddenException,
 	Injectable,
-	Logger,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
+import { Configuration } from '../../../../config';
 
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { Permission } from '../../users/types';
@@ -14,13 +15,18 @@ import { SessionHelper } from '../auth/session-helper';
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
-	private logger = new Logger(PermissionGuard.name, { timestamp: true });
-
-	constructor(private reflector: Reflector) {}
+	constructor(
+		private reflector: Reflector,
+		private configService: ConfigService<Configuration>,
+	) {}
 
 	canActivate(
 		context: ExecutionContext,
 	): boolean | Promise<boolean> | Observable<boolean> {
+		if (this.configService.get('IS_ADMIN_CORE_DEMO_APP')) {
+			return true; // There is no authentication in the admin core test app
+		}
+
 		// required permissions
 		const requiredPermissionsClass =
 			this.reflector.get<Permission[]>(

@@ -19,7 +19,7 @@ documents:
   - "!./src/react-admin/modules/user-group/queries/avo/*.graphql"
   - "!./src/react-admin/modules/content-page-labels/queries/avo/*.graphql"
 generates:
-  demo/src/react-admin/generated/graphql-db-types-hetarchief.ts:
+  src/react-admin/generated/graphql-db-types-hetarchief.ts:
     plugins:
       - typescript
       - typescript-operations

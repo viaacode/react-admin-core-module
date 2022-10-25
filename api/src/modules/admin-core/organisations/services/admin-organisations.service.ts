@@ -1,7 +1,7 @@
-import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { getConfig } from '../../../../config';
+import { Configuration } from '../../../../config';
 
 import { ORGANISATION_QUERIES } from '../admin-organisations.consts';
 import {
@@ -19,13 +19,11 @@ export class AdminOrganisationsService {
 	private queries: OrganisationQueries;
 
 	constructor(
-		private configService: ConfigService,
+		private configService: ConfigService<Configuration>,
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {
 		this.queries =
-			ORGANISATION_QUERIES[
-				getConfig(this.configService, 'databaseApplicationType')
-			];
+			ORGANISATION_QUERIES[this.configService.get('DATABASE_APPLICATION_TYPE')];
 	}
 
 	public adapt(gqlOrganisation: GqlOrganisation): Organisation {

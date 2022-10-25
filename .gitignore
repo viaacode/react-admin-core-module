@@ -236,14 +236,14 @@ storybook-static
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
 # Log files
 yarn-debug.log*
 yarn-error.log*
+
+# envrinment variables files
+.env/.env*
+!.env/.env.template
 
 # Generated outputs
 licenses.csv

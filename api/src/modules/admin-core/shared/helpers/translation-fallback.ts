@@ -1,20 +1,20 @@
-// import nlJson from '../i18n/locales/nl.json';
-//
-// export function getTranslationFallback(
-// 	key: string,
-// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// 	variables: Record<string, string | number> = {}
-// ): string {
-// 	const translation = nlJson[key];
-// 	if (translation) {
-// 		return resolveTranslationVariables(translation, variables);
-// 	}
-// 	if (key.includes('___')) {
-// 		return key.split('___')[1].replace('-', ' ') + ' ***';
-// 	} else {
-// 		return key + ' ***';
-// 	}
-// }
+import nlJson from '../i18n/locales/nl.json';
+
+export function getTranslationFallback(
+	key: string,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	variables: Record<string, string | number> = {},
+): string {
+	const translation = nlJson[key];
+	if (translation) {
+		return resolveTranslationVariables(translation, variables);
+	}
+	if (key.includes('___')) {
+		return key.split('___')[1].replace('-', ' ') + ' ***';
+	} else {
+		return key + ' ***';
+	}
+}
 
 export function resolveTranslationVariables(
 	translation: string,

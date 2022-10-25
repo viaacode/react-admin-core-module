@@ -9,38 +9,32 @@ import { PlayerTicketService } from '../../player-ticket/services/player-ticket.
 import { DataService } from '../../data/services/data.service';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
-	execute: jest.fn(),
+	execute: jest.fn()
 };
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
+const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'elasticSearchUrl') {
+		if (key === 'ELASTIC_SEARCH_URL') {
 			return 'http://elasticsearch'; // should be a syntactically valid url
 		}
-		if (key === 'ticketServiceUrl') {
+		if (key === 'TICKET_SERVICE_URL') {
 			return 'http://ticketservice';
 		}
-		if (key === 'mediaServiceUrl') {
+		if (key === 'MEDIA_SERVICE_URL') {
 			return 'http://mediaservice';
 		}
 		return key;
-	}),
+	})
 };
 
-const mockPlayerTicketService: Partial<
-	Record<keyof PlayerTicketService, jest.SpyInstance>
-> = {
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
 	getPlayableUrl: jest.fn(),
-	getEmbedUrl: jest.fn(),
+	getEmbedUrl: jest.fn()
 };
 
-const mockOrganisationsService: Partial<
-	Record<keyof AdminOrganisationsService, jest.SpyInstance>
-> = {
+const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, jest.SpyInstance>> = {
 	getOrganisation: jest.fn(),
-	adapt: jest.fn(),
+	adapt: jest.fn()
 };
 
 describe('ContentPagesService', () => {
@@ -52,21 +46,21 @@ describe('ContentPagesService', () => {
 				ContentPagesService,
 				{
 					provide: DataService,
-					useValue: mockDataService,
+					useValue: mockDataService
 				},
 				{
-					provide: ConfigService,
-					useValue: mockConfigService,
+					provide: ConfigService < Configuration >,
+					useValue: mockConfigService
 				},
 				{
 					provide: PlayerTicketService,
-					useValue: mockPlayerTicketService,
+					useValue: mockPlayerTicketService
 				},
 				{
 					provide: AdminOrganisationsService,
-					useValue: mockOrganisationsService,
-				},
-			],
+					useValue: mockOrganisationsService
+				}
+			]
 		}).compile();
 
 		contentPagesService = module.get<ContentPagesService>(ContentPagesService);

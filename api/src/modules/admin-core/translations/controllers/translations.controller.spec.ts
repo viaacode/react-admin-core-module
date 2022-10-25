@@ -43,6 +43,18 @@ describe('TranslationsController', () => {
 		expect(translationsController).toBeDefined();
 	});
 
+	describe('getFrontendTranslations', () => {
+		it('should return the translations', async () => {
+			mockTranslationsService.getTranslations.mockResolvedValueOnce(
+				mockTranslationsResponse,
+			);
+
+			const translations = await translationsController.getTranslationsJson();
+
+			expect(translations).toEqual(mockTranslationsResponse);
+		});
+	});
+
 	describe('getTranslations', () => {
 		it('should return the translations', async () => {
 			mockTranslationsService.getTranslations.mockResolvedValueOnce(
