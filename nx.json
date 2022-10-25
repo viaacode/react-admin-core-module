@@ -1,0 +1,61 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "format",
+          "lint",
+          "test",
+          "test:watch",
+          "test:cov",
+          "test:debug",
+          "test:e2e",
+          "generate-hetarchief-database-types",
+          "generate-avo-database-types",
+          "generate-database-types",
+          "preinstall"
+        ]
+      }
+    }
+  },
+  "targetDefaults": {
+    "start:api": {
+      "dependsOn": [
+        "^start:dev"
+      ]
+    },
+    "start:ui": {
+      "dependsOn": [
+        "^start"
+      ]
+    },
+    "build-api": {
+      "outputs": [
+        "{projectRoot}/api/dist"
+      ]
+    },
+    "generate-hetarchief-database-types-api": {
+      "outputs": [
+        "{projectRoot}/api/src/modules/admin-core/shared/generated/graphql-db-types-hetarchief.ts"
+      ]
+    },
+    "generate-avo-database-types-api": {
+      "outputs": [
+        "{projectRoot}/api/src/modules/admin-core/shared/generated/graphql-db-types-avo.ts"
+      ]
+    },
+    "generate-database-types-api": {
+      "outputs": [
+        "{projectRoot}/api/src/modules/admin-core/shared/generated"
+      ]
+    },
+    "preinstall-ui": {
+      "outputs": [
+        "{projectRoot}/ui/package-lock.json"
+      ]
+    }
+  },
+  "defaultBase": "main"
+}

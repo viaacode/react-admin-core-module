@@ -1,0 +1,208 @@
+import {
+	GetContentByIdsDocument as GetContentByIdsDocumentAvo,
+	GetContentByIdsQuery as GetContentByIdsQueryAvo,
+	GetContentByIdsQueryVariables as GetContentByIdsQueryVariablesAvo,
+	GetContentPageByPathDocument as GetContentPageByPathDocumentAvo,
+	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
+	GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesAvo,
+	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentAvo,
+	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryAvo,
+	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesAvo,
+	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryAvo,
+	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo,
+	GetContentPagesDocument as GetContentPagesDocumentAvo,
+	GetContentPagesQuery as GetContentPagesQueryAvo,
+	GetContentPagesQueryVariables as GetContentPagesQueryVariablesAvo,
+	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentAvo,
+	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
+	GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesAvo,
+	GetPublicContentPagesDocument as GetPublicContentPagesDocumentAvo,
+	GetPublicContentPagesQuery as GetPublicContentPagesQueryAvo,
+	GetPublicContentPagesQueryVariables as GetPublicContentPagesQueryVariablesAvo,
+	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentAvo,
+	UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationAvo,
+	UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesAvo,
+} from '../shared/generated/graphql-db-types-avo';
+import {
+	GetContentByIdsDocument as GetContentByIdsDocumentHetArchief,
+	GetContentByIdsQuery as GetContentByIdsQueryHetArchief,
+	GetContentByIdsQueryVariables as GetContentByIdsQueryVariablesHetArchief,
+	GetContentPageByPathDocument as GetContentPageByPathDocumentHetArchief,
+	GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
+	GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesHetArchief,
+	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryHetArchief,
+	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief,
+	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryHetArchief,
+	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief,
+	GetContentPagesDocument as GetContentPagesDocumentHetArchief,
+	GetContentPagesQuery as GetContentPagesQueryHetArchief,
+	GetContentPagesQueryVariables as GetContentPagesQueryVariablesHetArchief,
+	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentHetArchief,
+	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
+	GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesHetArchief,
+	GetPublicContentPagesDocument as GetPublicContentPagesDocumentHetArchief,
+	GetPublicContentPagesQuery as GetPublicContentPagesQueryHetArchief,
+	GetPublicContentPagesQueryVariables as GetPublicContentPagesQueryVariablesHetArchief,
+	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentHetArchief,
+	UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationHetArchief,
+	UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesHetArchief,
+} from '../shared/generated/graphql-db-types-hetarchief';
+import { AvoOrHetArchief, MediaPlayerPathInfo } from './content-pages.types';
+import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+
+export type ContentPageQueryTypes = {
+	GetContentByIdsQueryAvo: GetContentByIdsQueryAvo;
+	GetContentByIdsQueryHetArchief: GetContentByIdsQueryHetArchief;
+	GetContentByIdsQuery:
+		| GetContentByIdsQueryAvo
+		| GetContentByIdsQueryHetArchief;
+	GetContentPageByPathQueryAvo: GetContentPageByPathQueryAvo;
+	GetContentPageByPathQueryHetArchief: GetContentPageByPathQueryHetArchief;
+	GetContentPageByPathQuery:
+		| GetContentPageByPathQueryAvo
+		| GetContentPageByPathQueryHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryAvo: GetContentPageLabelsByTypeAndIdsQueryAvo;
+	GetContentPageLabelsByTypeAndIdsQueryHetArchief: GetContentPageLabelsByTypeAndIdsQueryHetArchief;
+	GetContentPageLabelsByTypeAndIdsQuery:
+		| GetContentPageLabelsByTypeAndIdsQueryAvo
+		| GetContentPageLabelsByTypeAndIdsQueryHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryAvo: GetContentPageLabelsByTypeAndLabelsQueryAvo;
+	GetContentPageLabelsByTypeAndLabelsQueryHetArchief: GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQuery:
+		| GetContentPageLabelsByTypeAndLabelsQueryAvo
+		| GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
+	GetContentPagesQueryAvo: GetContentPagesQueryAvo;
+	GetContentPagesQueryHetArchief: GetContentPagesQueryHetArchief;
+	GetContentPagesQuery:
+		| GetContentPagesQueryAvo
+		| GetContentPagesQueryHetArchief;
+	GetContentPagesWithBlocksQueryAvo: GetContentPagesWithBlocksQueryAvo;
+	GetContentPagesWithBlocksQueryHetArchief: GetContentPagesWithBlocksQueryHetArchief;
+	GetContentPagesWithBlocksQuery:
+		| GetContentPagesWithBlocksQueryAvo
+		| GetContentPagesWithBlocksQueryHetArchief;
+	GetPublicContentPagesQueryAvo: GetPublicContentPagesQueryAvo;
+	GetPublicContentPagesQueryHetArchief: GetPublicContentPagesQueryHetArchief;
+	GetPublicContentPagesQuery:
+		| GetPublicContentPagesQueryAvo
+		| GetPublicContentPagesQueryHetArchief;
+	UpdateContentPagePublishDatesMutationAvo: UpdateContentPagePublishDatesMutationAvo;
+	UpdateContentPagePublishDatesMutationHetArchief: UpdateContentPagePublishDatesMutationHetArchief;
+	UpdateContentPagePublishDatesMutation:
+		| UpdateContentPagePublishDatesMutationAvo
+		| UpdateContentPagePublishDatesMutationHetArchief;
+
+	GetContentByIdsQueryVariablesAvo: GetContentByIdsQueryVariablesAvo;
+	GetContentByIdsQueryVariablesHetArchief: GetContentByIdsQueryVariablesHetArchief;
+	GetContentByIdsQueryVariables:
+		| GetContentByIdsQueryVariablesAvo
+		| GetContentByIdsQueryVariablesHetArchief;
+	GetContentPageByPathQueryVariablesAvo: GetContentPageByPathQueryVariablesAvo;
+	GetContentPageByPathQueryVariablesHetArchief: GetContentPageByPathQueryVariablesHetArchief;
+	GetContentPageByPathQueryVariables:
+		| GetContentPageByPathQueryVariablesAvo
+		| GetContentPageByPathQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryVariablesAvo: GetContentPageLabelsByTypeAndIdsQueryVariablesAvo;
+	GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryVariables:
+		| GetContentPageLabelsByTypeAndIdsQueryVariablesAvo
+		| GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo: GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo;
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryVariables:
+		| GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo
+		| GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
+	GetContentPagesQueryVariablesAvo: GetContentPagesQueryVariablesAvo;
+	GetContentPagesQueryVariablesHetArchief: GetContentPagesQueryVariablesHetArchief;
+	GetContentPagesQueryVariables:
+		| GetContentPagesQueryVariablesAvo
+		| GetContentPagesQueryVariablesHetArchief;
+	GetContentPagesWithBlocksQueryVariablesAvo: GetContentPagesWithBlocksQueryVariablesAvo;
+	GetContentPagesWithBlocksQueryVariablesHetArchief: GetContentPagesWithBlocksQueryVariablesHetArchief;
+	GetContentPagesWithBlocksQueryVariables:
+		| GetContentPagesWithBlocksQueryVariablesAvo
+		| GetContentPagesWithBlocksQueryVariablesHetArchief;
+	GetPublicContentPagesQueryVariablesAvo: GetPublicContentPagesQueryVariablesAvo;
+	GetPublicContentPagesQueryVariablesHetArchief: GetPublicContentPagesQueryVariablesHetArchief;
+	GetPublicContentPagesQueryVariables:
+		| GetPublicContentPagesQueryVariablesAvo
+		| GetPublicContentPagesQueryVariablesHetArchief;
+	UpdateContentPagePublishDatesMutationVariablesAvo: UpdateContentPagePublishDatesMutationVariablesAvo;
+	UpdateContentPagePublishDatesMutationVariablesHetArchief: UpdateContentPagePublishDatesMutationVariablesHetArchief;
+	UpdateContentPagePublishDatesMutationVariables:
+		| UpdateContentPagePublishDatesMutationVariablesAvo
+		| UpdateContentPagePublishDatesMutationVariablesHetArchief;
+};
+
+type ContentPageQueries = {
+	GetContentByIdsDocument: TypedDocumentNode;
+	GetContentPageByPathDocument: TypedDocumentNode;
+	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode;
+	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode;
+	GetContentPagesDocument: TypedDocumentNode;
+	GetContentPagesWithBlocksDocument: TypedDocumentNode;
+	GetPublicContentPagesDocument: TypedDocumentNode;
+	UpdateContentPagePublishDatesDocument: TypedDocumentNode;
+};
+
+export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> =
+	{
+		[AvoOrHetArchief.avo]: {
+			GetContentByIdsDocument: GetContentByIdsDocumentAvo,
+			GetContentPageByPathDocument: GetContentPageByPathDocumentAvo,
+			GetContentPageLabelsByTypeAndIdsDocument:
+				GetContentPageLabelsByTypeAndIdsDocumentAvo,
+			GetContentPageLabelsByTypeAndLabelsDocument:
+				GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+			GetContentPagesDocument: GetContentPagesDocumentAvo,
+			GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
+			GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
+			UpdateContentPagePublishDatesDocument:
+				UpdateContentPagePublishDatesDocumentAvo,
+		},
+		[AvoOrHetArchief.hetArchief]: {
+			GetContentByIdsDocument: GetContentByIdsDocumentHetArchief,
+			GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
+			GetContentPageLabelsByTypeAndIdsDocument:
+				GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+			GetContentPageLabelsByTypeAndLabelsDocument:
+				GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+			GetContentPagesDocument: GetContentPagesDocumentHetArchief,
+			GetContentPagesWithBlocksDocument:
+				GetContentPagesWithBlocksDocumentHetArchief,
+			GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
+			UpdateContentPagePublishDatesDocument:
+				UpdateContentPagePublishDatesDocumentHetArchief,
+		},
+	};
+
+export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } =
+	{
+		MEDIA_PLAYER: {
+			getItemExternalIdPath: 'variables.componentState.item.value',
+			setItemExternalIdPath: 'variables.componentState.external_id',
+			setVideoSrcPath: 'variables.componentState.src',
+			setPosterSrcPath: 'variables.componentState.poster',
+			setTitlePath: 'variables.componentState.title',
+			setDescriptionPath: 'variables.componentState.description',
+			setIssuedPath: 'variables.componentState.issued',
+			setOrganisationPath: 'variables.componentState.organisation',
+			setDurationPath: 'variables.componentState.duration',
+		},
+		MEDIA_PLAYER_TITLE_TEXT_BUTTON: {
+			getItemExternalIdPath: 'variables.componentState.mediaItem.value',
+			setItemExternalIdPath: 'variables.componentState.mediaExternalId',
+			setVideoSrcPath: 'variables.componentState.mediaSrc',
+			setPosterSrcPath: 'variables.componentState.mediaPoster',
+			setTitlePath: 'variables.componentState.mediaTitle',
+			setDescriptionPath: 'variables.componentState.mediaDescription',
+			setIssuedPath: 'variables.componentState.mediaIssued',
+			setOrganisationPath: 'variables.componentState.mediaOrganisation',
+			setDurationPath: 'variables.componentState.mediaDuration',
+		},
+	};
+
+export const DEFAULT_AUDIO_STILL = '/images/audio-still.svg';

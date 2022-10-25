@@ -1,0 +1,26 @@
+overwrite: true
+schema:
+  - ${GRAPHQL_URL_HETARCHIEF}:
+      headers:
+        x-hasura-admin-secret: ${GRAPHQL_SECRET_HETARCHIEF}
+
+documents:
+  - "./src/react-admin/**/*.graphql"
+  # avo specific types are generated using a separate codegen config file, otherwise we have naming conflicts between the queries
+  - "!./src/react-admin/modules/content-page/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/collection/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/shared/services/organization-service/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/shared/services/relation-service/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/shared/services/settings-service/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/item/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/navigation/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/translations/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/user/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/user-group/queries/avo/*.graphql"
+  - "!./src/react-admin/modules/content-page-labels/queries/avo/*.graphql"
+generates:
+  src/react-admin/generated/graphql-db-types-hetarchief.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
