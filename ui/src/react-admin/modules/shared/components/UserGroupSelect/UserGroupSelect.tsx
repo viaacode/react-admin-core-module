@@ -1,11 +1,12 @@
-import { FormGroup, TagInfo, TagsInput } from '@viaa/avo2-components';
+import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
 import { isEmpty } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import React, { ChangeEvent, FunctionComponent } from 'react';
 
 import { useUserGroupOptions } from '../../../content-page/hooks/useUserGroupOptions';
+import { Checkbox } from '@meemoo/react-components';
 
 export interface UserGroupSelectProps {
-	label: string;
+	label: string | undefined;
 	error: string | undefined;
 	placeholder: string;
 	values: string[];
@@ -23,25 +24,49 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 }) => {
 	const [userGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
 
-	const handleSelectOnChange = (values: TagInfo[] | null) => {
-		onChange((values || []).map((val) => val.value as string));
+	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
+		const userGroup = evt.target.value;
+		if (values.includes(userGroup)) {
+			onChange(values.filter((value) => value !== userGroup));
+		} else {
+			onChange([...values, userGroup]);
+		}
 	};
 
-	const selectedOptions = userGroupOptions.filter((userGroupOption: TagInfo) => {
-		return values.includes(userGroupOption.value as string);
-	});
+	const getLabel = () => {
+		const parts = [];
+		if (label) {
+			parts.push(label);
+		}
+		if (placeholder && values.length === 0) {
+			parts.push(placeholder);
+		}
+		return parts.join(': ');
+	};
 
 	if (isEmpty(userGroupOptions)) {
 		return null;
 	}
 	return (
-		<FormGroup error={error} label={label} required={required}>
-			<TagsInput
-				placeholder={placeholder}
-				options={userGroupOptions}
-				onChange={handleSelectOnChange}
-				value={selectedOptions}
-			/>
+		<FormGroup
+			error={error}
+			label={getLabel()}
+			required={required}
+			className="c-user-group-select"
+		>
+			<CheckboxGroup>
+				{userGroupOptions.map((userGroupOption) => {
+					return (
+						<Checkbox
+							key={userGroupOption.value}
+							label={userGroupOption.label}
+							value={userGroupOption.value}
+							checked={values.includes(String(userGroupOption.value))}
+							onChange={handleCheckboxChanged}
+						></Checkbox>
+					);
+				})}
+			</CheckboxGroup>
 		</FormGroup>
 	);
 };
