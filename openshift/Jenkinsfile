@@ -74,6 +74,7 @@ pipeline {
 				container('npm') {
 
 					script {
+						try {
 							echo "Publishing admin-core-ui package to registry"
 							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
 							  sh "cat $configFile > .npmrc"
@@ -85,6 +86,15 @@ pipeline {
 							rm -f .npmrc
 							cd ..
 							'''
+						} catch (err) {
+							echo err.getMessage()
+							if [[ err.getMessage() == *"Repository does not allow updating assets"* ]]; then
+                            	echo "admin-core-ui package version number was not updated, continuing with api build"
+                            else
+                            	echo "admin-core-ui package failed to publish"
+                            	currentBuild.result = 'FAILURE'
+                            fi
+						}
 					} // script
 				}// end container
 			} // steps
@@ -107,6 +117,7 @@ pipeline {
 				container('npm') {
 
 					script {
+						try {
 							echo "Publishing admin-core-api package to registry"
 							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
 							  sh "cat $configFile > .npmrc"
@@ -120,6 +131,15 @@ pipeline {
 							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
 							rm -f .npmrc
 							'''
+						} catch (err) {
+							echo err.getMessage()
+							if [[ err.getMessage() == *"Repository does not allow updating assets"* ]]; then
+                            	echo "admin-core-api package version number was not updated, continuing pipeline"
+                            else
+                            	echo "admin-core-api package failed to publish"
+                            	currentBuild.result = 'FAILURE'
+                            fi
+						}
 					} // script
 				}// end container
 			} // steps
