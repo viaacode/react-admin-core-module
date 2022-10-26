@@ -6,5 +6,6 @@ export * from './player-ticket';
 export * from './site-variables';
 export * from './translations';
 export * from './user-groups';
+export * from './status';
 export * from './data';
 export * from './shared/types';

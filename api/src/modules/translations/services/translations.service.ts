@@ -14,7 +14,7 @@ import { Cache } from 'cache-manager';
 
 import { TranslationKey } from '../types';
 
-import { SiteVariablesService } from '../../site-variables/services/site-variables.service';
+import { SiteVariablesService } from '../../site-variables';
 import { Translations } from '../types';
 import { UpdateResponse } from '../../shared/types/types';
 

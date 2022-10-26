@@ -8,8 +8,10 @@ import {
 	AdminTranslationsModule,
 	AdminUserGroupsModule,
 	ContentPagesModule,
+	DataModule,
 	PlayerTicketModule,
 	SiteVariablesModule,
+	StatusModule,
 } from './modules';
 
 @Module({
@@ -22,14 +24,16 @@ import {
 				abortEarly: true,
 			},
 		}),
-		ContentPagesModule,
 		AdminNavigationsModule,
 		AdminOrganisationsModule,
 		AdminPermissionsModule,
-		PlayerTicketModule,
-		SiteVariablesModule,
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
+		ContentPagesModule,
+		DataModule,
+		PlayerTicketModule,
+		SiteVariablesModule,
+		StatusModule,
 	],
 })
 export class AdminCoreModule {}
