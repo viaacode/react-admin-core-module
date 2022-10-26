@@ -17,7 +17,9 @@ jest.mock('fs-extra');
 
 const mockedFse = fse as any;
 
-const mockDataPermissionsService: Partial<Record<keyof DataPermissionsService, jest.SpyInstance>> = {
+const mockDataPermissionsService: Partial<
+	Record<keyof DataPermissionsService, jest.SpyInstance>
+> = {
 	verify: jest.fn(),
 	isAllowedToExecuteQuery: jest.fn(),
 	isWhitelistEnabled: jest.fn(),
@@ -25,12 +27,14 @@ const mockDataPermissionsService: Partial<Record<keyof DataPermissionsService, j
 	getQueryName: jest.fn(),
 };
 
-const mockConfigService: Partial<Record<keyof ConfigService, jest.SpyInstance>> = {
+const mockConfigService: Partial<
+	Record<keyof ConfigService, jest.SpyInstance>
+> = {
 	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'GRAPHQL_URL') {
+		if (key === 'GRAPHQL_URL_HET_ARCHIEF') {
 			return 'http://localhost/v1/graphql/';
 		}
-		if (key === 'GRAPHQL_SECRET') {
+		if (key === 'GRAPHQL_SECRET_HET_ARCHIEF') {
 			return 'graphQl-$ecret';
 		}
 		if (key === 'GRAPHQL_ENABLE_WHITELIST') {
@@ -67,27 +71,27 @@ describe('DataService - no whitelist', () => {
 	beforeEach(async () => {
 		mockedFse.__setMockFiles(mockFiles);
 		const module: TestingModule = await Test.createTestingModule({
-					providers: [
-						DataService,
-						{
-							provide: DataPermissionsService,
-							useValue: mockDataPermissionsService,
-						},
-						{
-							provide: ConfigService,
-							useValue: mockConfigService,
-						},
-					],
-				})
-				.setLogger(new TestingLogger())
-				.compile();
+			providers: [
+				DataService,
+				{
+					provide: DataPermissionsService,
+					useValue: mockDataPermissionsService,
+				},
+				{
+					provide: ConfigService,
+					useValue: mockConfigService,
+				},
+			],
+		})
+			.setLogger(new TestingLogger())
+			.compile();
 
 		dataService = module.get<DataService>(DataService);
 		configService = module.get<ConfigService>(
-				ConfigService,
+			ConfigService,
 		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
-				DataPermissionsService,
+			DataPermissionsService,
 		);
 
 		mockDataPermissionsService.getQueryName.mockReturnValue('testQuery');
@@ -112,10 +116,10 @@ describe('DataService - no whitelist', () => {
 			});
 			mockDataPermissionsService.verify.mockReturnValueOnce(true);
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					true,
+				true,
 			);
 			mockDataPermissionsService.getWhitelistedQuery.mockReturnValueOnce(
-					mockQuery.query,
+				mockQuery.query,
 			);
 
 			const result = await dataService.executeClientQuery(mockUser, mockQuery);
@@ -128,10 +132,10 @@ describe('DataService - no whitelist', () => {
 		it('should throw an ForbiddenException when the query is not allowed to be executed', async () => {
 			mockDataPermissionsService.verify.mockReturnValueOnce(false);
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					false,
+				false,
 			);
 			mockDataPermissionsService.getWhitelistedQuery.mockReturnValueOnce(
-					mockQuery.query,
+				mockQuery.query,
 			);
 
 			let error;
@@ -155,10 +159,10 @@ describe('DataService - no whitelist', () => {
 			});
 			mockDataPermissionsService.verify.mockReturnValueOnce(true);
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					true,
+				true,
 			);
 			mockDataPermissionsService.getWhitelistedQuery.mockReturnValueOnce(
-					mockQuery.query,
+				mockQuery.query,
 			);
 
 			let error;
@@ -176,10 +180,10 @@ describe('DataService - no whitelist', () => {
 
 		it('should not execute a not-whitelisted query', async () => {
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					false,
+				false,
 			);
 			mockDataPermissionsService.getWhitelistedQuery.mockReturnValueOnce(
-					undefined,
+				undefined,
 			);
 
 			let error;
@@ -198,16 +202,16 @@ describe('DataService - no whitelist', () => {
 
 		it('should throw an internal server error when the graphql server returns errors', async () => {
 			nock('http://localhost/')
-					.post('/v1/graphql/')
-					.reply(201, {
-						errors: [
-							{
-								message: 'unknown graphql error',
-							},
-						],
-					});
+				.post('/v1/graphql/')
+				.reply(201, {
+					errors: [
+						{
+							message: 'unknown graphql error',
+						},
+					],
+				});
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					true,
+				true,
 			);
 			mockDataPermissionsService.verify.mockReturnValueOnce(true);
 			let error;
@@ -231,7 +235,7 @@ describe('DataService - with whitelist', () => {
 	const mockFiles = {
 		'proxy-whitelist.json': '{ "GET_PROXY_QUERY": "query getProxyQuery() {}"	}',
 		'client-whitelist.json':
-				'{	"GET_CLIENT_QUERY": "query getClientQuery() {}" }',
+			'{	"GET_CLIENT_QUERY": "query getClientQuery() {}" }',
 	};
 
 	beforeEach(async () => {
@@ -260,7 +264,7 @@ describe('DataService - with whitelist', () => {
 				data: 'ok',
 			});
 			mockDataPermissionsService.isAllowedToExecuteQuery.mockReturnValueOnce(
-					true,
+				true,
 			);
 			mockDataPermissionsService.isWhitelistEnabled.mockReturnValueOnce(true);
 			mockDataPermissionsService.verify.mockReturnValueOnce(true);
@@ -321,10 +325,10 @@ describe('DataService - no whitelist files', () => {
 
 		dataService = module.get<DataService>(DataService);
 		configService = module.get<ConfigService>(
-				ConfigService,
+			ConfigService,
 		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
-				DataPermissionsService,
+			DataPermissionsService,
 		);
 	});
 

@@ -10,7 +10,7 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('GraphQL')
-@Controller('admin/data')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/data')
 export class DataController {
 	constructor(private dataService: DataService) {}
 

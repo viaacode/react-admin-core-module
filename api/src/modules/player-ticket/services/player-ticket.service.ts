@@ -53,7 +53,7 @@ export class PlayerTicketService {
 			responseType: 'json',
 			https: {
 				rejectUnauthorized: false,
-				certificate: this.configService.get('TICKET_SERVICE_CERTIFICATE'),
+				certificate: this.configService.get('TICKET_SERVICE_CERT'),
 				key: this.configService.get('TICKET_SERVICE_KEY'),
 				passphrase: this.configService.get('TICKET_SERVICE_PASSPHRASE'),
 			},

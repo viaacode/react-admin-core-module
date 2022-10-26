@@ -30,7 +30,7 @@ import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 
 @ApiTags('ContentPages')
-@Controller('admin/content-pages')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
 export class ContentPagesController {
 	private logger: Logger = new Logger(ContentPagesController.name, {
 		timestamp: true,

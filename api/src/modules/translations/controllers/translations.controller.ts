@@ -10,7 +10,7 @@ import { UpdateResponse } from '../../shared/types/types';
 import { Translations } from '../types';
 
 @ApiTags('Translations')
-@Controller('admin/translations')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/translations')
 export class TranslationsController {
 	constructor(private translationsService: TranslationsService) {}
 

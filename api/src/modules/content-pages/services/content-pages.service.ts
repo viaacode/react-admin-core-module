@@ -55,10 +55,10 @@ import {
 } from '../content-pages.consts';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { MediaItemsDto } from '../dto/resolve-media-grid-blocks.dto';
-import { Organisation } from '../../organisations/admin-organisations.types';
-import { AdminOrganisationsService } from '../../organisations/services/admin-organisations.service';
-import { PlayerTicketService } from '../../player-ticket/services/player-ticket.service';
-import { DataService } from '../../data/services/data.service';
+import { Organisation } from '../../organisations';
+import { AdminOrganisationsService } from '../../organisations';
+import { PlayerTicketService } from '../../player-ticket';
+import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { Pagination } from '@studiohyperdrive/pagination';
 import { setHours, setMinutes } from 'date-fns';
@@ -70,15 +70,15 @@ export class ContentPagesService {
 	});
 	private readonly avoOrHetArchief: string;
 	private queries:
-			| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.avo]
-			| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.hetArchief];
+		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.avo]
+		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.hetArchief];
 	private fetchSearchQueryAvo: FetchSearchQueryFunctionAvo | null = null;
 
 	constructor(
-			@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-			protected configService: ConfigService<Configuration>,
-			protected playerTicketService: PlayerTicketService,
-			protected organisationsService: AdminOrganisationsService,
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+		protected configService: ConfigService<Configuration>,
+		protected playerTicketService: PlayerTicketService,
+		protected organisationsService: AdminOrganisationsService,
 	) {
 		this.avoOrHetArchief = this.configService.get('DATABASE_APPLICATION_TYPE');
 		this.queries = CONTENT_PAGE_QUERIES[this.avoOrHetArchief];
@@ -114,27 +114,27 @@ export class ContentPagesService {
 			contentType: gqlContentPage?.content_type as ContentPageType,
 			contentWidth: gqlContentPage?.content_width as ContentWidth,
 			owner: this.adaptUser(
-					(gqlContentPage as any)?.owner_profile ||
+				(gqlContentPage as any)?.owner_profile ||
 					(gqlContentPage as any)?.profile,
 			),
 			userProfileId: gqlContentPage?.user_profile_id,
 			userGroupIds: gqlContentPage?.user_group_ids,
 			content_blocks: (
-					(gqlContentPage as any)?.content_blocks ||
-					(gqlContentPage as any)?.contentBlockssBycontentId ||
-					[]
+				(gqlContentPage as any)?.content_blocks ||
+				(gqlContentPage as any)?.contentBlockssBycontentId ||
+				[]
 			).map(this.adaptContentBlock),
 			labels: (gqlContentPage?.content_content_labels || []).flatMap(
-					(labelLink): ContentPageLabel[] => {
-						return labelLink.map(
-								(labelObj): ContentPageLabel => ({
-									id: labelObj?.content_label?.id,
-									content_type: gqlContentPage?.content_type as ContentPageType,
-									label: labelObj?.content_label?.label,
-									link_to: labelObj?.content_label?.link_to,
-								}),
-						);
-					},
+				(labelLink): ContentPageLabel[] => {
+					return labelLink.map(
+						(labelObj): ContentPageLabel => ({
+							id: labelObj?.content_label?.id,
+							content_type: gqlContentPage?.content_type as ContentPageType,
+							label: labelObj?.content_label?.label,
+							link_to: labelObj?.content_label?.link_to,
+						}),
+					);
+				},
 			),
 		};
 	}
@@ -187,9 +187,11 @@ export class ContentPagesService {
 	}
 
 	public async getContentPagesForOverview(
-			inputQuery: ContentPageOverviewParams,
-			userGroupIds: string[],
-	): Promise<IPagination<ContentPage> & { labelCounts: Record<string, number> }> {
+		inputQuery: ContentPageOverviewParams,
+		userGroupIds: string[],
+	): Promise<
+		IPagination<ContentPage> & { labelCounts: Record<string, number> }
+	> {
 		const {
 			withBlock,
 			contentType,
@@ -235,107 +237,115 @@ export class ContentPagesService {
 				content: { user_group_ids: { _contains: userGroupId } },
 			})),
 		};
-		const response = await this.dataService.execute<| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
-				| ContentPageQueryTypes['GetContentPagesQuery'],
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
-				| ContentPageQueryTypes['GetContentPagesQueryVariables']>(
-				withBlock
-						? this.queries.GetContentPagesWithBlocksDocument
-						: this.queries.GetContentPagesDocument,
-				variables,
+		const response = await this.dataService.execute<
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
+			| ContentPageQueryTypes['GetContentPagesQuery'],
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
+			withBlock
+				? this.queries.GetContentPagesWithBlocksDocument
+				: this.queries.GetContentPagesDocument,
+			variables,
 		);
 
 		const responseAvo = response as
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
-				| ContentPageQueryTypes['GetContentPagesQueryAvo'];
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
+			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
 		const responseHetArchief = response as
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
-				| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
 
 		const count =
-				responseAvo.app_content_aggregate.aggregate.count ||
-				responseHetArchief.app_content_page_aggregate.aggregate.count ||
-				0;
+			responseAvo.app_content_aggregate.aggregate.count ||
+			responseHetArchief.app_content_page_aggregate.aggregate.count ||
+			0;
 		const contentPageLabels =
-				responseAvo.app_content_labels ||
-				responseHetArchief.app_content_label ||
-				[];
+			responseAvo.app_content_labels ||
+			responseHetArchief.app_content_label ||
+			[];
 
 		return {
 			...Pagination<ContentPage>({
 				items: (responseAvo.app_content ||
-						responseHetArchief.app_content_page ||
-						[]) as unknown as ContentPage[],
+					responseHetArchief.app_content_page ||
+					[]) as unknown as ContentPage[],
 				page,
 				size,
 				total: count,
 			}),
 			labelCounts: fromPairs(
-					contentPageLabels.map((labelInfo: any): [number, number] => [
-						labelInfo?.id,
-						labelInfo?.content_content_labels_aggregate?.aggregate?.count ||
+				contentPageLabels.map((labelInfo: any): [number, number] => [
+					labelInfo?.id,
+					labelInfo?.content_content_labels_aggregate?.aggregate?.count ||
 						labelInfo?.content_page_content_label_aggregate?.aggregate?.count ||
 						0,
-					]),
+				]),
 			),
 		};
 	}
 
 	public async getContentPageByPath(path: string): Promise<ContentPage | null> {
-		const response = await this.dataService.execute<ContentPageQueryTypes['GetContentPageByPathQuery'],
-				ContentPageQueryTypes['GetContentPageByPathQueryVariables']>(this.queries.GetContentPageByPathDocument, {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPageByPathQuery'],
+			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
+		>(this.queries.GetContentPageByPathDocument, {
 			path,
 		});
 		const contentPage: GqlContentPage | undefined =
-				get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
+			get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
 
 		return this.adaptContentPage(contentPage);
 	}
 
 	public async fetchCollectionOrItem(
-			type: 'ITEM' | 'COLLECTION',
-			id: string,
+		type: 'ITEM' | 'COLLECTION',
+		id: string,
 	): Promise<MediaItemResponse | null> {
 		if (this.avoOrHetArchief === AvoOrHetArchief.hetArchief) {
 			throw new InternalServerErrorException({
 				message:
-						'Trying to resolve item or collection from AvO inside the hetArchief database. Only objects are supported.',
+					'Trying to resolve item or collection from AvO inside the hetArchief database. Only objects are supported.',
 				additionalInfo: {
 					type,
 					id,
 				},
 			});
 		}
-		const response = await this.dataService.execute<GetItemTileByIdQuery | GetCollectionTileByIdQuery,
-				GetItemTileByIdQueryVariables | GetCollectionTileByIdQueryVariables>(
-				type === 'ITEM' ? GetItemTileByIdDocument : GetCollectionTileByIdDocument,
-				{ id },
+		const response = await this.dataService.execute<
+			GetItemTileByIdQuery | GetCollectionTileByIdQuery,
+			GetItemTileByIdQueryVariables | GetCollectionTileByIdQueryVariables
+		>(
+			type === 'ITEM' ? GetItemTileByIdDocument : GetCollectionTileByIdDocument,
+			{ id },
 		);
 
 		const itemOrCollection = get(response, 'obj[0]', null);
 		if (itemOrCollection) {
 			itemOrCollection.count =
-					get(response, 'data.view_counts_aggregate.aggregate.sum.count') || 0;
+				get(response, 'data.view_counts_aggregate.aggregate.sum.count') || 0;
 		}
 
 		return itemOrCollection;
 	}
 
 	public async fetchItemByExternalId(
-			externalId: string,
+		externalId: string,
 	): Promise<Partial<Avo.Item.Item> | null> {
 		if (this.avoOrHetArchief === AvoOrHetArchief.hetArchief) {
 			throw new InternalServerErrorException({
 				message:
-						'Trying to fetch item from AvO inside the hetArchief database. Only objects are supported.',
+					'Trying to fetch item from AvO inside the hetArchief database. Only objects are supported.',
 				additionalInfo: {
 					externalId,
 				},
 			});
 		}
 
-		const response = await this.dataService.execute<GetItemByExternalIdQuery,
-				GetItemByExternalIdQueryVariables>(GetItemByExternalIdDocument, {
+		const response = await this.dataService.execute<
+			GetItemByExternalIdQuery,
+			GetItemByExternalIdQueryVariables
+		>(GetItemByExternalIdDocument, {
 			externalId,
 		});
 
@@ -357,15 +367,15 @@ export class ContentPagesService {
 	}
 
 	public async fetchContentPages(
-			withBlock: boolean,
-			userGroupIds: (string | number)[],
-			contentType: string,
-			labelIds: number[],
-			selectedLabelIds: number[],
-			orderProp: string,
-			orderDirection: 'asc' | 'desc',
-			offset = 0,
-			limit: number,
+		withBlock: boolean,
+		userGroupIds: (string | number)[],
+		contentType: string,
+		labelIds: number[],
+		selectedLabelIds: number[],
+		orderProp: string,
+		orderDirection: 'asc' | 'desc',
+		offset = 0,
+		limit: number,
 	): Promise<ContentPageOverviewResponse> {
 		const now = new Date().toISOString();
 		const variables = {
@@ -402,50 +412,56 @@ export class ContentPagesService {
 				content: { user_group_ids: { _contains: userGroupId } },
 			})),
 		};
-		const response = await this.dataService.execute<| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
-				| ContentPageQueryTypes['GetContentPagesQuery'],
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
-				| ContentPageQueryTypes['GetContentPagesQueryVariables']>(
-				withBlock
-						? this.queries.GetContentPagesWithBlocksDocument
-						: this.queries.GetContentPagesDocument,
-				variables,
+		const response = await this.dataService.execute<
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
+			| ContentPageQueryTypes['GetContentPagesQuery'],
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
+			withBlock
+				? this.queries.GetContentPagesWithBlocksDocument
+				: this.queries.GetContentPagesDocument,
+			variables,
 		);
 		const responseAvo = response as
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
-				| ContentPageQueryTypes['GetContentPagesQueryAvo'];
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
+			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
 		const responseHetArchief = response as
-				| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
-				| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
 		return {
 			pages: (responseAvo.app_content ||
-					responseHetArchief.app_content_page ||
-					[]) as unknown as ContentPage[],
+				responseHetArchief.app_content_page ||
+				[]) as unknown as ContentPage[],
 			count:
-					responseAvo.app_content_aggregate?.aggregate?.count ||
-					responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
-					0,
+				responseAvo.app_content_aggregate?.aggregate?.count ||
+				responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
+				0,
 			labelCounts: fromPairs(
-					(
-							responseAvo.app_content_labels ||
-							responseHetArchief.app_content_label ||
-							[]
-					).map((labelInfo: any): [number, number] => [
-						labelInfo?.id,
-						labelInfo?.content_content_labels_aggregate?.aggregate?.count,
-					]),
+				(
+					responseAvo.app_content_labels ||
+					responseHetArchief.app_content_label ||
+					[]
+				).map((labelInfo: any): [number, number] => [
+					labelInfo?.id,
+					labelInfo?.content_content_labels_aggregate?.aggregate?.count,
+				]),
 			),
 		};
 	}
 
-	public async fetchPublicContentPages(): Promise<{
-		path: string;
-		updated_at: string;
-	}[]> {
+	public async fetchPublicContentPages(): Promise<
+		{
+			path: string;
+			updated_at: string;
+		}[]
+	> {
 		try {
 			const now = new Date().toISOString();
-			const response = await this.dataService.execute<ContentPageQueryTypes['GetPublicContentPagesQuery'],
-					ContentPageQueryTypes['GetPublicContentPagesQueryVariables']>(this.queries.GetPublicContentPagesDocument, {
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['GetPublicContentPagesQuery'],
+				ContentPageQueryTypes['GetPublicContentPagesQueryVariables']
+			>(this.queries.GetPublicContentPagesDocument, {
 				where: {
 					_and: [
 						{
@@ -467,12 +483,12 @@ export class ContentPagesService {
 				},
 			});
 			return (
-					(response as ContentPageQueryTypes['GetPublicContentPagesQueryAvo'])
-							.app_content ||
-					(
-							response as ContentPageQueryTypes['GetPublicContentPagesQueryHetArchief']
-					).app_content_page ||
-					[]
+				(response as ContentPageQueryTypes['GetPublicContentPagesQueryAvo'])
+					.app_content ||
+				(
+					response as ContentPageQueryTypes['GetPublicContentPagesQueryHetArchief']
+				).app_content_page ||
+				[]
 			).map((contentPage) => ({
 				path: contentPage.path,
 				updated_at: contentPage.updated_at,
@@ -489,8 +505,10 @@ export class ContentPagesService {
 		published: number;
 		unpublished: number;
 	}> {
-		const response = await this.dataService.execute<ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
-				ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']>(this.queries.UpdateContentPagePublishDatesDocument, {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
+			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
+		>(this.queries.UpdateContentPagePublishDatesDocument, {
 			now: new Date().toISOString(),
 			publishedAt: setMinutes(setHours(new Date(), 7), 0).toISOString(),
 		});
@@ -501,241 +519,245 @@ export class ContentPagesService {
 	}
 
 	public async getContentPagesByIds(
-			contentPageIds: number[],
+		contentPageIds: number[],
 	): Promise<Avo.ContentPage.Page[]> {
-		const response = await this.dataService.execute<ContentPageQueryTypes['GetContentByIdsQuery'],
-				ContentPageQueryTypes['GetContentByIdsQueryVariables']>(this.queries.GetContentByIdsDocument, {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentByIdsQuery'],
+			ContentPageQueryTypes['GetContentByIdsQueryVariables']
+		>(this.queries.GetContentByIdsDocument, {
 			ids: contentPageIds,
 		});
 		return ((response as ContentPageQueryTypes['GetContentByIdsQueryAvo'])
-						.app_content ||
-				(response as ContentPageQueryTypes['GetContentByIdsQueryHetArchief'])
-						.app_content_page ||
-				[]) as unknown as Avo.ContentPage.Page[];
+			.app_content ||
+			(response as ContentPageQueryTypes['GetContentByIdsQueryHetArchief'])
+				.app_content_page ||
+			[]) as unknown as Avo.ContentPage.Page[];
 	}
 
 	public async getContentPageLabelsByTypeAndLabels(
-			contentType: string,
-			labels: string[],
+		contentType: string,
+		labels: string[],
 	): Promise<LabelObj[]> {
-		const response = await this.dataService.execute<ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
-				ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']>(this.queries.GetContentPageLabelsByTypeAndLabelsDocument, {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
+			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']
+		>(this.queries.GetContentPageLabelsByTypeAndLabelsDocument, {
 			contentType,
 			labels,
 		});
 
 		const responseAvo =
-				response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo'];
+			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo'];
 		const responseHetArchief =
-				response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief'];
+			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief'];
 
 		return (
-				responseAvo.app_content_labels ||
-				responseHetArchief.app_content_label ||
-				[]
+			responseAvo.app_content_labels ||
+			responseHetArchief.app_content_label ||
+			[]
 		);
 	}
 
 	public async getContentPageLabelsByTypeAndIds(
-			contentType: string,
-			labelIds: string[],
+		contentType: string,
+		labelIds: string[],
 	): Promise<LabelObj[]> {
 		if (!labelIds.length) {
 			return [];
 		}
 		const response = await this.dataService.execute(
-				this.queries.GetContentPageLabelsByTypeAndIdsDocument,
-				{
-					contentType,
-					labelIds,
-				},
+			this.queries.GetContentPageLabelsByTypeAndIdsDocument,
+			{
+				contentType,
+				labelIds,
+			},
 		);
 
 		return (
-				get(response, 'data.cms_content_labels') ||
-				get(response, 'data.app_content_labels') ||
-				[]
+			get(response, 'data.cms_content_labels') ||
+			get(response, 'data.app_content_labels') ||
+			[]
 		);
 	}
 
 	public async resolveMediaTileItemsInPage(
-			contentPage: ContentPage,
-			request: Request,
+		contentPage: ContentPage,
+		request: Request,
 	) {
 		const mediaGridBlocks = contentPage.content_blocks.filter(
-				(contentBlock) => contentBlock.content_block_type === 'MEDIA_GRID',
+			(contentBlock) => contentBlock.content_block_type === 'MEDIA_GRID',
 		);
 		if (mediaGridBlocks.length) {
 			await promiseUtils.mapLimit(
-					mediaGridBlocks,
-					2,
-					async (mediaGridBlock: any) => {
-						try {
-							const searchQuery = get(
-									mediaGridBlock,
-									'variables.blockState.searchQuery.value',
-							);
-							const searchQueryLimit = get(
-									mediaGridBlock,
-									'variables.blockState.searchQueryLimit',
-							);
-							const mediaItems = get(
-									mediaGridBlock,
-									'variables.componentState',
-									[],
-							).filter((item: any) => item.mediaItem);
+				mediaGridBlocks,
+				2,
+				async (mediaGridBlock: any) => {
+					try {
+						const searchQuery = get(
+							mediaGridBlock,
+							'variables.blockState.searchQuery.value',
+						);
+						const searchQueryLimit = get(
+							mediaGridBlock,
+							'variables.blockState.searchQueryLimit',
+						);
+						const mediaItems = get(
+							mediaGridBlock,
+							'variables.componentState',
+							[],
+						).filter((item: any) => item.mediaItem);
 
-							const results: any[] = await this.resolveMediaTileItems(
-									searchQuery,
-									searchQueryLimit,
-									mediaItems,
-									request,
-							);
+						const results: any[] = await this.resolveMediaTileItems(
+							searchQuery,
+							searchQueryLimit,
+							mediaItems,
+							request,
+						);
 
-							set(mediaGridBlock, 'variables.blockState.results', results);
-						} catch (err) {
-							this.logger.error({
-								message: 'Failed to resolve media grid content',
-								innerException: err,
-								additionalInfo: {
-									mediaGridBlocks,
-									mediaGridBlock,
-								},
-							});
-						}
-					},
+						set(mediaGridBlock, 'variables.blockState.results', results);
+					} catch (err) {
+						this.logger.error({
+							message: 'Failed to resolve media grid content',
+							innerException: err,
+							additionalInfo: {
+								mediaGridBlocks,
+								mediaGridBlock,
+							},
+						});
+					}
+				},
 			);
 		}
 	}
 
 	public async resolveMediaPlayersInPage(
-			contentPage: ContentPage,
-			request: Request,
+		contentPage: ContentPage,
+		request: Request,
 	) {
 		const mediaPlayerBlocks = contentPage.content_blocks.filter(
-				(contentBlock) =>
-						keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.content_block_type),
+			(contentBlock) =>
+				keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.content_block_type),
 		);
 		if (mediaPlayerBlocks.length) {
 			await promiseUtils.mapLimit(
-					mediaPlayerBlocks,
-					2,
-					async (mediaPlayerBlock: any) => {
-						try {
-							const blockInfo =
-									MEDIA_PLAYER_BLOCKS[mediaPlayerBlock.content_block_type];
-							const externalId = get(
-									mediaPlayerBlock,
-									blockInfo.getItemExternalIdPath,
-							);
-							if (externalId) {
-								const itemInfo = await this.fetchItemByExternalId(externalId);
-								let videoSrc: string | undefined;
-								if (itemInfo && itemInfo.browse_path) {
-									videoSrc = await this.playerTicketService.getPlayableUrl(
-											itemInfo.browse_path,
-											request.header('Referer') || 'http://localhost:3200/',
-									);
-								}
-
-								// Copy all required properties to be able to render the video player without having to use the data route to fetch item information
-								if (
-										videoSrc &&
-										!get(mediaPlayerBlock, blockInfo.setVideoSrcPath)
-								) {
-									set(mediaPlayerBlock, blockInfo.setVideoSrcPath, videoSrc);
-								}
-								[
-									['external_id', 'setItemExternalIdPath'],
-									['thumbnail_path', 'setPosterSrcPath'],
-									['title', 'setTitlePath'],
-									['description', 'setDescriptionPath'],
-									['issued', 'setIssuedPath'],
-									['organisation', 'setOrganisationPath'],
-									['duration', 'setDurationPath'],
-								].forEach((props) => {
-									if (
-											itemInfo &&
-											(itemInfo as any)[props[0]] &&
-											!get(mediaPlayerBlock, (blockInfo as any)[props[1]])
-									) {
-										if (
-												props[0] === 'thumbnail_path' &&
-												itemInfo.type.label === 'audio'
-										) {
-											// Replace poster for audio items with default still
-											set(
-													mediaPlayerBlock,
-													(blockInfo as any)[props[1]],
-													DEFAULT_AUDIO_STILL,
-											);
-										} else {
-											set(
-													mediaPlayerBlock,
-													(blockInfo as any)[props[1]],
-													(itemInfo as any)[props[0]],
-											);
-										}
-									}
-								});
+				mediaPlayerBlocks,
+				2,
+				async (mediaPlayerBlock: any) => {
+					try {
+						const blockInfo =
+							MEDIA_PLAYER_BLOCKS[mediaPlayerBlock.content_block_type];
+						const externalId = get(
+							mediaPlayerBlock,
+							blockInfo.getItemExternalIdPath,
+						);
+						if (externalId) {
+							const itemInfo = await this.fetchItemByExternalId(externalId);
+							let videoSrc: string | undefined;
+							if (itemInfo && itemInfo.browse_path) {
+								videoSrc = await this.playerTicketService.getPlayableUrl(
+									itemInfo.browse_path,
+									request.header('Referer') || 'http://localhost:3200/',
+								);
 							}
-						} catch (err) {
-							this.logger.error({
-								message: 'Failed to resolve media grid content',
-								innerException: err,
-								additionalInfo: {
-									mediaPlayerBlocks,
-									mediaPlayerBlock,
-								},
+
+							// Copy all required properties to be able to render the video player without having to use the data route to fetch item information
+							if (
+								videoSrc &&
+								!get(mediaPlayerBlock, blockInfo.setVideoSrcPath)
+							) {
+								set(mediaPlayerBlock, blockInfo.setVideoSrcPath, videoSrc);
+							}
+							[
+								['external_id', 'setItemExternalIdPath'],
+								['thumbnail_path', 'setPosterSrcPath'],
+								['title', 'setTitlePath'],
+								['description', 'setDescriptionPath'],
+								['issued', 'setIssuedPath'],
+								['organisation', 'setOrganisationPath'],
+								['duration', 'setDurationPath'],
+							].forEach((props) => {
+								if (
+									itemInfo &&
+									(itemInfo as any)[props[0]] &&
+									!get(mediaPlayerBlock, (blockInfo as any)[props[1]])
+								) {
+									if (
+										props[0] === 'thumbnail_path' &&
+										itemInfo.type.label === 'audio'
+									) {
+										// Replace poster for audio items with default still
+										set(
+											mediaPlayerBlock,
+											(blockInfo as any)[props[1]],
+											DEFAULT_AUDIO_STILL,
+										);
+									} else {
+										set(
+											mediaPlayerBlock,
+											(blockInfo as any)[props[1]],
+											(itemInfo as any)[props[0]],
+										);
+									}
+								}
 							});
 						}
-					},
+					} catch (err) {
+						this.logger.error({
+							message: 'Failed to resolve media grid content',
+							innerException: err,
+							additionalInfo: {
+								mediaPlayerBlocks,
+								mediaPlayerBlock,
+							},
+						});
+					}
+				},
 			);
 		}
 	}
 
 	public async resolveMediaTileItems(
-			searchQuery: string | undefined,
-			searchQueryLimit: string | undefined,
-			mediaItems: MediaItemsDto[] | undefined,
-			request: Request,
+		searchQuery: string | undefined,
+		searchQueryLimit: string | undefined,
+		mediaItems: MediaItemsDto[] | undefined,
+		request: Request,
 	): Promise<Partial<Avo.Item.Item | Avo.Collection.Collection>[]> {
 		let manualResults: any[] = [];
 		let searchResults: any[] = [];
 
 		// Check for items/collections
 		const nonEmptyMediaItems = mediaItems.filter(
-				(mediaItem) => !isEmpty(mediaItem),
+			(mediaItem) => !isEmpty(mediaItem),
 		);
 		if (nonEmptyMediaItems.length) {
 			manualResults = await promiseUtils.mapLimit(
-					nonEmptyMediaItems,
-					10,
-					async (itemInfo) => {
-						const result: MediaItemResponse | null =
-								await this.fetchCollectionOrItem(
-										itemInfo.mediaItem.type === MediaItemType.BUNDLE
-												? MediaItemType.COLLECTION
-												: itemInfo.mediaItem.type,
-										itemInfo.mediaItem.value,
-								);
-						if (result) {
-							// Replace audio thumbnail
-							if (get(result, 'type.label') === 'audio') {
-								result.thumbnailUrl = DEFAULT_AUDIO_STILL;
-							}
-
-							// Set video play url
-							if ((result as any).browse_path) {
-								(result as any).src = await this.getPlayableUrlByBrowsePathSilent(
-										(result as any).browse_path,
-										request,
-								);
-								delete (result as any).browse_path; // Do not expose browse_path to the world
-							}
+				nonEmptyMediaItems,
+				10,
+				async (itemInfo) => {
+					const result: MediaItemResponse | null =
+						await this.fetchCollectionOrItem(
+							itemInfo.mediaItem.type === MediaItemType.BUNDLE
+								? MediaItemType.COLLECTION
+								: itemInfo.mediaItem.type,
+							itemInfo.mediaItem.value,
+						);
+					if (result) {
+						// Replace audio thumbnail
+						if (get(result, 'type.label') === 'audio') {
+							result.thumbnailUrl = DEFAULT_AUDIO_STILL;
 						}
-						return result;
-					},
+
+						// Set video play url
+						if ((result as any).browse_path) {
+							(result as any).src = await this.getPlayableUrlByBrowsePathSilent(
+								(result as any).browse_path,
+								request,
+							);
+							delete (result as any).browse_path; // Do not expose browse_path to the world
+						}
+					}
+					return result;
+				},
 			);
 		}
 
@@ -743,7 +765,7 @@ export class ContentPagesService {
 		if (searchQuery) {
 			if (!this.fetchSearchQueryAvo) {
 				this.logger.warn(
-						'resolveMediaTileItems through search queries is not supported for this app. Use ContentPagesController.setSearchQueryFunction to enable it',
+					'resolveMediaTileItems through search queries is not supported for this app. Use ContentPagesController.setSearchQueryFunction to enable it',
 				);
 				searchResults = [];
 			}
@@ -754,15 +776,15 @@ export class ContentPagesService {
 				searchQueryLimitNum = 8;
 			}
 			const searchResponse = await this.fetchSearchQueryAvo(
-					searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
-					parsedSearchQuery.filters || {},
-					parsedSearchQuery.orderProperty || 'relevance',
-					parsedSearchQuery.orderDirection || 'desc',
+				searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
+				parsedSearchQuery.filters || {},
+				parsedSearchQuery.orderProperty || 'relevance',
+				parsedSearchQuery.orderDirection || 'desc',
 			);
 			searchResults = await promiseUtils.mapLimit(
-					searchResponse.results || [],
-					8,
-					(result) => this.mapSearchResultToItemOrCollection(result, request),
+				searchResponse.results || [],
+				8,
+				(result) => this.mapSearchResultToItemOrCollection(result, request),
 			);
 		}
 
@@ -770,12 +792,12 @@ export class ContentPagesService {
 	}
 
 	private async mapSearchResultToItemOrCollection(
-			searchResult: SearchResultItem,
-			request: Request,
+		searchResult: SearchResultItem,
+		request: Request,
 	): Promise<ResolvedItemOrCollection> {
 		const isItem =
-				searchResult.administrative_type === 'video' ||
-				searchResult.administrative_type === 'audio';
+			searchResult.administrative_type === 'video' ||
+			searchResult.administrative_type === 'audio';
 		const isAudio = searchResult.administrative_type === 'audio';
 
 		if (isItem) {
@@ -793,8 +815,8 @@ export class ContentPagesService {
 				lom_typical_age_range: searchResult.lom_typical_age_range,
 				issued: searchResult.dcterms_issued,
 				thumbnail_path: isAudio
-						? DEFAULT_AUDIO_STILL
-						: searchResult.thumbnail_path,
+					? DEFAULT_AUDIO_STILL
+					: searchResult.thumbnail_path,
 				org_id: searchResult.original_cp_id,
 				organisation: {
 					name: searchResult.original_cp,
@@ -814,16 +836,16 @@ export class ContentPagesService {
 			} as Partial<Avo.Item.Item> & { src?: string };
 			if (isItem) {
 				item.src = await this.getPlayableUrlByExternalIdSilent(
-						searchResult.external_id,
-						request,
+					searchResult.external_id,
+					request,
 				);
 			}
 			try {
 				// TODO cache logos for quicker access
 				const org: Organisation =
-						await this.organisationsService.getOrganisation(
-								searchResult.original_cp_id,
-						);
+					await this.organisationsService.getOrganisation(
+						searchResult.original_cp_id,
+					);
 				item.organisation.logo_url = org?.logo_url || null;
 			} catch (err) {
 				this.logger.error({
@@ -876,15 +898,15 @@ export class ContentPagesService {
 	}
 
 	private async getPlayableUrlByExternalIdSilent(
-			externalId: string,
-			request: Request,
+		externalId: string,
+		request: Request,
 	): Promise<string | null> {
 		try {
 			return (
-					(await this.playerTicketService.getPlayableUrl(
-							externalId,
-							request.header('Referer') || 'http://localhost:8080/',
-					)) || null
+				(await this.playerTicketService.getPlayableUrl(
+					externalId,
+					request.header('Referer') || 'http://localhost:8080/',
+				)) || null
 			);
 		} catch (err) {
 			this.logger.error({
@@ -899,15 +921,15 @@ export class ContentPagesService {
 	}
 
 	private async getPlayableUrlByBrowsePathSilent(
-			browsePath: string,
-			request: Request,
+		browsePath: string,
+		request: Request,
 	): Promise<string | null> {
 		try {
 			return (
-					(await this.playerTicketService.getPlayableUrl(
-							browsePath,
-							request.header('Referer') || 'http://localhost:8080/',
-					)) || null
+				(await this.playerTicketService.getPlayableUrl(
+					browsePath,
+					request.header('Referer') || 'http://localhost:8080/',
+				)) || null
 			);
 		} catch (err) {
 			this.logger.error({

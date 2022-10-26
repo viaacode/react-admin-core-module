@@ -3,7 +3,6 @@ import {
 	Controller,
 	Delete,
 	Get,
-	Logger,
 	Param,
 	Patch,
 	Post,
@@ -27,13 +26,9 @@ import { DeleteResponse } from '../../shared/types/types';
 // Currently the admin core does all navigation manipulations through the data route
 // In the long term we would like to switch this to use these routes
 @ApiTags('Admin Navigations')
-@Controller('admin/navigations')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/navigations')
 @RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
 export class AdminNavigationsController {
-	private logger: Logger = new Logger(AdminNavigationsController.name, {
-		timestamp: true,
-	});
-
 	constructor(private navigationsService: AdminNavigationsService) {}
 
 	@ApiOperation({

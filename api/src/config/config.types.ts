@@ -9,8 +9,8 @@ export interface Configuration {
 	CLIENT_HOST: string;
 	PORT: number;
 	PROXY_API_KEY: string;
-	GRAPHQL_URL: string;
-	GRAPHQL_SECRET: string;
+	GRAPHQL_URL_HET_ARCHIEF: string;
+	GRAPHQL_SECRET_HET_ARCHIEF: string;
 	GRAPHQL_ENABLE_WHITELIST: boolean;
 	GRAPHQL_URL_AVO: string;
 	GRAPHQL_SECRET_AVO: string;
@@ -31,7 +31,7 @@ export interface Configuration {
 	CORS_ENABLE_WHITELIST: boolean;
 	CORS_OPTIONS: any;
 	TICKET_SERVICE_URL: string;
-	TICKET_SERVICE_CERTIFICATE: string;
+	TICKET_SERVICE_CERT: string;
 	TICKET_SERVICE_KEY: string;
 	TICKET_SERVICE_PASSPHRASE: string;
 	TICKET_SERVICE_MAXAGE: number;

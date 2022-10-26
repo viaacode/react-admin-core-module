@@ -10,7 +10,7 @@ import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('Permissions')
-@Controller('admin/permissions')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/permissions')
 @RequireAllPermissions(Permission.EDIT_PERMISSION_GROUPS)
 export class PermissionsController {
 	constructor(private permissionsService: PermissionsService) {}

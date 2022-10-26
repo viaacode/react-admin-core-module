@@ -107,7 +107,7 @@ export class DataPermissionsService {
 	) {
 		if (configService.get('ENVIRONMENT') !== 'production') {
 			this.logger.log('GraphQl config: ', {
-				url: this.configService.get('GRAPHQL_URL'),
+				url: this.configService.get('GRAPHQL_URL_HET_ARCHIEF'),
 				whitelistEnabled:
 					this.configService.get('GRAPHQL_ENABLE_WHITELIST') === 'true',
 			});

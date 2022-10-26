@@ -1,11 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	Logger,
-	Patch,
-	UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
@@ -17,7 +10,7 @@ import { UserGroupsResponse } from '../types';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('UserGroups')
-@Controller('admin/user-groups')
+@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/user-groups')
 @RequireAllPermissions(Permission.EDIT_PERMISSION_GROUPS)
 export class UserGroupsController {
 	constructor(private userGroupsService: UserGroupsService) {}
