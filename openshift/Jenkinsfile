@@ -88,7 +88,8 @@ pipeline {
 							'''
 						} catch (err) {
 							echo err.getMessage()
-							if [[ err.getMessage() == *"Repository does not allow updating assets"* ]]; then
+							if [ err.getMessage() == *"Repository does not allow updating assets"* ]
+							then
                             	echo "admin-core-ui package version number was not updated, continuing with api build"
                             else
                             	echo "admin-core-ui package failed to publish"
@@ -133,7 +134,8 @@ pipeline {
 							'''
 						} catch (err) {
 							echo err.getMessage()
-							if [[ err.getMessage() == *"Repository does not allow updating assets"* ]]; then
+							if [ err.getMessage() == *"Repository does not allow updating assets"* ]
+							then
                             	echo "admin-core-api package version number was not updated, continuing pipeline"
                             else
                             	echo "admin-core-api package failed to publish"
