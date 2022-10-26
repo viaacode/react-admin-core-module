@@ -88,13 +88,12 @@ pipeline {
 							'''
 						} catch (err) {
 							echo err.getMessage()
-							if ( err.getMessage().contains("Repository does not allow updating assets") )
-							then
+							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
                             	echo "admin-core-ui package version number was not updated, continuing with api build"
-                            else
+                            } else {
                             	echo "admin-core-ui package failed to publish"
                             	currentBuild.result = 'FAILURE'
-                            fi
+                            }
 						}
 					} // script
 				}// end container
@@ -134,13 +133,12 @@ pipeline {
 							'''
 						} catch (err) {
 							echo err.getMessage()
-							if ( err.getMessage().contains("Repository does not allow updating assets") )
-							then
-                            	echo "admin-core-api package version number was not updated, continuing pipeline"
-                            else
+							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
+                            	echo "admin-core-api package version number was not updated, continuing with pipeline"
+                            } else {
                             	echo "admin-core-api package failed to publish"
                             	currentBuild.result = 'FAILURE'
-                            fi
+                            }
 						}
 					} // script
 				}// end container
