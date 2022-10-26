@@ -1,7 +1,7 @@
 import { ConfigService as NestConfigService } from '@nestjs/config';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 
-import { AvoOrHetArchief } from '../modules/admin-core/content-pages/content-pages.types';
+import { AvoOrHetArchief } from '../modules';
 
 export interface Configuration {
 	ENVIRONMENT: string;
@@ -34,7 +34,7 @@ export interface Configuration {
 	TICKET_SERVICE_CERTIFICATE: string;
 	TICKET_SERVICE_KEY: string;
 	TICKET_SERVICE_PASSPHRASE: string;
-	TICKET_SERVICE_MAX_AGE: number;
+	TICKET_SERVICE_MAXAGE: number;
 	MEDIA_SERVICE_URL: string;
 	ENABLE_SEND_EMAIL: boolean;
 	CAMPAIGN_MONITOR_API_ENDPOINT: string;

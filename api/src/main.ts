@@ -1,13 +1,13 @@
 import { ConfigService as NestConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { AdminCoreModule } from './admin-core.module';
 import helmet from 'helmet';
 
 import { ConfigService } from './config';
 
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create(AdminCoreModule);
 	const configService = app.get<ConfigService>(NestConfigService);
 	const port = configService.get('PORT') || 3300;
 

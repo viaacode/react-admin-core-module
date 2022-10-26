@@ -6,4 +6,5 @@ test/
 *.js
 *.yml
 nest-cli.json
-**/*.tsbuildinfo
+dist/tsconfig.build.tsbuildinfo
+tsconfig.build.tsbuildinfo
