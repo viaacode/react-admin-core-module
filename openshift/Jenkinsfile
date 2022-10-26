@@ -87,7 +87,7 @@ pipeline {
 							cd ..
 							'''
 						} catch (err) {
-							echo err.getMessage()
+							echo "Error message: ${err.getMessage()}"
 							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
                             	echo "admin-core-ui package version number was not updated, continuing with api build"
                             } else {
@@ -132,7 +132,7 @@ pipeline {
 							rm -f .npmrc
 							'''
 						} catch (err) {
-							echo err.getMessage()
+							echo "Error message: ${err.getMessage()}"
 							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
                             	echo "admin-core-api package version number was not updated, continuing with pipeline"
                             } else {
