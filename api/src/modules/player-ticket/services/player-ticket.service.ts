@@ -12,7 +12,7 @@ import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
 
-import { Configuration } from '../../../config';
+import { cleanMultilineEnv, Configuration } from "../../../config";
 
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -53,8 +53,8 @@ export class PlayerTicketService {
 			responseType: 'json',
 			https: {
 				rejectUnauthorized: false,
-				certificate: this.configService.get('TICKET_SERVICE_CERT'),
-				key: this.configService.get('TICKET_SERVICE_KEY'),
+				certificate: cleanMultilineEnv(this.configService.get('TICKET_SERVICE_CERT')),
+				key: cleanMultilineEnv(this.configService.get('TICKET_SERVICE_KEY')),
 				passphrase: this.configService.get('TICKET_SERVICE_PASSPHRASE'),
 			},
 		});
