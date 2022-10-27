@@ -20,6 +20,7 @@ $content-top-bar-and-tabs-height: 113px;
 			.c-select__control {
 				border: 1px solid #25a4cf;
 				background-color: #25a4cf;
+				overflow: hidden;
 
 				.c-select__single-value,
 				svg {

@@ -27,6 +27,7 @@
 
 	.c-file-upload-button-and-input {
 		position: relative;
+		min-height: 50px;
 
 		&:hover .c-button {
 			background-color: #FFF;
