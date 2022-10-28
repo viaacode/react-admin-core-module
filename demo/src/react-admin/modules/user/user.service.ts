@@ -277,7 +277,8 @@ export class UserService {
 
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
-		isBlocked: boolean
+		isBlocked: boolean,
+		sendEmail: boolean,
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -292,6 +293,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
+				sendEmail
 			};
 
 			const response = await fetchWithLogout(url, {
@@ -380,7 +382,8 @@ export class UserService {
 	static async bulkDeleteUsers(
 		profileIds: string[],
 		deleteOption: Avo.User.UserDeleteOption,
-		transferToProfileId?: string
+		sendEmail: boolean,
+		transferToProfileId?: string,
 	): Promise<void> {
 		let url: string | undefined;
 		const isAvo =
@@ -391,6 +394,7 @@ export class UserService {
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
+				sendEmail,
 				...(isAvo ? { transferToProfileId } : {}),
 			};
 			const response = await fetchWithLogout(url, {

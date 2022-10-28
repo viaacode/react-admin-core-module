@@ -252,6 +252,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			await UserService.bulkDeleteUsers(
 				selectedProfileIds,
 				selectedDeleteOption,
+				false, // TODO sync sendEmail feature
 				transferToUser?.value
 			);
 
