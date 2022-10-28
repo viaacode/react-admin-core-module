@@ -8,7 +8,6 @@ $content-top-bar-and-tabs-height: 113px;
 	> .o-sidebar__content {
 		> .c-scrollable {
 			width: 100%;
-			height: calc(100vh - #{$content-top-bar-and-tabs-height} - 68px);
 			overflow-y: auto;
 			padding: 2rem 1.6rem 8rem;
 		}
