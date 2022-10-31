@@ -30,10 +30,16 @@
 		min-height: 50px;
 
 		&:hover .c-button {
-			background-color: #FFF;
+			background-color: #fff;
 		}
 
-		input[type="file"] {
+		[class^='Button-module_c-button__label__'] {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		input[type='file'] {
 			position: absolute;
 			top: 0;
 			right: 0;

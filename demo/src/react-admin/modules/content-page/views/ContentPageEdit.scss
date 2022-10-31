@@ -1,61 +1,13 @@
 @import '../../shared/styles/settings/colors';
 
-$content-top-bar-and-tabs-height: 113px;
-$top-navigation-bar-height: 8.8rem;
-$content-page-header-height: 16.2rem;
-$content-page-tabs-height: 5rem;
-$content-page-sidebar-margin: 4rem;
-$content-page-sidebar-blok-dropdown-height: 7rem;
-
-.m-resizable-panels {
-	> div {
-		> .resizable-fragment {
-			width: 100%;
-			overflow: visible !important;
-		}
-
-		> div:not(.resizable-fragment) {
-			position: relative;
-			background-color: rgba($color-gray-50, 0.4);
-			height: calc(
-				100vh - $top-navigation-bar-height - $content-page-header-height -
-					$content-page-tabs-height - $content-page-sidebar-margin
-			) !important;
-
-			&:after {
-				content: '||';
-				border: solid 1px #666;
-				border-width: 0 1px;
-				margin: -10px 0 0 3.5px;
-				height: 20px;
-				width: 4px;
-				overflow: hidden;
-				color: transparent;
-				top: 50%;
-				left: 3px;
-				transform: translateX(-50%);
-				position: absolute;
-			}
-		}
-	}
-}
-
 .c-content-edit-view__sidebar {
-	min-height: calc(
-		100vh - $top-navigation-bar-height - $content-page-header-height - $content-page-tabs-height
-	);
+	height: auto;
 
 	> .o-sidebar__content {
-		> .c-scrollable {
-			width: 100%;
-			overflow-y: auto;
-			padding: 2rem 1.6rem 8rem;
-			box-sizing: border-box;
-			height: calc(
-				100vh - $top-navigation-bar-height - $content-page-header-height -
-					$content-page-tabs-height - $content-page-sidebar-margin -
-					$content-page-sidebar-blok-dropdown-height
-			);
+		.c-select__control .c-select__placeholder {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		> .c-navbar {
@@ -65,7 +17,6 @@ $content-page-sidebar-blok-dropdown-height: 7rem;
 			.c-select__control {
 				border: 1px solid #25a4cf;
 				background-color: #25a4cf;
-				overflow: hidden;
 
 				.c-select__single-value,
 				svg {
@@ -82,7 +33,6 @@ $content-page-sidebar-blok-dropdown-height: 7rem;
 
 .c-content-edit-view__preview {
 	width: 100%;
-	height: calc(100vh - #{$content-top-bar-and-tabs-height});
 	overflow-y: visible;
 	overflow-x: hidden;
 	background-color: white;

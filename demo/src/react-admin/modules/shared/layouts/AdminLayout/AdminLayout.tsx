@@ -19,7 +19,9 @@ const AdminLayout: AdminLayoutComponent = ({ children, pageTitle }) => {
 	return (
 		<div className="c-admin">
 			<header className="c-admin__header">
-				<h2 className="c-admin__page-title">{pageTitle}</h2>
+				<h2 className="c-admin__page-title" title={pageTitle}>
+					{pageTitle}
+				</h2>
 				<div className="c-admin__actions">{actions}</div>
 			</header>
 
