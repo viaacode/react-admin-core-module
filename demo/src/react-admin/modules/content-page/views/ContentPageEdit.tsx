@@ -594,6 +594,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 								});
 							}
 						}}
+						body={tHtml(
+							'Het verwijderen van een blok kan niet ongedaan gemaakt worden.'
+						)}
 						isOpen={isDeleteModalOpen}
 						onClose={() => setIsDeleteModalOpen(false)}
 					/>

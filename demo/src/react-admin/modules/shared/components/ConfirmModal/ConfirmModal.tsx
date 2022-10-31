@@ -57,7 +57,7 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	};
 
 	return (
-		<Modal isOpen={isOpen} title={modalTitle()} size="small" onClose={onClose} scrollable>
+		<Modal isOpen={isOpen} title={modalTitle()} size="small" onClose={onClose}>
 			<ModalBody>
 				{modalBody()}
 				<Toolbar spaced>

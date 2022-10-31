@@ -13,10 +13,10 @@ import { ResizablePanels } from '~modules/shared/components/ResizablePanels/Resi
 import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-import './App.scss';
 import Sidebar from './shared/components/Sidebar/Sidebar';
 import { mockUser } from './mock-user';
+
+import './App.scss';
 
 const queryClient = new QueryClient();
 

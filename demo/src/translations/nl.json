@@ -705,7 +705,7 @@
   "shared/components/date-range-dropdown/date-range-dropdown___tot": "Tot en met",
   "shared/components/date-range-dropdown/date-range-dropdown___van": "Van",
   "shared/components/delete-object-modal/delete-object-modal___ben-je-zeker-dat-je-deze-actie-wil-uitvoeren": "Ben je zeker dat je deze actie wil uitvoeren?",
-  "shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden": "Als je de koppeling verbreekt kan je niet meer inloggen via je burgerprofiel. Je kan later steeds opnieuw koppelen.",
+  "shared/components/delete-object-modal/delete-object-modal___deze-actie-kan-niet-ongedaan-gemaakt-worden": "Deze actie kan niet ongedaan gemaakt worden",
   "shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen": "Ben je zeker dat je dit bestand wil verwijderen?",
   "shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten": "Een of meerdere geselecteerde bestanden zijn niet toegelaten.",
   "shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt": "Het opladen van de bestanden is mislukt.",
