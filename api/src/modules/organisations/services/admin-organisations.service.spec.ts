@@ -1,7 +1,5 @@
-import { ConfigService } from '@nestjs/config';
-import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '../../../config';
+import { Test, TestingModule } from '@nestjs/testing';
 
 import { GetOrganisationQuery } from '../../shared/generated/graphql-db-types-avo';
 import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
@@ -39,17 +37,6 @@ const mockGqlAvOOrganisation = {
 	},
 };
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'DATABASE_APPLICATION_TYPE') {
-			return AvoOrHetArchief.hetArchief;
-		}
-		return key;
-	}),
-};
-
 const mockDataService = {
 	execute: jest.fn(),
 };
@@ -61,10 +48,6 @@ describe('OrganisationsService', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				AdminOrganisationsService,
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 				{
 					provide: DataService,
 					useValue: mockDataService,

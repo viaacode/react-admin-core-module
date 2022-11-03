@@ -5,7 +5,7 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { SearchResultItem } from '@viaa/avo2-types/types/search';
@@ -13,7 +13,7 @@ import * as promiseUtils from 'blend-promise-utils';
 import { Request } from 'express';
 import { compact, fromPairs, get, isEmpty, keys, set } from 'lodash';
 
-import { Configuration } from '../../../config';
+
 
 import {
 	AvoOrHetArchief,
@@ -76,11 +76,10 @@ export class ContentPagesService {
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		protected configService: ConfigService<Configuration>,
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.avoOrHetArchief = this.configService.get('DATABASE_APPLICATION_TYPE');
+		this.avoOrHetArchief = process.env.DATABASE_APPLICATION_TYPE;
 		this.queries = CONTENT_PAGE_QUERIES[this.avoOrHetArchief];
 	}
 

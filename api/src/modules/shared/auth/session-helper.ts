@@ -3,6 +3,7 @@ import {
 	Logger,
 	LoggerService,
 } from '@nestjs/common';
+import { Avo } from "@viaa/avo2-types";
 import {
 	addDays,
 	getHours,
@@ -14,13 +15,14 @@ import {
 import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
 
-import { User } from '../../users/types';
+import { HetArchiefUser } from '../../users/types';
 import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
 
 const IDP = 'idp';
 const IDP_USER_INFO_PATH = 'idpUserInfo';
 export const ARCHIEF_USER_INFO_PATH = 'archiefUserInfo';
+export const AVO_USER_INFO_PATH = 'avoUserInfo';
 
 export class SessionHelper {
 	private static logger: LoggerService = new Logger(SessionHelper.name);
@@ -59,7 +61,7 @@ export class SessionHelper {
 				Idp[session[IDP]] && // IDP is set and known
 				session[IDP_USER_INFO_PATH] && // IDP user is set
 				SessionHelper.isIdpUserSessionValid(session) && // IDP session is valid
-				session[ARCHIEF_USER_INFO_PATH]
+				(session[ARCHIEF_USER_INFO_PATH] || session[AVO_USER_INFO_PATH])
 			) // Archief user is set
 		);
 	}
@@ -96,23 +98,23 @@ export class SessionHelper {
 	 */
 	public static setArchiefUserInfo(
 		session: Record<string, any>,
-		user: User,
+		user: HetArchiefUser,
 	): void {
 		SessionHelper.ensureValidSession(session);
 		session[ARCHIEF_USER_INFO_PATH] = user;
 	}
 
-	public static getArchiefUserInfo(session: Record<string, any>): User | null {
+	public static getUserInfo(session: Record<string, any>): HetArchiefUser | Avo.User.User | null {
 		if (!session) {
 			return null;
 		}
-		return session[ARCHIEF_USER_INFO_PATH];
+		return session[ARCHIEF_USER_INFO_PATH] || session[AVO_USER_INFO_PATH];
 	}
 
-	public static getUserGroupIds(user: User | null | undefined): string[] {
+	public static getUserGroupIds(groupId: string | undefined): string[] {
 		return [
-			...(user?.groupId ? [user.groupId] : []),
-			user
+			...(groupId ? [groupId] : []),
+			groupId
 				? SpecialPermissionGroups.loggedInUsers
 				: SpecialPermissionGroups.loggedOutUsers,
 		];

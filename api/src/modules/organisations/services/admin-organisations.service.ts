@@ -1,29 +1,25 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 
-import { Configuration } from '../../../config';
-
-import { ORGANISATION_QUERIES } from '../admin-organisations.consts';
+import { ORGANISATION_QUERIES } from "../admin-organisations.consts";
 import {
 	GqlAvoOrganisation,
 	GqlHetArchiefOrganisation,
 	GqlOrganisation,
 	Organisation,
 	OrganisationQueries,
-	OrganisationQueryTypes,
-} from '../admin-organisations.types';
-import { DataService } from '../../data';
+	OrganisationQueryTypes
+} from "../admin-organisations.types";
+import { DataService } from "../../data";
 
 @Injectable()
 export class AdminOrganisationsService {
 	private queries: OrganisationQueries;
 
 	constructor(
-		private configService: ConfigService<Configuration>,
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService
 	) {
 		this.queries =
-			ORGANISATION_QUERIES[this.configService.get('DATABASE_APPLICATION_TYPE')];
+			ORGANISATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE];
 	}
 
 	public adapt(gqlOrganisation: GqlOrganisation): Organisation {
@@ -39,24 +35,22 @@ export class AdminOrganisationsService {
 			name: hetArchiefOrganisation?.schema_name || avoOrganisation?.name,
 			logo_url:
 				hetArchiefOrganisation?.information?.logo?.iri ||
-				avoOrganisation?.logo_url,
+				avoOrganisation?.logo_url
 		};
 	}
 
 	public async getOrganisation(id: string): Promise<Organisation> {
-		const response = await this.dataService.execute<
-			OrganisationQueryTypes['GetOrganisationQuery'],
-			OrganisationQueryTypes['GetOrganisationQueryVariables']
-		>(this.queries.GetOrganisationDocument, {
-			id,
+		const response = await this.dataService.execute<OrganisationQueryTypes["GetOrganisationQuery"],
+			OrganisationQueryTypes["GetOrganisationQueryVariables"]>(this.queries.GetOrganisationDocument, {
+			id
 		});
 
 		/* istanbul ignore next */
 		return this.adapt(
-			(response as OrganisationQueryTypes['GetOrganisationQueryAvo'])
+			(response as OrganisationQueryTypes["GetOrganisationQueryAvo"])
 				?.shared_organisations?.[0] ||
-				(response as OrganisationQueryTypes['GetOrganisationQueryHetArchief'])
-					?.maintainer_content_partner?.[0],
+			(response as OrganisationQueryTypes["GetOrganisationQueryHetArchief"])
+				?.maintainer_content_partner?.[0]
 		);
 	}
 }

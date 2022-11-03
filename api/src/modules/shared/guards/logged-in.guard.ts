@@ -4,26 +4,24 @@ import {
 	Injectable,
 	UnauthorizedException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Avo } from "@viaa/avo2-types";
 import { Observable } from 'rxjs';
-import { Configuration } from '../../../config';
+import { HetArchiefUser } from "../../users/types";
 
 import { SessionHelper } from '../auth/session-helper';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
-	constructor(private configService: ConfigService<Configuration>) {}
-
 	canActivate(
 		context: ExecutionContext,
 	): boolean | Promise<boolean> | Observable<boolean> {
-		if (this.configService.get('IS_ADMIN_CORE_DEMO_APP') === 'true') {
+		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
 			return true; // There is no authentication in the admin core test app
 		}
 
 		const request = context.switchToHttp().getRequest();
-		const user = SessionHelper.getArchiefUserInfo(request.session);
-		if (!user?.id) {
+		const user = SessionHelper.getUserInfo(request.session);
+		if (!(user as HetArchiefUser)?.id && !(user as Avo.User.User)?.uid) {
 			throw new UnauthorizedException(
 				'You must be logged in to use this endpoint',
 			);

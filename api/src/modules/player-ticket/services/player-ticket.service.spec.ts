@@ -1,13 +1,10 @@
 import { CACHE_MANAGER } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { Cache } from 'cache-manager';
 import { addHours } from 'date-fns';
 import nock from 'nock';
 
-import { Configuration } from '../../../config';
-
-import { AvoOrHetArchief } from '../../content-pages';
 import { PlayerTicket } from '../player-ticket.types';
 import { PlayerTicketService } from './player-ticket.service';
 import { DataService } from '../../data';
@@ -16,26 +13,6 @@ import {
 	GetFileByRepresentationSchemaIdentifierQuery,
 	GetThumbnailUrlByIdQuery,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'ELASTIC_SEARCH_URL') {
-			return 'http://elasticsearch'; // should be a syntactically valid url
-		}
-		if (key === 'TICKET_SERVICE_URL') {
-			return 'http://ticketservice';
-		}
-		if (key === 'MEDIA_SERVICE_URL') {
-			return 'http://mediaservice';
-		}
-		if (key === 'DATABASE_APPLICATION_TYPE') {
-			return AvoOrHetArchief.hetArchief;
-		}
-		return key;
-	}),
-};
 
 const mockDataService = {
 	execute: jest.fn(),
@@ -67,10 +44,6 @@ describe('PlayerTicketService', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				PlayerTicketService,
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 				{
 					provide: DataService,
 					useValue: mockDataService,
@@ -145,7 +118,6 @@ describe('PlayerTicketService', () => {
 				object_file: [{ schema_embed_url: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-			mockConfigService.get.mockResolvedValueOnce(AvoOrHetArchief.avo);
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
 			expect(url).toEqual('vrt/item-1');
 		});

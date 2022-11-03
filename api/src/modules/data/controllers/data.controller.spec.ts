@@ -6,7 +6,7 @@ import { DataController } from './data.controller';
 
 import { TranslationsService } from '../../translations/services/translations.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Group, GroupIdToName, Permission, HetArchiefUser } from '../../users/types';
 import { Idp } from '../../shared/auth/auth.types';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 
@@ -18,7 +18,7 @@ const mockDataService = {
 	}),
 };
 
-const mockUser: User = {
+const mockUser: HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',

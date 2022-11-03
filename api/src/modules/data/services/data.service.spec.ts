@@ -1,15 +1,15 @@
-import { ConfigService } from '@nestjs/config';
+
 import { Test, TestingModule } from '@nestjs/testing';
 import fse from 'fs-extra';
 import nock from 'nock';
 
-import { Configuration } from '../../../config';
+
 
 import { DataPermissionsService } from './data-permissions.service';
 import { DataService } from './data.service';
 
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
-import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Group, GroupIdToName, Permission, HetArchiefUser } from '../../users/types';
 import { Idp } from '../../shared/auth/auth.types';
 import { TestingLogger } from '../../shared/logging/test-logger';
 
@@ -27,24 +27,7 @@ const mockDataPermissionsService: Partial<
 	getQueryName: jest.fn(),
 };
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'GRAPHQL_URL_HET_ARCHIEF') {
-			return 'http://localhost/v1/graphql/';
-		}
-		if (key === 'GRAPHQL_SECRET_HET_ARCHIEF') {
-			return 'graphQl-$ecret';
-		}
-		if (key === 'GRAPHQL_ENABLE_WHITELIST') {
-			return false; // For testing we disable the whitelist by default
-		}
-		return key;
-	}),
-};
-
-const mockUser: User = {
+const mockUser: HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
@@ -63,7 +46,6 @@ const mockQuery: GraphQlQueryDto = {
 
 describe('DataService - no whitelist', () => {
 	let dataService: DataService;
-	let configService: ConfigService<Configuration>;
 	let dataPermissionsService: DataPermissionsService;
 
 	const mockFiles = {};
@@ -77,19 +59,12 @@ describe('DataService - no whitelist', () => {
 					provide: DataPermissionsService,
 					useValue: mockDataPermissionsService,
 				},
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 			],
 		})
 			.setLogger(new TestingLogger())
 			.compile();
 
 		dataService = module.get<DataService>(DataService);
-		configService = module.get<ConfigService>(
-			ConfigService,
-		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
 			DataPermissionsService,
 		);
@@ -105,7 +80,6 @@ describe('DataService - no whitelist', () => {
 
 	it('services should be defined', () => {
 		expect(dataService).toBeDefined();
-		expect(configService).toBeDefined();
 		expect(dataPermissionsService).toBeDefined();
 	});
 
@@ -248,10 +222,6 @@ describe('DataService - with whitelist', () => {
 					provide: DataPermissionsService,
 					useValue: mockDataPermissionsService,
 				},
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 			],
 		}).compile();
 
@@ -303,7 +273,6 @@ describe('DataService - with whitelist', () => {
 
 describe('DataService - no whitelist files', () => {
 	let dataService: DataService;
-	let configService: ConfigService<Configuration>;
 	let dataPermissionsService: DataPermissionsService;
 
 	beforeEach(async () => {
@@ -316,17 +285,10 @@ describe('DataService - no whitelist files', () => {
 					provide: DataPermissionsService,
 					useValue: mockDataPermissionsService,
 				},
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 			],
 		}).compile();
 
 		dataService = module.get<DataService>(DataService);
-		configService = module.get<ConfigService>(
-			ConfigService,
-		) as unknown as ConfigService<Configuration>;
 		dataPermissionsService = module.get<DataPermissionsService>(
 			DataPermissionsService,
 		);
@@ -334,7 +296,6 @@ describe('DataService - no whitelist files', () => {
 
 	it('services should be defined when no whitelist files are available', () => {
 		expect(dataService).toBeDefined();
-		expect(configService).toBeDefined();
 		expect(dataPermissionsService).toBeDefined();
 	});
 });

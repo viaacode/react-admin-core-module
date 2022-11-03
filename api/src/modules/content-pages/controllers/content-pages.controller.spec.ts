@@ -1,16 +1,16 @@
-import { ConfigService } from '@nestjs/config';
+
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '../../../config';
+
 
 import { ContentPagesController } from './content-pages.controller';
 import { ContentPagesService } from '../services/content-pages.service';
 import { PlayerTicketService } from '../../player-ticket';
-import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Group, GroupIdToName, Permission, HetArchiefUser } from '../../users/types';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
-const mockUser: User = {
+const mockUser: HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
@@ -46,17 +46,6 @@ const mockPlayerTicketService: Partial<
 	getEmbedUrl: jest.fn(),
 };
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'PROXY_API_KEY') {
-			return '';
-		}
-		return key;
-	}),
-};
-
 describe('ContentPagesController', () => {
 	let contentPagesController: ContentPagesController;
 	let sessionHelperSpy: jest.SpyInstance;
@@ -74,10 +63,6 @@ describe('ContentPagesController', () => {
 					provide: PlayerTicketService,
 					useValue: mockPlayerTicketService,
 				},
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 			],
 		}).compile();
 
@@ -86,7 +71,7 @@ describe('ContentPagesController', () => {
 		);
 
 		sessionHelperSpy = jest
-			.spyOn(SessionHelper, 'getArchiefUserInfo')
+			.spyOn(SessionHelper, 'getUserInfo')
 			.mockReturnValue(mockUser);
 	});
 

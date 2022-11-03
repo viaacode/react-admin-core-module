@@ -46,7 +46,7 @@ export enum Permission {
 	CAN_EDIT_PROFILE_INFO = 'CAN_EDIT_PROFILE_INFO',
 }
 
-export interface User {
+export interface HetArchiefUser {
 	id: string;
 	fullName: string;
 	firstName: string;

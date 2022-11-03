@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { configValidationSchema } from './config';
 import {
 	AdminNavigationsModule,
 	AdminOrganisationsModule,
@@ -16,14 +14,6 @@ import {
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({
-			ignoreEnvFile: true,
-			validationSchema: configValidationSchema,
-			validationOptions: {
-				allowUnknown: true,
-				abortEarly: true,
-			},
-		}),
 		AdminNavigationsModule,
 		AdminOrganisationsModule,
 		AdminPermissionsModule,

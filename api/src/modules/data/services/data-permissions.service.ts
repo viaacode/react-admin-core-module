@@ -8,32 +8,32 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import { Avo } from '@viaa/avo2-types';
 import { every, get, some, without } from 'lodash';
 
-import { Configuration } from '../../../config';
+
 
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { QueryOrigin } from '../types';
 
 import { ContentPagesService } from '../../content-pages';
-import { Permission, User } from '../../users/types';
+import { Permission, HetArchiefUser } from '../../users/types';
 
 type IsAllowed = (
-	user: User,
+	user: HetArchiefUser,
 	query: string,
 	variables: any,
 ) => Promise<boolean>;
 
-function hasPermission(user: User, permissionName: Permission): boolean {
+function hasPermission(user: HetArchiefUser, permissionName: Permission): boolean {
 	const permissions =
 		get(user, 'profile.permissions') || get(user, 'permissions') || [];
 	return permissions.includes(permissionName);
 }
 
 function or(...permissionNames: Permission[]): IsAllowed {
-	return async (user: User): Promise<boolean> => {
+	return async (user: HetArchiefUser): Promise<boolean> => {
 		return some(permissionNames, (permissionName) =>
 			hasPermission(user, permissionName),
 		);
@@ -41,7 +41,7 @@ function or(...permissionNames: Permission[]): IsAllowed {
 }
 
 async function canInsertContentBlocks(
-	user: User,
+	user: HetArchiefUser,
 	query: string,
 	variables: any,
 ): Promise<boolean> {
@@ -66,7 +66,7 @@ async function canInsertContentBlocks(
 }
 
 async function canUpdateContentBlocks(
-	user: User,
+	user: HetArchiefUser,
 	query: string,
 	variables: { id: number },
 ): Promise<boolean> {
@@ -101,15 +101,15 @@ export class DataPermissionsService {
 	};
 
 	constructor(
-		private configService: ConfigService<Configuration>,
+
 		@Inject(forwardRef(() => ContentPagesService))
 		private contentPagesService: ContentPagesService,
 	) {
-		if (configService.get('ENVIRONMENT') !== 'production') {
+		if (process.env.ENVIRONMENT !== 'production') {
 			this.logger.log('GraphQl config: ', {
-				url: this.configService.get('GRAPHQL_URL_HET_ARCHIEF'),
+				url: process.env.GRAPHQL_URL_HET_ARCHIEF,
 				whitelistEnabled:
-					this.configService.get('GRAPHQL_ENABLE_WHITELIST') === 'true',
+					process.env.GRAPHQL_ENABLE_WHITELIST === 'true',
 			});
 		}
 		this.initWhitelist();
@@ -117,7 +117,7 @@ export class DataPermissionsService {
 
 	public async initWhitelist(): Promise<void> {
 		this.whitelistEnabled =
-			this.configService.get('GRAPHQL_ENABLE_WHITELIST') === 'true';
+			process.env.GRAPHQL_ENABLE_WHITELIST === 'true';
 
 		const whitelistFiles: Record<QueryOrigin, string[]> = {
 			PROXY: [
@@ -157,7 +157,7 @@ export class DataPermissionsService {
 				updateContentPageLabel: or(Permission.EDIT_CONTENT_PAGE_LABELS),
 				deleteContentBlock: or(Permission.DELETE_ANY_CONTENT_PAGES),
 				deleteContentLabelLinks: async (
-					user: User,
+					user: HetArchiefUser,
 					query: string,
 					variables: any,
 				) => {
@@ -212,7 +212,7 @@ export class DataPermissionsService {
 				),
 				insertContentBlocks: canInsertContentBlocks,
 				insertContentLabelLinks: async (
-					user: User,
+					user: HetArchiefUser,
 					query: string,
 					variables: any,
 				) => {
@@ -236,7 +236,7 @@ export class DataPermissionsService {
 
 					return false;
 				},
-				insertContent: async (user: User, query: string, variables: any) => {
+				insertContent: async (user: HetArchiefUser, query: string, variables: any) => {
 					if (hasPermission(user, Permission.EDIT_ANY_CONTENT_PAGES)) {
 						return true;
 					}
@@ -251,7 +251,7 @@ export class DataPermissionsService {
 				softDeleteContent: or(Permission.DELETE_ANY_CONTENT_PAGES),
 				updateContentBlock: canUpdateContentBlocks,
 				updateContentById: async (
-					user: User,
+					user: HetArchiefUser,
 					query: string,
 					variables: any,
 				) => {
@@ -335,7 +335,7 @@ export class DataPermissionsService {
 	 * @returns if a query is allowed, by checking both whitelisting and query permissions
 	 */
 	public async isAllowedToExecuteQuery(
-		user: User,
+		user: HetArchiefUser,
 		queryDto: GraphQlQueryDto,
 		origin: QueryOrigin,
 	): Promise<boolean> {
@@ -402,7 +402,7 @@ export class DataPermissionsService {
 	}
 
 	public async verify(
-		user: User,
+		user: HetArchiefUser,
 		queryName: string,
 		origin: QueryOrigin,
 		queryDto: GraphQlQueryDto,

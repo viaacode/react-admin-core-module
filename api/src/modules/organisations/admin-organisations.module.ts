@@ -1,5 +1,4 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AdminOrganisationsService } from './services/admin-organisations.service';
 
@@ -7,8 +6,8 @@ import { DataModule } from '../data';
 
 @Module({
 	controllers: [],
-	imports: [forwardRef(() => DataModule), ConfigModule],
-	providers: [AdminOrganisationsService, ConfigService],
+	imports: [forwardRef(() => DataModule)],
+	providers: [AdminOrganisationsService],
 	exports: [AdminOrganisationsService],
 })
 export class AdminOrganisationsModule {}

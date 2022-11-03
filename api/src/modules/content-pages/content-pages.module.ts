@@ -1,22 +1,20 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { ContentPagesController } from './controllers/content-pages.controller';
 import { ContentPagesService } from './services/content-pages.service';
 
-import { AdminOrganisationsModule } from '../organisations/admin-organisations.module';
-import { PlayerTicketModule } from '../player-ticket/player-ticket.module';
-import { DataModule } from '../data/data.module';
+import { AdminOrganisationsModule } from "../organisations";
+import { PlayerTicketModule } from "../player-ticket";
+import { DataModule } from "../data";
 
 @Module({
 	controllers: [ContentPagesController],
 	imports: [
-		ConfigModule,
 		PlayerTicketModule,
 		AdminOrganisationsModule,
 		forwardRef(() => DataModule),
 	],
-	providers: [ContentPagesService, ConfigService],
+	providers: [ContentPagesService],
 	exports: [ContentPagesService],
 })
 export class ContentPagesModule {}

@@ -1,19 +1,19 @@
-import { ConfigService } from '@nestjs/config';
+
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '../../../config';
+
 
 import { QueryOrigin } from '../types';
 
 import { DataPermissionsService } from './data-permissions.service';
 
 import { ContentPagesService } from '../../content-pages';
-import { Group, GroupIdToName, Permission, User } from '../../users/types';
+import { Group, GroupIdToName, Permission, HetArchiefUser } from '../../users/types';
 import { Idp } from '../../shared/auth/auth.types';
 
 const mockQuery = { query: 'query testQuery { username }' };
 
-const mockUser: User = {
+const mockUser: HetArchiefUser = {
 	id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
 	firstName: 'Meemoo',
 	lastName: 'Admin',
@@ -28,23 +28,6 @@ const mockUser: User = {
 
 const mockContentPagesService = jest.fn();
 
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'GRAPHQL_URL_HET_ARCHIEF') {
-			return 'http://localhost/v1/graphql/';
-		}
-		if (key === 'GRAPHQL_SECRET_HET_ARCHIEF') {
-			return 'graphQl-$ecret';
-		}
-		if (key == 'GRAPHQL_ENABLE_WHITELIST') {
-			return false; // For testing we disable the whitelist by default
-		}
-		return key;
-	}),
-};
-
 describe('DataPermissionsService', () => {
 	let dataPermissionsService: DataPermissionsService;
 
@@ -52,10 +35,6 @@ describe('DataPermissionsService', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				DataPermissionsService,
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
-				},
 				{
 					provide: ContentPagesService,
 					useValue: mockContentPagesService,

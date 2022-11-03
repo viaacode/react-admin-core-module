@@ -4,10 +4,10 @@ import {
 	ForbiddenException,
 	Injectable,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-import { Configuration } from '../../../config';
+
 
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { Permission } from '../../users/types';
@@ -17,13 +17,13 @@ import { SessionHelper } from '../auth/session-helper';
 export class PermissionGuard implements CanActivate {
 	constructor(
 		private reflector: Reflector,
-		private configService: ConfigService<Configuration>,
+
 	) {}
 
 	canActivate(
 		context: ExecutionContext,
 	): boolean | Promise<boolean> | Observable<boolean> {
-		if (this.configService.get('IS_ADMIN_CORE_DEMO_APP') === 'true') {
+		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
 			return true; // There is no authentication in the admin core test app
 		}
 
@@ -70,7 +70,7 @@ export class PermissionGuard implements CanActivate {
 
 		const request = context.switchToHttp().getRequest();
 		const user = new SessionUserEntity(
-			SessionHelper.getArchiefUserInfo(request.session),
+			SessionHelper.getUserInfo(request.session),
 		);
 		// User needs all required permissions
 		if (!user.hasAll(allRequiredPermissions)) {

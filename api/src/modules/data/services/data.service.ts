@@ -8,18 +8,18 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
 
-import { Configuration } from '../../../config';
+
 
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { GraphQlResponse, QueryOrigin } from '../types';
 
 import { DataPermissionsService } from './data-permissions.service';
 
-import { User } from '../../users/types';
+import { HetArchiefUser } from '../../users/types';
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { ASTNode } from 'graphql/language/ast';
@@ -30,16 +30,14 @@ export class DataService {
 	private gotInstance: Got;
 
 	constructor(
-		private configService: ConfigService<Configuration>,
+
 		@Inject(forwardRef(() => DataPermissionsService))
 		private dataPermissionsService: DataPermissionsService,
 	) {
 		const dbConfig: Options = {
-			prefixUrl: this.configService.get('GRAPHQL_URL_HET_ARCHIEF'),
+			prefixUrl: process.env.GRAPHQL_URL_HET_ARCHIEF,
 			headers: {
-				'x-hasura-admin-secret': this.configService.get(
-					'GRAPHQL_SECRET_HET_ARCHIEF',
-				),
+				'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_HET_ARCHIEF,
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',
@@ -54,7 +52,7 @@ export class DataService {
 	 * @returns the query result
 	 */
 	public async executeClientQuery(
-		user: User,
+		user: HetArchiefUser,
 		queryDto: GraphQlQueryDto,
 	): Promise<GraphQlResponse> {
 		// check if query can be executed
@@ -95,7 +93,7 @@ export class DataService {
 			};
 
 			const id = randomUUID();
-			if (this.configService.get('GRAPHQL_LOG_QUERIES') === 'true') {
+			if (process.env.GRAPHQL_LOG_QUERIES === 'true') {
 				this.logger.log(
 					`[ADMIN_CORE] ${id}, Executing graphql query: ${
 						queryData.query
@@ -106,7 +104,7 @@ export class DataService {
 				json: queryData,
 				resolveBodyOnly: true, // this is duplicate but fixes a typing error
 			});
-			if (this.configService.get('GRAPHQL_LOG_QUERIES') === 'true') {
+			if (process.env.GRAPHQL_LOG_QUERIES === 'true') {
 				this.logger.log(
 					`[ADMIN_CORE] ${id}, Response from graphql query: ${JSON.stringify(
 						data,

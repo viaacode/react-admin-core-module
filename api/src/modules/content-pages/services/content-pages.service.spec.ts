@@ -1,7 +1,7 @@
-import { ConfigService } from '@nestjs/config';
+
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { Configuration } from '../../../config';
+
 
 import { ContentPagesService } from './content-pages.service';
 import { AdminOrganisationsService } from '../../organisations';
@@ -10,23 +10,6 @@ import { DataService } from '../../data';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
-};
-
-const mockConfigService: Partial<
-	Record<keyof ConfigService, jest.SpyInstance>
-> = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'ELASTIC_SEARCH_URL') {
-			return 'http://elasticsearch'; // should be a syntactically valid url
-		}
-		if (key === 'TICKET_SERVICE_URL') {
-			return 'http://ticketservice';
-		}
-		if (key === 'MEDIA_SERVICE_URL') {
-			return 'http://mediaservice';
-		}
-		return key;
-	}),
 };
 
 const mockPlayerTicketService: Partial<
@@ -53,10 +36,6 @@ describe('ContentPagesService', () => {
 				{
 					provide: DataService,
 					useValue: mockDataService,
-				},
-				{
-					provide: ConfigService,
-					useValue: mockConfigService,
 				},
 				{
 					provide: PlayerTicketService,

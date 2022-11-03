@@ -5,7 +5,6 @@ import {
 	ForbiddenException,
 	Get,
 	Headers,
-	Logger,
 	Post,
 	Query,
 	Req,
@@ -32,10 +31,6 @@ import { SpecialPermissionGroups } from '../../shared/types/types';
 @ApiTags('ContentPages')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
 export class ContentPagesController {
-	private logger: Logger = new Logger(ContentPagesController.name, {
-		timestamp: true,
-	});
-
 	constructor(private contentPagesService: ContentPagesService) {}
 
 	@Post('overview')
@@ -47,7 +42,7 @@ export class ContentPagesController {
 			await this.contentPagesService.getContentPagesForOverview(
 				queryDto,
 				compact([
-					user?.getUser()?.groupId,
+					String(user?.getGroupId()),
 					user?.getUser()
 						? SpecialPermissionGroups.loggedInUsers
 						: SpecialPermissionGroups.loggedOutUsers,
@@ -109,7 +104,7 @@ export class ContentPagesController {
 			if (
 				!intersection(
 					contentPage.userGroupIds.map((id) => String(id)),
-					SessionHelper.getUserGroupIds(user.getUser()),
+					SessionHelper.getUserGroupIds(String(user.getGroupId())),
 				).length
 			) {
 				return null;

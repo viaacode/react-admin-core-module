@@ -227,8 +227,6 @@ function setConfig() {
 		},
 		database: {
 			databaseApplicationType: AvoOrHetArchief.hetArchief,
-			graphqlUrl: '',
-			graphqlSecret: '',
 			proxyUrl,
 		},
 		flowplayer: {

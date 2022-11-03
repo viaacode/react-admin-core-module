@@ -7,12 +7,11 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
-
-import { cleanMultilineEnv, Configuration } from "../../../config";
+import { cleanMultilineEnv } from "../../shared/helpers/env-vars";
 
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -43,24 +42,23 @@ export class PlayerTicketService {
 	private readonly host: string;
 
 	constructor(
-		protected configService: ConfigService<Configuration>,
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		@Inject(CACHE_MANAGER) private cacheManager: Cache,
 	) {
 		this.playerTicketsGotInstance = got.extend({
-			prefixUrl: this.configService.get('TICKET_SERVICE_URL'),
+			prefixUrl: process.env.TICKET_SERVICE_URL,
 			resolveBodyOnly: true,
 			responseType: 'json',
 			https: {
 				rejectUnauthorized: false,
-				certificate: cleanMultilineEnv(this.configService.get('TICKET_SERVICE_CERT')),
-				key: cleanMultilineEnv(this.configService.get('TICKET_SERVICE_KEY')),
-				passphrase: this.configService.get('TICKET_SERVICE_PASSPHRASE'),
+				certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
+				key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
+				passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
 			},
 		});
-		this.ticketServiceMaxAge = this.configService.get('TICKET_SERVICE_MAXAGE');
-		this.mediaServiceUrl = this.configService.get('MEDIA_SERVICE_URL');
-		this.host = this.configService.get('HOST');
+		this.ticketServiceMaxAge = parseInt(process.env.TICKET_SERVICE_MAXAGE || '14401');
+		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
+		this.host = process.env.HOST;
 	}
 
 	protected async getToken(
@@ -125,7 +123,7 @@ export class PlayerTicketService {
 	public async getEmbedUrl(id: string): Promise<string> {
 		let response;
 		if (
-			this.configService.get('DATABASE_APPLICATION_TYPE') ===
+			process.env.DATABASE_APPLICATION_TYPE ===
 			AvoOrHetArchief.hetArchief
 		) {
 			// Het archief

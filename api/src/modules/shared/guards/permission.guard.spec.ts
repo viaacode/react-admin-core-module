@@ -1,6 +1,6 @@
 import { ExecutionContext } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Configuration } from '../../../config';
+
+
 
 import { PermissionGuard } from './permission.guard';
 
@@ -29,20 +29,10 @@ const mockReflector = {
 	getAllAndOverride: jest.fn(),
 };
 
-const mockConfigService = {
-	get: jest.fn((key: keyof Configuration): string | boolean => {
-		if (key === 'IS_ADMIN_CORE_DEMO_APP') {
-			return false;
-		}
-		return key;
-	}),
-} as unknown as ConfigService<Configuration>;
-
 describe('PermissionGuard', () => {
 	it('Should allow access when no permissions are required', async () => {
 		const canActivate = new PermissionGuard(
 			mockReflector,
-			mockConfigService,
 		).canActivate(mockExecutionContextWithPermissions([]));
 		expect(canActivate).toBe(true);
 	});
@@ -54,7 +44,6 @@ describe('PermissionGuard', () => {
 		]);
 		const canActivate = new PermissionGuard(
 			mockReflector,
-			mockConfigService,
 		).canActivate(
 			mockExecutionContextWithPermissions([
 				Permission.SEARCH,
@@ -69,7 +58,7 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]); // trigger the handler option as alternative
 		expect(() =>
-			new PermissionGuard(mockReflector, mockConfigService).canActivate(
+			new PermissionGuard(mockReflector).canActivate(
 				mockExecutionContextWithPermissions([Permission.SEARCH]),
 			),
 		).toThrowError();
@@ -83,7 +72,6 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
 		const canActivate = new PermissionGuard(
 			mockReflector,
-			mockConfigService,
 		).canActivate(mockExecutionContextWithPermissions([Permission.SEARCH]));
 		expect(canActivate).toBe(true);
 	});
@@ -95,7 +83,6 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
 		const canActivate = new PermissionGuard(
 			mockReflector,
-			mockConfigService,
 		).canActivate(
 			mockExecutionContextWithPermissions([
 				Permission.SEARCH,
@@ -112,7 +99,7 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
 		expect(() =>
-			new PermissionGuard(mockReflector, mockConfigService).canActivate(
+			new PermissionGuard(mockReflector).canActivate(
 				mockExecutionContextWithPermissions([Permission.CREATE_VISIT_REQUEST]),
 			),
 		).toThrowError();

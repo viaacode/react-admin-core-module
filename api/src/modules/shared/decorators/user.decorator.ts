@@ -7,7 +7,7 @@ export const SessionUser = createParamDecorator(
 	(data: unknown, ctx: ExecutionContext): SessionUserEntity | null => {
 		const request = ctx.switchToHttp().getRequest();
 		return new SessionUserEntity(
-			SessionHelper.getArchiefUserInfo(request.session),
+			SessionHelper.getUserInfo(request.session),
 		);
 	},
 );
