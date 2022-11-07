@@ -129,7 +129,7 @@ export class DataService {
 				throw err;
 			}
 			this.logger.error('Failed to get data from database', err.stack);
-			throw new InternalServerErrorException();
+			throw err;
 		}
 	}
 }
