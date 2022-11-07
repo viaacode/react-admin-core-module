@@ -1,21 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
 
 import packageJson from '../../../../package.json';
-import { DataService } from '../../admin-core/data/services/data.service';
-import {
-	GetFirstObjectIdDocument,
-	GetFirstObjectIdQuery,
-} from '../../admin-core/shared/generated/graphql-db-types-hetarchief';
+import { TranslationsService } from '../../translations';
 
 @Injectable()
 export class StatusService {
 	private logger: Logger = new Logger(StatusService.name, { timestamp: true });
 
-	constructor(private dataService: DataService) {}
+	constructor(private translationsService: TranslationsService) {}
 
 	getStatus(): Record<string, string> {
 		return {
-			name: 'HetArchief proxy service',
+			name: 'Admin Core api',
 			version: packageJson.version,
 		};
 	}
@@ -30,12 +26,11 @@ export class StatusService {
 
 	private async getGraphQlStatus(): Promise<boolean> {
 		try {
-			const response = await this.dataService.execute<GetFirstObjectIdQuery>(
-				GetFirstObjectIdDocument,
-			);
+			const translations =
+				await this.translationsService.getFrontendTranslations();
 
 			/* istanbul ignore next */
-			return !!response?.object_ie?.[0]?.schema_identifier;
+			return !!Object.keys(translations)[0];
 		} catch (err) {
 			this.logger.error(err);
 			return false;

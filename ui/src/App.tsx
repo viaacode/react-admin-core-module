@@ -1,6 +1,6 @@
 import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';

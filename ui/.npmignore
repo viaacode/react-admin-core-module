@@ -1,6 +1,6 @@
-.env
+/.env/
 .idea
-public
-scripts
+public/
+scripts/
 *.yml
-*.js
+/*.js

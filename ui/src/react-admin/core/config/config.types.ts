@@ -143,8 +143,6 @@ export interface AdminConfig {
 	database: {
 		databaseApplicationType: AvoOrHetArchief;
 		proxyUrl: string;
-		graphqlUrl: string;
-		graphqlSecret: string;
 	};
 	user: CommonUser;
 }

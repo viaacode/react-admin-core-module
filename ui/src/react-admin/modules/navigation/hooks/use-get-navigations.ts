@@ -1,5 +1,5 @@
 import { HTTPError } from 'ky';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
 import { NavigationService } from '~modules/navigation/navigation.service';
 import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
@@ -11,11 +11,11 @@ export const useGetNavigations = (
 		NavigationItem[],
 		HTTPError,
 		NavigationItem[],
-		typeof NAVIGATIONS_QUERY_KEYS.getNavigations
+		(typeof NAVIGATIONS_QUERY_KEYS.getNavigations)[]
 	>
 ) => {
 	return useQuery(
-		NAVIGATIONS_QUERY_KEYS.getNavigations,
+		[NAVIGATIONS_QUERY_KEYS.getNavigations],
 		async () => {
 			const navItems = await NavigationService.fetchNavigationItems(placement);
 			reindexNavigationItems(navItems);

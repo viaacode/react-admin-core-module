@@ -10,7 +10,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default (cliArgs) => {
 	return [
 		{
-			input: ['src/react-admin/index.ts'],
+			input: ['src/index.ts'],
 			output: [
 				{
 					dir: 'dist/esm',
@@ -60,7 +60,7 @@ export default (cliArgs) => {
 				'lodash-es',
 				'react-dom',
 				'react-hook-form',
-				'react-query',
+				'@tanstack/react-query',
 				'react',
 				'react/jsx-runtime',
 				'rxjs/operators',

@@ -1,22 +1,18 @@
-import { ConfigService as NestConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { AdminCoreModule } from './admin-core.module';
 import helmet from 'helmet';
 
-import { ConfigService } from './config';
-
 async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
-	const configService = app.get<ConfigService>(NestConfigService);
-	const port = configService.get('PORT') || 3300;
+	const app = await NestFactory.create(AdminCoreModule);
+	const port = process.env.PORT || 3300;
 
 	/** Security */
-	app.enableCors(configService.get('CORS_OPTIONS'));
+	app.enableCors();
 	app.use(helmet());
 
 	/** Swagger docs **/
-	if (configService.get('ENVIRONMENT') !== 'production') {
+	if (process.env.ENVIRONMENT !== 'production') {
 		const swaggerConfig = new DocumentBuilder()
 			.setTitle('Admin Core API docs')
 			.setDescription('Documentatie voor de Admin Core api calls')
