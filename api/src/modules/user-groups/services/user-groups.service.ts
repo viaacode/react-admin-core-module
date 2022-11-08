@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
-import { GetUserGroupsPermissionsQuery } from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
 import { UserGroupsResponse } from '../user-groups.types';
@@ -11,13 +10,21 @@ export class UserGroupsService {
 	constructor(private dataService: DataService) {}
 
 	public adapt(
-		userGroup: GetUserGroupsPermissionsQuery['users_group'][0],
+		userGroup:
+			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0]
+			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0],
 	): UserGroupsResponse {
+		const avoUserGroup =
+			userGroup as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0];
+		const hetArchiefUserGroup =
+			userGroup as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0];
 		return {
 			id: userGroup.id,
 			label: userGroup.label,
-			name: userGroup.name,
-			permissions: userGroup.permissions.map((permissionWrap) => ({
+			name: avoUserGroup.label || hetArchiefUserGroup.name,
+			permissions: (
+				avoUserGroup.group_permissions || hetArchiefUserGroup.permissions
+			).map((permissionWrap) => ({
 				id: permissionWrap.permission.id,
 				label: permissionWrap.permission.label,
 				name: permissionWrap.permission.name,
