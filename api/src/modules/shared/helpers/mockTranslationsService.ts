@@ -1,5 +1,5 @@
-import { TranslationKey } from '../../translations/types';
-import { TranslationsService } from '../../translations/services/translations.service';
+import { TranslationKey } from "../../translations";
+import { TranslationsService } from "../../translations";
 
 export const mockTranslationsService: Partial<
 	Record<keyof TranslationsService, jest.SpyInstance>

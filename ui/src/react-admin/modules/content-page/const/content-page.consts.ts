@@ -13,51 +13,6 @@ import {
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
-const ROOT = 'navigatie';
-const DETAIL = ':navigationName';
-
-export const CONTENT_PAGE_PATHS = {
-	overview: `/${ROOT}`,
-	detail: `/${ROOT}/${DETAIL}`,
-	create: `/${ROOT}/${DETAIL}/aanmaken`,
-	edit: `/${ROOT}/${DETAIL}/bewerken`,
-};
-
-export const CONTENT_PAGE_CONFIG = {
-	views: {
-		overview: {
-			meta: {
-				title: 'Navigatie - beheer',
-				description: 'Navigatie overzicht beheerpagina',
-			},
-			labels: {
-				pageTitle: 'Navigatie: overzicht',
-				createButton: 'Navigatie toevoegen',
-				tableHeads: {
-					name: 'Naam',
-					description: 'Beschrijving',
-					actions: '',
-				},
-				tableActions: {
-					add: {
-						title: 'Voeg een navigatie-item toe aan deze navigatiebalk.',
-					},
-					view: {
-						title: 'Bekijk de navigatie-items voor deze navigatiebalk',
-					},
-				},
-			},
-			error: {},
-		},
-		detail: {
-			labels: {},
-		},
-		edit: {
-			labels: {},
-		},
-	},
-};
-
 export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],

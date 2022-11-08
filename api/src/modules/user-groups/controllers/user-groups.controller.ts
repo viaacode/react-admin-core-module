@@ -6,7 +6,7 @@ import { Permission } from '../../users/types';
 
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
 import { UserGroupsService } from '../services/user-groups.service';
-import { UserGroupsResponse } from '../types';
+import { UserGroupsResponse } from '../user-groups.types';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('UserGroups')

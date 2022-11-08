@@ -1,15 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { DataService } from '../../data/services/data.service';
-import {
-	GetUserGroupsPermissionsDocument,
-	GetUserGroupsPermissionsQuery,
-	UpdateUserGroupsPermissionsDocument,
-	UpdateUserGroupsPermissionsMutation,
-	UpdateUserGroupsPermissionsMutationVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+import { DataService } from '../../data';
+import { GetUserGroupsPermissionsQuery } from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
-import { UserGroupsResponse } from '../types';
+import { UserGroupsResponse } from '../user-groups.types';
+import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../user-groups.consts';
 
 @Injectable()
 export class UserGroupsService {
@@ -32,42 +27,68 @@ export class UserGroupsService {
 	}
 
 	public async getUserGroups(): Promise<UserGroupsResponse[]> {
-		const response =
-			await this.dataService.execute<GetUserGroupsPermissionsQuery>(
-				GetUserGroupsPermissionsDocument,
-			);
+		const response = await this.dataService.execute<
+			UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
+		>(
+			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetUserGroupsPermissionsDocument,
+		);
 
-		return response.users_group.map((userGroup) => this.adapt(userGroup));
+		const userGroups =
+			(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
+				.users_groups ||
+			(
+				response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']
+			).users_group;
+		return userGroups.map((userGroup) => this.adapt(userGroup));
 	}
 
 	public async updateUserGroups(
 		updates: UpdatePermission[],
 	): Promise<{ deleted: number; inserted: number }> {
 		const response = await this.dataService.execute<
-			UpdateUserGroupsPermissionsMutation,
-			UpdateUserGroupsPermissionsMutationVariables
-		>(UpdateUserGroupsPermissionsDocument, {
-			deletions: {
-				_or: updates
-					.filter((update) => !update.hasPermission)
+			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
+			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']
+		>(
+			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.UpdateUserGroupsPermissionsDocument,
+			{
+				deletions: {
+					_or: updates
+						.filter((update) => !update.hasPermission)
+						.map((update) => ({
+							_and: [
+								{ permission_id: { _eq: update.permissionId } },
+								{ group_id: { _eq: update.userGroupId } },
+							],
+						})),
+				},
+				insertions: updates
+					.filter((update) => update.hasPermission)
 					.map((update) => ({
-						_and: [
-							{ permission_id: { _eq: update.permissionId } },
-							{ group_id: { _eq: update.userGroupId } },
-						],
+						group_id: update.userGroupId,
+						permission_id: update.permissionId,
 					})),
 			},
-			insertions: updates
-				.filter((update) => update.hasPermission)
-				.map((update) => ({
-					group_id: update.userGroupId,
-					permission_id: update.permissionId,
-				})),
-		});
+		);
 
 		return {
-			deleted: response.delete_users_group_permission?.affected_rows || 0,
-			inserted: response.insert_users_group_permission?.affected_rows || 0,
+			deleted:
+				(
+					response as UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationAvo']
+				).delete_users_group_permissions?.affected_rows ||
+				(
+					response as UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationHetArchief']
+				).delete_users_group_permission?.affected_rows ||
+				0,
+			inserted:
+				(
+					response as UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationAvo']
+				).insert_users_group_permissions?.affected_rows ||
+				(
+					response as UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationHetArchief']
+				).insert_users_group_permission?.affected_rows ||
+				0,
 		};
 	}
 }
