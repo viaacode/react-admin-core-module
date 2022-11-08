@@ -125,8 +125,13 @@ export class DataService {
 			if (err instanceof DuplicateKeyException) {
 				throw err;
 			}
-			this.logger.error('Failed to get data from database', err.stack);
-			throw new InternalServerErrorException();
+
+			this.logger.error('Failed to get data from database', err);
+
+			throw new InternalServerErrorException(
+				null,
+				'Failed to get data from database, check the logs for more information.',
+			);
 		}
 	}
 }
