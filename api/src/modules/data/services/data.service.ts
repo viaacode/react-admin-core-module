@@ -12,8 +12,6 @@ import {
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
 
-
-
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { GraphQlResponse, QueryOrigin } from '../types';
 
@@ -30,7 +28,6 @@ export class DataService {
 	private gotInstance: Got;
 
 	constructor(
-
 		@Inject(forwardRef(() => DataPermissionsService))
 		private dataPermissionsService: DataPermissionsService,
 	) {
@@ -128,8 +125,13 @@ export class DataService {
 			if (err instanceof DuplicateKeyException) {
 				throw err;
 			}
-			this.logger.error('Failed to get data from database', err.stack);
-			throw err;
+
+			this.logger.error('Failed to get data from database', err);
+
+			throw new InternalServerErrorException(
+				null,
+				'Failed to get data from database, check the logs for more information.',
+			);
 		}
 	}
 }
