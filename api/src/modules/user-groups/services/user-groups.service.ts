@@ -31,7 +31,7 @@ export class UserGroupsService {
 			UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
 		>(
 			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetUserGroupsQuery,
+				.GetUserGroupsPermissionsDocument,
 		);
 
 		const userGroups =

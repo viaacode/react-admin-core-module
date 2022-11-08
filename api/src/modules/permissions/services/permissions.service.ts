@@ -13,7 +13,10 @@ export class PermissionsService {
 	public async getPermissions(): Promise<PermissionInfo[]> {
 		const response = await this.dataService.execute<
 			PermissionQueryTypes['GetPermissionsQuery']
-		>(PERMISSIONS_QUERIES[process.env.DATABASE_APPLICATION_TYPE]);
+		>(
+			PERMISSIONS_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetPermissionsDocument,
+		);
 
 		if (
 			(response as PermissionQueryTypes['GetPermissionsQueryAvo'])
@@ -34,15 +37,8 @@ export class PermissionsService {
 			(response as PermissionQueryTypes['GetPermissionsQueryHetArchief'])
 				.users_permission
 		) {
-			return (
-				response as PermissionQueryTypes['GetPermissionsQueryHetArchief']
-			).users_permission.map((permission) => {
-				return {
-					name: permission.name,
-					label: permission.label,
-					description: permission.description,
-				};
-			});
+			return (response as PermissionQueryTypes['GetPermissionsQueryHetArchief'])
+				.users_permission as PermissionInfo[];
 		}
 
 		return [];
