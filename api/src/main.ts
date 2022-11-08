@@ -8,7 +8,19 @@ async function bootstrap() {
 	const port = process.env.PORT || 3300;
 
 	/** Security */
-	app.enableCors();
+	app.enableCors({
+		origin: (
+			origin: string,
+			callback: (err: Error, allow: boolean) => void,
+		) => {
+			// whitelist not enabled
+			callback(null, true);
+		},
+		credentials: true,
+		allowedHeaders:
+			'X-Requested-With, Content-Type, authorization, Origin, Accept, cache-control',
+		methods: 'GET, POST, OPTIONS, PATCH, PUT, DELETE',
+	});
 	app.use(helmet());
 
 	/** Swagger docs **/
