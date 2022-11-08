@@ -18,10 +18,10 @@ import { UserGroupTableColumns } from '../const/user-group.const';
 import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
 import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import {
-	UserGroupArchief,
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
+	UserGroupWithPermissions,
 } from '../types/user-group.types';
 
 const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(
@@ -48,9 +48,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 		// Use data (userGroups) as original state
 		// Current state keeps track of table state
-		const [currentUserGroups, setCurrentUserGroups] = useState<UserGroupArchief[] | undefined>(
-			undefined
-		);
+		const [currentUserGroups, setCurrentUserGroups] = useState<
+			UserGroupWithPermissions[] | undefined
+		>(undefined);
 		// Updated checkboxes are saved separately
 		const [userGroupUpdates, setUserGroupUpdates] = useState<UserGroupUpdate[]>([]);
 		const [search, setSearch] = useState<string | undefined>(undefined);
@@ -61,7 +61,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		 */
 		const updateUserGroup = (
 			userGroupId: string,
-			permissionId: string,
+			permissionId: string | number,
 			hasPermission: boolean
 		) => {
 			if (!userGroupId || !permissionId || !currentUserGroups || !permissions) {
@@ -69,7 +69,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			}
 
 			const userGroups = cloneDeep(currentUserGroups);
-			const userGroup = userGroups.find((group) => group.id === userGroupId);
+			const userGroup = userGroups.find((group) => String(group.id) === String(userGroupId));
 
 			if (!userGroup) {
 				return;
@@ -100,7 +100,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		// Add updated permission to changelog
 		const updateUserGroupUpdates = (
 			userGroupId: string,
-			permissionId: string,
+			permissionId: string | number,
 			hasPermission: boolean
 		) => {
 			if (!userGroupId || !permissionId) {

@@ -1,8 +1,8 @@
-import { PermissionInfo } from '../permissions';
+import { PermissionData } from '../permissions';
 
-export interface UserGroupsResponse {
+export interface UserGroupWithPermissions {
 	id: string;
 	name: string;
 	label: string;
-	permissions: PermissionInfo[];
+	permissions: PermissionData[];
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
-import { UserGroupsResponse } from '../user-groups.types';
+import { UserGroupWithPermissions } from '../user-groups.types';
 import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../user-groups.consts';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class UserGroupsService {
 		userGroup:
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0]
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0],
-	): UserGroupsResponse {
+	): UserGroupWithPermissions {
 		const avoUserGroup =
 			userGroup as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0];
 		const hetArchiefUserGroup =
@@ -33,7 +33,7 @@ export class UserGroupsService {
 		};
 	}
 
-	public async getUserGroups(): Promise<UserGroupsResponse[]> {
+	public async getUserGroups(): Promise<UserGroupWithPermissions[]> {
 		const response = await this.dataService.execute<
 			UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
 		>(
