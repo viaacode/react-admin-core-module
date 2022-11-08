@@ -50,7 +50,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 	}
 
 	public async updateTranslations(
-		key: TranslationKey,
+		key: string,
 		value: Record<string, string>,
 	): Promise<UpdateResponse> {
 		return this.siteVariablesService.updateSiteVariable(key, value);

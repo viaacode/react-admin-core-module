@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsObject } from 'class-validator';
+import { IsObject } from 'class-validator';
 
 import { TranslationKey } from '../types';
 
@@ -11,8 +11,7 @@ export class UpdateTranslationsDto {
 			'The translation set to be updated, possible values: ' +
 			Object.values(TranslationKey).join(', '),
 	})
-	@IsEnum(TranslationKey)
-	key: TranslationKey;
+	key: string;
 
 	@IsObject()
 	@ApiProperty({

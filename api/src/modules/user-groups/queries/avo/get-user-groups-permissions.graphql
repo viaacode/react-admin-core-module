@@ -1,0 +1,14 @@
+query getUserGroupsPermissions {
+	users_groups {
+		id
+		label
+		description
+		group_permissions {
+			permission {
+				id
+				label
+				description
+			}
+		}
+	}
+}

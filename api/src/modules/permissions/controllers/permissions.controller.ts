@@ -1,8 +1,8 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { PermissionInfo } from '../permissions.types';
 
 import { PermissionsService } from '../services/permissions.service';
-import { PermissionResponse } from '../types';
 
 import { Permission } from '../../users/types';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
@@ -16,7 +16,7 @@ export class PermissionsController {
 	constructor(private permissionsService: PermissionsService) {}
 
 	@Get()
-	public async getPermissions(): Promise<PermissionResponse[]> {
+	public async getPermissions(): Promise<PermissionInfo[]> {
 		return this.permissionsService.getPermissions();
 	}
 }

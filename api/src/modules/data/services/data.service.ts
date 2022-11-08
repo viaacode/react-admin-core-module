@@ -12,8 +12,6 @@ import {
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
 
-
-
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { GraphQlResponse, QueryOrigin } from '../types';
 
@@ -30,14 +28,13 @@ export class DataService {
 	private gotInstance: Got;
 
 	constructor(
-
 		@Inject(forwardRef(() => DataPermissionsService))
 		private dataPermissionsService: DataPermissionsService,
 	) {
 		const dbConfig: Options = {
-			prefixUrl: process.env.GRAPHQL_URL_HET_ARCHIEF,
+			prefixUrl: process.env.GRAPHQL_URL,
 			headers: {
-				'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_HET_ARCHIEF,
+				'x-hasura-admin-secret': process.env.GRAPHQL_SECRET,
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',

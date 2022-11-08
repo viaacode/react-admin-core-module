@@ -1,0 +1,5 @@
+query getFirstObjectId {
+	app_item_meta(limit: 1) {
+		external_id
+	}
+}
