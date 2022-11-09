@@ -24,7 +24,7 @@ export const getFullName = (
 
 	const firstName = profile.firstName;
 	const lastName = profile.lastName;
-	const fullName = profile.fullName|| `${firstName} ${lastName}`;
+	const fullName = profile.fullName || `${firstName} ${lastName}`;
 	const email = includeEmail ? profile.email : '';
 	const organisationName = includeCompany ? profile.organisation?.name : '';
 
