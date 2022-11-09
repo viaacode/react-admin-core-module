@@ -11,7 +11,8 @@ import {
 import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
-import { cleanMultilineEnv } from "../../shared/helpers/env-vars";
+import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -56,7 +57,9 @@ export class PlayerTicketService {
 				passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
 			},
 		});
-		this.ticketServiceMaxAge = parseInt(process.env.TICKET_SERVICE_MAXAGE || '14401');
+		this.ticketServiceMaxAge = parseInt(
+			process.env.TICKET_SERVICE_MAXAGE || '14401',
+		);
 		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
 		this.host = process.env.HOST;
 	}
@@ -122,10 +125,7 @@ export class PlayerTicketService {
 
 	public async getEmbedUrl(id: string): Promise<string> {
 		let response;
-		if (
-			process.env.DATABASE_APPLICATION_TYPE ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			// Het archief
 			response = await this.dataService.execute<
 				GetFileByRepresentationSchemaIdentifierQuery,

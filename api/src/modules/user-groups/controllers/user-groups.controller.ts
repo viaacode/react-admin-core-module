@@ -6,7 +6,7 @@ import { Permission } from '../../users/types';
 
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
 import { UserGroupsService } from '../services/user-groups.service';
-import { UserGroupsResponse } from '../user-groups.types';
+import { UserGroupWithPermissions } from '../user-groups.types';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('UserGroups')
@@ -16,7 +16,7 @@ export class UserGroupsController {
 	constructor(private userGroupsService: UserGroupsService) {}
 
 	@Get()
-	public async getUserGroups(): Promise<UserGroupsResponse[]> {
+	public async getUserGroups(): Promise<UserGroupWithPermissions[]> {
 		return this.userGroupsService.getUserGroups();
 	}
 

@@ -1,6 +1,5 @@
-import { GetPermissionsQuery } from '../shared/generated/graphql-db-types-hetarchief';
-
-export type PermissionInfo = {
+export type PermissionData = {
+	id: string | number;
 	label: string;
 	name: string;
 	description: string;

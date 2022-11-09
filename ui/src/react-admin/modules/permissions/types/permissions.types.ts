@@ -1,5 +1,5 @@
 export interface PermissionData {
-	id: string;
+	id: string | number;
 	label: string;
 	name: string;
 	description: string;
