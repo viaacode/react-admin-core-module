@@ -12,8 +12,7 @@ import { SearchResultItem } from '@viaa/avo2-types/types/search';
 import * as promiseUtils from 'blend-promise-utils';
 import { Request } from 'express';
 import { compact, fromPairs, get, isEmpty, keys, set } from 'lodash';
-
-
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 
 import {
 	AvoOrHetArchief,
@@ -68,7 +67,6 @@ export class ContentPagesService {
 	private logger: Logger = new Logger(ContentPagesService.name, {
 		timestamp: true,
 	});
-	private readonly avoOrHetArchief: string;
 	private queries:
 		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.avo]
 		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.hetArchief];
@@ -79,8 +77,7 @@ export class ContentPagesService {
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.avoOrHetArchief = process.env.DATABASE_APPLICATION_TYPE;
-		this.queries = CONTENT_PAGE_QUERIES[this.avoOrHetArchief];
+		this.queries = CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE];
 	}
 
 	public setSearchQueryFunction(fetchSearchQuery: FetchSearchQueryFunctionAvo) {
@@ -301,7 +298,7 @@ export class ContentPagesService {
 		type: 'ITEM' | 'COLLECTION',
 		id: string,
 	): Promise<MediaItemResponse | null> {
-		if (this.avoOrHetArchief === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			throw new InternalServerErrorException({
 				message:
 					'Trying to resolve item or collection from AvO inside the hetArchief database. Only objects are supported.',
@@ -331,7 +328,7 @@ export class ContentPagesService {
 	public async fetchItemByExternalId(
 		externalId: string,
 	): Promise<Partial<Avo.Item.Item> | null> {
-		if (this.avoOrHetArchief === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			throw new InternalServerErrorException({
 				message:
 					'Trying to fetch item from AvO inside the hetArchief database. Only objects are supported.',

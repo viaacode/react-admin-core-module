@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AvoOrHetArchief } from '../../content-pages';
 import { DataService } from '../../data';
+import { isAvo } from '../../shared/helpers/is-avo';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
 import { UserGroupWithPermissions } from '../user-groups.types';
@@ -65,9 +66,7 @@ export class UserGroupsService {
 					_or: updates
 						.filter((update) => !update.hasPermission)
 						.map((update) => {
-							if (
-								process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo
-							) {
+							if (isAvo()) {
 								return {
 									user_group_id: { _eq: parseInt(update.userGroupId) },
 									permission_id: { _eq: update.permissionId },
@@ -83,7 +82,7 @@ export class UserGroupsService {
 				insertions: updates
 					.filter((update) => update.hasPermission)
 					.map((update) => {
-						if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+						if (isAvo()) {
 							return {
 								user_group_id: parseInt(update.userGroupId),
 								permission_id: update.permissionId,

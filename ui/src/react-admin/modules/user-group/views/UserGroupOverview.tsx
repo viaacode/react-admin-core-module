@@ -1,6 +1,6 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import React, { ChangeEvent, forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { cloneDeep, remove } from 'lodash-es';
+import { cloneDeep, remove, sortBy } from 'lodash-es';
 import { Column, TableOptions } from 'react-table';
 
 import {
@@ -172,8 +172,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		const onSearchSubmit = (search: string | undefined) => {
 			if (search) {
 				setSearchResults(
-					permissions?.filter((permission) =>
-						permission.label.toLowerCase().includes(search.toLowerCase())
+					sortBy(
+						permissions?.filter((permission) =>
+							permission.label.toLowerCase().includes(search.toLowerCase())
+						),
+						(permission) => permission.label
 					)
 				);
 			} else {
