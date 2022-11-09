@@ -33,7 +33,7 @@ export const UserGroupTableColumns = (
 	},
 	...sortBy(userGroups, (userGroup) => userGroup.permissions.length).map((group) => {
 		return {
-			Header: group?.label || '',
+			Header: () => <span>{group?.label || ''}</span>,
 			id: `${group?.name}-${group?.id}`,
 			accessor: (row: PermissionData) => row.name,
 			disableSortBy: true,

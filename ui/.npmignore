@@ -1,6 +1,11 @@
 /.env/
 .idea
+/*.iml
 public/
 scripts/
 *.yml
 /*.js
+/*.html
+node_modules/
+src/
+README.md
