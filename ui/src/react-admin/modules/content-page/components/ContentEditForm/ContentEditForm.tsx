@@ -17,7 +17,7 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_PAGES_WIDTH, GET_CONTENT_WIDTH_OPTIONS } from '../../const/content-page.consts';
+import { DEFAULT_PAGES_WIDTH, GET_CONTENT_PAGE_WIDTH_OPTIONS } from '../../const/content-page.consts';
 import {
 	ContentEditActionType,
 	ContentEditFormErrors,
@@ -344,7 +344,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										onChange={(value) =>
 											changeContentPageProp('content_width', value)
 										}
-										options={GET_CONTENT_WIDTH_OPTIONS()}
+										options={GET_CONTENT_PAGE_WIDTH_OPTIONS()}
 										value={contentPageInfo.content_width}
 									/>
 								</FormGroup>

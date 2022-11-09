@@ -24,8 +24,8 @@ import FilterTable, {
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
 import {
-	CONTENT_PATH,
-	GET_CONTENT_PAGE_OVERVIEW_COLUMNS,
+	CONTENT_PAGE_PATH,
+	GET_OVERVIEW_COLUMNS,
 	ITEMS_PER_PAGE,
 } from '../const/content-page.consts';
 import { isPublic } from '../helpers/get-published-state';
@@ -101,7 +101,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	}, [contentTypes, tableState]);
 
 	const tableColumns = useMemo(() => {
-		return GET_CONTENT_PAGE_OVERVIEW_COLUMNS(
+		return GET_OVERVIEW_COLUMNS(
 			contentTypeOptions,
 			setSelectedCheckboxes(userGroupOptions, get(tableState, 'user_group', []) as string[]),
 			setSelectedCheckboxes(contentPageLabelOptions, get(tableState, 'label', []) as string[])
@@ -332,7 +332,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		switch (columnId) {
 			case 'title':
 				return (
-					<Link to={buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })}>
+					<Link to={buildLink(CONTENT_PAGE_PATH.DETAIL, { id })}>
 						{truncateTableValue(title)}
 					</Link>
 				);
@@ -424,7 +424,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'actions':
 				return (
 					<ButtonToolbar>
-						<Link to={buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, { id })}>
+						<Link to={buildLink(CONTENT_PAGE_PATH.DETAIL, { id })}>
 							<Button
 								icon="info"
 								size="small"
@@ -462,7 +462,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 							disabled
 						/>
-						<Link to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, { id })}>
+						<Link to={buildLink(CONTENT_PAGE_PATH.EDIT, { id })}>
 							<Button
 								icon="edit"
 								size="small"
@@ -518,7 +518,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		// 				title={tText(
 		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 		// 				)}
-		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PATH.CONTENT_PAGE_CREATE)}
+		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PAGE_PATH.CREATE)}
 		// 			/>
 		// 		</Spacer>
 		// 	)}

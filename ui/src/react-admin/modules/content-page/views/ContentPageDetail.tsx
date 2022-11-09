@@ -16,8 +16,8 @@ import { ToastType } from '~core/config/config.types';
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import {
-	CONTENT_PATH,
-	GET_CONTENT_DETAIL_TABS,
+	CONTENT_PAGE_PATH,
+	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
@@ -64,8 +64,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
 
 	const [currentTab, setCurrentTab, tabs] = useTabs(
-		GET_CONTENT_DETAIL_TABS(),
-		GET_CONTENT_DETAIL_TABS()[0].id
+		GET_CONTENT_PAGE_DETAIL_TABS(),
+		GET_CONTENT_PAGE_DETAIL_TABS()[0].id
 	);
 
 	const user = AdminConfigManager.getConfig().user;
@@ -141,7 +141,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 		try {
 			await softDeleteContentPage(id);
 
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PAGE_PATH.OVERVIEW);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -274,7 +274,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					}
 
 					history.push(
-						buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
+						buildLink(CONTENT_PAGE_PATH.DETAIL, {
 							id: duplicateContentPage.id,
 						})
 					);
@@ -347,7 +347,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, {
+						to={buildLink(CONTENT_PAGE_PATH.EDIT, {
 							id,
 						})}
 						className="a-link__no-styles"

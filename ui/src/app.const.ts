@@ -1,6 +1,6 @@
 import { AdminConfigManager } from '~core/config';
 import { CONTENT_PAGE_LABEL_PATH } from '~modules/content-page-labels/content-page-label.const';
-import { CONTENT_PATH } from '~modules/content-page/const/content-page.consts';
+import { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
 import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
 import { USER_PATH } from '~modules/user/user.consts';
@@ -11,7 +11,7 @@ export const ADMIN_PATH = Object.freeze({
 	...USER_PATH,
 	...USER_GROUP_PATH,
 	...NAVIGATION_PATH,
-	...CONTENT_PATH,
+	...CONTENT_PAGE_PATH,
 	...CONTENT_PAGE_LABEL_PATH,
 	...TRANSLATIONS_PATH,
 });
@@ -39,7 +39,7 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 		},
 		{
 			label: i18n.tHtml('admin/admin___content-paginas'),
-			location: ADMIN_PATH.CONTENT_PAGE_OVERVIEW,
+			location: ADMIN_PATH.OVERVIEW,
 			key: 'content',
 			exact: false,
 			subLinks: [

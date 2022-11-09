@@ -7,8 +7,8 @@ import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
-	CONTENT_PATH,
-	GET_CONTENT_DETAIL_TABS,
+	CONTENT_PAGE_PATH,
+	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
@@ -75,7 +75,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
+	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
 
 	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
@@ -391,7 +391,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
+			navigate(history, CONTENT_PAGE_PATH.DETAIL, {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -465,9 +465,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PAGE_PATH.OVERVIEW);
 		} else {
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, { id });
+			navigate(history, CONTENT_PAGE_PATH.DETAIL, { id });
 		}
 	};
 

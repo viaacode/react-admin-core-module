@@ -6,11 +6,11 @@ import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 import ContentPageEditPage from './ContentPageEditPage';
 import ContentPageDetailPage from './ContentPageDetailPage';
 
-export const CONTENT_PATH = {
-	CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
-	CONTENT_PAGE_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
-	CONTENT_PAGE_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
-	CONTENT_PAGE_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,
+export const CONTENT_PAGE_PATH = {
+	OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
+	CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
+	DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
+	EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,
 	PAGES: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PAGINA`,
 	NEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=NIEUWS_ITEM`,
 	FAQS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=FAQ_ITEM`,
@@ -22,28 +22,28 @@ export const CONTENT_PATH = {
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
+			key={CONTENT_PAGE_PATH.OVERVIEW}
 			render={() => <ContentPageOverviewPage />}
 			exact
-			path={CONTENT_PATH.CONTENT_PAGE_OVERVIEW}
+			path={CONTENT_PAGE_PATH.OVERVIEW}
 		/>,
 		<Route
-			key={CONTENT_PATH.CONTENT_PAGE_CREATE}
+			key={CONTENT_PAGE_PATH.CREATE}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={CONTENT_PATH.CONTENT_PAGE_CREATE}
+			path={CONTENT_PAGE_PATH.CREATE}
 		/>,
 		<Route
-			key={CONTENT_PATH.CONTENT_PAGE_DETAIL}
+			key={CONTENT_PAGE_PATH.DETAIL}
 			render={() => <ContentPageDetailPage />}
 			exact
-			path={CONTENT_PATH.CONTENT_PAGE_DETAIL}
+			path={CONTENT_PAGE_PATH.DETAIL}
 		/>,
 		<Route
-			key={CONTENT_PATH.CONTENT_PAGE_EDIT}
+			key={CONTENT_PAGE_PATH.EDIT}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={CONTENT_PATH.CONTENT_PAGE_EDIT}
+			path={CONTENT_PAGE_PATH.EDIT}
 		/>,
 	];
 };
