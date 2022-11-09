@@ -120,6 +120,7 @@ export interface CommonUser {
 	firstName?: string;
 	lastName?: string;
 	fullName?: string;
+	full_name?: string;
 	acceptedTosAt?: string | null;
 	idp?: Idp;
 	permissions?: Permission[];
