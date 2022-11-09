@@ -130,40 +130,39 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			onChangePermissions?.(false);
 		};
 
-		const onClickSave = () => {
-			updateUserGroups({ updates: userGroupUpdates })
-				.then(() => {
-					refetchUserGroups();
-					setUserGroupUpdates([]);
+		const onClickSave = async () => {
+			try {
+				await updateUserGroups({ updates: userGroupUpdates });
+				await refetchUserGroups();
+				setUserGroupUpdates([]);
 
-					// Fire onChange for parent component
-					onChangePermissions?.(false);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___success'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
-						),
-						type: ToastType.ERROR,
-					});
-				})
-				.catch((err) => {
-					console.error(
-						new CustomError('Failed to save permissions', err, {
-							query: 'UserGroupService.updateUserGroups',
-						})
-					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___error'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
-						),
-						type: ToastType.ERROR,
-					});
+				// Fire onChange for parent component
+				onChangePermissions?.(false);
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___success'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
+					),
+					type: ToastType.SUCCESS,
 				});
+			} catch (err) {
+				console.error(
+					new CustomError('Failed to save permissions', err, {
+						query: 'UserGroupService.updateUserGroups',
+					})
+				);
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
+					),
+					type: ToastType.ERROR,
+				});
+			}
 		};
 
 		const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
