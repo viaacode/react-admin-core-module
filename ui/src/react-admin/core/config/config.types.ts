@@ -145,6 +145,7 @@ export interface AdminConfig {
 		proxyUrl: string;
 	};
 	user: CommonUser;
+	route_parts: Readonly<Record<string, string>>;
 }
 
 export interface IconConfig {
