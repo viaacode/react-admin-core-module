@@ -24,6 +24,7 @@ import FilterTable, {
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
 import {
+	CONTENT_PAGE_PATH,
 	GET_OVERVIEW_COLUMNS,
 	ITEMS_PER_PAGE,
 } from '../const/content-page.consts';
@@ -64,7 +65,6 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
-import { CONTENT_PAGE_PATH } from '../../../../modules/content-page/content-page.routes';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } = Permission;
 

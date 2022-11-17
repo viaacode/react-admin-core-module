@@ -5,7 +5,7 @@ import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
 import { USER_PATH } from '~modules/user/user.consts';
 import { NavigationItemInfo } from './shared/types';
 import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
-import { CONTENT_PAGE_PATH } from './modules/content-page/content-page.routes';
+import { CONTENT_PAGE_PATH } from './react-admin';
 
 export const ADMIN_PATH = Object.freeze({
 	...USER_PATH,

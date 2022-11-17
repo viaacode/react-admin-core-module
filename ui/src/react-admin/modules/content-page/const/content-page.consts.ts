@@ -166,6 +166,19 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 	},
 };
 
+export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
+	OVERVIEW: `/${parts.admin}/${parts.content}`,
+	CREATE: `/${parts.admin}/${parts.content}/${parts.create}`,
+	DETAIL: `/${parts.admin}/${parts.content}/:id`,
+	EDIT: `/${parts.admin}/${parts.content}/:id/${parts.edit}`,
+	PAGES: `/${parts.admin}/${parts.content}?content_type=PAGINA`,
+	NEWS: `/${parts.admin}/${parts.content}?content_type=NIEUWS_ITEM`,
+	FAQS: `/${parts.admin}/${parts.content}?content_type=FAQ_ITEM`,
+	SCREENCASTS: `/${parts.admin}/${parts.content}?content_type=SCREENCAST`,
+	PROJECTS: `/${parts.admin}/${parts.content}?content_type=PROJECT`,
+	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`,
+});
+
 export const ITEMS_PER_PAGE = 10;
 
 export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [

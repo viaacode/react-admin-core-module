@@ -7,6 +7,7 @@ import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
+	CONTENT_PAGE_PATH,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import {
@@ -51,7 +52,6 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
-import { CONTENT_PAGE_PATH } from '../../../../modules/content-page/content-page.routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 

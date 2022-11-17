@@ -16,6 +16,7 @@ import { ToastType } from '~core/config/config.types';
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import {
+	CONTENT_PAGE_PATH,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
@@ -37,7 +38,6 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { CONTENT_PAGE_PATH } from '../../../../modules/content-page/content-page.routes';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
