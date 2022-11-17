@@ -111,8 +111,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
 			let contentUserGroupIds: string[] =
-				response.app_content[0].user_group_ids ||
-				response.app_content_page[0].user_group_ids ||
+				response.app_content?.[0]?.user_group_ids ||
+				response.app_content_page?.[0]?.user_group_ids ||
 				[];
 			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
@@ -376,7 +376,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			);
 		}
 		const pageTitle = navigationBarId
-			? `${navigationBarName}: ${tText('modules/navigation/views/navigation-edit___item')} ${GET_PAGE_TYPES_LANG()[pageType]}`
+			? `${navigationBarName}: ${tText('modules/navigation/views/navigation-edit___item')} ${
+					GET_PAGE_TYPES_LANG()[pageType]
+			  }`
 			: tText('admin/menu/views/menu-edit___navigatie-toevoegen');
 		return (
 			<AdminLayout pageTitle={pageTitle}>
