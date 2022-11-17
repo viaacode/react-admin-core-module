@@ -345,7 +345,8 @@ export class ContentPagesService {
 			externalId,
 		});
 
-		return (response.app_item_meta[0] || null) as Partial<Avo.Item.Item> | null;
+		return (response.app_item_meta?.[0] ||
+			null) as Partial<Avo.Item.Item> | null;
 	}
 
 	private static getLabelFilter(labelIds: number[]): any[] {

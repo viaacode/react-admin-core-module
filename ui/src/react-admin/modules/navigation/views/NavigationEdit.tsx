@@ -111,8 +111,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(response) => {
 			let contentUserGroupIds: string[] =
-				response.app_content[0].user_group_ids ||
-				response.app_content_page[0].user_group_ids ||
+				response.app_content?.[0]?.user_group_ids ||
+				response.app_content_page?.[0]?.user_group_ids ||
 				[];
 			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
