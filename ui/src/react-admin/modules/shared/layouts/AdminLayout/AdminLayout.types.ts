@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
 export interface AdminLayoutProps {
-	pageTitle?: ReactNode;
+	pageTitle?: string;
 }
 
 export type AdminLayoutComponent = FC<AdminLayoutProps> & {

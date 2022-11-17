@@ -199,9 +199,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	// Computed
 	const pageType = id ? PageType.Edit : PageType.Create;
-	let pageTitle = tHtml('admin/content/views/content-edit___content-toevoegen');
+	let pageTitle = tText('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
-		pageTitle = `${tHtml('admin/content/views/content-edit___content-aanpassen')}: ${get(
+		pageTitle = `${tText('admin/content/views/content-edit___content-aanpassen')}: ${get(
 			contentPageState.currentContentPageInfo,
 			'title',
 			''
@@ -594,6 +594,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 								});
 							}
 						}}
+						body={tHtml('modules/content-page/views/content-page-edit___het-verwijderen-van-een-blok-kan-niet-ongedaan-gemaakt-worden')}
 						isOpen={isDeleteModalOpen}
 						onClose={() => setIsDeleteModalOpen(false)}
 					/>
