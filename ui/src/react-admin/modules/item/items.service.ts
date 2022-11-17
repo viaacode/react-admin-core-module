@@ -43,7 +43,7 @@ export class ItemsService {
 				variables,
 			});
 
-			const rawItem = response.app_item_meta[0];
+			const rawItem = response.app_item_meta?.[0];
 
 			if (!rawItem) {
 				throw new CustomError('Response does not contain an item', null, {
@@ -147,7 +147,7 @@ export class ItemsService {
 			query: FetchItemUuidByExternalIdDocument,
 			variables: { externalId },
 		});
-		return response.app_item_meta[0].uid;
+		return response.app_item_meta?.[0]?.uid;
 	}
 
 	public static async fetchPublicItemsByTitleOrExternalId(

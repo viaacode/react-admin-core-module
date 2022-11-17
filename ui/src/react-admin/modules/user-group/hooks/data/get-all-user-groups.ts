@@ -3,11 +3,11 @@ import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query
 import { AdminConfigManager } from '~core/config';
 
 import { USER_GROUP_QUERY_KEYS } from '../../const/user-group.const';
-import { UserGroupArchief } from '../../types/user-group.types';
+import { UserGroupWithPermissions } from '../../types/user-group.types';
 
-export const useGetUserGroups = <TData = UserGroupArchief[]>(
+export const useGetUserGroups = <TData = UserGroupWithPermissions[]>(
 	options: UseQueryOptions<
-		UserGroupArchief[],
+		UserGroupWithPermissions[],
 		HTTPError,
 		TData,
 		typeof USER_GROUP_QUERY_KEYS.all
@@ -19,7 +19,7 @@ export const useGetUserGroups = <TData = UserGroupArchief[]>(
 		USER_GROUP_QUERY_KEYS.all,
 		() =>
 			AdminConfigManager.getConfig().services.UserGroupsService.getAllUserGroups() as Promise<
-				UserGroupArchief[]
+				UserGroupWithPermissions[]
 			>,
 		{
 			...options,

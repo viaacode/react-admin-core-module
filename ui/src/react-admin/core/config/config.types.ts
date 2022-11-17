@@ -5,9 +5,9 @@ import { ComponentType, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import {
-	UserGroupArchief,
 	UserGroupUpdateResponse,
 	UserGroupUpdates,
+	UserGroupWithPermissions,
 } from '~modules/user-group/types/user-group.types';
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
@@ -45,7 +45,7 @@ export interface I18n {
 }
 
 export interface UserGroupsService {
-	getAllUserGroups: () => Promise<UserGroupArchief[]>;
+	getAllUserGroups: () => Promise<UserGroupWithPermissions[]>;
 	updateUserGroups: (json: UserGroupUpdates) => Promise<UserGroupUpdateResponse[]>;
 }
 
