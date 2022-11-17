@@ -7,7 +7,6 @@ import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
-	CONTENT_PAGE_PATH,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import {
@@ -52,6 +51,7 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { CONTENT_PAGE_PATH } from '../../../../modules/content-page/content-page.routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
@@ -391,7 +391,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, CONTENT_PAGE_PATH.DETAIL, {
+			navigate(history, CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -465,9 +465,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(CONTENT_PAGE_PATH.OVERVIEW);
+			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
 		} else {
-			navigate(history, CONTENT_PAGE_PATH.DETAIL, { id });
+			navigate(history, CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id });
 		}
 	};
 

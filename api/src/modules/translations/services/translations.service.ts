@@ -57,7 +57,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 	}
 
 	public async onApplicationBootstrap() {
-		await this.refreshBackendTranslations();
+		// await this.refreshBackendTranslations();
 	}
 
 	public async getFrontendTranslations(): Promise<Translations> {

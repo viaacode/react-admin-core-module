@@ -24,7 +24,6 @@ import FilterTable, {
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
 import {
-	CONTENT_PAGE_PATH,
 	GET_OVERVIEW_COLUMNS,
 	ITEMS_PER_PAGE,
 } from '../const/content-page.consts';
@@ -65,6 +64,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
+import { CONTENT_PAGE_PATH } from '../../../../modules/content-page/content-page.routes';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } = Permission;
 
@@ -332,7 +332,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		switch (columnId) {
 			case 'title':
 				return (
-					<Link to={buildLink(CONTENT_PAGE_PATH.DETAIL, { id })}>
+					<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id })}>
 						{truncateTableValue(title)}
 					</Link>
 				);
@@ -424,7 +424,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'actions':
 				return (
 					<ButtonToolbar>
-						<Link to={buildLink(CONTENT_PAGE_PATH.DETAIL, { id })}>
+						<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id })}>
 							<Button
 								icon="info"
 								size="small"
@@ -462,7 +462,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 							disabled
 						/>
-						<Link to={buildLink(CONTENT_PAGE_PATH.EDIT, { id })}>
+						<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT, { id })}>
 							<Button
 								icon="edit"
 								size="small"
@@ -518,7 +518,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		// 				title={tText(
 		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 		// 				)}
-		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PAGE_PATH.CREATE)}
+		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).CREATE)}
 		// 			/>
 		// 		</Spacer>
 		// 	)}

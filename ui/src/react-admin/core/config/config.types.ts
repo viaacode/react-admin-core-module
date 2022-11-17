@@ -16,6 +16,7 @@ import { ContentBlockType } from '~modules/content-page/types/content-block.type
 import { NavigationItem } from '~modules/navigation/navigation.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { MediaListItem } from '@viaa/avo2-components';
+import { ROUTE_PARTS } from '../../modules/shared';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -145,7 +146,7 @@ export interface AdminConfig {
 		proxyUrl: string;
 	};
 	user: CommonUser;
-	route_parts: Readonly<Record<string, string>>;
+	route_parts: typeof ROUTE_PARTS;
 }
 
 export interface IconConfig {

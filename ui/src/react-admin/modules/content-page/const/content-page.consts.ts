@@ -166,19 +166,6 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 	},
 };
 
-export const CONTENT_PAGE_PATH = {
-	OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
-	CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
-	DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
-	EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,
-	PAGES: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PAGINA`,
-	NEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=NIEUWS_ITEM`,
-	FAQS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=FAQ_ITEM`,
-	SCREENCASTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=SCREENCAST`,
-	PROJECTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PROJECT`,
-	OVERVIEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=OVERZICHT`,
-};
-
 export const ITEMS_PER_PAGE = 10;
 
 export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
