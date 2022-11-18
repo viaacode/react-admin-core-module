@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get, noop } from 'lodash-es';
 import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 
 import {
@@ -50,7 +50,10 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
+const ContentPageDetail: FC<{ id: string; loaded?: (item: ContentPageInfo) => void }> = ({
+	id,
+	loaded = noop,
+}) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -131,11 +134,12 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 	useEffect(() => {
 		if (contentPageInfo) {
+			loaded(contentPageInfo);
 			setLoadingInfo({
 				state: 'loaded',
 			});
 		}
-	}, [contentPageInfo, setLoadingInfo]);
+	}, [contentPageInfo, setLoadingInfo, loaded]);
 
 	const handleDelete = async () => {
 		try {
@@ -274,9 +278,12 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					}
 
 					history.push(
-						buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, {
-							id: duplicateContentPage.id,
-						})
+						buildLink(
+							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+							{
+								id: duplicateContentPage.id,
+							}
+						)
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
 						title: tText('modules/content-page/views/content-page-detail___success'),
@@ -347,9 +354,12 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT, {
-							id,
-						})}
+						to={buildLink(
+							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
+							{
+								id,
+							}
+						)}
 						className="a-link__no-styles"
 					>
 						<Button

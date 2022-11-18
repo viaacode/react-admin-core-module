@@ -11,7 +11,7 @@ export const ADMIN_PATH = Object.freeze({
 	...USER_PATH,
 	...USER_GROUP_PATH,
 	...NAVIGATION_PATH,
-	...CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts),
+	...CONTENT_PAGE_PATH(),
 	...CONTENT_PAGE_LABEL_PATH,
 	...TRANSLATIONS_PATH,
 });

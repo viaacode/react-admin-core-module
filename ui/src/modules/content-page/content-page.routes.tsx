@@ -3,11 +3,9 @@ import { Route } from 'react-router-dom';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 import ContentPageEditPage from './ContentPageEditPage';
 import ContentPageDetailPage from './ContentPageDetailPage';
-import { AdminConfigManager, CONTENT_PAGE_PATH } from '../../react-admin';
+import { CONTENT_PAGE_PATH, ROUTE_PARTS } from '../../react-admin';
 
-export const renderAdminContentPageRoutes = (
-	parts = AdminConfigManager.getConfig().route_parts
-): ReactNode[] => {
+export const renderAdminContentPageRoutes = (parts?: typeof ROUTE_PARTS): ReactNode[] => {
 	return [
 		<Route
 			key={CONTENT_PAGE_PATH(parts).OVERVIEW}

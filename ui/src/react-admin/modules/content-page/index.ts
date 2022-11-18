@@ -7,6 +7,5 @@ export { default as ContentPageDetail } from './views/ContentPageDetail';
 export { default as ContentPageEdit } from './views/ContentPageEdit';
 export { default as ContentPage } from './components/ContentPage/ContentPage';
 
-export * from '../../../modules/content-page/content-page.routes';
-
 export * from './const/content-page.consts';
+export * from './types/content-pages.types';
