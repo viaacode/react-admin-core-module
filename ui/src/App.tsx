@@ -36,8 +36,8 @@ function App() {
 			.catch((err) => {
 				console.error(new CustomError('Failed to get nav items', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('Error'),
-					description: tText('Het ophalen van de navigatie items is mislukt'),
+					title: tText('app___error'),
+					description: tText('app___het-ophalen-van-de-navigatie-items-is-mislukt'),
 					type: ToastType.ERROR,
 				});
 			});

@@ -20,13 +20,13 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{
-			label: i18n.tHtml('Gebruikers'),
+			label: i18n.tHtml('app___gebruikers'),
 			location: ADMIN_PATH.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
 		},
 		{
-			label: i18n.tHtml('Gebruikersgroep'),
+			label: i18n.tHtml('app___gebruikersgroep'),
 			location: ADMIN_PATH.USER_GROUP_OVERVIEW,
 			key: 'user-group',
 			exact: false,
@@ -64,7 +64,7 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			exact: false,
 		},
 		{
-			label: i18n.tHtml('Vertalingen v2'),
+			label: i18n.tHtml('app___vertalingen-v-2'),
 			location: ADMIN_PATH.TRANSLATIONS_V2,
 			key: 'translations-v2',
 			exact: false,

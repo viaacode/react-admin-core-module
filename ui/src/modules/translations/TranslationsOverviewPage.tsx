@@ -16,11 +16,11 @@ export const TranslationsOverviewPage: FC = () => {
 
 	return (
 		// not extracted translation since it isn't part of the exported views of the react-admin package
-		<AdminLayout pageTitle={tText('Vertalingen')}>
+		<AdminLayout pageTitle={tText('modules/translations/translations-overview-page___vertalingen')}>
 			<AdminLayout.Actions>
 				<Button
 					onClick={() => translationsRef.current?.onSave()}
-					label={tText('Wijzigingen opslaan')}
+					label={tText('modules/translations/translations-overview-page___wijzigingen-opslaan')}
 				/>
 			</AdminLayout.Actions>
 			<AdminLayout.Content>

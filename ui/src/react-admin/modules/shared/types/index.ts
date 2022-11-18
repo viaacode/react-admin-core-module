@@ -10,6 +10,9 @@ export enum AvoOrHetArchief {
 	hetArchief = 'hetArchief',
 }
 
+export const AVO = AvoOrHetArchief.avo;
+export const HET_ARCHIEF = AvoOrHetArchief.hetArchief;
+
 // Get all possible values from object
 export type ValueOf<T> = T[keyof T];
 
