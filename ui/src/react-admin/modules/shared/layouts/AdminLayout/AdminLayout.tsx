@@ -4,21 +4,24 @@ import React from 'react';
 import './AdminLayout.scss';
 import {
 	AdminActions,
+	AdminBack,
 	AdminContent,
 	AdminFiltersLeft,
 	AdminFiltersRight,
 } from './AdminLayout.slots';
 import { AdminLayoutComponent } from './AdminLayout.types';
 
-const AdminLayout: AdminLayoutComponent = ({ children, pageTitle }) => {
+const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, className }) => {
 	const actions = useSlot(AdminActions, children);
+	const back = useSlot(AdminBack, children);
+	const content = useSlot(AdminContent, children);
 	const filtersLeft = useSlot(AdminFiltersLeft, children);
 	const filtersRight = useSlot(AdminFiltersRight, children);
-	const content = useSlot(AdminContent, children);
 
 	return (
-		<div className="c-admin">
+		<div className={`c-admin${' ' + className}`}>
 			<header className="c-admin__header">
+				<div className="c-admin__back">{back}</div>
 				<h2 className="c-admin__page-title">{pageTitle}</h2>
 				<div className="c-admin__actions">{actions}</div>
 			</header>
@@ -34,8 +37,9 @@ const AdminLayout: AdminLayoutComponent = ({ children, pageTitle }) => {
 };
 
 AdminLayout.Actions = AdminActions;
+AdminLayout.Back = AdminBack;
+AdminLayout.Content = AdminContent;
 AdminLayout.FiltersLeft = AdminFiltersLeft;
 AdminLayout.FiltersRight = AdminFiltersRight;
-AdminLayout.Content = AdminContent;
 
 export default AdminLayout;

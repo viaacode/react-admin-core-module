@@ -302,6 +302,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
+				sendEmail: false // TODO
 			};
 
 			const response = await fetchWithLogout(url, {
@@ -402,6 +403,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				...(isAvo ? { transferToProfileId } : {}),
+				sendEmail: false // TODO
 			};
 			const response = await fetchWithLogout(url, {
 				method: 'DELETE',

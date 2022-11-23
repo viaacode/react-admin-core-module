@@ -147,11 +147,14 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 		} else {
 			currentUserGroupIds = [SpecialPermissionGroups.loggedOutUsers];
 		}
+
 		contentBlockBlockConfigs = compact(
 			contentBlockBlockConfigs.map(
 				(contentBlockConfig: ContentBlockConfig): ContentBlockConfig | null => {
-					const blockUserGroupIds: (string | number)[] =
-						contentBlockConfig.block.state.userGroupIds || [];
+					const blockUserGroupIds: (string | number)[] = (
+						contentBlockConfig.block.state.userGroupIds || []
+					).map(String);
+
 					if (blockUserGroupIds.length) {
 						// Block has special restrictions set
 						if (intersection(blockUserGroupIds, currentUserGroupIds).length === 0) {
@@ -159,6 +162,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 							return null;
 						}
 					}
+
 					// The user has the right permissions or there are no permissions defined for this block
 					return contentBlockConfig;
 				}

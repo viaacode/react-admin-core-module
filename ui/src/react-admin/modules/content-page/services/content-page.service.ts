@@ -4,6 +4,7 @@ import { isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
 import moment from 'moment';
 import { stringify } from 'query-string';
 
+import { AvoOrHetArchief } from '../../shared/types';
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
@@ -727,7 +728,19 @@ export class ContentPageService {
 		let url: string | undefined;
 		let body: any | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages`;
+			switch (AdminConfigManager.getConfig().database.databaseApplicationType) {
+				case AvoOrHetArchief.hetArchief:
+					url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages`;
+					break;
+
+				case AvoOrHetArchief.avo:
+					url = `${AdminConfigManager.getConfig().database.proxyUrl}/content-pages`;
+					break;
+
+				default:
+					throw new Error('Could not determine URL to poll for content-pages');
+			}
+
 			body = {
 				searchQuery,
 				searchQueryLimit,

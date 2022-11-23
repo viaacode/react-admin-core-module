@@ -1,5 +1,13 @@
 import { get, noop } from 'lodash-es';
-import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
+import React, {
+	FC,
+	ReactElement,
+	ReactNode,
+	ReactText,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 
 import {
 	Blankslate,
@@ -38,6 +46,7 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { DefaultComponentProps } from '~modules/shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -50,9 +59,17 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FC<{ id: string; loaded?: (item: ContentPageInfo) => void }> = ({
+export type ContentPageDetailProps = DefaultComponentProps & {
+	id: string;
+	loaded?: (item: ContentPageInfo) => void;
+	renderBack?: () => ReactNode;
+};
+
+const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	id,
 	loaded = noop,
+	renderBack,
+	className,
 }) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
@@ -418,7 +435,8 @@ const ContentPageDetail: FC<{ id: string; loaded?: (item: ContentPageInfo) => vo
 
 	// const description = contentPageInfo ? ContentPageService.getDescription(contentPageInfo) : '';
 	return (
-		<AdminLayout pageTitle={pageTitle}>
+		<AdminLayout className={className} pageTitle={pageTitle}>
+			<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>
 			<AdminLayout.Content>
 				<Navbar background="alt" placement="top" autoHeight>
@@ -426,20 +444,6 @@ const ContentPageDetail: FC<{ id: string; loaded?: (item: ContentPageInfo) => vo
 						<Tabs tabs={tabs} onClick={setCurrentTab} />
 					</Container>
 				</Navbar>
-				{/*<MetaTags>*/}
-				{/*	<title>*/}
-				{/*		{GENERATE_SITE_TITLE(*/}
-				{/*			get(contentPageInfo, 'title'),*/}
-				{/*			t(*/}
-				{/*				'admin/content/views/content-detail___content-beheer-detail-pagina-titel'*/}
-				{/*			)*/}
-				{/*		)}*/}
-				{/*	</title>*/}
-				{/*	<meta*/}
-				{/*		name="description"*/}
-				{/*		content={get(contentPageInfo, 'seo_description') || description || ''}*/}
-				{/*	/>*/}
-				{/*</MetaTags>*/}
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
 					dataObject={contentPageInfo}

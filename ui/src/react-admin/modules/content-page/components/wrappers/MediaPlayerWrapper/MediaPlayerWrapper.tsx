@@ -30,20 +30,22 @@ interface MediaPlayerWrapperProps {
 	autoplay?: boolean;
 }
 
-const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = ({
-	item,
-	src,
-	poster,
-	title,
-	external_id,
-	duration,
-	annotationTitle,
-	annotationText,
-	issued,
-	organisation,
-	width,
-	autoplay,
-}) => {
+const MediaPlayerWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
+	const {
+		item,
+		src,
+		poster,
+		title,
+		external_id,
+		duration,
+		annotationTitle,
+		annotationText,
+		issued,
+		organisation,
+		width,
+		autoplay,
+	} = props;
+
 	const { tText } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
