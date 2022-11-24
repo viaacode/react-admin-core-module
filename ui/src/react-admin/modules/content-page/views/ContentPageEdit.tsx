@@ -239,6 +239,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			// Run validators on to check untouched inputs
 			blockConfigs.forEach((config, configIndex) => {
 				const { fields, state } = config.components;
+				console.info({ fields });
 				const keysToValidate = Object.keys(fields).filter((key) => fields[key].validator);
 				let newErrors: ContentBlockErrors = {};
 
@@ -326,7 +327,10 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					const contentBody = {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
-						id: id.includes('-') ? id : parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
+						id:
+							typeof (id as string | number) === 'string' && id.includes('-')
+								? id
+								: parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
 						contentBlockConfigs: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo
@@ -391,9 +395,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, {
-				id: insertedOrUpdatedContent.id,
-			});
+			navigate(
+				history,
+				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+				{
+					id: insertedOrUpdatedContent.id,
+				}
+			);
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -467,7 +475,11 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 		if (pageType === PageType.Create) {
 			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
 		} else {
-			navigate(history, CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id });
+			navigate(
+				history,
+				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+				{ id }
+			);
 		}
 	};
 
