@@ -11,12 +11,26 @@ import { Avo } from '@viaa/avo2-types';
 import { SearchResultItem } from '@viaa/avo2-types/types/search';
 import * as promiseUtils from 'blend-promise-utils';
 import { Request } from 'express';
-import { compact, fromPairs, get, isEmpty, keys, set } from 'lodash';
+import {
+	compact,
+	fromPairs,
+	get,
+	has,
+	isEmpty,
+	keys,
+	omit,
+	set,
+	without,
+} from 'lodash';
+import { App_Content_Page_Insert_Input } from '../../shared/generated/graphql-db-types-hetarchief';
+import { CustomError } from '../../shared/helpers/custom-error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { ContentBlockConfig } from '../content-block.types';
 
 import {
 	AvoOrHetArchief,
 	ContentBlock,
+	ContentOverviewTableCols,
 	ContentPage,
 	ContentPageLabel,
 	ContentPageOverviewResponse,
@@ -29,13 +43,13 @@ import {
 	GqlContentPage,
 	GqlHetArchiefUser,
 	GqlUser,
-	LabelObj,
 	MediaItemResponse,
 	MediaItemType,
 	ResolvedItemOrCollection,
 } from '../content-pages.types';
 
 import {
+	App_Content_Blocks_Insert_Input,
 	GetCollectionTileByIdDocument,
 	GetCollectionTileByIdQuery,
 	GetCollectionTileByIdQueryVariables,
@@ -45,12 +59,12 @@ import {
 	GetItemTileByIdDocument,
 	GetItemTileByIdQuery,
 	GetItemTileByIdQueryVariables,
+	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
-	CONTENT_PAGE_QUERIES,
-	ContentPageQueryTypes,
 	DEFAULT_AUDIO_STILL,
 	MEDIA_PLAYER_BLOCKS,
+	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../content-pages.consts';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { MediaItemsDto } from '../dto/resolve-media-grid-blocks.dto';
@@ -61,23 +75,26 @@ import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { Pagination } from '@studiohyperdrive/pagination';
 import { setHours, setMinutes } from 'date-fns';
+import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
+import {
+	CONTENT_PAGE_QUERIES,
+	ContentPageQueryTypes,
+} from '../queries/content-pages.queries';
 
 @Injectable()
 export class ContentPagesService {
 	private logger: Logger = new Logger(ContentPagesService.name, {
 		timestamp: true,
 	});
-	private queries:
-		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.avo]
-		| typeof CONTENT_PAGE_QUERIES[AvoOrHetArchief.hetArchief];
 	private fetchSearchQueryAvo: FetchSearchQueryFunctionAvo | null = null;
+	private appType: AvoOrHetArchief;
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.queries = CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE];
+		this.appType = process.env.DATABASE_APPLICATION_TYPE as AvoOrHetArchief;
 	}
 
 	public setSearchQueryFunction(fetchSearchQuery: FetchSearchQueryFunctionAvo) {
@@ -128,6 +145,8 @@ export class ContentPagesService {
 							content_type: gqlContentPage?.content_type as ContentPageType,
 							label: labelObj?.content_label?.label,
 							link_to: labelObj?.content_label?.link_to,
+							created_at: labelObj?.content_label?.created_at,
+							updated_at: labelObj?.content_label?.updated_at,
 						}),
 					);
 				},
@@ -240,8 +259,10 @@ export class ContentPagesService {
 			| ContentPageQueryTypes['GetContentPagesQueryVariables']
 		>(
 			withBlock
-				? this.queries.GetContentPagesWithBlocksDocument
-				: this.queries.GetContentPagesDocument,
+				? CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+						.GetContentPagesWithBlocksDocument
+				: CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+						.GetContentPagesDocument,
 			variables,
 		);
 
@@ -285,9 +306,13 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPageByPathQuery'],
 			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
-		>(this.queries.GetContentPageByPathDocument, {
-			path,
-		});
+		>(
+			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetContentPageByPathDocument,
+			{
+				path,
+			},
+		);
 		const contentPage: GqlContentPage | undefined =
 			get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
 
@@ -349,104 +374,6 @@ export class ContentPagesService {
 			null) as Partial<Avo.Item.Item> | null;
 	}
 
-	private static getLabelFilter(labelIds: number[]): any[] {
-		if (labelIds.length) {
-			// The user selected some block labels at the top of the page overview component
-			return [
-				{
-					content_content_labels: {
-						content_label: { id: { _in: labelIds } },
-					},
-				},
-			];
-		}
-		return [];
-	}
-
-	public async fetchContentPages(
-		withBlock: boolean,
-		userGroupIds: (string | number)[],
-		contentType: string,
-		labelIds: number[],
-		selectedLabelIds: number[],
-		orderProp: string,
-		orderDirection: 'asc' | 'desc',
-		offset = 0,
-		limit: number,
-	): Promise<ContentPageOverviewResponse> {
-		const now = new Date().toISOString();
-		const variables = {
-			limit,
-			labelIds: compact(labelIds),
-			offset,
-			where: {
-				_and: [
-					{
-						// Get content pages with the selected content type
-						content_type: { _eq: contentType },
-					},
-					{
-						// Get pages that are visible to the current user
-						_or: userGroupIds.map((userGroupId) => ({
-							user_group_ids: { _contains: userGroupId },
-						})),
-					},
-					...this.getLabelFilter(selectedLabelIds),
-					// publish state
-					{
-						_or: [
-							{ is_public: { _eq: true } },
-							{ publish_at: { _is_null: true }, depublish_at: { _gte: now } },
-							{ publish_at: { _lte: now }, depublish_at: { _is_null: true } },
-							{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
-						],
-					},
-					{ is_deleted: { _eq: false } },
-				],
-			},
-			orderBy: { [orderProp]: orderDirection },
-			orUserGroupIds: userGroupIds.map((userGroupId) => ({
-				content: { user_group_ids: { _contains: userGroupId } },
-			})),
-		};
-		const response = await this.dataService.execute<
-			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
-			| ContentPageQueryTypes['GetContentPagesQuery'],
-			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
-			| ContentPageQueryTypes['GetContentPagesQueryVariables']
-		>(
-			withBlock
-				? this.queries.GetContentPagesWithBlocksDocument
-				: this.queries.GetContentPagesDocument,
-			variables,
-		);
-		const responseAvo = response as
-			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
-			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
-		const responseHetArchief = response as
-			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
-			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
-		return {
-			pages: (responseAvo.app_content ||
-				responseHetArchief.app_content_page ||
-				[]) as unknown as ContentPage[],
-			count:
-				responseAvo.app_content_aggregate?.aggregate?.count ||
-				responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
-				0,
-			labelCounts: fromPairs(
-				(
-					responseAvo.app_content_labels ||
-					responseHetArchief.app_content_label ||
-					[]
-				).map((labelInfo: any): [number, number] => [
-					labelInfo?.id,
-					labelInfo?.content_content_labels_aggregate?.aggregate?.count,
-				]),
-			),
-		};
-	}
-
 	public async fetchPublicContentPages(): Promise<
 		{
 			path: string;
@@ -458,27 +385,31 @@ export class ContentPagesService {
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['GetPublicContentPagesQuery'],
 				ContentPageQueryTypes['GetPublicContentPagesQueryVariables']
-			>(this.queries.GetPublicContentPagesDocument, {
-				where: {
-					_and: [
-						{
-							user_group_ids: {
-								_contains: SpecialPermissionGroups.loggedOutUsers,
+			>(
+				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.GetPublicContentPagesDocument,
+				{
+					where: {
+						_and: [
+							{
+								user_group_ids: {
+									_contains: SpecialPermissionGroups.loggedOutUsers,
+								},
 							},
-						},
-						// publish state
-						{
-							_or: [
-								{ is_public: { _eq: true } },
-								{ publish_at: { _eq: null }, depublish_at: { _gte: now } },
-								{ publish_at: { _lte: now }, depublish_at: { _eq: null } },
-								{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
-							],
-						},
-						{ is_deleted: { _eq: false } },
-					],
+							// publish state
+							{
+								_or: [
+									{ is_public: { _eq: true } },
+									{ publish_at: { _eq: null }, depublish_at: { _gte: now } },
+									{ publish_at: { _lte: now }, depublish_at: { _eq: null } },
+									{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
+								],
+							},
+							{ is_deleted: { _eq: false } },
+						],
+					},
 				},
-			});
+			);
 			return (
 				(response as ContentPageQueryTypes['GetPublicContentPagesQueryAvo'])
 					.app_content ||
@@ -505,10 +436,14 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
-		>(this.queries.UpdateContentPagePublishDatesDocument, {
-			now: new Date().toISOString(),
-			publishedAt: setMinutes(setHours(new Date(), 7), 0).toISOString(),
-		});
+		>(
+			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.UpdateContentPagePublishDatesDocument,
+			{
+				now: new Date().toISOString(),
+				publishedAt: setMinutes(setHours(new Date(), 7), 0).toISOString(),
+			},
+		);
 		return {
 			published: response.publish_content_pages?.affected_rows || 0,
 			unpublished: response.unpublish_content_pages?.affected_rows || 0,
@@ -521,60 +456,18 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentByIdsQuery'],
 			ContentPageQueryTypes['GetContentByIdsQueryVariables']
-		>(this.queries.GetContentByIdsDocument, {
-			ids: contentPageIds,
-		});
+		>(
+			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetContentByIdsDocument,
+			{
+				ids: contentPageIds,
+			},
+		);
 		return ((response as ContentPageQueryTypes['GetContentByIdsQueryAvo'])
 			.app_content ||
 			(response as ContentPageQueryTypes['GetContentByIdsQueryHetArchief'])
 				.app_content_page ||
 			[]) as unknown as Avo.ContentPage.Page[];
-	}
-
-	public async getContentPageLabelsByTypeAndLabels(
-		contentType: string,
-		labels: string[],
-	): Promise<LabelObj[]> {
-		const response = await this.dataService.execute<
-			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
-			ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']
-		>(this.queries.GetContentPageLabelsByTypeAndLabelsDocument, {
-			contentType,
-			labels,
-		});
-
-		const responseAvo =
-			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryAvo'];
-		const responseHetArchief =
-			response as ContentPageQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryHetArchief'];
-
-		return (
-			responseAvo.app_content_labels ||
-			responseHetArchief.app_content_label ||
-			[]
-		);
-	}
-
-	public async getContentPageLabelsByTypeAndIds(
-		contentType: string,
-		labelIds: string[],
-	): Promise<LabelObj[]> {
-		if (!labelIds.length) {
-			return [];
-		}
-		const response = await this.dataService.execute(
-			this.queries.GetContentPageLabelsByTypeAndIdsDocument,
-			{
-				contentType,
-				labelIds,
-			},
-		);
-
-		return (
-			get(response, 'data.cms_content_labels') ||
-			get(response, 'data.app_content_labels') ||
-			[]
-		);
 	}
 
 	public async resolveMediaTileItemsInPage(
@@ -938,5 +831,776 @@ export class ContentPagesService {
 			});
 			return null;
 		}
+	}
+
+	public async getPublicContentItems(
+		limit: number,
+	): Promise<
+		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+		| null
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPagesQuery'],
+			ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
+			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetContentPagesDocument,
+			{
+				limit,
+				orderBy: { title: Order_By.Asc },
+				where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
+			},
+		);
+
+		return (response as any).app_content || (response as any).app_content_page;
+	}
+
+	public async getPublicProjectContentItems(
+		limit: number,
+	): Promise<
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetPublicProjectContentPagesQuery'],
+			ContentPageQueryTypes['GetPublicProjectContentPagesQueryVariables']
+		>(CONTENT_PAGE_QUERIES[this.appType].GetPublicProjectContentPagesDocument, {
+			limit,
+			orderBy: { title: Order_By.Asc },
+		});
+		return (
+			(
+				response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']
+			).app_content ||
+			(
+				response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']
+			).app_content_page ||
+			[]
+		);
+	}
+
+	public async getPublicContentItemsByTitle(
+		title: string,
+		limit?: number,
+	): Promise<
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetPublicContentPagesByTitleQuery'],
+			ContentPageQueryTypes['GetPublicContentPagesByTitleQueryVariables']
+		>(CONTENT_PAGE_QUERIES[this.appType].GetPublicContentPagesByTitleDocument, {
+			limit: limit || null,
+			orderBy: { title: Order_By.Asc },
+			where: {
+				title: { _ilike: `%${title}%` },
+				is_public: { _eq: true },
+				is_deleted: { _eq: false },
+			},
+		});
+
+		return (
+			(
+				response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']
+			).app_content ||
+			(
+				response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']
+			).app_content_page ||
+			[]
+		);
+	}
+
+	public async getPublicProjectContentItemsByTitle(
+		title: string,
+		limit: number,
+	): Promise<
+		| ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryHetArchief']['app_content_page']
+		| null
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQuery'],
+			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryVariables']
+		>(
+			CONTENT_PAGE_QUERIES[this.appType]
+				.GetPublicProjectContentPagesByTitleDocument,
+			{
+				title,
+				limit,
+				orderBy: { title: Order_By.Asc },
+			},
+		);
+		return (
+			(
+				response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryAvo']
+			).app_content ||
+			(
+				response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryHetArchief']
+			).app_content_page
+		);
+	}
+
+	public async getContentPageById(
+		id: number | string,
+	): Promise<
+		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
+		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentByIdQuery'],
+			ContentPageQueryTypes['GetContentByIdQueryVariables']
+		>(CONTENT_PAGE_QUERIES[this.appType].GetContentByIdDocument, {
+			id,
+		});
+
+		const dbContentPage = ((
+			response as ContentPageQueryTypes['GetContentByIdQueryAvo']
+		).app_content ||
+			(response as ContentPageQueryTypes['GetContentByIdQueryHetArchief'])
+				.app_content_page ||
+			[])?.[0];
+
+		if (!dbContentPage) {
+			throw CustomError('No content page found with provided id', null, {
+				id,
+				code: 'NOT_FOUND',
+			});
+		}
+		return dbContentPage;
+	}
+
+	public async getContentTypes(): Promise<
+		{ value: Avo.ContentPage.Type; label: string }[] | null
+	> {
+		try {
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['GetContentTypesQuery']
+			>(CONTENT_PAGE_QUERIES[this.appType].GetContentTypesDocument);
+			const contentTypes =
+				(response as ContentPageQueryTypes['GetContentTypesQueryAvo'])
+					.lookup_enum_content_types ||
+				(response as ContentPageQueryTypes['GetContentTypesQueryHetArchief'])
+					.lookup_app_content_type;
+
+			return (contentTypes || []).map((obj) => ({
+				value: obj.value,
+				label: obj.description || (obj as any).comment,
+			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
+		} catch (err) {
+			throw CustomError('Failed to retrieve content types.', err, {
+				query: CONTENT_PAGE_QUERIES[this.appType].GetContentTypesDocument,
+			});
+		}
+	}
+
+	public async fetchLabelsByContentType(
+		contentType: string,
+	): Promise<Avo.ContentPage.Label[]> {
+		try {
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['GetContentLabelsByContentTypeQuery'],
+				ContentPageQueryTypes['GetContentLabelsByContentTypeQueryVariables']
+			>(
+				CONTENT_PAGE_QUERIES[this.appType]
+					.GetContentLabelsByContentTypeDocument,
+				{
+					contentType,
+				},
+			);
+
+			const labels =
+				(response as any).app_content_labels ||
+				(response as any).app_content_label;
+
+			if (!labels) {
+				throw CustomError('The response does not contain any labels', null, {
+					response,
+				});
+			}
+
+			return labels;
+		} catch (err) {
+			throw CustomError(
+				'Failed to get content labels by content type from database',
+				err,
+				{
+					variables: {
+						contentType,
+					},
+					query: 'GET_CONTENT_LABELS_BY_CONTENT_TYPE',
+				},
+			);
+		}
+	}
+
+	public async insertContentLabelsLinks(
+		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+		labelIds: (number | string)[],
+	): Promise<void> {
+		let variables: any;
+		try {
+			variables = {
+				objects: labelIds.map((labelId) => ({
+					content_id: contentPageId,
+					label_id: labelId,
+				})),
+			};
+
+			await this.dataService.execute<
+				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
+				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
+			>(
+				CONTENT_PAGE_QUERIES[this.appType].InsertContentLabelLinksDocument,
+				variables,
+			);
+		} catch (err) {
+			throw CustomError(
+				'Failed to insert content label links in the database',
+				err,
+				{
+					variables,
+					query: 'INSERT_CONTENT_LABEL_LINKS',
+				},
+			);
+		}
+	}
+
+	public async deleteContentLabelsLinks(
+		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+		labelIds: (number | string)[],
+	): Promise<void> {
+		try {
+			await this.dataService.execute<
+				ContentPageQueryTypes['DeleteContentLabelLinksMutation'],
+				ContentPageQueryTypes['DeleteContentLabelLinksMutationVariables']
+			>(CONTENT_PAGE_QUERIES[this.appType].DeleteContentLabelLinksDocument, {
+				labelIds,
+				contentPageId,
+			});
+		} catch (err) {
+			throw CustomError(
+				'Failed to insert content label links in the database',
+				err,
+				{
+					variables: {
+						labelIds,
+						contentPageId,
+					},
+					query: 'DELETE_CONTENT_LABEL_LINKS',
+				},
+			);
+		}
+	}
+
+	public async fetchContentPages(
+		offset: number,
+		limit: number,
+		sortColumn: ContentOverviewTableCols,
+		sortOrder: Avo.Search.OrderDirection,
+		tableColumnDataType: string,
+		where: any,
+	): Promise<
+		[
+			(
+				| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+				| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+			),
+			number,
+		]
+	> {
+		let variables:
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+			| null = null;
+		try {
+			variables = {
+				where,
+				offset,
+				limit,
+				orderBy: getOrderObject(
+					sortColumn,
+					sortOrder,
+					tableColumnDataType,
+					TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
+				),
+			};
+
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['GetContentPagesQuery'],
+				ContentPageQueryTypes['GetContentPagesQueryVariables']
+			>(CONTENT_PAGE_QUERIES[this.appType].GetContentPagesDocument, variables);
+
+			const dbContentPages =
+				(response as ContentPageQueryTypes['GetContentPagesQueryAvo'])
+					.app_content ||
+				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
+					.app_content_page ||
+				[];
+
+			const dbContentPageCount: number =
+				(response as ContentPageQueryTypes['GetContentPagesQueryAvo'])
+					.app_content_aggregate?.aggregate?.count ||
+				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
+					.app_content_page_aggregate?.aggregate?.count ||
+				0;
+
+			if (!dbContentPages) {
+				throw CustomError('Response did not contain any content pages', null, {
+					response,
+				});
+			}
+
+			return [dbContentPages, dbContentPageCount];
+		} catch (err) {
+			throw CustomError('Failed to get content pages from the database', err, {
+				variables,
+				query: 'GET_CONTENT_PAGES',
+			});
+		}
+	}
+
+	public async fetchContentPagesWithOrWithoutBlocks(
+		withBlock: boolean,
+		userGroupIds: (string | number)[],
+		contentType: string,
+		labelIds: number[],
+		selectedLabelIds: number[],
+		orderProp: string,
+		orderDirection: 'asc' | 'desc',
+		offset = 0,
+		limit: number,
+	): Promise<ContentPageOverviewResponse> {
+		const now = new Date().toISOString();
+		const variables = {
+			limit,
+			labelIds: compact(labelIds),
+			offset,
+			where: {
+				_and: [
+					{
+						// Get content pages with the selected content type
+						content_type: { _eq: contentType },
+					},
+					{
+						// Get pages that are visible to the current user
+						_or: userGroupIds.map((userGroupId) => ({
+							user_group_ids: { _contains: userGroupId },
+						})),
+					},
+					...this.getLabelFilter(selectedLabelIds),
+					// publish state
+					{
+						_or: [
+							{ is_public: { _eq: true } },
+							{ publish_at: { _is_null: true }, depublish_at: { _gte: now } },
+							{ publish_at: { _lte: now }, depublish_at: { _is_null: true } },
+							{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
+						],
+					},
+					{ is_deleted: { _eq: false } },
+				],
+			},
+			orderBy: { [orderProp]: orderDirection },
+			orUserGroupIds: userGroupIds.map((userGroupId) => ({
+				content: { user_group_ids: { _contains: userGroupId } },
+			})),
+		};
+		const response = await this.dataService.execute<
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
+			| ContentPageQueryTypes['GetContentPagesQuery'],
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryVariables']
+			| ContentPageQueryTypes['GetContentPagesQueryVariables']
+		>(
+			withBlock
+				? CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+						.GetContentPagesWithBlocksDocument
+				: CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+						.GetContentPagesDocument,
+			variables,
+		);
+		const responseAvo = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryAvo']
+			| ContentPageQueryTypes['GetContentPagesQueryAvo'];
+		const responseHetArchief = response as
+			| ContentPageQueryTypes['GetContentPagesWithBlocksQueryHetArchief']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
+		return {
+			pages: (responseAvo.app_content ||
+				responseHetArchief.app_content_page ||
+				[]) as unknown as ContentPage[],
+			count:
+				responseAvo.app_content_aggregate?.aggregate?.count ||
+				responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
+				0,
+			labelCounts: fromPairs(
+				(
+					responseAvo.app_content_labels ||
+					responseHetArchief.app_content_label ||
+					[]
+				).map((labelInfo: any): [number, number] => [
+					labelInfo?.id,
+					labelInfo?.content_content_labels_aggregate?.aggregate?.count,
+				]),
+			),
+		};
+	}
+
+	private cleanupBeforeInsert(
+		dbContentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+			contentBlockConfigs: ContentBlockConfig[];
+		},
+	): ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] {
+		return omit(dbContentPage, [
+			'contentBlockssBycontentId',
+			'content_blocks',
+			'profile',
+			'__typename',
+			'content_content_labels',
+			'id',
+		]);
+	}
+
+	public async insertContentPage(
+		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+			contentBlockConfigs: ContentBlockConfig[];
+		},
+	): Promise<
+		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+				contentBlockConfigs: ContentBlockConfig[];
+		  })
+		| null
+	> {
+		try {
+			const dbContentPage = this.cleanupBeforeInsert(contentPage);
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['InsertContentMutation'],
+				ContentPageQueryTypes['InsertContentMutationVariables']
+			>(CONTENT_PAGE_QUERIES[this.appType].InsertContentDocument, {
+				contentPage: dbContentPage as App_Content_Page_Insert_Input,
+			});
+
+			const id: number | null =
+				(response as ContentPageQueryTypes['InsertContentMutationAvo'])
+					.insert_app_content?.returning?.[0]?.id ||
+				(response as ContentPageQueryTypes['InsertContentMutationHetArchief'])
+					.insert_app_content_page?.returning?.[0]?.id ||
+				null;
+
+			if (id) {
+				// Insert content-blocks
+				let contentBlockConfigs: Partial<ContentBlockConfig>[] | null = null;
+				if (
+					contentPage.contentBlockConfigs &&
+					contentPage.contentBlockConfigs.length
+				) {
+					contentBlockConfigs = await this.insertContentBlocks(
+						id,
+						contentPage.contentBlockConfigs,
+					);
+
+					if (!contentBlockConfigs) {
+						// return null to prevent triggering success toast
+						return null;
+					}
+				}
+
+				return {
+					...contentPage,
+					contentBlockConfigs,
+					id,
+				} as App_Content_Page_Insert_Input & {
+					contentBlockConfigs: ContentBlockConfig[];
+				};
+			}
+
+			return null;
+		} catch (err) {
+			console.error('Failed to insert content page into the database', err);
+			return null;
+		}
+	}
+
+	public async updateContentPage(
+		contentPage: ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'] & {
+			contentBlockConfigs: ContentBlockConfig[];
+		},
+		initialContentPage:
+			| { contentBlockConfigs: ContentBlockConfig[] }
+			| undefined,
+	): Promise<
+		| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
+		| null
+	> {
+		try {
+			const dbContentPage = this.cleanupBeforeInsert(contentPage);
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['UpdateContentByIdMutation'],
+				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
+			>(CONTENT_PAGE_QUERIES[this.appType].UpdateContentByIdDocument, {
+				contentPage: dbContentPage,
+				id: contentPage.id,
+			});
+
+			const updatedContent =
+				(response as ContentPageQueryTypes['UpdateContentByIdMutationAvo'])
+					.update_app_content?.affected_rows ||
+				(
+					response as ContentPageQueryTypes['UpdateContentByIdMutationHetArchief']
+				).update_app_content_page?.affected_rows ||
+				null;
+			if (!updatedContent) {
+				throw CustomError(
+					'Content page update returned empty response',
+					null,
+					response,
+				);
+			}
+
+			if (contentPage.contentBlockConfigs && initialContentPage) {
+				await this.updateContentBlocks(
+					contentPage.id as number,
+					initialContentPage.contentBlockConfigs || [],
+					contentPage.contentBlockConfigs,
+				);
+			}
+
+			return contentPage;
+		} catch (err) {
+			console.error('Failed to save content', err);
+			return null;
+		}
+	}
+
+	public async deleteContentPage(id: number | string): Promise<void> {
+		try {
+			// query path
+			const contentPage = await this.getContentPageById(id);
+			await this.dataService.execute<
+				ContentPageQueryTypes['SoftDeleteContentMutation'],
+				ContentPageQueryTypes['SoftDeleteContentMutationVariables']
+			>(CONTENT_PAGE_QUERIES[this.appType].SoftDeleteContentDocument, {
+				id,
+				path: `${contentPage.path}-${id}`,
+			});
+		} catch (err) {
+			throw CustomError(
+				'Failed to delete content page from the database',
+				err,
+				{
+					id,
+					query: CONTENT_PAGE_QUERIES[this.appType].SoftDeleteContentDocument,
+				},
+			);
+		}
+	}
+
+	/**
+	 * Update content block.
+	 *
+	 * @param contentBlockConfig updated state of content block
+	 */
+	public async updateContentBlock(
+		contentBlockConfig: ContentPageQueryTypes['UpdateContentBlockMutationVariables']['contentBlock'],
+	): Promise<void> {
+		try {
+			await this.dataService.execute<
+				ContentPageQueryTypes['UpdateContentBlockMutation'],
+				ContentPageQueryTypes['UpdateContentBlockMutationVariables']
+			>(
+				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.UpdateContentBlockDocument,
+				{
+					contentBlock: contentBlockConfig as any,
+					id: contentBlockConfig.id as number,
+				},
+			);
+		} catch (err) {
+			throw CustomError('Failed to update content block', err, {
+				contentBlockConfig,
+			});
+		}
+	}
+
+	/**
+	 * Delete content block.
+	 *
+	 * @param id content block identifier
+	 */
+	public async deleteContentBlock(id: number) {
+		try {
+			return await this.dataService.execute<
+				ContentPageQueryTypes['DeleteContentBlockMutation'],
+				ContentPageQueryTypes['DeleteContentBlockMutationVariables']
+			>(
+				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.DeleteContentBlockDocument,
+				{ id },
+			);
+		} catch (err) {
+			throw CustomError('Failed to delete content block', err, { id });
+		}
+	}
+
+	private cleanContentBlocksBeforeDatabaseInsert(
+		dbContentBlocks: Partial<Avo.ContentPage.Block>[],
+	): ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'] {
+		return (dbContentBlocks || []).map((block) =>
+			omit(block, 'enum_content_block_type', '__typename', 'id'),
+		) as ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'];
+	}
+
+	/**
+	 * Insert content blocks.
+	 *
+	 * @param contentId content page identifier
+	 * @param contentBlockConfigs
+	 *
+	 * @return content blocks
+	 */
+	public async insertContentBlocks(
+		contentId: number,
+		contentBlockConfigs: App_Content_Blocks_Insert_Input[],
+	): Promise<Partial<ContentBlockConfig>[] | null> {
+		try {
+			(contentBlockConfigs || []).forEach(
+				(block) => (block.content_id = contentId),
+			);
+
+			const response = await this.dataService.execute<
+				ContentPageQueryTypes['InsertContentBlocksMutation'],
+				ContentPageQueryTypes['InsertContentBlocksMutationVariables']
+			>(
+				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.InsertContentBlocksDocument,
+				{
+					contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(
+						contentBlockConfigs,
+					) as any, // TODO Figure out why type doesn't work
+				},
+			);
+			const ids: number[] =
+				(
+					(response as ContentPageQueryTypes['InsertContentBlocksMutationAvo'])
+						.insert_app_content_blocks ||
+					(
+						response as ContentPageQueryTypes['InsertContentBlocksMutationHetArchief']
+					).insert_app_content_block
+				)?.returning?.map((block) => block.id) || [];
+
+			return contentBlockConfigs.map((block, index) => ({
+				...block,
+				id: ids[index],
+			}));
+		} catch (err) {
+			throw CustomError('Failed to insert content blocks', err, {
+				contentId,
+				contentBlockConfigs,
+			});
+		}
+	}
+
+	/**
+	 * Update content blocks.
+	 *
+	 * @param contentId content page identifier
+	 * @param initialContentBlocks initial state of content blocks
+	 * @param contentBlockConfigs configs of content blocks to update
+	 */
+	public async updateContentBlocks(
+		contentId: number,
+		initialContentBlocks: ContentBlockConfig[],
+		contentBlockConfigs: ContentBlockConfig[],
+	) {
+		try {
+			const initialContentBlockIds: number[] = compact(
+				initialContentBlocks.map((contentBlock) => contentBlock.id),
+			);
+			const currentContentBlockIds = contentBlockConfigs.reduce(
+				(acc: number[], curr) => {
+					if (has(curr, 'id')) {
+						return [...acc, curr.id as number];
+					}
+
+					return acc;
+				},
+				[],
+			);
+
+			// Inserted content-blocks
+			const insertPromises: Promise<any>[] = [];
+			const insertedConfigs: ContentBlockConfig[] = contentBlockConfigs.filter(
+				(config) => !has(config, 'id'),
+			);
+
+			if (insertedConfigs.length) {
+				insertPromises.push(
+					this.insertContentBlocks(contentId, insertedConfigs),
+				);
+			}
+
+			// Updated content-blocks
+			const updatePromises: Promise<any>[] = [];
+			const updatedConfigs = contentBlockConfigs.filter(
+				(config) =>
+					has(config, 'id') &&
+					initialContentBlockIds.includes(config.id as number),
+			);
+
+			updatedConfigs.forEach((config) =>
+				updatePromises.push(this.updateContentBlock(config)),
+			);
+
+			// Deleted content-blocks
+			const deletePromises: Promise<any>[] = [];
+			const deletedIds = without(
+				initialContentBlockIds,
+				...currentContentBlockIds,
+			);
+
+			deletedIds.forEach((id) =>
+				deletePromises.push(this.deleteContentBlock(id)),
+			);
+
+			// Run requests in parallel
+			await Promise.all([
+				Promise.all(insertPromises),
+				Promise.all(updatePromises),
+				Promise.all(deletePromises),
+			]);
+		} catch (err) {
+			throw CustomError('Failed to update content blocks', err, {
+				contentId,
+				initialContentBlocks,
+				contentBlockConfigs,
+			});
+		}
+	}
+
+	/**
+	 * Returns the user group ids that have access to this content page
+	 * @param path
+	 */
+	public async getUserGroupsFromContentPage(
+		path: string,
+	): Promise<(string | number)[]> {
+		// Check if permissions are stricter than the permissions on the content_page
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetPermissionsFromContentPageByPathQuery'],
+			ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryVariables']
+		>(
+			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetPermissionsFromContentPageByPathDocument,
+			{
+				path,
+			},
+		);
+
+		return ((
+			response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryAvo']
+		).app_content ||
+			(
+				response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryHetArchief']
+			).app_content_page ||
+			[])[0].user_group_ids;
 	}
 }

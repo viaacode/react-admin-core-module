@@ -1,27 +1,17 @@
 import { Avo } from '@viaa/avo2-types';
-import { stringify } from 'query-string';
+import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '../shared/helpers/custom-error';
-import { fetchWithLogout } from '../shared/helpers/fetch-with-logout';
-import { isUuid } from '../shared/helpers/uuid';
+import { fetchWithLogoutJson } from '../shared/helpers/fetch-with-logout';
 
 import { ContentTypeNumber } from './collection.types';
 
-import {
-	GetPublicCollectionsByIdDocument,
-	GetPublicCollectionsByIdQuery,
-	GetPublicCollectionsByIdQueryVariables,
-	GetPublicCollectionsByTitleDocument,
-	GetPublicCollectionsByTitleQuery,
-	GetPublicCollectionsByTitleQueryVariables,
-	GetPublicCollectionsDocument,
-	GetPublicCollectionsQuery,
-	GetPublicCollectionsQueryVariables,
-} from '~generated/graphql-db-types-avo';
-import { dataService } from '~modules/shared/services/data-service';
-
 export class CollectionService {
+	private static getBaseUrl(): string {
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/collections`;
+	}
+
 	/**
 	 * Retrieve collections or bundles.
 	 *
@@ -33,23 +23,22 @@ export class CollectionService {
 		limit: number,
 		typeId: ContentTypeNumber
 	): Promise<Avo.Collection.Collection[]> {
-		try {
-			// retrieve collections
-			const response = await dataService.query<
-				GetPublicCollectionsQuery,
-				GetPublicCollectionsQueryVariables
-			>({
-				query: GetPublicCollectionsDocument,
-				variables: { limit, typeId },
-			});
-
-			return (response.app_collections || []) as Avo.Collection.Collection[];
-		} catch (err) {
-			throw new CustomError('Het ophalen van de collecties is mislukt.', err, {
-				query: 'GET_PUBLIC_COLLECTIONS',
-				variables: { limit },
-			});
-		}
+		return fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/public`,
+				query: {
+					limit,
+					typeId,
+				},
+			}),
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				credentials: 'include',
+			}
+		);
 	}
 
 	static async fetchCollectionsOrBundlesByTitleOrId(
@@ -57,38 +46,16 @@ export class CollectionService {
 		titleOrId: string,
 		limit: number
 	): Promise<Avo.Collection.Collection[]> {
-		try {
-			const isUuidFormat = isUuid(titleOrId);
-			const variables: Partial<
-				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
-			> = {
-				limit,
-				typeId: isCollection ? ContentTypeNumber.collection : ContentTypeNumber.bundle,
-			};
-			if (isUuidFormat) {
-				(variables as GetPublicCollectionsByIdQueryVariables).id = titleOrId;
-			} else {
-				(variables as GetPublicCollectionsByTitleQueryVariables).title = `%${titleOrId}%`;
-			}
-
-			const response = await dataService.query<
-				GetPublicCollectionsByIdQuery | GetPublicCollectionsByTitleQuery,
-				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
-			>({
-				query: isUuidFormat
-					? GetPublicCollectionsByIdDocument
-					: GetPublicCollectionsByTitleDocument,
-				variables: variables as
-					| GetPublicCollectionsByIdQueryVariables
-					| GetPublicCollectionsByTitleQueryVariables,
-			});
-			return response.app_collections as Avo.Collection.Collection[];
-		} catch (err) {
-			throw new CustomError('Failed to fetch collections or bundles', err, {
-				query: 'GET_PUBLIC_COLLECTIONS_BY_ID or GET_PUBLIC_COLLECTIONS_BY_TITLE',
-				variables: { titleOrId, isCollection, limit },
-			});
-		}
+		return fetchWithLogoutJson(
+			stringifyUrl({
+				url: this.getBaseUrl(),
+				query: {
+					isCollection,
+					titleOrId,
+					limit,
+				},
+			})
+		);
 	}
 
 	/**
@@ -126,7 +93,7 @@ export class CollectionService {
 	 *
 	 * @param collectionId Unique id of the collection that must be fetched.
 	 * @param type Type of which items should be fetched.
-	 * @param assignmentUuid Collection can be fetched if it's not and you're not the owner,
+	 * @param assignmentUuid Collection can be fetched if you're not the owner,
 	 *        but if it is linked to an assignment that you're trying to view
 	 *
 	 * @param includeFragments
@@ -139,35 +106,17 @@ export class CollectionService {
 		includeFragments = true
 	): Promise<Avo.Collection.Collection | null> {
 		try {
-			const response = await fetchWithLogout(
-				`${
-					AdminConfigManager.getConfig().database.proxyUrl
-				}/admin/collections/fetch-with-items-by-id?${stringify({
-					type,
-					assignmentUuid,
-					id: collectionId,
-					includeFragments: includeFragments ? 'true' : 'false',
-				})}`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: `${this.getBaseUrl()}/fetch-with-items-by-id`,
+					query: {
+						type,
+						assignmentUuid,
+						id: collectionId,
+						includeFragments: includeFragments ? 'true' : 'false',
 					},
-					credentials: 'include',
-				}
+				})
 			);
-			if (response.status === 404) {
-				return null;
-			}
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError('invalid status code', null, {
-					collectionId,
-					type,
-					response,
-					statusCode: response.status,
-				});
-			}
-			return await response.json();
 		} catch (err) {
 			if (JSON.stringify(err).includes('COLLECTION_NOT_FOUND')) {
 				return null;

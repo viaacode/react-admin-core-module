@@ -63,6 +63,8 @@ export interface ContentPageLabel {
 	label: string;
 	content_type: ContentPageType;
 	link_to: PickerItem | null;
+	created_at: string;
+	updated_at: string;
 }
 
 export interface ContentPage {
@@ -180,3 +182,19 @@ export enum MediaItemType {
 	COLLECTION = 'COLLECTION',
 	BUNDLE = 'BUNDLE',
 }
+
+// Content Overview
+export type ContentOverviewTableCols =
+	| 'title'
+	| 'content_type'
+	| 'user_profile_id'
+	| 'author_user_group'
+	| 'created_at'
+	| 'updated_at'
+	| 'is_public'
+	| 'published_at'
+	| 'publish_at'
+	| 'depublish_at'
+	| 'labels'
+	| 'user_group_ids'
+	| 'actions';

@@ -2,23 +2,34 @@ import {
 	BadRequestException,
 	Body,
 	Controller,
+	Delete,
 	ForbiddenException,
 	Get,
 	Headers,
+	Param,
+	Patch,
 	Post,
+	Put,
 	Query,
 	Req,
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
+import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
+import { ContentBlockConfig } from '../content-block.types';
 
-import { ContentPage, LabelObj } from '../content-pages.types';
+import {
+	ContentOverviewTableCols,
+	ContentPage,
+	LabelObj,
+} from '../content-pages.types';
 
 import { ContentLabelsRequestDto } from '../dto/content-labels-request.dto';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto';
+import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { Permission } from '../../users/types';
@@ -38,17 +49,15 @@ export class ContentPagesController {
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
 	): Promise<IPagination<ContentPage>> {
-		const contentPages =
-			await this.contentPagesService.getContentPagesForOverview(
-				queryDto,
-				compact([
-					String(user?.getGroupId()),
-					user?.getUser()
-						? SpecialPermissionGroups.loggedInUsers
-						: SpecialPermissionGroups.loggedOutUsers,
-				]),
-			);
-		return contentPages;
+		return this.contentPagesService.getContentPagesForOverview(
+			queryDto,
+			compact([
+				String(user?.getGroupId()),
+				user?.getUser()
+					? SpecialPermissionGroups.loggedInUsers
+					: SpecialPermissionGroups.loggedOutUsers,
+			]),
+		);
 	}
 
 	@Get('')
@@ -185,21 +194,171 @@ export class ContentPagesController {
 		};
 	}
 
-	@Post('labels')
-	async getContentPageLabelsByTypeAndIds(
-		@Body() body: ContentLabelsRequestDto,
-	): Promise<LabelObj[]> {
-		if ((body as any).labelIds) {
-			return await this.contentPagesService.getContentPageLabelsByTypeAndIds(
-				body.contentType,
-				(body as any).labelIds,
+	@Get('public')
+	public async getPublicContentItems(
+		@Query('limit') limit: number,
+		@Query('title') title: string | undefined,
+	): Promise<
+		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
+		| null
+	> {
+		if (title) {
+			return this.contentPagesService.getPublicContentItemsByTitle(
+				title,
+				limit,
 			);
+		} else {
+			return this.contentPagesService.getPublicContentItems(limit);
 		}
+	}
 
-		// else labels query param is set
-		return await this.contentPagesService.getContentPageLabelsByTypeAndLabels(
-			body.contentType,
-			(body as any).labels,
+	@Get('public-projects')
+	public async getPublicProjectContentItems(
+		@Query('limit') limit: number,
+		@Query('title') title: string | undefined,
+	): Promise<
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
+	> {
+		if (title) {
+			return this.contentPagesService.getPublicProjectContentItemsByTitle(
+				title,
+				limit,
+			);
+		} else {
+			return this.contentPagesService.getPublicProjectContentItems(limit);
+		}
+	}
+
+	@Get(':id')
+	public async getContentPageById(
+		@Param('id') id: number | string,
+	): Promise<
+		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
+		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
+	> {
+		return this.contentPagesService.getContentPageById(id);
+	}
+
+	@Get('types')
+	public async getContentTypes(): Promise<
+		{ value: Avo.ContentPage.Type; label: string }[] | null
+	> {
+		return this.contentPagesService.getContentTypes();
+	}
+
+	@Get('labels')
+	public async fetchLabelsByContentType(
+		@Query('contentType') contentType: string,
+	): Promise<Avo.ContentPage.Label[]> {
+		return this.contentPagesService.fetchLabelsByContentType(contentType);
+	}
+
+	@Put('labels')
+	public async insertContentLabelsLinks(
+		@Body()
+		insertContentLabelLink: {
+			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[];
+		},
+	): Promise<void> {
+		await this.contentPagesService.insertContentLabelsLinks(
+			insertContentLabelLink.contentPageId,
+			insertContentLabelLink.labelIds,
 		);
+	}
+
+	@Delete('labels')
+	public async deleteContentLabelsLinks(
+		@Body()
+		deleteContentLabelLink: {
+			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[];
+		},
+	): Promise<void> {
+		await this.contentPagesService.deleteContentLabelsLinks(
+			deleteContentLabelLink.contentPageId,
+			deleteContentLabelLink.labelIds,
+		);
+	}
+
+	@Get()
+	public async fetchContentPages(
+		@Query('offset') offset: number,
+		@Query('limit') limit: number,
+		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
+		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('tableColumnDataType') tableColumnDataType: string,
+		@Query('where') where: string,
+	): Promise<
+		[
+			(
+				| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+				| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+			),
+			number,
+		]
+	> {
+		return this.contentPagesService.fetchContentPages(
+			offset,
+			limit,
+			sortColumn,
+			sortOrder,
+			tableColumnDataType,
+			JSON.parse(where),
+		);
+	}
+
+	@Put()
+	public async insertContentPage(
+		@Body()
+		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+			contentBlockConfigs: ContentBlockConfig[];
+		},
+	): Promise<
+		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+				contentBlockConfigs: ContentBlockConfig[];
+		  })
+		| null
+	> {
+		return this.contentPagesService.insertContentPage(contentPage);
+	}
+
+	@Patch()
+	public async updateContentPage(
+		@Body()
+		body: {
+			contentPage: ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'] & {
+				contentBlockConfigs: ContentBlockConfig[];
+			};
+			initialContentPage:
+				| { contentBlockConfigs: ContentBlockConfig[] }
+				| undefined;
+		},
+	): Promise<
+		| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
+		| null
+	> {
+		return this.contentPagesService.updateContentPage(
+			body.contentPage,
+			body.initialContentPage,
+		);
+	}
+
+	@Delete(':id')
+	public async deleteContentPage(
+		@Param('id') id: number | string,
+	): Promise<void> {
+		await this.contentPagesService.deleteContentPage(id);
+	}
+
+	@Get('access')
+	public async getUserGroupsFromContentPage(
+		@Query('path') path: string,
+	): Promise<(string | number)[]> {
+		return this.contentPagesService.getUserGroupsFromContentPage(path);
 	}
 }

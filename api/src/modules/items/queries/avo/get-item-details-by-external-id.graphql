@@ -1,6 +1,11 @@
-query getItemByUuid($uuid: uuid!) {
-	app_item_meta(where: { uid: { _eq: $uuid } }) {
-		thumbnail_path
+query getItemDetailsByExternalId($externalId: bpchar!) {
+	app_item_meta(
+		where: {
+			external_id: { _eq: $externalId }
+			is_deleted: { _eq: false }
+			is_published: { _eq: true }
+		}
+	) {
 		created_at
 		depublish_at
 		depublish_reason
@@ -8,7 +13,7 @@ query getItemByUuid($uuid: uuid!) {
 		duration
 		expiry_date
 		external_id
-		uid
+		id
 		is_deleted
 		is_published
 		issued
@@ -18,21 +23,25 @@ query getItemByUuid($uuid: uuid!) {
 		lom_keywords
 		lom_languages
 		lom_typicalagerange
+		note
 		org_id
-		organisation {
-			or_id
-			name
-		}
 		publish_at
 		published_at
 		series
+		thumbnail_path
 		title
+		type_id
+		uid
+		updated_at
+		organisation {
+			or_id
+			name
+			logo_url
+		}
 		type {
 			id
 			label
 		}
-		updated_at
-		note
 		relations(where: { predicate: { _eq: "IS_REPLACED_BY" } }) {
 			object
 			subject

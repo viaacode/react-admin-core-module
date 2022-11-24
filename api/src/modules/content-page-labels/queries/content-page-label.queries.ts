@@ -1,5 +1,5 @@
-import { AvoOrHetArchief } from '../../shared/types';
-
+import { DocumentNode } from 'graphql';
+import { AvoOrHetArchief } from '../../content-pages';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
 	DeleteContentPageLabelByIdMutation as DeleteContentPageLabelByIdMutationAvo,
@@ -7,6 +7,12 @@ import {
 	GetContentPageLabelByIdDocument as GetContentPageLabelByIdDocumentAvo,
 	GetContentPageLabelByIdQuery as GetContentPageLabelByIdQueryAvo,
 	GetContentPageLabelByIdQueryVariables as GetContentPageLabelByIdQueryVariablesAvo,
+	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentAvo,
+	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryAvo,
+	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesAvo,
+	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryAvo,
+	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo,
 	GetContentPageLabelsDocument as GetContentPageLabelsDocumentAvo,
 	GetContentPageLabelsQuery as GetContentPageLabelsQueryAvo,
 	GetContentPageLabelsQueryVariables as GetContentPageLabelsQueryVariablesAvo,
@@ -16,7 +22,7 @@ import {
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentAvo,
 	UpdateContentPageLabelMutation as UpdateContentPageLabelMutationAvo,
 	UpdateContentPageLabelMutationVariables as UpdateContentPageLabelMutationVariablesAvo,
-} from '~generated/graphql-db-types-avo';
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentHetArchief,
 	DeleteContentPageLabelByIdMutation as DeleteContentPageLabelByIdMutationHetArchief,
@@ -24,6 +30,12 @@ import {
 	GetContentPageLabelByIdDocument as GetContentPageLabelByIdDocumentHetArchief,
 	GetContentPageLabelByIdQuery as GetContentPageLabelByIdQueryHetArchief,
 	GetContentPageLabelByIdQueryVariables as GetContentPageLabelByIdQueryVariablesHetArchief,
+	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryHetArchief,
+	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief,
+	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryHetArchief,
+	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief,
 	GetContentPageLabelsDocument as GetContentPageLabelsDocumentHetArchief,
 	GetContentPageLabelsQuery as GetContentPageLabelsQueryHetArchief,
 	GetContentPageLabelsQueryVariables as GetContentPageLabelsQueryVariablesHetArchief,
@@ -33,7 +45,7 @@ import {
 	UpdateContentPageLabelDocument as UpdateContentPageLabelDocumentHetArchief,
 	UpdateContentPageLabelMutation as UpdateContentPageLabelMutationHetArchief,
 	UpdateContentPageLabelMutationVariables as UpdateContentPageLabelMutationVariablesHetArchief,
-} from '~generated/graphql-db-types-hetarchief';
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type ContentPageLabelQueryTypes = {
 	DeleteContentPageLabelByIdMutationAvo: DeleteContentPageLabelByIdMutationAvo;
@@ -48,7 +60,9 @@ export type ContentPageLabelQueryTypes = {
 		| GetContentPageLabelByIdQueryHetArchief;
 	GetContentPageLabelsQueryAvo: GetContentPageLabelsQueryAvo;
 	GetContentPageLabelsQueryHetArchief: GetContentPageLabelsQueryHetArchief;
-	GetContentPageLabelsQuery: GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief;
+	GetContentPageLabelsQuery:
+		| GetContentPageLabelsQueryAvo
+		| GetContentPageLabelsQueryHetArchief;
 	InsertContentPageLabelMutationAvo: InsertContentPageLabelMutationAvo;
 	InsertContentPageLabelMutationHetArchief: InsertContentPageLabelMutationHetArchief;
 	InsertContentPageLabelMutation:
@@ -84,29 +98,63 @@ export type ContentPageLabelQueryTypes = {
 	UpdateContentPageLabelMutationVariables:
 		| UpdateContentPageLabelMutationVariablesAvo
 		| UpdateContentPageLabelMutationVariablesHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryAvo: GetContentPageLabelsByTypeAndIdsQueryAvo;
+	GetContentPageLabelsByTypeAndIdsQueryHetArchief: GetContentPageLabelsByTypeAndIdsQueryHetArchief;
+	GetContentPageLabelsByTypeAndIdsQuery:
+		| GetContentPageLabelsByTypeAndIdsQueryAvo
+		| GetContentPageLabelsByTypeAndIdsQueryHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryAvo: GetContentPageLabelsByTypeAndLabelsQueryAvo;
+	GetContentPageLabelsByTypeAndLabelsQueryHetArchief: GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQuery:
+		| GetContentPageLabelsByTypeAndLabelsQueryAvo
+		| GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryVariablesAvo: GetContentPageLabelsByTypeAndIdsQueryVariablesAvo;
+	GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndIdsQueryVariables:
+		| GetContentPageLabelsByTypeAndIdsQueryVariablesAvo
+		| GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo: GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo;
+	GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
+	GetContentPageLabelsByTypeAndLabelsQueryVariables:
+		| GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo
+		| GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
 };
 
 type ContentPageLabelQueries = {
-	DeleteContentPageLabelByIdDocument: string;
-	GetContentPageLabelByIdDocument: string;
-	GetContentPageLabelsDocument: string;
-	InsertContentPageLabelDocument: string;
-	UpdateContentPageLabelDocument: string;
+	DeleteContentPageLabelByIdDocument: DocumentNode;
+	GetContentPageLabelByIdDocument: DocumentNode;
+	GetContentPageLabelsDocument: DocumentNode;
+	InsertContentPageLabelDocument: DocumentNode;
+	UpdateContentPageLabelDocument: DocumentNode;
+	GetContentPageLabelsByTypeAndIdsDocument: DocumentNode;
+	GetContentPageLabelsByTypeAndLabelsDocument: DocumentNode;
 };
 
-export const CONTENT_PAGE_LABEL_QUERIES: Record<AvoOrHetArchief, ContentPageLabelQueries> = {
+export const CONTENT_PAGE_LABEL_QUERIES: Record<
+	AvoOrHetArchief,
+	ContentPageLabelQueries
+> = {
 	[AvoOrHetArchief.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentAvo,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
+		GetContentPageLabelsByTypeAndIdsDocument:
+			GetContentPageLabelsByTypeAndIdsDocumentAvo,
+		GetContentPageLabelsByTypeAndLabelsDocument:
+			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
 	[AvoOrHetArchief.hetArchief]: {
-		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentHetArchief,
+		DeleteContentPageLabelByIdDocument:
+			DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentHetArchief,
+		GetContentPageLabelsByTypeAndIdsDocument:
+			GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+		GetContentPageLabelsByTypeAndLabelsDocument:
+			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
 };

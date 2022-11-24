@@ -11,7 +11,6 @@ import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { AvoOrHetArchief } from '~modules/shared/types';
 
 export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
@@ -133,37 +132,6 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			visibleByDefault: true,
 		},
 	];
-};
-
-export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
-	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
-}> = {
-	user_profile_id: (order: Avo.Search.OrderDirection) => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
-			return {
-				owner_profile: { first_name: order },
-			};
-		}
-		return {
-			profile: { first_name: order },
-		};
-	},
-	author_user_group: (order: Avo.Search.OrderDirection) => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
-			return {
-				owner_profile: { group: { name: order } },
-			};
-		}
-		return {
-			profile: { profile_user_group: { group: { label: order } } },
-		};
-	},
 };
 
 export const CONTENT_PATH = {

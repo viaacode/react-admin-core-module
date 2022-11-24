@@ -10,6 +10,7 @@ import {
 	Spinner,
 	TagInfo,
 } from '@viaa/avo2-components';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
 
 import { NavigationEditForm } from '../components';
 import {
@@ -33,11 +34,6 @@ import { PickerItem } from '~modules/shared/types/content-picker';
 import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
-import { dataService } from '~modules/shared/services/data-service';
-import {
-	CONTENT_PAGE_QUERIES,
-	ContentPageQueryTypes,
-} from '~modules/content-page/queries/content-pages.queries';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
@@ -72,12 +68,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		isError: isErrorNavigationItem,
 	} = useGetNavigationItem(navigationItemId);
 
-	const getQueries = () => {
-		return CONTENT_PAGE_QUERIES[
-			AdminConfigManager.getConfig().database.databaseApplicationType
-		];
-	};
-
 	useEffect(() => {
 		if (initialNavigationItem) {
 			setNavigationItem(initialNavigationItem);
@@ -109,11 +99,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
-		(response) => {
-			let contentUserGroupIds: string[] =
-				response.app_content?.[0]?.user_group_ids ||
-				response.app_content_page?.[0]?.user_group_ids ||
-				[];
+		(contentUserGroupIds) => {
 			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
 
@@ -170,18 +156,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	useEffect(() => {
 		if (navigationItem.content_type === 'CONTENT_PAGE' && navigationItem.content_path) {
 			// Check if permissions are stricter than the permissions on the content_page
-			dataService
-				.query<
-					ContentPageQueryTypes['GetPermissionsFromContentPageByPathQuery'],
-					ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryVariables']
-				>({
-					query: getQueries().GetPermissionsFromContentPageByPathDocument,
-					variables: {
-						path: navigationItem.content_path,
-					},
-				})
-				.then((response) => {
-					checkMenuItemContentPagePermissionsMismatch(response);
+			ContentPageService.getUserGroupsWithAccessToContentPage(navigationItem.content_path)
+				.then((userGroupIds) => {
+					checkMenuItemContentPagePermissionsMismatch(userGroupIds);
 				})
 				.catch((err) => {
 					console.error(

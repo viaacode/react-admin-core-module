@@ -1,48 +1,48 @@
-query getItemByExternalId($externalId: bpchar!) {
-	app_item_meta(
-		where: {
-			external_id: { _eq: $externalId }
-			is_deleted: { _eq: false }
-			is_published: { _eq: true }
-		}
-	) {
+query getItemDetailsByUuid($uuid: uuid!) {
+	app_item_meta(where: { uid: { _eq: $uuid } }) {
 		created_at
 		depublish_at
+		depublish_reason
 		description
 		duration
 		expiry_date
 		external_id
 		id
-		uid
 		is_deleted
-		is_orphaned
 		is_published
 		issued
-		issued_edtf
 		lom_classification
 		lom_context
 		lom_intendedenduserrole
 		lom_keywords
 		lom_languages
 		lom_typicalagerange
+		note
 		org_id
-		organisation {
-			or_id
-			name
-			logo_url
-		}
 		publish_at
 		published_at
 		series
 		thumbnail_path
 		title
+		type_id
+		uid
+		updated_at
+		organisation {
+			or_id
+			name
+			logo_url
+		}
 		type {
 			id
 			label
 		}
-		type_id
-		updated_at
-		note
+		relations(where: { predicate: { _eq: "IS_REPLACED_BY" } }) {
+			object
+			subject
+			predicate
+			created_at
+			updated_at
+		}
 		item_collaterals(where: { description: { _eq: "subtitle" } }) {
 			path
 			description
