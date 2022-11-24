@@ -129,7 +129,7 @@ import {
 	UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationHetArchief,
 	UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '../content-pages.types';
+import { AvoOrHetArchief } from '../../shared/types';
 
 export type ContentPageQueryTypes = {
 	GetContentByIdQuery: GetContentByIdQueryAvo | GetContentByIdQueryHetArchief;

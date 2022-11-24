@@ -20,9 +20,9 @@ const mockNavigationsResponse = {
 const mockNavigationsService: Partial<
 	Record<keyof AdminNavigationsService, jest.SpyInstance>
 > = {
-	findAllNavigationBars: jest.fn(),
+	findNavigationBars: jest.fn(),
 	findElementById: jest.fn(),
-	createElement: jest.fn(),
+	insertElement: jest.fn(),
 	updateElement: jest.fn(),
 	deleteElement: jest.fn(),
 };
@@ -53,10 +53,11 @@ describe('NavigationsController', () => {
 
 	describe('getNavigationBars', () => {
 		it('should return all navigations', async () => {
-			mockNavigationsService.findAllNavigationBars.mockResolvedValueOnce(
+			mockNavigationsService.findNavigationBars.mockResolvedValueOnce(
 				mockNavigationsResponse,
 			);
-			const navigations = await navigationsController.getNavigationBars({});
+			const navigations =
+				await navigationsController.getNavigationBarsOverview();
 			expect(navigations).toEqual(mockNavigationsResponse);
 		});
 	});
@@ -75,12 +76,12 @@ describe('NavigationsController', () => {
 
 	describe('createNavigationElement', () => {
 		it('should create a new navigation', async () => {
-			mockNavigationsService.createElement.mockResolvedValueOnce(
+			mockNavigationsService.insertElement.mockResolvedValueOnce(
 				mockNavigationsResponse.items[0],
 			);
 			const navigation = await navigationsController.createNavigationElement({
 				label: 'test-create-nav',
-				icon_name: '',
+				iconName: '',
 				placement: 'footer-links',
 				position: 1,
 			});
@@ -97,7 +98,7 @@ describe('NavigationsController', () => {
 				'navigation-1',
 				{
 					label: 'test-create-nav',
-					icon_name: '',
+					iconName: '',
 					placement: 'footer-links',
 					position: 1,
 				},

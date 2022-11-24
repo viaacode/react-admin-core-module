@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AvoOrHetArchief } from '../../content-pages';
+import { AvoOrHetArchief } from '../../shared/types';
 import { DataService } from '../../data';
 import { isAvo } from '../../shared/helpers/is-avo';
 
@@ -9,7 +9,8 @@ import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../user-groups.consts';
 
 @Injectable()
 export class UserGroupsService {
-	constructor(private dataService: DataService) {}
+	constructor(private dataService: DataService) {
+	}
 
 	public adapt(
 		userGroup:
@@ -36,9 +37,7 @@ export class UserGroupsService {
 	}
 
 	public async getUserGroups(): Promise<UserGroupWithPermissions[]> {
-		const response = await this.dataService.execute<
-			UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
-		>(
+		const response = await this.dataService.execute<UserGroupQueryTypes['GetUserGroupsPermissionsQuery']>(
 			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
 				.GetUserGroupsPermissionsDocument,
 		);
@@ -55,10 +54,8 @@ export class UserGroupsService {
 	public async updateUserGroups(
 		updates: UpdatePermission[],
 	): Promise<{ deleted: number; inserted: number }> {
-		const response = await this.dataService.execute<
-			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
-			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']
-		>(
+		const response = await this.dataService.execute<UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
+			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']>(
 			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
 				.UpdateUserGroupsPermissionsDocument,
 			{

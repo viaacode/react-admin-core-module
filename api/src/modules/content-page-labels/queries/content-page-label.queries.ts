@@ -1,5 +1,5 @@
 import { DocumentNode } from 'graphql';
-import { AvoOrHetArchief } from '../../content-pages';
+import { AvoOrHetArchief } from '../../shared/types';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
 	DeleteContentPageLabelByIdMutation as DeleteContentPageLabelByIdMutationAvo,
@@ -130,10 +130,8 @@ type ContentPageLabelQueries = {
 	GetContentPageLabelsByTypeAndLabelsDocument: DocumentNode;
 };
 
-export const CONTENT_PAGE_LABEL_QUERIES: Record<
-	AvoOrHetArchief,
-	ContentPageLabelQueries
-> = {
+export const CONTENT_PAGE_LABEL_QUERIES: Record<AvoOrHetArchief,
+	ContentPageLabelQueries> = {
 	[AvoOrHetArchief.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
@@ -141,20 +139,20 @@ export const CONTENT_PAGE_LABEL_QUERIES: Record<
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
 		GetContentPageLabelsByTypeAndIdsDocument:
-			GetContentPageLabelsByTypeAndIdsDocumentAvo,
+		GetContentPageLabelsByTypeAndIdsDocumentAvo,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+		GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
 	[AvoOrHetArchief.hetArchief]: {
 		DeleteContentPageLabelByIdDocument:
-			DeleteContentPageLabelByIdDocumentHetArchief,
+		DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentHetArchief,
 		GetContentPageLabelsByTypeAndIdsDocument:
-			GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+		GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+		GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
 };

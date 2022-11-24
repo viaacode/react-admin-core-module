@@ -1,9 +1,9 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
 import { useEffect, useState } from 'react';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
-import { ContentPageLabelService } from '../services/content-page-label.service';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

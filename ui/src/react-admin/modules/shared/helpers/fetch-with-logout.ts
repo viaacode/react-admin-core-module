@@ -2,12 +2,16 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 
 const AVO_LAST_RELOAD_BECAUSE_UNAUTH = 'AVO_LAST_RELOAD_BECAUSE_UNAUTH';
 
+type FetchOptions = Omit<RequestInit, 'method'> & {
+	method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
+};
+
 /**
  * Tries to get something from the proxy, if the response is 401, then the user is logged out and redirected to the login screen
  * @param url
  * @param options
  */
-export async function fetchWithLogout(url: string, options?: RequestInit): Promise<Response> {
+export async function fetchWithLogout(url: string, options?: FetchOptions): Promise<Response> {
 	const response = await fetch(url, {
 		headers: {
 			'Content-Type': 'application/json',
@@ -31,7 +35,7 @@ export async function fetchWithLogout(url: string, options?: RequestInit): Promi
 	return response;
 }
 
-export async function fetchWithLogoutJson(url: string, options?: RequestInit): Promise<any> {
+export async function fetchWithLogoutJson(url: string, options?: FetchOptions): Promise<any> {
 	const response = await fetchWithLogout(url, options);
 	return response.json();
 }

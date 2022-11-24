@@ -1,6 +1,6 @@
 import { Avo } from '@viaa/avo2-types';
+import { AvoOrHetArchief } from '../shared/types';
 import {
-	AvoOrHetArchief,
 	ContentOverviewTableCols,
 	MediaPlayerPathInfo,
 } from './content-pages.types';

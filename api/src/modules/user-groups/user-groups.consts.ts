@@ -1,4 +1,4 @@
-import { AvoOrHetArchief } from '../content-pages';
+import { AvoOrHetArchief } from '../shared/types';
 import {
 	GetUserGroupsPermissionsDocument as GetUserGroupsPermissionsDocumentAvo,
 	GetUserGroupsPermissionsQuery as GetUserGroupsPermissionsQueryAvo,

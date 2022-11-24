@@ -95,7 +95,7 @@ export class ContentPageService {
 
 	public static async fetchLabelsByContentType(
 		contentType: string
-	): Promise<{ value: Avo.ContentPage.Type; label: string }[]> {
+	): Promise<Avo.ContentPage.Label[]> {
 		return (
 			(await fetchWithLogoutJson(
 				stringifyUrl({

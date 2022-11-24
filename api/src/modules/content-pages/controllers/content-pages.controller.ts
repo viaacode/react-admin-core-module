@@ -20,13 +20,8 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
 import { ContentBlockConfig } from '../content-block.types';
 
-import {
-	ContentOverviewTableCols,
-	ContentPage,
-	LabelObj,
-} from '../content-pages.types';
+import { ContentOverviewTableCols, ContentPage } from '../content-pages.types';
 
-import { ContentLabelsRequestDto } from '../dto/content-labels-request.dto';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
@@ -42,7 +37,8 @@ import { SpecialPermissionGroups } from '../../shared/types/types';
 @ApiTags('ContentPages')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
 export class ContentPagesController {
-	constructor(private contentPagesService: ContentPagesService) {}
+	constructor(private contentPagesService: ContentPagesService) {
+	}
 
 	@Post('overview')
 	public async getContentPagesForOverview(
@@ -198,13 +194,11 @@ export class ContentPagesController {
 	public async getPublicContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<
-		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+	): Promise<| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
-		| null
-	> {
+		| null> {
 		if (title) {
 			return this.contentPagesService.getPublicContentItemsByTitle(
 				title,
@@ -219,10 +213,8 @@ export class ContentPagesController {
 	public async getPublicProjectContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<
-		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
-		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
-	> {
+	): Promise<| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']> {
 		if (title) {
 			return this.contentPagesService.getPublicProjectContentItemsByTitle(
 				title,
@@ -231,23 +223,6 @@ export class ContentPagesController {
 		} else {
 			return this.contentPagesService.getPublicProjectContentItems(limit);
 		}
-	}
-
-	@Get(':id')
-	public async getContentPageById(
-		@Param('id') id: number | string,
-	): Promise<
-		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
-		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
-	> {
-		return this.contentPagesService.getContentPageById(id);
-	}
-
-	@Get('types')
-	public async getContentTypes(): Promise<
-		{ value: Avo.ContentPage.Type; label: string }[] | null
-	> {
-		return this.contentPagesService.getContentTypes();
 	}
 
 	@Get('labels')
@@ -260,7 +235,7 @@ export class ContentPagesController {
 	@Put('labels')
 	public async insertContentLabelsLinks(
 		@Body()
-		insertContentLabelLink: {
+			insertContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -274,7 +249,7 @@ export class ContentPagesController {
 	@Delete('labels')
 	public async deleteContentLabelsLinks(
 		@Body()
-		deleteContentLabelLink: {
+			deleteContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -285,6 +260,19 @@ export class ContentPagesController {
 		);
 	}
 
+	@Get(':id')
+	public async getContentPageById(
+		@Param('id') id: number | string,
+	): Promise<| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
+		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]> {
+		return this.contentPagesService.getContentPageById(id);
+	}
+
+	@Get('types')
+	public async getContentTypes(): Promise<{ value: Avo.ContentPage.Type; label: string }[] | null> {
+		return this.contentPagesService.getContentTypes();
+	}
+
 	@Get()
 	public async fetchContentPages(
 		@Query('offset') offset: number,
@@ -293,15 +281,13 @@ export class ContentPagesController {
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string,
-	): Promise<
-		[
-			(
-				| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
-				| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+	): Promise<[
+		(
+			| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
 			),
-			number,
-		]
-	> {
+		number,
+	]> {
 		return this.contentPagesService.fetchContentPages(
 			offset,
 			limit,
@@ -315,22 +301,20 @@ export class ContentPagesController {
 	@Put()
 	public async insertContentPage(
 		@Body()
-		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+			contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
 			contentBlockConfigs: ContentBlockConfig[];
 		},
-	): Promise<
-		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-				contentBlockConfigs: ContentBlockConfig[];
-		  })
-		| null
-	> {
+	): Promise<| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+		contentBlockConfigs: ContentBlockConfig[];
+	})
+		| null> {
 		return this.contentPagesService.insertContentPage(contentPage);
 	}
 
 	@Patch()
 	public async updateContentPage(
 		@Body()
-		body: {
+			body: {
 			contentPage: ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'] & {
 				contentBlockConfigs: ContentBlockConfig[];
 			};
@@ -338,10 +322,8 @@ export class ContentPagesController {
 				| { contentBlockConfigs: ContentBlockConfig[] }
 				| undefined;
 		},
-	): Promise<
-		| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
-		| null
-	> {
+	): Promise<| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
+		| null> {
 		return this.contentPagesService.updateContentPage(
 			body.contentPage,
 			body.initialContentPage,

@@ -21,7 +21,7 @@ import ContentPage from '../../ContentPage/ContentPage';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ContentTypeAndLabelsValue } from '~modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import {
 	LoadingErrorLoadedComponent,

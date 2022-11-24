@@ -14,11 +14,6 @@ import {
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
 
-export enum AvoOrHetArchief {
-	avo = 'avo',
-	hetArchief = 'hetarchief',
-}
-
 type ContentPickerTypeAvo =
 	| 'COLLECTION'
 	| 'ITEM'

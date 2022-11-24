@@ -25,10 +25,10 @@ import {
 import { App_Content_Page_Insert_Input } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { AvoOrHetArchief } from '../../shared/types';
 import { ContentBlockConfig } from '../content-block.types';
 
 import {
-	AvoOrHetArchief,
 	ContentBlock,
 	ContentOverviewTableCols,
 	ContentPage,

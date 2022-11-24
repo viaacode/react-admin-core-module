@@ -16,7 +16,7 @@ import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 
 import { PlayerTicket } from '../player-ticket.types';
 
-import { AvoOrHetArchief } from '../../content-pages';
+import { AvoOrHetArchief } from '../../shared/types';
 import { DataService } from '../../data';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
@@ -127,18 +127,14 @@ export class PlayerTicketService {
 		let response;
 		if (isHetArchief()) {
 			// Het archief
-			response = await this.dataService.execute<
-				GetFileByRepresentationSchemaIdentifierQuery,
-				GetFileByRepresentationSchemaIdentifierQueryVariables
-			>(GetFileByRepresentationSchemaIdentifierDocument, {
+			response = await this.dataService.execute<GetFileByRepresentationSchemaIdentifierQuery,
+				GetFileByRepresentationSchemaIdentifierQueryVariables>(GetFileByRepresentationSchemaIdentifierDocument, {
 				id,
 			});
 		} else {
 			// AVO
-			response = await this.dataService.execute<
-				GetItemBrowsePathByExternalIdQuery,
-				GetItemBrowsePathByExternalIdQueryVariables
-			>(GetItemBrowsePathByExternalIdDocument, {
+			response = await this.dataService.execute<GetItemBrowsePathByExternalIdQuery,
+				GetItemBrowsePathByExternalIdQueryVariables>(GetItemBrowsePathByExternalIdDocument, {
 				externalId: id,
 			});
 		}
@@ -177,10 +173,8 @@ export class PlayerTicketService {
 	}
 
 	public async getThumbnailPath(id: string): Promise<string> {
-		const response = await this.dataService.execute<
-			GetThumbnailUrlByIdQuery,
-			GetThumbnailUrlByIdQueryVariables
-		>(GetThumbnailUrlByIdDocument, {
+		const response = await this.dataService.execute<GetThumbnailUrlByIdQuery,
+			GetThumbnailUrlByIdQueryVariables>(GetThumbnailUrlByIdDocument, {
 			id,
 		});
 		if (!response.object_ie?.[0]) {

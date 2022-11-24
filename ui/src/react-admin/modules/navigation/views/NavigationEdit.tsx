@@ -35,7 +35,7 @@ import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { AdminLayout } from '~modules/shared/layouts';
-import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
+import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
 
 interface NavigationEditProps {
@@ -61,7 +61,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetNavigations(navigationBarId);
+	} = useGetNavigationBarItems(navigationBarId);
 	const {
 		data: initialNavigationItem,
 		isLoading: isLoadingNavigationItem,

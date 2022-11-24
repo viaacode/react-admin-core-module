@@ -1,4 +1,3 @@
-import { AvoOrHetArchief } from "../content-pages";
 import {
 	GetPermissionsDocument as GetPermissionsDocumentAvo,
 	GetPermissionsQuery as GetPermissionsQueryAvo,
@@ -8,13 +7,12 @@ import {
 	GetPermissionsQuery as GetPermissionsQueryHetArchief,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoOrHetArchief } from '../shared/types';
 
 export type PermissionQueryTypes = {
 	GetPermissionsQueryAvo: GetPermissionsQueryAvo;
 	GetPermissionsQueryHetArchief: GetPermissionsQueryHetArchief;
-	GetPermissionsQuery:
-		| GetPermissionsQueryAvo
-		| GetPermissionsQueryHetArchief;
+	GetPermissionsQuery: GetPermissionsQueryAvo | GetPermissionsQueryHetArchief;
 };
 
 type PermissionsQueries = {

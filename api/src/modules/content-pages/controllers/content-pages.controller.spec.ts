@@ -37,8 +37,6 @@ const mockContentPagesService: Partial<
 	fetchContentPagesWithOrWithoutBlocks: jest.fn(),
 	updatePublishDates: jest.fn(),
 	getContentPagesByIds: jest.fn(),
-	getContentPageLabelsByTypeAndLabels: jest.fn(),
-	getContentPageLabelsByTypeAndIds: jest.fn(),
 };
 
 const mockPlayerTicketService: Partial<
