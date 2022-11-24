@@ -1,6 +1,6 @@
 import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
-import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import React, { FC, ReactNode, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -46,6 +46,7 @@ import { validateContentBlockField } from '~modules/shared/helpers/validation';
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
+import { DefaultComponentProps } from '~modules/shared/types/components';
 import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
@@ -55,7 +56,12 @@ import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
-const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
+export type ContentPageEditProps = DefaultComponentProps & {
+	id: string | undefined;
+	renderBack?: () => ReactNode;
+};
+
+const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -572,7 +578,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 
 		return (
-			<AdminLayout pageTitle={pageTitle}>
+			<AdminLayout className={className} pageTitle={pageTitle}>
+				<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
