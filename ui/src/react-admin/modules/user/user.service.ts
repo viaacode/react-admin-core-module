@@ -55,17 +55,22 @@ export class UserService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+
+		const database = AdminConfigManager.getConfig().database.databaseApplicationType;
+		const shared = {
+			email: userProfile.mail || undefined,
+			firstName: userProfile.first_name || undefined,
+			lastName: userProfile.last_name || undefined,
+			fullName: userProfile.full_name || (userProfile as any).user?.full_name || undefined,
+			last_access_at: userProfile.last_access_at,
+		};
+
+		if (database === AvoOrHetArchief.hetArchief) {
 			const user = userProfile as ProfileHetArchief;
+
 			return {
+				...shared,
 				profileId: user.id,
-				email: user.mail || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
-				fullName: user.full_name || undefined,
 				userGroup: {
 					id: user.group?.id,
 					name: user.group?.name,
@@ -78,18 +83,19 @@ export class UserService {
 					logo_url:
 						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
 				},
-				last_access_at: user.last_access_at,
 			};
-		} else {
+		} else if (database === AvoOrHetArchief.avo) {
 			const user = userProfile as ProfileAvo;
+
 			return {
+				...shared,
 				profileId: user.profile_id,
 				stamboek: user.stamboek || undefined,
-				organisation: user.company_name
-					? ({
-							name: user.company_name,
-					  } as Avo.Organization.Organization)
-					: undefined,
+				organisation:
+					(user.company_name && {
+						name: user.company_name,
+					}) ||
+					(userProfile as any).organisation,
 				educational_organisations: (user.organisations || []).map(
 					(org): ClientEducationOrganization => ({
 						organizationId: org.organization_id,
@@ -103,21 +109,25 @@ export class UserService {
 				business_category: user.business_category || undefined,
 				created_at: user.acc_created_at,
 				userGroup: {
-					name: user.group_name || undefined,
-					label: user.group_name || undefined,
-					id: user.group_id || undefined,
+					name:
+						user.group_name ||
+						(userProfile as any).profile_user_group?.group?.label ||
+						undefined,
+					label:
+						user.group_name ||
+						(userProfile as any).profile_user_group?.group?.label ||
+						undefined,
+					id:
+						user.group_id ||
+						(userProfile as any).profile_user_group?.group?.id ||
+						undefined,
 				},
-				userId: user.user_id,
-				uid: user.user_id,
-				email: user.mail || undefined,
-				fullName: user.full_name || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
+				userId: user.user_id || (userProfile as any).user?.id,
+				uid: user.user_id || (userProfile as any).user?.id,
 				is_blocked: user.is_blocked || undefined,
 				blocked_at: get(user, 'blocked_at.date'),
 				unblocked_at: get(user, 'unblocked_at.date'),
-				last_access_at: user.last_access_at,
-				temp_access: user?.user?.temp_access || undefined,
+				temp_access: user.user?.temp_access || undefined,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
 			};
 		}
