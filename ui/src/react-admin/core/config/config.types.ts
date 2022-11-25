@@ -40,8 +40,8 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	tHtml: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
-	tText: (translationKey: string, variables?: Record<string, string>) => string;
+	tHtml: (translationKey: string, variables?: Record<string, string>, apps?: AvoOrHetArchief[]) => ReactNode | string;
+	tText: (translationKey: string, variables?: Record<string, string>, apps?: AvoOrHetArchief[]) => string;
 }
 
 export interface UserGroupsService {

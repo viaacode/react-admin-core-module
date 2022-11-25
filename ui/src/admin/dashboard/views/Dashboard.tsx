@@ -6,7 +6,7 @@ const Dashboard = () => {
 	const { tHtml, tText } = useTranslation();
 
 	return (
-		<AdminLayout pageTitle={tText('Dashboard')}>
+		<AdminLayout pageTitle={tText('admin/dashboard/views/dashboard___dashboard')}>
 			<AdminLayout.Content>
 				<p>{tHtml('admin/dashboard/views/dashboard___introductie-beheer-dashboard')}</p>
 			</AdminLayout.Content>

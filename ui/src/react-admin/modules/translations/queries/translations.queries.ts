@@ -1,4 +1,4 @@
-import { AvoOrHetArchief } from '../../shared/types';
+import { AvoOrHetArchief } from '~modules/shared';
 
 import {
 	GetTranslationsDocument as GetTranslationsDocumentAvo,

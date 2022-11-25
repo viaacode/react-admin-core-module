@@ -401,12 +401,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			const profileIds = await UserService.getProfileIds(
 				generateWhereObject(getFilters(tableState), false)
 			);
+			const numOfSelectedProfiles = String(profileIds.length);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
-					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebuikers-geselecteerd',
+					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd',
 					{
-						numOfSelectedProfiles: `${profileIds.length}`,
+						numOfSelectedProfiles,
 					}
 				),
 				type: ToastType.SUCCESS,
