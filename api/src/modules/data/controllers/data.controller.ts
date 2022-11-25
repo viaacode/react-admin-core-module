@@ -5,8 +5,8 @@ import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { GraphQlQueryDto } from '../dto/graphql-query.dto';
 import { DataService } from '../services/data.service';
 
-import { SessionUserEntity } from '../../users/classes/session-user';
-import { SessionUser } from '../../shared/decorators/user.decorator';
+// import { SessionUserEntity } from '../../users/classes/session-user';
+// import { SessionUser } from '../../shared/decorators/user.decorator';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('GraphQL')
@@ -17,7 +17,7 @@ export class DataController {
 	@Post()
 	public async post(
 		@Body() dataQueryDto: GraphQlQueryDto,
-		@SessionUser() user: SessionUserEntity,
+		// @SessionUser() user: SessionUserEntity,
 	): Promise<any> {
 		return {
 			data: await this.dataService.execute(

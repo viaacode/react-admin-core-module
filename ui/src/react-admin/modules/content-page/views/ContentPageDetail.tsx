@@ -70,7 +70,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 	const user = AdminConfigManager.getConfig().user;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
-	const pageTitle = `Content: ${get(contentPageInfo, 'title', '')}`;
+	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(contentPageInfo, 'title', '')}`;
 
 	const hasPerm = (permission: Permission) => PermissionService.hasPerm(user, permission);
 

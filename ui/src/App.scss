@@ -4,12 +4,13 @@
 	> div {
 		> .resizable-fragment {
 			width: 100%;
+			overflow: visible !important;
 		}
 
 		> div:not(.resizable-fragment) {
 			position: relative;
 			background-color: rgba($color-gray-50, 0.4);
-			height: 100vh !important;
+			height: 100vh;
 
 			&:after {
 				content: '||';

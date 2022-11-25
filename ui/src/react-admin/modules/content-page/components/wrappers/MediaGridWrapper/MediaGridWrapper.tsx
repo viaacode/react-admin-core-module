@@ -168,17 +168,15 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 		itemOrCollection: ResolvedItemOrCollection,
 		index: number
 	): MediaListItem => {
-		const itemLabel = get(itemOrCollection, 'type.label', 'item');
+		const itemLabel = itemOrCollection?.type?.label || 'item';
 		const isItem =
 			itemLabel === ContentTypeString.video || itemLabel === ContentTypeString.audio;
 		const isCollection = itemLabel === ContentTypeString.collection;
-		const itemDuration = get(itemOrCollection, 'duration', 0);
-		const collectionItems = get(
-			itemOrCollection,
-			'collection_fragments_aggregate.aggregate.count',
-			0
-		); // TODO add fragment count to elasticsearch index
-		const viewCount = get(itemOrCollection, 'view_counts_aggregate.aggregate.sum.count', 0);
+		const itemDuration = (itemOrCollection as Avo.Item.Item)?.duration || 0;
+		const collectionItems =
+			(itemOrCollection as Avo.Collection.Collection)?.collection_fragments_aggregate
+				?.aggregate?.count || 0; // TODO add fragment count to elasticsearch index
+		const viewCount = itemOrCollection?.view_counts_aggregate?.aggregate?.sum?.count || 0;
 
 		const element: MediaGridBlockComponentState = (elements || [])[index] || ({} as any);
 

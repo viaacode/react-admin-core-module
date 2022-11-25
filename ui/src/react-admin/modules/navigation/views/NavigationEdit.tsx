@@ -376,8 +376,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			);
 		}
 		const pageTitle = navigationBarId
-			? `${navigationBarName}: item ${GET_PAGE_TYPES_LANG()[pageType]}`
-			: tHtml('admin/menu/views/menu-edit___navigatie-toevoegen');
+			? `${navigationBarName}: ${tText('modules/navigation/views/navigation-edit___item')} ${
+					GET_PAGE_TYPES_LANG()[pageType]
+			  }`
+			: tText('admin/menu/views/menu-edit___navigatie-toevoegen');
 		return (
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Actions>
