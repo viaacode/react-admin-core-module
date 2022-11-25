@@ -7,6 +7,9 @@ import {
 	BulkAddSubjectsToProfilesDocument,
 	BulkAddSubjectsToProfilesMutation,
 	BulkAddSubjectsToProfilesMutationVariables,
+	BulkClearUserTempAccessDocument,
+	BulkClearUserTempAccessMutation,
+	BulkClearUserTempAccessMutationVariables,
 	BulkDeleteSubjectsFromProfilesDocument,
 	BulkDeleteSubjectsFromProfilesMutation,
 	BulkDeleteSubjectsFromProfilesMutationVariables,
@@ -304,6 +307,13 @@ export class UserService {
 				credentials: 'include',
 				body: JSON.stringify(body),
 			});
+
+			if (isBlocked) {
+				await dataService.query<BulkClearUserTempAccessMutation, BulkClearUserTempAccessMutationVariables>({
+					variables: { profileIds },
+					query: BulkClearUserTempAccessDocument,
+				})
+			}
 
 			if (response.status < 200 || response.status >= 400) {
 				throw new CustomError('Status code was unexpected', null, {
