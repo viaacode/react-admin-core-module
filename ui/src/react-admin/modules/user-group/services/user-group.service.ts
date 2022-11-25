@@ -42,9 +42,9 @@ export class UserGroupService {
 					.users_group;
 			const userGroupCount =
 				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryAvo'])
-					.users_groups_aggregate.aggregate?.count ||
+					.users_groups_aggregate?.aggregate?.count ||
 				(response as UserGroupQueryTypes['GetUserGroupsWithFiltersQueryHetArchief'])
-					.users_group_aggregate.aggregate?.count;
+					.users_group_aggregate?.aggregate?.count;
 
 			if (!userGroups) {
 				throw new CustomError(

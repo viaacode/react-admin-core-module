@@ -440,7 +440,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const bulkUpdateBlockStatus = async (blockOrUnblock: boolean) => {
 		try {
 			setIsLoading(true);
-			await UserService.updateBlockStatusByProfileIds(selectedProfileIds, blockOrUnblock);
+			await UserService.updateBlockStatusByProfileIds(
+				selectedProfileIds,
+				blockOrUnblock,
+				false // TODO sync sendEmail feature
+			);
 			await fetchProfiles();
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),

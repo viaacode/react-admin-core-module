@@ -277,7 +277,8 @@ export class UserService {
 
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
-		isBlocked: boolean
+		isBlocked: boolean,
+		sendEmail: boolean
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -292,6 +293,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
+				sendEmail,
 			};
 
 			const response = await fetchWithLogout(url, {
@@ -380,6 +382,7 @@ export class UserService {
 	static async bulkDeleteUsers(
 		profileIds: string[],
 		deleteOption: Avo.User.UserDeleteOption,
+		sendEmail: boolean,
 		transferToProfileId?: string
 	): Promise<void> {
 		let url: string | undefined;
@@ -391,6 +394,7 @@ export class UserService {
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
+				sendEmail,
 				...(isAvo ? { transferToProfileId } : {}),
 			};
 			const response = await fetchWithLogout(url, {
@@ -445,14 +449,14 @@ export class UserService {
 			});
 
 			return {
-				publicCollections: response.publicCollections.aggregate?.count || 0,
-				privateCollections: response.privateCollections.aggregate?.count || 0,
-				assignments: response.assignments.aggregate?.count || 0,
+				publicCollections: response.publicCollections?.aggregate?.count || 0,
+				privateCollections: response.privateCollections?.aggregate?.count || 0,
+				assignments: response.assignments?.aggregate?.count || 0,
 				bookmarks:
-					(response.collectionBookmarks.aggregate?.count || 0) +
-					(response.itemBookmarks.aggregate?.count || 0),
-				publicContentPages: response.publicContentPages.aggregate?.count || 0,
-				privateContentPages: response.privateContentPages.aggregate?.count || 0,
+					(response.collectionBookmarks?.aggregate?.count || 0) +
+					(response.itemBookmarks?.aggregate?.count || 0),
+				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
+				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
 			};
 		} catch (err) {
 			throw new CustomError('Failed to get content counts for users from the database', err, {
