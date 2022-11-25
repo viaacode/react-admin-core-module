@@ -4,7 +4,7 @@ import { FileUploadProps } from '../../../shared/components/FileUpload/FileUploa
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

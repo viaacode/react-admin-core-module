@@ -6,7 +6,7 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 	GET_FULL_HEADING_TYPE_OPTIONS,
-} from '../../const/content-block.common.consts';
+} from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

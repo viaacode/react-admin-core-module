@@ -13,7 +13,7 @@ import { AdminConfigManager } from '~core/config';
 import {
 	GET_ALIGN_OPTIONS,
 	GET_WIDTH_OPTIONS,
-} from '~modules/content-page/const/content-block.common.consts';
+} from '~modules/content-page/const/content-block.consts';
 
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',

@@ -25,7 +25,7 @@ import {
 } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
+import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/content-block.consts';
 
 export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	title: '',

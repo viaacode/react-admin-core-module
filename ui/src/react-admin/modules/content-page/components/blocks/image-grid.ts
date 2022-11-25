@@ -4,7 +4,7 @@ import { FileUploadProps } from '../../../shared/components/FileUpload/FileUploa
 import {
 	GET_FILL_OPTIONS,
 	GET_IMAGE_GRID_FORMAT_OPTIONS,
-} from '../../const/content-block.common.consts';
+} from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -17,7 +17,7 @@ import { BlockImageGridWrapperProps } from '../wrappers/ImageGridWrapper/ImageGr
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/content-block.consts';
 
 export const INITIAL_IMAGE_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

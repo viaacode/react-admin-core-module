@@ -11,7 +11,7 @@ export const ADMIN_PATH = Object.freeze({
 	...USER_PATH,
 	...USER_GROUP_PATH,
 	...NAVIGATION_PATH,
-	...CONTENT_PAGE_PATH(),
+	CONTENT_PAGE: {...CONTENT_PAGE_PATH()},
 	...CONTENT_PAGE_LABEL_PATH,
 	...TRANSLATIONS_PATH,
 });
@@ -39,19 +39,19 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 		},
 		{
 			label: i18n.tHtml('admin/admin___content-paginas'),
-			location: ADMIN_PATH.OVERVIEW,
+			location: ADMIN_PATH.CONTENT_PAGE.OVERVIEW,
 			key: 'content',
 			exact: false,
 			subLinks: [
 				{
 					label: i18n.tHtml('admin/admin___paginas'),
-					location: ADMIN_PATH.PAGES,
+					location: ADMIN_PATH.CONTENT_PAGE.PAGES,
 					key: 'pages',
 					exact: true,
 				},
 				{
 					label: i18n.tHtml('admin/admin___fa-qs'),
-					location: ADMIN_PATH.FAQS,
+					location: ADMIN_PATH.CONTENT_PAGE.FAQS,
 					key: 'faqs',
 					exact: true,
 				},

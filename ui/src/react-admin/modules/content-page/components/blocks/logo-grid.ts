@@ -17,7 +17,7 @@ import {
 	GET_ALIGN_OPTIONS,
 	GET_FILL_OPTIONS,
 	GET_IMAGE_GRID_FORMAT_OPTIONS,
-} from '~modules/content-page/const/content-block.common.consts';
+} from '~modules/content-page/const/content-block.consts';
 
 export const INITIAL_LOGO_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

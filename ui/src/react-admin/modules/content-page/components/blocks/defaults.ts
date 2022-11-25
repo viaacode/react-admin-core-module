@@ -11,7 +11,7 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
-} from '../../const/content-block.common.consts';
+} from '../../const/content-block.consts';
 import {
 	Color,
 	ContentBlockEditor,

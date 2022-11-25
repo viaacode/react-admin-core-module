@@ -5,7 +5,7 @@ import { USER_PATH } from './user.const';
 
 export const ADMIN_PATH = Object.freeze({
 	...USER_PATH,
-	...CONTENT_PAGE_PATH(),
+	CONTENT_PAGE: { ...CONTENT_PAGE_PATH() },
 	...COLLECTIONS_OR_BUNDLES_PATH,
 	...NAVIGATION_PATH,
 });

@@ -14,7 +14,7 @@ import { BlockUspGridWrapperProps } from '../wrappers/UspGridWrapper/UspGridWrap
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/content-block.consts';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{

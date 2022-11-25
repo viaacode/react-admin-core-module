@@ -11,8 +11,8 @@ import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
-import { PageOverviewOrderOptions } from '../../../const/content-block.common.consts';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../../const/content-block.common.consts';
+import { PageOverviewOrderOptions } from '../../../const/content-block.consts';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../../const/content-block.consts';
 import { convertToContentPageInfos } from '../../../helpers/parsers';
 import { ContentPageService } from '../../../services/content-page.service';
 import { Color } from '../../../types/content-block.types';

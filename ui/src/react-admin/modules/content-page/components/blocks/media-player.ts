@@ -3,7 +3,7 @@ import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '../../const/content-block.common.consts';
+import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
