@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { AvoOrHetArchief } from '../../shared/types';
 import { DataService } from '../../data';
 import { isAvo } from '../../shared/helpers/is-avo';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
 import { UserGroupWithPermissions } from '../user-groups.types';
-import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../user-groups.consts';
+import {
+	USER_GROUP_QUERIES,
+	UserGroupQueryTypes,
+} from '../queries/user-groups.queries';
 
 @Injectable()
 export class UserGroupsService {
-	constructor(private dataService: DataService) {
-	}
+	constructor(private dataService: DataService) {}
 
 	public adapt(
 		userGroup:
@@ -26,7 +27,9 @@ export class UserGroupsService {
 			label: userGroup.label,
 			name: avoUserGroup.label || hetArchiefUserGroup.name,
 			permissions: (
-				avoUserGroup.group_permissions || hetArchiefUserGroup.permissions
+				avoUserGroup.group_permissions ||
+				hetArchiefUserGroup.permissions ||
+				[]
 			).map((permissionWrap) => ({
 				id: permissionWrap.permission.id,
 				label: permissionWrap.permission.label,
@@ -36,26 +39,48 @@ export class UserGroupsService {
 		};
 	}
 
-	public async getUserGroups(): Promise<UserGroupWithPermissions[]> {
-		const response = await this.dataService.execute<UserGroupQueryTypes['GetUserGroupsPermissionsQuery']>(
-			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetUserGroupsPermissionsDocument,
-		);
+	public async getUserGroups(
+		withPermissions: boolean,
+	): Promise<UserGroupWithPermissions[]> {
+		if (withPermissions) {
+			const response = await this.dataService.execute<
+				UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
+			>(
+				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.GetUserGroupsPermissionsDocument,
+			);
 
-		const userGroups =
-			(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
-				.users_groups ||
-			(
-				response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']
-			).users_group;
-		return userGroups.map((userGroup) => this.adapt(userGroup));
+			const userGroups =
+				(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
+					.users_groups ||
+				(
+					response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']
+				).users_group;
+			return userGroups.map((userGroup) => this.adapt(userGroup));
+		} else {
+			const response = await this.dataService.execute<
+				UserGroupQueryTypes['GetUserGroupsQuery']
+			>(
+				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.GetUserGroupsDocument,
+			);
+
+			const userGroups =
+				(response as UserGroupQueryTypes['GetUserGroupsQueryAvo'])
+					.users_groups ||
+				(response as UserGroupQueryTypes['GetUserGroupsQueryHetArchief'])
+					.users_group;
+			return userGroups.map((userGroup) => this.adapt(userGroup));
+		}
 	}
 
 	public async updateUserGroups(
 		updates: UpdatePermission[],
 	): Promise<{ deleted: number; inserted: number }> {
-		const response = await this.dataService.execute<UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
-			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']>(
+		const response = await this.dataService.execute<
+			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
+			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']
+		>(
 			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
 				.UpdateUserGroupsPermissionsDocument,
 			{

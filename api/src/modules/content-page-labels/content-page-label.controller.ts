@@ -15,16 +15,16 @@ export class ContentPagesController {
 
 	@Get('')
 	public async fetchContentPageLabels(
-		@Query('offset') offset: number,
-		@Query('limit') limit: number,
+		@Query('offset') offset: string,
+		@Query('limit') limit: string,
 		@Query('sortColumn') sortColumn: ContentPageLabelOverviewTableCols,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('where') where: string,
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return this.contentPageLabelService.fetchContentPageLabels(
-				offset,
-				limit,
+				parseInt(offset || '0'),
+				parseInt(limit || '20'),
 				sortColumn,
 				sortOrder,
 				JSON.parse(where),

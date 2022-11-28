@@ -12,6 +12,7 @@ import reactToString from 'react-to-string';
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
 	FilterableColumn,
@@ -52,7 +53,6 @@ import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import UserDeleteModal from '../components/UserDeleteModal';
 import {
 	GET_USER_BULK_ACTIONS,

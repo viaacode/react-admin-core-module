@@ -11,7 +11,6 @@ import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
-import { UserGroupsService } from './modules/user-group/user-groups.service';
 import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
@@ -220,7 +219,6 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
-			UserGroupsService,
 			PermissionsService,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars

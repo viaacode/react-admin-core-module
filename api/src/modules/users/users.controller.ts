@@ -35,16 +35,16 @@ export class UsersController {
 		Permission.VIEW_USERS_IN_SAME_COMPANY,
 	)
 	async getProfiles(
-		@Query('offset') offset: number,
-		@Query('limit') limit: number,
+		@Query('offset') offset: string,
+		@Query('limit') limit: string,
 		@Query('sortColumn') sortColumn: UserOverviewTableCol,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where = '{}',
 	): Promise<[CommonUser[], number]> {
 		return this.usersService.getProfiles(
-			offset,
-			limit,
+			parseInt(offset || '0'),
+			parseInt(limit || '50'),
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,

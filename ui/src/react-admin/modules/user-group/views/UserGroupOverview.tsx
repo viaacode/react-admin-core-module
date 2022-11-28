@@ -14,9 +14,9 @@ import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
+import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
 import { UserGroupTableColumns } from '../const/user-group.const';
-import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
-import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
@@ -36,7 +36,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			isError: isErrorUserGroups,
 			error: userGroupError,
 			refetch: refetchUserGroups,
-		} = useGetUserGroups();
+		} = useGetUserGroupsWithPermissions();
 		const {
 			data: permissions,
 			isError: isErrorPermissions,

@@ -40,8 +40,16 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	tHtml: (translationKey: string, variables?: Record<string, string>, apps?: AvoOrHetArchief[]) => ReactNode | string;
-	tText: (translationKey: string, variables?: Record<string, string>, apps?: AvoOrHetArchief[]) => string;
+	tHtml: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: AvoOrHetArchief[]
+	) => ReactNode | string;
+	tText: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: AvoOrHetArchief[]
+	) => string;
 }
 
 export interface UserGroupsService {
@@ -116,7 +124,6 @@ export interface AdminConfig {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
-		UserGroupsService: UserGroupsService;
 		PermissionsService: PermissionsService;
 		queryCache: {
 			clear: (key: string) => Promise<void>;

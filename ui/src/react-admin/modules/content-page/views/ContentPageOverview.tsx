@@ -19,6 +19,8 @@ import React, {
 } from 'react';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { PermissionService } from '~modules/shared/services/permission-service';
+import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
@@ -30,8 +32,6 @@ import {
 } from '../const/content-page.consts';
 import { isPublic } from '../helpers/get-published-state';
 import { useContentTypes } from '../hooks/useContentTypes';
-import { useUserGroupOptions } from '../hooks/useUserGroupOptions';
-import { useUserGroups } from '../hooks/useUserGroups';
 import { ContentPageService } from '../services/content-page.service';
 import {
 	ContentOverviewTableCols,
@@ -83,7 +83,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		CheckboxOption[],
 		boolean
 	];
-	const [userGroups] = useUserGroups(true);
+	const { data: userGroups } = useGetUserGroupsWithPermissions();
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
@@ -373,41 +373,44 @@ const ContentPageOverview: FunctionComponent = () => {
 			}
 
 			case 'user_group_ids': {
-				const userGroupIds = rowData[columnId];
-				if (!userGroupIds || !userGroupIds.length) {
+				const contentPageUserGroupIds = rowData[columnId];
+				if (!contentPageUserGroupIds || !contentPageUserGroupIds.length) {
 					return '-';
 				}
 				return (
 					<TagList
 						tags={compact(
-							userGroupIds.map((userGroupId: number): TagOption | null => {
-								const userGroup = userGroups.find(
-									(userGroup) => userGroup.id === userGroupId
-								);
-								if (!userGroup) {
-									return null;
-								}
-								if (userGroup.id === SpecialPermissionGroups.loggedInUsers) {
+							contentPageUserGroupIds.map(
+								(contentPageUserGroupId: number): TagOption | null => {
+									const userGroup = (userGroups || []).find(
+										(userGroup) =>
+											userGroup.id === String(contentPageUserGroupId)
+									);
+									if (!userGroup) {
+										return null;
+									}
+									if (userGroup.id === SpecialPermissionGroups.loggedInUsers) {
+										return {
+											label: tText(
+												'admin/content/views/content-overview___ingelogd'
+											),
+											id: userGroup.id as string,
+										};
+									}
+									if (userGroup.id === SpecialPermissionGroups.loggedOutUsers) {
+										return {
+											label: tText(
+												'admin/content/views/content-overview___niet-ingelogd'
+											),
+											id: userGroup.id as string,
+										};
+									}
 									return {
-										label: tText(
-											'admin/content/views/content-overview___ingelogd'
-										),
+										label: userGroup.label as string,
 										id: userGroup.id as string,
 									};
 								}
-								if (userGroup.id === SpecialPermissionGroups.loggedOutUsers) {
-									return {
-										label: tText(
-											'admin/content/views/content-overview___niet-ingelogd'
-										),
-										id: userGroup.id as string,
-									};
-								}
-								return {
-									label: userGroup.label as string,
-									id: userGroup.id as string,
-								};
-							})
+							)
 						)}
 						swatches={false}
 					/>

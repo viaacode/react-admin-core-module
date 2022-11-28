@@ -1,4 +1,3 @@
-import { Permission } from '~modules/user/user.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ReactNode } from 'react';
 import { DefaultComponentProps } from '~modules/shared';
@@ -15,18 +14,12 @@ export interface UserGroupOverviewRef {
 }
 
 export interface UserGroup {
-	id: number | string;
-	label: string;
-	description: string | null;
-	created_at: string;
-	updated_at: string;
-	permissions: Permission[];
-}
-
-export interface UserGroupWithPermissions {
 	id: string;
 	name: string;
 	label: string;
+}
+
+export interface UserGroupWithPermissions extends UserGroup {
 	permissions: PermissionData[];
 }
 

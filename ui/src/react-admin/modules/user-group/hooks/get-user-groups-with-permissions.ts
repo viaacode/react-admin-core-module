@@ -1,11 +1,11 @@
 import { HTTPError } from 'ky';
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
-import { AdminConfigManager } from '~core/config';
+import { UserGroupService } from '~modules/user-group/services/user-group.service';
 
-import { USER_GROUP_QUERY_KEYS } from '../../const/user-group.const';
-import { UserGroupWithPermissions } from '../../types/user-group.types';
+import { USER_GROUP_QUERY_KEYS } from '../const/user-group.const';
+import { UserGroupWithPermissions } from '../types/user-group.types';
 
-export const useGetUserGroups = <TData = UserGroupWithPermissions[]>(
+export const useGetUserGroupsWithPermissions = <TData = UserGroupWithPermissions[]>(
 	options: UseQueryOptions<
 		UserGroupWithPermissions[],
 		HTTPError,
@@ -17,10 +17,11 @@ export const useGetUserGroups = <TData = UserGroupWithPermissions[]>(
 ): UseQueryResult<TData, HTTPError> => {
 	return useQuery(
 		USER_GROUP_QUERY_KEYS.all,
-		() =>
-			AdminConfigManager.getConfig().services.UserGroupsService.getAllUserGroups() as Promise<
+		() => {
+			return UserGroupService.fetchUserGroupsWithPermissions() as Promise<
 				UserGroupWithPermissions[]
-			>,
+			>;
+		},
 		{
 			...options,
 			enabled: !!options.enabled,

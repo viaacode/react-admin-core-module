@@ -14,7 +14,6 @@ import {
 } from '@viaa/avo2-components';
 import { GET_CONTENT_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
-import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
@@ -26,6 +25,7 @@ import {
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;

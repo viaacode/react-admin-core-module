@@ -309,8 +309,8 @@ export class ContentPagesController {
 
 	@Get()
 	public async fetchContentPages(
-		@Query('offset') offset: number,
-		@Query('limit') limit: number,
+		@Query('offset') offset: string,
+		@Query('limit') limit: string,
 		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
@@ -325,8 +325,8 @@ export class ContentPagesController {
 		]
 	> {
 		return this.contentPagesService.fetchContentPages(
-			offset,
-			limit,
+			parseInt(offset || '0'),
+			parseInt(limit || '20'),
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,

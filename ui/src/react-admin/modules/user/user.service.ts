@@ -22,6 +22,7 @@ export class UserService {
 	private static getBaseUrl(): string {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
 	}
+
 	public static adaptProfile(
 		userProfile: ProfileAvo | ProfileHetArchief | undefined
 	): CommonUser | undefined {
