@@ -3,7 +3,7 @@ import {
 	Logger,
 	LoggerService,
 } from '@nestjs/common';
-import { Avo } from "@viaa/avo2-types";
+import { Avo } from '@viaa/avo2-types';
 import {
 	addDays,
 	getHours,
@@ -15,7 +15,7 @@ import {
 import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
 
-import { HetArchiefUser } from '../../users/types';
+import { HetArchiefUser } from '../../users/users.types';
 import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
 
@@ -104,7 +104,9 @@ export class SessionHelper {
 		session[ARCHIEF_USER_INFO_PATH] = user;
 	}
 
-	public static getUserInfo(session: Record<string, any>): HetArchiefUser | Avo.User.User | null {
+	public static getUserInfo(
+		session: Record<string, any>,
+	): HetArchiefUser | Avo.User.User | null {
 		if (!session) {
 			return null;
 		}

@@ -8,7 +8,7 @@ import {
 	GroupIdToName,
 	HetArchiefUser,
 	Permission,
-} from '../../users/types';
+} from '../../users/users.types';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 

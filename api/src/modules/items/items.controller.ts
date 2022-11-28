@@ -4,7 +4,7 @@ import { Avo } from '@viaa/avo2-types';
 import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
-import { Permission } from '../users/types';
+import { Permission } from '../users/users.types';
 import { ItemsService } from './items.service';
 
 @ApiTags('Items')

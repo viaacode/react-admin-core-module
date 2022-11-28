@@ -1,3 +1,4 @@
+import { DocumentNode } from 'graphql';
 import { AvoOrHetArchief } from '../../shared/types';
 
 import {
@@ -13,7 +14,7 @@ import {
 	GetUsersDocument as GetUsersDocumentAvo,
 	GetUsersQuery as GetUsersQueryAvo,
 	GetUsersQueryVariables as GetUsersQueryVariablesAvo,
-} from '~generated/graphql-db-types-avo';
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetIdpsDocument as GetIdpsDocumentHetArchief,
 	GetIdpsQuery as GetIdpsQueryHetArchief,
@@ -27,12 +28,14 @@ import {
 	GetUsersDocument as GetUsersDocumentHetArchief,
 	GetUsersQuery as GetUsersQueryHetArchief,
 	GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
-} from '~generated/graphql-db-types-hetarchief';
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type UserQueryTypes = {
 	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo;
 	GetProfileNamesQueryHetArchief: GetProfileNamesQueryHetArchief;
-	GetProfileNamesQuery: GetProfileNamesQueryAvo | GetProfileNamesQueryHetArchief;
+	GetProfileNamesQuery:
+		| GetProfileNamesQueryAvo
+		| GetProfileNamesQueryHetArchief;
 	GetUsersQueryAvo: GetUsersQueryAvo;
 	GetUsersQueryHetArchief: GetUsersQueryHetArchief;
 	GetUsersQuery: GetUsersQueryAvo | GetUsersQueryHetArchief;
@@ -49,10 +52,14 @@ export type UserQueryTypes = {
 		| GetProfileNamesQueryVariablesHetArchief;
 	GetUsersQueryVariablesAvo: GetUsersQueryVariablesAvo;
 	GetUsersQueryVariablesHetArchief: GetUsersQueryVariablesHetArchief;
-	GetUsersQueryVariables: GetUsersQueryVariablesAvo | GetUsersQueryVariablesHetArchief;
+	GetUsersQueryVariables:
+		| GetUsersQueryVariablesAvo
+		| GetUsersQueryVariablesHetArchief;
 	GetIdpsQueryVariablesAvo: GetIdpsQueryVariablesAvo;
 	GetIdpsQueryVariablesHetArchief: GetIdpsQueryVariablesHetArchief;
-	GetIdpsQueryVariables: GetIdpsQueryVariablesAvo | GetIdpsQueryVariablesHetArchief;
+	GetIdpsQueryVariables:
+		| GetIdpsQueryVariablesAvo
+		| GetIdpsQueryVariablesHetArchief;
 	GetProfileIdsQueryVariablesAvo: GetProfileIdsQueryVariablesAvo;
 	GetProfileIdsQueryVariablesHetArchief: GetProfileIdsQueryVariablesHetArchief;
 	GetProfileIdsQueryVariables:
@@ -61,10 +68,10 @@ export type UserQueryTypes = {
 };
 
 type UserQueries = {
-	GetProfileNamesDocument: string;
-	GetUsersDocument: string;
-	GetIdpsDocument: string;
-	GetProfileIdsDocument: string;
+	GetProfileNamesDocument: DocumentNode;
+	GetUsersDocument: DocumentNode;
+	GetIdpsDocument: DocumentNode;
+	GetProfileIdsDocument: DocumentNode;
 };
 
 export const USER_QUERIES: Record<AvoOrHetArchief, UserQueries> = {

@@ -11,6 +11,7 @@ import {
 	SiteVariablesModule,
 	StatusModule,
 } from './modules';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
 	imports: [
@@ -19,6 +20,7 @@ import {
 		AdminPermissionsModule,
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
+		UsersModule,
 		ContentPagesModule,
 		DataModule,
 		PlayerTicketModule,

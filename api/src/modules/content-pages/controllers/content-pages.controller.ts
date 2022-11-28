@@ -6,6 +6,7 @@ import {
 	ForbiddenException,
 	Get,
 	Headers,
+	MethodNotAllowedException,
 	Param,
 	Patch,
 	Post,
@@ -18,6 +19,8 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { Permission } from '../../users/users.types';
 import { ContentBlockConfig } from '../content-block.types';
 
 import { ContentOverviewTableCols, ContentPage } from '../content-pages.types';
@@ -27,7 +30,6 @@ import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto'
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Permission } from '../../users/types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
@@ -37,10 +39,13 @@ import { SpecialPermissionGroups } from '../../shared/types/types';
 @ApiTags('ContentPages')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
 export class ContentPagesController {
-	constructor(private contentPagesService: ContentPagesService) {
-	}
+	constructor(private contentPagesService: ContentPagesService) {}
 
 	@Post('overview')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
@@ -191,14 +196,21 @@ export class ContentPagesController {
 	}
 
 	@Get('public')
+	@RequireAnyPermissions(
+		Permission.EDIT_CONTENT_PAGE_LABELS,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async getPublicContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+	): Promise<
+		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
-		| null> {
+		| null
+	> {
 		if (title) {
 			return this.contentPagesService.getPublicContentItemsByTitle(
 				title,
@@ -209,12 +221,20 @@ export class ContentPagesController {
 		}
 	}
 
-	@Get('public-projects')
+	@Get('projects/public')
+	@RequireAnyPermissions(
+		Permission.EDIT_CONTENT_PAGE_LABELS,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_NAVIGATION_BARS,
+	)
 	public async getPublicProjectContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
-		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']> {
+	): Promise<
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
+	> {
 		if (title) {
 			return this.contentPagesService.getPublicProjectContentItemsByTitle(
 				title,
@@ -233,9 +253,10 @@ export class ContentPagesController {
 	}
 
 	@Put('labels')
+	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentLabelsLinks(
 		@Body()
-			insertContentLabelLink: {
+		insertContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -247,9 +268,10 @@ export class ContentPagesController {
 	}
 
 	@Delete('labels')
+	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentLabelsLinks(
 		@Body()
-			deleteContentLabelLink: {
+		deleteContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -261,15 +283,27 @@ export class ContentPagesController {
 	}
 
 	@Get(':id')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async getContentPageById(
 		@Param('id') id: number | string,
-	): Promise<| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
-		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]> {
+	): Promise<
+		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
+		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
+	> {
 		return this.contentPagesService.getContentPageById(id);
 	}
 
 	@Get('types')
-	public async getContentTypes(): Promise<{ value: Avo.ContentPage.Type; label: string }[] | null> {
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async getContentTypes(): Promise<
+		{ value: Avo.ContentPage.Type; label: string }[] | null
+	> {
 		return this.contentPagesService.getContentTypes();
 	}
 
@@ -281,13 +315,15 @@ export class ContentPagesController {
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string,
-	): Promise<[
-		(
-			| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
-			| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+	): Promise<
+		[
+			(
+				| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+				| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
 			),
-		number,
-	]> {
+			number,
+		]
+	> {
 		return this.contentPagesService.fetchContentPages(
 			offset,
 			limit,
@@ -299,22 +335,42 @@ export class ContentPagesController {
 	}
 
 	@Put()
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async insertContentPage(
 		@Body()
-			contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
 			contentBlockConfigs: ContentBlockConfig[];
 		},
-	): Promise<| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-		contentBlockConfigs: ContentBlockConfig[];
-	})
-		| null> {
+		@SessionUser() user,
+	): Promise<
+		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+				contentBlockConfigs: ContentBlockConfig[];
+		  })
+		| null
+	> {
+		if (
+			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			contentPage.user_profile_id !== user.id
+		) {
+			// User cannot edit other peoples pages
+			throw new ForbiddenException(
+				"You're not allowed to create content pages for other people",
+			);
+		}
 		return this.contentPagesService.insertContentPage(contentPage);
 	}
 
 	@Patch()
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async updateContentPage(
 		@Body()
-			body: {
+		body: {
 			contentPage: ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'] & {
 				contentBlockConfigs: ContentBlockConfig[];
 			};
@@ -322,8 +378,20 @@ export class ContentPagesController {
 				| { contentBlockConfigs: ContentBlockConfig[] }
 				| undefined;
 		},
-	): Promise<| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
-		| null> {
+		@SessionUser() user,
+	): Promise<
+		| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
+		| null
+	> {
+		if (
+			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			body.contentPage.user_profile_id !== user.id
+		) {
+			// User cannot edit other peoples pages
+			throw new ForbiddenException(
+				"You're not allowed to edit content pages that you do not own",
+			);
+		}
 		return this.contentPagesService.updateContentPage(
 			body.contentPage,
 			body.initialContentPage,
@@ -331,6 +399,7 @@ export class ContentPagesController {
 	}
 
 	@Delete(':id')
+	@RequireAnyPermissions(Permission.DELETE_ANY_CONTENT_PAGES)
 	public async deleteContentPage(
 		@Param('id') id: number | string,
 	): Promise<void> {
@@ -338,6 +407,7 @@ export class ContentPagesController {
 	}
 
 	@Get('access')
+	@RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
 	public async getUserGroupsFromContentPage(
 		@Query('path') path: string,
 	): Promise<(string | number)[]> {

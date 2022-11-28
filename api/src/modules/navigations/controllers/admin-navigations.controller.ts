@@ -5,7 +5,6 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -13,7 +12,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 
-import { Permission } from '../../users/types';
+import { Permission } from '../../users/users.types';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { DeleteResponse } from '../../shared/types/types';
 import { NavigationItem } from '../types';

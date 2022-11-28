@@ -1,4 +1,5 @@
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { UserQueryTypes } from './queries/users.queries';
 
 export enum Permission {
 	// BOTH
@@ -358,3 +359,8 @@ export interface DeleteContentCountsRaw {
 		};
 	};
 }
+
+export type ProfileAvo =
+	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
+export type ProfileHetArchief =
+	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];

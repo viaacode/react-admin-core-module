@@ -8,17 +8,13 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 
-
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Permission } from '../../users/types';
+import { Permission } from '../../users/users.types';
 import { SessionHelper } from '../auth/session-helper';
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
-	constructor(
-		private reflector: Reflector,
-
-	) {}
+	constructor(private reflector: Reflector) {}
 
 	canActivate(
 		context: ExecutionContext,

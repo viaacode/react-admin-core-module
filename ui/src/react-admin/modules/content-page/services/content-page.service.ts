@@ -45,7 +45,7 @@ export class ContentPageService {
 	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/public-projects`,
+				url: `${this.getBaseUrl()}/projects/public`,
 				query: {
 					limit,
 				},
@@ -74,7 +74,7 @@ export class ContentPageService {
 	): Promise<Partial<ContentPageInfo>[] | null> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/public-projects`,
+				url: `${this.getBaseUrl()}/projects/public`,
 				query: {
 					limit,
 					title,

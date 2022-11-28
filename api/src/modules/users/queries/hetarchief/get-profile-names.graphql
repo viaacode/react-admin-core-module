@@ -4,4 +4,9 @@ query getProfileNames($profileIds: [uuid!]!) {
 		full_name
 		mail
 	}
+	users_profile_aggregate(where: { id: { _in: $profileIds } }) {
+		aggregate {
+			count
+		}
+	}
 }

@@ -4,7 +4,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UpdateTranslationsDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
 
-import { Permission } from '../../users/types';
+import { Permission } from '../../users/users.types';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { UpdateResponse } from '../../shared/types/types';
 import { Translations } from '../types';
