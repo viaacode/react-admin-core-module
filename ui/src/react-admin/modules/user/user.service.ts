@@ -1,37 +1,14 @@
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { compact, flatten, get } from 'lodash-es';
+import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
-import {
-	BulkAddSubjectsToProfilesDocument,
-	BulkAddSubjectsToProfilesMutation,
-	BulkAddSubjectsToProfilesMutationVariables,
-	BulkDeleteSubjectsFromProfilesDocument,
-	BulkDeleteSubjectsFromProfilesMutation,
-	BulkDeleteSubjectsFromProfilesMutationVariables,
-	GetContentCountsForUsersDocument,
-	GetContentCountsForUsersQuery,
-	GetContentCountsForUsersQueryVariables,
-	GetDistinctBusinessCategoriesDocument,
-	GetDistinctBusinessCategoriesQuery,
-	GetDistinctBusinessCategoriesQueryVariables,
-	GetProfileNamesQuery as GetProfileNamesQueryAvo,
-	GetUsersQuery as GetUsersQueryAvo,
-} from '~generated/graphql-db-types-avo';
-import {
-	GetProfileNamesQuery as GetProfileNamesQueryHetArchief,
-	GetUsersQuery as GetUsersQueryHetArchief,
-} from '~generated/graphql-db-types-hetarchief';
-import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
-import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
+import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { USER_QUERIES, UserQueryTypes } from '~modules/user/queries/users.queries';
 
 import { CustomError } from '../shared/helpers/custom-error';
-import { dataService } from '../shared/services/data-service';
 
-import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT, ITEMS_PER_PAGE } from './user.consts';
+import { ITEMS_PER_PAGE } from './user.consts';
 import {
 	CommonUser,
 	DeleteContentCounts,
@@ -42,10 +19,9 @@ import {
 } from './user.types';
 
 export class UserService {
-	private static getQueries() {
-		return USER_QUERIES[AdminConfigManager.getConfig().database.databaseApplicationType];
+	private static getBaseUrl(): string {
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
 	}
-
 	public static adaptProfile(
 		userProfile: ProfileAvo | ProfileHetArchief | undefined
 	): CommonUser | undefined {
@@ -111,8 +87,8 @@ export class UserService {
 				firstName: user.first_name || undefined,
 				lastName: user.last_name || undefined,
 				is_blocked: user.is_blocked || undefined,
-				blocked_at: get(user, 'blocked_at.date'),
-				unblocked_at: get(user, 'unblocked_at.date'),
+				blocked_at: user?.blocked_at?.date,
+				unblocked_at: user?.unblocked_at?.date,
 				last_access_at: user.last_access_at,
 				temp_access: user?.user?.temp_access || undefined,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
@@ -128,149 +104,62 @@ export class UserService {
 		where: any = {},
 		itemsPerPage: number = ITEMS_PER_PAGE
 	): Promise<[CommonUser[], number]> {
-		let variables: any;
 		try {
-			// Hetarchief doesn't have a is_deleted column yet
-			const whereWithoutDeleted =
-				AdminConfigManager.getConfig().database.databaseApplicationType ===
-				AvoOrHetArchief.hetArchief
-					? where
-					: {
-							...where,
-							is_deleted: { _eq: false },
-					  };
-
-			variables = {
-				offset: itemsPerPage * page,
-				limit: itemsPerPage,
-				where: whereWithoutDeleted,
-				orderBy: getOrderObject(
-					sortColumn,
-					sortOrder,
-					tableColumnDataType,
-					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
-				),
-			};
-
-			const response = await dataService.query<GetUsersQueryAvo & GetUsersQueryHetArchief>({
-				variables,
-				query: this.getQueries().GetUsersDocument,
-			});
-
-			// Convert user format to profile format since we initially wrote the ui to deal with profiles
-			const userProfileObjects =
-				response?.users_profile || response?.users_summary_view || [];
-			const profiles: CommonUser[] = compact(userProfileObjects.map(this.adaptProfile));
-
-			const profileCount =
-				response?.users_summary_view_aggregate?.aggregate?.count ||
-				response?.users_profile_aggregate?.aggregate?.count ||
-				0;
-
-			if (!profiles) {
-				throw new CustomError('Response does not contain any profiles', null, {
-					response,
-				});
-			}
-
-			return [profiles as any[], profileCount];
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl(),
+					query: {
+						offset: page * ITEMS_PER_PAGE,
+						limit: itemsPerPage,
+						sortColumn,
+						sortOrder,
+						tableColumnDataType,
+						where: JSON.stringify(where),
+					},
+				})
+			);
 		} catch (err) {
-			throw new CustomError('Failed to get profiles from the database', err, {
-				variables,
-				query: 'GET_USERS',
+			throw new CustomError('Failed to get profiles from the server', err, {
+				page,
+				sortColumn,
+				sortOrder,
+				tableColumnDataType,
+				where,
+				itemsPerPage,
 			});
 		}
 	}
 
 	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<CommonUser>[]> {
 		try {
-			const response = await dataService.query<
-				UserQueryTypes['GetProfileNamesQuery'],
-				UserQueryTypes['GetProfileNamesQueryVariables']
-			>({
-				query: this.getQueries().GetProfileNamesDocument,
-				variables: {
-					profileIds,
-				},
-			});
-
-			/* istanbul ignore next */
-			if (
-				AdminConfigManager.getConfig().database.databaseApplicationType ===
-				AvoOrHetArchief.hetArchief
-			) {
-				return (
-					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])?.users_profile ||
-					[]
-				).map(
-					(
-						profileEntry: GetProfileNamesQueryHetArchief['users_profile'][0]
-					): Partial<CommonUser> => ({
-						profileId: profileEntry.id,
-						fullName: profileEntry.full_name || undefined,
-						email: profileEntry.mail || undefined,
-					})
-				);
-			} else {
-				return (
-					(response as UserQueryTypes['GetProfileNamesQueryAvo'])?.users_summary_view ||
-					[]
-				).map(
-					(
-						profileEntry: GetProfileNamesQueryAvo['users_summary_view'][0]
-					): Partial<CommonUser> => ({
-						profileId: profileEntry.profile_id,
-						fullName: profileEntry.full_name || undefined,
-						email: profileEntry.mail || undefined,
-					})
-				);
-			}
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl() + 'names',
+					query: {
+						profileIds,
+					},
+				})
+			);
 		} catch (err) {
-			throw new CustomError('Failed to get profile names from the database', err, {
+			throw new CustomError('Failed to get profile names from the server', err, {
 				profileIds,
-				query: 'GET_PROFILE_NAMES',
 			});
 		}
 	}
 
-	static async getProfileIds(
-		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
-	): Promise<string[]> {
-		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null;
+	static async getProfileIds(where?: any): Promise<string[]> {
 		try {
-			variables = {
-				where: where || {},
-			};
-			const response = await dataService.query<
-				UserQueryTypes['GetProfileIdsQuery'],
-				UserQueryTypes['GetProfileIdsQueryVariables']
-			>({
-				variables,
-				query: this.getQueries().GetProfileIdsDocument,
-			});
-
-			if (
-				AdminConfigManager.getConfig().database.databaseApplicationType ===
-				AvoOrHetArchief.avo
-			) {
-				// avo
-				return compact(
-					(
-						(response as UserQueryTypes['GetProfileIdsQueryAvo']).users_summary_view ||
-						[]
-					).map((user) => user?.profile_id)
-				);
-			}
-			// archief
-			return compact(
-				(
-					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
-				).map((user) => user?.id)
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl() + 'ids',
+					query: {
+						where: JSON.stringify(where),
+					},
+				})
 			);
 		} catch (err) {
-			throw new CustomError('Failed to get profile ids from the database', err, {
-				variables,
-				query: 'GET_PROFILE_IDS',
+			throw new CustomError('Failed to get profile ids from the server', err, {
+				where,
 			});
 		}
 	}
@@ -289,27 +178,17 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-block`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
 				sendEmail,
 			};
 
-			const response = await fetchWithLogout(url, {
+			await fetchWithLogout(url, {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
 				body: JSON.stringify(body),
 			});
-
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError('Status code was unexpected', null, {
-					response,
-				});
-			}
 		} catch (err) {
 			throw new CustomError(
 				'Failed to update is_blocked field for users in the database',
@@ -332,50 +211,20 @@ export class UserService {
 		}
 
 		try {
-			const response = await dataService.query<
-				GetDistinctBusinessCategoriesQuery,
-				GetDistinctBusinessCategoriesQueryVariables
-			>({
-				query: GetDistinctBusinessCategoriesDocument,
-			});
-
-			return compact(
-				(response.users_profiles || []).map((profile) => profile.business_category)
-			);
+			return fetchWithLogoutJson(this.getBaseUrl() + '/business-categories');
 		} catch (err) {
-			throw new CustomError('Failed to get distinct business categories from profiles', err, {
-				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
-			});
+			throw new CustomError(
+				'Failed to get distinct business categories from the server',
+				err
+			);
 		}
 	}
 
 	static async fetchIdps() {
 		try {
-			const response = await dataService.query<
-				UserQueryTypes['GetIdpsQuery'],
-				UserQueryTypes['GetIdpsQueryVariables']
-			>({
-				query: this.getQueries().GetIdpsDocument,
-			});
-
-			/* istanbul ignore next */
-			if (
-				AdminConfigManager.getConfig().database.databaseApplicationType ===
-				AvoOrHetArchief.hetArchief
-			) {
-				return (
-					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
-						.users_identity_provider || []
-				).map((idp) => idp.name);
-			}
-
-			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
-				(idp) => idp.value
-			);
+			return fetchWithLogoutJson(this.getBaseUrl() + '/idps');
 		} catch (err) {
-			throw new CustomError('Failed to get idps from the database', err, {
-				query: 'GET_IDPS',
-			});
+			throw new CustomError('Failed to get idps from the database', err);
 		}
 	}
 
@@ -397,20 +246,10 @@ export class UserService {
 				sendEmail,
 				...(isAvo ? { transferToProfileId } : {}),
 			};
-			const response = await fetchWithLogout(url, {
+			await fetchWithLogout(url, {
 				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
 				body: JSON.stringify(body),
 			});
-
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError('Status code was unexpected', null, {
-					response,
-				});
-			}
 		} catch (err) {
 			throw new CustomError('Failed to bulk delete users from the database', err, {
 				url,
@@ -438,30 +277,17 @@ export class UserService {
 		}
 
 		try {
-			const response = await dataService.query<
-				GetContentCountsForUsersQuery,
-				GetContentCountsForUsersQueryVariables
-			>({
-				query: GetContentCountsForUsersDocument,
-				variables: {
-					profileIds,
-				},
-			});
-
-			return {
-				publicCollections: response.publicCollections?.aggregate?.count || 0,
-				privateCollections: response.privateCollections?.aggregate?.count || 0,
-				assignments: response.assignments?.aggregate?.count || 0,
-				bookmarks:
-					(response.collectionBookmarks?.aggregate?.count || 0) +
-					(response.itemBookmarks?.aggregate?.count || 0),
-				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
-				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
-			};
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl() + '/counts',
+					query: {
+						profileIds,
+					},
+				})
+			);
 		} catch (err) {
-			throw new CustomError('Failed to get content counts for users from the database', err, {
+			throw new CustomError('Failed to get content counts for users from the server', err, {
 				profileIds,
-				query: 'GET_CONTENT_COUNTS_FOR_USERS',
 			});
 		}
 	}
@@ -479,32 +305,18 @@ export class UserService {
 		}
 
 		try {
-			// First remove the subjects, so we can add them without duplicate conflicts
-			await UserService.bulkRemoveSubjectsFromProfiles(subjects, profileIds);
-
-			// Add the subjects
-			await dataService.query<
-				BulkAddSubjectsToProfilesMutation,
-				BulkAddSubjectsToProfilesMutationVariables
-			>({
-				query: BulkAddSubjectsToProfilesDocument,
-				variables: {
-					subjects: flatten(
-						subjects.map((subject) =>
-							profileIds.map((profileId) => ({
-								key: subject,
-								profile_id: profileId,
-							}))
-						)
-					),
-				},
+			await fetchWithLogoutJson(this.getBaseUrl() + '/subjects', {
+				method: 'PATCH',
+				body: JSON.stringify({
+					subjects,
+					profileIds,
+				}),
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
 		} catch (err) {
 			throw new CustomError('Failed to bulk add subjects to profiles', err, {
 				subjects,
 				profileIds,
-				query: 'BULK_ADD_SUBJECTS_TO_PROFILES',
 			});
 		}
 	}
@@ -522,15 +334,12 @@ export class UserService {
 		}
 
 		try {
-			await dataService.query<
-				BulkDeleteSubjectsFromProfilesMutation,
-				BulkDeleteSubjectsFromProfilesMutationVariables
-			>({
-				query: BulkDeleteSubjectsFromProfilesDocument,
-				variables: {
+			await fetchWithLogoutJson(this.getBaseUrl() + '/subjects', {
+				method: 'DELETE',
+				body: JSON.stringify({
 					subjects,
 					profileIds,
-				},
+				}),
 			});
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearUserCache');
 		} catch (err) {

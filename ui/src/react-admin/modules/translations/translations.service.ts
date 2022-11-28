@@ -7,7 +7,7 @@ export class TranslationsService {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/translations`;
 	}
 
-	static async fetchTranslations(): Promise<{ name: string; value: Record<string, string> }[]> {
+	static async fetchTranslations(): Promise<Record<string, Record<string, string>>> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl());
 		} catch (err) {

@@ -1,5 +1,4 @@
 import { ButtonType, SelectOption } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
@@ -10,7 +9,7 @@ import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { CommonUser, Permission, UserBulkAction, UserOverviewTableCol } from './user.types';
+import { CommonUser, Permission, UserBulkAction } from './user.types';
 
 export const ITEMS_PER_PAGE = 50;
 

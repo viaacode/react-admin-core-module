@@ -4,7 +4,7 @@ import { Avo } from '@viaa/avo2-types';
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { NULL_FILTER } from '../../shared/helpers/filters';
-import { ContentOverviewTableCols, ContentWidth } from '../types/content-pages.types';
+import { ContentWidth } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import {

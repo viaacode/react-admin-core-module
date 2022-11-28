@@ -2,7 +2,6 @@ import I18n from 'i18next';
 import XHR from 'i18next-http-backend';
 import { lowerCase, upperFirst } from 'lodash-es';
 import { initReactI18next } from 'react-i18next';
-import { AdminConfigManager } from '~core/config';
 
 export async function initI18n(proxyUrl: string): Promise<void> {
 	return new Promise<void>((resolve) => {
@@ -10,7 +9,7 @@ export async function initI18n(proxyUrl: string): Promise<void> {
 			.use(initReactI18next) // passes i18n down to react-i18next
 			.init({
 				backend: {
-					loadPath: `${proxyUrl}/shared/translations/${AdminConfigManager.getConfig().database.databaseApplicationType}/nl.json`,
+					loadPath: `${proxyUrl}/translations/nl.json`,
 					parse: (data: any) => {
 						setTimeout(() => {
 							resolve();

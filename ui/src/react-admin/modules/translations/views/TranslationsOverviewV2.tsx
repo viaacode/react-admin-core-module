@@ -83,9 +83,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 
 	const getTranslations = useCallback(async () => {
 		try {
-			const translationRows = convertFromDatabaseToList(
-				await TranslationsService.fetchTranslations()
-			);
+			const allTranslations = await TranslationsService.fetchTranslations();
+			const translationRows = convertFromDatabaseToList(allTranslations);
 			setTranslations(translationRows);
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
@@ -114,9 +113,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			}
 
 			// Fetch database translations and convert to list of objects
-			const freshTranslations = convertFromDatabaseToList(
-				await TranslationsService.fetchTranslations()
-			);
+			const allTranslations = await TranslationsService.fetchTranslations();
+			const freshTranslations = convertFromDatabaseToList(allTranslations);
 
 			// Find the current translations
 			const freshTranslation = freshTranslations.find(
