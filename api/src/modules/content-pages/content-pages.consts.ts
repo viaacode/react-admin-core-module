@@ -38,17 +38,41 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 		order: Avo.Search.OrderDirection,
 	) => any;
 }> = {
-	user_profile_id: (order: Avo.Search.OrderDirection) => {
+	contentType: (order: Avo.Search.OrderDirection) => {
+		return { content_type: order };
+	},
+	createdAt: (order: Avo.Search.OrderDirection) => {
+		return { created_at: order };
+	},
+	updatedAt: (order: Avo.Search.OrderDirection) => {
+		return { updated_at: order };
+	},
+	isPublic: (order: Avo.Search.OrderDirection) => {
+		return { is_public: order };
+	},
+	publishedAt: (order: Avo.Search.OrderDirection) => {
+		return { published_at: order };
+	},
+	publishAt: (order: Avo.Search.OrderDirection) => {
+		return { publish_at: order };
+	},
+	depublishAt: (order: Avo.Search.OrderDirection) => {
+		return { depublish_at: order };
+	},
+	userGroupIds: (order: Avo.Search.OrderDirection) => {
+		return { user_group_ids: order };
+	},
+	userProfileId: (order: Avo.Search.OrderDirection) => {
 		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
 			return {
 				owner_profile: { first_name: order },
 			};
 		}
 		return {
-			profile: { first_name: order },
+			profile: { usersByuserId: { first_name: order } },
 		};
 	},
-	author_user_group: (order: Avo.Search.OrderDirection) => {
+	authorUserGroup: (order: Avo.Search.OrderDirection) => {
 		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
 			return {
 				owner_profile: { group: { name: order } },

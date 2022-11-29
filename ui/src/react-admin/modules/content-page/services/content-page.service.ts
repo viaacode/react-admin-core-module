@@ -1,8 +1,10 @@
+import { IPagination } from '@studiohyperdrive/pagination';
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
+import { isArray, isFunction, isPlainObject, kebabCase } from 'lodash-es';
 import moment from 'moment';
 import { stringifyUrl } from 'query-string';
+import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
 
 import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
@@ -10,12 +12,11 @@ import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import { ITEMS_PER_PAGE } from '../const/content-page.consts';
-import { convertToContentPageInfo, convertToDatabaseContentPage } from '../helpers/parsers';
 import { ContentBlockConfig } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
-	ContentPageDb,
 	ContentPageInfo,
+	ContentPageLabel,
 } from '../types/content-pages.types';
 
 import { AdminConfigManager } from '~core/config';
@@ -30,8 +31,17 @@ export class ContentPageService {
 		}${CONTENT_PAGE_SERVICE_BASE_URL}`;
 	}
 
+	public static async getContentPages(
+		options: ContentPageOverviewParams
+	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
+		return fetchWithLogoutJson(this.getBaseUrl(), {
+			method: 'POST',
+			body: JSON.stringify(options),
+		});
+	}
+
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const contentPagesDb: ContentPageDb[] = await fetchWithLogoutJson(
+		return fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/public`,
 				query: {
@@ -39,7 +49,6 @@ export class ContentPageService {
 				},
 			})
 		);
-		return contentPagesDb.map(convertToContentPageInfo);
 	}
 
 	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
@@ -93,9 +102,7 @@ export class ContentPageService {
 		return fetchWithLogoutJson(`${this.getBaseUrl()}/types`);
 	}
 
-	public static async fetchLabelsByContentType(
-		contentType: string
-	): Promise<Avo.ContentPage.Label[]> {
+	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
 		return (
 			(await fetchWithLogoutJson(
 				stringifyUrl({
@@ -156,46 +163,26 @@ export class ContentPageService {
 		);
 	}
 
-	private static cleanupBeforeInsert(
-		dbContentPage: Partial<ContentPageDb>
-	): Partial<ContentPageDb> {
-		return omit(dbContentPage, [
-			'contentBlockssBycontentId',
-			'content_blocks',
-			'profile',
-			'__typename',
-			'content_content_labels',
-			'id',
-		]);
-	}
-
 	public static async insertContentPage(
 		contentPage: Partial<ContentPageInfo>
 	): Promise<Partial<ContentPageInfo> | null> {
-		const dbContentPage = this.cleanupBeforeInsert(convertToDatabaseContentPage(contentPage));
-		const insertedDbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
+		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'PUT',
-			body: JSON.stringify(dbContentPage),
+			body: JSON.stringify(contentPage),
 		});
-		return convertToContentPageInfo(insertedDbContentPage);
 	}
 
 	public static async updateContentPage(
 		contentPage: Partial<ContentPageInfo>,
 		initialContentPage: Partial<ContentPageInfo> | undefined
 	): Promise<Partial<ContentPageInfo> | null> {
-		const dbContentPage = this.cleanupBeforeInsert(convertToDatabaseContentPage(contentPage));
-		const dbInitialContentPage = initialContentPage
-			? this.cleanupBeforeInsert(convertToDatabaseContentPage(initialContentPage))
-			: undefined;
-		const insertedDbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
+		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'PATCH',
 			body: JSON.stringify({
-				contentPage: dbContentPage,
-				initialContentPage: dbInitialContentPage,
+				contentPage,
+				initialContentPage,
 			}),
 		});
-		return convertToContentPageInfo(insertedDbContentPage);
 	}
 
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo>): string {
@@ -295,14 +282,14 @@ export class ContentPageService {
 			const contentToInsert = { ...contentPageInfo };
 
 			// update attributes specific to duplicate
-			contentToInsert.is_public = false;
-			contentToInsert.published_at = null;
-			contentToInsert.depublish_at = null;
-			contentToInsert.publish_at = null;
+			contentToInsert.isPublic = false;
+			contentToInsert.publishedAt = null;
+			contentToInsert.depublishAt = null;
+			contentToInsert.publishAt = null;
 			contentToInsert.path = null;
-			contentToInsert.created_at = moment().toISOString();
-			contentToInsert.updated_at = contentToInsert.created_at;
-			contentToInsert.user_profile_id = profileId;
+			contentToInsert.createdAt = moment().toISOString();
+			contentToInsert.updatedAt = contentToInsert.createdAt;
+			contentToInsert.userProfileId = profileId;
 
 			try {
 				contentToInsert.title = await this.getCopyTitleForContentPage(
@@ -348,19 +335,19 @@ export class ContentPageService {
 		contentPageInfo: ContentPageInfo,
 		sanitizePreset: SanitizePreset = 'link'
 	): string | null {
-		const description = contentPageInfo.description_state
-			? contentPageInfo.description_state.toHTML()
-			: contentPageInfo.description_html || null;
+		const description = (contentPageInfo as any).description_state
+			? (contentPageInfo as any).description_state.toHTML()
+			: (contentPageInfo as any).description_html || null;
 		return description ? sanitizeHtml(description, sanitizePreset) : null;
 	}
 
 	/**
-	 * Get a content page with all of its content without the user having o be logged in
+	 * Get a content page with all of its content without the user having to be logged in
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 */
 	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
 		try {
-			const responseContent = await fetchWithLogoutJson(
+			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl(),
 					query: {
@@ -368,20 +355,6 @@ export class ContentPageService {
 					},
 				})
 			);
-			if (!responseContent) {
-				throw new CustomError(
-					'Failed to get content page by path from /content-pages',
-					null,
-					{
-						path,
-						responseContent,
-					}
-				);
-			}
-			if (responseContent?.error) {
-				return responseContent?.error;
-			}
-			return convertToContentPageInfo(responseContent);
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
 		}

@@ -28,6 +28,10 @@ export class DataService {
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',
+			https: {
+				// TODO remove once error in certificates has been fixed: https://meemoo.atlassian.net/browse/OPS-1835
+				rejectUnauthorized: false,
+			},
 		};
 		this.gotInstance = got.extend(dbConfig);
 	}

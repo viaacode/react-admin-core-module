@@ -1,16 +1,10 @@
-import { RichEditorState } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
+import { PickerItem } from '~modules/shared/types/content-picker';
 
 import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
 import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
 
 import { ContentBlockConfig } from './content-block.types';
-import { CommonUser, ProfileAvo, ProfileHetArchief } from '~modules/user/user.types';
-import { ContentBlockSchema } from '@viaa/avo2-types/types/content-blocks';
-import {
-	ContentPageLabelLinkSchema,
-	ContentWidthSchema,
-} from '@viaa/avo2-types/types/content-page';
 
 // Pages
 export enum PageType {
@@ -33,17 +27,17 @@ export enum ContentWidth {
 // Content Overview
 export type ContentOverviewTableCols =
 	| 'title'
-	| 'content_type'
-	| 'user_profile_id'
-	| 'author_user_group'
-	| 'created_at'
-	| 'updated_at'
-	| 'is_public'
-	| 'published_at'
-	| 'publish_at'
-	| 'depublish_at'
+	| 'contentType'
+	| 'userProfileId'
+	| 'authorUserGroup'
+	| 'createdAt'
+	| 'updatedAt'
+	| 'isPublic'
+	| 'publishedAt'
+	| 'publishAt'
+	| 'depublishAt'
 	| 'labels'
-	| 'user_group_ids'
+	| 'userGroupIds'
 	| 'actions';
 
 export interface ContentTableState extends FilterableTableState {
@@ -56,66 +50,51 @@ export interface ContentTableState extends FilterableTableState {
 	labels: number[];
 }
 
-// Content Detail
-export interface ContentPageDb {
+export interface ContentPageLabel {
 	id: number;
-	thumbnail_path: string | null;
-	title: string;
-	description: string | null;
-	seo_description: string | null;
-	meta_description: string | null;
-	path: string | null;
-	is_public: boolean;
-	published_at: string;
-	publish_at: string | null;
-	depublish_at: string | null;
+	label: string;
+	content_type: Avo.ContentPage.Type;
+	link_to: PickerItem | null;
 	created_at: string;
-	updated_at: string | null;
-	is_protected: boolean;
-	content_type: string;
-	content_width: ContentWidthSchema;
-	profile: ProfileAvo | ProfileHetArchief;
-	user_profile_id: string | null;
-	user_group_ids: string[] | null;
-	content_blocks: ContentBlockSchema[];
-	content_content_labels: ContentPageLabelLinkSchema[];
+	updated_at: string;
 }
-
-/**
- * Convenience type with certain fields converted to be easier to manipulate
- * eg:
- * - contentBlockConfigs: ContentBlockConfig[]; instead of content_blocks: ContentBlockSchema[];
- * - labels: Avo.ContentPage.Label[] instead of content_content_labels: ContentLabelLinkSchema[];
- */
 
 export interface ContentPageInfo {
-	id: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-	thumbnail_path: string | null;
+	id: number | string;
+	thumbnailPath: string | null;
 	title: string;
-	description_html: string | null;
-	description_state: RichEditorState | undefined;
-	seo_description: string | null;
-	meta_description: string | null; // Used for klaar newsletter description
+	description: string | null;
+	seoDescription: string | null;
+	metaDescription: string | null;
 	path: string | null;
-	is_public: boolean;
-	published_at: string | null;
-	publish_at: string | null;
-	depublish_at: string | null;
-	created_at: string;
-	updated_at: string | null;
-	is_protected: boolean;
-	content_type: Avo.ContentPage.Type;
-	content_width: Avo.ContentPage.Width;
-	profile: CommonUser;
-	user_profile_id: string | null;
-	user_group_ids: string[] | null;
-	contentBlockConfigs: ContentBlockConfig[];
-	labels: Partial<Avo.ContentPage.Label>[];
+	isPublic: boolean;
+	publishedAt: string | null;
+	publishAt: string | null;
+	depublishAt: string | null;
+	createdAt: string;
+	updatedAt: string | null;
+	isProtected: boolean;
+	contentType: Avo.ContentPage.Type;
+	contentWidth: ContentWidth;
+	owner: ContentPageUser;
+	userProfileId: string | null;
+	userGroupIds: string[] | null;
+	content_blocks: ContentBlockConfig[];
+	labels: ContentPageLabel[];
 }
 
-export type ContentPageDetailParams = { id: string };
+export interface ContentPageUser {
+	id: string;
+	fullName: string;
+	firstName: string;
+	lastName: string;
+	groupId: string | number;
+	groupName: string;
+}
 
-export type ContentEditFormErrors = Partial<{ [key in keyof ContentPageInfo]: string }>;
+export type ContentEditFormErrors = Partial<{ [key in keyof ContentPageInfo]: string }> & {
+	description_html?: string;
+};
 
 export enum ContentEditActionType {
 	SET_CONTENT_PAGE = '@@admin-content-page/SET_CONTENT_PAGE',
@@ -131,9 +110,3 @@ export enum ContentEditActionType {
 }
 
 export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
-
-export interface ContentPageOverviewCellProps {
-	row: {
-		original: ContentPageInfo;
-	};
-}

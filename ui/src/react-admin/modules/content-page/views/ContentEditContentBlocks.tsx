@@ -64,7 +64,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	// Methods
 	const handleAddContentBlock = (configType: ContentBlockType) => {
 		const newConfig = CONTENT_BLOCK_CONFIG_MAP[configType](
-			(contentPageInfo.contentBlockConfigs || []).length
+			(contentPageInfo.content_blocks || []).length
 		);
 
 		// Update content block configs
@@ -134,7 +134,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	// Render
 	const renderContentBlockForms = () => {
-		return (contentPageInfo.contentBlockConfigs || []).map((contentBlockConfig, index) => {
+		return (contentPageInfo.content_blocks || []).map((contentBlockConfig, index) => {
 			return (
 				<div
 					className={`content-block-sidebar-${contentBlockConfig.position}`}
@@ -144,7 +144,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						config={contentBlockConfig}
 						blockIndex={index}
 						isAccordionOpen={contentBlockConfig.position === activeBlockPosition}
-						length={(contentPageInfo.contentBlockConfigs || []).length}
+						length={(contentPageInfo.content_blocks || []).length}
 						hasSubmitted={hasSubmitted}
 						toggleIsAccordionOpen={() => {
 							focusBlock(contentBlockConfig.position, 'sidebar');

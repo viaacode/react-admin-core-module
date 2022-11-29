@@ -39,7 +39,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	const blockState = get(contentBlockConfig, 'block.state');
 	const componentState = get(contentBlockConfig, 'components.state');
 	const containerSize =
-		contentPageInfo.content_width?.toUpperCase() ||
+		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
 	const PreviewComponent = COMPONENT_PREVIEW_MAP[contentBlockConfig.type];
@@ -100,7 +100,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 		// Set profile to current user for unsaved pages
 		blockStateProps.contentPageInfo = {
 			...contentPageInfo,
-			profile: contentPageInfo.profile || AdminConfigManager.getConfig().user,
+			profile: contentPageInfo.owner || AdminConfigManager.getConfig().user,
 		};
 	}
 

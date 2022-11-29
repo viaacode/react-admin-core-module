@@ -13,6 +13,7 @@ import {
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
+import { ContentBlockConfig } from './content-block.types';
 
 type ContentPickerTypeAvo =
 	| 'COLLECTION'
@@ -42,15 +43,6 @@ export interface PickerItem {
 	target?: LinkTarget;
 }
 
-export interface ContentBlock {
-	id: number;
-	variables: { [key: string]: any } | any[] | null;
-	position: number;
-	created_at: string;
-	updated_at: string;
-	content_block_type: string;
-}
-
 export type ContentWidth = 'REGULAR' | 'LARGE' | 'MEDIUM';
 
 export interface ContentPageLabel {
@@ -71,7 +63,7 @@ export interface ContentPage {
 	metaDescription: string | null;
 	path: string | null;
 	isPublic: boolean;
-	publishedAt: string;
+	publishedAt: string | null;
 	publishAt: string | null;
 	depublishAt: string | null;
 	createdAt: string;
@@ -82,7 +74,7 @@ export interface ContentPage {
 	owner: ContentPageUser;
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
-	content_blocks: ContentBlock[];
+	content_blocks: ContentBlockConfig[];
 	labels: ContentPageLabel[];
 }
 
@@ -109,6 +101,7 @@ export interface ContentPageUser {
 	firstName: string;
 	lastName: string;
 	groupId: string | number;
+	groupName: string;
 }
 
 export type ContentPageType =
@@ -181,15 +174,14 @@ export enum MediaItemType {
 // Content Overview
 export type ContentOverviewTableCols =
 	| 'title'
-	| 'content_type'
-	| 'user_profile_id'
-	| 'author_user_group'
-	| 'created_at'
-	| 'updated_at'
-	| 'is_public'
-	| 'published_at'
-	| 'publish_at'
-	| 'depublish_at'
+	| 'contentType'
+	| 'userProfileId'
+	| 'authorUserGroup'
+	| 'createdAt'
+	| 'updatedAt'
+	| 'isPublic'
+	| 'publishedAt'
+	| 'publishAt'
+	| 'depublishAt'
 	| 'labels'
-	| 'user_group_ids'
-	| 'actions';
+	| 'userGroupIds';

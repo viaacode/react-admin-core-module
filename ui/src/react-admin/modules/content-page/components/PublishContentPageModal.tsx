@@ -45,9 +45,9 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 	const [selectedOption, setSelectedOption] = useState<PublishOption>(
 		getPublishedState(contentPage)
 	);
-	const [publishedAt, setPublishedAt] = useState<string | null>(contentPage.published_at);
-	const [publishAt, setPublishAt] = useState<string | null>(contentPage.publish_at);
-	const [depublishAt, setDepublishAt] = useState<string | null>(contentPage.depublish_at);
+	const [publishedAt, setPublishedAt] = useState<string | null>(contentPage.publishedAt);
+	const [publishAt, setPublishAt] = useState<string | null>(contentPage.publishAt);
+	const [depublishAt, setDepublishAt] = useState<string | null>(contentPage.depublishAt);
 
 	const onSave = async () => {
 		try {
@@ -83,8 +83,8 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 
 	const resetModal = () => {
 		setSelectedOption(getPublishedState(contentPage));
-		setPublishAt(contentPage.publish_at);
-		setDepublishAt(contentPage.depublish_at);
+		setPublishAt(contentPage.publishAt);
+		setDepublishAt(contentPage.depublishAt);
 	};
 
 	const closeModal = (newContent?: Partial<ContentPageInfo>) => {

@@ -18,7 +18,6 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { getFullName } from '~modules/shared/helpers/get-profile-info';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
@@ -42,13 +41,11 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	// Methods
 	const getUserGroups = (contentPageInfo: ContentPageInfo): TagOption[] => {
 		const tagInfos: TagInfo[] = compact(
-			(contentPageInfo.user_group_ids || []).map(
-				(userGroupId: string): TagInfo | undefined => {
-					return allUserGroupOptions.find(
-						(userGroup: TagInfo) => userGroup.value === userGroupId
-					);
-				}
-			)
+			(contentPageInfo.userGroupIds || []).map((userGroupId: string): TagInfo | undefined => {
+				return allUserGroupOptions.find(
+					(userGroup: TagInfo) => userGroup.value === userGroupId
+				);
+			})
 		);
 
 		const tagOptions = tagInfos.map(
@@ -73,7 +70,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	const getContentPageWidthLabel = (contentPageInfo: ContentPageInfo): string => {
 		return get(
 			GET_CONTENT_WIDTH_OPTIONS().find(
-				(option) => option.value === contentPageInfo.content_width
+				(option) => option.value === contentPageInfo.contentWidth
 			),
 			'label',
 			'-'
@@ -81,25 +78,25 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	};
 
 	const definePublishedAt = (contentPageInfo: ContentPageInfo) => {
-		const { published_at, publish_at, depublish_at } = contentPageInfo;
+		const { publishedAt, publishAt, depublishAt } = contentPageInfo;
 
-		if (published_at) {
-			return formatDate(published_at);
+		if (publishedAt) {
+			return formatDate(publishedAt);
 		}
 
 		if (
-			publish_at &&
-			depublish_at &&
-			moment().isBetween(moment(publish_at), moment(depublish_at))
+			publishAt &&
+			depublishAt &&
+			moment().isBetween(moment(publishAt), moment(depublishAt))
 		) {
-			return formatDate(publish_at);
+			return formatDate(publishAt);
 		}
 
-		if (!depublish_at && publish_at && moment().isAfter(moment(publish_at))) {
-			return formatDate(publish_at);
+		if (!depublishAt && publishAt && moment().isAfter(moment(publishAt))) {
+			return formatDate(publishAt);
 		}
 
-		if (!publish_at && depublish_at && moment().isBefore(moment(depublish_at))) {
+		if (!publishAt && depublishAt && moment().isBefore(moment(depublishAt))) {
 			return tHtml('admin/content/views/content-detail-meta-data___ja');
 		}
 
@@ -124,7 +121,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							<div style={{ width: '400px' }}>
 								<Thumbnail
 									category="item"
-									src={contentPageInfo.thumbnail_path || undefined}
+									src={contentPageInfo.thumbnailPath || undefined}
 								/>
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
@@ -158,7 +155,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						{renderDetailRow(
 							get(
 								contentTypes.find(
-									(type) => type.value === contentPageInfo.content_type
+									(type) => type.value === contentPageInfo.contentType
 								),
 								'label'
 							) || '-',
@@ -169,13 +166,11 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							tText('admin/content/views/content-detail___breedte')
 						)}
 						{renderDetailRow(
-							contentPageInfo?.profile
-								? getFullName(contentPageInfo.profile, false, false)
-								: '-',
+							contentPageInfo.owner?.fullName || '-',
 							tText('admin/content/views/content-detail___auteur')
 						)}
 						{renderDetailRow(
-							contentPageInfo?.profile?.userGroup?.label || '-',
+							contentPageInfo?.owner?.groupName || '-',
 							tText('admin/content/views/content-detail___auteur-rol')
 						)}
 						{renderDateDetailRows(contentPageInfo, [
@@ -194,7 +189,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						)}
 						{renderDetailRow(
 							<p>
-								{formatDate(contentPageInfo.publish_at) ||
+								{formatDate(contentPageInfo.publishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
 							tText(
@@ -203,7 +198,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						)}
 						{renderDetailRow(
 							<p>
-								{formatDate(contentPageInfo.depublish_at) ||
+								{formatDate(contentPageInfo.depublishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
 							tText(

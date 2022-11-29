@@ -12,6 +12,10 @@ import {
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
+export const CONTENT_PAGE_QUERY_KEYS = {
+	OVERVIEW: 'OVERVIEW',
+};
+
 export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
@@ -27,7 +31,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'content_type',
+			id: 'contentType',
 			label: i18n.tText('admin/content/content___content-type'),
 			sortable: true,
 			visibleByDefault: true,
@@ -38,7 +42,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'user_profile_id',
+			id: 'userProfileId',
 			label: i18n.tText('admin/content/content___auteur'),
 			sortable: true,
 			visibleByDefault: true,
@@ -46,7 +50,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'author_user_group',
+			id: 'authorUserGroup',
 			label: i18n.tText('admin/users/user___gebruikersgroep'),
 			sortable: true,
 			visibleByDefault: false,
@@ -63,7 +67,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'created_at',
+			id: 'createdAt',
 			label: i18n.tText('admin/content/content___aangemaakt'),
 			sortable: true,
 			visibleByDefault: true,
@@ -71,7 +75,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'updated_at',
+			id: 'updatedAt',
 			label: i18n.tText('admin/content/content___laatst-bewerkt'),
 			sortable: true,
 			visibleByDefault: true,
@@ -79,7 +83,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'is_public',
+			id: 'isPublic',
 			label: i18n.tText('admin/content/content___publiek'),
 			sortable: true,
 			visibleByDefault: false,
@@ -87,7 +91,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'boolean',
 		},
 		{
-			id: 'published_at',
+			id: 'publishedAt',
 			label: i18n.tText('admin/content/views/content-overview___publicatie'),
 			sortable: true,
 			visibleByDefault: true,
@@ -95,7 +99,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'publish_at',
+			id: 'publishAt',
 			label: i18n.tText('admin/content/views/content-overview___publiceer-op'),
 			sortable: true,
 			visibleByDefault: true,
@@ -103,7 +107,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'depublish_at',
+			id: 'depublishAt',
 			label: i18n.tText('admin/content/views/content-overview___depubliceer-op'),
 			sortable: true,
 			visibleByDefault: true,
@@ -121,7 +125,7 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 			} as CheckboxDropdownModalProps,
 		},
 		{
-			id: 'user_group_ids',
+			id: 'userGroupIds',
 			label: i18n.tText('admin/content/content___zichtbaar-voor'),
 			sortable: false,
 			visibleByDefault: false,

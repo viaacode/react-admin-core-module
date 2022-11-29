@@ -104,7 +104,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			const contentPageObj = await ContentPageService.getContentPageById(id);
 			if (
 				!hasPerm(Permission.EDIT_ANY_CONTENT_PAGES) &&
-				contentPageObj.user_profile_id !== getProfileId(user)
+				contentPageObj.owner.id !== getProfileId(user)
 			) {
 				setLoadingInfo({
 					state: 'error',
@@ -149,7 +149,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 						delete newConfig.id;
 						// Ensure block is added at the bottom of the page
 						newConfig.position = (
-							contentPageState.currentContentPageInfo.contentBlockConfigs || []
+							contentPageState.currentContentPageInfo.content_blocks || []
 						).length;
 						changeContentPageState({
 							type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
@@ -176,7 +176,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				});
 			}
 		},
-		[changeContentPageState, contentPageState.currentContentPageInfo.contentBlockConfigs, tText]
+		[changeContentPageState, contentPageState.currentContentPageInfo.content_blocks, tText]
 	);
 
 	useEffect(() => {
@@ -230,9 +230,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			// Remove rich text editor states, since they are also saved as html,
 			// and we don't want those states to end up in the database
 			const blockConfigs: ContentBlockConfig[] = contentPageState.currentContentPageInfo
-				.contentBlockConfigs
+				.content_blocks
 				? ContentPageService.convertRichTextEditorStatesToHtml(
-						contentPageState.currentContentPageInfo.contentBlockConfigs
+						contentPageState.currentContentPageInfo.content_blocks
 				  )
 				: [];
 
@@ -315,7 +315,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				const contentBody = {
 					...contentPageState.currentContentPageInfo,
 					user_profile_id: getProfileId(user),
-					contentBlockConfigs: blockConfigs,
+					content_blocks: blockConfigs,
 					path: ContentPageService.getPathOrDefault(
 						contentPageState.currentContentPageInfo
 					),
@@ -327,7 +327,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
 						id: id.includes('-') ? id : parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
-						contentBlockConfigs: blockConfigs,
+						content_blocks: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo
 						),
@@ -415,8 +415,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			errors.title = tText('admin/content/views/content-edit___titel-is-verplicht');
 		}
 
-		if (!contentPageState.currentContentPageInfo.content_type) {
-			errors.content_type = tText(
+		if (!contentPageState.currentContentPageInfo.contentType) {
+			errors.contentType = tText(
 				'admin/content/views/content-edit___content-type-is-verplicht'
 			);
 		}
@@ -448,12 +448,12 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 		}
 
 		if (
-			contentPageState.currentContentPageInfo.publish_at &&
-			contentPageState.currentContentPageInfo.depublish_at &&
-			new Date(contentPageState.currentContentPageInfo.depublish_at) <
-				new Date(contentPageState.currentContentPageInfo.publish_at)
+			contentPageState.currentContentPageInfo.publishAt &&
+			contentPageState.currentContentPageInfo.depublishAt &&
+			new Date(contentPageState.currentContentPageInfo.depublishAt) <
+				new Date(contentPageState.currentContentPageInfo.publishAt)
 		) {
-			errors.depublish_at = tText(
+			errors.depublishAt = tText(
 				'admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum'
 			);
 		}
@@ -554,8 +554,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	};
 
 	const renderEditContentPage = () => {
-		const contentPageOwner = contentPageState.initialContentPageInfo.user_profile_id;
-		const isOwner = contentPageOwner ? get(user, 'profile.id') === contentPageOwner : true;
+		const contentPageOwnerId = contentPageState.initialContentPageInfo.owner.id;
+		const isOwner = contentPageOwnerId ? user?.profileId === contentPageOwnerId : true;
 		const isAllowedToSave =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 
@@ -594,7 +594,9 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 								});
 							}
 						}}
-						body={tHtml('modules/content-page/views/content-page-edit___het-verwijderen-van-een-blok-kan-niet-ongedaan-gemaakt-worden')}
+						body={tHtml(
+							'modules/content-page/views/content-page-edit___het-verwijderen-van-een-blok-kan-niet-ongedaan-gemaakt-worden'
+						)}
 						isOpen={isDeleteModalOpen}
 						onClose={() => setIsDeleteModalOpen(false)}
 					/>

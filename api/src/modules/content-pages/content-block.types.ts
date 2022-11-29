@@ -118,6 +118,7 @@ export enum ContentBlockType {
 	LogoGrid = 'LOGO_GRID',
 	UspGrid = 'USP_GRID',
 	Eventbrite = 'EVENTBRITE',
+	VideoTitleTextButton = 'VIDEO_TITLE_TEXT_BUTTON',
 }
 
 export enum ContentBlockEditor {
@@ -256,7 +257,7 @@ export interface KlaarBlockComponentState {
 
 export interface IntroBlockComponentState {
 	title: string;
-	headingType: HeadingTypeOption
+	headingType: HeadingTypeOption;
 	content: string;
 	align: AlignOption;
 }
@@ -382,6 +383,8 @@ export interface ContentBlockConfig {
 	type: ContentBlockType;
 	anchor?: string;
 	position: number;
+	created_at: string;
+	updated_at: string;
 }
 
 export interface ContentBlockMeta {
@@ -393,5 +396,7 @@ export const DEFAULT_BUTTON_PROPS = {
 	type: 'primary',
 	label: '',
 	icon: undefined,
-	buttonAction: undefined
+	buttonAction: undefined,
 };
+
+export type InsertOrUpdateContentPage =

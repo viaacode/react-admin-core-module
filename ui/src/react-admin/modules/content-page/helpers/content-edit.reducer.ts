@@ -1,3 +1,4 @@
+import { RichEditorState } from '@meemoo/react-components';
 import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import moment from 'moment';
@@ -27,8 +28,8 @@ interface SetContentPage {
 interface SetContentPageProp {
 	type: ContentEditActionType.SET_CONTENT_PAGE_PROP;
 	payload: {
-		propName: keyof ContentPageInfo;
-		propValue: ValueOf<ContentPageInfo>;
+		propName: keyof ContentPageInfo | 'description_state' | 'description_html';
+		propValue: ValueOf<ContentPageInfo> | RichEditorState | string;
 	};
 }
 
@@ -107,26 +108,27 @@ export interface ContentPageEditState {
 
 export const CONTENT_PAGE_INITIAL_STATE = (): ContentPageInfo => {
 	return {
-		thumbnail_path: null,
+		thumbnailPath: null,
 		title: '',
 		description_html: '',
 		description_state: undefined,
-		seo_description: '',
-		is_protected: false,
+		seoDescription: '',
+		isProtected: false,
 		path: '',
-		content_type: 'PAGINA',
-		content_width:
-			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth || ContentWidth.EXTRA_LARGE,
-		publish_at: '',
-		depublish_at: '',
-		is_public: false,
-		created_at: moment().toISOString(),
-		updated_at: moment().toISOString(),
-		published_at: null,
-		user_profile_id: null,
-		user_group_ids: [],
+		contentType: 'PAGINA',
+		contentWidth:
+			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth ||
+			ContentWidth.EXTRA_LARGE,
+		publishAt: '',
+		depublishAt: '',
+		isPublic: false,
+		createdAt: moment().toISOString(),
+		updatedAt: moment().toISOString(),
+		publishedAt: null,
+		userProfileId: null,
+		userGroupIds: [],
 		labels: [],
-		contentBlockConfigs: [],
+		contentBlocks: [],
 	} as unknown as ContentPageInfo;
 };
 
@@ -159,17 +161,14 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				return;
 			}
 			case ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo.contentBlockConfigs.push(
+				draft.currentContentPageInfo.content_blocks.push(
 					action.payload as ContentBlockConfig
 				);
 				return;
 			}
 			case ContentEditActionType.REMOVE_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo.contentBlockConfigs.splice(
-					action.payload as number,
-					1
-				);
-				repositionConfigs(draft.currentContentPageInfo.contentBlockConfigs);
+				draft.currentContentPageInfo.content_blocks.splice(action.payload as number, 1);
+				repositionConfigs(draft.currentContentPageInfo.content_blocks);
 				return;
 			}
 			case ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG: {
@@ -178,26 +177,20 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 					reorderContentBlockConfig.payload.configIndex +
 					reorderContentBlockConfig.payload.indexUpdate;
 				// Get updated item and remove it from copy
-				const reorderedConfig = draft.currentContentPageInfo.contentBlockConfigs.splice(
+				const reorderedConfig = draft.currentContentPageInfo.content_blocks.splice(
 					reorderContentBlockConfig.payload.configIndex,
 					1
 				)[0];
 				// Apply update object to config
-				draft.currentContentPageInfo.contentBlockConfigs.splice(
-					newIndex,
-					0,
-					reorderedConfig
-				);
+				draft.currentContentPageInfo.content_blocks.splice(newIndex, 0, reorderedConfig);
 				// Reposition
-				repositionConfigs(draft.currentContentPageInfo.contentBlockConfigs);
+				repositionConfigs(draft.currentContentPageInfo.content_blocks);
 				return;
 			}
 			case ContentEditActionType.ADD_COMPONENTS_STATE: {
 				const addComponentsState = action as AddComponentsState;
 				config =
-					draft.currentContentPageInfo.contentBlockConfigs[
-						addComponentsState.payload.index
-					];
+					draft.currentContentPageInfo.content_blocks[addComponentsState.payload.index];
 				componentsState = config.components.state;
 				(componentsState as RepeatedContentBlockComponentState[]).push(
 					...(addComponentsState.payload
@@ -208,7 +201,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.REMOVE_COMPONENTS_STATE: {
 				const removeComponentsState = action as RemoveComponentsState;
 				config =
-					draft.currentContentPageInfo.contentBlockConfigs[
+					draft.currentContentPageInfo.content_blocks[
 						removeComponentsState.payload.index
 					];
 				componentsState = config.components.state;
@@ -221,9 +214,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_COMPONENTS_STATE: {
 				const setComponentsState = action as SetComponentsState;
 				config =
-					draft.currentContentPageInfo.contentBlockConfigs[
-						setComponentsState.payload.index
-					];
+					draft.currentContentPageInfo.content_blocks[setComponentsState.payload.index];
 				components = config.components as ContentBlockComponentsConfig;
 
 				if (!isNil(action.payload.stateIndex)) {
@@ -246,7 +237,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_BLOCK_STATE: {
 				const setBlockState = action as SetBlockState;
 				const { block } =
-					draft.currentContentPageInfo.contentBlockConfigs[setBlockState.payload.index];
+					draft.currentContentPageInfo.content_blocks[setBlockState.payload.index];
 				block.state = { ...block.state, ...setBlockState.payload.formGroupState };
 				return;
 			}
@@ -255,12 +246,12 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				if (
 					JSON.stringify(action.payload.errors) !==
 					JSON.stringify(
-						draft.currentContentPageInfo.contentBlockConfigs[
+						draft.currentContentPageInfo.content_blocks[
 							setContentBlockError.payload.configIndex
 						].errors
 					)
 				) {
-					draft.currentContentPageInfo.contentBlockConfigs[
+					draft.currentContentPageInfo.content_blocks[
 						setContentBlockError.payload.configIndex
 					].errors = setContentBlockError.payload.errors;
 				}

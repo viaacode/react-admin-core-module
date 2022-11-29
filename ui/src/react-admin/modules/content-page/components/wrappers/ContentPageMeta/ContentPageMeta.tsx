@@ -1,12 +1,10 @@
 import { Button } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactNode } from 'react';
 
 import { getPublishedDate } from '../../../helpers/get-published-state';
 
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { ContentPageInfo, ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
-import { getProfileName } from '~modules/shared/helpers/get-profile-info';
 import { navigateToContentType } from '~modules/shared/helpers/link';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
@@ -19,7 +17,7 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 	const { tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
-	const renderLabel = (labelObj: Partial<Avo.ContentPage.Label>) => {
+	const renderLabel = (labelObj: ContentPageLabel) => {
 		return (labelObj as any).link_to ? (
 			<Button
 				type="inline-link"
@@ -43,24 +41,22 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 				{`${tHtml(
 					'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in'
 				)} `}
-				{contentPageInfo.labels.map(
-					(labelObj: Partial<Avo.ContentPage.Label>, index: number) => {
-						if (index === contentPageInfo.labels.length - 1) {
-							return renderLabel(labelObj);
-						}
-						if (index === contentPageInfo.labels.length - 2) {
-							return (
-								<>
-									{renderLabel(labelObj)}{' '}
-									{tHtml(
-										'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
-									)}{' '}
-								</>
-							);
-						}
-						return <>{renderLabel(labelObj)}, </>;
+				{contentPageInfo.labels.map((labelObj: ContentPageLabel, index: number) => {
+					if (index === contentPageInfo.labels.length - 1) {
+						return renderLabel(labelObj);
 					}
-				)}{' '}
+					if (index === contentPageInfo.labels.length - 2) {
+						return (
+							<>
+								{renderLabel(labelObj)}{' '}
+								{tHtml(
+									'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
+								)}{' '}
+							</>
+						);
+					}
+					return <>{renderLabel(labelObj)}, </>;
+				})}{' '}
 			</>
 		);
 	};
@@ -76,7 +72,7 @@ const ContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({ contentPageI
 			{`${tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'
 			)}`}{' '}
-			{getProfileName(contentPageInfo.profile)}
+			{contentPageInfo.owner?.fullName || '-'}
 		</span>
 	);
 };
