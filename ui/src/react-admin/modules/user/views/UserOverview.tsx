@@ -700,8 +700,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			return null;
 		}
 
-		console.info({ app, profiles, columns });
-
 		return (
 			<>
 				<FilterTable
