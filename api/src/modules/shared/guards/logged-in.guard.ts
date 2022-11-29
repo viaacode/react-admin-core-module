@@ -15,10 +15,6 @@ export class LoggedInGuard implements CanActivate {
 	canActivate(
 		context: ExecutionContext,
 	): boolean | Promise<boolean> | Observable<boolean> {
-		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
-			return true; // There is no authentication in the admin core test app
-		}
-
 		const request = context.switchToHttp().getRequest();
 		const user = SessionHelper.getUserInfo(request.session);
 		if (!(user as HetArchiefUser)?.id && !(user as Avo.User.User)?.uid) {

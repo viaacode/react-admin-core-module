@@ -6,15 +6,15 @@ import { UserGroup, UserGroupUpdates, UserGroupWithPermissions } from '../types/
 
 export class UserGroupService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/user-groups`;
 	}
 
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: this.getBaseUrl() + '/user-groups',
+				url: this.getBaseUrl(),
 				query: {
-					withPermissions: true,
+					withPermissions: 'true',
 				},
 			})
 		);
@@ -23,9 +23,9 @@ export class UserGroupService {
 	public static async fetchUserGroups(): Promise<UserGroup[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: this.getBaseUrl() + '/user-groups',
+				url: this.getBaseUrl(),
 				query: {
-					withPermissions: false,
+					withPermissions: 'false',
 				},
 			})
 		);
@@ -34,7 +34,7 @@ export class UserGroupService {
 	public static async updateUserGroups(
 		userGroupUpdates: UserGroupUpdates
 	): Promise<{ deleted: number; updated: number }> {
-		return fetchWithLogoutJson(this.getBaseUrl() + '/user-groups', {
+		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'PATCH',
 			body: JSON.stringify(userGroupUpdates),
 		});

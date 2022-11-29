@@ -220,7 +220,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				size: debouncedItemsPerPage,
 			};
 			const reply = await fetchWithLogout(
-				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages/overview`,
+				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages`,
 				{
 					method: 'POST',
 					headers: {

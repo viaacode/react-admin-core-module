@@ -1,4 +1,5 @@
 export * from './content-pages';
+export * from './content-page-labels';
 export * from './navigations';
 export * from './organisations';
 export * from './permissions';

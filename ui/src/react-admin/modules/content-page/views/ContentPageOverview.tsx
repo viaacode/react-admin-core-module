@@ -8,7 +8,7 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
-import { compact, get } from 'lodash-es';
+import { cloneDeep, compact, get, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	ReactNode,
@@ -183,6 +183,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					])
 				);
 				let userGroupPath: string;
+				const filtersFormatted: any = cloneDeep(filters);
 				if (
 					AdminConfigManager.getConfig().database.databaseApplicationType ===
 					AvoOrHetArchief.hetArchief
@@ -190,10 +191,16 @@ const ContentPageOverview: FunctionComponent = () => {
 					userGroupPath = 'owner_profile.group_id';
 				} else {
 					userGroupPath = 'profile.profile_user_group.group.id';
+					// Avo group ids are numbers
+					set(
+						filtersFormatted,
+						userGroupPath,
+						parseInt(get(filtersFormatted, userGroupPath))
+					);
 				}
 				andFilters.push(
 					...getMultiOptionFilters(
-						filters,
+						filtersFormatted,
 						['author_user_group', 'content_type', 'user_profile_id', 'labels'],
 						[
 							userGroupPath,

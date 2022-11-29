@@ -7,9 +7,11 @@ import {
 } from '@nestjs/common';
 
 import type { IPagination } from '@studiohyperdrive/pagination';
+import { Pagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { SearchResultItem } from '@viaa/avo2-types/types/search';
 import * as promiseUtils from 'blend-promise-utils';
+import { setHours, setMinutes } from 'date-fns';
 import { Request } from 'express';
 import {
 	compact,
@@ -22,11 +24,35 @@ import {
 	set,
 	without,
 } from 'lodash';
+import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
+import { DataService } from '../../data';
+import { AdminOrganisationsService, Organisation } from '../../organisations';
+import { PlayerTicketService } from '../../player-ticket';
+
+import {
+	App_Content_Blocks_Insert_Input,
+	GetCollectionTileByIdDocument,
+	GetCollectionTileByIdQuery,
+	GetCollectionTileByIdQueryVariables,
+	GetItemByExternalIdDocument,
+	GetItemByExternalIdQuery,
+	GetItemByExternalIdQueryVariables,
+	GetItemTileByIdDocument,
+	GetItemTileByIdQuery,
+	GetItemTileByIdQueryVariables,
+	Order_By,
+} from '../../shared/generated/graphql-db-types-avo';
 import { App_Content_Page_Insert_Input } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { AvoOrHetArchief } from '../../shared/types';
+import { SpecialPermissionGroups } from '../../shared/types/types';
 import { ContentBlockConfig } from '../content-block.types';
+import {
+	DEFAULT_AUDIO_STILL,
+	MEDIA_PLAYER_BLOCKS,
+	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
+} from '../content-pages.consts';
 
 import {
 	ContentBlock,
@@ -47,35 +73,8 @@ import {
 	MediaItemType,
 	ResolvedItemOrCollection,
 } from '../content-pages.types';
-
-import {
-	App_Content_Blocks_Insert_Input,
-	GetCollectionTileByIdDocument,
-	GetCollectionTileByIdQuery,
-	GetCollectionTileByIdQueryVariables,
-	GetItemByExternalIdDocument,
-	GetItemByExternalIdQuery,
-	GetItemByExternalIdQueryVariables,
-	GetItemTileByIdDocument,
-	GetItemTileByIdQuery,
-	GetItemTileByIdQueryVariables,
-	Order_By,
-} from '../../shared/generated/graphql-db-types-avo';
-import {
-	DEFAULT_AUDIO_STILL,
-	MEDIA_PLAYER_BLOCKS,
-	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
-} from '../content-pages.consts';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { MediaItemsDto } from '../dto/resolve-media-grid-blocks.dto';
-import { Organisation } from '../../organisations';
-import { AdminOrganisationsService } from '../../organisations';
-import { PlayerTicketService } from '../../player-ticket';
-import { DataService } from '../../data';
-import { SpecialPermissionGroups } from '../../shared/types/types';
-import { Pagination } from '@studiohyperdrive/pagination';
-import { setHours, setMinutes } from 'date-fns';
-import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
 import {
 	CONTENT_PAGE_QUERIES,
 	ContentPageQueryTypes,
@@ -274,8 +273,8 @@ export class ContentPagesService {
 			| ContentPageQueryTypes['GetContentPagesQueryHetArchief'];
 
 		const count =
-			responseAvo.app_content_aggregate.aggregate.count ||
-			responseHetArchief.app_content_page_aggregate.aggregate.count ||
+			responseAvo.app_content_aggregate?.aggregate?.count ||
+			responseHetArchief.app_content_page_aggregate?.aggregate?.count ||
 			0;
 		const contentPageLabels =
 			responseAvo.app_content_labels ||
@@ -942,7 +941,7 @@ export class ContentPagesService {
 	}
 
 	public async getContentPageById(
-		id: number | string,
+		id: string,
 	): Promise<
 		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
 		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
@@ -951,7 +950,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['GetContentByIdQuery'],
 			ContentPageQueryTypes['GetContentByIdQueryVariables']
 		>(CONTENT_PAGE_QUERIES[this.appType].GetContentByIdDocument, {
-			id,
+			id: this.appType === AvoOrHetArchief.avo ? parseInt(id) : id,
 		});
 
 		const dbContentPage = ((
@@ -1371,7 +1370,7 @@ export class ContentPagesService {
 		}
 	}
 
-	public async deleteContentPage(id: number | string): Promise<void> {
+	public async deleteContentPage(id: string): Promise<void> {
 		try {
 			// query path
 			const contentPage = await this.getContentPageById(id);

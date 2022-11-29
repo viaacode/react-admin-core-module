@@ -6,7 +6,6 @@ import {
 	ForbiddenException,
 	Get,
 	Headers,
-	MethodNotAllowedException,
 	Param,
 	Patch,
 	Post,
@@ -39,9 +38,10 @@ import { SpecialPermissionGroups } from '../../shared/types/types';
 @ApiTags('ContentPages')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
 export class ContentPagesController {
-	constructor(private contentPagesService: ContentPagesService) {}
+	constructor(private contentPagesService: ContentPagesService) {
+	}
 
-	@Post('overview')
+	@Post('')
 	@RequireAnyPermissions(
 		Permission.EDIT_ANY_CONTENT_PAGES,
 		Permission.EDIT_OWN_CONTENT_PAGES,
@@ -58,6 +58,31 @@ export class ContentPagesController {
 					? SpecialPermissionGroups.loggedInUsers
 					: SpecialPermissionGroups.loggedOutUsers,
 			]),
+		);
+	}
+
+	@Get('overview')
+	public async fetchContentPages(
+		@Query('offset') offset: string,
+		@Query('limit') limit: string,
+		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
+		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('tableColumnDataType') tableColumnDataType: string,
+		@Query('where') where: string,
+	): Promise<[
+		(
+			| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+			| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+			),
+		number,
+	]> {
+		return this.contentPagesService.fetchContentPages(
+			parseInt(offset || '0'),
+			parseInt(limit || '20'),
+			sortColumn,
+			sortOrder,
+			tableColumnDataType,
+			JSON.parse(where),
 		);
 	}
 
@@ -152,7 +177,7 @@ export class ContentPagesController {
 		};
 	}
 
-	@Post('')
+	@Post('media')
 	@ApiOperation({
 		summary:
 			'Resolves the objects (items, collections, bundles, search queries) that are references inside the media grid blocks to their actual objects',
@@ -169,7 +194,7 @@ export class ContentPagesController {
 		@SessionUser() user: SessionUserEntity,
 		@Req() request,
 	): Promise<any[]> {
-		if (user.has(Permission.SEARCH)) {
+		if (!user.has(Permission.SEARCH)) {
 			throw new ForbiddenException(
 				'You do not have the required permission for this route',
 			);
@@ -204,13 +229,11 @@ export class ContentPagesController {
 	public async getPublicContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<
-		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+	): Promise<| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
-		| null
-	> {
+		| null> {
 		if (title) {
 			return this.contentPagesService.getPublicContentItemsByTitle(
 				title,
@@ -231,10 +254,8 @@ export class ContentPagesController {
 	public async getPublicProjectContentItems(
 		@Query('limit') limit: number,
 		@Query('title') title: string | undefined,
-	): Promise<
-		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
-		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
-	> {
+	): Promise<| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']> {
 		if (title) {
 			return this.contentPagesService.getPublicProjectContentItemsByTitle(
 				title,
@@ -256,7 +277,7 @@ export class ContentPagesController {
 	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentLabelsLinks(
 		@Body()
-		insertContentLabelLink: {
+			insertContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -271,7 +292,7 @@ export class ContentPagesController {
 	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentLabelsLinks(
 		@Body()
-		deleteContentLabelLink: {
+			deleteContentLabelLink: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
@@ -282,56 +303,13 @@ export class ContentPagesController {
 		);
 	}
 
-	@Get(':id')
-	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
-	)
-	public async getContentPageById(
-		@Param('id') id: number | string,
-	): Promise<
-		| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
-		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]
-	> {
-		return this.contentPagesService.getContentPageById(id);
-	}
-
 	@Get('types')
 	@RequireAnyPermissions(
 		Permission.EDIT_ANY_CONTENT_PAGES,
 		Permission.EDIT_OWN_CONTENT_PAGES,
 	)
-	public async getContentTypes(): Promise<
-		{ value: Avo.ContentPage.Type; label: string }[] | null
-	> {
+	public async getContentTypes(): Promise<{ value: Avo.ContentPage.Type; label: string }[] | null> {
 		return this.contentPagesService.getContentTypes();
-	}
-
-	@Get()
-	public async fetchContentPages(
-		@Query('offset') offset: string,
-		@Query('limit') limit: string,
-		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
-		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
-		@Query('tableColumnDataType') tableColumnDataType: string,
-		@Query('where') where: string,
-	): Promise<
-		[
-			(
-				| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
-				| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
-			),
-			number,
-		]
-	> {
-		return this.contentPagesService.fetchContentPages(
-			parseInt(offset || '0'),
-			parseInt(limit || '20'),
-			sortColumn,
-			sortOrder,
-			tableColumnDataType,
-			JSON.parse(where),
-		);
 	}
 
 	@Put()
@@ -341,16 +319,14 @@ export class ContentPagesController {
 	)
 	public async insertContentPage(
 		@Body()
-		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+			contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
 			contentBlockConfigs: ContentBlockConfig[];
 		},
 		@SessionUser() user,
-	): Promise<
-		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-				contentBlockConfigs: ContentBlockConfig[];
-		  })
-		| null
-	> {
+	): Promise<| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
+		contentBlockConfigs: ContentBlockConfig[];
+	})
+		| null> {
 		if (
 			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
 			contentPage.user_profile_id !== user.id
@@ -370,7 +346,7 @@ export class ContentPagesController {
 	)
 	public async updateContentPage(
 		@Body()
-		body: {
+			body: {
 			contentPage: ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'] & {
 				contentBlockConfigs: ContentBlockConfig[];
 			};
@@ -379,10 +355,8 @@ export class ContentPagesController {
 				| undefined;
 		},
 		@SessionUser() user,
-	): Promise<
-		| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
-		| null
-	> {
+	): Promise<| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage']
+		| null> {
 		if (
 			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
 			body.contentPage.user_profile_id !== user.id
@@ -400,9 +374,7 @@ export class ContentPagesController {
 
 	@Delete(':id')
 	@RequireAnyPermissions(Permission.DELETE_ANY_CONTENT_PAGES)
-	public async deleteContentPage(
-		@Param('id') id: number | string,
-	): Promise<void> {
+	public async deleteContentPage(@Param('id') id: string): Promise<void> {
 		await this.contentPagesService.deleteContentPage(id);
 	}
 
@@ -412,5 +384,17 @@ export class ContentPagesController {
 		@Query('path') path: string,
 	): Promise<(string | number)[]> {
 		return this.contentPagesService.getUserGroupsFromContentPage(path);
+	}
+
+	@Get(':id')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async getContentPageById(
+		@Param('id') id: string,
+	): Promise<| ContentPageQueryTypes['GetContentByIdQueryAvo']['app_content'][0]
+		| ContentPageQueryTypes['GetContentByIdQueryHetArchief']['app_content_page'][0]> {
+		return this.contentPagesService.getContentPageById(id);
 	}
 }

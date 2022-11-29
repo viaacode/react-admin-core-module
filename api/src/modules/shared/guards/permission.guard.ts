@@ -19,10 +19,6 @@ export class PermissionGuard implements CanActivate {
 	canActivate(
 		context: ExecutionContext,
 	): boolean | Promise<boolean> | Observable<boolean> {
-		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
-			return true; // There is no authentication in the admin core test app
-		}
-
 		// required permissions
 		const requiredPermissionsClass =
 			this.reflector.get<Permission[]>(

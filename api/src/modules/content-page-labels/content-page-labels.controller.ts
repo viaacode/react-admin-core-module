@@ -5,13 +5,13 @@ import { ContentPageLabel, LabelObj } from '../content-pages';
 import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-request.dto';
 
 import { CustomError } from '../shared/helpers/custom-error';
-import { ContentPageLabelService } from './content-page-label.service';
-import { ContentPageLabelOverviewTableCols } from './content-page-label.types';
+import { ContentPageLabelsService } from './content-page-labels.service';
+import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
 
 @ApiTags('ContentPageLabels')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')
-export class ContentPagesController {
-	constructor(private contentPageLabelService: ContentPageLabelService) {}
+export class ContentPageLabelsController {
+	constructor(private contentPageLabelService: ContentPageLabelsService) {}
 
 	@Get('')
 	public async fetchContentPageLabels(

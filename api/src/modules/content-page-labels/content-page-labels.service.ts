@@ -4,13 +4,13 @@ import { isNil } from 'lodash';
 import { ContentPageLabel, ContentPageType, LabelObj } from '../content-pages';
 import { DataService } from '../data';
 import { CustomError } from '../shared/helpers/custom-error';
-import { ContentPageLabelOverviewTableCols } from './content-page-label.types';
+import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
 	ContentPageLabelQueryTypes,
 } from './queries/content-page-label.queries';
 
-export class ContentPageLabelService {
+export class ContentPageLabelsService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {}

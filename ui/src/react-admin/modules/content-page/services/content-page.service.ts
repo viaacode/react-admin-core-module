@@ -27,7 +27,7 @@ export class ContentPageService {
 	private static getBaseUrl(): string {
 		return `${
 			AdminConfigManager.getConfig().database.proxyUrl
-		}/${CONTENT_PAGE_SERVICE_BASE_URL}`;
+		}${CONTENT_PAGE_SERVICE_BASE_URL}`;
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
@@ -143,12 +143,13 @@ export class ContentPageService {
 	): Promise<[ContentPageInfo[], number]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: this.getBaseUrl() + '/overview',
 				query: {
 					offset: page * ITEMS_PER_PAGE,
 					limit: ITEMS_PER_PAGE,
 					sortColumn,
-					sortOrder: tableColumnDataType,
+					sortOrder,
+					tableColumnDataType,
 					where: JSON.stringify(where),
 				},
 			})
@@ -426,7 +427,7 @@ export class ContentPageService {
 		let url: string | undefined = undefined;
 		let body: any | undefined = undefined;
 		try {
-			url = this.getBaseUrl();
+			url = this.getBaseUrl() + '/media';
 			body = {
 				searchQuery,
 				searchQueryLimit,

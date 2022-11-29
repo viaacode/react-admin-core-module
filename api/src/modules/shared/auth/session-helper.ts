@@ -14,6 +14,7 @@ import {
 } from 'date-fns/fp';
 import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
+import { mockUserInfo } from "../../../mock-user-info";
 
 import { HetArchiefUser } from '../../users/users.types';
 import { Idp, LdapUser } from './auth.types';
@@ -107,6 +108,11 @@ export class SessionHelper {
 	public static getUserInfo(
 		session: Record<string, any>,
 	): HetArchiefUser | Avo.User.User | null {
+		/** Login user for admin-core demo app */
+		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
+			return mockUserInfo as any;
+		}
+
 		if (!session) {
 			return null;
 		}
