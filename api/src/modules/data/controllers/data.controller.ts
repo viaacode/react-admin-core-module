@@ -7,10 +7,11 @@ import { DataService } from '../services/data.service';
 
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { SessionUser } from '../../shared/decorators/user.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('GraphQL')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/data')
+@Controller(addPrefix(process, 'data'))
 export class DataController {
 	constructor(private dataService: DataService) {}
 

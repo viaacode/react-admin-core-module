@@ -7,10 +7,11 @@ import { PermissionsService } from '../services/permissions.service';
 import { Permission } from '../../users/types';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('Permissions')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/permissions')
+@Controller(addPrefix(process, 'permissions'))
 @RequireAllPermissions(Permission.EDIT_PERMISSION_GROUPS)
 export class PermissionsController {
 	constructor(private permissionsService: PermissionsService) {}

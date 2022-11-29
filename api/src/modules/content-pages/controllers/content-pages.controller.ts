@@ -27,9 +27,10 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { SpecialPermissionGroups } from '../../shared/types/types';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('ContentPages')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-pages')
+@Controller(addPrefix(process, 'content-pages'))
 export class ContentPagesController {
 	constructor(private contentPagesService: ContentPagesService) {}
 
