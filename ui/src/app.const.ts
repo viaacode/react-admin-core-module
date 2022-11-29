@@ -8,7 +8,7 @@ import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
 import { CONTENT_PAGE_PATH } from './react-admin';
 
 export const ADMIN_PATH = Object.freeze({
-	...USER_PATH,
+	...USER_PATH(),
 	...USER_GROUP_PATH,
 	...NAVIGATION_PATH,
 	...CONTENT_PAGE_PATH(),

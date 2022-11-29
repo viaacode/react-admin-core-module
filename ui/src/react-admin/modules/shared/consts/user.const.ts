@@ -1,12 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
-import { ROUTE_PARTS } from './routes';
-
-export const USER_PATH = {
-	USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}`,
-	USER_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id`,
-	// USER_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id/${ROUTE_PARTS.edit}`,
-};
 
 type UserDeleteRadioOption = { label: string; value: Avo.User.UserDeleteOption };
 export const GET_DELETE_RADIO_OPTIONS = (): UserDeleteRadioOption[] => {

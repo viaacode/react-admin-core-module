@@ -14,11 +14,11 @@ import { CommonUser, Permission, UserBulkAction, UserOverviewTableCol } from './
 
 export const USERS_PER_PAGE = 50;
 
-export const USER_PATH = {
-	USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}`,
-	USER_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id`,
-	USER_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id/${ROUTE_PARTS.edit}`,
-};
+export const USER_PATH = (parts = ROUTE_PARTS) => ({
+	USER_OVERVIEW: `/${parts.admin}/${parts.user}`,
+	USER_DETAIL: `/${parts.admin}/${parts.user}/:id`,
+	USER_EDIT: `/${parts.admin}/${parts.user}/:id/${parts.edit}`,
+});
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;

@@ -48,7 +48,6 @@ import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useIdps } from '~modules/shared/hooks/useIdps';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
@@ -57,6 +56,7 @@ import UserDeleteModal from '../components/UserDeleteModal';
 import {
 	GET_USER_BULK_ACTIONS,
 	GET_USER_OVERVIEW_TABLE_COLS,
+	USER_PATH,
 	USERS_PER_PAGE,
 } from '../user.consts';
 import { UserOverviewProps } from './UserOverview.types';
@@ -468,7 +468,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			ADMIN_PATH.USER_OVERVIEW,
+			USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW,
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState.columns || []).join('~') }
 		);
@@ -586,7 +586,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				// no user detail for archief yet
 
 				return app === AvoOrHetArchief.avo ? (
-					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
+					<Link
+						to={buildLink(
+							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,
+							{
+								id: commonUser.profileId,
+							}
+						)}
+					>
 						{truncateTableValue(get(commonUser, columnId))}
 					</Link>
 				) : (
