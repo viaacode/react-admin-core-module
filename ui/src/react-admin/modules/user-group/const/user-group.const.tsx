@@ -20,7 +20,7 @@ export const USER_GROUP_PATH = {
 	USER_GROUP_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id/${ROUTE_PARTS.edit}`,
 };
 
-export const ITEMS_PER_PAGE = 20;
+export const GROUPS_PER_PAGE = 20;
 
 export const UserGroupTableColumns = (
 	userGroups: UserGroupArchief[],

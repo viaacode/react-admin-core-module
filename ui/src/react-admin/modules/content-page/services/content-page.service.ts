@@ -12,7 +12,7 @@ import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { dataService } from '../../shared/services/data-service';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import {
-	ITEMS_PER_PAGE,
+	PAGES_PER_PAGE,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../const/content-page.consts';
 import {
@@ -298,8 +298,8 @@ export class ContentPageService {
 		try {
 			variables = {
 				where,
-				offset: ITEMS_PER_PAGE * page,
-				limit: ITEMS_PER_PAGE,
+				offset: PAGES_PER_PAGE * page,
+				limit: PAGES_PER_PAGE,
 				orderBy: getOrderObject(
 					sortColumn,
 					sortOrder,

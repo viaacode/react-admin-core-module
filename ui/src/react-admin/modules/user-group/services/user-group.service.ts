@@ -6,7 +6,7 @@ import { CustomError } from '../../shared/helpers/custom-error';
 import { dataService } from '../../shared/services/data-service';
 
 import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../queries/user-group.queries';
-import { ITEMS_PER_PAGE } from '../const/user-group.const';
+import { GROUPS_PER_PAGE } from '../const/user-group.const';
 import { UserGroup } from '../types/user-group.types';
 
 export class UserGroupService {
@@ -24,8 +24,8 @@ export class UserGroupService {
 		try {
 			variables = {
 				where,
-				offset: ITEMS_PER_PAGE * page,
-				limit: ITEMS_PER_PAGE,
+				offset: GROUPS_PER_PAGE * page,
+				limit: GROUPS_PER_PAGE,
 				orderBy: [{ [sortColumn]: sortOrder }],
 			};
 			const response = await dataService.query<

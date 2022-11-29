@@ -26,8 +26,8 @@ import {
 import { Icon } from '~modules/shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
-	ITEMS_PER_PAGE,
 	RICH_TEXT_EDITOR_OPTIONS,
+	TRANSLATIONS_PER_PAGE,
 	TRANSLATIONS_QUERY_PARAM_CONFIG,
 } from '~modules/translations/translations.const';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
@@ -59,7 +59,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 
 	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
 
-	const pageCount: number = Math.ceil(filteredTranslationsCount / ITEMS_PER_PAGE);
+	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
@@ -75,8 +75,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			[filters.orderDirection as OrderDirection]
 		);
 		const paginatedTranslations = orderedTranslations.slice(
-			(filters.page - 1) * ITEMS_PER_PAGE,
-			Math.min(translations?.length || 0, filters.page * ITEMS_PER_PAGE)
+			(filters.page - 1) * TRANSLATIONS_PER_PAGE,
+			Math.min(translations?.length || 0, filters.page * TRANSLATIONS_PER_PAGE)
 		);
 		setFilteredAndPaginatedTranslations(paginatedTranslations);
 	}, [translations, filters, setFilteredTranslationsCount, setFilteredAndPaginatedTranslations]);
@@ -286,7 +286,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 							],
 							data: filteredAndPaginatedTranslations,
 							initialState: {
-								pageSize: ITEMS_PER_PAGE,
+								pageSize: TRANSLATIONS_PER_PAGE,
 								sortBy: sortFilters,
 							},
 						} as TableOptions<any>

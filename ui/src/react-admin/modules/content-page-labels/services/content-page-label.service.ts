@@ -8,7 +8,7 @@ import { GetContentPageLabelsQuery as GetContentPageLabelsQueryHetArchief } from
 import { CustomError } from '../../shared/helpers/custom-error';
 import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
 import { dataService } from '../../shared/services/data-service';
-import { ITEMS_PER_PAGE } from '../content-page-label.const';
+import { LABELS_PER_PAGE } from '../content-page-label.const';
 import { ContentPageLabel, ContentPageLabelOverviewTableCols } from '../content-page-label.types';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
@@ -29,7 +29,7 @@ export class ContentPageLabelService {
 		sortColumn: ContentPageLabelOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
 		where: any,
-		itemsPerPage: number = ITEMS_PER_PAGE
+		itemsPerPage: number = LABELS_PER_PAGE
 	): Promise<[ContentPageLabel[], number]> {
 		let variables: ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables'] | null =
 			null;

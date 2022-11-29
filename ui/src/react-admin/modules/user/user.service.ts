@@ -31,7 +31,7 @@ import { USER_QUERIES, UserQueryTypes } from '~modules/user/queries/users.querie
 import { CustomError } from '../shared/helpers/custom-error';
 import { dataService } from '../shared/services/data-service';
 
-import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT, ITEMS_PER_PAGE } from './user.consts';
+import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT, USERS_PER_PAGE } from './user.consts';
 import {
 	CommonUser,
 	DeleteContentCounts,
@@ -136,7 +136,7 @@ export class UserService {
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
 		where: any = {},
-		itemsPerPage: number = ITEMS_PER_PAGE
+		itemsPerPage: number = USERS_PER_PAGE
 	): Promise<[CommonUser[], number]> {
 		let variables: any;
 		try {
@@ -302,7 +302,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
-				sendEmail: false // TODO
+				sendEmail: false, // TODO
 			};
 
 			const response = await fetchWithLogout(url, {
@@ -403,7 +403,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				...(isAvo ? { transferToProfileId } : {}),
-				sendEmail: false // TODO
+				sendEmail: false, // TODO
 			};
 			const response = await fetchWithLogout(url, {
 				method: 'DELETE',

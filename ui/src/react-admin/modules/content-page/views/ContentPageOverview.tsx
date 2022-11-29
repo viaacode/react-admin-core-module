@@ -26,7 +26,7 @@ import FilterTable, {
 import {
 	CONTENT_PAGE_PATH,
 	GET_OVERVIEW_COLUMNS,
-	ITEMS_PER_PAGE,
+	PAGES_PER_PAGE,
 } from '../const/content-page.consts';
 import { isPublic } from '../helpers/get-published-state';
 import { useContentTypes } from '../hooks/useContentTypes';
@@ -534,7 +534,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			<>
 				<FilterTable
 					data={contentPages}
-					itemsPerPage={ITEMS_PER_PAGE}
+					itemsPerPage={PAGES_PER_PAGE}
 					columns={tableColumns}
 					dataCount={contentPageCount}
 					searchTextPlaceholder={tText(

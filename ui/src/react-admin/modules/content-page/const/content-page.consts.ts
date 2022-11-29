@@ -179,7 +179,7 @@ export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
 	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`,
 });
 
-export const ITEMS_PER_PAGE = 10;
+export const PAGES_PER_PAGE = 10;
 
 export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
