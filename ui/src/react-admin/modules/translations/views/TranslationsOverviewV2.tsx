@@ -208,10 +208,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	}, [filters]);
 
 	const handleSortChange = useCallback(
-		(rules) => {
-			const orderProp = rules[0]?.id || undefined;
-			const orderDirection = rules[0]?.desc ? OrderDirection.desc : OrderDirection.asc;
-
+		(orderProp: string | undefined, orderDirection: string | undefined) => {
 			if (filters.orderProp !== orderProp || filters.orderDirection !== orderDirection) {
 				setFilters({
 					...filters,
