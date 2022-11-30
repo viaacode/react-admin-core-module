@@ -37,7 +37,7 @@
     "@viaa/avo2-components": "3.0.5",
     "@viaa/avo2-types": "2.45.3",
     "@meemoo/react-components": "2.21.1",
-    "graphql": "^16.6.0",
+    "graphql": "16.6.0",
     "immer": "9.0.12",
     "use-query-params": "1.2.3"
   },
@@ -140,6 +140,7 @@
   "resolutions": {
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "mini-css-extract-plugin": "2.4.7"
+    "mini-css-extract-plugin": "2.4.7",
+    "graphql": "16.6.0"
   }
 }

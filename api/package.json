@@ -50,7 +50,7 @@
     "express-session": "^1.17.2",
     "fs-extra": "^10.0.0",
     "got": "^11.8.3",
-    "graphql": "^15.8.0",
+    "graphql": "16.6.0",
     "helmet": "^5.0.2",
     "i18next": "^21.6.3",
     "joi": "^17.5.0",
@@ -110,5 +110,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "resolutions": {
+    "graphql": "16.6.0"
   }
 }
