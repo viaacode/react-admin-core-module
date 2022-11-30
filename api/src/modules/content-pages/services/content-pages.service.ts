@@ -42,7 +42,6 @@ import {
 	GetItemTileByIdQueryVariables,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
-import { App_Content_Page_Insert_Input } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { AvoOrHetArchief } from '../../shared/types';
@@ -66,6 +65,7 @@ import {
 	GqlContentBlock,
 	GqlContentPage,
 	GqlHetArchiefUser,
+	GqlInsertOrUpdateContentBlock,
 	GqlUser,
 	MediaItemResponse,
 	MediaItemType,
@@ -202,7 +202,7 @@ export class ContentPagesService {
 
 	private convertToDatabaseContentPage(
 		contentPageInfo: Partial<ContentPage>,
-	): GqlContentPage {
+	): GqlInsertOrUpdateContentBlock {
 		return {
 			id: contentPageInfo.id,
 			thumbnail_path: contentPageInfo.thumbnailPath,
@@ -1210,31 +1210,16 @@ export class ContentPagesService {
 		};
 	}
 
-	private cleanupBeforeInsert(
-		dbContentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-			contentBlockConfigs: ContentBlockConfig[];
-		},
-	): ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] {
-		return omit(dbContentPage, [
-			'contentBlockssBycontentId',
-			'content_blocks',
-			'profile',
-			'__typename',
-			'content_content_labels',
-			'id',
-		]);
-	}
-
 	public async insertContentPage(
 		contentPage: ContentPage,
 	): Promise<ContentPage | null> {
 		try {
-			const dbContentPage = this.cleanupBeforeInsert(contentPage);
+			const dbContentPage = this.convertToDatabaseContentPage(contentPage);
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['InsertContentMutation'],
 				ContentPageQueryTypes['InsertContentMutationVariables']
 			>(CONTENT_PAGE_QUERIES[this.appType].InsertContentDocument, {
-				contentPage: dbContentPage as App_Content_Page_Insert_Input,
+				contentPage: dbContentPage as any,
 			});
 
 			const id: number | null =
@@ -1247,13 +1232,10 @@ export class ContentPagesService {
 			if (id) {
 				// Insert content-blocks
 				let contentBlockConfigs: Partial<ContentBlockConfig>[] | null = null;
-				if (
-					contentPage.contentBlockConfigs &&
-					contentPage.contentBlockConfigs.length
-				) {
+				if (contentPage.content_blocks && contentPage.content_blocks.length) {
 					contentBlockConfigs = await this.insertContentBlocks(
 						id,
-						contentPage.contentBlockConfigs,
+						contentPage.content_blocks,
 					);
 
 					if (!contentBlockConfigs) {
@@ -1264,11 +1246,9 @@ export class ContentPagesService {
 
 				return {
 					...contentPage,
-					contentBlockConfigs,
+					content_blocks: contentBlockConfigs,
 					id,
-				} as App_Content_Page_Insert_Input & {
-					contentBlockConfigs: ContentBlockConfig[];
-				};
+				} as ContentPage;
 			}
 
 			return null;
@@ -1283,7 +1263,7 @@ export class ContentPagesService {
 		initialContentPage: ContentPage | undefined,
 	): Promise<ContentPage | null> {
 		try {
-			const dbContentPage = this.cleanupBeforeInsert(contentPage);
+			const dbContentPage = this.convertToDatabaseContentPage(contentPage);
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['UpdateContentByIdMutation'],
 				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
@@ -1307,11 +1287,11 @@ export class ContentPagesService {
 				);
 			}
 
-			if (contentPage.contentBlockConfigs && initialContentPage) {
+			if (contentPage.content_blocks && initialContentPage) {
 				await this.updateContentBlocks(
 					contentPage.id as number,
-					initialContentPage.contentBlockConfigs || [],
-					contentPage.contentBlockConfigs,
+					initialContentPage.content_blocks || [],
+					contentPage.content_blocks,
 				);
 			}
 

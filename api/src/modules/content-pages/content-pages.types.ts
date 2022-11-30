@@ -14,6 +14,7 @@ import {
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
 import { ContentBlockConfig } from './content-block.types';
+import { ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
 	| 'COLLECTION'
@@ -88,6 +89,10 @@ export type GqlContentPage =
 export type GqlContentBlock =
 	| GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0]
 	| GetContentPageByPathQueryAvo['app_content'][0]['content_blocks'][0];
+
+export type GqlInsertOrUpdateContentBlock =
+	| ContentPageQueryTypes['InsertContentMutationVariables']['contentPage']
+	| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'];
 
 export type GqlAvoUser =
 	GetContentPageByPathQueryAvo['app_content'][0]['profile'];

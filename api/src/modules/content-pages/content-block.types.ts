@@ -398,5 +398,3 @@ export const DEFAULT_BUTTON_PROPS = {
 	icon: undefined,
 	buttonAction: undefined,
 };
-
-export type InsertOrUpdateContentPage =

@@ -20,7 +20,6 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { Permission } from '../../users/users.types';
-import { ContentBlockConfig } from '../content-block.types';
 
 import {
 	ContentOverviewTableCols,
@@ -322,19 +321,12 @@ export class ContentPagesController {
 	)
 	public async insertContentPage(
 		@Body()
-		contentPage: ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-			contentBlockConfigs: ContentBlockConfig[];
-		},
+		contentPage: ContentPage,
 		@SessionUser() user,
-	): Promise<
-		| (ContentPageQueryTypes['InsertContentMutationVariables']['contentPage'] & {
-				contentBlockConfigs: ContentBlockConfig[];
-		  })
-		| null
-	> {
+	): Promise<ContentPage | null> {
 		if (
 			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
-			contentPage.user_profile_id !== user.id
+			contentPage.userProfileId !== user.id
 		) {
 			// User cannot edit other peoples pages
 			throw new ForbiddenException(
