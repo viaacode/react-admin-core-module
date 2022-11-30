@@ -1,5 +1,6 @@
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { compact, flatten, get } from 'lodash-es';
 import { AdminConfigManager } from '~core/config';
 
@@ -128,6 +129,21 @@ export class UserService {
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
 			};
 		}
+	}
+
+	static async getProfileById(id: string): Promise<CommonUser> {
+		return (
+			await this.getProfiles(
+				1,
+				'profileId',
+				'asc',
+				'string',
+				{
+					id: { _eq: id },
+				},
+				1
+			)
+		)[0][0];
 	}
 
 	static async getProfiles(
@@ -287,7 +303,8 @@ export class UserService {
 
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
-		isBlocked: boolean
+		isBlocked: boolean,
+		sendEmail?: boolean,
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -302,7 +319,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
-				sendEmail: false, // TODO
+				sendEmail: !!sendEmail,
 			};
 
 			const response = await fetchWithLogout(url, {
@@ -549,4 +566,45 @@ export class UserService {
 			});
 		}
 	}
+
+	static async updateTempAccessByUserId(
+		userId: string,
+		tempAccess: UserTempAccess,
+		profileId: string
+	): Promise<void> {
+		try {
+			// Update a users temp access
+			await dataService.query<UpdateUserTempAccessByIdMutation>({
+				query: UpdateUserTempAccessByIdDocument,
+				variables: {
+					user_id: userId,
+					from: tempAccess.from,
+					until: tempAccess.until,
+				},
+			});
+
+			/**
+			 * Trigger email if from day is <= updated at day
+			 * https://meemoo.atlassian.net/browse/AVO-1779
+			 */
+			const hasAccessNow =
+				!!tempAccess.from && isBefore(new Date(tempAccess.from), endOfDay(new Date()));
+
+			if (hasAccessNow && tempAccess.until) {
+				const isBlocked = !hasAccessNow;
+
+				await UserService.updateTempAccessBlockStatusByProfileIds(
+					[profileId],
+					isBlocked,
+					moment(tempAccess.until).format('DD-MM-YYYY'),
+					true
+				);
+			}
+		} catch (err) {
+			throw new CustomError(`Failed to update temp access for user`, err, {
+				userId,
+				tempAccess,
+			});
+		}
+	};
 }

@@ -11,4 +11,5 @@ export type {
 	LinkInfo,
 	ToastInfo,
 	ToastService,
-} from '~core/config/config.types';
+} from './config.types';
+export { ToastType } from './config.types';

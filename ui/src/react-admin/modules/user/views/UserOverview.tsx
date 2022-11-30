@@ -59,7 +59,10 @@ import {
 	USER_PATH,
 	USERS_PER_PAGE,
 } from '../user.consts';
-import { UserOverviewProps } from './UserOverview.types';
+
+export interface UserOverviewProps {
+	customFormatDate?: (date: Date|string) => string;
+}
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
