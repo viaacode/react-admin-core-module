@@ -124,7 +124,9 @@ export class PlayerTicketService {
 	}
 
 	public async getEmbedUrl(id: string): Promise<string> {
-		let response;
+		let response:
+			| GetFileByRepresentationSchemaIdentifierQuery
+			| GetItemBrowsePathByExternalIdQuery;
 		if (isHetArchief()) {
 			// Het archief
 			response = await this.dataService.execute<
@@ -145,8 +147,10 @@ export class PlayerTicketService {
 
 		/* istanbul ignore next */
 		const browsePath: string =
-			response?.data?.app_item_meta?.[0]?.browse_path ||
-			response?.data?.object_file?.[0]?.schema_embed_url;
+			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]
+				?.browse_path ||
+			(response as GetFileByRepresentationSchemaIdentifierQuery)
+				?.object_file?.[0]?.schema_embed_url;
 		if (!browsePath) {
 			throw new NotFoundException(
 				`Object file with representation_id '${id}' not found`,

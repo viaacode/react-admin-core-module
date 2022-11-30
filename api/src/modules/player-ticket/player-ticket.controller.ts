@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LoggedInGuard } from '../shared/guards/logged-in.guard';
+import { GetPlayableUrlDto } from './dto/GetPlayableUrlDto.dto';
 import { PlayerTicketService } from './services/player-ticket.service';
 
 @ApiTags('Player Ticket')
@@ -18,20 +19,22 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(
-		@Query('externalId') externalId: string | undefined,
-		@Query('browsePath') browsePath: string | undefined,
-		@Query('referrer') referrer: string,
-	) {
-		if (!externalId && !browsePath) {
+	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto) {
+		if (!queryParams.externalId && !queryParams.browsePath) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url',
 			);
 		}
-		if (externalId) {
-			return this.getPlayableUrlByExternalId(externalId, referrer);
+		if (queryParams.externalId) {
+			return this.getPlayableUrlByExternalId(
+				queryParams.externalId,
+				queryParams.referrer,
+			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(browsePath, referrer);
+			return this.getPlayableUrlFromBrowsePath(
+				queryParams.browsePath,
+				queryParams.referrer,
+			);
 		}
 	}
 
