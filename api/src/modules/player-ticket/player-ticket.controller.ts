@@ -5,6 +5,7 @@ import {
 	InternalServerErrorException,
 	NotFoundException,
 	Query,
+	Req,
 	UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
@@ -19,21 +20,34 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto) {
-		if (!queryParams.externalId && !queryParams.browsePath) {
+	public async getPlayableUrl(
+		@Query() queryParams: GetPlayableUrlDto,
+		@Req() request,
+	) {
+		if (
+			!queryParams.externalId &&
+			!queryParams.externalIds &&
+			!queryParams.browsePath
+		) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url',
 			);
 		}
+		const referrer = request.referrer || 'http://localhost:8080';
 		if (queryParams.externalId) {
-			return this.getPlayableUrlByExternalId(
-				queryParams.externalId,
-				queryParams.referrer,
+			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer);
+		} else if (queryParams.externalIds) {
+			return Promise.all(
+				queryParams.externalIds
+					.split(',')
+					.map((externalId) =>
+						this.getPlayableUrlByExternalId(externalId, referrer),
+					),
 			);
 		} else {
 			return this.getPlayableUrlFromBrowsePath(
 				queryParams.browsePath,
-				queryParams.referrer,
+				referrer,
 			);
 		}
 	}
