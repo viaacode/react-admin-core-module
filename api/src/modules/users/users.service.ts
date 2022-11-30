@@ -1,4 +1,5 @@
 import { forwardRef, Inject } from '@nestjs/common';
+import { isNil } from '@nestjs/common/utils/shared.utils';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { compact, flatten, get } from 'lodash';
@@ -69,7 +70,7 @@ export class UsersService {
 						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
 							?.iri,
 				},
-				last_access_at: user.last_access_at,
+				lastAccessAt: user.last_access_at,
 			};
 		} else {
 			const user = userProfile as ProfileAvo;
@@ -81,7 +82,7 @@ export class UsersService {
 							name: user.company_name,
 					  } as Avo.Organization.Organization)
 					: undefined,
-				educational_organisations: (user.organisations || []).map(
+				educationalOrganisations: (user.organisations || []).map(
 					(org): ClientEducationOrganization => ({
 						organizationId: org.organization_id,
 						unitId: org.unit_id || null,
@@ -91,10 +92,10 @@ export class UsersService {
 				subjects: user.classifications?.map(
 					(classification) => classification.key,
 				),
-				education_levels: user.contexts?.map((context) => context.key),
-				is_exception: user.is_exception || undefined,
-				business_category: user.business_category || undefined,
-				created_at: user.acc_created_at,
+				educationLevels: user.contexts?.map((context) => context.key),
+				isException: user.is_exception || undefined,
+				businessCategory: user.business_category || undefined,
+				createdAt: user.acc_created_at,
 				userGroup: {
 					name: user.group_name || undefined,
 					label: user.group_name || undefined,
@@ -106,11 +107,19 @@ export class UsersService {
 				fullName: user.full_name || undefined,
 				firstName: user.first_name || undefined,
 				lastName: user.last_name || undefined,
-				is_blocked: user.is_blocked || undefined,
-				blocked_at: get(user, 'blocked_at.date'),
-				unblocked_at: get(user, 'unblocked_at.date'),
-				last_access_at: user.last_access_at,
-				temp_access: user?.user?.temp_access || undefined,
+				isBlocked: user.is_blocked || undefined,
+				blockedAt: get(user, 'blocked_at.date'),
+				unblockedAt: get(user, 'unblocked_at.date'),
+				lastAccessAt: user.last_access_at,
+				tempAccess: user?.user?.temp_access
+					? {
+							from: user?.user?.temp_access?.from || null,
+							until: user?.user?.temp_access?.until || null,
+							status: isNil(user?.user?.temp_access?.current?.status)
+								? null
+								: user?.user?.temp_access?.current?.status === 1,
+					  }
+					: null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
 			};
 		}

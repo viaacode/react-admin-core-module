@@ -64,7 +64,7 @@ export interface FilterableTableState {
 	page: number;
 }
 
-export interface FilterableColumn extends TableColumn {
+export interface FilterableColumn<T = string> extends Omit<TableColumn, 'id'> {
 	filterType?:
 		| 'CheckboxDropdownModal'
 		| 'DateRangeDropdown'
@@ -74,6 +74,7 @@ export interface FilterableColumn extends TableColumn {
 		| 'MultiEducationalOrganisationSelectModal';
 	filterProps?: any;
 	visibleByDefault: boolean;
+	id: T;
 }
 
 const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {

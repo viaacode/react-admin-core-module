@@ -582,7 +582,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const Link = AdminConfigManager.getConfig().services.router.Link;
 
-		const isBlocked = get(commonUser, 'user.is_blocked');
+		const isBlocked = commonUser?.isBlocked;
 
 		switch (columnId) {
 			case 'firstName':
@@ -590,75 +590,75 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 				return app === AvoOrHetArchief.avo ? (
 					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
-						{truncateTableValue(get(commonUser, columnId))}
+						{truncateTableValue(commonUser?.firstName)}
 					</Link>
 				) : (
-					get(commonUser, 'firstName') || '-'
+					commonUser?.firstName || '-'
 				);
 
 			case 'lastName':
-				return truncateTableValue(get(commonUser, 'lastName'));
+				return truncateTableValue(commonUser?.lastName);
 
 			case 'email':
-				return truncateTableValue(get(commonUser, 'email'));
+				return truncateTableValue(commonUser?.email);
 
-			case 'is_blocked':
+			case 'isBlocked':
 				return isBlocked ? 'Ja' : 'Nee';
 
-			case 'blocked_at':
-			case 'unblocked_at':
+			case 'blockedAt':
+			case 'unblockedAt':
 				return formatDate(get(commonUser, ['user', columnId])) || '-';
 
-			case 'is_exception':
-				return get(commonUser, 'is_exception') ? 'Ja' : 'Nee';
+			case 'isException':
+				return commonUser?.isException ? 'Ja' : 'Nee';
 
 			case 'organisation':
-				return get(commonUser, 'organisation.name') || '-';
+				return commonUser?.organisation?.name || '-';
 
-			case 'created_at':
-				return formatDate(commonUser.created_at) || '-';
+			case 'createdAt':
+				return formatDate(commonUser.createdAt) || '-';
 
-			case 'last_access_at': {
-				const lastAccessDate = get(commonUser, 'last_access_at');
+			case 'lastAccessAt': {
+				const lastAccessDate = commonUser?.lastAccessAt;
 				return !isNil(lastAccessDate)
 					? customFormatDate
 						? customFormatDate(lastAccessDate)
 						: formatDate(lastAccessDate)
 					: '-';
 			}
-			case 'temp_access': {
-				const tempAccess = get(commonUser, 'user.temp_access.current.status');
+			case 'tempAccess': {
+				const tempAccess = commonUser?.tempAccess?.status;
 
 				switch (tempAccess) {
-					case 0:
+					case true:
 						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
-					case 1:
+					case false:
 						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 					default:
 						return '-';
 				}
 			}
-			case 'temp_access_from':
-				return formatDate(get(commonUser, 'user.temp_access.from')) || '-';
+			case 'tempAccessFrom':
+				return formatDate(commonUser?.tempAccess?.from) || '-';
 
-			case 'temp_access_until':
-				return formatDate(get(commonUser, 'user.temp_access.until')) || '-';
+			case 'tempAccessUntil':
+				return formatDate(commonUser?.tempAccess?.until) || '-';
 
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						get(commonUser, 'idps', []),
-						`user_${get(commonUser, 'user.profileId')}`,
+						commonUser?.idps || [],
+						`user_${commonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'
 				);
 
-			case 'education_levels':
+			case 'educationLevels':
 			case 'subjects': {
 				const labels = get(commonUser, columnId, []);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
-			case 'educational_organisations': {
+			case 'educationalOrganisations': {
 				const orgs: ClientEducationOrganization[] = get(commonUser, columnId, []);
 				const tags = orgs.map(
 					(org): TagOption => ({

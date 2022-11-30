@@ -1,5 +1,4 @@
 import { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
@@ -9,103 +8,11 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 import { CustomError } from '../shared/helpers/custom-error';
 
 import { ITEMS_PER_PAGE } from './user.consts';
-import {
-	CommonUser,
-	DeleteContentCounts,
-	Idp,
-	ProfileAvo,
-	ProfileHetArchief,
-	UserOverviewTableCol,
-} from './user.types';
+import { CommonUser, DeleteContentCounts, UserOverviewTableCol } from './user.types';
 
 export class UserService {
 	private static getBaseUrl(): string {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
-	}
-
-	public static adaptProfile(
-		userProfile: ProfileAvo | ProfileHetArchief | undefined
-	): CommonUser | undefined {
-		if (!userProfile) {
-			return undefined;
-		}
-
-		const database = AdminConfigManager.getConfig().database.databaseApplicationType;
-		const shared = {
-			email: userProfile.mail || undefined,
-			firstName: userProfile.first_name || undefined,
-			lastName: userProfile.last_name || undefined,
-			fullName: userProfile.full_name || (userProfile as any).user?.full_name || undefined,
-			last_access_at: userProfile.last_access_at,
-		};
-
-		if (database === AvoOrHetArchief.hetArchief) {
-			const user = userProfile as ProfileHetArchief;
-
-			return {
-				...shared,
-				profileId: user.id,
-				userGroup: {
-					id: user.group?.id,
-					name: user.group?.name,
-					label: user.group?.label,
-				},
-				idps: user.identities?.map((identity) => identity.identity_provider_name as Idp),
-				organisation: {
-					name: user.maintainer_users_profiles?.[0]?.maintainer.schema_name || undefined,
-					or_id: user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-					logo_url:
-						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
-				},
-			};
-		} else if (database === AvoOrHetArchief.avo) {
-			const user = userProfile as ProfileAvo;
-
-			return {
-				...shared,
-				profileId: user.profile_id,
-				stamboek: user.stamboek || undefined,
-				organisation:
-					(user.company_name && {
-						name: user.company_name,
-					}) ||
-					(userProfile as any).organisation,
-				educational_organisations: (user.organisations || []).map(
-					(org): ClientEducationOrganization => ({
-						organizationId: org.organization_id,
-						unitId: org.unit_id || null,
-						label: org.organization?.ldap_description || '',
-					})
-				),
-				subjects: user.classifications?.map((classification) => classification.key),
-				education_levels: user.contexts?.map((context) => context.key),
-				is_exception: user.is_exception || undefined,
-				business_category: user.business_category || undefined,
-				created_at: user.acc_created_at,
-				userGroup: {
-					name:
-						user.group_name ||
-						(userProfile as any).profile_user_group?.group?.label ||
-						undefined,
-					label:
-						user.group_name ||
-						(userProfile as any).profile_user_group?.group?.label ||
-						undefined,
-					id:
-						user.group_id ||
-						(userProfile as any).profile_user_group?.group?.id ||
-						undefined,
-				},
-				userId: user.user_id || (userProfile as any).user?.id,
-				uid: user.user_id || (userProfile as any).user?.id,
-				is_blocked: user.is_blocked || undefined,
-				blocked_at: user?.blocked_at?.date,
-				unblocked_at: user?.unblocked_at?.date,
-				last_access_at: user.last_access_at,
-				temp_access: user?.user?.temp_access || undefined,
-				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
-			};
-		}
 	}
 
 	static async getProfiles(

@@ -9,7 +9,7 @@ import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { CommonUser, Permission, UserBulkAction } from './user.types';
+import { CommonUser, Permission, UserBulkAction, UserOverviewTableCol } from './user.types';
 
 export const ITEMS_PER_PAGE = 50;
 
@@ -32,7 +32,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	educationLevels: CheckboxOption[],
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
-) => FilterableColumn[] = (
+) => FilterableColumn<UserOverviewTableCol>[] = (
 	user: CommonUser | undefined,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
@@ -63,7 +63,7 @@ const getAvoColumns = (
 	educationLevels: CheckboxOption[],
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
-): FilterableColumn[] => [
+): FilterableColumn<UserOverviewTableCol>[] => [
 	{
 		id: 'profileId',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___id'),
@@ -71,28 +71,28 @@ const getAvoColumns = (
 		visibleByDefault: false,
 	},
 	{
-		id: 'first_name',
+		id: 'firstName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___voornaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
-		id: 'last_name',
+		id: 'lastName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___achternaam'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
-		id: 'mail',
+		id: 'email',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: 'string',
 	},
 	{
-		id: 'user_group',
+		id: 'userGroup',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___gebruikersgroep'
 		),
@@ -113,7 +113,7 @@ const getAvoColumns = (
 		dataType: 'string',
 	},
 	{
-		id: 'business_category',
+		id: 'businessCategory',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___oormerk'),
 		sortable: true,
 		visibleByDefault: true,
@@ -132,7 +132,7 @@ const getAvoColumns = (
 		dataType: 'string',
 	},
 	{
-		id: 'is_exception',
+		id: 'isException',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___uitzonderingsaccount'
 		),
@@ -142,7 +142,7 @@ const getAvoColumns = (
 		dataType: 'boolean',
 	},
 	{
-		id: 'is_blocked',
+		id: 'isBlocked',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___geblokkeerd'),
 		sortable: true,
 		visibleByDefault: true,
@@ -150,7 +150,7 @@ const getAvoColumns = (
 		dataType: 'boolean',
 	},
 	{
-		id: 'blocked_at',
+		id: 'blockedAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___geblokkeerd-op'
 		),
@@ -160,7 +160,7 @@ const getAvoColumns = (
 		dataType: 'dateTime',
 	},
 	{
-		id: 'unblocked_at',
+		id: 'unblockedAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___ongeblokkeerd-op'
 		),
@@ -172,7 +172,7 @@ const getAvoColumns = (
 	...((PermissionService.hasPerm(user, Permission.EDIT_USER_TEMP_ACCESS)
 		? [
 				{
-					id: 'temp_access',
+					id: 'tempAccess',
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___tijdelijke-toegang'
 					),
@@ -198,7 +198,7 @@ const getAvoColumns = (
 					dataType: 'booleanNullsLast', // Users without a value are always last when sorting
 				},
 				{
-					id: 'temp_access_from',
+					id: 'tempAccessFrom',
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___te-deblokkeren-op'
 					),
@@ -207,7 +207,7 @@ const getAvoColumns = (
 					dataType: 'dateTime',
 				},
 				{
-					id: 'temp_access_until',
+					id: 'tempAccessUntil',
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___te-blokkeren-op'
 					),
@@ -216,7 +216,7 @@ const getAvoColumns = (
 					dataType: 'dateTime',
 				},
 		  ]
-		: []) as FilterableColumn[]),
+		: []) as FilterableColumn<UserOverviewTableCol>[]),
 	{
 		id: 'stamboek',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___stamboek'),
@@ -245,7 +245,7 @@ const getAvoColumns = (
 		dataType: 'string',
 	},
 	{
-		id: 'created_at',
+		id: 'createdAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___gebruiker-sinds'
 		),
@@ -255,7 +255,7 @@ const getAvoColumns = (
 		dataType: 'dateTime',
 	},
 	{
-		id: 'last_access_at',
+		id: 'lastAccessAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___laatste-toegang'
 		),
@@ -265,7 +265,7 @@ const getAvoColumns = (
 		dataType: 'dateTime',
 	},
 	{
-		id: 'education_levels',
+		id: 'educationLevels',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___onderwijs-niveaus'
 		),
@@ -321,7 +321,7 @@ const getAvoColumns = (
 		} as CheckboxDropdownModalProps,
 	},
 	{
-		id: 'educational_organisations',
+		id: 'educationalOrganisations',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___educatieve-organisaties'
 		),
@@ -334,7 +334,7 @@ const getAvoColumns = (
 const getHetArchiefColumns = (
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[]
-): FilterableColumn[] => [
+): FilterableColumn<UserOverviewTableCol>[] => [
 	{
 		id: 'profileId',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___id'),
@@ -403,7 +403,7 @@ const getHetArchiefColumns = (
 		dataType: 'string',
 	},
 	{
-		id: 'last_access_at',
+		id: 'lastAccessAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___laatste-toegang'
 		),
