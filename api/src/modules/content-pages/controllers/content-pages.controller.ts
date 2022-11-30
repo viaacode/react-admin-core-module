@@ -19,7 +19,7 @@ import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 
 import {
 	ContentOverviewTableCols,

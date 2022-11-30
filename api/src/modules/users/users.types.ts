@@ -162,10 +162,6 @@ export interface GqlPermission {
 	name: string;
 }
 
-export interface GqlPermissionData {
-	permission: GqlPermission;
-}
-
 export enum Group {
 	KIOSK_VISITOR = '04150e6e-b779-4125-84e5-6ee6fc580757',
 	MEEMOO_ADMIN = '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
@@ -282,12 +278,6 @@ export type UserOverviewTableCol =
 	| 'tempAccessFrom'
 	| 'tempAccessUntil';
 
-export interface RawUserGroup {
-	id: number;
-	label: string;
-	group_user_permission_groups: RawUserGroupPermissionGroupLink[];
-}
-
 export interface RawUserGroupPermissionGroupLink {
 	permission_group: RawPermissionGroupLink;
 }
@@ -307,13 +297,6 @@ export interface RawPermission {
 	label: string;
 }
 
-export type UserBulkAction =
-	| 'block'
-	| 'unblock'
-	| 'delete'
-	| 'change_subjects'
-	| 'export';
-
 export interface DeleteContentCounts {
 	publicCollections: number;
 	privateCollections: number;
@@ -321,44 +304,6 @@ export interface DeleteContentCounts {
 	bookmarks: number;
 	publicContentPages: number;
 	privateContentPages: number;
-}
-
-export interface DeleteContentCountsRaw {
-	publicCollections: {
-		aggregate: {
-			count: number;
-		};
-	};
-	publicContentPages: {
-		aggregate: {
-			count: number;
-		};
-	};
-	privateCollections: {
-		aggregate: {
-			count: number;
-		};
-	};
-	assignments: {
-		aggregate: {
-			count: number;
-		};
-	};
-	collectionBookmarks: {
-		aggregate: {
-			count: number;
-		};
-	};
-	itemBookmarks: {
-		aggregate: {
-			count: number;
-		};
-	};
-	privateContentPages: {
-		aggregate: {
-			count: number;
-		};
-	};
 }
 
 export type ProfileAvo =

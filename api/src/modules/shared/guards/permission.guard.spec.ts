@@ -2,7 +2,7 @@ import { ExecutionContext } from '@nestjs/common';
 
 import { PermissionGuard } from './permission.guard';
 
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 
 const mockExecutionContextWithPermissions = (permissions) =>
 	({

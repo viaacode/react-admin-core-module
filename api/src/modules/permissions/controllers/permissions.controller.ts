@@ -4,7 +4,7 @@ import { PermissionData } from '../permissions.types';
 
 import { PermissionsService } from '../services/permissions.service';
 
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 

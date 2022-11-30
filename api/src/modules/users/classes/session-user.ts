@@ -1,12 +1,9 @@
-import { Logger } from '@nestjs/common';
 import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
 
 import { HetArchiefUser, Permission } from '../users.types';
 
 export class SessionUserEntity {
-	private logger = new Logger(SessionUserEntity.name, { timestamp: true });
-
 	protected user: HetArchiefUser | Avo.User.User;
 	protected id: string;
 	protected firstName: string;

@@ -16,16 +16,6 @@ import { Avo } from '@viaa/avo2-types';
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
 
-export type FillOption = 'cover' | 'contain' | 'auto';
-
-export type BlockGridFormatOption =
-	| 'squareSmall'
-	| 'squareLarge'
-	| '4:3'
-	| '2:1'
-	| '6:9'
-	| '400x150';
-
 export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
 
 export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
@@ -154,21 +144,6 @@ export interface ContentBlockField {
 
 export type ContentBlockEditorType = 'field' | 'fieldGroup';
 
-export interface ContentBlockFieldGroup {
-	label?: string; // Optional for checkboxes, who have their own label
-	fields: {
-		[key: string]: ContentBlockField;
-	};
-	type?: ContentBlockEditorType;
-	min?: number;
-	max?: number;
-	repeat?: {
-		defaultState: any;
-		addButtonLabel?: string;
-		deleteButtonLabel?: string;
-	};
-}
-
 /* CONTENT BLOCK STATE */
 export interface DefaultContentBlockState {
 	backgroundColor: Color;
@@ -182,8 +157,6 @@ export interface DefaultContentBlockState {
 }
 
 export type ContentBlockState = DefaultContentBlockState;
-
-export type ContentBlockStateType = 'components' | 'block';
 
 export interface ContentBlockBlockConfig {
 	state: ContentBlockState;
@@ -304,33 +277,6 @@ export interface MediaGridBlockComponentState {
 	buttonAction?: ButtonAction;
 }
 
-export interface MediaGridBlockState extends DefaultContentBlockState {
-	title?: string;
-	buttonLabel?: string;
-	buttonAction?: ButtonAction;
-	ctaTitle?: string;
-	ctaTitleColor?: string;
-	ctaTitleSize?: HeadingType;
-	ctaContent?: string;
-	ctaContentColor?: string;
-	ctaButtonLabel?: string;
-	ctaButtonType?: ButtonType;
-	ctaButtonIcon?: IconName;
-	ctaBackgroundColor?: string;
-	ctaBackgroundImage?: string;
-	ctaWidth?: string;
-	openMediaInModal?: boolean;
-	ctaButtonAction?: ButtonAction;
-	navigate?: (buttonAction?: ButtonAction) => void;
-	searchQuery?: ButtonAction;
-	searchQueryLimit: string;
-}
-
-export interface AnchorLinksBlockState extends DefaultContentBlockState {
-	align: AlignOption;
-	hasDividers: boolean;
-}
-
 export type RepeatedContentBlockComponentState =
 	| AnchorLinksBlockComponentState
 	| ButtonsBlockComponentState
@@ -360,11 +306,6 @@ export type ContentBlockComponentState =
 	| RepeatedContentBlockComponentState[]
 	| SingleContentBlockComponentState;
 
-export type ContentBlockStateOption =
-	| Partial<ContentBlockComponentState>
-	| Partial<ContentBlockComponentState>[]
-	| Partial<ContentBlockState>;
-
 export interface ContentBlockComponentsConfig {
 	name?: string;
 	limits?: ContentBlockComponentsLimits;
@@ -386,15 +327,3 @@ export interface ContentBlockConfig {
 	created_at: string;
 	updated_at: string;
 }
-
-export interface ContentBlockMeta {
-	index: number;
-	config: ContentBlockConfig;
-}
-
-export const DEFAULT_BUTTON_PROPS = {
-	type: 'primary',
-	label: '',
-	icon: undefined,
-	buttonAction: undefined,
-};

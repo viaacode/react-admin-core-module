@@ -4,7 +4,7 @@ import { TranslationKey } from '../types';
 
 import { TranslationsService } from './translations.service';
 
-import { SiteVariablesService } from '../../site-variables/services/site-variables.service';
+import { SiteVariablesService } from '../../site-variables';
 import { UpdateResponse } from '../../shared/types/types';
 
 const mockSiteVariablesService: Partial<

@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { PlayerTicketService } from './services/player-ticket.service';
 
-import { DataModule } from '../data/data.module';
+import { DataModule } from '../data';
 
 @Module({
 	controllers: [],

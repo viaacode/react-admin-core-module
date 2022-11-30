@@ -124,7 +124,7 @@ export class ItemsService {
 		subjectIds: string[],
 		relationType: RelationType,
 	): Promise<RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
-		let variables: any;
+		let variables: any = null;
 		const isCollection = type === 'collection';
 		try {
 			variables = {
