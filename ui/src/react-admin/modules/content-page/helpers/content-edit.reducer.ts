@@ -236,9 +236,12 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			}
 			case ContentEditActionType.SET_BLOCK_STATE: {
 				const setBlockState = action as SetBlockState;
-				const { block } =
+				const blockInfo =
 					draft.currentContentPageInfo.content_blocks[setBlockState.payload.index];
-				block.state = { ...block.state, ...setBlockState.payload.formGroupState };
+				blockInfo.block.state = {
+					...blockInfo.block.state,
+					...setBlockState.payload.formGroupState,
+				};
 				return;
 			}
 			case ContentEditActionType.SET_CONTENT_BLOCK_ERROR: {

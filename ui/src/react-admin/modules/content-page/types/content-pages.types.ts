@@ -4,7 +4,7 @@ import { PickerItem } from '~modules/shared/types/content-picker';
 import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
 import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
 
-import { ContentBlockConfig } from './content-block.types';
+import { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
 // Pages
 export enum PageType {
@@ -59,7 +59,7 @@ export interface ContentPageLabel {
 	updated_at: string;
 }
 
-export interface ContentPageInfo {
+interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
@@ -79,8 +79,23 @@ export interface ContentPageInfo {
 	owner: ContentPageUser;
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
-	content_blocks: ContentBlockConfig[];
 	labels: ContentPageLabel[];
+}
+
+/**
+ * Content page format like we use it inside the admin-core-ui
+ * Contains extra info inside the content blocks: ContentBlockConfig
+ */
+export interface ContentPageInfo extends ContentPageBase {
+	content_blocks: ContentBlockConfig[];
+}
+
+/**
+ * Content page format as we receive it from the admin-core-api endpoints
+ * Contains only info that needs to be saved inside the database inside the blocks: DbContentBlock
+ */
+export interface DbContentPage extends ContentPageBase {
+	content_blocks: DbContentBlock[];
 }
 
 export interface ContentPageUser {

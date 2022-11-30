@@ -1,10 +1,12 @@
 import { IPagination } from '@studiohyperdrive/pagination';
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { isArray, isFunction, isPlainObject, kebabCase } from 'lodash-es';
+import { compact, isArray, isFunction, isPlainObject, kebabCase, sortBy } from 'lodash-es';
 import moment from 'moment';
 import { stringifyUrl } from 'query-string';
+import { ToastType } from '~core/config/config.types';
 import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block.consts';
 
 import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
@@ -12,11 +14,12 @@ import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import { ITEMS_PER_PAGE } from '../const/content-page.consts';
-import { ContentBlockConfig } from '../types/content-block.types';
+import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentPageLabel,
+	DbContentPage,
 } from '../types/content-pages.types';
 
 import { AdminConfigManager } from '~core/config';
@@ -34,14 +37,18 @@ export class ContentPageService {
 	public static async getContentPages(
 		options: ContentPageOverviewParams
 	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
-		return fetchWithLogoutJson(this.getBaseUrl(), {
+		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'POST',
 			body: JSON.stringify(options),
 		});
+		return {
+			items: this.convertDbContentPagesToContentPageInfos(dbContentPages),
+			...rest,
+		};
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		return fetchWithLogoutJson(
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/public`,
 				query: {
@@ -49,10 +56,11 @@ export class ContentPageService {
 				},
 			})
 		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages);
 	}
 
 	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
-		return fetchWithLogoutJson(
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/projects/public`,
 				query: {
@@ -60,13 +68,14 @@ export class ContentPageService {
 				},
 			})
 		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicContentItemsByTitle(
 		title: string,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
-		return fetchWithLogoutJson(
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/public`,
 				query: {
@@ -75,13 +84,14 @@ export class ContentPageService {
 				},
 			})
 		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
 		title: string,
 		limit: number
-	): Promise<Partial<ContentPageInfo>[] | null> {
-		return fetchWithLogoutJson(
+	): Promise<Partial<ContentPageInfo>[]> {
+		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/projects/public`,
 				query: {
@@ -90,10 +100,14 @@ export class ContentPageService {
 				},
 			})
 		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo> {
-		return fetchWithLogoutJson(`${this.getBaseUrl()}/${id}`);
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(
+			`${this.getBaseUrl()}/${id}`
+		);
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static async getContentTypes(): Promise<
@@ -148,7 +162,7 @@ export class ContentPageService {
 		tableColumnDataType: string,
 		where: any
 	): Promise<[ContentPageInfo[], number]> {
-		return fetchWithLogoutJson(
+		const [dbContentPages, count] = await fetchWithLogoutJson(
 			stringifyUrl({
 				url: this.getBaseUrl() + '/overview',
 				query: {
@@ -161,28 +175,31 @@ export class ContentPageService {
 				},
 			})
 		);
+		return [this.convertDbContentPagesToContentPageInfos(dbContentPages) || [], count];
 	}
 
 	public static async insertContentPage(
 		contentPage: Partial<ContentPageInfo>
 	): Promise<Partial<ContentPageInfo> | null> {
-		return fetchWithLogoutJson(this.getBaseUrl(), {
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'PUT',
-			body: JSON.stringify(contentPage),
+			body: JSON.stringify(this.convertContentPageInfoToDbContentPage(contentPage)),
 		});
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static async updateContentPage(
 		contentPage: Partial<ContentPageInfo>,
 		initialContentPage: Partial<ContentPageInfo> | undefined
 	): Promise<Partial<ContentPageInfo> | null> {
-		return fetchWithLogoutJson(this.getBaseUrl(), {
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'PATCH',
 			body: JSON.stringify({
-				contentPage,
-				initialContentPage,
+				contentPage: this.convertContentPageInfoToDbContentPage(contentPage),
+				initialContentPage: this.convertContentPageInfoToDbContentPage(initialContentPage),
 			}),
 		});
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo>): string {
@@ -223,6 +240,105 @@ export class ContentPageService {
 			},
 			(key: string | number) => String(key).endsWith(RichEditorStateKey)
 		);
+	}
+
+	private static convertDbContentPagesToContentPageInfos(
+		dbContentPages: DbContentPage[] | null
+	): ContentPageInfo[] | null {
+		if (!dbContentPages) {
+			return dbContentPages;
+		}
+		return dbContentPages.map(this.convertDbContentPageToContentPageInfo.bind(this));
+	}
+
+	private static convertDbContentPageToContentPageInfo(
+		dbContentPage: DbContentPage
+	): ContentPageInfo {
+		return {
+			...dbContentPage,
+			content_blocks: this.convertDbContentBlockToContentBlockConfig(
+				dbContentPage.content_blocks
+			),
+		};
+	}
+
+	private static convertDbContentBlockToContentBlockConfig(
+		contentBlocks: DbContentBlock[]
+	): ContentBlockConfig[] {
+		const sortedContentBlocks = sortBy(contentBlocks, (c) => c.position);
+
+		return compact(
+			(sortedContentBlocks || []).map((contentBlock: DbContentBlock) => {
+				const { type, id, components, block } = contentBlock;
+				const configForType = CONTENT_BLOCK_CONFIG_MAP[type as ContentBlockType];
+				if (!configForType) {
+					console.error(
+						new CustomError('Failed to find content block config for type', null, {
+							type,
+							contentBlock,
+							CONTENT_BLOCK_CONFIG_MAP,
+						})
+					);
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.tText(
+							'modules/admin/content-page/helpers/get-published-state___error'
+						),
+						description: AdminConfigManager.getConfig().services.i18n.tText(
+							'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
+						),
+						type: ToastType.ERROR,
+					});
+					return null;
+				}
+				const cleanConfig = configForType(contentBlock.position);
+
+				const rawComponentState = components;
+				const componentState = Array.isArray(rawComponentState)
+					? rawComponentState
+					: { ...cleanConfig.components.state, ...rawComponentState };
+
+				return {
+					...cleanConfig,
+					id,
+					components: {
+						...cleanConfig.components,
+						state: componentState,
+					},
+					block: {
+						...cleanConfig.block,
+						state: {
+							...cleanConfig.block.state,
+							...(block || {}),
+						},
+					},
+				} as ContentBlockConfig;
+			})
+		);
+	}
+
+	private static convertContentPageInfoToDbContentPage(
+		contentPageInfo: Partial<ContentPageInfo> | undefined
+	): DbContentPage | undefined {
+		if (!contentPageInfo) {
+			return undefined;
+		}
+		return {
+			...contentPageInfo,
+			content_blocks: (contentPageInfo.content_blocks || []).map(
+				(contentBlock): DbContentBlock => {
+					return {
+						name: contentBlock.name,
+						id: contentBlock.id,
+						anchor: contentBlock.anchor,
+						type: contentBlock.type,
+						errors: contentBlock.errors,
+						position: contentBlock.position,
+						block: contentBlock.block.state,
+						components: contentBlock.components.state,
+					};
+				}
+			),
+		} as DbContentPage;
 	}
 
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.

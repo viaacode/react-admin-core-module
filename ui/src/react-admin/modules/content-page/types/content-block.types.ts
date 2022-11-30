@@ -256,7 +256,7 @@ export interface KlaarBlockComponentState {
 
 export interface IntroBlockComponentState {
 	title: string;
-	headingType: HeadingTypeOption
+	headingType: HeadingTypeOption;
 	content: string;
 	align: AlignOption;
 }
@@ -384,6 +384,17 @@ export interface ContentBlockConfig {
 	position: number;
 }
 
+export interface DbContentBlock {
+	id?: number;
+	errors?: ContentBlockErrors;
+	name: string;
+	components: ContentBlockComponentState;
+	block: DefaultContentBlockState;
+	type: ContentBlockType;
+	anchor?: string;
+	position: number;
+}
+
 export interface ContentBlockMeta {
 	index: number;
 	config: ContentBlockConfig;
@@ -393,5 +404,5 @@ export const DEFAULT_BUTTON_PROPS = {
 	type: 'primary',
 	label: '',
 	icon: undefined,
-	buttonAction: undefined
+	buttonAction: undefined,
 };
