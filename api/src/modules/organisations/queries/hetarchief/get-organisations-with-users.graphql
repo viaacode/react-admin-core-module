@@ -1,4 +1,4 @@
-query getOrganizationsWithUsers {
+query getOrganisationsWithUsers {
 	maintainer_users_profile(distinct_on: maintainer_identifier) {
 		maintainer {
 			schema_identifier
@@ -6,4 +6,3 @@ query getOrganizationsWithUsers {
 		}
 	}
 }
-

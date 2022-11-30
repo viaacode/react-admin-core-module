@@ -9,5 +9,6 @@ import { DataModule } from '../data';
 	controllers: [AdminNavigationsController],
 	imports: [forwardRef(() => DataModule)],
 	providers: [AdminNavigationsService],
+	exports: [AdminNavigationsService],
 })
 export class AdminNavigationsModule {}

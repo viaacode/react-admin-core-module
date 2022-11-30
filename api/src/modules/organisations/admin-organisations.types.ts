@@ -1,12 +1,5 @@
-import {
-	GetOrganisationQuery as GetOrganisationQueryAvo,
-	GetOrganisationQueryVariables as GetOrganisationQueryVariablesAvo,
-} from '../shared/generated/graphql-db-types-avo';
-import {
-	GetOrganisationQuery as GetOrganisationQueryHetArchief,
-	GetOrganisationQueryVariables as GetOrganisationQueryVariablesHetArchief,
-} from '../shared/generated/graphql-db-types-hetarchief';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { GetOrganisationQuery as GetOrganisationQueryAvo } from '../shared/generated/graphql-db-types-avo';
+import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '../shared/generated/graphql-db-types-hetarchief';
 
 export interface Organisation {
 	id: string;
@@ -14,21 +7,9 @@ export interface Organisation {
 	logo_url?: string;
 }
 
-export type OrganisationQueryTypes = {
-	GetOrganisationQuery:
-		| GetOrganisationQueryAvo
-		| GetOrganisationQueryHetArchief;
-	GetOrganisationQueryAvo: GetOrganisationQueryAvo;
-	GetOrganisationQueryHetArchief: GetOrganisationQueryHetArchief;
-	GetOrganisationQueryVariables:
-		| GetOrganisationQueryVariablesAvo
-		| GetOrganisationQueryVariablesHetArchief;
-	GetOrganisationQueryVariablesAvo: GetOrganisationQueryVariablesAvo;
-	GetOrganisationQueryVariablesHetArchief: GetOrganisationQueryVariablesHetArchief;
-};
-
-export type OrganisationQueries = {
-	GetOrganisationDocument: TypedDocumentNode;
+export type BasicOrganisation = {
+	or_id: string;
+	name: string;
 };
 
 export type GqlAvoOrganisation =

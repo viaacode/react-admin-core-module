@@ -1,4 +1,4 @@
-import { forwardRef, Inject } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { compact, sortBy } from 'lodash';
 import { DataService } from '../data';
 import {
@@ -10,6 +10,7 @@ import {
 import { CustomError } from '../shared/helpers/custom-error';
 import { AvoOrHetArchief } from '../shared/types';
 
+@Injectable()
 export class LookupService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
