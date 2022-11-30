@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { UpdateResponse } from '../../shared/types/types';
 import {
 	SITE_VARIABLE_QUERIES,
@@ -17,13 +18,9 @@ export class SiteVariablesService {
 		const response = await this.dataService.execute<
 			SiteVariableQueryTypes['GetSiteVariableByNameQuery'],
 			SiteVariableQueryTypes['GetSiteVariableByNameQueryVariables']
-		>(
-			SITE_VARIABLE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetSiteVariableByNameDocument,
-			{
-				name: variable,
-			},
-		);
+		>(SITE_VARIABLE_QUERIES[getDatabaseType()].GetSiteVariableByNameDocument, {
+			name: variable,
+		});
 
 		/* istanbul ignore next */
 		return (
@@ -43,8 +40,7 @@ export class SiteVariablesService {
 			SiteVariableQueryTypes['UpdateSiteVariableByNameMutation'],
 			SiteVariableQueryTypes['UpdateSiteVariableByNameMutationVariables']
 		>(
-			SITE_VARIABLE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.UpdateSiteVariableByNameDocument,
+			SITE_VARIABLE_QUERIES[getDatabaseType()].UpdateSiteVariableByNameDocument,
 			{
 				name: variable,
 				data: { value },

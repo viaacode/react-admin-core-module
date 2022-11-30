@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CustomError } from '../../shared/helpers/custom-error';
-import { AvoOrHetArchief } from '../../shared/types';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { isAvo } from '../../shared/helpers/is-avo';
 
 import {
 	BasicOrganisation,
@@ -10,11 +11,11 @@ import {
 	Organisation,
 } from '../admin-organisations.types';
 import { DataService } from '../../data';
+import { sortBy } from 'lodash';
 import {
 	ORGANISATION_QUERIES,
 	OrganisationQueryTypes,
 } from '../queries/organization.queries';
-import { sortBy } from 'lodash';
 
 @Injectable()
 export class AdminOrganisationsService {
@@ -43,13 +44,9 @@ export class AdminOrganisationsService {
 		const response = await this.dataService.execute<
 			OrganisationQueryTypes['GetOrganisationQuery'],
 			OrganisationQueryTypes['GetOrganisationQueryVariables']
-		>(
-			ORGANISATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetOrganisationDocument,
-			{
-				id,
-			},
-		);
+		>(ORGANISATION_QUERIES[getDatabaseType()].GetOrganisationDocument, {
+			id,
+		});
 
 		/* istanbul ignore next */
 		return this.adapt(
@@ -65,12 +62,12 @@ export class AdminOrganisationsService {
 			const response = await this.dataService.execute<
 				OrganisationQueryTypes['GetOrganisationsWithUsersQuery']
 			>(
-				ORGANISATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetOrganizationsWithUsersDocument,
+				ORGANISATION_QUERIES[getDatabaseType()]
+					.GetOrganisationsWithUsersDocument,
 			);
 
 			let organisations;
-			if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+			if (isAvo()) {
 				organisations = (
 					response as OrganisationQueryTypes['GetOrganisationsWithUsersQueryAvo']
 				).shared_organisations_with_users;

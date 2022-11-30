@@ -22,7 +22,9 @@ import {
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { AvoOrHetArchief } from '../shared/types';
+import { getDatabaseType } from '../shared/helpers/get-database-type';
+import { isAvo } from '../shared/helpers/is-avo';
+import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import {
@@ -44,7 +46,7 @@ export class UsersService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			const user = userProfile as ProfileHetArchief;
 			return {
 				profileId: user.id,
@@ -136,13 +138,12 @@ export class UsersService {
 		let variables: any;
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
-			const whereWithoutDeleted =
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-					? where
-					: {
-							...where,
-							is_deleted: { _eq: false },
-					  };
+			const whereWithoutDeleted = isHetArchief()
+				? where
+				: {
+						...where,
+						is_deleted: { _eq: false },
+				  };
 
 			variables = {
 				offset,
@@ -158,10 +159,7 @@ export class UsersService {
 
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetUsersQuery']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetUsersDocument,
-				variables,
-			);
+			>(USER_QUERIES[getDatabaseType()].GetUsersDocument, variables);
 
 			const avoResponse = response as UserQueryTypes['GetProfileNamesQueryAvo'];
 			const hetArchiefResponse =
@@ -202,18 +200,12 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
 				UserQueryTypes['GetProfileNamesQueryVariables']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetProfileNamesDocument,
-				{
-					profileIds,
-				},
-			);
+			>(USER_QUERIES[getDatabaseType()].GetProfileNamesDocument, {
+				profileIds,
+			});
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])
 						?.users_profile || []
@@ -259,13 +251,9 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileIdsQuery'],
 				UserQueryTypes['GetProfileIdsQueryVariables']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetProfileIdsDocument,
-				variables,
-			);
+			>(USER_QUERIES[getDatabaseType()].GetProfileIdsDocument, variables);
 
-			if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+			if (isAvo()) {
 				// avo
 				return compact(
 					(
@@ -290,7 +278,7 @@ export class UsersService {
 	}
 
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return [];
 		}
 
@@ -321,12 +309,10 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
 				UserQueryTypes['GetIdpsQueryVariables']
-			>(USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetIdpsDocument);
+			>(USER_QUERIES[getDatabaseType()].GetIdpsDocument);
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
@@ -346,7 +332,7 @@ export class UsersService {
 	async fetchPublicAndPrivateCounts(
 		profileIds: string[],
 	): Promise<DeleteContentCounts> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
@@ -393,7 +379,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info(
 				"adding subjects to profiles isn't supported for hetarchief",
 			);
@@ -431,7 +417,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info(
 				"removing subjects from profiles isn't supported for hetarchief",
 			);

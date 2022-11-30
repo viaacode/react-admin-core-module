@@ -1,11 +1,11 @@
 import { Avo } from '@viaa/avo2-types';
-import { AvoOrHetArchief } from '../shared/types';
+import { isAvo } from '../shared/helpers/is-avo';
 import { UserOverviewTableCol } from './users.types';
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
 	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any;
 }> => {
-	if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+	if (isAvo()) {
 		return tableColumnToDatabaseOrderObjectAvo;
 	}
 	return tableColumnToDatabaseOrderObjectHetArchief;

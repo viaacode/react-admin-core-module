@@ -8,7 +8,7 @@ import {
 	GetSubjectsQuery,
 } from '../shared/generated/graphql-db-types-avo';
 import { CustomError } from '../shared/helpers/custom-error';
-import { AvoOrHetArchief } from '../shared/types';
+import { isHetArchief } from '../shared/helpers/is-hetarchief';
 
 @Injectable()
 export class LookupService {
@@ -18,7 +18,7 @@ export class LookupService {
 
 	public async fetchSubjects(): Promise<string[]> {
 		// not available for archief
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return [];
 		}
 
@@ -43,7 +43,7 @@ export class LookupService {
 
 	public async fetchEducationLevels(): Promise<string[]> {
 		// not available for archief
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return [];
 		}
 

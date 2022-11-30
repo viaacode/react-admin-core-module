@@ -40,6 +40,8 @@ type OrganisationQueries = {
 	GetOrganisationsWithUsersDocument: DocumentNode;
 };
 
+const test = GetOrganisationDocumentAvo;
+console.log(test);
 export const ORGANISATION_QUERIES: Record<
 	AvoOrHetArchief,
 	OrganisationQueries
@@ -54,3 +56,5 @@ export const ORGANISATION_QUERIES: Record<
 			GetOrganisationsWithUsersDocumentHetArchief,
 	},
 };
+
+console.log('queries: ', ORGANISATION_QUERIES);
