@@ -245,7 +245,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			// Run validators on to check untouched inputs
 			blockConfigs.forEach((config, configIndex) => {
 				const { fields, state } = config.components;
-				console.info({ fields });
 				const keysToValidate = Object.keys(fields).filter((key) => fields[key].validator);
 				let newErrors: ContentBlockErrors = {};
 
