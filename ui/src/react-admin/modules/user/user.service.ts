@@ -202,12 +202,13 @@ export class UserService {
 				body: JSON.stringify(body),
 			});
 
-			if (isBlocked) {
-				await dataService.query<BulkClearUserTempAccessMutation, BulkClearUserTempAccessMutationVariables>({
-					variables: { profileIds },
-					query: BulkClearUserTempAccessDocument,
-				})
-			}
+			// TODO move temp access to backend
+			// if (isBlocked) {
+			// 	await dataService.query<BulkClearUserTempAccessMutation, BulkClearUserTempAccessMutationVariables>({
+			// 		variables: { profileIds },
+			// 		query: BulkClearUserTempAccessDocument,
+			// 	})
+			// }
 		} catch (err) {
 			throw new CustomError(
 				'Failed to update is_blocked field for users in the database',
