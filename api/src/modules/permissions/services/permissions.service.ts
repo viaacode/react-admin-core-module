@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
 import {
 	PermissionQueryTypes,
@@ -8,7 +8,9 @@ import { PermissionData } from '../permissions.types';
 
 @Injectable()
 export class PermissionsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public async getPermissions(): Promise<PermissionData[]> {
 		const response = await this.dataService.execute<

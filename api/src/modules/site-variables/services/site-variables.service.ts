@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { DataService } from '../../data';
 import { UpdateResponse } from '../../shared/types/types';
@@ -9,7 +9,9 @@ import {
 
 @Injectable()
 export class SiteVariablesService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public async getSiteVariable<T>(variable: string): Promise<T> {
 		const response = await this.dataService.execute<

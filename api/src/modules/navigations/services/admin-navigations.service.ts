@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+	forwardRef,
+	Inject,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common';
 
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import {
@@ -13,7 +18,9 @@ import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public adapt(navigationEntry: Partial<NavigationEntry>): NavigationItem {
 		/* istanbul ignore next */

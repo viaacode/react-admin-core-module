@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
 import { isAvo } from '../../shared/helpers/is-avo';
 
@@ -11,7 +11,9 @@ import {
 
 @Injectable()
 export class UserGroupsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public adapt(
 		userGroup:

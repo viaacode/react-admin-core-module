@@ -20355,6 +20355,10 @@ export type Mutation_Root = {
   delete_users_profiles?: Maybe<Users_Profiles_Mutation_Response>;
   /** delete single row from the table: "users.profiles" */
   delete_users_profiles_by_pk?: Maybe<Users_Profiles>;
+  /** delete data from the table: "users.users_sync_cm" */
+  delete_users_users_sync_cm?: Maybe<Users_Users_Sync_Cm_Mutation_Response>;
+  /** delete single row from the table: "users.users_sync_cm" */
+  delete_users_users_sync_cm_by_pk?: Maybe<Users_Users_Sync_Cm>;
   /** insert data into the table: "app.assignment_assignment_tags" */
   insert_app_assignment_assignment_tags?: Maybe<App_Assignment_Assignment_Tags_Mutation_Response>;
   /** insert a single row into the table: "app.assignment_assignment_tags" */
@@ -20691,6 +20695,10 @@ export type Mutation_Root = {
   insert_users_profiles?: Maybe<Users_Profiles_Mutation_Response>;
   /** insert a single row into the table: "users.profiles" */
   insert_users_profiles_one?: Maybe<Users_Profiles>;
+  /** insert data into the table: "users.users_sync_cm" */
+  insert_users_users_sync_cm?: Maybe<Users_Users_Sync_Cm_Mutation_Response>;
+  /** insert a single row into the table: "users.users_sync_cm" */
+  insert_users_users_sync_cm_one?: Maybe<Users_Users_Sync_Cm>;
   /** update data of the table: "app.assignment_assignment_tags" */
   update_app_assignment_assignment_tags?: Maybe<App_Assignment_Assignment_Tags_Mutation_Response>;
   /** update single row of the table: "app.assignment_assignment_tags" */
@@ -21193,6 +21201,12 @@ export type Mutation_Root = {
   update_users_profiles_by_pk?: Maybe<Users_Profiles>;
   /** update multiples rows of table: "users.profiles" */
   update_users_profiles_many?: Maybe<Array<Maybe<Users_Profiles_Mutation_Response>>>;
+  /** update data of the table: "users.users_sync_cm" */
+  update_users_users_sync_cm?: Maybe<Users_Users_Sync_Cm_Mutation_Response>;
+  /** update single row of the table: "users.users_sync_cm" */
+  update_users_users_sync_cm_by_pk?: Maybe<Users_Users_Sync_Cm>;
+  /** update multiples rows of table: "users.users_sync_cm" */
+  update_users_users_sync_cm_many?: Maybe<Array<Maybe<Users_Users_Sync_Cm_Mutation_Response>>>;
 };
 
 
@@ -22194,6 +22208,18 @@ export type Mutation_RootDelete_Users_ProfilesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Users_Profiles_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Users_Users_Sync_CmArgs = {
+  where: Users_Users_Sync_Cm_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Users_Users_Sync_Cm_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -23369,6 +23395,20 @@ export type Mutation_RootInsert_Users_ProfilesArgs = {
 export type Mutation_RootInsert_Users_Profiles_OneArgs = {
   object: Users_Profiles_Insert_Input;
   on_conflict?: InputMaybe<Users_Profiles_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Users_Users_Sync_CmArgs = {
+  objects: Array<Users_Users_Sync_Cm_Insert_Input>;
+  on_conflict?: InputMaybe<Users_Users_Sync_Cm_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Users_Users_Sync_Cm_OneArgs = {
+  object: Users_Users_Sync_Cm_Insert_Input;
+  on_conflict?: InputMaybe<Users_Users_Sync_Cm_On_Conflict>;
 };
 
 
@@ -25305,6 +25345,38 @@ export type Mutation_RootUpdate_Users_Profiles_ManyArgs = {
   updates: Array<Users_Profiles_Updates>;
 };
 
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_Users_Sync_CmArgs = {
+  _append?: InputMaybe<Users_Users_Sync_Cm_Append_Input>;
+  _delete_at_path?: InputMaybe<Users_Users_Sync_Cm_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Users_Users_Sync_Cm_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Users_Users_Sync_Cm_Delete_Key_Input>;
+  _inc?: InputMaybe<Users_Users_Sync_Cm_Inc_Input>;
+  _prepend?: InputMaybe<Users_Users_Sync_Cm_Prepend_Input>;
+  _set?: InputMaybe<Users_Users_Sync_Cm_Set_Input>;
+  where: Users_Users_Sync_Cm_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_Users_Sync_Cm_By_PkArgs = {
+  _append?: InputMaybe<Users_Users_Sync_Cm_Append_Input>;
+  _delete_at_path?: InputMaybe<Users_Users_Sync_Cm_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Users_Users_Sync_Cm_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Users_Users_Sync_Cm_Delete_Key_Input>;
+  _inc?: InputMaybe<Users_Users_Sync_Cm_Inc_Input>;
+  _prepend?: InputMaybe<Users_Users_Sync_Cm_Prepend_Input>;
+  _set?: InputMaybe<Users_Users_Sync_Cm_Set_Input>;
+  pk_columns: Users_Users_Sync_Cm_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_Users_Sync_Cm_ManyArgs = {
+  updates: Array<Users_Users_Sync_Cm_Updates>;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -25893,6 +25965,12 @@ export type Query_Root = {
   users_summary_view: Array<Users_Summary_View>;
   /** fetch aggregated fields from the table: "users.summary_view" */
   users_summary_view_aggregate: Users_Summary_View_Aggregate;
+  /** fetch data from the table: "users.users_sync_cm" */
+  users_users_sync_cm: Array<Users_Users_Sync_Cm>;
+  /** fetch aggregated fields from the table: "users.users_sync_cm" */
+  users_users_sync_cm_aggregate: Users_Users_Sync_Cm_Aggregate;
+  /** fetch data from the table: "users.users_sync_cm" using primary key columns */
+  users_users_sync_cm_by_pk?: Maybe<Users_Users_Sync_Cm>;
 };
 
 
@@ -28126,6 +28204,29 @@ export type Query_RootUsers_Summary_View_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Summary_View_Order_By>>;
   where?: InputMaybe<Users_Summary_View_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_Users_Sync_CmArgs = {
+  distinct_on?: InputMaybe<Array<Users_Users_Sync_Cm_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Users_Sync_Cm_Order_By>>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_Users_Sync_Cm_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Users_Sync_Cm_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Users_Sync_Cm_Order_By>>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_Users_Sync_Cm_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 /** columns and relationships of "shared.collateral" */
@@ -31866,6 +31967,14 @@ export type Subscription_Root = {
   users_summary_view_aggregate: Users_Summary_View_Aggregate;
   /** fetch data from the table in a streaming manner : "users.summary_view" */
   users_summary_view_stream: Array<Users_Summary_View>;
+  /** fetch data from the table: "users.users_sync_cm" */
+  users_users_sync_cm: Array<Users_Users_Sync_Cm>;
+  /** fetch aggregated fields from the table: "users.users_sync_cm" */
+  users_users_sync_cm_aggregate: Users_Users_Sync_Cm_Aggregate;
+  /** fetch data from the table: "users.users_sync_cm" using primary key columns */
+  users_users_sync_cm_by_pk?: Maybe<Users_Users_Sync_Cm>;
+  /** fetch data from the table in a streaming manner : "users.users_sync_cm" */
+  users_users_sync_cm_stream: Array<Users_Users_Sync_Cm>;
 };
 
 
@@ -34806,6 +34915,36 @@ export type Subscription_RootUsers_Summary_View_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Users_Summary_View_Stream_Cursor_Input>>;
   where?: InputMaybe<Users_Summary_View_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_Users_Sync_CmArgs = {
+  distinct_on?: InputMaybe<Array<Users_Users_Sync_Cm_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Users_Sync_Cm_Order_By>>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_Users_Sync_Cm_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Users_Sync_Cm_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Users_Sync_Cm_Order_By>>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_Users_Sync_Cm_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootUsers_Users_Sync_Cm_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Users_Users_Sync_Cm_Stream_Cursor_Input>>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "time". All fields are combined with logical 'AND'. */
@@ -41388,6 +41527,352 @@ export type Users_Summary_View_Variance_Fields = {
   role_id?: Maybe<Scalars['Float']>;
 };
 
+/** columns and relationships of "users.users_sync_cm" */
+export type Users_Users_Sync_Cm = {
+  __typename?: 'users_users_sync_cm';
+  action: Scalars['String'];
+  avo_user_id?: Maybe<Scalars['uuid']>;
+  cm_email?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamptz'];
+  expected_info: Scalars['jsonb'];
+  failed_sync_count: Scalars['Int'];
+  id: Scalars['uuid'];
+  ldap_user_id?: Maybe<Scalars['String']>;
+  received_info: Scalars['jsonb'];
+  updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "users.users_sync_cm" */
+export type Users_Users_Sync_CmExpected_InfoArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "users.users_sync_cm" */
+export type Users_Users_Sync_CmReceived_InfoArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Aggregate = {
+  __typename?: 'users_users_sync_cm_aggregate';
+  aggregate?: Maybe<Users_Users_Sync_Cm_Aggregate_Fields>;
+  nodes: Array<Users_Users_Sync_Cm>;
+};
+
+/** aggregate fields of "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Aggregate_Fields = {
+  __typename?: 'users_users_sync_cm_aggregate_fields';
+  avg?: Maybe<Users_Users_Sync_Cm_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Users_Users_Sync_Cm_Max_Fields>;
+  min?: Maybe<Users_Users_Sync_Cm_Min_Fields>;
+  stddev?: Maybe<Users_Users_Sync_Cm_Stddev_Fields>;
+  stddev_pop?: Maybe<Users_Users_Sync_Cm_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Users_Users_Sync_Cm_Stddev_Samp_Fields>;
+  sum?: Maybe<Users_Users_Sync_Cm_Sum_Fields>;
+  var_pop?: Maybe<Users_Users_Sync_Cm_Var_Pop_Fields>;
+  var_samp?: Maybe<Users_Users_Sync_Cm_Var_Samp_Fields>;
+  variance?: Maybe<Users_Users_Sync_Cm_Variance_Fields>;
+};
+
+
+/** aggregate fields of "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Users_Users_Sync_Cm_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Users_Users_Sync_Cm_Append_Input = {
+  expected_info?: InputMaybe<Scalars['jsonb']>;
+  received_info?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** aggregate avg on columns */
+export type Users_Users_Sync_Cm_Avg_Fields = {
+  __typename?: 'users_users_sync_cm_avg_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "users.users_sync_cm". All fields are combined with a logical 'AND'. */
+export type Users_Users_Sync_Cm_Bool_Exp = {
+  _and?: InputMaybe<Array<Users_Users_Sync_Cm_Bool_Exp>>;
+  _not?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+  _or?: InputMaybe<Array<Users_Users_Sync_Cm_Bool_Exp>>;
+  action?: InputMaybe<String_Comparison_Exp>;
+  avo_user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  cm_email?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  expected_info?: InputMaybe<Jsonb_Comparison_Exp>;
+  failed_sync_count?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  ldap_user_id?: InputMaybe<String_Comparison_Exp>;
+  received_info?: InputMaybe<Jsonb_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "users.users_sync_cm" */
+export enum Users_Users_Sync_Cm_Constraint {
+  /** unique or primary key constraint on columns "avo_user_id" */
+  UsersSyncCmAvoUserIdKey = 'users_sync_cm_avo_user_id_key',
+  /** unique or primary key constraint on columns "cm_email" */
+  UsersSyncCmCmEmailKey = 'users_sync_cm_cm_email_key',
+  /** unique or primary key constraint on columns "ldap_user_id" */
+  UsersSyncCmLdapUserIdKey = 'users_sync_cm_ldap_user_id_key',
+  /** unique or primary key constraint on columns "id" */
+  UsersSyncCmPkey = 'users_sync_cm_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Users_Users_Sync_Cm_Delete_At_Path_Input = {
+  expected_info?: InputMaybe<Array<Scalars['String']>>;
+  received_info?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Users_Users_Sync_Cm_Delete_Elem_Input = {
+  expected_info?: InputMaybe<Scalars['Int']>;
+  received_info?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Users_Users_Sync_Cm_Delete_Key_Input = {
+  expected_info?: InputMaybe<Scalars['String']>;
+  received_info?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Inc_Input = {
+  failed_sync_count?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Insert_Input = {
+  action?: InputMaybe<Scalars['String']>;
+  avo_user_id?: InputMaybe<Scalars['uuid']>;
+  cm_email?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  expected_info?: InputMaybe<Scalars['jsonb']>;
+  failed_sync_count?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  ldap_user_id?: InputMaybe<Scalars['String']>;
+  received_info?: InputMaybe<Scalars['jsonb']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Users_Users_Sync_Cm_Max_Fields = {
+  __typename?: 'users_users_sync_cm_max_fields';
+  action?: Maybe<Scalars['String']>;
+  avo_user_id?: Maybe<Scalars['uuid']>;
+  cm_email?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  failed_sync_count?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  ldap_user_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Users_Users_Sync_Cm_Min_Fields = {
+  __typename?: 'users_users_sync_cm_min_fields';
+  action?: Maybe<Scalars['String']>;
+  avo_user_id?: Maybe<Scalars['uuid']>;
+  cm_email?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  failed_sync_count?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
+  ldap_user_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Mutation_Response = {
+  __typename?: 'users_users_sync_cm_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users_Users_Sync_Cm>;
+};
+
+/** on_conflict condition type for table "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_On_Conflict = {
+  constraint: Users_Users_Sync_Cm_Constraint;
+  update_columns?: Array<Users_Users_Sync_Cm_Update_Column>;
+  where?: InputMaybe<Users_Users_Sync_Cm_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "users.users_sync_cm". */
+export type Users_Users_Sync_Cm_Order_By = {
+  action?: InputMaybe<Order_By>;
+  avo_user_id?: InputMaybe<Order_By>;
+  cm_email?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  expected_info?: InputMaybe<Order_By>;
+  failed_sync_count?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  ldap_user_id?: InputMaybe<Order_By>;
+  received_info?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: users.users_sync_cm */
+export type Users_Users_Sync_Cm_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Users_Users_Sync_Cm_Prepend_Input = {
+  expected_info?: InputMaybe<Scalars['jsonb']>;
+  received_info?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "users.users_sync_cm" */
+export enum Users_Users_Sync_Cm_Select_Column {
+  /** column name */
+  Action = 'action',
+  /** column name */
+  AvoUserId = 'avo_user_id',
+  /** column name */
+  CmEmail = 'cm_email',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  ExpectedInfo = 'expected_info',
+  /** column name */
+  FailedSyncCount = 'failed_sync_count',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  LdapUserId = 'ldap_user_id',
+  /** column name */
+  ReceivedInfo = 'received_info',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "users.users_sync_cm" */
+export type Users_Users_Sync_Cm_Set_Input = {
+  action?: InputMaybe<Scalars['String']>;
+  avo_user_id?: InputMaybe<Scalars['uuid']>;
+  cm_email?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  expected_info?: InputMaybe<Scalars['jsonb']>;
+  failed_sync_count?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  ldap_user_id?: InputMaybe<Scalars['String']>;
+  received_info?: InputMaybe<Scalars['jsonb']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Users_Users_Sync_Cm_Stddev_Fields = {
+  __typename?: 'users_users_sync_cm_stddev_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Users_Users_Sync_Cm_Stddev_Pop_Fields = {
+  __typename?: 'users_users_sync_cm_stddev_pop_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Users_Users_Sync_Cm_Stddev_Samp_Fields = {
+  __typename?: 'users_users_sync_cm_stddev_samp_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "users_users_sync_cm" */
+export type Users_Users_Sync_Cm_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Users_Users_Sync_Cm_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Users_Users_Sync_Cm_Stream_Cursor_Value_Input = {
+  action?: InputMaybe<Scalars['String']>;
+  avo_user_id?: InputMaybe<Scalars['uuid']>;
+  cm_email?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  expected_info?: InputMaybe<Scalars['jsonb']>;
+  failed_sync_count?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  ldap_user_id?: InputMaybe<Scalars['String']>;
+  received_info?: InputMaybe<Scalars['jsonb']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Users_Users_Sync_Cm_Sum_Fields = {
+  __typename?: 'users_users_sync_cm_sum_fields';
+  failed_sync_count?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "users.users_sync_cm" */
+export enum Users_Users_Sync_Cm_Update_Column {
+  /** column name */
+  Action = 'action',
+  /** column name */
+  AvoUserId = 'avo_user_id',
+  /** column name */
+  CmEmail = 'cm_email',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  ExpectedInfo = 'expected_info',
+  /** column name */
+  FailedSyncCount = 'failed_sync_count',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  LdapUserId = 'ldap_user_id',
+  /** column name */
+  ReceivedInfo = 'received_info',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Users_Users_Sync_Cm_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Users_Users_Sync_Cm_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Users_Users_Sync_Cm_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Users_Users_Sync_Cm_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Users_Users_Sync_Cm_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Users_Users_Sync_Cm_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Users_Users_Sync_Cm_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Users_Users_Sync_Cm_Set_Input>;
+  where: Users_Users_Sync_Cm_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Users_Users_Sync_Cm_Var_Pop_Fields = {
+  __typename?: 'users_users_sync_cm_var_pop_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Users_Users_Sync_Cm_Var_Samp_Fields = {
+  __typename?: 'users_users_sync_cm_var_samp_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Users_Users_Sync_Cm_Variance_Fields = {
+  __typename?: 'users_users_sync_cm_variance_fields';
+  failed_sync_count?: Maybe<Scalars['Float']>;
+};
+
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uuid']>;
@@ -41728,6 +42213,16 @@ export type GetPublicItemsQueryVariables = Exact<{
 
 export type GetPublicItemsQuery = { __typename?: 'query_root', app_item_meta: Array<{ __typename?: 'app_item_meta', external_id: any, title: string, is_published?: boolean | null, is_deleted?: boolean | null }> };
 
+export type GetEducationLevelsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetEducationLevelsQuery = { __typename?: 'query_root', lookup_enum_lom_context: Array<{ __typename?: 'lookup_enum_lom_context', description?: string | null }> };
+
+export type GetSubjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSubjectsQuery = { __typename?: 'query_root', lookup_enum_lom_classification: Array<{ __typename?: 'lookup_enum_lom_classification', description: string }> };
+
 export type DeleteNavigationItemMutationVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -41925,6 +42420,8 @@ export const GetItemDetailsByExternalIdDocument = {"kind":"Document","definition
 export const GetItemDetailsByUuidDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getItemDetailsByUuid"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"uid"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_reason"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"expiry_date"}},{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"issued"}},{"kind":"Field","name":{"kind":"Name","value":"lom_classification"}},{"kind":"Field","name":{"kind":"Name","value":"lom_context"}},{"kind":"Field","name":{"kind":"Name","value":"lom_intendedenduserrole"}},{"kind":"Field","name":{"kind":"Name","value":"lom_keywords"}},{"kind":"Field","name":{"kind":"Name","value":"lom_languages"}},{"kind":"Field","name":{"kind":"Name","value":"lom_typicalagerange"}},{"kind":"Field","name":{"kind":"Name","value":"note"}},{"kind":"Field","name":{"kind":"Name","value":"org_id"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"series"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type_id"}},{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"or_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"relations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"predicate"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"IS_REPLACED_BY","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"object"}},{"kind":"Field","name":{"kind":"Name","value":"subject"}},{"kind":"Field","name":{"kind":"Name","value":"predicate"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}},{"kind":"Field","name":{"kind":"Name","value":"item_collaterals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"description"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"subtitle","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"external_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"view_counts_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetItemDetailsByUuidQuery, GetItemDetailsByUuidQueryVariables>;
 export const GetPublicItemsByTitleOrExternalIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicItemsByTitleOrExternalId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bpchar"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"itemsByTitle"},"name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_ilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"itemsByExternalId"},"name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"external_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}}]}}]} as unknown as DocumentNode<GetPublicItemsByTitleOrExternalIdQuery, GetPublicItemsByTitleOrExternalIdQueryVariables>;
 export const GetPublicItemsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicItems"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}}]}}]} as unknown as DocumentNode<GetPublicItemsQuery, GetPublicItemsQueryVariables>;
+export const GetEducationLevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getEducationLevels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_enum_lom_context"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetEducationLevelsQuery, GetEducationLevelsQueryVariables>;
+export const GetSubjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSubjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_enum_lom_classification"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetSubjectsQuery, GetSubjectsQueryVariables>;
 export const DeleteNavigationItemDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteNavigationItem"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_nav_elements"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteNavigationItemMutation, DeleteNavigationItemMutationVariables>;
 export const GetNavigationBarsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getNavigationBars"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_nav_elements"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"distinct_on"},"value":{"kind":"EnumValue","value":"placement"}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"placement"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}}]}}]}}]} as unknown as DocumentNode<GetNavigationBarsQuery, GetNavigationBarsQueryVariables>;
 export const GetNavigationItemByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getNavigationItemById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_nav_elements"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"icon_name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_target"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_path"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}}]}}]}}]} as unknown as DocumentNode<GetNavigationItemByIdQuery, GetNavigationItemByIdQueryVariables>;
