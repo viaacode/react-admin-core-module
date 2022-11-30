@@ -13,6 +13,7 @@ import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 
 import { PlayerTicket } from '../player-ticket.types';
 
@@ -57,7 +58,7 @@ export class PlayerTicketService {
 			},
 		});
 		this.ticketServiceMaxAge = parseInt(
-			process.env.TICKET_SERVICE_MAXAGE || '14401',
+			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY),
 		);
 		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
 		this.host = process.env.HOST;
