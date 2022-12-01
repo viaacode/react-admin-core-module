@@ -12,6 +12,7 @@ import reactToString from 'react-to-string';
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
 	FilterableColumn,
@@ -51,7 +52,6 @@ import { useIdps } from '~modules/shared/hooks/useIdps';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import UserDeleteModal from '../components/UserDeleteModal';
 import {
 	GET_USER_BULK_ACTIONS,
@@ -406,12 +406,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			const profileIds = await UserService.getProfileIds(
 				generateWhereObject(getFilters(tableState), false)
 			);
+			const numOfSelectedProfiles = String(profileIds.length);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
-					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebuikers-geselecteerd',
+					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd',
 					{
-						numOfSelectedProfiles: `${profileIds.length}`,
+						numOfSelectedProfiles,
 					}
 				),
 				type: ToastType.SUCCESS,
@@ -445,7 +446,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const bulkUpdateBlockStatus = async (blockOrUnblock: boolean) => {
 		try {
 			setIsLoading(true);
-			await UserService.updateBlockStatusByProfileIds(selectedProfileIds, blockOrUnblock);
+			await UserService.updateBlockStatusByProfileIds(
+				selectedProfileIds,
+				blockOrUnblock,
+				false // TODO sync sendEmail feature
+			);
 			await fetchProfiles();
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),

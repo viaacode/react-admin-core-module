@@ -1,8 +1,0 @@
-query getNavigationElements {
-	app_navigation(distinct_on: placement, order_by: { placement: asc }) {
-		id
-		description
-		placement
-		tooltip
-	}
-}

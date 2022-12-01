@@ -1,3 +1,4 @@
+import { IPagination } from '@studiohyperdrive/pagination';
 import {
 	BlockPageOverview,
 	ContentItemStyle,
@@ -7,21 +8,20 @@ import {
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
+import { ContentWidthSchema } from '@viaa/avo2-types/types/content-page';
 import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 
 import { PageOverviewOrderOptions } from '../../../const/content-block.common.consts';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../../const/content-block.common.consts';
-import { convertToContentPageInfos } from '../../../helpers/parsers';
 import { ContentPageService } from '../../../services/content-page.service';
 import { Color } from '../../../types/content-block.types';
 import { ContentPageInfo } from '../../../types/content-pages.types';
-import ContentPage from '../../ContentPage/ContentPage';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { ContentPageLabelService } from '~modules/content-page-labels/services/content-page-label.service';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ContentTypeAndLabelsValue } from '~modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 import {
 	LoadingErrorLoadedComponent,
@@ -29,7 +29,6 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { fetchWithLogout } from '~modules/shared/helpers/fetch-with-logout';
 import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
 import { useDebounce } from '~modules/shared/hooks/useDebounce';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -99,34 +98,9 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	const [labelPageCounts, setLabelPageCounts] = useState<{ [id: number]: number } | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [selectedTabObjects, setSelectedTabObjects] = useState<LabelObj[]>([]);
-	const [focusedPage, setFocusedPage] = useState<PageInfo | null>(null);
+	const [focusedPage, setFocusedPage] = useState<ContentPageInfo | null>(null);
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero
-
-	const dbToPageOverviewContentPage = (contentPageInfo: ContentPageInfo): PageInfo => {
-		return {
-			thumbnail_path: contentPageInfo.thumbnail_path || '/images/placeholder-wide.png',
-			labels: ((contentPageInfo.labels || []) as Avo.ContentPage.Label[]).map((labelObj) => ({
-				id: labelObj.id,
-				label: labelObj.label,
-			})),
-			created_at:
-				contentPageInfo.published_at ||
-				contentPageInfo.publish_at ||
-				contentPageInfo.created_at,
-			description: ContentPageService.getDescription(contentPageInfo, 'full'),
-			title: contentPageInfo.title,
-			id: contentPageInfo.id,
-			blocks: contentPageInfo.contentBlockConfigs ? (
-				<ContentPage
-					contentPageInfo={contentPageInfo}
-					userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
-				/>
-			) : null,
-			content_width: contentPageInfo.content_width,
-			path: contentPageInfo.path as string, // TODO enforce path in database
-		};
-	};
 
 	const getSelectedLabelIds = (): number[] => {
 		if (!contentTypeAndTabs.selectedLabels) {
@@ -180,8 +154,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 					queryParamsState.item
 				);
 				if (contentPage) {
-					tempFocusedPage = dbToPageOverviewContentPage(contentPage);
-					setFocusedPage(tempFocusedPage);
+					setFocusedPage(contentPage);
 				} else {
 					console.error(
 						new CustomError(
@@ -206,39 +179,23 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				}
 			}
 
-			const body: ContentPageOverviewParams = {
-				withBlock: itemStyle === 'ACCORDION',
-				contentType: contentTypeAndTabs.selectedContentType,
-				labelIds: getSelectedLabelIds(),
-				selectedLabelIds:
-					selectedTabs && selectedTabs.length
-						? selectedTabs.map((tab) => tab.id)
-						: getSelectedLabelIds(),
-				orderProp: sortOrder.split('__')[0],
-				orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-				page: queryParamsState.page,
-				size: debouncedItemsPerPage,
-			};
-			const reply = await fetchWithLogout(
-				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages/overview`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					credentials: 'include',
-					body: JSON.stringify(body),
-				}
-			);
-
-			const response = await reply.json();
+			const response: IPagination<ContentPageInfo> & { labelCounts: Record<string, number> } =
+				await ContentPageService.getContentPages({
+					withBlock: itemStyle === 'ACCORDION',
+					contentType: contentTypeAndTabs.selectedContentType,
+					labelIds: getSelectedLabelIds(),
+					selectedLabelIds:
+						selectedTabs && selectedTabs.length
+							? selectedTabs.map((tab) => tab.id)
+							: getSelectedLabelIds(),
+					orderProp: sortOrder.split('__')[0],
+					orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+					page: queryParamsState.page,
+					size: debouncedItemsPerPage,
+				});
 
 			// Set the pages on the state after removing the page that will be shown at the top (?item=/path)
-			setPages(
-				convertToContentPageInfos(response.items).filter(
-					(page) => page.id !== get(tempFocusedPage, 'id')
-				)
-			);
+			setPages(response.items.filter((page) => page.id !== get(tempFocusedPage, 'id')));
 			setPageCount(response.pages);
 			setLabelPageCounts(response.labelCounts);
 		} catch (err) {
@@ -312,6 +269,24 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 		);
 	};
 
+	/**
+	 * @deprecated TODO replace PageInfo with ContentPageInfo in avo2-components so the same interface is used for admin-core-ui, avo2-client and avo2-components and all mapping is handled in the backend (admin-core-api)
+	 * @param contentPage
+	 */
+	const convertToPageOverviewContentPage = (contentPage: ContentPageInfo): PageInfo => {
+		return {
+			id: contentPage.id,
+			title: contentPage.title,
+			description: contentPage.description,
+			blocks: contentPage.content_blocks,
+			path: contentPage.path as string,
+			content_width: contentPage.contentWidth as ContentWidthSchema,
+			labels: contentPage.labels,
+			created_at: contentPage.createdAt,
+			thumbnail_path: contentPage.thumbnailPath as string,
+		};
+	};
+
 	const renderPageOverviewBlock = () => {
 		return (
 			<BlockPageOverview
@@ -325,7 +300,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				currentPage={queryParamsState.page}
 				onCurrentPageChanged={handleCurrentPageChanged}
 				pageCount={pageCount || 1}
-				pages={(pages || []).map(dbToPageOverviewContentPage)}
+				pages={(pages || []).map(convertToPageOverviewContentPage)}
 				tabStyle={tabStyle}
 				itemStyle={itemStyle}
 				allowMultiple={allowMultiple}
@@ -344,7 +319,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				)}
 				buttonLabel={buttonLabel}
 				buttonAltTitle={buttonAltTitle}
-				focusedPage={focusedPage}
+				focusedPage={focusedPage ? convertToPageOverviewContentPage(focusedPage) : null}
 				getLabelLink={(label: string) => {
 					return `/${ROUTE_PARTS.news}?label=${encodeURIComponent(label)}`;
 				}}

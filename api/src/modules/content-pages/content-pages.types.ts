@@ -13,11 +13,8 @@ import {
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
-
-export enum AvoOrHetArchief {
-	avo = 'avo',
-	hetArchief = 'hetarchief',
-}
+import { ContentBlockConfig } from './content-block.types';
+import { ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
 	| 'COLLECTION'
@@ -47,15 +44,6 @@ export interface PickerItem {
 	target?: LinkTarget;
 }
 
-export interface ContentBlock {
-	id: number;
-	variables: { [key: string]: any } | any[] | null;
-	position: number;
-	created_at: string;
-	updated_at: string;
-	content_block_type: string;
-}
-
 export type ContentWidth = 'REGULAR' | 'LARGE' | 'MEDIUM';
 
 export interface ContentPageLabel {
@@ -63,6 +51,8 @@ export interface ContentPageLabel {
 	label: string;
 	content_type: ContentPageType;
 	link_to: PickerItem | null;
+	created_at: string;
+	updated_at: string;
 }
 
 export interface ContentPage {
@@ -74,7 +64,7 @@ export interface ContentPage {
 	metaDescription: string | null;
 	path: string | null;
 	isPublic: boolean;
-	publishedAt: string;
+	publishedAt: string | null;
 	publishAt: string | null;
 	depublishAt: string | null;
 	createdAt: string;
@@ -85,7 +75,7 @@ export interface ContentPage {
 	owner: ContentPageUser;
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
-	content_blocks: ContentBlock[];
+	content_blocks: ContentBlockConfig[];
 	labels: ContentPageLabel[];
 }
 
@@ -100,6 +90,10 @@ export type GqlContentBlock =
 	| GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0]
 	| GetContentPageByPathQueryAvo['app_content'][0]['content_blocks'][0];
 
+export type GqlInsertOrUpdateContentBlock =
+	| ContentPageQueryTypes['InsertContentMutationVariables']['contentPage']
+	| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'];
+
 export type GqlAvoUser =
 	GetContentPageByPathQueryAvo['app_content'][0]['profile'];
 export type GqlHetArchiefUser =
@@ -112,6 +106,7 @@ export interface ContentPageUser {
 	firstName: string;
 	lastName: string;
 	groupId: string | number;
+	groupName: string;
 }
 
 export type ContentPageType =
@@ -180,3 +175,18 @@ export enum MediaItemType {
 	COLLECTION = 'COLLECTION',
 	BUNDLE = 'BUNDLE',
 }
+
+// Content Overview
+export type ContentOverviewTableCols =
+	| 'title'
+	| 'contentType'
+	| 'userProfileId'
+	| 'authorUserGroup'
+	| 'createdAt'
+	| 'updatedAt'
+	| 'isPublic'
+	| 'publishedAt'
+	| 'publishAt'
+	| 'depublishAt'
+	| 'labels'
+	| 'userGroupIds';

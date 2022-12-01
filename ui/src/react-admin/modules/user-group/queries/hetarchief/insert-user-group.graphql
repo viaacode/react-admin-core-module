@@ -1,7 +1,0 @@
-mutation insertUserGroup($userGroup: users_group_insert_input!) {
-	insert_users_group(objects: [$userGroup]) {
-		returning {
-			id
-		}
-	}
-}

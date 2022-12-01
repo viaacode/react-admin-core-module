@@ -1,12 +1,14 @@
-
 import { Test, TestingModule } from '@nestjs/testing';
-
-
 
 import { ContentPagesController } from './content-pages.controller';
 import { ContentPagesService } from '../services/content-pages.service';
 import { PlayerTicketService } from '../../player-ticket';
-import { Group, GroupIdToName, Permission, HetArchiefUser } from '../../users/types';
+import {
+	Group,
+	GroupIdToName,
+	HetArchiefUser,
+	Permission,
+} from '../../users/users.types';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
@@ -32,11 +34,9 @@ const mockContentPagesService: Partial<
 	getContentPageByPath: jest.fn(),
 	fetchCollectionOrItem: jest.fn(),
 	fetchItemByExternalId: jest.fn(),
-	fetchContentPages: jest.fn(),
+	fetchContentPagesWithOrWithoutBlocks: jest.fn(),
 	updatePublishDates: jest.fn(),
 	getContentPagesByIds: jest.fn(),
-	getContentPageLabelsByTypeAndLabels: jest.fn(),
-	getContentPageLabelsByTypeAndIds: jest.fn(),
 };
 
 const mockPlayerTicketService: Partial<

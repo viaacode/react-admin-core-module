@@ -1,183 +1,9 @@
+import { Avo } from '@viaa/avo2-types';
+import { AvoOrHetArchief } from '../shared/types';
 import {
-	GetContentByIdsDocument as GetContentByIdsDocumentAvo,
-	GetContentByIdsQuery as GetContentByIdsQueryAvo,
-	GetContentByIdsQueryVariables as GetContentByIdsQueryVariablesAvo,
-	GetContentPageByPathDocument as GetContentPageByPathDocumentAvo,
-	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
-	GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesAvo,
-	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentAvo,
-	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryAvo,
-	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesAvo,
-	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentAvo,
-	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryAvo,
-	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo,
-	GetContentPagesDocument as GetContentPagesDocumentAvo,
-	GetContentPagesQuery as GetContentPagesQueryAvo,
-	GetContentPagesQueryVariables as GetContentPagesQueryVariablesAvo,
-	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentAvo,
-	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
-	GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesAvo,
-	GetPublicContentPagesDocument as GetPublicContentPagesDocumentAvo,
-	GetPublicContentPagesQuery as GetPublicContentPagesQueryAvo,
-	GetPublicContentPagesQueryVariables as GetPublicContentPagesQueryVariablesAvo,
-	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentAvo,
-	UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationAvo,
-	UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesAvo,
-} from '../shared/generated/graphql-db-types-avo';
-import {
-	GetContentByIdsDocument as GetContentByIdsDocumentHetArchief,
-	GetContentByIdsQuery as GetContentByIdsQueryHetArchief,
-	GetContentByIdsQueryVariables as GetContentByIdsQueryVariablesHetArchief,
-	GetContentPageByPathDocument as GetContentPageByPathDocumentHetArchief,
-	GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
-	GetContentPageByPathQueryVariables as GetContentPageByPathQueryVariablesHetArchief,
-	GetContentPageLabelsByTypeAndIdsDocument as GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
-	GetContentPageLabelsByTypeAndIdsQuery as GetContentPageLabelsByTypeAndIdsQueryHetArchief,
-	GetContentPageLabelsByTypeAndIdsQueryVariables as GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief,
-	GetContentPageLabelsByTypeAndLabelsDocument as GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
-	GetContentPageLabelsByTypeAndLabelsQuery as GetContentPageLabelsByTypeAndLabelsQueryHetArchief,
-	GetContentPageLabelsByTypeAndLabelsQueryVariables as GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief,
-	GetContentPagesDocument as GetContentPagesDocumentHetArchief,
-	GetContentPagesQuery as GetContentPagesQueryHetArchief,
-	GetContentPagesQueryVariables as GetContentPagesQueryVariablesHetArchief,
-	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentHetArchief,
-	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
-	GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesHetArchief,
-	GetPublicContentPagesDocument as GetPublicContentPagesDocumentHetArchief,
-	GetPublicContentPagesQuery as GetPublicContentPagesQueryHetArchief,
-	GetPublicContentPagesQueryVariables as GetPublicContentPagesQueryVariablesHetArchief,
-	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentHetArchief,
-	UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationHetArchief,
-	UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesHetArchief,
-} from '../shared/generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief, MediaPlayerPathInfo } from './content-pages.types';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
-
-export type ContentPageQueryTypes = {
-	GetContentByIdsQueryAvo: GetContentByIdsQueryAvo;
-	GetContentByIdsQueryHetArchief: GetContentByIdsQueryHetArchief;
-	GetContentByIdsQuery:
-		| GetContentByIdsQueryAvo
-		| GetContentByIdsQueryHetArchief;
-	GetContentPageByPathQueryAvo: GetContentPageByPathQueryAvo;
-	GetContentPageByPathQueryHetArchief: GetContentPageByPathQueryHetArchief;
-	GetContentPageByPathQuery:
-		| GetContentPageByPathQueryAvo
-		| GetContentPageByPathQueryHetArchief;
-	GetContentPageLabelsByTypeAndIdsQueryAvo: GetContentPageLabelsByTypeAndIdsQueryAvo;
-	GetContentPageLabelsByTypeAndIdsQueryHetArchief: GetContentPageLabelsByTypeAndIdsQueryHetArchief;
-	GetContentPageLabelsByTypeAndIdsQuery:
-		| GetContentPageLabelsByTypeAndIdsQueryAvo
-		| GetContentPageLabelsByTypeAndIdsQueryHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQueryAvo: GetContentPageLabelsByTypeAndLabelsQueryAvo;
-	GetContentPageLabelsByTypeAndLabelsQueryHetArchief: GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQuery:
-		| GetContentPageLabelsByTypeAndLabelsQueryAvo
-		| GetContentPageLabelsByTypeAndLabelsQueryHetArchief;
-	GetContentPagesQueryAvo: GetContentPagesQueryAvo;
-	GetContentPagesQueryHetArchief: GetContentPagesQueryHetArchief;
-	GetContentPagesQuery:
-		| GetContentPagesQueryAvo
-		| GetContentPagesQueryHetArchief;
-	GetContentPagesWithBlocksQueryAvo: GetContentPagesWithBlocksQueryAvo;
-	GetContentPagesWithBlocksQueryHetArchief: GetContentPagesWithBlocksQueryHetArchief;
-	GetContentPagesWithBlocksQuery:
-		| GetContentPagesWithBlocksQueryAvo
-		| GetContentPagesWithBlocksQueryHetArchief;
-	GetPublicContentPagesQueryAvo: GetPublicContentPagesQueryAvo;
-	GetPublicContentPagesQueryHetArchief: GetPublicContentPagesQueryHetArchief;
-	GetPublicContentPagesQuery:
-		| GetPublicContentPagesQueryAvo
-		| GetPublicContentPagesQueryHetArchief;
-	UpdateContentPagePublishDatesMutationAvo: UpdateContentPagePublishDatesMutationAvo;
-	UpdateContentPagePublishDatesMutationHetArchief: UpdateContentPagePublishDatesMutationHetArchief;
-	UpdateContentPagePublishDatesMutation:
-		| UpdateContentPagePublishDatesMutationAvo
-		| UpdateContentPagePublishDatesMutationHetArchief;
-
-	GetContentByIdsQueryVariablesAvo: GetContentByIdsQueryVariablesAvo;
-	GetContentByIdsQueryVariablesHetArchief: GetContentByIdsQueryVariablesHetArchief;
-	GetContentByIdsQueryVariables:
-		| GetContentByIdsQueryVariablesAvo
-		| GetContentByIdsQueryVariablesHetArchief;
-	GetContentPageByPathQueryVariablesAvo: GetContentPageByPathQueryVariablesAvo;
-	GetContentPageByPathQueryVariablesHetArchief: GetContentPageByPathQueryVariablesHetArchief;
-	GetContentPageByPathQueryVariables:
-		| GetContentPageByPathQueryVariablesAvo
-		| GetContentPageByPathQueryVariablesHetArchief;
-	GetContentPageLabelsByTypeAndIdsQueryVariablesAvo: GetContentPageLabelsByTypeAndIdsQueryVariablesAvo;
-	GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
-	GetContentPageLabelsByTypeAndIdsQueryVariables:
-		| GetContentPageLabelsByTypeAndIdsQueryVariablesAvo
-		| GetContentPageLabelsByTypeAndIdsQueryVariablesHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo: GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo;
-	GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief: GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
-	GetContentPageLabelsByTypeAndLabelsQueryVariables:
-		| GetContentPageLabelsByTypeAndLabelsQueryVariablesAvo
-		| GetContentPageLabelsByTypeAndLabelsQueryVariablesHetArchief;
-	GetContentPagesQueryVariablesAvo: GetContentPagesQueryVariablesAvo;
-	GetContentPagesQueryVariablesHetArchief: GetContentPagesQueryVariablesHetArchief;
-	GetContentPagesQueryVariables:
-		| GetContentPagesQueryVariablesAvo
-		| GetContentPagesQueryVariablesHetArchief;
-	GetContentPagesWithBlocksQueryVariablesAvo: GetContentPagesWithBlocksQueryVariablesAvo;
-	GetContentPagesWithBlocksQueryVariablesHetArchief: GetContentPagesWithBlocksQueryVariablesHetArchief;
-	GetContentPagesWithBlocksQueryVariables:
-		| GetContentPagesWithBlocksQueryVariablesAvo
-		| GetContentPagesWithBlocksQueryVariablesHetArchief;
-	GetPublicContentPagesQueryVariablesAvo: GetPublicContentPagesQueryVariablesAvo;
-	GetPublicContentPagesQueryVariablesHetArchief: GetPublicContentPagesQueryVariablesHetArchief;
-	GetPublicContentPagesQueryVariables:
-		| GetPublicContentPagesQueryVariablesAvo
-		| GetPublicContentPagesQueryVariablesHetArchief;
-	UpdateContentPagePublishDatesMutationVariablesAvo: UpdateContentPagePublishDatesMutationVariablesAvo;
-	UpdateContentPagePublishDatesMutationVariablesHetArchief: UpdateContentPagePublishDatesMutationVariablesHetArchief;
-	UpdateContentPagePublishDatesMutationVariables:
-		| UpdateContentPagePublishDatesMutationVariablesAvo
-		| UpdateContentPagePublishDatesMutationVariablesHetArchief;
-};
-
-type ContentPageQueries = {
-	GetContentByIdsDocument: TypedDocumentNode;
-	GetContentPageByPathDocument: TypedDocumentNode;
-	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode;
-	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode;
-	GetContentPagesDocument: TypedDocumentNode;
-	GetContentPagesWithBlocksDocument: TypedDocumentNode;
-	GetPublicContentPagesDocument: TypedDocumentNode;
-	UpdateContentPagePublishDatesDocument: TypedDocumentNode;
-};
-
-export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> =
-	{
-		[AvoOrHetArchief.avo]: {
-			GetContentByIdsDocument: GetContentByIdsDocumentAvo,
-			GetContentPageByPathDocument: GetContentPageByPathDocumentAvo,
-			GetContentPageLabelsByTypeAndIdsDocument:
-				GetContentPageLabelsByTypeAndIdsDocumentAvo,
-			GetContentPageLabelsByTypeAndLabelsDocument:
-				GetContentPageLabelsByTypeAndLabelsDocumentAvo,
-			GetContentPagesDocument: GetContentPagesDocumentAvo,
-			GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
-			GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
-			UpdateContentPagePublishDatesDocument:
-				UpdateContentPagePublishDatesDocumentAvo,
-		},
-		[AvoOrHetArchief.hetArchief]: {
-			GetContentByIdsDocument: GetContentByIdsDocumentHetArchief,
-			GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
-			GetContentPageLabelsByTypeAndIdsDocument:
-				GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
-			GetContentPageLabelsByTypeAndLabelsDocument:
-				GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
-			GetContentPagesDocument: GetContentPagesDocumentHetArchief,
-			GetContentPagesWithBlocksDocument:
-				GetContentPagesWithBlocksDocumentHetArchief,
-			GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
-			UpdateContentPagePublishDatesDocument:
-				UpdateContentPagePublishDatesDocumentHetArchief,
-		},
-	};
+	ContentOverviewTableCols,
+	MediaPlayerPathInfo,
+} from './content-pages.types';
 
 export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } =
 	{
@@ -206,3 +32,54 @@ export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } =
 	};
 
 export const DEFAULT_AUDIO_STILL = '/images/audio-still.svg';
+
+export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
+	[columnId in ContentOverviewTableCols]: (
+		order: Avo.Search.OrderDirection,
+	) => any;
+}> = {
+	contentType: (order: Avo.Search.OrderDirection) => {
+		return { content_type: order };
+	},
+	createdAt: (order: Avo.Search.OrderDirection) => {
+		return { created_at: order };
+	},
+	updatedAt: (order: Avo.Search.OrderDirection) => {
+		return { updated_at: order };
+	},
+	isPublic: (order: Avo.Search.OrderDirection) => {
+		return { is_public: order };
+	},
+	publishedAt: (order: Avo.Search.OrderDirection) => {
+		return { published_at: order };
+	},
+	publishAt: (order: Avo.Search.OrderDirection) => {
+		return { publish_at: order };
+	},
+	depublishAt: (order: Avo.Search.OrderDirection) => {
+		return { depublish_at: order };
+	},
+	userGroupIds: (order: Avo.Search.OrderDirection) => {
+		return { user_group_ids: order };
+	},
+	userProfileId: (order: Avo.Search.OrderDirection) => {
+		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+			return {
+				owner_profile: { first_name: order },
+			};
+		}
+		return {
+			profile: { usersByuserId: { first_name: order } },
+		};
+	},
+	authorUserGroup: (order: Avo.Search.OrderDirection) => {
+		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+			return {
+				owner_profile: { group: { name: order } },
+			};
+		}
+		return {
+			profile: { profile_user_group: { group: { label: order } } },
+		};
+	},
+};

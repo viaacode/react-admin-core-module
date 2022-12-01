@@ -1,9 +1,7 @@
-
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { GetOrganisationQuery } from '../../shared/generated/graphql-db-types-avo';
 import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '../../content-pages';
 import { Organisation } from '../admin-organisations.types';
 import { AdminOrganisationsService } from './admin-organisations.service';
 import { DataService } from '../../data';

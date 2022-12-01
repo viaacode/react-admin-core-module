@@ -3,21 +3,24 @@ import { FC, useRef } from 'react';
 
 import { AdminLayout } from '~modules/shared/layouts';
 import { TranslationsOverview } from '~modules/translations/views';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 interface TranslationsOverviewRef {
 	onSave: () => void;
 }
 
 export const TranslationsOverviewPage: FC = () => {
+	const { tText } = useTranslation();
 	// Access child functions
 	const translationsRef = useRef<TranslationsOverviewRef>();
 
 	return (
-		<AdminLayout pageTitle={'Vertalingen'}>
+		// not extracted translation since it isn't part of the exported views of the react-admin package
+		<AdminLayout pageTitle={tText('modules/translations/translations-overview-page___vertalingen')}>
 			<AdminLayout.Actions>
 				<Button
 					onClick={() => translationsRef.current?.onSave()}
-					label={'Wijzigingen opslaan'}
+					label={tText('modules/translations/translations-overview-page___wijzigingen-opslaan')}
 				/>
 			</AdminLayout.Actions>
 			<AdminLayout.Content>

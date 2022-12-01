@@ -4,14 +4,13 @@ import ReactDOM from 'react-dom';
 import { TOptions } from 'i18next';
 
 import App from './App';
-import i18n, { initI18n } from './translations/i18n';
+import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
 import { PermissionsService } from './modules/permissions/permissions.service';
-import { UserGroupsService } from './modules/user-group/user-groups.service';
 import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
@@ -86,35 +85,37 @@ function setConfig() {
 			buttonTypes: () => [
 				// Het archief buttons
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Zilver'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___zilver'),
 					value: 'content-page-button--silver',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Blauw groen'),
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'index___blauw-groen'
+					),
 					value: 'content-page-button--teal',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Wit'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___wit'),
 					value: 'content-page-button--white',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Zwart'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___zwart'),
 					value: 'content-page-button--black',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Outline'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___outline'),
 					value: 'content-page-button--outline',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Tekst'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___tekst'),
 					value: 'content-page-button--text',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Rood'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___rood'),
 					value: 'content-page-button--red',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Link'),
+					label: AdminConfigManager.getConfig().services.i18n.tText('index___link'),
 					value: 'content-page-button--link',
 				},
 
@@ -219,7 +220,6 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
-			UserGroupsService,
 			PermissionsService,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -227,7 +227,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: AvoOrHetArchief.hetArchief,
+			databaseApplicationType: AvoOrHetArchief.avo,
 			proxyUrl,
 		},
 		flowplayer: {

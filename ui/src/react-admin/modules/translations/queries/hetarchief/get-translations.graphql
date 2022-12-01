@@ -1,6 +1,0 @@
-query getTranslations {
-	app_config(where: { name: { _ilike: "TRANSLATIONS_%" } }) {
-		name
-		value
-	}
-}

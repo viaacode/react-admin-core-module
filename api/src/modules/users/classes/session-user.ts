@@ -1,8 +1,8 @@
-import { Logger } from "@nestjs/common";
-import { Avo } from "@viaa/avo2-types";
-import { get } from "lodash";
+import { Logger } from '@nestjs/common';
+import { Avo } from '@viaa/avo2-types';
+import { get } from 'lodash';
 
-import { HetArchiefUser, Permission } from "../types";
+import { HetArchiefUser, Permission } from '../users.types';
 
 export class SessionUserEntity {
 	private logger = new Logger(SessionUserEntity.name, { timestamp: true });
@@ -22,7 +22,7 @@ export class SessionUserEntity {
 		// merge them into 1 unified array
 		this.permissions = [
 			...((this.user as HetArchiefUser).permissions || []),
-			...((this.user as Avo.User.User).profile.permissions || [])
+			...((this.user as Avo.User.User).profile.permissions || []),
 		] as Permission[];
 	}
 
@@ -35,31 +35,45 @@ export class SessionUserEntity {
 	}
 
 	public getFirstName(): string {
-		return (this.user as HetArchiefUser).firstName || (this.user as Avo.User.User).first_name;
+		return (
+			(this.user as HetArchiefUser).firstName ||
+			(this.user as Avo.User.User).first_name
+		);
 	}
 
 	public getLastName(): string {
-		return (this.user as HetArchiefUser).lastName || (this.user as Avo.User.User).last_name;
+		return (
+			(this.user as HetArchiefUser).lastName ||
+			(this.user as Avo.User.User).last_name
+		);
 	}
 
 	public getFullName(): string {
-		return (this.user as HetArchiefUser).fullName || (this.user as Avo.User.User).full_name;
+		return (
+			(this.user as HetArchiefUser).fullName ||
+			(this.user as Avo.User.User).full_name
+		);
 	}
 
 	public getMail(): string {
-		return (this.user as HetArchiefUser).email || (this.user as Avo.User.User).mail;
+		return (
+			(this.user as HetArchiefUser).email || (this.user as Avo.User.User).mail
+		);
 	}
 
 	public getGroupId(): string | number {
-		return (this.user as HetArchiefUser).groupId || (this.user as Avo.User.User).profile?.userGroupIds?.[0] as number;
+		return (
+			(this.user as HetArchiefUser).groupId ||
+			((this.user as Avo.User.User).profile?.userGroupIds?.[0] as number)
+		);
 	}
 
 	public getMaintainerId(): string {
-		return get(this.user, "maintainerId");
+		return get(this.user, 'maintainerId');
 	}
 
 	public getVisitorSpaceSlug(): string {
-		return get(this.user, "visitorSpaceSlug");
+		return get(this.user, 'visitorSpaceSlug');
 	}
 
 	public has(permission: Permission): boolean {

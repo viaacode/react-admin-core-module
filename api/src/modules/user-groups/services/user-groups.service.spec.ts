@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { UserGroupsService } from './user-groups.service';
 
-import { DataService } from '../../data/services/data.service';
+import { DataService } from '../../data';
 
 const mockDataService = {
 	execute: jest.fn(),
@@ -54,7 +54,7 @@ describe('UserGroupsService', () => {
 		it('returns user groups', async () => {
 			mockDataService.execute.mockResolvedValueOnce(mockUserGroupsResponse);
 
-			const response = await userGroupsService.getUserGroups();
+			const response = await userGroupsService.getUserGroups(true);
 			expect(response.length).toBe(1);
 			expect(response[0].name).toEqual('CP_ADMIN');
 			expect(response[0].permissions.length).toBe(1);

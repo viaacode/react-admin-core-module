@@ -1,0 +1,9 @@
+query getNavigationBars {
+	app_navigation(distinct_on: placement, order_by: { placement: asc }) {
+		id
+		description
+		placement
+		tooltip
+		user_group_ids
+	}
+}

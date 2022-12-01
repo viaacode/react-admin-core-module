@@ -90,7 +90,11 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	const user = AdminConfigManager.getConfig().user;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
-	const pageTitle = `Content: ${get(contentPageInfo, 'title', '')}`;
+	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(
+		contentPageInfo,
+		'title',
+		''
+	)}`;
 
 	const hasPerm = (permission: Permission) => PermissionService.hasPerm(user, permission);
 
@@ -334,8 +338,8 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	};
 
 	const renderContentActions = () => {
-		const contentPageOwner = get(contentPageInfo, 'user_profile_id');
-		const isOwner = get(user, 'profile.id') === contentPageOwner;
+		const contentPageOwnerId = contentPageInfo?.owner?.id;
+		const isOwner = user?.profileId === contentPageOwnerId;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 		const Link = AdminConfigManager.getConfig().services.router.Link;

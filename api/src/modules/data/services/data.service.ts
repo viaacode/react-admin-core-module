@@ -1,9 +1,6 @@
 import { randomUUID } from 'crypto';
 
 import {
-	ForbiddenException,
-	forwardRef,
-	Inject,
 	Injectable,
 	InternalServerErrorException,
 	Logger,
@@ -12,12 +9,8 @@ import {
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
 
-import { GraphQlQueryDto } from '../dto/graphql-query.dto';
-import { GraphQlResponse, QueryOrigin } from '../types';
+import { GraphQlResponse } from '../types';
 
-import { DataPermissionsService } from './data-permissions.service';
-
-import { HetArchiefUser } from '../../users/types';
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { ASTNode } from 'graphql/language/ast';
@@ -27,10 +20,7 @@ export class DataService {
 	private logger: Logger = new Logger(DataService.name, { timestamp: true });
 	private gotInstance: Got;
 
-	constructor(
-		@Inject(forwardRef(() => DataPermissionsService))
-		private dataPermissionsService: DataPermissionsService,
-	) {
+	constructor() {
 		const dbConfig: Options = {
 			prefixUrl: process.env.GRAPHQL_URL,
 			headers: {
@@ -38,42 +28,12 @@ export class DataService {
 			},
 			resolveBodyOnly: true,
 			responseType: 'json',
+			https: {
+				// TODO remove once error in certificates has been fixed: https://meemoo.atlassian.net/browse/OPS-1835
+				rejectUnauthorized: false,
+			},
 		};
 		this.gotInstance = got.extend(dbConfig);
-	}
-
-	/**
-	 * Execute an incoming query from the client
-	 * @param user
-	 * @param queryDto the query to be executed
-	 * @returns the query result
-	 */
-	public async executeClientQuery(
-		user: HetArchiefUser,
-		queryDto: GraphQlQueryDto,
-	): Promise<GraphQlResponse> {
-		// check if query can be executed
-		if (
-			!(await this.dataPermissionsService.isAllowedToExecuteQuery(
-				user,
-				queryDto,
-				QueryOrigin.ADMIN_CORE,
-			))
-		) {
-			const queryName = this.dataPermissionsService.getQueryName(
-				queryDto.query,
-			);
-			throw new ForbiddenException(
-				'You are not authorized to execute this query: ' + queryName,
-			);
-		}
-		return this.execute(
-			this.dataPermissionsService.getWhitelistedQuery(
-				queryDto.query,
-				QueryOrigin.ADMIN_CORE,
-			),
-			queryDto.variables,
-		);
 	}
 
 	/**

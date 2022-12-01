@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AdminCoreModule } from './admin-core.module';
 import helmet from 'helmet';
+import { AdminCoreModule } from './admin-core.module';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AdminCoreModule);

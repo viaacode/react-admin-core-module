@@ -1,5 +1,0 @@
-mutation updateTranslations($name: String!, $translations: app_config_set_input!) {
-	update_app_config(where: { name: { _eq: $name } }, _set: $translations) {
-		affected_rows
-	}
-}

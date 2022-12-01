@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
+import { isAvo } from '../../shared/helpers/is-avo';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
-import { UserGroupsResponse } from '../user-groups.types';
-import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../user-groups.consts';
+import { UserGroupWithPermissions } from '../user-groups.types';
+import {
+	USER_GROUP_QUERIES,
+	UserGroupQueryTypes,
+} from '../queries/user-groups.queries';
 
 @Injectable()
 export class UserGroupsService {
@@ -13,7 +17,7 @@ export class UserGroupsService {
 		userGroup:
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0]
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0],
-	): UserGroupsResponse {
+	): UserGroupWithPermissions {
 		const avoUserGroup =
 			userGroup as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0];
 		const hetArchiefUserGroup =
@@ -23,7 +27,9 @@ export class UserGroupsService {
 			label: userGroup.label,
 			name: avoUserGroup.label || hetArchiefUserGroup.name,
 			permissions: (
-				avoUserGroup.group_permissions || hetArchiefUserGroup.permissions
+				avoUserGroup.group_permissions ||
+				hetArchiefUserGroup.permissions ||
+				[]
 			).map((permissionWrap) => ({
 				id: permissionWrap.permission.id,
 				label: permissionWrap.permission.label,
@@ -33,21 +39,39 @@ export class UserGroupsService {
 		};
 	}
 
-	public async getUserGroups(): Promise<UserGroupsResponse[]> {
-		const response = await this.dataService.execute<
-			UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
-		>(
-			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetUserGroupsPermissionsDocument,
-		);
+	public async getUserGroups(
+		withPermissions: boolean,
+	): Promise<UserGroupWithPermissions[]> {
+		if (withPermissions) {
+			const response = await this.dataService.execute<
+				UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
+			>(
+				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.GetUserGroupsPermissionsDocument,
+			);
 
-		const userGroups =
-			(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
-				.users_groups ||
-			(
-				response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']
-			).users_group;
-		return userGroups.map((userGroup) => this.adapt(userGroup));
+			const userGroups =
+				(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
+					.users_groups ||
+				(
+					response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']
+				).users_group;
+			return userGroups.map((userGroup) => this.adapt(userGroup));
+		} else {
+			const response = await this.dataService.execute<
+				UserGroupQueryTypes['GetUserGroupsQuery']
+			>(
+				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+					.GetUserGroupsDocument,
+			);
+
+			const userGroups =
+				(response as UserGroupQueryTypes['GetUserGroupsQueryAvo'])
+					.users_groups ||
+				(response as UserGroupQueryTypes['GetUserGroupsQueryHetArchief'])
+					.users_group;
+			return userGroups.map((userGroup) => this.adapt(userGroup));
+		}
 	}
 
 	public async updateUserGroups(
@@ -63,19 +87,35 @@ export class UserGroupsService {
 				deletions: {
 					_or: updates
 						.filter((update) => !update.hasPermission)
-						.map((update) => ({
-							_and: [
-								{ permission_id: { _eq: update.permissionId } },
-								{ group_id: { _eq: update.userGroupId } },
-							],
-						})),
+						.map((update) => {
+							if (isAvo()) {
+								return {
+									user_group_id: { _eq: parseInt(update.userGroupId) },
+									permission_id: { _eq: update.permissionId },
+								};
+							} else {
+								return {
+									group_id: { _eq: update.userGroupId },
+									permission_id: { _eq: update.permissionId },
+								};
+							}
+						}),
 				},
 				insertions: updates
 					.filter((update) => update.hasPermission)
-					.map((update) => ({
-						group_id: update.userGroupId,
-						permission_id: update.permissionId,
-					})),
+					.map((update) => {
+						if (isAvo()) {
+							return {
+								user_group_id: parseInt(update.userGroupId),
+								permission_id: update.permissionId,
+							};
+						} else {
+							return {
+								group_id: update.userGroupId,
+								permission_id: update.permissionId,
+							};
+						}
+					}),
 			},
 		);
 

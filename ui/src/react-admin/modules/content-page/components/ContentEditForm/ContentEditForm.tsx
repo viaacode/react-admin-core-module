@@ -22,6 +22,7 @@ import {
 	ContentEditActionType,
 	ContentEditFormErrors,
 	ContentPageInfo,
+	ContentPageLabel,
 	ContentWidth,
 } from '../../types/content-pages.types';
 
@@ -43,6 +44,7 @@ import { CommonUser, Permission } from '~modules/user/user.types';
 import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 import './ContentEditForm.scss';
+import { ContentPageTypeSchema } from '@viaa/avo2-types/types/content-page';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -62,10 +64,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	// Hooks
 	const { tText } = useTranslation();
 
-	const [contentTypeLabels, setContentTypeLabels] = useState<Avo.ContentPage.Label[]>([]);
+	const [contentTypeLabels, setContentTypeLabels] = useState<ContentPageLabel[]>([]);
 
 	const changeContentPageProp = useCallback(
-		(propName: keyof ContentPageInfo, propValue: ValueOf<ContentPageInfo>) =>
+		(
+			propName: keyof ContentPageInfo | 'description_state' | 'description_html',
+			propValue: ValueOf<ContentPageInfo> | RichEditorState | string
+		) =>
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
 				payload: { propName, propValue },
@@ -77,24 +82,24 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		// Set fixed content width for specific page types
 		Object.keys(DEFAULT_PAGES_WIDTH).forEach((key) => {
 			if (
-				contentPageInfo.content_type &&
-				DEFAULT_PAGES_WIDTH[key as ContentWidth].includes(contentPageInfo.content_type) &&
-				contentPageInfo.content_width !== key
+				contentPageInfo.contentType &&
+				DEFAULT_PAGES_WIDTH[key as ContentWidth].includes(contentPageInfo.contentType) &&
+				contentPageInfo.contentWidth !== key
 			) {
-				changeContentPageProp('content_width', key);
+				changeContentPageProp('contentWidth', key);
 			}
 		});
-	}, [contentPageInfo.content_type, contentPageInfo.content_width, changeContentPageProp]);
+	}, [contentPageInfo.contentType, contentPageInfo.contentWidth, changeContentPageProp]);
 
 	useEffect(() => {
-		if (!contentPageInfo.content_type) {
+		if (!contentPageInfo.contentType) {
 			return;
 		}
-		ContentPageService.fetchLabelsByContentType(contentPageInfo.content_type)
+		ContentPageService.fetchLabelsByContentType(contentPageInfo.contentType)
 			.then(setContentTypeLabels)
 			.catch((err: any) => {
 				console.error('Failed to fetch content labels by content type', err, {
-					contentType: contentPageInfo.content_type,
+					contentType: contentPageInfo.contentType,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText(
@@ -106,7 +111,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					type: ToastType.ERROR,
 				});
 			});
-	}, [contentPageInfo.content_type, setContentTypeLabels, tText]);
+	}, [contentPageInfo.contentType, setContentTypeLabels, tText]);
 
 	// Computed
 	const contentTypeOptions = [
@@ -122,11 +127,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 
 	// Methods
 	const handleContentTypeChange = (value: string) => {
-		changeContentPageProp('content_type', value);
+		changeContentPageProp('contentType', value);
 		changeContentPageProp('labels', []);
 	};
 
-	const mapLabelsToTags = (contentLabels: Partial<Avo.ContentPage.Label>[]): TagInfo[] => {
+	const mapLabelsToTags = (contentLabels: ContentPageLabel[]): TagInfo[] => {
 		return (contentLabels || []).map((contentLabel) => ({
 			label: contentLabel.label as string,
 			value: String(contentLabel.id as number),
@@ -136,20 +141,22 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const mapTagsToLabels = (
 		tags: TagInfo[],
 		contentType: Avo.ContentPage.Type | undefined
-	): Partial<Avo.ContentPage.Label>[] => {
-		return (tags || []).map((tag) => ({
-			label: tag.label,
-			id: tag.value as number,
-			content_type: contentType,
-		}));
+	): Partial<ContentPageLabel>[] => {
+		return (tags || []).map(
+			(tag): Partial<ContentPageLabel> => ({
+				label: tag.label,
+				id: tag.value as number,
+				content_type: contentType as ContentPageTypeSchema,
+			})
+		);
 	};
 
 	// Render
 	const ownerId = get(contentPageInfo, 'user_profile_id');
 	const owner: PickerItem | undefined =
-		contentPageInfo.profile && ownerId
+		contentPageInfo.owner && ownerId
 			? {
-					label: getFullName(contentPageInfo?.profile, false, true) || '-',
+					label: contentPageInfo?.owner?.fullName || '-',
 					type: ContentPickerType.PROFILE,
 					value: ownerId,
 			  }
@@ -166,21 +173,21 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 						<Grid>
 							<Column size="12">
 								<FormGroup
-									error={formErrors.thumbnail_path}
+									error={formErrors.thumbnailPath}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
 									)}
 								>
 									<FileUpload
-										ownerId={get(user, 'profile.id')}
-										urls={compact([contentPageInfo.thumbnail_path])}
+										ownerId={user.profileId}
+										urls={compact([contentPageInfo.thumbnailPath])}
 										assetType="CONTENT_PAGE_COVER"
 										allowMulti={false}
 										label={tText(
 											'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
 										)}
 										onChange={(urls: string[]) =>
-											changeContentPageProp('thumbnail_path', urls[0])
+											changeContentPageProp('thumbnailPath', urls[0])
 										}
 									/>
 								</FormGroup>
@@ -209,8 +216,12 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									)}
 								>
 									<RichTextEditorWrapper
-										initialHtml={contentPageInfo.description_html || ''}
-										state={contentPageInfo.description_state || undefined}
+										initialHtml={
+											(contentPageInfo as any).description_html || ''
+										}
+										state={
+											(contentPageInfo as any).description_state || undefined
+										}
 										onChange={(state: RichEditorState) =>
 											changeContentPageProp('description_state', state)
 										}
@@ -222,15 +233,15 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							<Column size="12">
 								<FormGroup
-									error={formErrors.seo_description}
+									error={formErrors.seoDescription}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___seo-omschrijving'
 									)}
 								>
 									<TextArea
-										value={contentPageInfo.seo_description || ''}
+										value={contentPageInfo.seoDescription || ''}
 										onChange={(newValue) =>
-											changeContentPageProp('seo_description', newValue)
+											changeContentPageProp('seoDescription', newValue)
 										}
 										height="auto"
 										placeholder={tText(
@@ -241,15 +252,15 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							<Column size="12">
 								<FormGroup
-									error={formErrors.meta_description}
+									error={formErrors.metaDescription}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___beschrijving-voor-export-bv-klaar-nieuwsbrief'
 									)}
 								>
 									<TextArea
-										value={contentPageInfo.meta_description || ''}
+										value={contentPageInfo.metaDescription || ''}
 										onChange={(newValue) =>
-											changeContentPageProp('meta_description', newValue)
+											changeContentPageProp('metaDescription', newValue)
 										}
 										height="auto"
 										placeholder={tText(
@@ -260,14 +271,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							{user?.permissions?.includes(Permission.EDIT_PROTECTED_PAGE_STATUS) && (
 								<Column size="12">
-									<FormGroup error={formErrors.is_protected}>
+									<FormGroup error={formErrors.isProtected}>
 										<Checkbox
-											checked={contentPageInfo.is_protected}
+											checked={contentPageInfo.isProtected}
 											label={tText(
 												'admin/content/components/content-edit-form/content-edit-form___beschermde-pagina'
 											)}
 											onChange={(value) =>
-												changeContentPageProp('is_protected', value)
+												changeContentPageProp('isProtected', value)
 											}
 										/>
 									</FormGroup>
@@ -291,7 +302,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								!!user && (
 									<Column size="12">
 										<FormGroup
-											error={formErrors.user_profile_id}
+											error={formErrors.userProfileId}
 											label={tText(
 												'admin/content/views/content-detail___auteur'
 											)}
@@ -310,7 +321,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 														return;
 													}
 													changeContentPageProp(
-														'user_profile_id',
+														'userProfileId',
 														item.value
 													);
 												}}
@@ -320,7 +331,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								)}
 							<Column size="3-6">
 								<FormGroup
-									error={formErrors.content_type}
+									error={formErrors.contentType}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___content-type'
 									)}
@@ -329,23 +340,23 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									<Select
 										onChange={handleContentTypeChange}
 										options={contentTypeOptions}
-										value={contentPageInfo.content_type}
+										value={contentPageInfo.contentType}
 									/>
 								</FormGroup>
 							</Column>
 							<Column size="3-6">
 								<FormGroup
-									error={formErrors.content_width}
+									error={formErrors.contentWidth}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___content-breedte'
 									)}
 								>
 									<Select
 										onChange={(value) =>
-											changeContentPageProp('content_width', value)
+											changeContentPageProp('contentWidth', value)
 										}
 										options={GET_CONTENT_PAGE_WIDTH_OPTIONS()}
-										value={contentPageInfo.content_width}
+										value={contentPageInfo.contentWidth}
 									/>
 								</FormGroup>
 							</Column>
@@ -359,7 +370,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										value={mapLabelsToTags(contentPageInfo.labels || [])}
 										options={mapLabelsToTags(contentTypeLabels)}
 										placeholder={
-											contentPageInfo.content_type
+											contentPageInfo.contentType
 												? tText(
 														'admin/content/components/content-edit-form/content-edit-form___kies-of-maak-een-label-optioneel'
 												  )
@@ -373,11 +384,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												'labels',
 												mapTagsToLabels(
 													values,
-													contentPageInfo.content_type
-												)
+													contentPageInfo.contentType
+												) as ContentPageLabel[]
 											)
 										}
-										disabled={!contentPageInfo.content_type}
+										disabled={!contentPageInfo.contentType}
 									/>
 								</FormGroup>
 							</Column>
@@ -386,14 +397,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
 									)}
-									error={formErrors.user_group_ids}
+									error={formErrors.userGroupIds}
 									placeholder={tText(
 										'admin/menu/components/menu-edit-form/menu-edit-form___niemand'
 									)}
-									values={contentPageInfo.user_group_ids || []}
+									values={contentPageInfo.userGroupIds || []}
 									required={false}
 									onChange={(userGroupIds: string[]) =>
-										changeContentPageProp('user_group_ids', userGroupIds)
+										changeContentPageProp('userGroupIds', userGroupIds)
 									}
 								/>
 							</Column>

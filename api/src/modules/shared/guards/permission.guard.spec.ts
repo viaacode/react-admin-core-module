@@ -1,10 +1,8 @@
 import { ExecutionContext } from '@nestjs/common';
 
-
-
 import { PermissionGuard } from './permission.guard';
 
-import { Permission } from '../../users/types';
+import { Permission } from '../../users/users.types';
 
 const mockExecutionContextWithPermissions = (permissions) =>
 	({
@@ -31,9 +29,9 @@ const mockReflector = {
 
 describe('PermissionGuard', () => {
 	it('Should allow access when no permissions are required', async () => {
-		const canActivate = new PermissionGuard(
-			mockReflector,
-		).canActivate(mockExecutionContextWithPermissions([]));
+		const canActivate = new PermissionGuard(mockReflector).canActivate(
+			mockExecutionContextWithPermissions([]),
+		);
 		expect(canActivate).toBe(true);
 	});
 
@@ -42,9 +40,7 @@ describe('PermissionGuard', () => {
 			Permission.SEARCH,
 			Permission.SEARCH_OBJECTS,
 		]);
-		const canActivate = new PermissionGuard(
-			mockReflector,
-		).canActivate(
+		const canActivate = new PermissionGuard(mockReflector).canActivate(
 			mockExecutionContextWithPermissions([
 				Permission.SEARCH,
 				Permission.SEARCH_OBJECTS,
@@ -70,9 +66,9 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
-		const canActivate = new PermissionGuard(
-			mockReflector,
-		).canActivate(mockExecutionContextWithPermissions([Permission.SEARCH]));
+		const canActivate = new PermissionGuard(mockReflector).canActivate(
+			mockExecutionContextWithPermissions([Permission.SEARCH]),
+		);
 		expect(canActivate).toBe(true);
 	});
 
@@ -81,9 +77,7 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
-		const canActivate = new PermissionGuard(
-			mockReflector,
-		).canActivate(
+		const canActivate = new PermissionGuard(mockReflector).canActivate(
 			mockExecutionContextWithPermissions([
 				Permission.SEARCH,
 				Permission.SEARCH_OBJECTS,

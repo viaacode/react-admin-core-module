@@ -11,9 +11,13 @@
 .c-admin__actions {
 	display: flex;
 
-	> *  {
+	> * {
 		&:not(:last-child) {
 			margin-right: 0.8rem;
 		}
 	}
+}
+
+.c-admin__content--no-content-padding {
+	padding-bottom: 0 !important;
 }

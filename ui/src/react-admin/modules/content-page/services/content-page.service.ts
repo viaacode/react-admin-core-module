@@ -1,289 +1,158 @@
+import { IPagination } from '@studiohyperdrive/pagination';
 import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { isArray, isFunction, isPlainObject, kebabCase, omit } from 'lodash-es';
+import { compact, isArray, isFunction, isPlainObject, kebabCase, sortBy } from 'lodash-es';
 import moment from 'moment';
-import { stringify } from 'query-string';
+import { stringifyUrl } from 'query-string';
+import { ToastType } from '~core/config/config.types';
+import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block.consts';
 
-import { fetchWithLogout } from '../../shared/helpers/fetch-with-logout';
+import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
-import { dataService } from '../../shared/services/data-service';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
-import {
-	PAGES_PER_PAGE,
-	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
-} from '../const/content-page.consts';
-import {
-	convertToContentPageInfo,
-	convertToContentPageInfos,
-	convertToDatabaseContentPage,
-} from '../helpers/parsers';
-import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
-import { ContentBlockConfig } from '../types/content-block.types';
+import { PAGES_PER_PAGE } from '../const/content-page.consts';
+import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
-	ContentPageDb,
 	ContentPageInfo,
+	ContentPageLabel,
+	DbContentPage,
 } from '../types/content-pages.types';
 
-import { ContentBlockService } from './content-block.service';
-
 import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { getOrderObject } from '~modules/shared/helpers/generate-order-gql-query';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
-import { Order_By } from '~generated/graphql-db-types-avo';
-import { App_Content_Page_Insert_Input } from '~generated/graphql-db-types-hetarchief';
 
 export class ContentPageService {
-	private static getQueries() {
-		return CONTENT_PAGE_QUERIES[
-			AdminConfigManager.getConfig().database.databaseApplicationType
-		];
+	private static getBaseUrl(): string {
+		return `${
+			AdminConfigManager.getConfig().database.proxyUrl
+		}${CONTENT_PAGE_SERVICE_BASE_URL}`;
+	}
+
+	public static async getContentPages(
+		options: ContentPageOverviewParams
+	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
+		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson(this.getBaseUrl(), {
+			method: 'POST',
+			body: JSON.stringify(options),
+		});
+		return {
+			items: this.convertDbContentPagesToContentPageInfos(dbContentPages),
+			...rest,
+		};
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const response = await dataService.query<
-			ContentPageQueryTypes['GetContentPagesQuery'],
-			ContentPageQueryTypes['GetContentPagesQueryVariables']
-		>({
-			query: this.getQueries().GetContentPagesDocument,
-			variables: {
-				limit,
-				orderBy: { title: Order_By.Asc },
-				where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
-			},
-		});
-
-		return convertToContentPageInfos(
-			(response as any).app_content || (response as any).app_content_page
-		) as ContentPageInfo[];
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/public`,
+				query: {
+					limit,
+				},
+			})
+		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages);
 	}
 
 	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
-		const response = await dataService.query<
-			ContentPageQueryTypes['GetPublicProjectContentPagesQuery'],
-			ContentPageQueryTypes['GetPublicProjectContentPagesQueryVariables']
-		>({
-			query: this.getQueries().GetPublicProjectContentPagesDocument,
-			variables: {
-				limit,
-				orderBy: { title: Order_By.Asc },
-			},
-		});
-		return ((response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo'])
-			.app_content ||
-			(response as ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief'])
-				.app_content_page ||
-			[]) as ContentPageInfo[];
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/projects/public`,
+				query: {
+					limit,
+				},
+			})
+		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicContentItemsByTitle(
 		title: string,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
-		const response = await dataService.query<
-			ContentPageQueryTypes['GetPublicContentPagesByTitleQuery'],
-			ContentPageQueryTypes['GetPublicContentPagesByTitleQueryVariables']
-		>({
-			query: this.getQueries().GetPublicContentPagesByTitleDocument,
-			variables: {
-				limit: limit || null,
-				orderBy: { title: Order_By.Asc },
-				where: {
-					title: { _ilike: `%${title}%` },
-					is_public: { _eq: true },
-					is_deleted: { _eq: false },
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/public`,
+				query: {
+					limit,
+					title,
 				},
-			},
-		});
-
-		return ((response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo'])
-			.app_content ||
-			(response as ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief'])
-				.app_content_page ||
-			[]) as ContentPageInfo[];
+			})
+		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
 		title: string,
 		limit: number
-	): Promise<Partial<ContentPageInfo>[] | null> {
-		const response = await dataService.query<
-			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQuery'],
-			ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryVariables']
-		>({
-			query: this.getQueries().GetPublicProjectContentPagesByTitleDocument,
-			variables: {
-				title,
-				limit,
-				orderBy: { title: Order_By.Asc },
-			},
-		});
-		return (
-			(response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryAvo'])
-				.app_content ||
-			(
-				response as ContentPageQueryTypes['GetPublicProjectContentPagesByTitleQueryHetArchief']
-			).app_content_page
+	): Promise<Partial<ContentPageInfo>[]> {
+		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/projects/public`,
+				query: {
+					limit,
+					title,
+				},
+			})
 		);
+		return this.convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo> {
-		const response = await dataService.query<
-			ContentPageQueryTypes['GetContentByIdQuery'],
-			ContentPageQueryTypes['GetContentByIdQueryVariables']
-		>({
-			query: this.getQueries().GetContentByIdDocument,
-			variables: {
-				id,
-			},
-		});
-
-		const dbContentPage = ((response as ContentPageQueryTypes['GetContentByIdQueryAvo'])
-			.app_content ||
-			(response as ContentPageQueryTypes['GetContentByIdQueryHetArchief']).app_content_page ||
-			[])?.[0];
-
-		if (!dbContentPage) {
-			throw new CustomError('No content page found with provided id', null, {
-				id,
-				code: 'NOT_FOUND',
-			});
-		}
-		return convertToContentPageInfo(dbContentPage as unknown as ContentPageDb);
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(
+			`${this.getBaseUrl()}/${id}`
+		);
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
-		try {
-			const response = await dataService.query<ContentPageQueryTypes['GetContentTypesQuery']>(
-				{
-					query: this.getQueries().GetContentTypesDocument,
-				}
-			);
-			const contentTypes =
-				(response as ContentPageQueryTypes['GetContentTypesQueryAvo'])
-					.lookup_enum_content_types ||
-				(response as ContentPageQueryTypes['GetContentTypesQueryHetArchief'])
-					.lookup_app_content_type;
-
-			return (contentTypes || []).map((obj) => ({
-				value: obj.value,
-				label: obj.description || (obj as any).comment,
-			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
-		} catch (err) {
-			console.error('Failed to retrieve content types.', err, {
-				query: this.getQueries().GetContentTypesDocument,
-			});
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
-					'modules/admin/content-page/services/content-page___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content/content___er-ging-iets-mis-tijdens-het-ophalen-van-de-content-types'
-				),
-				type: ToastType.ERROR,
-			});
-
-			return null;
-		}
+		return fetchWithLogoutJson(`${this.getBaseUrl()}/types`);
 	}
 
-	public static async fetchLabelsByContentType(
-		contentType: string
-	): Promise<Avo.ContentPage.Label[]> {
-		try {
-			const response = await dataService.query<
-				ContentPageQueryTypes['GetContentLabelsByContentTypeQuery'],
-				ContentPageQueryTypes['GetContentLabelsByContentTypeQueryVariables']
-			>({
-				query: this.getQueries().GetContentLabelsByContentTypeDocument,
-				variables: {
-					contentType,
-				},
-			});
-
-			const labels =
-				(response as any).app_content_labels || (response as any).app_content_label;
-
-			if (!labels) {
-				throw new CustomError('The response does not contain any labels', null, {
-					response,
-				});
-			}
-
-			return labels;
-		} catch (err) {
-			throw new CustomError(
-				'Failed to get content labels by content type from database',
-				err,
-				{
-					variables: {
+	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
+		return (
+			(await fetchWithLogoutJson(
+				stringifyUrl({
+					url: `${this.getBaseUrl()}/labels`,
+					query: {
 						contentType,
 					},
-					query: 'GET_CONTENT_LABELS_BY_CONTENT_TYPE',
-				}
-			);
-		}
+				})
+			)) || []
+		);
 	}
 
 	public static async insertContentLabelsLinks(
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
-		let variables: any;
-		try {
-			variables = {
-				objects: labelIds.map((labelId) => ({
-					content_id: contentPageId,
-					label_id: labelId,
-				})),
-			};
-
-			await dataService.query<
-				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
-				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
-			>({
-				variables,
-				query: this.getQueries().InsertContentLabelLinksDocument,
-			});
-		} catch (err) {
-			throw new CustomError('Failed to insert content label links in the database', err, {
-				variables,
-				query: 'INSERT_CONTENT_LABEL_LINKS',
-			});
-		}
+		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				contentPageId,
+				labelIds,
+			}),
+		});
 	}
 
 	public static async deleteContentLabelsLinks(
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
-		try {
-			await dataService.query<
-				ContentPageQueryTypes['DeleteContentLabelLinksMutation'],
-				ContentPageQueryTypes['DeleteContentLabelLinksMutationVariables']
-			>({
-				query: this.getQueries().DeleteContentLabelLinksDocument,
-				variables: {
-					labelIds,
-					contentPageId,
-				},
-			});
-		} catch (err) {
-			throw new CustomError('Failed to insert content label links in the database', err, {
-				variables: {
-					labelIds,
-					contentPageId,
-				},
-				query: 'DELETE_CONTENT_LABEL_LINKS',
-			});
-		}
+		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
+			method: 'DELETE',
+			body: JSON.stringify({
+				contentPageId,
+				labelIds,
+			}),
+		});
 	}
 
 	public static async fetchContentPages(
@@ -293,164 +162,44 @@ export class ContentPageService {
 		tableColumnDataType: string,
 		where: any
 	): Promise<[ContentPageInfo[], number]> {
-		let variables: ContentPageQueryTypes['GetContentPagesQueryVariables'] | null = null;
-		try {
-			variables = {
-				where,
-				offset: PAGES_PER_PAGE * page,
-				limit: PAGES_PER_PAGE,
-				orderBy: getOrderObject(
+		const [dbContentPages, count] = await fetchWithLogoutJson(
+			stringifyUrl({
+				url: this.getBaseUrl() + '/overview',
+				query: {
+					offset: page * PAGES_PER_PAGE,
+					limit: PAGES_PER_PAGE,
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
-					TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT
-				),
-			};
-
-			const response = await dataService.query<
-				ContentPageQueryTypes['GetContentPagesQuery'],
-				ContentPageQueryTypes['GetContentPagesQueryVariables']
-			>({
-				query: this.getQueries().GetContentPagesDocument,
-				variables,
-			});
-
-			const dbContentPages = ((response as ContentPageQueryTypes['GetContentPagesQueryAvo'])
-				.app_content ||
-				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
-					.app_content_page ||
-				[]) as ContentPageDb[];
-
-			const dbContentPageCount: number =
-				(response as ContentPageQueryTypes['GetContentPagesQueryAvo']).app_content_aggregate
-					?.aggregate?.count ||
-				(response as ContentPageQueryTypes['GetContentPagesQueryHetArchief'])
-					.app_content_page_aggregate?.aggregate?.count ||
-				0;
-
-			if (!dbContentPages) {
-				throw new CustomError('Response did not contain any content pages', null, {
-					response,
-				});
-			}
-
-			return [convertToContentPageInfos(dbContentPages), dbContentPageCount];
-		} catch (err) {
-			throw new CustomError('Failed to get content pages from the database', err, {
-				variables,
-				query: 'GET_CONTENT_PAGES',
-			});
-		}
-	}
-
-	private static cleanupBeforeInsert(
-		dbContentPage: Partial<ContentPageDb>
-	): Partial<ContentPageDb> {
-		return omit(dbContentPage, [
-			'contentBlockssBycontentId',
-			'content_blocks',
-			'profile',
-			'__typename',
-			'content_content_labels',
-			'id',
-		]);
+					where: JSON.stringify(where),
+				},
+			})
+		);
+		return [this.convertDbContentPagesToContentPageInfos(dbContentPages) || [], count];
 	}
 
 	public static async insertContentPage(
 		contentPage: Partial<ContentPageInfo>
 	): Promise<Partial<ContentPageInfo> | null> {
-		try {
-			const dbContentPage = this.cleanupBeforeInsert(
-				convertToDatabaseContentPage(contentPage)
-			);
-			const response = await dataService.query<
-				ContentPageQueryTypes['InsertContentMutation'],
-				ContentPageQueryTypes['InsertContentMutationVariables']
-			>({
-				query: this.getQueries().InsertContentDocument,
-				variables: {
-					contentPage: dbContentPage as App_Content_Page_Insert_Input,
-				},
-			});
-
-			const id: number | null =
-				(response as ContentPageQueryTypes['InsertContentMutationAvo']).insert_app_content
-					?.returning?.[0]?.id ||
-				(response as ContentPageQueryTypes['InsertContentMutationHetArchief'])
-					.insert_app_content_page?.returning?.[0]?.id ||
-				null;
-
-			if (id) {
-				// Insert content-blocks
-				let contentBlockConfigs: Partial<ContentBlockConfig>[] | null = null;
-				if (contentPage.contentBlockConfigs && contentPage.contentBlockConfigs.length) {
-					contentBlockConfigs = await ContentBlockService.insertContentBlocks(
-						id,
-						contentPage.contentBlockConfigs
-					);
-
-					if (!contentBlockConfigs) {
-						// return null to prevent triggering success toast
-						return null;
-					}
-				}
-
-				return { ...contentPage, contentBlockConfigs, id } as Partial<ContentPageInfo>;
-			}
-
-			return null;
-		} catch (err) {
-			console.error('Failed to insert content page into the database', err);
-			return null;
-		}
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
+			method: 'PUT',
+			body: JSON.stringify(this.convertContentPageInfoToDbContentPage(contentPage)),
+		});
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static async updateContentPage(
 		contentPage: Partial<ContentPageInfo>,
 		initialContentPage: Partial<ContentPageInfo> | undefined
 	): Promise<Partial<ContentPageInfo> | null> {
-		try {
-			const dbContentPage = this.cleanupBeforeInsert(
-				convertToDatabaseContentPage(contentPage)
-			);
-			const response = await dataService.query<
-				ContentPageQueryTypes['UpdateContentByIdMutation'],
-				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
-			>({
-				query: this.getQueries().UpdateContentByIdDocument,
-				variables: {
-					contentPage: dbContentPage,
-					id: contentPage.id,
-				},
-			});
-
-			const updatedContent =
-				(response as ContentPageQueryTypes['UpdateContentByIdMutationAvo'])
-					.update_app_content?.affected_rows ||
-				(response as ContentPageQueryTypes['UpdateContentByIdMutationHetArchief'])
-					.update_app_content_page?.affected_rows ||
-				null;
-			if (!updatedContent) {
-				throw new CustomError(
-					'Content page update returned empty response',
-					null,
-					response
-				);
-			}
-
-			if (contentPage.contentBlockConfigs && initialContentPage) {
-				await ContentBlockService.updateContentBlocks(
-					contentPage.id as number,
-					initialContentPage.contentBlockConfigs || [],
-					contentPage.contentBlockConfigs
-				);
-			}
-
-			return contentPage;
-		} catch (err) {
-			console.error('Failed to save content', err);
-			return null;
-		}
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
+			method: 'PATCH',
+			body: JSON.stringify({
+				contentPage: this.convertContentPageInfoToDbContentPage(contentPage),
+				initialContentPage: this.convertContentPageInfoToDbContentPage(initialContentPage),
+			}),
+		});
+		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo>): string {
@@ -491,6 +240,105 @@ export class ContentPageService {
 			},
 			(key: string | number) => String(key).endsWith(RichEditorStateKey)
 		);
+	}
+
+	private static convertDbContentPagesToContentPageInfos(
+		dbContentPages: DbContentPage[] | null
+	): ContentPageInfo[] | null {
+		if (!dbContentPages) {
+			return dbContentPages;
+		}
+		return dbContentPages.map(this.convertDbContentPageToContentPageInfo.bind(this));
+	}
+
+	private static convertDbContentPageToContentPageInfo(
+		dbContentPage: DbContentPage
+	): ContentPageInfo {
+		return {
+			...dbContentPage,
+			content_blocks: this.convertDbContentBlockToContentBlockConfig(
+				dbContentPage.content_blocks
+			),
+		};
+	}
+
+	private static convertDbContentBlockToContentBlockConfig(
+		contentBlocks: DbContentBlock[]
+	): ContentBlockConfig[] {
+		const sortedContentBlocks = sortBy(contentBlocks, (c) => c.position);
+
+		return compact(
+			(sortedContentBlocks || []).map((contentBlock: DbContentBlock) => {
+				const { type, id, components, block } = contentBlock;
+				const configForType = CONTENT_BLOCK_CONFIG_MAP[type as ContentBlockType];
+				if (!configForType) {
+					console.error(
+						new CustomError('Failed to find content block config for type', null, {
+							type,
+							contentBlock,
+							CONTENT_BLOCK_CONFIG_MAP,
+						})
+					);
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						title: AdminConfigManager.getConfig().services.i18n.tText(
+							'modules/admin/content-page/helpers/get-published-state___error'
+						),
+						description: AdminConfigManager.getConfig().services.i18n.tText(
+							'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
+						),
+						type: ToastType.ERROR,
+					});
+					return null;
+				}
+				const cleanConfig = configForType(contentBlock.position);
+
+				const rawComponentState = components;
+				const componentState = Array.isArray(rawComponentState)
+					? rawComponentState
+					: { ...cleanConfig.components.state, ...rawComponentState };
+
+				return {
+					...cleanConfig,
+					id,
+					components: {
+						...cleanConfig.components,
+						state: componentState,
+					},
+					block: {
+						...cleanConfig.block,
+						state: {
+							...cleanConfig.block.state,
+							...(block || {}),
+						},
+					},
+				} as ContentBlockConfig;
+			})
+		);
+	}
+
+	private static convertContentPageInfoToDbContentPage(
+		contentPageInfo: Partial<ContentPageInfo> | undefined
+	): DbContentPage | undefined {
+		if (!contentPageInfo) {
+			return undefined;
+		}
+		return {
+			...contentPageInfo,
+			content_blocks: (contentPageInfo.content_blocks || []).map(
+				(contentBlock): DbContentBlock => {
+					return {
+						name: contentBlock.name,
+						id: contentBlock.id,
+						anchor: contentBlock.anchor,
+						type: contentBlock.type,
+						errors: contentBlock.errors,
+						position: contentBlock.position,
+						block: contentBlock.block.state,
+						components: contentBlock.components.state,
+					};
+				}
+			),
+		} as DbContentPage;
 	}
 
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.
@@ -550,14 +398,14 @@ export class ContentPageService {
 			const contentToInsert = { ...contentPageInfo };
 
 			// update attributes specific to duplicate
-			contentToInsert.is_public = false;
-			contentToInsert.published_at = null;
-			contentToInsert.depublish_at = null;
-			contentToInsert.publish_at = null;
+			contentToInsert.isPublic = false;
+			contentToInsert.publishedAt = null;
+			contentToInsert.depublishAt = null;
+			contentToInsert.publishAt = null;
 			contentToInsert.path = null;
-			contentToInsert.created_at = moment().toISOString();
-			contentToInsert.updated_at = contentToInsert.created_at;
-			contentToInsert.user_profile_id = profileId;
+			contentToInsert.createdAt = moment().toISOString();
+			contentToInsert.updatedAt = contentToInsert.createdAt;
+			contentToInsert.userProfileId = profileId;
 
 			try {
 				contentToInsert.title = await this.getCopyTitleForContentPage(
@@ -594,71 +442,35 @@ export class ContentPageService {
 	}
 
 	public static async deleteContentPage(id: number | string): Promise<void> {
-		try {
-			// query path
-			const contentPage = await ContentPageService.getContentPageById(id);
-			await dataService.query<
-				ContentPageQueryTypes['SoftDeleteContentMutation'],
-				ContentPageQueryTypes['SoftDeleteContentMutationVariables']
-			>({
-				variables: { id, path: `${contentPage.path}-${id}` },
-				query: this.getQueries().SoftDeleteContentDocument,
-			});
-		} catch (err) {
-			throw new CustomError('Failed to delete content page from the database', err, {
-				id,
-				query: this.getQueries().SoftDeleteContentDocument,
-			});
-		}
+		await fetchWithLogoutJson(`${this.getBaseUrl()}/${id}`, {
+			method: 'DELETE',
+		});
 	}
 
 	public static getDescription(
 		contentPageInfo: ContentPageInfo,
 		sanitizePreset: SanitizePreset = 'link'
 	): string | null {
-		const description = contentPageInfo.description_state
-			? contentPageInfo.description_state.toHTML()
-			: contentPageInfo.description_html || null;
+		const description = (contentPageInfo as any).description_state
+			? (contentPageInfo as any).description_state.toHTML()
+			: (contentPageInfo as any).description_html || null;
 		return description ? sanitizeHtml(description, sanitizePreset) : null;
 	}
 
 	/**
-	 * Get a content page with all of its content without the user having o be logged in
+	 * Get a content page with all of its content without the user having to be logged in
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 */
 	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
 		try {
-			const response = await fetchWithLogout(
-				`${
-					AdminConfigManager.getConfig().database.proxyUrl
-				}/${CONTENT_PAGE_SERVICE_BASE_URL}?${stringify({
-					path,
-				})}`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
+			return fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl(),
+					query: {
+						path,
 					},
-					credentials: 'include',
-				}
+				})
 			);
-			let responseContent: any;
-			try {
-				responseContent = await response.json();
-			} catch (err) {
-				// Ignore bad parse errors, error is still handled below
-			}
-			if (!responseContent || response.status < 200 || response.status >= 400) {
-				throw new CustomError('Failed to get content page from /content-pages', null, {
-					path,
-					response,
-					responseContent,
-				});
-			}
-			if (responseContent?.error) {
-				return responseContent?.error;
-			}
-			return convertToContentPageInfo(responseContent);
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
 		}
@@ -675,37 +487,14 @@ export class ContentPageService {
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
-			const response = await fetchWithLogout(
-				`${
-					AdminConfigManager.getConfig().database.proxyUrl
-				}/admin/content-pages/path-exist?${stringify({
-					path,
-				})}`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					credentials: 'include',
-				}
-			);
-			let responseContent: any;
-			try {
-				responseContent = await response.json();
-			} catch (err) {
-				// Ignore bad parse errors, error is still handled below
-			}
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError(
-					'Failed to check if content page exists from /content-pages/path-exist',
-					null,
-					{
+			const responseContent = await fetchWithLogoutJson(
+				stringifyUrl({
+					url: this.getBaseUrl() + '/path-exists',
+					query: {
 						path,
-						response,
-						responseContent,
-					}
-				);
-			}
+					},
+				})
+			);
 			if (id === responseContent.id) {
 				return null;
 			}
@@ -724,30 +513,19 @@ export class ContentPageService {
 			  }[]
 			| undefined
 	): Promise<ResolvedItemOrCollection[]> {
-		let url: string | undefined;
-		let body: any | undefined;
+		let url: string | undefined = undefined;
+		let body: any | undefined = undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-pages`;
+			url = this.getBaseUrl() + '/media';
 			body = {
 				searchQuery,
 				searchQueryLimit,
 				mediaItems,
 			};
-
-			const response = await fetchWithLogout(url, {
+			return fetchWithLogoutJson(url, {
 				method: 'POST',
 				body: JSON.stringify(body),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				credentials: 'include',
 			});
-
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError('response status was unexpected', null, { response });
-			}
-
-			return await response.json();
 		} catch (err) {
 			throw new CustomError('Failed to resolve media items through proxy', err, {
 				searchQuery,
@@ -757,5 +535,18 @@ export class ContentPageService {
 				body,
 			});
 		}
+	}
+
+	public static async getUserGroupsWithAccessToContentPage(
+		path: string
+	): Promise<(string | number)[]> {
+		return fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/access`,
+				query: {
+					path,
+				},
+			})
+		);
 	}
 }
