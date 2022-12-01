@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { TOptions } from 'i18next';
 
 import App from './App';
-import i18n, { initI18n } from './translations/i18n';
+import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
@@ -89,7 +89,9 @@ function setConfig() {
 					value: 'content-page-button--silver',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___blauw-groen'),
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'index___blauw-groen'
+					),
 					value: 'content-page-button--teal',
 				},
 				{
