@@ -61,7 +61,7 @@ import {
 } from '../user.consts';
 
 export interface UserOverviewProps {
-	customFormatDate?: (date: Date|string) => string;
+	customFormatDate?: (date: Date | string) => string;
 }
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
@@ -639,7 +639,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					: '-';
 			}
 			case 'temp_access': {
-				const tempAccess = get(commonUser, 'user.temp_access.current.status');
+				const tempAccess = commonUser.temp_access?.current?.status;
 
 				switch (tempAccess) {
 					case 0:
@@ -744,7 +744,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						bulkActions
 					)}
 					rowKey={(row: CommonUser) =>
-						row?.profileId || row?.userId || get(row, 'user.mail')
+						row?.profileId || row?.userId || get(row, 'user.mail') || ''
 					}
 				/>
 				<UserDeleteModal

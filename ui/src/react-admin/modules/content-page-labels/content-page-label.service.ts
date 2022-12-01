@@ -10,7 +10,7 @@ import {
 } from '~modules/content-page-labels/content-page-label.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { ITEMS_PER_PAGE } from '~modules/user/user.consts';
+import { USERS_PER_PAGE } from '~modules/user/user.consts';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
@@ -22,7 +22,7 @@ export class ContentPageLabelService {
 		sortColumn: ContentPageLabelOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
 		where: any,
-		itemsPerPage: number = ITEMS_PER_PAGE
+		itemsPerPage: number = USERS_PER_PAGE
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return fetchWithLogoutJson(

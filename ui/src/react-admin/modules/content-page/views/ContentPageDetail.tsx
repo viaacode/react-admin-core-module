@@ -284,7 +284,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 						contentPageInfo,
 						CONTENT_PAGE_COPY,
 						CONTENT_PAGE_COPY_REGEX,
-						get(user, 'profile.id')
+						user.profileId
 					);
 
 					if (!duplicateContentPage) {
