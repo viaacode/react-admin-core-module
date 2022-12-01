@@ -23,4 +23,5 @@ export interface TranslationsOverviewV2Props extends DefaultProps {
 		onSave: () => void;
 		onClose: () => void;
 	}) => ReactNode;
+	isAvo?: boolean;
 }

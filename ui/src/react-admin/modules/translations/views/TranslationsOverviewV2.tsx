@@ -23,6 +23,7 @@ import {
 	Table,
 	TextInput,
 } from '@meemoo/react-components';
+import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { Icon } from '~modules/shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
@@ -45,6 +46,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Props> = ({
 	className,
 	renderPopup,
+	isAvo = false,
 }) => {
 	const { tHtml, tText } = useTranslation();
 
@@ -221,6 +223,51 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		[filters, setFilters]
 	);
 
+	const getPagination = () => {
+		if (!isAvo) {
+			return (
+				<Pagination
+					buttons={{
+						next: (
+							<Button
+								className="u-pl-24:sm u-pl-8"
+								disabled={filters.page === pageCount}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___volgende'
+								)}
+								iconEnd={<Icon name="angleRight" />}
+							/>
+						),
+						previous: (
+							<Button
+								className="u-pr-24:sm u-pr-8"
+								disabled={filters.page === 1}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___vorige'
+								)}
+								iconStart={<Icon name="angleLeft" />}
+							/>
+						),
+					}}
+					showFirstLastNumbers
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+					pageCount={pageCount}
+				/>
+			);
+		} else {
+			return (
+				<PaginationAvo
+					pageCount={pageCount}
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+				/>
+			);
+		}
+	};
+
 	const renderTranslationsTable = (): ReactNode => {
 		if (!filteredAndPaginatedTranslations) {
 			return <Loader />;
@@ -291,40 +338,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
 					onRowClick={handleRowClick}
-					pagination={() => {
-						return (
-							<Pagination
-								buttons={{
-									next: (
-										<Button
-											className="u-pl-24:sm u-pl-8"
-											disabled={filters.page === pageCount}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___volgende'
-											)}
-											iconEnd={<Icon name="angleRight" />}
-										/>
-									),
-									previous: (
-										<Button
-											className="u-pr-24:sm u-pr-8"
-											disabled={filters.page === 1}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___vorige'
-											)}
-											iconStart={<Icon name="angleLeft" />}
-										/>
-									),
-								}}
-								showFirstLastNumbers
-								onPageChange={handlePageChange}
-								currentPage={filters.page - 1}
-								pageCount={pageCount}
-							/>
-						);
-					}}
+					pagination={getPagination}
 				/>
 			</>
 		);
