@@ -11,7 +11,7 @@ import React, {
 
 import { TranslationsOverviewV2Props, TranslationV2 } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { OrderDirection } from '~modules/shared/types';
+import { AvoOrHetArchief, OrderDirection } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
@@ -46,7 +46,6 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Props> = ({
 	className,
 	renderPopup,
-	isAvo = false,
 }) => {
 	const { tHtml, tText } = useTranslation();
 
@@ -62,6 +61,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / ITEMS_PER_PAGE);
+
+	const isAvo =
+		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
