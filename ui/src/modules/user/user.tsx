@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { USER_PATH } from '../../react-admin';
+import { USER_PATH } from '~modules/user/user.routes';
 
 const UserOverviewPage: FC = () => {
 	const { tText } = useTranslation();

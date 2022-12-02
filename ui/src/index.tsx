@@ -210,9 +210,10 @@ function setConfig() {
 			},
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined) => (
-					<Html content={i18n.t(key, params)} />
+					<Html content={i18n.t(key, params as any) as unknown as string} />
 				),
-				tText: (key: string, params: TOptions | string | undefined) => i18n.t(key, params),
+				tText: (key: string, params: TOptions | string | undefined) =>
+					i18n.t(key, params as any) as unknown as string,
 			},
 			educationOrganisationService: {
 				fetchEducationOrganisationName: () => Promise.resolve(null),

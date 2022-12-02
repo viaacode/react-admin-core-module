@@ -43,20 +43,3 @@ export const getGqlSortDirection = (
 			return order as GraphQlSortDirections;
 	}
 };
-
-export const getOrderObject = (
-	sortColumn: string,
-	sortOrder: Avo.Search.OrderDirection,
-	tableColumnDataType: string,
-	columns: Partial<{
-		[columnName: string]: (order: Avo.Search.OrderDirection) => any;
-	}>
-): Record<string, GraphQlSortDirections>[] => {
-	const getOrderFunc = columns[sortColumn] as ((order: GraphQlSortDirections) => any) | undefined;
-
-	if (getOrderFunc) {
-		return [getOrderFunc(getGqlSortDirection(sortOrder, tableColumnDataType))];
-	}
-
-	return [{ [sortColumn]: getGqlSortDirection(sortOrder, tableColumnDataType) }];
-};

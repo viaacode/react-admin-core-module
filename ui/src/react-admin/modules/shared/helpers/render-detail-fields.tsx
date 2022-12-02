@@ -3,7 +3,6 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import { formatDate } from './formatters/date';
 import { sanitizeHtml, sanitizePresets } from './sanitize';
-import { stringsToTagList } from './strings-to-taglist';
 
 export function renderDetailRow(value: ReactNode, label: string): ReactElement {
 	return (
@@ -39,17 +38,5 @@ export function renderDateDetailRows(
 	return propAndTranslations.map((propAndTranslation) => {
 		const value = get(obj, propAndTranslation[0]);
 		return renderDetailRow(value ? formatDate(value) : '-', propAndTranslation[1]);
-	});
-}
-
-export function renderMultiOptionDetailRows(
-	obj: any,
-	propAndTranslations: [string, string][]
-): ReactElement[] {
-	return propAndTranslations.map((propAndTranslation) => {
-		return renderDetailRow(
-			obj[propAndTranslation[0]] ? stringsToTagList(obj[propAndTranslation[0]]) : '-',
-			propAndTranslation[1]
-		);
 	});
 }

@@ -2,7 +2,7 @@ import { AdminConfigManager } from '~core/config';
 import { CONTENT_PAGE_LABEL_PATH } from '~modules/content-page-labels/content-page-label.const';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
 import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
-import { USER_PATH } from '~modules/user/user.consts';
+import { USER_PATH } from '~modules/user/user.routes';
 import { NavigationItemInfo } from './shared/types';
 import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
 import { CONTENT_PAGE_PATH } from './react-admin';

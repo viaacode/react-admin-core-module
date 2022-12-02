@@ -5,19 +5,12 @@ import {
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { CommonUser, Permission, UserBulkAction } from './user.types';
 
 export const USERS_PER_PAGE = 50;
-
-export const USER_PATH = (parts = ROUTE_PARTS) => ({
-	USER_OVERVIEW: `/${parts.admin}/${parts.user}`,
-	USER_DETAIL: `/${parts.admin}/${parts.user}/:id`,
-	USER_EDIT: `/${parts.admin}/${parts.user}/:id/${parts.edit}`,
-});
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;

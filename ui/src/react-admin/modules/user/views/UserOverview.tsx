@@ -12,6 +12,7 @@ import reactToString from 'react-to-string';
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { USER_PATH } from '~modules/user/user.routes';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
@@ -25,7 +26,7 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { UserService } from '../user.service';
+import { UserService } from '~modules/user';
 import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
 import './UserOverview.scss';
@@ -53,12 +54,7 @@ import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
-import {
-	GET_USER_BULK_ACTIONS,
-	GET_USER_OVERVIEW_TABLE_COLS,
-	USER_PATH,
-	USERS_PER_PAGE,
-} from '../user.consts';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, USERS_PER_PAGE } from '~modules/user';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
