@@ -4,7 +4,7 @@ import { AdminConfigManager } from '~core/config';
 
 export class TranslationsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/translations`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/translations`;
 	}
 
 	static async fetchTranslations(): Promise<Record<string, Record<string, string>>> {

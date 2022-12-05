@@ -5,9 +5,10 @@ import { COLLECTIONS_OR_BUNDLES_PATH } from './collection.const';
 
 const userPath = USER_PATH();
 
-export const ADMIN_PATH = Object.freeze({
-	...userPath,
-	...CONTENT_PAGE_PATH(),
-	...COLLECTIONS_OR_BUNDLES_PATH,
-	...NAVIGATION_PATH,
-});
+export const ADMIN_PATH = () =>
+	Object.freeze({
+		...userPath,
+		...CONTENT_PAGE_PATH(),
+		...COLLECTIONS_OR_BUNDLES_PATH,
+		...NAVIGATION_PATH(),
+	});

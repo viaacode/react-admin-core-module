@@ -1,4 +1,4 @@
-export const ROUTE_PARTS = Object.freeze({
+export const ROUTE_PARTS = {
 	admin: 'admin',
 	assignment: 'opdracht',
 	assignments: 'opdrachten',
@@ -60,4 +60,4 @@ export const ROUTE_PARTS = Object.freeze({
 	linkedAccounts: 'koppelingen',
 	quickLane: 'bekijk',
 	permissions: 'permissies',
-});
+};

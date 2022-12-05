@@ -7,7 +7,7 @@ import { NavigationItem } from './navigation.types';
 
 export class NavigationService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/navigations`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/navigations`;
 	}
 
 	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {

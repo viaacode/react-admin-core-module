@@ -20,7 +20,7 @@ import {
 
 export class UserService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
 	}
 
 	public static adaptProfile(
@@ -194,7 +194,7 @@ export class UserService {
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
 		isBlocked: boolean,
-		sendEmail?: boolean,
+		sendEmail?: boolean
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -205,7 +205,7 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-block`;
+			url = `${this.getBaseUrl()}/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -274,12 +274,12 @@ export class UserService {
 			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
+			url = `${this.getBaseUrl()}/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
 				sendEmail,
-				...(isAvo ? { transferToProfileId } : {})
+				...(isAvo ? { transferToProfileId } : {}),
 			};
 			await fetchWithLogout(url, {
 				method: 'DELETE',
