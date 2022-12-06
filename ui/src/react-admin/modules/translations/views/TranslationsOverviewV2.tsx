@@ -1,3 +1,4 @@
+import { Container, Flex, Spinner } from '@viaa/avo2-components';
 import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -370,6 +371,17 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		);
 	};
 
+	const renderSpinner = () => (
+		<Container mode="vertical">
+			<Flex orientation="horizontal" center>
+				<Spinner size="large" />
+			</Flex>
+		</Container>
+	);
+
+	if (!translations) {
+		return renderSpinner();
+	}
 	return (
 		<div className={className}>
 			<TextInput

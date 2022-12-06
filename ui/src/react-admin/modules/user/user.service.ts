@@ -1,5 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
@@ -71,7 +70,7 @@ export class UserService {
 					}) ||
 					(userProfile as any).organisation,
 				educational_organisations: (user.organisations || []).map(
-					(org): ClientEducationOrganization => ({
+					(org): Avo.EducationOrganization.Organization => ({
 						organizationId: org.organization_id,
 						unitId: org.unit_id || null,
 						label: org.organization?.ldap_description || '',
@@ -194,7 +193,7 @@ export class UserService {
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
 		isBlocked: boolean,
-		sendEmail?: boolean,
+		sendEmail?: boolean
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -279,7 +278,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				sendEmail,
-				...(isAvo ? { transferToProfileId } : {})
+				...(isAvo ? { transferToProfileId } : {}),
 			};
 			await fetchWithLogout(url, {
 				method: 'DELETE',

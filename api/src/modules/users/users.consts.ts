@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { AvoOrHetArchief } from '../shared/types';
 import { UserOverviewTableCol } from './users.types';
 

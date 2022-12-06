@@ -4,7 +4,7 @@ import {
 	Injectable,
 	UnauthorizedException,
 } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { Observable } from 'rxjs';
 import { HetArchiefUser } from '../../users/users.types';
 

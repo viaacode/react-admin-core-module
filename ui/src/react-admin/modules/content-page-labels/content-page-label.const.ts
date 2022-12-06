@@ -1,4 +1,4 @@
-import { ROUTE_PARTS } from '../shared/consts/routes';
+import { ROUTE_PARTS } from '~modules/shared';
 
 export const CONTENT_PAGE_LABEL_PATH = {
 	CONTENT_PAGE_LABEL_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.contentPageLabels}`,

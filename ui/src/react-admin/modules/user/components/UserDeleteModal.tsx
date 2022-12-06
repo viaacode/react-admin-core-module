@@ -17,7 +17,7 @@ import {
 import { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
-import { UserService } from '../user.service';
+import { UserService } from '~modules/user';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';

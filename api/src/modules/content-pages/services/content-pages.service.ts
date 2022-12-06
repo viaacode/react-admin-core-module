@@ -8,8 +8,7 @@ import {
 
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
-import { SearchResultItem } from '@viaa/avo2-types/types/search';
+import type { Avo } from '@viaa/avo2-types';
 import * as promiseUtils from 'blend-promise-utils';
 import { setHours, setMinutes } from 'date-fns';
 import { Request } from 'express';
@@ -657,7 +656,7 @@ export class ContentPagesService {
 	}
 
 	private async mapSearchResultToItemOrCollection(
-		searchResult: SearchResultItem,
+		searchResult: Avo.Search.ResultItem,
 		request: Request,
 	): Promise<ResolvedItemOrCollection> {
 		const isItem =

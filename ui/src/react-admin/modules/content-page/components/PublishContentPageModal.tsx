@@ -20,7 +20,7 @@ import {
 import React, { FunctionComponent, useState } from 'react';
 
 import { getPublishedState } from '../helpers/get-published-state';
-import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
+import { ContentPageInfo, PublishOption } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

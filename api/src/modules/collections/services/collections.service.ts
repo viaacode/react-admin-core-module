@@ -1,5 +1,5 @@
 import { Inject, InternalServerErrorException } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { DataService } from '../../data';
 import {
 	GetPublicCollectionsByIdDocument,

@@ -38,7 +38,7 @@ describe('map-deep', () => {
 			[mockObject2],
 			(obj: any, key: string | number, value: any) => {
 				if (String(key).endsWith(RichEditorStateKey)) {
-					const htmlKey: string = String(key).substr(
+					const htmlKey: string = String(key).substring(
 						0,
 						String(key).length - RichEditorStateKey.length
 					);

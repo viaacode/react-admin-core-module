@@ -8,7 +8,6 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-
 import {
 	Blankslate,
 	Button,
@@ -19,6 +18,8 @@ import {
 	Navbar,
 	Tabs,
 } from '@viaa/avo2-components';
+import { PermissionName } from '@viaa/avo2-types';
+
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
@@ -44,7 +45,6 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/help
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 
@@ -57,7 +57,7 @@ const {
 	DELETE_ANY_CONTENT_PAGES,
 	UNPUBLISH_ANY_CONTENT_PAGE,
 	PUBLISH_ANY_CONTENT_PAGE,
-} = Permission;
+} = PermissionName;
 
 export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
@@ -96,13 +96,13 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		''
 	)}`;
 
-	const hasPerm = (permission: Permission) => PermissionService.hasPerm(user, permission);
+	const hasPerm = (permission: PermissionName) => PermissionService.hasPerm(user, permission);
 
 	const fetchContentPageById = useCallback(async () => {
 		try {
 			if (
-				!PermissionService.hasPerm(user, Permission.EDIT_ANY_CONTENT_PAGES) &&
-				!PermissionService.hasPerm(user, Permission.EDIT_OWN_CONTENT_PAGES)
+				!PermissionService.hasPerm(user, PermissionName.EDIT_ANY_CONTENT_PAGES) &&
+				!PermissionService.hasPerm(user, PermissionName.EDIT_OWN_CONTENT_PAGES)
 			) {
 				setLoadingInfo({
 					state: 'error',

@@ -1,5 +1,5 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { compact, flatten, get } from 'lodash';
 import { DataService } from '../data';

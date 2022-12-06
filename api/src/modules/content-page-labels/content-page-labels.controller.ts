@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Patch, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { ContentPageLabel, LabelObj } from '../content-pages';
 import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-request.dto';
 

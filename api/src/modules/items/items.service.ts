@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { DataService } from '../data';
 

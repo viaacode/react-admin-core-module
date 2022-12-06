@@ -1,4 +1,4 @@
-import { ContentPickerTypeSchema } from '@viaa/avo2-types/types/core';
+import { Avo } from '@viaa/avo2-types';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 
@@ -29,7 +29,7 @@ export interface NavigationItem extends NavigationBar {
 	label: string | null;
 	icon_name: string;
 	user_group_ids: string[] | null;
-	content_type: ContentPickerTypeSchema | null;
+	content_type: Avo.Core.ContentPickerType | null;
 	content_path: string | null;
 	link_target: '_blank' | '_self' | null;
 	position: number;
