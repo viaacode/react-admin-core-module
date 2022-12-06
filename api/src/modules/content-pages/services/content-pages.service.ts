@@ -43,7 +43,7 @@ import {
 } from '../../shared/generated/graphql-db-types-avo';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { ContentBlockConfig, ContentBlockType } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -83,14 +83,14 @@ export class ContentPagesService {
 		timestamp: true,
 	});
 	private fetchSearchQueryAvo: FetchSearchQueryFunctionAvo | null = null;
-	private readonly appType: AvoOrHetArchief;
+	private readonly appType: DatabaseType;
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.appType = process.env.DATABASE_APPLICATION_TYPE as AvoOrHetArchief;
+		this.appType = process.env.DATABASE_APPLICATION_TYPE as DatabaseType;
 	}
 
 	public setSearchQueryFunction(fetchSearchQuery: FetchSearchQueryFunctionAvo) {
@@ -920,7 +920,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['GetContentByIdQuery'],
 			ContentPageQueryTypes['GetContentByIdQueryVariables']
 		>(CONTENT_PAGE_QUERIES[this.appType].GetContentByIdDocument, {
-			id: this.appType === AvoOrHetArchief.avo ? parseInt(id) : id,
+			id: this.appType === DatabaseType.avo ? parseInt(id) : id,
 		});
 
 		const dbContentPage = ((

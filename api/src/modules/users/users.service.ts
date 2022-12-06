@@ -21,7 +21,7 @@ import {
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { AvoOrHetArchief } from '../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import {
@@ -43,7 +43,7 @@ export class UsersService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 			const user = userProfile as ProfileHetArchief;
 			return {
 				profileId: user.id,
@@ -128,7 +128,7 @@ export class UsersService {
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
 			const whereWithoutDeleted =
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
+				process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief
 					? where
 					: {
 							...where,
@@ -202,9 +202,7 @@ export class UsersService {
 			);
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 				return (
 					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])
 						?.users_profile || []
@@ -256,7 +254,7 @@ export class UsersService {
 				variables,
 			);
 
-			if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+			if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.avo) {
 				// avo
 				return compact(
 					(
@@ -281,7 +279,7 @@ export class UsersService {
 	}
 
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 			return [];
 		}
 
@@ -315,9 +313,7 @@ export class UsersService {
 			>(USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetIdpsDocument);
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
@@ -337,7 +333,7 @@ export class UsersService {
 	async fetchPublicAndPrivateCounts(
 		profileIds: string[],
 	): Promise<DeleteContentCounts> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
@@ -384,7 +380,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 			console.info(
 				"adding subjects to profiles isn't supported for hetarchief",
 			);
@@ -422,7 +418,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief) {
 			console.info(
 				"removing subjects from profiles isn't supported for hetarchief",
 			);
