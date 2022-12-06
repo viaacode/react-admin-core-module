@@ -1,6 +1,5 @@
 import { Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { DataService } from '../data';
 
 import { CustomError } from '../shared/helpers/custom-error';
@@ -120,8 +119,10 @@ export class ItemsService {
 	public async fetchRelationsBySubject(
 		type: 'collection' | 'item',
 		subjectIds: string[],
-		relationType: RelationType,
-	): Promise<RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		relationType: Avo.Collection.RelationType,
+	): Promise<
+		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
+	> {
 		let variables: any;
 		const isCollection = type === 'collection';
 		try {
@@ -143,10 +144,11 @@ export class ItemsService {
 			if (isCollection) {
 				return ((response as FetchCollectionRelationsBySubjectsQuery)
 					.app_collection_relations ||
-					[]) as RelationEntry<Avo.Collection.Collection>[];
+					[]) as Avo.Collection.RelationEntry<Avo.Collection.Collection>[];
 			} else {
 				return ((response as FetchItemRelationsBySubjectsQuery)
-					.app_item_relations || []) as RelationEntry<Avo.Item.Item>[];
+					.app_item_relations ||
+					[]) as Avo.Collection.RelationEntry<Avo.Item.Item>[];
 			}
 		} catch (err) {
 			throw CustomError('Failed to get relation from the database', err, {
