@@ -44,6 +44,7 @@ export default (cliArgs) => {
 				'@hookform/resolvers/yup',
 				'@meemoo/react-components',
 				'@viaa/avo2-components',
+				'@viaa/avo2-types',
 				'clsx',
 				'file-saver',
 				'moment',
