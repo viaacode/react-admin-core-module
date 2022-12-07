@@ -1,11 +1,9 @@
 import { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { USERS_PER_PAGE } from '~modules/user/user.consts';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
