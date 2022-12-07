@@ -634,7 +634,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					: '-';
 			}
 			case 'tempAccess': {
-				const tempAccess = commonUser?.tempAccess?.status;
+				const tempAccess = (commonUser?.tempAccess as any)?.status;
 
 				switch (tempAccess) {
 					case 1:
