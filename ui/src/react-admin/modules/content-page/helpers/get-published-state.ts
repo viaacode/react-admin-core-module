@@ -1,6 +1,5 @@
 import moment from 'moment';
-
-import { ContentPageInfo, PublishOption } from '~modules/content-page';
+import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 export function getPublishedState(
 	contentPage: ContentPageInfo | Partial<ContentPageInfo> | undefined | null

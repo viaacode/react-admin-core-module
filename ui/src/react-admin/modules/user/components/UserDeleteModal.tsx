@@ -17,7 +17,6 @@ import {
 import { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
-import { UserService } from '~modules/user';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
@@ -28,6 +27,7 @@ import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~modules/shared/consts/user.const';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
+import { UserService } from '../user.service';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];

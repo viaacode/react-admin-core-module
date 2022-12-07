@@ -7,8 +7,12 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
-import { USERS_PER_PAGE } from './user.consts';
-import { CommonUser, DeleteContentCounts, UserOverviewTableCol } from './user.types';
+import {
+	CommonUser,
+	DeleteContentCounts,
+	UserOverviewTableCol,
+	USERS_PER_PAGE,
+} from './user.types';
 
 export class UserService {
 	private static getBaseUrl(): string {

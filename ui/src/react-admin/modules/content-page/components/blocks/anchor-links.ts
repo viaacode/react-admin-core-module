@@ -1,4 +1,4 @@
-import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/content-block.consts';
+import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underline-link-button-type-options';
 import {
 	AnchorLinksBlockComponentState,
 	AnchorLinksBlockState,

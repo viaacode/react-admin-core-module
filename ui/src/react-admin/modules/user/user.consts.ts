@@ -12,8 +12,6 @@ import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 
-export const USERS_PER_PAGE = 50;
-
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
 	confirmButtonType?: ButtonType;

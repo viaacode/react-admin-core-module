@@ -11,12 +11,12 @@ import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 
-import { PageOverviewOrderOptions } from '../../../const/content-block.consts';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../../const/content-block.consts';
 import { ContentPageService } from '../../../services/content-page.service';
 import { Color } from '../../../types/content-block.types';
-import type { ContentPageInfo } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

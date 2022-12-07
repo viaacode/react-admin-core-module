@@ -6,7 +6,8 @@ import moment from 'moment';
 import { stringifyUrl } from 'query-string';
 import { ToastType } from '~core/config/config.types';
 import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
-import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block.consts';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
+import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
 
 import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
@@ -14,18 +15,17 @@ import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '../types/content-block.types';
-import {
-	ContentOverviewTableCols,
-	ContentPageInfo,
-	ContentPageLabel,
-	DbContentPage,
-	PAGES_PER_PAGE,
-} from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
+import {
+	ContentOverviewTableCols,
+	ContentPageInfo,
+	ContentPageLabel,
+	DbContentPage,
+} from '../types/content-pages.types';
 
 export class ContentPageService {
 	private static getBaseUrl(): string {

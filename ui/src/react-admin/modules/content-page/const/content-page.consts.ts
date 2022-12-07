@@ -1,11 +1,13 @@
 import { TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
+import {
+	ContentOverviewTableCols,
+	ContentWidth,
+} from '~modules/content-page/types/content-pages.types';
 
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '~modules/shared';
 import { NULL_FILTER } from '../../shared/helpers/filters';
-import { ContentWidth } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import {

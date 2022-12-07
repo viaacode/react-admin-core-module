@@ -33,15 +33,6 @@ import FilterTable, {
 import { isPublic } from '../helpers/get-published-state';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
-import {
-	CONTENT_PAGE_PATH,
-	CONTENT_PAGE_QUERY_KEYS,
-	ContentOverviewTableCols,
-	ContentPageInfo,
-	ContentTableState,
-	GET_OVERVIEW_COLUMNS,
-	PAGES_PER_PAGE,
-} from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -67,6 +58,17 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
+import {
+	ContentOverviewTableCols,
+	ContentPageInfo,
+	ContentTableState,
+} from '../types/content-pages.types';
+import {
+	CONTENT_PAGE_PATH,
+	CONTENT_PAGE_QUERY_KEYS,
+	GET_OVERVIEW_COLUMNS,
+	PAGES_PER_PAGE,
+} from '../const/content-page.consts';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;

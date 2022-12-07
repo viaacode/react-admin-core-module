@@ -4,10 +4,8 @@ import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 import { Navbar, Select } from '@viaa/avo2-components';
 
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
-import {
-	CONTENT_BLOCK_CONFIG_MAP,
-	GET_CONTENT_BLOCK_TYPE_OPTIONS,
-} from '~modules/content-page/const/content-block.consts';
+import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import {
 	ContentBlockErrors,

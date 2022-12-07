@@ -1,10 +1,8 @@
 import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
+import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
+import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
 
-import {
-	GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS,
-	GET_PAGE_OVERVIEW_ORDER_OPTIONS,
-	GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS,
-} from '../../const/content-block.consts';
 import {
 	Color,
 	ContentBlockConfig,

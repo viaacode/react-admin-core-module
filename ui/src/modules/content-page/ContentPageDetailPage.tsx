@@ -1,6 +1,6 @@
-import { ContentPageDetail } from '~modules/content-page';
 import { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
+import ContentPageDetail from '~modules/content-page/views/ContentPageDetail';
 
 const ContentPageDetailPage: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
 	return (

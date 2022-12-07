@@ -1,7 +1,11 @@
 import { CTAProps } from '@viaa/avo2-components';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/get-color-options';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
-import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -18,10 +22,6 @@ import {
 } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/content-block.consts';
 
 const EMPTY_CTA: Partial<CTAProps> = {
 	headingType: 'h2',

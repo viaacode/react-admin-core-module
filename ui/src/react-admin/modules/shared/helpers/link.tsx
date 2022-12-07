@@ -124,18 +124,6 @@ export function navigateToAbsoluteOrRelativeUrl(
 	}
 }
 
-export const generateSmartLink = (
-	action: ButtonAction | null | undefined,
-	children: ReactNode,
-	title?: string
-): ReactElement<any, any> | null => {
-	return (
-		<SmartLink action={action} title={title}>
-			{children}
-		</SmartLink>
-	);
-};
-
 export const navigateToContentType = (action: ButtonAction, history: History) => {
 	if (action) {
 		const { type, value, target } = action;

@@ -25,8 +25,14 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { UserService } from '~modules/user';
-import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
+import { UserService } from '~modules/user/user.service';
+import {
+	CommonUser,
+	UserBulkAction,
+	UserOverviewTableCol,
+	USERS_PER_PAGE,
+	UserTableState,
+} from '../user.types';
 
 import './UserOverview.scss';
 import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
@@ -53,7 +59,7 @@ import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
-import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, USERS_PER_PAGE } from '~modules/user';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;

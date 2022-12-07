@@ -1,17 +1,17 @@
 import { SelectOption } from '@viaa/avo2-components';
 import { isEmpty, isNil } from 'lodash-es';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_FOREGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/get-color-options';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
 import { RichTextEditorWrapperProps } from '../../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
-import {
-	GET_ALIGN_OPTIONS,
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_FOREGROUND_COLOR_OPTIONS_AVO,
-} from '../../const/content-block.consts';
 import {
 	Color,
 	ContentBlockEditor,

@@ -1,10 +1,10 @@
 import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import { GET_HEADING_TYPE_OPTIONS } from '../../const/content-block.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

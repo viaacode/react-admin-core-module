@@ -18,15 +18,6 @@ import { PermissionName } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_PAGES_WIDTH, GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page';
-import {
-	ContentEditActionType,
-	ContentEditFormErrors,
-	ContentPageInfo,
-	ContentPageLabel,
-	ContentWidth,
-} from '~modules/content-page';
-
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
@@ -45,6 +36,17 @@ import { CommonUser } from '~modules/user/user.types';
 import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 import './ContentEditForm.scss';
+import {
+	DEFAULT_PAGES_WIDTH,
+	GET_CONTENT_PAGE_WIDTH_OPTIONS,
+} from '~modules/content-page/const/content-page.consts';
+import {
+	ContentEditActionType,
+	ContentEditFormErrors,
+	ContentPageInfo,
+	ContentPageLabel,
+	ContentWidth,
+} from '~modules/content-page/types/content-pages.types';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
