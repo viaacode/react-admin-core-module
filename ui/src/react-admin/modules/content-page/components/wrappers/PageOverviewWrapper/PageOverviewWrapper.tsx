@@ -7,8 +7,7 @@ import {
 	PageInfo,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
-import { ContentWidthSchema } from '@viaa/avo2-types/types/content-page';
+import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
@@ -17,7 +16,7 @@ import { PageOverviewOrderOptions } from '../../../const/content-block.consts';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../../const/content-block.consts';
 import { ContentPageService } from '../../../services/content-page.service';
 import { Color } from '../../../types/content-block.types';
-import { ContentPageInfo } from '../../../types/content-pages.types';
+import type { ContentPageInfo } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -280,7 +279,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 			description: contentPage.description,
 			blocks: contentPage.content_blocks,
 			path: contentPage.path as string,
-			content_width: contentPage.contentWidth as ContentWidthSchema,
+			content_width: contentPage.contentWidth as Avo.ContentPage.Width,
 			labels: contentPage.labels,
 			created_at: contentPage.createdAt,
 			thumbnail_path: contentPage.thumbnailPath as string,

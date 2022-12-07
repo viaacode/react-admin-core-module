@@ -1,5 +1,5 @@
-import { AvoOrHetArchief } from '../types';
+import { DatabaseType } from '@viaa/avo2-types';
 
-export function getDatabaseType(): AvoOrHetArchief {
-	return process.env.DATABASE_APPLICATION_TYPE as AvoOrHetArchief;
+export function getDatabaseType(): DatabaseType {
+	return process.env.DATABASE_APPLICATION_TYPE as DatabaseType;
 }

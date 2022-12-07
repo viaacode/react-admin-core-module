@@ -39,7 +39,7 @@ import {
 	UpdateNavigationItemByIdMutation as UpdateNavigationItemByIdMutationHetArchief,
 	UpdateNavigationItemByIdMutationVariables as UpdateNavigationItemByIdMutationVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 export type NavigationQueryTypes = {
 	DeleteNavigationItemMutation:
@@ -118,8 +118,8 @@ type NavigationQueries = {
 	UpdateNavigationItemByIdDocument: TypedDocumentNode;
 };
 
-export const NAVIGATION_QUERIES: Record<AvoOrHetArchief, NavigationQueries> = {
-	[AvoOrHetArchief.avo]: {
+export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
+	[DatabaseType.avo]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentAvo,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentAvo,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentAvo,
@@ -128,7 +128,7 @@ export const NAVIGATION_QUERIES: Record<AvoOrHetArchief, NavigationQueries> = {
 		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
 	},
-	[AvoOrHetArchief.hetArchief]: {
+	[DatabaseType.hetArchief]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentHetArchief,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentHetArchief,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentHetArchief,

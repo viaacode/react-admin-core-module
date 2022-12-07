@@ -14,7 +14,7 @@ import { USERS_PER_PAGE } from '~modules/user/user.consts';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/content-page-labels`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-page-labels`;
 	}
 
 	public static async fetchContentPageLabels(

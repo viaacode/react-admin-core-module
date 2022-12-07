@@ -8,8 +8,7 @@ import {
 
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
-import { SearchResultItem } from '@viaa/avo2-types/types/search';
+import type { Avo } from '@viaa/avo2-types';
 import * as promiseUtils from 'blend-promise-utils';
 import { setHours, setMinutes } from 'date-fns';
 import { Request } from 'express';
@@ -45,7 +44,7 @@ import {
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { ContentBlockConfig, ContentBlockType } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -85,14 +84,14 @@ export class ContentPagesService {
 		timestamp: true,
 	});
 	private fetchSearchQueryAvo: FetchSearchQueryFunctionAvo | null = null;
-	private readonly appType: AvoOrHetArchief;
+	private readonly appType: DatabaseType;
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.appType = getDatabaseType() as AvoOrHetArchief;
+		this.appType = getDatabaseType();
 	}
 
 	public setSearchQueryFunction(fetchSearchQuery: FetchSearchQueryFunctionAvo) {
@@ -649,7 +648,7 @@ export class ContentPagesService {
 	}
 
 	private async mapSearchResultToItemOrCollection(
-		searchResult: SearchResultItem,
+		searchResult: Avo.Search.ResultItem,
 		request: Request,
 	): Promise<ResolvedItemOrCollection> {
 		const isItem =
@@ -909,7 +908,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['GetContentByIdQuery'],
 			ContentPageQueryTypes['GetContentByIdQueryVariables']
 		>(CONTENT_PAGE_QUERIES[this.appType].GetContentByIdDocument, {
-			id: this.appType === AvoOrHetArchief.avo ? parseInt(id) : id,
+			id: this.appType === DatabaseType.avo ? parseInt(id) : id,
 		});
 
 		const dbContentPage = ((

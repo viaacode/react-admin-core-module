@@ -1,6 +1,5 @@
-import { AvoOrHetArchief } from '../types';
-import { getDatabaseType } from './get-database-type';
+import { DatabaseType } from '@viaa/avo2-types';
 
 export function isHetArchief(): boolean {
-	return getDatabaseType() === AvoOrHetArchief.hetArchief;
+	return process.env.DATABASE_APPLICATION_TYPE === DatabaseType.hetArchief;
 }

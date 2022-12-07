@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { ContentPagesController } from './content-pages.controller';
 import { ContentPagesService } from '../services/content-pages.service';
 import { PlayerTicketService } from '../../player-ticket';
-import { Group, GroupIdToName, HetArchiefUser, Permission } from '../../users';
+import { Group, GroupIdToName, HetArchiefUser } from '../../users/users.types';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
@@ -17,7 +18,7 @@ const mockUser: HetArchiefUser = {
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: Group.CP_ADMIN,
 	groupName: GroupIdToName[Group.CP_ADMIN],
-	permissions: [Permission.EDIT_ANY_CONTENT_PAGES],
+	permissions: [PermissionName.EDIT_ANY_CONTENT_PAGES],
 };
 
 const mockContentPagesService: Partial<

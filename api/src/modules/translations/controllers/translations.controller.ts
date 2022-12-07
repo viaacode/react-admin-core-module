@@ -1,10 +1,9 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { UpdateTranslationsDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
-
-import { Permission } from '../../users';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { UpdateResponse } from '../../shared/types/types';
 import { Translations } from '../types';
@@ -32,7 +31,7 @@ export class TranslationsController {
 		description:
 			'Set translations for the specified key. Careful: this overwrites all existing values.',
 	})
-	@RequireAllPermissions(Permission.EDIT_TRANSLATIONS)
+	@RequireAllPermissions(PermissionName.EDIT_TRANSLATIONS)
 	public async updateTranslations(
 		@Body() newTranslations: UpdateTranslationsDto,
 	): Promise<UpdateResponse> {

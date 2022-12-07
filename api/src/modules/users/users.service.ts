@@ -1,6 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
+import type { Avo } from '@viaa/avo2-types';
 import { isNil } from '@nestjs/common/utils/shared.utils';
-import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { compact, flatten, get } from 'lodash';
 import { DataService } from '../data';
@@ -22,6 +22,7 @@ import {
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
+import { DatabaseType } from '@viaa/avo2-types';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';

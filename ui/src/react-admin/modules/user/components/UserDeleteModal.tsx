@@ -17,7 +17,7 @@ import {
 import { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
-import { UserService } from '../user.service';
+import { UserService } from '~modules/user';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
@@ -139,7 +139,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.COLLECTIONS_OVERVIEW,
+						ADMIN_PATH().COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -157,7 +157,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.COLLECTIONS_OVERVIEW,
+						ADMIN_PATH().COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '0',
@@ -175,7 +175,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.CONTENT_PAGE.OVERVIEW,
+						ADMIN_PATH().CONTENT_PAGE.OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -193,7 +193,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.CONTENT_PAGE.OVERVIEW,
+						ADMIN_PATH().CONTENT_PAGE.OVERVIEW,
 						{},
 						{
 							is_public: '0',

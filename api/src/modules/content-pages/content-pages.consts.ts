@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import {
 	ContentOverviewTableCols,

@@ -1,10 +1,9 @@
 import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Avo } from '@viaa/avo2-types';
-import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
-import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 
-import { Permission } from '../users';
+import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 import { ItemsService } from './items.service';
 
 @ApiTags('Items')
@@ -21,9 +20,9 @@ export class ItemsController {
 
 	@Get('')
 	@RequireAnyPermissions(
-		Permission.VIEW_ANY_PUBLISHED_ITEMS,
-		Permission.EDIT_CONTENT_PAGE_LABELS,
-		Permission.PUBLISH_ITEMS,
+		PermissionName.VIEW_ANY_PUBLISHED_ITEMS,
+		PermissionName.EDIT_CONTENT_PAGE_LABELS,
+		PermissionName.PUBLISH_ITEMS,
 	)
 	public async fetchPublicItems(
 		@Query('limit') limit: number,
@@ -40,12 +39,14 @@ export class ItemsController {
 	}
 
 	@Get('relations')
-	@RequireAnyPermissions(Permission.VIEW_ANY_PUBLISHED_ITEMS)
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_PUBLISHED_ITEMS)
 	public async fetchRelationsBySubject(
 		@Query('type') type: 'collection' | 'item',
 		@Query('subjectIds') subjectIds: string[],
-		@Query('relationType') relationType: RelationType,
-	): Promise<RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		@Query('relationType') relationType: Avo.Collection.RelationType,
+	): Promise<
+		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
+	> {
 		return this.itemsService.fetchRelationsBySubject(
 			type,
 			subjectIds,

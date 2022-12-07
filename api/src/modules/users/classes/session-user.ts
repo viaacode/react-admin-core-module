@@ -1,7 +1,8 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
+import { PermissionName } from '@viaa/avo2-types';
 
-import { HetArchiefUser, Permission } from '../users.types';
+import { HetArchiefUser } from '../users.types';
 
 export class SessionUserEntity {
 	protected user: HetArchiefUser | Avo.User.User;
@@ -11,7 +12,7 @@ export class SessionUserEntity {
 	protected mail: string;
 	protected maintainerId: string;
 	protected visitorSpaceSlug: string;
-	protected permissions: Array<Permission>;
+	protected permissions: Array<PermissionName>;
 
 	public constructor(user: HetArchiefUser | Avo.User.User) {
 		this.user = user;
@@ -20,7 +21,7 @@ export class SessionUserEntity {
 		this.permissions = [
 			...((this.user as HetArchiefUser).permissions || []),
 			...((this.user as Avo.User.User).profile.permissions || []),
-		] as Permission[];
+		] as PermissionName[];
 	}
 
 	public getUser(): HetArchiefUser | Avo.User.User {
@@ -73,15 +74,15 @@ export class SessionUserEntity {
 		return get(this.user, 'visitorSpaceSlug');
 	}
 
-	public has(permission: Permission): boolean {
+	public has(permission: PermissionName): boolean {
 		return this.permissions.includes(permission);
 	}
 
-	public hasNot(permission: Permission): boolean {
+	public hasNot(permission: PermissionName): boolean {
 		return !this.has(permission);
 	}
 
-	public hasAny(permissions: Permission[]): boolean {
+	public hasAny(permissions: PermissionName[]): boolean {
 		if (permissions.length === 0) {
 			return true;
 		}
@@ -89,7 +90,7 @@ export class SessionUserEntity {
 		return permissions.some((permission) => this.has(permission));
 	}
 
-	public hasAll(permissions: Permission[]): boolean {
+	public hasAll(permissions: PermissionName[]): boolean {
 		if (permissions.length === 0) {
 			return true;
 		}

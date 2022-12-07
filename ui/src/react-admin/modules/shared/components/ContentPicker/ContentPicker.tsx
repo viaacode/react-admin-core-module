@@ -50,7 +50,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 	// apply initial type from `initialValue`, default to first available type
 	const currentTypeObject = typeOptions.find((type) => type.value === get(initialValue, 'type'));
-	const [selectedType, setSelectedType] = useState<PickerTypeOption<ContentPickerType>>(
+	const [selectedType, setSelectedType] = useState<PickerTypeOption>(
 		currentTypeObject || typeOptions[0]
 	);
 

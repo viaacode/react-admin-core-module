@@ -9,6 +9,7 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
+import { PermissionName } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -18,6 +19,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
+
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { PermissionService } from '~modules/shared/services/permission-service';
@@ -27,20 +29,19 @@ import FilterTable, {
 	FilterableColumn,
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
-import {
-	CONTENT_PAGE_PATH,
-	CONTENT_PAGE_QUERY_KEYS,
-	GET_OVERVIEW_COLUMNS,
-	PAGES_PER_PAGE,
-} from '../const/content-page.consts';
+
 import { isPublic } from '../helpers/get-published-state';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
 import {
+	CONTENT_PAGE_PATH,
+	CONTENT_PAGE_QUERY_KEYS,
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
-} from '../types/content-pages.types';
+	GET_OVERVIEW_COLUMNS,
+	PAGES_PER_PAGE,
+} from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -62,13 +63,13 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/help
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
 
-const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } = Permission;
+const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
+	PermissionName;
 
 const ContentPageOverview: FunctionComponent = () => {
 	// Hooks
@@ -108,7 +109,7 @@ const ContentPageOverview: FunctionComponent = () => {
 
 	const getUser = () => AdminConfigManager.getConfig().user;
 
-	const hasPerm = useCallback((permission: Permission) => {
+	const hasPerm = useCallback((permission: PermissionName) => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
@@ -309,7 +310,12 @@ const ContentPageOverview: FunctionComponent = () => {
 		switch (columnId) {
 			case 'title':
 				return (
-					<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id })}>
+					<Link
+						to={buildLink(
+							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+							{ id }
+						)}
+					>
 						{truncateTableValue(title)}
 					</Link>
 				);
@@ -404,7 +410,13 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'actions':
 				return (
 					<ButtonToolbar>
-						<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL, { id })}>
+						<Link
+							to={buildLink(
+								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts)
+									.DETAIL,
+								{ id }
+							)}
+						>
 							<Button
 								icon="info"
 								size="small"
@@ -442,7 +454,12 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 							disabled
 						/>
-						<Link to={buildLink(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT, { id })}>
+						<Link
+							to={buildLink(
+								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
+								{ id }
+							)}
+						>
 							<Button
 								icon="edit"
 								size="small"

@@ -9,7 +9,7 @@ export async function initI18n(proxyUrl: string): Promise<void> {
 			.use(initReactI18next) // passes i18n down to react-i18next
 			.init({
 				backend: {
-					loadPath: `${proxyUrl}/translations/nl.json`,
+					loadPath: `${proxyUrl}/admin/translations/nl.json`,
 					parse: (data: any) => {
 						setTimeout(() => {
 							resolve();

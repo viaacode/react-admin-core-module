@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { isAvo } from '../shared/helpers/is-avo';
 import { UserOverviewTableCol } from './users.types';
 

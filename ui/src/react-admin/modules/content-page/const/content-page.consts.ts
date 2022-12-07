@@ -3,7 +3,7 @@ import { Avo } from '@viaa/avo2-types';
 import { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
 
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
-import { ROUTE_PARTS } from '../../shared/consts/routes';
+import { ROUTE_PARTS } from '~modules/shared';
 import { NULL_FILTER } from '../../shared/helpers/filters';
 import { ContentWidth } from '~modules/content-page';
 

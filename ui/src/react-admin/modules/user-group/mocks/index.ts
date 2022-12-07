@@ -1,4 +1,5 @@
-import { Permission } from '~modules/user/user.types';
+import { PermissionName } from '@viaa/avo2-types';
+
 import { UserGroupWithPermissions } from '../types/user-group.types';
 
 export const permissionDataMock = {
@@ -82,19 +83,19 @@ export const userGroupDataMock: UserGroupWithPermissions[] = [
 		permissions: [
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
@@ -107,7 +108,7 @@ export const userGroupDataMock: UserGroupWithPermissions[] = [
 		permissions: [
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
@@ -126,31 +127,31 @@ export const userGroupDataMock: UserGroupWithPermissions[] = [
 		permissions: [
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},
 			{
 				id: '5719b86d-a3ff-49fc-ab02-58b2a983dc91',
-				name: Permission.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
+				name: PermissionName.CAN_APPROVE_DENY_CP_VISIT_REQUESTS,
 				description: 'description',
 				label: 'zoeken',
 			},

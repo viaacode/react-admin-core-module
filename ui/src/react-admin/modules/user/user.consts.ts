@@ -1,4 +1,6 @@
 import { ButtonType, SelectOption } from '@viaa/avo2-components';
+import { PermissionName } from '@viaa/avo2-types';
+
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
@@ -8,7 +10,7 @@ import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterT
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
-import { CommonUser, Permission, UserBulkAction, UserOverviewTableCol } from './user.types';
+import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 
 export const USERS_PER_PAGE = 50;
 
@@ -25,7 +27,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	educationLevels: CheckboxOption[],
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
-) => FilterableColumn[] = (
+) => FilterableColumn<UserOverviewTableCol>[] = (
 	config,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
@@ -162,7 +164,7 @@ const getAvoColumns = (
 		filterType: 'DateRangeDropdown',
 		dataType: 'dateTime',
 	},
-	...((PermissionService.hasPerm(user, Permission.EDIT_USER_TEMP_ACCESS)
+	...((PermissionService.hasPerm(user, PermissionName.EDIT_USER_TEMP_ACCESS)
 		? [
 				{
 					id: 'tempAccess',
@@ -417,7 +419,7 @@ export const GET_USER_BULK_ACTIONS = (
 	const actions: UserBulkActionOption[] = [];
 
 	if (
-		PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) &&
+		PermissionService.hasPerm(user, PermissionName.EDIT_ANY_USER) &&
 		bulkActions.includes('block')
 	) {
 		actions.push({
@@ -434,7 +436,7 @@ export const GET_USER_BULK_ACTIONS = (
 		});
 	}
 	if (
-		PermissionService.hasPerm(user, Permission.DELETE_ANY_USER) &&
+		PermissionService.hasPerm(user, PermissionName.DELETE_ANY_USER) &&
 		bulkActions.includes('delete')
 	) {
 		actions.push({
@@ -445,7 +447,7 @@ export const GET_USER_BULK_ACTIONS = (
 		});
 	}
 	if (
-		PermissionService.hasPerm(user, Permission.EDIT_ANY_USER) &&
+		PermissionService.hasPerm(user, PermissionName.EDIT_ANY_USER) &&
 		bulkActions.includes('change_subjects')
 	) {
 		actions.push({

@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
@@ -271,11 +271,11 @@ export type RepeatedContentBlockComponentState =
 	| ImageGridBlockComponentStateFields
 	| MediaGridBlockComponentState
 	| {
-		image: string;
-		title: string;
-		buttonAction?: string;
-		className?: string;
-	} // project spotlight & spotlight
+			image: string;
+			title: string;
+			buttonAction?: string;
+			className?: string;
+	  } // project spotlight & spotlight
 	| RichTextBlockComponentState;
 
 export type SingleContentBlockComponentState =

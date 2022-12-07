@@ -1,6 +1,7 @@
 import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, ReactNode, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -47,14 +48,13 @@ import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { DefaultComponentProps } from '~modules/shared/types/components';
-import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
-const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
+const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
@@ -85,7 +85,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 
 	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
-		(permission: Permission) => PermissionService.hasPerm(user, permission),
+		(permission: PermissionName) => PermissionService.hasPerm(user, permission),
 		[user]
 	);
 
@@ -95,8 +95,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 				return;
 			}
 			if (
-				!hasPerm(Permission.EDIT_ANY_CONTENT_PAGES) &&
-				!hasPerm(Permission.EDIT_OWN_CONTENT_PAGES)
+				!hasPerm(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
+				!hasPerm(PermissionName.EDIT_OWN_CONTENT_PAGES)
 			) {
 				setLoadingInfo({
 					state: 'error',
@@ -109,7 +109,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			}
 			const contentPageObj = await ContentPageService.getContentPageById(id);
 			if (
-				!hasPerm(Permission.EDIT_ANY_CONTENT_PAGES) &&
+				!hasPerm(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 				contentPageObj.owner.id !== getProfileId(user)
 			) {
 				setLoadingInfo({

@@ -34,7 +34,7 @@ const NavigationOverview: FunctionComponent = () => {
 			case 'placement':
 				return (
 					<Link
-						to={buildLink(NAVIGATION_PATH.NAVIGATION_DETAIL, {
+						to={buildLink(NAVIGATION_PATH().NAVIGATION_DETAIL, {
 							navigationBarId: placement,
 						})}
 					>
@@ -47,7 +47,7 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="eye"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH.NAVIGATION_DETAIL, {
+								navigate(history, NAVIGATION_PATH().NAVIGATION_DETAIL, {
 									navigationBarId: placement,
 								})
 							}
@@ -63,7 +63,7 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="plus"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
+								navigate(history, NAVIGATION_PATH().NAVIGATION_ITEM_CREATE, {
 									navigationBarId: placement,
 								})
 							}

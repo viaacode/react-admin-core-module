@@ -13,14 +13,14 @@ import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
-import { PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentPageLabel,
 	DbContentPage,
-} from '../types/content-pages.types';
+	PAGES_PER_PAGE,
+} from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
@@ -218,7 +218,7 @@ export class ContentPageService {
 			blockConfigs,
 			(obj: any, key: string | number, value: any) => {
 				if (String(key).endsWith(RichEditorStateKey)) {
-					const htmlKey: string = String(key).substr(
+					const htmlKey: string = String(key).substring(
 						0,
 						String(key).length - RichEditorStateKey.length
 					);
