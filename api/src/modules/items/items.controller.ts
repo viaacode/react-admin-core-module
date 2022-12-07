@@ -1,7 +1,6 @@
 import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Avo } from '@viaa/avo2-types';
-import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
 import { Permission } from '../users';
@@ -44,8 +43,10 @@ export class ItemsController {
 	public async fetchRelationsBySubject(
 		@Query('type') type: 'collection' | 'item',
 		@Query('subjectIds') subjectIds: string[],
-		@Query('relationType') relationType: RelationType,
-	): Promise<RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		@Query('relationType') relationType: Avo.Collection.RelationType,
+	): Promise<
+		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
+	> {
 		return this.itemsService.fetchRelationsBySubject(
 			type,
 			subjectIds,

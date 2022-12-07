@@ -25,7 +25,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	educationLevels: CheckboxOption[],
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
-) => FilterableColumn[] = (
+) => FilterableColumn<UserOverviewTableCol>[] = (
 	config,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],

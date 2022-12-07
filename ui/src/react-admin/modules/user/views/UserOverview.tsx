@@ -598,7 +598,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 							}
 						)}
 					>
-						{truncateTableValue(get(commonUser, columnId))}
+						{truncateTableValue(commonUser?.firstName)}
 					</Link>
 				) : (
 					commonUser?.firstName || '-'
@@ -635,7 +635,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					: '-';
 			}
 			case 'tempAccess': {
-				const tempAccess = commonUser.tempAccess?.current?.status;
+				const tempAccess = commonUser?.tempAccess?.status;
 
 				switch (tempAccess) {
 					case 1:
