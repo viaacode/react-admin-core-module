@@ -9,7 +9,7 @@ export type BasicOrganisation = {
 
 export class OrganisationService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/organisations`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/organisations`;
 	}
 
 	public static async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {

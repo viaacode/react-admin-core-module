@@ -6,7 +6,7 @@ import { UserGroup, UserGroupUpdates, UserGroupWithPermissions } from '../types/
 
 export class UserGroupService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/user-groups`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user-groups`;
 	}
 
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {

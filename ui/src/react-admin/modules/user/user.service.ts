@@ -12,7 +12,7 @@ import { CommonUser, DeleteContentCounts, UserOverviewTableCol } from './user.ty
 
 export class UserService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/users`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
 	}
 
 	static async getProfiles(
