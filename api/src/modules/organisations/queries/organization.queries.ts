@@ -1,4 +1,5 @@
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
 import {
 	GetOrganisationDocument as GetOrganisationDocumentAvo,
 	GetOrganisationQuery as GetOrganisationQueryAvo,
@@ -14,7 +15,6 @@ import {
 	GetOrganisationsWithUsersDocument as GetOrganisationsWithUsersDocumentHetArchief,
 	GetOrganisationsWithUsersQuery as GetOrganisationsWithUsersQueryHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { AvoOrHetArchief } from '../../shared/types';
 
 export type OrganisationQueryTypes = {
 	GetOrganisationQuery:
@@ -40,15 +40,12 @@ type OrganisationQueries = {
 	GetOrganisationsWithUsersDocument: TypedDocumentNode;
 };
 
-export const ORGANISATION_QUERIES: Record<
-	AvoOrHetArchief,
-	OrganisationQueries
-> = {
-	[AvoOrHetArchief.avo]: {
+export const ORGANISATION_QUERIES: Record<DatabaseType, OrganisationQueries> = {
+	[DatabaseType.avo]: {
 		GetOrganisationDocument: GetOrganisationDocumentAvo,
 		GetOrganisationsWithUsersDocument: GetOrganisationsWithUsersDocumentAvo,
 	},
-	[AvoOrHetArchief.hetArchief]: {
+	[DatabaseType.hetArchief]: {
 		GetOrganisationDocument: GetOrganisationDocumentHetArchief,
 		GetOrganisationsWithUsersDocument:
 			GetOrganisationsWithUsersDocumentHetArchief,
