@@ -3,7 +3,7 @@ import {
 	Logger,
 	LoggerService,
 } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import {
 	addDays,
 	getHours,

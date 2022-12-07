@@ -10,8 +10,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import reactToString from 'react-to-string';
 
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import type { Avo } from '@viaa/avo2-types';
 import { USER_PATH } from '~modules/user/user.routes';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
@@ -667,7 +666,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 			case 'educationalOrganisations': {
-				const orgs: ClientEducationOrganization[] = get(commonUser, columnId, []);
+				const orgs: Avo.EducationOrganization.Organization[] = get(
+					commonUser,
+					columnId,
+					[]
+				);
 				const tags = orgs.map(
 					(org): TagOption => ({
 						id: `${org.organizationId}:${org.unitId || ''}`,

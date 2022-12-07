@@ -12,7 +12,7 @@ import {
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
-import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
+import { ContentEditActionType, ContentPageInfo, ContentWidth } from '~modules/content-page';
 
 import { ValueOf } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';

@@ -1,4 +1,4 @@
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetIdpsDocument as GetIdpsDocumentAvo,
@@ -74,14 +74,14 @@ type UserQueries = {
 	GetProfileIdsDocument: TypedDocumentNode;
 };
 
-export const USER_QUERIES: Record<AvoOrHetArchief, UserQueries> = {
-	[AvoOrHetArchief.avo]: {
+export const USER_QUERIES: Record<DatabaseType, UserQueries> = {
+	[DatabaseType.avo]: {
 		GetProfileNamesDocument: GetProfileNamesDocumentAvo,
 		GetUsersDocument: GetUsersDocumentAvo,
 		GetIdpsDocument: GetIdpsDocumentAvo,
 		GetProfileIdsDocument: GetProfileIdsDocumentAvo,
 	},
-	[AvoOrHetArchief.hetArchief]: {
+	[DatabaseType.hetArchief]: {
 		GetProfileNamesDocument: GetProfileNamesDocumentHetArchief,
 		GetUsersDocument: GetUsersDocumentHetArchief,
 		GetIdpsDocument: GetIdpsDocumentHetArchief,

@@ -7,7 +7,8 @@ import {
 	Grid,
 	IconName,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import React, { FC } from 'react';
 import { PermissionService } from '~modules/shared/services/permission-service';
 
@@ -16,7 +17,6 @@ import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
 import { generateSmartLink } from '~modules/shared/helpers/link';
-import { Permission } from '~modules/user/user.types';
 import { AdminConfigManager } from '~core/config';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
@@ -67,7 +67,7 @@ export const MediaPlayerTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWra
 	const shouldTitleLink =
 		PermissionService.hasPerm(
 			AdminConfigManager.getConfig().user,
-			Permission.VIEW_ANY_PUBLISHED_ITEMS
+			PermissionName.VIEW_ANY_PUBLISHED_ITEMS
 		) && !!mediaItem;
 
 	return (

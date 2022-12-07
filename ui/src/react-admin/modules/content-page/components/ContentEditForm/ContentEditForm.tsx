@@ -13,18 +13,19 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import { RichEditorState } from '@meemoo/react-components/dist/esm';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_PAGES_WIDTH, GET_CONTENT_PAGE_WIDTH_OPTIONS } from '../../const/content-page.consts';
+import { DEFAULT_PAGES_WIDTH, GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page';
 import {
 	ContentEditActionType,
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageLabel,
 	ContentWidth,
-} from '../../types/content-pages.types';
+} from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -40,11 +41,10 @@ import { getProfileId } from '~modules/shared/helpers/get-profile-id';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { ValueOf } from '~modules/shared/types';
 import { PickerItem } from '~modules/shared/types/content-picker';
-import { CommonUser, Permission } from '~modules/user/user.types';
+import { CommonUser } from '~modules/user/user.types';
 import { getFullName } from '~modules/shared/helpers/get-profile-info';
 
 import './ContentEditForm.scss';
-import { ContentPageTypeSchema } from '@viaa/avo2-types/types/content-page';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -146,7 +146,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 			(tag): Partial<ContentPageLabel> => ({
 				label: tag.label,
 				id: tag.value as number,
-				content_type: contentType as ContentPageTypeSchema,
+				content_type: contentType as Avo.ContentPage.Type,
 			})
 		);
 	};
@@ -269,7 +269,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							{user?.permissions?.includes(Permission.EDIT_PROTECTED_PAGE_STATUS) && (
+							{user?.permissions?.includes(
+								PermissionName.EDIT_PROTECTED_PAGE_STATUS
+							) && (
 								<Column size="12">
 									<FormGroup error={formErrors.isProtected}>
 										<Checkbox
@@ -298,7 +300,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							{user?.permissions?.includes(Permission.EDIT_CONTENT_PAGE_AUTHOR) &&
+							{user?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
 								!!user && (
 									<Column size="12">
 										<FormGroup

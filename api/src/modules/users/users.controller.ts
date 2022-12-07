@@ -8,14 +8,15 @@ import {
 	Patch,
 	Query,
 } from '@nestjs/common';
+import { PermissionName } from '@viaa/avo2-types';
 import { ApiTags } from '@nestjs/swagger';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 import { UsersService } from './users.service';
 import {
 	CommonUser,
 	DeleteContentCounts,
-	Permission,
 	UserOverviewTableCol,
 } from './users.types';
 
@@ -29,10 +30,10 @@ export class UsersController {
 
 	@Get('')
 	@RequireAnyPermissions(
-		Permission.VIEW_USERS,
-		Permission.EDIT_ANY_USER,
-		Permission.EDIT_ANY_COLLECTIONS,
-		Permission.VIEW_USERS_IN_SAME_COMPANY,
+		PermissionName.VIEW_USERS,
+		PermissionName.EDIT_ANY_USER,
+		PermissionName.EDIT_ANY_COLLECTIONS,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
 	)
 	async getProfiles(
 		@Query('offset') offset: string,
@@ -54,12 +55,12 @@ export class UsersController {
 
 	@Get('names')
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_USER,
-		Permission.VIEW_COLLECTIONS_OVERVIEW,
-		Permission.VIEW_BUNDLES_OVERVIEW,
-		Permission.EDIT_OWN_CONTENT_PAGES,
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.VIEW_USERS_IN_SAME_COMPANY,
+		PermissionName.EDIT_ANY_USER,
+		PermissionName.VIEW_COLLECTIONS_OVERVIEW,
+		PermissionName.VIEW_BUNDLES_OVERVIEW,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
 	)
 	async getNamesByProfileIds(
 		@Query('profileIds') profileIds: string[],
@@ -68,25 +69,25 @@ export class UsersController {
 	}
 
 	@Get('ids')
-	@RequireAnyPermissions(Permission.EDIT_ANY_USER)
+	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async getProfileIds(@Query('where') where = '{}'): Promise<string[]> {
 		return this.usersService.getProfileIds(JSON.parse(where));
 	}
 
 	@Get('business-categories')
-	@RequireAnyPermissions(Permission.VIEW_USERS)
+	@RequireAnyPermissions(PermissionName.VIEW_USERS)
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
 		return this.usersService.fetchDistinctBusinessCategories();
 	}
 
 	@Get('idps')
-	@RequireAnyPermissions(Permission.VIEW_USERS)
+	@RequireAnyPermissions(PermissionName.VIEW_USERS)
 	async fetchIdps() {
 		return this.usersService.fetchIdps();
 	}
 
 	@Get('counts')
-	@RequireAnyPermissions(Permission.EDIT_ANY_USER)
+	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async fetchPublicAndPrivateCounts(
 		@Query('profileIds') profileIds: string[],
 	): Promise<DeleteContentCounts> {
@@ -94,7 +95,7 @@ export class UsersController {
 	}
 
 	@Patch('subjects')
-	@RequireAnyPermissions(Permission.EDIT_ANY_USER)
+	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async bulkAddSubjectsToProfiles(
 		@Body() body: { subjects: string[]; profileIds: string[] },
 	): Promise<void> {
@@ -105,7 +106,7 @@ export class UsersController {
 	}
 
 	@Delete('subjects')
-	@RequireAnyPermissions(Permission.EDIT_ANY_USER)
+	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async bulkRemoveSubjectsFromProfiles(
 		@Body() body: { subjects: string[]; profileIds: string[] },
 	): Promise<void> {

@@ -1,4 +1,4 @@
-import { ContentPickerTypeSchema, LinkTargetSchema } from '@viaa/avo2-types/types/core';
+import type { Avo } from '@viaa/avo2-types';
 
 import { PickerTypeOption } from '../../types/content-picker';
 
@@ -14,9 +14,9 @@ import { AdminConfigManager } from '~core/config';
 
 export interface PickerItem {
 	label?: string;
-	type: ContentPickerTypeSchema;
+	type: Avo.Core.ContentPickerType;
 	value: string;
-	target?: LinkTargetSchema;
+	target?: Avo.Core.LinkTarget;
 }
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = () => ({

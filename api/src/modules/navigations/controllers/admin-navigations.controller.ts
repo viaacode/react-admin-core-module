@@ -8,11 +8,11 @@ import {
 	Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 
-import { Permission } from '../../users';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { DeleteResponse } from '../../shared/types/types';
 import { NavigationItem } from '../types';
@@ -22,7 +22,7 @@ import { NavigationItem } from '../types';
 // In the long term we would like to switch this to use these routes
 @ApiTags('Admin Navigations')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/navigations')
-@RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
+@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 export class AdminNavigationsController {
 	constructor(private adminNavigationsService: AdminNavigationsService) {}
 

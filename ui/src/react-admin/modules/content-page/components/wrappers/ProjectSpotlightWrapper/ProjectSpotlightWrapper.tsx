@@ -3,7 +3,7 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ContentPageService } from '../../../services/content-page.service';
-import { ContentPageInfo } from '../../../types/content-pages.types';
+import { ContentPageInfo } from '~modules/content-page';
 
 import {
 	LoadingErrorLoadedComponent,

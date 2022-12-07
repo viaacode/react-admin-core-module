@@ -1,6 +1,5 @@
 import { Alert, Select, Spacer } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
@@ -17,8 +16,8 @@ export interface Tag {
 }
 
 export interface EducationalOrganisationsSelectProps {
-	organisations: ClientEducationOrganization[];
-	onChange: (organisations: ClientEducationOrganization[]) => void;
+	organisations: Avo.EducationOrganization.Organization[];
+	onChange: (organisations: Avo.EducationOrganization.Organization[]) => void;
 	disabled?: boolean;
 	showSelectedValuesOnCollapsed?: boolean;
 }
@@ -29,9 +28,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	const { tHtml, tText } = useTranslation();
 
 	const [cities, setCities] = useState<string[]>([]);
-	const [organisationsInCity, setOrganisationsInCity] = useState<ClientEducationOrganization[]>(
-		[]
-	);
+	const [organisationsInCity, setOrganisationsInCity] = useState<
+		Avo.EducationOrganization.Organization[]
+	>([]);
 	const [selectedCity, setSelectedCity] = useState<string>('');
 	const [organizationsLoadingState, setOrganizationsLoadingState] = useState<
 		'loading' | 'loaded' | 'error'
@@ -121,7 +120,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	const onSelectedOrganisationChanged = (orgLabel: string) => {
 		const selectedOrg = organisationsInCity.find(
-			(org: ClientEducationOrganization) => org.label === orgLabel
+			(org: Avo.EducationOrganization.Organization) => org.label === orgLabel
 		);
 		if (!selectedOrg) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -135,7 +134,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			});
 			return;
 		}
-		const selectedOrgs: ClientEducationOrganization[] = [...organisations, ...[selectedOrg]];
+		const selectedOrgs: Avo.EducationOrganization.Organization[] = [
+			...organisations,
+			...[selectedOrg],
+		];
 		onChange(uniq(selectedOrgs));
 	};
 

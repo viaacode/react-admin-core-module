@@ -1,9 +1,9 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Avo } from '@viaa/avo2-types';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 
-import { Permission } from '../../users';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { ContentTypeNumber } from '../collections.types';
 import { CollectionsService } from '../services/collections.service';
 
@@ -14,9 +14,9 @@ export class CollectionsController {
 
 	@Get('public')
 	@RequireAnyPermissions(
-		Permission.VIEW_ANY_PUBLISHED_COLLECTIONS,
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.VIEW_ANY_PUBLISHED_COLLECTIONS,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async fetchCollectionsOrBundles(
 		@Query('limit') limit: number,
