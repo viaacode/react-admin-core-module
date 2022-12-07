@@ -73,9 +73,9 @@ export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
 	},
 	[DatabaseType.hetArchief]: {
 		GetUserGroupsPermissionsDocument:
-		GetUserGroupsPermissionsDocumentHetArchief,
+			GetUserGroupsPermissionsDocumentHetArchief,
 		GetUserGroupsDocument: GetUserGroupsDocumentHetArchief,
 		UpdateUserGroupsPermissionsDocument:
-		UpdateUserGroupsPermissionsDocumentHetArchief,
+			UpdateUserGroupsPermissionsDocumentHetArchief,
 	},
 };

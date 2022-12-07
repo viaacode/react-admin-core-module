@@ -1,4 +1,7 @@
-mutation updateContentById($id: uuid!, $contentPage: app_content_page_set_input!) {
+mutation updateContentById(
+	$id: uuid!
+	$contentPage: app_content_page_set_input!
+) {
 	update_app_content_page(
 		where: { id: { _eq: $id }, is_deleted: { _eq: false } }
 		_set: $contentPage

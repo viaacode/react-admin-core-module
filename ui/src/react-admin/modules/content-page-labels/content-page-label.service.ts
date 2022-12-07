@@ -52,18 +52,13 @@ export class ContentPageLabelService {
 		contentPageLabel: ContentPageLabel
 	): Promise<number> {
 		try {
-			return fetchWithLogoutJson(
-				stringifyUrl({
-					url: this.getBaseUrl(),
+			return fetchWithLogoutJson(this.getBaseUrl(), {
+				method: 'PUT',
+				body: JSON.stringify({
+					label: contentPageLabel.label,
+					content_type: contentPageLabel.content_type,
 				}),
-				{
-					method: 'PUT',
-					body: JSON.stringify({
-						label: contentPageLabel.label,
-						content_type: contentPageLabel.content_type,
-					}),
-				}
-			);
+			});
 		} catch (err) {
 			throw new CustomError('Failed to insert content page label in the database', err, {
 				contentPageLabel,
@@ -73,15 +68,10 @@ export class ContentPageLabelService {
 
 	static async updateContentPageLabel(contentPageLabelInfo: ContentPageLabel) {
 		try {
-			return fetchWithLogoutJson(
-				stringifyUrl({
-					url: this.getBaseUrl(),
-				}),
-				{
-					method: 'PATCH',
-					body: JSON.stringify(contentPageLabelInfo),
-				}
-			);
+			return fetchWithLogoutJson(this.getBaseUrl(), {
+				method: 'PATCH',
+				body: JSON.stringify(contentPageLabelInfo),
+			});
 		} catch (err) {
 			throw new CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
@@ -95,16 +85,13 @@ export class ContentPageLabelService {
 		labels: string[]
 	): Promise<LabelObj[]> {
 		try {
-			return fetchWithLogoutJson(
-				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-page-labels`,
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						contentType,
-						labels,
-					}),
-				}
-			);
+			return fetchWithLogoutJson(this.getBaseUrl(), {
+				method: 'POST',
+				body: JSON.stringify({
+					contentType,
+					labels,
+				}),
+			});
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get content page label objects by content type and labels',
@@ -122,16 +109,13 @@ export class ContentPageLabelService {
 		labelIds: number[]
 	): Promise<LabelObj[]> {
 		try {
-			return fetchWithLogoutJson(
-				`${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-page-labels`,
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						contentType,
-						labelIds: compact(labelIds),
-					}),
-				}
-			);
+			return fetchWithLogoutJson(this.getBaseUrl(), {
+				method: 'POST',
+				body: JSON.stringify({
+					contentType,
+					labelIds: compact(labelIds),
+				}),
+			});
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get content page labels by content type and label ids',

@@ -141,20 +141,20 @@ export const CONTENT_PAGE_LABEL_QUERIES: Record<
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
 		GetContentPageLabelsByTypeAndIdsDocument:
-		GetContentPageLabelsByTypeAndIdsDocumentAvo,
+			GetContentPageLabelsByTypeAndIdsDocumentAvo,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-		GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
 		DeleteContentPageLabelByIdDocument:
-		DeleteContentPageLabelByIdDocumentHetArchief,
+			DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentHetArchief,
 		GetContentPageLabelsByTypeAndIdsDocument:
-		GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+			GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-		GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
 };

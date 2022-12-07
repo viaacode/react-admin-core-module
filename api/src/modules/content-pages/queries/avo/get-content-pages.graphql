@@ -6,7 +6,12 @@ query getContentPages(
 	$labelIds: [Int!] = []
 	$orUserGroupIds: [app_content_content_labels_bool_exp!] = {}
 ) {
-	app_content(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
+	app_content(
+		where: $where
+		limit: $limit
+		offset: $offset
+		order_by: $orderBy
+	) {
 		id
 		content_type
 		created_at

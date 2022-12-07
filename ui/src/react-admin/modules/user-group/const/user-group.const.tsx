@@ -1,12 +1,12 @@
 import React from 'react';
 import { Checkbox } from '@meemoo/react-components';
 import { Column, UseSortByColumnOptions } from 'react-table';
+import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { ROUTE_PARTS } from '~modules/shared';
 import { PermissionRow } from '../types/user-group.types';
 import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { sortBy } from 'lodash-es';
 
 export const USER_GROUP_QUERY_KEYS = {

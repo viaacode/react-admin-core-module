@@ -1,0 +1,17 @@
+query getAllNavigationItems {
+	app_content_nav_elements(order_by: { placement: asc, position: asc }) {
+		id
+		created_at
+		description
+		user_group_ids
+		icon_name
+		label
+		link_target
+		placement
+		position
+		updated_at
+		content_type
+		content_path
+		tooltip
+	}
+}

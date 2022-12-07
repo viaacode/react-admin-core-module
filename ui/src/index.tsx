@@ -10,13 +10,12 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
-import { PermissionsService } from './modules/permissions/permissions.service';
 import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
-const proxyUrl = 'http://localhost:3300'; // admin-core-api url
+const proxyUrl = 'http://localhost:3300';
 
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
@@ -222,7 +221,6 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
-			PermissionsService,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				clear: async (_key: string) => Promise.resolve(),

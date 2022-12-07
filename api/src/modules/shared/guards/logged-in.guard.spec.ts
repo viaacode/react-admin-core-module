@@ -1,7 +1,5 @@
 import { ExecutionContext } from '@nestjs/common';
 
-
-
 import { LoggedInGuard } from './logged-in.guard';
 
 const mockExecutionContextWithSession = (session) =>
@@ -28,9 +26,7 @@ describe('LoggedInGuard', () => {
 
 	it('Should not allow access when no user is logged in', async () => {
 		expect(() =>
-			new LoggedInGuard().canActivate(
-				mockExecutionContextWithSession({}),
-			),
+			new LoggedInGuard().canActivate(mockExecutionContextWithSession({})),
 		).toThrowError();
 	});
 });

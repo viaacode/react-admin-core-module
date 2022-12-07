@@ -6,7 +6,7 @@ export class DuplicateKeyException extends HttpException {
 	constructor(data: any) {
 		super(
 			HttpException.createBody({ message: 'Duplicate Key Exception', data }),
-			HttpStatus.INTERNAL_SERVER_ERROR
+			HttpStatus.INTERNAL_SERVER_ERROR,
 		);
 		this.data = data;
 	}

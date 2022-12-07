@@ -11,7 +11,9 @@ describe('commaSeparatedStringToArray', () => {
 	});
 
 	it('should pass through array of strings without modifications', () => {
-		const converted = commaSeparatedStringToArray({ value: ['first', 'second'] });
+		const converted = commaSeparatedStringToArray({
+			value: ['first', 'second'],
+		});
 		expect(converted).toEqual(['first', 'second']);
 	});
 
