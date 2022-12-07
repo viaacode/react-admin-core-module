@@ -4,12 +4,11 @@ import {
 	ForbiddenException,
 	Injectable,
 } from '@nestjs/common';
-
+import { PermissionName } from '@viaa/avo2-types';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Permission } from '../../users/users.types';
 import { SessionHelper } from '../auth/session-helper';
 
 @Injectable()
@@ -21,24 +20,24 @@ export class PermissionGuard implements CanActivate {
 	): boolean | Promise<boolean> | Observable<boolean> {
 		// required permissions
 		const requiredPermissionsClass =
-			this.reflector.get<Permission[]>(
+			this.reflector.get<PermissionName[]>(
 				'requiredPermissions',
 				context.getClass(),
 			) || [];
 		const requiredPermissions =
-			this.reflector.get<Permission[]>(
+			this.reflector.get<PermissionName[]>(
 				'requiredPermissions',
 				context.getHandler(),
 			) || [];
 
 		// any permissions
 		const anyPermissionsClass =
-			this.reflector.get<Permission[]>(
+			this.reflector.get<PermissionName[]>(
 				'requireAnyPermissions',
 				context.getClass(),
 			) || [];
 		const anyPermissions =
-			this.reflector.get<Permission[]>(
+			this.reflector.get<PermissionName[]>(
 				'requireAnyPermissions',
 				context.getHandler(),
 			) || [];

@@ -1,4 +1,4 @@
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentAvo,
 	GetUserGroupsPermissionsDocument as GetUserGroupsPermissionsDocumentAvo,
@@ -65,17 +65,17 @@ type UserGroupsQueries = {
 	UpdateUserGroupsPermissionsDocument: TypedDocumentNode;
 };
 
-export const USER_GROUP_QUERIES: Record<AvoOrHetArchief, UserGroupsQueries> = {
-	[AvoOrHetArchief.avo]: {
+export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
+	[DatabaseType.avo]: {
 		GetUserGroupsPermissionsDocument: GetUserGroupsPermissionsDocumentAvo,
 		GetUserGroupsDocument: GetUserGroupsDocumentAvo,
 		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentAvo,
 	},
-	[AvoOrHetArchief.hetArchief]: {
+	[DatabaseType.hetArchief]: {
 		GetUserGroupsPermissionsDocument:
-			GetUserGroupsPermissionsDocumentHetArchief,
+		GetUserGroupsPermissionsDocumentHetArchief,
 		GetUserGroupsDocument: GetUserGroupsDocumentHetArchief,
 		UpdateUserGroupsPermissionsDocument:
-			UpdateUserGroupsPermissionsDocumentHetArchief,
+		UpdateUserGroupsPermissionsDocumentHetArchief,
 	},
 };

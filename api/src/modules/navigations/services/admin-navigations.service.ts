@@ -1,4 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+	forwardRef,
+	Inject,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import {
@@ -13,7 +19,9 @@ import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public adapt(navigationEntry: Partial<NavigationEntry>): NavigationItem {
 		/* istanbul ignore next */
@@ -59,13 +67,9 @@ export class AdminNavigationsService {
 		const response = await this.dataService.execute<
 			NavigationQueryTypes['InsertNavigationItemMutation'],
 			NavigationQueryTypes['InsertNavigationItemMutationVariables']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.InsertNavigationDocument,
-			{
-				navigationItem: this.adaptToDbFormat(navigationItem),
-			},
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].InsertNavigationItemDocument, {
+			navigationItem: this.adaptToDbFormat(navigationItem),
+		});
 
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
@@ -83,14 +87,10 @@ export class AdminNavigationsService {
 		const response = await this.dataService.execute<
 			NavigationQueryTypes['UpdateNavigationItemByIdMutation'],
 			NavigationQueryTypes['UpdateNavigationItemByIdMutationVariables']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.UpdateNavigationItemByIdDocument,
-			{
-				id,
-				navigationItem: this.adaptToDbFormat(navigationItem),
-			},
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].UpdateNavigationItemByIdDocument, {
+			id,
+			navigationItem: this.adaptToDbFormat(navigationItem),
+		});
 
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
@@ -105,13 +105,9 @@ export class AdminNavigationsService {
 		const response = await this.dataService.execute<
 			NavigationQueryTypes['DeleteNavigationItemMutation'],
 			NavigationQueryTypes['DeleteNavigationItemMutationVariables']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.DeleteNavigationDocument,
-			{
-				id,
-			},
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].DeleteNavigationItemDocument, {
+			id,
+		});
 
 		return {
 			affectedRows:
@@ -127,10 +123,7 @@ export class AdminNavigationsService {
 	public async findNavigationBars(): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetNavigationBarsQuery']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetNavigationBarsDocument,
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationBarsDocument);
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryAvo'])
@@ -149,7 +142,7 @@ export class AdminNavigationsService {
 			NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
 			NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
 		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+			NAVIGATION_QUERIES[getDatabaseType()]
 				.GetNavigationItemsByPlacementDocument,
 			{
 				placement,
@@ -171,11 +164,9 @@ export class AdminNavigationsService {
 		const navigationResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetNavigationItemByIdQuery'],
 			NavigationQueryTypes['GetNavigationItemByIdQueryVariables']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetNavigationItemByIdDocument,
-			{ id },
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemByIdDocument, {
+			id,
+		});
 		const item =
 			(
 				navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryAvo']

@@ -8,7 +8,7 @@ import {
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import React, { FunctionComponent, MouseEvent, useEffect, useState } from 'react';
 
@@ -27,7 +27,7 @@ export interface Tag {
 export interface MultiEducationalOrganisationSelectModalProps {
 	label: string;
 	id: string;
-	values: ClientEducationOrganization[];
+	values: Avo.EducationOrganization.Organization[];
 	disabled?: boolean;
 	onChange: (organisations: string[], id: string) => void;
 	showSelectedValuesOnCollapsed?: boolean;
@@ -41,7 +41,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [includeEmpty, setIncludeEmpty] = useState<boolean>(false);
 	const [selectedOrganisations, setSelectedOrganisations] =
-		useState<ClientEducationOrganization[]>(values);
+		useState<Avo.EducationOrganization.Organization[]>(values);
 
 	useEffect(() => {
 		setSelectedOrganisations(values.filter((org) => org.label !== NULL_FILTER));

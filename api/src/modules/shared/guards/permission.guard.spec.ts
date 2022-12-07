@@ -1,8 +1,7 @@
 import { ExecutionContext } from '@nestjs/common';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { PermissionGuard } from './permission.guard';
-
-import { Permission } from '../../users/users.types';
 
 const mockExecutionContextWithPermissions = (permissions) =>
 	({
@@ -37,13 +36,13 @@ describe('PermissionGuard', () => {
 
 	it('Should allow access when the user has all required permissions', async () => {
 		mockReflector.get.mockReturnValueOnce([
-			Permission.SEARCH,
-			Permission.SEARCH_OBJECTS,
+			PermissionName.SEARCH,
+			PermissionName.SEARCH_OBJECTS,
 		]);
 		const canActivate = new PermissionGuard(mockReflector).canActivate(
 			mockExecutionContextWithPermissions([
-				Permission.SEARCH,
-				Permission.SEARCH_OBJECTS,
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
 			]),
 		);
 		expect(canActivate).toBe(true);
@@ -52,10 +51,13 @@ describe('PermissionGuard', () => {
 	it('Should NOT allow access when the user has not all required permissions', async () => {
 		mockReflector.get
 			.mockReturnValueOnce([])
-			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]); // trigger the handler option as alternative
+			.mockReturnValueOnce([
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
+			]); // trigger the handler option as alternative
 		expect(() =>
 			new PermissionGuard(mockReflector).canActivate(
-				mockExecutionContextWithPermissions([Permission.SEARCH]),
+				mockExecutionContextWithPermissions([PermissionName.SEARCH]),
 			),
 		).toThrowError();
 	});
@@ -65,9 +67,12 @@ describe('PermissionGuard', () => {
 		mockReflector.get
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
-			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
+			.mockReturnValueOnce([
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
+			]);
 		const canActivate = new PermissionGuard(mockReflector).canActivate(
-			mockExecutionContextWithPermissions([Permission.SEARCH]),
+			mockExecutionContextWithPermissions([PermissionName.SEARCH]),
 		);
 		expect(canActivate).toBe(true);
 	});
@@ -76,11 +81,14 @@ describe('PermissionGuard', () => {
 		mockReflector.get
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
-			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
+			.mockReturnValueOnce([
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
+			]);
 		const canActivate = new PermissionGuard(mockReflector).canActivate(
 			mockExecutionContextWithPermissions([
-				Permission.SEARCH,
-				Permission.SEARCH_OBJECTS,
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
 			]),
 		);
 		expect(canActivate).toBe(true);
@@ -91,10 +99,15 @@ describe('PermissionGuard', () => {
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
 			.mockReturnValueOnce([])
-			.mockReturnValueOnce([Permission.SEARCH, Permission.SEARCH_OBJECTS]);
+			.mockReturnValueOnce([
+				PermissionName.SEARCH,
+				PermissionName.SEARCH_OBJECTS,
+			]);
 		expect(() =>
 			new PermissionGuard(mockReflector).canActivate(
-				mockExecutionContextWithPermissions([Permission.CREATE_VISIT_REQUEST]),
+				mockExecutionContextWithPermissions([
+					PermissionName.CREATE_VISIT_REQUEST,
+				]),
 			),
 		).toThrowError();
 	});

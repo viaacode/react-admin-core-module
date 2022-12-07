@@ -16,11 +16,11 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { Permission } from '../../users/users.types';
+import { PermissionName } from '@viaa/avo2-types';
 
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import {
 	ContentOverviewTableCols,
 	ContentPage,
@@ -45,8 +45,8 @@ export class ContentPagesController {
 
 	@Post('')
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
@@ -97,8 +97,8 @@ export class ContentPagesController {
 		const permissions = get(user.getUser(), 'permissions', []);
 		const userId = user.getId();
 		const canEditContentPage =
-			permissions.includes(Permission.EDIT_ANY_CONTENT_PAGES) ||
-			(permissions.includes(Permission.EDIT_OWN_CONTENT_PAGES) &&
+			permissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
+			(permissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) &&
 				contentPage.owner.id === userId);
 
 		if (!contentPage) {
@@ -190,7 +190,7 @@ export class ContentPagesController {
 		@SessionUser() user: SessionUserEntity,
 		@Req() request,
 	): Promise<any[]> {
-		if (!user.has(Permission.SEARCH)) {
+		if (!user.has(PermissionName.SEARCH)) {
 			throw new ForbiddenException(
 				'You do not have the required permission for this route',
 			);
@@ -218,9 +218,9 @@ export class ContentPagesController {
 
 	@Get('public')
 	@RequireAnyPermissions(
-		Permission.EDIT_CONTENT_PAGE_LABELS,
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_CONTENT_PAGE_LABELS,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getPublicContentItems(
 		@Query('limit') limit: number,
@@ -244,10 +244,10 @@ export class ContentPagesController {
 
 	@Get('projects/public')
 	@RequireAnyPermissions(
-		Permission.EDIT_CONTENT_PAGE_LABELS,
-		Permission.EDIT_OWN_CONTENT_PAGES,
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_NAVIGATION_BARS,
+		PermissionName.EDIT_CONTENT_PAGE_LABELS,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_NAVIGATION_BARS,
 	)
 	public async getPublicProjectContentItems(
 		@Query('limit') limit: number,
@@ -274,7 +274,7 @@ export class ContentPagesController {
 	}
 
 	@Put('labels')
-	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
+	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentLabelsLinks(
 		@Body()
 		insertContentLabelLink: {
@@ -289,7 +289,7 @@ export class ContentPagesController {
 	}
 
 	@Delete('labels')
-	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
+	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentLabelsLinks(
 		@Body()
 		deleteContentLabelLink: {
@@ -305,8 +305,8 @@ export class ContentPagesController {
 
 	@Get('types')
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
@@ -316,8 +316,8 @@ export class ContentPagesController {
 
 	@Put()
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async insertContentPage(
 		@Body()
@@ -325,7 +325,7 @@ export class ContentPagesController {
 		@SessionUser() user,
 	): Promise<ContentPage | null> {
 		if (
-			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 			contentPage.userProfileId !== user.id
 		) {
 			// User cannot edit other peoples pages
@@ -338,8 +338,8 @@ export class ContentPagesController {
 
 	@Patch()
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async updateContentPage(
 		@Body()
@@ -350,7 +350,7 @@ export class ContentPagesController {
 		@SessionUser() user,
 	): Promise<ContentPage | null> {
 		if (
-			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 			body.contentPage.userProfileId !== user.id
 		) {
 			// User cannot edit other peoples pages
@@ -365,13 +365,13 @@ export class ContentPagesController {
 	}
 
 	@Delete(':id')
-	@RequireAnyPermissions(Permission.DELETE_ANY_CONTENT_PAGES)
+	@RequireAnyPermissions(PermissionName.DELETE_ANY_CONTENT_PAGES)
 	public async deleteContentPage(@Param('id') id: string): Promise<void> {
 		await this.contentPagesService.deleteContentPage(id);
 	}
 
 	@Get('access')
-	@RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
+	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getUserGroupsFromContentPage(
 		@Query('path') path: string,
 	): Promise<(string | number)[]> {
@@ -380,8 +380,8 @@ export class ContentPagesController {
 
 	@Get(':id')
 	@RequireAnyPermissions(
-		Permission.EDIT_ANY_CONTENT_PAGES,
-		Permission.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getContentPageById(
 		@Param('id') id: string,

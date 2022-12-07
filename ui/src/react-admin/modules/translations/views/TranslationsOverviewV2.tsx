@@ -1,3 +1,4 @@
+import { Container, Flex, Spinner } from '@viaa/avo2-components';
 import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -11,7 +12,7 @@ import React, {
 
 import { TranslationsOverviewV2Props, TranslationV2 } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { OrderDirection } from '~modules/shared/types';
+import { AvoOrHetArchief, OrderDirection } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
@@ -23,6 +24,7 @@ import {
 	Table,
 	TextInput,
 } from '@meemoo/react-components';
+import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { Icon } from '~modules/shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
@@ -60,6 +62,9 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
+
+	const isAvo =
+		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
@@ -220,6 +225,51 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		[filters.search, filters.orderDirection, filters.orderProp, setFilters]
 	);
 
+	const getPagination = () => {
+		if (!isAvo) {
+			return (
+				<Pagination
+					buttons={{
+						next: (
+							<Button
+								className="u-pl-24:sm u-pl-8"
+								disabled={filters.page === pageCount}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___volgende'
+								)}
+								iconEnd={<Icon name="angleRight" />}
+							/>
+						),
+						previous: (
+							<Button
+								className="u-pr-24:sm u-pr-8"
+								disabled={filters.page === 1}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___vorige'
+								)}
+								iconStart={<Icon name="angleLeft" />}
+							/>
+						),
+					}}
+					showFirstLastNumbers
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+					pageCount={pageCount}
+				/>
+			);
+		} else {
+			return (
+				<PaginationAvo
+					pageCount={pageCount}
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+				/>
+			);
+		}
+	};
+
 	const renderTranslationsTable = (): ReactNode => {
 		if (!filteredAndPaginatedTranslations) {
 			return <Loader />;
@@ -290,40 +340,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
 					onRowClick={handleRowClick}
-					pagination={() => {
-						return (
-							<Pagination
-								buttons={{
-									next: (
-										<Button
-											className="u-pl-24:sm u-pl-8"
-											disabled={filters.page === pageCount}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___volgende'
-											)}
-											iconEnd={<Icon name="angleRight" />}
-										/>
-									),
-									previous: (
-										<Button
-											className="u-pr-24:sm u-pr-8"
-											disabled={filters.page === 1}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___vorige'
-											)}
-											iconStart={<Icon name="angleLeft" />}
-										/>
-									),
-								}}
-								showFirstLastNumbers
-								onPageChange={handlePageChange}
-								currentPage={filters.page - 1}
-								pageCount={pageCount}
-							/>
-						);
-					}}
+					pagination={getPagination}
 				/>
 			</>
 		);
@@ -370,6 +387,17 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 		);
 	};
 
+	const renderSpinner = () => (
+		<Container mode="vertical">
+			<Flex orientation="horizontal" center>
+				<Spinner size="large" />
+			</Flex>
+		</Container>
+	);
+
+	if (!translations) {
+		return renderSpinner();
+	}
 	return (
 		<div className={className}>
 			<TextInput

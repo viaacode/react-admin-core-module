@@ -8,11 +8,11 @@ import {
 	Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
 
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 
-import { Permission } from '../../users/users.types';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { DeleteResponse } from '../../shared/types/types';
 import { NavigationItem } from '../types';
@@ -22,16 +22,16 @@ import { NavigationItem } from '../types';
 // In the long term we would like to switch this to use these routes
 @ApiTags('Admin Navigations')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/navigations')
-@RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
+@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 export class AdminNavigationsController {
-	constructor(private navigationsService: AdminNavigationsService) {}
+	constructor(private adminNavigationsService: AdminNavigationsService) {}
 
 	@ApiOperation({
 		description: 'Get an overview of all the navigation bars that exist',
 	})
 	@Get()
 	public async getNavigationBarsOverview(): Promise<NavigationItem[]> {
-		return this.navigationsService.findNavigationBars();
+		return this.adminNavigationsService.findNavigationBars();
 	}
 
 	@ApiOperation({
@@ -41,7 +41,7 @@ export class AdminNavigationsController {
 	public async getNavigationBarItems(
 		@Param('placement') placement: string,
 	): Promise<NavigationItem[]> {
-		return this.navigationsService.findNavigationBarItemsByPlacementId(
+		return this.adminNavigationsService.findNavigationBarItemsByPlacementId(
 			placement,
 		);
 	}
@@ -53,7 +53,7 @@ export class AdminNavigationsController {
 	public async getNavigationElement(
 		@Param('id') id: string,
 	): Promise<NavigationItem> {
-		return this.navigationsService.findElementById(id);
+		return this.adminNavigationsService.findElementById(id);
 	}
 
 	@ApiOperation({
@@ -63,7 +63,7 @@ export class AdminNavigationsController {
 	public async createNavigationElement(
 		@Body() createNavigationDto: CreateNavigationDto,
 	): Promise<NavigationItem> {
-		return this.navigationsService.insertElement(createNavigationDto);
+		return this.adminNavigationsService.insertElement(createNavigationDto);
 	}
 
 	@ApiOperation({
@@ -74,7 +74,7 @@ export class AdminNavigationsController {
 		@Param('id') id: string,
 		@Body() updateNavigationDto: CreateNavigationDto,
 	): Promise<NavigationItem> {
-		return this.navigationsService.updateElement(id, updateNavigationDto);
+		return this.adminNavigationsService.updateElement(id, updateNavigationDto);
 	}
 
 	@ApiOperation({
@@ -85,6 +85,6 @@ export class AdminNavigationsController {
 	public async deleteNavigationElement(
 		@Param('id') id: string,
 	): Promise<DeleteResponse> {
-		return this.navigationsService.deleteElement(id);
+		return this.adminNavigationsService.deleteElement(id);
 	}
 }

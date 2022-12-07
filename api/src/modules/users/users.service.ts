@@ -1,5 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { isNil } from '@nestjs/common/utils/shared.utils';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
 import { compact, flatten, get } from 'lodash';
 import { DataService } from '../data';
@@ -21,7 +22,10 @@ import {
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { AvoOrHetArchief } from '../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
+import { getDatabaseType } from '../shared/helpers/get-database-type';
+import { isAvo } from '../shared/helpers/is-avo';
+import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import {
@@ -43,7 +47,7 @@ export class UsersService {
 		if (!userProfile) {
 			return undefined;
 		}
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			const user = userProfile as ProfileHetArchief;
 			return {
 				profileId: user.id,
@@ -69,7 +73,7 @@ export class UsersService {
 						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
 							?.iri,
 				},
-				last_access_at: user.last_access_at,
+				lastAccessAt: user.last_access_at,
 			};
 		} else {
 			const user = userProfile as ProfileAvo;
@@ -81,7 +85,7 @@ export class UsersService {
 							name: user.company_name,
 					  } as Avo.Organization.Organization)
 					: undefined,
-				educational_organisations: (user.organisations || []).map(
+				educationalOrganisations: (user.organisations || []).map(
 					(org): ClientEducationOrganization => ({
 						organizationId: org.organization_id,
 						unitId: org.unit_id || null,
@@ -91,10 +95,10 @@ export class UsersService {
 				subjects: user.classifications?.map(
 					(classification) => classification.key,
 				),
-				education_levels: user.contexts?.map((context) => context.key),
-				is_exception: user.is_exception || undefined,
-				business_category: user.business_category || undefined,
-				created_at: user.acc_created_at,
+				educationLevels: user.contexts?.map((context) => context.key),
+				isException: user.is_exception || undefined,
+				businessCategory: user.business_category || undefined,
+				createdAt: user.acc_created_at,
 				userGroup: {
 					name: user.group_name || undefined,
 					label: user.group_name || undefined,
@@ -106,11 +110,19 @@ export class UsersService {
 				fullName: user.full_name || undefined,
 				firstName: user.first_name || undefined,
 				lastName: user.last_name || undefined,
-				is_blocked: user.is_blocked || undefined,
-				blocked_at: get(user, 'blocked_at.date'),
-				unblocked_at: get(user, 'unblocked_at.date'),
-				last_access_at: user.last_access_at,
-				temp_access: user?.user?.temp_access || undefined,
+				isBlocked: user.is_blocked || undefined,
+				blockedAt: get(user, 'blocked_at.date'),
+				unblockedAt: get(user, 'unblocked_at.date'),
+				lastAccessAt: user.last_access_at,
+				tempAccess: user?.user?.temp_access
+					? {
+							from: user?.user?.temp_access?.from || null,
+							until: user?.user?.temp_access?.until || null,
+							status: isNil(user?.user?.temp_access?.current?.status)
+								? null
+								: user?.user?.temp_access?.current?.status === 1,
+					  }
+					: null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
 			};
 		}
@@ -127,13 +139,12 @@ export class UsersService {
 		let variables: any;
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
-			const whereWithoutDeleted =
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-					? where
-					: {
-							...where,
-							is_deleted: { _eq: false },
-					  };
+			const whereWithoutDeleted = isHetArchief()
+				? where
+				: {
+						...where,
+						is_deleted: { _eq: false },
+				  };
 
 			variables = {
 				offset,
@@ -149,10 +160,7 @@ export class UsersService {
 
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetUsersQuery']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetUsersDocument,
-				variables,
-			);
+			>(USER_QUERIES[getDatabaseType()].GetUsersDocument, variables);
 
 			const avoResponse = response as UserQueryTypes['GetProfileNamesQueryAvo'];
 			const hetArchiefResponse =
@@ -193,18 +201,12 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
 				UserQueryTypes['GetProfileNamesQueryVariables']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetProfileNamesDocument,
-				{
-					profileIds,
-				},
-			);
+			>(USER_QUERIES[getDatabaseType()].GetProfileNamesDocument, {
+				profileIds,
+			});
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])
 						?.users_profile || []
@@ -250,13 +252,9 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileIdsQuery'],
 				UserQueryTypes['GetProfileIdsQueryVariables']
-			>(
-				USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetProfileIdsDocument,
-				variables,
-			);
+			>(USER_QUERIES[getDatabaseType()].GetProfileIdsDocument, variables);
 
-			if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.avo) {
+			if (isAvo()) {
 				// avo
 				return compact(
 					(
@@ -281,7 +279,7 @@ export class UsersService {
 	}
 
 	async fetchDistinctBusinessCategories(): Promise<string[]> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return [];
 		}
 
@@ -312,12 +310,10 @@ export class UsersService {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
 				UserQueryTypes['GetIdpsQueryVariables']
-			>(USER_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetIdpsDocument);
+			>(USER_QUERIES[getDatabaseType()].GetIdpsDocument);
 
 			/* istanbul ignore next */
-			if (
-				process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief
-			) {
+			if (isHetArchief()) {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
@@ -337,7 +333,7 @@ export class UsersService {
 	async fetchPublicAndPrivateCounts(
 		profileIds: string[],
 	): Promise<DeleteContentCounts> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
@@ -384,7 +380,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info(
 				"adding subjects to profiles isn't supported for hetarchief",
 			);
@@ -422,7 +418,7 @@ export class UsersService {
 		subjects: string[],
 		profileIds: string[],
 	): Promise<void> {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			console.info(
 				"removing subjects from profiles isn't supported for hetarchief",
 			);

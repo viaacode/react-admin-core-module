@@ -1,4 +1,4 @@
-import { ContentPageFiltersDto } from '../../content-pages/dto/content-pages.dto';
+import { ContentPageFiltersDto } from './content-pages.dto';
 
 describe('ContentPagesDto', () => {
 	describe('ContentPagesQueryDto', () => {

@@ -4,7 +4,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import Select, { Props } from 'react-select';
 
 import './ColorSelect.scss';
-import { ReactSelectOption } from '../../../../shared/types';
+import { ReactSelectOption } from '~modules/shared';
 
 export interface ColorOption {
 	label: string;

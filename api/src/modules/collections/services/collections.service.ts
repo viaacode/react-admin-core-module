@@ -1,4 +1,8 @@
-import { Inject, InternalServerErrorException } from '@nestjs/common';
+import {
+	forwardRef,
+	Inject,
+	InternalServerErrorException,
+} from '@nestjs/common';
 import { Avo } from '@viaa/avo2-types';
 import { DataService } from '../../data';
 import {
@@ -17,7 +21,9 @@ import { isUuid } from '../../shared/helpers/uuid';
 import { ContentTypeNumber } from '../collections.types';
 
 export class CollectionsService {
-	constructor(@Inject() private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	/**
 	 * Retrieve collections or bundles.

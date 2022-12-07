@@ -15,7 +15,7 @@ import {
 	UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesHetArchief,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { AvoOrHetArchief } from '../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 export type SiteVariableQueryTypes = {
 	GetSiteVariableByNameQueryAvo: GetSiteVariableByNameQueryAvo;
@@ -48,17 +48,15 @@ type SiteVariableQueries = {
 	UpdateSiteVariableByNameDocument: TypedDocumentNode;
 };
 
-export const SITE_VARIABLE_QUERIES: Record<
-	AvoOrHetArchief,
-	SiteVariableQueries
-> = {
-	[AvoOrHetArchief.avo]: {
-		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentAvo,
-		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentAvo,
-	},
-	[AvoOrHetArchief.hetArchief]: {
-		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
-		UpdateSiteVariableByNameDocument:
-			UpdateSiteVariableByNameDocumentHetArchief,
-	},
-};
+export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> =
+	{
+		[DatabaseType.avo]: {
+			GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentAvo,
+			UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentAvo,
+		},
+		[DatabaseType.hetArchief]: {
+			GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
+			UpdateSiteVariableByNameDocument:
+				UpdateSiteVariableByNameDocumentHetArchief,
+		},
+	};

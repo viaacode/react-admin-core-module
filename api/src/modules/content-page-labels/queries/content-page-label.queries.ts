@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { AvoOrHetArchief } from '../../shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
 	DeleteContentPageLabelByIdMutation as DeleteContentPageLabelByIdMutationAvo,
@@ -131,30 +131,30 @@ type ContentPageLabelQueries = {
 };
 
 export const CONTENT_PAGE_LABEL_QUERIES: Record<
-	AvoOrHetArchief,
+	DatabaseType,
 	ContentPageLabelQueries
 > = {
-	[AvoOrHetArchief.avo]: {
+	[DatabaseType.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentAvo,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
 		GetContentPageLabelsByTypeAndIdsDocument:
-			GetContentPageLabelsByTypeAndIdsDocumentAvo,
+		GetContentPageLabelsByTypeAndIdsDocumentAvo,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+		GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
-	[AvoOrHetArchief.hetArchief]: {
+	[DatabaseType.hetArchief]: {
 		DeleteContentPageLabelByIdDocument:
-			DeleteContentPageLabelByIdDocumentHetArchief,
+		DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentHetArchief,
 		GetContentPageLabelsByTypeAndIdsDocument:
-			GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+		GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+		GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
 };
