@@ -2,8 +2,8 @@ import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
 import { isEmpty } from 'lodash-es';
 import React, { ChangeEvent, FunctionComponent } from 'react';
 
-import { useUserGroupOptions } from '../../../content-page/hooks/useUserGroupOptions';
 import { Checkbox } from '@meemoo/react-components';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;

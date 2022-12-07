@@ -19,7 +19,7 @@ export const TRANSLATIONS_QUERY_PARAM_CONFIG = {
 	orderDirection: withDefault(SortDirectionParam, 'asc'),
 };
 
-export const ITEMS_PER_PAGE = 20;
+export const TRANSLATIONS_PER_PAGE = 20;
 
 export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'fullscreen',

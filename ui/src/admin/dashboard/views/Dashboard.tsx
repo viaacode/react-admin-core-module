@@ -3,10 +3,10 @@ import { AdminLayout } from '../../../react-admin/modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 const Dashboard = () => {
-	const { tHtml } = useTranslation();
+	const { tHtml, tText } = useTranslation();
 
 	return (
-		<AdminLayout pageTitle={tHtml('Dashboard')}>
+		<AdminLayout pageTitle={tText('admin/dashboard/views/dashboard___dashboard')}>
 			<AdminLayout.Content>
 				<p>{tHtml('admin/dashboard/views/dashboard___introductie-beheer-dashboard')}</p>
 			</AdminLayout.Content>

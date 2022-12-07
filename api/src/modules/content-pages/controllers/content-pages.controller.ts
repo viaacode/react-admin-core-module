@@ -2,26 +2,36 @@ import {
 	BadRequestException,
 	Body,
 	Controller,
+	Delete,
 	ForbiddenException,
 	Get,
 	Headers,
+	Param,
+	Patch,
 	Post,
+	Put,
 	Query,
 	Req,
 	UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
+import { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { Permission } from '../../users';
 
-import { ContentPage, LabelObj } from '../content-pages.types';
+import {
+	ContentOverviewTableCols,
+	ContentPage,
+	ContentPageLabel,
+} from '../content-pages.types';
 
-import { ContentLabelsRequestDto } from '../dto/content-labels-request.dto';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto';
+import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Permission } from '../../users/types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
@@ -34,22 +44,43 @@ import { addPrefix } from '../../shared/helpers/add-route-prefix';
 export class ContentPagesController {
 	constructor(private contentPagesService: ContentPagesService) {}
 
-	@Post('overview')
+	@Post('')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
 	): Promise<IPagination<ContentPage>> {
-		const contentPages =
-			await this.contentPagesService.getContentPagesForOverview(
-				queryDto,
-				compact([
-					String(user?.getGroupId()),
-					user?.getUser()
-						? SpecialPermissionGroups.loggedInUsers
-						: SpecialPermissionGroups.loggedOutUsers,
-				]),
-			);
-		return contentPages;
+		return this.contentPagesService.getContentPagesForOverview(
+			queryDto,
+			compact([
+				String(user?.getGroupId()),
+				user?.getUser()
+					? SpecialPermissionGroups.loggedInUsers
+					: SpecialPermissionGroups.loggedOutUsers,
+			]),
+		);
+	}
+
+	@Get('overview')
+	public async fetchContentPages(
+		@Query('offset') offset: string,
+		@Query('limit') limit: string,
+		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
+		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
+		@Query('tableColumnDataType') tableColumnDataType: string,
+		@Query('where') where: string,
+	): Promise<[ContentPage[], number]> {
+		return this.contentPagesService.fetchContentPages(
+			parseInt(offset || '0'),
+			parseInt(limit || '20'),
+			sortColumn,
+			sortOrder,
+			tableColumnDataType,
+			JSON.parse(where),
+		);
 	}
 
 	@Get('')
@@ -143,7 +174,7 @@ export class ContentPagesController {
 		};
 	}
 
-	@Post('')
+	@Post('media')
 	@ApiOperation({
 		summary:
 			'Resolves the objects (items, collections, bundles, search queries) that are references inside the media grid blocks to their actual objects',
@@ -160,7 +191,7 @@ export class ContentPagesController {
 		@SessionUser() user: SessionUserEntity,
 		@Req() request,
 	): Promise<any[]> {
-		if (user.has(Permission.SEARCH)) {
+		if (!user.has(Permission.SEARCH)) {
 			throw new ForbiddenException(
 				'You do not have the required permission for this route',
 			);
@@ -186,21 +217,176 @@ export class ContentPagesController {
 		};
 	}
 
-	@Post('labels')
-	async getContentPageLabelsByTypeAndIds(
-		@Body() body: ContentLabelsRequestDto,
-	): Promise<LabelObj[]> {
-		if ((body as any).labelIds) {
-			return await this.contentPagesService.getContentPageLabelsByTypeAndIds(
-				body.contentType,
-				(body as any).labelIds,
+	@Get('public')
+	@RequireAnyPermissions(
+		Permission.EDIT_CONTENT_PAGE_LABELS,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async getPublicContentItems(
+		@Query('limit') limit: number,
+		@Query('title') title: string | undefined,
+	): Promise<
+		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
+		| null
+	> {
+		if (title) {
+			return this.contentPagesService.getPublicContentItemsByTitle(
+				title,
+				limit,
+			);
+		} else {
+			return this.contentPagesService.getPublicContentItems(limit);
+		}
+	}
+
+	@Get('projects/public')
+	@RequireAnyPermissions(
+		Permission.EDIT_CONTENT_PAGE_LABELS,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_NAVIGATION_BARS,
+	)
+	public async getPublicProjectContentItems(
+		@Query('limit') limit: number,
+		@Query('title') title: string | undefined,
+	): Promise<
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryHetArchief']['app_content_page']
+	> {
+		if (title) {
+			return this.contentPagesService.getPublicProjectContentItemsByTitle(
+				title,
+				limit,
+			);
+		} else {
+			return this.contentPagesService.getPublicProjectContentItems(limit);
+		}
+	}
+
+	@Get('labels')
+	public async fetchLabelsByContentType(
+		@Query('contentType') contentType: string,
+	): Promise<ContentPageLabel[]> {
+		return this.contentPagesService.fetchLabelsByContentType(contentType);
+	}
+
+	@Put('labels')
+	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
+	public async insertContentLabelsLinks(
+		@Body()
+		insertContentLabelLink: {
+			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[];
+		},
+	): Promise<void> {
+		await this.contentPagesService.insertContentLabelsLinks(
+			insertContentLabelLink.contentPageId,
+			insertContentLabelLink.labelIds,
+		);
+	}
+
+	@Delete('labels')
+	@RequireAnyPermissions(Permission.EDIT_CONTENT_PAGE_LABELS)
+	public async deleteContentLabelsLinks(
+		@Body()
+		deleteContentLabelLink: {
+			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+			labelIds: (number | string)[];
+		},
+	): Promise<void> {
+		await this.contentPagesService.deleteContentLabelsLinks(
+			deleteContentLabelLink.contentPageId,
+			deleteContentLabelLink.labelIds,
+		);
+	}
+
+	@Get('types')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async getContentTypes(): Promise<
+		{ value: Avo.ContentPage.Type; label: string }[] | null
+	> {
+		return this.contentPagesService.getContentTypes();
+	}
+
+	@Put()
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async insertContentPage(
+		@Body()
+		contentPage: ContentPage,
+		@SessionUser() user,
+	): Promise<ContentPage | null> {
+		if (
+			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			contentPage.userProfileId !== user.id
+		) {
+			// User cannot edit other peoples pages
+			throw new ForbiddenException(
+				"You're not allowed to create content pages for other people",
 			);
 		}
+		return this.contentPagesService.insertContentPage(contentPage);
+	}
 
-		// else labels query param is set
-		return await this.contentPagesService.getContentPageLabelsByTypeAndLabels(
-			body.contentType,
-			(body as any).labels,
+	@Patch()
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async updateContentPage(
+		@Body()
+		body: {
+			contentPage: ContentPage;
+			initialContentPage: ContentPage | undefined;
+		},
+		@SessionUser() user,
+	): Promise<ContentPage | null> {
+		if (
+			!user.has(Permission.EDIT_ANY_CONTENT_PAGES) &&
+			body.contentPage.userProfileId !== user.id
+		) {
+			// User cannot edit other peoples pages
+			throw new ForbiddenException(
+				"You're not allowed to edit content pages that you do not own",
+			);
+		}
+		return this.contentPagesService.updateContentPage(
+			body.contentPage,
+			body.initialContentPage,
 		);
+	}
+
+	@Delete(':id')
+	@RequireAnyPermissions(Permission.DELETE_ANY_CONTENT_PAGES)
+	public async deleteContentPage(@Param('id') id: string): Promise<void> {
+		await this.contentPagesService.deleteContentPage(id);
+	}
+
+	@Get('access')
+	@RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
+	public async getUserGroupsFromContentPage(
+		@Query('path') path: string,
+	): Promise<(string | number)[]> {
+		return this.contentPagesService.getUserGroupsFromContentPage(path);
+	}
+
+	@Get(':id')
+	@RequireAnyPermissions(
+		Permission.EDIT_ANY_CONTENT_PAGES,
+		Permission.EDIT_OWN_CONTENT_PAGES,
+	)
+	public async getContentPageById(
+		@Param('id') id: string,
+	): Promise<ContentPage> {
+		return this.contentPagesService.getContentPageById(id);
 	}
 }

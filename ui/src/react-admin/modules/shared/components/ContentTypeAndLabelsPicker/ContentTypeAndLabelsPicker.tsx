@@ -11,6 +11,7 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
@@ -42,7 +43,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	const { tHtml, tText } = useTranslation();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const [labels, setLabels] = useState<Avo.ContentPage.Label[]>([]);
+	const [labels, setLabels] = useState<ContentPageLabel[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {

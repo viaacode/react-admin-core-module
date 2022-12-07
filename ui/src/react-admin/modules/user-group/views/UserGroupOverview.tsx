@@ -1,6 +1,6 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import React, { ChangeEvent, forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { cloneDeep, remove } from 'lodash-es';
+import { cloneDeep, remove, sortBy } from 'lodash-es';
 import { Column, TableOptions } from 'react-table';
 
 import {
@@ -14,14 +14,14 @@ import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
+import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
 import { UserGroupTableColumns } from '../const/user-group.const';
-import { useGetUserGroups } from '../hooks/data/get-all-user-groups';
-import { useUpdateUserGroups } from '../hooks/data/update-user-groups';
 import {
-	UserGroupArchief,
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
+	UserGroupWithPermissions,
 } from '../types/user-group.types';
 
 const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(
@@ -36,7 +36,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			isError: isErrorUserGroups,
 			error: userGroupError,
 			refetch: refetchUserGroups,
-		} = useGetUserGroups();
+		} = useGetUserGroupsWithPermissions();
 		const {
 			data: permissions,
 			isError: isErrorPermissions,
@@ -48,9 +48,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 		// Use data (userGroups) as original state
 		// Current state keeps track of table state
-		const [currentUserGroups, setCurrentUserGroups] = useState<UserGroupArchief[] | undefined>(
-			undefined
-		);
+		const [currentUserGroups, setCurrentUserGroups] = useState<
+			UserGroupWithPermissions[] | undefined
+		>(undefined);
 		// Updated checkboxes are saved separately
 		const [userGroupUpdates, setUserGroupUpdates] = useState<UserGroupUpdate[]>([]);
 		const [search, setSearch] = useState<string | undefined>(undefined);
@@ -61,7 +61,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		 */
 		const updateUserGroup = (
 			userGroupId: string,
-			permissionId: string,
+			permissionId: string | number,
 			hasPermission: boolean
 		) => {
 			if (!userGroupId || !permissionId || !currentUserGroups || !permissions) {
@@ -69,7 +69,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			}
 
 			const userGroups = cloneDeep(currentUserGroups);
-			const userGroup = userGroups.find((group) => group.id === userGroupId);
+			const userGroup = userGroups.find((group) => String(group.id) === String(userGroupId));
 
 			if (!userGroup) {
 				return;
@@ -100,7 +100,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		// Add updated permission to changelog
 		const updateUserGroupUpdates = (
 			userGroupId: string,
-			permissionId: string,
+			permissionId: string | number,
 			hasPermission: boolean
 		) => {
 			if (!userGroupId || !permissionId) {
@@ -130,40 +130,39 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			onChangePermissions?.(false);
 		};
 
-		const onClickSave = () => {
-			updateUserGroups({ updates: userGroupUpdates })
-				.then(() => {
-					refetchUserGroups();
-					setUserGroupUpdates([]);
+		const onClickSave = async () => {
+			try {
+				await updateUserGroups({ updates: userGroupUpdates });
+				await refetchUserGroups();
+				setUserGroupUpdates([]);
 
-					// Fire onChange for parent component
-					onChangePermissions?.(false);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___success'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
-						),
-						type: ToastType.ERROR,
-					});
-				})
-				.catch((err) => {
-					console.error(
-						new CustomError('Failed to save permissions', err, {
-							query: 'UserGroupService.updateUserGroups',
-						})
-					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___error'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
-						),
-						type: ToastType.ERROR,
-					});
+				// Fire onChange for parent component
+				onChangePermissions?.(false);
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___success'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
+					),
+					type: ToastType.SUCCESS,
 				});
+			} catch (err) {
+				console.error(
+					new CustomError('Failed to save permissions', err, {
+						query: 'UserGroupService.updateUserGroups',
+					})
+				);
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___error'
+					),
+					description: AdminConfigManager.getConfig().services.i18n.tText(
+						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
+					),
+					type: ToastType.ERROR,
+				});
+			}
 		};
 
 		const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -173,8 +172,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		const onSearchSubmit = (search: string | undefined) => {
 			if (search) {
 				setSearchResults(
-					permissions?.filter((permission) =>
-						permission.label.toLowerCase().includes(search.toLowerCase())
+					sortBy(
+						permissions?.filter((permission) =>
+							permission.label.toLowerCase().includes(search.toLowerCase())
+						),
+						(permission) => permission.label
 					)
 				);
 			} else {

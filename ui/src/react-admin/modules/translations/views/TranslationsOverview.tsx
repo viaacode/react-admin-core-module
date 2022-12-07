@@ -1,9 +1,9 @@
-import { flatten, fromPairs, get, groupBy, isNil, map } from 'lodash-es';
+import { flatten, fromPairs, groupBy, isNil, map } from 'lodash-es';
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 
 import { KeyValueEditor } from '@viaa/avo2-components';
 
-import { Translation, TranslationsState } from '../translations.types';
+import { Translation } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
@@ -23,17 +23,17 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 			: 'TRANSLATIONS_';
 
 	const convertTranslationsToData = useCallback(
-		(translations: TranslationsState[]): Translation[] => {
+		(translations: Record<string, Record<string, string>>): Translation[] => {
 			// convert translations to state format
 			return flatten(
-				translations.map((context: TranslationsState) => {
+				Object.entries(translations).map((entry: [string, Record<string, string>]) => {
 					// convert object-based translations to array-based translations
-					const translationsArray: Translation[] = Object.entries(get(context, 'value'));
+					const translationsArray: Translation[] = Object.entries(entry[1]);
 
 					// add context to translations id
 					return translationsArray.map(
 						(item: Translation): Translation => [
-							`${get(context, 'name').replace(keyPrefix, '')}/${item[0]}`,
+							`${entry[0].replace(keyPrefix, '')}/${item[0]}`,
 							item[1],
 						]
 					);
@@ -45,9 +45,8 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 
 	const getTranslations = useCallback(async () => {
 		try {
-			const translationRows = convertTranslationsToData(
-				await TranslationsService.fetchTranslations()
-			);
+			const allTranslations = await TranslationsService.fetchTranslations();
+			const translationRows = convertTranslationsToData(allTranslations);
 			setInitialTranslations(translationRows);
 			setTranslations(translationRows);
 		} catch (err) {

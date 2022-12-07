@@ -1,16 +1,16 @@
 import { FC, ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 
-import { USER_PATH } from '~modules/shared/consts/user.const';
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { USER_PATH } from '~modules/user/user.routes';
 
 const UserOverviewPage: FC = () => {
-	const { tHtml } = useTranslation();
+	const { tText } = useTranslation();
 
 	return (
-		<AdminLayout pageTitle={tHtml('admin/users/views/user-overview___gebruikers')}>
+		<AdminLayout pageTitle={tText('admin/users/views/user-overview___gebruikers')}>
 			<AdminLayout.Content>
 				<UserOverview />
 			</AdminLayout.Content>
@@ -21,10 +21,10 @@ const UserOverviewPage: FC = () => {
 export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={USER_PATH.USER_OVERVIEW}
+			key={USER_PATH().USER_OVERVIEW}
 			render={() => <UserOverviewPage />}
 			exact
-			path={USER_PATH.USER_OVERVIEW}
+			path={USER_PATH().USER_OVERVIEW}
 		/>,
 	];
 };

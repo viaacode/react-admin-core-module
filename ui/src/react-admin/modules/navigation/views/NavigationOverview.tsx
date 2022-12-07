@@ -2,12 +2,12 @@ import { startCase } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
 import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
+import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
-import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
 import {
 	GET_NAVIGATION_OVERVIEW_TABLE_COLS,
 	NAVIGATION_PATH,
@@ -22,7 +22,7 @@ const NavigationOverview: FunctionComponent = () => {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetNavigations();
+	} = useGetNavigationBars();
 
 	const renderTableCell = (
 		rowData: Partial<NavigationItem>,

@@ -12,6 +12,8 @@ import reactToString from 'react-to-string';
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { USER_PATH } from '~modules/user/user.routes';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
 	FilterableColumn,
@@ -24,7 +26,7 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { UserService } from '../user.service';
+import { UserService } from '~modules/user';
 import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
 import './UserOverview.scss';
@@ -48,18 +50,15 @@ import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useIdps } from '~modules/shared/hooks/useIdps';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import { useUserGroupOptions } from '~modules/content-page/hooks/useUserGroupOptions';
 import UserDeleteModal from '../components/UserDeleteModal';
-import {
-	GET_USER_BULK_ACTIONS,
-	GET_USER_OVERVIEW_TABLE_COLS,
-	ITEMS_PER_PAGE,
-} from '../user.consts';
-import { UserOverviewProps } from './UserOverview.types';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, USERS_PER_PAGE } from '~modules/user';
+
+export interface UserOverviewProps {
+	customFormatDate?: (date: Date | string) => string;
+}
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
@@ -85,13 +84,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
+	const config = AdminConfigManager.getConfig();
 	const app = AdminConfigManager.getConfig().database.databaseApplicationType;
 	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
-				AdminConfigManager.getConfig().user,
+				config,
 				setSelectedCheckboxes(
 					userGroupOptions,
 					get(tableState, 'author.user_groups', []) as string[]
@@ -129,6 +129,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			subjects,
 			tableState,
 			userGroupOptions,
+			config,
 		]
 	);
 
@@ -401,12 +402,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			const profileIds = await UserService.getProfileIds(
 				generateWhereObject(getFilters(tableState), false)
 			);
+			const numOfSelectedProfiles = String(profileIds.length);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
-					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebuikers-geselecteerd',
+					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd',
 					{
-						numOfSelectedProfiles: `${profileIds.length}`,
+						numOfSelectedProfiles,
 					}
 				),
 				type: ToastType.SUCCESS,
@@ -440,7 +442,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const bulkUpdateBlockStatus = async (blockOrUnblock: boolean) => {
 		try {
 			setIsLoading(true);
-			await UserService.updateBlockStatusByProfileIds(selectedProfileIds, blockOrUnblock);
+			await UserService.updateBlockStatusByProfileIds(
+				selectedProfileIds,
+				blockOrUnblock,
+				false // TODO sync sendEmail feature
+			);
 			await fetchProfiles();
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),
@@ -466,7 +472,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			ADMIN_PATH.USER_OVERVIEW,
+			USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW,
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState.columns || []).join('~') }
 		);
@@ -577,83 +583,90 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const Link = AdminConfigManager.getConfig().services.router.Link;
 
-		const isBlocked = get(commonUser, 'user.is_blocked');
+		const isBlocked = commonUser?.isBlocked;
 
 		switch (columnId) {
 			case 'firstName':
 				// no user detail for archief yet
 
 				return app === AvoOrHetArchief.avo ? (
-					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
+					<Link
+						to={buildLink(
+							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,
+							{
+								id: commonUser.profileId,
+							}
+						)}
+					>
 						{truncateTableValue(get(commonUser, columnId))}
 					</Link>
 				) : (
-					get(commonUser, 'firstName') || '-'
+					commonUser?.firstName || '-'
 				);
 
 			case 'lastName':
-				return truncateTableValue(get(commonUser, 'lastName'));
+				return truncateTableValue(commonUser?.lastName);
 
 			case 'email':
-				return truncateTableValue(get(commonUser, 'email'));
+				return truncateTableValue(commonUser?.email);
 
-			case 'is_blocked':
+			case 'isBlocked':
 				return isBlocked ? 'Ja' : 'Nee';
 
-			case 'blocked_at':
-			case 'unblocked_at':
+			case 'blockedAt':
+			case 'unblockedAt':
 				return formatDate(get(commonUser, ['user', columnId])) || '-';
 
-			case 'is_exception':
-				return get(commonUser, 'is_exception') ? 'Ja' : 'Nee';
+			case 'isException':
+				return commonUser?.isException ? 'Ja' : 'Nee';
 
 			case 'organisation':
-				return get(commonUser, 'organisation.name') || '-';
+				return commonUser?.organisation?.name || '-';
 
-			case 'created_at':
-				return formatDate(commonUser.created_at) || '-';
+			case 'createdAt':
+				return formatDate(commonUser.createdAt) || '-';
 
-			case 'last_access_at': {
-				const lastAccessDate = get(commonUser, 'last_access_at');
+			case 'lastAccessAt': {
+				const lastAccessDate = commonUser?.lastAccessAt;
 				return !isNil(lastAccessDate)
 					? customFormatDate
 						? customFormatDate(lastAccessDate)
 						: formatDate(lastAccessDate)
 					: '-';
 			}
-			case 'temp_access': {
-				const tempAccess = get(commonUser, 'user.temp_access.current.status');
+			case 'tempAccess': {
+				const tempAccess = commonUser.tempAccess?.current?.status;
 
 				switch (tempAccess) {
-					case 0:
-						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 					case 1:
+						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
+					case 0:
 						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 					default:
 						return '-';
 				}
 			}
-			case 'temp_access_from':
-				return formatDate(get(commonUser, 'user.temp_access.from')) || '-';
+			case 'tempAccessFrom':
+				return formatDate(commonUser?.tempAccess?.from) || '-';
 
-			case 'temp_access_until':
-				return formatDate(get(commonUser, 'user.temp_access.until')) || '-';
+			case 'tempAccessUntil':
+				return formatDate(commonUser?.tempAccess?.until) || '-';
 
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						get(commonUser, 'idps', []),
-						`user_${get(commonUser, 'user.profileId')}`,
+						commonUser?.idps || [],
+						`user_${commonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'
 				);
 
-			case 'education_levels':
+			case 'educationLevels':
 			case 'subjects': {
 				const labels = get(commonUser, columnId, []);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
-			case 'educational_organisations': {
+			case 'educationalOrganisations': {
 				const orgs: ClientEducationOrganization[] = get(commonUser, columnId, []);
 				const tags = orgs.map(
 					(org): TagOption => ({
@@ -697,6 +710,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		if (!profiles) {
 			return null;
 		}
+
 		return (
 			<>
 				<FilterTable
@@ -712,7 +726,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					noContentMatchingFiltersMessage={tText(
 						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
-					itemsPerPage={ITEMS_PER_PAGE}
+					itemsPerPage={USERS_PER_PAGE}
 					onTableStateChanged={(newTableState) => setTableState(newTableState)}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
@@ -726,7 +740,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						bulkActions
 					)}
 					rowKey={(row: CommonUser) =>
-						row?.profileId || row?.userId || get(row, 'user.mail')
+						row?.profileId || row?.userId || get(row, 'user.mail') || ''
 					}
 				/>
 				<UserDeleteModal

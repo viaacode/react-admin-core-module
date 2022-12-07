@@ -1,5 +1,5 @@
-import { TranslationsState, TranslationV2 } from '~modules/translations/translations.types';
-import { flatten, fromPairs, get, groupBy, map } from 'lodash-es';
+import { TranslationV2 } from '~modules/translations/translations.types';
+import { flatten, fromPairs, groupBy, map } from 'lodash-es';
 import { AdminConfigManager } from '~core/config';
 import { AvoOrHetArchief } from '~modules/shared/types';
 
@@ -8,16 +8,18 @@ export const getKeyPrefix = () =>
 		? 'translations-'
 		: 'TRANSLATIONS_';
 
-export function convertFromDatabaseToList(translationList: TranslationsState[]): TranslationV2[] {
+export function convertFromDatabaseToList(
+	translationList: Record<string, Record<string, string>>
+): TranslationV2[] {
 	// convert translations to state format
 	return flatten(
-		translationList.map((context: TranslationsState) => {
+		Object.entries(translationList).map((entry: [string, Record<string, string>]) => {
 			// convert single object-based translations to array-based translations where each item has a key and a value
-			return Object.entries(get(context, 'value')).map((entryPair): TranslationV2 => {
+			return Object.entries(entry[1]).map((entryPair): TranslationV2 => {
 				return {
-					context: context.name,
+					context: entry[0],
 					key: entryPair[0],
-					label: `${context?.name.replace(getKeyPrefix(), '')}/${entryPair[0]}`,
+					label: `${entry[0].replace(getKeyPrefix(), '')}/${entryPair[0]}`,
 					value: entryPair[1] as string,
 				};
 			});

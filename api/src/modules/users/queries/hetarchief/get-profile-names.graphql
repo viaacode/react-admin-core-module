@@ -1,0 +1,12 @@
+query getProfileNames($profileIds: [uuid!]!) {
+	users_profile(where: { id: { _in: $profileIds } }) {
+		id
+		full_name
+		mail
+	}
+	users_profile_aggregate(where: { id: { _in: $profileIds } }) {
+		aggregate {
+			count
+		}
+	}
+}

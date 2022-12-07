@@ -5,23 +5,18 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
-	Query,
+	Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { IPagination } from '@studiohyperdrive/pagination/dist/lib/pagination.types';
 
-import {
-	CreateNavigationDto,
-	NavigationsQueryDto,
-} from '../dto/navigations.dto';
+import { CreateNavigationDto } from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
-import { Navigation } from '../types';
 
-import { Permission } from '../../users/types';
+import { Permission } from '../../users';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { DeleteResponse } from '../../shared/types/types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { NavigationItem } from '../types';
 
 // TODO these routes are currently not used by the admin-core
 // Currently the admin core does all navigation manipulations through the data route
@@ -30,69 +25,67 @@ import { addPrefix } from '../../shared/helpers/add-route-prefix';
 @Controller(addPrefix(process, 'navigations'))
 @RequireAnyPermissions(Permission.EDIT_NAVIGATION_BARS)
 export class AdminNavigationsController {
-	constructor(private navigationsService: AdminNavigationsService) {}
+	constructor(private adminNavigationsService: AdminNavigationsService) {}
 
 	@ApiOperation({
 		description: 'Get an overview of all the navigation bars that exist',
 	})
 	@Get()
-	public async getNavigationBars(
-		@Query() navigationsQueryDto: NavigationsQueryDto,
-	): Promise<IPagination<Navigation>> {
-		const navigations = await this.navigationsService.findAllNavigationBars(
-			navigationsQueryDto,
+	public async getNavigationBarsOverview(): Promise<NavigationItem[]> {
+		return this.adminNavigationsService.findNavigationBars();
+	}
+
+	@ApiOperation({
+		description: 'Get all items inside one bar by placement id',
+	})
+	@Get(':placement')
+	public async getNavigationBarItems(
+		@Param('placement') placement: string,
+	): Promise<NavigationItem[]> {
+		return this.adminNavigationsService.findNavigationBarItemsByPlacementId(
+			placement,
 		);
-		return navigations;
 	}
 
 	@ApiOperation({
 		description: 'Get one navigation element by id',
 	})
-	@Get(':id')
+	@Get('items/:id')
 	public async getNavigationElement(
 		@Param('id') id: string,
-	): Promise<Navigation> {
-		const navigations = await this.navigationsService.findElementById(id);
-		return navigations;
+	): Promise<NavigationItem> {
+		return this.adminNavigationsService.findElementById(id);
 	}
 
 	@ApiOperation({
 		description: 'Add one navigation element to a specific navigation bar',
 	})
-	@Post()
+	@Put('items')
 	public async createNavigationElement(
 		@Body() createNavigationDto: CreateNavigationDto,
-	): Promise<Navigation> {
-		const navigation = await this.navigationsService.createElement(
-			createNavigationDto,
-		);
-		return navigation;
+	): Promise<NavigationItem> {
+		return this.adminNavigationsService.insertElement(createNavigationDto);
 	}
 
 	@ApiOperation({
 		description: 'Update an existing navigation element',
 	})
-	@Patch(':id')
+	@Patch('items/:id')
 	public async updateNavigationElement(
 		@Param('id') id: string,
 		@Body() updateNavigationDto: CreateNavigationDto,
-	): Promise<Navigation> {
-		const navigation = await this.navigationsService.updateElement(
-			id,
-			updateNavigationDto,
-		);
-		return navigation;
+	): Promise<NavigationItem> {
+		return this.adminNavigationsService.updateElement(id, updateNavigationDto);
 	}
 
 	@ApiOperation({
 		description:
 			'Remove a navigation element. Also deleting it from its navigation bar',
 	})
-	@Delete(':id')
+	@Delete('items/:id')
 	public async deleteNavigationElement(
 		@Param('id') id: string,
 	): Promise<DeleteResponse> {
-		const deleted = await this.navigationsService.deleteElement(id);
-		return deleted;
+		return this.adminNavigationsService.deleteElement(id);
 	}
 }

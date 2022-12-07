@@ -1,15 +1,14 @@
+import { Avo } from '@viaa/avo2-types';
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import {
+	BasicOrganisation,
+	OrganisationService,
+} from '~modules/shared/services/organization-service/organisation-service';
 import { CustomError } from '../helpers/custom-error';
-import { OrganisationService } from '../services/organization-service/organization-service';
 
 import { useTranslation } from './useTranslation';
-
-export type BasicOrganisation = {
-	or_id: string;
-	name: string;
-};
 
 type UseCompaniesTuple = [BasicOrganisation[], boolean];
 
@@ -23,7 +22,7 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 		setIsLoading(true);
 
 		OrganisationService.fetchOrganisationsWithUsers()
-			.then((orgs) => {
+			.then((orgs: Partial<BasicOrganisation>[]) => {
 				if (orgs) {
 					setCompanies(
 						orgs.filter((org) => org.name && org.or_id) as BasicOrganisation[]

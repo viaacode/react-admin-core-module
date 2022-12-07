@@ -24,7 +24,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { Loader } from '~modules/shared/components';
 import { NavigationItem } from '../navigation.types';
-import { useGetNavigations } from '~modules/navigation/hooks/use-get-navigations';
+import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 
@@ -46,7 +46,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
 		refetch: refetchNavigationItems,
-	} = useGetNavigations(navigationBarId);
+	} = useGetNavigationBarItems(navigationBarId);
 
 	const timeout = useRef<NodeJS.Timeout | null>(null);
 

@@ -47,4 +47,5 @@ export const mockUser: CommonUser = {
 		Permission.EDIT_TRANSLATIONS,
 		Permission.EDIT_NAVIGATION_BARS,
 	],
+	tempAccess: null,
 };

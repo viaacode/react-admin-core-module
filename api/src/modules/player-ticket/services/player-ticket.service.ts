@@ -11,11 +11,12 @@ import {
 import type { Cache } from 'cache-manager';
 import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
-import { cleanMultilineEnv } from "../../shared/helpers/env-vars";
+import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 
 import { PlayerTicket } from '../player-ticket.types';
 
-import { AvoOrHetArchief } from '../../content-pages';
 import { DataService } from '../../data';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
@@ -56,7 +57,9 @@ export class PlayerTicketService {
 				passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
 			},
 		});
-		this.ticketServiceMaxAge = parseInt(process.env.TICKET_SERVICE_MAXAGE || '14401');
+		this.ticketServiceMaxAge = parseInt(
+			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY),
+		);
 		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
 		this.host = process.env.HOST;
 	}
@@ -121,11 +124,10 @@ export class PlayerTicketService {
 	}
 
 	public async getEmbedUrl(id: string): Promise<string> {
-		let response;
-		if (
-			process.env.DATABASE_APPLICATION_TYPE ===
-			AvoOrHetArchief.hetArchief
-		) {
+		let response:
+			| GetFileByRepresentationSchemaIdentifierQuery
+			| GetItemBrowsePathByExternalIdQuery;
+		if (isHetArchief()) {
 			// Het archief
 			response = await this.dataService.execute<
 				GetFileByRepresentationSchemaIdentifierQuery,
@@ -145,8 +147,10 @@ export class PlayerTicketService {
 
 		/* istanbul ignore next */
 		const browsePath: string =
-			response?.data?.app_item_meta?.[0]?.browse_path ||
-			response?.data?.object_file?.[0]?.schema_embed_url;
+			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]
+				?.browse_path ||
+			(response as GetFileByRepresentationSchemaIdentifierQuery)
+				?.object_file?.[0]?.schema_embed_url;
 		if (!browsePath) {
 			throw new NotFoundException(
 				`Object file with representation_id '${id}' not found`,

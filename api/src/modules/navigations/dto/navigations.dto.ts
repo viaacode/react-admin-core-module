@@ -7,20 +7,10 @@ import {
 	IsOptional,
 	IsString,
 } from 'class-validator';
-import { ContentPickerTypesEnum } from '../types';
-
-export class NavigationsQueryDto {
-	@IsString()
-	@IsOptional()
-	@ApiPropertyOptional({
-		type: String,
-		description: 'Get all navigation items with this placement',
-	})
-	placement?: string;
-}
+import { ContentPickerTypesEnum, NavigationItem } from '../types';
 
 // Note: also used for updating a navigation item
-export class CreateNavigationDto {
+export class CreateNavigationDto implements Partial<NavigationItem> {
 	@IsString()
 	@IsOptional()
 	@ApiPropertyOptional({
@@ -34,7 +24,7 @@ export class CreateNavigationDto {
 		type: String,
 		description: 'The icon for this navigation item',
 	})
-	icon_name = '';
+	iconName = '';
 
 	@IsString()
 	@IsOptional()
@@ -51,7 +41,7 @@ export class CreateNavigationDto {
 		type: String,
 		description: 'The user group ids allowed to see this navigation item',
 	})
-	user_group_ids?: Array<number>;
+	userGroupIds?: Array<number>;
 
 	@ApiProperty({
 		required: false,
@@ -66,7 +56,7 @@ export class CreateNavigationDto {
 			ContentPickerTypesEnum,
 		).join(', ')}`,
 	})
-	content_type?: ContentPickerTypesEnum;
+	contentType?: ContentPickerTypesEnum;
 
 	@IsString()
 	@IsOptional()
@@ -74,7 +64,7 @@ export class CreateNavigationDto {
 		type: String,
 		description: 'The content path for this navigation item, e.g. /help',
 	})
-	content_path?: string;
+	contentPath?: string;
 
 	@IsString()
 	@IsOptional()
@@ -82,7 +72,7 @@ export class CreateNavigationDto {
 		type: String,
 		description: 'The link target property for this item, e.g. _blank or _self',
 	})
-	link_target?: string;
+	linkTarget?: string;
 
 	@IsNumber()
 	@Type(() => Number)

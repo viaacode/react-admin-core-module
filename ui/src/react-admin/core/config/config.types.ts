@@ -5,9 +5,9 @@ import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'rea
 import { AvoOrHetArchief } from '~modules/shared/types';
 
 import {
-	UserGroupArchief,
 	UserGroupUpdateResponse,
 	UserGroupUpdates,
+	UserGroupWithPermissions,
 } from '~modules/user-group/types/user-group.types';
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
@@ -42,12 +42,20 @@ export interface NavigationsService {
 }
 
 export interface I18n {
-	tHtml: (translationKey: string, variables?: Record<string, string>) => ReactNode | string;
-	tText: (translationKey: string, variables?: Record<string, string>) => string;
+	tHtml: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: AvoOrHetArchief[]
+	) => ReactNode | string;
+	tText: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: AvoOrHetArchief[]
+	) => string;
 }
 
 export interface UserGroupsService {
-	getAllUserGroups: () => Promise<UserGroupArchief[]>;
+	getAllUserGroups: () => Promise<UserGroupWithPermissions[]>;
 	updateUserGroups: (json: UserGroupUpdates) => Promise<UserGroupUpdateResponse[]>;
 }
 
@@ -118,7 +126,6 @@ export interface AdminConfig {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
-		UserGroupsService: UserGroupsService;
 		PermissionsService: PermissionsService;
 		queryCache: {
 			clear: (key: string) => Promise<void>;

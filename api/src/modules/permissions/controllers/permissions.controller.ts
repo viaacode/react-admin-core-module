@@ -1,10 +1,10 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { PermissionInfo } from '../permissions.types';
+import { PermissionData } from '../permissions.types';
 
 import { PermissionsService } from '../services/permissions.service';
 
-import { Permission } from '../../users/types';
+import { Permission } from '../../users';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
@@ -17,7 +17,7 @@ export class PermissionsController {
 	constructor(private permissionsService: PermissionsService) {}
 
 	@Get()
-	public async getPermissions(): Promise<PermissionInfo[]> {
+	public async getPermissions(): Promise<PermissionData[]> {
 		return this.permissionsService.getPermissions();
 	}
 }

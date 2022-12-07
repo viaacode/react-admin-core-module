@@ -1,20 +1,10 @@
-import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
-
-import { Permission } from '~modules/user/user.types';
 import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ReactNode } from 'react';
-import { DefaultComponentProps } from '../../shared/types';
+import { DefaultComponentProps } from '~modules/shared';
 
-export enum UserGroups {
-	KIOSK_VISITOR = 'KIOSK_VISITOR',
-	MEEMOO_ADMIN = 'MEEMOO_ADMIN',
-	VISITOR = 'VISITOR',
-	CP_ADMIN = 'CP_ADMIN',
-}
-
-export interface UserGroupOverviewProps extends DefaultComponentProps{
+export interface UserGroupOverviewProps extends DefaultComponentProps {
 	onChangePermissions?: (hasChanges: boolean) => void;
-	renderSearchButtons?: ((search?: string) => ReactNode);
+	renderSearchButtons?: (search?: string) => ReactNode;
 }
 
 export interface UserGroupOverviewRef {
@@ -24,57 +14,25 @@ export interface UserGroupOverviewRef {
 }
 
 export interface UserGroup {
-	id: number | string;
-	label: string;
-	description: string | null;
-	created_at: string;
-	updated_at: string;
-	permissions: Permission[];
-}
-
-export interface UserGroupEditFormErrorState {
-	label?: string;
-	description?: string;
-}
-
-export interface UserGroupTableState extends FilterableTableState {
-	label: string;
-	description: string;
-	created_at: string;
-	updated_at: string;
-}
-
-export type UserGroupOverviewTableCols =
-	| 'label'
-	| 'description'
-	| 'created_at'
-	| 'updated_at'
-	| 'actions';
-
-export type PermissionGroupTableCols =
-	| 'label'
-	| 'description'
-	| 'created_at'
-	| 'updated_at'
-	| 'actions';
-
-export interface UserGroupArchief {
-	id: number | string;
+	id: string;
 	name: string;
 	label: string;
+}
+
+export interface UserGroupWithPermissions extends UserGroup {
 	permissions: PermissionData[];
 }
 
 export type PermissionRow = { row: { original: PermissionData } };
 
 export interface UserGroupUpdates {
-	updates: UserGroupUpdate[]
+	updates: UserGroupUpdate[];
 }
 
 export interface UserGroupUpdate {
-		userGroupId: string;
-		permissionId:string;
-		hasPermission: boolean;
+	userGroupId: string;
+	permissionId: string | number;
+	hasPermission: boolean;
 }
 
 export interface UserGroupUpdateResponse {

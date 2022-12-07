@@ -2,13 +2,13 @@ import { AdminConfigManager } from '~core/config';
 import { CONTENT_PAGE_LABEL_PATH } from '~modules/content-page-labels/content-page-label.const';
 import { TRANSLATIONS_PATH } from '~modules/translations/translations.const';
 import { USER_GROUP_PATH } from '~modules/user-group/const/user-group.const';
-import { USER_PATH } from '~modules/user/user.consts';
+import { USER_PATH } from '~modules/user/user.routes';
 import { NavigationItemInfo } from './shared/types';
 import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
 import { CONTENT_PAGE_PATH } from './react-admin';
 
 export const ADMIN_PATH = Object.freeze({
-	...USER_PATH,
+	...USER_PATH(),
 	...USER_GROUP_PATH,
 	...NAVIGATION_PATH,
 	CONTENT_PAGE: {...CONTENT_PAGE_PATH()},
@@ -20,13 +20,13 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{
-			label: i18n.tHtml('Gebruikers'),
+			label: i18n.tHtml('app___gebruikers'),
 			location: ADMIN_PATH.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
 		},
 		{
-			label: i18n.tHtml('Gebruikersgroep'),
+			label: i18n.tHtml('app___gebruikersgroep'),
 			location: ADMIN_PATH.USER_GROUP_OVERVIEW,
 			key: 'user-group',
 			exact: false,
@@ -58,13 +58,7 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			],
 		},
 		{
-			label: i18n.tHtml('admin/admin___vertaling'),
-			location: ADMIN_PATH.TRANSLATIONS,
-			key: 'translations',
-			exact: false,
-		},
-		{
-			label: i18n.tHtml('Vertalingen v2'),
+			label: i18n.tHtml('app___vertalingen-v-2'),
 			location: ADMIN_PATH.TRANSLATIONS_V2,
 			key: 'translations-v2',
 			exact: false,

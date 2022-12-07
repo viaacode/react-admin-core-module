@@ -1,23 +1,31 @@
 import { TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
+import { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
 
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { NULL_FILTER } from '../../shared/helpers/filters';
-import { ContentOverviewTableCols, ContentWidth } from '../types/content-pages.types';
+import { ContentWidth } from '~modules/content-page';
 
 import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { AvoOrHetArchief } from '~modules/shared/types';
+
+export const CONTENT_PAGE_QUERY_KEYS = {
+	OVERVIEW: 'OVERVIEW',
+};
 
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
 	contentPageLabelOptions: CheckboxOption[]
-) => FilterableColumn[] = (contentTypeOptions, userGroupOptions, contentPageLabelOptions) => {
+) => FilterableColumn<ContentOverviewTableCols>[] = (
+	contentTypeOptions,
+	userGroupOptions,
+	contentPageLabelOptions
+) => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{
@@ -28,7 +36,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'content_type',
+			id: 'contentType',
 			label: i18n.tText('admin/content/content___content-type'),
 			sortable: true,
 			visibleByDefault: true,
@@ -39,7 +47,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'user_profile_id',
+			id: 'userProfileId',
 			label: i18n.tText('admin/content/content___auteur'),
 			sortable: true,
 			visibleByDefault: true,
@@ -47,7 +55,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'author_user_group',
+			id: 'authorUserGroup',
 			label: i18n.tText('admin/users/user___gebruikersgroep'),
 			sortable: true,
 			visibleByDefault: false,
@@ -64,7 +72,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'string',
 		},
 		{
-			id: 'created_at',
+			id: 'createdAt',
 			label: i18n.tText('admin/content/content___aangemaakt'),
 			sortable: true,
 			visibleByDefault: true,
@@ -72,7 +80,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'updated_at',
+			id: 'updatedAt',
 			label: i18n.tText('admin/content/content___laatst-bewerkt'),
 			sortable: true,
 			visibleByDefault: true,
@@ -80,7 +88,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'is_public',
+			id: 'isPublic',
 			label: i18n.tText('admin/content/content___publiek'),
 			sortable: true,
 			visibleByDefault: false,
@@ -88,7 +96,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'boolean',
 		},
 		{
-			id: 'published_at',
+			id: 'publishedAt',
 			label: i18n.tText('admin/content/views/content-overview___publicatie'),
 			sortable: true,
 			visibleByDefault: true,
@@ -96,7 +104,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'publish_at',
+			id: 'publishAt',
 			label: i18n.tText('admin/content/views/content-overview___publiceer-op'),
 			sortable: true,
 			visibleByDefault: true,
@@ -104,7 +112,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			dataType: 'dateTime',
 		},
 		{
-			id: 'depublish_at',
+			id: 'depublishAt',
 			label: i18n.tText('admin/content/views/content-overview___depubliceer-op'),
 			sortable: true,
 			visibleByDefault: true,
@@ -122,7 +130,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			} as CheckboxDropdownModalProps,
 		},
 		{
-			id: 'user_group_ids',
+			id: 'userGroupIds',
 			label: i18n.tText('admin/content/content___zichtbaar-voor'),
 			sortable: false,
 			visibleByDefault: false,
@@ -133,37 +141,6 @@ export const GET_OVERVIEW_COLUMNS: (
 			visibleByDefault: true,
 		},
 	];
-};
-
-export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
-	[columnId in ContentOverviewTableCols]: (order: Avo.Search.OrderDirection) => any;
-}> = {
-	user_profile_id: (order: Avo.Search.OrderDirection) => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
-			return {
-				owner_profile: { first_name: order },
-			};
-		}
-		return {
-			profile: { first_name: order },
-		};
-	},
-	author_user_group: (order: Avo.Search.OrderDirection) => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
-			return {
-				owner_profile: { group: { name: order } },
-			};
-		}
-		return {
-			profile: { profile_user_group: { group: { label: order } } },
-		};
-	},
 };
 
 export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
@@ -179,7 +156,7 @@ export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
 	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`,
 });
 
-export const ITEMS_PER_PAGE = 10;
+export const PAGES_PER_PAGE = 10;
 
 export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{

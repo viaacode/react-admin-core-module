@@ -1,13 +1,13 @@
-import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
-import { Permission } from '../../users/types';
+import { Permission } from '../../users';
 
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
 import { UserGroupsService } from '../services/user-groups.service';
-import { UserGroupsResponse } from '../user-groups.types';
+import { UserGroupWithPermissions } from '../user-groups.types';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('UserGroups')
@@ -17,8 +17,10 @@ export class UserGroupsController {
 	constructor(private userGroupsService: UserGroupsService) {}
 
 	@Get()
-	public async getUserGroups(): Promise<UserGroupsResponse[]> {
-		return this.userGroupsService.getUserGroups();
+	public async getUserGroups(
+		@Query('withPermissions') withPermissions?: 'true' | 'false',
+	): Promise<UserGroupWithPermissions[]> {
+		return this.userGroupsService.getUserGroups(withPermissions === 'true');
 	}
 
 	@Patch()

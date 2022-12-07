@@ -1,4 +1,3 @@
-import { AvoOrHetArchief } from '../content-pages';
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentAvo,
 	GetSiteVariableByNameQuery as GetSiteVariableByNameQueryAvo,
@@ -16,6 +15,7 @@ import {
 	UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesHetArchief,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { AvoOrHetArchief } from '../shared/types';
 
 export type SiteVariableQueryTypes = {
 	GetSiteVariableByNameQueryAvo: GetSiteVariableByNameQueryAvo;

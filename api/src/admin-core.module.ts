@@ -5,11 +5,14 @@ import {
 	AdminPermissionsModule,
 	AdminTranslationsModule,
 	AdminUserGroupsModule,
+	ContentPageLabelsModule,
 	ContentPagesModule,
 	DataModule,
+	LookupModule,
 	PlayerTicketModule,
 	SiteVariablesModule,
 	StatusModule,
+	UsersModule,
 } from './modules';
 
 @Module({
@@ -19,11 +22,14 @@ import {
 		AdminPermissionsModule,
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
+		ContentPageLabelsModule,
 		ContentPagesModule,
 		DataModule,
+		LookupModule,
 		PlayerTicketModule,
 		SiteVariablesModule,
 		StatusModule,
+		UsersModule,
 	],
 })
 export class AdminCoreModule {}

@@ -10,11 +10,6 @@ export interface TranslationV2 {
 	label: string; // Display value in the application === context + '/' + key
 }
 
-export interface TranslationsState {
-	name: string;
-	value: any;
-}
-
 export interface TranslationsOverviewV2Props extends DefaultProps {
 	renderPopup: (info: {
 		title: string;

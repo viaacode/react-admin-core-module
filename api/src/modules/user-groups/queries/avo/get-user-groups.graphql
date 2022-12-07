@@ -1,0 +1,7 @@
+query getUserGroups {
+	users_groups {
+		id
+		label
+		description
+	}
+}

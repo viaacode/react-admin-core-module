@@ -1,7 +1,7 @@
 import React from 'react';
 import { Checkbox } from '@meemoo/react-components';
 import { Column, UseSortByColumnOptions } from 'react-table';
-import { UserGroup, UserGroupArchief } from '~modules/user-group/types/user-group.types';
+import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
 import { PermissionRow } from '../types/user-group.types';
 import { AdminConfigManager } from '~core/config';
@@ -20,11 +20,11 @@ export const USER_GROUP_PATH = {
 	USER_GROUP_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id/${ROUTE_PARTS.edit}`,
 };
 
-export const ITEMS_PER_PAGE = 20;
+export const GROUPS_PER_PAGE = 20;
 
 export const UserGroupTableColumns = (
-	userGroups: UserGroupArchief[],
-	updateUserGroup: (groupId: string, permissionId: string, value: boolean) => void
+	userGroups: UserGroupWithPermissions[],
+	updateUserGroup: (groupId: string, permissionId: string | number, value: boolean) => void
 ): (Column<PermissionData> & UseSortByColumnOptions<PermissionData>)[] => [
 	{
 		Header: '',
@@ -38,11 +38,9 @@ export const UserGroupTableColumns = (
 			accessor: (row: PermissionData) => row.name,
 			disableSortBy: true,
 			Cell: ({ row }: PermissionRow) => {
-				const isChecked = group?.permissions
-					? !!group?.permissions.find(
-							(permission: PermissionData) => permission.id === row.original.id
-					  )
-					: false;
+				const isChecked = !!group?.permissions?.find(
+					(permission: PermissionData) => permission.id === row.original.id
+				);
 
 				return (
 					<Checkbox

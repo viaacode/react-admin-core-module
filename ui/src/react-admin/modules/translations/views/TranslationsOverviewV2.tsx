@@ -26,8 +26,8 @@ import {
 import { Icon } from '~modules/shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
-	ITEMS_PER_PAGE,
 	RICH_TEXT_EDITOR_OPTIONS,
+	TRANSLATIONS_PER_PAGE,
 	TRANSLATIONS_QUERY_PARAM_CONFIG,
 } from '~modules/translations/translations.const';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
@@ -59,7 +59,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 
 	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
 
-	const pageCount: number = Math.ceil(filteredTranslationsCount / ITEMS_PER_PAGE);
+	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
@@ -75,17 +75,16 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			[filters.orderDirection as OrderDirection]
 		);
 		const paginatedTranslations = orderedTranslations.slice(
-			(filters.page - 1) * ITEMS_PER_PAGE,
-			Math.min(translations?.length || 0, filters.page * ITEMS_PER_PAGE)
+			(filters.page - 1) * TRANSLATIONS_PER_PAGE,
+			Math.min(translations?.length || 0, filters.page * TRANSLATIONS_PER_PAGE)
 		);
 		setFilteredAndPaginatedTranslations(paginatedTranslations);
 	}, [translations, filters, setFilteredTranslationsCount, setFilteredAndPaginatedTranslations]);
 
 	const getTranslations = useCallback(async () => {
 		try {
-			const translationRows = convertFromDatabaseToList(
-				await TranslationsService.fetchTranslations()
-			);
+			const allTranslations = await TranslationsService.fetchTranslations();
+			const translationRows = convertFromDatabaseToList(allTranslations);
 			setTranslations(translationRows);
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch translations', err));
@@ -114,9 +113,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 			}
 
 			// Fetch database translations and convert to list of objects
-			const freshTranslations = convertFromDatabaseToList(
-				await TranslationsService.fetchTranslations()
-			);
+			const allTranslations = await TranslationsService.fetchTranslations();
+			const freshTranslations = convertFromDatabaseToList(allTranslations);
 
 			// Find the current translations
 			const freshTranslation = freshTranslations.find(
@@ -208,10 +206,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	}, [filters]);
 
 	const handleSortChange = useCallback(
-		(rules) => {
-			const orderProp = rules[0]?.id || undefined;
-			const orderDirection = rules[0]?.desc ? OrderDirection.desc : OrderDirection.asc;
-
+		(orderProp: string | undefined, orderDirection: string | undefined) => {
 			if (filters.orderProp !== orderProp || filters.orderDirection !== orderDirection) {
 				setFilters({
 					...filters,
@@ -221,7 +216,8 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 				});
 			}
 		},
-		[filters, setFilters]
+		// Fix ARC-964: If filters.page is included, the pagination breaks (on pagechange the pagenumber resets to 1 again)
+		[filters.search, filters.orderDirection, filters.orderProp, setFilters]
 	);
 
 	const renderTranslationsTable = (): ReactNode => {
@@ -286,7 +282,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 							],
 							data: filteredAndPaginatedTranslations,
 							initialState: {
-								pageSize: ITEMS_PER_PAGE,
+								pageSize: TRANSLATIONS_PER_PAGE,
 								sortBy: sortFilters,
 							},
 						} as TableOptions<any>

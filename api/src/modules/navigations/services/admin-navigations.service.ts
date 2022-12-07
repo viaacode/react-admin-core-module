@@ -1,145 +1,187 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { IPagination, Pagination } from '@studiohyperdrive/pagination';
-
 import {
-	CreateNavigationDto,
-	NavigationsQueryDto,
-} from '../dto/navigations.dto';
-import { Navigation } from '../types';
+	forwardRef,
+	Inject,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 
+import { CreateNavigationDto } from '../dto/navigations.dto';
 import {
-	DeleteNavigationDocument,
-	DeleteNavigationMutation,
-	DeleteNavigationMutationVariables,
-	FindAllNavigationItemsDocument,
-	FindAllNavigationItemsQuery,
-	FindNavigationByIdDocument,
-	FindNavigationByIdQuery,
-	FindNavigationByIdQueryVariables,
-	FindNavigationByPlacementDocument,
-	FindNavigationByPlacementQuery,
-	FindNavigationByPlacementQueryVariables,
-	InsertNavigationDocument,
-	InsertNavigationMutation,
-	InsertNavigationMutationVariables,
-	UpdateNavigationByIdDocument,
-	UpdateNavigationByIdMutation,
-	UpdateNavigationByIdMutationVariables,
-} from '../../shared/generated/graphql-db-types-hetarchief';
-import { DataService } from '../../data/services/data.service';
+	NAVIGATION_QUERIES,
+	NavigationEntry,
+	NavigationQueryTypes,
+} from '../queries/navigation.queries';
+
+import { DataService } from '../../data';
 import { NavigationItem } from '../types';
 import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {
-	private logger: Logger = new Logger(AdminNavigationsService.name, {
-		timestamp: true,
-	});
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
-	constructor(private dataService: DataService) {}
+	public adapt(navigationEntry: Partial<NavigationEntry>): NavigationItem {
+		/* istanbul ignore next */
+		return {
+			id: navigationEntry?.id,
+			label: navigationEntry?.label,
+			placement: navigationEntry?.placement,
+			description: navigationEntry?.description,
+			linkTarget: navigationEntry?.link_target,
+			iconName: navigationEntry?.icon_name,
+			position: navigationEntry?.position,
+			contentType: navigationEntry?.content_type,
+			contentPath: navigationEntry?.content_path,
+			tooltip: navigationEntry?.tooltip,
+			updatedAt: navigationEntry?.updated_at,
+			createdAt: navigationEntry?.created_at,
+		};
+	}
 
-	public adapt(navigationItem: Navigation): NavigationItem {
+	public adaptToDbFormat(
+		navigationItem: Partial<NavigationItem>,
+	): NavigationEntry {
 		/* istanbul ignore next */
 		return {
 			id: navigationItem?.id,
 			label: navigationItem?.label,
 			placement: navigationItem?.placement,
 			description: navigationItem?.description,
-			linkTarget: navigationItem?.link_target,
-			iconName: navigationItem?.icon_name,
+			link_target: navigationItem?.linkTarget,
+			icon_name: navigationItem?.iconName,
 			position: navigationItem?.position,
-			contentType: navigationItem?.content_type,
-			contentPath: navigationItem?.content_path,
+			content_type: navigationItem?.contentType,
+			content_path: navigationItem?.contentPath,
 			tooltip: navigationItem?.tooltip,
-			updatedAt: navigationItem?.updated_at,
-			createdAt: navigationItem?.created_at,
+			updated_at: navigationItem?.updatedAt,
+			created_at: navigationItem?.createdAt,
 		};
 	}
 
-	public async createElement(
+	public async insertElement(
 		navigationItem: CreateNavigationDto,
-	): Promise<InsertNavigationMutation['insert_app_navigation_one']> {
+	): Promise<NavigationItem> {
 		const response = await this.dataService.execute<
-			InsertNavigationMutation,
-			InsertNavigationMutationVariables
-		>(InsertNavigationDocument, {
-			navigationItem,
+			NavigationQueryTypes['InsertNavigationItemMutation'],
+			NavigationQueryTypes['InsertNavigationItemMutationVariables']
+		>(NAVIGATION_QUERIES[getDatabaseType()].InsertNavigationItemDocument, {
+			navigationItem: this.adaptToDbFormat(navigationItem),
 		});
-		this.logger.debug(
-			`Navigation ${response.insert_app_navigation_one.id} created`,
-		);
 
-		return response.insert_app_navigation_one;
+		return this.adapt(
+			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
+				.insert_app_content_nav_elements_one ||
+				(
+					response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']
+				).insert_app_navigation_one,
+		);
 	}
 
 	public async updateElement(
 		id: string,
 		navigationItem: CreateNavigationDto,
-	): Promise<UpdateNavigationByIdMutation['update_app_navigation_by_pk']> {
+	): Promise<NavigationItem> {
 		const response = await this.dataService.execute<
-			UpdateNavigationByIdMutation,
-			UpdateNavigationByIdMutationVariables
-		>(UpdateNavigationByIdDocument, {
+			NavigationQueryTypes['UpdateNavigationItemByIdMutation'],
+			NavigationQueryTypes['UpdateNavigationItemByIdMutationVariables']
+		>(NAVIGATION_QUERIES[getDatabaseType()].UpdateNavigationItemByIdDocument, {
 			id,
-			navigationItem,
+			navigationItem: this.adaptToDbFormat(navigationItem),
 		});
-		this.logger.debug(
-			`Navigation ${response.update_app_navigation_by_pk.id} updated`,
-		);
 
-		return response.update_app_navigation_by_pk;
+		return this.adapt(
+			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
+				.insert_app_content_nav_elements_one ||
+				(
+					response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']
+				).insert_app_navigation_one,
+		);
 	}
 
 	public async deleteElement(id: string): Promise<DeleteResponse> {
 		const response = await this.dataService.execute<
-			DeleteNavigationMutation,
-			DeleteNavigationMutationVariables
-		>(DeleteNavigationDocument, {
+			NavigationQueryTypes['DeleteNavigationItemMutation'],
+			NavigationQueryTypes['DeleteNavigationItemMutationVariables']
+		>(NAVIGATION_QUERIES[getDatabaseType()].DeleteNavigationItemDocument, {
 			id,
 		});
 
 		return {
-			affectedRows: response.delete_app_navigation.affected_rows,
+			affectedRows:
+				(response as NavigationQueryTypes['DeleteNavigationItemMutationAvo'])
+					.delete_app_content_nav_elements?.affected_rows ||
+				(
+					response as NavigationQueryTypes['DeleteNavigationItemMutationHetArchief']
+				).delete_app_navigation?.affected_rows ||
+				0,
 		};
 	}
 
-	public async findAllNavigationBars(
-		navigationsQueryDto: NavigationsQueryDto,
-	): Promise<IPagination<Navigation>> {
-		const { placement } = navigationsQueryDto;
-		let navigationsResponse:
-			| FindNavigationByPlacementQuery
-			| FindAllNavigationItemsQuery;
-		if (placement) {
-			navigationsResponse = await this.dataService.execute<
-				FindNavigationByPlacementQuery,
-				FindNavigationByPlacementQueryVariables
-			>(FindNavigationByPlacementDocument, {
-				placement,
-			});
-		} else {
-			navigationsResponse =
-				await this.dataService.execute<FindAllNavigationItemsQuery>(
-					FindAllNavigationItemsDocument,
-				);
-		}
+	public async findNavigationBars(): Promise<NavigationItem[]> {
+		const navigationsResponse = await this.dataService.execute<
+			NavigationQueryTypes['GetNavigationBarsQuery']
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationBarsDocument);
 
-		return Pagination<Navigation>({
-			items: navigationsResponse.app_navigation,
-			page: 1,
-			size: navigationsResponse.app_navigation.length,
-			total: navigationsResponse.app_navigation.length,
-		});
+		return (
+			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryAvo'])
+				.app_content_nav_elements ||
+			(
+				navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryHetArchief']
+			).app_navigation ||
+			[]
+		).map(this.adapt);
 	}
 
-	public async findElementById(id: string): Promise<Navigation> {
+	public async findNavigationBarItemsByPlacementId(
+		placement: string,
+	): Promise<NavigationItem[]> {
+		const navigationsResponse = await this.dataService.execute<
+			NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
+			NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
+		>(
+			NAVIGATION_QUERIES[getDatabaseType()]
+				.GetNavigationItemsByPlacementDocument,
+			{
+				placement,
+			},
+		);
+
+		return (
+			(
+				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo']
+			).app_content_nav_elements ||
+			(
+				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']
+			).app_navigation ||
+			[]
+		).map(this.adapt);
+	}
+
+	public async findElementById(id: string | number): Promise<NavigationItem> {
 		const navigationResponse = await this.dataService.execute<
-			FindNavigationByIdQuery,
-			FindNavigationByIdQueryVariables
-		>(FindNavigationByIdDocument, { id });
-		if (!navigationResponse.app_navigation?.[0]) {
-			throw new NotFoundException();
+			NavigationQueryTypes['GetNavigationItemByIdQuery'],
+			NavigationQueryTypes['GetNavigationItemByIdQueryVariables']
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemByIdDocument, {
+			id,
+		});
+		const item =
+			(
+				navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryAvo']
+			)?.app_content_nav_elements?.[0] ||
+			(
+				navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']
+			)?.app_navigation?.[0];
+
+		if (!item) {
+			throw new NotFoundException({
+				message: 'Item with id was not found',
+				additionalInfo: { id },
+			});
 		}
-		return navigationResponse.app_navigation?.[0];
+
+		return this.adapt(item);
 	}
 }

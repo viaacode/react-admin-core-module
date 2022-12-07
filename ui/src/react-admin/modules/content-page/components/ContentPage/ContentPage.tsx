@@ -85,7 +85,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
 		let contentBlockBlockConfigs = ContentPageService.convertRichTextEditorStatesToHtml(
-			contentPageInfo.contentBlockConfigs || []
+			contentPageInfo.content_blocks || []
 		);
 
 		// images can have a setting to go full width
@@ -105,7 +105,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 
 		// Add page title as header block for faq items. Only for Avo
 		if (
-			contentPageInfo.content_type === 'FAQ_ITEM' &&
+			contentPageInfo.contentType === 'FAQ_ITEM' &&
 			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
 		) {
 			contentBlockBlockConfigs = [
