@@ -191,11 +191,7 @@ const getAvoColumns = (
 					dataType: 'booleanNullsLast', // Users without a value are always last when sorting
 				},
 				{
-<<<<<<< HEAD
 					id: 'tempAccessFrom',
-=======
-					id: 'temp_access.from',
->>>>>>> 274c037a220449b3d089debd5f4bd4d13de0108f
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___te-deblokkeren-op'
 					),
@@ -204,11 +200,7 @@ const getAvoColumns = (
 					dataType: 'dateTime',
 				},
 				{
-<<<<<<< HEAD
 					id: 'tempAccessUntil',
-=======
-					id: 'temp_access.until',
->>>>>>> 274c037a220449b3d089debd5f4bd4d13de0108f
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___te-blokkeren-op'
 					),
