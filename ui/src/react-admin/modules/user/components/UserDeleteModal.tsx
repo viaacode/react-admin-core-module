@@ -139,7 +139,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.COLLECTIONS_OVERVIEW,
+						ADMIN_PATH().COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -157,7 +157,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.COLLECTIONS_OVERVIEW,
+						ADMIN_PATH().COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '0',
@@ -175,7 +175,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.OVERVIEW,
+						ADMIN_PATH().OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -193,7 +193,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH.OVERVIEW,
+						ADMIN_PATH().OVERVIEW,
 						{},
 						{
 							is_public: '0',

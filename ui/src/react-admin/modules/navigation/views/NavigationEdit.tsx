@@ -87,7 +87,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				),
 				type: ToastType.ERROR,
 			});
-			history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW);
+			history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW);
 		}
 	}, [
 		isLoadingNavigationItems,
@@ -269,7 +269,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					),
 					position: navigationItems.length,
 				});
-				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
+				navigate(history, ADMIN_PATH().NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -293,7 +293,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						updated_at: new Date().toISOString(),
 					} as NavigationItem,
 				]);
-				navigate(history, ADMIN_PATH.NAVIGATION_DETAIL, {
+				navigate(history, ADMIN_PATH().NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -363,7 +363,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
-							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
+							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW)}
 							type="tertiary"
 						/>
 						<Button

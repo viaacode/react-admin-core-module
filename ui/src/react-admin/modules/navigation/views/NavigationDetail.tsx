@@ -204,7 +204,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 						<Button
 							icon="edit-2"
 							onClick={() =>
-								handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_EDIT, {
+								handleNavigate(NAVIGATION_PATH().NAVIGATION_ITEM_EDIT, {
 									navigationBarId,
 									navigationItemId: String(rowData.id),
 								})
@@ -265,7 +265,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							icon="plus"
 							label={tText('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
-								handleNavigate(NAVIGATION_PATH.NAVIGATION_ITEM_CREATE, {
+								handleNavigate(NAVIGATION_PATH().NAVIGATION_ITEM_CREATE, {
 									navigationBarId,
 								})
 							}
@@ -306,7 +306,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
-							onClick={() => history.push(NAVIGATION_PATH.NAVIGATION_OVERVIEW)}
+							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW)}
 							type="tertiary"
 						/>
 						<Button

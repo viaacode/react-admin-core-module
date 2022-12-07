@@ -16,7 +16,7 @@ import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/conte
 import Html from '~modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
-const proxyUrl = 'http://localhost:3300/admin'; // admin-core-api url
+const proxyUrl = 'http://localhost:3300'; // admin-core-api url
 
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
@@ -25,6 +25,7 @@ const routerConfig: AdminConfig['services']['router'] = {
 };
 
 function setConfig() {
+	// only used for starting admin-core separately
 	AdminConfigManager.setConfig({
 		contentPage: {
 			availableContentBlocks: [

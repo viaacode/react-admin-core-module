@@ -97,7 +97,7 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-block`;
+			url = `${this.getBaseUrl()}/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -158,7 +158,7 @@ export class UserService {
 			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user/bulk-delete`;
+			url = `${this.getBaseUrl()}/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,
