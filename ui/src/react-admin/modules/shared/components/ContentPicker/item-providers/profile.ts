@@ -11,7 +11,7 @@ export const retrieveProfiles = async (name: string | null, limit = 5): Promise<
 	try {
 		const response: [CommonUser[], number] = await UserService.getProfiles(
 			0,
-			'last_access_at',
+			'lastAccessAt',
 			'desc',
 			'dateTime',
 			name

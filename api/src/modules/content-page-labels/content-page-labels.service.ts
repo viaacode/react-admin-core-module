@@ -4,6 +4,7 @@ import { isNil } from 'lodash';
 import { ContentPageLabel, ContentPageType, LabelObj } from '../content-pages';
 import { DataService } from '../data';
 import { CustomError } from '../shared/helpers/custom-error';
+import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
@@ -36,7 +37,7 @@ export class ContentPageLabelsService {
 				ContentPageLabelQueryTypes['GetContentPageLabelsQuery'],
 				ContentPageLabelQueryTypes['GetContentPageLabelsQueryVariables']
 			>(
-				CONTENT_PAGE_LABEL_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
 					.GetContentPageLabelsDocument,
 				variables,
 			);
@@ -98,7 +99,7 @@ export class ContentPageLabelsService {
 				ContentPageLabelQueryTypes['InsertContentPageLabelMutation'],
 				ContentPageLabelQueryTypes['InsertContentPageLabelMutationVariables']
 			>(
-				CONTENT_PAGE_LABEL_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
 					.InsertContentPageLabelDocument,
 				{
 					contentPageLabel: {
@@ -140,7 +141,7 @@ export class ContentPageLabelsService {
 				ContentPageLabelQueryTypes['UpdateContentPageLabelMutation'],
 				ContentPageLabelQueryTypes['UpdateContentPageLabelMutationVariables']
 			>(
-				CONTENT_PAGE_LABEL_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
 					.UpdateContentPageLabelDocument,
 				{
 					contentPageLabel: {
@@ -171,7 +172,7 @@ export class ContentPageLabelsService {
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQuery'],
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndLabelsQueryVariables']
 		>(
-			CONTENT_PAGE_LABEL_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+			CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
 				.GetContentPageLabelsByTypeAndLabelsDocument,
 			{
 				contentType,
@@ -202,7 +203,7 @@ export class ContentPageLabelsService {
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQuery'],
 			ContentPageLabelQueryTypes['GetContentPageLabelsByTypeAndIdsQueryVariables']
 		>(
-			CONTENT_PAGE_LABEL_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+			CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
 				.GetContentPageLabelsByTypeAndIdsDocument,
 			{
 				contentType,

@@ -1,5 +1,5 @@
-import { Inject } from '@nestjs/common';
-import type { Avo } from '@viaa/avo2-types';
+import { forwardRef, Inject } from '@nestjs/common';
+import { Avo } from '@viaa/avo2-types';
 import { DataService } from '../data';
 
 import { CustomError } from '../shared/helpers/custom-error';
@@ -30,7 +30,9 @@ import {
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {
-	constructor(@Inject() protected dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public async fetchPublicItems(
 		limit: number,
@@ -123,7 +125,7 @@ export class ItemsService {
 	): Promise<
 		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
 	> {
-		let variables: any;
+		let variables: any = null;
 		const isCollection = type === 'collection';
 		try {
 			variables = {

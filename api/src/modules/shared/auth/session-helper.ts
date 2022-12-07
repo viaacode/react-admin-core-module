@@ -16,7 +16,7 @@ import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
 import { mockUserInfo } from '../../../mock-user-info';
 
-import { HetArchiefUser } from '../../users/users.types';
+import { HetArchiefUser } from '../../users';
 import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
 

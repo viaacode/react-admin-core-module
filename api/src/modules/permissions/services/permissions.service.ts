@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import {
 	PermissionQueryTypes,
 	PERMISSIONS_QUERIES,
@@ -8,15 +9,14 @@ import { PermissionData } from '../permissions.types';
 
 @Injectable()
 export class PermissionsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public async getPermissions(): Promise<PermissionData[]> {
 		const response = await this.dataService.execute<
 			PermissionQueryTypes['GetPermissionsQuery']
-		>(
-			PERMISSIONS_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetPermissionsDocument,
-		);
+		>(PERMISSIONS_QUERIES[getDatabaseType()].GetPermissionsDocument);
 
 		if (
 			(response as PermissionQueryTypes['GetPermissionsQueryAvo'])

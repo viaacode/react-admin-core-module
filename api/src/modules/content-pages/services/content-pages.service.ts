@@ -42,6 +42,7 @@ import {
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
 import { CustomError } from '../../shared/helpers/custom-error';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ContentBlockConfig, ContentBlockType } from '../content-block.types';
@@ -90,7 +91,7 @@ export class ContentPagesService {
 		protected playerTicketService: PlayerTicketService,
 		protected organisationsService: AdminOrganisationsService,
 	) {
-		this.appType = process.env.DATABASE_APPLICATION_TYPE as DatabaseType;
+		this.appType = getDatabaseType();
 	}
 
 	public setSearchQueryFunction(fetchSearchQuery: FetchSearchQueryFunctionAvo) {
@@ -282,10 +283,9 @@ export class ContentPagesService {
 			| ContentPageQueryTypes['GetContentPagesQueryVariables']
 		>(
 			withBlock
-				? CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				? CONTENT_PAGE_QUERIES[getDatabaseType()]
 						.GetContentPagesWithBlocksDocument
-				: CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-						.GetContentPagesDocument,
+				: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesDocument,
 			variables,
 		);
 
@@ -333,13 +333,9 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPageByPathQuery'],
 			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
-		>(
-			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetContentPageByPathDocument,
-			{
-				path,
-			},
-		);
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
+			path,
+		});
 		const contentPage: GqlContentPage | undefined =
 			get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
 
@@ -409,7 +405,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
 		>(
-			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+			CONTENT_PAGE_QUERIES[getDatabaseType()]
 				.UpdateContentPagePublishDatesDocument,
 			{
 				now: new Date().toISOString(),
@@ -428,13 +424,9 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentByIdsQuery'],
 			ContentPageQueryTypes['GetContentByIdsQueryVariables']
-		>(
-			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetContentByIdsDocument,
-			{
-				ids: contentPageIds,
-			},
-		);
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentByIdsDocument, {
+			ids: contentPageIds,
+		});
 
 		return (
 			(response as ContentPageQueryTypes['GetContentByIdsQueryAvo'])
@@ -817,15 +809,11 @@ export class ContentPagesService {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPagesQuery'],
 			ContentPageQueryTypes['GetContentPagesQueryVariables']
-		>(
-			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetContentPagesDocument,
-			{
-				limit,
-				orderBy: { title: Order_By.Asc },
-				where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
-			},
-		);
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesDocument, {
+			limit,
+			orderBy: { title: Order_By.Asc },
+			where: { is_public: { _eq: true }, is_deleted: { _eq: false } },
+		});
 
 		return (response as any).app_content || (response as any).app_content_page;
 	}
@@ -1176,10 +1164,9 @@ export class ContentPagesService {
 			| ContentPageQueryTypes['GetContentPagesQueryVariables']
 		>(
 			withBlock
-				? CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				? CONTENT_PAGE_QUERIES[getDatabaseType()]
 						.GetContentPagesWithBlocksDocument
-				: CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-						.GetContentPagesDocument,
+				: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesDocument,
 			variables,
 		);
 		const responseAvo = response as
@@ -1336,14 +1323,10 @@ export class ContentPagesService {
 			await this.dataService.execute<
 				ContentPageQueryTypes['UpdateContentBlockMutation'],
 				ContentPageQueryTypes['UpdateContentBlockMutationVariables']
-			>(
-				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.UpdateContentBlockDocument,
-				{
-					contentBlock: contentBlockConfig as any,
-					id: contentBlockConfig.id as number,
-				},
-			);
+			>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentBlockDocument, {
+				contentBlock: contentBlockConfig as any,
+				id: contentBlockConfig.id as number,
+			});
 		} catch (err) {
 			throw CustomError('Failed to update content block', err, {
 				contentBlockConfig,
@@ -1361,11 +1344,9 @@ export class ContentPagesService {
 			return await this.dataService.execute<
 				ContentPageQueryTypes['DeleteContentBlockMutation'],
 				ContentPageQueryTypes['DeleteContentBlockMutationVariables']
-			>(
-				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.DeleteContentBlockDocument,
-				{ id },
-			);
+			>(CONTENT_PAGE_QUERIES[getDatabaseType()].DeleteContentBlockDocument, {
+				id,
+			});
 		} catch (err) {
 			throw CustomError('Failed to delete content block', err, { id });
 		}
@@ -1399,15 +1380,11 @@ export class ContentPagesService {
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['InsertContentBlocksMutation'],
 				ContentPageQueryTypes['InsertContentBlocksMutationVariables']
-			>(
-				CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.InsertContentBlocksDocument,
-				{
-					contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(
-						contentBlockConfigs,
-					) as any, // TODO Figure out why type doesn't work
-				},
-			);
+			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentBlocksDocument, {
+				contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(
+					contentBlockConfigs,
+				) as any, // TODO Figure out why type doesn't work
+			});
 			const ids: number[] =
 				(
 					(response as ContentPageQueryTypes['InsertContentBlocksMutationAvo'])
@@ -1518,7 +1495,7 @@ export class ContentPagesService {
 			ContentPageQueryTypes['GetPermissionsFromContentPageByPathQuery'],
 			ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryVariables']
 		>(
-			CONTENT_PAGE_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+			CONTENT_PAGE_QUERIES[getDatabaseType()]
 				.GetPermissionsFromContentPageByPathDocument,
 			{
 				path,
