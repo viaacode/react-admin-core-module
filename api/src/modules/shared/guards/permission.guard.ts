@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 import { SessionHelper } from '../auth/session-helper';
 
 @Injectable()

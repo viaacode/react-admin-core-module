@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserGroupsController } from './controllers/user-groups.controller';
 import { UserGroupsService } from './services/user-groups.service';
 
-import { DataModule } from '../data/data.module';
+import { DataModule } from '../data';
 
 @Module({
 	imports: [forwardRef(() => DataModule), ConfigModule],

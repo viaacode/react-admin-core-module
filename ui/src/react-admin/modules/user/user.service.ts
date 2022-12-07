@@ -57,6 +57,7 @@ export class UserService {
 					logo_url:
 						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
 				},
+				tempAccess: null,
 			};
 		} else if (database === AvoOrHetArchief.avo) {
 			const user = userProfile as ProfileAvo;
@@ -70,7 +71,7 @@ export class UserService {
 						name: user.company_name,
 					}) ||
 					(userProfile as any).organisation,
-				educational_organisations: (user.organisations || []).map(
+				educationalOrganisations: (user.organisations || []).map(
 					(org): ClientEducationOrganization => ({
 						organizationId: org.organization_id,
 						unitId: org.unit_id || null,
@@ -78,10 +79,10 @@ export class UserService {
 					})
 				),
 				subjects: user.classifications?.map((classification) => classification.key),
-				education_levels: user.contexts?.map((context) => context.key),
-				is_exception: user.is_exception || undefined,
-				business_category: user.business_category || undefined,
-				created_at: user.acc_created_at,
+				educationLevels: user.contexts?.map((context) => context.key),
+				isException: user.is_exception || undefined,
+				businessCategory: user.business_category || undefined,
+				createdAt: user.acc_created_at,
 				userGroup: {
 					name:
 						user.group_name ||
@@ -98,11 +99,11 @@ export class UserService {
 				},
 				userId: user.user_id || (userProfile as any).user?.id,
 				uid: user.user_id || (userProfile as any).user?.id,
-				is_blocked: user.is_blocked || undefined,
-				blocked_at: user?.blocked_at?.date,
-				unblocked_at: user?.unblocked_at?.date,
-				last_access_at: user.last_access_at,
-				temp_access: user?.user?.temp_access || undefined,
+				isBlocked: user.is_blocked || undefined,
+				blockedAt: user?.blocked_at?.date,
+				unblockedAt: user?.unblocked_at?.date,
+				lastAccessAt: user.last_access_at,
+				tempAccess: user?.user?.temp_access || null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
 			};
 		}
@@ -194,7 +195,7 @@ export class UserService {
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
 		isBlocked: boolean,
-		sendEmail?: boolean,
+		sendEmail?: boolean
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -216,14 +217,6 @@ export class UserService {
 				method: 'POST',
 				body: JSON.stringify(body),
 			});
-
-			// TODO move temp access to backend
-			// if (isBlocked) {
-			// 	await dataService.query<BulkClearUserTempAccessMutation, BulkClearUserTempAccessMutationVariables>({
-			// 		variables: { profileIds },
-			// 		query: BulkClearUserTempAccessDocument,
-			// 	})
-			// }
 		} catch (err) {
 			throw new CustomError(
 				'Failed to update is_blocked field for users in the database',
@@ -279,7 +272,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				sendEmail,
-				...(isAvo ? { transferToProfileId } : {})
+				...(isAvo ? { transferToProfileId } : {}),
 			};
 			await fetchWithLogout(url, {
 				method: 'DELETE',

@@ -1,5 +1,6 @@
 import { TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
+import { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
 
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
 import { ROUTE_PARTS } from '../../shared/consts/routes';
@@ -20,7 +21,11 @@ export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
 	contentPageLabelOptions: CheckboxOption[]
-) => FilterableColumn[] = (contentTypeOptions, userGroupOptions, contentPageLabelOptions) => {
+) => FilterableColumn<ContentOverviewTableCols>[] = (
+	contentTypeOptions,
+	userGroupOptions,
+	contentPageLabelOptions
+) => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
 		{

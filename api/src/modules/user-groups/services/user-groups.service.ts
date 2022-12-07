@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
@@ -11,7 +12,9 @@ import {
 
 @Injectable()
 export class UserGroupsService {
-	constructor(private dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public adapt(
 		userGroup:
@@ -45,10 +48,7 @@ export class UserGroupsService {
 		if (withPermissions) {
 			const response = await this.dataService.execute<
 				UserGroupQueryTypes['GetUserGroupsPermissionsQuery']
-			>(
-				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetUserGroupsPermissionsDocument,
-			);
+			>(USER_GROUP_QUERIES[getDatabaseType()].GetUserGroupsPermissionsDocument);
 
 			const userGroups =
 				(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo'])
@@ -60,10 +60,7 @@ export class UserGroupsService {
 		} else {
 			const response = await this.dataService.execute<
 				UserGroupQueryTypes['GetUserGroupsQuery']
-			>(
-				USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-					.GetUserGroupsDocument,
-			);
+			>(USER_GROUP_QUERIES[getDatabaseType()].GetUserGroupsDocument);
 
 			const userGroups =
 				(response as UserGroupQueryTypes['GetUserGroupsQueryAvo'])
@@ -81,8 +78,7 @@ export class UserGroupsService {
 			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutation'],
 			UserGroupQueryTypes['UpdateUserGroupsPermissionsMutationVariables']
 		>(
-			USER_GROUP_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.UpdateUserGroupsPermissionsDocument,
+			USER_GROUP_QUERIES[getDatabaseType()].UpdateUserGroupsPermissionsDocument,
 			{
 				deletions: {
 					_or: updates

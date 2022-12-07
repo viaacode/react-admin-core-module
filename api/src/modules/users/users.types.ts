@@ -162,10 +162,6 @@ export interface GqlPermission {
 	name: string;
 }
 
-export interface GqlPermissionData {
-	permission: GqlPermission;
-}
-
 export enum Group {
 	KIOSK_VISITOR = '04150e6e-b779-4125-84e5-6ee6fc580757',
 	MEEMOO_ADMIN = '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
@@ -219,6 +215,7 @@ export interface OrganizationSchema {
 export interface UserTempAccess {
 	from?: string | null;
 	until?: string | null;
+	status?: boolean | null;
 }
 
 export interface UserGroupInfo {
@@ -241,20 +238,20 @@ export interface CommonUser {
 	permissions?: Permission[];
 	stamboek?: string;
 	organisation?: OrganizationSchema;
-	educational_organisations?: ClientEducationOrganization[];
+	educationalOrganisations?: ClientEducationOrganization[];
 	subjects?: string[];
-	education_levels?: string[];
-	is_exception?: boolean;
-	business_category?: string;
-	created_at?: string;
+	educationLevels?: string[];
+	isException?: boolean;
+	businessCategory?: string;
+	createdAt?: string;
 	userGroup?: Partial<UserGroupInfo>;
 	userId?: string;
 	uid?: string;
-	is_blocked?: boolean;
-	blocked_at?: string;
-	unblocked_at?: string;
-	last_access_at?: string;
-	temp_access?: UserTempAccess;
+	isBlocked?: boolean;
+	blockedAt?: string;
+	unblockedAt?: string;
+	lastAccessAt?: string;
+	tempAccess?: UserTempAccess;
 	idps?: Idp[];
 }
 
@@ -264,28 +261,22 @@ export type UserOverviewTableCol =
 	| 'lastName'
 	| 'email'
 	| 'userGroup'
-	| 'business_category'
-	| 'is_exception'
-	| 'is_blocked'
-	| 'blocked_at'
-	| 'unblocked_at'
+	| 'businessCategory'
+	| 'isException'
+	| 'isBlocked'
+	| 'blockedAt'
+	| 'unblockedAt'
 	| 'stamboek'
 	| 'organisation'
-	| 'created_at'
-	| 'education_levels'
+	| 'createdAt'
+	| 'educationLevels'
 	| 'subjects'
 	| 'idps'
-	| 'educational_organisations'
-	| 'last_access_at'
-	| 'temp_access'
-	| 'temp_access_from'
-	| 'temp_access_until';
-
-export interface RawUserGroup {
-	id: number;
-	label: string;
-	group_user_permission_groups: RawUserGroupPermissionGroupLink[];
-}
+	| 'educationalOrganisations'
+	| 'lastAccessAt'
+	| 'tempAccess'
+	| 'tempAccessFrom'
+	| 'tempAccessUntil';
 
 export interface RawUserGroupPermissionGroupLink {
 	permission_group: RawPermissionGroupLink;
@@ -306,13 +297,6 @@ export interface RawPermission {
 	label: string;
 }
 
-export type UserBulkAction =
-	| 'block'
-	| 'unblock'
-	| 'delete'
-	| 'change_subjects'
-	| 'export';
-
 export interface DeleteContentCounts {
 	publicCollections: number;
 	privateCollections: number;
@@ -320,44 +304,6 @@ export interface DeleteContentCounts {
 	bookmarks: number;
 	publicContentPages: number;
 	privateContentPages: number;
-}
-
-export interface DeleteContentCountsRaw {
-	publicCollections: {
-		aggregate: {
-			count: number;
-		};
-	};
-	publicContentPages: {
-		aggregate: {
-			count: number;
-		};
-	};
-	privateCollections: {
-		aggregate: {
-			count: number;
-		};
-	};
-	assignments: {
-		aggregate: {
-			count: number;
-		};
-	};
-	collectionBookmarks: {
-		aggregate: {
-			count: number;
-		};
-	};
-	itemBookmarks: {
-		aggregate: {
-			count: number;
-		};
-	};
-	privateContentPages: {
-		aggregate: {
-			count: number;
-		};
-	};
 }
 
 export type ProfileAvo =

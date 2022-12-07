@@ -121,20 +121,20 @@ export interface CommonUser {
 	permissions?: Permission[];
 	stamboek?: string;
 	organisation?: OrganizationSchema;
-	educational_organisations?: ClientEducationOrganization[];
+	educationalOrganisations?: ClientEducationOrganization[];
 	subjects?: string[];
-	education_levels?: string[];
-	is_exception?: boolean;
-	business_category?: string;
-	created_at?: string;
+	educationLevels?: string[];
+	isException?: boolean;
+	businessCategory?: string;
+	createdAt?: string;
 	userGroup?: Partial<UserGroupInfo>;
 	userId?: string;
 	uid?: string;
-	is_blocked?: boolean;
-	blocked_at?: string;
-	unblocked_at?: string;
-	last_access_at?: string;
-	temp_access?: UserTempAccess;
+	isBlocked?: boolean;
+	blockedAt?: string;
+	unblockedAt?: string;
+	lastAccessAt?: string;
+	tempAccess: UserTempAccess | null;
 	idps?: Idp[];
 }
 
@@ -144,22 +144,22 @@ export type UserOverviewTableCol =
 	| 'lastName'
 	| 'email'
 	| 'userGroup'
-	| 'business_category'
-	| 'is_exception'
-	| 'is_blocked'
-	| 'blocked_at'
-	| 'unblocked_at'
+	| 'businessCategory'
+	| 'isException'
+	| 'isBlocked'
+	| 'blockedAt'
+	| 'unblockedAt'
 	| 'stamboek'
 	| 'organisation'
-	| 'created_at'
-	| 'education_levels'
+	| 'createdAt'
+	| 'educationLevels'
 	| 'subjects'
 	| 'idps'
-	| 'educational_organisations'
-	| 'last_access_at'
-	| 'temp_access'
-	| 'temp_access_from'
-	| 'temp_access_until';
+	| 'educationalOrganisations'
+	| 'lastAccessAt'
+	| 'tempAccess'
+	| 'tempAccessFrom'
+	| 'tempAccessUntil';
 
 export interface UserTableState extends FilterableTableState {
 	first_name: string;

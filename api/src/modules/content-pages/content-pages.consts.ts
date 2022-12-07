@@ -1,5 +1,5 @@
 import { Avo } from '@viaa/avo2-types';
-import { AvoOrHetArchief } from '../shared/types';
+import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import {
 	ContentOverviewTableCols,
 	MediaPlayerPathInfo,
@@ -63,7 +63,7 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 		return { user_group_ids: order };
 	},
 	userProfileId: (order: Avo.Search.OrderDirection) => {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return {
 				owner_profile: { first_name: order },
 			};
@@ -73,7 +73,7 @@ export const TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT: Partial<{
 		};
 	},
 	authorUserGroup: (order: Avo.Search.OrderDirection) => {
-		if (process.env.DATABASE_APPLICATION_TYPE === AvoOrHetArchief.hetArchief) {
+		if (isHetArchief()) {
 			return {
 				owner_profile: { group: { name: order } },
 			};

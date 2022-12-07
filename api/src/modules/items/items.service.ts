@@ -1,4 +1,4 @@
-import { Inject } from '@nestjs/common';
+import { forwardRef, Inject } from '@nestjs/common';
 import { Avo } from '@viaa/avo2-types';
 import { RelationEntry, RelationType } from '@viaa/avo2-types/types/collection';
 import { DataService } from '../data';
@@ -31,7 +31,9 @@ import {
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {
-	constructor(@Inject() protected dataService: DataService) {}
+	constructor(
+		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+	) {}
 
 	public async fetchPublicItems(
 		limit: number,
@@ -122,7 +124,7 @@ export class ItemsService {
 		subjectIds: string[],
 		relationType: RelationType,
 	): Promise<RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
-		let variables: any;
+		let variables: any = null;
 		const isCollection = type === 'collection';
 		try {
 			variables = {

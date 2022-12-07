@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PermissionsController } from './controllers/permissions.controller';
 import { PermissionsService } from './services/permissions.service';
 
-import { DataModule } from '../data/data.module';
+import { DataModule } from '../data';
 
 @Module({
 	imports: [forwardRef(() => DataModule), ConfigModule],

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
 import { UserGroupsService } from '../services/user-groups.service';

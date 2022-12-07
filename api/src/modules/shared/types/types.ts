@@ -7,19 +7,6 @@ export enum SpecialPermissionGroups {
 	loggedInUsers = '-2',
 }
 
-export interface Address {
-	street: string;
-	postalCode: string;
-	locality: string;
-	postOfficeBoxNumber: string;
-}
-
-export interface ContactInfo {
-	email?: string | null;
-	telephone?: string | null;
-	address: Address;
-}
-
 export interface Recipient {
 	id: string;
 	email: string;

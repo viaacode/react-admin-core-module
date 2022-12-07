@@ -1,5 +1,0 @@
-mutation bulkClearUserTempAccess($profileIds: [uuid!]!) {
-	delete_shared_user_temp_access(where: { user: { profile: { id: { _in: $profileIds } } } }) {
-		affected_rows
-	}
-}

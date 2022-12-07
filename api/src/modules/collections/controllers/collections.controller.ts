@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Avo } from '@viaa/avo2-types';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 
-import { Permission } from '../../users/users.types';
+import { Permission } from '../../users';
 import { ContentTypeNumber } from '../collections.types';
 import { CollectionsService } from '../services/collections.service';
 

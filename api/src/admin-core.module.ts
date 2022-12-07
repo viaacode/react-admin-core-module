@@ -8,11 +8,12 @@ import {
 	ContentPageLabelsModule,
 	ContentPagesModule,
 	DataModule,
+	LookupModule,
 	PlayerTicketModule,
 	SiteVariablesModule,
 	StatusModule,
+	UsersModule,
 } from './modules';
-import { UsersModule } from './modules/users/users.module';
 
 @Module({
 	imports: [
@@ -21,13 +22,14 @@ import { UsersModule } from './modules/users/users.module';
 		AdminPermissionsModule,
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
-		UsersModule,
-		ContentPagesModule,
 		ContentPageLabelsModule,
+		ContentPagesModule,
 		DataModule,
+		LookupModule,
 		PlayerTicketModule,
 		SiteVariablesModule,
 		StatusModule,
+		UsersModule,
 	],
 })
 export class AdminCoreModule {}
