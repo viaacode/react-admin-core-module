@@ -1,4 +1,3 @@
-import { Avo } from '@viaa/avo2-types';
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

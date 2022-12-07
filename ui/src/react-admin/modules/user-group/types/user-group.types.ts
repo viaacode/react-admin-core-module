@@ -5,6 +5,7 @@ import { DefaultComponentProps } from '~modules/shared';
 export interface UserGroupOverviewProps extends DefaultComponentProps {
 	onChangePermissions?: (hasChanges: boolean) => void;
 	renderSearchButtons?: (search?: string) => ReactNode;
+	className?: string;
 }
 
 export interface UserGroupOverviewRef {
