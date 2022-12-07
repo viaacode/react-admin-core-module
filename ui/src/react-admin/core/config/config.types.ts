@@ -1,6 +1,6 @@
 import { TableSortingIcons } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
-import { ComponentType, FunctionComponent, MouseEvent, ReactNode } from 'react';
+import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import { AvoOrHetArchief } from '~modules/shared/types';
 
@@ -16,6 +16,8 @@ import { ContentBlockType } from '~modules/content-page/types/content-block.type
 import { NavigationItem } from '~modules/navigation/navigation.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { MediaListItem } from '@viaa/avo2-components';
+import { ROUTE_PARTS } from '../../modules/shared';
+import { FlowPlayerWrapperProps } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 
 export enum ToastType {
 	ERROR = 'error',
@@ -136,6 +138,7 @@ export interface AdminConfig {
 		table: {
 			sortingIcons: TableSortingIcons;
 		};
+		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
 	icon?: IconConfig;
@@ -152,6 +155,7 @@ export interface AdminConfig {
 		proxyUrl: string;
 	};
 	user: CommonUser;
+	route_parts: typeof ROUTE_PARTS;
 }
 
 export interface IconConfig {

@@ -1,12 +1,11 @@
 import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
-import { fromPairs, get, isArray, isEmpty, isNil, isString, map, noop } from 'lodash-es';
+import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
-import React, { Fragment, ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
-import { APP_PATH, CONTENT_TYPE_TO_ROUTE } from '../consts/routes.consts';
+import { APP_PATH } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
 
@@ -227,79 +226,3 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 		}
 	}
 };
-
-export const generateSearchLinks = (
-	key: string,
-	filterProp: Avo.Search.FilterProp,
-	filterValue: string | string[] | undefined,
-	className = ''
-) => {
-	if (isArray(filterValue)) {
-		return filterValue.map((value: string, index: number) => (
-			<Fragment key={`${key}:${filterProp}":${value}`}>
-				{generateSearchLink(filterProp, value, className)}
-				{index === filterValue.length - 1 ? '' : ', '}
-			</Fragment>
-		));
-	}
-
-	return generateSearchLink(filterProp, filterValue, className);
-};
-
-export function generateSearchLink(
-	filterProp: Avo.Search.FilterProp,
-	filterValue: string | undefined,
-	className = '',
-	onClick: () => void = noop
-) {
-	const Link = AdminConfigManager.getConfig().services.router.Link;
-	return filterValue ? (
-		<Link
-			className={className}
-			to={generateSearchLinkString(filterProp, filterValue)}
-			onClick={onClick}
-		>
-			{filterValue}
-		</Link>
-	) : (
-		<Fragment />
-	);
-}
-
-export function generateSearchLinkString(
-	filterProp: Avo.Search.FilterProp,
-	filterValue: string,
-	orderProperty?: Avo.Search.OrderProperty,
-	orderDirection?: Avo.Search.OrderDirection
-) {
-	const queryParamObject: any = {};
-	if (String(filterProp) === 'query') {
-		queryParamObject.filters = JSON.stringify({ query: filterValue });
-	} else {
-		queryParamObject.filters = `{"${filterProp}":["${filterValue}"]}`;
-	}
-	if (orderProperty) {
-		queryParamObject.orderProperty = orderProperty;
-	}
-	if (orderDirection) {
-		queryParamObject.orderDirection = orderDirection;
-	}
-
-	return buildLink(APP_PATH.SEARCH.route, {}, stringify(queryParamObject));
-}
-
-export function generateContentLinkString(contentType: Avo.Core.ContentType, id: string): string {
-	return buildLink(`${CONTENT_TYPE_TO_ROUTE[contentType]}`, { id });
-}
-
-export function generateAssignmentCreateLink(
-	assignmentType: Avo.Assignment.Type,
-	contentId?: string,
-	contentLabel?: Avo.Assignment.ContentLabel
-) {
-	return buildLink(
-		APP_PATH.ASSIGNMENT_CREATE.route,
-		{},
-		`assignment_type=${assignmentType}&content_id=${contentId}&content_label=${contentLabel}`
-	);
-}

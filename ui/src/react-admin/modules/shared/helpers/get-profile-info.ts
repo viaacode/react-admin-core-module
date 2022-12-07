@@ -1,17 +1,4 @@
-import { CustomError } from './custom-error';
-
 import { CommonUser } from '~modules/user/user.types';
-
-export function getProfileName(user: CommonUser | undefined): string {
-	if (!user) {
-		throw new CustomError('Failed to get profile name because the logged in user is undefined');
-	}
-	const profileName = getFullName(user, true, false);
-	if (!profileName) {
-		throw new CustomError('No profile name could be found for the logged in user');
-	}
-	return profileName;
-}
 
 export const getFullName = (
 	profile: CommonUser | null | undefined,

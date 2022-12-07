@@ -1,4 +1,4 @@
-import { DutchContentType, EnglishContentType } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 
 export enum ContentTypeNumber {
 	audio = 1,
@@ -16,7 +16,7 @@ export enum ContentTypeString {
 	searchquery = 'zoekopdracht',
 }
 
-const CONTENT_TYPE_TRANSLATIONS = {
+const CONTENT_TYPE_TRANSLATIONS: Record<Avo.ContentType.Dutch, Avo.ContentType.English> = {
 	item: 'item',
 	audio: 'audio',
 	video: 'video',
@@ -27,6 +27,6 @@ const CONTENT_TYPE_TRANSLATIONS = {
 	zoekopdracht: 'searchquery',
 };
 
-export function toEnglishContentType(label: DutchContentType): EnglishContentType {
-	return CONTENT_TYPE_TRANSLATIONS[label] as EnglishContentType;
+export function toEnglishContentType(label: Avo.ContentType.Dutch): Avo.ContentType.English {
+	return CONTENT_TYPE_TRANSLATIONS[label];
 }

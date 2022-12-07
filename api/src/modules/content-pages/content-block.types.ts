@@ -1,16 +1,3 @@
-import {
-	BlockHeroProps,
-	ButtonAction,
-	ButtonType,
-	ContentItemStyle,
-	ContentTabStyle,
-	CTAProps,
-	HeadingType,
-	IconName,
-	ImageInfo,
-	SpacerOption,
-} from '@viaa/avo2-components';
-import { RichEditorState } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
 
 // OPTIONS
@@ -68,8 +55,8 @@ export enum Color {
 }
 
 export interface PaddingFieldState {
-	top: SpacerOption;
-	bottom: SpacerOption;
+	top: string;
+	bottom: string;
 }
 
 // CONTENT BLOCK CONFIG
@@ -182,45 +169,45 @@ export interface ImageGridBlockComponentStateFields {
 	source: string;
 	title?: string;
 	text?: string;
-	action?: ButtonAction;
+	action?: string;
 }
 
 export interface PageOverviewBlockComponentStateFields {
 	tabs?: string[];
-	tabStyle?: ContentTabStyle;
+	tabStyle?: 'ROUNDED_BADGES' | 'MENU_BAR';
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	headerBackgroundColor?: Color;
 	contentType: Avo.ContentPage.Type;
-	itemStyle?: ContentItemStyle;
+	itemStyle?: 'GRID' | 'NEWS_LIST' | 'PROJECT_LIST' | 'ACCORDION';
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
 	buttonLabel?: string;
 	itemsPerPage?: number;
-	navigate?: (buttonAction: ButtonAction) => void;
+	navigate?: (buttonAction: string) => void;
 }
 
 export interface ButtonsBlockComponentState {
 	label: string;
-	icon?: IconName;
-	type?: ButtonType;
-	navigate?: (buttonAction: ButtonAction) => void;
+	icon?: string;
+	type?: string;
+	navigate?: (buttonAction: string) => void;
 }
 
 export interface RichTextBlockComponentState {
 	content: string;
 	// Each rich text editor state prop has to and with 'RichEditorStateKey'
 	// So this can be removed before saving the page to the database in ContentPageService.removeRichEditorStateRecursively
-	contentRichEditorState: RichEditorState | undefined;
+	// contentRichEditorState: RichEditorState | undefined;
 	buttons?: ButtonsBlockComponentState[];
 }
 
 export interface AnchorLinksBlockComponentState {
 	label: string;
-	icon?: IconName;
-	type?: ButtonType;
-	navigate?: (buttonAction: ButtonAction) => void;
+	icon?: string;
+	type?: string;
+	navigate?: (buttonAction: string) => void;
 }
 
 export interface KlaarBlockComponentState {
@@ -250,45 +237,50 @@ export interface QuoteBlockComponentState {
 
 export interface MediaPlayerBlockComponentState {
 	title: string;
-	item?: ButtonAction;
+	item?: string;
 	autoplay: boolean;
 }
 
 export interface MediaPlayerTitleTextButtonBlockComponentState {
 	mediaTitle: string;
-	mediaItem?: ButtonAction;
+	mediaItem?: string;
 	headingType: HeadingTypeOption;
 	headingTitle: string;
 	content: string;
 	buttonLabel: string;
-	buttonIcon?: IconName;
-	buttonType?: ButtonType;
-	buttonAction?: ButtonAction;
+	buttonIcon?: string;
+	buttonType?: string;
+	buttonAction?: string;
 	align: AlignOption;
 	mediaAutoplay: boolean;
 }
 
 export interface MediaGridBlockComponentState {
-	mediaItem?: ButtonAction;
+	mediaItem?: string;
 	buttonLabel?: string;
 	buttonAltTitle?: string;
-	buttonIcon?: IconName;
-	buttonType?: ButtonType;
-	buttonAction?: ButtonAction;
+	buttonIcon?: string;
+	buttonType?: string;
+	buttonAction?: string;
 }
 
 export type RepeatedContentBlockComponentState =
 	| AnchorLinksBlockComponentState
 	| ButtonsBlockComponentState
-	| Partial<CTAProps>
+	| Partial<Record<string, unknown>>
 	| ImageGridBlockComponentStateFields
 	| MediaGridBlockComponentState
-	| ImageInfo // project spotlight & spotlight
+	| {
+		image: string;
+		title: string;
+		buttonAction?: string;
+		className?: string;
+	} // project spotlight & spotlight
 	| RichTextBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
-	| Partial<BlockHeroProps>
+	| Partial<Record<string, unknown>>
 	| IFrameBlockComponentState
 	| ImageBlockComponentState
 	| IntroBlockComponentState

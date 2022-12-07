@@ -1,4 +1,4 @@
-import { DocumentNode } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import {
 	DeleteContentBlockDocument as DeleteContentBlockDocumentAvo,
 	DeleteContentBlockMutation as DeleteContentBlockMutationAvo,
@@ -344,27 +344,27 @@ export type ContentPageQueryTypes = {
 };
 
 type ContentPageQueries = {
-	DeleteContentBlockDocument: DocumentNode;
-	DeleteContentLabelLinksDocument: DocumentNode;
-	GetContentByIdDocument: DocumentNode;
-	GetContentLabelsByContentTypeDocument: DocumentNode;
-	GetContentPagesDocument: DocumentNode;
-	GetContentTypesDocument: DocumentNode;
-	GetPermissionsFromContentPageByPathDocument: DocumentNode;
-	GetPublicContentPagesByTitleDocument: DocumentNode;
-	GetPublicProjectContentPagesByTitleDocument: DocumentNode;
-	GetPublicProjectContentPagesDocument: DocumentNode;
-	InsertContentBlocksDocument: DocumentNode;
-	InsertContentDocument: DocumentNode;
-	InsertContentLabelLinksDocument: DocumentNode;
-	SoftDeleteContentDocument: DocumentNode;
-	UpdateContentBlockDocument: DocumentNode;
-	UpdateContentByIdDocument: DocumentNode;
-	GetContentByIdsDocument: DocumentNode;
-	GetContentPageByPathDocument: DocumentNode;
-	GetContentPagesWithBlocksDocument: DocumentNode;
-	GetPublicContentPagesDocument: DocumentNode;
-	UpdateContentPagePublishDatesDocument: DocumentNode;
+	DeleteContentBlockDocument: TypedDocumentNode;
+	DeleteContentLabelLinksDocument: TypedDocumentNode;
+	GetContentByIdDocument: TypedDocumentNode;
+	GetContentLabelsByContentTypeDocument: TypedDocumentNode;
+	GetContentPagesDocument: TypedDocumentNode;
+	GetContentTypesDocument: TypedDocumentNode;
+	GetPermissionsFromContentPageByPathDocument: TypedDocumentNode;
+	GetPublicContentPagesByTitleDocument: TypedDocumentNode;
+	GetPublicProjectContentPagesByTitleDocument: TypedDocumentNode;
+	GetPublicProjectContentPagesDocument: TypedDocumentNode;
+	InsertContentBlocksDocument: TypedDocumentNode;
+	InsertContentDocument: TypedDocumentNode;
+	InsertContentLabelLinksDocument: TypedDocumentNode;
+	SoftDeleteContentDocument: TypedDocumentNode;
+	UpdateContentBlockDocument: TypedDocumentNode;
+	UpdateContentByIdDocument: TypedDocumentNode;
+	GetContentByIdsDocument: TypedDocumentNode;
+	GetContentPageByPathDocument: TypedDocumentNode;
+	GetContentPagesWithBlocksDocument: TypedDocumentNode;
+	GetPublicContentPagesDocument: TypedDocumentNode;
+	UpdateContentPagePublishDatesDocument: TypedDocumentNode;
 };
 
 export const CONTENT_PAGE_QUERIES: Record<AvoOrHetArchief, ContentPageQueries> =

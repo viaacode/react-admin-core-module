@@ -1,4 +1,4 @@
-import { DocumentNode } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentAvo,
 	DeleteNavigationItemMutation as DeleteNavigationItemMutationAvo,
@@ -110,12 +110,12 @@ export type NavigationQueryTypes = {
 };
 
 type NavigationQueries = {
-	DeleteNavigationItemDocument: DocumentNode;
-	GetNavigationBarsDocument: DocumentNode;
-	GetNavigationItemByIdDocument: DocumentNode;
-	GetNavigationItemsByPlacementDocument: DocumentNode;
-	InsertNavigationItemDocument: DocumentNode;
-	UpdateNavigationItemByIdDocument: DocumentNode;
+	DeleteNavigationItemDocument: TypedDocumentNode;
+	GetNavigationBarsDocument: TypedDocumentNode;
+	GetNavigationItemByIdDocument: TypedDocumentNode;
+	GetNavigationItemsByPlacementDocument: TypedDocumentNode;
+	InsertNavigationItemDocument: TypedDocumentNode;
+	UpdateNavigationItemByIdDocument: TypedDocumentNode;
 };
 
 export const NAVIGATION_QUERIES: Record<AvoOrHetArchief, NavigationQueries> = {

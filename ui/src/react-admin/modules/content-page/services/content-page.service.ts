@@ -13,7 +13,7 @@ import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
-import { ITEMS_PER_PAGE } from '../const/content-page.consts';
+import { PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,
@@ -166,8 +166,8 @@ export class ContentPageService {
 			stringifyUrl({
 				url: this.getBaseUrl() + '/overview',
 				query: {
-					offset: page * ITEMS_PER_PAGE,
-					limit: ITEMS_PER_PAGE,
+					offset: page * PAGES_PER_PAGE,
+					limit: PAGES_PER_PAGE,
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,

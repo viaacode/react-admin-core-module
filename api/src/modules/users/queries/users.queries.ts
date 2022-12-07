@@ -1,4 +1,3 @@
-import { DocumentNode } from 'graphql';
 import { AvoOrHetArchief } from '../../shared/types';
 
 import {
@@ -29,6 +28,7 @@ import {
 	GetUsersQuery as GetUsersQueryHetArchief,
 	GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
 export type UserQueryTypes = {
 	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo;
@@ -68,10 +68,10 @@ export type UserQueryTypes = {
 };
 
 type UserQueries = {
-	GetProfileNamesDocument: DocumentNode;
-	GetUsersDocument: DocumentNode;
-	GetIdpsDocument: DocumentNode;
-	GetProfileIdsDocument: DocumentNode;
+	GetProfileNamesDocument: TypedDocumentNode;
+	GetUsersDocument: TypedDocumentNode;
+	GetIdpsDocument: TypedDocumentNode;
+	GetProfileIdsDocument: TypedDocumentNode;
 };
 
 export const USER_QUERIES: Record<AvoOrHetArchief, UserQueries> = {
