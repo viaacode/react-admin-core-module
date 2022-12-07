@@ -4,10 +4,10 @@ import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { AvoOrHetArchief } from '~modules/shared/types';
+import { USERS_PER_PAGE } from '~modules/user/user.consts';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
-import { ITEMS_PER_PAGE } from './user.consts';
 import { CommonUser, DeleteContentCounts, UserOverviewTableCol } from './user.types';
 
 export class UserService {
@@ -21,14 +21,14 @@ export class UserService {
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
 		where: any = {},
-		itemsPerPage: number = ITEMS_PER_PAGE
+		itemsPerPage: number = USERS_PER_PAGE
 	): Promise<[CommonUser[], number]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl(),
 					query: {
-						offset: page * ITEMS_PER_PAGE,
+						offset: page * USERS_PER_PAGE,
 						limit: itemsPerPage,
 						sortColumn,
 						sortOrder,
@@ -86,7 +86,7 @@ export class UserService {
 	static async updateBlockStatusByProfileIds(
 		profileIds: string[],
 		isBlocked: boolean,
-		sendEmail: boolean
+		sendEmail?: boolean
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
@@ -101,7 +101,7 @@ export class UserService {
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
-				sendEmail,
+				sendEmail: !!sendEmail,
 			};
 
 			await fetchWithLogout(url, {

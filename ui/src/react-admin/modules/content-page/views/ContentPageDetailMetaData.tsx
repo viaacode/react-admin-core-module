@@ -12,7 +12,7 @@ import {
 	TagOption,
 	Thumbnail,
 } from '@viaa/avo2-components';
-import { GET_CONTENT_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
+import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
@@ -69,7 +69,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 
 	const getContentPageWidthLabel = (contentPageInfo: ContentPageInfo): string => {
 		return get(
-			GET_CONTENT_WIDTH_OPTIONS().find(
+			GET_CONTENT_PAGE_WIDTH_OPTIONS().find(
 				(option) => option.value === contentPageInfo.contentWidth
 			),
 			'label',

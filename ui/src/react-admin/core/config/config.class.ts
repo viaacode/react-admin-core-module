@@ -8,6 +8,6 @@ export class AdminConfigManager {
 	}
 
 	public static getConfig(): AdminConfig {
-		return this.config;
+		return this.config || {};
 	}
 }

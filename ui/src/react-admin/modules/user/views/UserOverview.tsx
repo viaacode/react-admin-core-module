@@ -12,6 +12,7 @@ import reactToString from 'react-to-string';
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
+import { USER_PATH } from '~modules/user/user.routes';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
@@ -25,7 +26,7 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '../../shared/helpers/filters';
-import { UserService } from '../user.service';
+import { UserService } from '~modules/user';
 import { CommonUser, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
 
 import './UserOverview.scss';
@@ -49,17 +50,15 @@ import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useIdps } from '~modules/shared/hooks/useIdps';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
-import {
-	GET_USER_BULK_ACTIONS,
-	GET_USER_OVERVIEW_TABLE_COLS,
-	ITEMS_PER_PAGE,
-} from '../user.consts';
-import { UserOverviewProps } from './UserOverview.types';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS, USERS_PER_PAGE } from '~modules/user';
+
+export interface UserOverviewProps {
+	customFormatDate?: (date: Date | string) => string;
+}
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	// Hooks
@@ -85,13 +84,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
+	const config = AdminConfigManager.getConfig();
 	const app = AdminConfigManager.getConfig().database.databaseApplicationType;
 	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
 	const columns = useMemo(
 		() =>
 			GET_USER_OVERVIEW_TABLE_COLS(
-				AdminConfigManager.getConfig().user,
+				config,
 				setSelectedCheckboxes(
 					userGroupOptions,
 					get(tableState, 'author.user_groups', []) as string[]
@@ -129,6 +129,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			subjects,
 			tableState,
 			userGroupOptions,
+			config,
 		]
 	);
 
@@ -471,7 +472,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			ADMIN_PATH.USER_OVERVIEW,
+			USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW,
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState.columns || []).join('~') }
 		);
@@ -589,7 +590,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				// no user detail for archief yet
 
 				return app === AvoOrHetArchief.avo ? (
-					<Link to={buildLink(ADMIN_PATH.USER_DETAIL, { id: commonUser.profileId })}>
+					<Link
+						to={buildLink(
+							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,
+							{
+								id: commonUser.profileId,
+							}
+						)}
+					>
 						{truncateTableValue(commonUser?.firstName)}
 					</Link>
 				) : (
@@ -702,6 +710,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		if (!profiles) {
 			return null;
 		}
+
 		return (
 			<>
 				<FilterTable
@@ -717,7 +726,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					noContentMatchingFiltersMessage={tText(
 						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
-					itemsPerPage={ITEMS_PER_PAGE}
+					itemsPerPage={USERS_PER_PAGE}
 					onTableStateChanged={(newTableState) => setTableState(newTableState)}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
@@ -731,7 +740,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						bulkActions
 					)}
 					rowKey={(row: CommonUser) =>
-						row?.profileId || row?.userId || get(row, 'user.mail')
+						row?.profileId || row?.userId || get(row, 'user.mail') || ''
 					}
 				/>
 				<UserDeleteModal

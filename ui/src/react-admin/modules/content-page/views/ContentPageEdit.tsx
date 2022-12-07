@@ -1,14 +1,14 @@
 import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
-import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import React, { FC, ReactNode, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
 import {
-	CONTENT_PATH,
-	GET_CONTENT_DETAIL_TABS,
+	CONTENT_PAGE_PATH,
+	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
@@ -46,6 +46,7 @@ import { validateContentBlockField } from '~modules/shared/helpers/validation';
 import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
+import { DefaultComponentProps } from '~modules/shared/types/components';
 import { Permission } from '~modules/user/user.types';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
@@ -55,7 +56,12 @@ import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = Permission;
 
-const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
+export type ContentPageEditProps = DefaultComponentProps & {
+	id: string | undefined;
+	renderBack?: () => ReactNode;
+};
+
+const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -75,7 +81,7 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_DETAIL_TABS(), 'inhoud');
+	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
 
 	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
@@ -326,7 +332,10 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 					const contentBody = {
 						...contentPageState.currentContentPageInfo,
 						updated_at: new Date().toISOString(),
-						id: id.includes('-') ? id : parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
+						id:
+							typeof (id as string | number) === 'string' && id.includes('-')
+								? id
+								: parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
 						content_blocks: blockConfigs,
 						path: ContentPageService.getPathOrDefault(
 							contentPageState.currentContentPageInfo
@@ -391,9 +400,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, {
-				id: insertedOrUpdatedContent.id,
-			});
+			navigate(
+				history,
+				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+				{
+					id: insertedOrUpdatedContent.id,
+				}
+			);
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -465,9 +478,13 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
 		} else {
-			navigate(history, CONTENT_PATH.CONTENT_PAGE_DETAIL, { id });
+			navigate(
+				history,
+				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+				{ id }
+			);
 		}
 	};
 
@@ -560,7 +577,8 @@ const ContentPageEdit: FC<{ id: string | undefined }> = ({ id }) => {
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 
 		return (
-			<AdminLayout pageTitle={pageTitle}>
+			<AdminLayout className={className} pageTitle={pageTitle}>
+				<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button

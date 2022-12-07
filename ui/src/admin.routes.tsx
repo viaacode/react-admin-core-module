@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router';
-import { renderAdminContentPageRoutes } from './modules/content-page/content.routes';
+import { renderAdminContentPageRoutes } from './modules/content-page/content-page.routes';
 import { renderAdminTranslationsRoutes } from './modules/translations/translations';
 import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
 import { renderAdminUserRoutes } from './modules/user/user';

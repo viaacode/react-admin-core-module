@@ -1,5 +1,13 @@
-import { get } from 'lodash-es';
-import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
+import { get, noop } from 'lodash-es';
+import React, {
+	FC,
+	ReactElement,
+	ReactNode,
+	ReactText,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 
 import {
 	Blankslate,
@@ -16,8 +24,8 @@ import { ToastType } from '~core/config/config.types';
 import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import {
-	CONTENT_PATH,
-	GET_CONTENT_DETAIL_TABS,
+	CONTENT_PAGE_PATH,
+	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
@@ -38,6 +46,7 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { Permission } from '~modules/user/user.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { DefaultComponentProps } from '~modules/shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -50,7 +59,18 @@ const {
 	PUBLISH_ANY_CONTENT_PAGE,
 } = Permission;
 
-const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
+export type ContentPageDetailProps = DefaultComponentProps & {
+	id: string;
+	loaded?: (item: ContentPageInfo) => void;
+	renderBack?: () => ReactNode;
+};
+
+const ContentPageDetail: FC<ContentPageDetailProps> = ({
+	id,
+	loaded = noop,
+	renderBack,
+	className,
+}) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -64,8 +84,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
 
 	const [currentTab, setCurrentTab, tabs] = useTabs(
-		GET_CONTENT_DETAIL_TABS(),
-		GET_CONTENT_DETAIL_TABS()[0].id
+		GET_CONTENT_PAGE_DETAIL_TABS(),
+		GET_CONTENT_PAGE_DETAIL_TABS()[0].id
 	);
 
 	const user = AdminConfigManager.getConfig().user;
@@ -135,17 +155,18 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 	useEffect(() => {
 		if (contentPageInfo) {
+			loaded(contentPageInfo);
 			setLoadingInfo({
 				state: 'loaded',
 			});
 		}
-	}, [contentPageInfo, setLoadingInfo]);
+	}, [contentPageInfo, setLoadingInfo, loaded]);
 
 	const handleDelete = async () => {
 		try {
 			await softDeleteContentPage(id);
 
-			history.push(CONTENT_PATH.CONTENT_PAGE_OVERVIEW);
+			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -263,7 +284,7 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 						contentPageInfo,
 						CONTENT_PAGE_COPY,
 						CONTENT_PAGE_COPY_REGEX,
-						get(user, 'profile.id')
+						user.profileId
 					);
 
 					if (!duplicateContentPage) {
@@ -278,9 +299,12 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 					}
 
 					history.push(
-						buildLink(CONTENT_PATH.CONTENT_PAGE_DETAIL, {
-							id: duplicateContentPage.id,
-						})
+						buildLink(
+							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
+							{
+								id: duplicateContentPage.id,
+							}
+						)
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
 						title: tText('modules/content-page/views/content-page-detail___success'),
@@ -351,9 +375,12 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(CONTENT_PATH.CONTENT_PAGE_EDIT, {
-							id,
-						})}
+						to={buildLink(
+							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
+							{
+								id,
+							}
+						)}
 						className="a-link__no-styles"
 					>
 						<Button
@@ -412,7 +439,8 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 
 	// const description = contentPageInfo ? ContentPageService.getDescription(contentPageInfo) : '';
 	return (
-		<AdminLayout pageTitle={pageTitle}>
+		<AdminLayout className={className} pageTitle={pageTitle}>
+			<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>
 			<AdminLayout.Content>
 				<Navbar background="alt" placement="top" autoHeight>
@@ -420,20 +448,6 @@ const ContentPageDetail: FC<{ id: string }> = ({ id }) => {
 						<Tabs tabs={tabs} onClick={setCurrentTab} />
 					</Container>
 				</Navbar>
-				{/*<MetaTags>*/}
-				{/*	<title>*/}
-				{/*		{GENERATE_SITE_TITLE(*/}
-				{/*			get(contentPageInfo, 'title'),*/}
-				{/*			t(*/}
-				{/*				'admin/content/views/content-detail___content-beheer-detail-pagina-titel'*/}
-				{/*			)*/}
-				{/*		)}*/}
-				{/*	</title>*/}
-				{/*	<meta*/}
-				{/*		name="description"*/}
-				{/*		content={get(contentPageInfo, 'seo_description') || description || ''}*/}
-				{/*	/>*/}
-				{/*</MetaTags>*/}
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
 					dataObject={contentPageInfo}

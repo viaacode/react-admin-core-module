@@ -1,23 +1,16 @@
 import { ButtonType, SelectOption } from '@viaa/avo2-components';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfig, AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { AvoOrHetArchief } from '~modules/shared/types';
 import { CommonUser, Permission, UserBulkAction, UserOverviewTableCol } from './user.types';
 
-export const ITEMS_PER_PAGE = 50;
-
-export const USER_PATH = {
-	USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}`,
-	USER_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id`,
-	USER_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.user}/:id/${ROUTE_PARTS.edit}`,
-};
+export const USERS_PER_PAGE = 50;
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
@@ -25,7 +18,7 @@ type UserBulkActionOption = SelectOption<UserBulkAction> & {
 };
 
 export const GET_USER_OVERVIEW_TABLE_COLS: (
-	user: CommonUser | undefined,
+	config: AdminConfig,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
 	businessCategoryOptions: CheckboxOption[],
@@ -33,7 +26,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
 ) => FilterableColumn<UserOverviewTableCol>[] = (
-	user: CommonUser | undefined,
+	config,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
 	businessCategoryOptions: CheckboxOption[],
@@ -41,9 +34,9 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
 ) => {
-	if (AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo) {
+	if (config.database.databaseApplicationType === AvoOrHetArchief.avo) {
 		return getAvoColumns(
-			user,
+			config.user,
 			userGroupOptions,
 			companyOptions,
 			businessCategoryOptions,

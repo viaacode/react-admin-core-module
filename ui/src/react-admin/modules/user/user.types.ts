@@ -2,6 +2,7 @@ import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-or
 import { FilterableTableState } from '~modules/shared/components/FilterTable/FilterTable';
 import { GetUsersQuery as GetUsersQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 import { GetUsersQuery as GetUsersQueryAvo } from '~generated/graphql-db-types-avo';
+import { UserTempAccess } from '@viaa/avo2-types/types/user';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',
@@ -98,12 +99,6 @@ export interface OrganizationSchema {
 	description?: string;
 	website?: string;
 	data?: OrganizationData;
-}
-
-export interface UserTempAccess {
-	from?: string | null;
-	until?: string | null;
-	status?: boolean | null;
 }
 
 export interface UserGroupInfo {

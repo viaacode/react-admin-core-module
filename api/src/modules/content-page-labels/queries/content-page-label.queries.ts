@@ -1,4 +1,4 @@
-import { DocumentNode } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { AvoOrHetArchief } from '../../shared/types';
 import {
 	DeleteContentPageLabelByIdDocument as DeleteContentPageLabelByIdDocumentAvo,
@@ -121,17 +121,19 @@ export type ContentPageLabelQueryTypes = {
 };
 
 type ContentPageLabelQueries = {
-	DeleteContentPageLabelByIdDocument: DocumentNode;
-	GetContentPageLabelByIdDocument: DocumentNode;
-	GetContentPageLabelsDocument: DocumentNode;
-	InsertContentPageLabelDocument: DocumentNode;
-	UpdateContentPageLabelDocument: DocumentNode;
-	GetContentPageLabelsByTypeAndIdsDocument: DocumentNode;
-	GetContentPageLabelsByTypeAndLabelsDocument: DocumentNode;
+	DeleteContentPageLabelByIdDocument: TypedDocumentNode;
+	GetContentPageLabelByIdDocument: TypedDocumentNode;
+	GetContentPageLabelsDocument: TypedDocumentNode;
+	InsertContentPageLabelDocument: TypedDocumentNode;
+	UpdateContentPageLabelDocument: TypedDocumentNode;
+	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode;
+	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode;
 };
 
-export const CONTENT_PAGE_LABEL_QUERIES: Record<AvoOrHetArchief,
-	ContentPageLabelQueries> = {
+export const CONTENT_PAGE_LABEL_QUERIES: Record<
+	AvoOrHetArchief,
+	ContentPageLabelQueries
+> = {
 	[AvoOrHetArchief.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
@@ -139,20 +141,20 @@ export const CONTENT_PAGE_LABEL_QUERIES: Record<AvoOrHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
 		GetContentPageLabelsByTypeAndIdsDocument:
-		GetContentPageLabelsByTypeAndIdsDocumentAvo,
+			GetContentPageLabelsByTypeAndIdsDocumentAvo,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-		GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
 	[AvoOrHetArchief.hetArchief]: {
 		DeleteContentPageLabelByIdDocument:
-		DeleteContentPageLabelByIdDocumentHetArchief,
+			DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentHetArchief,
 		GetContentPageLabelsByTypeAndIdsDocument:
-		GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
+			GetContentPageLabelsByTypeAndIdsDocumentHetArchief,
 		GetContentPageLabelsByTypeAndLabelsDocument:
-		GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
+			GetContentPageLabelsByTypeAndLabelsDocumentHetArchief,
 	},
 };

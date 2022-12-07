@@ -17,7 +17,7 @@ import { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { DEFAULT_PAGES_WIDTH, GET_CONTENT_WIDTH_OPTIONS } from '../../const/content-page.consts';
+import { DEFAULT_PAGES_WIDTH, GET_CONTENT_PAGE_WIDTH_OPTIONS } from '../../const/content-page.consts';
 import {
 	ContentEditActionType,
 	ContentEditFormErrors,
@@ -179,7 +179,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									)}
 								>
 									<FileUpload
-										ownerId={get(user, 'profile.id')}
+										ownerId={user.profileId}
 										urls={compact([contentPageInfo.thumbnailPath])}
 										assetType="CONTENT_PAGE_COVER"
 										allowMulti={false}
@@ -355,7 +355,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										onChange={(value) =>
 											changeContentPageProp('contentWidth', value)
 										}
-										options={GET_CONTENT_WIDTH_OPTIONS()}
+										options={GET_CONTENT_PAGE_WIDTH_OPTIONS()}
 										value={contentPageInfo.contentWidth}
 									/>
 								</FormGroup>

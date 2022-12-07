@@ -1,4 +1,4 @@
-import { DocumentNode } from 'graphql';
+import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import {
 	GetOrganisationDocument as GetOrganisationDocumentAvo,
 	GetOrganisationQuery as GetOrganisationQueryAvo,
@@ -36,8 +36,8 @@ export type OrganisationQueryTypes = {
 };
 
 type OrganisationQueries = {
-	GetOrganisationDocument: DocumentNode;
-	GetOrganisationsWithUsersDocument: DocumentNode;
+	GetOrganisationDocument: TypedDocumentNode;
+	GetOrganisationsWithUsersDocument: TypedDocumentNode;
 };
 
 export const ORGANISATION_QUERIES: Record<

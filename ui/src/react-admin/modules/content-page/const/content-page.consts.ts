@@ -17,7 +17,7 @@ export const CONTENT_PAGE_QUERY_KEYS = {
 	OVERVIEW: 'OVERVIEW',
 };
 
-export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
+export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
 	contentPageLabelOptions: CheckboxOption[]
@@ -143,22 +143,22 @@ export const GET_CONTENT_PAGE_OVERVIEW_COLUMNS: (
 	];
 };
 
-export const CONTENT_PATH = {
-	CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
-	CONTENT_PAGE_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
-	CONTENT_PAGE_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
-	CONTENT_PAGE_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,
-	PAGES: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PAGINA`,
-	NEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=NIEUWS_ITEM`,
-	FAQS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=FAQ_ITEM`,
-	SCREENCASTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=SCREENCAST`,
-	PROJECTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=PROJECT`,
-	OVERVIEWS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}?content_type=OVERZICHT`,
-};
+export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
+	OVERVIEW: `/${parts.admin}/${parts.content}`,
+	CREATE: `/${parts.admin}/${parts.content}/${parts.create}`,
+	DETAIL: `/${parts.admin}/${parts.content}/:id`,
+	EDIT: `/${parts.admin}/${parts.content}/:id/${parts.edit}`,
+	PAGES: `/${parts.admin}/${parts.content}?content_type=PAGINA`,
+	NEWS: `/${parts.admin}/${parts.content}?content_type=NIEUWS_ITEM`,
+	FAQS: `/${parts.admin}/${parts.content}?content_type=FAQ_ITEM`,
+	SCREENCASTS: `/${parts.admin}/${parts.content}?content_type=SCREENCAST`,
+	PROJECTS: `/${parts.admin}/${parts.content}?content_type=PROJECT`,
+	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`,
+});
 
-export const ITEMS_PER_PAGE = 10;
+export const PAGES_PER_PAGE = 10;
 
-export const GET_CONTENT_DETAIL_TABS: () => TabProps[] = () => [
+export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___inhoud'),
@@ -173,7 +173,7 @@ export const GET_CONTENT_DETAIL_TABS: () => TabProps[] = () => [
 	},
 ];
 
-export const GET_CONTENT_WIDTH_OPTIONS = () => [
+export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
 	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___kies-een-content-breedte'
@@ -201,10 +201,8 @@ export const GET_CONTENT_WIDTH_OPTIONS = () => [
 	},
 ];
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export const DEFAULT_PAGES_WIDTH: { [key in ContentWidth]: Avo.ContentPage.Type[] } = {
 	[ContentWidth.EXTRA_LARGE]: ['PROJECT'],
 	[ContentWidth.LARGE]: [],
 	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM'],
 };
-/* eslint-enable @typescript-eslint/no-unused-vars */

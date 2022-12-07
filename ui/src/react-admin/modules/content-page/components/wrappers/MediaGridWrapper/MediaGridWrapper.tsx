@@ -6,11 +6,19 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { get, isEmpty, isNil } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, {
+	FunctionComponent,
+	ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import {
 	MediaGridBlockComponentState,
 	MediaGridBlockState,
 } from '~modules/content-page/types/content-block.types';
+import { AdminConfigManager } from '~core/config';
 
 import { ResolvedItemOrCollection } from './MediaGridWrapper.types';
 
@@ -73,6 +81,11 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	const [lastSearchQuery, setLastSearchQuery] = useState<string | null>(null);
 	const [lastSearchQueryLimit, setLastSearchQueryLimit] = useState<number | null>(null);
 
+	const configUser = useMemo(
+		() => user || AdminConfigManager.getConfig().user,
+		[user]
+	);
+
 	const resolveMediaResults = useCallback(async () => {
 		try {
 			if (results && results.length) {
@@ -85,7 +98,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 				setResolvedResults(results);
 				return;
 			}
-			if (user) {
+			if (configUser) {
 				// If we are logged in and get no results, but we do get elements, then the block is loaded in preview mode,
 				// and we should resolve the results ourselves using a separate route on the server
 				const searchQueryLimitNumber =
@@ -144,7 +157,7 @@ const MediaGridWrapper: FunctionComponent<MediaGridWrapperProps> = ({
 	}, [
 		results,
 		elements,
-		user,
+		configUser,
 		searchQuery,
 		searchQueryLimit,
 		lastSearchQuery,

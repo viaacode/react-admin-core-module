@@ -14,6 +14,7 @@ import { PermissionsService } from './modules/permissions/permissions.service';
 import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
+import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 const proxyUrl = 'http://localhost:3300/admin'; // admin-core-api url
 
@@ -209,9 +210,10 @@ function setConfig() {
 			},
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined) => (
-					<Html content={i18n.t(key, params)} />
+					<Html content={i18n.t(key, params as any) as unknown as string} />
 				),
-				tText: (key: string, params: TOptions | string | undefined) => i18n.t(key, params),
+				tText: (key: string, params: TOptions | string | undefined) =>
+					i18n.t(key, params as any) as unknown as string,
 			},
 			educationOrganisationService: {
 				fetchEducationOrganisationName: () => Promise.resolve(null),
@@ -243,6 +245,7 @@ function setConfig() {
 			},
 		},
 		user: mockUser,
+		route_parts: ROUTE_PARTS,
 	});
 }
 

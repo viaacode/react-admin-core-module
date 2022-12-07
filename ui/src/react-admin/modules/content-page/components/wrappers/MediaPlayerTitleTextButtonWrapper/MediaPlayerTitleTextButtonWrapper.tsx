@@ -40,29 +40,35 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	align: AlignOption;
 }
 
-export const MediaPlayerTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrapperProps> = ({
-	mediaItem,
-	mediaSrc,
-	mediaPoster,
-	mediaTitle,
-	mediaExternalId,
-	mediaIssued,
-	mediaOrganisation,
-	mediaDuration,
-	headingTitle,
-	headingType,
-	content,
-	buttonIcon,
-	buttonLabel,
-	buttonType,
-	buttonAltTitle,
-	buttonAction,
-	align,
-	mediaAutoplay,
-}) => {
+export const MediaPlayerTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrapperProps> = (
+	props
+) => {
+	const {
+		mediaItem,
+		mediaSrc,
+		mediaPoster,
+		mediaTitle,
+		mediaExternalId,
+		mediaIssued,
+		mediaOrganisation,
+		mediaDuration,
+		headingTitle,
+		headingType,
+		content,
+		buttonIcon,
+		buttonLabel,
+		buttonType,
+		buttonAltTitle,
+		buttonAction,
+		align,
+		mediaAutoplay,
+	} = props;
+
 	const shouldTitleLink =
-		PermissionService.hasPerm(AdminConfigManager.getConfig().user, Permission.VIEW_ANY_PUBLISHED_ITEMS) &&
-		!!mediaItem;
+		PermissionService.hasPerm(
+			AdminConfigManager.getConfig().user,
+			Permission.VIEW_ANY_PUBLISHED_ITEMS
+		) && !!mediaItem;
 
 	return (
 		<Grid className="c-item-video-description">

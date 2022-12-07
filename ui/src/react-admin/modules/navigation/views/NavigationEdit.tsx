@@ -211,8 +211,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (key === 'content') {
 			setNavigationItem({
 				...navigationItem,
-				content_type: get(value, 'type'),
-				content_path: get(value, 'value'),
+				content_type: get(value, 'type', null),
+				content_path: get(value, 'value', null),
 				link_target: get(value, 'target', '_self'),
 			});
 		} else {
