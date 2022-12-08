@@ -10,7 +10,7 @@
     "prepare----disabled-since-it-is-throwing-errors": "husky install",
     "start": "cross-env PORT=3400 dotenv -e .env/.env.local react-app-rewired start",
     "prebuild": "rimraf dist",
-    "build": "exitzero mv src/index-export.ts src/index.ts && rollup -c && move-cli src/index.ts src/index-export.ts",
+    "build": "exitzero mv src/index-export.ts src/index.ts && rollup -c && mv src/index.ts src/index-export.ts",
     "build-and-copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && npm run build && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "build-and-copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache && npm run build && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "build:analyze": "npm run build -- --config-analyze",
