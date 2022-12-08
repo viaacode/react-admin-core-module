@@ -32,7 +32,7 @@ import {
 	RepeatedContentBlockComponentState,
 } from '../../types/content-block.types';
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
-import { REPEATABLE_CONTENT_BLOCKS } from '../ContentBlockPreview/ContentBlockPreview.const';
+import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBlockRenderer.const';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -209,7 +209,8 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		const label = get(contentBlock.components, 'name', '').toLowerCase();
 		const underLimit =
 			isNil(get(components, 'limits.max')) ||
-			(isArray(components.state) && components.state.length < get(components, 'limits.max', 1));
+			(isArray(components.state) &&
+				components.state.length < get(components, 'limits.max', 1));
 
 		return (
 			<Accordion
