@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
+import { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
+import { ROUTE_PARTS } from '~modules/shared';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 import ContentPageEditPage from './ContentPageEditPage';
 import ContentPageDetailPage from './ContentPageDetailPage';
-import { CONTENT_PAGE_PATH, ROUTE_PARTS } from '../../react-admin';
 
 export const renderAdminContentPageRoutes = (parts?: typeof ROUTE_PARTS): ReactNode[] => {
 	return [

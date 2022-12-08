@@ -10,10 +10,10 @@ import { AvoOrHetArchief } from '~modules/shared/types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
-import { ContentBlockType } from '~modules/content-page';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
 const proxyUrl = 'http://localhost:3300';
 

@@ -1,12 +1,12 @@
 import { CheckboxProps, ContentPickerType, MultiRangeProps } from '@viaa/avo2-components';
-
-import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
-import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-	GET_FULL_HEADING_TYPE_OPTIONS,
-} from '../../const/content-block.common.consts';
+} from '~modules/content-page/const/get-color-options';
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+
+import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
+import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

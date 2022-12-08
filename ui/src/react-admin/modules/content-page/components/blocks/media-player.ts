@@ -1,9 +1,9 @@
 import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
+import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { PHOTO_TYPES } from '../../../shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '../../../shared/helpers/validation';
-import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '../../const/content-block.common.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

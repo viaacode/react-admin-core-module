@@ -1,3 +1,4 @@
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	ContentBlockConfig,
@@ -10,7 +11,6 @@ import {
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_INTRO_COMPONENTS_STATE = (): IntroBlockComponentState => ({
 	title: '',

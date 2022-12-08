@@ -1,9 +1,7 @@
 import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-components';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
-import React, { ReactElement, ReactNode } from 'react';
 
-import SmartLink from '../components/SmartLink/SmartLink';
 import { BUNDLE_PATH } from '../consts/bundle.const';
 import { APP_PATH } from '../consts/routes.consts';
 
@@ -123,18 +121,6 @@ export function navigateToAbsoluteOrRelativeUrl(
 			break;
 	}
 }
-
-export const generateSmartLink = (
-	action: ButtonAction | null | undefined,
-	children: ReactNode,
-	title?: string
-): ReactElement<any, any> | null => {
-	return (
-		<SmartLink action={action} title={title}>
-			{children}
-		</SmartLink>
-	);
-};
 
 export const navigateToContentType = (action: ButtonAction, history: History) => {
 	if (action) {

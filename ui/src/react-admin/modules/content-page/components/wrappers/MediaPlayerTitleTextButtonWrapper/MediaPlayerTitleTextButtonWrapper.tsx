@@ -10,13 +10,13 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import React, { FC } from 'react';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~modules/shared/services/permission-service';
 
 import { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 import MediaPlayerWrapper from '../MediaPlayerWrapper/MediaPlayerWrapper';
 import RichTextWrapper from '../RichTextWrapper/RichTextWrapper';
 
-import { generateSmartLink } from '~modules/shared/helpers/link';
 import { AdminConfigManager } from '~core/config';
 
 interface MediaPlayerTitleTextButtonWrapperProps {

@@ -4,13 +4,13 @@ import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
+import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
 import {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 } from '~modules/content-page-labels/content-page-label.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { USERS_PER_PAGE } from '~modules/user/user.consts';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
@@ -22,7 +22,7 @@ export class ContentPageLabelService {
 		sortColumn: ContentPageLabelOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
 		where: any,
-		itemsPerPage: number = USERS_PER_PAGE
+		itemsPerPage: number = LABELS_PER_PAGE
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return fetchWithLogoutJson(

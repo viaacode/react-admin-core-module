@@ -1,6 +1,7 @@
 import { Button, Flex } from '@viaa/avo2-components';
-import { ContentPageOverview } from '~modules/content-page';
 import { FC } from 'react';
+
+import ContentPageOverview from '~modules/content-page/views/ContentPageOverview';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 export const ContentPageOverviewPage: FC = () => {

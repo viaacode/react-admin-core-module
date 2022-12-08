@@ -1,8 +1,8 @@
 import { Button, Flex, FlexItem, FormGroup, Spacer } from '@viaa/avo2-components';
 import { get } from 'lodash-es';
 import React, { Fragment, FunctionComponent } from 'react';
+import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
-import { GET_EDITOR_TYPES_MAP } from '../../const/content-block.consts';
 import { generateFieldAttributes } from '../../helpers/field-attributes';
 import {
 	ContentBlockComponentState,

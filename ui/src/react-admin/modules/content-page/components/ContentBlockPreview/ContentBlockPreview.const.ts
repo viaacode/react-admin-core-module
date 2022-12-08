@@ -9,8 +9,8 @@ import {
 	BlockSpotlight,
 } from '@viaa/avo2-components';
 import { FunctionComponent } from 'react';
+import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
-import { ContentBlockType } from "~modules/content-page";
 import {
 	BlockImageGridWrapper,
 	BlockLogoGridWrapper,

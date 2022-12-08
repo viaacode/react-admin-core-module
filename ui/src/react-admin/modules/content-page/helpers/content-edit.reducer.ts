@@ -12,10 +12,10 @@ import {
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
-import { ContentEditActionType, ContentPageInfo, ContentWidth } from '~modules/content-page';
 
 import { ValueOf } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
+import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;

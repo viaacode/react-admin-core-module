@@ -2,6 +2,7 @@ import { Body, Controller, Get, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
@@ -10,7 +11,7 @@ import { UserGroupWithPermissions } from '../user-groups.types';
 
 @UseGuards(LoggedInGuard)
 @ApiTags('UserGroups')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/user-groups')
+@Controller(addPrefix(process, 'user-groups'))
 @RequireAllPermissions(PermissionName.EDIT_PERMISSION_GROUPS)
 export class UserGroupsController {
 	constructor(private userGroupsService: UserGroupsService) {}
