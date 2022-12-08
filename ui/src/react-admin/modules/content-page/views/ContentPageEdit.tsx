@@ -6,7 +6,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
-import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block.consts';
+import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
 import {
 	CONTENT_PAGE_PATH,
 	GET_CONTENT_PAGE_DETAIL_TABS,

@@ -2,10 +2,10 @@ import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/content-block.common.consts';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
 import { Color, ContentBlockConfig } from '../../types/content-block.types';
-import { ContentPageInfo, ContentWidth } from '~modules/content-page';
 
 import {
 	COMPONENT_PREVIEW_MAP,
@@ -16,10 +16,9 @@ import {
 	REPEATABLE_CONTENT_BLOCKS,
 } from './ContentBlockPreview.const';
 
-import { generateSmartLink } from '~modules/shared/helpers/link';
-
 import './ContentBlockPreview.scss';
 import { AdminConfigManager } from '~core/config';
+import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;

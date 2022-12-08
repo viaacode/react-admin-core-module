@@ -7,9 +7,10 @@ import { TranslationsService } from '../services/translations.service';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { UpdateResponse } from '../../shared/types/types';
 import { Translations } from '../types';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('Translations')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/translations')
+@Controller(addPrefix(process, 'translations'))
 export class TranslationsController {
 	constructor(private translationsService: TranslationsService) {}
 

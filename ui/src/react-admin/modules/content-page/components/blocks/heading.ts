@@ -1,4 +1,4 @@
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '../../const/content-block.common.consts';
+import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,

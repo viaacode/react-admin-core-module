@@ -5,10 +5,10 @@ import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
+import { buildLink } from '~modules/shared/helpers/link';
 import { BUNDLE_PATH } from '../../consts/bundle.const';
 import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';
-import { buildLink } from '../../helpers/link';
 import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
 
 export interface SmartLinkProps {
@@ -45,7 +45,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_self"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
 							title={title}
-							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							onClick={() =>
+								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+							}
 						>
 							{children}
 						</a>
@@ -56,7 +58,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					<Link
 						to={fullUrl}
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+						onClick={() =>
+							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+						}
 						title={title}
 					>
 						{children}
@@ -74,7 +78,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_blank"
 							rel="noopener noreferrer"
 							className={clsx({ 'a-link__no-styles': removeStyles })}
-							onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+							onClick={() =>
+								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+							}
 							title={title}
 						>
 							{children}
@@ -88,7 +94,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx({ 'a-link__no-styles': removeStyles })}
-						onClick={() => AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)}
+						onClick={() =>
+							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+						}
 						title={title}
 					>
 						{children}
@@ -180,3 +188,15 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 };
 
 export default SmartLink;
+
+export const generateSmartLink = (
+	action: ButtonAction | null | undefined,
+	children: ReactNode,
+	title?: string
+): ReactElement<any, any> | null => {
+	return (
+		<SmartLink action={action} title={title}>
+			{children}
+		</SmartLink>
+	);
+};

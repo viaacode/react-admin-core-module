@@ -15,13 +15,14 @@ import { AdminNavigationsService } from '../services/admin-navigations.service';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { DeleteResponse } from '../../shared/types/types';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { NavigationItem } from '../types';
 
 // TODO these routes are currently not used by the admin-core
 // Currently the admin core does all navigation manipulations through the data route
 // In the long term we would like to switch this to use these routes
 @ApiTags('Admin Navigations')
-@Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/navigations')
+@Controller(addPrefix(process, 'navigations'))
 @RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 export class AdminNavigationsController {
 	constructor(private adminNavigationsService: AdminNavigationsService) {}

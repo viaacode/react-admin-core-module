@@ -1,9 +1,9 @@
 import { get, isString, some } from 'lodash-es';
 import { PermissionName } from '@viaa/avo2-types';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 
 import { CollectionService } from '../../collection/collection.service';
 import { ContentPageService } from '../../content-page/services/content-page.service';
-import { ContentPageInfo } from '~modules/content-page';
 import { getProfileId } from '../helpers/get-profile-id';
 
 import { CommonUser } from '~modules/user/user.types';

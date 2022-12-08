@@ -1,7 +1,8 @@
-import { ContentPage } from '~modules/content-page';
 import { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
+
 import { AdminConfigManager } from '~core/config';
+import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
 
 const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = ({ match }) => {
 	return (

@@ -1,3 +1,5 @@
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import {
 	ContentBlockConfig,
@@ -10,10 +12,6 @@ import {
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import {
-	GET_ALIGN_OPTIONS,
-	GET_WIDTH_OPTIONS,
-} from '~modules/content-page/const/content-block.common.consts';
 
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',

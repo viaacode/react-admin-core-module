@@ -269,7 +269,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					),
 					position: navigationItems.length,
 				});
-				navigate(history, ADMIN_PATH().NAVIGATION_DETAIL, {
+				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -293,7 +293,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						updated_at: new Date().toISOString(),
 					} as NavigationItem,
 				]);
-				navigate(history, ADMIN_PATH().NAVIGATION_DETAIL, {
+				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 				AdminConfigManager.getConfig().services.toastService.showToast({

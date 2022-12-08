@@ -3,7 +3,6 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ContentPageService } from '../../../services/content-page.service';
-import { ContentPageInfo } from '~modules/content-page';
 
 import {
 	LoadingErrorLoadedComponent,
@@ -11,6 +10,7 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;
