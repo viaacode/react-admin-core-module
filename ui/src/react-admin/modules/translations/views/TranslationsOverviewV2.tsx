@@ -12,7 +12,7 @@ import React, {
 
 import { TranslationsOverviewV2Props, TranslationV2 } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { AvoOrHetArchief, OrderDirection } from '~modules/shared/types';
+import { DatabaseType, OrderDirection } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
@@ -64,7 +64,7 @@ export const TranslationsOverviewV2: FunctionComponent<TranslationsOverviewV2Pro
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
 	const isAvo =
-		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
+		AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo;
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(

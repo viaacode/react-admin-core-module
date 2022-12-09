@@ -21,7 +21,7 @@ import {
 } from '../../types/content-block.types';
 
 import { AdminConfigManager } from '~core/config';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -51,7 +51,7 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
 		),
-		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 			? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 			: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
@@ -91,12 +91,12 @@ export const FOREGROUND_COLOR_FIELD = (
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
 		options:
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 				? GET_FOREGROUND_COLOR_OPTIONS_AVO()
 				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
 			defaultValue ||
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 				? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0]
 				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
@@ -110,12 +110,12 @@ export const BACKGROUND_COLOR_FIELD = (
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
 		options:
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 				? GET_BACKGROUND_COLOR_OPTIONS_AVO()
 				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
 			defaultValue ||
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]
 				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},

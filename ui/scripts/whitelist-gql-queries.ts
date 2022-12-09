@@ -55,7 +55,7 @@ function extractQueriesFromCode(globPattern: string, outputFileName: string) {
 
 			await fs.writeFile(outputFile, JSON.stringify(queries, null, 2));
 
-			console.log(
+			console.info(
 				`Found ${
 					Object.keys(queries).length
 				} queries, outputted to: ${outputFile}. Copy this file to /scripts folder in the avo2 proxy`

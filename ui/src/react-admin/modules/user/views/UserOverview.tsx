@@ -49,7 +49,7 @@ import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { useBusinessCategories } from '~modules/shared/hooks/useBusinessCategory';
 import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
@@ -140,7 +140,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
-			if (app === AvoOrHetArchief.hetArchief) {
+			if (app === DatabaseType.hetArchief) {
 				return generateWhereObjectArchief(
 					filters,
 					onlySelectedProfiles,
@@ -594,7 +594,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			case 'firstName':
 				// no user detail for archief yet
 
-				return app === AvoOrHetArchief.avo ? (
+				return app === DatabaseType.avo ? (
 					<Link
 						to={buildLink(
 							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,

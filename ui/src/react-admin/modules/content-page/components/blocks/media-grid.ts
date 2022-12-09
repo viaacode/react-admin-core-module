@@ -24,7 +24,7 @@ import {
 } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 
@@ -240,7 +240,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'
 				),
 				AdminConfigManager.getConfig().database.databaseApplicationType ===
-					AvoOrHetArchief.avo
+					DatabaseType.avo
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),

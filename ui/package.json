@@ -96,7 +96,7 @@
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "5.11.0",
     "@viaa/avo2-components": "3.1.1",
-    "@viaa/avo2-types": "2.46.2",
+    "@viaa/avo2-types": "2.46.3",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
     "cross-env": "^7.0.3",

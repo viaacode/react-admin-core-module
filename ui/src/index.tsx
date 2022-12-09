@@ -6,7 +6,7 @@ import { TOptions } from 'i18next';
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
@@ -229,7 +229,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: AvoOrHetArchief.avo,
+			databaseApplicationType: DatabaseType.avo,
 			proxyUrl,
 		},
 		flowplayer: {

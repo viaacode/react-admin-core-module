@@ -15,7 +15,6 @@ import { Request } from 'express';
 import {
 	compact,
 	fromPairs,
-	get,
 	has,
 	isEmpty,
 	keys,
@@ -337,7 +336,10 @@ export class ContentPagesService {
 			path,
 		});
 		const contentPage: GqlContentPage | undefined =
-			get(response, 'cms_content[0]') || get(response, 'app_content_page[0]');
+			(response as ContentPageQueryTypes['GetContentPageByPathQueryHetArchief'])
+				?.app_content_page?.[0] ||
+			(response as ContentPageQueryTypes['GetContentPageByPathQueryAvo'])
+				?.app_content?.[0];
 
 		return this.adaptContentPage(contentPage);
 	}
@@ -364,13 +366,13 @@ export class ContentPagesService {
 			{ id },
 		);
 
-		const itemOrCollection = get(response, 'obj[0]', null);
-		if (itemOrCollection) {
-			itemOrCollection.count =
-				get(response, 'data.view_counts_aggregate.aggregate.sum.count') || 0;
-		}
+		const itemOrCollection = response?.obj?.[0] || null;
 
-		return itemOrCollection;
+		return {
+			...itemOrCollection,
+			count:
+				itemOrCollection?.view_counts_aggregate?.aggregate?.sum?.count || 0,
+		};
 	}
 
 	public async fetchItemByExternalId(
@@ -445,45 +447,37 @@ export class ContentPagesService {
 			(contentBlock) => contentBlock.type === 'MEDIA_GRID',
 		);
 		if (mediaGridBlocks.length) {
-			await promiseUtils.mapLimit(
-				mediaGridBlocks,
-				2,
-				async (mediaGridBlock: any) => {
-					try {
-						const searchQuery = get(
-							mediaGridBlock,
-							'variables.blockState.searchQuery.value',
-						);
-						const searchQueryLimit = get(
-							mediaGridBlock,
-							'variables.blockState.searchQueryLimit',
-						);
-						const mediaItems = get(
-							mediaGridBlock,
-							'variables.componentState',
-							[],
-						).filter((item: any) => item.mediaItem);
+			const mapperFunc = async (mediaGridBlock: any) => {
+				try {
+					const searchQuery =
+						mediaGridBlock?.variables?.blockState?.searchQuery?.value;
+					const searchQueryLimit =
+						mediaGridBlock?.variables?.blockState?.searchQueryLimit;
+					const mediaItems = (
+						mediaGridBlock?.variables?.componentState || []
+					).filter((item: any) => item.mediaItem);
 
-						const results: any[] = await this.resolveMediaTileItems(
-							searchQuery,
-							searchQueryLimit,
-							mediaItems,
-							request,
-						);
+					const results: any[] = await this.resolveMediaTileItems(
+						searchQuery,
+						searchQueryLimit,
+						mediaItems,
+						request,
+					);
 
-						set(mediaGridBlock, 'variables.blockState.results', results);
-					} catch (err) {
-						this.logger.error({
-							message: 'Failed to resolve media grid content',
-							innerException: err,
-							additionalInfo: {
-								mediaGridBlocks,
-								mediaGridBlock,
-							},
-						});
-					}
-				},
-			);
+					set(mediaGridBlock, 'variables.blockState.results', results);
+				} catch (err) {
+					this.logger.error({
+						message: 'Failed to resolve media grid content',
+						innerException: err,
+						additionalInfo: {
+							mediaGridBlocks,
+							mediaGridBlock,
+						},
+					});
+				}
+			};
+
+			await promiseUtils.mapLimit(mediaGridBlocks, 2, mapperFunc.bind(this));
 		}
 	}
 
@@ -502,10 +496,8 @@ export class ContentPagesService {
 					try {
 						const blockInfo =
 							MEDIA_PLAYER_BLOCKS[mediaPlayerBlock.content_block_type];
-						const externalId = get(
-							mediaPlayerBlock,
-							blockInfo.getItemExternalIdPath,
-						);
+						const externalId =
+							mediaPlayerBlock?.blockInfo?.getItemExternalIdPath;
 						if (externalId) {
 							const itemInfo = await this.fetchItemByExternalId(externalId);
 							let videoSrc: string | undefined;
@@ -517,10 +509,7 @@ export class ContentPagesService {
 							}
 
 							// Copy all required properties to be able to render the video player without having to use the data route to fetch item information
-							if (
-								videoSrc &&
-								!get(mediaPlayerBlock, blockInfo.setVideoSrcPath)
-							) {
+							if (videoSrc && !mediaPlayerBlock?.blockInfo?.setVideoSrcPath) {
 								set(mediaPlayerBlock, blockInfo.setVideoSrcPath, videoSrc);
 							}
 							[
@@ -535,7 +524,7 @@ export class ContentPagesService {
 								if (
 									itemInfo &&
 									(itemInfo as any)[props[0]] &&
-									!get(mediaPlayerBlock, (blockInfo as any)[props[1]])
+									!mediaPlayerBlock?.blockInfo?.[props[1]]
 								) {
 									if (
 										props[0] === 'thumbnail_path' &&
@@ -572,6 +561,31 @@ export class ContentPagesService {
 		}
 	}
 
+	private async mapMediaItem(itemInfo, request) {
+		const result: MediaItemResponse | null = await this.fetchCollectionOrItem(
+			itemInfo.mediaItem.type === MediaItemType.BUNDLE
+				? MediaItemType.COLLECTION
+				: itemInfo.mediaItem.type,
+			itemInfo.mediaItem.value,
+		);
+		if (result) {
+			// Replace audio thumbnail
+			if ((result as any)?.type?.label === 'audio') {
+				result.thumbnailUrl = DEFAULT_AUDIO_STILL;
+			}
+
+			// Set video play url
+			if ((result as any).browse_path) {
+				(result as any).src = await this.getPlayableUrlByBrowsePathSilent(
+					(result as any).browse_path,
+					request,
+				);
+				delete (result as any).browse_path; // Do not expose browse_path to the world
+			}
+		}
+		return result;
+	}
+
 	public async resolveMediaTileItems(
 		searchQuery: string | undefined,
 		searchQueryLimit: string | undefined,
@@ -589,31 +603,7 @@ export class ContentPagesService {
 			manualResults = await promiseUtils.mapLimit(
 				nonEmptyMediaItems,
 				10,
-				async (itemInfo) => {
-					const result: MediaItemResponse | null =
-						await this.fetchCollectionOrItem(
-							itemInfo.mediaItem.type === MediaItemType.BUNDLE
-								? MediaItemType.COLLECTION
-								: itemInfo.mediaItem.type,
-							itemInfo.mediaItem.value,
-						);
-					if (result) {
-						// Replace audio thumbnail
-						if (get(result, 'type.label') === 'audio') {
-							result.thumbnailUrl = DEFAULT_AUDIO_STILL;
-						}
-
-						// Set video play url
-						if ((result as any).browse_path) {
-							(result as any).src = await this.getPlayableUrlByBrowsePathSilent(
-								(result as any).browse_path,
-								request,
-							);
-							delete (result as any).browse_path; // Do not expose browse_path to the world
-						}
-					}
-					return result;
-				},
+				(item) => this.mapMediaItem(item, request),
 			);
 		}
 
@@ -631,12 +621,14 @@ export class ContentPagesService {
 			if (isNaN(searchQueryLimitNum)) {
 				searchQueryLimitNum = 8;
 			}
-			const searchResponse = await this.fetchSearchQueryAvo(
-				searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
-				parsedSearchQuery.filters || {},
-				parsedSearchQuery.orderProperty || 'relevance',
-				parsedSearchQuery.orderDirection || 'desc',
-			);
+			const searchResponse = await this.fetchSearchQueryAvo({
+				from: 0,
+				size: searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
+				filters: parsedSearchQuery.filters || {},
+				orderProperty: parsedSearchQuery.orderProperty || 'relevance',
+				orderDirection: parsedSearchQuery.orderDirection || 'desc',
+				index: 'all',
+			});
 			searchResults = await promiseUtils.mapLimit(
 				searchResponse.results || [],
 				8,

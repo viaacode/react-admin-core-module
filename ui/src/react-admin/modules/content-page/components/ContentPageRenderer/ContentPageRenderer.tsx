@@ -18,7 +18,7 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 
 type ContentPageDetailProps =
@@ -26,11 +26,11 @@ type ContentPageDetailProps =
 			contentPageInfo: Partial<ContentPageInfo>;
 			activeBlockPosition?: number | null;
 			onBlockClicked?: BlockClickHandler;
-			userGroupId: number | string | undefined;
+			onLoaded?: (contentPageInfo: ContentPageInfo) => void;
 	  }
 	| {
 			path: string;
-			userGroupId: number | string | undefined;
+			onLoaded?: (contentPageInfo: ContentPageInfo) => void;
 	  };
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
@@ -91,7 +91,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		// images can have a setting to go full width
 		// so we need to set the block prop: fullWidth to true if we find an image block with size setting: pageWidth
 		contentBlockBlockConfigs = contentBlockBlockConfigs.map((contentBlockConfig) => {
-			const width = (contentBlockConfig.components.state as BlockImageProps).width;
+			const width = (contentBlockConfig.components.state as BlockImageProps)?.width;
 			if (
 				contentBlockConfig.type === ContentBlockType.Image &&
 				width &&
@@ -106,7 +106,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		// Add page title as header block for faq items. Only for Avo
 		if (
 			contentPageInfo.contentType === 'FAQ_ITEM' &&
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 		) {
 			contentBlockBlockConfigs = [
 				{
@@ -139,9 +139,9 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (props.userGroupId) {
+		if (AdminConfigManager.getConfig()?.user?.userGroup?.id) {
 			currentUserGroupIds = [
-				String(props.userGroupId),
+				String(AdminConfigManager.getConfig()?.user?.userGroup?.id),
 				SpecialPermissionGroups.loggedInUsers,
 			];
 		} else {

@@ -3,7 +3,7 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
@@ -94,7 +94,7 @@ export class UserService {
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			return;
 		}
@@ -128,7 +128,7 @@ export class UserService {
 	static async fetchDistinctBusinessCategories(): Promise<string[]> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			return [];
 		}
@@ -159,7 +159,7 @@ export class UserService {
 	): Promise<void> {
 		let url: string | undefined;
 		const isAvo =
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo;
 
 		try {
 			url = `${this.getBaseUrl()}/user/bulk-delete`;
@@ -186,7 +186,7 @@ export class UserService {
 	static async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
@@ -221,7 +221,7 @@ export class UserService {
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
@@ -250,7 +250,7 @@ export class UserService {
 	): Promise<void> {
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			console.info("removing subjects from profiles isn't supported for hetarchief");
 			return;

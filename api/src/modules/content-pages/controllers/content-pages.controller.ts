@@ -187,7 +187,7 @@ export class ContentPagesController {
 	})
 	@UseGuards(LoggedInGuard)
 	async resolveMediaGridBlocks(
-		body: ResolveMediaGridBlocksDto,
+		@Body() body: ResolveMediaGridBlocksDto,
 		@SessionUser() user: SessionUserEntity,
 		@Req() request,
 	): Promise<any[]> {
@@ -196,6 +196,7 @@ export class ContentPagesController {
 				'You do not have the required permission for this route',
 			);
 		}
+		console.log('sbody for media endpoint: ', body);
 		return await this.contentPagesService.resolveMediaTileItems(
 			body.searchQuery,
 			body.searchQueryLimit,

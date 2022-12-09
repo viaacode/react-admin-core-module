@@ -55,7 +55,7 @@ import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-chec
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 
 import './ContentPageOverview.scss';
 import {
@@ -147,7 +147,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		const filtersFormatted: any = cloneDeep(filters);
 		if (
 			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
+			DatabaseType.hetArchief
 		) {
 			userGroupPath = 'owner_profile.group_id';
 		} else {
@@ -193,7 +193,7 @@ const ContentPageOverview: FunctionComponent = () => {
 
 	const ownerFilter = (queryWildcard: string): any[] => {
 		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 		) {
 			return [
 				{

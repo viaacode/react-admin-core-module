@@ -5,7 +5,7 @@ import { KeyValueEditor } from '@viaa/avo2-components';
 
 import { Translation } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
@@ -18,7 +18,7 @@ const TranslationsOverview = forwardRef<TranslationsOverviewRef | undefined>((_p
 	const [initialTranslations, setInitialTranslations] = useState<Translation[]>([]);
 	const [translations, setTranslations] = useState<Translation[]>([]);
 	const keyPrefix =
-		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+		AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
 			? 'translations-'
 			: 'TRANSLATIONS_';
 

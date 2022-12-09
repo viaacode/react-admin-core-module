@@ -164,11 +164,8 @@ export type ResolvedItemOrCollection = Partial<
 };
 
 export type FetchSearchQueryFunctionAvo = (
-	limit: number,
-	filters: Partial<Avo.Search.Filters>,
-	orderProperty: Avo.Search.OrderProperty,
-	orderDirection: Avo.Search.OrderDirection,
-) => Promise<Avo.Search.Search | null>;
+	searchRequest: Avo.Search.Request,
+) => Promise<Avo.Search.Search>;
 
 export enum MediaItemType {
 	ITEM = 'ITEM',

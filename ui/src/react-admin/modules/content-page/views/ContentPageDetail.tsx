@@ -421,7 +421,6 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				return (
 					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
-						userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
 					/>
 				);
 			case 'metadata':

@@ -9,7 +9,6 @@ export interface BlockUspGridWrapperProps {
 }
 
 const BlockUspGridWrapper: FunctionComponent<BlockUspGridWrapperProps> = ({ ...rest }) => {
-	console.log(rest);
 	return (
 		<div style={{ width: 'calc(100% + 124px)', marginLeft: '-62px' }}>
 			<BlockImageGrid
