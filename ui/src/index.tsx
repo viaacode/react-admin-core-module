@@ -201,6 +201,9 @@ function setConfig() {
 				// },
 			],
 		},
+		content_blocks: {
+			[ContentBlockType.Search]: () => <p>Search block mock</p>
+		},
 		services: {
 			assetService: AssetsService,
 			toastService: {

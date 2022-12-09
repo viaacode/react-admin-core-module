@@ -8,7 +8,8 @@ import {
 	BlockQuote,
 	BlockSpotlight,
 } from '@viaa/avo2-components';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
+import { AdminConfigManager } from '~core/config';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
 import {
@@ -27,35 +28,37 @@ import {
 import ButtonsWrapper from '../wrappers/ButtonsWrapper/ButtonsWrapper';
 import RichTextWrapper from '../wrappers/RichTextWrapper/RichTextWrapper';
 
-export const COMPONENT_PREVIEW_MAP: Record<
-	ContentBlockType,
-	FunctionComponent<any>
-> = Object.freeze({
-	[ContentBlockType.AnchorLinks]: ButtonsWrapper,
-	[ContentBlockType.Buttons]: ButtonsWrapper,
-	[ContentBlockType.CTAs]: CtaWrapper,
-	[ContentBlockType.Heading]: BlockHeading,
-	[ContentBlockType.IFrame]: BlockIFrame,
-	[ContentBlockType.ImageGrid]: BlockImageGridWrapper,
-	[ContentBlockType.Image]: BlockImage,
-	[ContentBlockType.Intro]: BlockIntro,
-	[ContentBlockType.MediaGrid]: MediaGridWrapper,
-	[ContentBlockType.Klaar]: BlockKlaar,
-	[ContentBlockType.MediaPlayerTitleTextButton]: MediaPlayerTitleTextButtonWrapper,
-	[ContentBlockType.MediaPlayer]: MediaPlayerWrapper,
-	[ContentBlockType.PageOverview]: PageOverviewWrapper,
-	[ContentBlockType.ProjectsSpotlight]: ProjectSpotlightWrapper,
-	[ContentBlockType.Quote]: BlockQuote,
-	[ContentBlockType.RichTextTwoColumns]: RichTextWrapper,
-	[ContentBlockType.RichText]: RichTextWrapper,
-	[ContentBlockType.Spotlight]: BlockSpotlight,
-	[ContentBlockType.Hero]: HeroWrapper,
-	[ContentBlockType.Search]: () => null, // TODO pass search block from AVO client, since it is too specific for avo to be in the admin core
-	[ContentBlockType.ContentPageMeta]: ContentPageMeta,
-	[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
-	[ContentBlockType.UspGrid]: BlockUspGridWrapper,
-	[ContentBlockType.Eventbrite]: BlockEventbrite,
-});
+export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
+	console.log('admin-core config content_blocks: ', AdminConfigManager.getConfig().content_blocks);
+	return {
+		[ContentBlockType.AnchorLinks]: ButtonsWrapper,
+		[ContentBlockType.Buttons]: ButtonsWrapper,
+		[ContentBlockType.CTAs]: CtaWrapper,
+		[ContentBlockType.Heading]: BlockHeading,
+		[ContentBlockType.IFrame]: BlockIFrame,
+		[ContentBlockType.ImageGrid]: BlockImageGridWrapper,
+		[ContentBlockType.Image]: BlockImage,
+		[ContentBlockType.Intro]: BlockIntro,
+		[ContentBlockType.MediaGrid]: MediaGridWrapper,
+		[ContentBlockType.Klaar]: BlockKlaar,
+		[ContentBlockType.MediaPlayerTitleTextButton]: MediaPlayerTitleTextButtonWrapper,
+		[ContentBlockType.MediaPlayer]: MediaPlayerWrapper,
+		[ContentBlockType.PageOverview]: PageOverviewWrapper,
+		[ContentBlockType.ProjectsSpotlight]: ProjectSpotlightWrapper,
+		[ContentBlockType.Quote]: BlockQuote,
+		[ContentBlockType.RichTextTwoColumns]: RichTextWrapper,
+		[ContentBlockType.RichText]: RichTextWrapper,
+		[ContentBlockType.Spotlight]: BlockSpotlight,
+		[ContentBlockType.Hero]: HeroWrapper,
+		[ContentBlockType.Search]:
+			AdminConfigManager.getConfig().content_blocks[ContentBlockType.Search] ||
+			(() => <p>Search component was not found on admin config</p>),
+		[ContentBlockType.ContentPageMeta]: ContentPageMeta,
+		[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
+		[ContentBlockType.UspGrid]: BlockUspGridWrapper,
+		[ContentBlockType.Eventbrite]: BlockEventbrite,
+	}[type];
+}
 
 export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.AnchorLinks,

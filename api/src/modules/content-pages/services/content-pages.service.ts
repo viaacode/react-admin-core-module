@@ -97,6 +97,10 @@ export class ContentPagesService {
 		this.fetchSearchQueryAvo = fetchSearchQuery;
 	}
 
+	public getSearchQueryFunction() {
+		return this.fetchSearchQueryAvo;
+	}
+
 	/**
 	 * Adapt a space as returned by a typical graphQl response to our internal space data model
 	 */
@@ -609,31 +613,34 @@ export class ContentPagesService {
 
 		// Check for search queries
 		if (searchQuery) {
-			if (!this.fetchSearchQueryAvo) {
+			const searchFunction = this.getSearchQueryFunction();
+			if (!searchFunction) {
 				this.logger.warn(
 					'resolveMediaTileItems through search queries is not supported for this app. Use ContentPagesController.setSearchQueryFunction to enable it',
 				);
 				searchResults = [];
+			} else {
+				// resolve search query to a list of results
+				const parsedSearchQuery = JSON.parse(searchQuery);
+				let searchQueryLimitNum: number = parseInt(searchQueryLimit, 10);
+				if (isNaN(searchQueryLimitNum)) {
+					searchQueryLimitNum = 8;
+				}
+				console.log('search function in admin-core-api: ', searchFunction);
+				const searchResponse = await searchFunction({
+					from: 0,
+					size: searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
+					filters: parsedSearchQuery.filters || {},
+					orderProperty: parsedSearchQuery.orderProperty || 'relevance',
+					orderDirection: parsedSearchQuery.orderDirection || 'desc',
+					index: 'all',
+				});
+				searchResults = await promiseUtils.mapLimit(
+					searchResponse.results || [],
+					8,
+					(result) => this.mapSearchResultToItemOrCollection(result, request),
+				);
 			}
-			// resolve search query to a list of results
-			const parsedSearchQuery = JSON.parse(searchQuery);
-			let searchQueryLimitNum: number = parseInt(searchQueryLimit, 10);
-			if (isNaN(searchQueryLimitNum)) {
-				searchQueryLimitNum = 8;
-			}
-			const searchResponse = await this.fetchSearchQueryAvo({
-				from: 0,
-				size: searchQueryLimitNum - manualResults.length, // Fetch less search results if the user already specified some manual results
-				filters: parsedSearchQuery.filters || {},
-				orderProperty: parsedSearchQuery.orderProperty || 'relevance',
-				orderDirection: parsedSearchQuery.orderDirection || 'desc',
-				index: 'all',
-			});
-			searchResults = await promiseUtils.mapLimit(
-				searchResponse.results || [],
-				8,
-				(result) => this.mapSearchResultToItemOrCollection(result, request),
-			);
 		}
 
 		return [...manualResults, ...searchResults];

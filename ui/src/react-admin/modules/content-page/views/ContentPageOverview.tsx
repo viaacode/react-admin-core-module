@@ -115,6 +115,43 @@ const ContentPageOverview: FunctionComponent = () => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
+	const ownerFilter = (queryWildcard: string): any[] => {
+		if (
+			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
+		) {
+			return [
+				{
+					owner: {
+						full_name: { _ilike: queryWildcard },
+					},
+				},
+				{
+					owner: {
+						group_name: { _ilike: queryWildcard },
+					},
+				},
+			];
+		}
+		return [
+			{
+				owner_profile: {
+					full_name: {
+						_ilike: queryWildcard,
+					},
+				},
+			},
+			{
+				owner_profile: {
+					group: {
+						label: {
+							_ilike: queryWildcard,
+						},
+					},
+				},
+			},
+		];
+	};
+
 	const generateWhereObject = (filters: Partial<ContentTableState>) => {
 		const andFilters: any[] = [];
 		andFilters.push(
@@ -190,43 +227,6 @@ const ContentPageOverview: FunctionComponent = () => {
 	);
 	const contentPages = contentPageResponse?.[0] || null;
 	const contentPageCount = contentPageResponse?.[1] || 0;
-
-	const ownerFilter = (queryWildcard: string): any[] => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
-		) {
-			return [
-				{
-					owner: {
-						full_name: { _ilike: queryWildcard },
-					},
-				},
-				{
-					owner: {
-						group_name: { _ilike: queryWildcard },
-					},
-				},
-			];
-		}
-		return [
-			{
-				owner_profile: {
-					full_name: {
-						_ilike: queryWildcard,
-					},
-				},
-			},
-			{
-				owner_profile: {
-					group: {
-						label: {
-							_ilike: queryWildcard,
-						},
-					},
-				},
-			},
-		];
-	};
 
 	useEffect(() => {
 		if (contentPages) {

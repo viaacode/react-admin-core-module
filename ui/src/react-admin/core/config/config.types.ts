@@ -115,6 +115,7 @@ export interface AdminConfig {
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
+	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>,
 	icon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
