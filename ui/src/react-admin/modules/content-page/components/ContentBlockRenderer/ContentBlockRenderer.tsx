@@ -42,7 +42,6 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
 	const PreviewComponent = GET_BLOCK_COMPONENT(contentBlockConfig.type);
-	console.log('PreviewComponent: ', PreviewComponent);
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
 	const componentStateProps: any = needsElements ? { elements: componentState } : componentState;
 

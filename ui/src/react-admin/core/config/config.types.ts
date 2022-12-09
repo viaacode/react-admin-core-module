@@ -6,7 +6,6 @@ import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'rea
 
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { MediaListItem } from '@viaa/avo2-components';
@@ -43,10 +42,6 @@ export interface I18n {
 	) => string;
 }
 
-export interface PermissionsService {
-	getAllPermissions: () => Promise<PermissionData[]>;
-}
-
 export interface LinkInfo {
 	className?: string;
 	to?: string;
@@ -56,8 +51,6 @@ export interface LinkInfo {
 }
 
 export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
-
-export type EventContentTypeSimplified = 'item' | 'collection';
 
 export interface AdminConfig {
 	// Core module configurations
@@ -84,6 +77,7 @@ export interface AdminConfig {
 			) => Promise<string>;
 			deleteFile: (fileUrl: string) => Promise<void>;
 		};
+		getContentPageByPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
@@ -100,7 +94,6 @@ export interface AdminConfig {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
-		PermissionsService: PermissionsService;
 		queryCache: {
 			clear: (key: string) => Promise<void>;
 		};

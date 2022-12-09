@@ -21,17 +21,12 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { DatabaseType } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 
-type ContentPageDetailProps =
-	| {
-			contentPageInfo: Partial<ContentPageInfo>;
-			activeBlockPosition?: number | null;
-			onBlockClicked?: BlockClickHandler;
-			onLoaded?: (contentPageInfo: ContentPageInfo) => void;
-	  }
-	| {
-			path: string;
-			onLoaded?: (contentPageInfo: ContentPageInfo) => void;
-	  };
+type ContentPageDetailProps = {
+	contentPageInfo: Partial<ContentPageInfo>;
+	activeBlockPosition?: number | null;
+	onBlockClicked?: BlockClickHandler;
+	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
+};
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const { tHtml } = useTranslation();

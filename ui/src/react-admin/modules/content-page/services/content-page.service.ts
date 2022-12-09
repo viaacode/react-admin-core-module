@@ -1,5 +1,4 @@
 import { IPagination } from '@studiohyperdrive/pagination';
-import { ButtonAction } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { isArray, isFunction, isPlainObject, kebabCase } from 'lodash-es';
 import moment from 'moment';
@@ -16,7 +15,6 @@ import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
-import { ResolvedItemOrCollection } from '../components/wrappers/MediaGridWrapper/MediaGridWrapper.types';
 import { ContentBlockConfig } from '../types/content-block.types';
 
 import { AdminConfigManager } from '~core/config';
@@ -409,7 +407,7 @@ export class ContentPageService {
 		try {
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
-					url: this.getBaseUrl(),
+					url: AdminConfigManager.getConfig().services.getContentPageByPathEndpoint || this.getBaseUrl(),
 					query: {
 						path,
 					},
@@ -451,39 +449,6 @@ export class ContentPageService {
 			return responseContent.title;
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
-		}
-	}
-
-	public static async resolveMediaItems(
-		searchQuery: string | null,
-		searchQueryLimit: number | undefined,
-		mediaItems:
-			| {
-					mediaItem: ButtonAction;
-			  }[]
-			| undefined
-	): Promise<ResolvedItemOrCollection[]> {
-		let url: string | undefined = undefined;
-		let body: any | undefined = undefined;
-		try {
-			url = this.getBaseUrl() + '/media';
-			body = {
-				searchQuery,
-				searchQueryLimit,
-				mediaItems,
-			};
-			return fetchWithLogoutJson(url, {
-				method: 'POST',
-				body: JSON.stringify(body),
-			});
-		} catch (err) {
-			throw new CustomError('Failed to resolve media items through proxy', err, {
-				searchQuery,
-				searchQueryLimit,
-				mediaItems,
-				url,
-				body,
-			});
 		}
 	}
 

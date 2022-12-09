@@ -42,7 +42,7 @@ export class UsersService {
 	) {}
 
 	public adaptProfile(
-		userProfile: ProfileAvo | ProfileHetArchief | undefined,
+		userProfile: ProfileAvo | ProfileHetArchief | Avo.User.User | undefined,
 	): CommonUser | undefined {
 		if (!userProfile) {
 			return undefined;

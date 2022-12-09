@@ -19,7 +19,6 @@ import {
 	ContentPageMeta,
 	CtaWrapper,
 	HeroWrapper,
-	MediaGridWrapper,
 	MediaPlayerTitleTextButtonWrapper,
 	MediaPlayerWrapper,
 	PageOverviewWrapper,
@@ -29,7 +28,6 @@ import ButtonsWrapper from '../wrappers/ButtonsWrapper/ButtonsWrapper';
 import RichTextWrapper from '../wrappers/RichTextWrapper/RichTextWrapper';
 
 export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
-	console.log('admin-core config content_blocks: ', AdminConfigManager.getConfig().content_blocks);
 	return {
 		[ContentBlockType.AnchorLinks]: ButtonsWrapper,
 		[ContentBlockType.Buttons]: ButtonsWrapper,
@@ -39,7 +37,6 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.ImageGrid]: BlockImageGridWrapper,
 		[ContentBlockType.Image]: BlockImage,
 		[ContentBlockType.Intro]: BlockIntro,
-		[ContentBlockType.MediaGrid]: MediaGridWrapper,
 		[ContentBlockType.Klaar]: BlockKlaar,
 		[ContentBlockType.MediaPlayerTitleTextButton]: MediaPlayerTitleTextButtonWrapper,
 		[ContentBlockType.MediaPlayer]: MediaPlayerWrapper,
@@ -50,13 +47,17 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.RichText]: RichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
 		[ContentBlockType.Hero]: HeroWrapper,
-		[ContentBlockType.Search]:
-			AdminConfigManager.getConfig().content_blocks[ContentBlockType.Search] ||
-			(() => <p>Search component was not found on admin config</p>),
 		[ContentBlockType.ContentPageMeta]: ContentPageMeta,
 		[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
 		[ContentBlockType.UspGrid]: BlockUspGridWrapper,
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
+		[ContentBlockType.MediaGrid]:
+		// Avo specific blocks
+		AdminConfigManager.getConfig().content_blocks[ContentBlockType.MediaGrid] ||
+		(() => <p>Media grid component was not found on admin config</p>),
+		[ContentBlockType.Search]:
+		AdminConfigManager.getConfig().content_blocks[ContentBlockType.Search] ||
+		(() => <p>Search component was not found on admin config</p>),
 	}[type];
 }
 

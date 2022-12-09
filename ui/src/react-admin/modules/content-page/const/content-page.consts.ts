@@ -2,7 +2,7 @@ import { TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import {
 	ContentOverviewTableCols,
-	ContentWidth,
+	ContentWidth
 } from '~modules/content-page/types/content-pages.types';
 
 import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
@@ -12,11 +12,12 @@ import { NULL_FILTER } from '../../shared/helpers/filters';
 import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
-	CheckboxOption,
+	CheckboxOption
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 export const CONTENT_PAGE_QUERY_KEYS = {
-	OVERVIEW: 'OVERVIEW',
+	OVERVIEW: 'OVERVIEW', getContentPageByPath: 'GET_CONTENT_PAGE_BY_PATH'
+
 };
 
 export const GET_OVERVIEW_COLUMNS: (
@@ -35,7 +36,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___titel'),
 			sortable: true,
 			visibleByDefault: true,
-			dataType: 'string',
+			dataType: 'string'
 		},
 		{
 			id: 'contentType',
@@ -44,9 +45,9 @@ export const GET_OVERVIEW_COLUMNS: (
 			visibleByDefault: true,
 			filterType: 'CheckboxDropdownModal',
 			filterProps: {
-				options: contentTypeOptions,
+				options: contentTypeOptions
 			} as CheckboxDropdownModalProps,
-			dataType: 'string',
+			dataType: 'string'
 		},
 		{
 			id: 'userProfileId',
@@ -54,7 +55,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'MultiUserSelectDropdown',
-			dataType: 'string',
+			dataType: 'string'
 		},
 		{
 			id: 'authorUserGroup',
@@ -67,11 +68,11 @@ export const GET_OVERVIEW_COLUMNS: (
 					...userGroupOptions,
 					{
 						label: i18n.tText('admin/content/content___leeg'),
-						id: NULL_FILTER,
-					},
-				],
+						id: NULL_FILTER
+					}
+				]
 			} as CheckboxDropdownModalProps,
-			dataType: 'string',
+			dataType: 'string'
 		},
 		{
 			id: 'createdAt',
@@ -79,7 +80,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: 'dateTime'
 		},
 		{
 			id: 'updatedAt',
@@ -87,7 +88,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: 'dateTime'
 		},
 		{
 			id: 'isPublic',
@@ -95,7 +96,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: false,
 			filterType: 'BooleanCheckboxDropdown',
-			dataType: 'boolean',
+			dataType: 'boolean'
 		},
 		{
 			id: 'publishedAt',
@@ -103,7 +104,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: 'dateTime'
 		},
 		{
 			id: 'publishAt',
@@ -111,7 +112,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: 'dateTime'
 		},
 		{
 			id: 'depublishAt',
@@ -119,7 +120,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: 'dateTime'
 		},
 		{
 			id: 'labels',
@@ -128,20 +129,20 @@ export const GET_OVERVIEW_COLUMNS: (
 			visibleByDefault: false,
 			filterType: 'CheckboxDropdownModal',
 			filterProps: {
-				options: contentPageLabelOptions,
-			} as CheckboxDropdownModalProps,
+				options: contentPageLabelOptions
+			} as CheckboxDropdownModalProps
 		},
 		{
 			id: 'userGroupIds',
 			label: i18n.tText('admin/content/content___zichtbaar-voor'),
 			sortable: false,
-			visibleByDefault: false,
+			visibleByDefault: false
 		},
 		{
 			id: 'actions',
 			tooltip: i18n.tText('admin/content/views/content-overview___acties'),
-			visibleByDefault: true,
-		},
+			visibleByDefault: true
+		}
 	];
 };
 
@@ -155,7 +156,7 @@ export const CONTENT_PAGE_PATH = (parts = ROUTE_PARTS) => ({
 	FAQS: `/${parts.admin}/${parts.content}?content_type=FAQ_ITEM`,
 	SCREENCASTS: `/${parts.admin}/${parts.content}?content_type=SCREENCAST`,
 	PROJECTS: `/${parts.admin}/${parts.content}?content_type=PROJECT`,
-	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`,
+	OVERVIEWS: `/${parts.admin}/${parts.content}?content_type=OVERZICHT`
 });
 
 export const PAGES_PER_PAGE = 10;
@@ -164,15 +165,15 @@ export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___inhoud'),
-		icon: 'layout',
+		icon: 'layout'
 	},
 	{
 		id: 'metadata',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___metadata'
 		),
-		icon: 'file-text',
-	},
+		icon: 'file-text'
+	}
 ];
 
 export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
@@ -181,30 +182,30 @@ export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
 			'admin/content/content___kies-een-content-breedte'
 		),
 		value: '',
-		disabled: true,
+		disabled: true
 	},
 	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___max-1300-px'
 		),
-		value: ContentWidth.EXTRA_LARGE,
+		value: ContentWidth.EXTRA_LARGE
 	},
 	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___breed-940-px'
 		),
-		value: ContentWidth.LARGE,
+		value: ContentWidth.LARGE
 	},
 	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___medium-720-px'
 		),
-		value: ContentWidth.MEDIUM,
-	},
+		value: ContentWidth.MEDIUM
+	}
 ];
 
 export const DEFAULT_PAGES_WIDTH: { [key in ContentWidth]: Avo.ContentPage.Type[] } = {
 	[ContentWidth.EXTRA_LARGE]: ['PROJECT'],
 	[ContentWidth.LARGE]: [],
-	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM'],
+	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM']
 };

@@ -14,7 +14,7 @@ import {
 	Req,
 	UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { compact, get, intersection } from 'lodash';
@@ -23,20 +23,16 @@ import { PermissionName } from '@viaa/avo2-types';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import {
 	ContentOverviewTableCols,
-	ContentPage,
-	ContentPageLabel,
-} from '../content-pages.types';
+	ContentPageLabel, DbContentPage
+} from "../content-pages.types";
 
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
-import { ResolveMediaGridBlocksDto } from '../dto/resolve-media-grid-blocks.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
-import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
-import { SpecialPermissionGroups } from '../../shared/types/types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('ContentPages')
@@ -52,15 +48,10 @@ export class ContentPagesController {
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
-	): Promise<IPagination<ContentPage>> {
+	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
 		return this.contentPagesService.getContentPagesForOverview(
 			queryDto,
-			compact([
-				String(user?.getGroupId()),
-				user?.getUser()
-					? SpecialPermissionGroups.loggedInUsers
-					: SpecialPermissionGroups.loggedOutUsers,
-			]),
+			user.getGroupIds()
 		);
 	}
 
@@ -72,7 +63,7 @@ export class ContentPagesController {
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string,
-	): Promise<[ContentPage[], number]> {
+	): Promise<[DbContentPage[], number]> {
 		return this.contentPagesService.fetchContentPages(
 			parseInt(offset || '0'),
 			parseInt(limit || '20'),
@@ -90,9 +81,9 @@ export class ContentPagesController {
 	public async getContentPageByPath(
 		@Query('path') path: string,
 		@Req() request,
-		@SessionUser() user: SessionUserEntity,
-	): Promise<ContentPage> {
-		const contentPage: ContentPage | undefined =
+		@SessionUser() user?: SessionUserEntity,
+	): Promise<DbContentPage> {
+		const contentPage: DbContentPage | undefined =
 			await this.contentPagesService.getContentPageByPath(path);
 
 		const permissions = get(user.getUser(), 'permissions', []);
@@ -143,12 +134,6 @@ export class ContentPagesController {
 			}
 		}
 
-		// Check if content page contains any search query content bocks (eg: media grids)
-		await this.contentPagesService.resolveMediaTileItemsInPage(
-			contentPage,
-			request,
-		);
-
 		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
 		if (request) {
 			await this.contentPagesService.resolveMediaPlayersInPage(
@@ -172,37 +157,6 @@ export class ContentPagesController {
 			title: get(contentPage, 'title', null),
 			id: get(contentPage, 'id', null),
 		};
-	}
-
-	@Post('media')
-	@ApiOperation({
-		summary:
-			'Resolves the objects (items, collections, bundles, search queries) that are references inside the media grid blocks to their actual objects',
-	})
-	@ApiResponse({
-		status: 200,
-		description:
-			'the media grid blocks with their content stored under the results property',
-		type: Array,
-	})
-	@UseGuards(LoggedInGuard)
-	async resolveMediaGridBlocks(
-		@Body() body: ResolveMediaGridBlocksDto,
-		@SessionUser() user: SessionUserEntity,
-		@Req() request,
-	): Promise<any[]> {
-		if (!user.has(PermissionName.SEARCH)) {
-			throw new ForbiddenException(
-				'You do not have the required permission for this route',
-			);
-		}
-		console.log('sbody for media endpoint: ', body);
-		return await this.contentPagesService.resolveMediaTileItems(
-			body.searchQuery,
-			body.searchQueryLimit,
-			body.mediaItems,
-			request,
-		);
 	}
 
 	@Post('update-published-dates')
@@ -323,9 +277,9 @@ export class ContentPagesController {
 	)
 	public async insertContentPage(
 		@Body()
-		contentPage: ContentPage,
+		contentPage: DbContentPage,
 		@SessionUser() user,
-	): Promise<ContentPage | null> {
+	): Promise<DbContentPage | null> {
 		if (
 			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 			contentPage.userProfileId !== user.id
@@ -346,11 +300,11 @@ export class ContentPagesController {
 	public async updateContentPage(
 		@Body()
 		body: {
-			contentPage: ContentPage;
-			initialContentPage: ContentPage | undefined;
+			contentPage: DbContentPage;
+			initialContentPage: DbContentPage | undefined;
 		},
 		@SessionUser() user,
-	): Promise<ContentPage | null> {
+	): Promise<DbContentPage | null> {
 		if (
 			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 			body.contentPage.userProfileId !== user.id
@@ -387,7 +341,7 @@ export class ContentPagesController {
 	)
 	public async getContentPageById(
 		@Param('id') id: string,
-	): Promise<ContentPage> {
+	): Promise<DbContentPage> {
 		return this.contentPagesService.getContentPageById(id);
 	}
 }

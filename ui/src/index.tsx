@@ -10,7 +10,6 @@ import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
-import { PermissionsService } from './modules/permissions/permissions.service';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
@@ -42,7 +41,7 @@ function setConfig() {
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
-				console.log('event handler: onSaveContentPage', { contentPageInfo });
+				console.info('event handler: onSaveContentPage', { contentPageInfo });
 			},
 		},
 		navigationBars: {
@@ -209,9 +208,12 @@ function setConfig() {
 			toastService: {
 				showToast: (toastInfo: ToastInfo) => {
 					// Client decides how the toast messages are shown
-					console.log('show toast: ', toastInfo);
+					console.info('show toast: ', toastInfo);
 				},
 			},
+			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
+			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
+			getContentPageByPathEndpoint: null,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined) => (
 					<Html content={i18n.t(key, params as any) as unknown as string} />
@@ -225,7 +227,6 @@ function setConfig() {
 				fetchEducationOrganisations: () => Promise.resolve([]),
 			},
 			router: routerConfig as any,
-			PermissionsService,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				clear: async (_key: string) => Promise.resolve(),

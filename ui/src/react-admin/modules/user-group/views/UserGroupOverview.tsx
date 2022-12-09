@@ -235,9 +235,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		useEffect(() => {
 			if (isErrorPermissions) {
 				console.error(
-					new CustomError('Failed to get permissions', permissionsError, {
-						query: 'PermissionsService.getAllPermissions',
-					})
+					new CustomError('Failed to get permissions', permissionsError)
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: AdminConfigManager.getConfig().services.i18n.tText(
