@@ -1,6 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, flatten } from 'lodash-es';
+import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
 import {
 	BulkAddSubjectsToProfilesDocument,

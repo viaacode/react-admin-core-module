@@ -251,6 +251,9 @@ function setConfig() {
 		},
 		user: mockUser,
 		route_parts: ROUTE_PARTS,
+		env: {
+			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people'
+		}
 	});
 }
 
