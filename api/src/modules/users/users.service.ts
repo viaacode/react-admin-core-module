@@ -1,6 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, flatten } from 'lodash';
+import { compact, flatten, isNil } from 'lodash-es';
 import { DataService } from '../data';
 import {
 	BulkAddSubjectsToProfilesDocument,
@@ -15,6 +15,9 @@ import {
 	GetDistinctBusinessCategoriesDocument,
 	GetDistinctBusinessCategoriesQuery,
 	GetDistinctBusinessCategoriesQueryVariables,
+	GetUserByIdDocument,
+	GetUserByIdQuery,
+	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 
 import { CustomError } from '../shared/helpers/custom-error';
@@ -28,8 +31,8 @@ import { convertUserInfoToCommonUser } from "./users.converters";
 import {
 	CommonUser,
 	DeleteContentCounts,
-	ProfileAvo,
-	ProfileHetArchief,
+	UserInfoOverviewAvo,
+	UserInfoOverviewHetArchief,
 	UserOverviewTableCol,
 } from './users.types';
 
@@ -79,7 +82,7 @@ export class UsersService {
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
-				[]) as ProfileAvo[] | ProfileHetArchief[];
+				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
 			const profiles: CommonUser[] = compact(
 				userProfileObjects.map(convertUserInfoToCommonUser),
 			);

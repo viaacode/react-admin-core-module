@@ -1,3 +1,4 @@
+import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
@@ -82,7 +83,7 @@ export interface UserGroupInfo {
 /**
  * User model for both hetarchief and avo
  */
-export interface CommonUser {
+export type CommonUser = {
 	profileId: string;
 	email?: string;
 	firstName?: string;
@@ -108,7 +109,12 @@ export interface CommonUser {
 	lastAccessAt?: string;
 	tempAccess?: UserTempAccess;
 	idps?: Idp[];
-}
+	alias?: string;
+	title?: string;
+	bio?: string;
+	alternativeEmail?: string;
+	updatedAt?: string;
+};
 
 export type UserOverviewTableCol =
 	| 'profileId'
@@ -142,7 +148,7 @@ export interface DeleteContentCounts {
 	privateContentPages: number;
 }
 
-export type ProfileAvo =
+export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
 	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
-export type ProfileHetArchief =
+export type UserInfoOverviewHetArchief =
 	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];

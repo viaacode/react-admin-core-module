@@ -30,7 +30,6 @@ const mockContentPagesService: Partial<
 	getContentPageByPath: jest.fn(),
 	fetchCollectionOrItem: jest.fn(),
 	fetchItemByExternalId: jest.fn(),
-	fetchContentPagesWithOrWithoutBlocks: jest.fn(),
 	updatePublishDates: jest.fn(),
 	getContentPagesByIds: jest.fn(),
 };

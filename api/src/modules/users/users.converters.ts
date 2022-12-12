@@ -2,62 +2,76 @@ import { isNil } from "@nestjs/common/utils/shared.utils";
 import { Avo } from "@viaa/avo2-types";
 import { Idp } from "../shared/auth/auth.types";
 import { isHetArchief } from "../shared/helpers/is-hetarchief";
-import { CommonUser, ProfileAvo, ProfileHetArchief } from "./users.types";
+import { CommonUser, HetArchiefUser, UserInfoOverviewAvo, UserInfoOverviewHetArchief } from "./users.types";
 
 /**
  * This function should convert all user info objects to a single format
  * Existing user info objects are:
  * * Avo.User.User
  * * Avo.User.Profile
- * * ProfileHetArchief
- * * ProfileAvo
- *
- * TODO see if we can rename some of the interface to be more clear
- * * Avo.User.User
- * * Avo.User.Profile
- * * ProfileHetArchief => this is the hetarchief user info straight from the graphql query: GetUsersQueryHetArchief
- * * HetArchiefUser => looks like the archief user but already mapped to camelcase format, this should never be passed to this function. Preferably we would user CommonUser everywhere, even in avo and hetarchief
- * * ProfileAvo split into 2 types => UserDetailAvo (contains all info for the user detail page in the admin dashboard)
- * *                               => UserOverviewAvo (contains info from the users_summary view to show the user overview table in the admin dashboard)
+ * * UserInfoOverviewAvo
+ * * UserInfoOverviewHetArchief
+ * * HetArchiefUser (reeds gemapped naar camelCase door hetarchief proxy)
  * @param userInfo
  */
 export function convertUserInfoToCommonUser(
-	userInfo: Avo.User.Profile | ProfileAvo | ProfileHetArchief | Avo.User.User | undefined,
+	userInfo: Avo.User.User | Avo.User.Profile | UserInfoOverviewAvo | UserInfoOverviewHetArchief | HetArchiefUser | undefined,
 ): CommonUser | undefined {
 	if (!userInfo) {
 		return undefined;
 	}
 	if (isHetArchief()) {
-		const profile = userInfo as ProfileHetArchief;
-		return {
-			profileId: profile.id,
-			email: profile.mail ?? undefined,
-			firstName: profile.first_name ?? undefined,
-			lastName: profile.last_name ?? undefined,
-			fullName: profile.full_name ?? undefined,
-			userGroup: {
-				id: profile.group?.id,
-				name: profile.group?.name,
-				label: profile.group?.label,
-			},
-			idps: profile.identities?.map(
-				(identity) => identity.identity_provider_name as Idp,
-			),
-			organisation: {
-				name:
-					profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
-					undefined,
-				or_id:
-				profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-				logo_url:
-				profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
-					?.iri,
-			},
-			lastAccessAt: profile.last_access_at,
-		};
+		if ((userInfo as HetArchiefUser).firstName) {
+			// HetArchiefUser: hetArchief user info mapped by the hetarchief proxy
+			const user = userInfo as HetArchiefUser;
+			return {
+				profileId: user.id,
+				email: user.email ?? undefined,
+				firstName: user.firstName ?? undefined,
+				lastName: user.lastName ?? undefined,
+				fullName: user.fullName ?? undefined,
+				userGroup: {
+					id: user.groupId,
+					name: user.groupName,
+					label: user.groupName,
+				},
+				idps: [user.idp],
+				organisation: undefined,
+				lastAccessAt: undefined,
+			};
+		} else {
+			// UserInfoOverviewHetArchief: overview user for admin-dashboard
+			const profile = userInfo as UserInfoOverviewHetArchief;
+			return {
+				profileId: profile.id,
+				email: profile.mail ?? undefined,
+				firstName: profile.first_name ?? undefined,
+				lastName: profile.last_name ?? undefined,
+				fullName: profile.full_name ?? undefined,
+				userGroup: {
+					id: profile.group?.id,
+					name: profile.group?.name,
+					label: profile.group?.label,
+				},
+				idps: profile.identities?.map(
+					(identity) => identity.identity_provider_name as Idp,
+				),
+				organisation: {
+					name:
+						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
+						undefined,
+					or_id:
+					profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
+					logo_url:
+					profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
+						?.iri,
+				},
+				lastAccessAt: profile.last_access_at,
+			};
+		}
 	} else {
-		if ((userInfo as any).profile) {
-			// Avo user object with linked profile
+		if ((userInfo as Avo.User.User).profile) {
+			// Avo.User.User: Avo user object with linked profile
 			const user = userInfo as Avo.User.User;
 			return {
 				profileId: user.profile.id,
@@ -101,7 +115,7 @@ export function convertUserInfoToCommonUser(
 					: null,
 				idps: user.idpmaps as Idp[],
 			};
-		} else if ((userInfo as any).user) {
+		} else if ((userInfo as Avo.User.Profile).user) {
 			// Avo profile with linked user
 			const profile = userInfo as Avo.User.Profile;
 			return {
@@ -148,7 +162,7 @@ export function convertUserInfoToCommonUser(
 			};
 		} else {
 			// Avo user summary table info
-			const user = userInfo as ProfileAvo;
+			const user = userInfo as UserInfoOverviewAvo;
 			return {
 				profileId: user.profile_id,
 				stamboek: user.stamboek ?? undefined,
