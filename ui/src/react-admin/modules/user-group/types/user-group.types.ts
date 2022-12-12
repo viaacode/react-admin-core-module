@@ -1,8 +1,7 @@
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ReactNode } from 'react';
-import { DefaultComponentProps } from '~modules/shared';
+import { PermissionData } from '~modules/permissions/permissions.types';
 
-export interface UserGroupOverviewProps extends DefaultComponentProps {
+export interface UserGroupOverviewProps {
 	onChangePermissions?: (hasChanges: boolean) => void;
 	renderSearchButtons?: (search?: string) => ReactNode;
 	className?: string;
@@ -34,9 +33,4 @@ export interface UserGroupUpdate {
 	userGroupId: string;
 	permissionId: string | number;
 	hasPermission: boolean;
-}
-
-export interface UserGroupUpdateResponse {
-	deleted: number;
-	inserted: number;
 }

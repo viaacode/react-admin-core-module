@@ -1,11 +1,10 @@
 import type { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { HetArchiefUser } from '../users.types';
 
 export class SessionUserEntity {
-	protected user: HetArchiefUser | Avo.User.User;
+	protected user: HetArchiefUser | Avo.User.User | undefined;
 	protected id: string;
 	protected firstName: string;
 	protected lastName: string;
@@ -14,13 +13,13 @@ export class SessionUserEntity {
 	protected visitorSpaceSlug: string;
 	protected permissions: Array<PermissionName>;
 
-	public constructor(user: HetArchiefUser | Avo.User.User) {
+	public constructor(user: HetArchiefUser | Avo.User.User | undefined) {
 		this.user = user;
 		// can be archief-user or avo-user, where permissions are stored differently
 		// merge them into 1 unified array
 		this.permissions = [
-			...((this.user as HetArchiefUser).permissions || []),
-			...((this.user as Avo.User.User).profile.permissions || []),
+			...((this.user as HetArchiefUser)?.permissions || []),
+			...((this.user as Avo.User.User)?.profile?.permissions || []),
 		] as PermissionName[];
 	}
 
@@ -34,44 +33,44 @@ export class SessionUserEntity {
 
 	public getFirstName(): string {
 		return (
-			(this.user as HetArchiefUser).firstName ||
-			(this.user as Avo.User.User).first_name
+			(this.user as HetArchiefUser)?.firstName ||
+			(this.user as Avo.User.User)?.first_name
 		);
 	}
 
 	public getLastName(): string {
 		return (
-			(this.user as HetArchiefUser).lastName ||
-			(this.user as Avo.User.User).last_name
+			(this.user as HetArchiefUser)?.lastName ||
+			(this.user as Avo.User.User)?.last_name
 		);
 	}
 
 	public getFullName(): string {
 		return (
-			(this.user as HetArchiefUser).fullName ||
-			(this.user as Avo.User.User).full_name
+			(this.user as HetArchiefUser)?.fullName ||
+			(this.user as Avo.User.User)?.full_name
 		);
 	}
 
 	public getMail(): string {
 		return (
-			(this.user as HetArchiefUser).email || (this.user as Avo.User.User).mail
+			(this.user as HetArchiefUser)?.email || (this.user as Avo.User.User)?.mail
 		);
 	}
 
 	public getGroupId(): string | number {
 		return (
-			(this.user as HetArchiefUser).groupId ||
-			((this.user as Avo.User.User).profile?.userGroupIds?.[0] as number)
+			(this.user as HetArchiefUser)?.groupId ||
+			((this.user as Avo.User.User)?.profile?.userGroupIds?.[0] as number)
 		);
 	}
 
 	public getMaintainerId(): string {
-		return get(this.user, 'maintainerId');
+		return (this.user as HetArchiefUser)?.maintainerId;
 	}
 
 	public getVisitorSpaceSlug(): string {
-		return get(this.user, 'visitorSpaceSlug');
+		return (this.user as HetArchiefUser)?.visitorSpaceSlug;
 	}
 
 	public has(permission: PermissionName): boolean {

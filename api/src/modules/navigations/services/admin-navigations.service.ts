@@ -14,7 +14,7 @@ import {
 } from '../queries/navigation.queries';
 
 import { DataService } from '../../data';
-import { NavigationItem } from '../types';
+import { NavigationItem } from '../navigations.types';
 import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
@@ -38,6 +38,7 @@ export class AdminNavigationsService {
 			tooltip: navigationEntry?.tooltip,
 			updatedAt: navigationEntry?.updated_at,
 			createdAt: navigationEntry?.created_at,
+			userGroupIds: navigationEntry?.user_group_ids,
 		};
 	}
 
@@ -155,6 +156,25 @@ export class AdminNavigationsService {
 			).app_content_nav_elements ||
 			(
 				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']
+			).app_navigation ||
+			[]
+		).map(this.adapt);
+	}
+
+	public async findAllNavigationBarItems(): Promise<NavigationItem[]> {
+		const navigationsResponse = await this.dataService.execute<
+			NavigationQueryTypes['GetAllNavigationItemsQuery']
+		>(
+			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
+				.GetAllNavigationItemsDocument,
+		);
+
+		return (
+			(
+				navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo']
+			).app_content_nav_elements ||
+			(
+				navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryHetArchief']
 			).app_navigation ||
 			[]
 		).map(this.adapt);

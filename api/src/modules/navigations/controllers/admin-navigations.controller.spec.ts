@@ -67,7 +67,7 @@ describe('NavigationsController', () => {
 			mockNavigationsService.findElementById.mockResolvedValueOnce(
 				mockNavigationsResponse.items[0],
 			);
-			const navigations = await navigationsController.getNavigationElement(
+			const navigations = await navigationsController.getNavigationElementById(
 				'navigation-1',
 			);
 			expect(navigations).toEqual(mockNavigationsResponse.items[0]);

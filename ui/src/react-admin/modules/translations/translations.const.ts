@@ -5,7 +5,6 @@ import { RichTextEditorControl } from '@meemoo/react-components';
 
 export const TRANSLATIONS_PATH = {
 	TRANSLATIONS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.translations}`,
-	TRANSLATIONS_V2: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.translationsV2}`,
 };
 
 export interface TranslationsOverviewRef {

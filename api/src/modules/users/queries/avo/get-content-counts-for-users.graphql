@@ -33,7 +33,10 @@ query getContentCountsForUsers($profileIds: [uuid!]!) {
 		}
 	}
 	assignments: app_assignments_aggregate(
-		where: { owner_profile_id: { _in: $profileIds }, is_deleted: { _eq: false } }
+		where: {
+			owner_profile_id: { _in: $profileIds }
+			is_deleted: { _eq: false }
+		}
 	) {
 		aggregate {
 			count
@@ -46,7 +49,9 @@ query getContentCountsForUsers($profileIds: [uuid!]!) {
 			count
 		}
 	}
-	itemBookmarks: app_item_bookmarks_aggregate(where: { profile_id: { _in: $profileIds } }) {
+	itemBookmarks: app_item_bookmarks_aggregate(
+		where: { profile_id: { _in: $profileIds } }
+	) {
 		aggregate {
 			count
 		}

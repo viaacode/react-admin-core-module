@@ -4,5 +4,5 @@ export interface UserGroupWithPermissions {
 	id: string;
 	name: string;
 	label: string;
-	permissions: PermissionData[];
+	permissions?: PermissionData[];
 }

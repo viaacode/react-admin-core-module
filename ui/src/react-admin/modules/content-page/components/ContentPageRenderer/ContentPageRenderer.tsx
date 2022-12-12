@@ -5,7 +5,7 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
-import ContentBlockPreview from '../ContentBlockPreview/ContentBlockPreview';
+import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
 import { AdminConfigManager } from '~core/config';
 import {
@@ -33,7 +33,7 @@ type ContentPageDetailProps =
 			userGroupId: number | string | undefined;
 	  };
 
-const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
+const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const { tHtml } = useTranslation();
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -179,7 +179,7 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 				{getContentBlocks(contentPageInfo as ContentPageInfo).map(
 					(contentBlockConfig: ContentBlockConfig) => {
 						return (
-							<ContentBlockPreview
+							<ContentBlockRenderer
 								key={
 									'content-block-preview-' +
 									contentBlockConfig.type +
@@ -219,4 +219,4 @@ const ContentPage: FunctionComponent<ContentPageDetailProps> = (props) => {
 	);
 };
 
-export default ContentPage;
+export default ContentPageRenderer;
