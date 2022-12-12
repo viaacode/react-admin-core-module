@@ -56,7 +56,4 @@ export { default as UserGroupOverview } from '~modules/user-group/views/UserGrou
 export { default as TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
 
 // STOPGAP
-export { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
-export type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-export { ROUTE_PARTS } from '~modules/shared';
 export type { DefaultComponentProps, ValueOf } from '~modules/shared';
