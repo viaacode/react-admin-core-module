@@ -46,6 +46,7 @@ export { default as NavigationDetail } from '~modules/navigation/views/Navigatio
 
 // Users
 export { UserOverview } from '~modules/user/views/UserOverview';
+export { UserDetail } from '~modules/user/views/UserDetail';
 export type { CommonUser } from '~modules/user/user.types';
 
 // User groups and permissions
@@ -53,3 +54,9 @@ export { default as UserGroupOverview } from '~modules/user-group/views/UserGrou
 
 // Translations
 export { default as TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
+
+// STOPGAP
+export { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
+export type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+export { ROUTE_PARTS } from '~modules/shared';
+export type { DefaultComponentProps, ValueOf } from '~modules/shared';
