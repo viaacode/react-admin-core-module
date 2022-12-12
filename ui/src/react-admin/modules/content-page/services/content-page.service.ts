@@ -202,6 +202,45 @@ export class ContentPageService {
 		return this.convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
+	public static async duplicateContentPageImages(id: number): Promise<ContentPageInfo> {
+		try {
+			const response = await fetchWithLogoutJson(
+				stringifyUrl({
+					url: `${this.getBaseUrl()}/duplicate`,
+					query: {
+						id
+					}
+				}),
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					credentials: 'include',
+				}
+			);
+			let responseContent: any;
+			try {
+				responseContent = await response.json();
+			} catch (err) {
+				// Ignore failed json parsing => will be handled by the status code not being between 200 and 400
+			}
+			if (response.status < 200 || response.status >= 400) {
+				throw new CustomError('Failed to get content page from /content-pages', null, {
+					id,
+					response,
+					responseContent,
+				});
+			}
+			if (responseContent.error) {
+				return responseContent.error;
+			}
+			return this.convertDbContentPageToContentPageInfo(responseContent);
+		} catch (err) {
+			throw new CustomError('Failed to get content page by path', err);
+		}
+	}
+
 	public static getPathOrDefault(contentPage: Partial<ContentPageInfo>): string {
 		return contentPage.path || `/${kebabCase(contentPage.title)}`;
 	}

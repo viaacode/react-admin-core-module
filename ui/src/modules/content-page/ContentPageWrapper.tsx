@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import { AdminConfigManager } from '~core/config';
-import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
+import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 
 const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = ({ match }) => {
 	return (
 		<>
-			<ContentPage
+			<ContentPageRenderer
 				path={'/' + match.params.path}
 				userGroupId={AdminConfigManager.getConfig().user?.userGroup?.id}
 			/>
