@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AdminCoreModule } from './admin-core.module';
+import packageJson from '../package.json';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AdminCoreModule);
@@ -28,7 +29,7 @@ async function bootstrap() {
 		const swaggerConfig = new DocumentBuilder()
 			.setTitle('Admin Core API docs')
 			.setDescription('Documentatie voor de Admin Core api calls')
-			.setVersion('0.1.0')
+			.setVersion(packageJson.version)
 			.addCookieAuth('connect.sid')
 			.build();
 		const document = SwaggerModule.createDocument(app, swaggerConfig);

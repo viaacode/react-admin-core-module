@@ -1,31 +1,41 @@
-import { Button } from '@viaa/avo2-components';
-import { FC, useRef } from 'react';
-
-import { AdminLayout } from '~modules/shared/layouts';
+import { FC, ReactNode } from 'react';
 import { TranslationsOverview } from '~modules/translations/views';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-
-interface TranslationsOverviewRef {
-	onSave: () => void;
-}
+import { Button, Modal } from '@meemoo/react-components';
 
 export const TranslationsOverviewPage: FC = () => {
-	const { tText } = useTranslation();
-	// Access child functions
-	const translationsRef = useRef<TranslationsOverviewRef>();
+	const renderPopup = ({
+		title,
+		body,
+		isOpen,
+		onSave,
+		onClose,
+	}: {
+		title: string;
+		body: ReactNode;
+		isOpen: boolean;
+		onSave: () => void;
+		onClose: () => void;
+	}) => {
+		const renderFooter = () => {
+			return (
+				<div>
+					<Button
+						variants={['block', 'black']}
+						onClick={onSave}
+						label="Bewaar wijzigingen"
+					/>
 
-	return (
-		// not extracted translation since it isn't part of the exported views of the react-admin package
-		<AdminLayout pageTitle={tText('modules/translations/translations-overview-page___vertalingen')}>
-			<AdminLayout.Actions>
-				<Button
-					onClick={() => translationsRef.current?.onSave()}
-					label={tText('modules/translations/translations-overview-page___wijzigingen-opslaan')}
-				/>
-			</AdminLayout.Actions>
-			<AdminLayout.Content>
-				<TranslationsOverview ref={translationsRef} />
-			</AdminLayout.Content>
-		</AdminLayout>
-	);
+					<Button variants={['block', 'text']} onClick={onClose} label="Annuleer" />
+				</div>
+			);
+		};
+
+		return (
+			<Modal isOpen={isOpen} title={title} onClose={onClose} footer={renderFooter()}>
+				{body}
+			</Modal>
+		);
+	};
+
+	return <TranslationsOverview className="c-translations-overview" renderPopup={renderPopup} />;
 };

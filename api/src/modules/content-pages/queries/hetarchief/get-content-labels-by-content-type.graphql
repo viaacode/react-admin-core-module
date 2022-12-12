@@ -1,4 +1,6 @@
-query getContentLabelsByContentType($contentType: lookup_app_content_type_enum!) {
+query getContentLabelsByContentType(
+	$contentType: lookup_app_content_type_enum!
+) {
 	app_content_label(where: { content_type: { _eq: $contentType } }) {
 		id
 		label

@@ -2,6 +2,7 @@ import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
 import React, { ChangeEvent, forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { cloneDeep, remove, sortBy } from 'lodash-es';
 import { Column, TableOptions } from 'react-table';
+import { PermissionData } from '~modules/permissions/permissions.types';
 
 import {
 	LoadingErrorLoadedComponent,
@@ -10,7 +11,6 @@ import {
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

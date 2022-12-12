@@ -373,17 +373,17 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentAvo,
 		GetContentByIdDocument: GetContentByIdDocumentAvo,
 		GetContentLabelsByContentTypeDocument:
-		GetContentLabelsByContentTypeDocumentAvo,
+			GetContentLabelsByContentTypeDocumentAvo,
 		GetContentPagesDocument: GetContentPagesDocumentAvo,
 		GetContentTypesDocument: GetContentTypesDocumentAvo,
 		GetPermissionsFromContentPageByPathDocument:
-		GetPermissionsFromContentPageByPathDocumentAvo,
+			GetPermissionsFromContentPageByPathDocumentAvo,
 		GetPublicContentPagesByTitleDocument:
-		GetPublicContentPagesByTitleDocumentAvo,
+			GetPublicContentPagesByTitleDocumentAvo,
 		GetPublicProjectContentPagesByTitleDocument:
-		GetPublicProjectContentPagesByTitleDocumentAvo,
+			GetPublicProjectContentPagesByTitleDocumentAvo,
 		GetPublicProjectContentPagesDocument:
-		GetPublicProjectContentPagesDocumentAvo,
+			GetPublicProjectContentPagesDocumentAvo,
 		InsertContentBlocksDocument: InsertContentBlocksDocumentAvo,
 		InsertContentDocument: InsertContentDocumentAvo,
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentAvo,
@@ -395,24 +395,24 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
 		UpdateContentPagePublishDatesDocument:
-		UpdateContentPagePublishDatesDocumentAvo,
+			UpdateContentPagePublishDatesDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentHetArchief,
 		GetContentByIdDocument: GetContentByIdDocumentHetArchief,
 		GetContentLabelsByContentTypeDocument:
-		GetContentLabelsByContentTypeDocumentHetArchief,
+			GetContentLabelsByContentTypeDocumentHetArchief,
 		GetContentPagesDocument: GetContentPagesDocumentHetArchief,
 		GetContentTypesDocument: GetContentTypesDocumentHetArchief,
 		GetPermissionsFromContentPageByPathDocument:
-		GetPermissionsFromContentPageByPathDocumentHetArchief,
+			GetPermissionsFromContentPageByPathDocumentHetArchief,
 		GetPublicContentPagesByTitleDocument:
-		GetPublicContentPagesByTitleDocumentHetArchief,
+			GetPublicContentPagesByTitleDocumentHetArchief,
 		GetPublicProjectContentPagesByTitleDocument:
-		GetPublicProjectContentPagesByTitleDocumentHetArchief,
+			GetPublicProjectContentPagesByTitleDocumentHetArchief,
 		GetPublicProjectContentPagesDocument:
-		GetPublicProjectContentPagesDocumentHetArchief,
+			GetPublicProjectContentPagesDocumentHetArchief,
 		InsertContentBlocksDocument: InsertContentBlocksDocumentHetArchief,
 		InsertContentDocument: InsertContentDocumentHetArchief,
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentHetArchief,
@@ -422,9 +422,9 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentByIdsDocument: GetContentByIdsDocumentHetArchief,
 		GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
 		GetContentPagesWithBlocksDocument:
-		GetContentPagesWithBlocksDocumentHetArchief,
+			GetContentPagesWithBlocksDocumentHetArchief,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
 		UpdateContentPagePublishDatesDocument:
-		UpdateContentPagePublishDatesDocumentHetArchief,
+			UpdateContentPagePublishDatesDocumentHetArchief,
 	},
 };

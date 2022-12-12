@@ -1,5 +1,10 @@
-query getContentPageLabelsByTypeAndIds($contentType: String!, $labelIds: [Int!]!) {
-	app_content_labels(where: { id: { _in: $labelIds }, content_type: { _eq: $contentType } }) {
+query getContentPageLabelsByTypeAndIds(
+	$contentType: String!
+	$labelIds: [Int!]!
+) {
+	app_content_labels(
+		where: { id: { _in: $labelIds }, content_type: { _eq: $contentType } }
+	) {
 		label
 		id
 	}

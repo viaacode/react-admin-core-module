@@ -7,9 +7,8 @@ import {
 
 import { Request } from 'express';
 
-
 export const API_KEY_EXCEPTION = new BadRequestException(
-		'You need to provide an valid api key for this endpoint under the header "apikey"',
+	'You need to provide an valid api key for this endpoint under the header "apikey"',
 );
 
 @Injectable()
@@ -29,7 +28,7 @@ export class ApiKeyGuard implements CanActivate {
 	}
 
 	private static getApiKey(
-			ctxOrReq: ExecutionContext | Request,
+		ctxOrReq: ExecutionContext | Request,
 	): string | undefined {
 		const request = ApiKeyGuard.getRequest(ctxOrReq);
 		return request.header('apikey');
