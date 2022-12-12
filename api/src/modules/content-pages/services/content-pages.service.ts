@@ -32,6 +32,7 @@ import {
 	GetCollectionTileByIdDocument,
 	GetCollectionTileByIdQuery,
 	GetCollectionTileByIdQueryVariables,
+	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
 	GetItemByExternalIdDocument,
 	GetItemByExternalIdQuery,
 	GetItemByExternalIdQueryVariables,
@@ -61,6 +62,8 @@ import {
 	DbContentPage,
 	GqlAvoUser,
 	GqlContentBlock,
+	GqlContentBlockAvo,
+	GqlContentBlockHetArchief,
 	GqlContentPage,
 	GqlHetArchiefUser,
 	GqlInsertOrUpdateContentBlock,
@@ -93,6 +96,8 @@ export class ContentPagesService {
 		if (!contentBlock) {
 			return null;
 		}
+		const contentBlockAvo = contentBlock as GqlContentBlockAvo;
+		const contentBlockHetArchief = contentBlock as GqlContentBlockHetArchief;
 		/* istanbul ignore next */
 		return {
 			id: contentBlock?.id,
@@ -229,9 +234,9 @@ export class ContentPagesService {
 		} = inputQuery;
 		const now = new Date().toISOString();
 		const variables = {
-			limit,
+			limit: limit || 10,
 			labelIds: compact(labelIds || []),
-			offset: offset,
+			offset: offset || 0,
 			where: {
 				_and: [
 					{
@@ -291,15 +296,15 @@ export class ContentPagesService {
 			responseHetArchief.app_content_label ||
 			[];
 
-		const contentBlocks = (
+		const contentPages = (
 			responseAvo.app_content ||
 			responseHetArchief.app_content_page ||
 			[]
-		).map(this.adaptContentBlock.bind(this)) as DbContentPage[];
+		).map(this.adaptContentPage.bind(this)) as DbContentPage[];
 
 		return {
 			...Pagination<DbContentPage>({
-				items: contentBlocks,
+				items: contentPages,
 				page: Math.floor(offset / limit),
 				size: limit,
 				total: count,
@@ -333,7 +338,11 @@ export class ContentPagesService {
 		return this.adaptContentPage(contentPage);
 	}
 
-	public async getContentPageByPathForUser(path: string, user?: CommonUser, referrer?: string) {
+	public async getContentPageByPathForUser(
+		path: string,
+		user?: CommonUser,
+		referrer?: string,
+	) {
 		const contentPage: DbContentPage | undefined =
 			await this.getContentPageByPath(path);
 
@@ -342,7 +351,8 @@ export class ContentPagesService {
 		const canEditContentPage =
 			permissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
 			(permissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) &&
-				!!userId && contentPage.owner.id === userId);
+				!!userId &&
+				contentPage.owner.id === userId);
 
 		if (!contentPage) {
 			return null;
@@ -388,10 +398,7 @@ export class ContentPagesService {
 
 		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
 		if (referrer) {
-			await this.resolveMediaPlayersInPage(
-				contentPage,
-				referrer
-			);
+			await this.resolveMediaPlayersInPage(contentPage, referrer);
 		}
 
 		return contentPage;
@@ -496,9 +503,10 @@ export class ContentPagesService {
 		contentPage: DbContentPage,
 		referrer?: string,
 	) {
-		const mediaPlayerBlocks = contentPage?.content_blocks?.filter(
-			(contentBlock) => keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.type),
-		) || [];
+		const mediaPlayerBlocks =
+			contentPage?.content_blocks?.filter((contentBlock) =>
+				keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.type),
+			) || [];
 		if (mediaPlayerBlocks.length) {
 			await mapLimit(mediaPlayerBlocks, 2, async (mediaPlayerBlock: any) => {
 				try {

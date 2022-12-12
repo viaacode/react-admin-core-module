@@ -48,7 +48,7 @@ export class SessionUserEntity {
 	 * hetarchief: string (uuid)
 	 */
 	public getGroupId(): string | number {
-		return this.user.userGroup.id;
+		return this.user?.userGroup?.id;
 	}
 
 	/**
@@ -72,7 +72,7 @@ export class SessionUserEntity {
 	}
 
 	public has(permission: PermissionName): boolean {
-		return this.user.permissions.includes(permission);
+		return this.user?.permissions?.includes(permission) || false;
 	}
 
 	public hasNot(permission: PermissionName): boolean {

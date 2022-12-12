@@ -33,7 +33,7 @@ import { useDebounce } from '~modules/shared/hooks/useDebounce';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export interface ContentPageOverviewParams {
-	withBlock: boolean;
+	withBlocks: boolean;
 	contentType: string;
 	// Visible tabs in the page overview component for which we should fetch item counts
 	labelIds: number[];
@@ -41,8 +41,8 @@ export interface ContentPageOverviewParams {
 	selectedLabelIds: number[];
 	orderProp?: string;
 	orderDirection?: 'asc' | 'desc';
-	page: number;
-	size: number;
+	offset: number;
+	limit: number;
 }
 
 interface PageOverviewWrapperProps {
@@ -180,7 +180,7 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 
 			const response: IPagination<ContentPageInfo> & { labelCounts: Record<string, number> } =
 				await ContentPageService.getContentPages({
-					withBlock: itemStyle === 'ACCORDION',
+					withBlocks: itemStyle === 'ACCORDION',
 					contentType: contentTypeAndTabs.selectedContentType,
 					labelIds: getSelectedLabelIds(),
 					selectedLabelIds:
@@ -189,8 +189,8 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 							: getSelectedLabelIds(),
 					orderProp: sortOrder.split('__')[0],
 					orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-					page: queryParamsState.page,
-					size: debouncedItemsPerPage,
+					offset: queryParamsState.page * debouncedItemsPerPage,
+					limit: debouncedItemsPerPage,
 				});
 
 			// Set the pages on the state after removing the page that will be shown at the top (?item=/path)

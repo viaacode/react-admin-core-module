@@ -13,7 +13,7 @@ import {
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
-import { DbContentBlock } from "./content-block.types";
+import { DbContentBlock } from './content-block.types';
 import { ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
@@ -93,9 +93,12 @@ export type GqlContentPage =
 	| GetContentPagesQueryHetArchief['app_content_page'][0]
 	| GetContentPagesWithBlocksQueryAvo['app_content'][0]
 	| GetContentPagesWithBlocksQueryHetArchief['app_content_page'][0];
-export type GqlContentBlock =
-	| GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0]
-	| GetContentPageByPathQueryAvo['app_content'][0]['content_blocks'][0];
+
+export type GqlContentBlockAvo =
+	GetContentPageByPathQueryAvo['app_content'][0]['content_blocks'][0];
+export type GqlContentBlockHetArchief =
+	GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0];
+export type GqlContentBlock = GqlContentBlockAvo | GqlContentBlockHetArchief;
 
 export type GqlInsertOrUpdateContentBlock =
 	| ContentPageQueryTypes['InsertContentMutationVariables']['contentPage']

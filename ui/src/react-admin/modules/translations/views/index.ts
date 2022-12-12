@@ -1,1 +1,1 @@
-export { TranslationsOverview } from './TranslationsOverview';
+export { default as TranslationsOverview } from './TranslationsOverview';
