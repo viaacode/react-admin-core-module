@@ -13,7 +13,8 @@ export const mockUser: CommonUser = {
 	userGroup: {
 		name: 'MEEMOO_ADMIN',
 		label: 'Sitebeheerder',
-		id: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
+		id: 1, // avo
+		// id: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26', // hetArchief
 	},
 	permissions: [
 		PermissionName.VIEW_ADMIN_DASHBOARD,

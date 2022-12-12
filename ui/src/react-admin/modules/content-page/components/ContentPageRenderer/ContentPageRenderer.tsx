@@ -2,6 +2,7 @@ import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -18,20 +19,14 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { AvoOrHetArchief } from '~modules/shared/types';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 
-type ContentPageDetailProps =
-	| {
-			contentPageInfo: Partial<ContentPageInfo>;
-			activeBlockPosition?: number | null;
-			onBlockClicked?: BlockClickHandler;
-			userGroupId: number | string | undefined;
-	  }
-	| {
-			path: string;
-			userGroupId: number | string | undefined;
-	  };
+type ContentPageDetailProps = {
+	contentPageInfo: Partial<ContentPageInfo>;
+	activeBlockPosition?: number | null;
+	onBlockClicked?: BlockClickHandler;
+	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
+};
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const { tHtml } = useTranslation();
@@ -91,7 +86,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		// images can have a setting to go full width
 		// so we need to set the block prop: fullWidth to true if we find an image block with size setting: pageWidth
 		contentBlockBlockConfigs = contentBlockBlockConfigs.map((contentBlockConfig) => {
-			const width = (contentBlockConfig.components.state as BlockImageProps).width;
+			const width = (contentBlockConfig.components.state as BlockImageProps)?.width;
 			if (
 				contentBlockConfig.type === ContentBlockType.Image &&
 				width &&
@@ -104,10 +99,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		});
 
 		// Add page title as header block for faq items. Only for Avo
-		if (
-			contentPageInfo.contentType === 'FAQ_ITEM' &&
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
-		) {
+		if (contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()) {
 			contentBlockBlockConfigs = [
 				{
 					position: 0,
@@ -139,9 +131,9 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (props.userGroupId) {
+		if (AdminConfigManager.getConfig()?.user?.userGroup?.id) {
 			currentUserGroupIds = [
-				String(props.userGroupId),
+				String(AdminConfigManager.getConfig()?.user?.userGroup?.id),
 				SpecialPermissionGroups.loggedInUsers,
 			];
 		} else {

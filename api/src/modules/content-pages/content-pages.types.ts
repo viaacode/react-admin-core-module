@@ -13,7 +13,7 @@ import {
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
-import { ContentBlockConfig } from './content-block.types';
+import { DbContentBlock } from "./content-block.types";
 import { ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
@@ -55,8 +55,8 @@ export interface ContentPageLabel {
 	updated_at: string;
 }
 
-export interface ContentPage {
-	id: number;
+interface ContentPageBase {
+	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
 	description: string | null;
@@ -70,13 +70,20 @@ export interface ContentPage {
 	createdAt: string;
 	updatedAt: string | null;
 	isProtected: boolean;
-	contentType: ContentPageType;
+	contentType: Avo.ContentPage.Type;
 	contentWidth: ContentWidth;
 	owner: ContentPageUser;
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
-	content_blocks: ContentBlockConfig[];
 	labels: ContentPageLabel[];
+}
+
+/**
+ * Content page format as we receive it from the admin-core-api endpoints
+ * Contains only info that needs to be saved inside the database inside the blocks: DbContentBlock
+ */
+export interface DbContentPage extends ContentPageBase {
+	content_blocks: DbContentBlock[];
 }
 
 export type GqlContentPage =
@@ -142,7 +149,7 @@ export type MediaItemResponse = Partial<Media> & {
 };
 
 export interface ContentPageOverviewResponse {
-	pages: ContentPage[];
+	pages: DbContentPage[];
 	count: number;
 	labelCounts: { [id: number]: number };
 }
@@ -155,25 +162,6 @@ export type LabelObj = {
 export interface SearchDateRange {
 	gte: string | '' | undefined;
 	lte: string | '' | undefined;
-}
-
-export type ResolvedItemOrCollection = Partial<
-	Avo.Item.Item | Avo.Collection.Collection
-> & {
-	src?: string;
-};
-
-export type FetchSearchQueryFunctionAvo = (
-	limit: number,
-	filters: Partial<Avo.Search.Filters>,
-	orderProperty: Avo.Search.OrderProperty,
-	orderDirection: Avo.Search.OrderDirection,
-) => Promise<Avo.Search.Search | null>;
-
-export enum MediaItemType {
-	ITEM = 'ITEM',
-	COLLECTION = 'COLLECTION',
-	BUNDLE = 'BUNDLE',
 }
 
 // Content Overview

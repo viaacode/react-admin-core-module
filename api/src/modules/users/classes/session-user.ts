@@ -1,16 +1,12 @@
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
+import { SpecialPermissionGroups } from "../../shared/types/types";
+import { convertProfileToCommonUser } from "../users.converters";
 
-import { HetArchiefUser } from '../users.types';
+import { CommonUser, HetArchiefUser } from "../users.types";
 
 export class SessionUserEntity {
 	protected user: HetArchiefUser | Avo.User.User | undefined;
-	protected id: string;
-	protected firstName: string;
-	protected lastName: string;
-	protected mail: string;
-	protected maintainerId: string;
-	protected visitorSpaceSlug: string;
 	protected permissions: Array<PermissionName>;
 
 	public constructor(user: HetArchiefUser | Avo.User.User | undefined) {
@@ -27,8 +23,14 @@ export class SessionUserEntity {
 		return this.user;
 	}
 
+	public getCommonUser(): CommonUser {
+		return convertProfileToCommonUser(this.user);
+	}
+
 	public getId(): string {
-		return (this.user as HetArchiefUser).id || (this.user as Avo.User.User).uid;
+		return (
+			(this.user as HetArchiefUser)?.id || (this.user as Avo.User.User)?.uid
+		);
 	}
 
 	public getFirstName(): string {
@@ -58,11 +60,28 @@ export class SessionUserEntity {
 		);
 	}
 
+	/**
+	 * Returns the single user group id that the user is part of. eg: 'f7b99395-36f3-4be2-9fb1-31197509e16b' or 3
+	 * avo: number
+	 * hetarchief: string (uuid)
+	 */
 	public getGroupId(): string | number {
 		return (
 			(this.user as HetArchiefUser)?.groupId ||
 			((this.user as Avo.User.User)?.profile?.userGroupIds?.[0] as number)
 		);
+	}
+
+	/**
+	 * Returns both the usergroup id of the current user and also the special user group the user is part of: loggedInUsers / loggedOutUsers
+	 */
+	public getGroupIds(): (string | number)[] {
+		return [
+			...(this.getGroupId() ? [this.getGroupId()] : []),
+			this.getGroupId()
+				? SpecialPermissionGroups.loggedInUsers
+				: SpecialPermissionGroups.loggedOutUsers,
+		];
 	}
 
 	public getMaintainerId(): string {

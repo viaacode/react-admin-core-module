@@ -19,6 +19,7 @@
     "isolatedModules": true,
     "strictNullChecks": true,
     "noEmit": true,
+    "declaration": true,
     "jsx": "react-jsx",
     "paths": {
       "~modules/*": [

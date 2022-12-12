@@ -232,7 +232,7 @@ export class ContentPageOverviewParams {
 		description: 'Also include the content blocks for each page',
 		default: false,
 	})
-	withBlock? = false;
+	withBlocks? = false;
 
 	@IsString()
 	@ApiProperty({
@@ -253,7 +253,7 @@ export class ContentPageOverviewParams {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	labelIds?: string[];
+	labelIds?: (string | number)[];
 
 	@IsArray()
 	@IsOptional()
@@ -264,7 +264,7 @@ export class ContentPageOverviewParams {
 		required: false,
 		example: ['69ccef3b-751a-4be4-95bc-5ef365fbd504'],
 	})
-	selectedLabelIds?: string[];
+	selectedLabelIds?: (string | number)[];
 
 	@IsString()
 	@Type(() => String)
@@ -318,10 +318,10 @@ export class ContentPageOverviewParams {
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: Number,
-		description: 'Which page of results to fetch. Counting starts at 1',
-		default: 1,
+		description: 'How many results to skip before returning the results',
+		default: 0,
 	})
-	page? = 1;
+	offset? = 0;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -331,5 +331,5 @@ export class ContentPageOverviewParams {
 		description: 'The max. number of results to return',
 		default: 10,
 	})
-	size? = 10;
+	limit? = 10;
 }

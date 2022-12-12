@@ -1,8 +1,8 @@
 import { TableSortingIcons } from '@meemoo/react-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
-import { AvoOrHetArchief } from '~modules/shared/types';
 
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
@@ -33,12 +33,12 @@ export interface I18n {
 	tHtml: (
 		translationKey: string,
 		variables?: Record<string, string>,
-		apps?: AvoOrHetArchief[]
+		apps?: DatabaseType[]
 	) => ReactNode | string;
 	tText: (
 		translationKey: string,
 		variables?: Record<string, string>,
-		apps?: AvoOrHetArchief[]
+		apps?: DatabaseType[]
 	) => string;
 }
 
@@ -77,6 +77,7 @@ export interface AdminConfig {
 			) => Promise<string>;
 			deleteFile: (fileUrl: string) => Promise<void>;
 		};
+		getContentPageByPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
@@ -107,6 +108,7 @@ export interface AdminConfig {
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
+	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>,
 	icon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
@@ -117,7 +119,7 @@ export interface AdminConfig {
 		bulkActions?: UserBulkAction[];
 	};
 	database: {
-		databaseApplicationType: AvoOrHetArchief;
+		databaseApplicationType: DatabaseType;
 		proxyUrl: string;
 	};
 	user: CommonUser;

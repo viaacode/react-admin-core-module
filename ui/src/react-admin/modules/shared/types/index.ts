@@ -5,13 +5,13 @@ export type ReactSelectOption<T = any> = {
 	value: T;
 };
 
-export enum AvoOrHetArchief {
+export enum DatabaseType {
 	avo = 'avo',
 	hetArchief = 'hetArchief',
 }
 
-export const AVO = AvoOrHetArchief.avo;
-export const HET_ARCHIEF = AvoOrHetArchief.hetArchief;
+export const AVO = DatabaseType.avo;
+export const HET_ARCHIEF = DatabaseType.hetArchief;
 
 // Get all possible values from object
 export type ValueOf<T> = T[keyof T];

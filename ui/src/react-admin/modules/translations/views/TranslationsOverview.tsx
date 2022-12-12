@@ -1,4 +1,4 @@
-import { Container, Flex, Spinner } from '@viaa/avo2-components';
+import { Container, Flex, Pagination as PaginationAvo, Spinner } from '@viaa/avo2-components';
 import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -9,6 +9,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { Translation, TranslationsOverviewProps } from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
@@ -49,7 +50,8 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 }) => {
 	const { tHtml, tText } = useTranslation();
 
-	const [translations, setTranslations] = useState<Translation[] | null>(null);
+	const [translations, setTranslations] = useState<Translation[]>([]);
+
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
 		Translation[] | null
 	>(null);
@@ -221,6 +223,51 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		[filters.search, filters.orderDirection, filters.orderProp, setFilters]
 	);
 
+	const getPagination = () => {
+		if (!isAvo()) {
+			return (
+				<Pagination
+					buttons={{
+						next: (
+							<Button
+								className="u-pl-24:sm u-pl-8"
+								disabled={filters.page === pageCount}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___volgende'
+								)}
+								iconEnd={<Icon name="angleRight" />}
+							/>
+						),
+						previous: (
+							<Button
+								className="u-pr-24:sm u-pr-8"
+								disabled={filters.page === 1}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___vorige'
+								)}
+								iconStart={<Icon name="angleLeft" />}
+							/>
+						),
+					}}
+					showFirstLastNumbers
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+					pageCount={pageCount}
+				/>
+			);
+		} else {
+			return (
+				<PaginationAvo
+					pageCount={pageCount}
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+				/>
+			);
+		}
+	};
+
 	const renderTranslationsTable = (): ReactNode => {
 		if (!filteredAndPaginatedTranslations) {
 			return <Loader />;
@@ -291,40 +338,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
 					onRowClick={handleRowClick}
-					pagination={() => {
-						return (
-							<Pagination
-								buttons={{
-									next: (
-										<Button
-											className="u-pl-24:sm u-pl-8"
-											disabled={filters.page === pageCount}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___volgende'
-											)}
-											iconEnd={<Icon name="angleRight" />}
-										/>
-									),
-									previous: (
-										<Button
-											className="u-pr-24:sm u-pr-8"
-											disabled={filters.page === 1}
-											variants={['text', 'neutral']}
-											label={tHtml(
-												'modules/shared/components/pagination-bar/pagination-bar___vorige'
-											)}
-											iconStart={<Icon name="angleLeft" />}
-										/>
-									),
-								}}
-								showFirstLastNumbers
-								onPageChange={handlePageChange}
-								currentPage={filters.page - 1}
-								pageCount={pageCount}
-							/>
-						);
-					}}
+					pagination={getPagination}
 				/>
 			</>
 		);

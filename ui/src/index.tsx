@@ -6,7 +6,7 @@ import { TOptions } from 'i18next';
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
 import { mockUser } from './mock-user';
@@ -41,7 +41,7 @@ function setConfig() {
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
-				console.log('event handler: onSaveContentPage', { contentPageInfo });
+				console.info('event handler: onSaveContentPage', { contentPageInfo });
 			},
 		},
 		navigationBars: {
@@ -200,14 +200,20 @@ function setConfig() {
 				// },
 			],
 		},
+		content_blocks: {
+			[ContentBlockType.Search]: () => <p>Search block mock</p>
+		},
 		services: {
 			assetService: AssetsService,
 			toastService: {
 				showToast: (toastInfo: ToastInfo) => {
 					// Client decides how the toast messages are shown
-					console.log('show toast: ', toastInfo);
+					console.info('show toast: ', toastInfo);
 				},
 			},
+			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
+			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
+			getContentPageByPathEndpoint: null,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined) => (
 					<Html content={i18n.t(key, params as any) as unknown as string} />
@@ -227,7 +233,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: AvoOrHetArchief.avo,
+			databaseApplicationType: DatabaseType.avo,
 			proxyUrl,
 		},
 		flowplayer: {

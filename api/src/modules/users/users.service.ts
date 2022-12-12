@@ -1,10 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { isNil } from '@nestjs/common/utils/shared.utils';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { compact, flatten, get } from 'lodash';
+import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
-import { Idp } from '../shared/auth/auth.types';
 import {
 	BulkAddSubjectsToProfilesDocument,
 	BulkAddSubjectsToProfilesMutation,
@@ -22,12 +19,12 @@ import {
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { DatabaseType } from '@viaa/avo2-types';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
+import { convertProfileToCommonUser } from "./users.converters";
 import {
 	CommonUser,
 	DeleteContentCounts,
@@ -40,93 +37,6 @@ export class UsersService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {}
-
-	public adaptProfile(
-		userProfile: ProfileAvo | ProfileHetArchief | undefined,
-	): CommonUser | undefined {
-		if (!userProfile) {
-			return undefined;
-		}
-		if (isHetArchief()) {
-			const user = userProfile as ProfileHetArchief;
-			return {
-				profileId: user.id,
-				email: user.mail || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
-				fullName: user.full_name || undefined,
-				userGroup: {
-					id: user.group?.id,
-					name: user.group?.name,
-					label: user.group?.label,
-				},
-				idps: user.identities?.map(
-					(identity) => identity.identity_provider_name as Idp,
-				),
-				organisation: {
-					name:
-						user.maintainer_users_profiles?.[0]?.maintainer.schema_name ||
-						undefined,
-					or_id:
-						user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-					logo_url:
-						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
-							?.iri,
-				},
-				lastAccessAt: user.last_access_at,
-			};
-		} else {
-			const user = userProfile as ProfileAvo;
-			return {
-				profileId: user.profile_id,
-				stamboek: user.stamboek || undefined,
-				organisation: user.company_name
-					? ({
-							name: user.company_name,
-					  } as Avo.Organization.Organization)
-					: undefined,
-				educationalOrganisations: (user.organisations || []).map(
-					(org): ClientEducationOrganization => ({
-						organizationId: org.organization_id,
-						unitId: org.unit_id || null,
-						label: org.organization?.ldap_description || '',
-					}),
-				),
-				subjects: user.classifications?.map(
-					(classification) => classification.key,
-				),
-				educationLevels: user.contexts?.map((context) => context.key),
-				isException: user.is_exception || undefined,
-				businessCategory: user.business_category || undefined,
-				createdAt: user.acc_created_at,
-				userGroup: {
-					name: user.group_name || undefined,
-					label: user.group_name || undefined,
-					id: user.group_id || undefined,
-				},
-				userId: user.user_id,
-				uid: user.user_id,
-				email: user.mail || undefined,
-				fullName: user.full_name || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
-				isBlocked: user.is_blocked || undefined,
-				blockedAt: get(user, 'blocked_at.date'),
-				unblockedAt: get(user, 'unblocked_at.date'),
-				lastAccessAt: user.last_access_at,
-				tempAccess: user?.user?.temp_access
-					? {
-							from: user?.user?.temp_access?.from || null,
-							until: user?.user?.temp_access?.until || null,
-							status: isNil(user?.user?.temp_access?.current?.status)
-								? null
-								: user?.user?.temp_access?.current?.status === 1,
-					  }
-					: null,
-				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
-			};
-		}
-	}
 
 	async getProfiles(
 		offset: number,
@@ -171,7 +81,7 @@ export class UsersService {
 				hetArchiefResponse?.users_profile ||
 				[]) as ProfileAvo[] | ProfileHetArchief[];
 			const profiles: CommonUser[] = compact(
-				userProfileObjects.map(this.adaptProfile),
+				userProfileObjects.map(convertProfileToCommonUser),
 			);
 
 			const profileCount =

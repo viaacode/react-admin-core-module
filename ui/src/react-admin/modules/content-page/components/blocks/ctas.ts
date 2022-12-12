@@ -4,6 +4,7 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
 import {
@@ -133,7 +134,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___achtergrond-kleur'
 				),
-				AdminConfigManager.getConfig().database.databaseApplicationType === 'avo'
+				isAvo()
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
