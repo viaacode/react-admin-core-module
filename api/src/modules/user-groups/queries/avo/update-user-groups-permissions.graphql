@@ -7,7 +7,10 @@ mutation updateUserGroupsPermissions(
 	}
 	insert_users_group_permissions(
 		objects: $insertions
-		on_conflict: { constraint: group_permissions_user_group_id_permission_id_key, update_columns: [] }
+		on_conflict: {
+			constraint: group_permissions_user_group_id_permission_id_key
+			update_columns: []
+		}
 	) {
 		affected_rows
 	}

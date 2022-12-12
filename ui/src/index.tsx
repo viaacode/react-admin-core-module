@@ -15,7 +15,7 @@ import Html from '~modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
-const proxyUrl = 'http://localhost:3300'; // admin-core-api url
+const proxyUrl = 'http://localhost:3300';
 
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,

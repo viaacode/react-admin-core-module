@@ -1,3 +1,9 @@
+import { NavigationQueryTypes } from './queries/navigation.queries';
+
+export type GqlNavigation =
+	| NavigationQueryTypes['GetNavigationBarsQueryAvo']['app_content_nav_elements'][0]
+	| NavigationQueryTypes['GetNavigationBarsQueryHetArchief']['app_navigation'][0];
+
 export enum ContentPickerTypesEnum {
 	CONTENT_PAGE = 'CONTENT_PAGE',
 	COLLECTION = 'COLLECTION',
@@ -22,4 +28,5 @@ export interface NavigationItem {
 	tooltip?: string;
 	updatedAt: string;
 	createdAt: string;
+	userGroupIds: string[] | number[];
 }

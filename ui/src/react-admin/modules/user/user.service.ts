@@ -4,6 +4,7 @@ import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { DatabaseType } from '@viaa/avo2-types';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
@@ -158,8 +159,6 @@ export class UserService {
 		transferToProfileId?: string
 	): Promise<void> {
 		let url: string | undefined;
-		const isAvo =
-			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo;
 
 		try {
 			url = `${this.getBaseUrl()}/user/bulk-delete`;
@@ -167,7 +166,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				sendEmail,
-				...(isAvo ? { transferToProfileId } : {}),
+				...(isAvo() ? { transferToProfileId } : {}),
 			};
 			await fetchWithLogout(url, {
 				method: 'DELETE',

@@ -3,6 +3,9 @@ import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentAvo,
 	DeleteNavigationItemMutation as DeleteNavigationItemMutationAvo,
 	DeleteNavigationItemMutationVariables as DeleteNavigationItemMutationVariablesAvo,
+	GetAllNavigationItemsDocument as GetAllNavigationItemsDocumentAvo,
+	GetAllNavigationItemsQuery as GetAllNavigationItemsQueryAvo,
+	GetAllNavigationItemsQueryVariables as GetAllNavigationItemsQueryVariablesAvo,
 	GetNavigationBarsDocument as GetNavigationBarsDocumentAvo,
 	GetNavigationBarsQuery as GetNavigationBarsQueryAvo,
 	GetNavigationBarsQueryVariables as GetNavigationBarsQueryVariablesAvo,
@@ -23,6 +26,9 @@ import {
 	DeleteNavigationItemDocument as DeleteNavigationItemDocumentHetArchief,
 	DeleteNavigationItemMutation as DeleteNavigationItemMutationHetArchief,
 	DeleteNavigationItemMutationVariables as DeleteNavigationItemMutationVariablesHetArchief,
+	GetAllNavigationItemsDocument as GetAllNavigationItemsDocumentHetArchief,
+	GetAllNavigationItemsQuery as GetAllNavigationItemsQueryHetArchief,
+	GetAllNavigationItemsQueryVariables as GetAllNavigationItemsQueryVariablesHetArchief,
 	GetNavigationBarsDocument as GetNavigationBarsDocumentHetArchief,
 	GetNavigationBarsQuery as GetNavigationBarsQueryHetArchief,
 	GetNavigationBarsQueryVariables as GetNavigationBarsQueryVariablesHetArchief,
@@ -75,6 +81,17 @@ export type NavigationQueryTypes = {
 	GetNavigationItemByIdQueryHetArchief: GetNavigationItemByIdQueryHetArchief;
 	GetNavigationItemByIdQueryVariablesHetArchief: GetNavigationItemByIdQueryVariablesHetArchief;
 
+	GetAllNavigationItemsQuery:
+		| GetAllNavigationItemsQueryAvo
+		| GetAllNavigationItemsQueryHetArchief;
+	GetAllNavigationItemsQueryVariables:
+		| GetAllNavigationItemsQueryVariablesAvo
+		| GetAllNavigationItemsQueryVariablesHetArchief;
+	GetAllNavigationItemsQueryAvo: GetAllNavigationItemsQueryAvo;
+	GetAllNavigationItemsQueryVariablesAvo: GetAllNavigationItemsQueryVariablesAvo;
+	GetAllNavigationItemsQueryHetArchief: GetAllNavigationItemsQueryHetArchief;
+	GetAllNavigationItemsQueryVariablesHetArchief: GetAllNavigationItemsQueryVariablesHetArchief;
+
 	GetNavigationItemsByPlacementQuery:
 		| GetNavigationItemsByPlacementQueryAvo
 		| GetNavigationItemsByPlacementQueryHetArchief;
@@ -112,6 +129,7 @@ export type NavigationQueryTypes = {
 type NavigationQueries = {
 	DeleteNavigationItemDocument: TypedDocumentNode;
 	GetNavigationBarsDocument: TypedDocumentNode;
+	GetAllNavigationItemsDocument: TypedDocumentNode;
 	GetNavigationItemByIdDocument: TypedDocumentNode;
 	GetNavigationItemsByPlacementDocument: TypedDocumentNode;
 	InsertNavigationItemDocument: TypedDocumentNode;
@@ -122,6 +140,7 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 	[DatabaseType.avo]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentAvo,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentAvo,
+		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentAvo,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentAvo,
 		GetNavigationItemsByPlacementDocument:
 			GetNavigationItemsByPlacementDocumentAvo,
@@ -131,6 +150,7 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 	[DatabaseType.hetArchief]: {
 		DeleteNavigationItemDocument: DeleteNavigationItemDocumentHetArchief,
 		GetNavigationBarsDocument: GetNavigationBarsDocumentHetArchief,
+		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentHetArchief,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentHetArchief,
 		GetNavigationItemsByPlacementDocument:
 			GetNavigationItemsByPlacementDocumentHetArchief,
@@ -145,5 +165,9 @@ export type NavigationEntry =
 	| InsertNavigationItemMutationHetArchief['insert_app_navigation_one']
 	| UpdateNavigationItemByIdMutationAvo['update_app_content_nav_elements_by_pk']
 	| UpdateNavigationItemByIdMutationHetArchief['update_app_navigation_by_pk']
+	| GetAllNavigationItemsQueryAvo['app_content_nav_elements'][0]
+	| GetAllNavigationItemsQueryHetArchief['app_navigation'][0]
 	| GetNavigationItemByIdQueryAvo['app_content_nav_elements'][0]
-	| GetNavigationItemByIdQueryHetArchief['app_navigation'][0];
+	| GetNavigationItemByIdQueryHetArchief['app_navigation'][0]
+	| GetNavigationItemsByPlacementQueryAvo['app_content_nav_elements'][0]
+	| GetNavigationItemsByPlacementQueryHetArchief['app_navigation'][0];

@@ -1,5 +1,4 @@
 import type { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from "../../shared/types/types";
 import { convertProfileToCommonUser } from "../users.converters";
@@ -86,11 +85,11 @@ export class SessionUserEntity {
 	}
 
 	public getMaintainerId(): string {
-		return get(this.user, 'maintainerId');
+		return (this.user as HetArchiefUser)?.maintainerId;
 	}
 
 	public getVisitorSpaceSlug(): string {
-		return get(this.user, 'visitorSpaceSlug');
+		return (this.user as HetArchiefUser)?.visitorSpaceSlug;
 	}
 
 	public has(permission: PermissionName): boolean {

@@ -13,6 +13,7 @@ import {
 	NAVIGATION_PATH,
 } from '~modules/navigation/navigation.consts';
 import { Loader } from '~modules/shared/components';
+import { AdminLayout } from '~modules/shared/layouts';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { tHtml, tText } = useTranslation();
@@ -102,16 +103,29 @@ const NavigationOverview: FunctionComponent = () => {
 		}
 
 		const columns = GET_NAVIGATION_OVERVIEW_TABLE_COLS();
+		const title = tText('admin/menu/views/menu-overview___navigatie-overzicht');
 		return (
-			<Table
-				columns={columns}
-				data={navigationItems}
-				renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
-					renderTableCell(rowData, columnId as NavigationOverviewTableCols)
-				}
-				rowKey="id"
-				variant="bordered"
-			/>
+			<AdminLayout pageTitle={title}>
+				<AdminLayout.Actions>
+					<ButtonToolbar>
+						<Button
+							label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}
+							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_CREATE)}
+						/>
+					</ButtonToolbar>
+				</AdminLayout.Actions>
+				<AdminLayout.Content>
+					<Table
+						columns={columns}
+						data={navigationItems}
+						renderCell={(rowData: Partial<NavigationItem>, columnId: string) =>
+							renderTableCell(rowData, columnId as NavigationOverviewTableCols)
+						}
+						rowKey="id"
+						variant="bordered"
+					/>
+				</AdminLayout.Content>
+			</AdminLayout>
 		);
 	};
 

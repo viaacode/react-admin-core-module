@@ -1,12 +1,12 @@
 import React from 'react';
 import { Checkbox } from '@meemoo/react-components';
 import { Column, UseSortByColumnOptions } from 'react-table';
+import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { ROUTE_PARTS } from '~modules/shared';
 import { PermissionRow } from '../types/user-group.types';
 import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { sortBy } from 'lodash-es';
 
 export const USER_GROUP_QUERY_KEYS = {
@@ -25,36 +25,38 @@ export const GROUPS_PER_PAGE = 20;
 export const UserGroupTableColumns = (
 	userGroups: UserGroupWithPermissions[],
 	updateUserGroup: (groupId: string, permissionId: string | number, value: boolean) => void
-): (Column<PermissionData> & UseSortByColumnOptions<PermissionData>)[] => [
-	{
-		Header: '',
-		accessor: 'label',
-		disableSortBy: true,
-	},
-	...sortBy(userGroups, (userGroup) => userGroup.permissions.length).map((group) => {
-		return {
-			Header: () => <span>{group?.label || ''}</span>,
-			id: `${group?.name}-${group?.id}`,
-			accessor: (row: PermissionData) => row.name,
+): (Column<PermissionData> & UseSortByColumnOptions<PermissionData>)[] => {
+	return [
+		{
+			Header: '',
+			accessor: 'label',
 			disableSortBy: true,
-			Cell: ({ row }: PermissionRow) => {
-				const isChecked = !!group?.permissions?.find(
-					(permission: PermissionData) => permission.id === row.original.id
-				);
+		},
+		...sortBy(userGroups, (userGroup) => userGroup.permissions?.length || 0).map((group) => {
+			return {
+				Header: () => <span>{group?.label || ''}</span>,
+				id: `${group?.name}-${group?.id}`,
+				accessor: (row: PermissionData) => row.name,
+				disableSortBy: true,
+				Cell: ({ row }: PermissionRow) => {
+					const isChecked = !!group?.permissions?.find(
+						(permission: PermissionData) => permission.id === row.original.id
+					);
 
-				return (
-					<Checkbox
-						checked={isChecked}
-						value={`${group?.name}-${row.original.name}`}
-						onChange={() =>
-							updateUserGroup(String(group?.id), row.original.id, !isChecked)
-						}
-					/>
-				);
-			},
-		};
-	}),
-];
+					return (
+						<Checkbox
+							checked={isChecked}
+							value={`${group?.name}-${row.original.name}`}
+							onChange={() =>
+								updateUserGroup(String(group?.id), row.original.id, !isChecked)
+							}
+						/>
+					);
+				},
+			};
+		}),
+	];
+};
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
