@@ -298,7 +298,8 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		return (
 			<AdminLayout
 				pageTitle={
-					tHtml('modules/navigation/views/navigation-detail___navigatie-balk') +
+					tText('modules/navigation/views/navigation-detail___navigatie-balk') +
+					' ' +
 					startCase(navigationBarId)
 				}
 			>
