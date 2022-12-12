@@ -86,7 +86,7 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		return this.contentPagesService.getContentPageByPathForUser(
 			path,
-			user.getCommonUser(),
+			user.getUser(),
 			request?.headers?.['Referrer'],
 		);
 	}

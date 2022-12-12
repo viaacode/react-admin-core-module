@@ -4,7 +4,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import { ContentPagesController } from './content-pages.controller';
 import { ContentPagesService } from '../services/content-pages.service';
 import { PlayerTicketService } from '../../player-ticket';
-import { Group, GroupIdToName, HetArchiefUser } from '../../users/users.types';
+import { Group, GroupIdToName, HetArchiefUser } from '../../users';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
