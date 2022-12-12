@@ -7,7 +7,14 @@ export { default as NavigationOverview } from './navigation/views/NavigationOver
 export { default as NavigationEdit } from '~modules/navigation/views/NavigationEdit';
 
 export { UserOverview } from '~modules/user/views/UserOverview';
+export { UserDetail } from '~modules/user/views/UserDetail';
 
 export { default as UserGroupOverview } from '~modules/user-group/views/UserGroupOverview';
 
 export { TranslationsOverviewV2 } from '~modules/translations/views/TranslationsOverviewV2';
+
+// STOPGAP
+export { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
+export type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+export { ROUTE_PARTS } from '~modules/shared';
+export type { DefaultComponentProps, ValueOf } from '~modules/shared';

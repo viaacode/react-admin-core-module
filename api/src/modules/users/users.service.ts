@@ -1,7 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { compact, flatten, get, isNil } from 'lodash-es';
+import { compact, flatten, get, isNil } from 'lodash';
 import { DataService } from '../data';
 import { Idp } from '../shared/auth/auth.types';
 import {

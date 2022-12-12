@@ -156,6 +156,9 @@ export interface AdminConfig {
 	};
 	user: CommonUser;
 	route_parts: typeof ROUTE_PARTS;
+	env: {
+		LDAP_DASHBOARD_PEOPLE_URL?: string;
+	}
 }
 
 export interface IconConfig {
