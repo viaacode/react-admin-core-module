@@ -21,7 +21,10 @@ export type { ContentPageInfo } from '~modules/content-page/types/content-pages.
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
 export type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 export type { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
-export type { MediaGridBlockState, MediaGridBlockComponentState } from '~modules/content-page/types/content-block.types';
+export type {
+	MediaGridBlockState,
+	MediaGridBlockComponentState,
+} from '~modules/content-page/types/content-block.types';
 export type {
 	ContentBlockConfig,
 	DbContentBlock,
@@ -39,6 +42,7 @@ export {
 // Navigation
 export { default as NavigationOverview } from './navigation/views/NavigationOverview';
 export { default as NavigationEdit } from '~modules/navigation/views/NavigationEdit';
+export { default as NavigationDetail } from '~modules/navigation/views/NavigationDetail';
 
 // Users
 export { UserOverview } from '~modules/user/views/UserOverview';
