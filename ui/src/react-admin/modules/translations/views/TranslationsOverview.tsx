@@ -44,7 +44,7 @@ import Html from '~modules/shared/components/Html/Html';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
-export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
+const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
 	renderPopup,
 }) => {
@@ -423,3 +423,5 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 		</div>
 	);
 };
+
+export default TranslationsOverview as FunctionComponent<TranslationsOverviewProps>;

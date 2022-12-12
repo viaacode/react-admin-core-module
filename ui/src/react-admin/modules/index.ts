@@ -52,4 +52,4 @@ export type { CommonUser } from '~modules/user/user.types';
 export { default as UserGroupOverview } from '~modules/user-group/views/UserGroupOverview';
 
 // Translations
-export { TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
+export { default as TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
