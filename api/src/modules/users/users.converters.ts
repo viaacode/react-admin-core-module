@@ -2,14 +2,13 @@ import { isNil } from "@nestjs/common/utils/shared.utils";
 import { Avo } from "@viaa/avo2-types";
 import { Idp } from "../shared/auth/auth.types";
 import { isHetArchief } from "../shared/helpers/is-hetarchief";
-import { CommonUser, HetArchiefUser, ProfileAvo, ProfileHetArchief } from "./users.types";
+import { CommonUser, ProfileAvo, ProfileHetArchief } from "./users.types";
 
 /**
  * This function should convert all user info objects to a single format
  * Existing user info objects are:
  * * Avo.User.User
  * * Avo.User.Profile
- * * HetArchiefUser
  * * ProfileHetArchief
  * * ProfileAvo
  *
@@ -17,13 +16,13 @@ import { CommonUser, HetArchiefUser, ProfileAvo, ProfileHetArchief } from "./use
  * * Avo.User.User
  * * Avo.User.Profile
  * * ProfileHetArchief => this is the hetarchief user info straight from the graphql query: GetUsersQueryHetArchief
- * * HetArchiefUser => looks like the archief user but already mapped to camelcase format, this should never be passed to this function
+ * * HetArchiefUser => looks like the archief user but already mapped to camelcase format, this should never be passed to this function. Preferably we would user CommonUser everywhere, even in avo and hetarchief
  * * ProfileAvo split into 2 types => UserDetailAvo (contains all info for the user detail page in the admin dashboard)
  * *                               => UserOverviewAvo (contains info from the users_summary view to show the user overview table in the admin dashboard)
  * @param userInfo
  */
 export function convertUserInfoToCommonUser(
-	userInfo: Avo.User.Profile | ProfileAvo | ProfileHetArchief | Avo.User.User | HetArchiefUser | undefined,
+	userInfo: Avo.User.Profile | ProfileAvo | ProfileHetArchief | Avo.User.User | undefined,
 ): CommonUser | undefined {
 	if (!userInfo) {
 		return undefined;
