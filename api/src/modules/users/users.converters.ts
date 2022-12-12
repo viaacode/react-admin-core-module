@@ -1,145 +1,185 @@
 import { isNil } from "@nestjs/common/utils/shared.utils";
 import { Avo } from "@viaa/avo2-types";
-import { ClientEducationOrganization } from "@viaa/avo2-types/types/education-organizations";
 import { Idp } from "../shared/auth/auth.types";
 import { isHetArchief } from "../shared/helpers/is-hetarchief";
 import { CommonUser, HetArchiefUser, ProfileAvo, ProfileHetArchief } from "./users.types";
 
 export function convertProfileToCommonUser(
-	userProfile: ProfileAvo | ProfileHetArchief | Avo.User.User | HetArchiefUser | undefined,
+	userInfo: Avo.User.Profile | ProfileAvo | ProfileHetArchief | Avo.User.User | HetArchiefUser | undefined,
 ): CommonUser | undefined {
-	if (!userProfile) {
+	if (!userInfo) {
 		return undefined;
 	}
 	if (isHetArchief()) {
-		const user = userProfile as ProfileHetArchief;
+		const profile = userInfo as ProfileHetArchief;
 		return {
-			profileId: user.id,
-			email: user.mail || undefined,
-			firstName: user.first_name || undefined,
-			lastName: user.last_name || undefined,
-			fullName: user.full_name || undefined,
+			profileId: profile.id,
+			email: profile.mail || undefined,
+			firstName: profile.first_name || undefined,
+			lastName: profile.last_name || undefined,
+			fullName: profile.full_name || undefined,
 			userGroup: {
-				id: user.group?.id,
-				name: user.group?.name,
-				label: user.group?.label,
+				id: profile.group?.id,
+				name: profile.group?.name,
+				label: profile.group?.label,
 			},
-			idps: user.identities?.map(
+			idps: profile.identities?.map(
 				(identity) => identity.identity_provider_name as Idp,
 			),
 			organisation: {
 				name:
-					user.maintainer_users_profiles?.[0]?.maintainer.schema_name ||
+					profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ||
 					undefined,
 				or_id:
-				user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
+				profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
 				logo_url:
-				user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
+				profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
 					?.iri,
 			},
-			lastAccessAt: user.last_access_at,
+			lastAccessAt: profile.last_access_at,
 		};
 	} else {
-		const user = userProfile as ProfileAvo;
-		return {
-			profileId: user.profile_id,
-			stamboek: user.stamboek || undefined,
-			organisation: user.company_name
-				? ({
-					name: user.company_name,
-				} as Avo.Organization.Organization)
-				: undefined,
-			educationalOrganisations: (user.organisations || []).map(
-				(org): ClientEducationOrganization => ({
-					organizationId: org.organization_id,
-					unitId: org.unit_id || null,
-					label: org.organization?.ldap_description || '',
-				}),
-			),
-			subjects: user.classifications?.map(
-				(classification) => classification.key,
-			),
-			educationLevels: user.contexts?.map((context) => context.key),
-			isException: user.is_exception || undefined,
-			businessCategory: user.business_category || undefined,
-			createdAt: user.acc_created_at,
-			userGroup: {
-				name: user.group_name || undefined,
-				label: user.group_name || undefined,
-				id: user.group_id || undefined,
-			},
-			userId: user.user_id,
-			uid: user.user_id,
-			email: user.mail || undefined,
-			fullName: user.full_name || undefined,
-			firstName: user.first_name || undefined,
-			lastName: user.last_name || undefined,
-			isBlocked: user.is_blocked || undefined,
-			blockedAt: user?.blocked_at?.date,
-			unblockedAt: user?.unblocked_at?.date,
-			lastAccessAt: user.last_access_at,
-			tempAccess: user?.user?.temp_access
-				? {
-					from: user?.user?.temp_access?.from || null,
-					until: user?.user?.temp_access?.until || null,
-					status: isNil(user?.user?.temp_access?.current?.status)
-						? null
-						: user?.user?.temp_access?.current?.status === 1,
-				}
-				: null,
-			idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
-		};
+		if ((userInfo as any).profile) {
+			// Avo user object with linked profile
+			const user = userInfo as Avo.User.User;
+			return {
+				profileId: user.profile.id,
+				stamboek: user.profile.stamboek || undefined,
+				organisation: user.profile?.organisation,
+				educationalOrganisations: (user.profile?.organizations || []).map(
+					(org): Avo.EducationOrganization.Organization => ({
+						organizationId: undefined,
+						unitId: org?.unitAddress || null,
+						label: org?.organizationName,
+					}),
+				),
+				subjects: user.profile.subjects,
+				educationLevels: user.profile.educationLevels,
+				isException: user.profile.is_exception || undefined,
+				businessCategory: user.profile.business_category || undefined,
+				createdAt: user.profile.created_at,
+				userGroup: {
+					name: undefined,
+					label: undefined,
+					id: user.profile.userGroupIds[0] || undefined,
+				},
+				userId: user.uid,
+				uid: user.uid,
+				email: user.mail || undefined,
+				fullName: user.full_name || undefined,
+				firstName: user.first_name || undefined,
+				lastName: user.last_name || undefined,
+				isBlocked: user.is_blocked || undefined,
+				blockedAt: undefined,
+				unblockedAt: undefined,
+				lastAccessAt: user.last_access_at,
+				tempAccess: user?.temp_access
+					? {
+						from: user?.temp_access?.from || null,
+						until: user?.temp_access?.until || null,
+						status: isNil(user?.temp_access?.current?.status)
+							? null
+							: user?.temp_access?.current?.status === 1,
+					}
+					: null,
+				idps: user.idpmaps as Idp[],
+			};
+		} else if ((userInfo as any).user) {
+			// Avo profile with linked user
+			const profile = userInfo as Avo.User.Profile;
+			return {
+				profileId: profile.id,
+				stamboek: profile.stamboek || undefined,
+				organisation: profile.organisation,
+				educationalOrganisations: (profile.organizations || []).map(
+					(org): Avo.EducationOrganization.Organization => ({
+						organizationId: undefined,
+						unitId: undefined,
+						label: org.organizationName,
+					}),
+				),
+				subjects: profile.subjects,
+				educationLevels: profile.educationLevels,
+				isException: profile.is_exception || undefined,
+				businessCategory: profile.business_category || undefined,
+				createdAt: profile.created_at,
+				userGroup: {
+					name:  undefined,
+					label:  undefined,
+					id: profile.userGroupIds[0] || undefined,
+				},
+				userId: profile.user_id,
+				uid: profile.user_id,
+				email: profile?.user?.mail || undefined,
+				fullName: profile?.user?.full_name || undefined,
+				firstName: profile?.user?.first_name || undefined,
+				lastName: profile?.user?.last_name || undefined,
+				isBlocked: profile?.user?.is_blocked || undefined,
+				blockedAt: undefined,
+				unblockedAt: undefined,
+				lastAccessAt: profile?.user?.last_access_at,
+				tempAccess: profile?.user?.temp_access
+					? {
+						from: profile?.user?.temp_access?.from || null,
+						until: profile?.user?.temp_access?.until || null,
+						status: isNil(profile?.user?.temp_access?.current?.status)
+							? null
+							: profile?.user?.temp_access?.current?.status === 1,
+					}
+					: null,
+				idps: profile?.user?.idpmaps as Idp[],
+			};
+		} else {
+			// Avo user summary table info
+			const user = userInfo as ProfileAvo;
+			return {
+				profileId: user.profile_id,
+				stamboek: user.stamboek || undefined,
+				organisation: user.company_name
+					? ({
+						name: user.company_name,
+					} as Avo.Organization.Organization)
+					: undefined,
+				educationalOrganisations: (user.organisations || []).map(
+					(org): Avo.EducationOrganization.Organization => ({
+						organizationId: org.organization_id,
+						unitId: org.unit_id || null,
+						label: org.organization?.ldap_description || '',
+					}),
+				),
+				subjects: user.classifications?.map(
+					(classification) => classification.key,
+				),
+				educationLevels: user.contexts?.map((context) => context.key),
+				isException: user.is_exception || undefined,
+				businessCategory: user.business_category || undefined,
+				createdAt: user.acc_created_at,
+				userGroup: {
+					name: user.group_name || undefined,
+					label: user.group_name || undefined,
+					id: user.group_id || undefined,
+				},
+				userId: user.user_id,
+				uid: user.user_id,
+				email: user.mail || undefined,
+				fullName: user.full_name || undefined,
+				firstName: user.first_name || undefined,
+				lastName: user.last_name || undefined,
+				isBlocked: user.is_blocked || undefined,
+				blockedAt: user?.blocked_at?.date,
+				unblockedAt: user?.unblocked_at?.date,
+				lastAccessAt: user.last_access_at,
+				tempAccess: user?.user?.temp_access
+					? {
+						from: user?.user?.temp_access?.from || null,
+						until: user?.user?.temp_access?.until || null,
+						status: isNil(user?.user?.temp_access?.current?.status)
+							? null
+							: user?.user?.temp_access?.current?.status === 1,
+					}
+					: null,
+				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
+			};
+		}
 	}
-}
-
-export function convertAvoUserToCommonUser(avoUser?: Avo.User.User | null): CommonUser | null {
-	if (!avoUser || !avoUser.profile) {
-		return null;
-	}
-	return {
-		profileId: avoUser.profile.id,
-		stamboek: avoUser.profile.stamboek || undefined,
-		organisation: avoUser.profile.organisation
-			? ({
-				name: avoUser.profile.organisation.name,
-			} as Avo.Organization.Organization)
-			: undefined,
-		educationalOrganisations: (avoUser.profile.organizations || []).map(
-			(org): Avo.EducationOrganization.Organization => ({
-				organizationId: null as any, // TODO fetch org id everywhere
-				unitId: null,
-				label: org.organizationName || '',
-			})
-		),
-		subjects: avoUser.profile.subjects,
-		educationLevels: avoUser.profile.educationLevels,
-		isException: avoUser.profile.is_exception || undefined,
-		businessCategory: avoUser.profile.business_category || undefined,
-		createdAt: avoUser.created_at,
-		userGroup: {
-			name: undefined,
-			label: undefined,
-			id: avoUser.profile.userGroupIds[0] || undefined,
-		},
-		userId: avoUser.uid,
-		uid: avoUser.uid,
-		email: avoUser.mail || undefined,
-		fullName: avoUser.full_name || undefined,
-		firstName: avoUser.first_name || undefined,
-		lastName: avoUser.last_name || undefined,
-		isBlocked: avoUser.is_blocked || undefined,
-		blockedAt: undefined, // TODO fetch value if needed
-		unblockedAt: undefined, // TODO fetch value if needed
-		lastAccessAt: avoUser.last_access_at || undefined,
-		tempAccess: avoUser?.temp_access
-			? {
-				from: avoUser?.temp_access?.from || null,
-				until: avoUser?.temp_access?.until || null,
-				status: isNil(avoUser?.temp_access?.status)
-					? null
-					: avoUser?.temp_access?.status,
-			}
-			: undefined,
-		idps: avoUser.idpmaps as Idp[],
-	};
 }
