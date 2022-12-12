@@ -100,6 +100,17 @@ export type App_Assignment_Assignment_Tags_Aggregate = {
   nodes: Array<App_Assignment_Assignment_Tags>;
 };
 
+export type App_Assignment_Assignment_Tags_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignment_Assignment_Tags_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Assignment_Tags_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Assignment_Tags_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Assignment_Tags_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignment_assignment_tags" */
 export type App_Assignment_Assignment_Tags_Aggregate_Fields = {
   __typename?: 'app_assignment_assignment_tags_aggregate_fields';
@@ -424,6 +435,33 @@ export type App_Assignment_Blocks_V2_Aggregate = {
   nodes: Array<App_Assignment_Blocks_V2>;
 };
 
+export type App_Assignment_Blocks_V2_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Assignment_Blocks_V2_Select_Column_App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Blocks_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Assignment_Blocks_V2_Select_Column_App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Blocks_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Blocks_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Blocks_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignment_blocks_v2" */
 export type App_Assignment_Blocks_V2_Aggregate_Fields = {
   __typename?: 'app_assignment_blocks_v2_aggregate_fields';
@@ -694,6 +732,22 @@ export enum App_Assignment_Blocks_V2_Select_Column {
   UseCustomFields = 'use_custom_fields'
 }
 
+/** select "app_assignment_blocks_v2_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.assignment_blocks_v2" */
+export enum App_Assignment_Blocks_V2_Select_Column_App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
+/** select "app_assignment_blocks_v2_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.assignment_blocks_v2" */
+export enum App_Assignment_Blocks_V2_Select_Column_App_Assignment_Blocks_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
 /** input type for updating data in table "app.assignment_blocks_v2" */
 export type App_Assignment_Blocks_V2_Set_Input = {
   assignment_id?: InputMaybe<Scalars['uuid']>;
@@ -936,6 +990,17 @@ export type App_Assignment_Labels_Aggregate = {
   nodes: Array<App_Assignment_Labels>;
 };
 
+export type App_Assignment_Labels_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignment_Labels_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Labels_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Labels_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Labels_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignment_labels" */
 export type App_Assignment_Labels_Aggregate_Fields = {
   __typename?: 'app_assignment_labels_aggregate_fields';
@@ -1005,6 +1070,7 @@ export type App_Assignment_Labels_Bool_Exp = {
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   tags?: InputMaybe<App_Assignment_Assignment_Tags_Bool_Exp>;
+  tags_aggregate?: InputMaybe<App_Assignment_Assignment_Tags_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "app.assignment_labels" */
@@ -1230,6 +1296,17 @@ export type App_Assignment_Labels_V2_Aggregate = {
   __typename?: 'app_assignment_labels_v2_aggregate';
   aggregate?: Maybe<App_Assignment_Labels_V2_Aggregate_Fields>;
   nodes: Array<App_Assignment_Labels_V2>;
+};
+
+export type App_Assignment_Labels_V2_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignment_Labels_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Labels_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Labels_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Labels_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.assignment_labels_v2" */
@@ -1502,6 +1579,33 @@ export type App_Assignment_Responses_Aggregate = {
   nodes: Array<App_Assignment_Responses>;
 };
 
+export type App_Assignment_Responses_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Assignment_Responses_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Assignment_Responses_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Assignment_Responses_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Responses_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Assignment_Responses_Select_Column_App_Assignment_Responses_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Responses_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignment_Responses_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Assignment_Responses_Select_Column_App_Assignment_Responses_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Responses_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignment_Responses_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Responses_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Responses_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignment_responses" */
 export type App_Assignment_Responses_Aggregate_Fields = {
   __typename?: 'app_assignment_responses_aggregate_fields';
@@ -1728,6 +1832,18 @@ export enum App_Assignment_Responses_Select_Column {
   UpdatedAt = 'updated_at'
 }
 
+/** select "app_assignment_responses_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.assignment_responses" */
+export enum App_Assignment_Responses_Select_Column_App_Assignment_Responses_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsArchived = 'is_archived'
+}
+
+/** select "app_assignment_responses_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.assignment_responses" */
+export enum App_Assignment_Responses_Select_Column_App_Assignment_Responses_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsArchived = 'is_archived'
+}
+
 /** input type for updating data in table "app.assignment_responses" */
 export type App_Assignment_Responses_Set_Input = {
   assignment_uuid?: InputMaybe<Scalars['uuid']>;
@@ -1892,6 +2008,17 @@ export type App_Assignment_Responses_V2_Aggregate = {
   nodes: Array<App_Assignment_Responses_V2>;
 };
 
+export type App_Assignment_Responses_V2_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignment_Responses_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignment_Responses_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignment_Responses_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignment_Responses_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignment_responses_v2" */
 export type App_Assignment_Responses_V2_Aggregate_Fields = {
   __typename?: 'app_assignment_responses_v2_aggregate_fields';
@@ -1935,6 +2062,7 @@ export type App_Assignment_Responses_V2_Bool_Exp = {
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   pupil_collection_blocks?: InputMaybe<App_Pupil_Collection_Blocks_Bool_Exp>;
+  pupil_collection_blocks_aggregate?: InputMaybe<App_Pupil_Collection_Blocks_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -2467,6 +2595,33 @@ export type App_Assignments_Aggregate = {
   nodes: Array<App_Assignments>;
 };
 
+export type App_Assignments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Assignments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Assignments_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Assignments_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Assignments_Select_Column_App_Assignments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Assignments_Select_Column_App_Assignments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignments" */
 export type App_Assignments_Aggregate_Fields = {
   __typename?: 'app_assignments_aggregate_fields';
@@ -2549,7 +2704,9 @@ export type App_Assignments_Bool_Exp = {
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   responses?: InputMaybe<App_Assignment_Responses_Bool_Exp>;
+  responses_aggregate?: InputMaybe<App_Assignment_Responses_Aggregate_Bool_Exp>;
   tags?: InputMaybe<App_Assignment_Assignment_Tags_Bool_Exp>;
+  tags_aggregate?: InputMaybe<App_Assignment_Assignment_Tags_Aggregate_Bool_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   uuid?: InputMaybe<Uuid_Comparison_Exp>;
@@ -2764,6 +2921,26 @@ export enum App_Assignments_Select_Column {
   UpdatedAt = 'updated_at',
   /** column name */
   Uuid = 'uuid'
+}
+
+/** select "app_assignments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.assignments" */
+export enum App_Assignments_Select_Column_App_Assignments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsArchived = 'is_archived',
+  /** column name */
+  IsCollaborative = 'is_collaborative',
+  /** column name */
+  IsDeleted = 'is_deleted'
+}
+
+/** select "app_assignments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.assignments" */
+export enum App_Assignments_Select_Column_App_Assignments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsArchived = 'is_archived',
+  /** column name */
+  IsCollaborative = 'is_collaborative',
+  /** column name */
+  IsDeleted = 'is_deleted'
 }
 
 /** input type for updating data in table "app.assignments" */
@@ -3022,6 +3199,33 @@ export type App_Assignments_V2_Aggregate = {
   nodes: Array<App_Assignments_V2>;
 };
 
+export type App_Assignments_V2_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Assignments_V2_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Assignments_V2_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Assignments_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignments_V2_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Assignments_V2_Select_Column_App_Assignments_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignments_V2_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Assignments_V2_Select_Column_App_Assignments_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_V2_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Assignments_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignments_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.assignments_v2" */
 export type App_Assignments_V2_Aggregate_Fields = {
   __typename?: 'app_assignments_v2_aggregate_fields';
@@ -3068,6 +3272,17 @@ export type App_Assignments_V2_Assignment_Labels_V2_Aggregate = {
   __typename?: 'app_assignments_v2_assignment_labels_v2_aggregate';
   aggregate?: Maybe<App_Assignments_V2_Assignment_Labels_V2_Aggregate_Fields>;
   nodes: Array<App_Assignments_V2_Assignment_Labels_V2>;
+};
+
+export type App_Assignments_V2_Assignment_Labels_V2_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignments_V2_Assignment_Labels_V2_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignments_V2_Assignment_Labels_V2_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignments_V2_Assignment_Labels_V2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_V2_Assignment_Labels_V2_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.assignments_v2_assignment_labels_v2" */
@@ -3356,6 +3571,7 @@ export type App_Assignments_V2_Bool_Exp = {
   assignment_type?: InputMaybe<String_Comparison_Exp>;
   available_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   blocks?: InputMaybe<App_Assignment_Blocks_V2_Bool_Exp>;
+  blocks_aggregate?: InputMaybe<App_Assignment_Blocks_V2_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deadline_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
@@ -3363,10 +3579,12 @@ export type App_Assignments_V2_Bool_Exp = {
   is_collaborative?: InputMaybe<Boolean_Comparison_Exp>;
   is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
   labels?: InputMaybe<App_Assignments_V2_Assignment_Labels_V2_Bool_Exp>;
+  labels_aggregate?: InputMaybe<App_Assignments_V2_Assignment_Labels_V2_Aggregate_Bool_Exp>;
   owner?: InputMaybe<Users_Summary_View_Bool_Exp>;
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   responses?: InputMaybe<App_Assignment_Responses_V2_Bool_Exp>;
+  responses_aggregate?: InputMaybe<App_Assignment_Responses_V2_Aggregate_Bool_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   view_count?: InputMaybe<App_Assignment_V2_Views_Bool_Exp>;
@@ -3534,6 +3752,22 @@ export enum App_Assignments_V2_Select_Column {
   Title = 'title',
   /** column name */
   UpdatedAt = 'updated_at'
+}
+
+/** select "app_assignments_v2_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.assignments_v2" */
+export enum App_Assignments_V2_Select_Column_App_Assignments_V2_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsCollaborative = 'is_collaborative',
+  /** column name */
+  IsDeleted = 'is_deleted'
+}
+
+/** select "app_assignments_v2_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.assignments_v2" */
+export enum App_Assignments_V2_Select_Column_App_Assignments_V2_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsCollaborative = 'is_collaborative',
+  /** column name */
+  IsDeleted = 'is_deleted'
 }
 
 /** input type for updating data in table "app.assignments_v2" */
@@ -3757,6 +3991,7 @@ export type App_Collection_Actualisation_Overview_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   is_public?: InputMaybe<Boolean_Comparison_Exp>;
   labels?: InputMaybe<App_Collection_Labels_Bool_Exp>;
+  labels_aggregate?: InputMaybe<App_Collection_Labels_Aggregate_Bool_Exp>;
   last_editor?: InputMaybe<Shared_User_Names_Bool_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -3960,6 +4195,17 @@ export type App_Collection_Bookmarks_Aggregate = {
   __typename?: 'app_collection_bookmarks_aggregate';
   aggregate?: Maybe<App_Collection_Bookmarks_Aggregate_Fields>;
   nodes: Array<App_Collection_Bookmarks>;
+};
+
+export type App_Collection_Bookmarks_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Bookmarks_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Bookmarks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Bookmarks_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Bookmarks_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.collection_bookmarks" */
@@ -4560,6 +4806,33 @@ export type App_Collection_Fragments_Aggregate = {
   nodes: Array<App_Collection_Fragments>;
 };
 
+export type App_Collection_Fragments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Collection_Fragments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Collection_Fragments_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Collection_Fragments_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Fragments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Collection_Fragments_Select_Column_App_Collection_Fragments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Fragments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collection_Fragments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Collection_Fragments_Select_Column_App_Collection_Fragments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Fragments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collection_Fragments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Fragments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Fragments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collection_fragments" */
 export type App_Collection_Fragments_Aggregate_Fields = {
   __typename?: 'app_collection_fragments_aggregate_fields';
@@ -4835,6 +5108,22 @@ export enum App_Collection_Fragments_Select_Column {
   UseCustomFields = 'use_custom_fields'
 }
 
+/** select "app_collection_fragments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.collection_fragments" */
+export enum App_Collection_Fragments_Select_Column_App_Collection_Fragments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
+/** select "app_collection_fragments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.collection_fragments" */
+export enum App_Collection_Fragments_Select_Column_App_Collection_Fragments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
 /** input type for updating data in table "app.collection_fragments" */
 export type App_Collection_Fragments_Set_Input = {
   collection_id?: InputMaybe<Scalars['String']>;
@@ -5091,6 +5380,17 @@ export type App_Collection_Labels_Aggregate = {
   nodes: Array<App_Collection_Labels>;
 };
 
+export type App_Collection_Labels_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Labels_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Labels_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Labels_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Labels_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collection_labels" */
 export type App_Collection_Labels_Aggregate_Fields = {
   __typename?: 'app_collection_labels_aggregate_fields';
@@ -5158,6 +5458,7 @@ export type App_Collection_Labels_Bool_Exp = {
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
   label_enum?: InputMaybe<Lookup_Enum_Collection_Labels_Bool_Exp>;
+  label_enum_aggregate?: InputMaybe<Lookup_Enum_Collection_Labels_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -5461,6 +5762,33 @@ export type App_Collection_Management_Qc_Aggregate = {
   nodes: Array<App_Collection_Management_Qc>;
 };
 
+export type App_Collection_Management_Qc_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Collection_Management_Qc_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Collection_Management_Qc_Select_Column_App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Management_Qc_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Collection_Management_Qc_Select_Column_App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Management_Qc_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collection_Management_Qc_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Management_Qc_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Management_Qc_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collection_management_QC" */
 export type App_Collection_Management_Qc_Aggregate_Fields = {
   __typename?: 'app_collection_management_QC_aggregate_fields';
@@ -5659,6 +5987,18 @@ export enum App_Collection_Management_Qc_Select_Column {
   UpdatedAt = 'updated_at'
 }
 
+/** select "app_collection_management_QC_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.collection_management_QC" */
+export enum App_Collection_Management_Qc_Select_Column_App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  QcStatus = 'qc_status'
+}
+
+/** select "app_collection_management_QC_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.collection_management_QC" */
+export enum App_Collection_Management_Qc_Select_Column_App_Collection_Management_Qc_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  QcStatus = 'qc_status'
+}
+
 /** input type for updating data in table "app.collection_management_QC" */
 export type App_Collection_Management_Qc_Set_Input = {
   assignee_profile_id?: InputMaybe<Scalars['uuid']>;
@@ -5835,6 +6175,7 @@ export type App_Collection_Management_Avg_Fields = {
 /** Boolean expression to filter rows from the table "app.collection_management". All fields are combined with a logical 'AND'. */
 export type App_Collection_Management_Bool_Exp = {
   QC?: InputMaybe<App_Collection_Management_Qc_Bool_Exp>;
+  QC_aggregate?: InputMaybe<App_Collection_Management_Qc_Aggregate_Bool_Exp>;
   _and?: InputMaybe<Array<App_Collection_Management_Bool_Exp>>;
   _not?: InputMaybe<App_Collection_Management_Bool_Exp>;
   _or?: InputMaybe<Array<App_Collection_Management_Bool_Exp>>;
@@ -6244,6 +6585,17 @@ export type App_Collection_Marcom_Log_Aggregate = {
   nodes: Array<App_Collection_Marcom_Log>;
 };
 
+export type App_Collection_Marcom_Log_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Marcom_Log_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Marcom_Log_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Marcom_Log_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Marcom_Log_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collection_marcom_log" */
 export type App_Collection_Marcom_Log_Aggregate_Fields = {
   __typename?: 'app_collection_marcom_log_aggregate_fields';
@@ -6614,6 +6966,17 @@ export type App_Collection_Marcom_Notes_Aggregate = {
   __typename?: 'app_collection_marcom_notes_aggregate';
   aggregate?: Maybe<App_Collection_Marcom_Notes_Aggregate_Fields>;
   nodes: Array<App_Collection_Marcom_Notes>;
+};
+
+export type App_Collection_Marcom_Notes_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Marcom_Notes_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Marcom_Notes_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Marcom_Notes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Marcom_Notes_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.collection_marcom_notes" */
@@ -7031,6 +7394,7 @@ export type App_Collection_Marcom_Overview_Bool_Exp = {
   is_public?: InputMaybe<Boolean_Comparison_Exp>;
   klascement?: InputMaybe<Boolean_Comparison_Exp>;
   labels?: InputMaybe<App_Collection_Labels_Bool_Exp>;
+  labels_aggregate?: InputMaybe<App_Collection_Labels_Aggregate_Bool_Exp>;
   last_editor?: InputMaybe<Shared_User_Names_Bool_Exp>;
   last_marcom_date?: InputMaybe<Timestamptz_Comparison_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -7218,6 +7582,17 @@ export type App_Collection_Plays_Aggregate = {
   __typename?: 'app_collection_plays_aggregate';
   aggregate?: Maybe<App_Collection_Plays_Aggregate_Fields>;
   nodes: Array<App_Collection_Plays>;
+};
+
+export type App_Collection_Plays_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Plays_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Plays_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Plays_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Plays_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.collection_plays" */
@@ -7640,6 +8015,7 @@ export type App_Collection_Qc_Overview_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   is_public?: InputMaybe<Boolean_Comparison_Exp>;
   labels?: InputMaybe<App_Collection_Labels_Bool_Exp>;
+  labels_aggregate?: InputMaybe<App_Collection_Labels_Aggregate_Bool_Exp>;
   last_editor?: InputMaybe<Shared_User_Names_Bool_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -8068,6 +8444,17 @@ export type App_Collection_Relations_View_Aggregate = {
   nodes: Array<App_Collection_Relations_View>;
 };
 
+export type App_Collection_Relations_View_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Relations_View_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Relations_View_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Relations_View_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Relations_View_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collection_relations_view" */
 export type App_Collection_Relations_View_Aggregate_Fields = {
   __typename?: 'app_collection_relations_view_aggregate_fields';
@@ -8194,6 +8581,17 @@ export type App_Collection_Views_Aggregate = {
   __typename?: 'app_collection_views_aggregate';
   aggregate?: Maybe<App_Collection_Views_Aggregate_Fields>;
   nodes: Array<App_Collection_Views>;
+};
+
+export type App_Collection_Views_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Collection_Views_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collection_Views_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collection_Views_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collection_Views_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.collection_views" */
@@ -8859,6 +9257,33 @@ export type App_Collections_Aggregate = {
   nodes: Array<App_Collections>;
 };
 
+export type App_Collections_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Collections_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Collections_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Collections_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Collections_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Collections_Select_Column_App_Collections_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collections_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collections_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Collections_Select_Column_App_Collections_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collections_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Collections_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Collections_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Collections_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.collections" */
 export type App_Collections_Aggregate_Fields = {
   __typename?: 'app_collections_aggregate_fields';
@@ -8931,6 +9356,7 @@ export type App_Collections_Avg_Order_By = {
 /** Boolean expression to filter rows from the table "app.collections". All fields are combined with a logical 'AND'. */
 export type App_Collections_Bool_Exp = {
   QC?: InputMaybe<App_Collection_Management_Qc_Bool_Exp>;
+  QC_aggregate?: InputMaybe<App_Collection_Management_Qc_Aggregate_Bool_Exp>;
   _and?: InputMaybe<Array<App_Collections_Bool_Exp>>;
   _not?: InputMaybe<App_Collections_Bool_Exp>;
   _or?: InputMaybe<Array<App_Collections_Bool_Exp>>;
@@ -8939,9 +9365,12 @@ export type App_Collections_Bool_Exp = {
   avo1_id?: InputMaybe<String_Comparison_Exp>;
   briefing_id?: InputMaybe<String_Comparison_Exp>;
   collection_bookmarks?: InputMaybe<App_Collection_Bookmarks_Bool_Exp>;
+  collection_bookmarks_aggregate?: InputMaybe<App_Collection_Bookmarks_Aggregate_Bool_Exp>;
   collection_fragment_ids?: InputMaybe<Jsonb_Comparison_Exp>;
   collection_fragments?: InputMaybe<App_Collection_Fragments_Bool_Exp>;
+  collection_fragments_aggregate?: InputMaybe<App_Collection_Fragments_Aggregate_Bool_Exp>;
   collection_labels?: InputMaybe<App_Collection_Labels_Bool_Exp>;
+  collection_labels_aggregate?: InputMaybe<App_Collection_Labels_Aggregate_Bool_Exp>;
   counts?: InputMaybe<App_Collection_Counts_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   depublish_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -8962,18 +9391,22 @@ export type App_Collections_Bool_Exp = {
   lom_typicalagerange?: InputMaybe<Jsonb_Comparison_Exp>;
   management?: InputMaybe<App_Collection_Management_Bool_Exp>;
   marcom?: InputMaybe<App_Collection_Marcom_Log_Bool_Exp>;
+  marcom_aggregate?: InputMaybe<App_Collection_Marcom_Log_Aggregate_Bool_Exp>;
   marcom_note?: InputMaybe<App_Collection_Marcom_Notes_Bool_Exp>;
   marcom_notes?: InputMaybe<App_Collection_Marcom_Notes_Bool_Exp>;
+  marcom_notes_aggregate?: InputMaybe<App_Collection_Marcom_Notes_Aggregate_Bool_Exp>;
   note?: InputMaybe<String_Comparison_Exp>;
   organisation?: InputMaybe<Shared_Organisations_Bool_Exp>;
   organisation_id?: InputMaybe<String_Comparison_Exp>;
   owner?: InputMaybe<Users_Summary_View_Bool_Exp>;
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   play_counts?: InputMaybe<App_Collection_Plays_Bool_Exp>;
+  play_counts_aggregate?: InputMaybe<App_Collection_Plays_Aggregate_Bool_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   publish_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   published_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   relations?: InputMaybe<App_Collection_Relations_View_Bool_Exp>;
+  relations_aggregate?: InputMaybe<App_Collection_Relations_View_Aggregate_Bool_Exp>;
   seo_image_path?: InputMaybe<String_Comparison_Exp>;
   thumbnail_path?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
@@ -8983,7 +9416,9 @@ export type App_Collections_Bool_Exp = {
   updated_by?: InputMaybe<Users_Profiles_Bool_Exp>;
   updated_by_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   usage_counts?: InputMaybe<App_Usage_Counts_Bool_Exp>;
+  usage_counts_aggregate?: InputMaybe<App_Usage_Counts_Aggregate_Bool_Exp>;
   view_counts?: InputMaybe<App_Collection_Views_Bool_Exp>;
+  view_counts_aggregate?: InputMaybe<App_Collection_Views_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "app.collections" */
@@ -9355,6 +9790,26 @@ export enum App_Collections_Select_Column {
   UpdatedAt = 'updated_at',
   /** column name */
   UpdatedByProfileId = 'updated_by_profile_id'
+}
+
+/** select "app_collections_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.collections" */
+export enum App_Collections_Select_Column_App_Collections_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsManaged = 'is_managed',
+  /** column name */
+  IsPublic = 'is_public'
+}
+
+/** select "app_collections_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.collections" */
+export enum App_Collections_Select_Column_App_Collections_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsManaged = 'is_managed',
+  /** column name */
+  IsPublic = 'is_public'
 }
 
 /** input type for updating data in table "app.collections" */
@@ -10072,6 +10527,17 @@ export type App_Content_Blocks_Aggregate = {
   nodes: Array<App_Content_Blocks>;
 };
 
+export type App_Content_Blocks_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Content_Blocks_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Content_Blocks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Content_Blocks_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Blocks_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.content_blocks" */
 export type App_Content_Blocks_Aggregate_Fields = {
   __typename?: 'app_content_blocks_aggregate_fields';
@@ -10466,8 +10932,11 @@ export type App_Content_Bool_Exp = {
   _not?: InputMaybe<App_Content_Bool_Exp>;
   _or?: InputMaybe<Array<App_Content_Bool_Exp>>;
   contentBlockssBycontentId?: InputMaybe<App_Content_Blocks_Bool_Exp>;
+  contentBlockssBycontentId_aggregate?: InputMaybe<App_Content_Blocks_Aggregate_Bool_Exp>;
   content_content_labels?: InputMaybe<App_Content_Content_Labels_Bool_Exp>;
+  content_content_labels_aggregate?: InputMaybe<App_Content_Content_Labels_Aggregate_Bool_Exp>;
   content_nav_elements?: InputMaybe<App_Content_Nav_Elements_Bool_Exp>;
+  content_nav_elements_aggregate?: InputMaybe<App_Content_Nav_Elements_Aggregate_Bool_Exp>;
   content_type?: InputMaybe<Lookup_Enum_Content_Types_Enum_Comparison_Exp>;
   content_width?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -10526,6 +10995,17 @@ export type App_Content_Content_Labels_Aggregate = {
   __typename?: 'app_content_content_labels_aggregate';
   aggregate?: Maybe<App_Content_Content_Labels_Aggregate_Fields>;
   nodes: Array<App_Content_Content_Labels>;
+};
+
+export type App_Content_Content_Labels_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Content_Content_Labels_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Content_Content_Labels_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Content_Content_Labels_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Content_Labels_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.content_content_labels" */
@@ -11010,6 +11490,7 @@ export type App_Content_Labels_Bool_Exp = {
   _not?: InputMaybe<App_Content_Labels_Bool_Exp>;
   _or?: InputMaybe<Array<App_Content_Labels_Bool_Exp>>;
   content_content_labels?: InputMaybe<App_Content_Content_Labels_Bool_Exp>;
+  content_content_labels_aggregate?: InputMaybe<App_Content_Content_Labels_Aggregate_Bool_Exp>;
   content_type?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Bool_Exp>;
@@ -11515,6 +11996,17 @@ export type App_Content_Nav_Elements_Aggregate = {
   __typename?: 'app_content_nav_elements_aggregate';
   aggregate?: Maybe<App_Content_Nav_Elements_Aggregate_Fields>;
   nodes: Array<App_Content_Nav_Elements>;
+};
+
+export type App_Content_Nav_Elements_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Content_Nav_Elements_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Content_Nav_Elements_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Content_Nav_Elements_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Nav_Elements_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.content_nav_elements" */
@@ -12662,6 +13154,17 @@ export type App_Item_Bookmarks_Aggregate = {
   nodes: Array<App_Item_Bookmarks>;
 };
 
+export type App_Item_Bookmarks_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Item_Bookmarks_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Item_Bookmarks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Item_Bookmarks_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Item_Bookmarks_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.item_bookmarks" */
 export type App_Item_Bookmarks_Aggregate_Fields = {
   __typename?: 'app_item_bookmarks_aggregate_fields';
@@ -12982,6 +13485,17 @@ export type App_Item_Collateral_Aggregate = {
   __typename?: 'app_item_collateral_aggregate';
   aggregate?: Maybe<App_Item_Collateral_Aggregate_Fields>;
   nodes: Array<App_Item_Collateral>;
+};
+
+export type App_Item_Collateral_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Item_Collateral_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Item_Collateral_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Item_Collateral_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Item_Collateral_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.item_collateral" */
@@ -13685,6 +14199,7 @@ export type App_Item_Meta_Bool_Exp = {
   issued_edtf?: InputMaybe<String_Comparison_Exp>;
   item?: InputMaybe<Shared_Items_Bool_Exp>;
   item_collaterals?: InputMaybe<App_Item_Collateral_Bool_Exp>;
+  item_collaterals_aggregate?: InputMaybe<App_Item_Collateral_Aggregate_Bool_Exp>;
   item_counts?: InputMaybe<App_Item_Counts_Bool_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -13698,10 +14213,12 @@ export type App_Item_Meta_Bool_Exp = {
   organisation?: InputMaybe<Shared_Organisations_Bool_Exp>;
   original_pid?: InputMaybe<String_Comparison_Exp>;
   play_counts?: InputMaybe<App_Item_Plays_Bool_Exp>;
+  play_counts_aggregate?: InputMaybe<App_Item_Plays_Aggregate_Bool_Exp>;
   publish_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   published_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   reference_id?: InputMaybe<Migrate_Reference_Ids_Bool_Exp>;
   relations?: InputMaybe<App_Item_Relations_View_Bool_Exp>;
+  relations_aggregate?: InputMaybe<App_Item_Relations_View_Aggregate_Bool_Exp>;
   seo_image_path?: InputMaybe<String_Comparison_Exp>;
   series?: InputMaybe<String_Comparison_Exp>;
   thumbnail_path?: InputMaybe<String_Comparison_Exp>;
@@ -13711,6 +14228,7 @@ export type App_Item_Meta_Bool_Exp = {
   uid?: InputMaybe<Uuid_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   view_counts?: InputMaybe<App_Item_Views_Bool_Exp>;
+  view_counts_aggregate?: InputMaybe<App_Item_Views_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "app.item_meta" */
@@ -14275,6 +14793,17 @@ export type App_Item_Plays_Aggregate = {
   __typename?: 'app_item_plays_aggregate';
   aggregate?: Maybe<App_Item_Plays_Aggregate_Fields>;
   nodes: Array<App_Item_Plays>;
+};
+
+export type App_Item_Plays_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Item_Plays_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Item_Plays_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Item_Plays_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Item_Plays_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.item_plays" */
@@ -14860,6 +15389,17 @@ export type App_Item_Relations_View_Aggregate = {
   nodes: Array<App_Item_Relations_View>;
 };
 
+export type App_Item_Relations_View_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Item_Relations_View_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Item_Relations_View_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Item_Relations_View_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Item_Relations_View_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.item_relations_view" */
 export type App_Item_Relations_View_Aggregate_Fields = {
   __typename?: 'app_item_relations_view_aggregate_fields';
@@ -15253,6 +15793,17 @@ export type App_Item_Views_Aggregate = {
   nodes: Array<App_Item_Views>;
 };
 
+export type App_Item_Views_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Item_Views_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Item_Views_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Item_Views_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Item_Views_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.item_views" */
 export type App_Item_Views_Aggregate_Fields = {
   __typename?: 'app_item_views_aggregate_fields';
@@ -15598,6 +16149,33 @@ export type App_Pupil_Collection_Blocks_Aggregate = {
   nodes: Array<App_Pupil_Collection_Blocks>;
 };
 
+export type App_Pupil_Collection_Blocks_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Pupil_Collection_Blocks_Select_Column_App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Pupil_Collection_Blocks_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Pupil_Collection_Blocks_Select_Column_App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Pupil_Collection_Blocks_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Pupil_Collection_Blocks_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Pupil_Collection_Blocks_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.pupil_collection_blocks" */
 export type App_Pupil_Collection_Blocks_Aggregate_Fields = {
   __typename?: 'app_pupil_collection_blocks_aggregate_fields';
@@ -15846,6 +16424,22 @@ export enum App_Pupil_Collection_Blocks_Select_Column {
   Type = 'type',
   /** column name */
   UpdatedAt = 'updated_at',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
+/** select "app_pupil_collection_blocks_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.pupil_collection_blocks" */
+export enum App_Pupil_Collection_Blocks_Select_Column_App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  UseCustomFields = 'use_custom_fields'
+}
+
+/** select "app_pupil_collection_blocks_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.pupil_collection_blocks" */
+export enum App_Pupil_Collection_Blocks_Select_Column_App_Pupil_Collection_Blocks_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
   /** column name */
   UseCustomFields = 'use_custom_fields'
 }
@@ -16441,6 +17035,17 @@ export type App_Search_Bookmarks_Aggregate = {
   nodes: Array<App_Search_Bookmarks>;
 };
 
+export type App_Search_Bookmarks_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Search_Bookmarks_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Search_Bookmarks_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Search_Bookmarks_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Search_Bookmarks_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "app.search_bookmarks" */
 export type App_Search_Bookmarks_Aggregate_Fields = {
   __typename?: 'app_search_bookmarks_aggregate_fields';
@@ -16881,6 +17486,17 @@ export type App_Usage_Counts_Aggregate = {
   __typename?: 'app_usage_counts_aggregate';
   aggregate?: Maybe<App_Usage_Counts_Aggregate_Fields>;
   nodes: Array<App_Usage_Counts>;
+};
+
+export type App_Usage_Counts_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Usage_Counts_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Usage_Counts_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Usage_Counts_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Usage_Counts_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.usage_counts" */
@@ -17514,6 +18130,17 @@ export type Lookup_Enum_Collection_Labels_Aggregate = {
   __typename?: 'lookup_enum_collection_labels_aggregate';
   aggregate?: Maybe<Lookup_Enum_Collection_Labels_Aggregate_Fields>;
   nodes: Array<Lookup_Enum_Collection_Labels>;
+};
+
+export type Lookup_Enum_Collection_Labels_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Lookup_Enum_Collection_Labels_Aggregate_Bool_Exp_Count>;
+};
+
+export type Lookup_Enum_Collection_Labels_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Lookup_Enum_Collection_Labels_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Lookup_Enum_Collection_Labels_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "lookup.enum_collection_labels" */
@@ -30114,6 +30741,7 @@ export type Shared_User_Roles_Bool_Exp = {
   label?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   users?: InputMaybe<Shared_Users_Bool_Exp>;
+  users_aggregate?: InputMaybe<Shared_Users_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "shared.user_roles" */
@@ -30724,6 +31352,33 @@ export type Shared_Users_Aggregate = {
   nodes: Array<Shared_Users>;
 };
 
+export type Shared_Users_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Shared_Users_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Shared_Users_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Shared_Users_Aggregate_Bool_Exp_Count>;
+};
+
+export type Shared_Users_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Shared_Users_Select_Column_Shared_Users_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Shared_Users_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Shared_Users_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Shared_Users_Select_Column_Shared_Users_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Shared_Users_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Shared_Users_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Shared_Users_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Shared_Users_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "shared.users" */
 export type Shared_Users_Aggregate_Fields = {
   __typename?: 'shared_users_aggregate_fields';
@@ -30790,6 +31445,7 @@ export type Shared_Users_Bool_Exp = {
   _not?: InputMaybe<Shared_Users_Bool_Exp>;
   _or?: InputMaybe<Array<Shared_Users_Bool_Exp>>;
   audit?: InputMaybe<Users_Audit_Log_Bool_Exp>;
+  audit_aggregate?: InputMaybe<Users_Audit_Log_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   expires_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   external_uid?: InputMaybe<Int_Comparison_Exp>;
@@ -30797,6 +31453,7 @@ export type Shared_Users_Bool_Exp = {
   full_name?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   idpmaps?: InputMaybe<Users_Idp_Map_Bool_Exp>;
+  idpmaps_aggregate?: InputMaybe<Users_Idp_Map_Aggregate_Bool_Exp>;
   is_blocked?: InputMaybe<Boolean_Comparison_Exp>;
   last_access_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   last_block?: InputMaybe<Shared_User_Last_Blocked_Bool_Exp>;
@@ -30805,6 +31462,7 @@ export type Shared_Users_Bool_Exp = {
   mail?: InputMaybe<String_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   profiles?: InputMaybe<Users_Profiles_Bool_Exp>;
+  profiles_aggregate?: InputMaybe<Users_Profiles_Aggregate_Bool_Exp>;
   role?: InputMaybe<Shared_User_Roles_Bool_Exp>;
   role_id?: InputMaybe<Int_Comparison_Exp>;
   temp_access?: InputMaybe<Shared_User_Temp_Access_Bool_Exp>;
@@ -31006,6 +31664,18 @@ export enum Shared_Users_Select_Column {
   UpdatedAt = 'updated_at'
 }
 
+/** select "shared_users_aggregate_bool_exp_bool_and_arguments_columns" columns of table "shared.users" */
+export enum Shared_Users_Select_Column_Shared_Users_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsBlocked = 'is_blocked'
+}
+
+/** select "shared_users_aggregate_bool_exp_bool_or_arguments_columns" columns of table "shared.users" */
+export enum Shared_Users_Select_Column_Shared_Users_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsBlocked = 'is_blocked'
+}
+
 /** input type for updating data in table "shared.users" */
 export type Shared_Users_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -31201,7 +31871,7 @@ export type Subscription_Root = {
   app_assignment_assignment_tags_aggregate: App_Assignment_Assignment_Tags_Aggregate;
   /** fetch data from the table: "app.assignment_assignment_tags" using primary key columns */
   app_assignment_assignment_tags_by_pk?: Maybe<App_Assignment_Assignment_Tags>;
-  /** fetch data from the table in a streaming manner : "app.assignment_assignment_tags" */
+  /** fetch data from the table in a streaming manner: "app.assignment_assignment_tags" */
   app_assignment_assignment_tags_stream: Array<App_Assignment_Assignment_Tags>;
   /** fetch data from the table: "app.assignment_blocks_v2" */
   app_assignment_blocks_v2: Array<App_Assignment_Blocks_V2>;
@@ -31209,7 +31879,7 @@ export type Subscription_Root = {
   app_assignment_blocks_v2_aggregate: App_Assignment_Blocks_V2_Aggregate;
   /** fetch data from the table: "app.assignment_blocks_v2" using primary key columns */
   app_assignment_blocks_v2_by_pk?: Maybe<App_Assignment_Blocks_V2>;
-  /** fetch data from the table in a streaming manner : "app.assignment_blocks_v2" */
+  /** fetch data from the table in a streaming manner: "app.assignment_blocks_v2" */
   app_assignment_blocks_v2_stream: Array<App_Assignment_Blocks_V2>;
   /** fetch data from the table: "app.assignment_labels" */
   app_assignment_labels: Array<App_Assignment_Labels>;
@@ -31217,7 +31887,7 @@ export type Subscription_Root = {
   app_assignment_labels_aggregate: App_Assignment_Labels_Aggregate;
   /** fetch data from the table: "app.assignment_labels" using primary key columns */
   app_assignment_labels_by_pk?: Maybe<App_Assignment_Labels>;
-  /** fetch data from the table in a streaming manner : "app.assignment_labels" */
+  /** fetch data from the table in a streaming manner: "app.assignment_labels" */
   app_assignment_labels_stream: Array<App_Assignment_Labels>;
   /** fetch data from the table: "app.assignment_labels_v2" */
   app_assignment_labels_v2: Array<App_Assignment_Labels_V2>;
@@ -31225,7 +31895,7 @@ export type Subscription_Root = {
   app_assignment_labels_v2_aggregate: App_Assignment_Labels_V2_Aggregate;
   /** fetch data from the table: "app.assignment_labels_v2" using primary key columns */
   app_assignment_labels_v2_by_pk?: Maybe<App_Assignment_Labels_V2>;
-  /** fetch data from the table in a streaming manner : "app.assignment_labels_v2" */
+  /** fetch data from the table in a streaming manner: "app.assignment_labels_v2" */
   app_assignment_labels_v2_stream: Array<App_Assignment_Labels_V2>;
   /** fetch data from the table: "app.assignment_responses" */
   app_assignment_responses: Array<App_Assignment_Responses>;
@@ -31233,7 +31903,7 @@ export type Subscription_Root = {
   app_assignment_responses_aggregate: App_Assignment_Responses_Aggregate;
   /** fetch data from the table: "app.assignment_responses" using primary key columns */
   app_assignment_responses_by_pk?: Maybe<App_Assignment_Responses>;
-  /** fetch data from the table in a streaming manner : "app.assignment_responses" */
+  /** fetch data from the table in a streaming manner: "app.assignment_responses" */
   app_assignment_responses_stream: Array<App_Assignment_Responses>;
   /** fetch data from the table: "app.assignment_responses_v2" */
   app_assignment_responses_v2: Array<App_Assignment_Responses_V2>;
@@ -31241,7 +31911,7 @@ export type Subscription_Root = {
   app_assignment_responses_v2_aggregate: App_Assignment_Responses_V2_Aggregate;
   /** fetch data from the table: "app.assignment_responses_v2" using primary key columns */
   app_assignment_responses_v2_by_pk?: Maybe<App_Assignment_Responses_V2>;
-  /** fetch data from the table in a streaming manner : "app.assignment_responses_v2" */
+  /** fetch data from the table in a streaming manner: "app.assignment_responses_v2" */
   app_assignment_responses_v2_stream: Array<App_Assignment_Responses_V2>;
   /** fetch data from the table: "app.assignment_v2_views" */
   app_assignment_v2_views: Array<App_Assignment_V2_Views>;
@@ -31249,7 +31919,7 @@ export type Subscription_Root = {
   app_assignment_v2_views_aggregate: App_Assignment_V2_Views_Aggregate;
   /** fetch data from the table: "app.assignment_v2_views" using primary key columns */
   app_assignment_v2_views_by_pk?: Maybe<App_Assignment_V2_Views>;
-  /** fetch data from the table in a streaming manner : "app.assignment_v2_views" */
+  /** fetch data from the table in a streaming manner: "app.assignment_v2_views" */
   app_assignment_v2_views_stream: Array<App_Assignment_V2_Views>;
   /** fetch data from the table: "app.assignments" */
   app_assignments: Array<App_Assignments>;
@@ -31257,7 +31927,7 @@ export type Subscription_Root = {
   app_assignments_aggregate: App_Assignments_Aggregate;
   /** fetch data from the table: "app.assignments" using primary key columns */
   app_assignments_by_pk?: Maybe<App_Assignments>;
-  /** fetch data from the table in a streaming manner : "app.assignments" */
+  /** fetch data from the table in a streaming manner: "app.assignments" */
   app_assignments_stream: Array<App_Assignments>;
   /** fetch data from the table: "app.assignments_v2" */
   app_assignments_v2: Array<App_Assignments_V2>;
@@ -31269,17 +31939,17 @@ export type Subscription_Root = {
   app_assignments_v2_assignment_labels_v2_aggregate: App_Assignments_V2_Assignment_Labels_V2_Aggregate;
   /** fetch data from the table: "app.assignments_v2_assignment_labels_v2" using primary key columns */
   app_assignments_v2_assignment_labels_v2_by_pk?: Maybe<App_Assignments_V2_Assignment_Labels_V2>;
-  /** fetch data from the table in a streaming manner : "app.assignments_v2_assignment_labels_v2" */
+  /** fetch data from the table in a streaming manner: "app.assignments_v2_assignment_labels_v2" */
   app_assignments_v2_assignment_labels_v2_stream: Array<App_Assignments_V2_Assignment_Labels_V2>;
   /** fetch data from the table: "app.assignments_v2" using primary key columns */
   app_assignments_v2_by_pk?: Maybe<App_Assignments_V2>;
-  /** fetch data from the table in a streaming manner : "app.assignments_v2" */
+  /** fetch data from the table in a streaming manner: "app.assignments_v2" */
   app_assignments_v2_stream: Array<App_Assignments_V2>;
   /** fetch data from the table: "app.collection_actualisation_overview" */
   app_collection_actualisation_overview: Array<App_Collection_Actualisation_Overview>;
   /** fetch aggregated fields from the table: "app.collection_actualisation_overview" */
   app_collection_actualisation_overview_aggregate: App_Collection_Actualisation_Overview_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_actualisation_overview" */
+  /** fetch data from the table in a streaming manner: "app.collection_actualisation_overview" */
   app_collection_actualisation_overview_stream: Array<App_Collection_Actualisation_Overview>;
   /** fetch data from the table: "app.collection_bookmarks" */
   app_collection_bookmarks: Array<App_Collection_Bookmarks>;
@@ -31287,13 +31957,13 @@ export type Subscription_Root = {
   app_collection_bookmarks_aggregate: App_Collection_Bookmarks_Aggregate;
   /** fetch data from the table: "app.collection_bookmarks" using primary key columns */
   app_collection_bookmarks_by_pk?: Maybe<App_Collection_Bookmarks>;
-  /** fetch data from the table in a streaming manner : "app.collection_bookmarks" */
+  /** fetch data from the table in a streaming manner: "app.collection_bookmarks" */
   app_collection_bookmarks_stream: Array<App_Collection_Bookmarks>;
   /** fetch data from the table: "app.collection_counts" */
   app_collection_counts: Array<App_Collection_Counts>;
   /** fetch aggregated fields from the table: "app.collection_counts" */
   app_collection_counts_aggregate: App_Collection_Counts_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_counts" */
+  /** fetch data from the table in a streaming manner: "app.collection_counts" */
   app_collection_counts_stream: Array<App_Collection_Counts>;
   /** fetch data from the table: "app.collection_fragments" */
   app_collection_fragments: Array<App_Collection_Fragments>;
@@ -31301,7 +31971,7 @@ export type Subscription_Root = {
   app_collection_fragments_aggregate: App_Collection_Fragments_Aggregate;
   /** fetch data from the table: "app.collection_fragments" using primary key columns */
   app_collection_fragments_by_pk?: Maybe<App_Collection_Fragments>;
-  /** fetch data from the table in a streaming manner : "app.collection_fragments" */
+  /** fetch data from the table in a streaming manner: "app.collection_fragments" */
   app_collection_fragments_stream: Array<App_Collection_Fragments>;
   /** fetch data from the table: "app.collection_labels" */
   app_collection_labels: Array<App_Collection_Labels>;
@@ -31309,7 +31979,7 @@ export type Subscription_Root = {
   app_collection_labels_aggregate: App_Collection_Labels_Aggregate;
   /** fetch data from the table: "app.collection_labels" using primary key columns */
   app_collection_labels_by_pk?: Maybe<App_Collection_Labels>;
-  /** fetch data from the table in a streaming manner : "app.collection_labels" */
+  /** fetch data from the table in a streaming manner: "app.collection_labels" */
   app_collection_labels_stream: Array<App_Collection_Labels>;
   /** fetch data from the table: "app.collection_management" */
   app_collection_management: Array<App_Collection_Management>;
@@ -31319,19 +31989,19 @@ export type Subscription_Root = {
   app_collection_management_QC_aggregate: App_Collection_Management_Qc_Aggregate;
   /** fetch data from the table: "app.collection_management_QC" using primary key columns */
   app_collection_management_QC_by_pk?: Maybe<App_Collection_Management_Qc>;
-  /** fetch data from the table in a streaming manner : "app.collection_management_QC" */
+  /** fetch data from the table in a streaming manner: "app.collection_management_QC" */
   app_collection_management_QC_stream: Array<App_Collection_Management_Qc>;
   /** fetch aggregated fields from the table: "app.collection_management" */
   app_collection_management_aggregate: App_Collection_Management_Aggregate;
   /** fetch data from the table: "app.collection_management" using primary key columns */
   app_collection_management_by_pk?: Maybe<App_Collection_Management>;
-  /** fetch data from the table in a streaming manner : "app.collection_management" */
+  /** fetch data from the table in a streaming manner: "app.collection_management" */
   app_collection_management_stream: Array<App_Collection_Management>;
   /** fetch data from the table: "app.collection_marcom_klascement_view" */
   app_collection_marcom_klascement_view: Array<App_Collection_Marcom_Klascement_View>;
   /** fetch aggregated fields from the table: "app.collection_marcom_klascement_view" */
   app_collection_marcom_klascement_view_aggregate: App_Collection_Marcom_Klascement_View_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_marcom_klascement_view" */
+  /** fetch data from the table in a streaming manner: "app.collection_marcom_klascement_view" */
   app_collection_marcom_klascement_view_stream: Array<App_Collection_Marcom_Klascement_View>;
   /** fetch data from the table: "app.collection_marcom_log" */
   app_collection_marcom_log: Array<App_Collection_Marcom_Log>;
@@ -31339,7 +32009,7 @@ export type Subscription_Root = {
   app_collection_marcom_log_aggregate: App_Collection_Marcom_Log_Aggregate;
   /** fetch data from the table: "app.collection_marcom_log" using primary key columns */
   app_collection_marcom_log_by_pk?: Maybe<App_Collection_Marcom_Log>;
-  /** fetch data from the table in a streaming manner : "app.collection_marcom_log" */
+  /** fetch data from the table in a streaming manner: "app.collection_marcom_log" */
   app_collection_marcom_log_stream: Array<App_Collection_Marcom_Log>;
   /** fetch data from the table: "app.collection_marcom_notes" */
   app_collection_marcom_notes: Array<App_Collection_Marcom_Notes>;
@@ -31347,13 +32017,13 @@ export type Subscription_Root = {
   app_collection_marcom_notes_aggregate: App_Collection_Marcom_Notes_Aggregate;
   /** fetch data from the table: "app.collection_marcom_notes" using primary key columns */
   app_collection_marcom_notes_by_pk?: Maybe<App_Collection_Marcom_Notes>;
-  /** fetch data from the table in a streaming manner : "app.collection_marcom_notes" */
+  /** fetch data from the table in a streaming manner: "app.collection_marcom_notes" */
   app_collection_marcom_notes_stream: Array<App_Collection_Marcom_Notes>;
   /** fetch data from the table: "app.collection_marcom_overview" */
   app_collection_marcom_overview: Array<App_Collection_Marcom_Overview>;
   /** fetch aggregated fields from the table: "app.collection_marcom_overview" */
   app_collection_marcom_overview_aggregate: App_Collection_Marcom_Overview_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_marcom_overview" */
+  /** fetch data from the table in a streaming manner: "app.collection_marcom_overview" */
   app_collection_marcom_overview_stream: Array<App_Collection_Marcom_Overview>;
   /** fetch data from the table: "app.collection_plays" */
   app_collection_plays: Array<App_Collection_Plays>;
@@ -31361,13 +32031,13 @@ export type Subscription_Root = {
   app_collection_plays_aggregate: App_Collection_Plays_Aggregate;
   /** fetch data from the table: "app.collection_plays" using primary key columns */
   app_collection_plays_by_pk?: Maybe<App_Collection_Plays>;
-  /** fetch data from the table in a streaming manner : "app.collection_plays" */
+  /** fetch data from the table in a streaming manner: "app.collection_plays" */
   app_collection_plays_stream: Array<App_Collection_Plays>;
   /** fetch data from the table: "app.collection_qc_overview" */
   app_collection_qc_overview: Array<App_Collection_Qc_Overview>;
   /** fetch aggregated fields from the table: "app.collection_qc_overview" */
   app_collection_qc_overview_aggregate: App_Collection_Qc_Overview_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_qc_overview" */
+  /** fetch data from the table in a streaming manner: "app.collection_qc_overview" */
   app_collection_qc_overview_stream: Array<App_Collection_Qc_Overview>;
   /** fetch data from the table: "app.collection_relations" */
   app_collection_relations: Array<App_Collection_Relations>;
@@ -31375,13 +32045,13 @@ export type Subscription_Root = {
   app_collection_relations_aggregate: App_Collection_Relations_Aggregate;
   /** fetch data from the table: "app.collection_relations" using primary key columns */
   app_collection_relations_by_pk?: Maybe<App_Collection_Relations>;
-  /** fetch data from the table in a streaming manner : "app.collection_relations" */
+  /** fetch data from the table in a streaming manner: "app.collection_relations" */
   app_collection_relations_stream: Array<App_Collection_Relations>;
   /** fetch data from the table: "app.collection_relations_view" */
   app_collection_relations_view: Array<App_Collection_Relations_View>;
   /** fetch aggregated fields from the table: "app.collection_relations_view" */
   app_collection_relations_view_aggregate: App_Collection_Relations_View_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.collection_relations_view" */
+  /** fetch data from the table in a streaming manner: "app.collection_relations_view" */
   app_collection_relations_view_stream: Array<App_Collection_Relations_View>;
   /** fetch data from the table: "app.collection_views" */
   app_collection_views: Array<App_Collection_Views>;
@@ -31389,7 +32059,7 @@ export type Subscription_Root = {
   app_collection_views_aggregate: App_Collection_Views_Aggregate;
   /** fetch data from the table: "app.collection_views" using primary key columns */
   app_collection_views_by_pk?: Maybe<App_Collection_Views>;
-  /** fetch data from the table in a streaming manner : "app.collection_views" */
+  /** fetch data from the table in a streaming manner: "app.collection_views" */
   app_collection_views_stream: Array<App_Collection_Views>;
   /** fetch data from the table: "app.collections" */
   app_collections: Array<App_Collections>;
@@ -31397,7 +32067,7 @@ export type Subscription_Root = {
   app_collections_aggregate: App_Collections_Aggregate;
   /** fetch data from the table: "app.collections" using primary key columns */
   app_collections_by_pk?: Maybe<App_Collections>;
-  /** fetch data from the table in a streaming manner : "app.collections" */
+  /** fetch data from the table in a streaming manner: "app.collections" */
   app_collections_stream: Array<App_Collections>;
   /** fetch data from the table: "app.content" */
   app_content: Array<App_Content>;
@@ -31409,7 +32079,7 @@ export type Subscription_Root = {
   app_content_assets_aggregate: App_Content_Assets_Aggregate;
   /** fetch data from the table: "app.content_assets" using primary key columns */
   app_content_assets_by_pk?: Maybe<App_Content_Assets>;
-  /** fetch data from the table in a streaming manner : "app.content_assets" */
+  /** fetch data from the table in a streaming manner: "app.content_assets" */
   app_content_assets_stream: Array<App_Content_Assets>;
   /** fetch data from the table: "app.content_blocks" */
   app_content_blocks: Array<App_Content_Blocks>;
@@ -31417,7 +32087,7 @@ export type Subscription_Root = {
   app_content_blocks_aggregate: App_Content_Blocks_Aggregate;
   /** fetch data from the table: "app.content_blocks" using primary key columns */
   app_content_blocks_by_pk?: Maybe<App_Content_Blocks>;
-  /** fetch data from the table in a streaming manner : "app.content_blocks" */
+  /** fetch data from the table in a streaming manner: "app.content_blocks" */
   app_content_blocks_stream: Array<App_Content_Blocks>;
   /** fetch data from the table: "app.content" using primary key columns */
   app_content_by_pk?: Maybe<App_Content>;
@@ -31427,7 +32097,7 @@ export type Subscription_Root = {
   app_content_content_labels_aggregate: App_Content_Content_Labels_Aggregate;
   /** fetch data from the table: "app.content_content_labels" using primary key columns */
   app_content_content_labels_by_pk?: Maybe<App_Content_Content_Labels>;
-  /** fetch data from the table in a streaming manner : "app.content_content_labels" */
+  /** fetch data from the table in a streaming manner: "app.content_content_labels" */
   app_content_content_labels_stream: Array<App_Content_Content_Labels>;
   /** fetch data from the table: "app.content_labels" */
   app_content_labels: Array<App_Content_Labels>;
@@ -31435,13 +32105,13 @@ export type Subscription_Root = {
   app_content_labels_aggregate: App_Content_Labels_Aggregate;
   /** fetch data from the table: "app.content_labels" using primary key columns */
   app_content_labels_by_pk?: Maybe<App_Content_Labels>;
-  /** fetch data from the table in a streaming manner : "app.content_labels" */
+  /** fetch data from the table in a streaming manner: "app.content_labels" */
   app_content_labels_stream: Array<App_Content_Labels>;
   /** fetch data from the table: "app.content_lower_title" */
   app_content_lower_title: Array<App_Content_Lower_Title>;
   /** fetch aggregated fields from the table: "app.content_lower_title" */
   app_content_lower_title_aggregate: App_Content_Lower_Title_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.content_lower_title" */
+  /** fetch data from the table in a streaming manner: "app.content_lower_title" */
   app_content_lower_title_stream: Array<App_Content_Lower_Title>;
   /** fetch data from the table: "app.content_nav_elements" */
   app_content_nav_elements: Array<App_Content_Nav_Elements>;
@@ -31449,9 +32119,9 @@ export type Subscription_Root = {
   app_content_nav_elements_aggregate: App_Content_Nav_Elements_Aggregate;
   /** fetch data from the table: "app.content_nav_elements" using primary key columns */
   app_content_nav_elements_by_pk?: Maybe<App_Content_Nav_Elements>;
-  /** fetch data from the table in a streaming manner : "app.content_nav_elements" */
+  /** fetch data from the table in a streaming manner: "app.content_nav_elements" */
   app_content_nav_elements_stream: Array<App_Content_Nav_Elements>;
-  /** fetch data from the table in a streaming manner : "app.content" */
+  /** fetch data from the table in a streaming manner: "app.content" */
   app_content_stream: Array<App_Content>;
   /** fetch data from the table: "app.interactive_tour" */
   app_interactive_tour: Array<App_Interactive_Tour>;
@@ -31459,7 +32129,7 @@ export type Subscription_Root = {
   app_interactive_tour_aggregate: App_Interactive_Tour_Aggregate;
   /** fetch data from the table: "app.interactive_tour" using primary key columns */
   app_interactive_tour_by_pk?: Maybe<App_Interactive_Tour>;
-  /** fetch data from the table in a streaming manner : "app.interactive_tour" */
+  /** fetch data from the table in a streaming manner: "app.interactive_tour" */
   app_interactive_tour_stream: Array<App_Interactive_Tour>;
   /** fetch data from the table: "app.item_bookmarks" */
   app_item_bookmarks: Array<App_Item_Bookmarks>;
@@ -31467,7 +32137,7 @@ export type Subscription_Root = {
   app_item_bookmarks_aggregate: App_Item_Bookmarks_Aggregate;
   /** fetch data from the table: "app.item_bookmarks" using primary key columns */
   app_item_bookmarks_by_pk?: Maybe<App_Item_Bookmarks>;
-  /** fetch data from the table in a streaming manner : "app.item_bookmarks" */
+  /** fetch data from the table in a streaming manner: "app.item_bookmarks" */
   app_item_bookmarks_stream: Array<App_Item_Bookmarks>;
   /** fetch data from the table: "app.item_collateral" */
   app_item_collateral: Array<App_Item_Collateral>;
@@ -31475,13 +32145,13 @@ export type Subscription_Root = {
   app_item_collateral_aggregate: App_Item_Collateral_Aggregate;
   /** fetch data from the table: "app.item_collateral" using primary key columns */
   app_item_collateral_by_pk?: Maybe<App_Item_Collateral>;
-  /** fetch data from the table in a streaming manner : "app.item_collateral" */
+  /** fetch data from the table in a streaming manner: "app.item_collateral" */
   app_item_collateral_stream: Array<App_Item_Collateral>;
   /** fetch data from the table: "app.item_counts" */
   app_item_counts: Array<App_Item_Counts>;
   /** fetch aggregated fields from the table: "app.item_counts" */
   app_item_counts_aggregate: App_Item_Counts_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.item_counts" */
+  /** fetch data from the table in a streaming manner: "app.item_counts" */
   app_item_counts_stream: Array<App_Item_Counts>;
   /** fetch data from the table: "app.item_meta" */
   app_item_meta: Array<App_Item_Meta>;
@@ -31489,7 +32159,7 @@ export type Subscription_Root = {
   app_item_meta_aggregate: App_Item_Meta_Aggregate;
   /** fetch data from the table: "app.item_meta" using primary key columns */
   app_item_meta_by_pk?: Maybe<App_Item_Meta>;
-  /** fetch data from the table in a streaming manner : "app.item_meta" */
+  /** fetch data from the table in a streaming manner: "app.item_meta" */
   app_item_meta_stream: Array<App_Item_Meta>;
   /** fetch data from the table: "app.item_plays" */
   app_item_plays: Array<App_Item_Plays>;
@@ -31497,7 +32167,7 @@ export type Subscription_Root = {
   app_item_plays_aggregate: App_Item_Plays_Aggregate;
   /** fetch data from the table: "app.item_plays" using primary key columns */
   app_item_plays_by_pk?: Maybe<App_Item_Plays>;
-  /** fetch data from the table in a streaming manner : "app.item_plays" */
+  /** fetch data from the table in a streaming manner: "app.item_plays" */
   app_item_plays_stream: Array<App_Item_Plays>;
   /** fetch data from the table: "app.item_relations" */
   app_item_relations: Array<App_Item_Relations>;
@@ -31505,13 +32175,13 @@ export type Subscription_Root = {
   app_item_relations_aggregate: App_Item_Relations_Aggregate;
   /** fetch data from the table: "app.item_relations" using primary key columns */
   app_item_relations_by_pk?: Maybe<App_Item_Relations>;
-  /** fetch data from the table in a streaming manner : "app.item_relations" */
+  /** fetch data from the table in a streaming manner: "app.item_relations" */
   app_item_relations_stream: Array<App_Item_Relations>;
   /** fetch data from the table: "app.item_relations_view" */
   app_item_relations_view: Array<App_Item_Relations_View>;
   /** fetch aggregated fields from the table: "app.item_relations_view" */
   app_item_relations_view_aggregate: App_Item_Relations_View_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.item_relations_view" */
+  /** fetch data from the table in a streaming manner: "app.item_relations_view" */
   app_item_relations_view_stream: Array<App_Item_Relations_View>;
   /** fetch data from the table: "app.item_score" */
   app_item_score: Array<App_Item_Score>;
@@ -31519,7 +32189,7 @@ export type Subscription_Root = {
   app_item_score_aggregate: App_Item_Score_Aggregate;
   /** fetch data from the table: "app.item_score" using primary key columns */
   app_item_score_by_pk?: Maybe<App_Item_Score>;
-  /** fetch data from the table in a streaming manner : "app.item_score" */
+  /** fetch data from the table in a streaming manner: "app.item_score" */
   app_item_score_stream: Array<App_Item_Score>;
   /** fetch data from the table: "app.item_views" */
   app_item_views: Array<App_Item_Views>;
@@ -31527,7 +32197,7 @@ export type Subscription_Root = {
   app_item_views_aggregate: App_Item_Views_Aggregate;
   /** fetch data from the table: "app.item_views" using primary key columns */
   app_item_views_by_pk?: Maybe<App_Item_Views>;
-  /** fetch data from the table in a streaming manner : "app.item_views" */
+  /** fetch data from the table in a streaming manner: "app.item_views" */
   app_item_views_stream: Array<App_Item_Views>;
   /** fetch data from the table: "app.pupil_collection_blocks" */
   app_pupil_collection_blocks: Array<App_Pupil_Collection_Blocks>;
@@ -31535,7 +32205,7 @@ export type Subscription_Root = {
   app_pupil_collection_blocks_aggregate: App_Pupil_Collection_Blocks_Aggregate;
   /** fetch data from the table: "app.pupil_collection_blocks" using primary key columns */
   app_pupil_collection_blocks_by_pk?: Maybe<App_Pupil_Collection_Blocks>;
-  /** fetch data from the table in a streaming manner : "app.pupil_collection_blocks" */
+  /** fetch data from the table in a streaming manner: "app.pupil_collection_blocks" */
   app_pupil_collection_blocks_stream: Array<App_Pupil_Collection_Blocks>;
   /** fetch data from the table: "app.quick_lanes" */
   app_quick_lanes: Array<App_Quick_Lanes>;
@@ -31547,9 +32217,9 @@ export type Subscription_Root = {
   app_quick_lanes_overview: Array<App_Quick_Lanes_Overview>;
   /** fetch aggregated fields from the table: "app.quick_lanes_overview" */
   app_quick_lanes_overview_aggregate: App_Quick_Lanes_Overview_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.quick_lanes_overview" */
+  /** fetch data from the table in a streaming manner: "app.quick_lanes_overview" */
   app_quick_lanes_overview_stream: Array<App_Quick_Lanes_Overview>;
-  /** fetch data from the table in a streaming manner : "app.quick_lanes" */
+  /** fetch data from the table in a streaming manner: "app.quick_lanes" */
   app_quick_lanes_stream: Array<App_Quick_Lanes>;
   /** fetch data from the table: "app.search_bookmarks" */
   app_search_bookmarks: Array<App_Search_Bookmarks>;
@@ -31557,7 +32227,7 @@ export type Subscription_Root = {
   app_search_bookmarks_aggregate: App_Search_Bookmarks_Aggregate;
   /** fetch data from the table: "app.search_bookmarks" using primary key columns */
   app_search_bookmarks_by_pk?: Maybe<App_Search_Bookmarks>;
-  /** fetch data from the table in a streaming manner : "app.search_bookmarks" */
+  /** fetch data from the table in a streaming manner: "app.search_bookmarks" */
   app_search_bookmarks_stream: Array<App_Search_Bookmarks>;
   /** fetch data from the table: "app.site_variables" */
   app_site_variables: Array<App_Site_Variables>;
@@ -31565,13 +32235,13 @@ export type Subscription_Root = {
   app_site_variables_aggregate: App_Site_Variables_Aggregate;
   /** fetch data from the table: "app.site_variables" using primary key columns */
   app_site_variables_by_pk?: Maybe<App_Site_Variables>;
-  /** fetch data from the table in a streaming manner : "app.site_variables" */
+  /** fetch data from the table in a streaming manner: "app.site_variables" */
   app_site_variables_stream: Array<App_Site_Variables>;
   /** fetch data from the table: "app.usage_counts" */
   app_usage_counts: Array<App_Usage_Counts>;
   /** fetch aggregated fields from the table: "app.usage_counts" */
   app_usage_counts_aggregate: App_Usage_Counts_Aggregate;
-  /** fetch data from the table in a streaming manner : "app.usage_counts" */
+  /** fetch data from the table in a streaming manner: "app.usage_counts" */
   app_usage_counts_stream: Array<App_Usage_Counts>;
   /** fetch data from the table: "lookup.enum_assignment_content_labels" */
   lookup_enum_assignment_content_labels: Array<Lookup_Enum_Assignment_Content_Labels>;
@@ -31579,7 +32249,7 @@ export type Subscription_Root = {
   lookup_enum_assignment_content_labels_aggregate: Lookup_Enum_Assignment_Content_Labels_Aggregate;
   /** fetch data from the table: "lookup.enum_assignment_content_labels" using primary key columns */
   lookup_enum_assignment_content_labels_by_pk?: Maybe<Lookup_Enum_Assignment_Content_Labels>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_assignment_content_labels" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_assignment_content_labels" */
   lookup_enum_assignment_content_labels_stream: Array<Lookup_Enum_Assignment_Content_Labels>;
   /** fetch data from the table: "lookup.enum_assignment_types" */
   lookup_enum_assignment_types: Array<Lookup_Enum_Assignment_Types>;
@@ -31587,7 +32257,7 @@ export type Subscription_Root = {
   lookup_enum_assignment_types_aggregate: Lookup_Enum_Assignment_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_assignment_types" using primary key columns */
   lookup_enum_assignment_types_by_pk?: Maybe<Lookup_Enum_Assignment_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_assignment_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_assignment_types" */
   lookup_enum_assignment_types_stream: Array<Lookup_Enum_Assignment_Types>;
   /** fetch data from the table: "lookup.enum_collection_labels" */
   lookup_enum_collection_labels: Array<Lookup_Enum_Collection_Labels>;
@@ -31595,7 +32265,7 @@ export type Subscription_Root = {
   lookup_enum_collection_labels_aggregate: Lookup_Enum_Collection_Labels_Aggregate;
   /** fetch data from the table: "lookup.enum_collection_labels" using primary key columns */
   lookup_enum_collection_labels_by_pk?: Maybe<Lookup_Enum_Collection_Labels>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_collection_labels" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_collection_labels" */
   lookup_enum_collection_labels_stream: Array<Lookup_Enum_Collection_Labels>;
   /** fetch data from the table: "lookup.enum_collection_management_qc_label" */
   lookup_enum_collection_management_qc_label: Array<Lookup_Enum_Collection_Management_Qc_Label>;
@@ -31603,7 +32273,7 @@ export type Subscription_Root = {
   lookup_enum_collection_management_qc_label_aggregate: Lookup_Enum_Collection_Management_Qc_Label_Aggregate;
   /** fetch data from the table: "lookup.enum_collection_management_qc_label" using primary key columns */
   lookup_enum_collection_management_qc_label_by_pk?: Maybe<Lookup_Enum_Collection_Management_Qc_Label>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_collection_management_qc_label" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_collection_management_qc_label" */
   lookup_enum_collection_management_qc_label_stream: Array<Lookup_Enum_Collection_Management_Qc_Label>;
   /** fetch data from the table: "lookup.enum_collection_management_status" */
   lookup_enum_collection_management_status: Array<Lookup_Enum_Collection_Management_Status>;
@@ -31611,7 +32281,7 @@ export type Subscription_Root = {
   lookup_enum_collection_management_status_aggregate: Lookup_Enum_Collection_Management_Status_Aggregate;
   /** fetch data from the table: "lookup.enum_collection_management_status" using primary key columns */
   lookup_enum_collection_management_status_by_pk?: Maybe<Lookup_Enum_Collection_Management_Status>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_collection_management_status" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_collection_management_status" */
   lookup_enum_collection_management_status_stream: Array<Lookup_Enum_Collection_Management_Status>;
   /** fetch data from the table: "lookup.enum_colors" */
   lookup_enum_colors: Array<Lookup_Enum_Colors>;
@@ -31619,7 +32289,7 @@ export type Subscription_Root = {
   lookup_enum_colors_aggregate: Lookup_Enum_Colors_Aggregate;
   /** fetch data from the table: "lookup.enum_colors" using primary key columns */
   lookup_enum_colors_by_pk?: Maybe<Lookup_Enum_Colors>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_colors" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_colors" */
   lookup_enum_colors_stream: Array<Lookup_Enum_Colors>;
   /** fetch data from the table: "lookup.enum_content_block_types" */
   lookup_enum_content_block_types: Array<Lookup_Enum_Content_Block_Types>;
@@ -31627,7 +32297,7 @@ export type Subscription_Root = {
   lookup_enum_content_block_types_aggregate: Lookup_Enum_Content_Block_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_content_block_types" using primary key columns */
   lookup_enum_content_block_types_by_pk?: Maybe<Lookup_Enum_Content_Block_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_content_block_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_content_block_types" */
   lookup_enum_content_block_types_stream: Array<Lookup_Enum_Content_Block_Types>;
   /** fetch data from the table: "lookup.enum_content_types" */
   lookup_enum_content_types: Array<Lookup_Enum_Content_Types>;
@@ -31635,7 +32305,7 @@ export type Subscription_Root = {
   lookup_enum_content_types_aggregate: Lookup_Enum_Content_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_content_types" using primary key columns */
   lookup_enum_content_types_by_pk?: Maybe<Lookup_Enum_Content_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_content_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_content_types" */
   lookup_enum_content_types_stream: Array<Lookup_Enum_Content_Types>;
   /** fetch data from the table: "lookup.enum_input_types" */
   lookup_enum_input_types: Array<Lookup_Enum_Input_Types>;
@@ -31643,7 +32313,7 @@ export type Subscription_Root = {
   lookup_enum_input_types_aggregate: Lookup_Enum_Input_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_input_types" using primary key columns */
   lookup_enum_input_types_by_pk?: Maybe<Lookup_Enum_Input_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_input_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_input_types" */
   lookup_enum_input_types_stream: Array<Lookup_Enum_Input_Types>;
   /** fetch data from the table: "lookup.enum_lom_classification" */
   lookup_enum_lom_classification: Array<Lookup_Enum_Lom_Classification>;
@@ -31651,7 +32321,7 @@ export type Subscription_Root = {
   lookup_enum_lom_classification_aggregate: Lookup_Enum_Lom_Classification_Aggregate;
   /** fetch data from the table: "lookup.enum_lom_classification" using primary key columns */
   lookup_enum_lom_classification_by_pk?: Maybe<Lookup_Enum_Lom_Classification>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_lom_classification" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_lom_classification" */
   lookup_enum_lom_classification_stream: Array<Lookup_Enum_Lom_Classification>;
   /** fetch data from the table: "lookup.enum_lom_context" */
   lookup_enum_lom_context: Array<Lookup_Enum_Lom_Context>;
@@ -31659,7 +32329,7 @@ export type Subscription_Root = {
   lookup_enum_lom_context_aggregate: Lookup_Enum_Lom_Context_Aggregate;
   /** fetch data from the table: "lookup.enum_lom_context" using primary key columns */
   lookup_enum_lom_context_by_pk?: Maybe<Lookup_Enum_Lom_Context>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_lom_context" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_lom_context" */
   lookup_enum_lom_context_stream: Array<Lookup_Enum_Lom_Context>;
   /** fetch data from the table: "lookup.enum_profile_flags" */
   lookup_enum_profile_flags: Array<Lookup_Enum_Profile_Flags>;
@@ -31667,7 +32337,7 @@ export type Subscription_Root = {
   lookup_enum_profile_flags_aggregate: Lookup_Enum_Profile_Flags_Aggregate;
   /** fetch data from the table: "lookup.enum_profile_flags" using primary key columns */
   lookup_enum_profile_flags_by_pk?: Maybe<Lookup_Enum_Profile_Flags>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_profile_flags" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_profile_flags" */
   lookup_enum_profile_flags_stream: Array<Lookup_Enum_Profile_Flags>;
   /** fetch data from the table: "lookup.enum_profile_preferences_keys" */
   lookup_enum_profile_preferences_keys: Array<Lookup_Enum_Profile_Preferences_Keys>;
@@ -31675,7 +32345,7 @@ export type Subscription_Root = {
   lookup_enum_profile_preferences_keys_aggregate: Lookup_Enum_Profile_Preferences_Keys_Aggregate;
   /** fetch data from the table: "lookup.enum_profile_preferences_keys" using primary key columns */
   lookup_enum_profile_preferences_keys_by_pk?: Maybe<Lookup_Enum_Profile_Preferences_Keys>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_profile_preferences_keys" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_profile_preferences_keys" */
   lookup_enum_profile_preferences_keys_stream: Array<Lookup_Enum_Profile_Preferences_Keys>;
   /** fetch data from the table: "lookup.enum_relation_types" */
   lookup_enum_relation_types: Array<Lookup_Enum_Relation_Types>;
@@ -31683,7 +32353,7 @@ export type Subscription_Root = {
   lookup_enum_relation_types_aggregate: Lookup_Enum_Relation_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_relation_types" using primary key columns */
   lookup_enum_relation_types_by_pk?: Maybe<Lookup_Enum_Relation_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_relation_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_relation_types" */
   lookup_enum_relation_types_stream: Array<Lookup_Enum_Relation_Types>;
   /** fetch data from the table: "lookup.enum_search_bookmark_types" */
   lookup_enum_search_bookmark_types: Array<Lookup_Enum_Search_Bookmark_Types>;
@@ -31691,7 +32361,7 @@ export type Subscription_Root = {
   lookup_enum_search_bookmark_types_aggregate: Lookup_Enum_Search_Bookmark_Types_Aggregate;
   /** fetch data from the table: "lookup.enum_search_bookmark_types" using primary key columns */
   lookup_enum_search_bookmark_types_by_pk?: Maybe<Lookup_Enum_Search_Bookmark_Types>;
-  /** fetch data from the table in a streaming manner : "lookup.enum_search_bookmark_types" */
+  /** fetch data from the table in a streaming manner: "lookup.enum_search_bookmark_types" */
   lookup_enum_search_bookmark_types_stream: Array<Lookup_Enum_Search_Bookmark_Types>;
   /** fetch data from the table: "lookup.thesaurus" */
   lookup_thesaurus: Array<Lookup_Thesaurus>;
@@ -31699,7 +32369,7 @@ export type Subscription_Root = {
   lookup_thesaurus_aggregate: Lookup_Thesaurus_Aggregate;
   /** fetch data from the table: "lookup.thesaurus" using primary key columns */
   lookup_thesaurus_by_pk?: Maybe<Lookup_Thesaurus>;
-  /** fetch data from the table in a streaming manner : "lookup.thesaurus" */
+  /** fetch data from the table in a streaming manner: "lookup.thesaurus" */
   lookup_thesaurus_stream: Array<Lookup_Thesaurus>;
   /** fetch data from the table: "migrate.original_publishdate" */
   migrate_original_publishdate: Array<Migrate_Original_Publishdate>;
@@ -31707,7 +32377,7 @@ export type Subscription_Root = {
   migrate_original_publishdate_aggregate: Migrate_Original_Publishdate_Aggregate;
   /** fetch data from the table: "migrate.original_publishdate" using primary key columns */
   migrate_original_publishdate_by_pk?: Maybe<Migrate_Original_Publishdate>;
-  /** fetch data from the table in a streaming manner : "migrate.original_publishdate" */
+  /** fetch data from the table in a streaming manner: "migrate.original_publishdate" */
   migrate_original_publishdate_stream: Array<Migrate_Original_Publishdate>;
   /** fetch data from the table: "migrate.reference_ids" */
   migrate_reference_ids: Array<Migrate_Reference_Ids>;
@@ -31715,7 +32385,7 @@ export type Subscription_Root = {
   migrate_reference_ids_aggregate: Migrate_Reference_Ids_Aggregate;
   /** fetch data from the table: "migrate.reference_ids" using primary key columns */
   migrate_reference_ids_by_pk?: Maybe<Migrate_Reference_Ids>;
-  /** fetch data from the table in a streaming manner : "migrate.reference_ids" */
+  /** fetch data from the table in a streaming manner: "migrate.reference_ids" */
   migrate_reference_ids_stream: Array<Migrate_Reference_Ids>;
   /** fetch data from the table: "shared.collateral" */
   shared_collateral: Array<Shared_Collateral>;
@@ -31723,7 +32393,7 @@ export type Subscription_Root = {
   shared_collateral_aggregate: Shared_Collateral_Aggregate;
   /** fetch data from the table: "shared.collateral" using primary key columns */
   shared_collateral_by_pk?: Maybe<Shared_Collateral>;
-  /** fetch data from the table in a streaming manner : "shared.collateral" */
+  /** fetch data from the table in a streaming manner: "shared.collateral" */
   shared_collateral_stream: Array<Shared_Collateral>;
   /** fetch data from the table: "shared.items" */
   shared_items: Array<Shared_Items>;
@@ -31731,7 +32401,7 @@ export type Subscription_Root = {
   shared_items_aggregate: Shared_Items_Aggregate;
   /** fetch data from the table: "shared.items" using primary key columns */
   shared_items_by_pk?: Maybe<Shared_Items>;
-  /** fetch data from the table in a streaming manner : "shared.items" */
+  /** fetch data from the table in a streaming manner: "shared.items" */
   shared_items_stream: Array<Shared_Items>;
   /** fetch data from the table: "shared.ldap_organizations" */
   shared_ldap_organizations: Array<Shared_Ldap_Organizations>;
@@ -31739,7 +32409,7 @@ export type Subscription_Root = {
   shared_ldap_organizations_aggregate: Shared_Ldap_Organizations_Aggregate;
   /** fetch data from the table: "shared.ldap_organizations" using primary key columns */
   shared_ldap_organizations_by_pk?: Maybe<Shared_Ldap_Organizations>;
-  /** fetch data from the table in a streaming manner : "shared.ldap_organizations" */
+  /** fetch data from the table in a streaming manner: "shared.ldap_organizations" */
   shared_ldap_organizations_stream: Array<Shared_Ldap_Organizations>;
   /** fetch data from the table: "shared.organisations" */
   shared_organisations: Array<Shared_Organisations>;
@@ -31747,13 +32417,13 @@ export type Subscription_Root = {
   shared_organisations_aggregate: Shared_Organisations_Aggregate;
   /** fetch data from the table: "shared.organisations" using primary key columns */
   shared_organisations_by_pk?: Maybe<Shared_Organisations>;
-  /** fetch data from the table in a streaming manner : "shared.organisations" */
+  /** fetch data from the table in a streaming manner: "shared.organisations" */
   shared_organisations_stream: Array<Shared_Organisations>;
   /** fetch data from the table: "shared.organisations_with_users" */
   shared_organisations_with_users: Array<Shared_Organisations_With_Users>;
   /** fetch aggregated fields from the table: "shared.organisations_with_users" */
   shared_organisations_with_users_aggregate: Shared_Organisations_With_Users_Aggregate;
-  /** fetch data from the table in a streaming manner : "shared.organisations_with_users" */
+  /** fetch data from the table in a streaming manner: "shared.organisations_with_users" */
   shared_organisations_with_users_stream: Array<Shared_Organisations_With_Users>;
   /** fetch data from the table: "shared.types" */
   shared_types: Array<Shared_Types>;
@@ -31761,25 +32431,25 @@ export type Subscription_Root = {
   shared_types_aggregate: Shared_Types_Aggregate;
   /** fetch data from the table: "shared.types" using primary key columns */
   shared_types_by_pk?: Maybe<Shared_Types>;
-  /** fetch data from the table in a streaming manner : "shared.types" */
+  /** fetch data from the table in a streaming manner: "shared.types" */
   shared_types_stream: Array<Shared_Types>;
   /** fetch data from the table: "shared.user_last_blocked" */
   shared_user_last_blocked: Array<Shared_User_Last_Blocked>;
   /** fetch aggregated fields from the table: "shared.user_last_blocked" */
   shared_user_last_blocked_aggregate: Shared_User_Last_Blocked_Aggregate;
-  /** fetch data from the table in a streaming manner : "shared.user_last_blocked" */
+  /** fetch data from the table in a streaming manner: "shared.user_last_blocked" */
   shared_user_last_blocked_stream: Array<Shared_User_Last_Blocked>;
   /** fetch data from the table: "shared.user_last_unblocked" */
   shared_user_last_unblocked: Array<Shared_User_Last_Unblocked>;
   /** fetch aggregated fields from the table: "shared.user_last_unblocked" */
   shared_user_last_unblocked_aggregate: Shared_User_Last_Unblocked_Aggregate;
-  /** fetch data from the table in a streaming manner : "shared.user_last_unblocked" */
+  /** fetch data from the table in a streaming manner: "shared.user_last_unblocked" */
   shared_user_last_unblocked_stream: Array<Shared_User_Last_Unblocked>;
   /** fetch data from the table: "shared.user_names" */
   shared_user_names: Array<Shared_User_Names>;
   /** fetch aggregated fields from the table: "shared.user_names" */
   shared_user_names_aggregate: Shared_User_Names_Aggregate;
-  /** fetch data from the table in a streaming manner : "shared.user_names" */
+  /** fetch data from the table in a streaming manner: "shared.user_names" */
   shared_user_names_stream: Array<Shared_User_Names>;
   /** fetch data from the table: "shared.user_roles" */
   shared_user_roles: Array<Shared_User_Roles>;
@@ -31787,7 +32457,7 @@ export type Subscription_Root = {
   shared_user_roles_aggregate: Shared_User_Roles_Aggregate;
   /** fetch data from the table: "shared.user_roles" using primary key columns */
   shared_user_roles_by_pk?: Maybe<Shared_User_Roles>;
-  /** fetch data from the table in a streaming manner : "shared.user_roles" */
+  /** fetch data from the table in a streaming manner: "shared.user_roles" */
   shared_user_roles_stream: Array<Shared_User_Roles>;
   /** fetch data from the table: "shared.user_temp_access" */
   shared_user_temp_access: Array<Shared_User_Temp_Access>;
@@ -31799,9 +32469,9 @@ export type Subscription_Root = {
   shared_user_temp_access_status: Array<Shared_User_Temp_Access_Status>;
   /** fetch aggregated fields from the table: "shared.user_temp_access_status" */
   shared_user_temp_access_status_aggregate: Shared_User_Temp_Access_Status_Aggregate;
-  /** fetch data from the table in a streaming manner : "shared.user_temp_access_status" */
+  /** fetch data from the table in a streaming manner: "shared.user_temp_access_status" */
   shared_user_temp_access_status_stream: Array<Shared_User_Temp_Access_Status>;
-  /** fetch data from the table in a streaming manner : "shared.user_temp_access" */
+  /** fetch data from the table in a streaming manner: "shared.user_temp_access" */
   shared_user_temp_access_stream: Array<Shared_User_Temp_Access>;
   /** fetch data from the table: "shared.users" */
   shared_users: Array<Shared_Users>;
@@ -31809,7 +32479,7 @@ export type Subscription_Root = {
   shared_users_aggregate: Shared_Users_Aggregate;
   /** fetch data from the table: "shared.users" using primary key columns */
   shared_users_by_pk?: Maybe<Shared_Users>;
-  /** fetch data from the table in a streaming manner : "shared.users" */
+  /** fetch data from the table in a streaming manner: "shared.users" */
   shared_users_stream: Array<Shared_Users>;
   /** fetch data from the table: "users.audit_log" */
   users_audit_log: Array<Users_Audit_Log>;
@@ -31817,7 +32487,7 @@ export type Subscription_Root = {
   users_audit_log_aggregate: Users_Audit_Log_Aggregate;
   /** fetch data from the table: "users.audit_log" using primary key columns */
   users_audit_log_by_pk?: Maybe<Users_Audit_Log>;
-  /** fetch data from the table in a streaming manner : "users.audit_log" */
+  /** fetch data from the table in a streaming manner: "users.audit_log" */
   users_audit_log_stream: Array<Users_Audit_Log>;
   /** fetch data from the table: "users.email_preferences" */
   users_email_preferences: Array<Users_Email_Preferences>;
@@ -31825,7 +32495,7 @@ export type Subscription_Root = {
   users_email_preferences_aggregate: Users_Email_Preferences_Aggregate;
   /** fetch data from the table: "users.email_preferences" using primary key columns */
   users_email_preferences_by_pk?: Maybe<Users_Email_Preferences>;
-  /** fetch data from the table in a streaming manner : "users.email_preferences" */
+  /** fetch data from the table in a streaming manner: "users.email_preferences" */
   users_email_preferences_stream: Array<Users_Email_Preferences>;
   /** fetch data from the table: "users.group_permissions" */
   users_group_permissions: Array<Users_Group_Permissions>;
@@ -31833,7 +32503,7 @@ export type Subscription_Root = {
   users_group_permissions_aggregate: Users_Group_Permissions_Aggregate;
   /** fetch data from the table: "users.group_permissions" using primary key columns */
   users_group_permissions_by_pk?: Maybe<Users_Group_Permissions>;
-  /** fetch data from the table in a streaming manner : "users.group_permissions" */
+  /** fetch data from the table in a streaming manner: "users.group_permissions" */
   users_group_permissions_stream: Array<Users_Group_Permissions>;
   /** fetch data from the table: "users.group_user_permission_groups" */
   users_group_user_permission_groups: Array<Users_Group_User_Permission_Groups>;
@@ -31841,7 +32511,7 @@ export type Subscription_Root = {
   users_group_user_permission_groups_aggregate: Users_Group_User_Permission_Groups_Aggregate;
   /** fetch data from the table: "users.group_user_permission_groups" using primary key columns */
   users_group_user_permission_groups_by_pk?: Maybe<Users_Group_User_Permission_Groups>;
-  /** fetch data from the table in a streaming manner : "users.group_user_permission_groups" */
+  /** fetch data from the table in a streaming manner: "users.group_user_permission_groups" */
   users_group_user_permission_groups_stream: Array<Users_Group_User_Permission_Groups>;
   /** fetch data from the table: "users.groups" */
   users_groups: Array<Users_Groups>;
@@ -31849,7 +32519,7 @@ export type Subscription_Root = {
   users_groups_aggregate: Users_Groups_Aggregate;
   /** fetch data from the table: "users.groups" using primary key columns */
   users_groups_by_pk?: Maybe<Users_Groups>;
-  /** fetch data from the table in a streaming manner : "users.groups" */
+  /** fetch data from the table in a streaming manner: "users.groups" */
   users_groups_stream: Array<Users_Groups>;
   /** fetch data from the table: "users.idp_map" */
   users_idp_map: Array<Users_Idp_Map>;
@@ -31857,7 +32527,7 @@ export type Subscription_Root = {
   users_idp_map_aggregate: Users_Idp_Map_Aggregate;
   /** fetch data from the table: "users.idp_map" using primary key columns */
   users_idp_map_by_pk?: Maybe<Users_Idp_Map>;
-  /** fetch data from the table in a streaming manner : "users.idp_map" */
+  /** fetch data from the table in a streaming manner: "users.idp_map" */
   users_idp_map_stream: Array<Users_Idp_Map>;
   /** fetch data from the table: "users.idps" */
   users_idps: Array<Users_Idps>;
@@ -31865,7 +32535,7 @@ export type Subscription_Root = {
   users_idps_aggregate: Users_Idps_Aggregate;
   /** fetch data from the table: "users.idps" using primary key columns */
   users_idps_by_pk?: Maybe<Users_Idps>;
-  /** fetch data from the table in a streaming manner : "users.idps" */
+  /** fetch data from the table in a streaming manner: "users.idps" */
   users_idps_stream: Array<Users_Idps>;
   /** fetch data from the table: "users.notifications" */
   users_notifications: Array<Users_Notifications>;
@@ -31873,7 +32543,7 @@ export type Subscription_Root = {
   users_notifications_aggregate: Users_Notifications_Aggregate;
   /** fetch data from the table: "users.notifications" using primary key columns */
   users_notifications_by_pk?: Maybe<Users_Notifications>;
-  /** fetch data from the table in a streaming manner : "users.notifications" */
+  /** fetch data from the table in a streaming manner: "users.notifications" */
   users_notifications_stream: Array<Users_Notifications>;
   /** fetch data from the table: "users.permission_group_user_permissions" */
   users_permission_group_user_permissions: Array<Users_Permission_Group_User_Permissions>;
@@ -31881,7 +32551,7 @@ export type Subscription_Root = {
   users_permission_group_user_permissions_aggregate: Users_Permission_Group_User_Permissions_Aggregate;
   /** fetch data from the table: "users.permission_group_user_permissions" using primary key columns */
   users_permission_group_user_permissions_by_pk?: Maybe<Users_Permission_Group_User_Permissions>;
-  /** fetch data from the table in a streaming manner : "users.permission_group_user_permissions" */
+  /** fetch data from the table in a streaming manner: "users.permission_group_user_permissions" */
   users_permission_group_user_permissions_stream: Array<Users_Permission_Group_User_Permissions>;
   /** fetch data from the table: "users.permission_groups" */
   users_permission_groups: Array<Users_Permission_Groups>;
@@ -31889,13 +32559,13 @@ export type Subscription_Root = {
   users_permission_groups_aggregate: Users_Permission_Groups_Aggregate;
   /** fetch data from the table: "users.permission_groups" using primary key columns */
   users_permission_groups_by_pk?: Maybe<Users_Permission_Groups>;
-  /** fetch data from the table in a streaming manner : "users.permission_groups" */
+  /** fetch data from the table in a streaming manner: "users.permission_groups" */
   users_permission_groups_stream: Array<Users_Permission_Groups>;
   /** fetch data from the table: "users.permission_matrix_view" */
   users_permission_matrix_view: Array<Users_Permission_Matrix_View>;
   /** fetch aggregated fields from the table: "users.permission_matrix_view" */
   users_permission_matrix_view_aggregate: Users_Permission_Matrix_View_Aggregate;
-  /** fetch data from the table in a streaming manner : "users.permission_matrix_view" */
+  /** fetch data from the table in a streaming manner: "users.permission_matrix_view" */
   users_permission_matrix_view_stream: Array<Users_Permission_Matrix_View>;
   /** fetch data from the table: "users.permissions" */
   users_permissions: Array<Users_Permissions>;
@@ -31903,7 +32573,7 @@ export type Subscription_Root = {
   users_permissions_aggregate: Users_Permissions_Aggregate;
   /** fetch data from the table: "users.permissions" using primary key columns */
   users_permissions_by_pk?: Maybe<Users_Permissions>;
-  /** fetch data from the table in a streaming manner : "users.permissions" */
+  /** fetch data from the table in a streaming manner: "users.permissions" */
   users_permissions_stream: Array<Users_Permissions>;
   /** fetch data from the table: "users.profile_classifications" */
   users_profile_classifications: Array<Users_Profile_Classifications>;
@@ -31911,7 +32581,7 @@ export type Subscription_Root = {
   users_profile_classifications_aggregate: Users_Profile_Classifications_Aggregate;
   /** fetch data from the table: "users.profile_classifications" using primary key columns */
   users_profile_classifications_by_pk?: Maybe<Users_Profile_Classifications>;
-  /** fetch data from the table in a streaming manner : "users.profile_classifications" */
+  /** fetch data from the table in a streaming manner: "users.profile_classifications" */
   users_profile_classifications_stream: Array<Users_Profile_Classifications>;
   /** fetch data from the table: "users.profile_contexts" */
   users_profile_contexts: Array<Users_Profile_Contexts>;
@@ -31919,7 +32589,7 @@ export type Subscription_Root = {
   users_profile_contexts_aggregate: Users_Profile_Contexts_Aggregate;
   /** fetch data from the table: "users.profile_contexts" using primary key columns */
   users_profile_contexts_by_pk?: Maybe<Users_Profile_Contexts>;
-  /** fetch data from the table in a streaming manner : "users.profile_contexts" */
+  /** fetch data from the table in a streaming manner: "users.profile_contexts" */
   users_profile_contexts_stream: Array<Users_Profile_Contexts>;
   /** fetch data from the table: "users.profile_flags" */
   users_profile_flags: Array<Users_Profile_Flags>;
@@ -31927,7 +32597,7 @@ export type Subscription_Root = {
   users_profile_flags_aggregate: Users_Profile_Flags_Aggregate;
   /** fetch data from the table: "users.profile_flags" using primary key columns */
   users_profile_flags_by_pk?: Maybe<Users_Profile_Flags>;
-  /** fetch data from the table in a streaming manner : "users.profile_flags" */
+  /** fetch data from the table in a streaming manner: "users.profile_flags" */
   users_profile_flags_stream: Array<Users_Profile_Flags>;
   /** fetch data from the table: "users.profile_organizations" */
   users_profile_organizations: Array<Users_Profile_Organizations>;
@@ -31935,7 +32605,7 @@ export type Subscription_Root = {
   users_profile_organizations_aggregate: Users_Profile_Organizations_Aggregate;
   /** fetch data from the table: "users.profile_organizations" using primary key columns */
   users_profile_organizations_by_pk?: Maybe<Users_Profile_Organizations>;
-  /** fetch data from the table in a streaming manner : "users.profile_organizations" */
+  /** fetch data from the table in a streaming manner: "users.profile_organizations" */
   users_profile_organizations_stream: Array<Users_Profile_Organizations>;
   /** fetch data from the table: "users.profile_preferences" */
   users_profile_preferences: Array<Users_Profile_Preferences>;
@@ -31943,7 +32613,7 @@ export type Subscription_Root = {
   users_profile_preferences_aggregate: Users_Profile_Preferences_Aggregate;
   /** fetch data from the table: "users.profile_preferences" using primary key columns */
   users_profile_preferences_by_pk?: Maybe<Users_Profile_Preferences>;
-  /** fetch data from the table in a streaming manner : "users.profile_preferences" */
+  /** fetch data from the table in a streaming manner: "users.profile_preferences" */
   users_profile_preferences_stream: Array<Users_Profile_Preferences>;
   /** fetch data from the table: "users.profile_user_groups" */
   users_profile_user_groups: Array<Users_Profile_User_Groups>;
@@ -31951,7 +32621,7 @@ export type Subscription_Root = {
   users_profile_user_groups_aggregate: Users_Profile_User_Groups_Aggregate;
   /** fetch data from the table: "users.profile_user_groups" using primary key columns */
   users_profile_user_groups_by_pk?: Maybe<Users_Profile_User_Groups>;
-  /** fetch data from the table in a streaming manner : "users.profile_user_groups" */
+  /** fetch data from the table in a streaming manner: "users.profile_user_groups" */
   users_profile_user_groups_stream: Array<Users_Profile_User_Groups>;
   /** fetch data from the table: "users.profiles" */
   users_profiles: Array<Users_Profiles>;
@@ -31959,13 +32629,13 @@ export type Subscription_Root = {
   users_profiles_aggregate: Users_Profiles_Aggregate;
   /** fetch data from the table: "users.profiles" using primary key columns */
   users_profiles_by_pk?: Maybe<Users_Profiles>;
-  /** fetch data from the table in a streaming manner : "users.profiles" */
+  /** fetch data from the table in a streaming manner: "users.profiles" */
   users_profiles_stream: Array<Users_Profiles>;
   /** fetch data from the table: "users.summary_view" */
   users_summary_view: Array<Users_Summary_View>;
   /** fetch aggregated fields from the table: "users.summary_view" */
   users_summary_view_aggregate: Users_Summary_View_Aggregate;
-  /** fetch data from the table in a streaming manner : "users.summary_view" */
+  /** fetch data from the table in a streaming manner: "users.summary_view" */
   users_summary_view_stream: Array<Users_Summary_View>;
   /** fetch data from the table: "users.users_sync_cm" */
   users_users_sync_cm: Array<Users_Users_Sync_Cm>;
@@ -31973,7 +32643,7 @@ export type Subscription_Root = {
   users_users_sync_cm_aggregate: Users_Users_Sync_Cm_Aggregate;
   /** fetch data from the table: "users.users_sync_cm" using primary key columns */
   users_users_sync_cm_by_pk?: Maybe<Users_Users_Sync_Cm>;
-  /** fetch data from the table in a streaming manner : "users.users_sync_cm" */
+  /** fetch data from the table in a streaming manner: "users.users_sync_cm" */
   users_users_sync_cm_stream: Array<Users_Users_Sync_Cm>;
 };
 
@@ -35011,6 +35681,17 @@ export type Users_Audit_Log_Aggregate = {
   nodes: Array<Users_Audit_Log>;
 };
 
+export type Users_Audit_Log_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Audit_Log_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Audit_Log_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Audit_Log_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Audit_Log_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.audit_log" */
 export type Users_Audit_Log_Aggregate_Fields = {
   __typename?: 'users_audit_log_aggregate_fields';
@@ -35358,6 +36039,33 @@ export type Users_Email_Preferences_Aggregate = {
   nodes: Array<Users_Email_Preferences>;
 };
 
+export type Users_Email_Preferences_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Users_Email_Preferences_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Users_Email_Preferences_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Users_Email_Preferences_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Email_Preferences_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Users_Email_Preferences_Select_Column_Users_Email_Preferences_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Email_Preferences_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Email_Preferences_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Users_Email_Preferences_Select_Column_Users_Email_Preferences_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Email_Preferences_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Email_Preferences_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Email_Preferences_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Email_Preferences_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.email_preferences" */
 export type Users_Email_Preferences_Aggregate_Fields = {
   __typename?: 'users_email_preferences_aggregate_fields';
@@ -35486,6 +36194,18 @@ export enum Users_Email_Preferences_Select_Column {
   ProfileId = 'profile_id'
 }
 
+/** select "users_email_preferences_aggregate_bool_exp_bool_and_arguments_columns" columns of table "users.email_preferences" */
+export enum Users_Email_Preferences_Select_Column_Users_Email_Preferences_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Checked = 'checked'
+}
+
+/** select "users_email_preferences_aggregate_bool_exp_bool_or_arguments_columns" columns of table "users.email_preferences" */
+export enum Users_Email_Preferences_Select_Column_Users_Email_Preferences_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  Checked = 'checked'
+}
+
 /** input type for updating data in table "users.email_preferences" */
 export type Users_Email_Preferences_Set_Input = {
   checked?: InputMaybe<Scalars['Boolean']>;
@@ -35545,6 +36265,17 @@ export type Users_Group_Permissions_Aggregate = {
   __typename?: 'users_group_permissions_aggregate';
   aggregate?: Maybe<Users_Group_Permissions_Aggregate_Fields>;
   nodes: Array<Users_Group_Permissions>;
+};
+
+export type Users_Group_Permissions_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Group_Permissions_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Group_Permissions_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Group_Permissions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Group_Permissions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.group_permissions" */
@@ -35858,6 +36589,17 @@ export type Users_Group_User_Permission_Groups_Aggregate = {
   __typename?: 'users_group_user_permission_groups_aggregate';
   aggregate?: Maybe<Users_Group_User_Permission_Groups_Aggregate_Fields>;
   nodes: Array<Users_Group_User_Permission_Groups>;
+};
+
+export type Users_Group_User_Permission_Groups_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Group_User_Permission_Groups_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Group_User_Permission_Groups_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Group_User_Permission_Groups_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Group_User_Permission_Groups_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.group_user_permission_groups" */
@@ -36261,6 +37003,17 @@ export type Users_Groups_Aggregate = {
   nodes: Array<Users_Groups>;
 };
 
+export type Users_Groups_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Groups_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Groups_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Groups_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Groups_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.groups" */
 export type Users_Groups_Aggregate_Fields = {
   __typename?: 'users_groups_aggregate_fields';
@@ -36325,11 +37078,14 @@ export type Users_Groups_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   group_permissions?: InputMaybe<Users_Group_Permissions_Bool_Exp>;
+  group_permissions_aggregate?: InputMaybe<Users_Group_Permissions_Aggregate_Bool_Exp>;
   group_user_permission_groups?: InputMaybe<Users_Group_User_Permission_Groups_Bool_Exp>;
+  group_user_permission_groups_aggregate?: InputMaybe<Users_Group_User_Permission_Groups_Aggregate_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
   ldap_role?: InputMaybe<String_Comparison_Exp>;
   profile_user_groups?: InputMaybe<Users_Profile_User_Groups_Bool_Exp>;
+  profile_user_groups_aggregate?: InputMaybe<Users_Profile_User_Groups_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -36603,6 +37359,17 @@ export type Users_Idp_Map_Aggregate = {
   __typename?: 'users_idp_map_aggregate';
   aggregate?: Maybe<Users_Idp_Map_Aggregate_Fields>;
   nodes: Array<Users_Idp_Map>;
+};
+
+export type Users_Idp_Map_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Idp_Map_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Idp_Map_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Idp_Map_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Idp_Map_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.idp_map" */
@@ -37074,6 +37841,33 @@ export type Users_Notifications_Aggregate = {
   nodes: Array<Users_Notifications>;
 };
 
+export type Users_Notifications_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Users_Notifications_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Users_Notifications_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Users_Notifications_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Notifications_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Users_Notifications_Select_Column_Users_Notifications_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Notifications_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Notifications_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Users_Notifications_Select_Column_Users_Notifications_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Notifications_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Notifications_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Notifications_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Notifications_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.notifications" */
 export type Users_Notifications_Aggregate_Fields = {
   __typename?: 'users_notifications_aggregate_fields';
@@ -37209,6 +38003,22 @@ export enum Users_Notifications_Select_Column {
   ThroughPlatform = 'through_platform'
 }
 
+/** select "users_notifications_aggregate_bool_exp_bool_and_arguments_columns" columns of table "users.notifications" */
+export enum Users_Notifications_Select_Column_Users_Notifications_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  ThroughEmail = 'through_email',
+  /** column name */
+  ThroughPlatform = 'through_platform'
+}
+
+/** select "users_notifications_aggregate_bool_exp_bool_or_arguments_columns" columns of table "users.notifications" */
+export enum Users_Notifications_Select_Column_Users_Notifications_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  ThroughEmail = 'through_email',
+  /** column name */
+  ThroughPlatform = 'through_platform'
+}
+
 /** input type for updating data in table "users.notifications" */
 export type Users_Notifications_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
@@ -37298,6 +38108,17 @@ export type Users_Permission_Group_User_Permissions_Aggregate = {
   nodes: Array<Users_Permission_Group_User_Permissions>;
 };
 
+export type Users_Permission_Group_User_Permissions_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Permission_Group_User_Permissions_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Permission_Group_User_Permissions_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Permission_Group_User_Permissions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Permission_Group_User_Permissions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.permission_group_user_permissions" */
 export type Users_Permission_Group_User_Permissions_Aggregate_Fields = {
   __typename?: 'users_permission_group_user_permissions_aggregate_fields';
@@ -37367,6 +38188,7 @@ export type Users_Permission_Group_User_Permissions_Bool_Exp = {
   permission?: InputMaybe<Users_Permissions_Bool_Exp>;
   permission_group?: InputMaybe<Users_Permission_Groups_Bool_Exp>;
   permissions?: InputMaybe<Users_Permissions_Bool_Exp>;
+  permissions_aggregate?: InputMaybe<Users_Permissions_Aggregate_Bool_Exp>;
   user_permission_group_id?: InputMaybe<Int_Comparison_Exp>;
   user_permission_id?: InputMaybe<Int_Comparison_Exp>;
 };
@@ -37714,9 +38536,11 @@ export type Users_Permission_Groups_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   group_user_permission_groups?: InputMaybe<Users_Group_User_Permission_Groups_Bool_Exp>;
+  group_user_permission_groups_aggregate?: InputMaybe<Users_Group_User_Permission_Groups_Aggregate_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
   permission_group_user_permissions?: InputMaybe<Users_Permission_Group_User_Permissions_Bool_Exp>;
+  permission_group_user_permissions_aggregate?: InputMaybe<Users_Permission_Group_User_Permissions_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -37920,6 +38744,17 @@ export type Users_Permission_Matrix_View_Aggregate = {
   __typename?: 'users_permission_matrix_view_aggregate';
   aggregate?: Maybe<Users_Permission_Matrix_View_Aggregate_Fields>;
   nodes: Array<Users_Permission_Matrix_View>;
+};
+
+export type Users_Permission_Matrix_View_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Permission_Matrix_View_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Permission_Matrix_View_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Permission_Matrix_View_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Permission_Matrix_View_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.permission_matrix_view" */
@@ -38249,6 +39084,17 @@ export type Users_Permissions_Aggregate = {
   nodes: Array<Users_Permissions>;
 };
 
+export type Users_Permissions_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Permissions_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Permissions_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Permissions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Permissions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.permissions" */
 export type Users_Permissions_Aggregate_Fields = {
   __typename?: 'users_permissions_aggregate_fields';
@@ -38313,9 +39159,11 @@ export type Users_Permissions_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   group_permissions?: InputMaybe<Users_Group_Permissions_Bool_Exp>;
+  group_permissions_aggregate?: InputMaybe<Users_Group_Permissions_Aggregate_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
   permission_group_user_permissions?: InputMaybe<Users_Permission_Group_User_Permissions_Bool_Exp>;
+  permission_group_user_permissions_aggregate?: InputMaybe<Users_Permission_Group_User_Permissions_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -38574,6 +39422,17 @@ export type Users_Profile_Classifications_Aggregate = {
   nodes: Array<Users_Profile_Classifications>;
 };
 
+export type Users_Profile_Classifications_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Classifications_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Classifications_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Classifications_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Classifications_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.profile_classifications" */
 export type Users_Profile_Classifications_Aggregate_Fields = {
   __typename?: 'users_profile_classifications_aggregate_fields';
@@ -38750,6 +39609,17 @@ export type Users_Profile_Contexts_Aggregate = {
   __typename?: 'users_profile_contexts_aggregate';
   aggregate?: Maybe<Users_Profile_Contexts_Aggregate_Fields>;
   nodes: Array<Users_Profile_Contexts>;
+};
+
+export type Users_Profile_Contexts_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Contexts_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Contexts_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Contexts_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Contexts_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.profile_contexts" */
@@ -38930,6 +39800,17 @@ export type Users_Profile_Flags_Aggregate = {
   __typename?: 'users_profile_flags_aggregate';
   aggregate?: Maybe<Users_Profile_Flags_Aggregate_Fields>;
   nodes: Array<Users_Profile_Flags>;
+};
+
+export type Users_Profile_Flags_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Flags_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Flags_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Flags_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Flags_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.profile_flags" */
@@ -39248,6 +40129,17 @@ export type Users_Profile_Organizations_Aggregate = {
   nodes: Array<Users_Profile_Organizations>;
 };
 
+export type Users_Profile_Organizations_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Organizations_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.profile_organizations" */
 export type Users_Profile_Organizations_Aggregate_Fields = {
   __typename?: 'users_profile_organizations_aggregate_fields';
@@ -39451,6 +40343,17 @@ export type Users_Profile_Preferences_Aggregate = {
   __typename?: 'users_profile_preferences_aggregate';
   aggregate?: Maybe<Users_Profile_Preferences_Aggregate_Fields>;
   nodes: Array<Users_Profile_Preferences>;
+};
+
+export type Users_Profile_Preferences_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Preferences_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Preferences_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Preferences_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Preferences_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "users.profile_preferences" */
@@ -39836,6 +40739,17 @@ export type Users_Profile_User_Groups_Aggregate = {
   nodes: Array<Users_Profile_User_Groups>;
 };
 
+export type Users_Profile_User_Groups_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_User_Groups_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_User_Groups_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_User_Groups_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_User_Groups_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.profile_user_groups" */
 export type Users_Profile_User_Groups_Aggregate_Fields = {
   __typename?: 'users_profile_user_groups_aggregate_fields';
@@ -39901,6 +40815,7 @@ export type Users_Profile_User_Groups_Bool_Exp = {
   _or?: InputMaybe<Array<Users_Profile_User_Groups_Bool_Exp>>;
   group?: InputMaybe<Users_Groups_Bool_Exp>;
   groups?: InputMaybe<Users_Groups_Bool_Exp>;
+  groups_aggregate?: InputMaybe<Users_Groups_Aggregate_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   user_group_id?: InputMaybe<Int_Comparison_Exp>;
@@ -40561,6 +41476,33 @@ export type Users_Profiles_Aggregate = {
   nodes: Array<Users_Profiles>;
 };
 
+export type Users_Profiles_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Users_Profiles_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Users_Profiles_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Users_Profiles_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profiles_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Users_Profiles_Select_Column_Users_Profiles_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profiles_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Profiles_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Users_Profiles_Select_Column_Users_Profiles_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profiles_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Users_Profiles_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profiles_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profiles_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "users.profiles" */
 export type Users_Profiles_Aggregate_Fields = {
   __typename?: 'users_profiles_aggregate_fields';
@@ -40598,31 +41540,47 @@ export type Users_Profiles_Bool_Exp = {
   alias?: InputMaybe<String_Comparison_Exp>;
   alternative_email?: InputMaybe<String_Comparison_Exp>;
   assignment_labels?: InputMaybe<App_Assignment_Labels_V2_Bool_Exp>;
+  assignment_labels_aggregate?: InputMaybe<App_Assignment_Labels_V2_Aggregate_Bool_Exp>;
   assignment_tags?: InputMaybe<App_Assignment_Labels_Bool_Exp>;
+  assignment_tags_aggregate?: InputMaybe<App_Assignment_Labels_Aggregate_Bool_Exp>;
   assignments?: InputMaybe<App_Assignments_Bool_Exp>;
+  assignments_aggregate?: InputMaybe<App_Assignments_Aggregate_Bool_Exp>;
   assignments_v2?: InputMaybe<App_Assignments_V2_Bool_Exp>;
+  assignments_v2_aggregate?: InputMaybe<App_Assignments_V2_Aggregate_Bool_Exp>;
   avatar?: InputMaybe<String_Comparison_Exp>;
   bio?: InputMaybe<String_Comparison_Exp>;
   bookmark_searches?: InputMaybe<App_Search_Bookmarks_Bool_Exp>;
+  bookmark_searches_aggregate?: InputMaybe<App_Search_Bookmarks_Aggregate_Bool_Exp>;
   business_category?: InputMaybe<String_Comparison_Exp>;
   collection_bookmarks?: InputMaybe<App_Collection_Bookmarks_Bool_Exp>;
+  collection_bookmarks_aggregate?: InputMaybe<App_Collection_Bookmarks_Aggregate_Bool_Exp>;
   collections?: InputMaybe<App_Collections_Bool_Exp>;
+  collections_aggregate?: InputMaybe<App_Collections_Aggregate_Bool_Exp>;
   company_id?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email_preferences?: InputMaybe<Users_Email_Preferences_Bool_Exp>;
+  email_preferences_aggregate?: InputMaybe<Users_Email_Preferences_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
   is_exception?: InputMaybe<Boolean_Comparison_Exp>;
   item_bookmarks?: InputMaybe<App_Item_Bookmarks_Bool_Exp>;
+  item_bookmarks_aggregate?: InputMaybe<App_Item_Bookmarks_Aggregate_Bool_Exp>;
   notifications?: InputMaybe<Users_Notifications_Bool_Exp>;
+  notifications_aggregate?: InputMaybe<Users_Notifications_Aggregate_Bool_Exp>;
   organisation?: InputMaybe<Shared_Organisations_Bool_Exp>;
   profile_classifications?: InputMaybe<Users_Profile_Classifications_Bool_Exp>;
+  profile_classifications_aggregate?: InputMaybe<Users_Profile_Classifications_Aggregate_Bool_Exp>;
   profile_contexts?: InputMaybe<Users_Profile_Contexts_Bool_Exp>;
+  profile_contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Bool_Exp>;
   profile_flags?: InputMaybe<Users_Profile_Flags_Bool_Exp>;
+  profile_flags_aggregate?: InputMaybe<Users_Profile_Flags_Aggregate_Bool_Exp>;
   profile_organizations?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
+  profile_organizations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp>;
   profile_preferences?: InputMaybe<Users_Profile_Preferences_Bool_Exp>;
+  profile_preferences_aggregate?: InputMaybe<Users_Profile_Preferences_Aggregate_Bool_Exp>;
   profile_user_group?: InputMaybe<Users_Profile_User_Groups_Bool_Exp>;
   profile_user_groups?: InputMaybe<Users_Profile_User_Groups_Bool_Exp>;
+  profile_user_groups_aggregate?: InputMaybe<Users_Profile_User_Groups_Aggregate_Bool_Exp>;
   stamboek?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -40854,6 +41812,22 @@ export enum Users_Profiles_Select_Column {
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
+}
+
+/** select "users_profiles_aggregate_bool_exp_bool_and_arguments_columns" columns of table "users.profiles" */
+export enum Users_Profiles_Select_Column_Users_Profiles_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsException = 'is_exception'
+}
+
+/** select "users_profiles_aggregate_bool_exp_bool_or_arguments_columns" columns of table "users.profiles" */
+export enum Users_Profiles_Select_Column_Users_Profiles_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsException = 'is_exception'
 }
 
 /** input type for updating data in table "users.profiles" */
@@ -41218,20 +42192,26 @@ export type Users_Summary_View_Bool_Exp = {
   acc_created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   acc_updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   assignments?: InputMaybe<App_Assignments_Bool_Exp>;
+  assignments_aggregate?: InputMaybe<App_Assignments_Aggregate_Bool_Exp>;
   audits?: InputMaybe<Users_Audit_Log_Bool_Exp>;
+  audits_aggregate?: InputMaybe<Users_Audit_Log_Aggregate_Bool_Exp>;
   blocked_at?: InputMaybe<Shared_User_Last_Blocked_Bool_Exp>;
   business_category?: InputMaybe<String_Comparison_Exp>;
   classifications?: InputMaybe<Users_Profile_Classifications_Bool_Exp>;
+  classifications_aggregate?: InputMaybe<Users_Profile_Classifications_Aggregate_Bool_Exp>;
   collections?: InputMaybe<App_Collections_Bool_Exp>;
+  collections_aggregate?: InputMaybe<App_Collections_Aggregate_Bool_Exp>;
   company_id?: InputMaybe<String_Comparison_Exp>;
   company_name?: InputMaybe<String_Comparison_Exp>;
   contexts?: InputMaybe<Users_Profile_Contexts_Bool_Exp>;
+  contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Bool_Exp>;
   first_name?: InputMaybe<String_Comparison_Exp>;
   first_name_lower?: InputMaybe<String_Comparison_Exp>;
   full_name?: InputMaybe<String_Comparison_Exp>;
   group_id?: InputMaybe<Int_Comparison_Exp>;
   group_name?: InputMaybe<String_Comparison_Exp>;
   idps?: InputMaybe<Users_Idp_Map_Bool_Exp>;
+  idps_aggregate?: InputMaybe<Users_Idp_Map_Aggregate_Bool_Exp>;
   is_blocked?: InputMaybe<Boolean_Comparison_Exp>;
   is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
   is_exception?: InputMaybe<Boolean_Comparison_Exp>;
@@ -41240,7 +42220,9 @@ export type Users_Summary_View_Bool_Exp = {
   last_name_lower?: InputMaybe<String_Comparison_Exp>;
   mail?: InputMaybe<String_Comparison_Exp>;
   organisations?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
+  organisations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp>;
   permissions?: InputMaybe<Users_Permission_Matrix_View_Bool_Exp>;
+  permissions_aggregate?: InputMaybe<Users_Permission_Matrix_View_Aggregate_Bool_Exp>;
   pro_created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   pro_updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
@@ -41534,11 +42516,12 @@ export type Users_Users_Sync_Cm = {
   avo_user_id?: Maybe<Scalars['uuid']>;
   cm_email?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
-  expected_info: Scalars['jsonb'];
+  expected_info?: Maybe<Scalars['jsonb']>;
   failed_sync_count: Scalars['Int'];
   id: Scalars['uuid'];
   ldap_user_id?: Maybe<Scalars['String']>;
-  received_info: Scalars['jsonb'];
+  received_info?: Maybe<Scalars['jsonb']>;
+  status?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
 };
 
@@ -41610,6 +42593,7 @@ export type Users_Users_Sync_Cm_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   ldap_user_id?: InputMaybe<String_Comparison_Exp>;
   received_info?: InputMaybe<Jsonb_Comparison_Exp>;
+  status?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -41659,6 +42643,7 @@ export type Users_Users_Sync_Cm_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   ldap_user_id?: InputMaybe<Scalars['String']>;
   received_info?: InputMaybe<Scalars['jsonb']>;
+  status?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -41672,6 +42657,7 @@ export type Users_Users_Sync_Cm_Max_Fields = {
   failed_sync_count?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   ldap_user_id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -41685,6 +42671,7 @@ export type Users_Users_Sync_Cm_Min_Fields = {
   failed_sync_count?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   ldap_user_id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -41715,6 +42702,7 @@ export type Users_Users_Sync_Cm_Order_By = {
   id?: InputMaybe<Order_By>;
   ldap_user_id?: InputMaybe<Order_By>;
   received_info?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -41750,6 +42738,8 @@ export enum Users_Users_Sync_Cm_Select_Column {
   /** column name */
   ReceivedInfo = 'received_info',
   /** column name */
+  Status = 'status',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
@@ -41764,6 +42754,7 @@ export type Users_Users_Sync_Cm_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   ldap_user_id?: InputMaybe<Scalars['String']>;
   received_info?: InputMaybe<Scalars['jsonb']>;
+  status?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -41804,6 +42795,7 @@ export type Users_Users_Sync_Cm_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   ldap_user_id?: InputMaybe<Scalars['String']>;
   received_info?: InputMaybe<Scalars['jsonb']>;
+  status?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -41833,6 +42825,8 @@ export enum Users_Users_Sync_Cm_Update_Column {
   LdapUserId = 'ldap_user_id',
   /** column name */
   ReceivedInfo = 'received_info',
+  /** column name */
+  Status = 'status',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -42372,6 +43366,13 @@ export type GetProfileNamesQueryVariables = Exact<{
 
 export type GetProfileNamesQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, full_name?: string | null, mail?: string | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
 
+export type GetUserByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_user_permission_groups: Array<{ __typename?: 'users_group_user_permission_groups', group: { __typename?: 'users_groups', label: string, id: number }, permission_group: { __typename?: 'users_permission_groups', label: string, id: number, permission_group_user_permissions: Array<{ __typename?: 'users_permission_group_user_permissions', permission: { __typename?: 'users_permissions', label: string, id: number } }> } }> } } | null } | null, contexts: Array<{ __typename?: 'users_profile_contexts', id: any, key: string }>, last_blocked_at: { __typename?: 'users_audit_log_aggregate', aggregate?: { __typename?: 'users_audit_log_aggregate_fields', max?: { __typename?: 'users_audit_log_max_fields', created_at?: any | null } | null } | null }, last_unblocked_at: { __typename?: 'users_audit_log_aggregate', aggregate?: { __typename?: 'users_audit_log_aggregate_fields', max?: { __typename?: 'users_audit_log_max_fields', created_at?: any | null } | null } | null }, classifications: Array<{ __typename?: 'users_profile_classifications', id: any, key: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
+
 export type GetUsersQueryVariables = Exact<{
   offset: Scalars['Int'];
   limit: Scalars['Int'];
@@ -42450,4 +43451,5 @@ export const GetDistinctBusinessCategoriesDocument = {"kind":"Document","definit
 export const GetIdpsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getIdps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetIdpsQuery, GetIdpsQueryVariables>;
 export const GetProfileIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetProfileIdsQuery, GetProfileIdsQueryVariables>;
 export const GetProfileNamesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileNames"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetProfileNamesQuery, GetProfileNamesQueryVariables>;
+export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_user_permission_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permission_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission_group_user_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contexts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","alias":{"kind":"Name","value":"last_blocked_at"},"name":{"kind":"Name","value":"audits_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"event"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"BLOCKED","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"max"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"last_unblocked_at"},"name":{"kind":"Name","value":"audits_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"event"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"UNBLOCKED","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"max"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"classifications"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
 export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"idp"}}]}},{"kind":"Field","name":{"kind":"Name","value":"classifications"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contexts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

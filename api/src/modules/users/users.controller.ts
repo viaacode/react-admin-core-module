@@ -5,6 +5,7 @@ import {
 	forwardRef,
 	Get,
 	Inject,
+	Param,
 	Patch,
 	Query,
 } from '@nestjs/common';
@@ -114,5 +115,18 @@ export class UsersController {
 			body.subjects,
 			body.profileIds,
 		);
+	}
+
+	@Get(':id')
+	@RequireAnyPermissions(
+		PermissionName.VIEW_USERS,
+		PermissionName.EDIT_ANY_USER,
+		PermissionName.EDIT_ANY_COLLECTIONS,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
+	)
+	async getUser(
+		@Param('id') id: string,
+	): Promise<CommonUser> {
+		return this.usersService.getById(id);
 	}
 }

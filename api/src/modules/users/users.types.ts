@@ -82,7 +82,7 @@ export interface UserGroupInfo {
 /**
  * User model for both hetarchief and avo
  */
-export interface CommonUser {
+export type CommonUser = {
 	profileId: string;
 	email?: string;
 	firstName?: string;
@@ -108,7 +108,12 @@ export interface CommonUser {
 	lastAccessAt?: string;
 	tempAccess?: UserTempAccess;
 	idps?: Idp[];
-}
+	alias?: string;
+	title?: string;
+	bio?: string;
+	alternativeEmail?: string;
+	updatedAt?: string;
+} & Partial<Pick<ProfileAvo, 'classifications'>>;
 
 export type UserOverviewTableCol =
 	| 'profileId'
@@ -143,6 +148,6 @@ export interface DeleteContentCounts {
 }
 
 export type ProfileAvo =
-	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
+	UserQueryTypes['GetUserByIdQueryAvo']['users_summary_view'][0];
 export type ProfileHetArchief =
 	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];

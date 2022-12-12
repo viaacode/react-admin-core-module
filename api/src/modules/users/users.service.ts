@@ -1,8 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { isNil } from '@nestjs/common/utils/shared.utils';
 import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { compact, flatten, get } from 'lodash';
+import { compact, flatten, get, isNil } from 'lodash-es';
 import { DataService } from '../data';
 import { Idp } from '../shared/auth/auth.types';
 import {
@@ -18,11 +17,13 @@ import {
 	GetDistinctBusinessCategoriesDocument,
 	GetDistinctBusinessCategoriesQuery,
 	GetDistinctBusinessCategoriesQueryVariables,
+	GetUserByIdDocument,
+	GetUserByIdQuery,
+	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
-import { DatabaseType } from '@viaa/avo2-types';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
@@ -96,7 +97,7 @@ export class UsersService {
 					(classification) => classification.key,
 				),
 				educationLevels: user.contexts?.map((context) => context.key),
-				isException: user.is_exception || undefined,
+				isException: user.is_exception,
 				businessCategory: user.business_category || undefined,
 				createdAt: user.acc_created_at,
 				userGroup: {
@@ -110,7 +111,7 @@ export class UsersService {
 				fullName: user.full_name || undefined,
 				firstName: user.first_name || undefined,
 				lastName: user.last_name || undefined,
-				isBlocked: user.is_blocked || undefined,
+				isBlocked: user.is_blocked,
 				blockedAt: get(user, 'blocked_at.date'),
 				unblockedAt: get(user, 'unblocked_at.date'),
 				lastAccessAt: user.last_access_at,
@@ -124,7 +125,39 @@ export class UsersService {
 					  }
 					: null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
+				alias: user.profile?.alias || undefined,
+				title: user.profile?.title || undefined,
+				bio: user.profile?.bio || undefined,
+				alternativeEmail: user.profile?.alternative_email,
+				updatedAt: user.acc_updated_at || undefined,
+				classifications: user.classifications,
 			};
+		}
+	}
+
+	async getById(id: string): Promise<CommonUser> {
+		try {
+			if (!isAvo()) {
+				throw CustomError('Not supported');
+			}
+
+			const response = await this.dataService.execute<
+				GetUserByIdQuery,
+				GetUserByIdQueryVariables
+			>(GetUserByIdDocument, { id });
+
+			if (!response || !response.users_summary_view[0]) {
+				throw CustomError('Could not fetch user', null, {
+					response,
+				});
+			}
+
+			return this.adaptProfile(response.users_summary_view[0]);
+		} catch (err) {
+			throw CustomError('Failed to get profiles from the database', err, {
+				variables: { id },
+				query: 'GET_USERS',
+			});
 		}
 	}
 
