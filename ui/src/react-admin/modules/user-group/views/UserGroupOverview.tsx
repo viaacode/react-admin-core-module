@@ -4,10 +4,7 @@ import { cloneDeep, remove, sortBy } from 'lodash-es';
 import { Column, TableOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~modules/shared/helpers/custom-error';
@@ -21,7 +18,7 @@ import {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
-	UserGroupWithPermissions,
+	UserGroupWithPermissions
 } from '../types/user-group.types';
 
 const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(
@@ -33,18 +30,18 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 		const {
 			data: userGroups,
+			isLoading: isLoadingUserGroups,
 			isError: isErrorUserGroups,
 			error: userGroupError,
-			refetch: refetchUserGroups,
+			refetch: refetchUserGroups
 		} = useGetUserGroupsWithPermissions();
 		const {
 			data: permissions,
+			isLoading: isLoadingPermissions,
 			isError: isErrorPermissions,
-			error: permissionsError,
+			error: permissionsError
 		} = useGetPermissions();
 		const { mutateAsync: updateUserGroups } = useUpdateUserGroups();
-
-		const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 
 		// Use data (userGroups) as original state
 		// Current state keeps track of table state
@@ -145,12 +142,12 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 					),
-					type: ToastType.SUCCESS,
+					type: ToastType.SUCCESS
 				});
 			} catch (err) {
 				console.error(
 					new CustomError('Failed to save permissions', err, {
-						query: 'UserGroupService.updateUserGroups',
+						query: 'UserGroupService.updateUserGroups'
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -160,7 +157,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 					),
-					type: ToastType.ERROR,
+					type: ToastType.ERROR
 				});
 			}
 		};
@@ -192,25 +189,27 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		useImperativeHandle(ref, () => ({
 			onCancel: onClickCancel,
 			onSave: onClickSave,
-			onSearch: onSearchSubmit,
+			onSearch: onSearchSubmit
 		}));
 
 		/**
 		 * Effects
 		 */
 		useEffect(() => {
-			if (userGroups?.length && permissions) {
-				// Initialize states
-				!currentUserGroups && setCurrentUserGroups(cloneDeep(userGroups));
-				setLoadingInfo({ state: 'loaded' });
-			}
-		}, [userGroups, permissions]);
+			setCurrentUserGroups((currentUserGroups) => {
+				if (!currentUserGroups) {
+					return cloneDeep(userGroups);
+				} else {
+					return currentUserGroups;
+				}
+			});
+		}, [userGroups]);
 
 		useEffect(() => {
 			if (isErrorUserGroups) {
 				console.error(
 					new CustomError('Failed to get user groups', userGroupError, {
-						query: 'UserGroupService.getAllUserGroups',
+						query: 'UserGroupService.getAllUserGroups'
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -220,23 +219,14 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
-					type: ToastType.ERROR,
-				});
-				setLoadingInfo({
-					state: 'error',
-					message: tHtml(
-						'modules/user-group/views/user-group-overview___het-ophalen-van-de-gebruikersgroepen-is-mislukt'
-					),
-					icon: 'alert-triangle',
+					type: ToastType.ERROR
 				});
 			}
 		}, [isErrorUserGroups, tHtml, userGroupError]);
 
 		useEffect(() => {
 			if (isErrorPermissions) {
-				console.error(
-					new CustomError('Failed to get permissions', permissionsError)
-				);
+				console.error(new CustomError('Failed to get permissions', permissionsError));
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___error'
@@ -244,14 +234,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
-					type: ToastType.ERROR,
-				});
-				setLoadingInfo({
-					state: 'error',
-					message: tHtml(
-						'modules/user-group/views/user-group-overview___het-ophalen-van-de-permissies-is-mislukt'
-					),
-					icon: 'alert-triangle',
+					type: ToastType.ERROR
 				});
 			}
 		}, [isErrorPermissions, isErrorUserGroups, permissionsError, tHtml, userGroupError]);
@@ -265,6 +248,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				return null;
 			}
 
+			console.log({
+				userGroups,
+				currentUserGroups,
+				permissions
+			});
 			return (
 				<div className={className}>
 					<TextInput
@@ -279,7 +267,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							'grey-border',
 							'icon--double',
 							'icon-clickable',
-							search ? 'black-border' : '',
+							search ? 'black-border' : ''
 						]}
 					/>
 					<Table
@@ -293,8 +281,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 								) as Column<object>[],
 								data: searchResults || permissions || [],
 								initialState: {
-									pageSize: permissions?.length,
-								},
+									pageSize: permissions?.length
+								}
 							} as TableOptions<object>
 							/* eslint-enable @typescript-eslint/ban-types */
 						}
@@ -303,13 +291,19 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			);
 		};
 
-		return (
-			<LoadingErrorLoadedComponent
-				loadingInfo={loadingInfo}
-				dataObject={{ ...permissions }}
-				render={renderUserGroupOverview}
-			/>
-		);
+		if (isLoadingUserGroups || isLoadingPermissions) {
+			return <CenteredSpinner />;
+		}
+		if (isErrorUserGroups || isErrorPermissions) {
+			return (
+				<p>
+					{tHtml(
+						'modules/user-group/views/user-group-overview___het-ophalen-van-de-permissies-is-mislukt'
+					)}
+				</p>
+			);
+		}
+		return renderUserGroupOverview();
 	}
 );
 

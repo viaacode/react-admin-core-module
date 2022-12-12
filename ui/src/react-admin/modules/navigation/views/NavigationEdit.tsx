@@ -7,10 +7,10 @@ import {
 	ButtonToolbar,
 	Flex,
 	Spacer,
-	Spinner,
 	TagInfo,
 } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 
 import { NavigationEditForm } from '../components';
 import {
@@ -339,11 +339,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const renderPageContent = () => {
 		if (isLoadingNavigationItems || isLoadingNavigationItem) {
-			return (
-				<Flex orientation="horizontal" center>
-					<Spinner size="large" />
-				</Flex>
-			);
+			return <CenteredSpinner/>;
 		}
 		if (isErrorNavigationItems || isErrorNavigationItem) {
 			return (

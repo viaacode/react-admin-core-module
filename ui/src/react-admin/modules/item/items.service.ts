@@ -8,7 +8,7 @@ import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
 
 export class ItemsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/items`;
+		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/items`;
 	}
 
 	public static async fetchItemById(uuidOrExternalId: string): Promise<Avo.Item.Item> {

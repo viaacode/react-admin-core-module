@@ -9,6 +9,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { Translation, TranslationsOverviewProps } from '../translations.types';
@@ -385,16 +386,8 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		);
 	};
 
-	const renderSpinner = () => (
-		<Container mode="vertical">
-			<Flex orientation="horizontal" center>
-				<Spinner size="large" />
-			</Flex>
-		</Container>
-	);
-
 	if (!translations) {
-		return renderSpinner();
+		return <CenteredSpinner/>;
 	}
 	return (
 		<div className={className}>
