@@ -1,4 +1,5 @@
 import {
+	BadRequestException,
 	forwardRef,
 	Inject,
 	Injectable,
@@ -11,10 +12,20 @@ import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { setHours, setMinutes } from 'date-fns';
-import { compact, fromPairs, has, keys, omit, set, without } from 'lodash';
+import {
+	compact,
+	fromPairs,
+	has,
+	intersection,
+	keys,
+	omit,
+	set,
+	without,
+} from 'lodash';
 import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
+import { SessionHelper } from '../../shared/auth/session-helper';
 
 import {
 	App_Content_Blocks_Insert_Input,
@@ -32,7 +43,8 @@ import {
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { DatabaseType } from '@viaa/avo2-types';
+import { DatabaseType, PermissionName } from '@viaa/avo2-types';
+import { CommonUser } from '../../users';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -288,7 +300,7 @@ export class ContentPagesService {
 		return {
 			...Pagination<DbContentPage>({
 				items: contentBlocks,
-				page: Math.floor(offset/limit),
+				page: Math.floor(offset / limit),
 				size: limit,
 				total: count,
 			}),
@@ -319,6 +331,70 @@ export class ContentPagesService {
 				?.app_content?.[0];
 
 		return this.adaptContentPage(contentPage);
+	}
+
+	public async getContentPageByPathForUser(path: string, user?: CommonUser, referrer?: string) {
+		const contentPage: DbContentPage | undefined =
+			await this.getContentPageByPath(path);
+
+		const permissions = user?.permissions || [];
+		const userId = user?.userId;
+		const canEditContentPage =
+			permissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
+			(permissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) &&
+				contentPage.owner.id === userId);
+
+		if (!contentPage) {
+			return null;
+		}
+
+		// People that can edit the content page are not restricted by the publish_at, depublish_at, is_public settings
+		if (!canEditContentPage) {
+			if (
+				contentPage.publishAt &&
+				new Date().getTime() < new Date(contentPage.publishAt).getTime()
+			) {
+				return null; // Not yet published
+			}
+
+			if (
+				contentPage.depublishAt &&
+				new Date().getTime() > new Date(contentPage.depublishAt).getTime()
+			) {
+				throw new BadRequestException({
+					message: 'The content page was depublished',
+					additionalInfo: {
+						code: 'CONTENT_PAGE_DEPUBLISHED',
+						contentPageType: contentPage?.contentType,
+					},
+				});
+			}
+
+			if (!contentPage.isPublic) {
+				return null;
+			}
+
+			console.log('user: ', user);
+			// Check if content page is accessible for the user who requested the content page
+			if (
+				!intersection(
+					contentPage.userGroupIds.map((id) => String(id)),
+					SessionHelper.getUserGroupIds(String(user?.userGroup?.id)),
+				).length
+			) {
+				return null;
+			}
+		}
+
+		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
+		if (referrer) {
+			await this.resolveMediaPlayersInPage(
+				contentPage,
+				referrer
+			);
+		}
+
+		return contentPage;
 	}
 
 	public async fetchCollectionOrItem(
@@ -418,11 +494,11 @@ export class ContentPagesService {
 
 	public async resolveMediaPlayersInPage(
 		contentPage: DbContentPage,
-		request: Request,
+		referrer?: string,
 	) {
-		const mediaPlayerBlocks = contentPage.content_blocks.filter(
+		const mediaPlayerBlocks = contentPage?.content_blocks?.filter(
 			(contentBlock) => keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.type),
-		);
+		) || [];
 		if (mediaPlayerBlocks.length) {
 			await mapLimit(mediaPlayerBlocks, 2, async (mediaPlayerBlock: any) => {
 				try {
@@ -435,7 +511,7 @@ export class ContentPagesService {
 						if (itemInfo && itemInfo.browse_path) {
 							videoSrc = await this.playerTicketService.getPlayableUrl(
 								itemInfo.browse_path,
-								request.headers['Referer'] || 'http://localhost:3200/',
+								referrer || 'http://localhost:3200/',
 							);
 						}
 

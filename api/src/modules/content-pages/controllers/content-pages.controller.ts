@@ -1,5 +1,4 @@
 import {
-	BadRequestException,
 	Body,
 	Controller,
 	Delete,
@@ -17,20 +16,20 @@ import {
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, get, intersection } from 'lodash';
+import { get } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import {
 	ContentOverviewTableCols,
-	ContentPageLabel, DbContentPage
-} from "../content-pages.types";
+	ContentPageLabel,
+	DbContentPage,
+} from '../content-pages.types';
 
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { SessionHelper } from '../../shared/auth/session-helper';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
@@ -48,10 +47,12 @@ export class ContentPagesController {
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
-	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
+	): Promise<
+		IPagination<DbContentPage> & { labelCounts: Record<string, number> }
+	> {
 		return this.contentPagesService.getContentPagesForOverview(
 			queryDto,
-			user.getGroupIds()
+			user.getGroupIds(),
 		);
 	}
 
@@ -83,66 +84,11 @@ export class ContentPagesController {
 		@Req() request,
 		@SessionUser() user?: SessionUserEntity,
 	): Promise<DbContentPage> {
-		const contentPage: DbContentPage | undefined =
-			await this.contentPagesService.getContentPageByPath(path);
-
-		const permissions = get(user.getUser(), 'permissions', []);
-		const userId = user.getId();
-		const canEditContentPage =
-			permissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
-			(permissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) &&
-				contentPage.owner.id === userId);
-
-		if (!contentPage) {
-			return null;
-		}
-
-		// People that can edit the content page are not restricted by the publish_at, depublish_at, is_public settings
-		if (!canEditContentPage) {
-			if (
-				contentPage.publishAt &&
-				new Date().getTime() < new Date(contentPage.publishAt).getTime()
-			) {
-				return null; // Not yet published
-			}
-
-			if (
-				contentPage.depublishAt &&
-				new Date().getTime() > new Date(contentPage.depublishAt).getTime()
-			) {
-				throw new BadRequestException({
-					message: 'The content page was depublished',
-					additionalInfo: {
-						code: 'CONTENT_PAGE_DEPUBLISHED',
-						contentPageType: get(contentPage, 'content_type'),
-					},
-				});
-			}
-
-			if (!contentPage.isPublic) {
-				return null;
-			}
-
-			// Check if content page is accessible for the user who requested the content page
-			if (
-				!intersection(
-					contentPage.userGroupIds.map((id) => String(id)),
-					SessionHelper.getUserGroupIds(String(user.getGroupId())),
-				).length
-			) {
-				return null;
-			}
-		}
-
-		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
-		if (request) {
-			await this.contentPagesService.resolveMediaPlayersInPage(
-				contentPage,
-				request,
-			);
-		}
-
-		return contentPage;
+		return this.contentPagesService.getContentPageByPathForUser(
+			path,
+			user.getCommonUser(),
+			request?.headers?.['Referrer'],
+		);
 	}
 
 	@Get('path-exist')

@@ -2,8 +2,9 @@ import type { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from "../../shared/types/types";
+import { convertProfileToCommonUser } from "../users.converters";
 
-import { HetArchiefUser } from '../users.types';
+import { CommonUser, HetArchiefUser } from "../users.types";
 
 export class SessionUserEntity {
 	protected user: HetArchiefUser | Avo.User.User | undefined;
@@ -21,6 +22,10 @@ export class SessionUserEntity {
 
 	public getUser(): HetArchiefUser | Avo.User.User {
 		return this.user;
+	}
+
+	public getCommonUser(): CommonUser {
+		return convertProfileToCommonUser(this.user);
 	}
 
 	public getId(): string {
