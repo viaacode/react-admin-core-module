@@ -103,8 +103,9 @@ const NavigationOverview: FunctionComponent = () => {
 		}
 
 		const columns = GET_NAVIGATION_OVERVIEW_TABLE_COLS();
+		const title = tText('admin/menu/views/menu-overview___navigatie-overzicht');
 		return (
-			<AdminLayout pageTitle={tText('admin/menu/views/menu-overview___navigatie-overzicht')}>
+			<AdminLayout pageTitle={title}>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
