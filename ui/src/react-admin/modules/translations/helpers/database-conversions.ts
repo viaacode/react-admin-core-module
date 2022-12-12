@@ -1,12 +1,8 @@
+import { isAvo } from '~modules/shared/helpers/is-avo';
 import { Translation } from '~modules/translations/translations.types';
 import { flatten, fromPairs, groupBy, map } from 'lodash-es';
-import { AdminConfigManager } from '~core/config';
-import { DatabaseType } from '@viaa/avo2-types';
 
-export const getKeyPrefix = () =>
-	AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
-		? 'translations-'
-		: 'TRANSLATIONS_';
+export const getKeyPrefix = () => (isAvo() ? 'translations-' : 'TRANSLATIONS_');
 
 export function convertFromDatabaseToList(
 	translationList: Record<string, Record<string, string>>

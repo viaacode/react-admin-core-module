@@ -22,6 +22,8 @@ import React, {
 
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
@@ -55,7 +57,6 @@ import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-chec
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { DatabaseType } from '@viaa/avo2-types';
 
 import './ContentPageOverview.scss';
 import {
@@ -116,9 +117,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	}, []);
 
 	const ownerFilter = (queryWildcard: string): any[] => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
-		) {
+		if (isAvo()) {
 			return [
 				{
 					owner: {
@@ -182,10 +181,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 		let userGroupPath: string;
 		const filtersFormatted: any = cloneDeep(filters);
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			DatabaseType.hetArchief
-		) {
+		if (isHetArchief()) {
 			userGroupPath = 'owner_profile.group_id';
 		} else {
 			userGroupPath = 'profile.profile_user_group.group.id';

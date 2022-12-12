@@ -4,6 +4,7 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '../../../shared/consts/icons.consts';
@@ -239,8 +240,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'
 				),
-				AdminConfigManager.getConfig().database.databaseApplicationType ===
-					DatabaseType.avo
+				isAvo()
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),

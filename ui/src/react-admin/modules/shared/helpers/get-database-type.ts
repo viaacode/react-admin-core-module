@@ -1,5 +1,6 @@
 import { DatabaseType } from '@viaa/avo2-types';
+import { AdminConfigManager } from '~core/config';
 
 export function getDatabaseType(): DatabaseType {
-	return process.env.DATABASE_APPLICATION_TYPE as DatabaseType;
+	return AdminConfigManager.getConfig().database.databaseApplicationType;
 }

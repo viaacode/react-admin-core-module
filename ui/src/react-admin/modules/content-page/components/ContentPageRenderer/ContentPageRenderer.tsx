@@ -2,6 +2,7 @@ import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -18,7 +19,6 @@ import {
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { DatabaseType } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 
 type ContentPageDetailProps = {
@@ -99,10 +99,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		});
 
 		// Add page title as header block for faq items. Only for Avo
-		if (
-			contentPageInfo.contentType === 'FAQ_ITEM' &&
-			AdminConfigManager.getConfig().database.databaseApplicationType === DatabaseType.avo
-		) {
+		if (contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()) {
 			contentBlockBlockConfigs = [
 				{
 					position: 0,
