@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { SpecialPermissionGroups } from "../../shared/types/types";
-import { convertProfileToCommonUser } from "../users.converters";
+import { convertUserInfoToCommonUser } from "../users.converters";
 
 import { CommonUser, HetArchiefUser } from "../users.types";
 
@@ -24,7 +24,7 @@ export class SessionUserEntity {
 	}
 
 	public getCommonUser(): CommonUser {
-		return convertProfileToCommonUser(this.user);
+		return convertUserInfoToCommonUser(this.user);
 	}
 
 	public getId(): string {

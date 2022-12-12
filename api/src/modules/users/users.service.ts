@@ -24,7 +24,7 @@ import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
-import { convertProfileToCommonUser } from "./users.converters";
+import { convertUserInfoToCommonUser } from "./users.converters";
 import {
 	CommonUser,
 	DeleteContentCounts,
@@ -81,7 +81,7 @@ export class UsersService {
 				hetArchiefResponse?.users_profile ||
 				[]) as ProfileAvo[] | ProfileHetArchief[];
 			const profiles: CommonUser[] = compact(
-				userProfileObjects.map(convertProfileToCommonUser),
+				userProfileObjects.map(convertUserInfoToCommonUser),
 			);
 
 			const profileCount =

@@ -4,7 +4,25 @@ import { Idp } from "../shared/auth/auth.types";
 import { isHetArchief } from "../shared/helpers/is-hetarchief";
 import { CommonUser, HetArchiefUser, ProfileAvo, ProfileHetArchief } from "./users.types";
 
-export function convertProfileToCommonUser(
+/**
+ * This function should convert all user info objects to a single format
+ * Existing user info objects are:
+ * * Avo.User.User
+ * * Avo.User.Profile
+ * * HetArchiefUser
+ * * ProfileHetArchief
+ * * ProfileAvo
+ *
+ * TODO see if we can rename some of the interface to be more clear
+ * * Avo.User.User
+ * * Avo.User.Profile
+ * * ProfileHetArchief => this is the hetarchief user info straight from the graphql query: GetUsersQueryHetArchief
+ * * HetArchiefUser => looks like the archief user but already mapped to camelcase format, this should never be passed to this function
+ * * ProfileAvo split into 2 types => UserDetailAvo (contains all info for the user detail page in the admin dashboard)
+ * *                               => UserOverviewAvo (contains info from the users_summary view to show the user overview table in the admin dashboard)
+ * @param userInfo
+ */
+export function convertUserInfoToCommonUser(
 	userInfo: Avo.User.Profile | ProfileAvo | ProfileHetArchief | Avo.User.User | HetArchiefUser | undefined,
 ): CommonUser | undefined {
 	if (!userInfo) {
