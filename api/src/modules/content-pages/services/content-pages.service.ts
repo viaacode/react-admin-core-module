@@ -342,7 +342,7 @@ export class ContentPagesService {
 		const canEditContentPage =
 			permissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES) ||
 			(permissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) &&
-				contentPage.owner.id === userId);
+				!!userId && contentPage.owner.id === userId);
 
 		if (!contentPage) {
 			return null;

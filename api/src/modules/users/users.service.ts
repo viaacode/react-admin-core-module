@@ -1,6 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, flatten } from 'lodash';
+import { compact, flatten } from 'lodash-es';
 import { DataService } from '../data';
 import {
 	BulkAddSubjectsToProfilesDocument,
@@ -15,6 +15,9 @@ import {
 	GetDistinctBusinessCategoriesDocument,
 	GetDistinctBusinessCategoriesQuery,
 	GetDistinctBusinessCategoriesQueryVariables,
+	GetUserByIdDocument,
+	GetUserByIdQuery,
+	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
 
 import { CustomError } from '../shared/helpers/custom-error';
@@ -24,12 +27,13 @@ import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
-import { convertProfileToCommonUser } from "./users.converters";
+import { convertUserInfoToCommonUser } from './users.converters';
 import {
 	CommonUser,
 	DeleteContentCounts,
-	ProfileAvo,
-	ProfileHetArchief,
+	UserInfoOverviewAvo,
+	UserInfoOverviewHetArchief,
+	UserInfoType,
 	UserOverviewTableCol,
 } from './users.types';
 
@@ -37,6 +41,37 @@ export class UsersService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {}
+
+	async getById(id: string): Promise<CommonUser> {
+		try {
+			if (!isAvo()) {
+				throw CustomError('Not supported');
+			}
+
+			const response = await this.dataService.execute<
+				GetUserByIdQuery,
+				GetUserByIdQueryVariables
+			>(GetUserByIdDocument, { id });
+
+			if (!response || !response.users_summary_view[0]) {
+				throw CustomError('Could not fetch user', null, {
+					response,
+				});
+			}
+
+			return convertUserInfoToCommonUser(
+				response.users_summary_view[0],
+				isAvo()
+					? UserInfoType.UserInfoOverviewAvo
+					: UserInfoType.UserInfoOverviewHetArchief,
+			);
+		} catch (err) {
+			throw CustomError('Failed to get profiles from the database', err, {
+				variables: { id },
+				query: 'GET_USERS',
+			});
+		}
+	}
 
 	async getProfiles(
 		offset: number,
@@ -79,9 +114,16 @@ export class UsersService {
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
-				[]) as ProfileAvo[] | ProfileHetArchief[];
+				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
 			const profiles: CommonUser[] = compact(
-				userProfileObjects.map(convertProfileToCommonUser),
+				userProfileObjects.map((userInfo) => {
+					return convertUserInfoToCommonUser(
+						userInfo,
+						isAvo()
+							? UserInfoType.UserInfoOverviewAvo
+							: UserInfoType.UserInfoOverviewHetArchief,
+					);
+				}),
 			);
 
 			const profileCount =

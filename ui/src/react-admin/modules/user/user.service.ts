@@ -20,6 +20,28 @@ export class UserService {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
 	}
 
+	// TODO: avoid "& any"
+	static async getUserById(id: string): Promise<CommonUser & any> {
+		try {
+			const response = await fetchWithLogoutJson(
+				stringifyUrl({
+					url: `${this.getBaseUrl()}/${id}`
+				})
+			);
+
+			if (!response) {
+				throw new CustomError('Failed to find profile by id', null, { response });
+			}
+
+			return response
+		} catch (err) {
+			throw new CustomError('Failed to get profile by id from the database', err, {
+				id,
+				query: 'GET_USER_BY_ID',
+			});
+		}
+	}
+
 	static async getProfiles(
 		page: number,
 		sortColumn: UserOverviewTableCol,

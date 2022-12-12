@@ -1,7 +1,9 @@
 import { ButtonType, SelectOption } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
 
-import { AdminConfig, AdminConfigManager } from '~core/config';
+import { AdminConfig, AdminConfigManager, I18n } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
@@ -9,6 +11,7 @@ import {
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { isAvo } from '~modules/shared/helpers/is-avo';
+import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { DatabaseType } from '@viaa/avo2-types';
 import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
@@ -466,4 +469,46 @@ export const GET_USER_BULK_ACTIONS = (
 	}
 
 	return actions;
+};
+
+type ValidationRule<T> = {
+	error: string | ((object: T) => string);
+	isValid: (object: T) => boolean;
+};
+
+function getError<T>(rule: ValidationRule<T>, object: T) {
+	if (typeof rule.error === 'string') {
+		return rule.error;
+	}
+	return rule.error(object);
+}
+
+const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (i18n: I18n) => ValidationRule<
+	Partial<Avo.User.TempAccess>
+>[] = (i18n: I18n) => [
+	{
+		// until cannot be null and must be in the future
+		error: i18n.tText('admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'),
+		isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
+			!!tempAccess.until && normalizeTimestamp(tempAccess.until).isAfter(),
+	},
+	{
+		// When both from and until date are set, the from date must be < the until date
+		error: i18n.tText('admin/users/user___de-startdatum-moet-voor-de-einddatum-liggen'),
+		isValid: (tempAccess: Partial<Avo.User.TempAccess>) => {
+			return tempAccess.from
+				? !!tempAccess.until &&
+						normalizeTimestamp(tempAccess.from).isBefore(
+							normalizeTimestamp(tempAccess.until)
+						)
+				: true;
+		},
+	},
+];
+
+export const getTempAccessValidationErrors = (tempAccess: Avo.User.TempAccess, i18n: I18n): string[] => {
+	const validationErrors = [...GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(i18n)].map((rule) => {
+		return rule.isValid(tempAccess) ? null : getError(rule, tempAccess);
+	});
+	return compact(validationErrors);
 };
