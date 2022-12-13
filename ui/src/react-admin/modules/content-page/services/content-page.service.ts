@@ -3,24 +3,24 @@ import { Avo } from '@viaa/avo2-types';
 import { isArray, isFunction, isPlainObject, kebabCase } from 'lodash-es';
 import moment from 'moment';
 import { stringifyUrl } from 'query-string';
+
+import { AdminConfigManager } from '~core/config';
 import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
+import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
 import {
 	convertContentPageInfoToDbContentPage,
 	convertDbContentPagesToContentPageInfos,
-	convertDbContentPageToContentPageInfo
+	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
+import { CustomError } from '~modules/shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
 import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '../../shared/helpers/sanitize';
 import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
 import { ContentBlockConfig } from '../types/content-block.types';
-
-import { AdminConfigManager } from '~core/config';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
@@ -267,10 +267,11 @@ export class ContentPageService {
 					if (value && value.toHTML && isFunction(value.toHTML)) {
 						htmlFromRichTextEditor = value.toHTML();
 					}
-					obj[htmlKey] = sanitizeHtml(
+					const sanitizedHtml = sanitizeHtml(
 						htmlFromRichTextEditor || obj[htmlKey] || '',
-						'full'
+						SanitizePreset.full
 					);
+					obj[htmlKey] = sanitizedHtml;
 				} else if (!isPlainObject(value) && !isArray(value)) {
 					obj[key] = value;
 				} else if (isPlainObject(value)) {
@@ -391,7 +392,7 @@ export class ContentPageService {
 
 	public static getDescription(
 		contentPageInfo: ContentPageInfo,
-		sanitizePreset: SanitizePreset = 'link'
+		sanitizePreset: SanitizePreset = SanitizePreset.link
 	): string | null {
 		const description = (contentPageInfo as any).description_state
 			? (contentPageInfo as any).description_state.toHTML()
@@ -407,7 +408,9 @@ export class ContentPageService {
 		try {
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
-					url: AdminConfigManager.getConfig().services.getContentPageByPathEndpoint || this.getBaseUrl(),
+					url:
+						AdminConfigManager.getConfig().services.getContentPageByPathEndpoint ||
+						this.getBaseUrl(),
 					query: {
 						path,
 					},
@@ -416,9 +419,7 @@ export class ContentPageService {
 			if (!dbContentPage) {
 				return null;
 			}
-			return convertDbContentPageToContentPageInfo(
-				dbContentPage
-			);
+			return convertDbContentPageToContentPageInfo(dbContentPage);
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
 		}

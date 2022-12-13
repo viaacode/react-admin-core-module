@@ -1,5 +1,7 @@
-const basic = {
-	allowedTags: [
+import DOMPurify from 'dompurify';
+
+export const basic: DOMPurify.Config = {
+	ALLOWED_TAGS: [
 		'h1',
 		'h2',
 		'h3',
@@ -23,46 +25,32 @@ const basic = {
 		'super',
 		'span',
 	],
-	allowedAttributes: {
-		span: ['style'],
-		p: ['style'],
-	},
+	RETURN_DOM: false,
+	ADD_ATTR: ['target'], // Allow target _blank for links
 };
 
-const link = {
-	allowedTags: [...basic.allowedTags, 'a'],
-	allowedAttributes: {
-		...basic.allowedAttributes,
-		a: ['href', 'target'],
-	},
+export const link: DOMPurify.Config = {
+	ALLOWED_TAGS: [...(basic.ALLOWED_TAGS || []), 'a'],
+	RETURN_DOM: false,
+	ADD_ATTR: ['target'], // Allow target _blank for links
 };
 
-const full = {
-	allowedTags: [...link.allowedTags, 'img', 'table', 'tr', 'td', 'div'],
-	allowedAttributes: {
-		...link.allowedAttributes,
-		table: ['class'],
-		td: ['colSpan', 'rowSpan'],
-		img: ['src'],
-		div: ['class', 'style'],
-		span: ['class', 'style'],
-		h1: ['class', 'style'],
-		h2: ['class', 'style'],
-		h3: ['class', 'style'],
-		h4: ['class', 'style'],
-		h5: ['class', 'style'],
-		h6: ['class', 'style'],
-	},
+export const full: DOMPurify.Config = {
+	ALLOWED_TAGS: [...(link.ALLOWED_TAGS || []), 'img', 'table', 'tr', 'td', 'div'],
+	RETURN_DOM: false,
+	ADD_ATTR: ['target'], // Allow target _blank for links
 };
 
-export type SanitizePreset = 'basic' | 'link' | 'full';
+export enum SanitizePreset {
+	basic = 'basic',
+	link = 'link',
+	full = 'full',
+}
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const presetLookup: { [preset in SanitizePreset]: any } = {
-	basic,
-	link,
-	full,
+const presetLookup: Record<SanitizePreset, DOMPurify.Config> = {
+	[SanitizePreset.basic]: basic,
+	[SanitizePreset.link]: link,
+	[SanitizePreset.full]: full,
 };
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 export default presetLookup;

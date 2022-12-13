@@ -1,7 +1,3 @@
-import { compact, get } from 'lodash-es';
-import moment from 'moment';
-import React, { FunctionComponent } from 'react';
-
 import {
 	BlockHeading,
 	Container,
@@ -12,6 +8,9 @@ import {
 	TagOption,
 	Thumbnail,
 } from '@viaa/avo2-components';
+import { compact, get } from 'lodash-es';
+import moment from 'moment';
+import React, { FunctionComponent } from 'react';
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -23,6 +22,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~modules/shared/helpers/render-detail-fields';
+import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
@@ -102,7 +102,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 
 		return tHtml('admin/content/views/content-detail-meta-data___nee');
 	};
-	const description = ContentPageService.getDescription(contentPageInfo, 'full');
+	const description = ContentPageService.getDescription(contentPageInfo, SanitizePreset.full);
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
@@ -111,7 +111,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						<BlockHeading type="h4">
 							{tHtml('admin/content/views/content-detail___omschrijving')}
 						</BlockHeading>
-						<Html content={description || '-'} sanitizePreset="full" />
+						<Html content={description || '-'} sanitizePreset={SanitizePreset.full} />
 					</Spacer>
 				)}
 

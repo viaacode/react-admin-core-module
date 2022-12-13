@@ -100,7 +100,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 				),
 			});
 		}
-	}, [setStoredProfile, setLoadingInfo, tText, params.id]);
+	}, [setStoredProfile, setLoadingInfo, tText, params.id, onLoaded]);
 
 	useEffect(() => {
 		fetchProfileById();

@@ -1,8 +1,9 @@
-import { mapDeep } from './map-deep';
 import { isArray, isFunction, isPlainObject } from 'lodash-es';
-import { sanitizeHtml } from '../../../shared/helpers/sanitize';
-import { mockObject1, mockObject2 } from '../../../shared/helpers/map-deep/map-deep.mocks';
+import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
 import { RichEditorStateKey } from '../../../content-page/const/rich-text-editor.consts';
+import { mockObject1, mockObject2 } from '../../../shared/helpers/map-deep/map-deep.mocks';
+import { sanitizeHtml } from '../../../shared/helpers/sanitize';
+import { mapDeep } from './map-deep';
 
 describe('map-deep', () => {
 	it('Should correctly map all levels of an object', () => {
@@ -48,7 +49,7 @@ describe('map-deep', () => {
 					}
 					obj[htmlKey] = sanitizeHtml(
 						htmlFromRichTextEditor || obj[htmlKey] || '',
-						'full'
+						SanitizePreset.full
 					);
 				} else if (!isPlainObject(value) && !isArray(value)) {
 					obj[key] = value;
