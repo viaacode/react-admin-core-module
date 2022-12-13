@@ -100,7 +100,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				config,
 				setSelectedCheckboxes(
 					userGroupOptions,
-					get(tableState, 'author.user_groups', []) as string[]
+					get(tableState, 'userGroup', []) as string[]
 				),
 				companies.map(
 					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
@@ -115,14 +115,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					(option: string): CheckboxOption => ({
 						id: option,
 						label: option,
-						checked: get(tableState, 'business_category', [] as string[]).includes(
+						checked: get(tableState, 'businessCategory', [] as string[]).includes(
 							option
 						),
 					})
 				),
 				setSelectedCheckboxes(
 					educationLevels,
-					get(tableState, 'education_levels', []) as string[]
+					get(tableState, 'educationLevels', []) as string[]
 				),
 				setSelectedCheckboxes(subjects, get(tableState, 'subjects', []) as string[]),
 				setSelectedCheckboxes(idps, get(tableState, 'idps', []) as string[])
@@ -175,12 +175,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			});
 		}
 
-		andFilters.push(...getBooleanFilters(filters, ['is_blocked', 'is_exception']));
+		andFilters.push(...getBooleanFilters(filters, ['isBlocked', 'isException'], ['is_blocked', 'is_exception']));
 
 		andFilters.push(
 			...getDateRangeFilters(
 				filters,
-				['blocked_at', 'unblocked_at'],
+				['blockedAt', 'unblockedAt'],
 				['blocked_at.max', 'unblocked_at.max']
 			)
 		);
@@ -188,7 +188,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		andFilters.push(
 			...getMultiOptionFilters(
 				filters,
-				['userGroup', 'organisation', 'business_category'],
+				['userGroup', 'organisation', 'businessCategory'],
 				['group_id', 'company_id', 'business_category']
 			)
 		);
@@ -196,7 +196,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		andFilters.push(
 			...getMultiOptionsFilters(
 				filters,
-				['education_levels', 'subjects', 'idps'],
+				['educationLevels', 'subjects', 'idps'],
 				['contexts', 'classifications', 'idps'],
 				['key', 'key', 'idp'],
 				true
@@ -204,13 +204,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		);
 
 		andFilters.push(
-			...getMultiOptionFilters(filters, ['temp_access'], ['user.temp_access.current.status'])
+			...getMultiOptionFilters(filters, ['tempAccess'], ['user.temp_access.current.status'])
 		);
 
 		andFilters.push(
 			...getDateRangeFilters(
 				filters,
-				['created_at', 'last_access_at'],
+				['createdAt', 'lastAccessAt'],
 				['acc_created_at', 'last_access_at']
 			)
 		);
@@ -327,12 +327,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 			const columnDataType: string = get(column, 'dataType', '');
 			const defaultSortOrder = isAvo() ? 'desc_nulls_first' : 'desc';
+			const where = generateWhereObject(getFilters(tableState), false);
+
 			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
 				tableState.page || 0,
 				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
 				tableState.sort_order || defaultSortOrder,
 				columnDataType,
-				generateWhereObject(getFilters(tableState), false)
+				where
 			);
 
 			setProfiles(profilesTemp);
@@ -352,7 +354,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 		setIsFetching(false);
 		setIsLoading(false);
-	}, [columns, tableState, generateWhereObject, tHtml, isFetching]);
+
+		// This eslint rule is critical to avoid infinite loading
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [columns, tableState, generateWhereObject, tHtml]);
 
 	useEffect(() => {
 		fetchProfiles();
