@@ -5,7 +5,7 @@ import { TOptions } from 'i18next';
 
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
@@ -20,7 +20,6 @@ const proxyUrl = 'http://localhost:3300';
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,
 	useHistory: useHistory,
-	useParams: useParams,
 };
 
 function setConfig() {
@@ -201,7 +200,7 @@ function setConfig() {
 			],
 		},
 		content_blocks: {
-			[ContentBlockType.Search]: () => <p>Search block mock</p>
+			[ContentBlockType.Search]: () => <p>Search block mock</p>,
 		},
 		services: {
 			assetService: AssetsService,
@@ -252,8 +251,8 @@ function setConfig() {
 		user: mockUser,
 		route_parts: ROUTE_PARTS,
 		env: {
-			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people'
-		}
+			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
+		},
 	});
 }
 

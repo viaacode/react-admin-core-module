@@ -42,6 +42,7 @@ import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
 import { USER_PATH } from '../user.routes';
 
 export interface UserDetailProps {
+	id: string | null;
 	onSetTempAccess?: (
 		userId: string,
 		tempAccess: Avo.User.TempAccess,
@@ -50,7 +51,7 @@ export interface UserDetailProps {
 	onLoaded?: (user: CommonUser) => void;
 }
 
-export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) => {
+export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded }) => {
 	// Hooks
 	const [storedProfile, setStoredProfile] = useState<CommonUser | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
@@ -66,7 +67,6 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 
 	const { tText, tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
-	const params = AdminConfigManager.getConfig().services.router.useParams();
 	const user = AdminConfigManager.getConfig().user;
 
 	const hasPerm = useCallback(
@@ -76,7 +76,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 
 	const fetchProfileById = useCallback(async () => {
 		try {
-			const profile = await UserService.getUserById(params.id);
+			const profile = await UserService.getUserById(String(id));
 
 			profile.tempAccess && setTempAccess(profile.tempAccess);
 			setStoredProfile(profile);
@@ -87,7 +87,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 				new CustomError('Failed to get user by id', err, {
 					query: 'GET_USER_BY_ID',
 					variables: {
-						id: params.id,
+						id,
 					},
 				})
 			);
@@ -99,7 +99,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 				),
 			});
 		}
-	}, [setStoredProfile, setLoadingInfo, tText, params.id]);
+	}, [setStoredProfile, setLoadingInfo, tText, id, onLoaded]);
 
 	useEffect(() => {
 		fetchProfileById();
@@ -199,7 +199,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 				navigate(
 					history,
 					buildLink(USER_PATH(AdminConfigManager.getConfig().route_parts).USER_EDIT, {
-						id: params.id,
+						id: id as string,
 					})
 				);
 				break;
