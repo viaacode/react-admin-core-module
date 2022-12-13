@@ -17,7 +17,7 @@ const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = (({ match 
 		return null;
 	}
 	if (isError) {
-		return <p>{tHtml('Het laden van deze pagina inhoud is mislukt')}</p>;
+		return <p>{tHtml('modules/content-page/content-page-wrapper___het-laden-van-deze-pagina-inhoud-is-mislukt')}</p>;
 	}
 	if (contentPageInfo) {
 		return <ContentPageRenderer contentPageInfo={contentPageInfo} />;
