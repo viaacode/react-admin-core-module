@@ -25,7 +25,6 @@ import {
 } from './defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { DatabaseType } from '@viaa/avo2-types';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 

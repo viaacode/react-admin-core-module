@@ -30,12 +30,12 @@ export function convertUserInfoToCommonUser(
 			return {
 				profileId: user.profile.id,
 				stamboek: user.profile.stamboek ?? undefined,
-				organisation: user.profile?.organisation,
-				educationalOrganisations: (user.profile?.organizations ?? []).map(
+				organisation: user.profile.organisation,
+				educationalOrganisations: (user.profile.organizations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
 						organizationId: undefined,
-						unitId: org?.unitAddress ?? null,
-						label: org?.organizationName,
+						unitId: org.unitAddress ?? null,
+						label: org.organizationName,
 					}),
 				),
 				subjects: user.profile.subjects,
@@ -51,23 +51,29 @@ export function convertUserInfoToCommonUser(
 				userId: user.uid,
 				uid: user.uid,
 				email: user.mail ?? undefined,
-				fullName: user?.full_name ?? user?.first_name ? [user?.first_name, user?.last_name].join(' ') : undefined,
+				fullName: user.full_name ?? user.first_name ? [user.first_name, user.last_name].join(' ') : undefined,
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
 				blockedAt: undefined,
 				unblockedAt: undefined,
 				lastAccessAt: user.last_access_at,
-				tempAccess: user?.temp_access
+				tempAccess: user.temp_access
 					? {
-							from: user?.temp_access?.from ?? null,
-							until: user?.temp_access?.until ?? null,
-							status: isNil(user?.temp_access?.current?.status)
+							from: user.temp_access.from ?? null,
+							until: user.temp_access.until ?? null,
+							status: isNil(user.temp_access.current?.status)
 								? null
-								: user?.temp_access?.current?.status === 1,
+								: user.temp_access.current?.status === 1,
 					  }
 					: null,
 				idps: user.idpmaps as Idp[],
+				alias: user.profile.alias || undefined,
+				title: user.profile.title || undefined,
+				bio: user.profile.bio || undefined,
+				alternativeEmail: user.profile.alternative_email,
+				updatedAt: user.profile.updated_at || undefined,
+				companyId: user.profile.company_id,
 			};
 		}
 
@@ -97,24 +103,30 @@ export function convertUserInfoToCommonUser(
 				},
 				userId: profile.user_id,
 				uid: profile.user_id,
-				email: profile?.user?.mail ?? undefined,
-				fullName: profile?.user?.full_name ?? profile?.user?.first_name ? [profile?.user?.first_name, profile?.user?.last_name].join(' ') : undefined,
-				firstName: profile?.user?.first_name ?? undefined,
-				lastName: profile?.user?.last_name ?? undefined,
-				isBlocked: profile?.user?.is_blocked ?? undefined,
+				email: profile.user.mail ?? undefined,
+				fullName: profile.user.full_name ?? profile.user.first_name ? [profile.user.first_name, profile.user.last_name].join(' ') : undefined,
+				firstName: profile.user.first_name ?? undefined,
+				lastName: profile.user.last_name ?? undefined,
+				isBlocked: profile.user.is_blocked ?? undefined,
 				blockedAt: undefined,
 				unblockedAt: undefined,
-				lastAccessAt: profile?.user?.last_access_at,
-				tempAccess: profile?.user?.temp_access
+				lastAccessAt: profile.user.last_access_at,
+				tempAccess: profile.user.temp_access
 					? {
-						from: profile?.user?.temp_access?.from ?? null,
-						until: profile?.user?.temp_access?.until ?? null,
-						status: isNil(profile?.user?.temp_access?.current?.status)
+						from: profile.user.temp_access.from ?? null,
+						until: profile.user.temp_access.until ?? null,
+						status: isNil(profile.user.temp_access.current?.status)
 							? null
-							: profile?.user?.temp_access?.current?.status === 1,
+							: profile.user.temp_access.current?.status === 1,
 					}
 					: null,
-				idps: profile?.user?.idpmaps as Idp[],
+				idps: profile.user.idpmaps as Idp[],
+				alias: profile.alias || undefined,
+				title: profile.title || undefined,
+				bio: profile.bio || undefined,
+				alternativeEmail: profile?.alternative_email,
+				updatedAt: profile.updated_at || undefined,
+				companyId: profile.company_id,
 			};
 		}
 
@@ -136,10 +148,10 @@ export function convertUserInfoToCommonUser(
 						label: org.organization?.ldap_description ?? '',
 					}),
 				),
-				subjects: user.classifications?.map(
+				subjects: user.classifications.map(
 					(classification) => classification.key,
 				),
-				educationLevels: user.contexts?.map((context) => context.key),
+				educationLevels: user.contexts.map((context) => context.key),
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
 				createdAt: user.acc_created_at,
@@ -155,16 +167,16 @@ export function convertUserInfoToCommonUser(
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
-				blockedAt: user?.blocked_at?.date,
-				unblockedAt: user?.unblocked_at?.date,
+				blockedAt: user.blocked_at?.date,
+				unblockedAt: user.unblocked_at?.date,
 				lastAccessAt: user.last_access_at,
-				tempAccess: user?.user?.temp_access
+				tempAccess: user.user.temp_access
 					? {
-						from: user?.user?.temp_access?.from ?? null,
-						until: user?.user?.temp_access?.until ?? null,
-						status: isNil(user?.user?.temp_access?.current?.status)
+						from: user.user.temp_access.from ?? null,
+						until: user.user.temp_access.until ?? null,
+						status: isNil(user.user.temp_access.current?.status)
 							? null
-							: user?.user?.temp_access?.current?.status === 1,
+							: user.user.temp_access.current?.status === 1,
 					}
 					: null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),

@@ -61,9 +61,7 @@ export class UsersService {
 
 			return convertUserInfoToCommonUser(
 				response.users_summary_view[0],
-				isAvo()
-					? UserInfoType.UserInfoOverviewAvo
-					: UserInfoType.UserInfoOverviewHetArchief,
+				UserInfoType.UserInfoOverviewAvo,
 			);
 		} catch (err) {
 			throw CustomError('Failed to get profiles from the database', err, {

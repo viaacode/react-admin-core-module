@@ -44,9 +44,10 @@ export { default as NavigationOverview } from './navigation/views/NavigationOver
 export { default as NavigationEdit } from '~modules/navigation/views/NavigationEdit';
 export { default as NavigationDetail } from '~modules/navigation/views/NavigationDetail';
 
-// Users
-export { UserOverview } from '~modules/user/views/UserOverview';
 export { UserDetail } from '~modules/user/views/UserDetail';
+export { UserEdit } from '~modules/user/views/UserEdit';
+export { UserOverview } from '~modules/user/views/UserOverview';
+
 export type { CommonUser } from '~modules/user/user.types';
 
 // User groups and permissions
