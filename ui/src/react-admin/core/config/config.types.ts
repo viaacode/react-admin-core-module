@@ -3,7 +3,6 @@ import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
-
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
@@ -88,9 +87,6 @@ export interface AdminConfig {
 				replace: (path: string) => void;
 			};
 
-			// Function that returns the params for the current url
-			useParams: () => Record<string, string>;
-
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
@@ -108,7 +104,7 @@ export interface AdminConfig {
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
-	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>,
+	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>;
 	icon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
@@ -126,7 +122,7 @@ export interface AdminConfig {
 	route_parts: typeof ROUTE_PARTS;
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
-	}
+	};
 }
 
 export interface IconConfig {
