@@ -76,6 +76,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [tableState, setTableState] = useState<Partial<UserTableState>>({});
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const [selectedProfileIds, setSelectedProfileIds] = useState<string[]>([]);
 	const [companies] = useCompaniesWithUsers();
 	const [businessCategories] = useBusinessCategories();
@@ -312,17 +313,24 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const fetchProfiles = useCallback(async () => {
+		if (isFetching) {
+			return;
+		}
+
 		try {
 			setIsLoading(true);
+			setIsFetching(true);
 
 			const column = columns.find((tableColumn: FilterableColumn) => {
 				return get(tableColumn, 'id', '') === get(tableState, 'sort_column', 'empty');
 			});
+
 			const columnDataType: string = get(column, 'dataType', '');
+			const defaultSortOrder = isAvo() ? 'desc_nulls_first' : 'desc';
 			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
 				tableState.page || 0,
 				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
-				tableState.sort_order || 'desc',
+				tableState.sort_order || defaultSortOrder,
 				columnDataType,
 				generateWhereObject(getFilters(tableState), false)
 			);
@@ -333,6 +341,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			console.error(
 				new CustomError('Failed to get users from the database', err, { tableState })
 			);
+
 			setLoadingInfo({
 				state: 'error',
 				message: tHtml(
@@ -340,8 +349,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				),
 			});
 		}
+
+		setIsFetching(false);
 		setIsLoading(false);
-	}, [columns, tableState, generateWhereObject, tHtml]);
+	}, [columns, tableState, generateWhereObject, tHtml, isFetching]);
 
 	useEffect(() => {
 		fetchProfiles();
