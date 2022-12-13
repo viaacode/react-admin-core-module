@@ -12,7 +12,7 @@ export interface HtmlProps {
 
 const Html: FunctionComponent<HtmlProps> = ({
 	content,
-	sanitizePreset = 'link',
+	sanitizePreset = SanitizePreset.link,
 	type = 'p',
 	className,
 }) => {

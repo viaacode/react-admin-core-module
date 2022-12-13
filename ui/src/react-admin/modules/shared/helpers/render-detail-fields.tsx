@@ -1,8 +1,9 @@
 import { get, isBoolean, isNil, isString } from 'lodash-es';
 import React, { ReactElement, ReactNode } from 'react';
+import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
 
 import { formatDate } from './formatters/date';
-import { sanitizeHtml, sanitizePresets } from './sanitize';
+import { sanitizeHtml } from './sanitize';
 
 export function renderDetailRow(value: ReactNode, label: string): ReactElement {
 	return (
@@ -10,7 +11,7 @@ export function renderDetailRow(value: ReactNode, label: string): ReactElement {
 			<th>{label}</th>
 			{isString(value) && (
 				<td
-					dangerouslySetInnerHTML={{ __html: sanitizeHtml(value, sanitizePresets.link) }}
+					dangerouslySetInnerHTML={{ __html: sanitizeHtml(value, SanitizePreset.link) }}
 				/>
 			)}
 			{!isString(value) && <td>{value}</td>}

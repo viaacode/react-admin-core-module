@@ -1,4 +1,4 @@
-import { Container, Flex, Pagination as PaginationAvo, Spinner } from '@viaa/avo2-components';
+import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -387,7 +387,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	};
 
 	if (!translations) {
-		return <CenteredSpinner/>;
+		return <CenteredSpinner />;
 	}
 	return (
 		<div className={className}>

@@ -8,7 +8,7 @@
    Usage: use these classes to style individual components like their rich text equivalent
    ========================================================================== */
 
-@import "./braft-editor-output";
+@import './braft-editor-output';
 
 .c-h1-display,
 .c-content .c-h1-display {
@@ -108,11 +108,12 @@
 }
 
 .c-content {
-	white-space: initial;
+	white-space: normal;
+	overflow: auto; // Otherwise margins on c-content div collapse on https://onderwijs-qas.hetarchief.be/leerlingen
 
 	p {
 		margin: 1.5rem 0;
-		min-height: 1em // Braft editor output css
+		min-height: 1em; // Braft editor output css
 	}
 
 	a {
@@ -121,7 +122,7 @@
 
 	dl {
 		border: 1px solid $color-gray-100;
-		border-radius: .3rem;
+		border-radius: 0.3rem;
 		overflow: hidden;
 		padding: 1.2rem;
 		margin: 1.5rem 0;
@@ -151,11 +152,13 @@
 		list-style: decimal;
 	}
 
-	ul, ol {
+	ul,
+	ol {
 		padding: 0;
 		margin: 1.5rem 0 1.5rem 1.75rem;
 
-		ul, ol {
+		ul,
+		ol {
 			margin: 0;
 			padding-left: 2.25rem;
 		}
@@ -222,16 +225,17 @@
 		font-weight: normal;
 		line-height: 16px;
 		word-wrap: break-word;
-		white-space: pre-wrap
+		white-space: pre-wrap;
 	}
 
-	pre, code {
+	pre,
+	code {
 		font-family: $g-code-font-family;
 	}
 
 	pre pre {
 		margin: 0;
-		padding: 0
+		padding: 0;
 	}
 
 	code {
@@ -261,7 +265,6 @@
 .c-content--inverse {
 	color: $color-gray-100;
 }
-
 
 // Overline plus paragraph
 .c-overline-plus-p {
