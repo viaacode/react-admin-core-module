@@ -40,7 +40,7 @@ export interface ContentPageOverviewParams {
 	// Selected tabs for which we should fetch content page items
 	selectedLabelIds: number[];
 	orderProp?: string;
-	orderDirection?: 'asc' | 'desc';
+	orderDirection?: Avo.Search.OrderDirection;
 	offset: number;
 	limit: number;
 }
