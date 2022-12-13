@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import { UserGroupService } from '~modules/user-group/services/user-group.service';
 
@@ -8,13 +7,13 @@ import { UserGroupWithPermissions } from '../types/user-group.types';
 export const useGetUserGroupsWithPermissions = <TData = UserGroupWithPermissions[]>(
 	options: UseQueryOptions<
 		UserGroupWithPermissions[],
-		HTTPError,
+		any,
 		TData,
 		typeof USER_GROUP_QUERY_KEYS.all
 	> = {
 		enabled: true,
 	}
-): UseQueryResult<TData, HTTPError> => {
+): UseQueryResult<TData, any> => {
 	return useQuery(
 		USER_GROUP_QUERY_KEYS.all,
 		() => {

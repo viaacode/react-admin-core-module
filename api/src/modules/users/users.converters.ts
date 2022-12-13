@@ -1,7 +1,13 @@
-import { isNil } from "@nestjs/common/utils/shared.utils";
-import { Avo } from "@viaa/avo2-types";
-import { Idp } from "../shared/auth/auth.types";
-import { CommonUser, HetArchiefUser, UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from "./users.types";
+import { isNil } from '@nestjs/common/utils/shared.utils';
+import { Avo } from '@viaa/avo2-types';
+import { Idp } from '../shared/auth/auth.types';
+import {
+	CommonUser,
+	HetArchiefUser,
+	UserInfoOverviewAvo,
+	UserInfoOverviewHetArchief,
+	UserInfoType,
+} from './users.types';
 
 /**
  * This function should convert all user info objects to a single format
@@ -17,7 +23,13 @@ import { CommonUser, HetArchiefUser, UserInfoOverviewAvo, UserInfoOverviewHetArc
  * @param userInfoType
  */
 export function convertUserInfoToCommonUser(
-	userInfo: Avo.User.User | Avo.User.Profile | UserInfoOverviewAvo | UserInfoOverviewHetArchief | HetArchiefUser | undefined,
+	userInfo:
+		| Avo.User.User
+		| Avo.User.Profile
+		| UserInfoOverviewAvo
+		| UserInfoOverviewHetArchief
+		| HetArchiefUser
+		| undefined,
 	userInfoType: UserInfoType,
 ): CommonUser | undefined {
 	if (!userInfo) {
@@ -51,7 +63,10 @@ export function convertUserInfoToCommonUser(
 				userId: user.uid,
 				uid: user.uid,
 				email: user.mail ?? undefined,
-				fullName: user.full_name ?? user.first_name ? [user.first_name, user.last_name].join(' ') : undefined,
+				fullName:
+					user.full_name ?? user.first_name
+						? [user.first_name, user.last_name].join(' ')
+						: undefined,
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
@@ -67,7 +82,12 @@ export function convertUserInfoToCommonUser(
 								: user.temp_access.current?.status === 1,
 					  }
 					: null,
-				idps: user.idpmaps as Idp[],
+				idps: Object.fromEntries(
+					user.idpmapObjects.map((idpMapObject) => [
+						idpMapObject.idp as Idp,
+						idpMapObject.idp_user_id as string,
+					]),
+				),
 				alias: user.profile.alias || undefined,
 				title: user.profile.title || undefined,
 				bio: user.profile.bio || undefined,
@@ -97,14 +117,17 @@ export function convertUserInfoToCommonUser(
 				businessCategory: profile.business_category ?? undefined,
 				createdAt: profile.created_at,
 				userGroup: {
-					name:  undefined,
-					label:  undefined,
+					name: undefined,
+					label: undefined,
 					id: profile.userGroupIds[0] ?? undefined,
 				},
 				userId: profile.user_id,
 				uid: profile.user_id,
 				email: profile.user.mail ?? undefined,
-				fullName: profile.user.full_name ?? profile.user.first_name ? [profile.user.first_name, profile.user.last_name].join(' ') : undefined,
+				fullName:
+					profile.user.full_name ?? profile.user.first_name
+						? [profile.user.first_name, profile.user.last_name].join(' ')
+						: undefined,
 				firstName: profile.user.first_name ?? undefined,
 				lastName: profile.user.last_name ?? undefined,
 				isBlocked: profile.user.is_blocked ?? undefined,
@@ -113,14 +136,19 @@ export function convertUserInfoToCommonUser(
 				lastAccessAt: profile.user.last_access_at,
 				tempAccess: profile.user.temp_access
 					? {
-						from: profile.user.temp_access.from ?? null,
-						until: profile.user.temp_access.until ?? null,
-						status: isNil(profile.user.temp_access.current?.status)
-							? null
-							: profile.user.temp_access.current?.status === 1,
-					}
+							from: profile.user.temp_access.from ?? null,
+							until: profile.user.temp_access.until ?? null,
+							status: isNil(profile.user.temp_access.current?.status)
+								? null
+								: profile.user.temp_access.current?.status === 1,
+					  }
 					: null,
-				idps: profile.user.idpmaps as Idp[],
+				idps: Object.fromEntries(
+					profile.user.idpmapObjects.map((idpMapObject) => [
+						idpMapObject.idp as Idp,
+						idpMapObject.idp_user_id as string,
+					]),
+				),
 				alias: profile.alias || undefined,
 				title: profile.title || undefined,
 				bio: profile.bio || undefined,
@@ -138,8 +166,8 @@ export function convertUserInfoToCommonUser(
 				stamboek: user.stamboek ?? undefined,
 				organisation: user.company_name
 					? ({
-						name: user.company_name,
-					} as Avo.Organization.Organization)
+							name: user.company_name,
+					  } as Avo.Organization.Organization)
 					: undefined,
 				educationalOrganisations: (user.organisations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
@@ -163,7 +191,10 @@ export function convertUserInfoToCommonUser(
 				userId: user.user_id,
 				uid: user.user_id,
 				email: user.mail ?? undefined,
-				fullName: user.full_name ?? user.first_name ? [user.first_name, user.last_name].join(' ') : undefined,
+				fullName:
+					user.full_name ?? user.first_name
+						? [user.first_name, user.last_name].join(' ')
+						: undefined,
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
@@ -172,14 +203,19 @@ export function convertUserInfoToCommonUser(
 				lastAccessAt: user.last_access_at,
 				tempAccess: user.user.temp_access
 					? {
-						from: user.user.temp_access.from ?? null,
-						until: user.user.temp_access.until ?? null,
-						status: isNil(user.user.temp_access.current?.status)
-							? null
-							: user.user.temp_access.current?.status === 1,
-					}
+							from: user.user.temp_access.from ?? null,
+							until: user.user.temp_access.until ?? null,
+							status: isNil(user.user.temp_access.current?.status)
+								? null
+								: user.user.temp_access.current?.status === 1,
+					  }
 					: null,
-				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
+				idps: Object.fromEntries(
+					user.idps.map((idpMapObject) => [
+						idpMapObject.idp as unknown as Idp,
+						idpMapObject.idp_user_id as string,
+					]),
+				),
 			};
 		}
 
@@ -191,24 +227,30 @@ export function convertUserInfoToCommonUser(
 				email: profile.mail ?? undefined,
 				firstName: profile.first_name ?? undefined,
 				lastName: profile.last_name ?? undefined,
-				fullName: profile.full_name ?? profile.first_name ? [profile.first_name, profile.last_name].join(' ') : undefined,
+				fullName:
+					profile.full_name ?? profile.first_name
+						? [profile.first_name, profile.last_name].join(' ')
+						: undefined,
 				userGroup: {
 					id: profile.group?.id,
 					name: profile.group?.name,
 					label: profile.group?.label,
 				},
-				idps: profile.identities?.map(
-					(identity) => identity.identity_provider_name as Idp,
+				idps: Object.fromEntries(
+					profile.identities?.map(
+						(identity) => [identity.identity_provider_name as Idp, null], // User ids of idp are not fetched
+					),
 				),
 				organisation: {
 					name:
 						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
 						undefined,
 					or_id:
-					profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
+						profile.maintainer_users_profiles?.[0]?.maintainer
+							.schema_identifier,
 					logo_url:
-					profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
-						?.iri,
+						profile.maintainer_users_profiles?.[0]?.maintainer?.information
+							?.logo?.iri,
 				},
 				lastAccessAt: profile.last_access_at,
 			};
@@ -228,18 +270,20 @@ export function convertUserInfoToCommonUser(
 					name: user.groupName,
 					label: user.groupName,
 				},
-				idps: [user.idp],
+				idps: { [user.idp]: null },
 				organisation: undefined,
 				lastAccessAt: undefined,
 			};
 		}
 
 		default:
-			throw new Error(JSON.stringify({
-				message: 'Failed to convert user with type',
-				additionalInfo: {
-					userInfoType,
-				}
-			}));
+			throw new Error(
+				JSON.stringify({
+					message: 'Failed to convert user with type',
+					additionalInfo: {
+						userInfoType,
+					},
+				}),
+			);
 	}
 }

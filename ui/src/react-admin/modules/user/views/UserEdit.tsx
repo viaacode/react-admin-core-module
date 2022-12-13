@@ -76,11 +76,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 			setBio(profile.bio);
 			setAlias(profile.alias);
 			setCompanyId(profile.companyId);
-			setSelectedSubjects(
-				(profile.classifications || [])
-					.map((classification: { key: string }) => classification.key)
-					.map(stringToTagInfo)
-			);
+			setSelectedSubjects((profile.subjects || []).map(stringToTagInfo));
 
 			setStoredProfile(profile);
 

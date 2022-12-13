@@ -30,6 +30,7 @@ import {
 import { UserService } from '~modules/user/user.service';
 import {
 	CommonUser,
+	Idp,
 	UserBulkAction,
 	UserOverviewTableCol,
 	USERS_PER_PAGE,
@@ -660,7 +661,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						commonUser?.idps || [],
+						Object.keys(commonUser?.idps || {}) as Idp[],
 						`user_${commonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'

@@ -1,5 +1,4 @@
 import type { Avo } from '@viaa/avo2-types';
-import type { HTTPError } from 'ky';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { CONTENT_PAGE_QUERY_KEYS } from '~modules/content-page/const/content-page.consts';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -14,7 +13,7 @@ export const useGetContentPagesOverview = <TData = [ContentPageInfo[], number]>(
 	sortOrder: Avo.Search.OrderDirection,
 	columnDataType: string,
 	where: any
-): UseQueryResult<TData, HTTPError> => {
+): UseQueryResult<TData, any> => {
 	return useQuery(
 		[CONTENT_PAGE_QUERY_KEYS.OVERVIEW, { page, sortColumn, sortOrder, columnDataType, where }],
 		() => {

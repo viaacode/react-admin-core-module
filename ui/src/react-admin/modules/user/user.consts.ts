@@ -20,6 +20,10 @@ type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirmButtonType?: ButtonType;
 };
 
+export const USER_QUERY_KEYS = {
+	getProfileById: 'getProfileById',
+};
+
 export const GET_USER_OVERVIEW_TABLE_COLS: (
 	config: AdminConfig,
 	userGroupOptions: CheckboxOption[],

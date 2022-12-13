@@ -21,6 +21,8 @@ export type { ContentPageInfo } from '~modules/content-page/types/content-pages.
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
 export type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 export type { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
+export type { ContentPageDetailProps } from '~modules/content-page/views/ContentPageDetail';
+export type { ContentPageEditProps } from '~modules/content-page/views/ContentPageEdit';
 export type {
 	MediaGridBlockState,
 	MediaGridBlockComponentState,
@@ -55,6 +57,10 @@ export { default as UserGroupOverview } from '~modules/user-group/views/UserGrou
 
 // Translations
 export { default as TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
+
+// Helpers
+export { sanitizeHtml } from './shared/helpers/sanitize/index';
+export { SanitizePreset } from './shared/helpers/sanitize/presets';
 
 // STOPGAP
 export type { DefaultComponentProps, ValueOf } from '~modules/shared';
