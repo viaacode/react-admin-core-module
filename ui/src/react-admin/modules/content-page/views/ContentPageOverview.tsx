@@ -22,6 +22,8 @@ import React, {
 
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
@@ -55,7 +57,6 @@ import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-chec
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { AvoOrHetArchief } from '~modules/shared/types';
 
 import './ContentPageOverview.scss';
 import {
@@ -115,6 +116,41 @@ const ContentPageOverview: FunctionComponent = () => {
 		return PermissionService.hasPerm(getUser(), permission);
 	}, []);
 
+	const ownerFilter = (queryWildcard: string): any[] => {
+		if (isAvo()) {
+			return [
+				{
+					owner: {
+						full_name: { _ilike: queryWildcard },
+					},
+				},
+				{
+					owner: {
+						group_name: { _ilike: queryWildcard },
+					},
+				},
+			];
+		}
+		return [
+			{
+				owner_profile: {
+					full_name: {
+						_ilike: queryWildcard,
+					},
+				},
+			},
+			{
+				owner_profile: {
+					group: {
+						label: {
+							_ilike: queryWildcard,
+						},
+					},
+				},
+			},
+		];
+	};
+
 	const generateWhereObject = (filters: Partial<ContentTableState>) => {
 		const andFilters: any[] = [];
 		andFilters.push(
@@ -145,10 +181,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 		let userGroupPath: string;
 		const filtersFormatted: any = cloneDeep(filters);
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			userGroupPath = 'owner_profile.group_id';
 		} else {
 			userGroupPath = 'profile.profile_user_group.group.id';
@@ -190,43 +223,6 @@ const ContentPageOverview: FunctionComponent = () => {
 	);
 	const contentPages = contentPageResponse?.[0] || null;
 	const contentPageCount = contentPageResponse?.[1] || 0;
-
-	const ownerFilter = (queryWildcard: string): any[] => {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
-		) {
-			return [
-				{
-					owner: {
-						full_name: { _ilike: queryWildcard },
-					},
-				},
-				{
-					owner: {
-						group_name: { _ilike: queryWildcard },
-					},
-				},
-			];
-		}
-		return [
-			{
-				owner_profile: {
-					full_name: {
-						_ilike: queryWildcard,
-					},
-				},
-			},
-			{
-				owner_profile: {
-					group: {
-						label: {
-							_ilike: queryWildcard,
-						},
-					},
-				},
-			},
-		];
-	};
 
 	useEffect(() => {
 		if (contentPages) {

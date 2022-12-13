@@ -4,7 +4,12 @@ query getUsers(
 	$orderBy: [users_summary_view_order_by!]!
 	$where: users_summary_view_bool_exp!
 ) {
-	users_summary_view(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
+	users_summary_view(
+		offset: $offset
+		limit: $limit
+		order_by: $orderBy
+		where: $where
+	) {
 		user_id
 		full_name
 		first_name

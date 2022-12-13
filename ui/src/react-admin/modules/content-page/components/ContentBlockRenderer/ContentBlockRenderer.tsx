@@ -8,15 +8,15 @@ import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options
 import { Color, ContentBlockConfig } from '../../types/content-block.types';
 
 import {
-	COMPONENT_PREVIEW_MAP,
 	CONTENT_PAGE_ACCESS_BLOCKS,
+	GET_BLOCK_COMPONENT,
 	IGNORE_BLOCK_LEVEL_PROPS,
 	NAVIGABLE_CONTENT_BLOCKS,
 	OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
-} from './ContentBlockPreview.const';
+} from './ContentBlockRenderer.const';
 
-import './ContentBlockPreview.scss';
+import './ContentBlockRenderer.scss';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 
@@ -29,7 +29,7 @@ interface ContentBlockPreviewProps {
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
+const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	contentBlockConfig,
 	contentPageInfo,
 	onClick = noop,
@@ -41,7 +41,7 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
-	const PreviewComponent = COMPONENT_PREVIEW_MAP[contentBlockConfig.type];
+	const PreviewComponent = GET_BLOCK_COMPONENT(contentBlockConfig.type);
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
 	const componentStateProps: any = needsElements ? { elements: componentState } : componentState;
 
@@ -157,4 +157,4 @@ const ContentBlockPreview: FunctionComponent<ContentBlockPreviewProps> = ({
 	);
 };
 
-export default ContentBlockPreview;
+export default ContentBlockRenderer;

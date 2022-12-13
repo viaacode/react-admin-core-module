@@ -1,8 +1,9 @@
-import { Container, Flex, IconName, Spinner } from '@viaa/avo2-components';
+import { IconName } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
 import { CommonUser } from '~modules/user/user.types';
@@ -35,14 +36,6 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 	render,
 }) => {
 	const { tHtml } = useTranslation();
-
-	const renderSpinner = () => (
-		<Container mode="vertical">
-			<Flex orientation="horizontal" center>
-				<Spinner size="large" />
-			</Flex>
-		</Container>
-	);
 
 	const renderError = () => (
 		// <ErrorView
@@ -83,7 +76,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 
 		case 'loading':
 		default:
-			return showSpinner ? renderSpinner() : <></>;
+			return showSpinner ? <CenteredSpinner/> : <></>;
 	}
 };
 

@@ -10,9 +10,10 @@ import {
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
@@ -37,7 +38,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 	subjects: CheckboxOption[],
 	idps: CheckboxOption[]
 ) => {
-	if (config.database.databaseApplicationType === AvoOrHetArchief.avo) {
+	if (isAvo()) {
 		return getAvoColumns(
 			config.user,
 			userGroupOptions,

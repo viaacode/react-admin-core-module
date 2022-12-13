@@ -22,7 +22,7 @@ import { PermissionName } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
+import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import {
 	CONTENT_PAGE_PATH,
@@ -419,9 +419,8 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		switch (currentTab) {
 			case 'inhoud':
 				return (
-					<ContentPage
+					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
-						userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
 					/>
 				);
 			case 'metadata':

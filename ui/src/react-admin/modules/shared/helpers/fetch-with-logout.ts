@@ -1,4 +1,4 @@
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { CustomError } from './custom-error';
 
 const AVO_LAST_RELOAD_BECAUSE_UNAUTH = 'AVO_LAST_RELOAD_BECAUSE_UNAUTH';
 
@@ -11,16 +11,20 @@ type FetchOptions = Omit<RequestInit, 'method'> & {
  * @param url
  * @param options
  */
-export async function fetchWithLogout(url: string, options?: FetchOptions): Promise<Response> {
+export async function fetchWithLogout(
+	url: RequestInfo,
+	options?: Partial<FetchOptions & { forceLogout: boolean }>
+): Promise<Response> {
+	const { forceLogout, ...fetchOptions } = options || { forceLogout: true };
 	const response = await fetch(url, {
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		credentials: 'include',
-		method: 'GET',
-		...options,
+		...fetchOptions,
 	});
-	if (response.status === 401) {
+	if (response.status === 401 && (forceLogout ?? true)) {
 		// User is no longer logged in => force them to login again
 		goToLoginBecauseOfUnauthorizedError();
 	}
@@ -35,9 +39,26 @@ export async function fetchWithLogout(url: string, options?: FetchOptions): Prom
 	return response;
 }
 
-export async function fetchWithLogoutJson(url: string, options?: FetchOptions): Promise<any> {
-	const response = await fetchWithLogout(url, options);
-	return response.json();
+export async function fetchWithLogoutJson<T = any>(
+	url: RequestInfo,
+	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNull: boolean }>
+): Promise<T> {
+	const { throwOnNull, ...fetchOptions } = options || { throwOnNull: true };
+	const response = await fetchWithLogout(url, fetchOptions);
+
+	const text = await response.text();
+	if (text) {
+		return JSON.parse(text);
+	} else {
+		if (throwOnNull ?? true) {
+			throw new CustomError('Response from the server was null', null, {
+				code: 'RESPONSE_IS_NULL',
+				text,
+			});
+		} else {
+			return null as T; // only in case throwOnNull is false will this ever return null, so we cast to T so we have to do less null checks everywhere
+		}
+	}
 }
 
 export function goToLoginBecauseOfUnauthorizedError() {

@@ -64,11 +64,6 @@ export interface PaddingFieldState {
 // if 1 block, errors is a string[]. If multiple, it is a string[] index by their stateIndex, so string[][].
 export type ContentBlockErrors = { [key: string]: (string | string[])[] };
 
-export interface ContentBlockComponentsLimits {
-	min?: number;
-	max?: number;
-}
-
 // must match the lookup enumeration `content_block_types` on GraphQL.
 export enum ContentBlockType {
 	AnchorLinks = 'ANCHOR_LINKS',
@@ -98,39 +93,6 @@ export enum ContentBlockType {
 	VideoTitleTextButton = 'VIDEO_TITLE_TEXT_BUTTON',
 }
 
-export enum ContentBlockEditor {
-	AlignSelect = 'AlignSelect',
-	Checkbox = 'Checkbox',
-	ColorSelect = 'ColorSelect',
-	ContentPicker = 'ContentPicker',
-	AnchorLinkSelect = 'AnchorLinkSelect',
-	ContentTypeAndLabelsPicker = 'ContentTypeAndLabelsPicker',
-	FileUpload = 'FileUpload',
-	IconPicker = 'IconPicker',
-	DatePicker = 'DatePicker',
-	MultiRange = 'MultiRange',
-	PaddingSelect = 'PaddingSelect',
-	Select = 'Select',
-	TextArea = 'TextArea',
-	TextInput = 'TextInput',
-	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
-	UserGroupSelect = 'UserGroupSelect',
-}
-
-export interface ContentBlockField {
-	label?: string; // Optional for checkboxes, who have their own label
-	editorType: ContentBlockEditor;
-	editorProps?: any;
-	validator?: (value: any) => string[];
-	repeat?: {
-		defaultState: any;
-		addButtonLabel?: string;
-		deleteButtonLabel?: string;
-	};
-}
-
-export type ContentBlockEditorType = 'field' | 'fieldGroup';
-
 /* CONTENT BLOCK STATE */
 export interface DefaultContentBlockState {
 	backgroundColor: Color;
@@ -141,15 +103,6 @@ export interface DefaultContentBlockState {
 	userGroupIds: number[];
 	fullWidth?: boolean;
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
-}
-
-export type ContentBlockState = DefaultContentBlockState;
-
-export interface ContentBlockBlockConfig {
-	state: ContentBlockState;
-	fields: {
-		[key: string]: ContentBlockField;
-	};
 }
 
 export interface HeadingBlockComponentState {
@@ -298,24 +251,13 @@ export type ContentBlockComponentState =
 	| RepeatedContentBlockComponentState[]
 	| SingleContentBlockComponentState;
 
-export interface ContentBlockComponentsConfig {
-	name?: string;
-	limits?: ContentBlockComponentsLimits;
-	state: ContentBlockComponentState;
-	fields: {
-		[key: string]: any;
-	};
-}
-
-export interface ContentBlockConfig {
+export interface DbContentBlock {
 	id?: number;
 	errors?: ContentBlockErrors;
 	name: string;
-	components: ContentBlockComponentsConfig;
-	block: ContentBlockBlockConfig;
+	components: ContentBlockComponentState;
+	block: DefaultContentBlockState;
 	type: ContentBlockType;
 	anchor?: string;
 	position: number;
-	created_at: string;
-	updated_at: string;
 }

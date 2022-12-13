@@ -7,7 +7,7 @@ import {
 	IsOptional,
 	IsString,
 } from 'class-validator';
-import { ContentPickerTypesEnum, NavigationItem } from '../types';
+import { ContentPickerTypesEnum, NavigationItem } from '../navigations.types';
 
 // Note: also used for updating a navigation item
 export class CreateNavigationDto implements Partial<NavigationItem> {

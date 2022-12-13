@@ -3,7 +3,8 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { AvoOrHetArchief } from '~modules/shared/types';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 
 import { CustomError } from '../shared/helpers/custom-error';
 
@@ -113,10 +114,7 @@ export class UserService {
 		isBlocked: boolean,
 		sendEmail?: boolean
 	): Promise<void> {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			return;
 		}
 
@@ -147,10 +145,7 @@ export class UserService {
 	}
 
 	static async fetchDistinctBusinessCategories(): Promise<string[]> {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			return [];
 		}
 
@@ -179,8 +174,6 @@ export class UserService {
 		transferToProfileId?: string
 	): Promise<void> {
 		let url: string | undefined;
-		const isAvo =
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo;
 
 		try {
 			url = `${this.getBaseUrl()}/user/bulk-delete`;
@@ -188,7 +181,7 @@ export class UserService {
 				profileIds,
 				deleteOption,
 				sendEmail,
-				...(isAvo ? { transferToProfileId } : {}),
+				...(isAvo() ? { transferToProfileId } : {}),
 			};
 			await fetchWithLogout(url, {
 				method: 'DELETE',
@@ -205,10 +198,7 @@ export class UserService {
 	}
 
 	static async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
@@ -240,10 +230,7 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
 		}
@@ -269,10 +256,7 @@ export class UserService {
 		subjects: string[],
 		profileIds: string[]
 	): Promise<void> {
-		if (
-			AdminConfigManager.getConfig().database.databaseApplicationType ===
-			AvoOrHetArchief.hetArchief
-		) {
+		if (isHetArchief()) {
 			console.info("removing subjects from profiles isn't supported for hetarchief");
 			return;
 		}

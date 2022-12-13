@@ -108,6 +108,14 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 				return;
 			}
 			const contentPageObj = await ContentPageService.getContentPageById(id);
+			if (!contentPageObj) {
+				setLoadingInfo({
+					state: 'error',
+					message: tHtml('Deze pagina kon niet worden gevonden'),
+					icon: 'search',
+				});
+				return;
+			}
 			if (
 				!hasPerm(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
 				contentPageObj.owner.id !== getProfileId(user)

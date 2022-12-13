@@ -1,5 +1,5 @@
 query getContentById($id: uuid!) {
-	app_content_page(where: {id: {_eq: $id}, is_deleted: {_eq: false}}) {
+	app_content_page(where: { id: { _eq: $id }, is_deleted: { _eq: false } }) {
 		content_type
 		content_width
 		created_at
@@ -44,7 +44,7 @@ query getContentById($id: uuid!) {
 				link_to
 			}
 		}
-		content_blocks(order_by: {position: asc}) {
+		content_blocks(order_by: { position: asc }) {
 			content_block_type
 			content_id
 			created_at

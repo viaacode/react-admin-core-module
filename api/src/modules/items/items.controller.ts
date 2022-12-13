@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
@@ -9,14 +9,7 @@ import { ItemsService } from './items.service';
 @ApiTags('Items')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/items')
 export class ItemsController {
-	constructor(@Inject() protected itemsService: ItemsService) {}
-
-	@Get(':id')
-	public async fetchItemByUuidOrExternalId(
-		@Param('id') id: string,
-	): Promise<Partial<Avo.Item.Item>> {
-		return this.itemsService.fetchItemOrReplacement(id);
-	}
+	constructor(protected itemsService: ItemsService) {}
 
 	@Get('')
 	@RequireAnyPermissions(
@@ -59,5 +52,12 @@ export class ItemsController {
 		@Query('externalId') externalId: string,
 	): Promise<string | null> {
 		return this.itemsService.fetchItemUuidByExternalId(externalId);
+	}
+
+	@Get(':id')
+	public async fetchItemByUuidOrExternalId(
+		@Param('id') id: string,
+	): Promise<Partial<Avo.Item.Item>> {
+		return this.itemsService.fetchItemOrReplacement(id);
 	}
 }

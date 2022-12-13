@@ -1,19 +1,12 @@
 import { TableSortingIcons } from '@meemoo/react-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
-import { AvoOrHetArchief } from '~modules/shared/types';
 
-import {
-	UserGroupUpdateResponse,
-	UserGroupUpdates,
-	UserGroupWithPermissions,
-} from '~modules/user-group/types/user-group.types';
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
-import { PermissionData } from '~modules/permissions/types/permissions.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
-import { NavigationItem } from '~modules/navigation/navigation.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { MediaListItem } from '@viaa/avo2-components';
 import { ROUTE_PARTS } from '~modules/shared';
@@ -36,31 +29,17 @@ export interface ToastService {
 	showToast: (toastInfo: ToastInfo) => void;
 }
 
-export interface NavigationsService {
-	getAllNavigationBars: () => Promise<NavigationItem[]>;
-	createNavigationItem: (navigationItem: NavigationItem) => Promise<NavigationItem>;
-}
-
 export interface I18n {
 	tHtml: (
 		translationKey: string,
 		variables?: Record<string, string>,
-		apps?: AvoOrHetArchief[]
+		apps?: DatabaseType[]
 	) => ReactNode | string;
 	tText: (
 		translationKey: string,
 		variables?: Record<string, string>,
-		apps?: AvoOrHetArchief[]
+		apps?: DatabaseType[]
 	) => string;
-}
-
-export interface UserGroupsService {
-	getAllUserGroups: () => Promise<UserGroupWithPermissions[]>;
-	updateUserGroups: (json: UserGroupUpdates) => Promise<UserGroupUpdateResponse[]>;
-}
-
-export interface PermissionsService {
-	getAllPermissions: () => Promise<PermissionData[]>;
 }
 
 export interface LinkInfo {
@@ -72,18 +51,6 @@ export interface LinkInfo {
 }
 
 export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;
-
-export type EventContentTypeSimplified = 'item' | 'collection';
-export type EventContentType = EventContentTypeSimplified | 'bundle';
-
-export interface BookmarkRequestInfo {
-	type: EventContentTypeSimplified;
-	uuid: string;
-}
-
-export type BookmarkStatusLookup = {
-	[contentType in EventContentTypeSimplified]: { [objectUuid: string]: boolean };
-};
 
 export interface AdminConfig {
 	// Core module configurations
@@ -110,6 +77,7 @@ export interface AdminConfig {
 			) => Promise<string>;
 			deleteFile: (fileUrl: string) => Promise<void>;
 		};
+		getContentPageByPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
@@ -126,7 +94,6 @@ export interface AdminConfig {
 			// A link component, just like <Link to="">click here</Link>
 			Link: FunctionComponent<LinkInfo>;
 		};
-		PermissionsService: PermissionsService;
 		queryCache: {
 			clear: (key: string) => Promise<void>;
 		};
@@ -141,6 +108,7 @@ export interface AdminConfig {
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
+	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>,
 	icon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
@@ -151,7 +119,7 @@ export interface AdminConfig {
 		bulkActions?: UserBulkAction[];
 	};
 	database: {
-		databaseApplicationType: AvoOrHetArchief;
+		databaseApplicationType: DatabaseType;
 		proxyUrl: string;
 	};
 	user: CommonUser;

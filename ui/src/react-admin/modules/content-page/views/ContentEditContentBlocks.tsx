@@ -3,7 +3,7 @@ import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 
-import ContentPage from '~modules/content-page/components/ContentPage/ContentPage';
+import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
@@ -22,10 +22,9 @@ import { ResizablePanels } from '~modules/shared/components/ResizablePanels/Resi
 import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
 import { createKey } from '~modules/shared/helpers/create-key';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 import './ContentEditContentBlocks.scss';
-import { AdminConfigManager } from '~core/config';
-import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -184,11 +183,10 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 				}}
 			>
 				<div className="c-content-edit-view__preview" ref={previewScrollable}>
-					<ContentPage
+					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
-						userGroupId={AdminConfigManager.getConfig()?.user?.userGroup?.id}
 					/>
 				</div>
 				<Sidebar className="c-content-edit-view__sidebar" light>

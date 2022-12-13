@@ -1,4 +1,4 @@
-export const ROUTE_PARTS = {
+export const ROUTE_PARTS = Object.freeze({
 	admin: 'admin',
 	assignment: 'opdracht',
 	assignments: 'opdrachten',
@@ -53,11 +53,10 @@ export const ROUTE_PARTS = {
 	permissionGroups: 'permissie-groepen',
 	user: 'gebruikers',
 	translations: 'vertaling',
-	translationsV2: 'vertaling-v2',
 	userGroup: 'gebruikersgroep',
 	interactiveTours: 'interactieve-tours',
 	cookiePolicy: 'cookiebeleid',
 	linkedAccounts: 'koppelingen',
 	quickLane: 'bekijk',
 	permissions: 'permissies',
-};
+});

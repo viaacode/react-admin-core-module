@@ -7,6 +7,7 @@ import {
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
@@ -21,7 +22,6 @@ import {
 } from '../../types/content-block.types';
 
 import { AdminConfigManager } from '~core/config';
-import { AvoOrHetArchief } from '~modules/shared/types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -51,9 +51,7 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 		AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
 		),
-		AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
-			? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
-			: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+		isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
 	padding: PADDING_FIELD(
 		AdminConfigManager.getConfig().services.i18n.tText(
@@ -90,13 +88,11 @@ export const FOREGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options:
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
-				? GET_FOREGROUND_COLOR_OPTIONS_AVO()
-				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+		options: isAvo()
+			? GET_FOREGROUND_COLOR_OPTIONS_AVO()
+			: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
-			defaultValue ||
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			defaultValue || isAvo()
 				? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0]
 				: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
@@ -109,13 +105,11 @@ export const BACKGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options:
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
-				? GET_BACKGROUND_COLOR_OPTIONS_AVO()
-				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+		options: isAvo()
+			? GET_BACKGROUND_COLOR_OPTIONS_AVO()
+			: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
-			defaultValue ||
-			AdminConfigManager.getConfig().database.databaseApplicationType === AvoOrHetArchief.avo
+			defaultValue || isAvo()
 				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]
 				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},

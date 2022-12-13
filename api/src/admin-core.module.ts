@@ -8,6 +8,7 @@ import {
 	ContentPageLabelsModule,
 	ContentPagesModule,
 	DataModule,
+	ItemsModule,
 	LookupModule,
 	PlayerTicketModule,
 	SiteVariablesModule,
@@ -30,6 +31,7 @@ import {
 		SiteVariablesModule,
 		StatusModule,
 		UsersModule,
+		ItemsModule,
 	],
 })
 export class AdminCoreModule {}

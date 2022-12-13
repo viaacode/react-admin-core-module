@@ -1,4 +1,7 @@
-mutation updateSiteVariableByName($name: String!, $data: app_site_variables_set_input!) {
+mutation updateSiteVariableByName(
+	$name: String!
+	$data: app_site_variables_set_input!
+) {
 	update_app_site_variables(where: { name: { _eq: $name } }, _set: $data) {
 		affected_rows
 	}

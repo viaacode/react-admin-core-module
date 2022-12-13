@@ -1,10 +1,13 @@
-import nlJson from '../i18n/locales/nl.json';
+import nlJsonAvo from '../translations/avo/nl.json';
+import nlJsonHetArchief from '../translations/hetArchief/nl.json';
+import { isAvo } from './is-avo';
 
 export function getTranslationFallback(
 	key: string,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	variables: Record<string, string | number> = {},
 ): string {
+	const nlJson = isAvo() ? nlJsonAvo : nlJsonHetArchief;
 	const translation = nlJson[key];
 	if (translation) {
 		return resolveTranslationVariables(translation, variables);

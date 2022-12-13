@@ -1,7 +1,7 @@
+import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { GetUserByIdQuery as GetUserByIdQueryAvo } from '../shared/generated/graphql-db-types-avo';
 
 export interface HetArchiefUser {
 	id: string;
@@ -114,10 +114,6 @@ export type CommonUser = {
 	bio?: string;
 	alternativeEmail?: string;
 	updatedAt?: string;
-	classifications?: {
-		id: any;
-		key: string;
-	}[];
 	companyId?: string;
 };
 
@@ -153,6 +149,15 @@ export interface DeleteContentCounts {
 	privateContentPages: number;
 }
 
-export type ProfileAvo = GetUserByIdQueryAvo['users_summary_view'][0];
-export type ProfileHetArchief =
+export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
+	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
+export type UserInfoOverviewHetArchief =
 	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];
+
+export enum UserInfoType {
+	AvoUserUser=  'AvoUserUser',
+	AvoUserProfile=  'AvoUserProfile',
+	UserInfoOverviewAvo=  'UserInfoOverviewAvo',
+	UserInfoOverviewHetArchief=  'UserInfoOverviewHetArchief',
+	HetArchiefUser=  'HetArchiefUser',
+}

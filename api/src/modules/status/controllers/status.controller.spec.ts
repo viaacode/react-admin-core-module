@@ -4,7 +4,9 @@ import { StatusService } from '../services/status.service';
 
 import { StatusController } from './status.controller';
 
-const mockStatusService: Partial<Record<keyof StatusService, jest.SpyInstance>> = {
+const mockStatusService: Partial<
+	Record<keyof StatusService, jest.SpyInstance>
+> = {
 	getStatus: jest.fn(),
 	getStatusFull: jest.fn(),
 };

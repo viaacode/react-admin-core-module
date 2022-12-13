@@ -4,6 +4,8 @@ import React, { FC, ReactText, useCallback, useEffect, useMemo, useState } from 
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
@@ -49,7 +51,6 @@ import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
 import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { AvoOrHetArchief } from '~modules/shared/types';
 import { useBusinessCategories } from '~modules/shared/hooks/useBusinessCategory';
 import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
@@ -90,7 +91,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
 	const config = AdminConfigManager.getConfig();
-	const app = AdminConfigManager.getConfig().database.databaseApplicationType;
 	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
 	const columns = useMemo(
@@ -140,7 +140,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 	const generateWhereObject = useCallback(
 		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
-			if (app === AvoOrHetArchief.hetArchief) {
+			if (isHetArchief()) {
 				return generateWhereObjectArchief(
 					filters,
 					onlySelectedProfiles,
@@ -149,7 +149,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			}
 			return generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 		},
-		[app, selectedProfileIds]
+		[selectedProfileIds]
 	);
 
 	const generateWhereObjectAvo = (
@@ -594,7 +594,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			case 'firstName':
 				// no user detail for archief yet
 
-				return app === AvoOrHetArchief.avo ? (
+				return isAvo() ? (
 					<Link
 						to={buildLink(
 							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,

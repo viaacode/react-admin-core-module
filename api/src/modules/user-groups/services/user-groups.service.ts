@@ -67,7 +67,12 @@ export class UserGroupsService {
 					.users_groups ||
 				(response as UserGroupQueryTypes['GetUserGroupsQueryHetArchief'])
 					.users_group;
-			return userGroups.map((userGroup) => this.adapt(userGroup));
+			return userGroups
+				.map((userGroup) => this.adapt(userGroup))
+				.map((userGroup) => {
+					delete userGroup.permissions;
+					return userGroup;
+				});
 		}
 	}
 

@@ -1,9 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import { ClientEducationOrganization } from '@viaa/avo2-types/types/education-organizations';
-import { compact, flatten, get, isNil } from 'lodash';
+import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
-import { Idp } from '../shared/auth/auth.types';
 import {
 	BulkAddSubjectsToProfilesDocument,
 	BulkAddSubjectsToProfilesMutation,
@@ -29,11 +27,13 @@ import { isAvo } from '../shared/helpers/is-avo';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
+import { convertUserInfoToCommonUser } from './users.converters';
 import {
 	CommonUser,
 	DeleteContentCounts,
-	ProfileAvo,
-	ProfileHetArchief,
+	UserInfoOverviewAvo,
+	UserInfoOverviewHetArchief,
+	UserInfoType,
 	UserOverviewTableCol,
 } from './users.types';
 
@@ -41,102 +41,6 @@ export class UsersService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {}
-
-	public adaptProfile(
-		userProfile: ProfileAvo | ProfileHetArchief | undefined,
-	): CommonUser | undefined {
-		if (!userProfile) {
-			return undefined;
-		}
-		if (isHetArchief()) {
-			const user = userProfile as ProfileHetArchief;
-			return {
-				profileId: user.id,
-				email: user.mail || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
-				fullName: user.full_name || undefined,
-				userGroup: {
-					id: user.group?.id,
-					name: user.group?.name,
-					label: user.group?.label,
-				},
-				idps: user.identities?.map(
-					(identity) => identity.identity_provider_name as Idp,
-				),
-				organisation: {
-					name:
-						user.maintainer_users_profiles?.[0]?.maintainer.schema_name ||
-						undefined,
-					or_id:
-						user.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-					logo_url:
-						user.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
-							?.iri,
-				},
-				lastAccessAt: user.last_access_at,
-			};
-		} else {
-			const user = userProfile as ProfileAvo;
-			return {
-				profileId: user.profile_id,
-				stamboek: user.stamboek || undefined,
-				organisation: user.company_name
-					? ({
-							name: user.company_name,
-					  } as Avo.Organization.Organization)
-					: undefined,
-				educationalOrganisations: (user.organisations || []).map(
-					(org): ClientEducationOrganization => ({
-						organizationId: org.organization_id,
-						unitId: org.unit_id || null,
-						label: org.organization?.ldap_description || '',
-					}),
-				),
-				subjects: user.classifications?.map(
-					(classification) => classification.key,
-				),
-				educationLevels: user.contexts?.map((context) => context.key),
-				isException: user.is_exception,
-				businessCategory: user.business_category || undefined,
-				createdAt: user.acc_created_at,
-				userGroup: {
-					name: user.group_name || undefined,
-					label: user.group_name || undefined,
-					id: user.group_id || undefined,
-				},
-				userId: user.user_id,
-				uid: user.user_id,
-				email: user.mail || undefined,
-				fullName: user.full_name || undefined,
-				firstName: user.first_name || undefined,
-				lastName: user.last_name || undefined,
-				isBlocked: user.is_blocked,
-				blockedAt: get(user, 'blocked_at.date'),
-				unblockedAt: get(user, 'unblocked_at.date'),
-				lastAccessAt: user.last_access_at,
-				tempAccess: user?.user?.temp_access
-					? {
-							from: user?.user?.temp_access?.from || null,
-							until: user?.user?.temp_access?.until || null,
-							current: {
-								status: isNil(user?.user?.temp_access?.current?.status)
-									? null
-									: user?.user?.temp_access?.current?.status,
-							}
-					  }
-					: null,
-				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
-				alias: user.profile?.alias || undefined,
-				title: user.profile?.title || undefined,
-				bio: user.profile?.bio || undefined,
-				alternativeEmail: user.profile?.alternative_email,
-				updatedAt: user.acc_updated_at || undefined,
-				classifications: user.classifications,
-				companyId: user.company_id
-			};
-		}
-	}
 
 	async getById(id: string): Promise<CommonUser> {
 		try {
@@ -155,7 +59,10 @@ export class UsersService {
 				});
 			}
 
-			return this.adaptProfile(response.users_summary_view[0]);
+			return convertUserInfoToCommonUser(
+				response.users_summary_view[0],
+				UserInfoType.UserInfoOverviewAvo,
+			);
 		} catch (err) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables: { id },
@@ -205,9 +112,16 @@ export class UsersService {
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
-				[]) as ProfileAvo[] | ProfileHetArchief[];
+				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
 			const profiles: CommonUser[] = compact(
-				userProfileObjects.map(this.adaptProfile),
+				userProfileObjects.map((userInfo) => {
+					return convertUserInfoToCommonUser(
+						userInfo,
+						isAvo()
+							? UserInfoType.UserInfoOverviewAvo
+							: UserInfoType.UserInfoOverviewHetArchief,
+					);
+				}),
 			);
 
 			const profileCount =
