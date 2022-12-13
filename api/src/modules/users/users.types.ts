@@ -107,7 +107,7 @@ export type CommonUser = {
 	blockedAt?: string;
 	unblockedAt?: string;
 	lastAccessAt?: string;
-	tempAccess?: Avo.User.TempAccess;
+	tempAccess?: UserTempAccess;
 	idps?: Idp[];
 	alias?: string;
 	title?: string;
@@ -155,9 +155,9 @@ export type UserInfoOverviewHetArchief =
 	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];
 
 export enum UserInfoType {
-	AvoUserUser=  'AvoUserUser',
-	AvoUserProfile=  'AvoUserProfile',
-	UserInfoOverviewAvo=  'UserInfoOverviewAvo',
-	UserInfoOverviewHetArchief=  'UserInfoOverviewHetArchief',
-	HetArchiefUser=  'HetArchiefUser',
+	AvoUserUser = 'AvoUserUser',
+	AvoUserProfile = 'AvoUserProfile',
+	UserInfoOverviewAvo = 'UserInfoOverviewAvo',
+	UserInfoOverviewHetArchief = 'UserInfoOverviewHetArchief',
+	HetArchiefUser = 'HetArchiefUser',
 }
