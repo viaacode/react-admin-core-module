@@ -107,14 +107,19 @@ export type CommonUser = {
 	blockedAt?: string;
 	unblockedAt?: string;
 	lastAccessAt?: string;
-	tempAccess?: UserTempAccess;
+	tempAccess?: Avo.User.TempAccess;
 	idps?: Idp[];
 	alias?: string;
 	title?: string;
 	bio?: string;
 	alternativeEmail?: string;
 	updatedAt?: string;
-} & Partial<Pick<ProfileAvo, 'classifications'>>;
+	classifications?: {
+		id: any;
+		key: string;
+	}[];
+	companyId?: string;
+};
 
 export type UserOverviewTableCol =
 	| 'profileId'

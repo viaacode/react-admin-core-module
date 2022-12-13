@@ -119,9 +119,11 @@ export class UsersService {
 					? {
 							from: user?.user?.temp_access?.from || null,
 							until: user?.user?.temp_access?.until || null,
-							status: isNil(user?.user?.temp_access?.current?.status)
-								? null
-								: user?.user?.temp_access?.current?.status === 1,
+							current: {
+								status: isNil(user?.user?.temp_access?.current?.status)
+									? null
+									: user?.user?.temp_access?.current?.status,
+							}
 					  }
 					: null,
 				idps: user.idps?.map((idp) => idp.idp as unknown as Idp),
@@ -131,6 +133,7 @@ export class UsersService {
 				alternativeEmail: user.profile?.alternative_email,
 				updatedAt: user.acc_updated_at || undefined,
 				classifications: user.classifications,
+				companyId: user.company_id
 			};
 		}
 	}

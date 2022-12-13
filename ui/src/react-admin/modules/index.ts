@@ -6,8 +6,11 @@ export { default as ContentPage } from '~modules/content-page/components/Content
 export { default as NavigationOverview } from './navigation/views/NavigationOverview';
 export { default as NavigationEdit } from '~modules/navigation/views/NavigationEdit';
 
-export { UserOverview } from '~modules/user/views/UserOverview';
 export { UserDetail } from '~modules/user/views/UserDetail';
+export { UserEdit } from '~modules/user/views/UserEdit';
+export { UserOverview } from '~modules/user/views/UserOverview';
+
+export type { CommonUser } from '~modules/user/user.types';
 
 export { default as UserGroupOverview } from '~modules/user-group/views/UserGroupOverview';
 

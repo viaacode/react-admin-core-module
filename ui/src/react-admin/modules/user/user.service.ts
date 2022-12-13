@@ -19,8 +19,7 @@ export class UserService {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
 	}
 
-	// TODO: avoid "& any"
-	static async getUserById(id: string): Promise<CommonUser & any> {
+	static async getUserById(id: string): Promise<CommonUser> {
 		try {
 			const response = await fetchWithLogoutJson(
 				stringifyUrl({

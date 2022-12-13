@@ -54,7 +54,7 @@ export interface UserGroupInfo {
 /**
  * User model for both hetarchief and avo
  */
-export interface CommonUser {
+export type CommonUser = {
 	profileId: string;
 	email?: string;
 	firstName?: string;
@@ -78,9 +78,19 @@ export interface CommonUser {
 	blockedAt?: string;
 	unblockedAt?: string;
 	lastAccessAt?: string;
-	tempAccess: Avo.User.TempAccess | null;
+	tempAccess?: Avo.User.TempAccess;
 	idps?: Idp[];
-}
+	alias?: string;
+	title?: string;
+	bio?: string;
+	alternativeEmail?: string;
+	updatedAt?: string;
+	classifications?: {
+		id: any;
+		key: string;
+	}[];
+	companyId?: string;
+};
 
 export type UserOverviewTableCol =
 	| 'profileId'

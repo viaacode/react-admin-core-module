@@ -32,15 +32,14 @@ import { PermissionService } from '~modules/shared/services/permission-service';
 import { CommonUser } from '../user.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~modules/shared/helpers/dropdown';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import TempAccessModal from '../components/TempAccessModal';
-// import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
 import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { formatDate, normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { renderAvatar } from '../../shared/helpers/formatters/avatar';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
+import { USER_PATH } from '../user.routes';
 
 export interface UserDetailProps {
 	onSetTempAccess?: (
@@ -79,7 +78,7 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 		try {
 			const profile = await UserService.getUserById(params.id);
 
-			setTempAccess(profile.tempAccess);
+			profile.tempAccess && setTempAccess(profile.tempAccess);
 			setStoredProfile(profile);
 
 			onLoaded?.(profile);
@@ -197,7 +196,12 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 				break;
 
 			case 'edit':
-				navigate(history, buildLink(ADMIN_PATH().USER_PATH.USER_EDIT, { id: params.id }));
+				navigate(
+					history,
+					buildLink(USER_PATH(AdminConfigManager.getConfig().route_parts).USER_EDIT, {
+						id: params.id,
+					})
+				);
 				break;
 
 			case 'delete':
@@ -424,7 +428,8 @@ export const UserDetail: FC<UserDetailProps> = ({ onSetTempAccess, onLoaded }) =
 	};
 
 	// Executed when the user was deleted
-	const deleteCallback = () => navigate(history, ADMIN_PATH().USER_PATH.USER_OVERVIEW);
+	const deleteCallback = () =>
+		navigate(history, USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW);
 
 	const renderUserDetailPage = () => {
 		const isBlocked = (storedProfile as any)?.is_blocked;
