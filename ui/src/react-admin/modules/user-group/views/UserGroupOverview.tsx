@@ -1,7 +1,15 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
-import React, { ChangeEvent, forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import React, {
+	ChangeEvent,
+	forwardRef,
+	useCallback,
+	useEffect,
+	useImperativeHandle,
+	useMemo,
+	useState,
+} from 'react';
 import { cloneDeep, remove, sortBy } from 'lodash-es';
-import { Column, TableOptions } from 'react-table';
+import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
@@ -18,7 +26,7 @@ import {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
-	UserGroupWithPermissions
+	UserGroupWithPermissions,
 } from '../types/user-group.types';
 
 const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroupOverviewProps>(
@@ -33,13 +41,13 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			isLoading: isLoadingUserGroups,
 			isError: isErrorUserGroups,
 			error: userGroupError,
-			refetch: refetchUserGroups
+			refetch: refetchUserGroups,
 		} = useGetUserGroupsWithPermissions();
 		const {
 			data: permissions,
 			isLoading: isLoadingPermissions,
 			isError: isErrorPermissions,
-			error: permissionsError
+			error: permissionsError,
 		} = useGetPermissions();
 		const { mutateAsync: updateUserGroups } = useUpdateUserGroups();
 
@@ -56,68 +64,71 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		/**
 		 * Callbacks
 		 */
-		const updateUserGroup = (
-			userGroupId: string,
-			permissionId: string | number,
-			hasPermission: boolean
-		) => {
-			if (!userGroupId || !permissionId || !currentUserGroups || !permissions) {
-				return;
-			}
+		// Add updated permission to changelog
+		const updateUserGroupUpdates = useCallback(
+			(userGroupId: string, permissionId: string | number, hasPermission: boolean) => {
+				if (!userGroupId || !permissionId) {
+					return;
+				}
 
-			const userGroups = cloneDeep(currentUserGroups);
-			const userGroup = userGroups.find((group) => String(group.id) === String(userGroupId));
+				const newUpdates = cloneDeep(userGroupUpdates);
+				const currentUpdate = newUpdates?.find(
+					(update) =>
+						update.permissionId === permissionId && update.userGroupId === userGroupId
+				);
+				if (currentUpdate) {
+					newUpdates.splice(newUpdates.indexOf(currentUpdate), 1);
+				}
+				newUpdates.push({ userGroupId, permissionId, hasPermission });
+				setUserGroupUpdates(newUpdates);
 
-			if (!userGroup) {
-				return;
-			}
+				// Fire onChange for parent component
+				onChangePermissions?.(!!newUpdates.length);
+			},
+			[onChangePermissions, userGroupUpdates]
+		);
 
-			// Filter out permission (if present)
-			const removed = remove(
-				userGroup.permissions,
-				(permission) => permission.id === permissionId
-			);
+		const updateUserGroup = useCallback(
+			(userGroupId: string, permissionId: string | number, hasPermission: boolean) => {
+				if (!userGroupId || !permissionId || !currentUserGroups || !permissions) {
+					return;
+				}
 
-			if (removed.length) {
-				// Permission was removed
-				setCurrentUserGroups(userGroups);
-			} else {
-				// Permission was not present
-				const newPermission = permissions.find(
+				const userGroups = cloneDeep(currentUserGroups);
+				const userGroup = userGroups.find(
+					(group) => String(group.id) === String(userGroupId)
+				);
+
+				if (!userGroup) {
+					return;
+				}
+
+				// Filter out permission (if present)
+				const removed = remove(
+					userGroup.permissions,
 					(permission) => permission.id === permissionId
 				);
-				newPermission && userGroup.permissions.push(newPermission);
-				setCurrentUserGroups(userGroups);
-			}
 
-			// Update changelog
-			updateUserGroupUpdates(userGroupId, permissionId, hasPermission);
-		};
+				if (removed.length) {
+					// Permission was removed
+					setCurrentUserGroups(userGroups);
+				} else {
+					// Permission was not present
+					const newPermission = permissions.find(
+						(permission) => permission.id === permissionId
+					);
+					if (newPermission) {
+						userGroup.permissions = userGroup.permissions || [];
+						userGroup.permissions.push(newPermission);
+					}
+					setCurrentUserGroups(userGroups);
+				}
 
-		// Add updated permission to changelog
-		const updateUserGroupUpdates = (
-			userGroupId: string,
-			permissionId: string | number,
-			hasPermission: boolean
-		) => {
-			if (!userGroupId || !permissionId) {
-				return;
-			}
-
-			const newUpdates = cloneDeep(userGroupUpdates);
-			const currentUpdate = newUpdates?.find(
-				(update) =>
-					update.permissionId === permissionId && update.userGroupId === userGroupId
-			);
-			if (currentUpdate) {
-				newUpdates.splice(newUpdates.indexOf(currentUpdate), 1);
-			}
-			newUpdates.push({ userGroupId, permissionId, hasPermission });
-			setUserGroupUpdates(newUpdates);
-
-			// Fire onChange for parent component
-			onChangePermissions?.(!!newUpdates.length);
-		};
+				// Update changelog
+				updateUserGroupUpdates(userGroupId, permissionId, hasPermission);
+			},
+			[currentUserGroups, permissions, updateUserGroupUpdates]
+		);
 
 		const onClickCancel = () => {
 			setCurrentUserGroups(cloneDeep(userGroups));
@@ -142,12 +153,12 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 					),
-					type: ToastType.SUCCESS
+					type: ToastType.SUCCESS,
 				});
 			} catch (err) {
 				console.error(
 					new CustomError('Failed to save permissions', err, {
-						query: 'UserGroupService.updateUserGroups'
+						query: 'UserGroupService.updateUserGroups',
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -157,7 +168,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 					),
-					type: ToastType.ERROR
+					type: ToastType.ERROR,
 				});
 			}
 		};
@@ -189,7 +200,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		useImperativeHandle(ref, () => ({
 			onCancel: onClickCancel,
 			onSave: onClickSave,
-			onSearch: onSearchSubmit
+			onSearch: onSearchSubmit,
 		}));
 
 		/**
@@ -209,7 +220,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			if (isErrorUserGroups) {
 				console.error(
 					new CustomError('Failed to get user groups', userGroupError, {
-						query: 'UserGroupService.getAllUserGroups'
+						query: 'UserGroupService.getAllUserGroups',
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -219,7 +230,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
-					type: ToastType.ERROR
+					type: ToastType.ERROR,
 				});
 			}
 		}, [isErrorUserGroups, tHtml, userGroupError]);
@@ -234,7 +245,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
-					type: ToastType.ERROR
+					type: ToastType.ERROR,
 				});
 			}
 		}, [isErrorPermissions, isErrorUserGroups, permissionsError, tHtml, userGroupError]);
@@ -243,16 +254,19 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		 * Render
 		 */
 
+		const columns = useMemo((): (Column<PermissionData> &
+			UseSortByColumnOptions<PermissionData>)[] => {
+			if (!currentUserGroups) {
+				return [];
+			}
+			return UserGroupTableColumns(currentUserGroups, updateUserGroup);
+		}, [currentUserGroups, updateUserGroup]);
+
 		const renderUserGroupOverview = () => {
 			if (!currentUserGroups) {
 				return null;
 			}
 
-			console.log({
-				userGroups,
-				currentUserGroups,
-				permissions
-			});
 			return (
 				<div className={className}>
 					<TextInput
@@ -267,7 +281,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							'grey-border',
 							'icon--double',
 							'icon-clickable',
-							search ? 'black-border' : ''
+							search ? 'black-border' : '',
 						]}
 					/>
 					<Table
@@ -275,14 +289,11 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 							// TODO: fix type hinting
 							/* eslint-disable @typescript-eslint/ban-types */
 							{
-								columns: UserGroupTableColumns(
-									currentUserGroups,
-									updateUserGroup
-								) as Column<object>[],
+								columns,
 								data: searchResults || permissions || [],
 								initialState: {
-									pageSize: permissions?.length
-								}
+									pageSize: permissions?.length,
+								},
 							} as TableOptions<object>
 							/* eslint-enable @typescript-eslint/ban-types */
 						}

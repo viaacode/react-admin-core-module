@@ -118,7 +118,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			}
 			if (
 				!hasPerm(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
-				contentPageObj.owner.id !== getProfileId(user)
+				contentPageObj.userProfileId !== getProfileId(user)
 			) {
 				setLoadingInfo({
 					state: 'error',
@@ -579,8 +579,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 	};
 
 	const renderEditContentPage = () => {
-		const contentPageOwnerId = contentPageState.initialContentPageInfo.owner.id;
-		const isOwner = contentPageOwnerId ? user?.profileId === contentPageOwnerId : true;
+		const contentPageOwnerId = contentPageState.initialContentPageInfo.userProfileId;
+		const isOwner =
+			user?.profileId && contentPageOwnerId && user?.profileId === contentPageOwnerId;
 		const isAllowedToSave =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 

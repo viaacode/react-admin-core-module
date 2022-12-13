@@ -13,7 +13,6 @@ import { NULL_FILTER } from '~modules/shared/helpers/filters';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { DatabaseType } from '@viaa/avo2-types';
 import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
@@ -483,12 +482,14 @@ function getError<T>(rule: ValidationRule<T>, object: T) {
 	return rule.error(object);
 }
 
-const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (i18n: I18n) => ValidationRule<
-	Partial<Avo.User.TempAccess>
->[] = (i18n: I18n) => [
+const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (
+	i18n: I18n
+) => ValidationRule<Partial<Avo.User.TempAccess>>[] = (i18n: I18n) => [
 	{
 		// until cannot be null and must be in the future
-		error: i18n.tText('admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'),
+		error: i18n.tText(
+			'admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'
+		),
 		isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
 			!!tempAccess.until && normalizeTimestamp(tempAccess.until).isAfter(),
 	},
@@ -506,7 +507,10 @@ const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (i18n: I18n) => ValidationRule<
 	},
 ];
 
-export const getTempAccessValidationErrors = (tempAccess: Avo.User.TempAccess, i18n: I18n): string[] => {
+export const getTempAccessValidationErrors = (
+	tempAccess: Avo.User.TempAccess,
+	i18n: I18n
+): string[] => {
 	const validationErrors = [...GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(i18n)].map((rule) => {
 		return rule.isValid(tempAccess) ? null : getError(rule, tempAccess);
 	});
