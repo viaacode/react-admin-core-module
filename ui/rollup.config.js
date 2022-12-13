@@ -50,7 +50,7 @@ export default (cliArgs) => {
 				'moment',
 				'query-string',
 				'use-query-params',
-				'sanitize-html',
+				'dompurify',
 				'react-select',
 				'react-select/async',
 				'react-select/creatable',
