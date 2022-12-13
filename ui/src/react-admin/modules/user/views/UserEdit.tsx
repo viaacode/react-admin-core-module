@@ -302,7 +302,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	const renderUserDetailPage = () => {
 		return (
 			<AdminLayout pageTitle={tText('admin/users/views/user-edit___bewerk-gebruiker')}>
-				<AdminLayout.FiltersRight>
+				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/user-groups/views/user-group-edit___annuleer')}
@@ -315,7 +315,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 							onClick={handleSave}
 						/>
 					</ButtonToolbar>
-				</AdminLayout.FiltersRight>
+				</AdminLayout.Actions>
 
 				<AdminLayout.Content>{renderUserDetail()}</AdminLayout.Content>
 			</AdminLayout>
