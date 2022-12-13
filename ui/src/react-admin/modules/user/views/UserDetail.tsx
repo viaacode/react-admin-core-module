@@ -441,7 +441,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		return (
 			<>
 				<AdminLayout pageTitle={tText('admin/users/views/user-detail___gebruiker-details')}>
-					<AdminLayout.FiltersRight>
+					<AdminLayout.Actions>
 						<ButtonToolbar>
 							{canBanUser() && (
 								<Button
@@ -494,7 +494,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								onOptionClicked={executeAction}
 							/>
 						</ButtonToolbar>
-					</AdminLayout.FiltersRight>
+					</AdminLayout.Actions>
 
 					<AdminLayout.Content>{renderUserDetail()}</AdminLayout.Content>
 				</AdminLayout>
