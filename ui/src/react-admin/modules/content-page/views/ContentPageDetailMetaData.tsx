@@ -11,6 +11,7 @@ import {
 import { compact, get } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent } from 'react';
+
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
