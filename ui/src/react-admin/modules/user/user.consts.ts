@@ -21,8 +21,8 @@ type UserBulkActionOption = SelectOption<UserBulkAction> & {
 };
 
 export const USER_QUERY_KEYS = {
-	getProfileById: 'getProfileById', 
-    getProfiles: 'getProfiles', 
+	getProfileById: 'getProfileById',
+    getProfiles: 'getProfiles',
     getIdps: 'getIdps'
 };
 
