@@ -6,6 +6,7 @@ import {
 	Get,
 	Headers,
 	Param,
+	ParseIntPipe,
 	Patch,
 	Post,
 	Put,
@@ -58,16 +59,16 @@ export class ContentPagesController {
 
 	@Get('overview')
 	public async fetchContentPages(
-		@Query('offset') offset: string,
-		@Query('limit') limit: string,
+		@Query('offset', ParseIntPipe) offset: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string,
 	): Promise<[DbContentPage[], number]> {
 		return this.contentPagesService.fetchContentPages(
-			parseInt(offset || '0'),
-			parseInt(limit || '20'),
+			offset || 0,
+			limit || 20,
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,
@@ -125,7 +126,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getPublicContentItems(
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('title') title: string | undefined,
 	): Promise<
 		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
@@ -152,7 +153,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_NAVIGATION_BARS,
 	)
 	public async getPublicProjectContentItems(
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('title') title: string | undefined,
 	): Promise<
 		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']

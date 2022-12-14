@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from "@nestjs/common";
 import { ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
@@ -18,7 +18,7 @@ export class ItemsController {
 		PermissionName.PUBLISH_ITEMS,
 	)
 	public async fetchPublicItems(
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('titleOrExternalId') titleOrExternalId: string | undefined,
 	): Promise<Avo.Item.Item[] | null> {
 		if (!titleOrExternalId) {
