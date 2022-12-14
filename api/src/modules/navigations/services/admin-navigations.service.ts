@@ -52,10 +52,10 @@ export class AdminNavigationsService {
 			placement: navigationItem?.placement,
 			description: navigationItem?.description,
 			link_target: navigationItem?.linkTarget,
-			icon_name: navigationItem?.iconName,
+			icon_name: navigationItem?.iconName || '', // TODO make nullable in the database
 			position: navigationItem?.position,
 			content_type: navigationItem?.contentType,
-			content_path: navigationItem?.contentPath,
+			content_path: navigationItem?.contentPath || '', // TODO make nullable in the database
 			tooltip: navigationItem?.tooltip,
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
