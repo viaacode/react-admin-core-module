@@ -1,5 +1,5 @@
-import React from 'react';
 import { Checkbox } from '@meemoo/react-components';
+import React from 'react';
 import { Column, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
@@ -10,7 +10,8 @@ import { SpecialPermissionGroups } from '~modules/shared/types/authentication.ty
 import { sortBy } from 'lodash-es';
 
 export const USER_GROUP_QUERY_KEYS = {
-	all: ['user-group'] as const,
+	getUserGroupsWithPermissions: 'getUserGroupsWithPermissions', getUserGroups: 'getUserGroups'
+
 };
 
 export const USER_GROUP_PATH = {
@@ -19,8 +20,6 @@ export const USER_GROUP_PATH = {
 	USER_GROUP_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/${ROUTE_PARTS.create}`,
 	USER_GROUP_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id/${ROUTE_PARTS.edit}`,
 };
-
-export const GROUPS_PER_PAGE = 20;
 
 export const UserGroupTableColumns = (
 	userGroups: UserGroupWithPermissions[],
