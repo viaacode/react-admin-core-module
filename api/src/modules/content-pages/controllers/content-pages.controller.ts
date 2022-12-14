@@ -180,14 +180,17 @@ export class ContentPagesController {
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentLabelsLinks(
 		@Body()
-		insertContentLabelLink: {
+		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
 	): Promise<void> {
+		if (!body.labelIds?.length) {
+			return;
+		}
 		await this.contentPagesService.insertContentLabelsLinks(
-			insertContentLabelLink.contentPageId,
-			insertContentLabelLink.labelIds,
+			body.contentPageId,
+			body.labelIds,
 		);
 	}
 
@@ -195,14 +198,17 @@ export class ContentPagesController {
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentLabelsLinks(
 		@Body()
-		deleteContentLabelLink: {
+		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
 	): Promise<void> {
+		if (!body.labelIds?.length) {
+			return;
+		}
 		await this.contentPagesService.deleteContentLabelsLinks(
-			deleteContentLabelLink.contentPageId,
-			deleteContentLabelLink.labelIds,
+			body.contentPageId,
+			body.labelIds,
 		);
 	}
 

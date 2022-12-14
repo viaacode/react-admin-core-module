@@ -135,6 +135,9 @@ export class ContentPageService {
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
+		if (!labelIds?.length) {
+			return;
+		}
 		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
 			method: 'PUT',
 			body: JSON.stringify({
@@ -148,6 +151,9 @@ export class ContentPageService {
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 		labelIds: (number | string)[]
 	): Promise<void> {
+		if (!labelIds?.length) {
+			return;
+		}
 		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
 			method: 'DELETE',
 			body: JSON.stringify({
