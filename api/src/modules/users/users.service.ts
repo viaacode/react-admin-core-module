@@ -31,6 +31,7 @@ import { convertUserInfoToCommonUser } from './users.converters';
 import {
 	CommonUser,
 	DeleteContentCounts,
+	Idp,
 	UserInfoOverviewAvo,
 	UserInfoOverviewHetArchief,
 	UserInfoType,
@@ -255,7 +256,7 @@ export class UsersService {
 		}
 	}
 
-	async fetchIdps() {
+	async fetchIdps(): Promise<Idp[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetIdpsQuery'],
@@ -267,12 +268,12 @@ export class UsersService {
 				return (
 					(response as UserQueryTypes['GetIdpsQueryHetArchief'])
 						.users_identity_provider || []
-				).map((idp) => idp.name);
+				).map((idp) => idp.name as Idp);
 			}
 
 			return (
 				(response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []
-			).map((idp) => idp.value);
+			).map((idp) => idp.value as Idp);
 		} catch (err) {
 			throw CustomError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',

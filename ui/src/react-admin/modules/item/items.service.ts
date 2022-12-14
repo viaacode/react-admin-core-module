@@ -13,10 +13,10 @@ export class ItemsService {
 
 	public static async fetchItemById(uuidOrExternalId: string): Promise<Avo.Item.Item> {
 		try {
-			const rawItem = await fetchWithLogoutJson(
+			const rawItem: Avo.Item.Item | null = await fetchWithLogoutJson<Avo.Item.Item>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/' + uuidOrExternalId,
-				})
+				}),
 			);
 
 			if (!rawItem) {
