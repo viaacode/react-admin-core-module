@@ -102,11 +102,11 @@ export type ContentEditAction =
 	| SetContentBlockError;
 
 export interface ContentPageEditState {
-	currentContentPageInfo: ContentPageInfo;
-	initialContentPageInfo: ContentPageInfo;
+	currentContentPageInfo: Partial<ContentPageInfo>;
+	initialContentPageInfo: Partial<ContentPageInfo>;
 }
 
-export const CONTENT_PAGE_INITIAL_STATE = (): ContentPageInfo => {
+export const CONTENT_PAGE_INITIAL_STATE = (): Partial<ContentPageInfo> => {
 	return {
 		thumbnailPath: null,
 		title: '',
@@ -128,8 +128,8 @@ export const CONTENT_PAGE_INITIAL_STATE = (): ContentPageInfo => {
 		userProfileId: null,
 		userGroupIds: [],
 		labels: [],
-		contentBlocks: [],
-	} as unknown as ContentPageInfo;
+		content_blocks: [],
+	} as Partial<ContentPageInfo>;
 };
 
 // Helpers
@@ -144,7 +144,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 	(draft: Draft<ContentPageEditState>, action: ContentEditAction) => {
 		// Because we use immer, we have to mutate the draft state in place for it to work properly
 		// We don't have to return anything because our produce() will automagically do that for us
-		let config: ContentBlockConfig;
+
 		let components: ContentBlockComponentsConfig;
 		let componentsState: ContentBlockComponentState;
 		switch (action.type) {
@@ -161,14 +161,17 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				return;
 			}
 			case ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo.content_blocks.push(
+				draft.currentContentPageInfo.content_blocks?.push(
 					action.payload as ContentBlockConfig
 				);
 				return;
 			}
 			case ContentEditActionType.REMOVE_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo.content_blocks.splice(action.payload as number, 1);
-				repositionConfigs(draft.currentContentPageInfo.content_blocks);
+				(draft.currentContentPageInfo as ContentPageInfo).content_blocks.splice(
+					action.payload as number,
+					1
+				);
+				repositionConfigs(draft.currentContentPageInfo.content_blocks || []);
 				return;
 			}
 			case ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG: {
@@ -177,44 +180,57 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 					reorderContentBlockConfig.payload.configIndex +
 					reorderContentBlockConfig.payload.indexUpdate;
 				// Get updated item and remove it from copy
-				const reorderedConfig = draft.currentContentPageInfo.content_blocks.splice(
-					reorderContentBlockConfig.payload.configIndex,
-					1
-				)[0];
-				// Apply update object to config
-				draft.currentContentPageInfo.content_blocks.splice(newIndex, 0, reorderedConfig);
-				// Reposition
-				repositionConfigs(draft.currentContentPageInfo.content_blocks);
+				if (draft.currentContentPageInfo.content_blocks) {
+					const reorderedConfig = draft.currentContentPageInfo.content_blocks.splice(
+						reorderContentBlockConfig.payload.configIndex,
+						1
+					)[0];
+					// Apply update object to config
+					draft.currentContentPageInfo.content_blocks?.splice(
+						newIndex,
+						0,
+						reorderedConfig
+					);
+					// Reposition
+					repositionConfigs(draft.currentContentPageInfo.content_blocks || []);
+				}
 				return;
 			}
 			case ContentEditActionType.ADD_COMPONENTS_STATE: {
 				const addComponentsState = action as AddComponentsState;
-				config =
-					draft.currentContentPageInfo.content_blocks[addComponentsState.payload.index];
-				componentsState = config.components.state;
-				(componentsState as RepeatedContentBlockComponentState[]).push(
-					...(addComponentsState.payload
-						.formGroupState as RepeatedContentBlockComponentState[])
-				);
+				const config: ContentBlockConfig | undefined =
+					draft.currentContentPageInfo.content_blocks?.[addComponentsState.payload.index];
+				if (config) {
+					componentsState = config.components.state;
+					(componentsState as RepeatedContentBlockComponentState[]).push(
+						...(addComponentsState.payload
+							.formGroupState as RepeatedContentBlockComponentState[])
+					);
+				}
 				return;
 			}
 			case ContentEditActionType.REMOVE_COMPONENTS_STATE: {
 				const removeComponentsState = action as RemoveComponentsState;
-				config =
-					draft.currentContentPageInfo.content_blocks[
+				const config: ContentBlockConfig | undefined =
+					draft.currentContentPageInfo.content_blocks?.[
 						removeComponentsState.payload.index
 					];
-				componentsState = config.components.state;
-				(componentsState as RepeatedContentBlockComponentState[]).splice(
-					removeComponentsState.payload.stateIndex,
-					1
-				);
+				if (config) {
+					componentsState = config.components.state;
+					(componentsState as RepeatedContentBlockComponentState[]).splice(
+						removeComponentsState.payload.stateIndex,
+						1
+					);
+				}
 				return;
 			}
 			case ContentEditActionType.SET_COMPONENTS_STATE: {
 				const setComponentsState = action as SetComponentsState;
-				config =
-					draft.currentContentPageInfo.content_blocks[setComponentsState.payload.index];
+				const config: ContentBlockConfig | undefined =
+					draft.currentContentPageInfo.content_blocks?.[setComponentsState.payload.index];
+				if (!config) {
+					return;
+				}
 				components = config.components as ContentBlockComponentsConfig;
 
 				if (!isNil(action.payload.stateIndex)) {
@@ -237,7 +253,10 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_BLOCK_STATE: {
 				const setBlockState = action as SetBlockState;
 				const blockInfo =
-					draft.currentContentPageInfo.content_blocks[setBlockState.payload.index];
+					draft.currentContentPageInfo.content_blocks?.[setBlockState.payload.index];
+				if (!blockInfo) {
+					return;
+				}
 				blockInfo.block.state = {
 					...blockInfo.block.state,
 					...setBlockState.payload.formGroupState,
@@ -249,11 +268,13 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				if (
 					JSON.stringify(action.payload.errors) !==
 					JSON.stringify(
-						draft.currentContentPageInfo.content_blocks[
+						draft.currentContentPageInfo.content_blocks?.[
 							setContentBlockError.payload.configIndex
 						].errors
 					)
 				) {
+					draft.currentContentPageInfo.content_blocks =
+						draft.currentContentPageInfo.content_blocks || [];
 					draft.currentContentPageInfo.content_blocks[
 						setContentBlockError.payload.configIndex
 					].errors = setContentBlockError.payload.errors;

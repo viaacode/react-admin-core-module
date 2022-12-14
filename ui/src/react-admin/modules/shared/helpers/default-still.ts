@@ -4,7 +4,7 @@ import { DEFAULT_AUDIO_STILL } from '../consts/items.consts';
 import { GetItemByExternalIdQuery, GetItemByUuidQuery } from '~generated/graphql-db-types-avo';
 
 export const addDefaultAudioStillToItem = (
-	item: GetItemByExternalIdQuery['app_item_meta'][0] | GetItemByUuidQuery['app_item_meta'][0]
+	item: Avo.Item.Item
 ): Avo.Item.Item => {
 	if (item?.type?.label === 'audio') {
 		return {

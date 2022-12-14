@@ -38,24 +38,28 @@ export class ContentPageService {
 	public static async getContentPages(
 		options: ContentPageOverviewParams
 	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
-		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson(this.getBaseUrl(), {
+		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
+			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
+		>(this.getBaseUrl(), {
 			method: 'POST',
 			body: JSON.stringify(options),
+			throwOnNullResponse: true,
 		});
 		return {
-			items: convertDbContentPagesToContentPageInfos(dbContentPages),
+			items: convertDbContentPagesToContentPageInfos(dbContentPages) || [],
 			...rest,
 		};
 	}
 
 	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
+		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson<DbContentPage[]>(
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/public`,
 				query: {
 					limit,
 				},
-			})
+			}),
+			{ throwOnNullResponse: true }
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages);
 	}
@@ -67,7 +71,8 @@ export class ContentPageService {
 				query: {
 					limit,
 				},
-			})
+			}),
+			{ throwOnNullResponse: true }
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
@@ -83,7 +88,8 @@ export class ContentPageService {
 					limit,
 					title,
 				},
-			})
+			}),
+			{ throwOnNullResponse: true }
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
@@ -99,7 +105,8 @@ export class ContentPageService {
 					limit,
 					title,
 				},
-			})
+			}),
+			{ throwOnNullResponse: true }
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
@@ -107,7 +114,7 @@ export class ContentPageService {
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo | null> {
 		const dbContentPage: DbContentPage | null = await fetchWithLogoutJson(
 			`${this.getBaseUrl()}/${id}`,
-			{ throwOnNull: false }
+			{ throwOnNullResponse: true }
 		);
 		return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
 	}
@@ -115,7 +122,7 @@ export class ContentPageService {
 	public static async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
-		return fetchWithLogoutJson(`${this.getBaseUrl()}/types`);
+		return fetchWithLogoutJson(`${this.getBaseUrl()}/types`, { throwOnNullResponse: true });
 	}
 
 	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
@@ -126,7 +133,8 @@ export class ContentPageService {
 					query: {
 						contentType,
 					},
-				})
+				}),
+				{ throwOnNullResponse: true }
 			)) || []
 		);
 	}
@@ -170,7 +178,7 @@ export class ContentPageService {
 		tableColumnDataType: string,
 		where: any
 	): Promise<[ContentPageInfo[], number]> {
-		const [dbContentPages, count] = await fetchWithLogoutJson(
+		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
 			stringifyUrl({
 				url: this.getBaseUrl() + '/overview',
 				query: {
@@ -181,7 +189,8 @@ export class ContentPageService {
 					tableColumnDataType,
 					where: JSON.stringify(where),
 				},
-			})
+			}),
+			{ throwOnNullResponse: true }
 		);
 		return [convertDbContentPagesToContentPageInfos(dbContentPages) || [], count];
 	}
@@ -210,9 +219,10 @@ export class ContentPageService {
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
+	// TODO figure out why this function is not used
 	public static async duplicateContentPageImages(id: number): Promise<ContentPageInfo> {
 		try {
-			const response = await fetchWithLogoutJson(
+			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
 					url: `${this.getBaseUrl()}/duplicate`,
 					query: {
@@ -221,28 +231,8 @@ export class ContentPageService {
 				}),
 				{
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					credentials: 'include',
 				}
 			);
-			let responseContent: any;
-			try {
-				responseContent = await response.json();
-			} catch (err) {
-				// Ignore failed json parsing => will be handled by the status code not being between 200 and 400
-			}
-			if (response.status < 200 || response.status >= 400) {
-				throw new CustomError('Failed to get content page from /content-pages', null, {
-					id,
-					response,
-					responseContent,
-				});
-			}
-			if (responseContent.error) {
-				return responseContent.error;
-			}
 			return convertDbContentPageToContentPageInfo(responseContent);
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
@@ -273,11 +263,10 @@ export class ContentPageService {
 					if (value && value.toHTML && isFunction(value.toHTML)) {
 						htmlFromRichTextEditor = value.toHTML();
 					}
-					const sanitizedHtml = sanitizeHtml(
+					obj[htmlKey] = sanitizeHtml(
 						htmlFromRichTextEditor || obj[htmlKey] || '',
 						SanitizePreset.full
 					);
-					obj[htmlKey] = sanitizedHtml;
 				} else if (!isPlainObject(value) && !isArray(value)) {
 					obj[key] = value;
 				} else if (isPlainObject(value)) {
@@ -442,13 +431,14 @@ export class ContentPageService {
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
-			const responseContent = await fetchWithLogoutJson(
+			const responseContent = await fetchWithLogoutJson<{ exists: boolean; title: string; id: number }>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/path-exists',
 					query: {
 						path,
 					},
-				})
+				}),
+				{throwOnNullResponse: true}
 			);
 			if (id === responseContent.id) {
 				return null;

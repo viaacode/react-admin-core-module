@@ -16,7 +16,8 @@ export class UserGroupService {
 				query: {
 					withPermissions: 'true',
 				},
-			})
+			}),
+			{throwOnNullResponse: true}
 		);
 	}
 
@@ -27,7 +28,8 @@ export class UserGroupService {
 				query: {
 					withPermissions: 'false',
 				},
-			})
+			}),
+			{throwOnNullResponse: true}
 		);
 	}
 
