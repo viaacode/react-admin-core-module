@@ -1,5 +1,5 @@
 import { isNil } from '@nestjs/common/utils/shared.utils';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo, PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
 import {
 	CommonUser,
@@ -94,6 +94,7 @@ export function convertUserInfoToCommonUser(
 				alternativeEmail: user.profile.alternative_email,
 				updatedAt: user.profile.updated_at || undefined,
 				companyId: user.profile.company_id,
+				permissions: user.profile.permissions as PermissionName[],
 			};
 		}
 
@@ -155,6 +156,7 @@ export function convertUserInfoToCommonUser(
 				alternativeEmail: profile?.alternative_email,
 				updatedAt: profile.updated_at || undefined,
 				companyId: profile.company_id,
+				permissions: profile.permissions as PermissionName[],
 			};
 		}
 
@@ -273,6 +275,7 @@ export function convertUserInfoToCommonUser(
 				idps: { [user.idp]: null },
 				organisation: undefined,
 				lastAccessAt: undefined,
+				permissions: user.permissions,
 			};
 		}
 

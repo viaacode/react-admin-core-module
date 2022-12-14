@@ -92,7 +92,7 @@ export class ContentPagesController {
 		);
 	}
 
-	@Get('path-exist')
+	@Get('path-exists')
 	async doesContentPageExist(
 		@Query('path') path: string,
 		@Req() request,
