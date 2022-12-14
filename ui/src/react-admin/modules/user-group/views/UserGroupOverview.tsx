@@ -94,8 +94,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					return;
 				}
 
-				const userGroups = cloneDeep(currentUserGroups);
-				const userGroup = userGroups.find(
+				const updatedUserGroups = cloneDeep(currentUserGroups);
+				const userGroup = updatedUserGroups.find(
 					(group) => String(group.id) === String(userGroupId)
 				);
 
@@ -111,7 +111,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 				if (removed.length) {
 					// Permission was removed
-					setCurrentUserGroups(userGroups);
+					setCurrentUserGroups(updatedUserGroups);
 				} else {
 					// Permission was not present
 					const newPermission = permissions.find(
@@ -121,7 +121,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						userGroup.permissions = userGroup.permissions || [];
 						userGroup.permissions.push(newPermission);
 					}
-					setCurrentUserGroups(userGroups);
+					setCurrentUserGroups(updatedUserGroups);
 				}
 
 				// Update changelog
