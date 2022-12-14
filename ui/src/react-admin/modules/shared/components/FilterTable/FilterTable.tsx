@@ -510,7 +510,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 export default FilterTable;
 
-export function getFilters(tableState: any | undefined): any {
+export function getFilters(tableState: any | undefined | null): any {
 	if (!tableState) {
 		return tableState;
 	}
