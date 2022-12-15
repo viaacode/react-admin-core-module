@@ -11,6 +11,7 @@ import { CustomError } from '../shared/helpers/custom-error';
 import {
 	CommonUser,
 	DeleteContentCounts,
+	Idp,
 	UserOverviewTableCol,
 	USERS_PER_PAGE,
 } from './user.types';
@@ -22,17 +23,12 @@ export class UserService {
 
 	static async getUserById(id: string): Promise<CommonUser> {
 		try {
-			const response = await fetchWithLogoutJson(
+			return fetchWithLogoutJson<CommonUser>(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/${id}`
-				})
+					url: `${this.getBaseUrl()}/${id}`,
+				}),
+				{ throwOnNullResponse: true }
 			);
-
-			if (!response) {
-				throw new CustomError('Failed to find profile by id', null, { response });
-			}
-
-			return response
 		} catch (err) {
 			throw new CustomError('Failed to get profile by id from the database', err, {
 				id,
@@ -120,7 +116,7 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${this.getBaseUrl()}/user/bulk-block`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -159,9 +155,11 @@ export class UserService {
 		}
 	}
 
-	static async fetchIdps() {
+	static async fetchIdps(): Promise<Idp[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/idps');
+			return fetchWithLogoutJson<Idp[]>(this.getBaseUrl() + '/idps', {
+				throwOnNullResponse: true,
+			});
 		} catch (err) {
 			throw new CustomError('Failed to get idps from the database', err);
 		}
@@ -176,7 +174,7 @@ export class UserService {
 		let url: string | undefined;
 
 		try {
-			url = `${this.getBaseUrl()}/user/bulk-delete`;
+			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,

@@ -111,7 +111,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
-					message: tHtml('Deze pagina kon niet worden gevonden'),
+					message: tHtml('react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'),
 					icon: 'search',
 				});
 				return;

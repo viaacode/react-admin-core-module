@@ -28,6 +28,15 @@ export interface LoadingErrorLoadedComponentProps {
 	render: () => ReactElement | null;
 }
 
+/**
+ * @deprecated use react-query useQuery function to handle loading and error states
+ * @param loadingInfo
+ * @param notFoundError
+ * @param showSpinner
+ * @param dataObject
+ * @param render
+ * @constructor
+ */
 export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedComponentProps> = ({
 	loadingInfo = { state: 'loading' },
 	notFoundError,
@@ -76,7 +85,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 
 		case 'loading':
 		default:
-			return showSpinner ? <CenteredSpinner/> : <></>;
+			return showSpinner ? <CenteredSpinner /> : <></>;
 	}
 };
 

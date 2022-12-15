@@ -66,8 +66,8 @@ export type CommonUser = {
 	stamboek?: string;
 	organisation?: OrganizationSchema;
 	educationalOrganisations?: Avo.EducationOrganization.Organization[];
-	subjects?: string[];
-	educationLevels?: string[];
+	subjects?: string[]; // classifications
+	educationLevels?: string[]; // contexts
 	isException?: boolean;
 	businessCategory?: string;
 	createdAt?: string;
@@ -79,16 +79,12 @@ export type CommonUser = {
 	unblockedAt?: string;
 	lastAccessAt?: string;
 	tempAccess?: Avo.User.TempAccess;
-	idps?: Idp[];
+	idps?: Partial<Record<Idp, string | null>>;
 	alias?: string;
 	title?: string;
 	bio?: string;
 	alternativeEmail?: string;
 	updatedAt?: string;
-	classifications?: {
-		id: any;
-		key: string;
-	}[];
 	companyId?: string;
 };
 

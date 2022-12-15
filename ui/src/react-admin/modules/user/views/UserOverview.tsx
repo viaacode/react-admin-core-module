@@ -6,6 +6,7 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
+import { useGetIdps } from '~modules/shared/hooks/use-get-idps';
 
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
@@ -30,6 +31,7 @@ import {
 import { UserService } from '~modules/user/user.service';
 import {
 	CommonUser,
+	Idp,
 	UserBulkAction,
 	UserOverviewTableCol,
 	USERS_PER_PAGE,
@@ -55,7 +57,6 @@ import { useBusinessCategories } from '~modules/shared/hooks/useBusinessCategory
 import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
-import { useIdps } from '~modules/shared/hooks/useIdps';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
@@ -82,7 +83,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [businessCategories] = useBusinessCategories();
 	const [educationLevels] = useEducationLevels();
 	const [subjects] = useSubjects();
-	const [idps] = useIdps();
+	const {data: idps} = useGetIdps();
 	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false) as [
 		CheckboxOption[],
 		boolean
@@ -125,7 +126,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					get(tableState, 'educationLevels', []) as string[]
 				),
 				setSelectedCheckboxes(subjects, get(tableState, 'subjects', []) as string[]),
-				setSelectedCheckboxes(idps, get(tableState, 'idps', []) as string[])
+				setSelectedCheckboxes(idps || [], get(tableState, 'idps', []) as string[])
 			),
 		[
 			businessCategories,
@@ -676,7 +677,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						commonUser?.idps || [],
+						Object.keys(commonUser?.idps || {}) as Idp[],
 						`user_${commonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'

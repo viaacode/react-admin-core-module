@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, ParseBoolPipe, ParseIntPipe, Query } from "@nestjs/common";
 import { ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
@@ -19,17 +19,17 @@ export class CollectionsController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async fetchCollectionsOrBundles(
-		@Query('limit') limit: number,
-		@Query('typeId') typeId: ContentTypeNumber,
+		@Query('limit', ParseIntPipe) limit: number,
+		@Query('typeId', ParseIntPipe) typeId: ContentTypeNumber,
 	): Promise<Avo.Collection.Collection[]> {
 		return this.collectionsService.fetchCollectionsOrBundles(limit, typeId);
 	}
 
 	@Get('')
 	public async fetchCollectionsOrBundlesById(
-		@Query('isCollection') isCollection: boolean,
+		@Query('isCollection', ParseBoolPipe) isCollection: boolean,
 		@Query('titleOrId') titleOrId: string,
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 	): Promise<Avo.Collection.Collection[]> {
 		if (isCollection) {
 			return this.collectionsService.fetchCollectionsByTitleOrId(

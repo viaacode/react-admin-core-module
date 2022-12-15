@@ -1,4 +1,3 @@
-import { HTTPError } from 'ky';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
 import { NavigationService } from '~modules/navigation/navigation.service';
@@ -9,7 +8,7 @@ export const useGetNavigationBarItems = (
 	placement?: string,
 	options?: UseQueryOptions<
 		NavigationItem[],
-		HTTPError,
+		any,
 		NavigationItem[],
 		typeof NAVIGATIONS_QUERY_KEYS.getNavigations[]
 	>

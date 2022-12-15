@@ -6,6 +6,7 @@ import {
 	Get,
 	Headers,
 	Param,
+	ParseIntPipe,
 	Patch,
 	Post,
 	Put,
@@ -58,16 +59,16 @@ export class ContentPagesController {
 
 	@Get('overview')
 	public async fetchContentPages(
-		@Query('offset') offset: string,
-		@Query('limit') limit: string,
+		@Query('offset', ParseIntPipe) offset: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('sortColumn') sortColumn: ContentOverviewTableCols,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where: string,
 	): Promise<[DbContentPage[], number]> {
 		return this.contentPagesService.fetchContentPages(
-			parseInt(offset || '0'),
-			parseInt(limit || '20'),
+			offset || 0,
+			limit || 20,
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,
@@ -91,7 +92,7 @@ export class ContentPagesController {
 		);
 	}
 
-	@Get('path-exist')
+	@Get('path-exists')
 	async doesContentPageExist(
 		@Query('path') path: string,
 		@Req() request,
@@ -125,7 +126,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
 	public async getPublicContentItems(
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('title') title: string | undefined,
 	): Promise<
 		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
@@ -152,7 +153,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_NAVIGATION_BARS,
 	)
 	public async getPublicProjectContentItems(
-		@Query('limit') limit: number,
+		@Query('limit', ParseIntPipe) limit: number,
 		@Query('title') title: string | undefined,
 	): Promise<
 		| ContentPageQueryTypes['GetPublicProjectContentPagesQueryAvo']['app_content']
@@ -179,14 +180,17 @@ export class ContentPagesController {
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentLabelsLinks(
 		@Body()
-		insertContentLabelLink: {
+		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
 	): Promise<void> {
+		if (!body.labelIds?.length) {
+			return;
+		}
 		await this.contentPagesService.insertContentLabelsLinks(
-			insertContentLabelLink.contentPageId,
-			insertContentLabelLink.labelIds,
+			body.contentPageId,
+			body.labelIds,
 		);
 	}
 
@@ -194,14 +198,17 @@ export class ContentPagesController {
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentLabelsLinks(
 		@Body()
-		deleteContentLabelLink: {
+		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
 	): Promise<void> {
+		if (!body.labelIds?.length) {
+			return;
+		}
 		await this.contentPagesService.deleteContentLabelsLinks(
-			deleteContentLabelLink.contentPageId,
-			deleteContentLabelLink.labelIds,
+			body.contentPageId,
+			body.labelIds,
 		);
 	}
 

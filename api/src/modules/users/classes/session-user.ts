@@ -19,7 +19,7 @@ export class SessionUserEntity {
 	}
 
 	public getUser(): CommonUser {
-		return ;
+		return this.user;
 	}
 
 	public getId(): string {

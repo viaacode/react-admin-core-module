@@ -59,7 +59,7 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			],
 		},
 		{
-			label: i18n.tHtml('Vertalingen'),
+			label: i18n.tHtml('app___vertalingen'),
 			location: ADMIN_PATH().TRANSLATIONS,
 			key: 'translations',
 			exact: false,

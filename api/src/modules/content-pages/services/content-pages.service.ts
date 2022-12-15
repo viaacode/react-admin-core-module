@@ -29,18 +29,23 @@ import { SessionHelper } from '../../shared/auth/session-helper';
 
 import {
 	App_Content_Blocks_Insert_Input,
+	App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
 	GetCollectionTileByIdDocument,
 	GetCollectionTileByIdQuery,
 	GetCollectionTileByIdQueryVariables,
-	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
 	GetItemByExternalIdDocument,
 	GetItemByExternalIdQuery,
 	GetItemByExternalIdQueryVariables,
 	GetItemTileByIdDocument,
 	GetItemTileByIdQuery,
 	GetItemTileByIdQueryVariables,
+	Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
+import {
+	App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
+	Lookup_App_Content_Block_Type_Enum,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
@@ -62,8 +67,6 @@ import {
 	DbContentPage,
 	GqlAvoUser,
 	GqlContentBlock,
-	GqlContentBlockAvo,
-	GqlContentBlockHetArchief,
 	GqlContentPage,
 	GqlHetArchiefUser,
 	GqlInsertOrUpdateContentBlock,
@@ -96,8 +99,6 @@ export class ContentPagesService {
 		if (!contentBlock) {
 			return null;
 		}
-		const contentBlockAvo = contentBlock as GqlContentBlockAvo;
-		const contentBlockHetArchief = contentBlock as GqlContentBlockHetArchief;
 		/* istanbul ignore next */
 		return {
 			id: contentBlock?.id,
@@ -1023,7 +1024,9 @@ export class ContentPagesService {
 	 * @param contentBlockConfig updated state of content block
 	 */
 	public async updateContentBlock(
-		contentBlockConfig: ContentPageQueryTypes['UpdateContentBlockMutationVariables']['contentBlock'],
+		contentBlockConfig:
+			| App_Content_Blocks_Set_Input_Avo
+			| App_Content_Block_Set_Input_HetArchief,
 	): Promise<void> {
 		try {
 			await this.dataService.execute<
@@ -1159,9 +1162,20 @@ export class ContentPagesService {
 					initialContentBlockIds.includes(config.id as number),
 			);
 
-			updatedConfigs.forEach((config) =>
-				updatePromises.push(this.updateContentBlock(config)),
-			);
+			updatedConfigs.forEach((config: DbContentBlock) => {
+				return updatePromises.push(
+					this.updateContentBlock({
+						content_block_type: config.type as any,
+						id: config.id,
+						position: config.position,
+						variables: {
+							blockState: config.block,
+							componentState: config.components,
+						},
+						updated_at: new Date().toISOString(),
+					}),
+				);
+			});
 
 			// Deleted content-blocks
 			const deletePromises: Promise<any>[] = [];

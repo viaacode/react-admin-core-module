@@ -21,5 +21,5 @@ module.exports = {
 		'^.+\\.jsx?$': require.resolve('babel-jest'),
 		'^.+\\.tsx?$': 'ts-jest',
 	},
-	transformIgnorePatterns: ['/node_modules/(?!(ky))', '^.+\\.module\\.(css|sass|scss)$'],
+	transformIgnorePatterns: ['^.+\\.module\\.(css|sass|scss)$'],
 };

@@ -1,4 +1,7 @@
-import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
+import {
+	GetUserByIdQuery,
+	Users_Idp_Map,
+} from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
@@ -108,7 +111,7 @@ export type CommonUser = {
 	unblockedAt?: string;
 	lastAccessAt?: string;
 	tempAccess?: UserTempAccess;
-	idps?: Idp[];
+	idps?: Partial<Record<Idp, string | null>>;
 	alias?: string;
 	title?: string;
 	bio?: string;

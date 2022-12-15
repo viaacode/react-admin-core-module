@@ -13,6 +13,9 @@ import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 import moment from 'moment';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
+import { ErrorView } from '~modules/shared/components/error';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
+import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
 
 import {
 	renderDateDetailRows,
@@ -23,13 +26,9 @@ import { AdminLayout } from '../../shared/layouts';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
 import { AdminConfigManager, ToastType } from '~core/config';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { CommonUser } from '../user.types';
+import { CommonUser, Idp } from '../user.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~modules/shared/helpers/dropdown';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
@@ -53,8 +52,13 @@ export interface UserDetailProps {
 
 export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded }) => {
 	// Hooks
-	const [storedProfile, setStoredProfile] = useState<CommonUser | null>(null);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+	const {
+		data: storedProfile,
+		isLoading,
+		isError,
+		refetch: refetchProfileInfo,
+		isFetched,
+	} = useGetProfileById(id);
 	const [tempAccess, setTempAccess] = useState<Avo.User.TempAccess | null>(null);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
 	const [isTempAccessModalOpen, setIsTempAccessModalOpen] = useState<boolean>(false);
@@ -69,59 +73,22 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const user = AdminConfigManager.getConfig().user;
 
+	useEffect(() => {
+		if (!!storedProfile && isFetched) {
+			onLoaded?.(storedProfile);
+		}
+	}, [isFetched, onLoaded, storedProfile]);
+
 	const hasPerm = useCallback(
 		(permission: PermissionName) => PermissionService.hasPerm(user, permission),
 		[user]
 	);
 
-	const fetchProfileById = useCallback(async () => {
-		try {
-			const profile = await UserService.getUserById(String(id));
-
-			profile.tempAccess && setTempAccess(profile.tempAccess);
-			setStoredProfile(profile);
-
-			onLoaded?.(profile);
-		} catch (err) {
-			console.error(
-				new CustomError('Failed to get user by id', err, {
-					query: 'GET_USER_BY_ID',
-					variables: {
-						id,
-					},
-				})
-			);
-
-			setLoadingInfo({
-				state: 'error',
-				message: tText(
-					'admin/users/views/user-detail___het-ophalen-van-de-gebruiker-info-is-mislukt'
-				),
-			});
-		}
-	}, [setStoredProfile, setLoadingInfo, tText, id, onLoaded]);
-
-	useEffect(() => {
-		fetchProfileById();
-	}, [fetchProfileById]);
-
-	useEffect(() => {
-		if (storedProfile) {
-			setLoadingInfo({
-				state: 'loaded',
-			});
-		}
-	}, [storedProfile, setLoadingInfo]);
-
 	const getLdapDashboardUrl = () => {
-		const ipdMapEntry = ((storedProfile as any)?.idps || []).find(
-			(idpMap: { idp: string; idp_user_id: string }) => idpMap.idp === 'HETARCHIEF'
-		);
+		const userIdpId = storedProfile?.idps?.[Idp.HETARCHIEF];
 
-		if (ipdMapEntry) {
-			return `${AdminConfigManager.getConfig().env.LDAP_DASHBOARD_PEOPLE_URL}/${
-				ipdMapEntry.idp_user_id
-			}`;
+		if (userIdpId) {
+			return `${AdminConfigManager.getConfig().env.LDAP_DASHBOARD_PEOPLE_URL}/${userIdpId}`;
 		}
 
 		return null;
@@ -133,8 +100,8 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 
 	const toggleBlockedStatus = async () => {
 		try {
-			const profileId = (storedProfile as any)?.profile_id;
-			const isBlocked = (storedProfile as any)?.is_blocked || false;
+			const profileId = storedProfile?.profileId;
+			const isBlocked = storedProfile?.isBlocked || false;
 
 			if (profileId) {
 				await UserService.updateBlockStatusByProfileIds(
@@ -142,7 +109,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 					!isBlocked,
 					shouldSendActionEmail
 				);
-				await fetchProfileById();
+				await refetchProfileInfo();
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					type: ToastType.SUCCESS,
@@ -231,7 +198,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 			await onSetTempAccess?.(userId, tempAccess, profileId);
 			setTempAccess(tempAccess);
 
-			await fetchProfileById();
+			await refetchProfileInfo();
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				type: ToastType.SUCCESS,
@@ -372,14 +339,14 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 									tText('admin/users/views/user-detail___totale-toegang')
 								)}
 							{renderDetailRow(
-								idpMapsToTagList(storedProfile.idps || [], 'idps') || '-',
+								idpMapsToTagList(
+									Object.keys(storedProfile.idps || {}) as Idp[],
+									'idps'
+								) || '-',
 								tText('admin/users/views/user-detail___gelinked-aan')
 							)}
 							{renderDetailRow(
-								stringsToTagList(
-									(storedProfile as any)?.classifications || [],
-									'key'
-								) || '-',
+								stringsToTagList(storedProfile?.subjects || []) || '-',
 								tText('admin/users/views/user-detail___vakken')
 							)}
 							{renderDetailRow(
@@ -432,7 +399,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		navigate(history, USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW);
 
 	const renderUserDetailPage = () => {
-		const isBlocked = (storedProfile as any)?.is_blocked;
+		const isBlocked = storedProfile?.isBlocked;
 		const blockButtonTooltip = isBlocked
 			? tText(
 					'admin/users/views/user-detail___laat-deze-gebruiker-terug-toe-op-het-av-o-platform'
@@ -585,11 +552,18 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		);
 	};
 
-	return (
-		<LoadingErrorLoadedComponent
-			loadingInfo={loadingInfo}
-			dataObject={storedProfile}
-			render={renderUserDetailPage}
-		/>
-	);
+	if (isLoading) {
+		return <CenteredSpinner />;
+	}
+	if (isError) {
+		return (
+			<ErrorView
+				message={tText(
+					'admin/users/views/user-detail___het-ophalen-van-de-gebruiker-info-is-mislukt'
+				)}
+				icon="alert-triangle"
+			/>
+		);
+	}
+	return renderUserDetailPage();
 };

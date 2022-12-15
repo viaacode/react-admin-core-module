@@ -54,15 +54,10 @@ export class NavigationService {
 		navigationItem: Partial<NavigationItem>
 	): Promise<number> {
 		try {
-			return fetchWithLogoutJson(
-				stringifyUrl({
-					url: this.getBaseUrl() + '/items',
-					query: {},
-				}),
-				{
-					method: 'PUT',
-				}
-			);
+			return fetchWithLogoutJson(this.getBaseUrl() + '/items', {
+				method: 'PUT',
+				body: JSON.stringify(navigationItem),
+			});
 		} catch (err) {
 			throw new CustomError('Failed to insert navigation item', err, {
 				navigationItem,

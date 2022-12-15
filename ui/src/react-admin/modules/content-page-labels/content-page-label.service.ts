@@ -35,7 +35,8 @@ export class ContentPageLabelService {
 						sortOrder,
 						where: JSON.stringify(where),
 					},
-				})
+				}),
+				{throwOnNullResponse: true}
 			);
 		} catch (err) {
 			throw new CustomError('Failed to get content page labels from the database', err, {

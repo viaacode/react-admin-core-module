@@ -39,24 +39,44 @@ export async function fetchWithLogout(
 	return response;
 }
 
-export async function fetchWithLogoutJson<T = any>(
+/**
+ * Operator overloading to ensure typescript understands that the function can sometimes return ResponseType and sometimes ResponseType | null
+ * Based on the options.throwOnNullResponse parameter
+ * @param url
+ * @param options
+ */
+export async function fetchWithLogoutJson<ResponseType>(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNull: boolean }>
-): Promise<T> {
-	const { throwOnNull, ...fetchOptions } = options || { throwOnNull: true };
+	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: true }>
+): Promise<ResponseType>;
+export async function fetchWithLogoutJson<ResponseType>(
+	url: RequestInfo,
+	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: false }>
+): Promise<ResponseType | null>;
+export async function fetchWithLogoutJson<ResponseType>(
+	url: RequestInfo,
+	options?: Partial<FetchOptions & { forceLogout: boolean }>
+): Promise<ResponseType | null>;
+export async function fetchWithLogoutJson<ResponseType>(
+	url: RequestInfo,
+	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: boolean }>
+): Promise<ResponseType | null> {
+	const { throwOnNullResponse, ...fetchOptions } = options || { throwOnNullResponse: false };
 	const response = await fetchWithLogout(url, fetchOptions);
 
 	const text = await response.text();
 	if (text) {
 		return JSON.parse(text);
 	} else {
-		if (throwOnNull ?? true) {
+		if (throwOnNullResponse) {
 			throw new CustomError('Response from the server was null', null, {
 				code: 'RESPONSE_IS_NULL',
 				text,
+				url,
+				options,
 			});
 		} else {
-			return null as T; // only in case throwOnNull is false will this ever return null, so we cast to T so we have to do less null checks everywhere
+			return null; // only in case throwOnNullResponse is false/undefined will this  return null
 		}
 	}
 }
