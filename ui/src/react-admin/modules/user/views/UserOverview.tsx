@@ -1,9 +1,11 @@
 import FileSaver from 'file-saver';
-import { compact, first, get, isNil, without } from 'lodash-es';
-import React, { FC, ReactText, useCallback, useEffect, useMemo, useState } from 'react';
+import { compact, get, isNil } from 'lodash-es';
+import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { ErrorView } from '~modules/shared/components/error';
+import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { useGetIdps } from '~modules/shared/hooks/use-get-idps';
@@ -14,6 +16,8 @@ import reactToString from 'react-to-string';
 
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
+import { generateWhereObjectArchief, generateWhereObjectAvo } from '~modules/user/helpers/generate-filter-where-object-users';
+import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
 import { USER_PATH } from '~modules/user/user.routes';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
@@ -21,13 +25,6 @@ import FilterTable, {
 	FilterableColumn,
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
-import {
-	getBooleanFilters,
-	getDateRangeFilters,
-	getMultiOptionFilters,
-	getMultiOptionsFilters,
-	NULL_FILTER,
-} from '../../shared/helpers/filters';
 import { UserService } from '~modules/user/user.service';
 import {
 	CommonUser,
@@ -41,14 +38,9 @@ import {
 import './UserOverview.scss';
 import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { eduOrgToClientOrg } from '~modules/shared/helpers/edu-org-string-to-client-org';
 import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
@@ -72,12 +64,8 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
-	const [profiles, setProfiles] = useState<CommonUser[] | null>(null);
-	const [profileCount, setProfileCount] = useState<number>(0);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	const [tableState, setTableState] = useState<Partial<UserTableState>>({});
+	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [isFetching, setIsFetching] = useState<boolean>(false);
 	const [selectedProfileIds, setSelectedProfileIds] = useState<string[]>([]);
 	const [companies] = useCompaniesWithUsers();
 	const [businessCategories] = useBusinessCategories();
@@ -141,236 +129,53 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	);
 
 	const generateWhereObject = useCallback(
-		(filters: Partial<UserTableState>, onlySelectedProfiles: boolean) => {
+		(filters: Partial<UserTableState> | null, onlySelectedProfiles: boolean): any | null => {
+			if (!filters) {
+				return null;
+			}
+			let whereObj;
 			if (isHetArchief()) {
-				return generateWhereObjectArchief(
+				whereObj = generateWhereObjectArchief(
 					filters,
 					onlySelectedProfiles,
 					selectedProfileIds
 				);
+			} else {
+				whereObj = generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 			}
-			return generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
+			if (JSON.stringify(whereObj) === '{"_and":[]}') {
+				return null;
+			}
+			return whereObj;
 		},
 		[selectedProfileIds]
 	);
 
-	const generateWhereObjectAvo = (
-		filters: Partial<UserTableState>,
-		onlySelectedProfiles: boolean,
-		theSelectedProfileIds: string[]
-	) => {
-		const andFilters: any[] = [];
-
-		if (filters.query) {
-			const query = `%${filters.query}%`;
-
-			andFilters.push({
-				_or: [
-					{ stamboek: { _ilike: query } },
-					{ mail: { _ilike: query } },
-					{ full_name: { _ilike: query } },
-					{ company_name: { _ilike: query } },
-					{ group_name: { _ilike: query } },
-					{ business_category: { _ilike: query } },
-				],
-			});
-		}
-
-		andFilters.push(...getBooleanFilters(filters, ['isBlocked', 'isException'], ['is_blocked', 'is_exception']));
-
-		andFilters.push(
-			...getDateRangeFilters(
-				filters,
-				['blockedAt', 'unblockedAt'],
-				['blocked_at.max', 'unblocked_at.max']
-			)
-		);
-
-		andFilters.push(
-			...getMultiOptionFilters(
-				filters,
-				['userGroup', 'organisation', 'businessCategory'],
-				['group_id', 'company_id', 'business_category']
-			)
-		);
-
-		andFilters.push(
-			...getMultiOptionsFilters(
-				filters,
-				['educationLevels', 'subjects', 'idps'],
-				['contexts', 'classifications', 'idps'],
-				['key', 'key', 'idp'],
-				true
-			)
-		);
-
-		andFilters.push(
-			...getMultiOptionFilters(filters, ['tempAccess'], ['user.temp_access.current.status'])
-		);
-
-		andFilters.push(
-			...getDateRangeFilters(
-				filters,
-				['createdAt', 'lastAccessAt'],
-				['acc_created_at', 'last_access_at']
-			)
-		);
-
-		if (filters.educational_organisations && filters.educational_organisations.length) {
-			const orFilters: any[] = [];
-
-			eduOrgToClientOrg(without(filters.educational_organisations, NULL_FILTER)).forEach(
-				(org) => {
-					orFilters.push({
-						organisations: {
-							organization_id: { _eq: org.organizationId },
-							unit_id: org.unitId ? { _eq: org.unitId } : { _is_null: true },
-						},
-					});
-				}
+	const getColumnType = useCallback((): string => {
+		const column = columns.find((tableColumn: FilterableColumn) => {
+			return (
+				!!tableColumn?.id &&
+				!!tableState?.sort_column &&
+				tableColumn?.id === tableState?.sort_column
 			);
+		});
+		return column?.dataType || '';
+	}, [tableState, columns]);
 
-			if (filters.educational_organisations.includes(NULL_FILTER)) {
-				orFilters.push({
-					_not: {
-						organisations: {},
-					},
-				});
-			}
-
-			andFilters.push({
-				_or: orFilters,
-			});
-		}
-
-		if (onlySelectedProfiles) {
-			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
-		}
-
-		// Filter users by wether the user has a Stamboeknummer or not.
-		if (!isNil(filters.stamboek)) {
-			const hasStamboek = first(filters.stamboek) === 'true';
-			const isStamboekNull = !hasStamboek;
-
-			andFilters.push({ stamboek: { _is_null: isStamboekNull } });
-		}
-
-		return { _and: andFilters };
-	};
-
-	const generateWhereObjectArchief = (
-		filters: Partial<UserTableState>,
-		onlySelectedProfiles: boolean,
-		theSelectedProfileIds: string[]
-	) => {
-		const andFilters: any[] = [];
-
-		if (filters.query) {
-			const query = `%${filters.query}%`;
-
-			andFilters.push({
-				_or: [
-					{ mail: { _ilike: query } },
-					{ full_name: { _ilike: query } },
-					{
-						maintainer_users_profiles: {
-							maintainer: {
-								schema_name: {
-									_ilike: query,
-								},
-							},
-						},
-					},
-					{
-						group: {
-							label: {
-								_ilike: query,
-							},
-						},
-					},
-				],
-			});
-		}
-
-		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
-
-		andFilters.push(
-			...getMultiOptionsFilters(
-				filters,
-				['idps', 'organisation'],
-				['identities', 'maintainer_users_profiles'],
-				['identity_provider_name', 'maintainer_identifier'],
-				true
-			)
-		);
-
-		andFilters.push(...getDateRangeFilters(filters, ['last_access_at'], ['last_access_at']));
-
-		if (onlySelectedProfiles) {
-			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
-		}
-
-		return { _and: andFilters };
-	};
-
-	const fetchProfiles = useCallback(async () => {
-		if (isFetching) {
-			return;
-		}
-
-		try {
-			setIsLoading(true);
-			setIsFetching(true);
-
-			const column = columns.find((tableColumn: FilterableColumn) => {
-				return get(tableColumn, 'id', '') === get(tableState, 'sort_column', 'empty');
-			});
-
-			const columnDataType: string = get(column, 'dataType', '');
-			const defaultSortOrder = isAvo() ? 'desc_nulls_first' : 'desc';
-			const where = generateWhereObject(getFilters(tableState), false);
-
-			const [profilesTemp, profileCountTemp] = await UserService.getProfiles(
-				tableState.page || 0,
-				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
-				tableState.sort_order || defaultSortOrder,
-				columnDataType,
-				where
-			);
-
-			setProfiles(profilesTemp);
-			setProfileCount(profileCountTemp);
-		} catch (err) {
-			console.error(
-				new CustomError('Failed to get users from the database', err, { tableState })
-			);
-
-			setLoadingInfo({
-				state: 'error',
-				message: tHtml(
-					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
-				),
-			});
-		}
-
-		setIsFetching(false);
-		setIsLoading(false);
-
-		// This eslint rule is critical to avoid infinite loading
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [columns, tableState, generateWhereObject, tHtml]);
-
-	useEffect(() => {
-		fetchProfiles();
-	}, [fetchProfiles]);
-
-	useEffect(() => {
-		if (profiles) {
-			setLoadingInfo({
-				state: 'loaded',
-			});
-		}
-	}, [profiles]);
+	const {
+		data: profilesResponse,
+		isLoading: isLoadingProfiles,
+		isError: isErrorProfiles,
+		refetch: refetchProfiles
+	} = useGetProfiles({
+		page: tableState?.page || 0,
+		sortColumn: (tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+		sortOrder: tableState?.sort_order || 'desc',
+		tableColumnDataType: getColumnType(),
+		where: generateWhereObject(getFilters(tableState), false),
+	});
+	const profiles = profilesResponse?.[0] || null;
+	const profileCount = profilesResponse?.[1] || null;
 
 	const bulkChangeSubjects = async (addOrRemove: AddOrRemove, subjects: string[]) => {
 		try {
@@ -469,7 +274,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				blockOrUnblock,
 				false // TODO sync sendEmail feature
 			);
-			await fetchProfiles();
+			await refetchProfiles();
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
@@ -496,7 +301,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			history,
 			USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW,
 			{},
-			{ [columnId]: tagId.toString(), columns: (tableState.columns || []).join('~') }
+			{ [columnId]: tagId.toString(), columns: (tableState?.columns || []).join('~') }
 		);
 	};
 
@@ -504,19 +309,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		try {
 			setIsLoading(true);
 			const column = columns.find(
-				(tableColumn: FilterableColumn) => tableColumn.id || '' === tableState.sort_column
+				(tableColumn: FilterableColumn) => tableColumn.id && tableState?.sort_column && tableColumn.id === tableState?.sort_column
 			);
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp] = await UserService.getProfiles(
 				0,
-				(tableState.sort_column || 'last_access_at') as UserOverviewTableCol,
-				tableState.sort_order || 'desc',
+				(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+				tableState?.sort_order || 'desc',
 				columnDataType,
 				generateWhereObject(getFilters(tableState), true),
 				100000
 			);
 			const columnIds =
-				tableState.columns && tableState.columns.length
+				tableState?.columns?.length
 					? tableState.columns
 					: columns
 							.filter((column) => column.visibleByDefault)
@@ -720,20 +525,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const renderNoResults = () => {
-		return <>{tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}</>;
-		// return (
-		// 	<ErrorView
-		// 		message={t('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
-		// 	>
-		// 		<p>
-		// 			{tHtml('admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn')} //  Beschrijving wanneer er nog geen gebruikers zijn
-		// 		</p>
-		// 	</ErrorView>
-		// );
+		return (
+			<ErrorView
+				message={tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
+			>
+				<p>
+					{tHtml('admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn')} //  Beschrijving wanneer er nog geen gebruikers zijn
+				</p>
+			</ErrorView>
+		);
 	};
 
 	const renderUserOverview = () => {
-		if (!profiles) {
+		if (!profiles || isNil(profileCount)) {
 			return null;
 		}
 
@@ -753,7 +557,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
 					itemsPerPage={USERS_PER_PAGE}
-					onTableStateChanged={(newTableState) => setTableState(newTableState)}
+					onTableStateChanged={setTableState}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
 					showCheckboxes={!!bulkActions.length}
@@ -773,7 +577,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					selectedProfileIds={selectedProfileIds}
 					isOpen={usersDeleteModalOpen}
 					onClose={() => setUsersDeleteModalOpen(false)}
-					deleteCallback={fetchProfiles}
+					deleteCallback={refetchProfiles}
 				/>
 				<AddOrRemoveLinkedElementsModal
 					title={tText('admin/users/views/user-overview___vakken-aanpassen')}
@@ -798,11 +602,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		);
 	};
 
-	return (
-		<LoadingErrorLoadedComponent
-			loadingInfo={loadingInfo}
-			dataObject={profiles}
-			render={renderUserOverview}
-		/>
-	);
+	if (isLoadingProfiles) {
+		return <CenteredSpinner />;
+	}
+	if (isErrorProfiles) {
+		return (
+			<ErrorView
+				message={tHtml(
+					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
+				)}
+				icon={'alert-triangle'}
+				actionButtons={['home', 'helpdesk']}
+			/>
+		);
+	}
+	return renderUserOverview();
 };
