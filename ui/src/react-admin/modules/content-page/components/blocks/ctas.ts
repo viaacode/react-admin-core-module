@@ -109,7 +109,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
-			buttonAltTitle: TEXT_FIELD('', {
+			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/ctas___alt-button-text'
 				),

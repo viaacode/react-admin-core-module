@@ -55,7 +55,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		),
 		state: INITIAL_LOGO_GRID_COMPONENTS_STATE(),
 		fields: {
-			textAbove: TEXT_FIELD('', {
+			textAbove: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'
 				),

@@ -62,7 +62,7 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					} as FileUploadProps,
 				}
 			),
-			title: TEXT_FIELD('', {
+			title: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/spotlight___titel'
 				),

@@ -69,7 +69,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				} as FileUploadProps,
 				validator: undefined,
 			}),
-			customTitle: TEXT_FIELD('', {
+			customTitle: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
 				),

@@ -62,7 +62,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
-			altTitle: TEXT_FIELD('', {
+			altTitle: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/buttons___alt-title-text'
 				),

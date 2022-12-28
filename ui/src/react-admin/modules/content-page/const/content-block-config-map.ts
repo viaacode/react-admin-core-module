@@ -9,6 +9,7 @@ import {
 	IFRAME_BLOCK_CONFIG,
 	IMAGE_BLOCK_CONFIG,
 	IMAGE_GRID_BLOCK_CONFIG,
+	IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
 	INTRO_BLOCK_CONFIG,
 	KLAAR_BLOCK_CONFIG,
 	LOGO_GRID_BLOCK_CONFIG,
@@ -22,6 +23,7 @@ import {
 	RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG,
 	SEARCH_BLOCK_CONFIG,
 	SPOTLIGHT_BLOCK_CONFIG,
+	UITGEKLAARD_BLOCK_CONFIG,
 	USP_GRID_BLOCK_CONFIG,
 } from '~modules/content-page/components/blocks';
 import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
@@ -54,4 +56,6 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.LogoGrid]: LOGO_GRID_BLOCK_CONFIG,
 	[ContentBlockType.UspGrid]: USP_GRID_BLOCK_CONFIG,
 	[ContentBlockType.Eventbrite]: EVENTBRITE_BLOCK_CONFIG,
+	[ContentBlockType.Uitgeklaard]: UITGEKLAARD_BLOCK_CONFIG,
+	[ContentBlockType.ImageTitleTextButton]: IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
 };
