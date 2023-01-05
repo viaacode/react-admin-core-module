@@ -123,11 +123,12 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 				),
 				editorType: ContentBlockEditor.TextInput,
 			},
-			buttonAltTitle: TEXT_FIELD('', {
+			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined
 			}),
 			buttonIcon: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(

@@ -41,6 +41,7 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/eventbrite___event-id'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined
 			}),
 			type: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(

@@ -37,6 +37,8 @@ function setConfig() {
 				ContentBlockType.PageOverview,
 				ContentBlockType.UspGrid,
 				ContentBlockType.Quote,
+				ContentBlockType.Uitgeklaard,
+				ContentBlockType.ImageTitleTextButton,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

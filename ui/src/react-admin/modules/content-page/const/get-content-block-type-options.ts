@@ -54,6 +54,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___uitgeklaard-titel-datum'
+			),
+			value: ContentBlockType.Uitgeklaard,
+		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___media-tegels'
 			),
 			value: ContentBlockType.MediaGrid,
@@ -81,6 +87,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 				'admin/content-block/content-block___afbeelding-grid'
 			),
 			value: ContentBlockType.ImageGrid,
+		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___afbeelding-met-titel-tekst-en-knop'
+			),
+			value: ContentBlockType.ImageTitleTextButton,
 		},
 		{
 			label: AdminConfigManager.getConfig().services.i18n.tText(

@@ -90,11 +90,12 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
-					altTitle: TEXT_FIELD('', {
+					altTitle: TEXT_FIELD(undefined, {
 						label: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/rich-text-two-columns___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
+						validator: undefined
 					}),
 					icon: {
 						label: AdminConfigManager.getConfig().services.i18n.tText(
