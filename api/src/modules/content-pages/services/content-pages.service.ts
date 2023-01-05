@@ -1062,11 +1062,29 @@ export class ContentPagesService {
 	}
 
 	private cleanContentBlocksBeforeDatabaseInsert(
-		dbContentBlocks: Partial<Avo.ContentPage.Block>[],
+		dbContentBlocks: Partial<{
+			id?: number;
+			name: string;
+			type: string;
+			errors: any;
+			position: number;
+			block: any;
+			components: any;
+			content_id: number;
+		}>[],
 	): ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'] {
-		return (dbContentBlocks || []).map((block) =>
-			omit(block, 'enum_content_block_type', '__typename', 'id'),
-		) as ContentPageQueryTypes['InsertContentBlocksMutationVariables']['contentBlocks'];
+		return (dbContentBlocks || []).map((block) => {
+			return {
+				content_block_type: block.type as Lookup_Enum_Content_Block_Types_Enum,
+				content_id: block.content_id,
+				id: block.id,
+				position: block.position,
+				variables: {
+					blockState: block.block,
+					componentState: block.components,
+				},
+			};
+		});
 	}
 
 	/**
@@ -1086,14 +1104,19 @@ export class ContentPagesService {
 				(block) => (block.content_id = contentId),
 			);
 
+			const variables: ContentPageQueryTypes['InsertContentBlocksMutationVariables'] =
+				{
+					contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(
+						contentBlockConfigs,
+					) as any, // TODO Figure out why type doesn't work
+				};
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['InsertContentBlocksMutation'],
 				ContentPageQueryTypes['InsertContentBlocksMutationVariables']
-			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentBlocksDocument, {
-				contentBlocks: this.cleanContentBlocksBeforeDatabaseInsert(
-					contentBlockConfigs,
-				) as any, // TODO Figure out why type doesn't work
-			});
+			>(
+				CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentBlocksDocument,
+				variables,
+			);
 			const ids: number[] =
 				(
 					(response as ContentPageQueryTypes['InsertContentBlocksMutationAvo'])
@@ -1131,16 +1154,9 @@ export class ContentPagesService {
 			const initialContentBlockIds: number[] = compact(
 				initialContentBlocks.map((contentBlock) => contentBlock.id),
 			);
-			const currentContentBlockIds = contentBlockConfigs.reduce(
-				(acc: number[], curr) => {
-					if (has(curr, 'id')) {
-						return [...acc, curr.id as number];
-					}
-
-					return acc;
-				},
-				[],
-			);
+			const currentContentBlockIds = contentBlockConfigs
+				.filter((block) => has(block, 'id'))
+				.map((block) => block.id);
 
 			// Inserted content-blocks
 			const insertPromises: Promise<any>[] = [];

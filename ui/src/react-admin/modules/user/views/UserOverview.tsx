@@ -89,7 +89,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				config,
 				setSelectedCheckboxes(
 					userGroupOptions,
-					get(tableState, 'author.user_groups', []) as string[]
+					get(tableState, 'userGroup', []) as string[]
 				),
 				companies.map(
 					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
@@ -104,14 +104,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					(option: string): CheckboxOption => ({
 						id: option,
 						label: option,
-						checked: get(tableState, 'business_category', [] as string[]).includes(
+						checked: get(tableState, 'businessCategory', [] as string[]).includes(
 							option
 						),
 					})
 				),
 				setSelectedCheckboxes(
 					educationLevels,
-					get(tableState, 'education_levels', []) as string[]
+					get(tableState, 'educationLevels', []) as string[]
 				),
 				setSelectedCheckboxes(subjects, get(tableState, 'subjects', []) as string[]),
 				setSelectedCheckboxes(idps || [], get(tableState, 'idps', []) as string[])

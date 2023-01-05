@@ -96,28 +96,30 @@ export interface ContentBlockComponentsLimits {
 export enum ContentBlockType {
 	AnchorLinks = 'ANCHOR_LINKS',
 	Buttons = 'BUTTONS',
+	ContentPageMeta = 'CONTENT_PAGE_META',
 	CTAs = 'CTAS',
+	Eventbrite = 'EVENTBRITE',
 	Heading = 'HEADING',
+	Hero = 'HERO',
 	IFrame = 'IFRAME',
 	Image = 'IMAGE',
 	ImageGrid = 'IMAGE_GRID',
+	ImageTitleTextButton = 'IMAGE_TITLE_TEXT_BUTTON',
 	Intro = 'INTRO',
 	Klaar = 'KLAAR',
+	LogoGrid = 'LOGO_GRID',
 	MediaGrid = 'MEDIA_GRID',
 	MediaPlayer = 'MEDIA_PLAYER',
 	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
+	PageOverview = 'PAGE_OVERVIEW',
+	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
 	Quote = 'QUOTE',
 	RichText = 'RICH_TEXT',
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
-	PageOverview = 'PAGE_OVERVIEW',
-	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
-	Spotlight = 'SPOTLIGHT',
-	Hero = 'HERO',
 	Search = 'SEARCH',
-	ContentPageMeta = 'CONTENT_PAGE_META',
-	LogoGrid = 'LOGO_GRID',
+	Spotlight = 'SPOTLIGHT',
+	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
-	Eventbrite = 'EVENTBRITE',
 }
 
 export enum ContentBlockEditor {
@@ -281,18 +283,29 @@ export interface MediaPlayerBlockComponentState {
 }
 
 export interface MediaPlayerTitleTextButtonBlockComponentState {
-	mediaTitle: string;
-	mediaItem?: ButtonAction;
-	headingType: HeadingTypeOption;
-	headingTitle: string;
-	content: string;
-	buttonLabel: string;
-	buttonIcon?: IconName;
-	buttonType?: ButtonType;
-	buttonAction?: ButtonAction;
 	align: AlignOption;
+	buttonAction?: ButtonAction;
+	buttonAltTitle?: string;
+	buttonIcon?: IconName;
+	buttonLabel: string;
+	buttonType?: ButtonType;
+	content: string;
+	headingTitle: string;
+	headingType: HeadingTypeOption;
 	mediaAutoplay: boolean;
+	mediaItem?: ButtonAction;
+	mediaTitle: string;
 }
+
+export type ImageTitleTextButtonBlockComponentState = Omit<
+	MediaPlayerTitleTextButtonBlockComponentState,
+	'mediaTitle' | 'mediaAutoplay' | 'align'
+> & {
+	imageAction?: ButtonAction;
+	imageAlt?: string;
+	imagePosition?: Omit<AlignOption, 'center'>;
+	imageSource?: string;
+};
 
 export interface MediaGridBlockComponentState {
 	mediaItem?: ButtonAction;

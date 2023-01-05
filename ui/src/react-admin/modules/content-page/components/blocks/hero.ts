@@ -55,7 +55,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	components: {
 		state: INITIAL_HERO_COMPONENTS_STATE(),
 		fields: {
-			title: TEXT_FIELD('', {
+			title: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/hero___titel'
 				),
@@ -67,7 +67,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/hero___titel-kleur'
 				)
 			),
-			content: TEXT_FIELD('', {
+			content: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/hero___beschrijving'
 				),
@@ -105,11 +105,12 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
-					altTitle: TEXT_FIELD('', {
+					altTitle: TEXT_FIELD(undefined, {
 						label: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/hero___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
+						validator: undefined,
 					}),
 					icon: {
 						label: AdminConfigManager.getConfig().services.i18n.tText(
@@ -146,6 +147,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
+				validator: undefined
 			}),
 			src: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
@@ -176,6 +178,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined
 			}),
 		},
 	},

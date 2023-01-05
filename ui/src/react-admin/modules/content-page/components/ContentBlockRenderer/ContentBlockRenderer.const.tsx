@@ -7,8 +7,9 @@ import {
 	BlockKlaar,
 	BlockQuote,
 	BlockSpotlight,
+	BlockUitgeklaard,
 } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import React, { FC, FunctionComponent } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
@@ -19,6 +20,7 @@ import {
 	ContentPageMeta,
 	CtaWrapper,
 	HeroWrapper,
+	ImageTitleTextButtonWrapper,
 	MediaPlayerTitleTextButtonWrapper,
 	MediaPlayerWrapper,
 	PageOverviewWrapper,
@@ -26,6 +28,10 @@ import {
 } from '../wrappers';
 import ButtonsWrapper from '../wrappers/ButtonsWrapper/ButtonsWrapper';
 import RichTextWrapper from '../wrappers/RichTextWrapper/RichTextWrapper';
+
+function loadComponentFromConfig(key: ContentBlockType): FC {
+	return AdminConfigManager.getConfig().content_blocks[key] || (() => <p>{key} component could not be found.</p>)
+}
 
 export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
 	return {
@@ -51,13 +57,11 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
 		[ContentBlockType.UspGrid]: BlockUspGridWrapper,
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
-		[ContentBlockType.MediaGrid]:
+		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
+		[ContentBlockType.ImageTitleTextButton]: ImageTitleTextButtonWrapper,
 		// Avo specific blocks
-		AdminConfigManager.getConfig().content_blocks[ContentBlockType.MediaGrid] ||
-		(() => <p>Media grid component was not found on admin config</p>),
-		[ContentBlockType.Search]:
-		AdminConfigManager.getConfig().content_blocks[ContentBlockType.Search] ||
-		(() => <p>Search component was not found on admin config</p>),
+		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
+		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search)
 	}[type];
 }
 
