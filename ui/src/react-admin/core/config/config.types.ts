@@ -141,7 +141,7 @@ export interface IconConfig {
 		sortTable: IconComponentProps;
 		arrowDown: IconComponentProps;
 	};
-	list: { label: string; value: string }[];
+	list: () => { label: string; value: string }[];
 }
 
 export type IconComponentProps = Record<string, unknown>;
