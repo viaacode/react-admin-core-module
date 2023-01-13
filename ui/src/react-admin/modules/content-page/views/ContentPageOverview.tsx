@@ -27,6 +27,7 @@ import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { useContentPagesControllerDeleteContentPage } from '../../../../shared/generated/serverComponents';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
@@ -34,7 +35,6 @@ import FilterTable, {
 
 import { isPublic } from '../helpers/get-published-state';
 import { useContentTypes } from '../hooks/useContentTypes';
-import { ContentPageService } from '../services/content-page.service';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -88,6 +88,7 @@ const ContentPageOverview: FunctionComponent = () => {
 	const { data: userGroups } = useGetUserGroupsWithPermissions();
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
+	const { mutateAsync: deleteContentPage } = useContentPagesControllerDeleteContentPage();
 
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -237,7 +238,11 @@ const ContentPageOverview: FunctionComponent = () => {
 				return;
 			}
 
-			await ContentPageService.deleteContentPage(contentToDelete.id);
+			await deleteContentPage({
+				pathParams: {
+					id: String(contentToDelete.id),
+				},
+			});
 			const queryClient = new QueryClient();
 			await queryClient.invalidateQueries([CONTENT_PAGE_QUERY_KEYS.OVERVIEW]);
 			AdminConfigManager.getConfig().services.toastService.showToast({

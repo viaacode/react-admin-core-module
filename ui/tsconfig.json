@@ -34,7 +34,8 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "openapi-codegen.config.ts"
   ],
   "exclude": [
     "node_modules"

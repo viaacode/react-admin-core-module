@@ -48,6 +48,7 @@ import { useTabs } from '~modules/shared/hooks/useTabs';
 import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { DefaultComponentProps } from '~modules/shared/types/components';
+import { useContentPagesControllerGetContentTypes } from '../../../../shared/generated/serverComponents';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
@@ -80,7 +81,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
-	const [contentTypes, isLoadingContentTypes] = useContentTypes();
+	const { data: contentTypes, isLoading: isLoadingContentTypes } =
+		useContentPagesControllerGetContentTypes({});
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
 
 	const user = AdminConfigManager.getConfig().user;
@@ -111,7 +113,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
-					message: tHtml('react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'),
+					message: tHtml(
+						'react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'
+					),
 					icon: 'search',
 				});
 				return;
@@ -566,7 +570,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			case 'metadata':
 				return (
 					<ContentEditForm
-						contentTypes={contentTypes}
+						contentTypes={contentTypes as any[]}
 						formErrors={formErrors}
 						contentPageInfo={contentPageState.currentContentPageInfo}
 						changeContentPageState={changeContentPageState}

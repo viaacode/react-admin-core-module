@@ -18,7 +18,6 @@ import {
 	has,
 	intersection,
 	keys,
-	omit,
 	set,
 	without,
 } from 'lodash';
@@ -42,10 +41,7 @@ import {
 	Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
-import {
-	App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
-	Lookup_App_Content_Block_Type_Enum,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
@@ -73,6 +69,7 @@ import {
 	GqlUser,
 	MediaItemResponse,
 } from '../content-pages.types';
+import { ContentPageTypeDto } from '../dto/content-page-type.dto';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import {
 	CONTENT_PAGE_QUERIES,
@@ -712,9 +709,7 @@ export class ContentPagesService {
 		return this.adaptContentPage(dbContentPage);
 	}
 
-	public async getContentTypes(): Promise<
-		{ value: Avo.ContentPage.Type; label: string }[] | null
-	> {
+	public async getContentTypes(): Promise<ContentPageTypeDto[]> {
 		try {
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['GetContentTypesQuery']
@@ -728,7 +723,7 @@ export class ContentPagesService {
 			return (contentTypes || []).map((obj) => ({
 				value: obj.value,
 				label: obj.description || (obj as any).comment,
-			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
+			})) as ContentPageTypeDto[];
 		} catch (err) {
 			throw CustomError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,

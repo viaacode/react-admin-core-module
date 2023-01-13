@@ -14,7 +14,7 @@ import {
 	Req,
 	UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash';
@@ -26,6 +26,7 @@ import {
 	ContentPageLabel,
 	DbContentPage,
 } from '../content-pages.types';
+import { ContentPageTypeDto } from '../dto/content-page-type.dto';
 
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
@@ -212,14 +213,19 @@ export class ContentPagesController {
 		);
 	}
 
+	@ApiOperation({ description: 'Get list of content page types' })
+	@ApiResponse({
+		status: 200,
+		description: 'List of content page types with their value and label',
+		type: ContentPageTypeDto,
+		isArray: true,
+	})
 	@Get('types')
 	@RequireAnyPermissions(
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 	)
-	public async getContentTypes(): Promise<
-		{ value: Avo.ContentPage.Type; label: string }[] | null
-	> {
+	public async getContentTypes(): Promise<ContentPageTypeDto[]> {
 		return this.contentPagesService.getContentTypes();
 	}
 

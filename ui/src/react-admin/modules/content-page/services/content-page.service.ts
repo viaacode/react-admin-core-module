@@ -379,12 +379,6 @@ export class ContentPageService {
 		}
 	}
 
-	public static async deleteContentPage(id: number | string): Promise<void> {
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/${id}`, {
-			method: 'DELETE',
-		});
-	}
-
 	public static getDescription(
 		contentPageInfo: ContentPageInfo,
 		sanitizePreset: SanitizePreset = SanitizePreset.link
@@ -431,14 +425,18 @@ export class ContentPageService {
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
-			const responseContent = await fetchWithLogoutJson<{ exists: boolean; title: string; id: number }>(
+			const responseContent = await fetchWithLogoutJson<{
+				exists: boolean;
+				title: string;
+				id: number;
+			}>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/path-exists',
 					query: {
 						path,
 					},
 				}),
-				{throwOnNullResponse: true}
+				{ throwOnNullResponse: true }
 			);
 			if (id === responseContent.id) {
 				return null;

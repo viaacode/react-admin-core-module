@@ -10,6 +10,7 @@ module.exports = {
 					ignore: ['@viaa', '@meemoo'],
 				},
 			],
-		}
+		},
 	},
+	ignorePatterns: ['src/shared/generated/*.ts'],
 };

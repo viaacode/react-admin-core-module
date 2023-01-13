@@ -29,7 +29,6 @@ import {
 	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
-import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
@@ -47,6 +46,7 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { DefaultComponentProps } from '~modules/shared/types/components';
+import { useContentPagesControllerDeleteContentPage } from '../../../../shared/generated/serverComponents';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -81,7 +81,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const [isPublishModalOpen, setIsPublishModalOpen] = useState<boolean>(false);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
 
-	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
+	const { mutateAsync: softDeleteContentPage } = useContentPagesControllerDeleteContentPage();
 
 	const [currentTab, setCurrentTab, tabs] = useTabs(
 		GET_CONTENT_PAGE_DETAIL_TABS(),
@@ -164,7 +164,11 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	const handleDelete = async () => {
 		try {
-			await softDeleteContentPage(id);
+			await softDeleteContentPage({
+				pathParams: {
+					id,
+				},
+			});
 
 			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -418,11 +422,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 		switch (currentTab) {
 			case 'inhoud':
-				return (
-					<ContentPageRenderer
-						contentPageInfo={contentPageInfo}
-					/>
-				);
+				return <ContentPageRenderer contentPageInfo={contentPageInfo} />;
 			case 'metadata':
 				return <ContentPageDetailMetaData contentPageInfo={contentPageInfo} />;
 			default:
