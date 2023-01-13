@@ -18,7 +18,6 @@ import {
 	has,
 	intersection,
 	keys,
-	omit,
 	set,
 	without,
 } from 'lodash';
@@ -42,10 +41,7 @@ import {
 	Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
-import {
-	App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
-	Lookup_App_Content_Block_Type_Enum,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
