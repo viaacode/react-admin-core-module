@@ -6,6 +6,7 @@ import {
 	OnApplicationBootstrap,
 } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { CustomError } from '../../shared/helpers/custom-error';
 import {
 	getTranslationFallback,
 	resolveTranslationVariables,
@@ -53,7 +54,18 @@ export class TranslationsService implements OnApplicationBootstrap {
 		key: string,
 		value: Record<string, string>,
 	): Promise<UpdateResponse> {
-		return this.siteVariablesService.updateSiteVariable(key, value);
+		try {
+			const response = await this.siteVariablesService.updateSiteVariable(
+				key,
+				value,
+			);
+			return response;
+		} catch (err) {
+			throw CustomError('Failed to update translation', err, {
+				key,
+				value,
+			});
+		}
 	}
 
 	public async onApplicationBootstrap() {

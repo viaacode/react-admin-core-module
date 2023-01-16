@@ -1,14 +1,7 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
-import {
-	Badge,
-	Button,
-	ButtonToolbar,
-	Flex,
-	Spacer,
-	TagInfo,
-} from '@viaa/avo2-components';
+import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 
@@ -101,7 +94,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(contentUserGroupIds) => {
 			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
-			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
+			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged in users
 			if (contentUserGroupIds.includes(SpecialPermissionGroups.loggedInUsers)) {
@@ -339,7 +332,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const renderPageContent = () => {
 		if (isLoadingNavigationItems || isLoadingNavigationItem) {
-			return <CenteredSpinner/>;
+			return <CenteredSpinner />;
 		}
 		if (isErrorNavigationItems || isErrorNavigationItem) {
 			return (

@@ -1,6 +1,9 @@
+import { kebabCase } from 'lodash-es';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import { TranslationContextName } from '~modules/translations/translations.types';
 
 export class TranslationsService {
 	private static getBaseUrl(): string {
@@ -20,15 +23,25 @@ export class TranslationsService {
 	 * @param name
 	 * @param translations
 	 */
-	static async updateTranslations(name: string, translations: any) {
+	static async updateTranslations(name: TranslationContextName, translations: any) {
 		try {
-			await fetchWithLogoutJson(this.getBaseUrl(), {
-				method: 'POST',
-				body: JSON.stringify({
-					key: name,
-					data: translations,
-				}),
-			});
+			const response = await fetchWithLogoutJson<{ affectedRows: number }>(
+				this.getBaseUrl(),
+				{
+					method: 'POST',
+					body: JSON.stringify({
+						key: isAvo() ? kebabCase(name) : name, // TODO at some point try to update translation site variable keys in the avo database to match hetarchief
+						data: translations,
+					}),
+				}
+			);
+			if (response.affectedRows !== 1) {
+				throw new CustomError(
+					'Failed to update translation. Number of affected rows was not 1',
+					null,
+					{ response }
+				);
+			}
 			await AdminConfigManager.getConfig().services.queryCache.clear('clearTranslations');
 		} catch (err) {
 			throw new CustomError('Failed to update translations', err, {
