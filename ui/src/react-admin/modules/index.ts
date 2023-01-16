@@ -15,7 +15,6 @@ export { default as ContentPageOverview } from './content-page/views/ContentPage
 export { default as ContentPageDetail } from './content-page/views/ContentPageDetail';
 export { default as ContentPageEdit } from '~modules/content-page/views/ContentPageEdit';
 export { default as ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-export type { ContentBlockErrors } from '~modules/content-page/types/content-block.types';
 export type { ColorOption } from './content-page/components/fields/ColorSelect/ColorSelect';
 export type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
@@ -26,10 +25,10 @@ export type { ContentPageEditProps } from '~modules/content-page/views/ContentPa
 export type {
 	MediaGridBlockState,
 	MediaGridBlockComponentState,
-} from '~modules/content-page/types/content-block.types';
-export type {
 	ContentBlockConfig,
 	DbContentBlock,
+	ImageTitleTextButtonBlockComponentState,
+	ContentBlockErrors,
 } from '~modules/content-page/types/content-block.types';
 export { CONTENT_PAGE_PATH } from './content-page/const/content-page.consts';
 export { CONTENT_BLOCK_CONFIG_MAP } from './content-page/const/content-block-config-map';
