@@ -1,4 +1,3 @@
-import sanitize from 'sanitize-html';
 import { SanitizePreset } from './presets';
 import { sanitizeHtml } from './index';
 
