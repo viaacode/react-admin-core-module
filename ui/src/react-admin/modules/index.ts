@@ -23,13 +23,17 @@ export type { ContentPageOverviewParams } from '~modules/content-page/components
 export type { ContentPageDetailProps } from '~modules/content-page/views/ContentPageDetail';
 export type { ContentPageEditProps } from '~modules/content-page/views/ContentPageEdit';
 export type {
-	MediaGridBlockState,
-	MediaGridBlockComponentState,
 	ContentBlockConfig,
-	DbContentBlock,
-	ImageTitleTextButtonBlockComponentState,
 	ContentBlockErrors,
-} from '~modules/content-page/types/content-block.types';
+	ContentBlockField,
+	DbContentBlock,
+	DefaultContentBlockState,
+	ImageTitleTextButtonBlockComponentState,
+	KlaarBlockComponentState,
+	MediaGridBlockComponentState,
+	MediaGridBlockState,
+} from './content-page/types/content-block.types';
+export { ContentBlockEditor } from './content-page/types/content-block.types';
 export { CONTENT_PAGE_PATH } from './content-page/const/content-page.consts';
 export { CONTENT_BLOCK_CONFIG_MAP } from './content-page/const/content-block-config-map';
 export { Color } from '~modules/content-page/types/content-block.types';
@@ -39,6 +43,16 @@ export {
 	convertDbContentPageToContentPageInfo,
 	convertDbContentPagesToContentPageInfos,
 } from '~modules/content-page/services/content-page.converters';
+export {
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	FILE_FIELD,
+	TEXT_FIELD,
+} from './content-page/components/blocks';
+export * from './content-page/components/wrappers';
+export { GET_ALIGN_OPTIONS } from './content-page/const/get-align-options';
+export { GET_BUTTON_TYPE_OPTIONS } from './content-page/const/get-button-type-options';
+export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-options';
 
 // Navigation
 export { default as NavigationOverview } from './navigation/views/NavigationOverview';

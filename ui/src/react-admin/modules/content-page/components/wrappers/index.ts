@@ -1,3 +1,4 @@
+export { default as BlockButtonsWrapper } from './ButtonsWrapper/ButtonsWrapper';
 export { default as BlockImageGridWrapper } from './ImageGridWrapper/ImageGridWrapper';
 export { default as BlockLogoGridWrapper } from './LogoGridWrapper/LogoGridWrapper';
 export { default as BlockUspGridWrapper } from './UspGridWrapper/UspGridWrapper';
@@ -9,3 +10,4 @@ export { default as MediaPlayerTitleTextButtonWrapper } from './MediaPlayerTitle
 export { default as MediaPlayerWrapper } from './MediaPlayerWrapper/MediaPlayerWrapper';
 export { default as PageOverviewWrapper } from './PageOverviewWrapper/PageOverviewWrapper';
 export { default as ProjectSpotlightWrapper } from './ProjectSpotlightWrapper/ProjectSpotlightWrapper';
+export { default as RichTextWrapper } from './RichTextWrapper/RichTextWrapper';

@@ -1,5 +1,5 @@
 import { BlockHeading, Button, Column, Grid, Image } from '@viaa/avo2-components';
-import classNames from 'classnames';
+import classNames from 'clsx';
 import React, { FC } from 'react';
 import { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
