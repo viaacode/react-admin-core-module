@@ -101,7 +101,7 @@ export interface DefaultContentBlockState {
 	headerHeight?: string; // css height string. eg: '20px' or '15%'
 	padding: PaddingFieldState;
 	margin: PaddingFieldState;
-	userGroupIds: number[];
+	userGroupIds: string[];
 	fullWidth?: boolean;
 	anchor?: string; // Contains an id that the user can enter, so they can link to this block using the anchor-block buttons
 }

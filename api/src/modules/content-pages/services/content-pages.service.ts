@@ -215,7 +215,7 @@ export class ContentPagesService {
 
 	public async getContentPagesForOverview(
 		inputQuery: ContentPageOverviewParams,
-		userGroupIds: (string | number)[],
+		userGroupIds: string[],
 	): Promise<
 		IPagination<DbContentPage> & { labelCounts: Record<string, number> }
 	> {
