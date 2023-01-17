@@ -36,3 +36,5 @@ export interface NavigationItem extends NavigationBar {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export type NavigationItemUpdate = Omit<NavigationItem, 'id' | 'createdAt' | 'updatedAt'>;

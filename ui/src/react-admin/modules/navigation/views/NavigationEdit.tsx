@@ -1,14 +1,7 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
-import {
-	Badge,
-	Button,
-	ButtonToolbar,
-	Flex,
-	Spacer,
-	TagInfo,
-} from '@viaa/avo2-components';
+import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 
@@ -77,16 +70,17 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
 			// Go back to overview if no menu items are present
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('modules/navigation/views/navigation-edit___error'),
-				description: tText(
+			showToast(
+				ToastType.ERROR,
+				tText('modules/navigation/views/navigation-edit___error'),
+				tText(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
 						menuName: navigationBarName,
 					}
-				),
-				type: ToastType.ERROR,
-			});
+				)
+			);
+
 			history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW);
 		}
 	}, [
@@ -169,13 +163,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 							},
 						})
 					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: tText('modules/navigation/views/navigation-edit___error'),
-						description: tText(
+
+					showToast(
+						ToastType.ERROR,
+						tText('modules/navigation/views/navigation-edit___error'),
+						tText(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
-						),
-						type: ToastType.ERROR,
-					});
+						)
+					);
 				});
 		}
 	}, [
@@ -204,6 +199,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	);
 
 	// Methods
+	const showToast = (type: ToastType, title: string, description: string): void => {
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title,
+			description,
+			type,
+		});
+	};
+
 	const handleChange = (
 		key: keyof NavigationItem | 'content',
 		value: ValueOf<NavigationItem> | PickerItem | null
@@ -226,13 +229,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const handleSave = async () => {
 		try {
 			if (!navigationItems) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___error'),
-					description: tText(
+				showToast(
+					ToastType.ERROR,
+					tText('modules/navigation/views/navigation-edit___error'),
+					tText(
 						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
-					),
-					type: ToastType.ERROR,
-				});
+					)
+				);
+
 				return;
 			}
 
@@ -270,16 +274,16 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					),
 					position: navigationItems.length,
 				});
+
 				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___success'),
-					description: tText(
-						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
-					),
-					type: ToastType.SUCCESS,
-				});
+
+				showToast(
+					ToastType.SUCCESS,
+					tText('modules/navigation/views/navigation-edit___success'),
+					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt')
+				);
 			} else {
 				// Update existing navigation item
 				if (isNil(navigationItemId)) {
@@ -295,16 +299,16 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						updated_at: new Date().toISOString(),
 					} as NavigationItem,
 				]);
+
 				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___success'),
-					description: tText(
-						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
-					),
-					type: ToastType.SUCCESS,
-				});
+
+				showToast(
+					ToastType.SUCCESS,
+					tText('modules/navigation/views/navigation-edit___success'),
+					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet')
+				);
 			}
 		} catch (err) {
 			console.error(
@@ -312,14 +316,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					menuForm: navigationItem,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('modules/navigation/views/navigation-edit___error'),
-				description: tText(
-					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
-				),
-				type: ToastType.ERROR,
-			});
+
+			showToast(
+				ToastType.ERROR,
+				tText('modules/navigation/views/navigation-edit___error'),
+				tText('admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt')
+			);
 		}
+
 		setIsSaving(false);
 	};
 
@@ -341,7 +345,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const renderPageContent = () => {
 		if (isLoadingNavigationItems || isLoadingNavigationItem) {
-			return <CenteredSpinner/>;
+			return <CenteredSpinner />;
 		}
 		if (isErrorNavigationItems || isErrorNavigationItem) {
 			return (
@@ -367,7 +371,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						<Button
 							disabled={isSaving}
 							label={tText('admin/menu/views/menu-detail___opslaan')}
-							onClick={() => handleSave()}
+							onClick={handleSave}
 						/>
 					</ButtonToolbar>
 				</AdminLayout.Actions>
