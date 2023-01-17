@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "2.0.23",
+  "version": "2.0.26",
   "private": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -8,10 +8,10 @@
   "scripts": {
     "preinstall": "npx force-resolutions",
     "prepare----disabled-since-it-is-throwing-errors": "husky install",
-    "start": "cross-env PORT=3400 dotenv -e .env/.env.local react-app-rewired start",
+    "dev": "cross-env PORT=3400 dotenv -e .env/.env.local react-app-rewired start",
     "prebuild": "rimraf dist",
     "build": "exitzero mv src/index-export.ts src/index.ts && rollup -c && mv src/index.ts src/index-export.ts",
-    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
+    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "npm run build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "build:analyze": "npm run build -- --config-analyze",
@@ -42,14 +42,14 @@
     "react-dom": "^17.0.2",
     "react-router": "^5.2.1",
     "dompurify": "^2.4.1",
-    "use-query-params": "1.2.3"
+    "use-query-params": "1.2.3",
+    "clsx": "^1.1.1"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "capture-stack-trace": "1.0.1",
-    "clsx": "^1.1.1",
     "copy-to-clipboard": "3.3.1",
     "date-fns": "2.28.0",
     "file-saver": "^2.0.5",

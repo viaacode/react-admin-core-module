@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classnames from 'clsx';
 import { Location } from 'history';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent, ReactElement } from 'react';
