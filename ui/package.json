@@ -11,7 +11,7 @@
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local react-app-rewired start",
     "prebuild": "rimraf dist",
     "build": "exitzero mv src/index-export.ts src/index.ts && rollup -c && mv src/index.ts src/index-export.ts",
-    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
+    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "npm run build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "build:analyze": "npm run build -- --config-analyze",

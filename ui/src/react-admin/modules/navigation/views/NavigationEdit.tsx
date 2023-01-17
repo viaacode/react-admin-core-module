@@ -1,5 +1,5 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
+import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -70,16 +70,17 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
 			// Go back to overview if no menu items are present
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('modules/navigation/views/navigation-edit___error'),
-				description: tText(
+			showToast(
+				ToastType.ERROR,
+				tText('modules/navigation/views/navigation-edit___error'),
+				tText(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
 						menuName: navigationBarName,
 					}
-				),
-				type: ToastType.ERROR,
-			});
+				)
+			);
+
 			history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW);
 		}
 	}, [
@@ -93,7 +94,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(contentUserGroupIds) => {
-			const navItemUserGroupIds: string[] = navigationItem.user_group_ids || [];
+			const navItemUserGroupIds: string[] = navigationItem.userGroupIds || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged in users
@@ -141,15 +142,15 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, navigationItem.user_group_ids, allUserGroups, tHtml]
+		[setPermissionWarning, navigationItem.userGroupIds, allUserGroups, tHtml]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
 	// TODO -- skipped for  now
 	useEffect(() => {
-		if (navigationItem.content_type === 'CONTENT_PAGE' && navigationItem.content_path) {
+		if (navigationItem.contentType === 'CONTENT_PAGE' && navigationItem.contentPath) {
 			// Check if permissions are stricter than the permissions on the content_page
-			ContentPageService.getUserGroupsWithAccessToContentPage(navigationItem.content_path)
+			ContentPageService.getUserGroupsWithAccessToContentPage(navigationItem.contentPath)
 				.then((userGroupIds) => {
 					checkMenuItemContentPagePermissionsMismatch(userGroupIds);
 				})
@@ -158,23 +159,24 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						new CustomError('Failed to get permissions from page', err, {
 							query: 'GET_PERMISSIONS_FROM_CONTENT_PAGE_BY_PATH',
 							variables: {
-								path: navigationItem.content_path,
+								path: navigationItem.contentPath,
 							},
 						})
 					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: tText('modules/navigation/views/navigation-edit___error'),
-						description: tText(
+
+					showToast(
+						ToastType.ERROR,
+						tText('modules/navigation/views/navigation-edit___error'),
+						tText(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
-						),
-						type: ToastType.ERROR,
-					});
+						)
+					);
 				});
 		}
 	}, [
-		navigationItem.content_type,
-		navigationItem.content_path,
-		navigationItem.user_group_ids,
+		navigationItem.contentType,
+		navigationItem.contentPath,
+		navigationItem.userGroupIds,
 		checkMenuItemContentPagePermissionsMismatch,
 		tText,
 	]);
@@ -197,6 +199,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	);
 
 	// Methods
+	const showToast = (type: ToastType, title: string, description: string): void => {
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title,
+			description,
+			type,
+		});
+	};
+
 	const handleChange = (
 		key: keyof NavigationItem | 'content',
 		value: ValueOf<NavigationItem> | PickerItem | null
@@ -204,9 +214,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (key === 'content') {
 			setNavigationItem({
 				...navigationItem,
-				content_type: get(value, 'type', null),
-				content_path: get(value, 'value', null),
-				link_target: get(value, 'target', '_self'),
+				contentType: get(value, 'type', null),
+				contentPath: get(value, 'value', null),
+				linkTarget: get(value, 'target', '_self'),
 			});
 		} else {
 			setNavigationItem({
@@ -219,13 +229,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const handleSave = async () => {
 		try {
 			if (!navigationItems) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___error'),
-					description: tText(
+				showToast(
+					ToastType.ERROR,
+					tText('modules/navigation/views/navigation-edit___error'),
+					tText(
 						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
-					),
-					type: ToastType.ERROR,
-				});
+					)
+				);
+
 				return;
 			}
 
@@ -241,16 +252,17 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			}
 
 			const menuItem: Partial<NavigationItem> = {
-				icon_name: navigationItem.icon_name,
+				iconName: navigationItem.iconName,
 				label: navigationItem.label,
-				content_path: navigationItem.content_path,
-				content_type: navigationItem.content_type,
-				link_target: navigationItem.link_target,
-				user_group_ids: navigationItem.user_group_ids,
+				contentPath: navigationItem.contentPath,
+				contentType: navigationItem.contentType,
+				linkTarget: navigationItem.linkTarget,
+				userGroupIds: navigationItem.userGroupIds,
 				placement: navigationItem.placement,
 				tooltip: navigationItem.tooltip,
 			};
 
+			// Create new navigation item
 			if (pageType === 'create') {
 				await NavigationService.insertNavigationItem({
 					...menuItem,
@@ -262,17 +274,18 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					),
 					position: navigationItems.length,
 				});
+
 				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___success'),
-					description: tText(
-						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
-					),
-					type: ToastType.SUCCESS,
-				});
+
+				showToast(
+					ToastType.SUCCESS,
+					tText('modules/navigation/views/navigation-edit___success'),
+					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt')
+				);
 			} else {
+				// Update existing navigation item
 				if (isNil(navigationItemId)) {
 					throw new CustomError('cannot update menu item because id is undefined', null, {
 						navigationItemId,
@@ -286,16 +299,16 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						updated_at: new Date().toISOString(),
 					} as NavigationItem,
 				]);
+
 				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/navigation/views/navigation-edit___success'),
-					description: tText(
-						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
-					),
-					type: ToastType.SUCCESS,
-				});
+
+				showToast(
+					ToastType.SUCCESS,
+					tText('modules/navigation/views/navigation-edit___success'),
+					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet')
+				);
 			}
 		} catch (err) {
 			console.error(
@@ -303,14 +316,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					menuForm: navigationItem,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('modules/navigation/views/navigation-edit___error'),
-				description: tText(
-					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
-				),
-				type: ToastType.ERROR,
-			});
+
+			showToast(
+				ToastType.ERROR,
+				tText('modules/navigation/views/navigation-edit___error'),
+				tText('admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt')
+			);
 		}
+
 		setIsSaving(false);
 	};
 
@@ -321,8 +334,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			errors.placement = tText('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
 		}
 
-		if (!navigationItem.content_path) {
-			errors.content_path = tText('admin/menu/views/menu-edit___link-is-verplicht');
+		if (!navigationItem.contentPath) {
+			errors.contentPath = tText('admin/menu/views/menu-edit___link-is-verplicht');
 		}
 
 		setFormErrors(errors);
@@ -358,7 +371,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 						<Button
 							disabled={isSaving}
 							label={tText('admin/menu/views/menu-detail___opslaan')}
-							onClick={() => handleSave()}
+							onClick={handleSave}
 						/>
 					</ButtonToolbar>
 				</AdminLayout.Actions>

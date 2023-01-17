@@ -59,6 +59,7 @@ export class AdminNavigationsService {
 			tooltip: navigationItem?.tooltip,
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
+			user_group_ids: navigationItem?.userGroupIds,
 		};
 	}
 
