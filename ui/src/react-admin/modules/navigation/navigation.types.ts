@@ -9,10 +9,10 @@ export interface NavigationEditFormErrorState {
 	placement?: string;
 	icon?: string;
 	label?: string;
-	content_path?: string;
-	content_type?: string;
-	link_target?: string;
-	user_group_ids?: string;
+	contentPath?: string;
+	contentType?: string;
+	linkTarget?: string;
+	userGroupIds?: string;
 	tooltip?: string;
 }
 
@@ -26,13 +26,15 @@ export interface NavigationBar {
 // NavigationItem extends from NavigationBar because we opted to only use one table to save both entities
 // Might be cleaner to split into 2 tables in the future
 export interface NavigationItem extends NavigationBar {
+	iconName: string;
 	label: string | null;
-	icon_name: string;
-	user_group_ids: string[] | null;
-	content_type: Avo.Core.ContentPickerType | null;
-	content_path: string | null;
-	link_target: '_blank' | '_self' | null;
+	userGroupIds: string[] | null;
+	contentType: Avo.Core.ContentPickerType | null;
+	contentPath: string | null;
+	linkTarget: '_blank' | '_self' | null;
 	position: number;
-	created_at: string;
-	updated_at: string;
+	createdAt: string;
+	updatedAt: string;
 }
+
+export type NavigationItemUpdate = Omit<NavigationItem, 'id' | 'createdAt' | 'updatedAt'>;

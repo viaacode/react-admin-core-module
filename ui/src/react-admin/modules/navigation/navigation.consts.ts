@@ -26,13 +26,14 @@ export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem> => ({
 	placement,
 	description: '',
-	icon_name: '',
+	iconName: '',
 	label: '',
-	content_type: null,
-	content_path: null,
-	link_target: '_self',
-	user_group_ids: [],
+	contentType: null,
+	contentPath: null,
+	linkTarget: '_self',
+	userGroupIds: [],
 	tooltip: '',
+	position: 0,
 });
 
 export const GET_PAGE_TYPES_LANG = (): Record<string, ReactNode> => ({

@@ -88,10 +88,10 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				>
 					<IconPicker
 						options={GET_ADMIN_ICON_OPTIONS()}
-						onChange={(option: any) => onChange('icon_name', get(option, 'value', ''))}
+						onChange={(option: any) => onChange('iconName', get(option, 'value', ''))}
 						value={GET_ADMIN_ICON_OPTIONS().find(
 							(option: ReactSelectOption<string>) =>
-								option.value === formState.icon_name
+								option.value === formState.iconName
 						)}
 					/>
 				</FormGroup>
@@ -115,7 +115,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				/>
 			</FormGroup>
 			<FormGroup
-				error={formErrors.content_path}
+				error={formErrors.contentPath}
 				label={tText('admin/menu/components/menu-edit-form/menu-edit-form___link')}
 				required
 			>
@@ -129,11 +129,11 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 						onChange('content', item);
 					}}
 					initialValue={
-						formState.content_type && formState.content_path
+						formState.contentType && formState.contentPath
 							? {
-									type: formState.content_type as ContentPickerType,
-									label: formState.content_path.toString(),
-									value: formState.content_path.toString(),
+									type: formState.contentType as ContentPickerType,
+									label: formState.contentPath.toString(),
+									value: formState.contentPath.toString(),
 							  }
 							: undefined
 					}
@@ -143,11 +143,11 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 				label={tText(
 					'admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor'
 				)}
-				error={formErrors.user_group_ids}
+				error={formErrors.userGroupIds}
 				placeholder={tText('admin/menu/components/menu-edit-form/menu-edit-form___niemand')}
-				values={formState.user_group_ids || []}
+				values={formState.userGroupIds || []}
 				required={false}
-				onChange={(userGroupIds: string[]) => onChange('user_group_ids', userGroupIds)}
+				onChange={(userGroupIds: string[]) => onChange('userGroupIds', userGroupIds)}
 			/>
 			{permissionWarning && <Alert message={permissionWarning} type="danger" />}
 		</Form>
