@@ -6,56 +6,56 @@ import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 
 const mockNavigationElement1 = {
-	contentPath: '/gebruiksvoorwaarden',
-	contentType: 'INTERNAL_LINK',
-	linkTarget: null,
+	content_path: '/gebruiksvoorwaarden',
+	content_type: 'INTERNAL_LINK',
+	link_target: null,
 	placement: 'footer_center',
 	position: 1,
 	id: '42555c7e-1cf7-4031-bb17-e6ca57eaab64',
-	iconName: '',
-	userGroupIds: [
+	icon_name: '',
+	user_group_ids: [
 		SpecialPermissionGroups.loggedOutUsers,
 		SpecialPermissionGroups.loggedInUsers,
 	],
 	label: 'Gebruikersvoorwaarden',
-	updatedAt: '2022-02-21T16:36:06.045845+00:00',
+	updated_at: '2022-02-21T16:36:06.045845+00:00',
 	description: 'Navigatie balk in de footer gecentreerd',
-	createdAt: '2022-02-21T16:36:06.045845+00:00',
-	contentId: null,
+	created_at: '2022-02-21T16:36:06.045845+00:00',
+	content_id: null,
 	tooltip: null,
 };
 
 const mockNavigationElement2 = {
-	contentPath: '/over-leeszalen',
-	contentType: 'INTERNAL_LINK',
-	linkTarget: null,
+	content_path: '/over-leeszalen',
+	content_type: 'INTERNAL_LINK',
+	link_target: null,
 	placement: 'header_left',
 	position: 1,
 	id: '7f8c1140-d52e-4f12-8437-6176392f64db',
-	iconName: '',
-	userGroupIds: [SpecialPermissionGroups.loggedInUsers],
+	icon_name: '',
+	user_group_ids: [SpecialPermissionGroups.loggedInUsers],
 	label: 'Over de leeszalen',
-	updatedAt: '2022-02-21T16:35:08.635696+00:00',
+	updated_at: '2022-02-21T16:35:08.635696+00:00',
 	description: 'Hoofd navigatie balk bovenaan de pagina linker zijde',
-	createdAt: '2022-02-21T16:35:08.635696+00:00',
-	contentId: null,
+	created_at: '2022-02-21T16:35:08.635696+00:00',
+	content_id: null,
 	tooltip: null,
 };
 
 const mockNavigationElement3 = {
-	contentPath: '/faq',
-	contentType: 'INTERNAL_LINK',
-	linkTarget: null,
+	content_path: '/faq',
+	content_type: 'INTERNAL_LINK',
+	link_target: null,
 	placement: 'header_left',
 	position: 2,
 	id: 'f3b279b0-8c30-48cd-82ce-7b184180d890',
-	iconName: '',
-	userGroupIds: null,
+	icon_name: '',
+	user_group_ids: null,
 	label: 'Vaak gestelde vragen',
-	updatedAt: '2022-02-21T16:35:25.554254+00:00',
+	updated_at: '2022-02-21T16:35:25.554254+00:00',
 	description: 'Hoofd navigatie balk bovenaan de pagina linker zijde',
-	createdAt: '2022-02-21T16:35:25.554254+00:00',
-	contentId: null,
+	created_at: '2022-02-21T16:35:25.554254+00:00',
+	content_id: null,
 	tooltip: null,
 };
 
@@ -91,7 +91,7 @@ describe('NavigationsService', () => {
 		expect(navigationInfo).toBeDefined();
 		expect(navigationInfo.id).toEqual(mockNavigationElement1.id);
 		expect(navigationInfo.contentPath).toEqual(
-			mockNavigationElement1.contentPath,
+			mockNavigationElement1.content_path,
 		);
 	});
 
@@ -150,7 +150,7 @@ describe('NavigationsService', () => {
 			const mockData: NavigationQueryTypes['InsertNavigationItemMutation'] = {
 				insert_app_navigation_one: {
 					id: '1',
-					iconName: 'plus',
+					icon_name: 'plus',
 				} as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']['insert_app_navigation_one'],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
@@ -171,7 +171,7 @@ describe('NavigationsService', () => {
 				{
 					update_app_navigation_by_pk: {
 						id: '1',
-						iconName: 'plus',
+						icon_name: 'plus',
 					} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
 				};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });

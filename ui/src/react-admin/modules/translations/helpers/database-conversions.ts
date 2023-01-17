@@ -1,6 +1,6 @@
 import { isAvo } from '~modules/shared/helpers/is-avo';
-import { Translation } from '~modules/translations/translations.types';
-import { flatten, fromPairs, groupBy, map } from 'lodash-es';
+import { Translation, TranslationContextName } from '~modules/translations/translations.types';
+import { flatten, fromPairs, groupBy, map, snakeCase } from 'lodash-es';
 
 export const getKeyPrefix = () => (isAvo() ? 'translations-' : 'TRANSLATIONS_');
 
@@ -13,7 +13,7 @@ export function convertFromDatabaseToList(
 			// convert single object-based translations to array-based translations where each item has a key and a value
 			return Object.entries(entry[1]).map((entryPair): Translation => {
 				return {
-					context: entry[0],
+					context: snakeCase(entry[0]).toUpperCase() as TranslationContextName,
 					key: entryPair[0],
 					label: `${entry[0].replace(getKeyPrefix(), '')}/${entryPair[0]}`,
 					value: entryPair[1] as string,

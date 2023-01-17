@@ -1,5 +1,6 @@
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
-import { orderBy } from 'lodash-es';
+import { orderBy, snakeCase } from 'lodash-es';
+import { decode as decodeHtmlEntities } from 'html-entities';
 import React, {
 	FunctionComponent,
 	MouseEvent,
@@ -12,7 +13,11 @@ import React, {
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 
-import { Translation, TranslationsOverviewProps } from '../translations.types';
+import {
+	Translation,
+	TranslationContextName,
+	TranslationsOverviewProps,
+} from '../translations.types';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { OrderDirection } from '~modules/shared/types';
 import { AdminConfigManager } from '~core/config';
@@ -159,10 +164,16 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				(dbTrans) => dbTrans.name === activeTranslation.context
 			);
 
+			if (!dbTranslationContext?.value) {
+				throw new CustomError('Failed to find translation context', null, {
+					context: activeTranslation.context,
+				});
+			}
+
 			// Only update the translations in the context that was changed
 			await TranslationsService.updateTranslations(
 				activeTranslation.context,
-				dbTranslationContext
+				dbTranslationContext?.value
 			);
 
 			await getTranslations();
@@ -190,7 +201,12 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	};
 
 	const handleRowClick = (_event: MouseEvent<any, any>, translationRow: Row<Translation>) => {
-		setActiveTranslation(translationRow.original);
+		setActiveTranslation({
+			...translationRow.original,
+			context: snakeCase(
+				translationRow.original.context
+			).toUpperCase() as TranslationContextName,
+		});
 	};
 
 	const handlePageChange = (newPageZeroBased: number) => {
@@ -379,7 +395,11 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				<RichTextEditor
 					onChange={setActiveTranslationEditorState}
 					state={activeTranslationEditorState || undefined}
-					initialHtml={activeTranslation.value}
+					initialHtml={
+						activeTranslation.value.includes('<')
+							? activeTranslation.value
+							: decodeHtmlEntities(activeTranslation.value)
+					}
 					controls={RICH_TEXT_EDITOR_OPTIONS}
 				></RichTextEditor>
 			</>

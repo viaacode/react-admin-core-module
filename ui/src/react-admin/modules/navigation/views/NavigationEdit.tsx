@@ -95,7 +95,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(contentUserGroupIds) => {
 			const navItemUserGroupIds: string[] = navigationItem.userGroupIds || [];
-			const allUserGroupIds: string[] = allUserGroups.map((ug) => ug.value as string);
+			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
 			// Add all user groups to content page user groups if content page is accessible by special user group: logged in users
 			if (contentUserGroupIds.includes(SpecialPermissionGroups.loggedInUsers)) {
