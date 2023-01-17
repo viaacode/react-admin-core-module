@@ -23,7 +23,6 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { buildLink } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~modules/shared/consts/user.const';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
@@ -139,7 +138,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH().COLLECTIONS_OVERVIEW,
+						AdminConfigManager.getConfig().routes.COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -157,7 +156,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH().COLLECTIONS_OVERVIEW,
+						AdminConfigManager.getConfig().routes.COLLECTIONS_OVERVIEW,
 						{},
 						{
 							is_public: '0',
@@ -175,7 +174,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH().CONTENT_PAGE.OVERVIEW,
+						AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW,
 						{},
 						{
 							is_public: '1',
@@ -193,7 +192,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						ADMIN_PATH().CONTENT_PAGE.OVERVIEW,
+						AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW,
 						{},
 						{
 							is_public: '0',

@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Patch, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+	Put,
+	Query,
+} from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageLabel, LabelObj } from '../content-pages';
 import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-request.dto';
@@ -7,11 +17,13 @@ import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-req
 import { CustomError } from '../shared/helpers/custom-error';
 import { ContentPageLabelsService } from './content-page-labels.service';
 import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
+import { ContentPageLabelDto } from './dto/content-page-label.dto';
 
 @ApiTags('ContentPageLabels')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')
 export class ContentPageLabelsController {
-	constructor(private contentPageLabelService: ContentPageLabelsService) {}
+	constructor(private contentPageLabelService: ContentPageLabelsService) {
+	}
 
 	@Get('')
 	public async fetchContentPageLabels(
@@ -44,10 +56,34 @@ export class ContentPageLabelsController {
 		}
 	}
 
+	@Get(':id')
+	public async fetchContentPageLabelById(
+		@Param('id') id: string,
+	): Promise<ContentPageLabel> {
+		try {
+			return this.contentPageLabelService.fetchContentPageLabelById(id);
+		} catch (err) {
+			throw CustomError(
+				'Failed to get content page label from the database',
+				err,
+				{
+					id,
+				},
+			);
+		}
+	}
+
+	@ApiOperation({ description: 'Insert one content page label' })
+	@ApiResponse({
+		status: 200,
+		description: 'Returns the id of the newly created content page label',
+		type: ContentPageLabelDto,
+		isArray: false,
+	})
 	@Put('')
 	public async insertContentPageLabel(
-		@Body() contentPageLabel: ContentPageLabel,
-	): Promise<number> {
+		@Body() contentPageLabel: ContentPageLabelDto,
+	): Promise<ContentPageLabelDto> {
 		try {
 			return this.contentPageLabelService.insertContentPageLabel(
 				contentPageLabel,
@@ -80,6 +116,31 @@ export class ContentPageLabelsController {
 		}
 	}
 
+	@Delete(':id')
+	public async deleteContentPageLabelById(
+		@Param('id') id: string,
+	): Promise<{ message: 'success' }> {
+		try {
+			await this.contentPageLabelService.deleteContentPageLabel(id);
+			return { message: 'success' };
+		} catch (err) {
+			throw CustomError(
+				'Failed to delete the content page label from the database',
+				err,
+				{
+					id,
+				},
+			);
+		}
+	}
+
+	@ApiOperation({ description: 'Get content page labels with filters' })
+	@ApiResponse({
+		status: 200,
+		description: 'Returns list of label objects',
+		type: ContentPageLabelDto,
+		isArray: true,
+	})
 	@Post('')
 	async getContentPageLabelsByType(
 		@Body() body: ContentLabelsRequestDto,

@@ -8,10 +8,7 @@ import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
 import { buildLink, navigate } from '~modules/shared/helpers/link';
-import {
-	GET_NAVIGATION_OVERVIEW_TABLE_COLS,
-	NAVIGATION_PATH,
-} from '~modules/navigation/navigation.consts';
+import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
 import { Loader } from '~modules/shared/components';
 import { AdminLayout } from '~modules/shared/layouts';
 
@@ -35,7 +32,7 @@ const NavigationOverview: FunctionComponent = () => {
 			case 'placement':
 				return (
 					<Link
-						to={buildLink(NAVIGATION_PATH().NAVIGATION_DETAIL, {
+						to={buildLink(AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
 							navigationBarId: placement,
 						})}
 					>
@@ -48,9 +45,13 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="eye"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH().NAVIGATION_DETAIL, {
-									navigationBarId: placement,
-								})
+								navigate(
+									history,
+									AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL,
+									{
+										navigationBarId: placement,
+									}
+								)
 							}
 							size="small"
 							title={tText(
@@ -64,9 +65,13 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							icon="plus"
 							onClick={() =>
-								navigate(history, NAVIGATION_PATH().NAVIGATION_ITEM_CREATE, {
-									navigationBarId: placement,
-								})
+								navigate(
+									history,
+									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE,
+									{
+										navigationBarId: placement,
+									}
+								)
 							}
 							size="small"
 							title={tText(
@@ -110,7 +115,11 @@ const NavigationOverview: FunctionComponent = () => {
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}
-							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_CREATE)}
+							onClick={() =>
+								history.push(
+									AdminConfigManager.getConfig().routes.NAVIGATION_CREATE
+								)
+							}
 						/>
 					</ButtonToolbar>
 				</AdminLayout.Actions>

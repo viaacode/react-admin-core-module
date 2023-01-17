@@ -1,11 +1,11 @@
 import { FC, ReactNode } from 'react';
 import { Route, useParams } from 'react-router-dom';
+import { AdminConfigManager } from '~core/config';
 import { UserDetail, UserEdit } from '~modules/user/views';
 
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { USER_PATH } from '~modules/user/user.routes';
 
 const UserOverviewPage: FC = () => {
 	const { tText } = useTranslation();
@@ -34,22 +34,22 @@ const UserDetailPage: FC = () => {
 export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={USER_PATH().USER_OVERVIEW}
+			key={AdminConfigManager.getConfig().routes.USER_OVERVIEW}
 			render={() => <UserOverviewPage />}
 			exact
-			path={USER_PATH().USER_OVERVIEW}
+			path={AdminConfigManager.getConfig().routes.USER_OVERVIEW}
 		/>,
 		<Route
-			key={USER_PATH().USER_DETAIL}
+			key={AdminConfigManager.getConfig().routes.USER_DETAIL}
 			render={() => <UserDetailPage />}
 			exact
-			path={USER_PATH().USER_DETAIL}
+			path={AdminConfigManager.getConfig().routes.USER_DETAIL}
 		/>,
 		<Route
-			key={USER_PATH().USER_EDIT}
+			key={AdminConfigManager.getConfig().routes.USER_EDIT}
 			render={() => <UserEditPage />}
 			exact
-			path={USER_PATH().USER_EDIT}
+			path={AdminConfigManager.getConfig().routes.USER_EDIT}
 		/>,
 	];
 };

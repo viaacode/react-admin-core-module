@@ -11,7 +11,6 @@ import {
 	Table,
 } from '@viaa/avo2-components';
 
-import { NAVIGATION_PATH } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
 
 import './NavigationDetail.scss';
@@ -204,10 +203,13 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 						<Button
 							icon="edit-2"
 							onClick={() =>
-								handleNavigate(NAVIGATION_PATH().NAVIGATION_ITEM_EDIT, {
-									navigationBarId,
-									navigationItemId: String(rowData.id),
-								})
+								handleNavigate(
+									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_EDIT,
+									{
+										navigationBarId,
+										navigationItemId: String(rowData.id),
+									}
+								)
 							}
 							title={tText(
 								'admin/menu/views/menu-detail___bewerk-dit-navigatie-item'
@@ -265,9 +267,12 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							icon="plus"
 							label={tText('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
-								handleNavigate(NAVIGATION_PATH().NAVIGATION_ITEM_CREATE, {
-									navigationBarId,
-								})
+								handleNavigate(
+									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE,
+									{
+										navigationBarId,
+									}
+								)
 							}
 							type="primary"
 						/>
@@ -307,7 +312,11 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
-							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW)}
+							onClick={() =>
+								history.push(
+									AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW
+								)
+							}
 							type="tertiary"
 						/>
 						<Button

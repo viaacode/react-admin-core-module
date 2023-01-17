@@ -59,7 +59,10 @@ export class PermissionService {
 			return true; // If no required permissions are passed, then the user is allowed to see the item/page
 		}
 		if (!user) {
-			console.warn('Checking permissions without user object', { permissionList, user });
+			console.warn('Checking permissions without user object', {
+				permissionList,
+				user,
+			});
 			return false;
 		}
 		// Check every permission and return true for the first permission that returns true (lazy eval)

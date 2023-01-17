@@ -65,7 +65,6 @@ import {
 	ContentTableState,
 } from '../types/content-pages.types';
 import {
-	CONTENT_PAGE_PATH,
 	CONTENT_PAGE_QUERY_KEYS,
 	GET_OVERVIEW_COLUMNS,
 	PAGES_PER_PAGE,
@@ -309,10 +308,9 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'title':
 				return (
 					<Link
-						to={buildLink(
-							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
-							{ id }
-						)}
+						to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+							id,
+						})}
 					>
 						{truncateTableValue(title)}
 					</Link>
@@ -410,8 +408,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					<ButtonToolbar>
 						<Link
 							to={buildLink(
-								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts)
-									.DETAIL,
+								AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL,
 								{ id }
 							)}
 						>
@@ -453,10 +450,9 @@ const ContentPageOverview: FunctionComponent = () => {
 							disabled
 						/>
 						<Link
-							to={buildLink(
-								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
-								{ id }
-							)}
+							to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT, {
+								id,
+							})}
 						>
 							<Button
 								icon="edit"
@@ -513,7 +509,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		// 				title={tText(
 		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 		// 				)}
-		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).CREATE)}
+		// 				onClick={() => Config.getConfig().services.router.push(AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE)}
 		// 			/>
 		// 		</Spacer>
 		// 	)}

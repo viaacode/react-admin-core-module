@@ -8,7 +8,6 @@ import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { MediaListItem } from '@viaa/avo2-components';
-import { ROUTE_PARTS } from '~modules/shared';
 import { FlowPlayerWrapperProps } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 
 export enum ToastType {
@@ -119,7 +118,36 @@ export interface AdminConfig {
 		proxyUrl: string;
 	};
 	user: CommonUser;
-	route_parts: typeof ROUTE_PARTS;
+	routes: {
+		BUNDLE_DETAIL: string;
+		BUNDLE_EDIT: string;
+		COLLECTIONS_OVERVIEW: string;
+		COLLECTION_DETAIL: string;
+		CONTENT_PAGE_CREATE: string;
+		CONTENT_PAGE_DETAIL: string;
+		CONTENT_PAGE_EDIT: string;
+		CONTENT_PAGE_LABEL_CREATE: string;
+		CONTENT_PAGE_LABEL_DETAIL: string;
+		CONTENT_PAGE_LABEL_EDIT: string;
+		CONTENT_PAGE_LABEL_OVERVIEW: string;
+		CONTENT_PAGE_OVERVIEW: string;
+		ITEM_DETAIL: string;
+		NAVIGATION_CREATE: string;
+		NAVIGATION_DETAIL: string;
+		NAVIGATION_ITEM_CREATE: string;
+		NAVIGATION_ITEM_EDIT: string;
+		NAVIGATION_OVERVIEW: string;
+		NEWS: string;
+		TRANSLATIONS_OVERVIEW: string;
+		USER_DETAIL: string;
+		USER_EDIT: string;
+		USER_GROUP_CREATE: string;
+		USER_GROUP_DETAIL: string;
+		USER_GROUP_EDIT: string;
+		USER_GROUP_OVERVIEW: string;
+		USER_OVERVIEW: string;
+		SEARCH: string;
+	};
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
 	};

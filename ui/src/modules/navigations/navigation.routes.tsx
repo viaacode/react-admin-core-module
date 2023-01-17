@@ -1,39 +1,39 @@
 import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
-import { NAVIGATION_PATH } from '~modules/navigation/navigation.consts';
+import { AdminConfigManager } from '~core/config';
 import NavigationOverviewPage from './NavigationOverviewPage';
 import NavigationDetailPage from './NavigationDetailPage';
 import NavigationEditPage from './NavigationEditPage';
 
 export const renderAdminNavigationRoutes = (): ReactNode[] => [
 	<Route
-		key={NAVIGATION_PATH().NAVIGATION_OVERVIEW}
+		key={AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW}
 		render={() => <NavigationOverviewPage />}
 		exact
-		path={NAVIGATION_PATH().NAVIGATION_OVERVIEW}
+		path={AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW}
 	/>,
 	<Route
-		key={NAVIGATION_PATH().NAVIGATION_CREATE}
+		key={AdminConfigManager.getConfig().routes.NAVIGATION_CREATE}
 		render={() => <NavigationEditPage />}
 		exact
-		path={NAVIGATION_PATH().NAVIGATION_CREATE}
+		path={AdminConfigManager.getConfig().routes.NAVIGATION_CREATE}
 	/>,
 	<Route
-		key={NAVIGATION_PATH().NAVIGATION_DETAIL}
+		key={AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL}
 		render={() => <NavigationDetailPage />}
 		exact
-		path={NAVIGATION_PATH().NAVIGATION_DETAIL}
+		path={AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL}
 	/>,
 	<Route
-		key={NAVIGATION_PATH().NAVIGATION_ITEM_CREATE}
+		key={AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE}
 		render={() => <NavigationEditPage />}
 		exact
-		path={NAVIGATION_PATH().NAVIGATION_ITEM_CREATE}
+		path={AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE}
 	/>,
 	<Route
-		key={NAVIGATION_PATH().NAVIGATION_ITEM_EDIT}
+		key={AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_EDIT}
 		render={() => <NavigationEditPage />}
 		exact
-		path={NAVIGATION_PATH().NAVIGATION_ITEM_EDIT}
+		path={AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_EDIT}
 	/>,
 ];

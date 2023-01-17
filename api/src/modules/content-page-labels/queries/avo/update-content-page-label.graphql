@@ -6,6 +6,13 @@ mutation updateContentPageLabel(
 		where: { id: { _eq: $contentPageLabelId } }
 		_set: $contentPageLabel
 	) {
-		affected_rows
+		returning {
+			label
+			id
+			content_type
+			link_to
+			created_at
+			updated_at
+		}
 	}
 }

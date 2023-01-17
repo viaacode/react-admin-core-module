@@ -38,7 +38,6 @@ import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
 import { formatDate, normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
 import { renderAvatar } from '../../shared/helpers/formatters/avatar';
 import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
-import { USER_PATH } from '../user.routes';
 
 export interface UserDetailProps {
 	id: string | null;
@@ -165,7 +164,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 			case 'edit':
 				navigate(
 					history,
-					buildLink(USER_PATH(AdminConfigManager.getConfig().route_parts).USER_EDIT, {
+					buildLink(AdminConfigManager.getConfig().routes.USER_EDIT, {
 						id: id as string,
 					})
 				);
@@ -396,7 +395,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 
 	// Executed when the user was deleted
 	const deleteCallback = () =>
-		navigate(history, USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW);
+		navigate(history, AdminConfigManager.getConfig().routes.USER_OVERVIEW);
 
 	const renderUserDetailPage = () => {
 		const isBlocked = storedProfile?.isBlocked;

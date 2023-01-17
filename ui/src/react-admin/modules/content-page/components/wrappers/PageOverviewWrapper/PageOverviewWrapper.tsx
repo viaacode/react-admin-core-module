@@ -26,7 +26,6 @@ import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { CheckboxListParam } from '~modules/shared/helpers/query-string-converters';
 import { useDebounce } from '~modules/shared/hooks/useDebounce';
@@ -320,7 +319,9 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				buttonAltTitle={buttonAltTitle}
 				focusedPage={focusedPage ? convertToPageOverviewContentPage(focusedPage) : null}
 				getLabelLink={(label: string) => {
-					return `/${ROUTE_PARTS.news}?label=${encodeURIComponent(label)}`;
+					return `/${
+						AdminConfigManager.getConfig().routes.NEWS
+					}?label=${encodeURIComponent(label)}`;
 				}}
 				renderLink={renderLink}
 			/>

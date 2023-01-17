@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 
 import {

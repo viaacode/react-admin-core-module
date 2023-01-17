@@ -2,7 +2,6 @@ import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-componen
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 
-import { BUNDLE_PATH } from '../consts/bundle.const';
 import { APP_PATH } from '../consts/routes.consts';
 
 import { insideIframe } from './inside-iframe';
@@ -140,15 +139,18 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				break;
 
 			case 'COLLECTION': {
-				const collectionUrl = buildLink(APP_PATH.COLLECTION_DETAIL.route, {
-					id: value as string,
-				});
+				const collectionUrl = buildLink(
+					AdminConfigManager.getConfig().routes.COLLECTION_DETAIL,
+					{
+						id: value as string,
+					}
+				);
 				navigateToAbsoluteOrRelativeUrl(collectionUrl, history, resolvedTarget);
 				break;
 			}
 
 			case 'ITEM': {
-				const itemUrl = buildLink(APP_PATH.ITEM_DETAIL.route, {
+				const itemUrl = buildLink(AdminConfigManager.getConfig().routes.ITEM_DETAIL, {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(itemUrl, history, resolvedTarget);
@@ -156,7 +158,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			}
 
 			case 'BUNDLE': {
-				const bundleUrl = buildLink(BUNDLE_PATH.BUNDLE_DETAIL, {
+				const bundleUrl = buildLink(AdminConfigManager.getConfig().routes.BUNDLE_DETAIL, {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(bundleUrl, history, resolvedTarget);
