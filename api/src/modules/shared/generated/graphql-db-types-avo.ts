@@ -18816,6 +18816,7 @@ export enum Lookup_Enum_Content_Block_Types_Enum {
   Iframe = 'IFRAME',
   Image = 'IMAGE',
   ImageGrid = 'IMAGE_GRID',
+  ImageTitleTextButton = 'IMAGE_TITLE_TEXT_BUTTON',
   Intro = 'INTRO',
   Klaar = 'KLAAR',
   Links = 'LINKS',
@@ -18834,6 +18835,7 @@ export enum Lookup_Enum_Content_Block_Types_Enum {
   Title = 'TITLE',
   TitleImageText = 'TITLE_IMAGE_TEXT',
   TitleImageTextButton = 'TITLE_IMAGE_TEXT_BUTTON',
+  Uitgeklaard = 'UITGEKLAARD',
   UspGrid = 'USP_GRID',
   Video = 'VIDEO',
   VideoTitleTextButton = 'VIDEO_TITLE_TEXT_BUTTON'

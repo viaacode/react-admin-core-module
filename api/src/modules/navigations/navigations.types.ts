@@ -28,5 +28,5 @@ export interface NavigationItem {
 	tooltip?: string;
 	updatedAt: string;
 	createdAt: string;
-	userGroupIds: string[] | number[];
+	userGroupIds: string[];
 }

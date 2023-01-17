@@ -13,7 +13,10 @@ import { PermissionName } from '@viaa/avo2-types';
 
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { CreateNavigationDto } from '../dto/navigations.dto';
+import {
+	CreateNavigationDto,
+	UpdateNavigationDto,
+} from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import {
@@ -31,24 +34,13 @@ import { NavigationItem } from '../navigations.types';
 export class AdminNavigationsController {
 	constructor(private adminNavigationsService: AdminNavigationsService) {}
 
-	private adapt(navigationItem: NavigationItem): NavigationItem {
-		delete navigationItem.userGroupIds;
-		return navigationItem;
-	}
-
-	private adaptMultiple(navigationItems: NavigationItem[]): NavigationItem[] {
-		return navigationItems.map(this.adapt);
-	}
-
 	@ApiOperation({
 		description: 'Get an overview of all the navigation bars that exist',
 	})
 	@Get()
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarsOverview(): Promise<NavigationItem[]> {
-		return this.adaptMultiple(
-			await this.adminNavigationsService.findNavigationBars(),
-		);
+		return await this.adminNavigationsService.findNavigationBars();
 	}
 
 	@ApiOperation({
@@ -79,7 +71,7 @@ export class AdminNavigationsController {
 			}
 		});
 
-		return groupBy(this.adaptMultiple(visibleItems), 'placement');
+		return groupBy(visibleItems, 'placement');
 	}
 
 	@ApiOperation({
@@ -90,8 +82,8 @@ export class AdminNavigationsController {
 	public async createNavigationElement(
 		@Body() createNavigationDto: CreateNavigationDto,
 	): Promise<NavigationItem> {
-		return this.adapt(
-			await this.adminNavigationsService.insertElement(createNavigationDto),
+		return await this.adminNavigationsService.insertElement(
+			createNavigationDto,
 		);
 	}
 
@@ -102,10 +94,11 @@ export class AdminNavigationsController {
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async updateNavigationElement(
 		@Param('id') id: string,
-		@Body() updateNavigationDto: CreateNavigationDto,
+		@Body() updateNavigationDto: UpdateNavigationDto,
 	): Promise<NavigationItem> {
-		return this.adapt(
-			await this.adminNavigationsService.updateElement(id, updateNavigationDto),
+		return await this.adminNavigationsService.updateElement(
+			id,
+			updateNavigationDto,
 		);
 	}
 
@@ -129,7 +122,7 @@ export class AdminNavigationsController {
 	public async getNavigationElementById(
 		@Param('id') id: string,
 	): Promise<NavigationItem> {
-		return this.adapt(await this.adminNavigationsService.findElementById(id));
+		return await this.adminNavigationsService.findElementById(id);
 	}
 
 	@ApiOperation({
@@ -140,10 +133,8 @@ export class AdminNavigationsController {
 	public async getNavigationBarItemsByPlacement(
 		@Param('placement') placement: string,
 	): Promise<NavigationItem[]> {
-		return this.adaptMultiple(
-			await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
-				placement,
-			),
+		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
+			placement,
 		);
 	}
 }

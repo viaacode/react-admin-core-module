@@ -5,7 +5,7 @@ describe('NavigationsDto', () => {
 		it('should be able to construct a CreateNavigationDto object', async () => {
 			const createNavigationDto = new CreateNavigationDto();
 			expect(createNavigationDto).toEqual({
-				icon_name: '',
+				iconName: '',
 			});
 		});
 	});

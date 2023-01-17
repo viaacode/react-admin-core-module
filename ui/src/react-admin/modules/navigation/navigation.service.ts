@@ -3,7 +3,7 @@ import { stringifyUrl } from 'query-string';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
-import { NavigationItem } from './navigation.types';
+import { NavigationItem, NavigationItemUpdate } from './navigation.types';
 
 export class NavigationService {
 	private static getBaseUrl(): string {
@@ -68,13 +68,26 @@ export class NavigationService {
 	public static async updateNavigationItems(navigationItems: NavigationItem[]): Promise<void> {
 		try {
 			const promises: Promise<any>[] = navigationItems.map((navigationItem) => {
+				const navigationItemUpdate: NavigationItemUpdate = {
+					iconName: navigationItem.iconName,
+					label: navigationItem.label,
+					userGroupIds: navigationItem.userGroupIds,
+					contentType: navigationItem.contentType,
+					contentPath: navigationItem.contentPath,
+					linkTarget: navigationItem.linkTarget,
+					position: navigationItem.position,
+					description: navigationItem.description,
+					placement: navigationItem.placement,
+					tooltip: navigationItem.tooltip,
+				};
+
 				return fetchWithLogoutJson(
 					stringifyUrl({
 						url: this.getBaseUrl() + '/items/' + navigationItem.id,
 					}),
 					{
 						method: 'PATCH',
-						body: JSON.stringify(navigationItem),
+						body: JSON.stringify(navigationItemUpdate),
 					}
 				);
 			});
