@@ -1,12 +1,12 @@
-@import "../../shared/styles/settings/colors";
-@import "../../shared/styles/settings/variables";
+@import '../../shared/styles/settings/colors';
+@import '../../shared/styles/settings/variables';
 
-.c-menu-detail__nav-edit {
+.c-navigation-detail__nav-edit {
 	li {
 		align-items: center;
 	}
 }
 
-.c-menu-detail__nav-label {
+.c-navigation-detail__nav-label {
 	margin: 0 auto 0 ($g-spacer-unit * 3);
 }

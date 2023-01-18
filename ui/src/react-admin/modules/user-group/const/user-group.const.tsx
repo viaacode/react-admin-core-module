@@ -8,11 +8,6 @@ import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
 import { sortBy } from 'lodash-es';
 
-export const USER_GROUP_QUERY_KEYS = {
-	getUserGroupsWithPermissions: 'getUserGroupsWithPermissions',
-	getUserGroups: 'getUserGroups',
-};
-
 export const UserGroupTableColumns = (
 	userGroups: UserGroupWithPermissions[],
 	updateUserGroup: (groupId: string, permissionId: string | number, value: boolean) => void

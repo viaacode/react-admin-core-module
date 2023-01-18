@@ -26,14 +26,15 @@ import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { PermissionService } from '~modules/shared/services/permission-service';
-import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import { QUERY_KEYS } from '~modules/shared/types';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
 
-import { isPublic } from '../helpers/get-published-state';
+import { isPublic } from '~modules/content-page/helpers';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
 
@@ -65,11 +66,7 @@ import {
 	ContentPageInfo,
 	ContentTableState,
 } from '../types/content-pages.types';
-import {
-	CONTENT_PAGE_QUERY_KEYS,
-	GET_OVERVIEW_COLUMNS,
-	PAGES_PER_PAGE,
-} from '../const/content-page.consts';
+import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~modules/shared/components/error';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
@@ -82,11 +79,11 @@ const ContentPageOverview: FunctionComponent = () => {
 	const [isNotAdminModalOpen, setIsNotAdminModalOpen] = useState<boolean>(false);
 	const [tableState, setTableState] = useState<Partial<ContentTableState>>({});
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false) as [
+	const [userGroupOptions, userGroups] = useUserGroupOptions('CheckboxOption', false, true) as [
 		CheckboxOption[],
+		UserGroupWithPermissions[],
 		boolean
 	];
-	const { data: userGroups } = useGetUserGroupsWithPermissions();
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 
@@ -98,7 +95,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			(option): CheckboxOption => ({
 				id: option.value,
 				label: option.label,
-				checked: get(tableState, 'content_type', [] as string[]).includes(option.value),
+				checked: (tableState?.content_type || ([] as string[])).includes(option.value),
 			})
 		);
 	}, [contentTypes, tableState]);
@@ -106,8 +103,14 @@ const ContentPageOverview: FunctionComponent = () => {
 	const tableColumns = useMemo(() => {
 		return GET_OVERVIEW_COLUMNS(
 			contentTypeOptions,
-			setSelectedCheckboxes(userGroupOptions, get(tableState, 'user_group', []) as string[]),
-			setSelectedCheckboxes(contentPageLabelOptions, get(tableState, 'label', []) as string[])
+			setSelectedCheckboxes(
+				userGroupOptions,
+				(tableState?.user_group || []).map((userGroup) => String(userGroup)) as string[]
+			),
+			setSelectedCheckboxes(
+				contentPageLabelOptions,
+				(tableState?.labels || []).map((label) => String(label)) as string[]
+			)
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
@@ -171,14 +174,13 @@ const ContentPageOverview: FunctionComponent = () => {
 				},
 			])
 		);
-		andFilters.push(...getBooleanFilters(filters, ['is_public']));
+		andFilters.push(...getBooleanFilters(filters, ['isPublic'], ['is_public']));
 		andFilters.push(
-			...getDateRangeFilters(filters, [
-				'created_at',
-				'updated_at',
-				'publish_at',
-				'depublish_at',
-			])
+			...getDateRangeFilters(
+				filters,
+				['createdAt', 'updatedAt', 'publishAt', 'depublishAt'],
+				['created_at', 'updated_at', 'publish_at', 'depublish_at']
+			)
 		);
 		let userGroupPath: string;
 		const filtersFormatted: any = cloneDeep(filters);
@@ -192,7 +194,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		andFilters.push(
 			...getMultiOptionFilters(
 				filtersFormatted,
-				['author_user_group', 'content_type', 'user_profile_id', 'labels'],
+				['authorUserGroup', 'contentType', 'userProfileId', 'labels'],
 				[
 					userGroupPath,
 					'content_type',
@@ -210,18 +212,30 @@ const ContentPageOverview: FunctionComponent = () => {
 
 		andFilters.push({ is_deleted: { _eq: false } });
 
+		// Special case for user group ids => need to be converted to numbers for avo // TODO at some point change user group ids to uuids
+		const userGroupIdsFilter = andFilters.find(
+			(andFilter) => !!andFilter?.profile?.profile_user_group?.group?.id?._in
+		);
+		if (userGroupIdsFilter) {
+			userGroupIdsFilter.profile.profile_user_group.group.id._in =
+				userGroupIdsFilter.profile.profile_user_group.group.id._in.map((id: string) =>
+					parseInt(id, 10)
+				);
+		}
+
 		return { _and: andFilters };
 	};
 
-	const { data: contentPageResponse, isLoading } = useGetContentPagesOverview(
-		tableState.page || 0,
-		(tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
-		tableState.sort_order || 'desc',
-		tableColumns.find(
-			(tableColumn: FilterableColumn) => tableColumn.id || '' === tableState.sort_column
-		)?.dataType || '',
-		generateWhereObject(getFilters(tableState))
-	);
+	const { data: contentPageResponse, isLoading } = useGetContentPagesOverview({
+		page: tableState.page || 0,
+		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
+		sortOrder: tableState.sort_order || 'desc',
+		tableColumnDataType:
+			tableColumns.find(
+				(tableColumn: FilterableColumn) => tableColumn.id || '' === tableState.sort_column
+			)?.dataType || '',
+		where: generateWhereObject(getFilters(tableState)),
+	});
 	const contentPages = contentPageResponse?.[0] || null;
 	const contentPageCount = contentPageResponse?.[1] || 0;
 
@@ -240,7 +254,7 @@ const ContentPageOverview: FunctionComponent = () => {
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			const queryClient = new QueryClient();
-			await queryClient.invalidateQueries([CONTENT_PAGE_QUERY_KEYS.OVERVIEW]);
+			await queryClient.invalidateQueries([QUERY_KEYS.GET_CONTENT_PAGE_OVERVIEW]);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
@@ -333,7 +347,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				);
 
 			case 'isPublic':
-				return get(contentPage, 'is_public') ? 'Ja' : 'Nee';
+				return contentPage?.isPublic ? 'Ja' : 'Nee';
 
 			case 'labels': {
 				const labels = contentPage[columnId];
@@ -524,13 +538,10 @@ const ContentPageOverview: FunctionComponent = () => {
 	};
 
 	const renderContentOverview = () => {
-		if (!contentPages) {
-			return null;
-		}
 		return (
 			<>
 				<FilterTable
-					data={[]}
+					data={contentPages || []}
 					itemsPerPage={PAGES_PER_PAGE}
 					columns={tableColumns}
 					dataCount={contentPageCount}
@@ -553,7 +564,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					isOpen={isConfirmModalOpen}
 					onClose={() => setIsConfirmModalOpen(false)}
 					body={
-						get(contentToDelete, 'is_protected', null)
+						contentToDelete?.isProtected || null
 							? tHtml(
 									'admin/content/views/content-overview___opgelet-dit-is-een-beschermde-pagina'
 							  )

@@ -1,12 +1,12 @@
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { USER_QUERY_KEYS } from '~modules/user/user.consts';
+import { QUERY_KEYS } from '~modules/shared/types';
 import { UserService } from '~modules/user/user.service';
 
 import { useQuery } from '@tanstack/react-query';
 import { AdminConfigManager, ToastType } from '~core/config';
 
 export const useGetIdps = () => {
-	return useQuery([USER_QUERY_KEYS.getIdps], async () => {
+	return useQuery([QUERY_KEYS.GET_IDPS], async () => {
 		try {
 			return UserService.fetchIdps();
 		} catch (err) {

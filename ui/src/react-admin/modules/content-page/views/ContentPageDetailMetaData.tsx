@@ -26,6 +26,7 @@ import {
 import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -37,7 +38,11 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	const { tHtml, tText } = useTranslation();
 
 	const [contentTypes] = useContentTypes();
-	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
+	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
+		TagInfo[],
+		UserGroup[],
+		boolean
+	];
 
 	// Methods
 	const getUserGroups = (contentPageInfo: ContentPageInfo): TagOption[] => {

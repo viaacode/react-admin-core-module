@@ -1,16 +1,16 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { AdminConfigManager } from '~core/config';
-import { PERMISSIONS_QUERY_KEYS } from '~modules/permissions/const/permissions.const';
 import { PermissionData } from '~modules/permissions/permissions.types';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export const useGetPermissions = <TData = PermissionData[]>(
-	options: UseQueryOptions<PermissionData[], any, TData, typeof PERMISSIONS_QUERY_KEYS.all> = {
+	options: UseQueryOptions<PermissionData[], any, TData, QUERY_KEYS[]> = {
 		enabled: true,
 	}
 ) => {
 	return useQuery(
-		PERMISSIONS_QUERY_KEYS.all,
+		[QUERY_KEYS.GET_ALL_PERMISSIONS],
 		() => {
 			return fetchWithLogoutJson<PermissionData[]>(
 				AdminConfigManager.getConfig().database.proxyUrl + '/admin/permissions'

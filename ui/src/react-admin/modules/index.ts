@@ -37,6 +37,7 @@ export { CONTENT_BLOCK_CONFIG_MAP } from './content-page/const/content-block-con
 export { Color } from '~modules/content-page/types/content-block.types';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export { PublishOption } from '~modules/content-page/types/content-pages.types';
+export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export {
 	convertDbContentPageToContentPageInfo,
 	convertDbContentPagesToContentPageInfos,

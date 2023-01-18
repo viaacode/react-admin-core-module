@@ -1,19 +1,14 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
 import { NavigationService } from '~modules/navigation/navigation.service';
 import { NavigationItem } from '../navigation.types';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export const useGetNavigationItem = (
 	id: string | undefined,
-	options?: UseQueryOptions<
-		NavigationItem | null,
-		any,
-		NavigationItem | null,
-		typeof NAVIGATIONS_QUERY_KEYS.getNavigationItem[]
-	>
+	options?: UseQueryOptions<NavigationItem | null, any, NavigationItem | null, QUERY_KEYS[]>
 ) => {
 	return useQuery(
-		[NAVIGATIONS_QUERY_KEYS.getNavigationItem],
+		[QUERY_KEYS.GET_NAVIGATION_ITEM],
 		() => {
 			if (!id) {
 				return null;

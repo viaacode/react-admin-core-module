@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { USER_QUERY_KEYS } from '~modules/user/user.consts';
 import { UserService } from '~modules/user/user.service';
 import { CommonUser } from '~modules/user/user.types';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export const useGetProfileById = (
 	id: string | undefined | null,
@@ -9,11 +9,11 @@ export const useGetProfileById = (
 		CommonUser | null,
 		any,
 		CommonUser | null,
-		typeof USER_QUERY_KEYS.getProfileById[]
+		typeof QUERY_KEYS.GET_PROFILE_BY_ID[]
 	>
 ) => {
 	return useQuery(
-		[USER_QUERY_KEYS.getProfileById],
+		[QUERY_KEYS.GET_PROFILE_BY_ID],
 		() => {
 			if (!id) {
 				return null;

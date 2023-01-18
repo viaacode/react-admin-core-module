@@ -19,7 +19,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useGetUserGroupsWithPermissions } from '~modules/user-group/hooks/get-user-groups-with-permissions';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
 import { UserGroupTableColumns } from '../const/user-group.const';
 import {
@@ -42,7 +42,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			isError: isErrorUserGroups,
 			error: userGroupError,
 			refetch: refetchUserGroups,
-		} = useGetUserGroupsWithPermissions();
+		} = useGetUserGroups({ withPermissions: true });
 		const {
 			data: permissions,
 			isLoading: isLoadingPermissions,
@@ -131,7 +131,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		);
 
 		const onClickCancel = () => {
-			setCurrentUserGroups(cloneDeep(userGroups));
+			setCurrentUserGroups(cloneDeep(userGroups) as UserGroupWithPermissions[]);
 			setUserGroupUpdates([]);
 
 			// Fire onChange for parent component
@@ -207,13 +207,17 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		 * Effects
 		 */
 		useEffect(() => {
-			setCurrentUserGroups((currentUserGroups) => {
-				if (!currentUserGroups) {
-					return cloneDeep(userGroups);
-				} else {
-					return currentUserGroups;
+			setCurrentUserGroups(
+				(
+					currentUserGroups: UserGroupWithPermissions[] | undefined
+				): UserGroupWithPermissions[] => {
+					if (!currentUserGroups) {
+						return cloneDeep(userGroups) as UserGroupWithPermissions[];
+					} else {
+						return currentUserGroups;
+					}
 				}
-			});
+			);
 		}, [userGroups]);
 
 		useEffect(() => {

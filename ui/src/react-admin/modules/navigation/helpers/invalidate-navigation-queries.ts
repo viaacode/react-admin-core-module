@@ -1,8 +1,8 @@
 import { QueryClient } from '@tanstack/react-query';
-import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export async function invalidateNavigationQueries() {
 	const client = new QueryClient();
-	await client.invalidateQueries([NAVIGATIONS_QUERY_KEYS.getNavigationItem]);
-	await client.invalidateQueries([NAVIGATIONS_QUERY_KEYS.getNavigations]);
+	await client.invalidateQueries([QUERY_KEYS.GET_NAVIGATION_ITEM]);
+	await client.invalidateQueries([QUERY_KEYS.GET_NAVIGATIONS]);
 }

@@ -3,11 +3,6 @@ import { TableColumn } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { ReactNode } from 'react';
 
-export enum NAVIGATIONS_QUERY_KEYS {
-	getNavigations = 'getNavigations',
-	getNavigationItem = 'getNavigationItem',
-}
-
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{
 		id: 'placement',

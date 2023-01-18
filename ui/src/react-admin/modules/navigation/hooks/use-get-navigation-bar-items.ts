@@ -1,20 +1,15 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { NAVIGATIONS_QUERY_KEYS } from '~modules/navigation/navigation.consts';
 import { NavigationService } from '~modules/navigation/navigation.service';
 import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
 import { NavigationItem } from '../navigation.types';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export const useGetNavigationBarItems = (
 	placement?: string,
-	options?: UseQueryOptions<
-		NavigationItem[],
-		any,
-		NavigationItem[],
-		typeof NAVIGATIONS_QUERY_KEYS.getNavigations[]
-	>
+	options?: UseQueryOptions<NavigationItem[], any, NavigationItem[], QUERY_KEYS[]>
 ) => {
 	return useQuery(
-		[NAVIGATIONS_QUERY_KEYS.getNavigations],
+		[QUERY_KEYS.GET_NAVIGATION_ITEM],
 		async () => {
 			const navItems = await NavigationService.fetchNavigationBarItems(placement);
 			reindexNavigationItems(navItems);

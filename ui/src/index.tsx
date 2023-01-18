@@ -361,7 +361,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: DatabaseType.hetArchief,
+			databaseApplicationType: DatabaseType.avo,
 			proxyUrl,
 		},
 		flowplayer: {
