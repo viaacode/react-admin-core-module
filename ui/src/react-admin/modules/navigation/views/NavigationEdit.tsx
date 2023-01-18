@@ -4,6 +4,7 @@ import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
+import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 import { NavigationEditForm } from '../components';
 import { GET_PAGE_TYPES_LANG, INITIAL_NAVIGATION_FORM } from '../navigation.consts';
@@ -44,7 +45,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
-	const [allUserGroups] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
+	const [allUserGroups] = useUserGroupOptions('TagInfo', true, false) as [
+		TagInfo[],
+		UserGroup[],
+		boolean
+	];
 	const {
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,

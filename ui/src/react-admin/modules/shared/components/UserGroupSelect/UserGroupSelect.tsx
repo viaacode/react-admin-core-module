@@ -4,6 +4,7 @@ import React, { ChangeEvent, FunctionComponent } from 'react';
 
 import { Checkbox } from '@meemoo/react-components';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;
@@ -22,7 +23,11 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	onChange,
 	required,
 }) => {
-	const [userGroupOptions] = useUserGroupOptions('TagInfo', true) as [TagInfo[], boolean];
+	const [userGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
+		TagInfo[],
+		UserGroup[],
+		boolean
+	];
 
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
 		const userGroup = evt.target.value;

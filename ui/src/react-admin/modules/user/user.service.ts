@@ -75,7 +75,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + 'names',
+					url: this.getBaseUrl() + '/names',
 					query: {
 						profileIds,
 					},
@@ -92,7 +92,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + 'ids',
+					url: this.getBaseUrl() + '/ids',
 					query: {
 						where: JSON.stringify(where),
 					},

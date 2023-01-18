@@ -1,19 +1,14 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { CONTENT_PAGE_QUERY_KEYS } from '~modules/content-page/const/content-page.consts';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { QUERY_KEYS } from '../../shared/types';
 
 export const useGetContentPageByPath = (
 	path: string | undefined,
-	options?: UseQueryOptions<
-		ContentPageInfo | null,
-		any,
-		ContentPageInfo | null,
-		typeof CONTENT_PAGE_QUERY_KEYS.getContentPageByPath[]
-	>
+	options?: UseQueryOptions<ContentPageInfo | null, any, ContentPageInfo | null, QUERY_KEYS[]>
 ) => {
 	return useQuery(
-		[CONTENT_PAGE_QUERY_KEYS.getContentPageByPath],
+		[QUERY_KEYS.GET_CONTENT_PAGE_BY_PATH],
 		() => {
 			if (!path) {
 				return null;

@@ -146,10 +146,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 											id: 'users',
 											label: `${selectedProfiles.length} ${
 												selectedProfiles.length > 1
-													? tHtml(
+													? tText(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruikers'
 													  )
-													: tHtml(
+													: tText(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruiker'
 													  )
 											}`,

@@ -74,10 +74,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [educationLevels] = useEducationLevels();
 	const [subjects] = useSubjects();
 	const { data: idps } = useGetIdps();
-	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false) as [
-		CheckboxOption[],
-		boolean
-	];
+	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false, false);
 	const [usersDeleteModalOpen, setUsersDeleteModalOpen] = useState<boolean>(false);
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
@@ -90,7 +87,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			GET_USER_OVERVIEW_TABLE_COLS(
 				config,
 				setSelectedCheckboxes(
-					userGroupOptions,
+					userGroupOptions as CheckboxOption[],
 					get(tableState, 'userGroup', []) as string[]
 				),
 				companies.map(

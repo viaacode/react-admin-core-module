@@ -14,11 +14,6 @@ import {
 	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
-export const CONTENT_PAGE_QUERY_KEYS = {
-	OVERVIEW: 'OVERVIEW',
-	getContentPageByPath: 'GET_CONTENT_PAGE_BY_PATH',
-};
-
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
