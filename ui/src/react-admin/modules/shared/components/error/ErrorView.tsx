@@ -8,6 +8,7 @@ import {
 	ToolbarCenter,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
+import { isNull } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 
 import './ErrorView.scss';
@@ -19,7 +20,7 @@ import { useTranslation } from '~modules/shared/hooks/useTranslation';
 interface ErrorViewProps {
 	message?: string | ReactNode;
 	icon?: IconName;
-	actionButtons?: Avo.Auth.ErrorActionButton[];
+	actionButtons?: Avo.Auth.ErrorActionButton[] | null;
 	children?: ReactNode;
 }
 
@@ -27,7 +28,7 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	message,
 	icon,
 	children = null,
-	actionButtons = [],
+	actionButtons,
 }) => {
 	const { tText } = useTranslation();
 
@@ -35,13 +36,14 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	const errorMessage: string | ReactNode = messageText;
 	const errorIcon = (icon || 'search') as IconName;
 	const Link = AdminConfigManager.getConfig().services.router.Link;
+	const actionButtonsResolved = isNull(actionButtons) ? [] : actionButtons || [];
 
 	if (!message) {
 		console.error(
 			new CustomError('Error view without error message', null, {
 				message,
 				icon,
-				actionButtons,
+				actionButtonsResolved,
 			})
 		);
 	}
@@ -49,14 +51,20 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	const renderButtons = () => {
 		const buttons = (
 			<>
-				<Link to="/">
-					<Button label={tText('error/views/error-view___ga-terug-naar-de-homepagina')} />
-				</Link>
-				<Button
-					type="danger"
-					onClick={() => (window as any).zE('webWidget', 'toggle')}
-					label={tText('error/views/error-view___contacteer-de-helpdesk')}
-				/>
+				{actionButtonsResolved?.includes('home') && (
+					<Link to="/">
+						<Button
+							label={tText('error/views/error-view___ga-terug-naar-de-homepagina')}
+						/>
+					</Link>
+				)}
+				{actionButtonsResolved?.includes('helpdesk') && (
+					<Button
+						type="danger"
+						onClick={() => (window as any).zE('webWidget', 'toggle')}
+						label={tText('error/views/error-view___contacteer-de-helpdesk')}
+					/>
+				)}
 			</>
 		);
 
