@@ -12,8 +12,6 @@ import {
 } from '@viaa/avo2-components';
 
 import { NavigationService } from '../navigation.service';
-
-import './NavigationDetail.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager } from '~core/config';
@@ -26,6 +24,8 @@ import { NavigationItem } from '../navigation.types';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
+
+import './NavigationDetail.scss';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -240,7 +240,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 			<>
 				<Table
 					align
-					className="c-menu-detail__table"
+					className="c-navigation-detail__table"
 					variant="styled"
 					emptyStateMessage={tText(
 						'modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items'
