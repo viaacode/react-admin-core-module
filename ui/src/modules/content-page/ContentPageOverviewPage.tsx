@@ -1,15 +1,15 @@
 import { Button, Flex } from '@viaa/avo2-components';
 import { FC } from 'react';
+import { AdminConfigManager } from '~core/config';
 
 import ContentPageOverview from '~modules/content-page/views/ContentPageOverview';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 export const ContentPageOverviewPage: FC = () => {
 	return (
 		<>
 			<Flex>
 				<h1>Content pages</h1>
-				<a href={`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`}>
+				<a href={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}>
 					<Button type="primary">Nieuwe pagina</Button>
 				</a>
 			</Flex>

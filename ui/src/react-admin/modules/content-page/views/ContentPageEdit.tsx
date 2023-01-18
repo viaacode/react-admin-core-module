@@ -7,10 +7,7 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
-import {
-	CONTENT_PAGE_PATH,
-	GET_CONTENT_PAGE_DETAIL_TABS,
-} from '~modules/content-page/const/content-page.consts';
+import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
 	ContentEditAction,
@@ -52,7 +49,6 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -91,7 +87,10 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 
 	const fetchContentPage = useCallback(async () => {
 		try {
-			if (isNil(id) || id === ROUTE_PARTS.create) {
+			if (
+				isNil(id) ||
+				id === AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE.split('/').pop()
+			) {
 				return;
 			}
 			if (
@@ -111,7 +110,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			if (!contentPageObj) {
 				setLoadingInfo({
 					state: 'error',
-					message: tHtml('react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'),
+					message: tHtml(
+						'react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'
+					),
 					icon: 'search',
 				});
 				return;
@@ -408,13 +409,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(
-				history,
-				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
-				{
-					id: insertedOrUpdatedContent.id,
-				}
-			);
+			navigate(history, AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+				id: insertedOrUpdatedContent.id,
+			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page ', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -486,13 +483,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
+			history.push(AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW);
 		} else {
-			navigate(
-				history,
-				CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
-				{ id }
-			);
+			navigate(history, AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, { id });
 		}
 	};
 

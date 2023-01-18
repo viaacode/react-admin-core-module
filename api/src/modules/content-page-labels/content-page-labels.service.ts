@@ -5,7 +5,9 @@ import { ContentPageLabel, ContentPageType, LabelObj } from '../content-pages';
 import { DataService } from '../data';
 import { CustomError } from '../shared/helpers/custom-error';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
+import { isAvo } from '../shared/helpers/is-avo';
 import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
+import { ContentPageLabelDto } from './dto/content-page-label.dto';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
 	ContentPageLabelQueryTypes,
@@ -43,7 +45,7 @@ export class ContentPageLabelsService {
 			);
 
 			/* istanbul ignore next */
-			const contentPageLabel: ContentPageLabel[] = (
+			const contentPageLabels: ContentPageLabel[] = (
 				(response as ContentPageLabelQueryTypes['GetContentPageLabelsQueryAvo'])
 					.app_content_labels ||
 				(
@@ -68,7 +70,7 @@ export class ContentPageLabelsService {
 				).app_content_label_aggregate?.aggregate?.count ||
 				0;
 
-			if (!contentPageLabel) {
+			if (!contentPageLabels) {
 				throw CustomError(
 					'Response does not contain any content page labels',
 					null,
@@ -78,7 +80,67 @@ export class ContentPageLabelsService {
 				);
 			}
 
-			return [contentPageLabel, contentPageLabelCount];
+			return [contentPageLabels, contentPageLabelCount];
+		} catch (err) {
+			throw CustomError(
+				'Failed to get content page labels from the database',
+				err,
+				{
+					variables,
+					query: 'GET_CONTENT_PAGE_LABELS',
+				},
+			);
+		}
+	}
+
+	public async fetchContentPageLabelById(
+		id: string,
+	): Promise<ContentPageLabel> {
+		let variables:
+			| ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryVariables']
+			| null = null;
+		try {
+			variables = {
+				id: isAvo() ? parseInt(id) : id,
+			};
+			const response = await this.dataService.execute<
+				ContentPageLabelQueryTypes['GetContentPageLabelByIdQuery'],
+				ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryVariables']
+			>(
+				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
+					.GetContentPageLabelByIdDocument,
+				variables,
+			);
+
+			/* istanbul ignore next */
+			const contentPageLabelRaw =
+				(
+					response as ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryAvo']
+				).app_content_labels?.[0] ||
+				(
+					response as ContentPageLabelQueryTypes['GetContentPageLabelByIdQueryHetArchief']
+				).app_content_label?.[0] ||
+				null;
+
+			if (!contentPageLabelRaw) {
+				throw CustomError(
+					'Response does not contain any content page labels',
+					null,
+					{
+						response,
+					},
+				);
+			}
+			const contentPageLabel: ContentPageLabel = {
+				label: contentPageLabelRaw.label,
+				content_type: contentPageLabelRaw.content_type as ContentPageType,
+				id: contentPageLabelRaw.id,
+				link_to: contentPageLabelRaw.link_to,
+				created_at: contentPageLabelRaw.created_at,
+				updated_at: contentPageLabelRaw.updated_at,
+			};
+
+			return contentPageLabel;
 		} catch (err) {
 			throw CustomError(
 				'Failed to get content page labels from the database',
@@ -92,8 +154,8 @@ export class ContentPageLabelsService {
 	}
 
 	public async insertContentPageLabel(
-		contentPageLabel: ContentPageLabel,
-	): Promise<number> {
+		contentPageLabel: ContentPageLabelDto,
+	): Promise<ContentPageLabelDto> {
 		try {
 			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['InsertContentPageLabelMutation'],
@@ -108,21 +170,21 @@ export class ContentPageLabelsService {
 					} as Partial<ContentPageLabel>,
 				},
 			);
-			const contentPageLabelId =
+			const contentPageLabelResponse =
 				(
 					response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationAvo']
-				).insert_app_content_labels?.returning?.[0]?.id ||
+				).insert_app_content_labels?.returning?.[0] ||
 				(
 					response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationHetArchief']
-				).insert_app_content_label?.returning?.[0]?.id;
-			if (isNil(contentPageLabelId)) {
+				).insert_app_content_label?.returning?.[0];
+			if (isNil(contentPageLabelResponse)) {
 				throw CustomError(
 					'Response from database does not contain the id of the inserted content page label',
 					null,
 					{ response },
 				);
 			}
-			return contentPageLabelId;
+			return contentPageLabelResponse as ContentPageLabelDto;
 		} catch (err) {
 			throw CustomError(
 				'Failed to insert content page label in the database',
@@ -135,9 +197,11 @@ export class ContentPageLabelsService {
 		}
 	}
 
-	async updateContentPageLabel(contentPageLabelInfo: ContentPageLabel) {
+	async updateContentPageLabel(
+		contentPageLabelInfo: ContentPageLabel,
+	): Promise<ContentPageLabelDto> {
 		try {
-			await this.dataService.execute<
+			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['UpdateContentPageLabelMutation'],
 				ContentPageLabelQueryTypes['UpdateContentPageLabelMutationVariables']
 			>(
@@ -152,6 +216,21 @@ export class ContentPageLabelsService {
 					contentPageLabelId: contentPageLabelInfo.id,
 				},
 			);
+			const contentPageLabelResponse =
+				(
+					response as ContentPageLabelQueryTypes['UpdateContentPageLabelMutationAvo']
+				).update_app_content_labels?.returning?.[0] ||
+				(
+					response as ContentPageLabelQueryTypes['UpdateContentPageLabelMutationHetArchief']
+				).update_app_content_label?.returning?.[0];
+			if (isNil(contentPageLabelResponse)) {
+				throw CustomError(
+					'Response from database does not contain the id of the inserted content page label',
+					null,
+					{ response },
+				);
+			}
+			return contentPageLabelResponse as ContentPageLabelDto;
 		} catch (err) {
 			throw CustomError(
 				'Failed to update content page label in the database',
@@ -159,6 +238,30 @@ export class ContentPageLabelsService {
 				{
 					contentPageLabel: contentPageLabelInfo,
 					query: 'UPDATE_CONTENT_PAGE_LABEL',
+				},
+			);
+		}
+	}
+
+	async deleteContentPageLabel(id: string) {
+		try {
+			await this.dataService.execute<
+				ContentPageLabelQueryTypes['DeleteContentPageLabelByIdMutation'],
+				ContentPageLabelQueryTypes['DeleteContentPageLabelByIdMutationVariables']
+			>(
+				CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()]
+					.DeleteContentPageLabelByIdDocument,
+				{
+					id: isAvo() ? parseInt(id) : id,
+				},
+			);
+		} catch (err) {
+			throw CustomError(
+				'Failed to delete content page label from the database',
+				err,
+				{
+					query: 'DeleteContentPageLabelByIdMutation',
+					id,
 				},
 			);
 		}

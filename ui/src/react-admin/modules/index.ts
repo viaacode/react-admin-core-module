@@ -1,7 +1,6 @@
 import { AdminConfigManager } from '~core/config/config.class';
 
 // Admin Core
-export { ROUTE_PARTS } from '~modules/shared';
 export type { AdminConfig } from '~core/config/config.types';
 export { AdminConfigManager };
 export {
@@ -34,7 +33,6 @@ export type {
 	MediaGridBlockState,
 } from './content-page/types/content-block.types';
 export { ContentBlockEditor } from './content-page/types/content-block.types';
-export { CONTENT_PAGE_PATH } from './content-page/const/content-page.consts';
 export { CONTENT_BLOCK_CONFIG_MAP } from './content-page/const/content-block-config-map';
 export { Color } from '~modules/content-page/types/content-block.types';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
@@ -53,6 +51,9 @@ export * from './content-page/components/wrappers';
 export { GET_ALIGN_OPTIONS } from './content-page/const/get-align-options';
 export { GET_BUTTON_TYPE_OPTIONS } from './content-page/const/get-button-type-options';
 export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-options';
+
+// Content page labels
+export { ContentPageLabelService } from './content-page-labels/content-page-label.service';
 
 // Navigation
 export { default as NavigationOverview } from './navigation/views/NavigationOverview';

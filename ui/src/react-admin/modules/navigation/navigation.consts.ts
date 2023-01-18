@@ -1,25 +1,12 @@
 import { NavigationItem } from '~modules/navigation/navigation.types';
+import { TableColumn } from '@viaa/avo2-components';
+import { AdminConfigManager } from '~core/config';
+import { ReactNode } from 'react';
 
 export enum NAVIGATIONS_QUERY_KEYS {
 	getNavigations = 'getNavigations',
 	getNavigationItem = 'getNavigationItem',
 }
-
-import { TableColumn } from '@viaa/avo2-components';
-import { AdminConfigManager } from '~core/config';
-import { ReactNode } from 'react';
-
-export const NAVIGATION_PATH = () => {
-	const ROUTE_PARTS = AdminConfigManager.getConfig().route_parts;
-
-	return {
-		NAVIGATION_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
-		NAVIGATION_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/${ROUTE_PARTS.create}`,
-		NAVIGATION_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/:navigationBarId`,
-		NAVIGATION_ITEM_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/:navigationBarId/${ROUTE_PARTS.create}`,
-		NAVIGATION_ITEM_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/:navigationBarId/:navigationItemId/${ROUTE_PARTS.edit}`,
-	};
-};
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{

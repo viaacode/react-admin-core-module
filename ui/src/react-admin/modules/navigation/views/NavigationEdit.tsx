@@ -6,11 +6,7 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
 
 import { NavigationEditForm } from '../components';
-import {
-	GET_PAGE_TYPES_LANG,
-	INITIAL_NAVIGATION_FORM,
-	NAVIGATION_PATH,
-} from '../navigation.consts';
+import { GET_PAGE_TYPES_LANG, INITIAL_NAVIGATION_FORM } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
 import {
 	NavigationEditFormErrorState,
@@ -26,7 +22,6 @@ import { navigate } from '~modules/shared/helpers/link';
 import { PickerItem } from '~modules/shared/types/content-picker';
 import { ValueOf } from '~modules/shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { ADMIN_PATH } from '~modules/shared/consts/admin.const';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
@@ -81,7 +76,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				)
 			);
 
-			history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW);
+			history.push(AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW);
 		}
 	}, [
 		isLoadingNavigationItems,
@@ -275,7 +270,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					position: navigationItems.length,
 				});
 
-				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
+				navigate(history, AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 
@@ -300,7 +295,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					} as NavigationItem,
 				]);
 
-				navigate(history, ADMIN_PATH().NAVIGATION_PATH.NAVIGATION_DETAIL, {
+				navigate(history, AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
 					navigationBarId: navigationItem.placement as string,
 				});
 
@@ -365,7 +360,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					<ButtonToolbar>
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
-							onClick={() => history.push(NAVIGATION_PATH().NAVIGATION_OVERVIEW)}
+							onClick={() =>
+								history.push(
+									AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW
+								)
+							}
 							type="tertiary"
 						/>
 						<Button

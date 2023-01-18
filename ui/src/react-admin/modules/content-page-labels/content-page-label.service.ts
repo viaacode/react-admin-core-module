@@ -36,7 +36,7 @@ export class ContentPageLabelService {
 						where: JSON.stringify(where),
 					},
 				}),
-				{throwOnNullResponse: true}
+				{ throwOnNullResponse: true }
 			);
 		} catch (err) {
 			throw new CustomError('Failed to get content page labels from the database', err, {
@@ -45,6 +45,18 @@ export class ContentPageLabelService {
 				sortOrder,
 				where,
 				itemsPerPage,
+			});
+		}
+	}
+
+	public static async fetchContentPageLabel(id: string | number): Promise<ContentPageLabel> {
+		try {
+			return fetchWithLogoutJson(this.getBaseUrl() + '/' + String(id), {
+				throwOnNullResponse: true,
+			});
+		} catch (err) {
+			throw new CustomError('Failed to get content page label from the database', err, {
+				id,
 			});
 		}
 	}
@@ -77,6 +89,19 @@ export class ContentPageLabelService {
 			throw new CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
+			});
+		}
+	}
+
+	static async deleteContentPageLabel(id: string | number) {
+		try {
+			return fetchWithLogoutJson(this.getBaseUrl() + '/' + String(id), {
+				method: 'DELETE',
+			});
+		} catch (err) {
+			throw new CustomError('Failed to delete content page label from the database', err, {
+				route: this.getBaseUrl() + '/' + String(id),
+				id,
 			});
 		}
 	}

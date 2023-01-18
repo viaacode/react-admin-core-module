@@ -16,9 +16,11 @@ import reactToString from 'react-to-string';
 
 import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { generateWhereObjectArchief, generateWhereObjectAvo } from '~modules/user/helpers/generate-filter-where-object-users';
+import {
+	generateWhereObjectArchief,
+	generateWhereObjectAvo,
+} from '~modules/user/helpers/generate-filter-where-object-users';
 import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
-import { USER_PATH } from '~modules/user/user.routes';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 
 import FilterTable, {
@@ -71,7 +73,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [businessCategories] = useBusinessCategories();
 	const [educationLevels] = useEducationLevels();
 	const [subjects] = useSubjects();
-	const {data: idps} = useGetIdps();
+	const { data: idps } = useGetIdps();
 	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false) as [
 		CheckboxOption[],
 		boolean
@@ -141,7 +143,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					selectedProfileIds
 				);
 			} else {
-				whereObj = generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
+				whereObj = generateWhereObjectAvo(
+					filters,
+					onlySelectedProfiles,
+					selectedProfileIds
+				); // TODO avo and split
 			}
 			if (JSON.stringify(whereObj) === '{"_and":[]}') {
 				return null;
@@ -166,7 +172,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		data: profilesResponse,
 		isLoading: isLoadingProfiles,
 		isError: isErrorProfiles,
-		refetch: refetchProfiles
+		refetch: refetchProfiles,
 	} = useGetProfiles({
 		page: tableState?.page || 0,
 		sortColumn: (tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
@@ -299,7 +305,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			USER_PATH(AdminConfigManager.getConfig().route_parts).USER_OVERVIEW,
+			AdminConfigManager.getConfig().routes.USER_OVERVIEW,
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState?.columns || []).join('~') }
 		);
@@ -309,7 +315,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		try {
 			setIsLoading(true);
 			const column = columns.find(
-				(tableColumn: FilterableColumn) => tableColumn.id && tableState?.sort_column && tableColumn.id === tableState?.sort_column
+				(tableColumn: FilterableColumn) =>
+					tableColumn.id &&
+					tableState?.sort_column &&
+					tableColumn.id === tableState?.sort_column
 			);
 			const columnDataType: string = get(column, 'dataType', '');
 			const [profilesTemp] = await UserService.getProfiles(
@@ -320,12 +329,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				generateWhereObject(getFilters(tableState), true),
 				100000
 			);
-			const columnIds =
-				tableState?.columns?.length
-					? tableState.columns
-					: columns
-							.filter((column) => column.visibleByDefault)
-							.map((column) => column.id);
+			const columnIds = tableState?.columns?.length
+				? tableState.columns
+				: columns.filter((column) => column.visibleByDefault).map((column) => column.id);
 			const columnLabels = columnIds.map((columnId) =>
 				get(
 					columns.find((column) => column.id === columnId),
@@ -418,12 +424,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 				return isAvo() ? (
 					<Link
-						to={buildLink(
-							USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL,
-							{
-								id: commonUser.profileId,
-							}
-						)}
+						to={buildLink(AdminConfigManager.getConfig().routes.USER_DETAIL, {
+							id: commonUser.profileId,
+						})}
 					>
 						{truncateTableValue(commonUser?.firstName)}
 					</Link>
@@ -530,7 +533,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				message={tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
 			>
 				<p>
-					{tHtml('admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn')} //  Beschrijving wanneer er nog geen gebruikers zijn
+					{tHtml(
+						'admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn'
+					)}{' '}
+					// Beschrijving wanneer er nog geen gebruikers zijn
 				</p>
 			</ErrorView>
 		);

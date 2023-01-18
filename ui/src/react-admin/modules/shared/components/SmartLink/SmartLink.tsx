@@ -6,8 +6,6 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { buildLink } from '~modules/shared/helpers/link';
-import { BUNDLE_PATH } from '../../consts/bundle.const';
-import { APP_PATH } from '../../consts/routes.consts';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
 
@@ -126,21 +124,27 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return renderLink(String(value), resolvedTarget);
 				}
 				case ContentPickerType.COLLECTION: {
-					const collectionUrl = buildLink(APP_PATH.COLLECTION_DETAIL.route, {
-						id: value as string,
-					});
+					const collectionUrl = buildLink(
+						AdminConfigManager.getConfig().routes.COLLECTION_DETAIL,
+						{
+							id: value as string,
+						}
+					);
 					return renderLink(collectionUrl, resolvedTarget);
 				}
 				case ContentPickerType.ITEM: {
-					const itemUrl = buildLink(APP_PATH.ITEM_DETAIL.route, {
+					const itemUrl = buildLink(AdminConfigManager.getConfig().routes.ITEM_DETAIL, {
 						id: value,
 					});
 					return renderLink(itemUrl, resolvedTarget);
 				}
 				case ContentPickerType.BUNDLE: {
-					const bundleUrl = buildLink(BUNDLE_PATH.BUNDLE_DETAIL, {
-						id: value,
-					});
+					const bundleUrl = buildLink(
+						AdminConfigManager.getConfig().routes.BUNDLE_DETAIL,
+						{
+							id: value,
+						}
+					);
 					return renderLink(bundleUrl, resolvedTarget);
 				}
 				case ContentPickerType.EXTERNAL_LINK: {
@@ -163,7 +167,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					const queryParams = JSON.parse(value as string);
 					return renderLink(
 						buildLink(
-							APP_PATH.SEARCH.route,
+							AdminConfigManager.getConfig().routes.SEARCH,
 							{},
 							stringify(
 								fromPairs(

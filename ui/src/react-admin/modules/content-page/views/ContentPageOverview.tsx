@@ -6,6 +6,7 @@ import {
 	LinkTarget,
 	Modal,
 	ModalBody,
+	Spacer,
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
@@ -65,11 +66,11 @@ import {
 	ContentTableState,
 } from '../types/content-pages.types';
 import {
-	CONTENT_PAGE_PATH,
 	CONTENT_PAGE_QUERY_KEYS,
 	GET_OVERVIEW_COLUMNS,
 	PAGES_PER_PAGE,
 } from '../const/content-page.consts';
+import { ErrorView } from '~modules/shared/components/error';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;
@@ -309,10 +310,9 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'title':
 				return (
 					<Link
-						to={buildLink(
-							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
-							{ id }
-						)}
+						to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+							id,
+						})}
 					>
 						{truncateTableValue(title)}
 					</Link>
@@ -410,8 +410,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					<ButtonToolbar>
 						<Link
 							to={buildLink(
-								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts)
-									.DETAIL,
+								AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL,
 								{ id }
 							)}
 						>
@@ -453,10 +452,9 @@ const ContentPageOverview: FunctionComponent = () => {
 							disabled
 						/>
 						<Link
-							to={buildLink(
-								CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
-								{ id }
-							)}
+							to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT, {
+								id,
+							})}
 						>
 							<Button
 								icon="edit"
@@ -492,33 +490,37 @@ const ContentPageOverview: FunctionComponent = () => {
 		}
 	};
 
+	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const renderNoResults = () => {
 		return (
-			<>{tText('admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt')}</>
+			<ErrorView
+				message={tText(
+					'admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt'
+				)}
+				actionButtons={undefined}
+			>
+				<p>
+					{tHtml(
+						'admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen'
+					)}
+				</p>
+				{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
+					<Spacer margin="top">
+						<Link to={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}>
+							<Button
+								icon="plus"
+								label={tText(
+									'admin/content/views/content-overview___content-toevoegen'
+								)}
+								title={tText(
+									'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
+								)}
+							/>
+						</Link>
+					</Spacer>
+				)}
+			</ErrorView>
 		);
-		// return (
-		// <ErrorView
-		// 	message={tText(
-		// 		'admin/content/views/content-overview___er-is-nog-geen-content-aangemaakt'
-		// 	)}
-		// >
-		// 	<p>
-		// 		{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
-		// 	</p>
-		// 	{hasPerm(CREATE_CONTENT_PAGES) && (
-		// 		<Spacer margin="top">
-		// 			<Button
-		// 				icon="plus"
-		// 				label={tText('admin/content/views/content-overview___content-toevoegen')}
-		// 				title={tText(
-		// 					'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
-		// 				)}
-		// 				onClick={() => Config.getConfig().services.router.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).CREATE)}
-		// 			/>
-		// 		</Spacer>
-		// 	)}
-		// </ErrorView>
-		// );
 	};
 
 	const renderContentOverview = () => {
@@ -528,7 +530,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		return (
 			<>
 				<FilterTable
-					data={contentPages}
+					data={[]}
 					itemsPerPage={PAGES_PER_PAGE}
 					columns={tableColumns}
 					dataCount={contentPageCount}

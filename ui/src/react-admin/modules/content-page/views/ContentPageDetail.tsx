@@ -24,10 +24,7 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
-import {
-	CONTENT_PAGE_PATH,
-	GET_CONTENT_PAGE_DETAIL_TABS,
-} from '~modules/content-page/const/content-page.consts';
+import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
@@ -166,7 +163,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			await softDeleteContentPage(id);
 
-			history.push(CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).OVERVIEW);
+			history.push(AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -299,12 +296,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					}
 
 					history.push(
-						buildLink(
-							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).DETAIL,
-							{
-								id: duplicateContentPage.id,
-							}
-						)
+						buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+							id: duplicateContentPage.id,
+						})
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
 						title: tText('modules/content-page/views/content-page-detail___success'),
@@ -375,12 +369,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(
-							CONTENT_PAGE_PATH(AdminConfigManager.getConfig().route_parts).EDIT,
-							{
-								id,
-							}
-						)}
+						to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT, {
+							id,
+						})}
 						className="a-link__no-styles"
 					>
 						<Button
@@ -418,11 +409,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 		switch (currentTab) {
 			case 'inhoud':
-				return (
-					<ContentPageRenderer
-						contentPageInfo={contentPageInfo}
-					/>
-				);
+				return <ContentPageRenderer contentPageInfo={contentPageInfo} />;
 			case 'metadata':
 				return <ContentPageDetailMetaData contentPageInfo={contentPageInfo} />;
 			default:

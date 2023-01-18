@@ -28,7 +28,6 @@ import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
 import { useSubjects } from '~modules/shared/hooks/useSubjects';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { USER_PATH } from '../user.routes';
 import { navigate } from '~modules/shared/helpers/link';
 import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
 import { PHOTO_TYPES } from '~modules/shared/helpers/files';
@@ -112,7 +111,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	}, [storedProfile, setLoadingInfo]);
 
 	const navigateBack = () => {
-		navigate(history, USER_PATH(AdminConfigManager.getConfig().route_parts).USER_DETAIL, {
+		navigate(history, AdminConfigManager.getConfig().routes.USER_DETAIL, {
 			id,
 		});
 	};

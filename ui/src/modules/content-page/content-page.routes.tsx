@@ -1,36 +1,35 @@
 import React, { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
-import { CONTENT_PAGE_PATH } from '~modules/content-page/const/content-page.consts';
-import { ROUTE_PARTS } from '~modules/shared';
+import { AdminConfigManager } from '~core/config';
 import { ContentPageOverviewPage } from './ContentPageOverviewPage';
 import ContentPageEditPage from './ContentPageEditPage';
 import ContentPageDetailPage from './ContentPageDetailPage';
 
-export const renderAdminContentPageRoutes = (parts?: typeof ROUTE_PARTS): ReactNode[] => {
+export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={CONTENT_PAGE_PATH(parts).OVERVIEW}
+			key={AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW}
 			render={() => <ContentPageOverviewPage />}
 			exact
-			path={CONTENT_PAGE_PATH(parts).OVERVIEW}
+			path={AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW}
 		/>,
 		<Route
-			key={CONTENT_PAGE_PATH(parts).CREATE}
+			key={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={CONTENT_PAGE_PATH(parts).CREATE}
+			path={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}
 		/>,
 		<Route
-			key={CONTENT_PAGE_PATH(parts).DETAIL}
+			key={AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL}
 			render={() => <ContentPageDetailPage />}
 			exact
-			path={CONTENT_PAGE_PATH(parts).DETAIL}
+			path={AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL}
 		/>,
 		<Route
-			key={CONTENT_PAGE_PATH(parts).EDIT}
+			key={AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={CONTENT_PAGE_PATH(parts).EDIT}
+			path={AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT}
 		/>,
 	];
 };
