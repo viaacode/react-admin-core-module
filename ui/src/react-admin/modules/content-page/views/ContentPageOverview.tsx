@@ -538,13 +538,10 @@ const ContentPageOverview: FunctionComponent = () => {
 	};
 
 	const renderContentOverview = () => {
-		if (!contentPages) {
-			return null;
-		}
 		return (
 			<>
 				<FilterTable
-					data={[]}
+					data={contentPages || []}
 					itemsPerPage={PAGES_PER_PAGE}
 					columns={tableColumns}
 					dataCount={contentPageCount}

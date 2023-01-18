@@ -442,7 +442,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const filters = getFilters(tableState);
 	return (
 		<div className={clsx('c-filter-table', className)}>
-			{!data.length && (isEmpty(filters) || !filters) ? (
+			{!data?.length && (isEmpty(filters) || !filters) ? (
 				renderNoResults()
 			) : (
 				<>
