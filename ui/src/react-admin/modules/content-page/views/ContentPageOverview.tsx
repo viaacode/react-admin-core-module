@@ -27,7 +27,7 @@ import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { PermissionService } from '~modules/shared/services/permission-service';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import { QUERY_KEYS } from '../../../../shared/types';
+import { QUERY_KEYS } from '~modules/shared/types';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,

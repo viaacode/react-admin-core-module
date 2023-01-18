@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { QUERY_KEYS } from '../../shared/types';
+import { QUERY_KEYS } from '~modules/shared/types';
 
 export const useGetContentPageByPath = (
 	path: string | undefined,

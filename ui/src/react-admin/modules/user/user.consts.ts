@@ -6,7 +6,7 @@ import { compact } from 'lodash-es';
 import { AdminConfig, AdminConfigManager, I18n } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
-	CheckboxOption
+	CheckboxOption,
 } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~modules/shared/helpers/filters';
@@ -18,12 +18,6 @@ import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
 	confirmButtonType?: ButtonType;
-};
-
-export const USER_QUERY_KEYS = {
-	getProfileById: 'getProfileById',
-    getProfiles: 'getProfiles',
-    getIdps: 'getIdps'
 };
 
 export const GET_USER_OVERVIEW_TABLE_COLS: (
@@ -70,28 +64,28 @@ const getAvoColumns = (
 		id: 'profileId',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___id'),
 		sortable: false,
-		visibleByDefault: false
+		visibleByDefault: false,
 	},
 	{
 		id: 'firstName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___voornaam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'lastName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___achternaam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'email',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'userGroup',
@@ -108,11 +102,11 @@ const getAvoColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
+					id: NULL_FILTER,
+				},
+			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'businessCategory',
@@ -127,11 +121,11 @@ const getAvoColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
+					id: NULL_FILTER,
+				},
+			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'isException',
@@ -141,7 +135,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'boolean'
+		dataType: 'boolean',
 	},
 	{
 		id: 'isBlocked',
@@ -149,7 +143,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'boolean'
+		dataType: 'boolean',
 	},
 	{
 		id: 'blockedAt',
@@ -159,7 +153,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime'
+		dataType: 'dateTime',
 	},
 	{
 		id: 'unblockedAt',
@@ -169,55 +163,55 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime'
+		dataType: 'dateTime',
 	},
 	...((PermissionService.hasPerm(user, PermissionName.EDIT_USER_TEMP_ACCESS)
 		? [
-			{
-				id: 'tempAccess',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/users/user___tijdelijke-toegang'
-				),
-				sortable: true,
-				visibleByDefault: false,
-				filterType: 'CheckboxDropdownModal',
-				filterProps: {
-					options: [
-						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
-								'admin/users/user___tijdelijke-toegang-ja'
-							),
-							id: '1'
-						},
-						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
-								'admin/users/user___tijdelijke-toegang-nee'
-							),
-							id: '0'
-						}
-					]
-				} as CheckboxDropdownModalProps,
-				dataType: 'booleanNullsLast' // Users without a value are always last when sorting
-			},
-			{
-				id: 'tempAccessFrom',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/users/user___te-deblokkeren-op'
-				),
-				sortable: true,
-				visibleByDefault: false,
-				dataType: 'dateTime'
-			},
-			{
-				id: 'tempAccessUntil',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/users/user___te-blokkeren-op'
-				),
-				sortable: true,
-				visibleByDefault: false,
-				dataType: 'dateTime'
-			}
-		]
+				{
+					id: 'tempAccess',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/users/user___tijdelijke-toegang'
+					),
+					sortable: true,
+					visibleByDefault: false,
+					filterType: 'CheckboxDropdownModal',
+					filterProps: {
+						options: [
+							{
+								label: AdminConfigManager.getConfig().services.i18n.tText(
+									'admin/users/user___tijdelijke-toegang-ja'
+								),
+								id: '1',
+							},
+							{
+								label: AdminConfigManager.getConfig().services.i18n.tText(
+									'admin/users/user___tijdelijke-toegang-nee'
+								),
+								id: '0',
+							},
+						],
+					} as CheckboxDropdownModalProps,
+					dataType: 'booleanNullsLast', // Users without a value are always last when sorting
+				},
+				{
+					id: 'tempAccessFrom',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/users/user___te-deblokkeren-op'
+					),
+					sortable: true,
+					visibleByDefault: false,
+					dataType: 'dateTime',
+				},
+				{
+					id: 'tempAccessUntil',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/users/user___te-blokkeren-op'
+					),
+					sortable: true,
+					visibleByDefault: false,
+					dataType: 'dateTime',
+				},
+		  ]
 		: []) as FilterableColumn<UserOverviewTableCol>[]),
 	{
 		id: 'stamboek',
@@ -225,7 +219,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'number'
+		dataType: 'number',
 	},
 	{
 		id: 'organisation',
@@ -240,11 +234,11 @@ const getAvoColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
+					id: NULL_FILTER,
+				},
+			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'createdAt',
@@ -254,7 +248,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime'
+		dataType: 'dateTime',
 	},
 	{
 		id: 'lastAccessAt',
@@ -264,7 +258,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime'
+		dataType: 'dateTime',
 	},
 	{
 		id: 'educationLevels',
@@ -277,20 +271,21 @@ const getAvoColumns = (
 		filterProps: {
 			options: [
 				...educationLevels,
-				{ // Note: doesn't look like this does anything
+				{
+					// Note: doesn't look like this does anything
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___andere'
 					),
-					id: 'Andere'
+					id: 'Andere',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
-		} as CheckboxDropdownModalProps
+					id: NULL_FILTER,
+				},
+			],
+		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'subjects',
@@ -305,10 +300,10 @@ const getAvoColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
-		} as CheckboxDropdownModalProps
+					id: NULL_FILTER,
+				},
+			],
+		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'idps',
@@ -323,10 +318,10 @@ const getAvoColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
-		} as CheckboxDropdownModalProps
+					id: NULL_FILTER,
+				},
+			],
+		} as CheckboxDropdownModalProps,
 	},
 	{
 		id: 'educationalOrganisations',
@@ -335,8 +330,8 @@ const getAvoColumns = (
 		),
 		sortable: false,
 		visibleByDefault: false,
-		filterType: 'MultiEducationalOrganisationSelectModal'
-	}
+		filterType: 'MultiEducationalOrganisationSelectModal',
+	},
 ];
 
 const getHetArchiefColumns = (
@@ -347,28 +342,28 @@ const getHetArchiefColumns = (
 		id: 'profileId',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___id'),
 		sortable: false,
-		visibleByDefault: false
+		visibleByDefault: false,
 	},
 	{
 		id: 'firstName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___voornaam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'lastName',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___achternaam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'email',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'userGroup',
@@ -385,11 +380,11 @@ const getHetArchiefColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
+					id: NULL_FILTER,
+				},
+			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'organisation',
@@ -404,11 +399,11 @@ const getHetArchiefColumns = (
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),
-					id: NULL_FILTER
-				}
-			]
+					id: NULL_FILTER,
+				},
+			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string'
+		dataType: 'string',
 	},
 	{
 		id: 'lastAccessAt',
@@ -418,8 +413,8 @@ const getHetArchiefColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime'
-	}
+		dataType: 'dateTime',
+	},
 ];
 
 export const GET_USER_BULK_ACTIONS = (
@@ -439,13 +434,13 @@ export const GET_USER_BULK_ACTIONS = (
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/users/user___blokkeren'
 			),
-			value: 'block'
+			value: 'block',
 		});
 		actions.push({
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/users/user___deblokkeren'
 			),
-			value: 'unblock'
+			value: 'unblock',
 		});
 	}
 	if (
@@ -456,7 +451,7 @@ export const GET_USER_BULK_ACTIONS = (
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/users/user___verwijderen'
 			),
-			value: 'delete'
+			value: 'delete',
 		});
 	}
 	if (
@@ -467,7 +462,7 @@ export const GET_USER_BULK_ACTIONS = (
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/users/user___vakken-aanpassen'
 			),
-			value: 'change_subjects'
+			value: 'change_subjects',
 		});
 	}
 	if (bulkActions.includes('export')) {
@@ -475,7 +470,7 @@ export const GET_USER_BULK_ACTIONS = (
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/users/user___exporteren'
 			),
-			value: 'export'
+			value: 'export',
 		});
 	}
 
@@ -503,7 +498,7 @@ const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (
 			'admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'
 		),
 		isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
-			!!tempAccess.until && normalizeTimestamp(tempAccess.until).isAfter()
+			!!tempAccess.until && normalizeTimestamp(tempAccess.until).isAfter(),
 	},
 	{
 		// When both from and until date are set, the from date must be < the until date
@@ -511,12 +506,12 @@ const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (
 		isValid: (tempAccess: Partial<Avo.User.TempAccess>) => {
 			return tempAccess.from
 				? !!tempAccess.until &&
-				normalizeTimestamp(tempAccess.from).isBefore(
-					normalizeTimestamp(tempAccess.until)
-				)
+						normalizeTimestamp(tempAccess.from).isBefore(
+							normalizeTimestamp(tempAccess.until)
+						)
 				: true;
-		}
-	}
+		},
+	},
 ];
 
 export const getTempAccessValidationErrors = (

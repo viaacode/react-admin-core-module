@@ -13,10 +13,3 @@ export type NavigationItemInfo = {
 	subLinks?: NavigationItemInfo[];
 	tooltip?: string;
 };
-
-export enum QUERY_KEYS {
-	GET_CONTENT_PAGE_OVERVIEW = 'GET_CONTENT_PAGE_OVERVIEW',
-	GET_CONTENT_PAGE_BY_PATH = 'GET_CONTENT_PAGE_BY_PATH',
-	GET_ALL_PERMISSIONS = 'GET_ALL_PERMISSIONS',
-	GET_PROFILES = 'GET_PROFILES',
-}
