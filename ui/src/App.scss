@@ -5,12 +5,15 @@
 		> .resizable-fragment {
 			width: 100%;
 			overflow: visible !important;
+			min-width: 10px;
 		}
 
 		> div:not(.resizable-fragment) {
 			position: relative;
 			background-color: rgba($color-gray-50, 0.4);
-			height: 100vh;
+			height: 100vh !important;
+			width: 15px;
+			min-width: 15px;
 
 			&:after {
 				content: '||';

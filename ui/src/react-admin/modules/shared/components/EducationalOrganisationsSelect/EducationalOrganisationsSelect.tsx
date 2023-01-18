@@ -4,11 +4,10 @@ import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 
-import { stringsToTagList } from '../../helpers/strings-to-taglist';
-
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
+import { AdminConfigManager, ToastType } from '~core/config';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+
+import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
 export interface Tag {
 	label: string;

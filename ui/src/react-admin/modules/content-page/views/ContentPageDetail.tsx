@@ -200,18 +200,19 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const handleShareModalClose = async (newContentPage?: Partial<ContentPageInfo>) => {
 		try {
 			if (newContentPage) {
-				await ContentPageService.updateContentPage(
-					{
-						...contentPageInfo,
-						...newContentPage,
-					},
-					undefined
-				);
+				const updatedContentPage: ContentPageInfo =
+					await ContentPageService.updateContentPage(
+						{
+							...contentPageInfo,
+							...newContentPage,
+						},
+						undefined
+					);
 
 				setContentPageInfo({
-					...contentPageInfo,
-					...newContentPage,
-				} as ContentPageInfo);
+					...updatedContentPage,
+					content_blocks: contentPageInfo?.content_blocks || [],
+				});
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('modules/content-page/views/content-page-detail___success'),
@@ -224,7 +225,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				});
 			}
 		} catch (err) {
-			console.error('Failed to save is_public state to content page', err, {
+			console.error('Failed to save isPublic state to content page', err, {
 				newContentPage,
 				contentPage: contentPageInfo,
 			});

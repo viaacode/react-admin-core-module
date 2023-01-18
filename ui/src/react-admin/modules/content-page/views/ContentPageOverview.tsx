@@ -262,7 +262,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				description: tText(
 					'admin/content/views/content-overview___het-content-item-is-succesvol-verwijderd'
 				),
-				type: ToastType.ERROR,
+				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
 			console.error(

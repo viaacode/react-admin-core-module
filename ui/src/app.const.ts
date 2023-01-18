@@ -9,12 +9,14 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			location: AdminConfigManager.getConfig().routes.USER_OVERVIEW,
 			key: 'users',
 			exact: false,
-		},
-		{
-			label: i18n.tHtml('app___gebruikersgroep'),
-			location: AdminConfigManager.getConfig().routes.USER_GROUP_OVERVIEW,
-			key: 'user-group',
-			exact: false,
+			subLinks: [
+				{
+					label: i18n.tHtml('Groepen en permissies'),
+					location: AdminConfigManager.getConfig().routes.USER_GROUP_OVERVIEW,
+					key: 'user-group',
+					exact: false,
+				},
+			],
 		},
 		{
 			label: i18n.tHtml('admin/admin___navigatie'),

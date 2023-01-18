@@ -53,7 +53,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 		try {
 			const now = new Date();
 			const newContent: Partial<ContentPageInfo> = {
-				is_public:
+				isPublic:
 					selectedOption === 'public' ||
 					(selectedOption === 'timebound' &&
 						((publishAt &&
@@ -61,10 +61,10 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 							((depublishAt && new Date(depublishAt) > now) || !depublishAt)) ||
 							(!publishAt &&
 								(!depublishAt || (depublishAt && new Date(depublishAt) > now))))),
-				published_at:
+				publishedAt:
 					publishedAt || (selectedOption === 'public' ? now.toISOString() : null),
-				publish_at: selectedOption === 'timebound' ? publishAt : null,
-				depublish_at: selectedOption === 'timebound' ? depublishAt : null,
+				publishAt: selectedOption === 'timebound' ? publishAt : null,
+				depublishAt: selectedOption === 'timebound' ? depublishAt : null,
 			} as Partial<ContentPageInfo>;
 			setValidationError(undefined);
 			closeModal(newContent);

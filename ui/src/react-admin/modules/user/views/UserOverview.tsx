@@ -540,16 +540,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const renderUserOverview = () => {
-		if (!profiles || isNil(profileCount)) {
-			return null;
-		}
-
 		return (
 			<>
 				<FilterTable
 					columns={columns}
-					data={profiles}
-					dataCount={profileCount}
+					data={profiles || []}
+					dataCount={profileCount || 0}
 					renderCell={(rowData: CommonUser, columnId: string) =>
 						renderTableCell(rowData, columnId as UserOverviewTableCol)
 					}
