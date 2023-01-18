@@ -57,10 +57,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	} = useGetNavigationItem(navigationItemId);
 
 	useEffect(() => {
-		if (initialNavigationItem) {
+		if (initialNavigationItem && navigationBarId) {
 			setNavigationItem(initialNavigationItem);
 		}
-	}, [initialNavigationItem]);
+	}, [initialNavigationItem, navigationBarId]);
 
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
