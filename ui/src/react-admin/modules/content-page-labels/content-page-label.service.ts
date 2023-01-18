@@ -63,7 +63,7 @@ export class ContentPageLabelService {
 
 	public static async insertContentPageLabel(
 		contentPageLabel: ContentPageLabel
-	): Promise<number> {
+	): Promise<ContentPageLabel> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'PUT',
@@ -79,7 +79,9 @@ export class ContentPageLabelService {
 		}
 	}
 
-	static async updateContentPageLabel(contentPageLabelInfo: ContentPageLabel) {
+	static async updateContentPageLabel(
+		contentPageLabelInfo: ContentPageLabel
+	): Promise<ContentPageLabel> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'PATCH',
