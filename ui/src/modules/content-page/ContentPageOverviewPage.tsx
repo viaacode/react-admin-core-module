@@ -9,7 +9,7 @@ export const ContentPageOverviewPage: FC = () => {
 		<>
 			<Flex>
 				<h1>Content pages</h1>
-				<a href={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}>
+				<a href={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
 					<Button type="primary">Nieuwe pagina</Button>
 				</a>
 			</Flex>

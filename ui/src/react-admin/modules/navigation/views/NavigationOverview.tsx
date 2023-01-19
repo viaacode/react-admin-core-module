@@ -32,7 +32,7 @@ const NavigationOverview: FunctionComponent = () => {
 			case 'placement':
 				return (
 					<Link
-						to={buildLink(AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
+						to={buildLink(AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
 							navigationBarId: placement,
 						})}
 					>
@@ -47,7 +47,7 @@ const NavigationOverview: FunctionComponent = () => {
 							onClick={() =>
 								navigate(
 									history,
-									AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL,
+									AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'),
 									{
 										navigationBarId: placement,
 									}
@@ -67,7 +67,7 @@ const NavigationOverview: FunctionComponent = () => {
 							onClick={() =>
 								navigate(
 									history,
-									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE,
+									AdminConfigManager.getAdminRoute('NAVIGATION_ITEM_CREATE'),
 									{
 										navigationBarId: placement,
 									}
@@ -116,9 +116,7 @@ const NavigationOverview: FunctionComponent = () => {
 						<Button
 							label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}
 							onClick={() =>
-								history.push(
-									AdminConfigManager.getConfig().routes.NAVIGATION_CREATE
-								)
+								history.push(AdminConfigManager.getAdminRoute('NAVIGATION_CREATE'))
 							}
 						/>
 					</ButtonToolbar>

@@ -111,7 +111,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	}, [storedProfile, setLoadingInfo]);
 
 	const navigateBack = () => {
-		navigate(history, AdminConfigManager.getConfig().routes.USER_DETAIL, {
+		navigate(history, AdminConfigManager.getAdminRoute('USER_DETAIL'), {
 			id,
 		});
 	};

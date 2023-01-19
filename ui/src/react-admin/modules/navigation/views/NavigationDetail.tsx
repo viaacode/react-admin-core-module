@@ -204,7 +204,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							icon="edit-2"
 							onClick={() =>
 								handleNavigate(
-									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_EDIT,
+									AdminConfigManager.getAdminRoute('NAVIGATION_ITEM_EDIT'),
 									{
 										navigationBarId,
 										navigationItemId: String(rowData.id),
@@ -268,7 +268,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							label={tText('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
 								handleNavigate(
-									AdminConfigManager.getConfig().routes.NAVIGATION_ITEM_CREATE,
+									AdminConfigManager.getAdminRoute('NAVIGATION_ITEM_CREATE'),
 									{
 										navigationBarId,
 									}
@@ -314,7 +314,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
 								history.push(
-									AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW
+									AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')
 								)
 							}
 							type="tertiary"

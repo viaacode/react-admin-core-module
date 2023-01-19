@@ -119,10 +119,6 @@ export interface AdminConfig {
 	};
 	user: CommonUser;
 	routes: {
-		BUNDLE_DETAIL: string;
-		BUNDLE_EDIT: string;
-		COLLECTIONS_OVERVIEW: string;
-		COLLECTION_DETAIL: string;
 		CONTENT_PAGE_CREATE: string;
 		CONTENT_PAGE_DETAIL: string;
 		CONTENT_PAGE_EDIT: string;
@@ -131,13 +127,11 @@ export interface AdminConfig {
 		CONTENT_PAGE_LABEL_EDIT: string;
 		CONTENT_PAGE_LABEL_OVERVIEW: string;
 		CONTENT_PAGE_OVERVIEW: string;
-		ITEM_DETAIL: string;
 		NAVIGATION_CREATE: string;
 		NAVIGATION_DETAIL: string;
 		NAVIGATION_ITEM_CREATE: string;
 		NAVIGATION_ITEM_EDIT: string;
 		NAVIGATION_OVERVIEW: string;
-		NEWS: string;
 		TRANSLATIONS_OVERVIEW: string;
 		USER_DETAIL: string;
 		USER_EDIT: string;
@@ -146,7 +140,15 @@ export interface AdminConfig {
 		USER_GROUP_EDIT: string;
 		USER_GROUP_OVERVIEW: string;
 		USER_OVERVIEW: string;
-		SEARCH: string;
+
+		// Optional values only needed for avo
+		BUNDLE_DETAIL?: string;
+		BUNDLE_EDIT?: string;
+		COLLECTIONS_OVERVIEW?: string;
+		COLLECTION_DETAIL?: string;
+		ITEM_DETAIL?: string;
+		NEWS?: string;
+		SEARCH?: string;
 	};
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;

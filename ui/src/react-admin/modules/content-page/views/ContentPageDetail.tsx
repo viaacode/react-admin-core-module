@@ -163,7 +163,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			await softDeleteContentPage(id);
 
-			history.push(AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW);
+			history.push(AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'));
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
@@ -297,7 +297,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					}
 
 					history.push(
-						buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+						buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
 							id: duplicateContentPage.id,
 						})
 					);
@@ -370,7 +370,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				/>
 				{isAllowedToEdit && (
 					<Link
-						to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT, {
+						to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_EDIT'), {
 							id,
 						})}
 						className="a-link__no-styles"

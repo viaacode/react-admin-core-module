@@ -319,9 +319,9 @@ const PageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 				buttonAltTitle={buttonAltTitle}
 				focusedPage={focusedPage ? convertToPageOverviewContentPage(focusedPage) : null}
 				getLabelLink={(label: string) => {
-					return `/${
-						AdminConfigManager.getConfig().routes.NEWS
-					}?label=${encodeURIComponent(label)}`;
+					return `/${AdminConfigManager.getAdminRoute('NEWS')}?label=${encodeURIComponent(
+						label
+					)}`;
 				}}
 				renderLink={renderLink}
 			/>

@@ -81,7 +81,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				)
 			);
 
-			history.push(AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW);
+			history.push(AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW'));
 		}
 	}, [
 		isLoadingNavigationItems,
@@ -275,7 +275,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					position: navigationItems.length,
 				});
 
-				navigate(history, AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
+				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
 					navigationBarId: navigationItem.placement as string,
 				});
 
@@ -300,7 +300,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					} as NavigationItem,
 				]);
 
-				navigate(history, AdminConfigManager.getConfig().routes.NAVIGATION_DETAIL, {
+				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
 					navigationBarId: navigationItem.placement as string,
 				});
 
@@ -367,7 +367,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
 								history.push(
-									AdminConfigManager.getConfig().routes.NAVIGATION_OVERVIEW
+									AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')
 								)
 							}
 							type="tertiary"

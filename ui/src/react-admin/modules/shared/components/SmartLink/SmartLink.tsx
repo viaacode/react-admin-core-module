@@ -125,7 +125,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				}
 				case ContentPickerType.COLLECTION: {
 					const collectionUrl = buildLink(
-						AdminConfigManager.getConfig().routes.COLLECTION_DETAIL,
+						AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
 						{
 							id: value as string,
 						}
@@ -133,18 +133,15 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return renderLink(collectionUrl, resolvedTarget);
 				}
 				case ContentPickerType.ITEM: {
-					const itemUrl = buildLink(AdminConfigManager.getConfig().routes.ITEM_DETAIL, {
+					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 						id: value,
 					});
 					return renderLink(itemUrl, resolvedTarget);
 				}
 				case ContentPickerType.BUNDLE: {
-					const bundleUrl = buildLink(
-						AdminConfigManager.getConfig().routes.BUNDLE_DETAIL,
-						{
-							id: value,
-						}
-					);
+					const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
+						id: value,
+					});
 					return renderLink(bundleUrl, resolvedTarget);
 				}
 				case ContentPickerType.EXTERNAL_LINK: {
@@ -167,7 +164,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					const queryParams = JSON.parse(value as string);
 					return renderLink(
 						buildLink(
-							AdminConfigManager.getConfig().routes.SEARCH,
+							AdminConfigManager.getAdminRoute('SEARCH'),
 							{},
 							stringify(
 								fromPairs(

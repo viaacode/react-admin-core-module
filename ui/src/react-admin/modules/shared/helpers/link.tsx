@@ -140,7 +140,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 
 			case 'COLLECTION': {
 				const collectionUrl = buildLink(
-					AdminConfigManager.getConfig().routes.COLLECTION_DETAIL,
+					AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
 					{
 						id: value as string,
 					}
@@ -150,7 +150,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			}
 
 			case 'ITEM': {
-				const itemUrl = buildLink(AdminConfigManager.getConfig().routes.ITEM_DETAIL, {
+				const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(itemUrl, history, resolvedTarget);
@@ -158,7 +158,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			}
 
 			case 'BUNDLE': {
-				const bundleUrl = buildLink(AdminConfigManager.getConfig().routes.BUNDLE_DETAIL, {
+				const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
 					id: value,
 				});
 				navigateToAbsoluteOrRelativeUrl(bundleUrl, history, resolvedTarget);

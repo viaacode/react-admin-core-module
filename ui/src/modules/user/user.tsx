@@ -34,22 +34,22 @@ const UserDetailPage: FC = () => {
 export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getConfig().routes.USER_OVERVIEW}
+			key={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
 			render={() => <UserOverviewPage />}
 			exact
-			path={AdminConfigManager.getConfig().routes.USER_OVERVIEW}
+			path={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
 		/>,
 		<Route
-			key={AdminConfigManager.getConfig().routes.USER_DETAIL}
+			key={AdminConfigManager.getAdminRoute('USER_DETAIL')}
 			render={() => <UserDetailPage />}
 			exact
-			path={AdminConfigManager.getConfig().routes.USER_DETAIL}
+			path={AdminConfigManager.getAdminRoute('USER_DETAIL')}
 		/>,
 		<Route
-			key={AdminConfigManager.getConfig().routes.USER_EDIT}
+			key={AdminConfigManager.getAdminRoute('USER_EDIT')}
 			render={() => <UserEditPage />}
 			exact
-			path={AdminConfigManager.getConfig().routes.USER_EDIT}
+			path={AdminConfigManager.getAdminRoute('USER_EDIT')}
 		/>,
 	];
 };
