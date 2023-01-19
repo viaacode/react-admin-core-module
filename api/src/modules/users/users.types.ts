@@ -124,6 +124,7 @@ export type UserOverviewTableCol =
 	| 'profileId'
 	| 'firstName'
 	| 'lastName'
+	| 'fullName'
 	| 'email'
 	| 'userGroup'
 	| 'businessCategory'
