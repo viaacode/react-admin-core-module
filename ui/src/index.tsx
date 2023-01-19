@@ -22,6 +22,29 @@ const routerConfig: AdminConfig['services']['router'] = {
 	useHistory: useHistory,
 };
 
+const DUMMY_EDUCATIONAL_ORGANISATIONS = [
+	{
+		organizationId: '50674',
+		unitId: '50674-5-316',
+		label: 'Academie de Kunstbrug Gent - Bargiekaai 1',
+	},
+	{
+		organizationId: '50674',
+		unitId: '50674-24-316',
+		label: 'Academie de Kunstbrug Gent - Cataloniëstraat 1',
+	},
+	{
+		organizationId: '50674',
+		unitId: '50674-2-316',
+		label: 'Academie de Kunstbrug Gent - Coupure Rechts 52',
+	},
+	{
+		organizationId: '50674',
+		unitId: '50674-4-316',
+		label: 'Academie de Kunstbrug Gent - Ottogracht Kunstencampus 4',
+	},
+];
+
 function setConfig() {
 	// only used for starting admin-core separately
 	AdminConfigManager.setConfig({
@@ -350,9 +373,14 @@ function setConfig() {
 					i18n.t(key, params as any) as unknown as string,
 			},
 			educationOrganisationService: {
-				fetchEducationOrganisationName: () => Promise.resolve(null),
-				fetchCities: () => Promise.resolve([]),
-				fetchEducationOrganisations: () => Promise.resolve([]),
+				fetchEducationOrganisationName: (orgId: string, unitId: string) =>
+					Promise.resolve(
+						DUMMY_EDUCATIONAL_ORGANISATIONS.find(
+							(org) => org.organizationId === orgId && org.unitId === unitId
+						)?.label || orgId
+					),
+				fetchCities: () => Promise.resolve(['GENT (9000)']),
+				fetchEducationOrganisations: () => Promise.resolve(DUMMY_EDUCATIONAL_ORGANISATIONS),
 			},
 			router: routerConfig as any,
 			queryCache: {
@@ -405,7 +433,7 @@ function setConfig() {
 			USER_GROUP_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id`,
 			USER_GROUP_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}/:id/${ROUTE_PARTS.edit}`,
 			USER_GROUP_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
-			USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}}`,
+			USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
 			SEARCH: `/${ROUTE_PARTS.search}`,
 		},
 		env: {

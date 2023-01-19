@@ -164,7 +164,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 			case 'edit':
 				navigate(
 					history,
-					buildLink(AdminConfigManager.getConfig().routes.USER_EDIT, {
+					buildLink(AdminConfigManager.getAdminRoute('USER_EDIT'), {
 						id: id as string,
 					})
 				);
@@ -395,7 +395,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 
 	// Executed when the user was deleted
 	const deleteCallback = () =>
-		navigate(history, AdminConfigManager.getConfig().routes.USER_OVERVIEW);
+		navigate(history, AdminConfigManager.getAdminRoute('USER_OVERVIEW'));
 
 	const renderUserDetailPage = () => {
 		const isBlocked = storedProfile?.isBlocked;

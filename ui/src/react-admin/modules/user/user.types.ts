@@ -112,24 +112,24 @@ export type UserOverviewTableCol =
 	| 'tempAccessUntil';
 
 export interface UserTableState extends FilterableTableState {
-	first_name: string;
-	last_name: string;
+	firstName: string;
+	lastName: string;
 	mail: string;
 	stamboek: string;
-	business_category: string;
-	is_exception: boolean;
-	is_blocked: boolean;
-	blocked_at: {
+	businessCategory: string;
+	isException: boolean;
+	isBlocked: boolean;
+	blockedAt: {
 		date: string;
 	};
-	unblocked_at: {
+	unblockedAt: {
 		date: string;
 	};
-	created_at: string;
-	education_levels: string[];
+	createdAt: string;
+	educationLevels: string[];
 	subjects: string[];
 	idps: string[];
-	educational_organisations: string[];
+	educationalOrganisations: string[];
 	columns: string[];
 }
 

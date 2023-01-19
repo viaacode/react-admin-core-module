@@ -89,10 +89,10 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 											id: 'users',
 											label: `${selected} ${
 												selected > 1
-													? tHtml(
+													? tText(
 															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___items-geselecteerd'
 													  )
-													: tHtml(
+													: tText(
 															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___item-geselecteerd'
 													  )
 											}`,

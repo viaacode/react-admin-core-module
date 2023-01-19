@@ -302,7 +302,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			AdminConfigManager.getConfig().routes.USER_OVERVIEW,
+			AdminConfigManager.getAdminRoute('USER_OVERVIEW'),
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState?.columns || []).join('~') }
 		);
@@ -421,7 +421,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 				return isAvo() ? (
 					<Link
-						to={buildLink(AdminConfigManager.getConfig().routes.USER_DETAIL, {
+						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
 							id: commonUser.profileId,
 						})}
 					>
@@ -540,16 +540,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	};
 
 	const renderUserOverview = () => {
-		if (!profiles || isNil(profileCount)) {
-			return null;
-		}
-
 		return (
 			<>
 				<FilterTable
 					columns={columns}
-					data={profiles}
-					dataCount={profileCount}
+					data={profiles || []}
+					dataCount={profileCount || 0}
 					renderCell={(rowData: CommonUser, columnId: string) =>
 						renderTableCell(rowData, columnId as UserOverviewTableCol)
 					}

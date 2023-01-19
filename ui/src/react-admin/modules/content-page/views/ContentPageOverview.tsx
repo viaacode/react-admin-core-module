@@ -262,7 +262,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				description: tText(
 					'admin/content/views/content-overview___het-content-item-is-succesvol-verwijderd'
 				),
-				type: ToastType.ERROR,
+				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
 			console.error(
@@ -324,7 +324,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'title':
 				return (
 					<Link
-						to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+						to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
 							id,
 						})}
 					>
@@ -423,10 +423,9 @@ const ContentPageOverview: FunctionComponent = () => {
 				return (
 					<ButtonToolbar>
 						<Link
-							to={buildLink(
-								AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL,
-								{ id }
-							)}
+							to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
+								id,
+							})}
 						>
 							<Button
 								icon="info"
@@ -466,7 +465,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							disabled
 						/>
 						<Link
-							to={buildLink(AdminConfigManager.getConfig().routes.CONTENT_PAGE_EDIT, {
+							to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_EDIT'), {
 								id,
 							})}
 						>
@@ -520,7 +519,7 @@ const ContentPageOverview: FunctionComponent = () => {
 				</p>
 				{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 					<Spacer margin="top">
-						<Link to={AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE}>
+						<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
 							<Button
 								icon="plus"
 								label={tText(

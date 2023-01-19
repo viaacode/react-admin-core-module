@@ -208,14 +208,17 @@ export class ContentPageService {
 	public static async updateContentPage(
 		contentPage: Partial<ContentPageInfo>,
 		initialContentPage: Partial<ContentPageInfo> | undefined
-	): Promise<Partial<ContentPageInfo> | null> {
-		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
-			method: 'PATCH',
-			body: JSON.stringify({
-				contentPage: convertContentPageInfoToDbContentPage(contentPage),
-				initialContentPage: convertContentPageInfoToDbContentPage(initialContentPage),
-			}),
-		});
+	): Promise<ContentPageInfo> {
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson<DbContentPage>(
+			this.getBaseUrl(),
+			{
+				method: 'PATCH',
+				body: JSON.stringify({
+					contentPage: convertContentPageInfoToDbContentPage(contentPage),
+					initialContentPage: convertContentPageInfoToDbContentPage(initialContentPage),
+				}),
+			}
+		);
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
@@ -431,14 +434,18 @@ export class ContentPageService {
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
-			const responseContent = await fetchWithLogoutJson<{ exists: boolean; title: string; id: number }>(
+			const responseContent = await fetchWithLogoutJson<{
+				exists: boolean;
+				title: string;
+				id: number;
+			}>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/path-exists',
 					query: {
 						path,
 					},
 				}),
-				{throwOnNullResponse: true}
+				{ throwOnNullResponse: true }
 			);
 			if (id === responseContent.id) {
 				return null;

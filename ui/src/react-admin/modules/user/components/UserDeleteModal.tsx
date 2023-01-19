@@ -138,7 +138,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getConfig().routes.COLLECTIONS_OVERVIEW,
+						AdminConfigManager.getAdminRoute('COLLECTIONS_OVERVIEW'),
 						{},
 						{
 							is_public: '1',
@@ -156,7 +156,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getConfig().routes.COLLECTIONS_OVERVIEW,
+						AdminConfigManager.getAdminRoute('COLLECTIONS_OVERVIEW'),
 						{},
 						{
 							is_public: '0',
@@ -174,7 +174,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW,
+						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
 							is_public: '1',
@@ -192,7 +192,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW,
+						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
 							is_public: '0',

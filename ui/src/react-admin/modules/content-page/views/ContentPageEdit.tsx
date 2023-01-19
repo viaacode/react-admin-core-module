@@ -89,7 +89,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 		try {
 			if (
 				isNil(id) ||
-				id === AdminConfigManager.getConfig().routes.CONTENT_PAGE_CREATE.split('/').pop()
+				id === AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE').split('/').pop()
 			) {
 				return;
 			}
@@ -409,7 +409,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, {
+			navigate(history, AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -483,9 +483,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(AdminConfigManager.getConfig().routes.CONTENT_PAGE_OVERVIEW);
+			history.push(AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'));
 		} else {
-			navigate(history, AdminConfigManager.getConfig().routes.CONTENT_PAGE_DETAIL, { id });
+			navigate(history, AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), { id });
 		}
 	};
 

@@ -87,7 +87,7 @@ export class UsersService {
 				? where
 				: {
 						...where,
-						is_deleted: { _eq: false },
+						_and: [...(where?._and || []), { is_deleted: { _eq: false } }],
 				  };
 
 			variables = {

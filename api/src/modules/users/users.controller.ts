@@ -124,9 +124,7 @@ export class UsersController {
 		PermissionName.EDIT_ANY_COLLECTIONS,
 		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
 	)
-	async getUser(
-		@Param('id') id: string,
-	): Promise<CommonUser> {
+	async getUser(@Param('id') id: string): Promise<CommonUser> {
 		return this.usersService.getById(id);
 	}
 }
