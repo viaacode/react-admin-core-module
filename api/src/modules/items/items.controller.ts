@@ -47,6 +47,7 @@ export class ItemsController {
 		);
 	}
 
+	// Allowed for all users
 	@ApiOperation({
 		description:
 			'Get the item uuid (eg: 7c493caf-1ec4-4900-a4bd-0e5a98ab8244) by its external id (eg: 3b5w69xc4k)',

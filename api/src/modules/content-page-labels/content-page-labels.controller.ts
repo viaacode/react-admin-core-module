@@ -10,9 +10,11 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageLabel, LabelObj } from '../content-pages';
 import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-request.dto';
+import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { ContentPageLabelsService } from './content-page-labels.service';
@@ -22,10 +24,13 @@ import { ContentPageLabelDto } from './dto/content-page-label.dto';
 @ApiTags('ContentPageLabels')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')
 export class ContentPageLabelsController {
-	constructor(private contentPageLabelService: ContentPageLabelsService) {
-	}
+	constructor(private contentPageLabelService: ContentPageLabelsService) {}
 
 	@Get('')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async fetchContentPageLabels(
 		@Query('offset') offset: string,
 		@Query('limit') limit: string,
@@ -56,6 +61,7 @@ export class ContentPageLabelsController {
 		}
 	}
 
+	// Allowed for any user
 	@Get(':id')
 	public async fetchContentPageLabelById(
 		@Param('id') id: string,
@@ -81,6 +87,7 @@ export class ContentPageLabelsController {
 		isArray: false,
 	})
 	@Put('')
+	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async insertContentPageLabel(
 		@Body() contentPageLabel: ContentPageLabelDto,
 	): Promise<ContentPageLabelDto> {
@@ -100,6 +107,7 @@ export class ContentPageLabelsController {
 	}
 
 	@Patch('')
+	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	async updateContentPageLabel(@Body() contentPageLabelInfo: ContentPageLabel) {
 		try {
 			return this.contentPageLabelService.updateContentPageLabel(
@@ -117,6 +125,7 @@ export class ContentPageLabelsController {
 	}
 
 	@Delete(':id')
+	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
 	public async deleteContentPageLabelById(
 		@Param('id') id: string,
 	): Promise<{ message: 'success' }> {
