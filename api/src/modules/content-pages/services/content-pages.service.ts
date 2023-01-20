@@ -74,6 +74,7 @@ import {
 	CONTENT_PAGE_QUERIES,
 	ContentPageQueryTypes,
 } from '../queries/content-pages.queries';
+import { isAvo } from 'src/modules/shared/helpers/is-avo';
 
 @Injectable()
 export class ContentPagesService {
@@ -1234,12 +1235,15 @@ export class ContentPagesService {
 			},
 		);
 
-		return ((
-			response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryAvo']
-		).app_content ||
-			(
-				response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryHetArchief']
-			).app_content_page ||
-			[])[0].user_group_ids;
+		if (isAvo()) {
+			const avoResponse =
+				response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryAvo'];
+			return avoResponse.app_content?.[0]?.user_group_ids || [];
+		}
+
+		const hetArchiefResponse =
+			response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryHetArchief'];
+
+		return hetArchiefResponse.app_content_page?.[0]?.user_group_ids || [];
 	}
 }

@@ -9,7 +9,7 @@ export const useGetNavigationBarItems = (
 	options?: UseQueryOptions<NavigationItem[], any, NavigationItem[], QUERY_KEYS[]>
 ) => {
 	return useQuery(
-		[QUERY_KEYS.GET_NAVIGATION_ITEM],
+		[QUERY_KEYS.GET_NAVIGATION_BAR_ITEMS],
 		async () => {
 			const navItems = await NavigationService.fetchNavigationBarItems(placement);
 			reindexNavigationItems(navItems);
