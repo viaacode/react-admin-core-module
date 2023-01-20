@@ -58,6 +58,7 @@ export class ContentPagesController {
 	}
 
 	@Get('overview')
+	@RequireAnyPermissions(PermissionName.VIEW_ADMIN_DASHBOARD)
 	public async fetchContentPages(
 		@Query('offset', ParseIntPipe) offset: number,
 		@Query('limit', ParseIntPipe) limit: number,
@@ -151,6 +152,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
 		PermissionName.EDIT_NAVIGATION_BARS,
+		PermissionName.EDIT_INTERACTIVE_TOURS,
 	)
 	public async getPublicProjectContentItems(
 		@Query('limit', ParseIntPipe) limit: number,
@@ -170,6 +172,10 @@ export class ContentPagesController {
 	}
 
 	@Get('labels')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async fetchLabelsByContentType(
 		@Query('contentType') contentType: string,
 	): Promise<ContentPageLabel[]> {
@@ -177,16 +183,31 @@ export class ContentPagesController {
 	}
 
 	@Put('labels')
-	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async insertContentLabelsLinks(
 		@Body()
 		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
+		@SessionUser() user: SessionUserEntity,
 	): Promise<void> {
 		if (!body.labelIds?.length) {
 			return;
+		}
+		if (!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES)) {
+			const contentPage = await this.contentPagesService.getContentPageById(
+				String(body.contentPageId),
+			);
+			if (contentPage.userProfileId !== user.getId()) {
+				// User cannot add labels to other peoples pages
+				throw new ForbiddenException(
+					"You're not allowed to add labels to content pages that you do not own",
+				);
+			}
 		}
 		await this.contentPagesService.insertContentLabelsLinks(
 			body.contentPageId,
@@ -195,16 +216,31 @@ export class ContentPagesController {
 	}
 
 	@Delete('labels')
-	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+	)
 	public async deleteContentLabelsLinks(
 		@Body()
 		body: {
 			contentPageId: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 			labelIds: (number | string)[];
 		},
+		@SessionUser() user: SessionUserEntity,
 	): Promise<void> {
 		if (!body.labelIds?.length) {
 			return;
+		}
+		if (!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES)) {
+			const contentPage = await this.contentPagesService.getContentPageById(
+				String(body.contentPageId),
+			);
+			if (contentPage.userProfileId !== user.getId()) {
+				// User cannot add labels to other peoples pages
+				throw new ForbiddenException(
+					"You're not allowed to add labels to content pages that you do not own",
+				);
+			}
 		}
 		await this.contentPagesService.deleteContentLabelsLinks(
 			body.contentPageId,
