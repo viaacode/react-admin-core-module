@@ -1,5 +1,5 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from "@nestjs/common";
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 
@@ -47,6 +47,14 @@ export class ItemsController {
 		);
 	}
 
+	@ApiOperation({
+		description:
+			'Get the item uuid (eg: 7c493caf-1ec4-4900-a4bd-0e5a98ab8244) by its external id (eg: 3b5w69xc4k)',
+	})
+	@ApiResponse({
+		status: 200,
+		description: 'The uuid of the item',
+	})
 	@Get('ids')
 	public async fetchItemUuidByExternalId(
 		@Query('externalId') externalId: string,

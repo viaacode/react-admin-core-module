@@ -185,6 +185,7 @@ export function convertUserInfoToCommonUser(
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
 				createdAt: user.acc_created_at,
+				updatedAt: user.acc_updated_at,
 				userGroup: {
 					name: user.group_name ?? undefined,
 					label: user.group_name ?? undefined,
@@ -199,6 +200,10 @@ export function convertUserInfoToCommonUser(
 						: undefined,
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
+				title: user.profile?.title ?? undefined,
+				alias: user.profile?.alias ?? undefined,
+				alternativeEmail: user.profile?.alternative_email ?? undefined,
+				bio: user.profile?.bio ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
 				blockedAt: user.blocked_at?.date,
 				unblockedAt: user.unblocked_at?.date,

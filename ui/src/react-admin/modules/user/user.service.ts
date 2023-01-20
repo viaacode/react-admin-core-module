@@ -209,7 +209,7 @@ export class UserService {
 		}
 
 		try {
-			return fetchWithLogoutJson(
+			return fetchWithLogoutJson<DeleteContentCounts>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/counts',
 					query: {
