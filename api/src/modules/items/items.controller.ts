@@ -62,6 +62,13 @@ export class ItemsController {
 		return this.itemsService.fetchItemUuidByExternalId(externalId);
 	}
 
+	@ApiOperation({ description: 'Get one media item by externalId or uuid' })
+	@ApiResponse({
+		status: 200,
+		description:
+			'Returns the item that was requested, throws an error if the item was not found',
+		isArray: false,
+	})
 	@Get(':id')
 	public async fetchItemByUuidOrExternalId(
 		@Param('id') id: string,

@@ -380,17 +380,20 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					</ButtonToolbar>
 				</AdminLayout.Actions>
 				<AdminLayout.Content>
-					<NavigationEditForm
-						formErrors={formErrors}
-						formState={navigationItem}
-						navigationParentId={navigationBarId}
-						navigationParentOptions={navigationParentOptions}
-						onChange={handleChange}
-						permissionWarning={permissionWarning}
-						enableIcons={
-							AdminConfigManager.getConfig().navigationBars?.enableIcons ?? true
-						}
-					/>
+					{/* Force re-render when contentPath changes */}
+					<div key={navigationItem.contentPath}>
+						<NavigationEditForm
+							formErrors={formErrors}
+							formState={navigationItem}
+							navigationParentId={navigationBarId}
+							navigationParentOptions={navigationParentOptions}
+							onChange={handleChange}
+							permissionWarning={permissionWarning}
+							enableIcons={
+								AdminConfigManager.getConfig().navigationBars?.enableIcons ?? true
+							}
+						/>
+					</div>
 				</AdminLayout.Content>
 			</AdminLayout>
 		);
