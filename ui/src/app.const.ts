@@ -11,7 +11,7 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			exact: false,
 			subLinks: [
 				{
-					label: i18n.tHtml('Groepen en permissies'),
+					label: i18n.tHtml('app___groepen-en-permissies'),
 					location: AdminConfigManager.getAdminRoute('USER_GROUP_OVERVIEW'),
 					key: 'user-group',
 					exact: false,
@@ -31,19 +31,19 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			exact: false,
 			subLinks: [
 				{
-					label: i18n.tHtml('Start: uitgelogd'),
+					label: i18n.tHtml('app___start-uitgelogd'),
 					location: AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW') + '/195',
 					key: 'pages',
 					exact: true,
 				},
 				{
-					label: i18n.tHtml('Start: uitgelogd leerlingen'),
+					label: i18n.tHtml('app___start-uitgelogd-leerlingen'),
 					location: AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW') + '/236',
 					key: 'faqs',
 					exact: true,
 				},
 				{
-					label: i18n.tHtml('Start: uitgelogd lesgever'),
+					label: i18n.tHtml('app___start-uitgelogd-lesgever'),
 					location: AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW') + '/313',
 					key: 'faqs',
 					exact: true,

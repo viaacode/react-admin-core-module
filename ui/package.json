@@ -23,7 +23,7 @@
     "test": "jest --cache",
     "type-check": "tsc --noEmit",
     "whitelist-queries": "ts-node --project ./scripts/tsconfig.json -- scripts/whitelist-gql-queries.ts",
-    "i18n:extract": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts && npm run lint:ts -- --fix",
+    "translations:extract": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts && npm run lint:ts -- --fix",
     "convert-gql-queries-to-separate-files": "ts-node --transpile-only --require dotenv/config --project ./scripts/tsconfig.json -- scripts/convert-gql-queries-to-separate-graphql-files.ts",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
