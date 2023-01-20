@@ -248,6 +248,20 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 	return { avo: newTranslationsAvo, hetarchief: newTranslationsHetArchief };
 }
 
+async function getAvoOnlineTranslations() {
+	const response = await fetch(
+		'https://avo2-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	return await response.json();
+}
+
 async function getOnlineTranslations(): Promise<{
 	avo: Record<string, string>;
 	hetarchief: Record<string, string>;
@@ -264,21 +278,7 @@ async function getOnlineTranslations(): Promise<{
 	}
 	try {
 		// Avo
-		const avoTranslationsResponse: GetTranslationsQueryAvo = (await (
-			await fetch(process.env.GRAPHQL_URL_AVO, {
-				headers: {
-					'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_AVO,
-				},
-				method: 'post',
-				body: JSON.stringify({
-					query: GetTranslationsDocumentAvo,
-				}),
-			})
-		).json()) as GetTranslationsQueryAvo;
-		const avoAdminCoreTranslations =
-			avoTranslationsResponse.app_site_variables?.find(
-				(t) => t.name === 'translations-admin-core' || t.name === 'TRANSLATIONS_ADMIN_CORE'
-			)?.value || {};
+		const avoAdminCoreTranslations = await getAvoOnlineTranslations();
 
 		// HetArchief
 		const hetArchiefTranslationsResponse: GetTranslationsQueryHetArchief = (await (
