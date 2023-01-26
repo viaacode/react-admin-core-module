@@ -76,7 +76,7 @@ export class MaintenanceAlertsQueryDto {
 		default: 'createdAt',
 		enum: [Object.values(MaintenanceAlertOrderProp)],
 	})
-	orderProp? = MaintenanceAlertOrderProp.ACTIVE;
+	orderProp? = MaintenanceAlertOrderProp.FROM_DATE;
 
 	@IsString()
 	@Type(() => String)
