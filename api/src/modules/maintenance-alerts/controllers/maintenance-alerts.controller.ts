@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Param, Patch, Post } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { PermissionName } from "@viaa/avo2-types";
 
@@ -27,4 +27,41 @@ export class MaintenanceAlertsController {
 			createMaintenanceAlertDto
 		)
 	}
+
+	@Patch(':id')
+	@ApiOperation({
+		description:
+			'Update maintenance alert',
+	})
+	@RequireAnyPermissions(PermissionName.EDIT_MAINTENANCE_ALERTS)
+	public async updateMaintenanceAlert(
+		@Param('id') maintenanceAlertId: string,
+		@Body() updateMaintenanceAlertDto: CreateMaintenanceAlertDto,
+	): Promise<MaintenanceAlert> {
+		return await this.maintenanceAlertsService.updateMaintenanceAlert(
+			maintenanceAlertId,
+			updateMaintenanceAlertDto
+		)
+	}
+
+	@Delete(':id')
+	@ApiOperation({
+		description:
+			'Delete maintenance alert',
+	})
+	@RequireAnyPermissions(PermissionName.DELETE_MAINTENANCE_ALERTS)
+	public async deleteMaintenanceAlert(
+		@Param('id') maintenanceAlertId: string
+	): Promise<{ status: string }> {
+		const affectedRows = await this.maintenanceAlertsService.deleteMaintenanceAlert(
+			maintenanceAlertId
+		)
+
+		if (affectedRows > 0) {
+			return { status: 'Maintenance alert has been deleted' };
+		} else {
+			return { status: `no maintenance alert found with that id: ${maintenanceAlertId}` };
+		}
+	}
+
 }
