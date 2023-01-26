@@ -17,17 +17,6 @@ export class MaintenanceAlertsQueryDto {
 	})
 	query?: string;
 
-	@IsArray()
-	@IsString({ each: true })
-	@Type(() => String)
-	@IsOptional()
-	@ApiPropertyOptional({
-		isArray: true,
-		description: 'List of user group ids',
-		default: [],
-	})
-	userGroupIds?: string[];
-
 	@IsString()
 	@Type(() => String)
 	@IsOptional()

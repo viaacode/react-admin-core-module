@@ -4,7 +4,9 @@ import { IPagination } from "@studiohyperdrive/pagination";
 import { PermissionName } from "@viaa/avo2-types";
 
 import { RequireAnyPermissions } from "../../shared/decorators/require-any-permissions.decorator";
+import { SessionUser } from "../../shared/decorators/user.decorator";
 import { addPrefix } from "../../shared/helpers/add-route-prefix";
+import { SessionUserEntity } from "../../users/classes/session-user";
 import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto } from "../dto/maintenance-alerts.dto";
 import { MaintenanceAlert } from "../maintenance-alerts.types";
 import { MaintenanceAlertsService } from './../services/maintenance-alerts.service';
@@ -32,8 +34,11 @@ export class MaintenanceAlertsController {
 	})
 	public async getPersonalMaintenanceAlerts(
 		@Query() queryDto: MaintenanceAlertsQueryDto,
+		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
-		return this.maintenanceAlertsService.findAll(queryDto);
+		return this.maintenanceAlertsService.findAll(queryDto, {
+			userGroupIds: user.getGroupIds()
+		});
 	}
 
 	@Get(':id')
@@ -41,7 +46,10 @@ export class MaintenanceAlertsController {
 		PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
 		PermissionName.VIEW_OWN_MAINTENANCE_ALERTS
 	)
-	public async getMaintenanceAlertById(@Param('id') id: string): Promise<MaintenanceAlert> {
+	public async getMaintenanceAlertById(
+		@Param('id') id: string,
+		@SessionUser() user: SessionUserEntity
+	): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.findById(id);
 	}
 

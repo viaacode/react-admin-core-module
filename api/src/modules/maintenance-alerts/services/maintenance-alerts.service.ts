@@ -35,8 +35,11 @@ export class MaintenanceAlertsService {
 
 	public async findAll(
 		inputQuery: MaintenanceAlertsQueryDto,
+		parameters: {
+			userGroupIds: (string | number)[]
+		} = null
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { query, userGroupIds, fromDate, untilDate, active, page, size, orderProp, orderDirection } =
+		const { query, fromDate, untilDate, active, page, size, orderProp, orderDirection } =
 			inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
@@ -50,28 +53,46 @@ export class MaintenanceAlertsService {
 			];
 		}
 
-		if (!isEmpty(userGroupIds)) {
-			where.user_groups = {
-				_in: isArray(userGroupIds) ? userGroupIds : [userGroupIds],
-			};
-		}
+		// Brecht - user group & special user group
+		if (!isNil(parameters)) {
 
-		if (!isEmpty(fromDate)) {
-			where.from_date = {
-				_gte: fromDate
+			// Brecht - LOGGED IN USER
+			if (parameters.userGroupIds[1] === '-2' ) {
+				where.user_groups = {
+					_in: isArray(parameters.userGroupIds[0]) ? parameters.userGroupIds[0] : [parameters.userGroupIds[0]]
+				}
 			}
-		}
 
-		if (!isEmpty(untilDate)) {
-			where.until_date = {
-				_lte: untilDate
-			}
-		}
-
-		if (!isEmpty(active)) {
 			where.active = {
-				_eq: active,
+				_eq: true,
 			};
+
+			where._and = [
+				{
+					from_date: { _gte: new Date().toISOString() }
+				},
+				{
+					until_date: { _lte: new Date().toISOString() }
+				}
+			];
+		} else {
+			if (!isEmpty(fromDate)) {
+				where.from_date = {
+					_gte: fromDate
+				}
+			}
+
+			if (!isEmpty(untilDate)) {
+				where.until_date = {
+					_lte: untilDate
+				}
+			}
+
+			if (!isEmpty(active)) {
+				where.active = {
+					_eq: active,
+				};
+			}
 		}
 
 		const maintenanceAlertsResponse = await this.dataService.execute<
