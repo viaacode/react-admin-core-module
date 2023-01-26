@@ -1,0 +1,22 @@
+query findMaintenanceAlerts(
+	$where: app_maintenance_alerts_bool_exp
+	$offset: Int!
+	$limit: Int!
+	$orderBy: app_maintenance_alerts_order_by! = {}
+) {
+	app_maintenance_alerts(where: $where, offset: $offset, limit: $limit, order_by: [$orderBy]) {
+		id
+		title
+		message
+		icon
+		active
+		from_date
+		until_date
+		user_groups
+	}
+	app_maintenance_alerts_aggregate(where: $where) {
+		aggregate {
+			count
+		}
+	}
+}

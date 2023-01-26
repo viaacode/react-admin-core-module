@@ -1,8 +1,15 @@
-import { Logger } from "@nestjs/common";
+import { IPagination, Pagination } from "@studiohyperdrive/pagination";
+import { Logger, NotFoundException } from "@nestjs/common";
+import { isArray } from "class-validator";
+import { isEmpty, isNil, set } from "lodash";
 
 import { DataService } from "../../data";
-import { CreateMaintenanceAlertDto, UpdateMaintenanceAlertDto } from './../dto/maintenance-alerts.dto';
+import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto, UpdateMaintenanceAlertDto } from './../dto/maintenance-alerts.dto';
 import { GqlMaintenanceAlert, MaintenanceAlert } from "../maintenance-alerts.types";
+import { ORDER_PROP_TO_DB_PROP } from "../maintenance-alerts.conts";
+
+import { SortDirection } from '../../shared/types';
+import { PaginationHelper } from "../../shared/helpers/pagination";
 
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
@@ -26,6 +33,82 @@ export class MaintenanceAlertsService {
 		}
 	}
 
+	public async findAll(
+		inputQuery: MaintenanceAlertsQueryDto,
+	): Promise<IPagination<MaintenanceAlert>> {
+		const { query, userGroupIds, fromDate, untilDate, active, page, size, orderProp, orderDirection } =
+			inputQuery;
+		const { offset, limit } = PaginationHelper.convertPagination(page, size);
+
+		/** Dynamically build the where object  */
+		const where: FindMaintenanceAlertsQueryVariables['where'] = {};
+
+		if (!isEmpty(query) && query !== '%' && query !== '%%') {
+			where._or = [
+				{ title: { _ilike: query } },
+				{ message: { _ilike: query } },
+			];
+		}
+
+		if (!isEmpty(userGroupIds)) {
+			where.user_groups = {
+				_in: isArray(userGroupIds) ? userGroupIds : [userGroupIds],
+			};
+		}
+
+		if (!isEmpty(fromDate)) {
+			where.from_date = {
+				_gte: fromDate
+			}
+		}
+
+		if (!isEmpty(untilDate)) {
+			where.until_date = {
+				_lte: untilDate
+			}
+		}
+
+		if (!isEmpty(active)) {
+			where.active = {
+				_eq: active,
+			};
+		}
+
+		const maintenanceAlertsResponse = await this.dataService.execute<
+			FindMaintenanceAlertsQuery,
+			FindMaintenanceAlertsQueryVariables
+		>(FindMaintenanceAlertsDocument, {
+			where,
+			offset,
+			limit,
+			orderBy: set(
+				{},
+				ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP['createdAt'],
+				orderDirection || SortDirection.desc
+			),
+		});
+
+		return Pagination<MaintenanceAlert>({
+			items: maintenanceAlertsResponse.app_material_requests.map((mr) => this.adapt(mr)),
+			page,
+			size,
+			total: maintenanceAlertsResponse.app_material_requests_aggregate.aggregate.count,
+		});
+	}
+
+	public async findById(id: string): Promise<MaintenanceAlert> {
+		const maintenanceAlertResponse = await this.dataService.execute<
+			FindMaintenanceAlertsByIdQuery,
+			FindMaintenanceAlertsByIdQueryVariables
+		>(FindMaintenanceAlertsByIdDocument, { id });
+
+		if (isNil(maintenanceAlertResponse) || !maintenanceAlertResponse.app_maintenance_alerts[0]) {
+			throw new NotFoundException(`Material Request with id '${id}' not found`);
+		}
+
+		return this.adapt(maintenanceAlertResponse.app_maintenance_alerts[0]);
+	}
+
 	public async createMaintenanceAlert(
 		createMaintenanceAlertDto: CreateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
@@ -41,9 +124,9 @@ export class MaintenanceAlertsService {
 
 		const { insert_app_maintenance_alerts_one: createdMainteanceAlert } =
 			await this.dataService.execute<
-				InsertMaintenanceAlertMutation,
-				InsertMaintenanceAlertMutationVariables
-			>(InsertMaintenanceAlertDocument, {
+				InsertMaintenanceAlertsMutation,
+				InsertMaintenanceAlertsMutationVariables
+			>(InsertMaintenanceAlertsDocument, {
 				newMaintenanceAlert
 			});
 
@@ -58,9 +141,9 @@ export class MaintenanceAlertsService {
 	): Promise<MaintenanceAlert> {
 		const { update_app_maintenance_alerts: updatedMaintenanceAlert } =
 			await this.dataService.execute<
-				UpdateMaintenanceAlertMutation,
-				UpdateMaintenanceAlertMutationVariables
-			>(UpdateMaintenanceAlertDocument, {
+				UpdateMaintenanceAlertsMutation,
+				UpdateMaintenanceAlertsMutationVariables
+			>(UpdateMaintenanceAlertsDocument, {
 				maintenanceAlertId,
 				updateMaintenanceAlertDto,
 			});
@@ -74,9 +157,9 @@ export class MaintenanceAlertsService {
 		maintenanceAlertId: string
 	): Promise<number> {
 		const response = await this.dataService.execute<
-			DeleteMaintenanceAlertMutation,
-			DeleteMaintenanceAlertMutationVariables
-		>(DeleteMaintenanceAlertDocument, {
+			DeleteMaintenanceAlertsMutation,
+			DeleteMaintenanceAlertsMutationVariables
+		>(DeleteMaintenanceAlertsDocument, {
 			maintenanceAlertId
 		});
 

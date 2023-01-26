@@ -1,0 +1,12 @@
+query findMaintenanceAlertById($id: uuid!) {
+	app_maintenance_alerts(where: { id: { _eq: $id } }) {
+		id
+		title
+		message
+		icon
+		active
+		from_date
+		until_date
+		user_groups
+	}
+}

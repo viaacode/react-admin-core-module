@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { IPagination } from "@studiohyperdrive/pagination";
 import { PermissionName } from "@viaa/avo2-types";
-
 
 import { RequireAnyPermissions } from "../../shared/decorators/require-any-permissions.decorator";
 import { addPrefix } from "../../shared/helpers/add-route-prefix";
-import { CreateMaintenanceAlertDto } from "../dto/maintenance-alerts.dto";
+import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto } from "../dto/maintenance-alerts.dto";
 import { MaintenanceAlert } from "../maintenance-alerts.types";
 import { MaintenanceAlertsService } from './../services/maintenance-alerts.service';
 
@@ -13,6 +13,37 @@ import { MaintenanceAlertsService } from './../services/maintenance-alerts.servi
 @Controller(addPrefix(process, 'maintenance-alerts'))
 export class MaintenanceAlertsController {
 	constructor(private maintenanceAlertsService: MaintenanceAlertsService) {}
+
+	@Get()
+	@ApiOperation({
+		description:
+			'Get maintenance alerts endpoint for meemoo admins and CP admins. Visitors should use the /personal endpoint.',
+	})
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
+	public async getMaintenanceAlerts(
+		@Query() queryDto: MaintenanceAlertsQueryDto,
+	): Promise<IPagination<MaintenanceAlert>> {
+		return await this.maintenanceAlertsService.findAll(queryDto);
+	}
+
+	@Get('personal')
+	@ApiOperation({
+		description: 'Get maintenance alert for the logged in user.',
+	})
+	public async getPersonalMaintenanceAlerts(
+		@Query() queryDto: MaintenanceAlertsQueryDto,
+	): Promise<IPagination<MaintenanceAlert>> {
+		return this.maintenanceAlertsService.findAll(queryDto);
+	}
+
+	@Get(':id')
+	@RequireAnyPermissions(
+		PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
+		PermissionName.VIEW_OWN_MAINTENANCE_ALERTS
+	)
+	public async getMaintenanceAlertById(@Param('id') id: string): Promise<MaintenanceAlert> {
+		return await this.maintenanceAlertsService.findById(id);
+	}
 
 	@Post()
 	@ApiOperation({
