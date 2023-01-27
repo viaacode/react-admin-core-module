@@ -1,0 +1,19 @@
+mutation updateMaintenanceAlert(
+	$maintenanceAlertId: uuid
+	$maintenanceAlert: app_maintenance_alerts_set_input
+) {
+	update_app_maintenance_alerts(
+		where: { id: { _eq: $maintenanceAlertId } }
+		_set: $maintenanceAlert
+	) {
+		returning {
+			id
+			title
+			message
+			type
+			user_groups
+			from_date
+			until_date
+		}
+	}
+}

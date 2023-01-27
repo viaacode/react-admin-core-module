@@ -1475,11 +1475,209 @@ export enum App_Content_Page_Update_Column {
   UserProfileId = 'user_profile_id'
 }
 
+/** columns and relationships of "app.maintenance_alerts" */
+export type App_Maintenance_Alerts = {
+  __typename?: 'app_maintenance_alerts';
+  from_date: Scalars['timestamp'];
+  id: Scalars['uuid'];
+  message: Scalars['String'];
+  title: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  until_date: Scalars['timestamp'];
+  user_groups: Scalars['jsonb'];
+};
+
+
+/** columns and relationships of "app.maintenance_alerts" */
+export type App_Maintenance_AlertsUser_GroupsArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Aggregate = {
+  __typename?: 'app_maintenance_alerts_aggregate';
+  aggregate?: Maybe<App_Maintenance_Alerts_Aggregate_Fields>;
+  nodes: Array<App_Maintenance_Alerts>;
+};
+
+/** aggregate fields of "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Aggregate_Fields = {
+  __typename?: 'app_maintenance_alerts_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Maintenance_Alerts_Max_Fields>;
+  min?: Maybe<App_Maintenance_Alerts_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Maintenance_Alerts_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type App_Maintenance_Alerts_Append_Input = {
+  user_groups?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** Boolean expression to filter rows from the table "app.maintenance_alerts". All fields are combined with a logical 'AND'. */
+export type App_Maintenance_Alerts_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Maintenance_Alerts_Bool_Exp>>;
+  _not?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Maintenance_Alerts_Bool_Exp>>;
+  from_date?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  message?: InputMaybe<String_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  type?: InputMaybe<String_Comparison_Exp>;
+  until_date?: InputMaybe<Timestamp_Comparison_Exp>;
+  user_groups?: InputMaybe<Jsonb_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app.maintenance_alerts" */
+export enum App_Maintenance_Alerts_Constraint {
+  /** unique or primary key constraint */
+  MaintenanceAlertsPkey = 'maintenance_alerts_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type App_Maintenance_Alerts_Delete_At_Path_Input = {
+  user_groups?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type App_Maintenance_Alerts_Delete_Elem_Input = {
+  user_groups?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type App_Maintenance_Alerts_Delete_Key_Input = {
+  user_groups?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Insert_Input = {
+  from_date?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  message?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  until_date?: InputMaybe<Scalars['timestamp']>;
+  user_groups?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** aggregate max on columns */
+export type App_Maintenance_Alerts_Max_Fields = {
+  __typename?: 'app_maintenance_alerts_max_fields';
+  from_date?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  message?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  until_date?: Maybe<Scalars['timestamp']>;
+};
+
+/** aggregate min on columns */
+export type App_Maintenance_Alerts_Min_Fields = {
+  __typename?: 'app_maintenance_alerts_min_fields';
+  from_date?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  message?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  until_date?: Maybe<Scalars['timestamp']>;
+};
+
+/** response of any mutation on the table "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Mutation_Response = {
+  __typename?: 'app_maintenance_alerts_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App_Maintenance_Alerts>;
+};
+
+/** on_conflict condition type for table "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_On_Conflict = {
+  constraint: App_Maintenance_Alerts_Constraint;
+  update_columns?: Array<App_Maintenance_Alerts_Update_Column>;
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app.maintenance_alerts". */
+export type App_Maintenance_Alerts_Order_By = {
+  from_date?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  message?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  until_date?: InputMaybe<Order_By>;
+  user_groups?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app_maintenance_alerts */
+export type App_Maintenance_Alerts_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type App_Maintenance_Alerts_Prepend_Input = {
+  user_groups?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "app.maintenance_alerts" */
+export enum App_Maintenance_Alerts_Select_Column {
+  /** column name */
+  FromDate = 'from_date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type',
+  /** column name */
+  UntilDate = 'until_date',
+  /** column name */
+  UserGroups = 'user_groups'
+}
+
+/** input type for updating data in table "app.maintenance_alerts" */
+export type App_Maintenance_Alerts_Set_Input = {
+  from_date?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  message?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  until_date?: InputMaybe<Scalars['timestamp']>;
+  user_groups?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** update columns of table "app.maintenance_alerts" */
+export enum App_Maintenance_Alerts_Update_Column {
+  /** column name */
+  FromDate = 'from_date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type',
+  /** column name */
+  UntilDate = 'until_date',
+  /** column name */
+  UserGroups = 'user_groups'
+}
+
 /** columns and relationships of "app.material_requests" */
 export type App_Material_Requests = {
   __typename?: 'app_material_requests';
   created_at: Scalars['timestamp'];
   id: Scalars['uuid'];
+  is_pending: Scalars['Boolean'];
   /** An object relationship */
   object: Object_Ie;
   object_schema_identifier: Scalars['String'];
@@ -1520,6 +1718,7 @@ export type App_Material_Requests_Bool_Exp = {
   _or?: InputMaybe<Array<App_Material_Requests_Bool_Exp>>;
   created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  is_pending?: InputMaybe<Boolean_Comparison_Exp>;
   object?: InputMaybe<Object_Ie_Bool_Exp>;
   object_schema_identifier?: InputMaybe<String_Comparison_Exp>;
   profile_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1539,6 +1738,7 @@ export enum App_Material_Requests_Constraint {
 export type App_Material_Requests_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_pending?: InputMaybe<Scalars['Boolean']>;
   object?: InputMaybe<Object_Ie_Obj_Rel_Insert_Input>;
   object_schema_identifier?: InputMaybe<Scalars['String']>;
   profile_id?: InputMaybe<Scalars['uuid']>;
@@ -1590,6 +1790,7 @@ export type App_Material_Requests_On_Conflict = {
 export type App_Material_Requests_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  is_pending?: InputMaybe<Order_By>;
   object?: InputMaybe<Object_Ie_Order_By>;
   object_schema_identifier?: InputMaybe<Order_By>;
   profile_id?: InputMaybe<Order_By>;
@@ -1611,6 +1812,8 @@ export enum App_Material_Requests_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsPending = 'is_pending',
+  /** column name */
   ObjectSchemaIdentifier = 'object_schema_identifier',
   /** column name */
   ProfileId = 'profile_id',
@@ -1626,6 +1829,7 @@ export enum App_Material_Requests_Select_Column {
 export type App_Material_Requests_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_pending?: InputMaybe<Scalars['Boolean']>;
   object_schema_identifier?: InputMaybe<Scalars['String']>;
   profile_id?: InputMaybe<Scalars['uuid']>;
   reason?: InputMaybe<Scalars['String']>;
@@ -1639,6 +1843,8 @@ export enum App_Material_Requests_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  IsPending = 'is_pending',
   /** column name */
   ObjectSchemaIdentifier = 'object_schema_identifier',
   /** column name */
@@ -2686,12 +2892,12 @@ export enum Lookup_App_Material_Request_Type_Constraint {
 }
 
 export enum Lookup_App_Material_Request_Type_Enum {
-  /** Bekijken van het materiaal */
-  LookInto = 'LOOK_INTO',
   /** Meer info van het materiaal */
   MoreInfo = 'MORE_INFO',
   /** Hergebruik van materiaal */
-  Reuse = 'REUSE'
+  Reuse = 'REUSE',
+  /** Bekijken van het materiaal */
+  View = 'VIEW'
 }
 
 /** Boolean expression to compare columns of type "lookup_app_material_request_type_enum". All fields are combined with logical 'AND'. */
@@ -2879,6 +3085,135 @@ export type Lookup_App_Notification_Type_Set_Input = {
 
 /** update columns of table "lookup.app_notification_type" */
 export enum Lookup_App_Notification_Type_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** columns and relationships of "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type';
+  comment?: Maybe<Scalars['String']>;
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type_aggregate';
+  aggregate?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate_Fields>;
+  nodes: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
+};
+
+/** aggregate fields of "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Max_Fields>;
+  min?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Min_Fields>;
+};
+
+
+/** aggregate fields of "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.maintainer_visitor_space_request_access_type". All fields are combined with a logical 'AND'. */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.maintainer_visitor_space_request_access_type" */
+export enum Lookup_Maintainer_Visitor_Space_Request_Access_Type_Constraint {
+  /** unique or primary key constraint */
+  MaintainerVisitorSpaceRequestAccessTypePkey = 'maintainer_visitor_space_request_access_type_pkey'
+}
+
+export enum Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum {
+  /** Toegang tot specifieke folders van de bezoekersruimte */
+  Folders = 'FOLDERS',
+  /** Volledige toegang tot de bezoekersruimte */
+  Full = 'FULL'
+}
+
+/** Boolean expression to compare columns of type "lookup_maintainer_visitor_space_request_access_type_enum". All fields are combined with logical 'AND'. */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>;
+  _in?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>;
+  _nin?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>>;
+};
+
+/** input type for inserting data into table "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Max_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Min_Fields = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response = {
+  __typename?: 'lookup_maintainer_visitor_space_request_access_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
+};
+
+/** on_conflict condition type for table "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_On_Conflict = {
+  constraint: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Constraint;
+  update_columns?: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Update_Column>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.maintainer_visitor_space_request_access_type". */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup_maintainer_visitor_space_request_access_type */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "lookup.maintainer_visitor_space_request_access_type" */
+export enum Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "lookup.maintainer_visitor_space_request_access_type" */
+export type Lookup_Maintainer_Visitor_Space_Request_Access_Type_Set_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "lookup.maintainer_visitor_space_request_access_type" */
+export enum Lookup_Maintainer_Visitor_Space_Request_Access_Type_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
@@ -3876,6 +4211,7 @@ export type Maintainer_Organisation = {
   primary_site: Scalars['jsonb'];
   schema_identifier: Scalars['String'];
   schema_name?: Maybe<Scalars['String']>;
+  sector?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3938,6 +4274,7 @@ export type Maintainer_Organisation_Bool_Exp = {
   primary_site?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_identifier?: InputMaybe<String_Comparison_Exp>;
   schema_name?: InputMaybe<String_Comparison_Exp>;
+  sector?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -3977,6 +4314,7 @@ export type Maintainer_Organisation_Insert_Input = {
   primary_site?: InputMaybe<Scalars['jsonb']>;
   schema_identifier?: InputMaybe<Scalars['String']>;
   schema_name?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -3987,6 +4325,7 @@ export type Maintainer_Organisation_Max_Fields = {
   description?: Maybe<Scalars['String']>;
   schema_identifier?: Maybe<Scalars['String']>;
   schema_name?: Maybe<Scalars['String']>;
+  sector?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3997,6 +4336,7 @@ export type Maintainer_Organisation_Min_Fields = {
   description?: Maybe<Scalars['String']>;
   schema_identifier?: Maybe<Scalars['String']>;
   schema_name?: Maybe<Scalars['String']>;
+  sector?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -4032,6 +4372,7 @@ export type Maintainer_Organisation_Order_By = {
   primary_site?: InputMaybe<Order_By>;
   schema_identifier?: InputMaybe<Order_By>;
   schema_name?: InputMaybe<Order_By>;
+  sector?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -4064,6 +4405,8 @@ export enum Maintainer_Organisation_Select_Column {
   /** column name */
   SchemaName = 'schema_name',
   /** column name */
+  Sector = 'sector',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
@@ -4076,6 +4419,7 @@ export type Maintainer_Organisation_Set_Input = {
   primary_site?: InputMaybe<Scalars['jsonb']>;
   schema_identifier?: InputMaybe<Scalars['String']>;
   schema_name?: InputMaybe<Scalars['String']>;
+  sector?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -4095,6 +4439,8 @@ export enum Maintainer_Organisation_Update_Column {
   SchemaIdentifier = 'schema_identifier',
   /** column name */
   SchemaName = 'schema_name',
+  /** column name */
+  Sector = 'sector',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -4465,6 +4811,7 @@ export type Maintainer_Visitor_Space_Pk_Columns_Input = {
 /** Bezoekaanvragen van gebruikers */
 export type Maintainer_Visitor_Space_Request = {
   __typename?: 'maintainer_visitor_space_request';
+  access_type: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum;
   cp_space_id: Scalars['uuid'];
   created_at: Scalars['timestamp'];
   end_date?: Maybe<Scalars['timestamp']>;
@@ -4576,6 +4923,7 @@ export type Maintainer_Visitor_Space_Request_Bool_Exp = {
   _and?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Bool_Exp>>;
   _not?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
   _or?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Bool_Exp>>;
+  access_type?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum_Comparison_Exp>;
   cp_space_id?: InputMaybe<Uuid_Comparison_Exp>;
   created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   end_date?: InputMaybe<Timestamp_Comparison_Exp>;
@@ -4602,8 +4950,197 @@ export enum Maintainer_Visitor_Space_Request_Constraint {
   VisitPkey = 'visit_pkey'
 }
 
+/** columns and relationships of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access = {
+  __typename?: 'maintainer_visitor_space_request_folder_access';
+  /** An object relationship */
+  folder: Users_Folder;
+  folder_id: Scalars['uuid'];
+  /** An array relationship */
+  folder_space_visitor_requests: Array<Maintainer_Visitor_Space_Request>;
+  /** An aggregate relationship */
+  folder_space_visitor_requests_aggregate: Maintainer_Visitor_Space_Request_Aggregate;
+  id: Scalars['uuid'];
+  visit_request_id: Scalars['uuid'];
+  /** An object relationship */
+  visitor_space_request: Maintainer_Visitor_Space_Request;
+  /** An array relationship */
+  visitor_space_request_folders: Array<Users_Folder>;
+  /** An aggregate relationship */
+  visitor_space_request_folders_aggregate: Users_Folder_Aggregate;
+};
+
+
+/** columns and relationships of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_AccessFolder_Space_Visitor_RequestsArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
+};
+
+
+/** columns and relationships of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_AccessFolder_Space_Visitor_Requests_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
+};
+
+
+/** columns and relationships of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_AccessVisitor_Space_Request_FoldersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Folder_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Folder_Order_By>>;
+  where?: InputMaybe<Users_Folder_Bool_Exp>;
+};
+
+
+/** columns and relationships of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_AccessVisitor_Space_Request_Folders_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Folder_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Folder_Order_By>>;
+  where?: InputMaybe<Users_Folder_Bool_Exp>;
+};
+
+/** aggregated selection of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Aggregate = {
+  __typename?: 'maintainer_visitor_space_request_folder_access_aggregate';
+  aggregate?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Aggregate_Fields>;
+  nodes: Array<Maintainer_Visitor_Space_Request_Folder_Access>;
+};
+
+/** aggregate fields of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Aggregate_Fields = {
+  __typename?: 'maintainer_visitor_space_request_folder_access_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Max_Fields>;
+  min?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Min_Fields>;
+};
+
+
+/** aggregate fields of "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "maintainer.visitor_space_request_folder_access". All fields are combined with a logical 'AND'. */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp = {
+  _and?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>>;
+  _not?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+  _or?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>>;
+  folder?: InputMaybe<Users_Folder_Bool_Exp>;
+  folder_id?: InputMaybe<Uuid_Comparison_Exp>;
+  folder_space_visitor_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  visit_request_id?: InputMaybe<Uuid_Comparison_Exp>;
+  visitor_space_request?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
+  visitor_space_request_folders?: InputMaybe<Users_Folder_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "maintainer.visitor_space_request_folder_access" */
+export enum Maintainer_Visitor_Space_Request_Folder_Access_Constraint {
+  /** unique or primary key constraint */
+  VisitorSpaceRequestFolderAccessPkey = 'visitor_space_request_folder_access_pkey'
+}
+
+/** input type for inserting data into table "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Insert_Input = {
+  folder?: InputMaybe<Users_Folder_Obj_Rel_Insert_Input>;
+  folder_id?: InputMaybe<Scalars['uuid']>;
+  folder_space_visitor_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Arr_Rel_Insert_Input>;
+  id?: InputMaybe<Scalars['uuid']>;
+  visit_request_id?: InputMaybe<Scalars['uuid']>;
+  visitor_space_request?: InputMaybe<Maintainer_Visitor_Space_Request_Obj_Rel_Insert_Input>;
+  visitor_space_request_folders?: InputMaybe<Users_Folder_Arr_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Max_Fields = {
+  __typename?: 'maintainer_visitor_space_request_folder_access_max_fields';
+  folder_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  visit_request_id?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Min_Fields = {
+  __typename?: 'maintainer_visitor_space_request_folder_access_min_fields';
+  folder_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  visit_request_id?: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Mutation_Response = {
+  __typename?: 'maintainer_visitor_space_request_folder_access_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Maintainer_Visitor_Space_Request_Folder_Access>;
+};
+
+/** on_conflict condition type for table "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_On_Conflict = {
+  constraint: Maintainer_Visitor_Space_Request_Folder_Access_Constraint;
+  update_columns?: Array<Maintainer_Visitor_Space_Request_Folder_Access_Update_Column>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "maintainer.visitor_space_request_folder_access". */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Order_By = {
+  folder?: InputMaybe<Users_Folder_Order_By>;
+  folder_id?: InputMaybe<Order_By>;
+  folder_space_visitor_requests_aggregate?: InputMaybe<Maintainer_Visitor_Space_Request_Aggregate_Order_By>;
+  id?: InputMaybe<Order_By>;
+  visit_request_id?: InputMaybe<Order_By>;
+  visitor_space_request?: InputMaybe<Maintainer_Visitor_Space_Request_Order_By>;
+  visitor_space_request_folders_aggregate?: InputMaybe<Users_Folder_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: maintainer_visitor_space_request_folder_access */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "maintainer.visitor_space_request_folder_access" */
+export enum Maintainer_Visitor_Space_Request_Folder_Access_Select_Column {
+  /** column name */
+  FolderId = 'folder_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  VisitRequestId = 'visit_request_id'
+}
+
+/** input type for updating data in table "maintainer.visitor_space_request_folder_access" */
+export type Maintainer_Visitor_Space_Request_Folder_Access_Set_Input = {
+  folder_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  visit_request_id?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "maintainer.visitor_space_request_folder_access" */
+export enum Maintainer_Visitor_Space_Request_Folder_Access_Update_Column {
+  /** column name */
+  FolderId = 'folder_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  VisitRequestId = 'visit_request_id'
+}
+
 /** input type for inserting data into table "maintainer.visitor_space_request" */
 export type Maintainer_Visitor_Space_Request_Insert_Input = {
+  access_type?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>;
   cp_space_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamp']>;
   end_date?: InputMaybe<Scalars['timestamp']>;
@@ -4919,6 +5456,7 @@ export type Maintainer_Visitor_Space_Request_On_Conflict = {
 
 /** Ordering options when selecting data from "maintainer.visitor_space_request". */
 export type Maintainer_Visitor_Space_Request_Order_By = {
+  access_type?: InputMaybe<Order_By>;
   cp_space_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   end_date?: InputMaybe<Order_By>;
@@ -4947,6 +5485,8 @@ export type Maintainer_Visitor_Space_Request_Pk_Columns_Input = {
 /** select columns of table "maintainer.visitor_space_request" */
 export enum Maintainer_Visitor_Space_Request_Select_Column {
   /** column name */
+  AccessType = 'access_type',
+  /** column name */
   CpSpaceId = 'cp_space_id',
   /** column name */
   CreatedAt = 'created_at',
@@ -4974,6 +5514,7 @@ export enum Maintainer_Visitor_Space_Request_Select_Column {
 
 /** input type for updating data in table "maintainer.visitor_space_request" */
 export type Maintainer_Visitor_Space_Request_Set_Input = {
+  access_type?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Enum>;
   cp_space_id?: InputMaybe<Scalars['uuid']>;
   created_at?: InputMaybe<Scalars['timestamp']>;
   end_date?: InputMaybe<Scalars['timestamp']>;
@@ -4990,6 +5531,8 @@ export type Maintainer_Visitor_Space_Request_Set_Input = {
 
 /** update columns of table "maintainer.visitor_space_request" */
 export enum Maintainer_Visitor_Space_Request_Update_Column {
+  /** column name */
+  AccessType = 'access_type',
   /** column name */
   CpSpaceId = 'cp_space_id',
   /** column name */
@@ -5116,6 +5659,10 @@ export type Mutation_Root = {
   delete_app_content_page_content_label?: Maybe<App_Content_Page_Content_Label_Mutation_Response>;
   /** delete single row from the table: "app.content_page_content_label" */
   delete_app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
+  /** delete data from the table: "app.maintenance_alerts" */
+  delete_app_maintenance_alerts?: Maybe<App_Maintenance_Alerts_Mutation_Response>;
+  /** delete single row from the table: "app.maintenance_alerts" */
+  delete_app_maintenance_alerts_by_pk?: Maybe<App_Maintenance_Alerts>;
   /** delete data from the table: "app.material_requests" */
   delete_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
   /** delete single row from the table: "app.material_requests" */
@@ -5144,6 +5691,10 @@ export type Mutation_Root = {
   delete_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_notification_type" */
   delete_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** delete data from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  delete_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
+  /** delete single row from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  delete_lookup_maintainer_visitor_space_request_access_type_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** delete data from the table: "lookup.maintainer_visitor_space_request_status" */
   delete_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
   /** delete single row from the table: "lookup.maintainer_visitor_space_request_status" */
@@ -5184,6 +5735,10 @@ export type Mutation_Root = {
   delete_maintainer_visitor_space_request?: Maybe<Maintainer_Visitor_Space_Request_Mutation_Response>;
   /** delete single row from the table: "maintainer.visitor_space_request" */
   delete_maintainer_visitor_space_request_by_pk?: Maybe<Maintainer_Visitor_Space_Request>;
+  /** delete data from the table: "maintainer.visitor_space_request_folder_access" */
+  delete_maintainer_visitor_space_request_folder_access?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Mutation_Response>;
+  /** delete single row from the table: "maintainer.visitor_space_request_folder_access" */
+  delete_maintainer_visitor_space_request_folder_access_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access>;
   /** delete data from the table: "maintainer.visitor_space_request_note" */
   delete_maintainer_visitor_space_request_note?: Maybe<Maintainer_Visitor_Space_Request_Note_Mutation_Response>;
   /** delete single row from the table: "maintainer.visitor_space_request_note" */
@@ -5264,6 +5819,10 @@ export type Mutation_Root = {
   insert_app_content_page_content_label_one?: Maybe<App_Content_Page_Content_Label>;
   /** insert a single row into the table: "app.content_page" */
   insert_app_content_page_one?: Maybe<App_Content_Page>;
+  /** insert data into the table: "app.maintenance_alerts" */
+  insert_app_maintenance_alerts?: Maybe<App_Maintenance_Alerts_Mutation_Response>;
+  /** insert a single row into the table: "app.maintenance_alerts" */
+  insert_app_maintenance_alerts_one?: Maybe<App_Maintenance_Alerts>;
   /** insert data into the table: "app.material_requests" */
   insert_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
   /** insert a single row into the table: "app.material_requests" */
@@ -5292,6 +5851,10 @@ export type Mutation_Root = {
   insert_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_notification_type" */
   insert_lookup_app_notification_type_one?: Maybe<Lookup_App_Notification_Type>;
+  /** insert data into the table: "lookup.maintainer_visitor_space_request_access_type" */
+  insert_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
+  /** insert a single row into the table: "lookup.maintainer_visitor_space_request_access_type" */
+  insert_lookup_maintainer_visitor_space_request_access_type_one?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** insert data into the table: "lookup.maintainer_visitor_space_request_status" */
   insert_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
   /** insert a single row into the table: "lookup.maintainer_visitor_space_request_status" */
@@ -5330,6 +5893,10 @@ export type Mutation_Root = {
   insert_maintainer_visitor_space_one?: Maybe<Maintainer_Visitor_Space>;
   /** insert data into the table: "maintainer.visitor_space_request" */
   insert_maintainer_visitor_space_request?: Maybe<Maintainer_Visitor_Space_Request_Mutation_Response>;
+  /** insert data into the table: "maintainer.visitor_space_request_folder_access" */
+  insert_maintainer_visitor_space_request_folder_access?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Mutation_Response>;
+  /** insert a single row into the table: "maintainer.visitor_space_request_folder_access" */
+  insert_maintainer_visitor_space_request_folder_access_one?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access>;
   /** insert data into the table: "maintainer.visitor_space_request_note" */
   insert_maintainer_visitor_space_request_note?: Maybe<Maintainer_Visitor_Space_Request_Note_Mutation_Response>;
   /** insert a single row into the table: "maintainer.visitor_space_request_note" */
@@ -5412,6 +5979,10 @@ export type Mutation_Root = {
   update_app_content_page_content_label?: Maybe<App_Content_Page_Content_Label_Mutation_Response>;
   /** update single row of the table: "app.content_page_content_label" */
   update_app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
+  /** update data of the table: "app.maintenance_alerts" */
+  update_app_maintenance_alerts?: Maybe<App_Maintenance_Alerts_Mutation_Response>;
+  /** update single row of the table: "app.maintenance_alerts" */
+  update_app_maintenance_alerts_by_pk?: Maybe<App_Maintenance_Alerts>;
   /** update data of the table: "app.material_requests" */
   update_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
   /** update single row of the table: "app.material_requests" */
@@ -5440,6 +6011,10 @@ export type Mutation_Root = {
   update_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_notification_type" */
   update_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** update data of the table: "lookup.maintainer_visitor_space_request_access_type" */
+  update_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
+  /** update single row of the table: "lookup.maintainer_visitor_space_request_access_type" */
+  update_lookup_maintainer_visitor_space_request_access_type_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** update data of the table: "lookup.maintainer_visitor_space_request_status" */
   update_lookup_maintainer_visitor_space_request_status?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Status_Mutation_Response>;
   /** update single row of the table: "lookup.maintainer_visitor_space_request_status" */
@@ -5480,6 +6055,10 @@ export type Mutation_Root = {
   update_maintainer_visitor_space_request?: Maybe<Maintainer_Visitor_Space_Request_Mutation_Response>;
   /** update single row of the table: "maintainer.visitor_space_request" */
   update_maintainer_visitor_space_request_by_pk?: Maybe<Maintainer_Visitor_Space_Request>;
+  /** update data of the table: "maintainer.visitor_space_request_folder_access" */
+  update_maintainer_visitor_space_request_folder_access?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access_Mutation_Response>;
+  /** update single row of the table: "maintainer.visitor_space_request_folder_access" */
+  update_maintainer_visitor_space_request_folder_access_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access>;
   /** update data of the table: "maintainer.visitor_space_request_note" */
   update_maintainer_visitor_space_request_note?: Maybe<Maintainer_Visitor_Space_Request_Note_Mutation_Response>;
   /** update single row of the table: "maintainer.visitor_space_request_note" */
@@ -5604,6 +6183,18 @@ export type Mutation_RootDelete_App_Content_Page_Content_Label_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_App_Maintenance_AlertsArgs = {
+  where: App_Maintenance_Alerts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Maintenance_Alerts_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_App_Material_RequestsArgs = {
   where: App_Material_Requests_Bool_Exp;
 };
@@ -5683,6 +6274,18 @@ export type Mutation_RootDelete_Lookup_App_Notification_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_Access_TypeArgs = {
+  where: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Maintainer_Visitor_Space_Request_Access_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -5803,6 +6406,18 @@ export type Mutation_RootDelete_Maintainer_Visitor_Space_RequestArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Maintainer_Visitor_Space_Request_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Maintainer_Visitor_Space_Request_Folder_AccessArgs = {
+  where: Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Maintainer_Visitor_Space_Request_Folder_Access_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -6059,6 +6674,20 @@ export type Mutation_RootInsert_App_Content_Page_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_App_Maintenance_AlertsArgs = {
+  objects: Array<App_Maintenance_Alerts_Insert_Input>;
+  on_conflict?: InputMaybe<App_Maintenance_Alerts_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Maintenance_Alerts_OneArgs = {
+  object: App_Maintenance_Alerts_Insert_Input;
+  on_conflict?: InputMaybe<App_Maintenance_Alerts_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_App_Material_RequestsArgs = {
   objects: Array<App_Material_Requests_Insert_Input>;
   on_conflict?: InputMaybe<App_Material_Requests_On_Conflict>;
@@ -6153,6 +6782,20 @@ export type Mutation_RootInsert_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootInsert_Lookup_App_Notification_Type_OneArgs = {
   object: Lookup_App_Notification_Type_Insert_Input;
   on_conflict?: InputMaybe<Lookup_App_Notification_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_Access_TypeArgs = {
+  objects: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Maintainer_Visitor_Space_Request_Access_Type_OneArgs = {
+  object: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_On_Conflict>;
 };
 
 
@@ -6286,6 +6929,20 @@ export type Mutation_RootInsert_Maintainer_Visitor_Space_OneArgs = {
 export type Mutation_RootInsert_Maintainer_Visitor_Space_RequestArgs = {
   objects: Array<Maintainer_Visitor_Space_Request_Insert_Input>;
   on_conflict?: InputMaybe<Maintainer_Visitor_Space_Request_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Maintainer_Visitor_Space_Request_Folder_AccessArgs = {
+  objects: Array<Maintainer_Visitor_Space_Request_Folder_Access_Insert_Input>;
+  on_conflict?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Maintainer_Visitor_Space_Request_Folder_Access_OneArgs = {
+  object: Maintainer_Visitor_Space_Request_Folder_Access_Insert_Input;
+  on_conflict?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_On_Conflict>;
 };
 
 
@@ -6619,6 +7276,30 @@ export type Mutation_RootUpdate_App_Content_Page_Content_Label_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_App_Maintenance_AlertsArgs = {
+  _append?: InputMaybe<App_Maintenance_Alerts_Append_Input>;
+  _delete_at_path?: InputMaybe<App_Maintenance_Alerts_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<App_Maintenance_Alerts_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<App_Maintenance_Alerts_Delete_Key_Input>;
+  _prepend?: InputMaybe<App_Maintenance_Alerts_Prepend_Input>;
+  _set?: InputMaybe<App_Maintenance_Alerts_Set_Input>;
+  where: App_Maintenance_Alerts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Maintenance_Alerts_By_PkArgs = {
+  _append?: InputMaybe<App_Maintenance_Alerts_Append_Input>;
+  _delete_at_path?: InputMaybe<App_Maintenance_Alerts_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<App_Maintenance_Alerts_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<App_Maintenance_Alerts_Delete_Key_Input>;
+  _prepend?: InputMaybe<App_Maintenance_Alerts_Prepend_Input>;
+  _set?: InputMaybe<App_Maintenance_Alerts_Set_Input>;
+  pk_columns: App_Maintenance_Alerts_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_App_Material_RequestsArgs = {
   _set?: InputMaybe<App_Material_Requests_Set_Input>;
   where: App_Material_Requests_Bool_Exp;
@@ -6725,6 +7406,20 @@ export type Mutation_RootUpdate_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootUpdate_Lookup_App_Notification_Type_By_PkArgs = {
   _set?: InputMaybe<Lookup_App_Notification_Type_Set_Input>;
   pk_columns: Lookup_App_Notification_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_Access_TypeArgs = {
+  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Set_Input>;
+  where: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Maintainer_Visitor_Space_Request_Access_Type_By_PkArgs = {
+  _set?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Set_Input>;
+  pk_columns: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Pk_Columns_Input;
 };
 
 
@@ -6879,6 +7574,20 @@ export type Mutation_RootUpdate_Maintainer_Visitor_Space_RequestArgs = {
 export type Mutation_RootUpdate_Maintainer_Visitor_Space_Request_By_PkArgs = {
   _set?: InputMaybe<Maintainer_Visitor_Space_Request_Set_Input>;
   pk_columns: Maintainer_Visitor_Space_Request_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Maintainer_Visitor_Space_Request_Folder_AccessArgs = {
+  _set?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Set_Input>;
+  where: Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Maintainer_Visitor_Space_Request_Folder_Access_By_PkArgs = {
+  _set?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Set_Input>;
+  pk_columns: Maintainer_Visitor_Space_Request_Folder_Access_Pk_Columns_Input;
 };
 
 
@@ -8969,6 +9678,12 @@ export type Query_Root = {
   app_content_page_content_label_aggregate: App_Content_Page_Content_Label_Aggregate;
   /** fetch data from the table: "app.content_page_content_label" using primary key columns */
   app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
+  /** fetch data from the table: "app.maintenance_alerts" */
+  app_maintenance_alerts: Array<App_Maintenance_Alerts>;
+  /** fetch aggregated fields from the table: "app.maintenance_alerts" */
+  app_maintenance_alerts_aggregate: App_Maintenance_Alerts_Aggregate;
+  /** fetch data from the table: "app.maintenance_alerts" using primary key columns */
+  app_maintenance_alerts_by_pk?: Maybe<App_Maintenance_Alerts>;
   /** fetch data from the table: "app.material_requests" */
   app_material_requests: Array<App_Material_Requests>;
   /** fetch aggregated fields from the table: "app.material_requests" */
@@ -9011,6 +9726,12 @@ export type Query_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  lookup_maintainer_visitor_space_request_access_type: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
+  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  lookup_maintainer_visitor_space_request_access_type_aggregate: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" using primary key columns */
+  lookup_maintainer_visitor_space_request_access_type_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
   lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
@@ -9071,6 +9792,12 @@ export type Query_Root = {
   maintainer_visitor_space_request_aggregate: Maintainer_Visitor_Space_Request_Aggregate;
   /** fetch data from the table: "maintainer.visitor_space_request" using primary key columns */
   maintainer_visitor_space_request_by_pk?: Maybe<Maintainer_Visitor_Space_Request>;
+  /** fetch data from the table: "maintainer.visitor_space_request_folder_access" */
+  maintainer_visitor_space_request_folder_access: Array<Maintainer_Visitor_Space_Request_Folder_Access>;
+  /** fetch aggregated fields from the table: "maintainer.visitor_space_request_folder_access" */
+  maintainer_visitor_space_request_folder_access_aggregate: Maintainer_Visitor_Space_Request_Folder_Access_Aggregate;
+  /** fetch data from the table: "maintainer.visitor_space_request_folder_access" using primary key columns */
+  maintainer_visitor_space_request_folder_access_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access>;
   /** fetch data from the table: "maintainer.visitor_space_request_note" */
   maintainer_visitor_space_request_note: Array<Maintainer_Visitor_Space_Request_Note>;
   /** fetch aggregated fields from the table: "maintainer.visitor_space_request_note" */
@@ -9287,6 +10014,29 @@ export type Query_RootApp_Content_Page_Content_Label_By_PkArgs = {
 };
 
 
+export type Query_RootApp_Maintenance_AlertsArgs = {
+  distinct_on?: InputMaybe<Array<App_Maintenance_Alerts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Maintenance_Alerts_Order_By>>;
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Maintenance_Alerts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Maintenance_Alerts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Maintenance_Alerts_Order_By>>;
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Maintenance_Alerts_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootApp_Material_RequestsArgs = {
   distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9444,6 +10194,29 @@ export type Query_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Query_RootLookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Request_Access_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Request_Access_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Maintainer_Visitor_Space_Request_Access_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -9674,6 +10447,29 @@ export type Query_RootMaintainer_Visitor_Space_Request_AggregateArgs = {
 
 
 export type Query_RootMaintainer_Visitor_Space_Request_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootMaintainer_Visitor_Space_Request_Folder_AccessArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+};
+
+
+export type Query_RootMaintainer_Visitor_Space_Request_Folder_Access_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+};
+
+
+export type Query_RootMaintainer_Visitor_Space_Request_Folder_Access_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -10091,6 +10887,12 @@ export type Subscription_Root = {
   app_content_page_content_label_aggregate: App_Content_Page_Content_Label_Aggregate;
   /** fetch data from the table: "app.content_page_content_label" using primary key columns */
   app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
+  /** fetch data from the table: "app.maintenance_alerts" */
+  app_maintenance_alerts: Array<App_Maintenance_Alerts>;
+  /** fetch aggregated fields from the table: "app.maintenance_alerts" */
+  app_maintenance_alerts_aggregate: App_Maintenance_Alerts_Aggregate;
+  /** fetch data from the table: "app.maintenance_alerts" using primary key columns */
+  app_maintenance_alerts_by_pk?: Maybe<App_Maintenance_Alerts>;
   /** fetch data from the table: "app.material_requests" */
   app_material_requests: Array<App_Material_Requests>;
   /** fetch aggregated fields from the table: "app.material_requests" */
@@ -10133,6 +10935,12 @@ export type Subscription_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  lookup_maintainer_visitor_space_request_access_type: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
+  /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_access_type" */
+  lookup_maintainer_visitor_space_request_access_type_aggregate: Lookup_Maintainer_Visitor_Space_Request_Access_Type_Aggregate;
+  /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" using primary key columns */
+  lookup_maintainer_visitor_space_request_access_type_by_pk?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_request_status" */
   lookup_maintainer_visitor_space_request_status: Array<Lookup_Maintainer_Visitor_Space_Request_Status>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_status" */
@@ -10193,6 +11001,12 @@ export type Subscription_Root = {
   maintainer_visitor_space_request_aggregate: Maintainer_Visitor_Space_Request_Aggregate;
   /** fetch data from the table: "maintainer.visitor_space_request" using primary key columns */
   maintainer_visitor_space_request_by_pk?: Maybe<Maintainer_Visitor_Space_Request>;
+  /** fetch data from the table: "maintainer.visitor_space_request_folder_access" */
+  maintainer_visitor_space_request_folder_access: Array<Maintainer_Visitor_Space_Request_Folder_Access>;
+  /** fetch aggregated fields from the table: "maintainer.visitor_space_request_folder_access" */
+  maintainer_visitor_space_request_folder_access_aggregate: Maintainer_Visitor_Space_Request_Folder_Access_Aggregate;
+  /** fetch data from the table: "maintainer.visitor_space_request_folder_access" using primary key columns */
+  maintainer_visitor_space_request_folder_access_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Folder_Access>;
   /** fetch data from the table: "maintainer.visitor_space_request_note" */
   maintainer_visitor_space_request_note: Array<Maintainer_Visitor_Space_Request_Note>;
   /** fetch aggregated fields from the table: "maintainer.visitor_space_request_note" */
@@ -10409,6 +11223,29 @@ export type Subscription_RootApp_Content_Page_Content_Label_By_PkArgs = {
 };
 
 
+export type Subscription_RootApp_Maintenance_AlertsArgs = {
+  distinct_on?: InputMaybe<Array<App_Maintenance_Alerts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Maintenance_Alerts_Order_By>>;
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Maintenance_Alerts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Maintenance_Alerts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Maintenance_Alerts_Order_By>>;
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Maintenance_Alerts_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Subscription_RootApp_Material_RequestsArgs = {
   distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -10566,6 +11403,29 @@ export type Subscription_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Subscription_RootLookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Access_TypeArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Access_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Order_By>>;
+  where?: InputMaybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Maintainer_Visitor_Space_Request_Access_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -10796,6 +11656,29 @@ export type Subscription_RootMaintainer_Visitor_Space_Request_AggregateArgs = {
 
 
 export type Subscription_RootMaintainer_Visitor_Space_Request_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootMaintainer_Visitor_Space_Request_Folder_AccessArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+};
+
+
+export type Subscription_RootMaintainer_Visitor_Space_Request_Folder_Access_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Maintainer_Visitor_Space_Request_Folder_Access_Order_By>>;
+  where?: InputMaybe<Maintainer_Visitor_Space_Request_Folder_Access_Bool_Exp>;
+};
+
+
+export type Subscription_RootMaintainer_Visitor_Space_Request_Folder_Access_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -13220,6 +14103,7 @@ export type Users_Profile = {
   identities: Array<Users_Identity>;
   /** An aggregate relationship */
   identities_aggregate: Users_Identity_Aggregate;
+  is_key_user: Scalars['Boolean'];
   last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
   mail?: Maybe<Scalars['String']>;
@@ -13398,6 +14282,7 @@ export type Users_Profile_Bool_Exp = {
   group_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   identities?: InputMaybe<Users_Identity_Bool_Exp>;
+  is_key_user?: InputMaybe<Boolean_Comparison_Exp>;
   last_access_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   last_name?: InputMaybe<String_Comparison_Exp>;
   mail?: InputMaybe<String_Comparison_Exp>;
@@ -13424,6 +14309,7 @@ export type Users_Profile_Insert_Input = {
   group_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
   identities?: InputMaybe<Users_Identity_Arr_Rel_Insert_Input>;
+  is_key_user?: InputMaybe<Scalars['Boolean']>;
   last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
   mail?: InputMaybe<Scalars['String']>;
@@ -13496,6 +14382,7 @@ export type Users_Profile_Order_By = {
   group_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   identities_aggregate?: InputMaybe<Users_Identity_Aggregate_Order_By>;
+  is_key_user?: InputMaybe<Order_By>;
   last_access_at?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
   mail?: InputMaybe<Order_By>;
@@ -13524,6 +14411,8 @@ export enum Users_Profile_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsKeyUser = 'is_key_user',
+  /** column name */
   LastAccessAt = 'last_access_at',
   /** column name */
   LastName = 'last_name',
@@ -13540,6 +14429,7 @@ export type Users_Profile_Set_Input = {
   first_name?: InputMaybe<Scalars['String']>;
   group_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_key_user?: InputMaybe<Scalars['Boolean']>;
   last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
   mail?: InputMaybe<Scalars['String']>;
@@ -13558,6 +14448,8 @@ export enum Users_Profile_Update_Column {
   GroupId = 'group_id',
   /** column name */
   Id = 'id',
+  /** column name */
+  IsKeyUser = 'is_key_user',
   /** column name */
   LastAccessAt = 'last_access_at',
   /** column name */
@@ -13808,6 +14700,45 @@ export type UpdateContentPagePublishDatesMutationVariables = Exact<{
 
 export type UpdateContentPagePublishDatesMutation = { __typename?: 'mutation_root', publish_content_pages?: { __typename?: 'app_content_page_mutation_response', affected_rows: number } | null, unpublish_content_pages?: { __typename?: 'app_content_page_mutation_response', affected_rows: number } | null };
 
+export type DeleteMaintenanceAlertMutationVariables = Exact<{
+  maintenanceAlertId?: InputMaybe<Scalars['uuid']>;
+}>;
+
+
+export type DeleteMaintenanceAlertMutation = { __typename?: 'mutation_root', delete_app_maintenance_alerts?: { __typename?: 'app_maintenance_alerts_mutation_response', affected_rows: number } | null };
+
+export type FindMaintenanceAlertByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type FindMaintenanceAlertByIdQuery = { __typename?: 'query_root', app_maintenance_alerts: Array<{ __typename?: 'app_maintenance_alerts', id: any, title: string, message: string, type?: string | null, from_date: any, until_date: any, user_groups: any }> };
+
+export type FindMaintenanceAlertsQueryVariables = Exact<{
+  where?: InputMaybe<App_Maintenance_Alerts_Bool_Exp>;
+  offset: Scalars['Int'];
+  limit: Scalars['Int'];
+  orderBy?: App_Maintenance_Alerts_Order_By;
+}>;
+
+
+export type FindMaintenanceAlertsQuery = { __typename?: 'query_root', app_maintenance_alerts: Array<{ __typename?: 'app_maintenance_alerts', id: any, title: string, message: string, type?: string | null, from_date: any, until_date: any, user_groups: any }>, app_maintenance_alerts_aggregate: { __typename?: 'app_maintenance_alerts_aggregate', aggregate?: { __typename?: 'app_maintenance_alerts_aggregate_fields', count: number } | null } };
+
+export type InsertMaintenanceAlertMutationVariables = Exact<{
+  newMaintenanceAlert: App_Maintenance_Alerts_Insert_Input;
+}>;
+
+
+export type InsertMaintenanceAlertMutation = { __typename?: 'mutation_root', insert_app_maintenance_alerts_one?: { __typename?: 'app_maintenance_alerts', id: any, title: string, message: string, type?: string | null, user_groups: any, from_date: any, until_date: any } | null };
+
+export type UpdateMaintenanceAlertMutationVariables = Exact<{
+  maintenanceAlertId?: InputMaybe<Scalars['uuid']>;
+  maintenanceAlert?: InputMaybe<App_Maintenance_Alerts_Set_Input>;
+}>;
+
+
+export type UpdateMaintenanceAlertMutation = { __typename?: 'mutation_root', update_app_maintenance_alerts?: { __typename?: 'app_maintenance_alerts_mutation_response', returning: Array<{ __typename?: 'app_maintenance_alerts', id: any, title: string, message: string, type?: string | null, user_groups: any, from_date: any, until_date: any }> } | null };
+
 export type DeleteNavigationItemMutationVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -13982,6 +14913,11 @@ export const SoftDeleteContentDocument = {"kind":"Document","definitions":[{"kin
 export const UpdateContentBlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentBlock"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentBlock"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_block_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentBlock"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentBlockMutation, UpdateContentBlockMutationVariables>;
 export const UpdateContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentByIdMutation, UpdateContentByIdMutationVariables>;
 export const UpdateContentPagePublishDatesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentPagePublishDates"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"publish_content_pages"},"name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"unpublish_content_pages"},"name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"BooleanValue","value":false}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentPagePublishDatesMutation, UpdateContentPagePublishDatesMutationVariables>;
+export const DeleteMaintenanceAlertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteMaintenanceAlert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlertId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_maintenance_alerts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlertId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteMaintenanceAlertMutation, DeleteMaintenanceAlertMutationVariables>;
+export const FindMaintenanceAlertByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"findMaintenanceAlertById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_maintenance_alerts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"from_date"}},{"kind":"Field","name":{"kind":"Name","value":"until_date"}},{"kind":"Field","name":{"kind":"Name","value":"user_groups"}}]}}]}}]} as unknown as DocumentNode<FindMaintenanceAlertByIdQuery, FindMaintenanceAlertByIdQueryVariables>;
+export const FindMaintenanceAlertsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"findMaintenanceAlerts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_maintenance_alerts_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_maintenance_alerts_order_by"}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_maintenance_alerts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"from_date"}},{"kind":"Field","name":{"kind":"Name","value":"until_date"}},{"kind":"Field","name":{"kind":"Name","value":"user_groups"}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_maintenance_alerts_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<FindMaintenanceAlertsQuery, FindMaintenanceAlertsQueryVariables>;
+export const InsertMaintenanceAlertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertMaintenanceAlert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newMaintenanceAlert"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_maintenance_alerts_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_app_maintenance_alerts_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newMaintenanceAlert"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"user_groups"}},{"kind":"Field","name":{"kind":"Name","value":"from_date"}},{"kind":"Field","name":{"kind":"Name","value":"until_date"}}]}}]}}]} as unknown as DocumentNode<InsertMaintenanceAlertMutation, InsertMaintenanceAlertMutationVariables>;
+export const UpdateMaintenanceAlertDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateMaintenanceAlert"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlertId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlert"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_maintenance_alerts_set_input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_maintenance_alerts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlertId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"maintenanceAlert"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"user_groups"}},{"kind":"Field","name":{"kind":"Name","value":"from_date"}},{"kind":"Field","name":{"kind":"Name","value":"until_date"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateMaintenanceAlertMutation, UpdateMaintenanceAlertMutationVariables>;
 export const DeleteNavigationItemDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteNavigationItem"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_navigation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteNavigationItemMutation, DeleteNavigationItemMutationVariables>;
 export const GetAllNavigationItemsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllNavigationItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_navigation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"placement"},"value":{"kind":"EnumValue","value":"asc"}},{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"icon_name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_target"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_path"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}}]}}]}}]} as unknown as DocumentNode<GetAllNavigationItemsQuery, GetAllNavigationItemsQueryVariables>;
 export const GetNavigationBarsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getNavigationBars"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_navigation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"distinct_on"},"value":{"kind":"EnumValue","value":"placement"}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"placement"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}}]}}]}}]} as unknown as DocumentNode<GetNavigationBarsQuery, GetNavigationBarsQueryVariables>;

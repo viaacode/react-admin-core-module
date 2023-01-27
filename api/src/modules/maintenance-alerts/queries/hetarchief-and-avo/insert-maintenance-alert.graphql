@@ -1,0 +1,11 @@
+mutation insertMaintenanceAlert($newMaintenanceAlert: app_maintenance_alerts_insert_input!) {
+	insert_app_maintenance_alerts_one(object: $newMaintenanceAlert) {
+		id
+		title
+		message
+		type
+		user_groups
+		from_date
+		until_date
+	}
+}
