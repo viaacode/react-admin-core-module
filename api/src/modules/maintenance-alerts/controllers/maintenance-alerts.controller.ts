@@ -7,7 +7,7 @@ import { RequireAnyPermissions } from "../../shared/decorators/require-any-permi
 import { SessionUser } from "../../shared/decorators/user.decorator";
 import { addPrefix } from "../../shared/helpers/add-route-prefix";
 import { SessionUserEntity } from "../../users/classes/session-user";
-import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto } from "../dto/maintenance-alerts.dto";
+import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto, UpdateMaintenanceAlertDto } from "../dto/maintenance-alerts.dto";
 import { MaintenanceAlert } from "../maintenance-alerts.types";
 import { MaintenanceAlertsService } from './../services/maintenance-alerts.service';
 
@@ -44,11 +44,9 @@ export class MaintenanceAlertsController {
 	@Get(':id')
 	@RequireAnyPermissions(
 		PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
-		PermissionName.VIEW_OWN_MAINTENANCE_ALERTS
 	)
 	public async getMaintenanceAlertById(
 		@Param('id') id: string,
-		@SessionUser() user: SessionUserEntity
 	): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.findById(id);
 	}
@@ -75,7 +73,7 @@ export class MaintenanceAlertsController {
 	@RequireAnyPermissions(PermissionName.EDIT_MAINTENANCE_ALERTS)
 	public async updateMaintenanceAlert(
 		@Param('id') maintenanceAlertId: string,
-		@Body() updateMaintenanceAlertDto: CreateMaintenanceAlertDto,
+		@Body() updateMaintenanceAlertDto: UpdateMaintenanceAlertDto,
 	): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.updateMaintenanceAlert(
 			maintenanceAlertId,

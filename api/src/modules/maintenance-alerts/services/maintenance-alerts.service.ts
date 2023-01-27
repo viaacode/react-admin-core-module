@@ -10,6 +10,23 @@ import { ORDER_PROP_TO_DB_PROP } from "../maintenance-alerts.conts";
 
 import { SortDirection } from '../../shared/types';
 import { PaginationHelper } from "../../shared/helpers/pagination";
+import {
+	DeleteMaintenanceAlertDocument,
+	DeleteMaintenanceAlertMutation,
+	DeleteMaintenanceAlertMutationVariables,
+	FindMaintenanceAlertByIdDocument,
+	FindMaintenanceAlertByIdQuery,
+	FindMaintenanceAlertByIdQueryVariables,
+	FindMaintenanceAlertsDocument,
+	FindMaintenanceAlertsQuery,
+	FindMaintenanceAlertsQueryVariables,
+	InsertMaintenanceAlertDocument,
+	InsertMaintenanceAlertMutation,
+	InsertMaintenanceAlertMutationVariables,
+	UpdateMaintenanceAlertDocument,
+	UpdateMaintenanceAlertMutation,
+	UpdateMaintenanceAlertMutationVariables
+} from "../../shared/generated/graphql-db-types-hetarchief";
 
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
@@ -59,7 +76,8 @@ export class MaintenanceAlertsService {
 			// Brecht - LOGGED IN USER
 			if (parameters.userGroupIds[1] === '-2' ) {
 				where.user_groups = {
-					_in: isArray(parameters.userGroupIds[0]) ? parameters.userGroupIds[0] : [parameters.userGroupIds[0]]
+					// jsonb comparison
+					_in: (isArray(parameters.userGroupIds[0]) ? parameters.userGroupIds[0] : [parameters.userGroupIds[0]]) as string[]
 				}
 			}
 
@@ -110,18 +128,18 @@ export class MaintenanceAlertsService {
 		});
 
 		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_material_requests.map((mr) => this.adapt(mr)),
+			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr)),
 			page,
 			size,
-			total: maintenanceAlertsResponse.app_material_requests_aggregate.aggregate.count,
+			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
 		});
 	}
 
 	public async findById(id: string): Promise<MaintenanceAlert> {
 		const maintenanceAlertResponse = await this.dataService.execute<
-			FindMaintenanceAlertsByIdQuery,
-			FindMaintenanceAlertsByIdQueryVariables
-		>(FindMaintenanceAlertsByIdDocument, { id });
+			FindMaintenanceAlertByIdQuery,
+			FindMaintenanceAlertByIdQueryVariables
+		>(FindMaintenanceAlertByIdDocument, { id });
 
 		if (isNil(maintenanceAlertResponse) || !maintenanceAlertResponse.app_maintenance_alerts[0]) {
 			throw new NotFoundException(`Material Request with id '${id}' not found`);
@@ -145,9 +163,9 @@ export class MaintenanceAlertsService {
 
 		const { insert_app_maintenance_alerts_one: createdMainteanceAlert } =
 			await this.dataService.execute<
-				InsertMaintenanceAlertsMutation,
-				InsertMaintenanceAlertsMutationVariables
-			>(InsertMaintenanceAlertsDocument, {
+				InsertMaintenanceAlertMutation,
+				InsertMaintenanceAlertMutationVariables
+			>(InsertMaintenanceAlertDocument, {
 				newMaintenanceAlert
 			});
 
@@ -162,11 +180,11 @@ export class MaintenanceAlertsService {
 	): Promise<MaintenanceAlert> {
 		const { update_app_maintenance_alerts: updatedMaintenanceAlert } =
 			await this.dataService.execute<
-				UpdateMaintenanceAlertsMutation,
-				UpdateMaintenanceAlertsMutationVariables
-			>(UpdateMaintenanceAlertsDocument, {
+				UpdateMaintenanceAlertMutation,
+				UpdateMaintenanceAlertMutationVariables
+			>(UpdateMaintenanceAlertDocument, {
 				maintenanceAlertId,
-				updateMaintenanceAlertDto,
+				maintenanceAlert: updateMaintenanceAlertDto,
 			});
 
 		this.logger.debug(`Maintenance Alert ${updatedMaintenanceAlert.returning[0].id} updated.`);
@@ -178,9 +196,9 @@ export class MaintenanceAlertsService {
 		maintenanceAlertId: string
 	): Promise<number> {
 		const response = await this.dataService.execute<
-			DeleteMaintenanceAlertsMutation,
-			DeleteMaintenanceAlertsMutationVariables
-		>(DeleteMaintenanceAlertsDocument, {
+			DeleteMaintenanceAlertMutation,
+			DeleteMaintenanceAlertMutationVariables
+		>(DeleteMaintenanceAlertDocument, {
 			maintenanceAlertId
 		});
 
