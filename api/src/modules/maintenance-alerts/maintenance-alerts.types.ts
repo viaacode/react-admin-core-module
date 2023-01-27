@@ -6,9 +6,9 @@ export class MaintenanceAlert {
 	title: string;
 	message: string;
 	type: string;
-	userGroups: string[];
 	fromDate: string;
 	untilDate: string;
+	userGroups?: string[];
 }
 
 export type GqlMaintenanceAlert =

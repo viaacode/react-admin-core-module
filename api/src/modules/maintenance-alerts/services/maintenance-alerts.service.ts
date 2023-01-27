@@ -33,30 +33,39 @@ export class MaintenanceAlertsService {
 
 	constructor(protected dataService: DataService) {}
 
-	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert): MaintenanceAlert | null {
+	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert, isPersonal: boolean = false): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
 			return null;
 		}
 
-		return {
+		let adaptedMaintenanceAlert: MaintenanceAlert = {
 			id: graphqlMaintenanceAlert.id,
 			title: graphqlMaintenanceAlert.title,
 			message: graphqlMaintenanceAlert.message,
 			type: graphqlMaintenanceAlert.type,
-			userGroups: graphqlMaintenanceAlert.user_groups,
 			fromDate: graphqlMaintenanceAlert.from_date,
 			untilDate: graphqlMaintenanceAlert.until_date
 		}
+
+		// Brecht - userGroups should not be returned when /personal endpoint is called
+		if (!isPersonal) {
+			adaptedMaintenanceAlert = {
+				...adaptedMaintenanceAlert,
+				userGroups: graphqlMaintenanceAlert.user_groups
+			}
+		}
+
+		return adaptedMaintenanceAlert;
 	}
 
 	public async findAll(
 		inputQuery: MaintenanceAlertsQueryDto,
 		parameters: {
-			userGroupIds: (string | number)[]
-		}
+			userGroupIds: (string | number)[],
+			isPersonal: boolean
+		} = null
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { fromDate, untilDate, page, size, orderProp, orderDirection } =
-			inputQuery;
+		const { fromDate, untilDate, page, size, orderProp, orderDirection } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
 		/** Dynamically build the where object  */
@@ -110,7 +119,7 @@ export class MaintenanceAlertsService {
 		});
 
 		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr)),
+			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters.isPersonal)),
 			page,
 			size,
 			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,

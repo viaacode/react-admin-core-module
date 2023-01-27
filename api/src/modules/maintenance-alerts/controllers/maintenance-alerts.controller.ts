@@ -37,7 +37,8 @@ export class MaintenanceAlertsController {
 		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
 		return this.maintenanceAlertsService.findAll(queryDto, {
-			userGroupIds: user.getGroupIds()
+			userGroupIds: user.getGroupIds(),
+			isPersonal: true
 		});
 	}
 
