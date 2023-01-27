@@ -18,7 +18,6 @@ export type { ColorOption } from './content-page/components/fields/ColorSelect/C
 export type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
 export type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
-export type { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
 export type { ContentPageDetailProps } from '~modules/content-page/views/ContentPageDetail';
 export type { ContentPageEditProps } from '~modules/content-page/views/ContentPageEdit';
 export type {
@@ -38,17 +37,11 @@ export { Color } from '~modules/content-page/types/content-block.types';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export { PublishOption } from '~modules/content-page/types/content-pages.types';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
+export * from './content-page/components/blocks';
 export {
 	convertDbContentPageToContentPageInfo,
 	convertDbContentPagesToContentPageInfos,
 } from '~modules/content-page/services/content-page.converters';
-export {
-	BLOCK_FIELD_DEFAULTS,
-	BLOCK_STATE_DEFAULTS,
-	FILE_FIELD,
-	TEXT_FIELD,
-} from './content-page/components/blocks';
-export * from './content-page/components/wrappers';
 export { GET_ALIGN_OPTIONS } from './content-page/const/get-align-options';
 export { GET_BUTTON_TYPE_OPTIONS } from './content-page/const/get-button-type-options';
 export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-options';

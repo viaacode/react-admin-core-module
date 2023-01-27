@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+import { DefaultComponentProps } from '~shared/types/components';
 
 export interface AdminLayoutProps extends DefaultComponentProps {
 	pageTitle?: ReactNode;

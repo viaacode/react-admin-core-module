@@ -7,7 +7,7 @@ import {
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
-import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isAvo } from '~shared/helpers/is-avo';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';

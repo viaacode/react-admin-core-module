@@ -13,8 +13,8 @@ import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 import moment from 'moment';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
-import { ErrorView } from '~modules/shared/components/error';
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
+import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
 
 import {
@@ -26,18 +26,18 @@ import { AdminLayout } from '../../shared/layouts';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
 import { AdminConfigManager, ToastType } from '~core/config';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { PermissionService } from '~modules/shared/services/permission-service';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { PermissionService } from '~shared/services/permission-service';
 import { CommonUser, Idp } from '../user.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { createDropdownMenuItem } from '~modules/shared/helpers/dropdown';
-import { buildLink, navigate } from '~modules/shared/helpers/link';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { CustomError } from '~shared/helpers/custom-error';
+import { createDropdownMenuItem } from '~shared/helpers/dropdown';
+import { buildLink, navigate } from '~shared/helpers/link';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import TempAccessModal from '../components/TempAccessModal';
-import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
-import { formatDate, normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
+import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
+import { formatDate, normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { renderAvatar } from '../../shared/helpers/formatters/avatar';
-import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
+import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 
 export interface UserDetailProps {
 	id: string | null;

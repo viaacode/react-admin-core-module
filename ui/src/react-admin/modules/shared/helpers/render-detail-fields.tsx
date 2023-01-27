@@ -1,6 +1,6 @@
 import { get, isBoolean, isNil, isString } from 'lodash-es';
 import React, { ReactElement, ReactNode } from 'react';
-import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 import { formatDate } from './formatters/date';
 import { sanitizeHtml } from './sanitize';

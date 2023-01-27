@@ -8,13 +8,13 @@ import { IconPicker } from '../../../shared/components/IconPicker/IconPicker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
-import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
-import { PickerItem } from '~modules/shared/types/content-picker';
-import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
-import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
-import { ReactSelectOption, ValueOf } from '~modules/shared/types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { PickerItem } from '~shared/types/content-picker';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { ReactSelectOption, ValueOf } from '~shared/types';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;

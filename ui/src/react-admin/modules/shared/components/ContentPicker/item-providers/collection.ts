@@ -5,7 +5,7 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { CollectionService } from '~modules/collection/collection.service';
 import { ContentTypeNumber } from '~modules/collection/collection.types';
-import { PickerItem } from '~modules/shared/types/content-picker';
+import { PickerItem } from '~shared/types/content-picker';
 
 // TODO: move fetchBundles and fetchBundlesByTitle to a separate bundle service, not collection service.
 

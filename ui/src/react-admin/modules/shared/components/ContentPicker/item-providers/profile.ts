@@ -3,7 +3,7 @@ import { CustomError } from '../../../helpers/custom-error';
 import { PickerItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { CommonUser } from '~modules/user/user.types';
 
 // Fetch profiles from GQL

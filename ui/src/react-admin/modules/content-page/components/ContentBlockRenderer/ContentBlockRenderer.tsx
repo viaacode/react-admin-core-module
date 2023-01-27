@@ -2,7 +2,7 @@ import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
-import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
 import { Color, ContentBlockConfig } from '../../types/content-block.types';

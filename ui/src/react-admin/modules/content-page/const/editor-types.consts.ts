@@ -8,12 +8,12 @@ import {
 } from '@viaa/avo2-components';
 import { FunctionComponent } from 'react';
 
-import { ContentPicker } from '~modules/shared/components/ContentPicker/ContentPicker';
-import { ContentTypeAndLabelsPicker } from '~modules/shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
-import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
-import RichTextEditorWrapper from '~modules/shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
-import { UserGroupSelect } from '~modules/shared/components/UserGroupSelect/UserGroupSelect';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import FileUpload from '~shared/components/FileUpload/FileUpload';
+import { IconPicker } from '~shared/components/IconPicker/IconPicker';
+import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';
 
 export const GET_EDITOR_TYPES_MAP = (): Record<string, FunctionComponent<any>> => ({

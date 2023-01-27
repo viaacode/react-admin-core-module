@@ -1,17 +1,19 @@
+import { RichEditorState } from '@meemoo/react-components';
 import {
-	BlockHeroProps,
 	ButtonAction,
 	ButtonType,
-	ContentItemStyle,
-	ContentTabStyle,
 	CTAProps,
 	HeadingType,
 	IconName,
-	ImageInfo,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import { RichEditorState } from '@meemoo/react-components';
 import { Avo } from '@viaa/avo2-types';
+import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import {
+	ContentItemStyle,
+	ContentTabStyle,
+} from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';

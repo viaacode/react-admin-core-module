@@ -1,4 +1,4 @@
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
 import { AdminConfigManager } from '~core/config';
 

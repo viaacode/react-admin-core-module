@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
-import { AdminLayout } from '~modules/shared/layouts';
+import { AdminLayout } from '~shared/layouts';
 import { NavigationOverview } from '~modules/navigation/views';
 
 const NavigationOverviewPage: FunctionComponent = () => {

@@ -2,8 +2,8 @@ import { compact, sortBy } from 'lodash-es';
 
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
-import { PickerItem } from '~modules/shared/types/content-picker';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import { PickerItem } from '~shared/types/content-picker';
 import { AdminConfigManager } from '~core/config';
 
 // Return InternalLinkItems items from adminCoreConfig.staticPages

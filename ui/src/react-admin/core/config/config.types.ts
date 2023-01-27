@@ -2,13 +2,13 @@ import { TableSortingIcons } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
+import { MediaListItem } from '~content-blocks/BlockMediaGrid/BlockMediaGrid';
 
 import { CommonUser, UserBulkAction } from '~modules/user/user.types';
 
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
-import { MediaListItem } from '@viaa/avo2-components';
-import { FlowPlayerWrapperProps } from '~modules/shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 
 export enum ToastType {
 	ERROR = 'error',

@@ -18,14 +18,14 @@ import { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
 import { DeleteContentCounts } from '../user.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { buildLink } from '~modules/shared/helpers/link';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { PickerItem } from '~modules/shared/types/content-picker';
-import { GET_DELETE_RADIO_OPTIONS } from '~modules/shared/consts/user.const';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
+import { buildLink } from '~shared/helpers/link';
+import { CustomError } from '~shared/helpers/custom-error';
+import { PickerItem } from '~shared/types/content-picker';
+import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { UserService } from '../user.service';
 
 interface UserDeleteModalProps {

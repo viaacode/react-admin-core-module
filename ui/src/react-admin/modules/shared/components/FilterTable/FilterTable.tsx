@@ -55,7 +55,7 @@ import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface FilterableTableState {
 	query?: string;

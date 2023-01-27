@@ -1,8 +1,8 @@
-import { BlockImageProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { isAvo } from '~modules/shared/helpers/is-avo';
+import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
+import { isAvo } from '~shared/helpers/is-avo';
 
 import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -16,10 +16,10 @@ import {
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;

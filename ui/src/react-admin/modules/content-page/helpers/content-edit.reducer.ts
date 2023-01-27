@@ -13,7 +13,7 @@ import {
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
 
-import { ValueOf } from '~modules/shared/types';
+import { ValueOf } from '~shared/types';
 import { AdminConfigManager } from '~core/config';
 import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 

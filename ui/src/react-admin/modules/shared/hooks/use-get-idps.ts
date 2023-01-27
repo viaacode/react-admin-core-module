@@ -1,5 +1,5 @@
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { QUERY_KEYS } from '~modules/shared/types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { QUERY_KEYS } from '~shared/types';
 import { UserService } from '~modules/user/user.service';
 
 import { useQuery } from '@tanstack/react-query';

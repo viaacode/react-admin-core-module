@@ -5,7 +5,7 @@ import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import { buildLink } from '~modules/shared/helpers/link';
+import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
 

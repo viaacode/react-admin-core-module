@@ -1,9 +1,13 @@
 import { compact, sortBy } from 'lodash-es';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
-import { ContentBlockConfig, ContentBlockType, DbContentBlock } from '~modules/content-page/types/content-block.types';
+import {
+	ContentBlockConfig,
+	ContentBlockType,
+	DbContentBlock,
+} from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, DbContentPage } from '~modules/content-page/types/content-pages.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 
 export function convertDbContentPagesToContentPageInfos(
 	dbContentPages: DbContentPage[] | null
@@ -19,9 +23,7 @@ export function convertDbContentPageToContentPageInfo(
 ): ContentPageInfo {
 	return {
 		...dbContentPage,
-		content_blocks: convertDbContentBlockToContentBlockConfig(
-			dbContentPage.content_blocks
-		),
+		content_blocks: convertDbContentBlockToContentBlockConfig(dbContentPage.content_blocks),
 	};
 }
 

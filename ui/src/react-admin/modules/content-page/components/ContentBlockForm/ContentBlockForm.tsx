@@ -3,7 +3,6 @@ import {
 	AccordionActions,
 	AccordionBody,
 	AccordionTitle,
-	BlockHeading,
 	Button,
 	ButtonGroup,
 	ButtonToolbar,
@@ -36,9 +35,10 @@ import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBloc
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './ContentBlockForm.scss';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 interface ContentBlockFormProps {
 	config: ContentBlockConfig;

@@ -19,8 +19,8 @@ import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { UserService } from '~modules/user/user.service';
 
 import './MultiUserSelectDropdown.scss';

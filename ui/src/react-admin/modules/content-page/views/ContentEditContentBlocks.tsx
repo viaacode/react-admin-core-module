@@ -18,10 +18,10 @@ import {
 	ContentEditActionType,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
-import { Sidebar } from '~modules/shared/components/Sidebar/Sidebar';
-import { createKey } from '~modules/shared/helpers/create-key';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { ResizablePanels } from '~shared/components/ResizablePanels/ResizablePanels';
+import { Sidebar } from '~shared/components/Sidebar/Sidebar';
+import { createKey } from '~shared/helpers/create-key';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 import './ContentEditContentBlocks.scss';

@@ -2,7 +2,6 @@ import {
 	Column,
 	FormGroup,
 	Grid,
-	LabelObj,
 	Select,
 	SelectOption,
 	TagInfo,
@@ -11,6 +10,7 @@ import {
 import { Avo } from '@viaa/avo2-types';
 import { compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 import { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
@@ -19,7 +19,7 @@ import { CustomError } from '../../helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;

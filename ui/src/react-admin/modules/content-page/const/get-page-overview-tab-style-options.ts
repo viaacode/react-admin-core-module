@@ -1,5 +1,6 @@
-import { ContentTabStyle, SelectOption } from '@viaa/avo2-components';
+import { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
+import { ContentTabStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 
 export const GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS: () => SelectOption<ContentTabStyle>[] = () => [
 	{

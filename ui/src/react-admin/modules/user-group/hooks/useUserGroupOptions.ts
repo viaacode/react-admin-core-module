@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { TagInfo } from '@viaa/avo2-components';
 
-import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';

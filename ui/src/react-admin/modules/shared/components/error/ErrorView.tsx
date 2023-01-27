@@ -13,9 +13,9 @@ import React, { FunctionComponent, ReactNode } from 'react';
 
 import './ErrorView.scss';
 import { AdminConfigManager } from '~core/config';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { isMobileWidth } from '~modules/shared/helpers/media-query';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { CustomError } from '~shared/helpers/custom-error';
+import { isMobileWidth } from '~shared/helpers/media-query';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 interface ErrorViewProps {
 	message?: string | ReactNode;

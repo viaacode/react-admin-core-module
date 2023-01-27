@@ -1,67 +1,67 @@
+import React, { FC, FunctionComponent } from 'react';
+import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
+import { AdminConfigManager } from '~core/config';
 import {
+	BlockButtonsWrapper,
+	BlockContentPageMeta,
+	BlockCTAsWrapper,
 	BlockEventbrite,
 	BlockHeading,
 	BlockIFrame,
 	BlockImage,
+	BlockImageGridWrapper,
+	BlockImageTitleTextButtonWrapper,
 	BlockIntro,
 	BlockKlaar,
+	BlockLogoGridWrapper,
+	BlockPageOverviewWrapper,
+	BlockProjectSpotlightWrapper,
 	BlockQuote,
+	BlockRichTextWrapper,
 	BlockSpotlight,
 	BlockUitgeklaard,
-} from '@viaa/avo2-components';
-import React, { FC, FunctionComponent } from 'react';
-import { AdminConfigManager } from '~core/config';
+	BlockUspGridWrapper,
+	BlockVideoTitleTextButtonWrapper,
+	BlockVideoWrapper,
+} from '~modules/content-page/components/blocks';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 
-import {
-	BlockImageGridWrapper,
-	BlockLogoGridWrapper,
-	BlockUspGridWrapper,
-	ContentPageMeta,
-	CtaWrapper,
-	HeroWrapper,
-	ImageTitleTextButtonWrapper,
-	MediaPlayerTitleTextButtonWrapper,
-	MediaPlayerWrapper,
-	PageOverviewWrapper,
-	ProjectSpotlightWrapper,
-} from '../wrappers';
-import ButtonsWrapper from '../wrappers/ButtonsWrapper/ButtonsWrapper';
-import RichTextWrapper from '../wrappers/RichTextWrapper/RichTextWrapper';
-
 function loadComponentFromConfig(key: ContentBlockType): FC {
-	return AdminConfigManager.getConfig().content_blocks[key] || (() => <p>{key} component could not be found.</p>)
+	return (
+		AdminConfigManager.getConfig().content_blocks[key] ||
+		(() => <p>{key} component could not be found.</p>)
+	);
 }
 
 export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
 	return {
-		[ContentBlockType.AnchorLinks]: ButtonsWrapper,
-		[ContentBlockType.Buttons]: ButtonsWrapper,
-		[ContentBlockType.CTAs]: CtaWrapper,
+		[ContentBlockType.AnchorLinks]: BlockButtonsWrapper,
+		[ContentBlockType.Buttons]: BlockButtonsWrapper,
+		[ContentBlockType.CTAs]: BlockCTAsWrapper,
 		[ContentBlockType.Heading]: BlockHeading,
 		[ContentBlockType.IFrame]: BlockIFrame,
 		[ContentBlockType.ImageGrid]: BlockImageGridWrapper,
 		[ContentBlockType.Image]: BlockImage,
 		[ContentBlockType.Intro]: BlockIntro,
 		[ContentBlockType.Klaar]: BlockKlaar,
-		[ContentBlockType.MediaPlayerTitleTextButton]: MediaPlayerTitleTextButtonWrapper,
-		[ContentBlockType.MediaPlayer]: MediaPlayerWrapper,
-		[ContentBlockType.PageOverview]: PageOverviewWrapper,
-		[ContentBlockType.ProjectsSpotlight]: ProjectSpotlightWrapper,
+		[ContentBlockType.MediaPlayerTitleTextButton]: BlockVideoTitleTextButtonWrapper,
+		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
+		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
+		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
 		[ContentBlockType.Quote]: BlockQuote,
-		[ContentBlockType.RichTextTwoColumns]: RichTextWrapper,
-		[ContentBlockType.RichText]: RichTextWrapper,
+		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
+		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
 		[ContentBlockType.Hero]: HeroWrapper,
-		[ContentBlockType.ContentPageMeta]: ContentPageMeta,
+		[ContentBlockType.ContentPageMeta]: BlockContentPageMeta,
 		[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
 		[ContentBlockType.UspGrid]: BlockUspGridWrapper,
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
-		[ContentBlockType.ImageTitleTextButton]: ImageTitleTextButtonWrapper,
+		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
-		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search)
+		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
 	}[type];
 }
 

@@ -7,8 +7,8 @@ import { ContentPageLabel } from '../content-page-label.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

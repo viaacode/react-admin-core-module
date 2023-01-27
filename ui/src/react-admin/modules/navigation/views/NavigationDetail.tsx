@@ -12,14 +12,14 @@ import {
 } from '@viaa/avo2-components';
 
 import { NavigationService } from '../navigation.service';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import DeleteObjectModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { navigate } from '~modules/shared/helpers/link';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { AdminLayout } from '~modules/shared/layouts';
-import { Loader } from '~modules/shared/components';
+import { navigate } from '~shared/helpers/link';
+import { CustomError } from '~shared/helpers/custom-error';
+import { AdminLayout } from '~shared/layouts';
+import { Loader } from '~shared/components';
 import { NavigationItem } from '../navigation.types';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';

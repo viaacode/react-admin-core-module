@@ -1,6 +1,6 @@
-import { ROUTE_PARTS } from '~modules/shared/consts/routes';
+import { ROUTE_PARTS } from '~shared/consts/routes';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import { SortDirectionParam } from '~modules/shared/helpers/query-params';
+import { SortDirectionParam } from '~shared/helpers/query-params';
 import { RichTextEditorControl } from '@meemoo/react-components';
 
 export const TRANSLATIONS_PATH = {

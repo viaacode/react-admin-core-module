@@ -5,7 +5,7 @@ import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { PermissionRow } from '../types/user-group.types';
 import { AdminConfigManager } from '~core/config';
-import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { sortBy } from 'lodash-es';
 
 export const UserGroupTableColumns = (

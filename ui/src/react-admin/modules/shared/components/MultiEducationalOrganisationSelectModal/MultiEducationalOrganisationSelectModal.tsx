@@ -15,7 +15,7 @@ import React, { FunctionComponent, MouseEvent, useEffect, useState } from 'react
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './MultiEducationalOrganisationSelectModal.scss';
 

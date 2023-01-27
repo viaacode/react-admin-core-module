@@ -1,5 +1,4 @@
 import {
-	BlockHeading,
 	Button,
 	ButtonToolbar,
 	DatePicker,
@@ -12,12 +11,13 @@ import {
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { toDateObject, toIsoDate } from '~modules/shared/helpers/formatters/date';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
 
