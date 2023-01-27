@@ -42,11 +42,10 @@ export class MaintenanceAlertsService {
 			id: graphqlMaintenanceAlert.id,
 			title: graphqlMaintenanceAlert.title,
 			message: graphqlMaintenanceAlert.message,
-			icon: graphqlMaintenanceAlert.icon,
+			type: graphqlMaintenanceAlert.type,
 			userGroups: graphqlMaintenanceAlert.user_groups,
 			fromDate: graphqlMaintenanceAlert.from_date,
-			untilDate: graphqlMaintenanceAlert.until_date,
-			active: graphqlMaintenanceAlert.active
+			untilDate: graphqlMaintenanceAlert.until_date
 		}
 	}
 
@@ -54,21 +53,14 @@ export class MaintenanceAlertsService {
 		inputQuery: MaintenanceAlertsQueryDto,
 		parameters: {
 			userGroupIds: (string | number)[]
-		} = null
+		}
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { query, fromDate, untilDate, active, page, size, orderProp, orderDirection } =
+		const { fromDate, untilDate, page, size, orderProp, orderDirection } =
 			inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
 		/** Dynamically build the where object  */
 		const where: FindMaintenanceAlertsQueryVariables['where'] = {};
-
-		if (!isEmpty(query) && query !== '%' && query !== '%%') {
-			where._or = [
-				{ title: { _ilike: query } },
-				{ message: { _ilike: query } },
-			];
-		}
 
 		// Brecht - user group & special user group
 		if (!isNil(parameters)) {
@@ -80,10 +72,6 @@ export class MaintenanceAlertsService {
 					_in: (isArray(parameters.userGroupIds[0]) ? parameters.userGroupIds[0] : [parameters.userGroupIds[0]]) as string[]
 				}
 			}
-
-			where.active = {
-				_eq: true,
-			};
 
 			where._and = [
 				{
@@ -104,12 +92,6 @@ export class MaintenanceAlertsService {
 				where.until_date = {
 					_lte: untilDate
 				}
-			}
-
-			if (!isEmpty(active)) {
-				where.active = {
-					_eq: active,
-				};
 			}
 		}
 
@@ -154,11 +136,10 @@ export class MaintenanceAlertsService {
 		const newMaintenanceAlert = {
 			title: createMaintenanceAlertDto.title,
 			message: createMaintenanceAlertDto.message,
-			icon: createMaintenanceAlertDto.icon,
+			type: createMaintenanceAlertDto.type,
 			user_groups: createMaintenanceAlertDto.userGroups,
 			from_date: createMaintenanceAlertDto.fromDate,
-			until_date: createMaintenanceAlertDto.untilDate,
-			active: createMaintenanceAlertDto.active
+			until_date: createMaintenanceAlertDto.untilDate
 		};
 
 		const { insert_app_maintenance_alerts_one: createdMainteanceAlert } =

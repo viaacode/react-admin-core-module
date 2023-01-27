@@ -3,10 +3,9 @@ mutation insertMaintenanceAlert($newMaintenanceAlert: app_maintenance_alerts_ins
 		id
 		title
 		message
-		icon
+		type
 		user_groups
 		from_date
 		until_date
-		active
 	}
 }

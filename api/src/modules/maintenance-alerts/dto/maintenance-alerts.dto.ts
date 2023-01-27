@@ -11,17 +11,6 @@ export class MaintenanceAlertsQueryDto {
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: String,
-		description:
-			"Text to search for in the title or message of the maintenance alert. Use '%' for wildcard.",
-		default: undefined,
-	})
-	query?: string;
-
-	@IsString()
-	@Type(() => String)
-	@IsOptional()
-	@ApiPropertyOptional({
-		type: String,
 		description: 'Retrieve maintenance alerts starting from a certain date',
 		example: '2022-02-25T16:36:06.045845'
 	})
@@ -36,16 +25,6 @@ export class MaintenanceAlertsQueryDto {
 		example: '2022-02-25T16:36:06.045845'
 	})
 	untilDate?: string;
-
-	@IsBoolean()
-	@Type(() => Number)
-	@IsOptional()
-	@ApiPropertyOptional({
-		type: Number,
-		description: 'Retrieve active or non active maintenance alerts',
-		default: true
-	})
-	active?: boolean = true;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -113,10 +92,10 @@ export class CreateMaintenanceAlertDto {
 	@Type(() => String)
 	@ApiProperty({
 		type: String,
-		description: 'The icon of the maintenance alert',
+		description: 'The type of the maintenance alert',
 		example: 'alert'
 	})
-	icon: string;
+	type: string;
 
 	@IsArray()
 	@IsString({ each: true})
@@ -145,16 +124,6 @@ export class CreateMaintenanceAlertDto {
 		example: '2022-02-27T16:36:06.045845'
 	})
 	untilDate: string;
-
-	@IsBoolean()
-	@Type(() => Boolean)
-	@ApiProperty({
-		type: Boolean,
-		description: 'Determine if the maintenance alert is active or not',
-		example: true
-	})
-	active: boolean;
-
 }
 
 export class UpdateMaintenanceAlertDto {
@@ -183,10 +152,10 @@ export class UpdateMaintenanceAlertDto {
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: String,
-		description: 'The icon of the maintenance alert',
+		description: 'The type of the maintenance alert',
 		example: 'alert'
 	})
-	icon?: string;
+	type?: string;
 
 	@IsArray()
 	@IsString({ each: true})
@@ -218,15 +187,4 @@ export class UpdateMaintenanceAlertDto {
 		example: '2022-02-27T16:36:06.045845'
 	})
 	untilDate?: string;
-
-	@IsBoolean()
-	@Type(() => Boolean)
-	@IsOptional()
-	@ApiPropertyOptional({
-		type: Boolean,
-		description: 'Determine if the maintenance alert is active or not',
-		example: true
-	})
-	active?: boolean;
-
 }

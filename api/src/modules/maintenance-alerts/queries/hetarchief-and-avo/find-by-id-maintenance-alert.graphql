@@ -3,8 +3,7 @@ query findMaintenanceAlertById($id: uuid!) {
 		id
 		title
 		message
-		icon
-		active
+		type
 		from_date
 		until_date
 		user_groups

@@ -10,11 +10,10 @@ mutation updateMaintenanceAlert(
 			id
 			title
 			message
-			icon
+			type
 			user_groups
 			from_date
 			until_date
-			active
 		}
 	}
 }
