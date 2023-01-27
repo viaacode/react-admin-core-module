@@ -1,9 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
 
 import { SortDirection } from "../../shared/types";
-import { MaintenanceAlertOrderProp } from "../maintenance-alerts.types";
+import { MaintenanceAlertOrderProp, MaintenanceAlertType } from "../maintenance-alerts.types";
 
 export class MaintenanceAlertsQueryDto {
 	@IsString()
@@ -89,13 +89,13 @@ export class CreateMaintenanceAlertDto {
 	message: string;
 
 	@IsString()
-	@Type(() => String)
+	@IsEnum(MaintenanceAlertType)
 	@ApiProperty({
 		type: String,
-		description: 'The type of the maintenance alert',
+		description: 'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
 		example: 'alert'
 	})
-	type: string;
+	type: MaintenanceAlertType;
 
 	@IsArray()
 	@IsString({ each: true})
@@ -148,10 +148,10 @@ export class UpdateMaintenanceAlertDto {
 	message?: string;
 
 	@IsString()
-	@Type(() => String)
+	@IsEnum(MaintenanceAlertType)
 	@IsOptional()
 	@ApiPropertyOptional({
-		type: String,
+		type: MaintenanceAlertType,
 		description: 'The type of the maintenance alert',
 		example: 'alert'
 	})

@@ -47,7 +47,7 @@ export class MaintenanceAlertsService {
 			untilDate: graphqlMaintenanceAlert.until_date
 		}
 
-		// Brecht - userGroups should not be returned when /personal endpoint is called
+		// userGroups should not be returned when /personal endpoint is called
 		if (!isPersonal) {
 			adaptedMaintenanceAlert = {
 				...adaptedMaintenanceAlert,
@@ -71,10 +71,21 @@ export class MaintenanceAlertsService {
 		/** Dynamically build the where object  */
 		const where: FindMaintenanceAlertsQueryVariables['where'] = {};
 
-		// Brecht - user group & special user group
-		if (!isNil(parameters)) {
+		// user group & special user group
+		if (isNil(parameters)) {
+			if (!isEmpty(fromDate)) {
+				where.from_date = {
+					_gte: fromDate
+				}
+			}
 
-			// Brecht - LOGGED IN USER
+			if (!isEmpty(untilDate)) {
+				where.until_date = {
+					_lte: untilDate
+				}
+			}
+		} else {
+			// LOGGED IN USER
 			if (parameters.userGroupIds[1] === '-2' ) {
 				where.user_groups = {
 					// jsonb comparison
@@ -90,18 +101,6 @@ export class MaintenanceAlertsService {
 					until_date: { _lte: new Date().toISOString() }
 				}
 			];
-		} else {
-			if (!isEmpty(fromDate)) {
-				where.from_date = {
-					_gte: fromDate
-				}
-			}
-
-			if (!isEmpty(untilDate)) {
-				where.until_date = {
-					_lte: untilDate
-				}
-			}
 		}
 
 		const maintenanceAlertsResponse = await this.dataService.execute<

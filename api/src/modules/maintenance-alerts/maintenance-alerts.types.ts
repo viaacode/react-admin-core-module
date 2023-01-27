@@ -25,3 +25,15 @@ export enum MaintenanceAlertOrderProp {
 	ACTIVE = 'active',
 }
 
+export enum MaintenanceAlertType {
+	INFO = 'info',
+	NOTIFICATION = 'notification',
+	USER = 'user',
+	QUESTION = 'question',
+	EXCLAMATION = 'exclamation',
+	KEY = 'key',
+	CALENDAR = 'calendar',
+	BOOK = 'book',
+	ANGLE_RIGHT = 'angle-right'
+}
+
