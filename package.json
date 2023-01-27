@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/viaacode/react-admin-core-module#readme",
   "scripts": {
-    "build-and-copy-to-client": "cd ui && npm run build-and-copy-to-client-hetarchief"
+    "build-and-copy-to-client": "cd ui && npm run build-and-copy-to-client-hetarchief",
+    "bump": "node ./scripts/bump-versions.js ./package.json ./ui/package.json ./api/package.json minor"
   },
   "devDependencies": {
     "@babel/preset-env": "7.18.2",
