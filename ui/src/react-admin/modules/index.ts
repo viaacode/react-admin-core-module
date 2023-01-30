@@ -60,6 +60,9 @@ export { UserOverview } from './user/views/UserOverview';
 
 export type { CommonUser } from './user/user.types';
 
+//Users
+export { UserService } from './user/user.service';
+
 // User groups and permissions
 export { default as UserGroupOverview } from './user-group/views/UserGroupOverview';
 
