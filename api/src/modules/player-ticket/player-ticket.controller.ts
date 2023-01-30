@@ -33,7 +33,7 @@ export class PlayerTicketController {
 				'Either query param externalId or browsePath is required to fetch a playable url',
 			);
 		}
-		const referrer = request.referrer || 'http://localhost:8080';
+		const referrer = request.header('Referer') || 'referer-not-defined';
 		if (queryParams.externalId) {
 			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer);
 		} else if (queryParams.externalIds) {
