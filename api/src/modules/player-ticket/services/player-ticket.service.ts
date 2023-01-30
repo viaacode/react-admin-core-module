@@ -75,7 +75,6 @@ export class PlayerTicketService {
 			maxage: this.ticketServiceMaxAge,
 		};
 
-		console.log('getting player token: ', { data, path, referer });
 		const playerTicket: PlayerTicket =
 			await this.playerTicketsGotInstance.get<PlayerTicket>(path, {
 				searchParams: data,
@@ -121,11 +120,6 @@ export class PlayerTicketService {
 	): Promise<string> {
 		const token = await this.getPlayerToken(embedUrl, referer);
 
-		console.log('getting playable url from browsePath: ', {
-			embedUrl,
-			referer,
-			token,
-		});
 		return `${this.mediaServiceUrl}/${embedUrl}?token=${token}`;
 	}
 
