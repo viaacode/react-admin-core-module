@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 
 import { PaddingFieldState } from '../../../types/content-block.types';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './PaddingSelect.scss';
 

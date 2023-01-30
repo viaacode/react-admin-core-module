@@ -1,4 +1,4 @@
-import { FilterableTableState } from '~modules/shared/components/FilterTable/FilterTable';
+import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 import { GetUsersQuery as GetUsersQueryHetArchief } from '~generated/graphql-db-types-hetarchief';
 import { GetUsersQuery as GetUsersQueryAvo } from '~generated/graphql-db-types-avo';
 import { PermissionName } from '@viaa/avo2-types';

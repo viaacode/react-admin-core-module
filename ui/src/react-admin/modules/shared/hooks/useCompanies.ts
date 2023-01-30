@@ -4,7 +4,7 @@ import { ToastType } from '~core/config/config.types';
 import {
 	BasicOrganisation,
 	OrganisationService,
-} from '~modules/shared/services/organization-service/organisation-service';
+} from '~shared/services/organization-service/organisation-service';
 import { CustomError } from '../helpers/custom-error';
 
 import { useTranslation } from './useTranslation';

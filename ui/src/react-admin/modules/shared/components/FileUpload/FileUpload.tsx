@@ -19,7 +19,7 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './FileUpload.scss';
 

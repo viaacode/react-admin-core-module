@@ -1,5 +1,4 @@
 import {
-	BlockHeading,
 	Container,
 	Spacer,
 	Table,
@@ -11,20 +10,21 @@ import {
 import { compact, get } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent } from 'react';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import Html from '~modules/shared/components/Html/Html';
-import { formatDate } from '~modules/shared/helpers/formatters/date';
+import Html from '~shared/components/Html/Html';
+import { formatDate } from '~shared/helpers/formatters/date';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
-} from '~modules/shared/helpers/render-detail-fields';
-import { SanitizePreset } from '~modules/shared/helpers/sanitize/presets';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+} from '~shared/helpers/render-detail-fields';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 

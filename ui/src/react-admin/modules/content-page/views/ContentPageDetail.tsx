@@ -30,20 +30,20 @@ import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDel
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import MoreOptionsDropdown from '~modules/shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { createDropdownMenuItem } from '~modules/shared/helpers/dropdown';
-import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
-import { useTabs } from '~modules/shared/hooks/useTabs';
-import { AdminLayout } from '~modules/shared/layouts';
-import { PermissionService } from '~modules/shared/services/permission-service';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
+import { CustomError } from '~shared/helpers/custom-error';
+import { createDropdownMenuItem } from '~shared/helpers/dropdown';
+import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { useTabs } from '~shared/hooks/useTabs';
+import { AdminLayout } from '~shared/layouts';
+import { PermissionService } from '~shared/services/permission-service';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { DefaultComponentProps } from '~shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;

@@ -10,16 +10,16 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
-import { isAvo } from '~modules/shared/helpers/is-avo';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { isAvo } from '~shared/helpers/is-avo';
 
 import {
 	Translation,
 	TranslationContextName,
 	TranslationsOverviewProps,
 } from '../translations.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { OrderDirection } from '~modules/shared/types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { OrderDirection } from '~shared/types';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { TranslationsService } from '../translations.service';
@@ -31,14 +31,14 @@ import {
 	Table,
 	TextInput,
 } from '@meemoo/react-components';
-import { Icon } from '~modules/shared/components';
+import { Icon } from '~shared/components';
 import { useQueryParams } from 'use-query-params';
 import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
 	TRANSLATIONS_QUERY_PARAM_CONFIG,
 } from '~modules/translations/translations.const';
-import { sortingIcons } from '~modules/shared/components/Table/Table.const';
+import { sortingIcons } from '~shared/components/Table/Table.const';
 import { Row, TableOptions } from 'react-table';
 import Loader from '../../shared/components/Loader/Loader';
 import {
@@ -46,9 +46,9 @@ import {
 	convertFromListToDatabase,
 	getKeyPrefix,
 } from '~modules/translations/helpers/database-conversions';
-import Html from '~modules/shared/components/Html/Html';
+import Html from '~shared/components/Html/Html';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,

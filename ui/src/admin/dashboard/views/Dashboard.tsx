@@ -1,6 +1,6 @@
 import React from 'react';
 import { AdminLayout } from '../../../react-admin/modules/shared/layouts';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 const Dashboard = () => {
 	const { tHtml, tText } = useTranslation();

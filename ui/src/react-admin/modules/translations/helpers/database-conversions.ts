@@ -1,4 +1,4 @@
-import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isAvo } from '~shared/helpers/is-avo';
 import { Translation, TranslationContextName } from '~modules/translations/translations.types';
 import { flatten, fromPairs, groupBy, map, snakeCase } from 'lodash-es';
 

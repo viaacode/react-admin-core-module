@@ -1,7 +1,7 @@
 import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { UserGroup, UserGroupUpdates, UserGroupWithPermissions } from '../types/user-group.types';
 
 export class UserGroupService {
@@ -17,7 +17,7 @@ export class UserGroupService {
 					withPermissions: 'true',
 				},
 			}),
-			{throwOnNullResponse: true}
+			{ throwOnNullResponse: true }
 		);
 	}
 
@@ -29,7 +29,7 @@ export class UserGroupService {
 					withPermissions: 'false',
 				},
 			}),
-			{throwOnNullResponse: true}
+			{ throwOnNullResponse: true }
 		);
 	}
 

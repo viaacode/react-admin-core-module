@@ -6,13 +6,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './react-admin/modules/shared/styles/main.scss';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
-import { ResizablePanels } from '~modules/shared/components/ResizablePanels/ResizablePanels';
+import { ResizablePanels } from '~shared/components/ResizablePanels/ResizablePanels';
 import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import Sidebar from './shared/components/Sidebar/Sidebar';
 import { mockUser } from './mock-user';
 

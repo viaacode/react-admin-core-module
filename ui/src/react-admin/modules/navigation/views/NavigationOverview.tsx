@@ -5,12 +5,12 @@ import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
-import { buildLink, navigate } from '~modules/shared/helpers/link';
+import { buildLink, navigate } from '~shared/helpers/link';
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
-import { Loader } from '~modules/shared/components';
-import { AdminLayout } from '~modules/shared/layouts';
+import { Loader } from '~shared/components';
+import { AdminLayout } from '~shared/layouts';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { tHtml, tText } = useTranslation();

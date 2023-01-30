@@ -2,7 +2,6 @@ import { QueryClient } from '@tanstack/react-query';
 import {
 	Button,
 	ButtonToolbar,
-	LabelObj,
 	LinkTarget,
 	Modal,
 	ModalBody,
@@ -20,15 +19,16 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
-import { PermissionService } from '~modules/shared/services/permission-service';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { PermissionService } from '~shared/services/permission-service';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import { QUERY_KEYS } from '~modules/shared/types';
+import { QUERY_KEYS } from '~shared/types';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
@@ -41,24 +41,24 @@ import { ContentPageService } from '../services/content-page.service';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
-import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getQueryFilter,
-} from '~modules/shared/helpers/filters';
-import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~modules/shared/helpers/link';
-import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
-import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+} from '~shared/helpers/filters';
+import { formatDate } from '~shared/helpers/formatters/date';
+import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { truncateTableValue } from '~shared/helpers/truncate';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './ContentPageOverview.scss';
 import {
@@ -67,7 +67,7 @@ import {
 	ContentTableState,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
-import { ErrorView } from '~modules/shared/components/error';
+import { ErrorView } from '~shared/components/error';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;

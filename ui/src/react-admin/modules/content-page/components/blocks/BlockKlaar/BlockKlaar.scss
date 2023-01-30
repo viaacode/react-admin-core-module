@@ -1,0 +1,18 @@
+@import '../../../../shared/styles/mixins';
+@import '../../../../shared/styles/settings/colors';
+@import '../../../../shared/styles/settings/variables';
+
+.klaar-header {
+	@include klaar-block(#aa3ce9, #3ecf6e, #0081ff, #0081ff);
+
+	&__date {
+		text-transform: uppercase;
+	}
+
+	&__logo,
+	&__date,
+	&__h1,
+	&__titles {
+		font-family: Arial;
+	}
+}

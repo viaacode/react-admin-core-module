@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 interface SidebarProps {
 	className?: string;

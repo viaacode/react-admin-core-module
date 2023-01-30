@@ -1,8 +1,8 @@
 import { kebabCase } from 'lodash-es';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
-import { isAvo } from '~modules/shared/helpers/is-avo';
+import { isAvo } from '~shared/helpers/is-avo';
 import { TranslationContextName } from '~modules/translations/translations.types';
 
 export class TranslationsService {

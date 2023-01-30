@@ -32,23 +32,23 @@ import {
 	ContentPageInfo,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { getProfileId } from '~modules/shared/helpers/get-profile-id';
-import { navigate } from '~modules/shared/helpers/link';
-import { validateContentBlockField } from '~modules/shared/helpers/validation';
-import { useTabs } from '~modules/shared/hooks/useTabs';
-import { AdminLayout } from '~modules/shared/layouts';
-import { PermissionService } from '~modules/shared/services/permission-service';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
+import { getProfileId } from '~shared/helpers/get-profile-id';
+import { navigate } from '~shared/helpers/link';
+import { validateContentBlockField } from '~shared/helpers/validation';
+import { useTabs } from '~shared/hooks/useTabs';
+import { AdminLayout } from '~shared/layouts';
+import { PermissionService } from '~shared/services/permission-service';
+import { DefaultComponentProps } from '~shared/types/components';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 

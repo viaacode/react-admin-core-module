@@ -4,13 +4,13 @@ import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { ErrorView } from '~modules/shared/components/error';
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
-import { useGetIdps } from '~modules/shared/hooks/use-get-idps';
+import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { useGetIdps } from '~shared/hooks/use-get-idps';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import reactToString from 'react-to-string';
 
@@ -38,22 +38,22 @@ import {
 } from '../user.types';
 
 import './UserOverview.scss';
-import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
-import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { buildLink, navigate } from '~modules/shared/helpers/link';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { formatDate } from '~modules/shared/helpers/formatters/date';
-import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
-import { setSelectedCheckboxes } from '~modules/shared/helpers/set-selected-checkboxes';
-import { stringsToTagList } from '~modules/shared/helpers/strings-to-taglist';
-import { truncateTableValue } from '~modules/shared/helpers/truncate';
-import { useBusinessCategories } from '~modules/shared/hooks/useBusinessCategory';
-import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
-import { useEducationLevels } from '~modules/shared/hooks/useEducationLevels';
-import { useSubjects } from '~modules/shared/hooks/useSubjects';
+import { SettingsService } from '~shared/services/settings-service/settings.service';
+import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { buildLink, navigate } from '~shared/helpers/link';
+import { CustomError } from '~shared/helpers/custom-error';
+import { formatDate } from '~shared/helpers/formatters/date';
+import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
+import { truncateTableValue } from '~shared/helpers/truncate';
+import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
+import { useEducationLevels } from '~shared/hooks/useEducationLevels';
+import { useSubjects } from '~shared/hooks/useSubjects';
 import AddOrRemoveLinkedElementsModal, {
 	AddOrRemove,
-} from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+} from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 

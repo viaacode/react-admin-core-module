@@ -1,14 +1,14 @@
 import { first, isNil, without } from 'lodash-es';
 import { AdminConfigManager, ToastType } from '~core/config';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { eduOrgToClientOrg } from '~modules/shared/helpers/edu-org-string-to-client-org';
+import { CustomError } from '~shared/helpers/custom-error';
+import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
 	getMultiOptionFilters,
 	getMultiOptionsFilters,
 	NULL_FILTER,
-} from '~modules/shared/helpers/filters';
+} from '~shared/helpers/filters';
 import { UserTableState } from '~modules/user/user.types';
 
 export const generateWhereObjectAvo = (

@@ -3,9 +3,9 @@ import { Avo } from '@viaa/avo2-types';
 import { isArray, isFunction, isPlainObject, kebabCase } from 'lodash-es';
 import moment from 'moment';
 import { stringifyUrl } from 'query-string';
+import { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
-import { ContentPageOverviewParams } from '~modules/content-page/components/wrappers/PageOverviewWrapper/PageOverviewWrapper';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
@@ -14,12 +14,12 @@ import {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 
-import { fetchWithLogoutJson } from '../../shared/helpers/fetch-with-logout';
-import { mapDeep } from '../../shared/helpers/map-deep/map-deep';
-import { sanitizeHtml } from '../../shared/helpers/sanitize';
-import { SanitizePreset } from '../../shared/helpers/sanitize/presets';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { mapDeep } from '~shared/helpers/map-deep/map-deep';
+import { sanitizeHtml } from '~shared/helpers/sanitize';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { ContentBlockConfig } from '../types/content-block.types';
 import {
 	ContentOverviewTableCols,

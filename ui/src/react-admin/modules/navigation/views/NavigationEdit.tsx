@@ -3,7 +3,7 @@ import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 import { NavigationEditForm } from '../components';
@@ -14,16 +14,16 @@ import {
 	NavigationEditPageType,
 	NavigationItem,
 } from '../navigation.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { SpecialPermissionGroups } from '~modules/shared/types/authentication.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { navigate } from '~modules/shared/helpers/link';
-import { PickerItem } from '~modules/shared/types/content-picker';
-import { ValueOf } from '~modules/shared/types';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { navigate } from '~shared/helpers/link';
+import { PickerItem } from '~shared/types/content-picker';
+import { ValueOf } from '~shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { AdminLayout } from '~modules/shared/layouts';
+import { AdminLayout } from '~shared/layouts';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
 

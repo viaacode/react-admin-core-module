@@ -6,7 +6,7 @@ import {
 	CheckboxOption,
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface BooleanCheckboxDropdownProps {
 	label: string;

@@ -23,17 +23,17 @@ import { AdminConfigManager, ToastType } from '~core/config';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
-} from '~modules/shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { useCompaniesWithUsers } from '~modules/shared/hooks/useCompanies';
-import { useSubjects } from '~modules/shared/hooks/useSubjects';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { navigate } from '~modules/shared/helpers/link';
-import FileUpload from '~modules/shared/components/FileUpload/FileUpload';
-import { PHOTO_TYPES } from '~modules/shared/helpers/files';
+} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
+import { useSubjects } from '~shared/hooks/useSubjects';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { CustomError } from '~shared/helpers/custom-error';
+import { navigate } from '~shared/helpers/link';
+import FileUpload from '~shared/components/FileUpload/FileUpload';
+import { PHOTO_TYPES } from '~shared/helpers/files';
 import stringToTagInfo from '../helpers/string-to-tag-info';
 import { CommonUser } from '../user.types';
-import { getAvatarProps } from '~modules/shared/helpers/formatters/avatar';
+import { getAvatarProps } from '~shared/helpers/formatters/avatar';
 
 export type UserEditProps = {
 	id: string;

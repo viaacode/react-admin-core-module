@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
 const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = (({ match }) => {
@@ -17,7 +17,13 @@ const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = (({ match 
 		return null;
 	}
 	if (isError) {
-		return <p>{tHtml('modules/content-page/content-page-wrapper___het-laden-van-deze-pagina-inhoud-is-mislukt')}</p>;
+		return (
+			<p>
+				{tHtml(
+					'modules/content-page/content-page-wrapper___het-laden-van-deze-pagina-inhoud-is-mislukt'
+				)}
+			</p>
+		);
 	}
 	if (contentPageInfo) {
 		return <ContentPageRenderer contentPageInfo={contentPageInfo} />;

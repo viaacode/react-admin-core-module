@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
@@ -16,7 +16,7 @@ export class ItemsService {
 			const rawItem: Avo.Item.Item | null = await fetchWithLogoutJson<Avo.Item.Item>(
 				stringifyUrl({
 					url: this.getBaseUrl() + '/' + uuidOrExternalId,
-				}),
+				})
 			);
 
 			if (!rawItem) {

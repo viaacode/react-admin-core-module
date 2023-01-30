@@ -1,5 +1,4 @@
 import {
-	BlockHeading,
 	Button,
 	ButtonToolbar,
 	DatePicker,
@@ -18,12 +17,13 @@ import {
 	TooltipTrigger,
 } from '@viaa/avo2-components';
 import React, { FunctionComponent, useState } from 'react';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
-import { getPublishedState } from '../helpers/get-published-state';
+import { getPublishedState } from '~modules/content-page/helpers';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './PublishContentPageModal.scss';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';

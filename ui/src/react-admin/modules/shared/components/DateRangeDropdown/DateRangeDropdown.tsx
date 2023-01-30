@@ -27,7 +27,7 @@ import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownM
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface DateRangeDropdownProps {
 	label: string;

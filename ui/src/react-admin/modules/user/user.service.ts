@@ -2,9 +2,9 @@ import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
-import { fetchWithLogout, fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
+import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 
 import { CustomError } from '../shared/helpers/custom-error';
 

@@ -1,7 +1,7 @@
 import { stringifyUrl } from 'query-string';
 
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
 import { NavigationItem, NavigationItemUpdate } from './navigation.types';
 

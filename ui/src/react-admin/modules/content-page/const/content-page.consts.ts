@@ -12,7 +12,7 @@ import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],

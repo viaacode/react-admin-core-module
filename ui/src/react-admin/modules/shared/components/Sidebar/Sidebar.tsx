@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './Sidebar.scss';
 import { AdminConfigManager } from '~core/config';

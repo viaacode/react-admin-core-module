@@ -3,9 +3,9 @@ import { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
-import { Permissions, PermissionService } from '~modules/shared/services/permission-service';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { Permissions, PermissionService } from '~shared/services/permission-service';
 import { CommonUser } from '~modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';

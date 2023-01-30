@@ -1,6 +1,6 @@
 import { AdminConfigManager } from '~core/config';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { CustomError } from '~shared/helpers/custom-error';
 
 export type BasicOrganisation = {
 	or_id: string;

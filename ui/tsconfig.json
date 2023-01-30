@@ -25,6 +25,12 @@
       "~modules/*": [
         "./src/react-admin/modules/*"
       ],
+      "~shared/*": [
+        "./src/react-admin/modules/shared/*"
+      ],
+      "~content-blocks/*": [
+        "./src/react-admin/modules/content-page/components/blocks/*"
+      ],
       "~generated/*": [
         "./src/react-admin/generated/*"
       ],

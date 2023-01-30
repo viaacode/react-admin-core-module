@@ -1,4 +1,3 @@
-import { LabelObj } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
@@ -9,8 +8,9 @@ import {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 } from '~modules/content-page-labels/content-page-label.types';
-import { CustomError } from '~modules/shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {

@@ -5,7 +5,7 @@ import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 
 import { AdminConfigManager, ToastType } from '~core/config';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 

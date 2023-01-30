@@ -4,8 +4,8 @@ import { AdminConfigManager } from '~core/config';
 import { UserDetail, UserEdit } from '~modules/user/views';
 
 import { UserOverview } from '~modules/user/views/UserOverview';
-import { AdminLayout } from '~modules/shared/layouts';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { AdminLayout } from '~shared/layouts';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 const UserOverviewPage: FC = () => {
 	const { tText } = useTranslation();

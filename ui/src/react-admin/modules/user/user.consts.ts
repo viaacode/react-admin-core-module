@@ -7,12 +7,12 @@ import { AdminConfig, AdminConfigManager, I18n } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
-} from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { FilterableColumn } from '~modules/shared/components/FilterTable/FilterTable';
-import { NULL_FILTER } from '~modules/shared/helpers/filters';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { normalizeTimestamp } from '~modules/shared/helpers/formatters/date';
-import { PermissionService } from '~modules/shared/services/permission-service';
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { NULL_FILTER } from '~shared/helpers/filters';
+import { isAvo } from '~shared/helpers/is-avo';
+import { normalizeTimestamp } from '~shared/helpers/formatters/date';
+import { PermissionService } from '~shared/services/permission-service';
 import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {

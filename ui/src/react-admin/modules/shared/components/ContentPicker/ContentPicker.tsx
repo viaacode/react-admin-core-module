@@ -20,7 +20,7 @@ import { parseSearchQuery } from './helpers/parse-picker';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
 	allowedTypes?: ContentPickerType[];

@@ -10,7 +10,7 @@ import {
 } from '@viaa/avo2-components';
 import React, { FunctionComponent, ReactNode } from 'react';
 
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { useTranslation } from '~shared/hooks/useTranslation';
 
 interface ConfirmModalProps {
 	title?: string;

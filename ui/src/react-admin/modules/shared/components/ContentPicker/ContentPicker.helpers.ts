@@ -2,7 +2,7 @@ import { get } from 'lodash-es';
 
 import { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 export function filterTypes(types: PickerTypeOption[], allowedTypes: ContentPickerType[]) {
 	return types.filter((option: PickerTypeOption) => {

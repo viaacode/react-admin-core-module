@@ -12,10 +12,10 @@ import { cloneDeep, remove, sortBy } from 'lodash-es';
 import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
-import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { useTranslation } from '~shared/hooks/useTranslation';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
-import { CustomError } from '~modules/shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

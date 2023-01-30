@@ -1,4 +1,5 @@
-import { ContentItemStyle, SelectOption } from '@viaa/avo2-components';
+import { SelectOption } from '@viaa/avo2-components';
+import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 import { AdminConfigManager } from '~core/config';
 
 export const GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS: () => SelectOption<ContentItemStyle>[] = () => [
