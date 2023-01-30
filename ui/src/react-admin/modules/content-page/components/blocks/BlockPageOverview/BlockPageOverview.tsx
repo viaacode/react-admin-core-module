@@ -175,7 +175,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const renderPages = () => {
-		console.log({ focusedPage, pages, itemStyle });
 		const allPages: ContentPageInfo[] = [...(focusedPage ? [focusedPage] : []), ...pages];
 		if (itemStyle === 'NEWS_LIST' || itemStyle === 'PROJECT_LIST') {
 			return allPages.map((page) => {
