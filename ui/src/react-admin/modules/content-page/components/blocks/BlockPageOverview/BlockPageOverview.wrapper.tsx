@@ -3,11 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
-import {
-	BlockPageOverview,
-	LabelObj,
-	PageInfo,
-} from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { BlockPageOverview, LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 import { PageOverviewWrapperProps } from '~modules/content-page/components/blocks';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
@@ -111,7 +107,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				}
 			}
 
-			let tempFocusedPage: PageInfo | undefined;
+			let tempFocusedPage: ContentPageInfo | undefined;
 			if (queryParamsState.item) {
 				const contentPage = await ContentPageService.getContentPageByPath(
 					queryParamsState.item
@@ -232,24 +228,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		);
 	};
 
-	/**
-	 * @deprecated TODO replace PageInfo with ContentPageInfo in avo2-components so the same interface is used for admin-core-ui, avo2-client and avo2-components and all mapping is handled in the backend (admin-core-api)
-	 * @param contentPage
-	 */
-	const convertToPageOverviewContentPage = (contentPage: ContentPageInfo): PageInfo => {
-		return {
-			id: contentPage.id,
-			title: contentPage.title,
-			description: contentPage.description,
-			blocks: contentPage.content_blocks,
-			path: contentPage.path as string,
-			content_width: contentPage.contentWidth as Avo.ContentPage.Width,
-			labels: contentPage.labels,
-			created_at: contentPage.createdAt,
-			thumbnail_path: contentPage.thumbnailPath as string,
-		};
-	};
-
 	const renderPageOverviewBlock = () => {
 		return (
 			<BlockPageOverview
@@ -263,7 +241,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				currentPage={queryParamsState.page}
 				onCurrentPageChanged={handleCurrentPageChanged}
 				pageCount={pageCount || 1}
-				pages={(pages || []).map(convertToPageOverviewContentPage)}
+				pages={pages ?? []}
 				tabStyle={tabStyle}
 				itemStyle={itemStyle}
 				allowMultiple={allowMultiple}
@@ -282,7 +260,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				)}
 				buttonLabel={buttonLabel}
 				buttonAltTitle={buttonAltTitle}
-				focusedPage={focusedPage ? convertToPageOverviewContentPage(focusedPage) : null}
+				focusedPage={focusedPage ?? null}
 				getLabelLink={(label: string) => {
 					return `/${AdminConfigManager.getAdminRoute('NEWS')}?label=${encodeURIComponent(
 						label
