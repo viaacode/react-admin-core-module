@@ -1,5 +1,5 @@
 query getUserGroups {
-	users_groups {
+	users_groups(order_by: { label: asc }) {
 		id
 		label
 		description

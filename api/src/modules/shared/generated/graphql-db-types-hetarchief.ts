@@ -1475,182 +1475,6 @@ export enum App_Content_Page_Update_Column {
   UserProfileId = 'user_profile_id'
 }
 
-/** columns and relationships of "app.material_requests" */
-export type App_Material_Requests = {
-  __typename?: 'app_material_requests';
-  created_at: Scalars['timestamp'];
-  id: Scalars['uuid'];
-  /** An object relationship */
-  object: Object_Ie;
-  object_schema_identifier: Scalars['String'];
-  profile_id: Scalars['uuid'];
-  reason: Scalars['String'];
-  /** An object relationship */
-  requested_by: Users_Profile;
-  type: Lookup_App_Material_Request_Type_Enum;
-  updated_at: Scalars['timestamp'];
-};
-
-/** aggregated selection of "app.material_requests" */
-export type App_Material_Requests_Aggregate = {
-  __typename?: 'app_material_requests_aggregate';
-  aggregate?: Maybe<App_Material_Requests_Aggregate_Fields>;
-  nodes: Array<App_Material_Requests>;
-};
-
-/** aggregate fields of "app.material_requests" */
-export type App_Material_Requests_Aggregate_Fields = {
-  __typename?: 'app_material_requests_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<App_Material_Requests_Max_Fields>;
-  min?: Maybe<App_Material_Requests_Min_Fields>;
-};
-
-
-/** aggregate fields of "app.material_requests" */
-export type App_Material_Requests_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "app.material_requests". All fields are combined with a logical 'AND'. */
-export type App_Material_Requests_Bool_Exp = {
-  _and?: InputMaybe<Array<App_Material_Requests_Bool_Exp>>;
-  _not?: InputMaybe<App_Material_Requests_Bool_Exp>;
-  _or?: InputMaybe<Array<App_Material_Requests_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  object?: InputMaybe<Object_Ie_Bool_Exp>;
-  object_schema_identifier?: InputMaybe<String_Comparison_Exp>;
-  profile_id?: InputMaybe<Uuid_Comparison_Exp>;
-  reason?: InputMaybe<String_Comparison_Exp>;
-  requested_by?: InputMaybe<Users_Profile_Bool_Exp>;
-  type?: InputMaybe<Lookup_App_Material_Request_Type_Enum_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "app.material_requests" */
-export enum App_Material_Requests_Constraint {
-  /** unique or primary key constraint */
-  MaterialRequestsPkey = 'material_requests_pkey'
-}
-
-/** input type for inserting data into table "app.material_requests" */
-export type App_Material_Requests_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  object?: InputMaybe<Object_Ie_Obj_Rel_Insert_Input>;
-  object_schema_identifier?: InputMaybe<Scalars['String']>;
-  profile_id?: InputMaybe<Scalars['uuid']>;
-  reason?: InputMaybe<Scalars['String']>;
-  requested_by?: InputMaybe<Users_Profile_Obj_Rel_Insert_Input>;
-  type?: InputMaybe<Lookup_App_Material_Request_Type_Enum>;
-  updated_at?: InputMaybe<Scalars['timestamp']>;
-};
-
-/** aggregate max on columns */
-export type App_Material_Requests_Max_Fields = {
-  __typename?: 'app_material_requests_max_fields';
-  created_at?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['uuid']>;
-  object_schema_identifier?: Maybe<Scalars['String']>;
-  profile_id?: Maybe<Scalars['uuid']>;
-  reason?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-};
-
-/** aggregate min on columns */
-export type App_Material_Requests_Min_Fields = {
-  __typename?: 'app_material_requests_min_fields';
-  created_at?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['uuid']>;
-  object_schema_identifier?: Maybe<Scalars['String']>;
-  profile_id?: Maybe<Scalars['uuid']>;
-  reason?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-};
-
-/** response of any mutation on the table "app.material_requests" */
-export type App_Material_Requests_Mutation_Response = {
-  __typename?: 'app_material_requests_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<App_Material_Requests>;
-};
-
-/** on_conflict condition type for table "app.material_requests" */
-export type App_Material_Requests_On_Conflict = {
-  constraint: App_Material_Requests_Constraint;
-  update_columns?: Array<App_Material_Requests_Update_Column>;
-  where?: InputMaybe<App_Material_Requests_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "app.material_requests". */
-export type App_Material_Requests_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  object?: InputMaybe<Object_Ie_Order_By>;
-  object_schema_identifier?: InputMaybe<Order_By>;
-  profile_id?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  requested_by?: InputMaybe<Users_Profile_Order_By>;
-  type?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: app_material_requests */
-export type App_Material_Requests_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "app.material_requests" */
-export enum App_Material_Requests_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ObjectSchemaIdentifier = 'object_schema_identifier',
-  /** column name */
-  ProfileId = 'profile_id',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  Type = 'type',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** input type for updating data in table "app.material_requests" */
-export type App_Material_Requests_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  object_schema_identifier?: InputMaybe<Scalars['String']>;
-  profile_id?: InputMaybe<Scalars['uuid']>;
-  reason?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<Lookup_App_Material_Request_Type_Enum>;
-  updated_at?: InputMaybe<Scalars['timestamp']>;
-};
-
-/** update columns of table "app.material_requests" */
-export enum App_Material_Requests_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ObjectSchemaIdentifier = 'object_schema_identifier',
-  /** column name */
-  ProfileId = 'profile_id',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  Type = 'type',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
 /** columns and relationships of "app.navigation" */
 export type App_Navigation = {
   __typename?: 'app_navigation';
@@ -2635,137 +2459,6 @@ export type Lookup_App_Content_Type_Set_Input = {
 
 /** update columns of table "lookup.app_content_type" */
 export enum Lookup_App_Content_Type_Update_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  Value = 'value'
-}
-
-/** columns and relationships of "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type = {
-  __typename?: 'lookup_app_material_request_type';
-  comment?: Maybe<Scalars['String']>;
-  value: Scalars['String'];
-};
-
-/** aggregated selection of "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Aggregate = {
-  __typename?: 'lookup_app_material_request_type_aggregate';
-  aggregate?: Maybe<Lookup_App_Material_Request_Type_Aggregate_Fields>;
-  nodes: Array<Lookup_App_Material_Request_Type>;
-};
-
-/** aggregate fields of "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Aggregate_Fields = {
-  __typename?: 'lookup_app_material_request_type_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Lookup_App_Material_Request_Type_Max_Fields>;
-  min?: Maybe<Lookup_App_Material_Request_Type_Min_Fields>;
-};
-
-
-/** aggregate fields of "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Lookup_App_Material_Request_Type_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "lookup.app_material_request_type". All fields are combined with a logical 'AND'. */
-export type Lookup_App_Material_Request_Type_Bool_Exp = {
-  _and?: InputMaybe<Array<Lookup_App_Material_Request_Type_Bool_Exp>>;
-  _not?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-  _or?: InputMaybe<Array<Lookup_App_Material_Request_Type_Bool_Exp>>;
-  comment?: InputMaybe<String_Comparison_Exp>;
-  value?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "lookup.app_material_request_type" */
-export enum Lookup_App_Material_Request_Type_Constraint {
-  /** unique or primary key constraint */
-  AppMaterialRequestTypePkey = 'app_material_request_type_pkey'
-}
-
-export enum Lookup_App_Material_Request_Type_Enum {
-  /** Bekijken van het materiaal */
-  LookInto = 'LOOK_INTO',
-  /** Meer info van het materiaal */
-  MoreInfo = 'MORE_INFO',
-  /** Hergebruik van materiaal */
-  Reuse = 'REUSE'
-}
-
-/** Boolean expression to compare columns of type "lookup_app_material_request_type_enum". All fields are combined with logical 'AND'. */
-export type Lookup_App_Material_Request_Type_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<Lookup_App_Material_Request_Type_Enum>;
-  _in?: InputMaybe<Array<Lookup_App_Material_Request_Type_Enum>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Lookup_App_Material_Request_Type_Enum>;
-  _nin?: InputMaybe<Array<Lookup_App_Material_Request_Type_Enum>>;
-};
-
-/** input type for inserting data into table "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Insert_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Lookup_App_Material_Request_Type_Max_Fields = {
-  __typename?: 'lookup_app_material_request_type_max_fields';
-  comment?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Lookup_App_Material_Request_Type_Min_Fields = {
-  __typename?: 'lookup_app_material_request_type_min_fields';
-  comment?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Mutation_Response = {
-  __typename?: 'lookup_app_material_request_type_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Lookup_App_Material_Request_Type>;
-};
-
-/** on_conflict condition type for table "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_On_Conflict = {
-  constraint: Lookup_App_Material_Request_Type_Constraint;
-  update_columns?: Array<Lookup_App_Material_Request_Type_Update_Column>;
-  where?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "lookup.app_material_request_type". */
-export type Lookup_App_Material_Request_Type_Order_By = {
-  comment?: InputMaybe<Order_By>;
-  value?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: lookup_app_material_request_type */
-export type Lookup_App_Material_Request_Type_Pk_Columns_Input = {
-  value: Scalars['String'];
-};
-
-/** select columns of table "lookup.app_material_request_type" */
-export enum Lookup_App_Material_Request_Type_Select_Column {
-  /** column name */
-  Comment = 'comment',
-  /** column name */
-  Value = 'value'
-}
-
-/** input type for updating data in table "lookup.app_material_request_type" */
-export type Lookup_App_Material_Request_Type_Set_Input = {
-  comment?: InputMaybe<Scalars['String']>;
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** update columns of table "lookup.app_material_request_type" */
-export enum Lookup_App_Material_Request_Type_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
@@ -5116,10 +4809,6 @@ export type Mutation_Root = {
   delete_app_content_page_content_label?: Maybe<App_Content_Page_Content_Label_Mutation_Response>;
   /** delete single row from the table: "app.content_page_content_label" */
   delete_app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
-  /** delete data from the table: "app.material_requests" */
-  delete_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
-  /** delete single row from the table: "app.material_requests" */
-  delete_app_material_requests_by_pk?: Maybe<App_Material_Requests>;
   /** delete data from the table: "app.navigation" */
   delete_app_navigation?: Maybe<App_Navigation_Mutation_Response>;
   /** delete single row from the table: "app.navigation" */
@@ -5136,10 +4825,6 @@ export type Mutation_Root = {
   delete_lookup_app_content_type?: Maybe<Lookup_App_Content_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_content_type" */
   delete_lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
-  /** delete data from the table: "lookup.app_material_request_type" */
-  delete_lookup_app_material_request_type?: Maybe<Lookup_App_Material_Request_Type_Mutation_Response>;
-  /** delete single row from the table: "lookup.app_material_request_type" */
-  delete_lookup_app_material_request_type_by_pk?: Maybe<Lookup_App_Material_Request_Type>;
   /** delete data from the table: "lookup.app_notification_type" */
   delete_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_notification_type" */
@@ -5264,10 +4949,6 @@ export type Mutation_Root = {
   insert_app_content_page_content_label_one?: Maybe<App_Content_Page_Content_Label>;
   /** insert a single row into the table: "app.content_page" */
   insert_app_content_page_one?: Maybe<App_Content_Page>;
-  /** insert data into the table: "app.material_requests" */
-  insert_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
-  /** insert a single row into the table: "app.material_requests" */
-  insert_app_material_requests_one?: Maybe<App_Material_Requests>;
   /** insert data into the table: "app.navigation" */
   insert_app_navigation?: Maybe<App_Navigation_Mutation_Response>;
   /** insert a single row into the table: "app.navigation" */
@@ -5284,10 +4965,6 @@ export type Mutation_Root = {
   insert_lookup_app_content_type?: Maybe<Lookup_App_Content_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_content_type" */
   insert_lookup_app_content_type_one?: Maybe<Lookup_App_Content_Type>;
-  /** insert data into the table: "lookup.app_material_request_type" */
-  insert_lookup_app_material_request_type?: Maybe<Lookup_App_Material_Request_Type_Mutation_Response>;
-  /** insert a single row into the table: "lookup.app_material_request_type" */
-  insert_lookup_app_material_request_type_one?: Maybe<Lookup_App_Material_Request_Type>;
   /** insert data into the table: "lookup.app_notification_type" */
   insert_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_notification_type" */
@@ -5412,10 +5089,6 @@ export type Mutation_Root = {
   update_app_content_page_content_label?: Maybe<App_Content_Page_Content_Label_Mutation_Response>;
   /** update single row of the table: "app.content_page_content_label" */
   update_app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
-  /** update data of the table: "app.material_requests" */
-  update_app_material_requests?: Maybe<App_Material_Requests_Mutation_Response>;
-  /** update single row of the table: "app.material_requests" */
-  update_app_material_requests_by_pk?: Maybe<App_Material_Requests>;
   /** update data of the table: "app.navigation" */
   update_app_navigation?: Maybe<App_Navigation_Mutation_Response>;
   /** update single row of the table: "app.navigation" */
@@ -5432,10 +5105,6 @@ export type Mutation_Root = {
   update_lookup_app_content_type?: Maybe<Lookup_App_Content_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_content_type" */
   update_lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
-  /** update data of the table: "lookup.app_material_request_type" */
-  update_lookup_app_material_request_type?: Maybe<Lookup_App_Material_Request_Type_Mutation_Response>;
-  /** update single row of the table: "lookup.app_material_request_type" */
-  update_lookup_app_material_request_type_by_pk?: Maybe<Lookup_App_Material_Request_Type>;
   /** update data of the table: "lookup.app_notification_type" */
   update_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_notification_type" */
@@ -5604,18 +5273,6 @@ export type Mutation_RootDelete_App_Content_Page_Content_Label_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_App_Material_RequestsArgs = {
-  where: App_Material_Requests_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_App_Material_Requests_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_App_NavigationArgs = {
   where: App_Navigation_Bool_Exp;
 };
@@ -5659,18 +5316,6 @@ export type Mutation_RootDelete_Lookup_App_Content_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Content_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_App_Material_Request_TypeArgs = {
-  where: Lookup_App_Material_Request_Type_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Lookup_App_Material_Request_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -6059,20 +5704,6 @@ export type Mutation_RootInsert_App_Content_Page_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_App_Material_RequestsArgs = {
-  objects: Array<App_Material_Requests_Insert_Input>;
-  on_conflict?: InputMaybe<App_Material_Requests_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_App_Material_Requests_OneArgs = {
-  object: App_Material_Requests_Insert_Input;
-  on_conflict?: InputMaybe<App_Material_Requests_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_App_NavigationArgs = {
   objects: Array<App_Navigation_Insert_Input>;
   on_conflict?: InputMaybe<App_Navigation_On_Conflict>;
@@ -6125,20 +5756,6 @@ export type Mutation_RootInsert_Lookup_App_Content_TypeArgs = {
 export type Mutation_RootInsert_Lookup_App_Content_Type_OneArgs = {
   object: Lookup_App_Content_Type_Insert_Input;
   on_conflict?: InputMaybe<Lookup_App_Content_Type_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_App_Material_Request_TypeArgs = {
-  objects: Array<Lookup_App_Material_Request_Type_Insert_Input>;
-  on_conflict?: InputMaybe<Lookup_App_Material_Request_Type_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Lookup_App_Material_Request_Type_OneArgs = {
-  object: Lookup_App_Material_Request_Type_Insert_Input;
-  on_conflict?: InputMaybe<Lookup_App_Material_Request_Type_On_Conflict>;
 };
 
 
@@ -6619,20 +6236,6 @@ export type Mutation_RootUpdate_App_Content_Page_Content_Label_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_App_Material_RequestsArgs = {
-  _set?: InputMaybe<App_Material_Requests_Set_Input>;
-  where: App_Material_Requests_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_App_Material_Requests_By_PkArgs = {
-  _set?: InputMaybe<App_Material_Requests_Set_Input>;
-  pk_columns: App_Material_Requests_Pk_Columns_Input;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_App_NavigationArgs = {
   _append?: InputMaybe<App_Navigation_Append_Input>;
   _delete_at_path?: InputMaybe<App_Navigation_Delete_At_Path_Input>;
@@ -6697,20 +6300,6 @@ export type Mutation_RootUpdate_Lookup_App_Content_TypeArgs = {
 export type Mutation_RootUpdate_Lookup_App_Content_Type_By_PkArgs = {
   _set?: InputMaybe<Lookup_App_Content_Type_Set_Input>;
   pk_columns: Lookup_App_Content_Type_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Lookup_App_Material_Request_TypeArgs = {
-  _set?: InputMaybe<Lookup_App_Material_Request_Type_Set_Input>;
-  where: Lookup_App_Material_Request_Type_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Lookup_App_Material_Request_Type_By_PkArgs = {
-  _set?: InputMaybe<Lookup_App_Material_Request_Type_Set_Input>;
-  pk_columns: Lookup_App_Material_Request_Type_Pk_Columns_Input;
 };
 
 
@@ -8969,12 +8558,6 @@ export type Query_Root = {
   app_content_page_content_label_aggregate: App_Content_Page_Content_Label_Aggregate;
   /** fetch data from the table: "app.content_page_content_label" using primary key columns */
   app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
-  /** fetch data from the table: "app.material_requests" */
-  app_material_requests: Array<App_Material_Requests>;
-  /** fetch aggregated fields from the table: "app.material_requests" */
-  app_material_requests_aggregate: App_Material_Requests_Aggregate;
-  /** fetch data from the table: "app.material_requests" using primary key columns */
-  app_material_requests_by_pk?: Maybe<App_Material_Requests>;
   /** fetch data from the table: "app.navigation" */
   app_navigation: Array<App_Navigation>;
   /** fetch aggregated fields from the table: "app.navigation" */
@@ -8999,12 +8582,6 @@ export type Query_Root = {
   lookup_app_content_type_aggregate: Lookup_App_Content_Type_Aggregate;
   /** fetch data from the table: "lookup.app_content_type" using primary key columns */
   lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
-  /** fetch data from the table: "lookup.app_material_request_type" */
-  lookup_app_material_request_type: Array<Lookup_App_Material_Request_Type>;
-  /** fetch aggregated fields from the table: "lookup.app_material_request_type" */
-  lookup_app_material_request_type_aggregate: Lookup_App_Material_Request_Type_Aggregate;
-  /** fetch data from the table: "lookup.app_material_request_type" using primary key columns */
-  lookup_app_material_request_type_by_pk?: Maybe<Lookup_App_Material_Request_Type>;
   /** fetch data from the table: "lookup.app_notification_type" */
   lookup_app_notification_type: Array<Lookup_App_Notification_Type>;
   /** fetch aggregated fields from the table: "lookup.app_notification_type" */
@@ -9287,29 +8864,6 @@ export type Query_RootApp_Content_Page_Content_Label_By_PkArgs = {
 };
 
 
-export type Query_RootApp_Material_RequestsArgs = {
-  distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Material_Requests_Order_By>>;
-  where?: InputMaybe<App_Material_Requests_Bool_Exp>;
-};
-
-
-export type Query_RootApp_Material_Requests_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Material_Requests_Order_By>>;
-  where?: InputMaybe<App_Material_Requests_Bool_Exp>;
-};
-
-
-export type Query_RootApp_Material_Requests_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
 export type Query_RootApp_NavigationArgs = {
   distinct_on?: InputMaybe<Array<App_Navigation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -9398,29 +8952,6 @@ export type Query_RootLookup_App_Content_Type_AggregateArgs = {
 
 
 export type Query_RootLookup_App_Content_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootLookup_App_Material_Request_TypeArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Type_Order_By>>;
-  where?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_App_Material_Request_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Type_Order_By>>;
-  where?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-};
-
-
-export type Query_RootLookup_App_Material_Request_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -10091,12 +9622,6 @@ export type Subscription_Root = {
   app_content_page_content_label_aggregate: App_Content_Page_Content_Label_Aggregate;
   /** fetch data from the table: "app.content_page_content_label" using primary key columns */
   app_content_page_content_label_by_pk?: Maybe<App_Content_Page_Content_Label>;
-  /** fetch data from the table: "app.material_requests" */
-  app_material_requests: Array<App_Material_Requests>;
-  /** fetch aggregated fields from the table: "app.material_requests" */
-  app_material_requests_aggregate: App_Material_Requests_Aggregate;
-  /** fetch data from the table: "app.material_requests" using primary key columns */
-  app_material_requests_by_pk?: Maybe<App_Material_Requests>;
   /** fetch data from the table: "app.navigation" */
   app_navigation: Array<App_Navigation>;
   /** fetch aggregated fields from the table: "app.navigation" */
@@ -10121,12 +9646,6 @@ export type Subscription_Root = {
   lookup_app_content_type_aggregate: Lookup_App_Content_Type_Aggregate;
   /** fetch data from the table: "lookup.app_content_type" using primary key columns */
   lookup_app_content_type_by_pk?: Maybe<Lookup_App_Content_Type>;
-  /** fetch data from the table: "lookup.app_material_request_type" */
-  lookup_app_material_request_type: Array<Lookup_App_Material_Request_Type>;
-  /** fetch aggregated fields from the table: "lookup.app_material_request_type" */
-  lookup_app_material_request_type_aggregate: Lookup_App_Material_Request_Type_Aggregate;
-  /** fetch data from the table: "lookup.app_material_request_type" using primary key columns */
-  lookup_app_material_request_type_by_pk?: Maybe<Lookup_App_Material_Request_Type>;
   /** fetch data from the table: "lookup.app_notification_type" */
   lookup_app_notification_type: Array<Lookup_App_Notification_Type>;
   /** fetch aggregated fields from the table: "lookup.app_notification_type" */
@@ -10409,29 +9928,6 @@ export type Subscription_RootApp_Content_Page_Content_Label_By_PkArgs = {
 };
 
 
-export type Subscription_RootApp_Material_RequestsArgs = {
-  distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Material_Requests_Order_By>>;
-  where?: InputMaybe<App_Material_Requests_Bool_Exp>;
-};
-
-
-export type Subscription_RootApp_Material_Requests_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<App_Material_Requests_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Material_Requests_Order_By>>;
-  where?: InputMaybe<App_Material_Requests_Bool_Exp>;
-};
-
-
-export type Subscription_RootApp_Material_Requests_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
 export type Subscription_RootApp_NavigationArgs = {
   distinct_on?: InputMaybe<Array<App_Navigation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -10520,29 +10016,6 @@ export type Subscription_RootLookup_App_Content_Type_AggregateArgs = {
 
 
 export type Subscription_RootLookup_App_Content_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootLookup_App_Material_Request_TypeArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Type_Order_By>>;
-  where?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_App_Material_Request_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Lookup_App_Material_Request_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Lookup_App_Material_Request_Type_Order_By>>;
-  where?: InputMaybe<Lookup_App_Material_Request_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootLookup_App_Material_Request_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
