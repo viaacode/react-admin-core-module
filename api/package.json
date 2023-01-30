@@ -28,7 +28,8 @@
     "i18n:extract": "ts-node --transpile-only --require dotenv/config scripts/extract-and-replace-translations.ts dotenv_config_path=.env/.env.local && npm run format:fix",
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
-    "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types"
+    "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
+    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json"
   },
   "dependencies": {
     "@nestjs/common": "^9.1.4",
