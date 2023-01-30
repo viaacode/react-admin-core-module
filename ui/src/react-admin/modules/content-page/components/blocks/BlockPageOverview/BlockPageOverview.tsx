@@ -17,12 +17,14 @@ import {
 	TagList,
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import { findIndex, flatten, get, uniqBy } from 'lodash-es';
+import { findIndex, flatten, uniqBy } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
-import { BlockImageGrid } from '../BlockImageGrid/BlockImageGrid';
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 
 import './BlockPageOverview.scss';
 
@@ -36,20 +38,6 @@ export type LabelObj = {
 	label: string;
 	id: number;
 };
-
-export interface PageInfo {
-	id: number | string; // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-	title: string;
-	description: string | null;
-	created_at: string;
-	content_width: ContentWidthSchema;
-	// TODO add thumbnail_path to content page in database
-	thumbnail_path: string;
-	// TODO add labels to content page in database
-	labels: LabelObj[];
-	blocks?: ReactNode; // Client knows how to convert ContentBlockSchema[] into a ReactNode
-	path: string;
-}
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -71,8 +59,8 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	currentPage: number;
 	onCurrentPageChanged: (newPage: number) => void;
 	pageCount: number;
-	pages: PageInfo[];
-	focusedPage: PageInfo | null; // Shown at the top with an expanded accordion
+	pages: ContentPageInfo[];
+	focusedPage: ContentPageInfo | null; // Shown at the top with an expanded accordion
 	getLabelLink?: (label: string) => string;
 	renderLink?: RenderLinkFunction;
 }
@@ -142,7 +130,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		return `<span class="c-content-page__label">${labelObj.label}</span>`;
 	};
 
-	const renderLabels = (page: PageInfo) => {
+	const renderLabels = (page: ContentPageInfo) => {
 		if (!page.labels || !page.labels.length) {
 			return '';
 		}
@@ -159,13 +147,13 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			.join('')}`;
 	};
 
-	const formatDateString = (dateString: string, page: PageInfo): string => {
+	const formatDateString = (dateString: string, page: ContentPageInfo): string => {
 		return dateString
 			.replace('%label%', renderLabels(page))
-			.replace('%date%', moment(page.created_at).format('D MMMM YYYY'));
+			.replace('%date%', moment(page.createdAt).format('D MMMM YYYY'));
 	};
 
-	const getDescription = (page: PageInfo) => {
+	const getDescription = (page: ContentPageInfo) => {
 		return showDescription && page.description
 			? <div dangerouslySetInnerHTML={{ __html: page.description }} /> || undefined
 			: undefined;
@@ -187,7 +175,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const renderPages = () => {
-		const allPages = [...(focusedPage ? [focusedPage] : []), ...pages] as PageInfo[];
+		const allPages: ContentPageInfo[] = [...(focusedPage ? [focusedPage] : []), ...pages];
 		if (itemStyle === 'NEWS_LIST' || itemStyle === 'PROJECT_LIST') {
 			return allPages.map((page) => {
 				return (
@@ -206,7 +194,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									<Spacer margin="bottom-large">
 										<AspectRatioWrapper
 											style={{
-												backgroundImage: `url(${page.thumbnail_path})`,
+												backgroundImage: `url(${page.thumbnailPath})`,
 											}}
 											aspect={itemStyle === 'NEWS_LIST' ? 1.78 : 2.5} // 500 x 280 or 528 x 211
 										/>
@@ -263,8 +251,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				flatten(allPages.map((page): LabelObj[] => page.labels)),
 				'id'
 			);
-			const pagesByLabel: { [labelId: number]: PageInfo[] } = Object.fromEntries(
-				uniqueLabels.map((labelObj: LabelObj): [number, PageInfo[]] => {
+			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
+				uniqueLabels.map((labelObj: LabelObj): [number, ContentPageInfo[]] => {
 					return [
 						labelObj.id,
 						allPages.filter((page) =>
@@ -293,10 +281,10 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						)}
 						<BlockImageGrid
 							elements={(pagesByLabel[labelObj.id] || []).map(
-								(page: PageInfo): GridItem => ({
+								(page: ContentPageInfo): GridItem => ({
 									title: showTitle ? page.title : undefined,
 									text: getDescription(page),
-									source: page.thumbnail_path,
+									source: page.thumbnailPath as string, // TODO handle undefined thumbnails
 									action: { type: 'CONTENT_PAGE', value: page.id },
 								})
 							)}
@@ -318,10 +306,10 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						return (
 							<Accordion
 								title={page.title}
-								isOpen={page.id === get(focusedPage, 'id')}
+								isOpen={page.id === focusedPage?.id}
 								key={`block-page-${page.id}`}
 							>
-								{page.blocks}
+								<ContentPageRenderer contentPageInfo={page} />
 							</Accordion>
 						);
 					})}
