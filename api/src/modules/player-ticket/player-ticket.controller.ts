@@ -102,6 +102,11 @@ export class PlayerTicketController {
 					},
 				});
 			}
+			console.log('getting playable url from browsePath: ', {
+				browsePath,
+				objectName,
+				referrer,
+			});
 
 			return this.playerTicketService.getPlayableUrl(objectName, referrer);
 		} catch (err) {
