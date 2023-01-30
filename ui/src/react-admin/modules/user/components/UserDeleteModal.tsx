@@ -5,6 +5,7 @@ import {
 	Alert,
 	Button,
 	ButtonToolbar,
+	Checkbox,
 	Modal,
 	ModalBody,
 	ModalFooterRight,
@@ -16,7 +17,7 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 
-import { ContentPicker } from '../../shared/components/ContentPicker/ContentPicker';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
@@ -27,6 +28,8 @@ import { PickerItem } from '~shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
 import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { UserService } from '../user.service';
+
+import './UserDeleteModal.scss';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];
@@ -56,6 +59,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	const [deleteContentCounts, setDeleteContentCounts] = useState<DeleteContentCounts | null>(
 		null
 	);
+	const [shouldSendEmail, setShouldSendEmail] = useState<boolean>(false);
 
 	const validateOptionModalAndOpenConfirm = async () => {
 		try {
@@ -224,7 +228,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 
 				{!!countOutputs.length && (
 					<Spacer margin="top" className="c-content">
-						<strong>Deze inhoud zal verwijderd worden:</strong>
+						<strong>
+							{tText(
+								'react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden'
+							)}
+						</strong>
 						<ul>
 							{countOutputs.map((count, index) => (
 								<li key={`content-count-${index}`}>{count}</li>
@@ -233,6 +241,13 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					</Spacer>
 				)}
 
+				<Checkbox
+					label={tText(
+						'admin/users/components/user-delete-modal___breng-de-gebruiker-s-op-de-hoogte-van-deze-actie'
+					)}
+					checked={shouldSendEmail}
+					onChange={setShouldSendEmail}
+				/>
 				<Spacer margin="top">
 					<Alert
 						message={tHtml(
@@ -248,10 +263,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	const handleDeleteUsers = async () => {
 		try {
 			setDeleteConfirmModalOpen(false);
+			setShouldSendEmail(false);
 			await UserService.bulkDeleteUsers(
 				selectedProfileIds,
 				selectedDeleteOption,
-				false, // TODO sync sendEmail feature
+				shouldSendEmail,
 				transferToUser?.value
 			);
 
@@ -286,6 +302,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				isOpen={isOpen}
 				onClose={onClose}
 				size="medium"
+				className="c-user-delete-modal"
 			>
 				<ModalBody>
 					<RadioButtonGroup
@@ -339,6 +356,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				size="medium"
 				onClose={handleConfirmModalClose}
 				scrollable
+				className="c-user-delete-modal"
 			>
 				<ModalBody>
 					{renderConfirmDeleteMessage()}
