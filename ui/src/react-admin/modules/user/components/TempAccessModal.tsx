@@ -10,12 +10,8 @@ import {
 } from '@viaa/avo2-components';
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -40,17 +36,8 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 	const untilDate = tempAccess ? toDateObject(tempAccess.until) : null;
 
 	const [validationError, setValidationError] = useState<string[] | undefined>(undefined);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [from, setFrom] = useState<Date | null>(fromDate || new Date(Date.now()));
 	const [until, setUntil] = useState<Date | null>(untilDate);
-
-	useEffect(() => {
-		if (isOpen) {
-			setLoadingInfo({
-				state: 'loaded',
-			});
-		}
-	}, [isOpen, setLoadingInfo]);
 
 	const onSave = async () => {
 		const newTempAccess = {
@@ -63,7 +50,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 			tHtml,
 		});
 
-		if (validationErrors && validationErrors.length) {
+		if (validationErrors?.length) {
 			setValidationError(validationErrors);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				type: ToastType.ERROR,
@@ -129,13 +116,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 			size="small"
 			onClose={onClose}
 		>
-			<ModalBody>
-				<LoadingErrorLoadedComponent
-					loadingInfo={loadingInfo}
-					dataObject={{}}
-					render={renderModalBody}
-				/>
-			</ModalBody>
+			<ModalBody>{isOpen && renderModalBody()}</ModalBody>
 			<ModalFooterRight>{renderConfirmButtons()}</ModalFooterRight>
 		</Modal>
 	);

@@ -1,3 +1,4 @@
+import { format, parseISO } from 'date-fns';
 import { isNumber } from 'lodash-es';
 import moment, { isMoment, Moment, parseZone } from 'moment';
 
@@ -11,6 +12,10 @@ export function reorderDate(dateString: string | null, separator = '/'): string 
 	return (dateString || '').substring(0, 10).split('-').reverse().join(separator);
 }
 
+/**
+ * @deprecated use date-fns functions instead of moment
+ * @param timestamp
+ */
 export function normalizeTimestamp(timestamp: DateLike): Moment {
 	if (isMoment(timestamp)) {
 		return timestamp;
@@ -48,11 +53,22 @@ export function formatTimestamp(timestamp: DateLikeNullable, includeSeconds = tr
 		.format(`DD-MM-YYYY HH:mm${includeSeconds ? ':ss' : ''}`);
 }
 
+/**
+ * @deprecated use formatDateString instead (use of the moment library is deprecated)
+ * @param timestamp
+ */
 export function formatDate(timestamp: DateLikeNullable): string {
 	if (!timestamp) {
 		return '';
 	}
 	return normalizeTimestamp(timestamp).local().format('DD-MM-YYYY');
+}
+
+export function formatDateString(timestamp: string | undefined | null): string {
+	if (!timestamp) {
+		return '';
+	}
+	return format(parseISO(timestamp), 'dd-MM-yyyy');
 }
 
 export function toIsoDate(timestamp: DateLikeNullable): string {
