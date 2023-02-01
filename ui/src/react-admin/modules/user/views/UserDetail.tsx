@@ -11,17 +11,18 @@ import {
 } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import moment from 'moment';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
+import { nlBE } from 'date-fns/locale';
+import { formatDateString } from '~shared/helpers/formatters/date';
 
 import {
 	renderDateDetailRows,
 	renderDetailRow,
 	renderSimpleDetailRows,
-} from '../../shared/helpers/render-detail-fields';
+} from '~shared/helpers/render-detail-fields';
 import { AdminLayout } from '../../shared/layouts';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
@@ -35,9 +36,9 @@ import { buildLink, navigate } from '~shared/helpers/link';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import TempAccessModal from '../components/TempAccessModal';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { formatDate, normalizeTimestamp } from '~shared/helpers/formatters/date';
-import { renderAvatar } from '../../shared/helpers/formatters/avatar';
+import { renderAvatar } from '~shared/helpers/formatters/avatar';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
+import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
 
 export interface UserDetailProps {
 	id: string | null;
@@ -179,7 +180,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		}
 	};
 
-	const handleSetTempAccess = async (tempAccess: Avo.User.TempAccess) => {
+	const handleSetTempAccess = async (newTempAccess: Avo.User.TempAccess) => {
 		try {
 			const userId = storedProfile?.userId;
 
@@ -194,8 +195,8 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 			}
 
 			// This callback will invoke a lot of functionality, see this method in avo2-client for more details.
-			await onSetTempAccess?.(userId, tempAccess, profileId);
-			setTempAccess(tempAccess);
+			await onSetTempAccess?.(userId, newTempAccess, profileId);
+			setTempAccess(newTempAccess);
 
 			await refetchProfileInfo();
 
@@ -221,29 +222,30 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		}
 	};
 
-	const renderTempAccess = (tempAccess: Avo.User.TempAccess | null): string => {
-		if (!tempAccess) {
+	const renderTempAccess = (): string => {
+		if (!tempAccess && !storedProfile?.tempAccess) {
 			return '-';
 		}
-		const from = tempAccess?.from;
-		const until = tempAccess?.until;
+		const from = tempAccess?.from || storedProfile?.tempAccess?.from;
+		const until = tempAccess?.until || storedProfile?.tempAccess?.until || '';
 		return from
-			? `${tText('admin/users/views/user-detail___van')} ${formatDate(from)} ${tText(
+			? `${tText('admin/users/views/user-detail___van')} ${formatDateString(from)} ${tText(
 					'admin/users/views/user-detail___tot'
-			  )} ${formatDate(until)}`
-			: `${tText('admin/users/views/user-detail___tot')} ${formatDate(until)}`;
+			  )} ${formatDateString(until)}`
+			: `${tText('admin/users/views/user-detail___tot')} ${formatDateString(until)}`;
 	};
 
-	const renderTempAccessDuration = (tempAccess: Avo.User.TempAccess | null): string => {
-		if (!tempAccess) {
+	const renderTempAccessDuration = (): string => {
+		if (!tempAccess && !storedProfile?.tempAccess) {
 			return '-';
 		}
-		const from = tempAccess?.from;
+		const from = tempAccess?.from || storedProfile?.tempAccess?.from;
 		if (!from) {
 			return '-';
 		}
-		const until = tempAccess?.until || '';
-		return moment.duration(normalizeTimestamp(until).diff(normalizeTimestamp(from))).humanize();
+		const until = tempAccess?.until || storedProfile?.tempAccess?.until || '';
+		const durationMs = differenceInMilliseconds(parseISO(until), parseISO(from));
+		return formatDuration(intervalToDuration({ start: 0, end: durationMs }), { locale: nlBE });
 	};
 
 	const renderUserDetail = () => {
@@ -329,12 +331,12 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 							])}
 							{hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS) &&
 								renderDetailRow(
-									renderTempAccess(tempAccess),
+									renderTempAccess(),
 									tText('admin/users/views/user-detail___tijdelijk-account')
 								)}
 							{hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS) &&
 								renderDetailRow(
-									renderTempAccessDuration(tempAccess),
+									renderTempAccessDuration(),
 									tText('admin/users/views/user-detail___totale-toegang')
 								)}
 							{renderDetailRow(
