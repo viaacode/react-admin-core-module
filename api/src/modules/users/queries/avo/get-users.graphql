@@ -32,7 +32,9 @@ query getUsers(
 		is_exception
 		business_category
 		idps {
+			id
 			idp
+			idp_user_id
 		}
 		classifications {
 			key
