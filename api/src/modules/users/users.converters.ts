@@ -41,6 +41,7 @@ export function convertUserInfoToCommonUser(
 			const user = userInfo as Avo.User.User;
 			return {
 				profileId: user.profile.id,
+				avatar: user?.profile?.avatar,
 				stamboek: user.profile.stamboek ?? undefined,
 				organisation: user.profile.organisation,
 				educationalOrganisations: (user.profile.organizations ?? []).map(
@@ -103,6 +104,7 @@ export function convertUserInfoToCommonUser(
 			const profile = userInfo as Avo.User.Profile;
 			return {
 				profileId: profile.id,
+				avatar: profile?.avatar,
 				stamboek: profile.stamboek ?? undefined,
 				organisation: profile.organisation,
 				educationalOrganisations: (profile.organizations ?? []).map(
@@ -165,6 +167,7 @@ export function convertUserInfoToCommonUser(
 			const user = userInfo as UserInfoOverviewAvo;
 			return {
 				profileId: user.profile_id,
+				avatar: user?.profile?.avatar,
 				stamboek: user.stamboek ?? undefined,
 				organisation: user.company_name
 					? ({

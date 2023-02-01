@@ -92,6 +92,7 @@ export type CommonUser = {
 	firstName?: string;
 	lastName?: string;
 	fullName?: string;
+	avatar?: string;
 	acceptedTosAt?: string | null;
 	idp?: Idp;
 	permissions?: PermissionName[];

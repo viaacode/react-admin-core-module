@@ -28,7 +28,7 @@ export const getAbbreviatedFullName = (user: CommonUser): string =>
 	`${(user.firstName || '')[0]}. ${user.lastName || ''}`;
 
 export const getAvatarImage = (user: CommonUser): string =>
-	user.organisation?.logo_url || get(user, 'avatar') || '';
+	user.organisation?.logo_url || user?.avatar || '';
 
 export const getAvatarProps = (
 	user: CommonUser,
