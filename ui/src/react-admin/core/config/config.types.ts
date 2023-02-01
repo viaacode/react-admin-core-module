@@ -170,6 +170,7 @@ export interface IconConfig {
 		arrowUp: IconComponentProps;
 		sortTable: IconComponentProps;
 		arrowDown: IconComponentProps;
+		chevronLeft: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 }

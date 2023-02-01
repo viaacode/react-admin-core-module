@@ -32,6 +32,7 @@ import {
 	ContentPageInfo,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
+import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import {
 	LoadingErrorLoadedComponent,
@@ -54,10 +55,9 @@ const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
-	renderBack?: () => ReactNode;
 };
 
-const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }) => {
+const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -577,10 +577,16 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, renderBack }
 			user?.profileId && contentPageOwnerId && user?.profileId === contentPageOwnerId;
 		const isAllowedToSave =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
-
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout className={className} pageTitle={pageTitle}>
-				<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
+				<AdminLayout.Back>
+					<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}>
+						<Button type="borderless">
+							<Icon name="chevronLeft"></Icon>
+						</Button>
+					</Link>
+				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button

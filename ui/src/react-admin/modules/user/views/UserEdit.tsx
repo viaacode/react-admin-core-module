@@ -16,6 +16,7 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { compact, get } from 'lodash-es';
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { Icon } from '~shared/components';
 import { AdminLayout } from '../../shared/layouts';
 import { UserService } from '../user.service';
 
@@ -295,8 +296,16 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	};
 
 	const renderUserDetailPage = () => {
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout pageTitle={tText('admin/users/views/user-edit___bewerk-gebruiker')}>
+				<AdminLayout.Back>
+					<Link to={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}>
+						<Button type="borderless">
+							<Icon name="chevronLeft"></Icon>
+						</Button>
+					</Link>
+				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button

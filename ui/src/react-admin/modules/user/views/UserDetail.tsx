@@ -12,6 +12,7 @@ import {
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
+import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
@@ -400,6 +401,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		navigate(history, AdminConfigManager.getAdminRoute('USER_OVERVIEW'));
 
 	const renderUserDetailPage = () => {
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		const isBlocked = storedProfile?.isBlocked;
 		const blockButtonTooltip = isBlocked
 			? tText(
@@ -409,6 +411,13 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 		return (
 			<>
 				<AdminLayout pageTitle={tText('admin/users/views/user-detail___gebruiker-details')}>
+					<AdminLayout.Back>
+						<Link to={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}>
+							<Button type="borderless">
+								<Icon name="chevronLeft"></Icon>
+							</Button>
+						</Link>
+					</AdminLayout.Back>
 					<AdminLayout.Actions>
 						<ButtonToolbar>
 							{canBanUser() && (

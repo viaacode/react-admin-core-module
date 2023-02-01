@@ -92,6 +92,7 @@ function setConfig() {
 				arrowUp: { name: 'arrow-up' },
 				sortTable: { name: 'sort-table' },
 				arrowDown: { name: 'arrow-down' },
+				chevronLeft: { name: 'chevron-left' },
 			},
 			list: () => [
 				{

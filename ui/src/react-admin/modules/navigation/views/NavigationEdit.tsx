@@ -1,8 +1,9 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import { FC, ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { Icon } from '~shared/components';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
@@ -359,8 +360,16 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					GET_PAGE_TYPES_LANG()[pageType]
 			  }`
 			: tText('admin/menu/views/menu-edit___navigatie-toevoegen');
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout pageTitle={pageTitle}>
+				<AdminLayout.Back>
+					<Link to={AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')}>
+						<Button type="borderless">
+							<Icon name="chevronLeft"></Icon>
+						</Button>
+					</Link>
+				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
