@@ -19,7 +19,7 @@ import { ToastType } from '~core/config/config.types';
 import { navigate } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
 import { AdminLayout } from '~shared/layouts';
-import { Loader } from '~shared/components';
+import { Icon, Loader } from '~shared/components';
 import { NavigationItem } from '../navigation.types';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
@@ -300,6 +300,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				</p>
 			);
 		}
+		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout
 				pageTitle={
@@ -308,6 +309,13 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 					startCase(navigationBarId)
 				}
 			>
+				<AdminLayout.Back>
+					<Link to={AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')}>
+						<Button type="borderless">
+							<Icon name="chevronLeft"></Icon>
+						</Button>
+					</Link>
+				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button

@@ -1,13 +1,5 @@
 import { get, noop } from 'lodash-es';
-import React, {
-	FC,
-	ReactElement,
-	ReactNode,
-	ReactText,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 import {
 	Blankslate,
 	Button,
@@ -19,6 +11,7 @@ import {
 	Tabs,
 } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
+import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -30,6 +23,7 @@ import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDel
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
+import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import {
 	LoadingErrorLoadedComponent,
@@ -59,15 +53,9 @@ const {
 export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
 	loaded?: (item: ContentPageInfo) => void;
-	renderBack?: () => ReactNode;
 };
 
-const ContentPageDetail: FC<ContentPageDetailProps> = ({
-	id,
-	loaded = noop,
-	renderBack,
-	className,
-}) => {
+const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, className }) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -427,7 +415,13 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	// const description = contentPageInfo ? ContentPageService.getDescription(contentPageInfo) : '';
 	return (
 		<AdminLayout className={className} pageTitle={pageTitle}>
-			<AdminLayout.Back>{renderBack?.()}</AdminLayout.Back>
+			<AdminLayout.Back>
+				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}>
+					<Button type="borderless">
+						<Icon name="chevronLeft"></Icon>
+					</Button>
+				</Link>
+			</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>
 			<AdminLayout.Content>
 				<Navbar background="alt" placement="top" autoHeight>
