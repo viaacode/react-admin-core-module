@@ -56,6 +56,7 @@ import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrga
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 export interface FilterableTableState {
 	query?: string;
@@ -106,6 +107,7 @@ interface FilterTableProps {
 	rowKey?: string | ((row: any) => string);
 	variant?: 'bordered' | 'invisible' | 'styled';
 	isLoading?: boolean;
+	hidePagination?: boolean;
 
 	// Used for automatic dropdown with bulk actions
 	bulkActions?: (SelectOption<string> & { confirm?: boolean; confirmButtonType?: ButtonType })[];
@@ -133,6 +135,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	rowKey = 'id',
 	variant = 'bordered',
 	isLoading = false,
+	hidePagination = false,
 	bulkActions,
 	onSelectBulkAction,
 	showCheckboxes,
@@ -421,18 +424,20 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								)}
 							</Flex>
 						</ToolbarLeft>
-						<ToolbarRight>
-							<CheckboxDropdownModal
-								label={tText(
-									'admin/shared/components/filter-table/filter-table___kolommen'
-								)}
-								id="table_columns"
-								options={getColumnOptions()}
-								onChange={updateSelectedColumns}
-								showSelectedValuesOnCollapsed={false}
-								showSearch={false}
-							/>
-						</ToolbarRight>
+						{isAvo() && (
+							<ToolbarRight>
+								<CheckboxDropdownModal
+									label={tText(
+										'admin/shared/components/filter-table/filter-table___kolommen'
+									)}
+									id="table_columns"
+									options={getColumnOptions()}
+									onChange={updateSelectedColumns}
+									showSelectedValuesOnCollapsed={false}
+									showSearch={false}
+								/>
+							</ToolbarRight>
+						)}
 					</Toolbar>
 				</Spacer>
 			</>
@@ -469,15 +474,17 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								onSelectionChanged={onSelectionChanged}
 								onSelectAll={onSelectAll}
 							/>
-							<Spacer margin="top-large">
-								<Pagination
-									pageCount={Math.ceil(dataCount / itemsPerPage)}
-									currentPage={tableState.page || 0}
-									onPageChange={(newPage) =>
-										handleTableStateChanged(newPage, 'page')
-									}
-								/>
-							</Spacer>
+							{!hidePagination && (
+								<Spacer margin="top-large">
+									<Pagination
+										pageCount={Math.ceil(dataCount / itemsPerPage)}
+										currentPage={tableState.page || 0}
+										onPageChange={(newPage) =>
+											handleTableStateChanged(newPage, 'page')
+										}
+									/>
+								</Spacer>
+							)}
 						</div>
 						{isLoading && (
 							<Flex center className="c-filter-table__loading">
