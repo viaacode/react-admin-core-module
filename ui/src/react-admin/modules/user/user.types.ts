@@ -108,7 +108,8 @@ export type UserOverviewTableCol =
 	| 'lastAccessAt'
 	| 'tempAccess'
 	| 'tempAccessFrom'
-	| 'tempAccessUntil';
+	| 'tempAccessUntil'
+	| 'actions';
 
 export interface UserTableState extends FilterableTableState {
 	fullName: string;

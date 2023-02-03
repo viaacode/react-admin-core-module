@@ -55,6 +55,8 @@ import AddOrRemoveLinkedElementsModal, {
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
+import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
+import { Icon } from '~modules/shared/components';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
@@ -410,6 +412,15 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		}
 	};
 
+	const handleOptionClicked = (profileId: string) => {
+		navigator.clipboard.writeText(profileId);
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title: tText('modules/user/views/user-overview___success'),
+			description: tText('admin/users/views/user-overview___uuid-gekopieerd'),
+			type: ToastType.SUCCESS,
+		});
+	};
+
 	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const isBlocked = commonUser?.isBlocked;
 
@@ -502,6 +513,22 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
 				);
 
+			case 'actions':
+				return (
+					<ActionsDropdown
+						menuItems={[
+							{
+								id: commonUser.profileId || '',
+								label:
+									commonUser.profileId ||
+									tText('admin/users/views/user-overview___geen-uuid'),
+								iconEnd: <Icon name="copy" />,
+							},
+						]}
+						onOptionClicked={() => handleOptionClicked(commonUser.profileId)}
+					/>
+				);
+
 			default:
 				return truncateTableValue(commonUser[columnId] || '-');
 		}
@@ -555,7 +582,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						row?.profileId || row?.userId || get(row, 'user.mail') || ''
 					}
 					hidePagination={hidePagination}
-					className="u-spacer-bottom-l"
+					className="u-spacer-bottom-l u-useroverview-table"
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}

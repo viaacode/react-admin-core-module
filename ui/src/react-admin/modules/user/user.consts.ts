@@ -401,6 +401,11 @@ const getHetArchiefColumns = (
 		filterType: 'DateRangeDropdown',
 		dataType: 'dateTime',
 	},
+	{
+		id: 'actions',
+		tooltip: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___acties'),
+		visibleByDefault: true,
+	},
 ];
 
 export const GET_USER_BULK_ACTIONS = (
