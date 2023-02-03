@@ -1,9 +1,11 @@
+import { endOfDay, isAfter, isBefore, parseISO } from 'date-fns';
 import FileSaver from 'file-saver';
 import { compact, get, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
@@ -462,15 +464,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					: '-';
 			}
 			case 'tempAccess': {
-				const tempAccess = (commonUser?.tempAccess as any)?.status;
-
-				switch (tempAccess) {
-					case 1:
-						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
-					case 0:
-						return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
-					default:
-						return '-';
+				if (hasTempAccess(commonUser?.tempAccess)) {
+					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
+				} else {
+					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 				}
 			}
 			case 'tempAccessFrom':
