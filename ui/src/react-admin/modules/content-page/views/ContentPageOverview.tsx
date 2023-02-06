@@ -23,6 +23,7 @@ import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
 
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { PermissionService } from '~shared/services/permission-service';
@@ -53,7 +54,6 @@ import {
 	getMultiOptionFilters,
 	getQueryFilter,
 } from '~shared/helpers/filters';
-import { formatDate } from '~shared/helpers/formatters/date';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~shared/helpers/truncate';
@@ -95,7 +95,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			(option): CheckboxOption => ({
 				id: option.value,
 				label: option.label,
-				checked: (tableState?.content_type || ([] as string[])).includes(option.value),
+				checked: (tableState?.contentType || ([] as string[])).includes(option.value),
 			})
 		);
 	}, [contentTypes, tableState]);
@@ -105,7 +105,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			contentTypeOptions,
 			setSelectedCheckboxes(
 				userGroupOptions,
-				(tableState?.user_group || []).map((userGroup) => String(userGroup)) as string[]
+				(tableState?.userGroup || []).map((userGroup) => String(userGroup)) as string[]
 			),
 			setSelectedCheckboxes(
 				contentPageLabelOptions,
@@ -417,7 +417,9 @@ const ContentPageOverview: FunctionComponent = () => {
 			case 'depublishAt':
 			case 'createdAt':
 			case 'updatedAt':
-				return contentPage[columnId] ? formatDate(contentPage[columnId] as string) : '-';
+				return contentPage[columnId]
+					? formatDateString(contentPage[columnId] as string)
+					: '-';
 
 			case 'actions':
 				return (

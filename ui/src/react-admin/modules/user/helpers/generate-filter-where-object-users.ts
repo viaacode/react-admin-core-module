@@ -34,18 +34,24 @@ export const generateWhereObjectAvo = (
 			});
 		}
 
-		andFilters.push(...getBooleanFilters(filters, ['is_blocked', 'is_exception']));
+		andFilters.push(
+			...getBooleanFilters<Partial<UserTableState>>(
+				filters,
+				['isBlocked', 'isException'],
+				['is_blocked', 'is_exception']
+			)
+		);
 
 		andFilters.push(
-			...getDateRangeFilters(
+			...getDateRangeFilters<Partial<UserTableState>>(
 				filters,
-				['blockedAt', 'unblocked_at'],
+				['blockedAt', 'unblockedAt'],
 				['blocked_at.max', 'unblocked_at.max']
 			)
 		);
 
 		andFilters.push(
-			...getMultiOptionFilters(
+			...getMultiOptionFilters<Partial<UserTableState>>(
 				filters,
 				['userGroup', 'organisation', 'businessCategory'],
 				['group_id', 'company_id', 'business_category']
@@ -53,7 +59,7 @@ export const generateWhereObjectAvo = (
 		);
 
 		andFilters.push(
-			...getMultiOptionsFilters(
+			...getMultiOptionsFilters<Partial<UserTableState>>(
 				filters,
 				['educationLevels', 'subjects', 'idps'],
 				['contexts', 'classifications', 'idps'],
@@ -63,14 +69,18 @@ export const generateWhereObjectAvo = (
 		);
 
 		andFilters.push(
-			...getMultiOptionFilters(filters, ['tempAccess'], ['user.temp_access.current.status'])
+			...getMultiOptionFilters<Partial<UserTableState>>(
+				filters,
+				['tempAccess'],
+				['user.temp_access.current.status']
+			)
 		);
 
 		andFilters.push(
-			...getDateRangeFilters(
+			...getDateRangeFilters<Partial<UserTableState>>(
 				filters,
-				['createdAt', 'last_access_at'],
-				['accCreatedAt', 'last_access_at']
+				['createdAt', 'lastAccessAt'],
+				['acc_created_at', 'last_access_at']
 			)
 		);
 
@@ -176,7 +186,7 @@ export const generateWhereObjectArchief = (
 			)
 		);
 
-		andFilters.push(...getDateRangeFilters(filters, ['last_access_at'], ['last_access_at']));
+		andFilters.push(...getDateRangeFilters(filters, ['lastAccessAt'], ['last_access_at']));
 
 		if (onlySelectedProfiles) {
 			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
