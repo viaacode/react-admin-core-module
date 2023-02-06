@@ -117,7 +117,7 @@ export interface UserTableState extends FilterableTableState {
 	lastName: string;
 	mail: string;
 	stamboek: string;
-	businessCategory: string;
+	businessCategory: string[];
 	isException: boolean;
 	isBlocked: boolean;
 	blockedAt: {
@@ -131,7 +131,9 @@ export interface UserTableState extends FilterableTableState {
 	subjects: string[];
 	idps: string[];
 	educationalOrganisations: string[];
+	organisation: string[];
 	columns: string[];
+	userGroup: string[];
 }
 
 export type UserBulkAction = 'block' | 'unblock' | 'delete' | 'change_subjects' | 'export';

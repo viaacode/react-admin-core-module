@@ -16,8 +16,9 @@ import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/cont
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { CommonUser } from '~modules/user/user.types';
 import Html from '~shared/components/Html/Html';
-import { formatDate } from '~shared/helpers/formatters/date';
+import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
@@ -132,29 +133,29 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
-						{renderSimpleDetailRows(contentPageInfo, [
+						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							['title', tText('admin/content/views/content-detail___titel')],
 						])}
 						{renderDetailRow(
 							description || '-',
 							tText('admin/content/views/content-detail___beschrijving')
 						)}
-						{renderSimpleDetailRows(contentPageInfo, [
+						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							[
-								'seo_description',
+								'seoDescription',
 								tText(
 									'admin/content/views/content-detail-meta-data___seo-beschrijving'
 								),
 							],
 							[
-								'meta_description',
+								'metaDescription',
 								tText(
 									'admin/content/views/content-detail-meta-data___beschrijving-voor-export-bv-klaar-nieuwsbrief'
 								),
 							],
 							['path', tText('admin/content/views/content-detail___pad')],
 							[
-								'is_protected',
+								'isProtected',
 								tText('admin/content/views/content-detail___beschermde-pagina'),
 							],
 						])}
@@ -179,13 +180,10 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							contentPageInfo?.owner?.groupName || '-',
 							tText('admin/content/views/content-detail___auteur-rol')
 						)}
-						{renderDateDetailRows(contentPageInfo, [
+						{renderDateDetailRows<ContentPageInfo>(contentPageInfo, [
+							['createdAt', tText('admin/content/views/content-detail___aangemaakt')],
 							[
-								'created_at',
-								tText('admin/content/views/content-detail___aangemaakt'),
-							],
-							[
-								'updated_at',
+								'updatedAt',
 								tText('admin/content/views/content-detail___laatst-bewerkt'),
 							],
 						])}
@@ -195,7 +193,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						)}
 						{renderDetailRow(
 							<p>
-								{formatDate(contentPageInfo.publishAt) ||
+								{formatDateString(contentPageInfo.publishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
 							tText(
@@ -204,7 +202,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						)}
 						{renderDetailRow(
 							<p>
-								{formatDate(contentPageInfo.depublishAt) ||
+								{formatDateString(contentPageInfo.depublishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
 							tText(

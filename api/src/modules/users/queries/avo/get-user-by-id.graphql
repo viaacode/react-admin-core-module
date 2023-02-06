@@ -82,19 +82,11 @@ query getUserById($id: uuid!) {
 		group_name
 		company_name
 		company_id
-		last_blocked_at: audits_aggregate(where: { event: { _eq: "BLOCKED" } }) {
-			aggregate {
-				max {
-					created_at
-				}
-			}
+		blocked_at {
+			date: max
 		}
-		last_unblocked_at: audits_aggregate(where: { event: { _eq: "UNBLOCKED" } }) {
-			aggregate {
-				max {
-					created_at
-				}
-			}
+		unblocked_at {
+			date: max
 		}
 		classifications {
 			id

@@ -19,9 +19,9 @@ export function renderDetailRow(value: ReactNode, label: string): ReactElement {
 	);
 }
 
-export function renderSimpleDetailRows(
-	obj: any,
-	propAndTranslations: [string, string][]
+export function renderSimpleDetailRows<T>(
+	obj: T,
+	propAndTranslations: [keyof T, string][]
 ): ReactElement[] {
 	return propAndTranslations.map((propAndTranslation) => {
 		let value = get(obj, propAndTranslation[0]);
@@ -32,9 +32,9 @@ export function renderSimpleDetailRows(
 	});
 }
 
-export function renderDateDetailRows(
-	obj: any,
-	propAndTranslations: [string, string][]
+export function renderDateDetailRows<T>(
+	obj: T,
+	propAndTranslations: [keyof T, string][]
 ): ReactElement[] {
 	return propAndTranslations.map((propAndTranslation) => {
 		const value = get(obj, propAndTranslation[0]);
