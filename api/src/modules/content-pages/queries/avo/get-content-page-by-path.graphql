@@ -15,13 +15,23 @@ query getContentPageByPath($path: String!) {
 		user_profile_id
 		profile {
 			id
+			organisation {
+				logo_url
+				name
+				or_id
+			}
+			profile_user_group {
+				group {
+					label
+					id
+				}
+			}
 			user: usersByuserId {
+				uid
+				full_name
 				first_name
 				last_name
-				role {
-					id
-					label
-				}
+				mail
 			}
 		}
 		publish_at

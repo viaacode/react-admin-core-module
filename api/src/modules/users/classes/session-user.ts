@@ -26,6 +26,10 @@ export class SessionUserEntity {
 		return this.user.userId;
 	}
 
+	public getProfileId(): string {
+		return this.user.profileId;
+	}
+
 	public getFirstName(): string {
 		return this.user.firstName;
 	}

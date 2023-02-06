@@ -1,13 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 
 import {
+	GetContentByIdQuery as GetContentByIdQueryAvo,
 	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
 	GetContentPagesQuery as GetContentPagesQueryAvo,
 	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
 	Lookup_Enum_Content_Types_Enum,
 } from '../shared/generated/graphql-db-types-avo';
 import {
+	GetContentByIdQuery as GetContentByIdQueryHetArchief,
 	GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
 	GetContentPagesQuery as GetContentPagesQueryHetArchief,
 	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
@@ -106,9 +107,11 @@ export type GqlInsertOrUpdateContentBlock =
 	| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'];
 
 export type GqlAvoUser =
-	GetContentPageByPathQueryAvo['app_content'][0]['profile'];
+	| GetContentPageByPathQueryAvo['app_content'][0]['profile']
+	| GetContentByIdQueryAvo['app_content'][0]['profile'];
 export type GqlHetArchiefUser =
-	GetContentPageByPathQueryHetArchief['app_content_page'][0]['owner_profile'];
+	| GetContentPageByPathQueryHetArchief['app_content_page'][0]['profile']
+	| GetContentByIdQueryHetArchief['app_content_page'][0]['profile'];
 export type GqlUser = GqlAvoUser | GqlHetArchiefUser;
 
 export interface ContentPageUser {

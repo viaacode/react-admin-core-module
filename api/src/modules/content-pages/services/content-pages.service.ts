@@ -112,17 +112,22 @@ export class ContentPagesService {
 			return null;
 		}
 		const mergedUser = {
-			gqlUser,
+			...gqlUser,
 			...(gqlUser as GqlAvoUser)?.user,
 		} as unknown as GqlHetArchiefUser & GqlAvoUser & GqlAvoUser['user'];
 		/* istanbul ignore next */
 		return {
-			id: mergedUser?.id,
-			fullName: mergedUser?.first_name + ' ' + mergedUser?.last_name,
+			id: mergedUser?.uid,
+			fullName:
+				mergedUser?.full_name ??
+				mergedUser?.first_name + ' ' + mergedUser?.last_name,
 			firstName: mergedUser?.first_name,
 			lastName: mergedUser?.last_name,
-			groupId: mergedUser?.role?.id || mergedUser?.group?.id,
-			groupName: mergedUser?.role?.label || mergedUser?.group?.label,
+			groupId:
+				mergedUser?.profile_user_group?.group?.id ?? mergedUser?.group?.id,
+			groupName:
+				mergedUser?.profile_user_group?.group?.label ??
+				mergedUser?.group?.label,
 		};
 	}
 

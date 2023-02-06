@@ -15,12 +15,21 @@ query getContentPageByPath($path: String!) {
 		is_public
 		path
 		user_profile_id
-		owner_profile {
+		profile: owner_profile {
 			id
-			first_name
-			last_name
+			full_name
+			maintainer_users_profiles {
+				maintainer {
+					schema_identifier
+					schema_name
+					information {
+						logo
+					}
+				}
+			}
 			group {
 				id
+				name
 				label
 			}
 		}
