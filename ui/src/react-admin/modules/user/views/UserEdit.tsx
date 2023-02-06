@@ -6,6 +6,7 @@ import {
 	FlexItem,
 	Form,
 	FormGroup,
+	IconName,
 	Select,
 	Spacer,
 	TagInfo,
@@ -282,7 +283,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 											ariaLabel={tText(
 												'admin/users/views/user-edit___verbreek-de-link-tussen-deze-gebruiker-en-dit-bedrijf'
 											)}
-											icon="delete"
+											icon={IconName.delete}
 											onClick={() => setCompanyId(undefined)}
 										/>
 									</Spacer>

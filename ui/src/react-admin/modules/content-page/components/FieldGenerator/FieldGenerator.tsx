@@ -1,4 +1,4 @@
-import { Button, Flex, FlexItem, FormGroup, Spacer } from '@viaa/avo2-components';
+import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
 import { get } from 'lodash-es';
 import React, { Fragment, FunctionComponent } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
@@ -183,7 +183,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon="add"
+				icon={IconName.add}
 				onClick={handleFieldAdd}
 				size="small"
 				title={label}
@@ -205,7 +205,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon="delete"
+				icon={IconName.delete}
 				onClick={() => handleFieldDelete(index)}
 				size="small"
 				title={label}

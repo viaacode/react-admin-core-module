@@ -1,7 +1,7 @@
 import { startCase } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 
-import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
 import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
@@ -43,7 +43,7 @@ const NavigationOverview: FunctionComponent = () => {
 				return (
 					<ButtonToolbar>
 						<Button
-							icon="eye"
+							icon={IconName.eye}
 							onClick={() =>
 								navigate(
 									history,
@@ -63,7 +63,7 @@ const NavigationOverview: FunctionComponent = () => {
 							type="secondary"
 						/>
 						<Button
-							icon="plus"
+							icon={IconName.plus}
 							onClick={() =>
 								navigate(
 									history,

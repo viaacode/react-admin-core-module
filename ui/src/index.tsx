@@ -14,6 +14,8 @@ import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/conte
 import Html from '~shared/components/Html/Html';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import { IconName } from '@viaa/avo2-components';
+import { capitalize, lowerCase } from 'lodash-es';
 
 const proxyUrl = 'http://localhost:3300';
 
@@ -94,145 +96,16 @@ function setConfig() {
 				arrowDown: { name: 'arrow-down' },
 				chevronLeft: { name: 'chevron-left' },
 			},
-			list: () => [
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___afbeelding'
-					),
-					value: 'image',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___aktetas'
-					),
-					value: 'briefcase',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___audio'
-					),
-					value: 'headphone',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___collectie'
-					),
-					value: 'collection',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___download'
-					),
-					value: 'download',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___externe-link'
-					),
-					value: 'external-link',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___help'
-					),
-					value: 'help-circle',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___info'
-					),
-					value: 'info',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___kalender'
-					),
-					value: 'calendar',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___klascement'
-					),
-					value: 'klascement',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___link'
-					),
-					value: 'link-2',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___link-delen'
-					),
-					value: 'share-2',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___login'
-					),
-					value: 'log-in',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___opdracht'
-					),
-					value: 'clipboard',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___profiel'
-					),
-					value: 'user',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___smartschool'
-					),
-					value: 'smartschool',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___tekstbestand'
-					),
-					value: 'file-text',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___uploaden'
-					),
-					value: 'upload',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___video'
-					),
-					value: 'video',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___view'
-					),
-					value: 'eye',
-				},
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/shared/constants/index___zoek'
-					),
-					value: 'search',
-				},
-			],
+			list: (): { value: IconName; label: string }[] => {
+				return Object.values(IconName).map((iconName: IconName) => ({
+					value: iconName,
+					label: capitalize(lowerCase(iconName)),
+				}));
+			},
 		},
 		components: {
 			loader: {
 				component: () => <></>,
-			},
-			table: {
-				sortingIcons: {
-					asc: <></>,
-					desc: <></>,
-					default: <></>,
-				},
 			},
 			buttonTypes: () => [
 				// Het archief buttons
@@ -419,7 +292,7 @@ function setConfig() {
 			CONTENT_PAGE_LABEL_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.contentPageLabels}/:id`,
 			CONTENT_PAGE_LABEL_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.contentPageLabels}/:id/${ROUTE_PARTS.edit}`,
 			CONTENT_PAGE_LABEL_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.contentPageLabels}`,
-			CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}}`,
+			CONTENT_PAGE_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
 			ITEM_DETAIL: `/${ROUTE_PARTS.item}/:id`,
 			NAVIGATION_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/${ROUTE_PARTS.create}`,
 			NAVIGATION_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}/:navigationBarId`,

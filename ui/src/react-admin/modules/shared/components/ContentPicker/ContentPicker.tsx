@@ -1,4 +1,12 @@
-import { Button, Flex, FlexItem, FormGroup, LinkTarget, TextInput } from '@viaa/avo2-components';
+import {
+	Button,
+	Flex,
+	FlexItem,
+	FormGroup,
+	IconName,
+	LinkTarget,
+	TextInput,
+} from '@viaa/avo2-components';
 import { get, isNull } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
@@ -334,7 +342,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				<Button
 					size="large"
 					type={'borderless'}
-					icon={isTargetSelf ? 'arrow-down-circle' : 'external-link'}
+					icon={isTargetSelf ? IconName.arrowDownCircle : IconName.externalLink}
 					title={
 						isTargetSelf
 							? tText(

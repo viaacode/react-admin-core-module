@@ -5,6 +5,7 @@ import {
 	Form,
 	FormGroup,
 	Icon,
+	IconName,
 	Modal,
 	ModalBody,
 	RadioButtonGroup,
@@ -189,7 +190,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 						/>
 						<Tooltip position="right">
 							<TooltipTrigger>
-								<Icon className="a-info-icon" name="info" size="small" />
+								<Icon className="a-info-icon" name={IconName.info} size="small" />
 							</TooltipTrigger>
 							<TooltipContent>
 								{tHtml(

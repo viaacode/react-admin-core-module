@@ -5,6 +5,7 @@ import {
 	Button,
 	ButtonToolbar,
 	Container,
+	IconName,
 	LinkTarget,
 	MenuItemInfo,
 	Navbar,
@@ -94,7 +95,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					message: tHtml(
 						'admin/content/views/content-detail___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: 'lock',
+					icon: IconName.lock,
 				});
 				return;
 			}
@@ -105,7 +106,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					message: tHtml(
 						'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gevonden-of-je-hebt-geen-rechten-om-deze-te-bekijken'
 					),
-					icon: 'lock',
+					icon: IconName.lock,
 				});
 				return;
 			}
@@ -129,7 +130,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					: tHtml(
 							'admin/content/views/content-detail___het-ophalen-van-de-content-pagina-is-mislukt'
 					  ),
-				icon: notFound ? 'search' : 'alert-triangle',
+				icon: notFound ? IconName.search : IconName.alertTriangle,
 			});
 		}
 	}, [id, setContentPageInfo, setLoadingInfo, user, tHtml]);
@@ -333,7 +334,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					(hasPerm(UNPUBLISH_ANY_CONTENT_PAGE) && isPublic(contentPageInfo))) && (
 					<Button
 						type="secondary"
-						icon={isPublic(contentPageInfo) ? 'unlock-3' : 'lock'}
+						icon={isPublic(contentPageInfo) ? IconName.unlock3 : IconName.lock}
 						label={tText('admin/content/views/content-detail___publiceren')}
 						title={tText(
 							'admin/content/views/content-detail___maak-de-content-pagina-publiek-niet-publiek'
@@ -346,7 +347,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 				)}
 				<Button
 					type="secondary"
-					icon="eye"
+					icon={IconName.eye}
 					label={tText('admin/content/views/content-detail___preview')}
 					title={tText(
 						'admin/content/views/content-detail___bekijk-deze-pagina-in-de-website'

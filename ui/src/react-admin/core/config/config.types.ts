@@ -97,9 +97,6 @@ export interface AdminConfig {
 		loader: {
 			component: ComponentType;
 		};
-		table: {
-			sortingIcons: TableSortingIcons;
-		};
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};

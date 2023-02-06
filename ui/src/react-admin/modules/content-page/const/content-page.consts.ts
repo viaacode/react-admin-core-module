@@ -1,12 +1,12 @@
-import { TabProps } from '@viaa/avo2-components';
+import { IconName, TabProps } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import {
 	ContentOverviewTableCols,
 	ContentWidth,
 } from '~modules/content-page/types/content-pages.types';
 
-import { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
-import { NULL_FILTER } from '../../shared/helpers/filters';
+import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { NULL_FILTER } from '~shared/helpers/filters';
 
 import { AdminConfigManager } from '~core/config';
 import {
@@ -146,14 +146,14 @@ export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___inhoud'),
-		icon: 'layout',
+		icon: IconName.layout,
 	},
 	{
 		id: 'metadata',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___metadata'
 		),
-		icon: 'file-text',
+		icon: IconName.fileText,
 	},
 ];
 

@@ -15,7 +15,7 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 
 import reactToString from 'react-to-string';
 
-import { TagInfo, TagList, TagOption } from '@viaa/avo2-components';
+import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import {
 	generateWhereObjectArchief,
@@ -604,7 +604,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				message={tHtml(
 					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
 				)}
-				icon={'alert-triangle'}
+				icon={IconName.alertTriangle}
 				actionButtons={['home', 'helpdesk']}
 			/>
 		);

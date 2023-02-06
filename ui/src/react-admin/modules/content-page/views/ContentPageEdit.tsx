@@ -1,4 +1,4 @@
-import { Button, ButtonToolbar, Container, Navbar, Tabs } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, IconName, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, ReactNode, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { PermissionName } from '@viaa/avo2-types';
@@ -102,7 +102,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: 'lock',
+					icon: IconName.lock,
 				});
 				return;
 			}
@@ -113,7 +113,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'
 					),
-					icon: 'search',
+					icon: IconName.search,
 				});
 				return;
 			}
@@ -126,7 +126,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: 'lock',
+					icon: IconName.lock,
 				});
 				return;
 			}
