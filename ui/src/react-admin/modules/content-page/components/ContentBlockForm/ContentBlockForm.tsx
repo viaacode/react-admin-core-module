@@ -20,7 +20,7 @@ import { get, isNil } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { validateContentBlockField } from '../../../shared/helpers/validation';
+import { validateContentBlockField } from '~shared/helpers/validation';
 import {
 	ContentBlockBlockConfig,
 	ContentBlockComponentsConfig,
@@ -262,7 +262,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 									description: AdminConfigManager.getConfig().services.i18n.tText(
 										'admin/content-block/components/content-block-form/content-block-form___de-blok-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken'
 									),
-									type: ToastType.ERROR,
+									type: ToastType.SUCCESS,
 								})
 							}
 						>
