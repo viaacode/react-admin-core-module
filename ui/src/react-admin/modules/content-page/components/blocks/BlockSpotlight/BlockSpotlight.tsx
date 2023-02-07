@@ -3,6 +3,7 @@ import {
 	DefaultProps,
 	defaultRenderLinkFunction,
 	Icon,
+	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
@@ -43,7 +44,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 				{renderLink(
 					buttonAction,
 					<p>
-						{get(elements, [index, 'title'])} <Icon name="chevron-right" />
+						{get(elements, [index, 'title'])} <Icon name={IconName.chevronRight} />
 					</p>,
 					get(elements, [index, 'title'])
 				)}

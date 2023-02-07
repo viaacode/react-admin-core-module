@@ -9,6 +9,7 @@ import {
 	Flex,
 	FlexItem,
 	Form,
+	IconName,
 	Spacer,
 	Toolbar,
 	ToolbarLeft,
@@ -122,7 +123,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 			aboveMin && (
 				<FlexItem className="u-flex-align-end" shrink>
 					<Button
-						icon="delete"
+						icon={IconName.delete}
 						type="danger"
 						onClick={() => removeComponentFromState(stateIndex)}
 						size="small"
@@ -197,7 +198,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				title={tText(
 					'admin/content-block/components/content-block-form/content-block-form___voeg-sectie-toe'
 				)}
-				icon="add"
+				icon={IconName.add}
 				type="secondary"
 				onClick={addComponentToState}
 			/>
@@ -226,7 +227,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 						<ButtonGroup>
 							<Button
 								disabled={blockIndex === 0}
-								icon="chevron-up"
+								icon={IconName.chevronUp}
 								onClick={() => onReorder(blockIndex, -1)}
 								size="small"
 								title={tText(
@@ -239,7 +240,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							/>
 							<Button
 								disabled={blockIndex + 1 === length}
-								icon="chevron-down"
+								icon={IconName.chevronDown}
 								onClick={() => onReorder(blockIndex, 1)}
 								size="small"
 								title={tText(
@@ -266,7 +267,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							}
 						>
 							<Button
-								icon="copy"
+								icon={IconName.copy}
 								size="small"
 								title={tText(
 									'admin/content-block/components/content-block-form/content-block-form___kopieer-content-blok'
@@ -278,7 +279,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							/>
 						</CopyToClipboard>
 						<Button
-							icon="delete"
+							icon={IconName.delete}
 							onClick={() => onRemove(blockIndex)}
 							size="small"
 							title={tText(

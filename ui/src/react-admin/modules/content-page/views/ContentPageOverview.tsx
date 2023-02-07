@@ -2,6 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import {
 	Button,
 	ButtonToolbar,
+	IconName,
 	LinkTarget,
 	Modal,
 	ModalBody,
@@ -430,7 +431,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon="info"
+								icon={IconName.info}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___bekijk-content'
@@ -442,7 +443,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							/>
 						</Link>
 						<Button
-							icon="eye"
+							icon={IconName.eye}
 							onClick={() => handlePreviewClicked(contentPage)}
 							size="small"
 							title={tText('admin/content/views/content-overview___preview-content')}
@@ -452,7 +453,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 						/>
 						<Button
-							icon={isPublic(contentPage) ? 'unlock-3' : 'lock'}
+							icon={isPublic(contentPage) ? IconName.unlock3 : IconName.lock}
 							size="small"
 							title={
 								isPublic(contentPage)
@@ -472,7 +473,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon="edit"
+								icon={IconName.edit}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___pas-content-aan'
@@ -485,7 +486,7 @@ const ContentPageOverview: FunctionComponent = () => {
 						</Link>
 						{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 							<Button
-								icon="delete"
+								icon={IconName.delete}
 								onClick={() => openModal(contentPage)}
 								size="small"
 								title={tText(
@@ -523,7 +524,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					<Spacer margin="top">
 						<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
 							<Button
-								icon="plus"
+								icon={IconName.plus}
 								label={tText(
 									'admin/content/views/content-overview___content-toevoegen'
 								)}

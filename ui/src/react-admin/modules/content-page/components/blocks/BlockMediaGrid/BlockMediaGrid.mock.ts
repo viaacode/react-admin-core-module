@@ -1,4 +1,4 @@
-import { ButtonType, testRenderLink } from '@viaa/avo2-components';
+import { ButtonType, IconName, testRenderLink } from '@viaa/avo2-components';
 import { action } from '~shared/helpers/action';
 import image500x200 from '../../../static/images/500x200.jpg';
 
@@ -7,9 +7,9 @@ import { BlockMediaGridProps, MediaListItem } from './BlockMediaGrid';
 export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	{
 		category: 'collection',
-		metadata: [{ icon: 'eye', label: '1005' }, { label: '10/10/2020' }],
+		metadata: [{ icon: IconName.eye, label: '1005' }, { label: '10/10/2020' }],
 		buttonLabel: 'meer lezen',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -27,7 +27,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Audio fragment 1',
 		buttonLabel: 'meer lezen',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -45,7 +45,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Collectie 2',
 		buttonLabel: 'google',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'secondary',
 		buttonAction: {
 			type: 'EXTERNAL_LINK',
@@ -59,7 +59,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'collection',
-		metadata: [{ icon: 'eye', label: '25' }, { label: '02/02/2020' }],
+		metadata: [{ icon: IconName.eye, label: '25' }, { label: '02/02/2020' }],
 		title: 'Collectie 3',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -73,7 +73,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'video',
-		metadata: [{ icon: 'eye', label: '195' }, { label: '02/02/2020' }],
+		metadata: [{ icon: IconName.eye, label: '195' }, { label: '02/02/2020' }],
 		title: 'Video fragment 1',
 		itemAction: {
 			type: 'ITEM',
@@ -87,7 +87,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Video fragment 2',
 		buttonLabel: 'meer lezen',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -102,10 +102,10 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'audio',
-		metadata: [{ icon: 'eye', label: '347' }, { label: '02/02/2020' }],
+		metadata: [{ icon: IconName.eye, label: '347' }, { label: '02/02/2020' }],
 		title: 'Audio fragment 2 en nog wat lange tekst die op 2 regels over loopt',
 		buttonLabel: 'meer lezen',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -123,7 +123,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Collectie 4',
 		buttonLabel: 'meer lezen',
-		buttonIcon: 'eye',
+		buttonIcon: IconName.eye,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -164,7 +164,7 @@ export const MEDIA_LIST_CTA_MOCK: BlockMediaGridProps = {
 	ctaTitle: 'Call to action',
 	ctaContent: 'Wil je meer weten?',
 	ctaButtonLabel: 'Ontdek meer',
-	ctaButtonIcon: 'delete',
+	ctaButtonIcon: IconName.delete,
 	elements: MEDIA_LIST_ITEMS_MOCK.slice(0, -1),
 	ctaButtonAction: {
 		type: 'EXTERNAL_LINK',
@@ -178,7 +178,7 @@ export const MEDIA_LIST_CTA_MOCK_WITHOUT_BUTTONS: BlockMediaGridProps = {
 	ctaTitle: 'Call to action',
 	ctaContent: 'Wil je meer weten?',
 	ctaButtonLabel: 'Ontdek meer',
-	ctaButtonIcon: 'delete',
+	ctaButtonIcon: IconName.delete,
 	elements: MEDIA_LIST_ITEMS_MOCK.slice(0, -1).map((mock) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { buttonLabel, buttonIcon, buttonType, ...rest } = mock;

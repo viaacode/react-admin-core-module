@@ -7,6 +7,7 @@ import {
 	Dropdown,
 	DropdownButton,
 	DropdownContent,
+	IconName,
 	MenuContent,
 	MenuItemInfo,
 } from '@viaa/avo2-components';
@@ -38,7 +39,7 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 		>
 			<DropdownButton>
 				<Button
-					icon="more-horizontal"
+					icon={IconName.moreHorizontal}
 					type="secondary"
 					ariaLabel={tText('assignment/views/assignment-detail___meer-opties')}
 					title={tText('assignment/views/assignment-detail___meer-opties')}

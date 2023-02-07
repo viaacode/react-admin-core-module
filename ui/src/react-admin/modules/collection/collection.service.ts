@@ -25,17 +25,15 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		return await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/public`,
+				url: `${AdminConfigManager.getConfig().database.proxyUrl}/collections/public`,
 				query: {
 					limit,
 					typeId,
 				},
 			}),
-			{throwOnNullResponse: true}
+			{ throwOnNullResponse: true }
 		);
 	}
-
-
 
 	static async fetchCollectionsOrBundlesByTitleOrId(
 		isCollection: boolean,
@@ -51,7 +49,7 @@ export class CollectionService {
 					limit,
 				},
 			}),
-			{throwOnNullResponse: true}
+			{ throwOnNullResponse: true }
 		);
 	}
 
@@ -113,7 +111,7 @@ export class CollectionService {
 						includeFragments: includeFragments ? 'true' : 'false',
 					},
 				}),
-				{throwOnNullResponse: true}
+				{ throwOnNullResponse: true }
 			);
 		} catch (err) {
 			if (JSON.stringify(err).includes('COLLECTION_NOT_FOUND')) {

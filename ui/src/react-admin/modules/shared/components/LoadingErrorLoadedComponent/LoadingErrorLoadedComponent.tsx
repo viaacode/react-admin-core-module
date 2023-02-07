@@ -54,7 +54,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 		// 			'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
 		// 		)
 		// 	}
-		// 	icon={loadingInfo.icon || 'alert-triangle'}
+		// 	icon={loadingInfo.icon || IconName.alertTriangle}
 		// 	actionButtons={loadingInfo.actionButtons || ['home']}
 		// />
 		<>
@@ -111,7 +111,7 @@ export async function checkPermissions(
 					AdminConfigManager.getConfig().services.i18n.tHtml(
 						'shared/components/loading-error-loaded-component/loading-error-loaded-component___je-hebt-geen-rechten-voor-deze-pagina'
 					),
-				icon: 'lock',
+				icon: IconName.lock,
 			});
 		}
 	} catch (err) {
@@ -121,7 +121,7 @@ export async function checkPermissions(
 			message: AdminConfigManager.getConfig().services.i18n.tHtml(
 				'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account'
 			),
-			icon: 'alert-triangle',
+			icon: IconName.alertTriangle,
 		});
 	}
 }
