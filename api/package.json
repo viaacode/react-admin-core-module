@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "2.0.38",
+  "version": "2.0.39",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -28,7 +28,8 @@
     "i18n:extract": "ts-node --transpile-only --require dotenv/config scripts/extract-and-replace-translations.ts dotenv_config_path=.env/.env.local && npm run format:fix",
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
-    "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types"
+    "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
+    "bump": "bump-package-versions --part=patch --strategy=highest ./package.json ../package.json ../ui/package.json"
   },
   "dependencies": {
     "@nestjs/common": "^9.1.4",
@@ -81,6 +82,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "bump-package-versions": "^1.0.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
