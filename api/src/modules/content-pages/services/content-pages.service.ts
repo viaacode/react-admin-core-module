@@ -387,7 +387,6 @@ export class ContentPagesService {
 				return null;
 			}
 
-			console.log('user: ', user);
 			// Check if content page is accessible for the user who requested the content page
 			if (
 				!intersection(
