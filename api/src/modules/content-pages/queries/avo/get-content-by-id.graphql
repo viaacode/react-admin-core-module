@@ -14,6 +14,7 @@ query getContentById($id: Int!) {
 		path
 		user_profile_id
 		profile {
+			id
 			organisation {
 				logo_url
 				name
@@ -26,8 +27,10 @@ query getContentById($id: Int!) {
 				}
 			}
 			user: usersByuserId {
-				id
+				uid
 				full_name
+				first_name
+				last_name
 				mail
 			}
 		}

@@ -150,9 +150,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${publicCollections} ${tHtml(
-						'admin/users/views/user-overview___publieke-collecties'
-					)}`}
+					{publicCollections}{' '}
+					{tHtml('admin/users/views/user-overview___publieke-collecties')}
 				</Link>
 			);
 		}
@@ -168,9 +167,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${privateCollections} ${tHtml(
-						'admin/users/views/user-overview___prive-collecties'
-					)}`}
+					{privateCollections}{' '}
+					{tHtml('admin/users/views/user-overview___prive-collecties')}
 				</Link>
 			);
 		}
@@ -186,9 +184,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${publicContentPages} ${tHtml(
-						'admin/users/views/user-overview___publieke-content-paginas'
-					)}`}
+					{publicContentPages}{' '}
+					{tHtml('admin/users/views/user-overview___publieke-content-paginas')}
 				</Link>
 			);
 		}
@@ -204,20 +201,23 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{`${privateContentPages} ${tHtml(
-						'admin/users/views/user-overview___prive-content-paginas'
-					)}`}
+					{privateContentPages}{' '}
+					{tHtml('admin/users/views/user-overview___prive-content-paginas')}
 				</Link>
 			);
 		}
 		if (!isTransferAll && assignments) {
 			countOutputs.push(
-				`${assignments} ${tHtml('admin/users/views/user-overview___opdrachten')}`
+				<>
+					{assignments} {tHtml('admin/users/views/user-overview___opdrachten')}
+				</>
 			);
 		}
 		if (!isTransferAll && bookmarks) {
 			countOutputs.push(
-				`${bookmarks} ${tHtml('admin/users/views/user-overview___bladwijzers')}`
+				<>
+					{bookmarks} {tHtml('admin/users/views/user-overview___bladwijzers')}
+				</>
 			);
 		}
 		return (

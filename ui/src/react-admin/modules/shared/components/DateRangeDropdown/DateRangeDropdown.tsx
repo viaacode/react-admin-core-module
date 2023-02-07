@@ -155,7 +155,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 				title: tText(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),
-				description: `${tHtml(
+				description: `${tText(
 					'shared/components/date-range-dropdown/date-range-dropdown___ongeldig-jaar'
 				)} ${value}`,
 				type: ToastType.ERROR,

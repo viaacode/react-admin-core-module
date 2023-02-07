@@ -267,18 +267,23 @@ export class ContentPagesController {
 	public async insertContentPage(
 		@Body()
 		contentPage: DbContentPage,
-		@SessionUser() user,
+		@SessionUser() user: SessionUserEntity,
 	): Promise<DbContentPage | null> {
 		if (
 			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
-			contentPage.userProfileId !== user.id
+			(!user.getProfileId() ||
+				contentPage.userProfileId !== user.getProfileId())
 		) {
 			// User cannot edit other peoples pages
 			throw new ForbiddenException(
 				"You're not allowed to create content pages for other people",
 			);
 		}
-		return this.contentPagesService.insertContentPage(contentPage);
+		return this.contentPagesService.insertContentPage({
+			...contentPage,
+			// Default the owner of the content page to the current user if it is empty
+			userProfileId: contentPage.userProfileId ?? user.getUser().profileId,
+		});
 	}
 
 	@Patch()

@@ -329,7 +329,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 			if (pageType === PageType.Create) {
 				const contentBody = {
 					...contentPageState.currentContentPageInfo,
-					user_profile_id: getProfileId(user),
+					userProfileId: getProfileId(user),
 					content_blocks: blockConfigs,
 					path: ContentPageService.getPathOrDefault(
 						contentPageState.currentContentPageInfo
