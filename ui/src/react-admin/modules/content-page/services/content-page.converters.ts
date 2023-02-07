@@ -1,6 +1,7 @@
-import { compact, sortBy } from 'lodash-es';
+import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import {
 	ContentBlockConfig,
 	ContentBlockType,
@@ -8,6 +9,55 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, DbContentPage } from '~modules/content-page/types/content-pages.types';
 import { CustomError } from '~shared/helpers/custom-error';
+import { mapDeep } from '~shared/helpers/map-deep/map-deep';
+import { sanitizeHtml } from '~shared/helpers/sanitize';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+
+export function getContentPageDescriptionHtml(
+	contentPageInfo: Partial<ContentPageInfo> | undefined,
+	sanitizePreset: SanitizePreset = SanitizePreset.link
+): string | null {
+	const descriptionHtml = contentPageInfo?.description_state
+		? contentPageInfo?.description_state.toHTML()
+		: contentPageInfo?.description || null;
+	return descriptionHtml ? sanitizeHtml(descriptionHtml, sanitizePreset) : null;
+}
+
+/**
+ * Remove rich text editor states, since they are also saved as html,
+ * and we don't want those states to end up in the database
+ * @param blockConfigs
+ */
+export function convertRichTextEditorStatesToHtml(
+	blockConfigs: ContentBlockConfig[]
+): ContentBlockConfig[] {
+	return mapDeep(
+		blockConfigs,
+		(obj: any, key: string | number, value: any) => {
+			if (String(key).endsWith(RichEditorStateKey)) {
+				const htmlKey: string = String(key).substring(
+					0,
+					String(key).length - RichEditorStateKey.length
+				);
+				let htmlFromRichTextEditor = undefined;
+				if (value && value.toHTML && isFunction(value.toHTML)) {
+					htmlFromRichTextEditor = value.toHTML();
+				}
+				obj[htmlKey] = sanitizeHtml(
+					htmlFromRichTextEditor || obj[htmlKey] || '',
+					SanitizePreset.full
+				);
+			} else if (!isPlainObject(value) && !isArray(value)) {
+				obj[key] = value;
+			} else if (isPlainObject(value)) {
+				obj[key] = {};
+			} else {
+				obj[key] = [];
+			}
+		},
+		(key: string | number) => String(key).endsWith(RichEditorStateKey)
+	);
+}
 
 export function convertDbContentPagesToContentPageInfos(
 	dbContentPages: DbContentPage[] | null
@@ -87,9 +137,10 @@ export function convertContentPageInfoToDbContentPage(
 	if (!contentPageInfo) {
 		return undefined;
 	}
-	return {
+	const dbContentPage = {
 		...contentPageInfo,
-		content_blocks: (contentPageInfo.content_blocks || []).map(
+		description: getContentPageDescriptionHtml(contentPageInfo),
+		content_blocks: convertRichTextEditorStatesToHtml(contentPageInfo.content_blocks || []).map(
 			(contentBlock): DbContentBlock => {
 				return {
 					name: contentBlock.name,
@@ -104,4 +155,6 @@ export function convertContentPageInfoToDbContentPage(
 			}
 		),
 	} as DbContentPage;
+	delete dbContentPage.description_state;
+	return dbContentPage;
 }

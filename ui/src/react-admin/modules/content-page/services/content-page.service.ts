@@ -246,42 +246,6 @@ export class ContentPageService {
 		return contentPage.path || `/${kebabCase(contentPage.title)}`;
 	}
 
-	/**
-	 * Remove rich text editor states, since they are also saved as html,
-	 * and we don't want those states to end up in the database
-	 * @param blockConfigs
-	 */
-	public static convertRichTextEditorStatesToHtml(
-		blockConfigs: ContentBlockConfig[]
-	): ContentBlockConfig[] {
-		return mapDeep(
-			blockConfigs,
-			(obj: any, key: string | number, value: any) => {
-				if (String(key).endsWith(RichEditorStateKey)) {
-					const htmlKey: string = String(key).substring(
-						0,
-						String(key).length - RichEditorStateKey.length
-					);
-					let htmlFromRichTextEditor = undefined;
-					if (value && value.toHTML && isFunction(value.toHTML)) {
-						htmlFromRichTextEditor = value.toHTML();
-					}
-					obj[htmlKey] = sanitizeHtml(
-						htmlFromRichTextEditor || obj[htmlKey] || '',
-						SanitizePreset.full
-					);
-				} else if (!isPlainObject(value) && !isArray(value)) {
-					obj[key] = value;
-				} else if (isPlainObject(value)) {
-					obj[key] = {};
-				} else {
-					obj[key] = [];
-				}
-			},
-			(key: string | number) => String(key).endsWith(RichEditorStateKey)
-		);
-	}
-
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.
 	/**
 	 * Find name that isn't a duplicate of an existing name of a content page of this user
@@ -386,16 +350,6 @@ export class ContentPageService {
 		await fetchWithLogoutJson(`${this.getBaseUrl()}/${id}`, {
 			method: 'DELETE',
 		});
-	}
-
-	public static getDescription(
-		contentPageInfo: ContentPageInfo,
-		sanitizePreset: SanitizePreset = SanitizePreset.link
-	): string | null {
-		const description = (contentPageInfo as any).description_state
-			? (contentPageInfo as any).description_state.toHTML()
-			: (contentPageInfo as any).description_html || null;
-		return description ? sanitizeHtml(description, sanitizePreset) : null;
 	}
 
 	/**
