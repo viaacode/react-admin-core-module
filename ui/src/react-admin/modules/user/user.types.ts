@@ -134,6 +134,8 @@ export interface UserTableState extends FilterableTableState {
 	organisation: string[];
 	columns: string[];
 	userGroup: string[];
+	tempAccess: string[];
+	lastAccessAt: { date: string };
 }
 
 export type UserBulkAction = 'block' | 'unblock' | 'delete' | 'change_subjects' | 'export';

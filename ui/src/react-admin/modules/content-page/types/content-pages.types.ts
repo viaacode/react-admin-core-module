@@ -41,13 +41,14 @@ export type ContentOverviewTableCols =
 	| 'actions';
 
 export interface ContentTableState extends FilterableTableState {
-	content_type: string[];
-	created_at: DateRange;
-	updated_at: DateRange;
-	publish_at: DateRange;
-	depublish_at: DateRange;
-	user_group: number[];
+	contentType: string[];
+	createdAt: DateRange;
+	updatedAt: DateRange;
+	publishAt: DateRange;
+	depublishAt: DateRange;
+	userGroup: number[];
 	labels: number[];
+	isPublic: string[];
 }
 
 export interface ContentPageLabel {

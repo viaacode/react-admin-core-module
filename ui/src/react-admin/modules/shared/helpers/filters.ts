@@ -16,37 +16,55 @@ export function getQueryFilter(
 	return [];
 }
 
-export function getDateRangeFilters(filters: any, props: string[], nestedProps?: string[]): any[] {
-	return setNestedValues(filters, props, nestedProps || props, (prop: string, value: any) => {
-		return {
-			[prop]: {
-				...(value && value.gte ? { _gte: value.gte } : null),
-				...(value && value.lte ? { _lte: value.lte } : null),
-			},
-		};
-	});
+export function getDateRangeFilters<T>(
+	filters: T,
+	props: (keyof T)[],
+	nestedProps?: string[]
+): any[] {
+	return setNestedValues<T>(
+		filters,
+		props,
+		nestedProps || (props as string[]),
+		(prop: string, value: any) => {
+			return {
+				[prop]: {
+					...(value && value.gte ? { _gte: value.gte } : null),
+					...(value && value.lte ? { _lte: value.lte } : null),
+				},
+			};
+		}
+	);
 }
 
-export function getBooleanFilters(filters: any, props: string[], nestedProps?: string[]): any[] {
-	return setNestedValues(filters, props, nestedProps || props, (prop: string, value: any) => {
-		const orFilters = [];
-		if (!value || !value.length) {
-			return {};
+export function getBooleanFilters<T>(
+	filters: T,
+	props: (keyof T)[],
+	nestedProps?: string[]
+): any[] {
+	return setNestedValues<T>(
+		filters,
+		props,
+		(nestedProps || props) as string[],
+		(prop: string, value: any) => {
+			const orFilters = [];
+			if (!value || !value.length) {
+				return {};
+			}
+			if (value.includes(NULL_FILTER)) {
+				orFilters.push({
+					[prop]: { _is_null: true },
+				});
+			}
+			orFilters.push(
+				...without(value, NULL_FILTER).map((val) => ({
+					[prop]: { _eq: val === 'true' },
+				}))
+			);
+			return {
+				_or: orFilters,
+			};
 		}
-		if (value.includes(NULL_FILTER)) {
-			orFilters.push({
-				[prop]: { _is_null: true },
-			});
-		}
-		orFilters.push(
-			...without(value, NULL_FILTER).map((val) => ({
-				[prop]: { _eq: val === 'true' },
-			}))
-		);
-		return {
-			_or: orFilters,
-		};
-	});
+	);
 }
 
 /**
@@ -56,22 +74,27 @@ export function getBooleanFilters(filters: any, props: string[], nestedProps?: s
  * @param props
  * @param nestedProps
  */
-export function getMultiOptionFilters(
-	filters: any,
-	props: string[],
+export function getMultiOptionFilters<T>(
+	filters: T,
+	props: (keyof T)[],
 	nestedProps?: string[]
 ): any[] {
-	return setNestedValues(filters, props, nestedProps || props, (prop: string, value: any) => {
-		if (isArray(value) && value.includes(NULL_FILTER)) {
-			return {
-				_or: [
-					{ [prop]: { _is_null: true } }, // Empty value
-					{ [prop]: { _in: without(value, NULL_FILTER) } }, // selected values
-				],
-			};
+	return setNestedValues(
+		filters,
+		props,
+		nestedProps || (props as string[]),
+		(prop: string, value: any) => {
+			if (isArray(value) && value.includes(NULL_FILTER)) {
+				return {
+					_or: [
+						{ [prop]: { _is_null: true } }, // Empty value
+						{ [prop]: { _in: without(value, NULL_FILTER) } }, // selected values
+					],
+				};
+			}
+			return { [prop]: { _in: value } };
 		}
-		return { [prop]: { _in: value } };
-	});
+	);
 }
 
 /**
@@ -83,15 +106,15 @@ export function getMultiOptionFilters(
  * @param labelPaths
  * @param keyIn
  */
-export function getMultiOptionsFilters(
-	filters: any,
-	props: string[],
+export function getMultiOptionsFilters<T>(
+	filters: T,
+	props: (keyof T)[],
 	nestedReferenceTables: string[],
 	labelPaths?: string[],
 	keyIn?: boolean
 ): any[] {
 	return compact(
-		props.map((prop: string, index: number) => {
+		props.map((prop: keyof T, index: number) => {
 			const filterValues = (filters as any)[prop];
 			const nestedPathParts: string[] = nestedReferenceTables[index].split('.');
 			const referenceTable: string | null = nestedPathParts.pop() || null;
@@ -193,20 +216,20 @@ export function getMultiOptionsFilters(
  * Takes a filter object and a list of properties and outputs a valid graphql query object
  * @param filters object containing the filter props and values set by the ui
  * @param props which props should be added to the graphql query
- * @param nestedProps wich props should be added to the graphql query in a nested fashion (matched to props by index in the array)
+ * @param nestedProps which props should be added to the graphql query in a nested fashion (matched to props by index in the array)
  * @param getValue function that returns the last part of the graphql query
  */
-function setNestedValues(
-	filters: any,
-	props: string[],
+function setNestedValues<T>(
+	filters: T,
+	props: (keyof T)[],
 	nestedProps: string[],
 	getValue: (prop: string, value: any) => any
 ): any[] {
 	return compact(
-		props.map((prop: string, index: number): any => {
+		props.map((prop: keyof T, index: number): any => {
 			const value = (filters as any)[prop];
 			if (!isNil(value) && (!isArray(value) || value.length)) {
-				const nestedProp = nestedProps ? nestedProps[index] : prop;
+				const nestedProp = nestedProps ? nestedProps[index] : String(prop);
 
 				const lastProp = nestedProp.split('.').pop() as string;
 				const path = nestedProp.substring(0, nestedProp.length - lastProp.length - 1);
