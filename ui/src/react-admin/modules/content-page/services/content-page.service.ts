@@ -85,7 +85,7 @@ export class ContentPageService {
 			stringifyUrl({
 				url: `${this.getBaseUrl()}/public`,
 				query: {
-					limit,
+					limit: limit ?? 20,
 					title,
 				},
 			}),

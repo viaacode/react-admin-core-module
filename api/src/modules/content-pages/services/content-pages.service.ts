@@ -387,7 +387,6 @@ export class ContentPagesService {
 				return null;
 			}
 
-			console.log('user: ', user);
 			// Check if content page is accessible for the user who requested the content page
 			if (
 				!intersection(
@@ -909,6 +908,7 @@ export class ContentPagesService {
 	): Promise<DbContentPage | null> {
 		try {
 			const dbContentPage = this.convertToDatabaseContentPage(contentPage);
+			delete dbContentPage.id; // No id needed for new content pages (or duplicates of existing ones
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['InsertContentMutation'],
 				ContentPageQueryTypes['InsertContentMutationVariables']
@@ -923,29 +923,31 @@ export class ContentPagesService {
 					.insert_app_content_page?.returning?.[0]?.id ||
 				null;
 
-			if (id) {
-				// Insert content-blocks
-				let contentBlockConfigs: Partial<DbContentBlock>[] | null = null;
-				if (contentPage.content_blocks && contentPage.content_blocks.length) {
-					contentBlockConfigs = await this.insertContentBlocks(
-						id,
-						contentPage.content_blocks,
-					);
-
-					if (!contentBlockConfigs) {
-						// return null to prevent triggering success toast
-						return null;
-					}
-				}
-
-				return {
-					...contentPage,
-					content_blocks: contentBlockConfigs,
-					id,
-				} as DbContentPage;
+			if (!id) {
+				throw new InternalServerErrorException(
+					CustomError(
+						'Failed to insert content page, received no id from the database',
+						null,
+						{ response },
+					),
+				);
 			}
 
-			return null;
+			// Insert content-blocks
+			let contentBlockConfigs: Partial<DbContentBlock>[] | null = null;
+			if (contentPage.content_blocks && contentPage.content_blocks.length) {
+				contentBlockConfigs = await this.insertContentBlocks(
+					id,
+					contentPage.content_blocks,
+				);
+
+				if (!contentBlockConfigs) {
+					// return null to prevent triggering success toast
+					return null;
+				}
+			}
+
+			return this.getContentPageById(String(id));
 		} catch (err) {
 			console.error('Failed to insert content page into the database', err);
 			return null;
@@ -1079,7 +1081,6 @@ export class ContentPagesService {
 			return {
 				content_block_type: block.type as Lookup_Enum_Content_Block_Types_Enum,
 				content_id: block.content_id,
-				id: block.id,
 				position: block.position,
 				variables: {
 					blockState: block.block,
