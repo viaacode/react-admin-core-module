@@ -270,7 +270,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								renderAvatar(storedProfile, { small: false }),
 								tText('admin/users/views/user-detail___avatar')
 							)}
-							{renderSimpleDetailRows(storedProfile, [
+							{renderSimpleDetailRows<CommonUser>(storedProfile, [
 								['firstName', tText('admin/users/views/user-detail___voornaam')],
 								['lastName', tText('admin/users/views/user-detail___achternaam')],
 								['alias', tText('admin/users/views/user-detail___gebruikersnaam')],
@@ -293,7 +293,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								userGroup ? userGroup.label : '-',
 								tText('admin/users/views/user-detail___gebruikersgroep')
 							)}
-							{renderDateDetailRows(storedProfile, [
+							{renderDateDetailRows<CommonUser>(storedProfile, [
 								[
 									'createdAt',
 									tText('admin/users/views/user-detail___aangemaakt-op'),
@@ -307,7 +307,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 									tText('admin/users/views/user-detail___laatste-toegang'),
 								],
 							])}
-							{renderSimpleDetailRows(storedProfile, [
+							{renderSimpleDetailRows<CommonUser>(storedProfile, [
 								[
 									'businessCategory',
 									tText('admin/users/views/user-detail___oormerk'),
@@ -318,7 +318,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								],
 								['isBlocked', tText('admin/users/views/user-detail___geblokkeerd')],
 							])}
-							{renderDateDetailRows(storedProfile, [
+							{renderDateDetailRows<CommonUser>(storedProfile, [
 								[
 									'blockedAt',
 									tText('admin/users/views/user-detail___laatst-geblokeerd-op'),

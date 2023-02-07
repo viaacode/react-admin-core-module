@@ -1,6 +1,5 @@
-import { endOfDay, isAfter, isBefore, parseISO } from 'date-fns';
 import FileSaver from 'file-saver';
-import { compact, get, isNil } from 'lodash-es';
+import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -44,7 +43,7 @@ import { SettingsService } from '~shared/services/settings-service/settings.serv
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
-import { formatDate } from '~shared/helpers/formatters/date';
+import { formatDateString } from '~shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
@@ -90,13 +89,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				config,
 				setSelectedCheckboxes(
 					userGroupOptions as CheckboxOption[],
-					get(tableState, 'userGroup', []) as string[]
+					(tableState?.userGroup ?? []) as string[]
 				),
 				companies.map(
 					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
 						id: option.or_id as string,
 						label: option.name as string,
-						checked: get(tableState, 'organisation', [] as string[]).includes(
+						checked: ((tableState?.organisation ?? []) as string[]).includes(
 							String(option.or_id)
 						),
 					})
@@ -105,17 +104,17 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					(option: string): CheckboxOption => ({
 						id: option,
 						label: option,
-						checked: get(tableState, 'businessCategory', [] as string[]).includes(
+						checked: ((tableState?.businessCategory ?? []) as string[]).includes(
 							option
 						),
 					})
 				),
 				setSelectedCheckboxes(
 					educationLevels,
-					get(tableState, 'educationLevels', []) as string[]
+					(tableState?.educationLevels ?? []) as string[]
 				),
-				setSelectedCheckboxes(subjects, get(tableState, 'subjects', []) as string[]),
-				setSelectedCheckboxes(idps || [], get(tableState, 'idps', []) as string[])
+				setSelectedCheckboxes(subjects, (tableState?.subjects ?? []) as string[]),
+				setSelectedCheckboxes(idps || [], (tableState?.idps ?? []) as string[])
 			),
 		[
 			businessCategories,
@@ -319,7 +318,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					tableState?.sort_column &&
 					tableColumn.id === tableState?.sort_column
 			);
-			const columnDataType: string = get(column, 'dataType', '');
+			const columnDataType: string = column?.dataType ?? '';
 			const [profilesTemp] = await UserService.getProfiles(
 				0,
 				(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
@@ -331,12 +330,8 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			const columnIds = tableState?.columns?.length
 				? tableState.columns
 				: columns.filter((column) => column.visibleByDefault).map((column) => column.id);
-			const columnLabels = columnIds.map((columnId) =>
-				get(
-					columns.find((column) => column.id === columnId),
-					'label',
-					columnId
-				)
+			const columnLabels = columnIds.map(
+				(columnId) => columns.find((column) => column.id === columnId)?.label ?? columnId
 			);
 			const csvRowValues: string[] = [columnLabels.join(';')];
 			profilesTemp.forEach((profile) => {
@@ -443,8 +438,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				return isBlocked ? 'Ja' : 'Nee';
 
 			case 'blockedAt':
+				return formatDateString(commonUser?.blockedAt) || '-';
+
 			case 'unblockedAt':
-				return formatDate(get(commonUser, ['user', columnId])) || '-';
+				return formatDateString(commonUser?.unblockedAt) || '-';
 
 			case 'isException':
 				return commonUser?.isException ? 'Ja' : 'Nee';
@@ -453,14 +450,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				return commonUser?.organisation?.name || '-';
 
 			case 'createdAt':
-				return formatDate(commonUser.createdAt) || '-';
+				return formatDateString(commonUser.createdAt) || '-';
 
 			case 'lastAccessAt': {
 				const lastAccessDate = commonUser?.lastAccessAt;
 				return !isNil(lastAccessDate)
 					? customFormatDate
 						? customFormatDate(lastAccessDate)
-						: formatDate(lastAccessDate)
+						: formatDateString(lastAccessDate)
 					: '-';
 			}
 			case 'tempAccess': {
@@ -471,10 +468,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				}
 			}
 			case 'tempAccessFrom':
-				return formatDate(commonUser?.tempAccess?.from) || '-';
+				return formatDateString(commonUser?.tempAccess?.from) || '-';
 
 			case 'tempAccessUntil':
-				return formatDate(commonUser?.tempAccess?.until) || '-';
+				return formatDateString(commonUser?.tempAccess?.until) || '-';
 
 			case 'idps':
 				return (
@@ -485,17 +482,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					) || '-'
 				);
 
-			case 'educationLevels':
-			case 'subjects': {
-				const labels = get(commonUser, columnId, []);
+			case 'educationLevels': {
+				const labels = commonUser?.educationLevels ?? [];
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
+
+			case 'subjects': {
+				const labels = commonUser?.subjects ?? [];
+				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
+			}
+
 			case 'educationalOrganisations': {
-				const orgs: Avo.EducationOrganization.Organization[] = get(
-					commonUser,
-					columnId,
-					[]
-				);
+				const orgs: Avo.EducationOrganization.Organization[] =
+					commonUser.educationalOrganisations ?? [];
 				const tags = orgs.map(
 					(org): TagOption => ({
 						id: `${org.organizationId}:${org.unitId || ''}`,
@@ -565,9 +564,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						AdminConfigManager.getConfig().user,
 						bulkActions
 					)}
-					rowKey={(row: CommonUser) =>
-						row?.profileId || row?.userId || get(row, 'user.mail') || ''
-					}
+					rowKey={(row: CommonUser) => row?.profileId || row?.userId || row?.email || ''}
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}
