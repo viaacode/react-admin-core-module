@@ -221,7 +221,7 @@ export class ContentPagesService {
 
 	public async getContentPagesForOverview(
 		inputQuery: ContentPageOverviewParams,
-		userGroupIds: (string | number)[],
+		userGroupIds: string[],
 	): Promise<
 		IPagination<DbContentPage> & { labelCounts: Record<string, number> }
 	> {
@@ -249,7 +249,9 @@ export class ContentPagesService {
 					{
 						// Get pages that are visible to the current user
 						_or: userGroupIds.map((userGroupId) => ({
-							user_group_ids: { _contains: userGroupId },
+							user_group_ids: {
+								_contains: isAvo() ? parseInt(userGroupId) : userGroupId,
+							},
 						})),
 					},
 					...this.getLabelFilter(selectedLabelIds || []),
@@ -267,7 +269,11 @@ export class ContentPagesService {
 			},
 			orderBy: { [orderProp]: orderDirection },
 			orUserGroupIds: userGroupIds.map((userGroupId) => ({
-				content: { user_group_ids: { _contains: userGroupId } },
+				content: {
+					user_group_ids: {
+						_contains: isAvo() ? parseInt(userGroupId) : userGroupId,
+					},
+				},
 			})),
 		};
 		const response = await this.dataService.execute<

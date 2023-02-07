@@ -58,13 +58,13 @@ export class SessionUserEntity {
 	/**
 	 * Returns both the usergroup id of the current user and also the special user group the user is part of: loggedInUsers / loggedOutUsers
 	 */
-	public getGroupIds(): (string | number)[] {
+	public getGroupIds(): string[] {
 		return [
 			...(this.getGroupId() ? [this.getGroupId()] : []),
 			this.getGroupId()
 				? SpecialPermissionGroups.loggedInUsers
 				: SpecialPermissionGroups.loggedOutUsers,
-		];
+		].map((group) => String(group));
 	}
 
 	public getMaintainerId(): string {
