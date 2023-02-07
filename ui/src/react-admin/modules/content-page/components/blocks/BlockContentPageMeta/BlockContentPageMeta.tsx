@@ -18,7 +18,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	const { tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
-	const renderLabel = (labelObj: ContentPageLabel) => {
+	const renderLabel = (labelObj: ContentPageLabel): string | ReactNode => {
 		return (labelObj as any).link_to ? (
 			<Button
 				type="inline-link"
@@ -39,9 +39,9 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 
 		return (
 			<>
-				{`${tHtml(
+				{tHtml(
 					'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in'
-				)} `}
+				)}{' '}
 				{contentPageInfo.labels.map((labelObj: ContentPageLabel, index: number) => {
 					if (index === contentPageInfo.labels.length - 1) {
 						return renderLabel(labelObj);
@@ -70,9 +70,9 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 			)}{' '}
 			{publishedDate ? normalizeTimestamp(publishedDate).local().format('D MMMM YYYY') : '-'}{' '}
 			{renderLabels()}
-			{`${tHtml(
+			{tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'
-			)}`}{' '}
+			)}{' '}
 			{contentPageInfo.owner?.fullName || '-'}
 		</span>
 	);

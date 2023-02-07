@@ -1,5 +1,5 @@
 import { LinkInfo, ToastInfo } from '~core/config/config.types';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { TOptions } from 'i18next';
 
@@ -240,10 +240,10 @@ function setConfig() {
 			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
 			getContentPageByPathEndpoint: null,
 			i18n: {
-				tHtml: (key: string, params: TOptions | string | undefined) => (
+				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
 					<Html content={i18n.t(key, params as any) as unknown as string} />
 				),
-				tText: (key: string, params: TOptions | string | undefined) =>
+				tText: (key: string, params: TOptions | string | undefined): string =>
 					i18n.t(key, params as any) as unknown as string,
 			},
 			educationOrganisationService: {
