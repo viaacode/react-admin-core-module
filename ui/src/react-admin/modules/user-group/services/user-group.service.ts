@@ -10,7 +10,7 @@ export class UserGroupService {
 	}
 
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {
-		return fetchWithLogoutJson(
+		const userGroups = await fetchWithLogoutJson<UserGroupWithPermissions[]>(
 			stringifyUrl({
 				url: this.getBaseUrl(),
 				query: {
@@ -19,10 +19,12 @@ export class UserGroupService {
 			}),
 			{ throwOnNullResponse: true }
 		);
+		userGroups.map((userGroup) => (userGroup.id = String(userGroup.id)));
+		return userGroups;
 	}
 
 	public static async fetchUserGroups(): Promise<UserGroup[]> {
-		return fetchWithLogoutJson(
+		const userGroups = await fetchWithLogoutJson<UserGroup[]>(
 			stringifyUrl({
 				url: this.getBaseUrl(),
 				query: {
@@ -31,6 +33,8 @@ export class UserGroupService {
 			}),
 			{ throwOnNullResponse: true }
 		);
+		userGroups.map((userGroup) => (userGroup.id = String(userGroup.id)));
+		return userGroups;
 	}
 
 	public static async updateUserGroups(
