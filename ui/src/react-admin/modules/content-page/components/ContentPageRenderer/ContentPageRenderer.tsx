@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
+import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
 import { isAvo } from '~shared/helpers/is-avo';
 
 import { ContentPageService } from '../../services/content-page.service';
@@ -79,7 +80,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
-		let contentBlockBlockConfigs = ContentPageService.convertRichTextEditorStatesToHtml(
+		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
 			contentPageInfo.content_blocks || []
 		);
 

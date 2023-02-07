@@ -241,7 +241,7 @@ function setConfig() {
 			getContentPageByPathEndpoint: null,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
-					<Html content={i18n.t(key, params as any) as unknown as string} />
+					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />
 				),
 				tText: (key: string, params: TOptions | string | undefined): string =>
 					i18n.t(key, params as any) as unknown as string,

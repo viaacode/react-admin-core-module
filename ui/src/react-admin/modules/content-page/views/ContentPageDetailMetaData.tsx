@@ -14,6 +14,7 @@ import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
+import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { CommonUser } from '~modules/user/user.types';
@@ -109,7 +110,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 
 		return tHtml('admin/content/views/content-detail-meta-data___nee');
 	};
-	const description = ContentPageService.getDescription(contentPageInfo, SanitizePreset.full);
+	const description = getContentPageDescriptionHtml(contentPageInfo, SanitizePreset.full);
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">

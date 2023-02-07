@@ -64,6 +64,7 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
+	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;
 	seoDescription: string | null;
 	metaDescription: string | null;
