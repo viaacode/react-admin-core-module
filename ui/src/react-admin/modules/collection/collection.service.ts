@@ -25,7 +25,7 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		return await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${AdminConfigManager.getConfig().database.proxyUrl}/collections/public`,
+				url: `${this.getBaseUrl()}/public`,
 				query: {
 					limit,
 					typeId,

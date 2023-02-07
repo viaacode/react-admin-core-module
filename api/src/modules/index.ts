@@ -1,5 +1,6 @@
 export * from './content-page-labels';
 export * from './content-pages';
+export * from './collections';
 export * from './data';
 export * from './lookup';
 export * from './navigations';
