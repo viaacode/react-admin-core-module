@@ -1,5 +1,5 @@
-import { CustomError } from '../../../helpers/custom-error';
-import { PickerItem } from '../../../types/content-picker';
+import { CustomError } from '~shared/helpers/custom-error';
+import { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
