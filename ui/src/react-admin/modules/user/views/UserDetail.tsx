@@ -274,6 +274,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 							{renderSimpleDetailRows<CommonUser>(storedProfile, [
 								['firstName', tText('admin/users/views/user-detail___voornaam')],
 								['lastName', tText('admin/users/views/user-detail___achternaam')],
+								['alias', tText('admin/users/views/user-detail___gebruikersnaam')],
 								['title', tText('admin/users/views/user-detail___functie')],
 								['bio', tText('admin/users/views/user-detail___bio')],
 								[

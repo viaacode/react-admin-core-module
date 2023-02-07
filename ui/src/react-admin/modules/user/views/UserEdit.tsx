@@ -48,6 +48,9 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	const [storedProfile, setStoredProfile] = useState<CommonUser | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [isSaving, setIsSaving] = useState<boolean>(false);
+	const [profileErrors, setProfileErrors] = useState<
+		Partial<{ [prop in keyof Avo.User.UpdateProfileValues]: string }>
+	>({});
 
 	const [selectedSubjects, setSelectedSubjects] = useState<TagInfo[]>([]);
 	const [companies] = useCompaniesWithUsers();
@@ -57,6 +60,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	const [avatar, setAvatar] = useState<string | undefined>();
 	const [title, setTitle] = useState<string | undefined>();
 	const [bio, setBio] = useState<string | undefined>();
+	const [alias, setAlias] = useState<string | undefined>();
 	const [companyId, setCompanyId] = useState<string | undefined>();
 
 	const { tText } = useTranslation();
@@ -71,6 +75,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 			setAvatar(getAvatarProps(profile).image);
 			setTitle(profile.title);
 			setBio(profile.bio);
+			setAlias(profile.alias);
 			setCompanyId(profile.companyId);
 			setSelectedSubjects((profile.subjects || []).map(stringToTagInfo));
 
@@ -124,6 +129,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 			const newProfileInfo = {
 				firstName,
 				lastName,
+				alias,
 				title,
 				bio,
 				userId: storedProfile.userId,
@@ -136,6 +142,22 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 				onSave?.(newProfileInfo);
 			} catch (err) {
 				setIsSaving(false);
+
+				if (JSON.stringify(err).includes('DUPLICATE_ALIAS')) {
+					AdminConfigManager.getConfig().services.toastService.showToast({
+						type: ToastType.ERROR,
+						description: tText(
+							'settings/components/profile___deze-schermnaam-is-reeds-in-gebruik'
+						),
+					});
+					setProfileErrors({
+						alias: tText(
+							'settings/components/profile___schermnaam-is-reeds-in-gebruik'
+						),
+					});
+					return;
+				}
+
 				throw err;
 			}
 
@@ -212,6 +234,12 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 						</FormGroup>
 						<FormGroup label={tText('admin/users/views/user-detail___bio')}>
 							<TextArea value={bio} onChange={setBio} />
+						</FormGroup>
+						<FormGroup
+							label={tText('admin/users/views/user-detail___gebruikersnaam')}
+							error={profileErrors.alias}
+						>
+							<TextInput value={alias} onChange={setAlias} />
 						</FormGroup>
 						<FormGroup label={tText('admin/users/views/user-detail___vakken')}>
 							<TagsInput
