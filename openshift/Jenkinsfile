@@ -82,6 +82,7 @@ pipeline {
 							sh '''#/bin/bash
 							cp .npmrc ./ui
 							cd ui
+							npm config fix
 							npm publish
 							rm -f .npmrc
 							cd ..
@@ -125,6 +126,7 @@ pipeline {
 							sh '''#/bin/bash
 							cp .npmrc ./api
 							cd api
+							npm config fix
 							npm publish
 							rm -f .npmrc
 							cd ..
