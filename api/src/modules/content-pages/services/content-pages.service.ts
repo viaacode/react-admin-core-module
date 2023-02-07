@@ -1082,7 +1082,6 @@ export class ContentPagesService {
 			return {
 				content_block_type: block.type as Lookup_Enum_Content_Block_Types_Enum,
 				content_id: block.content_id,
-				id: block.id,
 				position: block.position,
 				variables: {
 					blockState: block.block,

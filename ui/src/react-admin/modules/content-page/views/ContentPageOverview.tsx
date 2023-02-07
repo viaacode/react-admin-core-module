@@ -227,7 +227,11 @@ const ContentPageOverview: FunctionComponent = () => {
 		return { _and: andFilters };
 	};
 
-	const { data: contentPageResponse, isLoading } = useGetContentPagesOverview({
+	const {
+		data: contentPageResponse,
+		isLoading,
+		refetch: refetchContentPages,
+	} = useGetContentPagesOverview({
 		page: tableState.page || 0,
 		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
 		sortOrder: tableState.sort_order || 'desc',
@@ -254,8 +258,7 @@ const ContentPageOverview: FunctionComponent = () => {
 			}
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
-			const queryClient = new QueryClient();
-			await queryClient.invalidateQueries([QUERY_KEYS.GET_CONTENT_PAGE_OVERVIEW]);
+			await refetchContentPages();
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
