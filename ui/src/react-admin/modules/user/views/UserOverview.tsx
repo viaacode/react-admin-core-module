@@ -6,7 +6,6 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ErrorView } from '~modules/shared/components/error';
 import { CenteredSpinner } from '~modules/shared/components/Spinner/CenteredSpinner';
-import { isAvo } from '~modules/shared/helpers/is-avo';
 import { isHetArchief } from '~modules/shared/helpers/is-hetarchief';
 import { useGetIdps } from '~modules/shared/hooks/use-get-idps';
 
@@ -40,7 +39,7 @@ import {
 import './UserOverview.scss';
 import { SettingsService } from '~modules/shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { buildLink, navigate } from '~modules/shared/helpers/link';
+import { navigate } from '~modules/shared/helpers/link';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { formatDate } from '~modules/shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~modules/shared/helpers/idps-to-taglist';
@@ -56,6 +55,8 @@ import AddOrRemoveLinkedElementsModal, {
 } from '~modules/shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
+import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
+import { Icon } from '~modules/shared/components';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
@@ -179,6 +180,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	});
 	const profiles = profilesResponse?.[0] || null;
 	const profileCount = profilesResponse?.[1] || null;
+	const hidePagination = (profileCount && profileCount < USERS_PER_PAGE) || false;
 
 	const bulkChangeSubjects = async (addOrRemove: AddOrRemove, subjects: string[]) => {
 		try {
@@ -410,29 +412,21 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		}
 	};
 
-	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
-		const Link = AdminConfigManager.getConfig().services.router.Link;
+	const handleOptionClicked = (profileId: string) => {
+		navigator.clipboard.writeText(profileId);
+		AdminConfigManager.getConfig().services.toastService.showToast({
+			title: tText('modules/user/views/user-overview___success'),
+			description: tText('admin/users/views/user-overview___uuid-gekopieerd'),
+			type: ToastType.SUCCESS,
+		});
+	};
 
+	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
 		const isBlocked = commonUser?.isBlocked;
 
 		switch (columnId) {
-			case 'firstName':
-				// no user detail for archief yet
-
-				return isAvo() ? (
-					<Link
-						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
-							id: commonUser.profileId,
-						})}
-					>
-						{truncateTableValue(commonUser?.firstName)}
-					</Link>
-				) : (
-					commonUser?.firstName || '-'
-				);
-
-			case 'lastName':
-				return truncateTableValue(commonUser?.lastName);
+			case 'fullName':
+				return truncateTableValue(commonUser?.fullName);
 
 			case 'email':
 				return truncateTableValue(commonUser?.email);
@@ -519,6 +513,22 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
 				);
 
+			case 'actions':
+				return (
+					<ActionsDropdown
+						menuItems={[
+							{
+								id: commonUser.profileId || '',
+								label:
+									commonUser.profileId ||
+									tText('admin/users/views/user-overview___geen-uuid'),
+								iconEnd: <Icon name="copy" />,
+							},
+						]}
+						onOptionClicked={() => handleOptionClicked(commonUser.profileId)}
+					/>
+				);
+
 			default:
 				return truncateTableValue(commonUser[columnId] || '-');
 		}
@@ -571,6 +581,8 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					rowKey={(row: CommonUser) =>
 						row?.profileId || row?.userId || get(row, 'user.mail') || ''
 					}
+					hidePagination={hidePagination}
+					className="u-spacer-bottom-l u-useroverview-table"
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}
