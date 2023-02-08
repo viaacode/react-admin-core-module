@@ -1,9 +1,12 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
-import { SortDirection } from "../../shared/types";
-import { MaintenanceAlertOrderProp, MaintenanceAlertType } from "../maintenance-alerts.types";
+import { SortDirection } from '../../shared/types';
+import {
+	MaintenanceAlertOrderProp,
+	MaintenanceAlertType,
+} from '../maintenance-alerts.types';
 
 export class MaintenanceAlertsQueryDto {
 	@IsString()
@@ -12,7 +15,7 @@ export class MaintenanceAlertsQueryDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'Retrieve maintenance alerts starting from a certain date',
-		example: '2022-02-25T16:36:06.045845'
+		example: '2022-02-25T16:36:06.045845',
 	})
 	fromDate?: string;
 
@@ -21,8 +24,8 @@ export class MaintenanceAlertsQueryDto {
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: String,
-		description: 'Retrieve maintenance alerts going until a certain datd',
-		example: '2022-02-25T16:36:06.045845'
+		description: 'Retrieve maintenance alerts going until a certain date',
+		example: '2022-02-25T16:36:06.045845',
 	})
 	untilDate?: string;
 
@@ -75,7 +78,7 @@ export class CreateMaintenanceAlertDto {
 	@ApiProperty({
 		type: String,
 		description: 'The title of the maintenance alert',
-		example: 'Gepland onderhoud'
+		example: 'Gepland onderhoud',
 	})
 	title: string;
 
@@ -84,26 +87,28 @@ export class CreateMaintenanceAlertDto {
 	@ApiProperty({
 		type: String,
 		description: 'The message of the maintenance alert',
-		example: 'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.'
+		example:
+			'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.',
 	})
 	message: string;
 
 	@IsString()
-	@IsEnum(MaintenanceAlertType)
 	@ApiProperty({
 		type: String,
-		description: 'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
-		example: 'alert'
+		enum: MaintenanceAlertType,
+		description:
+			'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
+		example: 'alert',
 	})
 	type: MaintenanceAlertType;
 
 	@IsArray()
-	@IsString({ each: true})
+	@IsString({ each: true })
 	@Type(() => String)
 	@ApiProperty({
 		type: String,
 		description: 'The title of the maintenance alert',
-		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff']
+		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff'],
 	})
 	userGroups: string[];
 
@@ -112,7 +117,7 @@ export class CreateMaintenanceAlertDto {
 	@ApiProperty({
 		type: String,
 		description: 'The start date the maintenance alert should be shown',
-		example: '2022-02-25T16:36:06.045845'
+		example: '2022-02-25T16:36:06.045845',
 	})
 	fromDate: string;
 
@@ -121,7 +126,7 @@ export class CreateMaintenanceAlertDto {
 	@ApiProperty({
 		type: String,
 		description: 'The end date the maintenance alert should be shown',
-		example: '2022-02-27T16:36:06.045845'
+		example: '2022-02-27T16:36:06.045845',
 	})
 	untilDate: string;
 }
@@ -133,7 +138,7 @@ export class UpdateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The title of the maintenance alert',
-		example: 'Gepland onderhoud'
+		example: 'Gepland onderhoud',
 	})
 	title?: string;
 
@@ -143,28 +148,29 @@ export class UpdateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The message of the maintenance alert',
-		example: 'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.'
+		example:
+			'Opgelet! Tussen 25 en 27 februari plannen we een onderhoud aan Het archief.',
 	})
 	message?: string;
 
 	@IsString()
-	@IsEnum(MaintenanceAlertType)
-	@IsOptional()
 	@ApiPropertyOptional({
-		type: MaintenanceAlertType,
-		description: 'The type of the maintenance alert',
-		example: 'alert'
+		type: String,
+		enum: MaintenanceAlertType,
+		description:
+			'The type of the maintenance alert, mainly used to determine the icon/styling that should be shown in the UI',
+		example: 'alert',
 	})
-	type?: string;
+	type: MaintenanceAlertType;
 
 	@IsArray()
-	@IsString({ each: true})
+	@IsString({ each: true })
 	@Type(() => String)
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The title of the maintenance alert',
-		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff']
+		example: ['1a1bd2fa-535d-49e3-8a1d-3d8564edafff'],
 	})
 	userGroups?: string[];
 
@@ -174,7 +180,7 @@ export class UpdateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The start date the maintenance alert should be shown',
-		example: '2022-02-25T16:36:06.045845'
+		example: '2022-02-25T16:36:06.045845',
 	})
 	fromDate?: string;
 
@@ -184,7 +190,7 @@ export class UpdateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The end date the maintenance alert should be shown',
-		example: '2022-02-27T16:36:06.045845'
+		example: '2022-02-27T16:36:06.045845',
 	})
 	untilDate?: string;
 }

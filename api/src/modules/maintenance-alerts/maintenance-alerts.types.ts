@@ -1,5 +1,11 @@
-import { FindMaintenanceAlertByIdQuery, UpdateMaintenanceAlertMutation } from './../shared/generated/graphql-db-types-hetarchief';
-import { FindMaintenanceAlertsQuery, InsertMaintenanceAlertMutation } from "../shared/generated/graphql-db-types-hetarchief";
+import {
+	FindMaintenanceAlertByIdQuery,
+	UpdateMaintenanceAlertMutation,
+} from '../shared/generated/graphql-db-types-hetarchief';
+import {
+	FindMaintenanceAlertsQuery,
+	InsertMaintenanceAlertMutation,
+} from '../shared/generated/graphql-db-types-hetarchief';
 
 export class MaintenanceAlert {
 	id: string;
@@ -12,7 +18,7 @@ export class MaintenanceAlert {
 }
 
 export type GqlMaintenanceAlert =
-	FindMaintenanceAlertsQuery['app_maintenance_alerts'][0]
+	| FindMaintenanceAlertsQuery['app_maintenance_alerts'][0]
 	| FindMaintenanceAlertByIdQuery['app_maintenance_alerts'][0]
 	| UpdateMaintenanceAlertMutation['update_app_maintenance_alerts']['returning'][0]
 	| InsertMaintenanceAlertMutation['insert_app_maintenance_alerts_one'];
@@ -34,6 +40,5 @@ export enum MaintenanceAlertType {
 	KEY = 'key',
 	CALENDAR = 'calendar',
 	BOOK = 'book',
-	ANGLE_RIGHT = 'angle-right'
+	ANGLE_RIGHT = 'angle-right',
 }
-

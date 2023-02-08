@@ -29,7 +29,8 @@
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
-    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json"
+    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json",
+    "find-circular-dependencies": "npx madge --circular --extensions ts ./"
   },
   "dependencies": {
     "@nestjs/common": "^9.1.4",
