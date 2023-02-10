@@ -31,7 +31,7 @@ import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;
-	onClose: (contentPage?: Partial<ContentPageInfo>) => void;
+	onClose: (contentPage?: ContentPageInfo) => void;
 	contentPage: ContentPageInfo;
 }
 
@@ -53,7 +53,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 	const onSave = async () => {
 		try {
 			const now = new Date();
-			const newContent: Partial<ContentPageInfo> = {
+			const newContent: ContentPageInfo = {
 				isPublic:
 					selectedOption === 'public' ||
 					(selectedOption === 'timebound' &&
@@ -66,7 +66,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 					publishedAt || (selectedOption === 'public' ? now.toISOString() : null),
 				publishAt: selectedOption === 'timebound' ? publishAt : null,
 				depublishAt: selectedOption === 'timebound' ? depublishAt : null,
-			} as Partial<ContentPageInfo>;
+			} as ContentPageInfo;
 			setValidationError(undefined);
 			closeModal(newContent);
 		} catch (err) {
@@ -88,7 +88,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 		setDepublishAt(contentPage.depublishAt);
 	};
 
-	const closeModal = (newContent?: Partial<ContentPageInfo>) => {
+	const closeModal = (newContent?: ContentPageInfo) => {
 		if (!newContent) {
 			resetModal();
 		} else {

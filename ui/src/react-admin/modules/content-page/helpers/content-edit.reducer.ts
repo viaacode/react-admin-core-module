@@ -3,6 +3,7 @@ import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import moment from 'moment';
 import { Reducer } from 'react';
+import { CommonUser } from '~modules/user/user.types';
 
 import {
 	ContentBlockComponentsConfig,
@@ -102,17 +103,20 @@ export type ContentEditAction =
 	| SetContentBlockError;
 
 export interface ContentPageEditState {
-	currentContentPageInfo: Partial<ContentPageInfo>;
-	initialContentPageInfo: Partial<ContentPageInfo>;
+	currentContentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
+	initialContentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
 }
 
-export const CONTENT_PAGE_INITIAL_STATE = (): Partial<ContentPageInfo> => {
+export const CONTENT_PAGE_INITIAL_STATE = (
+	user: CommonUser
+): Omit<ContentPageInfo, 'id'> & { id?: string | number } => {
 	return {
 		thumbnailPath: null,
 		title: '',
-		description_html: '',
+		description: '',
 		description_state: undefined,
 		seoDescription: '',
+		metaDescription: '',
 		isProtected: false,
 		path: '',
 		contentType: 'PAGINA',
@@ -128,8 +132,16 @@ export const CONTENT_PAGE_INITIAL_STATE = (): Partial<ContentPageInfo> => {
 		userProfileId: null,
 		userGroupIds: [],
 		labels: [],
-		content_blocks: [],
-	} as Partial<ContentPageInfo>;
+		content_blocks: [] as ContentBlockConfig[],
+		owner: {
+			firstName: user.firstName || '-',
+			lastName: user.lastName || '-',
+			fullName: user.fullName || '-',
+			groupId: user.userGroup?.id as string,
+			id: user.profileId,
+			groupName: user.userGroup?.label as string,
+		},
+	};
 };
 
 // Helpers

@@ -15,7 +15,7 @@ import {
 import { RichEditorState } from '@meemoo/react-components/dist/esm';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { compact, get } from 'lodash-es';
+import { compact } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -28,12 +28,10 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
-import { getProfileId } from '~shared/helpers/get-profile-id';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { CommonUser } from '~modules/user/user.types';
-import { getFullName } from '~shared/helpers/get-profile-info';
 
 import './ContentEditForm.scss';
 import {
@@ -51,7 +49,7 @@ import {
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
 	formErrors: ContentEditFormErrors;
-	contentPageInfo: Partial<ContentPageInfo>;
+	contentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
 	changeContentPageState: (action: ContentEditAction) => void;
 	user: CommonUser;
 }
@@ -154,19 +152,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	};
 
 	// Render
-	const ownerId = get(contentPageInfo, 'user_profile_id');
-	const owner: PickerItem | undefined =
-		contentPageInfo.owner && ownerId
-			? {
-					label: contentPageInfo?.owner?.fullName || '-',
-					type: ContentPickerType.PROFILE,
-					value: ownerId,
-			  }
-			: {
-					label: getFullName(user as any, false, false) || '-',
-					type: ContentPickerType.PROFILE,
-					value: getProfileId(user),
-			  };
+	const owner: PickerItem | undefined = {
+		label: contentPageInfo.owner.fullName,
+		type: ContentPickerType.PROFILE,
+		value: contentPageInfo.owner.id,
+	};
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
