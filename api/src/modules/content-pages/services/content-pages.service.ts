@@ -248,11 +248,30 @@ export class ContentPagesService {
 					},
 					{
 						// Get pages that are visible to the current user
-						_or: userGroupIds.map((userGroupId) => ({
-							user_group_ids: {
-								_contains: isAvo() ? parseInt(userGroupId) : userGroupId,
-							},
-						})),
+						_or: userGroupIds.flatMap((userGroupId) => {
+							if (isAvo()) {
+								// Avo can contain both strings and numbers as user groups // TODO convert all usergroups in the avo database to strings [1, -2] => ["1", "-2"]
+								return [
+									{
+										user_group_ids: {
+											_contains: parseInt(userGroupId),
+										},
+									},
+									{
+										user_group_ids: {
+											_contains: String(userGroupId),
+										},
+									},
+								];
+							} else {
+								// Hetarchief can only contain uuid strings as user groups
+								return {
+									user_group_ids: {
+										_contains: userGroupId,
+									},
+								};
+							}
+						}),
 					},
 					...this.getLabelFilter(selectedLabelIds || []),
 					// publish state
@@ -268,13 +287,36 @@ export class ContentPagesService {
 				],
 			},
 			orderBy: { [orderProp]: orderDirection },
-			orUserGroupIds: userGroupIds.map((userGroupId) => ({
-				content: {
-					user_group_ids: {
-						_contains: isAvo() ? parseInt(userGroupId) : userGroupId,
-					},
-				},
-			})),
+			orUserGroupIds: userGroupIds.flatMap((userGroupId) => {
+				if (isAvo()) {
+					// Avo can contain both strings and numbers as user group ids
+					return [
+						{
+							content: {
+								user_group_ids: {
+									_contains: parseInt(userGroupId),
+								},
+							},
+						},
+						{
+							content: {
+								user_group_ids: {
+									_contains: String(userGroupId),
+								},
+							},
+						},
+					];
+				} else {
+					// Hetarchief can only contain uuid strings as user groups
+					return {
+						content: {
+							user_group_ids: {
+								_contains: userGroupId,
+							},
+						},
+					};
+				}
+			}),
 		};
 		const response = await this.dataService.execute<
 			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
