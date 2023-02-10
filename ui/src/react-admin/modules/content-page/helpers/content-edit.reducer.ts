@@ -29,7 +29,7 @@ interface SetContentPage {
 interface SetContentPageProp {
 	type: ContentEditActionType.SET_CONTENT_PAGE_PROP;
 	payload: {
-		propName: keyof ContentPageInfo | 'description_state' | 'description_html';
+		propName: keyof ContentPageInfo | 'description_state';
 		propValue: ValueOf<ContentPageInfo> | RichEditorState | string;
 	};
 }
