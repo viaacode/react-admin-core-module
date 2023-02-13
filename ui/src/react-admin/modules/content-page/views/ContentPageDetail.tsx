@@ -205,11 +205,13 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('modules/content-page/views/content-page-detail___success'),
-					description: tText(
-						isPublic(newContentPage)
-							? 'admin/content/views/content-detail___de-content-pagina-is-nu-publiek'
-							: 'admin/content/views/content-detail___de-content-pagina-is-nu-niet-meer-publiek'
-					),
+					description: isPublic(newContentPage)
+						? tText(
+								'admin/content/views/content-detail___de-content-pagina-is-nu-publiek'
+						  )
+						: tText(
+								'admin/content/views/content-detail___de-content-pagina-is-nu-niet-meer-publiek'
+						  ),
 					type: ToastType.SUCCESS,
 				});
 			}
@@ -260,7 +262,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 						AdminConfigManager.getConfig().services.toastService.showToast({
 							title: tText('modules/content-page/views/content-page-detail___error'),
 							description: tText(
-								'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gedupliceerd'
+								'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
 							),
 							type: ToastType.ERROR,
 						});
