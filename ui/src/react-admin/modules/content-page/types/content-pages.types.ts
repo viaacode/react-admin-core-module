@@ -110,7 +110,7 @@ export interface ContentPageUser {
 }
 
 export type ContentEditFormErrors = Partial<{ [key in keyof ContentPageInfo]: string }> & {
-	description_html?: string;
+	description?: string;
 };
 
 export enum ContentEditActionType {

@@ -68,7 +68,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 
 	const changeContentPageProp = useCallback(
 		(
-			propName: keyof ContentPageInfo | 'description_state' | 'description_html',
+			propName: keyof ContentPageInfo | 'description_state',
 			propValue: ValueOf<ContentPageInfo> | RichEditorState | string
 		) =>
 			changeContentPageState({
@@ -202,15 +202,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							</Column>
 							<Column size="12">
 								<FormGroup
-									error={formErrors.description_html}
+									error={formErrors.description}
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___omschrijving'
 									)}
 								>
 									<RichTextEditorWrapper
-										initialHtml={
-											(contentPageInfo as any).description_html || ''
-										}
+										initialHtml={(contentPageInfo as any).description || ''}
 										state={
 											(contentPageInfo as any).description_state || undefined
 										}
