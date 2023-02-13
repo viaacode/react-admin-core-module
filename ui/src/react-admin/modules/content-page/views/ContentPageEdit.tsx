@@ -1,5 +1,5 @@
 import { Button, ButtonToolbar, Container, IconName, Navbar, Tabs } from '@viaa/avo2-components';
-import { get, has, isFunction, isNil, without } from 'lodash-es';
+import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { PermissionName } from '@viaa/avo2-types';
 

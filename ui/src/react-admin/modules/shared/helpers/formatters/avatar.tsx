@@ -1,5 +1,4 @@
 import { Avatar, AvatarProps } from '@viaa/avo2-components';
-import { get } from 'lodash-es';
 import React, { ReactNode } from 'react';
 import { CommonUser } from '~modules/user/user.types';
 

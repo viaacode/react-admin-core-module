@@ -1,4 +1,3 @@
-import { QueryClient } from '@tanstack/react-query';
 import {
 	Button,
 	ButtonToolbar,
@@ -30,7 +29,6 @@ import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { PermissionService } from '~shared/services/permission-service';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import { QUERY_KEYS } from '~shared/types';
 import FilterTable, {
 	FilterableColumn,
 	getFilters,

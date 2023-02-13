@@ -15,9 +15,7 @@ import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { CommonUser } from '~modules/user/user.types';
 import Html from '~shared/components/Html/Html';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import {

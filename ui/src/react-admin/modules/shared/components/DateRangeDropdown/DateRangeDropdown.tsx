@@ -63,7 +63,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 	defaultControls = 'year',
 	onChange,
 }) => {
-	const { tHtml, tText } = useTranslation();
+	const { tText } = useTranslation();
 
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);

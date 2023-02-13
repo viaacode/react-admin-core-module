@@ -1,4 +1,3 @@
-import { TableSortingIcons } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
