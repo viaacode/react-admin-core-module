@@ -1,6 +1,6 @@
 import { Button, ButtonToolbar, Container, IconName, Navbar, Tabs } from '@viaa/avo2-components';
 import { get, has, isFunction, isNil, without } from 'lodash-es';
-import React, { FC, ReactNode, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
@@ -59,12 +59,13 @@ export type ContentPageEditProps = DefaultComponentProps & {
 };
 
 const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
+	const user = AdminConfigManager.getConfig().user;
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
 	>(contentEditReducer, {
-		currentContentPageInfo: CONTENT_PAGE_INITIAL_STATE(),
-		initialContentPageInfo: CONTENT_PAGE_INITIAL_STATE(),
+		currentContentPageInfo: CONTENT_PAGE_INITIAL_STATE(user),
+		initialContentPageInfo: CONTENT_PAGE_INITIAL_STATE(user),
 	});
 
 	const [formErrors, setFormErrors] = useState<ContentEditFormErrors>({});
@@ -80,7 +81,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
 
-	const user = AdminConfigManager.getConfig().user;
 	const hasPerm = useCallback(
 		(permission: PermissionName) => PermissionService.hasPerm(user, permission),
 		[user]
@@ -217,11 +217,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 	const pageType = id ? PageType.Edit : PageType.Create;
 	let pageTitle = tText('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
-		pageTitle = `${tText('admin/content/views/content-edit___content-aanpassen')}: ${get(
-			contentPageState.currentContentPageInfo,
-			'title',
-			''
-		)}`;
+		pageTitle = `${tText('admin/content/views/content-edit___content-aanpassen')}: ${
+			contentPageState.currentContentPageInfo?.title || ''
+		}`;
 	}
 
 	// Methods
@@ -326,7 +324,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 				return;
 			}
 
-			let insertedOrUpdatedContent: Partial<ContentPageInfo> | null;
+			let insertedOrUpdatedContent: ContentPageInfo | null;
 			if (pageType === PageType.Create) {
 				const contentBody = {
 					...contentPageState.currentContentPageInfo,

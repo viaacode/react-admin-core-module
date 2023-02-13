@@ -186,7 +186,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 		}
 	}
 
-	const handleShareModalClose = async (newContentPage?: Partial<ContentPageInfo>) => {
+	const handleShareModalClose = async (
+		newContentPage?: Omit<ContentPageInfo, 'id'> & { id?: string | number }
+	) => {
 		try {
 			if (newContentPage) {
 				const updatedContentPage: ContentPageInfo =
@@ -194,7 +196,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 						{
 							...contentPageInfo,
 							...newContentPage,
-						},
+						} as ContentPageInfo,
 						undefined
 					);
 
