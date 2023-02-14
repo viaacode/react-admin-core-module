@@ -63,7 +63,10 @@ export class AdminNavigationsController {
 			if (navigationItem.userGroupIds?.length) {
 				// If the page doesn't have any groups specified, it isn't visible for anyone
 				if (
-					intersection(allowedUserGroups, navigationItem.userGroupIds).length
+					intersection(
+						allowedUserGroups.map((groupId) => String(groupId)),
+						navigationItem.userGroupIds.map((groupId) => String(groupId)),
+					).length
 				) {
 					// The logged-in user has at least one user group that is required to view the nav item
 					visibleItems.push(navigationItem);

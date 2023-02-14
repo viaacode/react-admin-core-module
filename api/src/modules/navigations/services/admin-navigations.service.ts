@@ -38,7 +38,9 @@ export class AdminNavigationsService {
 			tooltip: navigationEntry?.tooltip,
 			updatedAt: navigationEntry?.updated_at,
 			createdAt: navigationEntry?.created_at,
-			userGroupIds: navigationEntry?.user_group_ids,
+			userGroupIds: navigationEntry?.user_group_ids?.map((groupId) =>
+				String(groupId),
+			),
 		};
 	}
 
@@ -59,7 +61,9 @@ export class AdminNavigationsService {
 			tooltip: navigationItem?.tooltip,
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
-			user_group_ids: navigationItem?.userGroupIds,
+			user_group_ids: navigationItem?.userGroupIds?.map((groupId) =>
+				String(groupId),
+			),
 		};
 	}
 

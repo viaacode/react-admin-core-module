@@ -161,7 +161,9 @@ export class ContentPagesService {
 			contentWidth: gqlContentPage?.content_width as ContentWidth,
 			owner,
 			userProfileId: gqlContentPage?.user_profile_id,
-			userGroupIds: gqlContentPage?.user_group_ids,
+			userGroupIds: gqlContentPage?.user_group_ids?.map((groupId) =>
+				String(groupId),
+			),
 			content_blocks: (
 				(gqlContentPage as any)?.content_blocks ||
 				(gqlContentPage as any)?.contentBlockssBycontentId ||
@@ -214,7 +216,9 @@ export class ContentPagesService {
 			published_at: contentPageInfo.publishedAt || null,
 			created_at: contentPageInfo.createdAt || null,
 			updated_at: contentPageInfo.updatedAt || null,
-			user_group_ids: contentPageInfo.userGroupIds,
+			user_group_ids: contentPageInfo.userGroupIds.map((groupId) =>
+				String(groupId),
+			),
 			user_profile_id: contentPageInfo.userProfileId,
 		};
 	}

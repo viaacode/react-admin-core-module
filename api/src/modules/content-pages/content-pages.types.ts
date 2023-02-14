@@ -155,12 +155,6 @@ export type MediaItemResponse = Partial<Media> & {
 	count: number;
 };
 
-export interface ContentPageOverviewResponse {
-	pages: DbContentPage[];
-	count: number;
-	labelCounts: { [id: number]: number };
-}
-
 export type LabelObj = {
 	label: string;
 	id: number;

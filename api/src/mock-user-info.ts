@@ -25,7 +25,7 @@ export const mockUserInfo = {
 			name: 'meemoo - Het Archief voor Onderwijs',
 			or_id: 'OR-h41jm1d',
 		},
-		userGroupIds: [1],
+		userGroupIds: ['1'],
 		permissions: [
 			PermissionName.SEARCH,
 			PermissionName.EDIT_ANY_CONTENT_PAGES,

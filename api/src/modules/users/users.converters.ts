@@ -59,7 +59,9 @@ export function convertUserInfoToCommonUser(
 				userGroup: {
 					name: undefined,
 					label: undefined,
-					id: user.profile.userGroupIds[0] ?? undefined,
+					id: user?.profile?.userGroupIds?.[0]
+						? String(user.profile.userGroupIds[0])
+						: undefined,
 				},
 				userId: user.uid,
 				uid: user.uid,
