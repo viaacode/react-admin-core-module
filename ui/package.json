@@ -31,7 +31,7 @@
     "bump": "bump-package-versions --part=patch --strategy=highest ./package.json ../package.json ../api/package.json"
   },
   "peerDependencies": {
-    "@meemoo/react-components": "2.22.4",
+    "@meemoo/react-components": "2.23.0",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "^4.14.1",
     "@viaa/avo2-components": "3.5.4",
