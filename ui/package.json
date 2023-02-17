@@ -28,7 +28,7 @@
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
-    "bump": "bump-package-versions --part=patch --strategy=highest ./package.json ../package.json ../api/package.json"
+    "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json"
   },
   "peerDependencies": {
     "@meemoo/react-components": "2.23.0",

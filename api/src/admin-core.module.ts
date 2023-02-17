@@ -11,6 +11,7 @@ import {
 	DataModule,
 	ItemsModule,
 	LookupModule,
+	MaintenanceAlertsModule,
 	PlayerTicketModule,
 	SiteVariablesModule,
 	StatusModule,
@@ -34,6 +35,7 @@ import {
 		StatusModule,
 		UsersModule,
 		ItemsModule,
+		MaintenanceAlertsModule
 	],
 })
 export class AdminCoreModule {}

@@ -5,6 +5,7 @@ schema:
         x-hasura-admin-secret: ${GRAPHQL_SECRET_HETARCHIEF}
 documents:
   - "src/modules/**/queries/hetarchief/*.graphql"
+  - "src/modules/**/queries/hetarchief-and-avo/*.graphql"
 generates:
   src/modules/shared/generated/graphql-db-types-hetarchief.ts:
     plugins:

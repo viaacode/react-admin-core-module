@@ -1,7 +1,8 @@
-import { Flex, Icon, IconName, Spacer } from '@viaa/avo2-components';
+import { Flex, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import Select, { Props as ReactSelectProps } from 'react-select';
+import { AdminConfigManager } from '~core/config';
 
 import './IconPicker.scss';
 
@@ -13,9 +14,11 @@ export const IconPicker: FunctionComponent<ReactSelectProps> = ({
 	placeholder = '',
 	...rest
 }) => {
+	const Icon = AdminConfigManager.getConfig().icon?.component;
+
 	const renderLabel = (option: any) => (
 		<Flex>
-			<Icon name={option?.value as IconName} />
+			{Icon && <Icon name={option?.value} />}
 			<Spacer margin="left">{option?.label as string}</Spacer>
 		</Flex>
 	);

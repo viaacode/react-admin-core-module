@@ -90,6 +90,8 @@ function setConfig() {
 				angleRight: { name: 'right' },
 				delete: { name: 'delete' },
 				edit: { name: 'edit' },
+				extraOptions: { name: 'dots-vertical' },
+				copy: { name: 'copy' },
 				filter: { name: 'filter' },
 				arrowUp: { name: 'arrow-up' },
 				sortTable: { name: 'sort-table' },

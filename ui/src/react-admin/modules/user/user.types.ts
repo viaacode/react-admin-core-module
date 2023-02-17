@@ -91,8 +91,7 @@ export type CommonUser = {
 
 export type UserOverviewTableCol =
 	| 'profileId'
-	| 'firstName'
-	| 'lastName'
+	| 'fullName'
 	| 'email'
 	| 'userGroup'
 	| 'businessCategory'
@@ -110,11 +109,11 @@ export type UserOverviewTableCol =
 	| 'lastAccessAt'
 	| 'tempAccess'
 	| 'tempAccessFrom'
-	| 'tempAccessUntil';
+	| 'tempAccessUntil'
+	| 'actions';
 
 export interface UserTableState extends FilterableTableState {
-	firstName: string;
-	lastName: string;
+	fullName: string;
 	mail: string;
 	stamboek: string;
 	businessCategory: string[];
