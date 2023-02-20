@@ -1,12 +1,14 @@
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { useGetIdps } from '~shared/hooks/use-get-idps';
 
@@ -40,7 +42,7 @@ import {
 import './UserOverview.scss';
 import { SettingsService } from '~shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { navigate } from '~shared/helpers/link';
+import { buildLink, navigate } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
@@ -423,7 +425,18 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 
 		switch (columnId) {
 			case 'fullName':
-				return truncateTableValue(commonUser?.fullName);
+				// no user detail for archief yet
+				return isAvo() ? (
+					<Link
+						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
+							id: commonUser.profileId,
+						})}
+					>
+						{truncateTableValue(commonUser?.fullName)}
+					</Link>
+				) : (
+					truncateTableValue(commonUser?.fullName)
+				);
 
 			case 'email':
 				return truncateTableValue(commonUser?.email);
