@@ -56,7 +56,7 @@ export class MaintenanceAlertsQueryDto {
 		type: String,
 		description: 'property to sort the results by',
 		default: 'createdAt',
-		enum: [Object.values(MaintenanceAlertOrderProp)],
+		enum: MaintenanceAlertOrderProp,
 	})
 	orderProp? = MaintenanceAlertOrderProp.FROM_DATE;
 
