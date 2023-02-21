@@ -337,9 +337,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 				insertedOrUpdatedContent = await ContentPageService.insertContentPage(contentBody);
 			} else {
 				if (!isNil(id)) {
-					const contentBody = {
+					const contentBody: ContentPageInfo = {
 						...contentPageState.currentContentPageInfo,
-						updated_at: new Date().toISOString(),
+						updatedAt: new Date().toISOString(),
 						id:
 							typeof (id as string | number) === 'string' && id.includes('-')
 								? id
