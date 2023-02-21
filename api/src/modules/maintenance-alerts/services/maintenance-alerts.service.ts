@@ -110,7 +110,7 @@ export class MaintenanceAlertsService {
 		>(FindMaintenanceAlertsDocument, {
 			where,
 			offset,
-			limit,
+			limit: Number(limit),
 			orderBy: set(
 				{},
 				ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP['fromDate'],
@@ -119,7 +119,7 @@ export class MaintenanceAlertsService {
 		});
 
 		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters.isPersonal)),
+			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters?.isPersonal)),
 			page,
 			size,
 			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
