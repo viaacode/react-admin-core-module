@@ -56,5 +56,11 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			key: 'translations',
 			exact: false,
 		},
+		{
+			label: i18n.tHtml('app___meldingen'),
+			location: AdminConfigManager.getAdminRoute('ALERTS_OVERVIEW'),
+			key: 'alerts',
+			exact: false,
+		},
 	];
 };
