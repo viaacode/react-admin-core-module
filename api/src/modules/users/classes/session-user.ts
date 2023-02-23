@@ -51,8 +51,10 @@ export class SessionUserEntity {
 	 * avo: number
 	 * hetarchief: string (uuid)
 	 */
-	public getGroupId(): string | number {
-		return this.user?.userGroup?.id;
+	public getGroupId(): string {
+		return this.user?.userGroup?.id
+			? String(this.user?.userGroup?.id)
+			: undefined;
 	}
 
 	/**

@@ -119,9 +119,11 @@ export class SessionHelper {
 		return session[ARCHIEF_USER_INFO_PATH] || session[AVO_USER_INFO_PATH];
 	}
 
-	public static getUserGroupIds(groupId: string | undefined): string[] {
+	public static getUserGroupIds(
+		groupId: string | number | undefined,
+	): string[] {
 		return [
-			...(groupId ? [groupId] : []),
+			...(groupId ? [String(groupId)] : []),
 			groupId
 				? SpecialPermissionGroups.loggedInUsers
 				: SpecialPermissionGroups.loggedOutUsers,
