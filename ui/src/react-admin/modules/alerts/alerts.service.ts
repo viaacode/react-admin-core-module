@@ -1,9 +1,10 @@
+import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '../../../index-export';
-import { AlertsOverviewTableCol } from './alerts.types';
+import { Alert, AlertsOverviewTableCol } from './alerts.types';
 
 export class AlertsService {
 	private static getBaseUrl(): string {
@@ -12,13 +13,14 @@ export class AlertsService {
 
 	static async fetchAlerts(
 		orderProp: AlertsOverviewTableCol = 'fromDate',
-		orderDirection: Avo.Search.OrderDirection = 'asc'
-	): Promise<Record<string, Record<string, string>>> {
+		orderDirection: Avo.Search.OrderDirection = 'asc',
+		page = 0
+	): Promise<IPagination<Alert[]>> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl(),
-					query: { orderProp, orderDirection },
+					query: { orderProp, orderDirection, page },
 				})
 			);
 		} catch (err) {

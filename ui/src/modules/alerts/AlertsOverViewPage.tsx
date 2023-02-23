@@ -37,5 +37,5 @@ export const AlertsOverviewPage: FC = () => {
 		);
 	};
 
-	return <AlertsOverview className="c-translations-overview" renderPopup={renderPopup} />;
+	return <AlertsOverview className="c-alerts-overview" renderPopup={renderPopup} />;
 };

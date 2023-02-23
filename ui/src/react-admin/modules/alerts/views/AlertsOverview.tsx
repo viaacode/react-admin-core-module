@@ -3,16 +3,14 @@ import {
 	Button,
 	Checkbox,
 	FormControl,
-	Pagination,
 	Row,
-	Select,
 	Table,
 	TableOptions,
 	TextArea,
 	TextInput,
 	Timepicker,
 } from '@meemoo/react-components';
-import { Icon, IconName } from '@viaa/avo2-components';
+import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 
 import { format, isWithinInterval } from 'date-fns';
@@ -21,6 +19,7 @@ import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
+import { PaginationBar } from '~modules/shared/components/PaginationBar';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -29,11 +28,10 @@ import { AdminConfigManager, ToastType } from '../../../../index-export';
 import { ALERTS_QUERY_PARAM_CONFIG } from '../alerts.const';
 import { AlertsService } from '../alerts.service';
 import { Alert, AlertsOverviewProps, AlertsOverviewTableCol } from '../alerts.types';
-import { convertFromDatabaseToList } from '../helpers/database-conversions';
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
-	const [alerts, setAlerts] = useState<Alert[]>();
+	const [alerts, setAlerts] = useState<IPagination<Alert[]>>();
 	const [filters, setFilters] = useQueryParams(ALERTS_QUERY_PARAM_CONFIG);
 	const [activeAlert, setActiveAlert] = useState<Alert | null>(null);
 
@@ -41,17 +39,18 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		try {
 			const allAlerts = await AlertsService.fetchAlerts(
 				filters.orderProp as AlertsOverviewTableCol,
-				filters.orderDirection as Avo.Search.OrderDirection
+				filters.orderDirection as Avo.Search.OrderDirection,
+				filters.page
 			);
 
-			setAlerts(convertFromDatabaseToList(allAlerts));
+			setAlerts(allAlerts);
 		} catch (err) {
 			console.error(new CustomError('Failed to fetch alerts', err));
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
 				description: tText(
-					'react-admin/modules/alerts/views/alerts-overview___het-ophale-van-de-meldingen-is-mislukt'
+					'react-admin/modules/alerts/views/alerts-overview___het-ophalen-van-de-meldingen-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -83,12 +82,12 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		return isActive ? 'actief' : 'inactief';
 	};
 
-	const renderAlertsTable = (): ReactNode => {
+	const renderAlertsTable = (alerts: IPagination<Alert[]>): ReactNode => {
 		if (!alerts) {
 			return <Loader />;
 		}
 
-		if (!alerts.length) {
+		if (!alerts.items.length) {
 			return (
 				<>
 					{tHtml(
@@ -198,7 +197,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									},
 								},
 							],
-							data: alerts,
+							data: alerts.items || [],
 							initialState: {
 								pageSize: 20,
 							},
@@ -206,8 +205,24 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					}
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
+					pagination={({ gotoPage }) => {
+						return (
+							<PaginationBar
+								className="u-mt-16 u-mb-16"
+								count={20}
+								start={Math.max(0, filters.page - 1) * 20}
+								total={alerts.pages || 1}
+								onPageChange={(pageZeroBased) => {
+									gotoPage(pageZeroBased);
+									setFilters({
+										...filters,
+										page: pageZeroBased + 1,
+									});
+								}}
+							/>
+						);
+					}}
 				/>
-				<Pagination pageCount={100} />
 			</>
 		);
 	};
@@ -262,7 +277,9 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					<Timepicker />
 				</FormControl>
 
-				<Checkbox label={tText('react-admin/modules/alerts/views/alerts-overview___zet-actief')} />
+				<Checkbox
+					label={tText('react-admin/modules/alerts/views/alerts-overview___zet-actief')}
+				/>
 			</>
 		);
 	};
@@ -270,7 +287,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const title = tText('react-admin/modules/alerts/views/alerts-overview___meldingen');
 
 	return (
-		<AdminLayout pageTitle={title}>
+		<AdminLayout className={className} pageTitle={title}>
 			<AdminLayout.Actions>
 				<Button
 					label={tText(
@@ -281,7 +298,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			</AdminLayout.Actions>
 
 			<AdminLayout.Content>
-				<div className={className}>{alerts && renderAlertsTable()}</div>
+				<div className={className}>{alerts && renderAlertsTable(alerts)}</div>
+
 				{renderPopup({
 					title: tText(
 						'react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'
