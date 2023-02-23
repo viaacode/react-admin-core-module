@@ -2,6 +2,7 @@ import { DefaultProps } from '@viaa/avo2-components';
 import { ReactNode } from 'react';
 
 export interface Alert {
+	id: string;
 	title: string;
 	message: string;
 	icon: string;
@@ -20,3 +21,5 @@ export interface AlertsOverviewProps extends DefaultProps {
 		onClose: () => void;
 	}) => ReactNode;
 }
+
+export type AlertsOverviewTableCol = 'id' | 'icon' | 'fromDate' | 'untilDate' | 'active';
