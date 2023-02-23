@@ -4,6 +4,7 @@ import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { Icon } from '~shared/components';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
@@ -215,7 +216,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		if (key === 'content') {
 			setNavigationItem({
 				...navigationItem,
-				contentType: get(value, 'type', null),
+				contentType:
+					get(value, 'type', null) === ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS
+						? 'DROPDOWN'
+						: get(value, 'type', null),
 				contentPath: get(value, 'value', null),
 				linkTarget: get(value, 'target', '_self'),
 			});
