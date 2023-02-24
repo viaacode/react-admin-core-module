@@ -2,8 +2,10 @@ import {
 	Badge,
 	Button,
 	Checkbox,
+	Datepicker,
 	FormControl,
 	Row,
+	Select,
 	Table,
 	TableOptions,
 	TextArea,
@@ -17,6 +19,7 @@ import { format, isWithinInterval } from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
 import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
+import { CheckboxDropdownModal } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { PaginationBar } from '~modules/shared/components/PaginationBar';
@@ -34,6 +37,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [alerts, setAlerts] = useState<IPagination<Alert[]>>();
 	const [filters, setFilters] = useQueryParams(ALERTS_QUERY_PARAM_CONFIG);
 	const [activeAlert, setActiveAlert] = useState<Alert | null>(null);
+	const [action, setAction] = useState<string | null>(null);
 
 	const getAlerts = useCallback(async () => {
 		try {
@@ -69,6 +73,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		},
 		[filters.orderProp, filters.orderDirection]
 	);
+
+	useEffect(() => {
+		console.log(action);
+	}, [action]);
 
 	useEffect(() => {
 		getAlerts();
@@ -176,7 +184,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 													AdminConfigManager.getConfig().icon
 														?.componentProps.edit.name as string
 												}
-												onClick={() => setActiveAlert(row.original)}
+												onClick={() => {
+													setActiveAlert(row.original);
+													setAction('edit');
+												}}
 											/>
 										);
 									},
@@ -191,7 +202,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 													AdminConfigManager.getConfig().icon
 														?.componentProps.delete.name as string
 												}
-												onClick={() => console.log('delete')}
+												onClick={() => setAction('delete')}
 											/>
 										);
 									},
@@ -227,6 +238,20 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		);
 	};
 
+	const onClickCreate = () => {
+		setAction('create');
+		setActiveAlert({
+			id: '',
+			title: '',
+			message: '',
+			icon: '',
+			userGroups: [],
+			fromDate: '',
+			untilDate: '',
+			active: false,
+		});
+	};
+
 	const renderPopupBody = () => {
 		if (!activeAlert) {
 			return;
@@ -240,14 +265,14 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						'react-admin/modules/alerts/views/alerts-overview___titel-melding'
 					)}
 				>
-					<TextInput />
+					<TextInput value={activeAlert.title} />
 				</FormControl>
 
 				<FormControl
 					id="new-alert-message"
 					label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving')}
 				>
-					<TextArea />
+					<TextArea value={activeAlert.message} />
 				</FormControl>
 
 				<FormControl
@@ -256,7 +281,23 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon'
 					)}
 				>
-					<IconPicker />
+					<IconPicker value={activeAlert.icon} />
+				</FormControl>
+				<FormControl
+					id="new-alert-user-group"
+					label={tHtml(
+						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
+					)}
+				>
+					<CheckboxDropdownModal
+						options={[
+							{ label: 'testoption', id: 'testoption', checked: false },
+							{ label: 'testoption2', id: 'testoption2', checked: false },
+						]}
+						label=""
+						id="test"
+						onChange={(value) => console.log(value)}
+					/>
 				</FormControl>
 
 				<FormControl
@@ -265,6 +306,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-van'
 					)}
 				>
+					<Datepicker />
+
 					<Timepicker />
 				</FormControl>
 
@@ -274,7 +317,11 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot'
 					)}
 				>
-					<Timepicker />
+					<>
+						<Datepicker />
+
+						<Timepicker />
+					</>
 				</FormControl>
 
 				<Checkbox
@@ -293,7 +340,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					label={tText(
 						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken'
 					)}
-					onClick={() => console.log('click')}
+					onClick={() => onClickCreate()}
 				/>
 			</AdminLayout.Actions>
 
@@ -307,7 +354,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					body: renderPopupBody(),
 					isOpen: !!activeAlert,
 					onSave: () => console.log('save'),
-					onClose: () => console.log('close'),
+					onClose: () => {
+						setActiveAlert(null);
+						setAction(null);
+					},
 				})}
 			</AdminLayout.Content>
 		</AdminLayout>
