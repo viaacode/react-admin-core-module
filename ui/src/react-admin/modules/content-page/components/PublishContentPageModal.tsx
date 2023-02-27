@@ -190,7 +190,11 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 						/>
 						<Tooltip position="right">
 							<TooltipTrigger>
-								<Icon className="a-info-icon" name={IconName.info} size="small" />
+								<Icon
+									className="a-info-icon"
+									name={'info' as IconName}
+									size="small"
+								/>
 							</TooltipTrigger>
 							<TooltipContent>
 								{tHtml(

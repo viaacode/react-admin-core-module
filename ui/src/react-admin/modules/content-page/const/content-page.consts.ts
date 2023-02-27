@@ -146,14 +146,14 @@ export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___inhoud'),
-		icon: IconName.layout,
+		icon: 'layout' as IconName,
 	},
 	{
 		id: 'metadata',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content/content___metadata'
 		),
-		icon: IconName.fileText,
+		icon: 'fileText' as IconName,
 	},
 ];
 

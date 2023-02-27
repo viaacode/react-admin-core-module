@@ -95,7 +95,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					message: tHtml(
 						'admin/content/views/content-detail___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: IconName.lock,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
@@ -106,7 +106,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					message: tHtml(
 						'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-gevonden-of-je-hebt-geen-rechten-om-deze-te-bekijken'
 					),
-					icon: IconName.lock,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
@@ -130,7 +130,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					: tHtml(
 							'admin/content/views/content-detail___het-ophalen-van-de-content-pagina-is-mislukt'
 					  ),
-				icon: notFound ? IconName.search : IconName.alertTriangle,
+				icon: notFound ? ('search' as IconName) : ('alertTriangle' as IconName),
 			});
 		}
 	}, [id, setContentPageInfo, setLoadingInfo, user, tHtml]);
@@ -338,7 +338,11 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 					(hasPerm(UNPUBLISH_ANY_CONTENT_PAGE) && isPublic(contentPageInfo))) && (
 					<Button
 						type="secondary"
-						icon={isPublic(contentPageInfo) ? IconName.unlock3 : IconName.lock}
+						icon={
+							isPublic(contentPageInfo)
+								? ('unlock3' as IconName)
+								: ('lock' as IconName)
+						}
 						label={tText('admin/content/views/content-detail___publiceren')}
 						title={tText(
 							'admin/content/views/content-detail___maak-de-content-pagina-publiek-niet-publiek'
@@ -351,7 +355,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 				)}
 				<Button
 					type="secondary"
-					icon={IconName.eye}
+					icon={'eye' as IconName}
 					label={tText('admin/content/views/content-detail___preview')}
 					title={tText(
 						'admin/content/views/content-detail___bekijk-deze-pagina-in-de-website'
