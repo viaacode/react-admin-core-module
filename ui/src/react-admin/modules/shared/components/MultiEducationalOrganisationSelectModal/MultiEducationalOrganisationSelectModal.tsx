@@ -106,7 +106,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 							)}
 							<Icon
 								className="c-button__icon"
-								name={isOpen ? IconName.caretUp : IconName.caretDown}
+								name={isOpen ? ('caretUp' as IconName) : ('caretDown' as IconName)}
 								size="small"
 								type="arrows"
 							/>

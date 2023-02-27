@@ -183,7 +183,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon={IconName.add}
+				icon={'add' as IconName}
 				onClick={handleFieldAdd}
 				size="small"
 				title={label}
@@ -205,7 +205,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon={IconName.delete}
+				icon={'delete' as IconName}
 				onClick={() => handleFieldDelete(index)}
 				size="small"
 				title={label}
