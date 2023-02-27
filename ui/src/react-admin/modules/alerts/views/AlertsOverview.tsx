@@ -13,8 +13,11 @@ import {
 import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 
-import { format, isWithinInterval } from 'date-fns';
-import { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { format, isWithinInterval, roundToNearestMinutes, set } from 'date-fns';
+import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
@@ -27,7 +30,16 @@ import { AdminLayout } from '~modules/shared/layouts';
 import { AdminConfigManager, ToastType } from '../../../../index-export';
 import { ALERTS_QUERY_PARAM_CONFIG } from '../alerts.const';
 import { AlertsService } from '../alerts.service';
-import { Alert, AlertsOverviewProps, AlertsOverviewTableCol } from '../alerts.types';
+import {
+	Alert,
+	AlertFormState,
+	AlertsOverviewProps,
+	AlertsOverviewTableCol,
+} from '../alerts.types';
+
+const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
+const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
+const defaultEndDate = (startDate: Date) => set(startDate, { hours: 23, minutes: 59 });
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
@@ -226,6 +238,30 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			</>
 		);
 	};
+
+	const defaultValues = useMemo(
+		() =>
+			({
+				title: activeAlert?.title || '',
+				message: activeAlert?.message || '',
+				fromDate: activeAlert?.fromDate || defaultStartDate(new Date()),
+				untilDate: activeAlert?.untilDate || defaultEndDate(new Date()),
+				userGroups: activeAlert?.userGroups || [],
+				icon: activeAlert?.icon || '',
+				active: activeAlert?.active || false,
+			} as AlertFormState),
+		[activeAlert]
+	);
+
+	const [form, setForm] = useState<AlertFormState>(defaultValues);
+	const {
+		control,
+		formState: { errors, isSubmitting },
+		handleSubmit,
+		setValue,
+	} = useForm<AlertFormState>({
+		resolver: yupResolver,
+	});
 
 	const renderPopupBody = () => {
 		if (!activeAlert) {
