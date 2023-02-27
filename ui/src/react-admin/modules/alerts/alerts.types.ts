@@ -23,3 +23,13 @@ export interface AlertsOverviewProps extends DefaultProps {
 }
 
 export type AlertsOverviewTableCol = 'id' | 'icon' | 'fromDate' | 'untilDate' | 'active';
+
+export interface AlertFormState {
+	title: string;
+	message: string;
+	fromDate: string;
+	untilDate: string;
+	userGroups: string[];
+	icon: string;
+	active: boolean;
+}
