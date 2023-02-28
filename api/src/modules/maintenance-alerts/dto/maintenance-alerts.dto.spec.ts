@@ -25,7 +25,7 @@ describe('MaintenanceAlertsDto', () => {
 	});
 
 	describe('UpdateMaintenanceAlertDto', () => {
-		it('should be able to construct a UpdateMaintenanceAlertDto object', () => {
+		it('should be able to construct an UpdateMaintenanceAlertDto object', () => {
 			const updateMaintenanceAlertDto = new UpdateMaintenanceAlertDto();
 			expect(updateMaintenanceAlertDto).toEqual({});
 		});
