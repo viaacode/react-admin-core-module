@@ -127,4 +127,21 @@ describe('MaintenanceAlertsController', () => {
 			expect(createdMaintenanceAlert).toEqual(mockMaintenanceAlert1);
 		});
 	});
+
+	describe('updateMaintenanceAlert', () => {
+		it('should update a maintenance alert by id', async () => {
+			mockMaintenanceAlertsService.updateMaintenanceAlert.mockResolvedValueOnce(
+				mockMaintenanceAlert1,
+			);
+			const updatedMaintenanceAlert = await maintenanceAlertsController.updateMaintenanceAlert(
+				mockMaintenanceAlert1.id,
+				{
+					title: "Gepland onderhoud updated",
+					type: MaintenanceAlertType.QUESTION,
+				}
+			);
+			expect(updatedMaintenanceAlert).toEqual(mockMaintenanceAlert1);
+		});
+	});
+
 });
