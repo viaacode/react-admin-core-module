@@ -6,7 +6,6 @@ import { AdminConfigManager } from '~core/config';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~shared/services/permission-service';
-import { CommonUser } from '~modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -91,7 +90,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 
 export async function checkPermissions(
 	permissions: Permissions,
-	user: CommonUser | undefined,
+	user: Avo.User.CommonUser | undefined,
 	successFunc: () => void,
 	setLoadingInfo: (info: LoadingInfo) => void,
 	noPermissionsMessage?: string
