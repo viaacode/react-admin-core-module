@@ -1,7 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
+import { FindMaintenanceAlertsQuery } from "src/modules/shared/generated/graphql-db-types-hetarchief";
 import { DataService } from "../../data";
 import { TestingLogger } from "../../shared/logging/test-logger";
-import { mockGqlMaintenanceAlert1 } from "../mocks/maintenance-alerts.mocks";
+import { mockGqlMaintenanceAlert1, mockMaintenanceAlert1, mockUser } from "../mocks/maintenance-alerts.mocks";
 import { MaintenanceAlertsService } from "./maintenance-alerts.service";
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
@@ -15,6 +16,18 @@ const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 		update
 		delete
 */
+
+const getDefaultMaintenanceAlertsResponse = (): {
+	app_maintenance_alerts: FindMaintenanceAlertsQuery[];
+	app_maintenance_alerts_aggregate: { aggregate: { count: number }};
+} => ({
+	app_maintenance_alerts: [mockGqlMaintenanceAlert1 as any],
+	app_maintenance_alerts_aggregate: {
+		aggregate: {
+			count: 100,
+		}
+	}
+})
 describe('MaintenanceAlertsService', () => {
 	let maintenanceAlertsService: MaintenanceAlertsService;
 
@@ -77,4 +90,77 @@ describe('MaintenanceAlertsService', () => {
 			expect(adapted).toBeNull();
 		});
 	});
+
+	describe('findAll', () => {//geen input, personal, usergroup, inputquery
+		it('returns a paginated response with all maintenance alerts', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
+
+			const response = await maintenanceAlertsService.findAll(
+				{
+					page: 1,
+					size: 10,
+				}
+			);
+			expect(response.items.length).toBe(1);
+			expect(response.page).toBe(1);
+			expect(response.size).toBe(10)
+			expect(response.total).toBe(100)
+		});
+
+		it('returns a paginated response with all maintenance alerts starting from a certain date', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
+
+			const response = await maintenanceAlertsService.findAll(
+				{
+					fromDate: "2022-02-24T16:36:06.045845",
+					page: 1,
+					size: 10,
+				}
+			);
+			expect(response.items.length).toBe(1);
+			expect(response.items[0]?.fromDate).toBe(mockMaintenanceAlert1.fromDate);
+			expect(response.page).toBe(1);
+			expect(response.size).toBe(10)
+			expect(response.total).toBe(100)
+		});
+
+		it('returns a paginated response with all maintenance alerts ending on a certain date', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
+
+			const response = await maintenanceAlertsService.findAll(
+				{
+					untilDate: "2022-02-27T16:36:06.045845",
+					page: 1,
+					size: 10,
+				}
+			);
+			expect(response.items.length).toBe(1);
+			expect(response.items[0]?.untilDate).toBe(mockMaintenanceAlert1.untilDate);
+			expect(response.page).toBe(1);
+			expect(response.size).toBe(10)
+			expect(response.total).toBe(100)
+		});
+
+		it('PARAMETESRSDD', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
+
+			const response = await maintenanceAlertsService.findAll(
+				{
+					page: 1,
+					size: 10,
+				},
+				{
+					userGroupIds: ,
+					isPersonal: true
+				}
+			);
+			expect(response.items.length).toBe(1);
+			expect(response.items[0]?.untilDate).toBe(mockMaintenanceAlert1.untilDate);
+			expect(response.page).toBe(1);
+			expect(response.size).toBe(10)
+			expect(response.total).toBe(100)
+		});
+
+	});
+
 });

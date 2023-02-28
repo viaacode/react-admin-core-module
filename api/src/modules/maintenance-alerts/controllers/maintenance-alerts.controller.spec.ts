@@ -22,7 +22,6 @@ const mockMaintenanceAlertsService: Partial<
 
 describe('MaintenanceAlertsController', () => {
 	let maintenanceAlertsController: MaintenanceAlertsController;
-	let sessionHelperSpy: jest.SpyInstance;
 
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
