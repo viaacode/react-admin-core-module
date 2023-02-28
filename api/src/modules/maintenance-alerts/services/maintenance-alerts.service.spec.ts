@@ -1,8 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { FindMaintenanceAlertsQuery } from "src/modules/shared/generated/graphql-db-types-hetarchief";
+import { FindMaintenanceAlertByIdQuery, FindMaintenanceAlertsQuery } from "src/modules/shared/generated/graphql-db-types-hetarchief";
 import { DataService } from "../../data";
 import { TestingLogger } from "../../shared/logging/test-logger";
-import { mockGqlMaintenanceAlert1, mockMaintenanceAlert1, mockUser } from "../mocks/maintenance-alerts.mocks";
+import { mockGqlMaintenanceAlert1, mockGqlMaintenanceAlert2, mockMaintenanceAlert1, mockUser } from "../mocks/maintenance-alerts.mocks";
 import { MaintenanceAlertsService } from "./maintenance-alerts.service";
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
@@ -10,7 +10,6 @@ const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 };
 /*
 	TODO:
-		findall
 		findbyid
 		create
 		update
@@ -27,7 +26,20 @@ const getDefaultMaintenanceAlertsResponse = (): {
 			count: 100,
 		}
 	}
-})
+});
+
+const getDefaultMaintenanceAlertsByIdResponse = (): {
+	app_maintenance_alerts: FindMaintenanceAlertByIdQuery[];
+	app_maintenance_alerts_aggregate: { aggregate: { count: number }};
+} => ({
+	app_maintenance_alerts: [mockGqlMaintenanceAlert2 as any],
+	app_maintenance_alerts_aggregate: {
+		aggregate: {
+			count: 100,
+		}
+	}
+});
+
 describe('MaintenanceAlertsService', () => {
 	let maintenanceAlertsService: MaintenanceAlertsService;
 
@@ -91,7 +103,7 @@ describe('MaintenanceAlertsService', () => {
 		});
 	});
 
-	describe('findAll', () => {//geen input, personal, usergroup, inputquery
+	describe('findAll', () => {
 		it('returns a paginated response with all maintenance alerts', async () => {
 			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
 
@@ -107,7 +119,7 @@ describe('MaintenanceAlertsService', () => {
 			expect(response.total).toBe(100)
 		});
 
-		it('returns a paginated response with all maintenance alerts starting from a certain date', async () => {
+		it('can filter on fromDate', async () => {
 			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
 
 			const response = await maintenanceAlertsService.findAll(
@@ -124,7 +136,7 @@ describe('MaintenanceAlertsService', () => {
 			expect(response.total).toBe(100)
 		});
 
-		it('returns a paginated response with all maintenance alerts ending on a certain date', async () => {
+		it('can filter on untilDate', async () => {
 			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
 
 			const response = await maintenanceAlertsService.findAll(
@@ -141,7 +153,7 @@ describe('MaintenanceAlertsService', () => {
 			expect(response.total).toBe(100)
 		});
 
-		it('PARAMETESRSDD', async () => {
+		it('can filter on userGroups', async () => {
 			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsResponse())
 
 			const response = await maintenanceAlertsService.findAll(
@@ -150,17 +162,50 @@ describe('MaintenanceAlertsService', () => {
 					size: 10,
 				},
 				{
-					userGroupIds: ,
+					userGroupIds: [
+						"0213c8d4-f459-45ef-8bbc-96268ab56d01",
+						"04150e6e-b779-4125-84e5-6ee6fc580757",
+						"0b281484-76cd-45a9-b6ce-68a0ea7f4b26",
+						"c56d95aa-e918-47ca-b102-486c9449fc4a"
+					],
 					isPersonal: true
 				}
 			);
 			expect(response.items.length).toBe(1);
-			expect(response.items[0]?.untilDate).toBe(mockMaintenanceAlert1.untilDate);
+			expect(response.items[0]?.id).toBe(mockMaintenanceAlert1.id);
+			expect(response.items[0]?.title).toBe(mockMaintenanceAlert1.title);
 			expect(response.page).toBe(1);
-			expect(response.size).toBe(10)
-			expect(response.total).toBe(100)
+			expect(response.size).toBe(10);
+			expect(response.total).toBe(100);
 		});
-
 	});
 
+	describe('findById', () => {
+		it('returns a single maintenance alert', async () => {
+			mockDataService.execute.mockResolvedValueOnce(getDefaultMaintenanceAlertsByIdResponse());
+			const response = await maintenanceAlertsService.findById('1');
+			expect(response.id).toBe(mockGqlMaintenanceAlert2.id);
+		});
+
+		it('throws a notfoundexception if the material request was not found', async () => {
+			const mockdata: FindMaintenanceAlertsQuery = {
+				app_maintenance_alerts: [],
+				app_maintenance_alerts_aggregate: {
+					aggregate: {
+						count: 0,
+					},
+				},
+			};
+
+			try {
+				await maintenanceAlertsService.findById('unknown-id');
+			} catch (error) {
+				expect(error.response).toEqual({
+					error: 'Not Found',
+					message: "Material Request with id 'unknown-id' not found",
+					statusCode: 404,
+				});
+			}
+		});
+	});
 });
