@@ -133,7 +133,6 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		console.log('current user', props.commonUser);
 		if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
 				String(props.commonUser?.userGroup?.id),
@@ -164,7 +163,6 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 			)
 		);
 
-		console.log('filtered content blocks by user group ids: ', contentBlockBlockConfigs);
 		return contentBlockBlockConfigs;
 	};
 
