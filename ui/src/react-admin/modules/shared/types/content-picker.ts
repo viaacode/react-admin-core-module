@@ -1,6 +1,5 @@
 import { LinkTarget } from '@viaa/avo2-components';
-
-import { ContentPickerType } from '../components/ContentPicker/ContentPicker.types';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 export type PickerItemControls = 'SELECT' | 'TEXT_INPUT' | 'FILE_UPLOAD';
 

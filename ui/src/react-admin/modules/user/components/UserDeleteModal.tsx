@@ -314,8 +314,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
 							allowedTypes={[ContentPickerType.PROFILE]}
-							onSelect={setTransferToUser}
-							initialValue={transferToUser}
+							value={transferToUser}
+							onChange={setTransferToUser}
 							placeholder={tText(
 								'admin/users/views/user-overview___overdragen-naar-gebruiker'
 							)}
