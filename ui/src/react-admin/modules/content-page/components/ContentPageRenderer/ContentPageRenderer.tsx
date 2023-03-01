@@ -172,10 +172,6 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 			<div className="c-content-page-preview">
 				{getContentBlocks(contentPageInfo as ContentPageInfo).map(
 					(contentBlockConfig: ContentBlockConfig) => {
-						console.log('rendering ', {
-							type: contentBlockConfig.type,
-							contentBlockConfig,
-						});
 						return (
 							<ContentBlockRenderer
 								key={
