@@ -13,6 +13,7 @@ import {
 	mockGqlMaintenanceAlert1,
 	mockGqlMaintenanceAlert2,
 	mockMaintenanceAlert1,
+	mockNewMaintenanceAlert,
 } from '../mocks/maintenance-alerts.mocks';
 import { MaintenanceAlertsService } from './maintenance-alerts.service';
 
@@ -218,7 +219,7 @@ describe('MaintenanceAlertsService', () => {
 			} catch (error) {
 				expect(error.response).toEqual({
 					error: 'Not Found',
-					message: "Material Request with id 'unknown-id' not found",
+					message: "Maintenance Alert with id 'unknown-id' not found",
 					statusCode: 404,
 				});
 			}
@@ -232,14 +233,9 @@ describe('MaintenanceAlertsService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
-			const response = await maintenanceAlertsService.createMaintenanceAlert({
-				title: mockGqlMaintenanceAlert1.title,
-				message: mockGqlMaintenanceAlert1.message,
-				type: MaintenanceAlertType.QUESTION, //vragen aan brecht mockGqlMaintenanceAlert1.type
-				userGroups: mockGqlMaintenanceAlert1.user_groups,
-				fromDate: mockGqlMaintenanceAlert1.from_date,
-				untilDate: mockGqlMaintenanceAlert1.until_date,
-			});
+			const response = await maintenanceAlertsService.createMaintenanceAlert(
+				mockNewMaintenanceAlert,
+			);
 			expect(response.id).toBe(mockGqlMaintenanceAlert1.id);
 		});
 	});

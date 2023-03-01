@@ -10,6 +10,7 @@ import {
 	FindMaintenanceAlertByIdQuery,
 	FindMaintenanceAlertsQuery,
 } from '../../../modules/shared/generated/graphql-db-types-hetarchief';
+import { CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
 
 export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenance_alerts'][0] =
 	{
@@ -76,6 +77,14 @@ const mockMaintenanceAlert2: MaintenanceAlert = {
 	],
 };
 
+export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
+	title: mockGqlMaintenanceAlert1.title,
+	message: mockGqlMaintenanceAlert1.message,
+	type: MaintenanceAlertType.QUESTION,
+	userGroups: mockGqlMaintenanceAlert1.user_groups,
+	fromDate: mockGqlMaintenanceAlert1.from_date,
+	untilDate: mockGqlMaintenanceAlert1.until_date,
+};
 export const mockMaintenanceAlertsResponse = {
 	items: [mockMaintenanceAlert1, mockMaintenanceAlert2],
 };
