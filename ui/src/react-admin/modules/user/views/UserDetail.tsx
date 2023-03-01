@@ -572,7 +572,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 				message={tText(
 					'admin/users/views/user-detail___het-ophalen-van-de-gebruiker-info-is-mislukt'
 				)}
-				icon={IconName.alertTriangle}
+				icon={'alertTriangle' as IconName}
 			/>
 		);
 	}

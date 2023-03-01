@@ -39,7 +39,7 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 		>
 			<DropdownButton>
 				<Button
-					icon={IconName.moreHorizontal}
+					icon={'moreHorizontal' as IconName}
 					type="secondary"
 					ariaLabel={tText('assignment/views/assignment-detail___meer-opties')}
 					title={tText('assignment/views/assignment-detail___meer-opties')}

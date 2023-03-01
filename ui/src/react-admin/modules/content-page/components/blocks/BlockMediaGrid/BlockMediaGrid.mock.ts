@@ -7,9 +7,9 @@ import { BlockMediaGridProps, MediaListItem } from './BlockMediaGrid';
 export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	{
 		category: 'collection',
-		metadata: [{ icon: IconName.eye, label: '1005' }, { label: '10/10/2020' }],
+		metadata: [{ icon: 'eye' as IconName, label: '1005' }, { label: '10/10/2020' }],
 		buttonLabel: 'meer lezen',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -27,7 +27,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Audio fragment 1',
 		buttonLabel: 'meer lezen',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -45,7 +45,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Collectie 2',
 		buttonLabel: 'google',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'secondary',
 		buttonAction: {
 			type: 'EXTERNAL_LINK',
@@ -59,7 +59,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'collection',
-		metadata: [{ icon: IconName.eye, label: '25' }, { label: '02/02/2020' }],
+		metadata: [{ icon: 'eye' as IconName, label: '25' }, { label: '02/02/2020' }],
 		title: 'Collectie 3',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -73,7 +73,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'video',
-		metadata: [{ icon: IconName.eye, label: '195' }, { label: '02/02/2020' }],
+		metadata: [{ icon: 'eye' as IconName, label: '195' }, { label: '02/02/2020' }],
 		title: 'Video fragment 1',
 		itemAction: {
 			type: 'ITEM',
@@ -87,7 +87,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Video fragment 2',
 		buttonLabel: 'meer lezen',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -102,10 +102,10 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 	},
 	{
 		category: 'audio',
-		metadata: [{ icon: IconName.eye, label: '347' }, { label: '02/02/2020' }],
+		metadata: [{ icon: 'eye' as IconName, label: '347' }, { label: '02/02/2020' }],
 		title: 'Audio fragment 2 en nog wat lange tekst die op 2 regels over loopt',
 		buttonLabel: 'meer lezen',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -123,7 +123,7 @@ export const MEDIA_LIST_ITEMS_MOCK: MediaListItem[] = [
 		metadata: [{ label: '02/02/2020' }],
 		title: 'Collectie 4',
 		buttonLabel: 'meer lezen',
-		buttonIcon: IconName.eye,
+		buttonIcon: 'eye' as IconName,
 		buttonType: 'danger',
 		buttonAction: {
 			type: 'INTERNAL_LINK',
@@ -164,7 +164,7 @@ export const MEDIA_LIST_CTA_MOCK: BlockMediaGridProps = {
 	ctaTitle: 'Call to action',
 	ctaContent: 'Wil je meer weten?',
 	ctaButtonLabel: 'Ontdek meer',
-	ctaButtonIcon: IconName.delete,
+	ctaButtonIcon: 'delete' as IconName,
 	elements: MEDIA_LIST_ITEMS_MOCK.slice(0, -1),
 	ctaButtonAction: {
 		type: 'EXTERNAL_LINK',
@@ -178,7 +178,7 @@ export const MEDIA_LIST_CTA_MOCK_WITHOUT_BUTTONS: BlockMediaGridProps = {
 	ctaTitle: 'Call to action',
 	ctaContent: 'Wil je meer weten?',
 	ctaButtonLabel: 'Ontdek meer',
-	ctaButtonIcon: IconName.delete,
+	ctaButtonIcon: 'delete' as IconName,
 	elements: MEDIA_LIST_ITEMS_MOCK.slice(0, -1).map((mock) => {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { buttonLabel, buttonIcon, buttonType, ...rest } = mock;

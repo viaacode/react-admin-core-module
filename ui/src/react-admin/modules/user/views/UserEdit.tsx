@@ -283,7 +283,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 											ariaLabel={tText(
 												'admin/users/views/user-edit___verbreek-de-link-tussen-deze-gebruiker-en-dit-bedrijf'
 											)}
-											icon={IconName.delete}
+											icon={'delete' as IconName}
 											onClick={() => setCompanyId(undefined)}
 										/>
 									</Spacer>

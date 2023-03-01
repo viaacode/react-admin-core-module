@@ -629,7 +629,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 				message={tHtml(
 					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
 				)}
-				icon={IconName.alertTriangle}
+				icon={'alertTriangle' as IconName}
 				actionButtons={['home', 'helpdesk']}
 			/>
 		);

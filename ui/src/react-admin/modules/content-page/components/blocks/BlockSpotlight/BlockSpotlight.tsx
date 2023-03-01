@@ -44,7 +44,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 				{renderLink(
 					buttonAction,
 					<p>
-						{get(elements, [index, 'title'])} <Icon name={IconName.chevronRight} />
+						{get(elements, [index, 'title'])} <Icon name={'chevronRight' as IconName} />
 					</p>,
 					get(elements, [index, 'title'])
 				)}

@@ -41,6 +41,7 @@ import React, {
 	useState,
 } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import { AdminConfigManager } from '~core/config';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
@@ -288,7 +289,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						<FormGroup className="c-content-filters__search" inlineMode="grow">
 							<TextInput
 								placeholder={searchTextPlaceholder}
-								icon={IconName.search}
+								icon={'search' as IconName} // TODO investigate why enum is undefined
 								onChange={setSearchTerm}
 								onKeyUp={handleKeyUp as any}
 								value={searchTerm}

@@ -342,7 +342,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				<Button
 					size="large"
 					type={'borderless'}
-					icon={isTargetSelf ? IconName.arrowDownCircle : IconName.externalLink}
+					icon={
+						isTargetSelf
+							? ('arrowDownCircle' as IconName)
+							: ('externalLink' as IconName)
+					}
 					title={
 						isTargetSelf
 							? tText(

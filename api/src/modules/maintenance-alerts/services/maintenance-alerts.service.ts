@@ -1,5 +1,5 @@
 import { IPagination, Pagination } from "@studiohyperdrive/pagination";
-import { Logger, NotFoundException } from "@nestjs/common";
+import { forwardRef, Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { isArray } from "class-validator";
 import { isEmpty, isNil, set } from "lodash";
 
@@ -28,10 +28,11 @@ import {
 	UpdateMaintenanceAlertMutationVariables
 } from "../../shared/generated/graphql-db-types-hetarchief";
 
+@Injectable()
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
 
-	constructor(protected dataService: DataService) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService,) {}
 
 	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert, isPersonal: boolean = false): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
@@ -109,7 +110,7 @@ export class MaintenanceAlertsService {
 		>(FindMaintenanceAlertsDocument, {
 			where,
 			offset,
-			limit,
+			limit: Number(limit),
 			orderBy: set(
 				{},
 				ORDER_PROP_TO_DB_PROP[orderProp] || ORDER_PROP_TO_DB_PROP['fromDate'],
@@ -118,7 +119,7 @@ export class MaintenanceAlertsService {
 		});
 
 		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters.isPersonal)),
+			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters?.isPersonal)),
 			page,
 			size,
 			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,

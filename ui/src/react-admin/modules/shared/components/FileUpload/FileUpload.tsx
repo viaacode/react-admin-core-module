@@ -171,7 +171,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			<Button
 				className="a-delete-button"
 				type="danger-hover"
-				icon={IconName.trash2}
+				icon={'trash2' as IconName}
 				ariaLabel={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
 				title={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
 				autoHeight
@@ -228,7 +228,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				<Spacer margin="bottom-small" key={url}>
 					<Blankslate
 						title={fileName || ''}
-						icon={IconName.file}
+						icon={'file' as IconName}
 						className="a-upload-file-preview"
 					>
 						{renderDeleteButton(url)}

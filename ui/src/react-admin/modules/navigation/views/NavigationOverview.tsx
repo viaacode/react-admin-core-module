@@ -43,7 +43,7 @@ const NavigationOverview: FunctionComponent = () => {
 				return (
 					<ButtonToolbar>
 						<Button
-							icon={IconName.eye}
+							icon={'eye' as IconName}
 							onClick={() =>
 								navigate(
 									history,
@@ -63,7 +63,7 @@ const NavigationOverview: FunctionComponent = () => {
 							type="secondary"
 						/>
 						<Button
-							icon={IconName.plus}
+							icon={'plus' as IconName}
 							onClick={() =>
 								navigate(
 									history,
