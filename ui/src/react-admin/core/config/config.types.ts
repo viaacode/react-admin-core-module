@@ -3,7 +3,7 @@ import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 import { MediaListItem } from '~content-blocks/BlockMediaGrid/BlockMediaGrid';
 
-import { CommonUser, UserBulkAction } from '~modules/user/user.types';
+import { UserBulkAction } from '~modules/user/user.types';
 
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
@@ -114,7 +114,6 @@ export interface AdminConfig {
 		databaseApplicationType: DatabaseType;
 		proxyUrl: string;
 	};
-	user: CommonUser;
 	routes: {
 		CONTENT_PAGE_CREATE: string;
 		CONTENT_PAGE_DETAIL: string;

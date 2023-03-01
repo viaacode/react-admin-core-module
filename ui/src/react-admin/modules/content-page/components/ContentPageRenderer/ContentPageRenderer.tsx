@@ -1,3 +1,4 @@
+import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
@@ -9,7 +10,6 @@ import { ContentPageService } from '../../services/content-page.service';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
-import { AdminConfigManager } from '~core/config';
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -27,6 +27,7 @@ type ContentPageDetailProps = {
 	activeBlockPosition?: number | null;
 	onBlockClicked?: BlockClickHandler;
 	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
+	commonUser?: Avo.User.CommonUser;
 };
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
@@ -132,9 +133,10 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (AdminConfigManager.getConfig()?.user?.userGroup?.id) {
+		console.log('current user', props.commonUser);
+		if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
-				String(AdminConfigManager.getConfig()?.user?.userGroup?.id),
+				String(props.commonUser?.userGroup?.id),
 				SpecialPermissionGroups.loggedInUsers,
 			];
 		} else {
@@ -162,6 +164,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 			)
 		);
 
+		console.log('filtered content blocks by user group ids: ', contentBlockBlockConfigs);
 		return contentBlockBlockConfigs;
 	};
 
@@ -171,6 +174,10 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 			<div className="c-content-page-preview">
 				{getContentBlocks(contentPageInfo as ContentPageInfo).map(
 					(contentBlockConfig: ContentBlockConfig) => {
+						console.log('rendering ', {
+							type: contentBlockConfig.type,
+							contentBlockConfig,
+						});
 						return (
 							<ContentBlockRenderer
 								key={
@@ -195,6 +202,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 										'preview'
 									)
 								}
+								commonUser={props.commonUser}
 							/>
 						);
 					}

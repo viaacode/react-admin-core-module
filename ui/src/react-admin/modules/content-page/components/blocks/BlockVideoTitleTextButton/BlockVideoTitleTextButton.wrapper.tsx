@@ -31,6 +31,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	buttonType?: ButtonType;
 	buttonAction?: ButtonAction;
 	align: AlignOption;
+	commonUser?: Avo.User.CommonUser;
 }
 
 export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrapperProps> = (
@@ -55,13 +56,12 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 		buttonAction,
 		align,
 		mediaAutoplay,
+		commonUser,
 	} = props;
 
 	const shouldTitleLink =
-		PermissionService.hasPerm(
-			AdminConfigManager.getConfig().user,
-			PermissionName.VIEW_ANY_PUBLISHED_ITEMS
-		) && !!mediaItem;
+		PermissionService.hasPerm(commonUser, PermissionName.VIEW_ANY_PUBLISHED_ITEMS) &&
+		!!mediaItem;
 
 	return (
 		<Grid className="c-item-video-description">

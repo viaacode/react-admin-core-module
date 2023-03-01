@@ -47,7 +47,6 @@ import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { DatabaseType, PermissionName } from '@viaa/avo2-types';
-import { CommonUser } from '../../users';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -404,7 +403,7 @@ export class ContentPagesService {
 
 	public async getContentPageByPathForUser(
 		path: string,
-		user?: CommonUser,
+		user?: Avo.User.CommonUser,
 		referrer?: string,
 	): Promise<DbContentPage | null> {
 		const contentPage: DbContentPage | undefined =

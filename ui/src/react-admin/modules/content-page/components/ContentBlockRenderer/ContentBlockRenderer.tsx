@@ -1,6 +1,7 @@
 import { Container, Spacer } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get, noop, omit } from 'lodash-es';
+import { noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
@@ -14,6 +15,7 @@ import {
 	NAVIGABLE_CONTENT_BLOCKS,
 	OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
+	USER_CONTENT_BLOCKS,
 } from './ContentBlockRenderer.const';
 
 import './ContentBlockRenderer.scss';
@@ -25,6 +27,7 @@ interface ContentBlockPreviewProps {
 	contentPageInfo: Partial<ContentPageInfo>;
 	onClick: () => void;
 	className?: string;
+	commonUser?: Avo.User.CommonUser;
 }
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
@@ -34,9 +37,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	contentPageInfo,
 	onClick = noop,
 	className,
+	commonUser,
 }) => {
-	const blockState = get(contentBlockConfig, 'block.state');
-	const componentState = get(contentBlockConfig, 'components.state');
+	const blockState = contentBlockConfig?.block?.state;
+	const componentState = contentBlockConfig?.components?.state;
 	const containerSize =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
@@ -88,6 +92,11 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		blockStateProps.renderLink = generateSmartLink;
 	}
 
+	if (USER_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
+		// Give the block access to the current logged-in user in theAvo.User.CommonUser format
+		blockStateProps.commonUser = commonUser;
+	}
+
 	if (OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
 		// Pass a function to the block, so it can render a wrapper to open media items in a modal
 		// Without the admin core needing to know about users, bookmarks, ...
@@ -99,7 +108,14 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		// Set profile to current user for unsaved pages
 		blockStateProps.contentPageInfo = {
 			...contentPageInfo,
-			profile: contentPageInfo.owner || AdminConfigManager.getConfig().user,
+			profile: contentPageInfo.owner || {
+				id: commonUser?.profileId,
+				fullName: commonUser?.fullName,
+				firstName: commonUser?.firstName,
+				lastName: commonUser?.lastName,
+				groupId: commonUser?.userGroup?.id,
+				groupName: commonUser?.userGroup?.label,
+			},
 		};
 	}
 
@@ -122,13 +138,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					'c-content-block-preview--dark': hasDarkBg,
 					'u-color-white': hasDarkBg,
 				})}
-				margin={[
-					get(blockState, 'margin.top', 'none'),
-					get(blockState, 'margin.bottom', 'none'),
-				]}
+				margin={[blockState?.margin?.top || 'none', blockState?.margin?.bottom || 'none']}
 				padding={[
-					get(blockState, 'padding.top', 'none'),
-					get(blockState, 'padding.bottom', 'none'),
+					blockState?.padding?.top || 'none',
+					blockState?.padding?.bottom || 'none',
 				]}
 			>
 				<div
