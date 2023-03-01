@@ -1,7 +1,11 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash';
-import { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
+import {
+	ContentPageLabel,
+	ContentPageType,
+	LabelObj,
+} from '../../content-pages';
 import { DataService } from '../../data';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
@@ -167,7 +171,7 @@ export class ContentPageLabelsService {
 					contentPageLabel: {
 						label: contentPageLabel.label,
 						content_type: contentPageLabel.content_type,
-					} as Partial<ContentPageLabel>,
+					} as any,
 				},
 			);
 			const contentPageLabelResponse =
@@ -212,7 +216,7 @@ export class ContentPageLabelsService {
 						label: contentPageLabelInfo.label,
 						content_type: contentPageLabelInfo.content_type,
 						link_to: contentPageLabelInfo.link_to,
-					} as Partial<ContentPageLabel>,
+					} as any,
 					contentPageLabelId: contentPageLabelInfo.id,
 				},
 			);

@@ -49,7 +49,7 @@ export interface PickerItem {
 export type ContentWidth = 'REGULAR' | 'LARGE' | 'MEDIUM';
 
 export interface ContentPageLabel {
-	id: number;
+	id: number | string;
 	label: string;
 	content_type: ContentPageType;
 	link_to: PickerItem | null;

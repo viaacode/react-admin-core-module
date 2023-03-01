@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TestingLogger } from '../../shared/logging/test-logger';
+import { mockContentPageLabelsResponse } from '../mocks/content-page-labels.mocks';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
@@ -37,7 +38,34 @@ describe('ContentPageLabelsController', () => {
 		);
 	});
 
+	afterEach(() => {
+		mockContentPageLabelsService.fetchContentPageLabels.mockRestore();
+	})
+
 	it('should be defined', () => {
 		expect(contentPageLabelsController).toBeDefined();
-	})
+	});
+
+	describe('fetchContentPageLabels', () => {
+		it('should return content page labels', async () => { //uileg nog beter maken
+			mockContentPageLabelsService.fetchContentPageLabels.mockResolvedValueOnce(mockContentPageLabelsResponse);
+
+			const contentPageLabels = await contentPageLabelsController.fetchContentPageLabels(
+				'0', '20', 'label', 'asc', '{}'
+			);
+
+			expect(contentPageLabels).toEqual(mockContentPageLabelsResponse);
+		});
+		it('should return an error', async () => { //uileg nog beter maken
+			mockContentPageLabelsService.fetchContentPageLabels.mockRejectedValueOnce(mockContentPageLabelsResponse);
+
+			try {
+				await contentPageLabelsController.fetchContentPageLabels(
+					'0', '20', 'label', 'asc', 'invalidJSON'
+				);
+			} catch(error) {
+				expect(error.message).toEqual("Failed to get content page labels from the database");
+			}
+		});
+	});
 });
