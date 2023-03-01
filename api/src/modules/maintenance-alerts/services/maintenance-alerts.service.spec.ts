@@ -1,7 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { FindMaintenanceAlertByIdQuery, FindMaintenanceAlertsQuery } from "src/modules/shared/generated/graphql-db-types-hetarchief";
+import { FindMaintenanceAlertByIdQuery, FindMaintenanceAlertsQuery, InsertMaintenanceAlertMutation } from "src/modules/shared/generated/graphql-db-types-hetarchief";
 import { DataService } from "../../data";
 import { TestingLogger } from "../../shared/logging/test-logger";
+import { MaintenanceAlertType } from "../maintenance-alerts.types";
 import { mockGqlMaintenanceAlert1, mockGqlMaintenanceAlert2, mockMaintenanceAlert1, mockUser } from "../mocks/maintenance-alerts.mocks";
 import { MaintenanceAlertsService } from "./maintenance-alerts.service";
 
@@ -188,7 +189,7 @@ describe('MaintenanceAlertsService', () => {
 		});
 
 		it('throws a notfoundexception if the material request was not found', async () => {
-			const mockdata: FindMaintenanceAlertsQuery = {
+			const mockData: FindMaintenanceAlertsQuery = {
 				app_maintenance_alerts: [],
 				app_maintenance_alerts_aggregate: {
 					aggregate: {
@@ -196,6 +197,7 @@ describe('MaintenanceAlertsService', () => {
 					},
 				},
 			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 
 			try {
 				await maintenanceAlertsService.findById('unknown-id');
@@ -206,6 +208,25 @@ describe('MaintenanceAlertsService', () => {
 					statusCode: 404,
 				});
 			}
+		});
+	});
+
+	describe('create', () => {
+		it('can create a new maintenance alert', async () => {
+			const mockData: InsertMaintenanceAlertMutation = {
+				insert_app_maintenance_alerts_one: mockGqlMaintenanceAlert1,
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response = await maintenanceAlertsService.createMaintenanceAlert({
+				title: mockGqlMaintenanceAlert1.title,
+				message: mockGqlMaintenanceAlert1.message,
+				type: MaintenanceAlertType.QUESTION , //vragen aan brecht mockGqlMaintenanceAlert1.type
+				userGroups: mockGqlMaintenanceAlert1.user_groups,
+				fromDate: mockGqlMaintenanceAlert1.from_date,
+				untilDate: mockGqlMaintenanceAlert1.until_date,
+			})
+			expect(response.id).toBe(mockGqlMaintenanceAlert1.id);
 		});
 	});
 });
