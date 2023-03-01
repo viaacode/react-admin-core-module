@@ -1,17 +1,17 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash';
-import { ContentPageLabel, ContentPageType, LabelObj } from '../content-pages';
-import { DataService } from '../data';
-import { CustomError } from '../shared/helpers/custom-error';
-import { getDatabaseType } from '../shared/helpers/get-database-type';
-import { isAvo } from '../shared/helpers/is-avo';
-import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
-import { ContentPageLabelDto } from './dto/content-page-label.dto';
+import { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
+import { DataService } from '../../data';
+import { CustomError } from '../../shared/helpers/custom-error';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { isAvo } from '../../shared/helpers/is-avo';
+import { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import { ContentPageLabelDto } from '../dto/content-page-label.dto';
 import {
 	CONTENT_PAGE_LABEL_QUERIES,
 	ContentPageLabelQueryTypes,
-} from './queries/content-page-label.queries';
+} from '../queries/content-page-label.queries';
 
 export class ContentPageLabelsService {
 	constructor(
