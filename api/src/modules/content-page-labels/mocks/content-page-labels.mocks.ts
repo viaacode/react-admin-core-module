@@ -6,10 +6,11 @@
 // 	where: '{}',
 // }
 
-import { Lookup_App_Content_Type_Enum } from '../../../../dist/src/modules/shared/generated/graphql-db-types-hetarchief';
+
+import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { ContentPageLabel } from '../../content-pages/content-pages.types';
 
-const mockContentPageLabel1: ContentPageLabel = {
+export const mockContentPageLabel1: ContentPageLabel = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
