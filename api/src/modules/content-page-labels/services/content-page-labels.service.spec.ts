@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { GetContentPageLabelByIdQuery, GetContentPageLabelsQuery, InsertContentPageLabelMutation } from "../../shared/generated/graphql-db-types-hetarchief";
+import { GetContentPageLabelByIdQuery, GetContentPageLabelsQuery, InsertContentPageLabelMutation, UpdateContentPageLabelMutation } from "../../shared/generated/graphql-db-types-hetarchief";
 import { DataService } from "../../data";
 import { TestingLogger } from "../../shared/logging/test-logger";
 import { mockContentPageLabel1, mockContentPageLabelDto, mockContentPageLabelsResponse, mockGqlContentPageLabel1, mockGqlContentPageLabel2 } from "../mocks/content-page-labels.mocks";
@@ -161,6 +161,39 @@ describe('ContentPageLabelsService', () => {
 
 			try{
 				await contentPageLabelsService.insertContentPageLabel(
+					new ContentPageLabelDto()
+				)
+			} catch (error) {
+				expect(error).toBeDefined();
+			}
+		});
+	});
+	describe('updateContentPageLabel', () => {
+		it('should update a content page label', async () => {
+			const mockData: UpdateContentPageLabelMutation = {
+					update_app_content_label: {
+						returning: [mockGqlContentPageLabel1]
+					}
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+			const response = await contentPageLabelsService.updateContentPageLabel(
+				mockContentPageLabelDto
+			)
+			expect(response.id).toBe(mockContentPageLabelDto.id);
+			expect(response.label).toBe(mockContentPageLabelDto.label);
+			expect(response.content_type).toBe(mockContentPageLabelDto.content_type);
+		});
+
+		it('should throw an error when it fails to update a content page label', async () => {
+			const mockData: UpdateContentPageLabelMutation = {
+					update_app_content_label: {
+						returning: null,
+					}
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			try{
+				await contentPageLabelsService.updateContentPageLabel(
 					new ContentPageLabelDto()
 				)
 			} catch (error) {
