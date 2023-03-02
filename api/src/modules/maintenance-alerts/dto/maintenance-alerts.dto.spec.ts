@@ -1,3 +1,5 @@
+import { SortDirection } from 'src/modules/shared/types/sorting';
+import { MaintenanceAlertOrderProp } from '../maintenance-alerts.types';
 import {
 	CreateMaintenanceAlertDto,
 	MaintenanceAlertsQueryDto,
@@ -11,8 +13,8 @@ describe('MaintenanceAlertsDto', () => {
 			expect(maintenanceAlertsQueryDto).toEqual({
 				page: 1,
 				size: 10,
-				orderProp: 'fromDate',
-				orderDirection: 'desc',
+				orderProp: MaintenanceAlertOrderProp.FROM_DATE,
+				orderDirection: SortDirection.desc,
 			});
 		});
 	});
