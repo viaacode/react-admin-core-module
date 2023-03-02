@@ -98,13 +98,34 @@ describe('ContentPageLabelsController', () => {
 		});
 
 		// it('should return an error when it fails to insert into the database', async () => {
-		// 	mockContentPageLabelsService.insertContentPageLabel.mockRejectedValueOnce({});
+		// 	mockContentPageLabelsService.insertContentPageLabel.mockRejectedValueOnce(mockContentPageLabelDto);
 
 		// 	try {
 		// 		await contentPageLabelsController.insertContentPageLabel(mockContentPageLabelDto);
 		// 	} catch(error) {
 		// 		console.log(error);
 		// 		expect(error.message).toEqual('Failed to insert content page label in the database');
+		// 	}
+		// });
+	});
+
+	describe('updateContentPageLabel', () => {
+		it('should update a ContentPageLabel', async () => {
+			mockContentPageLabelsService.updateContentPageLabel.mockResolvedValueOnce(mockContentPageLabel1);
+
+			const contentPageLabel = await contentPageLabelsController.updateContentPageLabel(mockContentPageLabel1);
+
+			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
+		});
+
+		// it('should return an error when it fails to update in the database', async () => {
+		// 	mockContentPageLabelsService.updateContentPageLabel.mockRejectedValueOnce(mockContentPageLabelDto);
+
+		// 	try {
+		// 		await contentPageLabelsController.updateContentPageLabel(mockContentPageLabelDto);
+		// 	} catch(error) {
+		// 		console.log(error);
+		// 		expect(error.message).toEqual('Failed to update content page label in the database');
 		// 	}
 		// });
 	});
