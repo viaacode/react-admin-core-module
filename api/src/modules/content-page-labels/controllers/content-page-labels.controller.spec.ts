@@ -69,7 +69,7 @@ describe('ContentPageLabelsController', () => {
 		});
 	});
 	describe('fetchContentPageLabelById', () => {
-		it('should return a ContentPageLabel given an known id', async () => {
+		it('should return a ContentPageLabel when given an known id', async () => {
 			mockContentPageLabelsService.fetchContentPageLabelById.mockResolvedValueOnce(mockContentPageLabelsResponse);
 
 			const contentPageLabel = await contentPageLabelsController.fetchContentPageLabelById(mockContentPageLabel1.id.toString());
@@ -128,5 +128,27 @@ describe('ContentPageLabelsController', () => {
 		// 		expect(error.message).toEqual('Failed to update content page label in the database');
 		// 	}
 		// });
+	});
+
+	describe('deleteContentPageLabelById', () => {
+		it('should delete a ContentPageLabel when given a known id', async () => {
+			mockContentPageLabelsService.deleteContentPageLabel.mockResolvedValueOnce(true);
+
+			const response = await contentPageLabelsController.deleteContentPageLabelById(mockContentPageLabel1.id.toString());
+
+			expect(response).toEqual({
+				message: 'success'
+			});
+		});
+
+		it('should return an error when it fails to delete a ContentPageLabel in the database', async () => {
+			mockContentPageLabelsService.deleteContentPageLabel.mockRejectedValueOnce(false);
+
+			try {
+				await contentPageLabelsController.deleteContentPageLabelById('unknown-id');
+			} catch(error) {
+				expect(error.message).toEqual('Failed to delete the content page label from the database');
+			}
+		});
 	});
 });
