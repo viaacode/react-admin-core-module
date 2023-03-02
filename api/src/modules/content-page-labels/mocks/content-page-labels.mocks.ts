@@ -1,14 +1,5 @@
-// export const fetchContentPageLabelsQuery = {
-// 	offset: '0',
-// 	limit: '20',
-// 	sortColumn: 'label',
-// 	sortOrder: 'asc',
-// 	where: '{}',
-// }
-
-
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
-import { ContentPageLabel } from '../../content-pages/content-pages.types';
+import { ContentPageLabel, LabelObj } from '../../content-pages/content-pages.types';
 import { ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 export const mockContentPageLabel1: ContentPageLabel = {
@@ -37,5 +28,12 @@ export const mockContentPageLabelDto: ContentPageLabelDto = {
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 };
+
+const mockLabelObj: LabelObj = {
+	label: "Gebruik van het materiaal",
+  id: "13d00f95-5597-4470-b5ce-d3ee96212ff4"
+}
+
+export const mockContentPageLabelsFilteredResponse = [mockLabelObj]
 
 export const mockContentPageLabelsResponse = [[mockContentPageLabel1], 1];

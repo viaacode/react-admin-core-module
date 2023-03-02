@@ -157,7 +157,7 @@ export type MediaItemResponse = Partial<Media> & {
 
 export type LabelObj = {
 	label: string;
-	id: number;
+	id: number | string;
 };
 
 export interface SearchDateRange {

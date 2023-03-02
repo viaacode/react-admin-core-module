@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
-import { mockContentPageLabel1, mockContentPageLabelDto, mockContentPageLabelsResponse } from '../mocks/content-page-labels.mocks';
+import { mockContentPageLabel1, mockContentPageLabelDto, mockContentPageLabelsFilteredResponse, mockContentPageLabelsResponse } from '../mocks/content-page-labels.mocks';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
@@ -149,6 +150,39 @@ describe('ContentPageLabelsController', () => {
 			} catch(error) {
 				expect(error.message).toEqual('Failed to delete the content page label from the database');
 			}
+		});
+	});
+
+	describe('getContentPageLabelsByType', () => {
+		it('should return an array of LabelObjects when labelIds are given', async () => {
+			mockContentPageLabelsService.getContentPageLabelsByTypeAndIds.mockResolvedValue(mockContentPageLabelsFilteredResponse);
+
+			const contentPageLabels = await contentPageLabelsController.getContentPageLabelsByType(
+				{
+					contentType: Lookup_App_Content_Type_Enum.FaqItem,
+					labelIds: [
+						"13d00f95-5597-4470-b5ce-d3ee96212ff4"
+					],
+					labels: [
+						"Gebruik van het materiaal"
+					]
+				}
+			);
+			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse);
+		});
+
+		it('should return an array of LabelObjects when labelIds are not given', async () => {
+			mockContentPageLabelsService.getContentPageLabelsByTypeAndLabels.mockResolvedValue(mockContentPageLabelsFilteredResponse);
+
+			const contentPageLabels = await contentPageLabelsController.getContentPageLabelsByType(
+				{
+					contentType: Lookup_App_Content_Type_Enum.FaqItem,
+					labels: [
+						"Gebruik van het materiaal"
+					]
+				}
+			);
+			expect(contentPageLabels).toEqual(mockContentPageLabelsFilteredResponse);
 		});
 	});
 });
