@@ -54,7 +54,6 @@ describe('ContentPageLabelsController', () => {
 
 	describe('fetchContentPageLabels', () => {
 		it('should return content page labels', async () => {
-			//uileg nog beter maken
 			mockContentPageLabelsService.fetchContentPageLabels.mockResolvedValueOnce(
 				mockContentPageLabelsResponse,
 			);
