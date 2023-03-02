@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TestingLogger } from '../../shared/logging/test-logger';
-import { mockContentPageLabel1, mockContentPageLabelsResponse } from '../mocks/content-page-labels.mocks';
+import { mockContentPageLabel1, mockContentPageLabelDto, mockContentPageLabelsResponse } from '../mocks/content-page-labels.mocks';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
@@ -64,7 +64,7 @@ describe('ContentPageLabelsController', () => {
 					'0', '20', 'label', 'asc', 'invalidJSON'
 				);
 			} catch(error) {
-				expect(error.message).toEqual("Failed to get content page labels from the database");
+				expect(error.message).toEqual('Failed to get content page labels from the database');
 			}
 		});
 	});
@@ -83,9 +83,29 @@ describe('ContentPageLabelsController', () => {
 			try {
 				await contentPageLabelsController.fetchContentPageLabelById('unknown-id');
 			} catch(error) {
-				expect(error.message).toEqual("Failed to get content page label from the database");
+				expect(error.message).toEqual('Failed to get content page label from the database');
 			}
 		});
-		
+	});
+
+	describe('insertContentPageLabel', () => {
+		it('should create a ContentPageLabel', async () => {
+			mockContentPageLabelsService.insertContentPageLabel.mockResolvedValueOnce(mockContentPageLabelDto);
+
+			const contentPageLabel = await contentPageLabelsController.insertContentPageLabel(mockContentPageLabelDto);
+
+			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
+		});
+
+		// it('should return an error when it fails to insert into the database', async () => {
+		// 	mockContentPageLabelsService.insertContentPageLabel.mockRejectedValueOnce({});
+
+		// 	try {
+		// 		await contentPageLabelsController.insertContentPageLabel(mockContentPageLabelDto);
+		// 	} catch(error) {
+		// 		console.log(error);
+		// 		expect(error.message).toEqual('Failed to insert content page label in the database');
+		// 	}
+		// });
 	});
 });
