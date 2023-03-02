@@ -1,7 +1,7 @@
 import { Button, ButtonToolbar, Container, IconName, Navbar, Tabs } from '@viaa/avo2-components';
 import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
-import { PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -56,16 +56,16 @@ const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
+	commonUser: Avo.User.CommonUser;
 };
 
-const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
-	const user = AdminConfigManager.getConfig().user;
+const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
 	>(contentEditReducer, {
-		currentContentPageInfo: CONTENT_PAGE_INITIAL_STATE(user),
-		initialContentPageInfo: CONTENT_PAGE_INITIAL_STATE(user),
+		currentContentPageInfo: CONTENT_PAGE_INITIAL_STATE(commonUser),
+		initialContentPageInfo: CONTENT_PAGE_INITIAL_STATE(commonUser),
 	});
 
 	const [formErrors, setFormErrors] = useState<ContentEditFormErrors>({});
@@ -82,8 +82,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
 
 	const hasPerm = useCallback(
-		(permission: PermissionName) => PermissionService.hasPerm(user, permission),
-		[user]
+		(permission: PermissionName) => PermissionService.hasPerm(commonUser, permission),
+		[commonUser]
 	);
 
 	const fetchContentPage = useCallback(async () => {
@@ -120,7 +120,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 			}
 			if (
 				!hasPerm(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
-				contentPageObj.userProfileId !== getProfileId(user)
+				contentPageObj.userProfileId !== getProfileId(commonUser)
 			) {
 				setLoadingInfo({
 					state: 'error',
@@ -152,7 +152,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, user, hasPerm, tHtml, tText]);
+	}, [id, commonUser, hasPerm, tHtml, tText]);
 
 	const onPasteContentBlock = useCallback(
 		(evt: ClipboardEvent) => {
@@ -328,7 +328,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 			if (pageType === PageType.Create) {
 				const contentBody = {
 					...contentPageState.currentContentPageInfo,
-					userProfileId: getProfileId(user),
+					userProfileId: getProfileId(commonUser),
 					content_blocks: blockConfigs,
 					path: ContentPageService.getPathOrDefault(
 						contentPageState.currentContentPageInfo
@@ -553,6 +553,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 						changeContentPageState={changeContentPageState}
 						onRemove={openDeleteModal}
 						onSave={handleStateSave}
+						commonUser={commonUser}
 					/>
 				);
 			case 'metadata':
@@ -562,7 +563,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 						formErrors={formErrors}
 						contentPageInfo={contentPageState.currentContentPageInfo}
 						changeContentPageState={changeContentPageState}
-						user={user}
+						commonUser={commonUser}
 					/>
 				);
 			default:
@@ -573,7 +574,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 	const renderEditContentPage = () => {
 		const contentPageOwnerId = contentPageState.initialContentPageInfo.userProfileId;
 		const isOwner =
-			user?.profileId && contentPageOwnerId && user?.profileId === contentPageOwnerId;
+			commonUser?.profileId &&
+			contentPageOwnerId &&
+			commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToSave =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 		const Link = AdminConfigManager.getConfig().services.router.Link;

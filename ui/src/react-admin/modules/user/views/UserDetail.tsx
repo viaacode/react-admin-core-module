@@ -31,7 +31,7 @@ import { UserService } from '../user.service';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { PermissionService } from '~shared/services/permission-service';
-import { CommonUser, Idp } from '../user.types';
+import { Idp } from '../user.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { buildLink, navigate } from '~shared/helpers/link';
@@ -49,10 +49,11 @@ export interface UserDetailProps {
 		tempAccess: Avo.User.TempAccess,
 		profileId: string
 	) => Promise<void>;
-	onLoaded?: (user: CommonUser) => void;
+	onLoaded?: (user: Avo.User.CommonUser) => void;
+	commonUser: Avo.User.CommonUser;
 }
 
-export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded }) => {
+export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded, commonUser }) => {
 	// Hooks
 	const {
 		data: storedProfile,
@@ -73,7 +74,6 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 
 	const { tText, tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
-	const user = AdminConfigManager.getConfig().user;
 
 	useEffect(() => {
 		if (!!storedProfile && isFetched) {
@@ -82,8 +82,8 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 	}, [isFetched, onLoaded, storedProfile]);
 
 	const hasPerm = useCallback(
-		(permission: PermissionName) => PermissionService.hasPerm(user, permission),
-		[user]
+		(permission: PermissionName) => PermissionService.hasPerm(commonUser, permission),
+		[commonUser]
 	);
 
 	const getLdapDashboardUrl = () => {
@@ -271,7 +271,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								renderAvatar(storedProfile, { small: false }),
 								tText('admin/users/views/user-detail___avatar')
 							)}
-							{renderSimpleDetailRows<CommonUser>(storedProfile, [
+							{renderSimpleDetailRows<Avo.User.CommonUser>(storedProfile, [
 								['firstName', tText('admin/users/views/user-detail___voornaam')],
 								['lastName', tText('admin/users/views/user-detail___achternaam')],
 								['alias', tText('admin/users/views/user-detail___gebruikersnaam')],
@@ -294,7 +294,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								userGroup ? userGroup.label : '-',
 								tText('admin/users/views/user-detail___gebruikersgroep')
 							)}
-							{renderDateDetailRows<CommonUser>(storedProfile, [
+							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
 								[
 									'createdAt',
 									tText('admin/users/views/user-detail___aangemaakt-op'),
@@ -308,7 +308,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 									tText('admin/users/views/user-detail___laatste-toegang'),
 								],
 							])}
-							{renderSimpleDetailRows<CommonUser>(storedProfile, [
+							{renderSimpleDetailRows<Avo.User.CommonUser>(storedProfile, [
 								[
 									'businessCategory',
 									tText('admin/users/views/user-detail___oormerk'),
@@ -319,7 +319,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 								],
 								['isBlocked', tText('admin/users/views/user-detail___geblokkeerd')],
 							])}
-							{renderDateDetailRows<CommonUser>(storedProfile, [
+							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
 								[
 									'blockedAt',
 									tText('admin/users/views/user-detail___laatst-geblokeerd-op'),
@@ -375,7 +375,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded 
 										closable={false}
 										swatches={false}
 										tags={storedProfile.educationalOrganisations.map(
-											(item) => ({
+											(item: Avo.EducationOrganization.Organization) => ({
 												label: item.label,
 												id: item.organizationId,
 											})

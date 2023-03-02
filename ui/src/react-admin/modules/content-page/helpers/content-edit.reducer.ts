@@ -3,7 +3,7 @@ import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import moment from 'moment';
 import { Reducer } from 'react';
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
 import {
 	ContentBlockComponentsConfig,
@@ -108,7 +108,7 @@ export interface ContentPageEditState {
 }
 
 export const CONTENT_PAGE_INITIAL_STATE = (
-	user: CommonUser
+	user: Avo.User.CommonUser
 ): Omit<ContentPageInfo, 'id'> & { id?: string | number } => {
 	return {
 		thumbnailPath: null,

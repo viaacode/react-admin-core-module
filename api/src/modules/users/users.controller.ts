@@ -15,11 +15,7 @@ import type { Avo } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 import { UsersService } from './users.service';
-import {
-	CommonUser,
-	DeleteContentCounts,
-	UserOverviewTableCol,
-} from './users.types';
+import { DeleteContentCounts, UserOverviewTableCol } from './users.types';
 
 @ApiTags('Users')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/users')
@@ -43,7 +39,7 @@ export class UsersController {
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
 		@Query('where') where = '{}',
-	): Promise<[CommonUser[], number]> {
+	): Promise<[Avo.User.CommonUser[], number]> {
 		return this.usersService.getProfiles(
 			parseInt(offset || '0'),
 			parseInt(limit || '50'),
@@ -65,7 +61,7 @@ export class UsersController {
 	)
 	async getNamesByProfileIds(
 		@Query('profileIds') profileIds: string[],
-	): Promise<Partial<CommonUser>[]> {
+	): Promise<Partial<Avo.User.CommonUser>[]> {
 		return this.usersService.getNamesByProfileIds(profileIds);
 	}
 
@@ -124,7 +120,7 @@ export class UsersController {
 		PermissionName.EDIT_ANY_COLLECTIONS,
 		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
 	)
-	async getUser(@Param('id') id: string): Promise<CommonUser> {
+	async getUser(@Param('id') id: string): Promise<Avo.User.CommonUser> {
 		return this.usersService.getById(id);
 	}
 }

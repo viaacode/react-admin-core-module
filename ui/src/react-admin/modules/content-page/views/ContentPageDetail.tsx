@@ -11,7 +11,7 @@ import {
 	Navbar,
 	Tabs,
 } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
@@ -54,9 +54,15 @@ const {
 export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
 	loaded?: (item: ContentPageInfo) => void;
+	commonUser: Avo.User.CommonUser;
 };
 
-const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, className }) => {
+const ContentPageDetail: FC<ContentPageDetailProps> = ({
+	id,
+	loaded = noop,
+	className,
+	commonUser,
+}) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -74,7 +80,6 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 		GET_CONTENT_PAGE_DETAIL_TABS()[0].id
 	);
 
-	const user = AdminConfigManager.getConfig().user;
 	const isContentProtected = get(contentPageInfo, 'is_protected', false);
 	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(
 		contentPageInfo,
@@ -82,13 +87,14 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 		''
 	)}`;
 
-	const hasPerm = (permission: PermissionName) => PermissionService.hasPerm(user, permission);
+	const hasPerm = (permission: PermissionName) =>
+		PermissionService.hasPerm(commonUser, permission);
 
 	const fetchContentPageById = useCallback(async () => {
 		try {
 			if (
-				!PermissionService.hasPerm(user, PermissionName.EDIT_ANY_CONTENT_PAGES) &&
-				!PermissionService.hasPerm(user, PermissionName.EDIT_OWN_CONTENT_PAGES)
+				!PermissionService.hasPerm(commonUser, PermissionName.EDIT_ANY_CONTENT_PAGES) &&
+				!PermissionService.hasPerm(commonUser, PermissionName.EDIT_OWN_CONTENT_PAGES)
 			) {
 				setLoadingInfo({
 					state: 'error',
@@ -133,7 +139,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 				icon: notFound ? ('search' as IconName) : ('alertTriangle' as IconName),
 			});
 		}
-	}, [id, setContentPageInfo, setLoadingInfo, user, tHtml]);
+	}, [id, setContentPageInfo, setLoadingInfo, commonUser, tHtml]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -275,7 +281,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 						contentPageInfo,
 						CONTENT_PAGE_COPY,
 						CONTENT_PAGE_COPY_REGEX,
-						user.profileId
+						commonUser?.profileId
 					);
 
 					if (!duplicateContentPage) {
@@ -327,7 +333,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 
 	const renderContentActions = () => {
 		const contentPageOwnerId = contentPageInfo?.owner?.id;
-		const isOwner = user?.profileId === contentPageOwnerId;
+		const isOwner = commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 		const Link = AdminConfigManager.getConfig().services.router.Link;
@@ -407,7 +413,12 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({ id, loaded = noop, clas
 
 		switch (currentTab) {
 			case 'inhoud':
-				return <ContentPageRenderer contentPageInfo={contentPageInfo} />;
+				return (
+					<ContentPageRenderer
+						contentPageInfo={contentPageInfo}
+						commonUser={commonUser}
+					/>
+				);
 			case 'metadata':
 				return <ContentPageDetailMetaData contentPageInfo={contentPageInfo} />;
 			default:

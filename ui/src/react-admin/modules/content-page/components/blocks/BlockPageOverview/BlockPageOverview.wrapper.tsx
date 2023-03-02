@@ -42,6 +42,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	sortOrder = 'published_at__desc',
 	headerBackgroundColor,
 	renderLink,
+	commonUser,
 }) => {
 	const { tHtml, tText } = useTranslation();
 
@@ -267,6 +268,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 					)}`;
 				}}
 				renderLink={renderLink}
+				commonUser={commonUser}
 			/>
 		);
 	};

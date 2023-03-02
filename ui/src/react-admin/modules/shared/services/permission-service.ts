@@ -6,19 +6,22 @@ import { CollectionService } from '../../collection/collection.service';
 import { ContentPageService } from '../../content-page/services/content-page.service';
 import { getProfileId } from '../helpers/get-profile-id';
 
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
 type PermissionInfo = { name: PermissionName; obj?: any | null };
 
 export type Permissions = PermissionName | PermissionInfo | (PermissionName | PermissionInfo)[];
 
 export class PermissionService {
-	public static hasPerm(user: CommonUser | undefined, permName: PermissionName): boolean {
+	public static hasPerm(
+		user: Avo.User.CommonUser | undefined,
+		permName: PermissionName
+	): boolean {
 		return PermissionService.getUserPermissions(user).includes(permName);
 	}
 
 	public static hasAtLeastOnePerm(
-		user: CommonUser | undefined,
+		user: Avo.User.CommonUser | undefined,
 		permNames: PermissionName[]
 	): boolean {
 		return some(permNames, (permName) =>
@@ -26,13 +29,13 @@ export class PermissionService {
 		);
 	}
 
-	public static getUserPermissions(user: CommonUser | undefined): PermissionName[] {
+	public static getUserPermissions(user: Avo.User.CommonUser | undefined): PermissionName[] {
 		return get(user, 'permissions') || get(user, 'profile.permissions') || [];
 	}
 
 	public static async hasPermissions(
 		permissions: Permissions,
-		user: CommonUser | null
+		user: Avo.User.CommonUser | null
 	): Promise<boolean> {
 		// Reformat all permissions to format: PermissionInfo[]
 		let permissionList: PermissionInfo[];
@@ -77,7 +80,7 @@ export class PermissionService {
 	public static async hasPermission(
 		permission: PermissionName,
 		obj: any | null | undefined,
-		user: CommonUser
+		user: Avo.User.CommonUser
 	): Promise<boolean> {
 		const userPermissions = PermissionService.getUserPermissions(user);
 		if (!user || !userPermissions) {
