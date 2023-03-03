@@ -15,7 +15,7 @@ export enum Idp {
 export type ProfileHetArchief = GetUsersQueryHetArchief['users_profile'][0];
 export type ProfileAvo = GetUsersQueryAvo['users_summary_view'][0];
 
-export const USERS_PER_PAGE = 50;
+export const USERS_PER_PAGE = 20;
 
 export interface OrganizationContactInfo {
 	phone?: string;
