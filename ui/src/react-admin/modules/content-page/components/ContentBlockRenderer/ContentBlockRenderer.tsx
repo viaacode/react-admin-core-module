@@ -1,6 +1,6 @@
 import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { get, noop, omit } from 'lodash-es';
+import { kebabCase, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
@@ -107,7 +107,11 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 
 	return (
 		<div
-			className={clsx('c-content-block', className)}
+			className={clsx(
+				'c-content-block',
+				className,
+				'c-content-block__' + kebabCase(contentBlockConfig.type)
+			)}
 			style={{
 				backgroundColor: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
