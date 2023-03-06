@@ -70,7 +70,7 @@ describe('ContentPageLabelsController', () => {
 			expect(contentPageLabels).toEqual(mockContentPageLabelsResponse);
 		});
 
-		// TODO: add test to test case in which an error is thrown
+		// TODO: add test in which an error is thrown
 	});
 	describe('fetchContentPageLabelById', () => {
 		it('should return a ContentPageLabel when given an known id', async () => {
@@ -86,7 +86,7 @@ describe('ContentPageLabelsController', () => {
 			expect(contentPageLabel).toEqual(mockContentPageLabelsResponse);
 		});
 
-		// TODO: add test to test case in which an error is thrown
+		// TODO: add test in which an error is thrown
 	});
 
 	describe('insertContentPageLabel', () => {
@@ -103,7 +103,7 @@ describe('ContentPageLabelsController', () => {
 			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
 		});
 
-		// TODO: add test to test case in which an error is thrown
+		// TODO: add test in which an error is thrown
 	});
 
 	describe('updateContentPageLabel', () => {
@@ -120,7 +120,7 @@ describe('ContentPageLabelsController', () => {
 			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
 		});
 
-		// TODO: add test to test case in which an error is thrown
+		// TODO: add test in which an error is thrown
 	});
 
 	describe('deleteContentPageLabelById', () => {
@@ -139,7 +139,7 @@ describe('ContentPageLabelsController', () => {
 			});
 		});
 
-		// TODO: add test to test case in which an error is thrown
+		// TODO: add test in which an error is thrown
 	});
 
 	describe('getContentPageLabelsByType', () => {

@@ -56,7 +56,7 @@ export const mockContentPageLabelDto: ContentPageLabelDto = {
 	updated_at: '2022-05-17T08:47:49.271562',
 };
 
-const mockLabelObj: LabelObj = {
+export const mockLabelObj: LabelObj = {
 	label: "Gebruik van het materiaal",
   id: "13d00f95-5597-4470-b5ce-d3ee96212ff4"
 }

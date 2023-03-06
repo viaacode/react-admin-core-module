@@ -1,10 +1,24 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { GetContentPageLabelByIdQuery, GetContentPageLabelsQuery, InsertContentPageLabelMutation, UpdateContentPageLabelMutation } from "../../shared/generated/graphql-db-types-hetarchief";
-import { DataService } from "../../data";
-import { TestingLogger } from "../../shared/logging/test-logger";
-import { mockContentPageLabel1, mockContentPageLabelDto, mockContentPageLabelsResponse, mockGqlContentPageLabel1, mockGqlContentPageLabel2 } from "../mocks/content-page-labels.mocks";
-import { ContentPageLabelsService } from "./content-page-labels.service";
-import { ContentPageLabelDto } from "../dto/content-page-label.dto";
+import { Test, TestingModule } from '@nestjs/testing';
+import {
+	GetContentPageLabelByIdQuery,
+	GetContentPageLabelsByTypeAndIdsQuery,
+	GetContentPageLabelsByTypeAndLabelsQuery,
+	GetContentPageLabelsQuery,
+	InsertContentPageLabelMutation,
+	Lookup_App_Content_Type_Enum,
+	UpdateContentPageLabelMutation,
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { DataService } from '../../data';
+import { TestingLogger } from '../../shared/logging/test-logger';
+import {
+	mockContentPageLabel1,
+	mockContentPageLabelDto,
+	mockGqlContentPageLabel1,
+	mockGqlContentPageLabel2,
+	mockLabelObj,
+} from '../mocks/content-page-labels.mocks';
+import { ContentPageLabelsService } from './content-page-labels.service';
+import { ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
@@ -18,9 +32,9 @@ const getDefaultContentPageLabelsResponse = (): {
 	app_content_label_aggregate: {
 		aggregate: {
 			count: 100,
-		}
-	}
-})
+		},
+	},
+});
 
 const getEmptyContentPageLabelsResponse = (): {
 	app_content_label: GetContentPageLabelsQuery[];
@@ -29,10 +43,10 @@ const getEmptyContentPageLabelsResponse = (): {
 	app_content_label: null,
 	app_content_label_aggregate: {
 		aggregate: {
-			count: 100,
-		}
-	}
-})
+			count: 0,
+		},
+	},
+});
 
 const getDefaultContentPageLabelsByIdResponse = (): {
 	app_content_label: GetContentPageLabelByIdQuery[];
@@ -42,16 +56,16 @@ const getDefaultContentPageLabelsByIdResponse = (): {
 	app_content_label_aggregate: {
 		aggregate: {
 			count: 100,
-		}
-	}
-})
+		},
+	},
+});
 
 describe('ContentPageLabelsService', () => {
 	let contentPageLabelsService: ContentPageLabelsService;
 	const env = process.env;
 
 	beforeEach(async () => {
-		process.env.DATABASE_APPLICATION_TYPE = 'hetarchief'
+		process.env.DATABASE_APPLICATION_TYPE = 'hetarchief';
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				ContentPageLabelsService,
@@ -64,7 +78,9 @@ describe('ContentPageLabelsService', () => {
 			.setLogger(new TestingLogger())
 			.compile();
 
-			contentPageLabelsService = module.get<ContentPageLabelsService>(ContentPageLabelsService);
+		contentPageLabelsService = module.get<ContentPageLabelsService>(
+			ContentPageLabelsService,
+		);
 	});
 
 	afterEach(() => {
@@ -79,7 +95,9 @@ describe('ContentPageLabelsService', () => {
 
 	describe('fetchContentPageLabels', () => {
 		it('should return all content page labels', async () => {
-			mockDataService.execute.mockResolvedValueOnce(getDefaultContentPageLabelsResponse());
+			mockDataService.execute.mockResolvedValueOnce(
+				getDefaultContentPageLabelsResponse(),
+			);
 
 			const response = await contentPageLabelsService.fetchContentPageLabels(
 				0,
@@ -92,30 +110,41 @@ describe('ContentPageLabelsService', () => {
 			expect(response[0][0].id).toBe(mockGqlContentPageLabel1.id);
 			expect(response[0][0].link_to).toBe(mockGqlContentPageLabel1.link_to);
 			expect(response[0][0].label).toBe(mockGqlContentPageLabel1.label);
-			expect(response[0][0].content_type).toBe(mockGqlContentPageLabel1.content_type);
-		});
-		it('should return an error when the response does not contain any content page labels', async () => {
-			mockDataService.execute.mockResolvedValueOnce(getEmptyContentPageLabelsResponse());
-
-			const response = await contentPageLabelsService.fetchContentPageLabels(
-				0,
-				20,
-				'label',
-				'asc',
-				'{}',
+			expect(response[0][0].content_type).toBe(
+				mockGqlContentPageLabel1.content_type,
 			);
-			//console.log(response) // expects nog maken
-			expect(response)
 		});
+		it('should return an error when the response fails to get content page labels', async () => {
+			mockDataService.execute.mockRejectedValueOnce(
+				getEmptyContentPageLabelsResponse(),
+			);
 
-		// TODO: add test to test case in which an error is thrown
+			try {
+				const response = await contentPageLabelsService.fetchContentPageLabels(
+					0,
+					20,
+					'label',
+					'asc',
+					'{}',
+				);
+				expect(response).toBeUndefined();
+			} catch (error) {
+				expect(error).toBeDefined();
+				expect(error.response.message).toEqual(
+					'Failed to get content page labels from the database',
+				);
+			}
+		});
+		//TODO: add test where the database returns nothing
 	});
 	describe('fetchContentPageLabelById', () => {
 		it('should return a content page label', async () => {
-			mockDataService.execute.mockResolvedValueOnce(getDefaultContentPageLabelsByIdResponse());
+			mockDataService.execute.mockResolvedValueOnce(
+				getDefaultContentPageLabelsByIdResponse(),
+			);
 
 			const response = await contentPageLabelsService.fetchContentPageLabelById(
-				mockGqlContentPageLabel2.id
+				mockGqlContentPageLabel2.id,
 			);
 			expect(response.id).toBe(mockGqlContentPageLabel2.id);
 			expect(response.link_to).toBe(mockGqlContentPageLabel2.link_to);
@@ -123,14 +152,24 @@ describe('ContentPageLabelsService', () => {
 			expect(response.content_type).toBe(mockGqlContentPageLabel2.content_type);
 		});
 		it('should throw an error when no content page label is found', async () => {
-			mockDataService.execute.mockResolvedValueOnce(getEmptyContentPageLabelsResponse());
+			mockDataService.execute.mockResolvedValueOnce(
+				getEmptyContentPageLabelsResponse(),
+			);
 
-			try{
-				await contentPageLabelsService.fetchContentPageLabelById(
-					'unknown-id'
-				);
+			try {
+				const response =
+					await contentPageLabelsService.fetchContentPageLabelById(
+						'unknown-id',
+					);
+				expect(response).toBeUndefined();
 			} catch (error) {
 				expect(error).toBeDefined();
+				expect(error.response.message).toEqual(
+					'Failed to get content page labels from the database',
+				);
+				expect(error.response.innerException.response.message).toEqual(
+					'Response does not contain any content page labels',
+				);
 			}
 		});
 	});
@@ -138,14 +177,14 @@ describe('ContentPageLabelsService', () => {
 	describe('insertContentPageLabel', () => {
 		it('should insert a content page label', async () => {
 			const mockData: InsertContentPageLabelMutation = {
-					insert_app_content_label: {
-						returning: [mockGqlContentPageLabel1]
-					}
+				insert_app_content_label: {
+					returning: [mockGqlContentPageLabel1],
+				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await contentPageLabelsService.insertContentPageLabel(
-				mockContentPageLabelDto
-			)
+				mockContentPageLabelDto,
+			);
 			expect(response.id).toBe(mockContentPageLabelDto.id);
 			expect(response.label).toBe(mockContentPageLabelDto.label);
 			expect(response.content_type).toBe(mockContentPageLabelDto.content_type);
@@ -153,32 +192,40 @@ describe('ContentPageLabelsService', () => {
 
 		it('should throw an error when it fails to insert a content page label', async () => {
 			const mockData: InsertContentPageLabelMutation = {
-					insert_app_content_label: {
-						returning: null,
-					}
+				insert_app_content_label: {
+					returning: null,
+				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
-			try{
-				await contentPageLabelsService.insertContentPageLabel(
-					new ContentPageLabelDto()
-				)
+			try {
+				const response = await contentPageLabelsService.insertContentPageLabel(
+					new ContentPageLabelDto(),
+				);
+				expect(response).toBeUndefined();
 			} catch (error) {
 				expect(error).toBeDefined();
+				expect(error.response.message).toEqual(
+					'Failed to insert content page label in the database',
+				);
+				expect(error.response.innerException.response.message).toEqual(
+					'Response from database does not contain the id of the inserted content page label',
+				);
 			}
 		});
 	});
+
 	describe('updateContentPageLabel', () => {
 		it('should update a content page label', async () => {
 			const mockData: UpdateContentPageLabelMutation = {
-					update_app_content_label: {
-						returning: [mockGqlContentPageLabel1]
-					}
+				update_app_content_label: {
+					returning: [mockGqlContentPageLabel1],
+				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await contentPageLabelsService.updateContentPageLabel(
-				mockContentPageLabelDto
-			)
+				mockContentPageLabelDto,
+			);
 			expect(response.id).toBe(mockContentPageLabelDto.id);
 			expect(response.label).toBe(mockContentPageLabelDto.label);
 			expect(response.content_type).toBe(mockContentPageLabelDto.content_type);
@@ -186,20 +233,87 @@ describe('ContentPageLabelsService', () => {
 
 		it('should throw an error when it fails to update a content page label', async () => {
 			const mockData: UpdateContentPageLabelMutation = {
-					update_app_content_label: {
-						returning: null,
-					}
+				update_app_content_label: {
+					returning: null,
+				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
-			try{
-				await contentPageLabelsService.updateContentPageLabel(
-					new ContentPageLabelDto()
-				)
+			try {
+				const response = await contentPageLabelsService.updateContentPageLabel(
+					new ContentPageLabelDto(),
+				);
+				expect(response).toBeUndefined();
 			} catch (error) {
 				expect(error).toBeDefined();
+				expect(error.response.message).toEqual(
+					'Failed to update content page label in the database',
+				);
+				expect(error.response.innerException.response.message).toEqual(
+					'Response from database does not contain the id of the inserted content page label',
+				);
 			}
 		});
 	});
 
+	describe('deleteContentPageLabel', () => {
+		it('should delete a content page label', async () => {
+			mockDataService.execute.mockResolvedValueOnce(true);
+
+			try {
+				await contentPageLabelsService.deleteContentPageLabel(
+					mockContentPageLabel1.id.toString(),
+				);
+			} catch (error) {
+				expect(error).toBeUndefined();
+			}
+		});
+
+		it('should throw an error when failing to delete a content page label', async () => {
+			mockDataService.execute.mockRejectedValueOnce(false);
+
+			try {
+				await contentPageLabelsService.deleteContentPageLabel('unknown-id');
+			} catch (error) {
+				expect(error).toBeDefined();
+				expect(error.response.message).toEqual(
+					'Failed to delete content page label from the database',
+				);
+			}
+		});
+	});
+
+	describe('getContentPageLabelsByTypeAndLabels', () => {
+		it('should get a content page label', async () => {
+			const mockData: GetContentPageLabelsByTypeAndLabelsQuery = {
+				app_content_label: [mockLabelObj],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response =
+				await contentPageLabelsService.getContentPageLabelsByTypeAndLabels(
+					Lookup_App_Content_Type_Enum.FaqItem,
+					[mockContentPageLabel1.label],
+				);
+			expect(response[0].id).toEqual(mockLabelObj.id);
+			expect(response[0].label).toEqual(mockLabelObj.label);
+		});
+	});
+
+	describe('getContentPageLabelsByTypeAndIds', () => {
+		it('should get a content page label', async () => {
+			const mockData: GetContentPageLabelsByTypeAndIdsQuery = {
+				app_content_label: [mockLabelObj],
+			};
+			mockDataService.execute.mockResolvedValueOnce(mockData);
+
+			const response =
+				await contentPageLabelsService.getContentPageLabelsByTypeAndIds(
+					Lookup_App_Content_Type_Enum.FaqItem,
+					[mockContentPageLabel1.id],
+				);
+			expect(response[0].id).toEqual(mockLabelObj.id);
+			expect(response[0].label).toEqual(mockLabelObj.label);
+		});
+	});
 });
