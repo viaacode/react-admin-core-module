@@ -19,6 +19,7 @@ import {
 } from '../mocks/content-page-labels.mocks';
 import { ContentPageLabelsService } from './content-page-labels.service';
 import { ContentPageLabelDto } from '../dto/content-page-label.dto';
+import { DatabaseType } from '@viaa/avo2-types';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
@@ -65,7 +66,7 @@ describe('ContentPageLabelsService', () => {
 	const env = process.env;
 
 	beforeEach(async () => {
-		process.env.DATABASE_APPLICATION_TYPE = 'hetarchief';
+		process.env.DATABASE_APPLICATION_TYPE = DatabaseType.hetArchief;
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				ContentPageLabelsService,
@@ -157,11 +158,12 @@ describe('ContentPageLabelsService', () => {
 			);
 
 			try {
-				const response =
-					await contentPageLabelsService.fetchContentPageLabelById(
-						'unknown-id',
-					);
-				expect(response).toBeUndefined();
+				await contentPageLabelsService.fetchContentPageLabelById('unknown-id');
+				fail(
+					new Error(
+						'fetchContentPageLabelById should have thrown an error for unknown ids',
+					),
+				);
 			} catch (error) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -199,10 +201,14 @@ describe('ContentPageLabelsService', () => {
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
 			try {
-				const response = await contentPageLabelsService.insertContentPageLabel(
+				await contentPageLabelsService.insertContentPageLabel(
 					new ContentPageLabelDto(),
 				);
-				expect(response).toBeUndefined();
+				fail(
+					new Error(
+						'insertContentPageLabel should have thrown an error when null is returned',
+					),
+				);
 			} catch (error) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
@@ -240,10 +246,14 @@ describe('ContentPageLabelsService', () => {
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
 			try {
-				const response = await contentPageLabelsService.updateContentPageLabel(
+				await contentPageLabelsService.updateContentPageLabel(
 					new ContentPageLabelDto(),
 				);
-				expect(response).toBeUndefined();
+				fail(
+					new Error(
+						'updateContentPageLabel should have thrown an error when null is returned',
+					),
+				);
 			} catch (error) {
 				expect(error).toBeDefined();
 				expect(error.response.message).toEqual(
