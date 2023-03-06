@@ -59,6 +59,8 @@ import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSel
 
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { isAvo } from '~modules/shared/helpers/is-avo';
+import { PaginationBar } from '@meemoo/react-components';
+import { Icon } from '../Icon';
 
 export interface FilterableTableState {
 	query?: string;
@@ -478,12 +480,25 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 							/>
 							{!hidePagination && (
 								<Spacer margin="top-large">
-									<Pagination
-										pageCount={Math.ceil(dataCount / itemsPerPage)}
-										currentPage={tableState.page || 0}
+									<PaginationBar
+										count={itemsPerPage}
 										onPageChange={(newPage) =>
 											handleTableStateChanged(newPage, 'page')
 										}
+										start={(tableState.page || 0) * itemsPerPage}
+										total={dataCount}
+										nextLabel={tText(
+											'shared/components/filter-table/filter-table___volgende'
+										)}
+										nextIcon={<Icon name="angleRight" />}
+										previousLabel={tText(
+											'shared/components/filter-table/filter-table___vorige'
+										)}
+										previousIcon={<Icon name="angleLeft" />}
+										backToTopLabel={tText(
+											'shared/components/filter-table/filter-table___terug-naar-boven'
+										)}
+										backToTopIcon={<Icon name="angleUp" />}
 									/>
 								</Spacer>
 							)}
