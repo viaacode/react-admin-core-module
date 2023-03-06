@@ -35,8 +35,8 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	onClick = noop,
 	className,
 }) => {
-	const blockState = get(contentBlockConfig, 'block.state');
-	const componentState = get(contentBlockConfig, 'components.state');
+	const blockState = contentBlockConfig?.block?.state;
+	const componentState = contentBlockConfig?.components?.state;
 	const containerSize =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
@@ -126,13 +126,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					'c-content-block-preview--dark': hasDarkBg,
 					'u-color-white': hasDarkBg,
 				})}
-				margin={[
-					get(blockState, 'margin.top', 'none'),
-					get(blockState, 'margin.bottom', 'none'),
-				]}
+				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
 				padding={[
-					get(blockState, 'padding.top', 'none'),
-					get(blockState, 'padding.bottom', 'none'),
+					blockState?.padding?.top ?? 'none',
+					blockState?.padding?.bottom ?? 'none',
 				]}
 			>
 				<div
