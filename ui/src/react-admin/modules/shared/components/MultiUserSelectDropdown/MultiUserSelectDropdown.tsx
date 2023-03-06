@@ -163,7 +163,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							)}
 							<Icon
 								className="c-button__icon"
-								name={isOpen ? IconName.caretUp : IconName.caretDown}
+								name={isOpen ? ('caretUp' as IconName) : ('caretDown' as IconName)}
 								size="small"
 								type="arrows"
 							/>
@@ -187,7 +187,8 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							<Spacer margin={['top', 'bottom']}>
 								<div key={`profile-content-picker-${selectedProfile?.label}`}>
 									<ContentPicker
-										onSelect={(selectedProfile) => {
+										value={selectedProfile}
+										onChange={(selectedProfile) => {
 											if (selectedProfile) {
 												setSelectedProfiles((selectedProfiles) =>
 													uniqBy(
@@ -207,7 +208,6 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 												'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___selecteer-een-gebruiker'
 											)
 										}
-										initialValue={selectedProfile}
 									/>
 								</div>
 							</Spacer>

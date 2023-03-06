@@ -103,7 +103,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: IconName.lock,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
@@ -114,7 +114,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'
 					),
-					icon: IconName.search,
+					icon: 'search' as IconName,
 				});
 				return;
 			}
@@ -127,7 +127,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 					message: tHtml(
 						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: IconName.lock,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
@@ -337,9 +337,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className }) => {
 				insertedOrUpdatedContent = await ContentPageService.insertContentPage(contentBody);
 			} else {
 				if (!isNil(id)) {
-					const contentBody = {
+					const contentBody: ContentPageInfo = {
 						...contentPageState.currentContentPageInfo,
-						updated_at: new Date().toISOString(),
+						updatedAt: new Date().toISOString(),
 						id:
 							typeof (id as string | number) === 'string' && id.includes('-')
 								? id

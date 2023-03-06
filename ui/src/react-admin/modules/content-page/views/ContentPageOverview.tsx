@@ -432,7 +432,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon={IconName.info}
+								icon={'info' as IconName}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___bekijk-content'
@@ -444,7 +444,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							/>
 						</Link>
 						<Button
-							icon={IconName.eye}
+							icon={'eye' as IconName}
 							onClick={() => handlePreviewClicked(contentPage)}
 							size="small"
 							title={tText('admin/content/views/content-overview___preview-content')}
@@ -454,7 +454,11 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 						/>
 						<Button
-							icon={isPublic(contentPage) ? IconName.unlock3 : IconName.lock}
+							icon={
+								isPublic(contentPage)
+									? ('unlock3' as IconName)
+									: ('lock' as IconName)
+							}
 							size="small"
 							title={
 								isPublic(contentPage)
@@ -474,7 +478,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon={IconName.edit}
+								icon={'edit' as IconName}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___pas-content-aan'
@@ -487,7 +491,7 @@ const ContentPageOverview: FunctionComponent = () => {
 						</Link>
 						{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 							<Button
-								icon={IconName.delete}
+								icon={'delete' as IconName}
 								onClick={() => openModal(contentPage)}
 								size="small"
 								title={tText(
@@ -525,7 +529,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					<Spacer margin="top">
 						<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
 							<Button
-								icon={IconName.plus}
+								icon={'plus' as IconName}
 								label={tText(
 									'admin/content/views/content-overview___content-toevoegen'
 								)}

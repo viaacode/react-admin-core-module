@@ -1,6 +1,7 @@
-import { ButtonAction, ContentPickerType, LinkTarget } from '@viaa/avo2-components';
+import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 import { APP_PATH } from '../consts/routes.consts';
 

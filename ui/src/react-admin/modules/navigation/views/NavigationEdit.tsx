@@ -1,9 +1,19 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
-import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
+import {
+	Badge,
+	Button,
+	ButtonToolbar,
+	Flex,
+	LinkTarget,
+	Spacer,
+	TagInfo,
+	TextInput,
+} from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { Icon } from '~shared/components';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
@@ -40,9 +50,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const navigationBarName = startCase(navigationBarId);
 
 	// Hooks
-	const [navigationItem, setNavigationItem] = useState<NavigationItem>(
-		INITIAL_NAVIGATION_FORM(navigationBarId ? String(navigationBarId) : '0') as NavigationItem
-	);
+	const [navigationItem, setNavigationItem] = useState<NavigationItem | null>(null);
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [permissionWarning, setPermissionWarning] = useState<ReactNode | null>(null);
@@ -63,10 +71,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	} = useGetNavigationItem(navigationItemId);
 
 	useEffect(() => {
-		if (initialNavigationItem && navigationBarId) {
+		if (initialNavigationItem && navigationBarId && !isLoadingNavigationItem) {
 			setNavigationItem(initialNavigationItem);
 		}
-	}, [initialNavigationItem, navigationBarId]);
+	}, [initialNavigationItem, navigationBarId, isLoadingNavigationItem]);
 
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
@@ -95,6 +103,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
 		(contentUserGroupIds) => {
+			if (!navigationItem) {
+				return;
+			}
 			const navItemUserGroupIds: string[] = navigationItem.userGroupIds || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
@@ -143,12 +154,15 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, navigationItem.userGroupIds, allUserGroups, tHtml]
+		[setPermissionWarning, navigationItem?.userGroupIds, allUserGroups, tHtml]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
 	// TODO -- skipped for  now
 	useEffect(() => {
+		if (!navigationItem) {
+			return;
+		}
 		if (navigationItem.contentType === 'CONTENT_PAGE' && navigationItem.contentPath) {
 			// Check if permissions are stricter than the permissions on the content_page
 			ContentPageService.getUserGroupsWithAccessToContentPage(navigationItem.contentPath)
@@ -174,13 +188,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					);
 				});
 		}
-	}, [
-		navigationItem.contentType,
-		navigationItem.contentPath,
-		navigationItem.userGroupIds,
-		checkMenuItemContentPagePermissionsMismatch,
-		tText,
-	]);
+	}, [navigationItem, checkMenuItemContentPagePermissionsMismatch, tText]);
 
 	// Computed
 	const pageType: NavigationEditPageType = navigationItemId ? 'edit' : 'create';
@@ -212,12 +220,16 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		key: keyof NavigationItem | 'content',
 		value: ValueOf<NavigationItem> | PickerItem | null
 	): void => {
+		if (!navigationItem) {
+			return;
+		}
 		if (key === 'content') {
+			const pickerValue = value as PickerItem | null;
 			setNavigationItem({
 				...navigationItem,
-				contentType: get(value, 'type', null),
-				contentPath: get(value, 'value', null),
-				linkTarget: get(value, 'target', '_self'),
+				contentType: pickerValue?.type || null,
+				contentPath: pickerValue?.value || null,
+				linkTarget: pickerValue?.target || '_self',
 			});
 		} else {
 			setNavigationItem({
@@ -253,14 +265,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			}
 
 			const menuItem: Partial<NavigationItem> = {
-				iconName: navigationItem.iconName,
-				label: navigationItem.label,
-				contentPath: navigationItem.contentPath,
-				contentType: navigationItem.contentType,
-				linkTarget: navigationItem.linkTarget,
-				userGroupIds: navigationItem.userGroupIds,
-				placement: navigationItem.placement,
-				tooltip: navigationItem.tooltip,
+				iconName: navigationItem?.iconName,
+				label: navigationItem?.label,
+				contentPath: navigationItem?.contentPath,
+				contentType: navigationItem?.contentType,
+				linkTarget: navigationItem?.linkTarget,
+				userGroupIds: navigationItem?.userGroupIds,
+				placement: navigationItem?.placement,
+				tooltip: navigationItem?.tooltip,
 			};
 
 			// Create new navigation item
@@ -271,13 +283,13 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					description: get(
 						navigationItems,
 						'[0].description',
-						navigationItem.description
+						navigationItem?.description || ''
 					),
 					position: navigationItems.length,
 				});
 
 				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
-					navigationBarId: navigationItem.placement as string,
+					navigationBarId: navigationItem?.placement as string,
 				});
 
 				showToast(
@@ -302,7 +314,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				]);
 
 				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
-					navigationBarId: navigationItem.placement as string,
+					navigationBarId: navigationItem?.placement as string,
 				});
 
 				showToast(
@@ -331,11 +343,11 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const handleValidation = (): boolean => {
 		const errors: NavigationEditFormErrorState = {};
 
-		if (!navigationBarId && !navigationItem.placement) {
+		if (!navigationBarId && !navigationItem?.placement) {
 			errors.placement = tText('admin/menu/views/menu-edit___navigatie-naam-is-verplicht');
 		}
 
-		if (!navigationItem.contentPath) {
+		if (!navigationItem?.contentPath) {
 			errors.contentPath = tText('admin/menu/views/menu-edit___link-is-verplicht');
 		}
 
@@ -389,19 +401,21 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					</ButtonToolbar>
 				</AdminLayout.Actions>
 				<AdminLayout.Content>
-					{/* Force re-render when contentPath changes */}
-					<div key={navigationItem.contentPath}>
-						<NavigationEditForm
-							formErrors={formErrors}
-							formState={navigationItem}
-							navigationParentId={navigationBarId}
-							navigationParentOptions={navigationParentOptions}
-							onChange={handleChange}
-							permissionWarning={permissionWarning}
-							enableIcons={
-								AdminConfigManager.getConfig().navigationBars?.enableIcons ?? true
-							}
-						/>
+					<div>
+						{navigationItem && (
+							<NavigationEditForm
+								formErrors={formErrors}
+								formState={navigationItem}
+								navigationParentId={navigationBarId}
+								navigationParentOptions={navigationParentOptions}
+								onChange={handleChange}
+								permissionWarning={permissionWarning}
+								enableIcons={
+									AdminConfigManager.getConfig().navigationBars?.enableIcons ??
+									true
+								}
+							/>
+						)}
 					</div>
 				</AdminLayout.Content>
 			</AdminLayout>

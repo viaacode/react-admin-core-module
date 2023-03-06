@@ -1,20 +1,19 @@
+import { Alert, Form, FormGroup, LinkTarget, TextArea, TextInput } from '@viaa/avo2-components';
 import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
-import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-components';
-
-import { IconPicker } from '../../../shared/components/IconPicker/IconPicker';
+import { IconPicker } from '~shared/components/IconPicker/IconPicker';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { ReactSelectOption, ValueOf } from '~shared/types';
+import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { PickerItem } from '~shared/types/content-picker';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { ReactSelectOption, ValueOf } from '~shared/types';
-import { useTranslation } from '~shared/hooks/useTranslation';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;
@@ -125,10 +124,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 						ContentPickerType.INTERNAL_LINK,
 						ContentPickerType.EXTERNAL_LINK,
 					]}
-					onSelect={(item: any) => {
-						onChange('content', item);
-					}}
-					initialValue={
+					value={
 						formState.contentType && formState.contentPath
 							? {
 									type: formState.contentType as ContentPickerType,
@@ -137,6 +133,9 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 							  }
 							: undefined
 					}
+					onChange={(item: any) => {
+						onChange('content', item);
+					}}
 				/>
 			</FormGroup>
 			<UserGroupSelect
