@@ -32,7 +32,7 @@ export class AlertsService {
 		if (!data) {
 			return;
 		}
-		await fetchWithLogoutJson(this.getBaseUrl(), {
+		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'POST',
 			body: JSON.stringify({
 				type: 'alert',
@@ -45,7 +45,7 @@ export class AlertsService {
 		if (!data || !alertId) {
 			return;
 		}
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+		return fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
 			method: 'PATCH',
 			body: JSON.stringify({
 				...data,
@@ -57,7 +57,7 @@ export class AlertsService {
 		if (!alertId) {
 			return;
 		}
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+		return fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
 			method: 'DELETE',
 		});
 	}

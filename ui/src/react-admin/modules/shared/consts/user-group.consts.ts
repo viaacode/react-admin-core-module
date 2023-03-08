@@ -1,0 +1,6 @@
+export enum Group {
+	KIOSK_VISITOR = '04150e6e-b779-4125-84e5-6ee6fc580757',
+	MEEMOO_ADMIN = '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
+	VISITOR = '0213c8d4-f459-45ef-8bbc-96268ab56d01',
+	CP_ADMIN = 'c56d95aa-e918-47ca-b102-486c9449fc4a',
+}

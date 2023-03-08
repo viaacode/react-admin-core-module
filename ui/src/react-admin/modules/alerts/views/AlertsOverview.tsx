@@ -4,11 +4,11 @@ import {
 	Checkbox,
 	Datepicker,
 	FormControl,
+	RichEditorState,
+	RichTextEditor,
 	Row,
-	Select,
 	Table,
 	TableOptions,
-	TextArea,
 	TextInput,
 	Timepicker,
 } from '@meemoo/react-components';
@@ -17,9 +17,19 @@ import { Avo } from '@viaa/avo2-types';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { format, isWithinInterval, roundToNearestMinutes, set } from 'date-fns';
+import {
+	add,
+	endOfDay,
+	format,
+	isAfter,
+	isSameDay,
+	isWithinInterval,
+	roundToNearestMinutes,
+	set,
+	startOfDay,
+} from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
 import { CheckboxDropdownModal } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
@@ -31,7 +41,13 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { AdminConfigManager, ToastType } from '../../../../index-export';
-import { ALERTS_QUERY_PARAM_CONFIG } from '../alerts.const';
+import {
+	ALERTS_FORM_SCHEMA,
+	ALERTS_QUERY_PARAM_CONFIG,
+	alertUserGroups,
+	GET_ADMIN_ICON_OPTIONS,
+	RICH_TEXT_EDITOR_OPTIONS,
+} from '../alerts.const';
 import { AlertsService } from '../alerts.service';
 import {
 	Alert,
@@ -39,6 +55,10 @@ import {
 	AlertsOverviewProps,
 	AlertsOverviewTableCol,
 } from '../alerts.types';
+import { ReactSelectOption } from '~modules/shared';
+import { get, now } from 'lodash-es';
+import { nlBE } from 'date-fns/locale';
+import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 
 const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
 const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
@@ -50,6 +70,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [filters, setFilters] = useQueryParams(ALERTS_QUERY_PARAM_CONFIG);
 	const [activeAlert, setActiveAlert] = useState<Alert | null>(null);
 	const [action, setAction] = useState<string | null>(null);
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
 
 	const getAlerts = useCallback(async () => {
 		try {
@@ -87,14 +109,14 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	);
 
 	useEffect(() => {
-		console.log(action);
-	}, [action]);
-
-	useEffect(() => {
 		getAlerts();
 	}, []);
 
 	const checkAlertActivity = (from: string, till: string) => {
+		if (!isAfter(new Date(till), new Date(from))) {
+			return '-';
+		}
+
 		const isActive = isWithinInterval(new Date(), {
 			start: new Date(from),
 			end: new Date(till),
@@ -149,7 +171,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 											<Html
 												content={format(
 													new Date(row.original.fromDate),
-													'i LLL y'
+													'PP',
+													{
+														locale: nlBE,
+													}
 												)}
 											/>
 										);
@@ -166,7 +191,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 											<Html
 												content={format(
 													new Date(row.original.untilDate),
-													'i LLL y'
+													'PP',
+													{
+														locale: nlBE,
+													}
 												)}
 											/>
 										);
@@ -207,14 +235,17 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								{
 									id: 'delete',
 									Header: '',
-									Cell: () => {
+									Cell: ({ row }) => {
 										return (
 											<Button
 												icon={
 													AdminConfigManager.getConfig().icon
 														?.componentProps.delete.name as string
 												}
-												onClick={() => setAction('delete')}
+												onClick={() => {
+													setAlertToDeleteId(row.original.id);
+													setIsDeleteModalOpen(true);
+												}}
 											/>
 										);
 									},
@@ -254,9 +285,9 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		() =>
 			({
 				title: activeAlert?.title || '',
-				message: activeAlert?.message || '',
-				fromDate: activeAlert?.fromDate || defaultStartDate(new Date()),
-				untilDate: activeAlert?.untilDate || defaultEndDate(new Date()),
+				message: activeAlert?.message,
+				fromDate: activeAlert?.fromDate || defaultStartDate(new Date()).toISOString(),
+				untilDate: activeAlert?.untilDate || defaultEndDate(new Date()).toISOString(),
 				userGroups: activeAlert?.userGroups || [],
 				icon: activeAlert?.icon || '',
 				active: activeAlert?.active || false,
@@ -264,16 +295,44 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		[activeAlert]
 	);
 
+	// source of truth
 	const [form, setForm] = useState<AlertFormState>(defaultValues);
+	const [formMessage, setFormMessage] = useState<RichEditorState>();
 	const {
 		control,
-		formState: { errors, isSubmitting },
+		formState: { errors },
 		handleSubmit,
 		setValue,
 	} = useForm<AlertFormState>({
-		resolver: yupResolver,
+		resolver: yupResolver(ALERTS_FORM_SCHEMA(tText)),
+		defaultValues,
 	});
 
+	useEffect(() => {
+		activeAlert &&
+			setForm({
+				title: activeAlert.title || defaultValues.title,
+				message: activeAlert.message || defaultValues.message,
+				userGroups: activeAlert.userGroups || defaultValues.userGroups,
+				fromDate: activeAlert.fromDate || defaultValues.fromDate,
+				untilDate: activeAlert.untilDate || defaultValues.untilDate,
+				icon: activeAlert.icon || defaultValues.icon,
+				active: activeAlert.active || defaultValues.active,
+			});
+		activeAlert && setFormMessage(undefined);
+	}, [activeAlert, defaultValues, setForm]);
+
+	useEffect(() => {
+		setValue('title', form.title);
+		setValue('message', form.message);
+		setValue('fromDate', form.fromDate);
+		setValue('untilDate', form.untilDate);
+		setValue('userGroups', form.userGroups);
+		setValue('icon', form.icon);
+		setValue('active', form.active);
+	}, [form, setValue]);
+
+	// Actions
 	const onClickCreate = () => {
 		setAction('create');
 		setActiveAlert({
@@ -288,6 +347,371 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		});
 	};
 
+	// TODO: refetch
+
+	const onClickSave = async (values: AlertFormState) => {
+		setAction('save');
+
+		if (activeAlert?.id) {
+			try {
+				await AlertsService.updateAlert(activeAlert.id, values);
+
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+					description: tText(
+						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-gelukt'
+					),
+					type: ToastType.SUCCESS,
+				});
+			} catch (err) {
+				console.error(new CustomError('Failed to update alert', err));
+
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+					description: tText(
+						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-mislukt'
+					),
+					type: ToastType.ERROR,
+				});
+			}
+		} else {
+			try {
+				await AlertsService.insertAlert(values);
+
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+					description: tText(
+						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-gelukt'
+					),
+					type: ToastType.SUCCESS,
+				});
+			} catch (err) {
+				console.error(new CustomError('Failed to create alert', err));
+
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+					description: tText(
+						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-mislukt'
+					),
+					type: ToastType.ERROR,
+				});
+			}
+		}
+
+		onClose();
+		getAlerts();
+	};
+
+	const onClickDelete = async () => {
+		setAction('delete');
+
+		if (!alertToDeleteId) {
+			return;
+		}
+
+		try {
+			await AlertsService.deleteAlert(alertToDeleteId);
+
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
+				description: tText(
+					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-gelukt'
+				),
+				type: ToastType.SUCCESS,
+			});
+		} catch (err) {
+			console.error(new CustomError('Failed to delete alert', err));
+
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
+				description: tText(
+					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-mislukt'
+				),
+				type: ToastType.ERROR,
+			});
+		}
+
+		getAlerts();
+	};
+
+	const onClose = () => {
+		setActiveAlert(null);
+		setFormMessage(undefined);
+		setAction(null);
+	};
+
+	const renderTitle = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-title"
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___titel-melding')}
+				errors={[errors.title?.message]}
+			>
+				<Controller
+					name="title"
+					control={control}
+					render={({ field }) => (
+						<TextInput
+							{...field}
+							value={form.title}
+							id="new-alert-title"
+							onChange={(e) => {
+								const title = e.currentTarget.value;
+
+								setForm((prev) => ({
+									...prev,
+									title,
+								}));
+							}}
+						/>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, errors.title?.message, form.title, tHtml]);
+
+	const renderMessage = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-message"
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving')}
+				errors={[errors.message?.message]}
+			>
+				<Controller
+					name="message"
+					control={control}
+					render={({ field }) => (
+						<RichTextEditor
+							onBlur={field.onBlur}
+							onChange={(state) => {
+								setFormMessage(state);
+								setForm((prev) => ({
+									...prev,
+									message: state.toHTML(),
+								}));
+							}}
+							state={formMessage}
+							initialHtml={defaultValues.message}
+							controls={RICH_TEXT_EDITOR_OPTIONS}
+						></RichTextEditor>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, defaultValues.message, errors.message?.message, formMessage, tHtml]);
+
+	const renderIcon = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-icon"
+				label={tHtml(
+					'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon'
+				)}
+				errors={[errors.icon?.message]}
+			>
+				<Controller
+					name="icon"
+					control={control}
+					render={() => (
+						<IconPicker
+							options={GET_ADMIN_ICON_OPTIONS()}
+							onChange={(option) => {
+								const icon = get(option, 'value', '');
+								setForm((prev) => ({
+									...prev,
+									icon,
+								}));
+							}}
+							value={GET_ADMIN_ICON_OPTIONS().find(
+								(option: ReactSelectOption<string>) => option.value === form.icon
+							)}
+						/>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, errors.icon?.message, form.icon, tHtml]);
+
+	const renderUserGroup = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-user-group"
+				label={tHtml(
+					'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
+				)}
+				errors={[errors.userGroups?.message]}
+			>
+				<Controller
+					name="userGroups"
+					control={control}
+					render={() => (
+						<CheckboxDropdownModal
+							onChange={(values) => {
+								setForm((prev) => ({
+									...prev,
+									userGroups: values,
+								}));
+							}}
+							// Set default selected state
+							options={alertUserGroups.map((option) => ({
+								...option,
+								checked: form.userGroups.includes(option.id),
+							}))}
+							label="Zichtbaar voor gebruikersgroep"
+							id="new-alert-user-group"
+						/>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, errors.userGroups?.message, form.userGroups, tHtml]);
+
+	const renderFrom = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-from-date"
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-van')}
+				errors={[errors.fromDate?.message]}
+			>
+				<Controller
+					name="fromDate"
+					control={control}
+					render={({ field }) => (
+						<>
+							<Datepicker
+								id="new-alert-from-date"
+								locale={nlBE}
+								minDate={defaultStartDate(new Date())}
+								name={field.name}
+								onBlur={field.onBlur}
+								onChange={(fromDate) => {
+									fromDate &&
+										setForm((prev) => ({
+											...prev,
+											fromDate: fromDate.toISOString(),
+										}));
+								}}
+								selected={new Date(form.fromDate)}
+								dateFormat="PP"
+								value={format(new Date(form.fromDate), 'PP', {
+									locale: nlBE,
+								})}
+							/>
+
+							<Timepicker
+								showTimeSelect
+								id="new-alert-from-time"
+								maxTime={endOfDay(new Date(form.fromDate) || now)}
+								minTime={startOfDay(new Date(form.fromDate) || now)}
+								minDate={defaultStartDate(new Date())}
+								name={field.name}
+								onBlur={field.onBlur}
+								onChange={(fromDate) => {
+									fromDate &&
+										setForm((prev) => ({
+											...prev,
+											fromDate: fromDate.toISOString(),
+										}));
+								}}
+								selected={new Date(form.fromDate)}
+								value={format(new Date(form.fromDate), 'HH:mm')}
+							/>
+						</>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, errors.fromDate?.message, form.fromDate, tHtml]);
+
+	const renderUntil = useMemo(() => {
+		return (
+			<FormControl
+				id="new-alert-until-date"
+				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot')}
+				errors={[errors.untilDate?.message]}
+			>
+				<Controller
+					name="untilDate"
+					control={control}
+					render={({ field }) => (
+						<>
+							<Datepicker
+								id="new-alert-until-date"
+								minDate={new Date(form.fromDate)}
+								locale={nlBE}
+								name={field.name}
+								onBlur={field.onBlur}
+								onChange={(untilDate) => {
+									untilDate &&
+										setForm((prev) => ({
+											...prev,
+											untilDate: untilDate.toISOString(),
+										}));
+								}}
+								selected={
+									isAfter(new Date(form.untilDate), new Date(form.fromDate))
+										? new Date(form.untilDate)
+										: new Date(form.fromDate)
+								}
+								dateFormat="PP"
+								value={
+									isAfter(new Date(form.untilDate), new Date(form.fromDate))
+										? format(new Date(form.untilDate), 'PP', {
+												locale: nlBE,
+										  })
+										: format(new Date(form.fromDate), 'PP', {
+												locale: nlBE,
+										  })
+								}
+							/>
+
+							<Timepicker
+								showTimeSelect
+								id="new-alert-until-time"
+								maxTime={endOfDay(new Date(form.untilDate) || now)}
+								minTime={
+									isSameDay(new Date(form.fromDate), new Date(form.untilDate))
+										? add(new Date(form.fromDate), { minutes: 30 })
+										: startOfDay(new Date(form.untilDate) || now)
+								}
+								minDate={new Date(form.fromDate)}
+								name={field.name}
+								onBlur={field.onBlur}
+								onChange={(untilDate) => {
+									untilDate &&
+										setForm((prev) => ({
+											...prev,
+											untilDate: untilDate.toISOString(),
+										}));
+								}}
+								selected={
+									isAfter(
+										new Date(form.untilDate),
+										add(new Date(form.fromDate), { minutes: 30 })
+									)
+										? new Date(form.untilDate)
+										: add(new Date(form.fromDate), { minutes: 30 })
+								}
+								value={
+									isAfter(
+										new Date(form.untilDate),
+										add(new Date(form.fromDate), { minutes: 30 })
+									)
+										? format(new Date(form.untilDate), 'HH:mm')
+										: format(
+												add(new Date(form.fromDate), { minutes: 30 }),
+												'HH:mm'
+										  )
+								}
+							/>
+						</>
+					)}
+				/>
+			</FormControl>
+		);
+	}, [control, errors.untilDate?.message, form.fromDate, form.untilDate, tHtml]);
+
+	// Show modal/blade
 	const renderPopupBody = () => {
 		if (!activeAlert) {
 			return;
@@ -295,74 +719,12 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 		return (
 			<>
-				<FormControl
-					id="new-alert-title"
-					label={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___titel-melding'
-					)}
-				>
-					<TextInput value={activeAlert.title} />
-				</FormControl>
-
-				<FormControl
-					id="new-alert-message"
-					label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving')}
-				>
-					<TextArea value={activeAlert.message} />
-				</FormControl>
-
-				<FormControl
-					id="new-alert-icon"
-					label={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon'
-					)}
-				>
-					<IconPicker value={activeAlert.icon} />
-				</FormControl>
-				<FormControl
-					id="new-alert-user-group"
-					label={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
-					)}
-				>
-					<CheckboxDropdownModal
-						options={[
-							{ label: 'testoption', id: 'testoption', checked: false },
-							{ label: 'testoption2', id: 'testoption2', checked: false },
-						]}
-						label=""
-						id="test"
-						onChange={(value) => console.log(value)}
-					/>
-				</FormControl>
-
-				<FormControl
-					id="new-alert-icon"
-					label={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-van'
-					)}
-				>
-					<Datepicker />
-
-					<Timepicker />
-				</FormControl>
-
-				<FormControl
-					id="new-alert-icon"
-					label={tHtml(
-						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot'
-					)}
-				>
-					<>
-						<Datepicker />
-
-						<Timepicker />
-					</>
-				</FormControl>
-
-				<Checkbox
-					label={tText('react-admin/modules/alerts/views/alerts-overview___zet-actief')}
-				/>
+				{renderTitle}
+				{renderMessage}
+				{renderIcon}
+				{renderUserGroup}
+				{renderFrom}
+				{renderUntil}
 			</>
 		);
 	};
@@ -385,16 +747,26 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 				{renderPopup({
 					title: tText(
-						'react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'
+						action === 'create'
+							? 'react-admin/modules/alerts/views/alerts-overview___melding-aanmaken'
+							: 'react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'
 					),
 					body: renderPopupBody(),
 					isOpen: !!activeAlert,
-					onSave: () => console.log('save'),
-					onClose: () => {
-						setActiveAlert(null);
-						setAction(null);
-					},
+					onSave: handleSubmit(onClickSave),
+					onClose: onClose,
 				})}
+				<ConfirmModal
+					deleteObjectCallback={onClickDelete}
+					body={tHtml(
+						'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden'
+					)}
+					isOpen={isDeleteModalOpen}
+					onClose={() => {
+						setAlertToDeleteId(undefined);
+						setIsDeleteModalOpen(false);
+					}}
+				/>
 			</AdminLayout.Content>
 		</AdminLayout>
 	);
