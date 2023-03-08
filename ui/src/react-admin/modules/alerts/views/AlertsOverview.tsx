@@ -93,7 +93,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				type: ToastType.ERROR,
 			});
 		}
-	}, [setAlerts, filters]);
+	}, [filters.orderProp, filters.orderDirection, filters.page, tText]);
 
 	const handleSortChange = useCallback(
 		(orderProp, orderDirection) => {
@@ -103,9 +103,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					orderProp,
 					orderDirection,
 				});
+				getAlerts();
 			}
 		},
-		[filters.orderProp, filters.orderDirection]
+		[filters, getAlerts, setFilters]
 	);
 
 	useEffect(() => {
