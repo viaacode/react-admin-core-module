@@ -4,7 +4,7 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '../../../index-export';
-import { Alert, AlertsOverviewTableCol } from './alerts.types';
+import { Alert, AlertFormState, AlertsOverviewTableCol } from './alerts.types';
 
 export class AlertsService {
 	private static getBaseUrl(): string {
@@ -26,5 +26,39 @@ export class AlertsService {
 		} catch (err) {
 			throw new CustomError('Failed to fetch alerts', err);
 		}
+	}
+
+	public static async insertAlert(data: AlertFormState): Promise<void> {
+		if (!data) {
+			return;
+		}
+		await fetchWithLogoutJson(this.getBaseUrl(), {
+			method: 'POST',
+			body: JSON.stringify({
+				type: 'alert',
+				...data,
+			}),
+		});
+	}
+
+	static async updateAlert(alertId: string, data: AlertFormState): Promise<Alert | void> {
+		if (!data || !alertId) {
+			return;
+		}
+		await fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+			method: 'PATCH',
+			body: JSON.stringify({
+				...data,
+			}),
+		});
+	}
+
+	static async deleteAlert(alertId: string): Promise<Alert | void> {
+		if (!alertId) {
+			return;
+		}
+		await fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+			method: 'DELETE',
+		});
 	}
 }
