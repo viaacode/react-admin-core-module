@@ -1,6 +1,6 @@
 import { Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { get, noop, omit } from 'lodash-es';
+import { kebabCase, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
@@ -35,8 +35,8 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	onClick = noop,
 	className,
 }) => {
-	const blockState = get(contentBlockConfig, 'block.state');
-	const componentState = get(contentBlockConfig, 'components.state');
+	const blockState = contentBlockConfig?.block?.state;
+	const componentState = contentBlockConfig?.components?.state;
 	const containerSize =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
@@ -107,7 +107,11 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 
 	return (
 		<div
-			className={clsx('c-content-block', className)}
+			className={clsx(
+				'c-content-block',
+				className,
+				'c-content-block__' + kebabCase(contentBlockConfig.type)
+			)}
 			style={{
 				backgroundColor: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
@@ -122,13 +126,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					'c-content-block-preview--dark': hasDarkBg,
 					'u-color-white': hasDarkBg,
 				})}
-				margin={[
-					get(blockState, 'margin.top', 'none'),
-					get(blockState, 'margin.bottom', 'none'),
-				]}
+				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
 				padding={[
-					get(blockState, 'padding.top', 'none'),
-					get(blockState, 'padding.bottom', 'none'),
+					blockState?.padding?.top ?? 'none',
+					blockState?.padding?.bottom ?? 'none',
 				]}
 			>
 				<div
