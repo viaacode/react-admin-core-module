@@ -34,7 +34,7 @@ function loadComponentFromConfig(key: ContentBlockType): FC {
 }
 
 export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
-	return {
+	const blocks = {
 		[ContentBlockType.AnchorLinks]: BlockButtonsWrapper,
 		[ContentBlockType.Buttons]: BlockButtonsWrapper,
 		[ContentBlockType.CTAs]: BlockCTAsWrapper,
@@ -62,7 +62,8 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
-	}[type];
+	};
+	return blocks[type];
 }
 
 export const REPEATABLE_CONTENT_BLOCKS = [
@@ -97,6 +98,15 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
 	ContentBlockType.Eventbrite,
+];
+
+/**
+ * Blocks that must receive a commonUser object, to be able to render correctly
+ */
+export const USER_CONTENT_BLOCKS = [
+	ContentBlockType.MediaPlayerTitleTextButton,
+	ContentBlockType.PageOverview,
+	ContentBlockType.MediaGrid,
 ];
 
 /**

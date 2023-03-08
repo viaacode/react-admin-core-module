@@ -31,7 +31,6 @@ import FilterTable, {
 } from '../../shared/components/FilterTable/FilterTable';
 import { UserService } from '~modules/user/user.service';
 import {
-	CommonUser,
 	Idp,
 	UserBulkAction,
 	UserOverviewTableCol,
@@ -63,9 +62,10 @@ import { Icon } from '~modules/shared/components';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
+	commonUser: Avo.User.CommonUser;
 }
 
-export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
+export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUser }) => {
 	// Hooks
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -83,18 +83,17 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 
-	const config = AdminConfigManager.getConfig();
 	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
 	const columns = useMemo(
 		() =>
-			GET_USER_OVERVIEW_TABLE_COLS(
-				config,
-				setSelectedCheckboxes(
+			GET_USER_OVERVIEW_TABLE_COLS({
+				commonUser,
+				userGroupOptions: setSelectedCheckboxes(
 					userGroupOptions as CheckboxOption[],
 					(tableState?.userGroup ?? []) as string[]
 				),
-				companies.map(
+				companyOptions: companies.map(
 					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
 						id: option.or_id as string,
 						label: option.name as string,
@@ -103,7 +102,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						),
 					})
 				),
-				businessCategories.map(
+				businessCategoryOptions: businessCategories.map(
 					(option: string): CheckboxOption => ({
 						id: option,
 						label: option,
@@ -112,13 +111,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 						),
 					})
 				),
-				setSelectedCheckboxes(
+				educationLevels: setSelectedCheckboxes(
 					educationLevels,
 					(tableState?.educationLevels ?? []) as string[]
 				),
-				setSelectedCheckboxes(subjects, (tableState?.subjects ?? []) as string[]),
-				setSelectedCheckboxes(idps || [], (tableState?.idps ?? []) as string[])
-			),
+				subjects: setSelectedCheckboxes(subjects, (tableState?.subjects ?? []) as string[]),
+				idps: setSelectedCheckboxes(idps || [], (tableState?.idps ?? []) as string[]),
+			}),
 		[
 			businessCategories,
 			companies,
@@ -127,7 +126,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 			subjects,
 			tableState,
 			userGroupOptions,
-			config,
+			commonUser,
 		]
 	);
 
@@ -420,7 +419,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 		});
 	};
 
-	const renderTableCell = (commonUser: CommonUser, columnId: UserOverviewTableCol) => {
+	const renderTableCell = (commonUser: Avo.User.CommonUser, columnId: UserOverviewTableCol) => {
 		const isBlocked = commonUser?.isBlocked;
 
 		switch (columnId) {
@@ -565,7 +564,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					columns={columns}
 					data={profiles || []}
 					dataCount={profileCount || 0}
-					renderCell={(rowData: CommonUser, columnId: string) =>
+					renderCell={(rowData: Avo.User.CommonUser, columnId: string) =>
 						renderTableCell(rowData, columnId as UserOverviewTableCol)
 					}
 					searchTextPlaceholder={tText(
@@ -583,11 +582,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate }) => {
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(
-						AdminConfigManager.getConfig().user,
-						bulkActions
-					)}
-					rowKey={(row: CommonUser) => row?.profileId || row?.userId || row?.email || ''}
+					bulkActions={GET_USER_BULK_ACTIONS(commonUser, bulkActions)}
+					rowKey={(row: Avo.User.CommonUser) =>
+						row?.profileId || row?.userId || row?.email || ''
+					}
 					className="u-spacer-bottom-l u-useroverview-table"
 				/>
 				<UserDeleteModal

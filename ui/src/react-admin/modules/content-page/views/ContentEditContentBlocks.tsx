@@ -1,3 +1,4 @@
+import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
@@ -39,6 +40,7 @@ interface ContentEditContentBlocksProps {
 	) => void;
 	addComponentToState: (index: number, blockType: ContentBlockType) => void;
 	removeComponentFromState: (index: number, stateIndex: number) => void;
+	commonUser: Avo.User.CommonUser;
 }
 
 const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps> = ({
@@ -49,6 +51,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	onSave,
 	addComponentToState,
 	removeComponentFromState,
+	commonUser,
 }) => {
 	const { tText } = useTranslation();
 
@@ -187,6 +190,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						contentPageInfo={contentPageInfo}
 						onBlockClicked={focusBlock}
 						activeBlockPosition={activeBlockPosition}
+						commonUser={commonUser}
 					/>
 				</div>
 				<Sidebar className="c-content-edit-view__sidebar" light>

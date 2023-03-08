@@ -1,14 +1,14 @@
 import { Avatar, AvatarProps } from '@viaa/avo2-components';
 import React, { ReactNode } from 'react';
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
 export const getInitialChar = (value: string | undefined | null): string => (value ? value[0] : '');
 
-export const getInitials = (user: CommonUser): string =>
+export const getInitials = (user: Avo.User.CommonUser): string =>
 	getInitialChar(user.firstName) + getInitialChar(user.lastName);
 
 export const getFullName = (
-	user: CommonUser,
+	user: Avo.User.CommonUser,
 	includeCompany: boolean,
 	includeEmail: boolean
 ): string | null => {
@@ -23,14 +23,14 @@ export const getFullName = (
 	}`;
 };
 
-export const getAbbreviatedFullName = (user: CommonUser): string =>
+export const getAbbreviatedFullName = (user: Avo.User.CommonUser): string =>
 	`${(user.firstName || '')[0]}. ${user.lastName || ''}`;
 
-export const getAvatarImage = (user: CommonUser): string =>
+export const getAvatarImage = (user: Avo.User.CommonUser): string =>
 	user.organisation?.logo_url || user?.avatar || '';
 
 export const getAvatarProps = (
-	user: CommonUser,
+	user: Avo.User.CommonUser,
 	options: {
 		small?: boolean;
 		abbreviatedName?: boolean;
@@ -49,7 +49,7 @@ export const getAvatarProps = (
 };
 
 export const renderAvatar = (
-	user?: CommonUser,
+	user?: Avo.User.CommonUser,
 	options: {
 		small?: boolean;
 		abbreviatedName?: boolean;

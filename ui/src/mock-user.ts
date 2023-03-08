@@ -1,8 +1,8 @@
 import { PermissionName } from '@viaa/avo2-types';
 
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
-export const mockUser: CommonUser = {
+export const mockUser: Avo.User.CommonUser = {
 	uid: '02ceadae-a1c5-4fe4-a503-c5b0e7fb9922',
 	profileId: '31051baa-94ab-4fc2-a859-750a52774d3a',
 	userId: '02ceadae-a1c5-4fe4-a503-c5b0e7fb9922',

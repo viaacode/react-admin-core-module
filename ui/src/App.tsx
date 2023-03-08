@@ -14,7 +14,6 @@ import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import Sidebar from './shared/components/Sidebar/Sidebar';
-import { mockUser } from './mock-user';
 
 import './App.scss';
 
@@ -26,9 +25,6 @@ function App() {
 	const { tText } = useTranslation();
 
 	useEffect(() => {
-		if (!mockUser) {
-			return;
-		}
 		GET_NAV_ITEMS()
 			.then((items) => {
 				setNavigationItems(items);

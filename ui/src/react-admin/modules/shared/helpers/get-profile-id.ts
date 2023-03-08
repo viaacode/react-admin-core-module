@@ -1,10 +1,9 @@
+import { Avo } from '@viaa/avo2-types';
 import { get } from 'lodash-es';
 
 import { CustomError } from './custom-error';
 
-import { CommonUser } from '~modules/user/user.types';
-
-export function getProfileId(user: CommonUser | undefined): string {
+export function getProfileId(user: Avo.User.CommonUser | undefined): string {
 	if (!user) {
 		throw new CustomError('Failed to get profile id because the logged in user is undefined');
 	}
