@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AdminCoreModule } from './admin-core.module';
 import packageJson from '../package.json';
+import { json } from 'express';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AdminCoreModule);
@@ -10,10 +11,7 @@ async function bootstrap() {
 
 	/** Security */
 	app.enableCors({
-		origin: (
-			origin: string,
-			callback: (err: Error, allow: boolean) => void,
-		) => {
+		origin: (origin: string, callback: (err: Error, allow: boolean) => void) => {
 			// whitelist not enabled
 			callback(null, true);
 		},
@@ -23,6 +21,9 @@ async function bootstrap() {
 		methods: 'GET, POST, OPTIONS, PATCH, PUT, DELETE',
 	});
 	app.use(helmet());
+
+	/** Increase POST json body size */
+	app.use(json({ limit: '500kb' }));
 
 	/** Swagger docs **/
 	if (process.env.ENVIRONMENT !== 'production') {

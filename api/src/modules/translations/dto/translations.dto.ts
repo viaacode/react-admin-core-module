@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsObject } from 'class-validator';
+import { IsObject, IsString } from 'class-validator';
 
 import { TranslationKey } from '../types';
 
 export class UpdateTranslationsDto {
+	@IsString()
 	@ApiProperty({
 		required: true,
 		enum: TranslationKey,
