@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { ContentPageLabelsController } from './content-page-labels.controller';
-import { ContentPageLabelsService } from './content-page-labels.service';
+import { ContentPageLabelsController } from './controllers/content-page-labels.controller';
+import { ContentPageLabelsService } from './services/content-page-labels.service';
 
 import { DataModule } from '../data';
 

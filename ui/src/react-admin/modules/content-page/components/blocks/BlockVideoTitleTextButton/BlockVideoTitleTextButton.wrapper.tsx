@@ -10,8 +10,6 @@ import { PermissionService } from '~shared/services/permission-service';
 
 import { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 
-import { AdminConfigManager } from '~core/config';
-
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;
 	mediaSrc?: string;

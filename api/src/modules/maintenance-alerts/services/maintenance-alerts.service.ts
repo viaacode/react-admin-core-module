@@ -133,7 +133,7 @@ export class MaintenanceAlertsService {
 		>(FindMaintenanceAlertByIdDocument, { id });
 
 		if (isNil(maintenanceAlertResponse) || !maintenanceAlertResponse.app_maintenance_alerts[0]) {
-			throw new NotFoundException(`Material Request with id '${id}' not found`);
+			throw new NotFoundException(`Maintenance Alert with id '${id}' not found`);
 		}
 
 		return this.adapt(maintenanceAlertResponse.app_maintenance_alerts[0]);

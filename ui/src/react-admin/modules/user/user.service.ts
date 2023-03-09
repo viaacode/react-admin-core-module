@@ -44,7 +44,7 @@ export class UserService {
 				stringifyUrl({
 					url: this.getBaseUrl(),
 					query: {
-						offset: page * USERS_PER_PAGE,
+						offset: page * itemsPerPage,
 						limit: itemsPerPage,
 						sortColumn,
 						sortOrder,

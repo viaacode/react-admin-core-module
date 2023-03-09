@@ -179,10 +179,10 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 		sortOrder: tableState?.sort_order || 'desc',
 		tableColumnDataType: getColumnType(),
 		where: generateWhereObject(getFilters(tableState), false),
+		itemsPerPage: USERS_PER_PAGE,
 	});
 	const profiles = profilesResponse?.[0] || null;
 	const profileCount = profilesResponse?.[1] || null;
-	const hidePagination = (profileCount && profileCount < USERS_PER_PAGE) || false;
 
 	const bulkChangeSubjects = async (addOrRemove: AddOrRemove, subjects: string[]) => {
 		try {
@@ -586,7 +586,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					rowKey={(row: Avo.User.CommonUser) =>
 						row?.profileId || row?.userId || row?.email || ''
 					}
-					hidePagination={hidePagination}
 					className="u-spacer-bottom-l u-useroverview-table"
 				/>
 				<UserDeleteModal
