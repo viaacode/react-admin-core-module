@@ -1,7 +1,6 @@
 import {
 	ButtonAction,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	Icon,
 	IconName,
 	RenderLinkFunction,
@@ -9,6 +8,7 @@ import {
 import classnames from 'classnames';
 import { get } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockSpotlight.scss';
 

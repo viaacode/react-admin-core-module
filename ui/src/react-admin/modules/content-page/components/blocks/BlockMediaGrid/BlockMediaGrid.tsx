@@ -4,7 +4,6 @@ import {
 	ButtonType,
 	Column,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	Grid,
 	HeadingType,
 	IconName,
@@ -26,6 +25,7 @@ import { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
 import { get, last } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
