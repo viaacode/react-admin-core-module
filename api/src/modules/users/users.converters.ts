@@ -1,8 +1,6 @@
-import { isNil } from '@nestjs/common/utils/shared.utils';
 import type { Avo, PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
 import {
-	CommonUser,
 	HetArchiefUser,
 	UserInfoOverviewAvo,
 	UserInfoOverviewHetArchief,
@@ -31,7 +29,7 @@ export function convertUserInfoToCommonUser(
 		| HetArchiefUser
 		| undefined,
 	userInfoType: UserInfoType,
-): CommonUser | undefined {
+): Avo.User.CommonUser | undefined {
 	if (!userInfo) {
 		return undefined;
 	}
@@ -80,9 +78,7 @@ export function convertUserInfoToCommonUser(
 					? {
 							from: user.temp_access.from ?? null,
 							until: user.temp_access.until ?? null,
-							status: isNil(user.temp_access.current?.status)
-								? null
-								: user.temp_access.current?.status === 1,
+							current: user.temp_access.current,
 					  }
 					: null,
 				idps: Object.fromEntries(
@@ -143,9 +139,7 @@ export function convertUserInfoToCommonUser(
 					? {
 							from: profile.user.temp_access.from ?? null,
 							until: profile.user.temp_access.until ?? null,
-							status: isNil(profile.user.temp_access.current?.status)
-								? null
-								: profile.user.temp_access.current?.status === 1,
+							current: profile.user.temp_access.current,
 					  }
 					: null,
 				idps: Object.fromEntries(
@@ -217,9 +211,7 @@ export function convertUserInfoToCommonUser(
 					? {
 							from: user.user.temp_access.from ?? null,
 							until: user.user.temp_access.until ?? null,
-							status: isNil(user.user.temp_access.current?.status)
-								? null
-								: user.user.temp_access.current?.status === 1,
+							current: user.user.temp_access.current,
 					  }
 					: null,
 				idps: Object.fromEntries(
@@ -263,6 +255,7 @@ export function convertUserInfoToCommonUser(
 					logo_url:
 						profile.maintainer_users_profiles?.[0]?.maintainer?.information
 							?.logo?.iri,
+					data: null,
 				},
 				lastAccessAt: profile.last_access_at,
 			};

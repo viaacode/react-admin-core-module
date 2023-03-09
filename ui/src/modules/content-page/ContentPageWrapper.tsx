@@ -1,3 +1,4 @@
+import { Avo } from '@viaa/avo2-types';
 import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
@@ -5,7 +6,14 @@ import ContentPageRenderer from '~modules/content-page/components/ContentPageRen
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
-const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = (({ match }) => {
+interface ContentPageWrapperProps {
+	commonUser: Avo.User.CommonUser;
+}
+
+const ContentPageWrapper = ({
+	match,
+	commonUser,
+}: ContentPageWrapperProps & RouteComponentProps<{ path: string }>) => {
 	const { tHtml } = useTranslation();
 	const {
 		data: contentPageInfo,
@@ -26,8 +34,10 @@ const ContentPageWrapper: FC<RouteComponentProps<{ path: string }>> = (({ match 
 		);
 	}
 	if (contentPageInfo) {
-		return <ContentPageRenderer contentPageInfo={contentPageInfo} />;
+		return <ContentPageRenderer contentPageInfo={contentPageInfo} commonUser={commonUser} />;
 	}
-}) as FC<RouteComponentProps<{ path: string }>>;
+};
 
-export default withRouter(ContentPageWrapper as FC);
+export default withRouter(
+	ContentPageWrapper as FC<ContentPageWrapperProps & RouteComponentProps<{ path: string }>>
+) as unknown as FC<ContentPageWrapperProps>;

@@ -4,10 +4,10 @@ import { isAvo } from '../../shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { convertUserInfoToCommonUser } from '../users.converters';
 
-import { CommonUser, HetArchiefUser, UserInfoType } from '../users.types';
+import { HetArchiefUser, UserInfoType } from '../users.types';
 
 export class SessionUserEntity {
-	protected user: CommonUser | undefined;
+	protected user: Avo.User.CommonUser | undefined;
 	protected originalUser: HetArchiefUser | Avo.User.User;
 
 	public constructor(user: HetArchiefUser | Avo.User.User | undefined) {
@@ -18,7 +18,7 @@ export class SessionUserEntity {
 		);
 	}
 
-	public getUser(): CommonUser {
+	public getUser(): Avo.User.CommonUser {
 		return this.user;
 	}
 

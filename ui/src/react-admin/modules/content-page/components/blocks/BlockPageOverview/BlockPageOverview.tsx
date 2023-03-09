@@ -16,6 +16,7 @@ import {
 	Tabs,
 	TagList,
 } from '@viaa/avo2-components';
+import { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import moment from 'moment';
@@ -63,6 +64,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	focusedPage: ContentPageInfo | null; // Shown at the top with an expanded accordion
 	getLabelLink?: (label: string) => string;
 	renderLink?: RenderLinkFunction;
+	commonUser?: Avo.User.CommonUser;
 }
 
 export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
@@ -89,6 +91,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	focusedPage,
 	getLabelLink,
 	renderLink = defaultRenderLinkFunction,
+	commonUser,
 }) => {
 	const allLabelObj = { label: allLabel, id: -2 };
 	const noLabelObj = { label: noLabel, id: -2 };
@@ -309,7 +312,10 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								isOpen={page.id === focusedPage?.id}
 								key={`block-page-${page.id}`}
 							>
-								<ContentPageRenderer contentPageInfo={page} />
+								<ContentPageRenderer
+									contentPageInfo={page}
+									commonUser={commonUser}
+								/>
 							</Accordion>
 						);
 					})}
