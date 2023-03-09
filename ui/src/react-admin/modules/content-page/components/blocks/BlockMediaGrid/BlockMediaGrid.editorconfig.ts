@@ -1,9 +1,10 @@
-import { CheckboxProps, ContentPickerType, MultiRangeProps } from '@viaa/avo2-components';
+import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { isAvo } from '~shared/helpers/is-avo';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';

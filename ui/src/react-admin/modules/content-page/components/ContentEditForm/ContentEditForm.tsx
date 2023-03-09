@@ -302,14 +302,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 											required
 										>
 											<ContentPicker
-												initialValue={owner}
 												hideTargetSwitch
 												hideTypeDropdown
 												placeholder={tText(
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
 												allowedTypes={[ContentPickerType.PROFILE]}
-												onSelect={(item: PickerItem | null) => {
+												value={owner}
+												onChange={(item: PickerItem | null) => {
 													if (!item) {
 														return;
 													}

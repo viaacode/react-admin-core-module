@@ -7,7 +7,7 @@ import {
 	LinkTarget,
 	TextInput,
 } from '@viaa/avo2-components';
-import { get, isNull } from 'lodash-es';
+import { isNull } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
@@ -22,7 +22,7 @@ import {
 	GET_CONTENT_TYPES,
 	REACT_SELECT_DEFAULT_OPTIONS,
 } from './ContentPicker.const';
-import { filterTypes, setInitialInput, setInitialItem } from './ContentPicker.helpers';
+import { filterTypes, setInitialItem } from './ContentPicker.helpers';
 import './ContentPicker.scss';
 import { parseSearchQuery } from './helpers/parse-picker';
 
@@ -32,8 +32,8 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
 	allowedTypes?: ContentPickerType[];
-	initialValue: PickerItem | undefined | null;
-	onSelect: (value: PickerItem | null) => void;
+	value: PickerItem | undefined | null;
+	onChange: (value: PickerItem | null) => void;
 	placeholder?: string;
 	hideTypeDropdown?: boolean;
 	hideTargetSwitch?: boolean;
@@ -42,8 +42,8 @@ export interface ContentPickerProps {
 
 export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
-	initialValue,
-	onSelect,
+	value,
+	onChange,
 	placeholder = AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___selecteer-een-item'
 	),
@@ -52,12 +52,13 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	errors = [],
 }) => {
 	const { tHtml, tText } = useTranslation();
+	const [testInput, setTestInput] = useState<string>('');
 
 	// filter available options for the type picker
 	const typeOptions = filterTypes(GET_CONTENT_TYPES(), allowedTypes as ContentPickerType[]);
 
-	// apply initial type from `initialValue`, default to first available type
-	const currentTypeObject = typeOptions.find((type) => type.value === get(initialValue, 'type'));
+	// apply initial type from `value`, default to first available type
+	const currentTypeObject = typeOptions.find((type) => type.value === value?.type);
 	const [selectedType, setSelectedType] = useState<PickerTypeOption>(
 		currentTypeObject || typeOptions[0]
 	);
@@ -69,13 +70,8 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	const [selectedItem, setSelectedItem] = useState<PickerItem | null>(null);
 	const [hasAppliedInitialItem, setHasAppliedInitialItem] = useState<boolean>(false);
 
-	// apply initial input if INPUT-based type, default to ''
-	const [input, setInput] = useState<string>(
-		setInitialInput(currentTypeObject, initialValue || undefined)
-	);
-
 	const [isTargetSelf, setIsTargetSelf] = useState<boolean>(
-		(get(initialValue, 'target') || LinkTarget.Self) === LinkTarget.Self
+		(value?.target || LinkTarget.Self) === LinkTarget.Self
 	);
 
 	// inflate item picker
@@ -87,14 +83,14 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				}
 				let items: PickerItem[] = await selectedType.fetch(keyword, 20);
 
-				if (!hasAppliedInitialItem && initialValue) {
+				if (!hasAppliedInitialItem && value) {
 					items = [
 						{
-							label: initialValue?.label || '',
-							type: initialValue?.type as ContentPickerType,
-							value: initialValue?.value || '',
+							label: value?.label || '',
+							type: value?.type as ContentPickerType,
+							value: value?.value || '',
 						},
-						...items.filter((item: PickerItem) => item.label !== initialValue?.label),
+						...items.filter((item: PickerItem) => item.label !== value?.label),
 					];
 				}
 
@@ -122,7 +118,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				return [];
 			}
 		},
-		[selectedType, hasAppliedInitialItem, initialValue]
+		[selectedType, hasAppliedInitialItem, value]
 	);
 
 	// when selecting a type, reset `selectedItem` and retrieve new item options
@@ -133,10 +129,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	// during the first update of `itemOptions`, set the initial value of the item picker
 	useEffect(() => {
 		if (itemOptions.length && !hasAppliedInitialItem) {
-			setSelectedItem(setInitialItem(itemOptions, initialValue || undefined) || null);
+			setSelectedItem(setInitialItem(itemOptions, value || undefined) || null);
 			setHasAppliedInitialItem(true);
 		}
-	}, [itemOptions, hasAppliedInitialItem, initialValue]);
+	}, [itemOptions, hasAppliedInitialItem, value]);
 
 	// events
 	const onSelectType = async (selected: SingleValue<PickerTypeOption>) => {
@@ -153,7 +149,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		event?: ActionMeta<PickerItem>
 	) => {
 		// reset `selectedItem` when clearing item picker
-		if (get(event, 'action') === 'clear') {
+		if (event?.action === 'clear') {
 			propertyChanged('selectedItem', null);
 			setSelectedItem(null);
 			return null;
@@ -188,11 +184,6 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		setSelectedItem(selectedItem);
 	};
 
-	const onChangeInput = (value: string) => {
-		setInput(value);
-		propertyChanged('value', value);
-	};
-
 	const propertyChanged = (
 		prop: 'type' | 'selectedItem' | 'value' | 'target' | 'label',
 		propValue: ContentPickerType | PickerItem | string | number | null | LinkTarget
@@ -212,7 +203,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 			newValue = (propValue as PickerItem)?.value || null;
 			newLabel = (propValue as PickerItem)?.label;
 		} else if (selectedType.picker === 'TEXT_INPUT') {
-			newValue = input;
+			newValue = value?.value || '';
 		} else if (selectedType.picker === 'SELECT' && selectedItem) {
 			newLabel = selectedItem?.label;
 			newValue = selectedItem?.value;
@@ -234,9 +225,9 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		}
 
 		if (isNull(newValue)) {
-			onSelect(null);
+			onChange(null);
 		} else {
-			onSelect({
+			onChange({
 				type: newType,
 				value: newValue,
 				target: newTarget,
@@ -281,11 +272,29 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 		switch (selectedType.picker) {
 			case 'SELECT':
-				return <FlexItem>{renderItemPicker()}</FlexItem>;
+				return (
+					<FlexItem>
+						<TextInput value={testInput} onChange={(val) => setTestInput(val)} />
+						{renderItemPicker()}
+					</FlexItem>
+				);
 			case 'TEXT_INPUT':
-				return <FlexItem>{renderTextInputPicker()}</FlexItem>;
+				return (
+					<FlexItem>
+						<TextInput
+							value={value?.value || ''}
+							onChange={(value: string) => propertyChanged('value', value)}
+							placeholder={selectedType.placeholder}
+						/>
+					</FlexItem>
+				);
 			case 'FILE_UPLOAD':
-				return <FlexItem>{renderFileUploadPicker()}</FlexItem>;
+				return (
+					<FlexItem>
+						<TextInput value={testInput} onChange={(val) => setTestInput(val)} />
+						{renderFileUploadPicker()}
+					</FlexItem>
+				);
 			default:
 				return null;
 		}
@@ -312,20 +321,16 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		/>
 	);
 
-	const renderTextInputPicker = () => (
-		<TextInput value={input} onChange={onChangeInput} placeholder={selectedType.placeholder} />
-	);
-
 	const renderFileUploadPicker = () => {
 		return (
 			<FileUpload
 				assetType={'CONTENT_BLOCK_FILE' as any}
 				ownerId=""
-				urls={[input]}
+				urls={[value?.value || '']}
 				allowMulti={false}
 				showDeleteButton
 				onChange={(urls: string[]) => {
-					onChangeInput(urls[0]);
+					propertyChanged('value', urls[0]);
 				}}
 				allowedTypes={[]}
 			/>
@@ -363,7 +368,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 							isTargetSelf ? LinkTarget.Blank : LinkTarget.Self
 						);
 					}}
-					disabled={!(selectedType.picker === 'TEXT_INPUT' ? input : selectedItem)}
+					disabled={!(selectedType.picker === 'TEXT_INPUT' ? value?.value : selectedItem)}
 				/>
 			</FlexItem>
 		);

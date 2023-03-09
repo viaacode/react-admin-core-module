@@ -49,7 +49,7 @@ export interface PickerItem {
 export type ContentWidth = 'REGULAR' | 'LARGE' | 'MEDIUM';
 
 export interface ContentPageLabel {
-	id: number;
+	id: number | string;
 	label: string;
 	content_type: ContentPageType;
 	link_to: PickerItem | null;
@@ -157,7 +157,7 @@ export type MediaItemResponse = Partial<Media> & {
 
 export type LabelObj = {
 	label: string;
-	id: number;
+	id: number | string;
 };
 
 export interface SearchDateRange {
