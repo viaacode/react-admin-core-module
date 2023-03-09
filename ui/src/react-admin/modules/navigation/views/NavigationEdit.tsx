@@ -1,24 +1,14 @@
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 
-import {
-	Badge,
-	Button,
-	ButtonToolbar,
-	Flex,
-	LinkTarget,
-	Spacer,
-	TagInfo,
-	TextInput,
-} from '@viaa/avo2-components';
+import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { Icon } from '~shared/components';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 import { NavigationEditForm } from '../components';
-import { GET_PAGE_TYPES_LANG, INITIAL_NAVIGATION_FORM } from '../navigation.consts';
+import { GET_PAGE_TYPES_LANG } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
 import {
 	NavigationEditFormErrorState,
