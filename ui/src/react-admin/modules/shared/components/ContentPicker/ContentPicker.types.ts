@@ -10,5 +10,5 @@ export enum ContentPickerType {
 	PROFILE = 'PROFILE',
 	ANCHOR_LINK = 'ANCHOR_LINK',
 	FILE = 'FILE',
-	CUSTOM_NAVIGATION_ELEMENTS = 'CUSTOM_NAVIGATION_ELEMENTS',
+	CUSTOM_NAVIGATION_ELEMENTS = 'DROPDOWN', // TODO switch this to 'CUSTOM_NAVIGATION_ELEMENTS' all at the same time and update existing navigation elements in the database as well
 }

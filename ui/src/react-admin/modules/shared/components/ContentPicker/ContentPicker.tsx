@@ -272,12 +272,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 		switch (selectedType.picker) {
 			case 'SELECT':
-				return (
-					<FlexItem>
-						<TextInput value={testInput} onChange={(val) => setTestInput(val)} />
-						{renderItemPicker()}
-					</FlexItem>
-				);
+				return <FlexItem>{renderItemPicker()}</FlexItem>;
 			case 'TEXT_INPUT':
 				return (
 					<FlexItem>

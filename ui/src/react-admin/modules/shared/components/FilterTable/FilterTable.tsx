@@ -5,7 +5,6 @@ import {
 	Form,
 	FormGroup,
 	IconName,
-	Pagination,
 	Select,
 	SelectOption,
 	Spacer,
@@ -41,7 +40,6 @@ import React, {
 	useState,
 } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
-import { AdminConfigManager } from '~core/config';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
