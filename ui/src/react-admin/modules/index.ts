@@ -54,6 +54,9 @@ export { default as NavigationOverview } from './navigation/views/NavigationOver
 export { default as NavigationEdit } from './navigation/views/NavigationEdit';
 export { default as NavigationDetail } from './navigation/views/NavigationDetail';
 
+// Alerts
+export { default as AlertsOverview } from './alerts/views/AlertsOverview';
+
 export { UserDetail } from './user/views/UserDetail';
 export { UserEdit } from './user/views/UserEdit';
 export { UserOverview } from './user/views/UserOverview';

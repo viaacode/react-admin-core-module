@@ -97,8 +97,17 @@ function setConfig() {
 				sortTable: { name: 'sort-table' },
 				arrowDown: { name: 'arrow-down' },
 				chevronLeft: { name: 'chevron-left' },
+				check: { name: 'check' },
+				calendar: { name: 'calendar' },
+				clock: { name: 'clock' },
 			},
 			list: (): { value: IconName; label: string }[] => {
+				return Object.values(IconName).map((iconName: IconName) => ({
+					value: iconName,
+					label: capitalize(lowerCase(iconName)),
+				}));
+			},
+			alerts: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
 					value: iconName,
 					label: capitalize(lowerCase(iconName)),

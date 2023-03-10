@@ -101,6 +101,7 @@ export interface AdminConfig {
 	};
 	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>;
 	icon?: IconConfig;
+	alertIcon?: IconConfig;
 	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
@@ -170,8 +171,12 @@ export interface IconConfig {
 		sortTable: IconComponentProps;
 		arrowDown: IconComponentProps;
 		chevronLeft: IconComponentProps;
+		check: IconComponentProps;
+		clock: IconComponentProps;
+		calendar: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
+	alerts: () => { label: string; value: string }[];
 }
 
 export type IconComponentProps = Record<string, unknown>;

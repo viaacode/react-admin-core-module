@@ -3,7 +3,7 @@ import { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '../../../index-export';
+import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
 import { Alert, AlertFormState, AlertsOverviewTableCol } from './alerts.types';
 
 export class AlertsService {
@@ -35,7 +35,6 @@ export class AlertsService {
 		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'POST',
 			body: JSON.stringify({
-				type: 'alert',
 				...data,
 			}),
 		});

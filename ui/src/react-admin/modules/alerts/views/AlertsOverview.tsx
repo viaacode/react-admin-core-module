@@ -1,9 +1,10 @@
 import {
 	Badge,
 	Button,
-	Checkbox,
 	Datepicker,
 	FormControl,
+	MultiSelect,
+	Pagination,
 	RichEditorState,
 	RichTextEditor,
 	Row,
@@ -11,9 +12,11 @@ import {
 	TableOptions,
 	TextInput,
 	Timepicker,
+	timepicker,
 } from '@meemoo/react-components';
 import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
+import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -32,7 +35,6 @@ import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
-import { CheckboxDropdownModal } from '~modules/shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { PaginationBar } from '~modules/shared/components/PaginationBar';
@@ -40,12 +42,12 @@ import { sortingIcons } from '~modules/shared/components/Table/Table.const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
-import { AdminConfigManager, ToastType } from '../../../../index-export';
 import {
 	ALERTS_FORM_SCHEMA,
+	ALERTS_PER_PAGE,
 	ALERTS_QUERY_PARAM_CONFIG,
 	alertUserGroups,
-	GET_ADMIN_ICON_OPTIONS,
+	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../alerts.const';
 import { AlertsService } from '../alerts.service';
@@ -59,6 +61,8 @@ import { ReactSelectOption } from '~modules/shared';
 import { get, now } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
+import { AdminConfigManager, ToastType } from '~core/config';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
 const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
@@ -73,7 +77,13 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
 
+	const Icon = AdminConfigManager.getConfig().icon?.component;
+
+	const pageCount: number = Math.ceil(alerts?.pages || 1 / ALERTS_PER_PAGE);
+
 	const getAlerts = useCallback(async () => {
+		console.log('get alerts');
+
 		try {
 			const allAlerts = await AlertsService.fetchAlerts(
 				filters.orderProp as AlertsOverviewTableCol,
@@ -103,7 +113,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					orderProp,
 					orderDirection,
 				});
-				getAlerts();
 			}
 		},
 		[filters, getAlerts, setFilters]
@@ -216,70 +225,148 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									},
 								},
 								{
-									id: 'edit',
+									id: 'actions',
 									Header: '',
 									Cell: ({ row }: { row: Row<Alert> }) => {
 										return (
-											<Button
-												icon={
-													AdminConfigManager.getConfig().icon
-														?.componentProps.edit.name as string
-												}
-												onClick={() => {
-													setActiveAlert(row.original);
-													setAction('edit');
-												}}
-											/>
-										);
-									},
-								},
-								{
-									id: 'delete',
-									Header: '',
-									Cell: ({ row }) => {
-										return (
-											<Button
-												icon={
-													AdminConfigManager.getConfig().icon
-														?.componentProps.delete.name as string
-												}
-												onClick={() => {
-													setAlertToDeleteId(row.original.id);
-													setIsDeleteModalOpen(true);
-												}}
-											/>
+											<>
+												<Button
+													icon={
+														Icon && (
+															<Icon
+																{...(AdminConfigManager.getConfig()
+																	.icon?.componentProps.edit as {
+																	name: string;
+																})}
+															/>
+														)
+													}
+													className="u-color-neutral"
+													variants="text"
+													onClick={() => {
+														setActiveAlert(row.original);
+														setAction('edit');
+													}}
+												/>
+												<Button
+													icon={
+														Icon && (
+															<Icon
+																{...(AdminConfigManager.getConfig()
+																	.icon?.componentProps
+																	.delete as {
+																	name: string;
+																})}
+															/>
+														)
+													}
+													className="u-color-neutral"
+													variants="text"
+													onClick={() => {
+														setAlertToDeleteId(row.original.id);
+														setIsDeleteModalOpen(true);
+													}}
+												/>
+											</>
 										);
 									},
 								},
 							],
 							data: alerts.items || [],
 							initialState: {
-								pageSize: 20,
+								pageSize: 10,
 							},
 						} as TableOptions<any>
 					}
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
-					pagination={({ gotoPage }) => {
-						return (
-							<PaginationBar
-								className="u-mt-16 u-mb-16"
-								count={20}
-								start={Math.max(0, filters.page - 1) * 20}
-								total={alerts.pages || 1}
-								onPageChange={(pageZeroBased) => {
-									gotoPage(pageZeroBased);
-									setFilters({
-										...filters,
-										page: pageZeroBased + 1,
-									});
-								}}
-							/>
-						);
-					}}
+					pagination={getPagination}
+					// pagination={({ gotoPage }) => {
+					// 	return (
+					// 		<PaginationBar
+					// 			className="u-mt-16 u-mb-16"
+					// 			count={10}
+					// 			start={Math.max(0, filters.page - 1) * 10}
+					// 			total={alerts.pages || 1}
+					// 			onPageChange={(pageZeroBased) => {
+					// 				gotoPage(pageZeroBased);
+					// 				setFilters({
+					// 					...filters,
+					// 					page: pageZeroBased + 1,
+					// 				});
+					// 			}}
+					// 	/>
+					// );
+					// }}
 				/>
 			</>
 		);
+	};
+
+	const getPagination = () => {
+		if (!isAvo()) {
+			return (
+				<Pagination
+					buttons={{
+						next: (
+							<Button
+								className="u-pl-24:sm u-pl-8"
+								disabled={filters.page === pageCount}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___volgende'
+								)}
+								iconEnd={
+									Icon && (
+										<Icon
+											{...(AdminConfigManager.getConfig().icon?.componentProps
+												.angleRight as { name: string })}
+										/>
+									)
+								}
+							/>
+						),
+						previous: (
+							<Button
+								className="u-pr-24:sm u-pr-8"
+								disabled={filters.page === 1}
+								variants={['text', 'neutral']}
+								label={tHtml(
+									'modules/shared/components/pagination-bar/pagination-bar___vorige'
+								)}
+								iconStart={
+									Icon && (
+										<Icon
+											{...(AdminConfigManager.getConfig().icon?.componentProps
+												.angleLeft as { name: string })}
+										/>
+									)
+								}
+							/>
+						),
+					}}
+					showFirstLastNumbers
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+					pageCount={pageCount}
+				/>
+			);
+		} else {
+			return (
+				<PaginationAvo
+					pageCount={pageCount}
+					onPageChange={handlePageChange}
+					currentPage={filters.page - 1}
+				/>
+			);
+		}
+	};
+
+	const handlePageChange = (newPageZeroBased: number) => {
+		setFilters({
+			...filters,
+			page: newPageZeroBased + 1,
+		});
 	};
 
 	const defaultValues = useMemo(
@@ -290,8 +377,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				fromDate: activeAlert?.fromDate || defaultStartDate(new Date()).toISOString(),
 				untilDate: activeAlert?.untilDate || defaultEndDate(new Date()).toISOString(),
 				userGroups: activeAlert?.userGroups || [],
-				icon: activeAlert?.icon || '',
-				active: activeAlert?.active || false,
+				type: activeAlert?.type || '',
 			} as AlertFormState),
 		[activeAlert]
 	);
@@ -317,8 +403,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				userGroups: activeAlert.userGroups || defaultValues.userGroups,
 				fromDate: activeAlert.fromDate || defaultValues.fromDate,
 				untilDate: activeAlert.untilDate || defaultValues.untilDate,
-				icon: activeAlert.icon || defaultValues.icon,
-				active: activeAlert.active || defaultValues.active,
+				type: activeAlert.type || defaultValues.type,
 			});
 		activeAlert && setFormMessage(undefined);
 	}, [activeAlert, defaultValues, setForm]);
@@ -329,8 +414,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setValue('fromDate', form.fromDate);
 		setValue('untilDate', form.untilDate);
 		setValue('userGroups', form.userGroups);
-		setValue('icon', form.icon);
-		setValue('active', form.active);
+		setValue('type', form.type);
 	}, [form, setValue]);
 
 	// Actions
@@ -340,15 +424,12 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			id: '',
 			title: '',
 			message: '',
-			icon: '',
+			type: '',
 			userGroups: [],
 			fromDate: '',
 			untilDate: '',
-			active: false,
 		});
 	};
-
-	// TODO: refetch
 
 	const onClickSave = async (values: AlertFormState) => {
 		setAction('save');
@@ -436,9 +517,17 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	};
 
 	const onClose = () => {
+		setAction(null);
 		setActiveAlert(null);
 		setFormMessage(undefined);
-		setAction(null);
+		setForm({
+			title: defaultValues.title,
+			message: defaultValues.message,
+			userGroups: defaultValues.userGroups,
+			fromDate: defaultValues.fromDate,
+			untilDate: defaultValues.untilDate,
+			type: defaultValues.type,
+		});
 	};
 
 	const renderTitle = useMemo(() => {
@@ -508,30 +597,40 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				label={tHtml(
 					'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon'
 				)}
-				errors={[errors.icon?.message]}
+				errors={[errors.type?.message]}
 			>
 				<Controller
-					name="icon"
+					name="type"
 					control={control}
 					render={() => (
 						<IconPicker
-							options={GET_ADMIN_ICON_OPTIONS()}
+							options={GET_ALERTS_ICON_OPTIONS()}
 							onChange={(option) => {
-								const icon = get(option, 'value', '');
+								const type = get(option, 'value', '');
 								setForm((prev) => ({
 									...prev,
-									icon,
+									type,
 								}));
 							}}
-							value={GET_ADMIN_ICON_OPTIONS().find(
-								(option: ReactSelectOption<string>) => option.value === form.icon
+							value={GET_ALERTS_ICON_OPTIONS().find(
+								(option: ReactSelectOption<string>) => option.value === form.type
 							)}
 						/>
 					)}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.icon?.message, form.icon, tHtml]);
+	}, [control, errors.type?.message, form.type, tHtml]);
+
+	const handleChangeUserGroups = useCallback(
+		(userGroups: string[]) => {
+			setForm((prev) => ({
+				...prev,
+				userGroups,
+			}));
+		},
+		[setForm]
+	);
 
 	const renderUserGroup = useMemo(() => {
 		return (
@@ -546,26 +645,42 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					name="userGroups"
 					control={control}
 					render={() => (
-						<CheckboxDropdownModal
-							onChange={(values) => {
-								setForm((prev) => ({
-									...prev,
-									userGroups: values,
-								}));
-							}}
-							// Set default selected state
-							options={alertUserGroups.map((option) => ({
-								...option,
-								checked: form.userGroups.includes(option.id),
-							}))}
-							label="Zichtbaar voor gebruikersgroep"
-							id="new-alert-user-group"
+						<MultiSelect
+							options={alertUserGroups}
+							onChange={handleChangeUserGroups}
+							label={tText(
+								'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
+							)}
+							iconOpen={
+								Icon && (
+									<Icon
+										{...(AdminConfigManager.getConfig().icon?.componentProps
+											.angleUp as { name: string })}
+									/>
+								)
+							}
+							iconClosed={
+								Icon && (
+									<Icon
+										{...(AdminConfigManager.getConfig().icon?.componentProps
+											.angleDown as { name: string })}
+									/>
+								)
+							}
+							iconCheck={
+								Icon && (
+									<Icon
+										{...(AdminConfigManager.getConfig().icon?.componentProps
+											.check as { name: string })}
+									/>
+								)
+							}
 						/>
 					)}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.userGroups?.message, form.userGroups, tHtml]);
+	}, [Icon, control, errors.userGroups?.message, handleChangeUserGroups, tHtml, tText]);
 
 	const renderFrom = useMemo(() => {
 		return (
@@ -573,6 +688,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				id="new-alert-from-date"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-van')}
 				errors={[errors.fromDate?.message]}
+				className="c-input--date-time"
 			>
 				<Controller
 					name="fromDate"
@@ -580,6 +696,20 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
+								customInput={
+									<TextInput
+										iconStart={
+											Icon && (
+												<Icon
+													{...(AdminConfigManager.getConfig().icon
+														?.componentProps.calendar as {
+														name: string;
+													})}
+												/>
+											)
+										}
+									/>
+								}
 								id="new-alert-from-date"
 								locale={nlBE}
 								minDate={defaultStartDate(new Date())}
@@ -600,6 +730,19 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 							/>
 
 							<Timepicker
+								{...timepicker}
+								customInput={
+									<TextInput
+										iconStart={
+											Icon && (
+												<Icon
+													{...(AdminConfigManager.getConfig().icon
+														?.componentProps.clock as { name: string })}
+												/>
+											)
+										}
+									/>
+								}
 								showTimeSelect
 								id="new-alert-from-time"
 								maxTime={endOfDay(new Date(form.fromDate) || now)}
@@ -622,7 +765,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				/>
 			</FormControl>
 		);
-	}, [control, errors.fromDate?.message, form.fromDate, tHtml]);
+	}, [Icon, control, errors.fromDate?.message, form.fromDate, tHtml]);
 
 	const renderUntil = useMemo(() => {
 		return (
@@ -630,6 +773,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				id="new-alert-until-date"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot')}
 				errors={[errors.untilDate?.message]}
+				className="c-input--date-time"
 			>
 				<Controller
 					name="untilDate"
@@ -637,6 +781,21 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
+								customInput={
+									// TODO: icon name
+									<TextInput
+										iconStart={
+											Icon && (
+												<Icon
+													{...(AdminConfigManager.getConfig().icon
+														?.componentProps.calendar as {
+														name: string;
+													})}
+												/>
+											)
+										}
+									/>
+								}
 								id="new-alert-until-date"
 								minDate={new Date(form.fromDate)}
 								locale={nlBE}
@@ -667,6 +826,19 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 							/>
 
 							<Timepicker
+								{...timepicker}
+								customInput={
+									<TextInput
+										iconStart={
+											Icon && (
+												<Icon
+													{...(AdminConfigManager.getConfig().icon
+														?.componentProps.clock as { name: string })}
+												/>
+											)
+										}
+									/>
+								}
 								showTimeSelect
 								id="new-alert-until-time"
 								maxTime={endOfDay(new Date(form.untilDate) || now)}
@@ -710,7 +882,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				/>
 			</FormControl>
 		);
-	}, [control, errors.untilDate?.message, form.fromDate, form.untilDate, tHtml]);
+	}, [Icon, control, errors.untilDate?.message, form.fromDate, form.untilDate, tHtml]);
 
 	// Show modal/blade
 	const renderPopupBody = () => {

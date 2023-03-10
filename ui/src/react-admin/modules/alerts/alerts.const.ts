@@ -1,11 +1,13 @@
 import { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import { array, boolean, date, object, SchemaOf, string } from 'yup';
+import { array, object, SchemaOf, string } from 'yup';
+import { AdminConfigManager } from '~core/config';
 import { ReactSelectOption, ROUTE_PARTS } from '~modules/shared';
 import { Group } from '~modules/shared/consts/user-group.consts';
 import { SortDirectionParam } from '~modules/shared/helpers/query-params';
-import { AdminConfigManager } from '../../../index-export';
 import { AlertFormState } from './alerts.types';
+
+export const ALERTS_PER_PAGE = 20;
 
 export const ALERTS_PATH = {
 	ALERTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
@@ -35,16 +37,15 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 		),
 		userGroups: array()
 			.of(string().required('is required'))
-			.length(
+			.min(
 				1,
 				tText(
 					'react-admin/modules/alerts/views/alerts-const___selecteer-een-gebruikersgroep'
 				)
 			),
-		icon: string().required(
+		type: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___icoon-is-verplicht')
 		),
-		active: boolean().required('is required'),
 	});
 };
 
@@ -79,5 +80,5 @@ export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'link',
 ];
 
-export const GET_ADMIN_ICON_OPTIONS: () => ReactSelectOption<string>[] = () =>
-	AdminConfigManager.getConfig().icon?.list() || [];
+export const GET_ALERTS_ICON_OPTIONS: () => ReactSelectOption<string>[] = () =>
+	AdminConfigManager.getConfig().icon?.alerts() || [];
