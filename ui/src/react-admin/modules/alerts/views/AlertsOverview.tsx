@@ -37,7 +37,6 @@ import { useQueryParams } from 'use-query-params';
 import { Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
-import { PaginationBar } from '~modules/shared/components/PaginationBar';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
@@ -82,8 +81,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const pageCount: number = Math.ceil(alerts?.pages || 1 / ALERTS_PER_PAGE);
 
 	const getAlerts = useCallback(async () => {
-		console.log('get alerts');
-
 		try {
 			const allAlerts = await AlertsService.fetchAlerts(
 				filters.orderProp as AlertsOverviewTableCol,
@@ -115,7 +112,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				});
 			}
 		},
-		[filters, getAlerts, setFilters]
+		[filters, setFilters]
 	);
 
 	useEffect(() => {
@@ -281,23 +278,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
 					pagination={getPagination}
-					// pagination={({ gotoPage }) => {
-					// 	return (
-					// 		<PaginationBar
-					// 			className="u-mt-16 u-mb-16"
-					// 			count={10}
-					// 			start={Math.max(0, filters.page - 1) * 10}
-					// 			total={alerts.pages || 1}
-					// 			onPageChange={(pageZeroBased) => {
-					// 				gotoPage(pageZeroBased);
-					// 				setFilters({
-					// 					...filters,
-					// 					page: pageZeroBased + 1,
-					// 				});
-					// 			}}
-					// 	/>
-					// );
-					// }}
 				/>
 			</>
 		);
@@ -715,7 +695,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								minDate={defaultStartDate(new Date())}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(fromDate) => {
+								onChange={(fromDate: Date) => {
 									fromDate &&
 										setForm((prev) => ({
 											...prev,
@@ -750,7 +730,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								minDate={defaultStartDate(new Date())}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(fromDate) => {
+								onChange={(fromDate: Date) => {
 									fromDate &&
 										setForm((prev) => ({
 											...prev,
@@ -801,7 +781,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								locale={nlBE}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(untilDate) => {
+								onChange={(untilDate: Date) => {
 									untilDate &&
 										setForm((prev) => ({
 											...prev,
@@ -850,7 +830,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								minDate={new Date(form.fromDate)}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(untilDate) => {
+								onChange={(untilDate: Date) => {
 									untilDate &&
 										setForm((prev) => ({
 											...prev,
