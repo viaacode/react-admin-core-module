@@ -1,6 +1,6 @@
 import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
-import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { AdminConfigManager } from '~core/config';
 
 import { ContentPageService } from '../../../services/content-page.service';
 
@@ -38,7 +38,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 	const fetchContentPages = useCallback(async () => {
 		try {
 			const promises = elements.map((projectInfo: ProjectSpotlightProps) => {
-				const projectPath = get(projectInfo, 'project.value');
+				const projectPath = projectInfo?.project?.value;
 				if (projectPath && projectPath.toString && projectPath.toString()) {
 					return ContentPageService.getContentPageByPath(
 						projectInfo.project.value.toString()
@@ -77,17 +77,26 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 			<BlockSpotlight
 				elements={projectContentPages.map(
 					(projectContentPage: ContentPageInfo | null, index: number): ImageInfo => {
-						return {
-							title:
-								elements[index].customTitle ||
-								get(projectContentPage, 'title') ||
-								'',
-							image:
-								elements[index].customImage ||
-								get(projectContentPage, 'thumbnail_path') ||
-								'',
-							buttonAction: elements[index].project,
-						};
+						const element = elements[index];
+						if (projectContentPage) {
+							return {
+								title: element?.customTitle || projectContentPage?.title || '',
+								image:
+									element?.customImage || projectContentPage?.thumbnailPath || '',
+								buttonAction: element?.project,
+							};
+						} else {
+							return {
+								title:
+									AdminConfigManager.getConfig().services.i18n.tText(
+										'Pagina niet gevonden'
+									) +
+									': ' +
+									element.project?.value?.toString(),
+								image: '',
+								buttonAction: undefined,
+							};
+						}
 					}
 				)}
 				renderLink={renderLink}

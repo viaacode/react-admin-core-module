@@ -157,6 +157,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				),
 				type: ToastType.ERROR,
 			});
+			onChange([]);
 		}
 
 		setIsProcessing(false);
