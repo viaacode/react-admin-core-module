@@ -1,5 +1,5 @@
 import { IPagination, Pagination } from "@studiohyperdrive/pagination";
-import { forwardRef, Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { BadRequestException, forwardRef, Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { isArray } from "class-validator";
 import { isEmpty, isNil, set } from "lodash";
 
@@ -34,7 +34,7 @@ export class MaintenanceAlertsService {
 
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService,) {}
 
-	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert, isPersonal: boolean = false): MaintenanceAlert | null {
+	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert, isPersonal = false): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
 			return null;
 		}
@@ -133,7 +133,7 @@ export class MaintenanceAlertsService {
 		>(FindMaintenanceAlertByIdDocument, { id });
 
 		if (isNil(maintenanceAlertResponse) || !maintenanceAlertResponse.app_maintenance_alerts[0]) {
-			throw new NotFoundException(`Material Request with id '${id}' not found`);
+			throw new NotFoundException(`Maintenance Alert with id '${id}' not found`);
 		}
 
 		return this.adapt(maintenanceAlertResponse.app_maintenance_alerts[0]);
@@ -168,16 +168,33 @@ export class MaintenanceAlertsService {
 		maintenanceAlertId: string,
 		updateMaintenanceAlertDto: UpdateMaintenanceAlertDto,
 	): Promise<MaintenanceAlert> {
+		const { title, message, type, userGroups, fromDate, untilDate } = updateMaintenanceAlertDto;
+
+		const updateMaintenanceAlert = {
+			title,
+			message,
+			type,
+			user_groups: userGroups,
+			from_date: fromDate,
+			until_date: untilDate
+		};
+
 		const { update_app_maintenance_alerts: updatedMaintenanceAlert } =
 			await this.dataService.execute<
 				UpdateMaintenanceAlertMutation,
 				UpdateMaintenanceAlertMutationVariables
 			>(UpdateMaintenanceAlertDocument, {
 				maintenanceAlertId,
-				maintenanceAlert: updateMaintenanceAlertDto,
+				updateMaintenanceAlert,
 			});
 
-		this.logger.debug(`Maintenance Alert ${updatedMaintenanceAlert.returning[0].id} updated.`);
+		if (isEmpty(updatedMaintenanceAlert.returning[0])) {
+			throw new BadRequestException(
+					`Maintenance alert (${maintenanceAlertId}) could not be updated.`
+			);
+		}
+
+		this.logger.debug(`Maintenance Alert ${updatedMaintenanceAlert.returning[0]?.id} updated.`);
 
 		return this.adapt(updatedMaintenanceAlert.returning[0]);
 	}

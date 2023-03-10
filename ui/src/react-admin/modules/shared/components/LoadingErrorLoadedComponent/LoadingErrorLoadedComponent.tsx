@@ -6,7 +6,6 @@ import { AdminConfigManager } from '~core/config';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~shared/services/permission-service';
-import { CommonUser } from '~modules/user/user.types';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -54,7 +53,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 		// 			'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
 		// 		)
 		// 	}
-		// 	icon={loadingInfo.icon || IconName.alertTriangle}
+		// 	icon={loadingInfo.icon || 'alertTriangle' as IconName}
 		// 	actionButtons={loadingInfo.actionButtons || ['home']}
 		// />
 		<>
@@ -91,7 +90,7 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 
 export async function checkPermissions(
 	permissions: Permissions,
-	user: CommonUser | undefined,
+	user: Avo.User.CommonUser | undefined,
 	successFunc: () => void,
 	setLoadingInfo: (info: LoadingInfo) => void,
 	noPermissionsMessage?: string
@@ -111,7 +110,7 @@ export async function checkPermissions(
 					AdminConfigManager.getConfig().services.i18n.tHtml(
 						'shared/components/loading-error-loaded-component/loading-error-loaded-component___je-hebt-geen-rechten-voor-deze-pagina'
 					),
-				icon: IconName.lock,
+				icon: 'lock' as IconName,
 			});
 		}
 	} catch (err) {
@@ -121,7 +120,7 @@ export async function checkPermissions(
 			message: AdminConfigManager.getConfig().services.i18n.tHtml(
 				'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account'
 			),
-			icon: IconName.alertTriangle,
+			icon: 'alertTriangle' as IconName,
 		});
 	}
 }

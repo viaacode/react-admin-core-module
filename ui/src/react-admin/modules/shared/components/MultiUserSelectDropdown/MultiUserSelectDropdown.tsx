@@ -13,7 +13,7 @@ import {
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
@@ -65,7 +65,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	useEffect(() => {
 		if (values.length) {
 			UserService.getNamesByProfileIds(values)
-				.then((users: Partial<CommonUser>[]) => {
+				.then((users: Partial<Avo.User.CommonUser>[]) => {
 					setSelectedProfiles(
 						users.map(
 							(user): PickerItem => ({
@@ -163,7 +163,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							)}
 							<Icon
 								className="c-button__icon"
-								name={isOpen ? IconName.caretUp : IconName.caretDown}
+								name={isOpen ? ('caretUp' as IconName) : ('caretDown' as IconName)}
 								size="small"
 								type="arrows"
 							/>
@@ -187,7 +187,8 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							<Spacer margin={['top', 'bottom']}>
 								<div key={`profile-content-picker-${selectedProfile?.label}`}>
 									<ContentPicker
-										onSelect={(selectedProfile) => {
+										value={selectedProfile}
+										onChange={(selectedProfile) => {
 											if (selectedProfile) {
 												setSelectedProfiles((selectedProfiles) =>
 													uniqBy(
@@ -207,7 +208,6 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 												'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___selecteer-een-gebruiker'
 											)
 										}
-										initialValue={selectedProfile}
 									/>
 								</div>
 							</Spacer>

@@ -9,7 +9,7 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -71,7 +71,11 @@ import { ErrorView } from '~shared/components/error';
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;
 
-const ContentPageOverview: FunctionComponent = () => {
+interface ContentPageOverviewProps {
+	commonUser?: Avo.User.CommonUser;
+}
+
+const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ commonUser }) => {
 	// Hooks
 	const [contentToDelete, setContentToDelete] = useState<ContentPageInfo | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -113,11 +117,12 @@ const ContentPageOverview: FunctionComponent = () => {
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
-	const getUser = () => AdminConfigManager.getConfig().user;
-
-	const hasPerm = useCallback((permission: PermissionName) => {
-		return PermissionService.hasPerm(getUser(), permission);
-	}, []);
+	const hasPerm = useCallback(
+		(permission: PermissionName) => {
+			return PermissionService.hasPerm(commonUser, permission);
+		},
+		[commonUser]
+	);
 
 	const ownerFilter = (queryWildcard: string): any[] => {
 		if (isAvo()) {
@@ -206,7 +211,7 @@ const ContentPageOverview: FunctionComponent = () => {
 		// When you get to this point we assume you already have either the EDIT_ANY_CONTENT_PAGES or EDIT_OWN_CONTENT_PAGES permission
 		if (!hasPerm(EDIT_ANY_CONTENT_PAGES)) {
 			// Add filter to only allow the content pages for which the user is the author
-			andFilters.push({ user_profile_id: { _eq: getUser().profileId } });
+			andFilters.push({ user_profile_id: { _eq: commonUser?.profileId } });
 		}
 
 		andFilters.push({ is_deleted: { _eq: false } });
@@ -432,7 +437,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon={IconName.info}
+								icon={'info' as IconName}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___bekijk-content'
@@ -444,7 +449,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							/>
 						</Link>
 						<Button
-							icon={IconName.eye}
+							icon={'eye' as IconName}
 							onClick={() => handlePreviewClicked(contentPage)}
 							size="small"
 							title={tText('admin/content/views/content-overview___preview-content')}
@@ -454,7 +459,11 @@ const ContentPageOverview: FunctionComponent = () => {
 							type="secondary"
 						/>
 						<Button
-							icon={isPublic(contentPage) ? IconName.unlock3 : IconName.lock}
+							icon={
+								isPublic(contentPage)
+									? ('unlock3' as IconName)
+									: ('lock' as IconName)
+							}
 							size="small"
 							title={
 								isPublic(contentPage)
@@ -474,7 +483,7 @@ const ContentPageOverview: FunctionComponent = () => {
 							})}
 						>
 							<Button
-								icon={IconName.edit}
+								icon={'edit' as IconName}
 								size="small"
 								title={tText(
 									'admin/content/views/content-overview___pas-content-aan'
@@ -487,7 +496,7 @@ const ContentPageOverview: FunctionComponent = () => {
 						</Link>
 						{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 							<Button
-								icon={IconName.delete}
+								icon={'delete' as IconName}
 								onClick={() => openModal(contentPage)}
 								size="small"
 								title={tText(
@@ -525,7 +534,7 @@ const ContentPageOverview: FunctionComponent = () => {
 					<Spacer margin="top">
 						<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
 							<Button
-								icon={IconName.plus}
+								icon={'plus' as IconName}
 								label={tText(
 									'admin/content/views/content-overview___content-toevoegen'
 								)}

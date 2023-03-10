@@ -123,7 +123,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 			aboveMin && (
 				<FlexItem className="u-flex-align-end" shrink>
 					<Button
-						icon={IconName.delete}
+						icon={'delete' as IconName}
 						type="danger"
 						onClick={() => removeComponentFromState(stateIndex)}
 						size="small"
@@ -198,7 +198,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				title={tText(
 					'admin/content-block/components/content-block-form/content-block-form___voeg-sectie-toe'
 				)}
-				icon={IconName.add}
+				icon={'add' as IconName}
 				type="secondary"
 				onClick={addComponentToState}
 			/>
@@ -227,7 +227,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 						<ButtonGroup>
 							<Button
 								disabled={blockIndex === 0}
-								icon={IconName.chevronUp}
+								icon={'chevronUp' as IconName}
 								onClick={() => onReorder(blockIndex, -1)}
 								size="small"
 								title={tText(
@@ -240,7 +240,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							/>
 							<Button
 								disabled={blockIndex + 1 === length}
-								icon={IconName.chevronDown}
+								icon={'chevronDown' as IconName}
 								onClick={() => onReorder(blockIndex, 1)}
 								size="small"
 								title={tText(
@@ -267,7 +267,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							}
 						>
 							<Button
-								icon={IconName.copy}
+								icon={'copy' as IconName}
 								size="small"
 								title={tText(
 									'admin/content-block/components/content-block-form/content-block-form___kopieer-content-blok'
@@ -279,7 +279,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							/>
 						</CopyToClipboard>
 						<Button
-							icon={IconName.delete}
+							icon={'delete' as IconName}
 							onClick={() => onRemove(blockIndex)}
 							size="small"
 							title={tText(

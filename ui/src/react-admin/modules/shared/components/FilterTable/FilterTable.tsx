@@ -5,7 +5,6 @@ import {
 	Form,
 	FormGroup,
 	IconName,
-	Pagination,
 	Select,
 	SelectOption,
 	Spacer,
@@ -58,6 +57,8 @@ import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSel
 
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { isAvo } from '~modules/shared/helpers/is-avo';
+import { PaginationBar } from '@meemoo/react-components';
+import { Icon } from '../Icon';
 
 export interface FilterableTableState {
 	query?: string;
@@ -288,7 +289,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						<FormGroup className="c-content-filters__search" inlineMode="grow">
 							<TextInput
 								placeholder={searchTextPlaceholder}
-								icon={IconName.search}
+								icon={'search' as IconName} // TODO investigate why enum is undefined
 								onChange={setSearchTerm}
 								onKeyUp={handleKeyUp as any}
 								value={searchTerm}
@@ -477,12 +478,25 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 							/>
 							{!hidePagination && (
 								<Spacer margin="top-large">
-									<Pagination
-										pageCount={Math.ceil(dataCount / itemsPerPage)}
-										currentPage={tableState.page || 0}
-										onPageChange={(newPage) =>
+									<PaginationBar
+										count={itemsPerPage}
+										onPageChange={(newPage: number) =>
 											handleTableStateChanged(newPage, 'page')
 										}
+										start={(tableState.page || 0) * itemsPerPage}
+										total={dataCount}
+										nextLabel={tText(
+											'shared/components/filter-table/filter-table___volgende'
+										)}
+										nextIcon={<Icon name="angleRight" />}
+										previousLabel={tText(
+											'shared/components/filter-table/filter-table___vorige'
+										)}
+										previousIcon={<Icon name="angleLeft" />}
+										backToTopLabel={tText(
+											'shared/components/filter-table/filter-table___terug-naar-boven'
+										)}
+										backToTopIcon={<Icon name="angleUp" />}
 									/>
 								</Spacer>
 							)}

@@ -19,6 +19,7 @@ import {
 	intersection,
 	keys,
 	set,
+	uniq,
 	without,
 } from 'lodash';
 import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
@@ -46,7 +47,6 @@ import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { DatabaseType, PermissionName } from '@viaa/avo2-types';
-import { CommonUser } from '../../users';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -102,7 +102,14 @@ export class ContentPagesService {
 			name: contentBlock?.content_block_type,
 			type: contentBlock?.content_block_type as unknown as ContentBlockType,
 			position: contentBlock?.position,
-			block: contentBlock?.variables?.blockState,
+			block: {
+				...contentBlock?.variables?.blockState,
+				userGroupIds: uniq(
+					(contentBlock?.variables?.blockState.userGroupIds || []).map(
+						(groupId) => String(groupId),
+					),
+				),
+			},
 			components: contentBlock?.variables?.componentState,
 		};
 	}
@@ -123,8 +130,9 @@ export class ContentPagesService {
 				mergedUser?.first_name + ' ' + mergedUser?.last_name,
 			firstName: mergedUser?.first_name,
 			lastName: mergedUser?.last_name,
-			groupId:
+			groupId: String(
 				mergedUser?.profile_user_group?.group?.id ?? mergedUser?.group?.id,
+			),
 			groupName:
 				mergedUser?.profile_user_group?.group?.label ??
 				mergedUser?.group?.label,
@@ -395,9 +403,9 @@ export class ContentPagesService {
 
 	public async getContentPageByPathForUser(
 		path: string,
-		user?: CommonUser,
+		user?: Avo.User.CommonUser,
 		referrer?: string,
-	) {
+	): Promise<DbContentPage | null> {
 		const contentPage: DbContentPage | undefined =
 			await this.getContentPageByPath(path);
 
@@ -440,12 +448,9 @@ export class ContentPagesService {
 			}
 
 			// Check if content page is accessible for the user who requested the content page
-			if (
-				!intersection(
-					contentPage.userGroupIds.map((id) => String(id)),
-					SessionHelper.getUserGroupIds(String(user?.userGroup?.id)),
-				).length
-			) {
+			const pageUserGroups = contentPage.userGroupIds.map((id) => String(id));
+			const userUserGroups = SessionHelper.getUserGroupIds(user?.userGroup?.id);
+			if (!intersection(pageUserGroups, userUserGroups).length) {
 				return null;
 			}
 		}

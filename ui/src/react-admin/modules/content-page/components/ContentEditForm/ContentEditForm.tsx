@@ -31,7 +31,6 @@ import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.c
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
-import { CommonUser } from '~modules/user/user.types';
 
 import './ContentEditForm.scss';
 import {
@@ -51,7 +50,7 @@ interface ContentEditFormProps {
 	formErrors: ContentEditFormErrors;
 	contentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
 	changeContentPageState: (action: ContentEditAction) => void;
-	user: CommonUser;
+	commonUser: Avo.User.CommonUser;
 }
 
 export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
@@ -59,7 +58,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	formErrors,
 	contentPageInfo,
 	changeContentPageState,
-	user,
+	commonUser,
 }) => {
 	// Hooks
 	const { tText } = useTranslation();
@@ -171,7 +170,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									)}
 								>
 									<FileUpload
-										ownerId={user.profileId}
+										ownerId={commonUser.profileId}
 										urls={compact([contentPageInfo.thumbnailPath])}
 										assetType="CONTENT_PAGE_COVER"
 										allowMulti={false}
@@ -259,7 +258,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							{user?.permissions?.includes(
+							{commonUser?.permissions?.includes(
 								PermissionName.EDIT_PROTECTED_PAGE_STATUS
 							) && (
 								<Column size="12">
@@ -290,8 +289,10 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							{user?.permissions?.includes(PermissionName.EDIT_CONTENT_PAGE_AUTHOR) &&
-								!!user && (
+							{commonUser?.permissions?.includes(
+								PermissionName.EDIT_CONTENT_PAGE_AUTHOR
+							) &&
+								!!commonUser && (
 									<Column size="12">
 										<FormGroup
 											error={formErrors.userProfileId}
@@ -301,14 +302,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 											required
 										>
 											<ContentPicker
-												initialValue={owner}
 												hideTargetSwitch
 												hideTypeDropdown
 												placeholder={tText(
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
 												allowedTypes={[ContentPickerType.PROFILE]}
-												onSelect={(item: PickerItem | null) => {
+												value={owner}
+												onChange={(item: PickerItem | null) => {
 													if (!item) {
 														return;
 													}

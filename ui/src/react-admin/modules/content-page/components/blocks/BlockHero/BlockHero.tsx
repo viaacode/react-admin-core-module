@@ -6,12 +6,12 @@ import {
 	ButtonToolbar,
 	Container,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	RenderLinkFunction,
 	Spacer,
 } from '@viaa/avo2-components';
 import { isString } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 

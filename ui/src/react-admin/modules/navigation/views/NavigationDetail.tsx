@@ -201,7 +201,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				return (
 					<ButtonToolbar>
 						<Button
-							icon={IconName.edit2}
+							icon={'edit2' as IconName}
 							onClick={() =>
 								handleNavigate(
 									AdminConfigManager.getAdminRoute('NAVIGATION_ITEM_EDIT'),
@@ -220,7 +220,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							type="secondary"
 						/>
 						<Button
-							icon={IconName.delete}
+							icon={'delete' as IconName}
 							title={tText(
 								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
 							)}
@@ -264,7 +264,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				<Spacer margin="top">
 					<Flex center>
 						<Button
-							icon={IconName.plus}
+							icon={'plus' as IconName}
 							label={tText('admin/menu/views/menu-detail___voeg-een-item-toe')}
 							onClick={() =>
 								handleNavigate(

@@ -1,7 +1,6 @@
 import {
 	ButtonAction,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	Icon,
 	IconName,
 	RenderLinkFunction,
@@ -9,6 +8,7 @@ import {
 import classnames from 'classnames';
 import { get } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockSpotlight.scss';
 
@@ -44,7 +44,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 				{renderLink(
 					buttonAction,
 					<p>
-						{get(elements, [index, 'title'])} <Icon name={IconName.chevronRight} />
+						{get(elements, [index, 'title'])} <Icon name={'chevronRight' as IconName} />
 					</p>,
 					get(elements, [index, 'title'])
 				)}

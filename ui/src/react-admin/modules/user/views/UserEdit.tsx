@@ -34,18 +34,17 @@ import { navigate } from '~shared/helpers/link';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { PHOTO_TYPES } from '~shared/helpers/files';
 import stringToTagInfo from '../helpers/string-to-tag-info';
-import { CommonUser } from '../user.types';
 import { getAvatarProps } from '~shared/helpers/formatters/avatar';
 
 export type UserEditProps = {
 	id: string;
 	onSave?: (newProfileInfo: Partial<Avo.User.Profile>) => void;
-	onLoaded?: (user: CommonUser) => void;
+	onLoaded?: (user: Avo.User.CommonUser) => void;
 };
 
 export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	// Hooks
-	const [storedProfile, setStoredProfile] = useState<CommonUser | null>(null);
+	const [storedProfile, setStoredProfile] = useState<Avo.User.CommonUser | null>(null);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [profileErrors, setProfileErrors] = useState<
@@ -283,7 +282,7 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 											ariaLabel={tText(
 												'admin/users/views/user-edit___verbreek-de-link-tussen-deze-gebruiker-en-dit-bedrijf'
 											)}
-											icon={IconName.delete}
+											icon={'delete' as IconName}
 											onClick={() => setCompanyId(undefined)}
 										/>
 									</Spacer>

@@ -61,8 +61,6 @@ export { UserDetail } from './user/views/UserDetail';
 export { UserEdit } from './user/views/UserEdit';
 export { UserOverview } from './user/views/UserOverview';
 
-export type { CommonUser } from './user/user.types';
-
 //Users
 export { UserService } from './user/user.service';
 

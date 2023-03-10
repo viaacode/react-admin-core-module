@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 
-import { AdminConfig, AdminConfigManager, I18n } from '~core/config';
+import { AdminConfigManager, I18n } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
@@ -13,33 +13,33 @@ import { NULL_FILTER } from '~shared/helpers/filters';
 import { isAvo } from '~shared/helpers/is-avo';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { PermissionService } from '~shared/services/permission-service';
-import { CommonUser, UserBulkAction, UserOverviewTableCol } from './user.types';
+import { UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
 	confirmButtonType?: ButtonType;
 };
 
-export const GET_USER_OVERVIEW_TABLE_COLS: (
-	config: AdminConfig,
-	userGroupOptions: CheckboxOption[],
-	companyOptions: CheckboxOption[],
-	businessCategoryOptions: CheckboxOption[],
-	educationLevels: CheckboxOption[],
-	subjects: CheckboxOption[],
-	idps: CheckboxOption[]
-) => FilterableColumn<UserOverviewTableCol>[] = (
-	config,
-	userGroupOptions: CheckboxOption[],
-	companyOptions: CheckboxOption[],
-	businessCategoryOptions: CheckboxOption[],
-	educationLevels: CheckboxOption[],
-	subjects: CheckboxOption[],
-	idps: CheckboxOption[]
-) => {
+export const GET_USER_OVERVIEW_TABLE_COLS: (props: {
+	commonUser?: Avo.User.CommonUser;
+	userGroupOptions: CheckboxOption[];
+	companyOptions: CheckboxOption[];
+	businessCategoryOptions: CheckboxOption[];
+	educationLevels: CheckboxOption[];
+	subjects: CheckboxOption[];
+	idps: CheckboxOption[];
+}) => FilterableColumn<UserOverviewTableCol>[] = ({
+	commonUser,
+	userGroupOptions,
+	companyOptions,
+	businessCategoryOptions,
+	educationLevels,
+	subjects,
+	idps,
+}) => {
 	if (isAvo()) {
 		return getAvoColumns(
-			config.user,
+			commonUser,
 			userGroupOptions,
 			companyOptions,
 			businessCategoryOptions,
@@ -52,7 +52,7 @@ export const GET_USER_OVERVIEW_TABLE_COLS: (
 };
 
 const getAvoColumns = (
-	user: CommonUser | undefined,
+	user: Avo.User.CommonUser | undefined,
 	userGroupOptions: CheckboxOption[],
 	companyOptions: CheckboxOption[],
 	businessCategoryOptions: CheckboxOption[],
@@ -409,7 +409,7 @@ const getHetArchiefColumns = (
 ];
 
 export const GET_USER_BULK_ACTIONS = (
-	user: CommonUser | undefined,
+	user: Avo.User.CommonUser | undefined,
 	bulkActions: UserBulkAction[]
 ): UserBulkActionOption[] => {
 	if (!user || !bulkActions) {

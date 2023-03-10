@@ -1,12 +1,7 @@
-import {
-	CTA,
-	CTAProps,
-	DefaultProps,
-	defaultRenderLinkFunction,
-	RenderLinkFunction,
-} from '@viaa/avo2-components';
+import { CTA, CTAProps, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import classnames from 'classnames';
 import React, { FunctionComponent } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 export interface BlockCTAsProps extends DefaultProps {
 	elements: CTAProps[];

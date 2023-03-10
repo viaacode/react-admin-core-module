@@ -9,7 +9,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { AssetsService } from './shared/services/assets.service';
-import { mockUser } from './mock-user';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~shared/components/Html/Html';
 import { ROUTE_PARTS } from '~shared/consts/routes';
@@ -290,7 +289,6 @@ function setConfig() {
 				// See AVO2-client src/admin/content-block/components/wrappers/MediaGridWrapper/MediaGridWrapper.tsx => handleItemClicked()
 			},
 		},
-		user: mockUser,
 		routes: {
 			ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
 			BUNDLE_DETAIL: `/${ROUTE_PARTS.bundles}/:id`,

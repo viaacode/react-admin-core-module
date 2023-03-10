@@ -6,24 +6,18 @@ import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 
-import { CustomError } from '../shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 
-import {
-	CommonUser,
-	DeleteContentCounts,
-	Idp,
-	UserOverviewTableCol,
-	USERS_PER_PAGE,
-} from './user.types';
+import { DeleteContentCounts, Idp, UserOverviewTableCol, USERS_PER_PAGE } from './user.types';
 
 export class UserService {
 	private static getBaseUrl(): string {
 		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
 	}
 
-	static async getUserById(id: string): Promise<CommonUser> {
+	static async getUserById(id: string): Promise<Avo.User.CommonUser> {
 		try {
-			return fetchWithLogoutJson<CommonUser>(
+			return fetchWithLogoutJson<Avo.User.CommonUser>(
 				stringifyUrl({
 					url: `${this.getBaseUrl()}/${id}`,
 				}),
@@ -44,13 +38,13 @@ export class UserService {
 		tableColumnDataType: string,
 		where: any = {},
 		itemsPerPage: number = USERS_PER_PAGE
-	): Promise<[CommonUser[], number]> {
+	): Promise<[Avo.User.CommonUser[], number]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl(),
 					query: {
-						offset: page * USERS_PER_PAGE,
+						offset: page * itemsPerPage,
 						limit: itemsPerPage,
 						sortColumn,
 						sortOrder,
@@ -71,7 +65,9 @@ export class UserService {
 		}
 	}
 
-	static async getNamesByProfileIds(profileIds: string[]): Promise<Partial<CommonUser>[]> {
+	static async getNamesByProfileIds(
+		profileIds: string[]
+	): Promise<Partial<Avo.User.CommonUser>[]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
