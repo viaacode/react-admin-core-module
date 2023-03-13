@@ -1,4 +1,4 @@
-import { RichTextEditorControl } from '@meemoo/react-components';
+import { MultiSelectOption, RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
 import { array, object, SchemaOf, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
@@ -51,22 +51,26 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 
 // Constants
 
-export const alertUserGroups: { label: string; id: string }[] = [
+export const alertUserGroups: MultiSelectOption[] = [
 	{
 		label: 'meemoo admin',
 		id: Group.MEEMOO_ADMIN,
+		checked: false,
 	},
 	{
 		label: 'CP admin',
 		id: Group.CP_ADMIN,
+		checked: false,
 	},
 	{
 		label: 'Eindgebruiker',
 		id: Group.VISITOR,
+		checked: false,
 	},
 	{
 		label: 'kiosk',
 		id: Group.KIOSK_VISITOR,
+		checked: false,
 	},
 ];
 

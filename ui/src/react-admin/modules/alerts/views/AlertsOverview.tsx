@@ -4,6 +4,7 @@ import {
 	Datepicker,
 	FormControl,
 	MultiSelect,
+	MultiSelectOption,
 	Pagination,
 	RichEditorState,
 	RichTextEditor,
@@ -57,7 +58,7 @@ import {
 	AlertsOverviewTableCol,
 } from '../alerts.types';
 import { ReactSelectOption } from '~modules/shared';
-import { get, now } from 'lodash-es';
+import { get, now, without } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -75,6 +76,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [action, setAction] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
+	const [userGroups, setUserGroups] = useState<MultiSelectOption[]>(alertUserGroups);
 
 	const Icon = AdminConfigManager.getConfig().icon?.component;
 
@@ -349,6 +351,13 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		});
 	};
 
+	const handleChangeUserGroups = useCallback((checked: boolean, id: string) => {
+		setForm((prev) => ({
+			...prev,
+			userGroups: !checked ? [...prev.userGroups, id] : without(prev.userGroups, id),
+		}));
+	}, []);
+
 	const defaultValues = useMemo(
 		() =>
 			({
@@ -362,7 +371,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		[activeAlert]
 	);
 
-	// source of truth
 	const [form, setForm] = useState<AlertFormState>(defaultValues);
 	const [formMessage, setFormMessage] = useState<RichEditorState>();
 	const {
@@ -396,6 +404,12 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setValue('userGroups', form.userGroups);
 		setValue('type', form.type);
 	}, [form, setValue]);
+
+	useEffect(() => {
+		setUserGroups((prev) =>
+			prev.map((option) => ({ ...option, checked: form.userGroups.includes(option.id) }))
+		);
+	}, [form.userGroups]);
 
 	// Actions
 	const onClickCreate = () => {
@@ -602,16 +616,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		);
 	}, [control, errors.type?.message, form.type, tHtml]);
 
-	const handleChangeUserGroups = useCallback(
-		(userGroups: string[]) => {
-			setForm((prev) => ({
-				...prev,
-				userGroups,
-			}));
-		},
-		[setForm]
-	);
-
 	const renderUserGroup = useMemo(() => {
 		return (
 			<FormControl
@@ -626,7 +630,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={() => (
 						<MultiSelect
-							options={alertUserGroups}
+							options={userGroups}
 							onChange={handleChangeUserGroups}
 							label={tText(
 								'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
@@ -660,7 +664,15 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				/>
 			</FormControl>
 		);
-	}, [Icon, control, errors.userGroups?.message, handleChangeUserGroups, tHtml, tText]);
+	}, [
+		Icon,
+		control,
+		errors.userGroups?.message,
+		handleChangeUserGroups,
+		tHtml,
+		tText,
+		userGroups,
+	]);
 
 	const renderFrom = useMemo(() => {
 		return (
