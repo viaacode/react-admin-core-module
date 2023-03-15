@@ -299,6 +299,7 @@ async function getOnlineTranslations(): Promise<{
 
 		return { avo: avoAdminCoreTranslations, hetarchief: hetArchiefAdminCoreTranslations };
 	} catch (err) {
+		console.error(err);
 		throw new Error('Failed to get translations from the database');
 	}
 }

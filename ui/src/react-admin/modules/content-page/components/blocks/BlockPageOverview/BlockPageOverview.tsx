@@ -7,7 +7,6 @@ import {
 	Container,
 	convertToHtml,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	Flex,
 	Grid,
 	Pagination,
@@ -24,6 +23,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 
