@@ -1,8 +1,11 @@
 import { FC, ReactNode } from 'react';
 import { Button, Modal } from '@meemoo/react-components';
 import { AlertsOverview } from '~modules/alerts/views';
+import { useTranslation } from '~modules/shared/hooks/useTranslation';
 
 export const AlertsOverviewPage: FC = () => {
+	const { tText } = useTranslation();
+
 	const renderPopup = ({
 		title,
 		body,
@@ -22,10 +25,18 @@ export const AlertsOverviewPage: FC = () => {
 					<Button
 						variants={['block', 'black']}
 						onClick={onSave}
-						label="Bewaar wijzigingen"
+						label="tText(
+							'react-admin/modules/alerts/views/alerts-overview-page___bewaar-wijzigingen'
+						)"
 					/>
 
-					<Button variants={['block', 'text']} onClick={onClose} label="Annuleer" />
+					<Button
+						variants={['block', 'text']}
+						onClick={onClose}
+						label="tText(
+							'react-admin/modules/alerts/views/alerts-overview-page___annuleer'
+						)"
+					/>
 				</div>
 			);
 		};
