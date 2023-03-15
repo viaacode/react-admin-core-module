@@ -1,5 +1,6 @@
 export const ROUTE_PARTS = Object.freeze({
 	admin: 'admin',
+	alerts: 'meldingen',
 	assignment: 'opdracht',
 	assignments: 'opdrachten',
 	bookmarks: 'bladwijzers',

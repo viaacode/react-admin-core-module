@@ -3,6 +3,7 @@ import { DefaultComponentProps } from '~shared/types/components';
 
 export interface AdminLayoutProps extends DefaultComponentProps {
 	pageTitle?: ReactNode;
+	className?: string;
 }
 
 export type AdminLayoutComponent = FC<AdminLayoutProps> & {
