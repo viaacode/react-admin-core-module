@@ -71,6 +71,7 @@ function setConfig() {
 		},
 		navigationBars: {
 			enableIcons: true,
+			customNavigationElements: ['<PROFILE_DROPDOWN>', '<VISITOR_SPACES_DROPDOWN>'],
 		},
 		staticPages: [
 			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,

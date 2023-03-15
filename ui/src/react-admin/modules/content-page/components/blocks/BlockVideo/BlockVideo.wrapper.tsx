@@ -59,7 +59,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 				// Video from MAM
 				const mediaItemTemp = await ItemsService.fetchItemById(item.value.toString());
 				setMediaItem(mediaItemTemp);
-				setVideoStill(poster || get(mediaItemTemp, 'thumbnail_path'));
+				setVideoStill(poster || mediaItemTemp?.thumbnail_path);
 			} else {
 				// Custom video
 				setVideoStill(poster);
