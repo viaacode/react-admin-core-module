@@ -115,6 +115,7 @@ export interface AdminConfig {
 		proxyUrl: string;
 	};
 	routes: {
+		ALERTS_OVERVIEW: string;
 		CONTENT_PAGE_CREATE: string;
 		CONTENT_PAGE_DETAIL: string;
 		CONTENT_PAGE_EDIT: string;

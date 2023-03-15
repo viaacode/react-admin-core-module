@@ -282,6 +282,7 @@ function setConfig() {
 			},
 		},
 		routes: {
+			ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
 			BUNDLE_DETAIL: `/${ROUTE_PARTS.bundles}/:id`,
 			BUNDLE_EDIT: `/${ROUTE_PARTS.bundles}/:id/${ROUTE_PARTS.edit}`,
 			COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.collections}`,

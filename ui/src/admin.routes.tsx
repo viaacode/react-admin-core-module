@@ -8,10 +8,12 @@ import { renderAdminUserRoutes } from './modules/user/user';
 import { Route } from 'react-router-dom';
 import ContentPageWrapper from './modules/content-page/ContentPageWrapper';
 import { renderAdminNavigationRoutes } from './modules/navigations/navigation.routes';
+import { renderAdminAlertsRoutes } from './modules/alerts/alerts';
 
 export const renderAdminRoutes = () => {
 	return (
 		<Switch>
+			{renderAdminAlertsRoutes()}
 			{renderAdminContentPageRoutes()}
 			{renderAdminUserGroupRoutes()}
 			{renderAdminTranslationsRoutes()}
