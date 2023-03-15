@@ -480,7 +480,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								<Spacer margin="top-large">
 									<PaginationBar
 										count={itemsPerPage}
-										onPageChange={(newPage) =>
+										onPageChange={(newPage: number) =>
 											handleTableStateChanged(newPage, 'page')
 										}
 										start={(tableState.page || 0) * itemsPerPage}

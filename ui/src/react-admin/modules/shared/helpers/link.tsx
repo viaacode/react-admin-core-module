@@ -1,6 +1,7 @@
 import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
+import { ReactNode } from 'react';
 import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 import { APP_PATH } from '../consts/routes.consts';
@@ -215,3 +216,14 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 		}
 	}
 };
+
+export function defaultRenderLinkFunction(
+	_buttonAction: ButtonAction | undefined | null,
+	children: ReactNode,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	_label?: string,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	_title?: string
+): ReactNode | null {
+	return <>{children}</>;
+}
