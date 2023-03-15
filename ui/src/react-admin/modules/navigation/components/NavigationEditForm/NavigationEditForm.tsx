@@ -123,6 +123,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 						ContentPickerType.CONTENT_PAGE,
 						ContentPickerType.INTERNAL_LINK,
 						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
 					]}
 					value={
 						formState.contentType && formState.contentPath

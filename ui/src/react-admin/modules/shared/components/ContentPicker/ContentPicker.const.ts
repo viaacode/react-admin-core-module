@@ -1,4 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
+import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
 
 import { PickerTypeOption } from '../../types/content-picker';
 
@@ -53,6 +54,8 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = 
 	[ContentPickerType.FILE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___bestand'
 	),
+	[ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS]:
+		AdminConfigManager.getConfig().services.i18n.tText('custom navigatie items'),
 });
 
 export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
@@ -135,6 +138,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels[ContentPickerType.FILE],
 			disabled: false,
 			picker: 'FILE_UPLOAD',
+		},
+		{
+			value: ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
+			label: labels[ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS],
+			disabled: false,
+			fetch: retrieveCustomNavigationElements,
+			picker: 'SELECT',
 		},
 	];
 };

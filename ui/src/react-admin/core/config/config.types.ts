@@ -63,6 +63,7 @@ export interface AdminConfig {
 	};
 	navigationBars?: {
 		enableIcons: boolean;
+		customNavigationElements: string[];
 	};
 	// Secondary services and config
 	services: {

@@ -28,7 +28,7 @@ export function convertUserInfoToCommonUser(
 		| UserInfoOverviewHetArchief
 		| HetArchiefUser
 		| undefined,
-	userInfoType: UserInfoType,
+	userInfoType: UserInfoType
 ): Avo.User.CommonUser | undefined {
 	if (!userInfo) {
 		return undefined;
@@ -47,7 +47,7 @@ export function convertUserInfoToCommonUser(
 						organizationId: undefined,
 						unitId: org.unitAddress ?? null,
 						label: org.organizationName,
-					}),
+					})
 				),
 				subjects: user.profile.subjects,
 				educationLevels: user.profile.educationLevels,
@@ -85,7 +85,7 @@ export function convertUserInfoToCommonUser(
 					user.idpmapObjects.map((idpMapObject) => [
 						idpMapObject.idp as Idp,
 						idpMapObject.idp_user_id as string,
-					]),
+					])
 				),
 				alias: user.profile.alias || undefined,
 				title: user.profile.title || undefined,
@@ -110,7 +110,7 @@ export function convertUserInfoToCommonUser(
 						organizationId: undefined,
 						unitId: undefined,
 						label: org.organizationName,
-					}),
+					})
 				),
 				subjects: profile.subjects,
 				educationLevels: profile.educationLevels,
@@ -146,7 +146,7 @@ export function convertUserInfoToCommonUser(
 					profile.user.idpmapObjects.map((idpMapObject) => [
 						idpMapObject.idp as Idp,
 						idpMapObject.idp_user_id as string,
-					]),
+					])
 				),
 				alias: profile.alias || undefined,
 				title: profile.title || undefined,
@@ -175,11 +175,9 @@ export function convertUserInfoToCommonUser(
 						organizationId: org.organization_id,
 						unitId: org.unit_id ?? null,
 						label: org.organization?.ldap_description ?? '',
-					}),
+					})
 				),
-				subjects: user.classifications.map(
-					(classification) => classification.key,
-				),
+				subjects: user.classifications.map((classification) => classification.key),
 				educationLevels: user.contexts.map((context) => context.key),
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
@@ -218,7 +216,7 @@ export function convertUserInfoToCommonUser(
 					user.idps.map((idpMapObject) => [
 						idpMapObject.idp as unknown as Idp,
 						idpMapObject.idp_user_id as string,
-					]),
+					])
 				),
 			};
 		}
@@ -242,19 +240,15 @@ export function convertUserInfoToCommonUser(
 				},
 				idps: Object.fromEntries(
 					profile.identities?.map(
-						(identity) => [identity.identity_provider_name as Idp, null], // User ids of idp are not fetched
-					),
+						(identity) => [identity.identity_provider_name as Idp, null] // User ids of idp are not fetched
+					)
 				),
 				organisation: {
 					name:
-						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
-						undefined,
-					or_id:
-						profile.maintainer_users_profiles?.[0]?.maintainer
-							.schema_identifier,
+						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ?? undefined,
+					or_id: profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
 					logo_url:
-						profile.maintainer_users_profiles?.[0]?.maintainer?.information
-							?.logo?.iri,
+						profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
 					data: null,
 				},
 				lastAccessAt: profile.last_access_at,
@@ -276,7 +270,11 @@ export function convertUserInfoToCommonUser(
 					label: user.groupName,
 				},
 				idps: { [user.idp]: null },
-				organisation: undefined,
+				organisation: {
+					or_id: user.maintainerId,
+					name: user.visitorSpaceSlug,
+					data: null,
+				},
 				lastAccessAt: undefined,
 				permissions: user.permissions,
 			};
@@ -289,7 +287,7 @@ export function convertUserInfoToCommonUser(
 					additionalInfo: {
 						userInfoType,
 					},
-				}),
+				})
 			);
 	}
 }

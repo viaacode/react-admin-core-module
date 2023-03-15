@@ -1050,8 +1050,12 @@ export class ContentPagesService {
 
 			return contentPage;
 		} catch (err) {
-			console.error('Failed to save content', err);
-			return null;
+			const error = CustomError('Failed to update content page', err, {
+				contentPage,
+				initialContentPage,
+			});
+			console.error(error);
+			throw new InternalServerErrorException(error);
 		}
 	}
 
