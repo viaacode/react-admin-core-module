@@ -29,7 +29,6 @@ import { USER_QUERIES, UserQueryTypes } from './queries/users.queries';
 import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import { convertUserInfoToCommonUser } from './users.converters';
 import {
-	CommonUser,
 	DeleteContentCounts,
 	Idp,
 	UserInfoOverviewAvo,
@@ -43,7 +42,7 @@ export class UsersService {
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 	) {}
 
-	async getById(id: string): Promise<CommonUser> {
+	async getById(id: string): Promise<Avo.User.CommonUser> {
 		try {
 			if (!isAvo()) {
 				throw CustomError('Not supported');
@@ -79,7 +78,7 @@ export class UsersService {
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
 		where: any = {},
-	): Promise<[CommonUser[], number]> {
+	): Promise<[Avo.User.CommonUser[], number]> {
 		let variables: any;
 		try {
 			// Hetarchief doesn't have a is_deleted column yet
@@ -114,7 +113,7 @@ export class UsersService {
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
 				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
-			const profiles: CommonUser[] = compact(
+			const profiles: Avo.User.CommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
 					return convertUserInfoToCommonUser(
 						userInfo,
@@ -147,7 +146,7 @@ export class UsersService {
 
 	async getNamesByProfileIds(
 		profileIds: string[],
-	): Promise<Partial<CommonUser>[]> {
+	): Promise<Partial<Avo.User.CommonUser>[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
@@ -164,7 +163,7 @@ export class UsersService {
 				).map(
 					(
 						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0],
-					): Partial<CommonUser> => ({
+					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
@@ -177,7 +176,7 @@ export class UsersService {
 				).map(
 					(
 						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0],
-					): Partial<CommonUser> => ({
+					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.profile_id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,

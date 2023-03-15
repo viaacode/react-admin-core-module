@@ -5,7 +5,6 @@ import {
 	Column,
 	convertToHtml,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	Grid,
 	GridSize,
 	RenderLinkFunction,
@@ -13,6 +12,7 @@ import {
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
 import React, { FunctionComponent } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockRichText.scss';
 

@@ -768,6 +768,7 @@
   "react-admin/modules/alerts/views/alerts-overview___zichtbaar-van": "Zichtbaar van",
   "react-admin/modules/content-page/components/blocks/image-title-text-button___link-achter-de-afbeelding": "Link achter de afbeelding",
   "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "Deze pagina kon niet worden gevonden",
+  "react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items": "custom navigatie items",
   "react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden": "Deze inhoud zal verwijderd worden",
   "settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden": "De geselecteerde school / onderwijsinstelling kon niet worden gevonden.",
   "settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente": "Er zijn geen (andere) scholen / onderwijsinstellingen gekend in deze gemeente.",

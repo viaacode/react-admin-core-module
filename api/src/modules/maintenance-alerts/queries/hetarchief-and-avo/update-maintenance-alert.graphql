@@ -1,10 +1,10 @@
 mutation updateMaintenanceAlert(
 	$maintenanceAlertId: uuid
-	$maintenanceAlert: app_maintenance_alerts_set_input
+	$updateMaintenanceAlert: app_maintenance_alerts_set_input
 ) {
 	update_app_maintenance_alerts(
 		where: { id: { _eq: $maintenanceAlertId } }
-		_set: $maintenanceAlert
+		_set: $updateMaintenanceAlert
 	) {
 		returning {
 			id

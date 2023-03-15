@@ -12,14 +12,14 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { ContentPageLabel, LabelObj } from '../content-pages';
-import { ContentLabelsRequestDto } from '../content-pages/dto/content-labels-request.dto';
-import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+import { ContentPageLabel, LabelObj } from '../../content-pages';
+import { ContentLabelsRequestDto } from '../../content-pages/dto/content-labels-request.dto';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 
-import { CustomError } from '../shared/helpers/custom-error';
-import { ContentPageLabelsService } from './content-page-labels.service';
-import { ContentPageLabelOverviewTableCols } from './content-page-labels.types';
-import { ContentPageLabelDto } from './dto/content-page-label.dto';
+import { CustomError } from '../../shared/helpers/custom-error';
+import { ContentPageLabelsService } from '../services/content-page-labels.service';
+import { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
+import { ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 @ApiTags('ContentPageLabels')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/content-page-labels')

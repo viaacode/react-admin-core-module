@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "2.0.52",
+  "version": "2.0.57",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -40,7 +40,7 @@
     "@nestjs/schedule": "^2.1.0",
     "@nestjs/swagger": "^6.1.2",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@viaa/avo2-types": "^2.46.8",
+    "@viaa/avo2-types": "2.48.1",
     "app-root-path": "3.0.0",
     "aws-sdk": "2.1097.0",
     "blend-promise-utils": "^1.28.0",

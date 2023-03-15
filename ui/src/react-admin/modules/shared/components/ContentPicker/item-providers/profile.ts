@@ -1,15 +1,15 @@
 import { UserService } from '~modules/user/user.service';
-import { CustomError } from '../../../helpers/custom-error';
-import { PickerItem } from '../../../types/content-picker';
+import { CustomError } from '~shared/helpers/custom-error';
+import { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
-import { CommonUser } from '~modules/user/user.types';
+import { Avo } from '@viaa/avo2-types';
 
 // Fetch profiles from GQL
 export const retrieveProfiles = async (name: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {
-		const response: [CommonUser[], number] = await UserService.getProfiles(
+		const response: [Avo.User.CommonUser[], number] = await UserService.getProfiles(
 			0,
 			'lastAccessAt',
 			'desc',
@@ -34,7 +34,7 @@ export const retrieveProfiles = async (name: string | null, limit = 5): Promise<
 };
 
 // Convert profiles to react-select options
-const parseProfiles = (commonUsers: CommonUser[]): PickerItem[] => {
+const parseProfiles = (commonUsers: Avo.User.CommonUser[]): PickerItem[] => {
 	return commonUsers.map(
 		(user): PickerItem => ({
 			label: `${user.fullName} (${user.email})`,

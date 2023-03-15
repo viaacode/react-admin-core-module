@@ -5,13 +5,13 @@ import {
 	ButtonToolbar,
 	ButtonType,
 	DefaultProps,
-	defaultRenderLinkFunction,
 	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockButtons.scss';
 
