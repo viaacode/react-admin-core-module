@@ -217,7 +217,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 			const pickerValue = value as PickerItem | null;
 			setNavigationItem({
 				...navigationItem,
-				contentType: pickerValue?.type || null,
+				contentType: pickerValue?.type ?? null,
 				contentPath: pickerValue?.value || null,
 				linkTarget: pickerValue?.target || '_self',
 			});
