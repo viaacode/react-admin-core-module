@@ -121,16 +121,16 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		getAlerts();
 	}, []);
 
-	const checkAlertActivity = (from: string, till: string) => {
+	const checkAlertActivity = (from: string, till: string): boolean => {
 		if (!isAfter(new Date(till), new Date(from))) {
-			return '-';
+			return false;
 		}
 
 		const isActive = isWithinInterval(new Date(), {
 			start: new Date(from),
 			end: new Date(till),
 		});
-		return isActive ? 'actief' : 'inactief';
+		return isActive;
 	};
 
 	const renderAlertsTable = (alerts: IPagination<Alert[]>): ReactNode => {
@@ -215,10 +215,26 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									Cell: ({ row }: { row: Row<Alert> }) => {
 										return (
 											<Badge
-												text={checkAlertActivity(
-													row.original.fromDate,
-													row.original.untilDate
-												)}
+												text={
+													checkAlertActivity(
+														row.original.fromDate,
+														row.original.untilDate
+													)
+														? tText(
+																'modules/alerts/views/alerts-overview___actief'
+														  )
+														: tText(
+																'modules/alerts/views/alerts-overview___inactief'
+														  )
+												}
+												variants={
+													checkAlertActivity(
+														row.original.fromDate,
+														row.original.untilDate
+													)
+														? ['success']
+														: ['grey']
+												}
 											/>
 										);
 									},

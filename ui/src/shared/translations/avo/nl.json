@@ -701,6 +701,8 @@
   "modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error": "Error",
   "modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error": "Error",
   "modules/admin/shared/helpers/link___error": "Error",
+  "modules/alerts/views/alerts-overview___actief": "Actief",
+  "modules/alerts/views/alerts-overview___inactief": "Inactief",
   "modules/alerts/views/alerts-overview___status": "Status",
   "modules/alerts/views/alerts-overview___titel-melding": "Titel melding",
   "modules/alerts/views/alerts-overview___zichtbaar-tot": "Zichtbaar tot",
