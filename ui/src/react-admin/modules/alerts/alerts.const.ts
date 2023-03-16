@@ -84,5 +84,8 @@ export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'link',
 ];
 
-export const GET_ALERTS_ICON_OPTIONS: () => ReactSelectOption<string>[] = () =>
-	AdminConfigManager.getConfig().icon?.alerts() || [];
+export const GET_ALERTS_ICON_OPTIONS: () => {
+	key: string;
+	value: string;
+	label: string;
+}[] = () => AdminConfigManager.getConfig().icon?.alerts() || [];

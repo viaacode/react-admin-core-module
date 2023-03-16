@@ -624,7 +624,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								}));
 							}}
 							value={GET_ALERTS_ICON_OPTIONS().find(
-								(option: ReactSelectOption<string>) => option.value === form.type
+								(option) => option.key === form.type
 							)}
 						/>
 					)}
