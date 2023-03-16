@@ -904,6 +904,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken'
 					)}
 					onClick={() => onClickCreate()}
+					variants="black"
 				/>
 			</AdminLayout.Actions>
 
