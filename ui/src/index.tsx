@@ -99,6 +99,7 @@ function setConfig() {
 				check: { name: 'check' },
 				calendar: { name: 'calendar' },
 				clock: { name: 'clock' },
+				export: { name: 'export' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

@@ -173,6 +173,7 @@ export interface IconConfig {
 		check: IconComponentProps;
 		clock: IconComponentProps;
 		calendar: IconComponentProps;
+		export: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { label: string; value: string }[];

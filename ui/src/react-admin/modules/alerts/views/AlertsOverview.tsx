@@ -900,6 +900,15 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		<AdminLayout className={className} pageTitle={title}>
 			<AdminLayout.Actions>
 				<Button
+					iconStart={
+						Icon && (
+							<Icon
+								{...(AdminConfigManager.getConfig().icon?.componentProps.export as {
+									name: string;
+								})}
+							/>
+						)
+					}
 					label={tText(
 						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken'
 					)}
