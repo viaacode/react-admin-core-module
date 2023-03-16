@@ -447,6 +447,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		if (activeAlert?.id) {
 			try {
 				await AlertsService.updateAlert(activeAlert.id, values);
+				getAlerts();
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
@@ -469,6 +470,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		} else {
 			try {
 				await AlertsService.insertAlert(values);
+				getAlerts();
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
