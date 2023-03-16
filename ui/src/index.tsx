@@ -107,10 +107,11 @@ function setConfig() {
 					label: capitalize(lowerCase(iconName)),
 				}));
 			},
-			alerts: (): { value: IconName; label: string }[] => {
-				return Object.values(IconName).map((iconName: IconName) => ({
-					value: iconName,
-					label: capitalize(lowerCase(iconName)),
+			alerts: (): { key: string; value: IconName; label: string }[] => {
+				return Object.keys(IconName).map((key: string) => ({
+					key,
+					value: IconName[key as keyof typeof IconName],
+					label: capitalize(lowerCase(key)),
 				}));
 			},
 		},

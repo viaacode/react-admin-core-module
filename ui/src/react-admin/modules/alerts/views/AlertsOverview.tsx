@@ -616,7 +616,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						<IconPicker
 							options={GET_ALERTS_ICON_OPTIONS()}
 							onChange={(option) => {
-								const type = get(option, 'value', '');
+								const type: string = get(option, 'key', '');
+
 								setForm((prev) => ({
 									...prev,
 									type,
