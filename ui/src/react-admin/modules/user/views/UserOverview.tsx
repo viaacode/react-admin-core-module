@@ -350,7 +350,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 			const csvString = csvRowValues.join('\n');
 			const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8' });
 			FileSaver.saveAs(blob, 'gebruikers.csv');
+			setSelectedProfileIds([]);
 		} catch (err) {
+			setSelectedProfileIds([]);
 			console.error(
 				new CustomError('Failed to export users to csv file', err, { tableState })
 			);
