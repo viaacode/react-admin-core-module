@@ -106,6 +106,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 			size="large"
 			onClose={closeModal}
 			scrollable={false}
+			className="p-content-page-publish-modal"
 		>
 			<ModalBody>
 				<p>
@@ -183,7 +184,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 					)}
 					className="c-content-page-publish-modal__display-date"
 				>
-					<Spacer>
+					<Spacer margin={['left-large', 'top']}>
 						<DatePicker
 							value={publishedAt ? new Date(publishedAt) : null}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
