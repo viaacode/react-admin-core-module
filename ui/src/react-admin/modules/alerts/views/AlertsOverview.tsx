@@ -422,12 +422,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setValue('type', form.type);
 	}, [form, setValue]);
 
-	// useEffect(() => {
-	// 	setUserGroups((prev) =>
-	// 		prev.map((option) => ({ ...option, checked: form.userGroups.includes(option.id) }))
-	// 	);
-	// }, [form.userGroups]);
-
 	// Actions
 	const onClickCreate = () => {
 		setAction('create');
