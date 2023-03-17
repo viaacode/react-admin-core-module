@@ -46,7 +46,6 @@ import {
 	ALERTS_FORM_SCHEMA,
 	ALERTS_PER_PAGE,
 	ALERTS_QUERY_PARAM_CONFIG,
-	alertUserGroups,
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../alerts.const';
@@ -57,12 +56,12 @@ import {
 	AlertsOverviewProps,
 	AlertsOverviewTableCol,
 } from '../alerts.types';
-import { ReactSelectOption } from '~modules/shared';
 import { get, now, without } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 
 const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
 const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
@@ -76,7 +75,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [action, setAction] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
-	const [userGroups, setUserGroups] = useState<MultiSelectOption[]>(alertUserGroups);
+	// const [userGroups, setUserGroups] = useState<MultiSelectOption[]>(alertUserGroups);
 
 	const Icon = AdminConfigManager.getConfig().icon?.component;
 
@@ -116,6 +115,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		},
 		[filters, setFilters]
 	);
+
+	const { data: userGroups } = useGetUserGroups({ withPermissions: false });
 
 	useEffect(() => {
 		getAlerts();
@@ -421,11 +422,11 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setValue('type', form.type);
 	}, [form, setValue]);
 
-	useEffect(() => {
-		setUserGroups((prev) =>
-			prev.map((option) => ({ ...option, checked: form.userGroups.includes(option.id) }))
-		);
-	}, [form.userGroups]);
+	// useEffect(() => {
+	// 	setUserGroups((prev) =>
+	// 		prev.map((option) => ({ ...option, checked: form.userGroups.includes(option.id) }))
+	// 	);
+	// }, [form.userGroups]);
 
 	// Actions
 	const onClickCreate = () => {
@@ -649,7 +650,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={() => (
 						<MultiSelect
-							options={userGroups}
+							options={(userGroups || []).map((userGroup) => ({
+								...userGroup,
+								checked: form.userGroups.includes(userGroup.id),
+							}))}
 							onChange={handleChangeUserGroups}
 							label={tText(
 								'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
@@ -687,6 +691,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		Icon,
 		control,
 		errors.userGroups?.message,
+		form.userGroups,
 		handleChangeUserGroups,
 		tHtml,
 		tText,

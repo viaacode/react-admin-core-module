@@ -1,9 +1,8 @@
-import { MultiSelectOption, RichTextEditorControl } from '@meemoo/react-components';
+import { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
 import { array, object, SchemaOf, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
-import { ReactSelectOption, ROUTE_PARTS } from '~modules/shared';
-import { Group } from '~modules/shared/consts/user-group.consts';
+import { ROUTE_PARTS } from '~modules/shared';
 import { SortDirectionParam } from '~modules/shared/helpers/query-params';
 import { AlertFormState } from './alerts.types';
 
@@ -50,29 +49,6 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 };
 
 // Constants
-
-export const alertUserGroups: MultiSelectOption[] = [
-	{
-		label: 'meemoo admin',
-		id: Group.MEEMOO_ADMIN,
-		checked: false,
-	},
-	{
-		label: 'CP admin',
-		id: Group.CP_ADMIN,
-		checked: false,
-	},
-	{
-		label: 'Eindgebruiker',
-		id: Group.VISITOR,
-		checked: false,
-	},
-	{
-		label: 'kiosk',
-		id: Group.KIOSK_VISITOR,
-		checked: false,
-	},
-];
 
 export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'undo',
