@@ -4,7 +4,6 @@ import {
 	Datepicker,
 	FormControl,
 	MultiSelect,
-	MultiSelectOption,
 	Pagination,
 	RichEditorState,
 	RichTextEditor,
@@ -75,7 +74,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [action, setAction] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
-	// const [userGroups, setUserGroups] = useState<MultiSelectOption[]>(alertUserGroups);
 
 	const Icon = AdminConfigManager.getConfig().icon?.component;
 
