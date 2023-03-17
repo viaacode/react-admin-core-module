@@ -312,6 +312,9 @@ function setConfig() {
 			USER_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
 			SEARCH: `/${ROUTE_PARTS.search}`,
 		},
+		users: {
+			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
+		},
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 		},
