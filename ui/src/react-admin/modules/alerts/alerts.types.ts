@@ -5,11 +5,10 @@ export interface Alert {
 	id: string;
 	title: string;
 	message: string;
-	icon: string;
+	type: string;
 	userGroups: string[];
 	fromDate: string;
 	untilDate: string;
-	active: boolean;
 }
 
 export interface AlertsOverviewProps extends DefaultProps {
@@ -23,3 +22,12 @@ export interface AlertsOverviewProps extends DefaultProps {
 }
 
 export type AlertsOverviewTableCol = 'id' | 'icon' | 'fromDate' | 'untilDate' | 'active';
+
+export interface AlertFormState {
+	title: string;
+	message: string;
+	fromDate: string;
+	untilDate: string;
+	userGroups: string[];
+	type: string;
+}
