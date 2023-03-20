@@ -237,7 +237,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 			}
 		},
 		// Fix ARC-964: If filters.page is included, the pagination breaks (on pagechange the pagenumber resets to 1 again)
-		[filters.search, filters.orderDirection, filters.orderProp, setFilters]
+		[filters, setFilters]
 	);
 
 	const getPagination = () => {
