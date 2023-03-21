@@ -21,7 +21,7 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
-import { UserGroupTableColumns } from '../const/user-group.const';
+import { getUserGroupTableColumns } from '../const/user-group.const';
 import {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
@@ -263,7 +263,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			if (!currentUserGroups) {
 				return [];
 			}
-			return UserGroupTableColumns(currentUserGroups, updateUserGroup);
+			return getUserGroupTableColumns(currentUserGroups, updateUserGroup);
 		}, [currentUserGroups, updateUserGroup]);
 
 		const renderUserGroupOverview = () => {

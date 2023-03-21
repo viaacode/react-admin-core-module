@@ -6,7 +6,6 @@ import {
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import { get } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
@@ -30,23 +29,24 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 	className,
 }) => {
 	function renderItem(index: number) {
-		if (!elements[index]) {
+		const element = elements?.[index];
+		if (!element) {
 			return null;
 		}
-		const buttonAction = get(elements, [index, 'buttonAction']);
+		const buttonAction = element?.buttonAction;
 		return (
 			<div
 				className={classnames('c-spotlight__item', {
 					'u-clickable': !!buttonAction,
 				})}
-				style={{ backgroundImage: `url(${get(elements, [index, 'image'])})` }}
+				style={{ backgroundImage: `url(${element?.image})` }}
 			>
 				{renderLink(
 					buttonAction,
 					<p>
-						{get(elements, [index, 'title'])} <Icon name={'chevronRight' as IconName} />
+						{element?.title} <Icon name={'chevronRight' as IconName} />
 					</p>,
-					get(elements, [index, 'title'])
+					element?.title
 				)}
 			</div>
 		);
