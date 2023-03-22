@@ -41,7 +41,6 @@ export class ContentPagesController {
 	constructor(private contentPagesService: ContentPagesService) {}
 
 	@Post('')
-	@RequireAnyPermissions()
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity,
