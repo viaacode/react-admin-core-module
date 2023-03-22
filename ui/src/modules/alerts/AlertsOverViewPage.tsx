@@ -25,17 +25,17 @@ export const AlertsOverviewPage: FC = () => {
 					<Button
 						variants={['block', 'black']}
 						onClick={onSave}
-						label="tText(
+						label={tText(
 							'react-admin/modules/alerts/views/alerts-overview-page___bewaar-wijzigingen'
-						)"
+						)}
 					/>
 
 					<Button
 						variants={['block', 'text']}
 						onClick={onClose}
-						label="tText(
+						label={tText(
 							'react-admin/modules/alerts/views/alerts-overview-page___annuleer'
-						)"
+						)}
 					/>
 				</div>
 			);

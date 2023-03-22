@@ -144,7 +144,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, navigationItem?.userGroupIds, allUserGroups, tHtml]
+		[setPermissionWarning, navigationItem, allUserGroups, tHtml]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
