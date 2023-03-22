@@ -780,6 +780,8 @@
   "react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-gelukt": "Het verwijderen van de melding is gelukt",
   "react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-mislukt": "Het verwijderen van de melding is mislukt",
   "react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-een-melding-kan-niet-ongedaan-gemaakt-worden": "Het verwijderen van een melding kan niet ongedaan gemaakt worden",
+  "react-admin/modules/alerts/views/alerts-overview___melding-aanmaken": "Melding aanmaken",
+  "react-admin/modules/alerts/views/alerts-overview___melding-aanpassen": "Melding aanpassen",
   "react-admin/modules/alerts/views/alerts-overview___meldingen": "Meldingen",
   "react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken": "Nieuwe melding aanmaken",
   "react-admin/modules/alerts/views/alerts-overview___succes": "Succes",

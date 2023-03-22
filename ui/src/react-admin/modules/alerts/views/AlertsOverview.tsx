@@ -116,7 +116,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 	useEffect(() => {
 		getAlerts();
-	}, [filters.orderProp, filters.orderDirection, getAlerts, filters.page]);
+	}, [getAlerts]);
 
 	const checkAlertActivity = (from: string, till: string): boolean => {
 		if (!isAfter(new Date(till), new Date(from))) {
@@ -926,11 +926,14 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				<div className={className}>{alerts && renderAlertsTable(alerts)}</div>
 
 				{renderPopup({
-					title: tText(
+					title:
 						action === 'create'
-							? 'react-admin/modules/alerts/views/alerts-overview___melding-aanmaken'
-							: 'react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'
-					),
+							? tText(
+									'react-admin/modules/alerts/views/alerts-overview___melding-aanmaken'
+							  )
+							: tText(
+									'react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'
+							  ),
 					body: renderPopupBody(),
 					isOpen: !!activeAlert,
 					onSave: handleSubmit(onClickSave),
