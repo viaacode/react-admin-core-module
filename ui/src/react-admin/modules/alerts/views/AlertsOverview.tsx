@@ -393,6 +393,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		formState: { errors },
 		handleSubmit,
 		setValue,
+		reset,
 	} = useForm<AlertFormState>({
 		resolver: yupResolver(ALERTS_FORM_SCHEMA(tText)),
 		defaultValues,
@@ -525,14 +526,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setAction(null);
 		setActiveAlert(null);
 		setFormMessage(undefined);
-		setForm({
-			title: defaultValues.title,
-			message: defaultValues.message,
-			userGroups: defaultValues.userGroups,
-			fromDate: defaultValues.fromDate,
-			untilDate: defaultValues.untilDate,
-			type: defaultValues.type,
-		});
+		reset();
 	};
 
 	const renderTitle = useMemo(() => {
