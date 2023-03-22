@@ -103,22 +103,20 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 	const handleSortChange = useCallback(
 		(orderProp, orderDirection) => {
-			if (filters.orderProp !== orderProp || filters.orderDirection !== orderDirection) {
-				setFilters({
-					...filters,
-					orderProp,
-					orderDirection,
-				});
-			}
+			setFilters((prev) => ({
+				...prev,
+				orderProp,
+				orderDirection,
+			}));
 		},
-		[filters, setFilters]
+		[setFilters]
 	);
 
 	const { data: userGroups } = useGetUserGroups({ withPermissions: false });
 
 	useEffect(() => {
 		getAlerts();
-	}, []);
+	}, [filters.orderProp, filters.orderDirection, getAlerts, filters.page]);
 
 	const checkAlertActivity = (from: string, till: string): boolean => {
 		if (!isAfter(new Date(till), new Date(from))) {
@@ -158,7 +156,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									Header: tHtml(
 										'modules/alerts/views/alerts-overview___titel-melding'
 									),
-									accessor: 'title',
 									Cell: ({ row }: { row: Row<Alert> }) => {
 										return (
 											<Html
@@ -360,10 +357,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	};
 
 	const handlePageChange = (newPageZeroBased: number) => {
-		setFilters({
-			...filters,
+		setFilters((prev) => ({
+			...prev,
 			page: newPageZeroBased + 1,
-		});
+		}));
 	};
 
 	const handleChangeUserGroups = useCallback((checked: boolean, id: string) => {
@@ -441,7 +438,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		if (activeAlert?.id) {
 			try {
 				await AlertsService.updateAlert(activeAlert.id, values);
-				getAlerts();
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
@@ -464,7 +460,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		} else {
 			try {
 				await AlertsService.insertAlert(values);
-				getAlerts();
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
