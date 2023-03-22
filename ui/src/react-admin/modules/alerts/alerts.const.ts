@@ -25,9 +25,7 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 		title: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___titel-is-verplicht')
 		),
-		message: string().required(
-			tText('react-admin/modules/alerts/views/alerts-const___beschrijving-is-verplicht')
-		),
+		message: string(),
 		fromDate: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___datum-is-verplicht')
 		),
