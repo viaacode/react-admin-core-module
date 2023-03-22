@@ -14,13 +14,14 @@ export class AlertsService {
 	static async fetchAlerts(
 		orderProp: AlertsOverviewTableCol = 'fromDate',
 		orderDirection: Avo.Search.OrderDirection = 'asc',
-		page = 0
+		page = 0,
+		size = 10
 	): Promise<IPagination<Alert[]>> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl(),
-					query: { orderProp, orderDirection, page },
+					query: { orderProp, orderDirection, page, size },
 				})
 			);
 		} catch (err) {
