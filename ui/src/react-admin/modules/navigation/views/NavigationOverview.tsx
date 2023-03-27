@@ -11,10 +11,10 @@ import { buildLink, navigate } from '~shared/helpers/link';
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
 import { Loader } from '~shared/components';
 import { AdminLayout } from '~shared/layouts';
+import { Link } from '~modules/shared/components/Link';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { tHtml, tText } = useTranslation();
-	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,

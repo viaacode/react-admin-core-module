@@ -1,4 +1,4 @@
-@import '../../../../shared/styles/settings/colors';
+@import "../../../../shared/styles/settings/colors";
 
 .o-block-image {
 	padding-top: 0;
@@ -21,7 +21,7 @@
 
 	&.o-block-image__full-width {
 		.a-block-image__annotation {
-			padding: 10px 20px 0 20px;
+			padding: 10px 20px 0;
 		}
 	}
 
@@ -29,7 +29,7 @@
 		position: relative;
 
 		.a-block-image__annotation {
-			padding: 0 20px 10px 20px;
+			padding: 0 20px 10px;
 			position: absolute;
 			top: calc(100% + 10px);
 			left: 0;

@@ -8,6 +8,7 @@ import { AdminConfigManager } from '~core/config';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
+import { Link } from '../Link';
 
 export interface SmartLinkProps {
 	action?: ButtonAction | null;
@@ -31,7 +32,6 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			fullUrl = `//${url}`;
 		}
 
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab

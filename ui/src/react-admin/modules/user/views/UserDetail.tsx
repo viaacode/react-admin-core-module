@@ -41,6 +41,7 @@ import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
 import { renderAvatar } from '~shared/helpers/formatters/avatar';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
+import { Link } from '~modules/shared/components/Link';
 
 export interface UserDetailProps {
 	id: string | null;
@@ -402,7 +403,6 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 		navigate(history, AdminConfigManager.getAdminRoute('USER_OVERVIEW'));
 
 	const renderUserDetailPage = () => {
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		const isBlocked = storedProfile?.isBlocked;
 		const blockButtonTooltip = isBlocked
 			? tText(

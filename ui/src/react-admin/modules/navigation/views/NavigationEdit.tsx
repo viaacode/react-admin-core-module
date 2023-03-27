@@ -27,6 +27,7 @@ import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptio
 import { AdminLayout } from '~shared/layouts';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
+import { Link } from '~modules/shared/components/Link';
 
 interface NavigationEditProps {
 	navigationBarId: string;
@@ -362,7 +363,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					GET_PAGE_TYPES_LANG()[pageType]
 			  }`
 			: tText('admin/menu/views/menu-edit___navigatie-toevoegen');
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Back>

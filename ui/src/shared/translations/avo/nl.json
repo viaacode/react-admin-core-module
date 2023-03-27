@@ -762,7 +762,6 @@
   "modules/user/components/user-delete-modal___success": "Gelukt",
   "modules/user/views/user-overview___error": "Error",
   "modules/user/views/user-overview___success": "Gelukt",
-  "react-admin/modules/alerts/views/alerts-const___beschrijving-is-verplicht": "Beschrijving is verplicht",
   "react-admin/modules/alerts/views/alerts-const___datum-is-verplicht": "Datum is verplicht",
   "react-admin/modules/alerts/views/alerts-const___icoon-is-verplicht": "Icoon is verplicht",
   "react-admin/modules/alerts/views/alerts-const___selecteer-een-gebruikersgroep": "Selecteer een gebruikersgroep",

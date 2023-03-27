@@ -3,6 +3,7 @@ import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { Avo, PermissionName } from '@viaa/avo2-types';
 
+import Link from '~shared/components/Link/Link';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
@@ -579,7 +580,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToSave =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout className={className} pageTitle={pageTitle}>
 				<AdminLayout.Back>

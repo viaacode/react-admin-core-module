@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { Link } from '../Link';
 
 import './Sidebar.scss';
-import { AdminConfigManager } from '~core/config';
 
 interface SidebarProps {
 	className?: string;
@@ -18,7 +18,6 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 }) => {
 	const { tHtml } = useTranslation();
-	const Link = AdminConfigManager.getConfig().services.router.Link;
 
 	return (
 		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
