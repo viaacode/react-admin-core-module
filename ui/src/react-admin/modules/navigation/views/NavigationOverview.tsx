@@ -111,16 +111,17 @@ const NavigationOverview: FunctionComponent = () => {
 		const title = tText('admin/menu/views/menu-overview___navigatie-overzicht');
 		return (
 			<AdminLayout pageTitle={title}>
-				<AdminLayout.Actions>
-					<ButtonToolbar>
-						<Button
-							label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}
-							onClick={() =>
-								history.push(AdminConfigManager.getAdminRoute('NAVIGATION_CREATE'))
-							}
-						/>
-					</ButtonToolbar>
-				</AdminLayout.Actions>
+				{/* TODO re-enable once we want to allow meemoo to create new navigation bars, usually this isn't needed, since new navigation bars always require new development work */}
+				{/*<AdminLayout.Actions>*/}
+				{/*	<ButtonToolbar>*/}
+				{/*		<Button*/}
+				{/*			label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}*/}
+				{/*			onClick={() =>*/}
+				{/*				history.push(AdminConfigManager.getAdminRoute('NAVIGATION_CREATE'))*/}
+				{/*			}*/}
+				{/*		/>*/}
+				{/*	</ButtonToolbar>*/}
+				{/*</AdminLayout.Actions>*/}
 				<AdminLayout.Content>
 					<Table
 						columns={columns}

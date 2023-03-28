@@ -60,14 +60,57 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		isError: isErrorNavigationItem,
 	} = useGetNavigationItem(navigationItemId);
 
+	// Computed
+	const pageType: NavigationEditPageType = navigationItemId
+		? NavigationEditPageType.edit
+		: NavigationEditPageType.create;
+	const navigationParentOptions = uniqBy(
+		compact(
+			(navigationItems || []).map((navigationItem) => {
+				if (!navigationItem.placement) {
+					return null;
+				}
+				return {
+					label: startCase(navigationItem.placement || ''),
+					value: navigationItem.placement,
+				};
+			})
+		),
+		'value'
+	);
+
 	useEffect(() => {
-		if (initialNavigationItem && navigationBarId && !isLoadingNavigationItem) {
-			setNavigationItem(initialNavigationItem);
+		if (navigationBarId && !isLoadingNavigationItem) {
+			if (initialNavigationItem) {
+				setNavigationItem(initialNavigationItem);
+			} else {
+				const newNavigationItem: NavigationItem = {
+					id: '',
+					description: '',
+					placement: navigationBarId,
+					tooltip: null,
+					iconName: '',
+					label: null,
+					userGroupIds: null,
+					contentType: null,
+					contentPath: null,
+					linkTarget: null,
+					position: 0,
+					createdAt: new Date().toISOString(),
+					updatedAt: new Date().toISOString(),
+				};
+				setNavigationItem(newNavigationItem);
+			}
 		}
 	}, [initialNavigationItem, navigationBarId, isLoadingNavigationItem]);
 
 	useEffect(() => {
-		if (!isLoadingNavigationItems && !isErrorNavigationItems && !navigationItems?.length) {
+		if (
+			!isLoadingNavigationItems &&
+			!isErrorNavigationItems &&
+			pageType === NavigationEditPageType.edit &&
+			!navigationItems?.length
+		) {
 			// Go back to overview if no menu items are present
 			showToast(
 				ToastType.ERROR,
@@ -87,6 +130,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		isErrorNavigationItems,
 		navigationItems,
 		navigationBarName,
+		pageType,
 		history,
 		tText,
 	]);
@@ -179,23 +223,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				});
 		}
 	}, [navigationItem, checkMenuItemContentPagePermissionsMismatch, tText]);
-
-	// Computed
-	const pageType: NavigationEditPageType = navigationItemId ? 'edit' : 'create';
-	const navigationParentOptions = uniqBy(
-		compact(
-			(navigationItems || []).map((navigationItem) => {
-				if (!navigationItem.placement) {
-					return null;
-				}
-				return {
-					label: startCase(navigationItem.placement || ''),
-					value: navigationItem.placement,
-				};
-			})
-		),
-		'value'
-	);
 
 	// Methods
 	const showToast = (type: ToastType, title: string, description: string): void => {

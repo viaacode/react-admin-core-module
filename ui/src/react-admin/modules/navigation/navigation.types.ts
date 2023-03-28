@@ -2,7 +2,10 @@ import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicke
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 
-export type NavigationEditPageType = 'edit' | 'create';
+export enum NavigationEditPageType {
+	edit = 'edit',
+	create = 'create',
+}
 
 export interface NavigationEditFormErrorState {
 	description?: string;
