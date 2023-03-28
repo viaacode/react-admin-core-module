@@ -14,6 +14,7 @@ import {
 	Timepicker,
 	timepicker,
 } from '@meemoo/react-components';
+import { MultiSelectOption } from '@meemoo/react-components/dist/esm/components/MultiSelect/MultiSelect.types';
 import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
@@ -41,6 +42,7 @@ import { sortingIcons } from '~modules/shared/components/Table/Table.const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {
 	ALERTS_FORM_SCHEMA,
 	ALERTS_PER_PAGE,
@@ -60,7 +62,6 @@ import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 
 const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
 const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
@@ -112,13 +113,13 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		[setFilters]
 	);
 
-	const { data: userGroups } = useGetUserGroups({ withPermissions: false });
+	const [userGroupOptions] = useUserGroupOptions('MultiSelectOption', true, false);
 
 	useEffect(() => {
 		getAlerts();
 	}, [getAlerts]);
 
-	const checkAlertActivity = (from: string, till: string): boolean => {
+	const checkAlertActive = (from: string, till: string): boolean => {
 		if (!isAfter(new Date(till), new Date(from))) {
 			return false;
 		}
@@ -212,7 +213,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										return (
 											<Badge
 												text={
-													checkAlertActivity(
+													checkAlertActive(
 														row.original.fromDate,
 														row.original.untilDate
 													)
@@ -224,7 +225,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 														  )
 												}
 												variants={
-													checkAlertActivity(
+													checkAlertActive(
 														row.original.fromDate,
 														row.original.untilDate
 													)
@@ -631,9 +632,9 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={() => (
 						<MultiSelect
-							options={(userGroups || []).map((userGroup) => ({
-								...userGroup,
-								checked: form.userGroups.includes(userGroup.id),
+							options={(userGroupOptions as MultiSelectOption[]).map((option) => ({
+								...option,
+								checked: form.userGroups.includes(option.id),
 							}))}
 							onChange={handleChangeUserGroups}
 							label={tText(
@@ -676,7 +677,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		handleChangeUserGroups,
 		tHtml,
 		tText,
-		userGroups,
+		userGroupOptions,
 	]);
 
 	const renderFrom = useMemo(() => {
