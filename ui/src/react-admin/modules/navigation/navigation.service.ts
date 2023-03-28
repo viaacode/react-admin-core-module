@@ -18,7 +18,7 @@ export class NavigationService {
 				})
 			);
 		} catch (err) {
-			throw new CustomError(`Failed to fetch navigation item by id`, err, {
+			throw new CustomError('Failed to fetch navigation item by id', err, {
 				id,
 			});
 		}
