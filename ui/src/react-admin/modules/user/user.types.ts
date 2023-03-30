@@ -18,6 +18,7 @@ export type UserOverviewTableCol =
 	| 'businessCategory'
 	| 'isException'
 	| 'isBlocked'
+	| 'isKeyUser'
 	| 'blockedAt'
 	| 'unblockedAt'
 	| 'stamboek'
@@ -40,6 +41,7 @@ export interface UserTableState extends FilterableTableState {
 	businessCategory: string[];
 	isException: boolean;
 	isBlocked: boolean;
+	isKeyUser: boolean;
 	blockedAt: {
 		date: string;
 	};
