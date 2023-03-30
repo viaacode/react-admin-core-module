@@ -398,7 +398,8 @@ const getHetArchiefColumns = (
 		),
 		sortable: true,
 		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
+		// Ward: hide lastAccessAt filter (ARC-1428)
+		//filterType: 'DateRangeDropdown',
 		dataType: 'dateTime',
 	},
 	{
