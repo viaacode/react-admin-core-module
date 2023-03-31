@@ -31,7 +31,7 @@
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json"
   },
   "peerDependencies": {
-    "@meemoo/react-components": "2.25.1",
+    "@meemoo/react-components": "2.25.4",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "^4.14.1",
     "@viaa/avo2-components": "3.6.0",
@@ -45,7 +45,8 @@
     "react": "17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.1",
-    "use-query-params": "1.2.3"
+    "use-query-params": "1.2.3",
+    "react-datepicker": "4.11.0"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",

@@ -3,6 +3,7 @@ import {
 	Button,
 	Datepicker,
 	FormControl,
+	futureDatepicker,
 	MultiSelect,
 	Pagination,
 	RichEditorState,
@@ -34,7 +35,7 @@ import {
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
-import { Loader } from '~modules/shared/components';
+import { Icon, Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
@@ -74,8 +75,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	const [action, setAction] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [alertToDeleteId, setAlertToDeleteId] = useState<string>();
-
-	const Icon = AdminConfigManager.getConfig().icon?.component;
 
 	const pageCount: number = Math.ceil(alerts?.pages || 1 / ALERTS_PER_PAGE);
 
@@ -118,16 +117,15 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		getAlerts();
 	}, [getAlerts]);
 
-	const checkAlertActivity = (from: string, till: string): boolean => {
+	const checkIsAlertActive = (from: string, till: string): boolean => {
 		if (!isAfter(new Date(till), new Date(from))) {
 			return false;
 		}
 
-		const isActive = isWithinInterval(new Date(), {
+		return isWithinInterval(new Date(), {
 			start: new Date(from),
 			end: new Date(till),
 		});
-		return isActive;
 	};
 
 	const renderAlertsTable = (alerts: IPagination<Alert[]>): ReactNode => {
@@ -212,7 +210,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										return (
 											<Badge
 												text={
-													checkAlertActivity(
+													checkIsAlertActive(
 														row.original.fromDate,
 														row.original.untilDate
 													)
@@ -224,7 +222,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 														  )
 												}
 												variants={
-													checkAlertActivity(
+													checkIsAlertActive(
 														row.original.fromDate,
 														row.original.untilDate
 													)
@@ -242,16 +240,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										return (
 											<>
 												<Button
-													icon={
-														Icon && (
-															<Icon
-																{...(AdminConfigManager.getConfig()
-																	.icon?.componentProps.edit as {
-																	name: string;
-																})}
-															/>
-														)
-													}
+													icon={<Icon name="edit" />}
 													className="u-color-neutral"
 													variants="text"
 													onClick={() => {
@@ -260,17 +249,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 													}}
 												/>
 												<Button
-													icon={
-														Icon && (
-															<Icon
-																{...(AdminConfigManager.getConfig()
-																	.icon?.componentProps
-																	.delete as {
-																	name: string;
-																})}
-															/>
-														)
-													}
+													icon={<Icon name="delete" />}
 													className="u-color-neutral"
 													variants="text"
 													onClick={() => {
@@ -310,14 +289,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								label={tHtml(
 									'modules/shared/components/pagination-bar/pagination-bar___volgende'
 								)}
-								iconEnd={
-									Icon && (
-										<Icon
-											{...(AdminConfigManager.getConfig().icon?.componentProps
-												.angleRight as { name: string })}
-										/>
-									)
-								}
+								iconEnd={<Icon name="angleRight" />}
 							/>
 						),
 						previous: (
@@ -328,14 +300,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								label={tHtml(
 									'modules/shared/components/pagination-bar/pagination-bar___vorige'
 								)}
-								iconStart={
-									Icon && (
-										<Icon
-											{...(AdminConfigManager.getConfig().icon?.componentProps
-												.angleLeft as { name: string })}
-										/>
-									)
-								}
+								iconStart={<Icon name="angleLeft" />}
 							/>
 						),
 					}}
@@ -639,37 +604,15 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 							label={tText(
 								'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
 							)}
-							iconOpen={
-								Icon && (
-									<Icon
-										{...(AdminConfigManager.getConfig().icon?.componentProps
-											.angleUp as { name: string })}
-									/>
-								)
-							}
-							iconClosed={
-								Icon && (
-									<Icon
-										{...(AdminConfigManager.getConfig().icon?.componentProps
-											.angleDown as { name: string })}
-									/>
-								)
-							}
-							iconCheck={
-								Icon && (
-									<Icon
-										{...(AdminConfigManager.getConfig().icon?.componentProps
-											.check as { name: string })}
-									/>
-								)
-							}
+							iconOpen={<Icon name="angleUp" />}
+							iconClosed={<Icon name="angleDown" />}
+							iconCheck={<Icon name="check" />}
 						/>
 					)}
 				/>
 			</FormControl>
 		);
 	}, [
-		Icon,
 		control,
 		errors.userGroups?.message,
 		form.userGroups,
@@ -693,20 +636,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
-								customInput={
-									<TextInput
-										iconStart={
-											Icon && (
-												<Icon
-													{...(AdminConfigManager.getConfig().icon
-														?.componentProps.calendar as {
-														name: string;
-													})}
-												/>
-											)
-										}
-									/>
-								}
+								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-from-date"
 								locale={nlBE}
 								minDate={defaultStartDate(new Date())}
@@ -728,18 +658,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 							<Timepicker
 								{...timepicker}
-								customInput={
-									<TextInput
-										iconStart={
-											Icon && (
-												<Icon
-													{...(AdminConfigManager.getConfig().icon
-														?.componentProps.clock as { name: string })}
-												/>
-											)
-										}
-									/>
-								}
+								customInput={<TextInput iconStart={<Icon name="clock" />} />}
 								showTimeSelect
 								id="new-alert-from-time"
 								maxTime={endOfDay(new Date(form.fromDate) || now)}
@@ -762,7 +681,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				/>
 			</FormControl>
 		);
-	}, [Icon, control, errors.fromDate?.message, form.fromDate, tHtml]);
+	}, [control, errors.fromDate?.message, form.fromDate, tHtml]);
 
 	const renderUntil = useMemo(() => {
 		return (
@@ -778,24 +697,9 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
-								customInput={
-									// TODO: icon name
-									<TextInput
-										iconStart={
-											Icon && (
-												<Icon
-													{...(AdminConfigManager.getConfig().icon
-														?.componentProps.calendar as {
-														name: string;
-													})}
-												/>
-											)
-										}
-									/>
-								}
+								{...futureDatepicker}
+								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-until-date"
-								minDate={new Date(form.fromDate)}
-								locale={nlBE}
 								name={field.name}
 								onBlur={field.onBlur}
 								onChange={(untilDate: Date) => {
@@ -805,37 +709,60 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 											untilDate: untilDate.toISOString(),
 										}));
 								}}
-								selected={
-									isAfter(new Date(form.untilDate), new Date(form.fromDate))
-										? new Date(form.untilDate)
-										: new Date(form.fromDate)
-								}
-								dateFormat="PP"
-								value={
-									isAfter(new Date(form.untilDate), new Date(form.fromDate))
-										? format(new Date(form.untilDate), 'PP', {
-												locale: nlBE,
-										  })
-										: format(new Date(form.fromDate), 'PP', {
-												locale: nlBE,
-										  })
-								}
+								selected={new Date(field.value)}
+								value={format(new Date(form.untilDate), 'PP', {
+									locale: nlBE,
+								})}
+								popperPlacement="bottom-start"
 							/>
+							{/*<Datepicker*/}
+							{/*	customInput={*/}
+							{/*		// TODO: icon name*/}
+							{/*		<TextInput*/}
+							{/*			iconStart={*/}
+							{/*				Icon && (*/}
+							{/*					<Icon*/}
+							{/*						{...(AdminConfigManager.getConfig().icon*/}
+							{/*							?.componentProps.calendar as {*/}
+							{/*							name: string;*/}
+							{/*						})}*/}
+							{/*					/>*/}
+							{/*				)*/}
+							{/*			}*/}
+							{/*		/>*/}
+							{/*	}*/}
+							{/*	id="new-alert-until-date"*/}
+							{/*	minDate={new Date(form.fromDate)}*/}
+							{/*	locale={nlBE}*/}
+							{/*	name={field.name}*/}
+							{/*	onBlur={field.onBlur}*/}
+							{/*	onChange={(untilDate: Date) => {*/}
+							{/*		untilDate &&*/}
+							{/*			setForm((prev) => ({*/}
+							{/*				...prev,*/}
+							{/*				untilDate: untilDate.toISOString(),*/}
+							{/*			}));*/}
+							{/*	}}*/}
+							{/*	selected={*/}
+							{/*		isAfter(new Date(form.untilDate), new Date(form.fromDate))*/}
+							{/*			? new Date(form.untilDate)*/}
+							{/*			: new Date(form.fromDate)*/}
+							{/*	}*/}
+							{/*	dateFormat="PP"*/}
+							{/*	value={*/}
+							{/*		isAfter(new Date(form.untilDate), new Date(form.fromDate))*/}
+							{/*			? format(new Date(form.untilDate), 'PP', {*/}
+							{/*					locale: nlBE,*/}
+							{/*			  })*/}
+							{/*			: format(new Date(form.fromDate), 'PP', {*/}
+							{/*					locale: nlBE,*/}
+							{/*			  })*/}
+							{/*	}*/}
+							{/*/>*/}
 
 							<Timepicker
 								{...timepicker}
-								customInput={
-									<TextInput
-										iconStart={
-											Icon && (
-												<Icon
-													{...(AdminConfigManager.getConfig().icon
-														?.componentProps.clock as { name: string })}
-												/>
-											)
-										}
-									/>
-								}
+								customInput={<TextInput iconStart={<Icon name="clock" />} />}
 								showTimeSelect
 								id="new-alert-until-time"
 								maxTime={endOfDay(new Date(form.untilDate) || now)}
@@ -879,7 +806,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				/>
 			</FormControl>
 		);
-	}, [Icon, control, errors.untilDate?.message, form.fromDate, form.untilDate, tHtml]);
+	}, [control, errors.untilDate?.message, form.fromDate, form.untilDate, tHtml]);
 
 	// Show modal/blade
 	const renderPopupBody = () => {
@@ -905,15 +832,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		<AdminLayout className={className} pageTitle={title}>
 			<AdminLayout.Actions>
 				<Button
-					iconStart={
-						Icon && (
-							<Icon
-								{...(AdminConfigManager.getConfig().icon?.componentProps.export as {
-									name: string;
-								})}
-							/>
-						)
-					}
+					iconStart={<Icon name="export" />}
 					label={tText(
 						'react-admin/modules/alerts/views/alerts-overview___nieuwe-melding-aanmaken'
 					)}
