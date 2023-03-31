@@ -54,7 +54,7 @@ export class AdminNavigationsController {
 			await this.adminNavigationsService.findAllNavigationBarItems();
 
 		// filter based on logged in / logged out
-		const allowedUserGroups = user
+		const allowedUserGroups = user.getGroupId()
 			? [SpecialPermissionGroups.loggedInUsers, user.getGroupId()]
 			: [SpecialPermissionGroups.loggedOutUsers];
 
