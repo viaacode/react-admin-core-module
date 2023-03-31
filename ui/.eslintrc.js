@@ -10,6 +10,7 @@ module.exports = {
 					ignore: ['@viaa', '@meemoo'],
 				},
 			],
-		}
+			quotes: ['error', 'single', { avoidEscape: true }],
+		},
 	},
 };

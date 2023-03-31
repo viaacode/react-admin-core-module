@@ -121,13 +121,13 @@ export class ResizablePanels extends Component<ResizablePanelsProps, ResizablePa
 		if (this.displayDirectionIsColumn()) {
 			return {
 				height: `${size}${unitMeasure}`,
-				width: `100%`,
+				width: '100%',
 				overflow: 'hidden',
 			};
 		}
 
 		return {
-			height: `100%`,
+			height: '100%',
 			width: `${size}${unitMeasure}`,
 			overflow: 'hidden',
 		};
