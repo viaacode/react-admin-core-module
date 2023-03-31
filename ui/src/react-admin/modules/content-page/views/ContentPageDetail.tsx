@@ -12,7 +12,6 @@ import {
 	Tabs,
 } from '@viaa/avo2-components';
 import { Avo, PermissionName } from '@viaa/avo2-types';
-import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -26,6 +25,7 @@ import { ContentPageInfo } from '~modules/content-page/types/content-pages.types
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import Link from '~shared/components/Link/Link';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
@@ -336,7 +336,6 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		const isOwner = commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 
 		return (
 			<ButtonToolbar>

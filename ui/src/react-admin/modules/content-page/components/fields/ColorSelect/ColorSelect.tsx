@@ -30,7 +30,7 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 				<Flex>
 					{!!option && (
 						<div
-							className={`c-color-select__preview`}
+							className={'c-color-select__preview'}
 							style={{ backgroundColor: option.color || option.value }}
 						/>
 					)}

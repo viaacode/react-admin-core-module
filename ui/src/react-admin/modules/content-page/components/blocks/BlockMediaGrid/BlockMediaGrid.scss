@@ -1,10 +1,11 @@
-@import '../../../../shared/styles/settings/colors';
+@import "../../../../shared/styles/settings/colors";
 
 .c-media-card__cta {
 	.c-thumbnail {
 		padding-top: 0;
 	}
 }
+
 .c-block-media-list {
 	.c-media-card {
 		cursor: pointer;
@@ -52,6 +53,7 @@
 				}
 			}
 		}
+
 		.c-media-card-content {
 			margin-top: 0.8rem;
 
