@@ -1,5 +1,5 @@
-@import './src/react-admin/modules/shared/styles/settings/colors';
-@import './src/react-admin/modules/shared/styles/settings/variables';
+@import "./src/react-admin/modules/shared/styles/settings/colors";
+@import "./src/react-admin/modules/shared/styles/settings/variables";
 
 /* ==========================================================================
    Component: Sidebar
@@ -30,7 +30,7 @@
 	.o-sidebar__nav-item-sublink > a {
 		padding: 6px 0 6px 44px;
 		display: block;
-		background-color: rgba(255, 255, 255, 0.04);
+		background-color: $color-white-4-percent;
 	}
 
 	.o-sidebar__nav-item-wrapper {

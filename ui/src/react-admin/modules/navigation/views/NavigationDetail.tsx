@@ -26,6 +26,7 @@ import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navi
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 
 import './NavigationDetail.scss';
+import { Link } from '~modules/shared/components/Link';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -300,7 +301,6 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 				</p>
 			);
 		}
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout
 				pageTitle={

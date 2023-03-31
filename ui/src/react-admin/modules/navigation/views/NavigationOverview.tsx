@@ -11,10 +11,10 @@ import { buildLink, navigate } from '~shared/helpers/link';
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
 import { Loader } from '~shared/components';
 import { AdminLayout } from '~shared/layouts';
+import { Link } from '~modules/shared/components/Link';
 
 const NavigationOverview: FunctionComponent = () => {
 	const { tHtml, tText } = useTranslation();
-	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,
@@ -111,16 +111,17 @@ const NavigationOverview: FunctionComponent = () => {
 		const title = tText('admin/menu/views/menu-overview___navigatie-overzicht');
 		return (
 			<AdminLayout pageTitle={title}>
-				<AdminLayout.Actions>
-					<ButtonToolbar>
-						<Button
-							label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}
-							onClick={() =>
-								history.push(AdminConfigManager.getAdminRoute('NAVIGATION_CREATE'))
-							}
-						/>
-					</ButtonToolbar>
-				</AdminLayout.Actions>
+				{/* TODO re-enable once we want to allow meemoo to create new navigation bars, usually this isn't needed, since new navigation bars always require new development work */}
+				{/*<AdminLayout.Actions>*/}
+				{/*	<ButtonToolbar>*/}
+				{/*		<Button*/}
+				{/*			label={tText('admin/menu/views/menu-overview___navigatie-toevoegen')}*/}
+				{/*			onClick={() =>*/}
+				{/*				history.push(AdminConfigManager.getAdminRoute('NAVIGATION_CREATE'))*/}
+				{/*			}*/}
+				{/*		/>*/}
+				{/*	</ButtonToolbar>*/}
+				{/*</AdminLayout.Actions>*/}
 				<AdminLayout.Content>
 					<Table
 						columns={columns}

@@ -1,4 +1,4 @@
-@import './react-admin/modules/shared/styles/settings/colors';
+@import "./react-admin/modules/shared/styles/settings/colors";
 
 .m-resizable-panels {
 	> div {
@@ -15,8 +15,8 @@
 			width: 15px;
 			min-width: 15px;
 
-			&:after {
-				content: '||';
+			&::after {
+				content: "||";
 				border: solid 1px #666;
 				border-width: 0 1px;
 				margin: -10px 0 0 3.5px;

@@ -10,12 +10,12 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { isNull } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
-
-import './ErrorView.scss';
-import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMobileWidth } from '~shared/helpers/media-query';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { Link } from '../Link';
+
+import './ErrorView.scss';
 
 interface ErrorViewProps {
 	message?: string | ReactNode;
@@ -35,7 +35,6 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	const messageText: string | ReactNode = message || '';
 	const errorMessage: string | ReactNode = messageText;
 	const errorIcon = (icon || 'search') as IconName;
-	const Link = AdminConfigManager.getConfig().services.router.Link;
 	const actionButtonsResolved = isNull(actionButtons) ? [] : actionButtons || [];
 
 	if (!message) {

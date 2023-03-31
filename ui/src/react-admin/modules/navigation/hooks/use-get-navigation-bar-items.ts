@@ -11,6 +11,9 @@ export const useGetNavigationBarItems = (
 	return useQuery(
 		[QUERY_KEYS.GET_NAVIGATION_BAR_ITEMS],
 		async () => {
+			if (!placement) {
+				return [];
+			}
 			const navItems = await NavigationService.fetchNavigationBarItems(placement);
 			reindexNavigationItems(navItems);
 			return navItems;
