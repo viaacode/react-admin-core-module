@@ -1,6 +1,6 @@
-@import '../../../../shared/styles/mixins';
-@import '../../../../shared/styles/settings/colors';
-@import '../../../../shared/styles/settings/variables';
+@import "../../../../shared/styles/mixins";
+@import "../../../../shared/styles/settings/colors";
+@import "../../../../shared/styles/settings/variables";
 
 .uitgeklaard-header {
 	@include klaar-block(#f3aa2e, #fff, #b75b99, #b75b99);

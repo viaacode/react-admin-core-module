@@ -126,7 +126,7 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 						<div>
 							<h4 className="c-media-card__title">titel</h4>
 							<MetaData category="item">
-								<MetaDataItem key={`block-media-list-meta-cta`} label="meta" />
+								<MetaDataItem key={'block-media-list-meta-cta'} label="meta" />
 							</MetaData>
 						</div>
 					)}
