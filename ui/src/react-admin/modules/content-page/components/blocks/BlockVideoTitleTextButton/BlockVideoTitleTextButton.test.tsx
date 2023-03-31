@@ -29,7 +29,7 @@ describe('<BlockVideoTitleTextButton />', () => {
 
 		const h2Element = component.find('h2');
 
-		expect(h2Element.html()).toContain(`>Title<`);
+		expect(h2Element.html()).toContain('>Title<');
 	});
 
 	it('Should render the title link correctly', () => {
