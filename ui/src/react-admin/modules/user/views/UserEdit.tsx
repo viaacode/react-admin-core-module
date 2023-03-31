@@ -35,6 +35,7 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { PHOTO_TYPES } from '~shared/helpers/files';
 import stringToTagInfo from '../helpers/string-to-tag-info';
 import { getAvatarProps } from '~shared/helpers/formatters/avatar';
+import { Link } from '~modules/shared/components/Link';
 
 export type UserEditProps = {
 	id: string;
@@ -296,7 +297,6 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 	};
 
 	const renderUserDetailPage = () => {
-		const Link = AdminConfigManager.getConfig().services.router.Link;
 		return (
 			<AdminLayout pageTitle={tText('admin/users/views/user-edit___bewerk-gebruiker')}>
 				<AdminLayout.Back>

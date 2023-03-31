@@ -4,7 +4,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import { ContentPagesController } from './content-pages.controller';
 import { ContentPagesService } from '../services/content-pages.service';
 import { PlayerTicketService } from '../../player-ticket';
-import { Group, GroupIdToName, HetArchiefUser } from '../../users';
+import { HetArchiefUser } from '../../users';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
@@ -16,14 +16,12 @@ const mockUser: HetArchiefUser = {
 	email: 'test.testers@meemoo.be',
 	idp: Idp.HETARCHIEF,
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
-	groupId: Group.CP_ADMIN,
-	groupName: GroupIdToName[Group.CP_ADMIN],
+	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
+	groupName: 'CP_ADMIN',
 	permissions: [PermissionName.EDIT_ANY_CONTENT_PAGES],
 };
 
-const mockContentPagesService: Partial<
-	Record<keyof ContentPagesService, jest.SpyInstance>
-> = {
+const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
 	adaptContentPage: jest.fn(),
 	adaptContentBlock: jest.fn(),
 	getContentPagesForOverview: jest.fn(),
@@ -34,9 +32,7 @@ const mockContentPagesService: Partial<
 	getContentPagesByIds: jest.fn(),
 };
 
-const mockPlayerTicketService: Partial<
-	Record<keyof PlayerTicketService, jest.SpyInstance>
-> = {
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
 	getPlayableUrl: jest.fn(),
 	getEmbedUrl: jest.fn(),
 };
@@ -61,13 +57,9 @@ describe('ContentPagesController', () => {
 			],
 		}).compile();
 
-		contentPagesController = module.get<ContentPagesController>(
-			ContentPagesController,
-		);
+		contentPagesController = module.get<ContentPagesController>(ContentPagesController);
 
-		sessionHelperSpy = jest
-			.spyOn(SessionHelper, 'getUserInfo')
-			.mockReturnValue(mockUser);
+		sessionHelperSpy = jest.spyOn(SessionHelper, 'getUserInfo').mockReturnValue(mockUser);
 	});
 
 	afterAll(async () => {

@@ -30,6 +30,7 @@ import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicke
 import { UserService } from '../user.service';
 
 import './UserDeleteModal.scss';
+import { Link } from '~modules/shared/components/Link';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];
@@ -125,8 +126,6 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	};
 
 	const renderConfirmDeleteMessage = () => {
-		const Link = AdminConfigManager.getConfig().services.router.Link;
-
 		const publicCollections: number = get(deleteContentCounts, 'publicCollections') || 0;
 		const privateCollections: number = get(deleteContentCounts, 'privateCollections') || 0;
 		const assignments: number = get(deleteContentCounts, 'assignments') || 0;

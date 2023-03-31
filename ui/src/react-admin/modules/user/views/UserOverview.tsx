@@ -1,7 +1,6 @@
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -38,7 +37,6 @@ import {
 	UserTableState,
 } from '../user.types';
 
-import './UserOverview.scss';
 import { SettingsService } from '~shared/services/settings-service/settings.service';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { buildLink, navigate } from '~shared/helpers/link';
@@ -59,6 +57,9 @@ import UserDeleteModal from '../components/UserDeleteModal';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
 import { Icon } from '~modules/shared/components';
+import { Link } from 'react-router-dom';
+
+import './UserOverview.scss';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
