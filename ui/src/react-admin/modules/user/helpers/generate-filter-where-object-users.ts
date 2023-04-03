@@ -178,8 +178,8 @@ export const generateWhereObjectArchief = (
 			andFilters.push(
 				...getBooleanFilters<Partial<UserTableState>>(
 					filters,
-					['isKeyUser', 'isException'],
-					['is_key_user', 'is_exception']
+					['isKeyUser'],
+					['is_key_user']
 				)
 			);
 		}
