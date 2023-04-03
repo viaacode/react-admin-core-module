@@ -174,6 +174,16 @@ export const generateWhereObjectArchief = (
 			});
 		}
 
+		if (!isNil(filters.isKeyUser)) {
+			andFilters.push(
+				...getBooleanFilters<Partial<UserTableState>>(
+					filters,
+					['isKeyUser'],
+					['is_key_user']
+				)
+			);
+		}
+
 		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
 
 		andFilters.push(

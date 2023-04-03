@@ -424,6 +424,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 	const renderTableCell = (commonUser: Avo.User.CommonUser, columnId: UserOverviewTableCol) => {
 		const isBlocked = commonUser?.isBlocked;
+		const isKeyUser = (commonUser as any)?.isKeyUser ?? false;
 
 		switch (columnId) {
 			case 'fullName':
@@ -445,6 +446,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			case 'isBlocked':
 				return isBlocked ? 'Ja' : 'Nee';
+
+			case 'isKeyUser':
+				return isKeyUser ? 'Ja' : 'Nee';
 
 			case 'blockedAt':
 				return formatDateString(commonUser?.blockedAt) || '-';
