@@ -392,13 +392,24 @@ const getHetArchiefColumns = (
 		dataType: 'string',
 	},
 	{
+		id: 'isKeyUser',
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'admin/users/user___sleutelgebruiker'
+		),
+		sortable: true,
+		visibleByDefault: false,
+		filterType: 'BooleanCheckboxDropdown',
+		dataType: 'boolean',
+	},
+	{
 		id: 'lastAccessAt',
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/users/user___laatste-toegang'
 		),
 		sortable: true,
 		visibleByDefault: true,
-		filterType: 'DateRangeDropdown',
+		// Ward: hide lastAccessAt filter (ARC-1428)
+		//filterType: 'DateRangeDropdown',
 		dataType: 'dateTime',
 	},
 	{

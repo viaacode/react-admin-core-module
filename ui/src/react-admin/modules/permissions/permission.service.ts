@@ -13,7 +13,7 @@ export class PermissionService {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl());
 		} catch (err) {
-			throw new CustomError(`Failed to fetch navigation items`, err);
+			throw new CustomError('Failed to fetch navigation items', err);
 		}
 	}
 }
