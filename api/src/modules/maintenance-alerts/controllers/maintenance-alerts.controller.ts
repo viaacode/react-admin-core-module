@@ -30,7 +30,7 @@ export class MaintenanceAlertsController {
 	public async getMaintenanceAlerts(
 		@Query() queryDto: MaintenanceAlertsQueryDto
 	): Promise<IPagination<MaintenanceAlert>> {
-		return await this.maintenanceAlertsService.findAll(queryDto);
+		return this.maintenanceAlertsService.findAll(queryDto, false);
 	}
 
 	@Get('personal')
@@ -41,7 +41,10 @@ export class MaintenanceAlertsController {
 		@Query() queryDto: MaintenanceAlertsQueryDto,
 		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
-		const maintenanceAlertResponse = await this.maintenanceAlertsService.findAll(queryDto);
+		const maintenanceAlertResponse = await this.maintenanceAlertsService.findAll(
+			queryDto,
+			true
+		);
 
 		// Filter alerts to only include the ones for the current user group
 		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) => {

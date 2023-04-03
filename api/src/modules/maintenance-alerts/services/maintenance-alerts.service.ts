@@ -42,7 +42,8 @@ import {
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
 
-	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
+	}
 
 	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
@@ -61,21 +62,24 @@ export class MaintenanceAlertsService {
 	}
 
 	public async findAll(
-		inputQuery: MaintenanceAlertsQueryDto
+		inputQuery: MaintenanceAlertsQueryDto,
+		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
 		const { page, size, orderProp, orderDirection } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
-		const where: FindMaintenanceAlertsQueryVariables['where'] = {
-			_and: [
-				{
-					from_date: { _lte: new Date().toISOString() },
-				},
-				{
-					until_date: { _gte: new Date().toISOString() },
-				},
-			],
-		};
+		const where: FindMaintenanceAlertsQueryVariables['where'] = onlyActive
+			? {
+				_and: [
+					{
+						from_date: { _lte: new Date().toISOString() },
+					},
+					{
+						until_date: { _gte: new Date().toISOString() },
+					},
+				],
+			}
+			: {};
 
 		const maintenanceAlertsResponse = await this.dataService.execute<
 			FindMaintenanceAlertsQuery,
