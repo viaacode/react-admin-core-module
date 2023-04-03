@@ -4,7 +4,7 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { Alert, AlertFormState, AlertsOverviewTableCol } from './alerts.types';
+import { Alert, AlertDto, AlertFormState, AlertsOverviewTableCol } from './alerts.types';
 
 export class AlertsService {
 	private static getBaseUrl(): string {
@@ -41,7 +41,7 @@ export class AlertsService {
 		});
 	}
 
-	static async updateAlert(alertId: string, data: AlertFormState): Promise<Alert | void> {
+	static async updateAlert(alertId: string, data: AlertDto): Promise<Alert | void> {
 		if (!data || !alertId) {
 			return;
 		}
