@@ -3,7 +3,6 @@ import {
 	Button,
 	Datepicker,
 	FormControl,
-	futureDatepicker,
 	MultiSelect,
 	Pagination,
 	RichEditorState,
@@ -21,17 +20,7 @@ import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import {
-	add,
-	endOfDay,
-	format,
-	isAfter,
-	isSameDay,
-	isWithinInterval,
-	roundToNearestMinutes,
-	set,
-	startOfDay,
-} from 'date-fns';
+import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
@@ -56,16 +45,12 @@ import {
 	AlertsOverviewProps,
 	AlertsOverviewTableCol,
 } from '../alerts.types';
-import { get, now, without } from 'lodash-es';
+import { get, without } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-
-const roundToNearestQuarter = (date: Date) => roundToNearestMinutes(date, { nearestTo: 15 });
-const defaultStartDate = (start: Date) => roundToNearestQuarter(start);
-const defaultEndDate = (startDate: Date) => set(startDate, { hours: 23, minutes: 59 });
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
@@ -118,13 +103,13 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	}, [getAlerts]);
 
 	const checkIsAlertActive = (from: string, till: string): boolean => {
-		if (!isAfter(new Date(till), new Date(from))) {
+		if (!isAfter(parseISO(till), parseISO(from))) {
 			return false;
 		}
 
 		return isWithinInterval(new Date(), {
-			start: new Date(from),
-			end: new Date(till),
+			start: parseISO(from),
+			end: parseISO(till),
 		});
 	};
 
@@ -173,7 +158,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										return (
 											<Html
 												content={format(
-													new Date(row.original.fromDate),
+													parseISO(row.original.fromDate),
 													'PP',
 													{
 														locale: nlBE,
@@ -193,7 +178,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										return (
 											<Html
 												content={format(
-													new Date(row.original.untilDate),
+													parseISO(row.original.untilDate),
 													'PP',
 													{
 														locale: nlBE,
@@ -335,20 +320,23 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		}));
 	}, []);
 
-	const defaultValues = useMemo(
-		() =>
-			({
-				title: activeAlert?.title || '',
-				message: activeAlert?.message,
-				fromDate: activeAlert?.fromDate || defaultStartDate(new Date()).toISOString(),
-				untilDate: activeAlert?.untilDate || defaultEndDate(new Date()).toISOString(),
-				userGroups: activeAlert?.userGroups || [],
-				type: activeAlert?.type || '',
-			} as AlertFormState),
-		[activeAlert]
-	);
+	const getDefaultValues = useCallback(() => {
+		const now = new Date();
+		return {
+			title: activeAlert?.title || '',
+			message: activeAlert?.message,
+			fromDate: activeAlert?.fromDate
+				? new Date(activeAlert?.fromDate + 'Z') // Force date to be interpreted as a GMT time from the database => parse it as a Europe/Brussels time in the date object
+				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0),
+			untilDate: activeAlert?.untilDate
+				? new Date(activeAlert?.untilDate + 'Z')
+				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59),
+			userGroups: activeAlert?.userGroups || [],
+			type: activeAlert?.type || '',
+		} as AlertFormState;
+	}, [activeAlert]);
 
-	const [form, setForm] = useState<AlertFormState>(defaultValues);
+	const [form, setForm] = useState<AlertFormState>(getDefaultValues());
 	const [formMessage, setFormMessage] = useState<RichEditorState>();
 	const {
 		control,
@@ -358,21 +346,13 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		reset,
 	} = useForm<AlertFormState>({
 		resolver: yupResolver(ALERTS_FORM_SCHEMA(tText)),
-		defaultValues,
+		defaultValues: getDefaultValues(),
 	});
 
 	useEffect(() => {
-		activeAlert &&
-			setForm({
-				title: activeAlert.title || defaultValues.title,
-				message: activeAlert.message || defaultValues.message,
-				userGroups: activeAlert.userGroups || defaultValues.userGroups,
-				fromDate: activeAlert.fromDate || defaultValues.fromDate,
-				untilDate: activeAlert.untilDate || defaultValues.untilDate,
-				type: activeAlert.type || defaultValues.type,
-			});
+		activeAlert && setForm(getDefaultValues());
 		activeAlert && setFormMessage(undefined);
-	}, [activeAlert, defaultValues, setForm]);
+	}, [activeAlert, getDefaultValues, setForm]);
 
 	useEffect(() => {
 		setValue('title', form.title);
@@ -402,7 +382,11 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 
 		if (activeAlert?.id) {
 			try {
-				await AlertsService.updateAlert(activeAlert.id, values);
+				await AlertsService.updateAlert(activeAlert.id, {
+					...values,
+					fromDate: values.fromDate.toUTCString(),
+					untilDate: values.untilDate.toUTCString(),
+				});
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
@@ -540,14 +524,14 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								}));
 							}}
 							state={formMessage}
-							initialHtml={defaultValues.message}
+							initialHtml={getDefaultValues().message}
 							controls={RICH_TEXT_EDITOR_OPTIONS}
 						></RichTextEditor>
 					)}
 				/>
 			</FormControl>
 		);
-	}, [control, defaultValues.message, errors.message?.message, formMessage, tHtml]);
+	}, [control, getDefaultValues, errors.message?.message, formMessage, tHtml]);
 
 	const renderIcon = useMemo(() => {
 		return (
@@ -636,45 +620,60 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
+								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-from-date"
-								locale={nlBE}
-								minDate={defaultStartDate(new Date())}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(fromDate: Date) => {
-									fromDate &&
+								onChange={(newFromDate: Date) => {
+									if (newFromDate) {
+										const oldFromDate = form.fromDate;
 										setForm((prev) => ({
 											...prev,
-											fromDate: fromDate.toISOString(),
+											fromDate: new Date(
+												newFromDate.getFullYear(),
+												newFromDate.getMonth(),
+												newFromDate.getDate(),
+												oldFromDate.getHours(),
+												oldFromDate.getMinutes()
+											),
 										}));
+									}
 								}}
-								selected={new Date(form.fromDate)}
-								dateFormat="PP"
-								value={format(new Date(form.fromDate), 'PP', {
+								selected={field.value}
+								value={format(form.fromDate, 'PP', {
 									locale: nlBE,
 								})}
+								popperPlacement="bottom-start"
 							/>
 
 							<Timepicker
 								{...timepicker}
+								locale={nlBE}
+								timeFormat={'HH:mm'}
 								customInput={<TextInput iconStart={<Icon name="clock" />} />}
 								showTimeSelect
 								id="new-alert-from-time"
-								maxTime={endOfDay(new Date(form.fromDate) || now)}
-								minTime={startOfDay(new Date(form.fromDate) || now)}
-								minDate={defaultStartDate(new Date())}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(fromDate: Date) => {
-									fromDate &&
+								onChange={(newFromTime: Date) => {
+									if (newFromTime) {
+										const oldFromDate = form.fromDate;
 										setForm((prev) => ({
 											...prev,
-											fromDate: fromDate.toISOString(),
+											fromDate: new Date(
+												oldFromDate.getFullYear(),
+												oldFromDate.getMonth(),
+												oldFromDate.getDate(),
+												newFromTime.getHours(),
+												newFromTime.getMinutes()
+											),
 										}));
+									}
 								}}
-								selected={new Date(form.fromDate)}
-								value={format(new Date(form.fromDate), 'HH:mm')}
+								value={format(form.fromDate, 'HH:mm', {
+									locale: nlBE,
+								})}
 							/>
 						</>
 					)}
@@ -697,109 +696,60 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					render={({ field }) => (
 						<>
 							<Datepicker
-								{...futureDatepicker}
+								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-until-date"
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(untilDate: Date) => {
-									untilDate &&
+								onChange={(newUntilDate: Date) => {
+									if (newUntilDate) {
+										const oldUntilDate = form.untilDate;
 										setForm((prev) => ({
 											...prev,
-											untilDate: untilDate.toISOString(),
+											untilDate: new Date(
+												newUntilDate.getFullYear(),
+												newUntilDate.getMonth(),
+												newUntilDate.getDate(),
+												oldUntilDate.getHours(),
+												oldUntilDate.getMinutes()
+											),
 										}));
+									}
 								}}
-								selected={new Date(field.value)}
-								value={format(new Date(form.untilDate), 'PP', {
+								selected={field.value}
+								value={format(form.untilDate, 'PP', {
 									locale: nlBE,
 								})}
 								popperPlacement="bottom-start"
 							/>
-							{/*<Datepicker*/}
-							{/*	customInput={*/}
-							{/*		// TODO: icon name*/}
-							{/*		<TextInput*/}
-							{/*			iconStart={*/}
-							{/*				Icon && (*/}
-							{/*					<Icon*/}
-							{/*						{...(AdminConfigManager.getConfig().icon*/}
-							{/*							?.componentProps.calendar as {*/}
-							{/*							name: string;*/}
-							{/*						})}*/}
-							{/*					/>*/}
-							{/*				)*/}
-							{/*			}*/}
-							{/*		/>*/}
-							{/*	}*/}
-							{/*	id="new-alert-until-date"*/}
-							{/*	minDate={new Date(form.fromDate)}*/}
-							{/*	locale={nlBE}*/}
-							{/*	name={field.name}*/}
-							{/*	onBlur={field.onBlur}*/}
-							{/*	onChange={(untilDate: Date) => {*/}
-							{/*		untilDate &&*/}
-							{/*			setForm((prev) => ({*/}
-							{/*				...prev,*/}
-							{/*				untilDate: untilDate.toISOString(),*/}
-							{/*			}));*/}
-							{/*	}}*/}
-							{/*	selected={*/}
-							{/*		isAfter(new Date(form.untilDate), new Date(form.fromDate))*/}
-							{/*			? new Date(form.untilDate)*/}
-							{/*			: new Date(form.fromDate)*/}
-							{/*	}*/}
-							{/*	dateFormat="PP"*/}
-							{/*	value={*/}
-							{/*		isAfter(new Date(form.untilDate), new Date(form.fromDate))*/}
-							{/*			? format(new Date(form.untilDate), 'PP', {*/}
-							{/*					locale: nlBE,*/}
-							{/*			  })*/}
-							{/*			: format(new Date(form.fromDate), 'PP', {*/}
-							{/*					locale: nlBE,*/}
-							{/*			  })*/}
-							{/*	}*/}
-							{/*/>*/}
 
 							<Timepicker
 								{...timepicker}
+								locale={nlBE}
+								timeFormat={'HH:mm'}
 								customInput={<TextInput iconStart={<Icon name="clock" />} />}
 								showTimeSelect
 								id="new-alert-until-time"
-								maxTime={endOfDay(new Date(form.untilDate) || now)}
-								minTime={
-									isSameDay(new Date(form.fromDate), new Date(form.untilDate))
-										? add(new Date(form.fromDate), { minutes: 30 })
-										: startOfDay(new Date(form.untilDate) || now)
-								}
-								minDate={new Date(form.fromDate)}
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(untilDate: Date) => {
-									untilDate &&
+								onChange={(newUntilTime: Date) => {
+									if (newUntilTime) {
+										const oldUntilDate = form.untilDate;
 										setForm((prev) => ({
 											...prev,
-											untilDate: untilDate.toISOString(),
+											untilDate: new Date(
+												oldUntilDate.getFullYear(),
+												oldUntilDate.getMonth(),
+												oldUntilDate.getDate(),
+												newUntilTime.getHours(),
+												newUntilTime.getMinutes()
+											),
 										}));
+									}
 								}}
-								selected={
-									isAfter(
-										new Date(form.untilDate),
-										add(new Date(form.fromDate), { minutes: 30 })
-									)
-										? new Date(form.untilDate)
-										: add(new Date(form.fromDate), { minutes: 30 })
-								}
-								value={
-									isAfter(
-										new Date(form.untilDate),
-										add(new Date(form.fromDate), { minutes: 30 })
-									)
-										? format(new Date(form.untilDate), 'HH:mm')
-										: format(
-												add(new Date(form.fromDate), { minutes: 30 }),
-												'HH:mm'
-										  )
-								}
+								value={format(form.untilDate, 'HH:mm', {
+									locale: nlBE,
+								})}
 							/>
 						</>
 					)}

@@ -26,6 +26,15 @@ export type AlertsOverviewTableCol = 'id' | 'icon' | 'fromDate' | 'untilDate' | 
 export interface AlertFormState {
 	title: string;
 	message?: string;
+	fromDate: Date;
+	untilDate: Date;
+	userGroups: string[];
+	type: string;
+}
+
+export interface AlertDto {
+	title: string;
+	message?: string;
 	fromDate: string;
 	untilDate: string;
 	userGroups: string[];
