@@ -1,15 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { IPagination } from "@studiohyperdrive/pagination";
-import { PermissionName } from "@viaa/avo2-types";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { IPagination } from '@studiohyperdrive/pagination';
+import { PermissionName } from '@viaa/avo2-types';
+import { intersection, omit } from 'lodash';
 
-import { RequireAnyPermissions } from "../../shared/decorators/require-any-permissions.decorator";
-import { SessionUser } from "../../shared/decorators/user.decorator";
-import { addPrefix } from "../../shared/helpers/add-route-prefix";
-import { SessionUserEntity } from "../../users/classes/session-user";
-import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto, UpdateMaintenanceAlertDto } from "../dto/maintenance-alerts.dto";
-import { MaintenanceAlert } from "../maintenance-alerts.types";
-import { MaintenanceAlertsService } from './../services/maintenance-alerts.service';
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { SessionUser } from '../../shared/decorators/user.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { SessionUserEntity } from '../../users/classes/session-user';
+import {
+	CreateMaintenanceAlertDto,
+	MaintenanceAlertsQueryDto,
+	UpdateMaintenanceAlertDto,
+} from '../dto/maintenance-alerts.dto';
+import { MaintenanceAlert } from '../maintenance-alerts.types';
+import { MaintenanceAlertsService } from '../services/maintenance-alerts.service';
 
 @ApiTags('MaintenanceAlerts')
 @Controller(addPrefix(process, 'maintenance-alerts'))
@@ -23,69 +28,71 @@ export class MaintenanceAlertsController {
 	})
 	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
 	public async getMaintenanceAlerts(
-		@Query() queryDto: MaintenanceAlertsQueryDto,
+		@Query() queryDto: MaintenanceAlertsQueryDto
 	): Promise<IPagination<MaintenanceAlert>> {
 		return await this.maintenanceAlertsService.findAll(queryDto);
 	}
 
 	@Get('personal')
 	@ApiOperation({
-		description: 'Get maintenance alert for the logged in user.',
+		description: 'Get active maintenance alert for the logged in user',
 	})
 	public async getPersonalMaintenanceAlerts(
 		@Query() queryDto: MaintenanceAlertsQueryDto,
 		@SessionUser() user: SessionUserEntity
 	): Promise<IPagination<MaintenanceAlert>> {
-		return this.maintenanceAlertsService.findAll(queryDto, {
-			userGroupIds: user.getGroupIds(),
-			isPersonal: true
+		const maintenanceAlertResponse = await this.maintenanceAlertsService.findAll(queryDto);
+
+		// Filter alerts to only include the ones for the current user group
+		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) => {
+			return intersection(alert.userGroups, user.getGroupIds()).length > 0;
 		});
+
+		// Remove user group ids, since the user doesn't need to know this
+		maintenanceAlertResponse.items = maintenanceAlertResponse.items.map((item) =>
+			omit(item, 'userGroupIds')
+		);
+
+		return maintenanceAlertResponse;
 	}
 
 	@Get(':id')
-	@RequireAnyPermissions(
-		PermissionName.VIEW_ANY_MAINTENANCE_ALERTS,
-	)
-	public async getMaintenanceAlertById(
-		@Param('id') id: string,
-	): Promise<MaintenanceAlert> {
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
+	public async getMaintenanceAlertById(@Param('id') id: string): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.findById(id);
 	}
 
 	@Post()
 	@ApiOperation({
-		description:
-			'Create a new maintenance alert',
+		description: 'Create a new maintenance alert',
 	})
 	@RequireAnyPermissions(PermissionName.CREATE_MAINTENANCE_ALERTS)
 	public async createMaintenanceAlert(
-		@Body() createMaintenanceAlertDto: CreateMaintenanceAlertDto,
+		@Body() createMaintenanceAlertDto: CreateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.createMaintenanceAlert(
 			createMaintenanceAlertDto
-		)
+		);
 	}
 
 	@Patch(':id')
 	@ApiOperation({
-		description:
-			'Update maintenance alert',
+		description: 'Update maintenance alert',
 	})
 	@RequireAnyPermissions(PermissionName.EDIT_MAINTENANCE_ALERTS)
 	public async updateMaintenanceAlert(
 		@Param('id') maintenanceAlertId: string,
-		@Body() updateMaintenanceAlertDto: UpdateMaintenanceAlertDto,
+		@Body() updateMaintenanceAlertDto: UpdateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
 		return await this.maintenanceAlertsService.updateMaintenanceAlert(
 			maintenanceAlertId,
 			updateMaintenanceAlertDto
-		)
+		);
 	}
 
 	@Delete(':id')
 	@ApiOperation({
-		description:
-			'Delete maintenance alert',
+		description: 'Delete maintenance alert',
 	})
 	@RequireAnyPermissions(PermissionName.DELETE_MAINTENANCE_ALERTS)
 	public async deleteMaintenanceAlert(
@@ -93,7 +100,7 @@ export class MaintenanceAlertsController {
 	): Promise<{ status: string }> {
 		const affectedRows = await this.maintenanceAlertsService.deleteMaintenanceAlert(
 			maintenanceAlertId
-		)
+		);
 
 		if (affectedRows > 0) {
 			return { status: 'Maintenance alert has been deleted' };
@@ -101,5 +108,4 @@ export class MaintenanceAlertsController {
 			return { status: `no maintenance alert found with that id: ${maintenanceAlertId}` };
 		}
 	}
-
 }

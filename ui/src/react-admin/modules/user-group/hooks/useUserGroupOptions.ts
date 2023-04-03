@@ -1,3 +1,4 @@
+import { MultiSelectOption } from '@meemoo/react-components/dist/esm/components/MultiSelect/MultiSelect.types';
 import { useMemo } from 'react';
 
 import { TagInfo } from '@viaa/avo2-components';
@@ -8,13 +9,13 @@ import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/u
 import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';
 
 type UseUserGroupsTriple = [
-	TagInfo[] | CheckboxOption[],
+	TagInfo[] | CheckboxOption[] | MultiSelectOption[],
 	UserGroup[] | UserGroupWithPermissions[],
 	boolean
 ];
 
 export const useUserGroupOptions = (
-	type: 'CheckboxOption' | 'TagInfo',
+	type: 'CheckboxOption' | 'MultiSelectOption' | 'TagInfo',
 	includeSpecialGroups: boolean,
 	includePermissions: boolean
 ): UseUserGroupsTriple => {

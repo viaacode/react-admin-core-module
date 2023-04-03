@@ -1,15 +1,15 @@
-import { IPagination, Pagination } from "@studiohyperdrive/pagination";
-import { BadRequestException, forwardRef, Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
-import { isArray } from "class-validator";
-import { isEmpty, isNil, set } from "lodash";
+import {
+	BadRequestException,
+	forwardRef,
+	Inject,
+	Injectable,
+	Logger,
+	NotFoundException,
+} from '@nestjs/common';
+import { IPagination, Pagination } from '@studiohyperdrive/pagination';
+import { isEmpty, isNil, set } from 'lodash';
 
-import { DataService } from "../../data";
-import { CreateMaintenanceAlertDto, MaintenanceAlertsQueryDto, UpdateMaintenanceAlertDto } from './../dto/maintenance-alerts.dto';
-import { GqlMaintenanceAlert, MaintenanceAlert } from "../maintenance-alerts.types";
-import { ORDER_PROP_TO_DB_PROP } from "../maintenance-alerts.conts";
-
-import { SortDirection } from '../../shared/types';
-import { PaginationHelper } from "../../shared/helpers/pagination";
+import { DataService } from '../../data';
 import {
 	DeleteMaintenanceAlertDocument,
 	DeleteMaintenanceAlertMutation,
@@ -25,84 +25,57 @@ import {
 	InsertMaintenanceAlertMutationVariables,
 	UpdateMaintenanceAlertDocument,
 	UpdateMaintenanceAlertMutation,
-	UpdateMaintenanceAlertMutationVariables
-} from "../../shared/generated/graphql-db-types-hetarchief";
+	UpdateMaintenanceAlertMutationVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
+import { PaginationHelper } from '../../shared/helpers/pagination';
+
+import { SortDirection } from '../../shared/types';
+import { ORDER_PROP_TO_DB_PROP } from '../maintenance-alerts.conts';
+import { GqlMaintenanceAlert, MaintenanceAlert } from '../maintenance-alerts.types';
+import {
+	CreateMaintenanceAlertDto,
+	MaintenanceAlertsQueryDto,
+	UpdateMaintenanceAlertDto,
+} from '../dto/maintenance-alerts.dto';
 
 @Injectable()
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
 
-	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService,) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
-	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert, isPersonal = false): MaintenanceAlert | null {
+	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
 			return null;
 		}
 
-		let adaptedMaintenanceAlert: MaintenanceAlert = {
+		return {
 			id: graphqlMaintenanceAlert.id,
 			title: graphqlMaintenanceAlert.title,
 			message: graphqlMaintenanceAlert.message,
 			type: graphqlMaintenanceAlert.type,
 			fromDate: graphqlMaintenanceAlert.from_date,
-			untilDate: graphqlMaintenanceAlert.until_date
-		}
-
-		// userGroups should not be returned when /personal endpoint is called
-		if (!isPersonal) {
-			adaptedMaintenanceAlert = {
-				...adaptedMaintenanceAlert,
-				userGroups: graphqlMaintenanceAlert.user_groups
-			}
-		}
-
-		return adaptedMaintenanceAlert;
+			untilDate: graphqlMaintenanceAlert.until_date,
+			userGroups: graphqlMaintenanceAlert.user_groups,
+		};
 	}
 
 	public async findAll(
-		inputQuery: MaintenanceAlertsQueryDto,
-		parameters: {
-			userGroupIds: (string | number)[],
-			isPersonal: boolean
-		} = null
+		inputQuery: MaintenanceAlertsQueryDto
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { fromDate, untilDate, page, size, orderProp, orderDirection } = inputQuery;
+		const { page, size, orderProp, orderDirection } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
-		/** Dynamically build the where object  */
-		const where: FindMaintenanceAlertsQueryVariables['where'] = {};
-
-		// user group & special user group
-		if (isNil(parameters)) {
-			if (!isEmpty(fromDate)) {
-				where.from_date = {
-					_gte: fromDate
-				}
-			}
-
-			if (!isEmpty(untilDate)) {
-				where.until_date = {
-					_lte: untilDate
-				}
-			}
-		} else {
-			// LOGGED IN USER
-			if (parameters.userGroupIds[1] === '-2' ) {
-				where.user_groups = {
-					// jsonb comparison
-					_in: (isArray(parameters.userGroupIds[0]) ? parameters.userGroupIds[0] : [parameters.userGroupIds[0]]) as string[]
-				}
-			}
-
-			where._and = [
+		const where: FindMaintenanceAlertsQueryVariables['where'] = {
+			_and: [
 				{
-					from_date: { _gte: new Date().toISOString() }
+					from_date: { _lte: new Date().toISOString() },
 				},
 				{
-					until_date: { _lte: new Date().toISOString() }
-				}
-			];
-		}
+					until_date: { _gte: new Date().toISOString() },
+				},
+			],
+		};
 
 		const maintenanceAlertsResponse = await this.dataService.execute<
 			FindMaintenanceAlertsQuery,
@@ -119,7 +92,7 @@ export class MaintenanceAlertsService {
 		});
 
 		return Pagination<MaintenanceAlert>({
-			items: maintenanceAlertsResponse.app_maintenance_alerts.map((mr) => this.adapt(mr, parameters?.isPersonal)),
+			items: maintenanceAlertsResponse.app_maintenance_alerts.map(this.adapt),
 			page,
 			size,
 			total: maintenanceAlertsResponse.app_maintenance_alerts_aggregate.aggregate.count,
@@ -132,7 +105,10 @@ export class MaintenanceAlertsService {
 			FindMaintenanceAlertByIdQueryVariables
 		>(FindMaintenanceAlertByIdDocument, { id });
 
-		if (isNil(maintenanceAlertResponse) || !maintenanceAlertResponse.app_maintenance_alerts[0]) {
+		if (
+			isNil(maintenanceAlertResponse) ||
+			!maintenanceAlertResponse.app_maintenance_alerts[0]
+		) {
 			throw new NotFoundException(`Maintenance Alert with id '${id}' not found`);
 		}
 
@@ -148,7 +124,7 @@ export class MaintenanceAlertsService {
 			type: createMaintenanceAlertDto.type,
 			user_groups: createMaintenanceAlertDto.userGroups,
 			from_date: createMaintenanceAlertDto.fromDate,
-			until_date: createMaintenanceAlertDto.untilDate
+			until_date: createMaintenanceAlertDto.untilDate,
 		};
 
 		const { insert_app_maintenance_alerts_one: createdMainteanceAlert } =
@@ -156,7 +132,7 @@ export class MaintenanceAlertsService {
 				InsertMaintenanceAlertMutation,
 				InsertMaintenanceAlertMutationVariables
 			>(InsertMaintenanceAlertDocument, {
-				newMaintenanceAlert
+				newMaintenanceAlert,
 			});
 
 		this.logger.debug(`Maintenance alert ${createdMainteanceAlert.id} created.`);
@@ -166,7 +142,7 @@ export class MaintenanceAlertsService {
 
 	public async updateMaintenanceAlert(
 		maintenanceAlertId: string,
-		updateMaintenanceAlertDto: UpdateMaintenanceAlertDto,
+		updateMaintenanceAlertDto: UpdateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
 		const { title, message, type, userGroups, fromDate, untilDate } = updateMaintenanceAlertDto;
 
@@ -176,7 +152,7 @@ export class MaintenanceAlertsService {
 			type,
 			user_groups: userGroups,
 			from_date: fromDate,
-			until_date: untilDate
+			until_date: untilDate,
 		};
 
 		const { update_app_maintenance_alerts: updatedMaintenanceAlert } =
@@ -190,7 +166,7 @@ export class MaintenanceAlertsService {
 
 		if (isEmpty(updatedMaintenanceAlert.returning[0])) {
 			throw new BadRequestException(
-					`Maintenance alert (${maintenanceAlertId}) could not be updated.`
+				`Maintenance alert (${maintenanceAlertId}) could not be updated.`
 			);
 		}
 
@@ -199,14 +175,12 @@ export class MaintenanceAlertsService {
 		return this.adapt(updatedMaintenanceAlert.returning[0]);
 	}
 
-	public async deleteMaintenanceAlert(
-		maintenanceAlertId: string
-	): Promise<number> {
+	public async deleteMaintenanceAlert(maintenanceAlertId: string): Promise<number> {
 		const response = await this.dataService.execute<
 			DeleteMaintenanceAlertMutation,
 			DeleteMaintenanceAlertMutationVariables
 		>(DeleteMaintenanceAlertDocument, {
-			maintenanceAlertId
+			maintenanceAlertId,
 		});
 
 		this.logger.debug(`Maintenance alert ${maintenanceAlertId} deleted`);
