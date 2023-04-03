@@ -33,7 +33,7 @@
     "list-of-changed-translations-avo": "git diff 4a80799c7cbcd04cc06785da309442641ce62357 2ccf2c37a3c0a105e6d5142cfd99bf680ac9e1ba --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt"
   },
   "peerDependencies": {
-    "@meemoo/react-components": "2.25.1",
+    "@meemoo/react-components": "2.25.4",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "^4.14.1",
     "@viaa/avo2-components": "3.6.0",
@@ -45,6 +45,7 @@
     "immer": "9.0.12",
     "lodash-es": "4.17.21",
     "react": "17.0.2",
+    "react-datepicker": "4.11.0",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.1",
     "use-query-params": "1.2.3"
