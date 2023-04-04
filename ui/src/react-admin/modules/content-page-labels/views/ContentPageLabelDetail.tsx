@@ -1,8 +1,8 @@
-import { Button } from '@meemoo/react-components';
-import { ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { Link } from '~modules/shared/components/Link';
 import { Icon } from '~shared/components';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
@@ -119,7 +119,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 						{renderDetailRow(
 							linkTo ? (
 								<Button
-									variants={['text', 'neutral']}
+									type="tertiary"
 									onClick={() => navigateToContentType(linkTo, history)}
 								>{`${labels[linkTo.type]} - ${decodeURIComponent(
 									String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
@@ -163,31 +163,26 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				)}
 			>
 				<AdminLayout.Back>
-					<Button
-						icon={<Icon name="chevronLeft" />}
-						onClick={() =>
-							navigate(
-								history,
-								AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')
-							)
-						}
-						variants={['block', 'text']}
-					/>
+					<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>
+						<Button type="borderless">
+							<Icon name="chevronLeft"></Icon>
+						</Button>
+					</Link>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							variants={['block', 'black']}
 							label={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerken'
 							)}
 							title={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerk-deze-content-pagina-label'
 							)}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							ariaLabel={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerk-deze-content-pagina-label'
 							)}
 							onClick={handleEditClick}
+							type="primary"
 						/>
 					</ButtonToolbar>
 				</AdminLayout.Actions>

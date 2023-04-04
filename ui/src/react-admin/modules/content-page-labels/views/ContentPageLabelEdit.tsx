@@ -1,6 +1,6 @@
-import { Button } from '@meemoo/react-components';
 import {
 	Box,
+	Button,
 	ButtonToolbar,
 	Container,
 	Form,
@@ -17,6 +17,7 @@ import { ContentPageLabelService } from '~modules/content-page-labels/content-pa
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import { Link } from '~shared/components/Link';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
@@ -297,16 +298,11 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			}
 		>
 			<AdminLayout.Back>
-				<Button
-					icon={<Icon name="chevronLeft" />}
-					onClick={() =>
-						navigate(
-							history,
-							AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')
-						)
-					}
-					variants={['block', 'text']}
-				/>
+				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>
+					<Button type="borderless">
+						<Icon name="chevronLeft"></Icon>
+					</Button>
+				</Link>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>
 				<ButtonToolbar>
@@ -315,7 +311,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 							'admin/content-page-labels/views/content-page-label-edit___annuleer'
 						)}
 						onClick={navigateBack}
-						variants={['block', 'text']}
+						type="secondary"
 					/>
 					<Button
 						disabled={isSaving}
@@ -323,6 +319,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 							'admin/content-page-labels/views/content-page-label-edit___opslaan'
 						)}
 						onClick={handleSave}
+						type="primary"
 					/>
 				</ButtonToolbar>
 			</AdminLayout.Actions>
