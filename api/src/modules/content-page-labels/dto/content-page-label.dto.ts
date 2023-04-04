@@ -43,10 +43,12 @@ export class InsertContentPageLabelDto {
 	content_type: ContentPageType;
 
 	@IsString()
+	@IsOptional()
 	@ApiProperty({
 		type: String,
+		required: false,
 	})
-	link_to: PickerItemDto | null;
+	link_to?: PickerItemDto | null = null;
 }
 
 export class UpdateContentPageLabelDto {
@@ -70,10 +72,12 @@ export class UpdateContentPageLabelDto {
 	content_type: ContentPageType;
 
 	@IsString()
+	@IsOptional()
 	@ApiProperty({
 		type: String,
+		required: false,
 	})
-	link_to: PickerItemDto | null;
+	link_to?: PickerItemDto | null = null;
 }
 
 export class ContentPageLabelDto {

@@ -140,7 +140,7 @@ export class ContentPageLabelsService {
 				contentPageLabel: {
 					label: contentPageLabel.label,
 					content_type: contentPageLabel.content_type,
-					link_to: contentPageLabel.link_to,
+					link_to: contentPageLabel.link_to || null,
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
 				},
@@ -177,7 +177,7 @@ export class ContentPageLabelsService {
 				contentPageLabel: {
 					label: contentPageLabelInfo.label,
 					content_type: contentPageLabelInfo.content_type as any, // Differences in avo <-> hetarchief
-					link_to: contentPageLabelInfo.link_to,
+					link_to: contentPageLabelInfo.link_to || null,
 					updated_at: new Date().toISOString(),
 				},
 				contentPageLabelId: contentPageLabelInfo.id,
