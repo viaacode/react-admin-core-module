@@ -1,10 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
-import {
-	ContentPageType,
-	ContentPickerType,
-	LinkTarget,
-} from '../../content-pages';
+import { ContentPageType, ContentPickerType, LinkTarget } from '../../content-pages';
 
 export class PickerItemDto {
 	@IsString()
@@ -31,6 +27,53 @@ export class PickerItemDto {
 		type: String,
 	})
 	target?: LinkTarget;
+}
+
+export class InsertContentPageLabelDto {
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	label: string;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	content_type: ContentPageType;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	link_to: PickerItemDto | null;
+}
+
+export class UpdateContentPageLabelDto {
+	@IsString()
+	@ApiProperty({
+		type: String,
+		description: 'The id of the content page label',
+	})
+	id: string;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	label: string;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	content_type: ContentPageType;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+	})
+	link_to: PickerItemDto | null;
 }
 
 export class ContentPageLabelDto {
