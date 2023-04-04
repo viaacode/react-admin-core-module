@@ -3,11 +3,11 @@ import { ButtonToolbar } from '@viaa/avo2-components';
 import { get, isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error';
+import { Link } from '~modules/shared/components/Link';
 import { Icon } from '~shared/components';
 import {
 	CheckboxDropdownModalProps,
