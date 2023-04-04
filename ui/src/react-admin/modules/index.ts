@@ -48,6 +48,9 @@ export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-
 
 // Content page labels
 export { ContentPageLabelService } from './content-page-labels/content-page-label.service';
+export { default as ContentPageLabelOverview } from './content-page-labels/views/ContentPageLabelOverview';
+export { default as ContentPageLabelEdit } from './content-page-labels/views/ContentPageLabelEdit';
+export { default as ContentPageLabelDetail } from './content-page-labels/views/ContentPageLabelDetail';
 
 // Navigation
 export { default as NavigationOverview } from './navigation/views/NavigationOverview';

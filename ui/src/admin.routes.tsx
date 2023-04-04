@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router';
 import { mockUser } from './mock-user';
+import { renderAdminContentPageLabelRoutes } from './modules/content-page-labels/content-page-labels.routes';
 import { renderAdminContentPageRoutes } from './modules/content-page/content-page.routes';
 import { renderAdminTranslationsRoutes } from './modules/translations/translations';
 import { renderAdminUserGroupRoutes } from './modules/user-group/user-group';
@@ -15,6 +16,7 @@ export const renderAdminRoutes = () => {
 		<Switch>
 			{renderAdminAlertsRoutes()}
 			{renderAdminContentPageRoutes()}
+			{renderAdminContentPageLabelRoutes()}
 			{renderAdminUserGroupRoutes()}
 			{renderAdminTranslationsRoutes()}
 			{renderAdminNavigationRoutes()}
