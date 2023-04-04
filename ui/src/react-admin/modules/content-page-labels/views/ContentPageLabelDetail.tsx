@@ -20,9 +20,9 @@ import {
 import { AdminLayout } from '~shared/layouts';
 import { ContentPageLabel } from '../content-page-label.types';
 
-type ContentPageLabelEditProps = { contentPageLabelId: string };
+type ContentPageLabelDetailProps = { contentPageLabelId: string };
 
-const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
+const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = ({
 	contentPageLabelId,
 }) => {
 	// Hooks
@@ -207,4 +207,4 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	);
 };
 
-export default ContentPageLabelEdit;
+export default ContentPageLabelDetail;

@@ -181,7 +181,7 @@ const ContentPageLabelOverview: FunctionComponent = () => {
 	const handleDelete = async () => {
 		if (isNil(contentPageLabelIdToDelete)) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText('Error'),
+				title: AdminConfigManager.getConfig().services.i18n.tText('react-admin/modules/content-page-labels/views/content-page-label-overview___error'),
 				description: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-page-labels/views/content-page-label-overview___het-verwijderen-van-het-label-is-mislukt-omdat-geen-label-geselecteerd-is'
 				),
@@ -193,7 +193,7 @@ const ContentPageLabelOverview: FunctionComponent = () => {
 		await ContentPageLabelService.deleteContentPageLabel(contentPageLabelIdToDelete);
 		await fetchContentPageLabels();
 		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.tText('Succes'),
+			title: AdminConfigManager.getConfig().services.i18n.tText('react-admin/modules/content-page-labels/views/content-page-label-overview___succes'),
 			description: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-page-labels/views/content-page-label-overview___de-content-pagina-label-is-verwijdert'
 			),

@@ -5,7 +5,6 @@ import {
 	Container,
 	Form,
 	FormGroup,
-	IconName,
 	Select,
 	Spacer,
 	TextInput,
@@ -22,7 +21,6 @@ import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { ROUTE_PARTS } from '~shared/consts';
 import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { AdminLayout } from '~shared/layouts';
@@ -31,7 +29,7 @@ import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
 import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
 
-type ContentPageLabelEditProps = { contentPageLabelId: string };
+type ContentPageLabelEditProps = { contentPageLabelId: string | undefined };
 
 const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	contentPageLabelId,
@@ -48,7 +46,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [contentTypes] = useContentTypes();
 
-	const isCreatePage: boolean = location.pathname.includes(`/${ROUTE_PARTS.create}`);
+	const isCreatePage = !contentPageLabelId;
 
 	const initOrFetchContentPageLabel = useCallback(async () => {
 		if (isCreatePage) {
