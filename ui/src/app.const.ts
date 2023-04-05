@@ -51,6 +51,12 @@ export const GET_NAV_ITEMS = async (): Promise<NavigationItemInfo[]> => {
 			],
 		},
 		{
+			label: i18n.tHtml('app___content-pagina-labels'),
+			location: AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW'),
+			key: 'translations',
+			exact: false,
+		},
+		{
 			label: i18n.tHtml('app___vertalingen'),
 			location: AdminConfigManager.getAdminRoute('TRANSLATIONS_OVERVIEW'),
 			key: 'translations',

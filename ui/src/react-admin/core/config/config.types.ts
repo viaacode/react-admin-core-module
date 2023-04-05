@@ -175,6 +175,7 @@ export interface IconConfig {
 		clock: IconComponentProps;
 		calendar: IconComponentProps;
 		export: IconComponentProps;
+		info: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];

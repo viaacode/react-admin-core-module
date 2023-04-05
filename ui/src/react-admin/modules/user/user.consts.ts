@@ -13,6 +13,7 @@ import { NULL_FILTER } from '~shared/helpers/filters';
 import { isAvo } from '~shared/helpers/is-avo';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { PermissionService } from '~shared/services/permission-service';
+import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
@@ -71,14 +72,14 @@ const getAvoColumns = (
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___naam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'email',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'userGroup',
@@ -99,7 +100,7 @@ const getAvoColumns = (
 				},
 			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'businessCategory',
@@ -118,7 +119,7 @@ const getAvoColumns = (
 				},
 			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'isException',
@@ -128,7 +129,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'boolean',
+		dataType: TableColumnDataType.boolean,
 	},
 	{
 		id: 'isBlocked',
@@ -136,7 +137,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'boolean',
+		dataType: TableColumnDataType.boolean,
 	},
 	{
 		id: 'blockedAt',
@@ -146,7 +147,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
+		dataType: TableColumnDataType.dateTime,
 	},
 	{
 		id: 'unblockedAt',
@@ -156,7 +157,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
+		dataType: TableColumnDataType.dateTime,
 	},
 	...((PermissionService.hasPerm(user, PermissionName.EDIT_USER_TEMP_ACCESS)
 		? [
@@ -184,7 +185,7 @@ const getAvoColumns = (
 							},
 						],
 					} as CheckboxDropdownModalProps,
-					dataType: 'booleanNullsLast', // Users without a value are always last when sorting
+					dataType: TableColumnDataType.booleanNullsLast, // Users without a value are always last when sorting
 				},
 				{
 					id: 'tempAccessFrom',
@@ -193,7 +194,7 @@ const getAvoColumns = (
 					),
 					sortable: true,
 					visibleByDefault: false,
-					dataType: 'dateTime',
+					dataType: TableColumnDataType.dateTime,
 				},
 				{
 					id: 'tempAccessUntil',
@@ -202,7 +203,7 @@ const getAvoColumns = (
 					),
 					sortable: true,
 					visibleByDefault: false,
-					dataType: 'dateTime',
+					dataType: TableColumnDataType.dateTime,
 				},
 		  ]
 		: []) as FilterableColumn<UserOverviewTableCol>[]),
@@ -212,7 +213,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'number',
+		dataType: TableColumnDataType.number,
 	},
 	{
 		id: 'organisation',
@@ -231,7 +232,7 @@ const getAvoColumns = (
 				},
 			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'createdAt',
@@ -241,7 +242,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
+		dataType: TableColumnDataType.dateTime,
 	},
 	{
 		id: 'lastAccessAt',
@@ -251,7 +252,7 @@ const getAvoColumns = (
 		sortable: true,
 		visibleByDefault: true,
 		filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
+		dataType: TableColumnDataType.dateTime,
 	},
 	{
 		id: 'educationLevels',
@@ -342,14 +343,14 @@ const getHetArchiefColumns = (
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___naam'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'email',
 		label: AdminConfigManager.getConfig().services.i18n.tText('admin/users/user___email'),
 		sortable: true,
 		visibleByDefault: true,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'userGroup',
@@ -370,7 +371,7 @@ const getHetArchiefColumns = (
 				},
 			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'organisation',
@@ -389,7 +390,7 @@ const getHetArchiefColumns = (
 				},
 			],
 		} as CheckboxDropdownModalProps,
-		dataType: 'string',
+		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'isKeyUser',
@@ -399,7 +400,7 @@ const getHetArchiefColumns = (
 		sortable: true,
 		visibleByDefault: false,
 		filterType: 'BooleanCheckboxDropdown',
-		dataType: 'boolean',
+		dataType: TableColumnDataType.boolean,
 	},
 	{
 		id: 'lastAccessAt',
@@ -410,7 +411,7 @@ const getHetArchiefColumns = (
 		visibleByDefault: true,
 		// Ward: hide lastAccessAt filter (ARC-1428)
 		//filterType: 'DateRangeDropdown',
-		dataType: 'dateTime',
+		dataType: TableColumnDataType.dateTime,
 	},
 	{
 		id: 'actions',

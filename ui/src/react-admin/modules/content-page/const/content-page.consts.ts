@@ -13,6 +13,7 @@ import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { TableColumnDataType } from '~shared/types/table-column-data-type';
 
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
@@ -30,7 +31,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___titel'),
 			sortable: true,
 			visibleByDefault: true,
-			dataType: 'string',
+			dataType: TableColumnDataType.string,
 		},
 		{
 			id: 'contentType',
@@ -41,7 +42,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			filterProps: {
 				options: contentTypeOptions,
 			} as CheckboxDropdownModalProps,
-			dataType: 'string',
+			dataType: TableColumnDataType.string,
 		},
 		{
 			id: 'userProfileId',
@@ -49,7 +50,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'MultiUserSelectDropdown',
-			dataType: 'string',
+			dataType: TableColumnDataType.string,
 		},
 		{
 			id: 'authorUserGroup',
@@ -66,7 +67,7 @@ export const GET_OVERVIEW_COLUMNS: (
 					},
 				],
 			} as CheckboxDropdownModalProps,
-			dataType: 'string',
+			dataType: TableColumnDataType.string,
 		},
 		{
 			id: 'createdAt',
@@ -74,7 +75,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: TableColumnDataType.dateTime,
 		},
 		{
 			id: 'updatedAt',
@@ -82,7 +83,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: TableColumnDataType.dateTime,
 		},
 		{
 			id: 'isPublic',
@@ -90,7 +91,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: false,
 			filterType: 'BooleanCheckboxDropdown',
-			dataType: 'boolean',
+			dataType: TableColumnDataType.boolean,
 		},
 		{
 			id: 'publishedAt',
@@ -98,7 +99,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: TableColumnDataType.dateTime,
 		},
 		{
 			id: 'publishAt',
@@ -106,7 +107,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: TableColumnDataType.dateTime,
 		},
 		{
 			id: 'depublishAt',
@@ -114,7 +115,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: true,
 			visibleByDefault: true,
 			filterType: 'DateRangeDropdown',
-			dataType: 'dateTime',
+			dataType: TableColumnDataType.dateTime,
 		},
 		{
 			id: 'labels',

@@ -1,7 +1,7 @@
 import { Avo } from '@viaa/avo2-types';
 
-import { FilterableTableState } from '../shared/components/FilterTable/FilterTable';
-import { PickerItem } from '../shared/types/content-picker';
+import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import { PickerItem } from '~shared/types/content-picker';
 
 export type ContentPageLabelOverviewTableCols =
 	| 'label'
