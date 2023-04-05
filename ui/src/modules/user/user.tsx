@@ -7,7 +7,7 @@ import { UserDetail, UserEdit } from '~modules/user/views';
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~shared/layouts';
 import { useTranslation } from '~shared/hooks/useTranslation';
-import { mockUser } from '../../mock-user';
+import { mockCommonUser } from '../../mock-common-user';
 
 const UserOverviewPage: FC<{ commonUser: Avo.User.CommonUser }> = ({ commonUser }) => {
 	const { tText } = useTranslation();
@@ -30,14 +30,14 @@ const UserEditPage: FC = () => {
 const UserDetailPage: FC = () => {
 	const params = useParams<{ id: string }>();
 
-	return <UserDetail id={params.id} commonUser={mockUser} />;
+	return <UserDetail id={params.id} commonUser={mockCommonUser} />;
 };
 
 export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
 			key={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
-			render={() => <UserOverviewPage commonUser={mockUser} />}
+			render={() => <UserOverviewPage commonUser={mockCommonUser} />}
 			exact
 			path={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
 		/>,

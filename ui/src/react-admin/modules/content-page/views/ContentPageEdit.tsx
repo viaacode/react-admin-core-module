@@ -1,7 +1,16 @@
-import { Button, ButtonToolbar, Container, IconName, Navbar, Tabs } from '@viaa/avo2-components';
+import {
+	Button,
+	ButtonToolbar,
+	Container,
+	IconName,
+	Navbar,
+	Spacer,
+	Tabs,
+} from '@viaa/avo2-components';
 import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { Avo, PermissionName } from '@viaa/avo2-types';
+import { ErrorView } from '~shared/components/error';
 
 import Link from '~shared/components/Link/Link';
 import { AdminConfigManager } from '~core/config';
@@ -166,7 +175,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 						delete newConfig.id;
 						// Ensure block is added at the bottom of the page
 						newConfig.position = (
-							contentPageState.currentContentPageInfo.content_blocks || []
+							contentPageState?.currentContentPageInfo?.content_blocks || []
 						).length;
 						changeContentPageState({
 							type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
@@ -193,7 +202,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				});
 			}
 		},
-		[changeContentPageState, contentPageState.currentContentPageInfo.content_blocks, tText]
+		[changeContentPageState, contentPageState?.currentContentPageInfo?.content_blocks, tText]
 	);
 
 	useEffect(() => {
@@ -578,8 +587,39 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			commonUser?.profileId &&
 			contentPageOwnerId &&
 			commonUser?.profileId === contentPageOwnerId;
-		const isAllowedToSave =
+		const canEditContentPage =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
+		if (!canEditContentPage) {
+			return (
+				<ErrorView
+					message={tText(
+						'Je hebt geen rechten om deze content pagina aan te passen titel'
+					)}
+					actionButtons={undefined}
+				>
+					<p>
+						{tHtml(
+							'admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen'
+						)}
+					</p>
+					{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
+						<Spacer margin="top">
+							<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
+								<Button
+									icon={'plus' as IconName}
+									label={tText(
+										'admin/content/views/content-overview___content-toevoegen'
+									)}
+									title={tText(
+										'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
+									)}
+								/>
+							</Link>
+						</Spacer>
+					)}
+				</ErrorView>
+			);
+		}
 		return (
 			<AdminLayout className={className} pageTitle={pageTitle}>
 				<AdminLayout.Back>
@@ -590,20 +630,20 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					</Link>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>
-					<ButtonToolbar>
-						<Button
-							label={tText('admin/content/views/content-edit___annuleer')}
-							onClick={navigateBack}
-							type="tertiary"
-						/>
-						{isAllowedToSave && (
+					{canEditContentPage && (
+						<ButtonToolbar>
+							<Button
+								label={tText('admin/content/views/content-edit___annuleer')}
+								onClick={navigateBack}
+								type="tertiary"
+							/>
 							<Button
 								disabled={isSaving}
 								label={tText('admin/content/views/content-edit___opslaan')}
 								onClick={handleSave}
 							/>
-						)}
-					</ButtonToolbar>
+						</ButtonToolbar>
+					)}
 				</AdminLayout.Actions>
 				<AdminLayout.Content>
 					<Navbar background="alt" placement="top" autoHeight>

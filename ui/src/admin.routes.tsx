@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router';
-import { mockUser } from './mock-user';
+import { mockCommonUser } from './mock-common-user';
 import { renderAdminContentPageLabelRoutes } from './modules/content-page-labels/content-page-labels.routes';
 import { renderAdminContentPageRoutes } from './modules/content-page/content-page.routes';
 import { renderAdminTranslationsRoutes } from './modules/translations/translations';
@@ -23,7 +23,7 @@ export const renderAdminRoutes = () => {
 			{renderAdminUserRoutes()}
 			<Route
 				key="content-page-resolve-routes"
-				render={() => <ContentPageWrapper commonUser={mockUser} />}
+				render={() => <ContentPageWrapper commonUser={mockCommonUser} />}
 				exact
 				path={'/:path'}
 			/>

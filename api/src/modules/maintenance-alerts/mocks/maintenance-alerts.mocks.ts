@@ -1,6 +1,5 @@
-import { HetArchiefUser } from '../../users';
 import { Idp } from '../../shared/auth/auth.types';
-import { PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 
 import { MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
 import {
@@ -85,7 +84,7 @@ export const mockMaintenanceAlertsResponse = {
 	items: [mockMaintenanceAlert1, mockMaintenanceAlert2],
 };
 
-export const mockUser: HetArchiefUser = {
+export const mockUser: Avo.User.HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',

@@ -1,11 +1,6 @@
 import type { Avo, PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
-import {
-	HetArchiefUser,
-	UserInfoOverviewAvo,
-	UserInfoOverviewHetArchief,
-	UserInfoType,
-} from './users.types';
+import { UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from './users.types';
 
 /**
  * This function should convert all user info objects to a single format
@@ -15,7 +10,7 @@ import {
  * - Avo.User.Profile
  * - UserInfoOverviewAvo
  * - UserInfoOverviewHetArchief
- * - HetArchiefUser (already mapped to camelCase by the hetarchief proxy service)
+ * - Avo.User.HetArchiefUser (already mapped to camelCase by the hetarchief proxy service)
  *
  * @param userInfo
  * @param userInfoType
@@ -26,7 +21,7 @@ export function convertUserInfoToCommonUser(
 		| Avo.User.Profile
 		| UserInfoOverviewAvo
 		| UserInfoOverviewHetArchief
-		| HetArchiefUser
+		| Avo.User.HetArchiefUser
 		| undefined,
 	userInfoType: UserInfoType
 ): Avo.User.CommonUser | undefined {
@@ -257,7 +252,7 @@ export function convertUserInfoToCommonUser(
 
 		case UserInfoType.HetArchiefUser: {
 			// HetArchiefUser: hetArchief user info mapped by the hetarchief proxy
-			const user = userInfo as HetArchiefUser;
+			const user = userInfo as Avo.User.HetArchiefUser;
 			return {
 				profileId: user.id,
 				email: user.email ?? undefined,

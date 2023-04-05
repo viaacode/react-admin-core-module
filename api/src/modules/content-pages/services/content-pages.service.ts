@@ -900,8 +900,11 @@ export class ContentPagesService {
 
 			return this.getContentPageById(String(id));
 		} catch (err) {
-			console.error('Failed to insert content page into the database', err);
-			return null;
+			throw new InternalServerErrorException(
+				CustomError('Failed to insert content page into the database', err, {
+					contentPage,
+				})
+			);
 		}
 	}
 
