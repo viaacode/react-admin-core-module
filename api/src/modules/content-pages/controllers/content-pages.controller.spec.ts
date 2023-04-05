@@ -8,7 +8,7 @@ import { HetArchiefUser } from '../../users';
 import { Idp } from '../../shared/auth/auth.types';
 import { SessionHelper } from '../../shared/auth/session-helper';
 
-const mockUser: HetArchiefUser = {
+export const mockUser: HetArchiefUser = {
 	id: 'e791ecf1-e121-4c54-9d2e-34524b6467c6',
 	firstName: 'Test',
 	lastName: 'Testers',
@@ -18,7 +18,15 @@ const mockUser: HetArchiefUser = {
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	groupName: 'CP_ADMIN',
-	permissions: [PermissionName.EDIT_ANY_CONTENT_PAGES],
+	permissions: [PermissionName.VIEW_ANY_MAINTENANCE_ALERTS],
+	isKeyUser: false,
+	visitorSpaceSlug: 'vrt',
+	maintainerId: 'OR-rf5kf25',
+	createdAt: '2023-03-08T08:00:00',
+	lastAccessAt: '2023-03-08T08:00:00',
+	organisationId: 'OR-rf5kf25',
+	organisationName: 'VRT',
+	sector: 'Publieke Omroep',
 };
 
 const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {

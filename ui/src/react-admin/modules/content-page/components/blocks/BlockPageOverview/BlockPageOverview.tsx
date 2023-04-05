@@ -33,7 +33,13 @@ moment.locale('nl-be');
 
 export type ContentWidthSchema = 'REGULAR' | 'LARGE' | 'MEDIUM';
 export type ContentTabStyle = 'ROUNDED_BADGES' | 'MENU_BAR';
-export type ContentItemStyle = 'GRID' | 'NEWS_LIST' | 'PROJECT_LIST' | 'ACCORDION';
+export enum ContentItemStyle {
+	GRID = 'GRID',
+	NEWS_LIST = 'NEWS_LIST',
+	PROJECT_LIST = 'PROJECT_LIST',
+	ACCORDION = 'ACCORDION',
+	ACCORDION_TWO_LEVELS = 'ACCORDION_TWO_LEVELS',
+}
 
 export type LabelObj = {
 	label: string;
@@ -73,7 +79,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	tabStyle = 'MENU_BAR',
 	allowMultiple = false,
 	centerHeader = false,
-	itemStyle = 'NEWS_LIST',
+	itemStyle = ContentItemStyle.NEWS_LIST,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
@@ -179,7 +185,10 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 
 	const renderPages = () => {
 		const allPages: ContentPageInfo[] = [...(focusedPage ? [focusedPage] : []), ...pages];
-		if (itemStyle === 'NEWS_LIST' || itemStyle === 'PROJECT_LIST') {
+		if (
+			itemStyle === ContentItemStyle.NEWS_LIST ||
+			itemStyle === ContentItemStyle.PROJECT_LIST
+		) {
 			return allPages.map((page) => {
 				return (
 					<Container
@@ -322,6 +331,36 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				</Spacer>
 			);
 		}
+		if (itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS) {
+			return (
+				<Spacer margin="top-large">
+					{tabs.map((tab) => {
+						return (
+							<Accordion
+								title={tab.label}
+								isOpen={tab.id === selectedTabs?.[0]?.id}
+								key={`page-overview--tab-${selectedTabs?.[0]?.id}`}
+							>
+								{allPages.map((page) => {
+									return (
+										<Accordion
+											title={page.title}
+											isOpen={page.id === focusedPage?.id}
+											key={`page-overview--page-${page.id}`}
+										>
+											<ContentPageRenderer
+												contentPageInfo={page}
+												commonUser={commonUser}
+											/>
+										</Accordion>
+									);
+								})}
+							</Accordion>
+						);
+					})}
+				</Spacer>
+			);
+		}
 	};
 
 	const renderHeader = () => {
@@ -333,6 +372,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			if (!extendedSelectedTabs || !extendedSelectedTabs.length) {
 				// Select the "all" option if no tabs are selected
 				extendedSelectedTabs = [extendedTabs[0]];
+			}
+			if (itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS) {
+				return null;
 			}
 			if (tabStyle === 'ROUNDED_BADGES') {
 				return (

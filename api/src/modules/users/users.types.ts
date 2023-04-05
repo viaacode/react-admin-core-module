@@ -1,7 +1,6 @@
-import { GetUserByIdQuery, Users_Idp_Map } from '../shared/generated/graphql-db-types-avo';
+import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
-import type { Avo } from '@viaa/avo2-types';
 
 export interface HetArchiefUser {
 	id: string;
@@ -16,6 +15,12 @@ export interface HetArchiefUser {
 	idp: Idp;
 	maintainerId?: string;
 	visitorSpaceSlug?: string;
+	isKeyUser: boolean;
+	lastAccessAt: string;
+	createdAt: string;
+	organisationName: string | null;
+	organisationId: string | null;
+	sector: string | null;
 }
 
 export enum Idp {

@@ -3,7 +3,11 @@ import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
-import { BlockPageOverview, LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import {
+	BlockPageOverview,
+	ContentItemStyle,
+	LabelObj,
+} from '~content-blocks/BlockPageOverview/BlockPageOverview';
 import { PageOverviewWrapperProps } from '~modules/content-page/components/blocks';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
@@ -30,7 +34,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	tabStyle = 'MENU_BAR',
 	allowMultiple = false,
 	centerHeader = false,
-	itemStyle = 'NEWS_LIST',
+	itemStyle = ContentItemStyle.NEWS_LIST,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
