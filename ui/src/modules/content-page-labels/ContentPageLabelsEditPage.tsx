@@ -4,12 +4,6 @@ import ContentPageLabelEdit from '~modules/content-page-labels/views/ContentPage
 
 const ContentPageLabelsEditPage: FC<RouteComponentProps<{ id: string | undefined }>> = ({
 	match,
-}) => {
-	return (
-		<>
-			<ContentPageLabelEdit contentPageLabelId={match.params.id} />
-		</>
-	);
-};
+}) => <ContentPageLabelEdit contentPageLabelId={match.params.id} />;
 
 export default withRouter(ContentPageLabelsEditPage);
