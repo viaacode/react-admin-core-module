@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestj
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import { PermissionName } from '@viaa/avo2-types';
+import { isAfter } from 'date-fns';
 import { intersection, omit } from 'lodash';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
@@ -54,6 +55,11 @@ export class MaintenanceAlertsController {
 		// Remove user group ids, since the user doesn't need to know this
 		maintenanceAlertResponse.items = maintenanceAlertResponse.items.map((item) =>
 			omit(item, 'userGroupIds')
+		);
+
+		// Remove alerts where the end date comes before the start date
+		maintenanceAlertResponse.items = maintenanceAlertResponse.items.filter((alert) =>
+			isAfter(new Date(alert.untilDate), new Date(alert.fromDate))
 		);
 
 		return maintenanceAlertResponse;
