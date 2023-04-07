@@ -11,7 +11,7 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
-import { buildLink, navigate, navigateToContentType } from '~shared/helpers/link';
+import { buildLink, navigateToContentType } from '~shared/helpers/link';
 import {
 	renderDateDetailRows,
 	renderDetailRow,

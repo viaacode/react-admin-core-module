@@ -1,22 +1,12 @@
-import {
-	InternalServerErrorException,
-	Logger,
-	LoggerService,
-} from '@nestjs/common';
+import { InternalServerErrorException, Logger, LoggerService } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
-import {
-	addDays,
-	getHours,
-	setHours,
-	setMilliseconds,
-	setMinutes,
-	setSeconds,
-} from 'date-fns/fp';
+import { addDays, getHours, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns/fp';
 import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
-import { mockUserInfo } from '../../../mock-user-info';
+import { mockUserAvo, mockUserHetArchief } from '../../../mock-user';
 
-import { HetArchiefUser } from '../../users';
+
+import { isAvo } from '../helpers/is-avo';
 import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
 
@@ -34,9 +24,7 @@ export class SessionHelper {
 
 	public static ensureValidSession(session: Record<string, any>) {
 		if (!session) {
-			SessionHelper.logger.error(
-				'Failed to set Idp user info, no session was found',
-			);
+			SessionHelper.logger.error('Failed to set Idp user info, no session was found');
 			throw new InternalServerErrorException();
 		}
 	}
@@ -82,11 +70,7 @@ export class SessionHelper {
 	 * @param idp
 	 * @param user
 	 */
-	public static setIdpUserInfo(
-		session: Record<string, any>,
-		idp: Idp,
-		user: LdapUser,
-	): void {
+	public static setIdpUserInfo(session: Record<string, any>, idp: Idp, user: LdapUser): void {
 		SessionHelper.ensureValidSession(session);
 		session[IDP] = idp;
 		session[IDP_USER_INFO_PATH] = user;
@@ -97,20 +81,19 @@ export class SessionHelper {
 	 * @param session
 	 * @param user
 	 */
-	public static setArchiefUserInfo(
-		session: Record<string, any>,
-		user: HetArchiefUser,
-	): void {
+	public static setArchiefUserInfo(session: Record<string, any>, user: Avo.User.HetArchiefUser): void {
 		SessionHelper.ensureValidSession(session);
 		session[ARCHIEF_USER_INFO_PATH] = user;
 	}
 
-	public static getUserInfo(
-		session: Record<string, any>,
-	): HetArchiefUser | Avo.User.User | null {
+	public static getUserInfo(session: Record<string, any>): Avo.User.HetArchiefUser | Avo.User.User | null {
 		/** Login user for admin-core demo app */
 		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
-			return mockUserInfo as any;
+			if (isAvo()) {
+				return mockUserAvo;
+			} else {
+				return mockUserHetArchief;
+			}
 		}
 
 		if (!session) {
@@ -119,9 +102,7 @@ export class SessionHelper {
 		return session[ARCHIEF_USER_INFO_PATH] || session[AVO_USER_INFO_PATH];
 	}
 
-	public static getUserGroupIds(
-		groupId: string | number | undefined,
-	): string[] {
+	public static getUserGroupIds(groupId: string | number | undefined): string[] {
 		return [
 			...(groupId ? [String(groupId)] : []),
 			groupId

@@ -25,15 +25,13 @@ export function idpMapsToTagList(
 	}
 	return (
 		<TagList
-			tags={idpMaps.map(
-				(idpMap: Idp): TagOption => {
-					return {
-						color: IDP_COLORS[idpMap],
-						label: idpMap,
-						id: `${key}_${idpMap}`,
-					};
-				}
-			)}
+			tags={idpMaps.map((idpMap: Idp): TagOption => {
+				return {
+					color: IDP_COLORS[idpMap],
+					label: idpMap,
+					id: `${key}_${idpMap}`,
+				};
+			})}
 			onTagClicked={onTagClicked}
 		/>
 	);

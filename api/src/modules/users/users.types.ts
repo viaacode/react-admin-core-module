@@ -1,22 +1,6 @@
-import { GetUserByIdQuery, Users_Idp_Map } from '../shared/generated/graphql-db-types-avo';
+import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
-import type { Avo } from '@viaa/avo2-types';
-
-export interface HetArchiefUser {
-	id: string;
-	fullName: string;
-	firstName: string;
-	lastName: string;
-	email: string;
-	acceptedTosAt: string;
-	groupId: string;
-	groupName: string;
-	permissions: PermissionName[];
-	idp: Idp;
-	maintainerId?: string;
-	visitorSpaceSlug?: string;
-}
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',

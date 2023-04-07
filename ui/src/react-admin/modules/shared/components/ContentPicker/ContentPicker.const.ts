@@ -55,7 +55,9 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = 
 		'admin/shared/components/content-picker/content-picker___bestand'
 	),
 	[ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS]:
-		AdminConfigManager.getConfig().services.i18n.tText('react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'),
+		AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
+		),
 });
 
 export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {

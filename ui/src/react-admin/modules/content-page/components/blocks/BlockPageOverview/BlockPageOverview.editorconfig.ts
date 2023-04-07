@@ -1,4 +1,7 @@
 import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+
+import { AdminConfigManager } from '~core/config';
+import { ContentItemStyle } from '~modules/content-page/components/blocks';
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
 import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
 import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
@@ -19,8 +22,6 @@ import {
 	CONTENT_TYPE_AND_LABELS_INPUT,
 } from '../defaults';
 
-import { AdminConfigManager } from '~core/config';
-
 export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 	(): PageOverviewBlockComponentStateFields => ({
 		tabs: [],
@@ -29,7 +30,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		centerHeader: false,
 		headerBackgroundColor: Color.Transparent,
 		contentType: 'FAQ_ITEM',
-		itemStyle: 'NEWS_LIST',
+		itemStyle: ContentItemStyle.NEWS_LIST,
 		showTitle: true,
 		showDescription: true,
 		showDate: false,

@@ -88,7 +88,9 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 						} else {
 							return {
 								title:
-									AdminConfigManager.getConfig().services.i18n.tText('react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden') +
+									AdminConfigManager.getConfig().services.i18n.tText(
+										'react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden'
+									) +
 									': ' +
 									element.project?.value?.toString(),
 								image: '',
