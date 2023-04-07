@@ -28,7 +28,9 @@ export const GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS: () => SelectOption<ContentIte
 		value: ContentItemStyle.ACCORDION,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('Accordion twee niveaus'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-page-overview-item-style-options___accordion-twee-niveaus'
+		),
 		value: ContentItemStyle.ACCORDION_TWO_LEVELS,
 	},
 ];

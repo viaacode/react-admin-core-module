@@ -593,7 +593,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			return (
 				<ErrorView
 					message={tText(
-						'Je hebt geen rechten om deze content pagina aan te passen titel'
+						'react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel'
 					)}
 					actionButtons={undefined}
 				>

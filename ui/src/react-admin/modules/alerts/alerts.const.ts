@@ -31,7 +31,12 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 		),
 		untilDate: date()
 			.required(tText('react-admin/modules/alerts/views/alerts-const___datum-is-verplicht'))
-			.min(ref('fromDate'), tText('react-admin/modules/alerts/alerts___de-einddatum-moet-na-de-start-datum-vallen')),
+			.min(
+				ref('fromDate'),
+				tText(
+					'react-admin/modules/alerts/alerts___de-einddatum-moet-na-de-start-datum-vallen'
+				)
+			),
 		userGroups: array()
 			.of(string().required('is required'))
 			.min(
