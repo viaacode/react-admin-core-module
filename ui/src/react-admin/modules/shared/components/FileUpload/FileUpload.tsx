@@ -1,13 +1,4 @@
-import {
-	Blankslate,
-	Button,
-	Flex,
-	FlexItem,
-	Icon,
-	IconName,
-	Spacer,
-	Spinner,
-} from '@viaa/avo2-components';
+import { Blankslate, Button, Flex, FlexItem, Icon, IconName, Spacer } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';

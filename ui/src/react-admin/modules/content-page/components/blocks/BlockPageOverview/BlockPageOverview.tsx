@@ -17,7 +17,6 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
-import clsx from 'clsx';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent, ReactNode } from 'react';
@@ -28,9 +27,9 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
+import { ContentItemStyle, ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
-import { ContentItemStyle, ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 
 moment.locale('nl-be');
 
@@ -92,9 +91,6 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	getLabelLink,
 	renderLink = defaultRenderLinkFunction,
 	commonUser,
-	isLoadingLabelObjs,
-	isLoadingSelectedTabObjects,
-	isLoadingFocusedPage,
 	isLoadingPagesAndLabels,
 }) => {
 	const allLabelObj = { label: allLabel, id: -2 };

@@ -8,7 +8,6 @@ import {
 	Select,
 	SelectOption,
 	Spacer,
-	Spinner,
 	Table,
 	TableColumn,
 	TextInput,
@@ -53,7 +52,6 @@ import {
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
-import Loader from '../Loader/Loader';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
