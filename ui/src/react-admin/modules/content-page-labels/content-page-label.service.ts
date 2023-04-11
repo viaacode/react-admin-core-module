@@ -8,7 +8,7 @@ import {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 } from '~modules/content-page-labels/content-page-label.types';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
@@ -134,14 +134,14 @@ export class ContentPageLabelService {
 
 	static async getContentPageLabelsByTypeAndIds(
 		contentType: Avo.ContentPage.Type,
-		labelIds: number[]
+		labelIds: number[] | string[]
 	): Promise<LabelObj[]> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
 					contentType,
-					labelIds: compact(labelIds),
+					labelIds: compact(labelIds as any[]),
 				}),
 			});
 		} catch (err) {
@@ -150,7 +150,7 @@ export class ContentPageLabelService {
 				err,
 				{
 					contentType,
-					labelIds: compact(labelIds),
+					labelIds: compact(labelIds as any[]),
 				}
 			);
 		}

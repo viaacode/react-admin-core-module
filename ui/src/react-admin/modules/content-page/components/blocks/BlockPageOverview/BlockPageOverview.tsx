@@ -17,34 +17,22 @@ import {
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
+import clsx from 'clsx';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import moment from 'moment';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 
 import './BlockPageOverview.scss';
+import { ContentItemStyle, ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 
 moment.locale('nl-be');
-
-export type ContentWidthSchema = 'REGULAR' | 'LARGE' | 'MEDIUM';
-export type ContentTabStyle = 'ROUNDED_BADGES' | 'MENU_BAR';
-export enum ContentItemStyle {
-	GRID = 'GRID',
-	NEWS_LIST = 'NEWS_LIST',
-	PROJECT_LIST = 'PROJECT_LIST',
-	ACCORDION = 'ACCORDION',
-	ACCORDION_TWO_LEVELS = 'ACCORDION_TWO_LEVELS',
-}
-
-export type LabelObj = {
-	label: string;
-	id: number;
-};
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -68,9 +56,14 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	pageCount: number;
 	pages: ContentPageInfo[];
 	focusedPage: ContentPageInfo | null; // Shown at the top with an expanded accordion
+	onFocusedPageChanged: (newFocusedPage: ContentPageInfo | null) => void;
 	getLabelLink?: (label: string) => string;
 	renderLink?: RenderLinkFunction;
 	commonUser?: Avo.User.CommonUser;
+	isLoadingLabelObjs: boolean;
+	isLoadingSelectedTabObjects: boolean;
+	isLoadingFocusedPage: boolean;
+	isLoadingPagesAndLabels: boolean;
 }
 
 export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
@@ -95,9 +88,14 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	pageCount,
 	pages = [],
 	focusedPage,
+	onFocusedPageChanged,
 	getLabelLink,
 	renderLink = defaultRenderLinkFunction,
 	commonUser,
+	isLoadingLabelObjs,
+	isLoadingSelectedTabObjects,
+	isLoadingFocusedPage,
+	isLoadingPagesAndLabels,
 }) => {
 	const allLabelObj = { label: allLabel, id: -2 };
 	const noLabelObj = { label: noLabel, id: -2 };
@@ -184,31 +182,37 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const renderPages = () => {
-		const allPages: ContentPageInfo[] = [...(focusedPage ? [focusedPage] : []), ...pages];
 		if (
 			itemStyle === ContentItemStyle.NEWS_LIST ||
 			itemStyle === ContentItemStyle.PROJECT_LIST
 		) {
-			return allPages.map((page) => {
+			return pages.map((page) => {
 				return (
 					<Container
 						className={classnames(
 							'c-block-image-title-text-button',
-							itemStyle === 'NEWS_LIST' && 'c-page-overview-news-list',
-							itemStyle === 'PROJECT_LIST' && 'c-page-overview-project-list'
+							itemStyle === ContentItemStyle.NEWS_LIST && 'c-page-overview-news-list',
+							itemStyle === ContentItemStyle.PROJECT_LIST &&
+								'c-page-overview-project-list'
 						)}
 						mode="vertical"
 						key={`content-block-page-${page.id}`}
 					>
 						<Container mode="horizontal">
 							<Grid>
-								<Column size={itemStyle === 'NEWS_LIST' ? '2-5' : '2-4'}>
+								<Column
+									size={itemStyle === ContentItemStyle.NEWS_LIST ? '2-5' : '2-4'}
+								>
 									<Spacer margin="bottom-large">
 										<AspectRatioWrapper
 											style={{
 												backgroundImage: `url(${page.thumbnailPath})`,
 											}}
-											aspect={itemStyle === 'NEWS_LIST' ? 1.78 : 2.5} // 500 x 280 or 528 x 211
+											aspect={
+												itemStyle === ContentItemStyle.NEWS_LIST
+													? 1.78
+													: 2.5
+											} // 500 x 280 or 528 x 211
 										/>
 									</Spacer>
 								</Column>
@@ -220,7 +224,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 													type: 'CONTENT_PAGE',
 													value: page.path,
 												} as ButtonAction,
-												itemStyle === 'NEWS_LIST' ? (
+												itemStyle === ContentItemStyle.NEWS_LIST ? (
 													<h3>{page.title}</h3>
 												) : (
 													<h2>{page.title}</h2>
@@ -258,23 +262,23 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				);
 			});
 		}
-		if (itemStyle === 'GRID') {
+		if (itemStyle === ContentItemStyle.GRID) {
 			const uniqueLabels: LabelObj[] = uniqBy(
-				flatten(allPages.map((page): LabelObj[] => page.labels)),
+				flatten(pages.map((page): LabelObj[] => page.labels)),
 				'id'
 			);
 			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
 				uniqueLabels.map((labelObj: LabelObj): [number, ContentPageInfo[]] => {
 					return [
 						labelObj.id,
-						allPages.filter((page) =>
+						pages.filter((page) =>
 							page.labels.map((pageLabelObj) => pageLabelObj.id).includes(labelObj.id)
 						),
 					];
 				})
 			);
 			// Put the pages that do not have a label under their own category
-			pagesByLabel[noLabelObj.id] = allPages.filter(
+			pagesByLabel[noLabelObj.id] = pages.filter(
 				(page) => !page.labels || !page.labels.length
 			);
 			const showAllLabels = !selectedTabs.length || selectedTabs[0].id === allLabelObj.id;
@@ -311,7 +315,11 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				);
 			});
 		}
-		if (itemStyle === 'ACCORDION') {
+		if (itemStyle === ContentItemStyle.ACCORDION) {
+			// Ensure the focused page is not loaded twice on the same pagination page (ACCORDION)
+			const allPages: ContentPageInfo[] = focusedPage
+				? [focusedPage, ...pages.filter((page) => page.id !== focusedPage.id)]
+				: pages;
 			return (
 				<Spacer margin="top-large">
 					{allPages.map((page) => {
@@ -332,6 +340,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			);
 		}
 		if (itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS) {
+			//ACCORDION_TWO_LEVELS does not have pagination, so we don't need to load the focused page first
+			const allPages = pages;
 			return (
 				<Spacer margin="top-large">
 					{tabs.map((tab) => {
@@ -339,22 +349,48 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 							<Accordion
 								title={tab.label}
 								isOpen={tab.id === selectedTabs?.[0]?.id}
-								key={`page-overview--tab-${selectedTabs?.[0]?.id}`}
+								onToggle={() => {
+									if (tab.id === selectedTabs?.[0]?.id) {
+										// currently opened => close the clicked accordion
+										onSelectedTabsChanged([]);
+									} else {
+										// currently closed => open the clicked accordion
+										onSelectedTabsChanged([tab]);
+									}
+								}}
+								key={`page-overview--tab-${tab.id}`}
+								className="c-content-page-overview-block__accordion--first-level"
 							>
-								{allPages.map((page) => {
-									return (
-										<Accordion
-											title={page.title}
-											isOpen={page.id === focusedPage?.id}
-											key={`page-overview--page-${page.id}`}
-										>
-											<ContentPageRenderer
-												contentPageInfo={page}
-												commonUser={commonUser}
-											/>
-										</Accordion>
-									);
-								})}
+								<>
+									{isLoadingPagesAndLabels ? (
+										<CenteredSpinner />
+									) : (
+										allPages.map((page) => {
+											return (
+												<Accordion
+													title={page.title}
+													isOpen={page.id === focusedPage?.id}
+													onToggle={() => {
+														if (page.id === focusedPage?.id) {
+															// currently opened => close the clicked accordion
+															onFocusedPageChanged?.(null);
+														} else {
+															// currently closed => open the clicked accordion
+															onFocusedPageChanged(page);
+														}
+													}}
+													key={`page-overview--page-${page.id}`}
+													className="c-content-page-overview-block__accordion--second-level"
+												>
+													<ContentPageRenderer
+														contentPageInfo={page}
+														commonUser={commonUser}
+													/>
+												</Accordion>
+											);
+										})
+									)}
+								</>
 							</Accordion>
 						);
 					})}

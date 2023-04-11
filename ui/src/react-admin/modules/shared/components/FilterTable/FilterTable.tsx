@@ -40,6 +40,7 @@ import React, {
 	useState,
 } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
@@ -52,6 +53,7 @@ import {
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
+import Loader from '../Loader/Loader';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
@@ -501,13 +503,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								</Spacer>
 							)}
 						</div>
-						{isLoading && (
-							<Flex center className="c-filter-table__loading">
-								<Spacer margin={['top-large', 'bottom-large']}>
-									<Spinner size="large" />
-								</Spacer>
-							</Flex>
-						)}
+						{isLoading && <CenteredSpinner />}
 					</div>
 				</>
 			)}

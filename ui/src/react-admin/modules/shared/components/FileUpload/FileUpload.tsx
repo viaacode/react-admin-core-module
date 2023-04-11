@@ -22,6 +22,7 @@ import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './FileUpload.scss';
+import Loader from '../Loader/Loader';
 
 export interface FileUploadProps {
 	icon?: IconName;
@@ -281,7 +282,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 						</FlexItem>
 					</Flex>
 				) : (
-					<Spinner size="large" />
+					<Loader />
 				))}
 			<ConfirmModal
 				title={tText(

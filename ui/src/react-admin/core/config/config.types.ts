@@ -95,7 +95,7 @@ export interface AdminConfig {
 	};
 	components: {
 		loader: {
-			component: ComponentType;
+			component: ComponentType | null;
 		};
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];

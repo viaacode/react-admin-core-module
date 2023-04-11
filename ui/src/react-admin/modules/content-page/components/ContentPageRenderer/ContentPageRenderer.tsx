@@ -1,26 +1,21 @@
+import { IconName } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
+import { AdminConfigManager } from '~core/config';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-import { isAvo } from '~shared/helpers/is-avo';
-
-import { ContentPageService } from '../../services/content-page.service';
-import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
-import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
 import {
 	BlockClickHandler,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { ErrorView } from '~shared/components/error';
+import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
+import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -31,54 +26,6 @@ type ContentPageDetailProps = {
 };
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
-	const { tHtml } = useTranslation();
-	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-
-	const fetchContentPage = useCallback(async () => {
-		try {
-			if ((props as any).path) {
-				setContentPageInfo(
-					await ContentPageService.getContentPageByPath((props as any).path)
-				);
-			} else if ((props as any).contentPageInfo) {
-				setContentPageInfo((props as any).contentPageInfo);
-			} else {
-				console.error(
-					new CustomError(
-						'Failed to load content page because neither path not content page info was passed to ContentPage component',
-						null,
-						{ props }
-					)
-				);
-				setLoadingInfo({
-					state: 'error',
-					message: tHtml(
-						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-					),
-				});
-			}
-		} catch (err) {
-			console.error(new CustomError('Failed to load content page', err, { props }));
-			setLoadingInfo({
-				state: 'error',
-				message: tHtml(
-					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-				),
-			});
-		}
-	}, [props, tHtml]);
-
-	useEffect(() => {
-		fetchContentPage();
-	}, [fetchContentPage]);
-
-	useEffect(() => {
-		if (contentPageInfo) {
-			setLoadingInfo({ state: 'loaded' });
-		}
-	}, [contentPageInfo]);
-
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
 		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
@@ -86,7 +33,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		);
 
 		// images can have a setting to go full width
-		// so we need to set the block prop: fullWidth to true if we find an image block with size setting: pageWidth
+		// So we need to set the block prop: fullWidth to true if we find an image block with size setting: pageWidth
 		contentBlockBlockConfigs = contentBlockBlockConfigs.map((contentBlockConfig) => {
 			const width = (contentBlockConfig.components.state as BlockImageProps)?.width;
 			if (
@@ -170,7 +117,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		// TODO render <InteractiveTour showButton={false} /> manually in AVO above the content page
 		return (
 			<div className="c-content-page-preview">
-				{getContentBlocks(contentPageInfo as ContentPageInfo).map(
+				{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 					(contentBlockConfig: ContentBlockConfig) => {
 						return (
 							<ContentBlockRenderer
@@ -181,7 +128,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 									contentBlockConfig.position
 								}
 								contentBlockConfig={contentBlockConfig}
-								contentPageInfo={contentPageInfo as ContentPageInfo}
+								contentPageInfo={props.contentPageInfo as ContentPageInfo}
 								className={clsx(
 									`content-block-preview-${contentBlockConfig.position}`,
 									{
@@ -205,13 +152,27 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		);
 	};
 
-	return (
-		<LoadingErrorLoadedComponent
-			loadingInfo={loadingInfo}
-			dataObject={contentPageInfo}
-			render={renderContentPage}
-		/>
-	);
+	const renderError = () => {
+		return (
+			<ErrorView
+				icon={'alertTriangle' as IconName}
+				message={AdminConfigManager.getConfig().services.i18n.tHtml(
+					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
+				)}
+			>
+				<p>
+					{AdminConfigManager.getConfig().services.i18n.tHtml(
+						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
+					)}
+				</p>
+			</ErrorView>
+		);
+	};
+
+	if (!props.contentPageInfo) {
+		return renderError();
+	}
+	return renderContentPage();
 };
 
 export default ContentPageRenderer;
