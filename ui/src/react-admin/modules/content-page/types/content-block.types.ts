@@ -122,6 +122,7 @@ export enum ContentBlockType {
 	Spotlight = 'SPOTLIGHT',
 	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
+	SearchTerms = 'SEARCH_TERMS',
 }
 
 export enum ContentBlockEditor {
@@ -421,3 +422,8 @@ export const DEFAULT_BUTTON_PROPS = {
 	icon: undefined,
 	buttonAction: undefined,
 };
+
+export interface SearchTermsBlockComponentState {
+	label: string;
+	link?: string;
+}

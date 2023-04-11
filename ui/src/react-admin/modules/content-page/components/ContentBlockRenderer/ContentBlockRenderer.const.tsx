@@ -1,4 +1,4 @@
-import React, { FC, FunctionComponent } from 'react';
+import { FC, FunctionComponent } from 'react';
 import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
 import { AdminConfigManager } from '~core/config';
 import {
@@ -18,6 +18,7 @@ import {
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
 	BlockRichTextWrapper,
+	BlockSearchTerms,
 	BlockSpotlight,
 	BlockUitgeklaard,
 	BlockUspGridWrapper,
@@ -59,6 +60,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
 		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
+		[ContentBlockType.SearchTerms]: BlockSearchTerms,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -78,6 +80,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.Spotlight,
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
+	ContentBlockType.SearchTerms,
 ];
 
 /**

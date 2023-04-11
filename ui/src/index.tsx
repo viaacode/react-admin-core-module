@@ -63,6 +63,7 @@ function setConfig() {
 				ContentBlockType.Quote,
 				ContentBlockType.Uitgeklaard,
 				ContentBlockType.ImageTitleTextButton,
+				ContentBlockType.SearchTerms,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -277,7 +278,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: DatabaseType.avo,
+			databaseApplicationType: DatabaseType.hetArchief,
 			proxyUrl,
 		},
 		flowplayer: {
