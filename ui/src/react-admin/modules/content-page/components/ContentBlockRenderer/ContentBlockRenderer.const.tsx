@@ -18,7 +18,7 @@ import {
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
 	BlockRichTextWrapper,
-	BlockSearchTerms,
+	BlockTagsWithLink,
 	BlockSpotlight,
 	BlockUitgeklaard,
 	BlockUspGridWrapper,
@@ -60,7 +60,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
 		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
-		[ContentBlockType.SearchTerms]: BlockSearchTerms,
+		[ContentBlockType.BlockTagsWithLink]: BlockTagsWithLink,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -80,7 +80,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.Spotlight,
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
-	ContentBlockType.SearchTerms,
+	ContentBlockType.BlockTagsWithLink,
 ];
 
 /**

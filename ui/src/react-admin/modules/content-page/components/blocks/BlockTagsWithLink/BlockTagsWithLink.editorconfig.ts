@@ -3,53 +3,53 @@ import {
 	ContentBlockEditor,
 	ContentBlockType,
 	DefaultContentBlockState,
-	SearchTermsBlockComponentState,
+	TagsWithLinkBlockComponentState,
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
 
-export const INITIAL_SEARCH_TERMS_COMPONENTS_STATE = (): SearchTermsBlockComponentState[] => [
+export const INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE = (): TagsWithLinkBlockComponentState[] => [
 	{
 		label: '',
 		link: '',
 	},
 ];
 
-export const INITIAL_SEARCH_TERMS_BLOCK_STATE = (): DefaultContentBlockState =>
+export const INITIAL_TAGS_WITH_LINK_BLOCK_STATE = (): DefaultContentBlockState =>
 	BLOCK_STATE_DEFAULTS();
 
-export const SEARCH_TERMS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
+export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/search-terms___search-terms'
+		'admin/content-block/helpers/generators/tags-with-link___title'
 	),
-	type: ContentBlockType.SearchTerms,
+	type: ContentBlockType.BlockTagsWithLink,
 	components: {
-		state: INITIAL_SEARCH_TERMS_COMPONENTS_STATE(),
+		state: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE(),
 		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/search-terms___search-term'
+			'admin/content-block/helpers/generators/tag-with-link___title'
 		),
 		fields: {
 			label: TEXT_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/search-term___label-is-verplicht'
+					'admin/content-block/helpers/generators/tag-with-link___label-is-verplicht'
 				),
 				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/search-term___label'
+						'admin/content-block/helpers/generators/tag-with-link___label'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			link: TEXT_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/search-term___label-is-verplicht'
+					'admin/content-block/helpers/generators/tag-with-linkm___link-is-verplicht'
 				),
 				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/search-term___link'
+						'admin/content-block/helpers/generators/tag-with-linkm___link'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
@@ -57,7 +57,7 @@ export const SEARCH_TERMS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 		},
 	},
 	block: {
-		state: INITIAL_SEARCH_TERMS_BLOCK_STATE(),
+		state: INITIAL_TAGS_WITH_LINK_BLOCK_STATE(),
 		fields: BLOCK_FIELD_DEFAULTS(),
 	},
 });
