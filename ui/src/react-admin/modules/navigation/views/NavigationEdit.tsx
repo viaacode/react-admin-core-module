@@ -91,7 +91,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					placement: navigationBarId,
 					tooltip: null,
 					iconName: '',
-					label: null,
+					label: '',
 					userGroupIds: null,
 					contentType: null,
 					contentPath: null,

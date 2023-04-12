@@ -182,21 +182,25 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		);
 	};
 
-	const renderTableCell = (rowData: any, columnId: string, rowIndex: number): ReactNode => {
+	const renderTableCell = (
+		navigationItem: NavigationItem,
+		columnId: string,
+		rowIndex: number
+	): ReactNode => {
 		switch (columnId) {
 			case 'sort': {
 				const isFirst = (i: number) => i === 0;
 				const isLast = (i: number) => i === (navigationItems || []).length - 1;
 				return (
 					<ButtonGroup>
-						{renderReorderButton('up', rowIndex, rowData.id, isFirst(rowIndex))}
-						{renderReorderButton('down', rowIndex, rowData.id, isLast(rowIndex))}
+						{renderReorderButton('up', rowIndex, navigationItem.id, isFirst(rowIndex))}
+						{renderReorderButton('down', rowIndex, navigationItem.id, isLast(rowIndex))}
 					</ButtonGroup>
 				);
 			}
 
 			case 'label':
-				return rowData.label || rowData.tooltip || rowData.content_path;
+				return navigationItem.label || navigationItem.tooltip || navigationItem.contentPath;
 
 			case 'actions':
 				return (
@@ -208,7 +212,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 									AdminConfigManager.getAdminRoute('NAVIGATION_ITEM_EDIT'),
 									{
 										navigationBarId,
-										navigationItemId: String(rowData.id),
+										navigationItemId: String(navigationItem.id),
 									}
 								)
 							}
@@ -228,7 +232,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							ariaLabel={tText(
 								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
 							)}
-							onClick={() => openConfirmModal(rowData.id)}
+							onClick={() => openConfirmModal(navigationItem.id)}
 							type="danger-hover"
 						/>
 					</ButtonToolbar>

@@ -71,7 +71,11 @@ function setConfig() {
 		},
 		navigationBars: {
 			enableIcons: true,
-			customNavigationElements: ['<PROFILE_DROPDOWN>', '<VISITOR_SPACES_DROPDOWN>'],
+			customNavigationElements: [
+				'<PROFILE_DROPDOWN>',
+				'<VISITOR_SPACES_DROPDOWN>',
+				'<DIVIDER>',
+			],
 		},
 		staticPages: [
 			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
