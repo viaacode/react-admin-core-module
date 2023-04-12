@@ -19,7 +19,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import Link from '~shared/components/Link/Link';
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';

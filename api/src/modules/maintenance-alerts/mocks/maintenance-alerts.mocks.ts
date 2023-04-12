@@ -56,7 +56,8 @@ export const mockMaintenanceAlert1: MaintenanceAlert = {
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
 };
-const mockMaintenanceAlert2: MaintenanceAlert = {
+
+export const mockMaintenanceAlert2: MaintenanceAlert = {
 	id: '17741a72-807e-43d0-9869-176593171938',
 	title: 'Gepland onderhoud',
 	message:
@@ -64,6 +65,22 @@ const mockMaintenanceAlert2: MaintenanceAlert = {
 	type: MaintenanceAlertType.EXCLAMATION,
 	fromDate: '2022-02-25T16:36:06.045845',
 	untilDate: '2022-02-27T16:36:06.045845',
+	userGroups: [
+		'0213c8d4-f459-45ef-8bbc-96268ab56d01',
+		'04150e6e-b779-4125-84e5-6ee6fc580757',
+		'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
+		'c56d95aa-e918-47ca-b102-486c9449fc4a',
+	],
+};
+
+export const mockMaintenanceAlert3Faulty: MaintenanceAlert = {
+	id: '17741a72-807e-43d0-9869-176593171938',
+	title: 'Faulty maintenance alert',
+	message:
+		'Opgelet! Tussen 25 en 27 maart plannen we een onderhoud aan Het archief. Je zal dus tijdelijk niet kunnen inloggen Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+	type: MaintenanceAlertType.EXCLAMATION,
+	fromDate: '2022-02-25T16:36:06.045845',
+	untilDate: '2021-02-27T16:36:06.045845',
 	userGroups: [
 		'0213c8d4-f459-45ef-8bbc-96268ab56d01',
 		'04150e6e-b779-4125-84e5-6ee6fc580757',
@@ -80,8 +97,9 @@ export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
 	fromDate: mockGqlMaintenanceAlert1.from_date,
 	untilDate: mockGqlMaintenanceAlert1.until_date,
 };
+
 export const mockMaintenanceAlertsResponse = {
-	items: [mockMaintenanceAlert1, mockMaintenanceAlert2],
+	items: [mockMaintenanceAlert1, mockMaintenanceAlert2, mockMaintenanceAlert3Faulty],
 };
 
 export const mockUser: Avo.User.HetArchiefUser = {

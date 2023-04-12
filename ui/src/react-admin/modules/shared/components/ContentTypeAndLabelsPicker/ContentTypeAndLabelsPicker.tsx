@@ -8,9 +8,9 @@ import {
 	TagsInput,
 } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
-import { compact, get, isNumber } from 'lodash-es';
+import { compact, get, isNumber, isString } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview';
+import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
@@ -23,7 +23,7 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;
-	selectedLabels: number[] | null;
+	selectedLabels: string[] | number[] | null;
 }
 
 export interface ContentTypeAndLabelsProps {
@@ -81,19 +81,20 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	};
 
 	const handleLabelsChanged = (newSelectedLabels: TagInfo[]) => {
-		onChange({
+		const newState = {
 			selectedContentType: get(value, 'selectedContentType') as Avo.ContentPage.Type,
-			selectedLabels: (newSelectedLabels || []).map(
-				(labelOption) => labelOption.value as number
-			),
-		});
+			selectedLabels: (newSelectedLabels || []).map((labelOption) => labelOption.value) as
+				| string[]
+				| number[],
+		};
+		onChange(newState);
 	};
 
-	const getSelectedLabelObjects = (): SelectOption<number>[] => {
+	const getSelectedLabelObjects = (): SelectOption<number | string>[] => {
 		// new format where we save the ids of the labels instead of the full label object
 		// https://meemoo.atlassian.net/browse/AVO-1410
-		let selectedLabelIds: number[] = value.selectedLabels || [];
-		if (!isNumber(selectedLabelIds[0])) {
+		let selectedLabelIds: number[] | string[] = value.selectedLabels || [];
+		if (!isNumber(selectedLabelIds[0]) && !isString(selectedLabelIds[0])) {
 			// Old format where we save the whole label object
 			// TODO deprecated remove when all content pages with type overview have been resaved
 			selectedLabelIds = ((value.selectedLabels || []) as unknown as LabelObj[]).map(
@@ -101,16 +102,18 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 			);
 		}
 		return compact(
-			selectedLabelIds.map((labelId: number): SelectOption<number> | null => {
-				const labelObj = labels.find((labelObj) => labelObj.id === labelId);
-				if (!labelObj) {
-					return null;
+			selectedLabelIds.map(
+				(labelId: number | string): SelectOption<number | string> | null => {
+					const labelObj = labels.find((labelObj) => labelObj.id === labelId);
+					if (!labelObj) {
+						return null;
+					}
+					return {
+						label: labelObj.label,
+						value: labelObj.id,
+					};
 				}
-				return {
-					label: labelObj.label,
-					value: labelObj.id,
-				};
-			})
+			)
 		);
 	};
 

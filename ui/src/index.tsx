@@ -120,7 +120,7 @@ function setConfig() {
 		},
 		components: {
 			loader: {
-				component: () => <></>,
+				component: null,
 			},
 			buttonTypes: () => [
 				// Het archief buttons
