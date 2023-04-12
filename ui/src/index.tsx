@@ -119,7 +119,7 @@ function setConfig() {
 		},
 		components: {
 			loader: {
-				component: () => <></>,
+				component: null,
 			},
 			buttonTypes: () => [
 				// Het archief buttons
@@ -277,7 +277,7 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: DatabaseType.avo,
+			databaseApplicationType: DatabaseType.hetArchief,
 			proxyUrl,
 		},
 		flowplayer: {

@@ -1,27 +1,25 @@
-import { IPagination } from '@studiohyperdrive/pagination';
+import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, get, isNumber } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { cloneDeep, compact, isNumber, isString } from 'lodash-es';
+import React, { FunctionComponent } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 import {
-	BlockPageOverview,
 	ContentItemStyle,
 	LabelObj,
-} from '~content-blocks/BlockPageOverview/BlockPageOverview';
-import { PageOverviewWrapperProps } from '~modules/content-page/components/blocks';
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-
-import { ContentPageService } from '../../../services/content-page.service';
+} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
+	BlockPageOverview,
+	PageOverviewWrapperProps,
+} from '~modules/content-page/components/blocks';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import { useGetContentPageByPath } from '~modules/content-page/hooks/use-get-content-page-by-path';
+import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
+import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
+import { useGetContentPagesOverview } from '~modules/content-page/hooks/use-get-content-pages-overview';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { ErrorView } from '~shared/components/error';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
 import { useDebounce } from '~shared/hooks/useDebounce';
 import { useTranslation } from '~shared/hooks/useTranslation';
@@ -48,32 +46,28 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	renderLink,
 	commonUser,
 }) => {
-	const { tHtml, tText } = useTranslation();
+	const { tText } = useTranslation();
 
 	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
 		page: NumberParam,
 		item: StringParam,
 		label: CheckboxListParam,
 	};
-	const [labelObjs, setLabelObjs] = useState<LabelObj[]>([]);
 	const [queryParamsState, setQueryParamsState] = useQueryParams(queryParamConfig);
-	const [pages, setPages] = useState<ContentPageInfo[] | null>(null);
-	const [pageCount, setPageCount] = useState<number | null>(null);
-	const [labelPageCounts, setLabelPageCounts] = useState<{ [id: number]: number } | null>(null);
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	const [selectedTabObjects, setSelectedTabObjects] = useState<LabelObj[]>([]);
-	const [focusedPage, setFocusedPage] = useState<ContentPageInfo | null>(null);
 
 	const debouncedItemsPerPage = useDebounce(itemsPerPage || 1000, 200); // Default to 1000 if itemsPerPage is zero
 
-	const getSelectedLabelIds = (): number[] => {
+	const getSelectedLabelIds = (): number[] | string[] => {
 		if (!contentTypeAndTabs.selectedLabels) {
 			return [];
 		}
-		if (isNumber(contentTypeAndTabs.selectedLabels[0])) {
+		if (
+			isNumber(contentTypeAndTabs.selectedLabels[0]) ||
+			isString(contentTypeAndTabs.selectedLabels[0])
+		) {
 			// new format where we save the ids of the labels instead of the full label object
 			// https://meemoo.atlassian.net/browse/AVO-1410
-			return compact(contentTypeAndTabs.selectedLabels || []);
+			return compact((contentTypeAndTabs.selectedLabels || []) as any[]);
 		}
 		// Old format where we save the whole label object
 		// TODO deprecated remove when all content pages with type overview have been resaved
@@ -84,126 +78,58 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		);
 	};
 
-	const fetchPages = useCallback(async () => {
-		try {
-			if (contentTypeAndTabs.selectedLabels && contentTypeAndTabs.selectedLabels.length) {
-				setLabelObjs(
-					await ContentPageLabelService.getContentPageLabelsByTypeAndIds(
-						contentTypeAndTabs.selectedContentType,
-						getSelectedLabelIds()
-					)
-				);
-			}
+	const { data: labelObjs, isFetching: isLoadingLabelObjs } = useGetContentPageLabelsByTypeAndIds(
+		{
+			selectedContentType: contentTypeAndTabs.selectedContentType,
+			getSelectedLabelIds: getSelectedLabelIds(),
+		},
+		{ enabled: (contentTypeAndTabs?.selectedLabels?.length || 0) > 0, keepPreviousData: true }
+	);
 
-			// Map labels in query params to label objects
-			let selectedTabs: LabelObj[] = [];
-			if (queryParamsState.label) {
-				const queryLabels = queryParamsState.label || [];
-				if (queryLabels.length) {
-					selectedTabs =
-						await ContentPageLabelService.getContentPageLabelsByTypeAndLabels(
-							contentTypeAndTabs.selectedContentType,
-							queryLabels
-						);
-					setSelectedTabObjects(selectedTabs);
-				} else {
-					selectedTabs = [];
-					setSelectedTabObjects([]);
-				}
-			}
+	const { data: selectedTabObjects, isFetching: isLoadingSelectedTabObjects } =
+		useGetContentPageLabelsByTypeAndLabels(
+			{
+				selectedContentType: contentTypeAndTabs.selectedContentType,
+				queryLabels: queryParamsState.label || [],
+			},
+			{ keepPreviousData: true }
+		);
 
-			let tempFocusedPage: ContentPageInfo | undefined;
-			if (queryParamsState.item) {
-				const contentPage = await ContentPageService.getContentPageByPath(
-					queryParamsState.item
-				);
-				if (contentPage) {
-					setFocusedPage(contentPage);
-				} else {
-					console.error(
-						new CustomError(
-							'Failed to find content page by path to set it as the expanded item for the page overview wrapper component',
-							null,
-							{
-								contentPage,
-								path: queryParamsState.item,
-							}
-						)
-					);
+	const { data: focusedPage, isFetching: isLoadingFocusedPage } = useGetContentPageByPath(
+		queryParamsState.item,
+		{ keepPreviousData: true }
+	);
 
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
-							'modules/admin/content-page/components/wrappers/page-overview-wrapper/page-overview-wrapper___error'
-						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/components/wrappers/page-overview-wrapper/page-overview-wrapper___het-opgegeven-item-kon-niet-worden-gevonden'
-						),
-						type: ToastType.ERROR,
-					});
-				}
-			}
+	const {
+		data: pagesAndLabels,
+		isFetching: isLoadingPagesAndLabels,
+		error: errorPagesAndLabels,
+	} = useGetContentPagesOverview(
+		{
+			withBlocks:
+				itemStyle === ContentItemStyle.ACCORDION ||
+				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS,
+			contentType: contentTypeAndTabs.selectedContentType,
+			labelIds: getSelectedLabelIds(),
+			selectedLabelIds:
+				selectedTabObjects && selectedTabObjects.length
+					? selectedTabObjects.map((tab) => tab.id)
+					: getSelectedLabelIds(),
+			orderProp: sortOrder.split('__')[0],
+			orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
+			offset:
+				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS
+					? 0
+					: queryParamsState.page * debouncedItemsPerPage,
+			limit:
+				itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS ? 500 : debouncedItemsPerPage,
+		},
+		{ keepPreviousData: true }
+	);
 
-			const response: IPagination<ContentPageInfo> & { labelCounts: Record<string, number> } =
-				await ContentPageService.getContentPages({
-					withBlocks: itemStyle === 'ACCORDION',
-					contentType: contentTypeAndTabs.selectedContentType,
-					labelIds: getSelectedLabelIds(),
-					selectedLabelIds:
-						selectedTabs && selectedTabs.length
-							? selectedTabs.map((tab) => tab.id)
-							: getSelectedLabelIds(),
-					orderProp: sortOrder.split('__')[0],
-					orderDirection: sortOrder.split('__').pop() as Avo.Search.OrderDirection,
-					offset: queryParamsState.page * debouncedItemsPerPage,
-					limit: debouncedItemsPerPage,
-				});
-
-			// Set the pages on the state after removing the page that will be shown at the top (?item=/path)
-			setPages(response.items.filter((page) => page.id !== get(tempFocusedPage, 'id')));
-			setPageCount(response.pages);
-			setLabelPageCounts(response.labelCounts);
-		} catch (err) {
-			console.error(
-				new CustomError('Failed to fetch pages', err, {
-					query: 'GET_CONTENT_PAGES',
-					variables: {
-						page: queryParamsState.page,
-						size: debouncedItemsPerPage,
-					},
-				})
-			);
-			setLoadingInfo({
-				state: 'error',
-				message: tHtml(
-					'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___het-ophalen-van-de-paginas-is-mislukt'
-				),
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [
-		itemStyle,
-		queryParamsState,
-		debouncedItemsPerPage,
-		setPages,
-		setPageCount,
-		sortOrder,
-		contentTypeAndTabs.selectedContentType,
-		// Deep compare by value and not by ref
-		// https://github.com/facebook/react/issues/14476#issuecomment-471199055
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		JSON.stringify(contentTypeAndTabs.selectedLabels),
-		tHtml,
-	]);
-
-	useEffect(() => {
-		fetchPages();
-	}, [fetchPages]);
-
-	useEffect(() => {
-		if (pages && pageCount) {
-			setLoadingInfo({ state: 'loaded' });
-		}
-	}, [pages, pageCount]);
+	const pages = pagesAndLabels?.items;
+	const pageCount = pagesAndLabels?.pages;
+	const labelPageCounts = pagesAndLabels?.labelCounts;
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParamsState((oldQueryParamState) => {
@@ -213,7 +139,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				item: undefined,
 			};
 		});
-		setFocusedPage(null);
 	};
 
 	const handleSelectedTabsChanged = (tabs: LabelObj[]) => {
@@ -223,6 +148,16 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				label: tabs.map((tab) => tab.label),
 				page: 0,
 				item: undefined,
+			};
+		});
+	};
+
+	const handleFocusedPageChanged = (newFocusedPage: ContentPageInfo | null) => {
+		setQueryParamsState((oldQueryParamState) => {
+			return {
+				...cloneDeep(oldQueryParamState),
+				page: 0,
+				item: newFocusedPage?.path,
 			};
 		});
 	};
@@ -241,7 +176,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 					!!headerBackgroundColor &&
 					GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(headerBackgroundColor)
 				}
-				selectedTabs={selectedTabObjects}
+				selectedTabs={selectedTabObjects || []}
 				onSelectedTabsChanged={handleSelectedTabsChanged}
 				currentPage={queryParamsState.page}
 				onCurrentPageChanged={handleCurrentPageChanged}
@@ -266,6 +201,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				buttonLabel={buttonLabel}
 				buttonAltTitle={buttonAltTitle}
 				focusedPage={focusedPage ?? null}
+				onFocusedPageChanged={handleFocusedPageChanged}
 				getLabelLink={(label: string) => {
 					return `/${AdminConfigManager.getAdminRoute('NEWS')}?label=${encodeURIComponent(
 						label
@@ -273,15 +209,27 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				}}
 				renderLink={renderLink}
 				commonUser={commonUser}
+				isLoadingLabelObjs={isLoadingLabelObjs}
+				isLoadingSelectedTabObjects={isLoadingSelectedTabObjects}
+				isLoadingFocusedPage={isLoadingFocusedPage}
+				isLoadingPagesAndLabels={isLoadingPagesAndLabels}
 			/>
 		);
 	};
 
-	return (
-		<LoadingErrorLoadedComponent
-			loadingInfo={loadingInfo}
-			dataObject={pages}
-			render={renderPageOverviewBlock}
-		/>
-	);
+	if (errorPagesAndLabels) {
+		return (
+			<ErrorView
+				icon={'alertTriangle' as IconName}
+				message={AdminConfigManager.getConfig().services.i18n.tHtml('Error')}
+			>
+				<p>
+					{AdminConfigManager.getConfig().services.i18n.tHtml(
+						'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___het-ophalen-van-de-paginas-is-mislukt'
+					)}
+				</p>
+			</ErrorView>
+		);
+	}
+	return renderPageOverviewBlock();
 };

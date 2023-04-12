@@ -8,7 +8,6 @@ import {
 	Select,
 	SelectOption,
 	Spacer,
-	Spinner,
 	Table,
 	TableColumn,
 	TextInput,
@@ -40,6 +39,7 @@ import React, {
 	useState,
 } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
@@ -501,13 +501,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								</Spacer>
 							)}
 						</div>
-						{isLoading && (
-							<Flex center className="c-filter-table__loading">
-								<Spacer margin={['top-large', 'bottom-large']}>
-									<Spinner size="large" />
-								</Spacer>
-							</Flex>
-						)}
+						{isLoading && <CenteredSpinner />}
 					</div>
 				</>
 			)}

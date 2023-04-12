@@ -1,13 +1,4 @@
-import {
-	Blankslate,
-	Button,
-	Flex,
-	FlexItem,
-	Icon,
-	IconName,
-	Spacer,
-	Spinner,
-} from '@viaa/avo2-components';
+import { Blankslate, Button, Flex, FlexItem, Icon, IconName, Spacer } from '@viaa/avo2-components';
 import { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';
@@ -22,6 +13,7 @@ import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
 import './FileUpload.scss';
+import Loader from '../Loader/Loader';
 
 export interface FileUploadProps {
 	icon?: IconName;
@@ -281,7 +273,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 						</FlexItem>
 					</Flex>
 				) : (
-					<Spinner size="large" />
+					<Loader />
 				))}
 			<ConfirmModal
 				title={tText(

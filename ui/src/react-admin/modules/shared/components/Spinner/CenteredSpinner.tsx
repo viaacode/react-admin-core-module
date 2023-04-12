@@ -1,11 +1,12 @@
-import { Container, Flex, Spinner } from '@viaa/avo2-components';
+import { Container, Flex } from '@viaa/avo2-components';
 import React, { FC } from 'react';
+import Loader from '../Loader/Loader';
 
 export const CenteredSpinner: FC = () => {
 	return (
 		<Container mode="vertical">
 			<Flex orientation="horizontal" center>
-				<Spinner size="large" />
+				<Loader />
 			</Flex>
 		</Container>
 	);

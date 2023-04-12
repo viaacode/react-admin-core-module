@@ -12,7 +12,7 @@ import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import {
 	ContentItemStyle,
 	ContentTabStyle,
-} from '~content-blocks/BlockPageOverview/BlockPageOverview';
+} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 // OPTIONS
