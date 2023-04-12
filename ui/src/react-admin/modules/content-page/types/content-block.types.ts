@@ -425,5 +425,5 @@ export const DEFAULT_BUTTON_PROPS = {
 
 export interface TagsWithLinkBlockComponentState {
 	label: string;
-	link?: string;
+	link?: ButtonAction;
 }

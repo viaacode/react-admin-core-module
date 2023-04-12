@@ -1,11 +1,13 @@
+import { ButtonAction } from '@viaa/avo2-components';
 import classnames from 'classnames';
 import { isNil } from 'lodash-es';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
+import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockTagWithLinkProps {
 	label: string;
-	link?: string;
+	link?: ButtonAction;
 }
 
 export interface BlockTagsWithLinkProps extends DefaultComponentProps {
@@ -18,16 +20,17 @@ export const BlockTagsWithLink: FunctionComponent<BlockTagsWithLinkProps> = ({
 }): ReactElement => (
 	<div className={classnames('c-block-tags-with-link', className)}>
 		{elements.map(
-			({ link, label }: BlockTagWithLinkProps): ReactNode =>
+			({ link, label }: BlockTagWithLinkProps, i: number): ReactNode =>
 				!isNil(link) ? (
-					<a
-						className="c-block-tags-with-link__term c-block-tags-with-link__link"
-						href={link}
+					<SmartLink
+						className="c-block-tags-with-link__term"
+						key={`c-block-tags-with-link-${i}`}
+						action={link}
 					>
 						{label}
-					</a>
+					</SmartLink>
 				) : (
-					<p className="c-block-tags-with-link__term c-block-tags-with-link__label">
+					<p key={`c-block-tags-with-link-${i}`} className="c-block-tags-with-link__term">
 						{label}
 					</p>
 				)

@@ -13,7 +13,6 @@ import { AdminConfigManager } from '~core/config';
 export const INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE = (): TagsWithLinkBlockComponentState[] => [
 	{
 		label: '',
-		link: '',
 	},
 ];
 
@@ -43,17 +42,15 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
-			link: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/tag-with-linkm___link-is-verplicht'
+			link: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/tag-with-link___link'
 				),
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/tag-with-linkm___link'
-					),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+				editorType: ContentBlockEditor.ContentPicker,
+				editorProps: {
+					allowedTypes: ['INTERNAL_LINK', 'EXTERNAL_LINK'],
+				},
+			},
 		},
 	},
 	block: {
