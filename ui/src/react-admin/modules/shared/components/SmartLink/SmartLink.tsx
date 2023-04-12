@@ -14,6 +14,7 @@ export interface SmartLinkProps {
 	action?: ButtonAction | null;
 	removeStyles?: boolean;
 	title?: string;
+	className?: string;
 	children: ReactNode;
 }
 
@@ -22,6 +23,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	removeStyles = true,
 	title,
 	children,
+	className,
 }) => {
 	const renderLink = (
 		url: string,
@@ -41,7 +43,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						<a
 							href={fullUrl}
 							target="_self"
-							className={clsx({ 'a-link__no-styles': removeStyles })}
+							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							title={title}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
@@ -55,7 +57,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				return (
 					<Link
 						to={fullUrl}
-						className={clsx({ 'a-link__no-styles': removeStyles })}
+						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() =>
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 						}
@@ -75,7 +77,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							href={fullUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							className={clsx({ 'a-link__no-styles': removeStyles })}
+							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 							}
@@ -91,7 +93,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						href={`${window.location.origin}${fullUrl}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className={clsx({ 'a-link__no-styles': removeStyles })}
+						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() =>
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 						}
