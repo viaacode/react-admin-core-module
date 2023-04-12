@@ -1,3 +1,4 @@
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -48,7 +49,11 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: ['INTERNAL_LINK', 'EXTERNAL_LINK'],
+					allowedTypes: [
+						ContentPickerType.ANCHOR_LINK,
+						ContentPickerType.INTERNAL_LINK,
+						ContentPickerType.EXTERNAL_LINK,
+					],
 				},
 			},
 		},
