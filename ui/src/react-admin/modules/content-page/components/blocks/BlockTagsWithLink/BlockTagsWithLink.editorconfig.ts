@@ -25,7 +25,7 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 	name: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content-block/helpers/generators/tags-with-link___title'
 	),
-	type: ContentBlockType.BlockTagsWithLink,
+	type: ContentBlockType.TagsWithLink,
 	components: {
 		state: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE(),
 		name: AdminConfigManager.getConfig().services.i18n.tText(

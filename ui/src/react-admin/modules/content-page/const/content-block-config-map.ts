@@ -59,5 +59,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.Eventbrite]: EVENTBRITE_BLOCK_CONFIG,
 	[ContentBlockType.Uitgeklaard]: UITGEKLAARD_BLOCK_CONFIG,
 	[ContentBlockType.ImageTitleTextButton]: IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
-	[ContentBlockType.BlockTagsWithLink]: TAGS_WITH_LINK_BLOCK_CONFIG,
+	[ContentBlockType.TagsWithLink]: TAGS_WITH_LINK_BLOCK_CONFIG,
 };

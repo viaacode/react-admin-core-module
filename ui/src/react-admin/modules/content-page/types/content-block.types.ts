@@ -122,7 +122,7 @@ export enum ContentBlockType {
 	Spotlight = 'SPOTLIGHT',
 	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
-	BlockTagsWithLink = 'TAGS_WITH_LINKS',
+	TagsWithLink = 'TAGS_WITH_LINKS',
 }
 
 export enum ContentBlockEditor {

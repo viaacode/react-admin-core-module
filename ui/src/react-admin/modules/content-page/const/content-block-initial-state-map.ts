@@ -61,5 +61,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.Eventbrite]: INITIAL_EVENTBRITE_COMPONENTS_STATE,
 	[ContentBlockType.Uitgeklaard]: INITIAL_UITGEKLAARD_BLOCK_STATE,
 	[ContentBlockType.ImageTitleTextButton]: INITIAL_IMAGE_TITLE_TEXT_BUTTON_BLOCK_STATE,
-	[ContentBlockType.BlockTagsWithLink]: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE,
+	[ContentBlockType.TagsWithLink]: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE,
 };

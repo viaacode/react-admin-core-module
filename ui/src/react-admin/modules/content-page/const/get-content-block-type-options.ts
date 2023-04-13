@@ -164,7 +164,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			label: AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-block/content-block___tags-with-link'
 			),
-			value: ContentBlockType.BlockTagsWithLink,
+			value: ContentBlockType.TagsWithLink,
 		},
 	];
 
