@@ -1,6 +1,7 @@
-import { SelectOption } from '@viaa/avo2-components';
+import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { RichTextEditorProps } from '@meemoo/react-components';
 import { debounce, get, isArray, isNil } from 'lodash-es';
+import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 
 import { PickerItem } from '../../shared/types/content-picker';
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
@@ -31,15 +32,15 @@ export const generateFieldAttributes = (
 
 		case ContentBlockEditor.ContentPicker:
 			return {
-				onSelect: (picked: PickerItem) => onChange(picked),
-				initialValue: value,
-			};
+				onChange,
+				value,
+			} as ContentPickerProps;
 
 		case ContentBlockEditor.DatePicker:
 			return {
 				onChange: (date: any) => onChange(date.toISOString()),
 				value: value ? new Date(value) : null,
-			};
+			} as DatePickerProps;
 
 		case ContentBlockEditor.IconPicker:
 		case ContentBlockEditor.ColorSelect:
