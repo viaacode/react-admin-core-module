@@ -19,6 +19,7 @@ import {
 	BlockQuote,
 	BlockRichTextWrapper,
 	BlockSpotlight,
+	BlockThreeClickableTiles,
 	BlockUitgeklaard,
 	BlockUspGridWrapper,
 	BlockVideoTitleTextButtonWrapper,
@@ -59,6 +60,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
 		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
+		[ContentBlockType.ThreeClickableTiles]: BlockThreeClickableTiles,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -78,6 +80,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.Spotlight,
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
+	ContentBlockType.ThreeClickableTiles,
 ];
 
 /**
@@ -98,6 +101,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
 	ContentBlockType.Eventbrite,
+	ContentBlockType.ThreeClickableTiles,
 ];
 
 /**

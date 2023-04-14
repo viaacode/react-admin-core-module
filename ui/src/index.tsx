@@ -63,6 +63,7 @@ function setConfig() {
 				ContentBlockType.Quote,
 				ContentBlockType.Uitgeklaard,
 				ContentBlockType.ImageTitleTextButton,
+				ContentBlockType.ThreeClickableTiles,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -96,6 +97,7 @@ function setConfig() {
 				arrowUp: { name: 'arrow-up' },
 				sortTable: { name: 'sort-table' },
 				arrowDown: { name: 'arrow-down' },
+				arrowRight: { name: 'arrow-right' },
 				chevronLeft: { name: 'chevron-left' },
 				check: { name: 'check' },
 				calendar: { name: 'calendar' },
