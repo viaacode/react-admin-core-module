@@ -123,6 +123,7 @@ export enum ContentBlockType {
 	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
+	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
 }
 
 export enum ContentBlockEditor {
@@ -426,4 +427,11 @@ export const DEFAULT_BUTTON_PROPS = {
 export interface TagsWithLinkBlockComponentState {
 	label: string;
 	link?: ButtonAction;
+}
+
+export interface CardWithoutDescriptionBlockComponentState {
+	title: string;
+	// ToDo(Silke): add state
+	// image?: any;
+	// style?: any;
 }

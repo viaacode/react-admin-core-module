@@ -3,6 +3,7 @@ import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
 import { AdminConfigManager } from '~core/config';
 import {
 	BlockButtonsWrapper,
+	BlockCardsWithoutDescription,
 	BlockContentPageMeta,
 	BlockCTAsWrapper,
 	BlockEventbrite,
@@ -61,6 +62,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
 		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
+		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -81,6 +83,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
 	ContentBlockType.TagsWithLink,
+	ContentBlockType.CardsWithoutDescription,
 ];
 
 /**
