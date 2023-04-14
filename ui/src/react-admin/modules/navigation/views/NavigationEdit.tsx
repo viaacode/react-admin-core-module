@@ -82,12 +82,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	);
 
 	useEffect(() => {
-		// TODO remove this console log once the error is gone on QAS. It's not reproducible locally :s
-		console.log({
-			navigationBarId,
-			navigationItemId,
-			originalNavigationItem,
-		});
 		if (navigationBarId && navigationItemId && originalNavigationItem) {
 			setCurrentCurrentNavigationItem(originalNavigationItem);
 		} else if (navigationBarId && !navigationItemId) {
