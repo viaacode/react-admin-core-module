@@ -20,6 +20,7 @@ export * from './BlockUitgeklaard';
 export * from './BlockVideo';
 export * from './BlockVideoTitleTextButton';
 export * from './BlockContentPageMeta';
+export * from './BlockTagsWithLink';
 
 export * from './anchor-links';
 export * from './defaults';

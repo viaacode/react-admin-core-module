@@ -63,6 +63,7 @@ function setConfig() {
 				ContentBlockType.Quote,
 				ContentBlockType.Uitgeklaard,
 				ContentBlockType.ImageTitleTextButton,
+				ContentBlockType.TagsWithLink,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
