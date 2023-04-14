@@ -34,7 +34,6 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 					className="c-block-three-clickable-tiles__tile-image"
 					style={{
 						backgroundImage: `url('${imgSource}')`,
-						display: 'block',
 					}}
 				>
 					<h3>{title}</h3>
