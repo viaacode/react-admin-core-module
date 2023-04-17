@@ -10,7 +10,7 @@ interface IconProps {
 
 const Icon: FC<IconProps> = ({ name, className }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
-	const iconProps = iconConfig?.componentProps?.[name] as { name: string };
+	const iconProps = (iconConfig?.componentProps?.[name] as { name: string }) ?? { name }; // Default to avo2 icons
 	const IconComponent = iconConfig?.component ?? (() => null);
 
 	return <IconComponent {...iconProps} className={className} />;

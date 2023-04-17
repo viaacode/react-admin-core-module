@@ -168,8 +168,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/content-block/content-block___cards_without_description'
+				'admin/content-block/content-block___three-clickable-tiles'
 			),
+			value: ContentBlockType.ThreeClickableTiles,
+		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___cards_without_description'
+				),
 			value: ContentBlockType.CardsWithoutDescription,
 		},
 	];

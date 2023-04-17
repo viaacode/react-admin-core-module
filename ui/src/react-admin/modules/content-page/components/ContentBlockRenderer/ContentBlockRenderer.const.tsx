@@ -21,6 +21,7 @@ import {
 	BlockRichTextWrapper,
 	BlockSpotlight,
 	BlockTagsWithLink,
+	BlockThreeClickableTiles,
 	BlockUitgeklaard,
 	BlockUspGridWrapper,
 	BlockVideoTitleTextButtonWrapper,
@@ -61,6 +62,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Eventbrite]: BlockEventbrite,
 		[ContentBlockType.Uitgeklaard]: BlockUitgeklaard,
 		[ContentBlockType.ImageTitleTextButton]: BlockImageTitleTextButtonWrapper,
+		[ContentBlockType.ThreeClickableTiles]: BlockThreeClickableTiles,
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		// Avo specific blocks
@@ -82,6 +84,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.Spotlight,
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
+	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
 ];
@@ -104,6 +107,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.LogoGrid,
 	ContentBlockType.UspGrid,
 	ContentBlockType.Eventbrite,
+	ContentBlockType.ThreeClickableTiles,
 ];
 
 /**
