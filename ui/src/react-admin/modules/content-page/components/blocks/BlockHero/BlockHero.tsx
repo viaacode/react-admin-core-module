@@ -9,6 +9,7 @@ import {
 	RenderLinkFunction,
 	Spacer,
 } from '@viaa/avo2-components';
+import clsx from 'clsx';
 import { isString } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
@@ -63,7 +64,9 @@ export const BlockHero: FunctionComponent<BlockHeroProps> = ({
 				</div>
 				{!!buttons && (
 					<Spacer margin="top-large">
-						<ButtonToolbar>
+						<ButtonToolbar
+							className={clsx({ 'c-button-toolbar--tri-button': buttons.length > 2 })}
+						>
 							{buttons.map(({ buttonAction, ...rest }, index: number) => {
 								return renderLink(
 									buttonAction,
