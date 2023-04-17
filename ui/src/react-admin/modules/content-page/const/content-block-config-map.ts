@@ -24,6 +24,7 @@ import {
 	SEARCH_BLOCK_CONFIG,
 	SPOTLIGHT_BLOCK_CONFIG,
 	TAGS_WITH_LINK_BLOCK_CONFIG,
+	THREE_CLICKABLE_TILES_BLOCK_CONFIG,
 	UITGEKLAARD_BLOCK_CONFIG,
 	USP_GRID_BLOCK_CONFIG,
 } from '~modules/content-page/components/blocks';
@@ -59,5 +60,6 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.Eventbrite]: EVENTBRITE_BLOCK_CONFIG,
 	[ContentBlockType.Uitgeklaard]: UITGEKLAARD_BLOCK_CONFIG,
 	[ContentBlockType.ImageTitleTextButton]: IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
+	[ContentBlockType.ThreeClickableTiles]: THREE_CLICKABLE_TILES_BLOCK_CONFIG,
 	[ContentBlockType.TagsWithLink]: TAGS_WITH_LINK_BLOCK_CONFIG,
 };

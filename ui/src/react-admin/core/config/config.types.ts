@@ -161,6 +161,7 @@ export interface IconConfig {
 		angleDown: IconComponentProps;
 		angleLeft: IconComponentProps;
 		angleRight: IconComponentProps;
+		arrowRight: IconComponentProps;
 		delete: IconComponentProps;
 		extraOptions: IconComponentProps;
 		copy: IconComponentProps;

@@ -120,6 +120,7 @@ export enum ContentBlockType {
 	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
 	Search = 'SEARCH',
 	Spotlight = 'SPOTLIGHT',
+	ThreeClickableTiles = 'THREE_CLICKABLE_TILES',
 	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
@@ -353,7 +354,8 @@ export type RepeatedContentBlockComponentState =
 	| ImageGridBlockComponentStateFields
 	| MediaGridBlockComponentState
 	| ImageInfo // project spotlight & spotlight
-	| RichTextBlockComponentState;
+	| RichTextBlockComponentState
+	| ThreeClickableTilesBlockComponentState;
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
@@ -425,5 +427,12 @@ export const DEFAULT_BUTTON_PROPS = {
 
 export interface TagsWithLinkBlockComponentState {
 	label: string;
+	link?: ButtonAction;
+}
+
+export interface ThreeClickableTilesBlockComponentState {
+	title: string;
+	subtitle: string;
+	source: string;
 	link?: ButtonAction;
 }
