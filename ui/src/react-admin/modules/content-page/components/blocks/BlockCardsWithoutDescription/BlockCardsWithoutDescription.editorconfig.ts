@@ -1,3 +1,4 @@
+import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -9,12 +10,13 @@ import {
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
+import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 
 export const INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE =
 	(): CardWithoutDescriptionBlockComponentState[] => [
 		{
 			title: '',
-			// ToDo(Silke): add image & style
+			style: 'round',
 		},
 	];
 
@@ -44,6 +46,26 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
+			style: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/card-withouth-description___style'
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS(),
+				},
+			},
+			image: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/card-withouth-description___image'
+				),
+				editorType: ContentBlockEditor.FileUpload,
+				validator: undefined,
+				editorProps: {
+					assetType: 'CONTENT_BLOCK_IMAGE',
+					allowMulti: false,
+				} as FileUploadProps,
+			},
 		},
 	},
 	block: {

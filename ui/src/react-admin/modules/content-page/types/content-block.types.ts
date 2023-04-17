@@ -32,6 +32,8 @@ export type WidthOption = 'full-width' | 'page-header' | string; // CSS width st
 
 export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
 
+export type CardWithoutDescriptionStyleOption = 'round' | 'square';
+
 export enum Color {
 	White = '#FFF',
 	Black = '#000',
@@ -431,7 +433,6 @@ export interface TagsWithLinkBlockComponentState {
 
 export interface CardWithoutDescriptionBlockComponentState {
 	title: string;
-	// ToDo(Silke): add state
-	// image?: any;
-	// style?: any;
+	style: CardWithoutDescriptionStyleOption;
+	image?: string;
 }
