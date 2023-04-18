@@ -97,7 +97,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 		>
 			{elements.map((element, index) => (
 				<div
-					key={`block-grid-${element?.action?.value || element.title || index}`}
+					key={`block-grid-${element?.action?.value || element.title || null}${index}`}
 					className={classnames('c-block-grid__item')}
 					style={{
 						width: `${itemWidth}px`,
