@@ -32,6 +32,8 @@ export type WidthOption = 'full-width' | 'page-header' | string; // CSS width st
 
 export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
 
+export type CardWithoutDescriptionStyleOption = 'round' | 'square';
+
 export enum Color {
 	White = '#FFF',
 	Black = '#000',
@@ -124,6 +126,7 @@ export enum ContentBlockType {
 	Uitgeklaard = 'UITGEKLAARD',
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
+	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
 }
 
 export enum ContentBlockEditor {
@@ -430,9 +433,16 @@ export interface TagsWithLinkBlockComponentState {
 	link?: ButtonAction;
 }
 
+
 export interface ThreeClickableTilesBlockComponentState {
 	title: string;
 	subtitle: string;
 	source: string;
 	link?: ButtonAction;
+}
+
+export interface CardWithoutDescriptionBlockComponentState {
+	title: string;
+	style: CardWithoutDescriptionStyleOption;
+	image?: string;
 }

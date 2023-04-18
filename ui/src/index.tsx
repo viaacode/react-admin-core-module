@@ -65,6 +65,7 @@ function setConfig() {
 				ContentBlockType.ImageTitleTextButton,
 				ContentBlockType.ThreeClickableTiles,
 				ContentBlockType.TagsWithLink,
+				ContentBlockType.CardsWithoutDescription,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

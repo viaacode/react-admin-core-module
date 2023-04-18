@@ -172,6 +172,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.ThreeClickableTiles,
 		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___cards_without_description'
+				),
+			value: ContentBlockType.CardsWithoutDescription,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object
