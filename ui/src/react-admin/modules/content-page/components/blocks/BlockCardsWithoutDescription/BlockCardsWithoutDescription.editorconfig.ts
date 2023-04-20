@@ -5,18 +5,32 @@ import {
 	ContentBlockType,
 	DefaultContentBlockState,
 	CardWithoutDescriptionBlockComponentState,
+	Color,
 } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
+import {
+	BACKGROUND_COLOR_FIELD,
+	BLOCK_FIELD_DEFAULTS,
+	BLOCK_STATE_DEFAULTS,
+	FOREGROUND_COLOR_FIELD,
+	TEXT_FIELD,
+} from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import { isAvo } from '~modules/shared/helpers/is-avo';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/get-color-options';
 
 export const INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE =
 	(): CardWithoutDescriptionBlockComponentState[] => [
 		{
 			title: '',
 			style: 'round',
+			textColor: Color.White,
+			backgroundColor: Color.Black,
 		},
 	];
 
@@ -46,15 +60,6 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
-			style: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___style'
-				),
-				editorType: ContentBlockEditor.Select,
-				editorProps: {
-					options: GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS(),
-				},
-			},
 			image: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/card-withouth-description___image'
@@ -66,6 +71,28 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					allowMulti: false,
 				} as FileUploadProps,
 			},
+			style: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/card-withouth-description___style'
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS(),
+				},
+			},
+			textColor: FOREGROUND_COLOR_FIELD(
+				AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/card-withouth-description___tekst-kleur'
+				)
+			),
+			backgroundColor: BACKGROUND_COLOR_FIELD(
+				AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/card-withouth-description___achtergrondkleur'
+				),
+				isAvo()
+					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
+					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+			),
 		},
 	},
 	block: {
