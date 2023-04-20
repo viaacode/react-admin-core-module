@@ -15,7 +15,6 @@ import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUploa
 export const INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE =
 	(): ThreeClickableTilesBlockComponentState[] => [
 		{
-			title: '',
 			subtitle: '',
 			source: '',
 		},
@@ -49,17 +48,6 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						'admin/content-block/helpers/generators/three-clickable-tiles___afbeelding'
 					),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
-				}
-			),
-			title: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/three-clickable-tiles___titel-is-verplicht'
-				),
-				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/three-clickable-tiles___titel'
-					),
-					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			subtitle: TEXT_FIELD(

@@ -1,6 +1,6 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import { isEmpty, isNil } from 'lodash-es';
+import { isNil } from 'lodash-es';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { Icon } from '~modules/shared/components';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
@@ -8,7 +8,6 @@ import { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockClickableTilesProps {
 	subtitle: string;
-	title: string;
 	imgSource: string;
 	link?: ButtonAction;
 }
@@ -23,7 +22,6 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 }): ReactElement => {
 	const renderTile = (
 		link: ButtonAction | undefined,
-		title: string,
 		subtitle: string,
 		imgSource: string,
 		i: number
@@ -35,11 +33,9 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 					style={{
 						backgroundImage: `url('${imgSource}')`,
 					}}
-				>
-					<h3>{title}</h3>
-				</div>
+				/>
 				<div className="c-block-three-clickable-tiles__tile-subtitle">
-					<h5>{subtitle}</h5>
+					<h5 className="u-text-ellipsis--2">{subtitle}</h5>
 					<Icon name="arrowRight" />
 				</div>
 			</div>
@@ -65,13 +61,8 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 	return (
 		<div className={classnames('c-block-three-clickable-tiles', className)}>
 			{elements.map(
-				(
-					{ link, subtitle, title, imgSource }: BlockClickableTilesProps,
-					i: number
-				): ReactNode =>
-					!isNil(title) && !isEmpty(title)
-						? renderTile(link, title, subtitle, imgSource, i)
-						: null
+				({ link, subtitle, imgSource }: BlockClickableTilesProps, i: number): ReactNode =>
+					renderTile(link, subtitle, imgSource, i)
 			)}
 		</div>
 	);
