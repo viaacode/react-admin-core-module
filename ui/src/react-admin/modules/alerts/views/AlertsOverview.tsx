@@ -47,7 +47,7 @@ import {
 	AlertsOverviewProps,
 	AlertsOverviewTableCol,
 } from '../alerts.types';
-import { get, without } from 'lodash-es';
+import { without } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -113,6 +113,16 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			end: parseISO(till),
 		});
 	};
+
+	const sortByInfo = useMemo(
+		() => [
+			{
+				id: filters.orderProp ?? 'fromDate',
+				desc: filters.orderDirection !== 'asc',
+			},
+		],
+		[filters]
+	);
 
 	const renderAlertsTable = (alerts: IPagination<Alert[]>): ReactNode => {
 		if (!alerts) {
@@ -251,6 +261,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 							data: alerts.items || [],
 							initialState: {
 								pageSize: 10,
+								sortBy: sortByInfo,
 							},
 						} as TableOptions<any>
 					}
@@ -325,7 +336,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		const now = new Date();
 		return {
 			title: activeAlert?.title || '',
-			message: activeAlert?.message,
+			message: activeAlert?.message || '',
 			fromDate: activeAlert?.fromDate
 				? new Date(activeAlert?.fromDate + 'Z') // Force date to be interpreted as a GMT time from the database => parse it as a Europe/Brussels time in the date object
 				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0),
@@ -471,7 +482,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setAction(null);
 		setActiveAlert(null);
 		setFormMessage(undefined);
-		reset();
+		setTimeout(() => {
+			// Wait for active alert to be set to undefined
+			reset(getDefaultValues());
+		}, 100);
 	};
 
 	const renderTitle = useMemo(() => {
@@ -550,16 +564,19 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						<IconPicker
 							options={GET_ALERTS_ICON_OPTIONS()}
 							onChange={(option) => {
-								const type: string = get(option, 'key', '');
+								const type: string | null =
+									(option as { key: string; value: string })?.key ?? null;
 
 								setForm((prev) => ({
 									...prev,
 									type,
 								}));
 							}}
-							value={GET_ALERTS_ICON_OPTIONS().find(
-								(option) => option.key === form.type
-							)}
+							value={
+								GET_ALERTS_ICON_OPTIONS().find(
+									(option) => option.key === form.type
+								) ?? null
+							}
 						/>
 					)}
 				/>
