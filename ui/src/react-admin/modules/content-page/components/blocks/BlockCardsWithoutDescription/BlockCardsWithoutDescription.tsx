@@ -6,8 +6,10 @@ import { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockCardWithoutDescriptionProps {
 	title: string;
-	style: CardWithoutDescriptionStyleOption;
 	image?: string;
+	style: CardWithoutDescriptionStyleOption;
+	textColor: string;
+	backgroundColor: string;
 }
 
 export interface BlockCardsWithoutDescriptionProps extends DefaultComponentProps {
@@ -18,17 +20,20 @@ export const BlockCardsWithoutDescription: FunctionComponent<BlockCardsWithoutDe
 	className,
 	elements,
 }): ReactElement => {
-	console.log({ elements });
-
 	const renderCard = (
-		{ title, style, image }: BlockCardWithoutDescriptionProps,
+		{ title, style, image, backgroundColor, textColor }: BlockCardWithoutDescriptionProps,
 		i: number
 	): ReactElement => (
 		<div
 			className="c-block-cards-without-description__card"
 			key={`c-block-cards-without-description__card--${i}`}
 		>
-			<p className="c-block-cards-without-description__title">{title}</p>
+			<p
+				style={{ color: textColor, backgroundColor }}
+				className="c-block-cards-without-description__title"
+			>
+				{title}
+			</p>
 			{image && (
 				<Image
 					src={image}

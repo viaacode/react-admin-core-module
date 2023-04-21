@@ -441,6 +441,8 @@ export interface ThreeClickableTilesBlockComponentState {
 
 export interface CardWithoutDescriptionBlockComponentState {
 	title: string;
-	style: CardWithoutDescriptionStyleOption;
 	image?: string;
+	style: CardWithoutDescriptionStyleOption;
+	textColor: string;
+	backgroundColor: string;
 }
