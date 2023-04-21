@@ -14,7 +14,7 @@ export const ALERTS_PATH = {
 
 export const ALERTS_QUERY_PARAM_CONFIG = {
 	orderProp: withDefault(StringParam, 'fromDate'),
-	orderDirection: withDefault(SortDirectionParam, 'asc'),
+	orderDirection: withDefault(SortDirectionParam, 'desc'),
 	page: withDefault(NumberParam, 1),
 };
 
