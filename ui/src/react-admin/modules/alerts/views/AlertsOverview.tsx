@@ -47,7 +47,7 @@ import {
 	AlertsOverviewProps,
 	AlertsOverviewTableCol,
 } from '../alerts.types';
-import { without } from 'lodash-es';
+import { isNil, without } from 'lodash-es';
 import { nlBE } from 'date-fns/locale';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -482,11 +482,14 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		setAction(null);
 		setActiveAlert(null);
 		setFormMessage(undefined);
-		setTimeout(() => {
-			// Wait for active alert to be set to undefined
-			reset(getDefaultValues());
-		}, 100);
 	};
+
+	useEffect(() => {
+		if (isNil(activeAlert)) {
+			// Reset the form when the blade is closed
+			reset(getDefaultValues());
+		}
+	}, [activeAlert]);
 
 	const renderTitle = useMemo(() => {
 		return (
