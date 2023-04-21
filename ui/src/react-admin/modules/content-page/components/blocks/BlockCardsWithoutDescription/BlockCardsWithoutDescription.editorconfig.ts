@@ -1,11 +1,11 @@
 import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
 import {
+	CardWithoutDescriptionBlockComponentState,
+	Color,
 	ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
 	DefaultContentBlockState,
-	CardWithoutDescriptionBlockComponentState,
-	Color,
 } from '../../../types/content-block.types';
 
 import {
@@ -40,29 +40,29 @@ export const INITIAL_CARDS_WITHOUT_DESCRIPTION_BLOCK_STATE = (): DefaultContentB
 export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/cards-without-description___cards'
+		'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___cards'
 	),
 	type: ContentBlockType.CardsWithoutDescription,
 	components: {
 		state: INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE(),
 		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/card-withouth-description___card'
+			'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___card'
 		),
 		fields: {
 			title: TEXT_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___label-is-verplicht'
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label-is-verplicht'
 				),
 				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/card-withouth-description___label'
+						'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			image: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___image'
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
 				validator: undefined,
@@ -73,7 +73,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 			},
 			style: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___style'
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___style'
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
@@ -82,12 +82,12 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 			},
 			textColor: FOREGROUND_COLOR_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___tekst-kleur'
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tekst-kleur'
 				)
 			),
 			backgroundColor: BACKGROUND_COLOR_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/card-withouth-description___achtergrondkleur'
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___achtergrondkleur-van-de-card'
 				),
 				isAvo()
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]

@@ -221,7 +221,9 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		return (
 			<ErrorView
 				icon={'alertTriangle' as IconName}
-				message={AdminConfigManager.getConfig().services.i18n.tHtml('Error')}
+				message={AdminConfigManager.getConfig().services.i18n.tHtml(
+					'react-admin/modules/content-page/components/blocks/block-page-overview/block-page-overview___error'
+				)}
 			>
 				<p>
 					{AdminConfigManager.getConfig().services.i18n.tHtml(
