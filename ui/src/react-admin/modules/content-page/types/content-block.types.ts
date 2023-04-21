@@ -434,7 +434,6 @@ export interface TagsWithLinkBlockComponentState {
 }
 
 export interface ThreeClickableTilesBlockComponentState {
-	title: string;
 	subtitle: string;
 	source: string;
 	link?: ButtonAction;
