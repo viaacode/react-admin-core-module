@@ -29,8 +29,8 @@
     "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json",
-    "list-of-changed-translations-hetarchief": "git diff 4a80799c7cbcd04cc06785da309442641ce62357 2ccf2c37a3c0a105e6d5142cfd99bf680ac9e1ba --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/hetArchief/nl.json > translation-changes.txt",
-    "list-of-changed-translations-avo": "git diff 4a80799c7cbcd04cc06785da309442641ce62357 2ccf2c37a3c0a105e6d5142cfd99bf680ac9e1ba --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt"
+    "list-of-changed-translations-hetarchief": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/hetArchief/nl.json > translation-changes.txt",
+    "list-of-changed-translations-avo": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt"
   },
   "peerDependencies": {
     "@meemoo/react-components": "2.25.7",
