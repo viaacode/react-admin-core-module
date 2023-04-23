@@ -44,7 +44,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 					'o-block-image__page-header-image': width === 'page-header',
 				}
 			)}
-			style={style}
+			style={style as any}
 		>
 			{width !== 'page-header' && (
 				<Image src={imageSource} alt={imageDescription || title || text} wide />

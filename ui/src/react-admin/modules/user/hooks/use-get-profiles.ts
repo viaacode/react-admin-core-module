@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { Avo } from '@viaa/avo2-types';
 import { UserService } from '~modules/user/user.service';
 import { UserOverviewTableCol, USERS_PER_PAGE } from '~modules/user/user.types';
@@ -13,7 +13,9 @@ export interface GetProfileArguments {
 	itemsPerPage?: number;
 }
 
-export const useGetProfiles = (getProfileArguments?: GetProfileArguments) => {
+export const useGetProfiles = (
+	getProfileArguments?: GetProfileArguments
+): UseQueryResult<[Avo.User.CommonUser[], number]> => {
 	return useQuery([QUERY_KEYS.GET_PROFILES, getProfileArguments], (props) => {
 		const getProfileArgs = props.queryKey[1] as GetProfileArguments;
 		if (!getProfileArgs) {

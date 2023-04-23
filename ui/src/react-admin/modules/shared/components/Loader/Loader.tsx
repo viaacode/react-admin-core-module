@@ -1,4 +1,4 @@
-import { Spinner } from '@viaa/avo2-components';
+import { Spinner, SpinnerProps } from '@viaa/avo2-components';
 import React, { FC } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -11,7 +11,7 @@ const Loader: FC<DefaultComponentProps> = (props) => {
 		const LoaderComponent = componentsConfig?.loader.component;
 		return <LoaderComponent {...props} />;
 	} else {
-		return <Spinner {...props} />;
+		return <Spinner {...(props as SpinnerProps)} />;
 	}
 };
 
