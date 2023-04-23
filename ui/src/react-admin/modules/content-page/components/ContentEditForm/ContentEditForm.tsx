@@ -12,7 +12,7 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import { RichEditorState } from '@meemoo/react-components/dist/esm';
+import type { RichEditorState } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';

@@ -47,7 +47,7 @@ import {
 	getKeyPrefix,
 } from '~modules/translations/helpers/database-conversions';
 import Html from '~shared/components/Html/Html';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({

@@ -1,12 +1,10 @@
 import { DefaultProps } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import moment from 'moment';
-import 'moment/locale/nl-be';
+import { format, parseISO } from 'date-fns';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import React, { FunctionComponent } from 'react';
 
 import './BlockKlaar.scss';
-
-moment.locale('nl-be');
 
 export interface BlockKlaarProps extends DefaultProps {
 	className?: string;
@@ -19,7 +17,11 @@ export const BlockKlaar: FunctionComponent<BlockKlaarProps> = ({ className, date
 		<div className="klaar-header__logo">
 			<span>KLAAR</span>
 		</div>
-		{date && <div className="klaar-header__date">{moment(date).format('LL')}</div>}
+		{date && (
+			<div className="klaar-header__date">
+				{format(parseISO(date), 'PP', { locale: nlBE })}
+			</div>
+		)}
 		<div className="klaar-header__titles">{(titles || []).join(' • ')}</div>
 	</div>
 );

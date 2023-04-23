@@ -1,5 +1,5 @@
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
-import { endOfDay, isAfter, isBefore, parseISO } from 'date-fns';
+import { endOfDay, isAfter, isBefore, isWithinInterval, parseISO } from 'date-fns';
 
 export function hasTempAccess(tempAccess?: UserTempAccess): boolean | null {
 	if (!tempAccess?.from && !tempAccess?.until) {
@@ -17,7 +17,7 @@ export function hasTempAccess(tempAccess?: UserTempAccess): boolean | null {
 	} else {
 		const fromDate = parseISO(tempAccess.from as string);
 		const untilDate = endOfDay(parseISO(tempAccess.until as string));
-		hasAccess = isAfter(now, fromDate) && isBefore(now, untilDate);
+		hasAccess = isWithinInterval(now, { start: fromDate, end: untilDate });
 	}
 
 	return hasAccess;

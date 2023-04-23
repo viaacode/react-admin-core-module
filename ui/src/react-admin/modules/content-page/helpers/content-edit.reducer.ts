@@ -1,7 +1,6 @@
 import { RichEditorState } from '@meemoo/react-components';
 import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
-import moment from 'moment';
 import { Reducer } from 'react';
 import { Avo } from '@viaa/avo2-types';
 
@@ -126,8 +125,8 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		publishAt: '',
 		depublishAt: '',
 		isPublic: false,
-		createdAt: moment().toISOString(),
-		updatedAt: moment().toISOString(),
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString(),
 		publishedAt: null,
 		userProfileId: null,
 		userGroupIds: [],

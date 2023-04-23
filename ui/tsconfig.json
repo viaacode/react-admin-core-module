@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["node", "vite/client"],
+    "module": "esnext",
+    "moduleResolution": "Node",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,8 +12,6 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strictNullChecks": true,

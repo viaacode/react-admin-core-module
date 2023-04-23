@@ -1,7 +1,6 @@
 import { IPagination } from '@studiohyperdrive/pagination';
 import { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
-import moment from 'moment';
 import { stringifyUrl } from 'query-string';
 import { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
@@ -303,7 +302,7 @@ export class ContentPageService {
 			contentToInsert.depublishAt = null;
 			contentToInsert.publishAt = null;
 			contentToInsert.path = null;
-			contentToInsert.createdAt = moment().toISOString();
+			contentToInsert.createdAt = new Date().toISOString();
 			contentToInsert.updatedAt = contentToInsert.createdAt;
 			contentToInsert.userProfileId = profileId;
 

@@ -17,7 +17,7 @@ import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
-import { nlBE } from 'date-fns/locale';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { formatDateString } from '~shared/helpers/formatters/date';
 
 import {

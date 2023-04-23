@@ -1,12 +1,9 @@
 import { DefaultProps } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import moment from 'moment';
-import 'moment/locale/nl-be';
+import { format, parseISO } from 'date-fns';
 import React, { FunctionComponent } from 'react';
 
 import './BlockUitgeklaard.scss';
-
-moment.locale('nl-be');
 
 export interface BlockUitgeklaardProps extends DefaultProps {
 	className?: string;
@@ -23,7 +20,7 @@ export const BlockUitgeklaard: FunctionComponent<BlockUitgeklaardProps> = ({
 		<div className="uitgeklaard-header__logo">
 			<span>Uitgeklaard</span>
 		</div>
-		{date && <div className="uitgeklaard-header__date">{moment(date).format('LL')}</div>}
+		{date && <div className="uitgeklaard-header__date">{format(parseISO(date), 'PP')}</div>}
 		<div className="uitgeklaard-header__titles">{(titles || []).join(' • ')}</div>
 	</div>
 );

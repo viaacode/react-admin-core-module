@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { isAfter, isBefore, isWithinInterval, parseISO } from 'date-fns';
 import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 export function getPublishedState(
@@ -35,21 +35,23 @@ export function getPublishedDate(
 	}
 
 	if (publishAt && depublishAt) {
-		if (moment().isBetween(moment(publishAt), moment(depublishAt))) {
+		if (
+			isWithinInterval(new Date(), { start: parseISO(publishAt), end: parseISO(depublishAt) })
+		) {
 			return publishAt;
 		}
 		return null;
 	}
 
 	if (publishAt) {
-		if (moment().isAfter(moment(publishAt))) {
+		if (isAfter(new Date(), parseISO(publishAt))) {
 			return publishAt;
 		}
 		return null;
 	}
 
 	if (depublishAt) {
-		if (moment().isBefore(moment(depublishAt))) {
+		if (isBefore(new Date(), parseISO(depublishAt))) {
 			return new Date().toISOString();
 		}
 		return null;
