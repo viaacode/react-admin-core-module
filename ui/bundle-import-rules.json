@@ -1,0 +1,11 @@
+{
+  "forbidden": [
+    {
+      "name": "demo-files",
+      "comment": "Don't include files from the demo app into the admin-core-ui bundle, since the demo app is only for testing the admin-core-ui components",
+      "severity": "error",
+      "from": { "path": "^src/react-admin" },
+      "to": { "pathNot": "^src/react-admin" }
+    }
+  ]
+}

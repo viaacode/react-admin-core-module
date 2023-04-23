@@ -37,7 +37,9 @@
     "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json",
     "list-of-changed-translations-hetarchief": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/hetArchief/nl.json > translation-changes.txt",
-    "list-of-changed-translations-avo": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt"
+    "list-of-changed-translations-avo": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt",
+    "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
+    "list-bundled-files": "npx depcruise src/react-admin --include-only \"^src\" --output-type text"
   },
   "peerDependencies": {
     "@hookform/resolvers": "^2.9.11",
@@ -122,6 +124,8 @@
     "bump-package-versions": "^1.0.2",
     "cross-env": "^7.0.3",
     "customize-cra": "1.0.0",
+    "dependency-cruiser": "^12.11.3",
+    "dependency-tree": "^9.0.0",
     "dompurify": "^2.4.1",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^7.2.1",
