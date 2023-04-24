@@ -13,7 +13,7 @@
   "scripts": {
     "preinstall": "npx force-resolutions",
     "install-local": "npm i ../../react-components ../../avo2-components",
-    "prepare----disabled-since-it-is-throwing-errors": "husky install",
+    "prepare": "cd .. && husky install",
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "__prebuild": "rimraf dist",
     "build": "tsc && vite build",
