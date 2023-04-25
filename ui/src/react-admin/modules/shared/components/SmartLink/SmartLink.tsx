@@ -46,10 +46,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_self"
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							title={title}
-							onClick={() => {
-								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
-								!anchor && scrollTo({ top: 0 });
-							}}
+							onClick={() =>
+								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+							}
 						>
 							{children}
 						</a>
@@ -81,10 +80,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target="_blank"
 							rel="noopener noreferrer"
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
-							onClick={() => {
-								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
-								!anchor && scrollTo({ top: 0 });
-							}}
+							onClick={() =>
+								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+							}
 							title={title}
 						>
 							{children}
@@ -98,10 +96,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
-						onClick={() => {
-							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
-							!anchor && scrollTo({ top: 0 });
-						}}
+						onClick={() =>
+							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
+						}
 						title={title}
 					>
 						{children}
