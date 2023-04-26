@@ -26,7 +26,8 @@ export type BlockGridFormatOption =
 	| '4:3'
 	| '2:1'
 	| '6:9'
-	| '400x150';
+	| '400x150'
+	| '384x220';
 
 export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
 
