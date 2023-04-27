@@ -127,6 +127,7 @@ export enum ContentBlockType {
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
 	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
+	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
 }
 
 export enum ContentBlockEditor {
@@ -445,4 +446,20 @@ export interface CardWithoutDescriptionBlockComponentState {
 	style: CardWithoutDescriptionStyleOption;
 	textColor: string;
 	backgroundColor: string;
+}
+
+export interface ImageTextBackgroundBlockComponentState {
+	heading: string;
+	headingType: HeadingTypeOption;
+	content: string;
+	foregroundColor: Color;
+	backgroundColor: Color;
+	image?: string;
+	contentAlignment?: AlignOption;
+	buttonAction?: ButtonAction;
+	buttonAltTitle?: string;
+	buttonLabel: string;
+	buttonType?: ButtonType;
+	buttonIcon?: IconName;
+	buttonIconAlignment?: AlignOption;
 }

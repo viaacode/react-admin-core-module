@@ -28,6 +28,7 @@ import {
 	INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE,
 	INITIAL_UITGEKLAARD_BLOCK_STATE,
 	INITIAL_USP_GRID_COMPONENTS_STATE,
+	INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE,
 } from '~modules/content-page/components/blocks';
 import { ContentBlockComponentState, ContentBlockType } from '../types/content-block.types';
 
@@ -66,4 +67,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.ThreeClickableTiles]: INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE,
 	[ContentBlockType.TagsWithLink]: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE,
 	[ContentBlockType.CardsWithoutDescription]: INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE,
+	[ContentBlockType.ImageTextBackground]: INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE,
 };

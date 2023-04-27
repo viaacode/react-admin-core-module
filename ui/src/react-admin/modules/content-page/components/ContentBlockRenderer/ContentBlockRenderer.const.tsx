@@ -11,6 +11,7 @@ import {
 	BlockIFrame,
 	BlockImage,
 	BlockImageGridWrapper,
+	BlockImageTextBackground,
 	BlockImageTitleTextButtonWrapper,
 	BlockIntro,
 	BlockKlaar,
@@ -65,6 +66,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.ThreeClickableTiles]: BlockThreeClickableTiles,
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
+		[ContentBlockType.ImageTextBackground]: BlockImageTextBackground,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),

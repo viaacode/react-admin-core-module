@@ -23,6 +23,7 @@ export * from './BlockContentPageMeta';
 export * from './BlockThreeClickableTiles';
 export * from './BlockTagsWithLink';
 export * from './BlockCardsWithoutDescription';
+export * from './BlockImageTextBackground';
 
 export * from './anchor-links';
 export * from './defaults';
