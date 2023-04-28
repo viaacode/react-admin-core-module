@@ -3,7 +3,7 @@ import { FunctionComponent, ReactElement } from 'react';
 import {
 	Color,
 	HeadingTypeOption,
-	AlignOption,
+	SimpleAlignOption,
 } from '~modules/content-page/types/content-block.types';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
@@ -17,13 +17,13 @@ export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;
-	contentAlignment?: AlignOption;
+	contentAlignment?: SimpleAlignOption;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
 	buttonType?: ButtonType;
 	buttonIcon?: IconName;
-	buttonIconAlignment?: AlignOption;
+	buttonIconAlignment?: SimpleAlignOption;
 }
 
 export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroundProps> = ({
@@ -34,7 +34,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	foregroundColor,
 	backgroundColor,
 	image,
-	contentAlignment = 'right',
+	contentAlignment,
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,

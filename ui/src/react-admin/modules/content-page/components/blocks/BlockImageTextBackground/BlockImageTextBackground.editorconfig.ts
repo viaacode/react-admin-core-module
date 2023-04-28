@@ -23,8 +23,7 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
-import { GET_BUTTON_TYPE_OPTIONS } from '~modules/content-page/const/get-button-type-options';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
@@ -127,7 +126,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_ALIGN_OPTIONS(),
+					options: GET_SIMPLE_ALIGN_OPTIONS(),
 				},
 			},
 			contentAlignment: {
@@ -136,7 +135,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_ALIGN_OPTIONS(),
+					options: GET_SIMPLE_ALIGN_OPTIONS(),
 				},
 			},
 			foregroundColor: FOREGROUND_COLOR_FIELD(

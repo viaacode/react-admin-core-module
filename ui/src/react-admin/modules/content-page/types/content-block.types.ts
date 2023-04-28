@@ -18,6 +18,8 @@ import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
 
+export type SimpleAlignOption = Omit<AlignOption, 'center'>;
+
 export type FillOption = 'cover' | 'contain' | 'auto';
 
 export type BlockGridFormatOption =
@@ -461,5 +463,5 @@ export interface ImageTextBackgroundBlockComponentState {
 	buttonLabel: string;
 	buttonType?: ButtonType;
 	buttonIcon?: IconName;
-	buttonIconAlignment?: AlignOption;
+	buttonIconAlignment?: SimpleAlignOption;
 }
