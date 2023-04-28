@@ -39,4 +39,10 @@ export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOp
 		),
 		value: '400x150',
 	},
+	{
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'admin/content-block/content-block___384-x-220'
+		),
+		value: '384x220',
+	},
 ];
