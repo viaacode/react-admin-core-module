@@ -9,6 +9,7 @@ import { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
 import { Button, ButtonAction, ButtonType, IconName, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import { Icon } from '~modules/shared/components';
 
 export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;
@@ -40,8 +41,9 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	buttonLabel,
 	buttonType,
 	buttonIcon,
-	buttonIconAlignment = 'right',
+	buttonIconAlignment = 'left',
 }): ReactElement => {
+	console.log({ buttonIcon });
 	return (
 		<article
 			className={classnames(
@@ -63,10 +65,12 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					generateSmartLink(
 						buttonAction,
 						<Button
-							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${contentAlignment}`}
-							icon={buttonIcon}
+							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment}`}
 							label={buttonLabel}
 							type={buttonType}
+							icon={buttonIcon}
+							iconPosition={buttonIconAlignment}
+							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

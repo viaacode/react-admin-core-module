@@ -35,6 +35,7 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		backgroundColor: Color.White,
 		contentAlignment: 'right',
 		buttonLabel: '',
+		buttonIconAlignment: 'left',
 	});
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlockState =>

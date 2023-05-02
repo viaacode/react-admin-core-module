@@ -18,7 +18,7 @@ import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
 
-export type SimpleAlignOption = Omit<AlignOption, 'center'>;
+export type SimpleAlignOption = 'left' | 'right';
 
 export type FillOption = 'cover' | 'contain' | 'auto';
 
