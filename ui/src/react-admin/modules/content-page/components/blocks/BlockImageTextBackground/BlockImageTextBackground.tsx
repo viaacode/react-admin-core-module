@@ -43,7 +43,6 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	buttonIcon,
 	buttonIconAlignment = 'left',
 }): ReactElement => {
-	console.log({ buttonIcon });
 	return (
 		<article
 			className={classnames(

@@ -9,8 +9,6 @@ interface IconProps {
 }
 
 const Icon: FC<IconProps> = ({ name, className }) => {
-	console.log({ name });
-
 	const iconConfig = AdminConfigManager.getConfig().icon;
 	const iconProps = ((iconConfig?.componentProps as any)?.[name] as {
 		name: string;
