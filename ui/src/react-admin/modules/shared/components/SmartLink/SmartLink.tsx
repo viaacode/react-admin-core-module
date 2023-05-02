@@ -27,7 +27,8 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 }) => {
 	const renderLink = (
 		url: string,
-		target: LinkTarget = LinkTarget.Self
+		target: LinkTarget = LinkTarget.Self,
+		anchor?: boolean
 	): ReactElement<any, any> | null => {
 		let fullUrl = url;
 		if (url.startsWith('www.')) {
@@ -58,9 +59,10 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					<Link
 						to={fullUrl}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
-						onClick={() =>
-							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
-						}
+						onClick={() => {
+							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
+							!anchor && scrollTo({ top: 0 });
+						}}
 						title={title}
 					>
 						{children}
@@ -157,7 +159,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					const urlWithoutQueryOrAnchor = window.location.href
 						.split('?')[0]
 						.split('#')[0];
-					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget);
+					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
 				}
 				case ContentPickerType.FILE: {
 					return renderLink(value as string, LinkTarget.Blank);
