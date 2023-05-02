@@ -44,7 +44,7 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlock
 export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/image-text-background/image-text-background'
+		'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___admin-content-block-helpers-image-text-background-image-text-background'
 	),
 	type: ContentBlockType.ImageTextBackground,
 	components: {

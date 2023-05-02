@@ -67,6 +67,7 @@ function setConfig() {
 				ContentBlockType.TagsWithLink,
 				ContentBlockType.CardsWithoutDescription,
 				ContentBlockType.ImageTextBackground,
+				ContentBlockType.MaintainersGrid,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

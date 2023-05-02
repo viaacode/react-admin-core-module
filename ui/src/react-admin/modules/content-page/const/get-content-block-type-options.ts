@@ -184,6 +184,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.ImageTextBackground,
 		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'react-admin/modules/content-page/const/get-content-block-type-options___aanbieders-grid'
+			),
+			value: ContentBlockType.MaintainersGrid,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object
