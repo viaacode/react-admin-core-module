@@ -4,13 +4,15 @@ import { AdminConfigManager } from '~core/config';
 import { IconConfig } from '~core/config/config.types';
 
 interface IconProps {
-	name: keyof IconConfig['componentProps'];
+	name: string;
 	className?: string;
 }
 
 const Icon: FC<IconProps> = ({ name, className }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
-	const iconProps = (iconConfig?.componentProps?.[name] as { name: string }) ?? { name }; // Default to avo2 icons
+	const iconProps = ((iconConfig?.componentProps as any)?.[name] as {
+		name: string;
+	}) ?? { name }; // Default to avo2 icons
 	const IconComponent = iconConfig?.component ?? (() => null);
 
 	return <IconComponent {...iconProps} className={className} />;
