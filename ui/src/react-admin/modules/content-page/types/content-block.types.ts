@@ -131,6 +131,7 @@ export enum ContentBlockType {
 	TagsWithLink = 'TAGS_WITH_LINKS',
 	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
 	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
+	MaintainersGrid = 'MAINTAINERS_GRID',
 }
 
 export enum ContentBlockEditor {
@@ -465,4 +466,13 @@ export interface ImageTextBackgroundBlockComponentState {
 	buttonType?: ButtonType;
 	buttonIcon?: IconName;
 	buttonIconAlignment?: SimpleAlignOption;
+}
+
+export interface MaintainersGridBlockComponentState {
+	title: string;
+	titleType: HeadingTypeOption;
+	subtitle: string;
+	buttonLabel?: string;
+	buttonAction?: ButtonAction;
+	maintainers: { imageSrc?: string; linkAction?: ButtonAction }[];
 }

@@ -16,6 +16,7 @@ import {
 	BlockIntro,
 	BlockKlaar,
 	BlockLogoGridWrapper,
+	BlockMaintainersGrid,
 	BlockPageOverviewWrapper,
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
@@ -67,6 +68,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.ImageTextBackground]: BlockImageTextBackground,
+		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
