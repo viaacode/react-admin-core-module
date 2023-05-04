@@ -152,9 +152,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 
 	// Render
 	const owner: PickerItem | undefined = {
-		label: contentPageInfo.owner.fullName,
+		label: contentPageInfo.owner?.fullName,
 		type: ContentPickerType.PROFILE,
-		value: contentPageInfo.owner.id,
+		value: contentPageInfo.owner?.id,
 	};
 	return (
 		<Container mode="vertical" size="small">
