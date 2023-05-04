@@ -45,13 +45,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 					.map((maintainer, index) => {
 						return (
 							<li
-								key={
-									maintainer.linkAction?.value +
-									'--' +
-									maintainer.imageSrc +
-									'--' +
-									index
-								}
+								key={`${maintainer.linkAction?.value}-${maintainer.imageSrc}-${index}`}
 							>
 								<SmartLink action={maintainer.linkAction}>
 									<img
