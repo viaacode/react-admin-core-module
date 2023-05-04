@@ -218,11 +218,14 @@ export class ContentPageService {
 	}
 
 	// TODO figure out why this function is not used
-	public static async duplicateContentPageImages(id: number): Promise<ContentPageInfo> {
+	public static async duplicateContentPageImages(id: number | string): Promise<ContentPageInfo> {
 		try {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/duplicate`,
+					// This route lives in the proxy and not in the admin-core-api so we use content-pages/duplicate instead of admin/content-pages/duplicate
+					url: `${
+						AdminConfigManager.getConfig().database.proxyUrl
+					}/content-pages/duplicate`,
 					query: {
 						id,
 					},
@@ -295,7 +298,7 @@ export class ContentPageService {
 		profileId: string
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const contentToInsert = { ...contentPageInfo };
+			const contentToInsert = await this.duplicateContentPageImages(contentPageInfo.id);
 
 			// update attributes specific to duplicate
 			contentToInsert.isPublic = false;
