@@ -25,6 +25,7 @@ export * from './BlockTagsWithLink';
 export * from './BlockCardsWithoutDescription';
 export * from './BlockImageTextBackground';
 export * from './BlockMaintainersGrid';
+export * from './BlockHetArchiefHeaderSearch';
 
 export * from './anchor-links';
 export * from './defaults';

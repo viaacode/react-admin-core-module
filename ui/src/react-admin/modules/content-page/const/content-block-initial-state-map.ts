@@ -1,3 +1,4 @@
+import { INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import {
 	INITIAL_ANCHOR_LINKS_COMPONENTS_STATE,
 	INITIAL_BUTTONS_COMPONENTS_STATE,
@@ -70,4 +71,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.CardsWithoutDescription]: INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE,
 	[ContentBlockType.ImageTextBackground]: INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE,
 	[ContentBlockType.MaintainersGrid]: INITIAL_MAINTAINERS_GRID_BLOCK_STATE,
+	[ContentBlockType.HetArchiefHeaderSearch]: INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE,
 };
