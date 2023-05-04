@@ -132,6 +132,7 @@ export enum ContentBlockType {
 	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
 	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
 	MaintainersGrid = 'MAINTAINERS_GRID',
+	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
 }
 
 export enum ContentBlockEditor {
@@ -475,4 +476,10 @@ export interface MaintainersGridBlockComponentState {
 	buttonLabel?: string;
 	buttonAction?: ButtonAction;
 	maintainers: { imageSrc?: string; linkAction?: ButtonAction }[];
+}
+
+export interface HetArchiefHeaderSearchBlockComponentState {
+	title: string;
+	subtitles: { label: string }[];
+	textBelowSearch?: string;
 }
