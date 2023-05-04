@@ -1,3 +1,4 @@
+import { HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG } from '~content-blocks/BlockHetArchiefHeaderSearch/BlockHetArchiefHeaderSearch.editorconfig';
 import {
 	ANCHOR_LINKS_BLOCK_CONFIG,
 	BUTTONS_BLOCK_CONFIG,
@@ -68,4 +69,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.CardsWithoutDescription]: CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG,
 	[ContentBlockType.ImageTextBackground]: IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG,
 	[ContentBlockType.MaintainersGrid]: MAINTAINERS_GRID_BLOCK_CONFIG,
+	[ContentBlockType.HetArchiefHeaderSearch]: HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG,
 };

@@ -1,5 +1,6 @@
 import { FC, FunctionComponent } from 'react';
 import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
+import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';
 import {
 	BlockButtonsWrapper,
@@ -69,6 +70,9 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
 		[ContentBlockType.ImageTextBackground]: BlockImageTextBackground,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
+
+		// Het archief specific blocks
+		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),

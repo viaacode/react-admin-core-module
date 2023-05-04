@@ -68,6 +68,7 @@ function setConfig() {
 				ContentBlockType.CardsWithoutDescription,
 				ContentBlockType.ImageTextBackground,
 				ContentBlockType.MaintainersGrid,
+				ContentBlockType.HetArchiefHeaderSearch,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
