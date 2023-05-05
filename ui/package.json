@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "private": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -33,7 +33,7 @@
     "list-of-changed-translations-avo": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix src/shared/translations/avo/nl.json > translation-changes.txt"
   },
   "peerDependencies": {
-    "@meemoo/react-components": "2.25.7",
+    "@meemoo/react-components": "2.25.8",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "^4.14.1",
     "@viaa/avo2-components": "3.6.2",
