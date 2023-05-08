@@ -6,6 +6,7 @@ import {
 	DefaultContentBlockState,
 	ThreeClickableTilesBlockComponentState,
 } from '../../../types/content-block.types';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
@@ -15,8 +16,9 @@ import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUploa
 export const INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE =
 	(): ThreeClickableTilesBlockComponentState[] => [
 		{
-			subtitle: '',
-			source: '',
+			title: '',
+			image: '',
+			titleType: 'h4',
 		},
 	];
 
@@ -39,7 +41,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		},
 		state: INITIAL_THREE_CLICKABLE_TILES_COMPONENTS_STATE(),
 		fields: {
-			imgSource: FILE_FIELD(
+			image: FILE_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/three-clickable-tiles___afbeelding-is-verplicht'
 				),
@@ -50,7 +52,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),
-			subtitle: TEXT_FIELD(
+			title: TEXT_FIELD(
 				AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
 				),
@@ -61,6 +63,15 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
+			titleType: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/content-block/helpers/generators/heading___type'
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_HEADING_TYPE_OPTIONS(),
+				},
+			},
 			link: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/three-clickable-tiles___link'
