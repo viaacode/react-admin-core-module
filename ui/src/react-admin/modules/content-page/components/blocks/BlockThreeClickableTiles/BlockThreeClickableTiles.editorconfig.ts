@@ -71,6 +71,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						ContentPickerType.ANCHOR_LINK,
 						ContentPickerType.INTERNAL_LINK,
 						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.CONTENT_PAGE,
 					],
 				},
 			},
