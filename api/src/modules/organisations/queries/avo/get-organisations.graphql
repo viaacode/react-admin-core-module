@@ -1,0 +1,7 @@
+query getOrganisations($ids: [String!]) {
+	shared_organisations(where: { or_id: { _in: $ids } }) {
+		or_id
+		name
+		logo_url
+	}
+}

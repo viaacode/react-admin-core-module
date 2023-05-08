@@ -1,3 +1,4 @@
+import { Organisation } from '../organisations';
 import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
 import { PermissionName } from '@viaa/avo2-types';
@@ -46,7 +47,7 @@ export interface DeleteContentCounts {
 export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
 	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
 export type UserInfoOverviewHetArchief =
-	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];
+	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0] & { organisation?: Organisation };
 
 export enum UserInfoType {
 	AvoUserUser = 'AvoUserUser',

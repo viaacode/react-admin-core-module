@@ -2,6 +2,7 @@ import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
+import { AdminOrganisationsService, Organisation } from '../organisations';
 import {
 	BulkAddSubjectsToProfilesDocument,
 	BulkAddSubjectsToProfilesMutation,
@@ -40,6 +41,7 @@ import {
 export class UsersService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+		protected adminOrganisationsService: AdminOrganisationsService
 	) {}
 
 	async getById(id: string): Promise<Avo.User.CommonUser> {
@@ -61,7 +63,7 @@ export class UsersService {
 
 			return convertUserInfoToCommonUser(
 				response.users_summary_view[0],
-				UserInfoType.UserInfoOverviewAvo,
+				UserInfoType.UserInfoOverviewAvo
 			);
 		} catch (err) {
 			throw CustomError('Failed to get profiles from the database', err, {
@@ -77,7 +79,7 @@ export class UsersService {
 		sortColumn: UserOverviewTableCol,
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
-		where: any = {},
+		where: any = {}
 	): Promise<[Avo.User.CommonUser[], number]> {
 		let variables: any;
 		try {
@@ -97,31 +99,59 @@ export class UsersService {
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
-					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT(),
+					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
 				),
 			};
 
-			const response = await this.dataService.execute<
-				UserQueryTypes['GetUsersQuery']
-			>(USER_QUERIES[getDatabaseType()].GetUsersDocument, variables);
+			const response = await this.dataService.execute<UserQueryTypes['GetUsersQuery']>(
+				USER_QUERIES[getDatabaseType()].GetUsersDocument,
+				variables
+			);
 
 			const avoResponse = response as UserQueryTypes['GetProfileNamesQueryAvo'];
-			const hetArchiefResponse =
-				response as UserQueryTypes['GetProfileNamesQueryHetArchief'];
+			const hetArchiefResponse = response as UserQueryTypes['GetProfileNamesQueryHetArchief'];
 
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
 				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
+
+			if (isHetArchief()) {
+				// Organisations can be linked in 2 ways
+				// * users.profile => maintainer.users_profile => content_partner.schema_identifier
+				// * users.profile.organisation_schema_identifier => maintainer.organisation
+				//
+				// We can fetch the first link directly since it has a hasura relationship
+				// But the second one cannot be fetched directly since there is no relationship, since we recache the organisations every night and a foreign key would prevent that
+				// So we need to fetch the organisations in a separate database call
+				const organisationInfos = await this.adminOrganisationsService.getOrganisations(
+					compact(
+						userProfileObjects.map(
+							(profile) =>
+								(profile as UserInfoOverviewHetArchief)
+									.organisation_schema_identifier
+						)
+					)
+				);
+				userProfileObjects.forEach((profile) => {
+					const hetArchiefProfile = profile as UserInfoOverviewHetArchief & {
+						organisation?: Organisation;
+					};
+					hetArchiefProfile.organisation = organisationInfos.find(
+						(org) => org.id === hetArchiefProfile.organisation_schema_identifier
+					);
+				});
+			}
+
 			const profiles: Avo.User.CommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
 					return convertUserInfoToCommonUser(
 						userInfo,
 						isAvo()
 							? UserInfoType.UserInfoOverviewAvo
-							: UserInfoType.UserInfoOverviewHetArchief,
+							: UserInfoType.UserInfoOverviewHetArchief
 					);
-				}),
+				})
 			);
 
 			const profileCount =
@@ -144,9 +174,7 @@ export class UsersService {
 		}
 	}
 
-	async getNamesByProfileIds(
-		profileIds: string[],
-	): Promise<Partial<Avo.User.CommonUser>[]> {
+	async getNamesByProfileIds(profileIds: string[]): Promise<Partial<Avo.User.CommonUser>[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
@@ -158,29 +186,29 @@ export class UsersService {
 			/* istanbul ignore next */
 			if (isHetArchief()) {
 				return (
-					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])
-						?.users_profile || []
+					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])?.users_profile ||
+					[]
 				).map(
 					(
-						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0],
+						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0]
 					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
-					}),
+					})
 				);
 			} else {
 				return (
-					(response as UserQueryTypes['GetProfileNamesQueryAvo'])
-						?.users_summary_view || []
+					(response as UserQueryTypes['GetProfileNamesQueryAvo'])?.users_summary_view ||
+					[]
 				).map(
 					(
-						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0],
+						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0]
 					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.profile_id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
-					}),
+					})
 				);
 			}
 		} catch (err) {
@@ -192,7 +220,7 @@ export class UsersService {
 	}
 
 	async getProfileIds(
-		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where'],
+		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
 	): Promise<string[]> {
 		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null;
 		try {
@@ -208,17 +236,16 @@ export class UsersService {
 				// avo
 				return compact(
 					(
-						(response as UserQueryTypes['GetProfileIdsQueryAvo'])
-							.users_summary_view || []
-					).map((user) => user?.profile_id),
+						(response as UserQueryTypes['GetProfileIdsQueryAvo']).users_summary_view ||
+						[]
+					).map((user) => user?.profile_id)
 				);
 			}
 			// archief
 			return compact(
 				(
-					(response as UserQueryTypes['GetProfileIdsQueryHetArchief'])
-						.users_profile || []
-				).map((user) => user?.id),
+					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
+				).map((user) => user?.id)
 			);
 		} catch (err) {
 			throw CustomError('Failed to get profile ids from the database', err, {
@@ -240,18 +267,12 @@ export class UsersService {
 			>(GetDistinctBusinessCategoriesDocument);
 
 			return compact(
-				(response.users_profiles || []).map(
-					(profile) => profile.business_category,
-				),
+				(response.users_profiles || []).map((profile) => profile.business_category)
 			);
 		} catch (err) {
-			throw CustomError(
-				'Failed to get distinct business categories from profiles',
-				err,
-				{
-					query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
-				},
-			);
+			throw CustomError('Failed to get distinct business categories from profiles', err, {
+				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
+			});
 		}
 	}
 
@@ -270,9 +291,9 @@ export class UsersService {
 				).map((idp) => idp.name as Idp);
 			}
 
-			return (
-				(response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []
-			).map((idp) => idp.value as Idp);
+			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
+				(idp) => idp.value as Idp
+			);
 		} catch (err) {
 			throw CustomError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
@@ -280,9 +301,7 @@ export class UsersService {
 		}
 	}
 
-	async fetchPublicAndPrivateCounts(
-		profileIds: string[],
-	): Promise<DeleteContentCounts> {
+	async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
 		if (isHetArchief()) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
@@ -311,29 +330,19 @@ export class UsersService {
 					(response.collectionBookmarks?.aggregate?.count || 0) +
 					(response.itemBookmarks?.aggregate?.count || 0),
 				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
-				privateContentPages:
-					response.privateContentPages?.aggregate?.count || 0,
+				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
 			};
 		} catch (err) {
-			throw CustomError(
-				'Failed to get content counts for users from the database',
-				err,
-				{
-					profileIds,
-					query: 'GET_CONTENT_COUNTS_FOR_USERS',
-				},
-			);
+			throw CustomError('Failed to get content counts for users from the database', err, {
+				profileIds,
+				query: 'GET_CONTENT_COUNTS_FOR_USERS',
+			});
 		}
 	}
 
-	async bulkAddSubjectsToProfiles(
-		subjects: string[],
-		profileIds: string[],
-	): Promise<void> {
+	async bulkAddSubjectsToProfiles(subjects: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info(
-				"adding subjects to profiles isn't supported for hetarchief",
-			);
+			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
 		}
 
@@ -351,8 +360,8 @@ export class UsersService {
 						profileIds.map((profileId) => ({
 							key: subject,
 							profile_id: profileId,
-						})),
-					),
+						}))
+					)
 				),
 			});
 		} catch (err) {
@@ -364,14 +373,9 @@ export class UsersService {
 		}
 	}
 
-	async bulkRemoveSubjectsFromProfiles(
-		subjects: string[],
-		profileIds: string[],
-	): Promise<void> {
+	async bulkRemoveSubjectsFromProfiles(subjects: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info(
-				"removing subjects from profiles isn't supported for hetarchief",
-			);
+			console.info("removing subjects from profiles isn't supported for hetarchief");
 			return;
 		}
 

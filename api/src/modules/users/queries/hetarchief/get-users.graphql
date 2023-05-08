@@ -4,18 +4,14 @@ query getUsers(
 	$orderBy: [users_profile_order_by!]!
 	$where: users_profile_bool_exp!
 ) {
-	users_profile(
-		offset: $offset
-		limit: $limit
-		order_by: $orderBy
-		where: $where
-	) {
+	users_profile(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
 		id
 		full_name
 		first_name
 		last_name
 		mail
 		last_access_at
+		organisation_schema_identifier
 		group {
 			label
 			name
