@@ -106,7 +106,6 @@ export interface AdminConfig {
 	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
-		mediaItemClicked?: (item: MediaListItem) => void;
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];
