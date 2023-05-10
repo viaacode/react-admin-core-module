@@ -82,7 +82,7 @@ export enum Color {
 	Platinum = '#F8F8F8',
 	Neutral = '#727272',
 	Zinc = '#ADADAD',
-	SkyBlue = '#7BC3D4',
+	SkyBlue = '#C3DDE6',
 }
 
 export enum GradientColor {
