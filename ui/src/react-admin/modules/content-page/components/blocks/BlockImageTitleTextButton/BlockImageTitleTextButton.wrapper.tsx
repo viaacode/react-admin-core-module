@@ -5,7 +5,7 @@ import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import Icon from '../../../../shared/components/Icon/Icon';
+import Icon from '~shared/components/Icon/Icon';
 
 export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockComponentState> = (
 	props
