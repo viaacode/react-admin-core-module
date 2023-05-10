@@ -85,6 +85,10 @@ export enum Color {
 	SkyBlue = '#7BC3D4',
 }
 
+export enum GradientColor {
+	BlackWhite = 'linear-gradient(180deg, #000 0%, #000 40%, #fff 40%, #fff 100%)',
+}
+
 export interface PaddingFieldState {
 	top: SpacerOption;
 	bottom: SpacerOption;

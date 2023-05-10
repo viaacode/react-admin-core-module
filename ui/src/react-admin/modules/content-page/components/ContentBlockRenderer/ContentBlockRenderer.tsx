@@ -129,7 +129,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 				'c-content-block__' + kebabCase(contentBlockConfig.type)
 			)}
 			style={{
-				backgroundColor: blockState.backgroundColor,
+				background: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
 			id={blockState.anchor}
@@ -152,7 +152,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					className="c-content-block__header-bg-color"
 					ref={headerBgRef}
 					style={{
-						backgroundColor: blockState.headerBackgroundColor,
+						background: blockState.headerBackgroundColor,
 					}}
 				/>
 				{blockState.fullWidth ? (

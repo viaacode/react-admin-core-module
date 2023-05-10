@@ -1,6 +1,6 @@
 import { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
-import { Color } from '../types/content-block.types';
+import { Color, GradientColor } from '../types/content-block.types';
 
 const transparentOption = () => ({
 	label: AdminConfigManager.getConfig().services.i18n.tText(
@@ -92,6 +92,12 @@ const skyBlueOption = () => ({
 	),
 	value: Color.SkyBlue,
 });
+const blackWhiteGradientOption = () => ({
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'modules/content-page/const/content-block___overgang-zwart-wit'
+	),
+	value: GradientColor.BlackWhite,
+});
 
 //
 export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
@@ -106,7 +112,9 @@ export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	yellowOption(),
 ];
 
-export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
+export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
+	Color | GradientColor
+>[] = () => [
 	transparentOption(),
 	whiteOption(),
 	oceanGreenOption(),
@@ -114,6 +122,7 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] =
 	platinumOption(),
 	blackOption(),
 	skyBlueOption(),
+	blackWhiteGradientOption(),
 ];
 
 export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [

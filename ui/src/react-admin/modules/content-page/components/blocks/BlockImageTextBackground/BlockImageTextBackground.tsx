@@ -49,7 +49,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 				`c-block-image-text-background c-block-image-text-background--${contentAlignment}`,
 				className
 			)}
-			style={{ backgroundColor }}
+			style={{ background: backgroundColor }}
 		>
 			<div
 				className="c-block-image-text-background__content-wrapper"
