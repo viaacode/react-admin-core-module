@@ -86,6 +86,12 @@ const zincOption = () => ({
 	),
 	value: Color.Zinc,
 });
+const skyBlueOption = () => ({
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'modules/content-page/const/content-block___sky-blauw'
+	),
+	value: Color.SkyBlue,
+});
 
 //
 export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
@@ -107,6 +113,7 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] =
 	seaGreenOption(),
 	platinumOption(),
 	blackOption(),
+	skyBlueOption(),
 ];
 
 export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [

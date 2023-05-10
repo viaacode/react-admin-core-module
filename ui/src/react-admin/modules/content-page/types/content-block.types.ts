@@ -77,11 +77,12 @@ export enum Color {
 	AlertAccent = '#E9E994',
 	TealBright200 = '#CFE3E9',
 	BorderColor = '#3FB1D6',
-	InputBoxShadow = '#69C2dF',
-	Transparent = 'transparent',
-	Platinum = '#f8f8f8',
+	InputBoxShadow = '#69C2DF',
+	Transparent = 'TRANSPARENT',
+	Platinum = '#F8F8F8',
 	Neutral = '#727272',
-	Zinc = '#adadad',
+	Zinc = '#ADADAD',
+	SkyBlue = '#7BC3D4',
 }
 
 export interface PaddingFieldState {
