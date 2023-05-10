@@ -79,9 +79,10 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [
-						ContentPickerType.ANCHOR_LINK,
+						ContentPickerType.CONTENT_PAGE,
 						ContentPickerType.INTERNAL_LINK,
 						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.ANCHOR_LINK,
 					],
 				},
 			},
