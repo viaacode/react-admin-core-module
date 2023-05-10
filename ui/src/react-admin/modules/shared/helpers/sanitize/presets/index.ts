@@ -24,6 +24,7 @@ export const basic: DOMPurify.Config = {
 		'sup',
 		'super',
 		'span',
+		'hr',
 	],
 	RETURN_DOM: false,
 	ADD_ATTR: ['target'], // Allow target _blank for links
