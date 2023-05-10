@@ -12,16 +12,11 @@ import {
 } from '../admin-organisations.types';
 import { DataService } from '../../data';
 import { sortBy } from 'lodash';
-import {
-	ORGANISATION_QUERIES,
-	OrganisationQueryTypes,
-} from '../queries/organization.queries';
+import { ORGANISATION_QUERIES, OrganisationQueryTypes } from '../queries/organization.queries';
 
 @Injectable()
 export class AdminOrganisationsService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public adapt(gqlOrganisation: GqlOrganisation): Organisation {
 		if (!gqlOrganisation) {
@@ -34,12 +29,14 @@ export class AdminOrganisationsService {
 		return {
 			id: hetArchiefOrganisation?.schema_identifier || avoOrganisation?.or_id,
 			name: hetArchiefOrganisation?.schema_name || avoOrganisation?.name,
-			logo_url:
-				hetArchiefOrganisation?.information?.logo?.iri ||
-				avoOrganisation?.logo_url,
+			logo_url: hetArchiefOrganisation?.information?.logo?.iri || avoOrganisation?.logo_url,
 		};
 	}
 
+	/**
+	 * @deprecated use getOrganisations instead
+	 * @param id
+	 */
 	public async getOrganisation(id: string): Promise<Organisation> {
 		const response = await this.dataService.execute<
 			OrganisationQueryTypes['GetOrganisationQuery'],
@@ -53,18 +50,33 @@ export class AdminOrganisationsService {
 			(response as OrganisationQueryTypes['GetOrganisationQueryAvo'])
 				?.shared_organisations?.[0] ||
 				(response as OrganisationQueryTypes['GetOrganisationQueryHetArchief'])
-					?.maintainer_content_partner?.[0],
+					?.maintainer_content_partner?.[0]
 		);
+	}
+
+	public async getOrganisations(ids: string[]): Promise<Organisation[]> {
+		const response = await this.dataService.execute<
+			OrganisationQueryTypes['GetOrganisationsQuery'],
+			OrganisationQueryTypes['GetOrganisationsQueryVariables']
+		>(ORGANISATION_QUERIES[getDatabaseType()].GetOrganisationsDocument, {
+			ids,
+		});
+
+		/* istanbul ignore next */
+		return (
+			(response as OrganisationQueryTypes['GetOrganisationsQueryAvo'])
+				?.shared_organisations ||
+			(response as OrganisationQueryTypes['GetOrganisationsQueryHetArchief'])
+				?.maintainer_content_partner ||
+			[]
+		).map(this.adapt);
 	}
 
 	public async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {
 		try {
 			const response = await this.dataService.execute<
 				OrganisationQueryTypes['GetOrganisationsWithUsersQuery']
-			>(
-				ORGANISATION_QUERIES[getDatabaseType()]
-					.GetOrganisationsWithUsersDocument,
-			);
+			>(ORGANISATION_QUERIES[getDatabaseType()].GetOrganisationsWithUsersDocument);
 
 			let organisations;
 			if (isAvo()) {
@@ -73,13 +85,9 @@ export class AdminOrganisationsService {
 				).shared_organisations_with_users;
 
 				if (!organisations) {
-					throw CustomError(
-						'Response does not contain any organisations',
-						null,
-						{
-							response,
-						},
-					);
+					throw CustomError('Response does not contain any organisations', null, {
+						response,
+					});
 				}
 			} else {
 				organisations = (

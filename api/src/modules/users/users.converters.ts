@@ -240,10 +240,15 @@ export function convertUserInfoToCommonUser(
 				),
 				organisation: {
 					name:
-						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ?? undefined,
-					or_id: profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
+						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
+						profile.organisation?.name ??
+						undefined,
+					or_id:
+						profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier ??
+						profile.organisation?.id,
 					logo_url:
-						profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
+						profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
+							?.iri ?? profile.organisation?.logo_url,
 					data: null,
 				},
 				lastAccessAt: profile.last_access_at,
