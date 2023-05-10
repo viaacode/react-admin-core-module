@@ -1,3 +1,4 @@
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -99,6 +100,14 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 							'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___logo-link'
 						),
 						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [
+								ContentPickerType.CONTENT_PAGE,
+								ContentPickerType.INTERNAL_LINK,
+								ContentPickerType.EXTERNAL_LINK,
+								ContentPickerType.ANCHOR_LINK,
+							],
+						},
 					},
 				},
 				type: 'fieldGroup',

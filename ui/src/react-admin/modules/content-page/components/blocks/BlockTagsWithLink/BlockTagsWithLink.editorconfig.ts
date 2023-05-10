@@ -50,9 +50,10 @@ export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig =>
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [
-						ContentPickerType.ANCHOR_LINK,
+						ContentPickerType.CONTENT_PAGE,
 						ContentPickerType.INTERNAL_LINK,
 						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.ANCHOR_LINK,
 					],
 				},
 			},
