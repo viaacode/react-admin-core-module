@@ -12,6 +12,7 @@ import {
 import clsx from 'clsx';
 import { isString } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
+import Icon from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -70,7 +71,15 @@ export const BlockHero: FunctionComponent<BlockHeroProps> = ({
 							{buttons.map(({ buttonAction, ...rest }, index: number) => {
 								return renderLink(
 									buttonAction,
-									<Button {...rest} key={`hero-button-${index}`} />,
+									<Button
+										{...rest}
+										key={`hero-button-${index}`}
+										renderIcon={
+											rest.icon
+												? () => <Icon name={rest.icon as string} />
+												: undefined
+										}
+									/>,
 									rest.label || rest.ariaLabel || rest.tooltip,
 									rest.altTitle || rest.label || rest.ariaLabel || rest.tooltip
 								);

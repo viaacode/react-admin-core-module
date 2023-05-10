@@ -1,3 +1,4 @@
+import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 
@@ -104,6 +105,15 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
+						},
+					},
+					buttonIconAlignment: {
+						label: AdminConfigManager.getConfig().services.i18n.tText(
+							'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___button-icon-alignment'
+						),
+						editorType: ContentBlockEditor.Select,
+						editorProps: {
+							options: GET_SIMPLE_ALIGN_OPTIONS(),
 						},
 					},
 					buttonAction: {

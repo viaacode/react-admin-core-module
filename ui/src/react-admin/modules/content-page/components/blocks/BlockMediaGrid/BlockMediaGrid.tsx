@@ -25,6 +25,7 @@ import { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
 import { get, last } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
+import Icon from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -131,7 +132,13 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 						</div>
 					)}
 					<Spacer margin="top-small">
-						<Button label={ctaButtonLabel} type={ctaButtonType} icon={ctaButtonIcon} />
+						<Button
+							label={ctaButtonLabel}
+							type={ctaButtonType}
+							renderIcon={
+								ctaButtonIcon ? () => <Icon name={ctaButtonIcon} /> : undefined
+							}
+						/>
 					</Spacer>
 				</div>
 			</>
@@ -170,7 +177,11 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 										<Button
 											label={buttonLabel}
 											type={buttonType}
-											icon={buttonIcon}
+											renderIcon={
+												buttonIcon
+													? () => <Icon name={buttonIcon} />
+													: undefined
+											}
 										/>,
 										mediaListItem.buttonLabel || mediaListItem.title,
 										mediaListItem.buttonAltTitle ||

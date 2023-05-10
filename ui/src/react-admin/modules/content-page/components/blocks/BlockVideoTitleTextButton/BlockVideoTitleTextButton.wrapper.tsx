@@ -5,6 +5,7 @@ import React, { FC } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
+import Icon from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~shared/services/permission-service';
 
@@ -90,7 +91,13 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 				{buttonAction &&
 					generateSmartLink(
 						buttonAction,
-						<Button icon={buttonIcon} label={buttonLabel} type={buttonType} />,
+						<Button
+							label={buttonLabel}
+							type={buttonType}
+							renderIcon={
+								buttonIcon ? () => <Icon name={buttonIcon as string} /> : undefined
+							}
+						/>,
 						buttonAltTitle || buttonLabel
 					)}
 			</Column>

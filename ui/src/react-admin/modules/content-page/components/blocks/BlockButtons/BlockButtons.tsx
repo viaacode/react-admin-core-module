@@ -11,6 +11,7 @@ import {
 import classnames from 'classnames';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
+import Icon from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockButtons.scss';
@@ -57,7 +58,16 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 					<div key={`buttons_block_${button.label}`}>
 						{renderLink(
 							button.buttonAction,
-							<Button key={`button-${index}`} type="secondary" {...button} />,
+							<Button
+								key={`button-${index}`}
+								type="secondary"
+								{...button}
+								renderIcon={
+									button.icon
+										? () => <Icon name={button.icon as string} />
+										: undefined
+								}
+							/>,
 							button.label || button.ariaLabel || button.tooltip,
 							button.altTitle || button.label || button.ariaLabel || button.tooltip
 						)}

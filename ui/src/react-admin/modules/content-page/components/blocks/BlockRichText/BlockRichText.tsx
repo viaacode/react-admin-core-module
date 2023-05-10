@@ -12,6 +12,7 @@ import {
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
 import React, { FunctionComponent } from 'react';
+import { Icon } from '~shared/components';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockRichText.scss';
@@ -38,20 +39,31 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	maxTextWidth,
 	renderLink = defaultRenderLinkFunction,
 }) => {
-	const renderButtons = (columnIndex: number, buttons: any[]) =>
-		buttons.map((buttonProps: any, buttonIndex: number) => (
-			<Spacer key={`rich-text-column-${columnIndex}-button-${buttonIndex}`} margin="top">
-				{renderLink(
-					buttonProps.buttonAction,
-					<Button {...buttonProps} />,
-					buttonProps.label || buttonProps.ariaLabel || buttonProps.tooltip,
-					buttonProps.altTitle ||
-						buttonProps.label ||
-						buttonProps.ariaLabel ||
-						buttonProps.tooltip
-				)}
-			</Spacer>
-		));
+	const renderButtons = (columnIndex: number, buttons: any[]) => {
+		return buttons.map((buttonProps: any, buttonIndex: number) => {
+			return (
+				<Spacer key={`rich-text-column-${columnIndex}-button-${buttonIndex}`} margin="top">
+					{renderLink(
+						buttonProps.buttonAction,
+						<Button
+							{...buttonProps}
+							renderIcon={
+								buttonProps.icon
+									? () => <Icon name={buttonProps.icon} />
+									: undefined
+							}
+							iconPosition={buttonProps.buttonIconAlignment}
+						/>,
+						buttonProps.label || buttonProps.ariaLabel || buttonProps.tooltip,
+						buttonProps.altTitle ||
+							buttonProps.label ||
+							buttonProps.ariaLabel ||
+							buttonProps.tooltip
+					)}
+				</Spacer>
+			);
+		});
+	};
 
 	const renderContent = (contentElem: BlockRichTextElement, columnIndex = 0) => {
 		const { content, color, buttons } = contentElem;

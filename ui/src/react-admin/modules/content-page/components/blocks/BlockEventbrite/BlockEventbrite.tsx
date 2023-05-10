@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import React, { FunctionComponent, useEffect } from 'react';
 
 import './BlockEventbrite.scss';
+import Icon from '~shared/components/Icon/Icon';
 
 export interface BlockEventbriteProps extends DefaultProps, ButtonProps {
 	eventId: string;
@@ -47,7 +48,11 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 				`c-block-eventbrite__align-${align}`
 			)}
 		>
-			<Button {...rest} id={elementId} />
+			<Button
+				{...rest}
+				id={elementId}
+				renderIcon={rest.icon ? () => <Icon name={rest.icon as string} /> : undefined}
+			/>
 		</div>
 	);
 };
