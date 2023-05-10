@@ -260,6 +260,8 @@ export function convertUserInfoToCommonUser(
 			const user = userInfo as Avo.User.HetArchiefUser;
 			return {
 				profileId: user.id,
+				uid: user.id,
+				userId: user.id,
 				email: user.email ?? undefined,
 				firstName: user.firstName ?? undefined,
 				lastName: user.lastName ?? undefined,
@@ -277,7 +279,7 @@ export function convertUserInfoToCommonUser(
 				},
 				lastAccessAt: undefined,
 				permissions: user.permissions,
-			};
+			} as Avo.User.CommonUser;
 		}
 
 		default:

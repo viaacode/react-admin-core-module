@@ -29,7 +29,7 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 			key={`c-block-three-clickable-tiles-${i}`}
 			className="c-block-three-clickable-tiles__tile"
 		>
-			<Image src={image} alt={title} className={`c-block-three-clickable-tiles__image`} />
+			<Image src={image} alt={title} className="c-block-three-clickable-tiles__image" />
 			<div className="c-block-three-clickable-tiles__content">
 				{title && titleType && (
 					<BlockHeading
