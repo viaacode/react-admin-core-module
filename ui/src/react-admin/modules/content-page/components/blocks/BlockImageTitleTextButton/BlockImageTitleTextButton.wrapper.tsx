@@ -1,10 +1,11 @@
 import { Button, Column, Grid, Image } from '@viaa/avo2-components';
 import classNames from 'clsx';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import Icon from '~shared/components/Icon/Icon';
 
 export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockComponentState> = (
 	props
@@ -46,7 +47,11 @@ export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockCompo
 				{buttonAction &&
 					generateSmartLink(
 						buttonAction,
-						<Button icon={buttonIcon} label={buttonLabel} type={buttonType} />,
+						<Button
+							label={buttonLabel}
+							type={buttonType}
+							renderIcon={buttonIcon ? () => <Icon name={buttonIcon} /> : undefined}
+						/>,
 						buttonAltTitle || buttonLabel
 					)}
 			</Column>
