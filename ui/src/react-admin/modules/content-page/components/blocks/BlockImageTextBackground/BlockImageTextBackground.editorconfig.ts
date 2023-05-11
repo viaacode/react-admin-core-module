@@ -25,6 +25,7 @@ import {
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
+import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): ImageTextBackgroundBlockComponentState => ({
@@ -111,6 +112,14 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
+				editorProps: {
+					allowedTypes: [
+						ContentPickerType.CONTENT_PAGE,
+						ContentPickerType.INTERNAL_LINK,
+						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.ANCHOR_LINK,
+					],
+				},
 			},
 			buttonIcon: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(

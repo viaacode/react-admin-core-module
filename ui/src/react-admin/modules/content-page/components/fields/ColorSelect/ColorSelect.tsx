@@ -31,7 +31,7 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 					{!!option && (
 						<div
 							className={'c-color-select__preview'}
-							style={{ backgroundColor: option.color || option.value }}
+							style={{ background: option.color || option.value }}
 						/>
 					)}
 					{!!label && <Spacer margin="left-small">{label}</Spacer>}

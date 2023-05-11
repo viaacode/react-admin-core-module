@@ -1,0 +1,6 @@
+// Avoid collapsing padding and margins: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
+.c-content-page-preview {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}

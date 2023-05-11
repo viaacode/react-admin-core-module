@@ -6,7 +6,6 @@ import React, { FunctionComponent } from 'react';
 import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { AdminConfigManager } from '~core/config';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-
 import {
 	BlockClickHandler,
 	ContentPageInfo,
@@ -16,6 +15,7 @@ import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
+import './ContentPageRenderer.scss';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;

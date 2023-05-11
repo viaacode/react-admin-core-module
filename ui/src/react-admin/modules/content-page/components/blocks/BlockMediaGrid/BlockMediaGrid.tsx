@@ -106,7 +106,7 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 							backgroundImage: ctaBackgroundImage
 								? `url('${ctaBackgroundImage}')`
 								: 'none',
-							backgroundColor: ctaBackgroundColor,
+							background: ctaBackgroundColor,
 						}}
 					>
 						<div className="c-thumbnail__content">

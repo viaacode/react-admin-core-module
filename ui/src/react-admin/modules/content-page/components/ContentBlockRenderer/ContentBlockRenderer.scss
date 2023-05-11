@@ -7,12 +7,6 @@
 .c-content-block {
 	position: relative;
 
-	// Avoid collapsing padding and margins: https://stackoverflow.com/questions/19718634/how-to-disable-margin-collapsing
-	padding-top: 0.05px;
-	padding-bottom: 0.05px;
-	margin-top: 0.05px;
-	margin-bottom: 0.05px;
-
 	> div {
 		z-index: 2;
 
