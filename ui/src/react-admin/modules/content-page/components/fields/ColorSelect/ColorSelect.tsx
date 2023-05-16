@@ -5,6 +5,10 @@ import Select, { Props } from 'react-select';
 
 import './ColorSelect.scss';
 import { ReactSelectOption } from '~modules/shared';
+import {
+	ColorSelectGradientColors,
+	GradientColor,
+} from '~modules/content-page/types/content-block.types';
 
 export interface ColorOption {
 	label: string;
@@ -25,14 +29,19 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 }) => {
 	const renderLabel = ({ label, value }: ReactSelectOption<string>): ReactNode => {
 		const option: ColorOption | undefined = options.find((option) => option.value === value);
+		const isGradient =
+			option?.color?.includes('gradient') || option?.value?.includes('gradient');
+		const background = isGradient
+			? ColorSelectGradientColors[
+					(option?.color as GradientColor) || (option?.value as GradientColor)
+			  ]
+			: option?.color || option?.value;
+
 		return (
 			<div key={`color-select-${label}-${value}`}>
 				<Flex>
-					{!!option && (
-						<div
-							className={'c-color-select__preview'}
-							style={{ background: option.color || option.value }}
-						/>
+					{!!background && (
+						<div className={'c-color-select__preview'} style={{ background }} />
 					)}
 					{!!label && <Spacer margin="left-small">{label}</Spacer>}
 				</Flex>

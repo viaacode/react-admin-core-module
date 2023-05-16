@@ -89,6 +89,10 @@ export enum GradientColor {
 	BlackWhite = 'linear-gradient(to top, #fff 0%, #fff calc(100% - 16rem), #000 calc(100% - 16rem), #000 100%)',
 }
 
+export const ColorSelectGradientColors: Record<GradientColor, string> = {
+	[GradientColor.BlackWhite]: 'linear-gradient(to top, #fff 0%, #fff 50%, #000 50%, #000 100%)',
+};
+
 export interface PaddingFieldState {
 	top: SpacerOption;
 	bottom: SpacerOption;
