@@ -1,7 +1,7 @@
 import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNumber, isString } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import { cloneDeep, compact, isNil, isNumber, isString } from 'lodash-es';
+import { FunctionComponent, useEffect } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 import {
 	ContentItemStyle,
@@ -130,6 +130,24 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const pages = pagesAndLabels?.items;
 	const pageCount = pagesAndLabels?.pages;
 	const labelPageCounts = pagesAndLabels?.labelCounts;
+
+	useEffect(() => {
+		const { label, item } = queryParamsState;
+
+		if (isNil(label) && isNil(item)) {
+			return;
+		}
+
+		const selector =
+			!isNil(label) && !isNil(item)
+				? 'c-content-page-overview-block__accordion--second-level'
+				: 'c-content-page-overview-block__accordion--first-level';
+
+		setTimeout(() => {
+			const $el = document.querySelector(`.${selector}:not(.c-accordion--closed)`);
+			$el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+		}, 1000);
+	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParamsState((oldQueryParamState) => {
