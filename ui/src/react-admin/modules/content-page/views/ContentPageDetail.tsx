@@ -435,11 +435,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	return (
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>
-				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}>
-					<Button type="borderless">
-						<Icon name="chevronLeft"></Icon>
-					</Button>
-				</Link>
+				<Button type="borderless" onClick={() => window.history.back()}>
+					<Icon name="chevronLeft"></Icon>
+				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>
 			<AdminLayout.Content>
