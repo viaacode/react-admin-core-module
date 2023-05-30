@@ -295,10 +295,6 @@ function setConfig() {
 			onExternalLink: () => {
 				// Client decides what should happen when an external link is clicked
 			},
-			mediaItemClicked: () => {
-				// TODO set redux value in the avo client and open a global modal to render the media item
-				// See AVO2-client src/admin/content-block/components/wrappers/MediaGridWrapper/MediaGridWrapper.tsx => handleItemClicked()
-			},
 		},
 		routes: {
 			ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,

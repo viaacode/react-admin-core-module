@@ -13,7 +13,6 @@ import {
 	GET_BLOCK_COMPONENT,
 	IGNORE_BLOCK_LEVEL_PROPS,
 	NAVIGABLE_CONTENT_BLOCKS,
-	OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
 } from './ContentBlockRenderer.const';
@@ -95,12 +94,6 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	if (USER_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
 		// Give the block access to the current logged-in user in theAvo.User.CommonUser format
 		blockStateProps.commonUser = commonUser;
-	}
-
-	if (OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
-		// Pass a function to the block, so it can render a wrapper to open media items in a modal
-		// Without the admin core needing to know about users, bookmarks, ...
-		blockStateProps.mediaItemClicked = AdminConfigManager.getConfig().handlers.mediaItemClicked;
 	}
 
 	// Pass the content page object to the block
