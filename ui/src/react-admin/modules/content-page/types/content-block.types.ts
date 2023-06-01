@@ -89,6 +89,10 @@ export enum GradientColor {
 	BlackWhite = 'linear-gradient(to top, #fff 0%, #fff calc(100% - 16rem), #000 calc(100% - 16rem), #000 100%)',
 }
 
+export enum CustomBackground {
+	MeemooLogo = '<MEEMOO_LOGO>',
+}
+
 export const ColorSelectGradientColors: Record<GradientColor, string> = {
 	[GradientColor.BlackWhite]: 'linear-gradient(to top, #fff 0%, #fff 50%, #000 50%, #000 100%)',
 };
@@ -194,7 +198,7 @@ export interface ContentBlockFieldGroup {
 
 /* CONTENT BLOCK STATE */
 export interface DefaultContentBlockState {
-	backgroundColor: Color;
+	backgroundColor: Color | GradientColor | CustomBackground;
 	headerBackgroundColor?: Color; // css color string. eg: '#222' or 'black' or 'rgb(0, 0, 255)'
 	headerHeight?: string; // css height string. eg: '20px' or '15%'
 	padding: PaddingFieldState;
