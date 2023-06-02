@@ -6,7 +6,7 @@ import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } f
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
-import { Color, ContentBlockConfig } from '../../types/content-block.types';
+import { Color, ContentBlockConfig, CustomBackground } from '../../types/content-block.types';
 
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
@@ -119,10 +119,17 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			className={clsx(
 				'c-content-block',
 				className,
-				'c-content-block__' + kebabCase(contentBlockConfig.type)
+				'c-content-block__' + kebabCase(contentBlockConfig.type),
+				{
+					'c-content-block__meemoo-custom-background':
+						blockState.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
+				}
 			)}
 			style={{
-				background: blockState.backgroundColor,
+				background:
+					blockState.backgroundColor === CustomBackground.MeemooLogo
+						? Color.Transparent
+						: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
 			id={blockState.anchor}
