@@ -107,7 +107,7 @@
     "@typescript-eslint/parser": "5.11.0",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
-    "bump-package-versions": "^1.0.2",
+    "bump-package-versions": "^1.0.5",
     "cross-env": "^7.0.3",
     "customize-cra": "1.0.0",
     "dompurify": "^2.4.1",

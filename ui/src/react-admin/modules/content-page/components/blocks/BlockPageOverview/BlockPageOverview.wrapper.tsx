@@ -104,6 +104,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		data: pagesAndLabels,
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
+		isInitialLoading,
 	} = useGetContentPagesOverview(
 		{
 			withBlocks:
@@ -132,22 +133,26 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const labelPageCounts = pagesAndLabels?.labelCounts;
 
 	useEffect(() => {
-		const { label, item } = queryParamsState;
+		if (!isInitialLoading) {
+			const { label, item } = queryParamsState;
 
-		if (isNil(label) && isNil(item)) {
-			return;
+			if (isNil(label) && isNil(item)) {
+				return;
+			}
+
+			const selector =
+				!isNil(label) && !isNil(item)
+					? '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed) .c-content-page-overview-block__accordion--second-level:not(.c-accordion--closed)'
+					: '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed)';
+
+			setTimeout(() => {
+				const $el = document.querySelector(selector);
+				$el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+			}, 100);
 		}
-
-		const selector =
-			!isNil(label) && !isNil(item)
-				? 'c-content-page-overview-block__accordion--second-level'
-				: 'c-content-page-overview-block__accordion--first-level';
-
-		setTimeout(() => {
-			const $el = document.querySelector(`.${selector}:not(.c-accordion--closed)`);
-			$el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-		}, 1000);
-	}, []);
+		// We only want to trigger a scroll down when the page loads, not when the query params change when a user clicks another page
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isInitialLoading]);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParamsState((oldQueryParamState) => {
