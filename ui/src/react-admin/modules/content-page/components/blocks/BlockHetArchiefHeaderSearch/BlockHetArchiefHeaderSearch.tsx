@@ -38,7 +38,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 				clearInterval(timerId);
 			}
 		};
-	}, []);
+	}, [subtitles.length]);
 
 	const navigateToSearchPage = () => {
 		const url = stringifyUrl({

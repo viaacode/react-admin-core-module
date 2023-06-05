@@ -1,7 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
-import { MediaListItem } from '~content-blocks/BlockMediaGrid/BlockMediaGrid';
 
 import { UserBulkAction } from '~modules/user/user.types';
 
