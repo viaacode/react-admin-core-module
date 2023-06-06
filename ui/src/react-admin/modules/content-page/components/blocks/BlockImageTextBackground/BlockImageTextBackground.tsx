@@ -1,6 +1,8 @@
 import classnames from 'classnames';
+import clsx from 'clsx';
 import { FunctionComponent, ReactElement } from 'react';
 import {
+	BackgroundAlignOption,
 	Color,
 	HeadingTypeOption,
 	SimpleAlignOption,
@@ -18,7 +20,7 @@ export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;
-	contentAlignment?: SimpleAlignOption;
+	imageAlignment?: BackgroundAlignOption;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
@@ -35,7 +37,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	foregroundColor,
 	backgroundColor,
 	image,
-	contentAlignment,
+	imageAlignment = 'left-screen',
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,
@@ -46,7 +48,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	return (
 		<article
 			className={classnames(
-				`c-block-image-text-background c-block-image-text-background--${contentAlignment}`,
+				`c-block-image-text-background c-block-image-text-background--${imageAlignment}`,
 				className
 			)}
 			style={{ background: backgroundColor }}
@@ -75,7 +77,15 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					)}
 			</div>
 			{image && (
-				<Image src={image} className="c-block-image-text-background__image-wrapper" />
+				<Image
+					src={image}
+					className={clsx('c-block-image-text-background__image-wrapper', {
+						'c-block-image-text-background__image-wrapper--screen-left':
+							imageAlignment === 'left-screen',
+						'c-block-image-text-background__image-wrapper--screen-right':
+							imageAlignment === 'right-screen',
+					})}
+				/>
 			)}
 		</article>
 	);
