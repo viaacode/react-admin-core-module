@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import { IconConfig } from '~core/config/config.types';
 
 interface IconProps {
 	name: string;

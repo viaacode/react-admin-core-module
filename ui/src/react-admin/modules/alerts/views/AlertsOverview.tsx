@@ -489,7 +489,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			// Reset the form when the blade is closed
 			reset(getDefaultValues());
 		}
-	}, [activeAlert]);
+	}, [activeAlert, getDefaultValues, reset]);
 
 	const renderTitle = useMemo(() => {
 		return (

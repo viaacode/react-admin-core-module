@@ -3,7 +3,6 @@ import { RichTextEditorProps } from '@meemoo/react-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 
-import { PickerItem } from '../../shared/types/content-picker';
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 

@@ -1,6 +1,6 @@
 import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNil, isNumber, isString } from 'lodash-es';
+import { cloneDeep, compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
 import { FunctionComponent, useEffect } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 import {
@@ -186,8 +186,16 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	};
 
 	const getLabelsWithContent = () => {
-		return (labelObjs || []).filter(
+		const labelsWithAtLeastOnePage = (labelObjs || []).filter(
 			(labelObj: LabelObj) => (labelPageCounts || {})[labelObj.id] > 0
+		);
+		// Sort labels in the order they were entered in the admin-core content page editor:
+		// https://meemoo.atlassian.net/browse/ARC-1443?focusedCommentId=40802
+		const labelIds = (contentTypeAndTabs.selectedLabels || []).map((labelId) =>
+			String(labelId)
+		);
+		return sortBy(labelsWithAtLeastOnePage, (labelObj) =>
+			labelIds.indexOf(String(labelObj.id))
 		);
 	};
 
