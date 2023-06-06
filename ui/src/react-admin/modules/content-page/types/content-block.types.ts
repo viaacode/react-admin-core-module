@@ -20,6 +20,12 @@ export type AlignOption = 'left' | 'right' | 'center';
 
 export type SimpleAlignOption = 'left' | 'right';
 
+export type BackgroundAlignOption =
+	| 'left-screen'
+	| 'left-inside-page'
+	| 'right-inside-page'
+	| 'right-screen';
+
 export type FillOption = 'cover' | 'contain' | 'auto';
 
 export type BlockGridFormatOption =
@@ -474,7 +480,7 @@ export interface ImageTextBackgroundBlockComponentState {
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;
-	contentAlignment?: AlignOption;
+	backgroundAlignment?: BackgroundAlignOption;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;

@@ -23,7 +23,10 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
-import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import {
+	GET_BACKGROUND_ALIGN_OPTIONS,
+	GET_SIMPLE_ALIGN_OPTIONS,
+} from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
@@ -34,7 +37,7 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		content: '',
 		foregroundColor: Color.Black,
 		backgroundColor: Color.White,
-		contentAlignment: 'right',
+		backgroundAlignment: 'left-inside-page',
 		buttonLabel: '',
 		buttonIconAlignment: 'left',
 	});
@@ -139,13 +142,11 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					options: GET_SIMPLE_ALIGN_OPTIONS(),
 				},
 			},
-			contentAlignment: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___content-alignment'
-				),
+			imageAlignment: {
+				label: AdminConfigManager.getConfig().services.i18n.tText('Afbeelding uitlijning'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_SIMPLE_ALIGN_OPTIONS(),
+					options: GET_BACKGROUND_ALIGN_OPTIONS(),
 				},
 			},
 			foregroundColor: FOREGROUND_COLOR_FIELD(
