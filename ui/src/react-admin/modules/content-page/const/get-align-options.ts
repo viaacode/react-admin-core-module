@@ -45,19 +45,27 @@ export const GET_BACKGROUND_ALIGN_OPTIONS: () => {
 	value: BackgroundAlignOption;
 }[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('Linker scherm rand'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-align-options___linker-scherm-rand'
+		),
 		value: 'left-screen',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('Links binnen de pagina'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-align-options___links-binnen-de-pagina'
+		),
 		value: 'left-inside-page',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('Rechts binnen de pagina'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-align-options___rechts-binnen-de-pagina'
+		),
 		value: 'right-inside-page',
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('Rechter scherm rand'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-align-options___rechter-scherm-rand'
+		),
 		value: 'right-screen',
 	},
 ];

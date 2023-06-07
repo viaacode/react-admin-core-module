@@ -143,7 +143,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			imageAlignment: {
-				label: AdminConfigManager.getConfig().services.i18n.tText('Afbeelding uitlijning'),
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_BACKGROUND_ALIGN_OPTIONS(),

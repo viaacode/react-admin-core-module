@@ -93,7 +93,9 @@ const skyBlueOption = () => ({
 	value: Color.SkyBlue,
 });
 const meemooLogoOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText('meemoo logo'),
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'react-admin/modules/content-page/const/get-color-options___meemoo-logo'
+	),
 	value: CustomBackground.MeemooLogo,
 });
 const blackWhiteGradientOption = () => ({
