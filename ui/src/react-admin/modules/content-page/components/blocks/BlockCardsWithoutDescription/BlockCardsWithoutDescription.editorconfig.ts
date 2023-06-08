@@ -1,4 +1,5 @@
 import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
+import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import {
 	CardWithoutDescriptionBlockComponentState,
 	Color,
@@ -93,6 +94,18 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
+			linkAction: {
+				label: AdminConfigManager.getConfig().services.i18n.tText('Tegel link'),
+				editorType: ContentBlockEditor.ContentPicker,
+				editorProps: {
+					allowedTypes: [
+						ContentPickerType.CONTENT_PAGE,
+						ContentPickerType.INTERNAL_LINK,
+						ContentPickerType.EXTERNAL_LINK,
+						ContentPickerType.ANCHOR_LINK,
+					],
+				},
+			},
 		},
 	},
 	block: {
