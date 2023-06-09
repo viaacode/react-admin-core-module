@@ -1,7 +1,5 @@
 import { ButtonAction, Image } from '@viaa/avo2-components';
-import classnames from 'classnames';
 import clsx from 'clsx';
-import { divide } from 'lodash-es';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { CardWithoutDescriptionStyleOption } from '~modules/content-page/types/content-block.types';
 import { DefaultComponentProps } from '~modules/shared/types/components';

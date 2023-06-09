@@ -1,10 +1,13 @@
 import classnames from 'classnames';
+import { sampleSize } from 'lodash-es';
 import { FunctionComponent, ReactElement } from 'react';
 import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
 import { ButtonAction } from '@viaa/avo2-components';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
+
+const MAX_MAINTAINERS_IN_GRID_BLOCK = 14;
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
 	title: string;
@@ -40,23 +43,22 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 				)}
 			</div>
 			<ul>
-				{maintainers
-					.filter((m) => !!m.imageSrc)
-					.map((maintainer, index) => {
-						return (
-							<li
-								key={`${maintainer.linkAction?.value}-${maintainer.imageSrc}-${index}`}
-							>
-								<SmartLink action={maintainer.linkAction}>
-									<img
-										src={maintainer.imageSrc}
-										alt={'Maintainer logo link'}
-										className="c-block-maintainers-grid__image"
-									></img>
-								</SmartLink>
-							</li>
-						);
-					})}
+				{sampleSize(
+					maintainers.filter((m) => !!m.imageSrc),
+					MAX_MAINTAINERS_IN_GRID_BLOCK
+				).map((maintainer, index) => {
+					return (
+						<li key={`${maintainer.linkAction?.value}-${maintainer.imageSrc}-${index}`}>
+							<SmartLink action={maintainer.linkAction}>
+								<img
+									src={maintainer.imageSrc}
+									alt={'Maintainer logo link'}
+									className="c-block-maintainers-grid__image"
+								></img>
+							</SmartLink>
+						</li>
+					);
+				})}
 			</ul>
 		</article>
 	);
