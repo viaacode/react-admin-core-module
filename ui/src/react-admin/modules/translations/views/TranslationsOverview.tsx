@@ -1,6 +1,14 @@
+import {
+	Button,
+	Pagination,
+	RichEditorState,
+	RichTextEditor,
+	Table,
+	TextInput,
+} from '@meemoo/react-components';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
-import { orderBy, snakeCase } from 'lodash-es';
 import { decode as decodeHtmlEntities } from 'html-entities';
+import { orderBy, snakeCase } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	MouseEvent,
@@ -10,45 +18,35 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Row, TableOptions } from 'react-table';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import {
+	convertFromDatabaseToList,
+	convertFromListToDatabase,
+	getKeyPrefix,
+} from '~modules/translations/helpers/database-conversions';
+import {
+	RICH_TEXT_EDITOR_OPTIONS,
+	TRANSLATIONS_PER_PAGE,
+} from '~modules/translations/translations.const';
+import { Icon } from '~shared/components';
+import Html from '~shared/components/Html/Html';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { sortingIcons } from '~shared/components/Table/Table.const';
+import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
+import { useTranslation } from '~shared/hooks/useTranslation';
+import { OrderDirection } from '~shared/types';
+import Loader from '../../shared/components/Loader/Loader';
+import { TranslationsService } from '../translations.service';
 
 import {
 	Translation,
 	TranslationContextName,
 	TranslationsOverviewProps,
 } from '../translations.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { OrderDirection } from '~shared/types';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { TranslationsService } from '../translations.service';
-import {
-	Button,
-	Pagination,
-	RichEditorState,
-	RichTextEditor,
-	Table,
-	TextInput,
-} from '@meemoo/react-components';
-import { Icon } from '~shared/components';
-import { useQueryParams } from 'use-query-params';
-import {
-	RICH_TEXT_EDITOR_OPTIONS,
-	TRANSLATIONS_PER_PAGE,
-	TRANSLATIONS_QUERY_PARAM_CONFIG,
-} from '~modules/translations/translations.const';
-import { sortingIcons } from '~shared/components/Table/Table.const';
-import { Row, TableOptions } from 'react-table';
-import Loader from '../../shared/components/Loader/Loader';
-import {
-	convertFromDatabaseToList,
-	convertFromListToDatabase,
-	getKeyPrefix,
-} from '~modules/translations/helpers/database-conversions';
-import Html from '~shared/components/Html/Html';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { useTranslation } from '~shared/hooks/useTranslation';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
@@ -66,29 +64,32 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const [activeTranslationEditorState, setActiveTranslationEditorState] =
 		useState<RichEditorState | null>(null);
 
-	const [filters, setFilters] = useQueryParams(TRANSLATIONS_QUERY_PARAM_CONFIG);
+	const [search, setSearch] = useState<string>('');
+	const [page, setPage] = useState<number>(1);
+	const [orderProp, setOrderProp] = useState<string | undefined>(undefined);
+	const [orderDirection, setOrderDirection] = useState<OrderDirection>(OrderDirection.asc);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
 			(translation) =>
-				translation.key.toLowerCase().includes(filters.search.toLowerCase()) ||
-				translation.value.toLowerCase().includes(filters.search.toLowerCase())
+				translation.key.toLowerCase().includes(search.toLowerCase()) ||
+				translation.value.toLowerCase().includes(search.toLowerCase())
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
 
 		const orderedTranslations = orderBy(
 			filteredTranslations,
-			[filters.orderProp],
-			[filters.orderDirection as OrderDirection]
+			[orderProp],
+			[orderDirection as OrderDirection]
 		);
 		const paginatedTranslations = orderedTranslations.slice(
-			(filters.page - 1) * TRANSLATIONS_PER_PAGE,
-			Math.min(translations?.length || 0, filters.page * TRANSLATIONS_PER_PAGE)
+			(page - 1) * TRANSLATIONS_PER_PAGE,
+			Math.min(translations?.length || 0, page * TRANSLATIONS_PER_PAGE)
 		);
-		setFilteredAndPaginatedTranslations(paginatedTranslations);
-	}, [translations, filters, setFilteredTranslationsCount, setFilteredAndPaginatedTranslations]);
+		setFilteredAndPaginatedTranslations(paginatedTranslations as Translation[]);
+	}, [translations, orderProp, orderDirection, page, search]);
 
 	const getTranslations = useCallback(async () => {
 		try {
@@ -210,34 +211,28 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	};
 
 	const handlePageChange = (newPageZeroBased: number) => {
-		setFilters({
-			...filters,
-			page: newPageZeroBased + 1,
-		});
+		setPage(newPageZeroBased + 1);
 	};
 
 	const sortFilters = useMemo(() => {
 		return [
 			{
-				id: filters.orderProp,
-				desc: filters.orderDirection !== OrderDirection.asc,
+				id: orderProp,
+				desc: orderDirection !== OrderDirection.asc,
 			},
 		];
-	}, [filters]);
+	}, [orderProp, orderDirection]);
 
 	const handleSortChange = useCallback(
-		(orderProp: string | undefined, orderDirection: string | undefined) => {
-			if (filters.orderProp !== orderProp || filters.orderDirection !== orderDirection) {
-				setFilters({
-					...filters,
-					orderProp,
-					orderDirection,
-					page: 1,
-				});
+		(newOrderProp: string | undefined, newOrderDirection: OrderDirection | undefined) => {
+			if (newOrderProp !== orderProp || newOrderDirection !== orderDirection) {
+				setOrderProp(newOrderProp);
+				setOrderDirection(newOrderDirection || OrderDirection.asc);
+				setPage(1);
 			}
 		},
 		// Fix ARC-964: If filters.page is included, the pagination breaks (on pagechange the pagenumber resets to 1 again)
-		[filters, setFilters]
+		[orderProp, orderDirection]
 	);
 
 	const getPagination = () => {
@@ -248,7 +243,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 						next: (
 							<Button
 								className="u-pl-24:sm u-pl-8"
-								disabled={filters.page === pageCount}
+								disabled={page === pageCount}
 								variants={['text', 'neutral']}
 								label={tHtml(
 									'modules/shared/components/pagination-bar/pagination-bar___volgende'
@@ -259,7 +254,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 						previous: (
 							<Button
 								className="u-pr-24:sm u-pr-8"
-								disabled={filters.page === 1}
+								disabled={page === 1}
 								variants={['text', 'neutral']}
 								label={tHtml(
 									'modules/shared/components/pagination-bar/pagination-bar___vorige'
@@ -270,7 +265,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					}}
 					showFirstLastNumbers
 					onPageChange={handlePageChange}
-					currentPage={filters.page - 1}
+					currentPage={page - 1}
 					pageCount={pageCount}
 				/>
 			);
@@ -279,7 +274,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				<PaginationAvo
 					pageCount={pageCount}
 					onPageChange={handlePageChange}
-					currentPage={filters.page - 1}
+					currentPage={page - 1}
 				/>
 			);
 		}
@@ -291,11 +286,11 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		}
 		if (!filteredAndPaginatedTranslations.length) {
 			return (
-				<>
+				<span className="c-translations-content__no-results">
 					{tHtml(
 						'modules/translations/views/translations-overview-v-2___er-zijn-geen-vertalingen-gevonden'
 					)}
-				</>
+				</span>
 			);
 		}
 		return (
@@ -414,8 +409,11 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 			<TextInput
 				type="search"
 				iconEnd={<Icon name="filter" />}
-				value={filters.search}
-				onChange={(e) => setFilters({ search: e.target.value, page: 1 })}
+				value={search}
+				onChange={(e) => {
+					setSearch(e.target.value);
+					setPage(1);
+				}}
 				placeholder={tText(
 					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
 				)}
