@@ -619,7 +619,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		);
 	}, [
 		control,
-		errors.userGroups?.message,
+		errors.userGroups,
 		form.userGroups,
 		handleChangeUserGroups,
 		tHtml,
