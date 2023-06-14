@@ -873,6 +873,7 @@
   "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label": "Label",
   "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label-is-verplicht": "Label is verplicht",
   "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___style": "Stijl",
+  "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tegel-link": "Tegel link",
   "react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tekst-kleur": "Tekst kleur",
   "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___animatie-tekst": "Animatie tekst",
   "react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___animatie-teksten": "Animatie teksten",
