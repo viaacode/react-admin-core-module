@@ -1,3 +1,4 @@
+import { MultiRangeProps } from '@viaa/avo2-components';
 import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 import {
 	ContentBlockConfig,
@@ -21,6 +22,7 @@ export const INITIAL_MAINTAINERS_GRID_COMPONENTS_STATE =
 		subtitle: '',
 		buttonLabel: '',
 		buttonAction: undefined,
+		visibleItems: 14,
 		maintainers: [
 			{
 				imageSrc: undefined,
@@ -78,6 +80,18 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___link-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
+			},
+			visibleItems: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___zichtbare-items'
+				),
+				editorType: ContentBlockEditor.MultiRange,
+				editorProps: {
+					min: 0,
+					max: 400,
+					step: 1,
+					showNumber: true,
+				} as MultiRangeProps,
 			},
 			maintainers: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(

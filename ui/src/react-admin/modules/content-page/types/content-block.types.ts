@@ -495,6 +495,7 @@ export interface MaintainersGridBlockComponentState {
 	subtitle: string;
 	buttonLabel?: string;
 	buttonAction?: ButtonAction;
+	visibleItems: number;
 	maintainers: { imageSrc?: string; linkAction?: ButtonAction }[];
 }
 
