@@ -10,7 +10,9 @@ import {
 	BlockClickHandler,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
+import { Loader } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
@@ -152,25 +154,8 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		);
 	};
 
-	const renderError = () => {
-		return (
-			<ErrorView
-				icon={'alertTriangle' as IconName}
-				message={AdminConfigManager.getConfig().services.i18n.tHtml(
-					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-				)}
-			>
-				<p>
-					{AdminConfigManager.getConfig().services.i18n.tHtml(
-						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-					)}
-				</p>
-			</ErrorView>
-		);
-	};
-
 	if (!props.contentPageInfo) {
-		return renderError();
+		return <CenteredSpinner />;
 	}
 	return renderContentPage();
 };
