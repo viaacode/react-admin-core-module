@@ -7,14 +7,13 @@ import { BlockHeading } from '../BlockHeading';
 import { ButtonAction } from '@viaa/avo2-components';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
 
-const MAX_MAINTAINERS_IN_GRID_BLOCK = 14;
-
 export interface BlockMaintainerGridProps extends DefaultComponentProps {
 	title: string;
 	titleType: HeadingTypeOption;
 	subtitle: string;
 	buttonLabel: string;
 	buttonAction?: ButtonAction;
+	visibleItems: number;
 	maintainers: { imageSrc: string; linkAction?: ButtonAction }[];
 }
 
@@ -25,6 +24,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 	subtitle,
 	buttonLabel,
 	buttonAction,
+	visibleItems,
 	maintainers,
 }): ReactElement => {
 	return (
@@ -45,7 +45,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 			<ul>
 				{sampleSize(
 					maintainers.filter((m) => !!m.imageSrc),
-					MAX_MAINTAINERS_IN_GRID_BLOCK
+					visibleItems
 				).map((maintainer, index) => {
 					return (
 						<li key={`${maintainer.linkAction?.value}-${maintainer.imageSrc}-${index}`}>

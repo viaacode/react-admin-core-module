@@ -899,6 +899,7 @@
   "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___titel-grootte": "Titel grootte",
   "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___verwijder-aanbieder": "Verwijder aanbieder",
   "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___voeg-aanbieder-toe": "Voeg aanbieder toe",
+  "react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___zichtbare-items": "Zichtbare items",
   "react-admin/modules/content-page/components/blocks/block-page-overview/block-page-overview___error": "Error",
   "react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden": "Pagina niet gevonden",
   "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___button-icon-alignment": "Positie icoon op knop",
