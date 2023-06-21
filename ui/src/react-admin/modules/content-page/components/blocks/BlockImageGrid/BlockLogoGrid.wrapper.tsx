@@ -9,7 +9,7 @@ import { BlockGridFormatOption, FillOption } from '~modules/content-page/types/c
 export interface BlockLogoGridWrapperProps {
 	elements: GridItem[];
 	format: BlockGridFormatOption;
-	itemWidth: number;
+	itemWidth: string;
 	fill?: FillOption;
 	textAlign?: AlignOptions;
 	className?: string;
@@ -18,7 +18,7 @@ export interface BlockLogoGridWrapperProps {
 
 export const BlockLogoGridWrapper: FunctionComponent<BlockLogoGridWrapperProps> = ({
 	format = '2:1',
-	itemWidth = 400,
+	itemWidth = '400px',
 	...rest
 }) => {
 	return <BlockImageGrid {...formatLookup[format]} itemWidth={itemWidth} {...rest} />;

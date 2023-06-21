@@ -22,9 +22,9 @@ export interface GridItem {
 
 export interface BlockImageGridProps extends DefaultProps {
 	elements: GridItem[];
-	imageWidth?: number;
-	imageHeight?: number;
-	itemWidth?: number;
+	imageWidth?: string;
+	imageHeight?: string;
+	itemWidth?: string;
 	fill?: 'cover' | 'contain' | 'auto';
 	align?: AlignOptions;
 	textAlign?: AlignOptions;
