@@ -74,7 +74,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const updateFilteredTranslations = useCallback(() => {
 		const filteredTranslations = (translations || []).filter(
 			(translation) =>
-				translation.key.toLowerCase().includes(search.toLowerCase()) ||
+				translation.label.toLowerCase().includes(search.toLowerCase()) ||
 				translation.value.toLowerCase().includes(search.toLowerCase())
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
