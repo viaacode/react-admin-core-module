@@ -20,6 +20,7 @@ import {
 	GetUserByIdQuery,
 	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
+import { GetUsersDocument } from '../shared/generated/graphql-db-types-hetarchief';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
@@ -124,14 +125,14 @@ export class UsersService {
 				// We can fetch the first link directly since it has a hasura relationship
 				// But the second one cannot be fetched directly since there is no relationship, since we recache the organisations every night and a foreign key would prevent that
 				// So we need to fetch the organisations in a separate database call
-				const organisationInfos = await this.adminOrganisationsService.getOrganisations(
-					compact(
-						userProfileObjects.map(
-							(profile) =>
-								(profile as UserInfoOverviewHetArchief)
-									.organisation_schema_identifier
-						)
+				const orgIds = compact(
+					userProfileObjects.map(
+						(profile) =>
+							(profile as UserInfoOverviewHetArchief).organisation_schema_identifier
 					)
+				);
+				const organisationInfos = await this.adminOrganisationsService.getOrganisations(
+					orgIds
 				);
 				userProfileObjects.forEach((profile) => {
 					const hetArchiefProfile = profile as UserInfoOverviewHetArchief & {

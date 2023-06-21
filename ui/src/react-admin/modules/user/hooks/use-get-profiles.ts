@@ -13,19 +13,26 @@ export interface GetProfileArguments {
 	itemsPerPage?: number;
 }
 
-export const useGetProfiles = (getProfileArguments?: GetProfileArguments) => {
-	return useQuery([QUERY_KEYS.GET_PROFILES, getProfileArguments], (props) => {
-		const getProfileArgs = props.queryKey[1] as GetProfileArguments;
-		if (!getProfileArgs) {
-			return null;
-		}
-		return UserService.getProfiles(
-			getProfileArgs.page,
-			getProfileArgs.sortColumn,
-			getProfileArgs.sortOrder,
-			getProfileArgs.tableColumnDataType,
-			getProfileArgs.where || {},
-			getProfileArgs.itemsPerPage || USERS_PER_PAGE
-		);
-	});
+export const useGetProfiles = (
+	getProfileArguments?: GetProfileArguments,
+	options: { enabled?: boolean } = { enabled: true }
+) => {
+	return useQuery(
+		[QUERY_KEYS.GET_PROFILES, getProfileArguments],
+		(props) => {
+			const getProfileArgs = props.queryKey[1] as GetProfileArguments;
+			if (!getProfileArgs) {
+				return null;
+			}
+			return UserService.getProfiles(
+				getProfileArgs.page,
+				getProfileArgs.sortColumn,
+				getProfileArgs.sortOrder,
+				getProfileArgs.tableColumnDataType,
+				getProfileArgs.where || {},
+				getProfileArgs.itemsPerPage || USERS_PER_PAGE
+			);
+		},
+		options
+	);
 };
