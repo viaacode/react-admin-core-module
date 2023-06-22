@@ -4,7 +4,9 @@ import { BlockGridFormatOption } from '~modules/content-page/types/content-block
 
 export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOption>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText('30% x 220'),
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-image-grid-format-options___30-x-220'
+		),
 		value: 'flex3',
 	},
 	{
