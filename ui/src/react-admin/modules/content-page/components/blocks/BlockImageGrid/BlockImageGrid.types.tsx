@@ -20,11 +20,13 @@ export interface GridItem {
 	action?: ButtonAction;
 }
 
+export type CssSizeSetting = `${number}${'rem' | '%'}`;
+
 export interface BlockImageGridProps extends DefaultProps {
 	elements: GridItem[];
-	imageWidth?: string;
-	imageHeight?: string;
-	itemWidth?: string;
+	imageWidth?: CssSizeSetting;
+	imageHeight?: CssSizeSetting;
+	itemWidth?: CssSizeSetting;
 	fill?: 'cover' | 'contain' | 'auto';
 	align?: AlignOptions;
 	textAlign?: AlignOptions;

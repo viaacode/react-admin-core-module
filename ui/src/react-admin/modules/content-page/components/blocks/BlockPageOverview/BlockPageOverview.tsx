@@ -300,9 +300,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									action: { type: 'CONTENT_PAGE', value: page.id },
 								})
 							)}
-							itemWidth="307px"
-							imageHeight="172px"
-							imageWidth="307px"
+							itemWidth="30.7rem"
+							imageHeight="17.2rem"
+							imageWidth="30.7rem"
 							renderLink={renderLink}
 							fill="cover"
 							textAlign="left"

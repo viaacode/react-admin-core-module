@@ -8,9 +8,9 @@ import './BlockImageGrid.scss';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
-	imageWidth = '200px',
-	imageHeight = '200px',
-	itemWidth = '200px',
+	imageWidth = '20rem',
+	imageHeight = '20rem',
+	itemWidth = '20rem',
 	fill = 'cover',
 	align = 'center',
 	textAlign = 'center',

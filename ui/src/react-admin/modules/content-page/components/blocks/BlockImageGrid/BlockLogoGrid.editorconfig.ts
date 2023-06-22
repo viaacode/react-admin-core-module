@@ -40,7 +40,7 @@ export const INITIAL_LOGO_GRID_BLOCK_STATE = (): BlockLogoGridWrapperProps &
 		format: '2:1',
 		fill: 'cover',
 		textAlign: 'center',
-		itemWidth: '400px',
+		itemWidth: '40rem',
 	};
 };
 
