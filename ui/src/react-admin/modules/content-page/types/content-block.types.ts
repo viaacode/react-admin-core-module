@@ -29,6 +29,7 @@ export type BackgroundAlignOption =
 export type FillOption = 'cover' | 'contain' | 'auto';
 
 export type BlockGridFormatOption =
+	| 'flex3'
 	| 'squareSmall'
 	| 'squareLarge'
 	| '4:3'

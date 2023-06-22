@@ -1,7 +1,9 @@
 import { AlignOptions, ButtonAction } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import { kebabCase } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
-import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
 import { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
 
@@ -18,23 +20,30 @@ export const formatLookup: {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
 	[format in BlockGridFormatOption]: {
 		/* eslint-enable @typescript-eslint/no-unused-vars */
-		imageWidth: number;
-		imageHeight: number;
-		itemWidth: number;
+		imageWidth: CssSizeSetting;
+		imageHeight: CssSizeSetting;
+		itemWidth: CssSizeSetting;
 	};
 } = {
-	squareSmall: { imageWidth: 200, imageHeight: 200, itemWidth: 200 },
-	squareLarge: { imageWidth: 275, imageHeight: 275, itemWidth: 275 },
-	'4:3': { imageWidth: 400, imageHeight: 300, itemWidth: 400 },
-	'2:1': { imageWidth: 200, imageHeight: 100, itemWidth: 200 },
-	'6:9': { imageWidth: 400, imageHeight: 225, itemWidth: 400 },
-	'400x150': { imageWidth: 400, imageHeight: 150, itemWidth: 400 },
-	'384x220': { imageWidth: 384, imageHeight: 220, itemWidth: 384 },
+	flex3: { imageWidth: '100%', imageHeight: '22.0rem', itemWidth: '30%' },
+	squareSmall: { imageWidth: '20rem', imageHeight: '20rem', itemWidth: '20rem' },
+	squareLarge: { imageWidth: '27.5rem', imageHeight: '27.5rem', itemWidth: '27.5rem' },
+	'4:3': { imageWidth: '40rem', imageHeight: '30rem', itemWidth: '40rem' },
+	'2:1': { imageWidth: '20rem', imageHeight: '10rem', itemWidth: '20rem' },
+	'6:9': { imageWidth: '40rem', imageHeight: '22.5rem', itemWidth: '40rem' },
+	'400x150': { imageWidth: '40rem', imageHeight: '15rem', itemWidth: '40rem' },
+	'384x220': { imageWidth: '38.4rem', imageHeight: '22rem', itemWidth: '38.4rem' },
 };
 
 export const BlockImageGridWrapper: FunctionComponent<BlockImageGridWrapperProps> = ({
 	format = 'squareLarge',
 	...rest
 }) => {
-	return <BlockImageGrid {...formatLookup[format]} {...rest} />;
+	return (
+		<BlockImageGrid
+			{...formatLookup[format]}
+			{...rest}
+			className={clsx(`c-block-grid--${kebabCase(format)}`, rest.className)}
+		/>
+	);
 };

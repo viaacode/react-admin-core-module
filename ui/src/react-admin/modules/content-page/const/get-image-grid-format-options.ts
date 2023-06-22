@@ -4,6 +4,10 @@ import { BlockGridFormatOption } from '~modules/content-page/types/content-block
 
 export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOption>[] = () => [
 	{
+		label: AdminConfigManager.getConfig().services.i18n.tText('30% x 220'),
+		value: 'flex3',
+	},
+	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/content-block___vierkant-klein-200-x-200'
 		),
