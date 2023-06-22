@@ -581,7 +581,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
 					itemsPerPage={USERS_PER_PAGE}
-					onTableStateChanged={setTableState}
+					onTableStateChanged={(newState) => {
+						setTableState(newState);
+					}}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
 					showCheckboxes={!!bulkActions.length}

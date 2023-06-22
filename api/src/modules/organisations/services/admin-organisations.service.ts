@@ -29,29 +29,12 @@ export class AdminOrganisationsService {
 		return {
 			id: hetArchiefOrganisation?.schema_identifier || avoOrganisation?.or_id,
 			name: hetArchiefOrganisation?.schema_name || avoOrganisation?.name,
-			logo_url: hetArchiefOrganisation?.information?.logo?.iri || avoOrganisation?.logo_url,
+			logo_url: hetArchiefOrganisation?.logo?.iri || avoOrganisation?.logo_url,
 		};
 	}
 
-	/**
-	 * @deprecated use getOrganisations instead
-	 * @param id
-	 */
 	public async getOrganisation(id: string): Promise<Organisation> {
-		const response = await this.dataService.execute<
-			OrganisationQueryTypes['GetOrganisationQuery'],
-			OrganisationQueryTypes['GetOrganisationQueryVariables']
-		>(ORGANISATION_QUERIES[getDatabaseType()].GetOrganisationDocument, {
-			id,
-		});
-
-		/* istanbul ignore next */
-		return this.adapt(
-			(response as OrganisationQueryTypes['GetOrganisationQueryAvo'])
-				?.shared_organisations?.[0] ||
-				(response as OrganisationQueryTypes['GetOrganisationQueryHetArchief'])
-					?.maintainer_content_partner?.[0]
-		);
+		return await this.getOrganisations([id])[0];
 	}
 
 	public async getOrganisations(ids: string[]): Promise<Organisation[]> {
@@ -67,7 +50,7 @@ export class AdminOrganisationsService {
 			(response as OrganisationQueryTypes['GetOrganisationsQueryAvo'])
 				?.shared_organisations ||
 			(response as OrganisationQueryTypes['GetOrganisationsQueryHetArchief'])
-				?.maintainer_content_partner ||
+				?.maintainer_organisation ||
 			[]
 		).map(this.adapt);
 	}
