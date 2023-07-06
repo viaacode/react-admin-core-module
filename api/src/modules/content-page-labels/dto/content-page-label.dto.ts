@@ -71,10 +71,8 @@ export class UpdateContentPageLabelDto {
 	})
 	content_type: ContentPageType;
 
-	@IsString()
 	@IsOptional()
 	@ApiProperty({
-		type: String,
 		required: false,
 	})
 	link_to?: PickerItemDto | null = null;

@@ -178,7 +178,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: 'error',
 				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-de-permissiegroep-is-mislukt'
+					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-pagina-label-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
