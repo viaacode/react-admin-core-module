@@ -38,10 +38,11 @@ export type UserOverviewTableCol =
 export interface DeleteContentCounts {
 	publicCollections: number;
 	privateCollections: number;
-	assignments: number;
-	bookmarks: number;
+	publicAssignments: number;
+	privateAssignments: number;
 	publicContentPages: number;
 	privateContentPages: number;
+	bookmarks: number;
 }
 
 export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
