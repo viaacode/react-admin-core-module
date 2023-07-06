@@ -214,7 +214,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				</Link>
 			);
 		}
-		if (!isTransferAll && publicAssignments) {
+		if (isDeleteAll && publicAssignments) {
 			countOutputs.push(
 				<>
 					{publicAssignments}{' '}
