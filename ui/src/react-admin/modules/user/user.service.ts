@@ -197,10 +197,11 @@ export class UserService {
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
-				assignments: 0,
-				bookmarks: 0,
+				publicAssignments: 0,
+				privateAssignments: 0,
 				publicContentPages: 0,
 				privateContentPages: 0,
+				bookmarks: 0,
 			};
 		}
 

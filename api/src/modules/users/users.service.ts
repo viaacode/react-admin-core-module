@@ -308,10 +308,11 @@ export class UsersService {
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
-				assignments: 0,
-				bookmarks: 0,
+				publicAssignments: 0,
+				privateAssignments: 0,
 				publicContentPages: 0,
 				privateContentPages: 0,
+				bookmarks: 0,
 			};
 		}
 
@@ -326,17 +327,18 @@ export class UsersService {
 			return {
 				publicCollections: response.publicCollections?.aggregate?.count || 0,
 				privateCollections: response.privateCollections?.aggregate?.count || 0,
-				assignments: response.assignments?.aggregate?.count || 0,
+				publicAssignments: response.publicAssignments?.aggregate?.count || 0,
+				privateAssignments: response.privateAssignments?.aggregate?.count || 0,
+				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
+				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
 				bookmarks:
 					(response.collectionBookmarks?.aggregate?.count || 0) +
 					(response.itemBookmarks?.aggregate?.count || 0),
-				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
-				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
 			};
 		} catch (err) {
 			throw CustomError('Failed to get content counts for users from the database', err, {
 				profileIds,
-				query: 'GET_CONTENT_COUNTS_FOR_USERS',
+				query: 'GetContentCountsForUsers',
 			});
 		}
 	}

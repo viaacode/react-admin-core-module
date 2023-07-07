@@ -126,12 +126,13 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	};
 
 	const renderConfirmDeleteMessage = () => {
-		const publicCollections: number = get(deleteContentCounts, 'publicCollections') || 0;
-		const privateCollections: number = get(deleteContentCounts, 'privateCollections') || 0;
-		const assignments: number = get(deleteContentCounts, 'assignments') || 0;
-		const bookmarks: number = get(deleteContentCounts, 'bookmarks') || 0;
-		const publicContentPages: number = get(deleteContentCounts, 'publicContentPages') || 0;
-		const privateContentPages: number = get(deleteContentCounts, 'privateContentPages') || 0;
+		const publicCollections: number = deleteContentCounts?.publicCollections || 0;
+		const privateCollections: number = deleteContentCounts?.privateCollections || 0;
+		const publicAssignments: number = deleteContentCounts?.publicAssignments || 0;
+		const privateAssignments: number = deleteContentCounts?.privateAssignments || 0;
+		const publicContentPages: number = deleteContentCounts?.publicContentPages || 0;
+		const privateContentPages: number = deleteContentCounts?.privateContentPages || 0;
+		const bookmarks: number = deleteContentCounts?.bookmarks || 0;
 
 		const isDeleteAll = selectedDeleteOption === 'DELETE_ALL';
 		const isTransferAll = selectedDeleteOption === 'TRANSFER_ALL';
@@ -150,7 +151,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{publicCollections}{' '}
-					{tHtml('admin/users/views/user-overview___publieke-collecties')}
+					{publicCollections === 1
+						? tHtml('Publieke collectie of bundel')
+						: tHtml('admin/users/views/user-overview___publieke-collecties')}
 				</Link>
 			);
 		}
@@ -167,7 +170,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{privateCollections}{' '}
-					{tHtml('admin/users/views/user-overview___prive-collecties')}
+					{privateCollections === 1
+						? tHtml('Privé collectie of bundel')
+						: tHtml('admin/users/views/user-overview___prive-collecties')}
 				</Link>
 			);
 		}
@@ -184,7 +189,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{publicContentPages}{' '}
-					{tHtml('admin/users/views/user-overview___publieke-content-paginas')}
+					{publicContentPages === 1
+						? tHtml('Publieke content pagina')
+						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
 				</Link>
 			);
 		}
@@ -201,21 +208,37 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{privateContentPages}{' '}
-					{tHtml('admin/users/views/user-overview___prive-content-paginas')}
+					{privateContentPages === 1
+						? tHtml('Privé content pagina')
+						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
 				</Link>
 			);
 		}
-		if (!isTransferAll && assignments) {
+		if (isDeleteAll && publicAssignments) {
 			countOutputs.push(
 				<>
-					{assignments} {tHtml('admin/users/views/user-overview___opdrachten')}
+					{publicAssignments}{' '}
+					{publicAssignments === 1
+						? tHtml('Publieke opdracht')
+						: tHtml('Publieke opdrachten')}
+				</>
+			);
+		}
+		if (!isTransferAll && privateAssignments) {
+			countOutputs.push(
+				<>
+					{privateAssignments}{' '}
+					{privateAssignments === 1 ? tHtml('Privé opdracht') : tHtml('Privé opdrachten')}
 				</>
 			);
 		}
 		if (!isTransferAll && bookmarks) {
 			countOutputs.push(
 				<>
-					{bookmarks} {tHtml('admin/users/views/user-overview___bladwijzers')}
+					{bookmarks}{' '}
+					{bookmarks === 1
+						? tHtml('Bladwijzer')
+						: tHtml('admin/users/views/user-overview___bladwijzers')}
 				</>
 			);
 		}

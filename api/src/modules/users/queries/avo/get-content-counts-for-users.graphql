@@ -2,8 +2,41 @@ query getContentCountsForUsers($profileIds: [uuid!]!) {
 	publicCollections: app_collections_aggregate(
 		where: {
 			profile: { id: { _in: $profileIds } }
-			is_public: { _eq: true }
+			_or: [{ is_public: { _eq: true } }, { contributors: {} }]
 			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	privateCollections: app_collections_aggregate(
+		where: {
+			profile: { id: { _in: $profileIds } }
+			_and: [{ is_public: { _eq: false } }, { _not: { contributors: {} } }]
+			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	publicAssignments: app_assignments_v2_aggregate(
+		where: {
+			owner_profile_id: { _in: $profileIds }
+			is_deleted: { _eq: false }
+			_or: [{ is_public: { _eq: true } }, { contributors: {} }]
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	privateAssignments: app_assignments_v2_aggregate(
+		where: {
+			owner_profile_id: { _in: $profileIds }
+			is_deleted: { _eq: false }
+			_and: [{ is_public: { _eq: false } }, { _not: { contributors: {} } }]
 		}
 	) {
 		aggregate {
@@ -21,20 +54,10 @@ query getContentCountsForUsers($profileIds: [uuid!]!) {
 			count
 		}
 	}
-	privateCollections: app_collections_aggregate(
+	privateContentPages: app_content_aggregate(
 		where: {
-			profile: { id: { _in: $profileIds } }
+			user_profile_id: { _in: $profileIds }
 			is_public: { _eq: false }
-			is_deleted: { _eq: false }
-		}
-	) {
-		aggregate {
-			count
-		}
-	}
-	assignments: app_assignments_aggregate(
-		where: {
-			owner_profile_id: { _in: $profileIds }
 			is_deleted: { _eq: false }
 		}
 	) {
@@ -49,20 +72,7 @@ query getContentCountsForUsers($profileIds: [uuid!]!) {
 			count
 		}
 	}
-	itemBookmarks: app_item_bookmarks_aggregate(
-		where: { profile_id: { _in: $profileIds } }
-	) {
-		aggregate {
-			count
-		}
-	}
-	privateContentPages: app_content_aggregate(
-		where: {
-			user_profile_id: { _in: $profileIds }
-			is_public: { _eq: false }
-			is_deleted: { _eq: false }
-		}
-	) {
+	itemBookmarks: app_item_bookmarks_aggregate(where: { profile_id: { _in: $profileIds } }) {
 		aggregate {
 			count
 		}

@@ -65,8 +65,9 @@ export type UserBulkAction = 'block' | 'unblock' | 'delete' | 'change_subjects' 
 export interface DeleteContentCounts {
 	publicCollections: number;
 	privateCollections: number;
-	assignments: number;
-	bookmarks: number;
+	publicAssignments: number;
+	privateAssignments: number;
 	publicContentPages: number;
 	privateContentPages: number;
+	bookmarks: number;
 }
