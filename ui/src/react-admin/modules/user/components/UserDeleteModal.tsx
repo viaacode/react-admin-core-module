@@ -152,7 +152,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{publicCollections}{' '}
 					{publicCollections === 1
-						? tHtml('Publieke collectie of bundel')
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-collectie-of-bundel'
+						  )
 						: tHtml('admin/users/views/user-overview___publieke-collecties')}
 				</Link>
 			);
@@ -171,7 +173,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{privateCollections}{' '}
 					{privateCollections === 1
-						? tHtml('Privé collectie of bundel')
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-collectie-of-bundel'
+						  )
 						: tHtml('admin/users/views/user-overview___prive-collecties')}
 				</Link>
 			);
@@ -190,7 +194,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{publicContentPages}{' '}
 					{publicContentPages === 1
-						? tHtml('Publieke content pagina')
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-content-pagina'
+						  )
 						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
 				</Link>
 			);
@@ -209,7 +215,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{privateContentPages}{' '}
 					{privateContentPages === 1
-						? tHtml('Privé content pagina')
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-content-pagina'
+						  )
 						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
 				</Link>
 			);
@@ -219,8 +227,12 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				<>
 					{publicAssignments}{' '}
 					{publicAssignments === 1
-						? tHtml('Publieke opdracht')
-						: tHtml('Publieke opdrachten')}
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten'
+						  )}
 				</>
 			);
 		}
@@ -228,7 +240,13 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<>
 					{privateAssignments}{' '}
-					{privateAssignments === 1 ? tHtml('Privé opdracht') : tHtml('Privé opdrachten')}
+					{privateAssignments === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-opdracht'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten'
+						  )}
 				</>
 			);
 		}
@@ -237,7 +255,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				<>
 					{bookmarks}{' '}
 					{bookmarks === 1
-						? tHtml('Bladwijzer')
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___bladwijzer'
+						  )
 						: tHtml('admin/users/views/user-overview___bladwijzers')}
 				</>
 			);
