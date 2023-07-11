@@ -1,9 +1,6 @@
-mutation bulkDeleteSubjectsFromProfiles(
-	$subjects: [String!]!
-	$profileIds: [uuid!]!
-) {
-	delete_users_profile_classifications(
-		where: { key: { _in: $subjects }, profile_id: { _in: $profileIds } }
+mutation bulkDeleteLomsFromProfiles($lomIds: [String!]!, $profileIds: [uuid!]!) {
+	delete_users_profiles_lom_links(
+		where: { lom_id: { _in: $lomIds }, profile_id: { _in: $profileIds } }
 	) {
 		affected_rows
 	}

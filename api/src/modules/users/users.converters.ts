@@ -1,4 +1,4 @@
-import type { Avo, PermissionName } from '@viaa/avo2-types';
+import { Avo, PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
 import { UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from './users.types';
 
@@ -44,8 +44,7 @@ export function convertUserInfoToCommonUser(
 						label: org.organizationName,
 					})
 				),
-				subjects: user.profile.subjects,
-				educationLevels: user.profile.educationLevels,
+				loms: user.profile.loms,
 				isException: user.profile.is_exception ?? undefined,
 				businessCategory: user.profile.business_category ?? undefined,
 				createdAt: user.profile.created_at,
@@ -107,8 +106,7 @@ export function convertUserInfoToCommonUser(
 						label: org.organizationName,
 					})
 				),
-				subjects: profile.subjects,
-				educationLevels: profile.educationLevels,
+				loms: profile.loms,
 				isException: profile.is_exception ?? undefined,
 				businessCategory: profile.business_category ?? undefined,
 				createdAt: profile.created_at,
@@ -172,8 +170,7 @@ export function convertUserInfoToCommonUser(
 						label: org.organization?.ldap_description ?? '',
 					})
 				),
-				subjects: user.classifications.map((classification) => classification.key),
-				educationLevels: user.contexts.map((context) => context.key),
+				loms: user.loms || [],
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
 				createdAt: user.acc_created_at,
@@ -251,6 +248,7 @@ export function convertUserInfoToCommonUser(
 							?.iri ?? profile.organisation?.logo_url,
 					data: null,
 				},
+				loms: [],
 				lastAccessAt: profile.last_access_at,
 			};
 		}
@@ -277,6 +275,7 @@ export function convertUserInfoToCommonUser(
 					name: user.visitorSpaceSlug,
 					data: null,
 				},
+				loms: [],
 				lastAccessAt: undefined,
 				permissions: user.permissions,
 			} as Avo.User.CommonUser;

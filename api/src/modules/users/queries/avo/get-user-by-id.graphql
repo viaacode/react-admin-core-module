@@ -74,10 +74,6 @@ query getUserById($id: uuid!) {
 			}
 			user_id
 		}
-		contexts {
-			id
-			key
-		}
 		group_id
 		group_name
 		company_name
@@ -88,15 +84,19 @@ query getUserById($id: uuid!) {
 		unblocked_at {
 			date: max
 		}
-		classifications {
-			id
-			key
-		}
 		organisations {
 			organization_id
 			unit_id
 			organization {
 				ldap_description
+			}
+		}
+		loms {
+			lom {
+				id
+				label
+				scheme
+				broader
 			}
 		}
 		user {
