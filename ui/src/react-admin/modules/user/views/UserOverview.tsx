@@ -1,3 +1,4 @@
+import { LomSchemeType } from '@viaa/avo2-types/types/lom/enums';
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
@@ -496,12 +497,20 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				);
 
 			case 'educationLevels': {
-				const labels = commonUser?.educationLevels ?? [];
+				const labels = compact(
+					(commonUser?.loms ?? [])
+						.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
+						.map((lom) => lom.lom?.label)
+				);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 
 			case 'subjects': {
-				const labels = commonUser?.subjects ?? [];
+				const labels = compact(
+					(commonUser?.loms ?? [])
+						.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
+						.map((lom) => lom.lom?.label)
+				);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 

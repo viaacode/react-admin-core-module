@@ -4291,6 +4291,118 @@ export type App_Assignments_V2_Inc_Input = {
   type_id?: InputMaybe<Scalars['Int']>;
 };
 
+/** columns and relationships of "app.assignments_v2_index" */
+export type App_Assignments_V2_Index = {
+  __typename?: 'app_assignments_v2_index';
+  document?: Maybe<Scalars['json']>;
+  document_id?: Maybe<Scalars['uuid']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  index_id?: Maybe<Scalars['String']>;
+  is_deleted?: Maybe<Scalars['Boolean']>;
+  is_public?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** columns and relationships of "app.assignments_v2_index" */
+export type App_Assignments_V2_IndexDocumentArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "app.assignments_v2_index" */
+export type App_Assignments_V2_Index_Aggregate = {
+  __typename?: 'app_assignments_v2_index_aggregate';
+  aggregate?: Maybe<App_Assignments_V2_Index_Aggregate_Fields>;
+  nodes: Array<App_Assignments_V2_Index>;
+};
+
+/** aggregate fields of "app.assignments_v2_index" */
+export type App_Assignments_V2_Index_Aggregate_Fields = {
+  __typename?: 'app_assignments_v2_index_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Assignments_V2_Index_Max_Fields>;
+  min?: Maybe<App_Assignments_V2_Index_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.assignments_v2_index" */
+export type App_Assignments_V2_Index_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "app.assignments_v2_index". All fields are combined with a logical 'AND'. */
+export type App_Assignments_V2_Index_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Assignments_V2_Index_Bool_Exp>>;
+  _not?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Assignments_V2_Index_Bool_Exp>>;
+  document?: InputMaybe<Json_Comparison_Exp>;
+  document_id?: InputMaybe<Uuid_Comparison_Exp>;
+  external_id?: InputMaybe<Uuid_Comparison_Exp>;
+  index_id?: InputMaybe<String_Comparison_Exp>;
+  is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
+  is_public?: InputMaybe<Boolean_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type App_Assignments_V2_Index_Max_Fields = {
+  __typename?: 'app_assignments_v2_index_max_fields';
+  document_id?: Maybe<Scalars['uuid']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  index_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type App_Assignments_V2_Index_Min_Fields = {
+  __typename?: 'app_assignments_v2_index_min_fields';
+  document_id?: Maybe<Scalars['uuid']>;
+  external_id?: Maybe<Scalars['uuid']>;
+  index_id?: Maybe<Scalars['String']>;
+};
+
+/** Ordering options when selecting data from "app.assignments_v2_index". */
+export type App_Assignments_V2_Index_Order_By = {
+  document?: InputMaybe<Order_By>;
+  document_id?: InputMaybe<Order_By>;
+  external_id?: InputMaybe<Order_By>;
+  index_id?: InputMaybe<Order_By>;
+  is_deleted?: InputMaybe<Order_By>;
+  is_public?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "app.assignments_v2_index" */
+export enum App_Assignments_V2_Index_Select_Column {
+  /** column name */
+  Document = 'document',
+  /** column name */
+  DocumentId = 'document_id',
+  /** column name */
+  ExternalId = 'external_id',
+  /** column name */
+  IndexId = 'index_id',
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsPublic = 'is_public'
+}
+
+/** Streaming cursor of the table "app_assignments_v2_index" */
+export type App_Assignments_V2_Index_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Assignments_V2_Index_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Assignments_V2_Index_Stream_Cursor_Value_Input = {
+  document?: InputMaybe<Scalars['json']>;
+  document_id?: InputMaybe<Scalars['uuid']>;
+  external_id?: InputMaybe<Scalars['uuid']>;
+  index_id?: InputMaybe<Scalars['String']>;
+  is_deleted?: InputMaybe<Scalars['Boolean']>;
+  is_public?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** input type for inserting data into table "app.assignments_v2" */
 export type App_Assignments_V2_Insert_Input = {
   answer_url?: InputMaybe<Scalars['String']>;
@@ -23671,6 +23783,149 @@ export type Lookup_Graph_Updates = {
   where: Lookup_Graph_Bool_Exp;
 };
 
+/** mapping tabel om van ldap onderwijs niveaus naar thesaurus lom onderwijs niveaus te mappen en omgekeerd */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure';
+  ldap_context: Scalars['String'];
+  /** An object relationship */
+  lom?: Maybe<Lookup_Thesaurus>;
+  thesaurus_structure_uri: Scalars['String'];
+};
+
+/** aggregated selection of "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure_aggregate';
+  aggregate?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate_Fields>;
+  nodes: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+};
+
+/** aggregate fields of "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate_Fields = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Max_Fields>;
+  min?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Min_Fields>;
+};
+
+
+/** aggregate fields of "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.ldap_context_to_lom_thesaurus_structure". All fields are combined with a logical 'AND'. */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>>;
+  ldap_context?: InputMaybe<String_Comparison_Exp>;
+  lom?: InputMaybe<Lookup_Thesaurus_Bool_Exp>;
+  thesaurus_structure_uri?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export enum Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Constraint {
+  /** unique or primary key constraint on columns "thesaurus_structure_uri" */
+  LdapContextToLomThesaurusStrucThesaurusStructureUriKey = 'ldap_context_to_lom_thesaurus_struc_thesaurus_structure_uri_key',
+  /** unique or primary key constraint on columns "ldap_context" */
+  LdapContextToLomThesaurusStructureLdapContextKey = 'ldap_context_to_lom_thesaurus_structure_ldap_context_key',
+  /** unique or primary key constraint on columns "ldap_context", "thesaurus_structure_uri" */
+  LdapContextToLomThesaurusStructurePkey = 'ldap_context_to_lom_thesaurus_structure_pkey'
+}
+
+/** input type for inserting data into table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Insert_Input = {
+  ldap_context?: InputMaybe<Scalars['String']>;
+  lom?: InputMaybe<Lookup_Thesaurus_Obj_Rel_Insert_Input>;
+  thesaurus_structure_uri?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Max_Fields = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure_max_fields';
+  ldap_context?: Maybe<Scalars['String']>;
+  thesaurus_structure_uri?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Min_Fields = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure_min_fields';
+  ldap_context?: Maybe<Scalars['String']>;
+  thesaurus_structure_uri?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response = {
+  __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+};
+
+/** on_conflict condition type for table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_On_Conflict = {
+  constraint: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Constraint;
+  update_columns?: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Update_Column>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.ldap_context_to_lom_thesaurus_structure". */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Order_By = {
+  ldap_context?: InputMaybe<Order_By>;
+  lom?: InputMaybe<Lookup_Thesaurus_Order_By>;
+  thesaurus_structure_uri?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup.ldap_context_to_lom_thesaurus_structure */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Pk_Columns_Input = {
+  ldap_context: Scalars['String'];
+  thesaurus_structure_uri: Scalars['String'];
+};
+
+/** select columns of table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export enum Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column {
+  /** column name */
+  LdapContext = 'ldap_context',
+  /** column name */
+  ThesaurusStructureUri = 'thesaurus_structure_uri'
+}
+
+/** input type for updating data in table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Set_Input = {
+  ldap_context?: InputMaybe<Scalars['String']>;
+  thesaurus_structure_uri?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "lookup_ldap_context_to_lom_thesaurus_structure" */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Stream_Cursor_Value_Input = {
+  ldap_context?: InputMaybe<Scalars['String']>;
+  thesaurus_structure_uri?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "lookup.ldap_context_to_lom_thesaurus_structure" */
+export enum Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Update_Column {
+  /** column name */
+  LdapContext = 'ldap_context',
+  /** column name */
+  ThesaurusStructureUri = 'thesaurus_structure_uri'
+}
+
+export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Set_Input>;
+  where: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp;
+};
+
 /** columns and relationships of "lookup.thesaurus" */
 export type Lookup_Thesaurus = {
   __typename?: 'lookup_thesaurus';
@@ -24640,6 +24895,10 @@ export type Mutation_Root = {
   delete_lookup_graph?: Maybe<Lookup_Graph_Mutation_Response>;
   /** delete single row from the table: "lookup.graph" */
   delete_lookup_graph_by_pk?: Maybe<Lookup_Graph>;
+  /** delete data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  delete_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
+  /** delete single row from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  delete_lookup_ldap_context_to_lom_thesaurus_structure_by_pk?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** delete data from the table: "lookup.thesaurus_old" */
   delete_lookup_thesaurus_old?: Maybe<Lookup_Thesaurus_Old_Mutation_Response>;
   /** delete single row from the table: "lookup.thesaurus_old" */
@@ -25016,6 +25275,10 @@ export type Mutation_Root = {
   insert_lookup_graph?: Maybe<Lookup_Graph_Mutation_Response>;
   /** insert a single row into the table: "lookup.graph" */
   insert_lookup_graph_one?: Maybe<Lookup_Graph>;
+  /** insert data into the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  insert_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
+  /** insert a single row into the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  insert_lookup_ldap_context_to_lom_thesaurus_structure_one?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** insert data into the table: "lookup.thesaurus_old" */
   insert_lookup_thesaurus_old?: Maybe<Lookup_Thesaurus_Old_Mutation_Response>;
   /** insert a single row into the table: "lookup.thesaurus_old" */
@@ -25516,6 +25779,12 @@ export type Mutation_Root = {
   update_lookup_graph_by_pk?: Maybe<Lookup_Graph>;
   /** update multiples rows of table: "lookup.graph" */
   update_lookup_graph_many?: Maybe<Array<Maybe<Lookup_Graph_Mutation_Response>>>;
+  /** update data of the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  update_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
+  /** update single row of the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  update_lookup_ldap_context_to_lom_thesaurus_structure_by_pk?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+  /** update multiples rows of table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  update_lookup_ldap_context_to_lom_thesaurus_structure_many?: Maybe<Array<Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>>>;
   /** update data of the table: "lookup.thesaurus_old" */
   update_lookup_thesaurus_old?: Maybe<Lookup_Thesaurus_Old_Mutation_Response>;
   /** update single row of the table: "lookup.thesaurus_old" */
@@ -26454,6 +26723,19 @@ export type Mutation_RootDelete_Lookup_Graph_By_PkArgs = {
   object: Scalars['String'];
   predicate: Scalars['String'];
   subject: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Ldap_Context_To_Lom_Thesaurus_StructureArgs = {
+  where: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_By_PkArgs = {
+  ldap_context: Scalars['String'];
+  thesaurus_structure_uri: Scalars['String'];
 };
 
 
@@ -27706,6 +27988,20 @@ export type Mutation_RootInsert_Lookup_GraphArgs = {
 export type Mutation_RootInsert_Lookup_Graph_OneArgs = {
   object: Lookup_Graph_Insert_Input;
   on_conflict?: InputMaybe<Lookup_Graph_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Ldap_Context_To_Lom_Thesaurus_StructureArgs = {
+  objects: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_OneArgs = {
+  object: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_On_Conflict>;
 };
 
 
@@ -29574,6 +29870,26 @@ export type Mutation_RootUpdate_Lookup_Graph_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Lookup_Ldap_Context_To_Lom_Thesaurus_StructureArgs = {
+  _set?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Set_Input>;
+  where: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_By_PkArgs = {
+  _set?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Set_Input>;
+  pk_columns: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_ManyArgs = {
+  updates: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Lookup_Thesaurus_OldArgs = {
   _set?: InputMaybe<Lookup_Thesaurus_Old_Set_Input>;
   where: Lookup_Thesaurus_Old_Bool_Exp;
@@ -30390,6 +30706,10 @@ export type Query_Root = {
   app_assignments_v2_contributors_aggregate: App_Assignments_V2_Contributors_Aggregate;
   /** fetch data from the table: "app.assignments_v2_contributors" using primary key columns */
   app_assignments_v2_contributors_by_pk?: Maybe<App_Assignments_V2_Contributors>;
+  /** fetch data from the table: "app.assignments_v2_index" */
+  app_assignments_v2_index: Array<App_Assignments_V2_Index>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_index" */
+  app_assignments_v2_index_aggregate: App_Assignments_V2_Index_Aggregate;
   /** fetch data from the table: "app.assignments_v2_lom_links" */
   app_assignments_v2_lom_links: Array<App_Assignments_V2_Lom_Links>;
   /** fetch aggregated fields from the table: "app.assignments_v2_lom_links" */
@@ -30750,6 +31070,12 @@ export type Query_Root = {
   lookup_graph_aggregate: Lookup_Graph_Aggregate;
   /** fetch data from the table: "lookup.graph" using primary key columns */
   lookup_graph_by_pk?: Maybe<Lookup_Graph>;
+  /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  lookup_ldap_context_to_lom_thesaurus_structure: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+  /** fetch aggregated fields from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  lookup_ldap_context_to_lom_thesaurus_structure_aggregate: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate;
+  /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" using primary key columns */
+  lookup_ldap_context_to_lom_thesaurus_structure_by_pk?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** fetch data from the table: "lookup.thesaurus" */
   lookup_thesaurus: Array<Lookup_Thesaurus>;
   /** fetch aggregated fields from the table: "lookup.thesaurus" */
@@ -31244,6 +31570,24 @@ export type Query_RootApp_Assignments_V2_Contributors_AggregateArgs = {
 
 export type Query_RootApp_Assignments_V2_Contributors_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootApp_Assignments_V2_IndexArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Index_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Assignments_V2_Index_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Index_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
 };
 
 
@@ -32666,6 +33010,30 @@ export type Query_RootLookup_Graph_By_PkArgs = {
   object: Scalars['String'];
   predicate: Scalars['String'];
   subject: Scalars['String'];
+};
+
+
+export type Query_RootLookup_Ldap_Context_To_Lom_Thesaurus_StructureArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Order_By>>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Ldap_Context_To_Lom_Thesaurus_Structure_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Order_By>>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Ldap_Context_To_Lom_Thesaurus_Structure_By_PkArgs = {
+  ldap_context: Scalars['String'];
+  thesaurus_structure_uri: Scalars['String'];
 };
 
 
@@ -36628,6 +36996,12 @@ export type Subscription_Root = {
   app_assignments_v2_contributors_by_pk?: Maybe<App_Assignments_V2_Contributors>;
   /** fetch data from the table in a streaming manner: "app.assignments_v2_contributors" */
   app_assignments_v2_contributors_stream: Array<App_Assignments_V2_Contributors>;
+  /** fetch data from the table: "app.assignments_v2_index" */
+  app_assignments_v2_index: Array<App_Assignments_V2_Index>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_index" */
+  app_assignments_v2_index_aggregate: App_Assignments_V2_Index_Aggregate;
+  /** fetch data from the table in a streaming manner: "app.assignments_v2_index" */
+  app_assignments_v2_index_stream: Array<App_Assignments_V2_Index>;
   /** fetch data from the table: "app.assignments_v2_lom_links" */
   app_assignments_v2_lom_links: Array<App_Assignments_V2_Lom_Links>;
   /** fetch aggregated fields from the table: "app.assignments_v2_lom_links" */
@@ -37120,6 +37494,14 @@ export type Subscription_Root = {
   lookup_graph_by_pk?: Maybe<Lookup_Graph>;
   /** fetch data from the table in a streaming manner: "lookup.graph" */
   lookup_graph_stream: Array<Lookup_Graph>;
+  /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  lookup_ldap_context_to_lom_thesaurus_structure: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+  /** fetch aggregated fields from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  lookup_ldap_context_to_lom_thesaurus_structure_aggregate: Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Aggregate;
+  /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" using primary key columns */
+  lookup_ldap_context_to_lom_thesaurus_structure_by_pk?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
+  /** fetch data from the table in a streaming manner: "lookup.ldap_context_to_lom_thesaurus_structure" */
+  lookup_ldap_context_to_lom_thesaurus_structure_stream: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** fetch data from the table: "lookup.thesaurus" */
   lookup_thesaurus: Array<Lookup_Thesaurus>;
   /** fetch aggregated fields from the table: "lookup.thesaurus" */
@@ -37769,6 +38151,31 @@ export type Subscription_RootApp_Assignments_V2_Contributors_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Assignments_V2_Contributors_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Assignments_V2_Contributors_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_IndexArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Index_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Index_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Index_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Index_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<App_Assignments_V2_Index_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Assignments_V2_Index_Bool_Exp>;
 };
 
 
@@ -39653,6 +40060,37 @@ export type Subscription_RootLookup_Graph_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Lookup_Graph_Stream_Cursor_Input>>;
   where?: InputMaybe<Lookup_Graph_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Ldap_Context_To_Lom_Thesaurus_StructureArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Order_By>>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Ldap_Context_To_Lom_Thesaurus_Structure_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Order_By>>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Ldap_Context_To_Lom_Thesaurus_Structure_By_PkArgs = {
+  ldap_context: Scalars['String'];
+  thesaurus_structure_uri: Scalars['String'];
+};
+
+
+export type Subscription_RootLookup_Ldap_Context_To_Lom_Thesaurus_Structure_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Stream_Cursor_Input>>;
+  where?: InputMaybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Bool_Exp>;
 };
 
 
@@ -44337,6 +44775,8 @@ export type Users_Permissions_Bool_Exp = {
 
 /** unique or primary key constraints on table "users.permissions" */
 export enum Users_Permissions_Constraint {
+  /** unique or primary key constraint on columns "label" */
+  PermissionsLabelKey = 'permissions_label_key',
   /** unique or primary key constraint on columns "id" */
   UserPermissionsPkey = 'user_permissions_pkey'
 }
@@ -46837,7 +47277,11 @@ export type Users_Profiles_Insert_Input = {
 export type Users_Profiles_Lom_Links = {
   __typename?: 'users_profiles_lom_links';
   id: Scalars['uuid'];
+  /** An object relationship */
+  lom?: Maybe<Lookup_Thesaurus>;
   lom_id: Scalars['String'];
+  /** An object relationship */
+  profile: Users_Profiles;
   profile_id: Scalars['uuid'];
 };
 
@@ -46894,7 +47338,9 @@ export type Users_Profiles_Lom_Links_Bool_Exp = {
   _not?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
   _or?: InputMaybe<Array<Users_Profiles_Lom_Links_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  lom?: InputMaybe<Lookup_Thesaurus_Bool_Exp>;
   lom_id?: InputMaybe<String_Comparison_Exp>;
+  profile?: InputMaybe<Users_Profiles_Bool_Exp>;
   profile_id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -46909,7 +47355,9 @@ export enum Users_Profiles_Lom_Links_Constraint {
 /** input type for inserting data into table "users.profiles_lom_links" */
 export type Users_Profiles_Lom_Links_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  lom?: InputMaybe<Lookup_Thesaurus_Obj_Rel_Insert_Input>;
   lom_id?: InputMaybe<Scalars['String']>;
+  profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
   profile_id?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -46962,7 +47410,9 @@ export type Users_Profiles_Lom_Links_On_Conflict = {
 /** Ordering options when selecting data from "users.profiles_lom_links". */
 export type Users_Profiles_Lom_Links_Order_By = {
   id?: InputMaybe<Order_By>;
+  lom?: InputMaybe<Lookup_Thesaurus_Order_By>;
   lom_id?: InputMaybe<Order_By>;
+  profile?: InputMaybe<Users_Profiles_Order_By>;
   profile_id?: InputMaybe<Order_By>;
 };
 
@@ -47345,6 +47795,10 @@ export type Users_Summary_View = {
   last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
   last_name_lower?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  loms: Array<Users_Profiles_Lom_Links>;
+  /** An aggregate relationship */
+  loms_aggregate: Users_Profiles_Lom_Links_Aggregate;
   mail?: Maybe<Scalars['String']>;
   /** An array relationship */
   organisations: Array<Users_Profile_Organizations>;
@@ -47491,6 +47945,26 @@ export type Users_Summary_ViewIdps_AggregateArgs = {
 
 
 /** columns and relationships of "users.summary_view" */
+export type Users_Summary_ViewLomsArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profiles_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profiles_Lom_Links_Order_By>>;
+  where?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users.summary_view" */
+export type Users_Summary_ViewLoms_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profiles_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profiles_Lom_Links_Order_By>>;
+  where?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users.summary_view" */
 export type Users_Summary_ViewOrganisationsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -47600,6 +48074,8 @@ export type Users_Summary_View_Bool_Exp = {
   last_access_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   last_name?: InputMaybe<String_Comparison_Exp>;
   last_name_lower?: InputMaybe<String_Comparison_Exp>;
+  loms?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
+  loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Bool_Exp>;
   mail?: InputMaybe<String_Comparison_Exp>;
   organisations?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
   organisations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp>;
@@ -47642,6 +48118,7 @@ export type Users_Summary_View_Insert_Input = {
   last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
   last_name_lower?: InputMaybe<Scalars['String']>;
+  loms?: InputMaybe<Users_Profiles_Lom_Links_Arr_Rel_Insert_Input>;
   mail?: InputMaybe<Scalars['String']>;
   organisations?: InputMaybe<Users_Profile_Organizations_Arr_Rel_Insert_Input>;
   permissions?: InputMaybe<Users_Permission_Matrix_View_Arr_Rel_Insert_Input>;
@@ -47739,6 +48216,7 @@ export type Users_Summary_View_Order_By = {
   last_access_at?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
   last_name_lower?: InputMaybe<Order_By>;
+  loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Order_By>;
   mail?: InputMaybe<Order_By>;
   organisations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Order_By>;
   permissions_aggregate?: InputMaybe<Users_Permission_Matrix_View_Aggregate_Order_By>;
@@ -48707,20 +49185,20 @@ export type UpdateUserGroupsPermissionsMutationVariables = Exact<{
 
 export type UpdateUserGroupsPermissionsMutation = { __typename?: 'mutation_root', delete_users_group_permissions?: { __typename?: 'users_group_permissions_mutation_response', affected_rows: number } | null, insert_users_group_permissions?: { __typename?: 'users_group_permissions_mutation_response', affected_rows: number } | null };
 
-export type BulkAddSubjectsToProfilesMutationVariables = Exact<{
-  subjects: Array<Users_Profile_Classifications_Insert_Input> | Users_Profile_Classifications_Insert_Input;
+export type BulkAddLomsToProfilesMutationVariables = Exact<{
+  loms: Array<Users_Profiles_Lom_Links_Insert_Input> | Users_Profiles_Lom_Links_Insert_Input;
 }>;
 
 
-export type BulkAddSubjectsToProfilesMutation = { __typename?: 'mutation_root', insert_users_profile_classifications?: { __typename?: 'users_profile_classifications_mutation_response', affected_rows: number } | null };
+export type BulkAddLomsToProfilesMutation = { __typename?: 'mutation_root', insert_users_profiles_lom_links?: { __typename?: 'users_profiles_lom_links_mutation_response', affected_rows: number } | null };
 
-export type BulkDeleteSubjectsFromProfilesMutationVariables = Exact<{
-  subjects: Array<Scalars['String']> | Scalars['String'];
+export type BulkDeleteLomsFromProfilesMutationVariables = Exact<{
+  lomIds: Array<Scalars['String']> | Scalars['String'];
   profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
 }>;
 
 
-export type BulkDeleteSubjectsFromProfilesMutation = { __typename?: 'mutation_root', delete_users_profile_classifications?: { __typename?: 'users_profile_classifications_mutation_response', affected_rows: number } | null };
+export type BulkDeleteLomsFromProfilesMutation = { __typename?: 'mutation_root', delete_users_profiles_lom_links?: { __typename?: 'users_profiles_lom_links_mutation_response', affected_rows: number } | null };
 
 export type GetContentCountsForUsersQueryVariables = Exact<{
   profileIds: Array<Scalars['uuid']> | Scalars['uuid'];
@@ -48758,7 +49236,7 @@ export type GetUserByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_user_permission_groups: Array<{ __typename?: 'users_group_user_permission_groups', group: { __typename?: 'users_groups', label: string, id: number }, permission_group: { __typename?: 'users_permission_groups', label: string, id: number, permission_group_user_permissions: Array<{ __typename?: 'users_permission_group_user_permissions', permission: { __typename?: 'users_permissions', label: string, id: number } }> } }> } } | null } | null, contexts: Array<{ __typename?: 'users_profile_contexts', id: any, key: string }>, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, classifications: Array<{ __typename?: 'users_profile_classifications', id: any, key: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
+export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_user_permission_groups: Array<{ __typename?: 'users_group_user_permission_groups', group: { __typename?: 'users_groups', label: string, id: number }, permission_group: { __typename?: 'users_permission_groups', label: string, id: number, permission_group_user_permissions: Array<{ __typename?: 'users_permission_group_user_permissions', permission: { __typename?: 'users_permissions', label: string, id: number } }> } }> } } | null } | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
 
 export type GetUsersQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -48768,7 +49246,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, classifications: Array<{ __typename?: 'users_profile_classifications', key: string }>, contexts: Array<{ __typename?: 'users_profile_contexts', key: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
 
 
 export const GetPublicCollectionsByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicCollectionsById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"typeId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_collections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"type_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"typeId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPublicCollectionsByIdQuery, GetPublicCollectionsByIdQueryVariables>;
@@ -48832,12 +49310,12 @@ export const GetFirstObjectIdDocument = {"kind":"Document","definitions":[{"kind
 export const GetUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroupsPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"group_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsPermissionsQuery, GetUserGroupsPermissionsQueryVariables>;
 export const GetUserGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_groups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsQuery, GetUserGroupsQueryVariables>;
 export const UpdateUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateUserGroupsPermissions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permissions_insert_input"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permissions_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_users_group_permissions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"insert_users_group_permissions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}}},{"kind":"Argument","name":{"kind":"Name","value":"on_conflict"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"constraint"},"value":{"kind":"EnumValue","value":"group_permissions_user_group_id_permission_id_key"}},{"kind":"ObjectField","name":{"kind":"Name","value":"update_columns"},"value":{"kind":"ListValue","values":[]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateUserGroupsPermissionsMutation, UpdateUserGroupsPermissionsMutationVariables>;
-export const BulkAddSubjectsToProfilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"bulkAddSubjectsToProfiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subjects"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profile_classifications_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_users_profile_classifications"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subjects"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<BulkAddSubjectsToProfilesMutation, BulkAddSubjectsToProfilesMutationVariables>;
-export const BulkDeleteSubjectsFromProfilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"bulkDeleteSubjectsFromProfiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subjects"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_users_profile_classifications"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subjects"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<BulkDeleteSubjectsFromProfilesMutation, BulkDeleteSubjectsFromProfilesMutationVariables>;
+export const BulkAddLomsToProfilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"bulkAddLomsToProfiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"loms"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_profiles_lom_links_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_users_profiles_lom_links"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"loms"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<BulkAddLomsToProfilesMutation, BulkAddLomsToProfilesMutationVariables>;
+export const BulkDeleteLomsFromProfilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"bulkDeleteLomsFromProfiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lomIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_users_profiles_lom_links"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"lom_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lomIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<BulkDeleteLomsFromProfilesMutation, BulkDeleteLomsFromProfilesMutationVariables>;
 export const GetContentCountsForUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentCountsForUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"publicCollections"},"name":{"kind":"Name","value":"app_collections_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contributors"},"value":{"kind":"ObjectValue","fields":[]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"privateCollections"},"name":{"kind":"Name","value":"app_collections_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"_and"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_not"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contributors"},"value":{"kind":"ObjectValue","fields":[]}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"publicAssignments"},"name":{"kind":"Name","value":"app_assignments_v2_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"owner_profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contributors"},"value":{"kind":"ObjectValue","fields":[]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"privateAssignments"},"name":{"kind":"Name","value":"app_assignments_v2_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"owner_profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"_and"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_not"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"contributors"},"value":{"kind":"ObjectValue","fields":[]}}]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"publicContentPages"},"name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"privateContentPages"},"name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"collectionBookmarks"},"name":{"kind":"Name","value":"app_collection_bookmarks_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"itemBookmarks"},"name":{"kind":"Name","value":"app_item_bookmarks_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentCountsForUsersQuery, GetContentCountsForUsersQueryVariables>;
 export const GetDistinctBusinessCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getDistinctBusinessCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_profiles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"distinct_on"},"value":{"kind":"EnumValue","value":"business_category"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"business_category"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"business_category"}}]}}]}}]} as unknown as DocumentNode<GetDistinctBusinessCategoriesQuery, GetDistinctBusinessCategoriesQueryVariables>;
 export const GetIdpsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getIdps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetIdpsQuery, GetIdpsQueryVariables>;
 export const GetProfileIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetProfileIdsQuery, GetProfileIdsQueryVariables>;
 export const GetProfileNamesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileNames"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetProfileNamesQuery, GetProfileNamesQueryVariables>;
-export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_user_permission_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permission_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission_group_user_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contexts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"classifications"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"classifications"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contexts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_user_permission_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permission_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission_group_user_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

@@ -170,7 +170,7 @@ export function convertUserInfoToCommonUser(
 						label: org.organization?.ldap_description ?? '',
 					})
 				),
-				loms: user.loms || [],
+				loms: (user.loms || []) as any[],
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
 				createdAt: user.acc_created_at,

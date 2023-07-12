@@ -29,14 +29,6 @@ query getUsers(
 				}
 			}
 		}
-		loms {
-			lom {
-				id
-				label
-				scheme
-				broader
-			}
-		}
 	}
 	users_profile_aggregate(where: $where) {
 		aggregate {
