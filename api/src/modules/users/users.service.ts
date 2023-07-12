@@ -4,12 +4,12 @@ import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
 import { AdminOrganisationsService, Organisation } from '../organisations';
 import {
-	BulkAddSubjectsToProfilesDocument,
-	BulkAddSubjectsToProfilesMutation,
-	BulkAddSubjectsToProfilesMutationVariables,
-	BulkDeleteSubjectsFromProfilesDocument,
-	BulkDeleteSubjectsFromProfilesMutation,
-	BulkDeleteSubjectsFromProfilesMutationVariables,
+	BulkAddLomsToProfilesDocument,
+	BulkAddLomsToProfilesMutation,
+	BulkAddLomsToProfilesMutationVariables,
+	BulkDeleteLomsFromProfilesDocument,
+	BulkDeleteLomsFromProfilesMutation,
+	BulkDeleteLomsFromProfilesMutationVariables,
 	GetContentCountsForUsersDocument,
 	GetContentCountsForUsersQuery,
 	GetContentCountsForUsersQueryVariables,
@@ -20,7 +20,6 @@ import {
 	GetUserByIdQuery,
 	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
-import { GetUsersDocument } from '../shared/generated/graphql-db-types-hetarchief';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
@@ -343,7 +342,7 @@ export class UsersService {
 		}
 	}
 
-	async bulkAddSubjectsToProfiles(subjects: string[], profileIds: string[]): Promise<void> {
+	async bulkAddLomsToProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
 			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
@@ -351,50 +350,50 @@ export class UsersService {
 
 		try {
 			// First remove the subjects, so we can add them without duplicate conflicts
-			await this.bulkRemoveSubjectsFromProfiles(subjects, profileIds);
+			await this.bulkRemoveLomsFromProfiles(lomIds, profileIds);
 
 			// Add the subjects
 			await this.dataService.execute<
-				BulkAddSubjectsToProfilesMutation,
-				BulkAddSubjectsToProfilesMutationVariables
-			>(BulkAddSubjectsToProfilesDocument, {
-				subjects: flatten(
-					subjects.map((subject) =>
+				BulkAddLomsToProfilesMutation,
+				BulkAddLomsToProfilesMutationVariables
+			>(BulkAddLomsToProfilesDocument, {
+				loms: flatten(
+					lomIds.map((lomId) =>
 						profileIds.map((profileId) => ({
-							key: subject,
+							lom_id: lomId,
 							profile_id: profileId,
 						}))
 					)
 				),
 			});
 		} catch (err) {
-			throw CustomError('Failed to bulk add subjects to profiles', err, {
-				subjects,
+			throw CustomError('Failed to bulk add loms to profiles', err, {
+				lomIds,
 				profileIds,
-				query: 'BULK_ADD_SUBJECTS_TO_PROFILES',
+				query: 'BulkAddLomsToProfiles',
 			});
 		}
 	}
 
-	async bulkRemoveSubjectsFromProfiles(subjects: string[], profileIds: string[]): Promise<void> {
+	async bulkRemoveLomsFromProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info("removing subjects from profiles isn't supported for hetarchief");
+			console.info("removing loms from profiles isn't supported for hetarchief");
 			return;
 		}
 
 		try {
 			await this.dataService.execute<
-				BulkDeleteSubjectsFromProfilesMutation,
-				BulkDeleteSubjectsFromProfilesMutationVariables
-			>(BulkDeleteSubjectsFromProfilesDocument, {
-				subjects,
+				BulkDeleteLomsFromProfilesMutation,
+				BulkDeleteLomsFromProfilesMutationVariables
+			>(BulkDeleteLomsFromProfilesDocument, {
+				lomIds,
 				profileIds,
 			});
 		} catch (err) {
-			throw CustomError('Failed to bulk delete subjects from profiles', err, {
-				subjects,
+			throw CustomError('Failed to bulk delete loms from profiles', err, {
+				lomIds,
 				profileIds,
-				query: 'BULK_DELETE_SUBJECTS_FROM_PROFILES',
+				query: 'BulkDeleteLomsFromProfiles',
 			});
 		}
 	}

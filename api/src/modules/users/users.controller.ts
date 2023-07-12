@@ -22,7 +22,7 @@ import { DeleteContentCounts, UserOverviewTableCol } from './users.types';
 export class UsersController {
 	constructor(
 		@Inject(forwardRef(() => UsersService))
-		protected usersService: UsersService,
+		protected usersService: UsersService
 	) {}
 
 	@Get('')
@@ -30,7 +30,7 @@ export class UsersController {
 		PermissionName.VIEW_USERS,
 		PermissionName.EDIT_ANY_USER,
 		PermissionName.EDIT_ANY_COLLECTIONS,
-		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
 	async getProfiles(
 		@Query('offset') offset: string,
@@ -38,7 +38,7 @@ export class UsersController {
 		@Query('sortColumn') sortColumn: UserOverviewTableCol,
 		@Query('sortOrder') sortOrder: Avo.Search.OrderDirection,
 		@Query('tableColumnDataType') tableColumnDataType: string,
-		@Query('where') where = '{}',
+		@Query('where') where = '{}'
 	): Promise<[Avo.User.CommonUser[], number]> {
 		return this.usersService.getProfiles(
 			parseInt(offset || '0'),
@@ -46,7 +46,7 @@ export class UsersController {
 			sortColumn,
 			sortOrder,
 			tableColumnDataType,
-			JSON.parse(where),
+			JSON.parse(where)
 		);
 	}
 
@@ -57,10 +57,10 @@ export class UsersController {
 		PermissionName.VIEW_BUNDLES_OVERVIEW,
 		PermissionName.EDIT_OWN_CONTENT_PAGES,
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
 	async getNamesByProfileIds(
-		@Query('profileIds') profileIds: string[],
+		@Query('profileIds') profileIds: string[]
 	): Promise<Partial<Avo.User.CommonUser>[]> {
 		return this.usersService.getNamesByProfileIds(profileIds);
 	}
@@ -86,31 +86,25 @@ export class UsersController {
 	@Get('counts')
 	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
 	async fetchPublicAndPrivateCounts(
-		@Query('profileIds') profileIds: string[],
+		@Query('profileIds') profileIds: string[]
 	): Promise<DeleteContentCounts> {
 		return this.usersService.fetchPublicAndPrivateCounts(profileIds);
 	}
 
-	@Patch('subjects')
+	@Patch('loms')
 	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
-	async bulkAddSubjectsToProfiles(
-		@Body() body: { subjects: string[]; profileIds: string[] },
+	async bulkAddLomsToProfiles(
+		@Body() body: { lomIds: string[]; profileIds: string[] }
 	): Promise<void> {
-		return this.usersService.bulkAddSubjectsToProfiles(
-			body.subjects,
-			body.profileIds,
-		);
+		return this.usersService.bulkAddLomsToProfiles(body.lomIds, body.profileIds);
 	}
 
-	@Delete('subjects')
+	@Delete('loms')
 	@RequireAnyPermissions(PermissionName.EDIT_ANY_USER)
-	async bulkRemoveSubjectsFromProfiles(
-		@Body() body: { subjects: string[]; profileIds: string[] },
+	async bulkRemoveLomsFromProfiles(
+		@Body() body: { lomIds: string[]; profileIds: string[] }
 	): Promise<void> {
-		return this.usersService.bulkRemoveSubjectsFromProfiles(
-			body.subjects,
-			body.profileIds,
-		);
+		return this.usersService.bulkRemoveLomsFromProfiles(body.lomIds, body.profileIds);
 	}
 
 	@Get(':id')
@@ -118,7 +112,7 @@ export class UsersController {
 		PermissionName.VIEW_USERS,
 		PermissionName.EDIT_ANY_USER,
 		PermissionName.EDIT_ANY_COLLECTIONS,
-		PermissionName.VIEW_USERS_IN_SAME_COMPANY,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY
 	)
 	async getUser(@Param('id') id: string): Promise<Avo.User.CommonUser> {
 		return this.usersService.getById(id);

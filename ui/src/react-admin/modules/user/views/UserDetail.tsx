@@ -8,10 +8,11 @@ import {
 	MoreOptionsDropdown,
 	Table,
 	TagList,
-	TagOption,
 } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { LomSchemeType } from '@viaa/avo2-types/types/lom/enums';
+import { compact } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
@@ -350,24 +351,27 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 								tText('admin/users/views/user-detail___gelinked-aan')
 							)}
 							{renderDetailRow(
-								stringsToTagList(storedProfile?.subjects || []) || '-',
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.subject
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
 								tText('admin/users/views/user-detail___vakken')
 							)}
 							{renderDetailRow(
-								storedProfile.educationLevels?.length ? (
-									<TagList
-										tags={storedProfile.educationLevels.map(
-											(item: string): TagOption => ({
-												id: item,
-												label: item,
-											})
-										)}
-										swatches={false}
-										closable={false}
-									/>
-								) : (
-									'-'
-								),
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.structure
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
 								tText('admin/users/views/user-detail___opleidingsniveaus')
 							)}
 							{renderDetailRow(

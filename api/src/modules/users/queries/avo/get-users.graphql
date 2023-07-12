@@ -4,12 +4,7 @@ query getUsers(
 	$orderBy: [users_summary_view_order_by!]!
 	$where: users_summary_view_bool_exp!
 ) {
-	users_summary_view(
-		offset: $offset
-		limit: $limit
-		order_by: $orderBy
-		where: $where
-	) {
+	users_summary_view(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
 		user_id
 		full_name
 		first_name
@@ -36,17 +31,19 @@ query getUsers(
 			idp
 			idp_user_id
 		}
-		classifications {
-			key
-		}
-		contexts {
-			key
-		}
 		organisations {
 			organization_id
 			unit_id
 			organization {
 				ldap_description
+			}
+		}
+		loms {
+			lom {
+				id
+				label
+				scheme
+				broader
 			}
 		}
 		user {

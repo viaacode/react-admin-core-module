@@ -1,7 +1,5 @@
-mutation bulkAddSubjectsToProfiles(
-	$subjects: [users_profile_classifications_insert_input!]!
-) {
-	insert_users_profile_classifications(objects: $subjects) {
+mutation bulkAddLomsToProfiles($loms: [users_profiles_lom_links_insert_input!]!) {
+	insert_users_profiles_lom_links(objects: $loms) {
 		affected_rows
 	}
 }

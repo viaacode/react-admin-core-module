@@ -77,7 +77,9 @@ export const UserEdit: FC<UserEditProps> = ({ id, onSave, onLoaded }) => {
 			setBio(profile.bio);
 			setAlias(profile.alias);
 			setCompanyId(profile.companyId);
-			setSelectedSubjects((profile.subjects || []).map(stringToTagInfo));
+
+			//TODO replace with the generic lom component
+			// setSelectedSubjects((profile.subjects || []).map(stringToTagInfo));
 
 			setStoredProfile(profile);
 

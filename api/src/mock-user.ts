@@ -26,6 +26,7 @@ export const mockUserAvo: Avo.User.User = {
 			name: 'meemoo - Het Archief voor Onderwijs',
 			or_id: 'OR-h41jm1d',
 		} as any,
+		loms: [],
 		user: undefined,
 		userGroupIds: ['1'] as any,
 		permissions: [
@@ -165,6 +166,7 @@ export const mockUserAvo: Avo.User.User = {
 	last_access_at: '2022-11-28T14:14:44.713+00:00',
 	external_uid: null,
 	role: { label: 'Beheerder', name: 'admin' } as any,
+	role_id: 1,
 	uid: '517aec71-cf0e-4e08-99d1-8e7e042923f7',
 	updated_at: '2022-11-28T08:23:35.658+00:00',
 	mail: 'bert.verhelst@studiohyperdrive.be',

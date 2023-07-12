@@ -202,6 +202,7 @@ export const mockCommonUser: Avo.User.CommonUser = {
 		or_id: 'OR-w66976m',
 		data: null,
 	} as any,
+	loms: [],
 	permissions: [
 		PermissionName.APPROVE_DENY_CP_VISIT_REQUESTS,
 		PermissionName.CANCEL_OWN_VISIT_REQUEST,
