@@ -25,22 +25,20 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	constructor(
 		private siteVariablesService: SiteVariablesService,
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {}
 
-	public async getTranslations(): Promise<
-		Record<string, Record<string, string>>
-	> {
+	public async getTranslations(): Promise<Record<string, Record<string, string>>> {
 		const [translationsFrontend, translationsAdminCore, translationsBackend] =
 			await Promise.all([
 				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_FRONTEND,
+					TranslationKey.TRANSLATIONS_FRONTEND
 				),
 				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_ADMIN_CORE,
+					TranslationKey.TRANSLATIONS_ADMIN_CORE
 				),
 				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_BACKEND,
+					TranslationKey.TRANSLATIONS_BACKEND
 				),
 			]);
 		return {
@@ -52,13 +50,11 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public async updateTranslations(
 		key: string,
-		value: Record<string, string>,
+		value: Record<string, string>
 	): Promise<UpdateResponse> {
 		try {
-			const response = await this.siteVariablesService.updateSiteVariable(
-				key,
-				value,
-			);
+			const response = await this.siteVariablesService.updateSiteVariable(key, value);
+			await this.cacheManager.reset();
 			return response;
 		} catch (err) {
 			throw CustomError('Failed to update translation', err, {
@@ -76,27 +72,23 @@ export class TranslationsService implements OnApplicationBootstrap {
 		const translations = await this.cacheManager.wrap(
 			TranslationKey.TRANSLATIONS_FRONTEND,
 			async () => {
-				const [translationsFrontend, translationsAdminCore] = await Promise.all(
-					[
-						this.siteVariablesService.getSiteVariable<Translations>(
-							TranslationKey.TRANSLATIONS_FRONTEND,
-						),
-						this.siteVariablesService.getSiteVariable<Translations>(
-							TranslationKey.TRANSLATIONS_ADMIN_CORE,
-						),
-					],
-				);
+				const [translationsFrontend, translationsAdminCore] = await Promise.all([
+					this.siteVariablesService.getSiteVariable<Translations>(
+						TranslationKey.TRANSLATIONS_FRONTEND
+					),
+					this.siteVariablesService.getSiteVariable<Translations>(
+						TranslationKey.TRANSLATIONS_ADMIN_CORE
+					),
+				]);
 				return {
 					...translationsAdminCore,
 					...translationsFrontend,
 				};
-			}, // cache for 1h
-			{ ttl: 3600 },
+			}, // cache for 1h (milliseconds)
+			3_600_000
 		);
 		if (!translations) {
-			throw new NotFoundException(
-				'No translations have been set in the database',
-			);
+			throw new NotFoundException('No translations have been set in the database');
 		}
 
 		return translations;
@@ -107,24 +99,18 @@ export class TranslationsService implements OnApplicationBootstrap {
 	 */
 	@Cron('0 * * * *')
 	public async refreshBackendTranslations(): Promise<void> {
-		const translations =
-			await this.siteVariablesService.getSiteVariable<Translations>(
-				TranslationKey.TRANSLATIONS_BACKEND,
-			);
+		const translations = await this.siteVariablesService.getSiteVariable<Translations>(
+			TranslationKey.TRANSLATIONS_BACKEND
+		);
 
 		if (!translations) {
-			throw new NotFoundException(
-				'No backend translations have been set in the database',
-			);
+			throw new NotFoundException('No backend translations have been set in the database');
 		}
 
 		this.backendTranslations = translations;
 	}
 
-	public t(
-		key: string,
-		variables: Record<string, string | number> = {},
-	): string {
+	public t(key: string, variables: Record<string, string | number> = {}): string {
 		const translation = this.backendTranslations[key];
 		if (translation) {
 			return resolveTranslationVariables(translation, variables);
