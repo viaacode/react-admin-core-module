@@ -55,12 +55,9 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetNavigationBarItems(navigationBarId);
-	const {
-		data: originalNavigationItem,
-		isLoading: isLoadingOriginalNavigationItem,
-		isError: isErrorNavigationItem,
-	} = useGetNavigationItem(navigationItemId);
+	} = useGetNavigationBarItems(navigationBarId, { keepPreviousData: false, cacheTime: 0 });
+	const originalNavigationItem =
+		navigationItems?.find((navItem) => navItem.id === navigationItemId) || null;
 
 	// Computed
 	const pageType: NavigationEditPageType = navigationItemId
@@ -384,10 +381,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	};
 
 	const renderPageContent = () => {
-		if (isLoadingNavigationItems || isLoadingOriginalNavigationItem) {
+		if (isLoadingNavigationItems) {
 			return <CenteredSpinner />;
 		}
-		if (isErrorNavigationItems || isErrorNavigationItem) {
+		if (isErrorNavigationItems) {
 			return (
 				<Flex orientation="horizontal" center>
 					{tHtml('admin/menu/views/menu-edit___het-ophalen-van-de-menu-items-is-mislukt')}
