@@ -11,7 +11,8 @@ import {
 	Navbar,
 	Tabs,
 } from '@viaa/avo2-components';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

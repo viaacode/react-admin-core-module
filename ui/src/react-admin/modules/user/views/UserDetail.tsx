@@ -9,9 +9,8 @@ import {
 	Table,
 	TagList,
 } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
+import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { LomSchemeType } from '@viaa/avo2-types/types/lom/enums';
 import { compact } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { Icon } from '~shared/components';

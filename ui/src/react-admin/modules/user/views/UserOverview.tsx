@@ -1,7 +1,9 @@
-import { LomSchemeType } from '@viaa/avo2-types/types/lom/enums';
+import { LomSchemeType } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
+import reactToString from 'react-to-string';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -14,10 +16,7 @@ import { useGetIdps } from '~shared/hooks/use-get-idps';
 
 import { useTranslation } from '~shared/hooks/useTranslation';
 
-import reactToString from 'react-to-string';
-
 import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,

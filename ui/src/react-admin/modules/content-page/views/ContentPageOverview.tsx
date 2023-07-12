@@ -9,7 +9,8 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, set } from 'lodash-es';
 import React, {
 	FunctionComponent,

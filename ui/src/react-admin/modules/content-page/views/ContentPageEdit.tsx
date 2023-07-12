@@ -9,7 +9,8 @@ import {
 } from '@viaa/avo2-components';
 import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { ErrorView } from '~shared/components/error';
 
 import Link from '~shared/components/Link/Link';
