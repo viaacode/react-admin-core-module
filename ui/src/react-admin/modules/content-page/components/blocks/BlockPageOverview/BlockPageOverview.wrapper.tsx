@@ -154,6 +154,11 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isInitialLoading]);
 
+	// ARC-1877: fix queryparams state on initial load was an old value (or undefined)
+	useEffect(() => {
+		setQueryParamsState(queryParamsState);
+	}, []);
+
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParamsState((oldQueryParamState) => {
 			return {
