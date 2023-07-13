@@ -28,15 +28,6 @@ import fetch from 'node-fetch';
 
 import glob from 'glob';
 import { compact, intersection, kebabCase, keys, lowerCase, upperFirst, without } from 'lodash';
-import {
-	GetTranslationsDocument as GetTranslationsDocumentAvo,
-	GetTranslationsQuery as GetTranslationsQueryAvo,
-} from '../src/react-admin/generated/graphql-db-types-avo';
-
-import {
-	GetTranslationsDocument as GetTranslationsDocumentHetArchief,
-	GetTranslationsQuery as GetTranslationsQueryHetArchief,
-} from '../src/react-admin/generated/graphql-db-types-hetarchief';
 
 import localTranslationsAvo from '../src/shared/translations/avo/nl.json';
 import localTranslationsHetArchief from '../src/shared/translations/hetArchief/nl.json';
@@ -262,6 +253,20 @@ async function getAvoOnlineTranslations() {
 	return await response.json();
 }
 
+async function getHetArchiefOnlineTranslations() {
+	const response = await fetch(
+		'https://hetarchief-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+
+	return await response.json();
+}
+
 async function getOnlineTranslations(): Promise<{
 	avo: Record<string, string>;
 	hetarchief: Record<string, string>;
@@ -281,21 +286,7 @@ async function getOnlineTranslations(): Promise<{
 		const avoAdminCoreTranslations = await getAvoOnlineTranslations();
 
 		// HetArchief
-		const hetArchiefTranslationsResponse: GetTranslationsQueryHetArchief = (await (
-			await fetch(process.env.GRAPHQL_URL_HETARCHIEF, {
-				headers: {
-					'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_HETARCHIEF,
-				},
-				method: 'post',
-				body: JSON.stringify({
-					query: GetTranslationsDocumentHetArchief,
-				}),
-			})
-		).json()) as GetTranslationsQueryHetArchief;
-		const hetArchiefAdminCoreTranslations =
-			hetArchiefTranslationsResponse.app_config?.find(
-				(t) => t.name === 'translations-admin-core' || t.name === 'TRANSLATIONS_ADMIN_CORE'
-			)?.value || {};
+		const hetArchiefAdminCoreTranslations = await getHetArchiefOnlineTranslations();
 
 		return { avo: avoAdminCoreTranslations, hetarchief: hetArchiefAdminCoreTranslations };
 	} catch (err) {
