@@ -16,7 +16,7 @@ import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
+import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import { nlBE } from 'date-fns/locale';
 import { formatDateString } from '~shared/helpers/formatters/date';
 
@@ -266,7 +266,11 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 		return (
 			<Container mode="vertical" size="small">
 				<Container mode="horizontal">
-					<Table horizontal variant="invisible" className="c-table_detail-page">
+					<Table
+						horizontal
+						variant="invisible"
+						className="c-table_detail-page c-user_detail-page"
+					>
 						<tbody>
 							{renderDetailRow(
 								renderAvatar(storedProfile, { small: false }),
@@ -354,24 +358,36 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 									compact(
 										(storedProfile?.loms || [])
 											.filter(
-												(lom) => lom.lom?.scheme === LomSchemeType.subject
+												(lom) => lom.lom?.scheme === LomSchemeType.structure
 											)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
-								tText('admin/users/views/user-detail___vakken')
+								tText('react-admin/modules/user/views/user-detail___onderwijs')
 							)}
 							{renderDetailRow(
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
 											.filter(
-												(lom) => lom.lom?.scheme === LomSchemeType.structure
+												(lom) => lom.lom?.scheme === LomSchemeType.theme
 											)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
-								tText('admin/users/views/user-detail___opleidingsniveaus')
+								tText('react-admin/modules/user/views/user-detail___themas')
+							)}
+							{renderDetailRow(
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.subject
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
+								tText('admin/users/views/user-detail___vakken')
 							)}
 							{renderDetailRow(
 								storedProfile.educationalOrganisations?.length ? (
