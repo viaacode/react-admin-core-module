@@ -45,6 +45,7 @@ query getUserById($id: uuid!) {
 			organisation {
 				logo_url
 				name
+				or_id
 			}
 			profile_user_group {
 				group {

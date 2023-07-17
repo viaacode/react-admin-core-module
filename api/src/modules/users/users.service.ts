@@ -68,7 +68,7 @@ export class UsersService {
 		} catch (err) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables: { id },
-				query: 'GET_USERS',
+				query: 'GetUserById',
 			});
 		}
 	}
