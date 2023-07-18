@@ -14,5 +14,7 @@ describe('User converter helpers', () => {
 		expect(commonUser.profileId).toEqual(MOCK_HETARCHIEF_USER.id);
 		expect(commonUser.userId).toEqual(MOCK_HETARCHIEF_USER.id);
 		expect(commonUser.userGroup.label).toEqual(MOCK_HETARCHIEF_USER.groupName);
+		expect(commonUser.organisation.or_id).toEqual(MOCK_HETARCHIEF_USER.organisationId);
+		expect(commonUser.organisation.name).toEqual(MOCK_HETARCHIEF_USER.organisationName);
 	});
 });
