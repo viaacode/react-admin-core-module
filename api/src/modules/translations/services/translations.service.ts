@@ -1,10 +1,4 @@
-import {
-	CACHE_MANAGER,
-	Inject,
-	Injectable,
-	NotFoundException,
-	OnApplicationBootstrap,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { CustomError } from '../../shared/helpers/custom-error';
 import {
@@ -12,6 +6,7 @@ import {
 	resolveTranslationVariables,
 } from '../../shared/helpers/translation-fallback';
 import { Cache } from 'cache-manager';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 import { TranslationKey } from '../types';
 

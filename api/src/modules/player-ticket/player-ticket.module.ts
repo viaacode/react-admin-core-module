@@ -1,6 +1,7 @@
-import { CacheModule, forwardRef, Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PlayerTicketController } from './player-ticket.controller';
+import { CacheModule } from '@nestjs/cache-manager';
 
 import { PlayerTicketService } from './services/player-ticket.service';
 

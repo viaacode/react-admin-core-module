@@ -1,5 +1,4 @@
 import {
-	CACHE_MANAGER,
 	forwardRef,
 	Inject,
 	Injectable,
@@ -7,9 +6,9 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 import type { Cache } from 'cache-manager';
-import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
