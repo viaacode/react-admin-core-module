@@ -79,8 +79,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 					...translationsAdminCore,
 					...translationsFrontend,
 				};
-			}, // cache for 1h (milliseconds)
-			3_600_000
+			}, // cache for 30 minutes (milliseconds)
+			1_800_000
 		);
 		if (!translations) {
 			throw new NotFoundException('No translations have been set in the database');
@@ -92,7 +92,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 	/**
 	 * Refresh the local cache of backend translations
 	 */
-	@Cron('0 * * * *')
+	@Cron('*/30 * * * *')
 	public async refreshBackendTranslations(): Promise<void> {
 		const translations = await this.siteVariablesService.getSiteVariable<Translations>(
 			TranslationKey.TRANSLATIONS_BACKEND
