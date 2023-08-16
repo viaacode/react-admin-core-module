@@ -155,11 +155,9 @@ export const generateWhereObjectArchief = (
 					{ mail: { _ilike: query } },
 					{ full_name: { _ilike: query } },
 					{
-						maintainer_users_profiles: {
-							maintainer: {
-								schema_name: {
-									_ilike: query,
-								},
+						organisation: {
+							schema_name: {
+								_ilike: query,
 							},
 						},
 					},
