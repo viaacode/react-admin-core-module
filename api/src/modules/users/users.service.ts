@@ -116,33 +116,6 @@ export class UsersService {
 				hetArchiefResponse?.users_profile ||
 				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
 
-			if (isHetArchief()) {
-				// Organisations can be linked in 2 ways
-				// * users.profile => maintainer.users_profile => content_partner.schema_identifier
-				// * users.profile.organisation_schema_identifier => maintainer.organisation
-				//
-				// We can fetch the first link directly since it has a hasura relationship
-				// But the second one cannot be fetched directly since there is no relationship, since we recache the organisations every night and a foreign key would prevent that
-				// So we need to fetch the organisations in a separate database call
-				const orgIds = compact(
-					userProfileObjects.map(
-						(profile) =>
-							(profile as UserInfoOverviewHetArchief).organisation_schema_identifier
-					)
-				);
-				const organisationInfos = await this.adminOrganisationsService.getOrganisations(
-					orgIds
-				);
-				userProfileObjects.forEach((profile) => {
-					const hetArchiefProfile = profile as UserInfoOverviewHetArchief & {
-						organisation?: Organisation;
-					};
-					hetArchiefProfile.organisation = organisationInfos.find(
-						(org) => org.id === hetArchiefProfile.organisation_schema_identifier
-					);
-				});
-			}
-
 			const profiles: Avo.User.CommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
 					return convertUserInfoToCommonUser(

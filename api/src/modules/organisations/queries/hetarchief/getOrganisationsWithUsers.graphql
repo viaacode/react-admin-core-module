@@ -1,8 +1,6 @@
 query getOrganisationsWithUsers {
-	maintainer_users_profile(distinct_on: maintainer_identifier) {
-		maintainer {
-			schema_identifier
-			schema_name
-		}
+	maintainer_organisation(distinct_on: schema_identifier, where: { users: {} }) {
+		schema_identifier
+		schema_name
 	}
 }

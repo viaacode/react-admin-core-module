@@ -238,16 +238,9 @@ export function convertUserInfoToCommonUser(
 					)
 				),
 				organisation: {
-					name:
-						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ??
-						profile.organisation?.name ??
-						undefined,
-					or_id:
-						profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier ??
-						profile.organisation?.id,
-					logo_url:
-						profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo
-							?.iri ?? profile.organisation?.logo_url,
+					name: profile.organisation?.name,
+					or_id: profile.organisation?.id,
+					logo_url: profile.organisation?.logo_url,
 					data: null,
 				},
 				loms: [],

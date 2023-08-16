@@ -75,16 +75,16 @@ export class AdminOrganisationsService {
 			} else {
 				organisations = (
 					response as OrganisationQueryTypes['GetOrganisationsWithUsersQueryHetArchief']
-				).maintainer_users_profile.map((maintainerWrap) => ({
-					name: maintainerWrap.maintainer.schema_name || undefined,
-					or_id: maintainerWrap.maintainer.schema_identifier,
+				).maintainer_organisation.map((maintainerWrap) => ({
+					name: maintainerWrap.schema_name || undefined,
+					or_id: maintainerWrap.schema_identifier,
 				}));
 			}
 
 			return sortBy(organisations, 'name');
 		} catch (err) {
 			throw CustomError('Failed to get organisations from the database', err, {
-				query: 'GET_ORGANISATIONS_WITH_USERS',
+				query: 'GetOrganisationsWithUsers',
 			});
 		}
 	}
