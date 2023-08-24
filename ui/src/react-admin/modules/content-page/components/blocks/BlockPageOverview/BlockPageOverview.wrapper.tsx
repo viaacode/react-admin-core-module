@@ -157,6 +157,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	// ARC-1877: fix queryparams state on initial load was an old value (or undefined)
 	useEffect(() => {
 		setQueryParamsState(queryParamsState);
+		// eslint-disable-next-line
 	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {

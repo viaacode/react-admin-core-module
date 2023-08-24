@@ -25,7 +25,6 @@ module.exports = {
 				},
 			},
 		],
-		quotes: ["error", "single", { avoidEscape: true }],
 		"sort-imports": [
 			"warn",
 			{

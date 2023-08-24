@@ -6,14 +6,15 @@
   "endOfLine": "auto",
   "singleQuote": true,
   "overrides": [
-	{
-	  "files": [
-		"/src/**/*.json"
-	  ],
-	  "options": {
-		"useTabs": false,
-		"tabWidth": 2
-	  }
-	}
+    {
+      "files": [
+        "**/*.json"
+      ],
+      "options": {
+        "singleQuote": false,
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    }
   ]
 }

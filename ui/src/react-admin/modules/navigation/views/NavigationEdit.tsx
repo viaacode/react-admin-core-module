@@ -26,7 +26,6 @@ import { ValueOf } from '~shared/types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { AdminLayout } from '~shared/layouts';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-import { useGetNavigationItem } from '~modules/navigation/hooks/use-get-navigation-item';
 import { Link } from '~modules/shared/components/Link';
 
 interface NavigationEditProps {
