@@ -15184,6 +15184,8 @@ export type Users_Profile = {
   organisation?: Maybe<Maintainer_Organisation>;
   organisation_schema_identifier?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamp']>;
+  /** An object relationship */
+  visitor_space?: Maybe<Maintainer_Visitor_Space>;
   /** An array relationship */
   visitor_space_requests: Array<Maintainer_Visitor_Space_Request>;
   /** An aggregate relationship */
@@ -15371,6 +15373,7 @@ export type Users_Profile_Bool_Exp = {
   organisation?: InputMaybe<Maintainer_Organisation_Bool_Exp>;
   organisation_schema_identifier?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  visitor_space?: InputMaybe<Maintainer_Visitor_Space_Bool_Exp>;
   visitor_space_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Bool_Exp>;
 };
 
@@ -15400,6 +15403,7 @@ export type Users_Profile_Insert_Input = {
   organisation?: InputMaybe<Maintainer_Organisation_Obj_Rel_Insert_Input>;
   organisation_schema_identifier?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
+  visitor_space?: InputMaybe<Maintainer_Visitor_Space_Obj_Rel_Insert_Input>;
   visitor_space_requests?: InputMaybe<Maintainer_Visitor_Space_Request_Arr_Rel_Insert_Input>;
 };
 
@@ -15506,6 +15510,7 @@ export type Users_Profile_Order_By = {
   organisation?: InputMaybe<Maintainer_Organisation_Order_By>;
   organisation_schema_identifier?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
+  visitor_space?: InputMaybe<Maintainer_Visitor_Space_Order_By>;
   visitor_space_requests_aggregate?: InputMaybe<Maintainer_Visitor_Space_Request_Aggregate_Order_By>;
 };
 
