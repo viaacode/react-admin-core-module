@@ -273,11 +273,11 @@ export class ContentPagesController {
 			contentPage: DbContentPage;
 			initialContentPage: DbContentPage | undefined;
 		},
-		@SessionUser() user
+		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage | null> {
 		if (
 			!user.has(PermissionName.EDIT_ANY_CONTENT_PAGES) &&
-			body.contentPage.userProfileId !== user.id
+			body.contentPage.userProfileId !== user.getProfileId()
 		) {
 			// User cannot edit other peoples pages
 			throw new ForbiddenException(
@@ -312,7 +312,7 @@ export class ContentPagesController {
 	public async getContentPageById(@Param('id') id: string): Promise<DbContentPage> {
 		try {
 			return await this.contentPagesService.getContentPageById(id);
-		} catch (err) {
+		} catch (err: any) {
 			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
 				throw new NotFoundException('The content page with id was not found');
 			}

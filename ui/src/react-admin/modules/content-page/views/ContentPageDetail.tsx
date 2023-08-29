@@ -333,7 +333,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	};
 
 	const renderContentActions = () => {
-		const contentPageOwnerId = contentPageInfo?.owner?.id;
+		const contentPageOwnerId = contentPageInfo?.userProfileId;
 		const isOwner = commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
