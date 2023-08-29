@@ -20,17 +20,10 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(
-		@Query() queryParams: GetPlayableUrlDto,
-		@Req() request,
-	) {
-		if (
-			!queryParams.externalId &&
-			!queryParams.externalIds &&
-			!queryParams.browsePath
-		) {
+	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto, @Req() request) {
+		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
-				'Either query param externalId or browsePath is required to fetch a playable url',
+				'Either query param externalId or browsePath is required to fetch a playable url'
 			);
 		}
 		const referrer = request.header('Referer') || 'referer-not-defined';
@@ -40,15 +33,10 @@ export class PlayerTicketController {
 			return Promise.all(
 				queryParams.externalIds
 					.split(',')
-					.map((externalId) =>
-						this.getPlayableUrlByExternalId(externalId, referrer),
-					),
+					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer))
 			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(
-				queryParams.browsePath,
-				referrer,
-			);
+			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer);
 		}
 	}
 
@@ -58,10 +46,7 @@ export class PlayerTicketController {
 	 * @param externalId: external_id of the media item that you want to view
 	 * @param referrer
 	 */
-	public async getPlayableUrlByExternalId(
-		externalId: string,
-		referrer: string,
-	): Promise<string> {
+	public async getPlayableUrlByExternalId(externalId: string, referrer: string): Promise<string> {
 		try {
 			const browsePath = await this.playerTicketService.getEmbedUrl(externalId);
 			if (!browsePath) {
@@ -70,7 +55,7 @@ export class PlayerTicketController {
 				});
 			}
 			return this.getPlayableUrlFromBrowsePath(browsePath, referrer);
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
@@ -84,7 +69,7 @@ export class PlayerTicketController {
 
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
-		referrer: string,
+		referrer: string
 	): Promise<string> {
 		try {
 			const objectName: string | undefined = browsePath
@@ -93,8 +78,7 @@ export class PlayerTicketController {
 
 			if (!objectName) {
 				throw new InternalServerErrorException({
-					message:
-						'Failed to extract object name from browse path for media item',
+					message: 'Failed to extract object name from browse path for media item',
 					innerException: null,
 					additionalInfo: {
 						browsePath,
@@ -104,7 +88,7 @@ export class PlayerTicketController {
 			}
 
 			return this.playerTicketService.getPlayableUrl(objectName, referrer);
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,

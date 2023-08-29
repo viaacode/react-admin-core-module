@@ -34,8 +34,8 @@ export type OrganisationQueryTypes = {
 };
 
 type OrganisationQueries = {
-	GetOrganisationsDocument: TypedDocumentNode;
-	GetOrganisationsWithUsersDocument: TypedDocumentNode;
+	GetOrganisationsDocument: TypedDocumentNode<any, any>;
+	GetOrganisationsWithUsersDocument: TypedDocumentNode<any, any>;
 };
 
 export const ORGANISATION_QUERIES: Record<DatabaseType, OrganisationQueries> = {

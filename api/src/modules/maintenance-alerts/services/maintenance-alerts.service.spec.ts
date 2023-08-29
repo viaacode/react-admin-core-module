@@ -147,7 +147,7 @@ describe('MaintenanceAlertsService', () => {
 
 			try {
 				await maintenanceAlertsService.findById('unknown-id');
-			} catch (error) {
+			} catch (error: any) {
 				expect(error.response).toEqual({
 					error: 'Not Found',
 					message: "Maintenance Alert with id 'unknown-id' not found",

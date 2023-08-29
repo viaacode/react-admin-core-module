@@ -65,7 +65,7 @@ export class UsersService {
 				response.users_summary_view[0],
 				UserInfoType.UserInfoOverviewAvo
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables: { id },
 				query: 'GetUserById',
@@ -139,7 +139,7 @@ export class UsersService {
 			}
 
 			return [profiles as any[], profileCount];
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables,
 				query: 'GET_USERS',
@@ -184,7 +184,7 @@ export class UsersService {
 					})
 				);
 			}
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profile names from the database', err, {
 				profileIds,
 				query: 'GET_PROFILE_NAMES',
@@ -220,7 +220,7 @@ export class UsersService {
 					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
 				).map((user) => user?.id)
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profile ids from the database', err, {
 				variables,
 				query: 'GET_PROFILE_IDS',
@@ -242,7 +242,7 @@ export class UsersService {
 			return compact(
 				(response.users_profiles || []).map((profile) => profile.business_category)
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get distinct business categories from profiles', err, {
 				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
 			});
@@ -267,7 +267,7 @@ export class UsersService {
 			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
 				(idp) => idp.value as Idp
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
 			});
@@ -307,7 +307,7 @@ export class UsersService {
 					(response.collectionBookmarks?.aggregate?.count || 0) +
 					(response.itemBookmarks?.aggregate?.count || 0),
 			};
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content counts for users from the database', err, {
 				profileIds,
 				query: 'GetContentCountsForUsers',
@@ -339,7 +339,7 @@ export class UsersService {
 					)
 				),
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to bulk add loms to profiles', err, {
 				lomIds,
 				profileIds,
@@ -362,7 +362,7 @@ export class UsersService {
 				lomIds,
 				profileIds,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to bulk delete loms from profiles', err, {
 				lomIds,
 				profileIds,

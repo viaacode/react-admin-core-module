@@ -75,7 +75,7 @@ export class ContentPageLabelsService {
 			}
 
 			return [contentPageLabels, contentPageLabelCount];
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
@@ -121,7 +121,7 @@ export class ContentPageLabelsService {
 			};
 
 			return contentPageLabel;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
@@ -158,7 +158,7 @@ export class ContentPageLabelsService {
 				);
 			}
 			return contentPageLabelResponse as ContentPageLabelDto;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to insert content page label in the database', err, {
 				contentPageLabel,
 				query: 'INSERT_CONTENT_PAGE_LABEL',
@@ -195,7 +195,7 @@ export class ContentPageLabelsService {
 				);
 			}
 			return contentPageLabelResponse as ContentPageLabelDto;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
@@ -211,7 +211,7 @@ export class ContentPageLabelsService {
 			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].DeleteContentPageLabelByIdDocument, {
 				id: isAvo() ? parseInt(id) : id,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to delete content page label from the database', err, {
 				query: 'DeleteContentPageLabelByIdMutation',
 				id,

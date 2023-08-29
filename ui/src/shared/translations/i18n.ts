@@ -29,7 +29,7 @@ export async function initI18n(proxyUrl: string): Promise<void> {
 				react: {
 					useSuspense: false,
 				},
-				parseMissingKeyHandler: (key) => {
+				parseMissingKeyHandler: (key: string) => {
 					if (key.includes('___')) {
 						return `${upperFirst(lowerCase(key.split('___').pop()))} ***`;
 					}

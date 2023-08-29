@@ -45,7 +45,7 @@ const mockExecutionContextWrong = {
 describe('ApiKeyGuard', () => {
 	it('Should allow access when apiKey header is set', async () => {
 		const canActivateRoute: boolean = new ApiKeyGuard().canActivate(
-			mockExecutionContextCorrect,
+			mockExecutionContextCorrect
 		);
 		expect(canActivateRoute).toBe(true);
 	});
@@ -54,7 +54,7 @@ describe('ApiKeyGuard', () => {
 		let error: any;
 		try {
 			new ApiKeyGuard().canActivate(mockExecutionContextNotSet);
-		} catch (err) {
+		} catch (err: any) {
 			error = err;
 		}
 		expect(error).toBe(API_KEY_EXCEPTION);
@@ -64,7 +64,7 @@ describe('ApiKeyGuard', () => {
 		let error: any;
 		try {
 			new ApiKeyGuard().canActivate(mockExecutionContextWrong);
-		} catch (err) {
+		} catch (err: any) {
 			error = err;
 		}
 		expect(error).toBe(API_KEY_EXCEPTION);

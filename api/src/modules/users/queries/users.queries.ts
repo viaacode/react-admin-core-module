@@ -33,9 +33,7 @@ import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 export type UserQueryTypes = {
 	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo;
 	GetProfileNamesQueryHetArchief: GetProfileNamesQueryHetArchief;
-	GetProfileNamesQuery:
-		| GetProfileNamesQueryAvo
-		| GetProfileNamesQueryHetArchief;
+	GetProfileNamesQuery: GetProfileNamesQueryAvo | GetProfileNamesQueryHetArchief;
 	GetUsersQueryAvo: GetUsersQueryAvo;
 	GetUsersQueryHetArchief: GetUsersQueryHetArchief;
 	GetUsersQuery: GetUsersQueryAvo | GetUsersQueryHetArchief;
@@ -52,14 +50,10 @@ export type UserQueryTypes = {
 		| GetProfileNamesQueryVariablesHetArchief;
 	GetUsersQueryVariablesAvo: GetUsersQueryVariablesAvo;
 	GetUsersQueryVariablesHetArchief: GetUsersQueryVariablesHetArchief;
-	GetUsersQueryVariables:
-		| GetUsersQueryVariablesAvo
-		| GetUsersQueryVariablesHetArchief;
+	GetUsersQueryVariables: GetUsersQueryVariablesAvo | GetUsersQueryVariablesHetArchief;
 	GetIdpsQueryVariablesAvo: GetIdpsQueryVariablesAvo;
 	GetIdpsQueryVariablesHetArchief: GetIdpsQueryVariablesHetArchief;
-	GetIdpsQueryVariables:
-		| GetIdpsQueryVariablesAvo
-		| GetIdpsQueryVariablesHetArchief;
+	GetIdpsQueryVariables: GetIdpsQueryVariablesAvo | GetIdpsQueryVariablesHetArchief;
 	GetProfileIdsQueryVariablesAvo: GetProfileIdsQueryVariablesAvo;
 	GetProfileIdsQueryVariablesHetArchief: GetProfileIdsQueryVariablesHetArchief;
 	GetProfileIdsQueryVariables:
@@ -68,10 +62,10 @@ export type UserQueryTypes = {
 };
 
 type UserQueries = {
-	GetProfileNamesDocument: TypedDocumentNode;
-	GetUsersDocument: TypedDocumentNode;
-	GetIdpsDocument: TypedDocumentNode;
-	GetProfileIdsDocument: TypedDocumentNode;
+	GetProfileNamesDocument: TypedDocumentNode<any, any>;
+	GetUsersDocument: TypedDocumentNode<any, any>;
+	GetIdpsDocument: TypedDocumentNode<any, any>;
+	GetProfileIdsDocument: TypedDocumentNode<any, any>;
 };
 
 export const USER_QUERIES: Record<DatabaseType, UserQueries> = {

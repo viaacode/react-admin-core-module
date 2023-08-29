@@ -1,3 +1,4 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import {
 	forwardRef,
 	Inject,
@@ -6,17 +7,16 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 import type { Cache } from 'cache-manager';
 import got, { Got } from 'got';
-import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
-import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
-
-import { PlayerTicket } from '../player-ticket.types';
 
 import { DataService } from '../../data';
+import {
+	GetItemBrowsePathByExternalIdDocument,
+	GetItemBrowsePathByExternalIdQuery,
+	GetItemBrowsePathByExternalIdQueryVariables,
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
 	GetFileByRepresentationSchemaIdentifierQuery,
@@ -25,11 +25,11 @@ import {
 	GetThumbnailUrlByIdQuery,
 	GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import {
-	GetItemBrowsePathByExternalIdDocument,
-	GetItemBrowsePathByExternalIdQuery,
-	GetItemBrowsePathByExternalIdQueryVariables,
-} from '../../shared/generated/graphql-db-types-avo';
+import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
+
+import { PlayerTicket } from '../player-ticket.types';
 
 @Injectable()
 export class PlayerTicketService {
@@ -71,15 +71,10 @@ export class PlayerTicketService {
 			maxage: this.ticketServiceMaxAge,
 		};
 
-		const playerTicket: PlayerTicket = await this.playerTicketsGotInstance.get<PlayerTicket>(
-			path,
-			{
-				searchParams: data,
-				resolveBodyOnly: true,
-			}
-		);
-
-		return playerTicket;
+		return this.playerTicketsGotInstance.get<PlayerTicket>(path, {
+			searchParams: data,
+			resolveBodyOnly: true,
+		});
 	}
 
 	public async getPlayerToken(embedUrl: string, referer: string): Promise<string> {
@@ -98,7 +93,7 @@ export class PlayerTicketService {
 				600_000 // 10 minutes
 			);
 			return token.jwt;
-		} catch (err) {
+		} catch (err: any) {
 			this.logger.error(`Error getting token: ${err.message}`);
 			throw new InternalServerErrorException('Could not get a thumbnail token');
 		}

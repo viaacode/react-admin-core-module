@@ -51,7 +51,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 			const response = await this.siteVariablesService.updateSiteVariable(key, value);
 			await this.cacheManager.reset();
 			return response;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to update translation', err, {
 				key,
 				value,

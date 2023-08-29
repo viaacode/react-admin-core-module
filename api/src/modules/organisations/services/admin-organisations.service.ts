@@ -82,7 +82,7 @@ export class AdminOrganisationsService {
 			}
 
 			return sortBy(organisations, 'name');
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get organisations from the database', err, {
 				query: 'GetOrganisationsWithUsers',
 			});

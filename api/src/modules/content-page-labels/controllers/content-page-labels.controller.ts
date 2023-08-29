@@ -40,7 +40,7 @@ export class ContentPageLabelsController {
 				sortOrder,
 				JSON.parse(where)
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content page labels from the database', err, {
 				offset,
 				limit,
@@ -56,7 +56,7 @@ export class ContentPageLabelsController {
 	public async fetchContentPageLabelById(@Param('id') id: string): Promise<ContentPageLabel> {
 		try {
 			return this.contentPageLabelService.fetchContentPageLabelById(id);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content page label from the database', err, {
 				id,
 			});
@@ -77,7 +77,7 @@ export class ContentPageLabelsController {
 	): Promise<ContentPageLabelDto> {
 		try {
 			return this.contentPageLabelService.insertContentPageLabel(contentPageLabel);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to insert content page label in the database', err, {
 				contentPageLabel,
 			});
@@ -89,7 +89,7 @@ export class ContentPageLabelsController {
 	async updateContentPageLabel(@Body() contentPageLabelInfo: UpdateContentPageLabelDto) {
 		try {
 			return this.contentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 			});
@@ -104,7 +104,7 @@ export class ContentPageLabelsController {
 		try {
 			await this.contentPageLabelService.deleteContentPageLabel(id);
 			return { message: 'success' };
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to delete the content page label from the database', err, {
 				id,
 			});

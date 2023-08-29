@@ -566,7 +566,7 @@ export class ContentPagesService {
 							}
 						});
 					}
-				} catch (err) {
+				} catch (err: any) {
 					this.logger.error({
 						message: 'Failed to resolve media grid content',
 						innerException: err,
@@ -714,7 +714,7 @@ export class ContentPagesService {
 				value: obj.value,
 				label: obj.description || (obj as any).comment,
 			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,
 			});
@@ -740,7 +740,7 @@ export class ContentPagesService {
 			}
 
 			return labels;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content labels by content type from database', err, {
 				variables: {
 					contentType,
@@ -767,7 +767,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentLabelLinksMutation'],
 				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentLabelLinksDocument, variables);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to insert content label links in the database', err, {
 				variables,
 				query: 'INSERT_CONTENT_LABEL_LINKS',
@@ -787,7 +787,7 @@ export class ContentPagesService {
 				labelIds,
 				contentPageId,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to insert content label links in the database', err, {
 				variables: {
 					labelIds,
@@ -848,7 +848,7 @@ export class ContentPagesService {
 				this.adaptContentPage.bind(this)
 			);
 			return [contentPages, dbContentPageCount];
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get content pages from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGES',
@@ -899,7 +899,7 @@ export class ContentPagesService {
 			}
 
 			return this.getContentPageById(String(id));
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException(
 				CustomError('Failed to insert content page into the database', err, {
 					contentPage,
@@ -941,7 +941,7 @@ export class ContentPagesService {
 			}
 
 			return contentPage;
-		} catch (err) {
+		} catch (err: any) {
 			const error = CustomError('Failed to update content page', err, {
 				contentPage,
 				initialContentPage,
@@ -962,7 +962,7 @@ export class ContentPagesService {
 				id,
 				path: `${contentPage.path}-${id}`,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to delete content page from the database', err, {
 				id,
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].SoftDeleteContentDocument,
@@ -988,7 +988,7 @@ export class ContentPagesService {
 				contentBlock: contentBlockConfig as any,
 				id: contentBlockConfig.id as number,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to update content block', err, {
 				contentBlockConfig,
 			});
@@ -1008,7 +1008,7 @@ export class ContentPagesService {
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].DeleteContentBlockDocument, {
 				id,
 			});
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to delete content block', err, { id });
 		}
 	}
@@ -1074,7 +1074,7 @@ export class ContentPagesService {
 				...block,
 				id: ids[index],
 			}));
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to insert content blocks', err, {
 				contentId,
 				contentBlockConfigs,
@@ -1146,7 +1146,7 @@ export class ContentPagesService {
 				Promise.all(updatePromises),
 				Promise.all(deletePromises),
 			]);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to update content blocks', err, {
 				contentId,
 				initialContentBlocks,
