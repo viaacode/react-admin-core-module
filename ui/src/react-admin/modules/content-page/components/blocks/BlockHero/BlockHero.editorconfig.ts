@@ -1,4 +1,5 @@
 import { TextInputProps } from '@viaa/avo2-components';
+import { noop } from 'lodash-es';
 import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 
@@ -172,6 +173,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					allowedTypes: PHOTO_TYPES,
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					ownerId: '',
+					onDeleteFile: noop, // images will be deleted from the assets service when the user saves the content page
 				} as Partial<FileUploadProps>,
 			}),
 			altText: TEXT_FIELD(undefined, {

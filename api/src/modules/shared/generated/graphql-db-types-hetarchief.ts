@@ -258,6 +258,187 @@ export enum App_Config_Update_Column {
   Value = 'value'
 }
 
+/** columns and relationships of "app.content_assets" */
+export type App_Content_Assets = {
+  __typename?: 'app_content_assets';
+  content_asset_type_id: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['uuid'];
+  label?: Maybe<Scalars['String']>;
+  owner_id?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "app.content_assets" */
+export type App_Content_Assets_Aggregate = {
+  __typename?: 'app_content_assets_aggregate';
+  aggregate?: Maybe<App_Content_Assets_Aggregate_Fields>;
+  nodes: Array<App_Content_Assets>;
+};
+
+/** aggregate fields of "app.content_assets" */
+export type App_Content_Assets_Aggregate_Fields = {
+  __typename?: 'app_content_assets_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Content_Assets_Max_Fields>;
+  min?: Maybe<App_Content_Assets_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.content_assets" */
+export type App_Content_Assets_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "app.content_assets". All fields are combined with a logical 'AND'. */
+export type App_Content_Assets_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Content_Assets_Bool_Exp>>;
+  _not?: InputMaybe<App_Content_Assets_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Content_Assets_Bool_Exp>>;
+  content_asset_type_id?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  label?: InputMaybe<String_Comparison_Exp>;
+  owner_id?: InputMaybe<String_Comparison_Exp>;
+  path?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app.content_assets" */
+export enum App_Content_Assets_Constraint {
+  /** unique or primary key constraint */
+  ContentAssetsPathKey = 'content_assets_path_key',
+  /** unique or primary key constraint */
+  ContentAssetsPkey = 'content_assets_pkey'
+}
+
+/** input type for inserting data into table "app.content_assets" */
+export type App_Content_Assets_Insert_Input = {
+  content_asset_type_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  owner_id?: InputMaybe<Scalars['String']>;
+  path?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type App_Content_Assets_Max_Fields = {
+  __typename?: 'app_content_assets_max_fields';
+  content_asset_type_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  owner_id?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type App_Content_Assets_Min_Fields = {
+  __typename?: 'app_content_assets_min_fields';
+  content_asset_type_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  label?: Maybe<Scalars['String']>;
+  owner_id?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "app.content_assets" */
+export type App_Content_Assets_Mutation_Response = {
+  __typename?: 'app_content_assets_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App_Content_Assets>;
+};
+
+/** on_conflict condition type for table "app.content_assets" */
+export type App_Content_Assets_On_Conflict = {
+  constraint: App_Content_Assets_Constraint;
+  update_columns?: Array<App_Content_Assets_Update_Column>;
+  where?: InputMaybe<App_Content_Assets_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app.content_assets". */
+export type App_Content_Assets_Order_By = {
+  content_asset_type_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  label?: InputMaybe<Order_By>;
+  owner_id?: InputMaybe<Order_By>;
+  path?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app_content_assets */
+export type App_Content_Assets_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "app.content_assets" */
+export enum App_Content_Assets_Select_Column {
+  /** column name */
+  ContentAssetTypeId = 'content_asset_type_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  OwnerId = 'owner_id',
+  /** column name */
+  Path = 'path',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "app.content_assets" */
+export type App_Content_Assets_Set_Input = {
+  content_asset_type_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  label?: InputMaybe<Scalars['String']>;
+  owner_id?: InputMaybe<Scalars['String']>;
+  path?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "app.content_assets" */
+export enum App_Content_Assets_Update_Column {
+  /** column name */
+  ContentAssetTypeId = 'content_asset_type_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Label = 'label',
+  /** column name */
+  OwnerId = 'owner_id',
+  /** column name */
+  Path = 'path',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
 /** information for the blocks out of which the content pages are build */
 export type App_Content_Block = {
   __typename?: 'app_content_block';
@@ -6085,6 +6266,10 @@ export type Mutation_Root = {
   delete_app_config?: Maybe<App_Config_Mutation_Response>;
   /** delete single row from the table: "app.config" */
   delete_app_config_by_pk?: Maybe<App_Config>;
+  /** delete data from the table: "app.content_assets" */
+  delete_app_content_assets?: Maybe<App_Content_Assets_Mutation_Response>;
+  /** delete single row from the table: "app.content_assets" */
+  delete_app_content_assets_by_pk?: Maybe<App_Content_Assets>;
   /** delete data from the table: "app.content_block" */
   delete_app_content_block?: Maybe<App_Content_Block_Mutation_Response>;
   /** delete single row from the table: "app.content_block" */
@@ -6253,6 +6438,10 @@ export type Mutation_Root = {
   insert_app_config?: Maybe<App_Config_Mutation_Response>;
   /** insert a single row into the table: "app.config" */
   insert_app_config_one?: Maybe<App_Config>;
+  /** insert data into the table: "app.content_assets" */
+  insert_app_content_assets?: Maybe<App_Content_Assets_Mutation_Response>;
+  /** insert a single row into the table: "app.content_assets" */
+  insert_app_content_assets_one?: Maybe<App_Content_Assets>;
   /** insert data into the table: "app.content_block" */
   insert_app_content_block?: Maybe<App_Content_Block_Mutation_Response>;
   /** insert a single row into the table: "app.content_block" */
@@ -6421,6 +6610,10 @@ export type Mutation_Root = {
   update_app_config?: Maybe<App_Config_Mutation_Response>;
   /** update single row of the table: "app.config" */
   update_app_config_by_pk?: Maybe<App_Config>;
+  /** update data of the table: "app.content_assets" */
+  update_app_content_assets?: Maybe<App_Content_Assets_Mutation_Response>;
+  /** update single row of the table: "app.content_assets" */
+  update_app_content_assets_by_pk?: Maybe<App_Content_Assets>;
   /** update data of the table: "app.content_block" */
   update_app_content_block?: Maybe<App_Content_Block_Mutation_Response>;
   /** update single row of the table: "app.content_block" */
@@ -6597,6 +6790,18 @@ export type Mutation_RootDelete_App_ConfigArgs = {
 /** mutation root */
 export type Mutation_RootDelete_App_Config_By_PkArgs = {
   name: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Content_AssetsArgs = {
+  where: App_Content_Assets_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Content_Assets_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -7104,6 +7309,20 @@ export type Mutation_RootInsert_App_ConfigArgs = {
 export type Mutation_RootInsert_App_Config_OneArgs = {
   object: App_Config_Insert_Input;
   on_conflict?: InputMaybe<App_Config_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Content_AssetsArgs = {
+  objects: Array<App_Content_Assets_Insert_Input>;
+  on_conflict?: InputMaybe<App_Content_Assets_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Content_Assets_OneArgs = {
+  object: App_Content_Assets_Insert_Input;
+  on_conflict?: InputMaybe<App_Content_Assets_On_Conflict>;
 };
 
 
@@ -7702,6 +7921,20 @@ export type Mutation_RootUpdate_App_Config_By_PkArgs = {
   _prepend?: InputMaybe<App_Config_Prepend_Input>;
   _set?: InputMaybe<App_Config_Set_Input>;
   pk_columns: App_Config_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Content_AssetsArgs = {
+  _set?: InputMaybe<App_Content_Assets_Set_Input>;
+  where: App_Content_Assets_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Content_Assets_By_PkArgs = {
+  _set?: InputMaybe<App_Content_Assets_Set_Input>;
+  pk_columns: App_Content_Assets_Pk_Columns_Input;
 };
 
 
@@ -10301,6 +10534,12 @@ export type Query_Root = {
   app_config_aggregate: App_Config_Aggregate;
   /** fetch data from the table: "app.config" using primary key columns */
   app_config_by_pk?: Maybe<App_Config>;
+  /** fetch data from the table: "app.content_assets" */
+  app_content_assets: Array<App_Content_Assets>;
+  /** fetch aggregated fields from the table: "app.content_assets" */
+  app_content_assets_aggregate: App_Content_Assets_Aggregate;
+  /** fetch data from the table: "app.content_assets" using primary key columns */
+  app_content_assets_by_pk?: Maybe<App_Content_Assets>;
   /** fetch data from the table: "app.content_block" */
   app_content_block: Array<App_Content_Block>;
   /** fetch aggregated fields from the table: "app.content_block" */
@@ -10590,6 +10829,29 @@ export type Query_RootApp_Config_AggregateArgs = {
 
 export type Query_RootApp_Config_By_PkArgs = {
   name: Scalars['String'];
+};
+
+
+export type Query_RootApp_Content_AssetsArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Assets_Order_By>>;
+  where?: InputMaybe<App_Content_Assets_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Content_Assets_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Assets_Order_By>>;
+  where?: InputMaybe<App_Content_Assets_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Content_Assets_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -11634,6 +11896,12 @@ export type Subscription_Root = {
   app_config_aggregate: App_Config_Aggregate;
   /** fetch data from the table: "app.config" using primary key columns */
   app_config_by_pk?: Maybe<App_Config>;
+  /** fetch data from the table: "app.content_assets" */
+  app_content_assets: Array<App_Content_Assets>;
+  /** fetch aggregated fields from the table: "app.content_assets" */
+  app_content_assets_aggregate: App_Content_Assets_Aggregate;
+  /** fetch data from the table: "app.content_assets" using primary key columns */
+  app_content_assets_by_pk?: Maybe<App_Content_Assets>;
   /** fetch data from the table: "app.content_block" */
   app_content_block: Array<App_Content_Block>;
   /** fetch aggregated fields from the table: "app.content_block" */
@@ -11923,6 +12191,29 @@ export type Subscription_RootApp_Config_AggregateArgs = {
 
 export type Subscription_RootApp_Config_By_PkArgs = {
   name: Scalars['String'];
+};
+
+
+export type Subscription_RootApp_Content_AssetsArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Assets_Order_By>>;
+  where?: InputMaybe<App_Content_Assets_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Content_Assets_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Assets_Order_By>>;
+  where?: InputMaybe<App_Content_Assets_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Content_Assets_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -15599,6 +15890,27 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type DeleteContentAssetMutationVariables = Exact<{
+  url: Scalars['String'];
+}>;
+
+
+export type DeleteContentAssetMutation = { __typename?: 'mutation_root', delete_app_content_assets?: { __typename?: 'app_content_assets_mutation_response', affected_rows: number } | null };
+
+export type GetContentAssetOwnerIdQueryVariables = Exact<{
+  url: Scalars['String'];
+}>;
+
+
+export type GetContentAssetOwnerIdQuery = { __typename?: 'query_root', app_content_assets: Array<{ __typename?: 'app_content_assets', owner_id?: string | null, content_asset_type_id: string }> };
+
+export type InsertContentAssetMutationVariables = Exact<{
+  asset: App_Content_Assets_Insert_Input;
+}>;
+
+
+export type InsertContentAssetMutation = { __typename?: 'mutation_root', insert_app_content_assets?: { __typename?: 'app_content_assets_mutation_response', affected_rows: number } | null };
+
 export type DeleteContentPageLabelByIdMutationVariables = Exact<{
   id: Scalars['uuid'];
 }>;
@@ -16010,6 +16322,9 @@ export type GetUsersQueryVariables = Exact<{
 export type GetUsersQuery = { __typename?: 'query_root', users_profile: Array<{ __typename?: 'users_profile', id: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, group?: { __typename?: 'users_group', label: string, name: string, id: any } | null, identities: Array<{ __typename?: 'users_identity', identity_provider_name: string }>, organisation?: { __typename?: 'maintainer_organisation', schema_name?: string | null, schema_identifier: string, homepage_url?: string | null, logo: any } | null }>, users_profile_aggregate: { __typename?: 'users_profile_aggregate', aggregate?: { __typename?: 'users_profile_aggregate_fields', count: number } | null } };
 
 
+export const DeleteContentAssetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentAsset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_assets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentAssetMutation, DeleteContentAssetMutationVariables>;
+export const GetContentAssetOwnerIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentAssetOwnerId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_assets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"owner_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_asset_type_id"}}]}}]}}]} as unknown as DocumentNode<GetContentAssetOwnerIdQuery, GetContentAssetOwnerIdQueryVariables>;
+export const InsertContentAssetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertContentAsset"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"asset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_assets_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_app_content_assets"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"asset"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<InsertContentAssetMutation, InsertContentAssetMutationVariables>;
 export const DeleteContentPageLabelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentPageLabelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentPageLabelByIdMutation, DeleteContentPageLabelByIdMutationVariables>;
 export const GetContentPageLabelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageLabelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]} as unknown as DocumentNode<GetContentPageLabelByIdQuery, GetContentPageLabelByIdQueryVariables>;
 export const GetContentPageLabelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageLabels"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_label_bool_exp"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_label_order_by"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_label_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPageLabelsQuery, GetContentPageLabelsQueryVariables>;

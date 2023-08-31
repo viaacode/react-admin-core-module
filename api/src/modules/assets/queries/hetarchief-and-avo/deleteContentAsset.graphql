@@ -1,0 +1,5 @@
+mutation deleteContentAsset($url: String!) {
+	delete_app_content_assets(where: { path: { _eq: $url } }) {
+		affected_rows
+	}
+}

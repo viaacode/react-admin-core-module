@@ -1,4 +1,4 @@
-import { AdminConfigManager } from '../core/config';
+import { AdminConfigManager } from '~core/config';
 
 // Admin Core
 export type { AdminConfig } from '../core/config/config.types';
@@ -37,6 +37,7 @@ export { Color } from './content-page/types/content-block.types';
 export { ContentBlockType } from './content-page/types/content-block.types';
 export { PublishOption } from './content-page/types/content-pages.types';
 export { ContentPageService } from './content-page/services/content-page.service';
+export { AssetsService } from './shared/services/assets-service/assets.service';
 export * from './content-page/components/blocks';
 export {
 	convertDbContentPageToContentPageInfo,

@@ -8,7 +8,6 @@ import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory } from 'react-router-dom';
 import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
-import { AssetsService } from './shared/services/assets.service';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~shared/components/Html/Html';
 import { ROUTE_PARTS } from '~shared/consts/routes';
@@ -250,7 +249,6 @@ function setConfig() {
 			[ContentBlockType.Search]: () => <p>Search block mock</p>,
 		},
 		services: {
-			assetService: AssetsService,
 			toastService: {
 				showToast: (toastInfo: ToastInfo) => {
 					// Client decides how the toast messages are shown

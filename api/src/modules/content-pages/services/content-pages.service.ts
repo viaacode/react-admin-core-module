@@ -6,14 +6,27 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-
-import { mapLimit } from 'blend-promise-utils';
 import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+
+import { mapLimit } from 'blend-promise-utils';
 import { setHours, setMinutes } from 'date-fns';
-import { compact, fromPairs, has, intersection, keys, set, uniq, without } from 'lodash';
+import {
+	compact,
+	escapeRegExp,
+	fromPairs,
+	has,
+	intersection,
+	keys,
+	set,
+	uniq,
+	without,
+} from 'lodash';
 import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
+import { isAvo } from 'src/modules/shared/helpers/is-avo';
+import { AssetsService } from '../../assets';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
@@ -37,7 +50,6 @@ import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief }
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { DatabaseType, PermissionName } from '@viaa/avo2-types';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -62,7 +74,6 @@ import {
 } from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
-import { isAvo } from 'src/modules/shared/helpers/is-avo';
 
 @Injectable()
 export class ContentPagesService {
@@ -72,7 +83,8 @@ export class ContentPagesService {
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		protected playerTicketService: PlayerTicketService
+		protected playerTicketService: PlayerTicketService,
+		protected assetsService: AssetsService
 	) {}
 
 	/**
@@ -184,7 +196,7 @@ export class ContentPagesService {
 	): GqlInsertOrUpdateContentBlock {
 		return {
 			id: contentPageInfo.id,
-			thumbnail_path: contentPageInfo.thumbnailPath,
+			thumbnail_path: contentPageInfo.thumbnailPath || null,
 			title: contentPageInfo.title,
 			description: contentPageInfo.description || null,
 			seo_description: contentPageInfo.seoDescription || null,
@@ -908,12 +920,12 @@ export class ContentPagesService {
 		}
 	}
 
-	public async updateContentPage(
-		contentPage: DbContentPage,
-		initialContentPage: DbContentPage | undefined
-	): Promise<DbContentPage | null> {
+	public async updateContentPage(contentPage: DbContentPage): Promise<DbContentPage | null> {
 		try {
 			const dbContentPage = this.convertToDatabaseContentPage(contentPage);
+			const initialContentPage: DbContentPage = await this.getContentPageById(
+				String(contentPage.id)
+			);
 			const response = await this.dataService.execute<
 				ContentPageQueryTypes['UpdateContentByIdMutation'],
 				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
@@ -940,11 +952,19 @@ export class ContentPagesService {
 				);
 			}
 
+			// Delete images from s3 that are present in the initialContentPage and no longer present in the updated contentPage
+			const originalImages = this.getImageUrlsFromJsonBlob(initialContentPage);
+			const updatedImages = this.getImageUrlsFromJsonBlob(contentPage);
+
+			const deletedImages = without(originalImages, ...updatedImages);
+			await mapLimit(deletedImages, 20, (deletedImageUrl: string) =>
+				this.assetsService.delete(deletedImageUrl)
+			);
+
 			return contentPage;
 		} catch (err: any) {
 			const error = CustomError('Failed to update content page', err, {
 				contentPage,
-				initialContentPage,
 			});
 			console.error(error);
 			throw new InternalServerErrorException(error);
@@ -1178,5 +1198,17 @@ export class ContentPagesService {
 			response as ContentPageQueryTypes['GetPermissionsFromContentPageByPathQueryHetArchief'];
 
 		return hetArchiefResponse.app_content_page?.[0]?.user_group_ids || [];
+	}
+
+	public getImageUrlsFromJsonBlob(jsonBlob: any): string[] {
+		const jsonString = JSON.stringify(jsonBlob);
+
+		const assetUrlsRegex = new RegExp(
+			`${escapeRegExp(process.env.ASSET_SERVER_ENDPOINT)}/${escapeRegExp(
+				process.env.ASSET_SERVER_BUCKET_NAME
+			)}/[^"\\\\]+`,
+			'g'
+		);
+		return jsonString.match(assetUrlsRegex);
 	}
 }

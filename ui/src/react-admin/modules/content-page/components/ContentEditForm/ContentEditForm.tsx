@@ -15,7 +15,7 @@ import {
 import { RichEditorState } from '@meemoo/react-components/dist/esm';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { compact, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -180,6 +180,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										onChange={(urls: string[]) =>
 											changeContentPageProp('thumbnailPath', urls[0])
 										}
+										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
 									/>
 								</FormGroup>
 							</Column>

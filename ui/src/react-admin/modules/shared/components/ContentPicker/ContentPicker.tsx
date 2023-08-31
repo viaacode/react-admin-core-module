@@ -7,7 +7,7 @@ import {
 	LinkTarget,
 	TextInput,
 } from '@viaa/avo2-components';
-import { isNull } from 'lodash-es';
+import { isNull, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
@@ -328,6 +328,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					propertyChanged('value', urls[0]);
 				}}
 				allowedTypes={[]}
+				onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
 			/>
 		);
 	};

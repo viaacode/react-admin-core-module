@@ -199,13 +199,10 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			if (newContentPage) {
 				const updatedContentPage: ContentPageInfo =
-					await ContentPageService.updateContentPage(
-						{
-							...contentPageInfo,
-							...newContentPage,
-						} as ContentPageInfo,
-						undefined
-					);
+					await ContentPageService.updateContentPage({
+						...contentPageInfo,
+						...newContentPage,
+					} as ContentPageInfo);
 
 				setContentPageInfo({
 					...updatedContentPage,

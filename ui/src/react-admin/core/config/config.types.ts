@@ -66,14 +66,6 @@ export interface AdminConfig {
 	};
 	// Secondary services and config
 	services: {
-		assetService: {
-			uploadFile: (
-				file: File,
-				assetType: Avo.FileUpload.AssetType,
-				ownerId: string
-			) => Promise<string>;
-			deleteFile: (fileUrl: string) => Promise<void>;
-		};
 		getContentPageByPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
@@ -102,7 +94,6 @@ export interface AdminConfig {
 	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>;
 	icon?: IconConfig;
 	alertIcon?: IconConfig;
-	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
 	};
@@ -181,15 +172,6 @@ export interface IconConfig {
 }
 
 export type IconComponentProps = Record<string, unknown>;
-
-export interface FileConfig {
-	service: FileService;
-}
-
-export interface FileService {
-	uploadFile: (file: File) => Promise<unknown>;
-	deleteFile: (url: string) => Promise<unknown>;
-}
 
 export interface EducationOrganisationService {
 	fetchCities(): Promise<string[]>;

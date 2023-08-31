@@ -1,5 +1,4 @@
 import {
-	BadRequestException,
 	Body,
 	Controller,
 	Delete,
@@ -271,7 +270,6 @@ export class ContentPagesController {
 		@Body()
 		body: {
 			contentPage: DbContentPage;
-			initialContentPage: DbContentPage | undefined;
 		},
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage | null> {
@@ -284,10 +282,7 @@ export class ContentPagesController {
 				"You're not allowed to edit content pages that you do not own"
 			);
 		}
-		return this.contentPagesService.updateContentPage(
-			body.contentPage,
-			body.initialContentPage
-		);
+		return this.contentPagesService.updateContentPage(body.contentPage);
 	}
 
 	@Delete(':id')

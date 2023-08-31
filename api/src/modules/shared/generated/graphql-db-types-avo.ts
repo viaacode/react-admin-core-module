@@ -13676,7 +13676,7 @@ export type App_Content_Assets = {
   content_asset_type_id: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
+  id: Scalars['uuid'];
   label?: Maybe<Scalars['String']>;
   owner_id?: Maybe<Scalars['String']>;
   path: Scalars['String'];
@@ -13693,17 +13693,9 @@ export type App_Content_Assets_Aggregate = {
 /** aggregate fields of "app.content_assets" */
 export type App_Content_Assets_Aggregate_Fields = {
   __typename?: 'app_content_assets_aggregate_fields';
-  avg?: Maybe<App_Content_Assets_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<App_Content_Assets_Max_Fields>;
   min?: Maybe<App_Content_Assets_Min_Fields>;
-  stddev?: Maybe<App_Content_Assets_Stddev_Fields>;
-  stddev_pop?: Maybe<App_Content_Assets_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<App_Content_Assets_Stddev_Samp_Fields>;
-  sum?: Maybe<App_Content_Assets_Sum_Fields>;
-  var_pop?: Maybe<App_Content_Assets_Var_Pop_Fields>;
-  var_samp?: Maybe<App_Content_Assets_Var_Samp_Fields>;
-  variance?: Maybe<App_Content_Assets_Variance_Fields>;
 };
 
 
@@ -13711,12 +13703,6 @@ export type App_Content_Assets_Aggregate_Fields = {
 export type App_Content_Assets_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<App_Content_Assets_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type App_Content_Assets_Avg_Fields = {
-  __typename?: 'app_content_assets_avg_fields';
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to filter rows from the table "app.content_assets". All fields are combined with a logical 'AND'. */
@@ -13727,7 +13713,7 @@ export type App_Content_Assets_Bool_Exp = {
   content_asset_type_id?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
   owner_id?: InputMaybe<String_Comparison_Exp>;
   path?: InputMaybe<String_Comparison_Exp>;
@@ -13736,6 +13722,8 @@ export type App_Content_Assets_Bool_Exp = {
 
 /** unique or primary key constraints on table "app.content_assets" */
 export enum App_Content_Assets_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ContentAssetsIdKey = 'content_assets_id_key',
   /** unique or primary key constraint on columns "label" */
   ContentAssetsLabelKey = 'content_assets_label_key',
   /** unique or primary key constraint on columns "path" */
@@ -13744,17 +13732,12 @@ export enum App_Content_Assets_Constraint {
   ContentAssetsPkey = 'content_assets_pkey'
 }
 
-/** input type for incrementing numeric columns in table "app.content_assets" */
-export type App_Content_Assets_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-};
-
 /** input type for inserting data into table "app.content_assets" */
 export type App_Content_Assets_Insert_Input = {
   content_asset_type_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
   owner_id?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
@@ -13767,7 +13750,7 @@ export type App_Content_Assets_Max_Fields = {
   content_asset_type_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
   owner_id?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
@@ -13780,7 +13763,7 @@ export type App_Content_Assets_Min_Fields = {
   content_asset_type_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['uuid']>;
   label?: Maybe<Scalars['String']>;
   owner_id?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
@@ -13817,7 +13800,7 @@ export type App_Content_Assets_Order_By = {
 
 /** primary key columns input for table: app.content_assets */
 export type App_Content_Assets_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  id: Scalars['uuid'];
 };
 
 /** select columns of table "app.content_assets" */
@@ -13845,29 +13828,11 @@ export type App_Content_Assets_Set_Input = {
   content_asset_type_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
   owner_id?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type App_Content_Assets_Stddev_Fields = {
-  __typename?: 'app_content_assets_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type App_Content_Assets_Stddev_Pop_Fields = {
-  __typename?: 'app_content_assets_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type App_Content_Assets_Stddev_Samp_Fields = {
-  __typename?: 'app_content_assets_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** Streaming cursor of the table "app_content_assets" */
@@ -13883,17 +13848,11 @@ export type App_Content_Assets_Stream_Cursor_Value_Input = {
   content_asset_type_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['uuid']>;
   label?: InputMaybe<Scalars['String']>;
   owner_id?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate sum on columns */
-export type App_Content_Assets_Sum_Fields = {
-  __typename?: 'app_content_assets_sum_fields';
-  id?: Maybe<Scalars['Int']>;
 };
 
 /** update columns of table "app.content_assets" */
@@ -13917,29 +13876,9 @@ export enum App_Content_Assets_Update_Column {
 }
 
 export type App_Content_Assets_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<App_Content_Assets_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<App_Content_Assets_Set_Input>;
   where: App_Content_Assets_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type App_Content_Assets_Var_Pop_Fields = {
-  __typename?: 'app_content_assets_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type App_Content_Assets_Var_Samp_Fields = {
-  __typename?: 'app_content_assets_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type App_Content_Assets_Variance_Fields = {
-  __typename?: 'app_content_assets_variance_fields';
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate avg on columns */
@@ -26418,7 +26357,7 @@ export type Mutation_RootDelete_App_Content_AssetsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_App_Content_Assets_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['uuid'];
 };
 
 
@@ -29168,7 +29107,6 @@ export type Mutation_RootUpdate_App_ContentArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_App_Content_AssetsArgs = {
-  _inc?: InputMaybe<App_Content_Assets_Inc_Input>;
   _set?: InputMaybe<App_Content_Assets_Set_Input>;
   where: App_Content_Assets_Bool_Exp;
 };
@@ -29176,7 +29114,6 @@ export type Mutation_RootUpdate_App_Content_AssetsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_App_Content_Assets_By_PkArgs = {
-  _inc?: InputMaybe<App_Content_Assets_Inc_Input>;
   _set?: InputMaybe<App_Content_Assets_Set_Input>;
   pk_columns: App_Content_Assets_Pk_Columns_Input;
 };
@@ -32259,7 +32196,7 @@ export type Query_RootApp_Content_Assets_AggregateArgs = {
 
 
 export type Query_RootApp_Content_Assets_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['uuid'];
 };
 
 
@@ -39029,7 +38966,7 @@ export type Subscription_RootApp_Content_Assets_AggregateArgs = {
 
 
 export type Subscription_RootApp_Content_Assets_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['uuid'];
 };
 
 

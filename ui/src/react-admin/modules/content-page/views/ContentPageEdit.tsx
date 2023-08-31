@@ -361,8 +361,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 						),
 					};
 					insertedOrUpdatedContent = await ContentPageService.updateContentPage(
-						contentBody,
-						contentPageState.initialContentPageInfo
+						contentBody
 					);
 				} else {
 					throw new CustomError(

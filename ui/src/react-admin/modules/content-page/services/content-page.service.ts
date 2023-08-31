@@ -200,29 +200,24 @@ export class ContentPageService {
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
-	public static async updateContentPage(
-		contentPage: ContentPageInfo,
-		initialContentPage: Partial<ContentPageInfo> | undefined
-	): Promise<ContentPageInfo> {
+	public static async updateContentPage(contentPage: ContentPageInfo): Promise<ContentPageInfo> {
 		const dbContentPage: DbContentPage = await fetchWithLogoutJson<DbContentPage>(
 			this.getBaseUrl(),
 			{
 				method: 'PATCH',
 				body: JSON.stringify({
 					contentPage: convertContentPageInfoToDbContentPage(contentPage),
-					initialContentPage: convertContentPageInfoToDbContentPage(initialContentPage),
 				}),
 			}
 		);
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
-	// TODO figure out why this function is not used
 	public static async duplicateContentPageImages(id: number | string): Promise<ContentPageInfo> {
 		try {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
-					// This route lives in the proxy and not in the admin-core-api so we use content-pages/duplicate instead of admin/content-pages/duplicate
+					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
 					url: `${
 						AdminConfigManager.getConfig().database.proxyUrl
 					}/content-pages/duplicate`,
@@ -247,7 +242,7 @@ export class ContentPageService {
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.
 	/**
 	 * Find name that isn't a duplicate of an existing name of a content page of this user
-	 * eg if these content pages exist:
+	 * eg: if these content pages exist:
 	 * copy 1: test
 	 * copy 2: test
 	 * copy 4: test
