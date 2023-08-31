@@ -154,6 +154,7 @@
     "@types/react": "17.0.65",
     "@types/react-dom": "17.0.20",
     "mini-css-extract-plugin": "2.4.7",
-    "graphql": "16.6.0"
+    "graphql": "16.6.0",
+    "typescript": "^5.2.2"
   }
 }
