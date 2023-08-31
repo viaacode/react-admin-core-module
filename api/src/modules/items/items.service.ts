@@ -1,5 +1,5 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { DataService } from '../data';
 
 import { CustomError } from '../shared/helpers/custom-error';

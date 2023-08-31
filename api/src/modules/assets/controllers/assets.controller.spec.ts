@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { mockUserAvo } from '../../../mock-user';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
 import { TranslationsService } from '../../translations';

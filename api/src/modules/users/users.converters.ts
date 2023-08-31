@@ -1,4 +1,5 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
 import { UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from './users.types';
 
@@ -39,9 +40,9 @@ export function convertUserInfoToCommonUser(
 				organisation: user.profile.organisation,
 				educationalOrganisations: (user.profile.organizations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: undefined,
-						unitId: org.unitAddress ?? null,
-						label: org.organizationName,
+						organizationId: org?.organizationId ?? null,
+						unitId: org?.unitId ?? null,
+						label: org?.label ?? null,
 					})
 				),
 				loms: user.profile.loms,
@@ -103,7 +104,7 @@ export function convertUserInfoToCommonUser(
 					(org): Avo.EducationOrganization.Organization => ({
 						organizationId: undefined,
 						unitId: undefined,
-						label: org.organizationName,
+						label: org.label,
 					})
 				),
 				loms: profile.loms,
