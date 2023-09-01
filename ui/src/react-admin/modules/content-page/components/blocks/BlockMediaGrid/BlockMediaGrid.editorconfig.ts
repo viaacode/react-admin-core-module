@@ -62,7 +62,12 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: ['ITEM', 'COLLECTION', 'BUNDLE'] as Avo.Core.ContentPickerType[],
+					allowedTypes: [
+						'ITEM',
+						'COLLECTION',
+						'BUNDLE',
+						'ASSIGNMENT',
+					] as Avo.Core.ContentPickerType[],
 				},
 			},
 			buttonLabel: TEXT_FIELD(undefined, {
