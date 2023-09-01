@@ -908,6 +908,7 @@
   "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "Deze pagina kon niet worden gevonden",
   "react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel": "Je hebt geen rechten om deze contentpagina aan te passen.",
   "react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items": "custom navigatie items",
+  "react-admin/modules/shared/components/content-picker/content-picker___opdrachten": "Opdrachten",
   "react-admin/modules/user/components/user-delete-modal___bladwijzer": "Bladwijzer",
   "react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden": "Deze inhoud zal verwijderd worden:",
   "react-admin/modules/user/components/user-delete-modal___prive-collectie-of-bundel": "Privé collectie of bundel",

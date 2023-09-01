@@ -1,0 +1,13 @@
+query getPublicAssignmentsByTitleOrId($title: String!, $id: uuid!, $limit: Int!) {
+	app_assignments_v2(
+		where: {
+			_or: [{ id: { _eq: $id } }, { title: { _ilike: $title } }]
+			is_deleted: { _eq: false }
+			is_public: { _eq: true }
+		}
+		limit: $limit
+	) {
+		id
+		title
+	}
+}

@@ -1,4 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
+import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
 
 import { PickerTypeOption } from '../../types/content-picker';
@@ -35,6 +36,9 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<ContentPickerType, string> = 
 	),
 	[ContentPickerType.BUNDLE]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/content/content___bundels'
+	),
+	[ContentPickerType.ASSIGNMENT]: AdminConfigManager.getConfig().services.i18n.tText(
+		'react-admin/modules/shared/components/content-picker/content-picker___opdrachten'
 	),
 	[ContentPickerType.EXTERNAL_LINK]: AdminConfigManager.getConfig().services.i18n.tText(
 		'admin/shared/components/content-picker/content-picker___externe-url'
@@ -99,6 +103,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			picker: 'SELECT',
 		},
 		{
+			value: ContentPickerType.ASSIGNMENT,
+			label: labels[ContentPickerType.ASSIGNMENT],
+			disabled: false,
+			fetch: retrieveAssignments,
+			picker: 'SELECT',
+		},
+		{
 			value: ContentPickerType.EXTERNAL_LINK,
 			label: labels[ContentPickerType.EXTERNAL_LINK],
 			disabled: false,
@@ -156,6 +167,7 @@ export const DEFAULT_ALLOWED_TYPES: ContentPickerType[] = [
 	ContentPickerType.ITEM,
 	ContentPickerType.COLLECTION,
 	ContentPickerType.BUNDLE,
+	ContentPickerType.ASSIGNMENT,
 	ContentPickerType.INTERNAL_LINK,
 	ContentPickerType.EXTERNAL_LINK,
 	ContentPickerType.ANCHOR_LINK,

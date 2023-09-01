@@ -1,4 +1,5 @@
 export * from './assets';
+export * from './assignments';
 export * from './collections';
 export * from './content-page-labels';
 export * from './content-pages';

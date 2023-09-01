@@ -2,7 +2,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 
 export const mockCommonUser: Avo.User.CommonUser = {
-	profileId: 'c4dead9b-32c3-4459-a66b-23f73afba3ea',
+	profileId: '31051baa-94ab-4fc2-a859-750a52774d3a',
 	email: 'hetarchief2.0+bztmeemooadmin@meemoo.be',
 	firstName: 'meemoo',
 	lastName: 'Admin',

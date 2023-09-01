@@ -133,6 +133,7 @@ export interface AdminConfig {
 		BUNDLE_EDIT?: string;
 		COLLECTIONS_OVERVIEW?: string;
 		COLLECTION_DETAIL?: string;
+		ASSIGNMENT_DETAIL?: string;
 		ITEM_DETAIL?: string;
 		NEWS?: string;
 		SEARCH?: string;

@@ -2,7 +2,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { Idp } from './users.types';
 
 export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
-	id: 'c4dead9b-32c3-4459-a66b-23f73afba3ea',
+	id: '31051baa-94ab-4fc2-a859-750a52774d3a',
 	fullName: 'meemoo Admin',
 	firstName: 'meemoo',
 	lastName: 'Admin',

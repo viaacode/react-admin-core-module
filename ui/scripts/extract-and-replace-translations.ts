@@ -26,7 +26,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import fetch from 'node-fetch';
 
-import glob from 'glob';
+import * as glob from 'glob';
 import { compact, intersection, kebabCase, keys, lowerCase, upperFirst, without } from 'lodash';
 
 import localTranslationsAvo from '../src/shared/translations/avo/nl.json';
@@ -81,19 +81,11 @@ function getFormattedTranslation(translation: string) {
 }
 
 async function getFilesByGlob(globPattern: string): Promise<string[]> {
-	return new Promise<string[]>((resolve, reject) => {
-		const options = {
-			ignore: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts'],
-			cwd: path.join(__dirname, '../src'),
-		};
-		glob(globPattern, options, (err, files) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(files);
-			}
-		});
-	});
+	const options = {
+		ignore: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts'],
+		cwd: path.join(__dirname, '../src'),
+	};
+	return glob.glob(globPattern, options);
 }
 
 function getFallbackTranslation(key: string): string {

@@ -127,6 +127,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				case ContentPickerType.PROJECTS: {
 					return renderLink(String(value), resolvedTarget);
 				}
+
 				case ContentPickerType.COLLECTION: {
 					const collectionUrl = buildLink(
 						AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
@@ -136,18 +137,31 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					);
 					return renderLink(collectionUrl, resolvedTarget);
 				}
+
 				case ContentPickerType.ITEM: {
 					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 						id: value,
 					});
 					return renderLink(itemUrl, resolvedTarget);
 				}
+
 				case ContentPickerType.BUNDLE: {
 					const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
 						id: value,
 					});
 					return renderLink(bundleUrl, resolvedTarget);
 				}
+
+				case ContentPickerType.ASSIGNMENT: {
+					const assignmentUrl = buildLink(
+						AdminConfigManager.getAdminRoute('ASSIGNMENT_DETAIL'),
+						{
+							id: value,
+						}
+					);
+					return renderLink(assignmentUrl, resolvedTarget);
+				}
+
 				case ContentPickerType.EXTERNAL_LINK: {
 					const externalUrl = ((value as string) || '').replace(
 						'{{PROXY_URL}}',
@@ -155,15 +169,18 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}
+
 				case ContentPickerType.ANCHOR_LINK: {
 					const urlWithoutQueryOrAnchor = window.location.href
 						.split('?')[0]
 						.split('#')[0];
 					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
 				}
+
 				case ContentPickerType.FILE: {
 					return renderLink(value as string, LinkTarget.Blank);
 				}
+
 				case ContentPickerType.SEARCH_QUERY: {
 					const queryParams = JSON.parse(value as string);
 					return renderLink(
@@ -182,6 +199,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						resolvedTarget
 					);
 				}
+
 				default:
 					break;
 			}

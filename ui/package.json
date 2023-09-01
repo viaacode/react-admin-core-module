@@ -30,8 +30,8 @@
     "@meemoo/react-components": "2.26.0",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "^4.14.1",
-    "@viaa/avo2-components": "3.10.0",
-    "@viaa/avo2-types": "2.48.33",
+    "@viaa/avo2-components": "3.10.3",
+    "@viaa/avo2-types": "2.48.36",
     "clsx": "^1.1.1",
     "classnames": "^2.3.2",
     "moment": "^2.29.4",
@@ -136,7 +136,7 @@
     "use-query-params": "1.2.3",
     "web-vitals": "^2.1.4",
     "lodash": "^4.17.21",
-    "glob": "^10.3.3"
+    "glob": "^10.3.4"
   },
   "browserslist": {
     "production": [

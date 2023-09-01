@@ -1209,6 +1209,6 @@ export class ContentPagesService {
 			)}/[^"\\\\]+`,
 			'g'
 		);
-		return jsonString.match(assetUrlsRegex);
+		return jsonString.match(assetUrlsRegex) || [];
 	}
 }
