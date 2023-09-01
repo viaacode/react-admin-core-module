@@ -4,7 +4,7 @@ import {
 	RichTextEditorProps,
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { AssetsService } from '~shared/services/assets-service/assets.service';

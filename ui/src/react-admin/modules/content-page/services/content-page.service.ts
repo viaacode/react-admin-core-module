@@ -1,5 +1,5 @@
 import { IPagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
 import moment from 'moment';
 import { stringifyUrl } from 'query-string';

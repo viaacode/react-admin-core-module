@@ -6,7 +6,7 @@ import { CollectionService } from '../../collection/collection.service';
 import { ContentPageService } from '../../content-page/services/content-page.service';
 import { getProfileId } from '../helpers/get-profile-id';
 
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 type PermissionInfo = { name: PermissionName; obj?: any | null };
 

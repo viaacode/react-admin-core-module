@@ -1,6 +1,5 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
-import { ContentPickerType } from '../ContentPicker.types';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { AssignmentService } from '~modules/assignment/assignment.service';
@@ -14,12 +13,12 @@ export const retrieveAssignments = async (
 	const assignments: Avo.Assignment.Assignment[] | null =
 		await AssignmentService.fetchAssignmentsByTitleOrId(titleOrId, limit);
 
-	return parseAssignments(ContentPickerType.ASSIGNMENT, assignments || []);
+	return parseAssignments('ASSIGNMENT', assignments || []);
 };
 
 // parse raw data to react-select options
 const parseAssignments = (
-	type: ContentPickerType,
+	type: Avo.Core.ContentPickerType,
 	raw: Avo.Assignment.Assignment[]
 ): PickerItem[] => {
 	return raw.map(

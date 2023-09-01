@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 export enum GraphQlSortDirections {
 	asc_nulls_last = 'asc_nulls_last',

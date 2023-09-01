@@ -1,3 +1,4 @@
+import type { Avo } from '@viaa/avo2-types';
 import {
 	Button,
 	Flex,
@@ -11,7 +12,6 @@ import { isNull, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { ContentPickerType } from './ContentPicker.types';
 
 import { CustomError } from '../../helpers/custom-error';
 import { PickerItem, PickerTypeOption } from '../../types/content-picker';
@@ -31,7 +31,7 @@ import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
-	allowedTypes?: ContentPickerType[];
+	allowedTypes?: Avo.Core.ContentPickerType[];
 	value: PickerItem | undefined | null;
 	onChange: (value: PickerItem | null) => void;
 	placeholder?: string;
@@ -55,7 +55,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	const [testInput, setTestInput] = useState<string>('');
 
 	// filter available options for the type picker
-	const typeOptions = filterTypes(GET_CONTENT_TYPES(), allowedTypes as ContentPickerType[]);
+	const typeOptions = filterTypes(
+		GET_CONTENT_TYPES(),
+		allowedTypes as Avo.Core.ContentPickerType[]
+	);
 
 	// apply initial type from `value`, default to first available type
 	const currentTypeObject = typeOptions.find((type) => type.value === value?.type);
@@ -87,7 +90,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					items = [
 						{
 							label: value?.label || '',
-							type: value?.type as ContentPickerType,
+							type: value?.type as Avo.Core.ContentPickerType,
 							value: value?.value || '',
 						},
 						...items.filter((item: PickerItem) => item.label !== value?.label),
@@ -186,11 +189,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 	const propertyChanged = (
 		prop: 'type' | 'selectedItem' | 'value' | 'target' | 'label',
-		propValue: ContentPickerType | PickerItem | string | number | null | LinkTarget
+		propValue: Avo.Core.ContentPickerType | PickerItem | string | number | null | LinkTarget
 	) => {
-		let newType: ContentPickerType;
+		let newType: Avo.Core.ContentPickerType;
 		if (prop === 'type') {
-			newType = propValue as ContentPickerType;
+			newType = propValue as Avo.Core.ContentPickerType;
 		} else {
 			newType = selectedType.value;
 		}
@@ -210,14 +213,14 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 		} else {
 			newValue = null;
 		}
-		if (newType === ContentPickerType.SEARCH_QUERY && newValue) {
+		if (newType === 'SEARCH_QUERY' && newValue) {
 			newValue = parseSearchQuery(newValue);
 		}
 
 		let newTarget: LinkTarget;
 		if (prop === 'target') {
 			newTarget = propValue as LinkTarget;
-		} else if (newType === ContentPickerType.FILE) {
+		} else if (newType === 'FILE') {
 			newTarget = LinkTarget.Blank;
 			newLabel = (newValue && newValue.split('/').pop()) || undefined;
 		} else {

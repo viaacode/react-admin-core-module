@@ -7,7 +7,7 @@ import {
 	IconName,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import {
 	ContentItemStyle,

@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { FC, ReactNode } from 'react';
 import { Route, useParams } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config';

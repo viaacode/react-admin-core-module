@@ -1,5 +1,4 @@
 import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import {
 	CardWithoutDescriptionBlockComponentState,
 	Color,
@@ -100,12 +99,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: [
-						ContentPickerType.CONTENT_PAGE,
-						ContentPickerType.INTERNAL_LINK,
-						ContentPickerType.EXTERNAL_LINK,
-						ContentPickerType.ANCHOR_LINK,
-					],
+					allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK'],
 				},
 			},
 		},

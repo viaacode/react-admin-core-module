@@ -9,14 +9,13 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { Link } from '~shared/components/Link';
 import {
 	LoadingErrorLoadedComponent,
@@ -239,12 +238,12 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 								>
 									<ContentPicker
 										allowedTypes={[
-											ContentPickerType.CONTENT_PAGE,
-											ContentPickerType.ITEM,
-											ContentPickerType.COLLECTION,
-											ContentPickerType.BUNDLE,
-											ContentPickerType.INTERNAL_LINK,
-											ContentPickerType.EXTERNAL_LINK,
+											'CONTENT_PAGE',
+											'ITEM',
+											'COLLECTION',
+											'BUNDLE',
+											'INTERNAL_LINK',
+											'EXTERNAL_LINK',
 										]}
 										onChange={(newLinkTo) =>
 											setContentPageLabelInfo({

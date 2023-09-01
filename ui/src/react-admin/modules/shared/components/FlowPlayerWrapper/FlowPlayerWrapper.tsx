@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 
 export type FlowPlayerWrapperProps = {

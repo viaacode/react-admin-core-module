@@ -15,7 +15,7 @@ import {
 	Tabs,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import moment from 'moment';

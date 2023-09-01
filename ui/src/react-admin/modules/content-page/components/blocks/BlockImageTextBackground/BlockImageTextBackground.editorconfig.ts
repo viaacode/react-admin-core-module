@@ -28,7 +28,6 @@ import {
 	GET_SIMPLE_ALIGN_OPTIONS,
 } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): ImageTextBackgroundBlockComponentState => ({
@@ -116,12 +115,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: [
-						ContentPickerType.CONTENT_PAGE,
-						ContentPickerType.INTERNAL_LINK,
-						ContentPickerType.EXTERNAL_LINK,
-						ContentPickerType.ANCHOR_LINK,
-					],
+					allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK'],
 				},
 			},
 			buttonIcon: {

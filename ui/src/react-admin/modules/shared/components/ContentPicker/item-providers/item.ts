@@ -1,10 +1,9 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { PickerItem } from '../../../types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ItemsService } from '~modules/item/items.service';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 // Fetch content items from GQL
 export const retrieveItems = async (
@@ -23,7 +22,7 @@ const parseItems = (raw: Avo.Item.Item[]): PickerItem[] => {
 	return raw.map((item: Avo.Item.Item): PickerItem => {
 		return {
 			label: item.title,
-			...parsePickerItem(ContentPickerType.ITEM, item.external_id.toString()),
+			...parsePickerItem('ITEM', item.external_id.toString()),
 		};
 	});
 };

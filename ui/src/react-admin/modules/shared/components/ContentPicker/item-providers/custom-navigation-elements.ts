@@ -2,7 +2,6 @@ import { compact, sortBy } from 'lodash-es';
 
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { PickerItem } from '~shared/types/content-picker';
 import { AdminConfigManager } from '~core/config';
 
@@ -18,10 +17,7 @@ export const retrieveCustomNavigationElements = async (
 			if (!keyword || customNavigationElement.includes(keyword)) {
 				return {
 					label: customNavigationElement,
-					...parsePickerItem(
-						ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
-						customNavigationElement
-					),
+					...parsePickerItem('CUSTOM_NAVIGATION_ELEMENTS', customNavigationElement),
 				};
 			}
 			return null;

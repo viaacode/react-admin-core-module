@@ -3,7 +3,7 @@ import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
@@ -120,15 +120,15 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			>
 				<ContentPicker
 					allowedTypes={[
-						ContentPickerType.CONTENT_PAGE,
-						ContentPickerType.INTERNAL_LINK,
-						ContentPickerType.EXTERNAL_LINK,
-						ContentPickerType.CUSTOM_NAVIGATION_ELEMENTS,
+						'CONTENT_PAGE',
+						'INTERNAL_LINK',
+						'EXTERNAL_LINK',
+						'CUSTOM_NAVIGATION_ELEMENTS',
 					]}
 					value={
 						formState.contentType && formState.contentPath
 							? {
-									type: formState.contentType as ContentPickerType,
+									type: formState.contentType as Avo.Core.ContentPickerType,
 									label: formState.contentPath.toString(),
 									value: formState.contentPath.toString(),
 							  }

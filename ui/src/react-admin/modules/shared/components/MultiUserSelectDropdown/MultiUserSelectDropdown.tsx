@@ -13,14 +13,13 @@ import {
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
-import { Avo } from '@viaa/avo2-types';
 
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { UserService } from '~modules/user/user.service';
 
@@ -71,7 +70,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							(user): PickerItem => ({
 								label: `${user?.fullName} (${user?.email})`,
 								value: user?.profileId as string,
-								type: ContentPickerType.PROFILE,
+								type: 'PROFILE',
 							})
 						)
 					);
@@ -200,7 +199,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 											}
 										}}
 										hideTargetSwitch
-										allowedTypes={[ContentPickerType.PROFILE]}
+										allowedTypes={['PROFILE']}
 										hideTypeDropdown
 										placeholder={
 											placeholder ||

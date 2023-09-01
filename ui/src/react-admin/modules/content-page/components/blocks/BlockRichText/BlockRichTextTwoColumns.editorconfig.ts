@@ -16,7 +16,6 @@ import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defau
 
 import { AdminConfigManager } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
-import { ContentPickerType } from '~modules/shared/components/ContentPicker/ContentPicker.types';
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
 	{
@@ -126,10 +125,10 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						...(!isAvo() && {
 							editorProps: {
 								allowedTypes: [
-									ContentPickerType.CONTENT_PAGE,
-									ContentPickerType.INTERNAL_LINK,
-									ContentPickerType.EXTERNAL_LINK,
-									ContentPickerType.ANCHOR_LINK,
+									'CONTENT_PAGE',
+									'INTERNAL_LINK',
+									'EXTERNAL_LINK',
+									'ANCHOR_LINK',
 								],
 							},
 						}),

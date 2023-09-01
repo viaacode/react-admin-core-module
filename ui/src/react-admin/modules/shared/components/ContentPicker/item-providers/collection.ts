@@ -1,6 +1,5 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
-import { ContentPickerType } from '../ContentPicker.types';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { CollectionService } from '~modules/collection/collection.service';
@@ -18,7 +17,7 @@ export const retrieveCollections = async (
 		? await CollectionService.fetchCollectionsByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.collection);
 
-	return parseCollections(ContentPickerType.COLLECTION, collections || []);
+	return parseCollections('COLLECTION', collections || []);
 };
 
 // fetch bundles by title-wildcard
@@ -30,12 +29,12 @@ export const retrieveBundles = async (
 		? await CollectionService.fetchBundlesByTitleOrId(titleOrId, limit)
 		: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.bundle);
 
-	return parseCollections(ContentPickerType.BUNDLE, bundles || []);
+	return parseCollections('BUNDLE', bundles || []);
 };
 
 // parse raw data to react-select options
 const parseCollections = (
-	type: ContentPickerType,
+	type: Avo.Core.ContentPickerType,
 	raw: Avo.Collection.Collection[]
 ): PickerItem[] => {
 	return raw.map(

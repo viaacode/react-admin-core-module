@@ -7,7 +7,7 @@ import {
 	TagInfo,
 	TagsInput,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { compact, get, isNumber, isString } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';

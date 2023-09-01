@@ -1,5 +1,5 @@
 import { Blankslate, Button, Flex, FlexItem, Icon, IconName, Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { compact, isString, noop } from 'lodash-es';
 import { parse } from 'query-string';
 import React, { FunctionComponent, useState } from 'react';

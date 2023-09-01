@@ -1,6 +1,6 @@
 import { IPagination } from '@studiohyperdrive/pagination';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { QUERY_KEYS } from '~modules/shared';
 import { AlertsService } from '../alerts.service';
 import { Alert, AlertsOverviewTableCol } from '../alerts.types';

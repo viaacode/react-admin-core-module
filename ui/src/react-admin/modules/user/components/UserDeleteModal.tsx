@@ -14,7 +14,7 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { DeleteContentCounts } from '../user.types';
@@ -25,7 +25,6 @@ import { buildLink } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
 import { PickerItem } from '~shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { UserService } from '../user.service';
 
 import './UserDeleteModal.scss';
@@ -354,7 +353,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{(selectedDeleteOption === 'TRANSFER_PUBLIC' ||
 						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
-							allowedTypes={[ContentPickerType.PROFILE]}
+							allowedTypes={['PROFILE']}
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(

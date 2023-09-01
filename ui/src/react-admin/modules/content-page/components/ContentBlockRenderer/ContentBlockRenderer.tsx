@@ -1,5 +1,5 @@
 import { Container, Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';

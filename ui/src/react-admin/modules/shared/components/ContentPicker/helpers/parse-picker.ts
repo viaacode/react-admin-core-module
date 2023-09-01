@@ -1,8 +1,7 @@
 import { LinkTarget } from '@viaa/avo2-components';
 import { parse } from 'query-string';
-
-import { PickerItem } from '../../../types/content-picker';
-import { ContentPickerType } from '../ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
+import { PickerItem } from '~shared/types/content-picker';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -44,11 +43,11 @@ export const parseSearchQuery = (input: string): string => {
 };
 
 export const parsePickerItem = (
-	type: ContentPickerType,
+	type: Avo.Core.ContentPickerType,
 	value: string,
 	target: LinkTarget = LinkTarget.Blank
 ): PickerItem => ({
 	type,
 	target,
-	value: type === ContentPickerType.SEARCH_QUERY ? parseSearchQuery(value) : value,
+	value: type === 'SEARCH_QUERY' ? parseSearchQuery(value) : value,
 });

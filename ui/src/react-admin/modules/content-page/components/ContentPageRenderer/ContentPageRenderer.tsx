@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent } from 'react';

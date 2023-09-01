@@ -16,7 +16,7 @@ import {
 } from '@meemoo/react-components';
 import { MultiSelectOption } from '@meemoo/react-components/dist/esm/components/MultiSelect/MultiSelect.types';
 import { IPagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 
 import { yupResolver } from '@hookform/resolvers/yup';

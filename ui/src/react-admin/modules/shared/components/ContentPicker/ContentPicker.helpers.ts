@@ -2,9 +2,9 @@ import { get } from 'lodash-es';
 
 import { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 
-export function filterTypes(types: PickerTypeOption[], allowedTypes: ContentPickerType[]) {
+export function filterTypes(types: PickerTypeOption[], allowedTypes: Avo.Core.ContentPickerType[]) {
 	return types.filter((option: PickerTypeOption) => {
 		return allowedTypes.length ? allowedTypes.includes(option.value) : option.value;
 	});

@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 
 type UserDeleteRadioOption = { label: string; value: Avo.User.UserDeleteOption };
