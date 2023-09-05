@@ -35,7 +35,8 @@ query getUsers(
 			organization_id
 			unit_id
 			organization {
-				ldap_description
+				organization_id
+				ldap_content
 			}
 		}
 		loms {

@@ -24968,6 +24968,8 @@ export type Mutation_Root = {
   delete_shared_ldap_organizations?: Maybe<Shared_Ldap_Organizations_Mutation_Response>;
   /** delete single row from the table: "shared.ldap_organizations" */
   delete_shared_ldap_organizations_by_pk?: Maybe<Shared_Ldap_Organizations>;
+  /** delete data from the table: "shared.ldap_organizations_flattened" */
+  delete_shared_ldap_organizations_flattened?: Maybe<Shared_Ldap_Organizations_Flattened_Mutation_Response>;
   /** delete data from the table: "shared.organisations" */
   delete_shared_organisations?: Maybe<Shared_Organisations_Mutation_Response>;
   /** delete single row from the table: "shared.organisations" */
@@ -25346,6 +25348,10 @@ export type Mutation_Root = {
   insert_shared_items_one?: Maybe<Shared_Items>;
   /** insert data into the table: "shared.ldap_organizations" */
   insert_shared_ldap_organizations?: Maybe<Shared_Ldap_Organizations_Mutation_Response>;
+  /** insert data into the table: "shared.ldap_organizations_flattened" */
+  insert_shared_ldap_organizations_flattened?: Maybe<Shared_Ldap_Organizations_Flattened_Mutation_Response>;
+  /** insert a single row into the table: "shared.ldap_organizations_flattened" */
+  insert_shared_ldap_organizations_flattened_one?: Maybe<Shared_Ldap_Organizations_Flattened>;
   /** insert a single row into the table: "shared.ldap_organizations" */
   insert_shared_ldap_organizations_one?: Maybe<Shared_Ldap_Organizations>;
   /** insert data into the table: "shared.organisations" */
@@ -25864,6 +25870,10 @@ export type Mutation_Root = {
   update_shared_ldap_organizations?: Maybe<Shared_Ldap_Organizations_Mutation_Response>;
   /** update single row of the table: "shared.ldap_organizations" */
   update_shared_ldap_organizations_by_pk?: Maybe<Shared_Ldap_Organizations>;
+  /** update data of the table: "shared.ldap_organizations_flattened" */
+  update_shared_ldap_organizations_flattened?: Maybe<Shared_Ldap_Organizations_Flattened_Mutation_Response>;
+  /** update multiples rows of table: "shared.ldap_organizations_flattened" */
+  update_shared_ldap_organizations_flattened_many?: Maybe<Array<Maybe<Shared_Ldap_Organizations_Flattened_Mutation_Response>>>;
   /** update multiples rows of table: "shared.ldap_organizations" */
   update_shared_ldap_organizations_many?: Maybe<Array<Maybe<Shared_Ldap_Organizations_Mutation_Response>>>;
   /** update data of the table: "shared.organisations" */
@@ -26853,6 +26863,12 @@ export type Mutation_RootDelete_Shared_Ldap_OrganizationsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Shared_Ldap_Organizations_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Shared_Ldap_Organizations_FlattenedArgs = {
+  where: Shared_Ldap_Organizations_Flattened_Bool_Exp;
 };
 
 
@@ -28124,6 +28140,18 @@ export type Mutation_RootInsert_Shared_Items_OneArgs = {
 export type Mutation_RootInsert_Shared_Ldap_OrganizationsArgs = {
   objects: Array<Shared_Ldap_Organizations_Insert_Input>;
   on_conflict?: InputMaybe<Shared_Ldap_Organizations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Shared_Ldap_Organizations_FlattenedArgs = {
+  objects: Array<Shared_Ldap_Organizations_Flattened_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Shared_Ldap_Organizations_Flattened_OneArgs = {
+  object: Shared_Ldap_Organizations_Flattened_Insert_Input;
 };
 
 
@@ -30085,6 +30113,25 @@ export type Mutation_RootUpdate_Shared_Ldap_Organizations_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Shared_Ldap_Organizations_FlattenedArgs = {
+  _append?: InputMaybe<Shared_Ldap_Organizations_Flattened_Append_Input>;
+  _delete_at_path?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_Key_Input>;
+  _inc?: InputMaybe<Shared_Ldap_Organizations_Flattened_Inc_Input>;
+  _prepend?: InputMaybe<Shared_Ldap_Organizations_Flattened_Prepend_Input>;
+  _set?: InputMaybe<Shared_Ldap_Organizations_Flattened_Set_Input>;
+  where: Shared_Ldap_Organizations_Flattened_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Shared_Ldap_Organizations_Flattened_ManyArgs = {
+  updates: Array<Shared_Ldap_Organizations_Flattened_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Shared_Ldap_Organizations_ManyArgs = {
   updates: Array<Shared_Ldap_Organizations_Updates>;
 };
@@ -31159,6 +31206,10 @@ export type Query_Root = {
   shared_ldap_organizations_aggregate: Shared_Ldap_Organizations_Aggregate;
   /** fetch data from the table: "shared.ldap_organizations" using primary key columns */
   shared_ldap_organizations_by_pk?: Maybe<Shared_Ldap_Organizations>;
+  /** fetch data from the table: "shared.ldap_organizations_flattened" */
+  shared_ldap_organizations_flattened: Array<Shared_Ldap_Organizations_Flattened>;
+  /** fetch aggregated fields from the table: "shared.ldap_organizations_flattened" */
+  shared_ldap_organizations_flattened_aggregate: Shared_Ldap_Organizations_Flattened_Aggregate;
   /** fetch data from the table: "shared.organisations" */
   shared_organisations: Array<Shared_Organisations>;
   /** fetch aggregated fields from the table: "shared.organisations" */
@@ -33236,6 +33287,24 @@ export type Query_RootShared_Ldap_Organizations_By_PkArgs = {
 };
 
 
+export type Query_RootShared_Ldap_Organizations_FlattenedArgs = {
+  distinct_on?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Order_By>>;
+  where?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
+};
+
+
+export type Query_RootShared_Ldap_Organizations_Flattened_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Order_By>>;
+  where?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
+};
+
+
 export type Query_RootShared_OrganisationsArgs = {
   distinct_on?: InputMaybe<Array<Shared_Organisations_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -34668,6 +34737,464 @@ export type Shared_Ldap_Organizations_Delete_Elem_Input = {
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Shared_Ldap_Organizations_Delete_Key_Input = {
   ldap_content?: InputMaybe<Scalars['String']>;
+};
+
+/** columns and relationships of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened = {
+  __typename?: 'shared_ldap_organizations_flattened';
+  businessCategory?: Maybe<Scalars['String']>;
+  createTimestamp?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  creatorsName?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  entryCSN?: Maybe<Scalars['String']>;
+  entryUUID?: Maybe<Scalars['String']>;
+  hasSubordinates?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  l?: Maybe<Scalars['String']>;
+  ldap_content?: Maybe<Scalars['jsonb']>;
+  ldap_description?: Maybe<Scalars['String']>;
+  ldap_entryuuid?: Maybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: Maybe<Scalars['timestamptz']>;
+  modifiersName?: Maybe<Scalars['String']>;
+  modifyTimestamp?: Maybe<Scalars['String']>;
+  o?: Maybe<Scalars['String']>;
+  objectClass?: Maybe<Scalars['jsonb']>;
+  organization_id?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  street?: Maybe<Scalars['String']>;
+  structuralObjectClass?: Maybe<Scalars['String']>;
+  subschemaSubentry?: Maybe<Scalars['String']>;
+  telephoneNumber?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+
+/** columns and relationships of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_FlattenedLdap_ContentArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_FlattenedObjectClassArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Aggregate = {
+  __typename?: 'shared_ldap_organizations_flattened_aggregate';
+  aggregate?: Maybe<Shared_Ldap_Organizations_Flattened_Aggregate_Fields>;
+  nodes: Array<Shared_Ldap_Organizations_Flattened>;
+};
+
+/** aggregate fields of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Aggregate_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_aggregate_fields';
+  avg?: Maybe<Shared_Ldap_Organizations_Flattened_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Shared_Ldap_Organizations_Flattened_Max_Fields>;
+  min?: Maybe<Shared_Ldap_Organizations_Flattened_Min_Fields>;
+  stddev?: Maybe<Shared_Ldap_Organizations_Flattened_Stddev_Fields>;
+  stddev_pop?: Maybe<Shared_Ldap_Organizations_Flattened_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Shared_Ldap_Organizations_Flattened_Stddev_Samp_Fields>;
+  sum?: Maybe<Shared_Ldap_Organizations_Flattened_Sum_Fields>;
+  var_pop?: Maybe<Shared_Ldap_Organizations_Flattened_Var_Pop_Fields>;
+  var_samp?: Maybe<Shared_Ldap_Organizations_Flattened_Var_Samp_Fields>;
+  variance?: Maybe<Shared_Ldap_Organizations_Flattened_Variance_Fields>;
+};
+
+
+/** aggregate fields of "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Shared_Ldap_Organizations_Flattened_Append_Input = {
+  ldap_content?: InputMaybe<Scalars['jsonb']>;
+  objectClass?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** aggregate avg on columns */
+export type Shared_Ldap_Organizations_Flattened_Avg_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "shared.ldap_organizations_flattened". All fields are combined with a logical 'AND'. */
+export type Shared_Ldap_Organizations_Flattened_Bool_Exp = {
+  _and?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Bool_Exp>>;
+  _not?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
+  _or?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Bool_Exp>>;
+  businessCategory?: InputMaybe<String_Comparison_Exp>;
+  createTimestamp?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  creatorsName?: InputMaybe<String_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  entryCSN?: InputMaybe<String_Comparison_Exp>;
+  entryUUID?: InputMaybe<String_Comparison_Exp>;
+  hasSubordinates?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  l?: InputMaybe<String_Comparison_Exp>;
+  ldap_content?: InputMaybe<Jsonb_Comparison_Exp>;
+  ldap_description?: InputMaybe<String_Comparison_Exp>;
+  ldap_entryuuid?: InputMaybe<Uuid_Comparison_Exp>;
+  ldap_modifytimestamp?: InputMaybe<Timestamptz_Comparison_Exp>;
+  modifiersName?: InputMaybe<String_Comparison_Exp>;
+  modifyTimestamp?: InputMaybe<String_Comparison_Exp>;
+  o?: InputMaybe<String_Comparison_Exp>;
+  objectClass?: InputMaybe<Jsonb_Comparison_Exp>;
+  organization_id?: InputMaybe<String_Comparison_Exp>;
+  postalCode?: InputMaybe<String_Comparison_Exp>;
+  street?: InputMaybe<String_Comparison_Exp>;
+  structuralObjectClass?: InputMaybe<String_Comparison_Exp>;
+  subschemaSubentry?: InputMaybe<String_Comparison_Exp>;
+  telephoneNumber?: InputMaybe<String_Comparison_Exp>;
+  type?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Shared_Ldap_Organizations_Flattened_Delete_At_Path_Input = {
+  ldap_content?: InputMaybe<Array<Scalars['String']>>;
+  objectClass?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Shared_Ldap_Organizations_Flattened_Delete_Elem_Input = {
+  ldap_content?: InputMaybe<Scalars['Int']>;
+  objectClass?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Shared_Ldap_Organizations_Flattened_Delete_Key_Input = {
+  ldap_content?: InputMaybe<Scalars['String']>;
+  objectClass?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for incrementing numeric columns in table "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Insert_Input = {
+  businessCategory?: InputMaybe<Scalars['String']>;
+  createTimestamp?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  creatorsName?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  entryCSN?: InputMaybe<Scalars['String']>;
+  entryUUID?: InputMaybe<Scalars['String']>;
+  hasSubordinates?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  l?: InputMaybe<Scalars['String']>;
+  ldap_content?: InputMaybe<Scalars['jsonb']>;
+  ldap_description?: InputMaybe<Scalars['String']>;
+  ldap_entryuuid?: InputMaybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: InputMaybe<Scalars['timestamptz']>;
+  modifiersName?: InputMaybe<Scalars['String']>;
+  modifyTimestamp?: InputMaybe<Scalars['String']>;
+  o?: InputMaybe<Scalars['String']>;
+  objectClass?: InputMaybe<Scalars['jsonb']>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  street?: InputMaybe<Scalars['String']>;
+  structuralObjectClass?: InputMaybe<Scalars['String']>;
+  subschemaSubentry?: InputMaybe<Scalars['String']>;
+  telephoneNumber?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Shared_Ldap_Organizations_Flattened_Max_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_max_fields';
+  businessCategory?: Maybe<Scalars['String']>;
+  createTimestamp?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  creatorsName?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  entryCSN?: Maybe<Scalars['String']>;
+  entryUUID?: Maybe<Scalars['String']>;
+  hasSubordinates?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  l?: Maybe<Scalars['String']>;
+  ldap_description?: Maybe<Scalars['String']>;
+  ldap_entryuuid?: Maybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: Maybe<Scalars['timestamptz']>;
+  modifiersName?: Maybe<Scalars['String']>;
+  modifyTimestamp?: Maybe<Scalars['String']>;
+  o?: Maybe<Scalars['String']>;
+  organization_id?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  street?: Maybe<Scalars['String']>;
+  structuralObjectClass?: Maybe<Scalars['String']>;
+  subschemaSubentry?: Maybe<Scalars['String']>;
+  telephoneNumber?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Shared_Ldap_Organizations_Flattened_Min_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_min_fields';
+  businessCategory?: Maybe<Scalars['String']>;
+  createTimestamp?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  creatorsName?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  entryCSN?: Maybe<Scalars['String']>;
+  entryUUID?: Maybe<Scalars['String']>;
+  hasSubordinates?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  l?: Maybe<Scalars['String']>;
+  ldap_description?: Maybe<Scalars['String']>;
+  ldap_entryuuid?: Maybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: Maybe<Scalars['timestamptz']>;
+  modifiersName?: Maybe<Scalars['String']>;
+  modifyTimestamp?: Maybe<Scalars['String']>;
+  o?: Maybe<Scalars['String']>;
+  organization_id?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  street?: Maybe<Scalars['String']>;
+  structuralObjectClass?: Maybe<Scalars['String']>;
+  subschemaSubentry?: Maybe<Scalars['String']>;
+  telephoneNumber?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Mutation_Response = {
+  __typename?: 'shared_ldap_organizations_flattened_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Shared_Ldap_Organizations_Flattened>;
+};
+
+/** Ordering options when selecting data from "shared.ldap_organizations_flattened". */
+export type Shared_Ldap_Organizations_Flattened_Order_By = {
+  businessCategory?: InputMaybe<Order_By>;
+  createTimestamp?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  creatorsName?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  entryCSN?: InputMaybe<Order_By>;
+  entryUUID?: InputMaybe<Order_By>;
+  hasSubordinates?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  l?: InputMaybe<Order_By>;
+  ldap_content?: InputMaybe<Order_By>;
+  ldap_description?: InputMaybe<Order_By>;
+  ldap_entryuuid?: InputMaybe<Order_By>;
+  ldap_modifytimestamp?: InputMaybe<Order_By>;
+  modifiersName?: InputMaybe<Order_By>;
+  modifyTimestamp?: InputMaybe<Order_By>;
+  o?: InputMaybe<Order_By>;
+  objectClass?: InputMaybe<Order_By>;
+  organization_id?: InputMaybe<Order_By>;
+  postalCode?: InputMaybe<Order_By>;
+  street?: InputMaybe<Order_By>;
+  structuralObjectClass?: InputMaybe<Order_By>;
+  subschemaSubentry?: InputMaybe<Order_By>;
+  telephoneNumber?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Shared_Ldap_Organizations_Flattened_Prepend_Input = {
+  ldap_content?: InputMaybe<Scalars['jsonb']>;
+  objectClass?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "shared.ldap_organizations_flattened" */
+export enum Shared_Ldap_Organizations_Flattened_Select_Column {
+  /** column name */
+  BusinessCategory = 'businessCategory',
+  /** column name */
+  CreateTimestamp = 'createTimestamp',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatorsName = 'creatorsName',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  EntryCsn = 'entryCSN',
+  /** column name */
+  EntryUuid = 'entryUUID',
+  /** column name */
+  HasSubordinates = 'hasSubordinates',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  L = 'l',
+  /** column name */
+  LdapContent = 'ldap_content',
+  /** column name */
+  LdapDescription = 'ldap_description',
+  /** column name */
+  LdapEntryuuid = 'ldap_entryuuid',
+  /** column name */
+  LdapModifytimestamp = 'ldap_modifytimestamp',
+  /** column name */
+  ModifiersName = 'modifiersName',
+  /** column name */
+  ModifyTimestamp = 'modifyTimestamp',
+  /** column name */
+  O = 'o',
+  /** column name */
+  ObjectClass = 'objectClass',
+  /** column name */
+  OrganizationId = 'organization_id',
+  /** column name */
+  PostalCode = 'postalCode',
+  /** column name */
+  Street = 'street',
+  /** column name */
+  StructuralObjectClass = 'structuralObjectClass',
+  /** column name */
+  SubschemaSubentry = 'subschemaSubentry',
+  /** column name */
+  TelephoneNumber = 'telephoneNumber',
+  /** column name */
+  Type = 'type',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "shared.ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Set_Input = {
+  businessCategory?: InputMaybe<Scalars['String']>;
+  createTimestamp?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  creatorsName?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  entryCSN?: InputMaybe<Scalars['String']>;
+  entryUUID?: InputMaybe<Scalars['String']>;
+  hasSubordinates?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  l?: InputMaybe<Scalars['String']>;
+  ldap_content?: InputMaybe<Scalars['jsonb']>;
+  ldap_description?: InputMaybe<Scalars['String']>;
+  ldap_entryuuid?: InputMaybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: InputMaybe<Scalars['timestamptz']>;
+  modifiersName?: InputMaybe<Scalars['String']>;
+  modifyTimestamp?: InputMaybe<Scalars['String']>;
+  o?: InputMaybe<Scalars['String']>;
+  objectClass?: InputMaybe<Scalars['jsonb']>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  street?: InputMaybe<Scalars['String']>;
+  structuralObjectClass?: InputMaybe<Scalars['String']>;
+  subschemaSubentry?: InputMaybe<Scalars['String']>;
+  telephoneNumber?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Shared_Ldap_Organizations_Flattened_Stddev_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Shared_Ldap_Organizations_Flattened_Stddev_Pop_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Shared_Ldap_Organizations_Flattened_Stddev_Samp_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "shared_ldap_organizations_flattened" */
+export type Shared_Ldap_Organizations_Flattened_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Shared_Ldap_Organizations_Flattened_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Shared_Ldap_Organizations_Flattened_Stream_Cursor_Value_Input = {
+  businessCategory?: InputMaybe<Scalars['String']>;
+  createTimestamp?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  creatorsName?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  entryCSN?: InputMaybe<Scalars['String']>;
+  entryUUID?: InputMaybe<Scalars['String']>;
+  hasSubordinates?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  l?: InputMaybe<Scalars['String']>;
+  ldap_content?: InputMaybe<Scalars['jsonb']>;
+  ldap_description?: InputMaybe<Scalars['String']>;
+  ldap_entryuuid?: InputMaybe<Scalars['uuid']>;
+  ldap_modifytimestamp?: InputMaybe<Scalars['timestamptz']>;
+  modifiersName?: InputMaybe<Scalars['String']>;
+  modifyTimestamp?: InputMaybe<Scalars['String']>;
+  o?: InputMaybe<Scalars['String']>;
+  objectClass?: InputMaybe<Scalars['jsonb']>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  street?: InputMaybe<Scalars['String']>;
+  structuralObjectClass?: InputMaybe<Scalars['String']>;
+  subschemaSubentry?: InputMaybe<Scalars['String']>;
+  telephoneNumber?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Shared_Ldap_Organizations_Flattened_Sum_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Shared_Ldap_Organizations_Flattened_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Shared_Ldap_Organizations_Flattened_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Shared_Ldap_Organizations_Flattened_Delete_Key_Input>;
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Shared_Ldap_Organizations_Flattened_Inc_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Shared_Ldap_Organizations_Flattened_Prepend_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Shared_Ldap_Organizations_Flattened_Set_Input>;
+  where: Shared_Ldap_Organizations_Flattened_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Shared_Ldap_Organizations_Flattened_Var_Pop_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Shared_Ldap_Organizations_Flattened_Var_Samp_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Shared_Ldap_Organizations_Flattened_Variance_Fields = {
+  __typename?: 'shared_ldap_organizations_flattened_variance_fields';
+  id?: Maybe<Scalars['Float']>;
 };
 
 /** input type for incrementing numeric columns in table "shared.ldap_organizations" */
@@ -37597,6 +38124,12 @@ export type Subscription_Root = {
   shared_ldap_organizations_aggregate: Shared_Ldap_Organizations_Aggregate;
   /** fetch data from the table: "shared.ldap_organizations" using primary key columns */
   shared_ldap_organizations_by_pk?: Maybe<Shared_Ldap_Organizations>;
+  /** fetch data from the table: "shared.ldap_organizations_flattened" */
+  shared_ldap_organizations_flattened: Array<Shared_Ldap_Organizations_Flattened>;
+  /** fetch aggregated fields from the table: "shared.ldap_organizations_flattened" */
+  shared_ldap_organizations_flattened_aggregate: Shared_Ldap_Organizations_Flattened_Aggregate;
+  /** fetch data from the table in a streaming manner: "shared.ldap_organizations_flattened" */
+  shared_ldap_organizations_flattened_stream: Array<Shared_Ldap_Organizations_Flattened>;
   /** fetch data from the table in a streaming manner: "shared.ldap_organizations" */
   shared_ldap_organizations_stream: Array<Shared_Ldap_Organizations>;
   /** fetch data from the table: "shared.organisations" */
@@ -40332,6 +40865,31 @@ export type Subscription_RootShared_Ldap_Organizations_AggregateArgs = {
 
 export type Subscription_RootShared_Ldap_Organizations_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type Subscription_RootShared_Ldap_Organizations_FlattenedArgs = {
+  distinct_on?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Order_By>>;
+  where?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
+};
+
+
+export type Subscription_RootShared_Ldap_Organizations_Flattened_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Shared_Ldap_Organizations_Flattened_Order_By>>;
+  where?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
+};
+
+
+export type Subscription_RootShared_Ldap_Organizations_Flattened_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Shared_Ldap_Organizations_Flattened_Stream_Cursor_Input>>;
+  where?: InputMaybe<Shared_Ldap_Organizations_Flattened_Bool_Exp>;
 };
 
 
@@ -49288,7 +49846,7 @@ export type GetUserByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_user_permission_groups: Array<{ __typename?: 'users_group_user_permission_groups', group: { __typename?: 'users_groups', label: string, id: number }, permission_group: { __typename?: 'users_permission_groups', label: string, id: number, permission_group_user_permissions: Array<{ __typename?: 'users_permission_group_user_permissions', permission: { __typename?: 'users_permissions', label: string, id: number } }> } }> } } | null } | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
+export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_user_permission_groups: Array<{ __typename?: 'users_group_user_permission_groups', group: { __typename?: 'users_groups', label: string, id: number }, permission_group: { __typename?: 'users_permission_groups', label: string, id: number, permission_group_user_permissions: Array<{ __typename?: 'users_permission_group_user_permissions', permission: { __typename?: 'users_permissions', label: string, id: number } }> } }> } } | null } | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
 
 export type GetUsersQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -49298,7 +49856,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
 
 
 export const GetPublicAssignmentsByTitleOrIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicAssignmentsByTitleOrId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_assignments_v2"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_ilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPublicAssignmentsByTitleOrIdQuery, GetPublicAssignmentsByTitleOrIdQueryVariables>;
@@ -49370,5 +49928,5 @@ export const GetDistinctBusinessCategoriesDocument = {"kind":"Document","definit
 export const GetIdpsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getIdps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetIdpsQuery, GetIdpsQueryVariables>;
 export const GetProfileIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetProfileIdsQuery, GetProfileIdsQueryVariables>;
 export const GetProfileNamesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileNames"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetProfileNamesQuery, GetProfileNamesQueryVariables>;
-export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_user_permission_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permission_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission_group_user_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_user_permission_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"permission_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission_group_user_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

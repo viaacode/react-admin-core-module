@@ -41,6 +41,10 @@ query getUserById($id: uuid!) {
 			profile_organizations {
 				unit_id
 				organization_id
+				organization {
+					organization_id
+					ldap_content
+				}
 			}
 			organisation {
 				logo_url
@@ -89,7 +93,8 @@ query getUserById($id: uuid!) {
 			organization_id
 			unit_id
 			organization {
-				ldap_description
+				organization_id
+				ldap_content
 			}
 		}
 		loms {

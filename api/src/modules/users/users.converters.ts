@@ -38,13 +38,7 @@ export function convertUserInfoToCommonUser(
 				avatar: user?.profile?.avatar,
 				stamboek: user.profile.stamboek ?? undefined,
 				organisation: user.profile.organisation,
-				educationalOrganisations: (user.profile.organizations ?? []).map(
-					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: org?.organizationId ?? null,
-						unitId: org?.unitId ?? null,
-						label: org?.label ?? null,
-					})
-				),
+				educationalOrganisations: user.profile.organizations ?? [],
 				loms: user.profile.loms,
 				isException: user.profile.is_exception ?? undefined,
 				businessCategory: user.profile.business_category ?? undefined,
@@ -100,13 +94,7 @@ export function convertUserInfoToCommonUser(
 				avatar: profile?.avatar,
 				stamboek: profile.stamboek ?? undefined,
 				organisation: profile.organisation,
-				educationalOrganisations: (profile.organizations ?? []).map(
-					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: undefined,
-						unitId: undefined,
-						label: org.label,
-					})
-				),
+				educationalOrganisations: profile.organizations ?? [],
 				loms: profile.loms,
 				isException: profile.is_exception ?? undefined,
 				businessCategory: profile.business_category ?? undefined,
@@ -168,9 +156,13 @@ export function convertUserInfoToCommonUser(
 					: undefined,
 				educationalOrganisations: (user.organisations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: org.organization_id,
+						organisationId: org.organization_id,
+						organisationLabel:
+							(org.organization as any)?.ldap_content?.attributes?.description?.[0] ??
+							'',
 						unitId: org.unit_id ?? null,
-						label: org.organization?.ldap_description ?? '',
+						unitStreet: (org.organization as any).ldap_content?.units?.[0]?.attributes
+							?.street?.[0],
 					})
 				),
 				loms: (user.loms || []) as any[],
