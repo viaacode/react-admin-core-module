@@ -518,8 +518,8 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					commonUser.educationalOrganisations ?? [];
 				const tags = orgs.map(
 					(org): TagOption => ({
-						id: `${org.organizationId}:${org.unitId || ''}`,
-						label: org.label || org.unitId || org.organizationId,
+						id: `${org.organisationId}:${org.unitId || ''}`,
+						label: org.organisationLabel || org.unitId || org.organisationId,
 					})
 				);
 				return (

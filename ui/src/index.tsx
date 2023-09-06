@@ -6,6 +6,7 @@ import { TOptions } from 'i18next';
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory } from 'react-router-dom';
+import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
@@ -22,26 +23,30 @@ const routerConfig: AdminConfig['services']['router'] = {
 	useHistory: useHistory,
 };
 
-const DUMMY_EDUCATIONAL_ORGANISATIONS = [
+const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-5-316',
-		label: 'Academie de Kunstbrug Gent - Bargiekaai 1',
+		unitStreet: 'Bargiekaai 1',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-24-316',
-		label: 'Academie de Kunstbrug Gent - Cataloniëstraat 1',
+		unitStreet: 'Cataloniëstraat 1',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-2-316',
-		label: 'Academie de Kunstbrug Gent - Coupure Rechts 52',
+		unitStreet: 'Coupure Rechts 52',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-4-316',
-		label: 'Academie de Kunstbrug Gent - Ottogracht Kunstencampus 4',
+		unitStreet: 'Ottogracht Kunstencampus 4',
 	},
 ];
 
@@ -272,8 +277,8 @@ function setConfig() {
 				fetchEducationOrganisationName: (orgId: string, unitId: string) =>
 					Promise.resolve(
 						DUMMY_EDUCATIONAL_ORGANISATIONS.find(
-							(org) => org.organizationId === orgId && org.unitId === unitId
-						)?.label || orgId
+							(org) => org.organisationId === orgId && org.unitId === unitId
+						)?.organisationLabel || orgId
 					),
 				fetchCities: () => Promise.resolve(['GENT (9000)']),
 				fetchEducationOrganisations: () => Promise.resolve(DUMMY_EDUCATIONAL_ORGANISATIONS),

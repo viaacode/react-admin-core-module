@@ -396,8 +396,8 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 										swatches={false}
 										tags={storedProfile.educationalOrganisations.map(
 											(item: Avo.EducationOrganization.Organization) => ({
-												label: item.label,
-												id: item.organizationId,
+												label: item.organisationLabel,
+												id: item.organisationId,
 											})
 										)}
 									/>
