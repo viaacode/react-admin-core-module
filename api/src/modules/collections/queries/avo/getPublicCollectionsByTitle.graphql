@@ -1,8 +1,4 @@
-query getPublicCollectionsByTitle(
-	$title: String!
-	$typeId: Int!
-	$limit: Int!
-) {
+query getPublicCollectionsByTitle($title: String!, $typeId: Int!, $limit: Int!) {
 	app_collections(
 		order_by: { title: asc }
 		where: {

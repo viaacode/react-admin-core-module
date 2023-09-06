@@ -1,8 +1,5 @@
 query getNavigationItemsByPlacement($placement: String!) {
-	app_navigation(
-		order_by: { position: asc }
-		where: { placement: { _eq: $placement } }
-	) {
+	app_navigation(order_by: { position: asc }, where: { placement: { _eq: $placement } }) {
 		id
 		created_at
 		description

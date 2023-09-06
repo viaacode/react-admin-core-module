@@ -42,8 +42,7 @@ import {
 export class MaintenanceAlertsService {
 	private logger: Logger = new Logger(MaintenanceAlertsService.name, { timestamp: true });
 
-	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
-	}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public adapt(graphqlMaintenanceAlert: GqlMaintenanceAlert): MaintenanceAlert | null {
 		if (!graphqlMaintenanceAlert) {
@@ -70,15 +69,15 @@ export class MaintenanceAlertsService {
 
 		const where: FindMaintenanceAlertsQueryVariables['where'] = onlyActive
 			? {
-				_and: [
-					{
-						from_date: { _lte: new Date().toISOString() },
-					},
-					{
-						until_date: { _gte: new Date().toISOString() },
-					},
-				],
-			}
+					_and: [
+						{
+							from_date: { _lte: new Date().toISOString() },
+						},
+						{
+							until_date: { _gte: new Date().toISOString() },
+						},
+					],
+			  }
 			: {};
 
 		const maintenanceAlertsResponse = await this.dataService.execute<

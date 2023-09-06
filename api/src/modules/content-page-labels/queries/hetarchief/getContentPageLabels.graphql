@@ -4,12 +4,7 @@ query getContentPageLabels(
 	$limit: Int!
 	$orderBy: [app_content_label_order_by!]!
 ) {
-	app_content_label(
-		offset: $offset
-		limit: $limit
-		order_by: $orderBy
-		where: $where
-	) {
+	app_content_label(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
 		label
 		content_type
 		link_to

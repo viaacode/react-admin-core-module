@@ -1,11 +1,5 @@
-mutation updateNavigationItemById(
-	$id: Int!
-	$navigationItem: app_content_nav_elements_set_input!
-) {
-	update_app_content_nav_elements_by_pk(
-		pk_columns: { id: $id }
-		_set: $navigationItem
-	) {
+mutation updateNavigationItemById($id: Int!, $navigationItem: app_content_nav_elements_set_input!) {
+	update_app_content_nav_elements_by_pk(pk_columns: { id: $id }, _set: $navigationItem) {
 		id
 		created_at
 		description

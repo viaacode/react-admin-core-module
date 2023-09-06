@@ -9,19 +9,16 @@ const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
 };
 
-const mockPlayerTicketService: Partial<
-	Record<keyof PlayerTicketService, jest.SpyInstance>
-> = {
+const mockPlayerTicketService: Partial<Record<keyof PlayerTicketService, jest.SpyInstance>> = {
 	getPlayableUrl: jest.fn(),
 	getEmbedUrl: jest.fn(),
 };
 
-const mockOrganisationsService: Partial<
-	Record<keyof AdminOrganisationsService, jest.SpyInstance>
-> = {
-	getOrganisation: jest.fn(),
-	adapt: jest.fn(),
-};
+const mockOrganisationsService: Partial<Record<keyof AdminOrganisationsService, jest.SpyInstance>> =
+	{
+		getOrganisation: jest.fn(),
+		adapt: jest.fn(),
+	};
 
 describe('ContentPagesService', () => {
 	let contentPagesService: ContentPagesService;

@@ -1,9 +1,5 @@
 mutation deleteMaintenanceAlert($maintenanceAlertId: uuid) {
-	delete_app_maintenance_alerts(
-		where: {
-			id: { _eq: $maintenanceAlertId }
-		}
-	) {
+	delete_app_maintenance_alerts(where: { id: { _eq: $maintenanceAlertId } }) {
 		affected_rows
 	}
 }

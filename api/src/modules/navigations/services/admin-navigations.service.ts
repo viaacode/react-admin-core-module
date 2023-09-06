@@ -1,9 +1,4 @@
-import {
-	forwardRef,
-	Inject,
-	Injectable,
-	NotFoundException,
-} from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 
 import { CreateNavigationDto } from '../dto/navigations.dto';
@@ -19,9 +14,7 @@ import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public adapt(navigationEntry: Partial<NavigationEntry>): NavigationItem {
 		/* istanbul ignore next */
@@ -38,15 +31,11 @@ export class AdminNavigationsService {
 			tooltip: navigationEntry?.tooltip,
 			updatedAt: navigationEntry?.updated_at,
 			createdAt: navigationEntry?.created_at,
-			userGroupIds: navigationEntry?.user_group_ids?.map((groupId) =>
-				String(groupId),
-			),
+			userGroupIds: navigationEntry?.user_group_ids?.map((groupId) => String(groupId)),
 		};
 	}
 
-	public adaptToDbFormat(
-		navigationItem: Partial<NavigationItem>,
-	): NavigationEntry {
+	public adaptToDbFormat(navigationItem: Partial<NavigationItem>): NavigationEntry {
 		/* istanbul ignore next */
 		return {
 			id: navigationItem?.id,
@@ -61,15 +50,11 @@ export class AdminNavigationsService {
 			tooltip: navigationItem?.tooltip,
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
-			user_group_ids: navigationItem?.userGroupIds?.map((groupId) =>
-				String(groupId),
-			),
+			user_group_ids: navigationItem?.userGroupIds?.map((groupId) => String(groupId)),
 		};
 	}
 
-	public async insertElement(
-		navigationItem: CreateNavigationDto,
-	): Promise<NavigationItem> {
+	public async insertElement(navigationItem: CreateNavigationDto): Promise<NavigationItem> {
 		const response = await this.dataService.execute<
 			NavigationQueryTypes['InsertNavigationItemMutation'],
 			NavigationQueryTypes['InsertNavigationItemMutationVariables']
@@ -80,15 +65,14 @@ export class AdminNavigationsService {
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
 				.insert_app_content_nav_elements_one ||
-				(
-					response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']
-				).insert_app_navigation_one,
+				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
+					.insert_app_navigation_one
 		);
 	}
 
 	public async updateElement(
 		id: string,
-		navigationItem: CreateNavigationDto,
+		navigationItem: CreateNavigationDto
 	): Promise<NavigationItem> {
 		const response = await this.dataService.execute<
 			NavigationQueryTypes['UpdateNavigationItemByIdMutation'],
@@ -101,9 +85,8 @@ export class AdminNavigationsService {
 		return this.adapt(
 			(response as NavigationQueryTypes['InsertNavigationItemMutationAvo'])
 				.insert_app_content_nav_elements_one ||
-				(
-					response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief']
-				).insert_app_navigation_one,
+				(response as NavigationQueryTypes['InsertNavigationItemMutationHetArchief'])
+					.insert_app_navigation_one
 		);
 	}
 
@@ -119,9 +102,8 @@ export class AdminNavigationsService {
 			affectedRows:
 				(response as NavigationQueryTypes['DeleteNavigationItemMutationAvo'])
 					.delete_app_content_nav_elements?.affected_rows ||
-				(
-					response as NavigationQueryTypes['DeleteNavigationItemMutationHetArchief']
-				).delete_app_navigation?.affected_rows ||
+				(response as NavigationQueryTypes['DeleteNavigationItemMutationHetArchief'])
+					.delete_app_navigation?.affected_rows ||
 				0,
 		};
 	}
@@ -134,31 +116,23 @@ export class AdminNavigationsService {
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryAvo'])
 				.app_content_nav_elements ||
-			(
-				navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryHetArchief']
-			).app_navigation ||
+			(navigationsResponse as NavigationQueryTypes['GetNavigationBarsQueryHetArchief'])
+				.app_navigation ||
 			[]
 		).map(this.adapt);
 	}
 
-	public async findNavigationBarItemsByPlacementId(
-		placement: string,
-	): Promise<NavigationItem[]> {
+	public async findNavigationBarItemsByPlacementId(placement: string): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
 			NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
-		>(
-			NAVIGATION_QUERIES[getDatabaseType()]
-				.GetNavigationItemsByPlacementDocument,
-			{
-				placement,
-			},
-		);
+		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
+			placement,
+		});
 
 		return (
-			(
-				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo']
-			).app_content_nav_elements ||
+			(navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo'])
+				.app_content_nav_elements ||
 			(
 				navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']
 			).app_navigation ||
@@ -169,18 +143,13 @@ export class AdminNavigationsService {
 	public async findAllNavigationBarItems(): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetAllNavigationItemsQuery']
-		>(
-			NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE]
-				.GetAllNavigationItemsDocument,
-		);
+		>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument);
 
 		return (
-			(
-				navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo']
-			).app_content_nav_elements ||
-			(
-				navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryHetArchief']
-			).app_navigation ||
+			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo'])
+				.app_content_nav_elements ||
+			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryHetArchief'])
+				.app_navigation ||
 			[]
 		).map(this.adapt);
 	}
@@ -193,12 +162,10 @@ export class AdminNavigationsService {
 			id,
 		});
 		const item =
-			(
-				navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryAvo']
-			)?.app_content_nav_elements?.[0] ||
-			(
-				navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']
-			)?.app_navigation?.[0];
+			(navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryAvo'])
+				?.app_content_nav_elements?.[0] ||
+			(navigationResponse as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief'])
+				?.app_navigation?.[0];
 
 		if (!item) {
 			throw new NotFoundException({

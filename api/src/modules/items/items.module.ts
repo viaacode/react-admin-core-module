@@ -8,11 +8,7 @@ import { ItemsService } from './items.service';
 
 @Module({
 	controllers: [ItemsController],
-	imports: [
-		PlayerTicketModule,
-		AdminOrganisationsModule,
-		forwardRef(() => DataModule),
-	],
+	imports: [PlayerTicketModule, AdminOrganisationsModule, forwardRef(() => DataModule)],
 	providers: [ItemsService],
 	exports: [ItemsService],
 })

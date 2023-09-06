@@ -8,11 +8,7 @@ import { CollectionsService } from './services/collections.service';
 
 @Module({
 	controllers: [CollectionsController],
-	imports: [
-		PlayerTicketModule,
-		AdminOrganisationsModule,
-		forwardRef(() => DataModule),
-	],
+	imports: [PlayerTicketModule, AdminOrganisationsModule, forwardRef(() => DataModule)],
 	providers: [CollectionsService],
 	exports: [CollectionsService],
 })

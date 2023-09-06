@@ -10,7 +10,7 @@ export class ContentLabelsRequestDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: `Get labels for this content page type. Options are: [${Object.values(
-			ContentPageTypeValues,
+			ContentPageTypeValues
 		).join(', ')}]`,
 		default: ContentPageTypeValues.Pagina,
 	})

@@ -15,19 +15,16 @@ export class ItemsController {
 	@RequireAnyPermissions(
 		PermissionName.VIEW_ANY_PUBLISHED_ITEMS,
 		PermissionName.EDIT_CONTENT_PAGE_LABELS,
-		PermissionName.PUBLISH_ITEMS,
+		PermissionName.PUBLISH_ITEMS
 	)
 	public async fetchPublicItems(
 		@Query('limit', ParseIntPipe) limit: number,
-		@Query('titleOrExternalId') titleOrExternalId: string | undefined,
+		@Query('titleOrExternalId') titleOrExternalId: string | undefined
 	): Promise<Avo.Item.Item[] | null> {
 		if (!titleOrExternalId) {
 			return this.itemsService.fetchPublicItems(limit);
 		} else {
-			return this.itemsService.fetchPublicItemsByTitleOrExternalId(
-				titleOrExternalId,
-				limit,
-			);
+			return this.itemsService.fetchPublicItemsByTitleOrExternalId(titleOrExternalId, limit);
 		}
 	}
 
@@ -36,15 +33,9 @@ export class ItemsController {
 	public async fetchRelationsBySubject(
 		@Query('type') type: 'collection' | 'item',
 		@Query('subjectIds') subjectIds: string[],
-		@Query('relationType') relationType: Avo.Collection.RelationType,
-	): Promise<
-		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
-	> {
-		return this.itemsService.fetchRelationsBySubject(
-			type,
-			subjectIds,
-			relationType,
-		);
+		@Query('relationType') relationType: Avo.Collection.RelationType
+	): Promise<Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
+		return this.itemsService.fetchRelationsBySubject(type, subjectIds, relationType);
 	}
 
 	// Allowed for all users
@@ -58,7 +49,7 @@ export class ItemsController {
 	})
 	@Get('ids')
 	public async fetchItemUuidByExternalId(
-		@Query('externalId') externalId: string,
+		@Query('externalId') externalId: string
 	): Promise<string | null> {
 		return this.itemsService.fetchItemUuidByExternalId(externalId);
 	}
@@ -72,7 +63,7 @@ export class ItemsController {
 	})
 	@Get(':id')
 	public async fetchItemByUuidOrExternalId(
-		@Param('id') id: string,
+		@Param('id') id: string
 	): Promise<Partial<Avo.Item.Item>> {
 		return this.itemsService.fetchItemOrReplacement(id);
 	}

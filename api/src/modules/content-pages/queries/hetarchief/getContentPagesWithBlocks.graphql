@@ -6,12 +6,7 @@ query getContentPagesWithBlocks(
 	$labelIds: [uuid!] = []
 	$orUserGroupIds: [app_content_page_content_label_bool_exp!] = {}
 ) {
-	app_content_page(
-		where: $where
-		limit: $limit
-		offset: $offset
-		order_by: $orderBy
-	) {
+	app_content_page(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
 		content_type
 		created_at
 		depublish_at

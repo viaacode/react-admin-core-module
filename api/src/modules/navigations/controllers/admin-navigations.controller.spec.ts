@@ -17,9 +17,7 @@ const mockNavigationsResponse = {
 	],
 };
 
-const mockNavigationsService: Partial<
-	Record<keyof AdminNavigationsService, jest.SpyInstance>
-> = {
+const mockNavigationsService: Partial<Record<keyof AdminNavigationsService, jest.SpyInstance>> = {
 	findNavigationBars: jest.fn(),
 	findElementById: jest.fn(),
 	insertElement: jest.fn(),
@@ -42,9 +40,7 @@ describe('NavigationsController', () => {
 			],
 		}).compile();
 
-		navigationsController = module.get<AdminNavigationsController>(
-			AdminNavigationsController,
-		);
+		navigationsController = module.get<AdminNavigationsController>(AdminNavigationsController);
 	});
 
 	it('should be defined', () => {
@@ -54,10 +50,9 @@ describe('NavigationsController', () => {
 	describe('getNavigationBars', () => {
 		it('should return all navigations', async () => {
 			mockNavigationsService.findNavigationBars.mockResolvedValueOnce(
-				mockNavigationsResponse,
+				mockNavigationsResponse
 			);
-			const navigations =
-				await navigationsController.getNavigationBarsOverview();
+			const navigations = await navigationsController.getNavigationBarsOverview();
 			expect(navigations).toEqual(mockNavigationsResponse);
 		});
 	});
@@ -65,10 +60,10 @@ describe('NavigationsController', () => {
 	describe('getNavigationElement', () => {
 		it('should return a navigation by id', async () => {
 			mockNavigationsService.findElementById.mockResolvedValueOnce(
-				mockNavigationsResponse.items[0],
+				mockNavigationsResponse.items[0]
 			);
 			const navigations = await navigationsController.getNavigationElementById(
-				'navigation-1',
+				'navigation-1'
 			);
 			expect(navigations).toEqual(mockNavigationsResponse.items[0]);
 		});
@@ -77,7 +72,7 @@ describe('NavigationsController', () => {
 	describe('createNavigationElement', () => {
 		it('should create a new navigation', async () => {
 			mockNavigationsService.insertElement.mockResolvedValueOnce(
-				mockNavigationsResponse.items[0],
+				mockNavigationsResponse.items[0]
 			);
 			const navigation = await navigationsController.createNavigationElement({
 				label: 'test-create-nav',
@@ -92,17 +87,14 @@ describe('NavigationsController', () => {
 	describe('updateNavigationElement', () => {
 		it('should update a navigation', async () => {
 			mockNavigationsService.updateElement.mockResolvedValueOnce(
-				mockNavigationsResponse.items[0],
+				mockNavigationsResponse.items[0]
 			);
-			const navigation = await navigationsController.updateNavigationElement(
-				'navigation-1',
-				{
-					label: 'test-create-nav',
-					iconName: '',
-					placement: 'footer-links',
-					position: 1,
-				},
-			);
+			const navigation = await navigationsController.updateNavigationElement('navigation-1', {
+				label: 'test-create-nav',
+				iconName: '',
+				placement: 'footer-links',
+				position: 1,
+			});
 			expect(navigation).toEqual(mockNavigationsResponse.items[0]);
 		});
 	});
@@ -111,9 +103,7 @@ describe('NavigationsController', () => {
 		it('should delete a navigation', async () => {
 			const mockData: DeleteResponse = { affectedRows: 1 };
 			mockNavigationsService.deleteElement.mockResolvedValueOnce(mockData);
-			const navigation = await navigationsController.deleteNavigationElement(
-				'navigation-1',
-			);
+			const navigation = await navigationsController.deleteNavigationElement('navigation-1');
 			expect(navigation).toEqual({ affectedRows: 1 });
 		});
 	});

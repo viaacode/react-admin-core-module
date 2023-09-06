@@ -19,14 +19,14 @@ describe('LoggedInGuard', () => {
 			},
 		};
 		const canActivate = new LoggedInGuard().canActivate(
-			mockExecutionContextWithSession(session),
+			mockExecutionContextWithSession(session)
 		);
 		expect(canActivate).toBe(true);
 	});
 
 	it('Should not allow access when no user is logged in', async () => {
 		expect(() =>
-			new LoggedInGuard().canActivate(mockExecutionContextWithSession({})),
+			new LoggedInGuard().canActivate(mockExecutionContextWithSession({}))
 		).toThrowError();
 	});
 });

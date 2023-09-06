@@ -123,9 +123,7 @@ export interface ContentPageUser {
 	groupName: string;
 }
 
-export type ContentPageType =
-	| Lookup_App_Content_Type_Enum
-	| Lookup_Enum_Content_Types_Enum;
+export type ContentPageType = Lookup_App_Content_Type_Enum | Lookup_Enum_Content_Types_Enum;
 export const ContentPageTypeValues = {
 	...Lookup_App_Content_Type_Enum,
 	...Lookup_Enum_Content_Types_Enum,

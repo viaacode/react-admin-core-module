@@ -1,9 +1,4 @@
-import {
-	CanActivate,
-	ExecutionContext,
-	ForbiddenException,
-	Injectable,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
@@ -15,37 +10,21 @@ import { SessionHelper } from '../auth/session-helper';
 export class PermissionGuard implements CanActivate {
 	constructor(private reflector: Reflector) {}
 
-	canActivate(
-		context: ExecutionContext,
-	): boolean | Promise<boolean> | Observable<boolean> {
+	canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
 		// required permissions
 		const requiredPermissionsClass =
-			this.reflector.get<PermissionName[]>(
-				'requiredPermissions',
-				context.getClass(),
-			) || [];
+			this.reflector.get<PermissionName[]>('requiredPermissions', context.getClass()) || [];
 		const requiredPermissions =
-			this.reflector.get<PermissionName[]>(
-				'requiredPermissions',
-				context.getHandler(),
-			) || [];
+			this.reflector.get<PermissionName[]>('requiredPermissions', context.getHandler()) || [];
 
 		// any permissions
 		const anyPermissionsClass =
-			this.reflector.get<PermissionName[]>(
-				'requireAnyPermissions',
-				context.getClass(),
-			) || [];
+			this.reflector.get<PermissionName[]>('requireAnyPermissions', context.getClass()) || [];
 		const anyPermissions =
-			this.reflector.get<PermissionName[]>(
-				'requireAnyPermissions',
-				context.getHandler(),
-			) || [];
+			this.reflector.get<PermissionName[]>('requireAnyPermissions', context.getHandler()) ||
+			[];
 
-		const allRequiredPermissions = [
-			...requiredPermissionsClass,
-			...requiredPermissions,
-		];
+		const allRequiredPermissions = [...requiredPermissionsClass, ...requiredPermissions];
 		const allAnyPermissions = [...anyPermissionsClass, ...anyPermissions];
 		const allPermissions = [
 			...requiredPermissionsClass,
@@ -60,20 +39,14 @@ export class PermissionGuard implements CanActivate {
 		}
 
 		const request = context.switchToHttp().getRequest();
-		const user = new SessionUserEntity(
-			SessionHelper.getUserInfo(request.session),
-		);
+		const user = new SessionUserEntity(SessionHelper.getUserInfo(request.session));
 		// User needs all required permissions
 		if (!user.hasAll(allRequiredPermissions)) {
-			throw new ForbiddenException(
-				"You don't have the required permission for this route",
-			);
+			throw new ForbiddenException("You don't have the required permission for this route");
 		}
 		// user needs any of the anyPermissions
 		if (!user.hasAny(allAnyPermissions)) {
-			throw new ForbiddenException(
-				"You don't have the required permission for this route",
-			);
+			throw new ForbiddenException("You don't have the required permission for this route");
 		}
 		return true;
 	}

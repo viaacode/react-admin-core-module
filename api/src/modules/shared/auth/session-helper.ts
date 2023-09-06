@@ -5,7 +5,6 @@ import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
 import { mockUserAvo, mockUserHetArchief } from '../../../mock-user';
 
-
 import { isAvo } from '../helpers/is-avo';
 import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
@@ -31,7 +30,7 @@ export class SessionHelper {
 
 	public static isIdpUserSessionValid(session: Record<string, any>): boolean {
 		const expiresOn = new Date(
-			get(session[IDP_USER_INFO_PATH], 'session_not_on_or_after', 0),
+			get(session[IDP_USER_INFO_PATH], 'session_not_on_or_after', 0)
 		).getTime();
 		return Date.now() <= expiresOn;
 	}
@@ -81,12 +80,17 @@ export class SessionHelper {
 	 * @param session
 	 * @param user
 	 */
-	public static setArchiefUserInfo(session: Record<string, any>, user: Avo.User.HetArchiefUser): void {
+	public static setArchiefUserInfo(
+		session: Record<string, any>,
+		user: Avo.User.HetArchiefUser
+	): void {
 		SessionHelper.ensureValidSession(session);
 		session[ARCHIEF_USER_INFO_PATH] = user;
 	}
 
-	public static getUserInfo(session: Record<string, any>): Avo.User.HetArchiefUser | Avo.User.User | null {
+	public static getUserInfo(
+		session: Record<string, any>
+	): Avo.User.HetArchiefUser | Avo.User.User | null {
 		/** Login user for admin-core demo app */
 		if (process.env.IS_ADMIN_CORE_DEMO_APP === 'true') {
 			if (isAvo()) {
@@ -120,7 +124,7 @@ export class SessionHelper {
 			setHours(5),
 			setMinutes(0),
 			setSeconds(0),
-			setMilliseconds(0),
+			setMilliseconds(0)
 		)(now);
 
 		return expiresAt.toISOString();

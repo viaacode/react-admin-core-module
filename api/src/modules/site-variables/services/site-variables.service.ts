@@ -3,16 +3,11 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { UpdateResponse } from '../../shared/types/types';
-import {
-	SITE_VARIABLE_QUERIES,
-	SiteVariableQueryTypes,
-} from '../site-variables.consts';
+import { SITE_VARIABLE_QUERIES, SiteVariableQueryTypes } from '../site-variables.consts';
 
 @Injectable()
 export class SiteVariablesService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public async getSiteVariable<T>(variable: string): Promise<T> {
 		const response = await this.dataService.execute<
@@ -26,36 +21,27 @@ export class SiteVariablesService {
 		return (
 			(response as SiteVariableQueryTypes['GetSiteVariableByNameQueryAvo'])
 				?.app_site_variables_by_pk?.value ||
-			(
-				response as SiteVariableQueryTypes['GetSiteVariableByNameQueryHetArchief']
-			)?.app_config_by_pk?.value
+			(response as SiteVariableQueryTypes['GetSiteVariableByNameQueryHetArchief'])
+				?.app_config_by_pk?.value
 		);
 	}
 
-	public async updateSiteVariable(
-		variable: string,
-		value: any,
-	): Promise<UpdateResponse> {
+	public async updateSiteVariable(variable: string, value: any): Promise<UpdateResponse> {
 		const response = await this.dataService.execute<
 			SiteVariableQueryTypes['UpdateSiteVariableByNameMutation'],
 			SiteVariableQueryTypes['UpdateSiteVariableByNameMutationVariables']
-		>(
-			SITE_VARIABLE_QUERIES[getDatabaseType()].UpdateSiteVariableByNameDocument,
-			{
-				name: variable,
-				data: { value },
-			},
-		);
+		>(SITE_VARIABLE_QUERIES[getDatabaseType()].UpdateSiteVariableByNameDocument, {
+			name: variable,
+			data: { value },
+		});
 
 		/* istanbul ignore next */
 		return {
 			affectedRows:
-				(
-					response as SiteVariableQueryTypes['UpdateSiteVariableByNameMutationAvo']
-				)?.update_app_site_variables?.affected_rows ||
-				(
-					response as SiteVariableQueryTypes['UpdateSiteVariableByNameMutationHetArchief']
-				)?.update_app_config?.affected_rows ||
+				(response as SiteVariableQueryTypes['UpdateSiteVariableByNameMutationAvo'])
+					?.update_app_site_variables?.affected_rows ||
+				(response as SiteVariableQueryTypes['UpdateSiteVariableByNameMutationHetArchief'])
+					?.update_app_config?.affected_rows ||
 				0,
 		};
 	}

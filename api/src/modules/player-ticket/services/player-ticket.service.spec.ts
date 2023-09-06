@@ -74,13 +74,8 @@ describe('PlayerTicketService', () => {
 				.get('/vrt/item-1')
 				.query(true)
 				.reply(200, { jwt: 'secret-jwt-token' });
-			const url = await playerTicketService.getPlayableUrl(
-				'vrt/item-1',
-				'referer',
-			);
-			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
-			);
+			const url = await playerTicketService.getPlayableUrl('vrt/item-1', 'referer');
+			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
 		});
 
 		it('uses the fallback referer if none was set', async () => {
@@ -93,13 +88,8 @@ describe('PlayerTicketService', () => {
 					maxage: 'ticketServiceMaxAge',
 				})
 				.reply(200, { jwt: 'secret-jwt-token' });
-			const url = await playerTicketService.getPlayableUrl(
-				'vrt/item-1',
-				undefined,
-			);
-			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
-			);
+			const url = await playerTicketService.getPlayableUrl('vrt/item-1', undefined);
+			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
 		});
 	});
 
@@ -148,10 +138,7 @@ describe('PlayerTicketService', () => {
 				.query(true)
 				.reply(200, mockPlayerTicket);
 
-			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				'referer',
-			);
+			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', 'referer');
 			expect(token).toEqual('secret-jwt-token');
 		});
 
@@ -165,10 +152,7 @@ describe('PlayerTicketService', () => {
 					maxage: 'ticketServiceMaxAge',
 				})
 				.reply(200, mockPlayerTicket);
-			const token = await playerTicketService.getPlayerToken(
-				'vrt/browse.mp4',
-				undefined,
-			);
+			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', undefined);
 			expect(token).toEqual('secret-jwt-token');
 		});
 	});
@@ -214,13 +198,8 @@ describe('PlayerTicketService', () => {
 				.spyOn(playerTicketService, 'getThumbnailToken')
 				.mockResolvedValueOnce('secret-jwt-token');
 
-			const url = await playerTicketService.getThumbnailUrl(
-				'vrt-id',
-				'referer',
-			);
-			expect(url).toEqual(
-				'http://mediaservice/vrt/item-1?token=secret-jwt-token',
-			);
+			const url = await playerTicketService.getThumbnailUrl('vrt-id', 'referer');
+			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
 
 			getThumbnailTokenSpy.mockRestore();
 		});
@@ -228,10 +207,7 @@ describe('PlayerTicketService', () => {
 
 	describe('resolveThumbnailUrl', () => {
 		it('does not get a token for an invalid path', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(
-				playerTicketService,
-				'getThumbnailToken',
-			);
+			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailToken');
 
 			const url = await playerTicketService.resolveThumbnailUrl('', 'referer');
 			expect(url).toEqual('');
@@ -241,15 +217,9 @@ describe('PlayerTicketService', () => {
 		});
 
 		it('does not get a token for an invalid referer', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(
-				playerTicketService,
-				'getThumbnailToken',
-			);
+			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailToken');
 
-			const url = await playerTicketService.resolveThumbnailUrl(
-				'http://thumbnail.jpg',
-				null,
-			);
+			const url = await playerTicketService.resolveThumbnailUrl('http://thumbnail.jpg', null);
 			expect(url).toEqual('http://thumbnail.jpg');
 			expect(getThumbnailTokenSpy).not.toBeCalled();
 
