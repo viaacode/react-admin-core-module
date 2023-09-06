@@ -43,7 +43,7 @@ export class PlayerTicketController {
 	/**
 	 * Gets a playable url for a given media item
 	 * https://viaadocumentation.atlassian.net/wiki/spaces/SI/pages/1063453019/Media+Service
-	 * @param externalId: external_id of the media item that you want to view
+	 * @param externalId external_id of the media item that you want to view
 	 * @param referrer
 	 */
 	public async getPlayableUrlByExternalId(externalId: string, referrer: string): Promise<string> {
@@ -67,27 +67,35 @@ export class PlayerTicketController {
 		}
 	}
 
+	/**
+	 * Generates a playable url for a video
+	 * @param browsePath
+	 * @param referrer
+	 */
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
 		referrer: string
 	): Promise<string> {
 		try {
-			const objectName: string | undefined = browsePath
+			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
 				.split('archief-media.viaa.be/viaa/')
 				.pop();
 
-			if (!objectName) {
+			if (!fileRepresentationSchemaIdentifier) {
 				throw new InternalServerErrorException({
 					message: 'Failed to extract object name from browse path for media item',
 					innerException: null,
 					additionalInfo: {
 						browsePath,
-						objectName,
+						objectName: fileRepresentationSchemaIdentifier,
 					},
 				});
 			}
 
-			return this.playerTicketService.getPlayableUrl(objectName, referrer);
+			return this.playerTicketService.getPlayableUrl(
+				fileRepresentationSchemaIdentifier,
+				referrer
+			);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',

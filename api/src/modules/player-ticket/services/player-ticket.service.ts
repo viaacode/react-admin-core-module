@@ -10,6 +10,7 @@ import {
 
 import type { Cache } from 'cache-manager';
 import got, { Got } from 'got';
+import { ParsedUrl, parseUrl, stringifyUrl } from 'query-string';
 
 import { DataService } from '../../data';
 import {
@@ -99,10 +100,12 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getPlayableUrl(embedUrl: string, referer: string): Promise<string> {
-		const token = await this.getPlayerToken(embedUrl, referer);
-
-		return `${this.mediaServiceUrl}/${embedUrl}?token=${token}`;
+	public async getPlayableUrl(
+		fileRepresentationSchemaIdentifier: string,
+		referer: string
+	): Promise<string> {
+		const token = await this.getPlayerToken(fileRepresentationSchemaIdentifier, referer);
+		return `${this.mediaServiceUrl}/${fileRepresentationSchemaIdentifier}?token=${token}`;
 	}
 
 	public async getEmbedUrl(id: string): Promise<string> {
@@ -131,7 +134,7 @@ export class PlayerTicketService {
 		const browsePath: string =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.object_file?.[0]
-				?.schema_embed_url;
+				?.schema_identifier;
 		if (!browsePath) {
 			throw new NotFoundException(`Object file with representation_id '${id}' not found`);
 		}

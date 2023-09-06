@@ -10,7 +10,7 @@ import { DataModule } from '../data';
 @Module({
 	controllers: [PlayerTicketController],
 	imports: [forwardRef(() => DataModule), ConfigModule, CacheModule.register()],
-	providers: [PlayerTicketService],
-	exports: [PlayerTicketService],
+	providers: [PlayerTicketService, PlayerTicketController],
+	exports: [PlayerTicketService, PlayerTicketController],
 })
 export class PlayerTicketModule {}
