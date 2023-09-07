@@ -1,14 +1,26 @@
-import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+	forwardRef,
+	Inject,
+	Injectable,
+	InternalServerErrorException,
+	Logger,
+} from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { AssetType } from '@viaa/avo2-types';
 import AWS, { AWSError, S3 } from 'aws-sdk';
 import fse from 'fs-extra';
 import got, { Got } from 'got';
-import _ from 'lodash';
+import _, { escapeRegExp, isNil } from 'lodash';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import {
+	InsertContentAssetDocument,
+	InsertContentAssetMutation,
+	InsertContentAssetMutationVariables,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { AssetToken } from '../assets.types';
+import { DataService } from 'src/modules/data/services/data.service';
 
 export const UUID_LENGTH = 35;
 
@@ -20,7 +32,7 @@ export class AssetsService {
 	private gotInstance: Got;
 	private s3: S3;
 
-	constructor() {
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
 		this.gotInstance = got.extend({
 			prefixUrl: process.env.ASSET_SERVER_TOKEN_ENDPOINT,
 			resolveBodyOnly: true,
@@ -153,7 +165,18 @@ export class AssetsService {
 		});
 	}
 
-	public async upload(
+	public async uploadAndTrack(
+		assetFiletype: AssetType,
+		file: any,
+		ownerId: string,
+		preferredKey?: string
+	): Promise<string> {
+		const url = await this.upload(assetFiletype, file, preferredKey);
+		await this.addAssetEntryToDb(ownerId, assetFiletype, url);
+		return url;
+	}
+
+	private async upload(
 		assetFiletype: AssetType,
 		file: any,
 		preferredKey?: string
@@ -281,12 +304,23 @@ export class AssetsService {
 		});
 	}
 
+	public async copyAndTrack(
+		assetFiletype: AssetType,
+		url: string,
+		ownerId: string,
+		copyKey?: string
+	): Promise<string> {
+		const copiedUrl = await this.copy(url, copyKey);
+		await this.addAssetEntryToDb(ownerId, assetFiletype, copiedUrl);
+		return copiedUrl;
+	}
+
 	/**
 	 * Makes a copy of a file on the s3 server
-	 * @param url url of the file you want to make a copy of
+	 * @param url url of the file you want to make a copy of. This can be an url on a different asset server than the one from the current environment
 	 * @param copyKey the name of the copied file, if not passed, an uuid will be appended to the original file name
 	 */
-	public copy(url: string, copyKey?: string | undefined): Promise<string> {
+	private copy(url: string, copyKey?: string | undefined): Promise<string> {
 		// eslint-disable-next-line no-async-promise-executor
 		return new Promise<string>(async (resolve, reject) => {
 			const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
@@ -313,22 +347,47 @@ export class AssetsService {
 						newId +
 						parts.ext;
 
-				s3Client.copyObject(
-					{
-						Key: newKey,
-						Bucket: bucket,
-						CopySource: `${bucket}/${key}`,
-					},
-					(err: AWSError) => {
+				if (url.includes(process.env.ASSET_SERVER_ENDPOINT)) {
+					// Asset is located on the same asset server as the current environment (eg: copy content block from QAS content page to content page on QAS)
+					// Use the s3 copy object since it is more efficient
+					s3Client.copyObject(
+						{
+							Key: newKey,
+							Bucket: bucket,
+							CopySource: `${bucket}/${key}`,
+						},
+						(err: AWSError) => {
+							if (err) {
+								const error = new InternalServerErrorException({
+									message: 'Failed to copy asset from the s3 asset service',
+									innerException: err,
+									additionalInfo: {
+										url,
+										newKey,
+										bucket,
+										copySource: `${bucket}/${key}`,
+									},
+								});
+								console.error(error);
+								reject(error);
+							} else {
+								resolve(this.getUrlFromKey(newKey as string));
+							}
+						}
+					);
+				} else {
+					// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
+					// Download the asset and upload it again to the asset service of this environment
+					const response = await got.get(url).buffer();
+					s3Client.putObject({ Key: newKey, Bucket: bucket, Body: response }, (err) => {
 						if (err) {
 							const error = new InternalServerErrorException({
-								message: 'Failed to copy asset from the s3 asset service',
+								message: 'Failed to upload asset to the s3 asset service',
 								innerException: err,
 								additionalInfo: {
 									url,
 									newKey,
 									bucket,
-									copySource: `${bucket}/${key}`,
 								},
 							});
 							console.error(error);
@@ -336,8 +395,8 @@ export class AssetsService {
 						} else {
 							resolve(this.getUrlFromKey(newKey as string));
 						}
-					}
-				);
+					});
+				}
 			} catch (err) {
 				reject({
 					message: 'Failed to copy file on s3',
@@ -350,6 +409,54 @@ export class AssetsService {
 					},
 				});
 			}
+		});
+	}
+
+	public async duplicateAssetsInJsonBlob(
+		jsonBlob: any,
+		ownerId: string,
+		assetType: AssetType
+	): Promise<any> {
+		let jsonBlobString = JSON.stringify(jsonBlob);
+		const assetUrlsRegex = new RegExp(
+			`(${process.env.ASSET_SERVER_ENDPOINTS_ALL_ENVS.split(',')
+				.map(escapeRegExp)
+				.join('|')})/${escapeRegExp(process.env.ASSET_SERVER_BUCKET_NAME)}/[^"\\\\]+`,
+			'g'
+		);
+		console.info('Find asset urls in json: ', {
+			jsonBlobString,
+			assetUrlsRegex,
+		});
+		const urls = jsonBlobString.match(assetUrlsRegex);
+
+		let newUrls: string[] = [];
+		if (urls && !isNil(ownerId)) {
+			newUrls = await Promise.all(
+				urls.map((url: string) => this.copyAndTrack(assetType, url, ownerId))
+			);
+
+			newUrls.forEach((newUrl: string, index: number) => {
+				jsonBlobString = jsonBlobString?.replace(urls[index], newUrl) || null;
+			});
+		}
+
+		return JSON.parse(jsonBlobString);
+	}
+
+	public async addAssetEntryToDb(ownerId: string, type: AssetType, url: string): Promise<void> {
+		const asset = {
+			owner_id: ownerId,
+			content_asset_type_id: type,
+			label: url,
+			description: null as string | null,
+			path: url,
+		};
+		await this.dataService.execute<
+			InsertContentAssetMutation,
+			InsertContentAssetMutationVariables
+		>(InsertContentAssetDocument, {
+			asset,
 		});
 	}
 }

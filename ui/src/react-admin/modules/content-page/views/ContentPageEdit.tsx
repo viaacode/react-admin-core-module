@@ -166,23 +166,37 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	}, [id, commonUser, hasPerm, tHtml, tText]);
 
 	const onPasteContentBlock = useCallback(
-		(evt: ClipboardEvent) => {
+		async (evt: ClipboardEvent) => {
 			try {
 				if (evt.clipboardData && evt.clipboardData.getData) {
 					const pastedText = evt.clipboardData.getData('text/plain');
 
 					if (pastedText.startsWith('{"block":')) {
-						const newConfig = JSON.parse(pastedText).block;
-						delete newConfig.id;
+						const spinnerToastId =
+							AdminConfigManager.getConfig().services.toastService.showToast({
+								title: tText('Bezig...'),
+								description: tText('Bezig met dupliceren van de afbeeldingen'),
+								type: ToastType.SPINNER,
+							});
+						const newBlockConfig = JSON.parse(pastedText).block;
+						delete newBlockConfig.id;
 						// Ensure block is added at the bottom of the page
-						newConfig.position = (
+						newBlockConfig.position = (
 							contentPageState?.currentContentPageInfo?.content_blocks || []
 						).length;
+
+						// Duplicate the assets used in this content block, so it is no longer linked to the original content block
+						const newBlockConfigWithDuplicatedAssets =
+							await ContentPageService.duplicateContentBlockImages(newBlockConfig);
+
 						changeContentPageState({
 							type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
-							payload: newConfig,
+							payload: newBlockConfigWithDuplicatedAssets,
 						});
 
+						AdminConfigManager.getConfig().services.toastService.hideToast(
+							spinnerToastId
+						);
 						AdminConfigManager.getConfig().services.toastService.showToast({
 							title: tText('modules/content-page/views/content-page-edit___success'),
 							description: tText(

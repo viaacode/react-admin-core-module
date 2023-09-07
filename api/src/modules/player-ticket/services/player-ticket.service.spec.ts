@@ -96,7 +96,7 @@ describe('PlayerTicketService', () => {
 	describe('getEmbedUrl', () => {
 		it('returns the embedUrl for an item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_embed_url: 'vrt/item-1' }],
+				object_file: [{ schema_identifier: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -105,7 +105,7 @@ describe('PlayerTicketService', () => {
 
 		it('returns the embedUrl for an avo item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_embed_url: 'vrt/item-1' }],
+				object_file: [{ schema_identifier: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getEmbedUrl('vrt-id');

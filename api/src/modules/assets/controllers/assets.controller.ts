@@ -27,9 +27,6 @@ import {
 	GetContentAssetOwnerIdDocument,
 	GetContentAssetOwnerIdQuery,
 	GetContentAssetOwnerIdQueryVariables,
-	InsertContentAssetDocument,
-	InsertContentAssetMutation,
-	InsertContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { TranslationsService } from '../../translations';
@@ -99,23 +96,12 @@ export class AssetsController {
 		}
 
 		try {
-			const url = await this.assetsService.upload(AssetType.CONTENT_PAGE_IMAGE, file);
-			const asset = {
-				owner_id: uploadAssetInfo.ownerId,
-				content_asset_type_id: uploadAssetInfo.type,
-				label: url,
-				description: null as string | null,
-				path: url,
-			};
-			await this.dataService.execute<
-				InsertContentAssetMutation,
-				InsertContentAssetMutationVariables
-			>(InsertContentAssetDocument, {
-				asset,
-			});
-			return {
-				url,
-			};
+			const url = await this.assetsService.uploadAndTrack(
+				AssetType.CONTENT_PAGE_IMAGE,
+				file,
+				uploadAssetInfo.ownerId
+			);
+			return { url };
 		} catch (err) {
 			const error = new InternalServerErrorException({
 				message: 'Failed to upload file to asset server',
@@ -132,31 +118,19 @@ export class AssetsController {
 		}
 	}
 
-	/**
-	 * Duplicate asset entry and keep a record of the duplicate in graphql
-	 * @param url
-	 * @param ownerId
-	 */
-	async duplicate(url: string, ownerId: string): Promise<string> {
-		const assetInfo = await this.info(url);
-		const duplicateUrl = await this.assetsService.copy(url);
-
-		const asset = {
-			owner_id: ownerId,
-			content_asset_type_id: assetInfo.content_asset_type_id,
-			label: duplicateUrl,
-			description: null as string | null,
-			path: duplicateUrl,
-		};
-		await this.dataService.execute<
-			InsertContentAssetMutation,
-			InsertContentAssetMutationVariables
-		>(InsertContentAssetDocument, {
-			asset,
-		});
-
-		return duplicateUrl;
-	}
+	// /**
+	//  * Duplicate asset entry and keep a record of the duplicate in graphql
+	//  * @param url
+	//  * @param ownerId
+	//  */
+	// async duplicate(url: string, ownerId: string): Promise<string> {
+	// 	const assetInfo = await this.info(url);
+	// 	return this.assetsService.copyAndTrack(
+	// 		assetInfo.content_asset_type_id as AssetType,
+	// 		url,
+	// 		ownerId
+	// 	);
+	// }
 
 	isValidFileType(file: { mimetype: string }): boolean {
 		return VALID_MIME_TYPES.includes(file.mimetype);

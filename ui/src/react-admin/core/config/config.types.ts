@@ -22,7 +22,8 @@ export interface ToastInfo {
 }
 
 export interface ToastService {
-	showToast: (toastInfo: ToastInfo) => void;
+	showToast: (toastInfo: ToastInfo) => string;
+	hideToast: (toastId: string) => void;
 }
 
 export interface I18n {

@@ -218,12 +218,10 @@ export class ContentPageService {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
-					url: `${
-						AdminConfigManager.getConfig().database.proxyUrl
-					}/content-pages/duplicate`,
-					query: {
-						id,
-					},
+					url:
+						`${
+							AdminConfigManager.getConfig().database.proxyUrl
+						}/admin/content-pages/duplicate/` + id,
 				}),
 				{
 					method: 'POST',
@@ -231,7 +229,28 @@ export class ContentPageService {
 			);
 			return convertDbContentPageToContentPageInfo(responseContent);
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError('Failed to duplicate assets for content page', err, { id });
+		}
+	}
+
+	public static async duplicateContentBlockImages(contentBlockInfo: any): Promise<any> {
+		try {
+			return await fetchWithLogoutJson<any>(
+				stringifyUrl({
+					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
+					url: `${
+						AdminConfigManager.getConfig().database.proxyUrl
+					}/admin/content-pages/blocks/duplicate`,
+				}),
+				{
+					method: 'POST',
+					body: JSON.stringify(contentBlockInfo),
+				}
+			);
+		} catch (err) {
+			throw new CustomError('Failed to duplicate assets for content block json', err, {
+				contentBlockInfo,
+			});
 		}
 	}
 

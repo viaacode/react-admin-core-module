@@ -5,6 +5,7 @@ import {
 	ForbiddenException,
 	Get,
 	Headers,
+	InternalServerErrorException,
 	NotFoundException,
 	Param,
 	ParseIntPipe,
@@ -18,24 +19,28 @@ import {
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash';
-import { PermissionName } from '@viaa/avo2-types';
+import { AssetType, PermissionName } from '@viaa/avo2-types';
+import { AssetsService } from '../../assets';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
+import { SessionUser } from '../../shared/decorators/user.decorator';
+import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { logAndThrow } from '../../shared/helpers/logAndThrow';
+import { SessionUserEntity } from '../../users/classes/session-user';
 import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
 
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
-import { SessionUserEntity } from '../../users/classes/session-user';
-import { SessionUser } from '../../shared/decorators/user.decorator';
-import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('ContentPages')
 @Controller(addPrefix(process, 'content-pages'))
 export class ContentPagesController {
-	constructor(private contentPagesService: ContentPagesService) {}
+	constructor(
+		private contentPagesService: ContentPagesService,
+		private assetsService: AssetsService
+	) {}
 
 	@Post('')
 	public async getContentPagesForOverview(
@@ -86,12 +91,12 @@ export class ContentPagesController {
 		@Query('path') path: string,
 		@Req() request,
 		@SessionUser() user
-	): Promise<{ exists: boolean; title: string; id: number }> {
+	): Promise<{ exists: boolean; title: string; id: number | string }> {
 		const contentPage = await this.getContentPageByPath(path, request, user);
 		return {
 			exists: !!contentPage,
-			title: get(contentPage, 'title', null),
-			id: get(contentPage, 'id', null),
+			title: contentPage?.title ?? null,
+			id: contentPage?.id ?? null,
 		};
 	}
 
@@ -297,6 +302,83 @@ export class ContentPagesController {
 		@Query('path') path: string
 	): Promise<(string | number)[]> {
 		return this.contentPagesService.getUserGroupsFromContentPage(path);
+	}
+
+	@Post('/duplicate/:id')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES
+	)
+	// TODO: move the duplicate logic from the client to this route, so we don't have the duplicate logic partly in the client and partly in the proxy.
+	async duplicateContentPageImages(
+		@Param('id') id: string,
+		@SessionUser() user: SessionUserEntity
+	): Promise<DbContentPage> {
+		console.log('duplicating content page for user profile: ' + user.getProfileId());
+		const contentPageJson: string | null = null;
+		try {
+			const dbContentPage: DbContentPage | null =
+				await this.contentPagesService.getContentPageById(id);
+			if (!dbContentPage) {
+				throw new NotFoundException({
+					message: 'Failed to duplicate content page images, because id was not found',
+					innerException: null,
+					additionalInfo: {
+						id,
+					},
+				});
+			}
+
+			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
+			return await this.assetsService.duplicateAssetsInJsonBlob(
+				dbContentPage,
+				user.getProfileId(),
+				AssetType.CONTENT_PAGE_IMAGE
+			);
+		} catch (err) {
+			logAndThrow(
+				new InternalServerErrorException({
+					message: 'Failed to duplicate assets of content page',
+					innerException: err,
+					additionalInfo: {
+						id,
+						contentPageJson,
+					},
+				})
+			);
+		}
+	}
+
+	@Post('/blocks/duplicate')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES
+	)
+	async duplicateContentBlockImages(
+		@Body() contentBlockJson: any,
+		@SessionUser() user: SessionUserEntity
+	): Promise<DbContentPage> {
+		try {
+			console.log(
+				'duplicating assets in content block for user profile: ' + user.getProfileId()
+			);
+			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
+			return await this.assetsService.duplicateAssetsInJsonBlob(
+				contentBlockJson,
+				user.getProfileId(),
+				AssetType.CONTENT_PAGE_IMAGE
+			);
+		} catch (err) {
+			logAndThrow(
+				new InternalServerErrorException({
+					message: 'Failed to duplicate assets in content block json',
+					innerException: err,
+					additionalInfo: {
+						contentBlockJson,
+					},
+				})
+			);
+		}
 	}
 
 	@Get(':id')

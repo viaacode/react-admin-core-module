@@ -10,7 +10,7 @@ import { AssetsService } from '../services/assets.service';
 import { AssetsController } from './assets.controller';
 
 const mockAssetsService: Partial<Record<keyof AssetsService, jest.SpyInstance>> = {
-	upload: jest.fn(),
+	uploadAndTrack: jest.fn(),
 	delete: jest.fn(),
 };
 
@@ -44,7 +44,7 @@ describe('AssetsController', () => {
 
 	describe('uploadAsset', () => {
 		it('should return the asset url', async () => {
-			mockAssetsService.upload.mockResolvedValueOnce(mockUploadUrl);
+			mockAssetsService.uploadAndTrack.mockResolvedValueOnce(mockUploadUrl);
 
 			const response = await assetsController.uploadAsset(
 				{} as any,

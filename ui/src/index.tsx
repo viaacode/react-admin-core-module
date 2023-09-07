@@ -258,9 +258,14 @@ function setConfig() {
 		},
 		services: {
 			toastService: {
-				showToast: (toastInfo: ToastInfo) => {
+				showToast: (toastInfo: ToastInfo): string => {
 					// Client decides how the toast messages are shown
 					console.info('show toast: ', toastInfo);
+					return 'fake-toast-id';
+				},
+				hideToast: (toastId: string) => {
+					// Client decides how the toast messages are hidden
+					console.info('hide toasts with id: ', toastId);
 				},
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
