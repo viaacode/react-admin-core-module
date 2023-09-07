@@ -78,7 +78,7 @@ export class PlayerTicketController {
 	): Promise<string> {
 		try {
 			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
-				.split('archief-media.viaa.be/viaa/')
+				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
 				.pop();
 
 			if (!fileRepresentationSchemaIdentifier) {
