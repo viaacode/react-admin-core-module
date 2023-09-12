@@ -48,7 +48,7 @@ export interface DeleteContentCounts {
 export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
 	UserQueryTypes['GetUsersQueryAvo']['users_summary_view'][0];
 export type UserInfoOverviewHetArchief =
-	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0] & { organisation?: Organisation };
+	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];
 
 export enum UserInfoType {
 	AvoUserUser = 'AvoUserUser',

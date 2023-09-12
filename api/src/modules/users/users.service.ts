@@ -91,6 +91,7 @@ export class UsersService {
 						_and: [...(where?._and || []), { is_deleted: { _eq: false } }],
 				  };
 
+			const query = USER_QUERIES[getDatabaseType()].GetUsersDocument;
 			variables = {
 				offset,
 				limit,
@@ -104,7 +105,7 @@ export class UsersService {
 			};
 
 			const response = await this.dataService.execute<UserQueryTypes['GetUsersQuery']>(
-				USER_QUERIES[getDatabaseType()].GetUsersDocument,
+				query,
 				variables
 			);
 

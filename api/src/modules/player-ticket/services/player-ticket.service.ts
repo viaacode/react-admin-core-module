@@ -136,7 +136,13 @@ export class PlayerTicketService {
 			(response as GetFileByRepresentationSchemaIdentifierQuery)?.object_file?.[0]
 				?.schema_identifier;
 		if (!browsePath) {
-			throw new NotFoundException(`Object file with representation_id '${id}' not found`);
+			throw new NotFoundException({
+				message: 'Object embed url not found',
+				innerException: null,
+				additionalInfo: {
+					id,
+				},
+			});
 		}
 
 		return browsePath;

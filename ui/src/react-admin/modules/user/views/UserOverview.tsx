@@ -422,9 +422,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 		});
 	};
 
-	const renderTableCell = (commonUser: Avo.User.CommonUser, columnId: UserOverviewTableCol) => {
-		const isBlocked = commonUser?.isBlocked;
-		const isKeyUser = (commonUser as any)?.isKeyUser ?? false;
+	const renderTableCell = (
+		tableRowCommonUser: Avo.User.CommonUser,
+		columnId: UserOverviewTableCol
+	) => {
+		const isBlocked = tableRowCommonUser?.isBlocked;
+		const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
 
 		switch (columnId) {
 			case 'fullName':
@@ -432,17 +435,17 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				return isAvo() ? (
 					<Link
 						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
-							id: commonUser.profileId,
+							id: tableRowCommonUser.profileId,
 						})}
 					>
-						{truncateTableValue(commonUser?.fullName)}
+						{truncateTableValue(tableRowCommonUser?.fullName)}
 					</Link>
 				) : (
-					truncateTableValue(commonUser?.fullName)
+					truncateTableValue(tableRowCommonUser?.fullName)
 				);
 
 			case 'email':
-				return truncateTableValue(commonUser?.email);
+				return truncateTableValue(tableRowCommonUser?.email);
 
 			case 'isBlocked':
 				return isBlocked ? 'Ja' : 'Nee';
@@ -451,22 +454,22 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				return isKeyUser ? 'Ja' : 'Nee';
 
 			case 'blockedAt':
-				return formatDateString(commonUser?.blockedAt) || '-';
+				return formatDateString(tableRowCommonUser?.blockedAt) || '-';
 
 			case 'unblockedAt':
-				return formatDateString(commonUser?.unblockedAt) || '-';
+				return formatDateString(tableRowCommonUser?.unblockedAt) || '-';
 
 			case 'isException':
-				return commonUser?.isException ? 'Ja' : 'Nee';
+				return tableRowCommonUser?.isException ? 'Ja' : 'Nee';
 
 			case 'organisation':
-				return commonUser?.organisation?.name || '-';
+				return tableRowCommonUser?.organisation?.name || '-';
 
 			case 'createdAt':
-				return formatDateString(commonUser.createdAt) || '-';
+				return formatDateString(tableRowCommonUser.createdAt) || '-';
 
 			case 'lastAccessAt': {
-				const lastAccessDate = commonUser?.lastAccessAt;
+				const lastAccessDate = tableRowCommonUser?.lastAccessAt;
 				return !isNil(lastAccessDate)
 					? customFormatDate
 						? customFormatDate(lastAccessDate)
@@ -474,30 +477,30 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					: '-';
 			}
 			case 'tempAccess': {
-				if (hasTempAccess(commonUser?.tempAccess)) {
+				if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
 					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 				} else {
 					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 				}
 			}
 			case 'tempAccessFrom':
-				return formatDateString(commonUser?.tempAccess?.from) || '-';
+				return formatDateString(tableRowCommonUser?.tempAccess?.from) || '-';
 
 			case 'tempAccessUntil':
-				return formatDateString(commonUser?.tempAccess?.until) || '-';
+				return formatDateString(tableRowCommonUser?.tempAccess?.until) || '-';
 
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						Object.keys(commonUser?.idps || {}) as Idp[],
-						`user_${commonUser?.profileId}`,
+						Object.keys(tableRowCommonUser?.idps || {}) as Idp[],
+						`user_${tableRowCommonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'
 				);
 
 			case 'educationLevels': {
 				const labels = compact(
-					(commonUser?.loms ?? [])
+					(tableRowCommonUser?.loms ?? [])
 						.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
 						.map((lom) => lom.lom?.label)
 				);
@@ -506,7 +509,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			case 'subjects': {
 				const labels = compact(
-					(commonUser?.loms ?? [])
+					(tableRowCommonUser?.loms ?? [])
 						.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
 						.map((lom) => lom.lom?.label)
 				);
@@ -515,7 +518,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			case 'educationalOrganisations': {
 				const orgs: Avo.EducationOrganization.Organization[] =
-					commonUser.educationalOrganisations ?? [];
+					tableRowCommonUser.educationalOrganisations ?? [];
 				const tags = orgs.map(
 					(org): TagOption => ({
 						id: `${org.organisationId}:${org.unitId || ''}`,
@@ -533,7 +536,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			case 'userGroup':
 				return truncateTableValue(
-					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
+					tableRowCommonUser.userGroup?.label || tableRowCommonUser.userGroup?.name || '-'
 				);
 
 			case 'actions':
@@ -541,19 +544,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					<ActionsDropdown
 						menuItems={[
 							{
-								id: commonUser.profileId || '',
+								id: tableRowCommonUser.profileId || '',
 								label:
-									commonUser.profileId ||
+									tableRowCommonUser.profileId ||
 									tText('admin/users/views/user-overview___geen-uuid'),
 								iconEnd: <Icon name="copy" />,
 							},
 						]}
-						onOptionClicked={() => handleOptionClicked(commonUser.profileId)}
+						onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
 					/>
 				);
 
 			default:
-				return truncateTableValue(commonUser[columnId] || '-');
+				return truncateTableValue(tableRowCommonUser[columnId] || '-');
 		}
 	};
 

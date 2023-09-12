@@ -231,9 +231,9 @@ export function convertUserInfoToCommonUser(
 					)
 				),
 				organisation: {
-					name: profile.organisation?.name,
-					or_id: profile.organisation?.id,
-					logo_url: profile.organisation?.logo_url,
+					name: profile.organisation?.schema_name,
+					or_id: profile.organisation?.schema_identifier,
+					logo_url: profile.organisation?.logo,
 					data: null,
 				},
 				loms: [],
