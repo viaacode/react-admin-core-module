@@ -174,8 +174,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					if (pastedText.startsWith('{"block":')) {
 						const spinnerToastId =
 							AdminConfigManager.getConfig().services.toastService.showToast({
-								title: tText('Bezig...'),
-								description: tText('Bezig met dupliceren van de afbeeldingen'),
+								title: tText(
+									'react-admin/modules/content-page/views/content-page-edit___bezig'
+								),
+								description: tText(
+									'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
+								),
 								type: ToastType.SPINNER,
 							});
 						const newBlockConfig = JSON.parse(pastedText).block;

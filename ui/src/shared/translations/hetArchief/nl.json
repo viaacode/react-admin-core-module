@@ -897,6 +897,8 @@
   "react-admin/modules/content-page/const/get-content-block-type-options___header-met-zoekveld": "Header met zoekveld",
   "react-admin/modules/content-page/const/get-image-grid-format-options___30-x-220": "30% x 220",
   "react-admin/modules/content-page/const/get-page-overview-item-style-options___accordion-twee-niveaus": "Accordion twee niveaus",
+  "react-admin/modules/content-page/views/content-page-edit___bezig": "Bezig...",
+  "react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen": "Bezig met dupliceren van de afbeeldingen",
   "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "Deze pagina kon niet worden gevonden",
   "react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel": "Je hebt geen rechten om deze content pagina aan te passen titel",
   "react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items": "custom navigatie items",
