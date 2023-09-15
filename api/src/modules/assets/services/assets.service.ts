@@ -424,11 +424,12 @@ export class AssetsService {
 				.join('|')})/${escapeRegExp(process.env.ASSET_SERVER_BUCKET_NAME)}/[^"\\\\]+`,
 			'g'
 		);
+		const urls = jsonBlobString.match(assetUrlsRegex);
 		console.info('Find asset urls in json: ', {
 			jsonBlobString,
 			assetUrlsRegex,
+			foundUrls: urls,
 		});
-		const urls = jsonBlobString.match(assetUrlsRegex);
 
 		let newUrls: string[] = [];
 		if (urls && !isNil(ownerId)) {

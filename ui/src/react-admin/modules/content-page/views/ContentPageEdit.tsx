@@ -11,6 +11,7 @@ import { has, isFunction, isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { ErrorView } from '~shared/components/error';
 
 import Link from '~shared/components/Link/Link';
@@ -165,49 +166,101 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 		}
 	}, [id, commonUser, hasPerm, tHtml, tText]);
 
-	const onPasteContentBlock = useCallback(
+	const handlePasteBlock = useCallback(
+		async (newBlockConfig: Partial<Avo.ContentPage.Block>) => {
+			const spinnerToastId = AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
+				description: tText(
+					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
+				),
+				type: ToastType.SPINNER,
+			});
+			delete newBlockConfig.id;
+			// Ensure block is added at the bottom of the page
+			newBlockConfig.position = (
+				contentPageState?.currentContentPageInfo?.content_blocks || []
+			).length;
+
+			// Duplicate the assets used in this content block, so it is no longer linked to the original content block
+			const newBlockConfigWithDuplicatedAssets =
+				await ContentPageService.duplicateContentImages(newBlockConfig);
+
+			changeContentPageState({
+				type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
+				payload: newBlockConfigWithDuplicatedAssets,
+			});
+
+			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-edit___success'),
+				description: tText('admin/content/views/content-edit___de-blok-is-toegevoegd'),
+				type: ToastType.SUCCESS,
+			});
+		},
+		[contentPageState?.currentContentPageInfo?.content_blocks, tText]
+	);
+
+	const handlePasteContentPage = useCallback(
+		async (newContentPageConfig: ContentPageInfo) => {
+			const spinnerToastId = AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
+				description: tText(
+					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
+				),
+				type: ToastType.SPINNER,
+			});
+
+			newContentPageConfig.id = contentPageState.currentContentPageInfo.id as string | number;
+
+			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
+				newContentPageConfig
+			);
+
+			changeContentPageState({
+				type: ContentEditActionType.SET_CONTENT_PAGE,
+				payload: {
+					contentPageInfo: {
+						...contentPageWithDuplicatedAssets,
+						content_blocks: [
+							...contentPageState.currentContentPageInfo.content_blocks,
+							...contentPageWithDuplicatedAssets.content_blocks,
+						].map((block, blockIndex) => {
+							// Reorder the combined array of content block positions
+							return {
+								...block,
+								position: blockIndex,
+							};
+						}),
+					},
+					replaceInitial: false,
+				},
+			});
+
+			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-edit___success'),
+				description: tText('De content pagina info is overgenomen'),
+				type: ToastType.SUCCESS,
+			});
+		},
+		[
+			contentPageState.currentContentPageInfo.content_blocks,
+			contentPageState.currentContentPageInfo.id,
+			tText,
+		]
+	);
+
+	const onPasteContent = useCallback(
 		async (evt: ClipboardEvent) => {
 			try {
 				if (evt.clipboardData && evt.clipboardData.getData) {
 					const pastedText = evt.clipboardData.getData('text/plain');
 
 					if (pastedText.startsWith('{"block":')) {
-						const spinnerToastId =
-							AdminConfigManager.getConfig().services.toastService.showToast({
-								title: tText(
-									'react-admin/modules/content-page/views/content-page-edit___bezig'
-								),
-								description: tText(
-									'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
-								),
-								type: ToastType.SPINNER,
-							});
-						const newBlockConfig = JSON.parse(pastedText).block;
-						delete newBlockConfig.id;
-						// Ensure block is added at the bottom of the page
-						newBlockConfig.position = (
-							contentPageState?.currentContentPageInfo?.content_blocks || []
-						).length;
-
-						// Duplicate the assets used in this content block, so it is no longer linked to the original content block
-						const newBlockConfigWithDuplicatedAssets =
-							await ContentPageService.duplicateContentBlockImages(newBlockConfig);
-
-						changeContentPageState({
-							type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,
-							payload: newBlockConfigWithDuplicatedAssets,
-						});
-
-						AdminConfigManager.getConfig().services.toastService.hideToast(
-							spinnerToastId
-						);
-						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: tText('modules/content-page/views/content-page-edit___success'),
-							description: tText(
-								'admin/content/views/content-edit___de-blok-is-toegevoegd'
-							),
-							type: ToastType.SUCCESS,
-						});
+						handlePasteBlock(JSON.parse(pastedText).block);
+					}
+					if (pastedText.startsWith('{"contentPage":')) {
+						handlePasteContentPage(JSON.parse(pastedText).contentPage);
 					}
 				}
 			} catch (err) {
@@ -221,7 +274,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				});
 			}
 		},
-		[changeContentPageState, contentPageState?.currentContentPageInfo?.content_blocks, tText]
+		[handlePasteBlock, handlePasteContentPage, tText]
 	);
 
 	useEffect(() => {
@@ -235,12 +288,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	}, [contentPageState.currentContentPageInfo, isLoadingContentTypes]);
 
 	useEffect(() => {
-		document.body.addEventListener('paste', onPasteContentBlock);
+		document.body.addEventListener('paste', onPasteContent);
 
 		return () => {
-			document.body.removeEventListener('paste', onPasteContentBlock);
+			document.body.removeEventListener('paste', onPasteContent);
 		};
-	}, [onPasteContentBlock]);
+	}, [onPasteContent]);
 
 	// Computed
 	const pageType = id ? PageType.Edit : PageType.Create;
@@ -662,10 +715,40 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					)}
 				</AdminLayout.Actions>
 				<AdminLayout.Content>
-					<Navbar background="alt" placement="top" autoHeight>
+					<Navbar
+						background="alt"
+						placement="top"
+						autoHeight
+						className="c-content-page-edit__nav-bar"
+					>
 						<Container mode="horizontal">
 							<Tabs tabs={tabs} onClick={setCurrentTab} />
 						</Container>
+						<CopyToClipboard
+							text={JSON.stringify({
+								contentPage: contentPageState.currentContentPageInfo,
+							})}
+							onCopy={() =>
+								AdminConfigManager.getConfig().services.toastService.showToast({
+									title: AdminConfigManager.getConfig().services.i18n.tText(
+										'Gekopieerd'
+									),
+									description: AdminConfigManager.getConfig().services.i18n.tText(
+										'De content pagina is naar je klembord gekopieerd druk ctrl-v om hem te plakken op een bewerk pagina'
+									),
+									type: ToastType.SUCCESS,
+								})
+							}
+						>
+							<Button
+								icon={'copy' as IconName}
+								size="small"
+								title={tText('Kopieer content pagina')}
+								ariaLabel={tText('Kopieer content pagina')}
+								type="secondary"
+								className="c-content-page-edit__copy-page-button u-spacer-s"
+							/>
+						</CopyToClipboard>
 					</Navbar>
 
 					{renderTabContent()}
