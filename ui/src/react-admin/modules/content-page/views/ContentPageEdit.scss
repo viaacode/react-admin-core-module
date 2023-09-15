@@ -41,3 +41,12 @@
 		overflow-wrap: break-word;
 	}
 }
+
+.c-content-page-edit__nav-bar {
+	position: relative;
+	.c-content-page-edit__copy-page-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+}

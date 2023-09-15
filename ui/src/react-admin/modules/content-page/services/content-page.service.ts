@@ -233,7 +233,7 @@ export class ContentPageService {
 		}
 	}
 
-	public static async duplicateContentBlockImages(contentBlockInfo: any): Promise<any> {
+	public static async duplicateContentImages(contentBlockInfo: any): Promise<any> {
 		try {
 			return await fetchWithLogoutJson<any>(
 				stringifyUrl({
