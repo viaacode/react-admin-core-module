@@ -59,20 +59,10 @@ query getUserById($id: uuid!) {
 					label
 					ldap_role
 					updated_at
-					group_user_permission_groups {
-						group {
-							label
+					group_permissions {
+						permission {
 							id
-						}
-						permission_group {
-							permission_group_user_permissions {
-								permission {
-									label
-									id
-								}
-							}
 							label
-							id
 						}
 					}
 				}
