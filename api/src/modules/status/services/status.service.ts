@@ -26,12 +26,11 @@ export class StatusService {
 
 	private async getGraphQlStatus(): Promise<boolean> {
 		try {
-			const translations =
-				await this.translationsService.getFrontendTranslations();
+			const translations = await this.translationsService.getFrontendTranslations();
 
 			/* istanbul ignore next */
 			return !!Object.keys(translations)[0];
-		} catch (err) {
+		} catch (err: any) {
 			this.logger.error(err);
 			return false;
 		}

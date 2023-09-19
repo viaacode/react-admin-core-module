@@ -1,0 +1,34 @@
+query getUsers(
+	$offset: Int!
+	$limit: Int!
+	$orderBy: [users_profile_order_by!]!
+	$where: users_profile_bool_exp!
+) {
+	users_profile(offset: $offset, limit: $limit, order_by: $orderBy, where: $where) {
+		id
+		full_name
+		first_name
+		last_name
+		mail
+		last_access_at
+		group {
+			label
+			name
+			id
+		}
+		identities {
+			identity_provider_name
+		}
+		organisation {
+			schema_name
+			schema_identifier
+			homepage_url
+			logo
+		}
+	}
+	users_profile_aggregate(where: $where) {
+		aggregate {
+			count
+		}
+	}
+}

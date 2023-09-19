@@ -1,4 +1,4 @@
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 
@@ -32,7 +32,7 @@ export interface NavigationItem extends NavigationBar {
 	iconName: string;
 	label: string | null;
 	userGroupIds: string[] | null;
-	contentType: ContentPickerType | null;
+	contentType: Avo.Core.ContentPickerType | null;
 	contentPath: string | null;
 	linkTarget: '_blank' | '_self' | null;
 	position: number;

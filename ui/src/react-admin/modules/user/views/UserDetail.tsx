@@ -8,16 +8,16 @@ import {
 	MoreOptionsDropdown,
 	Table,
 	TagList,
-	TagOption,
 } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
+import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { useGetProfileById } from '~modules/user/use-get-profile-by-id';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
+import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import { formatDateString } from '~shared/helpers/formatters/date';
 
 import {
@@ -266,7 +266,11 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 		return (
 			<Container mode="vertical" size="small">
 				<Container mode="horizontal">
-					<Table horizontal variant="invisible" className="c-table_detail-page">
+					<Table
+						horizontal
+						variant="invisible"
+						className="c-table_detail-page c-user_detail-page"
+					>
 						<tbody>
 							{renderDetailRow(
 								renderAvatar(storedProfile, { small: false }),
@@ -350,25 +354,40 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 								tText('admin/users/views/user-detail___gelinked-aan')
 							)}
 							{renderDetailRow(
-								stringsToTagList(storedProfile?.subjects || []) || '-',
-								tText('admin/users/views/user-detail___vakken')
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.structure
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
+								tText('react-admin/modules/user/views/user-detail___onderwijs')
 							)}
 							{renderDetailRow(
-								storedProfile.educationLevels?.length ? (
-									<TagList
-										tags={storedProfile.educationLevels.map(
-											(item: string): TagOption => ({
-												id: item,
-												label: item,
-											})
-										)}
-										swatches={false}
-										closable={false}
-									/>
-								) : (
-									'-'
-								),
-								tText('admin/users/views/user-detail___opleidingsniveaus')
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.theme
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
+								tText('react-admin/modules/user/views/user-detail___themas')
+							)}
+							{renderDetailRow(
+								stringsToTagList(
+									compact(
+										(storedProfile?.loms || [])
+											.filter(
+												(lom) => lom.lom?.scheme === LomSchemeType.subject
+											)
+											.map((lom) => lom.lom?.label)
+									)
+								) || '-',
+								tText('admin/users/views/user-detail___vakken')
 							)}
 							{renderDetailRow(
 								storedProfile.educationalOrganisations?.length ? (
@@ -377,8 +396,8 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 										swatches={false}
 										tags={storedProfile.educationalOrganisations.map(
 											(item: Avo.EducationOrganization.Organization) => ({
-												label: item.label,
-												id: item.organizationId,
+												label: item.organisationLabel,
+												id: item.organisationId,
 											})
 										)}
 									/>

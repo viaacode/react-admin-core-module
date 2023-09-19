@@ -8,9 +8,9 @@ import './BlockImageGrid.scss';
 
 export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 	elements = [],
-	imageWidth = 200,
-	imageHeight = 200,
-	itemWidth = 200,
+	imageWidth = '20rem',
+	imageHeight = '20rem',
+	itemWidth = '20rem',
 	fill = 'cover',
 	align = 'center',
 	textAlign = 'center',
@@ -36,8 +36,8 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 				<div
 					className="c-block-grid__image"
 					style={{
-						width: `${imageWidth}px`,
-						height: `${imageHeight}px`,
+						width: imageWidth,
+						height: imageHeight,
 						backgroundImage: `url(${element.source})`,
 						backgroundSize: fill,
 					}}
@@ -100,7 +100,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 					key={`block-grid-${element?.action?.value || element.title || null}${index}`}
 					className={classnames('c-block-grid__item')}
 					style={{
-						width: `${itemWidth}px`,
+						width: itemWidth,
 						margin: `${Math.round(verticalMargin / 2)}px ${Math.round(
 							horizontalMargin / 2
 						)}px`,

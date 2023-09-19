@@ -60,9 +60,7 @@ export type ContentPageLabelQueryTypes = {
 		| GetContentPageLabelByIdQueryHetArchief;
 	GetContentPageLabelsQueryAvo: GetContentPageLabelsQueryAvo;
 	GetContentPageLabelsQueryHetArchief: GetContentPageLabelsQueryHetArchief;
-	GetContentPageLabelsQuery:
-		| GetContentPageLabelsQueryAvo
-		| GetContentPageLabelsQueryHetArchief;
+	GetContentPageLabelsQuery: GetContentPageLabelsQueryAvo | GetContentPageLabelsQueryHetArchief;
 	InsertContentPageLabelMutationAvo: InsertContentPageLabelMutationAvo;
 	InsertContentPageLabelMutationHetArchief: InsertContentPageLabelMutationHetArchief;
 	InsertContentPageLabelMutation:
@@ -121,33 +119,27 @@ export type ContentPageLabelQueryTypes = {
 };
 
 type ContentPageLabelQueries = {
-	DeleteContentPageLabelByIdDocument: TypedDocumentNode;
-	GetContentPageLabelByIdDocument: TypedDocumentNode;
-	GetContentPageLabelsDocument: TypedDocumentNode;
-	InsertContentPageLabelDocument: TypedDocumentNode;
-	UpdateContentPageLabelDocument: TypedDocumentNode;
-	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode;
-	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode;
+	DeleteContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
+	GetContentPageLabelByIdDocument: TypedDocumentNode<any, any>;
+	GetContentPageLabelsDocument: TypedDocumentNode<any, any>;
+	InsertContentPageLabelDocument: TypedDocumentNode<any, any>;
+	UpdateContentPageLabelDocument: TypedDocumentNode<any, any>;
+	GetContentPageLabelsByTypeAndIdsDocument: TypedDocumentNode<any, any>;
+	GetContentPageLabelsByTypeAndLabelsDocument: TypedDocumentNode<any, any>;
 };
 
-export const CONTENT_PAGE_LABEL_QUERIES: Record<
-	DatabaseType,
-	ContentPageLabelQueries
-> = {
+export const CONTENT_PAGE_LABEL_QUERIES: Record<DatabaseType, ContentPageLabelQueries> = {
 	[DatabaseType.avo]: {
 		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentAvo,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentAvo,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentAvo,
 		UpdateContentPageLabelDocument: UpdateContentPageLabelDocumentAvo,
-		GetContentPageLabelsByTypeAndIdsDocument:
-			GetContentPageLabelsByTypeAndIdsDocumentAvo,
-		GetContentPageLabelsByTypeAndLabelsDocument:
-			GetContentPageLabelsByTypeAndLabelsDocumentAvo,
+		GetContentPageLabelsByTypeAndIdsDocument: GetContentPageLabelsByTypeAndIdsDocumentAvo,
+		GetContentPageLabelsByTypeAndLabelsDocument: GetContentPageLabelsByTypeAndLabelsDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
-		DeleteContentPageLabelByIdDocument:
-			DeleteContentPageLabelByIdDocumentHetArchief,
+		DeleteContentPageLabelByIdDocument: DeleteContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelByIdDocument: GetContentPageLabelByIdDocumentHetArchief,
 		GetContentPageLabelsDocument: GetContentPageLabelsDocumentHetArchief,
 		InsertContentPageLabelDocument: InsertContentPageLabelDocumentHetArchief,

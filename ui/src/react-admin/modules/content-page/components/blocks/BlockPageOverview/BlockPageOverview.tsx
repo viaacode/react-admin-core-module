@@ -15,7 +15,7 @@ import {
 	Tabs,
 	TagList,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import classnames from 'classnames';
 import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
@@ -298,9 +298,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									action: { type: 'CONTENT_PAGE', value: page.id },
 								})
 							)}
-							itemWidth={307}
-							imageHeight={172}
-							imageWidth={307}
+							itemWidth="30.7rem"
+							imageHeight="17.2rem"
+							imageWidth="30.7rem"
 							renderLink={renderLink}
 							fill="cover"
 							textAlign="left"

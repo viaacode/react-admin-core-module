@@ -1,4 +1,5 @@
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { Idp } from './modules';
 
 export const mockUserAvo: Avo.User.User = {
@@ -26,6 +27,7 @@ export const mockUserAvo: Avo.User.User = {
 			name: 'meemoo - Het Archief voor Onderwijs',
 			or_id: 'OR-h41jm1d',
 		} as any,
+		loms: [],
 		user: undefined,
 		userGroupIds: ['1'] as any,
 		permissions: [
@@ -117,9 +119,9 @@ export const mockUserAvo: Avo.User.User = {
 			PermissionName.REQUIRED_SUBJECTS_ON_PROFILE_PAGE,
 			PermissionName.VIEW_NEWSLETTERS_PAGE,
 			PermissionName.VIEW_NOTIFICATIONS_PAGE,
-			PermissionName.EDIT_COLLECTION_LABELS,
+			PermissionName.EDIT_COLLECTION_QUALITY_LABELS,
 			PermissionName.EDIT_COLLECTION_AUTHOR,
-			PermissionName.EDIT_BUNDLE_LABELS,
+			PermissionName.EDIT_BUNDLE_QUALITY_LABELS,
 			PermissionName.EDIT_BUNDLE_AUTHOR,
 			PermissionName.ADD_ITEM_TO_COLLECTION_BY_PID,
 			PermissionName.ADD_COLLECTION_TO_BUNDLE_BY_ID,
@@ -165,6 +167,7 @@ export const mockUserAvo: Avo.User.User = {
 	last_access_at: '2022-11-28T14:14:44.713+00:00',
 	external_uid: null,
 	role: { label: 'Beheerder', name: 'admin' } as any,
+	role_id: 1,
 	uid: '517aec71-cf0e-4e08-99d1-8e7e042923f7',
 	updated_at: '2022-11-28T08:23:35.658+00:00',
 	mail: 'bert.verhelst@studiohyperdrive.be',

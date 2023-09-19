@@ -1,28 +1,14 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Put,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Put } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { groupBy, intersection } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import {
-	CreateNavigationDto,
-	UpdateNavigationDto,
-} from '../dto/navigations.dto';
+import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import {
-	DeleteResponse,
-	SpecialPermissionGroups,
-} from '../../shared/types/types';
+import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { NavigationItem } from '../navigations.types';
 
@@ -48,10 +34,9 @@ export class AdminNavigationsController {
 	})
 	@Get('items')
 	public async getAllNavigationElements(
-		@SessionUser() user: SessionUserEntity,
+		@SessionUser() user: SessionUserEntity
 	): Promise<Record<string, NavigationItem[]>> {
-		const allNavigationItems =
-			await this.adminNavigationsService.findAllNavigationBarItems();
+		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems();
 
 		// filter based on logged in / logged out
 		const allowedUserGroups = user.getGroupId()
@@ -65,7 +50,7 @@ export class AdminNavigationsController {
 				if (
 					intersection(
 						allowedUserGroups.map((groupId) => String(groupId)),
-						navigationItem.userGroupIds.map((groupId) => String(groupId)),
+						navigationItem.userGroupIds.map((groupId) => String(groupId))
 					).length
 				) {
 					// The logged-in user has at least one user group that is required to view the nav item
@@ -83,11 +68,9 @@ export class AdminNavigationsController {
 	@Put('items')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async createNavigationElement(
-		@Body() createNavigationDto: CreateNavigationDto,
+		@Body() createNavigationDto: CreateNavigationDto
 	): Promise<NavigationItem> {
-		return await this.adminNavigationsService.insertElement(
-			createNavigationDto,
-		);
+		return await this.adminNavigationsService.insertElement(createNavigationDto);
 	}
 
 	@ApiOperation({
@@ -97,23 +80,17 @@ export class AdminNavigationsController {
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async updateNavigationElement(
 		@Param('id') id: string,
-		@Body() updateNavigationDto: UpdateNavigationDto,
+		@Body() updateNavigationDto: UpdateNavigationDto
 	): Promise<NavigationItem> {
-		return await this.adminNavigationsService.updateElement(
-			id,
-			updateNavigationDto,
-		);
+		return await this.adminNavigationsService.updateElement(id, updateNavigationDto);
 	}
 
 	@ApiOperation({
-		description:
-			'Remove a navigation element. Also deleting it from its navigation bar',
+		description: 'Remove a navigation element. Also deleting it from its navigation bar',
 	})
 	@Delete('items/:id')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
-	public async deleteNavigationElement(
-		@Param('id') id: string,
-	): Promise<DeleteResponse> {
+	public async deleteNavigationElement(@Param('id') id: string): Promise<DeleteResponse> {
 		return this.adminNavigationsService.deleteElement(id);
 	}
 
@@ -122,9 +99,7 @@ export class AdminNavigationsController {
 	})
 	@Get('items/:id')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
-	public async getNavigationElementById(
-		@Param('id') id: string,
-	): Promise<NavigationItem> {
+	public async getNavigationElementById(@Param('id') id: string): Promise<NavigationItem> {
 		return await this.adminNavigationsService.findElementById(id);
 	}
 
@@ -134,10 +109,8 @@ export class AdminNavigationsController {
 	@Get(':placement')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarItemsByPlacement(
-		@Param('placement') placement: string,
+		@Param('placement') placement: string
 	): Promise<NavigationItem[]> {
-		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
-			placement,
-		);
+		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(placement);
 	}
 }

@@ -9,33 +9,26 @@ export enum GraphQlSortDirections {
 	desc = 'desc',
 }
 
-const DEFAULT_NULL_ORDER: Record<
-	Avo.Search.OrderDirection,
-	GraphQlSortDirections
-> = {
+const DEFAULT_NULL_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
 	asc: GraphQlSortDirections.asc_nulls_last,
 	desc: GraphQlSortDirections.desc_nulls_first,
 };
 
 // Reverse order so asc sorts [true false null], and desc sorts [null false true]
-const BOOLEAN_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> =
-	{
-		asc: GraphQlSortDirections.desc_nulls_last,
-		desc: GraphQlSortDirections.asc_nulls_first,
-	};
+const BOOLEAN_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
+	asc: GraphQlSortDirections.desc_nulls_last,
+	desc: GraphQlSortDirections.asc_nulls_first,
+};
 
 // temp_access edge case
-const BOOLEAN_NULLS_LAST_ORDER: Record<
-	Avo.Search.OrderDirection,
-	GraphQlSortDirections
-> = {
+const BOOLEAN_NULLS_LAST_ORDER: Record<Avo.Search.OrderDirection, GraphQlSortDirections> = {
 	asc: GraphQlSortDirections.desc_nulls_last,
 	desc: GraphQlSortDirections.asc_nulls_last,
 };
 
 export const getGqlSortDirection = (
 	order: Avo.Search.OrderDirection,
-	tableColumnDataType: string,
+	tableColumnDataType: string
 ): GraphQlSortDirections => {
 	switch (tableColumnDataType) {
 		case 'string':
@@ -57,17 +50,13 @@ export const getOrderObject = (
 	tableColumnDataType: string,
 	columns: Partial<{
 		[columnName: string]: (order: Avo.Search.OrderDirection) => any;
-	}>,
+	}>
 ): Record<string, GraphQlSortDirections>[] => {
-	const getOrderFunc = columns[sortColumn] as
-		| ((order: GraphQlSortDirections) => any)
-		| undefined;
+	const getOrderFunc = columns[sortColumn] as ((order: GraphQlSortDirections) => any) | undefined;
 
 	if (getOrderFunc) {
 		return [getOrderFunc(getGqlSortDirection(sortOrder, tableColumnDataType))];
 	}
 
-	return [
-		{ [sortColumn]: getGqlSortDirection(sortOrder, tableColumnDataType) },
-	];
+	return [{ [sortColumn]: getGqlSortDirection(sortOrder, tableColumnDataType) }];
 };

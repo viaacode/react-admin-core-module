@@ -1,12 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-	IsArray,
-	IsEnum,
-	IsNumber,
-	IsOptional,
-	IsString,
-} from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ContentPickerTypesEnum, NavigationItem } from '../navigations.types';
 
 export class CreateNavigationDto implements Partial<NavigationItem> {
@@ -47,14 +41,12 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		required: false,
 		enum: ContentPickerTypesEnum,
 		description: `The content_type for this item. Options are: ${Object.values(
-			ContentPickerTypesEnum,
+			ContentPickerTypesEnum
 		).join(', ')}`,
 	})
 	@IsOptional()
 	@IsEnum(ContentPickerTypesEnum, {
-		message: `content_type must be one of: ${Object.values(
-			ContentPickerTypesEnum,
-		).join(', ')}`,
+		message: `content_type must be one of: ${Object.values(ContentPickerTypesEnum).join(', ')}`,
 	})
 	contentType?: ContentPickerTypesEnum;
 
@@ -78,8 +70,7 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 	@Type(() => Number)
 	@ApiProperty({
 		type: Number,
-		description:
-			'The position of this navigation item. Items are sorted by position.',
+		description: 'The position of this navigation item. Items are sorted by position.',
 	})
 	position: number;
 
@@ -138,14 +129,12 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		required: false,
 		enum: ContentPickerTypesEnum,
 		description: `The content_type for this item. Options are: ${Object.values(
-			ContentPickerTypesEnum,
+			ContentPickerTypesEnum
 		).join(', ')}`,
 	})
 	@IsOptional()
 	@IsEnum(ContentPickerTypesEnum, {
-		message: `content_type must be one of: ${Object.values(
-			ContentPickerTypesEnum,
-		).join(', ')}`,
+		message: `content_type must be one of: ${Object.values(ContentPickerTypesEnum).join(', ')}`,
 	})
 	contentType?: ContentPickerTypesEnum;
 
@@ -169,8 +158,7 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 	@Type(() => Number)
 	@ApiProperty({
 		type: Number,
-		description:
-			'The position of this navigation item. Items are sorted by position.',
+		description: 'The position of this navigation item. Items are sorted by position.',
 	})
 	position: number;
 

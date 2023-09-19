@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
@@ -70,6 +70,7 @@ export class ContentPageLabelService {
 				body: JSON.stringify({
 					label: contentPageLabel.label,
 					content_type: contentPageLabel.content_type,
+					link_to: contentPageLabel.link_to,
 				}),
 			});
 		} catch (err) {
@@ -85,7 +86,12 @@ export class ContentPageLabelService {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'PATCH',
-				body: JSON.stringify(contentPageLabelInfo),
+				body: JSON.stringify({
+					id: contentPageLabelInfo.id,
+					label: contentPageLabelInfo.label,
+					content_type: contentPageLabelInfo.content_type,
+					link_to: contentPageLabelInfo.link_to,
+				}),
 			});
 		} catch (err) {
 			throw new CustomError('Failed to update content page label in the database', err, {

@@ -1,8 +1,8 @@
 import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import { ReactNode } from 'react';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 import { APP_PATH } from '../consts/routes.consts';
 
@@ -133,7 +133,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			resolvedTarget = LinkTarget.Blank;
 		}
 
-		switch (type as ContentPickerType) {
+		switch (type as Avo.Core.ContentPickerType) {
 			case 'INTERNAL_LINK':
 			case 'CONTENT_PAGE':
 			case 'PROJECTS':

@@ -1,6 +1,6 @@
 import { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
-import { Color } from '../types/content-block.types';
+import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
 
 const transparentOption = () => ({
 	label: AdminConfigManager.getConfig().services.i18n.tText(
@@ -86,6 +86,24 @@ const zincOption = () => ({
 	),
 	value: Color.Zinc,
 });
+const skyBlueOption = () => ({
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'modules/content-page/const/content-block___sky-blauw'
+	),
+	value: Color.SkyBlue,
+});
+const meemooLogoOption = () => ({
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'react-admin/modules/content-page/const/get-color-options___meemoo-logo'
+	),
+	value: CustomBackground.MeemooLogo,
+});
+const blackWhiteGradientOption = () => ({
+	label: AdminConfigManager.getConfig().services.i18n.tText(
+		'modules/content-page/const/content-block___overgang-zwart-wit'
+	),
+	value: GradientColor.BlackWhite,
+});
 
 //
 export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
@@ -100,13 +118,18 @@ export const GET_BACKGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	yellowOption(),
 ];
 
-export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
+export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
+	Color | GradientColor | CustomBackground
+>[] = () => [
 	transparentOption(),
 	whiteOption(),
 	oceanGreenOption(),
 	seaGreenOption(),
 	platinumOption(),
 	blackOption(),
+	skyBlueOption(),
+	meemooLogoOption(),
+	blackWhiteGradientOption(),
 ];
 
 export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
@@ -118,7 +141,11 @@ export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = ()
 	yellowOption(),
 ];
 
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => Color[] = () => [
+export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (
+	| Color
+	| GradientColor
+	| CustomBackground
+)[] = () => [
 	Color.SoftBlue,
 	Color.NightBlue,
 	Color.Teal,

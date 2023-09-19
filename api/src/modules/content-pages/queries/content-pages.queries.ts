@@ -142,14 +142,10 @@ export type ContentPageQueryTypes = {
 		| GetContentLabelsByContentTypeQueryHetArchief;
 	GetContentPagesQueryAvo: GetContentPagesQueryAvo;
 	GetContentPagesQueryHetArchief: GetContentPagesQueryHetArchief;
-	GetContentPagesQuery:
-		| GetContentPagesQueryAvo
-		| GetContentPagesQueryHetArchief;
+	GetContentPagesQuery: GetContentPagesQueryAvo | GetContentPagesQueryHetArchief;
 	GetContentTypesQueryAvo: GetContentTypesQueryAvo;
 	GetContentTypesQueryHetArchief: GetContentTypesQueryHetArchief;
-	GetContentTypesQuery:
-		| GetContentTypesQueryAvo
-		| GetContentTypesQueryHetArchief;
+	GetContentTypesQuery: GetContentTypesQueryAvo | GetContentTypesQueryHetArchief;
 	GetPermissionsFromContentPageByPathQueryAvo: GetPermissionsFromContentPageByPathQueryAvo;
 	GetPermissionsFromContentPageByPathQueryHetArchief: GetPermissionsFromContentPageByPathQueryHetArchief;
 	GetPermissionsFromContentPageByPathQuery:
@@ -227,9 +223,7 @@ export type ContentPageQueryTypes = {
 		| InsertContentBlocksMutationHetArchief;
 	InsertContentMutationAvo: InsertContentMutationAvo;
 	InsertContentMutationHetArchief: InsertContentMutationHetArchief;
-	InsertContentMutation:
-		| InsertContentMutationAvo
-		| InsertContentMutationHetArchief;
+	InsertContentMutation: InsertContentMutationAvo | InsertContentMutationHetArchief;
 	InsertContentLabelLinksMutationAvo: InsertContentLabelLinksMutationAvo;
 	InsertContentLabelLinksMutationHetArchief: InsertContentLabelLinksMutationHetArchief;
 	InsertContentLabelLinksMutation:
@@ -237,9 +231,7 @@ export type ContentPageQueryTypes = {
 		| InsertContentLabelLinksMutationHetArchief;
 	SoftDeleteContentMutationAvo: SoftDeleteContentMutationAvo;
 	SoftDeleteContentMutationHetArchief: SoftDeleteContentMutationHetArchief;
-	SoftDeleteContentMutation:
-		| SoftDeleteContentMutationAvo
-		| SoftDeleteContentMutationHetArchief;
+	SoftDeleteContentMutation: SoftDeleteContentMutationAvo | SoftDeleteContentMutationHetArchief;
 	UpdateContentBlockMutationAvo: UpdateContentBlockMutationAvo;
 	UpdateContentBlockMutationHetArchief: UpdateContentBlockMutationHetArchief;
 	UpdateContentBlockMutation:
@@ -247,9 +239,7 @@ export type ContentPageQueryTypes = {
 		| UpdateContentBlockMutationHetArchief;
 	UpdateContentByIdMutationAvo: UpdateContentByIdMutationAvo;
 	UpdateContentByIdMutationHetArchief: UpdateContentByIdMutationHetArchief;
-	UpdateContentByIdMutation:
-		| UpdateContentByIdMutationAvo
-		| UpdateContentByIdMutationHetArchief;
+	UpdateContentByIdMutation: UpdateContentByIdMutationAvo | UpdateContentByIdMutationHetArchief;
 	DeleteContentBlockMutationVariablesAvo: DeleteContentBlockMutationVariablesAvo;
 	DeleteContentBlockMutationVariablesHetArchief: DeleteContentBlockMutationVariablesHetArchief;
 	DeleteContentBlockMutationVariables:
@@ -292,14 +282,10 @@ export type ContentPageQueryTypes = {
 		| UpdateContentByIdMutationVariablesHetArchief;
 	GetContentByIdsQueryAvo: GetContentByIdsQueryAvo;
 	GetContentByIdsQueryHetArchief: GetContentByIdsQueryHetArchief;
-	GetContentByIdsQuery:
-		| GetContentByIdsQueryAvo
-		| GetContentByIdsQueryHetArchief;
+	GetContentByIdsQuery: GetContentByIdsQueryAvo | GetContentByIdsQueryHetArchief;
 	GetContentPageByPathQueryAvo: GetContentPageByPathQueryAvo;
 	GetContentPageByPathQueryHetArchief: GetContentPageByPathQueryHetArchief;
-	GetContentPageByPathQuery:
-		| GetContentPageByPathQueryAvo
-		| GetContentPageByPathQueryHetArchief;
+	GetContentPageByPathQuery: GetContentPageByPathQueryAvo | GetContentPageByPathQueryHetArchief;
 	GetContentPagesWithBlocksQueryAvo: GetContentPagesWithBlocksQueryAvo;
 	GetContentPagesWithBlocksQueryHetArchief: GetContentPagesWithBlocksQueryHetArchief;
 	GetContentPagesWithBlocksQuery:
@@ -344,27 +330,27 @@ export type ContentPageQueryTypes = {
 };
 
 type ContentPageQueries = {
-	DeleteContentBlockDocument: TypedDocumentNode;
-	DeleteContentLabelLinksDocument: TypedDocumentNode;
-	GetContentByIdDocument: TypedDocumentNode;
-	GetContentLabelsByContentTypeDocument: TypedDocumentNode;
-	GetContentPagesDocument: TypedDocumentNode;
-	GetContentTypesDocument: TypedDocumentNode;
-	GetPermissionsFromContentPageByPathDocument: TypedDocumentNode;
-	GetPublicContentPagesByTitleDocument: TypedDocumentNode;
-	GetPublicProjectContentPagesByTitleDocument: TypedDocumentNode;
-	GetPublicProjectContentPagesDocument: TypedDocumentNode;
-	InsertContentBlocksDocument: TypedDocumentNode;
-	InsertContentDocument: TypedDocumentNode;
-	InsertContentLabelLinksDocument: TypedDocumentNode;
-	SoftDeleteContentDocument: TypedDocumentNode;
-	UpdateContentBlockDocument: TypedDocumentNode;
-	UpdateContentByIdDocument: TypedDocumentNode;
-	GetContentByIdsDocument: TypedDocumentNode;
-	GetContentPageByPathDocument: TypedDocumentNode;
-	GetContentPagesWithBlocksDocument: TypedDocumentNode;
-	GetPublicContentPagesDocument: TypedDocumentNode;
-	UpdateContentPagePublishDatesDocument: TypedDocumentNode;
+	DeleteContentBlockDocument: TypedDocumentNode<any, any>;
+	DeleteContentLabelLinksDocument: TypedDocumentNode<any, any>;
+	GetContentByIdDocument: TypedDocumentNode<any, any>;
+	GetContentLabelsByContentTypeDocument: TypedDocumentNode<any, any>;
+	GetContentPagesDocument: TypedDocumentNode<any, any>;
+	GetContentTypesDocument: TypedDocumentNode<any, any>;
+	GetPermissionsFromContentPageByPathDocument: TypedDocumentNode<any, any>;
+	GetPublicContentPagesByTitleDocument: TypedDocumentNode<any, any>;
+	GetPublicProjectContentPagesByTitleDocument: TypedDocumentNode<any, any>;
+	GetPublicProjectContentPagesDocument: TypedDocumentNode<any, any>;
+	InsertContentBlocksDocument: TypedDocumentNode<any, any>;
+	InsertContentDocument: TypedDocumentNode<any, any>;
+	InsertContentLabelLinksDocument: TypedDocumentNode<any, any>;
+	SoftDeleteContentDocument: TypedDocumentNode<any, any>;
+	UpdateContentBlockDocument: TypedDocumentNode<any, any>;
+	UpdateContentByIdDocument: TypedDocumentNode<any, any>;
+	GetContentByIdsDocument: TypedDocumentNode<any, any>;
+	GetContentPageByPathDocument: TypedDocumentNode<any, any>;
+	GetContentPagesWithBlocksDocument: TypedDocumentNode<any, any>;
+	GetPublicContentPagesDocument: TypedDocumentNode<any, any>;
+	UpdateContentPagePublishDatesDocument: TypedDocumentNode<any, any>;
 };
 
 export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
@@ -372,18 +358,13 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentAvo,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentAvo,
 		GetContentByIdDocument: GetContentByIdDocumentAvo,
-		GetContentLabelsByContentTypeDocument:
-			GetContentLabelsByContentTypeDocumentAvo,
+		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentAvo,
 		GetContentPagesDocument: GetContentPagesDocumentAvo,
 		GetContentTypesDocument: GetContentTypesDocumentAvo,
-		GetPermissionsFromContentPageByPathDocument:
-			GetPermissionsFromContentPageByPathDocumentAvo,
-		GetPublicContentPagesByTitleDocument:
-			GetPublicContentPagesByTitleDocumentAvo,
-		GetPublicProjectContentPagesByTitleDocument:
-			GetPublicProjectContentPagesByTitleDocumentAvo,
-		GetPublicProjectContentPagesDocument:
-			GetPublicProjectContentPagesDocumentAvo,
+		GetPermissionsFromContentPageByPathDocument: GetPermissionsFromContentPageByPathDocumentAvo,
+		GetPublicContentPagesByTitleDocument: GetPublicContentPagesByTitleDocumentAvo,
+		GetPublicProjectContentPagesByTitleDocument: GetPublicProjectContentPagesByTitleDocumentAvo,
+		GetPublicProjectContentPagesDocument: GetPublicProjectContentPagesDocumentAvo,
 		InsertContentBlocksDocument: InsertContentBlocksDocumentAvo,
 		InsertContentDocument: InsertContentDocumentAvo,
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentAvo,
@@ -394,25 +375,21 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPageByPathDocument: GetContentPageByPathDocumentAvo,
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
-		UpdateContentPagePublishDatesDocument:
-			UpdateContentPagePublishDatesDocumentAvo,
+		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
 		DeleteContentLabelLinksDocument: DeleteContentLabelLinksDocumentHetArchief,
 		GetContentByIdDocument: GetContentByIdDocumentHetArchief,
-		GetContentLabelsByContentTypeDocument:
-			GetContentLabelsByContentTypeDocumentHetArchief,
+		GetContentLabelsByContentTypeDocument: GetContentLabelsByContentTypeDocumentHetArchief,
 		GetContentPagesDocument: GetContentPagesDocumentHetArchief,
 		GetContentTypesDocument: GetContentTypesDocumentHetArchief,
 		GetPermissionsFromContentPageByPathDocument:
 			GetPermissionsFromContentPageByPathDocumentHetArchief,
-		GetPublicContentPagesByTitleDocument:
-			GetPublicContentPagesByTitleDocumentHetArchief,
+		GetPublicContentPagesByTitleDocument: GetPublicContentPagesByTitleDocumentHetArchief,
 		GetPublicProjectContentPagesByTitleDocument:
 			GetPublicProjectContentPagesByTitleDocumentHetArchief,
-		GetPublicProjectContentPagesDocument:
-			GetPublicProjectContentPagesDocumentHetArchief,
+		GetPublicProjectContentPagesDocument: GetPublicProjectContentPagesDocumentHetArchief,
 		InsertContentBlocksDocument: InsertContentBlocksDocumentHetArchief,
 		InsertContentDocument: InsertContentDocumentHetArchief,
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentHetArchief,
@@ -421,10 +398,8 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		UpdateContentByIdDocument: UpdateContentByIdDocumentHetArchief,
 		GetContentByIdsDocument: GetContentByIdsDocumentHetArchief,
 		GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
-		GetContentPagesWithBlocksDocument:
-			GetContentPagesWithBlocksDocumentHetArchief,
+		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentHetArchief,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
-		UpdateContentPagePublishDatesDocument:
-			UpdateContentPagePublishDatesDocumentHetArchief,
+		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentHetArchief,
 	},
 };

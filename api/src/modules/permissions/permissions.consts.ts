@@ -16,7 +16,7 @@ export type PermissionQueryTypes = {
 };
 
 type PermissionsQueries = {
-	GetPermissionsDocument: TypedDocumentNode;
+	GetPermissionsDocument: TypedDocumentNode<any, any>;
 };
 
 export const PERMISSIONS_QUERIES: Record<DatabaseType, PermissionsQueries> = {

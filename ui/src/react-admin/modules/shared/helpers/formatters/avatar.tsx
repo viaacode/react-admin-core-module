@@ -1,6 +1,6 @@
 import { Avatar, AvatarProps } from '@viaa/avo2-components';
 import React, { ReactNode } from 'react';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 export const getInitialChar = (value: string | undefined | null): string => (value ? value[0] : '');
 

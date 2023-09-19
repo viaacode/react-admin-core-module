@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "2.1.2",
+  "version": "2.3.22",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -33,18 +33,19 @@
     "find-circular-dependencies": "npx madge --circular --extensions ts ./"
   },
   "dependencies": {
-    "@nestjs/common": "^9.1.4",
-    "@nestjs/config": "^2.2.0",
-    "@nestjs/core": "^9.1.4",
-    "@nestjs/platform-express": "^9.1.4",
-    "@nestjs/schedule": "^2.1.0",
-    "@nestjs/swagger": "^6.1.2",
+    "@nestjs/cache-manager": "^2.1.0",
+    "@nestjs/common": "^9.4.3",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/core": "^9.4.3",
+    "@nestjs/platform-express": "^9.4.3",
+    "@nestjs/schedule": "^3.0.1",
+    "@nestjs/swagger": "^7.1.1",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@viaa/avo2-types": "2.48.4",
+    "@viaa/avo2-types": "2.48.40",
     "app-root-path": "3.0.0",
     "aws-sdk": "2.1097.0",
     "blend-promise-utils": "^1.28.0",
-    "cache-manager": "^3.6.0",
+    "cache-manager": "5.2.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "connect-redis": "^6.0.0",
@@ -60,6 +61,7 @@
     "lodash": "^4.17.21",
     "nock": "^13.2.9",
     "node-cron": "^3.0.0",
+    "multer": "^1.4.4",
     "query-string": "^7.1.0",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
@@ -76,19 +78,19 @@
     "@graphql-codegen/typed-document-node": "^2.3.12",
     "@graphql-codegen/typescript-operations": "^2.5.12",
     "@graphql-typed-document-node/core": "^3.1.1",
-    "@nestjs/cli": "^9.0.0",
-    "@nestjs/schematics": "^9.0.0",
-    "@nestjs/swagger": "^6.1.2",
-    "@nestjs/testing": "^9.0.0",
+    "@nestjs/cli": "^9.5.0",
+    "@nestjs/schematics": "^9.2.0",
+    "@nestjs/swagger": "^7.1.1",
+    "@nestjs/testing": "^9.4.3",
     "@types/express": "^4.17.13",
     "@types/jest": "28.1.8",
     "@types/joi": "^17.2.3",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^16.0.0",
+    "@types/node": "^20.4.0",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "bump-package-versions": "^1.0.2",
+    "bump-package-versions": "^1.0.6",
     "cross-env": "^7.0.3",
     "dotenv-cli": "^7.2.1",
     "eslint": "^8.0.1",
@@ -103,26 +105,10 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.7.4"
+    "typescript": "^5.2.2"
   },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  },
-  "resolutions": {
+  "overrides": {
+    "typescript": "^5.2.2",
     "graphql": "16.6.0"
   }
 }

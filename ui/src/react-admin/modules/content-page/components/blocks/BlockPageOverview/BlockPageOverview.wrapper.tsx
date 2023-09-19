@@ -1,7 +1,7 @@
 import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, isNumber, isString } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import { cloneDeep, compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
+import { FunctionComponent, useEffect } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
 import {
 	ContentItemStyle,
@@ -104,6 +104,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		data: pagesAndLabels,
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
+		isInitialLoading,
 	} = useGetContentPagesOverview(
 		{
 			withBlocks:
@@ -130,6 +131,34 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	const pages = pagesAndLabels?.items;
 	const pageCount = pagesAndLabels?.pages;
 	const labelPageCounts = pagesAndLabels?.labelCounts;
+
+	useEffect(() => {
+		if (!isInitialLoading) {
+			const { label, item } = queryParamsState;
+
+			if (isNil(label) && isNil(item)) {
+				return;
+			}
+
+			const selector =
+				!isNil(label) && !isNil(item)
+					? '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed) .c-content-page-overview-block__accordion--second-level:not(.c-accordion--closed)'
+					: '.c-content-page-overview-block__accordion--first-level:not(.c-accordion--closed)';
+
+			setTimeout(() => {
+				const $el = document.querySelector(selector);
+				$el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+			}, 100);
+		}
+		// We only want to trigger a scroll down when the page loads, not when the query params change when a user clicks another page
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isInitialLoading]);
+
+	// ARC-1877: fix queryparams state on initial load was an old value (or undefined)
+	useEffect(() => {
+		setQueryParamsState(queryParamsState);
+		// eslint-disable-next-line
+	}, []);
 
 	const handleCurrentPageChanged = (pageIndex: number) => {
 		setQueryParamsState((oldQueryParamState) => {
@@ -163,8 +192,16 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	};
 
 	const getLabelsWithContent = () => {
-		return (labelObjs || []).filter(
+		const labelsWithAtLeastOnePage = (labelObjs || []).filter(
 			(labelObj: LabelObj) => (labelPageCounts || {})[labelObj.id] > 0
+		);
+		// Sort labels in the order they were entered in the admin-core content page editor:
+		// https://meemoo.atlassian.net/browse/ARC-1443?focusedCommentId=40802
+		const labelIds = (contentTypeAndTabs.selectedLabels || []).map((labelId) =>
+			String(labelId)
+		);
+		return sortBy(labelsWithAtLeastOnePage, (labelObj) =>
+			labelIds.indexOf(String(labelObj.id))
 		);
 	};
 

@@ -2,13 +2,14 @@ import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { compact, flatten } from 'lodash';
 import { DataService } from '../data';
+import { AdminOrganisationsService, Organisation } from '../organisations';
 import {
-	BulkAddSubjectsToProfilesDocument,
-	BulkAddSubjectsToProfilesMutation,
-	BulkAddSubjectsToProfilesMutationVariables,
-	BulkDeleteSubjectsFromProfilesDocument,
-	BulkDeleteSubjectsFromProfilesMutation,
-	BulkDeleteSubjectsFromProfilesMutationVariables,
+	BulkAddLomsToProfilesDocument,
+	BulkAddLomsToProfilesMutation,
+	BulkAddLomsToProfilesMutationVariables,
+	BulkDeleteLomsFromProfilesDocument,
+	BulkDeleteLomsFromProfilesMutation,
+	BulkDeleteLomsFromProfilesMutationVariables,
 	GetContentCountsForUsersDocument,
 	GetContentCountsForUsersQuery,
 	GetContentCountsForUsersQueryVariables,
@@ -40,6 +41,7 @@ import {
 export class UsersService {
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
+		protected adminOrganisationsService: AdminOrganisationsService
 	) {}
 
 	async getById(id: string): Promise<Avo.User.CommonUser> {
@@ -61,12 +63,12 @@ export class UsersService {
 
 			return convertUserInfoToCommonUser(
 				response.users_summary_view[0],
-				UserInfoType.UserInfoOverviewAvo,
+				UserInfoType.UserInfoOverviewAvo
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables: { id },
-				query: 'GET_USERS',
+				query: 'GetUserById',
 			});
 		}
 	}
@@ -77,7 +79,7 @@ export class UsersService {
 		sortColumn: UserOverviewTableCol,
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
-		where: any = {},
+		where: any = {}
 	): Promise<[Avo.User.CommonUser[], number]> {
 		let variables: any;
 		try {
@@ -89,6 +91,7 @@ export class UsersService {
 						_and: [...(where?._and || []), { is_deleted: { _eq: false } }],
 				  };
 
+			const query = USER_QUERIES[getDatabaseType()].GetUsersDocument;
 			variables = {
 				offset,
 				limit,
@@ -97,31 +100,32 @@ export class UsersService {
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
-					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT(),
+					GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT()
 				),
 			};
 
-			const response = await this.dataService.execute<
-				UserQueryTypes['GetUsersQuery']
-			>(USER_QUERIES[getDatabaseType()].GetUsersDocument, variables);
+			const response = await this.dataService.execute<UserQueryTypes['GetUsersQuery']>(
+				query,
+				variables
+			);
 
 			const avoResponse = response as UserQueryTypes['GetProfileNamesQueryAvo'];
-			const hetArchiefResponse =
-				response as UserQueryTypes['GetProfileNamesQueryHetArchief'];
+			const hetArchiefResponse = response as UserQueryTypes['GetProfileNamesQueryHetArchief'];
 
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||
 				hetArchiefResponse?.users_profile ||
 				[]) as UserInfoOverviewAvo[] | UserInfoOverviewHetArchief[];
+
 			const profiles: Avo.User.CommonUser[] = compact(
 				userProfileObjects.map((userInfo) => {
 					return convertUserInfoToCommonUser(
 						userInfo,
 						isAvo()
 							? UserInfoType.UserInfoOverviewAvo
-							: UserInfoType.UserInfoOverviewHetArchief,
+							: UserInfoType.UserInfoOverviewHetArchief
 					);
-				}),
+				})
 			);
 
 			const profileCount =
@@ -136,7 +140,7 @@ export class UsersService {
 			}
 
 			return [profiles as any[], profileCount];
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profiles from the database', err, {
 				variables,
 				query: 'GET_USERS',
@@ -144,9 +148,7 @@ export class UsersService {
 		}
 	}
 
-	async getNamesByProfileIds(
-		profileIds: string[],
-	): Promise<Partial<Avo.User.CommonUser>[]> {
+	async getNamesByProfileIds(profileIds: string[]): Promise<Partial<Avo.User.CommonUser>[]> {
 		try {
 			const response = await this.dataService.execute<
 				UserQueryTypes['GetProfileNamesQuery'],
@@ -158,32 +160,32 @@ export class UsersService {
 			/* istanbul ignore next */
 			if (isHetArchief()) {
 				return (
-					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])
-						?.users_profile || []
+					(response as UserQueryTypes['GetProfileNamesQueryHetArchief'])?.users_profile ||
+					[]
 				).map(
 					(
-						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0],
+						profileEntry: UserQueryTypes['GetProfileNamesQueryHetArchief']['users_profile'][0]
 					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
-					}),
+					})
 				);
 			} else {
 				return (
-					(response as UserQueryTypes['GetProfileNamesQueryAvo'])
-						?.users_summary_view || []
+					(response as UserQueryTypes['GetProfileNamesQueryAvo'])?.users_summary_view ||
+					[]
 				).map(
 					(
-						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0],
+						profileEntry: UserQueryTypes['GetProfileNamesQueryAvo']['users_summary_view'][0]
 					): Partial<Avo.User.CommonUser> => ({
 						profileId: profileEntry.profile_id,
 						fullName: profileEntry.full_name || undefined,
 						email: profileEntry.mail || undefined,
-					}),
+					})
 				);
 			}
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profile names from the database', err, {
 				profileIds,
 				query: 'GET_PROFILE_NAMES',
@@ -192,7 +194,7 @@ export class UsersService {
 	}
 
 	async getProfileIds(
-		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where'],
+		where?: UserQueryTypes['GetProfileIdsQueryVariables']['where']
 	): Promise<string[]> {
 		let variables: UserQueryTypes['GetProfileIdsQueryVariables'] | null = null;
 		try {
@@ -208,19 +210,18 @@ export class UsersService {
 				// avo
 				return compact(
 					(
-						(response as UserQueryTypes['GetProfileIdsQueryAvo'])
-							.users_summary_view || []
-					).map((user) => user?.profile_id),
+						(response as UserQueryTypes['GetProfileIdsQueryAvo']).users_summary_view ||
+						[]
+					).map((user) => user?.profile_id)
 				);
 			}
 			// archief
 			return compact(
 				(
-					(response as UserQueryTypes['GetProfileIdsQueryHetArchief'])
-						.users_profile || []
-				).map((user) => user?.id),
+					(response as UserQueryTypes['GetProfileIdsQueryHetArchief']).users_profile || []
+				).map((user) => user?.id)
 			);
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get profile ids from the database', err, {
 				variables,
 				query: 'GET_PROFILE_IDS',
@@ -240,18 +241,12 @@ export class UsersService {
 			>(GetDistinctBusinessCategoriesDocument);
 
 			return compact(
-				(response.users_profiles || []).map(
-					(profile) => profile.business_category,
-				),
+				(response.users_profiles || []).map((profile) => profile.business_category)
 			);
-		} catch (err) {
-			throw CustomError(
-				'Failed to get distinct business categories from profiles',
-				err,
-				{
-					query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
-				},
-			);
+		} catch (err: any) {
+			throw CustomError('Failed to get distinct business categories from profiles', err, {
+				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
+			});
 		}
 	}
 
@@ -270,28 +265,27 @@ export class UsersService {
 				).map((idp) => idp.name as Idp);
 			}
 
-			return (
-				(response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []
-			).map((idp) => idp.value as Idp);
-		} catch (err) {
+			return ((response as UserQueryTypes['GetIdpsQueryAvo']).users_idps || []).map(
+				(idp) => idp.value as Idp
+			);
+		} catch (err: any) {
 			throw CustomError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
 			});
 		}
 	}
 
-	async fetchPublicAndPrivateCounts(
-		profileIds: string[],
-	): Promise<DeleteContentCounts> {
+	async fetchPublicAndPrivateCounts(profileIds: string[]): Promise<DeleteContentCounts> {
 		if (isHetArchief()) {
 			console.info("fetching counts isn't supported for hetarchief");
 			return {
 				publicCollections: 0,
 				privateCollections: 0,
-				assignments: 0,
-				bookmarks: 0,
+				publicAssignments: 0,
+				privateAssignments: 0,
 				publicContentPages: 0,
 				privateContentPages: 0,
+				bookmarks: 0,
 			};
 		}
 
@@ -306,88 +300,74 @@ export class UsersService {
 			return {
 				publicCollections: response.publicCollections?.aggregate?.count || 0,
 				privateCollections: response.privateCollections?.aggregate?.count || 0,
-				assignments: response.assignments?.aggregate?.count || 0,
+				publicAssignments: response.publicAssignments?.aggregate?.count || 0,
+				privateAssignments: response.privateAssignments?.aggregate?.count || 0,
+				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
+				privateContentPages: response.privateContentPages?.aggregate?.count || 0,
 				bookmarks:
 					(response.collectionBookmarks?.aggregate?.count || 0) +
 					(response.itemBookmarks?.aggregate?.count || 0),
-				publicContentPages: response.publicContentPages?.aggregate?.count || 0,
-				privateContentPages:
-					response.privateContentPages?.aggregate?.count || 0,
 			};
-		} catch (err) {
-			throw CustomError(
-				'Failed to get content counts for users from the database',
-				err,
-				{
-					profileIds,
-					query: 'GET_CONTENT_COUNTS_FOR_USERS',
-				},
-			);
+		} catch (err: any) {
+			throw CustomError('Failed to get content counts for users from the database', err, {
+				profileIds,
+				query: 'GetContentCountsForUsers',
+			});
 		}
 	}
 
-	async bulkAddSubjectsToProfiles(
-		subjects: string[],
-		profileIds: string[],
-	): Promise<void> {
+	async bulkAddLomsToProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info(
-				"adding subjects to profiles isn't supported for hetarchief",
-			);
+			console.info("adding subjects to profiles isn't supported for hetarchief");
 			return;
 		}
 
 		try {
 			// First remove the subjects, so we can add them without duplicate conflicts
-			await this.bulkRemoveSubjectsFromProfiles(subjects, profileIds);
+			await this.bulkRemoveLomsFromProfiles(lomIds, profileIds);
 
 			// Add the subjects
 			await this.dataService.execute<
-				BulkAddSubjectsToProfilesMutation,
-				BulkAddSubjectsToProfilesMutationVariables
-			>(BulkAddSubjectsToProfilesDocument, {
-				subjects: flatten(
-					subjects.map((subject) =>
+				BulkAddLomsToProfilesMutation,
+				BulkAddLomsToProfilesMutationVariables
+			>(BulkAddLomsToProfilesDocument, {
+				loms: flatten(
+					lomIds.map((lomId) =>
 						profileIds.map((profileId) => ({
-							key: subject,
+							lom_id: lomId,
 							profile_id: profileId,
-						})),
-					),
+						}))
+					)
 				),
 			});
-		} catch (err) {
-			throw CustomError('Failed to bulk add subjects to profiles', err, {
-				subjects,
+		} catch (err: any) {
+			throw CustomError('Failed to bulk add loms to profiles', err, {
+				lomIds,
 				profileIds,
-				query: 'BULK_ADD_SUBJECTS_TO_PROFILES',
+				query: 'BulkAddLomsToProfiles',
 			});
 		}
 	}
 
-	async bulkRemoveSubjectsFromProfiles(
-		subjects: string[],
-		profileIds: string[],
-	): Promise<void> {
+	async bulkRemoveLomsFromProfiles(lomIds: string[], profileIds: string[]): Promise<void> {
 		if (isHetArchief()) {
-			console.info(
-				"removing subjects from profiles isn't supported for hetarchief",
-			);
+			console.info("removing loms from profiles isn't supported for hetarchief");
 			return;
 		}
 
 		try {
 			await this.dataService.execute<
-				BulkDeleteSubjectsFromProfilesMutation,
-				BulkDeleteSubjectsFromProfilesMutationVariables
-			>(BulkDeleteSubjectsFromProfilesDocument, {
-				subjects,
+				BulkDeleteLomsFromProfilesMutation,
+				BulkDeleteLomsFromProfilesMutationVariables
+			>(BulkDeleteLomsFromProfilesDocument, {
+				lomIds,
 				profileIds,
 			});
-		} catch (err) {
-			throw CustomError('Failed to bulk delete subjects from profiles', err, {
-				subjects,
+		} catch (err: any) {
+			throw CustomError('Failed to bulk delete loms from profiles', err, {
+				lomIds,
 				profileIds,
-				query: 'BULK_DELETE_SUBJECTS_FROM_PROFILES',
+				query: 'BulkDeleteLomsFromProfiles',
 			});
 		}
 	}

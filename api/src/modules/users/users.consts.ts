@@ -21,7 +21,7 @@ const tableColumnToDatabaseOrderObjectAvo: Partial<{
 		last_name_lower: order,
 	}),
 	fullName: (order: Avo.Search.OrderDirection) => ({
-		full_name: order
+		full_name: order,
 	}),
 	email: (order: Avo.Search.OrderDirection) => ({
 		mail: order,
@@ -78,7 +78,7 @@ const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
 		last_name: order,
 	}),
 	fullName: (order: Avo.Search.OrderDirection) => ({
-		full_name: order
+		full_name: order,
 	}),
 	email: (order: Avo.Search.OrderDirection) => ({
 		mail: order,

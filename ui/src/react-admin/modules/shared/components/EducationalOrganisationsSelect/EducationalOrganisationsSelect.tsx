@@ -1,5 +1,5 @@
 import { Alert, Select, Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
@@ -119,7 +119,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	const onSelectedOrganisationChanged = (orgLabel: string) => {
 		const selectedOrg = organisationsInCity.find(
-			(org: Avo.EducationOrganization.Organization) => org.label === orgLabel
+			(org: Avo.EducationOrganization.Organization) => org.organisationLabel === orgLabel
 		);
 		if (!selectedOrg) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -142,7 +142,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	const removeOrganisation = async (orgLabel: ReactText) => {
 		const newOrganizations = [...organisations];
-		remove(newOrganizations, (org) => org.label === orgLabel);
+		remove(newOrganizations, (org) => org.organisationLabel === orgLabel);
 		onChange(newOrganizations);
 	};
 
@@ -165,8 +165,8 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				disabled: true,
 			},
 			...organisationsInCity.map((org: Avo.EducationOrganization.Organization) => ({
-				label: org.label,
-				value: org.label,
+				label: org.organisationLabel,
+				value: org.organisationLabel,
 			})),
 		];
 	};

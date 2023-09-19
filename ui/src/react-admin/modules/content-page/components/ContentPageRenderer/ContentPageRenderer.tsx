@@ -1,21 +1,19 @@
-import { IconName } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
-import { AdminConfigManager } from '~core/config';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-
 import {
 	BlockClickHandler,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
+import './ContentPageRenderer.scss';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -152,25 +150,8 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		);
 	};
 
-	const renderError = () => {
-		return (
-			<ErrorView
-				icon={'alertTriangle' as IconName}
-				message={AdminConfigManager.getConfig().services.i18n.tHtml(
-					'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-				)}
-			>
-				<p>
-					{AdminConfigManager.getConfig().services.i18n.tHtml(
-						'content-page/views/content-page___het-laden-van-deze-content-pagina-is-mislukt'
-					)}
-				</p>
-			</ErrorView>
-		);
-	};
-
 	if (!props.contentPageInfo) {
-		return renderError();
+		return <CenteredSpinner />;
 	}
 	return renderContentPage();
 };

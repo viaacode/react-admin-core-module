@@ -26,8 +26,7 @@ describe('SiteVariablesService', () => {
 			],
 		}).compile();
 
-		siteVariablesService =
-			module.get<SiteVariablesService>(SiteVariablesService);
+		siteVariablesService = module.get<SiteVariablesService>(SiteVariablesService);
 	});
 
 	it('services should be defined', () => {
@@ -45,9 +44,9 @@ describe('SiteVariablesService', () => {
 				},
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-			const response = await siteVariablesService.getSiteVariable<
-				Record<string, string>
-			>('variable-name');
+			const response = await siteVariablesService.getSiteVariable<Record<string, string>>(
+				'variable-name'
+			);
 			expect(response.key).toEqual('value');
 		});
 	});
@@ -62,7 +61,7 @@ describe('SiteVariablesService', () => {
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const response = await siteVariablesService.updateSiteVariable(
 				'variable-name',
-				'new-value',
+				'new-value'
 			);
 			expect(response).toEqual({ affectedRows: 1 });
 		});

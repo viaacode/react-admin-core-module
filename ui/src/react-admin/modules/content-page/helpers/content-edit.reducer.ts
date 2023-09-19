@@ -2,7 +2,7 @@ import { RichEditorState } from '@meemoo/react-components';
 import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import { Reducer } from 'react';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import {
 	ContentBlockComponentsConfig,

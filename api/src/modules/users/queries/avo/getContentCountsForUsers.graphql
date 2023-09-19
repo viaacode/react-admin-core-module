@@ -1,0 +1,92 @@
+query getContentCountsForUsers($profileIds: [uuid!]!) {
+	publicCollections: app_collections_aggregate(
+		where: {
+			profile: { id: { _in: $profileIds } }
+			_or: [
+				{ is_public: { _eq: true } }
+				{ contributors: { profile_id: { _is_null: false } } }
+			]
+			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	privateCollections: app_collections_aggregate(
+		where: {
+			profile: { id: { _in: $profileIds } }
+			_and: [
+				{ is_public: { _eq: false } }
+				{ _not: { contributors: { profile_id: { _is_null: false } } } }
+			]
+			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	publicAssignments: app_assignments_v2_aggregate(
+		where: {
+			owner_profile_id: { _in: $profileIds }
+			is_deleted: { _eq: false }
+			_or: [
+				{ is_public: { _eq: true } }
+				{ contributors: { profile_id: { _is_null: false } } }
+			]
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	privateAssignments: app_assignments_v2_aggregate(
+		where: {
+			owner_profile_id: { _in: $profileIds }
+			is_deleted: { _eq: false }
+			_and: [
+				{ is_public: { _eq: false } }
+				{ _not: { contributors: { profile_id: { _is_null: false } } } }
+			]
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	publicContentPages: app_content_aggregate(
+		where: {
+			user_profile_id: { _in: $profileIds }
+			is_public: { _eq: true }
+			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	privateContentPages: app_content_aggregate(
+		where: {
+			user_profile_id: { _in: $profileIds }
+			is_public: { _eq: false }
+			is_deleted: { _eq: false }
+		}
+	) {
+		aggregate {
+			count
+		}
+	}
+	collectionBookmarks: app_collection_bookmarks_aggregate(
+		where: { profile_id: { _in: $profileIds } }
+	) {
+		aggregate {
+			count
+		}
+	}
+	itemBookmarks: app_item_bookmarks_aggregate(where: { profile_id: { _in: $profileIds } }) {
+		aggregate {
+			count
+		}
+	}
+}

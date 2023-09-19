@@ -1,10 +1,6 @@
 import { randomUUID } from 'crypto';
 
-import {
-	Injectable,
-	InternalServerErrorException,
-	Logger,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
@@ -40,8 +36,8 @@ export class DataService {
 	 * execute a (GraphQl) query
 	 */
 	public async execute<QueryType, QueryVariablesType = void>(
-		query: string | TypedDocumentNode,
-		variables?: QueryVariablesType,
+		query: string | TypedDocumentNode<any, any>,
+		variables?: QueryVariablesType
 	): Promise<QueryType> {
 		try {
 			const queryData = {
@@ -54,7 +50,7 @@ export class DataService {
 				this.logger.log(
 					`[ADMIN_CORE] ${id}, Executing graphql query: ${
 						queryData.query
-					}  ---  ${JSON.stringify(queryData.variables)}`,
+					}  ---  ${JSON.stringify(queryData.variables)}`
 				);
 			}
 			const data = await this.gotInstance.post<GraphQlResponse>({
@@ -63,15 +59,11 @@ export class DataService {
 			});
 			if (process.env.GRAPHQL_LOG_QUERIES === 'true') {
 				this.logger.log(
-					`[ADMIN_CORE] ${id}, Response from graphql query: ${JSON.stringify(
-						data,
-					)}`,
+					`[ADMIN_CORE] ${id}, Response from graphql query: ${JSON.stringify(data)}`
 				);
 			}
 			if (data.errors) {
-				this.logger.error(
-					`GraphQl query failed: ${JSON.stringify(data.errors)}`,
-				);
+				this.logger.error(`GraphQl query failed: ${JSON.stringify(data.errors)}`);
 				if (data.errors[0]?.extensions?.code === 'constraint-violation') {
 					throw new DuplicateKeyException({
 						message: data.errors[0].message,
@@ -81,7 +73,7 @@ export class DataService {
 				throw new InternalServerErrorException(data);
 			}
 			return data.data;
-		} catch (err) {
+		} catch (err: any) {
 			if (err instanceof DuplicateKeyException) {
 				throw err;
 			}
@@ -90,7 +82,7 @@ export class DataService {
 
 			throw new InternalServerErrorException(
 				null,
-				'Failed to get data from database, check the logs for more information.',
+				'Failed to get data from database, check the logs for more information.'
 			);
 		}
 	}

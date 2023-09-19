@@ -4,9 +4,7 @@ import { UserGroupsService } from '../services/user-groups.service';
 
 import { UserGroupsController } from './user-groups.controller';
 
-const mockUserGroupsService: Partial<
-	Record<keyof UserGroupsService, jest.SpyInstance>
-> = {
+const mockUserGroupsService: Partial<Record<keyof UserGroupsService, jest.SpyInstance>> = {
 	getUserGroups: jest.fn(),
 	updateUserGroups: jest.fn(),
 };
@@ -43,8 +41,7 @@ describe('UserGroupsController', () => {
 			],
 		}).compile();
 
-		userGroupsController =
-			module.get<UserGroupsController>(UserGroupsController);
+		userGroupsController = module.get<UserGroupsController>(UserGroupsController);
 	});
 
 	it('should be defined', () => {
@@ -53,9 +50,7 @@ describe('UserGroupsController', () => {
 
 	describe('getUserGroups', () => {
 		it('should return the userGroups', async () => {
-			mockUserGroupsService.getUserGroups.mockResolvedValueOnce(
-				mockUserGroupsResponse,
-			);
+			mockUserGroupsService.getUserGroups.mockResolvedValueOnce(mockUserGroupsResponse);
 
 			const permissions = await userGroupsController.getUserGroups();
 
@@ -66,7 +61,7 @@ describe('UserGroupsController', () => {
 	describe('updateUserGroups', () => {
 		it('should update userGroup permissions', async () => {
 			mockUserGroupsService.updateUserGroups.mockResolvedValueOnce(
-				mockUpdateUserGroupsResponse,
+				mockUpdateUserGroupsResponse
 			);
 
 			const updates = await userGroupsController.updateUserGroups({

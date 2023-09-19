@@ -17,7 +17,9 @@ import {
 	Color,
 	ContentBlockEditor,
 	ContentBlockField,
+	CustomBackground,
 	DefaultContentBlockState,
+	GradientColor,
 	PaddingFieldState,
 } from '../../types/content-block.types';
 
@@ -100,7 +102,7 @@ export const FOREGROUND_COLOR_FIELD = (
 
 export const BACKGROUND_COLOR_FIELD = (
 	label: string,
-	defaultValue: SelectOption<Color>
+	defaultValue: SelectOption<Color | GradientColor | CustomBackground>
 ): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.ColorSelect,

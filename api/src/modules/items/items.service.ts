@@ -1,5 +1,5 @@
 import { forwardRef, Inject } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { DataService } from '../data';
 
 import { CustomError } from '../shared/helpers/custom-error';
@@ -30,13 +30,9 @@ import {
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
-	public async fetchPublicItems(
-		limit: number,
-	): Promise<Avo.Item.Item[] | null> {
+	public async fetchPublicItems(limit: number): Promise<Avo.Item.Item[] | null> {
 		const response = await this.dataService.execute<
 			GetPublicItemsQuery,
 			GetPublicItemsQueryVariables
@@ -44,9 +40,7 @@ export class ItemsService {
 		return response.app_item_meta as Avo.Item.Item[] | null;
 	}
 
-	private async fetchItemById(
-		uuidOrExternalId: string,
-	): Promise<Partial<Avo.Item.Item>> {
+	private async fetchItemById(uuidOrExternalId: string): Promise<Partial<Avo.Item.Item>> {
 		try {
 			let response;
 			if (isUuid(uuidOrExternalId)) {
@@ -74,7 +68,7 @@ export class ItemsService {
 			}
 
 			return rawItem as unknown as Partial<Avo.Item.Item>;
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get the item by id from the database', err, {
 				uuidOrExternalId,
 			});
@@ -82,7 +76,7 @@ export class ItemsService {
 	}
 
 	public async fetchItemOrReplacement(
-		uuidOrExternalId: string,
+		uuidOrExternalId: string
 	): Promise<(Avo.Item.Item & { replacement_for?: string }) | null> {
 		try {
 			let item = await this.fetchItemById(uuidOrExternalId);
@@ -92,9 +86,7 @@ export class ItemsService {
 			if (replacedByItemUid) {
 				const replacementItem = await this.fetchItemById(replacedByItemUid);
 				(replacementItem as any).replacement_for = item.external_id;
-				item = replacementItem as
-					| (Avo.Item.Item & { replacement_for?: string })
-					| null;
+				item = replacementItem as (Avo.Item.Item & { replacement_for?: string }) | null;
 			}
 
 			// Return the depublish reason if the item has a depublish reason
@@ -107,24 +99,18 @@ export class ItemsService {
 			return (item || null) as unknown as
 				| (Avo.Item.Item & { replacement_for?: string })
 				| null;
-		} catch (err) {
-			throw CustomError(
-				'Failed to get item or replacement or depublish reason',
-				err,
-				{
-					uuidOrExternalId,
-				},
-			);
+		} catch (err: any) {
+			throw CustomError('Failed to get item or replacement or depublish reason', err, {
+				uuidOrExternalId,
+			});
 		}
 	}
 
 	public async fetchRelationsBySubject(
 		type: 'collection' | 'item',
 		subjectIds: string[],
-		relationType: Avo.Collection.RelationType,
-	): Promise<
-		Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]
-	> {
+		relationType: Avo.Collection.RelationType
+	): Promise<Avo.Collection.RelationEntry<Avo.Item.Item | Avo.Collection.Collection>[]> {
 		let variables: any = null;
 		const isCollection = type === 'collection';
 		try {
@@ -133,26 +119,24 @@ export class ItemsService {
 				...(subjectIds ? { subjectIds } : {}),
 			};
 			const response = await this.dataService.execute<
-				| FetchCollectionRelationsBySubjectsQuery
-				| FetchItemRelationsBySubjectsQuery,
+				FetchCollectionRelationsBySubjectsQuery | FetchItemRelationsBySubjectsQuery,
 				| FetchCollectionRelationsBySubjectsQueryVariables
 				| FetchItemRelationsBySubjectsQueryVariables
 			>(
 				isCollection
 					? FetchCollectionRelationsBySubjectsDocument
 					: FetchItemRelationsBySubjectsDocument,
-				variables,
+				variables
 			);
 			if (isCollection) {
 				return ((response as FetchCollectionRelationsBySubjectsQuery)
 					.app_collection_relations ||
 					[]) as Avo.Collection.RelationEntry<Avo.Collection.Collection>[];
 			} else {
-				return ((response as FetchItemRelationsBySubjectsQuery)
-					.app_item_relations ||
+				return ((response as FetchItemRelationsBySubjectsQuery).app_item_relations ||
 					[]) as Avo.Collection.RelationEntry<Avo.Item.Item>[];
 			}
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get relation from the database', err, {
 				variables,
 				query: isCollection
@@ -162,9 +146,7 @@ export class ItemsService {
 		}
 	}
 
-	public async fetchItemUuidByExternalId(
-		externalId: string,
-	): Promise<string | null> {
+	public async fetchItemUuidByExternalId(externalId: string): Promise<string | null> {
 		const response = await this.dataService.execute<
 			FetchItemUuidByExternalIdQuery,
 			FetchItemUuidByExternalIdQueryVariables
@@ -174,7 +156,7 @@ export class ItemsService {
 
 	public async fetchPublicItemsByTitleOrExternalId(
 		titleOrExternalId: string,
-		limit: number,
+		limit: number
 	): Promise<Avo.Item.Item[]> {
 		try {
 			const response = await this.dataService.execute<
@@ -193,7 +175,7 @@ export class ItemsService {
 			}
 
 			return items as Avo.Item.Item[];
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to fetch items by title or external id', err, {
 				titleOrExternalId,
 				limit,

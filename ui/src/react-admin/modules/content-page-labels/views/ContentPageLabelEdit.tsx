@@ -9,14 +9,13 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { Link } from '~shared/components/Link';
 import {
 	LoadingErrorLoadedComponent,
@@ -178,7 +177,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: 'error',
 				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-de-permissiegroep-is-mislukt'
+					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-pagina-label-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -239,12 +238,12 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 								>
 									<ContentPicker
 										allowedTypes={[
-											ContentPickerType.CONTENT_PAGE,
-											ContentPickerType.ITEM,
-											ContentPickerType.COLLECTION,
-											ContentPickerType.BUNDLE,
-											ContentPickerType.INTERNAL_LINK,
-											ContentPickerType.EXTERNAL_LINK,
+											'CONTENT_PAGE',
+											'ITEM',
+											'COLLECTION',
+											'BUNDLE',
+											'INTERNAL_LINK',
+											'EXTERNAL_LINK',
 										]}
 										onChange={(newLinkTo) =>
 											setContentPageLabelInfo({

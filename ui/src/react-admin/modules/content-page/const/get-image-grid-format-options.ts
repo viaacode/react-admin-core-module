@@ -5,6 +5,12 @@ import { BlockGridFormatOption } from '~modules/content-page/types/content-block
 export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOption>[] = () => [
 	{
 		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'react-admin/modules/content-page/const/get-image-grid-format-options___30-x-220'
+		),
+		value: 'flex3',
+	},
+	{
+		label: AdminConfigManager.getConfig().services.i18n.tText(
 			'admin/content-block/content-block___vierkant-klein-200-x-200'
 		),
 		value: 'squareSmall',
@@ -38,5 +44,11 @@ export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOp
 			'admin/content-block/content-block___400-x-150'
 		),
 		value: '400x150',
+	},
+	{
+		label: AdminConfigManager.getConfig().services.i18n.tText(
+			'admin/content-block/content-block___384-x-220'
+		),
+		value: '384x220',
 	},
 ];

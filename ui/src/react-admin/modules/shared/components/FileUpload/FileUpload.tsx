@@ -1,8 +1,9 @@
 import { Blankslate, Button, Flex, FlexItem, Icon, IconName, Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
-import { compact, isString } from 'lodash-es';
+import type { Avo } from '@viaa/avo2-types';
+import { compact, isString, noop } from 'lodash-es';
 import { parse } from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
+import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
@@ -26,6 +27,7 @@ export interface FileUploadProps {
 	showDeleteButton?: boolean;
 	disabled?: boolean;
 	onChange: (urls: string[]) => void;
+	onDeleteFile?: (url: string) => void;
 }
 
 const FileUpload: FunctionComponent<FileUploadProps> = ({
@@ -39,6 +41,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	showDeleteButton = true,
 	disabled = false,
 	onChange,
+	onDeleteFile = noop,
 }) => {
 	const { tHtml, tText } = useTranslation();
 
@@ -80,13 +83,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				setIsProcessing(true);
 				const uploadedUrls: string[] = [];
 				for (let i = 0; i < (allowMulti ? files.length : 1); i += 1) {
-					uploadedUrls.push(
-						await AdminConfigManager.getConfig().services.assetService.uploadFile(
-							files[i],
-							assetType,
-							ownerId
-						)
-					);
+					uploadedUrls.push(await AssetsService.uploadFile(files[i], assetType, ownerId));
 				}
 				onChange(allowMulti ? [...(urls || []), ...uploadedUrls] : uploadedUrls);
 			}
@@ -132,7 +129,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const newUrls = [...urls];
 				for (let i = newUrls.length - 1; i >= 0; i -= 1) {
 					if (newUrls[i] === url) {
-						await AdminConfigManager.getConfig().services.assetService.deleteFile(url);
+						onDeleteFile(url);
 						newUrls.splice(i, 1);
 					}
 				}

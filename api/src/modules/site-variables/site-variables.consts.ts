@@ -44,19 +44,17 @@ export type SiteVariableQueryTypes = {
 };
 
 type SiteVariableQueries = {
-	GetSiteVariableByNameDocument: TypedDocumentNode;
-	UpdateSiteVariableByNameDocument: TypedDocumentNode;
+	GetSiteVariableByNameDocument: TypedDocumentNode<any, any>;
+	UpdateSiteVariableByNameDocument: TypedDocumentNode<any, any>;
 };
 
-export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> =
-	{
-		[DatabaseType.avo]: {
-			GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentAvo,
-			UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentAvo,
-		},
-		[DatabaseType.hetArchief]: {
-			GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
-			UpdateSiteVariableByNameDocument:
-				UpdateSiteVariableByNameDocumentHetArchief,
-		},
-	};
+export const SITE_VARIABLE_QUERIES: Record<DatabaseType, SiteVariableQueries> = {
+	[DatabaseType.avo]: {
+		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentAvo,
+		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentAvo,
+	},
+	[DatabaseType.hetArchief]: {
+		GetSiteVariableByNameDocument: GetSiteVariableByNameDocumentHetArchief,
+		UpdateSiteVariableByNameDocument: UpdateSiteVariableByNameDocumentHetArchief,
+	},
+};

@@ -7,7 +7,7 @@ import {
 	IconName,
 	SpacerOption,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import {
 	ContentItemStyle,
@@ -18,15 +18,25 @@ import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';
 
+export type SimpleAlignOption = 'left' | 'right';
+
+export type BackgroundAlignOption =
+	| 'left-screen'
+	| 'left-inside-page'
+	| 'right-inside-page'
+	| 'right-screen';
+
 export type FillOption = 'cover' | 'contain' | 'auto';
 
 export type BlockGridFormatOption =
+	| 'flex3'
 	| 'squareSmall'
 	| 'squareLarge'
 	| '4:3'
 	| '2:1'
 	| '6:9'
-	| '400x150';
+	| '400x150'
+	| '384x220';
 
 export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
 
@@ -74,12 +84,25 @@ export enum Color {
 	AlertAccent = '#E9E994',
 	TealBright200 = '#CFE3E9',
 	BorderColor = '#3FB1D6',
-	InputBoxShadow = '#69C2dF',
-	Transparent = 'transparent',
-	Platinum = '#f8f8f8',
+	InputBoxShadow = '#69C2DF',
+	Transparent = 'TRANSPARENT',
+	Platinum = '#F8F8F8',
 	Neutral = '#727272',
-	Zinc = '#adadad',
+	Zinc = '#ADADAD',
+	SkyBlue = '#C3DDE6',
 }
+
+export enum GradientColor {
+	BlackWhite = 'linear-gradient(to top, #fff 0%, #fff calc(100% - 16rem), #000 calc(100% - 16rem), #000 100%)',
+}
+
+export enum CustomBackground {
+	MeemooLogo = '<MEEMOO_LOGO>',
+}
+
+export const ColorSelectGradientColors: Record<GradientColor, string> = {
+	[GradientColor.BlackWhite]: 'linear-gradient(to top, #fff 0%, #fff 50%, #000 50%, #000 100%)',
+};
 
 export interface PaddingFieldState {
 	top: SpacerOption;
@@ -127,6 +150,9 @@ export enum ContentBlockType {
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
 	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
+	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
+	MaintainersGrid = 'MAINTAINERS_GRID',
+	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
 }
 
 export enum ContentBlockEditor {
@@ -179,7 +205,7 @@ export interface ContentBlockFieldGroup {
 
 /* CONTENT BLOCK STATE */
 export interface DefaultContentBlockState {
-	backgroundColor: Color;
+	backgroundColor: Color | GradientColor | CustomBackground;
 	headerBackgroundColor?: Color; // css color string. eg: '#222' or 'black' or 'rgb(0, 0, 255)'
 	headerHeight?: string; // css height string. eg: '20px' or '15%'
 	padding: PaddingFieldState;
@@ -434,8 +460,9 @@ export interface TagsWithLinkBlockComponentState {
 }
 
 export interface ThreeClickableTilesBlockComponentState {
-	subtitle: string;
-	source: string;
+	title: string;
+	titleType: HeadingTypeOption;
+	image: string;
 	link?: ButtonAction;
 }
 
@@ -445,4 +472,36 @@ export interface CardWithoutDescriptionBlockComponentState {
 	style: CardWithoutDescriptionStyleOption;
 	textColor: string;
 	backgroundColor: string;
+}
+
+export interface ImageTextBackgroundBlockComponentState {
+	heading: string;
+	headingType: HeadingTypeOption;
+	content: string;
+	foregroundColor: Color;
+	backgroundColor: Color;
+	image?: string;
+	backgroundAlignment?: BackgroundAlignOption;
+	buttonAction?: ButtonAction;
+	buttonAltTitle?: string;
+	buttonLabel: string;
+	buttonType?: ButtonType;
+	buttonIcon?: IconName;
+	buttonIconAlignment?: SimpleAlignOption;
+}
+
+export interface MaintainersGridBlockComponentState {
+	title: string;
+	titleType: HeadingTypeOption;
+	subtitle: string;
+	buttonLabel?: string;
+	buttonAction?: ButtonAction;
+	visibleItems: number;
+	maintainers: { imageSrc?: string; linkAction?: ButtonAction }[];
+}
+
+export interface HetArchiefHeaderSearchBlockComponentState {
+	title: string;
+	subtitles: { label: string }[];
+	textBelowSearch?: string;
 }

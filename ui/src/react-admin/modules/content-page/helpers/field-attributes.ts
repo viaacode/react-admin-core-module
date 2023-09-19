@@ -1,9 +1,8 @@
 import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { RichTextEditorProps } from '@meemoo/react-components';
-import { debounce, get, isArray, isNil } from 'lodash-es';
+import { compact, debounce, get, isArray, isNil } from 'lodash-es';
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 
-import { PickerItem } from '../../shared/types/content-picker';
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 
@@ -70,9 +69,12 @@ export const generateFieldAttributes = (
 			const urlOrUrls: string[] | undefined = value;
 			return {
 				// If the component wants a single value, take the first image from the array, otherwise pass the array
-				onChange: (value: null | undefined | string[]) =>
-					onChange(field.editorProps.allowMulti || !value ? value : value[0]),
-				urls: Array.isArray(urlOrUrls) ? urlOrUrls : isNil(urlOrUrls) ? [] : [urlOrUrls],
+				onChange: (value: null | undefined | string[]) => {
+					onChange(field.editorProps.allowMulti || !value ? value : value[0]);
+				},
+				urls: compact(
+					Array.isArray(urlOrUrls) ? urlOrUrls : isNil(urlOrUrls) ? [] : [urlOrUrls]
+				),
 			};
 		}
 

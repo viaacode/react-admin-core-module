@@ -16,7 +16,7 @@ import {
 	Timepicker,
 } from '@meemoo/react-components';
 import { IPagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -489,7 +489,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			// Reset the form when the blade is closed
 			reset(getDefaultValues());
 		}
-	}, [activeAlert]);
+	}, [activeAlert, getDefaultValues, reset]);
 
 	const renderTitle = useMemo(() => {
 		return (
@@ -619,7 +619,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		);
 	}, [
 		control,
-		errors.userGroups?.message,
+		errors.userGroups,
 		form.userGroups,
 		handleChangeUserGroups,
 		tHtml,

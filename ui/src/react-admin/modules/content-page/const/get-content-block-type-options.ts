@@ -178,6 +178,24 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.CardsWithoutDescription,
 		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'admin/content-block/content-block___image-text-background'
+			),
+			value: ContentBlockType.ImageTextBackground,
+		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'react-admin/modules/content-page/const/get-content-block-type-options___aanbieders-grid'
+			),
+			value: ContentBlockType.MaintainersGrid,
+		},
+		{
+			label: AdminConfigManager.getConfig().services.i18n.tText(
+				'react-admin/modules/content-page/const/get-content-block-type-options___header-met-zoekveld'
+			),
+			value: ContentBlockType.HetArchiefHeaderSearch,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

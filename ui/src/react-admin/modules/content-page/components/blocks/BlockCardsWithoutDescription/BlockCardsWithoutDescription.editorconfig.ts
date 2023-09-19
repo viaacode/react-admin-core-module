@@ -93,6 +93,15 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
+			linkAction: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tegel-link'
+				),
+				editorType: ContentBlockEditor.ContentPicker,
+				editorProps: {
+					allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK'],
+				},
+			},
 		},
 	},
 	block: {

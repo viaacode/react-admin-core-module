@@ -20,17 +20,10 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(
-		@Query() queryParams: GetPlayableUrlDto,
-		@Req() request,
-	) {
-		if (
-			!queryParams.externalId &&
-			!queryParams.externalIds &&
-			!queryParams.browsePath
-		) {
+	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto, @Req() request) {
+		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
-				'Either query param externalId or browsePath is required to fetch a playable url',
+				'Either query param externalId or browsePath is required to fetch a playable url'
 			);
 		}
 		const referrer = request.header('Referer') || 'referer-not-defined';
@@ -40,28 +33,20 @@ export class PlayerTicketController {
 			return Promise.all(
 				queryParams.externalIds
 					.split(',')
-					.map((externalId) =>
-						this.getPlayableUrlByExternalId(externalId, referrer),
-					),
+					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer))
 			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(
-				queryParams.browsePath,
-				referrer,
-			);
+			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer);
 		}
 	}
 
 	/**
 	 * Gets a playable url for a given media item
 	 * https://viaadocumentation.atlassian.net/wiki/spaces/SI/pages/1063453019/Media+Service
-	 * @param externalId: external_id of the media item that you want to view
+	 * @param externalId external_id of the media item that you want to view
 	 * @param referrer
 	 */
-	public async getPlayableUrlByExternalId(
-		externalId: string,
-		referrer: string,
-	): Promise<string> {
+	public async getPlayableUrlByExternalId(externalId: string, referrer: string): Promise<string> {
 		try {
 			const browsePath = await this.playerTicketService.getEmbedUrl(externalId);
 			if (!browsePath) {
@@ -70,7 +55,7 @@ export class PlayerTicketController {
 				});
 			}
 			return this.getPlayableUrlFromBrowsePath(browsePath, referrer);
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,
@@ -82,29 +67,36 @@ export class PlayerTicketController {
 		}
 	}
 
+	/**
+	 * Generates a playable url for a video
+	 * @param browsePath
+	 * @param referrer
+	 */
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
-		referrer: string,
+		referrer: string
 	): Promise<string> {
 		try {
-			const objectName: string | undefined = browsePath
-				.split('archief-media.viaa.be/viaa/')
+			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
+				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
 				.pop();
 
-			if (!objectName) {
+			if (!fileRepresentationSchemaIdentifier) {
 				throw new InternalServerErrorException({
-					message:
-						'Failed to extract object name from browse path for media item',
+					message: 'Failed to extract object name from browse path for media item',
 					innerException: null,
 					additionalInfo: {
 						browsePath,
-						objectName,
+						objectName: fileRepresentationSchemaIdentifier,
 					},
 				});
 			}
 
-			return this.playerTicketService.getPlayableUrl(objectName, referrer);
-		} catch (err) {
+			return this.playerTicketService.getPlayableUrl(
+				fileRepresentationSchemaIdentifier,
+				referrer
+			);
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
 				innerException: err,

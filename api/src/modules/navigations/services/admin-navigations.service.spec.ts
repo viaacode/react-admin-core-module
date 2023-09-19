@@ -13,10 +13,7 @@ const mockNavigationElement1 = {
 	position: 1,
 	id: '42555c7e-1cf7-4031-bb17-e6ca57eaab64',
 	icon_name: '',
-	user_group_ids: [
-		SpecialPermissionGroups.loggedOutUsers,
-		SpecialPermissionGroups.loggedInUsers,
-	],
+	user_group_ids: [SpecialPermissionGroups.loggedOutUsers, SpecialPermissionGroups.loggedInUsers],
 	label: 'Gebruikersvoorwaarden',
 	updated_at: '2022-02-21T16:36:06.045845+00:00',
 	description: 'Navigatie balk in de footer gecentreerd',
@@ -77,9 +74,7 @@ describe('NavigationsService', () => {
 			],
 		}).compile();
 
-		navigationsService = module.get<AdminNavigationsService>(
-			AdminNavigationsService,
-		);
+		navigationsService = module.get<AdminNavigationsService>(AdminNavigationsService);
 	});
 
 	it('services should be defined', () => {
@@ -90,39 +85,32 @@ describe('NavigationsService', () => {
 		const navigationInfo = navigationsService.adapt(mockNavigationElement1);
 		expect(navigationInfo).toBeDefined();
 		expect(navigationInfo.id).toEqual(mockNavigationElement1.id);
-		expect(navigationInfo.contentPath).toEqual(
-			mockNavigationElement1.content_path,
-		);
+		expect(navigationInfo.contentPath).toEqual(mockNavigationElement1.content_path);
 	});
 
 	it('returns a paginated response with all navigations by placement', async () => {
-		const mockData: NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief'] =
-			{
-				app_navigation: [
-					mockNavigationElement1,
-				] as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']['app_navigation'],
-			};
+		const mockData: NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief'] = {
+			app_navigation: [
+				mockNavigationElement1,
+			] as NavigationQueryTypes['GetNavigationItemsByPlacementQueryHetArchief']['app_navigation'],
+		};
 		mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-		const response =
-			await navigationsService.findNavigationBarItemsByPlacementId(
-				mockNavigationElement1.placement,
-			);
+		const response = await navigationsService.findNavigationBarItemsByPlacementId(
+			mockNavigationElement1.placement
+		);
 		expect(response.length).toBe(1);
 		expect(response[0].placement).toEqual(mockNavigationElement1.placement);
 	});
 
 	describe('findById', () => {
 		it('returns a single navigation', async () => {
-			const mockData: NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief'] =
-				{
-					app_navigation: [
-						mockNavigationElement1,
-					] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
-				};
+			const mockData: NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief'] = {
+				app_navigation: [
+					mockNavigationElement1,
+				] as NavigationQueryTypes['GetNavigationItemByIdQueryHetArchief']['app_navigation'],
+			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-			const response = await navigationsService.findElementById(
-				mockNavigationElement1.id,
-			);
+			const response = await navigationsService.findElementById(mockNavigationElement1.id);
 			expect(response.id).toBe(mockNavigationElement1.id);
 		});
 
@@ -167,13 +155,12 @@ describe('NavigationsService', () => {
 
 	describe('update', () => {
 		it('can update an existing navigation', async () => {
-			const mockData: NavigationQueryTypes['UpdateNavigationItemByIdMutation'] =
-				{
-					update_app_navigation_by_pk: {
-						id: '1',
-						icon_name: 'plus',
-					} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
-				};
+			const mockData: NavigationQueryTypes['UpdateNavigationItemByIdMutation'] = {
+				update_app_navigation_by_pk: {
+					id: '1',
+					icon_name: 'plus',
+				} as NavigationQueryTypes['UpdateNavigationItemByIdMutationHetArchief']['update_app_navigation_by_pk'],
+			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const response = await navigationsService.updateElement('1', {
 				label: 'test-create-nav',

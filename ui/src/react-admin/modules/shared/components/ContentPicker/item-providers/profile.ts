@@ -3,8 +3,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 // Fetch profiles from GQL
 export const retrieveProfiles = async (name: string | null, limit = 5): Promise<PickerItem[]> => {
@@ -38,7 +37,7 @@ const parseProfiles = (commonUsers: Avo.User.CommonUser[]): PickerItem[] => {
 	return commonUsers.map(
 		(user): PickerItem => ({
 			label: `${user.fullName} (${user.email})`,
-			...parsePickerItem(ContentPickerType.PROFILE, user.profileId),
+			...parsePickerItem('PROFILE', user.profileId),
 		})
 	);
 };

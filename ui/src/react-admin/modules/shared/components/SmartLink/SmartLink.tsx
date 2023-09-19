@@ -7,7 +7,7 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
-import { ContentPickerType } from '../ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 import { Link } from '../Link';
 
 export interface SmartLinkProps {
@@ -27,7 +27,8 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 }) => {
 	const renderLink = (
 		url: string,
-		target: LinkTarget = LinkTarget.Self
+		target: LinkTarget = LinkTarget.Self,
+		anchor?: boolean
 	): ReactElement<any, any> | null => {
 		let fullUrl = url;
 		if (url.startsWith('www.')) {
@@ -58,9 +59,10 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					<Link
 						to={fullUrl}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
-						onClick={() =>
-							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
-						}
+						onClick={() => {
+							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
+							!anchor && scrollTo({ top: 0 });
+						}}
 						title={title}
 					>
 						{children}
@@ -119,13 +121,14 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				resolvedTarget = LinkTarget.Blank;
 			}
 
-			switch (type as ContentPickerType) {
-				case ContentPickerType.INTERNAL_LINK:
-				case ContentPickerType.CONTENT_PAGE:
-				case ContentPickerType.PROJECTS: {
+			switch (type as Avo.Core.ContentPickerType) {
+				case 'INTERNAL_LINK':
+				case 'CONTENT_PAGE':
+				case 'PROJECTS': {
 					return renderLink(String(value), resolvedTarget);
 				}
-				case ContentPickerType.COLLECTION: {
+
+				case 'COLLECTION': {
 					const collectionUrl = buildLink(
 						AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
 						{
@@ -134,35 +137,51 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					);
 					return renderLink(collectionUrl, resolvedTarget);
 				}
-				case ContentPickerType.ITEM: {
+
+				case 'ITEM': {
 					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 						id: value,
 					});
 					return renderLink(itemUrl, resolvedTarget);
 				}
-				case ContentPickerType.BUNDLE: {
+
+				case 'BUNDLE': {
 					const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
 						id: value,
 					});
 					return renderLink(bundleUrl, resolvedTarget);
 				}
-				case ContentPickerType.EXTERNAL_LINK: {
+
+				case 'ASSIGNMENT': {
+					const assignmentUrl = buildLink(
+						AdminConfigManager.getAdminRoute('ASSIGNMENT_DETAIL'),
+						{
+							id: value,
+						}
+					);
+					return renderLink(assignmentUrl, resolvedTarget);
+				}
+
+				case 'EXTERNAL_LINK': {
 					const externalUrl = ((value as string) || '').replace(
 						'{{PROXY_URL}}',
 						AdminConfigManager.getConfig().database.proxyUrl || ''
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}
-				case ContentPickerType.ANCHOR_LINK: {
+
+				case 'ANCHOR_LINK': {
 					const urlWithoutQueryOrAnchor = window.location.href
 						.split('?')[0]
 						.split('#')[0];
-					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget);
+					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
 				}
-				case ContentPickerType.FILE: {
+
+				case 'FILE': {
 					return renderLink(value as string, LinkTarget.Blank);
 				}
-				case ContentPickerType.SEARCH_QUERY: {
+
+				case 'SEARCH_QUERY': {
 					const queryParams = JSON.parse(value as string);
 					return renderLink(
 						buildLink(
@@ -180,6 +199,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						resolvedTarget
 					);
 				}
+
 				default:
 					break;
 			}

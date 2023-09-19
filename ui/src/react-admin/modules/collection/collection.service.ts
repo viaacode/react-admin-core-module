@@ -1,9 +1,9 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
-import { CustomError } from '../shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '../shared/helpers/fetch-with-logout';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
 import { ContentTypeNumber } from './collection.types';
 

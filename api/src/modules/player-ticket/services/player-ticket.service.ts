@@ -1,5 +1,5 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import {
-	CACHE_MANAGER,
 	forwardRef,
 	Inject,
 	Injectable,
@@ -9,15 +9,15 @@ import {
 } from '@nestjs/common';
 
 import type { Cache } from 'cache-manager';
-import { differenceInSeconds } from 'date-fns';
 import got, { Got } from 'got';
-import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
-import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
-
-import { PlayerTicket } from '../player-ticket.types';
+import { ParsedUrl, parseUrl, stringifyUrl } from 'query-string';
 
 import { DataService } from '../../data';
+import {
+	GetItemBrowsePathByExternalIdDocument,
+	GetItemBrowsePathByExternalIdQuery,
+	GetItemBrowsePathByExternalIdQueryVariables,
+} from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetFileByRepresentationSchemaIdentifierDocument,
 	GetFileByRepresentationSchemaIdentifierQuery,
@@ -26,11 +26,11 @@ import {
 	GetThumbnailUrlByIdQuery,
 	GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import {
-	GetItemBrowsePathByExternalIdDocument,
-	GetItemBrowsePathByExternalIdQuery,
-	GetItemBrowsePathByExternalIdQueryVariables,
-} from '../../shared/generated/graphql-db-types-avo';
+import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
+import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
+
+import { PlayerTicket } from '../player-ticket.types';
 
 @Injectable()
 export class PlayerTicketService {
@@ -44,7 +44,7 @@ export class PlayerTicketService {
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {
 		this.playerTicketsGotInstance = got.extend({
 			prefixUrl: process.env.TICKET_SERVICE_URL,
@@ -58,16 +58,13 @@ export class PlayerTicketService {
 			},
 		});
 		this.ticketServiceMaxAge = parseInt(
-			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY),
+			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY)
 		);
 		this.mediaServiceUrl = process.env.MEDIA_SERVICE_URL;
 		this.host = process.env.HOST;
 	}
 
-	protected async getToken(
-		path: string,
-		referer: string,
-	): Promise<PlayerTicket> {
+	protected async getToken(path: string, referer: string): Promise<PlayerTicket> {
 		const data = {
 			app: 'OR-*',
 			client: '', // TODO: Wait for reply on ARC-536 and implement resolution
@@ -75,19 +72,13 @@ export class PlayerTicketService {
 			maxage: this.ticketServiceMaxAge,
 		};
 
-		const playerTicket: PlayerTicket =
-			await this.playerTicketsGotInstance.get<PlayerTicket>(path, {
-				searchParams: data,
-				resolveBodyOnly: true,
-			});
-
-		return playerTicket;
+		return this.playerTicketsGotInstance.get<PlayerTicket>(path, {
+			searchParams: data,
+			resolveBodyOnly: true,
+		});
 	}
 
-	public async getPlayerToken(
-		embedUrl: string,
-		referer: string,
-	): Promise<string> {
+	public async getPlayerToken(embedUrl: string, referer: string): Promise<string> {
 		// no caching
 		const token = await this.getToken(embedUrl, referer);
 		return token.jwt;
@@ -96,31 +87,25 @@ export class PlayerTicketService {
 	public async getThumbnailToken(referer: string): Promise<string> {
 		const thumbnailPath = 'TESTBEELD/keyframes_all';
 
-		const options = {
-			ttl: (token) =>
-				differenceInSeconds(new Date(token.context.expiration), new Date()) -
-				60, // 60s margin to get the new token
-		};
 		try {
 			const token = await this.cacheManager.wrap(
 				`thumbnailToken-${referer}`,
 				() => this.getToken(thumbnailPath, referer),
-				options,
+				600_000 // 10 minutes
 			);
 			return token.jwt;
-		} catch (err) {
+		} catch (err: any) {
 			this.logger.error(`Error getting token: ${err.message}`);
 			throw new InternalServerErrorException('Could not get a thumbnail token');
 		}
 	}
 
 	public async getPlayableUrl(
-		embedUrl: string,
-		referer: string,
+		fileRepresentationSchemaIdentifier: string,
+		referer: string
 	): Promise<string> {
-		const token = await this.getPlayerToken(embedUrl, referer);
-
-		return `${this.mediaServiceUrl}/${embedUrl}?token=${token}`;
+		const token = await this.getPlayerToken(fileRepresentationSchemaIdentifier, referer);
+		return `${this.mediaServiceUrl}/${fileRepresentationSchemaIdentifier}?token=${token}`;
 	}
 
 	public async getEmbedUrl(id: string): Promise<string> {
@@ -147,23 +132,23 @@ export class PlayerTicketService {
 
 		/* istanbul ignore next */
 		const browsePath: string =
-			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]
-				?.browse_path ||
-			(response as GetFileByRepresentationSchemaIdentifierQuery)
-				?.object_file?.[0]?.schema_embed_url;
+			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
+			(response as GetFileByRepresentationSchemaIdentifierQuery)?.object_file?.[0]
+				?.schema_identifier;
 		if (!browsePath) {
-			throw new NotFoundException(
-				`Object file with representation_id '${id}' not found`,
-			);
+			throw new NotFoundException({
+				message: 'Object embed url not found',
+				innerException: null,
+				additionalInfo: {
+					id,
+				},
+			});
 		}
 
 		return browsePath;
 	}
 
-	public async resolveThumbnailUrl(
-		path: string,
-		referer: string,
-	): Promise<string> {
+	public async resolveThumbnailUrl(path: string, referer: string): Promise<string> {
 		if (!path || !referer) {
 			return path;
 		}

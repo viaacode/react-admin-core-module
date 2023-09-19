@@ -18,14 +18,14 @@ export class UserGroupsController {
 
 	@Get()
 	public async getUserGroups(
-		@Query('withPermissions') withPermissions?: 'true' | 'false',
+		@Query('withPermissions') withPermissions?: 'true' | 'false'
 	): Promise<UserGroupWithPermissions[]> {
 		return this.userGroupsService.getUserGroups(withPermissions === 'true');
 	}
 
 	@Patch()
 	public async updateUserGroups(
-		@Body() updateUserGroupsDto: UpdateUserGroupsDto,
+		@Body() updateUserGroupsDto: UpdateUserGroupsDto
 	): Promise<{ deleted: number; inserted: number }> {
 		return this.userGroupsService.updateUserGroups(updateUserGroupsDto.updates);
 	}

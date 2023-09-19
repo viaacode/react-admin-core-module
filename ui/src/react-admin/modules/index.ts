@@ -1,4 +1,4 @@
-import { AdminConfigManager } from '../core/config';
+import { AdminConfigManager } from '~core/config';
 
 // Admin Core
 export type { AdminConfig } from '../core/config/config.types';
@@ -37,6 +37,7 @@ export { Color } from './content-page/types/content-block.types';
 export { ContentBlockType } from './content-page/types/content-block.types';
 export { PublishOption } from './content-page/types/content-pages.types';
 export { ContentPageService } from './content-page/services/content-page.service';
+export { AssetsService } from './shared/services/assets-service/assets.service';
 export * from './content-page/components/blocks';
 export {
 	convertDbContentPageToContentPageInfo,
@@ -60,12 +61,11 @@ export { default as NavigationDetail } from './navigation/views/NavigationDetail
 // Alerts
 export { default as AlertsOverview } from './alerts/views/AlertsOverview';
 
-export { UserDetail } from './user/views/UserDetail';
-export { UserEdit } from './user/views/UserEdit';
-export { UserOverview } from './user/views/UserOverview';
-
 //Users
+export { UserOverview } from './user/views/UserOverview';
+export { UserDetail } from './user/views/UserDetail';
 export { UserService } from './user/user.service';
+export { useGetProfileById } from './user/hooks/use-get-profile-by-id';
 
 // User groups and permissions
 export { default as UserGroupOverview } from './user-group/views/UserGroupOverview';

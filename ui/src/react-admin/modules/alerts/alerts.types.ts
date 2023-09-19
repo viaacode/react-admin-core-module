@@ -28,7 +28,7 @@ export interface AlertFormState {
 	message?: string;
 	fromDate: Date;
 	untilDate: Date;
-	userGroups: string[];
+	userGroups: any;
 	type: string;
 }
 

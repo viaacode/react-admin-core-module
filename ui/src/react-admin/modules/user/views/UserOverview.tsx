@@ -1,6 +1,9 @@
+import { LomSchemeType } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
+import reactToString from 'react-to-string';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -13,10 +16,7 @@ import { useGetIdps } from '~shared/hooks/use-get-idps';
 
 import { useTranslation } from '~shared/hooks/useTranslation';
 
-import reactToString from 'react-to-string';
-
 import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
@@ -422,9 +422,12 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 		});
 	};
 
-	const renderTableCell = (commonUser: Avo.User.CommonUser, columnId: UserOverviewTableCol) => {
-		const isBlocked = commonUser?.isBlocked;
-		const isKeyUser = (commonUser as any)?.isKeyUser ?? false;
+	const renderTableCell = (
+		tableRowCommonUser: Avo.User.CommonUser,
+		columnId: UserOverviewTableCol
+	) => {
+		const isBlocked = tableRowCommonUser?.isBlocked;
+		const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
 
 		switch (columnId) {
 			case 'fullName':
@@ -432,17 +435,17 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				return isAvo() ? (
 					<Link
 						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
-							id: commonUser.profileId,
+							id: tableRowCommonUser.profileId,
 						})}
 					>
-						{truncateTableValue(commonUser?.fullName)}
+						{truncateTableValue(tableRowCommonUser?.fullName)}
 					</Link>
 				) : (
-					truncateTableValue(commonUser?.fullName)
+					truncateTableValue(tableRowCommonUser?.fullName)
 				);
 
 			case 'email':
-				return truncateTableValue(commonUser?.email);
+				return truncateTableValue(tableRowCommonUser?.email);
 
 			case 'isBlocked':
 				return isBlocked ? 'Ja' : 'Nee';
@@ -451,22 +454,22 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				return isKeyUser ? 'Ja' : 'Nee';
 
 			case 'blockedAt':
-				return formatDateString(commonUser?.blockedAt) || '-';
+				return formatDateString(tableRowCommonUser?.blockedAt) || '-';
 
 			case 'unblockedAt':
-				return formatDateString(commonUser?.unblockedAt) || '-';
+				return formatDateString(tableRowCommonUser?.unblockedAt) || '-';
 
 			case 'isException':
-				return commonUser?.isException ? 'Ja' : 'Nee';
+				return tableRowCommonUser?.isException ? 'Ja' : 'Nee';
 
 			case 'organisation':
-				return commonUser?.organisation?.name || '-';
+				return tableRowCommonUser?.organisation?.name || '-';
 
 			case 'createdAt':
-				return formatDateString(commonUser.createdAt) || '-';
+				return formatDateString(tableRowCommonUser.createdAt) || '-';
 
 			case 'lastAccessAt': {
-				const lastAccessDate = commonUser?.lastAccessAt;
+				const lastAccessDate = tableRowCommonUser?.lastAccessAt;
 				return !isNil(lastAccessDate)
 					? customFormatDate
 						? customFormatDate(lastAccessDate)
@@ -474,44 +477,52 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					: '-';
 			}
 			case 'tempAccess': {
-				if (hasTempAccess(commonUser?.tempAccess)) {
+				if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
 					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
 				} else {
 					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
 				}
 			}
 			case 'tempAccessFrom':
-				return formatDateString(commonUser?.tempAccess?.from) || '-';
+				return formatDateString(tableRowCommonUser?.tempAccess?.from) || '-';
 
 			case 'tempAccessUntil':
-				return formatDateString(commonUser?.tempAccess?.until) || '-';
+				return formatDateString(tableRowCommonUser?.tempAccess?.until) || '-';
 
 			case 'idps':
 				return (
 					idpMapsToTagList(
-						Object.keys(commonUser?.idps || {}) as Idp[],
-						`user_${commonUser?.profileId}`,
+						Object.keys(tableRowCommonUser?.idps || {}) as Idp[],
+						`user_${tableRowCommonUser?.profileId}`,
 						navigateFilterToOption(columnId)
 					) || '-'
 				);
 
 			case 'educationLevels': {
-				const labels = commonUser?.educationLevels ?? [];
+				const labels = compact(
+					(tableRowCommonUser?.loms ?? [])
+						.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
+						.map((lom) => lom.lom?.label)
+				);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 
 			case 'subjects': {
-				const labels = commonUser?.subjects ?? [];
+				const labels = compact(
+					(tableRowCommonUser?.loms ?? [])
+						.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
+						.map((lom) => lom.lom?.label)
+				);
 				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
 			}
 
 			case 'educationalOrganisations': {
 				const orgs: Avo.EducationOrganization.Organization[] =
-					commonUser.educationalOrganisations ?? [];
+					tableRowCommonUser.educationalOrganisations ?? [];
 				const tags = orgs.map(
 					(org): TagOption => ({
-						id: `${org.organizationId}:${org.unitId || ''}`,
-						label: org.label || org.unitId || org.organizationId,
+						id: `${org.organisationId}:${org.unitId || ''}`,
+						label: org.organisationLabel || org.unitId || org.organisationId,
 					})
 				);
 				return (
@@ -525,7 +536,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			case 'userGroup':
 				return truncateTableValue(
-					commonUser.userGroup?.label || commonUser.userGroup?.name || '-'
+					tableRowCommonUser.userGroup?.label || tableRowCommonUser.userGroup?.name || '-'
 				);
 
 			case 'actions':
@@ -533,19 +544,19 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					<ActionsDropdown
 						menuItems={[
 							{
-								id: commonUser.profileId || '',
+								id: tableRowCommonUser.profileId || '',
 								label:
-									commonUser.profileId ||
+									tableRowCommonUser.profileId ||
 									tText('admin/users/views/user-overview___geen-uuid'),
 								iconEnd: <Icon name="copy" />,
 							},
 						]}
-						onOptionClicked={() => handleOptionClicked(commonUser.profileId)}
+						onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
 					/>
 				);
 
 			default:
-				return truncateTableValue(commonUser[columnId] || '-');
+				return truncateTableValue(tableRowCommonUser[columnId] || '-');
 		}
 	};
 
@@ -581,7 +592,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
 					itemsPerPage={USERS_PER_PAGE}
-					onTableStateChanged={setTableState}
+					onTableStateChanged={(newState) => {
+						setTableState(newState);
+					}}
 					renderNoResults={renderNoResults}
 					isLoading={isLoading}
 					showCheckboxes={!!bulkActions.length}

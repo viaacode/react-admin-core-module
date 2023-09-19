@@ -91,7 +91,7 @@ export const generateWhereObjectAvo = (
 				(org) => {
 					orFilters.push({
 						organisations: {
-							organization_id: { _eq: org.organizationId },
+							organization_id: { _eq: org.organisationId },
 							unit_id: org.unitId ? { _eq: org.unitId } : { _is_null: true },
 						},
 					});
@@ -155,11 +155,9 @@ export const generateWhereObjectArchief = (
 					{ mail: { _ilike: query } },
 					{ full_name: { _ilike: query } },
 					{
-						maintainer_users_profiles: {
-							maintainer: {
-								schema_name: {
-									_ilike: query,
-								},
+						organisation: {
+							schema_name: {
+								_ilike: query,
 							},
 						},
 					},

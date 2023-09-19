@@ -1,4 +1,4 @@
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { PickerItem } from '~shared/types/content-picker';
 
 import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';

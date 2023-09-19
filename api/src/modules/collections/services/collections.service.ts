@@ -1,9 +1,5 @@
-import {
-	forwardRef,
-	Inject,
-	InternalServerErrorException,
-} from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import { forwardRef, Inject, InternalServerErrorException } from '@nestjs/common';
+import type { Avo } from '@viaa/avo2-types';
 import { DataService } from '../../data';
 import {
 	GetPublicCollectionsByIdDocument,
@@ -21,9 +17,7 @@ import { isUuid } from '../../shared/helpers/uuid';
 import { ContentTypeNumber } from '../collections.types';
 
 export class CollectionsService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	/**
 	 * Retrieve collections or bundles.
@@ -34,7 +28,7 @@ export class CollectionsService {
 	 */
 	async fetchCollectionsOrBundles(
 		limit: number,
-		typeId: ContentTypeNumber,
+		typeId: ContentTypeNumber
 	): Promise<Avo.Collection.Collection[]> {
 		try {
 			// retrieve collections
@@ -44,7 +38,7 @@ export class CollectionsService {
 			>(GetPublicCollectionsDocument, { limit, typeId });
 
 			return (response.app_collections || []) as Avo.Collection.Collection[];
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Het ophalen van de collecties is mislukt.',
 				innerException: err,
@@ -59,47 +53,40 @@ export class CollectionsService {
 	async fetchCollectionsOrBundlesByTitleOrId(
 		isCollection: boolean,
 		titleOrId: string,
-		limit: number,
+		limit: number
 	): Promise<Avo.Collection.Collection[]> {
 		try {
 			const isUuidFormat = isUuid(titleOrId);
 			const variables: Partial<
-				| GetPublicCollectionsByIdQueryVariables
-				| GetPublicCollectionsByTitleQueryVariables
+				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
 			> = {
 				limit,
-				typeId: isCollection
-					? ContentTypeNumber.collection
-					: ContentTypeNumber.bundle,
+				typeId: isCollection ? ContentTypeNumber.collection : ContentTypeNumber.bundle,
 			};
 			if (isUuidFormat) {
 				(variables as GetPublicCollectionsByIdQueryVariables).id = titleOrId;
 			} else {
-				(
-					variables as GetPublicCollectionsByTitleQueryVariables
-				).title = `%${titleOrId}%`;
+				(variables as GetPublicCollectionsByTitleQueryVariables).title = `%${titleOrId}%`;
 			}
 
 			const response = await this.dataService.execute<
 				GetPublicCollectionsByIdQuery | GetPublicCollectionsByTitleQuery,
-				| GetPublicCollectionsByIdQueryVariables
-				| GetPublicCollectionsByTitleQueryVariables
+				GetPublicCollectionsByIdQueryVariables | GetPublicCollectionsByTitleQueryVariables
 			>(
 				isUuidFormat
 					? GetPublicCollectionsByIdDocument
 					: GetPublicCollectionsByTitleDocument,
 				variables as
 					| GetPublicCollectionsByIdQueryVariables
-					| GetPublicCollectionsByTitleQueryVariables,
+					| GetPublicCollectionsByTitleQueryVariables
 			);
 			return response.app_collections as Avo.Collection.Collection[];
-		} catch (err) {
+		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to fetch collections or bundles',
 				innerException: err,
 				additionalInfo: {
-					query:
-						'GET_PUBLIC_COLLECTIONS_BY_ID or GET_PUBLIC_COLLECTIONS_BY_TITLE',
+					query: 'GET_PUBLIC_COLLECTIONS_BY_ID or GET_PUBLIC_COLLECTIONS_BY_TITLE',
 					variables: { titleOrId, isCollection, limit },
 				},
 			});
@@ -116,7 +103,7 @@ export class CollectionsService {
 	 */
 	async fetchCollectionsByTitleOrId(
 		titleOrId: string,
-		limit: number,
+		limit: number
 	): Promise<Avo.Collection.Collection[]> {
 		return this.fetchCollectionsOrBundlesByTitleOrId(true, titleOrId, limit);
 	}
@@ -131,7 +118,7 @@ export class CollectionsService {
 	 */
 	async fetchBundlesByTitleOrId(
 		titleOrId: string,
-		limit: number,
+		limit: number
 	): Promise<Avo.Collection.Collection[]> {
 		return this.fetchCollectionsOrBundlesByTitleOrId(false, titleOrId, limit);
 	}

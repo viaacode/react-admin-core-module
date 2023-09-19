@@ -27,15 +27,7 @@ import * as path from 'path';
 import fetch from 'node-fetch';
 
 import glob from 'glob';
-import {
-	compact,
-	intersection,
-	kebabCase,
-	keys,
-	lowerCase,
-	upperFirst,
-	without,
-} from 'lodash';
+import { compact, intersection, kebabCase, keys, lowerCase, upperFirst, without } from 'lodash';
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentAvo,
 	GetSiteVariableByNameQuery as GetSiteVariableByNameQueryAvo,
@@ -54,26 +46,22 @@ type AppsList = ('AVO' | 'HET_ARCHIEF')[];
 type KeyMap = Record<string, { value: string; apps: AppsList }>;
 
 const oldTranslationsAvo: KeyMap = Object.fromEntries(
-	Object.entries(localTranslationsAvo as Record<string, string>).map(
-		([key, value]) => [
-			key,
-			{
-				value,
-				apps: ['AVO'],
-			},
-		],
-	),
+	Object.entries(localTranslationsAvo as Record<string, string>).map(([key, value]) => [
+		key,
+		{
+			value,
+			apps: ['AVO'],
+		},
+	])
 );
 const oldTranslationsHetArchief: KeyMap = Object.fromEntries(
-	Object.entries(localTranslationsHetArchief as Record<string, string>).map(
-		([key, value]) => [
-			key,
-			{
-				value,
-				apps: ['HET_ARCHIEF'],
-			},
-		],
-	),
+	Object.entries(localTranslationsHetArchief as Record<string, string>).map(([key, value]) => [
+		key,
+		{
+			value,
+			apps: ['HET_ARCHIEF'],
+		},
+	])
 );
 
 function getFormattedKey(filePath: string, key: string) {
@@ -90,7 +78,7 @@ function getFormattedKey(filePath: string, key: string) {
 		const formattedKey = kebabCase(key);
 
 		return `${fileKey}___${formattedKey}`;
-	} catch (err) {
+	} catch (err: any) {
 		console.error('Failed to format key', filePath, key);
 	}
 }
@@ -131,11 +119,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 	// Find and extract translations, replace strings with translation keys
 	codeFiles.forEach((relativeFilePath: string) => {
 		try {
-			const absoluteFilePath = path.resolve(
-				__dirname,
-				'../src',
-				relativeFilePath,
-			);
+			const absoluteFilePath = path.resolve(__dirname, '../src', relativeFilePath);
 			const content: string = fs.readFileSync(absoluteFilePath).toString();
 
 			// Replace tHtml() and tText() functions
@@ -170,24 +154,20 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 					tFunction: string,
 					translation: string,
 					translationParams: string | undefined,
-					appsParam: string | undefined,
+					appsParam: string | undefined
 				) => {
 					let formattedKey: string | undefined;
 					const apps: AppsList = compact(
 						(appsParam || ', [AVO, HET_ARCHIEF]')
 							.replace(/[[\]]/g, '')
 							.split(',')
-							.map((app) => app.trim()),
+							.map((app) => app.trim())
 					) as AppsList;
-					const formattedTranslation: string =
-						getFormattedTranslation(translation);
+					const formattedTranslation: string = getFormattedTranslation(translation);
 					if (formattedTranslation.includes('___')) {
 						formattedKey = formattedTranslation;
 					} else {
-						formattedKey = getFormattedKey(
-							relativeFilePath,
-							formattedTranslation,
-						);
+						formattedKey = getFormattedKey(relativeFilePath, formattedTranslation);
 					}
 
 					if (!formattedKey) {
@@ -207,19 +187,16 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 								translationParams,
 								appsParam,
 								absoluteFilePath,
-							},
+							}
 						);
 					}
 					// If translation contains '___', use original translation, otherwise use translation found by the regexp
 					const hasKeyAlready = formattedTranslation.includes('___');
 					if (apps.includes('AVO')) {
-						if (
-							hasKeyAlready &&
-							!(oldTranslationsAvo as KeyMap)[formattedKey]
-						) {
+						if (hasKeyAlready && !(oldTranslationsAvo as KeyMap)[formattedKey]) {
 							console.error(
 								'Failed to find old translation in /avo/nl.json for key: ',
-								formattedKey,
+								formattedKey
 							);
 						}
 						newTranslationsAvo[formattedKey] = {
@@ -227,20 +204,17 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 								(hasKeyAlready
 									? getFormattedTranslation(
 											(oldTranslationsAvo as KeyMap)[formattedKey]?.value ||
-												getFallbackTranslation(formattedKey),
+												getFallbackTranslation(formattedKey)
 									  )
 									: formattedTranslation) || '',
 							apps,
 						};
 					}
 					if (apps.includes('HET_ARCHIEF')) {
-						if (
-							hasKeyAlready &&
-							!(oldTranslationsHetArchief as KeyMap)[formattedKey]
-						) {
+						if (hasKeyAlready && !(oldTranslationsHetArchief as KeyMap)[formattedKey]) {
 							console.error(
 								'Failed to find old translation /hetArchief/nl.json for key: ',
-								formattedKey,
+								formattedKey
 							);
 						}
 						newTranslationsHetArchief[formattedKey] = {
@@ -248,7 +222,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 								(hasKeyAlready
 									? getFormattedTranslation(
 											(oldTranslationsHetArchief as KeyMap)[formattedKey]
-												?.value || getFallbackTranslation(formattedKey),
+												?.value || getFallbackTranslation(formattedKey)
 									  )
 									: formattedTranslation) || '',
 							apps,
@@ -258,21 +232,18 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 					if (hasKeyAlready) {
 						return match;
 					} else {
-						return `${prefix}${tFunction}('${formattedKey}'${
-							translationParams || ''
-						}${appsParam || ''})`;
+						return `${prefix}${tFunction}('${formattedKey}'${translationParams || ''}${
+							appsParam || ''
+						})`;
 					}
-				},
+				}
 			);
 
 			if (content !== newContent) {
 				fs.writeFileSync(absoluteFilePath, newContent);
 			}
-		} catch (err) {
-			console.error(
-				`Failed to find translations in file: ${relativeFilePath}`,
-				err,
-			);
+		} catch (err: any) {
+			console.error(`Failed to find translations in file: ${relativeFilePath}`, err);
 		}
 	});
 	return { avo: newTranslationsAvo, hetarchief: newTranslationsHetArchief };
@@ -289,7 +260,7 @@ async function getOnlineTranslations(): Promise<{
 		!process.env.GRAPHQL_SECRET_HETARCHIEF
 	) {
 		throw new Error(
-			'Missing environment variables. One or more of these are missing: GRAPHQL_URL_AVO, GRAPHQL_SECRET_AVO, GRAPHQL_URL_HETARCHIEF, GRAPHQL_SECRET_HETARCHIEF',
+			'Missing environment variables. One or more of these are missing: GRAPHQL_URL_AVO, GRAPHQL_SECRET_AVO, GRAPHQL_URL_HETARCHIEF, GRAPHQL_SECRET_HETARCHIEF'
 		);
 	}
 	try {
@@ -308,33 +279,30 @@ async function getOnlineTranslations(): Promise<{
 				}),
 			})
 		).json()) as GetSiteVariableByNameQueryAvo;
-		const avoAdminCoreTranslations =
-			avoTranslationsResponse.app_site_variables_by_pk;
+		const avoAdminCoreTranslations = avoTranslationsResponse.app_site_variables_by_pk;
 
 		// HetArchief
-		const hetArchiefTranslationsResponse: GetSiteVariableByNameQueryHetArchief =
-			(await (
-				await fetch(process.env.GRAPHQL_URL_HETARCHIEF, {
-					headers: {
-						'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_HETARCHIEF,
-					},
-					method: 'post',
-					body: JSON.stringify({
-						query: GetSiteVariableByNameDocumentHetArchief,
-						variables: {
-							name: 'TRANSLATIONS_ADMIN_CORE',
-						} as GetSiteVariableByNameQueryVariablesHetArchief,
-					}),
-				})
-			).json()) as GetSiteVariableByNameQueryHetArchief;
-		const hetArchiefAdminCoreTranslations =
-			hetArchiefTranslationsResponse.app_config_by_pk;
+		const hetArchiefTranslationsResponse: GetSiteVariableByNameQueryHetArchief = (await (
+			await fetch(process.env.GRAPHQL_URL_HETARCHIEF, {
+				headers: {
+					'x-hasura-admin-secret': process.env.GRAPHQL_SECRET_HETARCHIEF,
+				},
+				method: 'post',
+				body: JSON.stringify({
+					query: GetSiteVariableByNameDocumentHetArchief,
+					variables: {
+						name: 'TRANSLATIONS_ADMIN_CORE',
+					} as GetSiteVariableByNameQueryVariablesHetArchief,
+				}),
+			})
+		).json()) as GetSiteVariableByNameQueryHetArchief;
+		const hetArchiefAdminCoreTranslations = hetArchiefTranslationsResponse.app_config_by_pk;
 
 		return {
 			avo: avoAdminCoreTranslations,
 			hetarchief: hetArchiefAdminCoreTranslations,
 		};
-	} catch (err) {
+	} catch (err: any) {
 		throw new Error('Failed to get translations from the database');
 	}
 }
@@ -372,23 +340,14 @@ async function updateTranslations(
 	oldTranslations: KeyMap,
 	newTranslations: KeyMap,
 	onlineTranslations: Record<string, string>,
-	outputFile: string,
+	outputFile: string
 ): Promise<void> {
 	// Compare existing translations to the new translations
 	const oldTranslationKeys: string[] = keys(oldTranslations);
 	const newTranslationKeys: string[] = keys(newTranslations);
-	const addedTranslationKeys: string[] = without(
-		newTranslationKeys,
-		...oldTranslationKeys,
-	);
-	const removedTranslationKeys: string[] = without(
-		oldTranslationKeys,
-		...newTranslationKeys,
-	);
-	const existingTranslationKeys: string[] = intersection(
-		newTranslationKeys,
-		oldTranslationKeys,
-	);
+	const addedTranslationKeys: string[] = without(newTranslationKeys, ...oldTranslationKeys);
+	const removedTranslationKeys: string[] = without(oldTranslationKeys, ...newTranslationKeys);
+	const existingTranslationKeys: string[] = intersection(newTranslationKeys, oldTranslationKeys);
 
 	// Console log translations that were found in the json file but not in the code
 	console.warn(`
@@ -399,25 +358,18 @@ async function updateTranslations(
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslations: Record<string, string> = {};
 	existingTranslationKeys.forEach((key: string) => {
-		combinedTranslations[key] =
-			onlineTranslations[key] || oldTranslations[key].value;
+		combinedTranslations[key] = onlineTranslations[key] || oldTranslations[key].value;
 	});
 	addedTranslationKeys.forEach((key: string) => {
-		combinedTranslations[key] =
-			onlineTranslations[key] || newTranslations[key].value;
+		combinedTranslations[key] = onlineTranslations[key] || newTranslations[key].value;
 	});
 
-	const nlJsonContent = JSON.stringify(
-		sortObjectKeys(combinedTranslations),
-		null,
-		2,
-	);
+	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
 	fs.writeFileSync(outputFile, nlJsonContent + '\n');
 
-	const totalTranslations =
-		existingTranslationKeys.length + addedTranslationKeys.length;
+	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
 
 	console.info(`
 		Wrote ${totalTranslations} src/${outputFile.split('src').pop()} file
@@ -427,10 +379,8 @@ async function updateTranslations(
 }
 
 async function updateTranslationsForAvoAndHetArchief(): Promise<void> {
-	const {
-		avo: onlineTranslationsAvo,
-		hetarchief: onlineTranslationsHetArchief,
-	} = await getOnlineTranslations();
+	const { avo: onlineTranslationsAvo, hetarchief: onlineTranslationsHetArchief } =
+		await getOnlineTranslations();
 
 	// Extract translations from code and replace code by reference to translation key
 	const codeFiles = await getFilesByGlob('**/*.@(ts|tsx)');
@@ -441,22 +391,16 @@ async function updateTranslationsForAvoAndHetArchief(): Promise<void> {
 		oldTranslationsAvo,
 		newTranslationsAvo,
 		onlineTranslationsAvo,
-		`${__dirname.replace(
-			/\\/g,
-			'/',
-		)}/../src/modules/shared/translations/avo/nl.json`,
+		`${__dirname.replace(/\\/g, '/')}/../src/modules/shared/translations/avo/nl.json`
 	);
 	await updateTranslations(
 		oldTranslationsHetArchief,
 		newTranslationsHetArchief,
 		onlineTranslationsHetArchief,
-		`${__dirname.replace(
-			/\\/g,
-			'/',
-		)}/../src/modules/shared/translations/hetArchief/nl.json`,
+		`${__dirname.replace(/\\/g, '/')}/../src/modules/shared/translations/hetArchief/nl.json`
 	);
 }
 
 updateTranslationsForAvoAndHetArchief().catch((err) =>
-	console.error('Update of translations failed: ', err),
+	console.error('Update of translations failed: ', err)
 );

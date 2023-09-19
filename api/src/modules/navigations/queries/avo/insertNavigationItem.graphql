@@ -1,0 +1,17 @@
+mutation insertNavigationItem($navigationItem: app_content_nav_elements_insert_input!) {
+	insert_app_content_nav_elements_one(object: $navigationItem) {
+		id
+		created_at
+		description
+		user_group_ids
+		icon_name
+		label
+		link_target
+		placement
+		position
+		updated_at
+		content_type
+		content_path
+		tooltip
+	}
+}

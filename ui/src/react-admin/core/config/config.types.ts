@@ -1,7 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
-import { MediaListItem } from '~content-blocks/BlockMediaGrid/BlockMediaGrid';
 
 import { UserBulkAction } from '~modules/user/user.types';
 
@@ -23,7 +22,8 @@ export interface ToastInfo {
 }
 
 export interface ToastService {
-	showToast: (toastInfo: ToastInfo) => void;
+	showToast: (toastInfo: ToastInfo) => string;
+	hideToast: (toastId: string) => void;
 }
 
 export interface I18n {
@@ -67,14 +67,6 @@ export interface AdminConfig {
 	};
 	// Secondary services and config
 	services: {
-		assetService: {
-			uploadFile: (
-				file: File,
-				assetType: Avo.FileUpload.AssetType,
-				ownerId: string
-			) => Promise<string>;
-			deleteFile: (fileUrl: string) => Promise<void>;
-		};
 		getContentPageByPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
@@ -103,10 +95,8 @@ export interface AdminConfig {
 	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>;
 	icon?: IconConfig;
 	alertIcon?: IconConfig;
-	file?: FileConfig;
 	handlers: {
 		onExternalLink: (url: string) => void;
-		mediaItemClicked?: (item: MediaListItem) => void;
 	};
 	users?: {
 		bulkActions?: UserBulkAction[];
@@ -144,6 +134,7 @@ export interface AdminConfig {
 		BUNDLE_EDIT?: string;
 		COLLECTIONS_OVERVIEW?: string;
 		COLLECTION_DETAIL?: string;
+		ASSIGNMENT_DETAIL?: string;
 		ITEM_DETAIL?: string;
 		NEWS?: string;
 		SEARCH?: string;
@@ -183,15 +174,6 @@ export interface IconConfig {
 }
 
 export type IconComponentProps = Record<string, unknown>;
-
-export interface FileConfig {
-	service: FileService;
-}
-
-export interface FileService {
-	uploadFile: (file: File) => Promise<unknown>;
-	deleteFile: (url: string) => Promise<unknown>;
-}
 
 export interface EducationOrganisationService {
 	fetchCities(): Promise<string[]>;

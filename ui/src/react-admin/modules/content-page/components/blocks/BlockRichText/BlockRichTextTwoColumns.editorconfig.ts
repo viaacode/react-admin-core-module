@@ -1,3 +1,4 @@
+import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 
@@ -14,6 +15,7 @@ import {
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
 	{
@@ -106,11 +108,30 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
+					buttonIconAlignment: {
+						label: AdminConfigManager.getConfig().services.i18n.tText(
+							'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___button-icon-alignment'
+						),
+						editorType: ContentBlockEditor.Select,
+						editorProps: {
+							options: GET_SIMPLE_ALIGN_OPTIONS(),
+						},
+					},
 					buttonAction: {
 						label: AdminConfigManager.getConfig().services.i18n.tText(
 							'admin/content-block/helpers/generators/buttons___knop-actie'
 						),
 						editorType: ContentBlockEditor.ContentPicker,
+						...(!isAvo() && {
+							editorProps: {
+								allowedTypes: [
+									'CONTENT_PAGE',
+									'INTERNAL_LINK',
+									'EXTERNAL_LINK',
+									'ANCHOR_LINK',
+								],
+							},
+						}),
 					},
 				},
 				type: 'fieldGroup',

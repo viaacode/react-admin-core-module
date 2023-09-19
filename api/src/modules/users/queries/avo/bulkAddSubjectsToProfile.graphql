@@ -1,0 +1,5 @@
+mutation bulkAddLomsToProfiles($loms: [users_profiles_lom_links_insert_input!]!) {
+	insert_users_profiles_lom_links(objects: $loms) {
+		affected_rows
+	}
+}

@@ -1,4 +1,5 @@
-import type { Avo, PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { Idp } from '../shared/auth/auth.types';
 import { UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from './users.types';
 
@@ -37,15 +38,8 @@ export function convertUserInfoToCommonUser(
 				avatar: user?.profile?.avatar,
 				stamboek: user.profile.stamboek ?? undefined,
 				organisation: user.profile.organisation,
-				educationalOrganisations: (user.profile.organizations ?? []).map(
-					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: undefined,
-						unitId: org.unitAddress ?? null,
-						label: org.organizationName,
-					})
-				),
-				subjects: user.profile.subjects,
-				educationLevels: user.profile.educationLevels,
+				educationalOrganisations: user.profile.organizations ?? [],
+				loms: user.profile.loms,
 				isException: user.profile.is_exception ?? undefined,
 				businessCategory: user.profile.business_category ?? undefined,
 				createdAt: user.profile.created_at,
@@ -100,15 +94,8 @@ export function convertUserInfoToCommonUser(
 				avatar: profile?.avatar,
 				stamboek: profile.stamboek ?? undefined,
 				organisation: profile.organisation,
-				educationalOrganisations: (profile.organizations ?? []).map(
-					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: undefined,
-						unitId: undefined,
-						label: org.organizationName,
-					})
-				),
-				subjects: profile.subjects,
-				educationLevels: profile.educationLevels,
+				educationalOrganisations: profile.organizations ?? [],
+				loms: profile.loms,
 				isException: profile.is_exception ?? undefined,
 				businessCategory: profile.business_category ?? undefined,
 				createdAt: profile.created_at,
@@ -160,20 +147,25 @@ export function convertUserInfoToCommonUser(
 				profileId: user.profile_id,
 				avatar: user?.profile?.avatar,
 				stamboek: user.stamboek ?? undefined,
-				organisation: user.company_name
+				organisation: user.profile?.organisation?.name
 					? ({
-							name: user.company_name,
+							name: user.profile.organisation.name,
+							or_id: user.profile.organisation.or_id,
+							logo_url: user.profile.organisation.logo_url,
 					  } as Avo.Organization.Organization)
 					: undefined,
 				educationalOrganisations: (user.organisations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
-						organizationId: org.organization_id,
+						organisationId: org.organization_id,
+						organisationLabel:
+							(org.organization as any)?.ldap_content?.attributes?.description?.[0] ??
+							'',
 						unitId: org.unit_id ?? null,
-						label: org.organization?.ldap_description ?? '',
+						unitStreet: (org.organization as any).ldap_content?.units?.[0]?.attributes
+							?.street?.[0],
 					})
 				),
-				subjects: user.classifications.map((classification) => classification.key),
-				educationLevels: user.contexts.map((context) => context.key),
+				loms: (user.loms || []) as any[],
 				isException: user.is_exception ?? undefined,
 				businessCategory: user.business_category ?? undefined,
 				createdAt: user.acc_created_at,
@@ -239,13 +231,12 @@ export function convertUserInfoToCommonUser(
 					)
 				),
 				organisation: {
-					name:
-						profile.maintainer_users_profiles?.[0]?.maintainer.schema_name ?? undefined,
-					or_id: profile.maintainer_users_profiles?.[0]?.maintainer.schema_identifier,
-					logo_url:
-						profile.maintainer_users_profiles?.[0]?.maintainer?.information?.logo?.iri,
+					name: profile.organisation?.schema_name,
+					or_id: profile.organisation?.schema_identifier,
+					logo_url: profile.organisation?.logo,
 					data: null,
 				},
+				loms: [],
 				lastAccessAt: profile.last_access_at,
 			};
 		}
@@ -255,6 +246,8 @@ export function convertUserInfoToCommonUser(
 			const user = userInfo as Avo.User.HetArchiefUser;
 			return {
 				profileId: user.id,
+				uid: user.id,
+				userId: user.id,
 				email: user.email ?? undefined,
 				firstName: user.firstName ?? undefined,
 				lastName: user.lastName ?? undefined,
@@ -266,13 +259,14 @@ export function convertUserInfoToCommonUser(
 				},
 				idps: { [user.idp]: null },
 				organisation: {
-					or_id: user.maintainerId,
-					name: user.visitorSpaceSlug,
+					or_id: user.maintainerId || user.organisationId,
+					name: user.visitorSpaceSlug || user.organisationName,
 					data: null,
 				},
+				loms: [],
 				lastAccessAt: undefined,
 				permissions: user.permissions,
-			};
+			} as Avo.User.CommonUser;
 		}
 
 		default:

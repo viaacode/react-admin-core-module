@@ -15,7 +15,7 @@ import {
 import type { RichEditorState } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { compact, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -23,7 +23,7 @@ import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
+import type { Avo } from '@viaa/avo2-types';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
@@ -152,9 +152,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 
 	// Render
 	const owner: PickerItem | undefined = {
-		label: contentPageInfo.owner.fullName,
-		type: ContentPickerType.PROFILE,
-		value: contentPageInfo.owner.id,
+		label: contentPageInfo.owner?.fullName,
+		type: 'PROFILE',
+		value: contentPageInfo.owner?.id,
 	};
 	return (
 		<Container mode="vertical" size="small">
@@ -180,6 +180,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										onChange={(urls: string[]) =>
 											changeContentPageProp('thumbnailPath', urls[0])
 										}
+										onDeleteFile={noop} // images will be deleted from the assets service when the user saves the content page
 									/>
 								</FormGroup>
 							</Column>
@@ -307,7 +308,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												placeholder={tText(
 													'admin/content/components/content-edit-form/content-edit-form___selecteer-een-auteur'
 												)}
-												allowedTypes={[ContentPickerType.PROFILE]}
+												allowedTypes={['PROFILE']}
 												value={owner}
 												onChange={(item: PickerItem | null) => {
 													if (!item) {

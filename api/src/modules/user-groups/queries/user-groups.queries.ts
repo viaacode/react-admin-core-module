@@ -60,9 +60,9 @@ export type UserGroupQueryTypes = {
 };
 
 type UserGroupsQueries = {
-	GetUserGroupsDocument: TypedDocumentNode;
-	GetUserGroupsPermissionsDocument: TypedDocumentNode;
-	UpdateUserGroupsPermissionsDocument: TypedDocumentNode;
+	GetUserGroupsDocument: TypedDocumentNode<any, any>;
+	GetUserGroupsPermissionsDocument: TypedDocumentNode<any, any>;
+	UpdateUserGroupsPermissionsDocument: TypedDocumentNode<any, any>;
 };
 
 export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
@@ -72,10 +72,8 @@ export const USER_GROUP_QUERIES: Record<DatabaseType, UserGroupsQueries> = {
 		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
-		GetUserGroupsPermissionsDocument:
-			GetUserGroupsPermissionsDocumentHetArchief,
+		GetUserGroupsPermissionsDocument: GetUserGroupsPermissionsDocumentHetArchief,
 		GetUserGroupsDocument: GetUserGroupsDocumentHetArchief,
-		UpdateUserGroupsPermissionsDocument:
-			UpdateUserGroupsPermissionsDocumentHetArchief,
+		UpdateUserGroupsPermissionsDocument: UpdateUserGroupsPermissionsDocumentHetArchief,
 	},
 };

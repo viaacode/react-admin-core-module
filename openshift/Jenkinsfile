@@ -1,8 +1,8 @@
 pipeline {
-    agent {
-        kubernetes {
-            defaultContainer 'oc'
-            yaml """\
+	agent {
+		kubernetes {
+			defaultContainer 'oc'
+			yaml """\
         apiVersion: v1
         kind: Pod
         metadata:
@@ -19,7 +19,7 @@ pipeline {
             tty: true
             imagePullPolicy: Always
           - name: npm
-            image: node:lts
+            image: node:20.4-alpine
             command:
             - cat
             tty: true
@@ -31,45 +31,52 @@ pipeline {
 
 
         """.stripIndent()
-        }
-    }
-    options {
-        timeout(time: 45, unit: 'MINUTES')
-        disableConcurrentBuilds()
-    }
-    environment {
-        OC_PROJECT = 'hetarchief'
-        BASE_IMG = 'node:16-alpine'
-        OC_URL = 'https://c113-e.private.eu-de.containers.cloud.ibm.com:30227'
-        JIRA_URL = 'meemoo.atlassian.net'
-        APP_NAME = 'react-admin-core-module'
+		}
+	}
+	options {
+		timeout(time: 45, unit: 'MINUTES')
+		disableConcurrentBuilds()
+	}
+	environment {
+		OC_PROJECT = 'hetarchief'
+		BASE_IMG = 'node:20.4-alpine'
+		OC_URL = 'https://c113-e.private.eu-de.containers.cloud.ibm.com:30227'
+		JIRA_URL = 'meemoo.atlassian.net'
+		APP_NAME = 'react-admin-core-module'
 
-    }
-    stages {
-        stage('Calculate extra ENV vars') {
-            steps {
-                script {
-                    env.GIT_SHORT_COMMIT = sh(script: "printf \$(git rev-parse --short ${GIT_COMMIT})", returnStdout: true)
-                    env.IMAGE_TAG = sh(script: 'git describe --tags || echo latest', returnStdout: true)
-                    // The name used for the build config based on the image tag
-                    // Replace '.' with '_' as '.' is not allowed.
-                    env.BUILD_CONFIG_NAME = sh(script: 'echo "${IMAGE_TAG}" | sed -r "s/\\./\\-/g"', returnStdout: true)
-                }
-            }
-        }
-        stage('Build ui code') {
-            steps {
-                container('npm') {
-                    script {
-                        sh'''#!/bin/bash
-                        npm --registry=https://registry.npmjs.org install && cd ui && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+	}
+	stages {
+		stage('Calculate extra ENV vars') {
+			steps {
+				script {
+					env.GIT_SHORT_COMMIT = sh(script: "printf \$(git rev-parse --short ${GIT_COMMIT})", returnStdout: true)
+					env.IMAGE_TAG = sh(script: 'git describe --tags || echo latest', returnStdout: true)
+					// The name used for the build config based on the image tag
+					// Replace '.' with '_' as '.' is not allowed.
+					env.BUILD_CONFIG_NAME = sh(script: 'echo "${IMAGE_TAG}" | sed -r "s/\\./\\-/g"', returnStdout: true)
+				}
+			}
+		}
+		stage('Build ui code') {
+			steps {
+				container('npm') {
+					script {
+						sh '''
+							#!/bin/bash
+							node -v
+							npm -v
+							npm --registry=https://registry.npmjs.org install
+							cd ui
+							npm --registry=https://registry.npmjs.org install
+							npm run build || exit 1
+							cd ..
                         '''
-                    } // script
-                }
-            }
-        }// end stage build
+					} // script
+				}
+			}
+		}// end stage build
 
-        stage('Publish ui code') {
+		stage('Publish ui code') {
 			steps {
 				container('npm') {
 
@@ -77,43 +84,45 @@ pipeline {
 						try {
 							echo "Publishing admin-core-ui package to registry"
 							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-							  sh "cat $configFile > .npmrc"
+								sh "cat $configFile > .npmrc"
 							}
-							sh '''#/bin/bash
-							cp .npmrc ./ui
-							cd ui
-							npm config fix
-							npm publish
-							rm -f .npmrc
-							cd ..
+							sh '''
+								#/bin/bash
+								cp .npmrc ./ui
+								cd ui
+								npm config fix
+								npm publish
+								rm -f .npmrc
+								cd ..
 							'''
 						} catch (err) {
 							echo "Error message: ${err.getMessage()}"
-							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
-                            	echo "admin-core-ui package version number was not updated, continuing with api build"
-                            } else {
-                            	echo "admin-core-ui package failed to publish"
-                            	currentBuild.result = 'FAILURE'
-                            }
+							if (err.getMessage().contains("Repository does not allow updating assets")) {
+								echo "admin-core-ui package version number was not updated, continuing with api build"
+							} else {
+								echo "admin-core-ui package failed to publish"
+								currentBuild.result = 'FAILURE'
+							}
 						}
 					} // script
 				}// end container
 			} // steps
 		} // stage
 
-        stage('Build api code') {
-            steps {
-                container('npm') {
-                    script {
-                        sh'''#!/bin/bash
-                        cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+		stage('Build api code') {
+			steps {
+				container('npm') {
+					script {
+						sh '''
+							#!/bin/bash
+                        	cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
                         '''
-                    } // script
-                }
-            }
-        }// end stage build
+					} // script
+				}
+			}
+		}// end stage build
 
-        stage('Publish api code') {
+		stage('Publish api code') {
 			steps {
 				container('npm') {
 
@@ -121,26 +130,27 @@ pipeline {
 						try {
 							echo "Publishing admin-core-api package to registry"
 							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-							  sh "cat $configFile > .npmrc"
+								sh "cat $configFile > .npmrc"
 							}
-							sh '''#/bin/bash
-							cp .npmrc ./api
-							cd api
-							npm config fix
-							npm publish
-							rm -f .npmrc
-							cd ..
-							echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
-							rm -f .npmrc
+							sh '''
+								#/bin/bash
+								cp .npmrc ./api
+								cd api
+								npm config fix
+								npm publish
+								rm -f .npmrc
+								cd ..
+								echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+								rm -f .npmrc
 							'''
 						} catch (err) {
 							echo "Error message: ${err.getMessage()}"
-							if ( err.getMessage().contains("Repository does not allow updating assets") ) {
-                            	echo "admin-core-api package version number was not updated, continuing with pipeline"
-                            } else {
-                            	echo "admin-core-api package failed to publish"
-                            	currentBuild.result = 'FAILURE'
-                            }
+							if (err.getMessage().contains("Repository does not allow updating assets")) {
+								echo "admin-core-api package version number was not updated, continuing with pipeline"
+							} else {
+								echo "admin-core-api package failed to publish"
+								currentBuild.result = 'FAILURE'
+							}
 						}
 					} // script
 				}// end container
@@ -166,22 +176,22 @@ pipeline {
 	}
 }
 
-void getImageFromDockerfile() {
-    return 'node:lts'
+String getImageFromDockerfile() {
+	return 'node:20.4-alpine'
 }
 
 void setGitHubBuildStatus(String message, String state) {
-    step([
-        $class: 'GitHubCommitStatusSetter',
-        reposSource: [$class: 'ManuallyEnteredRepositorySource', url: "${GIT_URL}"],
-        commitShaSource: [$class: 'ManuallyEnteredShaSource', sha: "${GIT_COMMIT}"],
-        errorHandlers: [[$class: 'ChangingBuildStatusErrorHandler', result: 'UNSTABLE']],
-        statusResultSource: [ $class: 'ConditionalStatusResultSource', results: [[$class: 'AnyBuildResult', message: message, state: state]] ]
-    ])
+	step([
+		$class            : 'GitHubCommitStatusSetter',
+		reposSource       : [$class: 'ManuallyEnteredRepositorySource', url: "${GIT_URL}"],
+		commitShaSource   : [$class: 'ManuallyEnteredShaSource', sha: "${GIT_COMMIT}"],
+		errorHandlers     : [[$class: 'ChangingBuildStatusErrorHandler', result: 'UNSTABLE']],
+		statusResultSource: [$class: 'ConditionalStatusResultSource', results: [[$class: 'AnyBuildResult', message: message, state: state]]]
+	])
 }
 
 void getAllCommitsBetweenTags(String from, String to) {
-    commit_messages = sh(script: "git log ${from}...${to} --merges --format=%b", returnStdout: true)
+	commit_messages = sh(script: "git log ${from}...${to} --merges --format=%b", returnStdout: true)
 
-    return commit_messages
+	return commit_messages
 }

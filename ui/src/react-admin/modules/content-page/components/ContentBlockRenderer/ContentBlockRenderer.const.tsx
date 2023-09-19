@@ -1,5 +1,6 @@
 import { FC, FunctionComponent } from 'react';
 import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
+import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';
 import {
 	BlockButtonsWrapper,
@@ -11,10 +12,12 @@ import {
 	BlockIFrame,
 	BlockImage,
 	BlockImageGridWrapper,
+	BlockImageTextBackground,
 	BlockImageTitleTextButtonWrapper,
 	BlockIntro,
 	BlockKlaar,
 	BlockLogoGridWrapper,
+	BlockMaintainersGrid,
 	BlockPageOverviewWrapper,
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
@@ -65,6 +68,11 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.ThreeClickableTiles]: BlockThreeClickableTiles,
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
+		[ContentBlockType.ImageTextBackground]: BlockImageTextBackground,
+		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
+
+		// Het archief specific blocks
+		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -118,11 +126,6 @@ export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 ];
-
-/**
- * Blocks that must receive a renderMediaCardWrapper function so that a modal can be added to open media items with bookmark functionality
- */
-export const OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS = [ContentBlockType.MediaGrid];
 
 /**
  * Blocks that need access to the top level content page

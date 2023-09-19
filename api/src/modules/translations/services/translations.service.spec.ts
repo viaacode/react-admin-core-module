@@ -7,9 +7,7 @@ import { TranslationsService } from './translations.service';
 import { SiteVariablesService } from '../../site-variables';
 import { UpdateResponse } from '../../shared/types/types';
 
-const mockSiteVariablesService: Partial<
-	Record<keyof SiteVariablesService, jest.SpyInstance>
-> = {
+const mockSiteVariablesService: Partial<Record<keyof SiteVariablesService, jest.SpyInstance>> = {
 	getSiteVariable: jest.fn(),
 };
 
@@ -48,7 +46,7 @@ describe('TranslationsService', () => {
 	describe('getFrontendTranslations', () => {
 		it('can get translations', async () => {
 			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(
-				mockTranslationsResponse.value,
+				mockTranslationsResponse.value
 			);
 			// mockCacheManager.wrap.mockResolvedValueOnce(mockTranslationsResponse.value);
 			const translations = await translationsService.getFrontendTranslations();
@@ -66,9 +64,7 @@ describe('TranslationsService', () => {
 				error = e;
 			}
 
-			expect(error.message).toEqual(
-				'No translations have been set in the database',
-			);
+			expect(error.message).toEqual('No translations have been set in the database');
 		});
 	});
 
@@ -111,14 +107,12 @@ describe('TranslationsService', () => {
 			const mockData: UpdateResponse = {
 				affectedRows: 1,
 			};
-			mockSiteVariablesService.updateSiteVariable.mockResolvedValueOnce(
-				mockData,
-			);
+			mockSiteVariablesService.updateSiteVariable.mockResolvedValueOnce(mockData);
 			const response = await translationsService.updateTranslations(
 				TranslationKey.TRANSLATIONS_FRONTEND,
 				{
 					key: 'new-translation',
-				},
+				}
 			);
 			expect(response).toEqual({ affectedRows: 1 });
 		});

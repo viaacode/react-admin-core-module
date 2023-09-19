@@ -9,7 +9,7 @@ import {
 	Spacer,
 } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import React, { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 
 import './BlockImageTitleTextButton.scss';
 

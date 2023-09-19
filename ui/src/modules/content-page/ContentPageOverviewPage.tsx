@@ -1,5 +1,5 @@
 import { Button, Flex } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { FC } from 'react';
 import { AdminConfigManager } from '~core/config';
 

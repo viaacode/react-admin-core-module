@@ -4,7 +4,6 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 
 // Fetch content items from GQL
 export const retrieveContentPages = async (
@@ -42,7 +41,7 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<ContentPageInfo>): PickerItem => ({
 			label: item.title || '',
-			...parsePickerItem(ContentPickerType.CONTENT_PAGE, item.path as string), // TODO enforce path in database
+			...parsePickerItem('CONTENT_PAGE', item.path as string), // TODO enforce path in database
 		})
 	);
 };

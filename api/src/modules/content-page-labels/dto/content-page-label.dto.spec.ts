@@ -1,4 +1,4 @@
-import { ContentPageLabelDto, PickerItemDto } from "./content-page-label.dto";
+import { ContentPageLabelDto, PickerItemDto } from './content-page-label.dto';
 
 describe('ContentPageLabelDto', () => {
 	describe('PickerItemDto', () => {
@@ -14,5 +14,4 @@ describe('ContentPageLabelDto', () => {
 			expect(contentPageLabelDto).toEqual({});
 		});
 	});
-
 });

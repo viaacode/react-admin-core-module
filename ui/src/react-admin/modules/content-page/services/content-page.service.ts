@@ -1,5 +1,5 @@
 import { IPagination } from '@studiohyperdrive/pagination';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 import { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
@@ -199,32 +199,28 @@ export class ContentPageService {
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
-	public static async updateContentPage(
-		contentPage: ContentPageInfo,
-		initialContentPage: Partial<ContentPageInfo> | undefined
-	): Promise<ContentPageInfo> {
+	public static async updateContentPage(contentPage: ContentPageInfo): Promise<ContentPageInfo> {
 		const dbContentPage: DbContentPage = await fetchWithLogoutJson<DbContentPage>(
 			this.getBaseUrl(),
 			{
 				method: 'PATCH',
 				body: JSON.stringify({
 					contentPage: convertContentPageInfoToDbContentPage(contentPage),
-					initialContentPage: convertContentPageInfoToDbContentPage(initialContentPage),
 				}),
 			}
 		);
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
-	// TODO figure out why this function is not used
-	public static async duplicateContentPageImages(id: number): Promise<ContentPageInfo> {
+	public static async duplicateContentPageImages(id: number | string): Promise<ContentPageInfo> {
 		try {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/duplicate`,
-					query: {
-						id,
-					},
+					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
+					url:
+						`${
+							AdminConfigManager.getConfig().database.proxyUrl
+						}/admin/content-pages/duplicate/` + id,
 				}),
 				{
 					method: 'POST',
@@ -232,7 +228,28 @@ export class ContentPageService {
 			);
 			return convertDbContentPageToContentPageInfo(responseContent);
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError('Failed to duplicate assets for content page', err, { id });
+		}
+	}
+
+	public static async duplicateContentImages(contentBlockInfo: any): Promise<any> {
+		try {
+			return await fetchWithLogoutJson<any>(
+				stringifyUrl({
+					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
+					url: `${
+						AdminConfigManager.getConfig().database.proxyUrl
+					}/admin/content-pages/blocks/duplicate`,
+				}),
+				{
+					method: 'POST',
+					body: JSON.stringify(contentBlockInfo),
+				}
+			);
+		} catch (err) {
+			throw new CustomError('Failed to duplicate assets for content block json', err, {
+				contentBlockInfo,
+			});
 		}
 	}
 
@@ -243,7 +260,7 @@ export class ContentPageService {
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.
 	/**
 	 * Find name that isn't a duplicate of an existing name of a content page of this user
-	 * eg if these content pages exist:
+	 * eg: if these content pages exist:
 	 * copy 1: test
 	 * copy 2: test
 	 * copy 4: test
@@ -294,7 +311,7 @@ export class ContentPageService {
 		profileId: string
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const contentToInsert = { ...contentPageInfo };
+			const contentToInsert = await this.duplicateContentPageImages(contentPageInfo.id);
 
 			// update attributes specific to duplicate
 			contentToInsert.isPublic = false;

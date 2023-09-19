@@ -6,9 +6,9 @@ import { TOptions } from 'i18next';
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory } from 'react-router-dom';
+import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { AdminConfig, AdminConfigManager } from '~core/config';
-import { AssetsService } from './shared/services/assets.service';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
 import Html from '~shared/components/Html/Html';
 import { ROUTE_PARTS } from '~shared/consts/routes';
@@ -28,26 +28,30 @@ const routerConfig: AdminConfig['services']['router'] = {
 	useHistory: useHistory,
 };
 
-const DUMMY_EDUCATIONAL_ORGANISATIONS = [
+const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-5-316',
-		label: 'Academie de Kunstbrug Gent - Bargiekaai 1',
+		unitStreet: 'Bargiekaai 1',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-24-316',
-		label: 'Academie de Kunstbrug Gent - Cataloniëstraat 1',
+		unitStreet: 'Cataloniëstraat 1',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-2-316',
-		label: 'Academie de Kunstbrug Gent - Coupure Rechts 52',
+		unitStreet: 'Coupure Rechts 52',
 	},
 	{
-		organizationId: '50674',
+		organisationId: '50674',
+		organisationLabel: 'Academie de Kunstbrug Gent',
 		unitId: '50674-4-316',
-		label: 'Academie de Kunstbrug Gent - Ottogracht Kunstencampus 4',
+		unitStreet: 'Ottogracht Kunstencampus 4',
 	},
 ];
 
@@ -66,11 +70,16 @@ function setConfig() {
 				ContentBlockType.PageOverview,
 				ContentBlockType.UspGrid,
 				ContentBlockType.Quote,
+				ContentBlockType.CTAs,
+				ContentBlockType.MediaGrid,
 				ContentBlockType.Uitgeklaard,
 				ContentBlockType.ImageTitleTextButton,
-				ContentBlockType.ThreeClickableTiles,
-				ContentBlockType.TagsWithLink,
-				ContentBlockType.CardsWithoutDescription,
+				// ContentBlockType.ThreeClickableTiles,
+				// ContentBlockType.TagsWithLink,
+				// ContentBlockType.CardsWithoutDescription,
+				// ContentBlockType.ImageTextBackground,
+				// ContentBlockType.MaintainersGrid,
+				// ContentBlockType.HetArchiefHeaderSearch,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -132,131 +141,136 @@ function setConfig() {
 			},
 			buttonTypes: () => [
 				// Het archief buttons
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___zilver'),
+				// 	value: 'content-page-button--silver',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
+				// 		'index___blauw-groen'
+				// 	),
+				// 	value: 'content-page-button--teal',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___wit'),
+				// 	value: 'content-page-button--white',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___zwart'),
+				// 	value: 'content-page-button--black',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___outline'),
+				// 	value: 'content-page-button--outline',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___tekst'),
+				// 	value: 'content-page-button--text',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___rood'),
+				// 	value: 'content-page-button--red',
+				// },
+				// {
+				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___link'),
+				// 	value: 'content-page-button--link',
+				// },
+
+				// Avo buttons
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___zilver'),
-					value: 'content-page-button--silver',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___primair'
+					),
+					value: 'primary',
 				},
 				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'index___blauw-groen'
+						'admin/content-block/content-block___secundair'
 					),
-					value: 'content-page-button--teal',
+					value: 'secondary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___wit'),
-					value: 'content-page-button--white',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___secundair-invers'
+					),
+					value: 'secondary-i',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___zwart'),
-					value: 'content-page-button--black',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___tertiair'
+					),
+					value: 'tertiary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___outline'),
-					value: 'content-page-button--outline',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___randloos'
+					),
+					value: 'borderless',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___tekst'),
-					value: 'content-page-button--text',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___randloos-invers'
+					),
+					value: 'borderless-i',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___rood'),
-					value: 'content-page-button--red',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___gevaar'
+					),
+					value: 'danger',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('index___link'),
-					value: 'content-page-button--link',
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___gevaar-hover'
+					),
+					value: 'danger-hover',
 				},
-
-				// Avo buttons
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___primair'
-				// 	),
-				// 	value: 'primary',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___secundair'
-				// 	),
-				// 	value: 'secondary',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___secundair-invers'
-				// 	),
-				// 	value: 'secondary-i',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___tertiair'
-				// 	),
-				// 	value: 'tertiary',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___randloos'
-				// 	),
-				// 	value: 'borderless',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___randloos-invers'
-				// 	),
-				// 	value: 'borderless-i',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___gevaar'
-				// 	),
-				// 	value: 'danger',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___gevaar-hover'
-				// 	),
-				// 	value: 'danger-hover',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___link'
-				// 	),
-				// 	value: 'link',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___link-inline'
-				// 	),
-				// 	value: 'inline-link',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___leerling-primair-geel'
-				// 	),
-				// 	value: 'pupil-primary',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___leerling-link-tekst-in-geel'
-				// 	),
-				// 	value: 'pupil-link',
-				// },
-				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
-				// 		'admin/content-block/content-block___leerling-link-geel-inline'
-				// 	),
-				// 	value: 'pupil-inline-link',
-				// },
+				{
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___link'
+					),
+					value: 'link',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___link-inline'
+					),
+					value: 'inline-link',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___leerling-primair-geel'
+					),
+					value: 'pupil-primary',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___leerling-link-tekst-in-geel'
+					),
+					value: 'pupil-link',
+				},
+				{
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'admin/content-block/content-block___leerling-link-geel-inline'
+					),
+					value: 'pupil-inline-link',
+				},
 			],
 		},
 		content_blocks: {
 			[ContentBlockType.Search]: () => <p>Search block mock</p>,
+			[ContentBlockType.MediaGrid]: () => <p>Media grid block mock</p>,
 		},
 		services: {
-			assetService: AssetsService,
 			toastService: {
-				showToast: (toastInfo: ToastInfo) => {
+				showToast: (toastInfo: ToastInfo): string => {
 					// Client decides how the toast messages are shown
 					console.info('show toast: ', toastInfo);
+					return 'fake-toast-id';
+				},
+				hideToast: (toastId: string) => {
+					// Client decides how the toast messages are hidden
+					console.info('hide toasts with id: ', toastId);
 				},
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
@@ -273,8 +287,8 @@ function setConfig() {
 				fetchEducationOrganisationName: (orgId: string, unitId: string) =>
 					Promise.resolve(
 						DUMMY_EDUCATIONAL_ORGANISATIONS.find(
-							(org) => org.organizationId === orgId && org.unitId === unitId
-						)?.label || orgId
+							(org) => org.organisationId === orgId && org.unitId === unitId
+						)?.organisationLabel || orgId
 					),
 				fetchCities: () => Promise.resolve(['GENT (9000)']),
 				fetchEducationOrganisations: () => Promise.resolve(DUMMY_EDUCATIONAL_ORGANISATIONS),
@@ -297,10 +311,6 @@ function setConfig() {
 			onExternalLink: () => {
 				// Client decides what should happen when an external link is clicked
 			},
-			mediaItemClicked: () => {
-				// TODO set redux value in the avo client and open a global modal to render the media item
-				// See AVO2-client src/admin/content-block/components/wrappers/MediaGridWrapper/MediaGridWrapper.tsx => handleItemClicked()
-			},
 		},
 		routes: {
 			ALERTS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
@@ -308,6 +318,7 @@ function setConfig() {
 			BUNDLE_EDIT: `/${ROUTE_PARTS.bundles}/:id/${ROUTE_PARTS.edit}`,
 			COLLECTIONS_OVERVIEW: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.collections}`,
 			COLLECTION_DETAIL: `/${ROUTE_PARTS.collections}/:id`,
+			ASSIGNMENT_DETAIL: `/${ROUTE_PARTS.workspace}/${ROUTE_PARTS.assignments}/:id`,
 			CONTENT_PAGE_CREATE: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/${ROUTE_PARTS.create}`,
 			CONTENT_PAGE_DETAIL: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id`,
 			CONTENT_PAGE_EDIT: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}/:id/${ROUTE_PARTS.edit}`,

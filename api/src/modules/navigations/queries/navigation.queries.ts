@@ -59,9 +59,7 @@ export type NavigationQueryTypes = {
 	DeleteNavigationItemMutationHetArchief: DeleteNavigationItemMutationHetArchief;
 	DeleteNavigationItemMutationVariablesHetArchief: DeleteNavigationItemMutationVariablesHetArchief;
 
-	GetNavigationBarsQuery:
-		| GetNavigationBarsQueryAvo
-		| GetNavigationBarsQueryHetArchief;
+	GetNavigationBarsQuery: GetNavigationBarsQueryAvo | GetNavigationBarsQueryHetArchief;
 	GetNavigationBarsQueryVariables:
 		| GetNavigationBarsQueryVariablesAvo
 		| GetNavigationBarsQueryVariablesHetArchief;
@@ -127,13 +125,13 @@ export type NavigationQueryTypes = {
 };
 
 type NavigationQueries = {
-	DeleteNavigationItemDocument: TypedDocumentNode;
-	GetNavigationBarsDocument: TypedDocumentNode;
-	GetAllNavigationItemsDocument: TypedDocumentNode;
-	GetNavigationItemByIdDocument: TypedDocumentNode;
-	GetNavigationItemsByPlacementDocument: TypedDocumentNode;
-	InsertNavigationItemDocument: TypedDocumentNode;
-	UpdateNavigationItemByIdDocument: TypedDocumentNode;
+	DeleteNavigationItemDocument: TypedDocumentNode<any, any>;
+	GetNavigationBarsDocument: TypedDocumentNode<any, any>;
+	GetAllNavigationItemsDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemByIdDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemsByPlacementDocument: TypedDocumentNode<any, any>;
+	InsertNavigationItemDocument: TypedDocumentNode<any, any>;
+	UpdateNavigationItemByIdDocument: TypedDocumentNode<any, any>;
 };
 
 export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
@@ -142,8 +140,7 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		GetNavigationBarsDocument: GetNavigationBarsDocumentAvo,
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentAvo,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentAvo,
-		GetNavigationItemsByPlacementDocument:
-			GetNavigationItemsByPlacementDocumentAvo,
+		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentAvo,
 		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
 	},
@@ -152,11 +149,9 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		GetNavigationBarsDocument: GetNavigationBarsDocumentHetArchief,
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentHetArchief,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentHetArchief,
-		GetNavigationItemsByPlacementDocument:
-			GetNavigationItemsByPlacementDocumentHetArchief,
+		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentHetArchief,
 		InsertNavigationItemDocument: InsertNavigationItemDocumentHetArchief,
-		UpdateNavigationItemByIdDocument:
-			UpdateNavigationItemByIdDocumentHetArchief,
+		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentHetArchief,
 	},
 };
 

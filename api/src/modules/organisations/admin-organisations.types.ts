@@ -1,5 +1,5 @@
-import { GetOrganisationQuery as GetOrganisationQueryAvo } from '../shared/generated/graphql-db-types-avo';
-import { GetOrganisationQuery as GetOrganisationQueryHetArchief } from '../shared/generated/graphql-db-types-hetarchief';
+import { GetOrganisationsQuery as GetOrganisationsQueryAvo } from '../shared/generated/graphql-db-types-avo';
+import { GetOrganisationsQuery as GetOrganisationsQueryHetArchief } from '../shared/generated/graphql-db-types-hetarchief';
 
 export interface Organisation {
 	id: string;
@@ -12,8 +12,7 @@ export type BasicOrganisation = {
 	name: string;
 };
 
-export type GqlAvoOrganisation =
-	GetOrganisationQueryAvo['shared_organisations'][0];
+export type GqlAvoOrganisation = GetOrganisationsQueryAvo['shared_organisations'][0];
 export type GqlHetArchiefOrganisation =
-	GetOrganisationQueryHetArchief['maintainer_content_partner'][0];
+	GetOrganisationsQueryHetArchief['maintainer_organisation'][0];
 export type GqlOrganisation = GqlAvoOrganisation | GqlHetArchiefOrganisation;

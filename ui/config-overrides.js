@@ -9,7 +9,6 @@ module.exports = override(
 			__dirname,
 			'./src/react-admin/modules/content-page/components/blocks'
 		),
-		['~generated']: path.resolve(__dirname, './src/react-admin/generated'),
 		['~core']: path.resolve(__dirname, './src/react-admin/core'),
 	})
 );

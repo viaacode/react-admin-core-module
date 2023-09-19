@@ -11,7 +11,8 @@ import {
 	Navbar,
 	Tabs,
 } from '@viaa/avo2-components';
-import { Avo, PermissionName } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -198,13 +199,10 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		try {
 			if (newContentPage) {
 				const updatedContentPage: ContentPageInfo =
-					await ContentPageService.updateContentPage(
-						{
-							...contentPageInfo,
-							...newContentPage,
-						} as ContentPageInfo,
-						undefined
-					);
+					await ContentPageService.updateContentPage({
+						...contentPageInfo,
+						...newContentPage,
+					} as ContentPageInfo);
 
 				setContentPageInfo({
 					...updatedContentPage,
@@ -332,7 +330,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	};
 
 	const renderContentActions = () => {
-		const contentPageOwnerId = contentPageInfo?.owner?.id;
+		const contentPageOwnerId = contentPageInfo?.userProfileId;
 		const isOwner = commonUser?.profileId === contentPageOwnerId;
 		const isAllowedToEdit =
 			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
@@ -435,11 +433,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	return (
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>
-				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}>
-					<Button type="borderless">
-						<Icon name="chevronLeft"></Icon>
-					</Button>
-				</Link>
+				<Button type="borderless" onClick={() => window.history.back()}>
+					<Icon name="chevronLeft"></Icon>
+				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>{renderContentActions()}</AdminLayout.Actions>
 			<AdminLayout.Content>

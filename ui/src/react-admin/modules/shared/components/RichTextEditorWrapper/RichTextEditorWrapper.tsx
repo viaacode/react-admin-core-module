@@ -4,9 +4,10 @@ import {
 	RichTextEditorProps,
 	RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
+import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
 import { CustomError } from '../../helpers/custom-error';
@@ -46,12 +47,11 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 		? {
 				uploadFn: async (param: RichTextEditorUploadInfo) => {
 					try {
-						const url =
-							await AdminConfigManager.getConfig().services.assetService.uploadFile(
-								param.file,
-								fileType,
-								ownerId || ''
-							);
+						const url = await AssetsService.uploadFile(
+							param.file,
+							fileType,
+							ownerId || ''
+						);
 						param.success({
 							url,
 						});

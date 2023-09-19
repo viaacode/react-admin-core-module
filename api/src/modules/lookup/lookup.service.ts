@@ -12,9 +12,7 @@ import { isHetArchief } from '../shared/helpers/is-hetarchief';
 
 @Injectable()
 export class LookupService {
-	constructor(
-		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
-	) {}
+	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public async fetchSubjects(): Promise<string[]> {
 		// not available for archief
@@ -23,9 +21,7 @@ export class LookupService {
 		}
 
 		try {
-			const response = await this.dataService.execute<GetSubjectsQuery>(
-				GetSubjectsDocument,
-			);
+			const response = await this.dataService.execute<GetSubjectsQuery>(GetSubjectsDocument);
 
 			const subjects = (
 				(response.lookup_enum_lom_classification || [] || []) as {
@@ -34,7 +30,7 @@ export class LookupService {
 			).map((item: { description: string }) => item.description);
 
 			return sortBy(subjects, (subject) => subject.toLowerCase());
-		} catch (err) {
+		} catch (err: any) {
 			throw CustomError('Failed to get subjects from the database', err, {
 				query: 'GET_SUBJECTS',
 			});
@@ -49,22 +45,16 @@ export class LookupService {
 
 		try {
 			const response = await this.dataService.execute<GetEducationLevelsQuery>(
-				GetEducationLevelsDocument,
+				GetEducationLevelsDocument
 			);
 
 			return compact(
-				(response.lookup_enum_lom_context || []).map(
-					(item) => item.description,
-				),
+				(response.lookup_enum_lom_context || []).map((item) => item.description)
 			);
-		} catch (err) {
-			throw CustomError(
-				'Failed to get education levels from the database',
-				err,
-				{
-					query: 'GET_EDUCATION_LEVELS',
-				},
-			);
+		} catch (err: any) {
+			throw CustomError('Failed to get education levels from the database', err, {
+				query: 'GET_EDUCATION_LEVELS',
+			});
 		}
 	}
 }

@@ -7,9 +7,7 @@ import { TranslationsController } from './translations.controller';
 
 import { UpdateResponse } from '../../shared/types/types';
 
-const mockTranslationsService: Partial<
-	Record<keyof TranslationsService, jest.SpyInstance>
-> = {
+const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> = {
 	getTranslations: jest.fn(),
 	updateTranslations: jest.fn(),
 };
@@ -34,9 +32,7 @@ describe('TranslationsController', () => {
 			],
 		}).compile();
 
-		translationsController = module.get<TranslationsController>(
-			TranslationsController,
-		);
+		translationsController = module.get<TranslationsController>(TranslationsController);
 	});
 
 	it('should be defined', () => {
@@ -45,9 +41,7 @@ describe('TranslationsController', () => {
 
 	describe('getFrontendTranslations', () => {
 		it('should return the translations', async () => {
-			mockTranslationsService.getTranslations.mockResolvedValueOnce(
-				mockTranslationsResponse,
-			);
+			mockTranslationsService.getTranslations.mockResolvedValueOnce(mockTranslationsResponse);
 
 			const translations = await translationsController.getTranslationsJson();
 
@@ -57,9 +51,7 @@ describe('TranslationsController', () => {
 
 	describe('getTranslations', () => {
 		it('should return the translations', async () => {
-			mockTranslationsService.getTranslations.mockResolvedValueOnce(
-				mockTranslationsResponse,
-			);
+			mockTranslationsService.getTranslations.mockResolvedValueOnce(mockTranslationsResponse);
 
 			const translations = await translationsController.getTranslations();
 
@@ -70,9 +62,7 @@ describe('TranslationsController', () => {
 	describe('updateTranslations', () => {
 		it('should update the translations', async () => {
 			const mockData: UpdateResponse = { affectedRows: 1 };
-			mockTranslationsService.updateTranslations.mockResolvedValueOnce(
-				mockData,
-			);
+			mockTranslationsService.updateTranslations.mockResolvedValueOnce(mockData);
 
 			const response = await translationsController.updateTranslations({
 				key: TranslationKey.TRANSLATIONS_FRONTEND,

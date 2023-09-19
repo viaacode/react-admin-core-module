@@ -2,7 +2,6 @@ import { compact, sortBy } from 'lodash-es';
 
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { PickerItem } from '~shared/types/content-picker';
 import { AdminConfigManager } from '~core/config';
 
@@ -17,7 +16,7 @@ export const retrieveInternalLinks = async (
 			if (!keyword || staticRoute.includes(keyword)) {
 				return {
 					label: staticRoute,
-					...parsePickerItem(ContentPickerType.INTERNAL_LINK, staticRoute),
+					...parsePickerItem('INTERNAL_LINK', staticRoute),
 				};
 			}
 			return null;

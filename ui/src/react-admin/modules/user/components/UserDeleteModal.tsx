@@ -1,4 +1,3 @@
-import { get } from 'lodash-es';
 import React, { FunctionComponent, ReactNode, useState } from 'react';
 
 import {
@@ -15,7 +14,7 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { DeleteContentCounts } from '../user.types';
@@ -26,7 +25,6 @@ import { buildLink } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
 import { PickerItem } from '~shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
-import { ContentPickerType } from '~shared/components/ContentPicker/ContentPicker.types';
 import { UserService } from '../user.service';
 
 import './UserDeleteModal.scss';
@@ -126,12 +124,13 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	};
 
 	const renderConfirmDeleteMessage = () => {
-		const publicCollections: number = get(deleteContentCounts, 'publicCollections') || 0;
-		const privateCollections: number = get(deleteContentCounts, 'privateCollections') || 0;
-		const assignments: number = get(deleteContentCounts, 'assignments') || 0;
-		const bookmarks: number = get(deleteContentCounts, 'bookmarks') || 0;
-		const publicContentPages: number = get(deleteContentCounts, 'publicContentPages') || 0;
-		const privateContentPages: number = get(deleteContentCounts, 'privateContentPages') || 0;
+		const publicCollections: number = deleteContentCounts?.publicCollections || 0;
+		const privateCollections: number = deleteContentCounts?.privateCollections || 0;
+		const publicAssignments: number = deleteContentCounts?.publicAssignments || 0;
+		const privateAssignments: number = deleteContentCounts?.privateAssignments || 0;
+		const publicContentPages: number = deleteContentCounts?.publicContentPages || 0;
+		const privateContentPages: number = deleteContentCounts?.privateContentPages || 0;
+		const bookmarks: number = deleteContentCounts?.bookmarks || 0;
 
 		const isDeleteAll = selectedDeleteOption === 'DELETE_ALL';
 		const isTransferAll = selectedDeleteOption === 'TRANSFER_ALL';
@@ -150,7 +149,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{publicCollections}{' '}
-					{tHtml('admin/users/views/user-overview___publieke-collecties')}
+					{publicCollections === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-collectie-of-bundel'
+						  )
+						: tHtml('admin/users/views/user-overview___publieke-collecties')}
 				</Link>
 			);
 		}
@@ -167,7 +170,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{privateCollections}{' '}
-					{tHtml('admin/users/views/user-overview___prive-collecties')}
+					{privateCollections === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-collectie-of-bundel'
+						  )
+						: tHtml('admin/users/views/user-overview___prive-collecties')}
 				</Link>
 			);
 		}
@@ -184,7 +191,11 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{publicContentPages}{' '}
-					{tHtml('admin/users/views/user-overview___publieke-content-paginas')}
+					{publicContentPages === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-content-pagina'
+						  )
+						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
 				</Link>
 			);
 		}
@@ -201,21 +212,51 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					)}
 				>
 					{privateContentPages}{' '}
-					{tHtml('admin/users/views/user-overview___prive-content-paginas')}
+					{privateContentPages === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-content-pagina'
+						  )
+						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
 				</Link>
 			);
 		}
-		if (!isTransferAll && assignments) {
+		if (isDeleteAll && publicAssignments) {
 			countOutputs.push(
 				<>
-					{assignments} {tHtml('admin/users/views/user-overview___opdrachten')}
+					{publicAssignments}{' '}
+					{publicAssignments === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten'
+						  )}
+				</>
+			);
+		}
+		if (!isTransferAll && privateAssignments) {
+			countOutputs.push(
+				<>
+					{privateAssignments}{' '}
+					{privateAssignments === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-opdracht'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten'
+						  )}
 				</>
 			);
 		}
 		if (!isTransferAll && bookmarks) {
 			countOutputs.push(
 				<>
-					{bookmarks} {tHtml('admin/users/views/user-overview___bladwijzers')}
+					{bookmarks}{' '}
+					{bookmarks === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___bladwijzer'
+						  )
+						: tHtml('admin/users/views/user-overview___bladwijzers')}
 				</>
 			);
 		}
@@ -312,7 +353,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{(selectedDeleteOption === 'TRANSFER_PUBLIC' ||
 						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
-							allowedTypes={[ContentPickerType.PROFILE]}
+							allowedTypes={['PROFILE']}
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(

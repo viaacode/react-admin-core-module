@@ -1,19 +1,18 @@
 import { Container, Spacer } from '@viaa/avo2-components';
-import { Avo } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
-import { Color, ContentBlockConfig } from '../../types/content-block.types';
+import { Color, ContentBlockConfig, CustomBackground } from '../../types/content-block.types';
 
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
 	GET_BLOCK_COMPONENT,
 	IGNORE_BLOCK_LEVEL_PROPS,
 	NAVIGABLE_CONTENT_BLOCKS,
-	OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
 } from './ContentBlockRenderer.const';
@@ -97,12 +96,6 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		blockStateProps.commonUser = commonUser;
 	}
 
-	if (OPEN_MEDIA_IN_POPUP_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
-		// Pass a function to the block, so it can render a wrapper to open media items in a modal
-		// Without the admin core needing to know about users, bookmarks, ...
-		blockStateProps.mediaItemClicked = AdminConfigManager.getConfig().handlers.mediaItemClicked;
-	}
-
 	// Pass the content page object to the block
 	if (CONTENT_PAGE_ACCESS_BLOCKS.includes(contentBlockConfig.type)) {
 		// Set profile to current user for unsaved pages
@@ -126,10 +119,17 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			className={clsx(
 				'c-content-block',
 				className,
-				'c-content-block__' + kebabCase(contentBlockConfig.type)
+				'c-content-block__' + kebabCase(contentBlockConfig.type),
+				{
+					'c-content-block__meemoo-custom-background':
+						blockState.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
+				}
 			)}
 			style={{
-				backgroundColor: blockState.backgroundColor,
+				background:
+					blockState.backgroundColor === CustomBackground.MeemooLogo
+						? Color.Transparent
+						: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
 			id={blockState.anchor}
@@ -152,7 +152,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					className="c-content-block__header-bg-color"
 					ref={headerBgRef}
 					style={{
-						backgroundColor: blockState.headerBackgroundColor,
+						background: blockState.headerBackgroundColor,
 					}}
 				/>
 				{blockState.fullWidth ? (

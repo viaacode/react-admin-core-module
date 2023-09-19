@@ -1,14 +1,18 @@
 import { ButtonAction } from '@viaa/avo2-components';
 import classnames from 'classnames';
-import { isNil } from 'lodash-es';
+import { Image } from '@viaa/avo2-components';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { Icon } from '~modules/shared/components';
-import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
 import { DefaultComponentProps } from '~modules/shared/types/components';
+import { isNil } from 'lodash-es';
+import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
+import { Icon } from '~modules/shared/components';
+import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import { BlockHeading } from '../BlockHeading';
 
 export interface BlockClickableTilesProps {
-	subtitle: string;
-	imgSource: string;
+	title: string;
+	titleType: HeadingTypeOption;
+	image: string;
 	link?: ButtonAction;
 }
 
@@ -20,49 +24,43 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 	className,
 	elements,
 }): ReactElement => {
-	const renderTile = (
-		link: ButtonAction | undefined,
-		subtitle: string,
-		imgSource: string,
-		i: number
-	): ReactElement => {
-		const element = (
-			<div className="c-block-three-clickable-tiles__tile">
-				<div
-					className="c-block-three-clickable-tiles__tile-image"
-					style={{
-						backgroundImage: `url('${imgSource}')`,
-					}}
-				/>
-				<div className="c-block-three-clickable-tiles__tile-subtitle">
-					<h5 className="u-text-ellipsis--2">{subtitle}</h5>
+	const renderTile = ({ image, title, titleType }: BlockClickableTilesProps, i: number) => (
+		<article
+			key={`c-block-three-clickable-tiles-${i}`}
+			className="c-block-three-clickable-tiles__tile"
+		>
+			<Image src={image} alt={title} className="c-block-three-clickable-tiles__image" />
+			<div className="c-block-three-clickable-tiles__content">
+				{title && titleType && (
+					<BlockHeading
+						className="c-block-three-clickable-tiles__title u-text-ellipsis--2"
+						type={titleType}
+					>
+						{title}
+					</BlockHeading>
+				)}
+				<div className="c-block-three-clickable-tiles__icon">
 					<Icon name="arrowRight" />
 				</div>
 			</div>
-		);
-		return !isNil(link) ? (
-			<SmartLink
-				key={`c-block-three-clickable-tiles-${i}`}
-				className="c-block-three-clickable-tiles__term c-block-three-clickable-tiles__link"
-				action={link}
-			>
-				{element}
-			</SmartLink>
-		) : (
-			<div
-				key={`c-block-three-clickable-tiles-${i}`}
-				className="c-block-three-clickable-tiles__term"
-			>
-				{element}
-			</div>
-		);
-	};
+		</article>
+	);
 
 	return (
 		<div className={classnames('c-block-three-clickable-tiles', className)}>
 			{elements.map(
-				({ link, subtitle, imgSource }: BlockClickableTilesProps, i: number): ReactNode =>
-					renderTile(link, subtitle, imgSource, i)
+				(tile: BlockClickableTilesProps, i: number): ReactNode =>
+					isNil(tile?.link) ? (
+						renderTile(tile, i)
+					) : (
+						<SmartLink
+							key={`c-block-three-clickable-tiles-${i}`}
+							className="c-block-three-clickable-tiles__link"
+							action={tile.link}
+						>
+							{renderTile(tile, i)}
+						</SmartLink>
+					)
 			)}
 		</div>
 	);
