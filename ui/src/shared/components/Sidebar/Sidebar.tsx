@@ -1,4 +1,4 @@
-import classnames from 'clsx';
+import clsx from 'clsx';
 import { Location } from 'history';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent, ReactElement } from 'react';
@@ -50,12 +50,12 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 		return (
 			<li
 				key={`${navItem.location}-${index}`}
-				className={classnames('o-sidebar__nav-item-wrapper', {
+				className={clsx('o-sidebar__nav-item-wrapper', {
 					'o-sidebar__nav-item-sublink': isSubLink || false,
 				})}
 			>
 				<NavLink
-					className={classnames('o-sidebar__nav-item')}
+					className={clsx('o-sidebar__nav-item')}
 					activeClassName="o-sidebar__nav-item--active"
 					isActive={(match, location) => isActiveClass(navItem, location)}
 					to={navItem.location || '/'}
@@ -85,7 +85,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	};
 
 	return (
-		<div className={classnames(className, 'o-sidebar', { 'o-sidebar--light': light })}>
+		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
 			{headerLink && (
 				<div className="o-sidebar__header">
 					<Link className="u-remove-link-styling u-color-white" to={headerLink}>

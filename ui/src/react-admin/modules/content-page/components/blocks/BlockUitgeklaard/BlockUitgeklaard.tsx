@@ -1,5 +1,5 @@
 import { DefaultProps } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import React, { FunctionComponent } from 'react';
 
@@ -16,7 +16,7 @@ export const BlockUitgeklaard: FunctionComponent<BlockUitgeklaardProps> = ({
 	date,
 	titles,
 }) => (
-	<div className={classnames(className, 'uitgeklaard-header')} role="banner">
+	<div className={clsx(className, 'uitgeklaard-header')} role="banner">
 		<div className="uitgeklaard-header__logo">
 			<span>Uitgeklaard</span>
 		</div>

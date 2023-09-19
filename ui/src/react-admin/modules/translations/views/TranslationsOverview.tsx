@@ -31,6 +31,11 @@ import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
 } from '~modules/translations/translations.const';
+import {
+	type Translation,
+	TranslationContextName,
+	type TranslationsOverviewProps,
+} from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
@@ -41,19 +46,6 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
 import { TranslationsService } from '../translations.service';
-
-import {
-	convertFromDatabaseToList,
-	convertFromListToDatabase,
-	getKeyPrefix,
-} from '~modules/translations/helpers/database-conversions';
-import Html from '~shared/components/Html/Html';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import { useTranslation } from '~shared/hooks/useTranslation';
-	Translation,
-	TranslationContextName,
-	TranslationsOverviewProps,
-} from '../translations.types';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,

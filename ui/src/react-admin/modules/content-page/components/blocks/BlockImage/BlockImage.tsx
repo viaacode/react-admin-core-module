@@ -1,5 +1,5 @@
 import { AlignOptions, Container, DefaultProps, Image } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { CSSProperties, FunctionComponent } from 'react';
 
 import './BlockImage.scss';
@@ -35,7 +35,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 
 	return (
 		<Container
-			className={classnames(
+			className={clsx(
 				className,
 				'o-block-image',
 				`o-block-image__${align}`,

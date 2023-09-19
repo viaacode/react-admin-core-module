@@ -1,5 +1,5 @@
 import { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
@@ -19,7 +19,7 @@ export const BlockIntro: FunctionComponent<BlockIntroProps> = ({
 	align = 'left',
 	headingType = 'h1',
 }) => (
-	<div className={classnames(className, 'c-content', `u-text-${align}`)}>
+	<div className={clsx(className, 'c-content', `u-text-${align}`)}>
 		{title && (
 			<BlockHeading className="o-container-vertical-title__title" type={headingType}>
 				{title}

@@ -8,7 +8,7 @@ import {
 	Image,
 	Spacer,
 } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { FunctionComponent, ReactNode } from 'react';
 
 import './BlockImageTitleTextButton.scss';
@@ -49,10 +49,7 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 	};
 
 	return (
-		<Container
-			className={classnames('c-block-image-title-text-button', className)}
-			mode="vertical"
-		>
+		<Container className={clsx('c-block-image-title-text-button', className)} mode="vertical">
 			<Container mode="horizontal">
 				<Grid>
 					<Column size="2-4">

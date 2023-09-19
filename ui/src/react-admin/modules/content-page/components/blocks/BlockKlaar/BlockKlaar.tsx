@@ -1,5 +1,5 @@
 import { DefaultProps } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import React, { FunctionComponent } from 'react';
@@ -13,7 +13,7 @@ export interface BlockKlaarProps extends DefaultProps {
 }
 
 export const BlockKlaar: FunctionComponent<BlockKlaarProps> = ({ className, date, titles }) => (
-	<div className={classnames(className, 'klaar-header')} role="banner">
+	<div className={clsx(className, 'klaar-header')} role="banner">
 		<div className="klaar-header__logo">
 			<span>KLAAR</span>
 		</div>

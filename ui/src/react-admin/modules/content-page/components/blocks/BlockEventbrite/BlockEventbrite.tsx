@@ -1,5 +1,5 @@
 import { AlignOptions, Button, ButtonProps, DefaultProps } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent, useEffect } from 'react';
 
 import './BlockEventbrite.scss';
@@ -42,11 +42,7 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 
 	return (
 		<div
-			className={classnames(
-				className,
-				'c-block-eventbrite',
-				`c-block-eventbrite__align-${align}`
-			)}
+			className={clsx(className, 'c-block-eventbrite', `c-block-eventbrite__align-${align}`)}
 		>
 			<Button
 				{...rest}

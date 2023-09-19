@@ -10,7 +10,7 @@ import {
 	RenderLinkFunction,
 	Spacer,
 } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 import { Icon } from '~shared/components';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
@@ -97,7 +97,7 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	);
 
 	return (
-		<div className={classnames('c-rich-text-block', className)}>
+		<div className={clsx('c-rich-text-block', className)}>
 			{Array.isArray(elements) ? renderElements(elements) : renderContent(elements)}
 		</div>
 	);

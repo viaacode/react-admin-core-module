@@ -14,7 +14,8 @@ export interface GetProfileArguments {
 }
 
 export const useGetProfiles = (
-	getProfileArguments?: GetProfileArguments
+	getProfileArguments?: GetProfileArguments,
+	options: { enabled?: boolean } = {}
 ): UseQueryResult<[Avo.User.CommonUser[], number]> => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, getProfileArguments],
@@ -32,6 +33,9 @@ export const useGetProfiles = (
 				getProfileArgs.itemsPerPage || USERS_PER_PAGE
 			);
 		},
-		options
+		{
+			enabled: true,
+			...options,
+		}
 	);
 };

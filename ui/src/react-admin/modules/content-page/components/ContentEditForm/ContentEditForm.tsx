@@ -13,8 +13,7 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import type { RichEditorState } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { type Avo, PermissionName } from '@viaa/avo2-types';
 import { compact, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
@@ -23,7 +22,6 @@ import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import type { Avo } from '@viaa/avo2-types';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';

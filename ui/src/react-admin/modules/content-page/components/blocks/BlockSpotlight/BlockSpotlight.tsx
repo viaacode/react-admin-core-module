@@ -5,7 +5,7 @@ import {
 	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
@@ -36,7 +36,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 		const buttonAction = element?.buttonAction;
 		return (
 			<div
-				className={classnames('c-spotlight__item', {
+				className={clsx('c-spotlight__item', {
 					'u-clickable': !!buttonAction,
 				})}
 				style={{ backgroundImage: `url(${element?.image})` }}
@@ -53,7 +53,7 @@ export const BlockSpotlight: FunctionComponent<BlockSpotlightProps> = ({
 	}
 
 	return (
-		<div className={classnames(className, 'c-spotlight')}>
+		<div className={clsx(className, 'c-spotlight')}>
 			{renderItem(0)}
 			{renderItem(1)}
 			{renderItem(2)}

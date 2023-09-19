@@ -16,7 +16,7 @@ import {
 	TagList,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
@@ -183,7 +183,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			return pages.map((page) => {
 				return (
 					<Container
-						className={classnames(
+						className={clsx(
 							'c-block-image-title-text-button',
 							itemStyle === ContentItemStyle.NEWS_LIST && 'c-page-overview-news-list',
 							itemStyle === ContentItemStyle.PROJECT_LIST &&

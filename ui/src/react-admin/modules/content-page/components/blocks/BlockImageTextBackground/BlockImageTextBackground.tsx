@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import clsx from 'clsx';
 import { FunctionComponent, ReactElement } from 'react';
 import {
@@ -47,7 +46,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 }): ReactElement => {
 	return (
 		<article
-			className={classnames(
+			className={clsx(
 				`c-block-image-text-background c-block-image-text-background--${imageAlignment}`,
 				className
 			)}

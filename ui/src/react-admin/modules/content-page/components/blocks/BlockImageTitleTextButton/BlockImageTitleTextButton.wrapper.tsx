@@ -1,5 +1,5 @@
 import { Button, Column, Grid, Image } from '@viaa/avo2-components';
-import classNames from 'clsx';
+import clsx from 'clsx';
 import React, { FC } from 'react';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { ImageTitleTextButtonBlockComponentState } from '~modules/content-page/types/content-block.types';
@@ -29,7 +29,7 @@ export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockCompo
 
 	return (
 		<Grid
-			className={classNames(
+			className={clsx(
 				'c-item-video-description',
 				`c-image-title-text-button-wrapper--image-${imagePosition}`
 			)}
