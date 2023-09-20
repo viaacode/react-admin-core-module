@@ -15,8 +15,13 @@ import { ROUTE_PARTS } from '~shared/consts/routes';
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { IconName } from '@viaa/avo2-components';
 import { capitalize, lowerCase } from 'lodash-es';
+import setDefaultOptions from 'date-fns/setDefaultOptions';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 
 const proxyUrl = 'http://localhost:3300';
+
+// Set global locale for date-fns functions:
+setDefaultOptions({ locale: nlBE });
 
 const routerConfig: AdminConfig['services']['router'] = {
 	Link: Link as FunctionComponent<LinkInfo>,

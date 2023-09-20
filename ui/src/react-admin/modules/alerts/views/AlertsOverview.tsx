@@ -4,6 +4,7 @@ import {
 	Datepicker,
 	FormControl,
 	MultiSelect,
+	type MultiSelectOption,
 	Pagination,
 	RichEditorState,
 	RichTextEditor,
@@ -11,10 +12,9 @@ import {
 	Table,
 	TableOptions,
 	TextInput,
-	Timepicker,
 	timepicker,
+	Timepicker,
 } from '@meemoo/react-components';
-import { MultiSelectOption } from '@meemoo/react-components/dist/esm/components/MultiSelect/MultiSelect.types';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
@@ -48,7 +48,7 @@ import {
 	AlertsOverviewTableCol,
 } from '../alerts.types';
 import { isNil, without } from 'lodash-es';
-import { nlBE } from 'date-fns/locale';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';

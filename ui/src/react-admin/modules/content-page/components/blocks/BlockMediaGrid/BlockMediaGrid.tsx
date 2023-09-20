@@ -22,7 +22,7 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { get, last } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import Icon from '~shared/components/Icon/Icon';
@@ -198,7 +198,7 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 	};
 
 	return (
-		<div className={classnames(className, 'c-block-media-list c-media-card-list')}>
+		<div className={clsx(className, 'c-block-media-list c-media-card-list')}>
 			{(!!title || !!buttonLabel) && (
 				<Toolbar>
 					<ToolbarLeft>
@@ -225,7 +225,7 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 				})}
 				{hasCTA && (
 					<Column size={fullWidth ? '3-12' : '3-3'}>
-						<div className={classnames(className, 'c-media-card', 'c-media-card__cta')}>
+						<div className={clsx(className, 'c-media-card', 'c-media-card__cta')}>
 							{renderLink(
 								ctaButtonAction,
 								renderCTA(),

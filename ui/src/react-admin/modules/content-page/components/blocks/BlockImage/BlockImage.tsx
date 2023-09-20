@@ -1,5 +1,5 @@
 import { AlignOptions, Container, DefaultProps, Image } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { CSSProperties, FunctionComponent } from 'react';
 
 import './BlockImage.scss';
@@ -35,7 +35,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 
 	return (
 		<Container
-			className={classnames(
+			className={clsx(
 				className,
 				'o-block-image',
 				`o-block-image__${align}`,
@@ -44,7 +44,7 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 					'o-block-image__page-header-image': width === 'page-header',
 				}
 			)}
-			style={style}
+			style={style as any}
 		>
 			{width !== 'page-header' && (
 				<Image src={imageSource} alt={imageDescription || title || text} wide />

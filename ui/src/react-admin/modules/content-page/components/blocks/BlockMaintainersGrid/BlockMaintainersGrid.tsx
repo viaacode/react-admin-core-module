@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { sampleSize } from 'lodash-es';
 import { FunctionComponent, ReactElement } from 'react';
 import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
@@ -28,7 +28,7 @@ export const BlockMaintainersGrid: FunctionComponent<BlockMaintainerGridProps> =
 	maintainers,
 }): ReactElement => {
 	return (
-		<article className={classnames('c-block-maintainers-grid', className)}>
+		<article className={clsx('c-block-maintainers-grid', className)}>
 			<div className="c-block-maintainers-grid__header">
 				<div>
 					<BlockHeading className="c-block-maintainers-grid__title" type={titleType}>

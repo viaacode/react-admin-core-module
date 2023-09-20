@@ -18,7 +18,7 @@ import {
 import clsx from 'clsx';
 import { get, isNil } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { validateContentBlockField } from '~shared/helpers/validation';
 import {

@@ -1,5 +1,5 @@
 import { Accordion, DefaultProps } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent, useState } from 'react';
 
 import { BlockRichText } from '../BlockRichText/BlockRichText';
@@ -22,7 +22,7 @@ export const BlockAccordions: FunctionComponent<BlockAccordionsProps> = ({
 
 	// Render
 	return (
-		<div className={classnames(className, 'c-block-accordions')}>
+		<div className={clsx(className, 'c-block-accordions')}>
 			{elements.map(({ content, title }, index) => {
 				const key = generateKey(index);
 

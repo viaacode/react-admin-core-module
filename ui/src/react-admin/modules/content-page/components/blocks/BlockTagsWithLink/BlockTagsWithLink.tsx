@@ -1,5 +1,5 @@
 import { ButtonAction } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { isEmpty, isNil } from 'lodash-es';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
@@ -34,7 +34,7 @@ export const BlockTagsWithLink: FunctionComponent<BlockTagsWithLinkProps> = ({
 		);
 
 	return (
-		<div className={classnames('c-block-tags-with-link', className)}>
+		<div className={clsx('c-block-tags-with-link', className)}>
 			{elements.map(
 				({ link, label }: BlockTagWithLinkProps, i: number): ReactNode =>
 					!isNil(label) && !isEmpty(label) ? renderTag(link, label, i) : null

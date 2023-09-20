@@ -1,5 +1,5 @@
 import { ButtonAction } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { Image } from '@viaa/avo2-components';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { DefaultComponentProps } from '~modules/shared/types/components';
@@ -47,7 +47,7 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 	);
 
 	return (
-		<div className={classnames('c-block-three-clickable-tiles', className)}>
+		<div className={clsx('c-block-three-clickable-tiles', className)}>
 			{elements.map(
 				(tile: BlockClickableTilesProps, i: number): ReactNode =>
 					isNil(tile?.link) ? (

@@ -1,4 +1,4 @@
-import { MultiSelectOption } from '@meemoo/react-components/dist/esm/components/MultiSelect/MultiSelect.types';
+import type { MultiSelectOption } from '@meemoo/react-components';
 import { useMemo } from 'react';
 
 import { TagInfo } from '@viaa/avo2-components';

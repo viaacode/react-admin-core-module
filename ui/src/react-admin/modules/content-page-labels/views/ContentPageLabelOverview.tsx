@@ -42,10 +42,11 @@ import {
 	ContentPageLabelOverviewTableCols,
 	ContentPageLabelTableState,
 } from '../content-page-label.types';
+import { DefaultComponentProps } from '~modules/shared/types';
 
 import './ContentPageLabelOverview.scss';
 
-const ContentPageLabelOverview: FunctionComponent = () => {
+const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const [contentPageLabel, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
@@ -364,6 +365,7 @@ const ContentPageLabelOverview: FunctionComponent = () => {
 			pageTitle={AdminConfigManager.getConfig().services.i18n.tText(
 				'admin/content-page-labels/views/content-page-label-overview___content-pagina-labels-overzicht'
 			)}
+			className={className}
 		>
 			<AdminLayout.Actions>
 				<Button

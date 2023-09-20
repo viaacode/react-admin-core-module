@@ -8,7 +8,7 @@ import {
 	IconName,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { flatten } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import Icon from '~shared/components/Icon/Icon';
@@ -48,7 +48,7 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 	renderLink = defaultRenderLinkFunction,
 }) => (
 	<ButtonToolbar
-		className={classnames(className, 'c-block-buttons', `u-content-flex--${align}`, {
+		className={clsx(className, 'c-block-buttons', `u-content-flex--${align}`, {
 			'c-block-buttons__dividers': hasDividers,
 		})}
 	>

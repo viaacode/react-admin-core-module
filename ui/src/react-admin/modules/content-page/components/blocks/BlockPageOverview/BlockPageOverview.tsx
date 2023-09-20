@@ -16,9 +16,9 @@ import {
 	TagList,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
+import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
-import moment from 'moment';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
@@ -30,8 +30,6 @@ import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 import { ContentItemStyle, ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
-
-moment.locale('nl-be');
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -153,7 +151,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	const formatDateString = (dateString: string, page: ContentPageInfo): string => {
 		return dateString
 			.replace('%label%', renderLabels(page))
-			.replace('%date%', moment(page.createdAt).format('D MMMM YYYY'));
+			.replace('%date%', format(parseISO(page.createdAt), 'd MMMM yyyy'));
 	};
 
 	const getDescription = (page: ContentPageInfo) => {
@@ -185,7 +183,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			return pages.map((page) => {
 				return (
 					<Container
-						className={classnames(
+						className={clsx(
 							'c-block-image-title-text-button',
 							itemStyle === ContentItemStyle.NEWS_LIST && 'c-page-overview-news-list',
 							itemStyle === ContentItemStyle.PROJECT_LIST &&

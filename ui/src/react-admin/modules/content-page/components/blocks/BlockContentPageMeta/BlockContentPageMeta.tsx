@@ -1,4 +1,5 @@
 import { Button } from '@viaa/avo2-components';
+import { format } from 'date-fns';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { getPublishedDate } from '~modules/content-page/helpers';
 
@@ -68,7 +69,7 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 			{tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___gepubliceerd-op'
 			)}{' '}
-			{publishedDate ? normalizeTimestamp(publishedDate).local().format('D MMMM YYYY') : '-'}{' '}
+			{publishedDate ? format(normalizeTimestamp(publishedDate), 'd MMMM yyyy') : '-'}{' '}
 			{renderLabels()}
 			{tHtml(
 				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'

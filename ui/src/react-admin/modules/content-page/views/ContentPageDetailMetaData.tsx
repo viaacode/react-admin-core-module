@@ -7,8 +7,8 @@ import {
 	TagOption,
 	Thumbnail,
 } from '@viaa/avo2-components';
+import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact, get } from 'lodash-es';
-import moment from 'moment';
 import React, { FunctionComponent } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
@@ -93,16 +93,17 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 		if (
 			publishAt &&
 			depublishAt &&
-			moment().isBetween(moment(publishAt), moment(depublishAt))
+			isAfter(new Date(), parseISO(publishAt)) &&
+			isBefore(new Date(), parseISO(depublishAt))
 		) {
 			return formatDate(publishAt);
 		}
 
-		if (!depublishAt && publishAt && moment().isAfter(moment(publishAt))) {
+		if (!depublishAt && publishAt && isAfter(new Date(), parseISO(publishAt))) {
 			return formatDate(publishAt);
 		}
 
-		if (!publishAt && depublishAt && moment().isBefore(moment(depublishAt))) {
+		if (!publishAt && depublishAt && isBefore(new Date(), parseISO(depublishAt))) {
 			return tHtml('admin/content/views/content-detail-meta-data___ja');
 		}
 

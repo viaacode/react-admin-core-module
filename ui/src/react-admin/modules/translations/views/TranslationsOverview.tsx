@@ -31,6 +31,11 @@ import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
 } from '~modules/translations/translations.const';
+import {
+	type Translation,
+	TranslationContextName,
+	type TranslationsOverviewProps,
+} from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
@@ -41,12 +46,6 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
 import { TranslationsService } from '../translations.service';
-
-import {
-	Translation,
-	TranslationContextName,
-	TranslationsOverviewProps,
-} from '../translations.types';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
@@ -201,7 +200,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		}
 	};
 
-	const handleRowClick = (_event: MouseEvent<any, any>, translationRow: Row<Translation>) => {
+	const handleRowClick = (_event: MouseEvent<any, any>, translationRow: Row<any>) => {
 		setActiveTranslation({
 			...translationRow.original,
 			context: snakeCase(
@@ -280,6 +279,40 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		}
 	};
 
+	const translationTableColumns = [
+		{
+			id: 'key',
+			Header: tHtml('modules/translations/views/translations-overview-v-2___id'),
+			accessor: 'key',
+			Cell: ({ row }: { row: Row<Translation> }) => {
+				const parts = row.original.label?.split('___') || [];
+				return (
+					<>
+						<div>
+							<strong>{parts[1]}</strong>
+						</div>
+						<div className="u-text-muted">{parts[0]}</div>
+					</>
+				);
+			},
+		},
+		{
+			id: 'value',
+			Header: tHtml('modules/translations/views/translations-overview-v-2___waarde'),
+			accessor: 'value',
+			Cell: ({ row }: { row: Row<Translation> }) => {
+				return <Html content={row.original.value} className="c-content"></Html>;
+			},
+		},
+		{
+			Header: '',
+			id: 'cp-visitors-histories-table-actions',
+			Cell: () => {
+				return <Icon name="edit"></Icon>;
+			},
+		},
+	];
+
 	const renderTranslationsTable = (): ReactNode => {
 		if (!filteredAndPaginatedTranslations) {
 			return <Loader />;
@@ -298,48 +331,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				<Table
 					options={
 						{
-							columns: [
-								{
-									id: 'key',
-									Header: tHtml(
-										'modules/translations/views/translations-overview-v-2___id'
-									),
-									accessor: 'key',
-									Cell: ({ row }: { row: Row<Translation> }) => {
-										const parts = row.original.label?.split('___') || [];
-										return (
-											<>
-												<div>
-													<strong>{parts[1]}</strong>
-												</div>
-												<div className="u-text-muted">{parts[0]}</div>
-											</>
-										);
-									},
-								},
-								{
-									id: 'value',
-									Header: tHtml(
-										'modules/translations/views/translations-overview-v-2___waarde'
-									),
-									accessor: 'value',
-									Cell: ({ row }: { row: Row<Translation> }) => {
-										return (
-											<Html
-												content={row.original.value}
-												className="c-content"
-											></Html>
-										);
-									},
-								},
-								{
-									Header: '',
-									id: 'cp-visitors-histories-table-actions',
-									Cell: () => {
-										return <Icon name="edit"></Icon>;
-									},
-								},
-							],
+							columns: translationTableColumns,
 							data: filteredAndPaginatedTranslations,
 							initialState: {
 								pageSize: TRANSLATIONS_PER_PAGE,

@@ -1,5 +1,5 @@
 import { DefaultProps, Quote } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 
 import './BlockQuote.scss';
@@ -19,7 +19,7 @@ export const BlockQuote: FunctionComponent<BlockQuoteProps> = ({
 	authorInitials,
 }) => (
 	<Quote
-		className={classnames('c-block-quote', className)}
+		className={clsx('c-block-quote', className)}
 		quote={quote}
 		authorImage={authorImage}
 		authorName={authorName}

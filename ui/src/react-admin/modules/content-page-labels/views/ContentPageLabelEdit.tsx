@@ -24,15 +24,17 @@ import {
 import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { AdminLayout } from '~shared/layouts';
+import { DefaultComponentProps } from '~shared/types/components';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
 import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
 
-type ContentPageLabelEditProps = { contentPageLabelId: string | undefined };
+type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 
 const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	contentPageLabelId,
+	className,
 }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -295,6 +297,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 							'admin/content-page-labels/views/content-page-label-edit___content-pagina-label-aanpassen'
 					  )
 			}
+			className={className}
 		>
 			<AdminLayout.Back>
 				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>

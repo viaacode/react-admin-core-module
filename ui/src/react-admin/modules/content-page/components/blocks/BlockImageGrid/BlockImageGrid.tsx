@@ -1,5 +1,5 @@
 import { Button, Spacer } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 import { BlockImageGridProps, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
@@ -88,7 +88,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 
 	return (
 		<div
-			className={classnames(
+			className={clsx(
 				'c-block-grid',
 				`text-align-${textAlign}`,
 				`item-align-${align}`,
@@ -98,7 +98,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 			{elements.map((element, index) => (
 				<div
 					key={`block-grid-${element?.action?.value || element.title || null}${index}`}
-					className={classnames('c-block-grid__item')}
+					className={clsx('c-block-grid__item')}
 					style={{
 						width: itemWidth,
 						margin: `${Math.round(verticalMargin / 2)}px ${Math.round(

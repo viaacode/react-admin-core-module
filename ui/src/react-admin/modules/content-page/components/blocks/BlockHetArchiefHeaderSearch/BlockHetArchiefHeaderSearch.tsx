@@ -1,5 +1,4 @@
 import { TextInput } from '@meemoo/react-components';
-import classnames from 'classnames';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
 import React, { FunctionComponent, KeyboardEvent, ReactElement, useEffect, useState } from 'react';
@@ -55,7 +54,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	};
 
 	return (
-		<article className={classnames('c-block-het-archief-header-search', className)}>
+		<article className={clsx('c-block-het-archief-header-search', className)}>
 			<div className="c-block-het-archief-header-search__header">
 				<BlockHeading className="c-block-het-archief-header-search__title" type="h1">
 					{title}

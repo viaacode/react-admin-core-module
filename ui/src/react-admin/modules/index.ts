@@ -20,6 +20,7 @@ export type { DbContentPage } from './content-page/types/content-pages.types';
 export type { ContentPageLabel } from './content-page/types/content-pages.types';
 export type { ContentPageDetailProps } from './content-page/views/ContentPageDetail';
 export type { ContentPageEditProps } from './content-page/views/ContentPageEdit';
+export { ContentWidth } from './content-page/types/content-pages.types';
 export type {
 	ContentBlockConfig,
 	ContentBlockErrors,

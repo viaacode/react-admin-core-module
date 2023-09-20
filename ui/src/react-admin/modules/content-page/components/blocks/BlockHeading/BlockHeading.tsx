@@ -1,5 +1,5 @@
 import { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent, ReactNode } from 'react';
 
 import './BlockHeading.scss';
@@ -21,7 +21,7 @@ export const BlockHeading: FunctionComponent<BlockHeadingProps> = ({
 	className,
 }) => (
 	<Type
-		className={classnames(className, `c-heading c-${Type}`, {
+		className={clsx(className, `c-heading c-${Type}`, {
 			[`u-text-${align}`]: align !== 'left',
 		})}
 		onClick={onClick}

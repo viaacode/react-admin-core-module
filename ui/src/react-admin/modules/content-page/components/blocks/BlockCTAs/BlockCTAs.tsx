@@ -1,5 +1,5 @@
 import { CTA, CTAProps, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import React, { FunctionComponent } from 'react';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
@@ -15,7 +15,7 @@ export const BlockCTAs: FunctionComponent<BlockCTAsProps> = ({
 	width,
 	renderLink = defaultRenderLinkFunction,
 }) => (
-	<div className={classnames(className, 'c-cta')}>
+	<div className={clsx(className, 'c-cta')}>
 		{elements.map((cta, index) => (
 			<CTA
 				key={`cta-${index}`}

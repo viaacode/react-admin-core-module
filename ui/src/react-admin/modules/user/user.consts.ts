@@ -1,6 +1,7 @@
 import { ButtonType, SelectOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
+import { isAfter, isBefore } from 'date-fns';
 import { compact } from 'lodash-es';
 
 import { AdminConfigManager, I18n } from '~core/config';
@@ -501,7 +502,7 @@ const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (
 			'admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'
 		),
 		isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
-			!!tempAccess.until && normalizeTimestamp(tempAccess.until).isAfter(),
+			!!tempAccess.until && isAfter(normalizeTimestamp(tempAccess.until), new Date()),
 	},
 	{
 		// When both from and until date are set, the from date must be < the until date
@@ -509,7 +510,8 @@ const GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE: (
 		isValid: (tempAccess: Partial<Avo.User.TempAccess>) => {
 			return tempAccess.from
 				? !!tempAccess.until &&
-						normalizeTimestamp(tempAccess.from).isBefore(
+						isBefore(
+							normalizeTimestamp(tempAccess.from),
 							normalizeTimestamp(tempAccess.until)
 						)
 				: true;

@@ -16,8 +16,8 @@ import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
 import { Icon } from '~shared/components';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
-import { nlBE } from 'date-fns/locale';
 import { formatDateString } from '~shared/helpers/formatters/date';
 
 import {
