@@ -19,11 +19,13 @@ import {
 } from '~shared/helpers/render-detail-fields';
 import { AdminLayout } from '~shared/layouts';
 import { ContentPageLabel } from '../content-page-label.types';
+import { DefaultComponentProps } from '~modules/shared/types';
 
-type ContentPageLabelDetailProps = { contentPageLabelId: string };
+type ContentPageLabelDetailProps = { contentPageLabelId: string } & DefaultComponentProps;
 
 const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = ({
 	contentPageLabelId,
+	className,
 }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -161,6 +163,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				pageTitle={AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-page-labels/views/content-page-label-detail___content-pagina-label-details'
 				)}
+				className={className}
 			>
 				<AdminLayout.Back>
 					<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>

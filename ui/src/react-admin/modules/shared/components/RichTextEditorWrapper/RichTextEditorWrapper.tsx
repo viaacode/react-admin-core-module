@@ -1,12 +1,11 @@
 import {
 	RichTextEditor,
-	RichTextEditorControl,
-	RichTextEditorProps,
-	RichTextEditorUploadInfo,
+	type RichTextEditorProps,
+	type RichTextEditorUploadInfo,
 } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import React, { type FunctionComponent } from 'react';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
@@ -90,7 +89,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 	return (
 		<RichTextEditor
 			{...rest}
-			controls={(controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT) as RichTextEditorControl[]} // TODO remove this cast once react-components v2.12.16 is released
+			controls={controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT}
 			media={media as any}
 			state={state}
 			onChange={onChange || noop}

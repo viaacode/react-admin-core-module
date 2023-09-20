@@ -4,7 +4,10 @@ import { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/co
 
 import type { Avo } from '@viaa/avo2-types';
 
-export function filterTypes(types: PickerTypeOption[], allowedTypes: Avo.Core.ContentPickerType[]) {
+export function filterTypes(
+	types: PickerTypeOption[],
+	allowedTypes: Avo.Core.ContentPickerType[]
+): PickerTypeOption[] {
 	return types.filter((option: PickerTypeOption) => {
 		return allowedTypes.length ? allowedTypes.includes(option.value) : option.value;
 	});
