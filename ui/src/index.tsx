@@ -20,6 +20,8 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 
 const proxyUrl = 'http://localhost:3300';
 
+declare const document: any;
+
 // Set global locale for date-fns functions:
 setDefaultOptions({ locale: nlBE });
 
@@ -369,3 +371,12 @@ async function bootstrapApp() {
 }
 
 bootstrapApp().catch((err) => console.error(err));
+
+console.info(
+	`
+This is the demo app of the admin-core.
+This code should never execute inside the clients that use the admin-core.
+If you see this message in the client, the index.tsx file in the admin-core is getting bundled inside the admin-core-ui bundle.
+Figure out why and make sure that doesn't happen
+`
+);
