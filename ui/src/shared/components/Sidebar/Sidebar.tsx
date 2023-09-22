@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Location } from 'history';
 import { flatten } from 'lodash-es';
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NavigationItemInfo } from '../../types';
 
@@ -9,6 +9,7 @@ import './Sidebar.scss';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
 interface SidebarProps {
+	children?: ReactNode;
 	className?: string;
 	headerLink?: string;
 	light?: boolean;

@@ -1,11 +1,12 @@
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { Link } from '../Link';
 
 import './Sidebar.scss';
 
 interface SidebarProps {
+	children?: ReactNode;
 	className?: string;
 	headerLink?: string;
 	light?: boolean;

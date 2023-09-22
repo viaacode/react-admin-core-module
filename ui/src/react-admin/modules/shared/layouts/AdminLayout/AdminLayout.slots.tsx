@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 
-export const AdminActions: FC = ({ children }) => <>{children}</>;
-export const AdminBack: FC = ({ children }) => <>{children}</>;
-export const AdminContent: FC = ({ children }) => <>{children}</>;
-export const AdminFiltersLeft: FC = ({ children }) => <>{children}</>;
-export const AdminFiltersRight: FC = ({ children }) => <>{children}</>;
+export const AdminActions: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;
+export const AdminBack: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;
+export const AdminContent: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;
+export const AdminFiltersLeft: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;
+export const AdminFiltersRight: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;

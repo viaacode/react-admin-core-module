@@ -9,7 +9,7 @@ const Loader: FC<DefaultComponentProps> = (props) => {
 
 	if (componentsConfig?.loader.component) {
 		const LoaderComponent = componentsConfig?.loader.component;
-		return <LoaderComponent {...props} />;
+		return <LoaderComponent {...(props as any)} />;
 	} else {
 		return <Spinner {...(props as SpinnerProps)} />;
 	}

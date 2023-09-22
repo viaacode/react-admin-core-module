@@ -48,7 +48,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
 		UserGroup[],
-		boolean
+		boolean,
 	];
 	const {
 		data: navigationItems,
@@ -137,14 +137,14 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
-		(contentUserGroupIds) => {
+		(contentUserGroupIds: (string | number)[]) => {
 			if (!currentNavigationItem) {
 				return;
 			}
 			const navItemUserGroupIds: string[] = currentNavigationItem.userGroupIds || [];
 			const allUserGroupIds: string[] = allUserGroups.map((ug) => String(ug.value));
 
-			// Add all user groups to content page user groups if content page is accessible by special user group: logged in users
+			// Add all user groups to content page user groups if content page is accessible by special user group: logged-in users
 			if (contentUserGroupIds.includes(SpecialPermissionGroups.loggedInUsers)) {
 				contentUserGroupIds = uniq([
 					...contentUserGroupIds,

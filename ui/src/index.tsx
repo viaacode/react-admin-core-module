@@ -1,6 +1,6 @@
 import { LinkInfo, ToastInfo } from '~core/config/config.types';
 import React, { FunctionComponent, ReactNode } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { TOptions } from 'i18next';
 
 import App from './App';
@@ -356,11 +356,13 @@ function setConfig() {
 }
 
 function renderApp() {
-	ReactDOM.render(
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>,
-		document.getElementById('root')
+	const root = createRoot(document.getElementById('root'));
+	root.render(
+		// Disabled strict mode because of issues with react router v5
+		// https://stackoverflow.com/questions/72107964/url-change-successfully-but-components-not-rendered-in-react-v18
+		// <React.StrictMode>
+		<App />
+		// </React.StrictMode>
 	);
 }
 

@@ -1,6 +1,7 @@
 import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
@@ -9,7 +10,6 @@ import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
-import { ResizablePanels } from '~shared/components/ResizablePanels/ResizablePanels';
 import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
 import { useTranslation } from '~shared/hooks/useTranslation';
@@ -44,31 +44,29 @@ function App() {
 			<BrowserRouter>
 				<QueryParamProvider ReactRouterRoute={Route}>
 					<div className="App">
-						<div className="m-resizable-panels">
-							<ResizablePanels
-								displayDirection="row"
-								panelsSize={[300]}
-								sizeUnitMeasure="px"
-								resizerSize="15px"
-							>
+						<PanelGroup direction="horizontal">
+							<Panel defaultSize={15}>
 								<Sidebar
 									navItems={navigationItems || undefined}
 									className="o-app--admin__sidebar"
 								/>
+							</Panel>
+							<PanelResizeHandle />
+							<Panel defaultSize={85}>
 								<Flex
 									className="o-app--admin__main u-flex-auto u-scroll"
 									orientation="vertical"
 								>
 									{renderAdminRoutes()}
 								</Flex>
-							</ResizablePanels>
-						</div>
-						{/*<Sidebar />*/}
-						{/*/!*<Switch>*!/*/}
-						{/*/!*{routes?.length > 0 && AdminCore.routes.render(routes)}*!/*/}
-						{/*<ContentPageOverview user={mockUser} />*/}
-						{/*</Switch>*/}
+							</Panel>
+						</PanelGroup>
 					</div>
+					{/*<Sidebar />*/}
+					{/*/!*<Switch>*!/*/}
+					{/*/!*{routes?.length > 0 && AdminCore.routes.render(routes)}*!/*/}
+					{/*<ContentPageOverview user={mockUser} />*/}
+					{/*</Switch>*/}
 				</QueryParamProvider>
 			</BrowserRouter>
 		</QueryClientProvider>

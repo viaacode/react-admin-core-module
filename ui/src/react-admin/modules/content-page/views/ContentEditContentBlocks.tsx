@@ -3,6 +3,7 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
@@ -19,7 +20,6 @@ import {
 	ContentEditActionType,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-import { ResizablePanels } from '~shared/components/ResizablePanels/ResizablePanels';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';
 import { useTranslation } from '~shared/hooks/useTranslation';
@@ -176,39 +176,41 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	return (
 		<div className="m-resizable-panels m-edit-content-blocks">
-			<ResizablePanels
-				displayDirection="row"
-				panelsSize={[60, 40]}
-				sizeUnitMeasure="%"
-				resizerSize="15px"
-				onResize={() => {
-					window.dispatchEvent(new Event('resize'));
-				}}
+			<PanelGroup
+				direction="horizontal"
+				onLayout={() => window.dispatchEvent(new Event('resize'))}
 			>
-				<div className="c-content-edit-view__preview" ref={previewScrollable}>
-					<ContentPageRenderer
-						contentPageInfo={contentPageInfo}
-						onBlockClicked={focusBlock}
-						activeBlockPosition={activeBlockPosition}
-						commonUser={commonUser}
-					/>
-				</div>
-				<Sidebar className="c-content-edit-view__sidebar" light>
-					<Navbar background="alt">
-						<Select
-							options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
-							onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
-							placeholder={tText(
-								'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
-							)}
-							value={null as any}
+				<Panel defaultSize={60}>
+					<div className="c-content-edit-view__preview" ref={previewScrollable}>
+						<ContentPageRenderer
+							contentPageInfo={contentPageInfo}
+							onBlockClicked={focusBlock}
+							activeBlockPosition={activeBlockPosition}
+							commonUser={commonUser}
 						/>
-					</Navbar>
-					<div className="c-scrollable" ref={sidebarScrollable}>
-						{renderContentBlockForms()}
 					</div>
-				</Sidebar>
-			</ResizablePanels>
+				</Panel>
+				<PanelResizeHandle />
+				<Panel defaultSize={40}>
+					<Sidebar className="c-content-edit-view__sidebar" light>
+						<Navbar background="alt">
+							<Select
+								options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
+								onChange={(value) =>
+									handleAddContentBlock(value as ContentBlockType)
+								}
+								placeholder={tText(
+									'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
+								)}
+								value={null as any}
+							/>
+						</Navbar>
+						<div className="c-scrollable" ref={sidebarScrollable}>
+							{renderContentBlockForms()}
+						</div>
+					</Sidebar>
+				</Panel>
+			</PanelGroup>
 		</div>
 	);
 };

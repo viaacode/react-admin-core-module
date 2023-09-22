@@ -33,6 +33,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { OrderDirection } from '~shared/types';
 import {
 	ALERTS_FORM_SCHEMA,
 	ALERTS_PER_PAGE,
@@ -87,7 +88,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 	}, [filters.orderProp, filters.orderDirection, filters.page, tText]);
 
 	const handleSortChange = useCallback(
-		(orderProp, orderDirection) => {
+		(orderProp: string | undefined, orderDirection: OrderDirection | undefined) => {
 			setFilters((prev) => ({
 				...prev,
 				orderProp,
@@ -594,7 +595,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 				label={tHtml(
 					'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
 				)}
-				errors={[errors.userGroups?.message]}
+				errors={[<>{errors.userGroups?.message}</>]}
 			>
 				<Controller
 					name="userGroups"
