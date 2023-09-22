@@ -1,7 +1,6 @@
 import {
 	Badge,
 	Button,
-	Datepicker,
 	FormControl,
 	MultiSelect,
 	type MultiSelectOption,
@@ -23,8 +22,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
+import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { Icon, Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
@@ -641,7 +642,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<Datepicker
+							<DatePicker
+								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-from-date"
@@ -717,7 +719,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<Datepicker
+							<DatePicker
+								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-until-date"

@@ -1,7 +1,6 @@
 import {
 	Button,
 	Column,
-	DatePicker,
 	Dropdown,
 	DropdownButton,
 	DropdownContent,
@@ -21,6 +20,8 @@ import React, {
 	useState,
 } from 'react';
 import { format, parse, set } from 'date-fns';
+import DatePicker from 'react-datepicker';
+import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -335,7 +336,8 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DatePicker
-												value={fromDate}
+												{...datePickerDefaultProps}
+												value={fromDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'gte')}
 												disabled={dateControls !== 'date'}
 											/>
@@ -348,7 +350,8 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DatePicker
-												value={tillDate}
+												{...datePickerDefaultProps}
+												value={tillDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'lte')}
 												disabled={dateControls !== 'date'}
 											/>

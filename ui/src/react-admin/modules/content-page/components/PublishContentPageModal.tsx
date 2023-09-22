@@ -1,7 +1,6 @@
 import {
 	Button,
 	ButtonToolbar,
-	DatePicker,
 	Form,
 	FormGroup,
 	Icon,
@@ -17,8 +16,10 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
+import DatePicker from 'react-datepicker';
 import React, { FunctionComponent, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { getPublishedState } from '~modules/content-page/helpers';
 
@@ -155,7 +156,8 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 							)}
 						>
 							<DatePicker
-								value={publishAt ? new Date(publishAt) : null}
+								{...datePickerDefaultProps}
+								value={publishAt ? publishAt : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
 								showTimeInput={true}
 								disabled={selectedOption !== 'timebound'}
@@ -167,7 +169,8 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 							)}
 						>
 							<DatePicker
-								value={depublishAt ? new Date(depublishAt) : null}
+								{...datePickerDefaultProps}
+								value={depublishAt ? depublishAt : undefined}
 								onChange={(date) =>
 									setDepublishAt(date ? date.toISOString() : null)
 								}
@@ -186,7 +189,8 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 				>
 					<Spacer margin={['left-large', 'top']}>
 						<DatePicker
-							value={publishedAt ? new Date(publishedAt) : null}
+							{...datePickerDefaultProps}
+							value={publishedAt ? publishedAt : undefined}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
 						/>
 						<Tooltip position="right">
