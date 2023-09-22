@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "private": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -42,7 +42,7 @@
     "@popperjs/core": "2.11.6",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.35.3",
-    "@viaa/avo2-components": "4.0.9",
+    "@viaa/avo2-components": "4.0.10",
     "@viaa/avo2-types": "2.49.0",
     "autosize": "6.0.1",
     "caniuse-lite": "1.0.30001538",
@@ -150,6 +150,14 @@
     "vite-tsconfig-paths": "4.2.1",
     "web-vitals": "3.4.0"
   },
+  "overrides": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@types/react": "17.0.65",
+    "@types/react-dom": "17.0.20",
+    "mini-css-extract-plugin": "2.4.7",
+    "typescript": "5.1.6"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -161,13 +169,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "overrides": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "@types/react": "17.0.65",
-    "@types/react-dom": "17.0.20",
-    "mini-css-extract-plugin": "2.4.7",
-    "typescript": "5.1.6"
   }
 }
