@@ -20,7 +20,7 @@ import React, {
 	useState,
 } from 'react';
 import { format, parse, set } from 'date-fns';
-import DatePicker from 'react-datepicker';
+import { default as DatePicker } from 'react-datepicker';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { reorderDate } from '../../helpers/formatters/date';

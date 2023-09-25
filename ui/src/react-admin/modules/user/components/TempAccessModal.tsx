@@ -10,7 +10,7 @@ import {
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
 import React, { FunctionComponent, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import { default as DatePicker } from 'react-datepicker';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';

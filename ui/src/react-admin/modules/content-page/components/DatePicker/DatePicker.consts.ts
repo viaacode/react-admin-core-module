@@ -6,4 +6,5 @@ export const datePickerDefaultProps = {
 	showMonthDropdown: true,
 	showYearDropdown: true,
 	dropdownMode: 'select' as const,
+	calendarStartDay: 1,
 };
