@@ -103,7 +103,7 @@ export class AssetsController {
 			);
 			return { url };
 		} catch (err) {
-			const error = new InternalServerErrorException({
+			const error = {
 				message: 'Failed to upload file to asset server',
 				innerException: err,
 				additionalInfo: {
@@ -112,9 +112,9 @@ export class AssetsController {
 						buffer: '<<omitted>>',
 					},
 				},
-			});
-			this.logger.error(error);
-			throw error;
+			};
+			this.logger.error(JSON.stringify(error));
+			throw new InternalServerErrorException(error);
 		}
 	}
 

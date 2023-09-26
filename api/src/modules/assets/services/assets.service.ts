@@ -398,7 +398,7 @@ export class AssetsService {
 					});
 				}
 			} catch (err) {
-				reject({
+				const error = {
 					message: 'Failed to copy file on s3',
 					innerException: err,
 					additionalInfo: {
@@ -407,7 +407,9 @@ export class AssetsService {
 						bucket,
 						copySource: `${bucket}/${key}`,
 					},
-				});
+				};
+				console.error(JSON.stringify(error));
+				reject(new InternalServerErrorException(error));
 			}
 		});
 	}
