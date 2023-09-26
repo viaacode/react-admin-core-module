@@ -9,7 +9,7 @@ import { Cron } from '@nestjs/schedule';
 import { AssetType } from '@viaa/avo2-types';
 import AWS, { AWSError, S3 } from 'aws-sdk';
 import fse from 'fs-extra';
-import got, { Got } from 'got';
+import got, { ExtendOptions, Got } from 'got';
 import _, { escapeRegExp, isNil } from 'lodash';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,7 +33,7 @@ export class AssetsService {
 	private s3: S3;
 
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
-		this.gotInstance = got.extend({
+		const gotOptions: ExtendOptions = {
 			prefixUrl: process.env.ASSET_SERVER_TOKEN_ENDPOINT,
 			resolveBodyOnly: true,
 			username: process.env.ASSET_SERVER_TOKEN_USERNAME,
@@ -43,7 +43,9 @@ export class AssetsService {
 				'cache-control': 'no-cache',
 				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
 			},
-		});
+		};
+		console.info('asset service token request: ' + JSON.stringify(gotOptions));
+		this.gotInstance = got.extend(gotOptions);
 	}
 
 	public setToken(assetToken: AssetToken) {
@@ -97,6 +99,7 @@ export class AssetsService {
 					this.token = await this.gotInstance.post<AssetToken>('', {
 						resolveBodyOnly: true, // this is duplicate but fixes a typing error
 					});
+					console.info('asset service token response: ' + JSON.stringify(this.token));
 
 					this.s3 = new AWS.S3({
 						accessKeyId: this.token.token,
@@ -105,6 +108,7 @@ export class AssetsService {
 						s3BucketEndpoint: true,
 					});
 				} catch (err) {
+					console.error('asset service token response error: ' + JSON.stringify(err));
 					throw new InternalServerErrorException({
 						message: 'Failed to get new s3 token for the asset service',
 						error: err,
