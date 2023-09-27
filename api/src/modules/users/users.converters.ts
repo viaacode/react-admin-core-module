@@ -161,7 +161,7 @@ export function convertUserInfoToCommonUser(
 							(org.organization as any)?.ldap_content?.attributes?.description?.[0] ??
 							'',
 						unitId: org.unit_id ?? null,
-						unitStreet: (org.organization as any).ldap_content?.units?.[0]?.attributes
+						unitStreet: (org.organization as any)?.ldap_content?.units?.[0]?.attributes
 							?.street?.[0],
 					})
 				),
