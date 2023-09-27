@@ -76,6 +76,7 @@ export { default as TranslationsOverview } from './translations/views/Translatio
 // Helpers
 export { sanitizeHtml } from './shared/helpers/sanitize/index';
 export { SanitizePreset } from './shared/helpers/sanitize/presets';
+export { stripRichTextParagraph } from './shared/helpers/strip-rich-text-paragraph';
 
 // STOPGAP
 export type { DefaultComponentProps, ValueOf } from './shared';

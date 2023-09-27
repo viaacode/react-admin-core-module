@@ -37,6 +37,7 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
+import { stripRichTextParagraph } from '~shared/helpers/strip-rich-text-paragraph';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
@@ -145,19 +146,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 
 			// Update value in array
 			const newTranslationValue = activeTranslationEditorState?.toHTML() || '';
-			const newTranslationValueWithoutWrappingP = newTranslationValue
-				.replace(/<p>/g, '')
-				.replace(/<\/p>/g, '');
-			if (
-				newTranslationValue.length ===
-				(newTranslationValueWithoutWrappingP + '<p></p>').length
-			) {
-				// There was only one p tag in the translation, so we can safely delete it.
-				freshTranslation.value = newTranslationValueWithoutWrappingP;
-			} else {
-				// There are multiple p tags in the translation, so we cannot delete them
-				freshTranslation.value = newTranslationValue;
-			}
+			freshTranslation.value = stripRichTextParagraph(newTranslationValue);
 
 			// Convert array back to database format
 			const dbTranslations = convertFromListToDatabase(freshTranslations);
