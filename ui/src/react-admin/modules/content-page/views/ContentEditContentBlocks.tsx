@@ -3,7 +3,7 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { HorizontalPageSplit, VerticalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
@@ -176,41 +176,32 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	return (
 		<div className="m-resizable-panels m-edit-content-blocks">
-			<PanelGroup
-				direction="horizontal"
-				onLayout={() => window.dispatchEvent(new Event('resize'))}
-			>
-				<Panel defaultSize={60}>
-					<div className="c-content-edit-view__preview" ref={previewScrollable}>
-						<ContentPageRenderer
-							contentPageInfo={contentPageInfo}
-							onBlockClicked={focusBlock}
-							activeBlockPosition={activeBlockPosition}
-							commonUser={commonUser}
+			<HorizontalPageSplit widths={['60%', '40%']}>
+				<div className="c-content-edit-view__preview" ref={previewScrollable}>
+					<ContentPageRenderer
+						contentPageInfo={contentPageInfo}
+						onBlockClicked={focusBlock}
+						activeBlockPosition={activeBlockPosition}
+						commonUser={commonUser}
+					/>
+				</div>
+
+				<Sidebar className="c-content-edit-view__sidebar" light>
+					<Navbar background="alt">
+						<Select
+							options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
+							onChange={(value) => handleAddContentBlock(value as ContentBlockType)}
+							placeholder={tText(
+								'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
+							)}
+							value={null as any}
 						/>
+					</Navbar>
+					<div className="c-scrollable" ref={sidebarScrollable}>
+						{renderContentBlockForms()}
 					</div>
-				</Panel>
-				<PanelResizeHandle />
-				<Panel defaultSize={40}>
-					<Sidebar className="c-content-edit-view__sidebar" light>
-						<Navbar background="alt">
-							<Select
-								options={GET_CONTENT_BLOCK_TYPE_OPTIONS()}
-								onChange={(value) =>
-									handleAddContentBlock(value as ContentBlockType)
-								}
-								placeholder={tText(
-									'admin/content/views/content-edit-content-blocks___voeg-een-content-blok-toe'
-								)}
-								value={null as any}
-							/>
-						</Navbar>
-						<div className="c-scrollable" ref={sidebarScrollable}>
-							{renderContentBlockForms()}
-						</div>
-					</Sidebar>
-				</Panel>
-			</PanelGroup>
+				</Sidebar>
+			</HorizontalPageSplit>
 		</div>
 	);
 };

@@ -22,7 +22,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { default as DatePicker } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';

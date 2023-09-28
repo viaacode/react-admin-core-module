@@ -1,7 +1,7 @@
 import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { HorizontalPageSplit, VerticalPageSplit } from 'react-page-split';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
@@ -44,23 +44,19 @@ function App() {
 			<BrowserRouter>
 				<QueryParamProvider ReactRouterRoute={Route}>
 					<div className="App">
-						<PanelGroup direction="horizontal">
-							<Panel defaultSize={15}>
-								<Sidebar
-									navItems={navigationItems || undefined}
-									className="o-app--admin__sidebar"
-								/>
-							</Panel>
-							<PanelResizeHandle />
-							<Panel defaultSize={85}>
-								<Flex
-									className="o-app--admin__main u-flex-auto u-scroll"
-									orientation="vertical"
-								>
-									{renderAdminRoutes()}
-								</Flex>
-							</Panel>
-						</PanelGroup>
+						<HorizontalPageSplit widths={['15%', '85%']}>
+							<Sidebar
+								navItems={navigationItems || undefined}
+								className="o-app--admin__sidebar"
+							/>
+
+							<Flex
+								className="o-app--admin__main u-flex-auto u-scroll"
+								orientation="vertical"
+							>
+								{renderAdminRoutes()}
+							</Flex>
+						</HorizontalPageSplit>
 					</div>
 					{/*<Sidebar />*/}
 					{/*/!*<Switch>*!/*/}
