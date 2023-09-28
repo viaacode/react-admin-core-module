@@ -9,14 +9,16 @@ import {
 } from '@viaa/avo2-components';
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
-import React, { FunctionComponent, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { FC, FunctionComponent, useState } from 'react';
+import DatePicker, { type ReactDatePickerProps } from 'react-datepicker';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
+
+const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
 
 interface TempAccessModalProps {
 	tempAccess: UserTempAccess | null;
@@ -89,7 +91,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 				<BlockHeading className="u-m-0" type="h4">
 					{tHtml('admin/users/components/temp-access-modal___begindatum')}
 				</BlockHeading>
-				<DatePicker
+				<ReactDatePicker
 					{...datePickerDefaultProps}
 					value={toDateObject(from)?.toISOString()}
 					onChange={(selectedDate) => {
@@ -101,7 +103,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 						{tHtml('admin/users/components/temp-access-modal___einddatum')}
 					</BlockHeading>
 				</Spacer>
-				<DatePicker
+				<ReactDatePicker
 					{...datePickerDefaultProps}
 					value={toDateObject(until)?.toISOString()}
 					onChange={(selectedDate) => {

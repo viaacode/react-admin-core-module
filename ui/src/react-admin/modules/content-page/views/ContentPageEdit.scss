@@ -1,4 +1,5 @@
 @import "../../shared/styles/settings/colors";
+@import "./react-split-pane";
 
 .c-content-edit-view__sidebar {
 	height: auto;
@@ -42,8 +43,9 @@
 	}
 }
 
-.c-content-page-edit__nav-bar {
+.c-content-page-edit__nav-bar > .o-container {
 	position: relative;
+
 	.c-content-page-edit__copy-page-button {
 		position: absolute;
 		top: 0;

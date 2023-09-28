@@ -212,9 +212,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 			newContentPageConfig.id = contentPageState.currentContentPageInfo.id as string | number;
 
-			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
-				newContentPageConfig
-			);
+			const contentPageWithDuplicatedAssets =
+				await ContentPageService.duplicateContentImages(newContentPageConfig);
 
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE,
@@ -431,9 +430,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 							contentPageState.currentContentPageInfo
 						),
 					};
-					insertedOrUpdatedContent = await ContentPageService.updateContentPage(
-						contentBody
-					);
+					insertedOrUpdatedContent =
+						await ContentPageService.updateContentPage(contentBody);
 				} else {
 					throw new CustomError(
 						'failed to update content page because the id is undefined',
@@ -723,32 +721,33 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					>
 						<Container mode="horizontal">
 							<Tabs tabs={tabs} onClick={setCurrentTab} />
+							<CopyToClipboard
+								text={JSON.stringify({
+									contentPage: contentPageState.currentContentPageInfo,
+								})}
+								onCopy={() =>
+									AdminConfigManager.getConfig().services.toastService.showToast({
+										title: AdminConfigManager.getConfig().services.i18n.tText(
+											'Gekopieerd'
+										),
+										description:
+											AdminConfigManager.getConfig().services.i18n.tText(
+												'De content pagina is naar je klembord gekopieerd druk ctrl-v om hem te plakken op een bewerk pagina'
+											),
+										type: ToastType.SUCCESS,
+									})
+								}
+							>
+								<Button
+									icon={'copy' as IconName}
+									size="small"
+									title={tText('Kopieer content pagina')}
+									ariaLabel={tText('Kopieer content pagina')}
+									type="secondary"
+									className="c-content-page-edit__copy-page-button u-spacer-s"
+								/>
+							</CopyToClipboard>
 						</Container>
-						<CopyToClipboard
-							text={JSON.stringify({
-								contentPage: contentPageState.currentContentPageInfo,
-							})}
-							onCopy={() =>
-								AdminConfigManager.getConfig().services.toastService.showToast({
-									title: AdminConfigManager.getConfig().services.i18n.tText(
-										'Gekopieerd'
-									),
-									description: AdminConfigManager.getConfig().services.i18n.tText(
-										'De content pagina is naar je klembord gekopieerd druk ctrl-v om hem te plakken op een bewerk pagina'
-									),
-									type: ToastType.SUCCESS,
-								})
-							}
-						>
-							<Button
-								icon={'copy' as IconName}
-								size="small"
-								title={tText('Kopieer content pagina')}
-								ariaLabel={tText('Kopieer content pagina')}
-								type="secondary"
-								className="c-content-page-edit__copy-page-button u-spacer-s"
-							/>
-						</CopyToClipboard>
 					</Navbar>
 
 					{renderTabContent()}

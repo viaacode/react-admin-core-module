@@ -21,8 +21,9 @@ import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
-import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import { FC, FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactDatePickerProps } from 'react-datepicker';
+import * as DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -54,6 +55,8 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
+
+const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
@@ -642,7 +645,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<DatePicker
+							<ReactDatePicker
 								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
@@ -719,7 +722,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<DatePicker
+							<ReactDatePicker
 								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}

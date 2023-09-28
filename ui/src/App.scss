@@ -1,39 +1,5 @@
 @import "./react-admin/modules/shared/styles/settings/colors";
-
-.react-page-split--horizontal {
-	display: flex;
-
-	> * {
-		width: 100%;
-		overflow: visible !important;
-		min-width: 10px;
-	}
-
-	> .react-page-split__divider--horizontal {
-		background-color: red;
-		position: relative;
-		background-color: rgba($color-gray-50, 0.4);
-		height: 100vh !important;
-		width: 15px;
-		min-width: 15px;
-		cursor: col-resize;
-
-		&::after {
-			content: "||";
-			border: solid 1px #666;
-			border-width: 0 1px;
-			margin: -10px 0 0 3.5px;
-			height: 20px;
-			width: 5px;
-			overflow: hidden;
-			color: transparent;
-			top: 50%;
-			left: 4px;
-			transform: translateX(-50%);
-			position: absolute;
-		}
-	}
-}
+@import "./react-admin/modules/content-page/views/react-split-pane";
 
 .o-app--admin__sidebar {
 	overflow-y: auto;

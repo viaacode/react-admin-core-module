@@ -12,6 +12,7 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import React, {
+	FC,
 	FunctionComponent,
 	MouseEvent,
 	ReactText,
@@ -20,7 +21,8 @@ import React, {
 	useState,
 } from 'react';
 import { format, parse, set } from 'date-fns';
-import DatePicker from 'react-datepicker';
+import { ReactDatePickerProps } from 'react-datepicker';
+import * as DatePicker from 'react-datepicker';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { reorderDate } from '../../helpers/formatters/date';
@@ -29,6 +31,8 @@ import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownM
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
+
+const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -335,7 +339,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
-											<DatePicker
+											<ReactDatePicker
 												{...datePickerDefaultProps}
 												value={fromDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'gte')}
@@ -349,7 +353,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
-											<DatePicker
+											<ReactDatePicker
 												{...datePickerDefaultProps}
 												value={tillDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'lte')}

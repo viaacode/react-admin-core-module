@@ -16,8 +16,9 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
-import DatePicker from 'react-datepicker';
-import React, { FunctionComponent, useState } from 'react';
+import { ReactDatePickerProps } from 'react-datepicker';
+import * as DatePicker from 'react-datepicker';
+import React, { FC, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
@@ -26,9 +27,11 @@ import { getPublishedState } from '~modules/content-page/helpers';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
 import './PublishContentPageModal.scss';
-import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
+
+const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;
@@ -36,7 +39,7 @@ interface PublishContentPageModalProps {
 	contentPage: ContentPageInfo;
 }
 
-const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> = ({
+const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 	onClose,
 	isOpen,
 	contentPage,
@@ -155,7 +158,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 								'admin/content/components/share-content-page-modal___publiceren-op'
 							)}
 						>
-							<DatePicker
+							<ReactDatePicker
 								{...datePickerDefaultProps}
 								value={publishAt ? publishAt : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
@@ -168,7 +171,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 								'admin/content/components/share-content-page-modal___depubliceren-op'
 							)}
 						>
-							<DatePicker
+							<ReactDatePicker
 								{...datePickerDefaultProps}
 								value={depublishAt ? depublishAt : undefined}
 								onChange={(date) =>
@@ -188,7 +191,7 @@ const PublishContentPageModal: FunctionComponent<PublishContentPageModalProps> =
 					className="c-content-page-publish-modal__display-date"
 				>
 					<Spacer margin={['left-large', 'top']}>
-						<DatePicker
+						<ReactDatePicker
 							{...datePickerDefaultProps}
 							value={publishedAt ? publishedAt : undefined}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
