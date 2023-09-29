@@ -210,7 +210,22 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				type: ToastType.SPINNER,
 			});
 
-			newContentPageConfig.id = contentPageState.currentContentPageInfo.id as string | number;
+			// Replace pasted content page id with existing content page id
+			if (contentPageState.currentContentPageInfo.id) {
+				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as
+					| string
+					| number;
+			} else {
+				delete (newContentPageConfig as any).id;
+			}
+
+			// Remove content block ids
+			newContentPageConfig.content_blocks.forEach((contentBlock) => {
+				delete contentBlock.id;
+			});
+
+			// Set author to current user
+			newContentPageConfig.userProfileId = commonUser.profileId;
 
 			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
 				newContentPageConfig
@@ -246,6 +261,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			});
 		},
 		[
+			commonUser.profileId,
 			contentPageState.currentContentPageInfo.content_blocks,
 			contentPageState.currentContentPageInfo.id,
 			tText,
@@ -259,10 +275,10 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					const pastedText = evt.clipboardData.getData('text/plain');
 
 					if (pastedText.startsWith('{"block":')) {
-						handlePasteBlock(JSON.parse(pastedText).block);
+						await handlePasteBlock(JSON.parse(pastedText).block);
 					}
 					if (pastedText.startsWith('{"contentPage":')) {
-						handlePasteContentPage(JSON.parse(pastedText).contentPage);
+						await handlePasteContentPage(JSON.parse(pastedText).contentPage);
 					}
 				}
 			} catch (err) {

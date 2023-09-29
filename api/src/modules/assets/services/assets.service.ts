@@ -13,6 +13,7 @@ import got, { ExtendOptions, Got } from 'got';
 import _, { escapeRegExp, isNil } from 'lodash';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import { mapLimit } from 'blend-promise-utils';
 import {
 	InsertContentAssetDocument,
 	InsertContentAssetMutation,
@@ -44,7 +45,6 @@ export class AssetsService {
 				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
 			},
 		};
-		console.info('asset service token request: ' + JSON.stringify(gotOptions));
 		this.gotInstance = got.extend(gotOptions);
 	}
 
@@ -438,13 +438,38 @@ export class AssetsService {
 		});
 
 		let newUrls: string[] = [];
+		const failedUrls: string[] = [];
 		if (urls && !isNil(ownerId)) {
-			newUrls = await Promise.all(
-				urls.map((url: string) => this.copyAndTrack(assetType, url, ownerId))
-			);
+			newUrls = await mapLimit(urls, 5, async (url: string) => {
+				try {
+					return await this.copyAndTrack(assetType, url, ownerId);
+				} catch (err) {
+					failedUrls.push(url);
+					console.error(
+						JSON.stringify({
+							message: 'Failed to copy and track asset url',
+							innerException: err,
+							additionalInfo: {
+								url,
+							},
+						})
+					);
+					return null;
+				}
+			});
 
 			newUrls.forEach((newUrl: string, index: number) => {
 				jsonBlobString = jsonBlobString?.replace(urls[index], newUrl) || null;
+			});
+		}
+
+		if (failedUrls.length > 0) {
+			console.error({
+				message: 'Failed to copy and track asset urls',
+				innerException: null,
+				additionalInfo: {
+					failedUrls,
+				},
 			});
 		}
 
