@@ -18,7 +18,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { Row, TableOptions } from 'react-table';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
