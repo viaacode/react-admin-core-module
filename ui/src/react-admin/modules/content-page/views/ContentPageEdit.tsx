@@ -43,6 +43,7 @@ import {
 	ContentEditActionType,
 	ContentEditFormErrors,
 	ContentPageInfo,
+	ContentPageUser,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
 import { Icon } from '~shared/components';
@@ -226,6 +227,14 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 			// Set author to current user
 			newContentPageConfig.userProfileId = commonUser.profileId;
+			newContentPageConfig.owner = {
+				id: commonUser.profileId,
+				fullName: commonUser.fullName,
+				firstName: commonUser.firstName,
+				lastName: commonUser.lastName,
+				groupId: commonUser.userGroup?.id,
+				groupName: commonUser.userGroup?.name,
+			} as ContentPageUser;
 
 			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
 				newContentPageConfig
@@ -261,7 +270,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			});
 		},
 		[
+			commonUser.firstName,
+			commonUser.fullName,
+			commonUser.lastName,
 			commonUser.profileId,
+			commonUser.userGroup?.id,
+			commonUser.userGroup?.name,
 			contentPageState.currentContentPageInfo.content_blocks,
 			contentPageState.currentContentPageInfo.id,
 			tText,
