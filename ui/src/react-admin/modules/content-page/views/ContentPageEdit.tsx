@@ -236,9 +236,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				groupName: commonUser.userGroup?.name,
 			} as ContentPageUser;
 
-			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
-				newContentPageConfig
-			);
+			const contentPageWithDuplicatedAssets =
+				await ContentPageService.duplicateContentImages(newContentPageConfig);
 
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE,
@@ -781,35 +780,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								/>
 							</CopyToClipboard>
 						</Container>
-						<CopyToClipboard
-							text={JSON.stringify({
-								contentPage: contentPageState.currentContentPageInfo,
-							})}
-							onCopy={() =>
-								AdminConfigManager.getConfig().services.toastService.showToast({
-									title: AdminConfigManager.getConfig().services.i18n.tText(
-										'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
-									),
-									description: AdminConfigManager.getConfig().services.i18n.tText(
-										'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
-									),
-									type: ToastType.SUCCESS,
-								})
-							}
-						>
-							<Button
-								icon={'copy' as IconName}
-								size="small"
-								title={tText(
-									'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
-								)}
-								ariaLabel={tText(
-									'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
-								)}
-								type="secondary"
-								className="c-content-page-edit__copy-page-button u-spacer-s"
-							/>
-						</CopyToClipboard>
 					</Navbar>
 
 					{renderTabContent()}
