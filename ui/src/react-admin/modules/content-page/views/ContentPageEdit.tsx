@@ -43,6 +43,7 @@ import {
 	ContentEditActionType,
 	ContentEditFormErrors,
 	ContentPageInfo,
+	ContentPageUser,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
 import { Icon } from '~shared/components';
@@ -210,10 +211,34 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				type: ToastType.SPINNER,
 			});
 
-			newContentPageConfig.id = contentPageState.currentContentPageInfo.id as string | number;
+			// Replace pasted content page id with existing content page id
+			if (contentPageState.currentContentPageInfo.id) {
+				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as
+					| string
+					| number;
+			} else {
+				delete (newContentPageConfig as any).id;
+			}
 
-			const contentPageWithDuplicatedAssets =
-				await ContentPageService.duplicateContentImages(newContentPageConfig);
+			// Remove content block ids
+			newContentPageConfig.content_blocks.forEach((contentBlock) => {
+				delete contentBlock.id;
+			});
+
+			// Set author to current user
+			newContentPageConfig.userProfileId = commonUser.profileId;
+			newContentPageConfig.owner = {
+				id: commonUser.profileId,
+				fullName: commonUser.fullName,
+				firstName: commonUser.firstName,
+				lastName: commonUser.lastName,
+				groupId: commonUser.userGroup?.id,
+				groupName: commonUser.userGroup?.name,
+			} as ContentPageUser;
+
+			const contentPageWithDuplicatedAssets = await ContentPageService.duplicateContentImages(
+				newContentPageConfig
+			);
 
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE,
@@ -238,11 +263,19 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-edit___success'),
-				description: tText('De content pagina info is overgenomen'),
+				description: tText(
+					'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-info-is-overgenomen'
+				),
 				type: ToastType.SUCCESS,
 			});
 		},
 		[
+			commonUser.firstName,
+			commonUser.fullName,
+			commonUser.lastName,
+			commonUser.profileId,
+			commonUser.userGroup?.id,
+			commonUser.userGroup?.name,
 			contentPageState.currentContentPageInfo.content_blocks,
 			contentPageState.currentContentPageInfo.id,
 			tText,
@@ -256,10 +289,10 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					const pastedText = evt.clipboardData.getData('text/plain');
 
 					if (pastedText.startsWith('{"block":')) {
-						handlePasteBlock(JSON.parse(pastedText).block);
+						await handlePasteBlock(JSON.parse(pastedText).block);
 					}
 					if (pastedText.startsWith('{"contentPage":')) {
-						handlePasteContentPage(JSON.parse(pastedText).contentPage);
+						await handlePasteContentPage(JSON.parse(pastedText).contentPage);
 					}
 				}
 			} catch (err) {
@@ -748,6 +781,35 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								/>
 							</CopyToClipboard>
 						</Container>
+						<CopyToClipboard
+							text={JSON.stringify({
+								contentPage: contentPageState.currentContentPageInfo,
+							})}
+							onCopy={() =>
+								AdminConfigManager.getConfig().services.toastService.showToast({
+									title: AdminConfigManager.getConfig().services.i18n.tText(
+										'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
+									),
+									description: AdminConfigManager.getConfig().services.i18n.tText(
+										'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
+									),
+									type: ToastType.SUCCESS,
+								})
+							}
+						>
+							<Button
+								icon={'copy' as IconName}
+								size="small"
+								title={tText(
+									'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+								)}
+								ariaLabel={tText(
+									'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+								)}
+								type="secondary"
+								className="c-content-page-edit__copy-page-button u-spacer-s"
+							/>
+						</CopyToClipboard>
 					</Navbar>
 
 					{renderTabContent()}

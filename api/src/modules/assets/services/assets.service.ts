@@ -9,10 +9,11 @@ import { Cron } from '@nestjs/schedule';
 import { AssetType } from '@viaa/avo2-types';
 import AWS, { AWSError, S3 } from 'aws-sdk';
 import fse from 'fs-extra';
-import got, { Got } from 'got';
+import got, { ExtendOptions, Got } from 'got';
 import _, { escapeRegExp, isNil } from 'lodash';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import { mapLimit } from 'blend-promise-utils';
 import {
 	InsertContentAssetDocument,
 	InsertContentAssetMutation,
@@ -33,7 +34,7 @@ export class AssetsService {
 	private s3: S3;
 
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {
-		this.gotInstance = got.extend({
+		const gotOptions: ExtendOptions = {
 			prefixUrl: process.env.ASSET_SERVER_TOKEN_ENDPOINT,
 			resolveBodyOnly: true,
 			username: process.env.ASSET_SERVER_TOKEN_USERNAME,
@@ -43,7 +44,8 @@ export class AssetsService {
 				'cache-control': 'no-cache',
 				'X-User-Secret-Key-Meta': process.env.ASSET_SERVER_TOKEN_SECRET,
 			},
-		});
+		};
+		this.gotInstance = got.extend(gotOptions);
 	}
 
 	public setToken(assetToken: AssetToken) {
@@ -97,6 +99,7 @@ export class AssetsService {
 					this.token = await this.gotInstance.post<AssetToken>('', {
 						resolveBodyOnly: true, // this is duplicate but fixes a typing error
 					});
+					console.info('asset service token response: ' + JSON.stringify(this.token));
 
 					this.s3 = new AWS.S3({
 						accessKeyId: this.token.token,
@@ -105,6 +108,7 @@ export class AssetsService {
 						s3BucketEndpoint: true,
 					});
 				} catch (err) {
+					console.error('asset service token response error: ' + JSON.stringify(err));
 					throw new InternalServerErrorException({
 						message: 'Failed to get new s3 token for the asset service',
 						error: err,
@@ -398,7 +402,7 @@ export class AssetsService {
 					});
 				}
 			} catch (err) {
-				reject({
+				const error = {
 					message: 'Failed to copy file on s3',
 					innerException: err,
 					additionalInfo: {
@@ -407,7 +411,9 @@ export class AssetsService {
 						bucket,
 						copySource: `${bucket}/${key}`,
 					},
-				});
+				};
+				console.error(JSON.stringify(error));
+				reject(new InternalServerErrorException(error));
 			}
 		});
 	}
@@ -432,13 +438,38 @@ export class AssetsService {
 		});
 
 		let newUrls: string[] = [];
+		const failedUrls: string[] = [];
 		if (urls && !isNil(ownerId)) {
-			newUrls = await Promise.all(
-				urls.map((url: string) => this.copyAndTrack(assetType, url, ownerId))
-			);
+			newUrls = await mapLimit(urls, 5, async (url: string) => {
+				try {
+					return await this.copyAndTrack(assetType, url, ownerId);
+				} catch (err) {
+					failedUrls.push(url);
+					console.error(
+						JSON.stringify({
+							message: 'Failed to copy and track asset url',
+							innerException: err,
+							additionalInfo: {
+								url,
+							},
+						})
+					);
+					return null;
+				}
+			});
 
 			newUrls.forEach((newUrl: string, index: number) => {
 				jsonBlobString = jsonBlobString?.replace(urls[index], newUrl) || null;
+			});
+		}
+
+		if (failedUrls.length > 0) {
+			console.error({
+				message: 'Failed to copy and track asset urls',
+				innerException: null,
+				additionalInfo: {
+					failedUrls,
+				},
 			});
 		}
 
