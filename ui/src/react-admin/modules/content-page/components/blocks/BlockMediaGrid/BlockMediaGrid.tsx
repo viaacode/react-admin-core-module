@@ -23,7 +23,6 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get, last } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import Icon from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
@@ -123,7 +122,7 @@ export const BlockMediaGrid: FunctionComponent<BlockMediaGridProps> = ({
 					</div>
 				</div>
 				<div className="c-media-card-content">
-					{!!get(last(elements), 'buttonLabel') && !fullWidth && (
+					{!!elements.at(-1)?.buttonLabel && !fullWidth && (
 						<div>
 							<h4 className="c-media-card__title">titel</h4>
 							<MetaData category="item">
