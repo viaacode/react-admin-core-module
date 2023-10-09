@@ -58,13 +58,14 @@ pipeline {
 			}
 		}
 
-		parallel(
-			stage('ui') {
-				steps {
-					container('npm') {
-						// Build ui
-						script {
-							sh '''
+		stage('Build and publish ui and api') {
+			parallel(
+				stage('ui') {
+					steps {
+						container('npm') {
+							// Build ui
+							script {
+								sh '''
 								#!/bin/bash
 								node -v
 								npm -v
@@ -74,16 +75,16 @@ pipeline {
 								npm run build || exit 1
 								cd ..
 							'''
-						} // end script Build ui
+							} // end script Build ui
 
-						// Publish ui
-						script {
-							try {
-								echo "Publishing admin-core-ui package to registry"
-								configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-									sh "cat $configFile > .npmrc"
-								}
-								sh '''
+							// Publish ui
+							script {
+								try {
+									echo "Publishing admin-core-ui package to registry"
+									configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+										sh "cat $configFile > .npmrc"
+									}
+									sh '''
 											#/bin/bash
 											cp .npmrc ./ui
 											cd ui
@@ -92,38 +93,38 @@ pipeline {
 											rm -f .npmrc
 											cd ..
 										'''
-							} catch (err) {
-								echo "Error message: ${err.getMessage()}"
-								if (err.getMessage().contains("Repository does not allow updating assets")) {
-									echo "admin-core-ui package version number was not updated, continuing with api build"
-								} else {
-									echo "admin-core-ui package failed to publish"
-									currentBuild.result = 'FAILURE'
+								} catch (err) {
+									echo "Error message: ${err.getMessage()}"
+									if (err.getMessage().contains("Repository does not allow updating assets")) {
+										echo "admin-core-ui package version number was not updated, continuing with api build"
+									} else {
+										echo "admin-core-ui package failed to publish"
+										currentBuild.result = 'FAILURE'
+									}
 								}
-							}
-						} // end script Publish ui
+							} // end script Publish ui
+						}
 					}
-				}
-			},
-			stage('api') {
-				steps {
-					container('npm') {
-						// Build api
-						script {
-							sh '''
+				},
+				stage('api') {
+					steps {
+						container('npm') {
+							// Build api
+							script {
+								sh '''
 								#!/bin/bash
 								cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
 							'''
-						} // end script Build api
+							} // end script Build api
 
-						// Publish api
-						script {
-							try {
-								echo "Publishing admin-core-api package to registry"
-								configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-									sh "cat $configFile > .npmrc"
-								}
-								sh '''
+							// Publish api
+							script {
+								try {
+									echo "Publishing admin-core-api package to registry"
+									configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+										sh "cat $configFile > .npmrc"
+									}
+									sh '''
 									#/bin/bash
 									cp .npmrc ./api
 									cd api
@@ -134,20 +135,21 @@ pipeline {
 									echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
 									rm -f .npmrc
 								'''
-							} catch (err) {
-								echo "Error message: ${err.getMessage()}"
-								if (err.getMessage().contains("Repository does not allow updating assets")) {
-									echo "admin-core-api package version number was not updated, continuing with pipeline"
-								} else {
-									echo "admin-core-api package failed to publish"
-									currentBuild.result = 'FAILURE'
+								} catch (err) {
+									echo "Error message: ${err.getMessage()}"
+									if (err.getMessage().contains("Repository does not allow updating assets")) {
+										echo "admin-core-api package version number was not updated, continuing with pipeline"
+									} else {
+										echo "admin-core-api package failed to publish"
+										currentBuild.result = 'FAILURE'
+									}
 								}
-							}
-						} // end script Publish api
+							} // end script Publish api
+						}
 					}
-				}
-			},
-		)
+				},
+			)
+		}
 
 
 //		stage('Build ui code') {
