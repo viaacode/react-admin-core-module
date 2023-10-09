@@ -59,7 +59,7 @@ pipeline {
 		}
 
 		stage('Build and publish ui and api') {
-			parallel(
+			parallel {
 				stage('ui') {
 					steps {
 						container('npm') {
@@ -105,7 +105,7 @@ pipeline {
 							} // end script Publish ui
 						}
 					}
-				},
+				}
 				stage('api') {
 					steps {
 						container('npm') {
@@ -147,8 +147,8 @@ pipeline {
 							} // end script Publish api
 						}
 					}
-				},
-			)
+				}
+			}
 		}
 
 
