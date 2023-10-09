@@ -57,105 +57,202 @@ pipeline {
 				}
 			}
 		}
-		stage('Build ui code') {
+
+		stage('Build ui and api in parallel') {
 			steps {
-				container('npm') {
-					script {
-						sh '''
-							#!/bin/bash
-							node -v
-							npm -v
-							npm --registry=https://registry.npmjs.org install
-							cd ui
-							npm --registry=https://registry.npmjs.org install
-							npm run build || exit 1
-							cd ..
-                        '''
-					} // script
-				}
-			}
-		}// end stage build
+				parallel(
+					stage('ui') {
+						steps {
+							container('npm') {
+								// Build ui
+								script {
+									sh '''
+										#!/bin/bash
+										node -v
+										npm -v
+										npm --registry=https://registry.npmjs.org install
+										cd ui
+										npm --registry=https://registry.npmjs.org install
+										npm run build || exit 1
+										cd ..
+									'''
+								} // end script Build ui
 
-		stage('Publish ui code') {
-			steps {
-				container('npm') {
-
-					script {
-						try {
-							echo "Publishing admin-core-ui package to registry"
-							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-								sh "cat $configFile > .npmrc"
-							}
-							sh '''
-								#/bin/bash
-								cp .npmrc ./ui
-								cd ui
-								npm config fix
-								npm publish
-								rm -f .npmrc
-								cd ..
-							'''
-						} catch (err) {
-							echo "Error message: ${err.getMessage()}"
-							if (err.getMessage().contains("Repository does not allow updating assets")) {
-								echo "admin-core-ui package version number was not updated, continuing with api build"
-							} else {
-								echo "admin-core-ui package failed to publish"
-								currentBuild.result = 'FAILURE'
-							}
-						}
-					} // script
-				}// end container
-			} // steps
-		} // stage
-
-		stage('Build api code') {
-			steps {
-				container('npm') {
-					script {
-						sh '''
-							#!/bin/bash
-                        	cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
-                        '''
-					} // script
-				}
-			}
-		}// end stage build
-
-		stage('Publish api code') {
-			steps {
-				container('npm') {
-
-					script {
-						try {
-							echo "Publishing admin-core-api package to registry"
-							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
-								sh "cat $configFile > .npmrc"
-							}
-							sh '''
-								#/bin/bash
-								cp .npmrc ./api
-								cd api
-								npm config fix
-								npm publish
-								rm -f .npmrc
-								cd ..
-								echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
-								rm -f .npmrc
-							'''
-						} catch (err) {
-							echo "Error message: ${err.getMessage()}"
-							if (err.getMessage().contains("Repository does not allow updating assets")) {
-								echo "admin-core-api package version number was not updated, continuing with pipeline"
-							} else {
-								echo "admin-core-api package failed to publish"
-								currentBuild.result = 'FAILURE'
+								// Publish ui
+								script {
+									try {
+										echo "Publishing admin-core-ui package to registry"
+										configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+											sh "cat $configFile > .npmrc"
+										}
+										sh '''
+													#/bin/bash
+													cp .npmrc ./ui
+													cd ui
+													npm config fix
+													npm publish
+													rm -f .npmrc
+													cd ..
+												'''
+									} catch (err) {
+										echo "Error message: ${err.getMessage()}"
+										if (err.getMessage().contains("Repository does not allow updating assets")) {
+											echo "admin-core-ui package version number was not updated, continuing with api build"
+										} else {
+											echo "admin-core-ui package failed to publish"
+											currentBuild.result = 'FAILURE'
+										}
+									}
+								} // end script Publish ui
 							}
 						}
-					} // script
-				}// end container
-			} // steps
-		} // stage
+					},
+					stage('api') {
+						steps {
+							container('npm') {
+								// Build api
+								script {
+									sh '''
+										#!/bin/bash
+										cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+									'''
+								} // end script Build api
+
+								// Publish api
+								script {
+									try {
+										echo "Publishing admin-core-api package to registry"
+										configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+											sh "cat $configFile > .npmrc"
+										}
+										sh '''
+											#/bin/bash
+											cp .npmrc ./api
+											cd api
+											npm config fix
+											npm publish
+											rm -f .npmrc
+											cd ..
+											echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+											rm -f .npmrc
+										'''
+									} catch (err) {
+										echo "Error message: ${err.getMessage()}"
+										if (err.getMessage().contains("Repository does not allow updating assets")) {
+											echo "admin-core-api package version number was not updated, continuing with pipeline"
+										} else {
+											echo "admin-core-api package failed to publish"
+											currentBuild.result = 'FAILURE'
+										}
+									}
+								} // end script Publish api
+							}
+						}
+					},
+				)
+			}
+		}
+
+
+//		stage('Build ui code') {
+//			steps {
+//				container('npm') {
+//					script {
+//						sh '''
+//							#!/bin/bash
+//							node -v
+//							npm -v
+//							npm --registry=https://registry.npmjs.org install
+//							cd ui
+//							npm --registry=https://registry.npmjs.org install
+//							npm run build || exit 1
+//							cd ..
+//                        '''
+//					} // script
+//				}
+//			}
+//		}// end stage build
+//
+//		stage('Publish ui code') {
+//			steps {
+//				container('npm') {
+//
+//					script {
+//						try {
+//							echo "Publishing admin-core-ui package to registry"
+//							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+//								sh "cat $configFile > .npmrc"
+//							}
+//							sh '''
+//								#/bin/bash
+//								cp .npmrc ./ui
+//								cd ui
+//								npm config fix
+//								npm publish
+//								rm -f .npmrc
+//								cd ..
+//							'''
+//						} catch (err) {
+//							echo "Error message: ${err.getMessage()}"
+//							if (err.getMessage().contains("Repository does not allow updating assets")) {
+//								echo "admin-core-ui package version number was not updated, continuing with api build"
+//							} else {
+//								echo "admin-core-ui package failed to publish"
+//								currentBuild.result = 'FAILURE'
+//							}
+//						}
+//					} // script
+//				}// end container
+//			} // steps
+//		} // stage
+//
+//		stage('Build api code') {
+//			steps {
+//				container('npm') {
+//					script {
+//						sh '''
+//							#!/bin/bash
+//                        	cd api && npm --registry=https://registry.npmjs.org install && npm run build && cd .. || exit 1
+//                        '''
+//					} // script
+//				}
+//			}
+//		}// end stage build
+//
+//		stage('Publish api code') {
+//			steps {
+//				container('npm') {
+//
+//					script {
+//						try {
+//							echo "Publishing admin-core-api package to registry"
+//							configFileProvider([configFile(fileId: "npmrc", variable: 'configFile')]) {
+//								sh "cat $configFile > .npmrc"
+//							}
+//							sh '''
+//								#/bin/bash
+//								cp .npmrc ./api
+//								cd api
+//								npm config fix
+//								npm publish
+//								rm -f .npmrc
+//								cd ..
+//								echo "removing .npmrc for installto nexus not seems @viaa:registry=.."
+//								rm -f .npmrc
+//							'''
+//						} catch (err) {
+//							echo "Error message: ${err.getMessage()}"
+//							if (err.getMessage().contains("Repository does not allow updating assets")) {
+//								echo "admin-core-api package version number was not updated, continuing with pipeline"
+//							} else {
+//								echo "admin-core-api package failed to publish"
+//								currentBuild.result = 'FAILURE'
+//							}
+//						}
+//					} // script
+//				}// end container
+//			} // steps
+//		} // stage
 	} // stages
 
 	post {
