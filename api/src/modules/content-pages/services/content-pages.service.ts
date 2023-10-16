@@ -381,7 +381,8 @@ export class ContentPagesService {
 	public async getContentPageByPathForUser(
 		path: string,
 		user?: Avo.User.CommonUser,
-		referrer?: string
+		referrer?: string,
+		onlyInfo = false
 	): Promise<DbContentPage | null> {
 		const contentPage: DbContentPage | undefined = await this.getContentPageByPath(path);
 
@@ -432,7 +433,7 @@ export class ContentPagesService {
 		}
 
 		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
-		if (referrer) {
+		if (referrer && !onlyInfo) {
 			await this.resolveMediaPlayersInPage(contentPage, referrer);
 		}
 

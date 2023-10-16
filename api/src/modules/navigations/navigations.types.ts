@@ -13,6 +13,7 @@ export enum ContentPickerTypesEnum {
 	EXTERNAL_LINK = 'EXTERNAL_LINK',
 	ANCHOR_LINK = 'ANCHOR_LINK',
 	PROFILE = 'PROFILE',
+	CUSTOM_NAVIGATION_ELEMENTS = 'CUSTOM_NAVIGATION_ELEMENTS',
 }
 
 export interface NavigationItem {

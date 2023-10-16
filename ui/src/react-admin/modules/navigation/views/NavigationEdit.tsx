@@ -56,7 +56,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		isError: isErrorNavigationItems,
 	} = useGetNavigationBarItems(navigationBarId, { keepPreviousData: false, cacheTime: 0 });
 	const originalNavigationItem =
-		navigationItems?.find((navItem) => navItem.id === navigationItemId) || null;
+		navigationItems?.find((navItem) => String(navItem.id) === navigationItemId) || null;
 
 	// Computed
 	const pageType: NavigationEditPageType = navigationItemId
@@ -78,9 +78,12 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	);
 
 	useEffect(() => {
-		if (navigationBarId && navigationItemId && originalNavigationItem) {
+		if (isLoadingNavigationItems) {
+			return;
+		}
+		if (originalNavigationItem) {
 			setCurrentCurrentNavigationItem(originalNavigationItem);
-		} else if (navigationBarId && !navigationItemId) {
+		} else if (!navigationItemId) {
 			const newNavigationItem: NavigationItem = {
 				id: '',
 				description: '',
@@ -101,6 +104,8 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	}, [
 		navigationBarId,
 		navigationItemId,
+		isLoadingNavigationItems,
+		navigationItems,
 		originalNavigationItem,
 		setCurrentCurrentNavigationItem,
 	]);

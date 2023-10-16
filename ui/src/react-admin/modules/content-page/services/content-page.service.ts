@@ -366,8 +366,12 @@ export class ContentPageService {
 	/**
 	 * Get a content page with all of its content without the user having to be logged in
 	 * @param path The path to identify the content page including the leading slash. eg: /over
+	 * @param onlyInfo only include info about the content page, do not resolve media info inside the content page blocks
 	 */
-	public static async getContentPageByPath(path: string): Promise<ContentPageInfo | null> {
+	public static async getContentPageByPath(
+		path: string,
+		onlyInfo = false
+	): Promise<ContentPageInfo | null> {
 		try {
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
@@ -376,6 +380,7 @@ export class ContentPageService {
 						this.getBaseUrl(),
 					query: {
 						path,
+						onlyInfo: onlyInfo ? 'true' : 'false',
 					},
 				})
 			);

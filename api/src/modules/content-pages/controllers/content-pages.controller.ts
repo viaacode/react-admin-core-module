@@ -76,13 +76,15 @@ export class ContentPagesController {
 	})
 	public async getContentPageByPath(
 		@Query('path') path: string,
+		@Query('onlyInfo') onlyInfo: string,
 		@Req() request,
 		@SessionUser() user?: SessionUserEntity
 	): Promise<DbContentPage> {
 		return this.contentPagesService.getContentPageByPathForUser(
 			path,
 			user.getUser(),
-			request?.headers?.['Referrer']
+			request?.headers?.['Referrer'],
+			onlyInfo === 'true'
 		);
 	}
 
