@@ -1,5 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
+import { mockUserAvo, mockUserHetArchief } from '../../../mock-user';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '../../shared/types/types';
 import { convertUserInfoToCommonUser } from '../users.converters';

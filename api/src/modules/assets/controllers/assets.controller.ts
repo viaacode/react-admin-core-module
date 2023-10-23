@@ -17,6 +17,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { AssetType, PermissionName } from '@viaa/avo2-types';
+import path from 'path';
+import sharp from 'sharp';
 import { DataService } from '../../data';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
@@ -31,7 +33,7 @@ import {
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
 import { TranslationsService } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
-import { VALID_MIME_TYPES } from '../assets.consts';
+import { OPTIMIZE_INTO_WEBP_FORMATS, VALID_MIME_TYPES } from '../assets.consts';
 import { DeleteAssetDto } from '../dto/assets.dto';
 import { AssetsService } from '../services/assets.service';
 
@@ -78,7 +80,7 @@ export class AssetsController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES
 	)
 	async uploadAsset(
-		@UploadedFile() file: any,
+		@UploadedFile() file: any & { originalname: string; mimetype: string },
 		@Body() uploadAssetInfo: Avo.FileUpload.UploadAssetInfo
 	): Promise<{ url: string }> {
 		if (!file) {
@@ -96,9 +98,20 @@ export class AssetsController {
 		}
 
 		try {
+			let optimizedFile = file;
+			if (OPTIMIZE_INTO_WEBP_FORMATS.includes(file.mimetype)) {
+				optimizedFile = {
+					...file,
+					buffer: await sharp(file.buffer, { animated: file.mimetype === 'image/gif' })
+						.webp({})
+						.toBuffer(),
+					originalname: path.parse(file.originalname).name + '.webp',
+					mimetype: 'image/webp',
+				};
+			}
 			const url = await this.assetsService.uploadAndTrack(
 				AssetType.CONTENT_PAGE_IMAGE,
-				file,
+				optimizedFile,
 				uploadAssetInfo.ownerId
 			);
 			return { url };

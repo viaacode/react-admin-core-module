@@ -21,6 +21,7 @@ import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { AssetType, PermissionName } from '@viaa/avo2-types';
 import { AssetsService } from '../../assets';
+import { Request } from 'express';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
@@ -77,13 +78,13 @@ export class ContentPagesController {
 	public async getContentPageByPath(
 		@Query('path') path: string,
 		@Query('onlyInfo') onlyInfo: string,
-		@Req() request,
-		@SessionUser() user?: SessionUserEntity
+		@Req() request: Request,
+		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage> {
 		return this.contentPagesService.getContentPageByPathForUser(
 			path,
-			user.getUser(),
-			request?.headers?.['Referrer'],
+			user?.getUser(),
+			request?.headers?.['Referrer'] as string,
 			onlyInfo === 'true'
 		);
 	}
@@ -91,10 +92,10 @@ export class ContentPagesController {
 	@Get('path-exists')
 	async doesContentPageExist(
 		@Query('path') path: string,
-		@Req() request,
-		@SessionUser() user
+		@Req() request: Request,
+		@SessionUser() user: SessionUserEntity
 	): Promise<{ exists: boolean; title: string; id: number | string }> {
-		const contentPage = await this.getContentPageByPath(path, request, user);
+		const contentPage = await this.getContentPageByPath(path, 'true', request, user);
 		return {
 			exists: !!contentPage,
 			title: contentPage?.title ?? null,
