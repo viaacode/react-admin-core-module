@@ -39,3 +39,11 @@ export const VALID_MIME_TYPES: string[] = [
 	'application/x-7z-compressed',
 	'application/x-tar',
 ];
+
+export const OPTIMIZE_INTO_WEBP_FORMATS: string[] = [
+	'image/png',
+	'image/gif',
+	'image/jpeg',
+	'image/jpeg',
+	'image/bmp',
+];

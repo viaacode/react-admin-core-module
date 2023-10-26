@@ -270,7 +270,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 						</FlexItem>
 					</Flex>
 				) : (
-					<Loader />
+					<Loader fullscreen={false} />
 				))}
 			<ConfirmModal
 				title={tText(
