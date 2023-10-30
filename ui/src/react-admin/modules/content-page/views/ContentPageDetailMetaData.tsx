@@ -41,7 +41,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
 		UserGroup[],
-		boolean
+		boolean,
 	];
 
 	// Methods

@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "3.0.18",
+  "version": "3.0.19",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -130,7 +130,7 @@
     "lint-staged": "12.3.3",
     "lodash": "4.17.21",
     "lorem-ipsum": "2.0.8",
-    "node-fetch": "3.3.2",
+    "node-fetch": "2.6.7",
     "prettier": "3.0.3",
     "react-i18next": "11.16.2",
     "rimraf": "3.0.2",

@@ -63,9 +63,8 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			setContentPageLabelInfo(contentLabel);
 		} else {
 			try {
-				const contentLabel = await ContentPageLabelService.fetchContentPageLabel(
-					contentPageLabelId
-				);
+				const contentLabel =
+					await ContentPageLabelService.fetchContentPageLabel(contentPageLabelId);
 				setInitialContentPageLabel(contentLabel);
 				setContentPageLabelInfo(contentLabel);
 			} catch (err) {
@@ -147,14 +146,12 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			let contentPageLabel: ContentPageLabel;
 			if (isCreatePage) {
 				// insert the content page label
-				contentPageLabel = await ContentPageLabelService.insertContentPageLabel(
-					contentPageLabelInfo
-				);
+				contentPageLabel =
+					await ContentPageLabelService.insertContentPageLabel(contentPageLabelInfo);
 			} else {
 				// Update existing content page label
-				contentPageLabel = await ContentPageLabelService.updateContentPageLabel(
-					contentPageLabelInfo
-				);
+				contentPageLabel =
+					await ContentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
 			}
 
 			AdminConfigManager.getConfig().services.toastService.showToast({

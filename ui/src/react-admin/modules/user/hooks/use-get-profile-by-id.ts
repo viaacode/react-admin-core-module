@@ -9,7 +9,7 @@ export const useGetProfileById = (
 		Avo.User.CommonUser | null,
 		any,
 		Avo.User.CommonUser | null,
-		typeof QUERY_KEYS.GET_PROFILE_BY_ID[]
+		(typeof QUERY_KEYS.GET_PROFILE_BY_ID)[]
 	>
 ): UseQueryResult<Avo.User.CommonUser | null> => {
 	return useQuery(

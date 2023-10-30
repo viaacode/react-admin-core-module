@@ -22,7 +22,7 @@ export const INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 				image: undefined,
 				title: '',
 				buttonAction: undefined,
-			} as any)
+			}) as any
 	);
 
 export const INITIAL_PROJECTS_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>

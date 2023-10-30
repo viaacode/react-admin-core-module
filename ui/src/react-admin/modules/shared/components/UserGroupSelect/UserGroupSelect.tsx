@@ -26,7 +26,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	const [userGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
 		UserGroup[],
-		boolean
+		boolean,
 	];
 
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {

@@ -231,7 +231,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 	return { avo: newTranslationsAvo, hetarchief: newTranslationsHetArchief };
 }
 
-async function getAvoOnlineTranslations() {
+async function getAvoOnlineTranslations(): Promise<Record<string, string>> {
 	const response = await fetch(
 		'https://avo2-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
 		{
@@ -242,10 +242,10 @@ async function getAvoOnlineTranslations() {
 		}
 	);
 
-	return await response.json();
+	return (await response.json()) as Record<string, string>;
 }
 
-async function getHetArchiefOnlineTranslations() {
+async function getHetArchiefOnlineTranslations(): Promise<Record<string, string>> {
 	const response = await fetch(
 		'https://hetarchief-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
 		{
@@ -256,7 +256,7 @@ async function getHetArchiefOnlineTranslations() {
 		}
 	);
 
-	return await response.json();
+	return (await response.json()) as Record<string, string>;
 }
 
 async function getOnlineTranslations(): Promise<{

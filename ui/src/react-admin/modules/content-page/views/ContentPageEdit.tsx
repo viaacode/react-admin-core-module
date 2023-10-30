@@ -760,11 +760,11 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								onCopy={() =>
 									AdminConfigManager.getConfig().services.toastService.showToast({
 										title: AdminConfigManager.getConfig().services.i18n.tText(
-											'Gekopieerd'
+											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
 										),
 										description:
 											AdminConfigManager.getConfig().services.i18n.tText(
-												'De content pagina is naar je klembord gekopieerd druk ctrl-v om hem te plakken op een bewerk pagina'
+												'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
 											),
 										type: ToastType.SUCCESS,
 									})
@@ -773,8 +773,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								<Button
 									icon={'copy' as IconName}
 									size="small"
-									title={tText('Kopieer content pagina')}
-									ariaLabel={tText('Kopieer content pagina')}
+									title={tText(
+										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+									)}
+									ariaLabel={tText(
+										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
+									)}
 									type="secondary"
 									className="c-content-page-edit__copy-page-button u-spacer-s"
 								/>

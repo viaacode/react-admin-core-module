@@ -11,7 +11,7 @@ import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';
 type UseUserGroupsTriple = [
 	TagInfo[] | CheckboxOption[] | MultiSelectOption[],
 	UserGroup[] | UserGroupWithPermissions[],
-	boolean
+	boolean,
 ];
 
 export const useUserGroupOptions = (

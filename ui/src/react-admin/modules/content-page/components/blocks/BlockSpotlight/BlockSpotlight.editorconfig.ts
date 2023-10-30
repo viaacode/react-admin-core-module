@@ -21,7 +21,7 @@ export const INITIAL_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 				image: undefined,
 				title: '',
 				buttonAction: undefined,
-			} as any)
+			}) as any
 	);
 
 export const INITIAL_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>

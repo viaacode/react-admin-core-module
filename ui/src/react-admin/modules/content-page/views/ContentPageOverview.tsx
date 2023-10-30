@@ -86,7 +86,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 	const [userGroupOptions, userGroups] = useUserGroupOptions('CheckboxOption', false, true) as [
 		CheckboxOption[],
 		UserGroupWithPermissions[],
-		boolean
+		boolean,
 	];
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();

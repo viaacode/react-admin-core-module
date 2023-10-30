@@ -34,9 +34,8 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 
 	const initOrFetchContentPageLabel = useCallback(async () => {
 		try {
-			const contentPageLabelObj = await ContentPageLabelService.fetchContentPageLabel(
-				contentPageLabelId
-			);
+			const contentPageLabelObj =
+				await ContentPageLabelService.fetchContentPageLabel(contentPageLabelId);
 
 			if (!contentPageLabelObj) {
 				setLoadingInfo({
