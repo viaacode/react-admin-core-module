@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "3.0.19",
+  "version": "3.1.1",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -91,7 +91,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "bump-package-versions": "^1.0.6",
+    "bump-package-versions": "^1.0.7",
     "cross-env": "^7.0.3",
     "dotenv-cli": "^7.2.1",
     "eslint": "^8.0.1",

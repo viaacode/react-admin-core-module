@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "3.0.19",
+  "version": "3.1.1",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -107,7 +107,7 @@
     "@wojtekmaj/enzyme-adapter-react-17": "0.8.0",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
-    "bump-package-versions": "1.0.6",
+    "bump-package-versions": "^1.0.7",
     "cross-env": "7.0.3",
     "dependency-cruiser": "13.1.5",
     "dependency-tree": "10.0.9",
