@@ -22,8 +22,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { FC, FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { ReactDatePickerProps } from 'react-datepicker';
-import * as DatePicker from 'react-datepicker';
+import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -56,7 +55,10 @@ import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 
-const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
+// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
+const DatePicker =
+	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
@@ -645,7 +647,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<ReactDatePicker
+							<DatePicker
 								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}

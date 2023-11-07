@@ -21,8 +21,7 @@ import React, {
 	useState,
 } from 'react';
 import { format, parse, set } from 'date-fns';
-import { ReactDatePickerProps } from 'react-datepicker';
-import * as DatePicker from 'react-datepicker';
+import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { reorderDate } from '../../helpers/formatters/date';
@@ -32,7 +31,10 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
-const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
+// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
+const DatePicker =
+	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -339,7 +341,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
-											<ReactDatePicker
+											<DatePicker
 												{...datePickerDefaultProps}
 												value={fromDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'gte')}
@@ -353,7 +355,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
-											<ReactDatePicker
+											<DatePicker
 												{...datePickerDefaultProps}
 												value={tillDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'lte')}

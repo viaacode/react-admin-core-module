@@ -16,8 +16,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
-import { ReactDatePickerProps } from 'react-datepicker';
-import * as DatePicker from 'react-datepicker';
+import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
 import React, { FC, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -31,7 +30,10 @@ import { type ContentPageInfo, type PublishOption } from '../types/content-pages
 
 import './PublishContentPageModal.scss';
 
-const ReactDatePicker: FC<ReactDatePickerProps> = (DatePicker as any)?.default ?? DatePicker;
+// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
+const DatePicker =
+	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;
@@ -158,7 +160,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___publiceren-op'
 							)}
 						>
-							<ReactDatePicker
+							<DatePicker
 								{...datePickerDefaultProps}
 								value={publishAt ? publishAt : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
@@ -171,7 +173,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___depubliceren-op'
 							)}
 						>
-							<ReactDatePicker
+							<DatePicker
 								{...datePickerDefaultProps}
 								value={depublishAt ? depublishAt : undefined}
 								onChange={(date) =>
