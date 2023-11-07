@@ -11,8 +11,6 @@ import {
 	Table,
 	TableOptions,
 	TextInput,
-	timepicker,
-	Timepicker,
 } from '@meemoo/react-components';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
@@ -21,8 +19,8 @@ import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
-import { FC, FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
+import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import ReactDatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -34,6 +32,8 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import timepicker from '~shared/components/Timepicker/Timepicker';
+import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { OrderDirection } from '~shared/types';
 import {
 	ALERTS_FORM_SCHEMA,
