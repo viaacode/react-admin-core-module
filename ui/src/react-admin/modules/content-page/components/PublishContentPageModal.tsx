@@ -16,7 +16,6 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
-import ReactDatePicker from 'react-datepicker';
 import React, { FC, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -25,20 +24,11 @@ import { getPublishedState } from '~modules/content-page/helpers';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { DateInput } from '~shared/components/DateInput/DateInput';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
 import './PublishContentPageModal.scss';
-
-// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
-// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
-console.log({
-	message: 'date picker publish content page',
-	ReactDatePicker: JSON.stringify(ReactDatePicker),
-	ReactDatePickerDefault: JSON.stringify((ReactDatePicker as any).default),
-});
-const DatePicker =
-	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;
@@ -165,7 +155,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___publiceren-op'
 							)}
 						>
-							<DatePicker
+							<DateInput
 								{...datePickerDefaultProps}
 								value={publishAt ? publishAt : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
@@ -178,7 +168,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___depubliceren-op'
 							)}
 						>
-							<DatePicker
+							<DateInput
 								{...datePickerDefaultProps}
 								value={depublishAt ? depublishAt : undefined}
 								onChange={(date) =>
@@ -198,7 +188,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 					className="c-content-page-publish-modal__display-date"
 				>
 					<Spacer margin={['left-large', 'top']}>
-						<ReactDatePicker
+						<DateInput
 							{...datePickerDefaultProps}
 							value={publishedAt ? publishedAt : undefined}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}

@@ -11,18 +11,10 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import React, {
-	FC,
-	FunctionComponent,
-	MouseEvent,
-	ReactText,
-	useCallback,
-	useEffect,
-	useState,
-} from 'react';
+import React, { FC, MouseEvent, ReactText, useCallback, useEffect, useState } from 'react';
 import { format, parse, set } from 'date-fns';
-import ReactDatePicker from 'react-datepicker';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { DateInput } from '~shared/components/DateInput/DateInput';
 
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -30,11 +22,6 @@ import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownM
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
-
-// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
-// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
-const DatePicker =
-	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -62,7 +49,7 @@ const DEFAULT_FUTURE_DATE_RANGE = {
 	lte: '',
 };
 
-const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
+const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 	label,
 	id,
 	range = DEFAULT_DATE_RANGE,
@@ -341,7 +328,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
-											<DatePicker
+											<DateInput
 												{...datePickerDefaultProps}
 												value={fromDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'gte')}
@@ -355,7 +342,7 @@ const DateRangeDropdown: FunctionComponent<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
-											<DatePicker
+											<DateInput
 												{...datePickerDefaultProps}
 												value={tillDate?.toISOString()}
 												onChange={(value) => handleDateChange(value, 'lte')}

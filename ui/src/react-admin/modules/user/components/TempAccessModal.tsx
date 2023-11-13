@@ -10,18 +10,13 @@ import {
 import { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
 import React, { FunctionComponent, useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { DateInput } from '~shared/components/DateInput/DateInput';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
-
-// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
-// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
-const DatePicker =
-	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 interface TempAccessModalProps {
 	tempAccess: UserTempAccess | null;
@@ -94,7 +89,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 				<BlockHeading className="u-m-0" type="h4">
 					{tHtml('admin/users/components/temp-access-modal___begindatum')}
 				</BlockHeading>
-				<DatePicker
+				<DateInput
 					{...datePickerDefaultProps}
 					value={toDateObject(from)?.toISOString()}
 					onChange={(selectedDate) => {
@@ -106,7 +101,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 						{tHtml('admin/users/components/temp-access-modal___einddatum')}
 					</BlockHeading>
 				</Spacer>
-				<DatePicker
+				<DateInput
 					{...datePickerDefaultProps}
 					value={toDateObject(until)?.toISOString()}
 					onChange={(selectedDate) => {

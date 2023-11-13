@@ -20,7 +20,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -32,6 +31,7 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { DateInput } from '~shared/components/DateInput/DateInput';
 import timepicker from '~shared/components/Timepicker/Timepicker';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { OrderDirection } from '~shared/types';
@@ -54,11 +54,6 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
-
-// Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
-// https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
-const DatePicker =
-	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
 	const { tText, tHtml } = useTranslation();
@@ -647,7 +642,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<DatePicker
+							<DateInput
 								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
@@ -724,7 +719,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<ReactDatePicker
+							<DateInput
 								{...datePickerDefaultProps}
 								locale={nlBE}
 								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
