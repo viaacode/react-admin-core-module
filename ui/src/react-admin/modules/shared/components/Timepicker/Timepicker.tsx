@@ -17,6 +17,8 @@ const Timepicker: FC<TimepickerProps> = (props) => {
 			showPopperArrow={false}
 			showMonthDropdown
 			showYearDropdown
+			showTimeInput
+			showTimeSelectOnly
 			dropdownMode="select"
 			timeFormat="HH:mm"
 			{...props}

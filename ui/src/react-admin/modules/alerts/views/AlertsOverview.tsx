@@ -34,6 +34,7 @@ import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptio
 import { DateInput } from '~shared/components/DateInput/DateInput';
 import timepicker from '~shared/components/Timepicker/Timepicker';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
+import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { OrderDirection } from '~shared/types';
 import {
 	ALERTS_FORM_SCHEMA,
@@ -644,8 +645,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						<>
 							<DateInput
 								{...datePickerDefaultProps}
-								locale={nlBE}
-								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-from-date"
 								name={field.name}
 								onBlur={field.onBlur}
@@ -668,15 +667,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								value={format(form.fromDate, 'PP', {
 									locale: nlBE,
 								})}
-								popperPlacement="bottom-start"
 							/>
 
 							<Timepicker
-								{...timepicker}
-								locale={nlBE}
-								timeFormat={'HH:mm'}
-								customInput={<TextInput iconStart={<Icon name="clock" />} />}
-								showTimeSelect
+								{...timePickerDefaults}
 								id="new-alert-from-time"
 								name={field.name}
 								onBlur={field.onBlur}
@@ -721,8 +715,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 						<>
 							<DateInput
 								{...datePickerDefaultProps}
-								locale={nlBE}
-								customInput={<TextInput iconStart={<Icon name="calendar" />} />}
 								id="new-alert-until-date"
 								name={field.name}
 								onBlur={field.onBlur}
@@ -745,15 +737,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 								value={format(form.untilDate, 'PP', {
 									locale: nlBE,
 								})}
-								popperPlacement="bottom-start"
 							/>
 
 							<Timepicker
-								{...timepicker}
-								locale={nlBE}
-								timeFormat={'HH:mm'}
-								customInput={<TextInput iconStart={<Icon name="clock" />} />}
-								showTimeSelect
+								{...timePickerDefaults}
 								id="new-alert-until-time"
 								name={field.name}
 								onBlur={field.onBlur}

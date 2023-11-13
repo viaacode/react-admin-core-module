@@ -1,6 +1,7 @@
 import {
 	Button,
 	ButtonToolbar,
+	DatePicker,
 	Form,
 	FormGroup,
 	Icon,
@@ -16,6 +17,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
+import { parseISO } from 'date-fns';
 import React, { FC, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -24,7 +26,6 @@ import { getPublishedState } from '~modules/content-page/helpers';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { DateInput } from '~shared/components/DateInput/DateInput';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
@@ -155,9 +156,9 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___publiceren-op'
 							)}
 						>
-							<DateInput
+							<DatePicker
 								{...datePickerDefaultProps}
-								value={publishAt ? publishAt : undefined}
+								value={publishAt ? parseISO(publishAt) : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
 								showTimeInput={true}
 								disabled={selectedOption !== 'timebound'}
@@ -168,9 +169,9 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								'admin/content/components/share-content-page-modal___depubliceren-op'
 							)}
 						>
-							<DateInput
+							<DatePicker
 								{...datePickerDefaultProps}
-								value={depublishAt ? depublishAt : undefined}
+								value={depublishAt ? parseISO(depublishAt) : undefined}
 								onChange={(date) =>
 									setDepublishAt(date ? date.toISOString() : null)
 								}
@@ -188,9 +189,9 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 					className="c-content-page-publish-modal__display-date"
 				>
 					<Spacer margin={['left-large', 'top']}>
-						<DateInput
+						<DatePicker
 							{...datePickerDefaultProps}
-							value={publishedAt ? publishedAt : undefined}
+							value={publishedAt ? parseISO(publishedAt) : undefined}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
 						/>
 						<Tooltip position="right">
