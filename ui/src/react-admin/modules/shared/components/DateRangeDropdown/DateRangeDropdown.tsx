@@ -21,7 +21,7 @@ import React, {
 	useState,
 } from 'react';
 import { format, parse, set } from 'date-fns';
-import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { reorderDate } from '../../helpers/formatters/date';

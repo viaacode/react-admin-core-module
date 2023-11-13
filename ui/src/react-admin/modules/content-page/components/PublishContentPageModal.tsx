@@ -16,7 +16,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
-import ReactDatePicker, { type ReactDatePickerProps } from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 import React, { FC, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -32,6 +32,11 @@ import './PublishContentPageModal.scss';
 
 // Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
 // https://github.com/Hacker0x01/react-datepicker/issues/3834#issuecomment-1451662259
+console.log({
+	message: 'date picker publish content page',
+	ReactDatePicker: JSON.stringify(ReactDatePicker),
+	ReactDatePickerDefault: JSON.stringify((ReactDatePicker as any).default),
+});
 const DatePicker =
 	(ReactDatePicker as unknown as { default: typeof ReactDatePicker }).default ?? ReactDatePicker;
 
