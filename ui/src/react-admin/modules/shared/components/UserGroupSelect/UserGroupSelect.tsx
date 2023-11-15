@@ -1,5 +1,6 @@
 import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
-import { isEmpty } from 'lodash-es';
+import { TagInfoSchema } from '@viaa/avo2-components/dist/components/TagsInput/TagsInput';
+import { isEmpty, sortBy } from 'lodash-es';
 import React, { ChangeEvent, FunctionComponent } from 'react';
 
 import { Checkbox } from '@meemoo/react-components';
@@ -49,6 +50,28 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		return parts.join(': ');
 	};
 
+	/**
+	 * sort the user groups in a specific order
+	 * https://meemoo.atlassian.net/browse/ARC-1999
+	 * @param userGroups
+	 */
+	const customSortUserGroups = (userGroups: TagInfoSchema[]) => {
+		return sortBy(userGroups, (userGroup) => {
+			const label = userGroup.label.toLowerCase();
+			if (label.includes('kiosk')) {
+				return '1-' + label;
+			} else if (label.includes('meemoo')) {
+				return '2-' + label;
+			} else if (label.includes('cp')) {
+				return '3-' + label;
+			} else if (label.includes('bezoeker')) {
+				return '4-' + label;
+			} else {
+				return '0-' + label;
+			}
+		});
+	};
+
 	if (isEmpty(userGroupOptions)) {
 		return null;
 	}
@@ -60,7 +83,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 			className="c-user-group-select"
 		>
 			<CheckboxGroup>
-				{userGroupOptions.map((userGroupOption) => {
+				{customSortUserGroups(userGroupOptions).map((userGroupOption) => {
 					return (
 						<Checkbox
 							key={userGroupOption.value}
