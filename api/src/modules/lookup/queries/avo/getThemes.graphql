@@ -1,0 +1,6 @@
+query getThemes {
+	lookup_thesaurus(where: { scheme: { _eq: "https://data.hetarchief.be/id/onderwijs/thema" } }) {
+		id
+		label
+	}
+}
