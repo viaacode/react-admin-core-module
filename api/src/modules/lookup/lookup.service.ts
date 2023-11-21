@@ -29,6 +29,8 @@ export class LookupService {
 			const subjects = (response.lookup_thesaurus || []).map((item) => ({
 				id: item.id,
 				label: item.label,
+				broader: item.broader,
+				scheme: item.scheme,
 			}));
 
 			return sortBy(subjects, (subject) => subject.label.toLowerCase());
@@ -51,6 +53,8 @@ export class LookupService {
 			const themes = (response.lookup_thesaurus || []).map((item) => ({
 				id: item.id,
 				label: item.label,
+				broader: item.broader,
+				scheme: item.scheme,
 			}));
 
 			return sortBy(themes, (theme) => theme.label.toLowerCase());
@@ -76,6 +80,7 @@ export class LookupService {
 				id: item.id,
 				label: item.label,
 				broader: item.broader,
+				scheme: item.scheme,
 			}));
 
 			return LookupService.blacklistLoms(educationLevels);
@@ -131,7 +136,7 @@ export class LookupService {
 
 		// Sort by label
 		return sortBy([...firstLevel, ...secondLevel], (lom) => lom.label.toLowerCase()).map(
-			(lom) => ({ id: lom.id, label: lom.label })
+			(lom) => ({ id: lom.id, label: lom.label, broader: lom.broader, scheme: lom.scheme })
 		);
 	}
 }
