@@ -17,14 +17,15 @@ For a complete list of packages and version check out the `package.json` file.
 1. Make sure all PR's are merged into `main`
 2. Merge the desired release branch in the `main` branch
 3. Update avo2-components and avo2-react-components
-4. Extract translations for the `admin-core-module/ui` by running `cd ui/ && npm run translations:extract`
-5. Update `package.json` and `package-lock.json` by running `npm run bump`
-6. Stage changes `git add .` and commit changes with message `git commit -m "x.x.x"`
-7. Create a `tag` by running `git tag vx.x.x` (use the same number as used in the `package.json` `version` field)
-8. Push to the remote (`git push origin --follow-tags`)
-9. Check your build's progress in [Jenkins](https://ci.meemoo.be/blue/organizations/jenkins/hetarchief%2Freact-admin-core-module/activity).
-10. Go to [meemoo's nexus](http://do-prd-mvn-01.do.viaa.be:8081/#browse/browse:npm-viaa:%40meemoo) and check if both the `ui` and `api` are deployed
-11. Open pull requests for all repositories and make sure to use the latest version for the `@meemoo/admin-core-api` and `@meemoo/admin-core-ui`
+4. If a new version of `react-components` is available, run `cd ui/ && npm i`.
+5. Extract translations for the `admin-core-module/ui` by running `cd ui/ && npm run translations:extract`
+6. Update `package.json` and `package-lock.json` by running `npm run bump`
+7. Stage changes `git add .` and commit changes with message `git commit -m "x.x.x"`
+8. Create a `tag` by running `git tag vx.x.x` (use the same number as used in the `package.json` `version` field)
+9. Push to the remote (`git push origin --follow-tags`)
+10. Check your build's progress in [Jenkins](https://ci.meemoo.be/blue/organizations/jenkins/hetarchief%2Freact-admin-core-module/activity).
+11. Go to [meemoo's nexus](http://do-prd-mvn-01.do.viaa.be:8081/#browse/browse:npm-viaa:%40meemoo) and check if both the `ui` and `api` are deployed
+12. Open pull requests for all repositories and make sure to use the latest version for the `@meemoo/admin-core-api` and `@meemoo/admin-core-ui`
 
 ## See your changes
 
