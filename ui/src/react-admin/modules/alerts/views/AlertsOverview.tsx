@@ -112,8 +112,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		}
 
 		return isWithinInterval(new Date(), {
-			start: parseISO(from),
-			end: parseISO(till),
+			start: parseISO(from + 'Z'), // Force date to be interpreted as a GMT time from the database => parse it as a Europe/Brussels time in the date object
+			end: parseISO(till + 'Z'),
 		});
 	};
 
