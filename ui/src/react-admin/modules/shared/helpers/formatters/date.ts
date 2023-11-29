@@ -69,3 +69,15 @@ export function toDateObject(timestamp: DateLikeNullable): Date | null {
 	}
 	return normalizeTimestamp(timestamp);
 }
+
+/**
+ * Force date to be interpreted as a GMT time without timezone from the database => parse it as a Europe/Brussels time in the date object
+ * @param timestamp
+ */
+export function parseAsIsoWithoutTimezone(timestamp: string): Date {
+	if (!timestamp.endsWith('Z')) {
+		return parseISO(timestamp + 'Z');
+	} else {
+		return parseISO(timestamp);
+	}
+}

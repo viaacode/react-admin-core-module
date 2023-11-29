@@ -35,6 +35,7 @@ import { DateInput } from '~shared/components/DateInput/DateInput';
 import timepicker from '~shared/components/Timepicker/Timepicker';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
+import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { OrderDirection } from '~shared/types';
 import {
 	ALERTS_FORM_SCHEMA,
@@ -112,8 +113,8 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 		}
 
 		return isWithinInterval(new Date(), {
-			start: parseISO(from),
-			end: parseISO(till),
+			start: parseAsIsoWithoutTimezone(from),
+			end: parseAsIsoWithoutTimezone(till),
 		});
 	};
 
@@ -341,10 +342,10 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 			title: activeAlert?.title || '',
 			message: activeAlert?.message || '',
 			fromDate: activeAlert?.fromDate
-				? new Date(activeAlert?.fromDate + 'Z') // Force date to be interpreted as a GMT time from the database => parse it as a Europe/Brussels time in the date object
+				? parseAsIsoWithoutTimezone(activeAlert?.fromDate)
 				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0),
 			untilDate: activeAlert?.untilDate
-				? new Date(activeAlert?.untilDate + 'Z')
+				? parseAsIsoWithoutTimezone(activeAlert?.untilDate)
 				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59),
 			userGroups: activeAlert?.userGroups || [],
 			type: activeAlert?.type || '',
