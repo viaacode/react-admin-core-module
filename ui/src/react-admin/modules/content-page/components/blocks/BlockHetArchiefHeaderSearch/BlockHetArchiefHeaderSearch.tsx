@@ -89,7 +89,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 						</div>
 					}
 					onChange={(evt) => setSearchTerm(evt.target.value)}
-					onContainerKeyUp={handleKeyUp as any}
+					onKeyUp={handleKeyUp as any}
 					value={searchTerm}
 				/>
 				<p>{textBelowSearch}</p>
