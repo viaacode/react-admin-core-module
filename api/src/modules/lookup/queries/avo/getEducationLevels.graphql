@@ -1,5 +1,10 @@
 query getEducationLevels {
-	lookup_enum_lom_context {
-		description
+	lookup_thesaurus(
+		where: { scheme: { _eq: "https://w3id.org/onderwijs-vlaanderen/id/structuur" } }
+	) {
+		id
+		label
+		broader
+		scheme
 	}
 }

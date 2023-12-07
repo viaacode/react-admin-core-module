@@ -4703,6 +4703,7 @@ export type Maintainer_Organisation = {
   haorg_organization_type?: Maybe<Scalars['String']>;
   homepage_url?: Maybe<Scalars['String']>;
   logo: Scalars['jsonb'];
+  overlay: Scalars['Boolean'];
   primary_site: Scalars['jsonb'];
   schema_identifier: Scalars['String'];
   schema_name?: Maybe<Scalars['String']>;
@@ -4794,6 +4795,7 @@ export type Maintainer_Organisation_Bool_Exp = {
   haorg_organization_type?: InputMaybe<String_Comparison_Exp>;
   homepage_url?: InputMaybe<String_Comparison_Exp>;
   logo?: InputMaybe<Jsonb_Comparison_Exp>;
+  overlay?: InputMaybe<Boolean_Comparison_Exp>;
   primary_site?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_identifier?: InputMaybe<String_Comparison_Exp>;
   schema_name?: InputMaybe<String_Comparison_Exp>;
@@ -4839,6 +4841,7 @@ export type Maintainer_Organisation_Insert_Input = {
   haorg_organization_type?: InputMaybe<Scalars['String']>;
   homepage_url?: InputMaybe<Scalars['String']>;
   logo?: InputMaybe<Scalars['jsonb']>;
+  overlay?: InputMaybe<Scalars['Boolean']>;
   primary_site?: InputMaybe<Scalars['jsonb']>;
   schema_identifier?: InputMaybe<Scalars['String']>;
   schema_name?: InputMaybe<Scalars['String']>;
@@ -4910,6 +4913,7 @@ export type Maintainer_Organisation_Order_By = {
   haorg_organization_type?: InputMaybe<Order_By>;
   homepage_url?: InputMaybe<Order_By>;
   logo?: InputMaybe<Order_By>;
+  overlay?: InputMaybe<Order_By>;
   primary_site?: InputMaybe<Order_By>;
   schema_identifier?: InputMaybe<Order_By>;
   schema_name?: InputMaybe<Order_By>;
@@ -4948,6 +4952,8 @@ export enum Maintainer_Organisation_Select_Column {
   /** column name */
   Logo = 'logo',
   /** column name */
+  Overlay = 'overlay',
+  /** column name */
   PrimarySite = 'primary_site',
   /** column name */
   SchemaIdentifier = 'schema_identifier',
@@ -4970,6 +4976,7 @@ export type Maintainer_Organisation_Set_Input = {
   haorg_organization_type?: InputMaybe<Scalars['String']>;
   homepage_url?: InputMaybe<Scalars['String']>;
   logo?: InputMaybe<Scalars['jsonb']>;
+  overlay?: InputMaybe<Scalars['Boolean']>;
   primary_site?: InputMaybe<Scalars['jsonb']>;
   schema_identifier?: InputMaybe<Scalars['String']>;
   schema_name?: InputMaybe<Scalars['String']>;
@@ -4995,6 +5002,8 @@ export enum Maintainer_Organisation_Update_Column {
   /** column name */
   Logo = 'logo',
   /** column name */
+  Overlay = 'overlay',
+  /** column name */
   PrimarySite = 'primary_site',
   /** column name */
   SchemaIdentifier = 'schema_identifier',
@@ -5008,7 +5017,7 @@ export enum Maintainer_Organisation_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** The user profiles that will manage this reading room */
+/** DEPRECATED: use users.profile.organisation_schema_identifier instead */
 export type Maintainer_Users_Profile = {
   __typename?: 'maintainer_users_profile';
   id: Scalars['uuid'];
@@ -5179,6 +5188,10 @@ export type Maintainer_Visitor_Space = {
   content_partner: Maintainer_Content_Partner;
   created_at?: Maybe<Scalars['timestamp']>;
   id: Scalars['uuid'];
+  /** An array relationship */
+  profiles: Array<Users_Profile>;
+  /** An aggregate relationship */
+  profiles_aggregate: Users_Profile_Aggregate;
   published_at?: Maybe<Scalars['timestamp']>;
   schema_audience_type: Lookup_Schema_Audience_Type_Enum;
   schema_color?: Maybe<Scalars['String']>;
@@ -5196,6 +5209,26 @@ export type Maintainer_Visitor_Space = {
   visitor_space_requests: Array<Maintainer_Visitor_Space_Request>;
   /** An aggregate relationship */
   visitor_space_requests_aggregate: Maintainer_Visitor_Space_Request_Aggregate;
+};
+
+
+/** Bezoekersruimte aka leeszaal van een CP */
+export type Maintainer_Visitor_SpaceProfilesArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Order_By>>;
+  where?: InputMaybe<Users_Profile_Bool_Exp>;
+};
+
+
+/** Bezoekersruimte aka leeszaal van een CP */
+export type Maintainer_Visitor_SpaceProfiles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Order_By>>;
+  where?: InputMaybe<Users_Profile_Bool_Exp>;
 };
 
 
@@ -5248,6 +5281,7 @@ export type Maintainer_Visitor_Space_Bool_Exp = {
   content_partner?: InputMaybe<Maintainer_Content_Partner_Bool_Exp>;
   created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  profiles?: InputMaybe<Users_Profile_Bool_Exp>;
   published_at?: InputMaybe<Timestamp_Comparison_Exp>;
   schema_audience_type?: InputMaybe<Lookup_Schema_Audience_Type_Enum_Comparison_Exp>;
   schema_color?: InputMaybe<String_Comparison_Exp>;
@@ -5278,6 +5312,7 @@ export type Maintainer_Visitor_Space_Insert_Input = {
   content_partner?: InputMaybe<Maintainer_Content_Partner_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
+  profiles?: InputMaybe<Users_Profile_Arr_Rel_Insert_Input>;
   published_at?: InputMaybe<Scalars['timestamp']>;
   schema_audience_type?: InputMaybe<Lookup_Schema_Audience_Type_Enum>;
   schema_color?: InputMaybe<Scalars['String']>;
@@ -5351,6 +5386,7 @@ export type Maintainer_Visitor_Space_Order_By = {
   content_partner?: InputMaybe<Maintainer_Content_Partner_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  profiles_aggregate?: InputMaybe<Users_Profile_Aggregate_Order_By>;
   published_at?: InputMaybe<Order_By>;
   schema_audience_type?: InputMaybe<Order_By>;
   schema_color?: InputMaybe<Order_By>;
@@ -8968,6 +9004,8 @@ export type Object_Ie = {
   meemoofilm_contains_embedded_caption?: Maybe<Scalars['Boolean']>;
   meemoofilm_embeddedCaptionLanguage?: Maybe<Scalars['String']>;
   meemoofilm_image_or_sound?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  organisation?: Maybe<Maintainer_Organisation>;
   /** Overige lokale identifiers van de Content Partner (json) */
   premis_identifier?: Maybe<Scalars['jsonb']>;
   /** De IE waarvan de record deel uitmaakt. */
@@ -9226,6 +9264,7 @@ export type Object_Ie_Bool_Exp = {
   meemoofilm_contains_embedded_caption?: InputMaybe<Boolean_Comparison_Exp>;
   meemoofilm_embeddedCaptionLanguage?: InputMaybe<String_Comparison_Exp>;
   meemoofilm_image_or_sound?: InputMaybe<String_Comparison_Exp>;
+  organisation?: InputMaybe<Maintainer_Organisation_Bool_Exp>;
   premis_identifier?: InputMaybe<Jsonb_Comparison_Exp>;
   premis_is_part_of?: InputMaybe<String_Comparison_Exp>;
   premis_is_represented_by?: InputMaybe<Object_Representation_Bool_Exp>;
@@ -9448,6 +9487,7 @@ export type Object_Ie_Insert_Input = {
   meemoofilm_contains_embedded_caption?: InputMaybe<Scalars['Boolean']>;
   meemoofilm_embeddedCaptionLanguage?: InputMaybe<Scalars['String']>;
   meemoofilm_image_or_sound?: InputMaybe<Scalars['String']>;
+  organisation?: InputMaybe<Maintainer_Organisation_Obj_Rel_Insert_Input>;
   /** Overige lokale identifiers van de Content Partner (json) */
   premis_identifier?: InputMaybe<Scalars['jsonb']>;
   /** De IE waarvan de record deel uitmaakt. */
@@ -9776,6 +9816,7 @@ export type Object_Ie_Order_By = {
   meemoofilm_contains_embedded_caption?: InputMaybe<Order_By>;
   meemoofilm_embeddedCaptionLanguage?: InputMaybe<Order_By>;
   meemoofilm_image_or_sound?: InputMaybe<Order_By>;
+  organisation?: InputMaybe<Maintainer_Organisation_Order_By>;
   premis_identifier?: InputMaybe<Order_By>;
   premis_is_part_of?: InputMaybe<Order_By>;
   premis_is_represented_by_aggregate?: InputMaybe<Object_Representation_Aggregate_Order_By>;

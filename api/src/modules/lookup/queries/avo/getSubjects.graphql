@@ -1,5 +1,8 @@
 query getSubjects {
-	lookup_enum_lom_classification {
-		description
+	lookup_thesaurus(where: { scheme: { _eq: "https://w3id.org/onderwijs-vlaanderen/id/vak" } }) {
+		id
+		label
+		broader
+		scheme
 	}
 }

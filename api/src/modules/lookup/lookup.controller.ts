@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Avo } from '@viaa/avo2-types';
 
 import { LookupService } from './lookup.service';
 
@@ -9,12 +10,17 @@ export class LookupController {
 	constructor(private lookupService: LookupService) {}
 
 	@Get('subjects')
-	public async fetchSubjects(): Promise<string[]> {
+	public async fetchSubjects(): Promise<Avo.Lom.LomField[]> {
 		return this.lookupService.fetchSubjects();
 	}
 
 	@Get('education-levels')
-	public async fetchEducationLevels(): Promise<string[]> {
+	public async fetchEducationLevels(): Promise<Avo.Lom.LomField[]> {
 		return this.lookupService.fetchEducationLevels();
+	}
+
+	@Get('themes')
+	public async fetchThemes(): Promise<Avo.Lom.LomField[]> {
+		return this.lookupService.fetchThemes();
 	}
 }
