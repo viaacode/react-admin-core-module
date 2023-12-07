@@ -42,7 +42,8 @@ export const CheckboxListParam = {
 			if (isArray(value)) {
 				return value as string[];
 			}
-			return value.split('~');
+			const newValues = value.split('~');
+			return newValues?.length ? newValues : undefined;
 		} catch (err) {
 			return;
 		}
