@@ -243,9 +243,11 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				focusedPage={focusedPage ?? null}
 				onFocusedPageChanged={handleFocusedPageChanged}
 				getLabelLink={(label: string) => {
-					return `/${AdminConfigManager.getAdminRoute('NEWS')}?label=${encodeURIComponent(
-						label
-					)}`;
+					let newsLink = AdminConfigManager.getAdminRoute('NEWS');
+					if (!newsLink.startsWith('/') && !newsLink.includes('//')) {
+						newsLink = '/' + newsLink;
+					}
+					return `${newsLink}?label=${encodeURIComponent(label)}`;
 				}}
 				renderLink={renderLink}
 				commonUser={commonUser}
