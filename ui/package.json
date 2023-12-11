@@ -41,7 +41,7 @@
     "@meemoo/react-components": "3.0.19",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.35.3",
-    "@viaa/avo2-components": "4.0.15",
+    "@viaa/avo2-components": "4.0.16",
     "@viaa/avo2-types": "2.49.1",
     "autosize": "6.0.1",
     "caniuse-lite": "1.0.30001538",
