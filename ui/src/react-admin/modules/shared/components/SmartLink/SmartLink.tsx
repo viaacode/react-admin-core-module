@@ -215,10 +215,11 @@ export default SmartLink;
 export const generateSmartLink = (
 	action: ButtonAction | null | undefined,
 	children: ReactNode,
-	title?: string
+	title?: string,
+	className?: string
 ): ReactElement<any, any> | null => {
 	return (
-		<SmartLink action={action} title={title}>
+		<SmartLink action={action} title={title} className={className}>
 			{children}
 		</SmartLink>
 	);

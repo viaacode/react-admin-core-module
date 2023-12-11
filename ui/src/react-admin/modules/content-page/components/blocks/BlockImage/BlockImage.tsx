@@ -1,26 +1,50 @@
-import { AlignOptions, Container, DefaultProps, Image } from '@viaa/avo2-components';
+import {
+	AlignOptions,
+	Button,
+	ButtonAction,
+	ButtonType,
+	Container,
+	DefaultProps,
+	Image,
+} from '@viaa/avo2-components';
 import clsx from 'clsx';
 import React, { CSSProperties, FunctionComponent } from 'react';
+import { AlignOption } from '~modules/content-page/types/content-block.types';
 
 import './BlockImage.scss';
+import SmartLink, { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockImageProps extends DefaultProps {
 	imageSource: string;
 	imageDescription?: string;
+	imageAction?: ButtonAction;
+	imageAlt?: string;
 	title?: string;
 	text?: string;
 	width?: 'page-header' | 'full-width' | string;
 	align?: AlignOptions;
+	buttonAction?: ButtonAction;
+	buttonAlt?: string;
+	buttonLabel?: string;
+	buttonType?: ButtonType;
+	buttonAlign?: AlignOption;
 }
 
 export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	className,
 	imageSource,
 	imageDescription = '',
+	imageAction,
+	imageAlt,
 	title = '',
 	text = '',
 	width = '100%',
 	align = 'center',
+	buttonAlign,
+	buttonAction,
+	buttonAlt,
+	buttonLabel,
+	buttonType,
 }) => {
 	const style: CSSProperties = {};
 	if (width === 'page-header') {
@@ -32,6 +56,20 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	} else {
 		style.width = width;
 	}
+
+	const renderImageContent = () => {
+		return (
+			<>
+				{width !== 'page-header' && (
+					<Image
+						src={imageSource}
+						alt={imageAlt || imageDescription || title || text}
+						wide
+					/>
+				)}
+			</>
+		);
+	};
 
 	return (
 		<Container
@@ -46,9 +84,27 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 			)}
 			style={style as any}
 		>
-			{width !== 'page-header' && (
-				<Image src={imageSource} alt={imageDescription || title || text} wide />
-			)}
+			<div className="o-block-image__wrapper">
+				{/* image itself with or without link */}
+				{!!imageAction && (
+					<SmartLink action={imageAction} title={imageAlt}>
+						{renderImageContent()}
+					</SmartLink>
+				)}
+				{!imageAction && renderImageContent()}
+				{/* button on top of image */}
+				{buttonAction &&
+					generateSmartLink(
+						buttonAction,
+						<Button label={buttonLabel} type={buttonType} />,
+						buttonAlt || buttonLabel,
+						clsx('o-block-image__button', {
+							[`o-block-image__button--${buttonAlign}`]: !!buttonAlign,
+						})
+					)}
+			</div>
+
+			{/* image author attribution */}
 			{(!!title || !!text) && (
 				<div className="a-block-image__annotation">
 					{title && <h3>&#169; {title}</h3>}
