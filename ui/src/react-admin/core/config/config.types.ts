@@ -132,7 +132,8 @@ export interface AdminConfig {
 		// Optional values only needed for avo
 		BUNDLE_DETAIL?: string;
 		BUNDLE_EDIT?: string;
-		COLLECTIONS_OVERVIEW?: string;
+		ADMIN_COLLECTIONS_OVERVIEW?: string;
+		ADMIN_BUNDLES_OVERVIEW?: string;
 		COLLECTION_DETAIL?: string;
 		ASSIGNMENT_DETAIL?: string;
 		ITEM_DETAIL?: string;

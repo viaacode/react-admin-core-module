@@ -10,6 +10,7 @@ import {
 	ModalFooterRight,
 	RadioButtonGroup,
 	Spacer,
+	Spinner,
 	Toolbar,
 	ToolbarItem,
 	ToolbarRight,
@@ -124,23 +125,19 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	};
 
 	const renderConfirmDeleteMessage = () => {
-		const publicCollections: number = deleteContentCounts?.publicCollections || 0;
-		const privateCollections: number = deleteContentCounts?.privateCollections || 0;
-		const publicAssignments: number = deleteContentCounts?.publicAssignments || 0;
-		const privateAssignments: number = deleteContentCounts?.privateAssignments || 0;
-		const publicContentPages: number = deleteContentCounts?.publicContentPages || 0;
-		const privateContentPages: number = deleteContentCounts?.privateContentPages || 0;
-		const bookmarks: number = deleteContentCounts?.bookmarks || 0;
+		if (!deleteContentCounts) {
+			return <Spinner></Spinner>;
+		}
 
 		const isDeleteAll = selectedDeleteOption === 'DELETE_ALL';
 		const isTransferAll = selectedDeleteOption === 'TRANSFER_ALL';
 
 		const countOutputs: ReactNode[] = [];
-		if (isDeleteAll && publicCollections) {
+		if (isDeleteAll && deleteContentCounts.publicCollections) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('COLLECTIONS_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_COLLECTIONS_OVERVIEW'),
 						{},
 						{
 							is_public: '1',
@@ -148,20 +145,22 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{publicCollections}{' '}
-					{publicCollections === 1
+					{deleteContentCounts.publicCollections}{' '}
+					{deleteContentCounts.publicCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-collectie-of-bundel'
+								'react-admin/modules/user/components/user-delete-modal___publieke-collectie'
 						  )
-						: tHtml('admin/users/views/user-overview___publieke-collecties')}
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-collecties'
+						  )}
 				</Link>
 			);
 		}
-		if (!isTransferAll && privateCollections) {
+		if (!isTransferAll && deleteContentCounts.privateCollections) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('COLLECTIONS_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_COLLECTIONS_OVERVIEW'),
 						{},
 						{
 							is_public: '0',
@@ -169,62 +168,68 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						}
 					)}
 				>
-					{privateCollections}{' '}
-					{privateCollections === 1
+					{deleteContentCounts.privateCollections}{' '}
+					{deleteContentCounts.privateCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-collectie-of-bundel'
+								'react-admin/modules/user/components/user-delete-modal___prive-collectie'
 						  )
-						: tHtml('admin/users/views/user-overview___prive-collecties')}
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-collecties'
+						  )}
 				</Link>
 			);
 		}
-		if (isDeleteAll && publicContentPages) {
+		if (isDeleteAll && deleteContentCounts.publicBundles) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_BUNDLES_OVERVIEW'),
 						{},
 						{
 							is_public: '1',
-							user_profile_id: selectedProfileIds.join('~'),
+							owner_profile_id: selectedProfileIds.join('~'),
 						}
 					)}
 				>
-					{publicContentPages}{' '}
-					{publicContentPages === 1
+					{deleteContentCounts.publicBundles}{' '}
+					{deleteContentCounts.publicBundles === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-content-pagina'
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundel'
 						  )
-						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundels'
+						  )}
 				</Link>
 			);
 		}
-		if (!isTransferAll && privateContentPages) {
+		if (!isTransferAll && deleteContentCounts.privateBundles) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_BUNDLES_OVERVIEW'),
 						{},
 						{
 							is_public: '0',
-							user_profile_id: selectedProfileIds.join('~'),
+							owner_profile_id: selectedProfileIds.join('~'),
 						}
 					)}
 				>
-					{privateContentPages}{' '}
-					{privateContentPages === 1
+					{deleteContentCounts.privateBundles}{' '}
+					{deleteContentCounts.privateBundles === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-content-pagina'
+								'react-admin/modules/user/components/user-delete-modal___prive-bundel'
 						  )
-						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-bundels'
+						  )}
 				</Link>
 			);
 		}
-		if (isDeleteAll && publicAssignments) {
+		if (isDeleteAll && deleteContentCounts.publicAssignments) {
 			countOutputs.push(
 				<>
-					{publicAssignments}{' '}
-					{publicAssignments === 1
+					{deleteContentCounts.publicAssignments}{' '}
+					{deleteContentCounts.publicAssignments === 1
 						? tHtml(
 								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht'
 						  )
@@ -234,11 +239,29 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				</>
 			);
 		}
-		if (!isTransferAll && privateAssignments) {
+		if (
+			isDeleteAll &&
+			deleteContentCounts.publicAssignments &&
+			deleteContentCounts.publicAssignmentPupilCollections
+		) {
 			countOutputs.push(
 				<>
-					{privateAssignments}{' '}
-					{privateAssignments === 1
+					{deleteContentCounts.publicAssignmentPupilCollections}{' '}
+					{deleteContentCounts.publicAssignmentPupilCollections === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___leerlingen-collectie'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___leerlingen-collecties'
+						  )}
+				</>
+			);
+		}
+		if (!isTransferAll && deleteContentCounts.privateAssignments) {
+			countOutputs.push(
+				<>
+					{deleteContentCounts.privateAssignments}{' '}
+					{deleteContentCounts.privateAssignments === 1
 						? tHtml(
 								'react-admin/modules/user/components/user-delete-modal___prive-opdracht'
 						  )
@@ -248,11 +271,85 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				</>
 			);
 		}
-		if (!isTransferAll && bookmarks) {
+		if (
+			isDeleteAll &&
+			deleteContentCounts.privateAssignments &&
+			deleteContentCounts.privateAssignmentPupilCollections
+		) {
 			countOutputs.push(
 				<>
-					{bookmarks}{' '}
-					{bookmarks === 1
+					{deleteContentCounts.privateAssignmentPupilCollections}{' '}
+					{deleteContentCounts.privateAssignmentPupilCollections === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___leerlingen-collectie'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___leerlingen-collecties'
+						  )}
+				</>
+			);
+		}
+		if (isDeleteAll && deleteContentCounts.quickLanes) {
+			countOutputs.push(
+				<>
+					{deleteContentCounts.quickLanes}{' '}
+					{deleteContentCounts.quickLanes === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-link'
+						  )
+						: tHtml(
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-links'
+						  )}
+				</>
+			);
+		}
+		if (isDeleteAll && deleteContentCounts.publicContentPages) {
+			countOutputs.push(
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						{},
+						{
+							is_public: '1',
+							user_profile_id: selectedProfileIds.join('~'),
+						}
+					)}
+				>
+					{deleteContentCounts.publicContentPages}{' '}
+					{deleteContentCounts.publicContentPages === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___publieke-content-pagina'
+						  )
+						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
+				</Link>
+			);
+		}
+		if (!isTransferAll && deleteContentCounts.privateContentPages) {
+			countOutputs.push(
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						{},
+						{
+							is_public: '0',
+							user_profile_id: selectedProfileIds.join('~'),
+						}
+					)}
+				>
+					{deleteContentCounts.privateContentPages}{' '}
+					{deleteContentCounts.privateContentPages === 1
+						? tHtml(
+								'react-admin/modules/user/components/user-delete-modal___prive-content-pagina'
+						  )
+						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
+				</Link>
+			);
+		}
+		if (!isTransferAll && deleteContentCounts.bookmarks) {
+			countOutputs.push(
+				<>
+					{deleteContentCounts.bookmarks}{' '}
+					{deleteContentCounts.bookmarks === 1
 						? tHtml(
 								'react-admin/modules/user/components/user-delete-modal___bladwijzer'
 						  )
