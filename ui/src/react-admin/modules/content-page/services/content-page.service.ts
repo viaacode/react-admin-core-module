@@ -373,11 +373,15 @@ export class ContentPageService {
 		onlyInfo = false
 	): Promise<ContentPageInfo | null> {
 		try {
+			let url = this.getBaseUrl();
+			if (AdminConfigManager.getConfig().services.getContentPageByPathEndpoint && !onlyInfo) {
+				url =
+					AdminConfigManager.getConfig().services.getContentPageByPathEndpoint ||
+					this.getBaseUrl();
+			}
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
-					url:
-						AdminConfigManager.getConfig().services.getContentPageByPathEndpoint ||
-						this.getBaseUrl(),
+					url,
 					query: {
 						path,
 						onlyInfo: onlyInfo ? 'true' : 'false',
