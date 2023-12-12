@@ -227,7 +227,16 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 		}
 		if (isDeleteAll && deleteContentCounts.publicAssignments) {
 			countOutputs.push(
-				<>
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENTS_OVERVIEW'),
+						{},
+						{
+							is_public: '1',
+							author: selectedProfileIds.join('~'),
+						}
+					)}
+				>
 					{deleteContentCounts.publicAssignments}{' '}
 					{deleteContentCounts.publicAssignments === 1
 						? tHtml(
@@ -236,7 +245,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten'
 						  )}
-				</>
+				</Link>
 			);
 		}
 		if (
@@ -245,21 +254,44 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.publicAssignmentPupilCollections
 		) {
 			countOutputs.push(
-				<>
-					{deleteContentCounts.publicAssignmentPupilCollections}{' '}
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute(
+							'ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW'
+						),
+						{},
+						{
+							teacher: selectedProfileIds.join('~'),
+						}
+					)}
+				>
 					{deleteContentCounts.publicAssignmentPupilCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___leerlingen-collectie'
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie'
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___leerlingen-collecties'
+								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
+								{
+									numberOfCollections: String(
+										deleteContentCounts.publicAssignmentPupilCollections
+									),
+								}
 						  )}
-				</>
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.privateAssignments) {
 			countOutputs.push(
-				<>
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENTS_OVERVIEW'),
+						{},
+						{
+							is_public: '0',
+							author: selectedProfileIds.join('~'),
+						}
+					)}
+				>
 					{deleteContentCounts.privateAssignments}{' '}
 					{deleteContentCounts.privateAssignments === 1
 						? tHtml(
@@ -268,7 +300,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten'
 						  )}
-				</>
+				</Link>
 			);
 		}
 		if (
@@ -277,16 +309,30 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.privateAssignmentPupilCollections
 		) {
 			countOutputs.push(
-				<>
-					{deleteContentCounts.privateAssignmentPupilCollections}{' '}
+				<Link
+					to={buildLink(
+						AdminConfigManager.getAdminRoute(
+							'ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW'
+						),
+						{},
+						{
+							teacher: selectedProfileIds.join('~'),
+						}
+					)}
+				>
 					{deleteContentCounts.privateAssignmentPupilCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___leerlingen-collectie'
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie'
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___leerlingen-collecties'
+								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
+								{
+									numberOfCollections: String(
+										deleteContentCounts.privateAssignmentPupilCollections
+									),
+								}
 						  )}
-				</>
+				</Link>
 			);
 		}
 		if (isDeleteAll && deleteContentCounts.quickLanes) {
@@ -307,7 +353,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
 							is_public: '1',
@@ -328,7 +374,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'),
+						AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
 							is_public: '0',

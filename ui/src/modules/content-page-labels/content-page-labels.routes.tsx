@@ -8,28 +8,28 @@ import { ContentPageLabelsOverviewPage } from './ContentPageLabelsOverviewPage';
 export const renderAdminContentPageLabelRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}
 			render={() => <ContentPageLabelsOverviewPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_CREATE')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE')}
 			render={() => <ContentPageLabelsEditPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_CREATE')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL')}
 			render={() => <ContentPageLabelsDetailPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_EDIT')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT')}
 			render={() => <ContentPageLabelsEditPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_EDIT')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT')}
 		/>,
 	];
 };

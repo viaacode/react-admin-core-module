@@ -8,28 +8,28 @@ import ContentPageDetailPage from './ContentPageDetailPage';
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW')}
 			render={() => <ContentPageOverviewPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')}
 			render={() => <ContentPageDetailPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('CONTENT_PAGE_EDIT')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
 			render={() => <ContentPageEditPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('CONTENT_PAGE_EDIT')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
 		/>,
 	];
 };

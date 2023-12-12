@@ -30,16 +30,16 @@ const UserDetailPage: FC = () => {
 export const renderAdminUserRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}
 			render={() => <UserOverviewPage commonUser={mockCommonUser} />}
 			exact
-			path={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('USER_DETAIL')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL')}
 			render={() => <UserDetailPage />}
 			exact
-			path={AdminConfigManager.getAdminRoute('USER_DETAIL')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL')}
 		/>,
 	];
 };

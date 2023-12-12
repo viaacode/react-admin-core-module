@@ -12,7 +12,7 @@ export const ContentPageOverviewPage: FC<{ commonUser?: Avo.User.CommonUser }> =
 		<>
 			<Flex>
 				<h1>Content pages</h1>
-				<a href={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
+				<a href={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}>
 					<Button type="primary">Nieuwe pagina</Button>
 				</a>
 			</Flex>

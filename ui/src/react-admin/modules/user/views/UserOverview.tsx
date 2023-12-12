@@ -307,7 +307,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			AdminConfigManager.getAdminRoute('USER_OVERVIEW'),
+			AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'),
 			{},
 			{ [columnId]: tagId.toString(), columns: (tableState?.columns || []).join('~') }
 		);
@@ -434,7 +434,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				// no user detail for archief yet
 				return isAvo() ? (
 					<Link
-						to={buildLink(AdminConfigManager.getAdminRoute('USER_DETAIL'), {
+						to={buildLink(AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL'), {
 							id: tableRowCommonUser.profileId,
 						})}
 					>

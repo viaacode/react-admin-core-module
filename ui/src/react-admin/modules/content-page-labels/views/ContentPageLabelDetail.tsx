@@ -85,7 +85,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 
 	const handleEditClick = () => {
 		history.push(
-			buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_EDIT'), {
+			buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_EDIT'), {
 				id: contentPageLabelId,
 			})
 		);
@@ -165,7 +165,9 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				className={className}
 			>
 				<AdminLayout.Back>
-					<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>
+					<Link
+						to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}
+					>
 						<Button type="borderless">
 							<Icon name="chevronLeft"></Icon>
 						</Button>

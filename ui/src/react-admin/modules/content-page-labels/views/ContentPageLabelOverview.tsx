@@ -221,7 +221,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				return (
 					<Link
 						to={buildLink(
-							AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL'),
+							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'),
 							{ id: rowData.id }
 						)}
 					>
@@ -256,7 +256,9 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							onClick={() =>
 								navigate(
 									history,
-									AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL'),
+									AdminConfigManager.getAdminRoute(
+										'ADMIN_CONTENT_PAGE_LABEL_DETAIL'
+									),
 									{
 										id: rowData.id,
 									}
@@ -275,7 +277,9 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							onClick={() =>
 								navigate(
 									history,
-									AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_EDIT'),
+									AdminConfigManager.getAdminRoute(
+										'ADMIN_CONTENT_PAGE_LABEL_EDIT'
+									),
 									{
 										id: rowData.id,
 									}
@@ -373,7 +377,9 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 						'admin/content-page-labels/views/content-page-label-overview___content-pagina-label-toevoegen'
 					)}
 					onClick={() =>
-						history.push(AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_CREATE'))
+						history.push(
+							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE')
+						)
 					}
 				/>
 			</AdminLayout.Actions>
