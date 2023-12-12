@@ -7,10 +7,10 @@ import { UserGroupOverview } from '~modules/user-group/views';
 export const renderAdminUserGroupRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getAdminRoute('USER_GROUP_OVERVIEW')}
+			key={AdminConfigManager.getAdminRoute('ADMIN_USER_GROUP_OVERVIEW')}
 			render={() => <UserGroupOverview />}
 			exact
-			path={AdminConfigManager.getAdminRoute('USER_GROUP_OVERVIEW')}
+			path={AdminConfigManager.getAdminRoute('ADMIN_USER_GROUP_OVERVIEW')}
 		/>,
 	];
 };

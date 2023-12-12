@@ -103,7 +103,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 		try {
 			if (
 				isNil(id) ||
-				id === AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE').split('/').pop()
+				id ===
+					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
 			) {
 				return;
 			}
@@ -519,7 +520,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
+			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
@@ -593,9 +594,11 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(AdminConfigManager.getAdminRoute('CONTENT_PAGE_OVERVIEW'));
+			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 		} else {
-			navigate(history, AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), { id });
+			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+				id,
+			});
 		}
 	};
 
@@ -705,7 +708,9 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					</p>
 					{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 						<Spacer margin="top">
-							<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
+							<Link
+								to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
+							>
 								<Button
 									icon={'plus' as IconName}
 									label={tText(

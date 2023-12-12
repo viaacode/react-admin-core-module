@@ -168,7 +168,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 			case 'edit':
 				navigate(
 					history,
-					buildLink(AdminConfigManager.getAdminRoute('USER_EDIT'), {
+					buildLink(AdminConfigManager.getAdminRoute('ADMIN_USER_EDIT'), {
 						id: id as string,
 					})
 				);
@@ -419,7 +419,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 
 	// Executed when the user was deleted
 	const deleteCallback = () =>
-		navigate(history, AdminConfigManager.getAdminRoute('USER_OVERVIEW'));
+		navigate(history, AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'));
 
 	const renderUserDetailPage = () => {
 		const isBlocked = storedProfile?.isBlocked;
@@ -432,7 +432,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 			<>
 				<AdminLayout pageTitle={tText('admin/users/views/user-detail___gebruiker-details')}>
 					<AdminLayout.Back>
-						<Link to={AdminConfigManager.getAdminRoute('USER_OVERVIEW')}>
+						<Link to={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}>
 							<Button type="borderless">
 								<Icon name="chevronLeft"></Icon>
 							</Button>

@@ -331,9 +331,12 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			case 'title':
 				return (
 					<Link
-						to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
-							id,
-						})}
+						to={buildLink(
+							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+							{
+								id,
+							}
+						)}
 					>
 						{truncateTableValue(title)}
 					</Link>
@@ -432,9 +435,12 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				return (
 					<ButtonToolbar>
 						<Link
-							to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_DETAIL'), {
-								id,
-							})}
+							to={buildLink(
+								AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+								{
+									id,
+								}
+							)}
 						>
 							<Button
 								icon={'info' as IconName}
@@ -478,9 +484,12 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 							disabled
 						/>
 						<Link
-							to={buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_EDIT'), {
-								id,
-							})}
+							to={buildLink(
+								AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'),
+								{
+									id,
+								}
+							)}
 						>
 							<Button
 								icon={'edit' as IconName}
@@ -531,7 +540,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				</p>
 				{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 					<Spacer margin="top">
-						<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_CREATE')}>
+						<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}>
 							<Button
 								icon={'plus' as IconName}
 								label={tText(

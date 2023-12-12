@@ -129,7 +129,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				)
 			);
 
-			history.push(AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW'));
+			history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'));
 		}
 	}, [
 		isLoadingNavigationItems,
@@ -316,7 +316,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					position: navigationItems.length,
 				});
 
-				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
+				navigate(history, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
@@ -341,7 +341,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					} as NavigationItem,
 				]);
 
-				navigate(history, AdminConfigManager.getAdminRoute('NAVIGATION_DETAIL'), {
+				navigate(history, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
@@ -403,7 +403,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		return (
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Back>
-					<Link to={AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')}>
+					<Link to={AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')}>
 						<Button type="borderless">
 							<Icon name="chevronLeft"></Icon>
 						</Button>
@@ -415,7 +415,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
 								history.push(
-									AdminConfigManager.getAdminRoute('NAVIGATION_OVERVIEW')
+									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')
 								)
 							}
 							type="tertiary"

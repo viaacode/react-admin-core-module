@@ -96,9 +96,9 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 
 	const navigateBack = () => {
 		if (isCreatePage) {
-			history.push(AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW'));
+			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW'));
 		} else {
-			navigate(history, AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL'), {
+			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 				id: contentPageLabelId,
 			});
 		}
@@ -162,7 +162,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 				type: ToastType.SUCCESS,
 			});
 			history.push(
-				buildLink(AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_DETAIL'), {
+				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'), {
 					id: contentPageLabel.id,
 				})
 			);
@@ -297,7 +297,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			className={className}
 		>
 			<AdminLayout.Back>
-				<Link to={AdminConfigManager.getAdminRoute('CONTENT_PAGE_LABEL_OVERVIEW')}>
+				<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}>
 					<Button type="borderless">
 						<Icon name="chevronLeft"></Icon>
 					</Button>

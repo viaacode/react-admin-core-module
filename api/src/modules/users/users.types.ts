@@ -1,7 +1,5 @@
-import { Organisation } from '../organisations';
 import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
 import { UserQueryTypes } from './queries/users.queries';
-import { PermissionName } from '@viaa/avo2-types';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',
@@ -38,11 +36,16 @@ export type UserOverviewTableCol =
 export interface DeleteContentCounts {
 	publicCollections: number;
 	privateCollections: number;
+	publicBundles: number;
+	privateBundles: number;
 	publicAssignments: number;
+	publicAssignmentPupilCollections: number;
 	privateAssignments: number;
+	privateAssignmentPupilCollections: number;
 	publicContentPages: number;
 	privateContentPages: number;
 	bookmarks: number;
+	quickLanes: number;
 }
 
 export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
