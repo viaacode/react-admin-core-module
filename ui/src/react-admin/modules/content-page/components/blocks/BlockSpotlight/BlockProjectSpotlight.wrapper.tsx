@@ -37,15 +37,24 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 
 	const fetchContentPages = useCallback(async () => {
 		try {
-			const promises = elements.map((projectInfo: ProjectSpotlightProps) => {
-				const projectPath = projectInfo?.project?.value;
-				if (projectPath && projectPath.toString && projectPath.toString()) {
-					return ContentPageService.getContentPageByPath(
-						projectInfo.project.value.toString()
-					);
+			const promises = elements.map(
+				async (projectInfo: ProjectSpotlightProps): Promise<ContentPageInfo | null> => {
+					const projectPath = projectInfo?.project?.value;
+					if (projectPath && projectPath.toString && projectPath.toString()) {
+						try {
+							return await ContentPageService.getContentPageByPath(
+								projectInfo.project.value.toString(),
+								true
+							);
+						} catch (err) {
+							// Failed to fetch one of the content pages
+							// Continue rendering the block with one of the tiles missing
+							return null;
+						}
+					}
+					return null;
 				}
-				return Promise.resolve(null);
-			});
+			);
 			setProjectContentPages(await Promise.all(promises));
 		} catch (err) {
 			console.error(new CustomError('Failed to get projects by path', err, { elements }));
