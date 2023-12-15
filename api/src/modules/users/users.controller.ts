@@ -7,6 +7,7 @@ import {
 	Inject,
 	Param,
 	Patch,
+	Post,
 	Query,
 } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
@@ -15,7 +16,7 @@ import type { Avo } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
 import { UsersService } from './users.service';
-import { DeleteContentCounts, UserOverviewTableCol } from './users.types';
+import { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
 
 @ApiTags('Users')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/users')
@@ -25,6 +26,15 @@ export class UsersController {
 		protected usersService: UsersService
 	) {}
 
+	/**
+	 * @deprecated use POST /users instead to avoid issues with query params getting too big for the url
+	 * @param offset
+	 * @param limit
+	 * @param sortColumn
+	 * @param sortOrder
+	 * @param tableColumnDataType
+	 * @param where
+	 */
 	@Get('')
 	@RequireAnyPermissions(
 		PermissionName.VIEW_USERS,
@@ -47,6 +57,26 @@ export class UsersController {
 			sortOrder,
 			tableColumnDataType,
 			JSON.parse(where)
+		);
+	}
+
+	@Post('')
+	@RequireAnyPermissions(
+		PermissionName.VIEW_USERS,
+		PermissionName.EDIT_ANY_USER,
+		PermissionName.EDIT_ANY_COLLECTIONS,
+		PermissionName.VIEW_USERS_IN_SAME_COMPANY
+	)
+	async getProfilesPost(
+		@Body() body: QueryProfilesBody
+	): Promise<[Avo.User.CommonUser[], number]> {
+		return this.usersService.getProfiles(
+			parseInt(body.offset || '0'),
+			parseInt(body.limit || '50'),
+			body.sortColumn,
+			body.sortOrder,
+			body.tableColumnDataType,
+			JSON.parse(body.where)
 		);
 	}
 
