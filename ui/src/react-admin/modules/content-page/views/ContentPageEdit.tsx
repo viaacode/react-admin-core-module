@@ -217,8 +217,10 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as
 					| string
 					| number;
+				newContentPageConfig.createdAt = contentPageState.currentContentPageInfo.createdAt;
 			} else {
 				delete (newContentPageConfig as any).id;
+				newContentPageConfig.createdAt = new Date().toISOString();
 			}
 
 			// Remove content block ids
@@ -236,6 +238,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				groupId: commonUser.userGroup?.id,
 				groupName: commonUser.userGroup?.name,
 			} as ContentPageUser;
+
+			newContentPageConfig.updatedAt = new Date().toISOString();
 
 			const contentPageWithDuplicatedAssets =
 				await ContentPageService.duplicateContentImages(newContentPageConfig);

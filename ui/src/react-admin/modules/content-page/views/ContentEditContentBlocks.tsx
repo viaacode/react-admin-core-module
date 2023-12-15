@@ -3,7 +3,7 @@ import { get } from 'lodash-es';
 import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
-import { HorizontalPageSplit, VerticalPageSplit } from 'react-page-split';
+import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
