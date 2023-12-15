@@ -40,19 +40,17 @@ export class UserService {
 		itemsPerPage: number = USERS_PER_PAGE
 	): Promise<[Avo.User.CommonUser[], number]> {
 		try {
-			return fetchWithLogoutJson(
-				stringifyUrl({
-					url: this.getBaseUrl(),
-					query: {
-						offset: page * itemsPerPage,
-						limit: itemsPerPage,
-						sortColumn,
-						sortOrder,
-						tableColumnDataType,
-						where: JSON.stringify(where),
-					},
-				})
-			);
+			return fetchWithLogoutJson(this.getBaseUrl(), {
+				method: 'POST',
+				body: JSON.stringify({
+					offset: page * itemsPerPage,
+					limit: itemsPerPage,
+					sortColumn,
+					sortOrder,
+					tableColumnDataType,
+					where: JSON.stringify(where),
+				}),
+			});
 		} catch (err) {
 			throw new CustomError('Failed to get profiles from the server', err, {
 				page,

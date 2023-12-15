@@ -1,5 +1,6 @@
+import type { Avo } from '@viaa/avo2-types';
 import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
-import { UserQueryTypes } from './queries/users.queries';
+import type { UserQueryTypes } from './queries/users.queries';
 
 export enum Idp {
 	HETARCHIEF = 'HETARCHIEF',
@@ -7,6 +8,15 @@ export enum Idp {
 	SMARTSCHOOL = 'SMARTSCHOOL',
 	KLASCEMENT = 'KLASCEMENT',
 	VLAAMSEOVERHEID = 'VLAAMSEOVERHEID',
+}
+
+export interface QueryProfilesBody {
+	offset: string;
+	limit: string;
+	sortColumn: UserOverviewTableCol;
+	sortOrder: Avo.Search.OrderDirection;
+	tableColumnDataType: string;
+	where: string;
 }
 
 export type UserOverviewTableCol =
