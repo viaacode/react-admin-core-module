@@ -10,12 +10,12 @@ export function getPublishedState(
 
 	const { isPublic, publishAt, depublishAt } = contentPage;
 
-	if (isPublic) {
-		return PublishOption.public;
-	}
-
 	if (publishAt || depublishAt) {
 		return PublishOption.timebound;
+	}
+
+	if (isPublic) {
+		return PublishOption.public;
 	}
 
 	return PublishOption.private;
