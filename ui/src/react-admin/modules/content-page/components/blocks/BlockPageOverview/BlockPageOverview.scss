@@ -23,13 +23,25 @@
 			margin-top: 0;
 			cursor: pointer;
 			color: $color-teal-bright;
-			font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-				Helvetica, Arial, sans-serif;
+			font-family:
+				Montserrat,
+				-apple-system,
+				BlinkMacSystemFont,
+				"Segoe UI",
+				Roboto,
+				Helvetica,
+				Arial,
+				sans-serif;
 			font-weight: 500;
 
 			&:hover {
 				text-decoration: underline;
 			}
+		}
+
+		// AVO-3002: overwrite scss
+		p {
+			padding: 0;
 		}
 
 		.a-subtitle {
