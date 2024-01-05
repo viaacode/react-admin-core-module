@@ -219,7 +219,12 @@ export const generateSmartLink = (
 	className?: string
 ): ReactElement<any, any> | null => {
 	return (
-		<SmartLink action={action} title={title} className={className}>
+		<SmartLink
+			action={action}
+			title={title}
+			className={className}
+			key={'smart-link-' + action?.value + '-' + title + '-' + className}
+		>
 			{children}
 		</SmartLink>
 	);
