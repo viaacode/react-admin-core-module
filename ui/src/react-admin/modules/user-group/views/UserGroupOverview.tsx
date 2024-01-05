@@ -181,8 +181,10 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			if (search) {
 				setSearchResults(
 					sortBy(
-						permissions?.filter((permission) =>
-							permission.label.toLowerCase().includes(search.toLowerCase())
+						permissions?.filter(
+							(permission) =>
+								permission.label.toLowerCase().includes(search.toLowerCase()) ||
+								permission.name.toLowerCase().includes(search.toLowerCase())
 						),
 						(permission) => permission.label
 					)
