@@ -1,14 +1,17 @@
 import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+import { isEmpty, isNil } from 'lodash-es';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type { Avo } from '@viaa/avo2-types';
+import { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import { isAvo } from '~shared/helpers/is-avo';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { AVO } from '~shared/types';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -68,6 +71,37 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'BUNDLE',
 						'ASSIGNMENT',
 					] as Avo.Core.ContentPickerType[],
+				},
+			},
+			copyrightOwnerOrId: {
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___auteursrecht'
+				),
+				editorType: ContentBlockEditor.MaintainerSelect,
+				editorProps: {
+					extraSelectOptions: [
+						{
+							label: AdminConfigManager.getConfig().services.i18n.tText(
+								'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___geen-auteursrecht-vermelding'
+							),
+							value: 'NO_COPYRIGHT_NOTICE',
+						},
+					],
+				} as Partial<MaintainerSelectProps>,
+				validator: (value: string) => {
+					const errorArray: string[] = [];
+
+					if (isNil(value) || isEmpty(value)) {
+						errorArray.push(
+							AdminConfigManager.getConfig().services.i18n.tText(
+								'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___je-moet-een-keuze-maken-over-auteursrecht-van-de-video-still',
+								{},
+								[AVO]
+							)
+						);
+					}
+
+					return errorArray;
 				},
 			},
 			buttonLabel: TEXT_FIELD(undefined, {

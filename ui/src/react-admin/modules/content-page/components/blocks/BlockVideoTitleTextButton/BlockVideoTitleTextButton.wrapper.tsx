@@ -31,6 +31,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	buttonAction?: ButtonAction;
 	align: AlignOption;
 	commonUser?: Avo.User.CommonUser;
+	showCopyright?: boolean;
 }
 
 export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrapperProps> = (
@@ -56,6 +57,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 		align,
 		mediaAutoplay,
 		commonUser,
+		showCopyright,
 	} = props;
 
 	const shouldTitleLink =
@@ -75,6 +77,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 					poster={mediaPoster}
 					issued={mediaIssued}
 					organisation={mediaOrganisation}
+					showCopyright={showCopyright}
 				/>
 			</Column>
 			<Column size="2-5" className={`u-text-${align}`}>

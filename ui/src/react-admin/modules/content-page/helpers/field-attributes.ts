@@ -1,10 +1,10 @@
-import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { RichTextEditorProps } from '@meemoo/react-components';
+import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,
@@ -98,6 +98,16 @@ export const generateFieldAttributes = (
 					onChange(value);
 				},
 				values: value,
+			};
+
+		case ContentBlockEditor.MaintainerSelect:
+			return {
+				onChange: (value: any) => {
+					onChange(value);
+				},
+				value,
+				contentItemType: state.mediaItem?.type || null,
+				contentItemId: state.mediaItem?.value || null,
 			};
 
 		default:

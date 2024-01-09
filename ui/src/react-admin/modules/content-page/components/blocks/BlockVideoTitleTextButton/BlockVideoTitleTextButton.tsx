@@ -17,6 +17,7 @@ export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	titleLink?: string;
 	text?: string;
 	collapsedHeight?: number;
+	showCopyright?: boolean;
 }
 
 export const BlockVideoTitleTextButton: FunctionComponent<BlockVideoTitleTextButtonProps> = ({

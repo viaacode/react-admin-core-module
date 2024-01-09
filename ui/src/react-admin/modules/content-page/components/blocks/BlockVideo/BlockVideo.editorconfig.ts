@@ -78,6 +78,14 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 					ownerId: '',
 				} as FileUploadProps,
 			}),
+			showCopyright: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'react-admin/modules/content-page/components/blocks/block-video/block-video___toon-auteursrecht-melding-voor-deze-poster'
+					),
+				} as CheckboxProps,
+			},
 			annotationTitle: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/image___bijschift-titel'

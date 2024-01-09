@@ -1,7 +1,6 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import { Button, ButtonAction, Modal, ModalBody } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
@@ -28,6 +27,7 @@ interface MediaPlayerWrapperProps {
 	organisation?: Avo.Organization.Organization;
 	width?: string;
 	autoplay?: boolean;
+	showCopyright?: boolean;
 }
 
 export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
@@ -44,13 +44,17 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		organisation,
 		width,
 		autoplay,
+		showCopyright,
 	} = props;
 
-	const { tText } = useTranslation();
+	const { tText, tHtml } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [videoStill, setVideoStill] = useState<string>();
 	const [mediaItem, setMediaItem] = useState<Avo.Item.Item | null>(null);
+	const [activeCopyright, setActiveCopyright] = useState<Avo.Organization.Organization | null>(
+		null
+	);
 
 	const retrieveMediaItem = useCallback(async () => {
 		try {
@@ -92,7 +96,17 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		}
 	}, [src, mediaItem, setLoadingInfo]);
 
+	const handleCopyrightClicked = (
+		evt: React.MouseEvent<HTMLElement, MouseEvent>,
+		orgInfo: Avo.Organization.Organization
+	) => {
+		evt.stopPropagation();
+		evt.preventDefault();
+		setActiveCopyright(orgInfo);
+	};
+
 	const renderVideoPlayer = () => {
+		const org = organisation || mediaItem?.organisation;
 		return (
 			<div
 				className={clsx('c-video-player t-player-skin--dark', 'u-center-m')}
@@ -103,28 +117,56 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 						mediaItem
 							? ({
 									...(mediaItem || {}),
-									title: title || get(mediaItem, 'title') || '',
-									issued: issued || get(mediaItem, 'issued') || '',
-									organisation:
-										organisation || get(mediaItem, 'organisation') || '',
+									title: title || mediaItem?.title || '',
+									issued: issued || mediaItem?.issued || '',
+									organisation: organisation || mediaItem?.organisation || '',
 							  } as any)
 							: undefined
 					}
 					src={src}
 					poster={videoStill}
-					external_id={external_id || get(mediaItem, 'external_id')}
-					duration={duration || get(mediaItem, 'duration')}
-					title={title || get(mediaItem, 'title')}
-					organisationName={get(organisation || get(mediaItem, 'organisation'), 'name')}
-					organisationLogo={get(
-						organisation || get(mediaItem, 'organisation'),
-						'logo_url'
-					)}
-					issuedDate={issued || get(mediaItem, 'issued')}
+					topRight={
+						showCopyright &&
+						org && (
+							<Button
+								type="inline-link"
+								onClick={(evt) => handleCopyrightClicked(evt, org)}
+								label={tText('Bron >')}
+								title={tText('Bekijk de copyright info van deze afbeelding')}
+							/>
+						)
+					}
+					external_id={external_id || mediaItem?.external_id}
+					duration={duration || mediaItem?.duration}
+					title={title || mediaItem?.title}
+					organisationName={org?.name}
+					organisationLogo={org?.logo_url}
+					issuedDate={issued || mediaItem?.issued}
 					autoplay={autoplay}
 					annotationTitle={annotationTitle}
 					annotationText={annotationText}
 				/>
+				{/* Modal for displaying copyright info about the tile's image https://meemoo.atlassian.net/browse/AVO-3015 */}
+				<Modal
+					isOpen={!!activeCopyright}
+					onClose={() => {
+						setActiveCopyright(null);
+					}}
+					size="small"
+					title={tText(
+						'admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___copyright-info'
+					)}
+				>
+					<ModalBody>
+						{tHtml(
+							'admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___deze-afbeelding-valt-onder-copyright-van-organisation-name',
+							{
+								organisationName: activeCopyright?.name || '',
+								organisationWebsite: activeCopyright?.website || '',
+							}
+						)}
+					</ModalBody>
+				</Modal>
 			</div>
 		);
 	};

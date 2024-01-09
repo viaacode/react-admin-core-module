@@ -160,7 +160,6 @@ export enum ContentBlockEditor {
 	Checkbox = 'Checkbox',
 	ColorSelect = 'ColorSelect',
 	ContentPicker = 'ContentPicker',
-	AnchorLinkSelect = 'AnchorLinkSelect',
 	ContentTypeAndLabelsPicker = 'ContentTypeAndLabelsPicker',
 	FileUpload = 'FileUpload',
 	IconPicker = 'IconPicker',
@@ -172,6 +171,7 @@ export enum ContentBlockEditor {
 	TextInput = 'TextInput',
 	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
 	UserGroupSelect = 'UserGroupSelect',
+	MaintainerSelect = 'MaintainerSelect', // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
 }
 
 export interface ContentBlockField {

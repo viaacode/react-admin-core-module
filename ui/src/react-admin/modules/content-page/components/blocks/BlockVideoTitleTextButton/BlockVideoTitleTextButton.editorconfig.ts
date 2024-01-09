@@ -79,6 +79,14 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 					ownerId: '',
 				} as FileUploadProps,
 			}),
+			showCopyright: {
+				editorType: ContentBlockEditor.Checkbox,
+				editorProps: {
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'react-admin/modules/content-page/components/blocks/block-video-title-text-button/block-video-title-text-button___toon-auteursrecht-melding-voor-deze-poster'
+					),
+				} as CheckboxProps,
+			},
 			mediaAutoplay: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
