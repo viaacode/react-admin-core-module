@@ -131,8 +131,12 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 							<Button
 								type="inline-link"
 								onClick={(evt) => handleCopyrightClicked(evt, org)}
-								label={tText('Bron >')}
-								title={tText('Bekijk de copyright info van deze afbeelding')}
+								label={tText(
+									'react-admin/modules/content-page/components/blocks/block-video/block-video___bron'
+								)}
+								title={tText(
+									'react-admin/modules/content-page/components/blocks/block-video/block-video___bekijk-de-copyright-info-van-deze-afbeelding'
+								)}
 							/>
 						)
 					}
