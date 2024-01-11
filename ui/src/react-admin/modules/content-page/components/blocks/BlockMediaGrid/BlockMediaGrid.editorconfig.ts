@@ -1,5 +1,4 @@
 import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
-import { isEmpty, isNil } from 'lodash-es';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
@@ -91,7 +90,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: (value: string) => {
 					const errorArray: string[] = [];
 
-					if (isNil(value) || isEmpty(value)) {
+					if (!value) {
 						errorArray.push(
 							AdminConfigManager.getConfig().services.i18n.tText(
 								'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___je-moet-een-keuze-maken-over-auteursrecht-van-de-video-still',

@@ -9,7 +9,6 @@ import {
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { isEmpty, isNil } from 'lodash-es';
 export const INITIAL_UITGEKLAARD_COMPONENTS_STATE = (): KlaarBlockComponentState => ({
 	titles: [''],
 	date: '',
@@ -64,7 +63,7 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: (value: string) => {
 					const errorArray: string[] = [];
 
-					if (isNil(value) || isEmpty(value)) {
+					if (!value) {
 						errorArray.push(
 							AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-block/helpers/generators/uitgeklaard___datum-is-verplicht'

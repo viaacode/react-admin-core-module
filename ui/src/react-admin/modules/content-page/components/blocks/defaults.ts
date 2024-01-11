@@ -1,5 +1,4 @@
 import { SelectOption } from '@viaa/avo2-components';
-import { isEmpty, isNil } from 'lodash-es';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
@@ -149,7 +148,7 @@ export const TEXT_FIELD = (
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
-		if (isNil(value) || isEmpty(value)) {
+		if (!value) {
 			errorArray.push(
 				emptyFieldValidatorMessage ||
 					AdminConfigManager.getConfig().services.i18n.tText(
@@ -188,7 +187,7 @@ export const FILE_FIELD = (
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
-		if (isNil(value) || isEmpty(value)) {
+		if (!value) {
 			errorArray.push(emptyFieldValidatorMessage);
 		}
 
@@ -211,7 +210,7 @@ export const ITEM_PICKER_FIELD = (
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
-		if (isNil(value) || isEmpty(value)) {
+		if (!value) {
 			errorArray.push(emptyFieldValidatorMessage);
 		}
 

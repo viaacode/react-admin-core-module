@@ -1,5 +1,3 @@
-import { isEmpty, isNil } from 'lodash-es';
-
 import { AdminConfigManager } from '~core/config';
 import { AVO } from '~modules/shared';
 
@@ -80,7 +78,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: (value: string) => {
 					const errorArray: string[] = [];
 
-					if (isNil(value) || isEmpty(value)) {
+					if (!value) {
 						errorArray.push(
 							AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-block/helpers/generators/klaar___datum-is-verplicht',
