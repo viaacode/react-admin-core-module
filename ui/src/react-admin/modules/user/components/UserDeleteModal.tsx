@@ -253,6 +253,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.publicAssignments &&
 			deleteContentCounts.publicAssignmentPupilCollections
 		) {
+			const numberOfCollections = String(
+				deleteContentCounts.publicAssignmentPupilCollections
+			);
 			countOutputs.push(
 				<Link
 					to={buildLink(
@@ -272,9 +275,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
-									numberOfCollections: String(
-										deleteContentCounts.publicAssignmentPupilCollections
-									),
+									numberOfCollections,
 								}
 						  )}
 				</Link>
@@ -308,6 +309,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.privateAssignments &&
 			deleteContentCounts.privateAssignmentPupilCollections
 		) {
+			const numberOfCollections = String(
+				deleteContentCounts.privateAssignmentPupilCollections
+			);
 			countOutputs.push(
 				<Link
 					to={buildLink(
@@ -327,9 +331,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
-									numberOfCollections: String(
-										deleteContentCounts.privateAssignmentPupilCollections
-									),
+									numberOfCollections,
 								}
 						  )}
 				</Link>

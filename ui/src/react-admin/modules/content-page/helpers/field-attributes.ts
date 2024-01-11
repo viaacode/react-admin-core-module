@@ -106,9 +106,25 @@ export const generateFieldAttributes = (
 					onChange(value);
 				},
 				value,
+				// Pass the item that was selected above the maintainer select to the maintainer select
+				// So we can figure out which maintainers are used inside this content item
 				contentItemType: state.mediaItem?.type || null,
 				contentItemId: state.mediaItem?.value || null,
 			};
+
+		case ContentBlockEditor.UploadOrSelectVideoStill: {
+			const item = state.item || state.mediaItem;
+			return {
+				onChange: (value: any) => {
+					onChange(value);
+				},
+				value,
+				// Pass the item that was selected above the UploadOrSelectVideoStill input to the UploadOrSelectVideoStill input
+				// So we can figure out which stills to show the user for this content item
+				contentItemType: item?.type || null,
+				contentItemId: item?.value || null,
+			};
+		}
 
 		default:
 			return {

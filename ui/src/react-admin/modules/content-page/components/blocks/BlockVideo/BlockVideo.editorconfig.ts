@@ -66,18 +66,12 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 					),
 				} as TextInputProps,
 			}),
-			poster: FILE_FIELD(undefined, {
+			poster: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-player___eigen-poster-uploaden-optioneel'
+					'react-admin/modules/content-page/components/blocks/block-video/block-video___poster'
 				),
-				validator: undefined,
-				editorProps: {
-					allowMulti: false,
-					allowedTypes: PHOTO_TYPES,
-					assetType: 'CONTENT_BLOCK_IMAGE',
-					ownerId: '',
-				} as FileUploadProps,
-			}),
+				editorType: ContentBlockEditor.UploadOrSelectVideoStill,
+			},
 			showCopyright: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
