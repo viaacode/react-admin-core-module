@@ -172,6 +172,7 @@ export enum ContentBlockEditor {
 	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
 	UserGroupSelect = 'UserGroupSelect',
 	MaintainerSelect = 'MaintainerSelect', // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
+	UploadOrSelectVideoStill = 'UploadOrSelectVideoStill', // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
 }
 
 export interface ContentBlockField {

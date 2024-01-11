@@ -67,18 +67,12 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 					),
 				} as TextInputProps,
 			}),
-			mediaPoster: FILE_FIELD(undefined, {
+			mediaPoster: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-poster-uploaden-optioneel'
 				),
-				validator: undefined,
-				editorProps: {
-					allowMulti: false,
-					allowedTypes: PHOTO_TYPES,
-					assetType: 'CONTENT_BLOCK_IMAGE',
-					ownerId: '',
-				} as FileUploadProps,
-			}),
+				editorType: ContentBlockEditor.UploadOrSelectVideoStill,
+			},
 			showCopyright: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {

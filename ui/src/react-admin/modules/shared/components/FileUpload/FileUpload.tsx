@@ -1,6 +1,6 @@
 import { Blankslate, Button, Flex, FlexItem, Icon, IconName, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { compact, isString, noop } from 'lodash-es';
+import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
@@ -28,6 +28,17 @@ export interface FileUploadProps {
 	disabled?: boolean;
 	onChange: (urls: string[]) => void;
 	onDeleteFile?: (url: string) => void;
+
+	/**
+	 * Choose the preview the uploaded file or not
+	 * Used in UploadOrSelectVideoStill component
+	 */
+	showFilePreview?: boolean;
+	/**
+	 * If you only want to use the visualisation and delete functionality, but not the upload functionality, pass this custom button click handler
+	 * Used in UploadOrSelectVideoStill component
+	 */
+	onButtonClicked?: () => void;
 }
 
 const FileUpload: FunctionComponent<FileUploadProps> = ({
@@ -39,9 +50,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	ownerId,
 	urls,
 	showDeleteButton = true,
+	showFilePreview = true,
 	disabled = false,
 	onChange,
-	onDeleteFile = noop,
+	onDeleteFile,
+	onButtonClicked,
 }) => {
 	const { tHtml, tText } = useTranslation();
 
@@ -129,7 +142,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				const newUrls = [...urls];
 				for (let i = newUrls.length - 1; i >= 0; i -= 1) {
 					if (newUrls[i] === url) {
-						onDeleteFile(url);
+						onDeleteFile?.(url);
 						newUrls.splice(i, 1);
 					}
 				}
@@ -172,7 +185,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	};
 
 	const renderFilesPreview = () => {
-		if (!urls) {
+		if (!urls && !showFilePreview) {
 			return null;
 		}
 
@@ -255,18 +268,21 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 								ariaLabel={label}
 								type="secondary"
 								autoHeight
+								onClick={onButtonClicked}
 							/>
-							<input
-								type="file"
-								title={tText(
-									'shared/components/file-upload/file-upload___kies-een-bestand'
-								)}
-								multiple={allowMulti}
-								onChange={(evt) =>
-									!!evt.target.files &&
-									uploadSelectedFile(Array.from(evt.target.files))
-								}
-							/>
+							{!onButtonClicked && (
+								<input
+									type="file"
+									title={tText(
+										'shared/components/file-upload/file-upload___kies-een-bestand'
+									)}
+									multiple={allowMulti}
+									onChange={(evt) =>
+										!!evt.target.files &&
+										uploadSelectedFile(Array.from(evt.target.files))
+									}
+								/>
+							)}
 						</FlexItem>
 					</Flex>
 				) : (

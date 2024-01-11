@@ -15,6 +15,7 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';
 
@@ -35,4 +36,5 @@ export const GET_EDITOR_TYPES_MAP = (): Record<ContentBlockEditor, FunctionCompo
 	UserGroupSelect,
 	RICH_TEXT_EDITOR: RichTextEditorWrapper,
 	MaintainerSelect,
+	UploadOrSelectVideoStill,
 });

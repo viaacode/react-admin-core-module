@@ -1,0 +1,92 @@
+@use "sass:math";
+@import "../../../shared/styles/settings/colors";
+
+$imageWidth: 20rem;
+
+.c-upload-or-select-video-still {
+}
+
+.c-upload-or-select-video-still__modal {
+	.scrollbar-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.c-spinner {
+		width: 2rem;
+	}
+
+	.c-file-upload {
+		display: flex;
+		align-items: center;
+		width: $imageWidth;
+		height: math.div($imageWidth, 16) * 9;
+		background-color: #eee;
+		justify-content: center;
+		cursor: pointer;
+
+		&:hover {
+			outline: 0.5rem solid $color-primary;
+		}
+
+		input {
+			cursor: pointer;
+		}
+
+		.o-flex {
+			display: flex;
+			flex-direction: column;
+			width: $imageWidth;
+			height: math.div($imageWidth, 16) * 9;
+		}
+
+		.o-svg-icon {
+			position: absolute;
+			left: 50%;
+			top: 2rem;
+			transform: translateX(-50%);
+		}
+
+		.c-file-upload-button-and-input {
+			width: 100%;
+		}
+
+		.c-button {
+			width: 100%;
+			margin-top: 6rem;
+			border: 0;
+			background-color: transparent !important;
+			transition: none;
+
+			&:hover {
+				background-color: transparent;
+			}
+		}
+	}
+
+	.c-upload-or-select-video-still__spinner {
+		width: $imageWidth;
+		height: math.div($imageWidth, 16) * 9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #eee;
+	}
+
+	.c-upload-or-select-video-still__image {
+		width: $imageWidth;
+		height: math.div($imageWidth, 16) * 9;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-color: #666;
+		cursor: pointer;
+
+		&:hover,
+		&--selected {
+			outline: 0.5rem solid $color-primary;
+		}
+	}
+}
