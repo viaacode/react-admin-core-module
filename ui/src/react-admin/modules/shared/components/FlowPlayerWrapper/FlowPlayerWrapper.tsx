@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import type { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
 
@@ -23,6 +23,7 @@ export type FlowPlayerWrapperProps = {
 	seekTime?: number;
 	src?: string;
 	title?: string;
+	topRight?: ReactNode;
 };
 
 export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = (props) => {

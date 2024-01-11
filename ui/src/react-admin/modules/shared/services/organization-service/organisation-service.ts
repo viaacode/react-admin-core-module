@@ -1,3 +1,5 @@
+import { ContentPickerType } from '@viaa/avo2-types';
+import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -21,5 +23,24 @@ export class OrganisationService {
 				err
 			);
 		}
+	}
+
+	static getMaintainersByContentItem(
+		contentItemType:
+			| ContentPickerType.ITEM
+			| ContentPickerType.COLLECTION
+			| ContentPickerType.ASSIGNMENT,
+		contentItemId: string
+	): Promise<{ name: string; id: string; logo: string; website: string }[]> {
+		return fetchWithLogoutJson(
+			stringifyUrl({
+				url: `http://localhost:3000/organisations/by-content`,
+				// url: `${AdminConfigManager.getConfig().database.proxyUrl}/organisations/by-content`,
+				query: {
+					contentItemType,
+					contentItemId,
+				},
+			})
+		);
 	}
 }

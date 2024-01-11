@@ -5,6 +5,7 @@ import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.c
 import { generateFieldAttributes } from '../../helpers/field-attributes';
 import {
 	ContentBlockComponentState,
+	ContentBlockEditor,
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
@@ -65,7 +66,8 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 					),
 				};
 
-				const EditorComponents = GET_EDITOR_TYPES_MAP()[fieldState[1].editorType];
+				const EditorComponents =
+					GET_EDITOR_TYPES_MAP()[fieldState[1].editorType as ContentBlockEditor];
 
 				return (
 					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>

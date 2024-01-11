@@ -84,7 +84,7 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			},
 			imageAction: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'Link achter de afbeelding'
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___link-achter-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
@@ -104,31 +104,41 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			},
 			imageAlt: TEXT_FIELD(undefined, {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'Alt tekst voor de afbeelding'
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-tekst-voor-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText('Knop type'),
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-type'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText('Knoptekst is verplicht'),
+				AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knoptekst-is-verplicht'
+				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText('Knop tekst'),
+					label: AdminConfigManager.getConfig().services.i18n.tText(
+						'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-tekst'
+					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText('Alt knop text'),
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-knop-text'
+				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText('Knop actie'),
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-actie'
+				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [
@@ -146,7 +156,9 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonAlign: {
-				label: AdminConfigManager.getConfig().services.i18n.tText('Knop alignatie'),
+				label: AdminConfigManager.getConfig().services.i18n.tText(
+					'react-admin/modules/content-page/components/blocks/block-image/block-image___knop-alignatie'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
