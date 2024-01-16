@@ -6,6 +6,7 @@ import {
 	Get,
 	Headers,
 	InternalServerErrorException,
+	Ip,
 	NotFoundException,
 	Param,
 	ParseIntPipe,
@@ -79,12 +80,14 @@ export class ContentPagesController {
 		@Query('path') path: string,
 		@Query('onlyInfo') onlyInfo: string,
 		@Req() request: Request,
+		@Ip() ip,
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage> {
 		return this.contentPagesService.getContentPageByPathForUser(
 			path,
 			user?.getUser(),
 			request?.headers?.['Referrer'] as string,
+			ip,
 			onlyInfo === 'true'
 		);
 	}
@@ -93,9 +96,10 @@ export class ContentPagesController {
 	async doesContentPageExist(
 		@Query('path') path: string,
 		@Req() request: Request,
+		@Ip() ip,
 		@SessionUser() user: SessionUserEntity
 	): Promise<{ exists: boolean; title: string; id: number | string }> {
-		const contentPage = await this.getContentPageByPath(path, 'true', request, user);
+		const contentPage = await this.getContentPageByPath(path, 'true', request, ip, user);
 		return {
 			exists: !!contentPage,
 			title: contentPage?.title ?? null,

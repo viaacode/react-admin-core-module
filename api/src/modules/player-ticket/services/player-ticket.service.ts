@@ -7,10 +7,10 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-
+import publicIp from 'public-ip';
 import type { Cache } from 'cache-manager';
 import got, { Got } from 'got';
-import { ParsedUrl, parseUrl, stringifyUrl } from 'query-string';
+import { trimEnd } from 'lodash';
 
 import { DataService } from '../../data';
 import {
@@ -64,11 +64,13 @@ export class PlayerTicketService {
 		this.host = process.env.HOST;
 	}
 
-	protected async getToken(path: string, referer: string): Promise<PlayerTicket> {
+	protected async getToken(path: string, referer: string, ip: string): Promise<PlayerTicket> {
 		const data = {
 			app: 'OR-*',
-			client: '', // TODO: Wait for reply on ARC-536 and implement resolution
-			referer: referer || this.host,
+			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
+				? await publicIp.v4()
+				: ip,
+			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
 		};
 
@@ -78,19 +80,19 @@ export class PlayerTicketService {
 		});
 	}
 
-	public async getPlayerToken(embedUrl: string, referer: string): Promise<string> {
+	public async getPlayerToken(embedUrl: string, referer: string, ip: string): Promise<string> {
 		// no caching
-		const token = await this.getToken(embedUrl, referer);
+		const token = await this.getToken(embedUrl, referer, ip);
 		return token.jwt;
 	}
 
-	public async getThumbnailToken(referer: string): Promise<string> {
+	public async getThumbnailToken(referer: string, ip: string): Promise<string> {
 		const thumbnailPath = 'TESTBEELD/keyframes_all';
 
 		try {
 			const token = await this.cacheManager.wrap(
 				`thumbnailToken-${referer}`,
-				() => this.getToken(thumbnailPath, referer),
+				() => this.getToken(thumbnailPath, referer, ip),
 				600_000 // 10 minutes
 			);
 			return token.jwt;
@@ -102,9 +104,10 @@ export class PlayerTicketService {
 
 	public async getPlayableUrl(
 		fileRepresentationSchemaIdentifier: string,
-		referer: string
+		referer: string,
+		ip: string
 	): Promise<string> {
-		const token = await this.getPlayerToken(fileRepresentationSchemaIdentifier, referer);
+		const token = await this.getPlayerToken(fileRepresentationSchemaIdentifier, referer, ip);
 		return `${this.mediaServiceUrl}/${fileRepresentationSchemaIdentifier}?token=${token}`;
 	}
 
@@ -148,7 +151,7 @@ export class PlayerTicketService {
 		return browsePath;
 	}
 
-	public async resolveThumbnailUrl(path: string, referer: string): Promise<string> {
+	public async resolveThumbnailUrl(path: string, referer: string, ip: string): Promise<string> {
 		if (!path || !referer) {
 			return path;
 		}
@@ -156,13 +159,13 @@ export class PlayerTicketService {
 			// Already an absolute path => return path
 			return path;
 		}
-		const token = await this.getThumbnailToken(referer);
+		const token = await this.getThumbnailToken(referer, ip);
 		return `${this.mediaServiceUrl}/${path}?token=${token}`;
 	}
 
-	public async getThumbnailUrl(id: string, referer: string): Promise<string> {
+	public async getThumbnailUrl(id: string, referer: string, ip: string): Promise<string> {
 		const thumbnailPath = await this.getThumbnailPath(id);
-		return this.resolveThumbnailUrl(thumbnailPath, referer);
+		return this.resolveThumbnailUrl(thumbnailPath, referer, ip);
 	}
 
 	public async getThumbnailPath(id: string): Promise<string> {

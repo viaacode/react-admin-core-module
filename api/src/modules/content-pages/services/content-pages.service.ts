@@ -382,6 +382,7 @@ export class ContentPagesService {
 		path: string,
 		user?: Avo.User.CommonUser,
 		referrer?: string,
+		ip = '',
 		onlyInfo = false
 	): Promise<DbContentPage | null> {
 		const contentPage: DbContentPage | undefined = await this.getContentPageByPath(path);
@@ -434,7 +435,7 @@ export class ContentPagesService {
 
 		// Check if content page contains any media player content blocks (eg: mediaplayer, mediaPlayerTitleTextButton, hero)
 		if (referrer && !onlyInfo) {
-			await this.resolveMediaPlayersInPage(contentPage, referrer);
+			await this.resolveMediaPlayersInPage(contentPage, referrer, ip);
 		}
 
 		return contentPage;
@@ -521,7 +522,7 @@ export class ContentPagesService {
 		).map(this.adaptContentBlock.bind(this)) as DbContentPage[];
 	}
 
-	public async resolveMediaPlayersInPage(contentPage: DbContentPage, referrer?: string) {
+	public async resolveMediaPlayersInPage(contentPage: DbContentPage, referrer?: string, ip = '') {
 		const mediaPlayerBlocks =
 			contentPage?.content_blocks?.filter((contentBlock) =>
 				keys(MEDIA_PLAYER_BLOCKS).includes(contentBlock.type)
@@ -537,7 +538,8 @@ export class ContentPagesService {
 						if (itemInfo && itemInfo.browse_path) {
 							videoSrc = await this.playerTicketService.getPlayableUrl(
 								itemInfo.browse_path,
-								referrer || 'http://localhost:3200/'
+								referrer || 'http://localhost:3200/',
+								ip
 							);
 						}
 

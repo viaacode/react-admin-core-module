@@ -3,6 +3,7 @@ import {
 	Controller,
 	Get,
 	InternalServerErrorException,
+	Ip,
 	NotFoundException,
 	Query,
 	Req,
@@ -20,7 +21,7 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto, @Req() request) {
+	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto, @Req() request, @Ip() ip) {
 		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url'
@@ -28,15 +29,15 @@ export class PlayerTicketController {
 		}
 		const referrer = request.header('Referer') || 'referer-not-defined';
 		if (queryParams.externalId) {
-			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer);
+			return this.getPlayableUrlByExternalId(queryParams.externalId, referrer, ip);
 		} else if (queryParams.externalIds) {
 			return Promise.all(
 				queryParams.externalIds
 					.split(',')
-					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer))
+					.map((externalId) => this.getPlayableUrlByExternalId(externalId, referrer, ip))
 			);
 		} else {
-			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer);
+			return this.getPlayableUrlFromBrowsePath(queryParams.browsePath, referrer, ip);
 		}
 	}
 
@@ -46,7 +47,11 @@ export class PlayerTicketController {
 	 * @param externalId external_id of the media item that you want to view
 	 * @param referrer
 	 */
-	public async getPlayableUrlByExternalId(externalId: string, referrer: string): Promise<string> {
+	public async getPlayableUrlByExternalId(
+		externalId: string,
+		referrer: string,
+		ip: string
+	): Promise<string> {
 		try {
 			const browsePath = await this.playerTicketService.getEmbedUrl(externalId);
 			if (!browsePath) {
@@ -54,7 +59,7 @@ export class PlayerTicketController {
 					message: 'Object with external id was not found',
 				});
 			}
-			return this.getPlayableUrlFromBrowsePath(browsePath, referrer);
+			return this.getPlayableUrlFromBrowsePath(browsePath, referrer, ip);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get player ticket',
@@ -74,7 +79,8 @@ export class PlayerTicketController {
 	 */
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
-		referrer: string
+		referrer: string,
+		ip: string
 	): Promise<string> {
 		try {
 			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
@@ -94,7 +100,8 @@ export class PlayerTicketController {
 
 			return this.playerTicketService.getPlayableUrl(
 				fileRepresentationSchemaIdentifier,
-				referrer
+				referrer,
+				ip
 			);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
