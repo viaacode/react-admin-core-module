@@ -83,9 +83,10 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 			<FileUpload
 				assetType="CONTENT_BLOCK_IMAGE"
 				ownerId=""
-				urls={[value]}
+				urls={compact([selectedStill])}
 				onChange={(newValue: string[] | null) => onChange(newValue?.[0] || null)}
 				onButtonClicked={() => setIsModalOpen(true)}
+				onDeleteFile={() => setSelectedStill(null)}
 				label={tText(
 					'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-kies-een-still'
 				)}

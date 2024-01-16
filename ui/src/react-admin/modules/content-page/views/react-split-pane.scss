@@ -4,7 +4,8 @@
 
 	> * {
 		width: 100%;
-		overflow: auto !important;
+		overflow-y: auto !important;
+		overflow-x: visible !important;
 		min-width: 10px;
 	}
 

@@ -15,7 +15,6 @@ import {
 import {
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	FILE_FIELD,
 	ITEM_PICKER_FIELD,
 	TEXT_FIELD,
 } from '../defaults';

@@ -72,7 +72,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					] as Avo.Core.ContentPickerType[],
 				},
 			},
-			image: {
+			copyrightImage: {
 				label: AdminConfigManager.getConfig().services.i18n.tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___afbeelding'
 				),

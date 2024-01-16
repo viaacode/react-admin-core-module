@@ -348,6 +348,8 @@ export interface MediaGridBlockComponentState {
 	buttonIcon?: IconName;
 	buttonType?: ButtonType;
 	buttonAction?: ButtonAction;
+	copyrightImage?: string | null;
+	copyrightOwnerOrId?: string | null;
 }
 
 export interface MediaGridBlockState extends DefaultContentBlockState {
