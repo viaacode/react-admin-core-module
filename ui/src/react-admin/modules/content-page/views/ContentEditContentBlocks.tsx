@@ -1,11 +1,15 @@
 import type { Avo } from '@viaa/avo2-types';
+import clsx from 'clsx';
 import { get } from 'lodash-es';
-import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
+import React, { FunctionComponent, ReactNode, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import DraggableList, {
+	DraggableItemData,
+} from '~modules/content-page/components/DraggableList/DraggableList';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
@@ -56,7 +60,11 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	const { tText } = useTranslation();
 
 	// Hooks
+	// This is the block that is being edited with the form sidebar accordion opened up
 	const [activeBlockPosition, setActiveBlockPosition] = useState<number | null>(null);
+
+	// This is the collapsed accordion that is highlighted by a blue border
+	const [highlightedBlockIndex, setHighlightedBlockIndex] = useState<number | null>(null);
 
 	const previewScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 	const sidebarScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -118,6 +126,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	const focusBlock: BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => {
 		toggleActiveBlock(position, type === 'preview');
+		setHighlightedBlockIndex(position);
 		const inverseType = type === 'preview' ? 'sidebar' : 'preview';
 		setTimeout(() => {
 			scrollToBlockPosition(position, inverseType);
@@ -127,51 +136,97 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	const toggleActiveBlock = (position: number, onlyOpen: boolean) => {
 		if (position === activeBlockPosition && !onlyOpen) {
 			setActiveBlockPosition(null);
+			setTimeout(() => {
+				setHighlightedBlockIndex(null);
+			}, 1000);
 		} else {
 			setActiveBlockPosition(position);
 		}
 	};
 
+	const renderBlockForm = (itemData: DraggableItemData, index: number): ReactNode => {
+		return (
+			<div
+				className={clsx(
+					'content-block-sidebar-item',
+					`content-block-sidebar-${itemData.position}`,
+					{ [`content-block-sidebar-item--highlighted`]: index === highlightedBlockIndex }
+				)}
+				key={createKey('form', index)}
+			>
+				<ContentBlockForm
+					config={itemData}
+					blockIndex={index}
+					isAccordionOpen={itemData.position === activeBlockPosition}
+					length={(contentPageInfo.content_blocks || []).length}
+					hasSubmitted={hasSubmitted}
+					toggleIsAccordionOpen={() => {
+						focusBlock(itemData.position, 'sidebar');
+					}}
+					onChange={(
+						formGroupType: ContentBlockStateType,
+						input: any,
+						stateIndex?: number
+					) => onSave(index, formGroupType, input, stateIndex)}
+					addComponentToState={() => addComponentToState(index, itemData.type)}
+					removeComponentFromState={(stateIndex: number) =>
+						removeComponentFromState(index, stateIndex)
+					}
+					onError={(configIndex: number, errors: ContentBlockErrors) =>
+						changeContentPageState({
+							type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
+							payload: { configIndex, errors },
+						})
+					}
+					onRemove={onRemove}
+					onReorder={handleReorderContentBlock}
+				/>
+			</div>
+		);
+	};
+
+	const generateKeyForBlock = (itemData: DraggableItemData) => {
+		return itemData.id;
+	};
+
+	const handleDragStarting = () => {
+		setActiveBlockPosition(null);
+	};
+
+	const handleUpdateDraggableList = (updatedList: DraggableItemData[]) => {
+		changeContentPageState({
+			type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
+			payload: {
+				propName: 'content_blocks',
+				propValue: updatedList.map((blockConfig, index) => {
+					return {
+						...blockConfig,
+						position: index,
+					};
+				}),
+			},
+		});
+	};
+
 	// Render
 	const renderContentBlockForms = () => {
-		return (contentPageInfo.content_blocks || []).map((contentBlockConfig, index) => {
-			return (
-				<div
-					className={`content-block-sidebar-${contentBlockConfig.position}`}
-					key={createKey('form', index)}
-				>
-					<ContentBlockForm
-						config={contentBlockConfig}
-						blockIndex={index}
-						isAccordionOpen={contentBlockConfig.position === activeBlockPosition}
-						length={(contentPageInfo.content_blocks || []).length}
-						hasSubmitted={hasSubmitted}
-						toggleIsAccordionOpen={() => {
-							focusBlock(contentBlockConfig.position, 'sidebar');
-						}}
-						onChange={(
-							formGroupType: ContentBlockStateType,
-							input: any,
-							stateIndex?: number
-						) => onSave(index, formGroupType, input, stateIndex)}
-						addComponentToState={() =>
-							addComponentToState(index, contentBlockConfig.type)
-						}
-						removeComponentFromState={(stateIndex: number) =>
-							removeComponentFromState(index, stateIndex)
-						}
-						onError={(configIndex: number, errors: ContentBlockErrors) =>
-							changeContentPageState({
-								type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
-								payload: { configIndex, errors },
-							})
-						}
-						onRemove={onRemove}
-						onReorder={handleReorderContentBlock}
-					/>
-				</div>
-			);
-		});
+		console.log({ highlightedBlockIndex });
+		return (
+			<DraggableList
+				items={contentPageInfo.content_blocks || []}
+				renderItem={renderBlockForm}
+				generateKey={generateKeyForBlock}
+				onDragStarting={handleDragStarting}
+				onListChange={handleUpdateDraggableList}
+				highlightedItemIndex={highlightedBlockIndex}
+				setHighlightedItemIndex={(index) => {
+					setHighlightedBlockIndex(index);
+					setTimeout(() => {
+						setHighlightedBlockIndex(null);
+					}, 1000);
+				}}
+			></DraggableList>
+		);
 	};
 
 	return (

@@ -1,0 +1,100 @@
+@use "sass:math";
+@import "../../../shared/styles/settings/colors";
+
+$ghostHeight: 0.5rem;
+
+.c-draggable-list {
+	margin: 1rem 0;
+
+	.c-draggable-list__item {
+		margin: 1rem 1rem;
+		background-color: #fff;
+		border-radius: 0.5rem;
+		border: 0.1rem solid #d6dee3;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		position: relative;
+
+		&.c-draggable-list__item--highlighted {
+			border-color: $color-teal-bright;
+		}
+	}
+
+	.c-draggable-list__item__drag-handle {
+		width: 20px;
+		opacity: 0.3;
+		padding: 1.2rem 1.8rem 1.2rem 1.2rem;
+		cursor: move;
+		position: absolute;
+	}
+
+	.c-draggable-list__item__content {
+		flex-grow: 1;
+
+		.content-block-sidebar-item {
+			width: 100%;
+			.c-content-block-form__accordion {
+				border: none;
+				width: 100%;
+
+				> .o-flex {
+					width: 100%;
+				}
+
+				.c-accordion__header {
+					padding-left: 4rem;
+				}
+			}
+		}
+	}
+
+	.c-draggable-list__item--is-being-dragged {
+		border-color: $color-teal-bright;
+	}
+
+	.c-draggable-list__item--target-ghost {
+		height: 0;
+		margin: 0 1rem;
+		pointer-events: none;
+		position: relative;
+
+		&:after {
+			position: absolute;
+			left: 0;
+			top: -1rem + math.div($ghostHeight, 2);
+			content: " ";
+			height: $ghostHeight;
+			width: 100%;
+			transition: width 0.3s ease-out;
+			display: block;
+			background-color: $color-teal-bright;
+			border-radius: math.div($ghostHeight, 2);
+			animation: showAfterDelay 0.05s;
+		}
+	}
+
+	.c-draggable-list__item--end-ghost {
+		height: 10rem;
+		width: 100%;
+		display: block;
+	}
+}
+
+@-webkit-keyframes showAfterDelay {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	51% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
