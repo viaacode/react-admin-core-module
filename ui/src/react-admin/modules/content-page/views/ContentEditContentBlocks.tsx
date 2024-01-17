@@ -1,15 +1,17 @@
 import type { Avo } from '@viaa/avo2-types';
-import { get } from 'lodash-es';
-import React, { FunctionComponent, RefObject, useRef, useState } from 'react';
+import { get, uniqBy } from 'lodash-es';
+import React, { FunctionComponent, ReactNode, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import {
+	ContentBlockConfig,
 	ContentBlockErrors,
 	ContentBlockStateOption,
 	ContentBlockStateType,
@@ -132,46 +134,86 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		}
 	};
 
+	const renderBlockForm = ({
+		contentBlockConfig,
+		index,
+	}: {
+		contentBlockConfig: ContentBlockConfig;
+		index: number;
+	}): ReactNode => {
+		return (
+			<div
+				className={`content-block-sidebar-${contentBlockConfig.position}`}
+				key={createKey('form', index)}
+			>
+				<ContentBlockForm
+					config={contentBlockConfig}
+					blockIndex={index}
+					isAccordionOpen={contentBlockConfig.position === activeBlockPosition}
+					length={(contentPageInfo.content_blocks || []).length}
+					hasSubmitted={hasSubmitted}
+					toggleIsAccordionOpen={() => {
+						focusBlock(contentBlockConfig.position, 'sidebar');
+					}}
+					onChange={(
+						formGroupType: ContentBlockStateType,
+						input: any,
+						stateIndex?: number
+					) => onSave(index, formGroupType, input, stateIndex)}
+					addComponentToState={() => addComponentToState(index, contentBlockConfig.type)}
+					removeComponentFromState={(stateIndex: number) =>
+						removeComponentFromState(index, stateIndex)
+					}
+					onError={(configIndex: number, errors: ContentBlockErrors) =>
+						changeContentPageState({
+							type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
+							payload: { configIndex, errors },
+						})
+					}
+					onRemove={onRemove}
+					onReorder={handleReorderContentBlock}
+				/>
+			</div>
+		);
+	};
+
 	// Render
 	const renderContentBlockForms = () => {
-		return (contentPageInfo.content_blocks || []).map((contentBlockConfig, index) => {
-			return (
-				<div
-					className={`content-block-sidebar-${contentBlockConfig.position}`}
-					key={createKey('form', index)}
-				>
-					<ContentBlockForm
-						config={contentBlockConfig}
-						blockIndex={index}
-						isAccordionOpen={contentBlockConfig.position === activeBlockPosition}
-						length={(contentPageInfo.content_blocks || []).length}
-						hasSubmitted={hasSubmitted}
-						toggleIsAccordionOpen={() => {
-							focusBlock(contentBlockConfig.position, 'sidebar');
-						}}
-						onChange={(
-							formGroupType: ContentBlockStateType,
-							input: any,
-							stateIndex?: number
-						) => onSave(index, formGroupType, input, stateIndex)}
-						addComponentToState={() =>
-							addComponentToState(index, contentBlockConfig.type)
-						}
-						removeComponentFromState={(stateIndex: number) =>
-							removeComponentFromState(index, stateIndex)
-						}
-						onError={(configIndex: number, errors: ContentBlockErrors) =>
-							changeContentPageState({
-								type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
-								payload: { configIndex, errors },
-							})
-						}
-						onRemove={onRemove}
-						onReorder={handleReorderContentBlock}
-					/>
-				</div>
-			);
-		});
+		const blocks = (contentPageInfo.content_blocks || []).map((config, index) => ({
+			contentBlockConfig: config,
+			index,
+		}));
+		return (
+			<DraggableList
+				items={blocks}
+				renderItem={renderBlockForm}
+				generateKey={(item) => {
+					return item.contentBlockConfig.id;
+				}}
+				onListChange={
+					((
+						newBlocks: {
+							contentBlockConfig: ContentBlockConfig;
+							index: number;
+						}[]
+					) => {
+						newBlocks = uniqBy(newBlocks, (b) => b.contentBlockConfig.id);
+						changeContentPageState({
+							type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
+							payload: {
+								propName: 'content_blocks',
+								propValue: newBlocks.map((block, index) => {
+									return {
+										...block.contentBlockConfig,
+										position: index,
+									};
+								}),
+							},
+						});
+					}) as any
+				}
+			></DraggableList>
+		);
 	};
 
 	return (
