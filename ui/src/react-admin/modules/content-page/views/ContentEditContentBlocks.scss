@@ -19,3 +19,7 @@
 	animation: flash 1s ease-in-out 2;
 	background-color: inherit;
 }
+
+.content-block-sidebar-item--highlighted {
+	border-color: $color-teal-bright;
+}

@@ -1,7 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get, uniqBy } from 'lodash-es';
-import { generateKey } from 'node:crypto';
+import { get } from 'lodash-es';
 import React, { FunctionComponent, ReactNode, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
@@ -11,12 +10,10 @@ import ContentPageRenderer from '~modules/content-page/components/ContentPageRen
 import DraggableList, {
 	DraggableItemData,
 } from '~modules/content-page/components/DraggableList/DraggableList';
-import { DraggableItem } from '~modules/content-page/components/DraggableList/DraggableList.types';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import {
-	ContentBlockConfig,
 	ContentBlockErrors,
 	ContentBlockStateOption,
 	ContentBlockStateType,
@@ -63,7 +60,11 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	const { tText } = useTranslation();
 
 	// Hooks
+	// This is the block that is being edited with the form sidebar accordion opened up
 	const [activeBlockPosition, setActiveBlockPosition] = useState<number | null>(null);
+
+	// This is the collapsed accordion that is highlighted by a blue border
+	const [highlightedBlockIndex, setHighlightedBlockIndex] = useState<number | null>(null);
 
 	const previewScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 	const sidebarScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -125,6 +126,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	const focusBlock: BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => {
 		toggleActiveBlock(position, type === 'preview');
+		setHighlightedBlockIndex(position);
 		const inverseType = type === 'preview' ? 'sidebar' : 'preview';
 		setTimeout(() => {
 			scrollToBlockPosition(position, inverseType);
@@ -134,6 +136,9 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	const toggleActiveBlock = (position: number, onlyOpen: boolean) => {
 		if (position === activeBlockPosition && !onlyOpen) {
 			setActiveBlockPosition(null);
+			setTimeout(() => {
+				setHighlightedBlockIndex(null);
+			}, 1000);
 		} else {
 			setActiveBlockPosition(position);
 		}
@@ -144,7 +149,8 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 			<div
 				className={clsx(
 					'content-block-sidebar-item',
-					`content-block-sidebar-${itemData.position}`
+					`content-block-sidebar-${itemData.position}`,
+					{ [`content-block-sidebar-item--highlighted`]: index === highlightedBlockIndex }
 				)}
 				key={createKey('form', index)}
 			>
@@ -204,6 +210,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	// Render
 	const renderContentBlockForms = () => {
+		console.log({ highlightedBlockIndex });
 		return (
 			<DraggableList
 				items={contentPageInfo.content_blocks || []}
@@ -211,6 +218,13 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 				generateKey={generateKeyForBlock}
 				onDragStarting={handleDragStarting}
 				onListChange={handleUpdateDraggableList}
+				highlightedItemIndex={highlightedBlockIndex}
+				setHighlightedItemIndex={(index) => {
+					setHighlightedBlockIndex(index);
+					setTimeout(() => {
+						setHighlightedBlockIndex(null);
+					}, 1000);
+				}}
 			></DraggableList>
 		);
 	};

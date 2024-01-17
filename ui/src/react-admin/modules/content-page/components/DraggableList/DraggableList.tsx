@@ -15,6 +15,8 @@ export interface DraggableListProps {
 	onListChange: (updatedList: DraggableItemData[]) => void;
 	onDragStarting: () => void;
 	generateKey: (itemData: DraggableItemData) => string;
+	highlightedItemIndex: number | null;
+	setHighlightedItemIndex: (index: number | null) => void;
 }
 
 const DraggableList: FunctionComponent<DraggableListProps> = ({
@@ -23,6 +25,8 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 	onListChange,
 	onDragStarting,
 	generateKey,
+	highlightedItemIndex,
+	setHighlightedItemIndex,
 }) => {
 	const [currentlyBeingDragged, setCurrentlyBeingDragged] = useState<any | null>(null);
 
@@ -71,22 +75,14 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 		if (e.dataTransfer && e.target) {
 			e.dataTransfer.effectAllowed = 'move';
 			e.dataTransfer.setData('text/html', e.target);
-			e.dataTransfer.setDragImage(e.target, 20, 20);
+			e.dataTransfer.setDragImage(e.target, -0, -0);
 		}
 	};
 
-	const generateInternalKey = (item: DraggableItem): string => {
-		if (item.isTargetGhost) {
-			return 'target-ghost';
-		}
-		if (item.isEndGhost) {
-			return 'end-ghost';
-		}
-		return generateKey(item.data);
-	};
+	const onDragOver = (evt: any, draggedOverIndex: number) => {
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'move';
 
-	const onDragOver = (draggedOverIndex: number) => {
-		console.log('drag over: ' + draggedOverIndex);
 		const ghostIndex = findIndex(draggableItems, (item) => item.isTargetGhost || false);
 		if (
 			currentlyBeingDragged &&
@@ -127,19 +123,29 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			// Remove the dragged item from its original location
 			updatedList.splice(startIndex, 1);
 
+			const movedItemIndex = findIndex(updatedList, (item) => item.isBeingDragged);
+
 			onListChange(updatedList.map((item) => item.data));
+			setHighlightedItemIndex(movedItemIndex);
+			console.log('setting highlight to: ' + movedItemIndex);
 		}
 		resetDraggingState();
 	};
 
 	const handleRenderItem = (item: DraggableItem, index: number): ReactNode => {
 		if (item.isTargetGhost) {
-			return <div className="c-draggable-list__item--target-ghost"></div>;
+			return (
+				<div
+					className="c-draggable-list__item--target-ghost"
+					key={`draggable-list__item--target-ghost`}
+				></div>
+			);
 		} else if (item.isEndGhost) {
 			return (
 				<div
 					className="c-draggable-list__item--end-ghost"
-					onDragOver={() => onDragOver(index)}
+					key={`draggable-list__item--end-ghost`}
+					onDragOver={(evt) => onDragOver(evt, index)}
 				></div>
 			);
 		} else {
@@ -147,12 +153,13 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 				<div
 					className={classNames('c-draggable-list__item', {
 						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
+						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
 					})}
-					onDragOver={() => onDragOver(index)}
+					onDragOver={(evt) => onDragOver(evt, index)}
 					onDragEnd={onDragEnd}
 					onDragStart={(e) => onDragStart(e, index)}
 					draggable
-					key={`draggable-list__item-${generateInternalKey(item)}`}
+					key={`draggable-list__item-${generateKey(item.data)}`}
 				>
 					<div className="c-draggable-list__item__drag-handle">
 						<Icon name={IconName.menu} />
@@ -165,8 +172,13 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 		}
 	};
 
+	const handleDragOverContainer = (evt: any) => {
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'move';
+	};
+
 	return (
-		<div className={classNames('c-draggable-list')}>
+		<div className={classNames('c-draggable-list')} onDragOver={handleDragOverContainer}>
 			{(draggableItems || []).map((item, index) => handleRenderItem(item, index))}
 		</div>
 	);
