@@ -1,12 +1,17 @@
 import type { Avo } from '@viaa/avo2-types';
+import clsx from 'clsx';
 import { get, uniqBy } from 'lodash-es';
+import { generateKey } from 'node:crypto';
 import React, { FunctionComponent, ReactNode, RefObject, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
+import DraggableList, {
+	DraggableItemData,
+} from '~modules/content-page/components/DraggableList/DraggableList';
+import { DraggableItem } from '~modules/content-page/components/DraggableList/DraggableList.types';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
@@ -134,33 +139,30 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		}
 	};
 
-	const renderBlockForm = ({
-		contentBlockConfig,
-		index,
-	}: {
-		contentBlockConfig: ContentBlockConfig;
-		index: number;
-	}): ReactNode => {
+	const renderBlockForm = (itemData: DraggableItemData, index: number): ReactNode => {
 		return (
 			<div
-				className={`content-block-sidebar-${contentBlockConfig.position}`}
+				className={clsx(
+					'content-block-sidebar-item',
+					`content-block-sidebar-${itemData.position}`
+				)}
 				key={createKey('form', index)}
 			>
 				<ContentBlockForm
-					config={contentBlockConfig}
+					config={itemData}
 					blockIndex={index}
-					isAccordionOpen={contentBlockConfig.position === activeBlockPosition}
+					isAccordionOpen={itemData.position === activeBlockPosition}
 					length={(contentPageInfo.content_blocks || []).length}
 					hasSubmitted={hasSubmitted}
 					toggleIsAccordionOpen={() => {
-						focusBlock(contentBlockConfig.position, 'sidebar');
+						focusBlock(itemData.position, 'sidebar');
 					}}
 					onChange={(
 						formGroupType: ContentBlockStateType,
 						input: any,
 						stateIndex?: number
 					) => onSave(index, formGroupType, input, stateIndex)}
-					addComponentToState={() => addComponentToState(index, contentBlockConfig.type)}
+					addComponentToState={() => addComponentToState(index, itemData.type)}
 					removeComponentFromState={(stateIndex: number) =>
 						removeComponentFromState(index, stateIndex)
 					}
@@ -177,41 +179,38 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		);
 	};
 
+	const generateKeyForBlock = (itemData: DraggableItemData) => {
+		return itemData.id;
+	};
+
+	const handleDragStarting = () => {
+		setActiveBlockPosition(null);
+	};
+
+	const handleUpdateDraggableList = (updatedList: DraggableItemData[]) => {
+		changeContentPageState({
+			type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
+			payload: {
+				propName: 'content_blocks',
+				propValue: updatedList.map((blockConfig, index) => {
+					return {
+						...blockConfig,
+						position: index,
+					};
+				}),
+			},
+		});
+	};
+
 	// Render
 	const renderContentBlockForms = () => {
-		const blocks = (contentPageInfo.content_blocks || []).map((config, index) => ({
-			contentBlockConfig: config,
-			index,
-		}));
 		return (
 			<DraggableList
-				items={blocks}
+				items={contentPageInfo.content_blocks || []}
 				renderItem={renderBlockForm}
-				generateKey={(item) => {
-					return item.contentBlockConfig.id;
-				}}
-				onListChange={
-					((
-						newBlocks: {
-							contentBlockConfig: ContentBlockConfig;
-							index: number;
-						}[]
-					) => {
-						newBlocks = uniqBy(newBlocks, (b) => b.contentBlockConfig.id);
-						changeContentPageState({
-							type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
-							payload: {
-								propName: 'content_blocks',
-								propValue: newBlocks.map((block, index) => {
-									return {
-										...block.contentBlockConfig,
-										position: index,
-									};
-								}),
-							},
-						});
-					}) as any
-				}
+				generateKey={generateKeyForBlock}
+				onDragStarting={handleDragStarting}
+				onListChange={handleUpdateDraggableList}
 			></DraggableList>
 		);
 	};

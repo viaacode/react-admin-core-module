@@ -1,20 +1,71 @@
+@use "sass:math";
 @import "../../../shared/styles/settings/colors";
 
+$ghostHeight: 0.5rem;
+
 .c-draggable-list {
-	.o-grid-col-static {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: stretch;
+	padding: 1rem 0;
+
+	.c-draggable-list__item__drag-handle {
 		width: 20px;
+		opacity: 0.3;
+		padding: 1.2rem 1.8rem 1.2rem 1.2rem;
+		cursor: move;
 	}
 
-	.c-table-view__item {
-		cursor: move;
-		transition: background-color ease-in-out 0.3s;
+	.c-draggable-list__item {
+		margin: 0 1rem;
+		background-color: #fff;
+		border-radius: 0.5rem;
+		border: 0.1rem solid #d6dee3;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
 
-		&:hover {
-			background-color: $color-gray-50;
-		}
+	.c-draggable-list__item__content {
+		flex-grow: 1;
 
-		&:last-child {
-			border-bottom: none;
+		.content-block-sidebar-item {
+			width: 100%;
+			.c-content-block-form__accordion {
+				border: none;
+				width: 100%;
+
+				> .o-flex {
+					width: 100%;
+				}
+			}
 		}
+	}
+
+	.c-draggable-list__item--is-being-dragged {
+		opacity: 0.5;
+	}
+
+	.c-draggable-list__item--target-ghost {
+		height: 0;
+		margin: 0 1rem;
+		pointer-events: none;
+
+		&:after {
+			content: " ";
+			height: $ghostHeight;
+			width: 100%;
+			display: block;
+			margin-top: math.div(-$ghostHeight, 2);
+			background-color: $color-teal-bright;
+			border-radius: math.div($ghostHeight, 2);
+		}
+	}
+
+	.c-draggable-list__item--end-ghost {
+		height: 10rem;
+		width: 100%;
+		display: block;
 	}
 }
