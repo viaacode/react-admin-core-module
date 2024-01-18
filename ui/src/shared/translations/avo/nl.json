@@ -927,7 +927,7 @@
   "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "Deze pagina kon niet worden gevonden",
   "react-admin/modules/content-page/views/content-page-edit___gekopieerd": "Gekopieerd",
   "react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel": "Je hebt geen rechten om deze contentpagina aan te passen.",
-  "react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina": "Kopieer contentpagina",
+  "react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina": "Kopieer contentpagina van QAS &gt; PRD of omgekeerd",
   "react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items": "custom navigatie items",
   "react-admin/modules/shared/components/content-picker/content-picker___opdrachten": "Opdrachten",
   "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___annuleer": "Annuleer",
