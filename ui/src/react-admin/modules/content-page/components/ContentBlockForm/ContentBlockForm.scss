@@ -19,4 +19,24 @@
 	&.has-error {
 		border-color: $color-error;
 	}
+
+	.c-accordion__header-title {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		align-items: center;
+
+		.c-content-block-form__accordion__header__preview--image,
+		.c-content-block-form__accordion__header__preview--text {
+			background-color: #efefef;
+			padding: 0.5rem;
+			text-transform: uppercase;
+			text-align: center;
+			width: 3rem;
+			height: 2.5rem;
+			font-size: 11px;
+			background-position: center;
+			background-size: cover;
+		}
+	}
 }

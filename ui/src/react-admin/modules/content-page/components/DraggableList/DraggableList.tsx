@@ -127,7 +127,6 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 
 			onListChange(updatedList.map((item) => item.data));
 			setHighlightedItemIndex(movedItemIndex);
-			console.log('setting highlight to: ' + movedItemIndex);
 		}
 		resetDraggingState();
 	};
@@ -161,9 +160,6 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					draggable
 					key={`draggable-list__item-${generateKey(item.data)}`}
 				>
-					<div className="c-draggable-list__item__drag-handle">
-						<Icon name={IconName.menu} />
-					</div>
 					<div className="c-draggable-list__item__content">
 						<div className="o-flex">{renderItem(item.data, item.index)}</div>
 					</div>

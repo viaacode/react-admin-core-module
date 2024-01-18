@@ -210,7 +210,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	// Render
 	const renderContentBlockForms = () => {
-		console.log({ highlightedBlockIndex });
 		return (
 			<DraggableList
 				items={contentPageInfo.content_blocks || []}

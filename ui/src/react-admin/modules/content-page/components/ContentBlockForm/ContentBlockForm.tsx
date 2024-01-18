@@ -17,8 +17,9 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { get, isNil } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { findImageInJson } from '~shared/helpers/find-image-in-json';
 
 import { validateContentBlockField } from '~shared/helpers/validation';
 import {
@@ -205,6 +206,24 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		</Spacer>
 	);
 
+	const renderImageOrTitleAcronym = (contentBlock: ContentBlockConfig): ReactNode => {
+		const imageUrl: string | null = findImageInJson(contentBlock);
+		if (imageUrl) {
+			return (
+				<div
+					style={{ backgroundImage: `url(${imageUrl})` }}
+					className="c-content-block-form__accordion__header__preview--image"
+				></div>
+			);
+		} else {
+			return (
+				<div className="c-content-block-form__accordion__header__preview--text">
+					{contentBlock.name.substring(0, 2)}
+				</div>
+			);
+		}
+	};
+
 	const renderBlockForm = (contentBlock: ContentBlockConfig) => {
 		const accordionTitle = `${contentBlock.name} (${blockIndex + 1}/${length})`;
 		const label = get(contentBlock.components, 'name', '').toLowerCase();
@@ -221,7 +240,10 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				isOpen={isAccordionOpen}
 				onToggle={toggleIsAccordionOpen}
 			>
-				<AccordionTitle>{accordionTitle}</AccordionTitle>
+				<AccordionTitle>
+					{renderImageOrTitleAcronym(contentBlock)}
+					<span>{accordionTitle}</span>
+				</AccordionTitle>
 				<AccordionActions>
 					<ButtonToolbar>
 						<ButtonGroup>
