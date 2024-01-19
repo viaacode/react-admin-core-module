@@ -34,8 +34,7 @@ export class OrganisationService {
 	): Promise<{ name: string; id: string; logo: string; website: string }[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `http://localhost:3000/organisations/by-content`,
-				// url: `${AdminConfigManager.getConfig().database.proxyUrl}/organisations/by-content`,
+				url: `${AdminConfigManager.getConfig().database.proxyUrl}/organisations/by-content`,
 				query: {
 					contentItemType,
 					contentItemId,

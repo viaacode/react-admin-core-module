@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
+import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { QUERY_KEYS } from '~shared/types';
 
@@ -21,8 +22,9 @@ export const useGetStillsFromContentItem = (
 			}
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: `http://localhost:3000/video-stills/by-content`,
-					// url: `${AdminConfigManager.getConfig().database.proxyUrl}/video-stills/by-content`,
+					url: `${
+						AdminConfigManager.getConfig().database.proxyUrl
+					}/video-stills/by-content`,
 					query: {
 						contentItemType,
 						contentItemId,
