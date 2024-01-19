@@ -267,13 +267,6 @@ const getAvoColumns = (
 			options: [
 				...educationLevels,
 				{
-					// Note: doesn't look like this does anything
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/users/user___andere'
-					),
-					id: 'Andere',
-				},
-				{
 					label: AdminConfigManager.getConfig().services.i18n.tText(
 						'admin/users/user___leeg'
 					),

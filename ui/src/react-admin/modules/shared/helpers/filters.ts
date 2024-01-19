@@ -1,4 +1,5 @@
 import { compact, isArray, isNil, set, without } from 'lodash-es';
+import { LomScheme } from '~shared/consts/lom-scheme.enum';
 
 export const NULL_FILTER = 'null';
 
@@ -244,4 +245,50 @@ function setNestedValues<T>(
 			return null;
 		})
 	);
+}
+
+export function getLomFilter(
+	selectedFilterOptions: string[] | undefined,
+	scheme: LomScheme
+): any[] {
+	if (!selectedFilterOptions || selectedFilterOptions.length === 0) {
+		return [];
+	}
+	const nonNullFilterOptions = selectedFilterOptions.filter((level) => level !== NULL_FILTER);
+	const hasNullFilter = nonNullFilterOptions.length !== selectedFilterOptions.length;
+
+	const nonNullFilter = {
+		loms: {
+			lom_id: { _in: nonNullFilterOptions },
+			lom: {
+				scheme: { _eq: scheme },
+			},
+		},
+	};
+
+	const nullFilter = {
+		_not: {
+			loms: {
+				lom: {
+					scheme: {
+						_eq: scheme,
+					},
+				},
+			},
+		},
+	};
+
+	const orList = [];
+	if (nonNullFilterOptions.length) {
+		orList.push(nonNullFilter);
+	}
+	if (hasNullFilter) {
+		orList.push(nullFilter);
+	}
+
+	return [
+		{
+			_or: orList,
+		},
+	];
 }

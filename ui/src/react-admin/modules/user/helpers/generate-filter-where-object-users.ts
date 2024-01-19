@@ -1,15 +1,17 @@
 import { first, isNil, without } from 'lodash-es';
 import { AdminConfigManager, ToastType } from '~core/config';
+import { UserTableState } from '~modules/user/user.types';
+import { LomScheme } from '~shared/consts/lom-scheme.enum';
 import { CustomError } from '~shared/helpers/custom-error';
 import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
+	getLomFilter,
 	getMultiOptionFilters,
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '~shared/helpers/filters';
-import { UserTableState } from '~modules/user/user.types';
 
 export const generateWhereObjectAvo = (
 	filters: Partial<UserTableState>,
@@ -58,11 +60,14 @@ export const generateWhereObjectAvo = (
 			)
 		);
 
+		andFilters.push(...getLomFilter(filters.educationLevels, LomScheme.education));
+		andFilters.push(...getLomFilter(filters.subjects, LomScheme.subject));
+
 		andFilters.push(
 			...getMultiOptionsFilters<Partial<UserTableState>>(
 				filters,
-				['educationLevels', 'subjects', 'idps'],
-				['contexts', 'classifications', 'idps'],
+				['idps'],
+				['idps'],
 				['key', 'key', 'idp'],
 				true
 			)
