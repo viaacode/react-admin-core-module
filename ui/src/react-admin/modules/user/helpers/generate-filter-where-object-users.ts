@@ -67,8 +67,8 @@ export const generateWhereObjectAvo = (
 			...getMultiOptionsFilters<Partial<UserTableState>>(
 				filters,
 				['idps'],
-				['idps'],
-				['key', 'key', 'idp'],
+				['idps.idp'],
+				undefined,
 				true
 			)
 		);
