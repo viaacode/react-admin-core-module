@@ -16,7 +16,7 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { get, isNil } from 'lodash-es';
+import { isNil } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { findImageInJson } from '~shared/helpers/find-image-in-json';
@@ -38,9 +38,9 @@ import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBloc
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import './ContentBlockForm.scss';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 interface ContentBlockFormProps {
 	config: ContentBlockConfig;
@@ -102,7 +102,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		stateIndex?: number
 	) => {
 		const field = config[formGroupType].fields[fieldKey];
-		const validator = get(field, 'validator');
+		const validator = field?.validator;
 
 		const errors = validateContentBlockField(
 			fieldKey,
@@ -117,7 +117,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 	const renderRemoveButton = (stateIndex: number) => {
 		const aboveMin =
-			isArray(components.state) && components.state.length > get(components, 'limits.min', 1);
+			isArray(components.state) && components.state.length > (components?.limits?.min || 1);
 
 		return (
 			removeComponentFromState &&
@@ -161,7 +161,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 							<Spacer key={stateIndex} margin="bottom">
 								<BlockHeading type="h4" className="u-m-t-0 u-spacer-bottom-s">
 									<Toolbar autoHeight>
-										<ToolbarLeft>{`${get(config, 'components.name')} ${
+										<ToolbarLeft>{`${config?.components?.name} ${
 											stateIndex + 1
 										}`}</ToolbarLeft>
 										<ToolbarRight>
@@ -226,11 +226,10 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 	const renderBlockForm = (contentBlock: ContentBlockConfig) => {
 		const accordionTitle = `${contentBlock.name} (${blockIndex + 1}/${length})`;
-		const label = get(contentBlock.components, 'name', '').toLowerCase();
+		const label = (contentBlock?.components?.name || '').toLowerCase();
 		const underLimit =
-			isNil(get(components, 'limits.max')) ||
-			(isArray(components.state) &&
-				components.state.length < get(components, 'limits.max', 1));
+			isNil(components?.limits?.max) ||
+			(isArray(components.state) && components.state.length < (components?.limits?.max || 1));
 
 		return (
 			<Accordion

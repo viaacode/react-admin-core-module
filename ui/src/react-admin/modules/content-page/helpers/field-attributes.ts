@@ -1,8 +1,7 @@
-import { RichTextEditorProps } from '@meemoo/react-components';
 import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
-import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
 
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
 
@@ -53,16 +52,15 @@ export const generateFieldAttributes = (
 			};
 
 		case ContentBlockEditor.RICH_TEXT_EDITOR: {
-			const html = (state as any)[`${key}`] || '';
-			const richEditorState = (state as any)[`${key}${RichEditorStateKey}`];
+			const html = (state as any)[key] || '';
 			return {
 				id,
 				initialHtml: html, // Only use the html the first time, then use the editor state
-				state: richEditorState,
-				onChange: (editorState: any) => {
-					onChange(editorState, `${key}${RichEditorStateKey}`);
+				value: (state as any)[key],
+				onChange: (newValue: string) => {
+					onChange(newValue, key);
 				},
-			} as Partial<RichTextEditorProps>;
+			} as Partial<RichTextEditorWithInternalStateWrapperProps>;
 		}
 
 		case ContentBlockEditor.FileUpload: {

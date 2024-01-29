@@ -14,7 +14,7 @@ import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLab
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
+import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
 import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';
@@ -34,7 +34,7 @@ export const GET_EDITOR_TYPES_MAP = (): Record<ContentBlockEditor, FunctionCompo
 	TextArea,
 	TextInput,
 	UserGroupSelect,
-	RICH_TEXT_EDITOR: RichTextEditorWrapper,
+	RICH_TEXT_EDITOR: RichTextEditorWithInternalStateWrapper,
 	MaintainerSelect,
 	UploadOrSelectVideoStill,
 });

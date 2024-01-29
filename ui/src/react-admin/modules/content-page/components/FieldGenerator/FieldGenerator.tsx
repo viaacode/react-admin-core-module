@@ -1,9 +1,8 @@
 import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
-import { get } from 'lodash-es';
 import React, { Fragment, FunctionComponent } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
-import { generateFieldAttributes } from '../../helpers/field-attributes';
+import { generateFieldAttributes } from '~modules/content-page/helpers';
 import {
 	ContentBlockComponentState,
 	ContentBlockField,
@@ -47,7 +46,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 							(fieldGroup.min !== undefined ? fieldGroup.min : 1) &&
 							renderDeleteButton(
 								currentState,
-								get(fieldGroup, 'repeat.deleteButtonLabel'),
+								fieldGroup?.repeat?.deleteButtonLabel,
 								singleStateIndex
 							)}
 					</FlexItem>
@@ -76,8 +75,8 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 							<Flex center>
 								{renderAddButton(
 									currentState,
-									get(fieldGroup, 'repeat.defaultState'),
-									get(fieldGroup, 'repeat.addButtonLabel')
+									fieldGroup?.repeat?.defaultState,
+									fieldGroup?.repeat?.addButtonLabel
 								)}
 							</Flex>
 						</Spacer>
@@ -131,7 +130,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 										<Spacer margin="left">
 											{renderDeleteButton(
 												currentState,
-												get(field, 'repeat.deleteButtonLabel'),
+												field?.repeat?.deleteButtonLabel,
 												index
 											)}
 										</Spacer>
@@ -144,8 +143,8 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 						<Flex center>
 							{renderAddButton(
 								currentState,
-								get(field, 'repeat.defaultState'),
-								get(field, 'repeat.addButtonLabel')
+								field?.repeat?.defaultState,
+								field?.repeat?.addButtonLabel
 							)}
 						</Flex>
 					</Spacer>

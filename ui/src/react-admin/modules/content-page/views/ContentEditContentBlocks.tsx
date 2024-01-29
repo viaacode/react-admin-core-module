@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { get } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, RefObject, useRef, useState } from 'react';
+import React, { FunctionComponent, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
@@ -58,6 +58,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	commonUser,
 }) => {
 	const { tText } = useTranslation();
+	const contentBlockIds = (contentPageInfo.content_blocks || []).map((item) => item.id);
 
 	// Hooks
 	// This is the block that is being edited with the form sidebar accordion opened up
@@ -167,7 +168,9 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						formGroupType: ContentBlockStateType,
 						input: any,
 						stateIndex?: number
-					) => onSave(index, formGroupType, input, stateIndex)}
+					) => {
+						onSave(index, formGroupType, input, stateIndex);
+					}}
 					addComponentToState={() => addComponentToState(index, itemData.type)}
 					removeComponentFromState={(stateIndex: number) =>
 						removeComponentFromState(index, stateIndex)
@@ -209,8 +212,8 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	};
 
 	// Render
-	const renderContentBlockForms = () => {
-		return (
+	const renderedContentBlockForms = useMemo(
+		() => (
 			<DraggableList
 				items={contentPageInfo.content_blocks || []}
 				renderItem={renderBlockForm}
@@ -225,8 +228,11 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 					}, 1000);
 				}}
 			></DraggableList>
-		);
-	};
+		),
+		// Only do change detection on the ids of the blocks, not the content
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[contentBlockIds, handleUpdateDraggableList, highlightedBlockIndex, renderBlockForm]
+	);
 
 	return (
 		<HorizontalPageSplit
@@ -254,7 +260,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 					/>
 				</Navbar>
 				<div className="c-scrollable" ref={sidebarScrollable}>
-					{renderContentBlockForms()}
+					{renderedContentBlockForms}
 				</div>
 			</Sidebar>
 		</HorizontalPageSplit>
