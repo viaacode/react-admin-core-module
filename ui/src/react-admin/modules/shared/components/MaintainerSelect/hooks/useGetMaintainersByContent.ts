@@ -14,7 +14,7 @@ export const useGetMaintainersByContent = (
 	options: { enabled?: boolean } = {}
 ) => {
 	return useQuery<{ id: string; name: string; logo: string | null; website: string | null }[]>(
-		[QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemType],
+		[QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemId],
 		() => {
 			if (
 				!contentItemType ||

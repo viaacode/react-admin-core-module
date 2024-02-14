@@ -141,6 +141,7 @@ function setConfig() {
 			loader: {
 				component: null,
 			},
+			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
 			buttonTypes: () => [
 				// Het archief buttons
 				// {

@@ -89,6 +89,7 @@ export interface AdminConfig {
 		loader: {
 			component: ComponentType | null;
 		};
+		defaultAudioStill: string;
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
 	};
