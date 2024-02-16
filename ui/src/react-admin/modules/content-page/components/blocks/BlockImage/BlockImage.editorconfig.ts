@@ -1,9 +1,7 @@
-import { ButtonAction, ButtonType } from '@viaa/avo2-components';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import {
-	AlignOption,
 	ContentBlockConfig,
 	ContentBlockEditor,
 	ContentBlockType,
@@ -18,8 +16,11 @@ import { AdminConfigManager } from '~core/config';
 export const INITIAL_IMAGE_COMPONENTS_STATE = (): ImageBlockComponentState => ({
 	title: '',
 	text: '',
-	source: '',
+	imageSource: '',
+	imageAlt: '',
+	align: 'center',
 	width: 'full-width',
+	buttonAlign: 'left',
 });
 
 export const INITIAL_IMAGE_BLOCK_STATE = (): DefaultContentBlockState =>
