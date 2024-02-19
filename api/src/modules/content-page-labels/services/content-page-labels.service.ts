@@ -129,39 +129,39 @@ export class ContentPageLabelsService {
 		}
 	}
 
-	public async insertContentPageLabel(
-		contentPageLabel: InsertContentPageLabelDto
-	): Promise<ContentPageLabelDto> {
+	public async insertContentPageLabels(
+		contentPageLabels: InsertContentPageLabelDto[]
+	): Promise<ContentPageLabelDto[]> {
 		try {
 			const response = await this.dataService.execute<
 				ContentPageLabelQueryTypes['InsertContentPageLabelMutation'],
 				ContentPageLabelQueryTypes['InsertContentPageLabelMutationVariables']
 			>(CONTENT_PAGE_LABEL_QUERIES[getDatabaseType()].InsertContentPageLabelDocument, {
-				contentPageLabel: {
+				contentPageLabels: contentPageLabels.map((contentPageLabel) => ({
 					label: contentPageLabel.label,
 					content_type: contentPageLabel.content_type,
 					link_to: contentPageLabel.link_to || null,
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
-				},
+				})),
 			});
-			const contentPageLabelResponse =
+			const contentPageLabelsResponse =
 				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationAvo'])
-					.insert_app_content_labels?.returning?.[0] ||
+					.insert_app_content_labels?.returning ||
 				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationHetArchief'])
-					.insert_app_content_label?.returning?.[0];
-			if (isNil(contentPageLabelResponse)) {
+					.insert_app_content_label?.returning;
+			if (isNil(contentPageLabelsResponse)) {
 				throw CustomError(
-					'Response from database does not contain the id of the inserted content page label',
+					'Response from database does not contain the inserted content page labels',
 					null,
 					{ response }
 				);
 			}
-			return contentPageLabelResponse as ContentPageLabelDto;
+			return contentPageLabelsResponse as ContentPageLabelDto[];
 		} catch (err: any) {
-			throw CustomError('Failed to insert content page label in the database', err, {
-				contentPageLabel,
-				query: 'INSERT_CONTENT_PAGE_LABEL',
+			throw CustomError('Failed to insert content page labels in the database', err, {
+				contentPageLabels,
+				query: 'InsertContentPageLabel',
 			});
 		}
 	}

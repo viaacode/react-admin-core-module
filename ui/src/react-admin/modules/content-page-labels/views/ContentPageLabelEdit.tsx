@@ -146,8 +146,9 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			let contentPageLabel: ContentPageLabel;
 			if (isCreatePage) {
 				// insert the content page label
-				contentPageLabel =
-					await ContentPageLabelService.insertContentPageLabel(contentPageLabelInfo);
+				contentPageLabel = (
+					await ContentPageLabelService.insertContentPageLabels([contentPageLabelInfo])
+				)[0];
 			} else {
 				// Update existing content page label
 				contentPageLabel =
@@ -203,7 +204,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 								>
 									<TextInput
 										value={contentPageLabelInfo.label || ''}
-										onChange={(newLabel) =>
+										onChange={(newLabel: string) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
 												label: newLabel,

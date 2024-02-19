@@ -203,6 +203,7 @@ export class ContentPagesController {
 				);
 			}
 		}
+
 		// Delete before inserting to avoid foreign key duplicate exceptions
 		await this.contentPagesService.deleteContentLabelsLinks(body.contentPageId, body.labelIds);
 		await this.contentPagesService.insertContentLabelsLinks(body.contentPageId, body.labelIds);

@@ -16,7 +16,7 @@ const mockContentPageLabelsService: Partial<
 > = {
 	fetchContentPageLabels: jest.fn(),
 	fetchContentPageLabelById: jest.fn(),
-	insertContentPageLabel: jest.fn(),
+	insertContentPageLabels: jest.fn(),
 	updateContentPageLabel: jest.fn(),
 	deleteContentPageLabel: jest.fn(),
 	getContentPageLabelsByTypeAndLabels: jest.fn(),
@@ -90,13 +90,13 @@ describe('ContentPageLabelsController', () => {
 
 	describe('insertContentPageLabel', () => {
 		it('should create a ContentPageLabel', async () => {
-			mockContentPageLabelsService.insertContentPageLabel.mockResolvedValueOnce(
-				mockContentPageLabelDto
-			);
+			mockContentPageLabelsService.insertContentPageLabels.mockResolvedValueOnce([
+				mockContentPageLabelDto,
+			]);
 
-			const contentPageLabel = await contentPageLabelsController.insertContentPageLabel(
-				mockContentPageLabelDto
-			);
+			const contentPageLabel = await contentPageLabelsController.insertContentPageLabels([
+				mockContentPageLabelDto,
+			]);
 
 			expect(contentPageLabel).toEqual(mockContentPageLabelDto);
 		});

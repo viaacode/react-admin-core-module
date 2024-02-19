@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
+import { compact, flatten } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
@@ -11,6 +11,7 @@ import {
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { PickerItem } from '~shared/types/content-picker';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
@@ -61,21 +62,23 @@ export class ContentPageLabelService {
 		}
 	}
 
-	public static async insertContentPageLabel(
-		contentPageLabel: ContentPageLabel
-	): Promise<ContentPageLabel> {
+	public static async insertContentPageLabels(
+		contentPageLabels: Omit<ContentPageLabel, 'id'>[]
+	): Promise<ContentPageLabel[]> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'PUT',
-				body: JSON.stringify({
-					label: contentPageLabel.label,
-					content_type: contentPageLabel.content_type,
-					link_to: contentPageLabel.link_to,
-				}),
+				body: JSON.stringify(
+					contentPageLabels.map((labelObj) => ({
+						label: labelObj.label,
+						content_type: labelObj.content_type,
+						link_to: labelObj.link_to,
+					}))
+				),
 			});
 		} catch (err) {
-			throw new CustomError('Failed to insert content page label in the database', err, {
-				contentPageLabel,
+			throw new CustomError('Failed to insert content page labels in the database', err, {
+				contentPageLabels,
 			});
 		}
 	}

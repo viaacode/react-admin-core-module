@@ -104,7 +104,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			if (
 				isNil(id) ||
 				id ===
-				AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
+					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
 			) {
 				return;
 			}
@@ -244,6 +244,10 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			const contentPageWithDuplicatedAssets =
 				await ContentPageService.duplicateContentImages(newContentPageConfig);
 
+			// Remove content page labels, since those labels might not exist on this environment
+			contentPageWithDuplicatedAssets.labels = [];
+
+			// Update the content page state
 			changeContentPageState({
 				type: ContentEditActionType.SET_CONTENT_PAGE,
 				payload: {
@@ -281,6 +285,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			commonUser.userGroup?.id,
 			commonUser.userGroup?.name,
 			contentPageState.currentContentPageInfo.content_blocks,
+			contentPageState.currentContentPageInfo.createdAt,
 			contentPageState.currentContentPageInfo.id,
 			tText,
 		]
@@ -364,8 +369,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			const blockConfigs: ContentBlockConfig[] = contentPageState.currentContentPageInfo
 				.content_blocks
 				? convertRichTextEditorStatesToHtml(
-					contentPageState.currentContentPageInfo.content_blocks
-				)
+						contentPageState.currentContentPageInfo.content_blocks
+				  )
 				: [];
 
 			// Run validators on to check untouched inputs
@@ -584,7 +589,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			contentPageState.currentContentPageInfo.publishAt &&
 			contentPageState.currentContentPageInfo.depublishAt &&
 			new Date(contentPageState.currentContentPageInfo.depublishAt) <
-			new Date(contentPageState.currentContentPageInfo.publishAt)
+				new Date(contentPageState.currentContentPageInfo.publishAt)
 		) {
 			errors.depublishAt = tText(
 				'admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum'
