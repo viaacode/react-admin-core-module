@@ -20,7 +20,7 @@ export const BlockUitgeklaard: FunctionComponent<BlockUitgeklaardProps> = ({
 		<div className="uitgeklaard-header__logo">
 			<span>Uitgeklaard</span>
 		</div>
-		{date && <div className="uitgeklaard-header__date">{format(parseISO(date), 'PP')}</div>}
+		{date && <div className="uitgeklaard-header__date">{format(parseISO(date), 'PPP')}</div>}
 		<div className="uitgeklaard-header__titles">{(titles || []).join(' • ')}</div>
 	</div>
 );
