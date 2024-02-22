@@ -25,15 +25,10 @@
 }
 
 .content-block-sidebar__items-non-draggable {
-	overflow: visible;
-	overflow-x: hidden;
-	overflow-y: hidden;
-
 	> .content-block-sidebar-item {
 		margin: 1rem 1rem;
 		background-color: #fff;
 		display: block;
 		position: relative;
-		width: 100%;
 	}
 }

@@ -245,7 +245,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 				</AccordionTitle>
 				<AccordionActions>
 					<ButtonToolbar>
-						<ButtonGroup>
+						<ButtonGroup className='u-nowrap'>
 							<Button
 								disabled={blockIndex === 0}
 								icon={'chevronUp' as IconName}
