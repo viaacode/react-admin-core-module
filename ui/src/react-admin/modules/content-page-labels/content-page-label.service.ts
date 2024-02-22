@@ -61,21 +61,23 @@ export class ContentPageLabelService {
 		}
 	}
 
-	public static async insertContentPageLabel(
-		contentPageLabel: ContentPageLabel
-	): Promise<ContentPageLabel> {
+	public static async insertContentPageLabels(
+		contentPageLabels: Omit<ContentPageLabel, 'id'>[]
+	): Promise<ContentPageLabel[]> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'PUT',
-				body: JSON.stringify({
-					label: contentPageLabel.label,
-					content_type: contentPageLabel.content_type,
-					link_to: contentPageLabel.link_to,
-				}),
+				body: JSON.stringify(
+					contentPageLabels.map((labelObj) => ({
+						label: labelObj.label,
+						content_type: labelObj.content_type,
+						link_to: labelObj.link_to,
+					}))
+				),
 			});
 		} catch (err) {
-			throw new CustomError('Failed to insert content page label in the database', err, {
-				contentPageLabel,
+			throw new CustomError('Failed to insert content page labels in the database', err, {
+				contentPageLabels,
 			});
 		}
 	}

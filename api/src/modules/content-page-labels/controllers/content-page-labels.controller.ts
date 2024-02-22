@@ -63,23 +63,23 @@ export class ContentPageLabelsController {
 		}
 	}
 
-	@ApiOperation({ description: 'Insert one content page label' })
+	@ApiOperation({ description: 'Insert content page labels' })
 	@ApiResponse({
 		status: 200,
-		description: 'Returns the id of the newly created content page label',
+		description: 'Returns the newly created content page labels',
 		type: ContentPageLabelDto,
 		isArray: false,
 	})
 	@Put('')
 	@RequireAnyPermissions(PermissionName.EDIT_CONTENT_PAGE_LABELS)
-	public async insertContentPageLabel(
-		@Body() contentPageLabel: InsertContentPageLabelDto
-	): Promise<ContentPageLabelDto> {
+	public async insertContentPageLabels(
+		@Body() contentPageLabels: InsertContentPageLabelDto[]
+	): Promise<ContentPageLabelDto[]> {
 		try {
-			return this.contentPageLabelService.insertContentPageLabel(contentPageLabel);
+			return this.contentPageLabelService.insertContentPageLabels(contentPageLabels);
 		} catch (err: any) {
-			throw CustomError('Failed to insert content page label in the database', err, {
-				contentPageLabel,
+			throw CustomError('Failed to insert content page labels in the database', err, {
+				contentPageLabels,
 			});
 		}
 	}

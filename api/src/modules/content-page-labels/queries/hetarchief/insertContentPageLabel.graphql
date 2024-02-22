@@ -1,5 +1,5 @@
-mutation insertContentPageLabel($contentPageLabel: app_content_label_insert_input!) {
-	insert_app_content_label(objects: [$contentPageLabel]) {
+mutation insertContentPageLabel($contentPageLabels: [app_content_label_insert_input!]!) {
+	insert_app_content_label(objects: $contentPageLabels) {
 		returning {
 			label
 			id
