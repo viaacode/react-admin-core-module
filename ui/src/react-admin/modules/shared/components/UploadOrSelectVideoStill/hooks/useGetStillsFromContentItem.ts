@@ -15,12 +15,12 @@ export const useGetStillsFromContentItem = (
 	options: { enabled?: boolean } = {}
 ) => {
 	return useQuery<string[]>(
-		[QUERY_KEYS.GET_VIDEO_STILLS_FOR_CONTENT_ITEM, contentItemType, contentItemType],
-		() => {
+		[QUERY_KEYS.GET_VIDEO_STILLS_FOR_CONTENT_ITEM, contentItemType, contentItemId],
+		async () => {
 			if (!contentItemType || !contentItemId) {
 				return [];
 			}
-			return fetchWithLogoutJson(
+			const stills: string[] = await fetchWithLogoutJson(
 				stringifyUrl({
 					url: `${
 						AdminConfigManager.getConfig().database.proxyUrl
@@ -31,6 +31,13 @@ export const useGetStillsFromContentItem = (
 					},
 				})
 			);
+			return stills.map((still) => {
+				if (still === 'AUDIO_WAVE_FORM') {
+					return AdminConfigManager.getConfig().components.defaultAudioStill;
+				} else {
+					return still;
+				}
+			});
 		},
 		{ enabled: true, ...options }
 	);
