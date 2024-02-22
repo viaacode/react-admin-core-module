@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { compact, flatten } from 'lodash-es';
+import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
 import { AdminConfigManager } from '~core/config';
@@ -11,7 +11,6 @@ import {
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { PickerItem } from '~shared/types/content-picker';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
