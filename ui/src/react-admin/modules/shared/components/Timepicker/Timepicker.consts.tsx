@@ -1,9 +1,8 @@
 import { TextInput } from '@meemoo/react-components';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { ReactDatePickerProps } from 'react-datepicker';
-import { Icon } from '~shared/components';
+import { DatePickerPropsSchema, Icon } from '~shared/components';
 
-export const timePickerDefaults: Partial<ReactDatePickerProps> = {
+export const timePickerDefaults: Partial<DatePickerPropsSchema> = {
 	dateFormat: 'HH:mm',
 	showTimeSelect: true,
 	showTimeSelectOnly: true,

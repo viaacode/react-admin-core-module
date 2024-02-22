@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { FC } from 'react';
-import { DateInput } from '~shared/components/DateInput/DateInput';
+import { DatePicker } from '~shared/components';
 
 import { TimepickerProps } from './Timepicker.types';
 
@@ -10,7 +10,7 @@ const Timepicker: FC<TimepickerProps> = (props) => {
 	const classNames = clsx(className, 'c-datepicker', 'c-datepicker--time');
 
 	return (
-		<DateInput
+		<DatePicker
 			wrapperClassName={classNames}
 			calendarClassName={classNames}
 			popperClassName={classNames}

@@ -1,12 +1,10 @@
 import { TextInput } from '@meemoo/react-components';
 import React from 'react';
-import { ReactDatePickerProps } from 'react-datepicker';
 import Icon from '~shared/components/Icon/Icon';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
+import { DatePickerPropsSchema } from '~modules/shared/components';
 
-export const datePickerDefaultProps: Partial<
-	Omit<ReactDatePickerProps, 'minDate'> & { minDate: Date | undefined; maxDate: Date | undefined }
-> = {
+export const datePickerDefaultProps: Partial<DatePickerPropsSchema> = {
 	wrapperClassName: 'c-datepicker',
 	calendarClassName: 'c-datepicker',
 	popperClassName: 'c-datepicker',

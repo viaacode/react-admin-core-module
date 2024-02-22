@@ -14,7 +14,6 @@ import {
 import React, { FC, MouseEvent, ReactText, useCallback, useEffect, useState } from 'react';
 import { format, parse, set } from 'date-fns';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { DateInput } from '~shared/components/DateInput/DateInput';
 
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -22,6 +21,7 @@ import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownM
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { DatePicker } from '../DatePicker';
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -328,9 +328,9 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___van'
 											)}
 										>
-											<DateInput
+											<DatePicker
 												{...datePickerDefaultProps}
-												value={fromDate?.toISOString()}
+												value={fromDate}
 												onChange={(value) => handleDateChange(value, 'gte')}
 												disabled={dateControls !== 'date'}
 											/>
@@ -342,9 +342,9 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 												'shared/components/date-range-dropdown/date-range-dropdown___tot'
 											)}
 										>
-											<DateInput
+											<DatePicker
 												{...datePickerDefaultProps}
-												value={tillDate?.toISOString()}
+												value={tillDate}
 												onChange={(value) => handleDateChange(value, 'lte')}
 												disabled={dateControls !== 'date'}
 											/>

@@ -1,7 +1,6 @@
 import {
 	Button,
 	ButtonToolbar,
-	DatePicker,
 	Form,
 	FormGroup,
 	Icon,
@@ -30,6 +29,7 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
 import './PublishContentPageModal.scss';
+import { DatePicker } from '~modules/shared/components';
 
 interface PublishContentPageModalProps {
 	isOpen: boolean;

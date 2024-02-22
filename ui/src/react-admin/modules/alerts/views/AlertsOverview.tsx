@@ -23,7 +23,7 @@ import { FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useState
 import { Controller, useForm } from 'react-hook-form';
 import { useQueryParams } from 'use-query-params';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { Icon, Loader } from '~modules/shared/components';
+import { DatePicker, Icon, Loader } from '~modules/shared/components';
 import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
@@ -31,8 +31,6 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { DateInput } from '~shared/components/DateInput/DateInput';
-import timepicker from '~shared/components/Timepicker/Timepicker';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
@@ -644,7 +642,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<DateInput
+							<DatePicker
 								{...datePickerDefaultProps}
 								id="new-alert-from-date"
 								name={field.name}
@@ -665,9 +663,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									}
 								}}
 								selected={field.value}
-								value={format(form.fromDate, 'PP', {
-									locale: nlBE,
-								})}
 							/>
 
 							<Timepicker
@@ -690,9 +685,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										}));
 									}
 								}}
-								value={format(form.fromDate, 'HH:mm', {
-									locale: nlBE,
-								})}
+								selected={field.value}
 							/>
 						</>
 					)}
@@ -714,12 +707,12 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 					control={control}
 					render={({ field }) => (
 						<>
-							<DateInput
+							<DatePicker
 								{...datePickerDefaultProps}
 								id="new-alert-until-date"
 								name={field.name}
 								onBlur={field.onBlur}
-								onChange={(newUntilDate: Date) => {
+								onChange={(newUntilDate) => {
 									if (newUntilDate) {
 										const oldUntilDate = form.untilDate;
 										setForm((prev) => ({
@@ -735,9 +728,6 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									}
 								}}
 								selected={field.value}
-								value={format(form.untilDate, 'PP', {
-									locale: nlBE,
-								})}
 							/>
 
 							<Timepicker
@@ -760,9 +750,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										}));
 									}
 								}}
-								value={format(form.untilDate, 'HH:mm', {
-									locale: nlBE,
-								})}
+								selected={field.value}
 							/>
 						</>
 					)}
