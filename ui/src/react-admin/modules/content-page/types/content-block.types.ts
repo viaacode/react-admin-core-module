@@ -236,8 +236,16 @@ export interface HeadingBlockComponentState {
 export interface ImageBlockComponentState {
 	title: string;
 	text: string;
-	source: string;
+	imageSource: string;
 	width: WidthOption;
+	align: AlignOption;
+	imageAction?: ButtonAction;
+	imageAlt: string;
+	buttonType?: ButtonType;
+	buttonLabel?: string;
+	buttonAltTitle?: string;
+	buttonAction?: string;
+	buttonAlign?: AlignOption;
 }
 
 export interface ImageGridBlockComponentStateFields {
