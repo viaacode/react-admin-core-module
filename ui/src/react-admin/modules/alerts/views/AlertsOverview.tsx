@@ -174,7 +174,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 											<Html
 												content={format(
 													parseISO(row.original.fromDate),
-													'PP',
+													'PPP',
 													{
 														locale: nlBE,
 													}
@@ -194,7 +194,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 											<Html
 												content={format(
 													parseISO(row.original.untilDate),
-													'PP',
+													'PPP',
 													{
 														locale: nlBE,
 													}
@@ -665,7 +665,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									}
 								}}
 								selected={field.value}
-								value={format(form.fromDate, 'PP', {
+								value={format(form.fromDate, 'PPP', {
 									locale: nlBE,
 								})}
 							/>
@@ -735,7 +735,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 									}
 								}}
 								selected={field.value}
-								value={format(form.untilDate, 'PP', {
+								value={format(form.untilDate, 'PPP', {
 									locale: nlBE,
 								})}
 							/>

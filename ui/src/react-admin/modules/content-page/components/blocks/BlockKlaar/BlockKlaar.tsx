@@ -19,7 +19,7 @@ export const BlockKlaar: FunctionComponent<BlockKlaarProps> = ({ className, date
 		</div>
 		{date && (
 			<div className="klaar-header__date">
-				{format(parseISO(date), 'PP', { locale: nlBE })}
+				{format(parseISO(date), 'PPP', { locale: nlBE })}
 			</div>
 		)}
 		<div className="klaar-header__titles">{(titles || []).join(' • ')}</div>
