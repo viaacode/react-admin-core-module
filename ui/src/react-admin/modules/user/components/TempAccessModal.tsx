@@ -1,6 +1,7 @@
 import {
 	Button,
 	ButtonToolbar,
+	DatePicker,
 	FormGroup,
 	Modal,
 	ModalBody,
@@ -12,7 +13,6 @@ import { noop } from 'lodash-es';
 import React, { FunctionComponent, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
-import { DateInput } from '~shared/components/DateInput/DateInput';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -89,24 +89,20 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 				<BlockHeading className="u-m-0" type="h4">
 					{tHtml('admin/users/components/temp-access-modal___begindatum')}
 				</BlockHeading>
-				<DateInput
+				<DatePicker
 					{...datePickerDefaultProps}
-					value={toDateObject(from)?.toISOString()}
-					onChange={(selectedDate) => {
-						setFrom(selectedDate);
-					}}
+					value={from}
+					onChange={setFrom}
 				/>
 				<Spacer margin="top-large">
 					<BlockHeading className="u-m-0" type="h4">
 						{tHtml('admin/users/components/temp-access-modal___einddatum')}
 					</BlockHeading>
 				</Spacer>
-				<DateInput
+				<DatePicker
 					{...datePickerDefaultProps}
-					value={toDateObject(until)?.toISOString()}
-					onChange={(selectedDate) => {
-						setUntil(selectedDate);
-					}}
+					value={until}
+					onChange={setUntil}
 				/>
 			</FormGroup>
 		);
