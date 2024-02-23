@@ -89,21 +89,13 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 				<BlockHeading className="u-m-0" type="h4">
 					{tHtml('admin/users/components/temp-access-modal___begindatum')}
 				</BlockHeading>
-				<DatePicker
-					{...datePickerDefaultProps}
-					value={from}
-					onChange={setFrom}
-				/>
+				<DatePicker {...datePickerDefaultProps} value={from} onChange={setFrom} />
 				<Spacer margin="top-large">
 					<BlockHeading className="u-m-0" type="h4">
 						{tHtml('admin/users/components/temp-access-modal___einddatum')}
 					</BlockHeading>
 				</Spacer>
-				<DatePicker
-					{...datePickerDefaultProps}
-					value={until}
-					onChange={setUntil}
-				/>
+				<DatePicker {...datePickerDefaultProps} value={until} onChange={setUntil} />
 			</FormGroup>
 		);
 	};
