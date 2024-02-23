@@ -1,4 +1,3 @@
-import { Icon, IconName } from '@viaa/avo2-components';
 import classNames from 'classnames';
 import { findIndex } from 'lodash-es';
 import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
@@ -153,6 +152,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					className={classNames('c-draggable-list__item', {
 						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
 						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
+						'c-draggable-list__item--error': !!item.data.errors,
 					})}
 					onDragOver={(evt) => onDragOver(evt, index)}
 					onDragEnd={onDragEnd}

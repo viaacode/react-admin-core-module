@@ -1,4 +1,6 @@
 @use "sass:math";
+@use "sass:color";
+
 @import "../../../shared/styles/settings/colors";
 
 $ghostHeight: 0.5rem;
@@ -16,8 +18,13 @@ $ghostHeight: 0.5rem;
 		align-items: flex-start;
 		position: relative;
 
-		&.c-draggable-list__item--highlighted {
-			border-color: $color-teal-bright;
+		&.c-draggable-list__item {
+			&--highlighted {
+				border-color: $color-teal-bright;
+			}
+			&--error {
+				border-color: $color-error;
+			}
 		}
 	}
 
@@ -77,7 +84,7 @@ $ghostHeight: 0.5rem;
 	}
 }
 
-@-webkit-keyframes showAfterDelay {
+@keyframes showAfterDelay {
 	0% {
 		opacity: 0;
 	}
