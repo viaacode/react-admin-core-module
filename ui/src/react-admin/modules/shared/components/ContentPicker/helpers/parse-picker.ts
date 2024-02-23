@@ -38,7 +38,7 @@ export const parseSearchQuery = (input: string): string => {
 			type: ToastType.ERROR,
 		});
 
-		return 'Ongeldige zoekfilter';
+		return '';
 	}
 };
 
