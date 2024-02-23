@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import { get } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
+import { isNil } from 'lodash-es';
+import React, { FunctionComponent, ReactNode, useCallback, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
@@ -67,9 +67,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	// This is the collapsed accordion that is highlighted by a blue border
 	const [highlightedBlockIndex, setHighlightedBlockIndex] = useState<number | null>(null);
 
-	const previewScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-	const sidebarScrollable: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-
 	// Methods
 	const handleAddContentBlock = (configType: ContentBlockType) => {
 		const newConfig = CONTENT_BLOCK_CONFIG_MAP[configType](
@@ -87,18 +84,20 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		focusBlock(newConfig.position, 'sidebar');
 	};
 
-	const handleReorderContentBlock = (configIndex: number, indexUpdate: number) => {
-		// Close accordions
-		setActiveBlockPosition(null);
-		// Trigger reorder
-		changeContentPageState({
-			type: ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG,
-			payload: { configIndex, indexUpdate },
-		});
-	};
+	const handleReorderContentBlock = useCallback(
+		(configIndex: number, indexUpdate: number) => {
+			// Close accordions
+			setActiveBlockPosition(null);
+			// Trigger reorder
+			changeContentPageState({
+				type: ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG,
+				payload: { configIndex, indexUpdate },
+			});
+		},
+		[changeContentPageState]
+	);
 
 	/**
-	 * https://imgur.com/a/E7TxvUN
 	 * @param position
 	 * @param type
 	 */
@@ -107,10 +106,13 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		type: 'preview' | 'sidebar'
 	) => {
 		const blockElem = document.querySelector(`.content-block-${type}-${position}`);
-		const scrollable = get(
-			type === 'sidebar' ? sidebarScrollable : previewScrollable,
-			'current'
+
+		const sidebarScrollable = document.querySelector(
+			'.c-content-edit-view__sidebar .c-scrollable'
 		);
+		const previewScrollable = document.querySelector('.c-content-edit-view__preview');
+
+		const scrollable = type === 'sidebar' ? sidebarScrollable : previewScrollable;
 		if (!blockElem || !scrollable) {
 			return;
 		}
@@ -118,75 +120,98 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		const scrollableTop = scrollable.getBoundingClientRect().top;
 		const scrollTop = scrollable.scrollTop;
 		const scrollMargin = type === 'sidebar' ? 18 : 0;
-		const desiredScrollPosition = Math.max(
-			blockElemTop - (scrollableTop - scrollTop) - scrollMargin,
-			0
+		const desiredScrollPosition = Math.round(
+			Math.max(blockElemTop - (scrollableTop - scrollTop) - scrollMargin, 0)
 		);
 		scrollable.scroll({ left: 0, top: desiredScrollPosition, behavior: 'smooth' });
 	};
 
-	const focusBlock: BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => {
-		toggleActiveBlock(position, type === 'preview');
-		setHighlightedBlockIndex(position);
-		const inverseType = type === 'preview' ? 'sidebar' : 'preview';
-		setTimeout(() => {
-			scrollToBlockPosition(position, inverseType);
-		}, 0);
-	};
+	const toggleActiveBlock = useCallback(
+		(position: number, onlyOpen: boolean) => {
+			if (position === activeBlockPosition && !onlyOpen) {
+				setActiveBlockPosition(null);
+				setTimeout(() => {
+					setHighlightedBlockIndex(null);
+				}, 1000);
+			} else {
+				setActiveBlockPosition(position);
+			}
+		},
+		[activeBlockPosition]
+	);
 
-	const toggleActiveBlock = (position: number, onlyOpen: boolean) => {
-		if (position === activeBlockPosition && !onlyOpen) {
-			setActiveBlockPosition(null);
+	const focusBlock: BlockClickHandler = useCallback(
+		(position: number, type: 'preview' | 'sidebar') => {
+			toggleActiveBlock(position, type === 'preview');
+			setHighlightedBlockIndex(position);
+			const inverseType = type === 'preview' ? 'sidebar' : 'preview';
 			setTimeout(() => {
-				setHighlightedBlockIndex(null);
-			}, 1000);
-		} else {
-			setActiveBlockPosition(position);
-		}
-	};
+				scrollToBlockPosition(position, inverseType);
+			}, 0);
+		},
+		[toggleActiveBlock]
+	);
 
-	const renderBlockForm = (itemData: DraggableItemData, index: number): ReactNode => {
-		return (
-			<div
-				className={clsx(
-					'content-block-sidebar-item',
-					`content-block-sidebar-${itemData.position}`,
-					{ [`content-block-sidebar-item--highlighted`]: index === highlightedBlockIndex }
-				)}
-				key={createKey('form', index)}
-			>
-				<ContentBlockForm
-					config={itemData}
-					blockIndex={index}
-					isAccordionOpen={itemData.position === activeBlockPosition}
-					length={(contentPageInfo.content_blocks || []).length}
-					hasSubmitted={hasSubmitted}
-					toggleIsAccordionOpen={() => {
-						focusBlock(itemData.position, 'sidebar');
-					}}
-					onChange={(
-						formGroupType: ContentBlockStateType,
-						input: any,
-						stateIndex?: number
-					) => {
-						onSave(index, formGroupType, input, stateIndex);
-					}}
-					addComponentToState={() => addComponentToState(index, itemData.type)}
-					removeComponentFromState={(stateIndex: number) =>
-						removeComponentFromState(index, stateIndex)
-					}
-					onError={(configIndex: number, errors: ContentBlockErrors) =>
-						changeContentPageState({
-							type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
-							payload: { configIndex, errors },
-						})
-					}
-					onRemove={onRemove}
-					onReorder={handleReorderContentBlock}
-				/>
-			</div>
-		);
-	};
+	const renderBlockForm = useCallback(
+		(itemData: DraggableItemData, index: number): ReactNode => {
+			return (
+				<div
+					className={clsx(
+						'content-block-sidebar-item',
+						`content-block-sidebar-${itemData.position}`,
+						{
+							[`content-block-sidebar-item--highlighted`]:
+								index === highlightedBlockIndex,
+						}
+					)}
+					key={createKey('form', index)}
+				>
+					<ContentBlockForm
+						config={itemData}
+						blockIndex={index}
+						isAccordionOpen={itemData.position === activeBlockPosition}
+						length={(contentPageInfo.content_blocks || []).length}
+						hasSubmitted={hasSubmitted}
+						toggleIsAccordionOpen={() => {
+							focusBlock(itemData.position, 'sidebar');
+						}}
+						onChange={(
+							formGroupType: ContentBlockStateType,
+							input: any,
+							stateIndex?: number
+						) => {
+							onSave(index, formGroupType, input, stateIndex);
+						}}
+						addComponentToState={() => addComponentToState(index, itemData.type)}
+						removeComponentFromState={(stateIndex: number) =>
+							removeComponentFromState(index, stateIndex)
+						}
+						onError={(configIndex: number, errors: ContentBlockErrors) =>
+							changeContentPageState({
+								type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
+								payload: { configIndex, errors },
+							})
+						}
+						onRemove={onRemove}
+						onReorder={handleReorderContentBlock}
+					/>
+				</div>
+			);
+		},
+		[
+			activeBlockPosition,
+			addComponentToState,
+			changeContentPageState,
+			contentPageInfo.content_blocks,
+			focusBlock,
+			handleReorderContentBlock,
+			hasSubmitted,
+			highlightedBlockIndex,
+			onRemove,
+			onSave,
+			removeComponentFromState,
+		]
+	);
 
 	const generateKeyForBlock = (itemData: DraggableItemData) => {
 		return itemData.id;
@@ -196,39 +221,54 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		setActiveBlockPosition(null);
 	};
 
-	const handleUpdateDraggableList = (updatedList: DraggableItemData[]) => {
-		changeContentPageState({
-			type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
-			payload: {
-				propName: 'content_blocks',
-				propValue: updatedList.map((blockConfig, index) => {
-					return {
-						...blockConfig,
-						position: index,
-					};
-				}),
-			},
-		});
-	};
+	const handleUpdateDraggableList = useCallback(
+		(updatedList: DraggableItemData[]) => {
+			changeContentPageState({
+				type: ContentEditActionType.SET_CONTENT_PAGE_PROP,
+				payload: {
+					propName: 'content_blocks',
+					propValue: updatedList.map((blockConfig, index) => {
+						return {
+							...blockConfig,
+							position: index,
+						};
+					}),
+				},
+			});
+		},
+		[changeContentPageState]
+	);
 
 	// Render
-	const renderedContentBlockForms = useMemo(
-		() => (
-			<DraggableList
-				items={contentPageInfo.content_blocks || []}
-				renderItem={renderBlockForm}
-				generateKey={generateKeyForBlock}
-				onDragStarting={handleDragStarting}
-				onListChange={handleUpdateDraggableList}
-				highlightedItemIndex={highlightedBlockIndex}
-				setHighlightedItemIndex={(index) => {
-					setHighlightedBlockIndex(index);
-					setTimeout(() => {
-						setHighlightedBlockIndex(null);
-					}, 1000);
-				}}
-			></DraggableList>
-		),
+	const renderedContentBlockForms = useCallback(
+		() => {
+			if (isNil(activeBlockPosition)) {
+				// No block accordions are expanded, so we can enable drag and drop
+				return (
+					<DraggableList
+						items={contentPageInfo.content_blocks || []}
+						renderItem={renderBlockForm}
+						generateKey={generateKeyForBlock}
+						onDragStarting={handleDragStarting}
+						onListChange={handleUpdateDraggableList}
+						highlightedItemIndex={highlightedBlockIndex}
+						setHighlightedItemIndex={(index) => {
+							setHighlightedBlockIndex(index);
+							setTimeout(() => {
+								setHighlightedBlockIndex(null);
+							}, 1000);
+						}}
+					></DraggableList>
+				);
+			} else {
+				// A block is expanded, so we disable drag and drop
+				return (
+					<div className="content-block-sidebar__items-non-draggable">
+						{(contentPageInfo.content_blocks || []).map(renderBlockForm)}
+					</div>
+				);
+			}
+		},
 		// Only do change detection on the ids of the blocks, not the content
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[contentBlockIds, handleUpdateDraggableList, highlightedBlockIndex, renderBlockForm]
@@ -239,7 +279,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 			className="m-resizable-panels m-edit-content-blocks"
 			widths={['60%', '40%']}
 		>
-			<div className="c-content-edit-view__preview" ref={previewScrollable}>
+			<div className="c-content-edit-view__preview">
 				<ContentPageRenderer
 					contentPageInfo={contentPageInfo}
 					onBlockClicked={focusBlock}
@@ -259,9 +299,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						value={null as any}
 					/>
 				</Navbar>
-				<div className="c-scrollable" ref={sidebarScrollable}>
-					{renderedContentBlockForms}
-				</div>
+				<div className="c-scrollable">{renderedContentBlockForms()}</div>
 			</Sidebar>
 		</HorizontalPageSplit>
 	);

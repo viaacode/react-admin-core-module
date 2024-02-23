@@ -23,3 +23,12 @@
 .content-block-sidebar-item--highlighted {
 	border-color: $color-teal-bright;
 }
+
+.content-block-sidebar__items-non-draggable {
+	> .content-block-sidebar-item {
+		margin: 1rem 1rem;
+		background-color: #fff;
+		display: block;
+		position: relative;
+	}
+}

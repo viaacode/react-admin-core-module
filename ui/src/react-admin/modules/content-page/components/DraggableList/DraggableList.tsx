@@ -161,7 +161,12 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					key={`draggable-list__item-${generateKey(item.data)}`}
 				>
 					<div className="c-draggable-list__item__content">
-						<div className="o-flex">{renderItem(item.data, item.index)}</div>
+						<div className="o-flex u-flex-align--center">
+							<div className="c-draggable-list__item__drag-handle">
+								<Icon name={IconName.menu} />
+							</div>
+							{renderItem(item.data, item.index)}
+						</div>
 					</div>
 				</div>
 			);
