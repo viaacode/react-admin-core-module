@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "3.1.28",
+  "version": "3.1.29",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -103,7 +103,7 @@
     "@types/react-table": "7.7.10",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "@vitejs/plugin-react": "4.0.4",
+    "@vitejs/plugin-react": "4.2.1",
     "@wojtekmaj/enzyme-adapter-react-17": "0.8.0",
     "ajv": "8.11.0",
     "autoprefixer": "10.4.2",
