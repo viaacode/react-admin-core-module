@@ -4,6 +4,7 @@ import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState }
 import { DraggableItem } from './DraggableList.types';
 
 import './DraggableList.scss';
+import { Icon, IconName } from '@viaa/avo2-components';
 
 // TODO replace this with a generic T type
 export type DraggableItemData = any;
@@ -163,7 +164,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					<div className="c-draggable-list__item__content">
 						<div className="o-flex u-flex-align--center">
 							<div className="c-draggable-list__item__drag-handle">
-								<Icon name={IconName.menu} />
+								<Icon name={'menu' as IconName} />
 							</div>
 							{renderItem(item.data, item.index)}
 						</div>
