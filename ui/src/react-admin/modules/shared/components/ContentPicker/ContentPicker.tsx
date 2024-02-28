@@ -214,7 +214,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 			newValue = null;
 		}
 		if (newType === 'SEARCH_QUERY' && newValue) {
-			newValue = parseSearchQuery(newValue);
+			newValue = parseSearchQuery(newValue) || newValue;
 		}
 
 		let newTarget: LinkTarget;

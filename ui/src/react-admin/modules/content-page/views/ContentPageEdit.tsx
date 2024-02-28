@@ -7,7 +7,7 @@ import {
 	Spacer,
 	Tabs,
 } from '@viaa/avo2-components';
-import { has, isFunction, isNil, without } from 'lodash-es';
+import { isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
@@ -55,7 +55,6 @@ import {
 import { CustomError } from '~shared/helpers/custom-error';
 import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
-import { validateContentBlockField } from '~shared/helpers/validation';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
@@ -64,6 +63,7 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
 import { useTranslation } from '~shared/hooks/useTranslation';
+import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -352,6 +352,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	};
 
 	const handleSave = async () => {
+		const { content_blocks } = contentPageState.currentContentPageInfo;
+
 		try {
 			setIsSaving(true);
 			setHasSubmitted(true);
@@ -366,60 +368,34 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 			// Remove rich text editor states, since they are also saved as html,
 			// and we don't want those states to end up in the database
-			const blockConfigs: ContentBlockConfig[] = contentPageState.currentContentPageInfo
-				.content_blocks
-				? convertRichTextEditorStatesToHtml(
-						contentPageState.currentContentPageInfo.content_blocks
-				  )
+			const blockConfigs: ContentBlockConfig[] = content_blocks
+				? convertRichTextEditorStatesToHtml(content_blocks)
 				: [];
 
 			// Run validators on to check untouched inputs
 			blockConfigs.forEach((config, configIndex) => {
-				const { fields, state } = config.components;
-				const keysToValidate = Object.keys(fields).filter((key) => fields[key].validator);
 				let newErrors: ContentBlockErrors = {};
 
-				if (keysToValidate.length > 0) {
-					keysToValidate.forEach((key) => {
-						const validator = fields[key].validator;
+				newErrors = validateContentBlockConfig(
+					newErrors,
+					config.components.fields,
+					config.components.state
+				);
+				newErrors = validateContentBlockConfig(
+					newErrors,
+					config.block.fields,
+					config.block.state
+				);
 
-						if (validator && isFunction(validator)) {
-							if (Array.isArray(state) && state.length > 0) {
-								state.forEach(
-									(
-										singleState: ContentBlockComponentState,
-										stateIndex: number
-									) => {
-										newErrors = validateContentBlockField(
-											key,
-											validator,
-											newErrors,
-											singleState[key as keyof ContentBlockComponentState],
-											stateIndex
-										);
-									}
-								);
-							} else if (has(state, key)) {
-								newErrors = validateContentBlockField(
-									key,
-									validator,
-									newErrors,
-									state[key as keyof ContentBlockComponentState]
-								);
-							}
-						}
+				const hasErrors = Object.keys(newErrors).length > 0;
+
+				if (hasErrors) {
+					changeContentPageState({
+						type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
+						payload: { configIndex, errors: newErrors },
 					});
 
-					const hasErrors = Object.keys(newErrors).length > 0;
-
-					if (hasErrors) {
-						changeContentPageState({
-							type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
-							payload: { configIndex, errors: newErrors },
-						});
-
-						areConfigsValid = false;
-					}
+					areConfigsValid = false;
 				}
 			});
 
