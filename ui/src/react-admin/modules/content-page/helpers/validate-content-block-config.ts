@@ -1,4 +1,4 @@
-import { has, isFunction } from 'lodash';
+import { has, isFunction } from 'lodash-es';
 import {
 	ContentBlockComponentState,
 	ContentBlockErrors,
@@ -17,32 +17,30 @@ export function validateContentBlockConfig(
 
 	const keysToValidate = Object.keys(fields).filter((key) => fields[key].validator);
 
-	if (keysToValidate.length > 0) {
-		keysToValidate.forEach((key) => {
-			const validator = fields[key].validator;
+	keysToValidate.forEach((key) => {
+		const validator = fields[key].validator;
 
-			if (validator && isFunction(validator)) {
-				if (Array.isArray(state) && state.length > 0) {
-					state.forEach((singleState: ContentBlockComponentState, stateIndex: number) => {
-						newErrors = validateContentBlockField(
-							key,
-							validator,
-							newErrors,
-							singleState[key as keyof ContentBlockComponentState],
-							stateIndex
-						);
-					});
-				} else if (has(state, key)) {
+		if (validator && isFunction(validator)) {
+			if (Array.isArray(state) && state.length > 0) {
+				state.forEach((singleState: ContentBlockComponentState, stateIndex: number) => {
 					newErrors = validateContentBlockField(
 						key,
 						validator,
 						newErrors,
-						state[key as keyof ContentBlockComponentState]
+						singleState[key as keyof ContentBlockComponentState],
+						stateIndex
 					);
-				}
+				});
+			} else if (has(state, key)) {
+				newErrors = validateContentBlockField(
+					key,
+					validator,
+					newErrors,
+					state[key as keyof ContentBlockComponentState]
+				);
 			}
-		});
-    }
+		}
+	});
 
 	return newErrors;
 }

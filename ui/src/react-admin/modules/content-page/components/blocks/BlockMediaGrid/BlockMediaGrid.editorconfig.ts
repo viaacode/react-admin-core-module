@@ -193,7 +193,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					const { value } = input;
 					const errors: string[] = [];
 
-					if (!value || value.length === 0) {
+					if (!value) {
 						return errors; // Valid, optional field
 					}
 
