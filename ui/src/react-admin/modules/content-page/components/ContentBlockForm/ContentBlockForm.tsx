@@ -41,6 +41,7 @@ import { useTranslation } from '~shared/hooks/useTranslation';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import './ContentBlockForm.scss';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 interface ContentBlockFormProps {
 	config: ContentBlockConfig;
@@ -234,7 +235,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		return (
 			<Accordion
 				className={clsx('c-content-block-form__accordion', {
-					'has-error': hasSubmitted && Object.keys(configErrors).length > 0,
+					'has-error': hasSubmitted && blockHasErrors(configErrors),
 				})}
 				isOpen={isAccordionOpen}
 				onToggle={toggleIsAccordionOpen}

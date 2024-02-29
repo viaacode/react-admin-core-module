@@ -64,6 +64,7 @@ import ContentEditContentBlocks from './ContentEditContentBlocks';
 import './ContentPageEdit.scss';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
+import { blockHasErrors } from '../helpers/block-has-errors';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -387,9 +388,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					config.block.state
 				);
 
-				const hasErrors = Object.keys(newErrors).length > 0;
-
-				if (hasErrors) {
+				if (blockHasErrors(newErrors)) {
 					changeContentPageState({
 						type: ContentEditActionType.SET_CONTENT_BLOCK_ERROR,
 						payload: { configIndex, errors: newErrors },
@@ -574,7 +573,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 		setFormErrors(errors);
 
-		return Object.keys(errors).length === 0;
+		return !blockHasErrors(errors);
 	};
 
 	const navigateBack = () => {
