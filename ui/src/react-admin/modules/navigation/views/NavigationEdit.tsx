@@ -27,6 +27,7 @@ import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptio
 import { AdminLayout } from '~shared/layouts';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { Link } from '~modules/shared/components/Link';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 interface NavigationEditProps {
 	navigationBarId: string;
@@ -381,7 +382,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 
 		setFormErrors(errors);
 
-		return Object.keys(errors).length === 0;
+		return !blockHasErrors(errors);
 	};
 
 	const renderPageContent = () => {

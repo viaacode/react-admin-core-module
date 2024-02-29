@@ -5,6 +5,7 @@ import { DraggableItem } from './DraggableList.types';
 
 import './DraggableList.scss';
 import { Icon, IconName } from '@viaa/avo2-components';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 // TODO replace this with a generic T type
 export type DraggableItemData = any;
@@ -153,7 +154,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					className={classNames('c-draggable-list__item', {
 						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
 						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
-						'c-draggable-list__item--error': !!item.data.errors,
+						'c-draggable-list__item--error': blockHasErrors(item.data.errors),
 					})}
 					onDragOver={(evt) => onDragOver(evt, index)}
 					onDragEnd={onDragEnd}
