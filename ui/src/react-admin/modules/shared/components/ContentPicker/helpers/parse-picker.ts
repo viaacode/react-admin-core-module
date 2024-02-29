@@ -6,7 +6,7 @@ import { PickerItem } from '~shared/types/content-picker';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 
-export const parseSearchQuery = (input: string): string => {
+export const parseSearchQuery = (input: string, toast = false) => {
 	try {
 		// replace %22 by "
 		const replacedString = decodeURI(input);
@@ -28,17 +28,18 @@ export const parseSearchQuery = (input: string): string => {
 		return JSON.stringify(filterDefinition);
 	} catch (err) {
 		console.error('Failed to parse search query input', err);
-		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.tText(
-				'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
-			),
-			description: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
-			),
-			type: ToastType.ERROR,
-		});
+		toast &&
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: AdminConfigManager.getConfig().services.i18n.tText(
+					'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
+				),
+				description: AdminConfigManager.getConfig().services.i18n.tText(
+					'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
+				),
+				type: ToastType.ERROR,
+			});
 
-		return '';
+		return null; // return null for error handling
 	}
 };
 
@@ -49,5 +50,5 @@ export const parsePickerItem = (
 ): PickerItem => ({
 	type,
 	target,
-	value: type === 'SEARCH_QUERY' ? parseSearchQuery(value) : value,
+	value: type === 'SEARCH_QUERY' ? parseSearchQuery(value) || value : value,
 });

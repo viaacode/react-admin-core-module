@@ -28,6 +28,7 @@ import {
 } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
+import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 
@@ -187,6 +188,22 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					allowedTypes: ['SEARCH_QUERY'] as Avo.Core.ContentPickerType[],
 					hideTypeDropdown: true,
+				},
+				validator: (input: { value: string }) => {
+					const { value } = input;
+					const errors: string[] = [];
+
+					if (!value) {
+						return errors; // Valid, optional field
+					}
+
+					if (parseSearchQuery(value) === null) {
+						errors.push(AdminConfigManager.getConfig().services.i18n.tText(
+							'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
+						));
+					}
+
+					return errors;
 				},
 			},
 			searchQueryLimit: {
