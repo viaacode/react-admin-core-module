@@ -73,6 +73,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		const newConfig = CONTENT_BLOCK_CONFIG_MAP[configType](newBlockIndex);
 
 		newConfig.id = new Date().valueOf() + newBlockIndex;
+		newConfig.unsaved = true;
 
 		// Update content block configs
 		changeContentPageState({

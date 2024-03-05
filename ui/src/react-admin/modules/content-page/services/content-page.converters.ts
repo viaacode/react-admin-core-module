@@ -144,7 +144,7 @@ export function convertContentPageInfoToDbContentPage(
 			(contentBlock): DbContentBlock => {
 				return {
 					name: contentBlock.name,
-					id: contentBlock.id,
+					id: contentBlock.unsaved ? undefined : contentBlock.id,
 					anchor: contentBlock.anchor,
 					type: contentBlock.type,
 					errors: contentBlock.errors,

@@ -440,6 +440,7 @@ export interface ContentBlockConfig {
 	type: ContentBlockType;
 	anchor?: string;
 	position: number;
+	unsaved?: boolean;
 }
 
 export interface DbContentBlock {
