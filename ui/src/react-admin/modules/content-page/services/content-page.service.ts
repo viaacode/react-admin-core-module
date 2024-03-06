@@ -371,7 +371,7 @@ export class ContentPageService {
 	public static async getContentPageByPath(
 		path: string,
 		onlyInfo = false
-	): Promise<ContentPageInfo | null> {
+	): Promise<DbContentPage | null> {
 		try {
 			let url = this.getBaseUrl();
 			if (AdminConfigManager.getConfig().services.getContentPageByPathEndpoint && !onlyInfo) {
@@ -391,7 +391,7 @@ export class ContentPageService {
 			if (!dbContentPage) {
 				return null;
 			}
-			return convertDbContentPageToContentPageInfo(dbContentPage);
+			return dbContentPage;
 		} catch (err) {
 			throw new CustomError('Failed to get content page by path', err);
 		}

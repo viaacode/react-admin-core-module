@@ -1,5 +1,5 @@
 import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { AdminConfigManager, ToastInfo, ToastType } from '~core/config';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import {
@@ -12,6 +12,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { DatabaseType } from '~shared/types';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,
@@ -65,20 +66,42 @@ export function convertDbContentPagesToContentPageInfos(
 	if (!dbContentPages) {
 		return dbContentPages;
 	}
-	return dbContentPages.map(convertDbContentPageToContentPageInfo);
+	return dbContentPages.map((dbContentPage: DbContentPage) =>
+		convertDbContentPageToContentPageInfo(
+			dbContentPage,
+			AdminConfigManager.getConfig().services.toastService.showToast,
+			AdminConfigManager.getConfig().services.i18n.tText
+		)
+	);
 }
 
 export function convertDbContentPageToContentPageInfo(
-	dbContentPage: DbContentPage
+	dbContentPage: DbContentPage,
+	showToast: (toastInfo: ToastInfo) => string,
+	tText: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: DatabaseType[]
+	) => string
 ): ContentPageInfo {
 	return {
 		...dbContentPage,
-		content_blocks: convertDbContentBlockToContentBlockConfig(dbContentPage.content_blocks),
+		content_blocks: convertDbContentBlockToContentBlockConfig(
+			dbContentPage.content_blocks,
+			showToast,
+			tText
+		),
 	};
 }
 
 export function convertDbContentBlockToContentBlockConfig(
-	contentBlocks: DbContentBlock[]
+	contentBlocks: DbContentBlock[],
+	showToast: (toastInfo: ToastInfo) => string,
+	tText: (
+		translationKey: string,
+		variables?: Record<string, string>,
+		apps?: DatabaseType[]
+	) => string
 ): ContentBlockConfig[] {
 	const sortedContentBlocks = sortBy(contentBlocks, (c) => c.position);
 
@@ -94,10 +117,8 @@ export function convertDbContentBlockToContentBlockConfig(
 						CONTENT_BLOCK_CONFIG_MAP,
 					})
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/admin/content-page/helpers/get-published-state___error'
-					),
+				showToast({
+					title: tText('modules/admin/content-page/helpers/get-published-state___error'),
 					description: AdminConfigManager.getConfig().services.i18n.tText(
 						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
 					),

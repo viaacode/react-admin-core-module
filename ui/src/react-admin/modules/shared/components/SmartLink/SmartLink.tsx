@@ -5,6 +5,7 @@ import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
+import { isNextServerSideRendering } from '~shared/helpers/isNextServerSideRendering';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import type { Avo } from '@viaa/avo2-types';
@@ -92,7 +93,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				// relative url
 				return (
 					<a
-						href={`${window.location.origin}${fullUrl}`}
+						href={`${
+							isNextServerSideRendering() ? '' : window.location.origin
+						}${fullUrl}`}
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}

@@ -8,7 +8,6 @@ export {
 	fetchWithLogout,
 	goToLoginBecauseOfUnauthorizedError,
 } from '../modules/shared/helpers/fetch-with-logout';
-
 // Content pages
 export { default as ContentPageOverview } from './content-page/views/ContentPageOverview';
 export { default as ContentPageDetail } from './content-page/views/ContentPageDetail';
@@ -21,6 +20,7 @@ export type { ContentPageLabel } from './content-page/types/content-pages.types'
 export type { ContentPageDetailProps } from './content-page/views/ContentPageDetail';
 export type { ContentPageEditProps } from './content-page/views/ContentPageEdit';
 export { ContentWidth } from './content-page/types/content-pages.types';
+export { convertDbContentBlockToContentBlockConfig } from './content-page/services/content-page.converters';
 export type {
 	ContentBlockConfig,
 	ContentBlockErrors,

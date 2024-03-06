@@ -3,6 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import { ReactNode } from 'react';
+import { isNextServerSideRendering } from '~shared/helpers/isNextServerSideRendering';
 
 import { APP_PATH } from '../consts/routes.consts';
 
@@ -117,7 +118,9 @@ export function navigateToAbsoluteOrRelativeUrl(
 				window.open(fullUrl);
 			} else {
 				// relative url
-				window.open(`${window.location.origin}${fullUrl}`);
+				window.open(
+					`${isNextServerSideRendering() ? '' : window.location.origin}${fullUrl}`
+				);
 			}
 			break;
 	}
