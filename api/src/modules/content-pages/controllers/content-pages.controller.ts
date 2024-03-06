@@ -44,6 +44,11 @@ export class ContentPagesController {
 		private assetsService: AssetsService
 	) {}
 
+	/**
+	 * Fetches content pages to be shown in the PageOverviewBlock content block
+	 * @param queryDto
+	 * @param user
+	 */
 	@Post('')
 	public async getContentPagesForOverview(
 		@Body() queryDto: ContentPageOverviewParams,
@@ -52,6 +57,15 @@ export class ContentPagesController {
 		return this.contentPagesService.getContentPagesForOverview(queryDto, user.getGroupIds());
 	}
 
+	/**
+	 * Used to fetch content pages for the content page overview table in the admin dashboard
+	 * @param offset
+	 * @param limit
+	 * @param sortColumn
+	 * @param sortOrder
+	 * @param tableColumnDataType
+	 * @param where
+	 */
 	@Get('overview')
 	@RequireAnyPermissions(PermissionName.VIEW_ADMIN_DASHBOARD)
 	public async fetchContentPages(
@@ -314,6 +328,16 @@ export class ContentPagesController {
 		return this.contentPagesService.getUserGroupsFromContentPage(path);
 	}
 
+	/**
+	 * This function will accept an id of an existing content page
+	 * fetch the content page
+	 * duplicate all of the assets
+	 * and return the resulting content page json
+	 *
+	 * It doesn't save the content page in the database
+	 * @param id
+	 * @param user
+	 */
 	@Post('/duplicate/:id')
 	@RequireAnyPermissions(
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
