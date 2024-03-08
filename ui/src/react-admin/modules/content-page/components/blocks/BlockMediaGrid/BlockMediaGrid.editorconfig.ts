@@ -198,9 +198,11 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					}
 
 					if (parseSearchQuery(value) === null) {
-						errors.push(AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
-						));
+						errors.push(
+							AdminConfigManager.getConfig().services.i18n.tText(
+								'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
+							)
+						);
 					}
 
 					return errors;

@@ -69,7 +69,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	// Methods
 	const handleAddContentBlock = (configType: ContentBlockType) => {
-		const newBlockIndex = (contentPageInfo.content_blocks || []).length
+		const newBlockIndex = (contentPageInfo.content_blocks || []).length;
 		const newConfig = CONTENT_BLOCK_CONFIG_MAP[configType](newBlockIndex);
 
 		newConfig.id = new Date().valueOf() + newBlockIndex;

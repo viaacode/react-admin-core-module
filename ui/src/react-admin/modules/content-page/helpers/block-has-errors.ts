@@ -1,3 +1,3 @@
 export function blockHasErrors(errors: any = {}) {
-    return Object.keys(errors).length > 0
+	return Object.keys(errors).length > 0;
 }
