@@ -1,9 +1,11 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { sortBy } from 'lodash';
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 
 import { UpdatePermission } from '../dto/user-groups.dto';
+import { USER_GROUP_ORDER } from '../user-groups.consts';
 import { UserGroupWithPermissions } from '../user-groups.types';
 import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../queries/user-groups.queries';
 
@@ -15,6 +17,8 @@ export class UserGroupsService {
 		userGroup:
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0]
 			| UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0]
+			| UserGroupQueryTypes['GetUserGroupsQueryAvo']['users_groups'][0]
+			| UserGroupQueryTypes['GetUserGroupsQueryHetArchief']['users_group'][0]
 	): UserGroupWithPermissions {
 		const avoUserGroup =
 			userGroup as UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0];
@@ -37,6 +41,21 @@ export class UserGroupsService {
 		};
 	}
 
+	/**
+	 * sort the user groups in a specific order
+	 * https://meemoo.atlassian.net/browse/ARC-1999
+	 * // TODO replace this with a "display_order" column in the database at some point
+	 * @param userGroups
+	 */
+	private customSortUserGroups = <T extends { label: string }>(userGroups: T[]): T[] => {
+		return sortBy(userGroups, (userGroup) => {
+			const label = userGroup.label.toLowerCase();
+			const index = USER_GROUP_ORDER.findIndex((userGroupName) => userGroupName === label);
+
+			return `${String(index).padStart(2, '0')}-${label}`;
+		});
+	};
+
 	public async getUserGroups(withPermissions: boolean): Promise<UserGroupWithPermissions[]> {
 		if (withPermissions) {
 			const response = await this.dataService.execute<
@@ -48,7 +67,13 @@ export class UserGroupsService {
 					.users_groups ||
 				(response as UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief'])
 					.users_group;
-			return userGroups.map((userGroup) => this.adapt(userGroup));
+
+			const sortedUserGroups = this.customSortUserGroups<
+				| UserGroupQueryTypes['GetUserGroupsPermissionsQueryAvo']['users_groups'][0]
+				| UserGroupQueryTypes['GetUserGroupsPermissionsQueryHetArchief']['users_group'][0]
+			>(userGroups);
+
+			return sortedUserGroups.map((userGroup) => this.adapt(userGroup));
 		} else {
 			const response = await this.dataService.execute<
 				UserGroupQueryTypes['GetUserGroupsQuery']
@@ -57,7 +82,13 @@ export class UserGroupsService {
 			const userGroups =
 				(response as UserGroupQueryTypes['GetUserGroupsQueryAvo']).users_groups ||
 				(response as UserGroupQueryTypes['GetUserGroupsQueryHetArchief']).users_group;
-			return userGroups
+
+			const sortedUserGroups = this.customSortUserGroups<
+				| UserGroupQueryTypes['GetUserGroupsQueryAvo']['users_groups'][0]
+				| UserGroupQueryTypes['GetUserGroupsQueryHetArchief']['users_group'][0]
+			>(userGroups);
+
+			return sortedUserGroups
 				.map((userGroup) => this.adapt(userGroup))
 				.map((userGroup) => {
 					delete userGroup.permissions;

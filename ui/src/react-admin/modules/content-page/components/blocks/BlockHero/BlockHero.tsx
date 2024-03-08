@@ -101,6 +101,7 @@ export const BlockHero: FunctionComponent<BlockHeroProps> = ({
 					<FlowPlayer
 						src={src}
 						poster={poster}
+						type="video"
 						title={altText || 'Hero video'}
 						token={token}
 						dataPlayerId={dataPlayerId}

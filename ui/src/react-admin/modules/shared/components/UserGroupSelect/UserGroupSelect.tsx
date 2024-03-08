@@ -50,46 +50,6 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		return parts.join(': ');
 	};
 
-	const USER_GROUP_ORDER = [
-		// Hetarchief
-		'kiosk',
-		'meemoo',
-		'cp beheerder',
-		'bezoeker',
-		'meemoo beheerder',
-		// AVO
-		'leerling',
-		'lesgever',
-		'student lesgever',
-		'lesgever secundair',
-		'student lesgever secundair',
-		'educatieve auteur',
-		'educatieve uitgever',
-		'educatieve partner',
-		'contentpartner',
-		'redacteur',
-		'eindredacteur',
-		'medewerker meemoo',
-		'beheerder',
-	];
-
-	/**
-	 * sort the user groups in a specific order
-	 * https://meemoo.atlassian.net/browse/ARC-1999
-	 * @param userGroups
-	 */
-	const customSortUserGroups = (userGroups: TagInfoSchema[]) => {
-		return sortBy(userGroups, (userGroup) => {
-			const label = userGroup.label.toLowerCase();
-			let index = USER_GROUP_ORDER.findIndex((userGroupName) => userGroupName === label);
-			if (index === -1) {
-				index = 0;
-			}
-
-			return `${String(index).padStart(2, '0')}-${label}`;
-		});
-	};
-
 	if (isEmpty(userGroupOptions)) {
 		return null;
 	}
@@ -101,7 +61,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 			className="c-user-group-select"
 		>
 			<CheckboxGroup>
-				{customSortUserGroups(userGroupOptions).map((userGroupOption) => {
+				{userGroupOptions.map((userGroupOption) => {
 					return (
 						<Checkbox
 							key={userGroupOption.value}
