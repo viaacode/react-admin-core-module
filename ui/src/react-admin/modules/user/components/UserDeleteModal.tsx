@@ -18,6 +18,7 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { AVO } from '~shared/types';
 import { DeleteContentCounts } from '../user.types';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { AdminConfigManager } from '~core/config';
@@ -71,7 +72,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				// transfer user was not selected, or transfer user is the same user as one of the user that will be deleted
 				setTransferToUserError(
 					tText(
-						'admin/users/views/user-overview___kies-een-gebruiker-om-de-content-naar-over-te-dragen'
+						'admin/users/views/user-overview___kies-een-gebruiker-om-de-content-naar-over-te-dragen',
+						undefined,
+						[AVO]
 					)
 				);
 				return;
@@ -85,7 +88,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				// transfer user was not selected, or transfer user is the same user as one of the user that will be deleted
 				setTransferToUserError(
 					tText(
-						'admin/users/views/user-overview___je-kan-geen-content-overdragen-naar-een-gebruiker-die-verwijdert-zal-worden'
+						'admin/users/views/user-overview___je-kan-geen-content-overdragen-naar-een-gebruiker-die-verwijdert-zal-worden',
+						undefined,
+						[AVO]
 					)
 				);
 				return;
@@ -110,7 +115,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					'modules/user/components/user-delete-modal___error'
 				),
 				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt'
+					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt',
+					undefined,
+					[AVO]
 				),
 				type: ToastType.ERROR,
 			});
@@ -148,10 +155,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.publicCollections}{' '}
 					{deleteContentCounts.publicCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-collectie'
+								'react-admin/modules/user/components/user-delete-modal___publieke-collectie',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-collecties'
+								'react-admin/modules/user/components/user-delete-modal___publieke-collecties',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -171,10 +182,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.privateCollections}{' '}
 					{deleteContentCounts.privateCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-collectie'
+								'react-admin/modules/user/components/user-delete-modal___prive-collectie',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-collecties'
+								'react-admin/modules/user/components/user-delete-modal___prive-collecties',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -194,10 +209,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.publicBundles}{' '}
 					{deleteContentCounts.publicBundles === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-bundel'
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundel',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-bundels'
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundels',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -217,10 +236,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.privateBundles}{' '}
 					{deleteContentCounts.privateBundles === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-bundel'
+								'react-admin/modules/user/components/user-delete-modal___prive-bundel',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-bundels'
+								'react-admin/modules/user/components/user-delete-modal___prive-bundels',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -240,10 +263,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.publicAssignments}{' '}
 					{deleteContentCounts.publicAssignments === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht'
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten'
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -270,13 +297,16 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{deleteContentCounts.publicAssignmentPupilCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie'
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
 									numberOfCollections,
-								}
+								},
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -296,10 +326,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.privateAssignments}{' '}
 					{deleteContentCounts.privateAssignments === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-opdracht'
+								'react-admin/modules/user/components/user-delete-modal___prive-opdracht',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten'
+								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten',
+								undefined,
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -326,13 +360,16 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				>
 					{deleteContentCounts.privateAssignmentPupilCollections === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie'
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
 								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
 									numberOfCollections,
-								}
+								},
+								[AVO]
 						  )}
 				</Link>
 			);
@@ -343,10 +380,14 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					{deleteContentCounts.quickLanes}{' '}
 					{deleteContentCounts.quickLanes === 1
 						? tHtml(
-								'react-admin/modules/user/components/user-delete-modal___sneldeel-link'
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-link',
+								undefined,
+								[AVO]
 						  )
 						: tHtml(
-								'react-admin/modules/user/components/user-delete-modal___sneldeel-links'
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-links',
+								undefined,
+								[AVO]
 						  )}
 				</>
 			);
@@ -415,7 +456,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					<Spacer margin="top" className="c-content">
 						<strong>
 							{tText(
-								'react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden'
+								'react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden',
+								undefined,
+								[AVO]
 							)}
 						</strong>
 						<ul>
@@ -483,7 +526,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	return (
 		<>
 			<Modal
-				title={tText('admin/users/views/user-overview___verwijder-opties')}
+				title={tText('admin/users/views/user-overview___verwijder-opties', undefined, [
+					AVO,
+				])}
 				isOpen={isOpen}
 				onClose={onClose}
 				size="medium"
@@ -502,7 +547,9 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(
-								'admin/users/views/user-overview___overdragen-naar-gebruiker'
+								'admin/users/views/user-overview___overdragen-naar-gebruiker',
+								undefined,
+								[AVO]
 							)}
 							hideTargetSwitch
 							hideTypeDropdown

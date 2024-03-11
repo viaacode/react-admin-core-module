@@ -35,6 +35,8 @@ import localTranslationsHetArchief from '../src/shared/translations/hetArchief/n
 type AppsList = ('AVO' | 'HET_ARCHIEF')[];
 type KeyMap = Record<string, { value: string; apps: AppsList }>;
 
+const ROOT_FOLDER = 'src/react-admin';
+
 const oldTranslationsAvo: KeyMap = Object.fromEntries(
 	Object.entries(localTranslationsAvo as Record<string, string>).map(([key, value]) => [
 		key,
@@ -83,7 +85,7 @@ function getFormattedTranslation(translation: string) {
 async function getFilesByGlob(globPattern: string): Promise<string[]> {
 	const options = {
 		ignore: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts'],
-		cwd: path.join(__dirname, '../src'),
+		cwd: path.join(__dirname, '../' + ROOT_FOLDER),
 	};
 	return glob.glob(globPattern, options);
 }
@@ -101,7 +103,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 	// Find and extract translations, replace strings with translation keys
 	codeFiles.forEach((relativeFilePath: string) => {
 		try {
-			const absoluteFilePath = path.resolve(__dirname, '../src', relativeFilePath);
+			const absoluteFilePath = path.resolve(__dirname, '../' + ROOT_FOLDER, relativeFilePath);
 			const content: string = fs.readFileSync(absoluteFilePath).toString();
 
 			// Replace tHtml() and tText() functions
@@ -110,8 +112,8 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 			const whitespace = '\\s*';
 			const quote = '[\'"]'; // eg: "
 			const translation = '([^,)]+?)'; // eg: admin/content-block/helpers/generators/klaar___voeg-titel-toe
-			const translationVariables = '([\\s]*,[\\s]*\\{[^}]*\\})?'; // eg: , {}
-			const appsVariable = '([\\s]*,[\\s]*\\[[^\\]]*\\])?'; // eg: , [AVO]
+			const translationVariables = '([\\s]*,[\\s]*(\\{[^}]*\\}|undefined))?'; // eg: , {numberOfPeople: 5} or , undefined
+			const appsVariable = '([\\s]*,[\\s]*(\\[[^\\]]*\\]))?'; // eg: , [AVO]
 			const tFuncEnd = '[\\s]*\\)'; // eg: )
 			const combinedRegex = [
 				beforeTFunction,
@@ -135,7 +137,9 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 					prefix: string,
 					tFunction: string,
 					translation: string,
+					translationParamsWithComma: string | undefined,
 					translationParams: string | undefined,
+					appsParamWithComma: string | undefined,
 					appsParam: string | undefined
 				) => {
 					let formattedKey: string | undefined;

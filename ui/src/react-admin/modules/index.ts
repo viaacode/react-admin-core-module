@@ -45,7 +45,6 @@ export {
 	convertDbContentPagesToContentPageInfos,
 } from './content-page/services/content-page.converters';
 export { GET_ALIGN_OPTIONS } from './content-page/const/get-align-options';
-export { GET_BUTTON_TYPE_OPTIONS } from './content-page/const/get-button-type-options';
 export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-options';
 
 // Content page labels

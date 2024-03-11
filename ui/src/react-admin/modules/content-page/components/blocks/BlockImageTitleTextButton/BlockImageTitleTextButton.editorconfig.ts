@@ -10,7 +10,6 @@ import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } fr
 import { AdminConfigManager } from '~core/config';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { GET_BUTTON_TYPE_OPTIONS } from '~modules/content-page/const/get-button-type-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 
@@ -94,7 +93,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_BUTTON_TYPE_OPTIONS(),
+					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: {
