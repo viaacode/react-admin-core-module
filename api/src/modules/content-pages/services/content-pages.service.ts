@@ -493,12 +493,21 @@ export class ContentPagesService {
 		published: number;
 		unpublished: number;
 	}> {
+		const now = new Date();
+		const publishedAt = new Date(
+			now.getFullYear(),
+			now.getMonth(),
+			now.getDate(),
+			7,
+			0,
+			0
+		).toISOString();
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
 			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentPagePublishDatesDocument, {
-			now: new Date().toISOString(),
-			publishedAt: setMinutes(setHours(new Date(), 7), 0).toISOString(),
+			now: now.toISOString(),
+			publishedAt,
 		});
 		return {
 			published: response.publish_content_pages?.affected_rows || 0,
