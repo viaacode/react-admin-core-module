@@ -42,10 +42,10 @@
 
 		.o-block-image__button {
 			position: absolute;
-			bottom: $g-spacer-unit;
+			bottom: $g-spacer-unit * 2;
 
 			&--left {
-				left: $g-spacer-unit;
+				left: $g-spacer-unit * 2;
 			}
 
 			&--center {
@@ -54,7 +54,7 @@
 			}
 
 			&--right {
-				right: $g-spacer-unit;
+				right: $g-spacer-unit * 2;
 			}
 		}
 	}
