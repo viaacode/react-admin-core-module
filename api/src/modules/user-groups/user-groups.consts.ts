@@ -1,9 +1,8 @@
 export const USER_GROUP_ORDER = [
 	// Hetarchief
 	'kiosk',
-	'meemoo',
-	'cp beheerder',
 	'bezoeker',
+	'cp beheerder',
 	'meemoo beheerder',
 	// AVO
 	'leerling',
