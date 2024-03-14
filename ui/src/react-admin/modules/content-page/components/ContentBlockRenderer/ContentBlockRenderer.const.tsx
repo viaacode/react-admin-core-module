@@ -123,6 +123,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
  */
 export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.MediaPlayerTitleTextButton,
+	ContentBlockType.MediaPlayer,
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 ];

@@ -8,6 +8,7 @@ import {
 	SpacerOption,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
+import { ReactNode } from 'react';
 import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import {
 	ContentItemStyle,
@@ -179,6 +180,7 @@ export interface ContentBlockField {
 	label?: string; // Optional for checkboxes, who have their own label
 	editorType: ContentBlockEditor;
 	editorProps?: any;
+	note?: ReactNode;
 	validator?: (value: any) => string[];
 	repeat?: {
 		defaultState: any;

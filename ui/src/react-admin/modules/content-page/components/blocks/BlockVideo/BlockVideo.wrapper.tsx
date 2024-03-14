@@ -27,6 +27,7 @@ interface MediaPlayerWrapperProps {
 	organisation?: Avo.Organization.Organization;
 	width?: string;
 	autoplay?: boolean;
+	commonUser?: Avo.User.CommonUser;
 	showCopyright?: boolean;
 }
 
@@ -44,6 +45,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		organisation,
 		width,
 		autoplay,
+		commonUser,
 		showCopyright,
 	} = props;
 
@@ -55,6 +57,26 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	const [activeCopyright, setActiveCopyright] = useState<Avo.Organization.Organization | null>(
 		null
 	);
+
+	const org = organisation || mediaItem?.organisation;
+
+	// Show copy right notice when the block requires it and the user is not logged in, or when they are editing the content page (preview)
+	// https://meemoo.atlassian.net/browse/AVO-3015
+	const showCopyrightNotice =
+		showCopyright &&
+		(!commonUser ||
+			location.pathname.startsWith(
+				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
+			));
+	console.log({
+		showCopyright,
+		commonUser,
+		pathname: location.pathname,
+		ADMIN_CONTENT_PAGE_OVERVIEW:
+			AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW,
+		org,
+		showCopyrightNotice,
+	});
 
 	const retrieveMediaItem = useCallback(async () => {
 		try {
@@ -106,7 +128,6 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	};
 
 	const renderVideoPlayer = () => {
-		const org = organisation || mediaItem?.organisation;
 		return (
 			<div
 				className={clsx('c-video-player t-player-skin--dark', 'u-center-m')}
@@ -126,7 +147,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					src={src}
 					poster={videoStill}
 					topRight={
-						showCopyright &&
+						showCopyrightNotice &&
 						org && (
 							<Button
 								type="inline-link"

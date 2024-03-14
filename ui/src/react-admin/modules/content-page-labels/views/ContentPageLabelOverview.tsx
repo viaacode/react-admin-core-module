@@ -270,7 +270,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							title={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
 							)}
-							variants={['block', 'text']}
+							variants={['block', 'text', 'secondary']}
 						/>
 						<Button
 							icon={<Icon name="edit" />}
@@ -291,7 +291,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							title={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'
 							)}
-							variants={['block', 'text']}
+							variants={['block', 'text', 'secondary']}
 						/>
 						<Button
 							icon={<Icon name="delete" />}
@@ -302,7 +302,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							title={AdminConfigManager.getConfig().services.i18n.tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
-							variants={['block', 'text']}
+							variants={['block', 'text', 'secondary']}
 						/>
 					</ButtonToolbar>
 				);
@@ -381,6 +381,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_CREATE')
 						)
 					}
+					variants={['primary']}
 				/>
 			</AdminLayout.Actions>
 			<AdminLayout.Content>

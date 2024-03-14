@@ -1,9 +1,7 @@
 import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { PHOTO_TYPES } from '~shared/helpers/files';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 import {
 	ContentBlockConfig,
@@ -17,7 +15,6 @@ import {
 	ALIGN_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	FILE_FIELD,
 	ITEM_PICKER_FIELD,
 	TEXT_FIELD,
 } from '../defaults';

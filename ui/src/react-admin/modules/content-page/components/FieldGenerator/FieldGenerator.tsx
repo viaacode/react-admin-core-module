@@ -1,8 +1,9 @@
 import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment, FunctionComponent, ReactNode } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
 import { generateFieldAttributes } from '~modules/content-page/helpers';
+import { Icon } from '~shared/components';
 import {
 	ContentBlockComponentState,
 	ContentBlockField,
@@ -11,6 +12,7 @@ import {
 	ContentBlockStateType,
 } from '../../types/content-block.types';
 import { FieldGroup } from '../FieldGroup/FieldGroup';
+import { Alert } from '@meemoo/react-components';
 
 interface FieldGeneratorProps {
 	fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState;
@@ -89,6 +91,21 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		return <Fragment key={stateIndex}>{renderFieldGroups(currentState, stateIndex)}</Fragment>;
 	};
 
+	const renderNote = (field: ContentBlockField): ReactNode | null => {
+		if (!field.note) {
+			return null;
+		}
+		return (
+			<Spacer margin="top">
+				<Alert
+					content={field.note}
+					icon={<Icon name={IconName.alertTriangle} />}
+					variants="info"
+				/>
+			</Spacer>
+		);
+	};
+
 	const handleField = (field: ContentBlockField, currentState: any) => {
 		const EditorComponent = GET_EDITOR_TYPES_MAP()[(field as ContentBlockField).editorType];
 
@@ -124,6 +141,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 											<Spacer margin="top-small">
 												<EditorComponent {...editorProps} />
 											</Spacer>
+											{renderNote(field)}
 										</FormGroup>
 									</FlexItem>
 									{currentState.length > 1 && (
@@ -168,7 +186,12 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 			state
 		);
 
-		return <EditorComponent {...defaultProps} {...editorProps} />;
+		return (
+			<>
+				<EditorComponent {...defaultProps} {...editorProps} />
+				{renderNote(field)}
+			</>
+		);
 	};
 
 	const renderAddButton = (stateCopy: any[], defaultState: any, label?: string) => {

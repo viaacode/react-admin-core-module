@@ -720,6 +720,7 @@
   "modules/alerts/views/alerts-overview___titel-melding": "Titel melding",
   "modules/alerts/views/alerts-overview___zichtbaar-tot": "Zichtbaar tot",
   "modules/alerts/views/alerts-overview___zichtbaar-van": "Zichtbaar van",
+  "modules/content-page/components/blocks/block-media-grid/block-media-grid___opgelet-mediategels-met-een-zoekfilter-mogen-niet-op-een-publieke-pagina-worden-gebruikt-wegens-geen-bronvermeldingen": "Opgelet! Mediategels met een zoekfilter mogen niet op een publieke pagina worden gebruikt wegens geen bronvermeldingen",
   "modules/content-page/components/content-block-form/content-block-form___gekopieerd": "Gekopieerd.",
   "modules/content-page/const/content-block___neutraal": "Neutraal",
   "modules/content-page/const/content-block___overgang-zwart-wit": "Overgang zwart wit",

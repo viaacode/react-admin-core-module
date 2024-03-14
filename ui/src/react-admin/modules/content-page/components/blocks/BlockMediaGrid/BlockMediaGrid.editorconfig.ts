@@ -189,6 +189,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					allowedTypes: ['SEARCH_QUERY'] as Avo.Core.ContentPickerType[],
 					hideTypeDropdown: true,
 				},
+				note: AdminConfigManager.getConfig().services.i18n.tHtml(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___opgelet-mediategels-met-een-zoekfilter-mogen-niet-op-een-publieke-pagina-worden-gebruikt-wegens-geen-bronvermeldingen'
+				),
 				validator: (input: { value: string }) => {
 					const { value } = input;
 					const errors: string[] = [];
