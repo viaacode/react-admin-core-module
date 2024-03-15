@@ -15,6 +15,7 @@ import {
 import { CustomError } from '~shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
@@ -24,9 +25,7 @@ import {
 
 export class ContentPageService {
 	private static getBaseUrl(): string {
-		return `${
-			AdminConfigManager.getConfig().database.proxyUrl
-		}${CONTENT_PAGE_SERVICE_BASE_URL}`;
+		return `${getAdminCoreApiUrl()}${CONTENT_PAGE_SERVICE_BASE_URL}`;
 	}
 
 	public static async getContentPages(
@@ -217,10 +216,7 @@ export class ContentPageService {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
-					url:
-						`${
-							AdminConfigManager.getConfig().database.proxyUrl
-						}/admin/content-pages/duplicate/` + id,
+					url: `${getAdminCoreApiUrl()}/admin/content-pages/duplicate/` + id,
 				}),
 				{
 					method: 'POST',
@@ -237,9 +233,7 @@ export class ContentPageService {
 			return await fetchWithLogoutJson<any>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
-					url: `${
-						AdminConfigManager.getConfig().database.proxyUrl
-					}/admin/content-pages/blocks/duplicate`,
+					url: `${getAdminCoreApiUrl()}/admin/content-pages/blocks/duplicate`,
 				}),
 				{
 					method: 'POST',

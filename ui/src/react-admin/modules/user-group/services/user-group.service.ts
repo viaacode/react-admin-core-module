@@ -1,12 +1,12 @@
 import { stringifyUrl } from 'query-string';
 
-import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { UserGroup, UserGroupUpdates, UserGroupWithPermissions } from '../types/user-group.types';
 
 export class UserGroupService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/user-groups`;
+		return `${getAdminCoreApiUrl()}/admin/user-groups`;
 	}
 
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {

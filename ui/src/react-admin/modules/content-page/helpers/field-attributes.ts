@@ -100,8 +100,8 @@ export const generateFieldAttributes = (
 
 		case ContentBlockEditor.MaintainerSelect:
 			return {
-				onChange: (value: any) => {
-					onChange(value);
+				onChange: (newValue: any) => {
+					onChange(newValue);
 				},
 				value,
 				// Pass the item that was selected above the maintainer select to the maintainer select

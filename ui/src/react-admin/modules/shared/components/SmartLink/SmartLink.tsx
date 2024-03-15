@@ -5,6 +5,7 @@ import { stringify } from 'query-string';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import type { Avo } from '@viaa/avo2-types';
@@ -165,7 +166,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				case 'EXTERNAL_LINK': {
 					const externalUrl = ((value as string) || '').replace(
 						'{{PROXY_URL}}',
-						AdminConfigManager.getConfig().database.proxyUrl || ''
+						getAdminCoreApiUrl() || ''
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}

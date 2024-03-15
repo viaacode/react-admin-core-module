@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
-import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export class AssetsService {
 	public static async uploadFile(
@@ -11,7 +11,7 @@ export class AssetsService {
 	): Promise<string> {
 		let url: string | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/assets/upload`;
+			url = `${getAdminCoreApiUrl()}/admin/assets/upload`;
 
 			const formData = new FormData();
 			formData.append('ownerId', ownerId);
@@ -38,7 +38,7 @@ export class AssetsService {
 		let url: string | undefined;
 		let body: any;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/admin/assets/delete`;
+			url = `${getAdminCoreApiUrl()}/admin/assets/delete`;
 
 			body = {
 				url: fileUrl,

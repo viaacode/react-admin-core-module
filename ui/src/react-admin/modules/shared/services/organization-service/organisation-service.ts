@@ -1,8 +1,11 @@
 import { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { CustomError } from '~shared/helpers/custom-error';
+import {
+	getAdminCoreApiUrl,
+	getProxyUrl,
+} from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export type BasicOrganisation = {
 	or_id: string;
@@ -11,7 +14,7 @@ export type BasicOrganisation = {
 
 export class OrganisationService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/organisations`;
+		return `${getAdminCoreApiUrl()}/admin/organisations`;
 	}
 
 	public static async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {
@@ -34,7 +37,7 @@ export class OrganisationService {
 	): Promise<{ name: string; id: string; logo: string; website: string }[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${AdminConfigManager.getConfig().database.proxyUrl}/organisations/by-content`,
+				url: `${getProxyUrl()}/organisations/by-content`,
 				query: {
 					contentItemType,
 					contentItemId,

@@ -1,8 +1,8 @@
-import { isNumber, pick, pickBy } from 'lodash-es';
-
-import { ContentBlockErrors } from '../../content-page/types/content-block.types';
+import { isNumber } from 'lodash-es';
 
 import { AdminConfigManager } from '~core/config';
+
+import { ContentBlockErrors } from '../../content-page/types/content-block.types';
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (
@@ -36,21 +36,20 @@ export const validateContentBlockField = (
 	}
 
 	// If no errors are given, cleanup empty properties
-	if (isNumber(stateIndex)) {
-		const errorsByKey = [...(oldErrors[fieldKey] || [])];
-		delete errorsByKey[stateIndex];
-
+	if (errorArray.length === 0) {
+		// No more errors, clear proprty from error object
 		const updatedErrors = {
 			...oldErrors,
-			[fieldKey]: errorsByKey,
 		};
-
-		return pickBy(updatedErrors, (value) => value.length !== 0);
+		delete updatedErrors[fieldKey];
+		return updatedErrors;
+	} else {
+		// Still errors, set errors under fieldKey on error object
+		return {
+			...oldErrors,
+			[fieldKey]: errorArray,
+		};
 	}
-
-	const newKeys = Object.keys(oldErrors).filter((key) => key !== fieldKey);
-
-	return pick(oldErrors, newKeys);
 };
 
 export function validateFlowplayerVideoUrl(url: string | null | undefined) {

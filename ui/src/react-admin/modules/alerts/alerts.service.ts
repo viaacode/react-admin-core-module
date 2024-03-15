@@ -1,14 +1,14 @@
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { Alert, AlertDto, AlertFormState, AlertsOverviewTableCol } from './alerts.types';
 
 export class AlertsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/maintenance-alerts`;
+		return `${getAdminCoreApiUrl()}/admin/maintenance-alerts`;
 	}
 
 	static async fetchAlerts(

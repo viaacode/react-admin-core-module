@@ -105,6 +105,9 @@ export interface AdminConfig {
 	database: {
 		databaseApplicationType: DatabaseType;
 		proxyUrl: string;
+		// Value is empty for clients that use this config, but it is set for running the admin-core demo app
+		// So we can make a distinction between the admin-core-api endpoint and the proxy endpoint
+		adminCoreApiUrl?: string;
 	};
 	routes: {
 		ADMIN_ALERTS_OVERVIEW: string;

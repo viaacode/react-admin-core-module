@@ -1,10 +1,10 @@
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 
-import { AdminConfigManager } from '~core/config';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export class SettingsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/lookup`;
+		return `${getAdminCoreApiUrl()}/admin/lookup`;
 	}
 
 	public static async fetchSubjects(): Promise<string[]> {

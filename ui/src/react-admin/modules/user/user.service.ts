@@ -3,6 +3,10 @@ import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 
 import { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import {
+	getAdminCoreApiUrl,
+	getProxyUrl,
+} from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 
@@ -12,7 +16,7 @@ import { DeleteContentCounts, Idp, UserOverviewTableCol, USERS_PER_PAGE } from '
 
 export class UserService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/users`;
+		return `${getAdminCoreApiUrl()}/admin/users`;
 	}
 
 	static async getUserById(id: string): Promise<Avo.User.CommonUser> {
@@ -110,7 +114,7 @@ export class UserService {
 
 		let url: string | undefined;
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-block`;
+			url = `${getProxyUrl()}/user/bulk-block`;
 			const body: Avo.User.BulkBlockUsersBody = {
 				profileIds,
 				isBlocked,
@@ -168,7 +172,7 @@ export class UserService {
 		let url: string | undefined;
 
 		try {
-			url = `${AdminConfigManager.getConfig().database.proxyUrl}/user/bulk-delete`;
+			url = `${getProxyUrl()}/user/bulk-delete`;
 			const body: Avo.User.BulkDeleteUsersBody = {
 				profileIds,
 				deleteOption,

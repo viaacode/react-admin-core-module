@@ -2,12 +2,13 @@ import { kebabCase } from 'lodash-es';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { isAvo } from '~shared/helpers/is-avo';
 import { TranslationContextName } from '~modules/translations/translations.types';
 
 export class TranslationsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/translations`;
+		return `${getAdminCoreApiUrl()}/admin/translations`;
 	}
 
 	static async fetchTranslations(): Promise<Record<string, Record<string, string>>> {

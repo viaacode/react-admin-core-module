@@ -73,14 +73,6 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 			location.pathname.startsWith(
 				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
 			));
-	console.log({
-		showCopyright,
-		commonUser,
-		pathname: location.pathname,
-		ADMIN_CONTENT_PAGE_OVERVIEW:
-			AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW,
-		showCopyrightNotice,
-	});
 
 	return (
 		<Grid className="c-item-video-description">

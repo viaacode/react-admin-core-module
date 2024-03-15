@@ -1,6 +1,5 @@
 import { FlowPlayer, FlowPlayerProps } from '@meemoo/react-components';
 import {
-	AspectRatioWrapper,
 	Column,
 	Container,
 	convertToHtml,
@@ -33,9 +32,9 @@ export const BlockVideoTitleTextButton: FunctionComponent<BlockVideoTitleTextBut
 			<Spacer>
 				<Grid>
 					<Column size="2-6">
-						<AspectRatioWrapper aspect="16:9">
+						<div className="u-aspect-ratio-16-9">
 							<FlowPlayer {...flowPlayerProps} />
-						</AspectRatioWrapper>
+						</div>
 					</Column>
 					<Column size="2-6">
 						<div className="c-content">

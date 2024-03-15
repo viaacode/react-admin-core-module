@@ -3,6 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import { ReactNode } from 'react';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 import { APP_PATH } from '../consts/routes.consts';
 
@@ -170,7 +171,7 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 			case 'EXTERNAL_LINK': {
 				const externalUrl = ((value as string) || '').replace(
 					'{{PROXY_URL}}',
-					AdminConfigManager.getConfig().database.proxyUrl || ''
+					getAdminCoreApiUrl() || ''
 				);
 				navigateToAbsoluteOrRelativeUrl(externalUrl, history, resolvedTarget);
 				break;

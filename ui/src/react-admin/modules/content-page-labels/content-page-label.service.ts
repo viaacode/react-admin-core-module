@@ -11,10 +11,11 @@ import {
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/content-page-labels`;
+		return `${getAdminCoreApiUrl()}/admin/content-page-labels`;
 	}
 
 	public static async fetchContentPageLabels(

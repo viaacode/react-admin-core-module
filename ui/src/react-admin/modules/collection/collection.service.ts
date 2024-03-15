@@ -1,15 +1,15 @@
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 
-import { AdminConfigManager } from '~core/config';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 import { ContentTypeNumber } from './collection.types';
 
 export class CollectionService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/collections`;
+		return `${getAdminCoreApiUrl()}/admin/collections`;
 	}
 
 	/**

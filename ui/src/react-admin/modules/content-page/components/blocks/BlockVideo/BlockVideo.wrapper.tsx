@@ -68,15 +68,6 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 			location.pathname.startsWith(
 				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
 			));
-	console.log({
-		showCopyright,
-		commonUser,
-		pathname: location.pathname,
-		ADMIN_CONTENT_PAGE_OVERVIEW:
-			AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW,
-		org,
-		showCopyrightNotice,
-	});
 
 	const retrieveMediaItem = useCallback(async () => {
 		try {

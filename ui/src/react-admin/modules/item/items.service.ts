@@ -1,14 +1,14 @@
 import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 import { CustomError } from '../shared/helpers/custom-error';
 import { addDefaultAudioStillToItem } from '../shared/helpers/default-still';
 
 export class ItemsService {
 	private static getBaseUrl(): string {
-		return `${AdminConfigManager.getConfig().database.proxyUrl}/admin/items`;
+		return `${getAdminCoreApiUrl()}/admin/items`;
 	}
 
 	public static async fetchItemById(uuidOrExternalId: string): Promise<Avo.Item.Item> {
