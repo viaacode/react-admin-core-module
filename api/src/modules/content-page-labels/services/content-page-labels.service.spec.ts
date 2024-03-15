@@ -174,12 +174,12 @@ describe('ContentPageLabelsService', () => {
 				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const response = await contentPageLabelsService.insertContentPageLabel(
-				mockContentPageLabelDto
-			);
-			expect(response.id).toBe(mockContentPageLabelDto.id);
-			expect(response.label).toBe(mockContentPageLabelDto.label);
-			expect(response.content_type).toBe(mockContentPageLabelDto.content_type);
+			const response = await contentPageLabelsService.insertContentPageLabels([
+				mockContentPageLabelDto,
+			]);
+			expect(response[0].id).toBe(mockContentPageLabelDto.id);
+			expect(response[0].label).toBe(mockContentPageLabelDto.label);
+			expect(response[0].content_type).toBe(mockContentPageLabelDto.content_type);
 		});
 
 		it('should throw an error when it fails to insert a content page label', async () => {
@@ -191,7 +191,7 @@ describe('ContentPageLabelsService', () => {
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
 			try {
-				await contentPageLabelsService.insertContentPageLabel(new ContentPageLabelDto());
+				await contentPageLabelsService.insertContentPageLabels([new ContentPageLabelDto()]);
 				fail(
 					new Error(
 						'insertContentPageLabel should have thrown an error when null is returned'
