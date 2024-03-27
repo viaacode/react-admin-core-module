@@ -129,8 +129,14 @@ export class ContentPagesController {
 	): Promise<{ message: string }> {
 		const response = await this.contentPagesService.updatePublishDates();
 
+		const message = `content page publish dates have been updated, ${
+			response.publishedCount
+		} pages published (${response.publishedIds.join(',') || 'none'}), ${
+			response.unpublishedCount
+		} pages unpublished (${response.unpublishedIds.join(',') || 'none'})`;
+		console.log('[WEBHOOK] ' + message);
 		return {
-			message: `content page publish dates have been updated, ${response.published} published, ${response.unpublished} unpublished`,
+			message,
 		};
 	}
 

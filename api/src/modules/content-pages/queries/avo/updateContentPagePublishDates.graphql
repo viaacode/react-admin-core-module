@@ -15,6 +15,9 @@ mutation updateContentPagePublishDates($now: timestamptz, $publishedAt: timestam
 		_set: { published_at: $publishedAt, is_public: true }
 	) {
 		affected_rows
+		returning {
+			id
+		}
 	}
 	unpublish_content_pages: update_app_content(
 		where: {
@@ -25,5 +28,8 @@ mutation updateContentPagePublishDates($now: timestamptz, $publishedAt: timestam
 		_set: { is_public: false }
 	) {
 		affected_rows
+		returning {
+			id
+		}
 	}
 }

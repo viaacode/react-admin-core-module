@@ -490,8 +490,10 @@ export class ContentPagesService {
 	}
 
 	public async updatePublishDates(): Promise<{
-		published: number;
-		unpublished: number;
+		publishedCount: number;
+		publishedIds: string[];
+		unpublishedCount: number;
+		unpublishedIds: string[];
 	}> {
 		const now = new Date();
 		const publishedAt = new Date(
@@ -510,8 +512,10 @@ export class ContentPagesService {
 			publishedAt,
 		});
 		return {
-			published: response.publish_content_pages?.affected_rows || 0,
-			unpublished: response.unpublish_content_pages?.affected_rows || 0,
+			publishedCount: response.publish_content_pages?.affected_rows || 0,
+			publishedIds: response.publish_content_pages?.returning.map((page) => page.id),
+			unpublishedCount: response.unpublish_content_pages?.affected_rows || 0,
+			unpublishedIds: response.unpublish_content_pages?.returning.map((page) => page.id),
 		};
 	}
 
