@@ -110,7 +110,7 @@ export class AssetsController {
 				};
 			}
 			const url = await this.assetsService.uploadAndTrack(
-				AssetType.CONTENT_PAGE_IMAGE,
+				(uploadAssetInfo.type || AssetType.CONTENT_PAGE_IMAGE) as AssetType,
 				optimizedFile,
 				uploadAssetInfo.ownerId
 			);
@@ -201,6 +201,7 @@ export class AssetsController {
 
 	private async hasPermissionToDeleteAsset(url: string, @SessionUser() user: SessionUserEntity) {
 		const assetInfo = await this.info(url);
+		const userPermissions = user.getUser().permissions;
 		if (!assetInfo) {
 			throw new BadRequestException('The requested file was not found in the avo database');
 		}
@@ -209,39 +210,41 @@ export class AssetsController {
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.BUNDLE_COVER &&
-			user.hasAny([PermissionName.EDIT_OWN_BUNDLES, PermissionName.EDIT_ANY_BUNDLES])
+			(userPermissions.includes(PermissionName.EDIT_OWN_BUNDLES) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_BUNDLES))
 		) {
 			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.COLLECTION_COVER &&
-			user.hasAny([PermissionName.EDIT_OWN_COLLECTIONS, PermissionName.EDIT_ANY_COLLECTIONS])
+			(userPermissions.includes(PermissionName.EDIT_OWN_COLLECTIONS) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_COLLECTIONS))
 		) {
 			return true;
 		}
 		if (
 			[
 				AssetType.CONTENT_PAGE_COVER,
+				AssetType.CONTENT_PAGE_IMAGE,
 				AssetType.CONTENT_BLOCK_FILE,
 				AssetType.CONTENT_BLOCK_IMAGE,
 				AssetType.CONTENT_PAGE_DESCRIPTION_IMAGE,
 			].includes(assetInfo.content_asset_type_id as AssetType) &&
-			user.hasAny([
-				PermissionName.EDIT_OWN_CONTENT_PAGES,
-				PermissionName.EDIT_ANY_CONTENT_PAGES,
-			])
+			(userPermissions.includes(PermissionName.EDIT_OWN_CONTENT_PAGES) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_CONTENT_PAGES))
 		) {
 			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.ASSIGNMENT_DESCRIPTION_IMAGE &&
-			user.hasAny([PermissionName.EDIT_OWN_ASSIGNMENTS, PermissionName.EDIT_ANY_ASSIGNMENTS])
+			(userPermissions.includes(PermissionName.EDIT_OWN_ASSIGNMENTS) ||
+				userPermissions.includes(PermissionName.EDIT_ANY_ASSIGNMENTS))
 		) {
 			return true;
 		}
 		if (
 			assetInfo.content_asset_type_id === AssetType.INTERACTIVE_TOUR_IMAGE &&
-			user.hasAny([PermissionName.EDIT_INTERACTIVE_TOURS])
+			userPermissions.includes(PermissionName.EDIT_INTERACTIVE_TOURS)
 		) {
 			return true;
 		}
@@ -249,7 +252,7 @@ export class AssetsController {
 			[AssetType.ITEM_SUBTITLE, AssetType.ITEM_NOTE_IMAGE].includes(
 				assetInfo.content_asset_type_id as AssetType
 			) &&
-			user.hasAny([PermissionName.VIEW_ITEMS_OVERVIEW])
+			userPermissions.includes(PermissionName.VIEW_ITEMS_OVERVIEW)
 		) {
 			return true;
 		}
