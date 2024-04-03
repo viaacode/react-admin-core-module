@@ -1,4 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
+
 import { convertUserInfoToCommonUser } from './users.converters';
 import { MOCK_HETARCHIEF_USER } from './users.converters.mock';
 import { UserInfoType } from './users.types';

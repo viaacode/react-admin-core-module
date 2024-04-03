@@ -1,10 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
-import { GetOrganisationsQuery as GetOrganisationQueryAvo } from '../../shared/generated/graphql-db-types-avo';
-import { GetOrganisationsQuery as GetOrganisationQueryHetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
-import { Organisation } from '../admin-organisations.types';
-import { AdminOrganisationsService } from './admin-organisations.service';
 import { DataService } from '../../data';
+import { type GetOrganisationsQuery as GetOrganisationQueryAvo } from '../../shared/generated/graphql-db-types-avo';
+import { type GetOrganisationsQuery as GetOrganisationQueryHetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
+import { type Organisation } from '../admin-organisations.types';
+
+import { AdminOrganisationsService } from './admin-organisations.service';
 
 const mockGqlHetArchiefOrganisation: { data: GetOrganisationQueryHetArchief } = {
 	data: {
@@ -62,9 +63,8 @@ describe('OrganisationsService', () => {
 	describe('getOrganisations', () => {
 		it('should return an organisations from the hetArchief database', async () => {
 			mockDataService.execute.mockResolvedValueOnce(mockGqlHetArchiefOrganisation);
-			const organisation: Organisation = await organisationsService.getOrganisation(
-				'or-639k481'
-			);
+			const organisation: Organisation =
+				await organisationsService.getOrganisation('or-639k481');
 			expect(organisation.logo_url).toEqual(
 				mockGqlHetArchiefOrganisation.data.maintainer_organisation[0].logo.iri
 			);
@@ -72,9 +72,8 @@ describe('OrganisationsService', () => {
 
 		it('should return an organisations from the AvO database', async () => {
 			mockDataService.execute.mockResolvedValueOnce(mockGqlAvOOrganisation);
-			const organisation: Organisation = await organisationsService.getOrganisation(
-				'or-639k481'
-			);
+			const organisation: Organisation =
+				await organisationsService.getOrganisation('or-639k481');
 			expect(organisation.logo_url).toEqual(
 				mockGqlAvOOrganisation.data.shared_organisations[0].logo_url
 			);
@@ -85,9 +84,8 @@ describe('OrganisationsService', () => {
 				shared_organisations: [],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-			const organisation: Organisation = await organisationsService.getOrganisation(
-				'or-639k481'
-			);
+			const organisation: Organisation =
+				await organisationsService.getOrganisation('or-639k481');
 			expect(organisation).toBeNull();
 		});
 	});

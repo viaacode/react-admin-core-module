@@ -1,8 +1,10 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { sortBy } from 'lodash';
+
+import { DataService } from '../../data';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
-
 import {
 	BasicOrganisation,
 	GqlAvoOrganisation,
@@ -10,8 +12,6 @@ import {
 	GqlOrganisation,
 	Organisation,
 } from '../admin-organisations.types';
-import { DataService } from '../../data';
-import { sortBy } from 'lodash';
 import { ORGANISATION_QUERIES, OrganisationQueryTypes } from '../queries/organization.queries';
 
 @Injectable()

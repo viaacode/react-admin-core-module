@@ -1,4 +1,4 @@
-import { PermissionData } from '../permissions';
+import { type PermissionData } from '../permissions';
 
 export interface UserGroupWithPermissions {
 	id: string;

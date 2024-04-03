@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-import { PermissionsService } from './permissions.service';
+import { Test, type TestingModule } from '@nestjs/testing';
 
 import { DataService } from '../../data';
+
+import { PermissionsService } from './permissions.service';
 
 const mockDataService = {
 	execute: jest.fn(),

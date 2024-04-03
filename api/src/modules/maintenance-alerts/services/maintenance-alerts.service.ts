@@ -28,15 +28,14 @@ import {
 	UpdateMaintenanceAlertMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { PaginationHelper } from '../../shared/helpers/pagination';
-
 import { SortDirection } from '../../shared/types';
-import { ORDER_PROP_TO_DB_PROP } from '../maintenance-alerts.conts';
-import { GqlMaintenanceAlert, MaintenanceAlert } from '../maintenance-alerts.types';
 import {
 	CreateMaintenanceAlertDto,
 	MaintenanceAlertsQueryDto,
 	UpdateMaintenanceAlertDto,
 } from '../dto/maintenance-alerts.dto';
+import { ORDER_PROP_TO_DB_PROP } from '../maintenance-alerts.conts';
+import { GqlMaintenanceAlert, MaintenanceAlert } from '../maintenance-alerts.types';
 
 @Injectable()
 export class MaintenanceAlertsService {
@@ -77,7 +76,7 @@ export class MaintenanceAlertsService {
 							until_date: { _gte: new Date().toISOString() },
 						},
 					],
-			  }
+				}
 			: {};
 
 		const maintenanceAlertsResponse = await this.dataService.execute<

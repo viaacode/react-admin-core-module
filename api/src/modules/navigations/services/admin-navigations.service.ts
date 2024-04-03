@@ -1,16 +1,15 @@
 import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { getDatabaseType } from '../../shared/helpers/get-database-type';
 
+import { DataService } from '../../data';
+import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { DeleteResponse } from '../../shared/types/types';
 import { CreateNavigationDto } from '../dto/navigations.dto';
+import { NavigationItem } from '../navigations.types';
 import {
 	NAVIGATION_QUERIES,
 	NavigationEntry,
 	NavigationQueryTypes,
 } from '../queries/navigation.queries';
-
-import { DataService } from '../../data';
-import { NavigationItem } from '../navigations.types';
-import { DeleteResponse } from '../../shared/types/types';
 
 @Injectable()
 export class AdminNavigationsService {

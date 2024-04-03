@@ -1,4 +1,4 @@
-import { ExecutionContext } from '@nestjs/common';
+import { type ExecutionContext } from '@nestjs/common';
 
 import { API_KEY_EXCEPTION, ApiKeyGuard } from './api-key.guard';
 

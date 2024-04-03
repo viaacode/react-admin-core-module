@@ -1,11 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
+import { type UpdateResponse } from '../../shared/types/types';
+import { SiteVariablesService } from '../../site-variables';
 import { TranslationKey } from '../types';
 
 import { TranslationsService } from './translations.service';
-
-import { SiteVariablesService } from '../../site-variables';
-import { UpdateResponse } from '../../shared/types/types';
 
 const mockSiteVariablesService: Partial<Record<keyof SiteVariablesService, jest.SpyInstance>> = {
 	getSiteVariable: jest.fn(),

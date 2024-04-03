@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
-import { PermissionName } from '@viaa/avo2-types';
 import { Reflector } from '@nestjs/core';
+import { PermissionName } from '@viaa/avo2-types';
 import { Observable } from 'rxjs';
 
 import { SessionUserEntity } from '../../users/classes/session-user';

@@ -1,27 +1,28 @@
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { DatabaseType } from '@viaa/avo2-types';
+
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentAvo,
 	GetUserGroupsPermissionsDocument as GetUserGroupsPermissionsDocumentAvo,
-	GetUserGroupsPermissionsQuery as GetUserGroupsPermissionsQueryAvo,
-	GetUserGroupsPermissionsQueryVariables as GetUserGroupsPermissionsQueryVariablesAvo,
-	GetUserGroupsQuery as GetUserGroupsQueryAvo,
-	GetUserGroupsQueryVariables as GetUserGroupsQueryVariablesAvo,
+	type GetUserGroupsPermissionsQuery as GetUserGroupsPermissionsQueryAvo,
+	type GetUserGroupsPermissionsQueryVariables as GetUserGroupsPermissionsQueryVariablesAvo,
+	type GetUserGroupsQuery as GetUserGroupsQueryAvo,
+	type GetUserGroupsQueryVariables as GetUserGroupsQueryVariablesAvo,
 	UpdateUserGroupsPermissionsDocument as UpdateUserGroupsPermissionsDocumentAvo,
-	UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationAvo,
-	UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesAvo,
+	type UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationAvo,
+	type UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetUserGroupsDocument as GetUserGroupsDocumentHetArchief,
 	GetUserGroupsPermissionsDocument as GetUserGroupsPermissionsDocumentHetArchief,
-	GetUserGroupsPermissionsQuery as GetUserGroupsPermissionsQueryHetArchief,
-	GetUserGroupsPermissionsQueryVariables as GetUserGroupsPermissionsQueryVariablesHetArchief,
-	GetUserGroupsQuery as GetUserGroupsQueryHetArchief,
-	GetUserGroupsQueryVariables as GetUserGroupsQueryVariablesHetArchief,
+	type GetUserGroupsPermissionsQuery as GetUserGroupsPermissionsQueryHetArchief,
+	type GetUserGroupsPermissionsQueryVariables as GetUserGroupsPermissionsQueryVariablesHetArchief,
+	type GetUserGroupsQuery as GetUserGroupsQueryHetArchief,
+	type GetUserGroupsQueryVariables as GetUserGroupsQueryVariablesHetArchief,
 	UpdateUserGroupsPermissionsDocument as UpdateUserGroupsPermissionsDocumentHetArchief,
-	UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationHetArchief,
-	UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesHetArchief,
+	type UpdateUserGroupsPermissionsMutation as UpdateUserGroupsPermissionsMutationHetArchief,
+	type UpdateUserGroupsPermissionsMutationVariables as UpdateUserGroupsPermissionsMutationVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
 export type UserGroupQueryTypes = {
 	GetUserGroupsPermissionsQueryAvo: GetUserGroupsPermissionsQueryAvo;

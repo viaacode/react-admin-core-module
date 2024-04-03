@@ -1,4 +1,4 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { createParamDecorator, type ExecutionContext } from '@nestjs/common';
 
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { SessionHelper } from '../auth/session-helper';

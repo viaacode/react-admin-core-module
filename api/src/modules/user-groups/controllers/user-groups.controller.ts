@@ -2,9 +2,9 @@ import { Body, Controller, Get, Patch, Query, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { LoggedInGuard } from '../../shared/guards/logged-in.guard';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { UpdateUserGroupsDto } from '../dto/user-groups.dto';
 import { UserGroupsService } from '../services/user-groups.service';
 import { UserGroupWithPermissions } from '../user-groups.types';

@@ -1,8 +1,8 @@
 import {
-	FindMaintenanceAlertByIdQuery,
-	FindMaintenanceAlertsQuery,
-	InsertMaintenanceAlertMutation,
-	UpdateMaintenanceAlertMutation,
+	type FindMaintenanceAlertByIdQuery,
+	type FindMaintenanceAlertsQuery,
+	type InsertMaintenanceAlertMutation,
+	type UpdateMaintenanceAlertMutation,
 } from '../shared/generated/graphql-db-types-hetarchief';
 
 export class MaintenanceAlert {

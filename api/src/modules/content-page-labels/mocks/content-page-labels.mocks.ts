@@ -1,10 +1,10 @@
+import { type ContentPageLabel, type LabelObj } from '../../content-pages/content-pages.types';
 import {
-	GetContentPageLabelByIdQuery,
-	GetContentPageLabelsQuery,
+	type GetContentPageLabelByIdQuery,
+	type GetContentPageLabelsQuery,
 	Lookup_App_Content_Type_Enum,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { ContentPageLabel, LabelObj } from '../../content-pages/content-pages.types';
-import { ContentPageLabelDto } from '../dto/content-page-label.dto';
+import { type ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_label'][0] = {
 	label: 'Gebruik van het materiaal',

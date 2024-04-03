@@ -10,7 +10,6 @@ import type { IPagination } from '@studiohyperdrive/pagination';
 import { Pagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-
 import { mapLimit } from 'blend-promise-utils';
 import { setHours, setMinutes } from 'date-fns';
 import {
@@ -24,13 +23,11 @@ import {
 	uniq,
 	without,
 } from 'lodash';
-import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
-import { isAvo } from 'src/modules/shared/helpers/is-avo';
+
 import { AssetsService } from '../../assets';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
-
 import {
 	App_Content_Blocks_Insert_Input,
 	App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
@@ -56,7 +53,6 @@ import {
 	MEDIA_PLAYER_BLOCKS,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../content-pages.consts';
-
 import {
 	ContentOverviewTableCols,
 	ContentPageLabel,
@@ -74,6 +70,9 @@ import {
 } from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
+
+import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
+import { isAvo } from 'src/modules/shared/helpers/is-avo';
 
 @Injectable()
 export class ContentPagesService {

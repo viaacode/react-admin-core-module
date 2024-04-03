@@ -1,4 +1,4 @@
-import { ExecutionContext } from '@nestjs/common';
+import { type ExecutionContext } from '@nestjs/common';
 
 import { LoggedInGuard } from './logged-in.guard';
 
@@ -9,7 +9,7 @@ const mockExecutionContextWithSession = (session) =>
 				session,
 			}),
 		}),
-	} as unknown as ExecutionContext);
+	}) as unknown as ExecutionContext;
 
 describe('LoggedInGuard', () => {
 	it('Should allow access when user is logged in', async () => {

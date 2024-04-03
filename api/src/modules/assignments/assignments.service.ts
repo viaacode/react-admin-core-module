@@ -1,5 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
+
 import { DataService } from '../data';
 import {
 	GetPublicAssignmentsByTitleOrIdDocument,

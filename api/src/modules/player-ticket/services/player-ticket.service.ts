@@ -7,10 +7,10 @@ import {
 	Logger,
 	NotFoundException,
 } from '@nestjs/common';
-import publicIp from 'public-ip';
 import type { Cache } from 'cache-manager';
 import got, { Got } from 'got';
 import { trimEnd } from 'lodash';
+import publicIp from 'public-ip';
 
 import { DataService } from '../../data';
 import {
@@ -29,7 +29,6 @@ import {
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
-
 import { PlayerTicket } from '../player-ticket.types';
 
 @Injectable()

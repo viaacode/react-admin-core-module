@@ -1,18 +1,16 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { Cache } from 'cache-manager';
+
 import { CustomError } from '../../shared/helpers/custom-error';
 import {
 	getTranslationFallback,
 	resolveTranslationVariables,
 } from '../../shared/helpers/translation-fallback';
-import { Cache } from 'cache-manager';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-
-import { TranslationKey } from '../types';
-
-import { SiteVariablesService } from '../../site-variables';
-import { Translations } from '../types';
 import { UpdateResponse } from '../../shared/types/types';
+import { SiteVariablesService } from '../../site-variables';
+import { TranslationKey, Translations } from '../types';
 
 @Injectable()
 export class TranslationsService implements OnApplicationBootstrap {
