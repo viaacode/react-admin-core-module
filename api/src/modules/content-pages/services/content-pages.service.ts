@@ -12,7 +12,6 @@ import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { mapLimit } from 'blend-promise-utils';
-import { setHours, setMinutes } from 'date-fns';
 import {
 	compact,
 	escapeRegExp,
