@@ -11,6 +11,7 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
+import { isValid } from 'date-fns';
 import React, { FC, MouseEvent, ReactText, useCallback, useEffect, useState } from 'react';
 import { format, parse, set } from 'date-fns';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
@@ -66,23 +67,57 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 	const [yearInputGte, setYearInputGte] = useState<string>('');
 	const [yearInputLte, setYearInputLte] = useState<string>('');
 
+	const setDateControlsAndSimplifyDates = (newDateRangeControls: DateRangeControls) => {
+		if (newDateRangeControls === 'year') {
+			setDateControls(newDateRangeControls);
+			setRangeState({
+				gte: (rangeState?.gte || new Date().toISOString()).split('-')[0],
+				lte: (rangeState?.lte || new Date().toISOString()).split('-')[0],
+			});
+		} else if (newDateRangeControls === 'date') {
+			setDateControls('date');
+			const gteDate =
+				parseDateFromString(rangeState?.gte || new Date().toISOString()) || new Date();
+			const lteDate =
+				parseDateFromString(rangeState?.lte || new Date().toISOString()) || new Date();
+			setRangeState({
+				gte: format(
+					set(gteDate, { hours: 0, minutes: 0, seconds: 0 }),
+					'yyyy-MM-dd HH:mm:ss'
+				),
+				lte: format(
+					set(lteDate, { hours: 23, minutes: 59, seconds: 59 }),
+					'yyyy-MM-dd HH:mm:ss'
+				),
+			});
+		}
+	};
+
 	const applyDefaultRangeState = useCallback(() => {
-		if (dateControls === 'year') {
-			// Round selected dates to the larger year
-			setRangeState((oldRangeState) => {
+		setRangeState((oldRangeState) => {
+			if (
+				dateControls === 'year' &&
+				!oldRangeState.gte?.includes(':') &&
+				!oldRangeState.lte?.includes(':')
+			) {
+				// Round selected dates to the larger year
 				setYearInputGte(oldRangeState.gte ? oldRangeState.gte.split('-')[0] : '');
 				setYearInputLte(oldRangeState.lte ? oldRangeState.lte.split('-')[0] : '');
 				return {
 					gte: oldRangeState.gte ? `${oldRangeState.gte.split('-')[0]}-01-01` : '',
 					lte: oldRangeState.lte ? `${oldRangeState.lte.split('-')[0]}-12-31` : '',
 				};
-			});
-		} else if (dateControls === 'past') {
-			setRangeState(DEFAULT_PAST_DATE_RANGE);
-		} else if (dateControls === 'future') {
-			setRangeState(DEFAULT_FUTURE_DATE_RANGE);
-		}
-	}, [dateControls, setRangeState]);
+			} else if (dateControls === 'past') {
+				return DEFAULT_PAST_DATE_RANGE;
+			} else if (dateControls === 'future') {
+				return DEFAULT_FUTURE_DATE_RANGE;
+			} else if (oldRangeState.gte?.includes(':') && oldRangeState.lte?.includes(':')) {
+				// More precise date was selected, so select "date" mode automatically
+				setDateControls('date');
+			}
+			return oldRangeState;
+		});
+	}, [dateControls]);
 
 	const resetInternalRangeState = async (_tagId?: ReactText, evt?: MouseEvent): Promise<void> => {
 		evt && evt.stopPropagation();
@@ -200,6 +235,23 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 		return []; // Do not render a filter if date object is empty: {gte: "", lte: ""}
 	};
 
+	const parseDateFromString = (dateString: string | null): Date | null => {
+		if (!dateString) {
+			return null;
+		}
+		let date: Date | null = parse(dateString, 'yyyy', new Date());
+		if (!isValid(date)) {
+			date = parse(dateString, 'yyyy-MM-dd', new Date());
+		}
+		if (!isValid(date)) {
+			date = parse(dateString, 'yyyy-MM-dd HH:mm:ss', new Date());
+		}
+		if (!isValid(date)) {
+			date = null;
+		}
+		return date;
+	};
+
 	let dateRange = rangeState;
 	if (dateControls === 'past') {
 		dateRange = DEFAULT_PAST_DATE_RANGE;
@@ -221,8 +273,8 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 		tillYear = (till || yearInputLte || '').split('-')[0];
 	}
 
-	const fromDate: Date | null = from ? parse(from, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
-	const tillDate: Date | null = till ? parse(till, 'yyyy-MM-dd HH:mm:ss', new Date()) : null;
+	const fromDate: Date | null = parseDateFromString(from);
+	const tillDate: Date | null = parseDateFromString(till);
 
 	return (
 		<Dropdown
@@ -276,7 +328,9 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 										: []),
 								]}
 								value={dateControls}
-								onChange={(value) => setDateControls(value as DateRangeControls)}
+								onChange={(value) =>
+									setDateControlsAndSimplifyDates(value as DateRangeControls)
+								}
 							/>
 							{dateControls === 'year' && (
 								<Grid>
@@ -330,7 +384,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 										>
 											<DateInput
 												{...datePickerDefaultProps}
-												value={fromDate?.toISOString()}
+												selected={fromDate}
 												onChange={(value) => handleDateChange(value, 'gte')}
 												disabled={dateControls !== 'date'}
 											/>
@@ -344,7 +398,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 										>
 											<DateInput
 												{...datePickerDefaultProps}
-												value={tillDate?.toISOString()}
+												selected={tillDate}
 												onChange={(value) => handleDateChange(value, 'lte')}
 												disabled={dateControls !== 'date'}
 											/>

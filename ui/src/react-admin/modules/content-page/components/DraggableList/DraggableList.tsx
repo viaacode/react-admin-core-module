@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { findIndex } from 'lodash-es';
 import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
 import { DraggableItem } from './DraggableList.types';
@@ -151,7 +151,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 		} else {
 			return (
 				<div
-					className={classNames('c-draggable-list__item', {
+					className={clsx('c-draggable-list__item', {
 						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
 						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
 						'c-draggable-list__item--error': blockHasErrors(item.data.errors),
@@ -181,7 +181,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 	};
 
 	return (
-		<div className={classNames('c-draggable-list')} onDragOver={handleDragOverContainer}>
+		<div className={clsx('c-draggable-list')} onDragOver={handleDragOverContainer}>
 			{(draggableItems || []).map((item, index) => handleRenderItem(item, index))}
 		</div>
 	);

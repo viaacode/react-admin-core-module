@@ -664,10 +664,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										}));
 									}
 								}}
-								selected={field.value}
-								value={format(form.fromDate, 'PPP', {
-									locale: nlBE,
-								})}
+								selected={form.fromDate}
 							/>
 
 							<Timepicker
@@ -734,10 +731,7 @@ const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, ren
 										}));
 									}
 								}}
-								selected={field.value}
-								value={format(form.untilDate, 'PPP', {
-									locale: nlBE,
-								})}
+								selected={form.untilDate}
 							/>
 
 							<Timepicker
