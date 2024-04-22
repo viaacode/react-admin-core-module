@@ -22,39 +22,47 @@ and add them to the json file without overwriting the existing strings.
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
 
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
-import fetch from 'node-fetch';
-
+import { mapLimit } from 'blend-promise-utils';
 import * as glob from 'glob';
-import { compact, intersection, kebabCase, keys, lowerCase, upperFirst, without } from 'lodash';
+import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash';
 
-import localTranslationsAvo from '../src/shared/translations/avo/nl.json';
-import localTranslationsHetArchief from '../src/shared/translations/hetArchief/nl.json';
+import { executeDatabaseQuery } from './execute-database-query';
 
-type AppsList = ('AVO' | 'HET_ARCHIEF')[];
-type KeyMap = Record<string, { value: string; apps: AppsList }>;
+enum App {
+	AVO = 'AVO',
+	HET_ARCHIEF = 'HET_ARCHIEF',
+}
+enum Component {
+	ADMIN_CORE = 'ADMIN_CORE',
+	FRONTEND = 'FRONTEND',
+	BACKEND = 'BACKEND',
+}
+type Location = string;
+type Key = string;
 
-const ROOT_FOLDER = 'src/react-admin';
+enum ValueType {
+	TEXT = 'TEXT',
+	HTML = 'HTML',
+}
 
-const oldTranslationsAvo: KeyMap = Object.fromEntries(
-	Object.entries(localTranslationsAvo as Record<string, string>).map(([key, value]) => [
-		key,
-		{
-			value,
-			apps: ['AVO'],
-		},
-	])
-);
-const oldTranslationsHetArchief: KeyMap = Object.fromEntries(
-	Object.entries(localTranslationsHetArchief as Record<string, string>).map(([key, value]) => [
-		key,
-		{
-			value,
-			apps: ['HET_ARCHIEF'],
-		},
-	])
-);
+interface TranslationEntry {
+	app: App;
+	component: Component;
+	location: string;
+	key: string;
+	value: string;
+	value_type: ValueType | null;
+}
+
+function getFullKey(
+	translationEntry: TranslationEntry
+): `${App}__${Component}__${Location}__${Key}` {
+	return `${translationEntry.app}__${translationEntry.component}__${translationEntry.location}__${translationEntry.key}`;
+}
+
+type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
 function getFormattedKey(filePath: string, key: string) {
 	try {
@@ -82,29 +90,31 @@ function getFormattedTranslation(translation: string) {
 	return translation.trim().replace(/\t\t(\t)+/g, ' ');
 }
 
-async function getFilesByGlob(globPattern: string): Promise<string[]> {
+async function getFilesByGlob(rootFolderPath: string): Promise<string[]> {
 	const options = {
 		ignore: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts'],
-		cwd: path.join(__dirname, '../' + ROOT_FOLDER),
+		cwd: rootFolderPath,
 	};
-	return glob.glob(globPattern, options);
+	return glob.glob('**/*.@(ts|tsx)', options);
 }
 
 function getFallbackTranslation(key: string): string {
 	return `${upperFirst(lowerCase(key.split('___').pop()))}`;
 }
 
-function extractTranslationsFromCodeFiles(codeFiles: string[]): {
-	avo: KeyMap;
-	hetarchief: KeyMap;
-} {
-	const newTranslationsAvo: KeyMap = {};
-	const newTranslationsHetArchief: KeyMap = {};
+function extractTranslationsFromCodeFiles(
+	rootFolderPath: string,
+	codeFiles: string[],
+	app: App,
+	component: Component,
+	oldTranslations: Record<string, string>
+): TranslationEntry[] {
+	const newTranslations: TranslationEntry[] = [];
 	// Find and extract translations, replace strings with translation keys
-	codeFiles.forEach((relativeFilePath: string) => {
+	mapLimit(codeFiles, 20, async (relativeFilePath: string) => {
 		try {
-			const absoluteFilePath = path.resolve(__dirname, '../' + ROOT_FOLDER, relativeFilePath);
-			const content: string = fs.readFileSync(absoluteFilePath).toString();
+			const absoluteFilePath = path.resolve(rootFolderPath, relativeFilePath);
+			const content: string = (await fs.readFile(absoluteFilePath)).toString();
 
 			// Replace tHtml() and tText() functions
 			const beforeTFunction = '([^a-zA-Z])'; // eg: .
@@ -144,7 +154,7 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 				) => {
 					let formattedKey: string | undefined;
 					const apps: AppsList = compact(
-						(appsParam || ', [AVO, HET_ARCHIEF]')
+						(appsParam || `, [${App.AVO}, ${App.HET_ARCHIEF}]`)
 							.replace(/[[\]]/g, '')
 							.split(',')
 							.map((app) => app.trim())
@@ -178,41 +188,30 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 					}
 					// If translation contains '___', use original translation, otherwise use translation found by the regexp
 					const hasKeyAlready = formattedTranslation.includes('___');
-					if (apps.includes('AVO')) {
-						if (hasKeyAlready && !(oldTranslationsAvo as KeyMap)[formattedKey]) {
+					if (apps.includes(app)) {
+						if (hasKeyAlready && !oldTranslations[formattedKey]) {
 							console.error(
-								'Failed to find old translation in /avo/nl.json for key: ',
+								`Failed to find old translation in ${app}/nl.json for key: `,
 								formattedKey
 							);
 						}
-						newTranslationsAvo[formattedKey] = {
+						const location = formattedKey.split('___')[0];
+						const key = formattedKey.split('___')[1];
+
+						newTranslations.push({
+							app: App.AVO,
+							component,
+							location,
+							key,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
-											(oldTranslationsAvo as KeyMap)[formattedKey]?.value ||
+											oldTranslations[formattedKey] ||
 												getFallbackTranslation(formattedKey)
 									  )
 									: formattedTranslation) || '',
-							apps,
-						};
-					}
-					if (apps.includes('HET_ARCHIEF')) {
-						if (hasKeyAlready && !(oldTranslationsHetArchief as KeyMap)[formattedKey]) {
-							console.error(
-								'Failed to find old translation /hetArchief/nl.json for key: ',
-								formattedKey
-							);
-						}
-						newTranslationsHetArchief[formattedKey] = {
-							value:
-								(hasKeyAlready
-									? getFormattedTranslation(
-											(oldTranslationsHetArchief as KeyMap)[formattedKey]
-												?.value || getFallbackTranslation(formattedKey)
-									  )
-									: formattedTranslation) || '',
-							apps,
-						};
+							value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
+						});
 					}
 
 					if (hasKeyAlready) {
@@ -226,69 +225,32 @@ function extractTranslationsFromCodeFiles(codeFiles: string[]): {
 			);
 
 			if (content !== newContent) {
-				fs.writeFileSync(absoluteFilePath, newContent);
+				await fs.writeFile(absoluteFilePath, newContent);
 			}
 		} catch (err) {
 			console.error(`Failed to find translations in file: ${relativeFilePath}`, err);
 		}
 	});
-	return { avo: newTranslationsAvo, hetarchief: newTranslationsHetArchief };
+	return newTranslations;
 }
 
-async function getAvoOnlineTranslations(): Promise<Record<string, string>> {
-	const response = await fetch(
-		'https://avo2-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
-		{
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
+async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
+	const response = await executeDatabaseQuery(
+		app,
+		`
+query getAllTranslations {
+  app_translations {
+    component
+    key
+    language
+    location
+    value
+    value_type
+  }
+}
+	`
 	);
-
-	return (await response.json()) as Record<string, string>;
-}
-
-async function getHetArchiefOnlineTranslations(): Promise<Record<string, string>> {
-	const response = await fetch(
-		'https://hetarchief-proxy-qas.hetarchief.be/admin/translations/admin-core.json',
-		{
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}
-	);
-
-	return (await response.json()) as Record<string, string>;
-}
-
-async function getOnlineTranslations(): Promise<{
-	avo: Record<string, string>;
-	hetarchief: Record<string, string>;
-}> {
-	if (
-		!process.env.GRAPHQL_URL_AVO ||
-		!process.env.GRAPHQL_SECRET_AVO ||
-		!process.env.GRAPHQL_URL_HETARCHIEF ||
-		!process.env.GRAPHQL_SECRET_HETARCHIEF
-	) {
-		throw new Error(
-			'Missing environment variables. One or more of these are missing: GRAPHQL_URL_AVO, GRAPHQL_SECRET_AVO, GRAPHQL_URL_HETARCHIEF, GRAPHQL_SECRET_HETARCHIEF'
-		);
-	}
-	try {
-		// Avo
-		const avoAdminCoreTranslations = await getAvoOnlineTranslations();
-
-		// HetArchief
-		const hetArchiefAdminCoreTranslations = await getHetArchiefOnlineTranslations();
-
-		return { avo: avoAdminCoreTranslations, hetarchief: hetArchiefAdminCoreTranslations };
-	} catch (err) {
-		console.error(err);
-		throw new Error('Failed to get translations from the database');
-	}
+	return response.data.app_translations;
 }
 
 function checkTranslationsForKeysAsValue(translationJson: string) {
@@ -320,15 +282,15 @@ function sortObjectKeys(objToSort: Record<string, any>): Record<string, any> {
 		}, {});
 }
 
-async function updateTranslations(
-	oldTranslations: KeyMap,
-	newTranslations: KeyMap,
-	onlineTranslations: Record<string, string>,
+async function combineTranslations(
+	oldTranslations: TranslationEntry[],
+	newTranslations: TranslationEntry[],
+	onlineTranslations: TranslationEntry[],
 	outputFile: string
-): Promise<void> {
+): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
-	const oldTranslationKeys: string[] = keys(oldTranslations);
-	const newTranslationKeys: string[] = keys(newTranslations);
+	const oldTranslationKeys: string[] = oldTranslations.map(getFullKey);
+	const newTranslationKeys: string[] = newTranslations.map(getFullKey);
 	const addedTranslationKeys: string[] = without(newTranslationKeys, ...oldTranslationKeys);
 	const removedTranslationKeys: string[] = without(oldTranslationKeys, ...newTranslationKeys);
 	const existingTranslationKeys: string[] = intersection(newTranslationKeys, oldTranslationKeys);
@@ -340,18 +302,39 @@ async function updateTranslations(
 	`);
 
 	// Combine the translations in the json with the freshly extracted translations from the code
-	const combinedTranslations: Record<string, string> = {};
-	existingTranslationKeys.forEach((key: string) => {
-		combinedTranslations[key] = onlineTranslations[key] || oldTranslations[key].value;
+	const combinedTranslationEntries: TranslationEntry[] = [];
+	existingTranslationKeys.forEach((translationKey: string) => {
+		const entry =
+			onlineTranslations.find((t) => getFullKey(t) === translationKey) ||
+			(oldTranslations.find((t) => getFullKey(t) === translationKey) as TranslationEntry);
+		if (entry) {
+			combinedTranslationEntries.push(entry);
+		} else {
+			throw new Error(
+				'Failed to find translation in old and in online translations: ' + translationKey
+			);
+		}
 	});
-	addedTranslationKeys.forEach((key: string) => {
-		combinedTranslations[key] = onlineTranslations[key] || newTranslations[key].value;
+	addedTranslationKeys.forEach((translationKey: string) => {
+		const entry =
+			onlineTranslations.find((t) => getFullKey(t) === translationKey) ||
+			(newTranslations.find((t) => getFullKey(t) === translationKey) as TranslationEntry);
+		if (entry) {
+			combinedTranslationEntries.push(entry);
+		} else {
+			throw new Error(
+				'Failed to find translation in new and in online translations: ' + translationKey
+			);
+		}
 	});
 
+	const combinedTranslations = Object.fromEntries(
+		combinedTranslationEntries.map((entry) => [getFullKey(entry), entry.value])
+	);
 	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
-	fs.writeFileSync(outputFile, nlJsonContent + '\n');
+	await fs.writeFile(outputFile, nlJsonContent + '\n');
 
 	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
 
@@ -360,31 +343,132 @@ async function updateTranslations(
 			\t${addedTranslationKeys.length} translations added
 			\t${removedTranslationKeys.length} translations deleted
 	`);
+
+	return combinedTranslationEntries;
 }
 
-async function updateTranslationsForAvoAndHetArchief(): Promise<void> {
-	const { avo: onlineTranslationsAvo, hetarchief: onlineTranslationsHetArchief } =
-		await getOnlineTranslations();
+async function updateTranslations(
+	rootFolderPath: string,
+	app: App,
+	component: Component,
+	outputJsonFile: string
+): Promise<TranslationEntry[]> {
+	const onlineTranslations = await getOnlineTranslations(app);
+
+	const oldTranslations: Record<string, string> = JSON.parse(
+		(await fs.readFile(outputJsonFile)).toString()
+	);
+	const oldTranslationEntries = Object.entries(oldTranslations).map((entry): TranslationEntry => {
+		return {
+			app,
+			component,
+			location: entry[0].split('___')[0],
+			key: entry[0].split('___')[1],
+			value: entry[1],
+			value_type: null,
+		};
+	});
 
 	// Extract translations from code and replace code by reference to translation key
-	const codeFiles = await getFilesByGlob('**/*.@(ts|tsx)');
-	const { avo: newTranslationsAvo, hetarchief: newTranslationsHetArchief } =
-		extractTranslationsFromCodeFiles(codeFiles);
-
-	await updateTranslations(
-		oldTranslationsAvo,
-		newTranslationsAvo,
-		onlineTranslationsAvo,
-		`${__dirname.replace(/\\/g, '/')}/../src/shared/translations/avo/nl.json`
+	const codeFiles = await getFilesByGlob(rootFolderPath + '/src');
+	const newTranslations = extractTranslationsFromCodeFiles(
+		rootFolderPath,
+		codeFiles,
+		app,
+		component,
+		oldTranslations
 	);
-	await updateTranslations(
-		oldTranslationsHetArchief,
-		newTranslationsHetArchief,
-		onlineTranslationsHetArchief,
-		`${__dirname.replace(/\\/g, '/')}/../src/shared/translations/hetArchief/nl.json`
+
+	return await combineTranslations(
+		oldTranslationEntries,
+		newTranslations,
+		onlineTranslations,
+		outputJsonFile
 	);
 }
 
-updateTranslationsForAvoAndHetArchief().catch((err) =>
-	console.error('Update of translations failed: ', err)
-);
+async function extractTranslations() {
+	const app = process.argv[2] as App;
+	if (app !== App.AVO && app !== App.HET_ARCHIEF) {
+		throw new Error(
+			'Translation script started with wrong "APP" parameter. Only valid values are: ["AVO", "HET_ARCHIEF"]'
+		);
+	}
+
+	let allTranslations: TranslationEntry[];
+	if (app === App.AVO) {
+		// AVO admin-core
+		console.info('Extracting AVO admin-core translations...');
+		const avoAdminCoreTranslations = await updateTranslations(
+			path.resolve(__dirname, '../src/react-admin'),
+			App.AVO,
+			Component.ADMIN_CORE,
+			'hared/translations/avo/nl.json'
+		);
+
+		// AVO client
+		console.info('Extracting AVO client translations...');
+		const avoClientTranslations = await updateTranslations(
+			path.resolve(__dirname, '../../avo2-client/src'),
+			App.AVO,
+			Component.FRONTEND,
+			'shared/translations/nl.json'
+		);
+
+		// AVO proxy
+		console.info('Extracting AVO admin-core translations...');
+		const avoProxyTranslations = await updateTranslations(
+			path.resolve(__dirname, '../../avo2-proxy/server/src'),
+			App.AVO,
+			Component.BACKEND,
+			'shared/translations/nl.json'
+		);
+
+		allTranslations = [
+			...avoAdminCoreTranslations,
+			...avoClientTranslations,
+			...avoProxyTranslations,
+		];
+	} else {
+		// HetArchief admin-core
+		const hetArchiefAdminCoreTranslations = await updateTranslations(
+			path.resolve(__dirname, '../src/react-admin'),
+			App.HET_ARCHIEF,
+			Component.ADMIN_CORE,
+			'shared/translations/hetArchief/nl.json'
+		);
+
+		// HetArchief client
+		const hetArchiefClientTranslations = await updateTranslations(
+			path.resolve(__dirname, '../../hetarchief-client/src'),
+			App.HET_ARCHIEF,
+			Component.FRONTEND,
+			'../public/locales/nl/common.json'
+		);
+
+		// HetArchief proxy
+		const hetArchiefProxyTranslations = await updateTranslations(
+			path.resolve(__dirname, '../../hetarchief-proxy/src'),
+			App.HET_ARCHIEF,
+			Component.BACKEND,
+			'shared/translations/nl.json'
+		);
+
+		allTranslations = [
+			...hetArchiefAdminCoreTranslations,
+			...hetArchiefClientTranslations,
+			...hetArchiefProxyTranslations,
+		];
+	}
+
+	// Output all translations as sql file
+	let sql: string = allTranslations
+		.map((translationEntry) => {
+			return `INSERT INTO app.translations (component, location, key, value, value_type) VALUES (${translationEntry.component}, ${translationEntry.location}, ${translationEntry.key}, ${translationEntry.value}, ${translationEntry.value_type}) ON CONFLICT (id) DO UPDATE SET value = ${translationEntry.value}, value_type = ${translationEntry.value_type};`;
+		})
+		.join('\n');
+	sql = 'TRUNCATE app.translations;\n' + sql;
+	await fs.writeFile('./all-translations-' + app + '.sql', sql);
+}
+
+extractTranslations().catch((err) => console.error('Update of translations failed: ', err));
