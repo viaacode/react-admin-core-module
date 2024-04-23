@@ -112,7 +112,7 @@ async function extractTranslationsFromCodeFiles(
 	component: Component,
 	oldTranslations: Record<string, string>
 ): Promise<TranslationEntry[]> {
-	const newTranslations: TranslationEntry[] = [];
+	const sourceCodeTranslations: TranslationEntry[] = [];
 	// Find and extract translations, replace strings with translation keys
 	await mapLimit(codeFiles, 20, async (relativeFilePath: string) => {
 		try {
@@ -121,7 +121,7 @@ async function extractTranslationsFromCodeFiles(
 
 			// Replace tHtml() and tText() functions
 			const beforeTFunction = '([^a-zA-Z])'; // eg: .
-			const tFuncStart = '(tHtml|tText)\\('; // eg: tHtml
+			const tFuncStart = '(tHtml|tText|t)\\('; // eg: tHtml
 			const whitespace = '\\s*';
 			const quote = '[\'"]'; // eg: "
 			const translation = '([^,)]+?)'; // eg: admin/content-block/helpers/generators/klaar___voeg-titel-toe
@@ -148,7 +148,7 @@ async function extractTranslationsFromCodeFiles(
 				(
 					match: string,
 					prefix: string,
-					tFunction: string,
+					tFunction: 'tText' | 'tHtml' | 't',
 					translation: string,
 					translationParamsWithComma: string | undefined,
 					translationParams: string | undefined,
@@ -201,7 +201,7 @@ async function extractTranslationsFromCodeFiles(
 						const location = formattedKey.split(TRANSLATION_SEPARATOR)[0];
 						const key = formattedKey.split(TRANSLATION_SEPARATOR)[1];
 
-						newTranslations.push({
+						sourceCodeTranslations.push({
 							app,
 							component,
 							location,
@@ -234,7 +234,7 @@ async function extractTranslationsFromCodeFiles(
 			console.error(`Failed to find translations in file: ${relativeFilePath}`, err);
 		}
 	});
-	return newTranslations;
+	return sourceCodeTranslations;
 }
 
 async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
@@ -324,44 +324,51 @@ function sortObjectKeys(objToSort: Record<string, any>): Record<string, any> {
 }
 
 async function combineTranslations(
-	oldTranslations: TranslationEntry[],
-	newTranslations: TranslationEntry[],
+	nlJsonTranslations: TranslationEntry[],
+	sourceCodeTranslations: TranslationEntry[],
 	onlineTranslations: TranslationEntry[],
 	outputFile: string
 ): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
-	const oldTranslationKeys: string[] = oldTranslations.map(getFullKey);
-	const newTranslationKeys: string[] = newTranslations.map(getFullKey);
-	const addedTranslationKeys: string[] = without(newTranslationKeys, ...oldTranslationKeys);
-	const removedTranslationKeys: string[] = without(oldTranslationKeys, ...newTranslationKeys);
-	const existingTranslationKeys: string[] = intersection(newTranslationKeys, oldTranslationKeys);
+	const nlJsonTranslationKeys: string[] = nlJsonTranslations.map(getFullKey);
+	const sourceCodeTranslationKeys: string[] = sourceCodeTranslations.map(getFullKey);
+	const addedTranslationKeys: string[] = without(
+		sourceCodeTranslationKeys,
+		...nlJsonTranslationKeys
+	);
+	const removedTranslationKeys: string[] = without(
+		nlJsonTranslationKeys,
+		...sourceCodeTranslationKeys
+	);
+	const existingTranslationKeys: string[] = intersection(
+		sourceCodeTranslationKeys,
+		nlJsonTranslationKeys
+	);
 
 	// Console log translations that were found in the json file but not in the code
 	if (removedTranslationKeys.length > 0) {
-		console.warn(`
-		The following translation keys were removed:
-			\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}
-	`);
+		console.warn('The following translation keys were removed:');
+		console.log(`\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}`);
 	}
 
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslationEntries: TranslationEntry[] = [];
 	[...existingTranslationKeys, ...addedTranslationKeys].forEach((translationKey: string) => {
 		const onlineTranslation = onlineTranslations.find((t) => getFullKey(t) === translationKey);
-		const oldTranslation = oldTranslations.find(
+		const nlJsonTranslation = nlJsonTranslations.find(
 			(t) => getFullKey(t) === translationKey
 		) as TranslationEntry;
-		const newTranslation = newTranslations.find(
+		const sourceCodeTranslation = sourceCodeTranslations.find(
 			(t) => getFullKey(t) === translationKey
 		) as TranslationEntry;
 
-		if (!onlineTranslation && !oldTranslation && !newTranslation) {
+		if (!onlineTranslation && !nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
 				'Failed to find translation in online, nl.json and in code: ' + translationKey
 			);
 		}
 
-		if (!onlineTranslation && oldTranslation && !newTranslation) {
+		if (!onlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
 				'Only found translation in nl.json, not in online translations not in code: ' +
 					translationKey
@@ -369,17 +376,24 @@ async function combineTranslations(
 		}
 
 		const entry: TranslationEntry = {
-			app: newTranslation?.app || onlineTranslation?.app || oldTranslation?.app,
+			app: sourceCodeTranslation?.app || onlineTranslation?.app || nlJsonTranslation?.app,
 			component:
-				newTranslation?.component ||
+				sourceCodeTranslation?.component ||
 				onlineTranslation?.component ||
-				oldTranslation?.component,
+				nlJsonTranslation?.component,
 			location:
-				newTranslation?.location || onlineTranslation?.location || oldTranslation?.location,
-			key: newTranslation?.key || onlineTranslation?.key || oldTranslation?.key,
-			value: onlineTranslation?.value || oldTranslation?.value || newTranslation?.value, // Online translations always have priority. Code translations are lowest prio
+				sourceCodeTranslation?.location ||
+				onlineTranslation?.location ||
+				nlJsonTranslation?.location,
+			key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
+			value:
+				onlineTranslation?.value ||
+				nlJsonTranslation?.value ||
+				sourceCodeTranslation?.value, // Online translations always have priority. Code translations are lowest prio
 			value_type:
-				newTranslation?.value_type || onlineTranslation?.value_type || ValueType.TEXT, // translations in json file do not store the value type
+				sourceCodeTranslation?.value_type ||
+				onlineTranslation?.value_type ||
+				ValueType.TEXT, // translations in json file do not store the value type
 		};
 
 		combinedTranslationEntries.push(entry);
@@ -416,10 +430,10 @@ async function updateTranslations(
 			(t) => t.component === component
 		);
 
-		const oldTranslations: Record<string, string> = JSON.parse(
+		const nlJsonTranslations: Record<string, string> = JSON.parse(
 			(await fs.readFile(path.resolve(rootFolderPath, outputJsonFile))).toString()
 		);
-		const oldTranslationEntries = Object.entries(oldTranslations).map(
+		const nlJsonTranslationEntries = Object.entries(nlJsonTranslations).map(
 			(entry): TranslationEntry => {
 				return {
 					app,
@@ -434,17 +448,17 @@ async function updateTranslations(
 
 		// Extract translations from code and replace code by reference to translation key
 		const codeFiles = await getFilesByGlob(rootFolderPath);
-		const newTranslations = await extractTranslationsFromCodeFiles(
+		const sourceCodeTranslations = await extractTranslationsFromCodeFiles(
 			rootFolderPath,
 			codeFiles,
 			app,
 			component,
-			oldTranslations
+			nlJsonTranslations
 		);
 
 		return await combineTranslations(
-			oldTranslationEntries,
-			newTranslations,
+			nlJsonTranslationEntries,
+			sourceCodeTranslations,
 			onlineTranslations,
 			path.join(rootFolderPath, outputJsonFile)
 		);
@@ -566,6 +580,7 @@ async function extractTranslations() {
 				''
 			);
 		})
+		.sort()
 		.join('\n');
 	sql = 'TRUNCATE app.translations;\n' + sql;
 	await fs.writeFile(sqlFilePath, sql);
