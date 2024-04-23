@@ -260,8 +260,11 @@ query getAllOldTranslations {
 }
 	`
 	);
+	if (response.errors) {
+		throw new Error(JSON.stringify(response.errors));
+	}
 	const componentTranslations: { name: string; value: Record<string, string> }[] =
-		response.data.app_config || response.data.app_site_variables;
+		response.data?.app_config || response.data?.app_site_variables;
 	return componentTranslations.flatMap((componentTranslation): TranslationEntry[] => {
 		return Object.entries(componentTranslation.value).map((keyValuePair): TranslationEntry => {
 			return {
@@ -466,7 +469,7 @@ async function updateTranslations(
 		throw new Error(
 			JSON.stringify({
 				message: 'Failed to update translations',
-				innerException: err,
+				innerException: JSON.stringify(err, Object.getOwnPropertyNames(err)),
 				additionalInfo: {
 					rootFolderPath,
 					app,
@@ -494,7 +497,7 @@ async function extractTranslations() {
 			path.resolve(__dirname, '../src/react-admin'),
 			App.AVO,
 			Component.ADMIN_CORE,
-			'hared/translations/avo/nl.json'
+			'../shared/translations/avo/nl.json'
 		);
 		console.info('Formatting code');
 		execSync(`cd ${path.resolve(__dirname, '..')} && npm run format`);
@@ -572,13 +575,13 @@ async function extractTranslations() {
 	console.info('Writing SQL file: ' + sqlFilePath);
 	let sql: string = allTranslations
 		.map((translationEntry) => {
-			return `
-				INSERT INTO app.translations (component, location, key, value, value_type, language)
-				 VALUES ('${translationEntry.component}', '${translationEntry.location}', '${translationEntry.key}', '${translationEntry.value}', '${translationEntry.value_type}', 'NL')
-				 ON CONFLICT (component, location, key) DO UPDATE SET value = '${translationEntry.value}', value_type = '${translationEntry.value_type}';`.replace(
-				/[\n\r\t]/g, // Put on one line, to make file easier to edit/debug
-				''
-			);
+			const component = `'${translationEntry.component}'`;
+			const location = `'${translationEntry.location}'`;
+			const key = `'${translationEntry.key}'`;
+			const value = `'${translationEntry.value.replace(/'/g, "\\'")}'`;
+			const value_type = `'${translationEntry.value_type}'`;
+			const language = "'NL'";
+			return `INSERT INTO app.translations (component, location, key, value, value_type, language) VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
 		.join('\n');
