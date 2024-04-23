@@ -18,9 +18,7 @@ export async function executeDatabaseQuery(
 	const graphQlUrl: string =
 		app === 'AVO' ? process.env.GRAPHQL_URL_AVO : process.env.GRAPHQL_URL_HETARCHIEF;
 	const graphQlPassword: string =
-		app === 'HET_ARCHIEF'
-			? process.env.GRAPHQL_SECRET_AVO
-			: process.env.GRAPHQL_SECRET_HETARCHIEF;
+		app === 'AVO' ? process.env.GRAPHQL_SECRET_AVO : process.env.GRAPHQL_SECRET_HETARCHIEF;
 	const requestHeaders = new Headers();
 	requestHeaders.append('Content-Type', 'application/json');
 	requestHeaders.append('x-hasura-admin-secret', graphQlPassword);
