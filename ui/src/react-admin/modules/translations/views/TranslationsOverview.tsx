@@ -7,8 +7,7 @@ import {
 	TextInput,
 } from '@meemoo/react-components';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
-import { decode as decodeHtmlEntities } from 'html-entities';
-import { orderBy, snakeCase } from 'lodash-es';
+import { orderBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	MouseEvent,
@@ -22,18 +21,14 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { Row, TableOptions } from 'react-table';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import {
-	convertFromDatabaseToList,
-	convertFromListToDatabase,
-	getKeyPrefix,
-} from '~modules/translations/helpers/database-conversions';
+import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
 } from '~modules/translations/translations.const';
+import { LanguageCode, ValueType } from '~modules/translations/translations.core.types';
 import {
-	type Translation,
-	TranslationContextName,
+	MultiLanguageTranslationEntry,
 	type TranslationsOverviewProps,
 } from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
@@ -42,11 +37,14 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
-import { stripRichTextParagraph } from '~shared/helpers/strip-rich-text-paragraph';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
 import { TranslationsService } from '../translations.service';
+import { getFullKey } from '../helpers/get-full-key';
+import { useGetAllLanguages } from '../hooks/use-get-all-languages';
+
+import './TranslationsOverview.scss';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
@@ -54,15 +52,30 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 }) => {
 	const { tHtml, tText } = useTranslation();
 
-	const [translations, setTranslations] = useState<Translation[]>([]);
+	const {
+		data: allTranslationEntries,
+		refetch: refetchTranslations,
+		isLoading: isLoadingTranslations,
+	} = useGetAllTranslations();
+
+	const { data: allLanguages } = useGetAllLanguages();
+
+	// To simplify working with multi language translations, we convert the format of the server to
 
 	const [filteredAndPaginatedTranslations, setFilteredAndPaginatedTranslations] = useState<
-		Translation[] | null
+		MultiLanguageTranslationEntry[] | null
 	>(null);
 	const [filteredTranslationsCount, setFilteredTranslationsCount] = useState<number>(0);
-	const [activeTranslation, setActiveTranslation] = useState<Translation | null>(null);
+	const [activeTranslationEntry, setActiveTranslationEntry] =
+		useState<MultiLanguageTranslationEntry | null>(null);
+	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<LanguageCode>(
+		LanguageCode.NL
+	);
 	const [activeTranslationEditorState, setActiveTranslationEditorState] =
 		useState<RichEditorState | null>(null);
+	const [activeTranslationTextValue, setActiveTranslationTextValue] = useState<string | null>(
+		null
+	);
 
 	const [search, setSearch] = useState<string>('');
 	const [page, setPage] = useState<number>(1);
@@ -72,45 +85,35 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
 
 	const updateFilteredTranslations = useCallback(() => {
-		const filteredTranslations = (translations || []).filter(
-			(translation) =>
-				translation.label.toLowerCase().includes(search.toLowerCase()) ||
-				translation.value.toLowerCase().includes(search.toLowerCase())
+		if (!allTranslationEntries) {
+			return;
+		}
+		const filteredTranslations = allTranslationEntries.filter(
+			(translationEntry) =>
+				// Check key for search term
+				getFullKey(translationEntry).toLowerCase().includes(search.toLowerCase()) ||
+				// Check each language value for the search term
+				Object.values(translationEntry.values).find((value) =>
+					value.toLowerCase().includes(search.toLowerCase())
+				)
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
 
-		const orderedTranslations = orderBy(
+		const orderedTranslations: MultiLanguageTranslationEntry[] = orderBy(
 			filteredTranslations,
 			[orderProp],
 			[orderDirection as OrderDirection]
 		);
-		const paginatedTranslations = orderedTranslations.slice(
+		const paginatedTranslations: MultiLanguageTranslationEntry[] = orderedTranslations.slice(
 			(page - 1) * TRANSLATIONS_PER_PAGE,
-			Math.min(translations?.length || 0, page * TRANSLATIONS_PER_PAGE)
+			Math.min(orderedTranslations?.length || 0, page * TRANSLATIONS_PER_PAGE)
 		);
-		setFilteredAndPaginatedTranslations(paginatedTranslations as Translation[]);
-	}, [translations, orderProp, orderDirection, page, search]);
-
-	const getTranslations = useCallback(async () => {
-		try {
-			const allTranslations = await TranslationsService.fetchTranslations();
-			const translationRows = convertFromDatabaseToList(allTranslations);
-			setTranslations(translationRows);
-		} catch (err) {
-			console.error(new CustomError('Failed to fetch translations', err));
-			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('modules/translations/views/translations-overview___error'),
-				description: tText(
-					'admin/translations/views/translations-overview___het-ophalen-van-de-vertalingen-is-mislukt'
-				),
-				type: ToastType.ERROR,
-			});
-		}
-	}, [setTranslations, tText]);
+		setFilteredAndPaginatedTranslations(paginatedTranslations);
+	}, [allTranslationEntries, orderProp, orderDirection, page, search]);
 
 	useEffect(() => {
-		getTranslations();
-	}, [getTranslations]);
+		refetchTranslations();
+	}, [refetchTranslations]);
 
 	useEffect(() => {
 		updateFilteredTranslations();
@@ -118,56 +121,22 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 
 	const saveActiveTranslation = async () => {
 		try {
-			if (!activeTranslation) {
+			if (!activeTranslationEntry) {
 				throw new Error('Active translation is not defined, failed to save translation');
 			}
 
-			// Fetch database translations and convert to list of objects
-			const allTranslations = await TranslationsService.fetchTranslations();
-			const freshTranslations = convertFromDatabaseToList(allTranslations);
-
-			// Find the current translations
-			const freshTranslation = freshTranslations.find(
-				(trans) =>
-					trans.context === activeTranslation.context &&
-					trans.key === activeTranslation.key
-			);
-			if (!freshTranslation) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: tText('modules/translations/views/translations-overview___error'),
-					description: tText(
-						'modules/translations/views/translations-overview-v-2___deze-vertaling-kan-niet-langer-gevonden-worden-in-de-database-gelieve-de-pagina-te-herladen'
-					),
-					type: ToastType.ERROR,
-				});
-				return;
-			}
-
-			// Update value in array
-			const newTranslationValue = activeTranslationEditorState?.toHTML() || '';
-			freshTranslation.value = stripRichTextParagraph(newTranslationValue);
-
-			// Convert array back to database format
-			const dbTranslations = convertFromListToDatabase(freshTranslations);
-			const dbTranslationContext = dbTranslations.find(
-				(dbTrans) => dbTrans.name === activeTranslation.context
+			await TranslationsService.updateTranslation(
+				activeTranslationEntry.component,
+				activeTranslationEntry.location,
+				activeTranslationEntry.key,
+				activeTranslationLanguage,
+				activeTranslationTextValue || activeTranslationEditorState?.toHTML() || ''
 			);
 
-			if (!dbTranslationContext?.value) {
-				throw new CustomError('Failed to find translation context', null, {
-					context: activeTranslation.context,
-				});
-			}
+			await refetchTranslations();
 
-			// Only update the translations in the context that was changed
-			await TranslationsService.updateTranslations(
-				activeTranslation.context,
-				dbTranslationContext?.value
-			);
-
-			await getTranslations();
-
-			setActiveTranslation(null);
+			setActiveTranslationEntry(null);
+			setActiveTranslationTextValue(null);
 			setActiveTranslationEditorState(null);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
@@ -187,15 +156,6 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				type: ToastType.ERROR,
 			});
 		}
-	};
-
-	const handleRowClick = (_event: MouseEvent<any, any>, translationRow: Row<any>) => {
-		setActiveTranslation({
-			...translationRow.original,
-			context: snakeCase(
-				translationRow.original.context
-			).toUpperCase() as TranslationContextName,
-		});
 	};
 
 	const handlePageChange = (newPageZeroBased: number) => {
@@ -222,6 +182,14 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		// Fix ARC-964: If filters.page is included, the pagination breaks (on pagechange the pagenumber resets to 1 again)
 		[orderProp, orderDirection]
 	);
+
+	const handleEditButtonClicked = (
+		translationEntry: MultiLanguageTranslationEntry,
+		languageCode: LanguageCode
+	) => {
+		setActiveTranslationEntry(translationEntry);
+		setActiveTranslationLanguage(languageCode);
+	};
 
 	const getPagination = () => {
 		if (!isAvo()) {
@@ -272,34 +240,48 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		{
 			id: 'key',
 			Header: tHtml('modules/translations/views/translations-overview-v-2___id'),
-			accessor: 'key',
-			Cell: ({ row }: { row: Row<Translation> }) => {
-				const parts = row.original.label?.split('___') || [];
+			Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }) => {
+				const translationEntry: MultiLanguageTranslationEntry = row.original;
 				return (
 					<>
 						<div>
-							<strong>{parts[1]}</strong>
+							<strong>{translationEntry.key}</strong>
 						</div>
-						<div className="u-text-muted">{parts[0]}</div>
+						<div className="u-text-muted">
+							{translationEntry.component + '/' + translationEntry.location}
+						</div>
 					</>
 				);
 			},
 		},
-		{
-			id: 'value',
-			Header: tHtml('modules/translations/views/translations-overview-v-2___waarde'),
-			accessor: 'value',
-			Cell: ({ row }: { row: Row<Translation> }) => {
-				return <Html content={row.original.value} className="c-content"></Html>;
-			},
-		},
-		{
-			Header: '',
-			id: 'cp-visitors-histories-table-actions',
-			Cell: () => {
-				return <Icon name="edit"></Icon>;
-			},
-		},
+		...(allLanguages || []).map((languageInfo) => {
+			return {
+				id: 'value_' + languageInfo.languageCode,
+				Header: languageInfo.languageLabel,
+				Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }) => {
+					const translationEntry = row.original;
+					const value =
+						translationEntry.values[languageInfo.languageCode as LanguageCode];
+
+					return (
+						<button
+							className="c-translation-overview__edit-button"
+							onClick={() => {
+								handleEditButtonClicked(
+									translationEntry,
+									languageInfo.languageCode as LanguageCode
+								);
+							}}
+						>
+							{translationEntry.value_type === ValueType.HTML && (
+								<Html content={value} className="c-content"></Html>
+							)}
+							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
+						</button>
+					);
+				},
+			};
+		}),
 	];
 
 	const renderTranslationsTable = (): ReactNode => {
@@ -330,7 +312,6 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					}
 					onSortChange={handleSortChange}
 					sortingIcons={sortingIcons}
-					onRowClick={handleRowClick}
 					pagination={getPagination}
 				/>
 			</>
@@ -338,17 +319,13 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	};
 
 	const renderPopupBody = () => {
-		if (!activeTranslation) {
+		if (!activeTranslationEntry) {
 			return null;
 		}
 		return (
 			<>
 				<CopyToClipboard
-					text={
-						activeTranslation.context.replace(getKeyPrefix(), '') +
-						'___' +
-						activeTranslation.key
-					}
+					text={getFullKey(activeTranslationEntry)}
 					onCopy={() =>
 						AdminConfigManager.getConfig().services.toastService.showToast({
 							title: tText(
@@ -363,26 +340,35 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				>
 					<Button variants={['block', 'text']} className="c-button--copy-to-clipboard">
 						<div>
-							<strong>{activeTranslation.key.split('___')[1]}</strong>
+							<strong>{activeTranslationEntry.key}</strong>
 						</div>
-						<div className="u-text-muted">{activeTranslation.key.split('___')[0]}</div>
+						<div className="u-text-muted">
+							{activeTranslationEntry.component +
+								'/' +
+								activeTranslationEntry.location}
+						</div>
 					</Button>
 				</CopyToClipboard>
-				<RichTextEditor
-					onChange={setActiveTranslationEditorState}
-					state={activeTranslationEditorState || undefined}
-					initialHtml={
-						activeTranslation.value.includes('<')
-							? activeTranslation.value
-							: decodeHtmlEntities(activeTranslation.value)
-					}
-					controls={RICH_TEXT_EDITOR_OPTIONS}
-				></RichTextEditor>
+				{activeTranslationEntry.value_type === ValueType.HTML && (
+					<RichTextEditor
+						onChange={setActiveTranslationEditorState}
+						state={activeTranslationEditorState || undefined}
+						initialHtml={activeTranslationEntry.values[activeTranslationLanguage]}
+						controls={RICH_TEXT_EDITOR_OPTIONS}
+					></RichTextEditor>
+				)}
+				{activeTranslationEntry.value_type === ValueType.TEXT && (
+					<textarea
+						className="c-translation-overview__textarea"
+						value={activeTranslationEntry.values[activeTranslationLanguage]}
+						onChange={(evt) => setActiveTranslationTextValue(evt.target.value)}
+					></textarea>
+				)}
 			</>
 		);
 	};
 
-	if (!translations) {
+	if (isLoadingTranslations) {
 		return <CenteredSpinner />;
 	}
 	return (
@@ -405,10 +391,11 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					'modules/translations/views/translations-overview-v-2___vertaling-aanpassen'
 				),
 				body: renderPopupBody(),
-				isOpen: !!activeTranslation,
+				isOpen: !!activeTranslationEntry,
 				onSave: saveActiveTranslation,
 				onClose: () => {
-					setActiveTranslation(null);
+					setActiveTranslationEntry(null);
+					setActiveTranslationTextValue(null);
 					setActiveTranslationEditorState(null);
 				},
 			})}

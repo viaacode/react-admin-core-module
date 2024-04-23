@@ -3,13 +3,13 @@ import XHR from 'i18next-http-backend';
 import { lowerCase, upperFirst } from 'lodash-es';
 import { initReactI18next } from 'react-i18next';
 
-export async function initI18n(proxyUrl: string): Promise<void> {
+export async function initI18n(adminProxyUrl: string): Promise<void> {
 	return new Promise<void>((resolve) => {
 		I18n.use(XHR)
 			.use(initReactI18next) // passes i18n down to react-i18next
 			.init({
 				backend: {
-					loadPath: `${proxyUrl}/admin/translations/nl.json`,
+					loadPath: `${adminProxyUrl}/admin/translations/NL.json`,
 					parse: (data: any) => {
 						setTimeout(() => {
 							resolve();

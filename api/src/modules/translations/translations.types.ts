@@ -43,3 +43,11 @@ export interface TranslationEntry {
 	value_type: ValueType | null;
 	language: Lookup_Languages_Enum;
 }
+
+export interface MultiLanguageTranslationEntry {
+	component: Component;
+	location: Location;
+	key: Key;
+	values: Record<Lookup_Languages_Enum, string>;
+	value_type: ValueType | null;
+}

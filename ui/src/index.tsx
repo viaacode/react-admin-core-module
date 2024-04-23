@@ -18,8 +18,8 @@ import { capitalize, lowerCase } from 'lodash-es';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 
-const proxyUrl = 'http://localhost:3000';
-const adminProxyUrl = 'http://localhost:3300';
+const proxyUrl = 'http://localhost:3100';
+const adminCoreApiUrl = 'http://localhost:3300';
 
 declare const document: any;
 
@@ -306,7 +306,7 @@ function setConfig() {
 		database: {
 			databaseApplicationType: DatabaseType.avo,
 			proxyUrl,
-			adminProxyUrl,
+			adminCoreApiUrl,
 		},
 		flowplayer: {
 			FLOW_PLAYER_ID: '',
@@ -373,7 +373,7 @@ function renderApp() {
 }
 
 async function bootstrapApp() {
-	await initI18n(proxyUrl);
+	await initI18n(adminCoreApiUrl);
 	setConfig();
 	renderApp();
 }

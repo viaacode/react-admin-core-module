@@ -2731,8 +2731,6 @@ export type App_Translations_Bool_Exp = {
 /** unique or primary key constraints on table "app.translations" */
 export enum App_Translations_Constraint {
   /** unique or primary key constraint */
-  TranslationsComponentLocationKeyKey = 'translations_component_location_key_key',
-  /** unique or primary key constraint */
   TranslationsPkey = 'translations_pkey'
 }
 
@@ -2796,6 +2794,7 @@ export type App_Translations_Order_By = {
 export type App_Translations_Pk_Columns_Input = {
   component: Scalars['String'];
   key: Scalars['String'];
+  language: Lookup_Languages_Enum;
   location: Scalars['String'];
 };
 
@@ -7613,6 +7612,7 @@ export type Mutation_RootDelete_App_TranslationsArgs = {
 export type Mutation_RootDelete_App_Translations_By_PkArgs = {
   component: Scalars['String'];
   key: Scalars['String'];
+  language: Lookup_Languages_Enum;
   location: Scalars['String'];
 };
 
@@ -11919,6 +11919,7 @@ export type Query_RootApp_Translations_AggregateArgs = {
 export type Query_RootApp_Translations_By_PkArgs = {
   component: Scalars['String'];
   key: Scalars['String'];
+  language: Lookup_Languages_Enum;
   location: Scalars['String'];
 };
 
@@ -13370,6 +13371,7 @@ export type Subscription_RootApp_Translations_AggregateArgs = {
 export type Subscription_RootApp_Translations_By_PkArgs = {
   component: Scalars['String'];
   key: Scalars['String'];
+  language: Lookup_Languages_Enum;
   location: Scalars['String'];
 };
 

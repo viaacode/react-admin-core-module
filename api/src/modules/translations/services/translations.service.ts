@@ -2,7 +2,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { Cache } from 'cache-manager';
-import { isEmpty, sortBy } from 'lodash';
+import { groupBy, isEmpty, sortBy } from 'lodash';
 import { DataService } from '../../data';
 import {
 	GetAllLanguagesDocument,
@@ -31,6 +31,7 @@ import {
 	LanguageCode,
 	LanguageInfo,
 	Location,
+	MultiLanguageTranslationEntry,
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 	ValueType,
@@ -59,17 +60,36 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public getFullKey(
 		translationEntry: TranslationEntry
-	): `${App}${typeof TRANSLATION_SEPARATOR}${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
-		return `${translationEntry.app}${TRANSLATION_SEPARATOR}${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
+	): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+		return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 	}
 
-	public async getTranslations(): Promise<TranslationEntry[]> {
+	public async getTranslations(): Promise<MultiLanguageTranslationEntry[]> {
 		const translationEntries: TranslationEntry[] = await this.getTranslationsByComponent([
 			Component.ADMIN_CORE,
 			Component.FRONTEND,
 			Component.BACKEND,
 		]);
-		return sortBy(translationEntries, this.getFullKey);
+		const groupedByKey: [string, TranslationEntry[]][] = Object.entries(
+			groupBy(translationEntries, this.getFullKey)
+		);
+		const multiLanguageTranslationEntries: MultiLanguageTranslationEntry[] = groupedByKey.map(
+			(translationEntryPair): MultiLanguageTranslationEntry => {
+				return {
+					component: translationEntryPair[1][0].component,
+					location: translationEntryPair[1][0].location,
+					key: translationEntryPair[1][0].key,
+					value_type: translationEntryPair[1][0].value_type,
+					values: Object.fromEntries(
+						translationEntryPair[1].map((t) => [t.language, t.value])
+					) as Record<LanguageCode, string>,
+				};
+			}
+		);
+		return sortBy(
+			multiLanguageTranslationEntries,
+			this.getFullKey
+		) as MultiLanguageTranslationEntry[];
 	}
 
 	public async updateTranslation(

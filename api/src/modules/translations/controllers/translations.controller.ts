@@ -9,6 +9,7 @@ import {
 	type KeyValueTranslations,
 	LanguageCode,
 	type LanguageInfo,
+	MultiLanguageTranslationEntry,
 	TranslationEntry,
 } from '../translations.types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
@@ -47,7 +48,7 @@ export class TranslationsController {
 	 * Mostly used to get all translations in the admin-dashboard
 	 */
 	@Get()
-	public async getTranslations(): Promise<TranslationEntry[]> {
+	public async getTranslations(): Promise<MultiLanguageTranslationEntry[]> {
 		return this.translationsService.getTranslations();
 	}
 
