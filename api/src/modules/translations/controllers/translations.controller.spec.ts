@@ -1,15 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-
-import { TranslationsService } from '../services/translations.service';
-import { TranslationKey } from '../translations.types';
-
-import { TranslationsController } from './translations.controller';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { UpdateResponse } from '../../shared/types/types';
 
+import { TranslationsService } from '../services/translations.service';
+import { Component, TranslationKey } from '../translations.types';
+
+import { TranslationsController } from './translations.controller';
+
 const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> = {
 	getTranslations: jest.fn(),
-	updateTranslations: jest.fn(),
+	updateTranslation: jest.fn(),
 };
 
 const mockTranslationsResponse = {
@@ -39,16 +40,6 @@ describe('TranslationsController', () => {
 		expect(translationsController).toBeDefined();
 	});
 
-	describe('getFrontendTranslations', () => {
-		it('should return the translations', async () => {
-			mockTranslationsService.getTranslations.mockResolvedValueOnce(mockTranslationsResponse);
-
-			const translations = await translationsController.getTranslationsJson();
-
-			expect(translations).toEqual(mockTranslationsResponse);
-		});
-	});
-
 	describe('getTranslations', () => {
 		it('should return the translations', async () => {
 			mockTranslationsService.getTranslations.mockResolvedValueOnce(mockTranslationsResponse);
@@ -62,14 +53,17 @@ describe('TranslationsController', () => {
 	describe('updateTranslations', () => {
 		it('should update the translations', async () => {
 			const mockData: UpdateResponse = { affectedRows: 1 };
-			mockTranslationsService.updateTranslations.mockResolvedValueOnce(mockData);
+			mockTranslationsService.updateTranslation.mockResolvedValueOnce(mockData);
 
-			const response = await translationsController.updateTranslations({
-				key: TranslationKey.TRANSLATIONS_FRONTEND,
-				data: { key1: 'newTranslation' },
+			const promise = translationsController.updateTranslation({
+				component: Component.ADMIN_CORE,
+				location: 'modules/admin/const/requests',
+				key: 'status',
+				languageCode: Lookup_Languages_Enum.En,
+				value: 'new status',
 			});
 
-			expect(response.affectedRows).toBe(1);
+			await expect(promise).resolves.toBeUndefined();
 		});
 	});
 });

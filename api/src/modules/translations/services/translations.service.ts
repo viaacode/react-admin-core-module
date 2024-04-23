@@ -1,31 +1,46 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { Cache } from 'cache-manager';
+import { isEmpty, sortBy } from 'lodash';
 import { DataService } from '../../data';
 import {
 	GetAllLanguagesDocument,
 	GetAllLanguagesQuery,
+	GetTranslationsByComponentsAndLanguagesDocument,
+	GetTranslationsByComponentsAndLanguagesQuery,
+	GetTranslationsByComponentsAndLanguagesQueryVariables,
+	GetTranslationsByComponentsDocument,
+	GetTranslationsByComponentsQuery,
+	GetTranslationsByComponentsQueryVariables,
+	UpdateTranslationDocument,
+	UpdateTranslationMutation,
+	UpdateTranslationMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
+import { isAvo } from '../../shared/helpers/is-avo';
 import {
 	getTranslationFallback,
 	resolveTranslationVariables,
 } from '../../shared/helpers/translation-fallback';
-import { Cache } from 'cache-manager';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { LanguageInfo } from '../translations.types';
-
-import { TranslationKey } from '../translations.types';
-
-import { SiteVariablesService } from '../../site-variables';
-import { Translations } from '../translations.types';
-import { UpdateResponse } from '../../shared/types/types';
+import {
+	App,
+	Component,
+	Key,
+	KeyValueTranslations,
+	LanguageCode,
+	LanguageInfo,
+	Location,
+	TRANSLATION_SEPARATOR,
+	TranslationEntry,
+	ValueType,
+} from '../translations.types';
 
 @Injectable()
 export class TranslationsService implements OnApplicationBootstrap {
-	private backendTranslations: Translations;
+	private backendTranslations: KeyValueTranslations;
 
 	constructor(
-		private siteVariablesService: SiteVariablesService,
 		private dataService: DataService,
 		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {}
@@ -42,37 +57,46 @@ export class TranslationsService implements OnApplicationBootstrap {
 		);
 	}
 
-	public async getTranslations(): Promise<Record<string, Record<string, string>>> {
-		const [translationsFrontend, translationsAdminCore, translationsBackend] =
-			await Promise.all([
-				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_FRONTEND
-				),
-				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_ADMIN_CORE
-				),
-				this.siteVariablesService.getSiteVariable<Translations>(
-					TranslationKey.TRANSLATIONS_BACKEND
-				),
-			]);
-		return {
-			TRANSLATIONS_FRONTEND: translationsFrontend,
-			TRANSLATIONS_ADMIN_CORE: translationsAdminCore,
-			TRANSLATIONS_BACKEND: translationsBackend,
-		};
+	public getFullKey(
+		translationEntry: TranslationEntry
+	): `${App}${typeof TRANSLATION_SEPARATOR}${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+		return `${translationEntry.app}${TRANSLATION_SEPARATOR}${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 	}
 
-	public async updateTranslations(
-		key: string,
-		value: Record<string, string>
-	): Promise<UpdateResponse> {
+	public async getTranslations(): Promise<TranslationEntry[]> {
+		const translationEntries: TranslationEntry[] = await this.getTranslationsByComponent([
+			Component.ADMIN_CORE,
+			Component.FRONTEND,
+			Component.BACKEND,
+		]);
+		return sortBy(translationEntries, this.getFullKey);
+	}
+
+	public async updateTranslation(
+		component: Component,
+		location: Location,
+		key: Key,
+		languageCode: LanguageCode,
+		value: string
+	): Promise<void> {
 		try {
-			const response = await this.siteVariablesService.updateSiteVariable(key, value);
+			await this.dataService.execute<
+				UpdateTranslationMutation,
+				UpdateTranslationMutationVariables
+			>(UpdateTranslationDocument, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
 			await this.cacheManager.reset();
-			return response;
 		} catch (err: any) {
 			throw CustomError('Failed to update translation', err, {
+				component,
+				location,
 				key,
+				languageCode,
 				value,
 			});
 		}
@@ -82,26 +106,63 @@ export class TranslationsService implements OnApplicationBootstrap {
 		await this.refreshBackendTranslations();
 	}
 
-	public async getFrontendTranslations(): Promise<Translations> {
+	private convertTranslationEntriesToKeyValue(
+		entries: TranslationEntry[]
+	): Record<string, string> {
+		return Object.fromEntries(
+			entries.map((entry): [string, string] => {
+				return [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value];
+			})
+		);
+	}
+
+	public async getTranslationsByComponent(
+		components: Component[],
+		languageCodes?: LanguageCode[]
+	): Promise<TranslationEntry[]> {
+		let response:
+			| GetTranslationsByComponentsQuery
+			| GetTranslationsByComponentsAndLanguagesQuery;
+		if (!languageCodes) {
+			response = await this.dataService.execute<
+				GetTranslationsByComponentsQuery,
+				GetTranslationsByComponentsQueryVariables
+			>(GetTranslationsByComponentsDocument, { components });
+		} else {
+			response = await this.dataService.execute<
+				GetTranslationsByComponentsAndLanguagesQuery,
+				GetTranslationsByComponentsAndLanguagesQueryVariables
+			>(GetTranslationsByComponentsAndLanguagesDocument, { components, languageCodes });
+		}
+
+		return response.app_translations.map(
+			(translationEntry): TranslationEntry => ({
+				app: isAvo() ? App.AVO : App.HET_ARCHIEF,
+				component: translationEntry.component as Component,
+				location: translationEntry.location,
+				key: translationEntry.key,
+				language: translationEntry.language,
+				value: translationEntry.value,
+				value_type: translationEntry.value_type as ValueType,
+			})
+		);
+	}
+
+	public async getFrontendTranslations(
+		languageCode: LanguageCode
+	): Promise<KeyValueTranslations> {
 		const translations = await this.cacheManager.wrap(
-			TranslationKey.TRANSLATIONS_FRONTEND,
+			'FRONTEND_TRANSLATIONS_' + languageCode,
 			async () => {
-				const [translationsFrontend, translationsAdminCore] = await Promise.all([
-					this.siteVariablesService.getSiteVariable<Translations>(
-						TranslationKey.TRANSLATIONS_FRONTEND
-					),
-					this.siteVariablesService.getSiteVariable<Translations>(
-						TranslationKey.TRANSLATIONS_ADMIN_CORE
-					),
-				]);
-				return {
-					...translationsAdminCore,
-					...translationsFrontend,
-				};
+				const translations = await this.getTranslationsByComponent(
+					[Component.FRONTEND, Component.ADMIN_CORE],
+					[languageCode]
+				);
+				return this.convertTranslationEntriesToKeyValue(translations);
 			}, // cache for 30 minutes (milliseconds)
 			1_800_000
 		);
-		if (!translations) {
+		if (!translations || isEmpty(translations)) {
 			throw new NotFoundException('No translations have been set in the database');
 		}
 
@@ -113,15 +174,13 @@ export class TranslationsService implements OnApplicationBootstrap {
 	 */
 	@Cron('*/30 * * * *')
 	public async refreshBackendTranslations(): Promise<void> {
-		const translations = await this.siteVariablesService.getSiteVariable<Translations>(
-			TranslationKey.TRANSLATIONS_BACKEND
-		);
+		const translationEntries = await this.getTranslationsByComponent([Component.BACKEND]);
 
-		if (!translations) {
+		if (!translationEntries?.length) {
 			throw new NotFoundException('No backend translations have been set in the database');
 		}
 
-		this.backendTranslations = translations;
+		this.backendTranslations = this.convertTranslationEntriesToKeyValue(translationEntries);
 	}
 
 	public t(key: string, variables: Record<string, string | number> = {}): string {

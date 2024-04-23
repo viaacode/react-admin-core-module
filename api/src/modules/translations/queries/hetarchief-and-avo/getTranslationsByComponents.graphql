@@ -1,0 +1,10 @@
+query getTranslationsByComponents($components: [String!]!) {
+	app_translations(where: { component: { _in: $components } }) {
+		component
+		key
+		language
+		location
+		value
+		value_type
+	}
+}

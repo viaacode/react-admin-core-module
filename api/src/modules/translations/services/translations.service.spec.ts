@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-
-import { TranslationKey } from '../translations.types';
-
-import { TranslationsService } from './translations.service';
+import { UpdateResponse } from '../../shared/types/types';
 
 import { SiteVariablesService } from '../../site-variables';
-import { UpdateResponse } from '../../shared/types/types';
+
+import { Component, LanguageCode, TranslationKey } from '../translations.types';
+
+import { TranslationsService } from './translations.service';
 
 const mockSiteVariablesService: Partial<Record<keyof SiteVariablesService, jest.SpyInstance>> = {
 	getSiteVariable: jest.fn(),
@@ -49,7 +49,7 @@ describe('TranslationsService', () => {
 				mockTranslationsResponse.value
 			);
 			// mockCacheManager.wrap.mockResolvedValueOnce(mockTranslationsResponse.value);
-			const translations = await translationsService.getFrontendTranslations();
+			const translations = await translationsService.getFrontendTranslations(LanguageCode.Nl);
 
 			expect(translations).toEqual(mockTranslationsResponse.value);
 		});
@@ -108,11 +108,12 @@ describe('TranslationsService', () => {
 				affectedRows: 1,
 			};
 			mockSiteVariablesService.updateSiteVariable.mockResolvedValueOnce(mockData);
-			const response = await translationsService.updateTranslations(
-				TranslationKey.TRANSLATIONS_FRONTEND,
-				{
-					key: 'new-translation',
-				}
+			const response = await translationsService.updateTranslation(
+				Component.FRONTEND,
+				'modules/admin/const/requests',
+				'status',
+				LanguageCode.Nl,
+				'new value'
 			);
 			expect(response).toEqual({ affectedRows: 1 });
 		});
