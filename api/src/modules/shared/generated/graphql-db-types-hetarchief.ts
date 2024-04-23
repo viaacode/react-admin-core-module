@@ -2682,6 +2682,165 @@ export enum App_Notification_Update_Column {
   VisitId = 'visit_id'
 }
 
+/** Contains the translated labels in all languages for the hetarchief frontend client */
+export type App_Translations = {
+  __typename?: 'app_translations';
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+  value: Scalars['String'];
+  value_type: Scalars['String'];
+};
+
+/** aggregated selection of "app.translations" */
+export type App_Translations_Aggregate = {
+  __typename?: 'app_translations_aggregate';
+  aggregate?: Maybe<App_Translations_Aggregate_Fields>;
+  nodes: Array<App_Translations>;
+};
+
+/** aggregate fields of "app.translations" */
+export type App_Translations_Aggregate_Fields = {
+  __typename?: 'app_translations_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Translations_Max_Fields>;
+  min?: Maybe<App_Translations_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.translations" */
+export type App_Translations_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Translations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "app.translations". All fields are combined with a logical 'AND'. */
+export type App_Translations_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Translations_Bool_Exp>>;
+  _not?: InputMaybe<App_Translations_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Translations_Bool_Exp>>;
+  component?: InputMaybe<String_Comparison_Exp>;
+  key?: InputMaybe<String_Comparison_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
+  location?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+  value_type?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app.translations" */
+export enum App_Translations_Constraint {
+  /** unique or primary key constraint */
+  TranslationsComponentLocationKeyKey = 'translations_component_location_key_key',
+  /** unique or primary key constraint */
+  TranslationsPkey = 'translations_pkey'
+}
+
+/** input type for inserting data into table "app.translations" */
+export type App_Translations_Insert_Input = {
+  component?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
+  location?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+  value_type?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type App_Translations_Max_Fields = {
+  __typename?: 'app_translations_max_fields';
+  component?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  value_type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type App_Translations_Min_Fields = {
+  __typename?: 'app_translations_min_fields';
+  component?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  value_type?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "app.translations" */
+export type App_Translations_Mutation_Response = {
+  __typename?: 'app_translations_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App_Translations>;
+};
+
+/** on_conflict condition type for table "app.translations" */
+export type App_Translations_On_Conflict = {
+  constraint: App_Translations_Constraint;
+  update_columns?: Array<App_Translations_Update_Column>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app.translations". */
+export type App_Translations_Order_By = {
+  component?: InputMaybe<Order_By>;
+  key?: InputMaybe<Order_By>;
+  language?: InputMaybe<Order_By>;
+  location?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+  value_type?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app_translations */
+export type App_Translations_Pk_Columns_Input = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  location: Scalars['String'];
+};
+
+/** select columns of table "app.translations" */
+export enum App_Translations_Select_Column {
+  /** column name */
+  Component = 'component',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  Language = 'language',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Value = 'value',
+  /** column name */
+  ValueType = 'value_type'
+}
+
+/** input type for updating data in table "app.translations" */
+export type App_Translations_Set_Input = {
+  component?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
+  location?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+  value_type?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "app.translations" */
+export enum App_Translations_Update_Column {
+  /** column name */
+  Component = 'component',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  Language = 'language',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Value = 'value',
+  /** column name */
+  ValueType = 'value_type'
+}
+
 /** Boolean expression to compare columns of type "bpchar". All fields are combined with logical 'AND'. */
 export type Bpchar_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['bpchar']>;
@@ -3580,12 +3739,16 @@ export enum Lookup_App_Material_Request_Type_Constraint {
 }
 
 export enum Lookup_App_Material_Request_Type_Enum {
+  Education = 'EDUCATION',
   /** Meer info van het materiaal */
   MoreInfo = 'MORE_INFO',
+  Other = 'OTHER',
+  PrivateResearch = 'PRIVATE_RESEARCH',
   /** Hergebruik van materiaal */
   Reuse = 'REUSE',
   /** Bekijken van het materiaal */
-  View = 'VIEW'
+  View = 'VIEW',
+  Work = 'WORK'
 }
 
 /** Boolean expression to compare columns of type "lookup_app_material_request_type_enum". All fields are combined with logical 'AND'. */
@@ -3773,6 +3936,135 @@ export type Lookup_App_Notification_Type_Set_Input = {
 
 /** update columns of table "lookup.app_notification_type" */
 export enum Lookup_App_Notification_Type_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** Contains the list of languages that the hetarchief website is translated into. For now only NL and EN */
+export type Lookup_Languages = {
+  __typename?: 'lookup_languages';
+  comment: Scalars['String'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "lookup.languages" */
+export type Lookup_Languages_Aggregate = {
+  __typename?: 'lookup_languages_aggregate';
+  aggregate?: Maybe<Lookup_Languages_Aggregate_Fields>;
+  nodes: Array<Lookup_Languages>;
+};
+
+/** aggregate fields of "lookup.languages" */
+export type Lookup_Languages_Aggregate_Fields = {
+  __typename?: 'lookup_languages_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Lookup_Languages_Max_Fields>;
+  min?: Maybe<Lookup_Languages_Min_Fields>;
+};
+
+
+/** aggregate fields of "lookup.languages" */
+export type Lookup_Languages_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.languages". All fields are combined with a logical 'AND'. */
+export type Lookup_Languages_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_Languages_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_Languages_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_Languages_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.languages" */
+export enum Lookup_Languages_Constraint {
+  /** unique or primary key constraint */
+  LanguagesPkey = 'languages_pkey'
+}
+
+export enum Lookup_Languages_Enum {
+  /** English */
+  En = 'EN',
+  /** Nederlands */
+  Nl = 'NL'
+}
+
+/** Boolean expression to compare columns of type "lookup_languages_enum". All fields are combined with logical 'AND'. */
+export type Lookup_Languages_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Lookup_Languages_Enum>;
+  _in?: InputMaybe<Array<Lookup_Languages_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Lookup_Languages_Enum>;
+  _nin?: InputMaybe<Array<Lookup_Languages_Enum>>;
+};
+
+/** input type for inserting data into table "lookup.languages" */
+export type Lookup_Languages_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Lookup_Languages_Max_Fields = {
+  __typename?: 'lookup_languages_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_Languages_Min_Fields = {
+  __typename?: 'lookup_languages_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "lookup.languages" */
+export type Lookup_Languages_Mutation_Response = {
+  __typename?: 'lookup_languages_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_Languages>;
+};
+
+/** on_conflict condition type for table "lookup.languages" */
+export type Lookup_Languages_On_Conflict = {
+  constraint: Lookup_Languages_Constraint;
+  update_columns?: Array<Lookup_Languages_Update_Column>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.languages". */
+export type Lookup_Languages_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup_languages */
+export type Lookup_Languages_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "lookup.languages" */
+export enum Lookup_Languages_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "lookup.languages" */
+export type Lookup_Languages_Set_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "lookup.languages" */
+export enum Lookup_Languages_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
@@ -6676,6 +6968,10 @@ export type Mutation_Root = {
   delete_app_notification?: Maybe<App_Notification_Mutation_Response>;
   /** delete single row from the table: "app.notification" */
   delete_app_notification_by_pk?: Maybe<App_Notification>;
+  /** delete data from the table: "app.translations" */
+  delete_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** delete single row from the table: "app.translations" */
+  delete_app_translations_by_pk?: Maybe<App_Translations>;
   /** delete data from the table: "graph.mh_records" */
   delete_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
   /** delete single row from the table: "graph.mh_records" */
@@ -6700,6 +6996,10 @@ export type Mutation_Root = {
   delete_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_notification_type" */
   delete_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** delete data from the table: "lookup.languages" */
+  delete_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** delete single row from the table: "lookup.languages" */
+  delete_lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** delete data from the table: "lookup.maintainer_visitor_space_request_access_type" */
   delete_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.maintainer_visitor_space_request_access_type" */
@@ -6852,6 +7152,10 @@ export type Mutation_Root = {
   insert_app_notification?: Maybe<App_Notification_Mutation_Response>;
   /** insert a single row into the table: "app.notification" */
   insert_app_notification_one?: Maybe<App_Notification>;
+  /** insert data into the table: "app.translations" */
+  insert_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** insert a single row into the table: "app.translations" */
+  insert_app_translations_one?: Maybe<App_Translations>;
   /** insert data into the table: "graph.mh_records" */
   insert_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
   /** insert a single row into the table: "graph.mh_records" */
@@ -6876,6 +7180,10 @@ export type Mutation_Root = {
   insert_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_notification_type" */
   insert_lookup_app_notification_type_one?: Maybe<Lookup_App_Notification_Type>;
+  /** insert data into the table: "lookup.languages" */
+  insert_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** insert a single row into the table: "lookup.languages" */
+  insert_lookup_languages_one?: Maybe<Lookup_Languages>;
   /** insert data into the table: "lookup.maintainer_visitor_space_request_access_type" */
   insert_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.maintainer_visitor_space_request_access_type" */
@@ -7028,6 +7336,10 @@ export type Mutation_Root = {
   update_app_notification?: Maybe<App_Notification_Mutation_Response>;
   /** update single row of the table: "app.notification" */
   update_app_notification_by_pk?: Maybe<App_Notification>;
+  /** update data of the table: "app.translations" */
+  update_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** update single row of the table: "app.translations" */
+  update_app_translations_by_pk?: Maybe<App_Translations>;
   /** update data of the table: "graph.mh_records" */
   update_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
   /** update single row of the table: "graph.mh_records" */
@@ -7052,6 +7364,10 @@ export type Mutation_Root = {
   update_lookup_app_notification_type?: Maybe<Lookup_App_Notification_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_notification_type" */
   update_lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** update data of the table: "lookup.languages" */
+  update_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** update single row of the table: "lookup.languages" */
+  update_lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** update data of the table: "lookup.maintainer_visitor_space_request_access_type" */
   update_lookup_maintainer_visitor_space_request_access_type?: Maybe<Lookup_Maintainer_Visitor_Space_Request_Access_Type_Mutation_Response>;
   /** update single row of the table: "lookup.maintainer_visitor_space_request_access_type" */
@@ -7288,6 +7604,20 @@ export type Mutation_RootDelete_App_Notification_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_App_TranslationsArgs = {
+  where: App_Translations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  location: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Graph_Mh_RecordsArgs = {
   where: Graph_Mh_Records_Bool_Exp;
 };
@@ -7355,6 +7685,18 @@ export type Mutation_RootDelete_Lookup_App_Notification_TypeArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Lookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_LanguagesArgs = {
+  where: Lookup_Languages_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Languages_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -7837,6 +8179,20 @@ export type Mutation_RootInsert_App_Notification_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_App_TranslationsArgs = {
+  objects: Array<App_Translations_Insert_Input>;
+  on_conflict?: InputMaybe<App_Translations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Translations_OneArgs = {
+  object: App_Translations_Insert_Input;
+  on_conflict?: InputMaybe<App_Translations_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Graph_Mh_RecordsArgs = {
   objects: Array<Graph_Mh_Records_Insert_Input>;
   on_conflict?: InputMaybe<Graph_Mh_Records_On_Conflict>;
@@ -7917,6 +8273,20 @@ export type Mutation_RootInsert_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootInsert_Lookup_App_Notification_Type_OneArgs = {
   object: Lookup_App_Notification_Type_Insert_Input;
   on_conflict?: InputMaybe<Lookup_App_Notification_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_LanguagesArgs = {
+  objects: Array<Lookup_Languages_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_Languages_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Languages_OneArgs = {
+  object: Lookup_Languages_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_Languages_On_Conflict>;
 };
 
 
@@ -8517,6 +8887,20 @@ export type Mutation_RootUpdate_App_Notification_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_App_TranslationsArgs = {
+  _set?: InputMaybe<App_Translations_Set_Input>;
+  where: App_Translations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Translations_By_PkArgs = {
+  _set?: InputMaybe<App_Translations_Set_Input>;
+  pk_columns: App_Translations_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Graph_Mh_RecordsArgs = {
   _append?: InputMaybe<Graph_Mh_Records_Append_Input>;
   _delete_at_path?: InputMaybe<Graph_Mh_Records_Delete_At_Path_Input>;
@@ -8609,6 +8993,20 @@ export type Mutation_RootUpdate_Lookup_App_Notification_TypeArgs = {
 export type Mutation_RootUpdate_Lookup_App_Notification_Type_By_PkArgs = {
   _set?: InputMaybe<Lookup_App_Notification_Type_Set_Input>;
   pk_columns: Lookup_App_Notification_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_LanguagesArgs = {
+  _set?: InputMaybe<Lookup_Languages_Set_Input>;
+  where: Lookup_Languages_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Languages_By_PkArgs = {
+  _set?: InputMaybe<Lookup_Languages_Set_Input>;
+  pk_columns: Lookup_Languages_Pk_Columns_Input;
 };
 
 
@@ -11031,6 +11429,12 @@ export type Query_Root = {
   app_notification_aggregate: App_Notification_Aggregate;
   /** fetch data from the table: "app.notification" using primary key columns */
   app_notification_by_pk?: Maybe<App_Notification>;
+  /** fetch data from the table: "app.translations" */
+  app_translations: Array<App_Translations>;
+  /** fetch aggregated fields from the table: "app.translations" */
+  app_translations_aggregate: App_Translations_Aggregate;
+  /** fetch data from the table: "app.translations" using primary key columns */
+  app_translations_by_pk?: Maybe<App_Translations>;
   /** fetch data from the table: "graph.mh_records" */
   graph_mh_records: Array<Graph_Mh_Records>;
   /** fetch aggregated fields from the table: "graph.mh_records" */
@@ -11067,6 +11471,12 @@ export type Query_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** fetch data from the table: "lookup.languages" */
+  lookup_languages: Array<Lookup_Languages>;
+  /** fetch aggregated fields from the table: "lookup.languages" */
+  lookup_languages_aggregate: Lookup_Languages_Aggregate;
+  /** fetch data from the table: "lookup.languages" using primary key columns */
+  lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" */
   lookup_maintainer_visitor_space_request_access_type: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_access_type" */
@@ -11488,6 +11898,31 @@ export type Query_RootApp_Notification_By_PkArgs = {
 };
 
 
+export type Query_RootApp_TranslationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Translations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  location: Scalars['String'];
+};
+
+
 export type Query_RootGraph_Mh_RecordsArgs = {
   distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -11622,6 +12057,29 @@ export type Query_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Query_RootLookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Query_RootLookup_LanguagesArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Languages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Languages_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -12422,6 +12880,12 @@ export type Subscription_Root = {
   app_notification_aggregate: App_Notification_Aggregate;
   /** fetch data from the table: "app.notification" using primary key columns */
   app_notification_by_pk?: Maybe<App_Notification>;
+  /** fetch data from the table: "app.translations" */
+  app_translations: Array<App_Translations>;
+  /** fetch aggregated fields from the table: "app.translations" */
+  app_translations_aggregate: App_Translations_Aggregate;
+  /** fetch data from the table: "app.translations" using primary key columns */
+  app_translations_by_pk?: Maybe<App_Translations>;
   /** fetch data from the table: "graph.mh_records" */
   graph_mh_records: Array<Graph_Mh_Records>;
   /** fetch aggregated fields from the table: "graph.mh_records" */
@@ -12458,6 +12922,12 @@ export type Subscription_Root = {
   lookup_app_notification_type_aggregate: Lookup_App_Notification_Type_Aggregate;
   /** fetch data from the table: "lookup.app_notification_type" using primary key columns */
   lookup_app_notification_type_by_pk?: Maybe<Lookup_App_Notification_Type>;
+  /** fetch data from the table: "lookup.languages" */
+  lookup_languages: Array<Lookup_Languages>;
+  /** fetch aggregated fields from the table: "lookup.languages" */
+  lookup_languages_aggregate: Lookup_Languages_Aggregate;
+  /** fetch data from the table: "lookup.languages" using primary key columns */
+  lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** fetch data from the table: "lookup.maintainer_visitor_space_request_access_type" */
   lookup_maintainer_visitor_space_request_access_type: Array<Lookup_Maintainer_Visitor_Space_Request_Access_Type>;
   /** fetch aggregated fields from the table: "lookup.maintainer_visitor_space_request_access_type" */
@@ -12879,6 +13349,31 @@ export type Subscription_RootApp_Notification_By_PkArgs = {
 };
 
 
+export type Subscription_RootApp_TranslationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Translations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  location: Scalars['String'];
+};
+
+
 export type Subscription_RootGraph_Mh_RecordsArgs = {
   distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -13013,6 +13508,29 @@ export type Subscription_RootLookup_App_Notification_Type_AggregateArgs = {
 
 
 export type Subscription_RootLookup_App_Notification_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootLookup_LanguagesArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Languages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Languages_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -16775,6 +17293,11 @@ export type GetFirstObjectIdQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetFirstObjectIdQuery = { __typename?: 'query_root', object_ie: Array<{ __typename?: 'object_ie', schema_identifier: string }> };
 
+export type GetAllLanguagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllLanguagesQuery = { __typename?: 'query_root', lookup_languages: Array<{ __typename?: 'lookup_languages', value: string, comment: string }> };
+
 export type GetUserGroupsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -16875,6 +17398,7 @@ export const GetThumbnailUrlByIdDocument = {"kind":"Document","definitions":[{"k
 export const GetSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_config_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetSiteVariableByNameQuery, GetSiteVariableByNameQueryVariables>;
 export const UpdateSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_config_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_config"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateSiteVariableByNameMutation, UpdateSiteVariableByNameMutationVariables>;
 export const GetFirstObjectIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFirstObjectId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"object_ie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}}]}}]}}]} as unknown as DocumentNode<GetFirstObjectIdQuery, GetFirstObjectIdQueryVariables>;
+export const GetAllLanguagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllLanguages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_languages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"comment"}}]}}]}}]} as unknown as DocumentNode<GetAllLanguagesQuery, GetAllLanguagesQueryVariables>;
 export const GetUserGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsQuery, GetUserGroupsQueryVariables>;
 export const GetUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroupsPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsPermissionsQuery, GetUserGroupsPermissionsQueryVariables>;
 export const UpdateUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateUserGroupsPermissions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permission_insert_input"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permission_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_users_group_permission"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"insert_users_group_permission"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}}},{"kind":"Argument","name":{"kind":"Name","value":"on_conflict"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"constraint"},"value":{"kind":"EnumValue","value":"group_permission_group_id_permission_id_key"}},{"kind":"ObjectField","name":{"kind":"Name","value":"update_columns"},"value":{"kind":"ListValue","values":[]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateUserGroupsPermissionsMutation, UpdateUserGroupsPermissionsMutationVariables>;

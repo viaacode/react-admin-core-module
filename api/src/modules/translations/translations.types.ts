@@ -5,3 +5,8 @@ export const TranslationKey = {
 };
 
 export type Translations = Record<string, string>;
+
+export interface LanguageInfo {
+	languageCode: string;
+	languageLabel: string;
+}

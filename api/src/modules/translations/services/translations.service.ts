@@ -1,5 +1,10 @@
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { DataService } from '../../data';
+import {
+	GetAllLanguagesDocument,
+	GetAllLanguagesQuery,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import {
 	getTranslationFallback,
@@ -7,11 +12,12 @@ import {
 } from '../../shared/helpers/translation-fallback';
 import { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { LanguageInfo } from '../translations.types';
 
-import { TranslationKey } from '../types';
+import { TranslationKey } from '../translations.types';
 
 import { SiteVariablesService } from '../../site-variables';
-import { Translations } from '../types';
+import { Translations } from '../translations.types';
 import { UpdateResponse } from '../../shared/types/types';
 
 @Injectable()
@@ -20,8 +26,21 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	constructor(
 		private siteVariablesService: SiteVariablesService,
+		private dataService: DataService,
 		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {}
+
+	public async getLanguages(): Promise<LanguageInfo[]> {
+		const response = await this.dataService.execute<GetAllLanguagesQuery>(
+			GetAllLanguagesDocument
+		);
+		return response.lookup_languages.map(
+			(language): LanguageInfo => ({
+				languageCode: language.value,
+				languageLabel: language.comment,
+			})
+		);
+	}
 
 	public async getTranslations(): Promise<Record<string, Record<string, string>>> {
 		const [translationsFrontend, translationsAdminCore, translationsBackend] =
