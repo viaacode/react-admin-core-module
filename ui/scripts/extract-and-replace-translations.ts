@@ -578,7 +578,7 @@ async function extractTranslations() {
 			const component = `'${translationEntry.component}'`;
 			const location = `'${translationEntry.location}'`;
 			const key = `'${translationEntry.key}'`;
-			const value = `'${translationEntry.value.replace(/'/g, "\\'")}'`;
+			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
 			const language = "'NL'";
 			return `INSERT INTO app.translations (component, location, key, value, value_type, language) VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
