@@ -1,13 +1,16 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
-import { snakeCase } from 'lodash';
 
-import { UpdateTranslationsDto } from '../dto/translations.dto';
+import { UpdateTranslationDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
-import { UpdateResponse } from '../../shared/types/types';
-import { type LanguageInfo, TranslationKey, type Translations } from '../translations.types';
+import {
+	type KeyValueTranslations,
+	LanguageCode,
+	type LanguageInfo,
+	TranslationEntry,
+} from '../translations.types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('Translations')
@@ -15,51 +18,56 @@ import { addPrefix } from '../../shared/helpers/add-route-prefix';
 export class TranslationsController {
 	constructor(private translationsService: TranslationsService) {}
 
-	@Get('nl.json')
-	public async getTranslationsJson(): Promise<Translations> {
-		return this.translationsService.getFrontendTranslations();
+	/**
+	 * Get the frontend (admin-core and frontend) translations for a specific language
+	 * This endpoint is used by the client to translate labels in the UI
+	 * @param languageCode
+	 */
+	@Get(':languageCode.json')
+	@ApiParam({
+		name: 'languageCode',
+		enum: LanguageCode,
+	})
+	public async getTranslationsJson(
+		@Param('languageCode') languageCode: LanguageCode
+	): Promise<KeyValueTranslations> {
+		return this.translationsService.getFrontendTranslations(languageCode);
 	}
 
-	@Get('frontend.json')
-	public async getFrontendTranslationsJson(): Promise<Translations> {
-		const translations = await this.translationsService.getTranslations();
-		return translations[snakeCase(TranslationKey.TRANSLATIONS_FRONTEND).toUpperCase()];
-	}
-
-	@Get('backend.json')
-	public async getBackendTranslationsJson(): Promise<Translations> {
-		const translations = await this.translationsService.getTranslations();
-		return translations[snakeCase(TranslationKey.TRANSLATIONS_BACKEND).toUpperCase()];
-	}
-
-	@Get('admin-core.json')
-	public async getAdminCoreTranslationsJson(): Promise<Translations> {
-		const translations = await this.translationsService.getTranslations();
-		return translations[snakeCase(TranslationKey.TRANSLATIONS_ADMIN_CORE).toUpperCase()];
-	}
-
+	/**
+	 * Get all language codes and their label
+	 */
 	@Get('languages')
 	public async getLanguages(): Promise<LanguageInfo[]> {
 		return this.translationsService.getLanguages();
 	}
 
+	/**
+	 * Get all translations for all languages
+	 * Mostly used to get all translations in the admin-dashboard
+	 */
 	@Get()
-	public async getTranslations(): Promise<Record<string, Record<string, string>>> {
+	public async getTranslations(): Promise<TranslationEntry[]> {
 		return this.translationsService.getTranslations();
 	}
 
+	/**
+	 * Update one translation entry value
+	 * @param newTranslation
+	 */
 	@Post()
 	@ApiOperation({
 		description:
-			'Set translations for the specified key. Careful: this overwrites all existing values.',
+			'Set the value of a single translation entry for the specified component/location/key combination',
 	})
 	@RequireAllPermissions(PermissionName.EDIT_TRANSLATIONS)
-	public async updateTranslations(
-		@Body() newTranslations: UpdateTranslationsDto
-	): Promise<UpdateResponse> {
-		return this.translationsService.updateTranslations(
-			newTranslations.key,
-			newTranslations.data
+	public async updateTranslation(@Body() newTranslation: UpdateTranslationDto): Promise<void> {
+		await this.translationsService.updateTranslation(
+			newTranslation.component,
+			newTranslation.location,
+			newTranslation.key,
+			newTranslation.languageCode,
+			newTranslation.value
 		);
 	}
 }

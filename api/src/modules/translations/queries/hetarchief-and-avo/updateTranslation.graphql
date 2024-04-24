@@ -1,0 +1,19 @@
+mutation updateTranslation(
+	$value: String!
+	$component: String!
+	$location: String!
+	$key: String!
+	$languageCode: lookup_languages_enum!
+) {
+	update_app_translations(
+		where: {
+			component: { _eq: $component }
+			location: { _eq: $location }
+			key: { _eq: $key }
+			language: { _eq: $languageCode }
+		}
+		_set: { value: $value }
+	) {
+		affected_rows
+	}
+}

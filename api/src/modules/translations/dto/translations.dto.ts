@@ -1,25 +1,57 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsObject, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
-import { TranslationKey } from '../translations.types';
+import { Component, Key, LanguageCode, Location } from '../translations.types';
 
-export class UpdateTranslationsDto {
+export class UpdateTranslationDto {
 	@IsString()
 	@ApiProperty({
 		required: true,
-		enum: TranslationKey,
+		enum: Component,
 		description:
-			'The translation set to be updated, possible values: ' +
-			Object.values(TranslationKey).join(', '),
+			'The component in which this translation is used. Possible values: ' +
+			Object.values(Component).join(', '),
+		example: 'BACKEND',
 	})
-	key: string;
+	component: Component;
 
-	@IsObject()
+	@IsString()
+	@ApiProperty({
+		required: true,
+		type: String,
+		description: 'The file location in which this translation occurs',
+		example: 'modules/auth/controllers/het-archief',
+	})
+	location: Location;
+
+	@IsString()
+	@ApiProperty({
+		required: true,
+		type: String,
+		description:
+			'The translation key that uniquely identifies the translation within the component and file',
+		example: 'account-configuratie',
+	})
+	key: Key;
+
+	@IsString()
+	@ApiProperty({
+		required: true,
+		enum: LanguageCode,
+		description:
+			'The language code of the current value. Possible values: ' +
+			Object.values(Lookup_Languages_Enum).join(', '),
+		example: 'EN',
+	})
+	languageCode: LanguageCode;
+
+	@IsString()
 	@ApiProperty({
 		required: true,
 		description:
 			'A key-value object where the key is the translation-key, and value is the translation itself',
-		example: { NO_PERMISSION: 'je hebt geen toegang' },
+		example: 'new translation value',
 	})
-	data: Record<string, string>;
+	value: string;
 }
