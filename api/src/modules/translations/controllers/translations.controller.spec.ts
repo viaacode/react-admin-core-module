@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { TranslationsService } from '../services/translations.service';
-import { TranslationKey } from '../types';
+import { TranslationKey } from '../translations.types';
 
 import { TranslationsController } from './translations.controller';
 

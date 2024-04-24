@@ -7,7 +7,7 @@ import { UpdateTranslationsDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
 import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import { UpdateResponse } from '../../shared/types/types';
-import { TranslationKey, Translations } from '../types';
+import { type LanguageInfo, TranslationKey, type Translations } from '../translations.types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('Translations')
@@ -36,6 +36,11 @@ export class TranslationsController {
 	public async getAdminCoreTranslationsJson(): Promise<Translations> {
 		const translations = await this.translationsService.getTranslations();
 		return translations[snakeCase(TranslationKey.TRANSLATIONS_ADMIN_CORE).toUpperCase()];
+	}
+
+	@Get('languages')
+	public async getLanguages(): Promise<LanguageInfo[]> {
+		return this.translationsService.getLanguages();
 	}
 
 	@Get()

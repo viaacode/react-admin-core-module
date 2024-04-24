@@ -1,0 +1,6 @@
+query getAllLanguages {
+	lookup_languages {
+		value
+		comment
+	}
+}

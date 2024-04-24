@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { TranslationKey } from '../types';
+import { TranslationKey } from '../translations.types';
 
 import { TranslationsService } from './translations.service';
 
