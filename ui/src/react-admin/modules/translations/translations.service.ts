@@ -37,14 +37,14 @@ export class TranslationsService {
 	 * @param component
 	 * @param location
 	 * @param key
-	 * @param language
+	 * @param languageCode
 	 * @param value
 	 */
 	static async updateTranslation(
 		component: Component,
 		location: Location,
 		key: Key,
-		language: LanguageCode,
+		languageCode: LanguageCode,
 		value: string
 	) {
 		try {
@@ -54,7 +54,7 @@ export class TranslationsService {
 					component,
 					location,
 					key,
-					language,
+					languageCode,
 					value,
 				}),
 			});
@@ -64,7 +64,7 @@ export class TranslationsService {
 				component,
 				location,
 				key,
-				language,
+				languageCode,
 				value,
 			});
 		}

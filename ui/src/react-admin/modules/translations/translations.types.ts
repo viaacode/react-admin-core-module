@@ -41,6 +41,6 @@ export interface MultiLanguageTranslationEntry {
 }
 
 export interface LanguageInfo {
-	languageCode: string;
+	languageCode: LanguageCode;
 	languageLabel: string;
 }

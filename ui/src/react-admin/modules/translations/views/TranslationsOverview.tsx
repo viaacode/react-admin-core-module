@@ -7,10 +7,10 @@ import {
 	TextInput,
 } from '@meemoo/react-components';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
-import { orderBy } from 'lodash-es';
+import { orderBy, reverse, sortBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
-	MouseEvent,
+	ReactElement,
 	ReactNode,
 	useCallback,
 	useEffect,
@@ -18,7 +18,7 @@ import React, {
 	useState,
 } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { Row, TableOptions } from 'react-table';
+import { type Row, type TableOptions } from 'react-table';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
@@ -45,6 +45,8 @@ import { getFullKey } from '../helpers/get-full-key';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 
 import './TranslationsOverview.scss';
+
+type OrderProp = `value_${LanguageCode}` | 'id';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
@@ -79,7 +81,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 
 	const [search, setSearch] = useState<string>('');
 	const [page, setPage] = useState<number>(1);
-	const [orderProp, setOrderProp] = useState<string | undefined>(undefined);
+	const [orderProp, setOrderProp] = useState<OrderProp | undefined>(undefined);
 	const [orderDirection, setOrderDirection] = useState<OrderDirection>(OrderDirection.asc);
 
 	const pageCount: number = Math.ceil(filteredTranslationsCount / TRANSLATIONS_PER_PAGE);
@@ -99,14 +101,25 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		);
 		setFilteredTranslationsCount(filteredTranslations.length);
 
-		const orderedTranslations: MultiLanguageTranslationEntry[] = orderBy(
+		let sortedTranslations: MultiLanguageTranslationEntry[] = sortBy(
 			filteredTranslations,
-			[orderProp],
-			[orderDirection as OrderDirection]
+			(translationEntry: MultiLanguageTranslationEntry) => {
+				if (orderProp === 'id') {
+					return getFullKey(translationEntry);
+				}
+				if (orderProp) {
+					const languageCode = orderProp.split('_')[1] as LanguageCode;
+					return translationEntry.values[languageCode];
+				}
+				return undefined;
+			}
 		);
-		const paginatedTranslations: MultiLanguageTranslationEntry[] = orderedTranslations.slice(
+		if (orderDirection === OrderDirection.desc) {
+			sortedTranslations = reverse(sortedTranslations);
+		}
+		const paginatedTranslations: MultiLanguageTranslationEntry[] = sortedTranslations.slice(
 			(page - 1) * TRANSLATIONS_PER_PAGE,
-			Math.min(orderedTranslations?.length || 0, page * TRANSLATIONS_PER_PAGE)
+			Math.min(sortedTranslations?.length || 0, page * TRANSLATIONS_PER_PAGE)
 		);
 		setFilteredAndPaginatedTranslations(paginatedTranslations);
 	}, [allTranslationEntries, orderProp, orderDirection, page, search]);
@@ -174,7 +187,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const handleSortChange = useCallback(
 		(newOrderProp: string | undefined, newOrderDirection: OrderDirection | undefined) => {
 			if (newOrderProp !== orderProp || newOrderDirection !== orderDirection) {
-				setOrderProp(newOrderProp);
+				setOrderProp(newOrderProp as OrderProp | undefined);
 				setOrderDirection(newOrderDirection || OrderDirection.asc);
 				setPage(1);
 			}
@@ -188,6 +201,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		languageCode: LanguageCode
 	) => {
 		setActiveTranslationEntry(translationEntry);
+		setActiveTranslationTextValue(translationEntry.values[languageCode]);
 		setActiveTranslationLanguage(languageCode);
 	};
 
@@ -239,8 +253,11 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const translationTableColumns = [
 		{
 			id: 'key',
-			Header: tHtml('modules/translations/views/translations-overview-v-2___id'),
-			Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }) => {
+			Header: tHtml('modules/translations/views/translations-overview-v-2___id') as any,
+			canSort: true,
+			accessorFn: (translationEntry: MultiLanguageTranslationEntry) =>
+				getFullKey(translationEntry),
+			Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }): ReactElement => {
 				const translationEntry: MultiLanguageTranslationEntry = row.original;
 				return (
 					<>
@@ -258,7 +275,10 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 			return {
 				id: 'value_' + languageInfo.languageCode,
 				Header: languageInfo.languageLabel,
-				Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }) => {
+				canSort: true,
+				accessorFn: (translationEntry: MultiLanguageTranslationEntry) =>
+					translationEntry.values[languageInfo.languageCode],
+				Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }): ReactElement => {
 					const translationEntry = row.original;
 					const value =
 						translationEntry.values[languageInfo.languageCode as LanguageCode];
@@ -360,7 +380,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				{activeTranslationEntry.value_type === ValueType.TEXT && (
 					<textarea
 						className="c-translation-overview__textarea"
-						value={activeTranslationEntry.values[activeTranslationLanguage]}
+						value={activeTranslationTextValue || undefined}
 						onChange={(evt) => setActiveTranslationTextValue(evt.target.value)}
 					></textarea>
 				)}
