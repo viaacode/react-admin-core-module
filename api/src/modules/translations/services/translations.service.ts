@@ -7,12 +7,18 @@ import { DataService } from '../../data';
 import {
 	GetAllLanguagesDocument,
 	GetAllLanguagesQuery,
+	GetTranslationByComponentLocationKeyDocument,
+	GetTranslationByComponentLocationKeyQuery,
+	GetTranslationByComponentLocationKeyQueryVariables,
 	GetTranslationsByComponentsAndLanguagesDocument,
 	GetTranslationsByComponentsAndLanguagesQuery,
 	GetTranslationsByComponentsAndLanguagesQueryVariables,
 	GetTranslationsByComponentsDocument,
 	GetTranslationsByComponentsQuery,
 	GetTranslationsByComponentsQueryVariables,
+	InsertTranslationDocument,
+	InsertTranslationMutation,
+	InsertTranslationMutationVariables,
 	UpdateTranslationDocument,
 	UpdateTranslationMutation,
 	UpdateTranslationMutationVariables,
@@ -100,19 +106,43 @@ export class TranslationsService implements OnApplicationBootstrap {
 		value: string
 	): Promise<void> {
 		try {
-			await this.dataService.execute<
-				UpdateTranslationMutation,
-				UpdateTranslationMutationVariables
-			>(UpdateTranslationDocument, {
+			const existingEntries = await this.getTranslationsByComponentLocationKey(
 				component,
 				location,
-				key,
-				languageCode,
-				value,
-			});
+				key
+			);
+			if (existingEntries.find((entry) => entry.language === languageCode)) {
+				// Update entry
+				await this.dataService.execute<
+					UpdateTranslationMutation,
+					UpdateTranslationMutationVariables
+				>(UpdateTranslationDocument, {
+					component,
+					location,
+					key,
+					languageCode,
+					value,
+				});
+			} else {
+				// Insert entry (eg: for missing EN entry where NL entry already exists
+				await this.dataService.execute<
+					InsertTranslationMutation,
+					InsertTranslationMutationVariables
+				>(InsertTranslationDocument, {
+					component,
+					location,
+					key,
+					languageCode,
+					value,
+					value_type:
+						existingEntries.find((entry) => entry.language === 'NL')?.value_type ||
+						'TEXT',
+				});
+			}
+
 			await this.cacheManager.reset();
 		} catch (err: any) {
-			throw CustomError('Failed to update translation', err, {
+			throw CustomError('Failed to insert or update the translation', err, {
 				component,
 				location,
 				key,
@@ -155,17 +185,20 @@ export class TranslationsService implements OnApplicationBootstrap {
 			>(GetTranslationsByComponentsAndLanguagesDocument, { components, languageCodes });
 		}
 
-		return response.app_translations.map(
-			(translationEntry): TranslationEntry => ({
-				app: isAvo() ? App.AVO : App.HET_ARCHIEF,
-				component: translationEntry.component as Component,
-				location: translationEntry.location,
-				key: translationEntry.key,
-				language: translationEntry.language,
-				value: translationEntry.value,
-				value_type: translationEntry.value_type as ValueType,
-			})
-		);
+		return response.app_translations.map(this.adapt);
+	}
+
+	public async getTranslationsByComponentLocationKey(
+		component: Component,
+		location: Location,
+		key: Key
+	): Promise<TranslationEntry[]> {
+		const response = await this.dataService.execute<
+			GetTranslationByComponentLocationKeyQuery,
+			GetTranslationByComponentLocationKeyQueryVariables
+		>(GetTranslationByComponentLocationKeyDocument, { component, location, key });
+
+		return response.app_translations.map(this.adapt);
 	}
 
 	public async getFrontendTranslations(
@@ -209,5 +242,19 @@ export class TranslationsService implements OnApplicationBootstrap {
 			return resolveTranslationVariables(translation, variables);
 		}
 		return getTranslationFallback(key, variables);
+	}
+
+	private adapt(
+		translationEntry: GetTranslationsByComponentsQuery['app_translations'][0]
+	): TranslationEntry {
+		return {
+			app: isAvo() ? App.AVO : App.HET_ARCHIEF,
+			component: translationEntry.component as Component,
+			location: translationEntry.location,
+			key: translationEntry.key,
+			language: translationEntry.language,
+			value: translationEntry.value,
+			value_type: translationEntry.value_type as ValueType,
+		};
 	}
 }

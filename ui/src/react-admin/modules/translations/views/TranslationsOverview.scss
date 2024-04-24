@@ -4,3 +4,11 @@
 	text-align: left;
 	border: 0;
 }
+
+.c-translations-overview .c-table td button {
+	min-height: 4.5rem;
+
+	&:hover {
+		background-color: #adadad;
+	}
+}
