@@ -143,7 +143,9 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				activeTranslationEntry.location,
 				activeTranslationEntry.key,
 				activeTranslationLanguage,
-				activeTranslationTextValue || activeTranslationEditorState?.toHTML() || ''
+				activeTranslationEntry.value_type === ValueType.TEXT
+					? activeTranslationTextValue || ''
+					: activeTranslationEditorState?.toHTML() || ''
 			);
 
 			await refetchTranslations();
