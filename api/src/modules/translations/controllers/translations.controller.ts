@@ -9,7 +9,7 @@ import {
 	type KeyValueTranslations,
 	LanguageCode,
 	type LanguageInfo,
-	TranslationEntry,
+	MultiLanguageTranslationEntry,
 } from '../translations.types';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
@@ -47,27 +47,29 @@ export class TranslationsController {
 	 * Mostly used to get all translations in the admin-dashboard
 	 */
 	@Get()
-	public async getTranslations(): Promise<TranslationEntry[]> {
+	public async getTranslations(): Promise<MultiLanguageTranslationEntry[]> {
 		return this.translationsService.getTranslations();
 	}
 
 	/**
-	 * Update one translation entry value
-	 * @param newTranslation
+	 * Update or inserts one translation entry value
+	 * @param updatedTranslation
 	 */
 	@Post()
 	@ApiOperation({
 		description:
-			'Set the value of a single translation entry for the specified component/location/key combination',
+			"Set the value of a single translation entry for the specified component/location/key combination or creates the entry if it doesn't exist",
 	})
 	@RequireAllPermissions(PermissionName.EDIT_TRANSLATIONS)
-	public async updateTranslation(@Body() newTranslation: UpdateTranslationDto): Promise<void> {
-		await this.translationsService.updateTranslation(
-			newTranslation.component,
-			newTranslation.location,
-			newTranslation.key,
-			newTranslation.languageCode,
-			newTranslation.value
+	public async updateTranslation(
+		@Body() updatedTranslation: UpdateTranslationDto
+	): Promise<void> {
+		await this.translationsService.upsertTranslation(
+			updatedTranslation.component,
+			updatedTranslation.location,
+			updatedTranslation.key,
+			updatedTranslation.languageCode,
+			updatedTranslation.value
 		);
 	}
 }

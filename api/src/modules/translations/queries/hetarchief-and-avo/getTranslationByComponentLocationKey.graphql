@@ -1,0 +1,12 @@
+query getTranslationByComponentLocationKey($component: String!, $location: String!, $key: String!) {
+	app_translations(
+		where: { component: { _eq: $component }, location: { _eq: $location }, key: { _eq: $key } }
+	) {
+		component
+		location
+		key
+		language
+		value
+		value_type
+	}
+}

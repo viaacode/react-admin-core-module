@@ -23,47 +23,22 @@ We can now input the src/modules/shared/translations/.../nl.json files into thei
  */
 
 import { mapLimit } from 'blend-promise-utils';
+import { execSync } from 'child_process';
 import * as fs from 'fs/promises';
 import * as glob from 'glob';
 import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash';
 import * as path from 'path';
+import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
+import {
+	App,
+	Component,
+	LanguageCode,
+	TRANSLATION_SEPARATOR,
+	TranslationEntry,
+	ValueType,
+} from '../src/react-admin/modules/translations/translations.core.types';
 
 import { executeDatabaseQuery } from './execute-database-query';
-import { execSync } from 'child_process';
-
-const TRANSLATION_SEPARATOR = '___';
-
-enum App {
-	AVO = 'AVO',
-	HET_ARCHIEF = 'HET_ARCHIEF',
-}
-enum Component {
-	ADMIN_CORE = 'ADMIN_CORE',
-	FRONTEND = 'FRONTEND',
-	BACKEND = 'BACKEND',
-}
-type Location = string;
-type Key = string;
-
-enum ValueType {
-	TEXT = 'TEXT',
-	HTML = 'HTML',
-}
-
-interface TranslationEntry {
-	app: App;
-	component: Component;
-	location: string;
-	key: string;
-	value: string;
-	value_type: ValueType | null;
-}
-
-function getFullKey(
-	translationEntry: TranslationEntry
-): `${App}${typeof TRANSLATION_SEPARATOR}${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
-	return `${translationEntry.app}${TRANSLATION_SEPARATOR}${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
-}
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
@@ -206,6 +181,7 @@ async function extractTranslationsFromCodeFiles(
 							component,
 							location,
 							key,
+							language: LanguageCode.NL,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
@@ -272,6 +248,7 @@ query getAllOldTranslations {
 				component: nameToComponent[componentTranslation.name],
 				location: keyValuePair[0].split(TRANSLATION_SEPARATOR)[0],
 				key: keyValuePair[0].split(TRANSLATION_SEPARATOR)[1],
+				language: LanguageCode.NL,
 				value: keyValuePair[1],
 				value_type: null,
 			};
@@ -389,6 +366,7 @@ async function combineTranslations(
 				onlineTranslation?.location ||
 				nlJsonTranslation?.location,
 			key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
+			language: LanguageCode.NL, // All source code translations are dutch
 			value:
 				onlineTranslation?.value ||
 				nlJsonTranslation?.value ||
@@ -443,6 +421,7 @@ async function updateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
+					language: LanguageCode.NL,
 					value: entry[1],
 					value_type: null,
 				};
@@ -581,7 +560,7 @@ async function extractTranslations() {
 			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
 			const language = "'NL'";
-			return `INSERT INTO app.translations (component, location, key, value, value_type, language) VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
+			return `INSERT INTO app.translations (component, location, key, value, value_type, language) VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
 		.join('\n');

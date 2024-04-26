@@ -1,5 +1,13 @@
 import { ReactNode } from 'react';
 import { DefaultProps } from '@viaa/avo2-components';
+import {
+	App,
+	Component,
+	Key,
+	LanguageCode,
+	Location,
+	ValueType,
+} from '~modules/translations/translations.core.types';
 
 export interface Translation {
 	key: string; // Key in translation object in the database
@@ -22,4 +30,17 @@ export enum TranslationContextName {
 	TRANSLATIONS_FRONTEND = 'TRANSLATIONS_FRONTEND',
 	TRANSLATIONS_BACKEND = 'TRANSLATIONS_BACKEND',
 	TRANSLATIONS_ADMIN_CORE = 'TRANSLATIONS_ADMIN_CORE',
+}
+
+export interface MultiLanguageTranslationEntry {
+	component: Component;
+	location: Location;
+	key: Key;
+	values: Record<LanguageCode, string>;
+	value_type: ValueType | null;
+}
+
+export interface LanguageInfo {
+	languageCode: LanguageCode;
+	languageLabel: string;
 }

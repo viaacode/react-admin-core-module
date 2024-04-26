@@ -1,0 +1,23 @@
+mutation insertTranslation(
+	$component: String!
+	$location: String!
+	$key: String!
+	$languageCode: lookup_languages_enum!
+	$value: String!
+	$value_type: String!
+) {
+	insert_app_translations(
+		objects: [
+			{
+				component: $component
+				location: $location
+				key: $key
+				language: $languageCode
+				value: $value
+				value_type: $value_type
+			}
+		]
+	) {
+		affected_rows
+	}
+}

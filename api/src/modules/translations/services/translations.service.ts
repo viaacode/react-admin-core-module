@@ -2,17 +2,23 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { Cache } from 'cache-manager';
-import { isEmpty, sortBy } from 'lodash';
+import { groupBy, isEmpty, sortBy } from 'lodash';
 import { DataService } from '../../data';
 import {
 	GetAllLanguagesDocument,
 	GetAllLanguagesQuery,
+	GetTranslationByComponentLocationKeyDocument,
+	GetTranslationByComponentLocationKeyQuery,
+	GetTranslationByComponentLocationKeyQueryVariables,
 	GetTranslationsByComponentsAndLanguagesDocument,
 	GetTranslationsByComponentsAndLanguagesQuery,
 	GetTranslationsByComponentsAndLanguagesQueryVariables,
 	GetTranslationsByComponentsDocument,
 	GetTranslationsByComponentsQuery,
 	GetTranslationsByComponentsQueryVariables,
+	InsertTranslationDocument,
+	InsertTranslationMutation,
+	InsertTranslationMutationVariables,
 	UpdateTranslationDocument,
 	UpdateTranslationMutation,
 	UpdateTranslationMutationVariables,
@@ -31,6 +37,7 @@ import {
 	LanguageCode,
 	LanguageInfo,
 	Location,
+	MultiLanguageTranslationEntry,
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 	ValueType,
@@ -59,17 +66,112 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public getFullKey(
 		translationEntry: TranslationEntry
-	): `${App}${typeof TRANSLATION_SEPARATOR}${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
-		return `${translationEntry.app}${TRANSLATION_SEPARATOR}${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
+	): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+		return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 	}
 
-	public async getTranslations(): Promise<TranslationEntry[]> {
+	public async getTranslations(): Promise<MultiLanguageTranslationEntry[]> {
 		const translationEntries: TranslationEntry[] = await this.getTranslationsByComponent([
 			Component.ADMIN_CORE,
 			Component.FRONTEND,
 			Component.BACKEND,
 		]);
-		return sortBy(translationEntries, this.getFullKey);
+		const groupedByKey: [string, TranslationEntry[]][] = Object.entries(
+			groupBy(translationEntries, this.getFullKey)
+		);
+		const multiLanguageTranslationEntries: MultiLanguageTranslationEntry[] = groupedByKey.map(
+			(translationEntryPair): MultiLanguageTranslationEntry => {
+				return {
+					component: translationEntryPair[1][0].component,
+					location: translationEntryPair[1][0].location,
+					key: translationEntryPair[1][0].key,
+					value_type: translationEntryPair[1][0].value_type,
+					values: Object.fromEntries(
+						translationEntryPair[1].map((t) => [t.language, t.value])
+					) as Record<LanguageCode, string>,
+				};
+			}
+		);
+		return sortBy(
+			multiLanguageTranslationEntries,
+			this.getFullKey
+		) as MultiLanguageTranslationEntry[];
+	}
+
+	public async upsertTranslation(
+		component: Component,
+		location: Location,
+		key: Key,
+		languageCode: LanguageCode,
+		value: string
+	): Promise<void> {
+		try {
+			const existingEntries = await this.getTranslationsByComponentLocationKey(
+				component,
+				location,
+				key
+			);
+			if (existingEntries.find((entry) => entry.language === languageCode)) {
+				// Update entry
+				await this.updateTranslation(component, location, key, languageCode, value);
+			} else {
+				// Insert entry (eg: for missing EN entry where NL entry already exists
+				await this.insertTranslation(
+					component,
+					location,
+					key,
+					languageCode,
+					value,
+					// Use the same value_type as the dutch translation
+					existingEntries.find((entry) => entry.language === LanguageCode.Nl)
+						?.value_type || ValueType.TEXT
+				);
+			}
+
+			await this.cacheManager.reset();
+		} catch (err: any) {
+			throw CustomError('Failed to insert or update the translation', err, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
+		}
+	}
+
+	public async insertTranslation(
+		component: Component,
+		location: Location,
+		key: Key,
+		languageCode: LanguageCode,
+		value: string,
+		value_type: ValueType
+	): Promise<void> {
+		try {
+			// Insert entry (eg: for missing EN entry where NL entry already exists
+			await this.dataService.execute<
+				InsertTranslationMutation,
+				InsertTranslationMutationVariables
+			>(InsertTranslationDocument, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+				value_type,
+			});
+
+			await this.cacheManager.reset();
+		} catch (err: any) {
+			throw CustomError('Failed to insert the translation', err, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
+		}
 	}
 
 	public async updateTranslation(
@@ -90,9 +192,10 @@ export class TranslationsService implements OnApplicationBootstrap {
 				languageCode,
 				value,
 			});
+
 			await this.cacheManager.reset();
 		} catch (err: any) {
-			throw CustomError('Failed to update translation', err, {
+			throw CustomError('Failed to update the translation', err, {
 				component,
 				location,
 				key,
@@ -135,17 +238,20 @@ export class TranslationsService implements OnApplicationBootstrap {
 			>(GetTranslationsByComponentsAndLanguagesDocument, { components, languageCodes });
 		}
 
-		return response.app_translations.map(
-			(translationEntry): TranslationEntry => ({
-				app: isAvo() ? App.AVO : App.HET_ARCHIEF,
-				component: translationEntry.component as Component,
-				location: translationEntry.location,
-				key: translationEntry.key,
-				language: translationEntry.language,
-				value: translationEntry.value,
-				value_type: translationEntry.value_type as ValueType,
-			})
-		);
+		return response.app_translations.map(this.adapt);
+	}
+
+	public async getTranslationsByComponentLocationKey(
+		component: Component,
+		location: Location,
+		key: Key
+	): Promise<TranslationEntry[]> {
+		const response = await this.dataService.execute<
+			GetTranslationByComponentLocationKeyQuery,
+			GetTranslationByComponentLocationKeyQueryVariables
+		>(GetTranslationByComponentLocationKeyDocument, { component, location, key });
+
+		return response.app_translations.map(this.adapt);
 	}
 
 	public async getFrontendTranslations(
@@ -189,5 +295,19 @@ export class TranslationsService implements OnApplicationBootstrap {
 			return resolveTranslationVariables(translation, variables);
 		}
 		return getTranslationFallback(key, variables);
+	}
+
+	private adapt(
+		translationEntry: GetTranslationsByComponentsQuery['app_translations'][0]
+	): TranslationEntry {
+		return {
+			app: isAvo() ? App.AVO : App.HET_ARCHIEF,
+			component: translationEntry.component as Component,
+			location: translationEntry.location,
+			key: translationEntry.key,
+			language: translationEntry.language,
+			value: translationEntry.value,
+			value_type: translationEntry.value_type as ValueType,
+		};
 	}
 }
