@@ -98,7 +98,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		) as MultiLanguageTranslationEntry[];
 	}
 
-	public async updateTranslation(
+	public async upsertTranslation(
 		component: Component,
 		location: Location,
 		key: Key,
@@ -113,36 +113,89 @@ export class TranslationsService implements OnApplicationBootstrap {
 			);
 			if (existingEntries.find((entry) => entry.language === languageCode)) {
 				// Update entry
-				await this.dataService.execute<
-					UpdateTranslationMutation,
-					UpdateTranslationMutationVariables
-				>(UpdateTranslationDocument, {
-					component,
-					location,
-					key,
-					languageCode,
-					value,
-				});
+				await this.updateTranslation(component, location, key, languageCode, value);
 			} else {
 				// Insert entry (eg: for missing EN entry where NL entry already exists
-				await this.dataService.execute<
-					InsertTranslationMutation,
-					InsertTranslationMutationVariables
-				>(InsertTranslationDocument, {
+				await this.insertTranslation(
 					component,
 					location,
 					key,
 					languageCode,
 					value,
-					value_type:
-						existingEntries.find((entry) => entry.language === 'NL')?.value_type ||
-						'TEXT',
-				});
+					// Use the same value_type as the dutch translation
+					existingEntries.find((entry) => entry.language === LanguageCode.Nl)
+						?.value_type || ValueType.TEXT
+				);
 			}
 
 			await this.cacheManager.reset();
 		} catch (err: any) {
 			throw CustomError('Failed to insert or update the translation', err, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
+		}
+	}
+
+	public async insertTranslation(
+		component: Component,
+		location: Location,
+		key: Key,
+		languageCode: LanguageCode,
+		value: string,
+		value_type: ValueType
+	): Promise<void> {
+		try {
+			// Insert entry (eg: for missing EN entry where NL entry already exists
+			await this.dataService.execute<
+				InsertTranslationMutation,
+				InsertTranslationMutationVariables
+			>(InsertTranslationDocument, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+				value_type,
+			});
+
+			await this.cacheManager.reset();
+		} catch (err: any) {
+			throw CustomError('Failed to insert the translation', err, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
+		}
+	}
+
+	public async updateTranslation(
+		component: Component,
+		location: Location,
+		key: Key,
+		languageCode: LanguageCode,
+		value: string
+	): Promise<void> {
+		try {
+			await this.dataService.execute<
+				UpdateTranslationMutation,
+				UpdateTranslationMutationVariables
+			>(UpdateTranslationDocument, {
+				component,
+				location,
+				key,
+				languageCode,
+				value,
+			});
+
+			await this.cacheManager.reset();
+		} catch (err: any) {
+			throw CustomError('Failed to update the translation', err, {
 				component,
 				location,
 				key,
