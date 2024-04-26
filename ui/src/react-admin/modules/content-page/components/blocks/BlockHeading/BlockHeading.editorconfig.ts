@@ -1,4 +1,5 @@
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -33,42 +34,30 @@ export const INITIAL_HEADING_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/heading___titel'
-	),
+	name: tText('admin/content-block/helpers/generators/heading___titel'),
 	type: ContentBlockType.Heading,
 	components: {
 		state: INITIAL_HEADING_COMPONENTS_STATE(),
 		fields: {
 			children: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___titel-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/heading___titel-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/heading___titel'
-					),
+					label: tText('admin/content-block/helpers/generators/heading___titel'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			color: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___titel-kleur'
-				)
+				tText('admin/content-block/helpers/generators/heading___titel-kleur')
 			),
 			type: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___stijl'
-				),
+				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___uitlijning'
-				)
+				tText('admin/content-block/helpers/generators/defaults___uitlijning')
 			),
 		},
 	},

@@ -1,6 +1,7 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '../../shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
@@ -38,10 +39,10 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get user group options', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText(
 						'modules/admin/content-page-labels/hooks/use-content-page-label-options___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'admin/user-groups/hooks/use-user-group-options___het-ophalen-van-de-gebruikergroep-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,

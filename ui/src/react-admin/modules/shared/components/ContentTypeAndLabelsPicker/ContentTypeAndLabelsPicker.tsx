@@ -61,10 +61,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 					)
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText(
 						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 					),
 					type: ToastType.ERROR,

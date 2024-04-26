@@ -2,8 +2,8 @@ import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
-import { AdminConfigManager } from '~core/config';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { tHtml } from '~shared/helpers/translation-functions';
 import { useTranslation } from '~shared/hooks/useTranslation';
 import { Permissions, PermissionService } from '~shared/services/permission-service';
 
@@ -87,40 +87,3 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 			return showSpinner ? <CenteredSpinner /> : <></>;
 	}
 };
-
-export async function checkPermissions(
-	permissions: Permissions,
-	user: Avo.User.CommonUser | undefined,
-	successFunc: () => void,
-	setLoadingInfo: (info: LoadingInfo) => void,
-	noPermissionsMessage?: string
-): Promise<void> {
-	try {
-		if (!user) {
-			return;
-		}
-
-		if (await PermissionService.hasPermissions(permissions, user)) {
-			successFunc();
-		} else {
-			setLoadingInfo({
-				state: 'error',
-				message:
-					noPermissionsMessage ||
-					AdminConfigManager.getConfig().services.i18n.tHtml(
-						'shared/components/loading-error-loaded-component/loading-error-loaded-component___je-hebt-geen-rechten-voor-deze-pagina'
-					),
-				icon: 'lock' as IconName,
-			});
-		}
-	} catch (err) {
-		console.error('Failed to check permissions', err, { permissions, user });
-		setLoadingInfo({
-			state: 'error',
-			message: AdminConfigManager.getConfig().services.i18n.tHtml(
-				'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-ging-iets-mis-tijdens-het-controleren-van-de-rechten-van-je-account'
-			),
-			icon: 'alertTriangle' as IconName,
-		});
-	}
-}

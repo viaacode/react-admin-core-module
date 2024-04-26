@@ -2,6 +2,7 @@ import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 import {
 	ContentBlockConfig,
@@ -38,7 +39,7 @@ export const INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_STATE = (): DefaultCon
 
 export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'admin/content-block/helpers/generators/media-player-title-text-button___media-speler-met-titel-tekst-en-knop'
 	),
 	type: ContentBlockType.MediaPlayerTitleTextButton,
@@ -46,26 +47,26 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 		state: INITIAL_MEDIA_PLAYER_TITLE_TEXT_BUTTON_COMPONENTS_STATE(),
 		fields: {
 			mediaTitle: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___video-of-audio-item-toegankelijkheidstitel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			mediaItem: ITEM_PICKER_FIELD(),
 			mediaSrc: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-video-url-van-flowplayer-com-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: AdminConfigManager.getConfig().services.i18n.tText(
+					placeholder: tText(
 						'admin/content-block/helpers/generators/media-player-title-text-button___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			mediaPoster: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___eigen-poster-uploaden-optioneel'
 				),
 				editorType: ContentBlockEditor.UploadOrSelectVideoStill,
@@ -73,7 +74,7 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 			showCopyright: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'react-admin/modules/content-page/components/blocks/block-video-title-text-button/block-video-title-text-button___toon-auteursrecht-melding-voor-deze-poster'
 					),
 				} as CheckboxProps,
@@ -81,26 +82,20 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 			mediaAutoplay: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/media-player-title-text-button___automatisch-afspelen'
 					),
 				} as CheckboxProps,
 			},
 			headingTitle: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___titel-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/heading___titel-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/heading___titel'
-					),
+					label: tText('admin/content-block/helpers/generators/heading___titel'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___stijl'
-				),
+				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_TYPE_OPTIONS(),
@@ -108,46 +103,38 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 			},
 			content: TEXT_FIELD(),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-type'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___uitlijning'
-				)
+				tText('admin/content-block/helpers/generators/defaults___uitlijning')
 			),
 		},
 	},

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { UserService } from '~modules/user/user.service';
+import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
 import { useTranslation } from './useTranslation';
@@ -25,10 +26,8 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 				);
 
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/shared/hooks/use-business-category___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/shared/hooks/use-business-category___error'),
+					description: tText(
 						'shared/hooks/use-business-category___het-ophalen-van-de-oormerken-is-mislukt'
 					),
 					type: ToastType.ERROR,

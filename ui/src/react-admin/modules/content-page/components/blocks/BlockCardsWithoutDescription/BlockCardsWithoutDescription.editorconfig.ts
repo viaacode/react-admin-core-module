@@ -1,4 +1,5 @@
 import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	CardWithoutDescriptionBlockComponentState,
 	Color,
@@ -39,29 +40,29 @@ export const INITIAL_CARDS_WITHOUT_DESCRIPTION_BLOCK_STATE = (): DefaultContentB
 
 export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___cards'
 	),
 	type: ContentBlockType.CardsWithoutDescription,
 	components: {
 		state: INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE(),
-		name: AdminConfigManager.getConfig().services.i18n.tText(
+		name: tText(
 			'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___card'
 		),
 		fields: {
 			title: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___label'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			image: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
@@ -72,7 +73,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 				} as FileUploadProps,
 			},
 			style: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___style'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -81,12 +82,12 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 				},
 			},
 			textColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tekst-kleur'
 				)
 			),
 			backgroundColor: BACKGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___achtergrondkleur-van-de-card'
 				),
 				isAvo()
@@ -94,7 +95,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			linkAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___tegel-link'
 				),
 				editorType: ContentBlockEditor.ContentPicker,

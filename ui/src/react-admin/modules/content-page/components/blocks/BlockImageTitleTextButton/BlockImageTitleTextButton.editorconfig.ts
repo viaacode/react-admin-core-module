@@ -5,6 +5,7 @@ import {
 	DefaultContentBlockState,
 	ImageTitleTextButtonBlockComponentState,
 } from '~modules/content-page/types/content-block.types';
+import { tText } from '~shared/helpers/translation-functions';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
@@ -28,7 +29,7 @@ export const INITIAL_IMAGE_TITLE_TEXT_BUTTON_BLOCK_STATE = (): DefaultContentBlo
 
 export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'admin/content-block/helpers/generators/image-title-text-button___afbeelding-met-titel-tekst-en-knop'
 	),
 	type: ContentBlockType.ImageTitleTextButton,
@@ -36,31 +37,27 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 		state: INITIAL_IMAGE_TITLE_TEXT_BUTTON_COMPONENTS_STATE(),
 		fields: {
 			imageSource: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/image___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/image___afbeelding'),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),
 			imageAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-title-text-button___link-achter-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			imageAlt: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			imagePosition: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/image-title-text-button___positie-van-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -71,16 +68,12 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 				},
 			},
 			headingTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___titel'
-				),
+				label: tText('admin/content-block/helpers/generators/heading___titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			headingType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/heading___stijl'
-				),
+				label: tText('admin/content-block/helpers/generators/heading___stijl'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_TYPE_OPTIONS(),
@@ -88,38 +81,32 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 			},
 			content: TEXT_FIELD(),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-type'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/ctas___knop-icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-player-title-text-button___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,

@@ -86,10 +86,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 						)
 					);
 					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: AdminConfigManager.getConfig().services.i18n.tText(
+						title: tText(
 							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
 						),
-						description: AdminConfigManager.getConfig().services.i18n.tText(
+						description: tText(
 							'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___het-ophalen-van-de-gebruikersaccount-namen-is-mislukt'
 						),
 						type: ToastType.ERROR,

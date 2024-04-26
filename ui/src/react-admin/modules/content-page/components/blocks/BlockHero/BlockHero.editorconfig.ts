@@ -7,6 +7,7 @@ import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 import { PHOTO_TYPES } from '~shared/helpers/files';
+import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 
 import {
@@ -50,123 +51,99 @@ export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/hero___hero'
-	),
+	name: tText('admin/content-block/helpers/generators/hero___hero'),
 	type: ContentBlockType.Hero,
 	components: {
 		state: INITIAL_HERO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___titel'
-				),
+				label: tText('admin/content-block/helpers/generators/hero___titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___titel-kleur'
-				)
+				tText('admin/content-block/helpers/generators/hero___titel-kleur')
 			),
 			content: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___beschrijving'
-				),
+				label: tText('admin/content-block/helpers/generators/hero___beschrijving'),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___beschrijving-kleur'
-				)
+				tText('admin/content-block/helpers/generators/hero___beschrijving-kleur')
 			),
 
 			buttons: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___knop'
-				),
+				label: tText('admin/content-block/helpers/generators/hero___knop'),
 				fields: {
 					type: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___type'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___type'),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
 					label: TEXT_FIELD(
-						AdminConfigManager.getConfig().services.i18n.tText(
+						tText(
 							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 						),
 						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
-								'admin/content-block/helpers/generators/buttons___tekst'
-							),
+							label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
 					altTitle: TEXT_FIELD(undefined, {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/hero___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
 						validator: undefined,
 					}),
 					icon: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___icoon'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
 					buttonAction: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___knop-actie'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___knop-actie'),
 						editorType: ContentBlockEditor.ContentPicker,
 					},
 				},
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					addButtonLabel: tText(
 						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe'
 					),
-					deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					deleteButtonLabel: tText(
 						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop'
 					),
 				},
 			} as ContentBlockFieldGroup,
 
 			textBelowButtons: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___text-onder-knoppen'
-				),
+				label: tText('admin/content-block/helpers/generators/hero___text-onder-knoppen'),
 				editorProps: {
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
 				validator: undefined,
 			}),
 			src: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
-					placeholder: AdminConfigManager.getConfig().services.i18n.tText(
+					placeholder: tText(
 						'admin/content-block/helpers/generators/hero___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/hero___eigen-poster-uploaden'
-				),
+				label: tText('admin/content-block/helpers/generators/hero___eigen-poster-uploaden'),
 				validator: undefined,
 				editorProps: {
 					allowMulti: false,
@@ -177,7 +154,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as Partial<FileUploadProps>,
 			}),
 			altText: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
@@ -190,9 +167,7 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___achtergrondkleur'
-				),
+				label: tText('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_HERO_BACKGROUND_COLOR_OPTIONS(),

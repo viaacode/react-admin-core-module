@@ -49,12 +49,15 @@ export class ContentPagesController {
 	 * @param queryDto
 	 * @param user
 	 */
-	@Post('')
-	public async getContentPagesForOverview(
+	@Post('page-overview-block')
+	public async getContentPagesForPageOverviewBlock(
 		@Body() queryDto: ContentPageOverviewParams,
 		@SessionUser() user?: SessionUserEntity
 	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
-		return this.contentPagesService.getContentPagesForOverview(queryDto, user.getGroupIds());
+		return this.contentPagesService.getContentPagesForPageOverviewBlock(
+			queryDto,
+			user.getGroupIds()
+		);
 	}
 
 	/**

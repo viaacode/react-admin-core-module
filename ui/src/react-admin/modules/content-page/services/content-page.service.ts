@@ -28,12 +28,12 @@ export class ContentPageService {
 		return `${getAdminCoreApiUrl()}${CONTENT_PAGE_SERVICE_BASE_URL}`;
 	}
 
-	public static async getContentPages(
+	public static async getContentPagesForPageOverviewBlock(
 		options: ContentPageOverviewParams
 	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
 		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
 			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
-		>(this.getBaseUrl(), {
+		>(this.getBaseUrl() + '/page-overview-block', {
 			method: 'POST',
 			body: JSON.stringify(options),
 			throwOnNullResponse: true,
@@ -164,6 +164,14 @@ export class ContentPageService {
 		});
 	}
 
+	/**
+	 * Get content pages for the admin dashboard content page overview
+	 * @param page
+	 * @param sortColumn
+	 * @param sortOrder
+	 * @param tableColumnDataType
+	 * @param where
+	 */
 	public static async fetchContentPages(
 		page: number,
 		sortColumn: ContentOverviewTableCols,
@@ -173,7 +181,7 @@ export class ContentPageService {
 	): Promise<[ContentPageInfo[], number]> {
 		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
 			stringifyUrl({
-				url: this.getBaseUrl() + '/overview',
+				url: this.getBaseUrl(),
 				query: {
 					offset: page * PAGES_PER_PAGE,
 					limit: PAGES_PER_PAGE,

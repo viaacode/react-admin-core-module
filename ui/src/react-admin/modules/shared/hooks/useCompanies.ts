@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	BasicOrganisation,
 	OrganisationService,
@@ -31,10 +32,8 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get organisations from database', err));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/shared/hooks/use-companies___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/shared/hooks/use-companies___error'),
+					description: tText(
 						'settings/components/profile___het-ophalen-van-de-organisaties-is-mislukt'
 					),
 					type: ToastType.ERROR,

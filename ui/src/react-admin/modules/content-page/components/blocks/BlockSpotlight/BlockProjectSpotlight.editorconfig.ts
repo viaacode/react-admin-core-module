@@ -3,6 +3,7 @@ import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -11,8 +12,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE = (): ImageInfo[] =>
 	times(
@@ -35,14 +34,12 @@ export const INITIAL_PROJECTS_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockSta
 
 export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'admin/content-block/helpers/generators/projects-spotlight___projecten-in-de-kijker'
 	),
 	type: ContentBlockType.ProjectsSpotlight,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/projects-spotlight___project'
-		),
+		name: tText('admin/content-block/helpers/generators/projects-spotlight___project'),
 		limits: {
 			min: 3,
 			max: 3,
@@ -50,7 +47,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 		state: INITIAL_PROJECTS_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			project: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/project-spotlight___project-pagina'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -60,7 +57,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				} as ContentPickerProps,
 			},
 			customImage: FILE_FIELD('', {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-afbeelding-optioneel'
 				),
 				editorProps: {
@@ -70,7 +67,7 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 				validator: undefined,
 			}),
 			customTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,

@@ -32,7 +32,7 @@ export const mockUser: Avo.User.HetArchiefUser = {
 const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {
 	adaptContentPage: jest.fn(),
 	adaptContentBlock: jest.fn(),
-	getContentPagesForOverview: jest.fn(),
+	getContentPagesForPageOverviewBlock: jest.fn(),
 	getContentPageByPath: jest.fn(),
 	fetchCollectionOrItem: jest.fn(),
 	fetchItemByExternalId: jest.fn(),

@@ -12,6 +12,7 @@ import { isNull, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
+import { tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '../../helpers/custom-error';
 import { PickerItem, PickerTypeOption } from '../../types/content-picker';
@@ -44,7 +45,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	allowedTypes = DEFAULT_ALLOWED_TYPES,
 	value,
 	onChange,
-	placeholder = AdminConfigManager.getConfig().services.i18n.tText(
+	placeholder = tText(
 		'admin/shared/components/content-picker/content-picker___selecteer-een-item'
 	),
 	hideTypeDropdown = false,
@@ -110,10 +111,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText(
 						'modules/admin/shared/components/content-picker/content-picker___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'modules/admin/shared/components/content-picker/content-picker___het-ophalen-van-de-opties-is-mislukt'
 					),
 					type: ToastType.ERROR,
@@ -170,10 +171,10 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText(
 					'modules/admin/shared/components/content-picker/content-picker___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				description: tText(
 					'admin/shared/components/content-picker/content-picker___voor-deze-content-pagina-is-geen-pad-geconfigureerd'
 				),
 				type: ToastType.ERROR,

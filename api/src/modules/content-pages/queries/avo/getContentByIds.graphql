@@ -12,10 +12,11 @@ query getContentByIds($ids: [Int!]!) {
 		is_protected
 		is_public
 		path
-		user_profile_id
 		publish_at
 		published_at
 		title
+		language
+		nl_parent_page_id
 		updated_at
 		user_group_ids
 		user_profile_id

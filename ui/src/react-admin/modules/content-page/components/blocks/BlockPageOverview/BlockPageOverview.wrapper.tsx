@@ -17,10 +17,11 @@ import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/g
 import { useGetContentPageByPath } from '~modules/content-page/hooks/use-get-content-page-by-path';
 import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
 import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
-import { useGetContentPagesOverview } from '~modules/content-page/hooks/use-get-content-pages-overview';
+import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/hooks/use-get-content-pages-for-page-overview-block';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ErrorView } from '~shared/components/error';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useDebounce } from '~shared/hooks/useDebounce';
 import { useTranslation } from '~shared/hooks/useTranslation';
 
@@ -36,7 +37,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	buttonLabel = AdminConfigManager.getConfig().services.i18n.tText(
+	buttonLabel = tText(
 		'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___lees-meer'
 	),
 	buttonAltTitle = '',
@@ -105,7 +106,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		isFetching: isLoadingPagesAndLabels,
 		error: errorPagesAndLabels,
 		isInitialLoading,
-	} = useGetContentPagesOverview(
+	} = useGetContentPagesForPageOverviewBlock(
 		{
 			withBlocks:
 				itemStyle === ContentItemStyle.ACCORDION ||
@@ -263,12 +264,12 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		return (
 			<ErrorView
 				icon={'alertTriangle' as IconName}
-				message={AdminConfigManager.getConfig().services.i18n.tHtml(
+				message={tHtml(
 					'react-admin/modules/content-page/components/blocks/block-page-overview/block-page-overview___error'
 				)}
 			>
 				<p>
-					{AdminConfigManager.getConfig().services.i18n.tHtml(
+					{tHtml(
 						'admin/content-block/components/page-overview-wrapper/page-overview-wrapper___het-ophalen-van-de-paginas-is-mislukt'
 					)}
 				</p>

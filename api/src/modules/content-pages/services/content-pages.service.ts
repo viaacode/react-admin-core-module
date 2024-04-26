@@ -49,6 +49,7 @@ import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief }
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { LanguageCode } from '../../translations';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -142,6 +143,8 @@ export class ContentPagesService {
 			id: gqlContentPage?.id,
 			thumbnailPath: gqlContentPage?.thumbnail_path,
 			title: gqlContentPage?.title,
+			language: gqlContentPage.language,
+			nlParentPageId: gqlContentPage.nl_parent_page_id,
 			description: gqlContentPage?.description,
 			seoDescription: gqlContentPage?.seo_description,
 			metaDescription: gqlContentPage?.meta_description,
@@ -215,7 +218,7 @@ export class ContentPagesService {
 		};
 	}
 
-	public async getContentPagesForOverview(
+	public async getContentPagesForPageOverviewBlock(
 		inputQuery: ContentPageOverviewParams,
 		userGroupIds: string[]
 	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
@@ -362,12 +365,16 @@ export class ContentPagesService {
 		};
 	}
 
-	public async getContentPageByPath(path: string): Promise<DbContentPage | null> {
+	public async getContentPageByPath(
+		path: string,
+		language: LanguageCode
+	): Promise<DbContentPage | null> {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPageByPathQuery'],
 			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
 			path,
+			language,
 		});
 		const contentPage: GqlContentPage | undefined =
 			(response as ContentPageQueryTypes['GetContentPageByPathQueryHetArchief'])
@@ -384,7 +391,10 @@ export class ContentPagesService {
 		ip = '',
 		onlyInfo = false
 	): Promise<DbContentPage | null> {
-		const contentPage: DbContentPage | undefined = await this.getContentPageByPath(path);
+		const contentPage: DbContentPage | undefined = await this.getContentPageByPath(
+			path,
+			user.language as LanguageCode
+		);
 
 		const permissions = user?.permissions || [];
 		const userId = user?.userId;

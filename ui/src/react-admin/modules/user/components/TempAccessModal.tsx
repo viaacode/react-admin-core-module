@@ -46,10 +46,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 			until: until === null ? null : toIsoDate(until),
 		};
 
-		const validationErrors: string[] = getTempAccessValidationErrors(newTempAccess, {
-			tText,
-			tHtml,
-		});
+		const validationErrors: string[] = getTempAccessValidationErrors(newTempAccess);
 
 		if (validationErrors?.length) {
 			setValidationError(validationErrors);

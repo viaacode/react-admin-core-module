@@ -147,10 +147,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				// Fire onChange for parent component
 				onChangePermissions?.(false);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___success'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___success'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 					),
 					type: ToastType.SUCCESS,
@@ -162,10 +160,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 					),
 					type: ToastType.ERROR,
@@ -230,10 +226,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
 					type: ToastType.ERROR,
@@ -245,10 +239,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 			if (isErrorPermissions) {
 				console.error(new CustomError('Failed to get permissions', permissionsError));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
 					type: ToastType.ERROR,

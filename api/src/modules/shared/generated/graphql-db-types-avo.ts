@@ -1410,6 +1410,8 @@ export type App_Assignments_V2 = {
   contributors: Array<App_Assignments_V2_Contributors>;
   /** An aggregate relationship */
   contributors_aggregate: App_Assignments_V2_Contributors_Aggregate;
+  /** An object relationship */
+  counts?: Maybe<App_Assignments_V2_Counts>;
   created_at: Scalars['timestamptz'];
   deadline_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1442,6 +1444,10 @@ export type App_Assignments_V2 = {
   quality_labels: Array<App_Assignments_V2_Quality_Labels>;
   /** An aggregate relationship */
   quality_labels_aggregate: App_Assignments_V2_Quality_Labels_Aggregate;
+  /** An array relationship */
+  relations: Array<App_Assignments_V2_Relations>;
+  /** An aggregate relationship */
+  relations_aggregate: App_Assignments_V2_Relations_Aggregate;
   /** An array relationship */
   responses: Array<App_Assignment_Responses_V2>;
   /** An aggregate relationship */
@@ -1583,6 +1589,26 @@ export type App_Assignments_V2Quality_Labels_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<App_Assignments_V2_Quality_Labels_Order_By>>;
   where?: InputMaybe<App_Assignments_V2_Quality_Labels_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.assignments_v2" */
+export type App_Assignments_V2RelationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.assignments_v2" */
+export type App_Assignments_V2Relations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
 };
 
 
@@ -2245,6 +2271,7 @@ export type App_Assignments_V2_Bool_Exp = {
   briefing_id?: InputMaybe<String_Comparison_Exp>;
   contributors?: InputMaybe<App_Assignments_V2_Contributors_Bool_Exp>;
   contributors_aggregate?: InputMaybe<App_Assignments_V2_Contributors_Aggregate_Bool_Exp>;
+  counts?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deadline_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
@@ -2268,6 +2295,8 @@ export type App_Assignments_V2_Bool_Exp = {
   published_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   quality_labels?: InputMaybe<App_Assignments_V2_Quality_Labels_Bool_Exp>;
   quality_labels_aggregate?: InputMaybe<App_Assignments_V2_Quality_Labels_Aggregate_Bool_Exp>;
+  relations?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+  relations_aggregate?: InputMaybe<App_Assignments_V2_Relations_Aggregate_Bool_Exp>;
   responses?: InputMaybe<App_Assignment_Responses_V2_Bool_Exp>;
   responses_aggregate?: InputMaybe<App_Assignment_Responses_V2_Aggregate_Bool_Exp>;
   thumbnail_path?: InputMaybe<String_Comparison_Exp>;
@@ -2553,6 +2582,204 @@ export type App_Assignments_V2_Contributors_Updates = {
   where: App_Assignments_V2_Contributors_Bool_Exp;
 };
 
+/** columns and relationships of "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts = {
+  __typename?: 'app_assignments_v2_counts';
+  assignment_uuid?: Maybe<Scalars['uuid']>;
+  bookmarks?: Maybe<Scalars['bigint']>;
+  contributors?: Maybe<Scalars['bigint']>;
+  copies?: Maybe<Scalars['bigint']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregated selection of "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Aggregate = {
+  __typename?: 'app_assignments_v2_counts_aggregate';
+  aggregate?: Maybe<App_Assignments_V2_Counts_Aggregate_Fields>;
+  nodes: Array<App_Assignments_V2_Counts>;
+};
+
+/** aggregate fields of "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Aggregate_Fields = {
+  __typename?: 'app_assignments_v2_counts_aggregate_fields';
+  avg?: Maybe<App_Assignments_V2_Counts_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<App_Assignments_V2_Counts_Max_Fields>;
+  min?: Maybe<App_Assignments_V2_Counts_Min_Fields>;
+  stddev?: Maybe<App_Assignments_V2_Counts_Stddev_Fields>;
+  stddev_pop?: Maybe<App_Assignments_V2_Counts_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<App_Assignments_V2_Counts_Stddev_Samp_Fields>;
+  sum?: Maybe<App_Assignments_V2_Counts_Sum_Fields>;
+  var_pop?: Maybe<App_Assignments_V2_Counts_Var_Pop_Fields>;
+  var_samp?: Maybe<App_Assignments_V2_Counts_Var_Samp_Fields>;
+  variance?: Maybe<App_Assignments_V2_Counts_Variance_Fields>;
+};
+
+
+/** aggregate fields of "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Assignments_V2_Counts_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type App_Assignments_V2_Counts_Avg_Fields = {
+  __typename?: 'app_assignments_v2_counts_avg_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "app.assignments_v2_counts". All fields are combined with a logical 'AND'. */
+export type App_Assignments_V2_Counts_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Assignments_V2_Counts_Bool_Exp>>;
+  _not?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Assignments_V2_Counts_Bool_Exp>>;
+  assignment_uuid?: InputMaybe<Uuid_Comparison_Exp>;
+  bookmarks?: InputMaybe<Bigint_Comparison_Exp>;
+  contributors?: InputMaybe<Bigint_Comparison_Exp>;
+  copies?: InputMaybe<Bigint_Comparison_Exp>;
+  views?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** input type for inserting data into table "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Insert_Input = {
+  assignment_uuid?: InputMaybe<Scalars['uuid']>;
+  bookmarks?: InputMaybe<Scalars['bigint']>;
+  contributors?: InputMaybe<Scalars['bigint']>;
+  copies?: InputMaybe<Scalars['bigint']>;
+  views?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type App_Assignments_V2_Counts_Max_Fields = {
+  __typename?: 'app_assignments_v2_counts_max_fields';
+  assignment_uuid?: Maybe<Scalars['uuid']>;
+  bookmarks?: Maybe<Scalars['bigint']>;
+  contributors?: Maybe<Scalars['bigint']>;
+  copies?: Maybe<Scalars['bigint']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type App_Assignments_V2_Counts_Min_Fields = {
+  __typename?: 'app_assignments_v2_counts_min_fields';
+  assignment_uuid?: Maybe<Scalars['uuid']>;
+  bookmarks?: Maybe<Scalars['bigint']>;
+  contributors?: Maybe<Scalars['bigint']>;
+  copies?: Maybe<Scalars['bigint']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting object relation for remote table "app.assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Obj_Rel_Insert_Input = {
+  data: App_Assignments_V2_Counts_Insert_Input;
+};
+
+/** Ordering options when selecting data from "app.assignments_v2_counts". */
+export type App_Assignments_V2_Counts_Order_By = {
+  assignment_uuid?: InputMaybe<Order_By>;
+  bookmarks?: InputMaybe<Order_By>;
+  contributors?: InputMaybe<Order_By>;
+  copies?: InputMaybe<Order_By>;
+  views?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "app.assignments_v2_counts" */
+export enum App_Assignments_V2_Counts_Select_Column {
+  /** column name */
+  AssignmentUuid = 'assignment_uuid',
+  /** column name */
+  Bookmarks = 'bookmarks',
+  /** column name */
+  Contributors = 'contributors',
+  /** column name */
+  Copies = 'copies',
+  /** column name */
+  Views = 'views'
+}
+
+/** aggregate stddev on columns */
+export type App_Assignments_V2_Counts_Stddev_Fields = {
+  __typename?: 'app_assignments_v2_counts_stddev_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type App_Assignments_V2_Counts_Stddev_Pop_Fields = {
+  __typename?: 'app_assignments_v2_counts_stddev_pop_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type App_Assignments_V2_Counts_Stddev_Samp_Fields = {
+  __typename?: 'app_assignments_v2_counts_stddev_samp_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "app_assignments_v2_counts" */
+export type App_Assignments_V2_Counts_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Assignments_V2_Counts_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Assignments_V2_Counts_Stream_Cursor_Value_Input = {
+  assignment_uuid?: InputMaybe<Scalars['uuid']>;
+  bookmarks?: InputMaybe<Scalars['bigint']>;
+  contributors?: InputMaybe<Scalars['bigint']>;
+  copies?: InputMaybe<Scalars['bigint']>;
+  views?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type App_Assignments_V2_Counts_Sum_Fields = {
+  __typename?: 'app_assignments_v2_counts_sum_fields';
+  bookmarks?: Maybe<Scalars['bigint']>;
+  contributors?: Maybe<Scalars['bigint']>;
+  copies?: Maybe<Scalars['bigint']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type App_Assignments_V2_Counts_Var_Pop_Fields = {
+  __typename?: 'app_assignments_v2_counts_var_pop_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type App_Assignments_V2_Counts_Var_Samp_Fields = {
+  __typename?: 'app_assignments_v2_counts_var_samp_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type App_Assignments_V2_Counts_Variance_Fields = {
+  __typename?: 'app_assignments_v2_counts_variance_fields';
+  bookmarks?: Maybe<Scalars['Float']>;
+  contributors?: Maybe<Scalars['Float']>;
+  copies?: Maybe<Scalars['Float']>;
+  views?: Maybe<Scalars['Float']>;
+};
+
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type App_Assignments_V2_Delete_At_Path_Input = {
   lom_learning_resource_type?: InputMaybe<Array<Scalars['String']>>;
@@ -2693,6 +2920,7 @@ export type App_Assignments_V2_Insert_Input = {
   bookmarks?: InputMaybe<App_Assignments_V2_Bookmarks_Arr_Rel_Insert_Input>;
   briefing_id?: InputMaybe<Scalars['String']>;
   contributors?: InputMaybe<App_Assignments_V2_Contributors_Arr_Rel_Insert_Input>;
+  counts?: InputMaybe<App_Assignments_V2_Counts_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deadline_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
@@ -2712,6 +2940,7 @@ export type App_Assignments_V2_Insert_Input = {
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
   quality_labels?: InputMaybe<App_Assignments_V2_Quality_Labels_Arr_Rel_Insert_Input>;
+  relations?: InputMaybe<App_Assignments_V2_Relations_Arr_Rel_Insert_Input>;
   responses?: InputMaybe<App_Assignment_Responses_V2_Arr_Rel_Insert_Input>;
   thumbnail_path?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -3040,6 +3269,7 @@ export type App_Assignments_V2_Order_By = {
   bookmarks_aggregate?: InputMaybe<App_Assignments_V2_Bookmarks_Aggregate_Order_By>;
   briefing_id?: InputMaybe<Order_By>;
   contributors_aggregate?: InputMaybe<App_Assignments_V2_Contributors_Aggregate_Order_By>;
+  counts?: InputMaybe<App_Assignments_V2_Counts_Order_By>;
   created_at?: InputMaybe<Order_By>;
   deadline_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
@@ -3060,6 +3290,7 @@ export type App_Assignments_V2_Order_By = {
   profile?: InputMaybe<Users_Profiles_Order_By>;
   published_at?: InputMaybe<Order_By>;
   quality_labels_aggregate?: InputMaybe<App_Assignments_V2_Quality_Labels_Aggregate_Order_By>;
+  relations_aggregate?: InputMaybe<App_Assignments_V2_Relations_Aggregate_Order_By>;
   responses_aggregate?: InputMaybe<App_Assignment_Responses_V2_Aggregate_Order_By>;
   thumbnail_path?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -3768,6 +3999,230 @@ export type App_Assignments_V2_Quality_Labels_Updates = {
   where: App_Assignments_V2_Quality_Labels_Bool_Exp;
 };
 
+/** columns and relationships of "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations = {
+  __typename?: 'app_assignments_v2_relations';
+  created_at?: Maybe<Scalars['timestamp']>;
+  id: Scalars['uuid'];
+  object: Scalars['uuid'];
+  predicate: Lookup_Enum_Relation_Types_Enum;
+  subject: Scalars['uuid'];
+  updated_at?: Maybe<Scalars['timestamp']>;
+};
+
+/** aggregated selection of "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Aggregate = {
+  __typename?: 'app_assignments_v2_relations_aggregate';
+  aggregate?: Maybe<App_Assignments_V2_Relations_Aggregate_Fields>;
+  nodes: Array<App_Assignments_V2_Relations>;
+};
+
+export type App_Assignments_V2_Relations_Aggregate_Bool_Exp = {
+  count?: InputMaybe<App_Assignments_V2_Relations_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Assignments_V2_Relations_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Aggregate_Fields = {
+  __typename?: 'app_assignments_v2_relations_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Assignments_V2_Relations_Max_Fields>;
+  min?: Maybe<App_Assignments_V2_Relations_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<App_Assignments_V2_Relations_Max_Order_By>;
+  min?: InputMaybe<App_Assignments_V2_Relations_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Arr_Rel_Insert_Input = {
+  data: Array<App_Assignments_V2_Relations_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<App_Assignments_V2_Relations_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "app.assignments_v2_relations". All fields are combined with a logical 'AND'. */
+export type App_Assignments_V2_Relations_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Assignments_V2_Relations_Bool_Exp>>;
+  _not?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Assignments_V2_Relations_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  object?: InputMaybe<Uuid_Comparison_Exp>;
+  predicate?: InputMaybe<Lookup_Enum_Relation_Types_Enum_Comparison_Exp>;
+  subject?: InputMaybe<Uuid_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app.assignments_v2_relations" */
+export enum App_Assignments_V2_Relations_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  AssignmentsV2RelationsPkey = 'assignments_v2_relations_pkey',
+  /** unique or primary key constraint on columns "object", "predicate", "subject" */
+  AssignmentsV2RelationsSubjectPredicateObjectKey = 'assignments_v2_relations_subject_predicate_object_key'
+}
+
+/** input type for inserting data into table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  object?: InputMaybe<Scalars['uuid']>;
+  predicate?: InputMaybe<Lookup_Enum_Relation_Types_Enum>;
+  subject?: InputMaybe<Scalars['uuid']>;
+  updated_at?: InputMaybe<Scalars['timestamp']>;
+};
+
+/** aggregate max on columns */
+export type App_Assignments_V2_Relations_Max_Fields = {
+  __typename?: 'app_assignments_v2_relations_max_fields';
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  object?: Maybe<Scalars['uuid']>;
+  subject?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
+};
+
+/** order by max() on columns of table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  object?: InputMaybe<Order_By>;
+  subject?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type App_Assignments_V2_Relations_Min_Fields = {
+  __typename?: 'app_assignments_v2_relations_min_fields';
+  created_at?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  object?: Maybe<Scalars['uuid']>;
+  subject?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
+};
+
+/** order by min() on columns of table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  object?: InputMaybe<Order_By>;
+  subject?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Mutation_Response = {
+  __typename?: 'app_assignments_v2_relations_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App_Assignments_V2_Relations>;
+};
+
+/** on_conflict condition type for table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_On_Conflict = {
+  constraint: App_Assignments_V2_Relations_Constraint;
+  update_columns?: Array<App_Assignments_V2_Relations_Update_Column>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app.assignments_v2_relations". */
+export type App_Assignments_V2_Relations_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  object?: InputMaybe<Order_By>;
+  predicate?: InputMaybe<Order_By>;
+  subject?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app.assignments_v2_relations */
+export type App_Assignments_V2_Relations_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "app.assignments_v2_relations" */
+export enum App_Assignments_V2_Relations_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Object = 'object',
+  /** column name */
+  Predicate = 'predicate',
+  /** column name */
+  Subject = 'subject',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "app.assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  object?: InputMaybe<Scalars['uuid']>;
+  predicate?: InputMaybe<Lookup_Enum_Relation_Types_Enum>;
+  subject?: InputMaybe<Scalars['uuid']>;
+  updated_at?: InputMaybe<Scalars['timestamp']>;
+};
+
+/** Streaming cursor of the table "app_assignments_v2_relations" */
+export type App_Assignments_V2_Relations_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Assignments_V2_Relations_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Assignments_V2_Relations_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamp']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  object?: InputMaybe<Scalars['uuid']>;
+  predicate?: InputMaybe<Lookup_Enum_Relation_Types_Enum>;
+  subject?: InputMaybe<Scalars['uuid']>;
+  updated_at?: InputMaybe<Scalars['timestamp']>;
+};
+
+/** update columns of table "app.assignments_v2_relations" */
+export enum App_Assignments_V2_Relations_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Object = 'object',
+  /** column name */
+  Predicate = 'predicate',
+  /** column name */
+  Subject = 'subject',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type App_Assignments_V2_Relations_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<App_Assignments_V2_Relations_Set_Input>;
+  where: App_Assignments_V2_Relations_Bool_Exp;
+};
+
 /** select columns of table "app.assignments_v2" */
 export enum App_Assignments_V2_Select_Column {
   /** column name */
@@ -4162,6 +4617,10 @@ export type App_Collection_Actualisation_Overview = {
   last_editor?: Maybe<Shared_User_Names>;
   lom_classification?: Maybe<Scalars['jsonb']>;
   lom_context?: Maybe<Scalars['jsonb']>;
+  /** An array relationship */
+  loms: Array<App_Collections_Lom_Links>;
+  /** An aggregate relationship */
+  loms_aggregate: App_Collections_Lom_Links_Aggregate;
   /** An object relationship */
   manager?: Maybe<Shared_User_Names>;
   mgmt_created_at?: Maybe<Scalars['timestamptz']>;
@@ -4209,6 +4668,26 @@ export type App_Collection_Actualisation_OverviewLom_ClassificationArgs = {
 /** columns and relationships of "app.collection_actualisation_overview" */
 export type App_Collection_Actualisation_OverviewLom_ContextArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "app.collection_actualisation_overview" */
+export type App_Collection_Actualisation_OverviewLomsArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.collection_actualisation_overview" */
+export type App_Collection_Actualisation_OverviewLoms_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
 };
 
 /** aggregated selection of "app.collection_actualisation_overview" */
@@ -4260,6 +4739,8 @@ export type App_Collection_Actualisation_Overview_Bool_Exp = {
   last_editor?: InputMaybe<Shared_User_Names_Bool_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
+  loms?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Bool_Exp>;
   manager?: InputMaybe<Shared_User_Names_Bool_Exp>;
   mgmt_created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   mgmt_current_status?: InputMaybe<String_Comparison_Exp>;
@@ -4320,6 +4801,7 @@ export type App_Collection_Actualisation_Overview_Order_By = {
   last_editor?: InputMaybe<Shared_User_Names_Order_By>;
   lom_classification?: InputMaybe<Order_By>;
   lom_context?: InputMaybe<Order_By>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Order_By>;
   manager?: InputMaybe<Shared_User_Names_Order_By>;
   mgmt_created_at?: InputMaybe<Order_By>;
   mgmt_current_status?: InputMaybe<Order_By>;
@@ -7578,6 +8060,10 @@ export type App_Collection_Marcom_Overview = {
   last_marcom_date?: Maybe<Scalars['timestamptz']>;
   lom_classification?: Maybe<Scalars['jsonb']>;
   lom_context?: Maybe<Scalars['jsonb']>;
+  /** An array relationship */
+  loms: Array<App_Collections_Lom_Links>;
+  /** An aggregate relationship */
+  loms_aggregate: App_Collections_Lom_Links_Aggregate;
   /** An object relationship */
   owner?: Maybe<Users_Summary_View>;
   owner_profile_id?: Maybe<Scalars['uuid']>;
@@ -7618,6 +8104,26 @@ export type App_Collection_Marcom_OverviewLom_ClassificationArgs = {
 /** columns and relationships of "app.collection_marcom_overview" */
 export type App_Collection_Marcom_OverviewLom_ContextArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "app.collection_marcom_overview" */
+export type App_Collection_Marcom_OverviewLomsArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.collection_marcom_overview" */
+export type App_Collection_Marcom_OverviewLoms_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
 };
 
 /** aggregated selection of "app.collection_marcom_overview" */
@@ -7673,6 +8179,8 @@ export type App_Collection_Marcom_Overview_Bool_Exp = {
   last_marcom_date?: InputMaybe<Timestamptz_Comparison_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
+  loms?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Bool_Exp>;
   owner?: InputMaybe<Users_Summary_View_Bool_Exp>;
   owner_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
   parent_collection_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -7727,6 +8235,7 @@ export type App_Collection_Marcom_Overview_Order_By = {
   last_marcom_date?: InputMaybe<Order_By>;
   lom_classification?: InputMaybe<Order_By>;
   lom_context?: InputMaybe<Order_By>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Order_By>;
   owner?: InputMaybe<Users_Summary_View_Order_By>;
   owner_profile_id?: InputMaybe<Order_By>;
   parent_collection_id?: InputMaybe<Order_By>;
@@ -8200,6 +8709,10 @@ export type App_Collection_Qc_Overview = {
   last_editor?: Maybe<Shared_User_Names>;
   lom_classification?: Maybe<Scalars['jsonb']>;
   lom_context?: Maybe<Scalars['jsonb']>;
+  /** An array relationship */
+  loms: Array<App_Collections_Lom_Links>;
+  /** An aggregate relationship */
+  loms_aggregate: App_Collections_Lom_Links_Aggregate;
   mgmt_eind_check_date?: Maybe<Scalars['timestamptz']>;
   mgmt_language_check?: Maybe<Scalars['Boolean']>;
   mgmt_quality_check?: Maybe<Scalars['Boolean']>;
@@ -8242,6 +8755,26 @@ export type App_Collection_Qc_OverviewLom_ClassificationArgs = {
 /** columns and relationships of "app.collection_qc_overview" */
 export type App_Collection_Qc_OverviewLom_ContextArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "app.collection_qc_overview" */
+export type App_Collection_Qc_OverviewLomsArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.collection_qc_overview" */
+export type App_Collection_Qc_OverviewLoms_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Collections_Lom_Links_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Collections_Lom_Links_Order_By>>;
+  where?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
 };
 
 /** aggregated selection of "app.collection_qc_overview" */
@@ -8293,6 +8826,8 @@ export type App_Collection_Qc_Overview_Bool_Exp = {
   last_editor?: InputMaybe<Shared_User_Names_Bool_Exp>;
   lom_classification?: InputMaybe<Jsonb_Comparison_Exp>;
   lom_context?: InputMaybe<Jsonb_Comparison_Exp>;
+  loms?: InputMaybe<App_Collections_Lom_Links_Bool_Exp>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Bool_Exp>;
   mgmt_eind_check_date?: InputMaybe<Timestamptz_Comparison_Exp>;
   mgmt_language_check?: InputMaybe<Boolean_Comparison_Exp>;
   mgmt_quality_check?: InputMaybe<Boolean_Comparison_Exp>;
@@ -8339,6 +8874,7 @@ export type App_Collection_Qc_Overview_Order_By = {
   last_editor?: InputMaybe<Shared_User_Names_Order_By>;
   lom_classification?: InputMaybe<Order_By>;
   lom_context?: InputMaybe<Order_By>;
+  loms_aggregate?: InputMaybe<App_Collections_Lom_Links_Aggregate_Order_By>;
   mgmt_eind_check_date?: InputMaybe<Order_By>;
   mgmt_language_check?: InputMaybe<Order_By>;
   mgmt_quality_check?: InputMaybe<Order_By>;
@@ -11731,7 +12267,9 @@ export type App_Content = {
   is_deleted: Scalars['Boolean'];
   is_protected: Scalars['Boolean'];
   is_public?: Maybe<Scalars['Boolean']>;
+  language: Lookup_Languages_Enum;
   meta_description?: Maybe<Scalars['String']>;
+  nl_parent_page_id?: Maybe<Scalars['Int']>;
   /** An object relationship */
   owner?: Maybe<Users_Summary_View>;
   path?: Maybe<Scalars['String']>;
@@ -11747,6 +12285,10 @@ export type App_Content = {
   title: Scalars['String'];
   /** An object relationship */
   title_lower?: Maybe<App_Content_Lower_Title>;
+  /** An array relationship */
+  translated_content_pages: Array<App_Content>;
+  /** An aggregate relationship */
+  translated_content_pages_aggregate: App_Content_Aggregate;
   updated_at?: Maybe<Scalars['timestamptz']>;
   /** An object relationship */
   updated_by?: Maybe<Users_Summary_View>;
@@ -11817,6 +12359,26 @@ export type App_ContentContent_Nav_Elements_AggregateArgs = {
 
 
 /** columns and relationships of "app.content" */
+export type App_ContentTranslated_Content_PagesArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Order_By>>;
+  where?: InputMaybe<App_Content_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.content" */
+export type App_ContentTranslated_Content_Pages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Content_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Content_Order_By>>;
+  where?: InputMaybe<App_Content_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app.content" */
 export type App_ContentUser_Group_IdsArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -11826,6 +12388,33 @@ export type App_Content_Aggregate = {
   __typename?: 'app_content_aggregate';
   aggregate?: Maybe<App_Content_Aggregate_Fields>;
   nodes: Array<App_Content>;
+};
+
+export type App_Content_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<App_Content_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<App_Content_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<App_Content_Aggregate_Bool_Exp_Count>;
+};
+
+export type App_Content_Aggregate_Bool_Exp_Bool_And = {
+  arguments: App_Content_Select_Column_App_Content_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Content_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: App_Content_Select_Column_App_Content_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type App_Content_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<App_Content_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<App_Content_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "app.content" */
@@ -11851,9 +12440,31 @@ export type App_Content_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "app.content" */
+export type App_Content_Aggregate_Order_By = {
+  avg?: InputMaybe<App_Content_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<App_Content_Max_Order_By>;
+  min?: InputMaybe<App_Content_Min_Order_By>;
+  stddev?: InputMaybe<App_Content_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<App_Content_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<App_Content_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<App_Content_Sum_Order_By>;
+  var_pop?: InputMaybe<App_Content_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<App_Content_Var_Samp_Order_By>;
+  variance?: InputMaybe<App_Content_Variance_Order_By>;
+};
+
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type App_Content_Append_Input = {
   user_group_ids?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "app.content" */
+export type App_Content_Arr_Rel_Insert_Input = {
+  data: Array<App_Content_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<App_Content_On_Conflict>;
 };
 
 /** columns and relationships of "app.content_assets" */
@@ -12071,6 +12682,13 @@ export type App_Content_Assets_Updates = {
 export type App_Content_Avg_Fields = {
   __typename?: 'app_content_avg_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "app.content" */
+export type App_Content_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "app.content_blocks" */
@@ -12523,7 +13141,9 @@ export type App_Content_Bool_Exp = {
   is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
   is_protected?: InputMaybe<Boolean_Comparison_Exp>;
   is_public?: InputMaybe<Boolean_Comparison_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
   meta_description?: InputMaybe<String_Comparison_Exp>;
+  nl_parent_page_id?: InputMaybe<Int_Comparison_Exp>;
   owner?: InputMaybe<Users_Summary_View_Bool_Exp>;
   path?: InputMaybe<String_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
@@ -12536,6 +13156,8 @@ export type App_Content_Bool_Exp = {
   thumbnail_path?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   title_lower?: InputMaybe<App_Content_Lower_Title_Bool_Exp>;
+  translated_content_pages?: InputMaybe<App_Content_Bool_Exp>;
+  translated_content_pages_aggregate?: InputMaybe<App_Content_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   updated_by?: InputMaybe<Users_Summary_View_Bool_Exp>;
   updated_by_profile_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -12936,6 +13558,7 @@ export type App_Content_Delete_Key_Input = {
 /** input type for incrementing numeric columns in table "app.content" */
 export type App_Content_Inc_Input = {
   id?: InputMaybe<Scalars['Int']>;
+  nl_parent_page_id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "app.content" */
@@ -12954,7 +13577,9 @@ export type App_Content_Insert_Input = {
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_protected?: InputMaybe<Scalars['Boolean']>;
   is_public?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   meta_description?: InputMaybe<Scalars['String']>;
+  nl_parent_page_id?: InputMaybe<Scalars['Int']>;
   owner?: InputMaybe<Users_Summary_View_Obj_Rel_Insert_Input>;
   path?: InputMaybe<Scalars['String']>;
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
@@ -12967,6 +13592,7 @@ export type App_Content_Insert_Input = {
   thumbnail_path?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   title_lower?: InputMaybe<App_Content_Lower_Title_Obj_Rel_Insert_Input>;
+  translated_content_pages?: InputMaybe<App_Content_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   updated_by?: InputMaybe<Users_Summary_View_Obj_Rel_Insert_Input>;
   updated_by_profile_id?: InputMaybe<Scalars['uuid']>;
@@ -12987,6 +13613,7 @@ export type App_Content_Labels = {
   enum_content_type?: Maybe<Lookup_Enum_Content_Types>;
   id: Scalars['Int'];
   label: Scalars['String'];
+  language: Lookup_Languages_Enum;
   link_to?: Maybe<Scalars['jsonb']>;
   updated_at: Scalars['timestamptz'];
 };
@@ -13070,6 +13697,7 @@ export type App_Content_Labels_Bool_Exp = {
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
   link_to?: InputMaybe<Jsonb_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
@@ -13110,6 +13738,7 @@ export type App_Content_Labels_Insert_Input = {
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Obj_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_to?: InputMaybe<Scalars['jsonb']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -13165,6 +13794,7 @@ export type App_Content_Labels_Order_By = {
   enum_content_type?: InputMaybe<Lookup_Enum_Content_Types_Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
+  language?: InputMaybe<Order_By>;
   link_to?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -13190,6 +13820,8 @@ export enum App_Content_Labels_Select_Column {
   /** column name */
   Label = 'label',
   /** column name */
+  Language = 'language',
+  /** column name */
   LinkTo = 'link_to',
   /** column name */
   UpdatedAt = 'updated_at'
@@ -13201,6 +13833,7 @@ export type App_Content_Labels_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_to?: InputMaybe<Scalars['jsonb']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -13237,6 +13870,7 @@ export type App_Content_Labels_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_to?: InputMaybe<Scalars['jsonb']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -13257,6 +13891,8 @@ export enum App_Content_Labels_Update_Column {
   Id = 'id',
   /** column name */
   Label = 'label',
+  /** column name */
+  Language = 'language',
   /** column name */
   LinkTo = 'link_to',
   /** column name */
@@ -13484,6 +14120,7 @@ export type App_Content_Max_Fields = {
   header_path?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   meta_description?: Maybe<Scalars['String']>;
+  nl_parent_page_id?: Maybe<Scalars['Int']>;
   path?: Maybe<Scalars['String']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -13498,6 +14135,30 @@ export type App_Content_Max_Fields = {
   user_profile_id?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "app.content" */
+export type App_Content_Max_Order_By = {
+  content_width?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  depublish_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  header_path?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  meta_description?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
+  path?: InputMaybe<Order_By>;
+  publish_at?: InputMaybe<Order_By>;
+  published_at?: InputMaybe<Order_By>;
+  seo_description?: InputMaybe<Order_By>;
+  seo_image_path?: InputMaybe<Order_By>;
+  seo_keywords?: InputMaybe<Order_By>;
+  seo_title?: InputMaybe<Order_By>;
+  thumbnail_path?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  updated_by_profile_id?: InputMaybe<Order_By>;
+  user_profile_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type App_Content_Min_Fields = {
   __typename?: 'app_content_min_fields';
@@ -13508,6 +14169,7 @@ export type App_Content_Min_Fields = {
   header_path?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   meta_description?: Maybe<Scalars['String']>;
+  nl_parent_page_id?: Maybe<Scalars['Int']>;
   path?: Maybe<Scalars['String']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -13520,6 +14182,30 @@ export type App_Content_Min_Fields = {
   updated_at?: Maybe<Scalars['timestamptz']>;
   updated_by_profile_id?: Maybe<Scalars['uuid']>;
   user_profile_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "app.content" */
+export type App_Content_Min_Order_By = {
+  content_width?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  depublish_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  header_path?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  meta_description?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
+  path?: InputMaybe<Order_By>;
+  publish_at?: InputMaybe<Order_By>;
+  published_at?: InputMaybe<Order_By>;
+  seo_description?: InputMaybe<Order_By>;
+  seo_image_path?: InputMaybe<Order_By>;
+  seo_keywords?: InputMaybe<Order_By>;
+  seo_title?: InputMaybe<Order_By>;
+  thumbnail_path?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  updated_by_profile_id?: InputMaybe<Order_By>;
+  user_profile_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "app.content" */
@@ -13543,7 +14229,8 @@ export type App_Content_Nav_Elements = {
   description?: Maybe<Scalars['String']>;
   icon_name: Scalars['String'];
   id: Scalars['Int'];
-  label: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
+  language: Lookup_Languages_Enum;
   link_target?: Maybe<Scalars['String']>;
   placement: Scalars['String'];
   position: Scalars['Int'];
@@ -13655,6 +14342,7 @@ export type App_Content_Nav_Elements_Bool_Exp = {
   icon_name?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   label?: InputMaybe<String_Comparison_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
   link_target?: InputMaybe<String_Comparison_Exp>;
   placement?: InputMaybe<String_Comparison_Exp>;
   position?: InputMaybe<Int_Comparison_Exp>;
@@ -13702,6 +14390,7 @@ export type App_Content_Nav_Elements_Insert_Input = {
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_target?: InputMaybe<Scalars['String']>;
   placement?: InputMaybe<Scalars['String']>;
   position?: InputMaybe<Scalars['Int']>;
@@ -13807,6 +14496,7 @@ export type App_Content_Nav_Elements_Order_By = {
   icon_name?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
+  language?: InputMaybe<Order_By>;
   link_target?: InputMaybe<Order_By>;
   placement?: InputMaybe<Order_By>;
   position?: InputMaybe<Order_By>;
@@ -13844,6 +14534,8 @@ export enum App_Content_Nav_Elements_Select_Column {
   /** column name */
   Label = 'label',
   /** column name */
+  Language = 'language',
+  /** column name */
   LinkTarget = 'link_target',
   /** column name */
   Placement = 'placement',
@@ -13867,6 +14559,7 @@ export type App_Content_Nav_Elements_Set_Input = {
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_target?: InputMaybe<Scalars['String']>;
   placement?: InputMaybe<Scalars['String']>;
   position?: InputMaybe<Scalars['Int']>;
@@ -13938,6 +14631,7 @@ export type App_Content_Nav_Elements_Stream_Cursor_Value_Input = {
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   link_target?: InputMaybe<Scalars['String']>;
   placement?: InputMaybe<Scalars['String']>;
   position?: InputMaybe<Scalars['Int']>;
@@ -13979,6 +14673,8 @@ export enum App_Content_Nav_Elements_Update_Column {
   Id = 'id',
   /** column name */
   Label = 'label',
+  /** column name */
+  Language = 'language',
   /** column name */
   LinkTarget = 'link_target',
   /** column name */
@@ -14086,7 +14782,9 @@ export type App_Content_Order_By = {
   is_deleted?: InputMaybe<Order_By>;
   is_protected?: InputMaybe<Order_By>;
   is_public?: InputMaybe<Order_By>;
+  language?: InputMaybe<Order_By>;
   meta_description?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
   owner?: InputMaybe<Users_Summary_View_Order_By>;
   path?: InputMaybe<Order_By>;
   profile?: InputMaybe<Users_Profiles_Order_By>;
@@ -14099,6 +14797,7 @@ export type App_Content_Order_By = {
   thumbnail_path?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   title_lower?: InputMaybe<App_Content_Lower_Title_Order_By>;
+  translated_content_pages_aggregate?: InputMaybe<App_Content_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   updated_by?: InputMaybe<Users_Summary_View_Order_By>;
   updated_by_profile_id?: InputMaybe<Order_By>;
@@ -14139,7 +14838,11 @@ export enum App_Content_Select_Column {
   /** column name */
   IsPublic = 'is_public',
   /** column name */
+  Language = 'language',
+  /** column name */
   MetaDescription = 'meta_description',
+  /** column name */
+  NlParentPageId = 'nl_parent_page_id',
   /** column name */
   Path = 'path',
   /** column name */
@@ -14168,6 +14871,26 @@ export enum App_Content_Select_Column {
   UserProfileId = 'user_profile_id'
 }
 
+/** select "app_content_aggregate_bool_exp_bool_and_arguments_columns" columns of table "app.content" */
+export enum App_Content_Select_Column_App_Content_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsProtected = 'is_protected',
+  /** column name */
+  IsPublic = 'is_public'
+}
+
+/** select "app_content_aggregate_bool_exp_bool_or_arguments_columns" columns of table "app.content" */
+export enum App_Content_Select_Column_App_Content_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsProtected = 'is_protected',
+  /** column name */
+  IsPublic = 'is_public'
+}
+
 /** input type for updating data in table "app.content" */
 export type App_Content_Set_Input = {
   content_type?: InputMaybe<Lookup_Enum_Content_Types_Enum>;
@@ -14180,7 +14903,9 @@ export type App_Content_Set_Input = {
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_protected?: InputMaybe<Scalars['Boolean']>;
   is_public?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   meta_description?: InputMaybe<Scalars['String']>;
+  nl_parent_page_id?: InputMaybe<Scalars['Int']>;
   path?: InputMaybe<Scalars['String']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14200,18 +14925,39 @@ export type App_Content_Set_Input = {
 export type App_Content_Stddev_Fields = {
   __typename?: 'app_content_stddev_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "app.content" */
+export type App_Content_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type App_Content_Stddev_Pop_Fields = {
   __typename?: 'app_content_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "app.content" */
+export type App_Content_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type App_Content_Stddev_Samp_Fields = {
   __typename?: 'app_content_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "app.content" */
+export type App_Content_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "app_content" */
@@ -14234,7 +14980,9 @@ export type App_Content_Stream_Cursor_Value_Input = {
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_protected?: InputMaybe<Scalars['Boolean']>;
   is_public?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   meta_description?: InputMaybe<Scalars['String']>;
+  nl_parent_page_id?: InputMaybe<Scalars['Int']>;
   path?: InputMaybe<Scalars['String']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14254,6 +15002,13 @@ export type App_Content_Stream_Cursor_Value_Input = {
 export type App_Content_Sum_Fields = {
   __typename?: 'app_content_sum_fields';
   id?: Maybe<Scalars['Int']>;
+  nl_parent_page_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "app.content" */
+export type App_Content_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "app.content" */
@@ -14279,7 +15034,11 @@ export enum App_Content_Update_Column {
   /** column name */
   IsPublic = 'is_public',
   /** column name */
+  Language = 'language',
+  /** column name */
   MetaDescription = 'meta_description',
+  /** column name */
+  NlParentPageId = 'nl_parent_page_id',
   /** column name */
   Path = 'path',
   /** column name */
@@ -14330,18 +15089,39 @@ export type App_Content_Updates = {
 export type App_Content_Var_Pop_Fields = {
   __typename?: 'app_content_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "app.content" */
+export type App_Content_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type App_Content_Var_Samp_Fields = {
   __typename?: 'app_content_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "app.content" */
+export type App_Content_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type App_Content_Variance_Fields = {
   __typename?: 'app_content_variance_fields';
   id?: Maybe<Scalars['Float']>;
+  nl_parent_page_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "app.content" */
+export type App_Content_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  nl_parent_page_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "app.interactive_tour" */
@@ -18968,6 +19748,188 @@ export type App_Site_Variables_Updates = {
   where: App_Site_Variables_Bool_Exp;
 };
 
+/** Contains the translated labels in all languages for the Archief voor Onderwijs frontend client */
+export type App_Translations = {
+  __typename?: 'app_translations';
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+  value: Scalars['String'];
+  value_type: Scalars['String'];
+};
+
+/** aggregated selection of "app.translations" */
+export type App_Translations_Aggregate = {
+  __typename?: 'app_translations_aggregate';
+  aggregate?: Maybe<App_Translations_Aggregate_Fields>;
+  nodes: Array<App_Translations>;
+};
+
+/** aggregate fields of "app.translations" */
+export type App_Translations_Aggregate_Fields = {
+  __typename?: 'app_translations_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<App_Translations_Max_Fields>;
+  min?: Maybe<App_Translations_Min_Fields>;
+};
+
+
+/** aggregate fields of "app.translations" */
+export type App_Translations_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Translations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "app.translations". All fields are combined with a logical 'AND'. */
+export type App_Translations_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Translations_Bool_Exp>>;
+  _not?: InputMaybe<App_Translations_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Translations_Bool_Exp>>;
+  component?: InputMaybe<String_Comparison_Exp>;
+  key?: InputMaybe<String_Comparison_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
+  location?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+  value_type?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app.translations" */
+export enum App_Translations_Constraint {
+  /** unique or primary key constraint on columns "key", "location", "language", "component" */
+  TranslationsPkey = 'translations_pkey'
+}
+
+/** input type for inserting data into table "app.translations" */
+export type App_Translations_Insert_Input = {
+  component?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
+  location?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+  value_type?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type App_Translations_Max_Fields = {
+  __typename?: 'app_translations_max_fields';
+  component?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  value_type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type App_Translations_Min_Fields = {
+  __typename?: 'app_translations_min_fields';
+  component?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  value_type?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "app.translations" */
+export type App_Translations_Mutation_Response = {
+  __typename?: 'app_translations_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App_Translations>;
+};
+
+/** on_conflict condition type for table "app.translations" */
+export type App_Translations_On_Conflict = {
+  constraint: App_Translations_Constraint;
+  update_columns?: Array<App_Translations_Update_Column>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app.translations". */
+export type App_Translations_Order_By = {
+  component?: InputMaybe<Order_By>;
+  key?: InputMaybe<Order_By>;
+  language?: InputMaybe<Order_By>;
+  location?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+  value_type?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app.translations */
+export type App_Translations_Pk_Columns_Input = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+};
+
+/** select columns of table "app.translations" */
+export enum App_Translations_Select_Column {
+  /** column name */
+  Component = 'component',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  Language = 'language',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Value = 'value',
+  /** column name */
+  ValueType = 'value_type'
+}
+
+/** input type for updating data in table "app.translations" */
+export type App_Translations_Set_Input = {
+  component?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
+  location?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+  value_type?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "app_translations" */
+export type App_Translations_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Translations_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Translations_Stream_Cursor_Value_Input = {
+  component?: InputMaybe<Scalars['String']>;
+  key?: InputMaybe<Scalars['String']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
+  location?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+  value_type?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "app.translations" */
+export enum App_Translations_Update_Column {
+  /** column name */
+  Component = 'component',
+  /** column name */
+  Key = 'key',
+  /** column name */
+  Language = 'language',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Value = 'value',
+  /** column name */
+  ValueType = 'value_type'
+}
+
+export type App_Translations_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<App_Translations_Set_Input>;
+  where: App_Translations_Bool_Exp;
+};
+
 /** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
 export type Bigint_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['bigint']>;
@@ -21661,6 +22623,153 @@ export type Lookup_Graph_Updates = {
   where: Lookup_Graph_Bool_Exp;
 };
 
+/** Contains the list of languages that the Archief voor Onderwijs website is translated into. For now only NL */
+export type Lookup_Languages = {
+  __typename?: 'lookup_languages';
+  comment: Scalars['String'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "lookup.languages" */
+export type Lookup_Languages_Aggregate = {
+  __typename?: 'lookup_languages_aggregate';
+  aggregate?: Maybe<Lookup_Languages_Aggregate_Fields>;
+  nodes: Array<Lookup_Languages>;
+};
+
+/** aggregate fields of "lookup.languages" */
+export type Lookup_Languages_Aggregate_Fields = {
+  __typename?: 'lookup_languages_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Lookup_Languages_Max_Fields>;
+  min?: Maybe<Lookup_Languages_Min_Fields>;
+};
+
+
+/** aggregate fields of "lookup.languages" */
+export type Lookup_Languages_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "lookup.languages". All fields are combined with a logical 'AND'. */
+export type Lookup_Languages_Bool_Exp = {
+  _and?: InputMaybe<Array<Lookup_Languages_Bool_Exp>>;
+  _not?: InputMaybe<Lookup_Languages_Bool_Exp>;
+  _or?: InputMaybe<Array<Lookup_Languages_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "lookup.languages" */
+export enum Lookup_Languages_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  LanguagesPkey = 'languages_pkey'
+}
+
+export enum Lookup_Languages_Enum {
+  /** Nederlands */
+  Nl = 'NL'
+}
+
+/** Boolean expression to compare columns of type "lookup_languages_enum". All fields are combined with logical 'AND'. */
+export type Lookup_Languages_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Lookup_Languages_Enum>;
+  _in?: InputMaybe<Array<Lookup_Languages_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Lookup_Languages_Enum>;
+  _nin?: InputMaybe<Array<Lookup_Languages_Enum>>;
+};
+
+/** input type for inserting data into table "lookup.languages" */
+export type Lookup_Languages_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Lookup_Languages_Max_Fields = {
+  __typename?: 'lookup_languages_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Lookup_Languages_Min_Fields = {
+  __typename?: 'lookup_languages_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "lookup.languages" */
+export type Lookup_Languages_Mutation_Response = {
+  __typename?: 'lookup_languages_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Lookup_Languages>;
+};
+
+/** on_conflict condition type for table "lookup.languages" */
+export type Lookup_Languages_On_Conflict = {
+  constraint: Lookup_Languages_Constraint;
+  update_columns?: Array<Lookup_Languages_Update_Column>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "lookup.languages". */
+export type Lookup_Languages_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: lookup.languages */
+export type Lookup_Languages_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "lookup.languages" */
+export enum Lookup_Languages_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "lookup.languages" */
+export type Lookup_Languages_Set_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "lookup_languages" */
+export type Lookup_Languages_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Lookup_Languages_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Lookup_Languages_Stream_Cursor_Value_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "lookup.languages" */
+export enum Lookup_Languages_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+export type Lookup_Languages_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Lookup_Languages_Set_Input>;
+  where: Lookup_Languages_Bool_Exp;
+};
+
 /** mapping tabel om van ldap onderwijs niveaus naar thesaurus lom onderwijs niveaus te mappen en omgekeerd */
 export type Lookup_Ldap_Context_To_Lom_Thesaurus_Structure = {
   __typename?: 'lookup_ldap_context_to_lom_thesaurus_structure';
@@ -22381,6 +23490,10 @@ export type Mutation_Root = {
   delete_app_assignments_v2_quality_labels?: Maybe<App_Assignments_V2_Quality_Labels_Mutation_Response>;
   /** delete single row from the table: "app.assignments_v2_quality_labels" */
   delete_app_assignments_v2_quality_labels_by_pk?: Maybe<App_Assignments_V2_Quality_Labels>;
+  /** delete data from the table: "app.assignments_v2_relations" */
+  delete_app_assignments_v2_relations?: Maybe<App_Assignments_V2_Relations_Mutation_Response>;
+  /** delete single row from the table: "app.assignments_v2_relations" */
+  delete_app_assignments_v2_relations_by_pk?: Maybe<App_Assignments_V2_Relations>;
   /** delete data from the table: "app.collection_bookmarks" */
   delete_app_collection_bookmarks?: Maybe<App_Collection_Bookmarks_Mutation_Response>;
   /** delete single row from the table: "app.collection_bookmarks" */
@@ -22507,6 +23620,10 @@ export type Mutation_Root = {
   delete_app_site_variables?: Maybe<App_Site_Variables_Mutation_Response>;
   /** delete single row from the table: "app.site_variables" */
   delete_app_site_variables_by_pk?: Maybe<App_Site_Variables>;
+  /** delete data from the table: "app.translations" */
+  delete_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** delete single row from the table: "app.translations" */
+  delete_app_translations_by_pk?: Maybe<App_Translations>;
   /** delete data from the table: "lookup.enum_assignment_content_labels" */
   delete_lookup_enum_assignment_content_labels?: Maybe<Lookup_Enum_Assignment_Content_Labels_Mutation_Response>;
   /** delete single row from the table: "lookup.enum_assignment_content_labels" */
@@ -22575,6 +23692,10 @@ export type Mutation_Root = {
   delete_lookup_graph?: Maybe<Lookup_Graph_Mutation_Response>;
   /** delete single row from the table: "lookup.graph" */
   delete_lookup_graph_by_pk?: Maybe<Lookup_Graph>;
+  /** delete data from the table: "lookup.languages" */
+  delete_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** delete single row from the table: "lookup.languages" */
+  delete_lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** delete data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
   delete_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
   /** delete single row from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
@@ -22729,6 +23850,10 @@ export type Mutation_Root = {
   insert_app_assignments_v2_quality_labels?: Maybe<App_Assignments_V2_Quality_Labels_Mutation_Response>;
   /** insert a single row into the table: "app.assignments_v2_quality_labels" */
   insert_app_assignments_v2_quality_labels_one?: Maybe<App_Assignments_V2_Quality_Labels>;
+  /** insert data into the table: "app.assignments_v2_relations" */
+  insert_app_assignments_v2_relations?: Maybe<App_Assignments_V2_Relations_Mutation_Response>;
+  /** insert a single row into the table: "app.assignments_v2_relations" */
+  insert_app_assignments_v2_relations_one?: Maybe<App_Assignments_V2_Relations>;
   /** insert data into the table: "app.collection_bookmarks" */
   insert_app_collection_bookmarks?: Maybe<App_Collection_Bookmarks_Mutation_Response>;
   /** insert a single row into the table: "app.collection_bookmarks" */
@@ -22857,6 +23982,10 @@ export type Mutation_Root = {
   insert_app_site_variables?: Maybe<App_Site_Variables_Mutation_Response>;
   /** insert a single row into the table: "app.site_variables" */
   insert_app_site_variables_one?: Maybe<App_Site_Variables>;
+  /** insert data into the table: "app.translations" */
+  insert_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** insert a single row into the table: "app.translations" */
+  insert_app_translations_one?: Maybe<App_Translations>;
   /** insert data into the table: "lookup.enum_assignment_content_labels" */
   insert_lookup_enum_assignment_content_labels?: Maybe<Lookup_Enum_Assignment_Content_Labels_Mutation_Response>;
   /** insert a single row into the table: "lookup.enum_assignment_content_labels" */
@@ -22925,6 +24054,10 @@ export type Mutation_Root = {
   insert_lookup_graph?: Maybe<Lookup_Graph_Mutation_Response>;
   /** insert a single row into the table: "lookup.graph" */
   insert_lookup_graph_one?: Maybe<Lookup_Graph>;
+  /** insert data into the table: "lookup.languages" */
+  insert_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** insert a single row into the table: "lookup.languages" */
+  insert_lookup_languages_one?: Maybe<Lookup_Languages>;
   /** insert data into the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
   insert_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
   /** insert a single row into the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
@@ -23101,6 +24234,12 @@ export type Mutation_Root = {
   update_app_assignments_v2_quality_labels_by_pk?: Maybe<App_Assignments_V2_Quality_Labels>;
   /** update multiples rows of table: "app.assignments_v2_quality_labels" */
   update_app_assignments_v2_quality_labels_many?: Maybe<Array<Maybe<App_Assignments_V2_Quality_Labels_Mutation_Response>>>;
+  /** update data of the table: "app.assignments_v2_relations" */
+  update_app_assignments_v2_relations?: Maybe<App_Assignments_V2_Relations_Mutation_Response>;
+  /** update single row of the table: "app.assignments_v2_relations" */
+  update_app_assignments_v2_relations_by_pk?: Maybe<App_Assignments_V2_Relations>;
+  /** update multiples rows of table: "app.assignments_v2_relations" */
+  update_app_assignments_v2_relations_many?: Maybe<Array<Maybe<App_Assignments_V2_Relations_Mutation_Response>>>;
   /** update data of the table: "app.collection_bookmarks" */
   update_app_collection_bookmarks?: Maybe<App_Collection_Bookmarks_Mutation_Response>;
   /** update single row of the table: "app.collection_bookmarks" */
@@ -23291,6 +24430,12 @@ export type Mutation_Root = {
   update_app_site_variables_by_pk?: Maybe<App_Site_Variables>;
   /** update multiples rows of table: "app.site_variables" */
   update_app_site_variables_many?: Maybe<Array<Maybe<App_Site_Variables_Mutation_Response>>>;
+  /** update data of the table: "app.translations" */
+  update_app_translations?: Maybe<App_Translations_Mutation_Response>;
+  /** update single row of the table: "app.translations" */
+  update_app_translations_by_pk?: Maybe<App_Translations>;
+  /** update multiples rows of table: "app.translations" */
+  update_app_translations_many?: Maybe<Array<Maybe<App_Translations_Mutation_Response>>>;
   /** update data of the table: "lookup.enum_assignment_content_labels" */
   update_lookup_enum_assignment_content_labels?: Maybe<Lookup_Enum_Assignment_Content_Labels_Mutation_Response>;
   /** update single row of the table: "lookup.enum_assignment_content_labels" */
@@ -23393,6 +24538,12 @@ export type Mutation_Root = {
   update_lookup_graph_by_pk?: Maybe<Lookup_Graph>;
   /** update multiples rows of table: "lookup.graph" */
   update_lookup_graph_many?: Maybe<Array<Maybe<Lookup_Graph_Mutation_Response>>>;
+  /** update data of the table: "lookup.languages" */
+  update_lookup_languages?: Maybe<Lookup_Languages_Mutation_Response>;
+  /** update single row of the table: "lookup.languages" */
+  update_lookup_languages_by_pk?: Maybe<Lookup_Languages>;
+  /** update multiples rows of table: "lookup.languages" */
+  update_lookup_languages_many?: Maybe<Array<Maybe<Lookup_Languages_Mutation_Response>>>;
   /** update data of the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
   update_lookup_ldap_context_to_lom_thesaurus_structure?: Maybe<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure_Mutation_Response>;
   /** update single row of the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
@@ -23684,6 +24835,18 @@ export type Mutation_RootDelete_App_Assignments_V2_Quality_LabelsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_App_Assignments_V2_Quality_Labels_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Assignments_V2_RelationsArgs = {
+  where: App_Assignments_V2_Relations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Assignments_V2_Relations_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -24067,6 +25230,21 @@ export type Mutation_RootDelete_App_Site_Variables_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_App_TranslationsArgs = {
+  where: App_Translations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Lookup_Enum_Assignment_Content_LabelsArgs = {
   where: Lookup_Enum_Assignment_Content_Labels_Bool_Exp;
 };
@@ -24269,6 +25447,18 @@ export type Mutation_RootDelete_Lookup_Graph_By_PkArgs = {
   object: Scalars['String'];
   predicate: Scalars['String'];
   subject: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_LanguagesArgs = {
+  where: Lookup_Languages_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Lookup_Languages_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -24756,6 +25946,20 @@ export type Mutation_RootInsert_App_Assignments_V2_Quality_Labels_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_App_Assignments_V2_RelationsArgs = {
+  objects: Array<App_Assignments_V2_Relations_Insert_Input>;
+  on_conflict?: InputMaybe<App_Assignments_V2_Relations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Assignments_V2_Relations_OneArgs = {
+  object: App_Assignments_V2_Relations_Insert_Input;
+  on_conflict?: InputMaybe<App_Assignments_V2_Relations_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_App_Collection_BookmarksArgs = {
   objects: Array<App_Collection_Bookmarks_Insert_Input>;
   on_conflict?: InputMaybe<App_Collection_Bookmarks_On_Conflict>;
@@ -25202,6 +26406,20 @@ export type Mutation_RootInsert_App_Site_Variables_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_App_TranslationsArgs = {
+  objects: Array<App_Translations_Insert_Input>;
+  on_conflict?: InputMaybe<App_Translations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_Translations_OneArgs = {
+  object: App_Translations_Insert_Input;
+  on_conflict?: InputMaybe<App_Translations_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Lookup_Enum_Assignment_Content_LabelsArgs = {
   objects: Array<Lookup_Enum_Assignment_Content_Labels_Insert_Input>;
   on_conflict?: InputMaybe<Lookup_Enum_Assignment_Content_Labels_On_Conflict>;
@@ -25436,6 +26654,20 @@ export type Mutation_RootInsert_Lookup_GraphArgs = {
 export type Mutation_RootInsert_Lookup_Graph_OneArgs = {
   object: Lookup_Graph_Insert_Input;
   on_conflict?: InputMaybe<Lookup_Graph_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_LanguagesArgs = {
+  objects: Array<Lookup_Languages_Insert_Input>;
+  on_conflict?: InputMaybe<Lookup_Languages_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Lookup_Languages_OneArgs = {
+  object: Lookup_Languages_Insert_Input;
+  on_conflict?: InputMaybe<Lookup_Languages_On_Conflict>;
 };
 
 
@@ -26058,6 +27290,26 @@ export type Mutation_RootUpdate_App_Assignments_V2_Quality_Labels_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_App_Assignments_V2_Quality_Labels_ManyArgs = {
   updates: Array<App_Assignments_V2_Quality_Labels_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Assignments_V2_RelationsArgs = {
+  _set?: InputMaybe<App_Assignments_V2_Relations_Set_Input>;
+  where: App_Assignments_V2_Relations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Assignments_V2_Relations_By_PkArgs = {
+  _set?: InputMaybe<App_Assignments_V2_Relations_Set_Input>;
+  pk_columns: App_Assignments_V2_Relations_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Assignments_V2_Relations_ManyArgs = {
+  updates: Array<App_Assignments_V2_Relations_Updates>;
 };
 
 
@@ -26834,6 +28086,26 @@ export type Mutation_RootUpdate_App_Site_Variables_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_App_TranslationsArgs = {
+  _set?: InputMaybe<App_Translations_Set_Input>;
+  where: App_Translations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Translations_By_PkArgs = {
+  _set?: InputMaybe<App_Translations_Set_Input>;
+  pk_columns: App_Translations_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_Translations_ManyArgs = {
+  updates: Array<App_Translations_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Lookup_Enum_Assignment_Content_LabelsArgs = {
   _set?: InputMaybe<Lookup_Enum_Assignment_Content_Labels_Set_Input>;
   where: Lookup_Enum_Assignment_Content_Labels_Bool_Exp;
@@ -27170,6 +28442,26 @@ export type Mutation_RootUpdate_Lookup_Graph_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Lookup_Graph_ManyArgs = {
   updates: Array<Lookup_Graph_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_LanguagesArgs = {
+  _set?: InputMaybe<Lookup_Languages_Set_Input>;
+  where: Lookup_Languages_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Languages_By_PkArgs = {
+  _set?: InputMaybe<Lookup_Languages_Set_Input>;
+  pk_columns: Lookup_Languages_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Lookup_Languages_ManyArgs = {
+  updates: Array<Lookup_Languages_Updates>;
 };
 
 
@@ -27919,6 +29211,10 @@ export type Query_Root = {
   app_assignments_v2_contributors_aggregate: App_Assignments_V2_Contributors_Aggregate;
   /** fetch data from the table: "app.assignments_v2_contributors" using primary key columns */
   app_assignments_v2_contributors_by_pk?: Maybe<App_Assignments_V2_Contributors>;
+  /** fetch data from the table: "app.assignments_v2_counts" */
+  app_assignments_v2_counts: Array<App_Assignments_V2_Counts>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_counts" */
+  app_assignments_v2_counts_aggregate: App_Assignments_V2_Counts_Aggregate;
   /** fetch data from the table: "app.assignments_v2_index" */
   app_assignments_v2_index: Array<App_Assignments_V2_Index>;
   /** fetch aggregated fields from the table: "app.assignments_v2_index" */
@@ -27939,6 +29235,12 @@ export type Query_Root = {
   app_assignments_v2_quality_labels_aggregate: App_Assignments_V2_Quality_Labels_Aggregate;
   /** fetch data from the table: "app.assignments_v2_quality_labels" using primary key columns */
   app_assignments_v2_quality_labels_by_pk?: Maybe<App_Assignments_V2_Quality_Labels>;
+  /** fetch data from the table: "app.assignments_v2_relations" */
+  app_assignments_v2_relations: Array<App_Assignments_V2_Relations>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_relations" */
+  app_assignments_v2_relations_aggregate: App_Assignments_V2_Relations_Aggregate;
+  /** fetch data from the table: "app.assignments_v2_relations" using primary key columns */
+  app_assignments_v2_relations_by_pk?: Maybe<App_Assignments_V2_Relations>;
   /** fetch data from the table: "app.bundels_index" */
   app_bundels_index: Array<App_Bundels_Index>;
   /** fetch aggregated fields from the table: "app.bundels_index" */
@@ -28177,6 +29479,12 @@ export type Query_Root = {
   app_site_variables_aggregate: App_Site_Variables_Aggregate;
   /** fetch data from the table: "app.site_variables" using primary key columns */
   app_site_variables_by_pk?: Maybe<App_Site_Variables>;
+  /** fetch data from the table: "app.translations" */
+  app_translations: Array<App_Translations>;
+  /** fetch aggregated fields from the table: "app.translations" */
+  app_translations_aggregate: App_Translations_Aggregate;
+  /** fetch data from the table: "app.translations" using primary key columns */
+  app_translations_by_pk?: Maybe<App_Translations>;
   /** fetch data from the table: "lookup.enum_assignment_content_labels" */
   lookup_enum_assignment_content_labels: Array<Lookup_Enum_Assignment_Content_Labels>;
   /** fetch aggregated fields from the table: "lookup.enum_assignment_content_labels" */
@@ -28279,6 +29587,12 @@ export type Query_Root = {
   lookup_graph_aggregate: Lookup_Graph_Aggregate;
   /** fetch data from the table: "lookup.graph" using primary key columns */
   lookup_graph_by_pk?: Maybe<Lookup_Graph>;
+  /** fetch data from the table: "lookup.languages" */
+  lookup_languages: Array<Lookup_Languages>;
+  /** fetch aggregated fields from the table: "lookup.languages" */
+  lookup_languages_aggregate: Lookup_Languages_Aggregate;
+  /** fetch data from the table: "lookup.languages" using primary key columns */
+  lookup_languages_by_pk?: Maybe<Lookup_Languages>;
   /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
   lookup_ldap_context_to_lom_thesaurus_structure: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** fetch aggregated fields from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
@@ -28670,6 +29984,24 @@ export type Query_RootApp_Assignments_V2_Contributors_By_PkArgs = {
 };
 
 
+export type Query_RootApp_Assignments_V2_CountsArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Counts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Counts_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Assignments_V2_Counts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Counts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Counts_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+};
+
+
 export type Query_RootApp_Assignments_V2_IndexArgs = {
   distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -28748,6 +30080,29 @@ export type Query_RootApp_Assignments_V2_Quality_Labels_AggregateArgs = {
 
 
 export type Query_RootApp_Assignments_V2_Quality_Labels_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootApp_Assignments_V2_RelationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Assignments_V2_Relations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Assignments_V2_Relations_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -29699,6 +31054,32 @@ export type Query_RootApp_Site_Variables_By_PkArgs = {
 };
 
 
+export type Query_RootApp_TranslationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Translations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Query_RootApp_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+};
+
+
 export type Query_RootLookup_Enum_Assignment_Content_LabelsArgs = {
   distinct_on?: InputMaybe<Array<Lookup_Enum_Assignment_Content_Labels_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -30089,6 +31470,29 @@ export type Query_RootLookup_Graph_By_PkArgs = {
   object: Scalars['String'];
   predicate: Scalars['String'];
   subject: Scalars['String'];
+};
+
+
+export type Query_RootLookup_LanguagesArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Languages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Query_RootLookup_Languages_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -34439,6 +35843,12 @@ export type Subscription_Root = {
   app_assignments_v2_contributors_by_pk?: Maybe<App_Assignments_V2_Contributors>;
   /** fetch data from the table in a streaming manner: "app.assignments_v2_contributors" */
   app_assignments_v2_contributors_stream: Array<App_Assignments_V2_Contributors>;
+  /** fetch data from the table: "app.assignments_v2_counts" */
+  app_assignments_v2_counts: Array<App_Assignments_V2_Counts>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_counts" */
+  app_assignments_v2_counts_aggregate: App_Assignments_V2_Counts_Aggregate;
+  /** fetch data from the table in a streaming manner: "app.assignments_v2_counts" */
+  app_assignments_v2_counts_stream: Array<App_Assignments_V2_Counts>;
   /** fetch data from the table: "app.assignments_v2_index" */
   app_assignments_v2_index: Array<App_Assignments_V2_Index>;
   /** fetch aggregated fields from the table: "app.assignments_v2_index" */
@@ -34467,6 +35877,14 @@ export type Subscription_Root = {
   app_assignments_v2_quality_labels_by_pk?: Maybe<App_Assignments_V2_Quality_Labels>;
   /** fetch data from the table in a streaming manner: "app.assignments_v2_quality_labels" */
   app_assignments_v2_quality_labels_stream: Array<App_Assignments_V2_Quality_Labels>;
+  /** fetch data from the table: "app.assignments_v2_relations" */
+  app_assignments_v2_relations: Array<App_Assignments_V2_Relations>;
+  /** fetch aggregated fields from the table: "app.assignments_v2_relations" */
+  app_assignments_v2_relations_aggregate: App_Assignments_V2_Relations_Aggregate;
+  /** fetch data from the table: "app.assignments_v2_relations" using primary key columns */
+  app_assignments_v2_relations_by_pk?: Maybe<App_Assignments_V2_Relations>;
+  /** fetch data from the table in a streaming manner: "app.assignments_v2_relations" */
+  app_assignments_v2_relations_stream: Array<App_Assignments_V2_Relations>;
   /** fetch data from the table in a streaming manner: "app.assignments_v2" */
   app_assignments_v2_stream: Array<App_Assignments_V2>;
   /** fetch data from the table: "app.bundels_index" */
@@ -34795,6 +36213,14 @@ export type Subscription_Root = {
   app_site_variables_by_pk?: Maybe<App_Site_Variables>;
   /** fetch data from the table in a streaming manner: "app.site_variables" */
   app_site_variables_stream: Array<App_Site_Variables>;
+  /** fetch data from the table: "app.translations" */
+  app_translations: Array<App_Translations>;
+  /** fetch aggregated fields from the table: "app.translations" */
+  app_translations_aggregate: App_Translations_Aggregate;
+  /** fetch data from the table: "app.translations" using primary key columns */
+  app_translations_by_pk?: Maybe<App_Translations>;
+  /** fetch data from the table in a streaming manner: "app.translations" */
+  app_translations_stream: Array<App_Translations>;
   /** fetch data from the table: "lookup.enum_assignment_content_labels" */
   lookup_enum_assignment_content_labels: Array<Lookup_Enum_Assignment_Content_Labels>;
   /** fetch aggregated fields from the table: "lookup.enum_assignment_content_labels" */
@@ -34931,6 +36357,14 @@ export type Subscription_Root = {
   lookup_graph_by_pk?: Maybe<Lookup_Graph>;
   /** fetch data from the table in a streaming manner: "lookup.graph" */
   lookup_graph_stream: Array<Lookup_Graph>;
+  /** fetch data from the table: "lookup.languages" */
+  lookup_languages: Array<Lookup_Languages>;
+  /** fetch aggregated fields from the table: "lookup.languages" */
+  lookup_languages_aggregate: Lookup_Languages_Aggregate;
+  /** fetch data from the table: "lookup.languages" using primary key columns */
+  lookup_languages_by_pk?: Maybe<Lookup_Languages>;
+  /** fetch data from the table in a streaming manner: "lookup.languages" */
+  lookup_languages_stream: Array<Lookup_Languages>;
   /** fetch data from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
   lookup_ldap_context_to_lom_thesaurus_structure: Array<Lookup_Ldap_Context_To_Lom_Thesaurus_Structure>;
   /** fetch aggregated fields from the table: "lookup.ldap_context_to_lom_thesaurus_structure" */
@@ -35445,6 +36879,31 @@ export type Subscription_RootApp_Assignments_V2_Contributors_StreamArgs = {
 };
 
 
+export type Subscription_RootApp_Assignments_V2_CountsArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Counts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Counts_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Counts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Counts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Counts_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Counts_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<App_Assignments_V2_Counts_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Assignments_V2_Counts_Bool_Exp>;
+};
+
+
 export type Subscription_RootApp_Assignments_V2_IndexArgs = {
   distinct_on?: InputMaybe<Array<App_Assignments_V2_Index_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -35552,6 +37011,36 @@ export type Subscription_RootApp_Assignments_V2_Quality_Labels_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Assignments_V2_Quality_Labels_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Assignments_V2_Quality_Labels_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_RelationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Relations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Assignments_V2_Relations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Assignments_V2_Relations_Order_By>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Relations_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootApp_Assignments_V2_Relations_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<App_Assignments_V2_Relations_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Assignments_V2_Relations_Bool_Exp>;
 };
 
 
@@ -36817,6 +38306,39 @@ export type Subscription_RootApp_Site_Variables_StreamArgs = {
 };
 
 
+export type Subscription_RootApp_TranslationsArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Translations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Translations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<App_Translations_Order_By>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_Translations_By_PkArgs = {
+  component: Scalars['String'];
+  key: Scalars['String'];
+  language: Lookup_Languages_Enum;
+  location: Scalars['String'];
+};
+
+
+export type Subscription_RootApp_Translations_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<App_Translations_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Translations_Bool_Exp>;
+};
+
+
 export type Subscription_RootLookup_Enum_Assignment_Content_LabelsArgs = {
   distinct_on?: InputMaybe<Array<Lookup_Enum_Assignment_Content_Labels_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -37326,6 +38848,36 @@ export type Subscription_RootLookup_Graph_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Lookup_Graph_Stream_Cursor_Input>>;
   where?: InputMaybe<Lookup_Graph_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_LanguagesArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Languages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Lookup_Languages_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Lookup_Languages_Order_By>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
+};
+
+
+export type Subscription_RootLookup_Languages_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootLookup_Languages_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Lookup_Languages_Stream_Cursor_Input>>;
+  where?: InputMaybe<Lookup_Languages_Bool_Exp>;
 };
 
 
@@ -42596,6 +44148,7 @@ export type Users_Profiles = {
   item_bookmarks: Array<App_Item_Bookmarks>;
   /** An aggregate relationship */
   item_bookmarks_aggregate: App_Item_Bookmarks_Aggregate;
+  language: Lookup_Languages_Enum;
   /** An array relationship */
   loms: Array<Users_Profiles_Lom_Links>;
   /** An aggregate relationship */
@@ -43033,6 +44586,7 @@ export type Users_Profiles_Bool_Exp = {
   is_exception?: InputMaybe<Boolean_Comparison_Exp>;
   item_bookmarks?: InputMaybe<App_Item_Bookmarks_Bool_Exp>;
   item_bookmarks_aggregate?: InputMaybe<App_Item_Bookmarks_Aggregate_Bool_Exp>;
+  language?: InputMaybe<Lookup_Languages_Enum_Comparison_Exp>;
   loms?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
   loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Bool_Exp>;
   notifications?: InputMaybe<Users_Notifications_Bool_Exp>;
@@ -43090,6 +44644,7 @@ export type Users_Profiles_Insert_Input = {
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
   item_bookmarks?: InputMaybe<App_Item_Bookmarks_Arr_Rel_Insert_Input>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   loms?: InputMaybe<Users_Profiles_Lom_Links_Arr_Rel_Insert_Input>;
   notifications?: InputMaybe<Users_Notifications_Arr_Rel_Insert_Input>;
   organisation?: InputMaybe<Shared_Organisations_Obj_Rel_Insert_Input>;
@@ -43416,6 +44971,7 @@ export type Users_Profiles_Order_By = {
   is_deleted?: InputMaybe<Order_By>;
   is_exception?: InputMaybe<Order_By>;
   item_bookmarks_aggregate?: InputMaybe<App_Item_Bookmarks_Aggregate_Order_By>;
+  language?: InputMaybe<Order_By>;
   loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Order_By>;
   notifications_aggregate?: InputMaybe<Users_Notifications_Aggregate_Order_By>;
   organisation?: InputMaybe<Shared_Organisations_Order_By>;
@@ -43463,6 +45019,8 @@ export enum Users_Profiles_Select_Column {
   /** column name */
   IsException = 'is_exception',
   /** column name */
+  Language = 'language',
+  /** column name */
   Stamboek = 'stamboek',
   /** column name */
   Title = 'title',
@@ -43501,6 +45059,7 @@ export type Users_Profiles_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   stamboek?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -43528,6 +45087,7 @@ export type Users_Profiles_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
+  language?: InputMaybe<Lookup_Languages_Enum>;
   stamboek?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -43558,6 +45118,8 @@ export enum Users_Profiles_Update_Column {
   IsDeleted = 'is_deleted',
   /** column name */
   IsException = 'is_exception',
+  /** column name */
+  Language = 'language',
   /** column name */
   Stamboek = 'stamboek',
   /** column name */
@@ -44653,14 +46215,14 @@ export type GetContentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetContentByIdQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', id: any, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', uid: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
+export type GetContentByIdQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: number | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', id: any, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', uid: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
 
 export type GetContentByIdsQueryVariables = Exact<{
   ids: Array<Scalars['Int']> | Scalars['Int'];
 }>;
 
 
-export type GetContentByIdsQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', id: number, full_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
+export type GetContentByIdsQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, publish_at?: any | null, published_at?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: number | null, updated_at?: any | null, user_group_ids?: any | null, user_profile_id?: any | null, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', id: number, full_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', label: string, id: number, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
 
 export type GetContentLabelsByContentTypeQueryVariables = Exact<{
   contentType: Scalars['String'];
@@ -44671,10 +46233,11 @@ export type GetContentLabelsByContentTypeQuery = { __typename?: 'query_root', ap
 
 export type GetContentPageByPathQueryVariables = Exact<{
   path: Scalars['String'];
+  language: Lookup_Languages_Enum;
 }>;
 
 
-export type GetContentPageByPathQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', id: any, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', uid: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
+export type GetContentPageByPathQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: number | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', id: any, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', label: string, id: number } } | null, user?: { __typename?: 'shared_users', uid: any, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }> };
 
 export type GetContentPagesQueryVariables = Exact<{
   where?: InputMaybe<App_Content_Bool_Exp>;
@@ -44686,7 +46249,7 @@ export type GetContentPagesQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', id: number, content_type: Lookup_Enum_Content_Types_Enum, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, user_group_ids?: any | null, content_width: string, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', or_id: string, logo_url?: string | null, name: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', id: number, label: string } } | null, user?: { __typename?: 'shared_users', id: number, first_name?: string | null, last_name?: string | null, full_name?: string | null, role?: { __typename?: 'shared_user_roles', id: number, label: string } | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }> }>, app_content_aggregate: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count: number } | null }, app_content_labels: Array<{ __typename?: 'app_content_labels', id: number, content_content_labels_aggregate: { __typename?: 'app_content_content_labels_aggregate', aggregate?: { __typename?: 'app_content_content_labels_aggregate_fields', count: number } | null } }> };
+export type GetContentPagesQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', id: number, content_type: Lookup_Enum_Content_Types_Enum, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: number | null, updated_at?: any | null, user_group_ids?: any | null, content_width: string, profile?: { __typename?: 'users_profiles', organisation?: { __typename?: 'shared_organisations', or_id: string, logo_url?: string | null, name: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', id: number, label: string } } | null, user?: { __typename?: 'shared_users', id: number, first_name?: string | null, last_name?: string | null, full_name?: string | null, role?: { __typename?: 'shared_user_roles', id: number, label: string } | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }> }>, app_content_aggregate: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count: number } | null }, app_content_labels: Array<{ __typename?: 'app_content_labels', id: number, content_content_labels_aggregate: { __typename?: 'app_content_content_labels_aggregate', aggregate?: { __typename?: 'app_content_content_labels_aggregate_fields', count: number } | null } }> };
 
 export type GetContentPagesByIdsQueryVariables = Exact<{
   ids?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
@@ -44705,7 +46268,7 @@ export type GetContentPagesWithBlocksQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesWithBlocksQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, updated_at?: any | null, content_width: string, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', user?: { __typename?: 'shared_users', first_name?: string | null, last_name?: string | null, role?: { __typename?: 'shared_user_roles', id: number, label: string } | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }>, app_content_aggregate: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count: number } | null }, app_content_labels: Array<{ __typename?: 'app_content_labels', id: number, content_content_labels_aggregate: { __typename?: 'app_content_content_labels_aggregate', aggregate?: { __typename?: 'app_content_content_labels_aggregate_fields', count: number } | null } }> };
+export type GetContentPagesWithBlocksQuery = { __typename?: 'query_root', app_content: Array<{ __typename?: 'app_content', content_type: Lookup_Enum_Content_Types_Enum, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: number, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: number | null, updated_at?: any | null, content_width: string, user_group_ids?: any | null, profile?: { __typename?: 'users_profiles', user?: { __typename?: 'shared_users', first_name?: string | null, last_name?: string | null, role?: { __typename?: 'shared_user_roles', id: number, label: string } | null } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_content_labels', content_label: { __typename?: 'app_content_labels', id: number, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_blocks', content_block_type: Lookup_Enum_Content_Block_Types_Enum, content_id: number, created_at: any, id: number, position: number, updated_at: any, variables?: any | null, enum_content_block_type: { __typename?: 'lookup_enum_content_block_types', description?: string | null, value: string } }> }>, app_content_aggregate: { __typename?: 'app_content_aggregate', aggregate?: { __typename?: 'app_content_aggregate_fields', count: number } | null }, app_content_labels: Array<{ __typename?: 'app_content_labels', id: number, content_content_labels_aggregate: { __typename?: 'app_content_content_labels_aggregate', aggregate?: { __typename?: 'app_content_content_labels_aggregate_fields', count: number } | null } }> };
 
 export type GetContentTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -44897,7 +46460,7 @@ export type DeleteNavigationItemMutation = { __typename?: 'mutation_root', delet
 export type GetAllNavigationItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllNavigationItemsQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+export type GetAllNavigationItemsQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label?: string | null, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
 
 export type GetNavigationBarsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -44909,21 +46472,21 @@ export type GetNavigationItemByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetNavigationItemByIdQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+export type GetNavigationItemByIdQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label?: string | null, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
 
 export type GetNavigationItemsByPlacementQueryVariables = Exact<{
   placement: Scalars['String'];
 }>;
 
 
-export type GetNavigationItemsByPlacementQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
+export type GetNavigationItemsByPlacementQuery = { __typename?: 'query_root', app_content_nav_elements: Array<{ __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label?: string | null, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null }> };
 
 export type InsertNavigationItemMutationVariables = Exact<{
   navigationItem: App_Content_Nav_Elements_Insert_Input;
 }>;
 
 
-export type InsertNavigationItemMutation = { __typename?: 'mutation_root', insert_app_content_nav_elements_one?: { __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null } | null };
+export type InsertNavigationItemMutation = { __typename?: 'mutation_root', insert_app_content_nav_elements_one?: { __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label?: string | null, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null } | null };
 
 export type UpdateNavigationItemByIdMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -44931,7 +46494,7 @@ export type UpdateNavigationItemByIdMutationVariables = Exact<{
 }>;
 
 
-export type UpdateNavigationItemByIdMutation = { __typename?: 'mutation_root', update_app_content_nav_elements_by_pk?: { __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label: string, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null } | null };
+export type UpdateNavigationItemByIdMutation = { __typename?: 'mutation_root', update_app_content_nav_elements_by_pk?: { __typename?: 'app_content_nav_elements', id: number, created_at: any, description?: string | null, user_group_ids?: any | null, icon_name: string, label?: string | null, link_target?: string | null, placement: string, position: number, updated_at: any, content_type: string, content_path: string, tooltip?: string | null } | null };
 
 export type GetOrganisationsQueryVariables = Exact<{
   ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
@@ -45073,13 +46636,13 @@ export const UpdateContentPageLabelDocument = {"kind":"Document","definitions":[
 export const DeleteContentBlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentBlock"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentBlockMutation, DeleteContentBlockMutationVariables>;
 export const DeleteContentLabelLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentLabelLinks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPageId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"content_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPageId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentLabelLinksMutation, DeleteContentLabelLinksMutationVariables>;
 export const GetCollectionTileByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCollectionTileById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"obj"},"name":{"kind":"Name","value":"app_collections"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"collection_fragments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"view_counts_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetCollectionTileByIdQuery, GetCollectionTileByIdQueryVariables>;
-export const GetContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdQuery, GetContentByIdQueryVariables>;
-export const GetContentByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdsQuery, GetContentByIdsQueryVariables>;
+export const GetContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdQuery, GetContentByIdQueryVariables>;
+export const GetContentByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdsQuery, GetContentByIdsQueryVariables>;
 export const GetContentLabelsByContentTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentLabelsByContentType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content_type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]} as unknown as DocumentNode<GetContentLabelsByContentTypeQuery, GetContentLabelsByContentTypeQueryVariables>;
-export const GetContentPageByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPageByPathQuery, GetContentPageByPathQueryVariables>;
-export const GetContentPagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_content_labels_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"or_id"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesQuery, GetContentPagesQueryVariables>;
+export const GetContentPageByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"language"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"lookup_languages_enum"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"language"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPageByPathQuery, GetContentPageByPathQueryVariables>;
+export const GetContentPagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_content_labels_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"or_id"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesQuery, GetContentPagesQueryVariables>;
 export const GetContentPagesByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}}]}}]}}]} as unknown as DocumentNode<GetContentPagesByIdsQuery, GetContentPagesByIdsQueryVariables>;
-export const GetContentPagesWithBlocksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesWithBlocks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_content_labels_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesWithBlocksQuery, GetContentPagesWithBlocksQueryVariables>;
+export const GetContentPagesWithBlocksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesWithBlocks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_content_labels_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"user"},"name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"content_blocks"},"name":{"kind":"Name","value":"contentBlockssBycontentId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"enum_content_block_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_labels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesWithBlocksQuery, GetContentPagesWithBlocksQueryVariables>;
 export const GetContentTypesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_enum_content_types"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetContentTypesQuery, GetContentTypesQueryVariables>;
 export const GetItemByExternalIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getItemByExternalId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bpchar"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"external_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"browse_path"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"issued"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"item_collaterals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"description"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"subtitle","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"external_id"}}]}}]}}]}}]} as unknown as DocumentNode<GetItemByExternalIdQuery, GetItemByExternalIdQueryVariables>;
 export const GetItemTileByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getItemTileById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bpchar"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"obj"},"name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"external_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"browse_path"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"issued"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"item_collaterals"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"description"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"subtitle","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"external_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"view_counts_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetItemTileByIdQuery, GetItemTileByIdQueryVariables>;

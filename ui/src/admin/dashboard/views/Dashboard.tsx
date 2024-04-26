@@ -1,10 +1,8 @@
 import React from 'react';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '../../../react-admin/modules/shared/layouts';
-import { useTranslation } from '~shared/hooks/useTranslation';
 
 const Dashboard = () => {
-	const { tHtml, tText } = useTranslation();
-
 	return (
 		<AdminLayout pageTitle={tText('admin/dashboard/views/dashboard___dashboard')}>
 			<AdminLayout.Content>

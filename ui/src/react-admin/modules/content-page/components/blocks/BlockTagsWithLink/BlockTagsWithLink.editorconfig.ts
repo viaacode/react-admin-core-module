@@ -1,3 +1,4 @@
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -7,8 +8,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE = (): TagsWithLinkBlockComponentState[] => [
 	{
@@ -21,31 +20,21 @@ export const INITIAL_TAGS_WITH_LINK_BLOCK_STATE = (): DefaultContentBlockState =
 
 export const TAGS_WITH_LINK_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/tags-with-link___tags'
-	),
+	name: tText('admin/content-block/helpers/generators/tags-with-link___tags'),
 	type: ContentBlockType.TagsWithLink,
 	components: {
 		state: INITIAL_TAGS_WITH_LINK_COMPONENTS_STATE(),
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/tag-with-link___tag'
-		),
+		name: tText('admin/content-block/helpers/generators/tag-with-link___tag'),
 		fields: {
 			label: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/tag-with-link___label-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/tag-with-link___label-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/tag-with-link___label'
-					),
+					label: tText('admin/content-block/helpers/generators/tag-with-link___label'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			link: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/tag-with-link___link'
-				),
+				label: tText('admin/content-block/helpers/generators/tag-with-link___link'),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK'],

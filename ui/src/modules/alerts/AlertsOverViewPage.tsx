@@ -1,11 +1,9 @@
 import { FC, ReactNode } from 'react';
 import { Button, Modal } from '@meemoo/react-components';
 import { AlertsOverview } from '~modules/alerts/views';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const AlertsOverviewPage: FC = () => {
-	const { tText } = useTranslation();
-
 	const renderPopup = ({
 		title,
 		body,

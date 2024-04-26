@@ -37,9 +37,10 @@ query getContentById($id: Int!) {
 		publish_at
 		published_at
 		title
+		language
+		nl_parent_page_id
 		updated_at
 		user_group_ids
-		user_profile_id
 		content_content_labels {
 			content_label {
 				label

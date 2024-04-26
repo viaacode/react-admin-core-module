@@ -1,10 +1,10 @@
 import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 
-import { AdminConfigManager } from '~core/config';
 import { ContentItemStyle } from '~modules/content-page/components/blocks';
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
 import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
 import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	Color,
@@ -34,9 +34,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		showTitle: true,
 		showDescription: true,
 		showDate: false,
-		buttonLabel: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/page-overview___lees-meer'
-		),
+		buttonLabel: tText('admin/content-block/helpers/generators/page-overview___lees-meer'),
 		itemsPerPage: 20,
 	});
 
@@ -54,20 +52,18 @@ export const INITIAL_PAGE_OVERVIEW_BLOCK_STATE = (): DefaultContentBlockState =>
 export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => {
 	return {
 		position,
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/page-overview___pagina-overzicht'
-		),
+		name: tText('admin/content-block/helpers/generators/page-overview___pagina-overzicht'),
 		type: ContentBlockType.PageOverview,
 		components: {
 			state: INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE(),
 			fields: {
 				contentTypeAndTabs: CONTENT_TYPE_AND_LABELS_INPUT({
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___type-van-de-paginas-die-je-wil-weergeven-optioneel-kan-je-deze-ook-indelen-per-categorie'
 					),
 				}),
 				tabStyle: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___menu-type'
 					),
 					editorType: ContentBlockEditor.Select,
@@ -78,7 +74,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				allowMultiple: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/page-overview___mag-meerdere-menu-items-selecteren'
 						),
 					} as CheckboxProps,
@@ -86,13 +82,13 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				centerHeader: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/page-overview___menu-items-centereren'
 						),
 					} as CheckboxProps,
 				},
 				itemStyle: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___item-type'
 					),
 					editorType: ContentBlockEditor.Select,
@@ -103,7 +99,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/page-overview___toon-de-titel'
 						),
 					} as CheckboxProps,
@@ -111,7 +107,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				showDescription: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/page-overview___toon-de-beschrijving'
 						),
 					} as CheckboxProps,
@@ -119,25 +115,25 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				showDate: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/page-overview___toon-de-datum-en-categorie'
 						),
 					} as CheckboxProps,
 				},
 				buttonLabel: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___label-voor-de-button-lijst-item'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				},
 				buttonAltTitle: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___alt-title-text'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				},
 				itemsPerPage: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___items-per-pagina'
 					),
 					editorType: ContentBlockEditor.MultiRange,
@@ -154,7 +150,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 			state: INITIAL_PAGE_OVERVIEW_BLOCK_STATE(),
 			fields: {
 				sortOrder: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/page-overview___sorteer-volgorde'
 					),
 					editorType: ContentBlockEditor.Select,
@@ -163,11 +159,11 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					},
 				},
 				headerBackgroundColor: BACKGROUND_COLOR_FIELD(
-					AdminConfigManager.getConfig().services.i18n.tText(
+					tText(
 						'admin/content-block/helpers/generators/defaults___titelbalk-achtergrondkleur'
 					),
 					{
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/defaults___transparant'
 						),
 						value: Color.Transparent,

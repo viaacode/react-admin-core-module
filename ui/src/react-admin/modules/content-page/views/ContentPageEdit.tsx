@@ -748,13 +748,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								})}
 								onCopy={() =>
 									AdminConfigManager.getConfig().services.toastService.showToast({
-										title: AdminConfigManager.getConfig().services.i18n.tText(
+										title: tText(
 											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
 										),
-										description:
-											AdminConfigManager.getConfig().services.i18n.tText(
-												'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
-											),
+										description: tText(
+											'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
+										),
 										type: ToastType.SUCCESS,
 									})
 								}

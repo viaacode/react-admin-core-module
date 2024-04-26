@@ -111,10 +111,8 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				})
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
-					'modules/user/components/user-delete-modal___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText('modules/user/components/user-delete-modal___error'),
+				description: tText(
 					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt',
 					undefined,
 					[AVO]
@@ -500,22 +498,16 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			);
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
-					'modules/user/components/user-delete-modal___success'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/users/views/user-edit___de-gebruiker-is-aangepast'
-				),
+				title: tText('modules/user/components/user-delete-modal___success'),
+				description: tText('admin/users/views/user-edit___de-gebruiker-is-aangepast'),
 				type: ToastType.SUCCESS,
 			});
 			deleteCallback();
 		} catch (err) {
 			console.error(new CustomError('Failed to remove users', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
-					'modules/user/components/user-delete-modal___error'
-				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText('modules/user/components/user-delete-modal___error'),
+				description: tText(
 					'admin/users/views/user-overview___het-verwijderen-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,

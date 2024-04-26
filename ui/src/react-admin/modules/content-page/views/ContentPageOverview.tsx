@@ -11,7 +11,7 @@ import {
 } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, get, set } from 'lodash-es';
+import { cloneDeep, compact, get, groupBy, partition, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	ReactNode,
@@ -21,6 +21,8 @@ import React, {
 	useState,
 } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import Link from '~shared/components/Link/Link';
 import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
@@ -65,6 +67,7 @@ import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
+	TranslationFilterValue,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~shared/components/error';
@@ -90,6 +93,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 	];
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
+	const [languageOptions] = useGetLanguageFilterOptions();
 
 	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
@@ -114,7 +118,8 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			setSelectedCheckboxes(
 				contentPageLabelOptions,
 				(tableState?.labels || []).map((label) => String(label)) as string[]
-			)
+			),
+			setSelectedCheckboxes(languageOptions, tableState?.translations || [])
 		);
 	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
 
@@ -208,6 +213,41 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				]
 			)
 		);
+
+		// Filter by language
+		if (filters.translations?.length) {
+			const [translationNotExistValues, translationDoesExistValues] = partition(
+				filters.translations,
+				(translationFilterValue) => translationFilterValue.startsWith('NOT_')
+			) as [`NOT_${LanguageCode}`[], LanguageCode[]];
+
+			// Add filters for values: NOT_NL or NOT_EN
+			translationNotExistValues.forEach((translationNotExistValue) => {
+				const languageValue = translationNotExistValue.split('_')[0] as LanguageCode;
+				andFilters.push({
+					_not: {
+						_or: [
+							{ translated_content_pages: { language: { _eq: languageValue } } },
+							{ language: { _eq: languageValue } },
+						],
+					},
+				});
+			});
+
+			// Add filters for values: NL or EN
+			translationDoesExistValues.forEach((translationDoesExistValue) => {
+				andFilters.push({
+					_or: [
+						{
+							translated_content_pages: {
+								language: { _eq: translationDoesExistValue },
+							},
+						},
+						{ language: { _eq: translationDoesExistValue } },
+					],
+				});
+			});
+		}
 
 		// When you get to this point we assume you already have either the EDIT_ANY_CONTENT_PAGES or EDIT_OWN_CONTENT_PAGES permission
 		if (!hasPerm(EDIT_ANY_CONTENT_PAGES)) {

@@ -30,6 +30,8 @@ query getContentPagesWithBlocks(
 		publish_at
 		published_at
 		title
+		language
+		nl_parent_page_id
 		updated_at
 		content_width
 		user_group_ids

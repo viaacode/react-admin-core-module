@@ -15,6 +15,7 @@ import {
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
 import { Media } from '../media/media.types';
+import { LanguageCode } from '../translations';
 import { DbContentBlock } from './content-block.types';
 import { ContentPageQueryTypes } from './queries/content-pages.queries';
 
@@ -61,6 +62,8 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
+	language: LanguageCode;
+	nlParentPageId: number | string;
 	description: string | null;
 	seoDescription: string | null;
 	metaDescription: string | null;

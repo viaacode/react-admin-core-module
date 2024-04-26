@@ -146,117 +146,91 @@ function setConfig() {
 			buttonTypes: () => [
 				// Het archief buttons
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___zilver'),
+				// 	label: tText('index___zilver'),
 				// 	value: 'content-page-button--silver',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText(
+				// 	label: tText(
 				// 		'index___blauw-groen'
 				// 	),
 				// 	value: 'content-page-button--teal',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___wit'),
+				// 	label: tText('index___wit'),
 				// 	value: 'content-page-button--white',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___zwart'),
+				// 	label: tText('index___zwart'),
 				// 	value: 'content-page-button--black',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___outline'),
+				// 	label: tText('index___outline'),
 				// 	value: 'content-page-button--outline',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___tekst'),
+				// 	label: tText('index___tekst'),
 				// 	value: 'content-page-button--text',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___rood'),
+				// 	label: tText('index___rood'),
 				// 	value: 'content-page-button--red',
 				// },
 				// {
-				// 	label: AdminConfigManager.getConfig().services.i18n.tText('index___link'),
+				// 	label: tText('index___link'),
 				// 	value: 'content-page-button--link',
 				// },
 
 				// Avo buttons
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___primair'
-					),
+					label: tText('admin/content-block/content-block___primair'),
 					value: 'primary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___secundair'
-					),
+					label: tText('admin/content-block/content-block___secundair'),
 					value: 'secondary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___secundair-invers'
-					),
+					label: tText('admin/content-block/content-block___secundair-invers'),
 					value: 'secondary-i',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___tertiair'
-					),
+					label: tText('admin/content-block/content-block___tertiair'),
 					value: 'tertiary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___randloos'
-					),
+					label: tText('admin/content-block/content-block___randloos'),
 					value: 'borderless',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___randloos-invers'
-					),
+					label: tText('admin/content-block/content-block___randloos-invers'),
 					value: 'borderless-i',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___gevaar'
-					),
+					label: tText('admin/content-block/content-block___gevaar'),
 					value: 'danger',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___gevaar-hover'
-					),
+					label: tText('admin/content-block/content-block___gevaar-hover'),
 					value: 'danger-hover',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___link'
-					),
+					label: tText('admin/content-block/content-block___link'),
 					value: 'link',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___link-inline'
-					),
+					label: tText('admin/content-block/content-block___link-inline'),
 					value: 'inline-link',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___leerling-primair-geel'
-					),
+					label: tText('admin/content-block/content-block___leerling-primair-geel'),
 					value: 'pupil-primary',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___leerling-link-tekst-in-geel'
-					),
+					label: tText('admin/content-block/content-block___leerling-link-tekst-in-geel'),
 					value: 'pupil-link',
 				},
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/content-block___leerling-link-geel-inline'
-					),
+					label: tText('admin/content-block/content-block___leerling-link-geel-inline'),
 					value: 'pupil-inline-link',
 				},
 			],

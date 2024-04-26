@@ -1,4 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { PickerItem } from '~shared/types/content-picker';
 
 import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
@@ -33,12 +34,16 @@ export type ContentOverviewTableCols =
 	| 'createdAt'
 	| 'updatedAt'
 	| 'isPublic'
+	| 'language'
+	| 'translations'
 	| 'publishedAt'
 	| 'publishAt'
 	| 'depublishAt'
 	| 'labels'
 	| 'userGroupIds'
 	| 'actions';
+
+export type TranslationFilterValue = LanguageCode | `NOT_${LanguageCode}`;
 
 export interface ContentTableState extends FilterableTableState {
 	contentType: string[];
@@ -49,6 +54,7 @@ export interface ContentTableState extends FilterableTableState {
 	userGroup: number[];
 	labels: number[];
 	isPublic: string[];
+	translations: TranslationFilterValue;
 }
 
 export interface ContentPageLabel {

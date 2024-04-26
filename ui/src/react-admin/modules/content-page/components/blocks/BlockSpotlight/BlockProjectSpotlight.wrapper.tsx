@@ -1,6 +1,6 @@
 import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
+import { tText } from '~shared/helpers/translation-functions';
 
 import { ContentPageService } from '../../../services/content-page.service';
 
@@ -97,7 +97,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 						} else {
 							return {
 								title:
-									AdminConfigManager.getConfig().services.i18n.tText(
+									tText(
 										'react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden'
 									) +
 									': ' +
