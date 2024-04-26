@@ -5,13 +5,9 @@ import { UserService } from '~modules/user/user.service';
 import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
-import { useTranslation } from './useTranslation';
-
 type UseBusinessCategoriesTuple = [string[], boolean];
 
 export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
-	const { tHtml } = useTranslation();
-
 	const [businessCategories, setBusinessCategories] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -36,7 +32,7 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [tHtml]);
+	}, []);
 
 	return [businessCategories, isLoading];
 };

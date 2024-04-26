@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml } from '~shared/helpers/translation-functions';
 
 interface SidebarProps {
 	children?: ReactNode;
@@ -23,8 +23,6 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
-	const { tHtml } = useTranslation();
-
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
 			(!!item.location && item.location === location.pathname && !item.exact) ||

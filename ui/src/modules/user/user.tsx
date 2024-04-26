@@ -6,12 +6,10 @@ import { UserDetail } from '~modules/user/views';
 
 import { UserOverview } from '~modules/user/views/UserOverview';
 import { AdminLayout } from '~shared/layouts';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { mockCommonUser } from '../../mock-common-user';
 
 const UserOverviewPage: FC<{ commonUser: Avo.User.CommonUser }> = ({ commonUser }) => {
-	const { tText } = useTranslation();
-
 	return (
 		<AdminLayout pageTitle={tText('admin/users/views/user-overview___gebruikers')}>
 			<AdminLayout.Content>

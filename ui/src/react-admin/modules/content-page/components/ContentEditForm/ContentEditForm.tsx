@@ -26,7 +26,7 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 
@@ -59,8 +59,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	commonUser,
 }) => {
 	// Hooks
-	const { tText } = useTranslation();
-
 	const [contentTypeLabels, setContentTypeLabels] = useState<ContentPageLabel[]>([]);
 
 	const changeContentPageProp = useCallback(

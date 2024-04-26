@@ -15,7 +15,7 @@ import {
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export type AddOrRemove = 'add' | 'remove';
 
@@ -38,8 +38,6 @@ const AddOrRemoveLinkedElementsModal: FunctionComponent<AddOrRemoveLinkedElement
 	labels,
 	callback,
 }) => {
-	const { tText } = useTranslation();
-
 	const [selectedLabels, setSelectedLabels] = useState<TagInfo[] | undefined>(undefined);
 	const [addOrRemove, setAddOrRemove] = useState<AddOrRemove>('add');
 

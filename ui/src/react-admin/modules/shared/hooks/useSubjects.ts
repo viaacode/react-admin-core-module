@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
 import { SettingsService } from '../services/settings-service/settings.service';
-import { useTranslation } from './useTranslation';
 
 type UseSubjectsTuple = [string[], boolean];
 
 export const useSubjects = (): UseSubjectsTuple => {
-	const { tText } = useTranslation();
-
 	const [subjects, setSubjects] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -34,7 +32,7 @@ export const useSubjects = (): UseSubjectsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [tText]);
+	}, []);
 
 	return [subjects, isLoading];
 };

@@ -4,8 +4,6 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { tHtml } from '~shared/helpers/translation-functions';
-import { useTranslation } from '~shared/hooks/useTranslation';
-import { Permissions, PermissionService } from '~shared/services/permission-service';
 
 export type LoadingState = 'loading' | 'loaded' | 'error';
 
@@ -43,8 +41,6 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 	dataObject,
 	render,
 }) => {
-	const { tHtml } = useTranslation();
-
 	const renderError = () => (
 		// <ErrorView
 		// 	message={

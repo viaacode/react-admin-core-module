@@ -24,7 +24,7 @@ import {
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 
@@ -35,8 +35,6 @@ interface ContentDetailMetaDataProps {
 export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataProps> = ({
 	contentPageInfo,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [contentTypes] = useContentTypes();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],

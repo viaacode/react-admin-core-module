@@ -19,7 +19,7 @@ import { CustomError } from '../../helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;
@@ -40,8 +40,6 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	onChange,
 	errors,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [labels, setLabels] = useState<ContentPageLabel[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +69,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 				});
 			})
 			.finally(() => setIsLoading(false));
-	}, [value.selectedContentType, setLabels, tHtml]);
+	}, [value.selectedContentType, setLabels]);
 
 	const handleContentTypeChanged = (selectedValue: string) => {
 		onChange({

@@ -1,7 +1,7 @@
 import { Flex } from '@viaa/avo2-components';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { HorizontalPageSplit, VerticalPageSplit } from 'react-page-split';
+import { HorizontalPageSplit } from 'react-page-split';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
@@ -12,7 +12,7 @@ import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
 import { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import Sidebar from './shared/components/Sidebar/Sidebar';
 
 import './App.scss';
@@ -21,8 +21,6 @@ const queryClient = new QueryClient();
 
 function App() {
 	const [navigationItems, setNavigationItems] = useState<NavigationItemInfo[] | null>(null);
-
-	const { tText } = useTranslation();
 
 	useEffect(() => {
 		GET_NAV_ITEMS()
@@ -37,7 +35,7 @@ function App() {
 					type: ToastType.ERROR,
 				});
 			});
-	}, [tText]);
+	}, []);
 
 	return (
 		<QueryClientProvider client={queryClient}>

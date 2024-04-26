@@ -20,7 +20,7 @@ import { ContentPicker } from '../ContentPicker/ContentPicker';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import type { Avo } from '@viaa/avo2-types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { UserService } from '~modules/user/user.service';
 
 import './MultiUserSelectDropdown.scss';
@@ -49,8 +49,6 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 	onChange,
 	showSelectedValuesOnCollapsed = true,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedProfiles, setSelectedProfiles] = useState<PickerItem[]>([]);
 	const [selectedProfile, setSelectedProfile] = useState<PickerItem | undefined>(undefined);
@@ -96,7 +94,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 					});
 				});
 		}
-	}, [values, setSelectedProfiles, tHtml]);
+	}, [values, setSelectedProfiles]);
 
 	const closeDropdown = () => {
 		setSelectedProfiles([]);

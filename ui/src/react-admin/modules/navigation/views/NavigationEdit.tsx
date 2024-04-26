@@ -15,7 +15,7 @@ import {
 	NavigationEditPageType,
 	NavigationItem,
 } from '../navigation.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
@@ -35,7 +35,6 @@ interface NavigationEditProps {
 }
 
 const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);

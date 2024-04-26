@@ -22,7 +22,7 @@ import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownM
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export interface DateRangeDropdownProps {
 	label: string;
@@ -58,8 +58,6 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 	defaultControls = 'year',
 	onChange,
 }) => {
-	const { tText } = useTranslation();
-
 	// Internal range state (copied to external range state when the user clicks on the apply button
 	const [rangeState, setRangeState] = useState<DateRange>(range);
 	const [dateControls, setDateControls] = useState<DateRangeControls>(defaultControls);

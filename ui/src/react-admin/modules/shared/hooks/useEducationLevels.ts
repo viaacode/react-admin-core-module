@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
 import { SettingsService } from '../services/settings-service/settings.service';
@@ -10,8 +10,6 @@ import { useTranslation } from './useTranslation';
 type UseEducationLevelsTuple = [string[], boolean];
 
 export const useEducationLevels = (): UseEducationLevelsTuple => {
-	const { tHtml } = useTranslation();
-
 	const [educationLevels, setEducationLevels] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 

@@ -12,7 +12,7 @@ import { isNull, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import { tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '../../helpers/custom-error';
 import { PickerItem, PickerTypeOption } from '../../types/content-picker';
@@ -29,7 +29,6 @@ import { parseSearchQuery } from './helpers/parse-picker';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
 
 export interface ContentPickerProps {
 	allowedTypes?: Avo.Core.ContentPickerType[];
@@ -52,7 +51,6 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 	hideTargetSwitch = false,
 	errors = [],
 }) => {
-	const { tHtml, tText } = useTranslation();
 	const [testInput, setTestInput] = useState<string>('');
 
 	// filter available options for the type picker

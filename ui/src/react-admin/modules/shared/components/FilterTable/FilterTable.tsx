@@ -55,7 +55,7 @@ import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { PaginationBar } from '@meemoo/react-components';
 import { Icon } from '../Icon';
@@ -145,8 +145,6 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	onSelectionChanged,
 	onSelectAll,
 }) => {
-	const { tText } = useTranslation();
-
 	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
 	const [searchTerm, setSearchTerm] = useState<string>('');

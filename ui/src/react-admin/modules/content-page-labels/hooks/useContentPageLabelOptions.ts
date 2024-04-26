@@ -3,18 +3,16 @@ import { useEffect, useState } from 'react';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { tText } from '~shared/helpers/translation-functions';
 
-import { CustomError } from '../../shared/helpers/custom-error';
+import { CustomError } from '~shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { useTranslation } from '~shared/hooks/useTranslation';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 
 export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
-	const { tHtml } = useTranslation();
 	const [contentPageLabelOptions, setContentPageLabelOptions] = useState<CheckboxOption[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -51,7 +49,7 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [setIsLoading, setContentPageLabelOptions, tHtml]);
+	}, [setIsLoading, setContentPageLabelOptions]);
 
 	return [contentPageLabelOptions, isLoading];
 };

@@ -11,7 +11,7 @@ import {
 } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, get, groupBy, partition, set } from 'lodash-es';
+import { cloneDeep, compact, get, partition, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	ReactNode,
@@ -21,10 +21,10 @@ import React, {
 	useState,
 } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
 import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
 import { LanguageCode } from '~modules/translations/translations.core.types';
 import Link from '~shared/components/Link/Link';
-import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
@@ -60,14 +60,13 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './ContentPageOverview.scss';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
-	TranslationFilterValue,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~shared/components/error';
@@ -95,7 +94,6 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
 	const [languageOptions] = useGetLanguageFilterOptions();
 
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
@@ -119,9 +117,15 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				contentPageLabelOptions,
 				(tableState?.labels || []).map((label) => String(label)) as string[]
 			),
-			setSelectedCheckboxes(languageOptions, tableState?.translations || [])
+			setSelectedCheckboxes(languageOptions, (tableState?.translations || []) as string[])
 		);
-	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
+	}, [
+		contentPageLabelOptions,
+		contentTypeOptions,
+		tableState,
+		userGroupOptions,
+		languageOptions,
+	]);
 
 	const hasPerm = useCallback(
 		(permission: PermissionName) => {
@@ -275,7 +279,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		data: contentPageResponse,
 		isLoading,
 		refetch: refetchContentPages,
-	} = useGetContentPagesOverview({
+	} = useGetContentPages({
 		page: tableState.page || 0,
 		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
 		sortOrder: tableState.sort_order || 'desc',
@@ -390,10 +394,8 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 
 			case 'contentType':
 				return (
-					get(
-						contentTypes.find((type) => type.value === contentPage.contentType),
-						'label'
-					) || '-'
+					contentTypes.find((type) => type.value === contentPage.contentType)?.label ||
+					'-'
 				);
 
 			case 'isPublic':
@@ -470,6 +472,9 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				return contentPage[columnId]
 					? formatDateString(contentPage[columnId] as string)
 					: '-';
+
+			case 'translations':
+				return 'translations TODO';
 
 			case 'actions':
 				return (

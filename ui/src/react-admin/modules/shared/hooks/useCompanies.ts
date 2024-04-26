@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import {
 	BasicOrganisation,
 	OrganisationService,
@@ -13,8 +13,6 @@ import { useTranslation } from './useTranslation';
 type UseCompaniesTuple = [BasicOrganisation[], boolean];
 
 export const useCompaniesWithUsers = (): UseCompaniesTuple => {
-	const { tHtml } = useTranslation();
-
 	const [companies, setCompanies] = useState<BasicOrganisation[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 

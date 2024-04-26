@@ -2,8 +2,8 @@ import type { Avo } from '@viaa/avo2-types';
 import { LanguageCode } from '~modules/translations/translations.core.types';
 import { PickerItem } from '~shared/types/content-picker';
 
-import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
-import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
+import { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
+import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 import { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
@@ -34,7 +34,6 @@ export type ContentOverviewTableCols =
 	| 'createdAt'
 	| 'updatedAt'
 	| 'isPublic'
-	| 'language'
 	| 'translations'
 	| 'publishedAt'
 	| 'publishAt'

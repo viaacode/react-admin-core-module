@@ -12,7 +12,7 @@ import {
 } from '@viaa/avo2-components';
 
 import { NavigationService } from '../navigation.service';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -33,7 +33,6 @@ export interface NavigationDetailProps {
 }
 
 const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);

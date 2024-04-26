@@ -37,7 +37,7 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
 import { TranslationsService } from '../translations.service';
@@ -52,8 +52,6 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
 	renderPopup,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const {
 		data: allTranslationEntries,
 		refetch: refetchTranslations,

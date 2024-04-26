@@ -62,7 +62,7 @@ import { DefaultComponentProps } from '~shared/types/components';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import { blockHasErrors } from '../helpers/block-has-errors';
 
@@ -89,7 +89,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();

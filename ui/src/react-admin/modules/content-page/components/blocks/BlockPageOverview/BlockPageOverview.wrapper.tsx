@@ -23,7 +23,6 @@ import { ErrorView } from '~shared/components/error';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useDebounce } from '~shared/hooks/useDebounce';
-import { useTranslation } from '~shared/hooks/useTranslation';
 
 export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProps> = ({
 	contentTypeAndTabs = {
@@ -47,8 +46,6 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	renderLink,
 	commonUser,
 }) => {
-	const { tText } = useTranslation();
-
 	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
 		page: NumberParam,
 		item: StringParam,

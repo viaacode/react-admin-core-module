@@ -12,7 +12,7 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;
@@ -48,8 +48,6 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		commonUser,
 		showCopyright,
 	} = props;
-
-	const { tText, tHtml } = useTranslation();
 
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [videoStill, setVideoStill] = useState<string>();
@@ -95,7 +93,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 				type: ToastType.ERROR,
 			});
 		}
-	}, [item, src, poster, tText]);
+	}, [item, src, poster]);
 
 	useEffect(() => {
 		retrieveMediaItem();

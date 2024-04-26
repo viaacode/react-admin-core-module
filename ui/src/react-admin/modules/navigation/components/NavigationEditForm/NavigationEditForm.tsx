@@ -8,7 +8,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
@@ -37,8 +37,6 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	permissionWarning,
 	enableIcons,
 }) => {
-	const { tText } = useTranslation();
-
 	const handleMenuCreate = (label: string) => {
 		return {
 			label,

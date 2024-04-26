@@ -38,7 +38,7 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { DefaultComponentProps } from '~shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
@@ -65,7 +65,6 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	commonUser,
 }) => {
 	// Hooks
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);

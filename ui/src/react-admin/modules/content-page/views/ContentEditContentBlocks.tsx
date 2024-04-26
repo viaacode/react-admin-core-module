@@ -26,7 +26,7 @@ import {
 } from '~modules/content-page/types/content-pages.types';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 import './ContentEditContentBlocks.scss';
@@ -57,7 +57,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	removeComponentFromState,
 	commonUser,
 }) => {
-	const { tText } = useTranslation();
 	const contentBlockIds = (contentPageInfo.content_blocks || []).map((item) => item.id);
 
 	// Hooks

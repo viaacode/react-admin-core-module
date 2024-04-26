@@ -20,7 +20,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { AVO } from '~shared/types';
 import { DeleteContentCounts } from '../user.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { buildLink } from '~shared/helpers/link';
@@ -50,8 +50,6 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	onClose,
 	deleteCallback,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [transferToUser, setTransferToUser] = useState<PickerItem | null>(null);
 	const [transferToUserError, setTransferToUserError] = useState<string | undefined>();
 	const [selectedDeleteOption, setSelectedDeleteOption] =

@@ -1,6 +1,6 @@
 import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { ContentPageService } from '../../../services/content-page.service';
 
@@ -9,7 +9,6 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
-import { useTranslation } from '~shared/hooks/useTranslation';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
@@ -28,8 +27,6 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 	elements,
 	renderLink,
 }) => {
-	const { tHtml } = useTranslation();
-
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<
 		(ContentPageInfo | null)[] | null
@@ -66,7 +63,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 				actionButtons: [],
 			});
 		}
-	}, [elements, setProjectContentPages, setLoadingInfo, tHtml]);
+	}, [elements, setProjectContentPages, setLoadingInfo]);
 
 	useEffect(() => {
 		fetchContentPages();

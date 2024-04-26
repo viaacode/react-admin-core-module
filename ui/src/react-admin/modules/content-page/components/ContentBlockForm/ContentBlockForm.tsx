@@ -37,7 +37,7 @@ import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBloc
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import './ContentBlockForm.scss';
@@ -77,8 +77,6 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 	const configErrors = config.errors || {};
 
 	// Hooks
-	const { tText } = useTranslation();
-
 	// Methods
 	const handleChange = (
 		formGroupType: ContentBlockStateType,

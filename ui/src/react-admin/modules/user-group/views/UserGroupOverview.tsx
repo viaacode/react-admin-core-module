@@ -13,7 +13,7 @@ import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~shared/helpers/custom-error';
 
@@ -34,7 +34,6 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		/**
 		 * Hooks
 		 */
-		const { tHtml, tText } = useTranslation();
 
 		const {
 			data: userGroups,
@@ -233,7 +232,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					type: ToastType.ERROR,
 				});
 			}
-		}, [isErrorUserGroups, tHtml, userGroupError]);
+		}, [isErrorUserGroups, userGroupError]);
 
 		useEffect(() => {
 			if (isErrorPermissions) {
@@ -246,7 +245,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					type: ToastType.ERROR,
 				});
 			}
-		}, [isErrorPermissions, isErrorUserGroups, permissionsError, tHtml, userGroupError]);
+		}, [isErrorPermissions, isErrorUserGroups, permissionsError, userGroupError]);
 
 		/**
 		 * Render

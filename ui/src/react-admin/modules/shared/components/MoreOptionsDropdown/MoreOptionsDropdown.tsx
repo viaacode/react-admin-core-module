@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	Button,
@@ -27,8 +27,6 @@ const MoreOptionsDropdown: FunctionComponent<MoreOptionsDropdownProps> = ({
 	menuItems,
 	onOptionClicked,
 }) => {
-	const { tText } = useTranslation();
-
 	return !!menuItems && !!menuItems.length ? (
 		<Dropdown
 			isOpen={isOpen}

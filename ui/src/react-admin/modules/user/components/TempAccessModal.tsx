@@ -14,7 +14,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
 
@@ -31,8 +31,6 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 	onClose,
 	setTempAccessCallback,
 }) => {
-	const { tText, tHtml } = useTranslation();
-
 	const fromDate = tempAccess ? toDateObject(tempAccess.from) : null;
 	const untilDate = tempAccess ? toDateObject(tempAccess.until) : null;
 
