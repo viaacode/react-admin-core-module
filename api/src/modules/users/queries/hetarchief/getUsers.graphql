@@ -11,6 +11,7 @@ query getUsers(
 		last_name
 		mail
 		last_access_at
+		language
 		group {
 			label
 			name

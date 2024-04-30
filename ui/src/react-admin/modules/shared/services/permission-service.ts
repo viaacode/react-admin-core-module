@@ -140,7 +140,7 @@ export class PermissionService {
 			}
 			case PermissionName.EDIT_OWN_CONTENT_PAGES: {
 				const contentPage: ContentPageInfo = isString(obj)
-					? await ContentPageService.getContentPageByPath(obj)
+					? await ContentPageService.getContentPageByLanguageAndPath(obj)
 					: obj;
 				const contentPageOwnerId = get(contentPage, 'user_profile_id');
 				return !!profileId && !!contentPageOwnerId && profileId === contentPageOwnerId;

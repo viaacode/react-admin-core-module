@@ -29,6 +29,7 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { logAndThrow } from '../../shared/helpers/logAndThrow';
+import { LanguageCode } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
 
@@ -69,7 +70,7 @@ export class ContentPagesController {
 	 * @param tableColumnDataType
 	 * @param where
 	 */
-	@Get('overview')
+	@Get('')
 	@RequireAnyPermissions(PermissionName.VIEW_ADMIN_DASHBOARD)
 	public async fetchContentPages(
 		@Query('offset', ParseIntPipe) offset: number,
@@ -93,16 +94,19 @@ export class ContentPagesController {
 	@ApiOperation({
 		summary: 'Get content page by its path',
 	})
-	public async getContentPageByPath(
+	public async getContentPageByLanguageAndPath(
+		@Query('language') language: LanguageCode | undefined,
 		@Query('path') path: string,
 		@Query('onlyInfo') onlyInfo: string,
 		@Req() request: Request,
 		@Ip() ip,
-		@SessionUser() user: SessionUserEntity
+		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<DbContentPage> {
-		return this.contentPagesService.getContentPageByPathForUser(
+		const user = sessionUser?.getUser();
+		return this.contentPagesService.getContentPageByLanguageAndPathForUser(
+			language || (user.language as LanguageCode),
 			path,
-			user?.getUser(),
+			user,
 			request?.headers?.['Referrer'] as string,
 			ip,
 			onlyInfo === 'true'
@@ -111,12 +115,20 @@ export class ContentPagesController {
 
 	@Get('path-exists')
 	async doesContentPageExist(
+		@Query('language') language: LanguageCode,
 		@Query('path') path: string,
 		@Req() request: Request,
 		@Ip() ip,
 		@SessionUser() user: SessionUserEntity
 	): Promise<{ exists: boolean; title: string; id: number | string }> {
-		const contentPage = await this.getContentPageByPath(path, 'true', request, ip, user);
+		const contentPage = await this.getContentPageByLanguageAndPath(
+			language,
+			path,
+			'true',
+			request,
+			ip,
+			user
+		);
 		return {
 			exists: !!contentPage,
 			title: contentPage?.title ?? null,
@@ -141,6 +153,29 @@ export class ContentPagesController {
 		return {
 			message,
 		};
+	}
+
+	@Get('nl-parent-pages')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_CONTENT_PAGE_LABELS,
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES
+	)
+	public async getNlParentContentPages(
+		@Query('limit', ParseIntPipe) limit: number,
+		@Query('title') title: string | undefined
+	): Promise<
+		| ContentPageQueryTypes['GetNlParentContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetNlParentContentPagesQueryHetArchief']['app_content_page']
+		| ContentPageQueryTypes['GetNlParentContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetNlParentContentPagesByTitleQueryHetArchief']['app_content_page']
+		| null
+	> {
+		if (title) {
+			return this.contentPagesService.getNlParentContentPagesByTitle(title, limit);
+		} else {
+			return this.contentPagesService.getNlParentContentPages(limit);
+		}
 	}
 
 	@Get('public')

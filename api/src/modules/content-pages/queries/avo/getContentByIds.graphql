@@ -17,6 +17,12 @@ query getContentByIds($ids: [Int!]!) {
 		title
 		language
 		nl_parent_page_id
+		translated_content_pages {
+			title
+			language
+			path
+			id
+		}
 		updated_at
 		user_group_ids
 		user_profile_id

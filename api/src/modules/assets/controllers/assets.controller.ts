@@ -85,7 +85,7 @@ export class AssetsController {
 	): Promise<{ url: string }> {
 		if (!file) {
 			throw new BadRequestException(
-				this.translationsService.t(
+				this.translationsService.tText(
 					'modules/assets/controllers/assets___the-request-should-contain-a-file-to-upload'
 				)
 			);

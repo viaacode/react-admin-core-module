@@ -39,7 +39,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 					const projectPath = projectInfo?.project?.value;
 					if (projectPath && projectPath.toString && projectPath.toString()) {
 						try {
-							return await ContentPageService.getContentPageByPath(
+							return await ContentPageService.getContentPageByLanguageAndPath(
 								projectInfo.project.value.toString(),
 								true
 							);

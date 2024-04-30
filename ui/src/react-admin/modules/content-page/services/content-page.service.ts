@@ -12,6 +12,7 @@ import {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -44,25 +45,16 @@ export class ContentPageService {
 		};
 	}
 
-	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson<DbContentPage[]>(
-			stringifyUrl({
-				url: `${this.getBaseUrl()}/public`,
-				query: {
-					limit,
-				},
-			}),
-			{ throwOnNullResponse: true }
-		);
-		return convertDbContentPagesToContentPageInfos(dbContentPages);
-	}
-
-	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
+	public static async getNlParentContentPagesByTitle(
+		title: string | undefined,
+		limit?: number
+	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/projects/public`,
+				url: `${this.getBaseUrl()}/nl-parent-pages`,
 				query: {
-					limit,
+					limit: limit ?? 20,
+					title,
 				},
 			}),
 			{ throwOnNullResponse: true }
@@ -71,7 +63,7 @@ export class ContentPageService {
 	}
 
 	public static async getPublicContentItemsByTitle(
-		title: string,
+		title: string | undefined,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
@@ -88,7 +80,7 @@ export class ContentPageService {
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
-		title: string,
+		title: string | undefined,
 		limit: number
 	): Promise<Partial<ContentPageInfo>[]> {
 		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
@@ -367,10 +359,12 @@ export class ContentPageService {
 
 	/**
 	 * Get a content page with all of its content without the user having to be logged in
+	 * @param language The language the user is currently using the site in. eg: NL or EN
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 * @param onlyInfo only include info about the content page, do not resolve media info inside the content page blocks
 	 */
-	public static async getContentPageByPath(
+	public static async getContentPageByLanguageAndPath(
+		language: LanguageCode,
 		path: string,
 		onlyInfo = false
 	): Promise<ContentPageInfo | null> {
@@ -385,6 +379,7 @@ export class ContentPageService {
 				stringifyUrl({
 					url,
 					query: {
+						language,
 						path,
 						onlyInfo: onlyInfo ? 'true' : 'false',
 					},
@@ -401,11 +396,13 @@ export class ContentPageService {
 
 	/**
 	 * Check if content page with path already exists
+	 * @param language The language the user is currently using the site in. eg: NL or EN
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 * @param id pass the id of the page you're trying to update, when creating a page, omi this param
 	 * @return returns the title of the page if it exists, otherwise returns null
 	 */
 	public static async doesContentPagePathExist(
+		language: LanguageCode,
 		path: string,
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
@@ -418,6 +415,7 @@ export class ContentPageService {
 				stringifyUrl({
 					url: this.getBaseUrl() + '/path-exists',
 					query: {
+						language,
 						path,
 					},
 				}),

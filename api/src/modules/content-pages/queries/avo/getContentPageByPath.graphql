@@ -41,6 +41,12 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 		title
 		language
 		nl_parent_page_id
+		translated_content_pages {
+			title
+			language
+			path
+			id
+		}
 		updated_at
 		user_group_ids
 		content_width

@@ -21,6 +21,9 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import { LanguageInfo } from '~modules/translations/translations.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
@@ -60,6 +63,34 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 }) => {
 	// Hooks
 	const [contentTypeLabels, setContentTypeLabels] = useState<ContentPageLabel[]>([]);
+	const { data: allLanguages } = useGetAllLanguages();
+	const allLanguageOptions = (allLanguages || []).map(
+		(languageInfo: LanguageInfo): SelectOption<string> => ({
+			label: languageInfo.languageLabel,
+			value: languageInfo.languageCode,
+		})
+	);
+	const [language, setLanguage] = useState<LanguageCode>(
+		contentPageInfo.language || LanguageCode.NL
+	);
+	const getParentPagePickerItem = (): PickerItem | null => {
+		if (contentPageInfo.nlParentPageId) {
+			const parentPageInfo = contentPageInfo.translatedPages.find(
+				(p) => p.id === contentPageInfo.nlParentPageId
+			);
+			if (!parentPageInfo) {
+				return null;
+			}
+			return {
+				label: parentPageInfo.title,
+				value: String(parentPageInfo.id),
+				type: 'CONTENT_PAGE',
+				target: undefined,
+			};
+		}
+		return null;
+	};
+	const [nlParentPage, setNlParentPage] = useState<PickerItem | null>(getParentPagePickerItem());
 
 	const changeContentPageProp = useCallback(
 		(
@@ -380,6 +411,35 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										}
 										disabled={!contentPageInfo.contentType}
 									/>
+								</FormGroup>
+							</Column>
+							<Column size="6">
+								<FormGroup label={tText('Taal')}>
+									<Select
+										options={allLanguageOptions}
+										value={contentPageInfo.language}
+										onChange={(newLanguage) => {
+											changeContentPageProp('language', newLanguage);
+										}}
+										placeholder={tText('Selecteer de taal van de pagina')}
+										required
+										aria-label={tText('Selecteer de taal van de pagina')}
+									></Select>
+								</FormGroup>
+							</Column>
+							<Column size="6">
+								<FormGroup label={tText('Nederlandse hoofd pagina')}>
+									<ContentPicker
+										value={getParentPagePickerItem()}
+										onChange={(newNlParentPage) => {
+											const nlParentPageId = newNlParentPage?.value;
+											changeContentPageProp('nlParentPageId', nlParentPageId);
+										}}
+										allowedTypes={['NL_CONTENT_PAGE_PARENT_ID']}
+										hideTypeDropdown
+										hideTargetSwitch
+										placeholder={tText('Leeg indien dit de hoofd pagina is')}
+									></ContentPicker>
 								</FormGroup>
 							</Column>
 							<Column size="12">

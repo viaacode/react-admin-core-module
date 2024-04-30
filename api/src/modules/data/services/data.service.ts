@@ -4,6 +4,8 @@ import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common
 
 import got, { Got, Options } from 'got';
 import { print } from 'graphql/language/printer';
+import { isString } from 'lodash';
+import { CustomError } from '../../shared/helpers/custom-error';
 
 import { GraphQlResponse } from '../types';
 
@@ -63,7 +65,16 @@ export class DataService {
 				);
 			}
 			if (data.errors) {
-				this.logger.error(`GraphQl query failed: ${JSON.stringify(data.errors)}`);
+				this.logger.error(
+					CustomError(`GraphQl query failed`, null, {
+						query: isString(query)
+							? query
+							: ((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)
+									?.name?.value,
+						variables,
+						graphqlErrors: data.errors,
+					})
+				);
 				if (data.errors[0]?.extensions?.code === 'constraint-violation') {
 					throw new DuplicateKeyException({
 						message: data.errors[0].message,

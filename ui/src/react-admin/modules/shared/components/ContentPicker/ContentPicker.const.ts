@@ -1,6 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
+import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
 import { tText } from '~shared/helpers/translation-functions';
 
 import { PickerTypeOption } from '../../types/content-picker';
@@ -21,6 +22,7 @@ export interface PickerItem {
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, string> = () => ({
 	['CONTENT_PAGE']: tText('admin/content/content___content'),
+	['NL_CONTENT_PAGE_PARENT_ID']: tText('Nederlandse hoofd pagina'),
 	['INTERNAL_LINK']: tText('admin/content/content___statisch'),
 	['COLLECTION']: tText('admin/content/content___collecties'),
 	['ITEM']: tText('admin/content/content___items'),
@@ -37,6 +39,9 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, s
 	['CUSTOM_NAVIGATION_ELEMENTS']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
 	),
+	/**
+	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
+	 */
 	['DROPDOWN']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
 	),
@@ -50,6 +55,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels['CONTENT_PAGE'],
 			disabled: false,
 			fetch: retrieveContentPages,
+			picker: 'SELECT',
+		},
+		{
+			value: 'NL_CONTENT_PAGE_PARENT_ID',
+			label: labels['NL_CONTENT_PAGE_PARENT_ID'],
+			disabled: false,
+			fetch: retrieveNlParentContentPages,
 			picker: 'SELECT',
 		},
 		{

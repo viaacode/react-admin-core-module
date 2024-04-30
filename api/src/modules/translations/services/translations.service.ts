@@ -289,7 +289,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		this.backendTranslations = this.convertTranslationEntriesToKeyValue(translationEntries);
 	}
 
-	public t(key: string, variables: Record<string, string | number> = {}): string {
+	public tText(key: string, variables: Record<string, string | number> = {}): string {
 		const translation = this.backendTranslations[key];
 		if (translation) {
 			return resolveTranslationVariables(translation, variables);

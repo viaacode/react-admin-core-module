@@ -69,6 +69,8 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
+	language: LanguageCode;
+	nlParentPageId: string | number;
 	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;
 	seoDescription: string | null;
@@ -87,6 +89,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language'>[]; // Other pages that are translated versions of this page
 }
 
 /**
@@ -132,3 +135,10 @@ export enum ContentEditActionType {
 }
 
 export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
+
+export enum ContentPageAction {
+	duplicate = 'duplicate',
+	gotoEnglishPage = 'gotoEnglishPage',
+	duplicateForEnglish = 'duplicateForEnglish',
+	delete = 'delete',
+}

@@ -1,4 +1,7 @@
-import { LinkInfo, ToastInfo } from '~core/config/config.types';
+// noinspection ES6PreferShortImport
+
+import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
+import { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { TOptions } from 'i18next';
@@ -8,11 +11,14 @@ import i18n, { initI18n } from './shared/translations/i18n';
 import { Link, useHistory } from 'react-router-dom';
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
-import { AdminConfig, AdminConfigManager } from '~core/config';
-import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
-import Html from '~shared/components/Html/Html';
-import { ROUTE_PARTS } from '~shared/consts/routes';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
+import {
+	ContentPageInfo,
+	ContentWidth,
+} from '../src/react-admin/modules/content-page/types/content-pages.types';
+import Html from '../src/react-admin/modules/shared/components/Html/Html';
+import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
+import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
 import { IconName } from '@viaa/avo2-components';
 import { capitalize, lowerCase } from 'lodash-es';
 import setDefaultOptions from 'date-fns/setDefaultOptions';

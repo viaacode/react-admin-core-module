@@ -11,13 +11,18 @@ import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact, get } from 'lodash-es';
 import React, { FunctionComponent } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { AdminConfigManager } from '~core/config';
 
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import Html from '~shared/components/Html/Html';
+import { Link } from '~shared/components/Link';
+import SmartLink from '~shared/components/SmartLink/SmartLink';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
+import { buildLink } from '~shared/helpers/link';
 import {
 	renderDateDetailRows,
 	renderDetailRow,
@@ -36,6 +41,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	contentPageInfo,
 }) => {
 	const [contentTypes] = useContentTypes();
+	const { data: languages } = useGetAllLanguages();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
 		UserGroup[],
@@ -206,6 +212,72 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							tText(
 								'admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op'
 							)
+						)}
+						{renderDetailRow(
+							<p>
+								{languages?.find(
+									(language) => language.languageCode === contentPageInfo.language
+								)?.languageLabel || '-'}
+							</p>,
+							tText('Taal')
+						)}
+						{renderDetailRow(
+							contentPageInfo.nlParentPageId ? (
+								<p>
+									<Link
+										to={buildLink(
+											AdminConfigManager.getAdminRoute(
+												'ADMIN_CONTENT_PAGE_DETAIL'
+											),
+											{ id: contentPageInfo.nlParentPageId }
+										)}
+										title={tText('Bekijk de nederlandse hoofd pagina')}
+									>
+										{contentPageInfo.translatedPages?.find(
+											(translatedPage) =>
+												translatedPage.id === contentPageInfo.nlParentPageId
+										)?.title || '-'}
+									</Link>
+								</p>
+							) : (
+								<p>-</p>
+							),
+							tText('Nederlandstalige hoofd pagina')
+						)}
+						{renderDetailRow(
+							contentPageInfo.translatedPages.length
+								? contentPageInfo.translatedPages?.map((translatedPage) => {
+										return (
+											<p>
+												<span className="c-table_detail-page__translated-pages__language">
+													{translatedPage.language + ': '}
+												</span>
+												<Link
+													className="c-table_detail-page__translated-pages__link"
+													to={buildLink(
+														AdminConfigManager.getAdminRoute(
+															'ADMIN_CONTENT_PAGE_DETAIL'
+														),
+														{ id: translatedPage.id }
+													)}
+													title={
+														tText('Bekijk vertaalde pagina') +
+														' ' +
+														translatedPage.language
+													}
+												>
+													{translatedPage.title}
+												</Link>{' '}
+												<span className="c-table_detail-page__translations__path">
+													{'/' +
+														translatedPage.language.toLowerCase() +
+														translatedPage.path}
+												</span>
+											</p>
+										);
+								  })
+								: '-',
+							tText('Vertaalde versies')
 						)}
 						{renderDetailRow(
 							<TagList

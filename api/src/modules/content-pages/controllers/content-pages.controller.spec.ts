@@ -33,7 +33,7 @@ const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.Sp
 	adaptContentPage: jest.fn(),
 	adaptContentBlock: jest.fn(),
 	getContentPagesForPageOverviewBlock: jest.fn(),
-	getContentPageByPath: jest.fn(),
+	getContentPageByLanguageAndPath: jest.fn(),
 	fetchCollectionOrItem: jest.fn(),
 	fetchItemByExternalId: jest.fn(),
 	updatePublishDates: jest.fn(),

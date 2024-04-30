@@ -28,7 +28,7 @@ import * as fs from 'fs/promises';
 import * as glob from 'glob';
 import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash';
 import * as path from 'path';
-import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
+import { getFullKey } from '~modules/translations/helpers/get-full-key';
 import {
 	App,
 	Component,
@@ -36,7 +36,7 @@ import {
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 	ValueType,
-} from '../src/react-admin/modules/translations/translations.core.types';
+} from '~modules/translations/translations.core.types';
 
 import { executeDatabaseQuery } from './execute-database-query';
 

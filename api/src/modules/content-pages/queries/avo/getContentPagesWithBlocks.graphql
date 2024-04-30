@@ -34,6 +34,12 @@ query getContentPagesWithBlocks(
 		title
 		language
 		nl_parent_page_id
+		translated_content_pages {
+			title
+			language
+			path
+			id
+		}
 		updated_at
 		content_width
 		user_group_ids

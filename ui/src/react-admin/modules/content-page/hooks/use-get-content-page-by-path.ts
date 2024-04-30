@@ -10,7 +10,7 @@ export const useGetContentPageByPath = (path: string, options?: UseQueryOptions<
 			if (!path) {
 				return null;
 			}
-			return ContentPageService.getContentPageByPath(path);
+			return ContentPageService.getContentPageByLanguageAndPath(path);
 		},
 		options as any
 	);

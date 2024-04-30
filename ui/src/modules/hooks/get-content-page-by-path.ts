@@ -13,7 +13,7 @@ export const useGetContentPageByPath = (
 			if (!path) {
 				return null;
 			}
-			return ContentPageService.getContentPageByPath(path);
+			return ContentPageService.getContentPageByLanguageAndPath(path);
 		},
 		options
 	);

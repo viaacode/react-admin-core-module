@@ -13,7 +13,7 @@ export const retrieveContentPages = async (
 	try {
 		const contentItems: ContentPageInfo[] | null = title
 			? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
-			: await ContentPageService.getPublicContentItems(limit);
+			: await ContentPageService.getPublicContentItemsByTitle(undefined, limit);
 
 		return parseContentPages(contentItems || []);
 	} catch (err) {
