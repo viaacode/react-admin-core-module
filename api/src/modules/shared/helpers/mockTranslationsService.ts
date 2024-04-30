@@ -1,4 +1,5 @@
-import { TranslationsService } from '../../translations';
+import { type TranslationsService } from '../../translations';
+
 import { getTranslationFallback } from './translation-fallback';
 
 export const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> =

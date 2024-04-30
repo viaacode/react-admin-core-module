@@ -2,6 +2,8 @@ import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { Idp, LanguageCode } from './modules';
 
+import { type Idp } from './modules';
+
 export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
 	last_name: 'Verhelst',

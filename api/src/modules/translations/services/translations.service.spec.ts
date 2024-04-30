@@ -1,9 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UpdateResponse } from '../../shared/types/types';
+import { Test, type TestingModule } from '@nestjs/testing';
 
+import { type UpdateResponse } from '../../shared/types/types';
 import { SiteVariablesService } from '../../site-variables';
-
-import { Component, LanguageCode, TranslationKey } from '../translations.types';
+import { Component, LanguageCode } from '../translations.types';
 
 import { TranslationsService } from './translations.service';
 

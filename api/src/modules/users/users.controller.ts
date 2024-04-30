@@ -10,11 +10,12 @@ import {
 	Post,
 	Query,
 } from '@nestjs/common';
-import { PermissionName } from '@viaa/avo2-types';
 import { ApiTags } from '@nestjs/swagger';
+import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+
 import { UsersService } from './users.service';
 import { DeleteContentCounts, QueryProfilesBody, UserOverviewTableCol } from './users.types';
 

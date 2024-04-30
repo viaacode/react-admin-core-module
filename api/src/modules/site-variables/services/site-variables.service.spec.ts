@@ -1,12 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
+
+import { DataService } from '../../data';
+import {
+	type GetSiteVariableByNameQuery,
+	type UpdateSiteVariableByNameMutation,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 
 import { SiteVariablesService } from './site-variables.service';
-
-import {
-	GetSiteVariableByNameQuery,
-	UpdateSiteVariableByNameMutation,
-} from '../../shared/generated/graphql-db-types-hetarchief';
-import { DataService } from '../../data';
 
 const mockDataService = {
 	execute: jest.fn(),
@@ -44,9 +44,8 @@ describe('SiteVariablesService', () => {
 				},
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
-			const response = await siteVariablesService.getSiteVariable<Record<string, string>>(
-				'variable-name'
-			);
+			const response =
+				await siteVariablesService.getSiteVariable<Record<string, string>>('variable-name');
 			expect(response.key).toEqual('value');
 		});
 	});

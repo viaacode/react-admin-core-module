@@ -1,17 +1,15 @@
 import { randomUUID } from 'crypto';
 
+import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-
 import got, { Got, Options } from 'got';
+import { ASTNode } from 'graphql/language/ast';
 import { print } from 'graphql/language/printer';
 import { isString } from 'lodash';
 import { CustomError } from '../../shared/helpers/custom-error';
 
-import { GraphQlResponse } from '../types';
-
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { ASTNode } from 'graphql/language/ast';
+import { GraphQlResponse } from '../types';
 
 @Injectable()
 export class DataService {

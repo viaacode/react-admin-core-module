@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
-import { UpdateResponse } from '../../shared/types/types';
+import { type UpdateResponse } from '../../shared/types/types';
 
 import { TranslationsService } from '../services/translations.service';
 import { Component, TranslationKey } from '../translations.types';

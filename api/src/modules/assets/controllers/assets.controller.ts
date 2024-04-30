@@ -1,3 +1,5 @@
+import path from 'path';
+
 import {
 	BadRequestException,
 	Body,
@@ -17,8 +19,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 import { AssetType, PermissionName } from '@viaa/avo2-types';
-import path from 'path';
 import sharp from 'sharp';
+
 import { DataService } from '../../data';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';

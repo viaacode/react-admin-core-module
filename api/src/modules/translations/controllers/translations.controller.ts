@@ -2,16 +2,16 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 
+import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { UpdateTranslationDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
-import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
 import {
 	type KeyValueTranslations,
 	LanguageCode,
 	type LanguageInfo,
 	MultiLanguageTranslationEntry,
 } from '../translations.types';
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('Translations')
 @Controller(addPrefix(process, 'translations'))

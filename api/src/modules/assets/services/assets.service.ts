@@ -1,3 +1,5 @@
+import path from 'path';
+
 import {
 	forwardRef,
 	Inject,
@@ -8,19 +10,19 @@ import {
 import { Cron } from '@nestjs/schedule';
 import { AssetType } from '@viaa/avo2-types';
 import AWS, { AWSError, S3 } from 'aws-sdk';
+import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { ExtendOptions, Got } from 'got';
 import _, { escapeRegExp, isNil } from 'lodash';
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { mapLimit } from 'blend-promise-utils';
+
 import {
 	InsertContentAssetDocument,
 	InsertContentAssetMutation,
 	InsertContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-
 import { AssetToken } from '../assets.types';
+
 import { DataService } from 'src/modules/data/services/data.service';
 
 export const UUID_LENGTH = 35;

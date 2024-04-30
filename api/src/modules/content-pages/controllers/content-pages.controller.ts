@@ -21,9 +21,9 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { AssetType, PermissionName } from '@viaa/avo2-types';
-import { AssetsService } from '../../assets';
 import { Request } from 'express';
 
+import { AssetsService } from '../../assets';
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
@@ -32,7 +32,6 @@ import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import { LanguageCode } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
-
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';

@@ -1,9 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
-import { ContentPagesService } from './content-pages.service';
+import { DataService } from '../../data';
 import { AdminOrganisationsService } from '../../organisations';
 import { PlayerTicketService } from '../../player-ticket';
-import { DataService } from '../../data';
+
+import { ContentPagesService } from './content-pages.service';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),

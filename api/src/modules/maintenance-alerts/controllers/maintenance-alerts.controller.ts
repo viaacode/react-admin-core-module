@@ -107,9 +107,8 @@ export class MaintenanceAlertsController {
 	public async deleteMaintenanceAlert(
 		@Param('id') maintenanceAlertId: string
 	): Promise<{ status: string }> {
-		const affectedRows = await this.maintenanceAlertsService.deleteMaintenanceAlert(
-			maintenanceAlertId
-		);
+		const affectedRows =
+			await this.maintenanceAlertsService.deleteMaintenanceAlert(maintenanceAlertId);
 
 		if (affectedRows > 0) {
 			return { status: 'Maintenance alert has been deleted' };

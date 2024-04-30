@@ -1,6 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash';
+
 import { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
 import { DataService } from '../../data';
 import { CustomError } from '../../shared/helpers/custom-error';

@@ -1,13 +1,14 @@
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
+
 import {
 	GetPermissionsDocument as GetPermissionsDocumentAvo,
-	GetPermissionsQuery as GetPermissionsQueryAvo,
+	type GetPermissionsQuery as GetPermissionsQueryAvo,
 } from '../shared/generated/graphql-db-types-avo';
 import {
 	GetPermissionsDocument as GetPermissionsDocumentHetArchief,
-	GetPermissionsQuery as GetPermissionsQueryHetArchief,
+	type GetPermissionsQuery as GetPermissionsQueryHetArchief,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
 
 export type PermissionQueryTypes = {
 	GetPermissionsQueryAvo: GetPermissionsQueryAvo;

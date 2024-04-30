@@ -1,8 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
 import packageJson from '../../../../package.json';
 import { DataService } from '../../data';
 import { TestingLogger } from '../../shared/logging/test-logger';
+
 import { StatusService } from './status.service';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {

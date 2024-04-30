@@ -1,5 +1,6 @@
 import nlJsonAvo from '../translations/avo/nl.json';
 import nlJsonHetArchief from '../translations/hetArchief/nl.json';
+
 import { isAvo } from './is-avo';
 
 export function getTranslationFallback(

@@ -1,4 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
+
+import { TestingLogger } from '../../shared/logging/test-logger';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { MaintenanceAlertType } from '../maintenance-alerts.types';
 import {
@@ -8,8 +10,8 @@ import {
 	mockNewMaintenanceAlert,
 	mockUser,
 } from '../mocks/maintenance-alerts.mocks';
-import { TestingLogger } from '../../shared/logging/test-logger';
 import { MaintenanceAlertsService } from '../services/maintenance-alerts.service';
+
 import { MaintenanceAlertsController } from './maintenance-alerts.controller';
 
 const mockMaintenanceAlertsService: Partial<
@@ -88,9 +90,8 @@ describe('MaintenanceAlertsController', () => {
 		it('should return all maintenance alerts for a user', async () => {
 			mockMaintenanceAlertsService.findById.mockResolvedValueOnce(mockMaintenanceAlert1);
 
-			const maintenanceAlerts = await maintenanceAlertsController.getMaintenanceAlertById(
-				'1'
-			);
+			const maintenanceAlerts =
+				await maintenanceAlertsController.getMaintenanceAlertById('1');
 
 			expect(maintenanceAlerts).toEqual(mockMaintenanceAlert1);
 		});

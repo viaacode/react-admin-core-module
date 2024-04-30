@@ -1,5 +1,6 @@
 import { forwardRef, Inject, InternalServerErrorException } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
+
 import { DataService } from '../../data';
 import {
 	GetPublicCollectionsByIdDocument,
@@ -13,7 +14,6 @@ import {
 	GetPublicCollectionsQueryVariables,
 } from '../../shared/generated/graphql-db-types-avo';
 import { isUuid } from '../../shared/helpers/uuid';
-
 import { ContentTypeNumber } from '../collections.types';
 
 export class CollectionsService {

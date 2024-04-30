@@ -3,6 +3,7 @@ import { Inject, Injectable, NotFoundException, OnApplicationBootstrap } from '@
 import { Cron } from '@nestjs/schedule';
 import { Cache } from 'cache-manager';
 import { groupBy, isEmpty, sortBy } from 'lodash';
+
 import { DataService } from '../../data';
 import {
 	GetAllLanguagesDocument,
@@ -53,9 +54,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 	) {}
 
 	public async getLanguages(): Promise<LanguageInfo[]> {
-		const response = await this.dataService.execute<GetAllLanguagesQuery>(
-			GetAllLanguagesDocument
-		);
+		const response =
+			await this.dataService.execute<GetAllLanguagesQuery>(GetAllLanguagesDocument);
 		return response.lookup_languages.map(
 			(language): LanguageInfo => ({
 				languageCode: language.value,

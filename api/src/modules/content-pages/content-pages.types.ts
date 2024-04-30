@@ -1,23 +1,24 @@
 import type { Avo } from '@viaa/avo2-types';
 
+import { type Media } from '../media/media.types';
 import {
-	GetContentByIdQuery as GetContentByIdQueryAvo,
-	GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
-	GetContentPagesQuery as GetContentPagesQueryAvo,
-	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
+	type GetContentByIdQuery as GetContentByIdQueryAvo,
+	type GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
+	type GetContentPagesQuery as GetContentPagesQueryAvo,
+	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
 	Lookup_Enum_Content_Types_Enum,
 } from '../shared/generated/graphql-db-types-avo';
 import {
-	GetContentByIdQuery as GetContentByIdQueryHetArchief,
-	GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
-	GetContentPagesQuery as GetContentPagesQueryHetArchief,
-	GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
+	type GetContentByIdQuery as GetContentByIdQueryHetArchief,
+	type GetContentPageByPathQuery as GetContentPageByPathQueryHetArchief,
+	type GetContentPagesQuery as GetContentPagesQueryHetArchief,
+	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { Media } from '../media/media.types';
-import { LanguageCode } from '../translations';
-import { DbContentBlock } from './content-block.types';
-import { ContentPageQueryTypes } from './queries/content-pages.queries';
+import { type LanguageCode } from '../translations';
+
+import { type DbContentBlock } from './content-block.types';
+import { type ContentPageQueryTypes } from './queries/content-pages.queries';
 
 type ContentPickerTypeAvo =
 	| 'COLLECTION'

@@ -1,9 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { NavigationQueryTypes } from '../queries/navigation.queries';
+import { Test, type TestingModule } from '@nestjs/testing';
 
-import { AdminNavigationsService } from './admin-navigations.service';
 import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
+import { type NavigationQueryTypes } from '../queries/navigation.queries';
+
+import { AdminNavigationsService } from './admin-navigations.service';
 
 const mockNavigationElement1 = {
 	content_path: '/gebruiksvoorwaarden',

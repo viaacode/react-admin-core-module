@@ -1,6 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
+
 import { isAvo } from '../shared/helpers/is-avo';
-import { UserOverviewTableCol } from './users.types';
+
+import { type UserOverviewTableCol } from './users.types';
 
 export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
 	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any;

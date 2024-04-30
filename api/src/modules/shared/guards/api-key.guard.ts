@@ -1,5 +1,4 @@
 import { BadRequestException, CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-
 import { Request } from 'express';
 
 export const API_KEY_EXCEPTION = new BadRequestException(
