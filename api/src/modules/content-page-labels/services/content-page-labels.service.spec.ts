@@ -1,15 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import {
-	GetContentPageLabelByIdQuery,
-	GetContentPageLabelsByTypeAndIdsQuery,
-	GetContentPageLabelsByTypeAndLabelsQuery,
-	GetContentPageLabelsQuery,
-	InsertContentPageLabelMutation,
-	Lookup_App_Content_Type_Enum,
-	UpdateContentPageLabelMutation,
-} from '../../shared/generated/graphql-db-types-hetarchief';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { DatabaseType } from '@viaa/avo2-types';
+
 import { DataService } from '../../data';
+import {
+	type GetContentPageLabelByIdQuery,
+	type GetContentPageLabelsByTypeAndIdsQuery,
+	type GetContentPageLabelsByTypeAndLabelsQuery,
+	type GetContentPageLabelsQuery,
+	type InsertContentPageLabelMutation,
+	Lookup_App_Content_Type_Enum,
+	type UpdateContentPageLabelMutation,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
+import { ContentPageLabelDto } from '../dto/content-page-label.dto';
 import {
 	mockContentPageLabel1,
 	mockContentPageLabelDto,
@@ -17,9 +20,8 @@ import {
 	mockGqlContentPageLabel2,
 	mockLabelObj,
 } from '../mocks/content-page-labels.mocks';
+
 import { ContentPageLabelsService } from './content-page-labels.service';
-import { ContentPageLabelDto } from '../dto/content-page-label.dto';
-import { DatabaseType } from '@viaa/avo2-types';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
@@ -217,9 +219,8 @@ describe('ContentPageLabelsService', () => {
 				},
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
-			const response = await contentPageLabelsService.updateContentPageLabel(
-				mockContentPageLabelDto
-			);
+			const response =
+				await contentPageLabelsService.updateContentPageLabel(mockContentPageLabelDto);
 			expect(response.id).toBe(mockContentPageLabelDto.id);
 			expect(response.label).toBe(mockContentPageLabelDto.label);
 			expect(response.content_type).toBe(mockContentPageLabelDto.content_type);

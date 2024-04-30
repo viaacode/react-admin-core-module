@@ -1,34 +1,34 @@
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { DatabaseType } from '@viaa/avo2-types';
 
 import {
 	GetIdpsDocument as GetIdpsDocumentAvo,
-	GetIdpsQuery as GetIdpsQueryAvo,
-	GetIdpsQueryVariables as GetIdpsQueryVariablesAvo,
+	type GetIdpsQuery as GetIdpsQueryAvo,
+	type GetIdpsQueryVariables as GetIdpsQueryVariablesAvo,
 	GetProfileIdsDocument as GetProfileIdsDocumentAvo,
-	GetProfileIdsQuery as GetProfileIdsQueryAvo,
-	GetProfileIdsQueryVariables as GetProfileIdsQueryVariablesAvo,
+	type GetProfileIdsQuery as GetProfileIdsQueryAvo,
+	type GetProfileIdsQueryVariables as GetProfileIdsQueryVariablesAvo,
 	GetProfileNamesDocument as GetProfileNamesDocumentAvo,
-	GetProfileNamesQuery as GetProfileNamesQueryAvo,
-	GetProfileNamesQueryVariables as GetProfileNamesQueryVariablesAvo,
+	type GetProfileNamesQuery as GetProfileNamesQueryAvo,
+	type GetProfileNamesQueryVariables as GetProfileNamesQueryVariablesAvo,
 	GetUsersDocument as GetUsersDocumentAvo,
-	GetUsersQuery as GetUsersQueryAvo,
-	GetUsersQueryVariables as GetUsersQueryVariablesAvo,
+	type GetUsersQuery as GetUsersQueryAvo,
+	type GetUsersQueryVariables as GetUsersQueryVariablesAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetIdpsDocument as GetIdpsDocumentHetArchief,
-	GetIdpsQuery as GetIdpsQueryHetArchief,
-	GetIdpsQueryVariables as GetIdpsQueryVariablesHetArchief,
+	type GetIdpsQuery as GetIdpsQueryHetArchief,
+	type GetIdpsQueryVariables as GetIdpsQueryVariablesHetArchief,
 	GetProfileIdsDocument as GetProfileIdsDocumentHetArchief,
-	GetProfileIdsQuery as GetProfileIdsQueryHetArchief,
-	GetProfileIdsQueryVariables as GetProfileIdsQueryVariablesHetArchief,
+	type GetProfileIdsQuery as GetProfileIdsQueryHetArchief,
+	type GetProfileIdsQueryVariables as GetProfileIdsQueryVariablesHetArchief,
 	GetProfileNamesDocument as GetProfileNamesDocumentHetArchief,
-	GetProfileNamesQuery as GetProfileNamesQueryHetArchief,
-	GetProfileNamesQueryVariables as GetProfileNamesQueryVariablesHetArchief,
+	type GetProfileNamesQuery as GetProfileNamesQueryHetArchief,
+	type GetProfileNamesQueryVariables as GetProfileNamesQueryVariablesHetArchief,
 	GetUsersDocument as GetUsersDocumentHetArchief,
-	GetUsersQuery as GetUsersQueryHetArchief,
-	GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
+	type GetUsersQuery as GetUsersQueryHetArchief,
+	type GetUsersQueryVariables as GetUsersQueryVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
 export type UserQueryTypes = {
 	GetProfileNamesQueryAvo: GetProfileNamesQueryAvo;

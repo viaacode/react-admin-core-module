@@ -1,8 +1,9 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { AdminOrganisationsService } from './services/admin-organisations.service';
-import { AdminOrganisationsController } from './admin-organisations.controller';
 import { DataModule } from '../data';
+
+import { AdminOrganisationsController } from './admin-organisations.controller';
+import { AdminOrganisationsService } from './services/admin-organisations.service';
 
 @Module({
 	controllers: [AdminOrganisationsController],

@@ -1,7 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
+
 import { RequireAnyPermissions } from '../shared/decorators/require-any-permissions.decorator';
+
 import { BasicOrganisation } from './admin-organisations.types';
 import { AdminOrganisationsService } from './services/admin-organisations.service';
 

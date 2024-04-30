@@ -1,4 +1,4 @@
-import { NavigationQueryTypes } from './queries/navigation.queries';
+import { type NavigationQueryTypes } from './queries/navigation.queries';
 
 export type GqlNavigation =
 	| NavigationQueryTypes['GetNavigationBarsQueryAvo']['app_content_nav_elements'][0]

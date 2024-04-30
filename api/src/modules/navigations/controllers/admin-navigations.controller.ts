@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Patch, Put } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { groupBy, intersection } from 'lodash';
 import { PermissionName } from '@viaa/avo2-types';
+import { groupBy, intersection } from 'lodash';
 
+import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
-import { AdminNavigationsService } from '../services/admin-navigations.service';
-import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
-import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { NavigationItem } from '../navigations.types';
+import { AdminNavigationsService } from '../services/admin-navigations.service';
 
 // TODO these routes are currently not used by the admin-core
 // Currently the admin core does all navigation manipulations through the data route

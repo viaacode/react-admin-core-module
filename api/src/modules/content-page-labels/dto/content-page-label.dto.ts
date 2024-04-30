@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
+
 import { ContentPageType, ContentPickerType, LinkTarget } from '../../content-pages';
 
 export class PickerItemDto {

@@ -1,9 +1,7 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
+
 import { DataService } from '../data';
-
-import { CustomError } from '../shared/helpers/custom-error';
-
 import {
 	FetchCollectionRelationsBySubjectsDocument,
 	FetchCollectionRelationsBySubjectsQuery,
@@ -27,6 +25,7 @@ import {
 	GetPublicItemsQuery,
 	GetPublicItemsQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
+import { CustomError } from '../shared/helpers/custom-error';
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {

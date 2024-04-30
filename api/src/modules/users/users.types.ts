@@ -1,5 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
-import { GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
+
+import { type GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
+
 import type { UserQueryTypes } from './queries/users.queries';
 
 export enum Idp {

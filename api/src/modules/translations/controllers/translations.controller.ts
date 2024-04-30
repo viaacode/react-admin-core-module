@@ -3,12 +3,12 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 import { snakeCase } from 'lodash';
 
+import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
+import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { UpdateResponse } from '../../shared/types/types';
 import { UpdateTranslationsDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
-import { RequireAllPermissions } from '../../shared/decorators/require-permissions.decorator';
-import { UpdateResponse } from '../../shared/types/types';
 import { TranslationKey, Translations } from '../types';
-import { addPrefix } from '../../shared/helpers/add-route-prefix';
 
 @ApiTags('Translations')
 @Controller(addPrefix(process, 'translations'))

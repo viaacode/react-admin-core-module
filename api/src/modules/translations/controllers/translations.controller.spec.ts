@@ -1,11 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
+import { type UpdateResponse } from '../../shared/types/types';
 import { TranslationsService } from '../services/translations.service';
 import { TranslationKey } from '../types';
 
 import { TranslationsController } from './translations.controller';
-
-import { UpdateResponse } from '../../shared/types/types';
 
 const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> = {
 	getTranslations: jest.fn(),
