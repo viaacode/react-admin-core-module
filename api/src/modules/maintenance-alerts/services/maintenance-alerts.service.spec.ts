@@ -1,11 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import {
-	DeleteMaintenanceAlertMutation,
-	FindMaintenanceAlertByIdQuery,
-	FindMaintenanceAlertsQuery,
-	InsertMaintenanceAlertMutation,
-	UpdateMaintenanceAlertMutation,
-} from 'src/modules/shared/generated/graphql-db-types-hetarchief';
+import { Test, type TestingModule } from '@nestjs/testing';
+
 import { DataService } from '../../data';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { MaintenanceAlertType } from '../maintenance-alerts.types';
@@ -14,7 +8,16 @@ import {
 	mockGqlMaintenanceAlert2,
 	mockNewMaintenanceAlert,
 } from '../mocks/maintenance-alerts.mocks';
+
 import { MaintenanceAlertsService } from './maintenance-alerts.service';
+
+import {
+	type DeleteMaintenanceAlertMutation,
+	type FindMaintenanceAlertByIdQuery,
+	type FindMaintenanceAlertsQuery,
+	type InsertMaintenanceAlertMutation,
+	type UpdateMaintenanceAlertMutation,
+} from 'src/modules/shared/generated/graphql-db-types-hetarchief';
 
 const mockDataService: Partial<Record<keyof DataService, jest.SpyInstance>> = {
 	execute: jest.fn(),
@@ -164,9 +167,8 @@ describe('MaintenanceAlertsService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
-			const response = await maintenanceAlertsService.createMaintenanceAlert(
-				mockNewMaintenanceAlert
-			);
+			const response =
+				await maintenanceAlertsService.createMaintenanceAlert(mockNewMaintenanceAlert);
 			expect(response.id).toBe(mockGqlMaintenanceAlert1.id);
 		});
 	});
@@ -214,9 +216,8 @@ describe('MaintenanceAlertsService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce(mockData);
 
-			const affectedRows = await maintenanceAlertsService.deleteMaintenanceAlert(
-				'unknown-id'
-			);
+			const affectedRows =
+				await maintenanceAlertsService.deleteMaintenanceAlert('unknown-id');
 			expect(affectedRows).toBe(0);
 		});
 	});

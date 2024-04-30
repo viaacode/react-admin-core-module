@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import helmet from 'helmet';
-import { AdminCoreModule } from './admin-core.module';
-import packageJson from '../package.json';
 import { json } from 'express';
+import helmet from 'helmet';
+
+import packageJson from '../package.json';
+
+import { AdminCoreModule } from './admin-core.module';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AdminCoreModule);

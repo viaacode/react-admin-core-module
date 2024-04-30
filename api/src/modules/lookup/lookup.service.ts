@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Avo } from '@viaa/avo2-types';
 import { sortBy } from 'lodash';
+
 import { DataService } from '../data';
 import {
 	GetEducationLevelsDocument,

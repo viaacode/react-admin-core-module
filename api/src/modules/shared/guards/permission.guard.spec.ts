@@ -1,4 +1,4 @@
-import { ExecutionContext } from '@nestjs/common';
+import { type ExecutionContext } from '@nestjs/common';
 import { PermissionName } from '@viaa/avo2-types';
 
 import { PermissionGuard } from './permission.guard';
@@ -17,7 +17,7 @@ const mockExecutionContextWithPermissions = (permissions) =>
 		}),
 		getClass: jest.fn(),
 		getHandler: jest.fn(),
-	} as unknown as ExecutionContext);
+	}) as unknown as ExecutionContext;
 
 const mockReflector = {
 	get: jest.fn(),

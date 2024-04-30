@@ -1,7 +1,12 @@
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
-import { Idp } from '../shared/auth/auth.types';
-import { UserInfoOverviewAvo, UserInfoOverviewHetArchief, UserInfoType } from './users.types';
+import { type Avo, type PermissionName } from '@viaa/avo2-types';
+
+import { type Idp } from '../shared/auth/auth.types';
+
+import {
+	type UserInfoOverviewAvo,
+	type UserInfoOverviewHetArchief,
+	UserInfoType,
+} from './users.types';
 
 /**
  * This function should convert all user info objects to a single format
@@ -68,7 +73,7 @@ export function convertUserInfoToCommonUser(
 							from: user.temp_access.from ?? null,
 							until: user.temp_access.until ?? null,
 							current: user.temp_access.current,
-					  }
+						}
 					: null,
 				idps: Object.fromEntries(
 					user.idpmapObjects.map((idpMapObject) => [
@@ -122,7 +127,7 @@ export function convertUserInfoToCommonUser(
 							from: profile.user.temp_access.from ?? null,
 							until: profile.user.temp_access.until ?? null,
 							current: profile.user.temp_access.current,
-					  }
+						}
 					: null,
 				idps: Object.fromEntries(
 					profile.user.idpmapObjects.map((idpMapObject) => [
@@ -152,7 +157,7 @@ export function convertUserInfoToCommonUser(
 							name: user.profile.organisation.name,
 							or_id: user.profile.organisation.or_id,
 							logo_url: user.profile.organisation.logo_url,
-					  } as Avo.Organization.Organization)
+						} as Avo.Organization.Organization)
 					: undefined,
 				educationalOrganisations: (user.organisations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
@@ -197,7 +202,7 @@ export function convertUserInfoToCommonUser(
 							from: user.user.temp_access.from ?? null,
 							until: user.user.temp_access.until ?? null,
 							current: user.user.temp_access.current,
-					  }
+						}
 					: null,
 				idps: Object.fromEntries(
 					user.idps.map((idpMapObject) => [

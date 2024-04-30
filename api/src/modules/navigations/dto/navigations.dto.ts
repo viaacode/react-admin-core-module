@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+
 import { ContentPickerTypesEnum, NavigationItem } from '../navigations.types';
 
 export class CreateNavigationDto implements Partial<NavigationItem> {

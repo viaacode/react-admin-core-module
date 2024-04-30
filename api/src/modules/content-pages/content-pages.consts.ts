@@ -1,6 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
+
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
-import { ContentOverviewTableCols, MediaPlayerPathInfo } from './content-pages.types';
+
+import { type ContentOverviewTableCols, type MediaPlayerPathInfo } from './content-pages.types';
 
 export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } = {
 	MEDIA_PLAYER: {

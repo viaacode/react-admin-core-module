@@ -1,19 +1,19 @@
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { DatabaseType } from '@viaa/avo2-types';
-import {
-	GetOrganisationsDocument as GetOrganisationsDocumentAvo,
-	GetOrganisationsQuery as GetOrganisationsQueryAvo,
-	GetOrganisationsQueryVariables as GetOrganisationsQueryVariablesAvo,
-	GetOrganisationsWithUsersDocument as GetOrganisationsWithUsersDocumentAvo,
-	GetOrganisationsWithUsersQuery as GetOrganisationsWithUsersQueryAvo,
-} from '../../shared/generated/graphql-db-types-avo';
 
 import {
+	GetOrganisationsDocument as GetOrganisationsDocumentAvo,
+	type GetOrganisationsQuery as GetOrganisationsQueryAvo,
+	type GetOrganisationsQueryVariables as GetOrganisationsQueryVariablesAvo,
+	GetOrganisationsWithUsersDocument as GetOrganisationsWithUsersDocumentAvo,
+	type GetOrganisationsWithUsersQuery as GetOrganisationsWithUsersQueryAvo,
+} from '../../shared/generated/graphql-db-types-avo';
+import {
 	GetOrganisationsDocument as GetOrganisationsDocumentHetArchief,
-	GetOrganisationsQuery as GetOrganisationsQueryHetArchief,
-	GetOrganisationsQueryVariables as GetOrganisationsQueryVariablesHetArchief,
+	type GetOrganisationsQuery as GetOrganisationsQueryHetArchief,
+	type GetOrganisationsQueryVariables as GetOrganisationsQueryVariablesHetArchief,
 	GetOrganisationsWithUsersDocument as GetOrganisationsWithUsersDocumentHetArchief,
-	GetOrganisationsWithUsersQuery as GetOrganisationsWithUsersQueryHetArchief,
+	type GetOrganisationsWithUsersQuery as GetOrganisationsWithUsersQueryHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type OrganisationQueryTypes = {

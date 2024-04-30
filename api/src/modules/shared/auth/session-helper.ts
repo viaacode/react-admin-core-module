@@ -1,13 +1,14 @@
-import { InternalServerErrorException, Logger, LoggerService } from '@nestjs/common';
+import { InternalServerErrorException, Logger, type LoggerService } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
 import { addDays, getHours, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns/fp';
 import { get } from 'lodash';
 import flow from 'lodash/fp/flow';
-import { mockUserAvo, mockUserHetArchief } from '../../../mock-user';
 
+import { mockUserAvo, mockUserHetArchief } from '../../../mock-user';
 import { isAvo } from '../helpers/is-avo';
-import { Idp, LdapUser } from './auth.types';
 import { SpecialPermissionGroups } from '../types/types';
+
+import { Idp, type LdapUser } from './auth.types';
 
 const IDP = 'idp';
 const IDP_USER_INFO_PATH = 'idpUserInfo';

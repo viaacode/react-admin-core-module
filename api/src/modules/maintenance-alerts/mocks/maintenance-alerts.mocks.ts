@@ -1,13 +1,13 @@
-import { Idp } from '../../shared/auth/auth.types';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 
-import { MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
+import { Idp } from '../../shared/auth/auth.types';
 import {
-	FindMaintenanceAlertByIdQuery,
-	FindMaintenanceAlertsQuery,
+	type FindMaintenanceAlertByIdQuery,
+	type FindMaintenanceAlertsQuery,
 } from '../../shared/generated/graphql-db-types-hetarchief';
-import { CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
+import { type CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
+import { type MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenance_alerts'][0] = {
 	id: '29f9eac3-0c7e-48ec-9216-3a3af7487766',

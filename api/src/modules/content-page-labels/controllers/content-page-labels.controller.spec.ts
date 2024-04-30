@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
+
 import { Lookup_App_Content_Type_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
-import { UpdateContentPageLabelDto } from '../dto/content-page-label.dto';
+import { type UpdateContentPageLabelDto } from '../dto/content-page-label.dto';
 import {
 	mockContentPageLabel1,
 	mockContentPageLabelDto,
@@ -9,6 +10,7 @@ import {
 	mockContentPageLabelsResponse,
 } from '../mocks/content-page-labels.mocks';
 import { ContentPageLabelsService } from '../services/content-page-labels.service';
+
 import { ContentPageLabelsController } from './content-page-labels.controller';
 
 const mockContentPageLabelsService: Partial<

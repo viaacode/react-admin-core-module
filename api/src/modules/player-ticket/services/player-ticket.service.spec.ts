@@ -1,18 +1,18 @@
 import { CACHE_MANAGER } from '@nestjs/common';
-
-import { Test, TestingModule } from '@nestjs/testing';
-import { Cache } from 'cache-manager';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { type Cache } from 'cache-manager';
 import { addHours } from 'date-fns';
 import nock from 'nock';
 
-import { PlayerTicket } from '../player-ticket.types';
-import { PlayerTicketService } from './player-ticket.service';
 import { DataService } from '../../data';
-import { TestingLogger } from '../../shared/logging/test-logger';
 import {
-	GetFileByRepresentationSchemaIdentifierQuery,
-	GetThumbnailUrlByIdQuery,
+	type GetFileByRepresentationSchemaIdentifierQuery,
+	type GetThumbnailUrlByIdQuery,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { TestingLogger } from '../../shared/logging/test-logger';
+import { type PlayerTicket } from '../player-ticket.types';
+
+import { PlayerTicketService } from './player-ticket.service';
 
 const mockDataService = {
 	execute: jest.fn(),

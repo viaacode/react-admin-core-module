@@ -1,13 +1,13 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { sortBy } from 'lodash';
+
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
-
 import { UpdatePermission } from '../dto/user-groups.dto';
+import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../queries/user-groups.queries';
 import { USER_GROUP_ORDER } from '../user-groups.consts';
 import { UserGroupWithPermissions } from '../user-groups.types';
-import { USER_GROUP_QUERIES, UserGroupQueryTypes } from '../queries/user-groups.queries';
 
 @Injectable()
 export class UserGroupsService {

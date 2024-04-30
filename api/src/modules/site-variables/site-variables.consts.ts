@@ -1,21 +1,22 @@
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DatabaseType } from '@viaa/avo2-types';
+
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentAvo,
-	GetSiteVariableByNameQuery as GetSiteVariableByNameQueryAvo,
-	GetSiteVariableByNameQueryVariables as GetSiteVariableByNameQueryVariablesAvo,
+	type GetSiteVariableByNameQuery as GetSiteVariableByNameQueryAvo,
+	type GetSiteVariableByNameQueryVariables as GetSiteVariableByNameQueryVariablesAvo,
 	UpdateSiteVariableByNameDocument as UpdateSiteVariableByNameDocumentAvo,
-	UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationAvo,
-	UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesAvo,
+	type UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationAvo,
+	type UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesAvo,
 } from '../shared/generated/graphql-db-types-avo';
 import {
 	GetSiteVariableByNameDocument as GetSiteVariableByNameDocumentHetArchief,
-	GetSiteVariableByNameQuery as GetSiteVariableByNameQueryHetArchief,
-	GetSiteVariableByNameQueryVariables as GetSiteVariableByNameQueryVariablesHetArchief,
+	type GetSiteVariableByNameQuery as GetSiteVariableByNameQueryHetArchief,
+	type GetSiteVariableByNameQueryVariables as GetSiteVariableByNameQueryVariablesHetArchief,
 	UpdateSiteVariableByNameDocument as UpdateSiteVariableByNameDocumentHetArchief,
-	UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationHetArchief,
-	UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesHetArchief,
+	type UpdateSiteVariableByNameMutation as UpdateSiteVariableByNameMutationHetArchief,
+	type UpdateSiteVariableByNameMutationVariables as UpdateSiteVariableByNameMutationVariablesHetArchief,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { DatabaseType } from '@viaa/avo2-types';
 
 export type SiteVariableQueryTypes = {
 	GetSiteVariableByNameQueryAvo: GetSiteVariableByNameQueryAvo;

@@ -1,10 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 
+import { type DeleteResponse } from '../../shared/types/types';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 
 import { AdminNavigationsController } from './admin-navigations.controller';
-
-import { DeleteResponse } from '../../shared/types/types';
 
 const mockNavigationsResponse = {
 	items: [
@@ -62,9 +61,8 @@ describe('NavigationsController', () => {
 			mockNavigationsService.findElementById.mockResolvedValueOnce(
 				mockNavigationsResponse.items[0]
 			);
-			const navigations = await navigationsController.getNavigationElementById(
-				'navigation-1'
-			);
+			const navigations =
+				await navigationsController.getNavigationElementById('navigation-1');
 			expect(navigations).toEqual(mockNavigationsResponse.items[0]);
 		});
 	});
