@@ -23,40 +23,6 @@ const mockNavigationElement1 = {
 	tooltip: null,
 };
 
-const mockNavigationElement2 = {
-	content_path: '/over-leeszalen',
-	content_type: 'INTERNAL_LINK',
-	link_target: null,
-	placement: 'header_left',
-	position: 1,
-	id: '7f8c1140-d52e-4f12-8437-6176392f64db',
-	icon_name: '',
-	user_group_ids: [SpecialPermissionGroups.loggedInUsers],
-	label: 'Over de leeszalen',
-	updated_at: '2022-02-21T16:35:08.635696+00:00',
-	description: 'Hoofd navigatie balk bovenaan de pagina linker zijde',
-	created_at: '2022-02-21T16:35:08.635696+00:00',
-	content_id: null,
-	tooltip: null,
-};
-
-const mockNavigationElement3 = {
-	content_path: '/faq',
-	content_type: 'INTERNAL_LINK',
-	link_target: null,
-	placement: 'header_left',
-	position: 2,
-	id: 'f3b279b0-8c30-48cd-82ce-7b184180d890',
-	icon_name: '',
-	user_group_ids: null,
-	label: 'Vaak gestelde vragen',
-	updated_at: '2022-02-21T16:35:25.554254+00:00',
-	description: 'Hoofd navigatie balk bovenaan de pagina linker zijde',
-	created_at: '2022-02-21T16:35:25.554254+00:00',
-	content_id: null,
-	tooltip: null,
-};
-
 const mockDataService = {
 	execute: jest.fn(),
 };

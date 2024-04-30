@@ -11,7 +11,7 @@ import { CustomError } from '../shared/helpers/custom-error';
 import { logAndThrow } from '../shared/helpers/logAndThrow';
 import { isUuid } from '../shared/helpers/uuid';
 
-export default class AssignmentsService {
+export class AssignmentsService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public async fetchPublicAssignmentsByTitleOrId(

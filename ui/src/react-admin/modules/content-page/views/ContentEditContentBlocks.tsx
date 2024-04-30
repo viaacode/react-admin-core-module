@@ -110,7 +110,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 		const blockElem = document.querySelector(`.content-block-${type}-${position}`);
 
 		const sidebarScrollable = document.querySelector(
-			'.c-content-edit-view__sidebar .c-scrollable'
+			'.m-edit-content-blocks .react-page-split__divider + .react-page-split__panel'
 		);
 		const previewScrollable = document.querySelector('.c-content-edit-view__preview');
 

@@ -2,11 +2,11 @@ import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import type { Avo } from '@viaa/avo2-types';
 
-import AssignmentsService from './assignments.service';
+import { AssignmentsService } from './assignments.service';
 
 @ApiTags('Assignments')
 @Controller(process.env.ADMIN_CORE_ROUTES_PREFIX + '/assignments')
-export default class AssignmentsController {
+export class AssignmentsController {
 	constructor(private assignmentsService: AssignmentsService) {}
 
 	@Get('public')
