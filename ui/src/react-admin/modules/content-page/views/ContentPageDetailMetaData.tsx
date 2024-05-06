@@ -20,7 +20,6 @@ import { ContentPageInfo } from '~modules/content-page/types/content-pages.types
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link';
-import SmartLink from '~shared/components/SmartLink/SmartLink';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import { buildLink } from '~shared/helpers/link';
 import {
@@ -249,9 +248,6 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								? contentPageInfo.translatedPages?.map((translatedPage) => {
 										return (
 											<p>
-												<span className="c-table_detail-page__translated-pages__language">
-													{translatedPage.language + ': '}
-												</span>
 												<Link
 													className="c-table_detail-page__translated-pages__link"
 													to={buildLink(
@@ -266,13 +262,18 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 														translatedPage.language
 													}
 												>
-													{translatedPage.title}
-												</Link>{' '}
-												<span className="c-table_detail-page__translations__path">
-													{'/' +
-														translatedPage.language.toLowerCase() +
-														translatedPage.path}
-												</span>
+													<span className="c-table_detail-page__translated-pages__language">
+														{translatedPage.language + ': '}
+													</span>
+													<span className="c-table_detail-page__translated-pages__title">
+														{translatedPage.title}
+													</span>
+													<span className="c-table_detail-page__translations__path">
+														{'/' +
+															translatedPage.language.toLowerCase() +
+															translatedPage.path}
+													</span>
+												</Link>
 											</p>
 										);
 								  })

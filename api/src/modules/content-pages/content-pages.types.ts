@@ -82,7 +82,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
-	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language'>[]; // Other pages that are translated versions of this page
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language' | 'isPublic'>[]; // Other pages that are translated versions of this page
 }
 
 /**

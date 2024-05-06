@@ -31,7 +31,7 @@ export const retrieveProjectContentPages = async (
 ): Promise<PickerItem[]> => {
 	const contentItems: Partial<ContentPageInfo>[] | null = title
 		? await ContentPageService.getPublicProjectContentItemsByTitle(`%${title}%`, limit)
-		: await ContentPageService.getPublicProjectContentItems(limit);
+		: await ContentPageService.getPublicProjectContentItemsByTitle(undefined, limit);
 
 	return parseContentPages(contentItems || []);
 };

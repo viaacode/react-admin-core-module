@@ -69,7 +69,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const [activeTranslationEntry, setActiveTranslationEntry] =
 		useState<MultiLanguageTranslationEntry | null>(null);
 	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<LanguageCode>(
-		LanguageCode.NL
+		LanguageCode.Nl
 	);
 	const [activeTranslationEditorState, setActiveTranslationEditorState] =
 		useState<RichEditorState | null>(null);

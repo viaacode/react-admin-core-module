@@ -89,7 +89,7 @@ export class ContentPagesController {
 		);
 	}
 
-	@Get('')
+	@Get('by-language-and-path')
 	@ApiOperation({
 		summary: 'Get content page by its path',
 	})

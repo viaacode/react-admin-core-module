@@ -70,7 +70,7 @@ interface ContentPageBase {
 	thumbnailPath: string | null;
 	title: string;
 	language: LanguageCode;
-	nlParentPageId: string | number;
+	nlParentPageId: string | number | null; // number is still used by avo, but we want to switch to uuids at some point
 	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;
 	seoDescription: string | null;
@@ -89,7 +89,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
-	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language'>[]; // Other pages that are translated versions of this page
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language' | 'isPublic'>[]; // Other pages that are translated versions of this page
 }
 
 /**

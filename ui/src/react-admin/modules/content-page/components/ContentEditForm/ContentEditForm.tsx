@@ -71,7 +71,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		})
 	);
 	const [language, setLanguage] = useState<LanguageCode>(
-		contentPageInfo.language || LanguageCode.NL
+		contentPageInfo.language || LanguageCode.Nl
 	);
 	const getParentPagePickerItem = (): PickerItem | null => {
 		if (contentPageInfo.nlParentPageId) {

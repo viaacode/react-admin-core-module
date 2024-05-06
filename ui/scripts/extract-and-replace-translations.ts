@@ -181,7 +181,7 @@ async function extractTranslationsFromCodeFiles(
 							component,
 							location,
 							key,
-							language: LanguageCode.NL,
+							language: LanguageCode.Nl,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
@@ -248,7 +248,7 @@ query getAllOldTranslations {
 				component: nameToComponent[componentTranslation.name],
 				location: keyValuePair[0].split(TRANSLATION_SEPARATOR)[0],
 				key: keyValuePair[0].split(TRANSLATION_SEPARATOR)[1],
-				language: LanguageCode.NL,
+				language: LanguageCode.Nl,
 				value: keyValuePair[1],
 				value_type: null,
 			};
@@ -366,7 +366,7 @@ async function combineTranslations(
 				onlineTranslation?.location ||
 				nlJsonTranslation?.location,
 			key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-			language: LanguageCode.NL, // All source code translations are dutch
+			language: LanguageCode.Nl, // All source code translations are dutch
 			value:
 				onlineTranslation?.value ||
 				nlJsonTranslation?.value ||
@@ -421,7 +421,7 @@ async function updateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
-					language: LanguageCode.NL,
+					language: LanguageCode.Nl,
 					value: entry[1],
 					value_type: null,
 				};

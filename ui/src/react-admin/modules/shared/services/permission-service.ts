@@ -1,12 +1,12 @@
-import { get, isString, some } from 'lodash-es';
+import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
+import { get, isString, some } from 'lodash-es';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 
 import { CollectionService } from '../../collection/collection.service';
 import { ContentPageService } from '../../content-page/services/content-page.service';
 import { getProfileId } from '../helpers/get-profile-id';
-
-import type { Avo } from '@viaa/avo2-types';
 
 type PermissionInfo = { name: PermissionName; obj?: any | null };
 
@@ -140,7 +140,7 @@ export class PermissionService {
 			}
 			case PermissionName.EDIT_OWN_CONTENT_PAGES: {
 				const contentPage: ContentPageInfo = isString(obj)
-					? await ContentPageService.getContentPageByLanguageAndPath(obj)
+					? await ContentPageService.getContentPageByLanguageAndPath(LanguageCode.Nl, obj) // TODO pass the english language as well
 					: obj;
 				const contentPageOwnerId = get(contentPage, 'user_profile_id');
 				return !!profileId && !!contentPageOwnerId && profileId === contentPageOwnerId;

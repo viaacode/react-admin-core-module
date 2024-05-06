@@ -539,8 +539,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 		try {
 			const existingContentPageTitle: string | null =
-				await ContentPageService.doesContentPagePathExist(
-					contentPageState.currentContentPageInfo.language || LanguageCode.NL,
+				await ContentPageService.doesContentPageLanguageAndPathExist(
+					contentPageState.currentContentPageInfo.language || LanguageCode.Nl,
 					path,
 					contentPageState.currentContentPageInfo.id
 				);

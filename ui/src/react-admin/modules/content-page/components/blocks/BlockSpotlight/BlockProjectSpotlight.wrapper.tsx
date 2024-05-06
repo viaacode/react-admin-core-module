@@ -1,16 +1,18 @@
 import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
+import { type Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-
-import { ContentPageService } from '../../../services/content-page.service';
+import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+
+import { ContentPageService } from '../../../services/content-page.service';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;
@@ -21,11 +23,13 @@ interface ProjectSpotlightProps {
 interface ProjectSpotlightWrapperProps {
 	elements: ProjectSpotlightProps[];
 	renderLink: RenderLinkFunction;
+	commonUser?: Avo.User.CommonUser;
 }
 
 export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
 	elements,
 	renderLink,
+	commonUser,
 }) => {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<
@@ -37,10 +41,11 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 			const promises = elements.map(
 				async (projectInfo: ProjectSpotlightProps): Promise<ContentPageInfo | null> => {
 					const projectPath = projectInfo?.project?.value;
-					if (projectPath && projectPath.toString && projectPath.toString()) {
+					if (projectPath?.toString()) {
 						try {
 							return await ContentPageService.getContentPageByLanguageAndPath(
-								projectInfo.project.value.toString(),
+								(commonUser?.language || LanguageCode.Nl) as LanguageCode,
+								projectPath.toString(),
 								true
 							);
 						} catch (err) {

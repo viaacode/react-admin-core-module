@@ -11,7 +11,7 @@ export const mockCommonUser: Avo.User.CommonUser = {
 	firstName: 'meemoo',
 	lastName: 'Admin',
 	fullName: 'meemoo Admin',
-	language: LanguageCode.NL,
+	language: LanguageCode.Nl,
 	userGroup: {
 		id: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 		name: 'CP_ADMIN',

@@ -39,11 +39,12 @@ query getContentById($id: Int!) {
 		title
 		language
 		nl_parent_page_id
-		translated_content_pages {
+		translated_content_pages(where: { is_deleted: { _eq: false } }) {
 			title
 			language
 			path
 			id
+			is_public
 		}
 		updated_at
 		user_group_ids

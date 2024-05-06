@@ -292,6 +292,7 @@ export class ContentPageService {
 	 * Add duplicate of content page
 	 *
 	 * @param contentPageInfo
+	 * @param overrideValues
 	 * @param copyPrefix
 	 * @param copyRegex
 	 * @param profileId user who will be the owner of the copy
@@ -300,12 +301,16 @@ export class ContentPageService {
 	 */
 	public static async duplicateContentPage(
 		contentPageInfo: ContentPageInfo,
+		overrideValues: Partial<ContentPageInfo>,
 		copyPrefix: string,
 		copyRegex: RegExp,
 		profileId: string
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const contentToInsert = await this.duplicateContentPageImages(contentPageInfo.id);
+			const contentToInsert = {
+				...(await this.duplicateContentPageImages(contentPageInfo.id)),
+				...overrideValues,
+			};
 
 			// update attributes specific to duplicate
 			contentToInsert.isPublic = false;
@@ -370,10 +375,13 @@ export class ContentPageService {
 	): Promise<ContentPageInfo | null> {
 		try {
 			let url = this.getBaseUrl();
-			if (AdminConfigManager.getConfig().services.getContentPageByPathEndpoint && !onlyInfo) {
+			if (
+				AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint &&
+				!onlyInfo
+			) {
 				url =
-					AdminConfigManager.getConfig().services.getContentPageByPathEndpoint ||
-					this.getBaseUrl();
+					AdminConfigManager.getConfig().services
+						.getContentPageByLanguageAndPathEndpoint || this.getBaseUrl();
 			}
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
@@ -390,7 +398,7 @@ export class ContentPageService {
 			}
 			return convertDbContentPageToContentPageInfo(dbContentPage);
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError('Failed to get content page by language and path', err);
 		}
 	}
 
@@ -401,7 +409,7 @@ export class ContentPageService {
 	 * @param id pass the id of the page you're trying to update, when creating a page, omi this param
 	 * @return returns the title of the page if it exists, otherwise returns null
 	 */
-	public static async doesContentPagePathExist(
+	public static async doesContentPageLanguageAndPathExist(
 		language: LanguageCode,
 		path: string,
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
@@ -426,7 +434,10 @@ export class ContentPageService {
 			}
 			return responseContent.title;
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError(
+				'Failed to check if content page exists by language and path',
+				err
+			);
 		}
 	}
 

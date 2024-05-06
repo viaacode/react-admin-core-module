@@ -181,6 +181,7 @@ export class ContentPagesService {
 					path: translatedPage.path,
 					title: translatedPage.title,
 					language: translatedPage.language,
+					isPublic: translatedPage.is_public,
 				})
 			),
 		};

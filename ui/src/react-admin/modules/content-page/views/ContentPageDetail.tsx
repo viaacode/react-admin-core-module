@@ -77,7 +77,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const [isPublishModalOpen, setIsPublishModalOpen] = useState<boolean>(false);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
 	const hasEnglishVersion = !!contentPageInfo?.translatedPages.find(
-		(page) => page.language === LanguageCode.EN
+		(page) => page.language === LanguageCode.En
 	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
@@ -255,7 +255,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					),
 			  ]
 			: []),
-		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== LanguageCode.EN
+		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== LanguageCode.En
 			? hasEnglishVersion
 				? [
 						createDropdownMenuItem(
@@ -282,7 +282,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			: []),
 	];
 
-	const duplicateContentPage = async (values: Partial<ContentPageInfo>): Promise<void> => {
+	const duplicateContentPage = async (
+		overrideValues: Partial<ContentPageInfo>
+	): Promise<void> => {
 		try {
 			if (!contentPageInfo) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
@@ -296,10 +298,8 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			}
 
 			const duplicateContentPage = await ContentPageService.duplicateContentPage(
-				{
-					...contentPageInfo,
-					...values,
-				},
+				contentPageInfo,
+				overrideValues,
 				CONTENT_PAGE_COPY,
 				CONTENT_PAGE_COPY_REGEX,
 				commonUser?.profileId
@@ -352,14 +352,14 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 			case ContentPageAction.duplicateForEnglish:
 				await duplicateContentPage({
-					language: LanguageCode.EN,
+					language: LanguageCode.En,
 					nlParentPageId: contentPageInfo?.id,
 				});
 				break;
 
 			case ContentPageAction.gotoEnglishPage: {
 				const englishPageId = contentPageInfo?.translatedPages.find(
-					(p) => p.language === LanguageCode.EN
+					(p) => p.language === LanguageCode.En
 				)?.id;
 				if (englishPageId) {
 					const url = buildLink(
