@@ -125,7 +125,9 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 		}
 		if (!contentPageLabelInfo?.language) {
 			return {
-				label: tText('Een taal keuze is verplicht'),
+				label: tText(
+					'modules/content-page-labels/views/content-page-label-edit___een-taal-keuze-is-verplicht'
+				),
 			};
 		}
 		return null;
@@ -172,7 +174,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			}
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: tText('succes'),
+				title: tText('modules/content-page-labels/views/content-page-label-edit___succes'),
 				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___de-content-pagina-label-is-opgeslagen'
 				),
@@ -246,7 +248,12 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 										}
 									/>
 								</FormGroup>
-								<FormGroup label={tText('Taal')} error={formErrors.language}>
+								<FormGroup
+									label={tText(
+										'modules/content-page-labels/views/content-page-label-edit___taal'
+									)}
+									error={formErrors.language}
+								>
 									<Select
 										options={languageOptions}
 										value={contentPageLabelInfo.language}

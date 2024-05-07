@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager, IconConfig } from '~core/config';
 import Icon from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~shared/services/permission-service';
@@ -27,7 +27,7 @@ interface MediaPlayerTitleTextButtonWrapperProps {
 	content: string;
 	buttonLabel: string;
 	buttonAltTitle?: string;
-	buttonIcon?: IconName;
+	buttonIcon?: keyof IconConfig['componentProps'];
 	buttonType?: ButtonType;
 	buttonAction?: ButtonAction;
 	align: AlignOption;
@@ -107,9 +107,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 						<Button
 							label={buttonLabel}
 							type={buttonType}
-							renderIcon={
-								buttonIcon ? () => <Icon name={buttonIcon as string} /> : undefined
-							}
+							renderIcon={buttonIcon ? () => <Icon name={buttonIcon} /> : undefined}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}

@@ -218,7 +218,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 									(language) => language.languageCode === contentPageInfo.language
 								)?.languageLabel || '-'}
 							</p>,
-							tText('Taal')
+							tText('modules/content-page/views/content-page-detail-meta-data___taal')
 						)}
 						{renderDetailRow(
 							contentPageInfo.nlParentPageId ? (
@@ -230,7 +230,9 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 											),
 											{ id: contentPageInfo.nlParentPageId }
 										)}
-										title={tText('Bekijk de nederlandse hoofd pagina')}
+										title={tText(
+											'modules/content-page/views/content-page-detail-meta-data___bekijk-de-nederlandse-hoofd-pagina'
+										)}
 									>
 										{contentPageInfo.translatedPages?.find(
 											(translatedPage) =>
@@ -241,7 +243,9 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							) : (
 								<p>-</p>
 							),
-							tText('Nederlandstalige hoofd pagina')
+							tText(
+								'modules/content-page/views/content-page-detail-meta-data___nederlandstalige-hoofd-pagina'
+							)
 						)}
 						{renderDetailRow(
 							contentPageInfo.translatedPages.length
@@ -257,7 +261,9 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 														{ id: translatedPage.id }
 													)}
 													title={
-														tText('Bekijk vertaalde pagina') +
+														tText(
+															'modules/content-page/views/content-page-detail-meta-data___bekijk-vertaalde-pagina'
+														) +
 														' ' +
 														translatedPage.language
 													}
@@ -278,7 +284,9 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 										);
 								  })
 								: '-',
-							tText('Vertaalde versies')
+							tText(
+								'modules/content-page/views/content-page-detail-meta-data___vertaalde-versies'
+							)
 						)}
 						{renderDetailRow(
 							<TagList

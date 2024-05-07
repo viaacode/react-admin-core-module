@@ -17,18 +17,24 @@ export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
 		setLanguageOptions([
 			...allLanguages.map(
 				(languageInfo): CheckboxOption => ({
-					label: tText('{{language}} bestaat', {
-						language: languageInfo.languageLabel,
-					}),
+					label: tText(
+						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat',
+						{
+							language: languageInfo.languageLabel,
+						}
+					),
 					id: languageInfo.languageCode,
 					checked: false,
 				})
 			),
 			...allLanguages.map(
 				(languageInfo): CheckboxOption => ({
-					label: tText('{{language}} bestaat niet', {
-						language: languageInfo.languageLabel,
-					}),
+					label: tText(
+						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat-niet',
+						{
+							language: languageInfo.languageLabel,
+						}
+					),
 					id: 'NOT_' + languageInfo.languageCode,
 					checked: false,
 				})
