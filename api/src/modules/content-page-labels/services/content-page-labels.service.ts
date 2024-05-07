@@ -58,6 +58,7 @@ export class ContentPageLabelsService {
 					content_type: labelObj?.content_type as ContentPageType,
 					id: labelObj?.id,
 					link_to: labelObj?.link_to,
+					language: labelObj?.language,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
 				})
@@ -112,16 +113,15 @@ export class ContentPageLabelsService {
 					response,
 				});
 			}
-			const contentPageLabel: ContentPageLabel = {
+			return {
 				label: contentPageLabelRaw.label,
 				content_type: contentPageLabelRaw.content_type as ContentPageType,
 				id: contentPageLabelRaw.id,
 				link_to: contentPageLabelRaw.link_to,
+				language: contentPageLabelRaw.language,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
-
-			return contentPageLabel;
 		} catch (err: any) {
 			throw CustomError('Failed to get content page labels from the database', err, {
 				variables,

@@ -4,6 +4,7 @@ import {
 	type GetContentPageLabelsQuery,
 	Lookup_App_Content_Type_Enum,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { LanguageCode } from '../../translations';
 import { type ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_label'][0] = {
@@ -14,6 +15,7 @@ export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_la
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
 		target: '_self',
 	},
+	language: LanguageCode.Nl,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
@@ -27,6 +29,7 @@ export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
 		target: '_self',
 	},
+	language: LanguageCode.Nl,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
@@ -42,6 +45,7 @@ export const mockContentPageLabel1: ContentPageLabel = {
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
 		target: '_self',
 	},
+	language: LanguageCode.Nl,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 };
@@ -55,6 +59,7 @@ export const mockContentPageLabelDto: ContentPageLabelDto = {
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
 		target: '_self',
 	},
+	language: LanguageCode.Nl,
 	created_at: '2022-05-17T08:47:49.271562',
 	updated_at: '2022-05-17T08:47:49.271562',
 };

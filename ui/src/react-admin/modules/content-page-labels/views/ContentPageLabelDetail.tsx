@@ -53,6 +53,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				id: contentPageLabelObj.id,
 				label: contentPageLabelObj.label,
 				content_type: contentPageLabelObj.content_type,
+				language: contentPageLabelObj.language,
 				link_to: contentPageLabelObj.link_to,
 				created_at: contentPageLabelObj.created_at,
 				updated_at: contentPageLabelObj.updated_at,
@@ -118,6 +119,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 								),
 							],
 						])}
+						{renderDetailRow(contentPageLabelInfo.language, tText('Taal'))}
 						{renderDetailRow(
 							linkTo ? (
 								<Button

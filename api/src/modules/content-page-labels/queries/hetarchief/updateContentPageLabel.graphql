@@ -8,6 +8,7 @@ mutation updateContentPageLabel(
 			id
 			content_type
 			link_to
+			language
 			created_at
 			updated_at
 		}

@@ -8,6 +8,8 @@ import { ContentPageLabelService } from '~modules/content-page-labels/content-pa
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error';
 import { Link } from '~modules/shared/components/Link';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageInfo } from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
 import {
 	CheckboxDropdownModalProps,
@@ -61,6 +63,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [contentTypes] = useContentTypes() as [any[], boolean];
+	const { data: allLanguages } = useGetAllLanguages();
 
 	const fetchContentPageLabels = useCallback(async () => {
 		setIsLoading(true);
@@ -72,7 +75,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				])
 			);
 			andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
-			andFilters.push(...getMultiOptionFilters(filters, ['content_type']));
+			andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
 			return { _and: andFilters };
 		};
 
@@ -117,6 +120,13 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			),
 		})
 	);
+	const languageOptions = (allLanguages || []).map(
+		(languageInfo: LanguageInfo): CheckboxOption => ({
+			id: languageInfo.languageCode,
+			label: languageInfo.languageLabel,
+			checked: (tableState?.language || []).includes(languageInfo.languageCode),
+		})
+	);
 
 	const getContentPageLabelOverviewTableCols: () => FilterableColumn<ContentPageLabelOverviewTableCols>[] =
 		() => [
@@ -143,6 +153,17 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				label: tText('admin/content-page-labels/views/content-page-label-overview___link'),
 				sortable: false,
 				visibleByDefault: true,
+			},
+			{
+				id: 'language',
+				label: tText('Taal'),
+				sortable: true,
+				visibleByDefault: true,
+				filterType: 'CheckboxDropdownModal',
+				filterProps: {
+					options: languageOptions,
+				} as CheckboxDropdownModalProps,
+				dataType: TableColumnDataType.string,
 			},
 			{
 				id: 'created_at',
@@ -208,7 +229,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 
 	// Render
 	const renderTableCell = (
-		rowData: ContentPageLabel,
+		contentPageLabel: ContentPageLabel,
 		columnId: ContentPageLabelOverviewTableCols
 	) => {
 		switch (columnId) {
@@ -217,19 +238,21 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					<Link
 						to={buildLink(
 							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'),
-							{ id: rowData.id }
+							{ id: contentPageLabel.id }
 						)}
 					>
-						{truncateTableValue(rowData[columnId])}
+						{truncateTableValue(contentPageLabel[columnId])}
 					</Link>
 				);
 
 			case 'created_at':
 			case 'updated_at':
-				return rowData[columnId] ? formatDate(rowData[columnId] as string) : '-';
+				return contentPageLabel[columnId]
+					? formatDate(contentPageLabel[columnId] as string)
+					: '-';
 
 			case 'link_to': {
-				const linkTo = rowData.link_to;
+				const linkTo = contentPageLabel.link_to;
 				if (!linkTo) {
 					return '-';
 				}
@@ -241,6 +264,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 						String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
 					)}`}</SmartLink>
 				);
+			}
+
+			case 'language': {
+				return contentPageLabel.language;
 			}
 
 			case 'actions':
@@ -255,7 +282,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 										'ADMIN_CONTENT_PAGE_LABEL_DETAIL'
 									),
 									{
-										id: rowData.id,
+										id: contentPageLabel.id,
 									}
 								)
 							}
@@ -276,7 +303,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 										'ADMIN_CONTENT_PAGE_LABEL_EDIT'
 									),
 									{
-										id: rowData.id,
+										id: contentPageLabel.id,
 									}
 								)
 							}
@@ -290,7 +317,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 						/>
 						<Button
 							icon={<Icon name="delete" />}
-							onClick={() => openModal(rowData)}
+							onClick={() => openModal(contentPageLabel)}
 							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
@@ -303,7 +330,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				);
 
 			default:
-				return truncateTableValue(rowData[columnId]);
+				return truncateTableValue(contentPageLabel[columnId]);
 		}
 	};
 

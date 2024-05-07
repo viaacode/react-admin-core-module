@@ -55,6 +55,7 @@ export interface ContentPageLabel {
 	label: string;
 	content_type: ContentPageType;
 	link_to: PickerItem | null;
+	language: LanguageCode;
 	created_at: string;
 	updated_at: string;
 }
