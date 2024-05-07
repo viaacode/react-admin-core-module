@@ -1,5 +1,5 @@
 import {
-	Button,
+	Button as AvoButton,
 	IconName,
 	LinkTarget,
 	Modal,
@@ -8,6 +8,7 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
+import { Button } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, get, partition, set } from 'lodash-es';
@@ -24,7 +25,7 @@ import { useGetContentPages } from '~modules/content-page/hooks/get-content-page
 import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { LanguageCode } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components';
+import Icon from '~shared/components/Icon/Icon';
 import Link from '~shared/components/Link/Link';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { formatDateString } from '~shared/helpers/formatters/date';
@@ -68,6 +69,8 @@ import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
+	NOT_TRANSLATION_PREFIX,
+	TranslationFilterValue,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~shared/components/error';
@@ -229,12 +232,13 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		if (filters.translations?.length) {
 			const [translationNotExistValues, translationDoesExistValues] = partition(
 				filters.translations,
-				(translationFilterValue) => translationFilterValue.startsWith('NOT_')
-			) as [`NOT_${LanguageCode}`[], LanguageCode[]];
+				(translationFilterValue) =>
+					translationFilterValue.startsWith(NOT_TRANSLATION_PREFIX)
+			) as [`${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`[], LanguageCode[]];
 
 			// Add filters for values: NOT_NL or NOT_EN
 			translationNotExistValues.forEach((translationNotExistValue) => {
-				const languageValue = translationNotExistValue.split('_')[0] as LanguageCode;
+				const languageValue = translationNotExistValue.split('_')[1] as LanguageCode;
 				andFilters.push({
 					_not: {
 						_or: [
@@ -508,7 +512,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			case 'actions':
 				return (
 					<>
-						<Button
+						<AvoButton
 							icon={
 								isPublic(contentPage)
 									? ('unlock3' as IconName)
@@ -537,7 +541,10 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 							placement="bottom-end"
 						>
 							<DropdownButton>
-								<Button type="secondary" icon={'' as IconName}></Button>
+								<Button
+									type="secondary"
+									renderIcon={() => <Icon name="extraOptions" />}
+								></Button>
 							</DropdownButton>
 							<DropdownContent>
 								<Link
@@ -550,7 +557,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 										}
 									)}
 								>
-									<Button
+									<AvoButton
 										icon={'info' as IconName}
 										size="small"
 										title={tText(
@@ -565,7 +572,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 										type="secondary"
 									/>
 								</Link>
-								<Button
+								<AvoButton
 									icon={'eye' as IconName}
 									onClick={() => handlePreviewClicked(contentPage)}
 									size="small"
@@ -588,7 +595,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 										}
 									)}
 								>
-									<Button
+									<AvoButton
 										icon={'edit' as IconName}
 										size="small"
 										title={tText(
@@ -605,16 +612,19 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 								</Link>
 								{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 									<Button
-										icon={'delete' as IconName}
+										icon={'trash-2' as IconName}
 										onClick={() => openModal(contentPage)}
 										size="small"
 										title={tText(
 											'admin/content/views/content-overview___verwijder-content'
 										)}
+										label={tText(
+											'admin/content/views/content-overview___verwijder-content'
+										)}
 										ariaLabel={tText(
 											'admin/content/views/content-overview___verwijder-content'
 										)}
-										type="danger-hover"
+										type="secondary"
 									/>
 								)}
 							</DropdownContent>
@@ -643,7 +653,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 					<Spacer margin="top">
 						<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}>
-							<Button
+							<AvoButton
 								icon={'plus' as IconName}
 								label={tText(
 									'admin/content/views/content-overview___content-toevoegen'

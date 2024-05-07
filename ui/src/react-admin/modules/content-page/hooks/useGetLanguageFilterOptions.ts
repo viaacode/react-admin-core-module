@@ -29,7 +29,7 @@ export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
 					label: tText('{{language}} bestaat niet', {
 						language: languageInfo.languageLabel,
 					}),
-					id: languageInfo.languageCode,
+					id: 'NOT_' + languageInfo.languageCode,
 					checked: false,
 				})
 			),

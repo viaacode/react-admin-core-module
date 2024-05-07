@@ -42,7 +42,12 @@ export type ContentOverviewTableCols =
 	| 'userGroupIds'
 	| 'actions';
 
-export type TranslationFilterValue = LanguageCode | `NOT_${LanguageCode}`;
+export const NOT_TRANSLATION_PREFIX = 'NOT_';
+
+// NL, EN, NOT_NL, NOT_EN
+export type TranslationFilterValue =
+	| LanguageCode
+	| `${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`;
 
 export interface ContentTableState extends FilterableTableState {
 	contentType: string[];
