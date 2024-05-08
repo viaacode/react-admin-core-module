@@ -66,6 +66,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			const contentLabel = {
 				label: '',
 				content_type: 'PAGINA',
+				language: LanguageCode.Nl,
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
