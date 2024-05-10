@@ -170,8 +170,8 @@ export class ContentPagesService {
 					id: labelObj?.content_label?.id,
 					content_type: gqlContentPage?.content_type as ContentPageType, // TODO eliminate either ContentPageType or Avo.ContentPage.Type
 					label: labelObj?.content_label?.label,
-					link_to: labelObj?.content_label?.link_to,
 					language: labelObj?.content_label?.language,
+					link_to: labelObj?.content_label?.link_to,
 					created_at: labelObj?.content_label?.created_at,
 					updated_at: labelObj?.content_label?.updated_at,
 				})

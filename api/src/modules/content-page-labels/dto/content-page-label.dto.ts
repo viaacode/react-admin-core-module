@@ -45,6 +45,13 @@ export class InsertContentPageLabelDto {
 	content_type: ContentPageType;
 
 	@IsString()
+	@ApiProperty({
+		type: String,
+		enum: LanguageCode,
+	})
+	language: LanguageCode;
+
+	@IsString()
 	@IsOptional()
 	@ApiProperty({
 		type: String,
@@ -72,6 +79,13 @@ export class UpdateContentPageLabelDto {
 		type: String,
 	})
 	content_type: ContentPageType;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+		enum: LanguageCode,
+	})
+	language: LanguageCode;
 
 	@IsOptional()
 	@ApiProperty({

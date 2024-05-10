@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config';
-import { DatabaseType } from '~shared/types';
+import { App } from '~modules/translations/translations.core.types';
 
 export function tText(
 	translationKey: string,
 	variables?: Record<string, string>,
-	apps?: DatabaseType[]
+	apps?: App[]
 ): string {
 	return AdminConfigManager.getConfig().services.i18n.tText(translationKey, variables, apps);
 }
@@ -13,7 +13,7 @@ export function tText(
 export function tHtml(
 	translationKey: string,
 	variables?: Record<string, string>,
-	apps?: DatabaseType[]
+	apps?: App[]
 ): ReactNode | string {
 	return AdminConfigManager.getConfig().services.i18n.tHtml(translationKey, variables, apps);
 }

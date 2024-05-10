@@ -1,17 +1,13 @@
 import { CSSProperties } from 'react';
+import { App } from '~modules/translations/translations.core.types';
 
 export type ReactSelectOption<T = any> = {
 	label: string;
 	value: T;
 };
 
-export enum DatabaseType {
-	avo = 'avo',
-	hetArchief = 'hetArchief',
-}
-
-export const AVO = DatabaseType.avo;
-export const HET_ARCHIEF = DatabaseType.hetArchief;
+export const AVO = App.AVO;
+export const HET_ARCHIEF = App.HET_ARCHIEF;
 
 // Get all possible values from object
 export type ValueOf<T> = T[keyof T];

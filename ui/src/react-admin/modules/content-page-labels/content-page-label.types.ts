@@ -17,8 +17,8 @@ export interface ContentPageLabel {
 	id: number;
 	label: string;
 	content_type: Avo.ContentPage.Type;
-	link_to: PickerItem | null;
 	language: LanguageCode;
+	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;
 }
@@ -33,8 +33,8 @@ export interface ContentPageLabelEditFormErrorState {
 export interface ContentPageLabelTableState extends FilterableTableState {
 	label: string;
 	content_type: Avo.ContentPage.Type | null;
-	link_to: PickerItem | null;
 	language: LanguageCode[];
+	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;
 }
