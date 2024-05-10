@@ -1,3 +1,5 @@
+import { type LanguageCode } from '../translations';
+
 import { type NavigationQueryTypes } from './queries/navigation.queries';
 
 export type GqlNavigation =
@@ -26,6 +28,7 @@ export interface NavigationItem {
 	position: number;
 	contentType: string;
 	contentPath: string;
+	language: LanguageCode;
 	tooltip?: string;
 	updatedAt: string;
 	createdAt: string;

@@ -12,6 +12,7 @@ query getNavigationItemById($id: uuid!) {
 		updated_at
 		content_type
 		content_path
+		language
 		tooltip
 	}
 }

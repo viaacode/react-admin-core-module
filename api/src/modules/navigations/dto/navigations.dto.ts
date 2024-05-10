@@ -2,6 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 
+import { LanguageCode } from '../../translations';
 import { ContentPickerTypesEnum, NavigationItem } from '../navigations.types';
 
 export class CreateNavigationDto implements Partial<NavigationItem> {
@@ -81,6 +82,14 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 		description: 'The placement for this menu item: e.g. footer-links',
 	})
 	placement: string;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+		enum: LanguageCode,
+		description: 'The site language for which this navigation item should be shown',
+	})
+	language: LanguageCode;
 
 	@IsString()
 	@IsOptional()
@@ -169,6 +178,14 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 		description: 'The placement for this menu item: e.g. footer-links',
 	})
 	placement: string;
+
+	@IsString()
+	@ApiProperty({
+		type: String,
+		enum: LanguageCode,
+		description: 'The site language for which this navigation item should be shown',
+	})
+	language: LanguageCode;
 
 	@IsString()
 	@IsOptional()

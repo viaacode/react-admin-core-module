@@ -52,7 +52,7 @@ import './ContentPageLabelOverview.scss';
 const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
-	const [contentPageLabel, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
+	const [contentPageLabels, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
 	const [contentPageLabelCount, setContentPageLabelCount] = useState<number>(0);
 	const [contentPageLabelIdToDelete, setContentPageLabelIdToDelete] = useState<number | null>(
 		null
@@ -106,10 +106,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	}, [fetchContentPageLabels]);
 
 	useEffect(() => {
-		if (contentPageLabel && !isNil(contentPageLabelCount)) {
+		if (contentPageLabels && !isNil(contentPageLabelCount)) {
 			setLoadingInfo({ state: 'loaded' });
 		}
-	}, [contentPageLabel, contentPageLabelCount]);
+	}, [contentPageLabels, contentPageLabelCount]);
 
 	const contentTypeOptions = contentTypes.map(
 		(option): CheckboxOption => ({
@@ -355,7 +355,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			<>
 				<FilterTable
 					columns={getContentPageLabelOverviewTableCols()}
-					data={contentPageLabel || []}
+					data={contentPageLabels || []}
 					dataCount={contentPageLabelCount}
 					renderCell={(rowData: ContentPageLabel, columnId: string) =>
 						renderTableCell(rowData, columnId as ContentPageLabelOverviewTableCols)
@@ -409,7 +409,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
-					dataObject={contentPageLabel}
+					dataObject={contentPageLabels}
 					render={renderContentPageLabelTable}
 				/>
 			</AdminLayout.Content>

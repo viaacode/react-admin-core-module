@@ -14,6 +14,9 @@ import {
 	GetNavigationItemByIdDocument as GetNavigationItemByIdDocumentAvo,
 	type GetNavigationItemByIdQuery as GetNavigationItemByIdQueryAvo,
 	type GetNavigationItemByIdQueryVariables as GetNavigationItemByIdQueryVariablesAvo,
+	GetNavigationItemsByPlacementAndLanguageDocument as GetNavigationItemsByPlacementAndLanguageDocumentAvo,
+	type GetNavigationItemsByPlacementAndLanguageQuery as GetNavigationItemsByPlacementAndLanguageQueryAvo,
+	type GetNavigationItemsByPlacementAndLanguageQueryVariables as GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo,
 	GetNavigationItemsByPlacementDocument as GetNavigationItemsByPlacementDocumentAvo,
 	type GetNavigationItemsByPlacementQuery as GetNavigationItemsByPlacementQueryAvo,
 	type GetNavigationItemsByPlacementQueryVariables as GetNavigationItemsByPlacementQueryVariablesAvo,
@@ -37,6 +40,9 @@ import {
 	GetNavigationItemByIdDocument as GetNavigationItemByIdDocumentHetArchief,
 	type GetNavigationItemByIdQuery as GetNavigationItemByIdQueryHetArchief,
 	type GetNavigationItemByIdQueryVariables as GetNavigationItemByIdQueryVariablesHetArchief,
+	GetNavigationItemsByPlacementAndLanguageDocument as GetNavigationItemsByPlacementAndLanguageDocumentHetArchief,
+	type GetNavigationItemsByPlacementAndLanguageQuery as GetNavigationItemsByPlacementAndLanguageQueryHetArchief,
+	type GetNavigationItemsByPlacementAndLanguageQueryVariables as GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief,
 	GetNavigationItemsByPlacementDocument as GetNavigationItemsByPlacementDocumentHetArchief,
 	type GetNavigationItemsByPlacementQuery as GetNavigationItemsByPlacementQueryHetArchief,
 	type GetNavigationItemsByPlacementQueryVariables as GetNavigationItemsByPlacementQueryVariablesHetArchief,
@@ -102,6 +108,17 @@ export type NavigationQueryTypes = {
 	GetNavigationItemsByPlacementQueryHetArchief: GetNavigationItemsByPlacementQueryHetArchief;
 	GetNavigationItemsByPlacementQueryVariablesHetArchief: GetNavigationItemsByPlacementQueryVariablesHetArchief;
 
+	GetNavigationItemsByPlacementAndLanguageQuery:
+		| GetNavigationItemsByPlacementAndLanguageQueryAvo
+		| GetNavigationItemsByPlacementAndLanguageQueryHetArchief;
+	GetNavigationItemsByPlacementAndLanguageQueryVariables:
+		| GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo
+		| GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief;
+	GetNavigationItemsByPlacementAndLanguageQueryAvo: GetNavigationItemsByPlacementAndLanguageQueryAvo;
+	GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo: GetNavigationItemsByPlacementAndLanguageQueryVariablesAvo;
+	GetNavigationItemsByPlacementAndLanguageQueryHetArchief: GetNavigationItemsByPlacementAndLanguageQueryHetArchief;
+	GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief: GetNavigationItemsByPlacementAndLanguageQueryVariablesHetArchief;
+
 	InsertNavigationItemMutation:
 		| InsertNavigationItemMutationAvo
 		| InsertNavigationItemMutationHetArchief;
@@ -131,6 +148,7 @@ type NavigationQueries = {
 	GetAllNavigationItemsDocument: TypedDocumentNode<any, any>;
 	GetNavigationItemByIdDocument: TypedDocumentNode<any, any>;
 	GetNavigationItemsByPlacementDocument: TypedDocumentNode<any, any>;
+	GetNavigationItemsByPlacementAndLanguageDocument: TypedDocumentNode<any, any>;
 	InsertNavigationItemDocument: TypedDocumentNode<any, any>;
 	UpdateNavigationItemByIdDocument: TypedDocumentNode<any, any>;
 };
@@ -142,6 +160,8 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentAvo,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentAvo,
 		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentAvo,
+		GetNavigationItemsByPlacementAndLanguageDocument:
+			GetNavigationItemsByPlacementAndLanguageDocumentAvo,
 		InsertNavigationItemDocument: InsertNavigationItemDocumentAvo,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentAvo,
 	},
@@ -151,6 +171,8 @@ export const NAVIGATION_QUERIES: Record<DatabaseType, NavigationQueries> = {
 		GetAllNavigationItemsDocument: GetAllNavigationItemsDocumentHetArchief,
 		GetNavigationItemByIdDocument: GetNavigationItemByIdDocumentHetArchief,
 		GetNavigationItemsByPlacementDocument: GetNavigationItemsByPlacementDocumentHetArchief,
+		GetNavigationItemsByPlacementAndLanguageDocument:
+			GetNavigationItemsByPlacementAndLanguageDocumentHetArchief,
 		InsertNavigationItemDocument: InsertNavigationItemDocumentHetArchief,
 		UpdateNavigationItemByIdDocument: UpdateNavigationItemByIdDocumentHetArchief,
 	},

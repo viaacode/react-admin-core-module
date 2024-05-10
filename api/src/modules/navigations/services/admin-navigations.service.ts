@@ -1,8 +1,10 @@
 import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { compact } from 'lodash';
 
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { DeleteResponse } from '../../shared/types/types';
+import { LanguageCode } from '../../translations';
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import { NavigationItem } from '../navigations.types';
 import {
@@ -27,6 +29,7 @@ export class AdminNavigationsService {
 			position: navigationEntry?.position,
 			contentType: navigationEntry?.content_type,
 			contentPath: navigationEntry?.content_path,
+			language: navigationEntry?.language,
 			tooltip: navigationEntry?.tooltip,
 			updatedAt: navigationEntry?.updated_at,
 			createdAt: navigationEntry?.created_at,
@@ -46,6 +49,7 @@ export class AdminNavigationsService {
 			position: navigationItem?.position,
 			content_type: navigationItem?.contentType,
 			content_path: navigationItem?.contentPath || '', // TODO make nullable in the database
+			language: navigationItem?.language,
 			tooltip: navigationItem?.tooltip,
 			updated_at: navigationItem?.updatedAt,
 			created_at: navigationItem?.createdAt,
@@ -121,13 +125,38 @@ export class AdminNavigationsService {
 		).map(this.adapt);
 	}
 
-	public async findNavigationBarItemsByPlacementId(placement: string): Promise<NavigationItem[]> {
-		const navigationsResponse = await this.dataService.execute<
-			NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
-			NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
-		>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
-			placement,
-		});
+	public async findNavigationBarItemsByPlacementId(
+		placement: string,
+		language?: LanguageCode,
+		searchTerm?: string
+	): Promise<NavigationItem[]> {
+		let navigationsResponse:
+			| NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery']
+			| NavigationQueryTypes['GetNavigationItemsByPlacementQuery'];
+		const searchTermDb = '%' + (searchTerm || '') + '%';
+
+		if (language) {
+			navigationsResponse = await this.dataService.execute<
+				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery'],
+				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQueryVariables']
+			>(
+				NAVIGATION_QUERIES[getDatabaseType()]
+					.GetNavigationItemsByPlacementAndLanguageDocument,
+				{
+					placement,
+					language,
+					searchTerm: searchTermDb,
+				}
+			);
+		} else {
+			navigationsResponse = await this.dataService.execute<
+				NavigationQueryTypes['GetNavigationItemsByPlacementQuery'],
+				NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
+			>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
+				placement,
+				searchTerm: searchTermDb,
+			});
+		}
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo'])
@@ -139,10 +168,13 @@ export class AdminNavigationsService {
 		).map(this.adapt);
 	}
 
-	public async findAllNavigationBarItems(): Promise<NavigationItem[]> {
+	public async findAllNavigationBarItems(language?: LanguageCode): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
-			NavigationQueryTypes['GetAllNavigationItemsQuery']
-		>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument);
+			NavigationQueryTypes['GetAllNavigationItemsQuery'],
+			NavigationQueryTypes['GetAllNavigationItemsQueryVariables']
+		>(NAVIGATION_QUERIES[process.env.DATABASE_APPLICATION_TYPE].GetAllNavigationItemsDocument, {
+			languages: compact([language]),
+		});
 
 		return (
 			(navigationsResponse as NavigationQueryTypes['GetAllNavigationItemsQueryAvo'])

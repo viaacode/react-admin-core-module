@@ -109,7 +109,8 @@ interface FilterTableProps {
 	rowKey?: string | ((row: any) => string);
 	variant?: 'bordered' | 'invisible' | 'styled';
 	isLoading?: boolean;
-	hidePagination?: boolean;
+	showPagination?: boolean;
+	showColumnsVisibility?: boolean;
 
 	// Used for automatic dropdown with bulk actions
 	bulkActions?: (SelectOption<string> & { confirm?: boolean; confirmButtonType?: ButtonType })[];
@@ -137,10 +138,11 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	rowKey = 'id',
 	variant = 'bordered',
 	isLoading = false,
-	hidePagination = false,
+	showPagination = true,
 	bulkActions,
 	onSelectBulkAction,
 	showCheckboxes,
+	showColumnsVisibility = true,
 	selectedItemIds,
 	onSelectionChanged,
 	onSelectAll,
@@ -424,7 +426,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								)}
 							</Flex>
 						</ToolbarLeft>
-						{isAvo() && (
+						{isAvo() && showColumnsVisibility && (
 							<ToolbarRight>
 								<CheckboxDropdownModal
 									label={tText(
@@ -474,7 +476,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								onSelectionChanged={onSelectionChanged}
 								onSelectAll={onSelectAll}
 							/>
-							{!hidePagination && (
+							{showPagination && (
 								<Spacer margin="top-large">
 									<PaginationBar
 										count={itemsPerPage}
