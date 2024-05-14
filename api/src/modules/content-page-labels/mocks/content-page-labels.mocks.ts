@@ -4,11 +4,13 @@ import {
 	type GetContentPageLabelsQuery,
 	Lookup_App_Content_Type_Enum,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { LanguageCode } from '../../translations';
 import { type ContentPageLabelDto } from '../dto/content-page-label.dto';
 
 export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_label'][0] = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
+	language: LanguageCode.Nl,
 	link_to: {
 		type: 'INTERNAL_LINK',
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
@@ -22,6 +24,7 @@ export const mockGqlContentPageLabel1: GetContentPageLabelsQuery['app_content_la
 export const mockGqlContentPageLabel2: GetContentPageLabelByIdQuery['app_content_label'][0] = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
+	language: LanguageCode.Nl,
 	link_to: {
 		type: 'INTERNAL_LINK',
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
@@ -37,6 +40,7 @@ export const mockContentPageLabel1: ContentPageLabel = {
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
 	//id: 1,
+	language: LanguageCode.Nl,
 	link_to: {
 		type: 'INTERNAL_LINK',
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',
@@ -50,6 +54,7 @@ export const mockContentPageLabelDto: ContentPageLabelDto = {
 	label: 'Gebruik van het materiaal',
 	content_type: Lookup_App_Content_Type_Enum.FaqItem,
 	id: '13d00f95-5597-4470-b5ce-d3ee96212ff4',
+	language: LanguageCode.Nl,
 	link_to: {
 		type: 'INTERNAL_LINK',
 		value: '/faq?label=Gebruik%20van%20het%20materiaal',

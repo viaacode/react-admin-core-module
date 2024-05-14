@@ -6,6 +6,7 @@ import {
 	ButtonToolbar,
 	Container,
 	DefaultProps,
+	IconName,
 	RenderLinkFunction,
 	Spacer,
 } from '@viaa/avo2-components';
@@ -76,7 +77,7 @@ export const BlockHero: FunctionComponent<BlockHeroProps> = ({
 										key={`hero-button-${index}`}
 										renderIcon={
 											rest.icon
-												? () => <Icon name={rest.icon as string} />
+												? () => <Icon name={rest.icon as IconName} />
 												: undefined
 										}
 									/>,

@@ -65,6 +65,7 @@ export interface ContentPageLabel {
 	id: number;
 	label: string;
 	content_type: Avo.ContentPage.Type;
+	language: LanguageCode;
 	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;

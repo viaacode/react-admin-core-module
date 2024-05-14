@@ -57,6 +57,7 @@ export class ContentPageLabelsService {
 					label: labelObj?.label,
 					content_type: labelObj?.content_type as ContentPageType,
 					id: labelObj?.id,
+					language: labelObj?.language,
 					link_to: labelObj?.link_to,
 					created_at: labelObj?.created_at,
 					updated_at: labelObj?.updated_at,
@@ -112,16 +113,15 @@ export class ContentPageLabelsService {
 					response,
 				});
 			}
-			const contentPageLabel: ContentPageLabel = {
+			return {
 				label: contentPageLabelRaw.label,
 				content_type: contentPageLabelRaw.content_type as ContentPageType,
 				id: contentPageLabelRaw.id,
+				language: contentPageLabelRaw.language,
 				link_to: contentPageLabelRaw.link_to,
 				created_at: contentPageLabelRaw.created_at,
 				updated_at: contentPageLabelRaw.updated_at,
 			};
-
-			return contentPageLabel;
 		} catch (err: any) {
 			throw CustomError('Failed to get content page labels from the database', err, {
 				variables,
@@ -141,6 +141,7 @@ export class ContentPageLabelsService {
 				contentPageLabels: contentPageLabels.map((contentPageLabel) => ({
 					label: contentPageLabel.label,
 					content_type: contentPageLabel.content_type,
+					language: contentPageLabel.language as any,
 					link_to: contentPageLabel.link_to || null,
 					created_at: new Date().toISOString(),
 					updated_at: new Date().toISOString(),
@@ -178,6 +179,7 @@ export class ContentPageLabelsService {
 				contentPageLabel: {
 					label: contentPageLabelInfo.label,
 					content_type: contentPageLabelInfo.content_type as any, // Differences in avo <-> hetarchief
+					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to || null,
 					updated_at: new Date().toISOString(),
 				},

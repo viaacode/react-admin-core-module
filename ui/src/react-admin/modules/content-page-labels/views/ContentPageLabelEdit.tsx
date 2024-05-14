@@ -14,6 +14,8 @@ import { isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { Link } from '~shared/components/Link';
@@ -30,6 +32,7 @@ import { DefaultComponentProps } from '~shared/types/components';
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
 import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
+import { SelectOption } from '@meemoo/react-components';
 
 type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 
@@ -48,6 +51,13 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [contentTypes] = useContentTypes();
+	const { data: allLanguages } = useGetAllLanguages();
+	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
+		return {
+			label: languageInfo.languageLabel,
+			value: languageInfo.languageCode,
+		};
+	});
 
 	const isCreatePage = !contentPageLabelId;
 
@@ -56,6 +66,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			const contentLabel = {
 				label: '',
 				content_type: 'PAGINA',
+				language: LanguageCode.Nl,
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -106,11 +117,16 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	};
 
 	const getFormErrors = (): ContentPageLabelEditFormErrorState | null => {
-		if (!contentPageLabelInfo || !contentPageLabelInfo.label) {
+		if (!contentPageLabelInfo?.label) {
 			return {
 				label: tText(
 					'admin/content-page-labels/views/content-page-label-edit___een-label-is-verplicht'
 				),
+			};
+		}
+		if (!contentPageLabelInfo?.language) {
+			return {
+				label: tText('Een taal keuze is verplicht'),
 			};
 		}
 		return null;
@@ -157,7 +173,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			}
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: 'succes',
+				title: tText('succes'),
 				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___de-content-pagina-label-is-opgeslagen'
 				),
@@ -227,6 +243,18 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 												...contentPageLabelInfo,
 												content_type:
 													newContentType as Avo.ContentPage.Type,
+											})
+										}
+									/>
+								</FormGroup>
+								<FormGroup label={tText('Taal')} error={formErrors.language}>
+									<Select
+										options={languageOptions}
+										value={contentPageLabelInfo.language}
+										onChange={(newLanguage) =>
+											setContentPageLabelInfo({
+												...contentPageLabelInfo,
+												language: newLanguage as LanguageCode,
 											})
 										}
 									/>
