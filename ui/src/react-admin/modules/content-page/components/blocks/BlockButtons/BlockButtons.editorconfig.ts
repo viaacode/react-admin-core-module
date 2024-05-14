@@ -1,4 +1,5 @@
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	ButtonsBlockComponentState,
@@ -29,59 +30,43 @@ export const INITIAL_BUTTONS_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/buttons___knoppen'
-	),
+	name: tText('admin/content-block/helpers/generators/buttons___knoppen'),
 	type: ContentBlockType.Buttons,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/buttons___knop'
-		),
+		name: tText('admin/content-block/helpers/generators/buttons___knop'),
 		limits: {
 			max: 3,
 		},
 		state: INITIAL_BUTTONS_COMPONENTS_STATE(),
 		fields: {
 			type: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___type'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			label: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/buttons___tekst'
-					),
+					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			altTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___alt-title-text'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			icon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___knop-actie'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___knop-actie'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},
@@ -90,9 +75,7 @@ export const BUTTONS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_BUTTONS_BLOCK_STATE(),
 		fields: {
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___uitlijning'
-				)
+				tText('admin/content-block/helpers/generators/defaults___uitlijning')
 			),
 			...BLOCK_FIELD_DEFAULTS(),
 		},

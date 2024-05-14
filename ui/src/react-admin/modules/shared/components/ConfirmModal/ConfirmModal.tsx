@@ -10,7 +10,7 @@ import {
 } from '@viaa/avo2-components';
 import React, { FunctionComponent, ReactNode } from 'react';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 interface ConfirmModalProps {
 	title?: string;
@@ -35,8 +35,6 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 	isOpen,
 	deleteObjectCallback,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const modalTitle = (): string => {
 		return (
 			title ||

@@ -45,9 +45,17 @@ query getContentPages(
 		publish_at
 		published_at
 		title
+		language
+		nl_parent_page_id
+		translated_content_pages(where: { is_deleted: { _eq: false } }) {
+			title
+			language
+			path
+			id
+			is_public
+		}
 		updated_at
 		user_group_ids
-		user_profile_id
 		content_width
 		user_group_ids
 		content_content_labels {

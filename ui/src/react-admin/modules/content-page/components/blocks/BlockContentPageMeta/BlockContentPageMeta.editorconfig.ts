@@ -1,3 +1,4 @@
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockType,
@@ -5,8 +6,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE = () => ({});
 
@@ -20,9 +19,7 @@ export const INITIAL_CONTENT_PAGE_META_BLOCK_STATE = (): DefaultContentBlockStat
 
 export const CONTENT_PAGE_META_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/content-page-meta___pagina-meta-data'
-	),
+	name: tText('admin/content-block/helpers/generators/content-page-meta___pagina-meta-data'),
 	type: ContentBlockType.ContentPageMeta,
 	components: {
 		state: INITIAL_CONTENT_PAGE_META_COMPONENTS_STATE(),

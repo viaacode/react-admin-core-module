@@ -12,7 +12,7 @@ import { isNull } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMobileWidth } from '~shared/helpers/media-query';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { Link } from '../Link';
 
 import './ErrorView.scss';
@@ -30,8 +30,6 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	children = null,
 	actionButtons,
 }) => {
-	const { tText } = useTranslation();
-
 	const messageText: string | ReactNode = message || '';
 	const errorMessage: string | ReactNode = messageText;
 	const errorIcon = (icon || 'search') as IconName;

@@ -28,7 +28,7 @@ import * as fs from 'fs/promises';
 import * as glob from 'glob';
 import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash';
 import * as path from 'path';
-import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
+import { getFullKey } from '~modules/translations/helpers/get-full-key';
 import {
 	App,
 	Component,
@@ -36,7 +36,7 @@ import {
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 	ValueType,
-} from '../src/react-admin/modules/translations/translations.core.types';
+} from '~modules/translations/translations.core.types';
 
 import { executeDatabaseQuery } from './execute-database-query';
 
@@ -181,7 +181,7 @@ async function extractTranslationsFromCodeFiles(
 							component,
 							location,
 							key,
-							language: LanguageCode.NL,
+							language: LanguageCode.Nl,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
@@ -248,7 +248,7 @@ query getAllOldTranslations {
 				component: nameToComponent[componentTranslation.name],
 				location: keyValuePair[0].split(TRANSLATION_SEPARATOR)[0],
 				key: keyValuePair[0].split(TRANSLATION_SEPARATOR)[1],
-				language: LanguageCode.NL,
+				language: LanguageCode.Nl,
 				value: keyValuePair[1],
 				value_type: null,
 			};
@@ -366,7 +366,7 @@ async function combineTranslations(
 				onlineTranslation?.location ||
 				nlJsonTranslation?.location,
 			key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-			language: LanguageCode.NL, // All source code translations are dutch
+			language: LanguageCode.Nl, // All source code translations are dutch
 			value:
 				onlineTranslation?.value ||
 				nlJsonTranslation?.value ||
@@ -421,7 +421,7 @@ async function updateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
-					language: LanguageCode.NL,
+					language: LanguageCode.Nl,
 					value: entry[1],
 					value_type: null,
 				};

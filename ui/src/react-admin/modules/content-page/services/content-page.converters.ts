@@ -12,6 +12,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { tText } from '~shared/helpers/translation-functions';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,
@@ -95,10 +96,8 @@ export function convertDbContentBlockToContentBlockConfig(
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/admin/content-page/helpers/get-published-state___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/admin/content-page/helpers/get-published-state___error'),
+					description: tText(
 						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
 					),
 					type: ToastType.ERROR,

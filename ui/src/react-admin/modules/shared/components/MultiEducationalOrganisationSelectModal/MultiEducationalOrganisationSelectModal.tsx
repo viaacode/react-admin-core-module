@@ -16,7 +16,7 @@ import React, { FunctionComponent, MouseEvent, useEffect, useState } from 'react
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './MultiEducationalOrganisationSelectModal.scss';
 
@@ -32,8 +32,6 @@ export interface MultiEducationalOrganisationSelectModalProps {
 export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	MultiEducationalOrganisationSelectModalProps
 > = ({ label, id, values, disabled, onChange, showSelectedValuesOnCollapsed = true }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [includeEmpty, setIncludeEmpty] = useState<boolean>(false);
 	const [selectedOrganisations, setSelectedOrganisations] =

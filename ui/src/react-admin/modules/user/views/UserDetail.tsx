@@ -29,7 +29,7 @@ import { AdminLayout } from '../../shared/layouts';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
 import { AdminConfigManager, ToastType } from '~core/config';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
 import { Idp } from '../user.types';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -73,7 +73,6 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 		useState<boolean>(false);
 	const [shouldSendActionEmail, setShouldSendActionEmail] = useState<boolean>(false);
 
-	const { tText, tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	useEffect(() => {

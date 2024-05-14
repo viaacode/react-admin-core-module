@@ -13,7 +13,7 @@ import { CustomError } from '../../helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 import './RichTextEditorWrapper.scss';
 
@@ -30,8 +30,6 @@ export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInte
 const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 	RichTextEditorWithInternalStateWrapperProps
 > = (props) => {
-	const { tText } = useTranslation();
-
 	const { controls, fileType, ownerId, value, onChange, ...rest } = props;
 
 	if ((controls || []).includes('media') && !fileType) {

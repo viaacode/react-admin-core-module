@@ -16,7 +16,7 @@ import FileUpload from '~shared/components/FileUpload/FileUpload';
 
 import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';
 import { PHOTO_TYPES } from '~shared/helpers/files';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 import './UploadOrSelectVideoStill.scss';
 
@@ -43,7 +43,6 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 	contentItemType,
 	contentItemId,
 }) => {
-	const { tText } = useTranslation();
 	const [originalStillValue] = useState<string | null>(value);
 	const [uploadedStill, setUploadedStill] = useState<string | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

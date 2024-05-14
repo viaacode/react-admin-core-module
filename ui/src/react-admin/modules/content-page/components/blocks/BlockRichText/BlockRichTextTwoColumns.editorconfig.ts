@@ -1,6 +1,7 @@
 import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	ContentBlockConfig,
@@ -40,14 +41,10 @@ export const INITIAL_RICH_TEXT_TWO_COLUMNS_BLOCK_STATE = (): DefaultContentBlock
 
 export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/rich-text-two-columns___tekst-2-kolommen'
-	),
+	name: tText('admin/content-block/helpers/generators/rich-text-two-columns___tekst-2-kolommen'),
 	type: ContentBlockType.RichTextTwoColumns,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/rich-text-two-columns___kolom'
-		),
+		name: tText('admin/content-block/helpers/generators/rich-text-two-columns___kolom'),
 		limits: {
 			min: 2,
 			max: 2,
@@ -56,7 +53,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		fields: {
 			content: {
 				...TEXT_FIELD(
-					AdminConfigManager.getConfig().services.i18n.tText(
+					tText(
 						'admin/content-block/helpers/generators/rich-text-two-columns___tekst-is-verplicht'
 					),
 					{
@@ -68,48 +65,40 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 			},
 			buttons: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/rich-text-two-columns___knop'
-				),
+				label: tText('admin/content-block/helpers/generators/rich-text-two-columns___knop'),
 				fields: {
 					type: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___type'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___type'),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
 					label: TEXT_FIELD(
-						AdminConfigManager.getConfig().services.i18n.tText(
+						tText(
 							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
 						),
 						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
-								'admin/content-block/helpers/generators/buttons___tekst'
-							),
+							label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
 					altTitle: TEXT_FIELD(undefined, {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'admin/content-block/helpers/generators/rich-text-two-columns___alt-title-text'
 						),
 						editorType: ContentBlockEditor.TextInput,
 						validator: undefined,
 					}),
 					icon: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___icoon'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
 					buttonIconAlignment: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___button-icon-alignment'
 						),
 						editorType: ContentBlockEditor.Select,
@@ -118,9 +107,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						},
 					},
 					buttonAction: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
-							'admin/content-block/helpers/generators/buttons___knop-actie'
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___knop-actie'),
 						editorType: ContentBlockEditor.ContentPicker,
 						...(!isAvo() && {
 							editorProps: {
@@ -139,10 +126,10 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				max: 10,
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					addButtonLabel: tText(
 						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe'
 					),
-					deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					deleteButtonLabel: tText(
 						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop'
 					),
 				},

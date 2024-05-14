@@ -7,6 +7,7 @@ import {
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { isAvo } from '~shared/helpers/is-avo';
+import { tText } from '~shared/helpers/translation-functions';
 
 import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
 import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
@@ -21,8 +22,6 @@ import {
 	GradientColor,
 	PaddingFieldState,
 } from '../../types/content-block.types';
-
-import { AdminConfigManager } from '~core/config';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (
@@ -49,35 +48,21 @@ export const BLOCK_STATE_DEFAULTS = (
 
 export const BLOCK_FIELD_DEFAULTS = () => ({
 	backgroundColor: BACKGROUND_COLOR_FIELD(
-		AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/defaults___achtergrondkleur'
-		),
+		tText('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
 		isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
-	padding: PADDING_FIELD(
-		AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/defaults___padding'
-		)
-	),
-	margin: PADDING_FIELD(
-		AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/defaults___marge'
-		)
-	),
+	padding: PADDING_FIELD(tText('admin/content-block/helpers/generators/defaults___padding')),
+	margin: PADDING_FIELD(tText('admin/content-block/helpers/generators/defaults___marge')),
 	userGroupIds: USER_GROUP_SELECT(
-		AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/defaults___zichtbaar-voor'
-		),
-		AdminConfigManager.getConfig().services.i18n.tText(
+		tText('admin/content-block/helpers/generators/defaults___zichtbaar-voor'),
+		tText(
 			'admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina'
 		)
 	),
 
 	// Used to link to this block from inside the same page using the anchors-block
 	anchor: INPUT_FIELD({
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/defaults___anchor-id'
-		),
+		label: tText('admin/content-block/helpers/generators/defaults___anchor-id'),
 	}),
 });
 
@@ -141,9 +126,7 @@ export const TEXT_FIELD = (
 	emptyFieldValidatorMessage?: string,
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/defaults___tekst'
-	),
+	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
 	editorType: ContentBlockEditor.RICH_TEXT_EDITOR,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
@@ -151,9 +134,7 @@ export const TEXT_FIELD = (
 		if (!value) {
 			errorArray.push(
 				emptyFieldValidatorMessage ||
-					AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/defaults___tekst-is-verplicht'
-					)
+					tText('admin/content-block/helpers/generators/defaults___tekst-is-verplicht')
 			);
 		}
 
@@ -167,22 +148,18 @@ export const TEXT_FIELD = (
 });
 
 export const INPUT_FIELD = (propOverride?: Partial<ContentBlockField>): ContentBlockField => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/defaults___tekst'
-	),
+	label: tText('admin/content-block/helpers/generators/defaults___tekst'),
 	editorType: ContentBlockEditor.TextInput,
 	...propOverride,
 });
 
 export const FILE_FIELD = (
-	emptyFieldValidatorMessage = AdminConfigManager.getConfig().services.i18n.tText(
+	emptyFieldValidatorMessage = tText(
 		'admin/content-block/helpers/generators/defaults___een-bestand-is-verplicht'
 	) || 'een-bestand-is-verplicht',
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/defaults___bestand'
-	),
+	label: tText('admin/content-block/helpers/generators/defaults___bestand'),
 	editorType: ContentBlockEditor.FileUpload,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
@@ -198,14 +175,12 @@ export const FILE_FIELD = (
 });
 
 export const ITEM_PICKER_FIELD = (
-	emptyFieldValidatorMessage = AdminConfigManager.getConfig().services.i18n.tText(
+	emptyFieldValidatorMessage = tText(
 		'admin/content-block/helpers/generators/defaults___selecteren-van-video-item-is-verplicht'
 	),
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/media-player___video-of-audio-item'
-	),
+	label: tText('admin/content-block/helpers/generators/media-player___video-of-audio-item'),
 	editorType: ContentBlockEditor.ContentPicker,
 	validator: (value: string) => {
 		const errorArray: string[] = [];
@@ -226,9 +201,7 @@ export const ITEM_PICKER_FIELD = (
 export const CONTENT_TYPE_AND_LABELS_INPUT = (
 	propOverride?: Partial<ContentBlockField>
 ): ContentBlockField => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/defaults___type-en-labels'
-	),
+	label: tText('admin/content-block/helpers/generators/defaults___type-en-labels'),
 	editorType: ContentBlockEditor.ContentTypeAndLabelsPicker,
 	validator: undefined,
 	...propOverride,

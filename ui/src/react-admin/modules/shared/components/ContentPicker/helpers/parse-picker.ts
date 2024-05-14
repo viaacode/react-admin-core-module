@@ -1,6 +1,7 @@
 import { LinkTarget } from '@viaa/avo2-components';
 import { parse } from 'query-string';
 import type { Avo } from '@viaa/avo2-types';
+import { tText } from '~shared/helpers/translation-functions';
 import { PickerItem } from '~shared/types/content-picker';
 
 import { AdminConfigManager } from '~core/config';
@@ -30,10 +31,10 @@ export const parseSearchQuery = (input: string, toast = false) => {
 		console.error('Failed to parse search query input', err);
 		toast &&
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText(
 					'modules/admin/shared/components/content-picker/helpers/parse-picker___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				description: tText(
 					'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
 				),
 				type: ToastType.ERROR,

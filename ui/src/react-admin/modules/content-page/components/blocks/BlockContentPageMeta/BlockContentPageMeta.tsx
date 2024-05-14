@@ -6,7 +6,7 @@ import { getPublishedDate } from '~modules/content-page/helpers';
 import { ContentPageInfo, ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { navigateToContentType } from '~shared/helpers/link';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 
 export interface ContentPageMetaProps {
@@ -16,7 +16,6 @@ export interface ContentPageMetaProps {
 export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	contentPageInfo,
 }) => {
-	const { tHtml } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const renderLabel = (labelObj: ContentPageLabel): string | ReactNode => {

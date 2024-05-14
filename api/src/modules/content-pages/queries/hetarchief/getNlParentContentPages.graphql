@@ -1,0 +1,11 @@
+query getNlParentContentPages($limit: Int!) {
+	app_content_page(
+		limit: $limit
+		where: { language: { _eq: NL }, is_deleted: { _eq: false } }
+		order_by: { title: asc }
+	) {
+		id
+		title
+		path
+	}
+}

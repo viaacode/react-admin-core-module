@@ -46,6 +46,7 @@ import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief }
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
+import { LanguageCode } from '../../translations';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -141,6 +142,8 @@ export class ContentPagesService {
 			id: gqlContentPage?.id,
 			thumbnailPath: gqlContentPage?.thumbnail_path,
 			title: gqlContentPage?.title,
+			language: gqlContentPage.language,
+			nlParentPageId: gqlContentPage.nl_parent_page_id,
 			description: gqlContentPage?.description,
 			seoDescription: gqlContentPage?.seo_description,
 			metaDescription: gqlContentPage?.meta_description,
@@ -170,6 +173,15 @@ export class ContentPagesService {
 					link_to: labelObj?.content_label?.link_to,
 					created_at: labelObj?.content_label?.created_at,
 					updated_at: labelObj?.content_label?.updated_at,
+				})
+			),
+			translatedPages: gqlContentPage.translated_content_pages.map(
+				(translatedPage: GqlContentPage['translated_content_pages'][0]) => ({
+					id: translatedPage.id,
+					path: translatedPage.path,
+					title: translatedPage.title,
+					language: translatedPage.language,
+					isPublic: translatedPage.is_public,
 				})
 			),
 		};
@@ -211,10 +223,12 @@ export class ContentPagesService {
 			updated_at: contentPageInfo.updatedAt || null,
 			user_group_ids: contentPageInfo.userGroupIds.map((groupId) => String(groupId)),
 			user_profile_id: contentPageInfo.userProfileId,
+			language: contentPageInfo.language || LanguageCode.Nl,
+			nl_parent_page_id: contentPageInfo.nlParentPageId || null,
 		};
 	}
 
-	public async getContentPagesForOverview(
+	public async getContentPagesForPageOverviewBlock(
 		inputQuery: ContentPageOverviewParams,
 		userGroupIds: string[]
 	): Promise<IPagination<DbContentPage> & { labelCounts: Record<string, number> }> {
@@ -361,11 +375,15 @@ export class ContentPagesService {
 		};
 	}
 
-	public async getContentPageByPath(path: string): Promise<DbContentPage | null> {
+	public async getContentPageByLanguageAndPath(
+		language: LanguageCode,
+		path: string
+	): Promise<DbContentPage | null> {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPageByPathQuery'],
 			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
+			language,
 			path,
 		});
 		const contentPage: GqlContentPage | undefined =
@@ -376,14 +394,18 @@ export class ContentPagesService {
 		return this.adaptContentPage(contentPage);
 	}
 
-	public async getContentPageByPathForUser(
+	public async getContentPageByLanguageAndPathForUser(
+		language: LanguageCode,
 		path: string,
 		user?: Avo.User.CommonUser,
 		referrer?: string,
 		ip = '',
 		onlyInfo = false
 	): Promise<DbContentPage | null> {
-		const contentPage: DbContentPage | undefined = await this.getContentPageByPath(path);
+		const contentPage: DbContentPage | undefined = await this.getContentPageByLanguageAndPath(
+			language,
+			path
+		);
 
 		const permissions = user?.permissions || [];
 		const userId = user?.userId;
@@ -604,6 +626,42 @@ export class ContentPagesService {
 				}
 			});
 		}
+	}
+
+	public async getNlParentContentPages(
+		limit: number
+	): Promise<
+		| ContentPageQueryTypes['GetNlParentContentPagesQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetNlParentContentPagesQueryHetArchief']['app_content_page']
+		| null
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetNlParentContentPagesQuery'],
+			ContentPageQueryTypes['GetNlParentContentPagesQueryVariables']
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetNlParentContentPagesDocument, {
+			limit,
+		});
+
+		return (response as any).app_content || (response as any).app_content_page;
+	}
+
+	public async getNlParentContentPagesByTitle(
+		title: string,
+		limit: number
+	): Promise<
+		| ContentPageQueryTypes['GetNlParentContentPagesByTitleQueryAvo']['app_content']
+		| ContentPageQueryTypes['GetNlParentContentPagesByTitleQueryHetArchief']['app_content_page']
+		| null
+	> {
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetNlParentContentPagesByTitleQuery'],
+			ContentPageQueryTypes['GetNlParentContentPagesByTitleQueryVariables']
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetNlParentContentPagesByTitleDocument, {
+			limit,
+			title,
+		});
+
+		return (response as any).app_content || (response as any).app_content_page;
 	}
 
 	public async getPublicContentItems(

@@ -3,7 +3,8 @@ import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import { tHtml } from '~shared/helpers/translation-functions';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
 interface ContentPageWrapperProps {
@@ -14,12 +15,11 @@ const ContentPageWrapper = ({
 	match,
 	commonUser,
 }: ContentPageWrapperProps & RouteComponentProps<{ path: string }>) => {
-	const { tHtml } = useTranslation();
 	const {
 		data: contentPageInfo,
 		isLoading,
 		isError,
-	} = useGetContentPageByPath('/' + match.params.path);
+	} = useGetContentPageByPath(commonUser?.language as LanguageCode, '/' + match.params.path);
 
 	if (isLoading) {
 		return null;

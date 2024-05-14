@@ -1,6 +1,5 @@
 import {
-	Button,
-	ButtonToolbar,
+	Button as AvoButton,
 	IconName,
 	LinkTarget,
 	Modal,
@@ -9,9 +8,10 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
+import { Button } from '@viaa/avo2-components';
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { cloneDeep, compact, get, set } from 'lodash-es';
+import { cloneDeep, compact, get, partition, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	ReactNode,
@@ -21,8 +21,12 @@ import React, {
 	useState,
 } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
+import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import Icon from '~shared/components/Icon/Icon';
 import Link from '~shared/components/Link/Link';
-import { useGetContentPagesOverview } from '~modules/content-page/hooks/get-content-pages-overview';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
@@ -39,7 +43,7 @@ import { isPublic } from '~modules/content-page/helpers';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
 
-import { AdminConfigManager } from '~core/config';
+import { AdminConfigManager, IconComponentProps } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
@@ -58,16 +62,20 @@ import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './ContentPageOverview.scss';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
+	NOT_TRANSLATION_PREFIX,
+	TranslationFilterValue,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~shared/components/error';
+import clsx from 'clsx';
+import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;
@@ -90,8 +98,12 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 	];
 	const [contentTypes] = useContentTypes();
 	const [contentPageLabelOptions] = useContentPageLabelOptions();
+	const { data: allLanguages } = useGetAllLanguages();
+	const [languageOptions] = useGetLanguageFilterOptions();
+	const [selectedDropdownContentPageId, setSelectedDropdownContentPageId] = useState<
+		string | number | null
+	>(null);
 
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const contentTypeOptions = useMemo(() => {
@@ -114,9 +126,16 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			setSelectedCheckboxes(
 				contentPageLabelOptions,
 				(tableState?.labels || []).map((label) => String(label)) as string[]
-			)
+			),
+			setSelectedCheckboxes(languageOptions, (tableState?.translations || []) as string[])
 		);
-	}, [contentPageLabelOptions, contentTypeOptions, tableState, userGroupOptions]);
+	}, [
+		contentPageLabelOptions,
+		contentTypeOptions,
+		tableState,
+		userGroupOptions,
+		languageOptions,
+	]);
 
 	const hasPerm = useCallback(
 		(permission: PermissionName) => {
@@ -209,6 +228,42 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			)
 		);
 
+		// Filter by language
+		if (filters.translations?.length) {
+			const [translationNotExistValues, translationDoesExistValues] = partition(
+				filters.translations,
+				(translationFilterValue) =>
+					translationFilterValue.startsWith(NOT_TRANSLATION_PREFIX)
+			) as [`${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`[], LanguageCode[]];
+
+			// Add filters for values: NOT_NL or NOT_EN
+			translationNotExistValues.forEach((translationNotExistValue) => {
+				const languageValue = translationNotExistValue.split('_')[1] as LanguageCode;
+				andFilters.push({
+					_not: {
+						_or: [
+							{ translated_content_pages: { language: { _eq: languageValue } } },
+							{ language: { _eq: languageValue } },
+						],
+					},
+				});
+			});
+
+			// Add filters for values: NL or EN
+			translationDoesExistValues.forEach((translationDoesExistValue) => {
+				andFilters.push({
+					_or: [
+						{
+							translated_content_pages: {
+								language: { _eq: translationDoesExistValue },
+							},
+						},
+						{ language: { _eq: translationDoesExistValue } },
+					],
+				});
+			});
+		}
+
 		// When you get to this point we assume you already have either the EDIT_ANY_CONTENT_PAGES or EDIT_OWN_CONTENT_PAGES permission
 		if (!hasPerm(EDIT_ANY_CONTENT_PAGES)) {
 			// Add filter to only allow the content pages for which the user is the author
@@ -235,7 +290,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		data: contentPageResponse,
 		isLoading,
 		refetch: refetchContentPages,
-	} = useGetContentPagesOverview({
+	} = useGetContentPages({
 		page: tableState.page || 0,
 		sortColumn: (tableState.sort_column as ContentOverviewTableCols) || 'updated_at',
 		sortOrder: tableState.sort_order || 'desc',
@@ -350,10 +405,8 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 
 			case 'contentType':
 				return (
-					get(
-						contentTypes.find((type) => type.value === contentPage.contentType),
-						'label'
-					) || '-'
+					contentTypes.find((type) => type.value === contentPage.contentType)?.label ||
+					'-'
 				);
 
 			case 'isPublic':
@@ -431,40 +484,35 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 					? formatDateString(contentPage[columnId] as string)
 					: '-';
 
+			case 'translations':
+				return (
+					<div className="c-content-overview__table__translated_pages">
+						{(allLanguages || []).map((languageInfo) => {
+							const translatedPage = contentPage.translatedPages.find(
+								(page) => page.language === languageInfo.languageCode
+							);
+
+							return (
+								<span
+									className={clsx({
+										'c-content-overview__table__translated_pages__page': true,
+										'c-content-overview__table__translated_pages__page--exists':
+											!!translatedPage,
+										'c-content-overview__table__translated_pages__page--published':
+											translatedPage?.isPublic,
+									})}
+								>
+									{languageInfo.languageCode}
+								</span>
+							);
+						})}
+					</div>
+				);
+
 			case 'actions':
 				return (
-					<ButtonToolbar>
-						<Link
-							to={buildLink(
-								AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
-								{
-									id,
-								}
-							)}
-						>
-							<Button
-								icon={'info' as IconName}
-								size="small"
-								title={tText(
-									'admin/content/views/content-overview___bekijk-content'
-								)}
-								ariaLabel={tText(
-									'admin/content/views/content-overview___bekijk-content'
-								)}
-								type="secondary"
-							/>
-						</Link>
-						<Button
-							icon={'eye' as IconName}
-							onClick={() => handlePreviewClicked(contentPage)}
-							size="small"
-							title={tText('admin/content/views/content-overview___preview-content')}
-							ariaLabel={tText(
-								'admin/content/views/content-overview___preview-content'
-							)}
-							type="secondary"
-						/>
-						<Button
+					<>
+						<AvoButton
 							icon={
 								isPublic(contentPage)
 									? ('unlock3' as IconName)
@@ -483,41 +531,105 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 							type="secondary"
 							disabled
 						/>
-						<Link
-							to={buildLink(
-								AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'),
-								{
-									id,
-								}
-							)}
+						<Dropdown
+							className="c-actions-dropdown"
+							flyoutClassName="c-actions-dropdown-flyout"
+							isOpen={selectedDropdownContentPageId === contentPage.id}
+							menuWidth="fit-content"
+							onOpen={() => setSelectedDropdownContentPageId(contentPage.id)}
+							onClose={() => setSelectedDropdownContentPageId(null)}
+							placement="bottom-end"
 						>
-							<Button
-								icon={'edit' as IconName}
-								size="small"
-								title={tText(
-									'admin/content/views/content-overview___pas-content-aan'
+							<DropdownButton>
+								<Button
+									type="secondary"
+									renderIcon={() => <Icon name="extraOptions" />}
+								></Button>
+							</DropdownButton>
+							<DropdownContent>
+								<Link
+									to={buildLink(
+										AdminConfigManager.getAdminRoute(
+											'ADMIN_CONTENT_PAGE_DETAIL'
+										),
+										{
+											id,
+										}
+									)}
+								>
+									<AvoButton
+										icon={'info' as IconName}
+										size="small"
+										title={tText(
+											'admin/content/views/content-overview___bekijk-content'
+										)}
+										label={tText(
+											'admin/content/views/content-overview___bekijk-content'
+										)}
+										ariaLabel={tText(
+											'admin/content/views/content-overview___bekijk-content'
+										)}
+										type="secondary"
+									/>
+								</Link>
+								<AvoButton
+									icon={'eye' as IconName}
+									onClick={() => handlePreviewClicked(contentPage)}
+									size="small"
+									title={tText(
+										'admin/content/views/content-overview___preview-content'
+									)}
+									label={tText(
+										'admin/content/views/content-overview___preview-content'
+									)}
+									ariaLabel={tText(
+										'admin/content/views/content-overview___preview-content'
+									)}
+									type="secondary"
+								/>
+								<Link
+									to={buildLink(
+										AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'),
+										{
+											id,
+										}
+									)}
+								>
+									<AvoButton
+										icon={'edit' as IconName}
+										size="small"
+										title={tText(
+											'admin/content/views/content-overview___pas-content-aan'
+										)}
+										label={tText(
+											'admin/content/views/content-overview___pas-content-aan'
+										)}
+										ariaLabel={tText(
+											'admin/content/views/content-overview___pas-content-aan'
+										)}
+										type="secondary"
+									/>
+								</Link>
+								{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
+									<Button
+										icon={'trash-2' as IconName}
+										onClick={() => openModal(contentPage)}
+										size="small"
+										title={tText(
+											'admin/content/views/content-overview___verwijder-content'
+										)}
+										label={tText(
+											'admin/content/views/content-overview___verwijder-content'
+										)}
+										ariaLabel={tText(
+											'admin/content/views/content-overview___verwijder-content'
+										)}
+										type="secondary"
+									/>
 								)}
-								ariaLabel={tText(
-									'admin/content/views/content-overview___pas-content-aan'
-								)}
-								type="secondary"
-							/>
-						</Link>
-						{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
-							<Button
-								icon={'delete' as IconName}
-								onClick={() => openModal(contentPage)}
-								size="small"
-								title={tText(
-									'admin/content/views/content-overview___verwijder-content'
-								)}
-								ariaLabel={tText(
-									'admin/content/views/content-overview___verwijder-content'
-								)}
-								type="danger-hover"
-							/>
-						)}
-					</ButtonToolbar>
+							</DropdownContent>
+						</Dropdown>
+					</>
 				);
 
 			default:
@@ -541,7 +653,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 					<Spacer margin="top">
 						<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}>
-							<Button
+							<AvoButton
 								icon={'plus' as IconName}
 								label={tText(
 									'admin/content/views/content-overview___content-toevoegen'

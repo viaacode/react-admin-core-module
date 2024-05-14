@@ -88,6 +88,7 @@ export function convertUserInfoToCommonUser(
 				updatedAt: user.profile.updated_at || undefined,
 				companyId: user.profile.company_id,
 				permissions: user.profile.permissions as PermissionName[],
+				language: user.profile.language,
 			};
 		}
 
@@ -142,6 +143,7 @@ export function convertUserInfoToCommonUser(
 				updatedAt: profile.updated_at || undefined,
 				companyId: profile.company_id,
 				permissions: profile.permissions as PermissionName[],
+				language: profile.language,
 			};
 		}
 
@@ -197,6 +199,7 @@ export function convertUserInfoToCommonUser(
 				blockedAt: user.blocked_at?.date,
 				unblockedAt: user.unblocked_at?.date,
 				lastAccessAt: user.last_access_at,
+				language: null,
 				tempAccess: user.user.temp_access
 					? {
 							from: user.user.temp_access.from ?? null,
@@ -225,6 +228,7 @@ export function convertUserInfoToCommonUser(
 					profile.full_name ?? profile.first_name
 						? [profile.first_name, profile.last_name].join(' ')
 						: undefined,
+				language: profile.language,
 				userGroup: {
 					id: profile.group?.id,
 					name: profile.group?.name,

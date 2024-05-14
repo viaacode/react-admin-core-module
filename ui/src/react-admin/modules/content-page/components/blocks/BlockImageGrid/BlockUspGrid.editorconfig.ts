@@ -3,6 +3,7 @@ import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	ContentBlockConfig,
@@ -41,24 +42,18 @@ export const INITIAL_USP_GRID_BLOCK_STATE = (): BlockUspGridWrapperProps &
 
 export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/usp-grid___usp'
-	),
+	name: tText('admin/content-block/helpers/generators/usp-grid___usp'),
 	type: ContentBlockType.UspGrid,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/image-grid___item'
-		),
+		name: tText('admin/content-block/helpers/generators/image-grid___item'),
 		state: INITIAL_USP_GRID_COMPONENTS_STATE(),
 		fields: {
 			source: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/image-grid___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/image-grid___afbeelding'),
 					editorProps: {
 						assetType: 'CONTENT_BLOCK_IMAGE',
 						allowMulti: false,
@@ -67,52 +62,38 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___titel'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			text: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___knop-tooltip'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___knop-type-kleur'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/usp-grid___alt-title-text'
-				),
+				label: tText('admin/content-block/helpers/generators/usp-grid___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			action: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___link'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___link'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},
@@ -123,18 +104,14 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			align: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___alignatie'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___alignatie'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
 			textAlign: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___text-alignatie'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),

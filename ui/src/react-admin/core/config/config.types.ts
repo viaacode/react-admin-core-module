@@ -67,7 +67,7 @@ export interface AdminConfig {
 	};
 	// Secondary services and config
 	services: {
-		getContentPageByPathEndpoint: string | null;
+		getContentPageByLanguageAndPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;

@@ -1,3 +1,4 @@
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	Color,
 	ContentBlockConfig,
@@ -46,7 +47,7 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlock
 
 export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___admin-content-block-helpers-image-text-background-image-text-background'
 	),
 	type: ContentBlockType.ImageTextBackground,
@@ -54,18 +55,18 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		state: INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
 		fields: {
 			heading: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___titel-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			headingType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___titel-stijl'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -77,7 +78,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			image: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
@@ -88,7 +89,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				} as FileUploadProps,
 			},
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-type'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -97,20 +98,20 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			buttonLabel: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-tekst'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -119,7 +120,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			buttonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-icoon'
 				),
 				editorType: ContentBlockEditor.IconPicker,
@@ -128,7 +129,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			buttonIconAlignment: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___button-icon-alignment'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -137,7 +138,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			imageAlignment: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -146,12 +147,12 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			foregroundColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___voorgrond-kleur'
 				)
 			),
 			backgroundColor: BACKGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___achtergrond-kleur'
 				),
 				isAvo()

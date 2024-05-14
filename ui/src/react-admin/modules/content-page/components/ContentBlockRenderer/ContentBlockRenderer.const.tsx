@@ -126,6 +126,7 @@ export const USER_CONTENT_BLOCKS = [
 	ContentBlockType.MediaPlayer,
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
+	ContentBlockType.ProjectsSpotlight,
 ];
 
 /**

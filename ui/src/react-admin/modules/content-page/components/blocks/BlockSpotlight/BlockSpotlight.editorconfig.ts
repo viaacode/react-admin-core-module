@@ -2,6 +2,7 @@ import { times } from 'lodash-es';
 import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -34,14 +35,10 @@ export const INITIAL_SPOTLIGHT_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/spotlight___in-de-kijker'
-	),
+	name: tText('admin/content-block/helpers/generators/spotlight___in-de-kijker'),
 	type: ContentBlockType.Spotlight,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/spotlight___item'
-		),
+		name: tText('admin/content-block/helpers/generators/spotlight___item'),
 		limits: {
 			min: 3,
 			max: 3,
@@ -49,13 +46,11 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_SPOTLIGHT_COMPONENTS_STATE(),
 		fields: {
 			image: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/generators/spotlight___een-afbeelding-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/spotlight___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/spotlight___afbeelding'),
 					editorProps: {
 						assetType: 'CONTENT_BLOCK_IMAGE',
 						allowMulti: false,
@@ -63,16 +58,12 @@ export const SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			title: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/spotlight___titel'
-				),
+				label: tText('admin/content-block/helpers/generators/spotlight___titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/spotlight___link'
-				),
+				label: tText('admin/content-block/helpers/generators/spotlight___link'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},

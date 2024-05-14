@@ -26,7 +26,7 @@ import { getPublishedState } from '~modules/content-page/helpers';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
 import './PublishContentPageModal.scss';
@@ -42,8 +42,6 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 	isOpen,
 	contentPage,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [validationError, setValidationError] = useState<string[] | undefined>(undefined);
 	const [selectedOption, setSelectedOption] = useState<PublishOption>(
 		getPublishedState(contentPage)

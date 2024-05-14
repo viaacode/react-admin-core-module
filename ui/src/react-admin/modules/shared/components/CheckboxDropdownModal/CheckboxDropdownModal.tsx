@@ -28,7 +28,7 @@ import React, { FunctionComponent, MouseEvent, useState } from 'react';
 
 import { isMobileWidth } from '../../helpers/media-query';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 import './CheckboxDropdownModal.scss';
 
@@ -74,8 +74,6 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 	onChange,
 	onSearch,
 }) => {
-	const { tText } = useTranslation();
-
 	// Computed
 	const optionsFromPairs = fromPairs(
 		options.map(({ checked, ...option }: CheckboxOption) => [option.id, checked])

@@ -14,7 +14,7 @@ import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { useGetIdps } from '~shared/hooks/use-get-idps';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import {
@@ -68,7 +68,6 @@ export interface UserOverviewProps {
 
 export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUser }) => {
 	// Hooks
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(null);

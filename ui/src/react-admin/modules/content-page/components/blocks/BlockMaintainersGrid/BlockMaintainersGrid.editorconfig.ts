@@ -1,4 +1,5 @@
 import { MultiRangeProps } from '@viaa/avo2-components';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -11,7 +12,6 @@ import {
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 
-import { AdminConfigManager } from '~core/config';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 export const INITIAL_MAINTAINERS_GRID_COMPONENTS_STATE =
@@ -35,7 +35,7 @@ export const INITIAL_MAINTAINERS_GRID_BLOCK_STATE = (): DefaultContentBlockState
 
 export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
+	name: tText(
 		'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___aanbieders-grid'
 	),
 	type: ContentBlockType.MaintainersGrid,
@@ -43,18 +43,18 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 		state: INITIAL_MAINTAINERS_GRID_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___titel'
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			titleType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___titel-grootte'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -63,25 +63,25 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 				},
 			},
 			subtitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___subtitel'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonLabel: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___link-tekst'
 				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___link-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			visibleItems: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___zichtbare-items'
 				),
 				editorType: ContentBlockEditor.MultiRange,
@@ -93,23 +93,23 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 				} as MultiRangeProps,
 			},
 			maintainers: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___aanbieders'
 				),
 				fields: {
 					imageSrc: FILE_FIELD(
-						AdminConfigManager.getConfig().services.i18n.tText(
+						tText(
 							'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___een-aanbieder-logo-is-verplicht'
 						),
 						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
+							label: tText(
 								'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___logo'
 							),
 							editorType: ContentBlockEditor.FileUpload,
 						}
 					),
 					linkAction: {
-						label: AdminConfigManager.getConfig().services.i18n.tText(
+						label: tText(
 							'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___logo-link'
 						),
 						editorType: ContentBlockEditor.ContentPicker,
@@ -126,10 +126,10 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					addButtonLabel: tText(
 						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___voeg-aanbieder-toe'
 					),
-					deleteButtonLabel: AdminConfigManager.getConfig().services.i18n.tText(
+					deleteButtonLabel: tText(
 						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___verwijder-aanbieder'
 					),
 				},

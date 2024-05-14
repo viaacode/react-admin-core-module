@@ -13,7 +13,7 @@ export const retrieveContentPages = async (
 	try {
 		const contentItems: ContentPageInfo[] | null = title
 			? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
-			: await ContentPageService.getPublicContentItems(limit);
+			: await ContentPageService.getPublicContentItemsByTitle(undefined, limit);
 
 		return parseContentPages(contentItems || []);
 	} catch (err) {
@@ -31,7 +31,7 @@ export const retrieveProjectContentPages = async (
 ): Promise<PickerItem[]> => {
 	const contentItems: Partial<ContentPageInfo>[] | null = title
 		? await ContentPageService.getPublicProjectContentItemsByTitle(`%${title}%`, limit)
-		: await ContentPageService.getPublicProjectContentItems(limit);
+		: await ContentPageService.getPublicProjectContentItemsByTitle(undefined, limit);
 
 	return parseContentPages(contentItems || []);
 };

@@ -13,7 +13,7 @@ import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~shared/helpers/custom-error';
 
@@ -34,7 +34,6 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		/**
 		 * Hooks
 		 */
-		const { tHtml, tText } = useTranslation();
 
 		const {
 			data: userGroups,
@@ -147,10 +146,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				// Fire onChange for parent component
 				onChangePermissions?.(false);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___success'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___success'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
 					),
 					type: ToastType.SUCCESS,
@@ -162,10 +159,8 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
 					),
 					type: ToastType.ERROR,
@@ -230,31 +225,27 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 					})
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
 					),
 					type: ToastType.ERROR,
 				});
 			}
-		}, [isErrorUserGroups, tHtml, userGroupError]);
+		}, [isErrorUserGroups, userGroupError]);
 
 		useEffect(() => {
 			if (isErrorPermissions) {
 				console.error(new CustomError('Failed to get permissions', permissionsError));
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
-						'modules/user-group/views/user-group-overview___error'
-					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText('modules/user-group/views/user-group-overview___error'),
+					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'
 					),
 					type: ToastType.ERROR,
 				});
 			}
-		}, [isErrorPermissions, isErrorUserGroups, permissionsError, tHtml, userGroupError]);
+		}, [isErrorPermissions, isErrorUserGroups, permissionsError, userGroupError]);
 
 		/**
 		 * Render

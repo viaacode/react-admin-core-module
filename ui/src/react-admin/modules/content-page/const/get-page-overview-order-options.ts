@@ -1,5 +1,5 @@
 import { SelectOption } from '@viaa/avo2-components';
-import { AdminConfigManager } from '~core/config';
+import { tText } from '~shared/helpers/translation-functions';
 
 export type PageOverviewOrderOptions =
 	| 'published_at__asc'
@@ -10,27 +10,19 @@ export type PageOverviewOrderOptions =
 export const GET_PAGE_OVERVIEW_ORDER_OPTIONS: () => SelectOption<PageOverviewOrderOptions>[] =
 	() => [
 		{
-			label: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/content-block/content-block___publicatie-datum-nieuw-oud'
-			),
+			label: tText('admin/content-block/content-block___publicatie-datum-nieuw-oud'),
 			value: 'published_at__desc',
 		},
 		{
-			label: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/content-block/content-block___publicatie-datum-oud-nieuw'
-			),
+			label: tText('admin/content-block/content-block___publicatie-datum-oud-nieuw'),
 			value: 'published_at__asc',
 		},
 		{
-			label: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/content-block/content-block___titel-a-z'
-			),
+			label: tText('admin/content-block/content-block___titel-a-z'),
 			value: 'title__asc',
 		},
 		{
-			label: AdminConfigManager.getConfig().services.i18n.tText(
-				'admin/content-block/content-block___titel-z-a'
-			),
+			label: tText('admin/content-block/content-block___titel-z-a'),
 			value: 'title__desc',
 		},
 	];

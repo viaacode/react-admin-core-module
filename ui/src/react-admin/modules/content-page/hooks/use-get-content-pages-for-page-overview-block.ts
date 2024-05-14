@@ -15,14 +15,14 @@ interface ContentPagesOverviewArgs {
 	limit: number;
 }
 
-export const useGetContentPagesOverview = (
+export const useGetContentPagesForPageOverviewBlock = (
 	requestArgs: ContentPagesOverviewArgs,
 	options?: UseQueryOptions<any>
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, requestArgs],
 		(props) => {
-			return ContentPageService.getContentPages(
+			return ContentPageService.getContentPagesForPageOverviewBlock(
 				props.queryKey[1] as ContentPagesOverviewArgs
 			);
 		},

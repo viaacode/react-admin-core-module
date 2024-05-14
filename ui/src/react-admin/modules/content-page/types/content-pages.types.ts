@@ -1,8 +1,9 @@
 import type { Avo } from '@viaa/avo2-types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { PickerItem } from '~shared/types/content-picker';
 
-import { DateRange } from '../../shared/components/DateRangeDropdown/DateRangeDropdown';
-import { FilterableTableState } from '../../shared/components/FilterTable/FilterTable';
+import { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
+import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 import { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
@@ -33,12 +34,20 @@ export type ContentOverviewTableCols =
 	| 'createdAt'
 	| 'updatedAt'
 	| 'isPublic'
+	| 'translations'
 	| 'publishedAt'
 	| 'publishAt'
 	| 'depublishAt'
 	| 'labels'
 	| 'userGroupIds'
 	| 'actions';
+
+export const NOT_TRANSLATION_PREFIX = 'NOT_';
+
+// NL, EN, NOT_NL, NOT_EN
+export type TranslationFilterValue =
+	| LanguageCode
+	| `${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`;
 
 export interface ContentTableState extends FilterableTableState {
 	contentType: string[];
@@ -49,6 +58,7 @@ export interface ContentTableState extends FilterableTableState {
 	userGroup: number[];
 	labels: number[];
 	isPublic: string[];
+	translations: TranslationFilterValue;
 }
 
 export interface ContentPageLabel {
@@ -64,6 +74,8 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
+	language: LanguageCode;
+	nlParentPageId: string | number | null; // number is still used by avo, but we want to switch to uuids at some point
 	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;
 	seoDescription: string | null;
@@ -82,6 +94,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language' | 'isPublic'>[]; // Other pages that are translated versions of this page
 }
 
 /**
@@ -127,3 +140,10 @@ export enum ContentEditActionType {
 }
 
 export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
+
+export enum ContentPageAction {
+	duplicate = 'duplicate',
+	gotoEnglishPage = 'gotoEnglishPage',
+	duplicateForEnglish = 'duplicateForEnglish',
+	delete = 'delete',
+}

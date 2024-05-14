@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { FunctionComponent, ReactNode } from 'react';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml } from '~shared/helpers/translation-functions';
 import { Link } from '../Link';
 
 import './Sidebar.scss';
@@ -18,8 +18,6 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
 	headerLink,
 	light = false,
 }) => {
-	const { tHtml } = useTranslation();
-
 	return (
 		<div className={clsx(className, 'o-sidebar', { 'o-sidebar--light': light })}>
 			{headerLink && (

@@ -28,6 +28,7 @@ import {
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
 import { buildLink, navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { AdminLayout } from '~shared/layouts';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
@@ -89,7 +90,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		} catch (err) {
 			setLoadingInfo({
 				state: 'error',
-				message: AdminConfigManager.getConfig().services.i18n.tText(
+				message: tText(
 					'admin/content-page-labels/views/content-page-label-overview___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 				),
 			});
@@ -121,18 +122,14 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		() => [
 			{
 				id: 'label',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___label'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___label'),
 				sortable: true,
 				visibleByDefault: true,
 				dataType: TableColumnDataType.string,
 			},
 			{
 				id: 'content_type',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___type'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___type'),
 				sortable: true,
 				visibleByDefault: true,
 				filterType: 'CheckboxDropdownModal',
@@ -143,15 +140,13 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'link_to',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___link'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___link'),
 				sortable: false,
 				visibleByDefault: true,
 			},
 			{
 				id: 'created_at',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-page-labels/views/content-page-label-overview___gemaakt-op'
 				),
 				sortable: true,
@@ -161,7 +156,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'updated_at',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-page-labels/views/content-page-label-overview___aangepast-op'
 				),
 				sortable: true,
@@ -171,7 +166,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'actions',
-				tooltip: AdminConfigManager.getConfig().services.i18n.tText(
+				tooltip: tText(
 					'admin/content-page-labels/views/content-page-label-overview___acties'
 				),
 				visibleByDefault: true,
@@ -182,10 +177,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const handleDelete = async () => {
 		if (isNil(contentPageLabelIdToDelete)) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText(
 					'react-admin/modules/content-page-labels/views/content-page-label-overview___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				description: tText(
 					'admin/content-page-labels/views/content-page-label-overview___het-verwijderen-van-het-label-is-mislukt-omdat-geen-label-geselecteerd-is'
 				),
 				type: ToastType.ERROR,
@@ -196,10 +191,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		await ContentPageLabelService.deleteContentPageLabel(contentPageLabelIdToDelete);
 		await fetchContentPageLabels();
 		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.tText(
+			title: tText(
 				'react-admin/modules/content-page-labels/views/content-page-label-overview___succes'
 			),
-			description: AdminConfigManager.getConfig().services.i18n.tText(
+			description: tText(
 				'admin/content-page-labels/views/content-page-label-overview___de-content-pagina-label-is-verwijdert'
 			),
 			type: ToastType.SUCCESS,
@@ -264,10 +259,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 									}
 								)
 							}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
@@ -285,10 +280,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 									}
 								)
 							}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
@@ -296,10 +291,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 						<Button
 							icon={<Icon name="delete" />}
 							onClick={() => openModal(rowData)}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
@@ -315,12 +310,12 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const renderNoResults = () => {
 		return (
 			<ErrorView
-				message={AdminConfigManager.getConfig().services.i18n.tHtml(
+				message={tHtml(
 					'admin/content-page-labels/views/content-page-label-overview___er-zijn-nog-geen-content-pagina-labels-aangemaakt'
 				)}
 			>
 				<p>
-					{AdminConfigManager.getConfig().services.i18n.tHtml(
+					{tHtml(
 						'admin/content-page-labels/views/content-page-label-overview___er-zijn-nog-geen-content-pagina-labels-aangemaakt'
 					)}
 				</p>
@@ -338,11 +333,11 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					renderCell={(rowData: ContentPageLabel, columnId: string) =>
 						renderTableCell(rowData, columnId as ContentPageLabelOverviewTableCols)
 					}
-					searchTextPlaceholder={AdminConfigManager.getConfig().services.i18n.tText(
+					searchTextPlaceholder={tText(
 						'admin/content-page-labels/views/content-page-label-overview___zoek-op-label'
 					)}
 					renderNoResults={renderNoResults}
-					noContentMatchingFiltersMessage={AdminConfigManager.getConfig().services.i18n.tText(
+					noContentMatchingFiltersMessage={tText(
 						'admin/content-page-labels/views/content-page-label-overview___er-zijn-geen-content-pagina-labels-gevonden-die-voldoen-aan-je-zoekterm'
 					)}
 					itemsPerPage={ITEMS_PER_PAGE}
@@ -353,10 +348,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					deleteObjectCallback={handleDelete}
 					isOpen={isConfirmModalOpen}
 					onClose={() => setIsConfirmModalOpen(false)}
-					title={AdminConfigManager.getConfig().services.i18n.tText(
+					title={tText(
 						'admin/content-page-labels/views/content-page-label-overview___ben-je-zeker-dat-je-dit-label-wil-verwijderen'
 					)}
-					body={AdminConfigManager.getConfig().services.i18n.tText(
+					body={tText(
 						'admin/content-page-labels/views/content-page-label-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 					)}
 				/>
@@ -366,14 +361,14 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 
 	return (
 		<AdminLayout
-			pageTitle={AdminConfigManager.getConfig().services.i18n.tText(
+			pageTitle={tText(
 				'admin/content-page-labels/views/content-page-label-overview___content-pagina-labels-overzicht'
 			)}
 			className={className}
 		>
 			<AdminLayout.Actions>
 				<Button
-					label={AdminConfigManager.getConfig().services.i18n.tText(
+					label={tText(
 						'admin/content-page-labels/views/content-page-label-overview___content-pagina-label-toevoegen'
 					)}
 					onClick={() =>
