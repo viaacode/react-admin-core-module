@@ -119,7 +119,12 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 								),
 							],
 						])}
-						{renderDetailRow(contentPageLabelInfo.language, tText('Taal'))}
+						{renderDetailRow(
+							contentPageLabelInfo.language,
+							tText(
+								'modules/content-page-labels/views/content-page-label-detail___taal'
+							)
+						)}
 						{renderDetailRow(
 							linkTo ? (
 								<Button
