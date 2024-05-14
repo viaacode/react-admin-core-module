@@ -1,4 +1,5 @@
 import { stringifyUrl } from 'query-string';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -25,11 +26,19 @@ export class NavigationService {
 		}
 	}
 
-	public static async fetchNavigationBarItems(placement?: string): Promise<NavigationItem[]> {
+	public static async fetchNavigationBarItems(
+		placement?: string,
+		language?: LanguageCode,
+		searchTerm?: string
+	): Promise<NavigationItem[]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: this.getBaseUrl() + (placement ? '/' + placement : ''),
+					query: {
+						language,
+						searchTerm,
+					},
 				})
 			);
 		} catch (err) {
@@ -79,6 +88,7 @@ export class NavigationService {
 					position: navigationItem.position,
 					description: navigationItem.description,
 					placement: navigationItem.placement,
+					language: navigationItem.language,
 					tooltip: navigationItem.tooltip,
 				};
 

@@ -2,6 +2,7 @@ import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-componen
 import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import type { Avo } from '@viaa/avo2-types';
 
@@ -12,6 +13,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
+import { Select, SelectOption } from '@meemoo/react-components';
 
 import './NavigationEditForm.scss';
 
@@ -37,6 +39,14 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	permissionWarning,
 	enableIcons,
 }) => {
+	const { data: allLanguages } = useGetAllLanguages();
+	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
+		return {
+			label: languageInfo.languageLabel,
+			value: languageInfo.languageCode,
+		};
+	});
+
 	const handleMenuCreate = (label: string) => {
 		return {
 			label,
@@ -135,6 +145,15 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					onChange={(item: any) => {
 						onChange('content', item);
 					}}
+				/>
+			</FormGroup>
+			<FormGroup label={tText('Taal')} error={formErrors.language}>
+				<Select
+					options={languageOptions}
+					value={formState.language}
+					onChange={(SelectChangeEvt) =>
+						onChange('language', SelectChangeEvt.target.value)
+					}
 				/>
 			</FormGroup>
 			<UserGroupSelect

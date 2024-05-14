@@ -12,6 +12,7 @@ mutation insertNavigationItem($navigationItem: app_navigation_insert_input!) {
 		updated_at
 		content_type
 		content_path
+		language
 		tooltip
 	}
 }

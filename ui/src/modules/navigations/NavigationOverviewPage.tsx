@@ -3,14 +3,14 @@ import React, { FunctionComponent } from 'react';
 import { tText } from '~shared/helpers/translation-functions';
 
 import { AdminLayout } from '~shared/layouts';
-import { NavigationOverview } from '~modules/navigation/views';
+import { NavigationBarOverview } from '~modules/navigation/views';
 
 const NavigationOverviewPage: FunctionComponent = () => {
 	const renderPageContent = () => {
 		return (
 			<AdminLayout pageTitle={tText('admin/menu/views/menu-overview___navigatie-overzicht')}>
 				<AdminLayout.Content>
-					<NavigationOverview />
+					<NavigationBarOverview />
 				</AdminLayout.Content>
 			</AdminLayout>
 		);

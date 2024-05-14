@@ -1,5 +1,5 @@
-import NavigationDetail from './NavigationDetail';
-import NavigationEdit from './NavigationEdit';
-import NavigationOverview from './NavigationOverview';
+import NavigationBarDetail from './NavigationBarDetail';
+import NavigationItemEdit from './NavigationItemEdit';
+import NavigationBarOverview from './NavigationBarOverview';
 
-export { NavigationDetail, NavigationEdit, NavigationOverview };
+export { NavigationBarDetail, NavigationItemEdit, NavigationBarOverview };

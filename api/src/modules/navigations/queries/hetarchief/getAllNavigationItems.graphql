@@ -1,5 +1,8 @@
-query getAllNavigationItems {
-	app_navigation(order_by: { placement: asc, position: asc }) {
+query getAllNavigationItems($languages: [lookup_languages_enum!]!) {
+	app_navigation(
+		order_by: { placement: asc, position: asc }
+		where: { language: { _in: $languages } }
+	) {
 		id
 		created_at
 		description
@@ -12,6 +15,7 @@ query getAllNavigationItems {
 		updated_at
 		content_type
 		content_path
+		language
 		tooltip
 	}
 }
