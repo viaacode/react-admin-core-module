@@ -5,6 +5,7 @@ import { groupBy, intersection } from 'lodash';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
 import { LanguageCode } from '../../translations';
@@ -38,7 +39,7 @@ export class AdminNavigationsController {
 		@SessionUser() user: SessionUserEntity
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
-			user.getLanguage()
+			user?.getLanguage() || Lookup_Languages_Enum.Nl
 		);
 
 		// filter based on logged in / logged out

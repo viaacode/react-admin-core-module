@@ -276,9 +276,11 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 					className="c-navigation-detail__table"
 					variant="styled"
 					data={navigationItems || []}
-					searchTextPlaceholder={tText('Zoek op navigatie item label')}
+					searchTextPlaceholder={tText(
+						'modules/navigation/views/navigation-bar-detail___zoek-op-navigatie-item-label'
+					)}
 					noContentMatchingFiltersMessage={tText(
-						'Er zijn geen navigatie items in de huidige navigatie balk die voldoen aan je filters'
+						'modules/navigation/views/navigation-bar-detail___er-zijn-geen-navigatie-items-in-de-huidige-navigatie-balk-die-voldoen-aan-je-filters'
 					)}
 					renderNoResults={() =>
 						tHtml(
@@ -299,7 +301,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 						},
 						{
 							id: 'language',
-							label: tText('Taal'),
+							label: tText('modules/navigation/views/navigation-bar-detail___taal'),
 							sortable: true,
 							visibleByDefault: true,
 							filterType: 'CheckboxDropdownModal',

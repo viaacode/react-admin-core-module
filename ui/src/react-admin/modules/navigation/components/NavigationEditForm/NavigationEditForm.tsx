@@ -3,6 +3,7 @@ import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import type { Avo } from '@viaa/avo2-types';
 
@@ -13,7 +14,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
-import { Select, SelectOption } from '@meemoo/react-components';
+import { ReactSelect, Select, SelectOption } from '@meemoo/react-components';
 
 import './NavigationEditForm.scss';
 
@@ -147,13 +148,20 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					}}
 				/>
 			</FormGroup>
-			<FormGroup label={tText('Taal')} error={formErrors.language}>
-				<Select
+			<FormGroup
+				label={tText(
+					'modules/navigation/components/navigation-edit-form/navigation-edit-form___taal'
+				)}
+				error={formErrors.language}
+			>
+				<ReactSelect
 					options={languageOptions}
-					value={formState.language}
-					onChange={(SelectChangeEvt) =>
-						onChange('language', SelectChangeEvt.target.value)
+					value={
+						languageOptions.find(
+							(option) => option.value === (formState.language || LanguageCode.Nl)
+						) || languageOptions[0]
 					}
+					onChange={(evt) => onChange('language', (evt as SelectOption).value)}
 				/>
 			</FormGroup>
 			<UserGroupSelect

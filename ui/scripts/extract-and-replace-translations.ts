@@ -347,8 +347,6 @@ async function combineTranslations(
 
 			combinedTranslationEntries.push(entry);
 		});
-
-		// Output new translations that were found in code
 	});
 
 	const combinedTranslations = Object.fromEntries(
@@ -529,7 +527,7 @@ async function extractTranslations() {
 			const key = `'${translationEntry.key}'`;
 			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
-			const language = "'NL'";
+			const language = `'${translationEntry.language}'`;
 			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language") VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()

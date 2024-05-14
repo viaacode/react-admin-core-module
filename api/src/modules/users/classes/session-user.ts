@@ -30,8 +30,8 @@ export class SessionUserEntity {
 		return this.user.profileId;
 	}
 
-	public getLanguage(): LanguageCode {
-		return this.user.language as LanguageCode;
+	public getLanguage(): LanguageCode | undefined {
+		return this.user?.language as LanguageCode | undefined;
 	}
 
 	public getFirstName(): string {
