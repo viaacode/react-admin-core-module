@@ -22,7 +22,9 @@ export interface PickerItem {
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, string> = () => ({
 	['CONTENT_PAGE']: tText('admin/content/content___content'),
-	['NL_CONTENT_PAGE_PARENT_ID']: tText('Nederlandse hoofd pagina'),
+	['NL_CONTENT_PAGE_PARENT_ID']: tText(
+		'modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina'
+	),
 	['INTERNAL_LINK']: tText('admin/content/content___statisch'),
 	['COLLECTION']: tText('admin/content/content___collecties'),
 	['ITEM']: tText('admin/content/content___items'),

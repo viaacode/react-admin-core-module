@@ -156,7 +156,9 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'language',
-				label: tText('Taal'),
+				label: tText(
+					'modules/content-page-labels/views/content-page-label-overview___taal'
+				),
 				sortable: true,
 				visibleByDefault: true,
 				filterType: 'CheckboxDropdownModal',

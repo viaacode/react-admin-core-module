@@ -414,21 +414,33 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								</FormGroup>
 							</Column>
 							<Column size="6">
-								<FormGroup label={tText('Taal')}>
+								<FormGroup
+									label={tText(
+										'modules/content-page/components/content-edit-form/content-edit-form___taal'
+									)}
+								>
 									<Select
 										options={allLanguageOptions}
 										value={contentPageInfo.language}
 										onChange={(newLanguage) => {
 											changeContentPageProp('language', newLanguage);
 										}}
-										placeholder={tText('Selecteer de taal van de pagina')}
+										placeholder={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+										)}
 										required
-										aria-label={tText('Selecteer de taal van de pagina')}
+										aria-label={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+										)}
 									></Select>
 								</FormGroup>
 							</Column>
 							<Column size="6">
-								<FormGroup label={tText('Nederlandse hoofd pagina')}>
+								<FormGroup
+									label={tText(
+										'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
+									)}
+								>
 									<ContentPicker
 										value={getParentPagePickerItem()}
 										onChange={(newNlParentPage) => {
@@ -438,7 +450,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										allowedTypes={['NL_CONTENT_PAGE_PARENT_ID']}
 										hideTypeDropdown
 										hideTargetSwitch
-										placeholder={tText('Leeg indien dit de hoofd pagina is')}
+										placeholder={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
+										)}
 									></ContentPicker>
 								</FormGroup>
 							</Column>

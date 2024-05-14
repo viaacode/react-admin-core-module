@@ -138,7 +138,7 @@ export const GET_OVERVIEW_COLUMNS: (
 		},
 		{
 			id: 'translations',
-			label: i18n.tText('Vertalingen'),
+			label: i18n.tText('modules/content-page/const/content-page___vertalingen'),
 			sortable: false,
 			visibleByDefault: true,
 			filterType: 'CheckboxDropdownModal',

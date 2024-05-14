@@ -260,14 +260,18 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				? [
 						createDropdownMenuItem(
 							ContentPageAction.gotoEnglishPage,
-							tText('Ga naar engelse pagina'),
+							tText(
+								'modules/content-page/views/content-page-detail___ga-naar-engelse-pagina'
+							),
 							'eye'
 						),
 				  ]
 				: [
 						createDropdownMenuItem(
 							ContentPageAction.duplicateForEnglish,
-							tText('Dupliceer voor engelse pagina'),
+							tText(
+								'modules/content-page/views/content-page-detail___dupliceer-voor-engelse-pagina'
+							),
 							'copy'
 						),
 				  ]
