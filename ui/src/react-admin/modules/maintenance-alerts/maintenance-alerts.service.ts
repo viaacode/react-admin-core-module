@@ -19,7 +19,7 @@ export class MaintenanceAlertsService {
 
 	static async fetchMaintenanceAlerts(
 		searchTerm: string | undefined,
-		language: LanguageCode[] | undefined,
+		languages: LanguageCode[] | undefined,
 		orderProp: MaintenanceAlertsOverviewTableCol = 'fromDate',
 		orderDirection: Avo.Search.OrderDirection = 'asc',
 		page = 0,
@@ -35,7 +35,7 @@ export class MaintenanceAlertsService {
 						page,
 						size,
 						searchTerm,
-						language: language ? language.join(',') : undefined,
+						languages: languages ? languages.join(',') : undefined,
 					},
 				})
 			);

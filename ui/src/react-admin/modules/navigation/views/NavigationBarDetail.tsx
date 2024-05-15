@@ -51,7 +51,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
 		refetch: refetchNavigationItems,
-	} = useGetNavigationBarItems(navigationBarId, tableState.language?.[0], tableState.query);
+	} = useGetNavigationBarItems(navigationBarId, tableState.language, tableState.query);
 	const { data: allLanguages } = useGetAllLanguages();
 
 	const languageOptions = (allLanguages || []).map(

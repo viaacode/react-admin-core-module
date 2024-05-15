@@ -65,7 +65,7 @@ export class MaintenanceAlertsQueryDto {
 		type: String,
 		description: 'comma separated list of languages to filter the maintenance alerts by',
 	})
-	language?: string;
+	languages?: string;
 }
 
 export class CreateMaintenanceAlertDto {

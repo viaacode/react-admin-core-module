@@ -65,7 +65,7 @@ export class MaintenanceAlertsService {
 		inputQuery: MaintenanceAlertsQueryDto,
 		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { page, size, orderProp, orderDirection, language, searchTerm } = inputQuery;
+		const { page, size, orderProp, orderDirection, languages, searchTerm } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
 		const whereAndFilter = [];
@@ -79,8 +79,8 @@ export class MaintenanceAlertsService {
 				}
 			);
 		}
-		if (language) {
-			whereAndFilter.push({ language: { _in: language.split(',') as LanguageCode[] } });
+		if (languages?.length) {
+			whereAndFilter.push({ language: { _in: languages.split(',') as LanguageCode[] } });
 		}
 		if (searchTerm) {
 			whereAndFilter.push({
