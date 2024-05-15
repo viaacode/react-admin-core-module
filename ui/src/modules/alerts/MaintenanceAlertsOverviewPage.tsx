@@ -3,7 +3,7 @@ import { Button, Modal } from '@meemoo/react-components';
 import MaintenanceAlertsOverview from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview';
 import { tText } from '~shared/helpers/translation-functions';
 
-export const AlertsOverviewPage: FC = () => {
+export const MaintenanceAlertsOverviewPage: FC = () => {
 	const renderPopup = ({
 		title,
 		body,
