@@ -65,7 +65,7 @@ export class MaintenanceAlertsService {
 		inputQuery: MaintenanceAlertsQueryDto,
 		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { page, size, orderProp, orderDirection, language } = inputQuery;
+		const { page, size, orderProp, orderDirection, language, searchTerm } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
 		const whereAndFilter = [];
@@ -81,6 +81,14 @@ export class MaintenanceAlertsService {
 		}
 		if (language) {
 			whereAndFilter.push({ language: { _in: language.split(',') as LanguageCode[] } });
+		}
+		if (searchTerm) {
+			whereAndFilter.push({
+				_or: [
+					{ title: { _ilike: `%${searchTerm}%` } },
+					{ message: { _ilike: `%${searchTerm}%` } },
+				],
+			});
 		}
 		const where: FindMaintenanceAlertsQueryVariables['where'] = whereAndFilter.length
 			? {
