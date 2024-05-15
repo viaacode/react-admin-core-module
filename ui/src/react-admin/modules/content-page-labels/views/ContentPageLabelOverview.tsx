@@ -65,19 +65,20 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const [contentTypes] = useContentTypes() as [any[], boolean];
 	const { data: allLanguages } = useGetAllLanguages();
 
+	const generateWhereObject = (filters: Partial<ContentPageLabelTableState>) => {
+		const andFilters: any[] = [];
+		andFilters.push(
+			...getQueryFilter(filters.query, (queryWildcard: string) => [
+				{ label: { _ilike: queryWildcard } },
+			])
+		);
+		andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
+		andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
+		return { _and: andFilters };
+	};
+
 	const fetchContentPageLabels = useCallback(async () => {
 		setIsLoading(true);
-		const generateWhereObject = (filters: Partial<ContentPageLabelTableState>) => {
-			const andFilters: any[] = [];
-			andFilters.push(
-				...getQueryFilter(filters.query, (queryWildcard: string) => [
-					{ label: { _ilike: queryWildcard } },
-				])
-			);
-			andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
-			andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
-			return { _and: andFilters };
-		};
 
 		try {
 			const [contentPageLabelTemp, contentPageLabelCountTemp] =

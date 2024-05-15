@@ -5,4 +5,5 @@ export const ORDER_PROP_TO_DB_PROP: Partial<Record<keyof MaintenanceAlert, strin
 	type: 'type',
 	fromDate: 'from_date',
 	untilDate: 'until_date',
+	language: 'language',
 };

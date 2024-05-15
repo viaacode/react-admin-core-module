@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { SortDirection } from '../../shared/types';
+import { LanguageCode } from '../../translations';
 import { MaintenanceAlertOrderProp, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export class MaintenanceAlertsQueryDto {
@@ -47,6 +48,24 @@ export class MaintenanceAlertsQueryDto {
 		enum: [SortDirection.asc, SortDirection.desc],
 	})
 	orderDirection? = SortDirection.desc;
+
+	@IsString()
+	@Type(() => String)
+	@IsOptional()
+	@ApiPropertyOptional({
+		type: String,
+		description: 'Search term to search for in the maintenance alerts',
+	})
+	searchTerm?: string;
+
+	@IsString()
+	@Type(() => String)
+	@IsOptional()
+	@ApiPropertyOptional({
+		type: String,
+		description: 'comma separated list of languages to filter the maintenance alerts by',
+	})
+	language?: string;
 }
 
 export class CreateMaintenanceAlertDto {
@@ -105,6 +124,15 @@ export class CreateMaintenanceAlertDto {
 		example: '2022-02-27T16:36:06.045845',
 	})
 	untilDate: string;
+
+	@IsString()
+	@Type(() => String)
+	@ApiPropertyOptional({
+		type: String,
+		description: 'Language of the maintenance alert',
+		enum: LanguageCode,
+	})
+	language: LanguageCode;
 }
 
 export class UpdateMaintenanceAlertDto {
@@ -168,4 +196,13 @@ export class UpdateMaintenanceAlertDto {
 		example: '2022-02-27T16:36:06.045845',
 	})
 	untilDate?: string;
+
+	@IsString()
+	@Type(() => String)
+	@ApiPropertyOptional({
+		type: String,
+		description: 'Language of the maintenance alert',
+		enum: LanguageCode,
+	})
+	language: LanguageCode;
 }

@@ -29,6 +29,7 @@ import {
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { PaginationHelper } from '../../shared/helpers/pagination';
 import { SortDirection } from '../../shared/types';
+import { LanguageCode } from '../../translations';
 import {
 	CreateMaintenanceAlertDto,
 	MaintenanceAlertsQueryDto,
@@ -56,6 +57,7 @@ export class MaintenanceAlertsService {
 			fromDate: graphqlMaintenanceAlert.from_date,
 			untilDate: graphqlMaintenanceAlert.until_date,
 			userGroups: graphqlMaintenanceAlert.user_groups,
+			language: graphqlMaintenanceAlert.language,
 		};
 	}
 
@@ -63,19 +65,26 @@ export class MaintenanceAlertsService {
 		inputQuery: MaintenanceAlertsQueryDto,
 		onlyActive: boolean
 	): Promise<IPagination<MaintenanceAlert>> {
-		const { page, size, orderProp, orderDirection } = inputQuery;
+		const { page, size, orderProp, orderDirection, language } = inputQuery;
 		const { offset, limit } = PaginationHelper.convertPagination(page, size);
 
-		const where: FindMaintenanceAlertsQueryVariables['where'] = onlyActive
+		const whereAndFilter = [];
+		if (onlyActive) {
+			whereAndFilter.push(
+				{
+					from_date: { _lte: new Date().toISOString() },
+				},
+				{
+					until_date: { _gte: new Date().toISOString() },
+				}
+			);
+		}
+		if (language) {
+			whereAndFilter.push({ language: { _in: language.split(',') as LanguageCode[] } });
+		}
+		const where: FindMaintenanceAlertsQueryVariables['where'] = whereAndFilter.length
 			? {
-					_and: [
-						{
-							from_date: { _lte: new Date().toISOString() },
-						},
-						{
-							until_date: { _gte: new Date().toISOString() },
-						},
-					],
+					_and: whereAndFilter,
 				}
 			: {};
 
@@ -127,9 +136,10 @@ export class MaintenanceAlertsService {
 			user_groups: createMaintenanceAlertDto.userGroups,
 			from_date: createMaintenanceAlertDto.fromDate,
 			until_date: createMaintenanceAlertDto.untilDate,
+			language: createMaintenanceAlertDto.language,
 		};
 
-		const { insert_app_maintenance_alerts_one: createdMainteanceAlert } =
+		const { insert_app_maintenance_alerts_one: createdMaintenanceAlert } =
 			await this.dataService.execute<
 				InsertMaintenanceAlertMutation,
 				InsertMaintenanceAlertMutationVariables
@@ -137,16 +147,15 @@ export class MaintenanceAlertsService {
 				newMaintenanceAlert,
 			});
 
-		this.logger.debug(`Maintenance alert ${createdMainteanceAlert.id} created.`);
-
-		return this.adapt(createdMainteanceAlert);
+		return this.adapt(createdMaintenanceAlert);
 	}
 
 	public async updateMaintenanceAlert(
 		maintenanceAlertId: string,
 		updateMaintenanceAlertDto: UpdateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
-		const { title, message, type, userGroups, fromDate, untilDate } = updateMaintenanceAlertDto;
+		const { title, message, type, userGroups, fromDate, untilDate, language } =
+			updateMaintenanceAlertDto;
 
 		const updateMaintenanceAlert = {
 			title,
@@ -155,6 +164,7 @@ export class MaintenanceAlertsService {
 			user_groups: userGroups,
 			from_date: fromDate,
 			until_date: untilDate,
+			language: language,
 		};
 
 		const { update_app_maintenance_alerts: updatedMaintenanceAlert } =
@@ -184,8 +194,6 @@ export class MaintenanceAlertsService {
 		>(DeleteMaintenanceAlertDocument, {
 			maintenanceAlertId,
 		});
-
-		this.logger.debug(`Maintenance alert ${maintenanceAlertId} deleted`);
 
 		return response.delete_app_maintenance_alerts.affected_rows;
 	}

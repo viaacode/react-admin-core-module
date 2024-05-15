@@ -7,5 +7,6 @@ mutation insertMaintenanceAlert($newMaintenanceAlert: app_maintenance_alerts_ins
 		user_groups
 		from_date
 		until_date
+		language
 	}
 }
