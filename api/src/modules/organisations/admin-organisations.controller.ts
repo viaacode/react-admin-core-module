@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 
@@ -16,5 +16,11 @@ export class AdminOrganisationsController {
 	@RequireAnyPermissions(PermissionName.VIEW_USERS)
 	public async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {
 		return this.adminOrganisationsService.fetchOrganisationsWithUsers();
+	}
+
+	@Get('maintainer-grid')
+	public async fetchOrganisationsForMaintainerGrid(@Query('limit') limit: number): Promise<any> {
+		console.log('we here');
+		return this.adminOrganisationsService.fetchOrganisationsForMaintainerGrid(limit);
 	}
 }

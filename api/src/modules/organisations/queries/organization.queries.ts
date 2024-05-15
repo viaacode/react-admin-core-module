@@ -10,6 +10,7 @@ import {
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	GetOrganisationsDocument as GetOrganisationsDocumentHetArchief,
+	type GetOrganisationsForMaintainerGridQuery as GetOrganisationsForMaintainerGridQueryArchief,
 	type GetOrganisationsQuery as GetOrganisationsQueryHetArchief,
 	type GetOrganisationsQueryVariables as GetOrganisationsQueryVariablesHetArchief,
 	GetOrganisationsWithUsersDocument as GetOrganisationsWithUsersDocumentHetArchief,
@@ -31,6 +32,9 @@ export type OrganisationQueryTypes = {
 		| GetOrganisationsWithUsersQueryHetArchief;
 	GetOrganisationsWithUsersQueryAvo: GetOrganisationsWithUsersQueryAvo;
 	GetOrganisationsWithUsersQueryHetArchief: GetOrganisationsWithUsersQueryHetArchief;
+	GetOrganisationsForMaintainerGridQuery:
+		| GetOrganisationsForMaintainerGridQueryArchief
+		| undefined;
 };
 
 type OrganisationQueries = {

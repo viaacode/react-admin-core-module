@@ -12,7 +12,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   _text: any;
-  bpchar: any;
   date: any;
   daterange: any;
   json: any;
@@ -2980,39 +2979,6 @@ export enum App_Translations_Update_Column {
   ValueType = 'value_type'
 }
 
-/** Boolean expression to compare columns of type "bpchar". All fields are combined with logical 'AND'. */
-export type Bpchar_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['bpchar']>;
-  _gt?: InputMaybe<Scalars['bpchar']>;
-  _gte?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given case-insensitive pattern */
-  _ilike?: InputMaybe<Scalars['bpchar']>;
-  _in?: InputMaybe<Array<Scalars['bpchar']>>;
-  /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: InputMaybe<Scalars['bpchar']>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  /** does the column match the given pattern */
-  _like?: InputMaybe<Scalars['bpchar']>;
-  _lt?: InputMaybe<Scalars['bpchar']>;
-  _lte?: InputMaybe<Scalars['bpchar']>;
-  _neq?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: InputMaybe<Scalars['bpchar']>;
-  _nin?: InputMaybe<Array<Scalars['bpchar']>>;
-  /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given pattern */
-  _nlike?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: InputMaybe<Scalars['bpchar']>;
-  /** does the column match the given SQL regular expression */
-  _similar?: InputMaybe<Scalars['bpchar']>;
-};
-
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['date']>;
@@ -3037,321 +3003,6 @@ export type Daterange_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['daterange']>;
   _neq?: InputMaybe<Scalars['daterange']>;
   _nin?: InputMaybe<Array<Scalars['daterange']>>;
-};
-
-/** Mediahaven records and their metadata in json format */
-export type Graph_Mh_Records = {
-  __typename?: 'graph_mh_records';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  data: Scalars['jsonb'];
-  external_id?: Maybe<Scalars['bpchar']>;
-  fragment_id: Scalars['String'];
-  id: Scalars['Int'];
-  mh_last_modified_date?: Maybe<Scalars['timestamptz']>;
-  or_id: Scalars['String'];
-  original_filename?: Maybe<Scalars['bpchar']>;
-  pid?: Maybe<Scalars['bpchar']>;
-  type: Scalars['bpchar'];
-  type_viaa?: Maybe<Scalars['bpchar']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-
-/** Mediahaven records and their metadata in json format */
-export type Graph_Mh_RecordsDataArgs = {
-  path?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregated selection of "graph.mh_records" */
-export type Graph_Mh_Records_Aggregate = {
-  __typename?: 'graph_mh_records_aggregate';
-  aggregate?: Maybe<Graph_Mh_Records_Aggregate_Fields>;
-  nodes: Array<Graph_Mh_Records>;
-};
-
-/** aggregate fields of "graph.mh_records" */
-export type Graph_Mh_Records_Aggregate_Fields = {
-  __typename?: 'graph_mh_records_aggregate_fields';
-  avg?: Maybe<Graph_Mh_Records_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Graph_Mh_Records_Max_Fields>;
-  min?: Maybe<Graph_Mh_Records_Min_Fields>;
-  stddev?: Maybe<Graph_Mh_Records_Stddev_Fields>;
-  stddev_pop?: Maybe<Graph_Mh_Records_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Graph_Mh_Records_Stddev_Samp_Fields>;
-  sum?: Maybe<Graph_Mh_Records_Sum_Fields>;
-  var_pop?: Maybe<Graph_Mh_Records_Var_Pop_Fields>;
-  var_samp?: Maybe<Graph_Mh_Records_Var_Samp_Fields>;
-  variance?: Maybe<Graph_Mh_Records_Variance_Fields>;
-};
-
-
-/** aggregate fields of "graph.mh_records" */
-export type Graph_Mh_Records_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Graph_Mh_Records_Append_Input = {
-  data?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** aggregate avg on columns */
-export type Graph_Mh_Records_Avg_Fields = {
-  __typename?: 'graph_mh_records_avg_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "graph.mh_records". All fields are combined with a logical 'AND'. */
-export type Graph_Mh_Records_Bool_Exp = {
-  _and?: InputMaybe<Array<Graph_Mh_Records_Bool_Exp>>;
-  _not?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-  _or?: InputMaybe<Array<Graph_Mh_Records_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  data?: InputMaybe<Jsonb_Comparison_Exp>;
-  external_id?: InputMaybe<Bpchar_Comparison_Exp>;
-  fragment_id?: InputMaybe<String_Comparison_Exp>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  mh_last_modified_date?: InputMaybe<Timestamptz_Comparison_Exp>;
-  or_id?: InputMaybe<String_Comparison_Exp>;
-  original_filename?: InputMaybe<Bpchar_Comparison_Exp>;
-  pid?: InputMaybe<Bpchar_Comparison_Exp>;
-  type?: InputMaybe<Bpchar_Comparison_Exp>;
-  type_viaa?: InputMaybe<Bpchar_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "graph.mh_records" */
-export enum Graph_Mh_Records_Constraint {
-  /** unique or primary key constraint */
-  MhRecordsIdKey = 'mh_records_id_key',
-  /** unique or primary key constraint */
-  MhRecordsPkey = 'mh_records_pkey'
-}
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Graph_Mh_Records_Delete_At_Path_Input = {
-  data?: InputMaybe<Array<Scalars['String']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Graph_Mh_Records_Delete_Elem_Input = {
-  data?: InputMaybe<Scalars['Int']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Graph_Mh_Records_Delete_Key_Input = {
-  data?: InputMaybe<Scalars['String']>;
-};
-
-/** input type for incrementing numeric columns in table "graph.mh_records" */
-export type Graph_Mh_Records_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "graph.mh_records" */
-export type Graph_Mh_Records_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']>;
-  data?: InputMaybe<Scalars['jsonb']>;
-  external_id?: InputMaybe<Scalars['bpchar']>;
-  fragment_id?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
-  mh_last_modified_date?: InputMaybe<Scalars['timestamptz']>;
-  or_id?: InputMaybe<Scalars['String']>;
-  original_filename?: InputMaybe<Scalars['bpchar']>;
-  pid?: InputMaybe<Scalars['bpchar']>;
-  type?: InputMaybe<Scalars['bpchar']>;
-  type_viaa?: InputMaybe<Scalars['bpchar']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Graph_Mh_Records_Max_Fields = {
-  __typename?: 'graph_mh_records_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  external_id?: Maybe<Scalars['bpchar']>;
-  fragment_id?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  mh_last_modified_date?: Maybe<Scalars['timestamptz']>;
-  or_id?: Maybe<Scalars['String']>;
-  original_filename?: Maybe<Scalars['bpchar']>;
-  pid?: Maybe<Scalars['bpchar']>;
-  type?: Maybe<Scalars['bpchar']>;
-  type_viaa?: Maybe<Scalars['bpchar']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Graph_Mh_Records_Min_Fields = {
-  __typename?: 'graph_mh_records_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  external_id?: Maybe<Scalars['bpchar']>;
-  fragment_id?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  mh_last_modified_date?: Maybe<Scalars['timestamptz']>;
-  or_id?: Maybe<Scalars['String']>;
-  original_filename?: Maybe<Scalars['bpchar']>;
-  pid?: Maybe<Scalars['bpchar']>;
-  type?: Maybe<Scalars['bpchar']>;
-  type_viaa?: Maybe<Scalars['bpchar']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "graph.mh_records" */
-export type Graph_Mh_Records_Mutation_Response = {
-  __typename?: 'graph_mh_records_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Graph_Mh_Records>;
-};
-
-/** on_conflict condition type for table "graph.mh_records" */
-export type Graph_Mh_Records_On_Conflict = {
-  constraint: Graph_Mh_Records_Constraint;
-  update_columns?: Array<Graph_Mh_Records_Update_Column>;
-  where?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "graph.mh_records". */
-export type Graph_Mh_Records_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  data?: InputMaybe<Order_By>;
-  external_id?: InputMaybe<Order_By>;
-  fragment_id?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  mh_last_modified_date?: InputMaybe<Order_By>;
-  or_id?: InputMaybe<Order_By>;
-  original_filename?: InputMaybe<Order_By>;
-  pid?: InputMaybe<Order_By>;
-  type?: InputMaybe<Order_By>;
-  type_viaa?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: graph_mh_records */
-export type Graph_Mh_Records_Pk_Columns_Input = {
-  fragment_id: Scalars['String'];
-};
-
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Graph_Mh_Records_Prepend_Input = {
-  data?: InputMaybe<Scalars['jsonb']>;
-};
-
-/** select columns of table "graph.mh_records" */
-export enum Graph_Mh_Records_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Data = 'data',
-  /** column name */
-  ExternalId = 'external_id',
-  /** column name */
-  FragmentId = 'fragment_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  MhLastModifiedDate = 'mh_last_modified_date',
-  /** column name */
-  OrId = 'or_id',
-  /** column name */
-  OriginalFilename = 'original_filename',
-  /** column name */
-  Pid = 'pid',
-  /** column name */
-  Type = 'type',
-  /** column name */
-  TypeViaa = 'type_viaa',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** input type for updating data in table "graph.mh_records" */
-export type Graph_Mh_Records_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']>;
-  data?: InputMaybe<Scalars['jsonb']>;
-  external_id?: InputMaybe<Scalars['bpchar']>;
-  fragment_id?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['Int']>;
-  mh_last_modified_date?: InputMaybe<Scalars['timestamptz']>;
-  or_id?: InputMaybe<Scalars['String']>;
-  original_filename?: InputMaybe<Scalars['bpchar']>;
-  pid?: InputMaybe<Scalars['bpchar']>;
-  type?: InputMaybe<Scalars['bpchar']>;
-  type_viaa?: InputMaybe<Scalars['bpchar']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type Graph_Mh_Records_Stddev_Fields = {
-  __typename?: 'graph_mh_records_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Graph_Mh_Records_Stddev_Pop_Fields = {
-  __typename?: 'graph_mh_records_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Graph_Mh_Records_Stddev_Samp_Fields = {
-  __typename?: 'graph_mh_records_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Graph_Mh_Records_Sum_Fields = {
-  __typename?: 'graph_mh_records_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "graph.mh_records" */
-export enum Graph_Mh_Records_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Data = 'data',
-  /** column name */
-  ExternalId = 'external_id',
-  /** column name */
-  FragmentId = 'fragment_id',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  MhLastModifiedDate = 'mh_last_modified_date',
-  /** column name */
-  OrId = 'or_id',
-  /** column name */
-  OriginalFilename = 'original_filename',
-  /** column name */
-  Pid = 'pid',
-  /** column name */
-  Type = 'type',
-  /** column name */
-  TypeViaa = 'type_viaa',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** aggregate var_pop on columns */
-export type Graph_Mh_Records_Var_Pop_Fields = {
-  __typename?: 'graph_mh_records_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Graph_Mh_Records_Var_Samp_Fields = {
-  __typename?: 'graph_mh_records_var_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Graph_Mh_Records_Variance_Fields = {
-  __typename?: 'graph_mh_records_variance_fields';
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** Boolean expression to compare columns of type "json". All fields are combined with logical 'AND'. */
@@ -3878,16 +3529,12 @@ export enum Lookup_App_Material_Request_Type_Constraint {
 }
 
 export enum Lookup_App_Material_Request_Type_Enum {
-  Education = 'EDUCATION',
   /** Meer info van het materiaal */
   MoreInfo = 'MORE_INFO',
-  Other = 'OTHER',
-  PrivateResearch = 'PRIVATE_RESEARCH',
   /** Hergebruik van materiaal */
   Reuse = 'REUSE',
   /** Bekijken van het materiaal */
-  View = 'VIEW',
-  Work = 'WORK'
+  View = 'VIEW'
 }
 
 /** Boolean expression to compare columns of type "lookup_app_material_request_type_enum". All fields are combined with logical 'AND'. */
@@ -7111,10 +6758,6 @@ export type Mutation_Root = {
   delete_app_translations?: Maybe<App_Translations_Mutation_Response>;
   /** delete single row from the table: "app.translations" */
   delete_app_translations_by_pk?: Maybe<App_Translations>;
-  /** delete data from the table: "graph.mh_records" */
-  delete_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
-  /** delete single row from the table: "graph.mh_records" */
-  delete_graph_mh_records_by_pk?: Maybe<Graph_Mh_Records>;
   /** delete data from the table: "lookup.app_content_block_type" */
   delete_lookup_app_content_block_type?: Maybe<Lookup_App_Content_Block_Type_Mutation_Response>;
   /** delete single row from the table: "lookup.app_content_block_type" */
@@ -7295,10 +6938,6 @@ export type Mutation_Root = {
   insert_app_translations?: Maybe<App_Translations_Mutation_Response>;
   /** insert a single row into the table: "app.translations" */
   insert_app_translations_one?: Maybe<App_Translations>;
-  /** insert data into the table: "graph.mh_records" */
-  insert_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
-  /** insert a single row into the table: "graph.mh_records" */
-  insert_graph_mh_records_one?: Maybe<Graph_Mh_Records>;
   /** insert data into the table: "lookup.app_content_block_type" */
   insert_lookup_app_content_block_type?: Maybe<Lookup_App_Content_Block_Type_Mutation_Response>;
   /** insert a single row into the table: "lookup.app_content_block_type" */
@@ -7479,10 +7118,6 @@ export type Mutation_Root = {
   update_app_translations?: Maybe<App_Translations_Mutation_Response>;
   /** update single row of the table: "app.translations" */
   update_app_translations_by_pk?: Maybe<App_Translations>;
-  /** update data of the table: "graph.mh_records" */
-  update_graph_mh_records?: Maybe<Graph_Mh_Records_Mutation_Response>;
-  /** update single row of the table: "graph.mh_records" */
-  update_graph_mh_records_by_pk?: Maybe<Graph_Mh_Records>;
   /** update data of the table: "lookup.app_content_block_type" */
   update_lookup_app_content_block_type?: Maybe<Lookup_App_Content_Block_Type_Mutation_Response>;
   /** update single row of the table: "lookup.app_content_block_type" */
@@ -7754,18 +7389,6 @@ export type Mutation_RootDelete_App_Translations_By_PkArgs = {
   key: Scalars['String'];
   language: Lookup_Languages_Enum;
   location: Scalars['String'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Graph_Mh_RecordsArgs = {
-  where: Graph_Mh_Records_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Graph_Mh_Records_By_PkArgs = {
-  fragment_id: Scalars['String'];
 };
 
 
@@ -8329,20 +7952,6 @@ export type Mutation_RootInsert_App_TranslationsArgs = {
 export type Mutation_RootInsert_App_Translations_OneArgs = {
   object: App_Translations_Insert_Input;
   on_conflict?: InputMaybe<App_Translations_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Graph_Mh_RecordsArgs = {
-  objects: Array<Graph_Mh_Records_Insert_Input>;
-  on_conflict?: InputMaybe<Graph_Mh_Records_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Graph_Mh_Records_OneArgs = {
-  object: Graph_Mh_Records_Insert_Input;
-  on_conflict?: InputMaybe<Graph_Mh_Records_On_Conflict>;
 };
 
 
@@ -9037,32 +8646,6 @@ export type Mutation_RootUpdate_App_TranslationsArgs = {
 export type Mutation_RootUpdate_App_Translations_By_PkArgs = {
   _set?: InputMaybe<App_Translations_Set_Input>;
   pk_columns: App_Translations_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Graph_Mh_RecordsArgs = {
-  _append?: InputMaybe<Graph_Mh_Records_Append_Input>;
-  _delete_at_path?: InputMaybe<Graph_Mh_Records_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Graph_Mh_Records_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Graph_Mh_Records_Delete_Key_Input>;
-  _inc?: InputMaybe<Graph_Mh_Records_Inc_Input>;
-  _prepend?: InputMaybe<Graph_Mh_Records_Prepend_Input>;
-  _set?: InputMaybe<Graph_Mh_Records_Set_Input>;
-  where: Graph_Mh_Records_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Graph_Mh_Records_By_PkArgs = {
-  _append?: InputMaybe<Graph_Mh_Records_Append_Input>;
-  _delete_at_path?: InputMaybe<Graph_Mh_Records_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Graph_Mh_Records_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Graph_Mh_Records_Delete_Key_Input>;
-  _inc?: InputMaybe<Graph_Mh_Records_Inc_Input>;
-  _prepend?: InputMaybe<Graph_Mh_Records_Prepend_Input>;
-  _set?: InputMaybe<Graph_Mh_Records_Set_Input>;
-  pk_columns: Graph_Mh_Records_Pk_Columns_Input;
 };
 
 
@@ -11575,12 +11158,6 @@ export type Query_Root = {
   app_translations_aggregate: App_Translations_Aggregate;
   /** fetch data from the table: "app.translations" using primary key columns */
   app_translations_by_pk?: Maybe<App_Translations>;
-  /** fetch data from the table: "graph.mh_records" */
-  graph_mh_records: Array<Graph_Mh_Records>;
-  /** fetch aggregated fields from the table: "graph.mh_records" */
-  graph_mh_records_aggregate: Graph_Mh_Records_Aggregate;
-  /** fetch data from the table: "graph.mh_records" using primary key columns */
-  graph_mh_records_by_pk?: Maybe<Graph_Mh_Records>;
   /** fetch data from the table: "lookup.app_content_block_type" */
   lookup_app_content_block_type: Array<Lookup_App_Content_Block_Type>;
   /** fetch aggregated fields from the table: "lookup.app_content_block_type" */
@@ -12061,29 +11638,6 @@ export type Query_RootApp_Translations_By_PkArgs = {
   key: Scalars['String'];
   language: Lookup_Languages_Enum;
   location: Scalars['String'];
-};
-
-
-export type Query_RootGraph_Mh_RecordsArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Records_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-};
-
-
-export type Query_RootGraph_Mh_Records_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Records_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-};
-
-
-export type Query_RootGraph_Mh_Records_By_PkArgs = {
-  fragment_id: Scalars['String'];
 };
 
 
@@ -13027,12 +12581,6 @@ export type Subscription_Root = {
   app_translations_aggregate: App_Translations_Aggregate;
   /** fetch data from the table: "app.translations" using primary key columns */
   app_translations_by_pk?: Maybe<App_Translations>;
-  /** fetch data from the table: "graph.mh_records" */
-  graph_mh_records: Array<Graph_Mh_Records>;
-  /** fetch aggregated fields from the table: "graph.mh_records" */
-  graph_mh_records_aggregate: Graph_Mh_Records_Aggregate;
-  /** fetch data from the table: "graph.mh_records" using primary key columns */
-  graph_mh_records_by_pk?: Maybe<Graph_Mh_Records>;
   /** fetch data from the table: "lookup.app_content_block_type" */
   lookup_app_content_block_type: Array<Lookup_App_Content_Block_Type>;
   /** fetch aggregated fields from the table: "lookup.app_content_block_type" */
@@ -13513,29 +13061,6 @@ export type Subscription_RootApp_Translations_By_PkArgs = {
   key: Scalars['String'];
   language: Lookup_Languages_Enum;
   location: Scalars['String'];
-};
-
-
-export type Subscription_RootGraph_Mh_RecordsArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Records_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph_Mh_Records_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Records_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Records_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Records_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph_Mh_Records_By_PkArgs = {
-  fragment_id: Scalars['String'];
 };
 
 
@@ -17400,6 +16925,11 @@ export type GetOrganisationsQueryVariables = Exact<{
 
 export type GetOrganisationsQuery = { __typename?: 'query_root', maintainer_organisation: Array<{ __typename?: 'maintainer_organisation', logo: any, schema_name?: string | null, schema_identifier: string }> };
 
+export type GetOrganisationsForMaintainerGridQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOrganisationsForMaintainerGridQuery = { __typename?: 'query_root', maintainer_organisation: Array<{ __typename?: 'maintainer_organisation', homepage_url?: string | null, schema_name?: string | null, logo: any, schema_identifier: string, slug?: string | null }> };
+
 export type GetOrganisationsWithUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -17589,6 +17119,7 @@ export const GetNavigationItemsByPlacementDocument = {"kind":"Document","definit
 export const InsertNavigationItemDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertNavigationItem"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"navigationItem"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_navigation_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_app_navigation_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"navigationItem"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"icon_name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_target"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_path"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}}]}}]}}]} as unknown as DocumentNode<InsertNavigationItemMutation, InsertNavigationItemMutationVariables>;
 export const UpdateNavigationItemByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateNavigationItemById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"navigationItem"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_navigation_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_navigation_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"navigationItem"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"icon_name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_target"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_path"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}}]}}]}}]} as unknown as DocumentNode<UpdateNavigationItemByIdMutation, UpdateNavigationItemByIdMutationVariables>;
 export const GetOrganisationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOrganisations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"maintainer_organisation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"schema_identifier"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"schema_name"}},{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}}]}}]}}]} as unknown as DocumentNode<GetOrganisationsQuery, GetOrganisationsQueryVariables>;
+export const GetOrganisationsForMaintainerGridDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOrganisationsForMaintainerGrid"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"maintainer_organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"homepage_url"}},{"kind":"Field","name":{"kind":"Name","value":"schema_name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetOrganisationsForMaintainerGridQuery, GetOrganisationsForMaintainerGridQueryVariables>;
 export const GetOrganisationsWithUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOrganisationsWithUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"maintainer_organisation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"distinct_on"},"value":{"kind":"EnumValue","value":"schema_identifier"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"users"},"value":{"kind":"ObjectValue","fields":[]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"schema_name"}}]}}]}}]} as unknown as DocumentNode<GetOrganisationsWithUsersQuery, GetOrganisationsWithUsersQueryVariables>;
 export const GetPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_permission"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetPermissionsQuery, GetPermissionsQueryVariables>;
 export const GetFileByRepresentationSchemaIdentifierDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFileByRepresentationSchemaIdentifier"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"object_file"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"representation_schema_identifier"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"schema_identifier"}}]}}]}}]} as unknown as DocumentNode<GetFileByRepresentationSchemaIdentifierQuery, GetFileByRepresentationSchemaIdentifierQueryVariables>;

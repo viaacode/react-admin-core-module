@@ -6,6 +6,7 @@ import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { MaintainerGridOrganisation } from '~shared/types/organisation.types';
 
 export type BasicOrganisation = {
 	or_id: string;
@@ -41,6 +42,17 @@ export class OrganisationService {
 				query: {
 					contentItemType,
 					contentItemId,
+				},
+			})
+		);
+	}
+
+	static getMaintainerGrid(limit: number): Promise<MaintainerGridOrganisation[]> {
+		return fetchWithLogoutJson(
+			stringifyUrl({
+				url: `${this.getBaseUrl()}/maintainer-grid`,
+				query: {
+					limit,
 				},
 			})
 		);
