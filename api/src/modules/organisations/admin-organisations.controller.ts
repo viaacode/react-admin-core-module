@@ -20,7 +20,6 @@ export class AdminOrganisationsController {
 
 	@Get('maintainer-grid')
 	public async fetchOrganisationsForMaintainerGrid(@Query('limit') limit: number): Promise<any> {
-		console.log('we here');
 		return this.adminOrganisationsService.fetchOrganisationsForMaintainerGrid(limit);
 	}
 }
