@@ -101,7 +101,6 @@ export class AssetsService {
 					this.token = await this.gotInstance.post<AssetToken>('', {
 						resolveBodyOnly: true, // this is duplicate but fixes a typing error
 					});
-					console.info('asset service token response: ' + JSON.stringify(this.token));
 
 					this.s3 = new AWS.S3({
 						accessKeyId: this.token.token,

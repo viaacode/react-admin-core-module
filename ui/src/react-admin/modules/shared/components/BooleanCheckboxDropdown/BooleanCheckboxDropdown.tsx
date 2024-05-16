@@ -6,7 +6,7 @@ import {
 	CheckboxOption,
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export interface BooleanCheckboxDropdownProps {
 	label: string;
@@ -33,8 +33,6 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 	includeEmpty = false,
 	onChange,
 }) => {
-	const { tText } = useTranslation();
-
 	const getOptions = (): CheckboxOption[] => {
 		return [
 			{

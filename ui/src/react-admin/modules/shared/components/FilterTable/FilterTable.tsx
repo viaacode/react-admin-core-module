@@ -55,7 +55,7 @@ import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { PaginationBar } from '@meemoo/react-components';
 import { Icon } from '../Icon';
@@ -109,7 +109,8 @@ interface FilterTableProps {
 	rowKey?: string | ((row: any) => string);
 	variant?: 'bordered' | 'invisible' | 'styled';
 	isLoading?: boolean;
-	hidePagination?: boolean;
+	showPagination?: boolean;
+	showColumnsVisibility?: boolean;
 
 	// Used for automatic dropdown with bulk actions
 	bulkActions?: (SelectOption<string> & { confirm?: boolean; confirmButtonType?: ButtonType })[];
@@ -137,16 +138,15 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	rowKey = 'id',
 	variant = 'bordered',
 	isLoading = false,
-	hidePagination = false,
+	showPagination = true,
 	bulkActions,
 	onSelectBulkAction,
 	showCheckboxes,
+	showColumnsVisibility = true,
 	selectedItemIds,
 	onSelectionChanged,
 	onSelectAll,
 }) => {
-	const { tText } = useTranslation();
-
 	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
 	const [searchTerm, setSearchTerm] = useState<string>('');
@@ -426,7 +426,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								)}
 							</Flex>
 						</ToolbarLeft>
-						{isAvo() && (
+						{isAvo() && showColumnsVisibility && (
 							<ToolbarRight>
 								<CheckboxDropdownModal
 									label={tText(
@@ -476,7 +476,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								onSelectionChanged={onSelectionChanged}
 								onSelectAll={onSelectAll}
 							/>
-							{!hidePagination && (
+							{showPagination && (
 								<Spacer margin="top-large">
 									<PaginationBar
 										count={itemsPerPage}

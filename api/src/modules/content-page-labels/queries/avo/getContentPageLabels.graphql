@@ -8,6 +8,7 @@ query getContentPageLabels(
 		label
 		content_type
 		link_to
+		language
 		created_at
 		updated_at
 		id

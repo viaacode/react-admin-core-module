@@ -19,7 +19,7 @@ import { CustomError } from '../../helpers/custom-error';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;
@@ -40,8 +40,6 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 	onChange,
 	errors,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [labels, setLabels] = useState<ContentPageLabel[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -61,17 +59,17 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 					)
 				);
 				AdminConfigManager.getConfig().services.toastService.showToast({
-					title: AdminConfigManager.getConfig().services.i18n.tText(
+					title: tText(
 						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
 					),
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			})
 			.finally(() => setIsLoading(false));
-	}, [value.selectedContentType, setLabels, tHtml]);
+	}, [value.selectedContentType, setLabels]);
 
 	const handleContentTypeChanged = (selectedValue: string) => {
 		onChange({

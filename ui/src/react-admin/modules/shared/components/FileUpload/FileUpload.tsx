@@ -11,10 +11,10 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import Loader from '../Loader/Loader';
 
 import './FileUpload.scss';
-import Loader from '../Loader/Loader';
 
 export interface FileUploadProps {
 	icon?: IconName;
@@ -56,8 +56,6 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	onDeleteFile,
 	onButtonClicked,
 }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [urlToDelete, setUrlToDelete] = useState<string | null>(null);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [isProcessing, setIsProcessing] = useState<boolean>(false);

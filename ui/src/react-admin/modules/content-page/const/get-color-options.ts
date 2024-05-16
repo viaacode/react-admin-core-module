@@ -1,107 +1,73 @@
 import { SelectOption } from '@viaa/avo2-components';
-import { AdminConfigManager } from '~core/config';
+import { tText } from '~shared/helpers/translation-functions';
 import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
 
 const transparentOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___geen'
-	),
+	label: tText('admin/content-block/content-block___geen'),
 	value: Color.Transparent,
 });
 const whiteOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___wit'
-	),
+	label: tText('admin/content-block/content-block___wit'),
 	value: Color.White,
 });
 const gray50Option = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___grijs'
-	),
+	label: tText('admin/content-block/content-block___grijs'),
 	value: Color.Gray50,
 });
 const softBlueOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___zachtblauw'
-	),
+	label: tText('admin/content-block/content-block___zachtblauw'),
 	value: Color.SoftBlue,
 });
 const nightBlueOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___nachtblauw'
-	),
+	label: tText('admin/content-block/content-block___nachtblauw'),
 	value: Color.NightBlue,
 });
 const tealOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___appelblauwzeegroen'
-	),
+	label: tText('admin/content-block/content-block___appelblauwzeegroen'),
 	value: Color.Teal,
 });
 const tealBrightOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___appelblauwzeegroen-helder'
-	),
+	label: tText('admin/content-block/content-block___appelblauwzeegroen-helder'),
 	value: Color.TealBright,
 });
 const oceanGreenOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___oceaangroen'
-	),
+	label: tText('admin/content-block/content-block___oceaangroen'),
 	value: Color.OceanGreen,
 });
 const seaGreenOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___zeegroen'
-	),
+	label: tText('modules/content-page/const/content-block___zeegroen'),
 	value: Color.SeaGreen,
 });
 const yellowOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/content-block___leerlingen-geel'
-	),
+	label: tText('admin/content-block/content-block___leerlingen-geel'),
 	value: Color.Yellow,
 });
 const platinumOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___platinum'
-	),
+	label: tText('modules/content-page/const/content-block___platinum'),
 	value: Color.Platinum,
 });
 const blackOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___zwart'
-	),
+	label: tText('modules/content-page/const/content-block___zwart'),
 	value: Color.Black,
 });
 const neutralOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___neutraal'
-	),
+	label: tText('modules/content-page/const/content-block___neutraal'),
 	value: Color.Neutral,
 });
 const zincOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___zinc'
-	),
+	label: tText('modules/content-page/const/content-block___zinc'),
 	value: Color.Zinc,
 });
 const skyBlueOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___sky-blauw'
-	),
+	label: tText('modules/content-page/const/content-block___sky-blauw'),
 	value: Color.SkyBlue,
 });
 const meemooLogoOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'react-admin/modules/content-page/const/get-color-options___meemoo-logo'
-	),
+	label: tText('react-admin/modules/content-page/const/get-color-options___meemoo-logo'),
 	value: CustomBackground.MeemooLogo,
 });
 const blackWhiteGradientOption = () => ({
-	label: AdminConfigManager.getConfig().services.i18n.tText(
-		'modules/content-page/const/content-block___overgang-zwart-wit'
-	),
+	label: tText('modules/content-page/const/content-block___overgang-zwart-wit'),
 	value: GradientColor.BlackWhite,
 });
 
@@ -158,27 +124,19 @@ export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/content-block___zwart'
-		),
+		label: tText('admin/content-block/content-block___zwart'),
 		value: Color.Black,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/content-block___donker-grijs'
-		),
+		label: tText('admin/content-block/content-block___donker-grijs'),
 		value: Color.Gray700,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/content-block___grijs'
-		),
+		label: tText('admin/content-block/content-block___grijs'),
 		value: Color.Gray50,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/content-block___wit'
-		),
+		label: tText('admin/content-block/content-block___wit'),
 		value: Color.White,
 	},
 ];

@@ -1,3 +1,5 @@
+// noinspection ES6PreferShortImport
+
 /**
  This script runs over all the code and looks for either:
 tHtml('Aanvraagformulier')
@@ -181,7 +183,7 @@ async function extractTranslationsFromCodeFiles(
 							component,
 							location,
 							key,
-							language: LanguageCode.NL,
+							language: LanguageCode.Nl,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
@@ -196,9 +198,9 @@ async function extractTranslationsFromCodeFiles(
 					if (hasKeyAlready) {
 						return match;
 					} else {
-						return `${prefix}${tFunction}('${formattedKey}'${translationParams || ''}${
-							appsParam || ''
-						})`;
+						return `${prefix}${tFunction}('${formattedKey}'${
+							translationParams ? ', ' + translationParams : ''
+						}${appsParam ? ', ' + appsParam : ''})`;
 					}
 				}
 			);
@@ -214,64 +216,22 @@ async function extractTranslationsFromCodeFiles(
 }
 
 async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
-	// Old translations in app.config
-	const nameToComponent: Record<string, Component> = {
-		TRANSLATIONS_ADMIN_CORE: Component.ADMIN_CORE,
-		TRANSLATIONS_FRONTEND: Component.FRONTEND,
-		TRANSLATIONS_BACKEND: Component.BACKEND,
-		'translations-admin-core': Component.ADMIN_CORE,
-		'translations-frontend': Component.FRONTEND,
-		'translations-backend': Component.BACKEND,
-	};
 	const response = await executeDatabaseQuery(
 		app,
 		`
-query getAllOldTranslations {
-  ${
-		app === App.HET_ARCHIEF ? 'app_config' : 'app_site_variables'
-  }(where: {name: {_in: ["TRANSLATIONS_ADMIN_CORE", "TRANSLATIONS_FRONTEND", "TRANSLATIONS_BACKEND", "translations-admin-core", "translations-frontend", "translations-backend"]}}) {
-  	name
-    value
-  }
-}
-	`
-	);
-	if (response.errors) {
-		throw new Error(JSON.stringify(response.errors));
+	query getAllTranslations {
+	  app_translations {
+	    component
+	    key
+	    language
+	    location
+	    value
+	    value_type
+	  }
 	}
-	const componentTranslations: { name: string; value: Record<string, string> }[] =
-		response.data?.app_config || response.data?.app_site_variables;
-	return componentTranslations.flatMap((componentTranslation): TranslationEntry[] => {
-		return Object.entries(componentTranslation.value).map((keyValuePair): TranslationEntry => {
-			return {
-				app,
-				component: nameToComponent[componentTranslation.name],
-				location: keyValuePair[0].split(TRANSLATION_SEPARATOR)[0],
-				key: keyValuePair[0].split(TRANSLATION_SEPARATOR)[1],
-				language: LanguageCode.NL,
-				value: keyValuePair[1],
-				value_type: null,
-			};
-		});
-	});
-
-	// New translations in app.translations
-	// 	const response = await executeDatabaseQuery(
-	// 		app,
-	// 		`
-	// query getAllTranslations {
-	//   app_translations {
-	//     component
-	//     key
-	//     language
-	//     location
-	//     value
-	//     value_type
-	//   }
-	// }
-	// 	`
-	// 	);
-	// 	return response.data.app_translations.map((t: TranslationEntry) => ({ ...t, app }));
+		`
+	);
+	return response.data.app_translations.map((t: TranslationEntry) => ({ ...t, app }));
 }
 
 function checkTranslationsForKeysAsValue(translationJson: string) {
@@ -305,13 +265,13 @@ function sortObjectKeys(objToSort: Record<string, any>): Record<string, any> {
 
 async function combineTranslations(
 	nlJsonTranslations: TranslationEntry[],
-	sourceCodeTranslations: TranslationEntry[],
-	onlineTranslations: TranslationEntry[],
-	outputFile: string
+	nlSourceCodeTranslations: TranslationEntry[],
+	allOnlineTranslations: TranslationEntry[],
+	outputJsonFile: string
 ): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
 	const nlJsonTranslationKeys: string[] = nlJsonTranslations.map(getFullKey);
-	const sourceCodeTranslationKeys: string[] = sourceCodeTranslations.map(getFullKey);
+	const sourceCodeTranslationKeys: string[] = nlSourceCodeTranslations.map(getFullKey);
 	const addedTranslationKeys: string[] = without(
 		sourceCodeTranslationKeys,
 		...nlJsonTranslationKeys
@@ -334,66 +294,74 @@ async function combineTranslations(
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslationEntries: TranslationEntry[] = [];
 	[...existingTranslationKeys, ...addedTranslationKeys].forEach((translationKey: string) => {
-		const onlineTranslation = onlineTranslations.find((t) => getFullKey(t) === translationKey);
+		const onlineTranslations = allOnlineTranslations.filter(
+			(t) => getFullKey(t) === translationKey
+		);
+		const nlOnlineTranslation = onlineTranslations.find((t) => t.language === LanguageCode.Nl);
 		const nlJsonTranslation = nlJsonTranslations.find(
 			(t) => getFullKey(t) === translationKey
 		) as TranslationEntry;
-		const sourceCodeTranslation = sourceCodeTranslations.find(
+		const sourceCodeTranslation = nlSourceCodeTranslations.find(
 			(t) => getFullKey(t) === translationKey
 		) as TranslationEntry;
 
-		if (!onlineTranslation && !nlJsonTranslation && !sourceCodeTranslation) {
+		if (!nlOnlineTranslation && !nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
 				'Failed to find translation in online, nl.json and in code: ' + translationKey
 			);
 		}
 
-		if (!onlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
+		if (!nlOnlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
 				'Only found translation in nl.json, not in online translations not in code: ' +
 					translationKey
 			);
 		}
 
-		const entry: TranslationEntry = {
-			app: sourceCodeTranslation?.app || onlineTranslation?.app || nlJsonTranslation?.app,
-			component:
-				sourceCodeTranslation?.component ||
-				onlineTranslation?.component ||
-				nlJsonTranslation?.component,
-			location:
-				sourceCodeTranslation?.location ||
-				onlineTranslation?.location ||
-				nlJsonTranslation?.location,
-			key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-			language: LanguageCode.NL, // All source code translations are dutch
-			value:
-				onlineTranslation?.value ||
-				nlJsonTranslation?.value ||
-				sourceCodeTranslation?.value, // Online translations always have priority. Code translations are lowest prio
-			value_type:
-				sourceCodeTranslation?.value_type ||
-				onlineTranslation?.value_type ||
-				ValueType.TEXT, // translations in json file do not store the value type
-		};
+		// Output translations for both NL and EN
+		onlineTranslations.forEach((onlineTranslation) => {
+			const entry: TranslationEntry = {
+				app:
+					sourceCodeTranslation?.app ||
+					nlOnlineTranslation?.app ||
+					nlJsonTranslation?.app,
+				component:
+					sourceCodeTranslation?.component ||
+					onlineTranslation?.component ||
+					nlJsonTranslation?.component,
+				location:
+					sourceCodeTranslation?.location ||
+					onlineTranslation?.location ||
+					nlJsonTranslation?.location,
+				key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
+				language: onlineTranslation.language || LanguageCode.Nl, // All source code translations are dutch, online translation can exist in EN and NL
+				value:
+					onlineTranslation?.value ||
+					nlJsonTranslation?.value ||
+					sourceCodeTranslation?.value, // Online translations always have priority. Code translations are lowest priority
+				value_type:
+					sourceCodeTranslation?.value_type ||
+					onlineTranslation?.value_type ||
+					ValueType.TEXT, // translations in json file do not store the value type
+			};
 
-		combinedTranslationEntries.push(entry);
+			combinedTranslationEntries.push(entry);
+		});
 	});
 
 	const combinedTranslations = Object.fromEntries(
-		combinedTranslationEntries.map((entry) => [
-			entry.location + TRANSLATION_SEPARATOR + entry.key,
-			entry.value,
-		])
+		combinedTranslationEntries
+			.filter((entry) => entry.language === LanguageCode.Nl)
+			.map((entry) => [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value])
 	);
 	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
-	await fs.writeFile(outputFile, nlJsonContent + '\n');
+	await fs.writeFile(outputJsonFile, nlJsonContent + '\n');
 
 	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
 
-	console.info(`Wrote ${totalTranslations} to ${outputFile}`);
+	console.info(`Wrote ${totalTranslations} to ${outputJsonFile}`);
 	console.info(`\t${addedTranslationKeys.length} translations added`);
 	console.info(`\t${removedTranslationKeys.length} translations deleted`);
 
@@ -421,7 +389,7 @@ async function updateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
-					language: LanguageCode.NL,
+					language: LanguageCode.Nl,
 					value: entry[1],
 					value_type: null,
 				};
@@ -559,8 +527,8 @@ async function extractTranslations() {
 			const key = `'${translationEntry.key}'`;
 			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
-			const language = "'NL'";
-			return `INSERT INTO app.translations (component, location, key, value, value_type, language) VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
+			const language = `'${translationEntry.language}'`;
+			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language") VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
 		.join('\n');

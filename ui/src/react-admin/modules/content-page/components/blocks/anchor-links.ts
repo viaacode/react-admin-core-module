@@ -1,3 +1,4 @@
+import { tText } from '~shared/helpers/translation-functions';
 import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underline-link-button-type-options';
 import {
 	AnchorLinksBlockComponentState,
@@ -8,8 +9,6 @@ import {
 } from '../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_ANCHOR_LINKS_COMPONENTS_STATE = (): AnchorLinksBlockComponentState[] => [
 	{
@@ -31,40 +30,28 @@ export const INITIAL_ANCHOR_LINKS_BLOCK_STATE = (): AnchorLinksBlockState => ({
 
 export const ANCHOR_LINKS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/anchor-links___links'
-	),
+	name: tText('admin/content-block/helpers/generators/anchor-links___links'),
 	type: ContentBlockType.AnchorLinks,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/anchor-links___link'
-		),
+		name: tText('admin/content-block/helpers/generators/anchor-links___link'),
 		state: INITIAL_ANCHOR_LINKS_COMPONENTS_STATE(),
 		fields: {
 			label: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/buttons___tekst'
-					),
+					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			type: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/anchor-links___kleur'
-				),
+				label: tText('admin/content-block/helpers/generators/anchor-links___kleur'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/anchor-links___link'
-				),
+				label: tText('admin/content-block/helpers/generators/anchor-links___link'),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: ['ANCHOR_LINK'],
@@ -78,9 +65,7 @@ export const ANCHOR_LINKS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 		state: INITIAL_ANCHOR_LINKS_BLOCK_STATE(),
 		fields: {
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___uitlijning'
-				)
+				tText('admin/content-block/helpers/generators/defaults___uitlijning')
 			),
 			...BLOCK_FIELD_DEFAULTS(),
 		},

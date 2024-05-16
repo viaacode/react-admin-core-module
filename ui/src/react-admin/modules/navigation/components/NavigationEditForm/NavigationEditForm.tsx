@@ -2,16 +2,19 @@ import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-componen
 import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import type { Avo } from '@viaa/avo2-types';
 
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
+import { ReactSelect, Select, SelectOption } from '@meemoo/react-components';
 
 import './NavigationEditForm.scss';
 
@@ -37,7 +40,13 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	permissionWarning,
 	enableIcons,
 }) => {
-	const { tText } = useTranslation();
+	const { data: allLanguages } = useGetAllLanguages();
+	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
+		return {
+			label: languageInfo.languageLabel,
+			value: languageInfo.languageCode,
+		};
+	});
 
 	const handleMenuCreate = (label: string) => {
 		return {
@@ -137,6 +146,22 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					onChange={(item: any) => {
 						onChange('content', item);
 					}}
+				/>
+			</FormGroup>
+			<FormGroup
+				label={tText(
+					'modules/navigation/components/navigation-edit-form/navigation-edit-form___taal'
+				)}
+				error={formErrors.language}
+			>
+				<ReactSelect
+					options={languageOptions}
+					value={
+						languageOptions.find(
+							(option) => option.value === (formState.language || LanguageCode.Nl)
+						) || languageOptions[0]
+					}
+					onChange={(evt) => onChange('language', (evt as SelectOption).value)}
 				/>
 			</FormGroup>
 			<UserGroupSelect

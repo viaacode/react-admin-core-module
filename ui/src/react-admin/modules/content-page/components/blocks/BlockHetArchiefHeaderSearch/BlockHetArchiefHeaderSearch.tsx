@@ -6,7 +6,7 @@ import { AdminConfigManager } from '~core/config';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components';
 import { KeyCode } from '~shared/consts/keycode';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '../BlockHeading';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
@@ -21,7 +21,6 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	subtitles,
 	textBelowSearch,
 }): ReactElement => {
-	const { tText } = useTranslation();
 	const [activeIndex, setActiveIndex] = useState<number>(subtitles.length - 1);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const history = AdminConfigManager.getConfig().services.router.useHistory();

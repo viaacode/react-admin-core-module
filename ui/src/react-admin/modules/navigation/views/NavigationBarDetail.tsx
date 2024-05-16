@@ -1,18 +1,20 @@
-import { cloneDeep, isNil, startCase } from 'lodash-es';
-import React, { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import './NavigationBarOverview.scss';
 
+import { cloneDeep, isNil, startCase } from 'lodash-es';
+import React, { FC, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+
+import { Button, ButtonGroup, ButtonToolbar, Flex, IconName, Spacer } from '@viaa/avo2-components';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageInfo } from '~modules/translations/translations.types';
 import {
-	Button,
-	ButtonGroup,
-	ButtonToolbar,
-	Flex,
-	IconName,
-	Spacer,
-	Table,
-} from '@viaa/avo2-components';
+	CheckboxDropdownModalProps,
+	CheckboxOption,
+} from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import FilterTable from '~shared/components/FilterTable/FilterTable';
+import { TableColumnDataType } from '~shared/types/table-column-data-type';
 
 import { NavigationService } from '../navigation.service';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -20,20 +22,22 @@ import { navigate } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
 import { AdminLayout } from '~shared/layouts';
 import { Icon, Loader } from '~shared/components';
-import { NavigationItem } from '../navigation.types';
+import {
+	NavigationItem,
+	NavigationItemOverviewTableCols,
+	NavigationItemsTableState,
+} from '../navigation.types';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 
-import './NavigationDetail.scss';
 import { Link } from '~modules/shared/components/Link';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
 }
 
-const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
-	const { tHtml, tText } = useTranslation();
+const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
@@ -41,14 +45,28 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const [idToDelete, setIdToDelete] = useState<string | null>(null);
 	const [navigationItems, setNavigationItems] = useState<NavigationItem[] | null>(null);
 	const [isSaving, setIsSaving] = useState<boolean>(false);
+	const [tableState, setTableState] = useState<Partial<NavigationItemsTableState>>({});
 	const {
 		data: initialNavigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
 		refetch: refetchNavigationItems,
-	} = useGetNavigationBarItems(navigationBarId);
+	} = useGetNavigationBarItems(navigationBarId, tableState.language?.[0], tableState.query);
+	const { data: allLanguages } = useGetAllLanguages();
+
+	const languageOptions = (allLanguages || []).map(
+		(languageInfo: LanguageInfo): CheckboxOption => ({
+			id: languageInfo.languageCode,
+			label: languageInfo.languageLabel,
+			checked: (tableState?.language || []).includes(languageInfo.languageCode),
+		})
+	);
 
 	const timeout = useRef<NodeJS.Timeout | null>(null);
+
+	useEffect(() => {
+		refetchNavigationItems();
+	}, [tableState, refetchNavigationItems]);
 
 	useEffect(() => {
 		if (!isLoadingNavigationItems && !isErrorNavigationItems && initialNavigationItems) {
@@ -70,6 +88,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	}, [activeItemId]);
 
 	// Methods
+
 	const handleDelete = async (): Promise<void> => {
 		try {
 			if (isNil(idToDelete)) {
@@ -182,21 +201,28 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 		);
 	};
 
-	const renderTableCell = (rowData: any, columnId: string, rowIndex: number): ReactNode => {
+	const renderTableCell = (
+		navigationItem: NavigationItem,
+		columnId: NavigationItemOverviewTableCols,
+		rowIndex: number
+	): ReactNode => {
 		switch (columnId) {
 			case 'sort': {
 				const isFirst = (i: number) => i === 0;
 				const isLast = (i: number) => i === (navigationItems || []).length - 1;
 				return (
 					<ButtonGroup>
-						{renderReorderButton('up', rowIndex, rowData.id, isFirst(rowIndex))}
-						{renderReorderButton('down', rowIndex, rowData.id, isLast(rowIndex))}
+						{renderReorderButton('up', rowIndex, navigationItem.id, isFirst(rowIndex))}
+						{renderReorderButton('down', rowIndex, navigationItem.id, isLast(rowIndex))}
 					</ButtonGroup>
 				);
 			}
 
 			case 'label':
-				return rowData.label || rowData.tooltip || rowData.content_path;
+				return navigationItem.label || navigationItem.tooltip || navigationItem.contentPath;
+
+			case 'language':
+				return navigationItem.language;
 
 			case 'actions':
 				return (
@@ -208,7 +234,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_ITEM_EDIT'),
 									{
 										navigationBarId,
-										navigationItemId: String(rowData.id),
+										navigationItemId: String(navigationItem.id),
 									}
 								)
 							}
@@ -228,7 +254,7 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 							ariaLabel={tText(
 								'admin/menu/views/menu-detail___verwijder-dit-navigatie-item'
 							)}
-							onClick={() => openConfirmModal(rowData.id)}
+							onClick={() => openConfirmModal(navigationItem.id)}
 							type="danger-hover"
 						/>
 					</ButtonToolbar>
@@ -239,27 +265,57 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const renderNavigationDetail = () => {
 		return (
 			<>
-				<Table
-					align
+				<FilterTable
+					dataCount={100}
+					itemsPerPage={100}
+					onTableStateChanged={setTableState}
+					isLoading={isLoadingNavigationItems}
+					showCheckboxes={false}
+					showPagination={false}
+					showColumnsVisibility={false}
 					className="c-navigation-detail__table"
 					variant="styled"
-					emptyStateMessage={tText(
-						'modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items'
-					)}
 					data={navigationItems || []}
+					searchTextPlaceholder={tText(
+						'modules/navigation/views/navigation-bar-detail___zoek-op-navigatie-item-label'
+					)}
+					noContentMatchingFiltersMessage={tText(
+						'modules/navigation/views/navigation-bar-detail___er-zijn-geen-navigatie-items-in-de-huidige-navigatie-balk-die-voldoen-aan-je-filters'
+					)}
+					renderNoResults={() =>
+						tHtml(
+							'modules/navigation/views/navigation-detail___deze-navigatie-balk-heeft-nog-geen-items'
+						) as ReactElement
+					}
 					columns={[
 						{
 							id: 'sort',
+							visibleByDefault: true,
 						},
 						{
 							id: 'label',
 							label: tText('modules/navigation/views/navigation-detail___label'),
+							sortable: true,
+							dataType: 'string',
+							visibleByDefault: true,
+						},
+						{
+							id: 'language',
+							label: tText('modules/navigation/views/navigation-bar-detail___taal'),
+							sortable: true,
+							visibleByDefault: true,
+							filterType: 'CheckboxDropdownModal',
+							filterProps: {
+								options: languageOptions,
+							} as CheckboxDropdownModalProps,
+							dataType: TableColumnDataType.string,
 						},
 						{
 							id: 'actions',
+							visibleByDefault: true,
 						},
 					]}
-					renderCell={renderTableCell}
+					renderCell={renderTableCell as any}
 					rowKey="id"
 				/>
 				<Spacer margin="top">
@@ -344,4 +400,4 @@ const NavigationDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	return renderPageContent();
 };
 
-export default NavigationDetail;
+export default NavigationBarDetail;

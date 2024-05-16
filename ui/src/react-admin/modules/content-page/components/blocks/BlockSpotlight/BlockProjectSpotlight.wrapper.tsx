@@ -1,17 +1,18 @@
 import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
+import { type Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
-
-import { ContentPageService } from '../../../services/content-page.service';
+import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
-import { useTranslation } from '~shared/hooks/useTranslation';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+
+import { ContentPageService } from '../../../services/content-page.service';
 
 interface ProjectSpotlightProps {
 	project: ButtonAction;
@@ -22,14 +23,14 @@ interface ProjectSpotlightProps {
 interface ProjectSpotlightWrapperProps {
 	elements: ProjectSpotlightProps[];
 	renderLink: RenderLinkFunction;
+	commonUser?: Avo.User.CommonUser;
 }
 
 export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
 	elements,
 	renderLink,
+	commonUser,
 }) => {
-	const { tHtml } = useTranslation();
-
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<
 		(ContentPageInfo | null)[] | null
@@ -40,10 +41,11 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 			const promises = elements.map(
 				async (projectInfo: ProjectSpotlightProps): Promise<ContentPageInfo | null> => {
 					const projectPath = projectInfo?.project?.value;
-					if (projectPath && projectPath.toString && projectPath.toString()) {
+					if (projectPath?.toString()) {
 						try {
-							return await ContentPageService.getContentPageByPath(
-								projectInfo.project.value.toString(),
+							return await ContentPageService.getContentPageByLanguageAndPath(
+								(commonUser?.language || LanguageCode.Nl) as LanguageCode,
+								projectPath.toString(),
 								true
 							);
 						} catch (err) {
@@ -66,7 +68,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 				actionButtons: [],
 			});
 		}
-	}, [elements, setProjectContentPages, setLoadingInfo, tHtml]);
+	}, [elements, setProjectContentPages, setLoadingInfo]);
 
 	useEffect(() => {
 		fetchContentPages();
@@ -97,7 +99,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 						} else {
 							return {
 								title:
-									AdminConfigManager.getConfig().services.i18n.tText(
+									tText(
 										'react-admin/modules/content-page/components/blocks/block-spotlight/block-project-spotlight___pagina-niet-gevonden'
 									) +
 									': ' +

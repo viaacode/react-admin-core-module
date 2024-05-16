@@ -5,7 +5,7 @@ import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 
 import { AdminConfigManager, ToastType } from '~core/config';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
 
@@ -24,8 +24,6 @@ export interface EducationalOrganisationsSelectProps {
 export const EducationalOrganisationsSelect: FunctionComponent<
 	EducationalOrganisationsSelectProps
 > = ({ organisations, onChange, disabled = false }) => {
-	const { tHtml, tText } = useTranslation();
-
 	const [cities, setCities] = useState<string[]>([]);
 	const [organisationsInCity, setOrganisationsInCity] = useState<
 		Avo.EducationOrganization.Organization[]
@@ -110,7 +108,6 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		setOrganisationsInCity,
 		setOrganizationsLoadingState,
 		onChange,
-		tText,
 	]);
 
 	const onSelectedCityChanged = async (cityAndZipCode: string) => {

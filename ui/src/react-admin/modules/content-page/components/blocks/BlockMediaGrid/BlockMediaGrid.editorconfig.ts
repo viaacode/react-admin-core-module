@@ -10,6 +10,7 @@ import { isAvo } from '~shared/helpers/is-avo';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
 import {
 	ContentBlockConfig,
@@ -49,18 +50,14 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 
 export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/media-grid___media-tegels'
-	),
+	name: tText('admin/content-block/helpers/generators/media-grid___media-tegels'),
 	type: ContentBlockType.MediaGrid,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/media-grid___media-item'
-		),
+		name: tText('admin/content-block/helpers/generators/media-grid___media-item'),
 		state: INITIAL_MEDIA_GRID_COMPONENTS_STATE(),
 		fields: {
 			mediaItem: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___selecteer-uit-items-en-collecties'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -74,20 +71,20 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			copyrightImage: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___afbeelding'
 				),
 				editorType: ContentBlockEditor.UploadOrSelectVideoStill,
 			},
 			copyrightOwnerOrId: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___auteursrecht'
 				),
 				editorType: ContentBlockEditor.MaintainerSelect,
 				editorProps: {
 					extraSelectOptions: [
 						{
-							label: AdminConfigManager.getConfig().services.i18n.tText(
+							label: tText(
 								'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___geen-auteursrecht-vermelding'
 							),
 							value: 'NO_COPYRIGHT_NOTICE',
@@ -99,7 +96,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (!value) {
 						errorArray.push(
-							AdminConfigManager.getConfig().services.i18n.tText(
+							tText(
 								'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___je-moet-een-keuze-maken-over-auteursrecht-van-de-video-still',
 								{},
 								[AVO]
@@ -111,41 +108,31 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			buttonLabel: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___alt-title-text'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___knop-icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___knop-type'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___knop-type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___knop-actie'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___knop-actie'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},
@@ -154,34 +141,30 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_MEDIA_GRID_BLOCK_STATE(),
 		fields: {
 			title: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___algemene-titel'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___algemene-titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___algemene-knop-tekst'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___alt-title-text'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___algemene-knop-actie'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			searchQuery: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___voeg-een-zoek-filter-toe'
 				),
 				editorType: ContentBlockEditor.ContentPicker,
@@ -189,7 +172,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					allowedTypes: ['SEARCH_QUERY'] as Avo.Core.ContentPickerType[],
 					hideTypeDropdown: true,
 				},
-				note: AdminConfigManager.getConfig().services.i18n.tHtml(
+				note: tHtml(
 					'modules/content-page/components/blocks/block-media-grid/block-media-grid___opgelet-mediategels-met-een-zoekfilter-mogen-niet-op-een-publieke-pagina-worden-gebruikt-wegens-geen-bronvermeldingen'
 				),
 				validator: (input: { value: string }) => {
@@ -202,7 +185,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (parseSearchQuery(value) === null) {
 						errors.push(
-							AdminConfigManager.getConfig().services.i18n.tText(
+							tText(
 								'admin/shared/helpers/content-picker/parse-picker___gelieve-een-correcte-zoekfilter-link-in-te-vullen'
 							)
 						);
@@ -212,7 +195,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			searchQueryLimit: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___zoekresultaten-limiet'
 				),
 				editorType: ContentBlockEditor.MultiRange,
@@ -226,25 +209,21 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			openMediaInModal: {
 				editorType: ContentBlockEditor.Checkbox,
 				editorProps: {
-					label: AdminConfigManager.getConfig().services.i18n.tText(
+					label: tText(
 						'admin/content-block/helpers/generators/media-grid___media-items-openen-in-een-popup'
 					),
 				} as CheckboxProps,
 			},
 			ctaTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-titel'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			ctaTitleColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-titel-kleur'
-				)
+				tText('admin/content-block/helpers/generators/media-grid___cta-titel-kleur')
 			),
 			ctaTitleSize: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___cta-titel-grootte'
 				),
 				editorType: ContentBlockEditor.Select,
@@ -253,65 +232,53 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			ctaContent: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___cta-omschrijving'
 				),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			ctaContentColor: FOREGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-omschrijving-kleur'
-				)
+				tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving-kleur')
 			),
 			ctaButtonLabel: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			ctaButtonAltTitle: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___alt-button-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			ctaButtonIcon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-knop-icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			ctaButtonType: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-knop-type'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			ctaButtonAction: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-knop-actie'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-actie'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			ctaBackgroundColor: BACKGROUND_COLOR_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'
-				),
+				tText('admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'),
 				isAvo()
 					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
 					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			ctaBackgroundImage: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/media-grid___cta-achtergrond-afbeelding'
 				),
 				editorType: ContentBlockEditor.FileUpload,

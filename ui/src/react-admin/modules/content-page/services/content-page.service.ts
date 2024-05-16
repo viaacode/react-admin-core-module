@@ -12,6 +12,7 @@ import {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -28,12 +29,12 @@ export class ContentPageService {
 		return `${getAdminCoreApiUrl()}${CONTENT_PAGE_SERVICE_BASE_URL}`;
 	}
 
-	public static async getContentPages(
+	public static async getContentPagesForPageOverviewBlock(
 		options: ContentPageOverviewParams
 	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
 		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
 			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
-		>(this.getBaseUrl(), {
+		>(this.getBaseUrl() + '/page-overview-block', {
 			method: 'POST',
 			body: JSON.stringify(options),
 			throwOnNullResponse: true,
@@ -44,25 +45,16 @@ export class ContentPageService {
 		};
 	}
 
-	public static async getPublicContentItems(limit: number): Promise<ContentPageInfo[] | null> {
-		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson<DbContentPage[]>(
-			stringifyUrl({
-				url: `${this.getBaseUrl()}/public`,
-				query: {
-					limit,
-				},
-			}),
-			{ throwOnNullResponse: true }
-		);
-		return convertDbContentPagesToContentPageInfos(dbContentPages);
-	}
-
-	public static async getPublicProjectContentItems(limit: number): Promise<ContentPageInfo[]> {
+	public static async getNlParentContentPagesByTitle(
+		title: string | undefined,
+		limit?: number
+	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/projects/public`,
+				url: `${this.getBaseUrl()}/nl-parent-pages`,
 				query: {
-					limit,
+					limit: limit ?? 20,
+					title,
 				},
 			}),
 			{ throwOnNullResponse: true }
@@ -71,7 +63,7 @@ export class ContentPageService {
 	}
 
 	public static async getPublicContentItemsByTitle(
-		title: string,
+		title: string | undefined,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
@@ -88,7 +80,7 @@ export class ContentPageService {
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
-		title: string,
+		title: string | undefined,
 		limit: number
 	): Promise<Partial<ContentPageInfo>[]> {
 		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
@@ -164,6 +156,14 @@ export class ContentPageService {
 		});
 	}
 
+	/**
+	 * Get content pages for the admin dashboard content page overview
+	 * @param page
+	 * @param sortColumn
+	 * @param sortOrder
+	 * @param tableColumnDataType
+	 * @param where
+	 */
 	public static async fetchContentPages(
 		page: number,
 		sortColumn: ContentOverviewTableCols,
@@ -173,7 +173,7 @@ export class ContentPageService {
 	): Promise<[ContentPageInfo[], number]> {
 		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
 			stringifyUrl({
-				url: this.getBaseUrl() + '/overview',
+				url: this.getBaseUrl(),
 				query: {
 					offset: page * PAGES_PER_PAGE,
 					limit: PAGES_PER_PAGE,
@@ -292,6 +292,7 @@ export class ContentPageService {
 	 * Add duplicate of content page
 	 *
 	 * @param contentPageInfo
+	 * @param overrideValues
 	 * @param copyPrefix
 	 * @param copyRegex
 	 * @param profileId user who will be the owner of the copy
@@ -300,12 +301,16 @@ export class ContentPageService {
 	 */
 	public static async duplicateContentPage(
 		contentPageInfo: ContentPageInfo,
+		overrideValues: Partial<ContentPageInfo>,
 		copyPrefix: string,
 		copyRegex: RegExp,
 		profileId: string
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const contentToInsert = await this.duplicateContentPageImages(contentPageInfo.id);
+			const contentToInsert = {
+				...(await this.duplicateContentPageImages(contentPageInfo.id)),
+				...overrideValues,
+			};
 
 			// update attributes specific to duplicate
 			contentToInsert.isPublic = false;
@@ -359,24 +364,30 @@ export class ContentPageService {
 
 	/**
 	 * Get a content page with all of its content without the user having to be logged in
+	 * @param language The language the user is currently using the site in. eg: NL or EN
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 * @param onlyInfo only include info about the content page, do not resolve media info inside the content page blocks
 	 */
-	public static async getContentPageByPath(
+	public static async getContentPageByLanguageAndPath(
+		language: LanguageCode,
 		path: string,
 		onlyInfo = false
 	): Promise<ContentPageInfo | null> {
 		try {
 			let url = this.getBaseUrl();
-			if (AdminConfigManager.getConfig().services.getContentPageByPathEndpoint && !onlyInfo) {
+			if (
+				AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint &&
+				!onlyInfo
+			) {
 				url =
-					AdminConfigManager.getConfig().services.getContentPageByPathEndpoint ||
-					this.getBaseUrl();
+					AdminConfigManager.getConfig().services
+						.getContentPageByLanguageAndPathEndpoint || this.getBaseUrl();
 			}
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
 					url,
 					query: {
+						language,
 						path,
 						onlyInfo: onlyInfo ? 'true' : 'false',
 					},
@@ -387,17 +398,19 @@ export class ContentPageService {
 			}
 			return convertDbContentPageToContentPageInfo(dbContentPage);
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError('Failed to get content page by language and path', err);
 		}
 	}
 
 	/**
 	 * Check if content page with path already exists
+	 * @param language The language the user is currently using the site in. eg: NL or EN
 	 * @param path The path to identify the content page including the leading slash. eg: /over
 	 * @param id pass the id of the page you're trying to update, when creating a page, omi this param
 	 * @return returns the title of the page if it exists, otherwise returns null
 	 */
-	public static async doesContentPagePathExist(
+	public static async doesContentPageLanguageAndPathExist(
+		language: LanguageCode,
 		path: string,
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
@@ -410,6 +423,7 @@ export class ContentPageService {
 				stringifyUrl({
 					url: this.getBaseUrl() + '/path-exists',
 					query: {
+						language,
 						path,
 					},
 				}),
@@ -420,7 +434,10 @@ export class ContentPageService {
 			}
 			return responseContent.title;
 		} catch (err) {
-			throw new CustomError('Failed to get content page by path', err);
+			throw new CustomError(
+				'Failed to check if content page exists by language and path',
+				err
+			);
 		}
 	}
 

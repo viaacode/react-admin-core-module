@@ -6,6 +6,7 @@ import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options';
 import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -46,31 +47,25 @@ export const INITIAL_LOGO_GRID_BLOCK_STATE = (): BlockLogoGridWrapperProps &
 
 export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/logo-grid___logos-sign-off'
-	),
+	name: tText('admin/content-block/helpers/generators/logo-grid___logos-sign-off'),
 	type: ContentBlockType.LogoGrid,
 	components: {
-		name: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content-block/helpers/generators/image-grid___item'
-		),
+		name: tText('admin/content-block/helpers/generators/image-grid___item'),
 		state: INITIAL_LOGO_GRID_COMPONENTS_STATE(),
 		fields: {
 			textAbove: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			source: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
+				tText(
 					'admin/content-block/helpers/generators/image-grid___een-afbeelding-is-verplicht'
 				),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/image-grid___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/image-grid___afbeelding'),
 					editorProps: {
 						assetType: 'CONTENT_BLOCK_IMAGE',
 						allowMulti: false,
@@ -79,9 +74,7 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				}
 			),
 			action: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___link'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___link'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 		},
@@ -92,18 +85,14 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			format: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___formaat'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___formaat'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_IMAGE_GRID_FORMAT_OPTIONS(),
 				},
 			},
 			itemWidth: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/logo-grid___kolom-breedte'
-				),
+				label: tText('admin/content-block/helpers/generators/logo-grid___kolom-breedte'),
 				editorType: ContentBlockEditor.MultiRange,
 				editorProps: {
 					min: 0,
@@ -113,27 +102,21 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as MultiRangeProps,
 			},
 			fill: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___zoom'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___zoom'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_FILL_OPTIONS(),
 				},
 			},
 			align: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___alignatie'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___alignatie'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
 			textAlign: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image-grid___text-alignatie'
-				),
+				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),

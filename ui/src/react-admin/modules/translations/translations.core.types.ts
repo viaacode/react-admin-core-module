@@ -16,8 +16,8 @@ export enum ValueType {
 }
 
 export enum LanguageCode {
-	NL = 'NL',
-	EN = 'EN',
+	Nl = 'NL',
+	En = 'EN',
 }
 
 export interface TranslationEntry {

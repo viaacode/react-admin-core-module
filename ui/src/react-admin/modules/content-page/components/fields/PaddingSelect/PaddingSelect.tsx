@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 
 import { PaddingFieldState } from '../../../types/content-block.types';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './PaddingSelect.scss';
 
@@ -15,8 +15,6 @@ export interface PaddingSelectProps {
 type PaddingDirection = 'top' | 'bottom';
 
 export const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value }) => {
-	const { tHtml } = useTranslation();
-
 	const generateOptions = (direction: PaddingDirection) =>
 		[
 			{

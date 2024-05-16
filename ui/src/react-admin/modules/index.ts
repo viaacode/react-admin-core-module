@@ -54,9 +54,9 @@ export { default as ContentPageLabelEdit } from './content-page-labels/views/Con
 export { default as ContentPageLabelDetail } from './content-page-labels/views/ContentPageLabelDetail';
 
 // Navigation
-export { default as NavigationOverview } from './navigation/views/NavigationOverview';
-export { default as NavigationEdit } from './navigation/views/NavigationEdit';
-export { default as NavigationDetail } from './navigation/views/NavigationDetail';
+export { default as NavigationOverview } from './navigation/views/NavigationBarOverview';
+export { default as NavigationEdit } from './navigation/views/NavigationItemEdit';
+export { default as NavigationDetail } from './navigation/views/NavigationBarDetail';
 
 // Alerts
 export { default as AlertsOverview } from './alerts/views/AlertsOverview';
@@ -72,6 +72,7 @@ export { default as UserGroupOverview } from './user-group/views/UserGroupOvervi
 
 // Translations
 export { default as TranslationsOverview } from './translations/views/TranslationsOverview';
+export { LanguageCode } from '~modules/translations/translations.core.types';
 
 // Helpers
 export { sanitizeHtml } from './shared/helpers/sanitize/index';

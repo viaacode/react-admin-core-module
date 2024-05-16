@@ -1,11 +1,24 @@
+import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
-
-import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
+import { Link } from '~modules/shared/components/Link';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroup } from '~modules/user-group/types/user-group.types';
 import { Icon } from '~shared/components';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { UserGroup } from '~modules/user-group/types/user-group.types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts';
+import { ValueOf } from '~shared/types';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { PickerItem } from '~shared/types/content-picker';
 
 import { NavigationEditForm } from '../components';
 import { GET_PAGE_TYPES_LANG } from '../navigation.consts';
@@ -15,27 +28,13 @@ import {
 	NavigationEditPageType,
 	NavigationItem,
 } from '../navigation.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { navigate } from '~shared/helpers/link';
-import { PickerItem } from '~shared/types/content-picker';
-import { ValueOf } from '~shared/types';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { AdminLayout } from '~shared/layouts';
-import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-import { Link } from '~modules/shared/components/Link';
-import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 interface NavigationEditProps {
 	navigationBarId: string;
 	navigationItemId: string | undefined;
 }
 
-const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
-	const { tHtml, tText } = useTranslation();
+const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);
@@ -55,7 +54,10 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetNavigationBarItems(navigationBarId, { keepPreviousData: false, cacheTime: 0 });
+	} = useGetNavigationBarItems(navigationBarId, undefined, undefined, {
+		keepPreviousData: false,
+		cacheTime: 0,
+	});
 	const originalNavigationItem =
 		navigationItems?.find((navItem) => String(navItem.id) === navigationItemId) || null;
 
@@ -97,6 +99,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				contentPath: null,
 				linkTarget: null,
 				position: 0,
+				language: LanguageCode.Nl,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
 			};
@@ -139,7 +142,6 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 		navigationBarName,
 		pageType,
 		history,
-		tText,
 	]);
 
 	const checkMenuItemContentPagePermissionsMismatch = useCallback(
@@ -195,7 +197,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				setPermissionWarning(null);
 			}
 		},
-		[setPermissionWarning, currentNavigationItem, allUserGroups, tHtml]
+		[setPermissionWarning, currentNavigationItem, allUserGroups]
 	);
 
 	// Check if the navigation item is visible for users that do not have access to the selected content page
@@ -234,7 +236,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 					);
 				});
 		}
-	}, [currentNavigationItem, checkMenuItemContentPagePermissionsMismatch, tText]);
+	}, [currentNavigationItem, checkMenuItemContentPagePermissionsMismatch]);
 
 	// Methods
 	const showToast = (type: ToastType, title: string, description: string): void => {
@@ -302,6 +304,7 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 				userGroupIds: currentNavigationItem?.userGroupIds,
 				placement: currentNavigationItem?.placement,
 				tooltip: currentNavigationItem?.tooltip,
+				language: currentNavigationItem?.language,
 			};
 
 			// Create new navigation item
@@ -453,4 +456,4 @@ const NavigationEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationIt
 	return renderPageContent();
 };
 
-export default NavigationEdit;
+export default NavigationItemEdit;

@@ -1,6 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
+import { App } from '~modules/translations/translations.core.types';
 
 import { UserBulkAction } from '~modules/user/user.types';
 
@@ -30,13 +31,9 @@ export interface I18n {
 	tHtml: (
 		translationKey: string,
 		variables?: Record<string, string>,
-		apps?: DatabaseType[]
+		apps?: App[]
 	) => ReactNode | string;
-	tText: (
-		translationKey: string,
-		variables?: Record<string, string>,
-		apps?: DatabaseType[]
-	) => string;
+	tText: (translationKey: string, variables?: Record<string, string>, apps?: App[]) => string;
 }
 
 export interface LinkInfo {
@@ -67,7 +64,7 @@ export interface AdminConfig {
 	};
 	// Secondary services and config
 	services: {
-		getContentPageByPathEndpoint: string | null;
+		getContentPageByLanguageAndPathEndpoint: string | null;
 		toastService: ToastService;
 		i18n: I18n;
 		educationOrganisationService: EducationOrganisationService;
@@ -175,6 +172,7 @@ export interface IconConfig {
 		calendar: IconComponentProps;
 		export: IconComponentProps;
 		info: IconComponentProps;
+		warning: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];

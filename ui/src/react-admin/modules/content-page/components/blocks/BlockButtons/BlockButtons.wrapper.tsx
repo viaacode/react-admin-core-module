@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { BlockButtons, BlockButtonsProps } from '~content-blocks/BlockButtons/BlockButtons';
 
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const BlockButtonsWrapper: FunctionComponent<BlockButtonsProps> = (props) => {
-	const { tText } = useTranslation();
-
 	// Add tooltips for download buttons
 	const elements = props.elements;
 	elements.forEach((element) => {

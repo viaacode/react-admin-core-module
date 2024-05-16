@@ -28,14 +28,13 @@ import Html from '~modules/shared/components/Html/Html';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { sortingIcons } from '~modules/shared/components/Table/Table.const';
 import { CustomError } from '~modules/shared/helpers/custom-error';
-import { useTranslation } from '~modules/shared/hooks/useTranslation';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { DateInput } from '~shared/components/DateInput/DateInput';
-import timepicker from '~shared/components/Timepicker/Timepicker';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
 import {
 	ALERTS_FORM_SCHEMA,
@@ -58,7 +57,6 @@ import { AdminConfigManager, ToastType } from '~core/config';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 
 const AlertsOverview: FunctionComponent<AlertsOverviewProps> = ({ className, renderPopup }) => {
-	const { tText, tHtml } = useTranslation();
 	const [alerts, setAlerts] = useState<IPagination<Alert[]>>();
 	const [filters, setFilters] = useQueryParams(ALERTS_QUERY_PARAM_CONFIG);
 	const [activeAlert, setActiveAlert] = useState<Alert | null>(null);

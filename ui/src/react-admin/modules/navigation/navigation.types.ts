@@ -1,4 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 
@@ -16,6 +18,7 @@ export interface NavigationEditFormErrorState {
 	contentType?: string;
 	linkTarget?: string;
 	userGroupIds?: string;
+	language?: string;
 	tooltip?: string;
 }
 
@@ -36,8 +39,16 @@ export interface NavigationItem extends NavigationBar {
 	contentPath: string | null;
 	linkTarget: '_blank' | '_self' | null;
 	position: number;
+	language: LanguageCode;
 	createdAt: string;
 	updatedAt: string;
 }
 
 export type NavigationItemUpdate = Omit<NavigationItem, 'id' | 'createdAt' | 'updatedAt'>;
+
+export interface NavigationItemsTableState extends FilterableTableState {
+	label: string;
+	language: LanguageCode[];
+}
+
+export type NavigationItemOverviewTableCols = 'sort' | 'label' | 'language' | 'actions';

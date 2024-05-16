@@ -1,5 +1,8 @@
-query getNavigationItemsByPlacement($placement: String!) {
-	app_navigation(order_by: { position: asc }, where: { placement: { _eq: $placement } }) {
+query getNavigationItemsByPlacement($placement: String!, $searchTerm: String!) {
+	app_navigation(
+		order_by: { position: asc }
+		where: { placement: { _eq: $placement }, label: { _ilike: $searchTerm } }
+	) {
 		id
 		created_at
 		description
@@ -12,6 +15,7 @@ query getNavigationItemsByPlacement($placement: String!) {
 		updated_at
 		content_type
 		content_path
+		language
 		tooltip
 	}
 }

@@ -12,9 +12,7 @@ interface ContentPageOverviewParams {
 	where: any;
 }
 
-export const useGetContentPagesOverview = (
-	contentPageOverviewParams?: ContentPageOverviewParams
-) => {
+export const useGetContentPages = (contentPageOverviewParams?: ContentPageOverviewParams) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, contentPageOverviewParams],
 		(props) => {

@@ -1,3 +1,4 @@
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	Color,
 	ContentBlockConfig,
@@ -6,8 +7,6 @@ import {
 } from '../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from './defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_SEARCH_COMPONENTS_STATE = () => ({});
 
@@ -23,9 +22,7 @@ export const INITIAL_SEARCH_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const SEARCH_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/search___search'
-	),
+	name: tText('admin/content-block/helpers/generators/search___search'),
 	type: ContentBlockType.Search,
 	components: {
 		state: INITIAL_SEARCH_COMPONENTS_STATE(),

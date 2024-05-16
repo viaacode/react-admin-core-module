@@ -8,6 +8,8 @@ import { ContentPageLabelService } from '~modules/content-page-labels/content-pa
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error';
 import { Link } from '~modules/shared/components/Link';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageInfo } from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
 import {
 	CheckboxDropdownModalProps,
@@ -28,6 +30,7 @@ import {
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
 import { buildLink, navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { AdminLayout } from '~shared/layouts';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
@@ -49,7 +52,7 @@ import './ContentPageLabelOverview.scss';
 const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
-	const [contentPageLabel, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
+	const [contentPageLabels, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
 	const [contentPageLabelCount, setContentPageLabelCount] = useState<number>(0);
 	const [contentPageLabelIdToDelete, setContentPageLabelIdToDelete] = useState<number | null>(
 		null
@@ -60,6 +63,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const [contentTypes] = useContentTypes() as [any[], boolean];
+	const { data: allLanguages } = useGetAllLanguages();
 
 	const fetchContentPageLabels = useCallback(async () => {
 		setIsLoading(true);
@@ -71,7 +75,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				])
 			);
 			andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
-			andFilters.push(...getMultiOptionFilters(filters, ['content_type']));
+			andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
 			return { _and: andFilters };
 		};
 
@@ -89,7 +93,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		} catch (err) {
 			setLoadingInfo({
 				state: 'error',
-				message: AdminConfigManager.getConfig().services.i18n.tText(
+				message: tText(
 					'admin/content-page-labels/views/content-page-label-overview___het-ophalen-van-de-content-pagina-labels-is-mislukt'
 				),
 			});
@@ -102,10 +106,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	}, [fetchContentPageLabels]);
 
 	useEffect(() => {
-		if (contentPageLabel && !isNil(contentPageLabelCount)) {
+		if (contentPageLabels && !isNil(contentPageLabelCount)) {
 			setLoadingInfo({ state: 'loaded' });
 		}
-	}, [contentPageLabel, contentPageLabelCount]);
+	}, [contentPageLabels, contentPageLabelCount]);
 
 	const contentTypeOptions = contentTypes.map(
 		(option): CheckboxOption => ({
@@ -116,23 +120,26 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			),
 		})
 	);
+	const languageOptions = (allLanguages || []).map(
+		(languageInfo: LanguageInfo): CheckboxOption => ({
+			id: languageInfo.languageCode,
+			label: languageInfo.languageLabel,
+			checked: (tableState?.language || []).includes(languageInfo.languageCode),
+		})
+	);
 
 	const getContentPageLabelOverviewTableCols: () => FilterableColumn<ContentPageLabelOverviewTableCols>[] =
 		() => [
 			{
 				id: 'label',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___label'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___label'),
 				sortable: true,
 				visibleByDefault: true,
 				dataType: TableColumnDataType.string,
 			},
 			{
 				id: 'content_type',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___type'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___type'),
 				sortable: true,
 				visibleByDefault: true,
 				filterType: 'CheckboxDropdownModal',
@@ -143,15 +150,26 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'link_to',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-page-labels/views/content-page-label-overview___link'
-				),
+				label: tText('admin/content-page-labels/views/content-page-label-overview___link'),
 				sortable: false,
 				visibleByDefault: true,
 			},
 			{
+				id: 'language',
+				label: tText(
+					'modules/content-page-labels/views/content-page-label-overview___taal'
+				),
+				sortable: true,
+				visibleByDefault: true,
+				filterType: 'CheckboxDropdownModal',
+				filterProps: {
+					options: languageOptions,
+				} as CheckboxDropdownModalProps,
+				dataType: TableColumnDataType.string,
+			},
+			{
 				id: 'created_at',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-page-labels/views/content-page-label-overview___gemaakt-op'
 				),
 				sortable: true,
@@ -161,7 +179,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'updated_at',
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-page-labels/views/content-page-label-overview___aangepast-op'
 				),
 				sortable: true,
@@ -171,7 +189,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			},
 			{
 				id: 'actions',
-				tooltip: AdminConfigManager.getConfig().services.i18n.tText(
+				tooltip: tText(
 					'admin/content-page-labels/views/content-page-label-overview___acties'
 				),
 				visibleByDefault: true,
@@ -182,10 +200,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const handleDelete = async () => {
 		if (isNil(contentPageLabelIdToDelete)) {
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText(
 					'react-admin/modules/content-page-labels/views/content-page-label-overview___error'
 				),
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				description: tText(
 					'admin/content-page-labels/views/content-page-label-overview___het-verwijderen-van-het-label-is-mislukt-omdat-geen-label-geselecteerd-is'
 				),
 				type: ToastType.ERROR,
@@ -196,10 +214,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		await ContentPageLabelService.deleteContentPageLabel(contentPageLabelIdToDelete);
 		await fetchContentPageLabels();
 		AdminConfigManager.getConfig().services.toastService.showToast({
-			title: AdminConfigManager.getConfig().services.i18n.tText(
+			title: tText(
 				'react-admin/modules/content-page-labels/views/content-page-label-overview___succes'
 			),
-			description: AdminConfigManager.getConfig().services.i18n.tText(
+			description: tText(
 				'admin/content-page-labels/views/content-page-label-overview___de-content-pagina-label-is-verwijdert'
 			),
 			type: ToastType.SUCCESS,
@@ -213,7 +231,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 
 	// Render
 	const renderTableCell = (
-		rowData: ContentPageLabel,
+		contentPageLabel: ContentPageLabel,
 		columnId: ContentPageLabelOverviewTableCols
 	) => {
 		switch (columnId) {
@@ -222,19 +240,21 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					<Link
 						to={buildLink(
 							AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_DETAIL'),
-							{ id: rowData.id }
+							{ id: contentPageLabel.id }
 						)}
 					>
-						{truncateTableValue(rowData[columnId])}
+						{truncateTableValue(contentPageLabel[columnId])}
 					</Link>
 				);
 
 			case 'created_at':
 			case 'updated_at':
-				return rowData[columnId] ? formatDate(rowData[columnId] as string) : '-';
+				return contentPageLabel[columnId]
+					? formatDate(contentPageLabel[columnId] as string)
+					: '-';
 
 			case 'link_to': {
-				const linkTo = rowData.link_to;
+				const linkTo = contentPageLabel.link_to;
 				if (!linkTo) {
 					return '-';
 				}
@@ -246,6 +266,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 						String(linkTo.value)?.split('hetarchief.be')?.pop() || ''
 					)}`}</SmartLink>
 				);
+			}
+
+			case 'language': {
+				return contentPageLabel.language;
 			}
 
 			case 'actions':
@@ -260,14 +284,14 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 										'ADMIN_CONTENT_PAGE_LABEL_DETAIL'
 									),
 									{
-										id: rowData.id,
+										id: contentPageLabel.id,
 									}
 								)
 							}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bekijk-de-details-van-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
@@ -281,25 +305,25 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 										'ADMIN_CONTENT_PAGE_LABEL_EDIT'
 									),
 									{
-										id: rowData.id,
+										id: contentPageLabel.id,
 									}
 								)
 							}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___bewerk-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
 						/>
 						<Button
 							icon={<Icon name="delete" />}
-							onClick={() => openModal(rowData)}
-							aria-label={AdminConfigManager.getConfig().services.i18n.tText(
+							onClick={() => openModal(contentPageLabel)}
+							aria-label={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-overview___verwijder-deze-content-pagina-label'
 							)}
 							variants={['block', 'text', 'secondary']}
@@ -308,19 +332,19 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				);
 
 			default:
-				return truncateTableValue(rowData[columnId]);
+				return truncateTableValue(contentPageLabel[columnId]);
 		}
 	};
 
 	const renderNoResults = () => {
 		return (
 			<ErrorView
-				message={AdminConfigManager.getConfig().services.i18n.tHtml(
+				message={tHtml(
 					'admin/content-page-labels/views/content-page-label-overview___er-zijn-nog-geen-content-pagina-labels-aangemaakt'
 				)}
 			>
 				<p>
-					{AdminConfigManager.getConfig().services.i18n.tHtml(
+					{tHtml(
 						'admin/content-page-labels/views/content-page-label-overview___er-zijn-nog-geen-content-pagina-labels-aangemaakt'
 					)}
 				</p>
@@ -333,16 +357,16 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			<>
 				<FilterTable
 					columns={getContentPageLabelOverviewTableCols()}
-					data={contentPageLabel || []}
+					data={contentPageLabels || []}
 					dataCount={contentPageLabelCount}
 					renderCell={(rowData: ContentPageLabel, columnId: string) =>
 						renderTableCell(rowData, columnId as ContentPageLabelOverviewTableCols)
 					}
-					searchTextPlaceholder={AdminConfigManager.getConfig().services.i18n.tText(
+					searchTextPlaceholder={tText(
 						'admin/content-page-labels/views/content-page-label-overview___zoek-op-label'
 					)}
 					renderNoResults={renderNoResults}
-					noContentMatchingFiltersMessage={AdminConfigManager.getConfig().services.i18n.tText(
+					noContentMatchingFiltersMessage={tText(
 						'admin/content-page-labels/views/content-page-label-overview___er-zijn-geen-content-pagina-labels-gevonden-die-voldoen-aan-je-zoekterm'
 					)}
 					itemsPerPage={ITEMS_PER_PAGE}
@@ -353,10 +377,10 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					deleteObjectCallback={handleDelete}
 					isOpen={isConfirmModalOpen}
 					onClose={() => setIsConfirmModalOpen(false)}
-					title={AdminConfigManager.getConfig().services.i18n.tText(
+					title={tText(
 						'admin/content-page-labels/views/content-page-label-overview___ben-je-zeker-dat-je-dit-label-wil-verwijderen'
 					)}
-					body={AdminConfigManager.getConfig().services.i18n.tText(
+					body={tText(
 						'admin/content-page-labels/views/content-page-label-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 					)}
 				/>
@@ -366,14 +390,14 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 
 	return (
 		<AdminLayout
-			pageTitle={AdminConfigManager.getConfig().services.i18n.tText(
+			pageTitle={tText(
 				'admin/content-page-labels/views/content-page-label-overview___content-pagina-labels-overzicht'
 			)}
 			className={className}
 		>
 			<AdminLayout.Actions>
 				<Button
-					label={AdminConfigManager.getConfig().services.i18n.tText(
+					label={tText(
 						'admin/content-page-labels/views/content-page-label-overview___content-pagina-label-toevoegen'
 					)}
 					onClick={() =>
@@ -387,7 +411,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 			<AdminLayout.Content>
 				<LoadingErrorLoadedComponent
 					loadingInfo={loadingInfo}
-					dataObject={contentPageLabel}
+					dataObject={contentPageLabels}
 					render={renderContentPageLabelTable}
 				/>
 			</AdminLayout.Content>

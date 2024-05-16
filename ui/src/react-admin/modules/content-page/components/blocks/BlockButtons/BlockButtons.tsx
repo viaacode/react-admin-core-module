@@ -64,7 +64,7 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 								{...button}
 								renderIcon={
 									button.icon
-										? () => <Icon name={button.icon as string} />
+										? () => <Icon name={button.icon as IconName} />
 										: undefined
 								}
 							/>,

@@ -15,6 +15,7 @@ import {
 	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
+import { type LanguageCode } from '../translations';
 
 import { type DbContentBlock } from './content-block.types';
 import { type ContentPageQueryTypes } from './queries/content-pages.queries';
@@ -53,6 +54,7 @@ export interface ContentPageLabel {
 	id: number | string;
 	label: string;
 	content_type: ContentPageType;
+	language: LanguageCode;
 	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;
@@ -62,6 +64,8 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
+	language: LanguageCode;
+	nlParentPageId: number | string;
 	description: string | null;
 	seoDescription: string | null;
 	metaDescription: string | null;
@@ -79,6 +83,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language' | 'isPublic'>[]; // Other pages that are translated versions of this page
 }
 
 /**

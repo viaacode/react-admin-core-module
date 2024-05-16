@@ -2,6 +2,7 @@ import { type Avo, type PermissionName } from '@viaa/avo2-types';
 
 import { isAvo } from '../../shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '../../shared/types/types';
+import { type LanguageCode } from '../../translations';
 import { convertUserInfoToCommonUser } from '../users.converters';
 import { UserInfoType } from '../users.types';
 
@@ -27,6 +28,10 @@ export class SessionUserEntity {
 
 	public getProfileId(): string {
 		return this.user.profileId;
+	}
+
+	public getLanguage(): LanguageCode | undefined {
+		return this.user?.language as LanguageCode | undefined;
 	}
 
 	public getFirstName(): string {

@@ -1,12 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PermissionName } from '@viaa/avo2-types';
 import { groupBy, intersection } from 'lodash';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
+import { LanguageCode } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
 import { NavigationItem } from '../navigations.types';
@@ -36,7 +38,9 @@ export class AdminNavigationsController {
 	public async getAllNavigationElements(
 		@SessionUser() user: SessionUserEntity
 	): Promise<Record<string, NavigationItem[]>> {
-		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems();
+		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
+			user?.getLanguage() || Lookup_Languages_Enum.Nl
+		);
 
 		// filter based on logged in / logged out
 		const allowedUserGroups = user.getGroupId()
@@ -109,8 +113,14 @@ export class AdminNavigationsController {
 	@Get(':placement')
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarItemsByPlacement(
-		@Param('placement') placement: string
+		@Param('placement') placement: string,
+		@Query('language') language?: LanguageCode,
+		@Query('searchTerm') searchTerm?: string
 	): Promise<NavigationItem[]> {
-		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(placement);
+		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
+			placement,
+			language,
+			searchTerm
+		);
 	}
 }

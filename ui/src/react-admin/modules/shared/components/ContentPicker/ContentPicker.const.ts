@@ -1,6 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
+import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
+import { tText } from '~shared/helpers/translation-functions';
 
 import { PickerTypeOption } from '../../types/content-picker';
 
@@ -11,8 +13,6 @@ import { retrieveInternalLinks } from './item-providers/internal-link';
 import { retrieveItems } from './item-providers/item';
 import { retrieveProfiles } from './item-providers/profile';
 
-import { AdminConfigManager } from '~core/config';
-
 export interface PickerItem {
 	label?: string;
 	type: Avo.Core.ContentPickerType;
@@ -21,44 +21,30 @@ export interface PickerItem {
 }
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, string> = () => ({
-	['CONTENT_PAGE']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content/content___content'
+	['CONTENT_PAGE']: tText('admin/content/content___content'),
+	['NL_CONTENT_PAGE_PARENT_ID']: tText(
+		'modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina'
 	),
-	['INTERNAL_LINK']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content/content___statisch'
-	),
-	['COLLECTION']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content/content___collecties'
-	),
-	['ITEM']: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___items'),
-	['BUNDLE']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content/content___bundels'
-	),
-	['ASSIGNMENT']: AdminConfigManager.getConfig().services.i18n.tText(
+	['INTERNAL_LINK']: tText('admin/content/content___statisch'),
+	['COLLECTION']: tText('admin/content/content___collecties'),
+	['ITEM']: tText('admin/content/content___items'),
+	['BUNDLE']: tText('admin/content/content___bundels'),
+	['ASSIGNMENT']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___opdrachten'
 	),
-	['EXTERNAL_LINK']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___externe-url'
-	),
-	['SEARCH_QUERY']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___zoekfilters'
-	),
-	['PROJECTS']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___projecten'
-	),
-	['PROFILE']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___gebruiker'
-	),
-	['ANCHOR_LINK']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___anchors'
-	),
-	['FILE']: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/shared/components/content-picker/content-picker___bestand'
-	),
-	['CUSTOM_NAVIGATION_ELEMENTS']: AdminConfigManager.getConfig().services.i18n.tText(
+	['EXTERNAL_LINK']: tText('admin/shared/components/content-picker/content-picker___externe-url'),
+	['SEARCH_QUERY']: tText('admin/shared/components/content-picker/content-picker___zoekfilters'),
+	['PROJECTS']: tText('admin/shared/components/content-picker/content-picker___projecten'),
+	['PROFILE']: tText('admin/shared/components/content-picker/content-picker___gebruiker'),
+	['ANCHOR_LINK']: tText('admin/shared/components/content-picker/content-picker___anchors'),
+	['FILE']: tText('admin/shared/components/content-picker/content-picker___bestand'),
+	['CUSTOM_NAVIGATION_ELEMENTS']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
 	),
-	['DROPDOWN']: AdminConfigManager.getConfig().services.i18n.tText(
+	/**
+	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
+	 */
+	['DROPDOWN']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
 	),
 });
@@ -71,6 +57,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels['CONTENT_PAGE'],
 			disabled: false,
 			fetch: retrieveContentPages,
+			picker: 'SELECT',
+		},
+		{
+			value: 'NL_CONTENT_PAGE_PARENT_ID',
+			label: labels['NL_CONTENT_PAGE_PARENT_ID'],
+			disabled: false,
+			fetch: retrieveNlParentContentPages,
 			picker: 'SELECT',
 		},
 		{
@@ -120,7 +113,7 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			label: labels['SEARCH_QUERY'],
 			disabled: false,
 			picker: 'TEXT_INPUT',
-			placeholder: AdminConfigManager.getConfig().services.i18n.tText(
+			placeholder: tText(
 				'admin/shared/components/content-picker/content-picker___plak-hier-uw-zoekpagina-url'
 			),
 		},

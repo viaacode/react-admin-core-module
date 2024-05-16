@@ -22,8 +22,12 @@ import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/conten
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import {
+	ContentPageAction,
+	ContentPageInfo,
+} from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import Link from '~shared/components/Link/Link';
@@ -34,11 +38,11 @@ import {
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
 import { CustomError } from '~shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~shared/helpers/dropdown';
-import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { DefaultComponentProps } from '~shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
@@ -65,7 +69,6 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	commonUser,
 }) => {
 	// Hooks
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentPageInfo, setContentPageInfo] = useState<ContentPageInfo | null>(null);
@@ -73,6 +76,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
 	const [isPublishModalOpen, setIsPublishModalOpen] = useState<boolean>(false);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
+	const hasEnglishVersion = !!contentPageInfo?.translatedPages.find(
+		(page) => page.language === LanguageCode.En
+	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
 
@@ -81,7 +87,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		GET_CONTENT_PAGE_DETAIL_TABS()[0].id
 	);
 
-	const isContentProtected = get(contentPageInfo, 'is_protected', false);
+	const isContentProtected = contentPageInfo?.isProtected || false;
 	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(
 		contentPageInfo,
 		'title',
@@ -140,7 +146,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				icon: notFound ? ('search' as IconName) : ('alertTriangle' as IconName),
 			});
 		}
-	}, [id, setContentPageInfo, setLoadingInfo, commonUser, tHtml]);
+	}, [id, setContentPageInfo, setLoadingInfo, commonUser]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -243,84 +249,135 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		...(hasPerm(EDIT_ANY_CONTENT_PAGES)
 			? [
 					createDropdownMenuItem(
-						'duplicate',
+						ContentPageAction.duplicate,
 						tText('collection/views/collection-detail___dupliceer'),
 						'copy'
 					),
 			  ]
 			: []),
+		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== LanguageCode.En
+			? hasEnglishVersion
+				? [
+						createDropdownMenuItem(
+							ContentPageAction.gotoEnglishPage,
+							tText(
+								'modules/content-page/views/content-page-detail___ga-naar-engelse-pagina'
+							),
+							'eye'
+						),
+				  ]
+				: [
+						createDropdownMenuItem(
+							ContentPageAction.duplicateForEnglish,
+							tText(
+								'modules/content-page/views/content-page-detail___dupliceer-voor-engelse-pagina'
+							),
+							'copy'
+						),
+				  ]
+			: []),
 		...((!isContentProtected || isContentProtected) && hasPerm(DELETE_ANY_CONTENT_PAGES)
 			? [
 					createDropdownMenuItem(
-						'delete',
+						ContentPageAction.delete,
 						tText('admin/content/views/content-detail___verwijderen')
 					),
 			  ]
 			: []),
 	];
 
+	const duplicateContentPage = async (
+		overrideValues: Partial<ContentPageInfo>
+	): Promise<void> => {
+		try {
+			if (!contentPageInfo) {
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/content-page/views/content-page-detail___error'),
+					description: tText(
+						'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
+					),
+					type: ToastType.ERROR,
+				});
+				return;
+			}
+
+			const duplicateContentPage = await ContentPageService.duplicateContentPage(
+				contentPageInfo,
+				overrideValues,
+				CONTENT_PAGE_COPY,
+				CONTENT_PAGE_COPY_REGEX,
+				commonUser?.profileId
+			);
+
+			if (!duplicateContentPage) {
+				AdminConfigManager.getConfig().services.toastService.showToast({
+					title: tText('modules/content-page/views/content-page-detail___error'),
+					description: tText(
+						'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
+					),
+					type: ToastType.ERROR,
+				});
+				return;
+			}
+
+			history.push(
+				buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+					id: duplicateContentPage.id,
+				})
+			);
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-detail___success'),
+				description: tText(
+					'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
+				),
+				type: ToastType.SUCCESS,
+			});
+		} catch (err) {
+			console.error('Failed to duplicate content page', err, {
+				originalContentPage: contentPageInfo,
+			});
+
+			AdminConfigManager.getConfig().services.toastService.showToast({
+				title: tText('modules/content-page/views/content-page-detail___error'),
+				description: tText(
+					'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
+				),
+				type: ToastType.ERROR,
+			});
+		}
+	};
+
 	const executeAction = async (item: ReactText) => {
 		setIsOptionsMenuOpen(false);
 		switch (item) {
-			case 'duplicate':
-				try {
-					if (!contentPageInfo) {
-						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: tText('modules/content-page/views/content-page-detail___error'),
-							description: tText(
-								'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
-							),
-							type: ToastType.ERROR,
-						});
-						return;
-					}
-
-					const duplicateContentPage = await ContentPageService.duplicateContentPage(
-						contentPageInfo,
-						CONTENT_PAGE_COPY,
-						CONTENT_PAGE_COPY_REGEX,
-						commonUser?.profileId
-					);
-
-					if (!duplicateContentPage) {
-						AdminConfigManager.getConfig().services.toastService.showToast({
-							title: tText('modules/content-page/views/content-page-detail___error'),
-							description: tText(
-								'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
-							),
-							type: ToastType.ERROR,
-						});
-						return;
-					}
-
-					history.push(
-						buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
-							id: duplicateContentPage.id,
-						})
-					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: tText('modules/content-page/views/content-page-detail___success'),
-						description: tText(
-							'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
-						),
-						type: ToastType.SUCCESS,
-					});
-				} catch (err) {
-					console.error('Failed to duplicate content page', err, {
-						originalContentPage: contentPageInfo,
-					});
-
-					AdminConfigManager.getConfig().services.toastService.showToast({
-						title: tText('modules/content-page/views/content-page-detail___error'),
-						description: tText(
-							'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
-						),
-						type: ToastType.ERROR,
-					});
-				}
+			case ContentPageAction.duplicate:
+				await duplicateContentPage({});
 				break;
 
-			case 'delete':
+			case ContentPageAction.duplicateForEnglish:
+				await duplicateContentPage({
+					language: LanguageCode.En,
+					nlParentPageId: contentPageInfo?.id,
+				});
+				break;
+
+			case ContentPageAction.gotoEnglishPage: {
+				const englishPageId = contentPageInfo?.translatedPages.find(
+					(p) => p.language === LanguageCode.En
+				)?.id;
+				if (englishPageId) {
+					const url = buildLink(
+						AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+						{
+							id: englishPageId,
+						}
+					);
+					navigate(history, url);
+				}
+				break;
+			}
+
+			case ContentPageAction.delete:
 				setIsConfirmModalOpen(true);
 				break;
 

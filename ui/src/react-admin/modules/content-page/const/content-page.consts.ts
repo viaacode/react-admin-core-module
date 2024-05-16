@@ -13,16 +13,19 @@ import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
-	contentPageLabelOptions: CheckboxOption[]
+	contentPageLabelOptions: CheckboxOption[],
+	languageOptions: CheckboxOption[]
 ) => FilterableColumn<ContentOverviewTableCols>[] = (
 	contentTypeOptions,
 	userGroupOptions,
-	contentPageLabelOptions
+	contentPageLabelOptions,
+	languageOptions
 ) => {
 	const i18n = AdminConfigManager.getConfig().services.i18n;
 	return [
@@ -134,6 +137,16 @@ export const GET_OVERVIEW_COLUMNS: (
 			visibleByDefault: false,
 		},
 		{
+			id: 'translations',
+			label: i18n.tText('modules/content-page/const/content-page___vertalingen'),
+			sortable: false,
+			visibleByDefault: true,
+			filterType: 'CheckboxDropdownModal',
+			filterProps: {
+				options: languageOptions,
+			} as CheckboxDropdownModalProps,
+		},
+		{
 			id: 'actions',
 			tooltip: i18n.tText('admin/content/views/content-overview___acties'),
 			visibleByDefault: true,
@@ -146,42 +159,32 @@ export const PAGES_PER_PAGE = 10;
 export const GET_CONTENT_PAGE_DETAIL_TABS: () => TabProps[] = () => [
 	{
 		id: 'inhoud',
-		label: AdminConfigManager.getConfig().services.i18n.tText('admin/content/content___inhoud'),
+		label: tText('admin/content/content___inhoud'),
 		icon: 'layout' as IconName,
 	},
 	{
 		id: 'metadata',
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content/content___metadata'
-		),
+		label: tText('admin/content/content___metadata'),
 		icon: 'fileText' as IconName,
 	},
 ];
 
 export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content/content___kies-een-content-breedte'
-		),
+		label: tText('admin/content/content___kies-een-content-breedte'),
 		value: '',
 		disabled: true,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content/content___max-1300-px'
-		),
+		label: tText('admin/content/content___max-1300-px'),
 		value: ContentWidth.EXTRA_LARGE,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content/content___breed-940-px'
-		),
+		label: tText('admin/content/content___breed-940-px'),
 		value: ContentWidth.LARGE,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/content/content___medium-720-px'
-		),
+		label: tText('admin/content/content___medium-720-px'),
 		value: ContentWidth.MEDIUM,
 	},
 ];

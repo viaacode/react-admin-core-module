@@ -29,6 +29,12 @@ import {
 	GetContentTypesDocument as GetContentTypesDocumentAvo,
 	type GetContentTypesQuery as GetContentTypesQueryAvo,
 	type GetContentTypesQueryVariables as GetContentTypesQueryVariablesAvo,
+	GetNlParentContentPagesByTitleDocument as GetNlParentContentPagesByTitleDocumentAvo,
+	type GetNlParentContentPagesByTitleQuery as GetNlParentContentPagesByTitleQueryAvo,
+	type GetNlParentContentPagesByTitleQueryVariables as GetNlParentContentPagesByTitleQueryVariablesAvo,
+	GetNlParentContentPagesDocument as GetNlParentContentPagesDocumentAvo,
+	type GetNlParentContentPagesQuery as GetNlParentContentPagesQueryAvo,
+	type GetNlParentContentPagesQueryVariables as GetNlParentContentPagesQueryVariablesAvo,
 	GetPermissionsFromContentPageByPathDocument as GetPermissionsFromContentPageByPathDocumentAvo,
 	type GetPermissionsFromContentPageByPathQuery as GetPermissionsFromContentPageByPathQueryAvo,
 	type GetPermissionsFromContentPageByPathQueryVariables as GetPermissionsFromContentPageByPathQueryVariablesAvo,
@@ -94,6 +100,12 @@ import {
 	GetContentTypesDocument as GetContentTypesDocumentHetArchief,
 	type GetContentTypesQuery as GetContentTypesQueryHetArchief,
 	type GetContentTypesQueryVariables as GetContentTypesQueryVariablesHetArchief,
+	GetNlParentContentPagesByTitleDocument as GetNlParentContentPagesByTitleDocumentHetArchief,
+	type GetNlParentContentPagesByTitleQuery as GetNlParentContentPagesByTitleQueryHetArchief,
+	type GetNlParentContentPagesByTitleQueryVariables as GetNlParentContentPagesByTitleQueryVariablesHetArchief,
+	GetNlParentContentPagesDocument as GetNlParentContentPagesDocumentHetArchief,
+	type GetNlParentContentPagesQuery as GetNlParentContentPagesQueryHetArchief,
+	type GetNlParentContentPagesQueryVariables as GetNlParentContentPagesQueryVariablesHetArchief,
 	GetPermissionsFromContentPageByPathDocument as GetPermissionsFromContentPageByPathDocumentHetArchief,
 	type GetPermissionsFromContentPageByPathQuery as GetPermissionsFromContentPageByPathQueryHetArchief,
 	type GetPermissionsFromContentPageByPathQueryVariables as GetPermissionsFromContentPageByPathQueryVariablesHetArchief,
@@ -328,6 +340,26 @@ export type ContentPageQueryTypes = {
 	UpdateContentPagePublishDatesMutationVariables:
 		| UpdateContentPagePublishDatesMutationVariablesAvo
 		| UpdateContentPagePublishDatesMutationVariablesHetArchief;
+	GetNlParentContentPagesQuery:
+		| GetNlParentContentPagesQueryAvo
+		| GetNlParentContentPagesQueryHetArchief;
+	GetNlParentContentPagesQueryAvo: GetNlParentContentPagesQueryAvo;
+	GetNlParentContentPagesQueryHetArchief: GetNlParentContentPagesQueryHetArchief;
+	GetNlParentContentPagesQueryVariablesAvo: GetNlParentContentPagesQueryVariablesAvo;
+	GetNlParentContentPagesQueryVariablesHetArchief: GetNlParentContentPagesQueryVariablesHetArchief;
+	GetNlParentContentPagesQueryVariables:
+		| GetNlParentContentPagesQueryVariablesAvo
+		| GetNlParentContentPagesQueryVariablesHetArchief;
+	GetNlParentContentPagesByTitleQuery:
+		| GetNlParentContentPagesByTitleQueryAvo
+		| GetNlParentContentPagesByTitleQueryHetArchief;
+	GetNlParentContentPagesByTitleQueryAvo: GetNlParentContentPagesByTitleQueryAvo;
+	GetNlParentContentPagesByTitleQueryHetArchief: GetNlParentContentPagesByTitleQueryHetArchief;
+	GetNlParentContentPagesByTitleQueryVariablesAvo: GetNlParentContentPagesByTitleQueryVariablesAvo;
+	GetNlParentContentPagesByTitleQueryVariablesHetArchief: GetNlParentContentPagesByTitleQueryVariablesHetArchief;
+	GetNlParentContentPagesByTitleQueryVariables:
+		| GetNlParentContentPagesByTitleQueryVariablesAvo
+		| GetNlParentContentPagesByTitleQueryVariablesHetArchief;
 };
 
 type ContentPageQueries = {
@@ -352,6 +384,8 @@ type ContentPageQueries = {
 	GetContentPagesWithBlocksDocument: TypedDocumentNode<any, any>;
 	GetPublicContentPagesDocument: TypedDocumentNode<any, any>;
 	UpdateContentPagePublishDatesDocument: TypedDocumentNode<any, any>;
+	GetNlParentContentPagesDocument: TypedDocumentNode<any, any>;
+	GetNlParentContentPagesByTitleDocument: TypedDocumentNode<any, any>;
 };
 
 export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
@@ -377,6 +411,8 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
 		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentAvo,
+		GetNlParentContentPagesDocument: GetNlParentContentPagesDocumentAvo,
+		GetNlParentContentPagesByTitleDocument: GetNlParentContentPagesByTitleDocumentAvo,
 	},
 	[DatabaseType.hetArchief]: {
 		DeleteContentBlockDocument: DeleteContentBlockDocumentHetArchief,
@@ -402,5 +438,7 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentHetArchief,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
 		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentHetArchief,
+		GetNlParentContentPagesDocument: GetNlParentContentPagesDocumentHetArchief,
+		GetNlParentContentPagesByTitleDocument: GetNlParentContentPagesByTitleDocumentHetArchief,
 	},
 };

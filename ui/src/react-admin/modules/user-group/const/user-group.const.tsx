@@ -3,6 +3,7 @@ import React from 'react';
 import { Column, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import { tText } from '~shared/helpers/translation-functions';
 import { PermissionRow } from '../types/user-group.types';
 import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
@@ -71,15 +72,13 @@ export const getUserGroupTableColumns = (
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
+		label: tText(
 			'admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'
 		),
 		id: SpecialPermissionGroups.loggedOutUsers,
 	},
 	{
-		label: AdminConfigManager.getConfig().services.i18n.tText(
-			'admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'
-		),
+		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___ingelogde-gebruikers'),
 		id: SpecialPermissionGroups.loggedInUsers,
 	},
 ];

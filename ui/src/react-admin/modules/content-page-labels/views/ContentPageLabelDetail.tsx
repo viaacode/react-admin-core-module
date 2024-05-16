@@ -17,6 +17,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
+import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { ContentPageLabel } from '../content-page-label.types';
 import { DefaultComponentProps } from '~modules/shared/types';
@@ -41,7 +42,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				setLoadingInfo({
 					state: 'error',
 					icon: IconName.search,
-					message: AdminConfigManager.getConfig().services.i18n.tText(
+					message: tText(
 						'admin/content-page-labels/views/content-page-label-detail___deze-content-pagina-label-werd-niet-gevonden'
 					),
 				});
@@ -52,6 +53,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				id: contentPageLabelObj.id,
 				label: contentPageLabelObj.label,
 				content_type: contentPageLabelObj.content_type,
+				language: contentPageLabelObj.language,
 				link_to: contentPageLabelObj.link_to,
 				created_at: contentPageLabelObj.created_at,
 				updated_at: contentPageLabelObj.updated_at,
@@ -66,7 +68,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 			);
 			setLoadingInfo({
 				state: 'error',
-				message: AdminConfigManager.getConfig().services.i18n.tText(
+				message: tText(
 					'admin/content-page-labels/views/content-page-label-detail___het-ophalen-van-de-content-pagina-label-is-mislukt'
 				),
 			});
@@ -106,17 +108,23 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 						{renderSimpleDetailRows(contentPageLabelInfo, [
 							[
 								'label',
-								AdminConfigManager.getConfig().services.i18n.tText(
+								tText(
 									'admin/content-page-labels/views/content-page-label-detail___label'
 								),
 							],
 							[
 								'content_type',
-								AdminConfigManager.getConfig().services.i18n.tText(
+								tText(
 									'admin/content-page-labels/views/content-page-label-detail___type'
 								),
 							],
 						])}
+						{renderDetailRow(
+							contentPageLabelInfo.language,
+							tText(
+								'modules/content-page-labels/views/content-page-label-detail___taal'
+							)
+						)}
 						{renderDetailRow(
 							linkTo ? (
 								<Button
@@ -128,20 +136,20 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 							) : (
 								'-'
 							),
-							AdminConfigManager.getConfig().services.i18n.tText(
+							tText(
 								'admin/content-page-labels/views/content-page-label-detail___link'
 							)
 						)}
 						{renderDateDetailRows(contentPageLabelInfo, [
 							[
 								'created_at',
-								AdminConfigManager.getConfig().services.i18n.tText(
+								tText(
 									'admin/content-page-labels/views/content-page-label-detail___aangemaakt-op'
 								),
 							],
 							[
 								'updated_at',
-								AdminConfigManager.getConfig().services.i18n.tText(
+								tText(
 									'admin/content-page-labels/views/content-page-label-detail___aangepast-op'
 								),
 							],
@@ -159,7 +167,7 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 		}
 		return (
 			<AdminLayout
-				pageTitle={AdminConfigManager.getConfig().services.i18n.tText(
+				pageTitle={tText(
 					'admin/content-page-labels/views/content-page-label-detail___content-pagina-label-details'
 				)}
 				className={className}
@@ -176,13 +184,13 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={AdminConfigManager.getConfig().services.i18n.tText(
+							label={tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerken'
 							)}
-							title={AdminConfigManager.getConfig().services.i18n.tText(
+							title={tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerk-deze-content-pagina-label'
 							)}
-							ariaLabel={AdminConfigManager.getConfig().services.i18n.tText(
+							ariaLabel={tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerk-deze-content-pagina-label'
 							)}
 							onClick={handleEditClick}

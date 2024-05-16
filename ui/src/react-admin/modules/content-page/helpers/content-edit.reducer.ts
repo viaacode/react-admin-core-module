@@ -1,8 +1,12 @@
 import { RichEditorState } from '@meemoo/react-components';
+import type { Avo } from '@viaa/avo2-types';
 import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import { Reducer } from 'react';
-import type { Avo } from '@viaa/avo2-types';
+import { AdminConfigManager } from '~core/config';
+import { LanguageCode } from '~modules/translations/translations.core.types';
+
+import { ValueOf } from '~shared/types';
 
 import {
 	ContentBlockComponentsConfig,
@@ -12,9 +16,6 @@ import {
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
-
-import { ValueOf } from '~shared/types';
-import { AdminConfigManager } from '~core/config';
 import { ContentEditActionType, ContentPageInfo, ContentWidth } from '../types/content-pages.types';
 
 interface SetContentPage {
@@ -132,6 +133,9 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		userGroupIds: [],
 		labels: [],
 		content_blocks: [] as ContentBlockConfig[],
+		language: LanguageCode.Nl,
+		nlParentPageId: null,
+		translatedPages: [],
 		owner: {
 			firstName: user.firstName || '-',
 			lastName: user.lastName || '-',

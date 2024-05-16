@@ -1,5 +1,6 @@
 import { BlockEventbriteProps } from '~content-blocks/BlockEventbrite/BlockEventbrite';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
 
 import {
 	ContentBlockConfig,
@@ -27,44 +28,32 @@ export const INITIAL_EVENTBRITE_BLOCK_STATE = (): DefaultContentBlockState => ({
 
 export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/eventbrite___eventbrite'
-	),
+	name: tText('admin/content-block/helpers/generators/eventbrite___eventbrite'),
 	type: ContentBlockType.Eventbrite,
 	components: {
 		state: INITIAL_EVENTBRITE_COMPONENTS_STATE(),
 		fields: {
 			eventId: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/eventbrite___event-id'
-				),
+				label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			type: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___type'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___type'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			label: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/buttons___tekst'
-					),
+					label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			icon: {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/buttons___icoon'
-				),
+				label: tText('admin/content-block/helpers/generators/buttons___icoon'),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
@@ -76,9 +65,7 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_EVENTBRITE_BLOCK_STATE(),
 		fields: {
 			align: ALIGN_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/defaults___uitlijning'
-				)
+				tText('admin/content-block/helpers/generators/defaults___uitlijning')
 			),
 			...BLOCK_FIELD_DEFAULTS(),
 		},

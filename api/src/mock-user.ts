@@ -1,7 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 
-import { type Idp } from './modules';
+import { type Idp, type LanguageCode } from './modules';
 
 export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
@@ -11,6 +11,7 @@ export const mockUserAvo: Avo.User.User = {
 	is_blocked: false,
 	profile: {
 		id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
+		language: 'NL' as LanguageCode,
 		alias: 'bert_verhelst',
 		title: 'Developer1',
 		alternative_email: 'verhelstbert@gmail.comaaaaaaa',
@@ -190,7 +191,10 @@ export const mockUserAvo: Avo.User.User = {
 } as Avo.User.User;
 
 export const mockUserHetArchief: Avo.User.HetArchiefUser = {
-	id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
+	// QAS
+	// id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
+	// LOCAL DB
+	id: '8cd21983-92ff-4e67-8f6d-9640cac67073',
 	fullName: 'meemoo Admin',
 	firstName: 'meemoo',
 	lastName: 'Admin',

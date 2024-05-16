@@ -5,7 +5,7 @@ import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
 import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 
 import { NavigationItem, NavigationOverviewTableCols } from '../navigation.types';
-import { useTranslation } from '~shared/hooks/useTranslation';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { GET_NAVIGATION_OVERVIEW_TABLE_COLS } from '~modules/navigation/navigation.consts';
@@ -13,8 +13,7 @@ import { Loader } from '~shared/components';
 import { AdminLayout } from '~shared/layouts';
 import { Link } from '~modules/shared/components/Link';
 
-const NavigationOverview: FunctionComponent = () => {
-	const { tHtml, tText } = useTranslation();
+const NavigationBarOverview: FunctionComponent = () => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,
@@ -158,4 +157,4 @@ const NavigationOverview: FunctionComponent = () => {
 	return renderPageContent();
 };
 
-export default NavigationOverview;
+export default NavigationBarOverview;

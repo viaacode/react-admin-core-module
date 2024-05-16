@@ -1,4 +1,5 @@
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -8,8 +9,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_QUOTE_COMPONENTS_STATE = (): QuoteBlockComponentState => ({
 	quote: '',
@@ -27,46 +26,32 @@ export const INITIAL_QUOTE_BLOCK_STATE = (): DefaultContentBlockState =>
 
 export const QUOTE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: AdminConfigManager.getConfig().services.i18n.tText(
-		'admin/content-block/helpers/generators/quote___quote'
-	),
+	name: tText('admin/content-block/helpers/generators/quote___quote'),
 	type: ContentBlockType.Quote,
 	components: {
 		state: INITIAL_QUOTE_COMPONENTS_STATE(),
 		fields: {
 			quote: TEXT_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/quote___quote-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/quote___quote-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/quote___quote'
-					),
+					label: tText('admin/content-block/helpers/generators/quote___quote'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			authorName: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/quote___auteur'
-				),
+				label: tText('admin/content-block/helpers/generators/quote___auteur'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			authorInitials: TEXT_FIELD(undefined, {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/quote___initialen'
-				),
+				label: tText('admin/content-block/helpers/generators/quote___initialen'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			authorImage: FILE_FIELD(
-				AdminConfigManager.getConfig().services.i18n.tText(
-					'admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'
-				),
+				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
 				{
-					label: AdminConfigManager.getConfig().services.i18n.tText(
-						'admin/content-block/helpers/generators/image___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/image___afbeelding'),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),

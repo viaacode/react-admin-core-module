@@ -4,6 +4,7 @@ mutation insertContentPageLabel($contentPageLabels: [app_content_labels_insert_i
 			label
 			id
 			content_type
+			language
 			link_to
 			created_at
 			updated_at

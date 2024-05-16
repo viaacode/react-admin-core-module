@@ -14,6 +14,8 @@ import { isNil } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { Link } from '~shared/components/Link';
@@ -23,12 +25,14 @@ import {
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink, navigate } from '~shared/helpers/link';
+import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { DefaultComponentProps } from '~shared/types/components';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
 import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
+import { SelectOption } from '@meemoo/react-components';
 
 type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 
@@ -47,6 +51,13 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [contentTypes] = useContentTypes();
+	const { data: allLanguages } = useGetAllLanguages();
+	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
+		return {
+			label: languageInfo.languageLabel,
+			value: languageInfo.languageCode,
+		};
+	});
 
 	const isCreatePage = !contentPageLabelId;
 
@@ -55,6 +66,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			const contentLabel = {
 				label: '',
 				content_type: 'PAGINA',
+				language: LanguageCode.Nl,
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -76,7 +88,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 				);
 				setLoadingInfo({
 					state: 'error',
-					message: AdminConfigManager.getConfig().services.i18n.tText(
+					message: tText(
 						'admin/content-page-labels/views/content-page-label-edit___het-ophalen-van-de-content-pagina-label-is-mislukt'
 					),
 				});
@@ -105,10 +117,17 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	};
 
 	const getFormErrors = (): ContentPageLabelEditFormErrorState | null => {
-		if (!contentPageLabelInfo || !contentPageLabelInfo.label) {
+		if (!contentPageLabelInfo?.label) {
 			return {
-				label: AdminConfigManager.getConfig().services.i18n.tText(
+				label: tText(
 					'admin/content-page-labels/views/content-page-label-edit___een-label-is-verplicht'
+				),
+			};
+		}
+		if (!contentPageLabelInfo?.language) {
+			return {
+				label: tText(
+					'modules/content-page-labels/views/content-page-label-edit___een-taal-keuze-is-verplicht'
 				),
 			};
 		}
@@ -122,7 +141,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			if (errors) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: 'error',
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'admin/content-page-labels/views/content-page-label-edit___de-invoer-is-ongeldig'
 					),
 					type: ToastType.ERROR,
@@ -133,7 +152,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			if (!initialContentPageLabel || !contentPageLabelInfo) {
 				AdminConfigManager.getConfig().services.toastService.showToast({
 					title: 'error',
-					description: AdminConfigManager.getConfig().services.i18n.tText(
+					description: tText(
 						'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-content-pagina-label-is-mislukt-omdat-het-label-nog-niet-is-geladen'
 					),
 					type: ToastType.ERROR,
@@ -156,8 +175,8 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			}
 
 			AdminConfigManager.getConfig().services.toastService.showToast({
-				title: 'succes',
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				title: tText('modules/content-page-labels/views/content-page-label-edit___succes'),
+				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___de-content-pagina-label-is-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
@@ -176,7 +195,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			);
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: 'error',
-				description: AdminConfigManager.getConfig().services.i18n.tText(
+				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-pagina-label-is-mislukt'
 				),
 				type: ToastType.ERROR,
@@ -196,7 +215,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 						<Box backgroundColor="gray">
 							<Form>
 								<FormGroup
-									label={AdminConfigManager.getConfig().services.i18n.tText(
+									label={tText(
 										'admin/content-page-labels/views/content-page-label-edit___label'
 									)}
 									error={formErrors.label}
@@ -213,7 +232,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 									/>
 								</FormGroup>
 								<FormGroup
-									label={AdminConfigManager.getConfig().services.i18n.tText(
+									label={tText(
 										'admin/content-page-labels/views/content-page-label-edit___content-pagina-type'
 									)}
 									error={formErrors.content_type}
@@ -231,7 +250,24 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 									/>
 								</FormGroup>
 								<FormGroup
-									label={AdminConfigManager.getConfig().services.i18n.tText(
+									label={tText(
+										'modules/content-page-labels/views/content-page-label-edit___taal'
+									)}
+									error={formErrors.language}
+								>
+									<Select
+										options={languageOptions}
+										value={contentPageLabelInfo.language}
+										onChange={(newLanguage) =>
+											setContentPageLabelInfo({
+												...contentPageLabelInfo,
+												language: newLanguage as LanguageCode,
+											})
+										}
+									/>
+								</FormGroup>
+								<FormGroup
+									label={tText(
 										'admin/content-page-labels/views/content-page-label-edit___link-naar'
 									)}
 									error={formErrors.link_to}
@@ -288,10 +324,10 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 		<AdminLayout
 			pageTitle={
 				isCreatePage
-					? AdminConfigManager.getConfig().services.i18n.tText(
+					? tText(
 							'admin/content-page-labels/views/content-page-label-edit___content-pagina-label-aanmaken'
 					  )
-					: AdminConfigManager.getConfig().services.i18n.tText(
+					: tText(
 							'admin/content-page-labels/views/content-page-label-edit___content-pagina-label-aanpassen'
 					  )
 			}
@@ -307,7 +343,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			<AdminLayout.Actions>
 				<ButtonToolbar>
 					<Button
-						label={AdminConfigManager.getConfig().services.i18n.tText(
+						label={tText(
 							'admin/content-page-labels/views/content-page-label-edit___annuleer'
 						)}
 						onClick={navigateBack}
@@ -315,7 +351,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 					/>
 					<Button
 						disabled={isSaving}
-						label={AdminConfigManager.getConfig().services.i18n.tText(
+						label={tText(
 							'admin/content-page-labels/views/content-page-label-edit___opslaan'
 						)}
 						onClick={handleSave}

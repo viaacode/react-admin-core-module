@@ -72,6 +72,7 @@ export class ContentPageLabelService {
 					contentPageLabels.map((labelObj) => ({
 						label: labelObj.label,
 						content_type: labelObj.content_type,
+						language: labelObj.language,
 						link_to: labelObj.link_to,
 					}))
 				),
@@ -93,6 +94,7 @@ export class ContentPageLabelService {
 					id: contentPageLabelInfo.id,
 					label: contentPageLabelInfo.label,
 					content_type: contentPageLabelInfo.content_type,
+					language: contentPageLabelInfo.language,
 					link_to: contentPageLabelInfo.link_to,
 				}),
 			});

@@ -7,14 +7,11 @@ import {
 	Spacer,
 	Tabs,
 } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
-import { PermissionName } from '@viaa/avo2-types';
-import type { Avo } from '@viaa/avo2-types';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { ErrorView } from '~shared/components/error';
-
-import Link from '~shared/components/Link/Link';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
@@ -46,8 +43,12 @@ import {
 	ContentPageUser,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ErrorView } from '~shared/components/error';
+
+import Link from '~shared/components/Link/Link';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
@@ -55,16 +56,16 @@ import {
 import { CustomError } from '~shared/helpers/custom-error';
 import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
 import { DefaultComponentProps } from '~shared/types/components';
+import { blockHasErrors } from '../helpers/block-has-errors';
+import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';
 
 import './ContentPageEdit.scss';
-import { useTranslation } from '~shared/hooks/useTranslation';
-import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
-import { blockHasErrors } from '../helpers/block-has-errors';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -89,7 +90,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
-	const { tHtml, tText } = useTranslation();
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
@@ -508,7 +508,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				id: insertedOrUpdatedContent.id,
 			});
 		} catch (err) {
-			console.error(new CustomError('Failed to save content page ', err));
+			console.error(new CustomError('Failed to save content page', err));
 			AdminConfigManager.getConfig().services.toastService.showToast({
 				title: tText('modules/content-page/views/content-page-edit___error'),
 				description: tText(
@@ -539,7 +539,8 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 
 		try {
 			const existingContentPageTitle: string | null =
-				await ContentPageService.doesContentPagePathExist(
+				await ContentPageService.doesContentPageLanguageAndPathExist(
+					contentPageState.currentContentPageInfo.language || LanguageCode.Nl,
 					path,
 					contentPageState.currentContentPageInfo.id
 				);
@@ -748,13 +749,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 								})}
 								onCopy={() =>
 									AdminConfigManager.getConfig().services.toastService.showToast({
-										title: AdminConfigManager.getConfig().services.i18n.tText(
+										title: tText(
 											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
 										),
-										description:
-											AdminConfigManager.getConfig().services.i18n.tText(
-												'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
-											),
+										description: tText(
+											'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
+										),
 										type: ToastType.SUCCESS,
 									})
 								}
