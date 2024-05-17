@@ -8,34 +8,34 @@
    ========================================================================== */
 
 .u-d-block {
-  display: block !important;
+    display: block !important;
 }
 
 .u-d-flex {
-  display: flex !important;
+    display: flex !important;
 }
 
 /* Responsive utilities
    ========================================================================== */
 
 .u-max-bp3-d-none {
-  @media (min-width: $g-bp3) {
-    display: none;
-  }
+    @media (min-width: $g-bp3) {
+        display: none;
+    }
 }
 
 .u-min-bp3-d-block {
-  display: none;
+    display: none;
 
-  @media (min-width: $g-bp3) {
-    display: block;
-  }
+    @media (min-width: $g-bp3) {
+        display: block;
+    }
 }
 
 .u-min-bp3-d-flex {
-  display: none;
+    display: none;
 
-  @media (min-width: $g-bp3) {
-    display: flex;
-  }
+    @media (min-width: $g-bp3) {
+        display: flex;
+    }
 }

@@ -3,123 +3,123 @@
    ========================================================================== */
 
 .c-label {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .c-label + .c-label {
-  margin-left: 1.6rem;
+    margin-left: 1.6rem;
 }
 
 .c-label-swatch {
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 100%;
-  display: block;
-  line-height: 0;
-  font-size: 0;
-  flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 100%;
+    display: block;
+    line-height: 0;
+    font-size: 0;
+    flex-shrink: 0;
 }
 
 .c-label-text {
-  padding-left: 0.8rem;
-  flex-shrink: 0;
+    padding-left: 0.8rem;
+    flex-shrink: 0;
 }
 
 /* Color input field
 ========================================================================== */
 
 .c-label-filter {
-  border: 1px solid $color-gray-100;
-  padding: 0.2rem 1rem 0.2rem 1.2rem;
-  border-radius: 0.3rem;
-  height: 3.6rem;
-  align-items: center;
-  display: flex;
+    border: 1px solid $color-gray-100;
+    padding: 0.2rem 1rem 0.2rem 1.2rem;
+    border-radius: 0.3rem;
+    height: 3.6rem;
+    align-items: center;
+    display: flex;
 }
 
 .c-label-options {
-  .o-svg-icon svg {
-    color: $color-gray-700;
-  }
+    .o-svg-icon svg {
+        color: $color-gray-700;
+    }
 }
 
 /* Color input field dropdown
 ========================================================================== */
 
 .c-label-dropdown {
-  max-width: 15rem;
+    max-width: 15rem;
 
-  .c-label-swatch-picker {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1.2rem 0.8rem;
-  }
-
-  .c-label-swatch {
-    margin: 0.8rem;
-    width: 3.2rem;
-    height: 3.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      transform: scale(1.1);
+    .c-label-swatch-picker {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1.2rem 0.8rem;
     }
 
-    .o-svg-icon {
-      width: 1.6rem;
-      height: 1.6rem;
-      display: none;
-      color: rgb(255 255 255 / 90%);
-    }
+    .c-label-swatch {
+        margin: 0.8rem;
+        width: 3.2rem;
+        height: 3.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    &:focus .o-svg-icon {
-      display: block;
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        .o-svg-icon {
+            width: 1.6rem;
+            height: 1.6rem;
+            display: none;
+            color: rgb(255 255 255 / 90%);
+        }
+
+        &:focus .o-svg-icon {
+            display: block;
+        }
     }
-  }
 }
 
 /* Different label swatch colors
 ========================================================================== */
 
 .c-label-swatch--color-1 {
-  background-color: $color-wine-red;
+    background-color: $color-wine-red;
 }
 
 .c-label-swatch--color-2 {
-  background-color: $color-ocean-green;
+    background-color: $color-ocean-green;
 }
 
 .c-label-swatch--color-3 {
-  background-color: $color-tapestry;
+    background-color: $color-tapestry;
 }
 
 .c-label-swatch--color-4 {
-  background-color: $color-green;
+    background-color: $color-green;
 }
 
 .c-label-swatch--color-5 {
-  background-color: $color-yellow;
+    background-color: $color-yellow;
 }
 
 .c-label-swatch--color-6 {
-  background-color: $color-dark-orange;
+    background-color: $color-dark-orange;
 }
 
 .c-label-swatch--color-7 {
-  background-color: $color-silver;
+    background-color: $color-silver;
 }
 
 .c-label-swatch--color-8 {
-  background-color: $color-night-blue;
+    background-color: $color-night-blue;
 }
 
 .c-label-swatch--color-9 {
-  background-color: $color-soft-blue;
+    background-color: $color-soft-blue;
 }
 
 .c-label-swatch--color-10 {
-  background-color: $color-french-rose;
+    background-color: $color-french-rose;
 }

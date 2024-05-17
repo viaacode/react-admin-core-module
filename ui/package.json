@@ -21,7 +21,7 @@
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "build:analyze": "npm run build -- --config-analyze",
-    "format": "prettier --log-level warn --write \"src/**/*.ts\" \"src/**/*.tsx\" \"!src/react-admin/generated/**/*.ts\"",
+    "format": "prettier --log-level warn --write \"src/**/*.ts\" \"src/**/*.tsx\" \"!src/react-admin/generated/**/*.ts\" \"src/**/*.scss\" \"src/**/*.css\"",
     "lint": "npm run lint:ts && npm run lint:scss",
     "lint:fix": "npm run lint:ts:fix && npm run lint:scss:fix",
     "lint:ts": "eslint src --ext .js,.jsx,.ts,.tsx",

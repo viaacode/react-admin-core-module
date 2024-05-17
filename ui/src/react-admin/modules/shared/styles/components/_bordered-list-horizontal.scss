@@ -3,48 +3,48 @@
    ========================================================================== */
 
 .c-bordered-list-horizontal {
-  display: flex;
+    display: flex;
 
-  li {
-    border-right: 0.1rem solid $color-gray-150;
+    li {
+        border-right: 0.1rem solid $color-gray-150;
 
-    &:last-child {
-      border: none;
+        &:last-child {
+            border: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a,
+        span {
+            display: block;
+            padding: 0.4rem 0.8rem;
+        }
     }
-
-    a {
-      text-decoration: none;
-    }
-
-    a,
-    span {
-      display: block;
-      padding: 0.4rem 0.8rem;
-    }
-  }
 }
 
 /* Drop columns on request
    ========================================================================== */
 
 @media (max-width: $g-bp2 - 1) {
-  .c-bordered-list-horizontal--resp {
-    flex-direction: column;
-    width: 100%;
+    .c-bordered-list-horizontal--resp {
+        flex-direction: column;
+        width: 100%;
 
-    li {
-      border-right: none;
-      border-bottom: 0.1rem solid $color-gray-150;
+        li {
+            border-right: none;
+            border-bottom: 0.1rem solid $color-gray-150;
 
-      &:last-child {
-        border: none;
-      }
+            &:last-child {
+                border: none;
+            }
 
-      a,
-      span {
-        display: block;
-        padding: 0.4rem 0.8rem;
-      }
+            a,
+            span {
+                display: block;
+                padding: 0.4rem 0.8rem;
+            }
+        }
     }
-  }
 }

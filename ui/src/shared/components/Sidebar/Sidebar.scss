@@ -6,56 +6,56 @@
    ========================================================================== */
 
 .o-sidebar {
-  width: 100%;
-  height: 100vh;
-  background-color: $color-gray-700;
-  color: $color-gray-50;
+    width: 100%;
+    height: 100vh;
+    background-color: $color-gray-700;
+    color: $color-gray-50;
 }
 
 /* Elements
    ========================================================================== */
 
 .o-sidebar__header {
-  display: flex;
-  align-items: center;
-  height: 6.4rem;
-  padding: 0 3.2rem;
-  border-bottom: 2px solid rgba($color-gray-50, 0.2);
-  font-size: 2.4rem;
-  font-weight: 500;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    height: 6.4rem;
+    padding: 0 3.2rem;
+    border-bottom: 2px solid rgba($color-gray-50, 0.2);
+    font-size: 2.4rem;
+    font-weight: 500;
+    text-align: center;
 }
 
 .o-sidebar__nav {
-  .o-sidebar__nav-item-sublink > a {
-    padding: 6px 0 6px 44px;
-    display: block;
-    background-color: $color-white-4-percent;
-  }
-
-  .o-sidebar__nav-item-wrapper {
-    border-color: rgba($color-gray-50, 0.4);
-  }
-
-  .o-sidebar__nav-item {
-    padding: 1.6rem 3.2rem;
-    color: $color-gray-50;
-
-    &:focus,
-    &:hover {
-      background-color: $color-gray-800;
+    .o-sidebar__nav-item-sublink > a {
+        padding: 6px 0 6px 44px;
+        display: block;
+        background-color: $color-white-4-percent;
     }
 
-    &.o-sidebar__nav-item--active {
-      background-color: $color-gray-600;
+    .o-sidebar__nav-item-wrapper {
+        border-color: rgba($color-gray-50, 0.4);
     }
-  }
+
+    .o-sidebar__nav-item {
+        padding: 1.6rem 3.2rem;
+        color: $color-gray-50;
+
+        &:focus,
+        &:hover {
+            background-color: $color-gray-800;
+        }
+
+        &.o-sidebar__nav-item--active {
+            background-color: $color-gray-600;
+        }
+    }
 }
 
 /* Modifiers
    ========================================================================== */
 
 .o-sidebar--light {
-  background-color: $g-base-background;
-  color: $g-text-color;
+    background-color: $g-base-background;
+    color: $g-text-color;
 }

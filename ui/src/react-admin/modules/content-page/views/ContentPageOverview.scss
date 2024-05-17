@@ -1,18 +1,18 @@
 .c-content-overview__table {
-  th {
-    white-space: nowrap;
-  }
+    th {
+        white-space: nowrap;
+    }
 
-  tr > td:last-child {
-    display: flex;
-    flex-direction: row;
-  }
+    tr > td:last-child {
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 .c-pagination-bar,
 .c-pagination,
 .c-pagination__pages {
-  display: flex;
-  flex-direction: row;
-  gap: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
 }

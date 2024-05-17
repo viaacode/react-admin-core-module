@@ -16,47 +16,47 @@ $u-text-danger-color: $color-error !default;
    ========================================================================== */
 
 .u-text-muted {
-  color: $u-text-muted-color;
+    color: $u-text-muted-color;
 }
 
 .u-text-primary {
-  color: $u-text-primary-color;
+    color: $u-text-primary-color;
 }
 
 .u-text-success {
-  color: $u-text-success-color;
-
-  .o-svg-icon {
     color: $u-text-success-color;
-  }
+
+    .o-svg-icon {
+        color: $u-text-success-color;
+    }
 }
 
 .u-text-danger {
-  color: $u-text-danger-color;
+    color: $u-text-danger-color;
 }
 
 .u-text-bold {
-  font-weight: $g-headings-font-weight;
+    font-weight: $g-headings-font-weight;
 }
 
 .u-text-center {
-  text-align: center !important;
+    text-align: center !important;
 }
 
 .u-text-right {
-  text-align: right !important;
+    text-align: right !important;
 }
 
 .u-text-hidden {
-  display: none;
+    display: none;
 }
 
 .u-text-uc {
-  text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .u-truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
