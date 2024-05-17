@@ -26,6 +26,7 @@ export * from './BlockCardsWithoutDescription';
 export * from './BlockImageTextBackground';
 export * from './BlockMaintainersGrid';
 export * from './BlockHetArchiefHeaderSearch';
+export * from './BlockOverviewNewspaperTitles';
 
 export * from './anchor-links';
 export * from './defaults';

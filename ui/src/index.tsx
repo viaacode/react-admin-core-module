@@ -89,6 +89,7 @@ function setConfig() {
 				ContentBlockType.ImageTextBackground,
 				ContentBlockType.MaintainersGrid,
 				ContentBlockType.HetArchiefHeaderSearch,
+				ContentBlockType.OverviewNewspaperTitles,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {

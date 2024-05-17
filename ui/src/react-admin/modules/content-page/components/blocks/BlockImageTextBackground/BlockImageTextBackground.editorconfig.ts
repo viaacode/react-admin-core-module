@@ -17,12 +17,8 @@ import {
 } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
-import { isAvo } from '~modules/shared/helpers/is-avo';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/get-color-options';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import {
 	GET_BACKGROUND_ALIGN_OPTIONS,
@@ -155,9 +151,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___achtergrond-kleur'
 				),
-				isAvo()
-					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
-					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 		},
 	},

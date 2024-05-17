@@ -18,6 +18,7 @@ import {
 	BlockKlaar,
 	BlockLogoGridWrapper,
 	BlockMaintainersGrid,
+	BlockOverviewNewspaperTitles,
 	BlockPageOverviewWrapper,
 	BlockProjectSpotlightWrapper,
 	BlockQuote,
@@ -73,6 +74,8 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
+		[ContentBlockType.OverviewNewspaperTitles]: BlockOverviewNewspaperTitles,
+
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
@@ -116,6 +119,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.UspGrid,
 	ContentBlockType.Eventbrite,
 	ContentBlockType.ThreeClickableTiles,
+	ContentBlockType.OverviewNewspaperTitles,
 ];
 
 /**
