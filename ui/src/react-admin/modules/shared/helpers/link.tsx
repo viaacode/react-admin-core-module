@@ -4,6 +4,7 @@ import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
 import { ReactNode } from 'react';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 
 import { APP_PATH } from '../consts/routes.consts';
@@ -57,7 +58,7 @@ export const navigate = (
 	// Abort navigation when params were expected but none were given
 	if (missingParams.length > 0 && (isNil(params) || isEmpty(params))) {
 		navigationConsoleError(route, missingParams);
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: tText('modules/admin/shared/helpers/link___error') || '',
 			description: tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'
@@ -72,7 +73,7 @@ export const navigate = (
 	const builtLink = buildLink(route, params, search);
 
 	if (isEmpty(builtLink)) {
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: tText('modules/admin/shared/helpers/link___error'),
 			description: tText(
 				'shared/helpers/link___de-navigatie-is-afgebroken-wegens-foutieve-parameters'

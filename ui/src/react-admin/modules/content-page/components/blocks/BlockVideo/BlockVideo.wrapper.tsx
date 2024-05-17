@@ -6,6 +6,7 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ItemsService } from '~modules/item/items.service';
+import { showToast } from '~modules/shared/helpers/show-toast';
 import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 import {
 	LoadingErrorLoadedComponent,
@@ -83,7 +84,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 			console.error(
 				new CustomError('Failed to fetch item info from the database', err, { item })
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
 				),

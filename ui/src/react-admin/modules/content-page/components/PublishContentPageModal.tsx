@@ -24,8 +24,8 @@ import { datePickerDefaultProps } from '~modules/content-page/components/DatePic
 
 import { getPublishedState } from '~modules/content-page/helpers';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
 
@@ -70,7 +70,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 			setValidationError(undefined);
 			closeModal(newContent);
 		} catch (err) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/components/publish-content-page-modal___error'
 				),

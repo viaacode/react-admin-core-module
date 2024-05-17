@@ -5,9 +5,9 @@ import { HorizontalPageSplit } from 'react-page-split';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './react-admin/modules/shared/styles/main.scss';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { CustomError } from '~shared/helpers/custom-error';
+import { showToast } from '~shared/helpers/show-toast';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
 import { NavigationItemInfo } from './shared/types';
@@ -29,7 +29,7 @@ function App() {
 			})
 			.catch((err) => {
 				console.error(new CustomError('Failed to get nav items', err));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('app___error'),
 					description: tText('app___het-ophalen-van-de-navigatie-items-is-mislukt'),
 					type: ToastType.ERROR,

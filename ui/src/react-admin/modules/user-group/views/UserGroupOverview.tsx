@@ -13,11 +13,11 @@ import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
 import { PermissionData } from '~modules/permissions/permissions.types';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useGetPermissions } from '~modules/permissions/hooks/data/get-all-permissions';
 import { CustomError } from '~shared/helpers/custom-error';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
@@ -145,7 +145,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 
 				// Fire onChange for parent component
 				onChangePermissions?.(false);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user-group/views/user-group-overview___success'),
 					description: tText(
 						'modules/user-group/views/user-group-overview___de-permissies-werden-succesvol-bewaard'
@@ -158,7 +158,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'UserGroupService.updateUserGroups',
 					})
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user-group/views/user-group-overview___error'),
 					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-bewaren-van-de-permissies'
@@ -224,7 +224,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 						query: 'UserGroupService.getAllUserGroups',
 					})
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user-group/views/user-group-overview___error'),
 					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-gebruikersgroepen'
@@ -237,7 +237,7 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 		useEffect(() => {
 			if (isErrorPermissions) {
 				console.error(new CustomError('Failed to get permissions', permissionsError));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user-group/views/user-group-overview___error'),
 					description: tText(
 						'modules/user-group/views/user-group-overview___er-ging-iets-mis-bij-het-ophalen-van-de-permissies'

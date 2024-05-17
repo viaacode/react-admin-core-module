@@ -31,6 +31,7 @@ import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { showToast } from '~shared/helpers/show-toast';
 import { PermissionService } from '~shared/services/permission-service';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
@@ -317,7 +318,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			await refetchContentPages();
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
 				),
@@ -330,7 +331,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			console.error(
 				new CustomError('Failed to delete content page', err, { contentToDelete })
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
@@ -362,7 +363,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		if (page && page.path) {
 			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),

@@ -1,4 +1,3 @@
-import { AdminConfigManager } from '~core/config';
 import {
 	AlignOption,
 	BackgroundAlignOption,

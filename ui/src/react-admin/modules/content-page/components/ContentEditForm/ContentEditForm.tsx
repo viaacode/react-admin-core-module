@@ -17,18 +17,17 @@ import { type Avo, PermissionName } from '@viaa/avo2-types';
 import { compact, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
 import { LanguageInfo } from '~modules/translations/translations.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
@@ -70,9 +69,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 			value: languageInfo.languageCode,
 		})
 	);
-	const [language, setLanguage] = useState<LanguageCode>(
-		contentPageInfo.language || LanguageCode.Nl
-	);
 	const getParentPagePickerItem = (): PickerItem | null => {
 		if (contentPageInfo.nlParentPageId) {
 			const parentPageInfo = contentPageInfo.translatedPages.find(
@@ -90,7 +86,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		}
 		return null;
 	};
-	const [nlParentPage, setNlParentPage] = useState<PickerItem | null>(getParentPagePickerItem());
 
 	const changeContentPageProp = useCallback(
 		(
@@ -127,7 +122,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 				console.error('Failed to fetch content labels by content type', err, {
 					contentType: contentPageInfo.contentType,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/content-page/components/content-edit-form/content-edit-form___error'
 					),
@@ -137,7 +132,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					type: ToastType.ERROR,
 				});
 			});
-	}, [contentPageInfo.contentType, setContentTypeLabels, tText]);
+	}, [contentPageInfo.contentType, setContentTypeLabels]);
 
 	// Computed
 	const contentTypeOptions = [

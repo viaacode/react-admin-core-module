@@ -7,7 +7,7 @@ import {
 	TextInput,
 } from '@meemoo/react-components';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
-import { orderBy, reverse, sortBy } from 'lodash-es';
+import { reverse, sortBy } from 'lodash-es';
 import React, {
 	FunctionComponent,
 	ReactElement,
@@ -19,7 +19,6 @@ import React, {
 } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { type Row, type TableOptions } from 'react-table';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
@@ -37,6 +36,7 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
@@ -152,7 +152,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 			setActiveTranslationTextValue(null);
 			setActiveTranslationEditorState(null);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/translations/views/translations-overview___success'),
 				description: tText(
 					'modules/translations/views/translations-overview-v-2___de-vertaling-is-opgeslagen'
@@ -161,7 +161,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save translation', err));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/translations/views/translations-overview___error'),
 				description: tText(
 					'modules/translations/views/translations-overview-v-2___het-opslaan-van-de-vertaling-is-mislukt'
@@ -347,7 +347,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 				<CopyToClipboard
 					text={getFullKey(activeTranslationEntry)}
 					onCopy={() =>
-						AdminConfigManager.getConfig().services.toastService.showToast({
+						showToast({
 							title: tText(
 								'modules/translations/views/translations-overview-v-2___gekopieerd'
 							),

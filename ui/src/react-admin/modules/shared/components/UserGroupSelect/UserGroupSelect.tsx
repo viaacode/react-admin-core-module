@@ -1,6 +1,5 @@
 import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
-import { TagInfoSchema } from '@viaa/avo2-components/dist/components/TagsInput/TagsInput';
-import { isEmpty, sortBy } from 'lodash-es';
+import { isEmpty } from 'lodash-es';
 import React, { ChangeEvent, FunctionComponent } from 'react';
 
 import { Checkbox } from '@meemoo/react-components';

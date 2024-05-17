@@ -12,6 +12,7 @@ import { isNull, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '../../helpers/custom-error';
@@ -27,7 +28,6 @@ import { filterTypes, setInitialItem } from './ContentPicker.helpers';
 import './ContentPicker.scss';
 import { parseSearchQuery } from './helpers/parse-picker';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 
 export interface ContentPickerProps {
@@ -108,7 +108,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 						selectedType,
 					})
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/shared/components/content-picker/content-picker___error'
 					),
@@ -168,7 +168,7 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 					selectedItem,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/shared/components/content-picker/content-picker___error'
 				),

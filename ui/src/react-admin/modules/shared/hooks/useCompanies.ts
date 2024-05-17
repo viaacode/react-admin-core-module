@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
 import {
 	BasicOrganisation,
 	OrganisationService,
 } from '~shared/services/organization-service/organisation-service';
 import { CustomError } from '../helpers/custom-error';
-
-import { useTranslation } from './useTranslation';
 
 type UseCompaniesTuple = [BasicOrganisation[], boolean];
 
@@ -29,7 +27,7 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get organisations from database', err));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/shared/hooks/use-companies___error'),
 					description: tText(
 						'settings/components/profile___het-ophalen-van-de-organisaties-is-mislukt'
@@ -40,7 +38,7 @@ export const useCompaniesWithUsers = (): UseCompaniesTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [tHtml]);
+	}, []);
 
 	return [companies, isLoading];
 };

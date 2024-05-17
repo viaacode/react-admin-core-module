@@ -14,7 +14,7 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { isNil, without } from 'lodash-es';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { ToastType } from '~core/config';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
 import { MaintenanceAlertsEditFormProps } from '~modules/maintenance-alerts/maintenance-alerts.types';
@@ -29,6 +29,7 @@ import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { CustomError } from '~shared/helpers/custom-error';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import {
 	ALERTS_FORM_SCHEMA,
@@ -119,7 +120,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					untilDate: values.untilDate.toUTCString(),
 				});
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
 					description: tText(
 						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-gelukt'
@@ -129,7 +130,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			} catch (err) {
 				console.error(new CustomError('Failed to update alert', err));
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
 					description: tText(
 						'react-admin/modules/alerts/views/alerts-overview___het-aanpassen-van-de-melding-is-mislukt'
@@ -141,7 +142,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			try {
 				await MaintenanceAlertsService.insertAlert(values);
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
 					description: tText(
 						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-gelukt'
@@ -151,7 +152,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			} catch (err) {
 				console.error(new CustomError('Failed to create alert', err));
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
 					description: tText(
 						'react-admin/modules/alerts/views/alerts-overview___het-aanmaken-van-de-melding-is-mislukt'
@@ -188,7 +189,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				/>
 			</FormControl>
 		);
-	}, [control, errors.title?.message]);
+	}, [control, errors.title?.message, setValue]);
 
 	const renderMessage = useMemo(() => {
 		return (

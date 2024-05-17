@@ -1,5 +1,5 @@
 import { first, isNil, without } from 'lodash-es';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { ToastType } from '~core/config';
 import { UserTableState } from '~modules/user/user.types';
 import { LomScheme } from '~shared/consts/lom-scheme.enum';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -12,6 +12,7 @@ import {
 	getMultiOptionsFilters,
 	NULL_FILTER,
 } from '~shared/helpers/filters';
+import { showToast } from '~shared/helpers/show-toast';
 
 export const generateWhereObjectAvo = (
 	filters: Partial<UserTableState>,
@@ -137,7 +138,7 @@ export const generateWhereObjectAvo = (
 				{ filters }
 			)
 		);
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: 'Het opbouwen van de filters voor de gebruikers is mislukt',
 			type: ToastType.ERROR,
 		});
@@ -214,7 +215,7 @@ export const generateWhereObjectArchief = (
 				{ filters }
 			)
 		);
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: 'Het opbouwen van de filters voor de gebruikers is mislukt',
 			type: ToastType.ERROR,
 		});

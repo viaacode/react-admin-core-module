@@ -1,15 +1,16 @@
 .braft-output-content p {
-  min-height: 1em
+  min-height: 1em;
 }
 
 .braft-output-content .image-wrap img {
   max-width: 100%;
-  height: auto
+  height: auto;
 }
 
-.braft-output-content ul, .braft-output-content ol {
+.braft-output-content ul,
+.braft-output-content ol {
   margin: 16px 0;
-  padding: 0
+  padding: 0;
 }
 
 .braft-output-content blockquote {
@@ -18,7 +19,7 @@
   background-color: #f1f2f3;
   border-left: solid 5px #ccc;
   color: #666;
-  font-style: italic
+  font-style: italic;
 }
 
 .braft-output-content pre {
@@ -35,10 +36,10 @@
   font-weight: normal;
   line-height: 16px;
   word-wrap: break-word;
-  white-space: pre-wrap
+  white-space: pre-wrap;
 }
 
 .braft-output-content pre pre {
   margin: 0;
-  padding: 0
+  padding: 0;
 }

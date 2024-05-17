@@ -5,20 +5,21 @@
    ========================================================================== */
 
 .c-bordered-list {
-	a, span {
-		display: block;
-		padding: .8rem;
-	}
+  a,
+  span {
+    display: block;
+    padding: 0.8rem;
+  }
 
-	a {
-		text-decoration: none;
-	}
+  a {
+    text-decoration: none;
+  }
 
-	li {
-		border-bottom: .1rem solid color.mix($color-gray-100, $color-gray-150);
-	}
+  li {
+    border-bottom: 0.1rem solid color.mix($color-gray-100, $color-gray-150);
+  }
 }
 
 .c-bordered-list--direct-padding li {
-	padding: .8rem;
+  padding: 0.8rem;
 }

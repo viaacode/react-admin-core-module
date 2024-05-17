@@ -1,14 +1,14 @@
+/* stylelint-disable max-line-length */
 // Avoid collapsing padding and margins: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing
 // We tried
 // * overflow: hidden => causes issues on the homepage of the avo with the search dropdown being cut off
 // * We tried a margin of 0.05px => which causes a single pixel line between blocks with the same background
 // * We tried display flex => which causes issues on safari with blocks: https://meemoo.atlassian.net/browse/ARC-1737
-//
 // * Latest solution: try negative margins of 0.05px
 .c-content-page-preview {
-	overflow-y: auto;
-	padding-top: -0.05px;
-	padding-bottom: -0.05px;
-	margin-top: -0.05px;
-	margin-bottom: -0.05px;
+  overflow-y: auto;
+  padding-top: -0.05px;
+  padding-bottom: -0.05px;
+  margin-top: -0.05px;
+  margin-bottom: -0.05px;
 }

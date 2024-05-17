@@ -56,6 +56,7 @@ import {
 import { CustomError } from '~shared/helpers/custom-error';
 import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
@@ -159,7 +160,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					id,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-edit___error'),
 				description: tText(
 					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
@@ -167,11 +168,11 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				type: ToastType.ERROR,
 			});
 		}
-	}, [id, commonUser, hasPerm, tHtml, tText]);
+	}, [id, commonUser, hasPerm]);
 
 	const handlePasteBlock = useCallback(
 		async (newBlockConfig: Partial<Avo.ContentPage.Block>) => {
-			const spinnerToastId = AdminConfigManager.getConfig().services.toastService.showToast({
+			const spinnerToastId = showToast({
 				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
 				description: tText(
 					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
@@ -194,18 +195,18 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			});
 
 			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText('admin/content/views/content-edit___de-blok-is-toegevoegd'),
 				type: ToastType.SUCCESS,
 			});
 		},
-		[contentPageState?.currentContentPageInfo?.content_blocks, tText]
+		[contentPageState?.currentContentPageInfo?.content_blocks]
 	);
 
 	const handlePasteContentPage = useCallback(
 		async (newContentPageConfig: ContentPageInfo) => {
-			const spinnerToastId = AdminConfigManager.getConfig().services.toastService.showToast({
+			const spinnerToastId = showToast({
 				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
 				description: tText(
 					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
@@ -270,7 +271,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			});
 
 			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText(
 					'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-info-is-overgenomen'
@@ -288,7 +289,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			contentPageState.currentContentPageInfo.content_blocks,
 			contentPageState.currentContentPageInfo.createdAt,
 			contentPageState.currentContentPageInfo.id,
-			tText,
 		]
 	);
 
@@ -307,7 +307,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				}
 			} catch (err) {
 				console.error(new CustomError('Failed to paste content block', err));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/content-page/views/content-page-edit___error'),
 					description: tText(
 						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
@@ -316,7 +316,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				});
 			}
 		},
-		[handlePasteBlock, handlePasteContentPage, tText]
+		[handlePasteBlock, handlePasteContentPage]
 	);
 
 	useEffect(() => {
@@ -401,7 +401,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			if (!isFormValid || !areConfigsValid) {
 				setIsSaving(false);
 				if (!isFormValid) {
-					AdminConfigManager.getConfig().services.toastService.showToast({
+					showToast({
 						title: tText('modules/content-page/views/content-page-edit___error'),
 						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
@@ -410,7 +410,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 					});
 				}
 				if (!areConfigsValid) {
-					AdminConfigManager.getConfig().services.toastService.showToast({
+					showToast({
 						title: tText('modules/content-page/views/content-page-edit___error'),
 						description: tText(
 							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
@@ -497,7 +497,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				insertedOrUpdatedContent as ContentPageInfo
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText(
 					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
@@ -509,7 +509,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page', err));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-edit___error'),
 				description: tText(
 					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'
@@ -748,7 +748,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 									contentPage: contentPageState.currentContentPageInfo,
 								})}
 								onCopy={() =>
-									AdminConfigManager.getConfig().services.toastService.showToast({
+									showToast({
 										title: tText(
 											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
 										),

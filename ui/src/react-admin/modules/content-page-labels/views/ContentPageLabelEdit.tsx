@@ -25,6 +25,7 @@ import {
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink, navigate } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { DefaultComponentProps } from '~shared/types/components';
@@ -139,7 +140,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			const errors = getFormErrors();
 			setFormErrors(errors || {});
 			if (errors) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: 'error',
 					description: tText(
 						'admin/content-page-labels/views/content-page-label-edit___de-invoer-is-ongeldig'
@@ -150,7 +151,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			}
 
 			if (!initialContentPageLabel || !contentPageLabelInfo) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: 'error',
 					description: tText(
 						'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-content-pagina-label-is-mislukt-omdat-het-label-nog-niet-is-geladen'
@@ -174,7 +175,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 					await ContentPageLabelService.updateContentPageLabel(contentPageLabelInfo);
 			}
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page-labels/views/content-page-label-edit___succes'),
 				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___de-content-pagina-label-is-opgeslagen'
@@ -193,7 +194,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 					initialContentPageLabel,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: 'error',
 				description: tText(
 					'admin/content-page-labels/views/content-page-label-edit___het-opslaan-van-het-pagina-label-is-mislukt'

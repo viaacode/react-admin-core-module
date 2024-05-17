@@ -5,154 +5,154 @@
    ========================================================================== */
 
 .u-maximize-height {
-	height: 100% !important;
+  height: 100% !important;
 }
 
 .u-maximize-width {
-	width: 100% !important;
+  width: 100% !important;
 }
 
 .u-float-right {
-	float: right !important;
+  float: right !important;
 }
 
 .u-center-m {
-	margin: 0 auto !important;
+  margin: 0 auto !important;
 }
 
 .u-nowrap {
-	white-space: nowrap !important;
+  white-space: nowrap !important;
 }
 
 .u-position-relative {
-	position: relative !important;
+  position: relative !important;
 }
 
 .u-position-absolute {
-	position: absolute !important;
+  position: absolute !important;
 }
 
 .u-hidden {
-	display: none !important;
+  display: none !important;
 }
 
 .u-opacity-50 {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 .u-scroll {
-	overflow: auto !important;
-	-webkit-overflow-scrolling: touch;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 .u-overflow-hidden,
 .u-kill-scroll {
-	overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 .u-sr-accessible {
-	position: absolute;
-	left: -10000px;
-	top: auto;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .u-sr-accessible-table-cell {
-	display: flex; // Take out of regular table context
-	position: absolute;
-	left: -10000px;
-	top: -10000px;
-	width: 0;
-	height: 1px;
-	overflow: hidden;
-	padding: 0 !important;
-	background-color: #fff;
-	margin: 0 !important;
+  display: flex; // Take out of regular table context
+  position: absolute;
+  left: -10000px;
+  top: -10000px;
+  width: 0;
+  height: 1px;
+  overflow: hidden;
+  padding: 0 !important;
+  background-color: #fff;
+  margin: 0 !important;
 }
 
 .u-limit-width {
-	max-width: 60rem;
+  max-width: 60rem;
 }
 
 @media (min-width: $g-bp3) {
-	.u-limit-width-bp3 {
-		max-width: 60rem;
-	}
+  .u-limit-width-bp3 {
+    max-width: 60rem;
+  }
 }
 
 @media (min-width: $g-bp2) {
-	.u-limit-width-bp2-s {
-		max-width: 32rem;
-	}
+  .u-limit-width-bp2-s {
+    max-width: 32rem;
+  }
 }
 
 .u-text-editable {
-	border-bottom: 1px dotted #666;
-	cursor: pointer;
+  border-bottom: 1px dotted #666;
+  cursor: pointer;
 }
 
 .u-remove-link-styling a,
 .u-remove-link-styling {
-	color: $color-gray-700;
-	text-decoration: none;
+  color: $color-gray-700;
+  text-decoration: none;
 }
 
 .u-clickable {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .u-disable-click {
-	cursor: default;
-	pointer-events: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 .u-flex-auto {
-	flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .u-flex-align {
-	display: flex;
+  display: flex;
 
-	&--start {
-		align-items: flex-start;
-	}
+  &--start {
+    align-items: flex-start;
+  }
 
-	&--center {
-		align-items: center;
-	}
+  &--center {
+    align-items: center;
+  }
 
-	&--end {
-		align-items: flex-end;
-	}
+  &--end {
+    align-items: flex-end;
+  }
 }
 
 .u-content-flex {
-	display: flex;
-	flex: 1 0 auto;
+  display: flex;
+  flex: 1 0 auto;
 
-	&--left {
-		justify-content: flex-start;
-	}
+  &--left {
+    justify-content: flex-start;
+  }
 
-	&--center {
-		justify-content: center;
-	}
+  &--center {
+    justify-content: center;
+  }
 
-	&--right {
-		justify-content: flex-end;
-	}
+  &--right {
+    justify-content: flex-end;
+  }
 }
 
 // Sticky footer with flexbox
 // https://css-tricks.com/couple-takes-sticky-footer/#article-header-id-3
 
 .u-body-flex {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .u-footer-flex {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }

@@ -1,5 +1,5 @@
 import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { ToastType } from '~core/config';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import {
@@ -12,6 +12,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 
 export function getContentPageDescriptionHtml(
@@ -95,7 +96,7 @@ export function convertDbContentBlockToContentBlockConfig(
 						CONTENT_BLOCK_CONFIG_MAP,
 					})
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/admin/content-page/helpers/get-published-state___error'),
 					description: tText(
 						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'

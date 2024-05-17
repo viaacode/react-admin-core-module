@@ -14,6 +14,7 @@ import { Icon } from '~shared/components';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { navigate } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { ValueOf } from '~shared/types';
@@ -122,16 +123,16 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 			!navigationItems?.length
 		) {
 			// Go back to overview if no menu items are present
-			showToast(
-				ToastType.ERROR,
-				tText('modules/navigation/views/navigation-edit___error'),
-				tText(
+			showToast({
+				type: ToastType.ERROR,
+				title: tText('modules/navigation/views/navigation-edit___error'),
+				description: tText(
 					'admin/menu/views/menu-edit___er-werden-geen-navigatie-items-gevonden-voor-menu-name',
 					{
 						menuName: navigationBarName,
 					}
-				)
-			);
+				),
+			});
 
 			history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'));
 		}
@@ -227,26 +228,18 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 						})
 					);
 
-					showToast(
-						ToastType.ERROR,
-						tText('modules/navigation/views/navigation-edit___error'),
-						tText(
+					showToast({
+						type: ToastType.ERROR,
+						title: tText('modules/navigation/views/navigation-edit___error'),
+						description: tText(
 							'admin/menu/views/menu-edit___het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt'
-						)
-					);
+						),
+					});
 				});
 		}
 	}, [currentNavigationItem, checkMenuItemContentPagePermissionsMismatch]);
 
 	// Methods
-	const showToast = (type: ToastType, title: string, description: string): void => {
-		AdminConfigManager.getConfig().services.toastService.showToast({
-			title,
-			description,
-			type,
-		});
-	};
-
 	const handleChange = (
 		key: keyof NavigationItem | 'content',
 		value: ValueOf<NavigationItem> | PickerItem | null
@@ -273,13 +266,13 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 	const handleSave = async () => {
 		try {
 			if (!navigationItems) {
-				showToast(
-					ToastType.ERROR,
-					tText('modules/navigation/views/navigation-edit___error'),
-					tText(
+				showToast({
+					type: ToastType.ERROR,
+					title: tText('modules/navigation/views/navigation-edit___error'),
+					description: tText(
 						'modules/navigation/views/navigation-edit___er-zijn-geen-navigatie-items-om-op-te-slaan'
-					)
-				);
+					),
+				});
 
 				return;
 			}
@@ -324,11 +317,13 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
-				showToast(
-					ToastType.SUCCESS,
-					tText('modules/navigation/views/navigation-edit___success'),
-					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt')
-				);
+				showToast({
+					type: ToastType.SUCCESS,
+					title: tText('modules/navigation/views/navigation-edit___success'),
+					description: tText(
+						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-aangemaakt'
+					),
+				});
 			} else {
 				// Update existing navigation item
 				if (isNil(navigationItemId)) {
@@ -349,11 +344,13 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 					navigationBarId: currentNavigationItem?.placement as string,
 				});
 
-				showToast(
-					ToastType.SUCCESS,
-					tText('modules/navigation/views/navigation-edit___success'),
-					tText('admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet')
-				);
+				showToast({
+					type: ToastType.SUCCESS,
+					title: tText('modules/navigation/views/navigation-edit___success'),
+					description: tText(
+						'admin/menu/views/menu-edit___het-navigatie-item-is-succesvol-geupdatet'
+					),
+				});
 			}
 		} catch (err) {
 			console.error(
@@ -362,11 +359,13 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 				})
 			);
 
-			showToast(
-				ToastType.ERROR,
-				tText('modules/navigation/views/navigation-edit___error'),
-				tText('admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt')
-			);
+			showToast({
+				type: ToastType.ERROR,
+				title: tText('modules/navigation/views/navigation-edit___error'),
+				description: tText(
+					'admin/menu/views/menu-edit___het-updaten-van-het-navigatie-item-is-mislukt'
+				),
+			});
 		}
 
 		setIsSaving(false);
