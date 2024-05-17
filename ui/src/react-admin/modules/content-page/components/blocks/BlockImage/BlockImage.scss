@@ -2,64 +2,64 @@
 @import "../../../../shared/styles/settings/variables";
 
 .o-block-image {
-    padding-top: 0;
-    max-width: 100%;
+	padding-top: 0;
+	max-width: 100%;
 
-    &.o-block-image__page-header-image {
-        background-size: cover;
-        background-position: center;
-    }
+	&.o-block-image__page-header-image {
+		background-size: cover;
+		background-position: center;
+	}
 
-    &.o-block-image__center {
-        margin-left: auto;
-        margin-right: auto;
-    }
+	&.o-block-image__center {
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-    &.o-block-image__right {
-        margin-left: auto;
-        margin-right: 0;
-    }
+	&.o-block-image__right {
+		margin-left: auto;
+		margin-right: 0;
+	}
 
-    &.o-block-image__full-width {
-        .a-block-image__annotation {
-            padding: 10px 20px 0;
-        }
-    }
+	&.o-block-image__full-width {
+		.a-block-image__annotation {
+			padding: 10px 20px 0;
+		}
+	}
 
-    &.o-block-image__page-header {
-        position: relative;
+	&.o-block-image__page-header {
+		position: relative;
 
-        .a-block-image__annotation {
-            padding: 0 20px 10px;
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 0;
-        }
-    }
+		.a-block-image__annotation {
+			padding: 0 20px 10px;
+			position: absolute;
+			top: calc(100% + 10px);
+			left: 0;
+		}
+	}
 
-    .o-block-image__wrapper {
-        position: relative;
+	.o-block-image__wrapper {
+		position: relative;
 
-        .o-block-image__button {
-            position: absolute;
-            bottom: $g-spacer-unit * 2;
+		.o-block-image__button {
+			position: absolute;
+			bottom: $g-spacer-unit * 2;
 
-            &--left {
-                left: $g-spacer-unit * 2;
-            }
+			&--left {
+				left: $g-spacer-unit * 2;
+			}
 
-            &--center {
-                left: 50%;
-                transform: translateX(-50%);
-            }
+			&--center {
+				left: 50%;
+				transform: translateX(-50%);
+			}
 
-            &--right {
-                right: $g-spacer-unit * 2;
-            }
-        }
-    }
+			&--right {
+				right: $g-spacer-unit * 2;
+			}
+		}
+	}
 }
 
 .a-block-image__text {
-    color: $color-gray-200;
+	color: $color-gray-200;
 }

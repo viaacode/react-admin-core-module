@@ -1,23 +1,23 @@
 .c-admin__header {
-    display: flex;
-    align-items: center;
-    padding-bottom: 4rem;
+	display: flex;
+	align-items: center;
+	padding-bottom: 4rem;
 }
 
 .c-admin__page-title {
-    flex-grow: 1;
+	flex-grow: 1;
 }
 
 .c-admin__actions {
-    display: flex;
+	display: flex;
 
-    > * {
-        &:not(:last-child) {
-            margin-right: 0.8rem;
-        }
-    }
+	> * {
+		&:not(:last-child) {
+			margin-right: 0.8rem;
+		}
+	}
 }
 
 .c-admin__content--no-content-padding {
-    padding-bottom: 0 !important;
+	padding-bottom: 0 !important;
 }

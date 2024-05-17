@@ -1,51 +1,51 @@
 .c-file-upload {
-    position: relative;
+	position: relative;
 
-    .a-upload-media-preview {
-        height: 300px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        background-color: #ddd;
+	.a-upload-media-preview {
+		height: 300px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		background-color: #ddd;
 
-        video {
-            width: 100%;
-            height: 100%;
-        }
-    }
+		video {
+			width: 100%;
+			height: 100%;
+		}
+	}
 
-    .a-upload-media-preview,
-    .a-upload-file-preview {
-        position: relative;
+	.a-upload-media-preview,
+	.a-upload-file-preview {
+		position: relative;
 
-        .a-delete-button {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
-    }
+		.a-delete-button {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+	}
 
-    .c-file-upload-button-and-input {
-        position: relative;
-        min-height: 50px;
+	.c-file-upload-button-and-input {
+		position: relative;
+		min-height: 50px;
 
-        &:hover .c-button {
-            background-color: #fff;
-        }
+		&:hover .c-button {
+			background-color: #fff;
+		}
 
-        [class^="Button-module_c-button__label__"] {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+		[class^="Button-module_c-button__label__"] {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
-        input[type="file"] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            opacity: 0.0001;
-        }
-    }
+		input[type="file"] {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			opacity: 0.0001;
+		}
+	}
 }

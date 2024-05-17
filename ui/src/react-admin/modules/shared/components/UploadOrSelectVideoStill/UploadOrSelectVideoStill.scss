@@ -4,85 +4,85 @@
 $image-width: 20rem;
 
 .c-upload-or-select-video-still__modal {
-    .scrollbar-container {
-        flex-flow: row wrap;
-        display: flex;
-        gap: 1rem;
-    }
+	.scrollbar-container {
+		flex-flow: row wrap;
+		display: flex;
+		gap: 1rem;
+	}
 
-    .c-file-upload {
-        display: flex;
-        align-items: center;
-        width: $image-width;
-        height: math.div($image-width, 16) * 9;
-        background-color: #eee;
-        justify-content: center;
-        cursor: pointer;
+	.c-file-upload {
+		display: flex;
+		align-items: center;
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
+		background-color: #eee;
+		justify-content: center;
+		cursor: pointer;
 
-        &:hover {
-            outline: 0.5rem solid $color-primary;
-        }
+		&:hover {
+			outline: 0.5rem solid $color-primary;
+		}
 
-        input {
-            cursor: pointer;
-        }
+		input {
+			cursor: pointer;
+		}
 
-        .o-flex {
-            display: flex;
-            flex-direction: column;
-            width: $image-width;
-            height: math.div($image-width, 16) * 9;
-        }
+		.o-flex {
+			display: flex;
+			flex-direction: column;
+			width: $image-width;
+			height: math.div($image-width, 16) * 9;
+		}
 
-        .o-svg-icon {
-            position: absolute;
-            left: 50%;
-            top: 2rem;
-            transform: translateX(-50%);
-        }
+		.o-svg-icon {
+			position: absolute;
+			left: 50%;
+			top: 2rem;
+			transform: translateX(-50%);
+		}
 
-        .c-file-upload-button-and-input {
-            width: 100%;
-        }
+		.c-file-upload-button-and-input {
+			width: 100%;
+		}
 
-        .c-button {
-            width: 100%;
-            margin-top: 6rem;
-            border: 0;
-            background-color: transparent !important;
-            transition: none;
+		.c-button {
+			width: 100%;
+			margin-top: 6rem;
+			border: 0;
+			background-color: transparent !important;
+			transition: none;
 
-            &:hover {
-                background-color: transparent;
-            }
-        }
+			&:hover {
+				background-color: transparent;
+			}
+		}
 
-        .a-upload-media-preview {
-            display: none;
-        }
-    }
+		.a-upload-media-preview {
+			display: none;
+		}
+	}
 
-    .c-upload-or-select-video-still__spinner {
-        width: $image-width;
-        height: math.div($image-width, 16) * 9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #eee;
-    }
+	.c-upload-or-select-video-still__spinner {
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #eee;
+	}
 
-    .c-upload-or-select-video-still__image {
-        width: $image-width;
-        height: math.div($image-width, 16) * 9;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #666;
-        cursor: pointer;
+	.c-upload-or-select-video-still__image {
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-color: #666;
+		cursor: pointer;
 
-        &:hover,
-        &--selected {
-            outline: 0.5rem solid $color-primary;
-        }
-    }
+		&:hover,
+		&--selected {
+			outline: 0.5rem solid $color-primary;
+		}
+	}
 }

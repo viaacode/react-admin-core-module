@@ -2,53 +2,53 @@
 @import "./react-split-pane";
 
 .c-content-edit-view__sidebar {
-    height: auto;
+	height: auto;
 
-    > .o-sidebar__content {
-        .c-select__control .c-select__placeholder {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+	> .o-sidebar__content {
+		.c-select__control .c-select__placeholder {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
-        > .c-navbar {
-            padding: 1.6rem;
-            height: 70px;
+		> .c-navbar {
+			padding: 1.6rem;
+			height: 70px;
 
-            .c-select__control {
-                border: 1px solid #25a4cf;
-                background-color: #25a4cf;
+			.c-select__control {
+				border: 1px solid #25a4cf;
+				background-color: #25a4cf;
 
-                .c-select__single-value,
-                svg {
-                    color: #fff;
-                }
-            }
+				.c-select__single-value,
+				svg {
+					color: #fff;
+				}
+			}
 
-            .c-select__placeholder {
-                color: #fff;
-            }
-        }
-    }
+			.c-select__placeholder {
+				color: #fff;
+			}
+		}
+	}
 }
 
 .c-content-edit-view__preview {
-    width: 100%;
-    overflow-y: visible;
-    overflow-x: hidden;
-    background-color: white;
+	width: 100%;
+	overflow-y: visible;
+	overflow-x: hidden;
+	background-color: white;
 
-    .c-content-block-preview > .o-container {
-        overflow-wrap: break-word;
-    }
+	.c-content-block-preview > .o-container {
+		overflow-wrap: break-word;
+	}
 }
 
 .c-content-page-edit__nav-bar > .o-container {
-    position: relative;
+	position: relative;
 
-    .c-content-page-edit__copy-page-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+	.c-content-page-edit__copy-page-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
 }

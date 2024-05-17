@@ -11,7 +11,8 @@ module.exports = {
 			options: {
 				singleQuote: false,
 				printWidth: 1000,
-				useTabs: false,
+				useTabs: true,
+				tabWidth: 4,
 			},
 		},
 		{

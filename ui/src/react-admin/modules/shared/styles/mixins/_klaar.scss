@@ -1,36 +1,36 @@
 @mixin klaar-block($background, $foreground, $date, $title) {
-    background-color: #fff;
-    min-height: 48px;
-    margin-bottom: 0;
+	background-color: #fff;
+	min-height: 48px;
+	margin-bottom: 0;
 
-    &__logo {
-        display: inline-block;
-        background-color: $background;
+	&__logo {
+		display: inline-block;
+		background-color: $background;
 
-        span {
-            color: $foreground;
-        }
-    }
+		span {
+			color: $foreground;
+		}
+	}
 
-    &__date {
-        background-color: $date;
-        color: white;
-        margin-left: -4px;
-    }
+	&__date {
+		background-color: $date;
+		color: white;
+		margin-left: -4px;
+	}
 
-    &__titles {
-        color: $title;
-    }
+	&__titles {
+		color: $title;
+	}
 
-    &__logo,
-    &__date,
-    &__h1,
-    &__titles {
-        line-height: 1;
-        font-size: 28px;
-        padding: 10px 15px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        display: inline-block;
-    }
+	&__logo,
+	&__date,
+	&__h1,
+	&__titles {
+		line-height: 1;
+		font-size: 28px;
+		padding: 10px 15px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		display: inline-block;
+	}
 }

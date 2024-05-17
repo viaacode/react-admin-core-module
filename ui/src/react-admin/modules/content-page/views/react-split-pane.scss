@@ -1,29 +1,29 @@
 .react-page-split--horizontal {
-    display: flex;
-    position: relative;
+	display: flex;
+	position: relative;
 
-    > * {
-        width: 100%;
-        overflow-y: auto !important;
-        overflow-x: visible !important;
-        min-width: 10px;
-    }
+	> * {
+		width: 100%;
+		overflow-y: auto !important;
+		overflow-x: visible !important;
+		min-width: 10px;
+	}
 
-    > .react-page-split__divider--horizontal {
-        position: relative;
-        background-color: rgba($color-gray-50, 0.4);
-        height: auto !important;
-        top: 0;
-        bottom: 0;
-        width: 15px;
-        min-width: 15px;
-        cursor: col-resize;
-        overflow: hidden !important;
+	> .react-page-split__divider--horizontal {
+		position: relative;
+		background-color: rgba($color-gray-50, 0.4);
+		height: auto !important;
+		top: 0;
+		bottom: 0;
+		width: 15px;
+		min-width: 15px;
+		cursor: col-resize;
+		overflow: hidden !important;
 
-        // src/react-admin/modules/content-page/assets/draggable.svg
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="6" height="10" viewBox="0 0 6 30"><rect fill="%23666" width="1" height="30" x="0" /><rect fill="%23666" width="1" height="30" x="5" /></svg>');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 15px;
-    }
+		// src/react-admin/modules/content-page/assets/draggable.svg
+		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="6" height="10" viewBox="0 0 6 30"><rect fill="%23666" width="1" height="30" x="0" /><rect fill="%23666" width="1" height="30" x="5" /></svg>');
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 15px;
+	}
 }
