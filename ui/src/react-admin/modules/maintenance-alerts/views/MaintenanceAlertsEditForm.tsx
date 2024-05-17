@@ -426,7 +426,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		return (
 			<FormControl
 				id="new-alert-language"
-				label={tHtml('Taal')}
+				label={tHtml(
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___taal'
+				)}
 				errors={[errors.language?.message]}
 			>
 				<Controller

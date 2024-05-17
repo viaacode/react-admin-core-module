@@ -49,7 +49,7 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<Partial<MaintenanceAler
 		),
 		language: mixed<LanguageCode>()
 			.oneOf(Object.values(LanguageCode))
-			.required(tText('Taal is verplicht')),
+			.required(tText('modules/maintenance-alerts/maintenance-alerts___taal-is-verplicht')),
 	});
 };
 

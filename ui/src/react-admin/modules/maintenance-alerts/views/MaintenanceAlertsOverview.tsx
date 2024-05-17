@@ -215,7 +215,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 			},
 			{
 				id: 'language',
-				label: tText('Taal'),
+				label: tText('modules/maintenance-alerts/views/maintenance-alerts-overview___taal'),
 				sortable: true,
 				visibleByDefault: true,
 				filterType: 'CheckboxDropdownModal',
@@ -235,8 +235,16 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 
 	const renderNoResults = () => {
 		return (
-			<ErrorView message={tHtml('Er zijn nog geen meldingen aangemaakt')}>
-				<p>{tHtml('Er zijn nog geen meldingen aangemaakt')}</p>
+			<ErrorView
+				message={tHtml(
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt'
+				)}
+			>
+				<p>
+					{tHtml(
+						'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-nog-geen-meldingen-aangemaakt'
+					)}
+				</p>
 			</ErrorView>
 		);
 	};
@@ -264,10 +272,12 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 				renderCell={(maintenanceAlert: MaintenanceAlert, columnId: string) =>
 					renderTableCell(maintenanceAlert, columnId as MaintenanceAlertsOverviewTableCol)
 				}
-				searchTextPlaceholder={tText('Zoeken op titel of bericht')}
+				searchTextPlaceholder={tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoeken-op-titel-of-bericht'
+				)}
 				renderNoResults={renderNoResults}
 				noContentMatchingFiltersMessage={tText(
-					'Er zijn geen meldingen gevonden die voldoen aan je zoekterm'
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___er-zijn-geen-meldingen-gevonden-die-voldoen-aan-je-zoekterm'
 				)}
 				itemsPerPage={ITEMS_PER_PAGE}
 				onTableStateChanged={setTableState}
