@@ -5,6 +5,7 @@ import { AdminConfigManager } from '~core/config';
 import {
 	BlockButtonsWrapper,
 	BlockCardsWithoutDescription,
+	BlockContentEnclose,
 	BlockContentPageMeta,
 	BlockCTAsWrapper,
 	BlockEventbrite,
@@ -75,6 +76,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		[ContentBlockType.OverviewNewspaperTitles]: BlockOverviewNewspaperTitles,
+		[ContentBlockType.ContentEncloseGrid]: BlockContentEnclose,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -98,6 +100,7 @@ export const REPEATABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.TagsWithLink,
 	ContentBlockType.CardsWithoutDescription,
+	// ContentBlockType.ContentEncloseGrid,
 ];
 
 /**
@@ -120,6 +123,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.Eventbrite,
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.OverviewNewspaperTitles,
+	ContentBlockType.ContentEncloseGrid,
 ];
 
 /**

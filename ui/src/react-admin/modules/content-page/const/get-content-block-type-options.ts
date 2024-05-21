@@ -145,6 +145,10 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.OverviewNewspaperTitles,
 		},
+		{
+			label: 'ContentEncloseGrid',
+			value: ContentBlockType.ContentEncloseGrid,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object
