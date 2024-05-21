@@ -11,6 +11,7 @@ export const useGetIeObjectsNewspaperTitles = () => {
 		{
 			keepPreviousData: true,
 			enabled: true,
+			stateTime: 3600000
 		}
 	);
 };
