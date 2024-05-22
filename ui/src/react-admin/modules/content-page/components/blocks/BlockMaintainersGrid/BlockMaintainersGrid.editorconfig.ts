@@ -3,14 +3,12 @@ import { tText } from '~shared/helpers/translation-functions';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
-	ContentBlockFieldGroup,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS,
 	DefaultContentBlockState,
 	MaintainersGridBlockComponentState,
 } from '../../../types/content-block.types';
 
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
@@ -92,48 +90,6 @@ export const MAINTAINERS_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig 
 					showNumber: true,
 				} as MultiRangeProps,
 			},
-			maintainers: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___aanbieders'
-				),
-				fields: {
-					imageSrc: FILE_FIELD(
-						tText(
-							'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___een-aanbieder-logo-is-verplicht'
-						),
-						{
-							label: tText(
-								'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___logo'
-							),
-							editorType: ContentBlockEditor.FileUpload,
-						}
-					),
-					linkAction: {
-						label: tText(
-							'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___logo-link'
-						),
-						editorType: ContentBlockEditor.ContentPicker,
-						editorProps: {
-							allowedTypes: [
-								'CONTENT_PAGE',
-								'INTERNAL_LINK',
-								'EXTERNAL_LINK',
-								'ANCHOR_LINK',
-							],
-						},
-					},
-				},
-				type: 'fieldGroup',
-				repeat: {
-					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: tText(
-						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___voeg-aanbieder-toe'
-					),
-					deleteButtonLabel: tText(
-						'react-admin/modules/content-page/components/blocks/block-maintainers-grid/block-maintainers-grid___verwijder-aanbieder'
-					),
-				},
-			} as ContentBlockFieldGroup,
 		},
 	},
 	block: {

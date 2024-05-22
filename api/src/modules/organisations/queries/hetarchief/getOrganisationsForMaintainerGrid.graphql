@@ -1,0 +1,9 @@
+query getOrganisationsForMaintainerGrid {
+ maintainer_organisation {
+    homepage_url
+    schema_name
+    logo
+    schema_identifier
+    slug
+  }
+}

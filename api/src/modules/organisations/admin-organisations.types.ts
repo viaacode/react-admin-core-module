@@ -7,6 +7,14 @@ export interface Organisation {
 	logo_url?: string;
 }
 
+export interface MaintainerGridOrganisation {
+	id: string;
+	name: string;
+	logoUrl: string;
+	homepageUrl: string;
+	slug: string;
+}
+
 export type BasicOrganisation = {
 	or_id: string;
 	name: string;
