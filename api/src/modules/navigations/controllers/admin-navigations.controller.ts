@@ -114,12 +114,12 @@ export class AdminNavigationsController {
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarItemsByPlacement(
 		@Param('placement') placement: string,
-		@Query('language') language?: LanguageCode,
+		@Query('languages') languages?: string, // Comma separated list of LanguageCodes
 		@Query('searchTerm') searchTerm?: string
 	): Promise<NavigationItem[]> {
 		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
 			placement,
-			language,
+			(languages?.length ? languages.split(',') : []) as LanguageCode[],
 			searchTerm
 		);
 	}

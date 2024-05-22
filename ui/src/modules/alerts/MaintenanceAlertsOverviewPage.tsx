@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 import { Button, Modal } from '@meemoo/react-components';
-import { AlertsOverview } from '~modules/alerts/views';
+import MaintenanceAlertsOverview from '~modules/maintenance-alerts/views/MaintenanceAlertsOverview';
 import { tText } from '~shared/helpers/translation-functions';
 
-export const AlertsOverviewPage: FC = () => {
+export const MaintenanceAlertsOverviewPage: FC = () => {
 	const renderPopup = ({
 		title,
 		body,
@@ -46,5 +46,5 @@ export const AlertsOverviewPage: FC = () => {
 		);
 	};
 
-	return <AlertsOverview className="c-alerts-overview" renderPopup={renderPopup} />;
+	return <MaintenanceAlertsOverview className="c-alerts-overview" renderPopup={renderPopup} />;
 };

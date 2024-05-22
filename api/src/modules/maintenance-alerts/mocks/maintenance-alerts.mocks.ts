@@ -5,6 +5,7 @@ import { Idp } from '../../shared/auth/auth.types';
 import {
 	type FindMaintenanceAlertByIdQuery,
 	type FindMaintenanceAlertsQuery,
+	Lookup_Languages_Enum,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { type CreateMaintenanceAlertDto } from '../dto/maintenance-alerts.dto';
 import { type MaintenanceAlert, MaintenanceAlertType } from '../maintenance-alerts.types';
@@ -23,6 +24,7 @@ export const mockGqlMaintenanceAlert1: FindMaintenanceAlertsQuery['app_maintenan
 		'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
+	language: Lookup_Languages_Enum.Nl,
 };
 
 export const mockGqlMaintenanceAlert2: FindMaintenanceAlertByIdQuery['app_maintenance_alerts'][0] =
@@ -40,6 +42,7 @@ export const mockGqlMaintenanceAlert2: FindMaintenanceAlertByIdQuery['app_mainte
 			'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 			'c56d95aa-e918-47ca-b102-486c9449fc4a',
 		],
+		language: Lookup_Languages_Enum.Nl,
 	};
 
 export const mockMaintenanceAlert1: MaintenanceAlert = {
@@ -56,6 +59,7 @@ export const mockMaintenanceAlert1: MaintenanceAlert = {
 		'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
+	language: Lookup_Languages_Enum.Nl,
 };
 
 export const mockMaintenanceAlert2: MaintenanceAlert = {
@@ -72,6 +76,7 @@ export const mockMaintenanceAlert2: MaintenanceAlert = {
 		'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
+	language: Lookup_Languages_Enum.Nl,
 };
 
 export const mockMaintenanceAlert3Faulty: MaintenanceAlert = {
@@ -88,6 +93,7 @@ export const mockMaintenanceAlert3Faulty: MaintenanceAlert = {
 		'0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 		'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	],
+	language: Lookup_Languages_Enum.Nl,
 };
 
 export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
@@ -97,6 +103,7 @@ export const mockNewMaintenanceAlert: CreateMaintenanceAlertDto = {
 	userGroups: mockGqlMaintenanceAlert1.user_groups,
 	fromDate: mockGqlMaintenanceAlert1.from_date,
 	untilDate: mockGqlMaintenanceAlert1.until_date,
+	language: mockGqlMaintenanceAlert1.language,
 };
 
 export const mockMaintenanceAlertsResponse = {
