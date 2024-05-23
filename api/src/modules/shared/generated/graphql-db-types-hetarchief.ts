@@ -3093,7 +3093,7 @@ export enum Lookup_App_Content_Block_Type_Constraint {
 export enum Lookup_App_Content_Block_Type_Enum {
   Accordions = 'ACCORDIONS',
   AnchorLinks = 'ANCHOR_LINKS',
-  BlockOverviewNewspaperTitles = 'BLOCK_OVERVIEW_NEWSPAPER_TITLES',
+  BlockOverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
   Buttons = 'BUTTONS',
   Cards = 'CARDS',
   CardsNoDescription = 'CARDS_NO_DESCRIPTION',
