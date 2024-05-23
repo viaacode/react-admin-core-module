@@ -11,6 +11,7 @@ import { useGetContentBlockEnloseContent } from '~content-blocks/BlockContentEnc
 import { tText } from '~shared/helpers/translation-functions';
 import { compact } from 'lodash-es';
 import Html from '~shared/components/Html/Html';
+import { Link } from '~modules/shared/components/Link';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -69,27 +70,43 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 				{enclosedContent?.map((object: any) => {
 					return (
 						<li className="c-block-enclosed-content__cards__card" key={object?.id}>
-							<div
-								className="c-block-enclosed-content__cards__card__image"
-								style={{
-									backgroundImage: `url( ${object?.thumbnail} )`,
-								}}
-							>
-								{object?.thumbnail
-									? null
-									: tText('Je hebt geen toegang tot deze content')}
-							</div>
-							<div className="c-block-enclosed-content__cards__card__wrapper">
-								<span className="c-block-enclosed-content__cards__card__title">
-									{object?.name || tText('Deze content bestaat niet meer')}
-								</span>
-								<div className="c-block-enclosed-content__cards__card__description-wrapper">
-									<Html
-										content={object?.description}
-										className="c-block-enclosed-content__cards__card__description"
-									/>
+							<Link to="#">
+								<div
+									className="c-block-enclosed-content__cards__card__image"
+									style={{
+										backgroundImage: `url( ${object?.thumbnail} )`,
+									}}
+								>
+									{object?.thumbnail
+										? null
+										: tText('Je hebt geen toegang tot deze content')}
+									<div className="c-block-enclosed-content__cards__card__image__icon">
+										<Icon name={'filter'} />
+									</div>
 								</div>
-							</div>
+								<div className="c-block-enclosed-content__cards__card__wrapper">
+									<span className="c-block-enclosed-content__cards__card__title">
+										{object?.name || tText('Deze content bestaat niet meer')}
+									</span>
+									<div className="c-block-enclosed-content__cards__card__description-wrapper">
+										<Html
+											content={object?.description}
+											className="c-block-enclosed-content__cards__card__description"
+										/>
+									</div>
+								</div>
+								{object?.type === 'OBJECT' ? (
+									<div className={'c-block-enclosed-content__cards__card__meta'}>
+										<div className="c-block-enclosed-content__cards__card__meta__maintainer">
+											{object?.maintainerName}
+										</div>
+										<div className="c-block-enclosed-content__cards__card__meta__date">
+											{object?.dateCreated}
+										</div>
+										<div>{object?.id}</div>
+									</div>
+								) : null}
+							</Link>
 						</li>
 					);
 				})}
