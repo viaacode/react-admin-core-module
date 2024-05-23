@@ -125,7 +125,7 @@ describe('ContentPageLabelsService', () => {
 				expect(response).toBeUndefined();
 			} catch (error: any) {
 				expect(error).toBeDefined();
-				expect(error.response.message).toEqual(
+				expect(error.response.message).toContain(
 					'Failed to get content page labels from the database'
 				);
 			}

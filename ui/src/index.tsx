@@ -1,28 +1,28 @@
 // noinspection ES6PreferShortImport
 
-import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
-import { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
-import React, { FunctionComponent, ReactNode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { TOptions } from 'i18next';
-
-import App from './App';
-import i18n, { initI18n } from './shared/translations/i18n';
-import { Link, useHistory } from 'react-router-dom';
+import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
+import setDefaultOptions from 'date-fns/setDefaultOptions';
+import { TOptions } from 'i18next';
+import { capitalize, lowerCase } from 'lodash-es';
+import React, { FunctionComponent, ReactNode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Link, useHistory } from 'react-router-dom';
 import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
+import { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
+import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
 import {
 	ContentPageInfo,
 	ContentWidth,
 } from '../src/react-admin/modules/content-page/types/content-pages.types';
 import Html from '../src/react-admin/modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
-import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
-import { IconName } from '@viaa/avo2-components';
-import { capitalize, lowerCase } from 'lodash-es';
-import setDefaultOptions from 'date-fns/setDefaultOptions';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
+import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
+
+import App from './App';
+import i18n, { initI18n } from './shared/translations/i18n';
 
 const proxyUrl = 'http://localhost:3100';
 const adminCoreApiUrl = 'http://localhost:3300';
@@ -131,7 +131,7 @@ function setConfig() {
 				clock: { name: 'clock' },
 				export: { name: 'export' },
 				info: { name: 'info' },
-				warning: { name: 'warning' },
+				warning: { name: 'exclamation' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
