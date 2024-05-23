@@ -5,7 +5,6 @@ import { Icon } from '~shared/components';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import {
 	BlockContentEncloseProps,
-	EnclosedContent,
 	MappedObject,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
 import { useGetContentBlockEnloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEnloseContent';
@@ -24,9 +23,6 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	buttonAltTitle,
 	elements,
 }) => {
-	useEffect(() => {
-		console.log('first useEfect', elements);
-	}, [elements]);
 	const ieObjectsIds: (MappedObject | undefined)[] = useMemo(
 		() =>
 			compact(
@@ -43,16 +39,12 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 			),
 		[elements]
 	);
-	useEffect(() => {
-		console.log('second useEffect', ieObjectsIds);
-	}, [ieObjectsIds]);
+
 	const enclosedContent = useGetContentBlockEnloseContent(
 		ieObjectsIds as MappedObject[],
 		elements
 	);
-	useEffect(() => {
-		console.log('after fetch', enclosedContent);
-	}, [enclosedContent]);
+
 	return (
 		<section>
 			<div className="c-block-enclosed-content__header">
@@ -83,16 +75,20 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 									backgroundImage: `url( ${object?.thumbnail} )`,
 								}}
 							>
-								{object?.thumbnail ? null : tText('Deze content bestaat niet meer')}
+								{object?.thumbnail
+									? null
+									: tText('Je hebt geen toegang tot deze content')}
 							</div>
 							<div className="c-block-enclosed-content__cards__card__wrapper">
 								<span className="c-block-enclosed-content__cards__card__title">
 									{object?.name || tText('Deze content bestaat niet meer')}
 								</span>
-								<Html
-									content={object?.description}
-									className="c-block-enclosed-content__cards__card__description"
-								/>
+								<div className="c-block-enclosed-content__cards__card__description-wrapper">
+									<Html
+										content={object?.description}
+										className="c-block-enclosed-content__cards__card__description"
+									/>
+								</div>
 							</div>
 						</li>
 					);
