@@ -16,6 +16,7 @@ import {
 	type FindMaintenanceAlertByIdQuery,
 	type FindMaintenanceAlertsQuery,
 	type InsertMaintenanceAlertMutation,
+	Lookup_Languages_Enum,
 	type UpdateMaintenanceAlertMutation,
 } from 'src/modules/shared/generated/graphql-db-types-hetarchief';
 
@@ -187,6 +188,7 @@ describe('MaintenanceAlertsService', () => {
 				{
 					title: 'Gepland onderhoud updated',
 					type: MaintenanceAlertType.QUESTION,
+					language: Lookup_Languages_Enum.Nl,
 				}
 			);
 			expect(response.id).toBe(mockGqlMaintenanceAlert1.id);

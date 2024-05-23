@@ -66,7 +66,7 @@ describe('NavigationsService', () => {
 		mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 		const response = await navigationsService.findNavigationBarItemsByPlacementId(
 			mockNavigationElement1.placement,
-			LanguageCode.Nl
+			[LanguageCode.Nl]
 		);
 		expect(response.length).toBe(1);
 		expect(response[0].placement).toEqual(mockNavigationElement1.placement);
