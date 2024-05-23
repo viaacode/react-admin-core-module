@@ -30,7 +30,6 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 					if (!element?.mediaItem?.value) {
 						return;
 					}
-					console.log('we here');
 					return {
 						value: element.mediaItem.value,
 						type: element.mediaItem.type,
