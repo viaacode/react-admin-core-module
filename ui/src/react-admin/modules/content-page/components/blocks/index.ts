@@ -31,3 +31,4 @@ export * from './BlockOverviewNewspaperTitles';
 export * from './anchor-links';
 export * from './defaults';
 export * from './search';
+export * from './BlockContentEnclose';

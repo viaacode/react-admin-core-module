@@ -90,6 +90,7 @@ function setConfig() {
 				ContentBlockType.MaintainersGrid,
 				ContentBlockType.HetArchiefHeaderSearch,
 				ContentBlockType.OverviewNewspaperTitles,
+				ContentBlockType.ContentEncloseGrid,
 			],
 			defaultPageWidth: ContentWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
@@ -261,7 +262,7 @@ function setConfig() {
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
 			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
-			getContentPageByLanguageAndPathEndpoint: null,
+			getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
 					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />

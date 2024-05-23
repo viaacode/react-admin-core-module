@@ -155,6 +155,7 @@ export enum ContentBlockType {
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
+	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 }
 
 export enum ContentBlockEditor {
@@ -519,4 +520,9 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 	title: string;
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
+}
+
+export interface HetArchiefIeObject {
+	name: string;
+	schemaIdentifier: string;
 }

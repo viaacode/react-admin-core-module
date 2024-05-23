@@ -34,6 +34,7 @@ import {
 	INITIAL_USP_GRID_COMPONENTS_STATE,
 } from '~modules/content-page/components/blocks';
 import { ContentBlockComponentState, ContentBlockType } from '../types/content-block.types';
+import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 
 export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -74,4 +75,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.MaintainersGrid]: INITIAL_MAINTAINERS_GRID_BLOCK_STATE,
 	[ContentBlockType.HetArchiefHeaderSearch]: INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE,
 	[ContentBlockType.OverviewNewspaperTitles]: INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE,
+	[ContentBlockType.ContentEncloseGrid]: INITIAL_CONTENT_ENCLOSE_BLOCK_STATE,
 };

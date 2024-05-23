@@ -3093,9 +3093,11 @@ export enum Lookup_App_Content_Block_Type_Constraint {
 export enum Lookup_App_Content_Block_Type_Enum {
   Accordions = 'ACCORDIONS',
   AnchorLinks = 'ANCHOR_LINKS',
+  BlockOverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
   Buttons = 'BUTTONS',
   Cards = 'CARDS',
   CardsNoDescription = 'CARDS_NO_DESCRIPTION',
+  ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
   ContentPageMeta = 'CONTENT_PAGE_META',
   Ctas = 'CTAS',
   Eventbrite = 'EVENTBRITE',
