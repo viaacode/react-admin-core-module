@@ -131,6 +131,7 @@ function setConfig() {
 				clock: { name: 'clock' },
 				export: { name: 'export' },
 				info: { name: 'info' },
+				warning: { name: 'warning' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
@@ -261,7 +262,7 @@ function setConfig() {
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
 			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
-			getContentPageByLanguageAndPathEndpoint: null,
+			getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
 					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />

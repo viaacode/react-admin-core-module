@@ -125,8 +125,8 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 
 	// when selecting a type, reset `selectedItem` and retrieve new item options
 	useEffect(() => {
-		fetchPickerOptions(selectedItem?.label || null);
-	}, [fetchPickerOptions, selectedItem]);
+		fetchPickerOptions(null);
+	}, [fetchPickerOptions]);
 
 	// during the first update of `itemOptions`, set the initial value of the item picker
 	useEffect(() => {

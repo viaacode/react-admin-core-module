@@ -521,3 +521,8 @@ export interface HetArchiefHeaderSearchBlockComponentState {
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
 }
+
+export interface HetArchiefIeObject {
+	name: string;
+	schemaIdentifier: string;
+}

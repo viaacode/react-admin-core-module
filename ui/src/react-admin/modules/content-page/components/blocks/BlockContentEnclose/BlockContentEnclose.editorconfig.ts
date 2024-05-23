@@ -6,7 +6,7 @@ import {
 	DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
-import { type Avo, ContentPickerType } from '@viaa/avo2-types';
+import { ContentPickerType } from '@viaa/avo2-types';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import { AdminConfigManager } from '~core/config';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
@@ -16,11 +16,13 @@ export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 	image: '',
 	titleType: 'h4',
 	description: '',
-	objects: [
+	elements: [
 		{
-			label: '',
-			type: 'CONTENT_PAGE',
-			value: '',
+			mediaItem: {
+				label: '',
+				type: 'CONTENT_PAGE',
+				value: '',
+			},
 		},
 	],
 });
@@ -82,7 +84,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				label: 'buttonAction',
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			objects: {
+			elements: {
 				label: 'label',
 				fields: {
 					mediaItem: {
