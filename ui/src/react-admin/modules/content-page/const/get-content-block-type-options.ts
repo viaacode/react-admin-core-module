@@ -139,6 +139,12 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			),
 			value: ContentBlockType.HetArchiefHeaderSearch,
 		},
+		{
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___overzicht-krantentitels'
+			),
+			value: ContentBlockType.OverviewNewspaperTitles,
+		},
 	];
 
 	// Only show the content blocks that the client enabled through the config object

@@ -154,6 +154,7 @@ export enum ContentBlockType {
 	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
+	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 }
 
 export enum ContentBlockEditor {
