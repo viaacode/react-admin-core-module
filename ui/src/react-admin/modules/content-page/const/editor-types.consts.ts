@@ -14,7 +14,7 @@ import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLab
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
+import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';

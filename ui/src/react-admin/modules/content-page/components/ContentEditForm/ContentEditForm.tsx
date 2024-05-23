@@ -1,3 +1,4 @@
+import type { RichEditorState } from '@meemoo/react-components';
 import {
 	Checkbox,
 	Column,
@@ -12,31 +13,17 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import type { RichEditorState } from '@meemoo/react-components';
 import { type Avo, PermissionName } from '@viaa/avo2-types';
 import { compact, noop } from 'lodash-es';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types';
-import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageInfo } from '~modules/translations/translations.types';
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import FileUpload from '~shared/components/FileUpload/FileUpload';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import RichTextEditorWrapper from '~shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
-import { ValueOf } from '~shared/types';
-import { PickerItem } from '~shared/types/content-picker';
-
-import './ContentEditForm.scss';
 import {
 	DEFAULT_PAGES_WIDTH,
 	GET_CONTENT_PAGE_WIDTH_OPTIONS,
 } from '~modules/content-page/const/content-page.consts';
+import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import {
 	ContentEditActionType,
 	ContentEditFormErrors,
@@ -44,6 +31,19 @@ import {
 	ContentPageLabel,
 	ContentWidth,
 } from '~modules/content-page/types/content-pages.types';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { LanguageInfo } from '~modules/translations/translations.types';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import FileUpload from '~shared/components/FileUpload/FileUpload';
+import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { ValueOf } from '~shared/types';
+import { PickerItem } from '~shared/types/content-picker';
+
+import './ContentEditForm.scss';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -229,14 +229,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___omschrijving'
 									)}
 								>
-									<RichTextEditorWrapper
-										initialHtml={(contentPageInfo as any).description || ''}
-										state={
-											(contentPageInfo as any).description_state || undefined
-										}
-										onChange={(state: RichEditorState) =>
-											changeContentPageProp('description_state', state)
-										}
+									<RichTextEditorWithInternalStateWrapper
+										value={(contentPageInfo as any).description || ''}
+										onChange={(html: string) => {
+											if ((contentPageInfo as any).description !== html) {
+												changeContentPageProp('description', html);
+											}
+										}}
 										controls={RICH_TEXT_EDITOR_OPTIONS_FULL}
 										fileType="CONTENT_PAGE_DESCRIPTION_IMAGE"
 										id="description"

@@ -4,18 +4,17 @@ import {
 	type RichTextEditorWithInternalStateProps,
 } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
-import { noop } from 'lodash-es';
 import React, { type FunctionComponent } from 'react';
+
+import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
 import { CustomError } from '../../helpers/custom-error';
 
-import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
-
-import './RichTextEditorWrapper.scss';
+import './RichTextEditorWithInternalStateWrapper.scss';
 
 export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInternalStateProps & {
 	fileType?: Avo.FileUpload.AssetType; // Required to enable file upload
@@ -35,7 +34,7 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 	if ((controls || []).includes('media') && !fileType) {
 		console.error(
 			new CustomError(
-				'Trying to initialize RichTextEditorWrapper component with media without fileType',
+				'Trying to initialize RichTextEditorWithInternalStateWrapper component with media without fileType',
 				null,
 				props
 			)
@@ -92,7 +91,9 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 			controls={controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT}
 			media={media as any}
 			value={value}
-			onChange={onChange || noop}
+			onChange={(newHtml: string) => {
+				onChange?.(newHtml);
+			}}
 		/>
 	);
 };
