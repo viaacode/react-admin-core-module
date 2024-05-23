@@ -11,6 +11,7 @@ import {
 import { useGetContentBlockEnloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEnloseContent';
 import { tText } from '~shared/helpers/translation-functions';
 import { compact } from 'lodash-es';
+import Html from '~shared/components/Html/Html';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -79,19 +80,20 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 							<div
 								className="c-block-enclosed-content__cards__card__image"
 								style={{
-									width: '100%',
-									height: '200px',
-									backgroundImage: `url( https://pic.pnnet.dev/256x256 )`,
+									backgroundImage: `url( ${object?.thumbnail} )`,
 								}}
 							>
-								{object?.thumbnail || tText('Deze content bestaat niet meer')}
+								{object?.thumbnail ? null : tText('Deze content bestaat niet meer')}
 							</div>
-							<span className="c-block-enclosed-content__cards__card__title">
-								{object?.name || tText('Deze content bestaat niet meer')}
-							</span>
-							<p className="c-block-enclosed-content__cards__card__image__description">
-								{object?.description}
-							</p>
+							<div className="c-block-enclosed-content__cards__card__wrapper">
+								<span className="c-block-enclosed-content__cards__card__title">
+									{object?.name || tText('Deze content bestaat niet meer')}
+								</span>
+								<Html
+									content={object?.description}
+									className="c-block-enclosed-content__cards__card__description"
+								/>
+							</div>
 						</li>
 					);
 				})}

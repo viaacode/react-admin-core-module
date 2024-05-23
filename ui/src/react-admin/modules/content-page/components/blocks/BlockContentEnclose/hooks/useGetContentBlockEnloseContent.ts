@@ -13,6 +13,7 @@ import {
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
 import { Avo } from '@viaa/avo2-types';
 import PickerItem = Avo.Core.PickerItem;
+import { compact } from 'lodash-es';
 
 export const useGetContentBlockEnloseContent = (
 	ids: MappedObject[],
@@ -60,7 +61,10 @@ export const useGetContentBlockEnloseContent = (
 		queries: [...(ieObjectIds.length > 0 ? [ieObjectQuery] : []), ...contentPageQueries],
 	});
 
-	return results.flatMap((result: any) => {
+	return compact(results).flatMap((result: any) => {
+		if (!result.data) {
+			return null;
+		}
 		if (Array.isArray(result.data)) {
 			return result.data.map((item: any) => {
 				return {
@@ -76,7 +80,7 @@ export const useGetContentBlockEnloseContent = (
 			id: result.data.id,
 			name: result.data.title,
 			description: result.data.description,
-			thumbnail: result.data.thumbnail_path,
+			thumbnail: result.data.thumbnailPath,
 		};
 	}) as any;
 };
