@@ -127,7 +127,7 @@ export class AdminNavigationsService {
 
 	public async findNavigationBarItemsByPlacementId(
 		placement: string,
-		language?: LanguageCode,
+		languages: LanguageCode[],
 		searchTerm?: string
 	): Promise<NavigationItem[]> {
 		let navigationsResponse:
@@ -135,7 +135,7 @@ export class AdminNavigationsService {
 			| NavigationQueryTypes['GetNavigationItemsByPlacementQuery'];
 		const searchTermDb = '%' + (searchTerm || '') + '%';
 
-		if (language) {
+		if (languages?.length) {
 			navigationsResponse = await this.dataService.execute<
 				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery'],
 				NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQueryVariables']
@@ -144,7 +144,7 @@ export class AdminNavigationsService {
 					.GetNavigationItemsByPlacementAndLanguageDocument,
 				{
 					placement,
-					language,
+					languages,
 					searchTerm: searchTermDb,
 				}
 			);

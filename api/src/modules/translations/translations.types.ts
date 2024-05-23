@@ -32,6 +32,10 @@ export enum ValueType {
 	HTML = 'HTML',
 }
 
+export enum Locale {
+	nl = 'nl',
+	en = 'en',
+}
 export { Lookup_Languages_Enum as LanguageCode };
 
 export interface TranslationEntry {

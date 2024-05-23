@@ -319,7 +319,8 @@ async function combineTranslations(
 		}
 
 		// Output translations for both NL and EN
-		onlineTranslations.forEach((onlineTranslation) => {
+		[LanguageCode.Nl, LanguageCode.En].forEach((languageCode) => {
+			const onlineTranslation = onlineTranslations.find((t) => t.language === languageCode);
 			const entry: TranslationEntry = {
 				app:
 					sourceCodeTranslation?.app ||
@@ -334,7 +335,7 @@ async function combineTranslations(
 					onlineTranslation?.location ||
 					nlJsonTranslation?.location,
 				key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-				language: onlineTranslation.language || LanguageCode.Nl, // All source code translations are dutch, online translation can exist in EN and NL
+				language: languageCode, // All source code translations are dutch, online translation can exist in EN and NL
 				value:
 					onlineTranslation?.value ||
 					nlJsonTranslation?.value ||

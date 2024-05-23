@@ -12,6 +12,7 @@ query findMaintenanceAlerts(
 		from_date
 		until_date
 		user_groups
+		language
 	}
 	app_maintenance_alerts_aggregate(where: $where) {
 		aggregate {

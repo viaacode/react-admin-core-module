@@ -8,19 +8,24 @@ import { compact } from 'lodash-es';
 
 export const useGetNavigationBarItems = (
 	placement?: string,
-	language?: LanguageCode,
+	languages?: LanguageCode[],
 	searchTerm?: string,
 	options?: UseQueryOptions<NavigationItem[], any, NavigationItem[], string[]>
 ) => {
 	return useQuery(
-		compact([QUERY_KEYS.GET_NAVIGATION_BAR_ITEMS, placement, language, searchTerm]),
+		compact([
+			QUERY_KEYS.GET_NAVIGATION_BAR_ITEMS,
+			placement,
+			(languages || []).join(','),
+			searchTerm,
+		]),
 		async () => {
 			if (!placement) {
 				return [];
 			}
 			const navItems = await NavigationService.fetchNavigationBarItems(
 				placement,
-				language,
+				languages,
 				searchTerm
 			);
 			reindexNavigationItems(navItems);
