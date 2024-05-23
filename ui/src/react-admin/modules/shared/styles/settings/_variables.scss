@@ -9,18 +9,28 @@
 /* Typography
    ========================================================================== */
 
-$g-base-font-family: "Montserrat", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
+$g-base-font-family:
+	"Montserrat",
+	-apple-system,
+	blinkmacsystemfont,
+	"Segoe UI",
+	roboto,
+	helvetica,
+	arial,
+	sans-serif;
+/* stylelint-disable max-line-length */
 $g-code-font-family: consolas, "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", monaco, "Courier New", courier, monospace;
+/* stylelint-enable max-line-length */
 $g-base-font-size: 1.5rem;
 $g-base-line-height: 1.5;
 $g-headings-font-weight: 500;
-$g-headings-font-family: "Avenir LT Std", "Avenir Next", avenir,  montserrat, sans-serif;
+$g-headings-font-family: "Avenir LT Std", "Avenir Next", avenir, montserrat, sans-serif;
 
 /* Colors
    ========================================================================== */
 
 $g-text-color: $color-gray-700;
-$g-base-background: #FFF;
+$g-base-background: #fff;
 
 /* Breakpoints
    ========================================================================== */
@@ -56,7 +66,6 @@ $g-bar-size-medium: 4.8rem;
 
 $g-spacer-unit: 0.8rem;
 
-
 /* Form groups
    ========================================================================== */
 
@@ -70,13 +79,11 @@ $o-grid-bp2: 600px;
 $o-grid-bp3: 900px;
 $o-grid-bp4: 1200px;
 
-
 /* Button overrides
    ========================================================================== */
 
 $c-button-hover-border-color: $color-gray-100;
 $c-button-link-color: $color-night-blue;
-
 
 /* Inputs
    ========================================================================== */

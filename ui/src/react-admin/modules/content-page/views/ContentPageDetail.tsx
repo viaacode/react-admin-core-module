@@ -39,6 +39,7 @@ import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOpti
 import { CustomError } from '~shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~shared/helpers/dropdown';
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
@@ -166,7 +167,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			await softDeleteContentPage(id);
 
 			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
 					'admin/content/views/content-detail___het-content-item-is-succesvol-verwijderd'
@@ -175,7 +176,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			});
 		} catch (err) {
 			console.error(err);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
 				description: tText(
 					'admin/content/views/content-detail___het-verwijderen-van-het-content-item-is-mislukt'
@@ -189,7 +190,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		if (contentPageInfo && contentPageInfo.path) {
 			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 		} else {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
 				description: tText(
 					'admin/content/views/content-detail___de-preview-kon-niet-worden-geopend'
@@ -215,7 +216,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					content_blocks: contentPageInfo?.content_blocks || [],
 				});
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/content-page/views/content-page-detail___success'),
 					description: isPublic(newContentPage)
 						? tText(
@@ -233,7 +234,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				contentPage: contentPageInfo,
 			});
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
 				description: tText(
 					'admin/content/views/content-detail___het-opslaan-van-de-publiek-status-van-de-content-pagina-is-mislukt'
@@ -291,7 +292,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	): Promise<void> => {
 		try {
 			if (!contentPageInfo) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/content-page/views/content-page-detail___error'),
 					description: tText(
 						'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
@@ -310,7 +311,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			);
 
 			if (!duplicateContentPage) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/content-page/views/content-page-detail___error'),
 					description: tText(
 						'admin/content/views/content-detail___de-gedupliceerde-content-pagina-kon-niet-worden-gevonden'
@@ -325,7 +326,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					id: duplicateContentPage.id,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___success'),
 				description: tText(
 					'admin/content/views/content-detail___de-content-pagina-is-gedupliceerd'
@@ -337,7 +338,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				originalContentPage: contentPageInfo,
 			});
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
 				description: tText(
 					'admin/content/views/content-detail___het-dupliceren-van-de-content-pagina-is-mislukt'
@@ -454,7 +455,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	// Render
 	const renderContentDetail = (contentPageInfo: ContentPageInfo | null): ReactElement | null => {
 		if (!contentPageInfo) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
 				description: tText(
 					'admin/content/views/content-detail___de-content-pagina-kon-niet-worden-ingeladen'

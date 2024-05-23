@@ -12,6 +12,7 @@ import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { showToast } from '~shared/helpers/show-toast';
 import { useGetIdps } from '~shared/hooks/use-get-idps';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -192,7 +193,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 			if (addOrRemove === 'add') {
 				await UserService.bulkAddSubjectsToProfiles(subjects, compact(selectedProfileIds));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user/views/user-overview___success'),
 					description: tText(
 						'admin/users/views/user-overview___de-vakken-zijn-toegevoegd-aan-de-geselecteerde-gebruikers'
@@ -205,7 +206,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					subjects,
 					compact(selectedProfileIds)
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/user/views/user-overview___success'),
 					description: tText(
 						'admin/users/views/user-overview___de-vakken-zijn-verwijderd-van-de-geselecteerde-gebruikers'
@@ -220,7 +221,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					subjects,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-aanpassen-van-de-vakken-is-mislukt'
@@ -237,7 +238,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				generateWhereObject(getFilters(tableState), false)
 			);
 			const numOfSelectedProfiles = String(profileIds.length);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
 					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd',
@@ -257,7 +258,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				)
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-ophalen-van-alle-geselecteerde-gebruiker-ids-is-mislukt'
@@ -282,7 +283,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				false // TODO sync sendEmail feature
 			);
 			await refetchProfiles();
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
 					blockOrUnblock
@@ -292,7 +293,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-blokkeren-van-de-geselecteerde-gebruikers-is-mislukt'
@@ -357,7 +358,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 				new CustomError('Failed to export users to csv file', err, { tableState })
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-exporteren-van-de-geselecteerde-gebruikers-is-mislukt'
@@ -400,7 +401,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						console.error(
 							new CustomError('Failed to get subjects from the database', err)
 						);
-						AdminConfigManager.getConfig().services.toastService.showToast({
+						showToast({
 							title: tText('modules/user/views/user-overview___error'),
 							description: tText(
 								'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
@@ -414,7 +415,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 
 	const handleOptionClicked = (profileId: string) => {
 		navigator.clipboard.writeText(profileId);
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: tText('modules/user/views/user-overview___success'),
 			description: tText('admin/users/views/user-overview___uuid-gekopieerd'),
 			type: ToastType.SUCCESS,

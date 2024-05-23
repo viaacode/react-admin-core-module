@@ -17,7 +17,8 @@
 			right: 0;
 			width: 100%;
 			height: 0; // Will be overridden by a dynamic style in the ContentBlockPreview component
-			z-index: -1; // put absolutely positioned header background below block content but above the .c-content-block div
+			// put absolutely positioned header background below block content but above the .c-content-block div
+			z-index: -1;
 		}
 
 		.c-content-block-preview {
@@ -30,7 +31,8 @@
 				h4,
 				h5,
 				h6 {
-					// No margins on header blocks, the block margins should handle this: https://meemoo.atlassian.net/browse/AVO-315
+					// No margins on header blocks
+					// the block margins should handle this: https://meemoo.atlassian.net/browse/AVO-315
 					margin: 0;
 				}
 			}

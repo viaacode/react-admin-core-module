@@ -6,12 +6,12 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
 import React, { type FunctionComponent } from 'react';
+import { showToast } from '~shared/helpers/show-toast';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
 import { CustomError } from '../../helpers/custom-error';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { tText } from '~shared/helpers/translation-functions';
 
@@ -70,7 +70,7 @@ const RichTextEditorWrapper: FunctionComponent<RichTextEditorWrapperProps> = (pr
 						return true;
 					}
 
-					AdminConfigManager.getConfig().services.toastService.showToast({
+					showToast({
 						title: tText(
 							'modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error'
 						),

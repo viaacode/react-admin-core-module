@@ -22,6 +22,7 @@ $main-nav-switch-bp-2: 1100px;
 	@media (min-width: $main-nav-switch-bp-1) {
 		display: block;
 	}
+
 	@media (min-width: $main-nav-switch-bp-2) {
 		display: none;
 	}

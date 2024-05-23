@@ -48,6 +48,7 @@ import {
 import { DefaultComponentProps } from '~modules/shared/types';
 
 import './ContentPageLabelOverview.scss';
+import { showToast } from '~modules/shared/helpers/show-toast';
 
 const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
@@ -200,7 +201,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	// Methods
 	const handleDelete = async () => {
 		if (isNil(contentPageLabelIdToDelete)) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'react-admin/modules/content-page-labels/views/content-page-label-overview___error'
 				),
@@ -214,7 +215,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		setIsConfirmModalOpen(false);
 		await ContentPageLabelService.deleteContentPageLabel(contentPageLabelIdToDelete);
 		await fetchContentPageLabels();
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: tText(
 				'react-admin/modules/content-page-labels/views/content-page-label-overview___succes'
 			),

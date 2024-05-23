@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { UserService } from '~modules/user/user.service';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
@@ -21,7 +21,7 @@ export const useBusinessCategories = (): UseBusinessCategoriesTuple => {
 					new CustomError('Failed to get distinct business categories from database', err)
 				);
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/shared/hooks/use-business-category___error'),
 					description: tText(
 						'shared/hooks/use-business-category___het-ophalen-van-de-oormerken-is-mislukt'

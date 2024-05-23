@@ -13,11 +13,11 @@ import {
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
+import { showToast } from '~shared/helpers/show-toast';
 
 import { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import type { Avo } from '@viaa/avo2-types';
 import { tText } from '~shared/helpers/translation-functions';
@@ -83,7 +83,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 							})
 						)
 					);
-					AdminConfigManager.getConfig().services.toastService.showToast({
+					showToast({
 						title: tText(
 							'modules/admin/shared/components/multi-user-select-dropdown/multi-user-select-dropdown___error'
 						),

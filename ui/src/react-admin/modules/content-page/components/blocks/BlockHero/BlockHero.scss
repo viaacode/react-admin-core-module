@@ -7,6 +7,7 @@
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
+
 	@media (min-width: $g-bp2) {
 		padding: 2.4rem;
 		flex-direction: row;
@@ -57,6 +58,7 @@
 		border-radius: 0.4rem;
 		position: relative;
 		z-index: 10;
+
 		@media (max-width: $g-bp2) {
 			margin-bottom: 1.6rem;
 		}
@@ -68,6 +70,7 @@
 	font-size: 3.2rem;
 	margin: 0 0 1.2rem;
 	line-height: 1.25;
+
 	@media (min-width: $g-bp2) {
 		font-size: 3.8rem;
 		margin: 0 0 2rem;

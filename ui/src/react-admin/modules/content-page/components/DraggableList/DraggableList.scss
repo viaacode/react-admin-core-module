@@ -1,15 +1,14 @@
 @use "sass:math";
 @use "sass:color";
-
 @import "../../../shared/styles/settings/colors";
 
-$ghostHeight: 0.5rem;
+$ghost-height: 0.5rem;
 
 .c-draggable-list {
 	margin: 1rem 0;
 
 	.c-draggable-list__item {
-		margin: 1rem 1rem;
+		margin: 1rem;
 		background-color: #fff;
 		border-radius: 0.5rem;
 		border: 0.1rem solid #d6dee3;
@@ -22,6 +21,7 @@ $ghostHeight: 0.5rem;
 			&--highlighted {
 				border-color: $color-teal-bright;
 			}
+
 			&--error {
 				border-color: $color-error;
 			}
@@ -40,6 +40,7 @@ $ghostHeight: 0.5rem;
 
 		.content-block-sidebar-item {
 			width: 100%;
+
 			.c-content-block-form__accordion {
 				border: none;
 				width: 100%;
@@ -61,18 +62,18 @@ $ghostHeight: 0.5rem;
 		pointer-events: none;
 		position: relative;
 
-		&:after {
+		&::after {
 			position: absolute;
 			left: 0;
-			top: -1rem + math.div($ghostHeight, 2);
+			top: -1rem + math.div($ghost-height, 2);
 			content: " ";
-			height: $ghostHeight;
+			height: $ghost-height;
 			width: 100%;
 			transition: width 0.3s ease-out;
 			display: block;
 			background-color: $color-teal-bright;
-			border-radius: math.div($ghostHeight, 2);
-			animation: showAfterDelay 0.05s;
+			border-radius: math.div($ghost-height, 2);
+			animation: show-after-delay 0.05s;
 		}
 	}
 
@@ -83,7 +84,7 @@ $ghostHeight: 0.5rem;
 	}
 }
 
-@keyframes showAfterDelay {
+@keyframes show-after-delay {
 	0% {
 		opacity: 0;
 	}

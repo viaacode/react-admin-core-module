@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { DefaultProps } from '@viaa/avo2-components';
 import {
-	App,
 	Component,
 	Key,
 	LanguageCode,

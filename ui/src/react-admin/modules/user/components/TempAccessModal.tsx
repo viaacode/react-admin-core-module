@@ -14,8 +14,9 @@ import React, { FunctionComponent, useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
 
 interface TempAccessModalProps {
@@ -48,7 +49,7 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 
 		if (validationErrors?.length) {
 			setValidationError(validationErrors);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				type: ToastType.ERROR,
 				description: validationErrors.join(', '),
 			});

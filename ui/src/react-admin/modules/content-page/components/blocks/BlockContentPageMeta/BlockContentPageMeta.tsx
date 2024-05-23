@@ -6,7 +6,7 @@ import { getPublishedDate } from '~modules/content-page/helpers';
 import { ContentPageInfo, ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { navigateToContentType } from '~shared/helpers/link';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { tHtml } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 
 export interface ContentPageMetaProps {

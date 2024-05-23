@@ -32,6 +32,7 @@ import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navi
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 
 import { Link } from '~modules/shared/components/Link';
+import { showToast } from '~modules/shared/helpers/show-toast';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -98,7 +99,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 			await invalidateNavigationQueries();
 			await refetchNavigationItems();
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/navigation/views/navigation-detail___success'),
 				description: tText(
 					'admin/menu/views/menu-detail___het-navigatie-item-is-succesvol-verwijderd'
@@ -107,7 +108,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 			});
 		} catch (err) {
 			console.error(new CustomError('Failed to delete menu item', err, { idToDelete }));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/navigation/views/navigation-detail___error'),
 				description: tText(
 					'admin/menu/views/menu-detail___het-verwijderen-van-het-navigatie-item-is-mislukt'
@@ -130,7 +131,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 
 			await NavigationService.updateNavigationItems(navigationItems);
 			await invalidateNavigationQueries();
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/navigation/views/navigation-detail___success'),
 				description: tText(
 					'admin/menu/views/menu-detail___de-navigatie-items-zijn-succesvol-opgeslagen'
@@ -141,7 +142,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 			console.error(
 				new CustomError('Failed to update menu items', err, { menuItems: navigationItems })
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/navigation/views/navigation-detail___error'),
 				description: tText(
 					'admin/menu/views/menu-detail___het-opslaan-van-de-navigatie-items-is-mislukt'

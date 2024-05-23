@@ -1,12 +1,12 @@
 import { capitalize, orderBy, startCase } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '~shared/helpers/custom-error';
 import { ContentPageLabel } from '../content-page-label.types';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
@@ -36,7 +36,7 @@ export const useContentPageLabelOptions = (): UseContentPageLabelsTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get user group options', err));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/content-page-labels/hooks/use-content-page-label-options___error'
 					),

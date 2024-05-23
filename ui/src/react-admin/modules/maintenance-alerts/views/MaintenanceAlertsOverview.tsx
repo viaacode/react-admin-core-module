@@ -20,6 +20,7 @@ import {
 import { ErrorView } from '~shared/components/error';
 import FilterTable, { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service';
@@ -30,7 +31,7 @@ import {
 } from '../maintenance-alerts.types';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { ToastType } from '~core/config';
 
 const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProps> = ({
 	className,
@@ -92,7 +93,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 		try {
 			await MaintenanceAlertsService.deleteAlert(alertToDeleteId);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
 				description: tText(
 					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-gelukt'
@@ -102,7 +103,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 		} catch (err) {
 			console.error(new CustomError('Failed to delete alert', err));
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('react-admin/modules/alerts/views/alerts-overview___error'),
 				description: tText(
 					'react-admin/modules/alerts/views/alerts-overview___het-verwijderen-van-de-melding-is-mislukt'

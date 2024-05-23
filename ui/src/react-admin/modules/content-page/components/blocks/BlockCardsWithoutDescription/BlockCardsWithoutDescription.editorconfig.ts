@@ -17,7 +17,6 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 
-import { AdminConfigManager } from '~core/config';
 import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import {
