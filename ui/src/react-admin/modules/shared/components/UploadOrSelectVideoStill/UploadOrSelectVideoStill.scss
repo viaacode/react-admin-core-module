@@ -1,24 +1,20 @@
 @use "sass:math";
 @import "../../../shared/styles/settings/colors";
 
-$imageWidth: 20rem;
-
-.c-upload-or-select-video-still {
-}
+$image-width: 20rem;
 
 .c-upload-or-select-video-still__modal {
 	.scrollbar-container {
+		flex-flow: row wrap;
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
 		gap: 1rem;
 	}
 
 	.c-file-upload {
 		display: flex;
 		align-items: center;
-		width: $imageWidth;
-		height: math.div($imageWidth, 16) * 9;
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
 		background-color: #eee;
 		justify-content: center;
 		cursor: pointer;
@@ -34,8 +30,8 @@ $imageWidth: 20rem;
 		.o-flex {
 			display: flex;
 			flex-direction: column;
-			width: $imageWidth;
-			height: math.div($imageWidth, 16) * 9;
+			width: $image-width;
+			height: math.div($image-width, 16) * 9;
 		}
 
 		.o-svg-icon {
@@ -67,8 +63,8 @@ $imageWidth: 20rem;
 	}
 
 	.c-upload-or-select-video-still__spinner {
-		width: $imageWidth;
-		height: math.div($imageWidth, 16) * 9;
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -76,8 +72,8 @@ $imageWidth: 20rem;
 	}
 
 	.c-upload-or-select-video-still__image {
-		width: $imageWidth;
-		height: math.div($imageWidth, 16) * 9;
+		width: $image-width;
+		height: math.div($image-width, 16) * 9;
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;

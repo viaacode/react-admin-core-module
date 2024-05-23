@@ -48,6 +48,7 @@ import {
 import { DefaultComponentProps } from '~modules/shared/types';
 
 import './ContentPageLabelOverview.scss';
+import { showToast } from '~modules/shared/helpers/show-toast';
 
 const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
@@ -65,19 +66,20 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const [contentTypes] = useContentTypes() as [any[], boolean];
 	const { data: allLanguages } = useGetAllLanguages();
 
+	const generateWhereObject = (filters: Partial<ContentPageLabelTableState>) => {
+		const andFilters: any[] = [];
+		andFilters.push(
+			...getQueryFilter(filters.query, (queryWildcard: string) => [
+				{ label: { _ilike: queryWildcard } },
+			])
+		);
+		andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
+		andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
+		return { _and: andFilters };
+	};
+
 	const fetchContentPageLabels = useCallback(async () => {
 		setIsLoading(true);
-		const generateWhereObject = (filters: Partial<ContentPageLabelTableState>) => {
-			const andFilters: any[] = [];
-			andFilters.push(
-				...getQueryFilter(filters.query, (queryWildcard: string) => [
-					{ label: { _ilike: queryWildcard } },
-				])
-			);
-			andFilters.push(...getDateRangeFilters(filters, ['created_at', 'updated_at']));
-			andFilters.push(...getMultiOptionFilters(filters, ['content_type', 'language']));
-			return { _and: andFilters };
-		};
 
 		try {
 			const [contentPageLabelTemp, contentPageLabelCountTemp] =
@@ -199,7 +201,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	// Methods
 	const handleDelete = async () => {
 		if (isNil(contentPageLabelIdToDelete)) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'react-admin/modules/content-page-labels/views/content-page-label-overview___error'
 				),
@@ -213,7 +215,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		setIsConfirmModalOpen(false);
 		await ContentPageLabelService.deleteContentPageLabel(contentPageLabelIdToDelete);
 		await fetchContentPageLabels();
-		AdminConfigManager.getConfig().services.toastService.showToast({
+		showToast({
 			title: tText(
 				'react-admin/modules/content-page-labels/views/content-page-label-overview___succes'
 			),

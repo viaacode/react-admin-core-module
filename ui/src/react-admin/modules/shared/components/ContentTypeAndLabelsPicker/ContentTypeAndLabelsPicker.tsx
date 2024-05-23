@@ -12,12 +12,12 @@ import { compact, get, isNumber, isString } from 'lodash-es';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
+import { showToast } from '~shared/helpers/show-toast';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
 import { ContentPageService } from '../../../content-page/services/content-page.service';
 import { CustomError } from '../../helpers/custom-error';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { tText } from '~shared/helpers/translation-functions';
 
@@ -58,7 +58,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						}
 					)
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
 					),

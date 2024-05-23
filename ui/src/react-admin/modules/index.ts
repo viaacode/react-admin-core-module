@@ -59,7 +59,7 @@ export { default as NavigationEdit } from './navigation/views/NavigationItemEdit
 export { default as NavigationDetail } from './navigation/views/NavigationBarDetail';
 
 // Alerts
-export { default as AlertsOverview } from './alerts/views/AlertsOverview';
+export { default as MaintenanceAlertsOverview } from './maintenance-alerts/views/MaintenanceAlertsOverview';
 
 //Users
 export { UserOverview } from './user/views/UserOverview';

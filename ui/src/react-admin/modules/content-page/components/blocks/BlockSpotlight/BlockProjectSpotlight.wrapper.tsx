@@ -68,7 +68,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 				actionButtons: [],
 			});
 		}
-	}, [elements, setProjectContentPages, setLoadingInfo]);
+	}, [elements, commonUser?.language]);
 
 	useEffect(() => {
 		fetchContentPages();

@@ -8,7 +8,7 @@ $base-font-family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvet
 $base-font-size: 1.6rem !default;
 $base-line-height: 1.5 !default;
 $base-color: $color-gray-700 !default;
-$g-base-background: #FFF !default;
+$g-base-background: #fff !default;
 
 /* Elements
    ========================================================================== */
@@ -19,7 +19,8 @@ $g-base-background: #FFF !default;
 	box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
 	overflow-x: hidden;
 }
 
@@ -29,6 +30,7 @@ html {
 	@media (min-width: $g-bp3) {
 		font-size: 58.33%; // 14px
 	}
+
 	@media (min-width: $g-bp4) {
 		font-size: 62.5%; // Base 10
 	}
@@ -47,7 +49,6 @@ body.c-body-compensate-header {
 	margin: $g-bar-size-regular 0 0;
 }
 
-
 img,
 video {
 	max-width: 100%;
@@ -65,18 +66,20 @@ a {
 	color: $color-primary;
 }
 
-em, i {
+em,
+i {
 	font-style: italic;
 }
 
-strong, b {
+strong,
+b {
 	font-weight: $g-headings-font-weight;
 }
 
 /* Required fields
    ========================================================================== */
 
-   abbr[title] {
+abbr[title] {
 	text-decoration: none;
 	opacity: 0.5;
 }

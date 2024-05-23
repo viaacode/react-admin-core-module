@@ -1,7 +1,7 @@
 import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
 import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
-import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
+import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 
 import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
 

@@ -14,7 +14,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
-import { ReactSelect, Select, SelectOption } from '@meemoo/react-components';
+import { ReactSelect, SelectOption } from '@meemoo/react-components';
 
 import './NavigationEditForm.scss';
 

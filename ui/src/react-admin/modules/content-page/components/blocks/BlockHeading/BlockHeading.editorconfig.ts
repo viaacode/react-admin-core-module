@@ -16,8 +16,6 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 
-import { AdminConfigManager } from '~core/config';
-
 export const INITIAL_HEADING_COMPONENTS_STATE = (): HeadingBlockComponentState => ({
 	children: '',
 	type: 'h2',

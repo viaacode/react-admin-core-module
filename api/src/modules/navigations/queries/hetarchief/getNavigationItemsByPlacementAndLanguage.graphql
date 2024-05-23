@@ -1,13 +1,13 @@
 query getNavigationItemsByPlacementAndLanguage(
 	$placement: String!
-	$language: lookup_languages_enum!
+	$languages: [lookup_languages_enum!]!
 	$searchTerm: String!
 ) {
 	app_navigation(
 		order_by: { position: asc }
 		where: {
 			placement: { _eq: $placement }
-			language: { _eq: $language }
+			language: { _in: $languages }
 			label: { _ilike: $searchTerm }
 		}
 	) {

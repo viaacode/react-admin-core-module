@@ -5,10 +5,9 @@ import { groupBy, intersection } from 'lodash';
 
 import { RequireAnyPermissions } from '../../shared/decorators/require-any-permissions.decorator';
 import { SessionUser } from '../../shared/decorators/user.decorator';
-import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
-import { LanguageCode } from '../../translations';
+import { LanguageCode, Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
 import { NavigationItem } from '../navigations.types';
@@ -36,10 +35,11 @@ export class AdminNavigationsController {
 	})
 	@Get('items')
 	public async getAllNavigationElements(
-		@SessionUser() user: SessionUserEntity
+		@SessionUser() user: SessionUserEntity,
+		@Query('locale') locale?: Locale
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
-			user?.getLanguage() || Lookup_Languages_Enum.Nl
+			(locale?.toUpperCase() || LanguageCode.Nl) as LanguageCode
 		);
 
 		// filter based on logged in / logged out
@@ -114,12 +114,12 @@ export class AdminNavigationsController {
 	@RequireAnyPermissions(PermissionName.EDIT_NAVIGATION_BARS)
 	public async getNavigationBarItemsByPlacement(
 		@Param('placement') placement: string,
-		@Query('language') language?: LanguageCode,
+		@Query('languages') languages?: string, // Comma separated list of LanguageCodes
 		@Query('searchTerm') searchTerm?: string
 	): Promise<NavigationItem[]> {
 		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
 			placement,
-			language,
+			(languages?.length ? languages.split(',') : []) as LanguageCode[],
 			searchTerm
 		);
 	}

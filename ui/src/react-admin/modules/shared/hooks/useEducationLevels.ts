@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
 import { SettingsService } from '../services/settings-service/settings.service';
-import { useTranslation } from './useTranslation';
 
 type UseEducationLevelsTuple = [string[], boolean];
 
@@ -24,7 +23,7 @@ export const useEducationLevels = (): UseEducationLevelsTuple => {
 				console.error(
 					new CustomError('Failed to get educationLevels from the database', err)
 				);
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/shared/hooks/use-education-levels___error'),
 					description: tText(
 						'shared/hooks/use-education-levels___ophalen-van-de-opleidingsniveaus-is-mislukt'
@@ -35,7 +34,7 @@ export const useEducationLevels = (): UseEducationLevelsTuple => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [tHtml]);
+	}, []);
 
 	return [educationLevels, isLoading];
 };

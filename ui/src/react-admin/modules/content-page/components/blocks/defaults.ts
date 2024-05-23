@@ -6,13 +6,13 @@ import {
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
+
+import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
+import { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
-
-import { FileUploadProps } from '../../../shared/components/FileUpload/FileUpload';
-import { UserGroupSelectProps } from '../../../shared/components/UserGroupSelect/UserGroupSelect';
-import { RichTextEditorWrapperProps } from '../../../shared/components/RichTextEditorWrapper/RichTextEditorWrapper';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '../../../shared/consts/rich-text-editor.consts';
 import {
 	Color,
 	ContentBlockEditor,
@@ -143,7 +143,7 @@ export const TEXT_FIELD = (
 	editorProps: {
 		controls: [...RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN, 'media'],
 		fileType: 'CONTENT_BLOCK_IMAGE',
-	} as Partial<RichTextEditorWrapperProps>,
+	} as Partial<RichTextEditorWithInternalStateWrapperProps>,
 	...propOverride,
 });
 

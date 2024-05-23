@@ -31,6 +31,7 @@ import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { formatDateString } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { showToast } from '~shared/helpers/show-toast';
 import { PermissionService } from '~shared/services/permission-service';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
@@ -43,7 +44,7 @@ import { isPublic } from '~modules/content-page/helpers';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
 
-import { AdminConfigManager, IconComponentProps } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
@@ -70,7 +71,6 @@ import {
 	ContentPageInfo,
 	ContentTableState,
 	NOT_TRANSLATION_PREFIX,
-	TranslationFilterValue,
 } from '../types/content-pages.types';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { ErrorView } from '~shared/components/error';
@@ -318,7 +318,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 
 			await ContentPageService.deleteContentPage(contentToDelete.id);
 			await refetchContentPages();
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___success'
 				),
@@ -331,7 +331,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 			console.error(
 				new CustomError('Failed to delete content page', err, { contentToDelete })
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
@@ -363,7 +363,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		if (page && page.path) {
 			navigateToAbsoluteOrRelativeUrl(page.path, history, LinkTarget.Blank);
 		} else {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/content-page/pages/content-page-overview/content-page-overview___error'
 				),
@@ -493,17 +493,29 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 							);
 
 							return (
-								<span
-									className={clsx({
-										'c-content-overview__table__translated_pages__page': true,
-										'c-content-overview__table__translated_pages__page--exists':
-											!!translatedPage,
-										'c-content-overview__table__translated_pages__page--published':
-											translatedPage?.isPublic,
-									})}
+								<Link
+									to={buildLink(
+										AdminConfigManager.getAdminRoute(
+											'ADMIN_CONTENT_PAGE_DETAIL'
+										),
+										{
+											id: translatedPage?.id,
+										}
+									)}
 								>
-									{languageInfo.languageCode}
-								</span>
+									<span
+										className={clsx({
+											'c-content-overview__table__translated_pages__page':
+												true,
+											'c-content-overview__table__translated_pages__page--exists':
+												!!translatedPage,
+											'c-content-overview__table__translated_pages__page--published':
+												translatedPage?.isPublic,
+										})}
+									>
+										{languageInfo.languageCode}
+									</span>
+								</Link>
 							);
 						})}
 					</div>

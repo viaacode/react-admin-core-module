@@ -34,7 +34,7 @@ $c-video-player-progress-inner-bg: $color-teal-bright;
 
 	.c-play-overlay {
 		position: absolute;
-		top: calc(50% - #{math.div($player-play-button-dimensions,  2)});
+		top: calc(50% - #{math.div($player-play-button-dimensions, 2)});
 		left: calc(50% - #{math.div($player-play-button-dimensions, 2)});
 		width: $player-play-button-dimensions;
 		height: $player-play-button-dimensions;

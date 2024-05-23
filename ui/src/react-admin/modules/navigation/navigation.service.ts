@@ -28,7 +28,7 @@ export class NavigationService {
 
 	public static async fetchNavigationBarItems(
 		placement?: string,
-		language?: LanguageCode,
+		languages?: LanguageCode[],
 		searchTerm?: string
 	): Promise<NavigationItem[]> {
 		try {
@@ -36,7 +36,7 @@ export class NavigationService {
 				stringifyUrl({
 					url: this.getBaseUrl() + (placement ? '/' + placement : ''),
 					query: {
-						language,
+						languages: languages?.length ? languages.join(',') : undefined,
 						searchTerm,
 					},
 				})

@@ -16,11 +16,11 @@ import React, { FC, MouseEvent, ReactText, useCallback, useEffect, useState } fr
 import { format, parse, set } from 'date-fns';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { DateInput } from '~shared/components/DateInput/DateInput';
+import { showToast } from '~shared/helpers/show-toast';
 
 import { reorderDate } from '../../helpers/formatters/date';
 import { renderDropdownButton } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { tText } from '~shared/helpers/translation-functions';
 
@@ -178,7 +178,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 				await handleDateChange(null, rangeId);
 			}
 		} catch (err) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'
 				),

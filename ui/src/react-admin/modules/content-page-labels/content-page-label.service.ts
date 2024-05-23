@@ -2,7 +2,6 @@ import type { Avo } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
-import { AdminConfigManager } from '~core/config';
 import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
 import {
 	ContentPageLabel,

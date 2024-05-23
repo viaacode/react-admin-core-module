@@ -20,6 +20,7 @@ import { isNil } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { findImageInJson } from '~shared/helpers/find-image-in-json';
+import { showToast } from '~shared/helpers/show-toast';
 
 import { validateContentBlockField } from '~shared/helpers/validation';
 import {
@@ -35,7 +36,6 @@ import {
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
 import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBlockRenderer.const';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
@@ -275,7 +275,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 						<CopyToClipboard
 							text={JSON.stringify({ block: config })}
 							onCopy={() =>
-								AdminConfigManager.getConfig().services.toastService.showToast({
+								showToast({
 									title: tText(
 										'modules/content-page/components/content-block-form/content-block-form___gekopieerd'
 									),

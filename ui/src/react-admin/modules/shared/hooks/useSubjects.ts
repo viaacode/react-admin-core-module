@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
+import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { CustomError } from '../helpers/custom-error';
 
@@ -21,7 +21,7 @@ export const useSubjects = (): UseSubjectsTuple => {
 			})
 			.catch((err: any) => {
 				console.error(new CustomError('Failed to get subjects from the database', err));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/shared/hooks/use-subjects___error'),
 					description: tText(
 						'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'

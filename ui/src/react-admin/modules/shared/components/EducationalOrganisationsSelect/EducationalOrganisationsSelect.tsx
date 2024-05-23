@@ -5,6 +5,7 @@ import { pullAllBy, remove, uniq } from 'lodash-es';
 import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
 
 import { AdminConfigManager, ToastType } from '~core/config';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
@@ -45,7 +46,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			.catch((err: any) => {
 				console.error(err);
 				console.error(new Error('Failed to get cities'));
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
 					),
@@ -55,7 +56,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					type: ToastType.ERROR,
 				});
 			});
-	}, [setCities, tText]);
+	}, [setCities]);
 
 	useEffect(() => {
 		(async () => {
@@ -90,7 +91,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error('Failed to get educational organizations', err, {
 					selectedCity,
 				});
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText(
 						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 					),
@@ -119,7 +120,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			(org: Avo.EducationOrganization.Organization) => org.organisationLabel === orgLabel
 		);
 		if (!selectedOrg) {
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText(
 					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
 				),

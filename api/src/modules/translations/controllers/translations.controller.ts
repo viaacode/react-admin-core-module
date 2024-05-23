@@ -26,12 +26,18 @@ export class TranslationsController {
 	@Get(':languageCode.json')
 	@ApiParam({
 		name: 'languageCode',
-		enum: LanguageCode,
+		enum: [
+			// NL, EN, nl, en
+			...Object.values(LanguageCode),
+			...Object.values(LanguageCode).map((languageCode) => languageCode.toLowerCase()),
+		],
 	})
 	public async getTranslationsJson(
 		@Param('languageCode') languageCode: LanguageCode
 	): Promise<KeyValueTranslations> {
-		return this.translationsService.getFrontendTranslations(languageCode);
+		return this.translationsService.getFrontendTranslations(
+			languageCode.toUpperCase() as LanguageCode
+		);
 	}
 
 	/**

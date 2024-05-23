@@ -18,6 +18,7 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { showToast } from '~shared/helpers/show-toast';
 import { AVO } from '~shared/types';
 import { DeleteContentCounts } from '../user.types';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -108,7 +109,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 					// selectedUsers: selectedProfileIds,
 				})
 			);
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/components/user-delete-modal___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt',
@@ -495,7 +496,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				transferToUser?.value
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/components/user-delete-modal___success'),
 				description: tText('admin/users/views/user-edit___de-gebruiker-is-aangepast'),
 				type: ToastType.SUCCESS,
@@ -503,7 +504,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteCallback();
 		} catch (err) {
 			console.error(new CustomError('Failed to remove users', err));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/user/components/user-delete-modal___error'),
 				description: tText(
 					'admin/users/views/user-overview___het-verwijderen-van-de-geselecteerde-gebruikers-is-mislukt'

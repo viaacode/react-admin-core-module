@@ -1,12 +1,11 @@
 import { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import { array, date, object, ref, SchemaOf, string } from 'yup';
+import { array, date, mixed, object, ref, SchemaOf, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
 import { ROUTE_PARTS } from '~modules/shared';
 import { SortDirectionParam } from '~modules/shared/helpers/query-params';
-import { AlertFormState } from './alerts.types';
-
-export const ALERTS_PER_PAGE = 20;
+import { LanguageCode } from '~modules/translations/translations.core.types';
+import { MaintenanceAlertFormState } from './maintenance-alerts.types';
 
 export const ALERTS_PATH = {
 	ALERTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
@@ -20,7 +19,7 @@ export const ALERTS_QUERY_PARAM_CONFIG = {
 
 // Yup
 
-export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
+export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<Partial<MaintenanceAlertFormState>> => {
 	return object({
 		title: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___titel-is-verplicht')
@@ -48,6 +47,9 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<AlertFormState> => {
 		type: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___icoon-is-verplicht')
 		),
+		language: mixed<LanguageCode>()
+			.oneOf(Object.values(LanguageCode))
+			.required(tText('modules/maintenance-alerts/maintenance-alerts___taal-is-verplicht')),
 	});
 };
 

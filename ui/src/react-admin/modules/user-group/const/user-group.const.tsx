@@ -5,7 +5,6 @@ import { PermissionData } from '~modules/permissions/permissions.types';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { tText } from '~shared/helpers/translation-functions';
 import { PermissionRow } from '../types/user-group.types';
-import { AdminConfigManager } from '~core/config';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { sortBy } from 'lodash-es';
 

@@ -3,13 +3,13 @@ import type { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';
 import React, { FunctionComponent, useState } from 'react';
+import { showToast } from '~shared/helpers/show-toast';
 import { AssetsService } from '~shared/services/assets-service/assets.service';
 
 import { CustomError } from '../../helpers/custom-error';
 import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import Loader from '../Loader/Loader';
@@ -78,7 +78,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					? files.filter((file) => !allowedTypes.includes(file.type))
 					: [];
 				if (notAllowedFiles.length) {
-					AdminConfigManager.getConfig().services.toastService.showToast({
+					showToast({
 						title: tText(
 							'modules/admin/shared/components/file-upload/file-upload___error'
 						),
@@ -103,7 +103,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				new CustomError('Failed to upload files in FileUpload component', err, { files })
 			);
 			if (files && files.length > 1 && allowMulti) {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
@@ -111,7 +111,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					type: ToastType.ERROR,
 				});
 			} else {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 					description: tText(
 						'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
@@ -150,7 +150,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 		} catch (err) {
 			console.error(new CustomError('Failed to delete asset', err, { urls }));
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 				description: tText(
 					'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'

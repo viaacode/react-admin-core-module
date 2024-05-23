@@ -25,6 +25,7 @@ import {
 	renderDetailRow,
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
+import { showToast } from '~shared/helpers/show-toast';
 import { AdminLayout } from '../../shared/layouts';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
@@ -113,14 +114,14 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 				);
 				await refetchProfileInfo();
 
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					type: ToastType.SUCCESS,
 					description: isBlocked
 						? tText('admin/users/views/user-detail___gebruiker-is-gedeblokkeerd')
 						: tText('admin/users/views/user-detail___gebruiker-is-geblokkeerd'),
 				});
 			} else {
-				AdminConfigManager.getConfig().services.toastService.showToast({
+				showToast({
 					type: ToastType.ERROR,
 					description: tText(
 						'admin/users/views/user-detail___het-updaten-van-de-gebruiker-is-mislukt-omdat-zijn-id-niet-kon-worden-gevonden'
@@ -134,7 +135,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 				})
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				type: ToastType.ERROR,
 				description: tText(
 					'admin/users/views/user-detail___het-updaten-van-de-gebruiker-is-mislukt'
@@ -202,7 +203,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 
 			await refetchProfileInfo();
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				type: ToastType.SUCCESS,
 				description: tText(
 					'admin/users/views/user-detail___tijdelijke-toegang-werd-successvol-geupdated'
@@ -215,7 +216,7 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 				})
 			);
 
-			AdminConfigManager.getConfig().services.toastService.showToast({
+			showToast({
 				type: ToastType.ERROR,
 				description: tText(
 					'admin/users/views/user-detail___het-updaten-van-de-tijdelijke-toegang-is-mislukt'

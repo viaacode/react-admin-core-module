@@ -20,15 +20,14 @@ $c-checkbox-small-size: 1.2rem !default;
 $c-radio-size: 1.6rem !default;
 $c-radio-dot-size: math.div($c-radio-size, 2) !default;
 $c-checkbox-icon-size: 1.6rem !default;
-$c-checkbox-background-color: #FFF !default;
-$c-radio-background-color: #FFF !default;
+$c-checkbox-background-color: #fff !default;
+$c-radio-background-color: #fff !default;
 $c-checkbox-spacing: 0.8rem !default;
 $c-radio-spacing: 0.8rem !default;
 $c-checkbox-spacing-inline: 0.8rem !default;
 $c-radio-spacing-inline: 0.8rem !default;
 $c-checkbox-checked-color: $color-primary !default;
 $c-radio-checked-color: $color-primary !default;
-
 
 /* Labels
    ========================================================================== */
@@ -81,7 +80,7 @@ $c-radio-checked-color: $color-primary !default;
 	&:focus,
 	&:active {
 		outline: 0;
-		box-shadow: 0 0 0 0.2rem rgba($c-checkbox-input-border-color, .5);
+		box-shadow: 0 0 0 0.2rem rgba($c-checkbox-input-border-color, 0.5);
 		border-color: $c-checkbox-input-border-color;
 		transition: 0.14s box-shadow ease-in-out;
 	}
@@ -161,7 +160,7 @@ $c-radio-checked-color: $color-primary !default;
 		border-color: $c-radio-input-border;
 
 		&::before {
-			background-color: #FFF;
+			background-color: #fff;
 		}
 
 		&:checked::before {
@@ -179,7 +178,6 @@ $c-radio-checked-color: $color-primary !default;
 		opacity: 1;
 	}
 }
-
 
 /* Spacing/Grouping
 	 ========================================================================== */

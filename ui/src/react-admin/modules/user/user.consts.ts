@@ -4,7 +4,6 @@ import { PermissionName } from '@viaa/avo2-types';
 import { isAfter, isBefore } from 'date-fns';
 import { compact } from 'lodash-es';
 
-import { I18n } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
