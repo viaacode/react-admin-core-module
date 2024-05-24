@@ -32,7 +32,8 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 					query: {
 						id: ieObjectIds,
 					},
-				})
+				}),
+				{ headers: { referer: window.location.origin } }
 			),
 		keepPreviousData: true,
 		enabled: ieObjectIds.length > 0,

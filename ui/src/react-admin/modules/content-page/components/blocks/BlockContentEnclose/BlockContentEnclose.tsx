@@ -7,11 +7,11 @@ import {
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
 import { useGetContentBlockEncloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { Link } from '~modules/shared/components/Link';
 import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
-import { Link } from '~modules/shared/components/Link';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -66,15 +66,15 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 			<ul className="c-block-enclosed-content__cards">
 				{elementInfos?.map((elementInfo: any) => {
 					return (
-						<li className="c-block-enclosed-content__cards__card" key={object?.id}>
+						<li className="c-block-enclosed-content__cards__card" key={elementInfo?.id}>
 							<Link to="#">
 								<div
 									className="c-block-enclosed-content__cards__card__image"
 									style={{
-										backgroundImage: `url( ${object?.thumbnail} )`,
+										backgroundImage: `url( ${elementInfo?.thumbnail} )`,
 									}}
 								>
-									{object?.thumbnail
+									{elementInfo?.thumbnail
 										? null
 										: tText('Je hebt geen toegang tot deze content')}
 									<div className="c-block-enclosed-content__cards__card__image__icon">
@@ -83,24 +83,25 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 								</div>
 								<div className="c-block-enclosed-content__cards__card__wrapper">
 									<span className="c-block-enclosed-content__cards__card__title">
-										{object?.name || tText('Deze content bestaat niet meer')}
+										{elementInfo?.name ||
+											tText('Je hebt geen toegang tot deze content')}
 									</span>
 									<div className="c-block-enclosed-content__cards__card__description-wrapper">
 										<Html
-											content={object?.description}
+											content={elementInfo?.description}
 											className="c-block-enclosed-content__cards__card__description"
 										/>
 									</div>
 								</div>
-								{object?.type === 'OBJECT' ? (
+								{elementInfo?.type === 'OBJECT' ? (
 									<div className={'c-block-enclosed-content__cards__card__meta'}>
 										<div className="c-block-enclosed-content__cards__card__meta__maintainer">
-											{object?.maintainerName}
+											{elementInfo?.maintainerName}
 										</div>
 										<div className="c-block-enclosed-content__cards__card__meta__date">
-											{object?.dateCreated}
+											{elementInfo?.dateCreated}
 										</div>
-										<div>{object?.id}</div>
+										<div>{elementInfo?.id}</div>
 									</div>
 								) : null}
 							</Link>
