@@ -65,11 +65,11 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 					id: item.maintainerId,
 					name: item.name,
 					description: item.description,
-					thumbnail: item.thumbnail_path,
+					thumbnail: item.thumbnailUrl,
 					dateCreated: item.dateCreatedLowerBound,
 					maintainerName: item.maintainerName,
 					icon: item.ebucoreObjectType,
-					type: 'OBJECT',
+					type: 'IE_OBJECT',
 				};
 			});
 		}

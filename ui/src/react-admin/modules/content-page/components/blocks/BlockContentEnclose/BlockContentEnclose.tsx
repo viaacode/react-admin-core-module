@@ -71,7 +71,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 								<div
 									className="c-block-enclosed-content__cards__card__image"
 									style={{
-										backgroundImage: `url( ${elementInfo?.thumbnail} )`,
+										backgroundImage: `url(${elementInfo?.thumbnail})`,
 									}}
 								>
 									{elementInfo?.thumbnail
@@ -93,7 +93,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 										/>
 									</div>
 								</div>
-								{elementInfo?.type === 'OBJECT' ? (
+								{elementInfo?.type === 'IE_OBJECT' ? (
 									<div className={'c-block-enclosed-content__cards__card__meta'}>
 										<div className="c-block-enclosed-content__cards__card__meta__maintainer">
 											{elementInfo?.maintainerName}
