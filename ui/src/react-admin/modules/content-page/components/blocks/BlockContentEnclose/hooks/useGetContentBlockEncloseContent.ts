@@ -68,10 +68,14 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 		if (Array.isArray(result.data)) {
 			return result.data.map((item: any) => {
 				return {
-					id: item.id,
+					id: item.maintainerId,
 					name: item.name,
 					description: item.description,
 					thumbnail: item.thumbnail_path,
+					dateCreated: item.dateCreatedLowerBound,
+					maintainerName: item.maintainerName,
+					icon: item.ebucoreObjectType,
+					type: 'OBJECT',
 				};
 			});
 		}
@@ -81,6 +85,7 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 			name: result.data.title,
 			description: result.data.description,
 			thumbnail: result.data.thumbnailPath,
+			type: 'CONTENT_PAGE',
 		};
 	}) as any;
 };
