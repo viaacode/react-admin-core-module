@@ -20,7 +20,7 @@ export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 		{
 			mediaItem: {
 				label: '',
-				type: ContentPickerType.IE_OBJECT,
+				type: 'IE_OBJECT',
 				value: '',
 			},
 		},
@@ -91,10 +91,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						label: 'content enclose',
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
-							allowedTypes: [
-								ContentPickerType.CONTENT_PAGE,
-								ContentPickerType.IE_OBJECT,
-							] as ContentPickerType[],
+							allowedTypes: ['CONTENT_PAGE', 'IE_OBJECT'] as ContentPickerType[],
 						},
 					},
 				},

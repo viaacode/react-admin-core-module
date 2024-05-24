@@ -1,5 +1,4 @@
 import { useQueries } from '@tanstack/react-query';
-import { ContentPickerType } from '@viaa/avo2-types';
 import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 import {
@@ -15,26 +14,20 @@ import {
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetContentBlockEncloseContent = (ids: MappedElement[]): EnclosedContent[] => {
-	const ieObjectIds = ids
-		.filter((id) => id.type === ContentPickerType.IE_OBJECT)
-		.map((id) => id.value);
+	const ieObjectIds = ids.filter((id) => id.type === 'IE_OBJECT').map((id) => id.value);
 
-	const contentPageIds = ids
-		.filter((id) => id.type === ContentPickerType.CONTENT_PAGE)
-		.map((id) => id.value);
+	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
 
+	const url = stringifyUrl({
+		url: `${getProxyUrl()}/ie-objects`,
+		query: {
+			id: ieObjectIds,
+		},
+	});
 	const ieObjectQuery = {
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT],
 		queryFn: () =>
-			fetchWithLogoutJson<any[]>(
-				stringifyUrl({
-					url: `${getProxyUrl()}/ie-objects`,
-					query: {
-						id: ieObjectIds,
-					},
-				}),
-				{ headers: { referer: window.location.origin } }
-			),
+			fetchWithLogoutJson<any[]>(url, { headers: { referer: window.location.origin } }),
 		keepPreviousData: true,
 		enabled: ieObjectIds.length > 0,
 	};
