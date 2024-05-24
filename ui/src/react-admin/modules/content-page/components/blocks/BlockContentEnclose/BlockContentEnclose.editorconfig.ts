@@ -1,3 +1,7 @@
+import { ContentPickerType } from '@viaa/avo2-types';
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
+import { AdminConfigManager } from '~core/config';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -5,10 +9,6 @@ import {
 	DEFAULT_BUTTON_PROPS,
 	DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
-import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
-import { ContentPickerType } from '@viaa/avo2-types';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { AdminConfigManager } from '~core/config';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 
 export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
@@ -20,7 +20,7 @@ export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 		{
 			mediaItem: {
 				label: '',
-				type: 'CONTENT_PAGE',
+				type: ContentPickerType.IE_OBJECT,
 				value: '',
 			},
 		},
@@ -91,7 +91,10 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 						label: 'content enclose',
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
-							allowedTypes: ['CONTENT_PAGE', 'OBJECT'] as ContentPickerType[],
+							allowedTypes: [
+								ContentPickerType.CONTENT_PAGE,
+								ContentPickerType.IE_OBJECT,
+							] as ContentPickerType[],
 						},
 					},
 				},

@@ -1,27 +1,27 @@
 import { useQueries } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~shared/types';
+import { ContentPickerType } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
+import { stringifyUrl } from 'query-string';
+import {
+	EnclosedContent,
+	MappedElement,
+} from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { stringifyUrl } from 'query-string';
-import { LanguageCode } from '~modules/translations/translations.core.types';
-import {
-	EnclosedContent,
-	MappedObject,
-} from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { Avo } from '@viaa/avo2-types';
-import PickerItem = Avo.Core.PickerItem;
-import { compact } from 'lodash-es';
+import { QUERY_KEYS } from '~shared/types';
 
-export const useGetContentBlockEnloseContent = (
-	ids: MappedObject[],
-	originalElements: { mediaItem: PickerItem }[]
-): EnclosedContent[] => {
-	const ieObjectIds = ids.filter((id) => id.type === 'OBJECT').map((id) => id.value);
+export const useGetContentBlockEncloseContent = (ids: MappedElement[]): EnclosedContent[] => {
+	const ieObjectIds = ids
+		.filter((id) => id.type === ContentPickerType.IE_OBJECT)
+		.map((id) => id.value);
 
-	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
+	const contentPageIds = ids
+		.filter((id) => id.type === ContentPickerType.CONTENT_PAGE)
+		.map((id) => id.value);
 
 	const ieObjectQuery = {
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT],

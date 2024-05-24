@@ -1,16 +1,16 @@
-import React, { FC, useEffect, useMemo } from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading';
 import { Button } from '@viaa/avo2-components';
-import { Icon } from '~shared/components';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { compact } from 'lodash-es';
+import React, { FC, useMemo } from 'react';
 import {
 	BlockContentEncloseProps,
-	MappedObject,
+	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { useGetContentBlockEnloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEnloseContent';
-import { tText } from '~shared/helpers/translation-functions';
-import { compact } from 'lodash-es';
+import { useGetContentBlockEncloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent';
+import { BlockHeading } from '~content-blocks/BlockHeading';
+import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -23,7 +23,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	buttonAltTitle,
 	elements,
 }) => {
-	const ieObjectsIds: (MappedObject | undefined)[] = useMemo(
+	const elementTypeAndIds: (MappedElement | undefined)[] = useMemo(
 		() =>
 			compact(
 				elements.map((element) => {
@@ -39,10 +39,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 		[elements]
 	);
 
-	const enclosedContent = useGetContentBlockEnloseContent(
-		ieObjectsIds as MappedObject[],
-		elements
-	);
+	const elementInfos = useGetContentBlockEncloseContent(elementTypeAndIds as MappedElement[]);
 
 	return (
 		<section>
@@ -65,26 +62,27 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 					)}
 			</div>
 			<ul className="c-block-enclosed-content__cards">
-				{enclosedContent?.map((object: any) => {
+				{elementInfos?.map((elementInfo: any) => {
 					return (
-						<li className="c-block-enclosed-content__cards__card" key={object?.id}>
+						<li className="c-block-enclosed-content__cards__card" key={elementInfo?.id}>
 							<div
 								className="c-block-enclosed-content__cards__card__image"
 								style={{
-									backgroundImage: `url( ${object?.thumbnail} )`,
+									backgroundImage: `url( ${elementInfo?.thumbnail} )`,
 								}}
 							>
-								{object?.thumbnail
+								{elementInfo?.thumbnail
 									? null
 									: tText('Je hebt geen toegang tot deze content')}
 							</div>
 							<div className="c-block-enclosed-content__cards__card__wrapper">
 								<span className="c-block-enclosed-content__cards__card__title">
-									{object?.name || tText('Je hebt geen toegang tot dit object')}
+									{elementInfo?.name ||
+										tText('Je hebt geen toegang tot dit object')}
 								</span>
 								<div className="c-block-enclosed-content__cards__card__description-wrapper">
 									<Html
-										content={object?.description}
+										content={elementInfo?.description}
 										className="c-block-enclosed-content__cards__card__description"
 									/>
 								</div>
