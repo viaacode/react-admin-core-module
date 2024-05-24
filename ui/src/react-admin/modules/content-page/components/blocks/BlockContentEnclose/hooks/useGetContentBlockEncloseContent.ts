@@ -1,39 +1,33 @@
 import { useQueries } from '@tanstack/react-query';
-import { QUERY_KEYS } from '~shared/types';
+import { compact } from 'lodash-es';
+import { stringifyUrl } from 'query-string';
+import {
+	EnclosedContent,
+	MappedElement,
+} from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
+import { LanguageCode } from '~modules/translations/translations.core.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { stringifyUrl } from 'query-string';
-import { LanguageCode } from '~modules/translations/translations.core.types';
-import {
-	EnclosedContent,
-	MappedObject,
-} from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { Avo } from '@viaa/avo2-types';
-import PickerItem = Avo.Core.PickerItem;
-import { compact } from 'lodash-es';
+import { QUERY_KEYS } from '~shared/types';
 
-export const useGetContentBlockEnloseContent = (
-	ids: MappedObject[],
-	originalElements: { mediaItem: PickerItem }[]
-): EnclosedContent[] => {
-	const ieObjectIds = ids.filter((id) => id.type === 'OBJECT').map((id) => id.value);
+export const useGetContentBlockEncloseContent = (ids: MappedElement[]): EnclosedContent[] => {
+	const ieObjectIds = ids.filter((id) => id.type === 'IE_OBJECT').map((id) => id.value);
 
 	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
 
+	const url = stringifyUrl({
+		url: `${getProxyUrl()}/ie-objects`,
+		query: {
+			id: ieObjectIds,
+		},
+	});
 	const ieObjectQuery = {
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT],
 		queryFn: () =>
-			fetchWithLogoutJson<any[]>(
-				stringifyUrl({
-					url: `${getProxyUrl()}/ie-objects`,
-					query: {
-						id: ieObjectIds,
-					},
-				})
-			),
+			fetchWithLogoutJson<any[]>(url, { headers: { referer: window.location.origin } }),
 		keepPreviousData: true,
 		enabled: ieObjectIds.length > 0,
 	};
@@ -71,11 +65,11 @@ export const useGetContentBlockEnloseContent = (
 					id: item.maintainerId,
 					name: item.name,
 					description: item.description,
-					thumbnail: item.thumbnail_path,
+					thumbnail: item.thumbnailUrl,
 					dateCreated: item.dateCreatedLowerBound,
 					maintainerName: item.maintainerName,
 					icon: item.ebucoreObjectType,
-					type: 'OBJECT',
+					type: 'IE_OBJECT',
 				};
 			});
 		}
