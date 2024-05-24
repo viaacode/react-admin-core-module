@@ -3,7 +3,7 @@ import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import type { Avo } from '@viaa/avo2-types';
 
@@ -158,7 +158,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					options={languageOptions}
 					value={
 						languageOptions.find(
-							(option) => option.value === (formState.language || LanguageCode.Nl)
+							(option) => option.value === (formState.language || Locale.Nl)
 						) || languageOptions[0]
 					}
 					onChange={(evt) => onChange('language', (evt as SelectOption).value)}

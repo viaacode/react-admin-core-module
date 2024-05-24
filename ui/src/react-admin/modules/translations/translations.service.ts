@@ -1,7 +1,7 @@
 import {
 	Component,
 	Key,
-	LanguageCode,
+	Locale,
 	Location,
 	TranslationEntry,
 } from '~modules/translations/translations.core.types';
@@ -44,7 +44,7 @@ export class TranslationsService {
 		component: Component,
 		location: Location,
 		key: Key,
-		languageCode: LanguageCode,
+		languageCode: Locale,
 		value: string
 	) {
 		try {

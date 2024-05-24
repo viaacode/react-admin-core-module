@@ -5,7 +5,7 @@ import {
 	EnclosedContent,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
@@ -42,7 +42,7 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 				stringifyUrl({
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/by-language-and-path`,
 					query: {
-						language: LanguageCode.Nl,
+						language: Locale.Nl,
 						path: id,
 						onlyInfo: 'false',
 					},

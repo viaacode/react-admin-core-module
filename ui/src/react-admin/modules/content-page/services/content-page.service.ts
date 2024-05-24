@@ -12,7 +12,7 @@ import {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -369,7 +369,7 @@ export class ContentPageService {
 	 * @param onlyInfo only include info about the content page, do not resolve media info inside the content page blocks
 	 */
 	public static async getContentPageByLanguageAndPath(
-		language: LanguageCode,
+		language: Locale,
 		path: string,
 		onlyInfo = false
 	): Promise<ContentPageInfo | null> {
@@ -410,7 +410,7 @@ export class ContentPageService {
 	 * @return returns the title of the page if it exists, otherwise returns null
 	 */
 	public static async doesContentPageLanguageAndPathExist(
-		language: LanguageCode,
+		language: Locale,
 		path: string,
 		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {

@@ -21,7 +21,7 @@ import { MaintenanceAlertsEditFormProps } from '~modules/maintenance-alerts/main
 import { Icon } from '~modules/shared/components';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { LanguageInfo } from '~modules/translations/translations.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { DateInput } from '~shared/components/DateInput/DateInput';
@@ -59,7 +59,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59),
 			userGroups: maintenanceAlert?.userGroups || [],
 			type: maintenanceAlert?.type || '',
-			language: maintenanceAlert?.language || LanguageCode.Nl,
+			language: maintenanceAlert?.language || Locale.Nl,
 		} as MaintenanceAlertFormState;
 	}, [maintenanceAlert]);
 
@@ -439,15 +439,15 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 						<ReactSelect
 							options={languageOptions}
 							onChange={(option) => {
-								const language: LanguageCode | null = ((
+								const language: Locale | null = ((
 									option as { label: string; value: string }
-								)?.value ?? LanguageCode.Nl) as LanguageCode;
+								)?.value ?? Locale.Nl) as Locale;
 
 								setValue('language', language);
 							}}
 							value={
 								languageOptions.find((option) => option.value === field.value) ||
-								languageOptions.find((option) => option.value === LanguageCode.Nl)
+								languageOptions.find((option) => option.value === Locale.Nl)
 							}
 						/>
 					)}

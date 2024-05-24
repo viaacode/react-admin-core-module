@@ -15,9 +15,9 @@ export enum ValueType {
 	HTML = 'HTML',
 }
 
-export enum LanguageCode {
-	Nl = 'NL',
-	En = 'EN',
+export enum Locale {
+	Nl = 'nl',
+	En = 'en',
 }
 
 export interface TranslationEntry {
@@ -25,7 +25,7 @@ export interface TranslationEntry {
 	component: Component;
 	location: Location;
 	key: Key;
-	language: LanguageCode;
+	language: Locale;
 	value: string;
 	value_type: ValueType | null;
 }

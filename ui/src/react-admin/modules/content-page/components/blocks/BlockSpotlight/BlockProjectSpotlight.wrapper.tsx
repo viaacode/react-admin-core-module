@@ -3,7 +3,7 @@ import { type Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
 import {
 	LoadingErrorLoadedComponent,
@@ -44,7 +44,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 					if (projectPath?.toString()) {
 						try {
 							return await ContentPageService.getContentPageByLanguageAndPath(
-								(commonUser?.language || LanguageCode.Nl) as LanguageCode,
+								(commonUser?.language || Locale.Nl) as Locale,
 								projectPath.toString(),
 								true
 							);

@@ -1,7 +1,7 @@
 query getNlParentContentPagesByTitle($limit: Int!, $title: String!) {
 	app_content(
 		limit: $limit
-		where: { title: { _ilike: $title }, language: { _eq: NL }, is_deleted: { _eq: false } }
+		where: { title: { _ilike: $title }, language: { _eq: nl }, is_deleted: { _eq: false } }
 		order_by: { title: asc }
 	) {
 		id

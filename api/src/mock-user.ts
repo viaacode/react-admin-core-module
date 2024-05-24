@@ -11,7 +11,7 @@ export const mockUserAvo: Avo.User.User = {
 	is_blocked: false,
 	profile: {
 		id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
-		language: 'NL' as LanguageCode,
+		language: 'nl' as LanguageCode,
 		alias: 'bert_verhelst',
 		title: 'Developer1',
 		alternative_email: 'verhelstbert@gmail.comaaaaaaa',

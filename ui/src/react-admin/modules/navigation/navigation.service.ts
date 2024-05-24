@@ -1,5 +1,5 @@
 import { stringifyUrl } from 'query-string';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -28,7 +28,7 @@ export class NavigationService {
 
 	public static async fetchNavigationBarItems(
 		placement?: string,
-		languages?: LanguageCode[],
+		languages?: Locale[],
 		searchTerm?: string
 	): Promise<NavigationItem[]> {
 		try {
