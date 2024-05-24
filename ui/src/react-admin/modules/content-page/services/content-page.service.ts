@@ -383,7 +383,6 @@ export class ContentPageService {
 					AdminConfigManager.getConfig().services
 						.getContentPageByLanguageAndPathEndpoint || this.getBaseUrl();
 			}
-			console.log('url', url);
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
 					url,

@@ -1,11 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { shuffle, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 
 import { DataService } from '../../data';
-import {
-	GetOrganisationsForMaintainerGridDocument,
-	GetOrganisationsForMaintainerGridQuery,
-} from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
@@ -14,7 +10,6 @@ import {
 	GqlAvoOrganisation,
 	GqlHetArchiefOrganisation,
 	GqlOrganisation,
-	MaintainerGridOrganisation,
 	Organisation,
 } from '../admin-organisations.types';
 import { ORGANISATION_QUERIES, OrganisationQueryTypes } from '../queries/organization.queries';
@@ -38,20 +33,8 @@ export class AdminOrganisationsService {
 		};
 	}
 
-	public maintainerGridAdapter(
-		gqlOrganisation: GetOrganisationsForMaintainerGridQuery['maintainer_organisation'][0]
-	): MaintainerGridOrganisation {
-		return {
-			id: gqlOrganisation.schema_identifier,
-			name: gqlOrganisation.schema_name,
-			logoUrl: gqlOrganisation.logo?.iri,
-			homepageUrl: gqlOrganisation.homepage_url,
-			slug: gqlOrganisation.slug,
-		};
-	}
-
 	public async getOrganisation(id: string): Promise<Organisation> {
-		return await this.getOrganisations([id])[0];
+		return (await this.getOrganisations([id]))[0];
 	}
 
 	public async getOrganisations(ids: string[]): Promise<Organisation[]> {
@@ -70,28 +53,6 @@ export class AdminOrganisationsService {
 				?.maintainer_organisation ||
 			[]
 		).map(this.adapt);
-	}
-
-	public async fetchOrganisationsForMaintainerGrid(
-		limit: number
-	): Promise<MaintainerGridOrganisation[]> {
-		try {
-			if (isAvo()) {
-				throw new Error('This function is only available for hetarchief');
-			}
-
-			const response = await this.dataService.execute<GetOrganisationsForMaintainerGridQuery>(
-				GetOrganisationsForMaintainerGridDocument
-			);
-
-			return shuffle(response.maintainer_organisation)
-				.slice(0, limit)
-				.map(this.maintainerGridAdapter);
-		} catch (err: any) {
-			throw CustomError('Failed to get organisations from the database', err, {
-				query: 'GetOrganisationsWithUsers',
-			});
-		}
 	}
 
 	public async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {

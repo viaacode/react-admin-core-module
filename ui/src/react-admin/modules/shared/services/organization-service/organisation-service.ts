@@ -1,7 +1,7 @@
 import { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
@@ -50,7 +50,7 @@ export class OrganisationService {
 	static getMaintainerGrid(limit: number): Promise<MaintainerGridOrganisation[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/maintainer-grid`,
+				url: `${getProxyUrl()}/organisations/maintainer-grid`,
 				query: {
 					limit,
 				},

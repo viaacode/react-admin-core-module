@@ -8,7 +8,7 @@ import {
 } from '~modules/content-page/const/get-color-options';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
-import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWrapper/RichTextEditorWithInternalStateWrapper';
+import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { UserGroupSelectProps } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { isAvo } from '~shared/helpers/is-avo';

@@ -1,5 +1,6 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 import { TestingLogger } from '../../shared/logging/test-logger';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { MaintenanceAlertType } from '../maintenance-alerts.types';
@@ -117,6 +118,7 @@ describe('MaintenanceAlertsController', () => {
 				await maintenanceAlertsController.updateMaintenanceAlert(mockMaintenanceAlert1.id, {
 					title: 'Gepland onderhoud updated',
 					type: MaintenanceAlertType.QUESTION,
+					language: Lookup_Languages_Enum.Nl,
 				});
 			expect(updatedMaintenanceAlert).toEqual(mockMaintenanceAlert1);
 		});
