@@ -17,7 +17,7 @@
     "prebuild": "rimraf dist",
     "build": "vite build",
     "serve": "vite preview",
-    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
+    "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist ../../hetarchief-client/node_modules/.cache ../../hetarchief-client/.swc ../../hetarchief-client/.next && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
     "build:analyze": "npm run build -- --config-analyze",

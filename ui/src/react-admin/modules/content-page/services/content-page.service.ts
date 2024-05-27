@@ -374,14 +374,14 @@ export class ContentPageService {
 		onlyInfo = false
 	): Promise<ContentPageInfo | null> {
 		try {
-			let url = this.getBaseUrl();
+			let url = this.getBaseUrl() + '/by-language-and-path';
 			if (
 				AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint &&
 				!onlyInfo
 			) {
 				url =
 					AdminConfigManager.getConfig().services
-						.getContentPageByLanguageAndPathEndpoint || this.getBaseUrl();
+						.getContentPageByLanguageAndPathEndpoint || url;
 			}
 			const dbContentPage = await fetchWithLogoutJson<DbContentPage | null>(
 				stringifyUrl({
