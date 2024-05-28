@@ -1,6 +1,10 @@
 import { RichTextEditorControl } from '@meemoo/react-components';
 
-export const RICH_TEXT_EDITOR_OPTIONS_ALIGN: RichTextEditorControl[] = ['separator', 'text-align'];
+export const RICH_TEXT_EDITOR_OPTIONS_ALIGN: RichTextEditorControl[] = [
+	'separator',
+	'text-align',
+	'editHtml',
+];
 
 export const RICH_TEXT_EDITOR_OPTIONS_BASE: RichTextEditorControl[] = [
 	'fullscreen',
@@ -81,6 +85,7 @@ export const RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN: (
 	'table',
 	'separator',
 	'remove-styles',
+	'editHtml',
 ];
 
 export const RICH_TEXT_EDITOR_OPTIONS_DEFAULT_NO_TITLES: (

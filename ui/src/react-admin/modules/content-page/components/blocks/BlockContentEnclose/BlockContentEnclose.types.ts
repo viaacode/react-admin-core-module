@@ -22,10 +22,3 @@ export type MappedElement = {
 	value: string;
 	type: ContentPickerTypeSchema;
 };
-
-export interface EnclosedContent {
-	thumbnail_path: string;
-	name: string;
-	description: string;
-	id: string;
-}
