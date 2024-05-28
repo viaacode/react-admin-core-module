@@ -115,7 +115,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 				// Update entry
 				await this.updateTranslation(component, location, key, languageCode, value);
 			} else {
-				// Insert entry (eg: for missing EN entry where NL entry already exists
+				// Insert entry (eg: for missing en entry where nl entry already exists
 				await this.insertTranslation(
 					component,
 					location,

@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { NavigationService } from '~modules/navigation/navigation.service';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
 import { NavigationItem } from '../navigation.types';
 import { QUERY_KEYS } from '~shared/types';
@@ -8,7 +8,7 @@ import { compact } from 'lodash-es';
 
 export const useGetNavigationBarItems = (
 	placement?: string,
-	languages?: LanguageCode[],
+	languages?: Locale[],
 	searchTerm?: string,
 	options?: UseQueryOptions<NavigationItem[], any, NavigationItem[], string[]>
 ) => {

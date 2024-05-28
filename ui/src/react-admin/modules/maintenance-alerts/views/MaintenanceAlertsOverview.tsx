@@ -11,7 +11,7 @@ import { Icon, Loader } from '~modules/shared/components';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { LanguageInfo } from '~modules/translations/translations.types';
 import {
 	CheckboxDropdownModalProps,
@@ -81,7 +81,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 			userGroups: [],
 			fromDate: '',
 			untilDate: '',
-			language: LanguageCode.Nl,
+			language: Locale.Nl,
 		});
 	};
 

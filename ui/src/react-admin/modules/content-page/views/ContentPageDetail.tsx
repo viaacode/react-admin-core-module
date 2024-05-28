@@ -27,7 +27,7 @@ import {
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import Link from '~shared/components/Link/Link';
@@ -78,7 +78,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	const [isPublishModalOpen, setIsPublishModalOpen] = useState<boolean>(false);
 	const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState<boolean>(false);
 	const hasEnglishVersion = !!contentPageInfo?.translatedPages.find(
-		(page) => page.language === LanguageCode.En
+		(page) => page.language === Locale.En
 	);
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
@@ -256,7 +256,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					),
 			  ]
 			: []),
-		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== LanguageCode.En
+		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== Locale.En
 			? hasEnglishVersion
 				? [
 						createDropdownMenuItem(
@@ -357,14 +357,14 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 			case ContentPageAction.duplicateForEnglish:
 				await duplicateContentPage({
-					language: LanguageCode.En,
+					language: Locale.En,
 					nlParentPageId: contentPageInfo?.id,
 				});
 				break;
 
 			case ContentPageAction.gotoEnglishPage: {
 				const englishPageId = contentPageInfo?.translatedPages.find(
-					(p) => p.language === LanguageCode.En
+					(p) => p.language === Locale.En
 				)?.id;
 				if (englishPageId) {
 					const url = buildLink(

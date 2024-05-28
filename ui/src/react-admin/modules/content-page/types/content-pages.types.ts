@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { PickerItem } from '~shared/types/content-picker';
 
 import { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
@@ -45,9 +45,7 @@ export type ContentOverviewTableCols =
 export const NOT_TRANSLATION_PREFIX = 'NOT_';
 
 // NL, EN, NOT_NL, NOT_EN
-export type TranslationFilterValue =
-	| LanguageCode
-	| `${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`;
+export type TranslationFilterValue = Locale | `${typeof NOT_TRANSLATION_PREFIX}${Locale}`;
 
 export interface ContentTableState extends FilterableTableState {
 	contentType: string[];
@@ -65,7 +63,7 @@ export interface ContentPageLabel {
 	id: number;
 	label: string;
 	content_type: Avo.ContentPage.Type;
-	language: LanguageCode;
+	language: Locale;
 	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;
@@ -75,7 +73,7 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
-	language: LanguageCode;
+	language: Locale;
 	nlParentPageId: string | number | null; // number is still used by avo, but we want to switch to uuids at some point
 	description_state?: any | undefined; // Only used during interaction with rich text editor
 	description: string | null;

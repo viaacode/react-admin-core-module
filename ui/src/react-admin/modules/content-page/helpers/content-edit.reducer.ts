@@ -4,7 +4,7 @@ import { Draft, produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import { Reducer } from 'react';
 import { AdminConfigManager } from '~core/config';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
 import { ValueOf } from '~shared/types';
 
@@ -133,7 +133,7 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		userGroupIds: [],
 		labels: [],
 		content_blocks: [] as ContentBlockConfig[],
-		language: LanguageCode.Nl,
+		language: Locale.Nl,
 		nlParentPageId: null,
 		translatedPages: [],
 		owner: {

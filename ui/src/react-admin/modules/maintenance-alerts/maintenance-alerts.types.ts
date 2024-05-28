@@ -1,6 +1,6 @@
 import { DefaultProps } from '@viaa/avo2-components';
 import { ReactNode } from 'react';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 export interface MaintenanceAlert {
@@ -11,7 +11,7 @@ export interface MaintenanceAlert {
 	userGroups: string[];
 	fromDate: string;
 	untilDate: string;
-	language: LanguageCode;
+	language: Locale;
 }
 
 export interface MaintenanceAlertsOverviewProps extends DefaultProps {
@@ -52,7 +52,7 @@ export interface MaintenanceAlertFormState {
 	untilDate: Date;
 	userGroups: any;
 	type: string;
-	language: LanguageCode;
+	language: Locale;
 }
 
 export interface MaintenanceAlertDto {
@@ -67,5 +67,5 @@ export interface MaintenanceAlertDto {
 
 export interface MaintenanceAlertsOverviewTableState extends FilterableTableState {
 	query: string;
-	language: LanguageCode[];
+	language: Locale[];
 }

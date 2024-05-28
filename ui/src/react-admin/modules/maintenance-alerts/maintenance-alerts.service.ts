@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~modules/shared/helpers/fetch-with-logout';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import {
 	MaintenanceAlert,
@@ -19,7 +19,7 @@ export class MaintenanceAlertsService {
 
 	static async fetchMaintenanceAlerts(
 		searchTerm: string | undefined,
-		languages: LanguageCode[] | undefined,
+		languages: Locale[] | undefined,
 		orderProp: MaintenanceAlertsOverviewTableCol = 'fromDate',
 		orderDirection: Avo.Search.OrderDirection = 'asc',
 		page = 0,

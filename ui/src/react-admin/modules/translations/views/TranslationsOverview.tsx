@@ -25,7 +25,7 @@ import {
 	RICH_TEXT_EDITOR_OPTIONS,
 	TRANSLATIONS_PER_PAGE,
 } from '~modules/translations/translations.const';
-import { LanguageCode, ValueType } from '~modules/translations/translations.core.types';
+import { Locale, ValueType } from '~modules/translations/translations.core.types';
 import {
 	MultiLanguageTranslationEntry,
 	type TranslationsOverviewProps,
@@ -46,7 +46,7 @@ import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 
 import './TranslationsOverview.scss';
 
-type OrderProp = `value_${LanguageCode}` | 'id';
+type OrderProp = `value_${Locale}` | 'id';
 
 const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
@@ -68,9 +68,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	const [filteredTranslationsCount, setFilteredTranslationsCount] = useState<number>(0);
 	const [activeTranslationEntry, setActiveTranslationEntry] =
 		useState<MultiLanguageTranslationEntry | null>(null);
-	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<LanguageCode>(
-		LanguageCode.Nl
-	);
+	const [activeTranslationLanguage, setActiveTranslationLanguage] = useState<Locale>(Locale.Nl);
 	const [activeTranslationEditorState, setActiveTranslationEditorState] =
 		useState<RichEditorState | null>(null);
 	const [activeTranslationTextValue, setActiveTranslationTextValue] = useState<string | null>(
@@ -106,7 +104,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					return getFullKey(translationEntry);
 				}
 				if (orderProp) {
-					const languageCode = orderProp.split('_')[1] as LanguageCode;
+					const languageCode = orderProp.split('_')[1] as Locale;
 					return translationEntry.values[languageCode];
 				}
 				return undefined;
@@ -198,7 +196,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 
 	const handleEditButtonClicked = (
 		translationEntry: MultiLanguageTranslationEntry,
-		languageCode: LanguageCode
+		languageCode: Locale
 	) => {
 		setActiveTranslationEntry(translationEntry);
 		setActiveTranslationTextValue(translationEntry.values[languageCode]);
@@ -280,8 +278,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					translationEntry.values[languageInfo.languageCode],
 				Cell: ({ row }: { row: Row<MultiLanguageTranslationEntry> }): ReactElement => {
 					const translationEntry = row.original;
-					const value =
-						translationEntry.values[languageInfo.languageCode as LanguageCode];
+					const value = translationEntry.values[languageInfo.languageCode as Locale];
 
 					return (
 						<button
@@ -289,7 +286,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 							onClick={() => {
 								handleEditButtonClicked(
 									translationEntry,
-									languageInfo.languageCode as LanguageCode
+									languageInfo.languageCode as Locale
 								);
 							}}
 						>

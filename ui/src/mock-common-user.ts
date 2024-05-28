@@ -1,6 +1,6 @@
 import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
 export const mockCommonUser: Avo.User.CommonUser = {
 	// QAS
@@ -11,7 +11,7 @@ export const mockCommonUser: Avo.User.CommonUser = {
 	firstName: 'meemoo',
 	lastName: 'Admin',
 	fullName: 'meemoo Admin',
-	language: LanguageCode.Nl,
+	language: Locale.Nl,
 	userGroup: {
 		id: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 		name: 'CP_ADMIN',

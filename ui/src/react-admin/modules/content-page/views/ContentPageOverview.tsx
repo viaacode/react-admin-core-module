@@ -24,7 +24,7 @@ import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.ty
 import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
 import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import Icon from '~shared/components/Icon/Icon';
 import Link from '~shared/components/Link/Link';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
@@ -234,11 +234,11 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 				filters.translations,
 				(translationFilterValue) =>
 					translationFilterValue.startsWith(NOT_TRANSLATION_PREFIX)
-			) as [`${typeof NOT_TRANSLATION_PREFIX}${LanguageCode}`[], LanguageCode[]];
+			) as [`${typeof NOT_TRANSLATION_PREFIX}${Locale}`[], Locale[]];
 
 			// Add filters for values: NOT_NL or NOT_EN
 			translationNotExistValues.forEach((translationNotExistValue) => {
-				const languageValue = translationNotExistValue.split('_')[1] as LanguageCode;
+				const languageValue = translationNotExistValue.split('_')[1] as Locale;
 				andFilters.push({
 					_not: {
 						_or: [

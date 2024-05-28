@@ -4,7 +4,7 @@ import { array, date, mixed, object, ref, SchemaOf, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
 import { ROUTE_PARTS } from '~modules/shared';
 import { SortDirectionParam } from '~modules/shared/helpers/query-params';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { MaintenanceAlertFormState } from './maintenance-alerts.types';
 
 export const ALERTS_PATH = {
@@ -47,8 +47,8 @@ export const ALERTS_FORM_SCHEMA = (tText: any): SchemaOf<Partial<MaintenanceAler
 		type: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___icoon-is-verplicht')
 		),
-		language: mixed<LanguageCode>()
-			.oneOf(Object.values(LanguageCode))
+		language: mixed<Locale>()
+			.oneOf(Object.values(Locale))
 			.required(tText('modules/maintenance-alerts/maintenance-alerts___taal-is-verplicht')),
 	});
 };

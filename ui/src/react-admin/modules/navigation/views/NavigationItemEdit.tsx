@@ -7,7 +7,7 @@ import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 import { Link } from '~modules/shared/components/Link';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 import { Icon } from '~shared/components';
@@ -100,7 +100,7 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 				contentPath: null,
 				linkTarget: null,
 				position: 0,
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 				createdAt: new Date().toISOString(),
 				updatedAt: new Date().toISOString(),
 			};
