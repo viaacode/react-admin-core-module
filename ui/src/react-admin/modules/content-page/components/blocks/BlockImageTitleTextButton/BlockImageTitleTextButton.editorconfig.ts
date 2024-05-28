@@ -1,3 +1,6 @@
+import { AdminConfigManager } from '~core/config';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -5,14 +8,10 @@ import {
 	DefaultContentBlockState,
 	ImageTitleTextButtonBlockComponentState,
 } from '~modules/content-page/types/content-block.types';
+import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
-import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 
 export const INITIAL_IMAGE_TITLE_TEXT_BUTTON_COMPONENTS_STATE =
 	(): ImageTitleTextButtonBlockComponentState => ({
@@ -54,7 +53,6 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			imagePosition: {
 				label: tText(
@@ -70,7 +68,6 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 			headingTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/heading___titel'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			headingType: {
 				label: tText('admin/content-block/helpers/generators/heading___stijl'),
@@ -96,7 +93,6 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),

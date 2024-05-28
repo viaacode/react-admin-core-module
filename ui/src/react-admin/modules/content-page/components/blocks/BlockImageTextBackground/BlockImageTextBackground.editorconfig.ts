@@ -1,3 +1,12 @@
+import { AdminConfigManager } from '~core/config';
+import {
+	GET_BACKGROUND_ALIGN_OPTIONS,
+	GET_SIMPLE_ALIGN_OPTIONS,
+} from '~modules/content-page/const/get-align-options';
+import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 import {
 	Color,
@@ -15,16 +24,6 @@ import {
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
-import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
-import {
-	GET_BACKGROUND_ALIGN_OPTIONS,
-	GET_SIMPLE_ALIGN_OPTIONS,
-} from '~modules/content-page/const/get-align-options';
-import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): ImageTextBackgroundBlockComponentState => ({
@@ -78,7 +77,6 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
-				validator: undefined,
 				editorProps: {
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
@@ -104,7 +102,6 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			buttonAction: {
 				label: tText(

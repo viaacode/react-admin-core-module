@@ -1,4 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -11,11 +12,15 @@ export const useGetContentPageByPath = (
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_CONTENT_PAGE_BY_PATH],
-		() => {
+		async () => {
 			if (!path) {
 				return null;
 			}
-			return ContentPageService.getContentPageByLanguageAndPath(language, path);
+			const dbContentPage = await ContentPageService.getContentPageByLanguageAndPath(
+				language,
+				path
+			);
+			return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
 		},
 		options
 	);

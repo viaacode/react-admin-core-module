@@ -14,7 +14,7 @@ import {
 	PageOverviewWrapperProps,
 } from '~modules/content-page/components/blocks';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
-import { useGetContentPageByPath } from '~modules/content-page/hooks/use-get-content-page-by-path';
+import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path';
 import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';
 import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
 import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/hooks/use-get-content-pages-for-page-overview-block';
@@ -94,11 +94,10 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 			{ keepPreviousData: true }
 		);
 
-	const { data: focusedPage, isFetching: isLoadingFocusedPage } = useGetContentPageByPath(
-		commonUser?.language as Locale,
-		queryParamsState.item,
-		{ keepPreviousData: true }
-	);
+	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
+		useGetContentPageByLanguageAndPath(commonUser?.language as Locale, queryParamsState.item, {
+			keepPreviousData: true,
+		});
 
 	const {
 		data: pagesAndLabels,

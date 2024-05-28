@@ -1,5 +1,7 @@
-import { BlockUspGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockUspGrid.wrapper';
 import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { BlockUspGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockUspGrid.wrapper';
+
+import { AdminConfigManager } from '~core/config';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 
 import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -14,8 +16,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_USP_GRID_COMPONENTS_STATE = (): ImageGridBlockComponentStateFields[] => [
 	{
@@ -64,22 +64,18 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			title: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			text: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),

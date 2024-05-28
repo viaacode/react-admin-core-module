@@ -372,7 +372,7 @@ export class ContentPageService {
 		language: Locale,
 		path: string,
 		onlyInfo = false
-	): Promise<ContentPageInfo | null> {
+	): Promise<DbContentPage | null> {
 		try {
 			let url = this.getBaseUrl() + '/by-language-and-path';
 			if (
@@ -396,7 +396,7 @@ export class ContentPageService {
 			if (!dbContentPage) {
 				return null;
 			}
-			return convertDbContentPageToContentPageInfo(dbContentPage);
+			return dbContentPage;
 		} catch (err) {
 			throw new CustomError('Failed to get content page by language and path', err);
 		}

@@ -56,7 +56,6 @@ export const LOGO_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'admin/content-block/helpers/generators/logo-grid___tekst-boven-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			source: FILE_FIELD(
 				tText(

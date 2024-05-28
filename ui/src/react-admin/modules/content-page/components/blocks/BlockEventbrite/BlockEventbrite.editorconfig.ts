@@ -1,4 +1,6 @@
 import { BlockEventbriteProps } from '~content-blocks/BlockEventbrite/BlockEventbrite';
+
+import { AdminConfigManager } from '~core/config';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 
@@ -10,8 +12,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
 
 export const INITIAL_EVENTBRITE_COMPONENTS_STATE = (): Partial<BlockEventbriteProps> => ({
 	eventId: '',
@@ -36,7 +36,6 @@ export const EVENTBRITE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			eventId: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/eventbrite___event-id'),
 				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			}),
 			type: {
 				label: tText('admin/content-block/helpers/generators/buttons___type'),
