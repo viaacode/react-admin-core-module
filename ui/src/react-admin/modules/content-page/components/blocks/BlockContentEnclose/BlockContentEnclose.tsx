@@ -87,7 +87,8 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 										})`,
 									}}
 								>
-									{elementInfo?.thumbnail ? (
+									{elementInfo?.thumbnail ||
+									elementInfo?.objectType === 'audio' ? (
 										elementInfo.objectType &&
 										TYPE_TO_ICON_MAP[elementInfo.objectType] ? (
 											<div className="c-block-enclosed-content__cards__card__image__icon">

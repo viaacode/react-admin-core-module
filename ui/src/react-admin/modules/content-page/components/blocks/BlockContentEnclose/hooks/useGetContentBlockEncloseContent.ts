@@ -2,7 +2,6 @@ import { useQueries } from '@tanstack/react-query';
 import { compact, kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 import { MappedElement } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
 	getAdminCoreApiUrl,
@@ -16,13 +15,13 @@ import {
 	GetContentBlockEncloseContentReturnType,
 	IeObject,
 } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
 export const useGetContentBlockEnloseContent = (
 	ids: MappedElement[],
 	originalElements: { mediaItem: PickerItem }[]
 ): GetContentBlockEncloseContentReturnType[] => {
 	const ieObjectIds = ids.filter((id) => id.type === 'IE_OBJECT').map((id) => id.value);
-	console.log(originalElements);
 	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
 
 	const url = stringifyUrl({
@@ -49,7 +48,7 @@ export const useGetContentBlockEnloseContent = (
 				stringifyUrl({
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/by-language-and-path`,
 					query: {
-						language: LanguageCode.Nl,
+						language: Locale.Nl,
 						path: id,
 						onlyInfo: 'false',
 					},
@@ -74,7 +73,9 @@ export const useGetContentBlockEnloseContent = (
 						id: item.maintainerId,
 						name: item.name || item.title,
 						description: item.description,
-						thumbnail: item.thumbnailUrl,
+						thumbnail:
+							item.thumbnailUrl ||
+							'https://fastly.picsum.photos/id/716/600/600.jpg?hmac=rfg-0QfaSm9tSWioKwljrGVZIXvIy_KZuuFZO0H7bAQ',
 						dateCreated: item.dateCreatedLowerBound,
 						maintainerName: item.maintainerName,
 						objectType: item.dctermsFormat,
