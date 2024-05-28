@@ -1,5 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
-import { compact } from 'lodash-es';
+import { compact, kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 import {
 	EnclosedContent,
@@ -12,11 +12,21 @@ import {
 	getAdminCoreApiUrl,
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { Avo } from '@viaa/avo2-types';
+import PickerItem = Avo.Core.PickerItem;
 import { QUERY_KEYS } from '~shared/types';
+import {
+	ContentPage,
+	GetContentBlockEncloseContentReturnType,
+	IeObject,
+} from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
+import { Locale } from '~modules/translations/translations.core.types';
 
-export const useGetContentBlockEncloseContent = (ids: MappedElement[]): EnclosedContent[] => {
+export const useGetContentBlockEnloseContent = (
+	ids: MappedElement[],
+	originalElements: { mediaItem: PickerItem }[]
+): GetContentBlockEncloseContentReturnType[] => {
 	const ieObjectIds = ids.filter((id) => id.type === 'IE_OBJECT').map((id) => id.value);
-
 	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
 
 	const url = stringifyUrl({
@@ -41,7 +51,7 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 			if (!id) {
 				return null;
 			}
-			return fetchWithLogoutJson<any[]>(
+			return fetchWithLogoutJson<ContentPage[]>(
 				stringifyUrl({
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/by-language-and-path`,
 					query: {
@@ -58,31 +68,53 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 		queries: [...(ieObjectIds.length > 0 ? [ieObjectQuery] : []), ...contentPageQueries],
 	});
 
-	return compact(results).flatMap((result: any) => {
-		if (!result.data) {
-			return null;
-		}
-		if (Array.isArray(result.data)) {
-			return result.data.map((item: any) => {
-				return {
-					id: item.maintainerId,
-					name: item.name,
-					description: item.description,
-					thumbnail: item.thumbnailUrl,
-					dateCreated: item.dateCreatedLowerBound,
-					maintainerName: item.maintainerName,
-					icon: item.ebucoreObjectType,
-					type: 'IE_OBJECT',
-				};
-			});
-		}
+	const mappedResults = compact(results).flatMap((result) => {
+		if (result.status === 'success') {
+			if (!result.data) {
+				return null;
+			}
+			if (Array.isArray(result.data)) {
+				const ieObjects = result.data as IeObject[];
+				return ieObjects.map((item: IeObject) => {
+					return {
+						id: item.maintainerId,
+						name: item.name || item.title,
+						description: item.description,
+						thumbnail:
+							item.thumbnailUrl ||
+							'https://fastly.picsum.photos/id/716/600/600.jpg?hmac=rfg-0QfaSm9tSWioKwljrGVZIXvIy_KZuuFZO0H7bAQ',
+						dateCreated: item.dateCreatedLowerBound,
+						maintainerName: item.maintainerName,
+						objectType: item.dctermsFormat,
+						identifier: item.schemaIdentifier,
+						pid: item.meemooIdentifier,
+						link: `/zoeken/maintainer-slug/${item.schemaIdentifier}/${kebabCase(
+							item.name
+						)}`,
+						type: 'IE_OBJECT',
+					};
+				});
+			}
 
-		return {
-			id: result.data.id,
-			name: result.data.title,
-			description: result.data.description,
-			thumbnail: result.data.thumbnailPath,
-			type: 'CONTENT_PAGE',
-		};
-	}) as any;
+			const contentPage = result.data as ContentPage;
+			return {
+				id: contentPage.id,
+				name: contentPage.title,
+				description: contentPage.description,
+				thumbnail: contentPage.thumbnailPath,
+				identifier: contentPage.path,
+				link: contentPage.path,
+				type: 'CONTENT_PAGE',
+			};
+		}
+	});
+
+	return compact(
+		originalElements.map((element) => {
+			const found = mappedResults.find(
+				(item) => (item && item.identifier === element?.mediaItem?.value) || null
+			);
+			return found || null;
+		})
+	) as GetContentBlockEncloseContentReturnType[];
 };

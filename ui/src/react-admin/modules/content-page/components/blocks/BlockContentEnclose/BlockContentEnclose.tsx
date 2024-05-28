@@ -1,17 +1,20 @@
-import { Button } from '@viaa/avo2-components';
+import { Button, IconName } from '@viaa/avo2-components';
 import { compact } from 'lodash-es';
 import React, { FC, useMemo } from 'react';
 import {
 	BlockContentEncloseProps,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { useGetContentBlockEncloseContent } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { Link } from '~modules/shared/components/Link';
 import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
+import { useGetContentBlockEnloseContent } from './hooks/useGetContentBlockEncloseContent';
+import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
+import { AdminConfigManager } from '~core/config';
+import { TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -31,7 +34,6 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 					if (!element?.mediaItem?.value) {
 						return;
 					}
-					console.log('we here');
 					return {
 						value: element.mediaItem.value,
 						type: element.mediaItem.type,
@@ -41,10 +43,13 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 		[elements]
 	);
 
-	const elementInfos = useGetContentBlockEncloseContent(elementTypeAndIds as MappedElement[]);
+	const elementInfos = useGetContentBlockEnloseContent(
+		elementTypeAndIds as MappedElement[],
+		elements
+	);
 
 	return (
-		<section>
+		<section className="l-container">
 			<div className="c-block-enclosed-content__header">
 				<div>
 					<BlockHeading className="c-block-enclosed-content__title" type={titleType}>
@@ -64,35 +69,54 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 					)}
 			</div>
 			<ul className="c-block-enclosed-content__cards">
-				{elementInfos?.map((elementInfo: any) => {
+				{elementInfos?.map((elementInfo, index) => {
 					return (
-						<li className="c-block-enclosed-content__cards__card" key={elementInfo?.id}>
-							<Link to="#">
+						<li
+							className="c-block-enclosed-content__cards__card"
+							key={`${elementInfo?.id}-${index}`}
+						>
+							<Link to={elementInfo.link}>
 								<div
 									className="c-block-enclosed-content__cards__card__image"
 									style={{
-										backgroundImage: `url(${elementInfo?.thumbnail})`,
+										backgroundImage: `url(${
+											elementInfo.objectType !== ('audio' as IconNameSchema)
+												? elementInfo?.thumbnail
+												: AdminConfigManager.getConfig().components
+														.defaultAudioStill
+										})`,
 									}}
 								>
-									{elementInfo?.thumbnail
-										? null
-										: tText(
-												'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___je-hebt-geen-toegang-tot-deze-content'
-										  )}
-									<div className="c-block-enclosed-content__cards__card__image__icon">
-										<Icon name={'filter'} />
-									</div>
+									{elementInfo?.thumbnail ||
+									elementInfo?.objectType === 'audio' ? (
+										elementInfo.objectType &&
+										TYPE_TO_ICON_MAP[elementInfo.objectType] ? (
+											<div className="c-block-enclosed-content__cards__card__image__icon">
+												<Icon
+													name={
+														TYPE_TO_ICON_MAP[
+															elementInfo.objectType
+														] as IconName
+													}
+												/>
+											</div>
+										) : null
+									) : (
+										<Icon
+											className="c-block-enclosed-content__cards__card__image__no-permission"
+											name={'eyeOff'}
+										/>
+									)}
 								</div>
 								<div className="c-block-enclosed-content__cards__card__wrapper">
 									<span className="c-block-enclosed-content__cards__card__title">
-										{elementInfo?.name ||
-											tText(
-												'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___je-hebt-geen-toegang-tot-deze-content'
-											)}
+										{elementInfo?.name || tText('Geen toegang')}
 									</span>
 									<div className="c-block-enclosed-content__cards__card__description-wrapper">
 										<Html
-											content={elementInfo?.description}
+											content={
+												elementInfo?.description || tText('Geen toegang')
+											}
 											className="c-block-enclosed-content__cards__card__description"
 										/>
 									</div>
@@ -105,7 +129,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 										<div className="c-block-enclosed-content__cards__card__meta__date">
 											{elementInfo?.dateCreated}
 										</div>
-										<div>{elementInfo?.id}</div>
+										<div>{elementInfo?.pid}</div>
 									</div>
 								) : null}
 							</Link>
