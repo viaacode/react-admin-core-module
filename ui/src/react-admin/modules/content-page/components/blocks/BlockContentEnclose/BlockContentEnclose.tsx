@@ -104,7 +104,10 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 									) : (
 										<Icon
 											className="c-block-enclosed-content__cards__card__image__no-permission"
-											name={'eyeOff'}
+											name={
+												AdminConfigManager.getConfig().icon?.componentProps
+													.eyeOff.name as IconName
+											}
 										/>
 									)}
 								</div>
