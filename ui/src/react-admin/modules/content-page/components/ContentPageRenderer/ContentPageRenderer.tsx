@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
@@ -22,6 +23,16 @@ type ContentPageDetailProps = {
 	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
 	commonUser?: Avo.User.CommonUser;
 };
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+			keepPreviousData: true,
+			retry: 0,
+		},
+	},
+});
 
 const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
@@ -115,37 +126,39 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		// TODO render <InteractiveTour showButton={false} /> manually in AVO above the content page
 		return (
 			<div className="c-content-page-preview">
-				{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
-					(contentBlockConfig: ContentBlockConfig) => {
-						return (
-							<ContentBlockRenderer
-								key={
-									'content-block-preview-' +
-									contentBlockConfig.type +
-									'-' +
-									contentBlockConfig.position
-								}
-								contentBlockConfig={contentBlockConfig}
-								contentPageInfo={props.contentPageInfo as ContentPageInfo}
-								className={clsx(
-									`content-block-preview-${contentBlockConfig.position}`,
-									{
-										'c-content-block__active':
-											contentBlockConfig.position ===
-											(props as any).activeBlockPosition,
+				<QueryClientProvider client={queryClient}>
+					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
+						(contentBlockConfig: ContentBlockConfig) => {
+							return (
+								<ContentBlockRenderer
+									key={
+										'content-block-preview-' +
+										contentBlockConfig.type +
+										'-' +
+										contentBlockConfig.position
 									}
-								)}
-								onClick={() =>
-									((props as any).onBlockClicked || noop)(
-										contentBlockConfig.position,
-										'preview'
-									)
-								}
-								commonUser={props.commonUser}
-							/>
-						);
-					}
-				)}
+									contentBlockConfig={contentBlockConfig}
+									contentPageInfo={props.contentPageInfo as ContentPageInfo}
+									className={clsx(
+										`content-block-preview-${contentBlockConfig.position}`,
+										{
+											'c-content-block__active':
+												contentBlockConfig.position ===
+												(props as any).activeBlockPosition,
+										}
+									)}
+									onClick={() =>
+										((props as any).onBlockClicked || noop)(
+											contentBlockConfig.position,
+											'preview'
+										)
+									}
+									commonUser={props.commonUser}
+								/>
+							);
+						}
+					)}
+				</QueryClientProvider>
 			</div>
 		);
 	};
