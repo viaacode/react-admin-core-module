@@ -7,7 +7,7 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 import { TOptions } from 'i18next';
 import { capitalize, lowerCase } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Link, useHistory } from 'react-router-dom';
 import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
@@ -132,6 +132,7 @@ function setConfig() {
 				export: { name: 'export' },
 				info: { name: 'info' },
 				warning: { name: 'exclamation' },
+				eyeOff: { name: 'eye-off' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

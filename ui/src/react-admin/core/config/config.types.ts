@@ -173,6 +173,7 @@ export interface IconConfig {
 		export: IconComponentProps;
 		info: IconComponentProps;
 		warning: IconComponentProps;
+		eyeOff: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];
