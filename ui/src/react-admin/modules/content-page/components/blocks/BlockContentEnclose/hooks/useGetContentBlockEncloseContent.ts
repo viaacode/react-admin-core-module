@@ -5,6 +5,7 @@ import {
 	EnclosedContent,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
+import { AdminConfigManager } from '~core/config';
 import { Locale } from '~modules/translations/translations.core.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import {
@@ -27,7 +28,9 @@ export const useGetContentBlockEncloseContent = (ids: MappedElement[]): Enclosed
 	const ieObjectQuery = {
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT],
 		queryFn: () =>
-			fetchWithLogoutJson<any[]>(url, { headers: { referer: window.location.origin } }),
+			fetchWithLogoutJson<any[]>(url, {
+				headers: { referer: AdminConfigManager.getConfig().env.CLIENT_URL },
+			}),
 		keepPreviousData: true,
 		enabled: ieObjectIds.length > 0,
 	};

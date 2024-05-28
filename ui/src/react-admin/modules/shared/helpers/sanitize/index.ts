@@ -1,4 +1,4 @@
-import { default as domPurify } from 'dompurify';
+import domPurify from 'isomorphic-dompurify';
 
 import sanitizePresets, { SanitizePreset } from './presets';
 
