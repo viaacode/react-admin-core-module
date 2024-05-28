@@ -174,6 +174,9 @@ export interface IconConfig {
 		info: IconComponentProps;
 		warning: IconComponentProps;
 		eyeOff: IconComponentProps;
+		audio: IconComponentProps;
+		video: IconComponentProps;
+		newspaper: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];

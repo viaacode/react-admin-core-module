@@ -1,4 +1,4 @@
-import { Button } from '@viaa/avo2-components';
+import { Button, IconName } from '@viaa/avo2-components';
 import { compact } from 'lodash-es';
 import React, { FC, useMemo } from 'react';
 import {
@@ -14,6 +14,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { useGetContentBlockEnloseContent } from './hooks/useGetContentBlockEncloseContent';
 import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
 import { AdminConfigManager } from '~core/config';
+import { TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -79,7 +80,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 									className="c-block-enclosed-content__cards__card__image"
 									style={{
 										backgroundImage: `url(${
-											elementInfo.icon !== ('audio' as IconNameSchema)
+											elementInfo.objectType !== ('audio' as IconNameSchema)
 												? elementInfo?.thumbnail
 												: AdminConfigManager.getConfig().components
 														.defaultAudioStill
@@ -87,9 +88,16 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 									}}
 								>
 									{elementInfo?.thumbnail ? (
-										elementInfo.icon ? (
+										elementInfo.objectType &&
+										TYPE_TO_ICON_MAP[elementInfo.objectType] ? (
 											<div className="c-block-enclosed-content__cards__card__image__icon">
-												<Icon name={elementInfo.icon} />
+												<Icon
+													name={
+														TYPE_TO_ICON_MAP[
+															elementInfo.objectType
+														] as IconName
+													}
+												/>
 											</div>
 										) : null
 									) : (

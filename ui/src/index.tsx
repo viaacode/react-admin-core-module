@@ -133,6 +133,9 @@ function setConfig() {
 				info: { name: 'info' },
 				warning: { name: 'exclamation' },
 				eyeOff: { name: 'eye-off' },
+				video: { name: 'video' },
+				audio: { name: 'audio' },
+				newspaper: { name: 'newspaper' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({

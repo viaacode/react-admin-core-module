@@ -7,7 +7,7 @@ export interface GetContentBlockEncloseContentReturnType {
 	thumbnail?: string;
 	dateCreated?: string;
 	maintainerName?: string;
-	icon?: IconNameSchema;
+	objectType?: string;
 	identifier?: string;
 	link?: string;
 	pid?: string;
@@ -26,7 +26,8 @@ export interface IeObject {
 	meemooIdentifier: string;
 	maintainerSlug: string;
 	schemaIdentifier: string;
-	dctermsFormat: IconNameSchema;
+	dctermsFormat: string;
+	objectType: string;
 }
 
 export interface ContentPage {

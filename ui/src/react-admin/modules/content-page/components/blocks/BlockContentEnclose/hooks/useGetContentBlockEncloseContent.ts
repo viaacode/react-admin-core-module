@@ -77,7 +77,7 @@ export const useGetContentBlockEnloseContent = (
 						thumbnail: item.thumbnailUrl,
 						dateCreated: item.dateCreatedLowerBound,
 						maintainerName: item.maintainerName,
-						icon: item.dctermsFormat,
+						objectType: item.dctermsFormat,
 						identifier: item.schemaIdentifier,
 						pid: item.meemooIdentifier,
 						link: `/zoeken/maintainer-slug/${item.schemaIdentifier}/${kebabCase(
