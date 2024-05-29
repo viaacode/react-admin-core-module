@@ -2,6 +2,7 @@ import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
 import { type Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { AdminConfigManager } from '~core/config';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 
@@ -29,7 +30,6 @@ interface ProjectSpotlightWrapperProps {
 export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
 	elements,
 	renderLink,
-	commonUser,
 }) => {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<
@@ -44,7 +44,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 					if (projectPath?.toString()) {
 						try {
 							return await ContentPageService.getContentPageByLanguageAndPath(
-								(commonUser?.language || Locale.Nl) as Locale,
+								(AdminConfigManager.getConfig().locale || Locale.Nl) as Locale,
 								projectPath.toString(),
 								true
 							);
@@ -68,7 +68,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 				actionButtons: [],
 			});
 		}
-	}, [elements, commonUser?.language]);
+	}, [elements]);
 
 	useEffect(() => {
 		fetchContentPages();

@@ -3,7 +3,7 @@ import { ContentPageService } from '~modules/content-page/services/content-page.
 import { Locale } from '~modules/translations/translations.core.types';
 import { QUERY_KEYS } from '~shared/types';
 
-export const useGetContentPageByPath = (
+export const useGetContentPageByLanguageAndPath = (
 	language: Locale,
 	path: string,
 	options?: UseQueryOptions<any>

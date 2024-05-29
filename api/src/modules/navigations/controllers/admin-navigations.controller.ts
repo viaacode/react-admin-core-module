@@ -39,7 +39,7 @@ export class AdminNavigationsController {
 		@Query('locale') locale?: Locale
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
-			(locale?.toUpperCase() || LanguageCode.Nl) as LanguageCode
+			(locale || Locale.nl) as unknown as LanguageCode
 		);
 
 		// filter based on logged in / logged out

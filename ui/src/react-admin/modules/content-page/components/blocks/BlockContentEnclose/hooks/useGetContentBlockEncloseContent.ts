@@ -1,25 +1,25 @@
 import { useQueries } from '@tanstack/react-query';
+import { type Avo } from '@viaa/avo2-types';
 import { compact, kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 import { MappedElement } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import {
-	getAdminCoreApiUrl,
-	getProxyUrl,
-} from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { Avo } from '@viaa/avo2-types';
-import { QUERY_KEYS } from '~shared/types';
 import {
 	ContentPage,
 	GetContentBlockEncloseContentReturnType,
 	IeObject,
 } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
+import { AdminConfigManager } from '~core/config';
 import { Locale } from '~modules/translations/translations.core.types';
-import PickerItem = Avo.Core.PickerItem;
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import {
+	getAdminCoreApiUrl,
+	getProxyUrl,
+} from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { QUERY_KEYS } from '~shared/types';
 
-export const useGetContentBlockEnloseContent = (
+export const useGetContentBlockEncloseContent = (
 	ids: MappedElement[],
-	originalElements: { mediaItem: PickerItem }[]
+	originalElements: { mediaItem: Avo.Core.PickerItem }[]
 ): GetContentBlockEncloseContentReturnType[] => {
 	const ieObjectIds = ids.filter((id) => id.type === 'IE_OBJECT').map((id) => id.value);
 	const contentPageIds = ids.filter((id) => id.type === 'CONTENT_PAGE').map((id) => id.value);
@@ -48,7 +48,7 @@ export const useGetContentBlockEnloseContent = (
 				stringifyUrl({
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/by-language-and-path`,
 					query: {
-						language: Locale.Nl,
+						language: AdminConfigManager.getConfig().locale || Locale.Nl,
 						path: id,
 						onlyInfo: 'false',
 					},

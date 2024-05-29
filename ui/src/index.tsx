@@ -266,7 +266,10 @@ function setConfig() {
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
 			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
-			getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
+			// AVO
+			// getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
+			// HET_ARCHIEF
+			getContentPageByLanguageAndPathEndpoint: null,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
 					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />
@@ -342,8 +345,10 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
+		locale: 'nl',
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
+			CLIENT_URL: 'http://localhost:3400',
 		},
 	});
 }

@@ -1,9 +1,9 @@
 import type { Avo } from '@viaa/avo2-types';
 import React, { FC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { AdminConfigManager } from '~core/config';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { Locale } from '~modules/translations/translations.core.types';
 import { tHtml } from '~shared/helpers/translation-functions';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
@@ -19,7 +19,7 @@ const ContentPageWrapper = ({
 		data: contentPageInfo,
 		isLoading,
 		isError,
-	} = useGetContentPageByPath(commonUser?.language as Locale, '/' + match.params.path);
+	} = useGetContentPageByPath(AdminConfigManager.getConfig().locale, '/' + match.params.path);
 
 	if (isLoading) {
 		return null;
