@@ -4,5 +4,6 @@ query getSubjects {
 		label
 		broader
 		scheme
+		related
 	}
 }
