@@ -8,7 +8,6 @@ import {
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { Avo } from '@viaa/avo2-types';
-import PickerItem = Avo.Core.PickerItem;
 import { QUERY_KEYS } from '~shared/types';
 import {
 	ContentPage,
@@ -16,6 +15,7 @@ import {
 	IeObject,
 } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
 import { Locale } from '~modules/translations/translations.core.types';
+import PickerItem = Avo.Core.PickerItem;
 
 export const useGetContentBlockEnloseContent = (
 	ids: MappedElement[],
@@ -73,15 +73,13 @@ export const useGetContentBlockEnloseContent = (
 						id: item.maintainerId,
 						name: item.name || item.title,
 						description: item.description,
-						thumbnail:
-							item.thumbnailUrl ||
-							'https://fastly.picsum.photos/id/716/600/600.jpg?hmac=rfg-0QfaSm9tSWioKwljrGVZIXvIy_KZuuFZO0H7bAQ',
+						thumbnail: item.thumbnailUrl,
 						dateCreated: item.dateCreatedLowerBound,
 						maintainerName: item.maintainerName,
 						objectType: item.dctermsFormat,
 						identifier: item.schemaIdentifier,
 						pid: item.meemooIdentifier,
-						link: `/zoeken/maintainer-slug/${item.schemaIdentifier}/${kebabCase(
+						link: `/zoeken/${item.maintainerSlug}/${item.schemaIdentifier}/${kebabCase(
 							item.name
 						)}`,
 						type: 'IE_OBJECT',
@@ -104,10 +102,9 @@ export const useGetContentBlockEnloseContent = (
 
 	return compact(
 		originalElements.map((element) => {
-			const found = mappedResults.find(
+			return mappedResults.find(
 				(item) => (item && item.identifier === element?.mediaItem?.value) || null
 			);
-			return found || null;
 		})
 	) as GetContentBlockEncloseContentReturnType[];
 };
