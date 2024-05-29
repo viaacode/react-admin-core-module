@@ -147,6 +147,7 @@ export interface AdminConfig {
 	locale: Locale;
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
+		CLIENT_URL: string;
 	};
 }
 
