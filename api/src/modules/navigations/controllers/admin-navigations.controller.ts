@@ -36,10 +36,10 @@ export class AdminNavigationsController {
 	@Get('items')
 	public async getAllNavigationElements(
 		@SessionUser() user: SessionUserEntity,
-		@Query('locale') locale?: Locale
+		@Query('language') language?: Locale
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
-			(locale || Locale.nl) as unknown as LanguageCode
+			(language || Locale.nl) as unknown as LanguageCode
 		);
 
 		// filter based on logged in / logged out
