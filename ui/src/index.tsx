@@ -342,8 +342,10 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
+		locale: 'nl',
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
+			CLIENT_URL: 'http://localhost:3400',
 		},
 	});
 }

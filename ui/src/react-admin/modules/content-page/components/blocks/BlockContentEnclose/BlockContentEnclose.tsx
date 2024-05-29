@@ -1,20 +1,20 @@
 import { Button, IconName } from '@viaa/avo2-components';
+import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
 import { compact } from 'lodash-es';
 import React, { FC, useMemo } from 'react';
+import { TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
 import {
 	BlockContentEncloseProps,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
 import { BlockHeading } from '~content-blocks/BlockHeading';
+import { AdminConfigManager } from '~core/config';
 import { Link } from '~modules/shared/components/Link';
 import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';
-import { useGetContentBlockEnloseContent } from './hooks/useGetContentBlockEncloseContent';
-import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
-import { AdminConfigManager } from '~core/config';
-import { TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
+import { useGetContentBlockEncloseContent } from './hooks/useGetContentBlockEncloseContent';
 
 export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 	title,
@@ -43,7 +43,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 		[elements]
 	);
 
-	const elementInfos = useGetContentBlockEnloseContent(
+	const elementInfos = useGetContentBlockEncloseContent(
 		elementTypeAndIds as MappedElement[],
 		elements
 	);
@@ -110,12 +110,18 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 								</div>
 								<div className="c-block-enclosed-content__cards__card__wrapper">
 									<span className="c-block-enclosed-content__cards__card__title">
-										{elementInfo?.name || tText('Geen toegang')}
+										{elementInfo?.name ||
+											tText(
+												'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___geen-toegang'
+											)}
 									</span>
 									<div className="c-block-enclosed-content__cards__card__description-wrapper">
 										<Html
 											content={
-												elementInfo?.description || tText('Geen toegang')
+												elementInfo?.description ||
+												tText(
+													'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___geen-toegang'
+												)
 											}
 											className="c-block-enclosed-content__cards__card__description"
 										/>

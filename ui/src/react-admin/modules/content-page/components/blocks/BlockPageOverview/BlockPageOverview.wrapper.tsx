@@ -19,7 +19,6 @@ import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks
 import { useGetContentPageLabelsByTypeAndLabels } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-labels';
 import { useGetContentPagesForPageOverviewBlock } from '~modules/content-page/hooks/use-get-content-pages-for-page-overview-block';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { Locale } from '~modules/translations/translations.core.types';
 import { ErrorView } from '~shared/components/error';
 import { CheckboxListParam } from '~shared/helpers/query-string-converters';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -95,9 +94,13 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 		);
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
-		useGetContentPageByLanguageAndPath(commonUser?.language as Locale, queryParamsState.item, {
-			keepPreviousData: true,
-		});
+		useGetContentPageByLanguageAndPath(
+			AdminConfigManager.getConfig().locale,
+			queryParamsState.item,
+			{
+				keepPreviousData: true,
+			}
+		);
 
 	const {
 		data: pagesAndLabels,

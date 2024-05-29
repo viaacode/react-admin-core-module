@@ -4,7 +4,7 @@ import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'rea
 
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
-import { App } from '~modules/translations/translations.core.types';
+import { App, Locale } from '~modules/translations/translations.core.types';
 
 import { UserBulkAction } from '~modules/user/user.types';
 import { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
@@ -143,6 +143,7 @@ export interface AdminConfig {
 		NEWS?: string;
 		SEARCH?: string;
 	};
+	locale: Locale;
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
 		CLIENT_URL: string;
