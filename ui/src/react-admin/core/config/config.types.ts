@@ -53,7 +53,7 @@ export interface AdminConfig {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
-	staticPages: string[];
+	staticPages: Record<Locale, string[]>;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 		defaultPageWidth: ContentWidth;

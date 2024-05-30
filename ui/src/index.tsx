@@ -101,12 +101,20 @@ function setConfig() {
 			enableIcons: true,
 			customNavigationElements: ['<PROFILE_DROPDOWN>', '<VISITOR_SPACES_DROPDOWN>'],
 		},
-		staticPages: [
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
-		],
+		staticPages: {
+			nl: [
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
+			],
+			en: [
+				`/${ROUTE_PARTS.admin}/content-pages`,
+				`/${ROUTE_PARTS.admin}/navigation`,
+				`/${ROUTE_PARTS.admin}/user-groups`,
+				`/${ROUTE_PARTS.admin}/users`,
+			],
+		},
 		icon: {
 			component: ({ name }: any) => <span>{name}</span>,
 			componentProps: {

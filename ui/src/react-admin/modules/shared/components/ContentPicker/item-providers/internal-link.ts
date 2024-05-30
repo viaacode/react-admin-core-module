@@ -1,16 +1,17 @@
 import { compact, sortBy } from 'lodash-es';
-
-import { parsePickerItem } from '../helpers/parse-picker';
+import { AdminConfigManager } from '~core/config';
 
 import { PickerItem } from '~shared/types/content-picker';
-import { AdminConfigManager } from '~core/config';
+
+import { parsePickerItem } from '../helpers/parse-picker';
 
 // Return InternalLinkItems items from adminCoreConfig.staticPages
 export const retrieveInternalLinks = async (
 	keyword: string | null,
 	limit: number
 ): Promise<PickerItem[]> => {
-	const staticRoutes = AdminConfigManager.getConfig().staticPages;
+	const staticRoutes =
+		AdminConfigManager.getConfig().staticPages[AdminConfigManager.getConfig().locale];
 	const routeOptions: (PickerItem | null)[] = staticRoutes.map(
 		(staticRoute): PickerItem | null => {
 			if (!keyword || staticRoute.includes(keyword)) {
