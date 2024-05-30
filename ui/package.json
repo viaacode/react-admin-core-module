@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.0.16",
+  "version": "4.0.17",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
