@@ -1,12 +1,13 @@
 import { Button, IconName } from '@viaa/avo2-components';
-import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
+import clsx from 'clsx';
 import { compact } from 'lodash-es';
 import React, { FC, useMemo } from 'react';
-import { TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
+import { GET_TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
 import {
 	BlockContentEncloseProps,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
+import { GetContentBlockEncloseContentReturnType } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
 import { Link } from '~modules/shared/components/Link';
@@ -48,6 +49,35 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 		elements
 	);
 
+	const renderIcon = (elementInfo: GetContentBlockEncloseContentReturnType) => {
+		if (elementInfo.type === 'CONTENT_PAGE') {
+			// No icon should be shown for content page tiles
+			return null;
+		}
+		if (
+			!elementInfo.objectType ||
+			(!GET_TYPE_TO_ICON_MAP()[elementInfo.objectType] && elementInfo.thumbnail)
+		) {
+			// Show a no eye icon with a semi grey background if you do not have access to the thumbnail or the type of the object doesn't have an icon
+			return (
+				<Icon
+					className="c-block-enclosed-content__cards__card__image__no-permission"
+					name={
+						AdminConfigManager.getConfig().icon?.componentProps.eyeOff.name as IconName
+					}
+				/>
+			);
+		}
+
+		// Render the audio, video or newspaper icon on top of the thumbnail
+		// TODO add newspaper icon
+		return (
+			<div className="c-block-enclosed-content__cards__card__image__icon">
+				<Icon name={GET_TYPE_TO_ICON_MAP()[elementInfo.objectType]} />
+			</div>
+		);
+	};
+
 	return (
 		<section className="l-container">
 			<div className="c-block-enclosed-content__header">
@@ -77,39 +107,27 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 						>
 							<Link to={elementInfo.link}>
 								<div
-									className="c-block-enclosed-content__cards__card__image"
-									style={{
-										backgroundImage: `url(${
-											elementInfo.objectType !== ('audio' as IconNameSchema)
-												? elementInfo?.thumbnail
-												: AdminConfigManager.getConfig().components
-														.defaultAudioStill
-										})`,
-									}}
-								>
-									{elementInfo?.thumbnail ||
-									elementInfo?.objectType === 'audio' ? (
-										elementInfo.objectType &&
-										TYPE_TO_ICON_MAP[elementInfo.objectType] ? (
-											<div className="c-block-enclosed-content__cards__card__image__icon">
-												<Icon
-													name={
-														TYPE_TO_ICON_MAP[
-															elementInfo.objectType
-														] as IconName
-													}
-												/>
-											</div>
-										) : null
-									) : (
-										<Icon
-											className="c-block-enclosed-content__cards__card__image__no-permission"
-											name={
-												AdminConfigManager.getConfig().icon?.componentProps
-													.eyeOff.name as IconName
-											}
-										/>
+									className={clsx(
+										'c-block-enclosed-content__cards__card__image',
+										{
+											'c-block-enclosed-content__cards__card__image--audio':
+												elementInfo.objectType === 'audio',
+										}
 									)}
+									style={
+										elementInfo?.thumbnail
+											? {
+													backgroundImage: `url(${
+														elementInfo.objectType === 'audio'
+															? AdminConfigManager.getConfig()
+																	.components.defaultAudioStill
+															: elementInfo?.thumbnail
+													})`,
+											  }
+											: {}
+									}
+								>
+									{renderIcon(elementInfo)}
 								</div>
 								<div className="c-block-enclosed-content__cards__card__wrapper">
 									<span className="c-block-enclosed-content__cards__card__title">

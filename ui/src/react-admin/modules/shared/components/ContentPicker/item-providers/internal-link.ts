@@ -11,17 +11,18 @@ export const retrieveInternalLinks = async (
 	keyword: string | null,
 	limit: number
 ): Promise<PickerItem[]> => {
-	const staticRoutes: [Locale, string][] = Object.keys(
-		AdminConfigManager.getConfig().staticPages
-	).flatMap((language): [Locale, string][] => {
-		const routes = AdminConfigManager.getConfig().staticPages[language as Locale];
-		return routes.map((route: string) => [language, route] as [Locale, string]);
-	});
+	const staticRoutes: [Locale, string][] = Object.keys(AdminConfigManager.getConfig().staticPages)
+		.flatMap((language): [Locale, string][] => {
+			const routes = AdminConfigManager.getConfig().staticPages[language as Locale];
+			return routes.map((route: string) => [language, route] as [Locale, string]);
+		})
+		.filter((route) => !route[1].includes(':'));
 	const routeOptions: (PickerItem | null)[] = staticRoutes.map(
 		(staticRoute): PickerItem | null => {
-			if (!keyword || staticRoute.includes(keyword)) {
+			const label = staticRoute[0] + ' - ' + staticRoute[1];
+			if (!keyword || label.toLowerCase().includes(keyword.toLowerCase())) {
 				return {
-					label: staticRoute[0] + ' -- ' + staticRoute[1],
+					label,
 					...parsePickerItem('INTERNAL_LINK', staticRoute[1]),
 				};
 			}
