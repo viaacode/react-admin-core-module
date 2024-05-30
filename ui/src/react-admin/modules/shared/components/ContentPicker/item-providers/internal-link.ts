@@ -1,5 +1,6 @@
 import { compact, sortBy } from 'lodash-es';
 import { AdminConfigManager } from '~core/config';
+import { Locale } from '~modules/translations/translations.core.types';
 
 import { PickerItem } from '~shared/types/content-picker';
 
@@ -10,14 +11,18 @@ export const retrieveInternalLinks = async (
 	keyword: string | null,
 	limit: number
 ): Promise<PickerItem[]> => {
-	const staticRoutes =
-		AdminConfigManager.getConfig().staticPages[AdminConfigManager.getConfig().locale];
+	const staticRoutes: [Locale, string][] = Object.keys(
+		AdminConfigManager.getConfig().staticPages
+	).flatMap((language): [Locale, string][] => {
+		const routes = AdminConfigManager.getConfig().staticPages[language as Locale];
+		return routes.map((route: string) => [language, route] as [Locale, string]);
+	});
 	const routeOptions: (PickerItem | null)[] = staticRoutes.map(
 		(staticRoute): PickerItem | null => {
 			if (!keyword || staticRoute.includes(keyword)) {
 				return {
-					label: staticRoute,
-					...parsePickerItem('INTERNAL_LINK', staticRoute),
+					label: staticRoute[0] + ' -- ' + staticRoute[1],
+					...parsePickerItem('INTERNAL_LINK', staticRoute[1]),
 				};
 			}
 			return null;
