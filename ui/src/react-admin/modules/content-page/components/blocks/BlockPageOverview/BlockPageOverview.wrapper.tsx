@@ -95,7 +95,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 
 	const { data: focusedPage, isFetching: isLoadingFocusedPage } =
 		useGetContentPageByLanguageAndPath(
-			AdminConfigManager.getConfig().locale,
+			AdminConfigManager.getConfig().locale || Locale.Nl,
 			queryParamsState.item,
 			{
 				keepPreviousData: true,

@@ -31,7 +31,6 @@ interface ProjectSpotlightWrapperProps {
 export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWrapperProps> = ({
 	elements,
 	renderLink,
-	commonUser,
 }) => {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
 	const [projectContentPages, setProjectContentPages] = useState<

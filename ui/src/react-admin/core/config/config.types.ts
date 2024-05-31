@@ -7,6 +7,7 @@ import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/conte
 import { App, Locale } from '~modules/translations/translations.core.types';
 
 import { UserBulkAction } from '~modules/user/user.types';
+
 import { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 
 export enum ToastType {
@@ -52,7 +53,7 @@ export interface AdminConfig {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
-	staticPages: string[];
+	staticPages: Record<Locale, string[]>;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 		defaultPageWidth: ContentWidth;
