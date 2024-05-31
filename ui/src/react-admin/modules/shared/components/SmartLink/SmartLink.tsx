@@ -1,4 +1,5 @@
 import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { fromPairs, map } from 'lodash-es';
 import { stringify } from 'query-string';
@@ -8,7 +9,6 @@ import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
-import type { Avo } from '@viaa/avo2-types';
 import { Link } from '../Link';
 
 export interface SmartLinkProps {
@@ -93,7 +93,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				// relative url
 				return (
 					<a
-						href={`${window.location.origin}${fullUrl}`}
+						href={`${AdminConfigManager.getConfig().env.CLIENT_URL}${fullUrl}`}
 						target="_blank"
 						rel="noopener noreferrer"
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}

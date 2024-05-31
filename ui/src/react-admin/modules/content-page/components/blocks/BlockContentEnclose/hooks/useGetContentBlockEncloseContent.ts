@@ -33,7 +33,9 @@ export const useGetContentBlockEncloseContent = (
 	const ieObjectQuery = {
 		queryKey: [QUERY_KEYS.GET_IE_OBJECT],
 		queryFn: () =>
-			fetchWithLogoutJson<IeObject[]>(url, { headers: { referer: window.location.origin } }),
+			fetchWithLogoutJson<any[]>(url, {
+				headers: { referer: AdminConfigManager.getConfig().env.CLIENT_URL },
+			}),
 		keepPreviousData: true,
 		enabled: ieObjectIds.length > 0,
 	};

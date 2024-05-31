@@ -1,4 +1,6 @@
+import { AdminConfigManager } from '~core/config';
 import { GET_SIMPLE_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 import { tText } from '~shared/helpers/translation-functions';
@@ -14,9 +16,6 @@ import {
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
-import { isAvo } from '~modules/shared/helpers/is-avo';
 
 export const INITIAL_RICH_TEXT_TWO_COLUMNS_COMPONENTS_STATE = (): RichTextBlockComponentState[] => [
 	{

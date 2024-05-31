@@ -3,6 +3,7 @@ import { type Avo } from '@viaa/avo2-types';
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 import { AdminConfigManager } from '~core/config';
+import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 
@@ -43,11 +44,15 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 					const projectPath = projectInfo?.project?.value;
 					if (projectPath?.toString()) {
 						try {
-							return await ContentPageService.getContentPageByLanguageAndPath(
-								(AdminConfigManager.getConfig().locale || Locale.Nl) as Locale,
-								projectPath.toString(),
-								true
-							);
+							const dbContentPage =
+								await ContentPageService.getContentPageByLanguageAndPath(
+									(AdminConfigManager.getConfig().locale || Locale.Nl) as Locale,
+									projectPath.toString(),
+									true
+								);
+							return dbContentPage
+								? convertDbContentPageToContentPageInfo(dbContentPage)
+								: null;
 						} catch (err) {
 							// Failed to fetch one of the content pages
 							// Continue rendering the block with one of the tiles missing
