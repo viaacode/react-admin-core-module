@@ -70,22 +70,27 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			title: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___titel'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			text: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___tekst'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),

@@ -64,12 +64,14 @@ export const PROJECTS_SPOTLIGHT_BLOCK_CONFIG = (position = 0): ContentBlockConfi
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
 				} as FileUploadProps,
+				validator: undefined,
 			}),
 			customTitle: TEXT_FIELD(undefined, {
 				label: tText(
 					'admin/content-block/helpers/generators/project-spotlight___aangepaste-titel-optioneel'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 		},
 	},

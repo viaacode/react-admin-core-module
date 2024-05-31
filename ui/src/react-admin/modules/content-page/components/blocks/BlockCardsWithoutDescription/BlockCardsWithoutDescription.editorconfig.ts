@@ -65,6 +65,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
+				validator: undefined,
 				editorProps: {
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,

@@ -77,6 +77,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
 				),
 				editorType: ContentBlockEditor.FileUpload,
+				validator: undefined,
 				editorProps: {
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
@@ -102,6 +103,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'admin/content-block/helpers/image-text-background/image-text-background___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonAction: {
 				label: tText(

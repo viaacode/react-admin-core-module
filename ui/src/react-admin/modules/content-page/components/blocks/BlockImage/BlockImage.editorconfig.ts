@@ -41,12 +41,14 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			title: {
 				label: tText('admin/content-block/helpers/generators/image___bijschift-titel'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			},
 			text: {
 				label: tText(
 					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			},
 			imageSource: FILE_FIELD(
 				tText('admin/content-block/helpers/generators/image___een-afbeelding-is-verplicht'),
@@ -94,6 +96,7 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					'react-admin/modules/content-page/components/blocks/block-image/block-image___alt-tekst-voor-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonType: {
 				label: tText(

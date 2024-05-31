@@ -53,6 +53,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					'admin/content-block/helpers/generators/image-title-text-button___alt-tekst-voor-de-afbeelding'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			imagePosition: {
 				label: tText(
@@ -68,6 +69,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 			headingTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/heading___titel'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			headingType: {
 				label: tText('admin/content-block/helpers/generators/heading___stijl'),
@@ -93,6 +95,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 					'admin/content-block/helpers/generators/media-player-title-text-button___alt-title-text'
 				),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonIcon: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-icoon'),
