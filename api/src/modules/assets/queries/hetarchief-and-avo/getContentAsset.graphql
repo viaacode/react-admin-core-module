@@ -1,0 +1,12 @@
+query getContentAsset($path: String!) {
+	app_content_assets(where: { path: { _eq: $path } }) {
+		path
+		id
+		content_asset_type_id
+		created_at
+		description
+		label
+		owner_id
+		updated_at
+	}
+}

@@ -17,9 +17,15 @@ import _, { escapeRegExp, isNil } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
+	GetContentAssetDocument,
+	GetContentAssetQuery,
+	GetContentAssetQueryVariables,
 	InsertContentAssetDocument,
 	InsertContentAssetMutation,
 	InsertContentAssetMutationVariables,
+	UpdateContentAssetDocument,
+	UpdateContentAssetMutation,
+	UpdateContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { AssetToken } from '../assets.types';
 
@@ -177,7 +183,12 @@ export class AssetsService {
 		preferredKey?: string
 	): Promise<string> {
 		const url = await this.upload(assetFiletype, file, preferredKey);
-		await this.addAssetEntryToDb(ownerId, assetFiletype, url);
+		const contentAsset = await this.getAssetEntryFromDb(url);
+		if (contentAsset) {
+			await this.updateAssetEntryInDb(ownerId, assetFiletype, url);
+		} else {
+			await this.addAssetEntryToDb(ownerId, assetFiletype, url);
+		}
 		return url;
 	}
 
@@ -491,5 +502,38 @@ export class AssetsService {
 		>(InsertContentAssetDocument, {
 			asset,
 		});
+	}
+
+	public async updateAssetEntryInDb(
+		ownerId: string,
+		type: AssetType,
+		url: string
+	): Promise<void> {
+		const asset = {
+			owner_id: ownerId,
+			content_asset_type_id: type,
+			label: url,
+			description: null as string | null,
+			path: url,
+		};
+		await this.dataService.execute<
+			UpdateContentAssetMutation,
+			UpdateContentAssetMutationVariables
+		>(UpdateContentAssetDocument, {
+			path: url,
+			asset,
+		});
+	}
+
+	public async getAssetEntryFromDb(
+		url: string
+	): Promise<GetContentAssetQuery['app_content_assets'][0] | null> {
+		const response = await this.dataService.execute<
+			GetContentAssetQuery,
+			GetContentAssetQueryVariables
+		>(GetContentAssetDocument, {
+			path: url,
+		});
+		return response.app_content_assets[0];
 	}
 }

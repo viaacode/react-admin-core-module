@@ -1,0 +1,5 @@
+mutation updateContentAsset($path: String!, $asset: app_content_assets_set_input!) {
+	update_app_content_assets(_set: $asset, where: { path: { _eq: $path } }) {
+		affected_rows
+	}
+}
