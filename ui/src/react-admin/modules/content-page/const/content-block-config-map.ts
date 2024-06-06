@@ -3,6 +3,8 @@ import {
 	ANCHOR_LINKS_BLOCK_CONFIG,
 	BUTTONS_BLOCK_CONFIG,
 	CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG,
+	CONTENT_BREADCRUMBS_CONFIG,
+	CONTENT_ENCLOSE_BLOCK_CONFIG,
 	CONTENT_PAGE_META_BLOCK_CONFIG,
 	CTAS_BLOCK_CONFIG,
 	EVENTBRITE_BLOCK_CONFIG,
@@ -34,7 +36,6 @@ import {
 	USP_GRID_BLOCK_CONFIG,
 } from '~modules/content-page/components/blocks';
 import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
-import { CONTENT_ENCLOSE_BLOCK_CONFIG } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 
 export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	ContentBlockType,
@@ -74,4 +75,5 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.HetArchiefHeaderSearch]: HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG,
 	[ContentBlockType.OverviewNewspaperTitles]: OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG,
 	[ContentBlockType.ContentEncloseGrid]: CONTENT_ENCLOSE_BLOCK_CONFIG,
+	[ContentBlockType.Breadcrumbs]: CONTENT_BREADCRUMBS_CONFIG,
 };

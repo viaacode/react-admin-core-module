@@ -32,3 +32,4 @@ export * from './anchor-links';
 export * from './defaults';
 export * from './search';
 export * from './BlockContentEnclose';
+export * from './BlockBreadcrumbs';
