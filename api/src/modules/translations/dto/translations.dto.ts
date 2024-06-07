@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
-import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
 
-import { Component, Key, LanguageCode, Location } from '../translations.types';
+import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-hetarchief';
+import { Component, Key, Locale, Location } from '../translations.types';
 
 export class UpdateTranslationDto {
 	@IsString()
@@ -38,13 +38,13 @@ export class UpdateTranslationDto {
 	@IsString()
 	@ApiProperty({
 		required: true,
-		enum: LanguageCode,
+		enum: Locale,
 		description:
 			'The language code of the current value. Possible values: ' +
 			Object.values(Lookup_Languages_Enum).join(', '),
 		example: 'EN',
 	})
-	languageCode: LanguageCode;
+	languageCode: Locale;
 
 	@IsString()
 	@ApiProperty({

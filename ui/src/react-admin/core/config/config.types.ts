@@ -1,3 +1,4 @@
+import { LinkTarget } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
@@ -43,6 +44,7 @@ export interface LinkInfo {
 	onClick?: (evt: MouseEvent) => void;
 	title?: string;
 	children: ReactNode;
+	target?: LinkTarget;
 }
 
 export type History = ReturnType<AdminConfig['services']['router']['useHistory']>;

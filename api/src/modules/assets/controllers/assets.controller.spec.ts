@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 
 import { mockUserAvo } from '../../../mock-user';
 import { mockTranslationsService } from '../../shared/helpers/mockTranslationsService';
-import { TranslationsService } from '../../translations';
+import { Locale, TranslationsService } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { AssetsService } from '../services/assets.service';
 
@@ -48,7 +48,8 @@ describe('AssetsController', () => {
 
 			const response = await assetsController.uploadAsset(
 				{} as any,
-				{} as Avo.FileUpload.UploadAssetInfo
+				{} as Avo.FileUpload.UploadAssetInfo,
+				{ getLanguage: () => Locale.Nl } as any
 			);
 
 			expect(response).toEqual({

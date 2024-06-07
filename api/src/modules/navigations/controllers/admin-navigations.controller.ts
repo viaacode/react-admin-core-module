@@ -7,7 +7,7 @@ import { RequireAnyPermissions } from '../../shared/decorators/require-any-permi
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { DeleteResponse, SpecialPermissionGroups } from '../../shared/types/types';
-import { LanguageCode, Locale } from '../../translations';
+import { Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CreateNavigationDto, UpdateNavigationDto } from '../dto/navigations.dto';
 import { NavigationItem } from '../navigations.types';
@@ -39,7 +39,7 @@ export class AdminNavigationsController {
 		@Query('language') language?: Locale
 	): Promise<Record<string, NavigationItem[]>> {
 		const allNavigationItems = await this.adminNavigationsService.findAllNavigationBarItems(
-			(language || Locale.nl) as unknown as LanguageCode
+			(language || Locale.Nl) as unknown as Locale
 		);
 
 		// filter based on logged in / logged out
@@ -119,7 +119,7 @@ export class AdminNavigationsController {
 	): Promise<NavigationItem[]> {
 		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
 			placement,
-			(languages?.length ? languages.split(',') : []) as LanguageCode[],
+			(languages?.length ? languages.split(',') : []) as Locale[],
 			searchTerm
 		);
 	}

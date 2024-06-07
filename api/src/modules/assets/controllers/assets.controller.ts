@@ -83,12 +83,15 @@ export class AssetsController {
 	)
 	async uploadAsset(
 		@UploadedFile() file: any & { originalname: string; mimetype: string },
-		@Body() uploadAssetInfo: Avo.FileUpload.UploadAssetInfo
+		@Body() uploadAssetInfo: Avo.FileUpload.UploadAssetInfo,
+		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<{ url: string }> {
 		if (!file) {
 			throw new BadRequestException(
 				this.translationsService.tText(
-					'modules/assets/controllers/assets___the-request-should-contain-a-file-to-upload'
+					'modules/assets/controllers/assets___the-request-should-contain-a-file-to-upload',
+					{},
+					sessionUser.getLanguage()
 				)
 			);
 		}

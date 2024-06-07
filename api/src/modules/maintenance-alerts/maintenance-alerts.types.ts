@@ -4,7 +4,7 @@ import {
 	type InsertMaintenanceAlertMutation,
 	type UpdateMaintenanceAlertMutation,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { type LanguageCode } from '../translations';
+import { type Locale } from '../translations';
 
 export class MaintenanceAlert {
 	id: string;
@@ -14,7 +14,7 @@ export class MaintenanceAlert {
 	fromDate: string;
 	untilDate: string;
 	userGroups?: string[];
-	language: LanguageCode;
+	language: Locale;
 }
 
 export type GqlMaintenanceAlert =

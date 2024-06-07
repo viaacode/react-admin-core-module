@@ -3,7 +3,7 @@ import { Type } from 'class-transformer';
 import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { SortDirection } from '../../shared/types';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { MaintenanceAlertOrderProp, MaintenanceAlertType } from '../maintenance-alerts.types';
 
 export class MaintenanceAlertsQueryDto {
@@ -130,9 +130,9 @@ export class CreateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'Language of the maintenance alert',
-		enum: LanguageCode,
+		enum: Locale,
 	})
-	language: LanguageCode;
+	language: Locale;
 }
 
 export class UpdateMaintenanceAlertDto {
@@ -202,7 +202,7 @@ export class UpdateMaintenanceAlertDto {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'Language of the maintenance alert',
-		enum: LanguageCode,
+		enum: Locale,
 	})
-	language: LanguageCode;
+	language: Locale;
 }

@@ -8,8 +8,8 @@ import { UpdateTranslationDto } from '../dto/translations.dto';
 import { TranslationsService } from '../services/translations.service';
 import {
 	type KeyValueTranslations,
-	LanguageCode,
 	type LanguageInfo,
+	Locale,
 	MultiLanguageTranslationEntry,
 } from '../translations.types';
 
@@ -28,14 +28,14 @@ export class TranslationsController {
 		name: 'languageCode',
 		enum: [
 			// nl, en
-			...Object.values(LanguageCode),
+			...Object.values(Locale),
 		],
 	})
 	public async getTranslationsJson(
-		@Param('languageCode') languageCode: LanguageCode
+		@Param('languageCode') languageCode: Locale
 	): Promise<KeyValueTranslations> {
 		return this.translationsService.getFrontendTranslations(
-			languageCode.toLowerCase() as LanguageCode
+			languageCode.toLowerCase() as Locale
 		);
 	}
 

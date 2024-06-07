@@ -2,7 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 
 import { DataService } from '../../data';
 import { SpecialPermissionGroups } from '../../shared/types/types';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { type NavigationQueryTypes } from '../queries/navigation.queries';
 
 import { AdminNavigationsService } from './admin-navigations.service';
@@ -21,7 +21,7 @@ const mockNavigationElement1 = {
 	description: 'Navigatie balk in de footer gecentreerd',
 	created_at: '2022-02-21T16:36:06.045845+00:00',
 	content_id: null,
-	language: LanguageCode.Nl,
+	language: Locale.Nl,
 	tooltip: null,
 };
 
@@ -66,7 +66,7 @@ describe('NavigationsService', () => {
 		mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 		const response = await navigationsService.findNavigationBarItemsByPlacementId(
 			mockNavigationElement1.placement,
-			[LanguageCode.Nl]
+			[Locale.Nl]
 		);
 		expect(response.length).toBe(1);
 		expect(response[0].placement).toEqual(mockNavigationElement1.placement);
@@ -117,7 +117,7 @@ describe('NavigationsService', () => {
 				iconName: 'plus',
 				placement: 'footer-links',
 				position: 1,
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 			});
 			expect(response.id).toBe('1');
 			expect(response.iconName).toBe('plus');
@@ -138,7 +138,7 @@ describe('NavigationsService', () => {
 				iconName: 'plus',
 				placement: 'footer-links',
 				position: 1,
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 			});
 			expect(response.id).toBe('1');
 			expect(response.iconName).toBe('plus');

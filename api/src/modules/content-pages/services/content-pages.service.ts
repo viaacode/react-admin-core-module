@@ -46,7 +46,7 @@ import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief }
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { ContentBlockType, DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
@@ -224,7 +224,7 @@ export class ContentPagesService {
 			updated_at: contentPageInfo.updatedAt || null,
 			user_group_ids: contentPageInfo.userGroupIds.map((groupId) => String(groupId)),
 			user_profile_id: contentPageInfo.userProfileId,
-			language: contentPageInfo.language || LanguageCode.Nl,
+			language: contentPageInfo.language || Locale.Nl,
 			nl_parent_page_id: contentPageInfo.nlParentPageId || null,
 		};
 	}
@@ -377,7 +377,7 @@ export class ContentPagesService {
 	}
 
 	public async getContentPageByLanguageAndPath(
-		language: LanguageCode,
+		language: Locale,
 		path: string
 	): Promise<DbContentPage | null> {
 		const response = await this.dataService.execute<
@@ -396,7 +396,7 @@ export class ContentPagesService {
 	}
 
 	public async getContentPageByLanguageAndPathForUser(
-		language: LanguageCode,
+		language: Locale,
 		path: string,
 		user?: Avo.User.CommonUser,
 		referrer?: string,

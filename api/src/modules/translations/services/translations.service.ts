@@ -35,8 +35,8 @@ import {
 	Component,
 	Key,
 	KeyValueTranslations,
-	LanguageCode,
 	LanguageInfo,
+	Locale,
 	Location,
 	MultiLanguageTranslationEntry,
 	TRANSLATION_SEPARATOR,
@@ -46,7 +46,7 @@ import {
 
 @Injectable()
 export class TranslationsService implements OnApplicationBootstrap {
-	private backendTranslations: KeyValueTranslations;
+	private backendTranslations: Record<Locale, KeyValueTranslations>;
 
 	constructor(
 		private dataService: DataService,
@@ -88,7 +88,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 					value_type: translationEntryPair[1][0].value_type,
 					values: Object.fromEntries(
 						translationEntryPair[1].map((t) => [t.language, t.value])
-					) as Record<LanguageCode, string>,
+					) as Record<Locale, string>,
 				};
 			}
 		);
@@ -102,7 +102,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		component: Component,
 		location: Location,
 		key: Key,
-		languageCode: LanguageCode,
+		languageCode: Locale,
 		value: string
 	): Promise<void> {
 		try {
@@ -123,8 +123,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 					languageCode,
 					value,
 					// Use the same value_type as the dutch translation
-					existingEntries.find((entry) => entry.language === LanguageCode.Nl)
-						?.value_type || ValueType.TEXT
+					existingEntries.find((entry) => entry.language === Locale.Nl)?.value_type ||
+						ValueType.TEXT
 				);
 			}
 
@@ -144,7 +144,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		component: Component,
 		location: Location,
 		key: Key,
-		languageCode: LanguageCode,
+		languageCode: Locale,
 		value: string,
 		value_type: ValueType
 	): Promise<void> {
@@ -178,7 +178,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		component: Component,
 		location: Location,
 		key: Key,
-		languageCode: LanguageCode,
+		languageCode: Locale,
 		value: string
 	): Promise<void> {
 		try {
@@ -211,17 +211,28 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	private convertTranslationEntriesToKeyValue(
 		entries: TranslationEntry[]
-	): Record<string, string> {
+	): Record<Locale, Record<string, string>> {
+		const groupedByLanguage = groupBy(entries, (entry) => entry.language as Locale) as Record<
+			Locale,
+			TranslationEntry[]
+		>;
+
+		const languageCodes = Object.keys(groupedByLanguage) as Locale[];
 		return Object.fromEntries(
-			entries.map((entry): [string, string] => {
-				return [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value];
+			languageCodes.map((language) => {
+				const translationPairs = groupedByLanguage[language].map(
+					(entry): [string, string] => {
+						return [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value];
+					}
+				);
+				return [language, Object.fromEntries(translationPairs)];
 			})
-		);
+		) as Record<Locale, Record<string, string>>;
 	}
 
 	public async getTranslationsByComponent(
 		components: Component[],
-		languageCodes?: LanguageCode[]
+		languageCodes?: Locale[]
 	): Promise<TranslationEntry[]> {
 		let response:
 			| GetTranslationsByComponentsQuery
@@ -254,9 +265,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 		return response.app_translations.map(this.adapt);
 	}
 
-	public async getFrontendTranslations(
-		languageCode: LanguageCode
-	): Promise<KeyValueTranslations> {
+	public async getFrontendTranslations(languageCode: Locale): Promise<KeyValueTranslations> {
 		const translations = await this.cacheManager.wrap(
 			'FRONTEND_TRANSLATIONS_' + languageCode,
 			async () => {
@@ -272,7 +281,7 @@ export class TranslationsService implements OnApplicationBootstrap {
 			throw new NotFoundException('No translations have been set in the database');
 		}
 
-		return translations;
+		return translations[languageCode];
 	}
 
 	/**
@@ -280,7 +289,11 @@ export class TranslationsService implements OnApplicationBootstrap {
 	 */
 	@Cron('*/30 * * * *')
 	public async refreshBackendTranslations(): Promise<void> {
-		const translationEntries = await this.getTranslationsByComponent([Component.BACKEND]);
+		const languages = await this.getLanguages();
+		const translationEntries = await this.getTranslationsByComponent(
+			[Component.BACKEND],
+			languages.map((language) => language.languageCode) as Locale[]
+		);
 
 		if (!translationEntries?.length) {
 			throw new NotFoundException('No backend translations have been set in the database');
@@ -289,8 +302,12 @@ export class TranslationsService implements OnApplicationBootstrap {
 		this.backendTranslations = this.convertTranslationEntriesToKeyValue(translationEntries);
 	}
 
-	public tText(key: string, variables: Record<string, string | number> = {}): string {
-		const translation = this.backendTranslations[key];
+	public tText(
+		key: string,
+		variables: Record<string, string | number> | null,
+		locale: Locale
+	): string {
+		const translation = this.backendTranslations[locale][key];
 		if (translation) {
 			return resolveTranslationVariables(translation, variables);
 		}

@@ -2,7 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 
 import { type UpdateResponse } from '../../shared/types/types';
 import { SiteVariablesService } from '../../site-variables';
-import { Component, LanguageCode } from '../translations.types';
+import { Component, Locale } from '../translations.types';
 
 import { TranslationsService } from './translations.service';
 
@@ -48,7 +48,7 @@ describe('TranslationsService', () => {
 				mockTranslationsResponse.value
 			);
 			// mockCacheManager.wrap.mockResolvedValueOnce(mockTranslationsResponse.value);
-			const translations = await translationsService.getFrontendTranslations(LanguageCode.Nl);
+			const translations = await translationsService.getFrontendTranslations(Locale.Nl);
 
 			expect(translations).toEqual(mockTranslationsResponse.value);
 		});
@@ -111,7 +111,7 @@ describe('TranslationsService', () => {
 				Component.FRONTEND,
 				'modules/admin/const/requests',
 				'status',
-				LanguageCode.Nl,
+				Locale.Nl,
 				'new value'
 			);
 			expect(response).toEqual({ affectedRows: 1 });
