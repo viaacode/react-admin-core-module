@@ -10,7 +10,7 @@ import * as path from 'path';
 import {
 	App,
 	Component,
-	LanguageCode,
+	Locale,
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 } from '../src/react-admin/modules/translations/translations.core.types';
@@ -60,7 +60,7 @@ async function migrateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
-					language: LanguageCode.Nl,
+					language: Locale.Nl,
 					value: entry[1],
 					value_type: null,
 				};
@@ -80,7 +80,7 @@ async function migrateTranslations(
 					);
 					return {
 						...nlTranslationEntry,
-						language: LanguageCode.En,
+						language: Locale.En,
 						value: await machineTranslate(nlTranslationEntry.value),
 					};
 				}

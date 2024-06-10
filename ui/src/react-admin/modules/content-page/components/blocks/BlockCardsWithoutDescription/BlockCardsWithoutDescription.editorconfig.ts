@@ -1,4 +1,11 @@
 import { GET_CARD_WITHOUT_DESCRIPTION_STYLE_OPTIONS } from '~modules/content-page/const/get-card-without-description-style-options';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+} from '~modules/content-page/const/get-color-options';
+
+import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import {
 	CardWithoutDescriptionBlockComponentState,
@@ -16,13 +23,6 @@ import {
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-
-import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_BACKGROUND_COLOR_OPTIONS_AVO,
-} from '~modules/content-page/const/get-color-options';
 
 export const INITIAL_CARDS_WITHOUT_DESCRIPTION_COMPONENTS_STATE =
 	(): CardWithoutDescriptionBlockComponentState[] => [

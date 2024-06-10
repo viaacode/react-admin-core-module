@@ -1,8 +1,8 @@
-import { PickerItem } from '~shared/types/content-picker';
 import { ButtonAction, ButtonType } from '@viaa/avo2-components';
-import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
 import { ContentPickerTypeSchema } from '@viaa/avo2-types/types/core';
+import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import { PickerItem } from '~shared/types/content-picker';
 
 export type BlockContentEncloseProps = {
 	title: string;
@@ -18,14 +18,7 @@ export type BlockContentEncloseProps = {
 	}[];
 };
 
-export type MappedObject = {
+export type MappedElement = {
 	value: string;
 	type: ContentPickerTypeSchema;
 };
-
-export interface EnclosedContent {
-	thumbnail_path: string;
-	name: string;
-	description: string;
-	id: string;
-}

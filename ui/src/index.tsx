@@ -7,7 +7,7 @@ import nlBE from 'date-fns/locale/nl-BE/index.js';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 import { TOptions } from 'i18next';
 import { capitalize, lowerCase } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Link, useHistory } from 'react-router-dom';
 import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
@@ -102,12 +102,20 @@ function setConfig() {
 			enableIcons: true,
 			customNavigationElements: ['<PROFILE_DROPDOWN>', '<VISITOR_SPACES_DROPDOWN>'],
 		},
-		staticPages: [
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
-			`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
-		],
+		staticPages: {
+			nl: [
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.content}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.navigation}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.userGroup}`,
+				`/${ROUTE_PARTS.admin}/${ROUTE_PARTS.users}`,
+			],
+			en: [
+				`/${ROUTE_PARTS.admin}/content-pages`,
+				`/${ROUTE_PARTS.admin}/navigation`,
+				`/${ROUTE_PARTS.admin}/user-groups`,
+				`/${ROUTE_PARTS.admin}/users`,
+			],
+		},
 		icon: {
 			component: ({ name }: any) => <span>{name}</span>,
 			componentProps: {
@@ -133,6 +141,10 @@ function setConfig() {
 				export: { name: 'export' },
 				info: { name: 'info' },
 				warning: { name: 'exclamation' },
+				eyeOff: { name: 'eye-off' },
+				video: { name: 'video' },
+				audio: { name: 'audio' },
+				newspaper: { name: 'newspaper' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
@@ -263,7 +275,10 @@ function setConfig() {
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
 			// https://app.diagrams.net/#G1WCrp76U14pGpajEplYlSVGiuWfEQpRqI
-			getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
+			// AVO
+			// getContentPageByLanguageAndPathEndpoint: `${proxyUrl}/admin/content-pages/by-language-and-path`,
+			// HET_ARCHIEF
+			getContentPageByLanguageAndPathEndpoint: null,
 			i18n: {
 				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
 					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />
@@ -339,8 +354,10 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
+		locale: 'nl',
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
+			CLIENT_URL: 'http://localhost:3400',
 		},
 	});
 }

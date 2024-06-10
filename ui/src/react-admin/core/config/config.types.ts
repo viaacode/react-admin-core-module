@@ -1,12 +1,13 @@
 import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
-import { App } from '~modules/translations/translations.core.types';
-
-import { UserBulkAction } from '~modules/user/user.types';
 
 import { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { App, Locale } from '~modules/translations/translations.core.types';
+
+import { UserBulkAction } from '~modules/user/user.types';
+
 import { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
 
 export enum ToastType {
@@ -52,7 +53,7 @@ export interface AdminConfig {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
-	staticPages: string[];
+	staticPages: Record<Locale, string[]>;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 		defaultPageWidth: ContentWidth;
@@ -143,8 +144,10 @@ export interface AdminConfig {
 		NEWS?: string;
 		SEARCH?: string;
 	};
+	locale: Locale;
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
+		CLIENT_URL: string;
 	};
 }
 
@@ -173,6 +176,10 @@ export interface IconConfig {
 		export: IconComponentProps;
 		info: IconComponentProps;
 		warning: IconComponentProps;
+		eyeOff: IconComponentProps;
+		audio: IconComponentProps;
+		video: IconComponentProps;
+		newspaper: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];

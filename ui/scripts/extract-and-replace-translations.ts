@@ -34,7 +34,7 @@ import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-
 import {
 	App,
 	Component,
-	LanguageCode,
+	Locale,
 	TRANSLATION_SEPARATOR,
 	TranslationEntry,
 	ValueType,
@@ -183,7 +183,7 @@ async function extractTranslationsFromCodeFiles(
 							component,
 							location,
 							key,
-							language: LanguageCode.Nl,
+							language: Locale.Nl,
 							value:
 								(hasKeyAlready
 									? getFormattedTranslation(
@@ -267,7 +267,8 @@ async function combineTranslations(
 	nlJsonTranslations: TranslationEntry[],
 	nlSourceCodeTranslations: TranslationEntry[],
 	allOnlineTranslations: TranslationEntry[],
-	outputJsonFile: string
+	outputJsonFile: string,
+	app: App
 ): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
 	const nlJsonTranslationKeys: string[] = nlJsonTranslations.map(getFullKey);
@@ -297,7 +298,7 @@ async function combineTranslations(
 		const onlineTranslations = allOnlineTranslations.filter(
 			(t) => getFullKey(t) === translationKey
 		);
-		const nlOnlineTranslation = onlineTranslations.find((t) => t.language === LanguageCode.Nl);
+		const nlOnlineTranslation = onlineTranslations.find((t) => t.language === Locale.Nl);
 		const nlJsonTranslation = nlJsonTranslations.find(
 			(t) => getFullKey(t) === translationKey
 		) as TranslationEntry;
@@ -318,8 +319,9 @@ async function combineTranslations(
 			);
 		}
 
-		// Output translations for both NL and EN
-		[LanguageCode.Nl, LanguageCode.En].forEach((languageCode) => {
+		// Output translations for both 'nl' and 'en'
+		const languages = app === App.AVO ? [Locale.Nl] : [Locale.Nl, Locale.En];
+		languages.forEach((languageCode) => {
 			const onlineTranslation = onlineTranslations.find((t) => t.language === languageCode);
 			const entry: TranslationEntry = {
 				app:
@@ -335,7 +337,7 @@ async function combineTranslations(
 					onlineTranslation?.location ||
 					nlJsonTranslation?.location,
 				key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-				language: languageCode, // All source code translations are dutch, online translation can exist in EN and NL
+				language: languageCode, // All source code translations are dutch, online translation can exist in 'en'' and 'nl'
 				value:
 					onlineTranslation?.value ||
 					nlJsonTranslation?.value ||
@@ -352,7 +354,7 @@ async function combineTranslations(
 
 	const combinedTranslations = Object.fromEntries(
 		combinedTranslationEntries
-			.filter((entry) => entry.language === LanguageCode.Nl)
+			.filter((entry) => entry.language === Locale.Nl)
 			.map((entry) => [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value])
 	);
 	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
@@ -390,7 +392,7 @@ async function updateTranslations(
 					component,
 					location: entry[0].split(TRANSLATION_SEPARATOR)[0],
 					key: entry[0].split(TRANSLATION_SEPARATOR)[1],
-					language: LanguageCode.Nl,
+					language: Locale.Nl,
 					value: entry[1],
 					value_type: null,
 				};
@@ -411,7 +413,8 @@ async function updateTranslations(
 			nlJsonTranslationEntries,
 			sourceCodeTranslations,
 			onlineTranslations,
-			path.join(rootFolderPath, outputJsonFile)
+			path.join(rootFolderPath, outputJsonFile),
+			app
 		);
 	} catch (err) {
 		throw new Error(
@@ -447,7 +450,7 @@ async function extractTranslations() {
 			Component.ADMIN_CORE,
 			'../shared/translations/avo/nl.json'
 		);
-		console.info('Formatting code');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '..')} && npm run format`);
 
 		// AVO client
@@ -458,7 +461,7 @@ async function extractTranslations() {
 			Component.FRONTEND,
 			'shared/translations/nl.json'
 		);
-		console.info('Formatting code');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '../../../avo2-client')} && npm run format`);
 
 		// AVO proxy
@@ -469,7 +472,7 @@ async function extractTranslations() {
 			Component.BACKEND,
 			'shared/translations/nl.json'
 		);
-		console.info('Formatting code');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '../../../avo2-proxy/server')} && npm run format`);
 
 		allTranslations = [
@@ -486,7 +489,7 @@ async function extractTranslations() {
 			Component.ADMIN_CORE,
 			'../shared/translations/hetArchief/nl.json'
 		);
-		console.info('Formatting code\n\n');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '..')} && npm run format`);
 
 		// HetArchief client
@@ -497,7 +500,7 @@ async function extractTranslations() {
 			Component.FRONTEND,
 			'../public/locales/nl/common.json'
 		);
-		console.info('Formatting code\n\n');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '../../../hetarchief-client')} && npm run format`);
 
 		// HetArchief proxy
@@ -508,7 +511,7 @@ async function extractTranslations() {
 			Component.BACKEND,
 			'shared/i18n/locales/nl.json'
 		);
-		console.info('Formatting code\n\n');
+		console.info('Formatting code\n');
 		execSync(`cd ${path.resolve(__dirname, '../../../hetarchief-proxy')} && npm run format`);
 
 		allTranslations = [

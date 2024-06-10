@@ -37,7 +37,7 @@ export const validateContentBlockField = (
 
 	// If no errors are given, cleanup empty properties
 	if (errorArray.length === 0) {
-		// No more errors, clear proprty from error object
+		// No more errors, clear property from error object
 		const updatedErrors = {
 			...oldErrors,
 		};

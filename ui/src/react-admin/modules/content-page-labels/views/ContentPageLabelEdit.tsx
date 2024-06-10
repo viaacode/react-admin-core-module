@@ -15,7 +15,7 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { Link } from '~shared/components/Link';
@@ -67,7 +67,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 			const contentLabel = {
 				label: '',
 				content_type: 'PAGINA',
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 				created_at: new Date().toISOString(),
 				updated_at: new Date().toISOString(),
 				permissions: [],
@@ -262,7 +262,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 										onChange={(newLanguage) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
-												language: newLanguage as LanguageCode,
+												language: newLanguage as Locale,
 											})
 										}
 									/>

@@ -43,7 +43,7 @@ import {
 	ContentPageUser,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
-import { LanguageCode } from '~modules/translations/translations.core.types';
+import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
@@ -540,7 +540,7 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 		try {
 			const existingContentPageTitle: string | null =
 				await ContentPageService.doesContentPageLanguageAndPathExist(
-					contentPageState.currentContentPageInfo.language || LanguageCode.Nl,
+					contentPageState.currentContentPageInfo.language || Locale.Nl,
 					path,
 					contentPageState.currentContentPageInfo.id
 				);

@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 export const basic: DOMPurify.Config = {
 	ALLOWED_TAGS: [

@@ -1,11 +1,12 @@
-import { PickerItem } from '~shared/types/content-picker';
-import { CustomError } from '~shared/helpers/custom-error';
+import { ContentPickerType } from '@viaa/avo2-types';
+import { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
 import { parsePickerItem } from '~shared/components/ContentPicker/helpers/parse-picker';
+import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
+import { PickerItem } from '~shared/types/content-picker';
 
-export const retrieveIeObjects = async (title: string | '', limit = 5): Promise<PickerItem[]> => {
+export const retrieveIeObjects = async (title: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {
 		const rawIeObjects: { items: HetArchiefIeObject[] } = await fetchWithLogoutJson(
 			`${getProxyUrl()}/ie-objects`,
@@ -30,7 +31,7 @@ const parseIeObjects = (raw: Partial<HetArchiefIeObject>[]): PickerItem[] => {
 	return raw.map(
 		(item: Partial<HetArchiefIeObject>): PickerItem => ({
 			label: item.name || '',
-			...parsePickerItem('OBJECT', item.schemaIdentifier as string), // TODO enforce path in database
+			...parsePickerItem(ContentPickerType.IE_OBJECT, item.schemaIdentifier as string), // TODO enforce path in database
 		})
 	);
 };
