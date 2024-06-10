@@ -42,7 +42,7 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, s
 	['CUSTOM_NAVIGATION_ELEMENTS']: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___custom-navigatie-items'
 	),
-	['OBJECT']: tText('ie-objects'),
+	['OBJECT']: tText('modules/shared/components/content-picker/content-picker___ie-objects'),
 	/**
 	 * @deprecated, use CUSTOM_NAVIGATION_ELEMENTS instead
 	 */

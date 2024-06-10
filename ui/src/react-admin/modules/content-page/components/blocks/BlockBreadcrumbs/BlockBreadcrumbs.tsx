@@ -10,7 +10,7 @@ export const BlockBreadcrumbs: FC<BlockBreadcrumbsProps> = ({ foregroundColor, e
 	}, [elements]);
 	return (
 		<Breadcrumbs
-			icon={<Icon name={'angleRight'} />}
+			icon={<Icon name="angleRight" />}
 			items={elements.map((breadCrumb: any) => {
 				return {
 					label: breadCrumb.label,

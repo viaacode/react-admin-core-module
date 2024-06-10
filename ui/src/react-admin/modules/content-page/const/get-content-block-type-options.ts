@@ -146,11 +146,13 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.OverviewNewspaperTitles,
 		},
 		{
-			label: tText('ContentEncloseGrid'),
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___content-enclose-grid'
+			),
 			value: ContentBlockType.ContentEncloseGrid,
 		},
 		{
-			label: tText('breadcrumbs'),
+			label: tText('modules/content-page/const/get-content-block-type-options___breadcrumbs'),
 			value: ContentBlockType.Breadcrumbs,
 		},
 	];

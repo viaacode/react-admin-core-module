@@ -76,11 +76,16 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 							>
 								{object?.thumbnail
 									? null
-									: tText('Je hebt geen toegang tot deze content')}
+									: tText(
+											'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___je-hebt-geen-toegang-tot-deze-content'
+									  )}
 							</div>
 							<div className="c-block-enclosed-content__cards__card__wrapper">
 								<span className="c-block-enclosed-content__cards__card__title">
-									{object?.name || tText('Je hebt geen toegang tot dit object')}
+									{object?.name ||
+										tText(
+											'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___je-hebt-geen-toegang-tot-dit-object'
+										)}
 								</span>
 								<div className="c-block-enclosed-content__cards__card__description-wrapper">
 									<Html

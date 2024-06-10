@@ -39,7 +39,9 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 		state: INITIAL_BREADCRUMBS_COMPONENTS_STATE(),
 		fields: {
 			foregroundColor: {
-				label: tText('tekstkleur'),
+				label: tText(
+					'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___tekstkleur'
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
@@ -50,11 +52,15 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 				label: 'breadcrumb',
 				fields: {
 					label: {
-						label: tText('label'),
+						label: tText(
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label'
+						),
 						editorType: ContentBlockEditor.TextInput,
 					},
 					link: {
-						label: tText('link'),
+						label: tText(
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link'
+						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
 							allowedTypes: [
@@ -68,8 +74,12 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: 'voeg object toe',
-					deleteButtonLabel: 'verwijder object',
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___voeg-object-toe'
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___verwijder-object'
+					),
 				},
 			},
 		},
