@@ -1,15 +1,15 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { Avo } from '@viaa/avo2-types';
+import { type Avo } from '@viaa/avo2-types';
 import { sortBy } from 'lodash';
 
 import { DataService } from '../data';
 import {
 	GetEducationLevelsDocument,
-	GetEducationLevelsQuery,
+	type GetEducationLevelsQuery,
 	GetSubjectsDocument,
-	GetSubjectsQuery,
+	type GetSubjectsQuery,
 	GetThemesDocument,
-	GetThemesQuery,
+	type GetThemesQuery,
 } from '../shared/generated/graphql-db-types-avo';
 import { CustomError } from '../shared/helpers/custom-error';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
@@ -32,6 +32,7 @@ export class LookupService {
 				label: item.label,
 				broader: item.broader,
 				scheme: item.scheme,
+				related: item.related,
 			}));
 
 			return sortBy(subjects, (subject) => subject.label.toLowerCase());

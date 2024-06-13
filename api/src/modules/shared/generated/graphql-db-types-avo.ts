@@ -102,6 +102,7 @@ export type App_Assignment_Blocks_V2 = {
   /** An object relationship */
   assignment: App_Assignments_V2;
   assignment_id: Scalars['uuid'];
+  color?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   custom_description?: Maybe<Scalars['String']>;
   custom_title?: Maybe<Scalars['String']>;
@@ -220,6 +221,7 @@ export type App_Assignment_Blocks_V2_Bool_Exp = {
   _or?: InputMaybe<Array<App_Assignment_Blocks_V2_Bool_Exp>>;
   assignment?: InputMaybe<App_Assignments_V2_Bool_Exp>;
   assignment_id?: InputMaybe<Uuid_Comparison_Exp>;
+  color?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   custom_description?: InputMaybe<String_Comparison_Exp>;
   custom_title?: InputMaybe<String_Comparison_Exp>;
@@ -254,6 +256,7 @@ export type App_Assignment_Blocks_V2_Inc_Input = {
 export type App_Assignment_Blocks_V2_Insert_Input = {
   assignment?: InputMaybe<App_Assignments_V2_Obj_Rel_Insert_Input>;
   assignment_id?: InputMaybe<Scalars['uuid']>;
+  color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   custom_description?: InputMaybe<Scalars['String']>;
   custom_title?: InputMaybe<Scalars['String']>;
@@ -275,6 +278,7 @@ export type App_Assignment_Blocks_V2_Insert_Input = {
 export type App_Assignment_Blocks_V2_Max_Fields = {
   __typename?: 'app_assignment_blocks_v2_max_fields';
   assignment_id?: Maybe<Scalars['uuid']>;
+  color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   custom_description?: Maybe<Scalars['String']>;
   custom_title?: Maybe<Scalars['String']>;
@@ -293,6 +297,7 @@ export type App_Assignment_Blocks_V2_Max_Fields = {
 /** order by max() on columns of table "app.assignment_blocks_v2" */
 export type App_Assignment_Blocks_V2_Max_Order_By = {
   assignment_id?: InputMaybe<Order_By>;
+  color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   custom_description?: InputMaybe<Order_By>;
   custom_title?: InputMaybe<Order_By>;
@@ -312,6 +317,7 @@ export type App_Assignment_Blocks_V2_Max_Order_By = {
 export type App_Assignment_Blocks_V2_Min_Fields = {
   __typename?: 'app_assignment_blocks_v2_min_fields';
   assignment_id?: Maybe<Scalars['uuid']>;
+  color?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   custom_description?: Maybe<Scalars['String']>;
   custom_title?: Maybe<Scalars['String']>;
@@ -330,6 +336,7 @@ export type App_Assignment_Blocks_V2_Min_Fields = {
 /** order by min() on columns of table "app.assignment_blocks_v2" */
 export type App_Assignment_Blocks_V2_Min_Order_By = {
   assignment_id?: InputMaybe<Order_By>;
+  color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   custom_description?: InputMaybe<Order_By>;
   custom_title?: InputMaybe<Order_By>;
@@ -365,6 +372,7 @@ export type App_Assignment_Blocks_V2_On_Conflict = {
 export type App_Assignment_Blocks_V2_Order_By = {
   assignment?: InputMaybe<App_Assignments_V2_Order_By>;
   assignment_id?: InputMaybe<Order_By>;
+  color?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   custom_description?: InputMaybe<Order_By>;
   custom_title?: InputMaybe<Order_By>;
@@ -391,6 +399,8 @@ export type App_Assignment_Blocks_V2_Pk_Columns_Input = {
 export enum App_Assignment_Blocks_V2_Select_Column {
   /** column name */
   AssignmentId = 'assignment_id',
+  /** column name */
+  Color = 'color',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -442,6 +452,7 @@ export enum App_Assignment_Blocks_V2_Select_Column_App_Assignment_Blocks_V2_Aggr
 /** input type for updating data in table "app.assignment_blocks_v2" */
 export type App_Assignment_Blocks_V2_Set_Input = {
   assignment_id?: InputMaybe<Scalars['uuid']>;
+  color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   custom_description?: InputMaybe<Scalars['String']>;
   custom_title?: InputMaybe<Scalars['String']>;
@@ -515,6 +526,7 @@ export type App_Assignment_Blocks_V2_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type App_Assignment_Blocks_V2_Stream_Cursor_Value_Input = {
   assignment_id?: InputMaybe<Scalars['uuid']>;
+  color?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   custom_description?: InputMaybe<Scalars['String']>;
   custom_title?: InputMaybe<Scalars['String']>;
@@ -551,6 +563,8 @@ export type App_Assignment_Blocks_V2_Sum_Order_By = {
 export enum App_Assignment_Blocks_V2_Update_Column {
   /** column name */
   AssignmentId = 'assignment_id',
+  /** column name */
+  Color = 'color',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1415,6 +1429,9 @@ export type App_Assignments_V2 = {
   created_at: Scalars['timestamptz'];
   deadline_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  education_level?: Maybe<Lookup_Thesaurus>;
+  education_level_id?: Maybe<Scalars['String']>;
   external_id?: Maybe<Scalars['uuid']>;
   id: Scalars['uuid'];
   is_collaborative: Scalars['Boolean'];
@@ -2275,6 +2292,8 @@ export type App_Assignments_V2_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   deadline_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
+  education_level?: InputMaybe<Lookup_Thesaurus_Bool_Exp>;
+  education_level_id?: InputMaybe<String_Comparison_Exp>;
   external_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_collaborative?: InputMaybe<Boolean_Comparison_Exp>;
@@ -2924,6 +2943,8 @@ export type App_Assignments_V2_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deadline_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
+  education_level?: InputMaybe<Lookup_Thesaurus_Obj_Rel_Insert_Input>;
+  education_level_id?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_collaborative?: InputMaybe<Scalars['Boolean']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
@@ -3157,6 +3178,7 @@ export type App_Assignments_V2_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   deadline_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  education_level_id?: Maybe<Scalars['String']>;
   external_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   last_user_edit_at?: Maybe<Scalars['timestamptz']>;
@@ -3179,6 +3201,7 @@ export type App_Assignments_V2_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   deadline_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  education_level_id?: InputMaybe<Order_By>;
   external_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   last_user_edit_at?: InputMaybe<Order_By>;
@@ -3202,6 +3225,7 @@ export type App_Assignments_V2_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   deadline_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  education_level_id?: Maybe<Scalars['String']>;
   external_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
   last_user_edit_at?: Maybe<Scalars['timestamptz']>;
@@ -3224,6 +3248,7 @@ export type App_Assignments_V2_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   deadline_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  education_level_id?: InputMaybe<Order_By>;
   external_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   last_user_edit_at?: InputMaybe<Order_By>;
@@ -3273,6 +3298,8 @@ export type App_Assignments_V2_Order_By = {
   created_at?: InputMaybe<Order_By>;
   deadline_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  education_level?: InputMaybe<Lookup_Thesaurus_Order_By>;
+  education_level_id?: InputMaybe<Order_By>;
   external_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_collaborative?: InputMaybe<Order_By>;
@@ -4238,6 +4265,8 @@ export enum App_Assignments_V2_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
+  EducationLevelId = 'education_level_id',
+  /** column name */
   ExternalId = 'external_id',
   /** column name */
   Id = 'id',
@@ -4299,6 +4328,7 @@ export type App_Assignments_V2_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deadline_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
+  education_level_id?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_collaborative?: InputMaybe<Scalars['Boolean']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
@@ -4365,6 +4395,7 @@ export type App_Assignments_V2_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   deadline_at?: InputMaybe<Scalars['timestamptz']>;
   description?: InputMaybe<Scalars['String']>;
+  education_level_id?: InputMaybe<Scalars['String']>;
   external_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_collaborative?: InputMaybe<Scalars['Boolean']>;
@@ -4408,6 +4439,8 @@ export enum App_Assignments_V2_Update_Column {
   DeadlineAt = 'deadline_at',
   /** column name */
   Description = 'description',
+  /** column name */
+  EducationLevelId = 'education_level_id',
   /** column name */
   Id = 'id',
   /** column name */
@@ -46460,7 +46493,7 @@ export type GetEducationLevelsQuery = { __typename?: 'query_root', lookup_thesau
 export type GetSubjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSubjectsQuery = { __typename?: 'query_root', lookup_thesaurus: Array<{ __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, broader?: string | null, scheme?: string | null }> };
+export type GetSubjectsQuery = { __typename?: 'query_root', lookup_thesaurus: Array<{ __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, broader?: string | null, scheme?: string | null, related?: any | null }> };
 
 export type GetThemesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -46697,7 +46730,7 @@ export const GetItemDetailsByUuidDocument = {"kind":"Document","definitions":[{"
 export const GetPublicItemsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicItems"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}}]}}]} as unknown as DocumentNode<GetPublicItemsQuery, GetPublicItemsQueryVariables>;
 export const GetPublicItemsByTitleOrExternalIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicItemsByTitleOrExternalId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bpchar"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"itemsByTitle"},"name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_ilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"itemsByExternalId"},"name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"external_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"externalId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_published"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"is_published"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}}]}}]}}]} as unknown as DocumentNode<GetPublicItemsByTitleOrExternalIdQuery, GetPublicItemsByTitleOrExternalIdQueryVariables>;
 export const GetEducationLevelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getEducationLevels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_thesaurus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"scheme"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"https://w3id.org/onderwijs-vlaanderen/id/structuur","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}}]}}]}}]} as unknown as DocumentNode<GetEducationLevelsQuery, GetEducationLevelsQueryVariables>;
-export const GetSubjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSubjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_thesaurus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"scheme"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"https://w3id.org/onderwijs-vlaanderen/id/vak","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}}]}}]}}]} as unknown as DocumentNode<GetSubjectsQuery, GetSubjectsQueryVariables>;
+export const GetSubjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSubjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_thesaurus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"scheme"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"https://w3id.org/onderwijs-vlaanderen/id/vak","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"related"}}]}}]}}]} as unknown as DocumentNode<GetSubjectsQuery, GetSubjectsQueryVariables>;
 export const GetThemesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getThemes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_thesaurus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"scheme"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"StringValue","value":"https://data.hetarchief.be/id/onderwijs/thema","block":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}}]}}]}}]} as unknown as DocumentNode<GetThemesQuery, GetThemesQueryVariables>;
 export const DeleteNavigationItemDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteNavigationItem"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_nav_elements"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteNavigationItemMutation, DeleteNavigationItemMutationVariables>;
 export const GetAllNavigationItemsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllNavigationItems"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languages"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"lookup_languages_enum"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_nav_elements"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"placement"},"value":{"kind":"EnumValue","value":"asc"}},{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languages"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"icon_name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_target"}},{"kind":"Field","name":{"kind":"Name","value":"placement"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_path"}},{"kind":"Field","name":{"kind":"Name","value":"tooltip"}},{"kind":"Field","name":{"kind":"Name","value":"language"}}]}}]}}]} as unknown as DocumentNode<GetAllNavigationItemsQuery, GetAllNavigationItemsQueryVariables>;

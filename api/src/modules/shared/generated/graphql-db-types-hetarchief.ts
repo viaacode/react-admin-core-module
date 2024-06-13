@@ -3093,6 +3093,7 @@ export enum Lookup_App_Content_Block_Type_Constraint {
 export enum Lookup_App_Content_Block_Type_Enum {
   Accordions = 'ACCORDIONS',
   AnchorLinks = 'ANCHOR_LINKS',
+  Breadcrumbs = 'BREADCRUMBS',
   Buttons = 'BUTTONS',
   Cards = 'CARDS',
   CardsNoDescription = 'CARDS_NO_DESCRIPTION',
@@ -3266,6 +3267,10 @@ export enum Lookup_App_Content_Type_Constraint {
 }
 
 export enum Lookup_App_Content_Type_Enum {
+  /** Blogpost */
+  BlogPost = 'BLOG_POST',
+  /** Collection */
+  Collection = 'COLLECTION',
   /** Frequently asked question item */
   FaqItem = 'FAQ_ITEM',
   /** Pagina */
@@ -5844,11 +5849,13 @@ export type Maintainer_Visitor_Space = {
   published_at?: Maybe<Scalars['timestamp']>;
   schema_audience_type: Lookup_Schema_Audience_Type_Enum;
   schema_color?: Maybe<Scalars['String']>;
-  schema_description?: Maybe<Scalars['String']>;
+  schema_description_en?: Maybe<Scalars['String']>;
+  schema_description_nl?: Maybe<Scalars['String']>;
   schema_image?: Maybe<Scalars['String']>;
   schema_maintainer_id: Scalars['String'];
   schema_public_access?: Maybe<Scalars['Boolean']>;
-  schema_service_description?: Maybe<Scalars['String']>;
+  schema_service_description_en?: Maybe<Scalars['String']>;
+  schema_service_description_nl?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   status: Lookup_Maintainer_Visitor_Space_Status_Enum;
   /** An object relationship */
@@ -5934,11 +5941,13 @@ export type Maintainer_Visitor_Space_Bool_Exp = {
   published_at?: InputMaybe<Timestamp_Comparison_Exp>;
   schema_audience_type?: InputMaybe<Lookup_Schema_Audience_Type_Enum_Comparison_Exp>;
   schema_color?: InputMaybe<String_Comparison_Exp>;
-  schema_description?: InputMaybe<String_Comparison_Exp>;
+  schema_description_en?: InputMaybe<String_Comparison_Exp>;
+  schema_description_nl?: InputMaybe<String_Comparison_Exp>;
   schema_image?: InputMaybe<String_Comparison_Exp>;
   schema_maintainer_id?: InputMaybe<String_Comparison_Exp>;
   schema_public_access?: InputMaybe<Boolean_Comparison_Exp>;
-  schema_service_description?: InputMaybe<String_Comparison_Exp>;
+  schema_service_description_en?: InputMaybe<String_Comparison_Exp>;
+  schema_service_description_nl?: InputMaybe<String_Comparison_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum_Comparison_Exp>;
   status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Bool_Exp>;
@@ -5965,11 +5974,13 @@ export type Maintainer_Visitor_Space_Insert_Input = {
   published_at?: InputMaybe<Scalars['timestamp']>;
   schema_audience_type?: InputMaybe<Lookup_Schema_Audience_Type_Enum>;
   schema_color?: InputMaybe<Scalars['String']>;
-  schema_description?: InputMaybe<Scalars['String']>;
+  schema_description_en?: InputMaybe<Scalars['String']>;
+  schema_description_nl?: InputMaybe<Scalars['String']>;
   schema_image?: InputMaybe<Scalars['String']>;
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
   schema_public_access?: InputMaybe<Scalars['Boolean']>;
-  schema_service_description?: InputMaybe<Scalars['String']>;
+  schema_service_description_en?: InputMaybe<Scalars['String']>;
+  schema_service_description_nl?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum>;
   status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Obj_Rel_Insert_Input>;
@@ -5984,10 +5995,12 @@ export type Maintainer_Visitor_Space_Max_Fields = {
   id?: Maybe<Scalars['uuid']>;
   published_at?: Maybe<Scalars['timestamp']>;
   schema_color?: Maybe<Scalars['String']>;
-  schema_description?: Maybe<Scalars['String']>;
+  schema_description_en?: Maybe<Scalars['String']>;
+  schema_description_nl?: Maybe<Scalars['String']>;
   schema_image?: Maybe<Scalars['String']>;
   schema_maintainer_id?: Maybe<Scalars['String']>;
-  schema_service_description?: Maybe<Scalars['String']>;
+  schema_service_description_en?: Maybe<Scalars['String']>;
+  schema_service_description_nl?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamp']>;
 };
@@ -5999,10 +6012,12 @@ export type Maintainer_Visitor_Space_Min_Fields = {
   id?: Maybe<Scalars['uuid']>;
   published_at?: Maybe<Scalars['timestamp']>;
   schema_color?: Maybe<Scalars['String']>;
-  schema_description?: Maybe<Scalars['String']>;
+  schema_description_en?: Maybe<Scalars['String']>;
+  schema_description_nl?: Maybe<Scalars['String']>;
   schema_image?: Maybe<Scalars['String']>;
   schema_maintainer_id?: Maybe<Scalars['String']>;
-  schema_service_description?: Maybe<Scalars['String']>;
+  schema_service_description_en?: Maybe<Scalars['String']>;
+  schema_service_description_nl?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamp']>;
 };
@@ -6039,11 +6054,13 @@ export type Maintainer_Visitor_Space_Order_By = {
   published_at?: InputMaybe<Order_By>;
   schema_audience_type?: InputMaybe<Order_By>;
   schema_color?: InputMaybe<Order_By>;
-  schema_description?: InputMaybe<Order_By>;
+  schema_description_en?: InputMaybe<Order_By>;
+  schema_description_nl?: InputMaybe<Order_By>;
   schema_image?: InputMaybe<Order_By>;
   schema_maintainer_id?: InputMaybe<Order_By>;
   schema_public_access?: InputMaybe<Order_By>;
-  schema_service_description?: InputMaybe<Order_By>;
+  schema_service_description_en?: InputMaybe<Order_By>;
+  schema_service_description_nl?: InputMaybe<Order_By>;
   slug?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
   status_info?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Order_By>;
@@ -6880,7 +6897,9 @@ export enum Maintainer_Visitor_Space_Select_Column {
   /** column name */
   SchemaColor = 'schema_color',
   /** column name */
-  SchemaDescription = 'schema_description',
+  SchemaDescriptionEn = 'schema_description_en',
+  /** column name */
+  SchemaDescriptionNl = 'schema_description_nl',
   /** column name */
   SchemaImage = 'schema_image',
   /** column name */
@@ -6888,7 +6907,9 @@ export enum Maintainer_Visitor_Space_Select_Column {
   /** column name */
   SchemaPublicAccess = 'schema_public_access',
   /** column name */
-  SchemaServiceDescription = 'schema_service_description',
+  SchemaServiceDescriptionEn = 'schema_service_description_en',
+  /** column name */
+  SchemaServiceDescriptionNl = 'schema_service_description_nl',
   /** column name */
   Slug = 'slug',
   /** column name */
@@ -6904,11 +6925,13 @@ export type Maintainer_Visitor_Space_Set_Input = {
   published_at?: InputMaybe<Scalars['timestamp']>;
   schema_audience_type?: InputMaybe<Lookup_Schema_Audience_Type_Enum>;
   schema_color?: InputMaybe<Scalars['String']>;
-  schema_description?: InputMaybe<Scalars['String']>;
+  schema_description_en?: InputMaybe<Scalars['String']>;
+  schema_description_nl?: InputMaybe<Scalars['String']>;
   schema_image?: InputMaybe<Scalars['String']>;
   schema_maintainer_id?: InputMaybe<Scalars['String']>;
   schema_public_access?: InputMaybe<Scalars['Boolean']>;
-  schema_service_description?: InputMaybe<Scalars['String']>;
+  schema_service_description_en?: InputMaybe<Scalars['String']>;
+  schema_service_description_nl?: InputMaybe<Scalars['String']>;
   slug?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<Lookup_Maintainer_Visitor_Space_Status_Enum>;
   updated_at?: InputMaybe<Scalars['timestamp']>;
@@ -6927,7 +6950,9 @@ export enum Maintainer_Visitor_Space_Update_Column {
   /** column name */
   SchemaColor = 'schema_color',
   /** column name */
-  SchemaDescription = 'schema_description',
+  SchemaDescriptionEn = 'schema_description_en',
+  /** column name */
+  SchemaDescriptionNl = 'schema_description_nl',
   /** column name */
   SchemaImage = 'schema_image',
   /** column name */
@@ -6935,7 +6960,9 @@ export enum Maintainer_Visitor_Space_Update_Column {
   /** column name */
   SchemaPublicAccess = 'schema_public_access',
   /** column name */
-  SchemaServiceDescription = 'schema_service_description',
+  SchemaServiceDescriptionEn = 'schema_service_description_en',
+  /** column name */
+  SchemaServiceDescriptionNl = 'schema_service_description_nl',
   /** column name */
   Slug = 'slug',
   /** column name */
