@@ -37,8 +37,6 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			fullUrl = `//${url}`;
 		}
 
-		console.log('rendering smartlink with target: ' + target);
-
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab
