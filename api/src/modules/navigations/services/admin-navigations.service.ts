@@ -4,7 +4,7 @@ import { compact } from 'lodash';
 import { DataService } from '../../data';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { DeleteResponse } from '../../shared/types/types';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { CreateNavigationDto } from '../dto/navigations.dto';
 import { NavigationItem } from '../navigations.types';
 import {
@@ -127,7 +127,7 @@ export class AdminNavigationsService {
 
 	public async findNavigationBarItemsByPlacementId(
 		placement: string,
-		languages: LanguageCode[],
+		languages: Locale[],
 		searchTerm?: string
 	): Promise<NavigationItem[]> {
 		let navigationsResponse:
@@ -168,7 +168,7 @@ export class AdminNavigationsService {
 		).map(this.adapt);
 	}
 
-	public async findAllNavigationBarItems(language?: LanguageCode): Promise<NavigationItem[]> {
+	public async findAllNavigationBarItems(language?: Locale): Promise<NavigationItem[]> {
 		const navigationsResponse = await this.dataService.execute<
 			NavigationQueryTypes['GetAllNavigationItemsQuery'],
 			NavigationQueryTypes['GetAllNavigationItemsQueryVariables']

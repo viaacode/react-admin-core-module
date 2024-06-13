@@ -29,7 +29,7 @@ import {
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { PaginationHelper } from '../../shared/helpers/pagination';
 import { SortDirection } from '../../shared/types';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import {
 	CreateMaintenanceAlertDto,
 	MaintenanceAlertsQueryDto,
@@ -80,7 +80,7 @@ export class MaintenanceAlertsService {
 			);
 		}
 		if (languages?.length) {
-			whereAndFilter.push({ language: { _in: languages.split(',') as LanguageCode[] } });
+			whereAndFilter.push({ language: { _in: languages.split(',') as Locale[] } });
 		}
 		if (searchTerm) {
 			whereAndFilter.push({

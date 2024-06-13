@@ -1,4 +1,4 @@
-import { type LanguageCode } from '../translations';
+import { type Locale } from '../translations';
 
 import { type NavigationQueryTypes } from './queries/navigation.queries';
 
@@ -28,7 +28,7 @@ export interface NavigationItem {
 	position: number;
 	contentType: string;
 	contentPath: string;
-	language: LanguageCode;
+	language: Locale;
 	tooltip?: string;
 	updatedAt: string;
 	createdAt: string;

@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import packageJson from '../../../../package.json';
 import { TranslationsService } from '../../translations';
-import { LanguageCode } from '../../translations/translations.types';
+import { Locale } from '../../translations/translations.types';
 
 @Injectable()
 export class StatusService {
@@ -27,9 +27,7 @@ export class StatusService {
 
 	private async getGraphQlStatus(): Promise<boolean> {
 		try {
-			const translations = await this.translationsService.getFrontendTranslations(
-				LanguageCode.Nl
-			);
+			const translations = await this.translationsService.getFrontendTranslations(Locale.Nl);
 
 			/* istanbul ignore next */
 			return !!Object.keys(translations)[0];

@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
 import { ContentPageType, ContentPickerType, LinkTarget } from '../../content-pages';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 
 export class PickerItemDto {
 	@IsString()
@@ -47,9 +47,9 @@ export class InsertContentPageLabelDto {
 	@IsString()
 	@ApiProperty({
 		type: String,
-		enum: LanguageCode,
+		enum: Locale,
 	})
-	language: LanguageCode;
+	language: Locale;
 
 	@IsString()
 	@IsOptional()
@@ -83,9 +83,9 @@ export class UpdateContentPageLabelDto {
 	@IsString()
 	@ApiProperty({
 		type: String,
-		enum: LanguageCode,
+		enum: Locale,
 	})
-	language: LanguageCode;
+	language: Locale;
 
 	@IsOptional()
 	@ApiProperty({
@@ -123,9 +123,9 @@ export class ContentPageLabelDto {
 	@IsString()
 	@ApiProperty({
 		type: String,
-		enum: LanguageCode,
+		enum: Locale,
 	})
-	language: LanguageCode;
+	language: Locale;
 
 	@IsString()
 	@ApiProperty({

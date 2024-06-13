@@ -15,7 +15,7 @@ import {
 	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	Lookup_App_Content_Type_Enum,
 } from '../shared/generated/graphql-db-types-hetarchief';
-import { type LanguageCode } from '../translations';
+import { type Locale } from '../translations';
 
 import { type DbContentBlock } from './content-block.types';
 import { type ContentPageQueryTypes } from './queries/content-pages.queries';
@@ -54,7 +54,7 @@ export interface ContentPageLabel {
 	id: number | string;
 	label: string;
 	content_type: ContentPageType;
-	language: LanguageCode;
+	language: Locale;
 	link_to: PickerItem | null;
 	created_at: string;
 	updated_at: string;
@@ -64,7 +64,7 @@ interface ContentPageBase {
 	id: number | string;
 	thumbnailPath: string | null;
 	title: string;
-	language: LanguageCode;
+	language: Locale;
 	nlParentPageId: number | string;
 	description: string | null;
 	seoDescription: string | null;

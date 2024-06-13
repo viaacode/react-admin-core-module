@@ -29,7 +29,7 @@ import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
 import { logAndThrow } from '../../shared/helpers/logAndThrow';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
@@ -94,7 +94,7 @@ export class ContentPagesController {
 		summary: 'Get content page by its path',
 	})
 	public async getContentPageByLanguageAndPath(
-		@Query('language') language: LanguageCode | undefined,
+		@Query('language') language: Locale | undefined,
 		@Query('path') path: string,
 		@Query('onlyInfo') onlyInfo: string,
 		@Req() request: Request,
@@ -103,7 +103,7 @@ export class ContentPagesController {
 	): Promise<DbContentPage> {
 		const user = sessionUser?.getUser();
 		return this.contentPagesService.getContentPageByLanguageAndPathForUser(
-			language || (user.language as LanguageCode),
+			language || (user.language as Locale),
 			path,
 			user,
 			request?.headers?.['Referrer'] as string,
@@ -114,7 +114,7 @@ export class ContentPagesController {
 
 	@Get('path-exists')
 	async doesContentPageExist(
-		@Query('language') language: LanguageCode,
+		@Query('language') language: Locale,
 		@Query('path') path: string,
 		@Req() request: Request,
 		@Ip() ip,

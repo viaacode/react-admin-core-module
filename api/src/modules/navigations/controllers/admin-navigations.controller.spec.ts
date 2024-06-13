@@ -1,7 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 
 import { type DeleteResponse } from '../../shared/types/types';
-import { LanguageCode } from '../../translations';
+import { Locale } from '../../translations';
 import { AdminNavigationsService } from '../services/admin-navigations.service';
 
 import { AdminNavigationsController } from './admin-navigations.controller';
@@ -78,7 +78,7 @@ describe('NavigationsController', () => {
 				iconName: '',
 				placement: 'footer-links',
 				position: 1,
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 			});
 			expect(navigation).toEqual(mockNavigationsResponse.items[0]);
 		});
@@ -94,7 +94,7 @@ describe('NavigationsController', () => {
 				iconName: '',
 				placement: 'footer-links',
 				position: 1,
-				language: LanguageCode.Nl,
+				language: Locale.Nl,
 			});
 			expect(navigation).toEqual(mockNavigationsResponse.items[0]);
 		});
