@@ -3,6 +3,7 @@ import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';
 import {
+	BlockBreadcrumbs,
 	BlockButtonsWrapper,
 	BlockCardsWithoutDescription,
 	BlockContentEnclose,
@@ -77,6 +78,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		[ContentBlockType.OverviewNewspaperTitles]: BlockOverviewNewspaperTitles,
 		[ContentBlockType.ContentEncloseGrid]: BlockContentEnclose,
+		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
@@ -124,6 +126,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.ThreeClickableTiles,
 	ContentBlockType.OverviewNewspaperTitles,
 	ContentBlockType.ContentEncloseGrid,
+	ContentBlockType.Breadcrumbs,
 ];
 
 /**

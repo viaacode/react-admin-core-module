@@ -35,6 +35,7 @@ import {
 } from '~modules/content-page/components/blocks';
 import { ContentBlockComponentState, ContentBlockType } from '../types/content-block.types';
 import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
+import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
 
 export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
@@ -76,4 +77,5 @@ export const CONTENT_BLOCK_INITIAL_STATE_MAP: {
 	[ContentBlockType.HetArchiefHeaderSearch]: INITIAL_HET_ARCHIEF_HEADER_SEARCH_BLOCK_STATE,
 	[ContentBlockType.OverviewNewspaperTitles]: INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE,
 	[ContentBlockType.ContentEncloseGrid]: INITIAL_CONTENT_ENCLOSE_BLOCK_STATE,
+	[ContentBlockType.Breadcrumbs]: INITIAL_BREADCRUMBS_BLOCK_STATE,
 };

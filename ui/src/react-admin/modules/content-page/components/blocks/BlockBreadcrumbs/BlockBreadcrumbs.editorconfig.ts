@@ -1,0 +1,93 @@
+import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
+import {
+	ContentBlockConfig,
+	ContentBlockEditor,
+	ContentBlockType,
+	DEFAULT_BUTTON_PROPS,
+	DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
+import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
+import { tText } from '~shared/helpers/translation-functions';
+import { ContentPickerType } from '@viaa/avo2-types';
+
+export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
+	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,
+	elements: [
+		{
+			label: '',
+			link: {
+				value: '',
+			},
+		},
+	],
+});
+
+export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => ({
+	...BLOCK_STATE_DEFAULTS({
+		padding: {
+			top: 'top-extra-large',
+			bottom: 'bottom-extra-large',
+		},
+	}),
+});
+
+export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
+	position,
+	name: 'CONTENT_ENCLOSE_BLOCK_CONFIG',
+	type: ContentBlockType.Breadcrumbs,
+	components: {
+		state: INITIAL_BREADCRUMBS_COMPONENTS_STATE(),
+		fields: {
+			foregroundColor: {
+				label: tText(
+					'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___tekstkleur'
+				),
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+				},
+			},
+			elements: {
+				label: 'breadcrumb',
+				fields: {
+					label: {
+						label: tText(
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label'
+						),
+						editorType: ContentBlockEditor.TextInput,
+					},
+					link: {
+						label: tText(
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link'
+						),
+						editorType: ContentBlockEditor.ContentPicker,
+						editorProps: {
+							allowedTypes: [
+								'CONTENT_PAGE',
+								'INTERNAL_LINK',
+								'EXTERNAL_LINK',
+							] as ContentPickerType[],
+						},
+					},
+				},
+				type: 'fieldGroup',
+				repeat: {
+					defaultState: DEFAULT_BUTTON_PROPS,
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___voeg-object-toe'
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___verwijder-object'
+					),
+				},
+			},
+		},
+	},
+	block: {
+		state: INITIAL_BREADCRUMBS_BLOCK_STATE(),
+		fields: {
+			...BLOCK_FIELD_DEFAULTS(),
+		},
+	},
+});
