@@ -88,16 +88,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		maintenanceAlert && reset(getDefaultValues());
 	}, [maintenanceAlert, getDefaultValues, reset]);
 
-	// useEffect(() => {
-	// 	setValue('title', form.title);
-	// 	setValue('message', form.message);
-	// 	setValue('fromDate', form.fromDate);
-	// 	setValue('untilDate', form.untilDate);
-	// 	setValue('userGroups', form.userGroups);
-	// 	setValue('type', form.type);
-	// 	setValue('language', form.language);
-	// }, [form, setValue]);
-
 	useEffect(() => {
 		if (isNil(maintenanceAlert)) {
 			// Reset the form when the blade is closed
@@ -165,7 +155,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		handleClose();
 	};
 
-	const renderTitle = useMemo(() => {
+	const renderedTitle = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-title"
@@ -191,7 +181,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [control, errors.title?.message, setValue]);
 
-	const renderMessage = useMemo(() => {
+	const renderedMessage = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-message"
@@ -219,7 +209,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [errors.message?.message, maintenanceAlert, control, getDefaultValues, setValue]);
 
-	const renderIcon = useMemo(() => {
+	const renderedIcon = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-icon"
@@ -252,7 +242,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [control, errors.type?.message, setValue]);
 
-	const renderUserGroup = useMemo(() => {
+	const renderedUserGroup = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-user-group"
@@ -289,7 +279,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [control, errors.userGroups?.message, setValue, userGroupOptions]);
 
-	const renderFrom = useMemo(() => {
+	const renderedFrom = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-from-date"
@@ -356,7 +346,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [control, errors.fromDate?.message, setValue]);
 
-	const renderUntil = useMemo(() => {
+	const renderedUntil = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-until-date"
@@ -423,7 +413,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		);
 	}, [control, errors.untilDate?.message, setValue]);
 
-	const renderLanguage = useMemo(() => {
+	const renderedLanguage = useMemo(() => {
 		return (
 			<FormControl
 				id="new-alert-language"
@@ -433,7 +423,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				errors={[errors.language?.message]}
 			>
 				<Controller
-					name="type"
+					name="language"
 					control={control}
 					render={({ field }) => (
 						<ReactSelect
@@ -463,13 +453,13 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 
 		return (
 			<>
-				{renderTitle}
-				{renderMessage}
-				{renderIcon}
-				{renderUserGroup}
-				{renderFrom}
-				{renderUntil}
-				{renderLanguage}
+				{renderedTitle}
+				{renderedMessage}
+				{renderedIcon}
+				{renderedUserGroup}
+				{renderedFrom}
+				{renderedUntil}
+				{renderedLanguage}
 			</>
 		);
 	};
