@@ -1,4 +1,4 @@
-import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
+import { ButtonAction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { fromPairs, map } from 'lodash-es';
@@ -10,6 +10,7 @@ import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-cor
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { Link } from '../Link';
+import { LinkTarget } from './SmartLink.types';
 
 export interface SmartLinkProps {
 	action?: ButtonAction | null;
@@ -44,7 +45,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return (
 						<a
 							href={fullUrl}
-							target="_self"
+							target={target}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							title={title}
 							onClick={() =>
@@ -65,6 +66,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							!anchor && scrollTo({ top: 0 });
 						}}
 						title={title}
+						target={target}
 					>
 						{children}
 					</Link>
