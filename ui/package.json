@@ -41,7 +41,7 @@
     "@meemoo/react-components": "3.0.28",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.35.3",
-    "@viaa/avo2-components": "4.0.24",
+    "@viaa/avo2-components": "4.0.25",
     "@viaa/avo2-types": "2.49.5",
     "autosize": "6.0.1",
     "capture-stack-trace": "1.0.1",
