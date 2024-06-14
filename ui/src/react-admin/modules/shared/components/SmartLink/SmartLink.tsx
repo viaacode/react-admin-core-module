@@ -7,6 +7,7 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering';
 import { buildLink } from '~shared/helpers/link';
 import { insideIframe } from '../../helpers/inside-iframe';
 import { Link } from '../Link';
@@ -36,6 +37,17 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 		if (url.startsWith('www.')) {
 			fullUrl = `//${url}`;
 		}
+		const clientUrl = AdminConfigManager.getConfig().env.CLIENT_URL;
+		const clientUrlWithoutProtocol = AdminConfigManager.getConfig().env.CLIENT_URL.replace(
+			/https?:\/\//,
+			''
+		);
+		if (fullUrl.startsWith(clientUrl)) {
+			fullUrl = fullUrl.replace(clientUrl, '');
+		}
+		if (fullUrl.startsWith(clientUrlWithoutProtocol)) {
+			fullUrl = fullUrl.replace(clientUrlWithoutProtocol, '');
+		}
 
 		switch (target) {
 			case LinkTarget.Self:
@@ -45,9 +57,9 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return (
 						<a
 							href={fullUrl}
-							target={target}
-							className={clsx(className, { 'a-link__no-styles': removeStyles })}
+							target={LinkTarget.Self}
 							title={title}
+							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 							}
@@ -60,13 +72,13 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				return (
 					<Link
 						to={fullUrl}
+						target={LinkTarget.Self}
+						title={title}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() => {
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
 							!anchor && scrollTo({ top: 0 });
 						}}
-						title={title}
-						target={target}
 					>
 						{children}
 					</Link>
@@ -80,13 +92,13 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return (
 						<a
 							href={fullUrl}
-							target="_blank"
+							target={LinkTarget.Blank}
 							rel="noopener noreferrer"
+							title={title}
 							className={clsx(className, { 'a-link__no-styles': removeStyles })}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 							}
-							title={title}
 						>
 							{children}
 						</a>
@@ -96,13 +108,13 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 				return (
 					<a
 						href={`${AdminConfigManager.getConfig().env.CLIENT_URL}${fullUrl}`}
-						target="_blank"
+						target={LinkTarget.Blank}
 						rel="noopener noreferrer"
+						title={title}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
 						onClick={() =>
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 						}
-						title={title}
 					>
 						{children}
 					</a>
@@ -119,7 +131,7 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			}
 
 			let resolvedTarget = target;
-			if (insideIframe()) {
+			if (!isServerSideRendering() && insideIframe()) {
 				// Klaar page inside smartschool iframe must open all links in new window: https://meemoo.atlassian.net/browse/AVO-1354
 				resolvedTarget = LinkTarget.Blank;
 			}
