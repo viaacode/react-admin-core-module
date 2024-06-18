@@ -18,8 +18,11 @@ import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroup } from '~modules/user-group/types/user-group.types';
 import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
 import { buildLink } from '~shared/helpers/link';
 import {
@@ -29,8 +32,6 @@ import {
 } from '~shared/helpers/render-detail-fields';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroup } from '~modules/user-group/types/user-group.types';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -213,11 +214,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							)
 						)}
 						{renderDetailRow(
-							<p>
-								{languages?.find(
-									(language) => language.languageCode === contentPageInfo.language
-								)?.languageLabel || '-'}
-							</p>,
+							<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
 							tText('modules/content-page/views/content-page-detail-meta-data___taal')
 						)}
 						{renderDetailRow(

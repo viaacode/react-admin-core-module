@@ -8,6 +8,10 @@ import { ContentPageLabelService } from '~modules/content-page-labels/content-pa
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { ErrorView } from '~modules/shared/components/error';
 import { Link } from '~modules/shared/components/Link';
+import { showToast } from '~modules/shared/helpers/show-toast';
+import { DefaultComponentProps } from '~modules/shared/types';
+
+import './ContentPageLabelOverview.scss';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { LanguageInfo } from '~modules/translations/translations.types';
 import { Icon } from '~shared/components';
@@ -23,6 +27,7 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import SmartLink from '~shared/components/SmartLink/SmartLink';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import {
 	getDateRangeFilters,
 	getMultiOptionFilters,
@@ -45,10 +50,6 @@ import {
 	ContentPageLabelOverviewTableCols,
 	ContentPageLabelTableState,
 } from '../content-page-label.types';
-import { DefaultComponentProps } from '~modules/shared/types';
-
-import './ContentPageLabelOverview.scss';
-import { showToast } from '~modules/shared/helpers/show-toast';
 
 const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
 	// Hooks
@@ -125,7 +126,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 	const languageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): CheckboxOption => ({
 			id: languageInfo.languageCode,
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			checked: (tableState?.language || []).includes(languageInfo.languageCode),
 		})
 	);

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { NOT_TRANSLATION_PREFIX } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { tText } from '~shared/helpers/translation-functions';
 
 export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
@@ -21,7 +22,7 @@ export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
 					label: tText(
 						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat',
 						{
-							language: languageInfo.languageLabel,
+							language: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 						}
 					),
 					id: languageInfo.languageCode,
@@ -33,7 +34,7 @@ export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
 					label: tText(
 						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat-niet',
 						{
-							language: languageInfo.languageLabel,
+							language: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 						}
 					),
 					id: NOT_TRANSLATION_PREFIX + languageInfo.languageCode,

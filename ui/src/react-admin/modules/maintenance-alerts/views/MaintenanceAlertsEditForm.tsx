@@ -27,6 +27,7 @@ import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptio
 import { DateInput } from '~shared/components/DateInput/DateInput';
 import Timepicker from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { showToast } from '~shared/helpers/show-toast';
@@ -80,7 +81,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	const languageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): SelectOption => ({
 			value: languageInfo.languageCode,
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 		})
 	);
 

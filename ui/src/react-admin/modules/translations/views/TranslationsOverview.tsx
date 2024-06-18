@@ -34,15 +34,16 @@ import { Icon } from '~shared/components';
 import Html from '~shared/components/Html/Html';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isAvo } from '~shared/helpers/is-avo';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
 import Loader from '../../shared/components/Loader/Loader';
-import { TranslationsService } from '../translations.service';
 import { getFullKey } from '../helpers/get-full-key';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages';
+import { TranslationsService } from '../translations.service';
 
 import './TranslationsOverview.scss';
 
@@ -272,7 +273,7 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		...(allLanguages || []).map((languageInfo) => {
 			return {
 				id: 'value_' + languageInfo.languageCode,
-				Header: languageInfo.languageLabel,
+				Header: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 				canSort: true,
 				accessorFn: (translationEntry: MultiLanguageTranslationEntry) =>
 					translationEntry.values[languageInfo.languageCode],
