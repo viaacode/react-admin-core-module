@@ -1,35 +1,56 @@
-import { LomSchemeType } from '@viaa/avo2-types';
+import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
+import { LomSchemeType } from '@viaa/avo2-types';
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import reactToString from 'react-to-string';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
-import { ErrorView } from '~shared/components/error';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { isAvo } from '~shared/helpers/is-avo';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { showToast } from '~shared/helpers/show-toast';
-import { useGetIdps } from '~shared/hooks/use-get-idps';
-
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-
-import { IconName, TagInfo, TagList, TagOption } from '@viaa/avo2-components';
+import { Icon } from '~modules/shared/components';
+import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
 } from '~modules/user/helpers/generate-filter-where-object-users';
+import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
+import { UserService } from '~modules/user/user.service';
+import AddOrRemoveLinkedElementsModal, {
+	AddOrRemove,
+} from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { CustomError } from '~shared/helpers/custom-error';
+import { formatDateString } from '~shared/helpers/formatters/date';
+import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { buildLink, navigate } from '~shared/helpers/link';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { showToast } from '~shared/helpers/show-toast';
+import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
+
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { truncateTableValue } from '~shared/helpers/truncate';
+import { useGetIdps } from '~shared/hooks/use-get-idps';
+import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
+import { useEducationLevels } from '~shared/hooks/useEducationLevels';
+import { useSubjects } from '~shared/hooks/useSubjects';
+
+import { SettingsService } from '~shared/services/settings-service/settings.service';
 
 import FilterTable, {
 	FilterableColumn,
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
-import { UserService } from '~modules/user/user.service';
+import UserDeleteModal from '../components/UserDeleteModal';
 import {
 	Idp,
 	UserBulkAction,
@@ -37,28 +58,6 @@ import {
 	USERS_PER_PAGE,
 	UserTableState,
 } from '../user.types';
-
-import { SettingsService } from '~shared/services/settings-service/settings.service';
-import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { buildLink, navigate } from '~shared/helpers/link';
-import { CustomError } from '~shared/helpers/custom-error';
-import { formatDateString } from '~shared/helpers/formatters/date';
-import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
-import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
-import { truncateTableValue } from '~shared/helpers/truncate';
-import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
-import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
-import { useEducationLevels } from '~shared/hooks/useEducationLevels';
-import { useSubjects } from '~shared/hooks/useSubjects';
-import AddOrRemoveLinkedElementsModal, {
-	AddOrRemove,
-} from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
-import UserDeleteModal from '../components/UserDeleteModal';
-import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
-import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
-import { Icon } from '~modules/shared/components';
-import { Link } from 'react-router-dom';
 
 import './UserOverview.scss';
 
@@ -340,6 +339,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 			const csvRowValues: string[] = [columnLabels.join(';')];
 			profilesTemp.forEach((profile) => {
 				const csvCellValues: string[] = [];
+
+				// TODO check if we can replace the "react-to-string" package with a render separate root function
+				// https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code
 				columnIds.forEach((columnId) => {
 					const csvCellValue = reactToString(
 						renderTableCell(profile, columnId as UserOverviewTableCol)
