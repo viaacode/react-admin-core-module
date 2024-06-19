@@ -17,30 +17,32 @@ export const useGetLanguageFilterOptions = (): [CheckboxOption[], boolean] => {
 		}
 
 		setLanguageOptions([
-			...allLanguages.map(
-				(languageInfo): CheckboxOption => ({
+			...allLanguages.map((languageInfo): CheckboxOption => {
+				const language = GET_LANGUAGE_NAMES()[languageInfo.languageCode];
+				return {
 					label: tText(
 						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat',
 						{
-							language: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
+							language,
 						}
 					),
 					id: languageInfo.languageCode,
 					checked: false,
-				})
-			),
-			...allLanguages.map(
-				(languageInfo): CheckboxOption => ({
+				};
+			}),
+			...allLanguages.map((languageInfo): CheckboxOption => {
+				const language = GET_LANGUAGE_NAMES()[languageInfo.languageCode];
+				return {
 					label: tText(
 						'modules/content-page/hooks/use-get-language-filter-options___language-bestaat-niet',
 						{
-							language: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
+							language,
 						}
 					),
 					id: NOT_TRANSLATION_PREFIX + languageInfo.languageCode,
 					checked: false,
-				})
-			),
+				};
+			}),
 		]);
 		setIsLoading(false);
 	}, [allLanguages]);
