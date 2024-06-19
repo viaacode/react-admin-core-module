@@ -1,3 +1,4 @@
+import { SelectOption } from '@meemoo/react-components';
 import {
 	Box,
 	Button,
@@ -23,6 +24,7 @@ import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
@@ -33,7 +35,6 @@ import { DefaultComponentProps } from '~shared/types/components';
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
 import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
-import { SelectOption } from '@meemoo/react-components';
 
 type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 
@@ -55,7 +56,7 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	const { data: allLanguages } = useGetAllLanguages();
 	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
 		return {
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			value: languageInfo.languageCode,
 		};
 	});

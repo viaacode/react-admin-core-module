@@ -2,12 +2,15 @@ import { Badge, Button } from '@meemoo/react-components';
 import { IPagination } from '@studiohyperdrive/pagination';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { FunctionComponent, ReactNode, useState } from 'react';
+import { ToastType } from '~core/config';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { useGetMaintenanceAlerts } from '~modules/maintenance-alerts/hooks/use-get-maintenance-alerts';
 import { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import MaintenanceAlertsEditForm from '~modules/maintenance-alerts/views/MaintenanceAlertsEditForm';
 import { Icon, Loader } from '~modules/shared/components';
+import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
@@ -19,6 +22,7 @@ import {
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { ErrorView } from '~shared/components/error';
 import FilterTable, { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -29,9 +33,6 @@ import {
 	MaintenanceAlertsOverviewProps,
 	MaintenanceAlertsOverviewTableCol,
 } from '../maintenance-alerts.types';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
-import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
-import { ToastType } from '~core/config';
 
 const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProps> = ({
 	className,
@@ -54,7 +55,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 	const languageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): CheckboxOption => ({
 			id: languageInfo.languageCode,
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			checked: (tableState?.language || []).includes(languageInfo.languageCode),
 		})
 	);

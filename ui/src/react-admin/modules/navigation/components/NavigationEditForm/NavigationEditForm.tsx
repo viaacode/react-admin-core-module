@@ -1,20 +1,21 @@
+import { ReactSelect, SelectOption } from '@meemoo/react-components';
 import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
 import { get, kebabCase } from 'lodash-es';
 import React, { FunctionComponent, ReactNode } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import type { Avo } from '@viaa/avo2-types';
 
 import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
-import { ReactSelect, SelectOption } from '@meemoo/react-components';
 
 import './NavigationEditForm.scss';
 
@@ -43,7 +44,7 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	const { data: allLanguages } = useGetAllLanguages();
 	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
 		return {
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			value: languageInfo.languageCode,
 		};
 	});

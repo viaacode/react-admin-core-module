@@ -1,38 +1,39 @@
 import './NavigationBarOverview.scss';
 
+import { Button, ButtonGroup, ButtonToolbar, Flex, IconName, Spacer } from '@viaa/avo2-components';
+
 import { cloneDeep, isNil, startCase } from 'lodash-es';
 import React, { FC, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
+import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
+import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
 
-import { Button, ButtonGroup, ButtonToolbar, Flex, IconName, Spacer } from '@viaa/avo2-components';
+import { Link } from '~modules/shared/components/Link';
+import { showToast } from '~modules/shared/helpers/show-toast';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { LanguageInfo } from '~modules/translations/translations.types';
+import { Icon, Loader } from '~shared/components';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import FilterTable from '~shared/components/FilterTable/FilterTable';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { CustomError } from '~shared/helpers/custom-error';
+import { navigate } from '~shared/helpers/link';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 
 import { NavigationService } from '../navigation.service';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { navigate } from '~shared/helpers/link';
-import { CustomError } from '~shared/helpers/custom-error';
-import { AdminLayout } from '~shared/layouts';
-import { Icon, Loader } from '~shared/components';
 import {
 	NavigationItem,
 	NavigationItemOverviewTableCols,
 	NavigationItemsTableState,
 } from '../navigation.types';
-import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
-import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
-
-import { Link } from '~modules/shared/components/Link';
-import { showToast } from '~modules/shared/helpers/show-toast';
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
@@ -58,7 +59,7 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 	const languageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): CheckboxOption => ({
 			id: languageInfo.languageCode,
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			checked: (tableState?.language || []).includes(languageInfo.languageCode),
 		})
 	);

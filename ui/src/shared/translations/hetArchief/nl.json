@@ -797,6 +797,8 @@
   "modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina": "Nederlandse hoofd pagina",
   "modules/shared/components/pagination-bar/pagination-bar___volgende": "volgende",
   "modules/shared/components/pagination-bar/pagination-bar___vorige": "vorige",
+  "modules/shared/consts/language-names___engels": "Engels",
+  "modules/shared/consts/language-names___nederlands": "Nederlands",
   "modules/shared/hooks/use-business-category___error": "Error",
   "modules/shared/hooks/use-companies___error": "Error",
   "modules/shared/hooks/use-education-levels___error": "Error",

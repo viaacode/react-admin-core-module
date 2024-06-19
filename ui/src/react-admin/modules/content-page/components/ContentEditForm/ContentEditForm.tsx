@@ -37,6 +37,7 @@ import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -65,7 +66,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const { data: allLanguages } = useGetAllLanguages();
 	const allLanguageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): SelectOption<string> => ({
-			label: languageInfo.languageLabel,
+			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
 			value: languageInfo.languageCode,
 		})
 	);
