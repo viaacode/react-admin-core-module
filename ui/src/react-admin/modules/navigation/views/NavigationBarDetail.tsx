@@ -297,14 +297,12 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 						{
 							id: 'label',
 							label: tText('modules/navigation/views/navigation-detail___label'),
-							sortable: true,
 							dataType: 'string',
 							visibleByDefault: true,
 						},
 						{
 							id: 'language',
 							label: tText('modules/navigation/views/navigation-bar-detail___taal'),
-							sortable: true,
 							visibleByDefault: true,
 							filterType: 'CheckboxDropdownModal',
 							filterProps: {

@@ -1,6 +1,10 @@
-query getNavigationItemsByPlacement($placement: String!, $searchTerm: String!) {
+query getNavigationItemsByPlacement(
+	$placement: String!
+	$searchTerm: String!
+	$orderBy: [app_content_nav_elements_order_by!]!
+) {
 	app_content_nav_elements(
-		order_by: { position: asc }
+		order_by: $orderBy
 		where: { placement: { _eq: $placement }, label: { _ilike: $searchTerm } }
 	) {
 		id

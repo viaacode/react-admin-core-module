@@ -128,7 +128,9 @@ export class AdminNavigationsService {
 	public async findNavigationBarItemsByPlacementId(
 		placement: string,
 		languages: Locale[],
-		searchTerm?: string
+		searchTerm?: string,
+		orderProperty: string = 'position',
+		orderDirection: string = 'asc'
 	): Promise<NavigationItem[]> {
 		let navigationsResponse:
 			| NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery']
@@ -146,6 +148,7 @@ export class AdminNavigationsService {
 					placement,
 					languages,
 					searchTerm: searchTermDb,
+					orderBy: { [orderProperty]: orderDirection },
 				}
 			);
 		} else {
@@ -155,6 +158,7 @@ export class AdminNavigationsService {
 			>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
 				placement,
 				searchTerm: searchTermDb,
+				orderBy: { [orderProperty]: orderDirection },
 			});
 		}
 

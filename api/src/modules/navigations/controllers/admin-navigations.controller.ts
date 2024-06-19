@@ -115,12 +115,16 @@ export class AdminNavigationsController {
 	public async getNavigationBarItemsByPlacement(
 		@Param('placement') placement: string,
 		@Query('languages') languages?: string, // Comma separated list of LanguageCodes
-		@Query('searchTerm') searchTerm?: string
+		@Query('searchTerm') searchTerm?: string,
+		@Query('orderProperty') orderProperty?: string,
+		@Query('orderDirection') orderDirection?: string
 	): Promise<NavigationItem[]> {
 		return await this.adminNavigationsService.findNavigationBarItemsByPlacementId(
 			placement,
 			(languages?.length ? languages.split(',') : []) as Locale[],
-			searchTerm
+			searchTerm,
+			orderProperty,
+			orderDirection
 		);
 	}
 }

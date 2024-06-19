@@ -2,9 +2,10 @@ query getNavigationItemsByPlacementAndLanguage(
 	$placement: String!
 	$languages: [lookup_languages_enum!]!
 	$searchTerm: String!
+	$orderBy: [app_navigation_order_by!]!
 ) {
 	app_navigation(
-		order_by: { position: asc }
+		order_by: $orderBy
 		where: {
 			placement: { _eq: $placement }
 			language: { _in: $languages }
