@@ -39,7 +39,9 @@ export const INITIAL_CONTENT_ENCLOSE_BLOCK_STATE = (): DefaultContentBlockState 
 
 export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Content insluiten'),
+	name: tText(
+		'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-insluiten'
+	),
 	type: ContentBlockType.ContentEncloseGrid,
 	components: {
 		state: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE(),

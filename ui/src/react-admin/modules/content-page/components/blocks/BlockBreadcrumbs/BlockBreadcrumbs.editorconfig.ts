@@ -33,7 +33,9 @@ export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => (
 
 export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('Breadcrumbs'),
+	name: tText(
+		'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___breadcrumbs'
+	),
 	type: ContentBlockType.Breadcrumbs,
 	components: {
 		state: INITIAL_BREADCRUMBS_COMPONENTS_STATE(),
