@@ -24,6 +24,7 @@ import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink } from '~shared/helpers/link';
 import {
 	renderDateDetailRows,
@@ -213,10 +214,13 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								'admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op'
 							)
 						)}
-						{renderDetailRow(
-							<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
-							tText('modules/content-page/views/content-page-detail-meta-data___taal')
-						)}
+						{isMultiLanguageEnabled() &&
+							renderDetailRow(
+								<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
+								tText(
+									'modules/content-page/views/content-page-detail-meta-data___taal'
+								)
+							)}
 						{renderDetailRow(
 							contentPageInfo.nlParentPageId ? (
 								<p>

@@ -5,9 +5,9 @@ import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { formatDate } from './formatters/date';
 import { sanitizeHtml } from './sanitize';
 
-export function renderDetailRow(value: ReactNode, label: string): ReactElement {
+export function renderDetailRow(value: ReactNode, label: string, className?: string): ReactElement {
 	return (
-		<tr key={`detail-row_${label}`}>
+		<tr key={`detail-row_${label}`} className={className}>
 			<th>{label}</th>
 			{isString(value) && (
 				<td

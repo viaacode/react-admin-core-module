@@ -1,5 +1,3 @@
-import { get, noop } from 'lodash-es';
-import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 import {
 	Blankslate,
 	Button,
@@ -11,8 +9,10 @@ import {
 	Navbar,
 	Tabs,
 } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import { get, noop } from 'lodash-es';
+import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -38,12 +38,13 @@ import {
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
 import { CustomError } from '~shared/helpers/custom-error';
 import { createDropdownMenuItem } from '~shared/helpers/dropdown';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { DefaultComponentProps } from '~shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
@@ -256,7 +257,9 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					),
 			  ]
 			: []),
-		...(hasPerm(EDIT_ANY_CONTENT_PAGES) && contentPageInfo?.language !== Locale.En
+		...(hasPerm(EDIT_ANY_CONTENT_PAGES) &&
+		contentPageInfo?.language !== Locale.En &&
+		isMultiLanguageEnabled()
 			? hasEnglishVersion
 				? [
 						createDropdownMenuItem(
