@@ -39,6 +39,7 @@ import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextE
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { ValueOf } from '~shared/types';
@@ -408,49 +409,56 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									/>
 								</FormGroup>
 							</Column>
-							<Column size="6">
-								<FormGroup
-									label={tText(
-										'modules/content-page/components/content-edit-form/content-edit-form___taal'
-									)}
-								>
-									<Select
-										options={allLanguageOptions}
-										value={contentPageInfo.language}
-										onChange={(newLanguage) => {
-											changeContentPageProp('language', newLanguage);
-										}}
-										placeholder={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+							{isMultiLanguageEnabled() && (
+								<Column size="6">
+									<FormGroup
+										label={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___taal'
 										)}
-										required
-										aria-label={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+									>
+										<Select
+											options={allLanguageOptions}
+											value={contentPageInfo.language}
+											onChange={(newLanguage) => {
+												changeContentPageProp('language', newLanguage);
+											}}
+											placeholder={tText(
+												'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+											)}
+											required
+											aria-label={tText(
+												'modules/content-page/components/content-edit-form/content-edit-form___selecteer-de-taal-van-de-pagina'
+											)}
+										></Select>
+									</FormGroup>
+								</Column>
+							)}
+							{isMultiLanguageEnabled() && (
+								<Column size="6" className="c-multilanguage-controls">
+									<FormGroup
+										label={tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
 										)}
-									></Select>
-								</FormGroup>
-							</Column>
-							<Column size="6">
-								<FormGroup
-									label={tText(
-										'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
-									)}
-								>
-									<ContentPicker
-										value={getParentPagePickerItem()}
-										onChange={(newNlParentPage) => {
-											const nlParentPageId = newNlParentPage?.value;
-											changeContentPageProp('nlParentPageId', nlParentPageId);
-										}}
-										allowedTypes={['NL_CONTENT_PAGE_PARENT_ID']}
-										hideTypeDropdown
-										hideTargetSwitch
-										placeholder={tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
-										)}
-									></ContentPicker>
-								</FormGroup>
-							</Column>
+									>
+										<ContentPicker
+											value={getParentPagePickerItem()}
+											onChange={(newNlParentPage) => {
+												const nlParentPageId = newNlParentPage?.value;
+												changeContentPageProp(
+													'nlParentPageId',
+													nlParentPageId
+												);
+											}}
+											allowedTypes={['NL_CONTENT_PAGE_PARENT_ID']}
+											hideTypeDropdown
+											hideTargetSwitch
+											placeholder={tText(
+												'modules/content-page/components/content-edit-form/content-edit-form___leeg-indien-dit-de-hoofd-pagina-is'
+											)}
+										></ContentPicker>
+									</FormGroup>
+								</Column>
+							)}
 							<Column size="12">
 								<UserGroupSelect
 									label={tText(

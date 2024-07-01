@@ -1,20 +1,22 @@
 import { IconName, TabProps } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
+
+import { AdminConfigManager } from '~core/config';
 import {
 	ContentOverviewTableCols,
 	ContentWidth,
 } from '~modules/content-page/types/content-pages.types';
-
-import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
-import { NULL_FILTER } from '~shared/helpers/filters';
-
-import { AdminConfigManager } from '~core/config';
 import {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+
+import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import { NULL_FILTER } from '~shared/helpers/filters';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
@@ -41,7 +43,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___content-type'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'CheckboxDropdownModal',
+			filterType: TableFilterType.CheckboxDropdownModal,
 			filterProps: {
 				options: contentTypeOptions,
 			} as CheckboxDropdownModalProps,
@@ -52,7 +54,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___auteur'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'MultiUserSelectDropdown',
+			filterType: TableFilterType.MultiUserSelectDropdown,
 			dataType: TableColumnDataType.string,
 		},
 		{
@@ -60,7 +62,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/users/user___gebruikersgroep'),
 			sortable: true,
 			visibleByDefault: false,
-			filterType: 'CheckboxDropdownModal',
+			filterType: TableFilterType.CheckboxDropdownModal,
 			filterProps: {
 				options: [
 					...userGroupOptions,
@@ -77,7 +79,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___aangemaakt'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'DateRangeDropdown',
+			filterType: TableFilterType.DateRangeDropdown,
 			dataType: TableColumnDataType.dateTime,
 		},
 		{
@@ -85,7 +87,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___laatst-bewerkt'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'DateRangeDropdown',
+			filterType: TableFilterType.DateRangeDropdown,
 			dataType: TableColumnDataType.dateTime,
 		},
 		{
@@ -93,7 +95,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___publiek'),
 			sortable: true,
 			visibleByDefault: false,
-			filterType: 'BooleanCheckboxDropdown',
+			filterType: TableFilterType.BooleanCheckboxDropdown,
 			dataType: TableColumnDataType.boolean,
 		},
 		{
@@ -101,7 +103,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/views/content-overview___publicatie'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'DateRangeDropdown',
+			filterType: TableFilterType.DateRangeDropdown,
 			dataType: TableColumnDataType.dateTime,
 		},
 		{
@@ -109,7 +111,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/views/content-overview___publiceer-op'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'DateRangeDropdown',
+			filterType: TableFilterType.DateRangeDropdown,
 			dataType: TableColumnDataType.dateTime,
 		},
 		{
@@ -117,7 +119,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/views/content-overview___depubliceer-op'),
 			sortable: true,
 			visibleByDefault: true,
-			filterType: 'DateRangeDropdown',
+			filterType: TableFilterType.DateRangeDropdown,
 			dataType: TableColumnDataType.dateTime,
 		},
 		{
@@ -125,7 +127,7 @@ export const GET_OVERVIEW_COLUMNS: (
 			label: i18n.tText('admin/content/content___labels'),
 			sortable: false,
 			visibleByDefault: false,
-			filterType: 'CheckboxDropdownModal',
+			filterType: TableFilterType.CheckboxDropdownModal,
 			filterProps: {
 				options: contentPageLabelOptions,
 			} as CheckboxDropdownModalProps,
@@ -136,16 +138,20 @@ export const GET_OVERVIEW_COLUMNS: (
 			sortable: false,
 			visibleByDefault: false,
 		},
-		{
-			id: 'translations',
-			label: i18n.tText('modules/content-page/const/content-page___vertalingen'),
-			sortable: false,
-			visibleByDefault: true,
-			filterType: 'CheckboxDropdownModal',
-			filterProps: {
-				options: languageOptions,
-			} as CheckboxDropdownModalProps,
-		},
+		...(isMultiLanguageEnabled()
+			? [
+					{
+						id: 'translations' as const,
+						label: i18n.tText('modules/content-page/const/content-page___vertalingen'),
+						sortable: false,
+						visibleByDefault: true,
+						filterType: TableFilterType.CheckboxDropdownModal,
+						filterProps: {
+							options: languageOptions,
+						} as CheckboxDropdownModalProps,
+					},
+			  ]
+			: []),
 		{
 			id: 'actions',
 			tooltip: i18n.tText('admin/content/views/content-overview___acties'),

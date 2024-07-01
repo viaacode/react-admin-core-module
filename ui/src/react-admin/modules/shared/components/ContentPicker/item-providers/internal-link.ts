@@ -14,7 +14,7 @@ export const retrieveInternalLinks = async (
 	const staticRoutes: [Locale, string][] = Object.keys(AdminConfigManager.getConfig().staticPages)
 		.flatMap((language): [Locale, string][] => {
 			const routes = AdminConfigManager.getConfig().staticPages[language as Locale];
-			return routes.map((route: string) => [language, route] as [Locale, string]);
+			return (routes || []).map((route: string) => [language, route] as [Locale, string]);
 		})
 		.filter((route) => !route[1].includes(':'));
 	const routeOptions: (PickerItem | null)[] = staticRoutes.map(

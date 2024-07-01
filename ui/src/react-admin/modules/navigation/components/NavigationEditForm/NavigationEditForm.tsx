@@ -12,6 +12,7 @@ import { IconPicker } from '~shared/components/IconPicker/IconPicker';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { tText } from '~shared/helpers/translation-functions';
 import { ReactSelectOption, ValueOf } from '~shared/types';
 import { PickerItem } from '~shared/types/content-picker';
@@ -149,22 +150,25 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					}}
 				/>
 			</FormGroup>
-			<FormGroup
-				label={tText(
-					'modules/navigation/components/navigation-edit-form/navigation-edit-form___taal'
-				)}
-				error={formErrors.language}
-			>
-				<ReactSelect
-					options={languageOptions}
-					value={
-						languageOptions.find(
-							(option) => option.value === (formState.language || Locale.Nl)
-						) || languageOptions[0]
-					}
-					onChange={(evt) => onChange('language', (evt as SelectOption).value)}
-				/>
-			</FormGroup>
+			{isMultiLanguageEnabled() && (
+				<FormGroup
+					label={tText(
+						'modules/navigation/components/navigation-edit-form/navigation-edit-form___taal'
+					)}
+					error={formErrors.language}
+					className="c-multilanguage-controls"
+				>
+					<ReactSelect
+						options={languageOptions}
+						value={
+							languageOptions.find(
+								(option) => option.value === (formState.language || Locale.Nl)
+							) || languageOptions[0]
+						}
+						onChange={(evt) => onChange('language', (evt as SelectOption).value)}
+					/>
+				</FormGroup>
+			)}
 			<UserGroupSelect
 				label={tText(
 					'admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor'

@@ -26,6 +26,7 @@ import {
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -251,23 +252,26 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 										}
 									/>
 								</FormGroup>
-								<FormGroup
-									label={tText(
-										'modules/content-page-labels/views/content-page-label-edit___taal'
-									)}
-									error={formErrors.language}
-								>
-									<Select
-										options={languageOptions}
-										value={contentPageLabelInfo.language}
-										onChange={(newLanguage) =>
-											setContentPageLabelInfo({
-												...contentPageLabelInfo,
-												language: newLanguage as Locale,
-											})
-										}
-									/>
-								</FormGroup>
+								{isMultiLanguageEnabled() && (
+									<FormGroup
+										label={tText(
+											'modules/content-page-labels/views/content-page-label-edit___taal'
+										)}
+										error={formErrors.language}
+										className="c-multilanguage-controls"
+									>
+										<Select
+											options={languageOptions}
+											value={contentPageLabelInfo.language}
+											onChange={(newLanguage) =>
+												setContentPageLabelInfo({
+													...contentPageLabelInfo,
+													language: newLanguage as Locale,
+												})
+											}
+										/>
+									</FormGroup>
+								)}
 								<FormGroup
 									label={tText(
 										'admin/content-page-labels/views/content-page-label-edit___link-naar'

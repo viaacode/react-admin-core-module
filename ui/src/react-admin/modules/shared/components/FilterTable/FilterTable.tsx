@@ -1,3 +1,4 @@
+import { PaginationBar } from '@meemoo/react-components';
 import {
 	Button,
 	ButtonType,
@@ -39,7 +40,11 @@ import React, {
 	useState,
 } from 'react';
 import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import { isAvo } from '~modules/shared/helpers/is-avo';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+
+import { tText } from '~shared/helpers/translation-functions';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
@@ -52,13 +57,9 @@ import {
 } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
+import { Icon } from '../Icon';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
-
-import { tText } from '~shared/helpers/translation-functions';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { PaginationBar } from '@meemoo/react-components';
-import { Icon } from '../Icon';
 
 export interface FilterableTableState {
 	query?: string;
@@ -68,13 +69,7 @@ export interface FilterableTableState {
 }
 
 export interface FilterableColumn<T = string> extends Omit<TableColumn, 'id'> {
-	filterType?:
-		| 'CheckboxDropdownModal'
-		| 'DateRangeDropdown'
-		| 'BooleanCheckboxDropdown'
-		| 'OkNokEmptyCheckboxDropdown'
-		| 'MultiUserSelectDropdown'
-		| 'MultiEducationalOrganisationSelectModal';
+	filterType?: TableFilterType;
 	filterProps?: any;
 	visibleByDefault: boolean;
 	id: T;
@@ -84,7 +79,6 @@ const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {
 	CheckboxDropdownModal: CheckboxListParam,
 	DateRangeDropdown: DateRangeParam,
 	BooleanCheckboxDropdown: CheckboxListParam,
-	OkNokEmptyCheckboxDropdown: CheckboxListParam,
 	MultiUserSelectDropdown: CheckboxListParam,
 	MultiEducationalOrganisationSelectModal: CheckboxListParam,
 };
@@ -281,6 +275,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 		const page = tableState.page | 0;
 		const from = page * itemsPerPage + 1;
 		const to = Math.min(page * itemsPerPage + itemsPerPage, dataCount);
+		const columnsWithAFilter = columns.filter((col) => col.filterType && col.id);
+		const showFiltersAndColumnSelection =
+			(isAvo() && showColumnsVisibility) || columnsWithAFilter.length > 0;
 
 		return (
 			<>
@@ -312,136 +309,140 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 					</Form>
 				</Spacer>
 
-				<Spacer margin="bottom">
-					<Toolbar className="c-filter-table__toolbar">
-						<ToolbarLeft>
-							<Flex spaced="regular" wrap>
-								{columns.map((col) => {
-									if (!col.filterType || !col.id) {
-										return null;
-									}
+				{showFiltersAndColumnSelection && (
+					<Spacer margin="bottom">
+						<Toolbar className="c-filter-table__toolbar">
+							<ToolbarLeft>
+								<Flex spaced="regular" wrap>
+									{columnsWithAFilter.map((col) => {
+										switch (col.filterType) {
+											case 'CheckboxDropdownModal':
+												return (
+													<CheckboxDropdownModal
+														{...(col.filterProps || {})}
+														id={col.id}
+														label={col.label}
+														onChange={(value) =>
+															handleTableStateChanged(value, col.id)
+														}
+														options={get(
+															col,
+															'filterProps.options',
+															[]
+														).map((option: CheckboxOption) => ({
+															...option,
+															checked: (
+																(tableState as any)[col.id] || []
+															).includes(option.id),
+														}))}
+														key={`filter-${col.id}`}
+													/>
+												);
 
-									switch (col.filterType) {
-										case 'CheckboxDropdownModal':
-											return (
-												<CheckboxDropdownModal
-													{...(col.filterProps || {})}
-													id={col.id}
-													label={col.label}
-													onChange={(value) =>
-														handleTableStateChanged(value, col.id)
-													}
-													options={get(
-														col,
-														'filterProps.options',
-														[]
-													).map((option: CheckboxOption) => ({
-														...option,
-														checked: (
-															(tableState as any)[col.id] || []
-														).includes(option.id),
-													}))}
-													key={`filter-${col.id}`}
-												/>
-											);
+											case 'DateRangeDropdown':
+												return (
+													<DateRangeDropdown
+														{...(col.filterProps || {})}
+														id={col.id}
+														label={col.label}
+														onChange={(value) =>
+															handleTableStateChanged(value, col.id)
+														}
+														range={(tableState as any)[col.id]}
+														key={`filter-${col.id}`}
+													/>
+												);
 
-										case 'DateRangeDropdown':
-											return (
-												<DateRangeDropdown
-													{...(col.filterProps || {})}
-													id={col.id}
-													label={col.label}
-													onChange={(value) =>
-														handleTableStateChanged(value, col.id)
-													}
-													range={(tableState as any)[col.id]}
-													key={`filter-${col.id}`}
-												/>
-											);
+											case 'BooleanCheckboxDropdown':
+												return (
+													<BooleanCheckboxDropdown
+														{...(col.filterProps || {})}
+														id={col.id}
+														label={col.label}
+														value={(tableState as any)[col.id]}
+														onChange={(value) =>
+															handleTableStateChanged(value, col.id)
+														}
+														trueLabel={get(
+															col,
+															'filterProps.trueLabel'
+														)}
+														falseLabel={get(
+															col,
+															'filterProps.falseLabel'
+														)}
+														includeEmpty={get(
+															col,
+															'filterProps.includeEmpty'
+														)}
+														key={`filter-${col.id}`}
+													/>
+												);
 
-										case 'BooleanCheckboxDropdown':
-											return (
-												<BooleanCheckboxDropdown
-													{...(col.filterProps || {})}
-													id={col.id}
-													label={col.label}
-													value={(tableState as any)[col.id]}
-													onChange={(value) =>
-														handleTableStateChanged(value, col.id)
-													}
-													trueLabel={get(col, 'filterProps.trueLabel')}
-													falseLabel={get(col, 'filterProps.falseLabel')}
-													includeEmpty={get(
-														col,
-														'filterProps.includeEmpty'
-													)}
-													key={`filter-${col.id}`}
-												/>
-											);
+											case 'MultiUserSelectDropdown':
+												return (
+													<MultiUserSelectDropdown
+														{...(col.filterProps || {})}
+														id={col.id}
+														label={col.label}
+														values={(tableState as any)[col.id]}
+														onChange={(value: any) =>
+															handleTableStateChanged(value, col.id)
+														}
+														key={`filter-${col.id}`}
+													/>
+												);
 
-										case 'MultiUserSelectDropdown':
-											return (
-												<MultiUserSelectDropdown
-													{...(col.filterProps || {})}
-													id={col.id}
-													label={col.label}
-													values={(tableState as any)[col.id]}
-													onChange={(value: any) =>
-														handleTableStateChanged(value, col.id)
-													}
-													key={`filter-${col.id}`}
-												/>
-											);
+											case 'MultiEducationalOrganisationSelectModal':
+												return (
+													<MultiEducationalOrganisationSelectModal
+														{...(col.filterProps || {})}
+														id={col.id}
+														label={col.label || ''}
+														values={eduOrgToClientOrg(
+															(tableState as any)[col.id]
+														)}
+														onChange={(value) =>
+															handleTableStateChanged(value, col.id)
+														}
+														key={`filter-${col.id}`}
+													/>
+												);
 
-										case 'MultiEducationalOrganisationSelectModal':
-											return (
-												<MultiEducationalOrganisationSelectModal
-													{...(col.filterProps || {})}
-													id={col.id}
-													label={col.label || ''}
-													values={eduOrgToClientOrg(
-														(tableState as any)[col.id]
-													)}
-													onChange={(value) =>
-														handleTableStateChanged(value, col.id)
-													}
-													key={`filter-${col.id}`}
-												/>
-											);
-
-										default:
-											return null;
-									}
-								})}
-								{!!bulkActions && !!bulkActions?.length && (
-									<Select
-										options={bulkActions || []}
-										onChange={handleSelectBulkAction}
-										placeholder={tText(
-											'admin/shared/components/filter-table/filter-table___bulkactie'
-										)}
-										disabled={!(selectedItemIds || []).length}
-										className="c-bulk-action-select"
-									/>
-								)}
-							</Flex>
-						</ToolbarLeft>
-						{isAvo() && showColumnsVisibility && (
-							<ToolbarRight>
-								<CheckboxDropdownModal
-									label={tText(
-										'admin/shared/components/filter-table/filter-table___kolommen'
+											default:
+												return null;
+										}
+									})}
+									{!!bulkActions && !!bulkActions?.length && (
+										<Select
+											options={bulkActions || []}
+											onChange={handleSelectBulkAction}
+											placeholder={tText(
+												'admin/shared/components/filter-table/filter-table___bulkactie'
+											)}
+											disabled={!(selectedItemIds || []).length}
+											className="c-bulk-action-select"
+										/>
 									)}
-									id="table_columns"
-									options={getColumnOptions()}
-									onChange={updateSelectedColumns}
-									showSelectedValuesOnCollapsed={false}
-									showSearch={false}
-								/>
-							</ToolbarRight>
-						)}
-					</Toolbar>
-				</Spacer>
+								</Flex>
+							</ToolbarLeft>
+							{isAvo() && showColumnsVisibility && (
+								<ToolbarRight>
+									<CheckboxDropdownModal
+										label={tText(
+											'admin/shared/components/filter-table/filter-table___kolommen'
+										)}
+										id="table_columns"
+										options={getColumnOptions()}
+										onChange={updateSelectedColumns}
+										showSelectedValuesOnCollapsed={false}
+										showSearch={false}
+									/>
+								</ToolbarRight>
+							)}
+						</Toolbar>
+					</Spacer>
+				)}
 			</>
 		);
 	};

@@ -72,7 +72,6 @@ export { default as UserGroupOverview } from './user-group/views/UserGroupOvervi
 
 // Translations
 export { default as TranslationsOverview } from './translations/views/TranslationsOverview';
-export { Locale } from '~modules/translations/translations.core.types';
 
 // Helpers
 export { sanitizeHtml } from './shared/helpers/sanitize/index';

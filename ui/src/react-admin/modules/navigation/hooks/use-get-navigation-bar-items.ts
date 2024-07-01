@@ -1,10 +1,9 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { compact } from 'lodash-es';
 import { NavigationService } from '~modules/navigation/navigation.service';
 import { Locale } from '~modules/translations/translations.core.types';
 import { QUERY_KEYS } from '~shared/types';
 import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
-import { NavigationItem } from '../navigation.types';
 
 export const useGetNavigationBarItems = (
 	placement?: string,
@@ -12,7 +11,7 @@ export const useGetNavigationBarItems = (
 	searchTerm?: string,
 	orderProperty?: string,
 	orderDirection?: string,
-	options?: UseQueryOptions<NavigationItem[], any, NavigationItem[], string[]>
+	options: { keepPreviousData?: boolean; cacheTime?: number } = {}
 ) => {
 	return useQuery(
 		compact([
@@ -35,6 +34,6 @@ export const useGetNavigationBarItems = (
 			reindexNavigationItems(navItems);
 			return navItems;
 		},
-		options
+		{ keepPreviousData: false, cacheTime: 300000, ...options }
 	);
 };

@@ -30,6 +30,7 @@ import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.con
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import {
@@ -415,6 +416,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	}, [control, errors.untilDate?.message, setValue]);
 
 	const renderedLanguage = useMemo(() => {
+		if (!isMultiLanguageEnabled()) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-language"
@@ -422,6 +426,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___taal'
 				)}
 				errors={[errors.language?.message]}
+				className="c-multilanguage-controls"
 			>
 				<Controller
 					name="language"

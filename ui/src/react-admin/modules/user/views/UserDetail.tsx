@@ -9,16 +9,25 @@ import {
 	Table,
 	TagList,
 } from '@viaa/avo2-components';
-import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
+import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
+import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { compact } from 'lodash-es';
 import React, { FC, ReactText, useCallback, useEffect, useState } from 'react';
+import { AdminConfigManager, ToastType } from '~core/config';
+import { Link } from '~modules/shared/components/Link';
+import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import { Icon } from '~shared/components';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
+import { CustomError } from '~shared/helpers/custom-error';
+import { createDropdownMenuItem } from '~shared/helpers/dropdown';
+import { renderAvatar } from '~shared/helpers/formatters/avatar';
 import { formatDateString } from '~shared/helpers/formatters/date';
+import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
+import { buildLink, navigate } from '~shared/helpers/link';
 
 import {
 	renderDateDetailRows,
@@ -26,23 +35,14 @@ import {
 	renderSimpleDetailRows,
 } from '~shared/helpers/render-detail-fields';
 import { showToast } from '~shared/helpers/show-toast';
-import { AdminLayout } from '../../shared/layouts';
-import UserDeleteModal from '../components/UserDeleteModal';
-import { UserService } from '../user.service';
-import { AdminConfigManager, ToastType } from '~core/config';
+import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
-import { Idp } from '../user.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { createDropdownMenuItem } from '~shared/helpers/dropdown';
-import { buildLink, navigate } from '~shared/helpers/link';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { AdminLayout } from '../../shared/layouts';
 import TempAccessModal from '../components/TempAccessModal';
-import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { renderAvatar } from '~shared/helpers/formatters/avatar';
-import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
-import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
-import { Link } from '~modules/shared/components/Link';
+import UserDeleteModal from '../components/UserDeleteModal';
+import { UserService } from '../user.service';
+import { Idp } from '../user.types';
 
 export interface UserDetailProps {
 	id: string | null;
@@ -336,16 +336,16 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 									),
 								],
 							])}
-							{hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS) &&
-								renderDetailRow(
-									renderTempAccess(),
-									tText('admin/users/views/user-detail___tijdelijk-account')
-								)}
-							{hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS) &&
-								renderDetailRow(
-									renderTempAccessDuration(),
-									tText('admin/users/views/user-detail___totale-toegang')
-								)}
+							{renderDetailRow(
+								renderTempAccess(),
+								tText('admin/users/views/user-detail___tijdelijk-account'),
+								hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS)
+							)}
+							{renderDetailRow(
+								renderTempAccessDuration(),
+								tText('admin/users/views/user-detail___totale-toegang'),
+								hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS)
+							)}
 							{renderDetailRow(
 								idpMapsToTagList(
 									Object.keys(storedProfile.idps || {}) as Idp[],
