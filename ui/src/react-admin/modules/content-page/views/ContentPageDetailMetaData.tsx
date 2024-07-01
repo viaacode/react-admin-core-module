@@ -214,13 +214,13 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								'admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op'
 							)
 						)}
-						{isMultiLanguageEnabled() &&
-							renderDetailRow(
-								<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
-								tText(
-									'modules/content-page/views/content-page-detail-meta-data___taal'
-								)
-							)}
+						{renderDetailRow(
+							<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
+							tText(
+								'modules/content-page/views/content-page-detail-meta-data___taal'
+							),
+							isMultiLanguageEnabled()
+						)}
 						{renderDetailRow(
 							contentPageInfo.nlParentPageId ? (
 								<p>

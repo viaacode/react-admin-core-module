@@ -120,13 +120,13 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 								),
 							],
 						])}
-						{isMultiLanguageEnabled() &&
-							renderDetailRow(
-								contentPageLabelInfo.language,
-								tText(
-									'modules/content-page-labels/views/content-page-label-detail___taal'
-								)
-							)}
+						{renderDetailRow(
+							contentPageLabelInfo.language,
+							tText(
+								'modules/content-page-labels/views/content-page-label-detail___taal'
+							),
+							isMultiLanguageEnabled()
+						)}
 						{renderDetailRow(
 							linkTo ? (
 								<Button
