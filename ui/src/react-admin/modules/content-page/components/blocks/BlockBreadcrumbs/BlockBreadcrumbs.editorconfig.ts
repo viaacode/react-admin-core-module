@@ -1,4 +1,6 @@
+import { ContentPickerType } from '@viaa/avo2-types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defaults';
+import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import {
 	ContentBlockConfig,
 	ContentBlockEditor,
@@ -6,9 +8,7 @@ import {
 	DEFAULT_BUTTON_PROPS,
 	DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
-import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { tText } from '~shared/helpers/translation-functions';
-import { ContentPickerType } from '@viaa/avo2-types';
 
 export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,
@@ -33,7 +33,9 @@ export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => (
 
 export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: 'CONTENT_ENCLOSE_BLOCK_CONFIG',
+	name: tText(
+		'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___breadcrumbs'
+	),
 	type: ContentBlockType.Breadcrumbs,
 	components: {
 		state: INITIAL_BREADCRUMBS_COMPONENTS_STATE(),
