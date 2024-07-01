@@ -10,6 +10,7 @@ import {
 	DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { tText } from '~shared/helpers/translation-functions';
 
 export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 	title: '',
@@ -38,7 +39,7 @@ export const INITIAL_CONTENT_ENCLOSE_BLOCK_STATE = (): DefaultContentBlockState 
 
 export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: 'CONTENT_ENCLOSE_BLOCK_CONFIG',
+	name: tText('Content insluiten'),
 	type: ContentBlockType.ContentEncloseGrid,
 	components: {
 		state: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE(),
