@@ -29,6 +29,10 @@ interface MediaPlayerWrapperProps {
 	autoplay?: boolean;
 	commonUser?: Avo.User.CommonUser;
 	showCopyright?: boolean;
+	seekable?: boolean;
+	ui?: | number;
+	controls?: boolean;
+	speed?: unknown | null;
 }
 
 export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
@@ -47,6 +51,10 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		autoplay,
 		commonUser,
 		showCopyright,
+		seekable,
+		ui,
+		controls,
+		speed
 	} = props;
 
 	const { tText, tHtml } = useTranslation();
@@ -161,6 +169,10 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					autoplay={autoplay}
 					annotationTitle={annotationTitle}
 					annotationText={annotationText}
+					seekable={seekable}
+					ui={ui}
+					controls={controls}
+					speed={speed}
 				/>
 				{/* Modal for displaying copyright info about the tile's image https://meemoo.atlassian.net/browse/AVO-3015 */}
 				<Modal
