@@ -33,6 +33,7 @@ interface MediaPlayerWrapperProps {
 	ui?: | number;
 	controls?: boolean;
 	speed?: unknown | null;
+	onEnded?: () => void;
 }
 
 export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
@@ -54,7 +55,8 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		seekable,
 		ui,
 		controls,
-		speed
+		speed,
+		onEnded,
 	} = props;
 
 	const { tText, tHtml } = useTranslation();
@@ -173,6 +175,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					ui={ui}
 					controls={controls}
 					speed={speed}
+					onEnded={onEnded}
 				/>
 				{/* Modal for displaying copyright info about the tile's image https://meemoo.atlassian.net/browse/AVO-3015 */}
 				<Modal
