@@ -69,6 +69,7 @@ export { useGetProfileById } from './user/hooks/use-get-profile-by-id';
 
 // User groups and permissions
 export { default as UserGroupOverview } from './user-group/views/UserGroupOverview';
+export { preferredUserGroupOrder } from './user-group/const/user-group.const';
 
 // Translations
 export { default as TranslationsOverview } from './translations/views/TranslationsOverview';
