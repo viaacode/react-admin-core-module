@@ -16,6 +16,7 @@ import {
 	getProxyUrl,
 } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { QUERY_KEYS } from '~shared/types';
+import { formatDateToDayMonthYear } from '~shared/helpers/formatters/date';
 
 export const useGetContentBlockEncloseContent = (
 	ids: MappedElement[],
@@ -76,7 +77,7 @@ export const useGetContentBlockEncloseContent = (
 						name: item.name || item.title,
 						description: item.description,
 						thumbnail: item.thumbnailUrl,
-						dateCreated: item.dateCreatedLowerBound,
+						dateCreated: formatDateToDayMonthYear(item.dateCreatedLowerBound),
 						maintainerName: item.maintainerName,
 						objectType: item.dctermsFormat,
 						identifier: item.schemaIdentifier,
@@ -94,6 +95,7 @@ export const useGetContentBlockEncloseContent = (
 				id: contentPage.id,
 				name: contentPage.title,
 				description: contentPage.description,
+				dateCreated: formatDateToDayMonthYear(contentPage.createdAt),
 				thumbnail: contentPage.thumbnailPath,
 				identifier: contentPage.path,
 				link: contentPage.path,

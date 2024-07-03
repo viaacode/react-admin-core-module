@@ -182,6 +182,9 @@ export interface IconConfig {
 		audio: IconComponentProps;
 		video: IconComponentProps;
 		newspaper: IconComponentProps;
+		noAudio: IconComponentProps;
+		noVideo: IconComponentProps;
+		noFilm: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];
