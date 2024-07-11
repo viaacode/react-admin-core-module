@@ -55,7 +55,7 @@ export interface AdminConfig {
 		FLOW_PLAYER_TOKEN: string;
 		FLOW_PLAYER_ID: string;
 	};
-	staticPages: Record<Locale, string[]>;
+	staticPages: Partial<Record<Locale, string[]>>;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
 		defaultPageWidth: ContentWidth;
@@ -92,6 +92,7 @@ export interface AdminConfig {
 		defaultAudioStill: string;
 		flowplayer?: FC<FlowPlayerWrapperProps>;
 		buttonTypes: () => { label: string; value: string }[];
+		enableMultiLanguage: boolean;
 	};
 	content_blocks: Partial<Record<ContentBlockType, FunctionComponent<any>>>;
 	icon?: IconConfig;

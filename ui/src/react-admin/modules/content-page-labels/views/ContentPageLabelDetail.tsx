@@ -3,6 +3,7 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { Link } from '~modules/shared/components/Link';
+import { DefaultComponentProps } from '~modules/shared/types';
 import { Icon } from '~shared/components';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
@@ -11,6 +12,7 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigateToContentType } from '~shared/helpers/link';
 import {
 	renderDateDetailRows,
@@ -20,7 +22,6 @@ import {
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { ContentPageLabel } from '../content-page-label.types';
-import { DefaultComponentProps } from '~modules/shared/types';
 
 type ContentPageLabelDetailProps = { contentPageLabelId: string } & DefaultComponentProps;
 
@@ -123,7 +124,8 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 							contentPageLabelInfo.language,
 							tText(
 								'modules/content-page-labels/views/content-page-label-detail___taal'
-							)
+							),
+							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(
 							linkTo ? (

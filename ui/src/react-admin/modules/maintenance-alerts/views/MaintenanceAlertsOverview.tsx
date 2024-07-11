@@ -24,9 +24,11 @@ import { ErrorView } from '~shared/components/error';
 import FilterTable, { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service';
 import {
 	MaintenanceAlert,
@@ -215,17 +217,23 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 				sortable: true,
 				visibleByDefault: true,
 			},
-			{
-				id: 'language',
-				label: tText('modules/maintenance-alerts/views/maintenance-alerts-overview___taal'),
-				sortable: true,
-				visibleByDefault: true,
-				filterType: 'CheckboxDropdownModal',
-				filterProps: {
-					options: languageOptions,
-				} as CheckboxDropdownModalProps,
-				dataType: TableColumnDataType.string,
-			},
+			...(isMultiLanguageEnabled()
+				? [
+						{
+							id: 'language' as const,
+							label: tText(
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___taal'
+							),
+							sortable: true,
+							visibleByDefault: true,
+							filterType: TableFilterType.CheckboxDropdownModal,
+							filterProps: {
+								options: languageOptions,
+							} as CheckboxDropdownModalProps,
+							dataType: TableColumnDataType.string,
+						},
+				  ]
+				: []),
 			{
 				id: 'actions',
 				tooltip: tText(

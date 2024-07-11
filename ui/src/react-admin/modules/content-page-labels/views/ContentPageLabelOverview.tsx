@@ -34,11 +34,13 @@ import {
 	getQueryFilter,
 } from '~shared/helpers/filters';
 import { formatDate } from '~shared/helpers/formatters/date';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigate } from '~shared/helpers/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { AdminLayout } from '~shared/layouts';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 import FilterTable, {
@@ -145,7 +147,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				label: tText('admin/content-page-labels/views/content-page-label-overview___type'),
 				sortable: true,
 				visibleByDefault: true,
-				filterType: 'CheckboxDropdownModal',
+				filterType: TableFilterType.CheckboxDropdownModal,
 				filterProps: {
 					options: contentTypeOptions,
 				} as CheckboxDropdownModalProps,
@@ -157,19 +159,23 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				sortable: false,
 				visibleByDefault: true,
 			},
-			{
-				id: 'language',
-				label: tText(
-					'modules/content-page-labels/views/content-page-label-overview___taal'
-				),
-				sortable: true,
-				visibleByDefault: true,
-				filterType: 'CheckboxDropdownModal',
-				filterProps: {
-					options: languageOptions,
-				} as CheckboxDropdownModalProps,
-				dataType: TableColumnDataType.string,
-			},
+			...(isMultiLanguageEnabled()
+				? [
+						{
+							id: 'language' as const,
+							label: tText(
+								'modules/content-page-labels/views/content-page-label-overview___taal'
+							),
+							sortable: true,
+							visibleByDefault: true,
+							filterType: TableFilterType.CheckboxDropdownModal,
+							filterProps: {
+								options: languageOptions,
+							} as CheckboxDropdownModalProps,
+							dataType: TableColumnDataType.string,
+						},
+				  ]
+				: []),
 			{
 				id: 'created_at',
 				label: tText(
@@ -177,7 +183,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				),
 				sortable: true,
 				visibleByDefault: true,
-				filterType: 'DateRangeDropdown',
+				filterType: TableFilterType.DateRangeDropdown,
 				dataType: TableColumnDataType.dateTime,
 			},
 			{
@@ -187,7 +193,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 				),
 				sortable: true,
 				visibleByDefault: true,
-				filterType: 'DateRangeDropdown',
+				filterType: TableFilterType.DateRangeDropdown,
 				dataType: TableColumnDataType.dateTime,
 			},
 			{

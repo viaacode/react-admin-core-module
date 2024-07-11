@@ -55,7 +55,7 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 		data: navigationItems,
 		isLoading: isLoadingNavigationItems,
 		isError: isErrorNavigationItems,
-	} = useGetNavigationBarItems(navigationBarId, undefined, undefined, {
+	} = useGetNavigationBarItems(navigationBarId, [Locale.Nl], undefined, undefined, undefined, {
 		keepPreviousData: false,
 		cacheTime: 0,
 	});

@@ -23,10 +23,12 @@ import DeleteObjectModal from '~shared/components/ConfirmModal/ConfirmModal';
 import FilterTable from '~shared/components/FilterTable/FilterTable';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
+import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { navigate } from '~shared/helpers/link';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
+import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { NavigationService } from '../navigation.service';
 import {
@@ -300,16 +302,22 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 							dataType: 'string',
 							visibleByDefault: true,
 						},
-						{
-							id: 'language',
-							label: tText('modules/navigation/views/navigation-bar-detail___taal'),
-							visibleByDefault: true,
-							filterType: 'CheckboxDropdownModal',
-							filterProps: {
-								options: languageOptions,
-							} as CheckboxDropdownModalProps,
-							dataType: TableColumnDataType.string,
-						},
+						...(isMultiLanguageEnabled()
+							? [
+									{
+										id: 'language',
+										label: tText(
+											'modules/navigation/views/navigation-bar-detail___taal'
+										),
+										visibleByDefault: true,
+										filterType: TableFilterType.CheckboxDropdownModal,
+										filterProps: {
+											options: languageOptions,
+										} as CheckboxDropdownModalProps,
+										dataType: TableColumnDataType.string,
+									},
+							  ]
+							: []),
 						{
 							id: 'actions',
 							visibleByDefault: true,

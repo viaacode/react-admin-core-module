@@ -304,8 +304,8 @@ export class TranslationsService implements OnApplicationBootstrap {
 
 	public tText(
 		key: string,
-		variables: Record<string, string | number> | null,
-		locale: Locale
+		variables: Record<string, string | number> | null = null,
+		locale: Locale = Locale.Nl
 	): string {
 		const translation = this.backendTranslations[locale][key];
 		if (translation) {
