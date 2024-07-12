@@ -1,6 +1,7 @@
 import { FC, ReactNode, useMemo } from 'react';
 import type { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';
+import { FlowplayerSourceList } from '@meemoo/react-components';
 
 export type FlowPlayerWrapperProps = {
 	annotationText?: string;
@@ -16,14 +17,18 @@ export type FlowPlayerWrapperProps = {
 	issuedDate?: string;
 	item?: Avo.Item.Item;
 	onEnded?: () => void;
-	onPlay?: () => void;
+	onPlay?: (playingSrc?: string) => void;
 	organisationLogo?: string;
 	organisationName?: string;
 	poster?: string;
 	seekTime?: number;
-	src?: string;
+	src?: string | FlowplayerSourceList;
 	title?: string;
 	topRight?: ReactNode;
+	seekable?: boolean;
+	ui?: | number;
+	controls?: boolean;
+	speed?: unknown | null;
 };
 
 export const FlowPlayerWrapper: FC<FlowPlayerWrapperProps> = (props) => {

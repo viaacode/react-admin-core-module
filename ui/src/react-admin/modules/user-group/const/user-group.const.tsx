@@ -8,25 +8,28 @@ import { PermissionRow } from '../types/user-group.types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { sortBy } from 'lodash-es';
 
-const preferredUserGroupOrder: Record<string, number> = {
+export const preferredUserGroupOrder: Record<string, number> = {
 	// Avo
-	Leerling: 1,
-	Lesgever: 2,
+	'Leerling lager': 1,
+	'Leerling secundair': 2,
 	'Student lesgever': 3,
-	'Lesgever secundair': 4,
-	'Student lesgever secundair': 5,
-	'Educatieve auteur': 6,
-	'Educatieve uitgever': 7,
-	'Educatieve partner': 8,
-	Contentpartner: 9,
-	Redacteur: 10,
-	Eindredacteur: 11,
-	'Medewerker meemoo': 12,
-	Beheerder: 13,
+	'Lesgever': 4,
+	'Student lesgever lager': 5,
+	'Lesgever lager': 6,
+	'Student lesgever secundair': 7,
+	'Lesgever secundair': 8,
+	'Educatieve auteur': 9,
+	'Educatieve uitgever': 10,
+	'Educatieve partner': 11,
+	'Contentpartner': 12,
+	'Medewerker meemoo': 13,
+	'Redacteur': 14,
+	'Eindredacteur': 15,
+	'Beheerder': 16,
 
 	// Hetarchief
-	Kioskgebruiker: 1,
-	Bezoeker: 2,
+	'Kioskgebruiker': 1,
+	'Bezoeker': 2,
 	'CP beheerder': 3,
 	'Meemoo beheerder': 4,
 };

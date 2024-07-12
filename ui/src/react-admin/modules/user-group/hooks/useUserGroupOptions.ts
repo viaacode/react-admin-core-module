@@ -6,7 +6,8 @@ import { TagInfo } from '@viaa/avo2-components';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import { GET_SPECIAL_USER_GROUPS } from '../const/user-group.const';
+import { GET_SPECIAL_USER_GROUPS, preferredUserGroupOrder } from '../const/user-group.const';
+import { sortBy } from 'lodash';
 
 type UseUserGroupsTriple = [
 	TagInfo[] | CheckboxOption[] | MultiSelectOption[],
@@ -26,8 +27,9 @@ export const useUserGroupOptions = (
 	const userGroupOptions = useMemo(() => {
 		const allOptions = [
 			...(includeSpecialGroups ? GET_SPECIAL_USER_GROUPS() : []),
-			...(userGroups || []),
+			...sortBy((userGroups || []), (userGroup) => preferredUserGroupOrder[userGroup.label || '']),
 		];
+
 		if (type === 'TagInfo') {
 			return allOptions.map(
 				(opt): TagInfo => ({
