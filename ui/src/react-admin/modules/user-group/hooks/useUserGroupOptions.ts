@@ -27,7 +27,10 @@ export const useUserGroupOptions = (
 	const userGroupOptions = useMemo(() => {
 		const allOptions = [
 			...(includeSpecialGroups ? GET_SPECIAL_USER_GROUPS() : []),
-			...sortBy((userGroups || []), (userGroup) => preferredUserGroupOrder[userGroup.label || '']),
+			...sortBy(
+				userGroups || [],
+				(userGroup) => preferredUserGroupOrder[userGroup.label || '']
+			),
 		];
 
 		if (type === 'TagInfo') {

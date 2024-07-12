@@ -31,7 +31,7 @@ interface MediaPlayerWrapperProps {
 	commonUser?: Avo.User.CommonUser;
 	showCopyright?: boolean;
 	seekable?: boolean;
-	ui?: | number;
+	ui?: number;
 	controls?: boolean;
 	speed?: unknown | null;
 	onEnded?: () => void;

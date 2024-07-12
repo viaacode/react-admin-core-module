@@ -26,7 +26,7 @@ export type FlowPlayerWrapperProps = {
 	title?: string;
 	topRight?: ReactNode;
 	seekable?: boolean;
-	ui?: | number;
+	ui?: number;
 	controls?: boolean;
 	speed?: unknown | null;
 };
