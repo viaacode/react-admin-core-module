@@ -54,18 +54,14 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 			// No icon should be shown for content page tiles
 			return null;
 		}
-		if (
-			!elementInfo.objectType ||
-			(!GET_TYPE_TO_ICON_MAP()[elementInfo.objectType] && elementInfo.thumbnail)
-		) {
+		if (!elementInfo.thumbnail) {
 			// Show a no eye icon with a semi grey background if you do not have access to the thumbnail or the type of the object doesn't have an icon
 			return (
-				<Icon
-					className="c-block-enclosed-content__cards__card__image__no-permission"
-					name={
-						AdminConfigManager.getConfig().icon?.componentProps.eyeOff.name as IconName
-					}
-				/>
+				<div className="c-block-enclosed-content__cards__card__image__icon">
+					<Icon
+						name={GET_TYPE_TO_ICON_MAP()[`no${elementInfo.objectType}` as IconName]}
+					/>
+				</div>
 			);
 		}
 
@@ -73,7 +69,7 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 		// TODO add newspaper icon
 		return (
 			<div className="c-block-enclosed-content__cards__card__image__icon">
-				<Icon name={GET_TYPE_TO_ICON_MAP()[elementInfo.objectType]} />
+				<Icon name={GET_TYPE_TO_ICON_MAP()[elementInfo.objectType as IconName]} />
 			</div>
 		);
 	};
@@ -136,6 +132,20 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 												'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___geen-toegang'
 											)}
 									</span>
+									{elementInfo?.type === 'IE_OBJECT' ? (
+										<div
+											className={
+												'c-block-enclosed-content__cards__card__meta'
+											}
+										>
+											<div>{elementInfo?.pid}</div>
+											<div className="c-block-enclosed-content__cards__card__meta__maintainer">
+												{elementInfo?.maintainerName} (
+												{elementInfo?.dateCreated})
+											</div>
+										</div>
+									) : null}
+
 									<div className="c-block-enclosed-content__cards__card__description-wrapper">
 										<Html
 											content={
@@ -148,17 +158,6 @@ export const BlockContentEnclose: FC<BlockContentEncloseProps> = ({
 										/>
 									</div>
 								</div>
-								{elementInfo?.type === 'IE_OBJECT' ? (
-									<div className={'c-block-enclosed-content__cards__card__meta'}>
-										<div className="c-block-enclosed-content__cards__card__meta__maintainer">
-											{elementInfo?.maintainerName}
-										</div>
-										<div className="c-block-enclosed-content__cards__card__meta__date">
-											{elementInfo?.dateCreated}
-										</div>
-										<div>{elementInfo?.pid}</div>
-									</div>
-								) : null}
 							</Link>
 						</li>
 					);

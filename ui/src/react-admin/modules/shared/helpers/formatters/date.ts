@@ -81,3 +81,17 @@ export function parseAsIsoWithoutTimezone(timestamp: string): Date {
 		return parseISO(timestamp);
 	}
 }
+
+/**
+ * Formats a date string from YYYY-MM-DD to 'dd MMM. yyyy' format in Dutch (Belgium) locale.
+ * For example, '2020-09-15' becomes '15 sep. 2020'.
+ *
+ * @param dateString The date string in YYYY-MM-DD format.
+ * @returns The formatted date string.
+ */
+export function formatDateToDayMonthYear(dateString: string | undefined | null): string {
+	if (!dateString) {
+		return '';
+	}
+	return format(parseISO(dateString), 'd MMM. yyyy', { locale: nlBE });
+}
