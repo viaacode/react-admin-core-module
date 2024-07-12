@@ -1,5 +1,3 @@
-import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
-
 export interface GetContentBlockEncloseContentReturnType {
 	id?: string;
 	name?: string;
@@ -35,5 +33,6 @@ export interface ContentPage {
 	title: string;
 	description: string;
 	thumbnailPath: string;
+	createdAt: string;
 	path: string;
 }
