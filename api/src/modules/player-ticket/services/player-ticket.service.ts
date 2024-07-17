@@ -174,10 +174,11 @@ export class PlayerTicketService {
 		>(GetThumbnailUrlByIdDocument, {
 			id,
 		});
-		if (!response.object_ie?.[0]) {
+		if (!response.graph__intellectual_entity?.[0]) {
 			throw new NotFoundException(`Object IE with id '${id}' not found`);
 		}
 
-		return response.object_ie[0].schema_thumbnail_url;
+		console.log({ thumbnailPath: response.graph__intellectual_entity[0].schema_thumbnail_url });
+		return response.graph__intellectual_entity[0].schema_thumbnail_url;
 	}
 }

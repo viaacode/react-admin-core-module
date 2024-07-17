@@ -189,9 +189,7 @@ describe('PlayerTicketService', () => {
 	describe('getThumbnailUrl', () => {
 		it('returns a thumbnail url', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				object_ie: [
-					{ schema_thumbnail_url: 'vrt/item-1' },
-				] as GetThumbnailUrlByIdQuery['object_ie'],
+				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const getThumbnailTokenSpy = jest
@@ -234,9 +232,7 @@ describe('PlayerTicketService', () => {
 	describe('getThumbnailPath', () => {
 		it('returns the thumbnail url for an item', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				object_ie: [
-					{ schema_thumbnail_url: 'vrt/item-1' },
-				] as GetThumbnailUrlByIdQuery['object_ie'],
+				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getThumbnailPath('vrt-id');
@@ -245,7 +241,7 @@ describe('PlayerTicketService', () => {
 
 		it('throws a notfoundexception if the item was not found', async () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
-				object_ie: [],
+				graph__intellectual_entity: [],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			let error;
