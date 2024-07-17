@@ -78,6 +78,7 @@ export class PlayerTicketController {
 	 * Generates a playable url for a video
 	 * @param browsePath
 	 * @param referrer
+	 * @param ip
 	 */
 	public async getPlayableUrlFromBrowsePath(
 		browsePath: string,
