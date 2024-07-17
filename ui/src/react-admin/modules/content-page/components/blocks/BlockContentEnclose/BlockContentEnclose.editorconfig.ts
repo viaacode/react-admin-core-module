@@ -88,10 +88,11 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [
-						'CONTENT_PAGE',
 						'IE_OBJECT',
-						'ANCHOR_LINK',
+						'CONTENT_PAGE',
+						'INTERNAL_LINK',
 						'EXTERNAL_LINK',
+						'ANCHOR_LINK',
 						'FILE',
 					] as ContentPickerType[],
 				},
