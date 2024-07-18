@@ -1,7 +1,7 @@
-import { ROUTE_PARTS } from '~shared/consts/routes';
-import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import { SortDirectionParam } from '~shared/helpers/query-params';
 import { RichTextEditorControl } from '@meemoo/react-components';
+import { NumberParam, StringParam, withDefault } from 'use-query-params';
+import { ROUTE_PARTS } from '~shared/consts/routes';
+import { SortDirectionParam } from '~shared/helpers/query-params';
 
 export const TRANSLATIONS_PATH = {
 	TRANSLATIONS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.translations}`,
@@ -36,4 +36,7 @@ export const RICH_TEXT_EDITOR_OPTIONS: RichTextEditorControl[] = [
 	'separator',
 	'list-ul',
 	'list-ol',
+	'separator',
+	'remove-styles',
+	'editHtml',
 ];
