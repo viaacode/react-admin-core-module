@@ -54,6 +54,7 @@ export const RICH_TEXT_EDITOR_OPTIONS_FULL: RichTextEditorControl[] = [
 	'table',
 	'separator',
 	'remove-styles',
+	'editHtml',
 ];
 
 export const RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN: (
