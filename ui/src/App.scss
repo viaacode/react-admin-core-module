@@ -5,3 +5,11 @@
 	overflow-y: auto;
 	padding-bottom: 100px;
 }
+
+.c-modal__overlay {
+	position: absolute;
+	inset: 0;
+	width: auto;
+	height: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}

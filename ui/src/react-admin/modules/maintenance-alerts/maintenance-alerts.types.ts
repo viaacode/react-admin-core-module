@@ -45,16 +45,6 @@ export type MaintenanceAlertsOverviewTableCol =
 	| 'language'
 	| 'actions';
 
-export interface MaintenanceAlertFormState {
-	title: string;
-	message?: string;
-	fromDate: Date;
-	untilDate: Date;
-	userGroups: any;
-	type: string;
-	language: Locale;
-}
-
 export interface MaintenanceAlertDto {
 	title: string;
 	message?: string;

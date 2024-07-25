@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import {
 	FormControl,
 	MultiSelect,
@@ -8,16 +7,19 @@ import {
 	SelectOption,
 	TextInput,
 } from '@meemoo/react-components';
-
 import { format } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { isNil, without } from 'lodash-es';
-import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { without } from 'lodash-es';
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ValidationError } from 'yup';
 import { ToastType } from '~core/config';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
-import { MaintenanceAlertsEditFormProps } from '~modules/maintenance-alerts/maintenance-alerts.types';
+import {
+	MaintenanceAlert,
+	MaintenanceAlertDto,
+	MaintenanceAlertsEditFormProps,
+} from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { Icon } from '~modules/shared/components';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
@@ -38,7 +40,6 @@ import {
 	GET_ALERTS_ICON_OPTIONS,
 	RICH_TEXT_EDITOR_OPTIONS,
 } from '../maintenance-alerts.const';
-import { MaintenanceAlertFormState } from '../maintenance-alerts.types';
 
 const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProps> = ({
 	maintenanceAlert,
@@ -48,36 +49,11 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 }) => {
 	const [userGroupOptions] = useUserGroupOptions('MultiSelectOption', true, false);
 
-	const getDefaultValues = useCallback(() => {
-		const now = new Date();
-		return {
-			title: maintenanceAlert?.title || '',
-			message: maintenanceAlert?.message || '',
-			fromDate: maintenanceAlert?.fromDate
-				? parseAsIsoWithoutTimezone(maintenanceAlert?.fromDate)
-				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0),
-			untilDate: maintenanceAlert?.untilDate
-				? parseAsIsoWithoutTimezone(maintenanceAlert?.untilDate)
-				: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59),
-			userGroups: maintenanceAlert?.userGroups || [],
-			type: maintenanceAlert?.type || '',
-			language: maintenanceAlert?.language || Locale.Nl,
-		} as MaintenanceAlertFormState;
-	}, [maintenanceAlert]);
-
-	// const [form, setForm] = useState<MaintenanceAlertFormState>(getDefaultValues());
-	const {
-		control,
-		formState: { errors },
-		handleSubmit,
-		setValue,
-		reset,
-	} = useForm<MaintenanceAlertFormState>({
-		resolver: yupResolver(ALERTS_FORM_SCHEMA(tText)),
-		defaultValues: getDefaultValues(),
-	});
-
 	const { data: allLanguages } = useGetAllLanguages();
+
+	const [currentMaintenanceAlert, setCurrentMaintenanceAlert] =
+		useState<Partial<MaintenanceAlert> | null>(maintenanceAlert);
+	const [errors, setErrors] = useState<Partial<Record<keyof MaintenanceAlert, string>>>({});
 
 	const languageOptions = (allLanguages || []).map(
 		(languageInfo: LanguageInfo): SelectOption => ({
@@ -86,31 +62,73 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		})
 	);
 
-	useEffect(() => {
-		maintenanceAlert && reset(getDefaultValues());
-	}, [maintenanceAlert, getDefaultValues, reset]);
+	const updateFormState = useCallback(() => {
+		setCurrentMaintenanceAlert({
+			...(maintenanceAlert || {}),
+			fromDate: maintenanceAlert?.fromDate
+				? parseAsIsoWithoutTimezone(maintenanceAlert.fromDate).toISOString()
+				: undefined,
+			untilDate: maintenanceAlert?.untilDate
+				? parseAsIsoWithoutTimezone(maintenanceAlert.untilDate).toISOString()
+				: undefined,
+		});
+	}, [maintenanceAlert]);
 
 	useEffect(() => {
-		if (isNil(maintenanceAlert)) {
-			// Reset the form when the blade is closed
-			reset(getDefaultValues());
-		}
-	}, [maintenanceAlert, getDefaultValues, reset]);
+		updateFormState();
+	}, [maintenanceAlert, updateFormState]);
 
 	const handleClose = () => {
-		reset(getDefaultValues());
-		setValue('message', '');
 		onClose();
+		updateFormState();
 	};
 
-	const onClickSave = async (values: MaintenanceAlertFormState) => {
+	const isFormValid = useCallback((): boolean => {
+		try {
+			// Attempt to validate the currentMaintenanceAlert object against the schema
+			ALERTS_FORM_SCHEMA().validateSync(currentMaintenanceAlert);
+			// If validation is successful, you might want to clear any existing errors
+			setErrors({});
+			return true;
+		} catch (error) {
+			if (error instanceof ValidationError) {
+				const path = error.path as string;
+				const message = error.message as string;
+				setErrors({ [path]: message });
+			} else {
+				// Handle unexpected errors (not related to validation)
+				showToast({
+					title: tText('Error'),
+					description: tText('Het valideren van het formulier is mislukt.'),
+					type: ToastType.ERROR,
+				});
+			}
+			return false;
+		}
+	}, [currentMaintenanceAlert]);
+
+	const onClickSave = async () => {
+		if (!currentMaintenanceAlert) {
+			showToast({
+				title: tText('Error'),
+				description: tText('Het opslaan van de melding is mislukt'),
+				type: ToastType.ERROR,
+			});
+		}
+		if (!isFormValid()) {
+			showToast({
+				title: tText('Error'),
+				description: tText('Bepaalde velden in het formulier zijn niet correct ingevuld.'),
+				type: ToastType.ERROR,
+			});
+			return;
+		}
 		if (maintenanceAlert?.id) {
 			try {
-				await MaintenanceAlertsService.updateAlert(maintenanceAlert.id, {
-					...values,
-					fromDate: values.fromDate.toUTCString(),
-					untilDate: values.untilDate.toUTCString(),
-				});
+				await MaintenanceAlertsService.updateAlert(
+					maintenanceAlert.id,
+					currentMaintenanceAlert as MaintenanceAlertDto
+				);
 
 				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
@@ -132,7 +150,9 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			}
 		} else {
 			try {
-				await MaintenanceAlertsService.insertAlert(values);
+				await MaintenanceAlertsService.insertAlert(
+					currentMaintenanceAlert as MaintenanceAlert
+				);
 
 				showToast({
 					title: tText('react-admin/modules/alerts/views/alerts-overview___succes'),
@@ -158,264 +178,291 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	};
 
 	const renderedTitle = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-title"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___titel-melding')}
-				errors={[errors.title?.message]}
+				errors={[errors.title]}
 			>
-				<Controller
-					name="title"
-					control={control}
-					render={({ field }) => (
-						<TextInput
-							{...field}
-							value={field.value}
-							id="new-alert-title"
-							onChange={(e) => {
-								const title = e.currentTarget.value;
-								setValue('title', title);
-							}}
-						/>
-					)}
+				<TextInput
+					value={currentMaintenanceAlert?.title}
+					id="new-alert-title"
+					onChange={(e) => {
+						const title = e.currentTarget.value;
+						setCurrentMaintenanceAlert({
+							...currentMaintenanceAlert,
+							title,
+						});
+					}}
+					onBlur={isFormValid}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.title?.message, setValue]);
+	}, [isFormValid, currentMaintenanceAlert, errors.title]);
 
 	const renderedMessage = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
+		console.log('render message: ', { message: currentMaintenanceAlert?.message });
 		return (
 			<FormControl
 				id="new-alert-message"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___beschrijving')}
-				errors={[errors.message?.message]}
+				errors={[errors.message]}
+				key={currentMaintenanceAlert?.id}
 			>
-				{!!maintenanceAlert && (
-					<Controller
-						name="message"
-						control={control}
-						render={({ field }) => (
-							<RichTextEditorWithInternalState
-								onBlur={field.onBlur}
-								onChange={(newMessage) => {
-									setValue('message', newMessage);
-								}}
-								value={field.value}
-								initialHtml={getDefaultValues().message}
-								controls={RICH_TEXT_EDITOR_OPTIONS}
-							></RichTextEditorWithInternalState>
-						)}
-					/>
-				)}
+				<RichTextEditorWithInternalState
+					value={currentMaintenanceAlert?.message}
+					controls={RICH_TEXT_EDITOR_OPTIONS}
+					key={maintenanceAlert?.id}
+					onChange={(newMessage) => {
+						setCurrentMaintenanceAlert({
+							...currentMaintenanceAlert,
+							message: newMessage,
+						});
+					}}
+					onBlur={isFormValid}
+				></RichTextEditorWithInternalState>
 			</FormControl>
 		);
-	}, [errors.message?.message, maintenanceAlert, control, getDefaultValues, setValue]);
+	}, [currentMaintenanceAlert, errors.message, maintenanceAlert?.id, isFormValid]);
 
 	const renderedIcon = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-icon"
 				label={tHtml(
 					'react-admin/modules/alerts/views/alerts-overview___verduidelijkend-icoon'
 				)}
-				errors={[errors.type?.message]}
+				errors={[errors.type]}
 			>
-				<Controller
-					name="type"
-					control={control}
-					render={({ field }) => (
-						<IconPicker
-							options={GET_ALERTS_ICON_OPTIONS()}
-							onChange={(option) => {
-								const type: string | null =
-									(option as { key: string; value: string })?.key ?? null;
+				<IconPicker
+					options={GET_ALERTS_ICON_OPTIONS()}
+					value={
+						GET_ALERTS_ICON_OPTIONS().find(
+							(option) => option.key === currentMaintenanceAlert?.type
+						) ?? null
+					}
+					onChange={(option) => {
+						const type: string | null =
+							(option as { key: string; value: string })?.key ?? null;
 
-								setValue('type', type);
-							}}
-							value={
-								GET_ALERTS_ICON_OPTIONS().find(
-									(option) => option.key === field.value
-								) ?? null
-							}
-						/>
-					)}
+						setCurrentMaintenanceAlert({ ...currentMaintenanceAlert, type });
+					}}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.type?.message, setValue]);
+	}, [currentMaintenanceAlert, errors.type]);
 
 	const renderedUserGroup = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-user-group"
 				label={tHtml(
 					'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
 				)}
-				errors={[<>{errors.userGroups?.message}</>]}
+				errors={[<>{errors.userGroups}</>]}
 			>
-				<Controller
-					name="userGroups"
-					control={control}
-					render={({ field }) => (
-						<MultiSelect
-							options={(userGroupOptions as MultiSelectOption[]).map((option) => ({
-								...option,
-								checked: field.value.includes(option.id),
-							}))}
-							onChange={(checked: boolean, id: string) => {
-								setValue(
-									'userGroups',
-									!checked ? [...field.value, id] : without(field.value, id)
-								);
-							}}
-							label={tText(
-								'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
-							)}
-							iconOpen={<Icon name="angleUp" />}
-							iconClosed={<Icon name="angleDown" />}
-							iconCheck={<Icon name="check" />}
-						/>
+				<MultiSelect
+					options={(userGroupOptions as MultiSelectOption[]).map((option) => ({
+						...option,
+						checked: currentMaintenanceAlert?.userGroups?.includes(option.id) || false,
+					}))}
+					onChange={(checked: boolean, id: string) => {
+						setCurrentMaintenanceAlert({
+							...currentMaintenanceAlert,
+							userGroups: !checked
+								? [...(currentMaintenanceAlert.userGroups || []), id]
+								: without(currentMaintenanceAlert.userGroups, id),
+						});
+					}}
+					label={tText(
+						'react-admin/modules/alerts/views/alerts-overview___zichtbaar-voor-gebruikersgroep'
 					)}
+					iconOpen={<Icon name="angleUp" />}
+					iconClosed={<Icon name="angleDown" />}
+					iconCheck={<Icon name="check" />}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.userGroups?.message, setValue, userGroupOptions]);
+	}, [currentMaintenanceAlert, errors.userGroups, userGroupOptions]);
 
 	const renderedFrom = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-from-date"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-van')}
-				errors={[errors.fromDate?.message]}
+				errors={[errors.fromDate]}
 				className="c-input--date-time"
 			>
-				<Controller
-					name="fromDate"
-					control={control}
-					render={({ field }) => (
-						<>
-							<DateInput
-								{...datePickerDefaultProps}
-								id="new-alert-from-date"
-								name={field.name}
-								onBlur={field.onBlur}
-								onChange={(newFromDate: Date) => {
-									if (newFromDate) {
-										const oldFromDate = field.value;
-										setValue(
-											'fromDate',
-											new Date(
-												newFromDate.getFullYear(),
-												newFromDate.getMonth(),
-												newFromDate.getDate(),
-												oldFromDate.getHours(),
-												oldFromDate.getMinutes()
-											)
-										);
-									}
-								}}
-								selected={field.value}
-							/>
+				<>
+					<DateInput
+						{...datePickerDefaultProps}
+						id="new-alert-from-date"
+						name="fromDate"
+						onBlur={isFormValid}
+						onChange={(newFromDate: Date) => {
+							if (newFromDate) {
+								const oldFromDate: Date | null = currentMaintenanceAlert.fromDate
+									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
+									: null;
+								setCurrentMaintenanceAlert({
+									...currentMaintenanceAlert,
+									fromDate: new Date(
+										newFromDate.getFullYear(),
+										newFromDate.getMonth(),
+										newFromDate.getDate(),
+										oldFromDate?.getHours() || 0,
+										oldFromDate?.getMinutes() || 0
+									).toISOString(),
+								});
+							}
+						}}
+						selected={
+							currentMaintenanceAlert.fromDate
+								? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
+								: new Date()
+						}
+					/>
 
-							<Timepicker
-								{...timePickerDefaults}
-								id="new-alert-from-time"
-								name={field.name}
-								onBlur={field.onBlur}
-								onChange={(newFromTime: Date) => {
-									if (newFromTime) {
-										const oldFromDate = field.value;
-										setValue(
-											'fromDate',
-											new Date(
-												oldFromDate.getFullYear(),
-												oldFromDate.getMonth(),
-												oldFromDate.getDate(),
-												newFromTime.getHours(),
-												newFromTime.getMinutes()
-											)
-										);
-									}
-								}}
-								value={format(field.value, 'HH:mm', {
-									locale: nlBE,
-								})}
-							/>
-						</>
-					)}
-				/>
+					<Timepicker
+						{...timePickerDefaults}
+						id="new-alert-from-time"
+						name="fromDate"
+						onBlur={isFormValid}
+						onChange={(newFromTime: Date) => {
+							if (newFromTime) {
+								const oldFromDate: Date = currentMaintenanceAlert.fromDate
+									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate)
+									: new Date();
+								setCurrentMaintenanceAlert({
+									...currentMaintenanceAlert,
+									fromDate: new Date(
+										oldFromDate?.getFullYear(),
+										oldFromDate?.getMonth(),
+										oldFromDate?.getDate(),
+										newFromTime.getHours(),
+										newFromTime.getMinutes()
+									).toISOString(),
+								});
+							}
+						}}
+						value={
+							currentMaintenanceAlert.fromDate
+								? format(
+										parseAsIsoWithoutTimezone(currentMaintenanceAlert.fromDate),
+										'HH:mm',
+										{
+											locale: nlBE,
+										}
+								  )
+								: undefined
+						}
+					/>
+				</>
 			</FormControl>
 		);
-	}, [control, errors.fromDate?.message, setValue]);
+	}, [isFormValid, currentMaintenanceAlert, errors.fromDate]);
 
 	const renderedUntil = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		return (
 			<FormControl
 				id="new-alert-until-date"
 				label={tHtml('react-admin/modules/alerts/views/alerts-overview___zichtbaar-tot')}
-				errors={[errors.untilDate?.message]}
+				errors={[errors.untilDate]}
 				className="c-input--date-time"
 			>
-				<Controller
-					name="untilDate"
-					control={control}
-					render={({ field }) => (
-						<>
-							<DateInput
-								{...datePickerDefaultProps}
-								id="new-alert-until-date"
-								name={field.name}
-								onBlur={field.onBlur}
-								onChange={(newUntilDate: Date) => {
-									if (newUntilDate) {
-										const oldUntilDate = field.value;
-										setValue(
-											'untilDate',
-											new Date(
-												newUntilDate.getFullYear(),
-												newUntilDate.getMonth(),
-												newUntilDate.getDate(),
-												oldUntilDate.getHours(),
-												oldUntilDate.getMinutes()
-											)
-										);
-									}
-								}}
-								selected={field.value}
-							/>
+				<>
+					<DateInput
+						{...datePickerDefaultProps}
+						id="new-alert-until-date"
+						name="untilDate"
+						onBlur={isFormValid}
+						onChange={(newUntilDate: Date) => {
+							if (newUntilDate) {
+								const oldUntilDate: Date | null = currentMaintenanceAlert.untilDate
+									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
+									: null;
+								setCurrentMaintenanceAlert({
+									...currentMaintenanceAlert,
+									untilDate: new Date(
+										newUntilDate.getFullYear(),
+										newUntilDate.getMonth(),
+										newUntilDate.getDate(),
+										oldUntilDate?.getHours() || 23,
+										oldUntilDate?.getMinutes() || 59
+									).toISOString(),
+								});
+							}
+						}}
+						selected={
+							currentMaintenanceAlert.untilDate
+								? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
+								: new Date()
+						}
+					/>
 
-							<Timepicker
-								{...timePickerDefaults}
-								id="new-alert-until-time"
-								name={field.name}
-								onBlur={field.onBlur}
-								onChange={(newUntilTime: Date) => {
-									if (newUntilTime) {
-										const oldUntilDate = field.value;
-										setValue(
-											'untilDate',
-											new Date(
-												oldUntilDate.getFullYear(),
-												oldUntilDate.getMonth(),
-												oldUntilDate.getDate(),
-												newUntilTime.getHours(),
-												newUntilTime.getMinutes()
-											)
-										);
-									}
-								}}
-								value={format(field.value, 'HH:mm', {
-									locale: nlBE,
-								})}
-							/>
-						</>
-					)}
-				/>
+					<Timepicker
+						{...timePickerDefaults}
+						id="new-alert-until-time"
+						name="untilDate"
+						onBlur={isFormValid}
+						onChange={(newUntilTime: Date) => {
+							if (newUntilTime) {
+								const oldUntilDate: Date = currentMaintenanceAlert.untilDate
+									? parseAsIsoWithoutTimezone(currentMaintenanceAlert.untilDate)
+									: new Date();
+								setCurrentMaintenanceAlert({
+									...currentMaintenanceAlert,
+									untilDate: new Date(
+										oldUntilDate?.getFullYear(),
+										oldUntilDate?.getMonth(),
+										oldUntilDate?.getDate(),
+										newUntilTime.getHours(),
+										newUntilTime.getMinutes()
+									).toISOString(),
+								});
+							}
+						}}
+						value={
+							currentMaintenanceAlert.untilDate
+								? format(
+										parseAsIsoWithoutTimezone(
+											currentMaintenanceAlert.untilDate
+										),
+										'HH:mm',
+										{
+											locale: nlBE,
+										}
+								  )
+								: undefined
+						}
+					/>
+				</>
 			</FormControl>
 		);
-	}, [control, errors.untilDate?.message, setValue]);
+	}, [isFormValid, currentMaintenanceAlert, errors.untilDate]);
 
 	const renderedLanguage = useMemo(() => {
+		if (!currentMaintenanceAlert) {
+			return null;
+		}
 		if (!isMultiLanguageEnabled()) {
 			return null;
 		}
@@ -425,32 +472,27 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				label={tHtml(
 					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___taal'
 				)}
-				errors={[errors.language?.message]}
+				errors={[errors.language]}
 				className="c-multilanguage-controls"
 			>
-				<Controller
-					name="language"
-					control={control}
-					render={({ field }) => (
-						<ReactSelect
-							options={languageOptions}
-							onChange={(option) => {
-								const language: Locale | null = ((
-									option as { label: string; value: string }
-								)?.value ?? Locale.Nl) as Locale;
+				<ReactSelect
+					options={languageOptions}
+					onChange={(option) => {
+						const language: Locale | null = ((
+							option as { label: string; value: string }
+						)?.value ?? Locale.Nl) as Locale;
 
-								setValue('language', language);
-							}}
-							value={
-								languageOptions.find((option) => option.value === field.value) ||
-								languageOptions.find((option) => option.value === Locale.Nl)
-							}
-						/>
-					)}
+						setCurrentMaintenanceAlert({ ...currentMaintenanceAlert, language });
+					}}
+					value={
+						languageOptions.find(
+							(option) => option.value === currentMaintenanceAlert.language
+						) || languageOptions.find((option) => option.value === Locale.Nl)
+					}
 				/>
 			</FormControl>
 		);
-	}, [control, errors.language?.message, languageOptions, setValue]);
+	}, [currentMaintenanceAlert, errors.language, languageOptions]);
 
 	const renderPopupBody = () => {
 		if (!maintenanceAlert) {
@@ -458,7 +500,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		}
 
 		return (
-			<>
+			<div key={'c-maintenance-alert__edit-popup__' + maintenanceAlert?.id}>
 				{renderedTitle}
 				{renderedMessage}
 				{renderedIcon}
@@ -466,7 +508,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				{renderedFrom}
 				{renderedUntil}
 				{renderedLanguage}
-			</>
+			</div>
 		);
 	};
 
@@ -477,7 +519,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 				: tText('react-admin/modules/alerts/views/alerts-overview___melding-aanpassen'),
 		body: renderPopupBody(),
 		isOpen: !!maintenanceAlert,
-		onSave: handleSubmit(onClickSave),
+		onSave: onClickSave,
 		onClose: handleClose,
 	});
 };

@@ -8,7 +8,6 @@ import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-cor
 import {
 	MaintenanceAlert,
 	MaintenanceAlertDto,
-	MaintenanceAlertFormState,
 	MaintenanceAlertsOverviewTableCol,
 } from './maintenance-alerts.types';
 
@@ -44,15 +43,15 @@ export class MaintenanceAlertsService {
 		}
 	}
 
-	public static async insertAlert(data: MaintenanceAlertFormState): Promise<void> {
-		if (!data) {
+	public static async insertAlert(maintenanceAlert: MaintenanceAlert): Promise<void> {
+		if (!maintenanceAlert) {
 			return;
 		}
+		const data = maintenanceAlert as Partial<MaintenanceAlert>;
+		delete data.id;
 		return fetchWithLogoutJson(this.getBaseUrl(), {
 			method: 'POST',
-			body: JSON.stringify({
-				...data,
-			}),
+			body: JSON.stringify(data),
 		});
 	}
 
