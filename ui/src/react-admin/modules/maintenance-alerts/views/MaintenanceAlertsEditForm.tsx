@@ -98,8 +98,12 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			} else {
 				// Handle unexpected errors (not related to validation)
 				showToast({
-					title: tText('Error'),
-					description: tText('Het valideren van het formulier is mislukt.'),
+					title: tText(
+						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'
+					),
+					description: tText(
+						'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-valideren-van-het-formulier-is-mislukt'
+					),
 					type: ToastType.ERROR,
 				});
 			}
@@ -110,15 +114,23 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 	const onClickSave = async () => {
 		if (!currentMaintenanceAlert) {
 			showToast({
-				title: tText('Error'),
-				description: tText('Het opslaan van de melding is mislukt'),
+				title: tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'
+				),
+				description: tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___het-opslaan-van-de-melding-is-mislukt'
+				),
 				type: ToastType.ERROR,
 			});
 		}
 		if (!isFormValid()) {
 			showToast({
-				title: tText('Error'),
-				description: tText('Bepaalde velden in het formulier zijn niet correct ingevuld.'),
+				title: tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___error'
+				),
+				description: tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-edit-form___bepaalde-velden-in-het-formulier-zijn-niet-correct-ingevuld'
+				),
 				type: ToastType.ERROR,
 			});
 			return;
