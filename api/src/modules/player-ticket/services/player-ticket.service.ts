@@ -151,15 +151,30 @@ export class PlayerTicketService {
 	}
 
 	public async resolveThumbnailUrl(path: string, referer: string, ip: string): Promise<string> {
-		if (!path || !referer) {
+		try {
+			if (!path || !referer) {
+				return path;
+			}
+			if (path.startsWith('https://') || path.startsWith('http://')) {
+				// Already an absolute path => return path
+				return path;
+			}
+			const token = await this.getThumbnailToken(referer, ip);
+			return `${this.mediaServiceUrl}/${path}?token=${token}`;
+		} catch (err) {
+			console.error(
+				JSON.stringify({
+					message: 'Failed to resolveThumbnailUrl',
+					innerException: err,
+					additionalInfo: {
+						path,
+						referer,
+						ip,
+					},
+				})
+			);
 			return path;
 		}
-		if (path.startsWith('https://') || path.startsWith('http://')) {
-			// Already an absolute path => return path
-			return path;
-		}
-		const token = await this.getThumbnailToken(referer, ip);
-		return `${this.mediaServiceUrl}/${path}?token=${token}`;
 	}
 
 	public async getThumbnailUrl(id: string, referer: string, ip: string): Promise<string> {
