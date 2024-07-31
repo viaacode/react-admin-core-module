@@ -44,6 +44,19 @@ import { executeDatabaseQuery } from './execute-database-query';
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
+interface CaptureGroups {
+	prefix: string;
+	tFunction: string;
+	translationWithQuotes: string;
+	translationBetweenSingleQuotes?: string;
+	translationBetweenDoubleQuotes?: string;
+	translationBetweenBackTicks?: string;
+	translationParamsWithComma?: string;
+	translationParams?: string;
+	appsParamWithComma?: string;
+	appsParam?: string;
+}
+
 function getFormattedKey(filePath: string, key: string) {
 	try {
 		const fileKey = filePath
@@ -97,24 +110,39 @@ async function extractTranslationsFromCodeFiles(
 			const content: string = (await fs.readFile(absoluteFilePath)).toString();
 
 			// Replace tHtml() and tText() functions
-			const beforeTFunction = '([^a-zA-Z])'; // eg: .
-			const tFuncStart = '(tHtml|tText|t)\\('; // eg: tHtml
+			const prefix = '(?<prefix>[^a-zA-Z])'; // eg: .
+			const tFunction = '(?<tFunction>tHtml|tText)\\('; // eg: tHtml
 			const whitespace = '\\s*';
-			const quote = '[\'"]'; // eg: "
-			const translation = '([^,)]+?)'; // eg: admin/content-block/helpers/generators/klaar___voeg-titel-toe
-			const translationVariables = '([\\s]*,[\\s]*([^)]*?|undefined))?'; // eg: , {numberOfPeople: 5} or , undefined
-			const appsVariable = '([\\s]*,[\\s]*(\\[[^\\]]*\\]))?'; // eg: , [AVO]
+			const singleQuote = "[']"; // eg: "
+			const doubleQuote = '["]'; // eg: "
+			const backTick = '[`]'; // eg: "
+			const translationBetweenSingleQuotes =
+				singleQuote + "(?<translationBetweenSingleQuotes>[^']+?)" + singleQuote; // eg: 'admin/content-block/helpers/generators/klaar___voeg-titel-toe'
+			const translationBetweenDoubleQuotes =
+				doubleQuote + '(?<translationBetweenDoubleQuotes>[^"]+?)' + doubleQuote; // eg: "admin/content-block/helpers/generators/klaar___voeg-titel-toe"
+			const translationBetweenBackTicks =
+				backTick + '(?<translationBetweenBackTicks>[^`]+?)' + backTick; // eg: `admin/content-block/helpers/generators/klaar___voeg-titel-toe`
+			const translationWithQuotes =
+				'(?<translationWithQuotes>' +
+				translationBetweenSingleQuotes +
+				'|' +
+				translationBetweenDoubleQuotes +
+				'|' +
+				translationBetweenBackTicks +
+				')';
+			const translationParamsWithComma =
+				'(?<translationParamsWithComma>[\\s]*,[\\s]*(?<translationParams>[^)]*?|undefined))?'; // eg: , {numberOfPeople: 5} or , undefined
+			const appsParamWithComma =
+				'(?<appsParamWithComma>[\\s]*,[\\s]*(?<appsParam>\\[[^\\]]*\\]))?'; // eg: , [AVO]
 			const tFuncEnd = '[\\s]*\\)'; // eg: )
 			const combinedRegex = [
-				beforeTFunction,
-				tFuncStart,
+				prefix,
+				tFunction,
 				whitespace,
-				quote,
-				translation,
-				quote,
+				translationWithQuotes,
 				whitespace,
-				translationVariables,
-				appsVariable,
+				translationParamsWithComma,
+				appsParamWithComma,
 				whitespace,
 				tFuncEnd,
 			].join('');
@@ -122,22 +150,27 @@ async function extractTranslationsFromCodeFiles(
 			const newContent = content.replace(
 				// Match char before t function to make sure it isn't part of a bigger function name, eg: sent()
 				regex,
-				(
-					match: string,
-					prefix: string,
-					tFunction: 'tText' | 'tHtml' | 't',
-					translation: string,
-					translationParamsWithComma: string | undefined,
-					translationParams: string | undefined,
-					appsParamWithComma: string | undefined,
-					appsParam: string | undefined
-				) => {
+				(match: string, ...groups) => {
+					const captureGroups = groups.pop() as CaptureGroups;
+					const {
+						prefix,
+						tFunction,
+						translationBetweenSingleQuotes,
+						translationBetweenDoubleQuotes,
+						translationBetweenBackTicks,
+						translationParams,
+						appsParam,
+					} = captureGroups;
+					const translation = (translationBetweenSingleQuotes ||
+						translationBetweenDoubleQuotes ||
+						translationBetweenBackTicks) as string;
+
 					let formattedKey: string | undefined;
 					const apps: AppsList = compact(
 						(appsParam || `, [${App.AVO}, ${App.HET_ARCHIEF}]`)
 							.replace(/[[\]]/g, '')
 							.split(',')
-							.map((app) => app.trim())
+							.map((app: string) => app.trim())
 					) as AppsList;
 					const formattedTranslation: string = getFormattedTranslation(translation);
 					if (formattedTranslation.includes(TRANSLATION_SEPARATOR)) {
