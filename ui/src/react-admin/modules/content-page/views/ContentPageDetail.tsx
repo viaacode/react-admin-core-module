@@ -7,12 +7,15 @@ import {
 	LinkTarget,
 	MenuItemInfo,
 	Navbar,
+	TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { get, noop } from 'lodash-es';
+import { stringifyUrl } from 'query-string';
 import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -42,7 +45,6 @@ import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enable
 import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
 import { DefaultComponentProps } from '~shared/types/components';
@@ -84,10 +86,14 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	const { mutateAsync: softDeleteContentPage } = useSoftDeleteContentPage();
 
-	const [currentTab, setCurrentTab, tabs] = useTabs(
-		GET_CONTENT_PAGE_DETAIL_TABS(),
-		GET_CONTENT_PAGE_DETAIL_TABS()[0].id
+	const [currentTab, setCurrentTab] = useQueryParam(
+		'tab',
+		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
 	);
+	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
+		...tab,
+		active: tab.id === currentTab,
+	}));
 
 	const isContentProtected = contentPageInfo?.isProtected || false;
 	const pageTitle = `${tText('modules/content-page/views/content-page-detail___content')}: ${get(
@@ -390,6 +396,15 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		}
 	};
 
+	const getEditLink = () => {
+		return stringifyUrl({
+			url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
+				id,
+			}),
+			query: { tab: currentTab },
+		});
+	};
+
 	const renderContentActions = () => {
 		const contentPageOwnerId = contentPageInfo?.userProfileId;
 		const isOwner = commonUser?.profileId === contentPageOwnerId;
@@ -430,12 +445,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					onClick={handlePreviewClicked}
 				/>
 				{isAllowedToEdit && (
-					<Link
-						to={buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT'), {
-							id,
-						})}
-						className="a-link__no-styles"
-					>
+					<Link to={getEditLink()} className="a-link__no-styles">
 						<Button
 							label={tText('admin/content/views/content-detail___bewerken')}
 							title={tText(
@@ -502,7 +512,12 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			<AdminLayout.Content>
 				<Navbar background="alt" placement="top" autoHeight>
 					<Container mode="horizontal">
-						<Tabs tabs={tabs} onClick={setCurrentTab} />
+						<Tabs
+							tabs={tabs}
+							onClick={(newCurrentTab: string | number) =>
+								setCurrentTab(newCurrentTab as string)
+							}
+						/>
 					</Container>
 				</Navbar>
 				<LoadingErrorLoadedComponent

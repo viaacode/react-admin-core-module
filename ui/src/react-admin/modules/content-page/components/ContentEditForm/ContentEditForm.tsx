@@ -41,6 +41,7 @@ import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextE
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
+import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -231,14 +232,14 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									error={formErrors.description}
 									label={
 										tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-overzichtspaginas-max-max-length-karakters',
+											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving',
 											{
 												maxLength:
 													CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
 											}
 										) +
 										` (${
-											(contentPageInfo as any).description?.length || 0
+											stripHtml(contentPageInfo.description)?.length || 0
 										} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
 									}
 								>
@@ -260,7 +261,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									error={formErrors.seoDescription}
 									label={
 										tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo-max-max-length-karakters',
+											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo',
 											{
 												maxLength:
 													CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,

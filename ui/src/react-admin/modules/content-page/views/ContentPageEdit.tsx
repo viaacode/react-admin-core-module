@@ -5,6 +5,7 @@ import {
 	IconName,
 	Navbar,
 	Spacer,
+	TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
@@ -12,6 +13,7 @@ import { PermissionName } from '@viaa/avo2-types';
 import { isNil, without } from 'lodash-es';
 import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
@@ -65,7 +67,6 @@ import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { useTabs } from '~shared/hooks/useTabs';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
 import { DefaultComponentProps } from '~shared/types/components';
@@ -101,7 +102,14 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
-	const [currentTab, setCurrentTab, tabs] = useTabs(GET_CONTENT_PAGE_DETAIL_TABS(), 'inhoud');
+	const [currentTab, setCurrentTab] = useQueryParam(
+		'tab',
+		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
+	);
+	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
+		...tab,
+		active: tab.id === currentTab,
+	}));
 
 	const hasPerm = useCallback(
 		(permission: PermissionName) => PermissionService.hasPerm(commonUser, permission),
@@ -511,9 +519,14 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
-				id: insertedOrUpdatedContent.id,
-			});
+			navigate(
+				history,
+				AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+				{
+					id: insertedOrUpdatedContent.id,
+				},
+				{ tab: currentTab }
+			);
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page', err));
 			showToast({
@@ -541,6 +554,11 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			);
 		}
 
+		console.log('beschrijving: ', {
+			description: contentPageState.currentContentPageInfo.description,
+			descriptionStripped: stripHtml(contentPageState.currentContentPageInfo.description),
+			descriptionFromRTE: contentPageState.currentContentPageInfo.description_state?.toHTML(),
+		});
 		const description: string | null = stripHtml(
 			contentPageState.currentContentPageInfo.description
 		);
@@ -769,7 +787,12 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 						className="c-content-page-edit__nav-bar"
 					>
 						<Container mode="horizontal">
-							<Tabs tabs={tabs} onClick={setCurrentTab} />
+							<Tabs
+								tabs={tabs}
+								onClick={(newCurrentTab: string | number) =>
+									setCurrentTab(newCurrentTab as string)
+								}
+							/>
 							<CopyToClipboard
 								text={JSON.stringify({
 									contentPage: contentPageState.currentContentPageInfo,
