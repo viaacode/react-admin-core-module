@@ -18,6 +18,15 @@ import { tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 
+export const CONTENT_PAGE_DESCRIPTION_MAX_LENGTH = 165;
+export const CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING = String(
+	CONTENT_PAGE_DESCRIPTION_MAX_LENGTH
+);
+export const CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH = 158;
+export const CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING = String(
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
+);
+
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],

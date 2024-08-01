@@ -19,6 +19,8 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 
 import { ToastType } from '~core/config/config.types';
 import {
+	CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	DEFAULT_PAGES_WIDTH,
 	GET_CONTENT_PAGE_WIDTH_OPTIONS,
 } from '~modules/content-page/const/content-page.consts';
@@ -227,9 +229,18 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.description}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___omschrijving'
-									)}
+									label={
+										tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-overzichtspaginas-max-max-length-karakters',
+											{
+												maxLength:
+													CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
+											}
+										) +
+										` (${
+											(contentPageInfo as any).description?.length || 0
+										} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
+									}
 								>
 									<RichTextEditorWithInternalStateWrapper
 										value={(contentPageInfo as any).description || ''}
@@ -247,9 +258,18 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 							<Column size="12">
 								<FormGroup
 									error={formErrors.seoDescription}
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___seo-omschrijving'
-									)}
+									label={
+										tText(
+											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving-voor-seo-max-max-length-karakters',
+											{
+												maxLength:
+													CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
+											}
+										) +
+										` (${
+											contentPageInfo.seoDescription?.length || 0
+										} / ${CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING})`
+									}
 								>
 									<TextArea
 										value={contentPageInfo.seoDescription || ''}

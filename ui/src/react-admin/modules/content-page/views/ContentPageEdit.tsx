@@ -16,7 +16,13 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
-import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
+import {
+	CONTENT_PAGE_DESCRIPTION_MAX_LENGTH,
+	CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
+	GET_CONTENT_PAGE_DETAIL_TABS,
+} from '~modules/content-page/const/content-page.consts';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
 	ContentEditAction,
@@ -54,6 +60,7 @@ import {
 	LoadingInfo,
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
+import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
@@ -531,6 +538,26 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 		if (!contentPageState.currentContentPageInfo.contentType) {
 			errors.contentType = tText(
 				'admin/content/views/content-edit___content-type-is-verplicht'
+			);
+		}
+
+		const description: string | null = stripHtml(
+			contentPageState.currentContentPageInfo.description
+		);
+		if ((description?.length || 0) > CONTENT_PAGE_DESCRIPTION_MAX_LENGTH) {
+			errors.description = tText(
+				'modules/content-page/views/content-page-edit___de-beschrijving-mag-maximaal-max-length-tekens-bevatten',
+				{ maxLength: CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING }
+			);
+		}
+
+		if (
+			(contentPageState.currentContentPageInfo.seoDescription?.length || 0) >
+			CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
+		) {
+			errors.seoDescription = tText(
+				'modules/content-page/views/content-page-edit___de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten',
+				{ maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING }
 			);
 		}
 
