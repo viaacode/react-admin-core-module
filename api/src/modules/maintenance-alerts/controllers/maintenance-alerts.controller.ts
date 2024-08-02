@@ -75,7 +75,7 @@ export class MaintenanceAlertsController {
 	@ApiOperation({
 		description: 'Create a new maintenance alert',
 	})
-	@RequireAnyPermissions(PermissionName.CREATE_MAINTENANCE_ALERTS)
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
 	public async createMaintenanceAlert(
 		@Body() createMaintenanceAlertDto: CreateMaintenanceAlertDto
 	): Promise<MaintenanceAlert> {
@@ -88,7 +88,7 @@ export class MaintenanceAlertsController {
 	@ApiOperation({
 		description: 'Update maintenance alert',
 	})
-	@RequireAnyPermissions(PermissionName.EDIT_MAINTENANCE_ALERTS)
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
 	public async updateMaintenanceAlert(
 		@Param('id') maintenanceAlertId: string,
 		@Body() updateMaintenanceAlertDto: UpdateMaintenanceAlertDto
@@ -103,7 +103,7 @@ export class MaintenanceAlertsController {
 	@ApiOperation({
 		description: 'Delete maintenance alert',
 	})
-	@RequireAnyPermissions(PermissionName.DELETE_MAINTENANCE_ALERTS)
+	@RequireAnyPermissions(PermissionName.VIEW_ANY_MAINTENANCE_ALERTS)
 	public async deleteMaintenanceAlert(
 		@Param('id') maintenanceAlertId: string
 	): Promise<{ status: string }> {
