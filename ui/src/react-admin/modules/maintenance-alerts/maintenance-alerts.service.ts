@@ -62,10 +62,12 @@ export class MaintenanceAlertsService {
 		if (!data || !alertId) {
 			return;
 		}
+		const dataTemp: Partial<MaintenanceAlert> = { ...data } as any;
+		delete dataTemp.id;
 		return fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
 			method: 'PATCH',
 			body: JSON.stringify({
-				...data,
+				...dataTemp,
 			}),
 		});
 	}
