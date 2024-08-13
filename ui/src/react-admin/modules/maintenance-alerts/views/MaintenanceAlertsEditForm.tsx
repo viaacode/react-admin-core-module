@@ -219,7 +219,6 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 		if (!currentMaintenanceAlert) {
 			return null;
 		}
-		console.log('render message: ', { message: currentMaintenanceAlert?.message });
 		return (
 			<FormControl
 				id="new-alert-message"

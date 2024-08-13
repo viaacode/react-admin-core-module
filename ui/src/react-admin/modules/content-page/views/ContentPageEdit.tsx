@@ -554,11 +554,6 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 			);
 		}
 
-		console.log('beschrijving: ', {
-			description: contentPageState.currentContentPageInfo.description,
-			descriptionStripped: stripHtml(contentPageState.currentContentPageInfo.description),
-			descriptionFromRTE: contentPageState.currentContentPageInfo.description_state?.toHTML(),
-		});
 		const description: string | null = stripHtml(
 			contentPageState.currentContentPageInfo.description
 		);
