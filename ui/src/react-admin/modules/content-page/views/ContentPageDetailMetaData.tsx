@@ -17,7 +17,6 @@ import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/cont
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { UserGroup } from '~modules/user-group/types/user-group.types';
 import Html from '~shared/components/Html/Html';
@@ -42,7 +41,6 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	contentPageInfo,
 }) => {
 	const [contentTypes] = useContentTypes();
-	const { data: languages } = useGetAllLanguages();
 	const [allUserGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
 		UserGroup[],

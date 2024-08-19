@@ -1,5 +1,7 @@
+import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
 import {
 	Button as AvoButton,
+	Button,
 	IconName,
 	LinkTarget,
 	Modal,
@@ -8,9 +10,9 @@ import {
 	TagList,
 	TagOption,
 } from '@viaa/avo2-components';
-import { Button } from '@viaa/avo2-components';
-import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import clsx from 'clsx';
 import { cloneDeep, compact, get, partition, set } from 'lodash-es';
 import React, {
 	FunctionComponent,
@@ -21,33 +23,23 @@ import React, {
 	useState,
 } from 'react';
 import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
-import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
-import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { Locale } from '~modules/translations/translations.core.types';
-import Icon from '~shared/components/Icon/Icon';
-import Link from '~shared/components/Link/Link';
-import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { formatDateString } from '~shared/helpers/formatters/date';
-import { isAvo } from '~shared/helpers/is-avo';
-import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { showToast } from '~shared/helpers/show-toast';
-import { PermissionService } from '~shared/services/permission-service';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import FilterTable, {
-	FilterableColumn,
-	getFilters,
-} from '../../shared/components/FilterTable/FilterTable';
-
-import { isPublic } from '~modules/content-page/helpers';
-import { useContentTypes } from '../hooks/useContentTypes';
-import { ContentPageService } from '../services/content-page.service';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { useContentPageLabelOptions } from '~modules/content-page-labels/hooks/useContentPageLabelOptions';
+
+import { isPublic } from '~modules/content-page/helpers';
+import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
+import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
+import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
+import { Locale } from '~modules/translations/translations.core.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
+import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ErrorView } from '~shared/components/error';
+import Icon from '~shared/components/Icon/Icon';
+import Link from '~shared/components/Link/Link';
 import {
 	LoadingErrorLoadedComponent,
 	LoadingInfo,
@@ -59,23 +51,31 @@ import {
 	getMultiOptionFilters,
 	getQueryFilter,
 } from '~shared/helpers/filters';
+import { formatDateString } from '~shared/helpers/formatters/date';
+import { isAvo } from '~shared/helpers/is-avo';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { buildLink, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
-import { truncateTableValue } from '~shared/helpers/truncate';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import './ContentPageOverview.scss';
+import { truncateTableValue } from '~shared/helpers/truncate';
+import { PermissionService } from '~shared/services/permission-service';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import FilterTable, {
+	FilterableColumn,
+	getFilters,
+} from '../../shared/components/FilterTable/FilterTable';
+import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
+import { useContentTypes } from '../hooks/useContentTypes';
+import { ContentPageService } from '../services/content-page.service';
 import {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentTableState,
 	NOT_TRANSLATION_PREFIX,
 } from '../types/content-pages.types';
-import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
-import { ErrorView } from '~shared/components/error';
-import clsx from 'clsx';
-import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;
@@ -570,7 +570,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 									)}
 								>
 									<AvoButton
-										icon={'info' as IconName}
+										renderIcon={() => <Icon name="info" />}
 										size="small"
 										title={tText(
 											'admin/content/views/content-overview___bekijk-content'
@@ -585,7 +585,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 									/>
 								</Link>
 								<AvoButton
-									icon={'eye' as IconName}
+									renderIcon={() => <Icon name="view" />}
 									onClick={() => handlePreviewClicked(contentPage)}
 									size="small"
 									title={tText(
@@ -608,7 +608,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 									)}
 								>
 									<AvoButton
-										icon={'edit' as IconName}
+										renderIcon={() => <Icon name="edit" />}
 										size="small"
 										title={tText(
 											'admin/content/views/content-overview___pas-content-aan'
@@ -624,7 +624,7 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 								</Link>
 								{hasPerm(DELETE_ANY_CONTENT_PAGES) && (
 									<Button
-										icon={'trash-2' as IconName}
+										renderIcon={() => <Icon name="delete" />}
 										onClick={() => openModal(contentPage)}
 										size="small"
 										title={tText(
