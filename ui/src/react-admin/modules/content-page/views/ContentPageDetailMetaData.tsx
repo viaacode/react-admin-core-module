@@ -244,7 +244,8 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							),
 							tText(
 								'modules/content-page/views/content-page-detail-meta-data___nederlandstalige-hoofd-pagina'
-							)
+							),
+							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(
 							contentPageInfo.translatedPages.length
@@ -285,7 +286,8 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								: '-',
 							tText(
 								'modules/content-page/views/content-page-detail-meta-data___vertaalde-versies'
-							)
+							),
+							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(
 							<TagList
