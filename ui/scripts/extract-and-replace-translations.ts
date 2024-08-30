@@ -262,7 +262,9 @@ async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	    value_type
 	  }
 	}
-		`
+		`,
+		{},
+		'QAS' // Get translations from QAS v3
 	);
 	return response.data.app_translations.map((t: TranslationEntry) => ({ ...t, app }));
 }
