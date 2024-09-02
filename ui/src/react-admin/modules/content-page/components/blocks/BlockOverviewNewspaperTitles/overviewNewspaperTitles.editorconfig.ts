@@ -27,7 +27,9 @@ export const INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE = (): DefaultContentB
 
 export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: 'OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG',
+	name: tText(
+		'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___krantentitels'
+	),
 	type: ContentBlockType.OverviewNewspaperTitles,
 	components: {
 		state: INITIAL_OVERVIEW_NEWSPAPER_TITLES_COMPONENTS_STATE(),
