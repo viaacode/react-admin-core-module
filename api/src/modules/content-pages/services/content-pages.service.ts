@@ -23,55 +23,54 @@ import {
 	without,
 } from 'lodash';
 
+import { getOrderObject } from '../../../modules/shared/helpers/generate-order-gql-query';
+import { isAvo } from '../../../modules/shared/helpers/is-avo';
 import { AssetsService } from '../../assets';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
 import { SessionHelper } from '../../shared/auth/session-helper';
 import {
-	App_Content_Blocks_Insert_Input,
-	App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
+	type App_Content_Blocks_Insert_Input,
+	type App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
 	GetCollectionTileByIdDocument,
-	GetCollectionTileByIdQuery,
-	GetCollectionTileByIdQueryVariables,
+	type GetCollectionTileByIdQuery,
+	type GetCollectionTileByIdQueryVariables,
 	GetItemByExternalIdDocument,
-	GetItemByExternalIdQuery,
-	GetItemByExternalIdQueryVariables,
+	type GetItemByExternalIdQuery,
+	type GetItemByExternalIdQueryVariables,
 	GetItemTileByIdDocument,
-	GetItemTileByIdQuery,
-	GetItemTileByIdQueryVariables,
-	Lookup_Enum_Content_Block_Types_Enum,
+	type GetItemTileByIdQuery,
+	type GetItemTileByIdQueryVariables,
+	type Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
-import { App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
+import { type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
-import { ContentBlockType, DbContentBlock } from '../content-block.types';
+import { type ContentBlockType, type DbContentBlock } from '../content-block.types';
 import {
 	DEFAULT_AUDIO_STILL,
 	MEDIA_PLAYER_BLOCKS,
 	TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT,
 } from '../content-pages.consts';
 import {
-	ContentOverviewTableCols,
-	ContentPageLabel,
-	ContentPageType,
-	ContentPageUser,
-	ContentWidth,
-	DbContentPage,
-	GqlAvoUser,
-	GqlContentBlock,
-	GqlContentPage,
-	GqlHetArchiefUser,
-	GqlInsertOrUpdateContentBlock,
-	GqlUser,
-	MediaItemResponse,
+	type ContentOverviewTableCols,
+	type ContentPageLabel,
+	type ContentPageType,
+	type ContentPageUser,
+	type ContentWidth,
+	type DbContentPage,
+	type GqlAvoUser,
+	type GqlContentBlock,
+	type GqlContentPage,
+	type GqlHetArchiefUser,
+	type GqlInsertOrUpdateContentBlock,
+	type GqlUser,
+	type MediaItemResponse,
 } from '../content-pages.types';
-import { ContentPageOverviewParams } from '../dto/content-pages.dto';
-import { CONTENT_PAGE_QUERIES, ContentPageQueryTypes } from '../queries/content-pages.queries';
-
-import { getOrderObject } from 'src/modules/shared/helpers/generate-order-gql-query';
-import { isAvo } from 'src/modules/shared/helpers/is-avo';
+import { type ContentPageOverviewParams } from '../dto/content-pages.dto';
+import { CONTENT_PAGE_QUERIES, type ContentPageQueryTypes } from '../queries/content-pages.queries';
 
 @Injectable()
 export class ContentPagesService {
