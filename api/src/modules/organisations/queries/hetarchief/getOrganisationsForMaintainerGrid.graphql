@@ -5,6 +5,6 @@ query getOrganisationsForMaintainerGrid {
 		skos_pref_label
 		ha_org_has_logo
 		foaf_homepage
-		slug
+		skos_alt_label
 	}
 }

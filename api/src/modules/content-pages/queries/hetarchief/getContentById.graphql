@@ -22,7 +22,7 @@ query getContentById($id: uuid!) {
 					org_identifier
 					skos_pref_label
 					ha_org_has_logo
-					slug
+					skos_alt_label
 				}
 			}
 			group {

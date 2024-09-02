@@ -24,7 +24,7 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 					org_identifier
 					skos_pref_label
 					ha_org_has_logo
-					slug
+					skos_alt_label
 				}
 			}
 			group {
