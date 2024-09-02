@@ -418,16 +418,13 @@ export class ContentPagesService {
 				});
 			}
 
-			// Because `isPublic` is only set once when publishing a content page we only care about it
-			// if it is the only property governing publication
-			if (!contentPage.publishAt && !contentPage.depublishAt && !contentPage.isPublic) {
+			if (!contentPage.isPublic) {
 				return null;
 			}
 
 			// Check if content page is accessible for the user who requested the content page
 			const pageUserGroups = contentPage.userGroupIds.map((id) => String(id));
 			const userUserGroups = SessionHelper.getUserGroupIds(user?.userGroup?.id);
-
 			if (!intersection(pageUserGroups, userUserGroups).length) {
 				return null;
 			}
