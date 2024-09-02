@@ -110,7 +110,7 @@ export class PlayerTicketService {
 		return `${this.mediaServiceUrl}/${fileRepresentationSchemaIdentifier}?token=${token}`;
 	}
 
-	public async getEmbedUrl(id: string): Promise<string> {
+	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
 		let response:
 			| GetFileByRepresentationSchemaIdentifierQuery
 			| GetItemBrowsePathByExternalIdQuery;
@@ -120,7 +120,7 @@ export class PlayerTicketService {
 				GetFileByRepresentationSchemaIdentifierQuery,
 				GetFileByRepresentationSchemaIdentifierQueryVariables
 			>(GetFileByRepresentationSchemaIdentifierDocument, {
-				id,
+				id: representationOrExternalId,
 			});
 		} else {
 			// AVO
@@ -128,21 +128,21 @@ export class PlayerTicketService {
 				GetItemBrowsePathByExternalIdQuery,
 				GetItemBrowsePathByExternalIdQueryVariables
 			>(GetItemBrowsePathByExternalIdDocument, {
-				externalId: id,
+				externalId: representationOrExternalId,
 			});
 		}
 
 		/* istanbul ignore next */
 		const browsePath: string =
 			(response as GetItemBrowsePathByExternalIdQuery)?.app_item_meta?.[0]?.browse_path ||
-			(response as GetFileByRepresentationSchemaIdentifierQuery)?.object_file?.[0]
-				?.schema_identifier;
+			(response as GetFileByRepresentationSchemaIdentifierQuery)?.graph_representation?.[0]
+				?.includes?.[0]?.file?.premis_stored_at;
 		if (!browsePath) {
 			throw new NotFoundException({
 				message: 'Object embed url not found',
 				innerException: null,
 				additionalInfo: {
-					id,
+					id: representationOrExternalId,
 				},
 			});
 		}

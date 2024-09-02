@@ -1,5 +1,9 @@
 query getFileByRepresentationSchemaIdentifier($id: String) {
-	object_file(where: { representation_schema_identifier: { _eq: $id } }) {
-		schema_identifier
+	graph_representation(where: { id: { _eq: $id } }) {
+		includes {
+			file {
+				premis_stored_at
+			}
+		}
 	}
 }

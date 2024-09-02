@@ -7,20 +7,11 @@ export interface Organisation {
 	logo_url?: string;
 }
 
-export interface MaintainerGridOrganisation {
-	id: string;
-	name: string;
-	logoUrl: string;
-	homepageUrl: string;
-	slug: string;
-}
-
 export type BasicOrganisation = {
 	or_id: string;
 	name: string;
 };
 
 export type GqlAvoOrganisation = GetOrganisationsQueryAvo['shared_organisations'][0];
-export type GqlHetArchiefOrganisation =
-	GetOrganisationsQueryHetArchief['maintainer_organisation'][0];
+export type GqlHetArchiefOrganisation = GetOrganisationsQueryHetArchief['graph_organization'][0];
 export type GqlOrganisation = GqlAvoOrganisation | GqlHetArchiefOrganisation;

@@ -1,7 +1,9 @@
 query getOrganisations($ids: [String!]) {
-	maintainer_organisation(where: { schema_identifier: { _in: $ids } }) {
-		logo
-		schema_name
-		schema_identifier
+	graph_organization(where: { org_identifier: { _in: $ids } }) {
+		id
+		org_identifier
+		skos_pref_label
+		ha_org_has_logo
+		slug
 	}
 }
