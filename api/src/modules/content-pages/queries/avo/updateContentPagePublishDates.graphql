@@ -14,8 +14,8 @@ mutation updateContentPagePublishDates($now: timestamptz, $publishedAt: timestam
 				}
 				{
 					_or: [
-						is_public: { _eq: false }
-						published_at: { _is_null: true }
+						{ is_public: { _eq: false } }
+						{ published_at: { _is_null: true } }
 					]
 				}
 			]
