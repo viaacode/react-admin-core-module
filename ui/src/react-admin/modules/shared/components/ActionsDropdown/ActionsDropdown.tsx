@@ -10,6 +10,7 @@ import {
 } from '@meemoo/react-components';
 
 import { Icon } from '../Icon';
+import { tText } from '~shared/helpers/translation-functions';
 
 export interface ActionsDropdownProps {
 	menuItems: MenuItemInfo[] | MenuItemInfo[][];
@@ -38,7 +39,7 @@ const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 			placement="bottom-end"
 		>
 			<DropdownButton>
-				<Button>
+				<Button title={tText('hover opties')}>
 					<Icon name="extraOptions" />
 				</Button>
 			</DropdownButton>
