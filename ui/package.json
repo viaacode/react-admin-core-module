@@ -30,6 +30,8 @@
     "lint:scss:fix": "stylelint --fix src/**/*.{css,scss}",
     "test": "jest --cache",
     "type-check": "tsc --noEmit",
+    "backup-translations-hetarchief-qas": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/backup-translations.ts -- HET_ARCHIEF",
+    "backup-translations-avo-qas": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/backup-translations.ts -- AVO",
     "translations:extract:avo": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:migrate:avo": "dotenv -e .env/.env.local ts-node --transpile-only --project ./scripts/tsconfig.json scripts/migrate-to-sql-translations.ts -- AVO",
