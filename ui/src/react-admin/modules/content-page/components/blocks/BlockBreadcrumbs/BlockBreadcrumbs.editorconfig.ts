@@ -25,8 +25,8 @@ export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS({
 		padding: {
-			top: 'top-extra-large',
-			bottom: 'bottom-extra-large',
+			top: 'top-small',
+			bottom: 'bottom-small',
 		},
 	}),
 });
