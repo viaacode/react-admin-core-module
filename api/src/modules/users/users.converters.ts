@@ -240,9 +240,9 @@ export function convertUserInfoToCommonUser(
 					)
 				),
 				organisation: {
-					name: profile.organisation?.schema_name,
-					or_id: profile.organisation?.schema_identifier,
-					logo_url: profile.organisation?.logo,
+					name: profile.organisation?.skos_pref_label,
+					or_id: profile.organisation?.org_identifier,
+					logo_url: profile.organisation?.ha_org_has_logo,
 					data: null,
 				},
 				loms: [],

@@ -1,6 +1,7 @@
 query getOrganisationsWithUsers {
-	maintainer_organisation(distinct_on: schema_identifier, where: { users: {} }) {
-		schema_identifier
-		schema_name
+	graph_organization(distinct_on: org_identifier, where: { users: {} }) {
+		id
+		org_identifier
+		skos_pref_label
 	}
 }

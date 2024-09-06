@@ -9,11 +9,12 @@ import { AdminOrganisationsService } from './admin-organisations.service';
 
 const mockGqlHetArchiefOrganisation: { data: GetOrganisationQueryHetArchief } = {
 	data: {
-		maintainer_organisation: [
+		graph_organization: [
 			{
-				logo: { iri: 'https://assets.viaa.be/images/OR-2f7jt01' },
-				schema_name: 'KAAP',
-				schema_identifier: 'OR-2f7jt01',
+				ha_org_has_logo: 'https://assets.viaa.be/images/OR-2f7jt01',
+				skos_pref_label: 'KAAP',
+				org_identifier: 'OR-2f7jt01',
+				id: 'https://data.viaa.be/graph/organizations/OR-2f7jt01',
 			},
 		],
 	},
@@ -66,7 +67,7 @@ describe('OrganisationsService', () => {
 			const organisation: Organisation =
 				await organisationsService.getOrganisation('or-639k481');
 			expect(organisation.logo_url).toEqual(
-				mockGqlHetArchiefOrganisation.data.maintainer_organisation[0].logo.iri
+				mockGqlHetArchiefOrganisation.data.graph_organization[0].ha_org_has_logo
 			);
 		});
 

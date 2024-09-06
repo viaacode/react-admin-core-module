@@ -20,11 +20,11 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 			full_name
 			maintainer_users_profiles {
 				maintainer {
-					schema_identifier
-					schema_name
-					information {
-						logo
-					}
+					id
+					org_identifier
+					skos_pref_label
+					ha_org_has_logo
+					skos_alt_label
 				}
 			}
 			group {

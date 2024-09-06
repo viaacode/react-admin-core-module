@@ -27,9 +27,9 @@ export class AdminOrganisationsService {
 
 		/* istanbul ignore next */
 		return {
-			id: hetArchiefOrganisation?.schema_identifier || avoOrganisation?.or_id,
-			name: hetArchiefOrganisation?.schema_name || avoOrganisation?.name,
-			logo_url: hetArchiefOrganisation?.logo?.iri || avoOrganisation?.logo_url,
+			id: hetArchiefOrganisation?.org_identifier || avoOrganisation?.or_id,
+			name: hetArchiefOrganisation?.skos_pref_label || avoOrganisation?.name,
+			logo_url: hetArchiefOrganisation?.ha_org_has_logo || avoOrganisation?.logo_url,
 		};
 	}
 
@@ -50,7 +50,7 @@ export class AdminOrganisationsService {
 			(response as OrganisationQueryTypes['GetOrganisationsQueryAvo'])
 				?.shared_organisations ||
 			(response as OrganisationQueryTypes['GetOrganisationsQueryHetArchief'])
-				?.maintainer_organisation ||
+				?.graph_organization ||
 			[]
 		).map(this.adapt);
 	}
@@ -75,9 +75,9 @@ export class AdminOrganisationsService {
 			} else {
 				organisations = (
 					response as OrganisationQueryTypes['GetOrganisationsWithUsersQueryHetArchief']
-				).maintainer_organisation.map((maintainerWrap) => ({
-					name: maintainerWrap.schema_name || undefined,
-					or_id: maintainerWrap.schema_identifier,
+				).graph_organization.map((organisation) => ({
+					name: organisation.skos_pref_label || undefined,
+					or_id: organisation.org_identifier,
 				}));
 			}
 

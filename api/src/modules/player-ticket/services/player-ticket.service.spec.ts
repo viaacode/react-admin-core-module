@@ -96,7 +96,9 @@ describe('PlayerTicketService', () => {
 	describe('getEmbedUrl', () => {
 		it('returns the embedUrl for an item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_identifier: 'vrt/item-1' }],
+				graph_representation: [
+					{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] },
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -105,7 +107,9 @@ describe('PlayerTicketService', () => {
 
 		it('returns the embedUrl for an avo item', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [{ schema_identifier: 'vrt/item-1' }],
+				graph_representation: [
+					{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] },
+				],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
@@ -114,7 +118,7 @@ describe('PlayerTicketService', () => {
 
 		it('throws a not found exception if the item was not found', async () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
-				object_file: [],
+				graph_representation: [{ includes: [] }],
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			let error;

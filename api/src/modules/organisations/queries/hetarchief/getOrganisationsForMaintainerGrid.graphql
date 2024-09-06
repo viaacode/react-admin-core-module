@@ -1,9 +1,10 @@
 query getOrganisationsForMaintainerGrid {
- maintainer_organisation {
-    homepage_url
-    schema_name
-    logo
-    schema_identifier
-    slug
-  }
+	graph_organization {
+		id
+		org_identifier
+		skos_pref_label
+		ha_org_has_logo
+		foaf_homepage
+		skos_alt_label
+	}
 }
