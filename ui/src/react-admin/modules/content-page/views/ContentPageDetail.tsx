@@ -195,7 +195,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
-			navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
+			navigateToAbsoluteOrRelativeUrl(`/${AdminConfigManager.getConfig().locale}${contentPageInfo.path}`, history, LinkTarget.Blank);
 		} else {
 			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),
