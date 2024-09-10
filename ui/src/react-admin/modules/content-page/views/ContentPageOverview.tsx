@@ -554,7 +554,9 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 						>
 							<DropdownButton>
 								<Button
-									title={tText('hover opties')}
+									title={tText(
+										'modules/content-page/views/content-page-overview___hover-opties'
+									)}
 									type="secondary"
 									renderIcon={() => <Icon name="extraOptions" />}
 								></Button>

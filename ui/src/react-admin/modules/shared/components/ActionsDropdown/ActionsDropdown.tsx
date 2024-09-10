@@ -39,7 +39,11 @@ const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
 			placement="bottom-end"
 		>
 			<DropdownButton>
-				<Button title={tText('hover opties')}>
+				<Button
+					title={tText(
+						'modules/shared/components/actions-dropdown/actions-dropdown___hover-opties'
+					)}
+				>
 					<Icon name="extraOptions" />
 				</Button>
 			</DropdownButton>

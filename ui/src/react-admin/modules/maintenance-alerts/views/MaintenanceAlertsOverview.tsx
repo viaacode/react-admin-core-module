@@ -175,7 +175,9 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 								setActiveMaintenanceAlert(maintenanceAlert);
 								setAction('edit');
 							}}
-							title={tText('hover bewerk notificatie')}
+							title={tText(
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-bewerk-notificatie'
+							)}
 						/>
 						<Button
 							icon={<Icon name="delete" />}
@@ -185,7 +187,9 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 								setAlertToDeleteId(maintenanceAlert.id);
 								setIsDeleteModalOpen(true);
 							}}
-							title={tText('hover verwijder notificatie')}
+							title={tText(
+								'modules/maintenance-alerts/views/maintenance-alerts-overview___hover-verwijder-notificatie'
+							)}
 						/>
 					</>
 				);
