@@ -2,7 +2,7 @@ import { Link } from '~modules/shared/components/Link';
 import React, { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
 import { stringifyUrl } from 'query-string';
 
-import { useGetIeObjectsNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
+import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
 import {
 	BlockOverviewNewspaperTitlesProps,
 	NewspaperTitle,
@@ -25,7 +25,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 }) => {
 	const [searchInput, setSearchInput] = useState('');
 	const [newspaperData, setNewspaperData] = useState<NewspaperTitle[]>();
-	const { data } = useGetIeObjectsNewspaperTitles();
+	const { data } = useGetNewspaperTitles();
 
 	useEffect(() => {
 		setNewspaperData(data);
