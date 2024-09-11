@@ -808,6 +808,8 @@
   "modules/shared/components/actions-dropdown/actions-dropdown___hover-opties": "hover opties",
   "modules/shared/components/content-picker/content-picker___ie-objects": "ie-objects",
   "modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina": "Nederlandse hoofd pagina",
+  "modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar": " van ",
+  "modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar": "-",
   "modules/shared/components/pagination-bar/pagination-bar___volgende": "volgende",
   "modules/shared/components/pagination-bar/pagination-bar___vorige": "vorige",
   "modules/shared/consts/language-names___engels": "Engels",

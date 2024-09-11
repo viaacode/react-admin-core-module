@@ -185,7 +185,6 @@ export interface IconConfig {
 		newspaper: IconComponentProps;
 		noAudio: IconComponentProps;
 		noVideo: IconComponentProps;
-		noFilm: IconComponentProps;
 	};
 	list: () => { label: string; value: string }[];
 	alerts: () => { key: string; label: string; value: string }[];

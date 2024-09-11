@@ -498,6 +498,12 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 											'shared/components/filter-table/filter-table___terug-naar-boven'
 										)}
 										backToTopIcon={<Icon name="angleUp" />}
+										labelBetweenPageStartAndEnd={tText(
+											'modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar'
+										)}
+										labelBetweenPageEndAndTotal={tText(
+											'modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar'
+										)}
 									/>
 								</Spacer>
 							)}

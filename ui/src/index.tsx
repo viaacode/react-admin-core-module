@@ -145,6 +145,8 @@ function setConfig() {
 				video: { name: 'video' },
 				audio: { name: 'audio' },
 				newspaper: { name: 'newspaper' },
+				noAudio: { name: 'no-audio' },
+				noVideo: { name: 'no-video' },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
@@ -165,6 +167,7 @@ function setConfig() {
 				component: null,
 			},
 			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
+			enableMultiLanguage: true,
 			buttonTypes: () => [
 				// Het archief buttons
 				// {
@@ -354,7 +357,7 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
-		locale: 'nl',
+		locale: 'en',
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',
