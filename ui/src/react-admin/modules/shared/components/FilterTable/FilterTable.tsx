@@ -290,6 +290,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								onChange={setSearchTerm}
 								onKeyUp={handleKeyUp as any}
 								value={searchTerm}
+								ariaLabel={tText('zoekveld aria label')}
 							/>
 						</FormGroup>
 						<FormGroup inlineMode="shrink">

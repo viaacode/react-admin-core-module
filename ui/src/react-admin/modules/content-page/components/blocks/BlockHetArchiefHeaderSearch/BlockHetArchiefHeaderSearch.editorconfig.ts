@@ -70,6 +70,10 @@ export const HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
+			searchAriaLabel: TEXT_FIELD(tText('aria label verplicht'), {
+				label: tText('aria label voor zoekveld'),
+				editorType: ContentBlockEditor.TextInput,
+			}),
 		},
 	},
 	block: {

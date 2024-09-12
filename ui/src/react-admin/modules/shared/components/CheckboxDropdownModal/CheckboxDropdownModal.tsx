@@ -255,6 +255,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 									)}
 									icon={'search' as IconName}
 									value={searchKeyword}
+									ariaLabel={tText('aria label')}
 									onChange={(value) => {
 										setSearchKeyword(value);
 

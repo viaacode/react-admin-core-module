@@ -11,6 +11,7 @@ import { BlockHeading } from '../BlockHeading';
 
 export interface BlockHetArchiefHeaderSearchProps extends DefaultComponentProps {
 	title: string;
+	searchAriaLabel: string;
 	subtitles: { label: string }[];
 	textBelowSearch?: string;
 }
@@ -19,6 +20,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	className,
 	title,
 	subtitles,
+	searchAriaLabel,
 	textBelowSearch,
 }): ReactElement => {
 	const [activeIndex, setActiveIndex] = useState<number>(subtitles.length - 1);
@@ -79,6 +81,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			</div>
 			<div>
 				<TextInput
+					aria-label={searchAriaLabel}
 					placeholder={tText(
 						'react-admin/modules/content-page/components/blocks/block-het-archief-header-search/block-het-archief-header-search___start-je-zoektocht'
 					)}
