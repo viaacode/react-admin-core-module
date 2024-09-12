@@ -22,9 +22,12 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 	const elementId = `eventbrite-widget-modal-trigger-${eventId}`;
 
 	useEffect(() => {
-		const existingScript = document.getElementById(EVENTBRITE_SCRIPT_ID);
-		if (!existingScript) {
-			const script = document.createElement('script');
+		let script: HTMLScriptElement | null = document.getElementById(
+			EVENTBRITE_SCRIPT_ID
+		) as HTMLScriptElement | null;
+
+		if (!script) {
+			script = document.createElement('script');
 			script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
 			script.id = EVENTBRITE_SCRIPT_ID;
 			document.body.appendChild(script);
@@ -38,6 +41,8 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 				});
 			};
 		}
+
+		return () => script.remove();
 	}, [elementId, eventId]);
 
 	return (
