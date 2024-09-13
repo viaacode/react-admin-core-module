@@ -1,6 +1,5 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import { ButtonAction, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { Image } from '@viaa/avo2-components';
 import { FunctionComponent, ReactElement, ReactNode } from 'react';
 import { DefaultComponentProps } from '~modules/shared/types/components';
 import { isNil } from 'lodash-es';

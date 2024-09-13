@@ -1,8 +1,7 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
-import { get, isNumber } from 'lodash-es';
 import React, { FunctionComponent, memo } from 'react';
 
-import { createKey } from '../../../shared/helpers/create-key';
+import { createKey } from '~shared/helpers/create-key';
 import {
 	ContentBlockBlockConfig,
 	ContentBlockComponentsConfig,
@@ -44,8 +43,8 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 			const stateKey = key as keyof ContentBlockComponentState | keyof ContentBlockState;
 			const formErrorsForBlock = configErrors[stateKey];
 
-			if (isNumber(stateIndex)) {
-				error = get(formErrorsForBlock, [stateIndex]) as string[];
+			if (typeof stateIndex === 'number') {
+				error = formErrorsForBlock[stateIndex] as string[];
 			} else {
 				error = formErrorsForBlock as string[];
 			}

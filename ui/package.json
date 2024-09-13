@@ -61,7 +61,6 @@
     "date-fns": "2.30.0",
     "date-fns-tz": "2.0.0",
     "file-saver": "2.0.5",
-    "html-entities": "2.3.3",
     "i": "0.3.7",
     "i18next-http-backend": "1.4.1",
     "immer": "9.0.12",
