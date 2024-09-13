@@ -7,7 +7,7 @@ import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/Checkbo
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { GET_SPECIAL_USER_GROUPS, preferredUserGroupOrder } from '../const/user-group.const';
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 
 type UseUserGroupsTriple = [
 	TagInfo[] | CheckboxOption[] | MultiSelectOption[],

@@ -1,4 +1,4 @@
-import { kebabCase } from 'lodash';
+import { kebabCase } from 'lodash-es';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import {

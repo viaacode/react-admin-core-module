@@ -13,7 +13,7 @@ export function validateContentBlockConfig(
 	},
 	state: ContentBlockComponentState
 ) {
-	let newErrors = { ...errors } || {};
+	let newErrors = { ...errors };
 
 	const keysToValidate = Object.keys(fields).filter((key) => fields[key].validator);
 

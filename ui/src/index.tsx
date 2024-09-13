@@ -23,6 +23,7 @@ import { tText } from '../src/react-admin/modules/shared/helpers/translation-fun
 
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
+import { Locale } from '~modules/translations/translations.core.types';
 
 const proxyUrl = 'http://localhost:3100';
 const adminCoreApiUrl = 'http://localhost:3300';
@@ -357,7 +358,7 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
-		locale: 'en',
+		locale: Locale.En,
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',

@@ -155,9 +155,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const getDescription = (page: ContentPageInfo) => {
-		return showDescription && page.description
-			? <div dangerouslySetInnerHTML={{ __html: page.description }} /> || undefined
-			: undefined;
+		return showDescription && page.description ? (
+			<div dangerouslySetInnerHTML={{ __html: page.description }} />
+		) : undefined;
 	};
 
 	const renderText = (text: string | ReactNode, className?: string) => {

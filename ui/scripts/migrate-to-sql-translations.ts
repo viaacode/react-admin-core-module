@@ -5,7 +5,7 @@
  */
 
 import * as fs from 'fs/promises';
-import { kebabCase, trim } from 'lodash';
+import { kebabCase, trim } from 'lodash-es';
 import * as path from 'path';
 import {
 	App,
