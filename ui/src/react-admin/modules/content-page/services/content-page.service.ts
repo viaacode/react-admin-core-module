@@ -1,8 +1,8 @@
-import { IPagination } from '@studiohyperdrive/pagination';
+import type { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import { type ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { type ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
@@ -12,12 +12,12 @@ import {
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
 } from '~modules/content-page/services/content-page.converters';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { Locale } from '~modules/translations/translations.core.types';
 import { CustomError } from '~shared/helpers/custom-error';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import {
+import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentPageLabel,

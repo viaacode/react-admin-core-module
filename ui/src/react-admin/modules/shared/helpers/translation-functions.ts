@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { AdminConfigManager } from '~core/config';
-import { App } from '~modules/translations/translations.core.types';
+import type { App } from '~modules/translations/translations.core.types';
 
 export function tText(
 	translationKey: string,

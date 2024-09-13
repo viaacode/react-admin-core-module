@@ -2,7 +2,7 @@ import { isNumber } from 'lodash-es';
 
 import { tText } from '~shared/helpers/translation-functions';
 
-import { ContentBlockErrors } from '../../content-page/types/content-block.types';
+import type { ContentBlockErrors } from '../../content-page/types/content-block.types';
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (

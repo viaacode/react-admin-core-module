@@ -7,10 +7,11 @@ import {
 	ModalBody,
 	ModalFooterRight,
 } from '@viaa/avo2-components';
-import { ContentPickerType } from '@viaa/avo2-types';
+import type { ContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { compact, noop, uniq } from 'lodash-es';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loader } from '~shared/components';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 

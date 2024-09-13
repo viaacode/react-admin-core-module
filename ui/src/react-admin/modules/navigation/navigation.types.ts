@@ -1,6 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
-import { Locale } from '~modules/translations/translations.core.types';
-import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { Locale } from '~modules/translations/translations.core.types';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 

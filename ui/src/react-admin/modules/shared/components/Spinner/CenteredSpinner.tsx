@@ -1,5 +1,6 @@
 import { Container, Flex } from '@viaa/avo2-components';
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import Loader from '../Loader/Loader';
 
 export const CenteredSpinner: FC = () => {

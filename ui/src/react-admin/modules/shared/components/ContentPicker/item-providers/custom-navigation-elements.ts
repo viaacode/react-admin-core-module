@@ -2,7 +2,7 @@ import { compact, sortBy } from 'lodash-es';
 
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 import { AdminConfigManager } from '~core/config';
 
 // Return custom navigation elements from adminCoreConfig.navigationBars.customNavigationElements

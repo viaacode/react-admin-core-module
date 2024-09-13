@@ -1,4 +1,7 @@
 import type { RichEditorState } from '@meemoo/react-components';
+import type {
+	SelectOption,
+	TagInfo} from '@viaa/avo2-components';
 import {
 	Checkbox,
 	Column,
@@ -7,15 +10,15 @@ import {
 	FormGroup,
 	Grid,
 	Select,
-	SelectOption,
-	TagInfo,
 	TagsInput,
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import { type Avo, PermissionName } from '@viaa/avo2-types';
+import type { type Avo} from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { compact, noop } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types';
 import {
@@ -24,17 +27,18 @@ import {
 	DEFAULT_PAGES_WIDTH,
 	GET_CONTENT_PAGE_WIDTH_OPTIONS,
 } from '~modules/content-page/const/content-page.consts';
-import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
+import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import {
-	ContentEditActionType,
+import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageLabel,
-	ContentWidth,
+	ContentWidth} from '~modules/content-page/types/content-pages.types';
+import {
+	ContentEditActionType
 } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageInfo } from '~modules/translations/translations.types';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
@@ -45,8 +49,8 @@ import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { ValueOf } from '~shared/types';
-import { PickerItem } from '~shared/types/content-picker';
+import type { ValueOf } from '~shared/types';
+import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
 

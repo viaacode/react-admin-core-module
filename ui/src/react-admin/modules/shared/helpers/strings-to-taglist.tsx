@@ -1,6 +1,8 @@
-import { TagList, TagOption } from '@viaa/avo2-components';
+import type { TagOption } from '@viaa/avo2-components';
+import { TagList } from '@viaa/avo2-components';
 import { noop } from 'lodash-es';
-import React, { MouseEvent, ReactNode } from 'react';
+import type { MouseEvent, ReactNode } from 'react';
+import React from 'react';
 
 export function stringsToTagList(
 	labelsOrObjs: string[] | any[],

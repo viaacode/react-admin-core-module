@@ -1,13 +1,15 @@
-import { Button, IconName } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
+import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { compact } from 'lodash-es';
-import React, { FC, useMemo } from 'react';
+import type { FC} from 'react';
+import React, { useMemo } from 'react';
 import { GET_TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
-import {
+import type {
 	BlockContentEncloseProps,
 	MappedElement,
 } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import { GetContentBlockEncloseContentReturnType } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
+import type { GetContentBlockEncloseContentReturnType } from '~content-blocks/BlockContentEnclose/hooks/useGetContentBlockEncloseContent.types';
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
 import { Link } from '~modules/shared/components/Link';

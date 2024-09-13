@@ -1,5 +1,8 @@
-import React, { FunctionComponent, useState } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { useState } from 'react';
 
+import type {
+	TagInfo} from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
@@ -9,7 +12,6 @@ import {
 	ModalBody,
 	ModalFooterRight,
 	Select,
-	TagInfo,
 	TagsInput,
 	Toolbar,
 	ToolbarItem,

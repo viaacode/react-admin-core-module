@@ -1,9 +1,10 @@
 import { tText } from '~shared/helpers/translation-functions';
 import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underline-link-button-type-options';
-import {
+import type {
 	AnchorLinksBlockComponentState,
 	AnchorLinksBlockState,
-	ContentBlockConfig,
+	ContentBlockConfig} from '../../types/content-block.types';
+import {
 	ContentBlockEditor,
 	ContentBlockType,
 } from '../../types/content-block.types';

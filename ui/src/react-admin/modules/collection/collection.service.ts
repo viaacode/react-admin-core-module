@@ -5,7 +5,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
-import { ContentTypeNumber } from './collection.types';
+import type { ContentTypeNumber } from './collection.types';
 
 export class CollectionService {
 	private static getBaseUrl(): string {

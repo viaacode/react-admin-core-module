@@ -1,10 +1,12 @@
-import {
+import type {
 	type RichTextEditorUploadInfo,
-	RichTextEditorWithInternalState,
-	type RichTextEditorWithInternalStateProps,
+	type RichTextEditorWithInternalStateProps} from '@meemoo/react-components';
+import {
+	RichTextEditorWithInternalState
 } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
-import React, { type FunctionComponent } from 'react';
+import type { type FunctionComponent } from 'react';
+import React from 'react';
 
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';

@@ -1,7 +1,9 @@
-import { Form, FormGroup, Select, SelectOption, SpacerOption } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { SelectOption, SpacerOption } from '@viaa/avo2-components';
+import { Form, FormGroup, Select } from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
-import { PaddingFieldState } from '../../../types/content-block.types';
+import type { PaddingFieldState } from '../../../types/content-block.types';
 
 import { tHtml } from '~shared/helpers/translation-functions';
 

@@ -1,28 +1,31 @@
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { isNil } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, useCallback, useState } from 'react';
+import type { FunctionComponent, ReactNode} from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import DraggableList, {
+import type {
 	DraggableItemData,
 } from '~modules/content-page/components/DraggableList/DraggableList';
+import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
-import { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
-import {
+import type { ContentEditAction } from '~modules/content-page/helpers/content-edit.reducer';
+import type {
 	ContentBlockErrors,
 	ContentBlockStateOption,
 	ContentBlockStateType,
 	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
-import {
+import type {
 	BlockClickHandler,
-	ContentEditActionType,
-	ContentPageInfo,
+	ContentPageInfo} from '~modules/content-page/types/content-pages.types';
+import {
+	ContentEditActionType
 } from '~modules/content-page/types/content-pages.types';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';
@@ -161,7 +164,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 						'content-block-sidebar-item',
 						`content-block-sidebar-${itemData.position}`,
 						{
-							[`content-block-sidebar-item--highlighted`]:
+							['content-block-sidebar-item--highlighted']:
 								index === highlightedBlockIndex,
 						}
 					)}

@@ -1,5 +1,6 @@
-import { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import type { FC } from 'react';
+import type { RouteComponentProps} from 'react-router';
+import { withRouter } from 'react-router';
 import ContentPageEdit from '~modules/content-page/views/ContentPageEdit';
 import { mockCommonUser } from '../../mock-common-user';
 

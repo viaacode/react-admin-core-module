@@ -1,6 +1,6 @@
 import { get } from 'lodash-es';
 
-import { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
+import type { PickerItem, PickerItemControls, PickerTypeOption } from '../../types/content-picker';
 
 import type { Avo } from '@viaa/avo2-types';
 

@@ -1,12 +1,13 @@
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL_WITHOUT_ALIGN } from '~shared/consts/rich-text-editor.consts';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
-	IntroBlockComponentState,
+	IntroBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

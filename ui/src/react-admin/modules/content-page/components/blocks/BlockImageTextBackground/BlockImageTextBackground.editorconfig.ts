@@ -5,16 +5,17 @@ import {
 } from '~modules/content-page/const/get-align-options';
 import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
+import type {
+	ContentBlockConfig,
+	DefaultContentBlockState,
+	ImageTextBackgroundBlockComponentState} from '../../../types/content-block.types';
 import {
 	Color,
-	ContentBlockConfig,
 	ContentBlockEditor,
-	ContentBlockType,
-	DefaultContentBlockState,
-	ImageTextBackgroundBlockComponentState,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

@@ -1,6 +1,6 @@
 import { isArray } from 'lodash-es';
 
-import { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown';
+import type { DateRange } from '../components/DateRangeDropdown/DateRangeDropdown';
 
 export const DateRangeParam = {
 	encode: (value: DateRange | undefined) => {

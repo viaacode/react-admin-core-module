@@ -1,6 +1,8 @@
-import { Badge, Button, ButtonToolbar, Flex, Spacer, TagInfo } from '@viaa/avo2-components';
+import type { TagInfo } from '@viaa/avo2-components';
+import { Badge, Button, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-components';
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
+import type { FC, ReactNode} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
@@ -9,7 +11,7 @@ import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navi
 import { Link } from '~modules/shared/components/Link';
 import { Locale } from '~modules/translations/translations.core.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroup } from '~modules/user-group/types/user-group.types';
+import type { UserGroup } from '~modules/user-group/types/user-group.types';
 import { Icon } from '~shared/components';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -17,17 +19,18 @@ import { navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
-import { ValueOf } from '~shared/types';
+import type { ValueOf } from '~shared/types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 
 import { NavigationEditForm } from '../components';
 import { GET_PAGE_TYPES_LANG } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
-import {
+import type {
 	NavigationEditFormErrorState,
-	NavigationEditPageType,
-	NavigationItem,
+	NavigationItem} from '../navigation.types';
+import {
+	NavigationEditPageType
 } from '../navigation.types';
 
 interface NavigationEditProps {

@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { DateInput } from '~shared/components/DateInput/DateInput';
 
-import { TimepickerProps } from './Timepicker.types';
+import type { TimepickerProps } from './Timepicker.types';
 
 const Timepicker: FC<TimepickerProps> = (props) => {
 	const { className } = props;

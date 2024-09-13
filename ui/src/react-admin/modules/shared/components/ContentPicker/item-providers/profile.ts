@@ -1,6 +1,6 @@
 import { UserService } from '~modules/user/user.service';
 import { CustomError } from '~shared/helpers/custom-error';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import type { Avo } from '@viaa/avo2-types';

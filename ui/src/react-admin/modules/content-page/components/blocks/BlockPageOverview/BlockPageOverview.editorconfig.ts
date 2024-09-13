@@ -1,4 +1,4 @@
-import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 
 import { ContentItemStyle } from '~modules/content-page/components/blocks';
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
@@ -6,13 +6,14 @@ import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get
 import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
 import { tText } from '~shared/helpers/translation-functions';
 
+import type {
+	ContentBlockConfig,
+	DefaultContentBlockState,
+	PageOverviewBlockComponentStateFields} from '../../../types/content-block.types';
 import {
 	Color,
-	ContentBlockConfig,
 	ContentBlockEditor,
-	ContentBlockType,
-	DefaultContentBlockState,
-	PageOverviewBlockComponentStateFields,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

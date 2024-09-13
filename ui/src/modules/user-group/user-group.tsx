@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config';
 

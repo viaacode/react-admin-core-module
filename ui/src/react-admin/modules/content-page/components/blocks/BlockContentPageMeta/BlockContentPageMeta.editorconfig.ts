@@ -1,8 +1,9 @@
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockType,
-	DefaultContentBlockState,
+	DefaultContentBlockState} from '../../../types/content-block.types';
+import {
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '../defaults';

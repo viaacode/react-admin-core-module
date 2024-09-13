@@ -1,10 +1,11 @@
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
 	ContentBlockField,
-	ContentBlockType,
 	DefaultContentBlockState,
-	KlaarBlockComponentState,
+	KlaarBlockComponentState} from '~modules/content-page/types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

@@ -4,16 +4,17 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 
-import { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	CardWithoutDescriptionBlockComponentState,
-	Color,
 	ContentBlockConfig,
+	DefaultContentBlockState} from '../../../types/content-block.types';
+import {
+	Color,
 	ContentBlockEditor,
-	ContentBlockType,
-	DefaultContentBlockState,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

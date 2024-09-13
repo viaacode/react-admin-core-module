@@ -1,8 +1,9 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import type { Locale } from '~modules/translations/translations.core.types';
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetContentPageByPath = (

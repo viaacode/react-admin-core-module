@@ -1,9 +1,10 @@
 import { TextInput } from '@meemoo/react-components';
 import clsx from 'clsx';
 import { stringifyUrl } from 'query-string';
-import React, { FunctionComponent, KeyboardEvent, ReactElement, useEffect, useState } from 'react';
+import type { FunctionComponent, KeyboardEvent, ReactElement} from 'react';
+import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { Icon } from '~shared/components';
 import { KeyCode } from '~shared/consts/keycode';
 import { tText } from '~shared/helpers/translation-functions';

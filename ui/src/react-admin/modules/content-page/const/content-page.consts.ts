@@ -1,17 +1,18 @@
-import { IconName, TabProps } from '@viaa/avo2-components';
+import type { IconName, TabProps } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
+import type {
+	ContentOverviewTableCols} from '~modules/content-page/types/content-pages.types';
 import {
-	ContentOverviewTableCols,
 	ContentWidth,
 } from '~modules/content-page/types/content-pages.types';
-import {
+import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
-import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~shared/helpers/filters';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { tText } from '~shared/helpers/translation-functions';

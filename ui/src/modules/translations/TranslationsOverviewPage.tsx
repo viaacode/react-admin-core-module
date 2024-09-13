@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { TranslationsOverview } from '~modules/translations/views';
 import { Button, Modal } from '@meemoo/react-components';
 

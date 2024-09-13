@@ -1,17 +1,19 @@
+import type {
+	IconName,
+	TabProps} from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
 	Container,
-	IconName,
 	Navbar,
 	Spacer,
-	TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { isNil, without } from 'lodash-es';
-import React, { FC, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import type { FC, Reducer} from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { AdminConfigManager } from '~core/config';
@@ -25,16 +27,17 @@ import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 } from '~modules/content-page/const/content-page.consts';
+import type {
+	ContentEditAction,
+	ContentPageEditState} from '~modules/content-page/helpers/content-edit.reducer';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
-	ContentEditAction,
-	contentEditReducer,
-	ContentPageEditState,
+	contentEditReducer
 } from '~modules/content-page/helpers/content-edit.reducer';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import {
+import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
@@ -44,11 +47,12 @@ import {
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '~modules/content-page/types/content-block.types';
-import {
-	ContentEditActionType,
+import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
-	ContentPageUser,
+	ContentPageUser} from '~modules/content-page/types/content-pages.types';
+import {
+	ContentEditActionType,
 	PageType,
 } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -57,9 +61,10 @@ import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 
 import Link from '~shared/components/Link/Link';
+import type {
+	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
+	LoadingErrorLoadedComponent
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { stripHtml } from '~shared/helpers/formatters/strip-html';
@@ -69,7 +74,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
-import { DefaultComponentProps } from '~shared/types/components';
+import type { DefaultComponentProps } from '~shared/types/components';
 import { blockHasErrors } from '../helpers/block-has-errors';
 import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
 import ContentEditContentBlocks from './ContentEditContentBlocks';

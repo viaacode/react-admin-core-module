@@ -1,8 +1,9 @@
+import type {
+	IconName} from '@viaa/avo2-components';
 import {
 	Button,
 	Checkbox,
 	Icon,
-	IconName,
 	Modal,
 	ModalBody,
 	ModalFooterRight,
@@ -11,7 +12,8 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
-import React, { FunctionComponent, MouseEvent, useEffect, useState } from 'react';
+import type { FunctionComponent, MouseEvent} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';

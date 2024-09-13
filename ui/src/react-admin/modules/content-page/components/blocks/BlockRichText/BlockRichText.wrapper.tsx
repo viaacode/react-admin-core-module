@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { BlockRichText, BlockRichTextProps } from '~content-blocks/BlockRichText/BlockRichText';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockRichTextProps } from '~content-blocks/BlockRichText/BlockRichText';
+import { BlockRichText } from '~content-blocks/BlockRichText/BlockRichText';
 
 export const BlockRichTextWrapper: FunctionComponent<
 	Omit<BlockRichTextProps, 'maxTextWidth'> & {

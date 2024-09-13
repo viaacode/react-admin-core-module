@@ -1,23 +1,24 @@
-import { TextInputProps } from '@viaa/avo2-components';
+import type { TextInputProps } from '@viaa/avo2-components';
 import { noop } from 'lodash-es';
-import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
 import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 import { PHOTO_TYPES } from '~shared/helpers/files';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 
+import type {
+	ContentBlockConfig,
+	ContentBlockFieldGroup,
+	DefaultContentBlockState} from '../../../types/content-block.types';
 import {
 	Color,
-	ContentBlockConfig,
 	ContentBlockEditor,
-	ContentBlockFieldGroup,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS,
-	DefaultContentBlockState,
+	DEFAULT_BUTTON_PROPS
 } from '../../../types/content-block.types';
 
 import {

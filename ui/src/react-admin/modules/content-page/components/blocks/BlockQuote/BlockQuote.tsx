@@ -1,6 +1,8 @@
-import { DefaultProps, Quote } from '@viaa/avo2-components';
+import type { DefaultProps} from '@viaa/avo2-components';
+import { Quote } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import './BlockQuote.scss';
 

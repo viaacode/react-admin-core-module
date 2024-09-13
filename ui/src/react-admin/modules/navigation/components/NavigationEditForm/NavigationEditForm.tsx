@@ -1,8 +1,10 @@
-import { ReactSelect, SelectOption } from '@meemoo/react-components';
+import type { SelectOption } from '@meemoo/react-components';
+import { ReactSelect } from '@meemoo/react-components';
 import { Alert, Form, FormGroup, TextArea, TextInput } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { get, kebabCase } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
@@ -14,9 +16,9 @@ import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { tText } from '~shared/helpers/translation-functions';
-import { ReactSelectOption, ValueOf } from '~shared/types';
-import { PickerItem } from '~shared/types/content-picker';
-import { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
+import type { ReactSelectOption, ValueOf } from '~shared/types';
+import type { PickerItem } from '~shared/types/content-picker';
+import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
 

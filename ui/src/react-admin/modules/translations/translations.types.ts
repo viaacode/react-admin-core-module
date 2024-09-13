@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { DefaultProps } from '@viaa/avo2-components';
-import {
+import type { ReactNode } from 'react';
+import type { DefaultProps } from '@viaa/avo2-components';
+import type {
 	Component,
 	Key,
 	Locale,

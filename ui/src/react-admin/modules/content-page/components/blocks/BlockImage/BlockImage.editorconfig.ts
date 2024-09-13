@@ -1,14 +1,15 @@
 import { AdminConfigManager } from '~core/config';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
-	ImageBlockComponentState,
+	ImageBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';

@@ -1,9 +1,9 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isEmpty, isNil } from 'lodash-es';
-import { FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockTagWithLinkProps {
 	label: string;

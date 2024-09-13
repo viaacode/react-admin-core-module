@@ -1,13 +1,14 @@
 import { Badge, Button } from '@meemoo/react-components';
-import { IPagination } from '@studiohyperdrive/pagination';
+import type { IPagination } from '@studiohyperdrive/pagination';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import { FunctionComponent, ReactNode, useState } from 'react';
+import type { FunctionComponent, ReactNode} from 'react';
+import { useState } from 'react';
 import { ToastType } from '~core/config';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import { useGetMaintenanceAlerts } from '~modules/maintenance-alerts/hooks/use-get-maintenance-alerts';
-import { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
+import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import MaintenanceAlertsEditForm from '~modules/maintenance-alerts/views/MaintenanceAlertsEditForm';
 import { Icon, Loader } from '~modules/shared/components';
 import ConfirmModal from '~modules/shared/components/ConfirmModal/ConfirmModal';
@@ -15,13 +16,14 @@ import { CustomError } from '~modules/shared/helpers/custom-error';
 import { AdminLayout } from '~modules/shared/layouts';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
-import { LanguageInfo } from '~modules/translations/translations.types';
-import {
+import type { LanguageInfo } from '~modules/translations/translations.types';
+import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { ErrorView } from '~shared/components/error';
-import FilterTable, { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import FilterTable from '~shared/components/FilterTable/FilterTable';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { parseAsIsoWithoutTimezone } from '~shared/helpers/formatters/date';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
@@ -30,7 +32,7 @@ import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service';
-import {
+import type {
 	MaintenanceAlert,
 	MaintenanceAlertsOverviewProps,
 	MaintenanceAlertsOverviewTableCol,

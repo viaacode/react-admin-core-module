@@ -1,14 +1,16 @@
+import type {
+	ButtonType} from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
-	ButtonType,
 	Modal,
 	ModalBody,
 	Toolbar,
 	ToolbarItem,
 	ToolbarRight,
 } from '@viaa/avo2-components';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 

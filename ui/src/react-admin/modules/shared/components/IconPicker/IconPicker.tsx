@@ -1,7 +1,8 @@
 import { Flex, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { FunctionComponent } from 'react';
-import Select, { Props as ReactSelectProps } from 'react-select';
+import type { FunctionComponent } from 'react';
+import type { Props as ReactSelectProps } from 'react-select';
+import Select from 'react-select';
 import { Icon } from '~shared/components';
 
 import './IconPicker.scss';

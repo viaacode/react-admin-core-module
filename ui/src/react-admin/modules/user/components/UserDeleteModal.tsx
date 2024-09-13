@@ -1,4 +1,5 @@
-import React, { FunctionComponent, ReactNode, useState } from 'react';
+import type { FunctionComponent, ReactNode} from 'react';
+import React, { useState } from 'react';
 
 import {
 	Alert,
@@ -20,13 +21,13 @@ import type { Avo } from '@viaa/avo2-types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { showToast } from '~shared/helpers/show-toast';
 import { AVO } from '~shared/types';
-import { DeleteContentCounts } from '../user.types';
+import type { DeleteContentCounts } from '../user.types';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { buildLink } from '~shared/helpers/link';
 import { CustomError } from '~shared/helpers/custom-error';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
 import { UserService } from '../user.service';
 

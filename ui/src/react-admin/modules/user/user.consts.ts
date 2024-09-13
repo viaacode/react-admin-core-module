@@ -1,14 +1,14 @@
-import { ButtonType, SelectOption } from '@viaa/avo2-components';
+import type { ButtonType, SelectOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { isAfter, isBefore } from 'date-fns';
 import { compact } from 'lodash-es';
 
-import {
+import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
-import { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { NULL_FILTER } from '~shared/helpers/filters';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { isAvo } from '~shared/helpers/is-avo';
@@ -16,7 +16,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
-import { UserBulkAction, UserOverviewTableCol } from './user.types';
+import type { UserBulkAction, UserOverviewTableCol } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;

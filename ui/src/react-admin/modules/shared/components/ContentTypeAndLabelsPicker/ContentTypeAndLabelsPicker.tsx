@@ -1,17 +1,19 @@
+import type {
+	SelectOption,
+	TagInfo} from '@viaa/avo2-components';
 import {
 	Column,
 	FormGroup,
 	Grid,
 	Select,
-	SelectOption,
-	TagInfo,
 	TagsInput,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { compact, get, isNumber, isString } from 'lodash-es';
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
+import type { FunctionComponent} from 'react';
+import React, { useEffect, useState } from 'react';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
 import { showToast } from '~shared/helpers/show-toast';
 
 import { useContentTypes } from '../../../content-page/hooks/useContentTypes';

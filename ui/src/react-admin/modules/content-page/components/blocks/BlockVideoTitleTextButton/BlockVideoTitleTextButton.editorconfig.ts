@@ -1,15 +1,16 @@
-import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
+import type { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
-	MediaPlayerTitleTextButtonBlockComponentState,
+	MediaPlayerTitleTextButtonBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

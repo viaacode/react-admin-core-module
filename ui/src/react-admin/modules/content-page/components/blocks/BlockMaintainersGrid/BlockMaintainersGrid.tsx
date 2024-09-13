@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { FunctionComponent, ReactElement } from 'react';
-import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+import type { FunctionComponent, ReactElement } from 'react';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
-import { ButtonAction } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
 import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid';
 

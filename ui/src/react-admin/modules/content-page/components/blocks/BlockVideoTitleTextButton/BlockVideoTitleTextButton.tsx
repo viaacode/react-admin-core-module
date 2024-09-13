@@ -1,14 +1,17 @@
-import { FlowPlayer, FlowPlayerProps } from '@meemoo/react-components';
+import type { FlowPlayerProps } from '@meemoo/react-components';
+import { FlowPlayer } from '@meemoo/react-components';
+import type {
+	DefaultProps} from '@viaa/avo2-components';
 import {
 	Column,
 	Container,
 	convertToHtml,
-	DefaultProps,
 	ExpandableContainer,
 	Grid,
 	Spacer,
 } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	flowPlayerProps: FlowPlayerProps;

@@ -8,9 +8,10 @@ import {
 	ModalFooterRight,
 	Spacer,
 } from '@viaa/avo2-components';
-import { UserTempAccess } from '@viaa/avo2-types/types/user';
+import type { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { noop } from 'lodash-es';
-import React, { FunctionComponent, useState } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';

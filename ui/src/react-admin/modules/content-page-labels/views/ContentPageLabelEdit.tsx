@@ -1,4 +1,4 @@
-import { SelectOption } from '@meemoo/react-components';
+import type { SelectOption } from '@meemoo/react-components';
 import {
 	Box,
 	Button,
@@ -12,7 +12,8 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
@@ -20,9 +21,10 @@ import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { Link } from '~shared/components/Link';
+import type {
+	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
+	LoadingErrorLoadedComponent
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -31,11 +33,11 @@ import { buildLink, navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
-import { DefaultComponentProps } from '~shared/types/components';
+import type { DefaultComponentProps } from '~shared/types/components';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
 
-import { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
+import type { ContentPageLabel, ContentPageLabelEditFormErrorState } from '../content-page-label.types';
 
 type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 

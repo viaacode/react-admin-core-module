@@ -1,12 +1,14 @@
-import {
+import type {
 	ButtonAction,
 	DefaultProps,
-	Icon,
 	IconName,
-	RenderLinkFunction,
+	RenderLinkFunction} from '@viaa/avo2-components';
+import {
+	Icon
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockSpotlight.scss';

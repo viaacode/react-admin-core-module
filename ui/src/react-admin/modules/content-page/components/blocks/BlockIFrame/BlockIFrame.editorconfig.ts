@@ -1,10 +1,11 @@
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
-	IFrameBlockComponentState,
+	IFrameBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

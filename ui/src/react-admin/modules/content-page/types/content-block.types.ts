@@ -1,5 +1,5 @@
-import { RichEditorState } from '@meemoo/react-components';
-import {
+import type { RichEditorState } from '@meemoo/react-components';
+import type {
 	ButtonAction,
 	ButtonType,
 	CTAProps,
@@ -8,13 +8,13 @@ import {
 	SpacerOption,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { ReactNode } from 'react';
-import { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
-import {
+import type { ReactNode } from 'react';
+import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import type {
 	ContentItemStyle,
 	ContentTabStyle,
 } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 // OPTIONS
 export type AlignOption = 'left' | 'right' | 'center';

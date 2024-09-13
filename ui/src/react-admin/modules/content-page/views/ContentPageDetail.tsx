@@ -1,20 +1,22 @@
+import type {
+	IconName,
+	MenuItemInfo,
+	TabProps} from '@viaa/avo2-components';
 import {
 	Blankslate,
 	Button,
 	ButtonToolbar,
 	Container,
-	IconName,
 	LinkTarget,
-	MenuItemInfo,
 	Navbar,
-	TabProps,
 	Tabs,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { get, noop } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import React, { FC, ReactElement, ReactText, useCallback, useEffect, useState } from 'react';
+import type { FC, ReactElement, ReactText} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 
 import { AdminConfigManager } from '~core/config';
@@ -25,18 +27,20 @@ import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/conten
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
 import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type {
+	ContentPageInfo} from '~modules/content-page/types/content-pages.types';
 import {
-	ContentPageAction,
-	ContentPageInfo,
+	ContentPageAction
 } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import Link from '~shared/components/Link/Link';
+import type {
+	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
+	LoadingErrorLoadedComponent
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -47,7 +51,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
-import { DefaultComponentProps } from '~shared/types/components';
+import type { DefaultComponentProps } from '~shared/types/components';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;

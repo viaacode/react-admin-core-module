@@ -1,24 +1,26 @@
+import type {
+	RichEditorState} from '@meemoo/react-components';
 import {
 	Button,
 	Pagination,
-	RichEditorState,
 	RichTextEditor,
 	Table,
 	TextInput,
 } from '@meemoo/react-components';
 import { Pagination as PaginationAvo } from '@viaa/avo2-components';
 import { reverse, sortBy } from 'lodash-es';
-import React, {
+import type {
 	FunctionComponent,
 	ReactElement,
-	ReactNode,
+	ReactNode} from 'react';
+import React, {
 	useCallback,
 	useEffect,
 	useMemo,
 	useState,
 } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { type Row, type TableOptions } from 'react-table';
+import type { type Row, type TableOptions } from 'react-table';
 import { ToastType } from '~core/config/config.types';
 import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
 import {
@@ -26,7 +28,7 @@ import {
 	TRANSLATIONS_PER_PAGE,
 } from '~modules/translations/translations.const';
 import { Locale, ValueType } from '~modules/translations/translations.core.types';
-import {
+import type {
 	MultiLanguageTranslationEntry,
 	type TranslationsOverviewProps,
 } from '~modules/translations/translations.types';

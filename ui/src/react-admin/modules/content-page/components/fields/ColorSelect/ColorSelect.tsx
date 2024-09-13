@@ -1,13 +1,16 @@
 import { Flex, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent, ReactNode } from 'react';
-import Select, { Props } from 'react-select';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
+import type { Props } from 'react-select';
+import Select from 'react-select';
 
 import './ColorSelect.scss';
-import { ReactSelectOption } from '~modules/shared';
+import type { ReactSelectOption } from '~modules/shared';
+import type {
+	GradientColor} from '~modules/content-page/types/content-block.types';
 import {
-	ColorSelectGradientColors,
-	GradientColor,
+	ColorSelectGradientColors
 } from '~modules/content-page/types/content-block.types';
 
 export interface ColorOption {

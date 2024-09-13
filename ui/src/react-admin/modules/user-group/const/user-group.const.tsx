@@ -1,10 +1,10 @@
 import { Checkbox } from '@meemoo/react-components';
 import React from 'react';
-import { Column, UseSortByColumnOptions } from 'react-table';
-import { PermissionData } from '~modules/permissions/permissions.types';
-import { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import type { Column, UseSortByColumnOptions } from 'react-table';
+import type { PermissionData } from '~modules/permissions/permissions.types';
+import type { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
 import { tText } from '~shared/helpers/translation-functions';
-import { PermissionRow } from '../types/user-group.types';
+import type { PermissionRow } from '../types/user-group.types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { sortBy } from 'lodash-es';
 

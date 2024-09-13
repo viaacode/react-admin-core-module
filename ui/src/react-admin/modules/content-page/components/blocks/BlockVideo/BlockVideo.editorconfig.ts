@@ -1,14 +1,15 @@
-import { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
+import type { CheckboxProps, TextInputProps } from '@viaa/avo2-components';
 import { GET_MEDIA_PLAYER_WIDTH_OPTIONS } from '~modules/content-page/const/get-media-player-width-options';
 
 import { tText } from '~shared/helpers/translation-functions';
 import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
-	MediaPlayerBlockComponentState,
+	MediaPlayerBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { compact } from 'lodash-es';
 import { NavigationService } from '~modules/navigation/navigation.service';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { Locale } from '~modules/translations/translations.core.types';
 import { QUERY_KEYS } from '~shared/types';
 import { reindexNavigationItems } from '../helpers/reorder-navigation-items';
 

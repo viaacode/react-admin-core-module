@@ -1,4 +1,4 @@
-import { ButtonAction, ButtonType, HeadingType, IconName } from '@viaa/avo2-components';
+import type { ButtonAction, ButtonType, HeadingType, IconName } from '@viaa/avo2-components';
 
 export interface NewspaperTitle {
 	url: string;

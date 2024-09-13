@@ -1,7 +1,8 @@
 import { Button, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
-import { BlockImageGridProps, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockImageGridProps, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import './BlockImageGrid.scss';

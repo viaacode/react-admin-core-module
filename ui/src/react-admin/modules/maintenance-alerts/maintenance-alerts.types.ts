@@ -1,7 +1,7 @@
-import { DefaultProps } from '@viaa/avo2-components';
-import { ReactNode } from 'react';
-import { Locale } from '~modules/translations/translations.core.types';
-import { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { DefaultProps } from '@viaa/avo2-components';
+import type { ReactNode } from 'react';
+import type { Locale } from '~modules/translations/translations.core.types';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
 export interface MaintenanceAlert {
 	id: string;

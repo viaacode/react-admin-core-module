@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Route } from 'react-router';
 import { ALERTS_PATH } from '~modules/maintenance-alerts/maintenance-alerts.const';
 import { MaintenanceAlertsOverviewPage } from './MaintenanceAlertsOverviewPage';

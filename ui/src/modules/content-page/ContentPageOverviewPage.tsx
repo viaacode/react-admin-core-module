@@ -1,6 +1,6 @@
 import { Button, Flex } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { AdminConfigManager } from '~core/config';
 
 import ContentPageOverview from '~modules/content-page/views/ContentPageOverview';

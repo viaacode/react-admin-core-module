@@ -5,16 +5,18 @@ import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
-import { TOptions } from 'i18next';
+import type { TOptions } from 'i18next';
 import { capitalize, lowerCase } from 'lodash-es';
-import { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Link, useHistory } from 'react-router-dom';
-import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
-import { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
+import type { AdminConfig} from '../src/react-admin/core/config';
+import { AdminConfigManager } from '../src/react-admin/core/config';
+import type { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
 import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
+import type {
+	ContentPageInfo} from '../src/react-admin/modules/content-page/types/content-pages.types';
 import {
-	ContentPageInfo,
 	ContentWidth,
 } from '../src/react-admin/modules/content-page/types/content-pages.types';
 import Html from '../src/react-admin/modules/shared/components/Html/Html';

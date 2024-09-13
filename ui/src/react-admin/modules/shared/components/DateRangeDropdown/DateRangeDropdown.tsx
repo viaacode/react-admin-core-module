@@ -12,7 +12,8 @@ import {
 	TextInput,
 } from '@viaa/avo2-components';
 import { isValid } from 'date-fns';
-import React, { FC, MouseEvent, ReactText, useCallback, useEffect, useState } from 'react';
+import type { FC, MouseEvent, ReactText} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { format, parse, set } from 'date-fns';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { DateInput } from '~shared/components/DateInput/DateInput';

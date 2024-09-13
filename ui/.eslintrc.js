@@ -2,14 +2,10 @@ module.exports = {
 	parserOptions: {
 		tsconfigRootDir: __dirname,
 		sourceType: 'module',
-		rules: {
-			'import/no-unresolved': [
-				2,
-				{
-					ignore: ['@viaa', '@meemoo'],
-				},
-			],
-			quotes: ['error', 'single', { avoidEscape: true }],
-		},
+	},
+	rules: {
+		// Add type if only the typescript type or interface is imported
+		'@typescript-eslint/consistent-type-imports': ['error', {}],
+		quotes: ['error', 'single', { avoidEscape: true }],
 	},
 };

@@ -1,4 +1,4 @@
-import { ButtonProps } from './BlockButtons';
+import type { ButtonProps } from './BlockButtons';
 
 export const BUTTONS_MOCK: ButtonProps[] = [
 	{

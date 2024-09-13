@@ -1,5 +1,6 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { PermissionData } from '~modules/permissions/permissions.types';
+import type { UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { PermissionData } from '~modules/permissions/permissions.types';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { QUERY_KEYS } from '~shared/types';

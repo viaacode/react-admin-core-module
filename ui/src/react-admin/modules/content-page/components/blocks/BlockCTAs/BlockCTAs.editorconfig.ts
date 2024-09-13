@@ -1,4 +1,4 @@
-import { CTAProps } from '@viaa/avo2-components';
+import type { CTAProps } from '@viaa/avo2-components';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
@@ -8,11 +8,12 @@ import { isAvo } from '~shared/helpers/is-avo';
 
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
+	DefaultContentBlockState} from '../../../types/content-block.types';
+import {
 	ContentBlockEditor,
-	ContentBlockType,
-	DefaultContentBlockState,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

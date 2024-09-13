@@ -10,7 +10,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { showToast } from '~shared/helpers/show-toast';
 import { renderAdminRoutes } from './admin.routes';
 import { GET_NAV_ITEMS } from './app.const';
-import { NavigationItemInfo } from './shared/types';
+import type { NavigationItemInfo } from './shared/types';
 import { QueryParamProvider } from 'use-query-params';
 import { tText } from '~shared/helpers/translation-functions';
 import Sidebar from './shared/components/Sidebar/Sidebar';

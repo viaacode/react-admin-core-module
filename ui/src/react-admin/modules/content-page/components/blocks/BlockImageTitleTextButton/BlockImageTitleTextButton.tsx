@@ -1,15 +1,16 @@
+import type {
+	DefaultProps} from '@viaa/avo2-components';
 import {
 	Button,
 	Column,
 	Container,
 	convertToHtml,
-	DefaultProps,
 	Grid,
 	Image,
 	Spacer,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 
 import './BlockImageTitleTextButton.scss';
 

@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
+import type {
+	BasicOrganisation} from '~shared/services/organization-service/organisation-service';
 import {
-	BasicOrganisation,
 	OrganisationService,
 } from '~shared/services/organization-service/organisation-service';
 import { CustomError } from '../helpers/custom-error';

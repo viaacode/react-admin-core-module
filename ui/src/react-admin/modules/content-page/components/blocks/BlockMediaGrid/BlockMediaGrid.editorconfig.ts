@@ -1,23 +1,24 @@
-import { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type { Avo } from '@viaa/avo2-types';
-import { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
+import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import { isAvo } from '~shared/helpers/is-avo';
 
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	MediaGridBlockComponentState,
-	MediaGridBlockState,
+	MediaGridBlockState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType
 } from '../../../types/content-block.types';
 
 import {

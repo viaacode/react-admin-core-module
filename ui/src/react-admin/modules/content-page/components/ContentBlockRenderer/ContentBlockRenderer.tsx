@@ -2,11 +2,13 @@ import { Container, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { kebabCase, noop, omit } from 'lodash-es';
-import React, { FunctionComponent, RefObject, useCallback, useEffect, useRef } from 'react';
+import type { FunctionComponent, RefObject} from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
-import { Color, ContentBlockConfig, CustomBackground } from '../../types/content-block.types';
+import type { ContentBlockConfig} from '../../types/content-block.types';
+import { Color, CustomBackground } from '../../types/content-block.types';
 
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
@@ -19,7 +21,8 @@ import {
 
 import './ContentBlockRenderer.scss';
 import { AdminConfigManager } from '~core/config';
-import { ContentPageInfo, ContentWidth } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageInfo} from '~modules/content-page/types/content-pages.types';
+import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;

@@ -1,8 +1,9 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
-import React, { FunctionComponent, memo } from 'react';
+import type { FunctionComponent} from 'react';
+import React, { memo } from 'react';
 
 import { createKey } from '~shared/helpers/create-key';
-import {
+import type {
 	ContentBlockBlockConfig,
 	ContentBlockComponentsConfig,
 	ContentBlockComponentState,

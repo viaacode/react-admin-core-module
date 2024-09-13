@@ -5,14 +5,15 @@ import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
 import { tText } from '~shared/helpers/translation-functions';
 
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
 	ContentBlockFieldGroup,
-	ContentBlockType,
-	DEFAULT_BUTTON_PROPS,
 	DefaultContentBlockState,
-	RichTextBlockComponentState,
+	RichTextBlockComponentState} from '../../../types/content-block.types';
+import {
+	ContentBlockEditor,
+	ContentBlockType,
+	DEFAULT_BUTTON_PROPS
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

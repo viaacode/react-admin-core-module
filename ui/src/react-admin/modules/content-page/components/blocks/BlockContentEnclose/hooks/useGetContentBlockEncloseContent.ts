@@ -1,9 +1,9 @@
 import { useQueries } from '@tanstack/react-query';
-import { type Avo } from '@viaa/avo2-types';
+import type { type Avo } from '@viaa/avo2-types';
 import { compact, kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import { MappedElement } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
-import {
+import type { MappedElement } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.types';
+import type {
 	ContentPage,
 	GetContentBlockEncloseContentReturnType,
 	IeObject,

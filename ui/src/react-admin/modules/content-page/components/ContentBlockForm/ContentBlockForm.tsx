@@ -1,3 +1,5 @@
+import type {
+	IconName} from '@viaa/avo2-components';
 import {
 	Accordion,
 	AccordionActions,
@@ -9,7 +11,6 @@ import {
 	Flex,
 	FlexItem,
 	Form,
-	IconName,
 	Spacer,
 	Toolbar,
 	ToolbarLeft,
@@ -17,13 +18,14 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isNil } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { findImageInJson } from '~shared/helpers/find-image-in-json';
 import { showToast } from '~shared/helpers/show-toast';
 
 import { validateContentBlockField } from '~shared/helpers/validation';
-import {
+import type {
 	ContentBlockBlockConfig,
 	ContentBlockComponentsConfig,
 	ContentBlockComponentState,

@@ -1,4 +1,4 @@
-import {
+import type {
 	Component,
 	Key,
 	Locale,
@@ -9,7 +9,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { LanguageInfo } from '~modules/translations/translations.types';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 
 export class TranslationsService {
 	private static getBaseUrl(): string {

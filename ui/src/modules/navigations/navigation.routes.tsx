@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config';
 import NavigationOverviewPage from './NavigationOverviewPage';

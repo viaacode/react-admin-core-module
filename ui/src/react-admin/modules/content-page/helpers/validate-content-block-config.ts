@@ -1,5 +1,5 @@
 import { has, isFunction } from 'lodash-es';
-import {
+import type {
 	ContentBlockComponentState,
 	ContentBlockErrors,
 	ContentBlockField,

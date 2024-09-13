@@ -1,6 +1,6 @@
-import { NavigationItem } from '~modules/navigation/navigation.types';
-import { TableColumn } from '@viaa/avo2-components';
-import { ReactNode } from 'react';
+import type { NavigationItem } from '~modules/navigation/navigation.types';
+import type { TableColumn } from '@viaa/avo2-components';
+import type { ReactNode } from 'react';
 import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [

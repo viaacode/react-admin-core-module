@@ -1,10 +1,11 @@
-import { AlignOptions, ButtonAction } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { AlignOptions, ButtonAction } from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { formatLookup } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
-import { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
-import { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
+import type { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
 
 export interface BlockLogoGridWrapperProps {
 	elements: GridItem[];

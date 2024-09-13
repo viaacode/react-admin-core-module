@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { BlockHero, BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import { BlockHero } from '~content-blocks/BlockHero/BlockHero';
 import { AdminConfigManager } from '~core/config';
 
 export const HeroWrapper: FunctionComponent<BlockHeroProps> = (props) => {

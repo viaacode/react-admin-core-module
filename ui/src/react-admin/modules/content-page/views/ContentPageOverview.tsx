@@ -1,28 +1,30 @@
 import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
+import type {
+	IconName,
+	TagOption} from '@viaa/avo2-components';
 import {
 	Button as AvoButton,
 	Button,
-	IconName,
 	LinkTarget,
 	Modal,
 	ModalBody,
 	Spacer,
-	TagList,
-	TagOption,
+	TagList
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, get, partition, set } from 'lodash-es';
-import React, {
+import type {
 	FunctionComponent,
-	ReactNode,
+	ReactNode} from 'react';
+import React, {
 	useCallback,
 	useEffect,
 	useMemo,
 	useState,
 } from 'react';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -32,17 +34,18 @@ import { isPublic } from '~modules/content-page/helpers';
 import { useGetContentPages } from '~modules/content-page/hooks/get-content-pages';
 import { useGetLanguageFilterOptions } from '~modules/content-page/hooks/useGetLanguageFilterOptions';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { Locale } from '~modules/translations/translations.core.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
-import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import type { UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 import Icon from '~shared/components/Icon/Icon';
 import Link from '~shared/components/Link/Link';
+import type {
+	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
+	LoadingErrorLoadedComponent
 } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import {
@@ -63,17 +66,19 @@ import './ContentPageOverview.scss';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { PermissionService } from '~shared/services/permission-service';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import type {
+	FilterableColumn} from '../../shared/components/FilterTable/FilterTable';
 import FilterTable, {
-	FilterableColumn,
 	getFilters,
 } from '../../shared/components/FilterTable/FilterTable';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
-import {
+import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
-	ContentTableState,
+	ContentTableState} from '../types/content-pages.types';
+import {
 	NOT_TRANSLATION_PREFIX,
 } from '../types/content-pages.types';
 

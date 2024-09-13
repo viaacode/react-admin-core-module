@@ -1,5 +1,5 @@
-import { SelectOption } from '@viaa/avo2-components';
-import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type { SelectOption } from '@viaa/avo2-components';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [

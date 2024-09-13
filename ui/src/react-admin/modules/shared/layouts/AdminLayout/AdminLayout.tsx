@@ -9,7 +9,7 @@ import {
 	AdminFiltersLeft,
 	AdminFiltersRight,
 } from './AdminLayout.slots';
-import { AdminLayoutComponent } from './AdminLayout.types';
+import type { AdminLayoutComponent } from './AdminLayout.types';
 
 const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, className }) => {
 	const actions = useSlot(AdminActions, children);

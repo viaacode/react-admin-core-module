@@ -1,5 +1,7 @@
-import { Container, convertToHtml, DefaultProps, Image, Spacer } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { DefaultProps} from '@viaa/avo2-components';
+import { Container, convertToHtml, Image, Spacer } from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 export interface BlockTitleImageTextProps extends DefaultProps {
 	title?: string;

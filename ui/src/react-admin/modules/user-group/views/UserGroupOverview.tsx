@@ -1,6 +1,7 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
+import type {
+	ChangeEvent} from 'react';
 import React, {
-	ChangeEvent,
 	forwardRef,
 	useCallback,
 	useEffect,
@@ -9,8 +10,8 @@ import React, {
 	useState,
 } from 'react';
 import { cloneDeep, remove, sortBy } from 'lodash-es';
-import { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
-import { PermissionData } from '~modules/permissions/permissions.types';
+import type { Column, TableOptions, UseSortByColumnOptions } from 'react-table';
+import type { PermissionData } from '~modules/permissions/permissions.types';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { showToast } from '~shared/helpers/show-toast';
@@ -22,7 +23,7 @@ import { ToastType } from '~core/config/config.types';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { useUpdateUserGroups } from '~modules/user-group/hooks/update-user-groups';
 import { getUserGroupTableColumns } from '../const/user-group.const';
-import {
+import type {
 	UserGroupOverviewProps,
 	UserGroupOverviewRef,
 	UserGroupUpdate,
