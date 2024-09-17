@@ -1,16 +1,14 @@
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { isNil } from 'lodash-es';
-import type { FunctionComponent, ReactNode} from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useState } from 'react';
 
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import type {
-	DraggableItemData,
-} from '~modules/content-page/components/DraggableList/DraggableList';
+import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList';
 import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
@@ -23,10 +21,9 @@ import type {
 } from '~modules/content-page/types/content-block.types';
 import type {
 	BlockClickHandler,
-	ContentPageInfo} from '~modules/content-page/types/content-pages.types';
-import {
-	ContentEditActionType
+	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
 import { Sidebar } from '~shared/components/Sidebar/Sidebar';
 import { createKey } from '~shared/helpers/create-key';
 import { tText } from '~shared/helpers/translation-functions';

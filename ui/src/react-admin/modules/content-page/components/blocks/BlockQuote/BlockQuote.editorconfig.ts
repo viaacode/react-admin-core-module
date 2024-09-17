@@ -3,11 +3,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	QuoteBlockComponentState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	QuoteBlockComponentState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 

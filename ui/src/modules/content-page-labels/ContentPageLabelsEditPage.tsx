@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { RouteComponentProps} from 'react-router';
+import type { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router';
 import ContentPageLabelEdit from '~modules/content-page-labels/views/ContentPageLabelEdit';
 

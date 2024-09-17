@@ -1,4 +1,4 @@
-import type { DefaultProps} from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import { Container, convertToHtml, Image, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';

@@ -1,7 +1,7 @@
 import type { AlignOptions, ButtonProps, DefaultProps, IconName } from '@viaa/avo2-components';
 import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
 
 import './BlockEventbrite.scss';

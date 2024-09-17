@@ -9,11 +9,12 @@ import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,
 	DefaultContentBlockState,
-	RichTextBlockComponentState} from '../../../types/content-block.types';
+	RichTextBlockComponentState,
+} from '../../../types/content-block.types';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS
+	DEFAULT_BUTTON_PROPS,
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

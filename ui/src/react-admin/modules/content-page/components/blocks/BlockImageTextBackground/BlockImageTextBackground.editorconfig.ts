@@ -11,12 +11,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	ImageTextBackgroundBlockComponentState} from '../../../types/content-block.types';
-import {
-	Color,
-	ContentBlockEditor,
-	ContentBlockType
+	ImageTextBackgroundBlockComponentState,
 } from '../../../types/content-block.types';
+import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BACKGROUND_COLOR_FIELD,

@@ -1,6 +1,4 @@
-import type {
-	type MultiSelectOption,
-	SelectOption} from '@meemoo/react-components';
+import type { MultiSelectOption, SelectOption } from '@meemoo/react-components';
 import {
 	FormControl,
 	MultiSelect,
@@ -11,7 +9,7 @@ import {
 import { format } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { without } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ValidationError } from 'yup';
 import { ToastType } from '~core/config';

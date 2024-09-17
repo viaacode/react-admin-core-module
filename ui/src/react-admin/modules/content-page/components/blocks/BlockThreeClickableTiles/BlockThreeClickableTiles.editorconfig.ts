@@ -2,11 +2,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	ThreeClickableTilesBlockComponentState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	ThreeClickableTilesBlockComponentState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';

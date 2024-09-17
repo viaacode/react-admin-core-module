@@ -1,13 +1,5 @@
-import type {
-	AlignOptions,
-	ButtonAction,
-	ButtonType,
-	DefaultProps} from '@viaa/avo2-components';
-import {
-	Button,
-	Container,
-	Image,
-} from '@viaa/avo2-components';
+import type { AlignOptions, ButtonAction, ButtonType, DefaultProps } from '@viaa/avo2-components';
+import { Button, Container, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { CSSProperties, FunctionComponent } from 'react';
 import React from 'react';

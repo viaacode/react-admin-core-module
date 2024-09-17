@@ -1,4 +1,4 @@
-import type { type Avo} from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { ContentPickerType } from '@viaa/avo2-types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';

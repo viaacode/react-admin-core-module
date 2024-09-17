@@ -10,12 +10,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	CardWithoutDescriptionBlockComponentState,
 	ContentBlockConfig,
-	DefaultContentBlockState} from '../../../types/content-block.types';
-import {
-	Color,
-	ContentBlockEditor,
-	ContentBlockType
+	DefaultContentBlockState,
 } from '../../../types/content-block.types';
+import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BACKGROUND_COLOR_FIELD,

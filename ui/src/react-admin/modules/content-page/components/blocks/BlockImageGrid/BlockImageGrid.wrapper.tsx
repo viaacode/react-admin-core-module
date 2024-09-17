@@ -6,7 +6,10 @@ import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
 import type { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
-import type { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
+import type {
+	BlockGridFormatOption,
+	FillOption,
+} from '~modules/content-page/types/content-block.types';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

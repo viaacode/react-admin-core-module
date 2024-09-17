@@ -18,11 +18,9 @@ import type {
 	CustomBackground,
 	DefaultContentBlockState,
 	GradientColor,
-	PaddingFieldState} from '../../types/content-block.types';
-import {
-	Color,
-	ContentBlockEditor
+	PaddingFieldState,
 } from '../../types/content-block.types';
+import { Color, ContentBlockEditor } from '../../types/content-block.types';
 
 // Block config defaults
 export const BLOCK_STATE_DEFAULTS = (

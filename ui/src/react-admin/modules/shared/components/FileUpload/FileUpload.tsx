@@ -1,9 +1,9 @@
-import type { IconName} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import { Blankslate, Button, Flex, FlexItem, Icon, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { compact, isString } from 'lodash-es';
 import { parse } from 'query-string';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { showToast } from '~shared/helpers/show-toast';
 import { AssetsService } from '~shared/services/assets-service/assets.service';

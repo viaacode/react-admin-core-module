@@ -3,11 +3,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	HeadingBlockComponentState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	HeadingBlockComponentState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	ALIGN_FIELD,

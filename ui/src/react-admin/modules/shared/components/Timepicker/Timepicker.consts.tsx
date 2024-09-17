@@ -1,6 +1,6 @@
 import { TextInput } from '@meemoo/react-components';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import type { type ReactDatePickerProps } from 'react-datepicker';
+import type { ReactDatePickerProps } from 'react-datepicker';
 import { Icon } from '~shared/components';
 
 export const timePickerDefaults: Partial<ReactDatePickerProps> = {

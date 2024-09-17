@@ -1,5 +1,4 @@
-import type {
-	IconName} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
 	Dropdown,
@@ -13,7 +12,7 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
-import type { FunctionComponent, ReactText} from 'react';
+import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 import { showToast } from '~shared/helpers/show-toast';
 

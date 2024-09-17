@@ -5,11 +5,9 @@ import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	DefaultContentBlockState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 

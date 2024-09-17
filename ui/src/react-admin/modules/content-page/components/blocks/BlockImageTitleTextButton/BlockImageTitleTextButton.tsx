@@ -1,5 +1,4 @@
-import type {
-	DefaultProps} from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import {
 	Button,
 	Column,

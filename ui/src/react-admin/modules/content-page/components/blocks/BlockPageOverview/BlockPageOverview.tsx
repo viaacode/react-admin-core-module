@@ -1,7 +1,4 @@
-import type {
-	ButtonAction,
-	DefaultProps,
-	RenderLinkFunction} from '@viaa/avo2-components';
+import type { ButtonAction, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import {
 	Accordion,
 	AspectRatioWrapper,

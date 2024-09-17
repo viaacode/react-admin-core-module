@@ -5,7 +5,10 @@ import type { TagInfo } from '@viaa/avo2-components';
 
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import type { UserGroup, UserGroupWithPermissions } from '~modules/user-group/types/user-group.types';
+import type {
+	UserGroup,
+	UserGroupWithPermissions,
+} from '~modules/user-group/types/user-group.types';
 import { GET_SPECIAL_USER_GROUPS, preferredUserGroupOrder } from '../const/user-group.const';
 import { sortBy } from 'lodash-es';
 

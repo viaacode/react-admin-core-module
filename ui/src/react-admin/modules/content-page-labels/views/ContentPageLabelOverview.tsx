@@ -1,7 +1,7 @@
 import { Button } from '@meemoo/react-components';
 import { ButtonToolbar } from '@viaa/avo2-components';
 import { get, isNil } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { AdminConfigManager, ToastType } from '~core/config';
@@ -23,11 +23,8 @@ import type {
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
-import type {
-	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import {
-	LoadingErrorLoadedComponent
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import SmartLink from '~shared/components/SmartLink/SmartLink';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import {
@@ -45,11 +42,8 @@ import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
-import type {
-	FilterableColumn} from '../../shared/components/FilterTable/FilterTable';
-import FilterTable, {
-	getFilters,
-} from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,

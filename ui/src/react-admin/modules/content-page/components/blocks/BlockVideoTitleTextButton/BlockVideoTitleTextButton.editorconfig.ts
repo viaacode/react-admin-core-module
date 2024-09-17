@@ -7,11 +7,9 @@ import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	MediaPlayerTitleTextButtonBlockComponentState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	MediaPlayerTitleTextButtonBlockComponentState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	ALIGN_FIELD,

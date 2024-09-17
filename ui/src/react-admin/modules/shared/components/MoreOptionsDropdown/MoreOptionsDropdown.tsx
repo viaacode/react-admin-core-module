@@ -3,15 +3,13 @@ import React from 'react';
 
 import { tText } from '~shared/helpers/translation-functions';
 
-import type {
-	IconName,
-	MenuItemInfo} from '@viaa/avo2-components';
+import type { IconName, MenuItemInfo } from '@viaa/avo2-components';
 import {
 	Button,
 	Dropdown,
 	DropdownButton,
 	DropdownContent,
-	MenuContent
+	MenuContent,
 } from '@viaa/avo2-components';
 
 export interface MoreOptionsDropdownProps {

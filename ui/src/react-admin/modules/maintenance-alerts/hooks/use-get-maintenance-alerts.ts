@@ -4,7 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import type { MaintenanceAlertsOverviewTableState } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { QUERY_KEYS } from '~modules/shared';
 import { MaintenanceAlertsService } from '../maintenance-alerts.service';
-import type { MaintenanceAlert, MaintenanceAlertsOverviewTableCol } from '../maintenance-alerts.types';
+import type {
+	MaintenanceAlert,
+	MaintenanceAlertsOverviewTableCol,
+} from '../maintenance-alerts.types';
 
 export const useGetMaintenanceAlerts = (
 	getMaintenanceAlertsArguments: Partial<MaintenanceAlertsOverviewTableState>

@@ -1,18 +1,9 @@
-import type {
-	IconName,
-	TabProps} from '@viaa/avo2-components';
-import {
-	Button,
-	ButtonToolbar,
-	Container,
-	Navbar,
-	Spacer,
-	Tabs,
-} from '@viaa/avo2-components';
+import type { IconName, TabProps } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { isNil, without } from 'lodash-es';
-import type { FC, Reducer} from 'react';
+import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
@@ -29,10 +20,11 @@ import {
 } from '~modules/content-page/const/content-page.consts';
 import type {
 	ContentEditAction,
-	ContentPageEditState} from '~modules/content-page/helpers/content-edit.reducer';
+	ContentPageEditState,
+} from '~modules/content-page/helpers/content-edit.reducer';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
-	contentEditReducer
+	contentEditReducer,
 } from '~modules/content-page/helpers/content-edit.reducer';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
@@ -50,22 +42,17 @@ import type {
 import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
-	ContentPageUser} from '~modules/content-page/types/content-pages.types';
-import {
-	ContentEditActionType,
-	PageType,
+	ContentPageUser,
 } from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 
 import Link from '~shared/components/Link/Link';
-import type {
-	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import {
-	LoadingErrorLoadedComponent
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { getProfileId } from '~shared/helpers/get-profile-id';

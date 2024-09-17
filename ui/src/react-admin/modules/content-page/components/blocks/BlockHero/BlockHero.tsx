@@ -4,13 +4,9 @@ import type {
 	ButtonProps,
 	DefaultProps,
 	IconName,
-	RenderLinkFunction} from '@viaa/avo2-components';
-import {
-	Button,
-	ButtonToolbar,
-	Container,
-	Spacer,
+	RenderLinkFunction,
 } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isString } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';

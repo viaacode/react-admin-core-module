@@ -1,6 +1,6 @@
 import type { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import type { Schema} from 'yup';
+import type { Schema } from 'yup';
 import { array, mixed, object, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
 import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';

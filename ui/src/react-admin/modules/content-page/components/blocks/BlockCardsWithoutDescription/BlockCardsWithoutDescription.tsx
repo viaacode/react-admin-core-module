@@ -1,4 +1,4 @@
-import type { ButtonAction} from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';

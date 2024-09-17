@@ -4,10 +4,11 @@ import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-headin
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	ImageTitleTextButtonBlockComponentState} from '~modules/content-page/types/content-block.types';
+	ImageTitleTextButtonBlockComponentState,
+} from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
-	ContentBlockType
+	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';

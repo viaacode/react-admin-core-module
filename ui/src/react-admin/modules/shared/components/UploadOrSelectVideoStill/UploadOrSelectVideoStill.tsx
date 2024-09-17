@@ -10,7 +10,7 @@ import {
 import type { ContentPickerType } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { compact, noop, uniq } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { Loader } from '~shared/components';
 import FileUpload from '~shared/components/FileUpload/FileUpload';

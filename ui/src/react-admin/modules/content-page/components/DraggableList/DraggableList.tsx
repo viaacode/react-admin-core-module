@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { findIndex } from 'lodash-es';
-import type { FunctionComponent, ReactNode} from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import type { DraggableItem } from './DraggableList.types';
 

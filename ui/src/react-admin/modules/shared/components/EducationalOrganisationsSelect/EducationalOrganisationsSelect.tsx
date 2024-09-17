@@ -2,7 +2,7 @@ import { Alert, Select, Spacer } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { pullAllBy, remove, uniq } from 'lodash-es';
-import type { FunctionComponent, ReactText} from 'react';
+import type { FunctionComponent, ReactText } from 'react';
 import React, { useEffect, useState } from 'react';
 
 import { AdminConfigManager, ToastType } from '~core/config';

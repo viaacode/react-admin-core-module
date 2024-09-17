@@ -1,7 +1,5 @@
 import type { RichEditorState } from '@meemoo/react-components';
-import type {
-	SelectOption,
-	TagInfo} from '@viaa/avo2-components';
+import type { SelectOption, TagInfo } from '@viaa/avo2-components';
 import {
 	Checkbox,
 	Column,
@@ -14,10 +12,10 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import type { type Avo} from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { compact, noop } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types';
@@ -33,10 +31,9 @@ import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageLabel,
-	ContentWidth} from '~modules/content-page/types/content-pages.types';
-import {
-	ContentEditActionType
+	ContentWidth,
 } from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import type { LanguageInfo } from '~modules/translations/translations.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';

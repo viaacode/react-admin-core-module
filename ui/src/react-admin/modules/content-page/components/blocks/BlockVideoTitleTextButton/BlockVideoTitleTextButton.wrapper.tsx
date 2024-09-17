@@ -1,4 +1,4 @@
-import type { ButtonAction, ButtonType} from '@viaa/avo2-components';
+import type { ButtonAction, ButtonType } from '@viaa/avo2-components';
 import { Button, Column, Grid } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';

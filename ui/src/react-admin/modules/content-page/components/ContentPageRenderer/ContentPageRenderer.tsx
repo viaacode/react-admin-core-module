@@ -13,7 +13,7 @@ import type {
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import type { ContentBlockConfig} from '../../types/content-block.types';
+import type { ContentBlockConfig } from '../../types/content-block.types';
 import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 import './ContentPageRenderer.scss';

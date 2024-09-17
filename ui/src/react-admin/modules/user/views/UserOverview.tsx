@@ -4,7 +4,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { LomSchemeType } from '@viaa/avo2-types';
 import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
-import type { FC, ReactText} from 'react';
+import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import reactToString from 'react-to-string';
@@ -22,9 +22,7 @@ import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 import { UserService } from '~modules/user/user.service';
-import type {
-	AddOrRemove,
-} from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { ErrorView } from '~shared/components/error';
@@ -49,20 +47,11 @@ import { useSubjects } from '~shared/hooks/useSubjects';
 
 import { SettingsService } from '~shared/services/settings-service/settings.service';
 
-import type {
-	FilterableColumn} from '../../shared/components/FilterTable/FilterTable';
-import FilterTable, {
-	getFilters,
-} from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
-import type {
-	Idp,
-	UserBulkAction,
-	UserOverviewTableCol,
-	UserTableState} from '../user.types';
-import {
-	USERS_PER_PAGE
-} from '../user.types';
+import type { Idp, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
+import { USERS_PER_PAGE } from '../user.types';
 
 import './UserOverview.scss';
 

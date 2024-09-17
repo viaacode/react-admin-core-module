@@ -2,10 +2,9 @@ import type {
 	ButtonAction,
 	DefaultProps,
 	IconName,
-	RenderLinkFunction} from '@viaa/avo2-components';
-import {
-	Icon
+	RenderLinkFunction,
 } from '@viaa/avo2-components';
+import { Icon } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';

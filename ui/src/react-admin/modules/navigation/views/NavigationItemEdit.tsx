@@ -1,7 +1,7 @@
 import type { TagInfo } from '@viaa/avo2-components';
 import { Badge, Button, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-components';
 import { compact, get, isNil, startCase, uniq, uniqBy, without } from 'lodash-es';
-import type { FC, ReactNode} from 'react';
+import type { FC, ReactNode } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -26,12 +26,8 @@ import type { PickerItem } from '~shared/types/content-picker';
 import { NavigationEditForm } from '../components';
 import { GET_PAGE_TYPES_LANG } from '../navigation.consts';
 import { NavigationService } from '../navigation.service';
-import type {
-	NavigationEditFormErrorState,
-	NavigationItem} from '../navigation.types';
-import {
-	NavigationEditPageType
-} from '../navigation.types';
+import type { NavigationEditFormErrorState, NavigationItem } from '../navigation.types';
+import { NavigationEditPageType } from '../navigation.types';
 
 interface NavigationEditProps {
 	navigationBarId: string;

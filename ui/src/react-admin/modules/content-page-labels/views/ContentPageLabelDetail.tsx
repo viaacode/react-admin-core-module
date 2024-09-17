@@ -1,5 +1,5 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
@@ -8,11 +8,8 @@ import type { DefaultComponentProps } from '~modules/shared/types';
 import { Icon } from '~shared/components';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
-import type {
-	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import {
-	LoadingErrorLoadedComponent
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigateToContentType } from '~shared/helpers/link';

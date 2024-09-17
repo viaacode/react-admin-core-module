@@ -1,5 +1,4 @@
-import type {
-	ButtonType} from '@viaa/avo2-components';
+import type { ButtonType } from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,

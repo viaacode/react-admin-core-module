@@ -4,7 +4,10 @@ import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { getPublishedDate } from '~modules/content-page/helpers';
 
-import type { ContentPageInfo, ContentPageLabel } from '~modules/content-page/types/content-pages.types';
+import type {
+	ContentPageInfo,
+	ContentPageLabel,
+} from '~modules/content-page/types/content-pages.types';
 import { normalizeTimestamp } from '~shared/helpers/formatters/date';
 import { navigateToContentType } from '~shared/helpers/link';
 import { tHtml } from '~shared/helpers/translation-functions';

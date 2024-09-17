@@ -3,11 +3,12 @@ import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS } from '~content-blocks/defa
 import { GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '~modules/content-page/types/content-block.types';
+	DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS
+	DEFAULT_BUTTON_PROPS,
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
 

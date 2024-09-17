@@ -2,7 +2,7 @@ import { startCase } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import type { IconName} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Table } from '@viaa/avo2-components';
 import { useGetNavigationBars } from '~modules/navigation/hooks/use-get-navigation-bars';
 

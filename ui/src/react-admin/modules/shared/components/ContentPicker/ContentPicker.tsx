@@ -1,16 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
-import type {
-	IconName} from '@viaa/avo2-components';
-import {
-	Button,
-	Flex,
-	FlexItem,
-	FormGroup,
-	LinkTarget,
-	TextInput,
-} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
+import { Button, Flex, FlexItem, FormGroup, LinkTarget, TextInput } from '@viaa/avo2-components';
 import { isNull, noop } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import type { ActionMeta, SingleValue } from 'react-select';
 import ReactSelect from 'react-select';

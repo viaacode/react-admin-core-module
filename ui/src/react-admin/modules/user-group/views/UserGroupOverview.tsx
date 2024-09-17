@@ -1,6 +1,5 @@
 import { keysEnter, onKey, Table, TextInput } from '@meemoo/react-components';
-import type {
-	ChangeEvent} from 'react';
+import type { ChangeEvent } from 'react';
 import React, {
 	forwardRef,
 	useCallback,

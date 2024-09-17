@@ -2,7 +2,7 @@ import type { IconName } from '@viaa/avo2-components';
 import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { compact } from 'lodash-es';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import React, { useMemo } from 'react';
 import { GET_TYPE_TO_ICON_MAP } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.const';
 import type {

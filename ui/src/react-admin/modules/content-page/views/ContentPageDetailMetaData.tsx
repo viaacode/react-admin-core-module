@@ -1,13 +1,5 @@
-import type {
-	TagInfo,
-	TagOption} from '@viaa/avo2-components';
-import {
-	Container,
-	Spacer,
-	Table,
-	TagList,
-	Thumbnail,
-} from '@viaa/avo2-components';
+import type { TagInfo, TagOption } from '@viaa/avo2-components';
+import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
 import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact, get } from 'lodash-es';
 import type { FunctionComponent } from 'react';

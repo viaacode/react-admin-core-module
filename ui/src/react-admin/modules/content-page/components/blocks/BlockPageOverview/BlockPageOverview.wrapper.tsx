@@ -1,22 +1,16 @@
 import type { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { cloneDeep, compact, isNil, isNumber, isString, sortBy } from 'lodash-es';
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import { useEffect } from 'react';
-import type { QueryParamConfig} from 'use-query-params';
+import type { QueryParamConfig } from 'use-query-params';
 import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
-import type {
-	LabelObj} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import {
-	ContentItemStyle
-} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import { ContentItemStyle } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
-import type {
-	PageOverviewWrapperProps} from '~modules/content-page/components/blocks';
-import {
-	BlockPageOverview
-} from '~modules/content-page/components/blocks';
+import type { PageOverviewWrapperProps } from '~modules/content-page/components/blocks';
+import { BlockPageOverview } from '~modules/content-page/components/blocks';
 import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 import { useGetContentPageByLanguageAndPath } from '~modules/content-page/hooks/use-get-content-page-by-language-and-path';
 import { useGetContentPageLabelsByTypeAndIds } from '~modules/content-page/hooks/use-get-content-page-labels-by-type-and-ids';

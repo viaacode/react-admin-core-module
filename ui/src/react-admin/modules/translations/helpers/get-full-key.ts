@@ -1,11 +1,5 @@
-import type {
-	Component,
-	Key,
-	Location,
-	TranslationEntry} from '../translations.core.types';
-import {
-	TRANSLATION_SEPARATOR
-} from '../translations.core.types';
+import type { Component, Key, Location, TranslationEntry } from '../translations.core.types';
+import { TRANSLATION_SEPARATOR } from '../translations.core.types';
 import type { MultiLanguageTranslationEntry } from '../translations.types';
 
 export function getFullKey(

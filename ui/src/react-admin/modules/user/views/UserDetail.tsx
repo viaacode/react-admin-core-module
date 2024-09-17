@@ -1,6 +1,4 @@
-import type {
-	IconName,
-	MenuItemInfo} from '@viaa/avo2-components';
+import type { IconName, MenuItemInfo } from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
@@ -15,7 +13,7 @@ import { LomSchemeType, PermissionName } from '@viaa/avo2-types';
 import { differenceInMilliseconds, formatDuration, intervalToDuration, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { compact } from 'lodash-es';
-import type { FC, ReactText} from 'react';
+import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { Link } from '~modules/shared/components/Link';

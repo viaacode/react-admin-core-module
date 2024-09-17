@@ -1,7 +1,5 @@
 import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
-import type {
-	IconName,
-	TagOption} from '@viaa/avo2-components';
+import type { IconName, TagOption } from '@viaa/avo2-components';
 import {
 	Button as AvoButton,
 	Button,
@@ -9,21 +7,14 @@ import {
 	Modal,
 	ModalBody,
 	Spacer,
-	TagList
+	TagList,
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, get, partition, set } from 'lodash-es';
-import type {
-	FunctionComponent,
-	ReactNode} from 'react';
-import React, {
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
@@ -42,11 +33,8 @@ import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 import Icon from '~shared/components/Icon/Icon';
 import Link from '~shared/components/Link/Link';
-import type {
-	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import {
-	LoadingErrorLoadedComponent
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import {
 	getBooleanFilters,
@@ -66,21 +54,17 @@ import './ContentPageOverview.scss';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { PermissionService } from '~shared/services/permission-service';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import type {
-	FilterableColumn} from '../../shared/components/FilterTable/FilterTable';
-import FilterTable, {
-	getFilters,
-} from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { useContentTypes } from '../hooks/useContentTypes';
 import { ContentPageService } from '../services/content-page.service';
 import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
-	ContentTableState} from '../types/content-pages.types';
-import {
-	NOT_TRANSLATION_PREFIX,
+	ContentTableState,
 } from '../types/content-pages.types';
+import { NOT_TRANSLATION_PREFIX } from '../types/content-pages.types';
 
 const { EDIT_ANY_CONTENT_PAGES, DELETE_ANY_CONTENT_PAGES, EDIT_PROTECTED_PAGE_STATUS } =
 	PermissionName;

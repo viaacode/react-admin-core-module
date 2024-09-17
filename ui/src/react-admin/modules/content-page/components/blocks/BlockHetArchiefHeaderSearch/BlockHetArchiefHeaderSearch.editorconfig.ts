@@ -3,11 +3,12 @@ import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,
 	DefaultContentBlockState,
-	HetArchiefHeaderSearchBlockComponentState} from '../../../types/content-block.types';
+	HetArchiefHeaderSearchBlockComponentState,
+} from '../../../types/content-block.types';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS
+	DEFAULT_BUTTON_PROPS,
 } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';

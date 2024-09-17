@@ -6,11 +6,9 @@ import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	MediaPlayerBlockComponentState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	MediaPlayerBlockComponentState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BLOCK_FIELD_DEFAULTS,

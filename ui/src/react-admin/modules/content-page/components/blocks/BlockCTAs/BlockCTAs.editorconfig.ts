@@ -10,11 +10,9 @@ import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	DefaultContentBlockState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BACKGROUND_COLOR_FIELD,

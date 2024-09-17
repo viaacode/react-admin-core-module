@@ -6,11 +6,9 @@ import { tText } from '~shared/helpers/translation-functions';
 
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	DefaultContentBlockState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '../defaults';
 

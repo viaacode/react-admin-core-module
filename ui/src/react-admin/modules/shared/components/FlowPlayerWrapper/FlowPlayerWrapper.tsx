@@ -1,4 +1,4 @@
-import type { FC, ReactNode} from 'react';
+import type { FC, ReactNode } from 'react';
 import { useMemo } from 'react';
 import type { Avo } from '@viaa/avo2-types';
 import { AdminConfigManager } from '~core/config';

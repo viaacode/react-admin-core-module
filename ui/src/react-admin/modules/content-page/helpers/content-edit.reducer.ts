@@ -1,6 +1,6 @@
 import type { RichEditorState } from '@meemoo/react-components';
 import type { Avo } from '@viaa/avo2-types';
-import type { Draft} from 'immer';
+import type { Draft } from 'immer';
 import { produce } from 'immer';
 import { cloneDeep, isNil } from 'lodash-es';
 import type { Reducer } from 'react';
@@ -17,7 +17,7 @@ import type {
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
-import type { ContentPageInfo} from '../types/content-pages.types';
+import type { ContentPageInfo } from '../types/content-pages.types';
 import { ContentEditActionType, ContentWidth } from '../types/content-pages.types';
 
 interface SetContentPage {

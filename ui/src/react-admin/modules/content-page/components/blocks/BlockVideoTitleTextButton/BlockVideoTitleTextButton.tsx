@@ -1,7 +1,6 @@
 import type { FlowPlayerProps } from '@meemoo/react-components';
 import { FlowPlayer } from '@meemoo/react-components';
-import type {
-	DefaultProps} from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import {
 	Column,
 	Container,

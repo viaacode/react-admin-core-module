@@ -1,10 +1,10 @@
 import './NavigationBarOverview.scss';
 
-import type { IconName} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import { Button, ButtonGroup, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-components';
 
 import { cloneDeep, isNil, startCase } from 'lodash-es';
-import type { FC, ReactElement, ReactNode} from 'react';
+import type { FC, ReactElement, ReactNode } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';

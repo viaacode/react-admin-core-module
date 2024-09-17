@@ -1,9 +1,10 @@
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '~modules/content-page/types/content-block.types';
+	DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
-	ContentBlockType
+	ContentBlockType,
 } from '~modules/content-page/types/content-block.types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { AdminConfigManager } from '~core/config';

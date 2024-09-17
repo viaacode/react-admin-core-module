@@ -1,5 +1,5 @@
 import { Link } from '~modules/shared/components/Link';
-import type { ChangeEvent, FC, KeyboardEvent} from 'react';
+import type { ChangeEvent, FC, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 import { stringifyUrl } from 'query-string';
 

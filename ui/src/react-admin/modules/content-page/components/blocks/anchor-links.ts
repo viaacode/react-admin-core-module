@@ -3,11 +3,9 @@ import { GET_UNDERLINED_LINK_BUTTON_TYPE_OPTIONS } from '../../const/get-underli
 import type {
 	AnchorLinksBlockComponentState,
 	AnchorLinksBlockState,
-	ContentBlockConfig} from '../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType,
+	ContentBlockConfig,
 } from '../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../types/content-block.types';
 
 import { ALIGN_FIELD, BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from './defaults';
 

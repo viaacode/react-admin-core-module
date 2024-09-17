@@ -13,12 +13,13 @@ import { validateFlowplayerVideoUrl } from '~shared/helpers/validation';
 import type {
 	ContentBlockConfig,
 	ContentBlockFieldGroup,
-	DefaultContentBlockState} from '../../../types/content-block.types';
+	DefaultContentBlockState,
+} from '../../../types/content-block.types';
 import {
 	Color,
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS
+	DEFAULT_BUTTON_PROPS,
 } from '../../../types/content-block.types';
 
 import {

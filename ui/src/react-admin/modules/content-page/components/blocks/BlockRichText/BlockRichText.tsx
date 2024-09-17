@@ -3,14 +3,9 @@ import type {
 	ButtonProps,
 	DefaultProps,
 	GridSize,
-	RenderLinkFunction} from '@viaa/avo2-components';
-import {
-	Button,
-	Column,
-	convertToHtml,
-	Grid,
-	Spacer,
+	RenderLinkFunction,
 } from '@viaa/avo2-components';
+import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';

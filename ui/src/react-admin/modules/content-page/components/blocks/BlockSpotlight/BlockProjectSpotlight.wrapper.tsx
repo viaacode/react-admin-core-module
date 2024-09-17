@@ -1,6 +1,6 @@
 import type { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
-import type { type Avo } from '@viaa/avo2-types';
-import type { FunctionComponent} from 'react';
+import type { Avo } from '@viaa/avo2-types';
+import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 import { BlockSpotlight } from '~content-blocks/BlockSpotlight/BlockSpotlight';
@@ -9,11 +9,8 @@ import { convertDbContentPageToContentPageInfo } from '~modules/content-page/ser
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 
-import type {
-	LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import {
-	LoadingErrorLoadedComponent
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 

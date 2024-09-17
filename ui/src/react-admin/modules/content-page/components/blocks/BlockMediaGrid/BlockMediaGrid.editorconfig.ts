@@ -15,11 +15,9 @@ import { AVO } from '~shared/types';
 import type {
 	ContentBlockConfig,
 	MediaGridBlockComponentState,
-	MediaGridBlockState} from '../../../types/content-block.types';
-import {
-	ContentBlockEditor,
-	ContentBlockType
+	MediaGridBlockState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BACKGROUND_COLOR_FIELD,

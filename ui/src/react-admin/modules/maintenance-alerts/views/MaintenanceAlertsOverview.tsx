@@ -3,7 +3,7 @@ import type { IPagination } from '@studiohyperdrive/pagination';
 
 import { format, isAfter, isWithinInterval, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import type { FunctionComponent, ReactNode} from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import { useState } from 'react';
 import { ToastType } from '~core/config';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';

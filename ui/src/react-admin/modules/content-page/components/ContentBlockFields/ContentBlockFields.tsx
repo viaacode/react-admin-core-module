@@ -1,4 +1,4 @@
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { memo } from 'react';
 
 import { createKey } from '../../../shared/helpers/create-key';

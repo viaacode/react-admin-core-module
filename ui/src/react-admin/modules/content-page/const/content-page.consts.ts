@@ -2,11 +2,8 @@ import type { IconName, TabProps } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
-import type {
-	ContentOverviewTableCols} from '~modules/content-page/types/content-pages.types';
-import {
-	ContentWidth,
-} from '~modules/content-page/types/content-pages.types';
+import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
+import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,

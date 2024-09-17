@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import type { RouteComponentProps} from 'react-router';
+import type { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router';
 import { NavigationItemEdit } from '~modules/navigation/views';
 

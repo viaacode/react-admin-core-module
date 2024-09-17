@@ -7,7 +7,10 @@ import type {
 	ContentBlockType,
 	DbContentBlock,
 } from '~modules/content-page/types/content-block.types';
-import type { ContentPageInfo, DbContentPage } from '~modules/content-page/types/content-pages.types';
+import type {
+	ContentPageInfo,
+	DbContentPage,
+} from '~modules/content-page/types/content-pages.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';

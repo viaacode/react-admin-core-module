@@ -10,15 +10,12 @@ import { capitalize, lowerCase } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Link, useHistory } from 'react-router-dom';
-import type { AdminConfig} from '../src/react-admin/core/config';
+import type { AdminConfig } from '../src/react-admin/core/config';
 import { AdminConfigManager } from '../src/react-admin/core/config';
 import type { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
 import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
-import type {
-	ContentPageInfo} from '../src/react-admin/modules/content-page/types/content-pages.types';
-import {
-	ContentWidth,
-} from '../src/react-admin/modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '../src/react-admin/modules/content-page/types/content-pages.types';
+import { ContentWidth } from '../src/react-admin/modules/content-page/types/content-pages.types';
 import Html from '../src/react-admin/modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
 import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';

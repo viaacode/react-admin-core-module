@@ -1,4 +1,4 @@
-import type { FunctionComponent, ReactNode} from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React, { useState } from 'react';
 
 import {

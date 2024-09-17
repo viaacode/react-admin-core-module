@@ -8,7 +8,7 @@ import type {
 } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
-import type { ButtonAction, ButtonType, IconName} from '@viaa/avo2-components';
+import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
 import { Button, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~modules/shared/components';

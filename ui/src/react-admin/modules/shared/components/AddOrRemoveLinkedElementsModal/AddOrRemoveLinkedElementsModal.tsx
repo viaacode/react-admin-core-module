@@ -1,8 +1,7 @@
-import type { FunctionComponent} from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 
-import type {
-	TagInfo} from '@viaa/avo2-components';
+import type { TagInfo } from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,

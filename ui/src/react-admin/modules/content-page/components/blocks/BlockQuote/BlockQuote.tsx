@@ -1,4 +1,4 @@
-import type { DefaultProps} from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import { Quote } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';

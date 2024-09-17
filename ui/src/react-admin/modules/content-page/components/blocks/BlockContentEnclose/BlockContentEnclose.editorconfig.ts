@@ -4,11 +4,12 @@ import { AdminConfigManager } from '~core/config';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type {
 	ContentBlockConfig,
-	DefaultContentBlockState} from '~modules/content-page/types/content-block.types';
+	DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
 import {
 	ContentBlockEditor,
 	ContentBlockType,
-	DEFAULT_BUTTON_PROPS
+	DEFAULT_BUTTON_PROPS,
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';

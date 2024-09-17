@@ -9,12 +9,9 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	PageOverviewBlockComponentStateFields} from '../../../types/content-block.types';
-import {
-	Color,
-	ContentBlockEditor,
-	ContentBlockType
+	PageOverviewBlockComponentStateFields,
 } from '../../../types/content-block.types';
+import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
 	BACKGROUND_COLOR_FIELD,

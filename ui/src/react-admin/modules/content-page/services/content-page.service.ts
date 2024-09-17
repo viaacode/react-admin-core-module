@@ -2,7 +2,7 @@ import type { IPagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { kebabCase } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import type { type ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 
 import { AdminConfigManager } from '~core/config';
 import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
