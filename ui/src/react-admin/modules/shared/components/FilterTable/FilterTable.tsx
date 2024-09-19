@@ -115,6 +115,7 @@ interface FilterTableProps {
 	selectedItemIds?: (string | number)[] | null;
 	onSelectionChanged?: (selectedItemIds: (string | number)[]) => void;
 	onSelectAll?: () => void;
+	searchInputAriaLabel?: string;
 }
 
 const FilterTable: FunctionComponent<FilterTableProps> = ({
@@ -140,6 +141,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	selectedItemIds,
 	onSelectionChanged,
 	onSelectAll,
+	searchInputAriaLabel,
 }) => {
 	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
@@ -290,7 +292,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								onChange={setSearchTerm}
 								onKeyUp={handleKeyUp as any}
 								value={searchTerm}
-								ariaLabel={tText('zoekveld aria label')}
+								ariaLabel={searchInputAriaLabel}
 							/>
 						</FormGroup>
 						<FormGroup inlineMode="shrink">

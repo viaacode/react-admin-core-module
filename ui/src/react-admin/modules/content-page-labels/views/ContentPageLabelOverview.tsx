@@ -381,6 +381,7 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					itemsPerPage={ITEMS_PER_PAGE}
 					onTableStateChanged={setTableState}
 					isLoading={isLoading}
+					searchInputAriaLabel={tText('zoek input aria label')}
 				/>
 				<ConfirmModal
 					deleteObjectCallback={handleDelete}
