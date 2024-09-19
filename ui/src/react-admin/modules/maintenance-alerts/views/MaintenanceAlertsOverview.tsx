@@ -300,6 +300,7 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 				itemsPerPage={ITEMS_PER_PAGE}
 				onTableStateChanged={setTableState}
 				isLoading={isLoading}
+				searchInputAriaLabel={tText('zoek input aria label')}
 			/>
 		);
 	};

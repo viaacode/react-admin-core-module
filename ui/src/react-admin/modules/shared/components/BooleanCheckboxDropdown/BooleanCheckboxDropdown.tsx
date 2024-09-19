@@ -18,6 +18,7 @@ export interface BooleanCheckboxDropdownProps {
 	falseValue?: string;
 	includeEmpty?: boolean;
 	onChange: (value: string[], id: string) => void;
+	searchInputAriaLabel: string;
 }
 
 const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> = ({
@@ -31,6 +32,7 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 	falseValue = 'false',
 	includeEmpty = false,
 	onChange,
+	searchInputAriaLabel,
 }) => {
 	const getOptions = (): CheckboxOption[] => {
 		return [
@@ -83,6 +85,7 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 			options={getOptions()}
 			onChange={handleCheckboxChange}
 			disabled={disabled}
+			searchInputAriaLabel={searchInputAriaLabel}
 		/>
 	);
 };
