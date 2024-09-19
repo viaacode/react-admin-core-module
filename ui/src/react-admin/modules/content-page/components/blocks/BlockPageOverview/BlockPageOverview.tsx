@@ -126,7 +126,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	const renderLabel = (labelObj: any) => {
 		const labelLink = getLabelLink?.(labelObj.label);
 		if (labelLink) {
-			return `<a href="${labelLink}" class="c-content-page__label">${labelObj.label}</a>`;
+			return `<a href="${labelLink}" class="c-content-page__label c-content-page__label--link">${labelObj.label}</a>`;
 		}
 		return `<span class="c-content-page__label">${labelObj.label}</span>`;
 	};
