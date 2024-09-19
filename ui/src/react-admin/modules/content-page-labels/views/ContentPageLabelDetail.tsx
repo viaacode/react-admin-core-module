@@ -1,16 +1,15 @@
 import { Button, ButtonToolbar, IconName, Table } from '@viaa/avo2-components';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import { Link } from '~modules/shared/components/Link';
-import { DefaultComponentProps } from '~modules/shared/types';
+import type { DefaultComponentProps } from '~modules/shared/types';
 import { Icon } from '~shared/components';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { buildLink, navigateToContentType } from '~shared/helpers/link';
@@ -21,7 +20,7 @@ import {
 } from '~shared/helpers/render-detail-fields';
 import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
-import { ContentPageLabel } from '../content-page-label.types';
+import type { ContentPageLabel } from '../content-page-label.types';
 
 type ContentPageLabelDetailProps = { contentPageLabelId: string } & DefaultComponentProps;
 

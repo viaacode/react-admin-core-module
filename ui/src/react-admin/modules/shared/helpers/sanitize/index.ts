@@ -1,6 +1,7 @@
 import domPurify from 'isomorphic-dompurify';
 
-import sanitizePresets, { SanitizePreset } from './presets';
+import type { SanitizePreset } from './presets';
+import sanitizePresets from './presets';
 
 const sanitizeHtml = (input: string, preset: SanitizePreset): string => {
 	const presetConfig = sanitizePresets[preset];

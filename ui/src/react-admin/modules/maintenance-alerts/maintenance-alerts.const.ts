@@ -1,8 +1,9 @@
-import { RichTextEditorControl } from '@meemoo/react-components';
+import type { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
-import { array, mixed, object, Schema, string } from 'yup';
+import type { Schema } from 'yup';
+import { array, mixed, object, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
-import { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';
+import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { ROUTE_PARTS } from '~modules/shared';
 import { SortDirectionParam } from '~modules/shared/helpers/query-params';
 import { Locale } from '~modules/translations/translations.core.types';

@@ -1,3 +1,4 @@
+import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
@@ -5,7 +6,6 @@ import {
 	Form,
 	FormGroup,
 	Icon,
-	IconName,
 	Modal,
 	ModalBody,
 	RadioButtonGroup,
@@ -18,7 +18,8 @@ import {
 	TooltipTrigger,
 } from '@viaa/avo2-components';
 import { parseISO } from 'date-fns';
-import React, { FC, useState } from 'react';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
@@ -27,7 +28,7 @@ import { getPublishedState } from '~modules/content-page/helpers';
 import { ToastType } from '~core/config/config.types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { type ContentPageInfo, type PublishOption } from '../types/content-pages.types';
+import type { ContentPageInfo, PublishOption } from '../types/content-pages.types';
 
 import './PublishContentPageModal.scss';
 

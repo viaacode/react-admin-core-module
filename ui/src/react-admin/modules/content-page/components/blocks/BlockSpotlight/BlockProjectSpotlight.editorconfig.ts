@@ -1,15 +1,14 @@
 import { times } from 'lodash-es';
-import { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
-import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 

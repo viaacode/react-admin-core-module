@@ -1,9 +1,9 @@
 import { CustomError } from '~shared/helpers/custom-error';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 
 /**
  * All content pages can be translated into multiple languages

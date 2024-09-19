@@ -1,8 +1,9 @@
-import { ButtonAction, Image } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
+import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { CardWithoutDescriptionStyleOption } from '~modules/content-page/types/content-block.types';
-import { DefaultComponentProps } from '~modules/shared/types/components';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { CardWithoutDescriptionStyleOption } from '~modules/content-page/types/content-block.types';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
 import SmartLink from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockCardWithoutDescriptionProps {

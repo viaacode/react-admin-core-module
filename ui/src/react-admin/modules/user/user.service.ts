@@ -12,7 +12,8 @@ import { isHetArchief } from '~shared/helpers/is-hetarchief';
 
 import { CustomError } from '~shared/helpers/custom-error';
 
-import { DeleteContentCounts, Idp, UserOverviewTableCol, USERS_PER_PAGE } from './user.types';
+import type { DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types';
+import { USERS_PER_PAGE } from './user.types';
 
 export class UserService {
 	private static getBaseUrl(): string {

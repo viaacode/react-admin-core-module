@@ -1,6 +1,6 @@
-import { SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions';
-import { FillOption } from '../types/content-block.types';
+import type { FillOption } from '../types/content-block.types';
 
 export const GET_FILL_OPTIONS: () => SelectOption<FillOption>[] = () => [
 	{

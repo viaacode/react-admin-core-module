@@ -1,18 +1,16 @@
 import { FlowPlayer } from '@meemoo/react-components';
-import {
-	Button,
+import type {
 	ButtonAction,
 	ButtonProps,
-	ButtonToolbar,
-	Container,
 	DefaultProps,
 	IconName,
 	RenderLinkFunction,
-	Spacer,
 } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isString } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 import Icon from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 

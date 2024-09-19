@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@meemoo/react-components';
-import { FC } from 'react';
-import { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
+import type { FC } from 'react';
+import type { BlockBreadcrumbsProps } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.types';
 import { Icon } from '~shared/components';
 import { Link } from '~shared/components/Link';
 

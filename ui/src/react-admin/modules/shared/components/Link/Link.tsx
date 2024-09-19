@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 
-import { AdminConfigManager, LinkInfo } from '~core/config';
+import type { LinkInfo } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 
 const Link: FC<LinkInfo> = (props) => {
 	const AdminCoreConfigLink = AdminConfigManager.getConfig().services.router.Link;

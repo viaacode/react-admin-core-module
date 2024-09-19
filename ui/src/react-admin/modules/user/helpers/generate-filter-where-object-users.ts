@@ -1,6 +1,6 @@
 import { first, isNil, without } from 'lodash-es';
 import { ToastType } from '~core/config';
-import { UserTableState } from '~modules/user/user.types';
+import type { UserTableState } from '~modules/user/user.types';
 import { LomScheme } from '~shared/consts/lom-scheme.enum';
 import { CustomError } from '~shared/helpers/custom-error';
 import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org';

@@ -1,6 +1,6 @@
-import { SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions';
-import { WidthOption } from '../types/content-block.types';
+import type { WidthOption } from '../types/content-block.types';
 
 export const GET_MEDIA_PLAYER_WIDTH_OPTIONS: () => SelectOption<WidthOption>[] = () => [
 	{

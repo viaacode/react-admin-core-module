@@ -1,19 +1,18 @@
-import { MultiRangeProps } from '@viaa/avo2-components';
-import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import { BlockLogoGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockLogoGrid.wrapper';
+import type { MultiRangeProps } from '@viaa/avo2-components';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { BlockLogoGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockLogoGrid.wrapper';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options';
 import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options';
 
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
 	ImageGridBlockComponentStateFields,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 

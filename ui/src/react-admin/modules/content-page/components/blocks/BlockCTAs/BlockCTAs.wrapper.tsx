@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { BlockCTAs, BlockCTAsProps } from '~content-blocks/BlockCTAs/BlockCTAs';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockCTAsProps } from '~content-blocks/BlockCTAs/BlockCTAs';
+import { BlockCTAs } from '~content-blocks/BlockCTAs/BlockCTAs';
 
 import { isMobileWidth } from '~shared/helpers/media-query';
 

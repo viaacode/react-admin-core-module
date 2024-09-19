@@ -1,11 +1,13 @@
-import { ButtonAction, LinkTarget } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
+import { LinkTarget } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { fromPairs, get, isEmpty, isNil, isString, map } from 'lodash-es';
 import { stringify } from 'query-string';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { AdminConfigManager } from '~core/config';
-import { History, ToastType } from '~core/config/config.types';
+import type { History } from '~core/config/config.types';
+import { ToastType } from '~core/config/config.types';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';

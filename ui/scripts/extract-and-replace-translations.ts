@@ -28,7 +28,7 @@ import { mapLimit } from 'blend-promise-utils';
 import { execSync } from 'child_process';
 import * as fs from 'fs/promises';
 import * as glob from 'glob';
-import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash';
+import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
 import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
 import {

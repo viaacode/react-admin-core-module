@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { UseQueryOptions } from '@tanstack/react-query/src/types';
+import type { UseQueryOptions } from '@tanstack/react-query/src/types';
 import type { Avo } from '@viaa/avo2-types';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { QUERY_KEYS } from '~shared/types';

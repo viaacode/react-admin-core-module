@@ -1,6 +1,7 @@
-import { IconName } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { tHtml } from '~shared/helpers/translation-functions';

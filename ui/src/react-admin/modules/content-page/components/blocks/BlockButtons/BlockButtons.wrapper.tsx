@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { BlockButtons, BlockButtonsProps } from '~content-blocks/BlockButtons/BlockButtons';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockButtonsProps } from '~content-blocks/BlockButtons/BlockButtons';
+import { BlockButtons } from '~content-blocks/BlockButtons/BlockButtons';
 
 import { tText } from '~shared/helpers/translation-functions';
 

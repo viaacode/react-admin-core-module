@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { App } from '~modules/translations/translations.core.types';
 
 export type ReactSelectOption<T = any> = {

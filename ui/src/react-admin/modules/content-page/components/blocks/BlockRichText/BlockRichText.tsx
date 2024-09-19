@@ -1,17 +1,14 @@
-import {
-	Button,
+import type {
 	ButtonAction,
 	ButtonProps,
-	Column,
-	convertToHtml,
 	DefaultProps,
-	Grid,
 	GridSize,
 	RenderLinkFunction,
-	Spacer,
 } from '@viaa/avo2-components';
+import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { Icon } from '~shared/components';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 

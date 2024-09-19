@@ -1,8 +1,9 @@
-import { DefaultProps } from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import './BlockKlaar.scss';
 

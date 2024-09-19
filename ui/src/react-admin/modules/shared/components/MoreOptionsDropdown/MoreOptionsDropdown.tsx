@@ -1,15 +1,15 @@
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import { tText } from '~shared/helpers/translation-functions';
 
+import type { IconName, MenuItemInfo } from '@viaa/avo2-components';
 import {
 	Button,
 	Dropdown,
 	DropdownButton,
 	DropdownContent,
-	IconName,
 	MenuContent,
-	MenuItemInfo,
 } from '@viaa/avo2-components';
 
 export interface MoreOptionsDropdownProps {

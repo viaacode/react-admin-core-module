@@ -1,11 +1,15 @@
-import { AlignOptions, ButtonAction } from '@viaa/avo2-components';
+import type { AlignOptions, ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { kebabCase } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid/BlockImageGrid';
-import { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { CssSizeSetting, GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 
-import { BlockGridFormatOption, FillOption } from '~modules/content-page/types/content-block.types';
+import type {
+	BlockGridFormatOption,
+	FillOption,
+} from '~modules/content-page/types/content-block.types';
 
 export interface BlockImageGridWrapperProps {
 	elements: GridItem[];

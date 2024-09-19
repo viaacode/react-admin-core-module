@@ -1,10 +1,12 @@
-import { CheckboxGroup, FormGroup, TagInfo } from '@viaa/avo2-components';
+import type { TagInfo } from '@viaa/avo2-components';
+import { CheckboxGroup, FormGroup } from '@viaa/avo2-components';
 import { isEmpty } from 'lodash-es';
-import React, { ChangeEvent, FunctionComponent } from 'react';
+import type { ChangeEvent, FunctionComponent } from 'react';
+import React from 'react';
 
 import { Checkbox } from '@meemoo/react-components';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroup } from '~modules/user-group/types/user-group.types';
+import type { UserGroup } from '~modules/user-group/types/user-group.types';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;

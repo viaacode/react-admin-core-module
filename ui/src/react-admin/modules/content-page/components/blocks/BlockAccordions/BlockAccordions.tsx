@@ -1,6 +1,8 @@
-import { Accordion, DefaultProps } from '@viaa/avo2-components';
+import type { DefaultProps } from '@viaa/avo2-components';
+import { Accordion } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
 
 import { BlockRichText } from '../BlockRichText/BlockRichText';
 

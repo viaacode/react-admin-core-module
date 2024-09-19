@@ -1,4 +1,4 @@
-import {
+import type {
 	AlignOption,
 	BackgroundAlignOption,
 } from '~modules/content-page/types/content-block.types';

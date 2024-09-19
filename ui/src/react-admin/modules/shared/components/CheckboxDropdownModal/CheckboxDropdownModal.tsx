@@ -1,3 +1,4 @@
+import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
 	ButtonToolbar,
@@ -11,7 +12,6 @@ import {
 	FormGroup,
 	Grid,
 	Icon,
-	IconName,
 	Modal,
 	ModalBody,
 	ModalFooterRight,
@@ -24,7 +24,8 @@ import {
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { clone, compact, fromPairs, take } from 'lodash-es';
-import React, { FunctionComponent, MouseEvent, useState } from 'react';
+import type { FunctionComponent, MouseEvent } from 'react';
+import React, { useState } from 'react';
 
 import { isMobileWidth } from '../../helpers/media-query';
 

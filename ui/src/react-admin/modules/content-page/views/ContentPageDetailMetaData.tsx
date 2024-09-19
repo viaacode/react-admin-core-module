@@ -1,24 +1,18 @@
-import {
-	Container,
-	Spacer,
-	Table,
-	TagInfo,
-	TagList,
-	TagOption,
-	Thumbnail,
-} from '@viaa/avo2-components';
+import type { TagInfo, TagOption } from '@viaa/avo2-components';
+import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
 import { isAfter, isBefore, parseISO } from 'date-fns';
 import { compact, get } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { AdminConfigManager } from '~core/config';
 
 import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
 import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
 import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import { UserGroup } from '~modules/user-group/types/user-group.types';
+import type { UserGroup } from '~modules/user-group/types/user-group.types';
 import Html from '~shared/components/Html/Html';
 import { Link } from '~shared/components/Link';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';

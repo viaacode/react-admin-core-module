@@ -1,11 +1,11 @@
-import {
+import type {
 	AlignOptions,
 	ButtonAction,
 	ButtonType,
 	DefaultProps,
 	RenderLinkFunction,
 } from '@viaa/avo2-components';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export interface GridItem {
 	source: string;

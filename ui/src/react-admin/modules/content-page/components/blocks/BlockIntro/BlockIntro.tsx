@@ -1,6 +1,7 @@
-import { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
+import type { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { BlockRichText } from '~content-blocks/BlockRichText';

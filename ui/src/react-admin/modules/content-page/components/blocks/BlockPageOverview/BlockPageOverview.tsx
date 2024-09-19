@@ -1,16 +1,14 @@
+import type { ButtonAction, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import {
 	Accordion,
 	AspectRatioWrapper,
 	Button,
-	ButtonAction,
 	Column,
 	Container,
 	convertToHtml,
-	DefaultProps,
 	Flex,
 	Grid,
 	Pagination,
-	RenderLinkFunction,
 	Spacer,
 	Tabs,
 	TagList,
@@ -19,15 +17,17 @@ import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
-import React, { FunctionComponent, ReactNode } from 'react';
-import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
-import { ContentItemStyle, ContentTabStyle, LabelObj } from './BlockPageOverview.types';
+import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
+import { ContentItemStyle } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
 
@@ -155,9 +155,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const getDescription = (page: ContentPageInfo) => {
-		return showDescription && page.description
-			? <div dangerouslySetInnerHTML={{ __html: page.description }} /> || undefined
-			: undefined;
+		return showDescription && page.description ? (
+			<div dangerouslySetInnerHTML={{ __html: page.description }} />
+		) : undefined;
 	};
 
 	const renderText = (text: string | ReactNode, className?: string) => {

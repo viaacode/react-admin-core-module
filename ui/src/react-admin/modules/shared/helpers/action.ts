@@ -1,4 +1,4 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 
 export function action(label: string, props?: any) {
 	return (info: ButtonAction) => {

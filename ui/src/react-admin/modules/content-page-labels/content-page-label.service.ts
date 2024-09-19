@@ -3,11 +3,11 @@ import { compact } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
 
 import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
-import {
+import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
 } from '~modules/content-page-labels/content-page-label.types';
-import { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';

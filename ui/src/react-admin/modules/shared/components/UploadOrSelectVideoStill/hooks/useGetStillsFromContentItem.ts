@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ContentPickerType } from '@viaa/avo2-types';
+import type { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';

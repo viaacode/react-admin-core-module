@@ -33,7 +33,8 @@ import {
 	INITIAL_UITGEKLAARD_BLOCK_STATE,
 	INITIAL_USP_GRID_COMPONENTS_STATE,
 } from '~modules/content-page/components/blocks';
-import { ContentBlockComponentState, ContentBlockType } from '../types/content-block.types';
+import type { ContentBlockComponentState } from '../types/content-block.types';
+import { ContentBlockType } from '../types/content-block.types';
 import { INITIAL_CONTENT_ENCLOSE_BLOCK_STATE } from '~content-blocks/BlockContentEnclose/BlockContentEnclose.editorconfig';
 import { INITIAL_BREADCRUMBS_BLOCK_STATE } from '~content-blocks/BlockBreadcrumbs/BlockBreadcrumbs.editorconfig';
 

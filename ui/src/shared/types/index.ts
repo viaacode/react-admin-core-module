@@ -1,6 +1,6 @@
-import { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
-import { IconName } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 
 export type NavigationItemInfo = {
 	label: string | ReactNode;

@@ -1,5 +1,7 @@
-import { AspectRatioWrapper, VideoAspectRatio } from '@viaa/avo2-components';
-import React, { FunctionComponent, IframeHTMLAttributes } from 'react';
+import type { VideoAspectRatio } from '@viaa/avo2-components';
+import { AspectRatioWrapper } from '@viaa/avo2-components';
+import type { FunctionComponent, IframeHTMLAttributes } from 'react';
+import React from 'react';
 
 import './BlockIFrame.scss';
 

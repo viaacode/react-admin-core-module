@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NOT_TRANSLATION_PREFIX } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { tText } from '~shared/helpers/translation-functions';
 

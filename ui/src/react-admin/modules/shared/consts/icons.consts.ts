@@ -1,4 +1,4 @@
-import { ReactSelectOption } from '../types';
+import type { ReactSelectOption } from '../types';
 
 import { AdminConfigManager } from '~core/config';
 

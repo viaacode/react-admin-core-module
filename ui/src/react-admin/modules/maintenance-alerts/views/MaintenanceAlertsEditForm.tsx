@@ -1,21 +1,21 @@
+import type { MultiSelectOption, SelectOption } from '@meemoo/react-components';
 import {
 	FormControl,
 	MultiSelect,
-	type MultiSelectOption,
 	ReactSelect,
 	RichTextEditorWithInternalState,
-	SelectOption,
 	TextInput,
 } from '@meemoo/react-components';
 import { format } from 'date-fns';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { without } from 'lodash-es';
-import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ValidationError } from 'yup';
 import { ToastType } from '~core/config';
 import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
-import {
+import type {
 	MaintenanceAlert,
 	MaintenanceAlertDto,
 	MaintenanceAlertsEditFormProps,
@@ -24,7 +24,7 @@ import { Icon } from '~modules/shared/components';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';
-import { LanguageInfo } from '~modules/translations/translations.types';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { DateInput } from '~shared/components/DateInput/DateInput';
 import Timepicker from '~shared/components/Timepicker/Timepicker';

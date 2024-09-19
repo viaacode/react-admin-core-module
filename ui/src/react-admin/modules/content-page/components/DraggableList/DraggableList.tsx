@@ -1,10 +1,12 @@
 import clsx from 'clsx';
 import { findIndex } from 'lodash-es';
-import React, { FunctionComponent, ReactNode, useCallback, useEffect, useState } from 'react';
-import { DraggableItem } from './DraggableList.types';
+import type { FunctionComponent, ReactNode } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import type { DraggableItem } from './DraggableList.types';
 
 import './DraggableList.scss';
-import { Icon, IconName } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
+import { Icon } from '@viaa/avo2-components';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 // TODO replace this with a generic T type
@@ -137,14 +139,14 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			return (
 				<div
 					className="c-draggable-list__item--target-ghost"
-					key={`draggable-list__item--target-ghost`}
+					key={'draggable-list__item--target-ghost'}
 				></div>
 			);
 		} else if (item.isEndGhost) {
 			return (
 				<div
 					className="c-draggable-list__item--end-ghost"
-					key={`draggable-list__item--end-ghost`}
+					key={'draggable-list__item--end-ghost'}
 					onDragOver={(evt) => onDragOver(evt, index)}
 				></div>
 			);

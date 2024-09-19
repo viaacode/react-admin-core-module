@@ -1,8 +1,10 @@
 import { noop } from 'lodash-es';
-import React, { ReactText } from 'react';
+import type { ReactText } from 'react';
+import React from 'react';
 
-import { TagList, TagOption } from '@viaa/avo2-components';
-import { Idp } from '~modules/user/user.types';
+import type { TagOption } from '@viaa/avo2-components';
+import { TagList } from '@viaa/avo2-components';
+import type { Idp } from '~modules/user/user.types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const IDP_COLORS: { [idp in Idp]: string } = {

@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import { parsePickerItem } from '../helpers/parse-picker';
 
 import { AssignmentService } from '~modules/assignment/assignment.service';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 
 // fetch assignments by title-wildcard
 export const retrieveAssignments = async (

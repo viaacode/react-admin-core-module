@@ -1,4 +1,4 @@
-import { FC, FunctionComponent } from 'react';
+import type { FC, FunctionComponent } from 'react';
 import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';

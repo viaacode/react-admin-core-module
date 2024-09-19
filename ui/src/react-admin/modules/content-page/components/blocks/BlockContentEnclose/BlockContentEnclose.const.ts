@@ -1,4 +1,4 @@
-import { IconName } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 
 export function GET_TYPE_TO_ICON_MAP(): Record<string, IconName> {

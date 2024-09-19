@@ -1,7 +1,9 @@
-import { Button, ButtonGroup, IconName } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { IconName } from '@viaa/avo2-components';
+import { Button, ButtonGroup } from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
-import { AlignOption } from '../../../types/content-block.types';
+import type { AlignOption } from '../../../types/content-block.types';
 
 export interface AlignSelectProps {
 	onChange: (value: string) => void;

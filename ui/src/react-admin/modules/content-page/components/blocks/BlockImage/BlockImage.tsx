@@ -1,15 +1,9 @@
-import {
-	AlignOptions,
-	Button,
-	ButtonAction,
-	ButtonType,
-	Container,
-	DefaultProps,
-	Image,
-} from '@viaa/avo2-components';
+import type { AlignOptions, ButtonAction, ButtonType, DefaultProps } from '@viaa/avo2-components';
+import { Button, Container, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { CSSProperties, FunctionComponent } from 'react';
-import { AlignOption } from '~modules/content-page/types/content-block.types';
+import type { CSSProperties, FunctionComponent } from 'react';
+import React from 'react';
+import type { AlignOption } from '~modules/content-page/types/content-block.types';
 
 import './BlockImage.scss';
 import SmartLink, { generateSmartLink } from '~shared/components/SmartLink/SmartLink';

@@ -2,12 +2,15 @@ import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
 import { ToastType } from '~core/config';
 import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
 import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
-import {
+import type {
 	ContentBlockConfig,
 	ContentBlockType,
 	DbContentBlock,
 } from '~modules/content-page/types/content-block.types';
-import { ContentPageInfo, DbContentPage } from '~modules/content-page/types/content-pages.types';
+import type {
+	ContentPageInfo,
+	DbContentPage,
+} from '~modules/content-page/types/content-pages.types';
 import { CustomError } from '~shared/helpers/custom-error';
 import { mapDeep } from '~shared/helpers/map-deep/map-deep';
 import { sanitizeHtml } from '~shared/helpers/sanitize';

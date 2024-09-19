@@ -1,8 +1,8 @@
 import * as path from 'path';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
-import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import { externalizeDeps } from 'vite-plugin-externalize-deps';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
@@ -15,10 +15,23 @@ export default defineConfig({
 	},
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'src/index.ts'),
+			entry: {
+				// Contains all the code that is needed to render the admin-core dashboard pages and edit pages
+				admin: resolve(__dirname, 'src/admin.mts'),
+				// Contains all the logic to render content pages and set the admin-core config
+				client: resolve(__dirname, 'src/client.mts'),
+			},
 			name: '@meemoo/admin-core-ui',
-			fileName: 'index',
-			formats: ['es', 'cjs'],
+			fileName: (_, entryName) => {
+				console.log('entryName', entryName);
+				return `${entryName}.mjs`;
+			},
+			formats: ['es'],
+		},
+		rollupOptions: {
+			output: {
+				entryFileNames: `[name].mjs`,
+			},
 		},
 		sourcemap: true,
 	},

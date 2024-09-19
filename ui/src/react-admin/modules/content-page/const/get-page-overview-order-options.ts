@@ -1,4 +1,4 @@
-import { SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions';
 
 export type PageOverviewOrderOptions =

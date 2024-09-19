@@ -1,4 +1,4 @@
-import { RichTextEditorControl } from '@meemoo/react-components';
+import type { RichTextEditorControl } from '@meemoo/react-components';
 import { NumberParam, StringParam, withDefault } from 'use-query-params';
 import { ROUTE_PARTS } from '~shared/consts/routes';
 import { SortDirectionParam } from '~shared/helpers/query-params';

@@ -1,13 +1,15 @@
-import { ContentPickerType } from '@viaa/avo2-types';
+import type { ContentPickerType } from '@viaa/avo2-types';
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, TEXT_FIELD } from '~content-blocks/defaults';
 import { AdminConfigManager } from '~core/config';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import {
+import type {
 	ContentBlockConfig,
+	DefaultContentBlockState,
+} from '~modules/content-page/types/content-block.types';
+import {
 	ContentBlockEditor,
 	ContentBlockType,
 	DEFAULT_BUTTON_PROPS,
-	DefaultContentBlockState,
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';

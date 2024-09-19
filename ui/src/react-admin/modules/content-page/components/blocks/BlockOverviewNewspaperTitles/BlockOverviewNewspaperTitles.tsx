@@ -1,9 +1,10 @@
 import { Link } from '~modules/shared/components/Link';
-import React, { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
+import type { ChangeEvent, FC, KeyboardEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { stringifyUrl } from 'query-string';
 
 import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
-import {
+import type {
 	BlockOverviewNewspaperTitlesProps,
 	NewspaperTitle,
 } from './BlockOverviewNewspaperTitles.types';

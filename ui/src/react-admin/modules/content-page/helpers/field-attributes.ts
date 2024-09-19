@@ -1,9 +1,10 @@
-import { DatePickerProps, SelectOption } from '@viaa/avo2-components';
+import type { DatePickerProps, SelectOption } from '@viaa/avo2-components';
 import { compact, debounce, get, isArray, isNil } from 'lodash-es';
-import { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
-import { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 
-import { ContentBlockEditor, ContentBlockField } from '../types/content-block.types';
+import type { ContentBlockField } from '../types/content-block.types';
+import { ContentBlockEditor } from '../types/content-block.types';
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,

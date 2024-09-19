@@ -6,8 +6,8 @@ import {
 	TextArea,
 	TextInput,
 } from '@viaa/avo2-components';
-import { FunctionComponent } from 'react';
-import { ContentBlockEditor } from '~modules/content-page/types/content-block.types';
+import type { FunctionComponent } from 'react';
+import type { ContentBlockEditor } from '~modules/content-page/types/content-block.types';
 
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';

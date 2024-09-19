@@ -5,24 +5,24 @@ import type { Avo } from '@viaa/avo2-types';
 import { DatabaseType } from '@viaa/avo2-types';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
-import { TOptions } from 'i18next';
+import type { TOptions } from 'i18next';
 import { capitalize, lowerCase } from 'lodash-es';
-import { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Link, useHistory } from 'react-router-dom';
-import { AdminConfig, AdminConfigManager } from '../src/react-admin/core/config';
-import { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
+import type { AdminConfig } from '../src/react-admin/core/config';
+import { AdminConfigManager } from '../src/react-admin/core/config';
+import type { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
 import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
-import {
-	ContentPageInfo,
-	ContentWidth,
-} from '../src/react-admin/modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '../src/react-admin/modules/content-page/types/content-pages.types';
+import { ContentWidth } from '../src/react-admin/modules/content-page/types/content-pages.types';
 import Html from '../src/react-admin/modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
 import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
 
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
+import { Locale } from '~modules/translations/translations.core.types';
 
 const proxyUrl = 'http://localhost:3100';
 const adminCoreApiUrl = 'http://localhost:3300';
@@ -357,7 +357,7 @@ function setConfig() {
 		users: {
 			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
 		},
-		locale: 'en',
+		locale: Locale.En,
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',

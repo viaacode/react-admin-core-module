@@ -1,7 +1,7 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import image500x200 from '../../../static/images/500x200.jpg';
 
-import { ImageInfo } from './BlockSpotlight';
+import type { ImageInfo } from './BlockSpotlight';
 
 const MOCK_BUTTON_ACTION: ButtonAction = {
 	type: 'EXTERNAL_LINK',

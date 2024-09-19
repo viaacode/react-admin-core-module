@@ -1,9 +1,10 @@
 import { FormGroup, Spacer } from '@viaa/avo2-components';
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
 import { generateFieldAttributes } from '../../helpers/field-attributes';
-import {
+import type {
 	ContentBlockComponentState,
 	ContentBlockEditor,
 	ContentBlockFieldGroup,

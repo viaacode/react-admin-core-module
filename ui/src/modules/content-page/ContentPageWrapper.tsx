@@ -1,6 +1,8 @@
 import type { Avo } from '@viaa/avo2-types';
-import React, { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import type { FC } from 'react';
+import React from 'react';
+import type { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router';
 import { AdminConfigManager } from '~core/config';
 
 import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';

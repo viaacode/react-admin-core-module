@@ -1,10 +1,10 @@
 import { ContentPickerType } from '@viaa/avo2-types';
-import { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
+import type { HetArchiefIeObject } from '~modules/content-page/types/content-block.types';
 import { parsePickerItem } from '~shared/components/ContentPicker/helpers/parse-picker';
 import { CustomError } from '~shared/helpers/custom-error';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 
 export const retrieveIeObjects = async (title: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {

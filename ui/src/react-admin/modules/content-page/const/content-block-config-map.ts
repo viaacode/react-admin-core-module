@@ -35,7 +35,8 @@ import {
 	UITGEKLAARD_BLOCK_CONFIG,
 	USP_GRID_BLOCK_CONFIG,
 } from '~modules/content-page/components/blocks';
-import { ContentBlockConfig, ContentBlockType } from '../types/content-block.types';
+import type { ContentBlockConfig } from '../types/content-block.types';
+import { ContentBlockType } from '../types/content-block.types';
 
 export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	ContentBlockType,

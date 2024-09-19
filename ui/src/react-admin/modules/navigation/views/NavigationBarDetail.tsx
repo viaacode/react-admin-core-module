@@ -1,9 +1,11 @@
 import './NavigationBarOverview.scss';
 
-import { Button, ButtonGroup, ButtonToolbar, Flex, IconName, Spacer } from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
+import { Button, ButtonGroup, ButtonToolbar, Flex, Spacer } from '@viaa/avo2-components';
 
 import { cloneDeep, isNil, startCase } from 'lodash-es';
-import React, { FC, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import type { FC, ReactElement, ReactNode } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
@@ -13,9 +15,9 @@ import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navi
 import { Link } from '~modules/shared/components/Link';
 import { showToast } from '~modules/shared/helpers/show-toast';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
-import { LanguageInfo } from '~modules/translations/translations.types';
+import type { LanguageInfo } from '~modules/translations/translations.types';
 import { Icon, Loader } from '~shared/components';
-import {
+import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
 } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
@@ -31,7 +33,7 @@ import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { NavigationService } from '../navigation.service';
-import {
+import type {
 	NavigationItem,
 	NavigationItemOverviewTableCols,
 	NavigationItemsTableState,

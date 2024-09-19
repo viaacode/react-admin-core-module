@@ -1,8 +1,8 @@
-import { RenderLinkFunction } from '@viaa/avo2-components';
+import type { RenderLinkFunction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
-import { Color } from '~modules/content-page/types/content-block.types';
-import { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
+import type { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
+import type { Color } from '~modules/content-page/types/content-block.types';
+import type { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 
 export type ContentTabStyle = 'ROUNDED_BADGES' | 'MENU_BAR';
 export enum ContentItemStyle {

@@ -1,6 +1,7 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import type { UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { NavigationService } from '~modules/navigation/navigation.service';
-import { NavigationItem } from '../navigation.types';
+import type { NavigationItem } from '../navigation.types';
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetNavigationItem = (

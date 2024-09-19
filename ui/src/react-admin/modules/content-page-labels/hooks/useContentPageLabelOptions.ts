@@ -5,10 +5,10 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '~shared/helpers/custom-error';
-import { ContentPageLabel } from '../content-page-label.types';
+import type { ContentPageLabel } from '../content-page-label.types';
 
 import { ToastType } from '~core/config/config.types';
-import { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 
 type UseContentPageLabelsTuple = [CheckboxOption[], boolean];
 

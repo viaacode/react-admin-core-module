@@ -1,4 +1,4 @@
-import { SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { useEffect, useState } from 'react';
 

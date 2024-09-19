@@ -1,16 +1,13 @@
 import { PaginationBar } from '@meemoo/react-components';
+import type { ButtonType, IconName, SelectOption, TableColumn } from '@viaa/avo2-components';
 import {
 	Button,
-	ButtonType,
 	Flex,
 	Form,
 	FormGroup,
-	IconName,
 	Select,
-	SelectOption,
 	Spacer,
 	Table,
-	TableColumn,
 	TextInput,
 	Toolbar,
 	ToolbarLeft,
@@ -31,30 +28,23 @@ import {
 	omitBy,
 	sortBy,
 } from 'lodash-es';
-import React, {
-	FunctionComponent,
-	KeyboardEvent,
-	ReactElement,
-	ReactNode,
-	useEffect,
-	useState,
-} from 'react';
-import { NumberParam, QueryParamConfig, StringParam, useQueryParams } from 'use-query-params';
+import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { QueryParamConfig } from 'use-query-params';
+import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 
 import { tText } from '~shared/helpers/translation-functions';
-import { TableFilterType } from '~shared/types/table-filter-types';
+import type { TableFilterType } from '~shared/types/table-filter-types';
 
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
 import './FilterTable.scss';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
-import {
-	CheckboxDropdownModal,
-	CheckboxOption,
-} from '../CheckboxDropdownModal/CheckboxDropdownModal';
+import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
+import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { Icon } from '../Icon';

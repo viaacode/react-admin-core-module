@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 
-import { RouteComponentProps, withRouter } from 'react-router';
+import type { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router';
 import { NavigationBarDetail } from '~modules/navigation/views';
 
 const NavigationDetailPage: FC<RouteComponentProps<{ navigationBarId: string }>> = ({ match }) => {

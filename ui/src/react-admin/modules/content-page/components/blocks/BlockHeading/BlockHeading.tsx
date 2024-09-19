@@ -1,6 +1,7 @@
-import { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
+import type { AlignOptions, DefaultProps, HeadingType } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 
 import './BlockHeading.scss';
 

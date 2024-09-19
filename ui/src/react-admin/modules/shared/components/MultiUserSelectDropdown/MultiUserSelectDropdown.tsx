@@ -1,3 +1,4 @@
+import type { IconName } from '@viaa/avo2-components';
 import {
 	Button,
 	Dropdown,
@@ -6,16 +7,16 @@ import {
 	Form,
 	FormGroup,
 	Icon,
-	IconName,
 	Spacer,
 	TagList,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { uniqBy } from 'lodash-es';
-import React, { FunctionComponent, ReactText, useEffect, useState } from 'react';
+import type { FunctionComponent, ReactText } from 'react';
+import React, { useEffect, useState } from 'react';
 import { showToast } from '~shared/helpers/show-toast';
 
-import { PickerItem } from '../../types/content-picker';
+import type { PickerItem } from '../../types/content-picker';
 import { ContentPicker } from '../ContentPicker/ContentPicker';
 
 import { ToastType } from '~core/config/config.types';

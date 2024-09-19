@@ -1,9 +1,10 @@
 import clsx from 'clsx';
-import { Location } from 'history';
+import type { Location } from 'history';
 import { flatten } from 'lodash-es';
-import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { NavigationItemInfo } from '../../types';
+import type { NavigationItemInfo } from '../../types';
 
 import './Sidebar.scss';
 import { tHtml } from '~shared/helpers/translation-functions';

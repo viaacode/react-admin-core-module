@@ -1,9 +1,10 @@
-import { ButtonAction } from '@viaa/avo2-components';
+import type { ButtonAction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { fromPairs, map } from 'lodash-es';
 import { stringify } from 'query-string';
-import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';

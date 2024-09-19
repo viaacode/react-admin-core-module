@@ -2,17 +2,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
-import React, { FunctionComponent } from 'react';
-import { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
 import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
-import {
+import type {
 	BlockClickHandler,
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { ContentBlockConfig, ContentBlockType } from '../../types/content-block.types';
+import type { ContentBlockConfig } from '../../types/content-block.types';
+import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 import './ContentPageRenderer.scss';
 

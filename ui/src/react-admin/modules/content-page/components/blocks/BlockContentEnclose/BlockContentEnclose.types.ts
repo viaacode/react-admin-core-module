@@ -1,8 +1,8 @@
-import { ButtonAction, ButtonType } from '@viaa/avo2-components';
-import { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
-import { ContentPickerTypeSchema } from '@viaa/avo2-types/types/core';
-import { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import { PickerItem } from '~shared/types/content-picker';
+import type { ButtonAction, ButtonType } from '@viaa/avo2-components';
+import type { IconNameSchema } from '@viaa/avo2-components/dist/components/Icon/Icon.types';
+import type { ContentPickerTypeSchema } from '@viaa/avo2-types/types/core';
+import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type { PickerItem } from '~shared/types/content-picker';
 
 export type BlockContentEncloseProps = {
 	title: string;

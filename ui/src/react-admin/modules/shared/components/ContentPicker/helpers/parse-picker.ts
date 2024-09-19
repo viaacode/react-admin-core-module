@@ -3,7 +3,7 @@ import { parse } from 'query-string';
 import type { Avo } from '@viaa/avo2-types';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
-import { PickerItem } from '~shared/types/content-picker';
+import type { PickerItem } from '~shared/types/content-picker';
 
 import { ToastType } from '~core/config/config.types';
 

@@ -1,11 +1,12 @@
-import { type Avo, ContentPickerType } from '@viaa/avo2-types';
+import type { Avo } from '@viaa/avo2-types';
+import { ContentPickerType } from '@viaa/avo2-types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
 import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects';
 import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
 import { tText } from '~shared/helpers/translation-functions';
 
-import { PickerTypeOption } from '../../types/content-picker';
+import type { PickerTypeOption } from '../../types/content-picker';
 
 import { retrieveAnchors } from './item-providers/anchors';
 import { retrieveBundles, retrieveCollections } from './item-providers/collection';

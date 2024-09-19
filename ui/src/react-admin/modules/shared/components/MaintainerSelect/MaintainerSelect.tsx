@@ -1,8 +1,10 @@
 import { FormGroup } from '@viaa/avo2-components';
-import { ContentPickerType } from '@viaa/avo2-types';
+import type { ContentPickerType } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
-import React, { FunctionComponent, useEffect } from 'react';
-import ReactSelect, { ActionMeta } from 'react-select';
+import type { FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
+import type { ActionMeta } from 'react-select';
+import ReactSelect from 'react-select';
 
 import { useGetMaintainersByContent } from '~shared/components/MaintainerSelect/hooks/useGetMaintainersByContent';
 

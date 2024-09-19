@@ -1,10 +1,11 @@
 import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
-import React, { Fragment, FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React, { Fragment } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
 import { generateFieldAttributes } from '~modules/content-page/helpers';
 import { Icon } from '~shared/components';
-import {
+import type {
 	ContentBlockComponentState,
 	ContentBlockField,
 	ContentBlockFieldGroup,

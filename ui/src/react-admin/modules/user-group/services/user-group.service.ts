@@ -2,7 +2,11 @@ import { stringifyUrl } from 'query-string';
 
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
 import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { UserGroup, UserGroupUpdates, UserGroupWithPermissions } from '../types/user-group.types';
+import type {
+	UserGroup,
+	UserGroupUpdates,
+	UserGroupWithPermissions,
+} from '../types/user-group.types';
 
 export class UserGroupService {
 	private static getBaseUrl(): string {

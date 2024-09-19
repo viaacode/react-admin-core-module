@@ -1,12 +1,13 @@
-import React, { FunctionComponent, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
 
+import type { MenuItemInfo } from '@meemoo/react-components';
 import {
 	Button,
 	Dropdown,
 	DropdownButton,
 	DropdownContent,
 	MenuContent,
-	MenuItemInfo,
 } from '@meemoo/react-components';
 
 import { Icon } from '../Icon';

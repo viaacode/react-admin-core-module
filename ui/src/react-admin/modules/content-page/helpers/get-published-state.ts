@@ -1,5 +1,6 @@
 import { isAfter, isBefore, isWithinInterval, parseISO } from 'date-fns';
-import { ContentPageInfo, PublishOption } from '../types/content-pages.types';
+import type { ContentPageInfo } from '../types/content-pages.types';
+import { PublishOption } from '../types/content-pages.types';
 
 export function getPublishedState(
 	contentPage: ContentPageInfo | Partial<ContentPageInfo> | undefined | null

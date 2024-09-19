@@ -1,16 +1,19 @@
-import { Button, ButtonAction, ButtonType, Column, Grid } from '@viaa/avo2-components';
+import type { ButtonAction, ButtonType } from '@viaa/avo2-components';
+import { Button, Column, Grid } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
-import { AdminConfigManager, IconConfig } from '~core/config';
+import type { IconConfig } from '~core/config';
+import { AdminConfigManager } from '~core/config';
 import Icon from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~shared/services/permission-service';
 
-import { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
+import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;

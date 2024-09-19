@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import React, { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
 import { tHtml } from '~shared/helpers/translation-functions';
 import { Link } from '../Link';
 

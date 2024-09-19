@@ -1,20 +1,19 @@
-import { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import { BlockImageGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import type { BlockImageGridWrapperProps } from '~content-blocks/BlockImageGrid/BlockImageGrid.wrapper';
 
 import { AdminConfigManager } from '~core/config';
 import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_FILL_OPTIONS } from '~modules/content-page/const/get-fill-options';
 import { GET_IMAGE_GRID_FORMAT_OPTIONS } from '~modules/content-page/const/get-image-grid-format-options';
 
-import { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { tText } from '~shared/helpers/translation-functions';
-import {
+import type {
 	ContentBlockConfig,
-	ContentBlockEditor,
-	ContentBlockType,
 	DefaultContentBlockState,
 	ImageGridBlockComponentStateFields,
 } from '../../../types/content-block.types';
+import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import { BLOCK_FIELD_DEFAULTS, BLOCK_STATE_DEFAULTS, FILE_FIELD, TEXT_FIELD } from '../defaults';
 

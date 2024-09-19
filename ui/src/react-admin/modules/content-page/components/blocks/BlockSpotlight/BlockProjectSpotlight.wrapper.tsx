@@ -1,16 +1,16 @@
-import { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
-import { type Avo } from '@viaa/avo2-types';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { BlockSpotlight, ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import type { ButtonAction, RenderLinkFunction } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import type { FunctionComponent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
+import { BlockSpotlight } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 import { AdminConfigManager } from '~core/config';
 import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
-import { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
 
-import {
-	LoadingErrorLoadedComponent,
-	LoadingInfo,
-} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 

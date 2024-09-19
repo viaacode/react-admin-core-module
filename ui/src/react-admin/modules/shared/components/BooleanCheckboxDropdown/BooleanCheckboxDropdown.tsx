@@ -1,10 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import { NULL_FILTER } from '../../helpers/filters';
-import {
-	CheckboxDropdownModal,
-	CheckboxOption,
-} from '../CheckboxDropdownModal/CheckboxDropdownModal';
+import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
+import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 
 import { tText } from '~shared/helpers/translation-functions';
 

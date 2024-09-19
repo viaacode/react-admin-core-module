@@ -1,5 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import type { PermissionName } from '@viaa/avo2-types';
 
 export class PermissionService {
 	public static hasPerm(

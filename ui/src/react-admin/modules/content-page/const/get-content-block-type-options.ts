@@ -1,4 +1,4 @@
-import { SelectOption } from '@viaa/avo2-components';
+import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { tText } from '~shared/helpers/translation-functions';
 import { ContentBlockType } from '../types/content-block.types';

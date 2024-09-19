@@ -1,22 +1,17 @@
 import type { Avo } from '@viaa/avo2-types';
-import {
-	Button,
-	Flex,
-	FlexItem,
-	FormGroup,
-	IconName,
-	LinkTarget,
-	TextInput,
-} from '@viaa/avo2-components';
+import type { IconName } from '@viaa/avo2-components';
+import { Button, Flex, FlexItem, FormGroup, LinkTarget, TextInput } from '@viaa/avo2-components';
 import { isNull, noop } from 'lodash-es';
-import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import ReactSelect, { ActionMeta, SingleValue } from 'react-select';
+import type { FunctionComponent } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import type { ActionMeta, SingleValue } from 'react-select';
+import ReactSelect from 'react-select';
 import AsyncSelect from 'react-select/async';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { CustomError } from '../../helpers/custom-error';
-import { PickerItem, PickerTypeOption } from '../../types/content-picker';
+import type { PickerItem, PickerTypeOption } from '../../types/content-picker';
 import FileUpload from '../FileUpload/FileUpload';
 
 import {

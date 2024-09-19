@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 import { sanitizeHtml } from '../../helpers/sanitize';
 import { SanitizePreset } from '../../helpers/sanitize/presets';
