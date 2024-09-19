@@ -377,6 +377,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 															'filterProps.includeEmpty'
 														)}
 														key={`filter-${col.id}`}
+														searchInputAriaLabel={tText(
+															'zoekveld checkbox filter aria label'
+														)}
 													/>
 												);
 

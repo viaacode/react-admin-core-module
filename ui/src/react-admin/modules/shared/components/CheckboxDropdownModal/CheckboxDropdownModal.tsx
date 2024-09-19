@@ -61,6 +61,7 @@ export interface CheckboxDropdownModalProps {
 	showSearch?: boolean;
 	onChange: (checkedOptions: string[], id: string) => void;
 	onSearch?: (aggId: string) => void;
+	searchInputAriaLabel?: string;
 }
 
 export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps> = ({
@@ -73,6 +74,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 	showSearch = true,
 	onChange,
 	onSearch,
+	searchInputAriaLabel,
 }) => {
 	// Computed
 	const optionsFromPairs = fromPairs(
@@ -255,7 +257,7 @@ export const CheckboxDropdownModal: FunctionComponent<CheckboxDropdownModalProps
 									)}
 									icon={'search' as IconName}
 									value={searchKeyword}
-									ariaLabel={tText('aria label')}
+									ariaLabel={searchInputAriaLabel}
 									onChange={(value) => {
 										setSearchKeyword(value);
 
