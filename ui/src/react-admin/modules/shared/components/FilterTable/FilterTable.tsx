@@ -370,7 +370,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 														)}
 														key={`filter-${col.id}`}
 														searchInputAriaLabel={tText(
-															'zoekveld checkbox filter aria label'
+															'modules/shared/components/filter-table/filter-table___zoekveld-checkbox-filter-aria-label'
 														)}
 													/>
 												);

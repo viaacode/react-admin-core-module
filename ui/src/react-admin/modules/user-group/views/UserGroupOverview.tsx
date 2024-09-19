@@ -268,7 +268,9 @@ const UserGroupOverview = forwardRef<UserGroupOverviewRef | undefined, UserGroup
 				<div className={className}>
 					<TextInput
 						placeholder={tText('modules/user-group/views/user-group-overview___zoek')}
-						aria-label={tText('zoekveld aria label')}
+						aria-label={tText(
+							'modules/user-group/views/user-group-overview___zoekveld-aria-label'
+						)}
 						value={search}
 						onChange={onSearchChange}
 						onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}

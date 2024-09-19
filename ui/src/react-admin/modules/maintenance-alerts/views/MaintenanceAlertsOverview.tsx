@@ -300,7 +300,9 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 				itemsPerPage={ITEMS_PER_PAGE}
 				onTableStateChanged={setTableState}
 				isLoading={isLoading}
-				searchInputAriaLabel={tText('zoek input aria label')}
+				searchInputAriaLabel={tText(
+					'modules/maintenance-alerts/views/maintenance-alerts-overview___zoek-input-aria-label'
+				)}
 			/>
 		);
 	};

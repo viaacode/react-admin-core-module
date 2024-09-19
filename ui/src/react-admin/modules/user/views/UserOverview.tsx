@@ -603,7 +603,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						row?.profileId || row?.userId || row?.email || ''
 					}
 					className="u-spacer-bottom-l u-useroverview-table"
-					searchInputAriaLabel={tText('zoek input aria label')}
+					searchInputAriaLabel={tText(
+						'modules/user/views/user-overview___zoek-input-aria-label'
+					)}
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}

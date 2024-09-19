@@ -378,7 +378,9 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 					itemsPerPage={ITEMS_PER_PAGE}
 					onTableStateChanged={setTableState}
 					isLoading={isLoading}
-					searchInputAriaLabel={tText('zoek input aria label')}
+					searchInputAriaLabel={tText(
+						'modules/content-page-labels/views/content-page-label-overview___zoek-input-aria-label'
+					)}
 				/>
 				<ConfirmModal
 					deleteObjectCallback={handleDelete}

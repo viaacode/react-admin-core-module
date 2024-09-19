@@ -380,7 +380,9 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		<div className={className}>
 			<TextInput
 				type="search"
-				aria-label={tText('zoekveld aria label')}
+				aria-label={tText(
+					'modules/translations/views/translations-overview___zoekveld-aria-label'
+				)}
 				iconEnd={<Icon name="filter" />}
 				value={search}
 				onChange={(e) => {

@@ -327,7 +327,9 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 					]}
 					renderCell={renderTableCell as any}
 					rowKey="id"
-					searchInputAriaLabel={tText('zoek input aria label')}
+					searchInputAriaLabel={tText(
+						'modules/navigation/views/navigation-bar-detail___zoek-input-aria-label'
+					)}
 				/>
 				<Spacer margin="top">
 					<Flex center>
