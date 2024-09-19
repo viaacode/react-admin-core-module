@@ -22,4 +22,8 @@ export class AdminConfigManager {
 			})
 		);
 	}
+
+	public static hasAdminRoute(name: keyof AdminConfig['routes']): boolean {
+		return !!this.config.routes[name];
+	}
 }
