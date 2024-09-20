@@ -12,12 +12,20 @@ export {
 } from '~modules/content-page/types/content-pages.types';
 export { type DbContentPage } from '~modules/content-page/types/content-pages.types';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
+export { BlockHeading } from '~content-blocks/BlockHeading';
+export { BlockIntro } from '~content-blocks/BlockIntro';
+export { BlockRichText } from '~content-blocks/BlockRichText';
+export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper';
+
+// Auth and data fetching with logout
+export { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+export { goToLoginBecauseOfUnauthorizedError } from '~shared/helpers/fetch-with-logout';
 
 // Admin Core Config
-import { AdminConfigManager } from '~core/config';
-
+export { AdminConfigManager, ToastType } from '~core/config';
 export type { AdminConfig } from './react-admin/core/config/config.types';
-export { AdminConfigManager };
 
 // Misc
 export { type LinkInfo, type ToastInfo } from '~core/config/config.types';
+export { sanitizeHtml } from '~shared/helpers/sanitize';
+export { SanitizePreset } from '~shared/helpers/sanitize/presets';
