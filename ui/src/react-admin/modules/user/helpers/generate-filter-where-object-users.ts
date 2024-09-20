@@ -162,7 +162,7 @@ export const generateWhereObjectArchief = (
 					{ full_name: { _ilike: query } },
 					{
 						organisation: {
-							schema_name: {
+							skos_pref_label: {
 								_ilike: query,
 							},
 						},
