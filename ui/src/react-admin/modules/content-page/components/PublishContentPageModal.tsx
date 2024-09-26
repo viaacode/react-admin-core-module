@@ -21,7 +21,7 @@ import { parseISO } from 'date-fns';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 import { getPublishedState } from '~modules/content-page/helpers';
 
@@ -156,7 +156,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							)}
 						>
 							<DatePicker
-								{...datePickerDefaultProps}
+								{...getDatePickerDefaultProps}
 								value={publishAt ? parseISO(publishAt) : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
 								showTimeInput={true}
@@ -169,7 +169,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							)}
 						>
 							<DatePicker
-								{...datePickerDefaultProps}
+								{...getDatePickerDefaultProps}
 								value={depublishAt ? parseISO(depublishAt) : undefined}
 								onChange={(date) =>
 									setDepublishAt(date ? date.toISOString() : null)
@@ -189,7 +189,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 				>
 					<Spacer margin={['left-large', 'top']}>
 						<DatePicker
-							{...datePickerDefaultProps}
+							{...getDatePickerDefaultProps}
 							value={publishedAt ? parseISO(publishedAt) : undefined}
 							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
 						/>

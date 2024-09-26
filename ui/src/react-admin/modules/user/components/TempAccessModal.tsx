@@ -13,7 +13,7 @@ import { noop } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { toDateObject, toIsoDate } from '~shared/helpers/formatters/date';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
@@ -86,13 +86,13 @@ const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
 				<BlockHeading className="u-m-0" type="h4">
 					{tHtml('admin/users/components/temp-access-modal___begindatum')}
 				</BlockHeading>
-				<DatePicker {...datePickerDefaultProps} value={from} onChange={setFrom} />
+				<DatePicker {...getDatePickerDefaultProps} value={from} onChange={setFrom} />
 				<Spacer margin="top-large">
 					<BlockHeading className="u-m-0" type="h4">
 						{tHtml('admin/users/components/temp-access-modal___einddatum')}
 					</BlockHeading>
 				</Spacer>
-				<DatePicker {...datePickerDefaultProps} value={until} onChange={setUntil} />
+				<DatePicker {...getDatePickerDefaultProps} value={until} onChange={setUntil} />
 			</FormGroup>
 		);
 	};

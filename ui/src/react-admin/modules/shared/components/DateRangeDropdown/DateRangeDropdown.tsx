@@ -11,11 +11,10 @@ import {
 	Spacer,
 	TextInput,
 } from '@viaa/avo2-components';
-import { isValid } from 'date-fns';
+import { format, isValid, parse, set } from 'date-fns';
 import type { FC, MouseEvent, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
-import { format, parse, set } from 'date-fns';
-import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { DateInput } from '~shared/components/DateInput/DateInput';
 import { showToast } from '~shared/helpers/show-toast';
 
@@ -382,7 +381,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DateInput
-												{...datePickerDefaultProps}
+												{...getDatePickerDefaultProps()}
 												selected={fromDate}
 												onChange={(value) => handleDateChange(value, 'gte')}
 												disabled={dateControls !== 'date'}
@@ -396,7 +395,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 											)}
 										>
 											<DateInput
-												{...datePickerDefaultProps}
+												{...getDatePickerDefaultProps()}
 												selected={tillDate}
 												onChange={(value) => handleDateChange(value, 'lte')}
 												disabled={dateControls !== 'date'}

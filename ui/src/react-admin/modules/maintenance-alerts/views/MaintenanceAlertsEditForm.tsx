@@ -13,7 +13,7 @@ import type { FunctionComponent } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ValidationError } from 'yup';
 import { ToastType } from '~core/config';
-import { datePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 import { MaintenanceAlertsService } from '~modules/maintenance-alerts/maintenance-alerts.service';
 import type {
 	MaintenanceAlert,
@@ -321,7 +321,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			>
 				<>
 					<DateInput
-						{...datePickerDefaultProps}
+						{...getDatePickerDefaultProps()}
 						id="new-alert-from-date"
 						name="fromDate"
 						onBlur={isFormValid}
@@ -401,7 +401,7 @@ const MaintenanceAlertsEditForm: FunctionComponent<MaintenanceAlertsEditFormProp
 			>
 				<>
 					<DateInput
-						{...datePickerDefaultProps}
+						{...getDatePickerDefaultProps()}
 						id="new-alert-until-date"
 						name="untilDate"
 						onBlur={isFormValid}

@@ -4,6 +4,7 @@ import React from 'react';
 import { DateInput } from '~shared/components/DateInput/DateInput';
 
 import type { TimepickerProps } from './Timepicker.types';
+import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
 const Timepicker: FC<TimepickerProps> = (props) => {
 	const { className } = props;
@@ -12,6 +13,7 @@ const Timepicker: FC<TimepickerProps> = (props) => {
 
 	return (
 		<DateInput
+			locale={getDatePickerDefaultProps().locale}
 			wrapperClassName={classNames}
 			calendarClassName={classNames}
 			popperClassName={classNames}
