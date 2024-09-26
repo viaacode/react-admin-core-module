@@ -194,8 +194,8 @@ export const generateWhereObjectArchief = (
 			...getMultiOptionsFilters(
 				filters,
 				['idps', 'organisation'],
-				['identities', 'maintainer_users_profiles'],
-				['identity_provider_name', 'maintainer_identifier'],
+				['identities', 'organisation'],
+				['identity_provider_name', 'org_identifier'],
 				true
 			)
 		);
