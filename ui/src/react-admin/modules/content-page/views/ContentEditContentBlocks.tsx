@@ -30,6 +30,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import ContentBlockForm from '~modules/content-page/components/ContentBlockForm/ContentBlockForm';
 
 import './ContentEditContentBlocks.scss';
+import { isAvo } from '~shared/helpers/is-avo';
 
 interface ContentEditContentBlocksProps {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -286,6 +287,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 					onBlockClicked={focusBlock}
 					activeBlockPosition={activeBlockPosition}
 					commonUser={commonUser}
+					renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
 				/>
 			</div>
 

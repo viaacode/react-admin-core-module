@@ -11,7 +11,6 @@ import type {
 	ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { isAvo } from '~shared/helpers/is-avo';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import type { ContentBlockConfig } from '../../types/content-block.types';
 import { ContentBlockType } from '../../types/content-block.types';
@@ -24,6 +23,7 @@ type ContentPageDetailProps = {
 	onBlockClicked?: BlockClickHandler;
 	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
 	commonUser?: Avo.User.CommonUser;
+	renderFakeTitle?: boolean;
 };
 
 const queryClient = new QueryClient({
@@ -59,7 +59,7 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 		});
 
 		// Add page title as header block for faq items. Only for Avo
-		if (contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()) {
+		if (props.renderFakeTitle) {
 			contentBlockBlockConfigs = [
 				{
 					position: 0,

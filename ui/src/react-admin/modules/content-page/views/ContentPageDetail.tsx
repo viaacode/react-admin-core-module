@@ -43,6 +43,7 @@ import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import { PermissionService } from '~shared/services/permission-service';
 import type { DefaultComponentProps } from '~shared/types/components';
+import { isAvo } from '~shared/helpers/is-avo';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -484,6 +485,7 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 					<ContentPageRenderer
 						contentPageInfo={contentPageInfo}
 						commonUser={commonUser}
+						renderFakeTitle={contentPageInfo.contentType === 'FAQ_ITEM' && isAvo()}
 					/>
 				);
 			case 'metadata':
