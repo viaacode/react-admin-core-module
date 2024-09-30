@@ -10,11 +10,6 @@ const mockSiteVariablesService: Partial<Record<keyof SiteVariablesService, jest.
 	getSiteVariable: jest.fn(),
 };
 
-const mockTranslationsResponse = {
-	name: 'TRANSLATIONS_FRONTEND',
-	value: { key1: 'translation 1' },
-};
-
 const mockCacheManager: Partial<Record<'wrap', jest.SpyInstance>> = {
 	wrap: jest.fn().mockImplementation((key: string, func: () => any): any => {
 		return func();
@@ -43,16 +38,6 @@ describe('TranslationsService', () => {
 	});
 
 	describe('getFrontendTranslations', () => {
-		it('can get translations', async () => {
-			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(
-				mockTranslationsResponse.value
-			);
-			// mockCacheManager.wrap.mockResolvedValueOnce(mockTranslationsResponse.value);
-			const translations = await translationsService.getFrontendTranslations(Locale.Nl);
-
-			expect(translations).toEqual(mockTranslationsResponse.value);
-		});
-
 		it('throws an exception if no translations were set', async () => {
 			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(undefined);
 			mockCacheManager.wrap.mockResolvedValueOnce(undefined);

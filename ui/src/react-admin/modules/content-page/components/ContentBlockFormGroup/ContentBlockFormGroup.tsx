@@ -45,7 +45,7 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 			const formErrorsForBlock = configErrors[stateKey];
 
 			if (typeof stateIndex === 'number') {
-				error = formErrorsForBlock[stateIndex] as string[];
+				error = (formErrorsForBlock?.[stateIndex] || []) as string[];
 			} else {
 				error = formErrorsForBlock as string[];
 			}

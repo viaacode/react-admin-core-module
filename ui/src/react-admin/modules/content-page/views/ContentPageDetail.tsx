@@ -191,11 +191,16 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
-			navigateToAbsoluteOrRelativeUrl(
-				`/${AdminConfigManager.getConfig().locale}${contentPageInfo.path}`,
-				history,
-				LinkTarget.Blank
-			);
+			if (isAvo()) {
+				// Do not add the locale to the path for AVO
+				navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
+			} else {
+				navigateToAbsoluteOrRelativeUrl(
+					`/${AdminConfigManager.getConfig().locale}${contentPageInfo.path}`,
+					history,
+					LinkTarget.Blank
+				);
+			}
 		} else {
 			showToast({
 				title: tText('modules/content-page/views/content-page-detail___error'),

@@ -76,9 +76,16 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target={LinkTarget.Self}
 						title={title}
 						className={clsx(className, { 'a-link__no-styles': removeStyles })}
-						onClick={() => {
+						onClick={(evt) => {
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
-							!anchor && scrollTo({ top: 0 });
+							if (anchor) {
+								const anchorId = fullUrl.split('#')[1];
+								document
+									.getElementById(anchorId)
+									?.scrollIntoView({ behavior: 'instant' });
+							} else {
+								scrollTo({ top: 0 });
+							}
 						}}
 					>
 						{children}

@@ -135,11 +135,16 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
-			id={blockState.anchor}
 			data-anchor={blockState.anchor}
 			ref={blockRef}
 			onClick={onClick}
 		>
+			{/*
+			 * Separate div where we add the anchor id, so we can move this element higher,
+			 * to avoid overlapping a fixed header when we jump to this anchor
+			 * https://meemoo.atlassian.net/browse/AVO-3351
+			 */}
+			<div className="c-anchor-block__anchor" id={blockState.anchor}></div>
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,

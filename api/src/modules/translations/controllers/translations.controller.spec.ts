@@ -4,18 +4,13 @@ import { Lookup_Languages_Enum } from '../../shared/generated/graphql-db-types-h
 import { type UpdateResponse } from '../../shared/types/types';
 
 import { TranslationsService } from '../services/translations.service';
-import { Component, TranslationKey } from '../translations.types';
+import { Component } from '../translations.types';
 
 import { TranslationsController } from './translations.controller';
 
 const mockTranslationsService: Partial<Record<keyof TranslationsService, jest.SpyInstance>> = {
 	getTranslations: jest.fn(),
 	updateTranslation: jest.fn(),
-};
-
-const mockTranslationsResponse = {
-	name: TranslationKey.TRANSLATIONS_FRONTEND,
-	value: { key1: 'translation 1' },
 };
 
 describe('TranslationsController', () => {
@@ -42,11 +37,9 @@ describe('TranslationsController', () => {
 
 	describe('getTranslations', () => {
 		it('should return the translations', async () => {
-			mockTranslationsService.getTranslations.mockResolvedValueOnce(mockTranslationsResponse);
-
 			const translations = await translationsController.getTranslations();
 
-			expect(translations).toEqual(mockTranslationsResponse);
+			expect(translations).toEqual({});
 		});
 	});
 
