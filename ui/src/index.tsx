@@ -125,6 +125,8 @@ function setConfig() {
 				angleUp: { name: 'up' },
 				angleLeft: { name: 'left' },
 				angleRight: { name: 'right' },
+				anglesLeft: { name: 'anglesLeft' },
+				anglesRight: { name: 'anglesRight' },
 				delete: { name: 'delete' },
 				edit: { name: 'edit' },
 				extraOptions: { name: 'dots-vertical' },

@@ -1,6 +1,5 @@
 import type { LinkTarget } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import type { DatabaseType } from '@viaa/avo2-types';
+import type { Avo, DatabaseType } from '@viaa/avo2-types';
 import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from 'react';
 
 import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
@@ -165,6 +164,8 @@ export interface IconConfig {
 		angleDown: IconComponentProps;
 		angleLeft: IconComponentProps;
 		angleRight: IconComponentProps;
+		anglesLeft: IconComponentProps;
+		anglesRight: IconComponentProps;
 		arrowRight: IconComponentProps;
 		delete: IconComponentProps;
 		extraOptions: IconComponentProps;

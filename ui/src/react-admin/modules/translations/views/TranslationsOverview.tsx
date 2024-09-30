@@ -1,6 +1,5 @@
 import type { RichEditorState } from '@meemoo/react-components';
-import { Button, Pagination, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
-import { Pagination as PaginationAvo } from '@viaa/avo2-components';
+import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
 import { reverse, sortBy } from 'lodash-es';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -23,7 +22,6 @@ import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';
-import { isAvo } from '~shared/helpers/is-avo';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
@@ -33,6 +31,7 @@ import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
 
 import './TranslationsOverview.scss';
+import { Spacer } from '@viaa/avo2-components';
 
 type OrderProp = `value_${Locale}` | 'id';
 
@@ -192,48 +191,41 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	};
 
 	const getPagination = () => {
-		if (!isAvo()) {
-			return (
-				<Pagination
-					buttons={{
-						next: (
-							<Button
-								className="u-pl-24:sm u-pl-8"
-								disabled={page === pageCount}
-								variants={['text', 'neutral']}
-								label={tHtml(
-									'modules/shared/components/pagination-bar/pagination-bar___volgende'
-								)}
-								iconEnd={<Icon name="angleRight" />}
-							/>
-						),
-						previous: (
-							<Button
-								className="u-pr-24:sm u-pr-8"
-								disabled={page === 1}
-								variants={['text', 'neutral']}
-								label={tHtml(
-									'modules/shared/components/pagination-bar/pagination-bar___vorige'
-								)}
-								iconStart={<Icon name="angleLeft" />}
-							/>
-						),
+		return (
+			<Spacer margin="top-large">
+				<PaginationBar
+					startItem={(page || 0) * TRANSLATIONS_PER_PAGE}
+					itemsPerPage={TRANSLATIONS_PER_PAGE}
+					totalItems={pageCount * TRANSLATIONS_PER_PAGE}
+					onPageChange={handlePageChange}
+					firstLabel={tText('Eerste')}
+					firstIcon={<Icon name="anglesLeft" />}
+					previousLabel={tText('shared/components/filter-table/filter-table___vorige')}
+					previousIcon={<Icon name="angleLeft" />}
+					nextLabel={tText('shared/components/filter-table/filter-table___volgende')}
+					nextIcon={<Icon name="angleRight" />}
+					lastLabel={tText('Laatste')}
+					lastIcon={<Icon name="anglesRight" />}
+					backToTopLabel={tText(
+						'shared/components/filter-table/filter-table___terug-naar-boven'
+					)}
+					backToTopIcon={<Icon name="angleUp" />}
+					labelBetweenPageStartAndEnd={tText(
+						'modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar'
+					)}
+					labelBetweenPageEndAndTotal={tText(
+						'modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar'
+					)}
+					showBackToTop={true}
+					showFirstAndLastButtons={true}
+					onScrollToTop={() => {
+						const filterTable = document.querySelector('.c-filter-table');
+						const scrollable = filterTable?.closest('.c-scrollable');
+						scrollable?.scrollTo(0, 0);
 					}}
-					showFirstLastNumbers
-					onPageChange={handlePageChange}
-					currentPage={page - 1}
-					pageCount={pageCount}
 				/>
-			);
-		} else {
-			return (
-				<PaginationAvo
-					pageCount={pageCount}
-					onPageChange={handlePageChange}
-					currentPage={page - 1}
-				/>
-			);
-		}
+			</Spacer>
+		);
 	};
 
 	const translationTableColumns = [

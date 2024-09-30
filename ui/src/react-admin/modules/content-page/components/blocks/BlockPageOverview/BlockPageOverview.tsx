@@ -8,7 +8,6 @@ import {
 	convertToHtml,
 	Flex,
 	Grid,
-	Pagination,
 	Spacer,
 	Tabs,
 	TagList,
@@ -30,6 +29,9 @@ import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
+import { PaginationBar } from '@meemoo/react-components';
+import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -460,11 +462,14 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			{renderPages()}
 			{pageCount > 1 && (
 				<Spacer margin="top">
-					<Pagination
-						pageCount={pageCount}
-						currentPage={currentPage}
-						displayCount={5}
+					<PaginationBar
+						{...GET_DEFAULT_PAGINATION_BAR_PROPS()}
+						startItem={currentPage * ITEMS_PER_PAGE}
+						itemsPerPage={ITEMS_PER_PAGE}
+						totalItems={pageCount * ITEMS_PER_PAGE}
 						onPageChange={onCurrentPageChanged}
+						showBackToTop={false}
+						showProgress={false}
 					/>
 				</Spacer>
 			)}

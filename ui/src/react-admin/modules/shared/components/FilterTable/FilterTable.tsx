@@ -47,9 +47,9 @@ import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownMo
 import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
-import { Icon } from '../Icon';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 
 export interface FilterableTableState {
 	query?: string;
@@ -476,30 +476,20 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 							{showPagination && (
 								<Spacer margin="top-large">
 									<PaginationBar
-										count={itemsPerPage}
+										{...GET_DEFAULT_PAGINATION_BAR_PROPS()}
+										startItem={(tableState.page || 0) * itemsPerPage}
+										itemsPerPage={itemsPerPage}
+										totalItems={dataCount}
 										onPageChange={(newPage: number) =>
 											handleTableStateChanged(newPage, 'page')
 										}
-										start={(tableState.page || 0) * itemsPerPage}
-										total={dataCount}
-										nextLabel={tText(
-											'shared/components/filter-table/filter-table___volgende'
-										)}
-										nextIcon={<Icon name="angleRight" />}
-										previousLabel={tText(
-											'shared/components/filter-table/filter-table___vorige'
-										)}
-										previousIcon={<Icon name="angleLeft" />}
-										backToTopLabel={tText(
-											'shared/components/filter-table/filter-table___terug-naar-boven'
-										)}
-										backToTopIcon={<Icon name="angleUp" />}
-										labelBetweenPageStartAndEnd={tText(
-											'modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar'
-										)}
-										labelBetweenPageEndAndTotal={tText(
-											'modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar'
-										)}
+										onScrollToTop={() => {
+											const filterTable =
+												document.querySelector('.c-filter-table');
+											const scrollable =
+												filterTable?.closest('.c-scrollable');
+											scrollable?.scrollTo(0, 0);
+										}}
 									/>
 								</Spacer>
 							)}
