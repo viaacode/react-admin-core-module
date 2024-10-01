@@ -9,7 +9,7 @@ import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
 import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
 import type { IconConfig } from '~core/config';
 import { AdminConfigManager } from '~core/config';
-import Icon from '~shared/components/Icon/Icon';
+import { Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~shared/services/permission-service';
 

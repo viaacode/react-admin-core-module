@@ -14,7 +14,7 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 import { ToastType } from '~core/config/config.types';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import Loader from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
 
 import './FileUpload.scss';
 

@@ -34,7 +34,10 @@ interface NavigationEditProps {
 	navigationItemId: string | undefined;
 }
 
-const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigationItemId }) => {
+export const NavigationItemEdit: FC<NavigationEditProps> = ({
+	navigationBarId,
+	navigationItemId,
+}) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const navigationBarName = startCase(navigationBarId);
@@ -453,5 +456,3 @@ const NavigationItemEdit: FC<NavigationEditProps> = ({ navigationBarId, navigati
 
 	return renderPageContent();
 };
-
-export default NavigationItemEdit;

@@ -18,7 +18,7 @@ import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
 import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
 import { isPublic } from '~modules/content-page/helpers/get-published-state';
@@ -30,7 +30,7 @@ import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPa
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import Link from '~shared/components/Link/Link';
+import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
@@ -62,7 +62,7 @@ export type ContentPageDetailProps = DefaultComponentProps & {
 	commonUser: Avo.User.CommonUser;
 };
 
-const ContentPageDetail: FC<ContentPageDetailProps> = ({
+export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	id,
 	loaded = noop,
 	className,
@@ -554,5 +554,3 @@ const ContentPageDetail: FC<ContentPageDetailProps> = ({
 		</AdminLayout>
 	);
 };
-
-export default ContentPageDetail;

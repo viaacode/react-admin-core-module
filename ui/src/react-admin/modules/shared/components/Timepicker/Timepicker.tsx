@@ -6,7 +6,7 @@ import { DateInput } from '~shared/components/DateInput/DateInput';
 import type { TimepickerProps } from './Timepicker.types';
 import { getDatePickerDefaultProps } from '~modules/content-page/components/DatePicker/DatePicker.consts';
 
-const Timepicker: FC<TimepickerProps> = (props) => {
+export const Timepicker: FC<TimepickerProps> = (props) => {
 	const { className } = props;
 
 	const classNames = clsx(className, 'c-datepicker', 'c-datepicker--time');
@@ -28,5 +28,3 @@ const Timepicker: FC<TimepickerProps> = (props) => {
 		/>
 	);
 };
-
-export default Timepicker;

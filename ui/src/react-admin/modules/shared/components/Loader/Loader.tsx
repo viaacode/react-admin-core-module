@@ -6,7 +6,7 @@ import React from 'react';
 import { AdminConfigManager } from '~core/config';
 import type { DefaultComponentProps } from '../../types';
 
-const Loader: FC<DefaultComponentProps & { fullscreen?: boolean }> = (props) => {
+export const Loader: FC<DefaultComponentProps & { fullscreen?: boolean }> = (props) => {
 	const componentsConfig = AdminConfigManager.getConfig().components;
 
 	if (componentsConfig?.loader.component) {
@@ -16,5 +16,3 @@ const Loader: FC<DefaultComponentProps & { fullscreen?: boolean }> = (props) => 
 		return <Spinner {...(props as SpinnerProps)} />;
 	}
 };
-
-export default Loader;

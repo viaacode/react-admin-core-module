@@ -1,1 +1,1 @@
-export { default as UserGroupOverview } from './UserGroupOverview';
+export { UserGroupOverview } from './UserGroupOverview';

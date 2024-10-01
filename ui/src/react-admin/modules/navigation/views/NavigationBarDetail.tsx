@@ -43,7 +43,7 @@ export interface NavigationDetailProps {
 	navigationBarId: string;
 }
 
-const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
+export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
@@ -412,5 +412,3 @@ const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => 
 
 	return renderPageContent();
 };
-
-export default NavigationBarDetail;

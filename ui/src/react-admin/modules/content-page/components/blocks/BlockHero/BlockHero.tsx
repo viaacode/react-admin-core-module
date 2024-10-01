@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import { isString } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
-import Icon from '~shared/components/Icon/Icon';
+import { Icon } from '~shared/components/Icon/Icon';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';

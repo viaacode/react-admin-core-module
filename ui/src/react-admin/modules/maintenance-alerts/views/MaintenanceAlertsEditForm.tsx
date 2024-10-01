@@ -27,7 +27,7 @@ import { Locale } from '~modules/translations/translations.core.types';
 import type { LanguageInfo } from '~modules/translations/translations.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import { DateInput } from '~shared/components/DateInput/DateInput';
-import Timepicker from '~shared/components/Timepicker/Timepicker';
+import { Timepicker } from '~shared/components/Timepicker/Timepicker';
 import { timePickerDefaults } from '~shared/components/Timepicker/Timepicker.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { CustomError } from '~shared/helpers/custom-error';

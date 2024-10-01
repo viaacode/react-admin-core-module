@@ -28,7 +28,8 @@ export const useGetUserGroups = <TData = UserGroup[] | UserGroupWithPermissions[
 			}
 		},
 		{
-			cacheTime: 60,
+			cacheTime: Infinity,
+			staleTime: Infinity,
 			keepPreviousData: true,
 		}
 	);

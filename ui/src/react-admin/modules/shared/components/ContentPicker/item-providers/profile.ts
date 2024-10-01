@@ -10,6 +10,7 @@ export const retrieveProfiles = async (name: string | null, limit = 5): Promise<
 	try {
 		const response: [Avo.User.CommonUser[], number] = await UserService.getProfiles(
 			0,
+			limit,
 			'lastAccessAt',
 			'desc',
 			'dateTime',
@@ -20,8 +21,7 @@ export const retrieveProfiles = async (name: string | null, limit = 5): Promise<
 							{ mail: { _ilike: `%${name}%` } },
 						],
 				  }
-				: undefined,
-			limit
+				: undefined
 		);
 		return parseProfiles(response[0]);
 	} catch (err) {

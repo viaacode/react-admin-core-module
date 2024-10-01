@@ -1,6 +1,6 @@
 // Content page rendering
 
-export { default as ContentPageRenderer } from './react-admin/modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+export { ContentPageRenderer } from './react-admin/modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 export {
 	convertDbContentPageToContentPageInfo,
 	convertDbContentPagesToContentPageInfos,

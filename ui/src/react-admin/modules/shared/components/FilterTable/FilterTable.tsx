@@ -416,7 +416,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 											placeholder={tText(
 												'admin/shared/components/filter-table/filter-table___bulkactie'
 											)}
-											disabled={!(selectedItemIds || []).length}
+											disabled={
+												!bulkActions.find((action) => !action.disabled)
+											}
 											className="c-bulk-action-select"
 										/>
 									)}

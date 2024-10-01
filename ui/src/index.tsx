@@ -23,6 +23,7 @@ import { tText } from '../src/react-admin/modules/shared/helpers/translation-fun
 import App from './App';
 import i18n, { initI18n } from './shared/translations/i18n';
 import { Locale } from '~modules/translations/translations.core.types';
+import { UserBulkAction } from '~modules/user/user.types';
 
 const proxyUrl = 'http://localhost:3100';
 const adminCoreApiUrl = 'http://localhost:3300';
@@ -360,7 +361,14 @@ function setConfig() {
 			SEARCH: `/${ROUTE_PARTS.search}`,
 		},
 		users: {
-			bulkActions: ['block', 'unblock', 'delete', 'change_subjects', 'export'],
+			bulkActions: [
+				UserBulkAction.BLOCK,
+				UserBulkAction.UNBLOCK,
+				UserBulkAction.DELETE,
+				UserBulkAction.CHANGE_SUBJECTS,
+				UserBulkAction.EXPORT_SELECTION,
+				UserBulkAction.EXPORT_ALL,
+			],
 		},
 		locale: Locale.En,
 		env: {

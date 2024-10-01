@@ -50,7 +50,7 @@ import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 
-import Link from '~shared/components/Link/Link';
+import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -75,7 +75,7 @@ export type ContentPageEditProps = DefaultComponentProps & {
 	commonUser: Avo.User.CommonUser;
 };
 
-const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }) => {
+export const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -841,5 +841,3 @@ const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }
 		/>
 	);
 };
-
-export default ContentPageEdit;

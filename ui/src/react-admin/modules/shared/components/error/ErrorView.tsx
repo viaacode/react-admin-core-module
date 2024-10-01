@@ -25,7 +25,7 @@ interface ErrorViewProps {
 	children?: ReactNode;
 }
 
-const ErrorView: FunctionComponent<ErrorViewProps> = ({
+export const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	message,
 	icon,
 	children = null,
@@ -89,5 +89,3 @@ const ErrorView: FunctionComponent<ErrorViewProps> = ({
 		</Container>
 	);
 };
-
-export default ErrorView;

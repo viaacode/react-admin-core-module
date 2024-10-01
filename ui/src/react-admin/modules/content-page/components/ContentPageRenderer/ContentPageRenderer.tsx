@@ -36,7 +36,7 @@ const queryClient = new QueryClient({
 	},
 });
 
-const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
+export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
 		// Convert editor states to html
 		let contentBlockBlockConfigs = convertRichTextEditorStatesToHtml(
@@ -170,5 +170,3 @@ const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) =
 	}
 	return renderContentPage();
 };
-
-export default ContentPageRenderer;

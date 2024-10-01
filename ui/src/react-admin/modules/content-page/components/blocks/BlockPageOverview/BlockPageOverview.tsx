@@ -19,7 +19,7 @@ import { findIndex, flatten, uniqBy } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
-import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';

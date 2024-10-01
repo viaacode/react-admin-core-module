@@ -5,7 +5,7 @@ import type { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router';
 import { AdminConfigManager } from '~core/config';
 
-import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import { tHtml } from '~shared/helpers/translation-functions';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 

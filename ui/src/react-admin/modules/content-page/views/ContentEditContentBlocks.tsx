@@ -7,7 +7,7 @@ import React, { useCallback, useState } from 'react';
 import { Navbar, Select } from '@viaa/avo2-components';
 import { HorizontalPageSplit } from 'react-page-split';
 
-import ContentPageRenderer from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type { DraggableItemData } from '~modules/content-page/components/DraggableList/DraggableList';
 import DraggableList from '~modules/content-page/components/DraggableList/DraggableList';
 import { GET_CONTENT_BLOCK_TYPE_OPTIONS } from '~modules/content-page/const/get-content-block-type-options';

@@ -1,3 +1,3 @@
-export { default as ContentPageLabelOverview } from './ContentPageLabelOverview';
-export { default as ContentPageLabelDetail } from './ContentPageLabelDetail';
-export { default as ContentPageLabelEdit } from './ContentPageLabelEdit';
+export { ContentPageLabelOverview } from './ContentPageLabelOverview';
+export { ContentPageLabelDetail } from './ContentPageLabelDetail';
+export { ContentPageLabelEdit } from './ContentPageLabelEdit';

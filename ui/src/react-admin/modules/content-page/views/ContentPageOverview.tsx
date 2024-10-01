@@ -31,8 +31,8 @@ import type { UserGroupWithPermissions } from '~modules/user-group/types/user-gr
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
-import Icon from '~shared/components/Icon/Icon';
-import Link from '~shared/components/Link/Link';
+import { Icon } from '~shared/components/Icon/Icon';
+import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
@@ -54,7 +54,7 @@ import './ContentPageOverview.scss';
 import { truncateTableValue } from '~shared/helpers/truncate';
 import { PermissionService } from '~shared/services/permission-service';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import { GET_OVERVIEW_COLUMNS, PAGES_PER_PAGE } from '../const/content-page.consts';
 import { useContentTypes } from '../hooks/useContentTypes';
@@ -73,7 +73,9 @@ interface ContentPageOverviewProps {
 	commonUser?: Avo.User.CommonUser;
 }
 
-const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ commonUser }) => {
+export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({
+	commonUser,
+}) => {
 	// Hooks
 	const [contentToDelete, setContentToDelete] = useState<ContentPageInfo | null>(null);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
@@ -738,5 +740,3 @@ const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = ({ comm
 		/>
 	);
 };
-
-export default ContentPageOverview;

@@ -1,1 +1,1 @@
-export { default as Timepicker } from './Timepicker';
+export { Timepicker } from './Timepicker';

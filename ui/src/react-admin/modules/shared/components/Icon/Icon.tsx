@@ -10,7 +10,7 @@ interface IconProps {
 	className?: string;
 }
 
-const Icon: FC<IconProps> = ({ name, className }) => {
+export const Icon: FC<IconProps> = ({ name, className }) => {
 	const iconConfig = AdminConfigManager.getConfig().icon;
 	const iconProps = ((iconConfig?.componentProps as any)?.[name] as {
 		name: string;
@@ -19,5 +19,3 @@ const Icon: FC<IconProps> = ({ name, className }) => {
 
 	return <IconComponent {...iconProps} className={className} />;
 };
-
-export default Icon;

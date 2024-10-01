@@ -24,7 +24,7 @@ import type { ContentPageLabel } from '../content-page-label.types';
 
 type ContentPageLabelDetailProps = { contentPageLabelId: string } & DefaultComponentProps;
 
-const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = ({
+export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = ({
 	contentPageLabelId,
 	className,
 }) => {
@@ -214,5 +214,3 @@ const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = (
 		</>
 	);
 };
-
-export default ContentPageLabelDetail;

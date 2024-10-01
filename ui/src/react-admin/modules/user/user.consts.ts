@@ -16,11 +16,13 @@ import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
 import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
-import type { UserBulkAction, UserOverviewTableCol } from './user.types';
+import type { UserOverviewTableCol } from './user.types';
+import { UserBulkAction } from './user.types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
 	confirmButtonType?: ButtonType;
+	disabled?: boolean;
 };
 
 export const GET_USER_OVERVIEW_TABLE_COLS: (props: {
@@ -369,7 +371,8 @@ const getHetArchiefColumns = (
 
 export const GET_USER_BULK_ACTIONS = (
 	user: Avo.User.CommonUser | undefined,
-	bulkActions: UserBulkAction[]
+	bulkActions: UserBulkAction[],
+	hasSelection: boolean
 ): UserBulkActionOption[] => {
 	if (!user || !bulkActions) {
 		return [];
@@ -378,39 +381,51 @@ export const GET_USER_BULK_ACTIONS = (
 
 	if (
 		PermissionService.hasPerm(user, PermissionName.EDIT_ANY_USER) &&
-		bulkActions.includes('block')
+		bulkActions.includes(UserBulkAction.BLOCK)
 	) {
 		actions.push({
-			label: tText('admin/users/user___blokkeren'),
-			value: 'block',
+			label: tText('modules/user/user___selectie-blokkeren'),
+			value: UserBulkAction.BLOCK,
+			disabled: !hasSelection,
 		});
 		actions.push({
-			label: tText('admin/users/user___deblokkeren'),
-			value: 'unblock',
+			label: tText('modules/user/user___selectie-deblokkeren'),
+			value: UserBulkAction.UNBLOCK,
+			disabled: !hasSelection,
 		});
 	}
 	if (
 		PermissionService.hasPerm(user, PermissionName.DELETE_ANY_USER) &&
-		bulkActions.includes('delete')
+		bulkActions.includes(UserBulkAction.DELETE)
 	) {
 		actions.push({
-			label: tText('admin/users/user___verwijderen'),
-			value: 'delete',
+			label: tText('modules/user/user___selectie-verwijderen'),
+			value: UserBulkAction.DELETE,
+			disabled: !hasSelection,
 		});
 	}
 	if (
 		PermissionService.hasPerm(user, PermissionName.EDIT_ANY_USER) &&
-		bulkActions.includes('change_subjects')
+		bulkActions.includes(UserBulkAction.CHANGE_SUBJECTS)
 	) {
 		actions.push({
-			label: tText('admin/users/user___vakken-aanpassen'),
-			value: 'change_subjects',
+			label: tText('modules/user/user___selectie-vakken-aanpassen'),
+			value: UserBulkAction.CHANGE_SUBJECTS,
+			disabled: !hasSelection,
 		});
 	}
-	if (bulkActions.includes('export')) {
+	if (bulkActions.includes(UserBulkAction.EXPORT_SELECTION)) {
 		actions.push({
-			label: tText('admin/users/user___exporteren'),
-			value: 'export',
+			label: tText('modules/user/user___selectie-exporteren'),
+			value: UserBulkAction.EXPORT_SELECTION,
+			disabled: !hasSelection,
+		});
+	}
+	if (bulkActions.includes(UserBulkAction.EXPORT_ALL)) {
+		actions.push({
+			label: tText('modules/user/user___alles-exporteren'),
+			value: UserBulkAction.EXPORT_ALL,
+			disabled: false,
 		});
 	}
 

@@ -50,7 +50,9 @@ import type {
 	ContentPageLabelTableState,
 } from '../content-page-label.types';
 
-const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ className }) => {
+export const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({
+	className,
+}) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const [contentPageLabels, setContentPageLabels] = useState<ContentPageLabel[] | null>(null);
@@ -427,5 +429,3 @@ const ContentPageLabelOverview: FunctionComponent<DefaultComponentProps> = ({ cl
 		</AdminLayout>
 	);
 };
-
-export default ContentPageLabelOverview;

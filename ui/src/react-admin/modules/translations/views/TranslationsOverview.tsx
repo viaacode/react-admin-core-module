@@ -25,7 +25,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
-import Loader from '../../shared/components/Loader/Loader';
+import { Loader } from '../../shared/components/Loader/Loader';
 import { getFullKey } from '../helpers/get-full-key';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
@@ -35,7 +35,7 @@ import { Spacer } from '@viaa/avo2-components';
 
 type OrderProp = `value_${Locale}` | 'id';
 
-const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
+export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 	className,
 	renderPopup,
 }) => {
@@ -198,13 +198,13 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 					itemsPerPage={TRANSLATIONS_PER_PAGE}
 					totalItems={pageCount * TRANSLATIONS_PER_PAGE}
 					onPageChange={handlePageChange}
-					firstLabel={tText('Eerste')}
+					firstLabel={tText('modules/translations/views/translations-overview___eerste')}
 					firstIcon={<Icon name="anglesLeft" />}
 					previousLabel={tText('shared/components/filter-table/filter-table___vorige')}
 					previousIcon={<Icon name="angleLeft" />}
 					nextLabel={tText('shared/components/filter-table/filter-table___volgende')}
 					nextIcon={<Icon name="angleRight" />}
-					lastLabel={tText('Laatste')}
+					lastLabel={tText('modules/translations/views/translations-overview___laatste')}
 					lastIcon={<Icon name="anglesRight" />}
 					backToTopLabel={tText(
 						'shared/components/filter-table/filter-table___terug-naar-boven'
@@ -402,5 +402,3 @@ const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> = ({
 		</div>
 	);
 };
-
-export default TranslationsOverview as FunctionComponent<TranslationsOverviewProps>;

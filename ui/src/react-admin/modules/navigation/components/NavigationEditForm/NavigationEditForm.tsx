@@ -35,7 +35,7 @@ interface NavigationEditFormProps {
 	enableIcons: boolean;
 }
 
-const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
+export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	formErrors,
 	formState,
 	navigationParentId,
@@ -185,5 +185,3 @@ const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 		</Form>
 	);
 };
-
-export default NavigationEditForm;

@@ -2,12 +2,10 @@ import type { IconName, TagInfo, TagOption } from '@viaa/avo2-components';
 import { TagList } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { LomSchemeType } from '@viaa/avo2-types';
-import FileSaver from 'file-saver';
 import { compact, isNil } from 'lodash-es';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import reactToString from 'react-to-string';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
@@ -47,11 +45,12 @@ import { useSubjects } from '~shared/hooks/useSubjects';
 
 import { SettingsService } from '~shared/services/settings-service/settings.service';
 
-import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
-import type { Idp, UserBulkAction, UserOverviewTableCol, UserTableState } from '../user.types';
-import { USERS_PER_PAGE } from '../user.types';
+import type { Idp, UserOverviewTableCol, UserTableState } from '../user.types';
+import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
+import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 
 import './UserOverview.scss';
 
@@ -76,6 +75,9 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 	const [usersDeleteModalOpen, setUsersDeleteModalOpen] = useState<boolean>(false);
 	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
+	const [exportType, setExportType] = useState<
+		UserBulkAction.EXPORT_SELECTION | UserBulkAction.EXPORT_ALL | null
+	>(null);
 
 	const bulkActions = AdminConfigManager.getConfig().users?.bulkActions || [];
 
@@ -306,88 +308,36 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 		);
 	};
 
-	const bulkExport = async () => {
-		try {
-			setIsLoading(true);
-			const column = columns.find(
-				(tableColumn: FilterableColumn) =>
-					tableColumn.id &&
-					tableState?.sort_column &&
-					tableColumn.id === tableState?.sort_column
-			);
-			const columnDataType: string = column?.dataType ?? '';
-			const [profilesTemp] = await UserService.getProfiles(
-				0,
-				(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
-				tableState?.sort_order || 'desc',
-				columnDataType,
-				generateWhereObject(getFilters(tableState), true),
-				100000
-			);
-			const columnIds = tableState?.columns?.length
-				? tableState.columns
-				: columns.filter((column) => column.visibleByDefault).map((column) => column.id);
-			const columnLabels = columnIds.map(
-				(columnId) => columns.find((column) => column.id === columnId)?.label ?? columnId
-			);
-			const csvRowValues: string[] = [columnLabels.join(';')];
-			profilesTemp.forEach((profile) => {
-				const csvCellValues: string[] = [];
-
-				// TODO check if we can replace the "react-to-string" package with a render separate root function
-				// https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code
-				columnIds.forEach((columnId) => {
-					const csvCellValue = reactToString(
-						renderTableCell(profile, columnId as UserOverviewTableCol)
-					);
-					csvCellValues.push(`"${csvCellValue.replace(/"/g, '""')}"`);
-				});
-				csvRowValues.push(csvCellValues.join(';'));
-			});
-			const csvString = csvRowValues.join('\n');
-			const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8' });
-			FileSaver.saveAs(blob, 'gebruikers.csv');
-			setSelectedProfileIds([]);
-		} catch (err) {
-			setSelectedProfileIds([]);
-			console.error(
-				new CustomError('Failed to export users to csv file', err, { tableState })
-			);
-
-			showToast({
-				title: tText('modules/user/views/user-overview___error'),
-				description: tText(
-					'admin/users/views/user-overview___het-exporteren-van-de-geselecteerde-gebruikers-is-mislukt'
-				),
-				type: ToastType.ERROR,
-			});
-		}
-
-		setIsLoading(false);
-	};
-
 	const handleBulkAction = async (action: UserBulkAction): Promise<void> => {
-		if (!selectedProfileIds || !selectedProfileIds.length) {
-			return;
-		}
+		const hasSelectedRows = (selectedProfileIds?.length || 0) > 0;
+
 		switch (action) {
-			case 'export':
-				await bulkExport();
+			case UserBulkAction.EXPORT_SELECTION:
+				if (!hasSelectedRows) return;
+				setExportType(UserBulkAction.EXPORT_SELECTION);
 				return;
 
-			case 'block':
+			case UserBulkAction.EXPORT_ALL:
+				setExportType(UserBulkAction.EXPORT_ALL);
+				return;
+
+			case UserBulkAction.BLOCK:
+				if (!hasSelectedRows) return;
 				await bulkUpdateBlockStatus(true);
 				return;
 
-			case 'unblock':
+			case UserBulkAction.UNBLOCK:
+				if (!hasSelectedRows) return;
 				await bulkUpdateBlockStatus(false);
 				return;
 
-			case 'delete':
+			case UserBulkAction.DELETE:
+				if (!hasSelectedRows) return;
 				setUsersDeleteModalOpen(true);
 				return;
 
-			case 'change_subjects':
+			case UserBulkAction.CHANGE_SUBJECTS:
+				if (!hasSelectedRows) return;
 				setChangeSubjectsModalOpen(true);
 				SettingsService.fetchSubjects()
 					.then((subjects: string[]) => {
@@ -598,7 +548,11 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					onSelectBulkAction={handleBulkAction as any}
-					bulkActions={GET_USER_BULK_ACTIONS(commonUser, bulkActions)}
+					bulkActions={GET_USER_BULK_ACTIONS(
+						commonUser,
+						bulkActions,
+						selectedProfileIds?.length > 0
+					)}
 					rowKey={(row: Avo.User.CommonUser) =>
 						row?.profileId || row?.userId || row?.email || ''
 					}
@@ -631,6 +585,62 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 							tags.map((tag) => tag.value.toString())
 						)
 					}
+				/>
+				<ExportAllToCsvModal
+					title={tText(
+						'modules/user/views/user-overview___exporteren-van-alle-gebruikers-naar-csv'
+					)}
+					isOpen={exportType !== null}
+					onClose={() => setExportType(null)}
+					fetchingItemsLabel={tText(
+						'modules/user/views/user-overview___bezig-met-ophalen-van-gebruikers'
+					)}
+					generatingCsvLabel={tText(
+						'modules/user/views/user-overview___bezig-met-genereren-van-de-csv'
+					)}
+					fetchTotalItems={async () => {
+						const where =
+							exportType === UserBulkAction.EXPORT_ALL
+								? {}
+								: generateWhereObject(getFilters(tableState), true);
+						const response = await UserService.getProfiles(
+							0,
+							0,
+							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+							tableState?.sort_order || 'desc',
+							getColumnType(),
+							where
+						);
+						return response[1];
+					}}
+					fetchMoreItems={async (offset: number, limit: number) => {
+						const where =
+							exportType === UserBulkAction.EXPORT_ALL
+								? {}
+								: generateWhereObject(getFilters(tableState), true);
+						const response = await UserService.getProfiles(
+							offset,
+							limit,
+							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+							tableState?.sort_order || 'desc',
+							getColumnType(),
+							where
+						);
+						return response[0];
+					}}
+					renderValue={(value: any, columnId: string) =>
+						renderTableCell(value as any, columnId as UserOverviewTableCol)
+					}
+					columns={compact(
+						columns.map((column) => {
+							const label = column.label || column.tooltip;
+							if (!label) {
+								return null;
+							}
+							return { label, id: column.id };
+						})
+					)}
+					exportFileName={tText('modules/user/views/user-overview___gebruikers-csv')}
 				/>
 			</>
 		);

@@ -1,3 +1,3 @@
-export { default as ContentPageDetail } from './ContentPageDetail';
-export { default as ContentPageEdit } from './ContentPageEdit';
-export { default as ContentPageOverview } from './ContentPageOverview';
+export { ContentPageDetail } from './ContentPageDetail';
+export { ContentPageEdit } from './ContentPageEdit';
+export { ContentPageOverview } from './ContentPageOverview';

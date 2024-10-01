@@ -11,7 +11,7 @@ import {
 } from './AdminLayout.slots';
 import type { AdminLayoutComponent } from './AdminLayout.types';
 
-const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, className }) => {
+export const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, className }) => {
 	const actions = useSlot(AdminActions, children);
 	const back = useSlot(AdminBack, children);
 	const content = useSlot(AdminContent, children);
@@ -41,5 +41,3 @@ AdminLayout.Back = AdminBack;
 AdminLayout.Content = AdminContent;
 AdminLayout.FiltersLeft = AdminFiltersLeft;
 AdminLayout.FiltersRight = AdminFiltersRight;
-
-export default AdminLayout;

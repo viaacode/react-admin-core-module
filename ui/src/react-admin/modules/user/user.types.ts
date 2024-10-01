@@ -60,7 +60,14 @@ export interface UserTableState extends FilterableTableState {
 	lastAccessAt: { date: string };
 }
 
-export type UserBulkAction = 'block' | 'unblock' | 'delete' | 'change_subjects' | 'export';
+export enum UserBulkAction {
+	BLOCK = 'BLOCK',
+	UNBLOCK = 'UNBLOCK',
+	DELETE = 'DELETE',
+	CHANGE_SUBJECTS = 'CHANGE_SUBJECTS',
+	EXPORT_SELECTION = 'EXPORT_SELECTION',
+	EXPORT_ALL = 'EXPORT_ALL',
+}
 
 export interface DeleteContentCounts {
 	publicCollections: number;

@@ -15,7 +15,7 @@ import { Loader } from '~shared/components';
 import { AdminLayout } from '~shared/layouts';
 import { Link } from '~modules/shared/components/Link';
 
-const NavigationBarOverview: FunctionComponent = () => {
+export const NavigationBarOverview: FunctionComponent = () => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 	const {
 		data: navigationItems,
@@ -158,5 +158,3 @@ const NavigationBarOverview: FunctionComponent = () => {
 
 	return renderPageContent();
 };
-
-export default NavigationBarOverview;

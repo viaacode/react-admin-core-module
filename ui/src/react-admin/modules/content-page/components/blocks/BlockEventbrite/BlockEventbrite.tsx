@@ -3,9 +3,9 @@ import { Button } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
+import { Icon } from '~shared/components/Icon/Icon';
 
 import './BlockEventbrite.scss';
-import Icon from '~shared/components/Icon/Icon';
 
 export interface BlockEventbriteProps extends DefaultProps, ButtonProps {
 	eventId: string;

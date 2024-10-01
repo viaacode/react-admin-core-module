@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import { TranslationsOverview } from '~modules/translations/views';
+import { TranslationsOverview } from '~modules/translations/views/TranslationsOverview';
 import { Button, Modal } from '@meemoo/react-components';
 
 export const TranslationsOverviewPage: FC = () => {

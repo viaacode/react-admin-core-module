@@ -38,7 +38,7 @@ import type {
 	MaintenanceAlertsOverviewTableCol,
 } from '../maintenance-alerts.types';
 
-const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProps> = ({
+export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProps> = ({
 	className,
 	renderPopup,
 }) => {
@@ -347,5 +347,3 @@ const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverviewProp
 		</AdminLayout>
 	);
 };
-
-export default MaintenanceAlertsOverview as FunctionComponent<MaintenanceAlertsOverviewProps>;

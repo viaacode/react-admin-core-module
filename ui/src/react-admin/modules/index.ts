@@ -1,8 +1,6 @@
-import { AdminConfigManager } from '~core/config';
-
 // Admin Core
 export type { AdminConfig } from '../core/config/config.types';
-export { AdminConfigManager };
+export { AdminConfigManager } from '../core/config/config.class';
 export {
 	fetchWithLogoutJson,
 	fetchWithLogout,
@@ -10,10 +8,10 @@ export {
 } from '../modules/shared/helpers/fetch-with-logout';
 
 // Content pages
-export { default as ContentPageOverview } from './content-page/views/ContentPageOverview';
-export { default as ContentPageDetail } from './content-page/views/ContentPageDetail';
-export { default as ContentPageEdit } from './content-page/views/ContentPageEdit';
-export { default as ContentPageRenderer } from './content-page/components/ContentPageRenderer/ContentPageRenderer';
+export { ContentPageOverview } from './content-page/views/ContentPageOverview';
+export { ContentPageDetail } from './content-page/views/ContentPageDetail';
+export { ContentPageEdit } from './content-page/views/ContentPageEdit';
+export { ContentPageRenderer } from './content-page/components/ContentPageRenderer/ContentPageRenderer';
 export type { ColorOption } from './content-page/components/fields/ColorSelect/ColorSelect';
 export type { ContentPageInfo } from './content-page/types/content-pages.types';
 export type { DbContentPage } from './content-page/types/content-pages.types';
@@ -49,30 +47,34 @@ export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-
 
 // Content page labels
 export { ContentPageLabelService } from './content-page-labels/content-page-label.service';
-export { default as ContentPageLabelOverview } from './content-page-labels/views/ContentPageLabelOverview';
-export { default as ContentPageLabelEdit } from './content-page-labels/views/ContentPageLabelEdit';
-export { default as ContentPageLabelDetail } from './content-page-labels/views/ContentPageLabelDetail';
+export { ContentPageLabelOverview } from './content-page-labels/views/ContentPageLabelOverview';
+export { ContentPageLabelEdit } from './content-page-labels/views/ContentPageLabelEdit';
+export { ContentPageLabelDetail } from './content-page-labels/views/ContentPageLabelDetail';
 
 // Navigation
-export { default as NavigationOverview } from './navigation/views/NavigationBarOverview';
-export { default as NavigationEdit } from './navigation/views/NavigationItemEdit';
-export { default as NavigationDetail } from './navigation/views/NavigationBarDetail';
+export { NavigationBarOverview } from './navigation/views/NavigationBarOverview';
+export { NavigationItemEdit } from './navigation/views/NavigationItemEdit';
+export { NavigationBarDetail } from './navigation/views/NavigationBarDetail';
 
 // Alerts
-export { default as MaintenanceAlertsOverview } from './maintenance-alerts/views/MaintenanceAlertsOverview';
+export { MaintenanceAlertsOverview } from './maintenance-alerts/views/MaintenanceAlertsOverview';
 
 //Users
 export { UserOverview } from './user/views/UserOverview';
 export { UserDetail } from './user/views/UserDetail';
 export { UserService } from './user/user.service';
 export { useGetProfileById } from './user/hooks/use-get-profile-by-id';
+export { UserBulkAction } from './user/user.types';
 
 // User groups and permissions
-export { default as UserGroupOverview } from './user-group/views/UserGroupOverview';
+export { UserGroupOverview } from './user-group/views/UserGroupOverview';
 export { preferredUserGroupOrder } from './user-group/const/user-group.const';
 
 // Translations
-export { default as TranslationsOverview } from './translations/views/TranslationsOverview';
+export { TranslationsOverview } from './translations/views/TranslationsOverview';
+
+// Export items to csv modal
+export { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 
 // Helpers
 export { sanitizeHtml } from './shared/helpers/sanitize/index';

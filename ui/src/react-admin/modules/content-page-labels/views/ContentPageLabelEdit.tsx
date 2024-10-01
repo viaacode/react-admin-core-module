@@ -41,7 +41,7 @@ import type {
 
 type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
 
-const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
+export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	contentPageLabelId,
 	className,
 }) => {
@@ -381,5 +381,3 @@ const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 		</>
 	);
 };
-
-export default ContentPageLabelEdit;

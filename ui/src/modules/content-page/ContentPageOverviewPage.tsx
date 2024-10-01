@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import { AdminConfigManager } from '~core/config';
 
-import ContentPageOverview from '~modules/content-page/views/ContentPageOverview';
+import { ContentPageOverview } from '~modules/content-page/views/ContentPageOverview';
 
 export const ContentPageOverviewPage: FC<{ commonUser?: Avo.User.CommonUser }> = ({
 	commonUser,

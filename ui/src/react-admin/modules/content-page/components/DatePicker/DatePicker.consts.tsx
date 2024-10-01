@@ -1,7 +1,7 @@
 import { TextInput } from '@meemoo/react-components';
 import React from 'react';
 import type { ReactDatePickerProps } from 'react-datepicker';
-import Icon from '~shared/components/Icon/Icon';
+import { Icon } from '~shared/components/Icon/Icon';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import { Locale } from '~modules/translations/translations.core.types';
 import enGB from 'date-fns/locale/en-GB/index.js';

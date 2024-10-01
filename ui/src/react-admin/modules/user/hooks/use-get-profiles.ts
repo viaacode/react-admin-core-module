@@ -26,13 +26,14 @@ export const useGetProfiles = (
 			if (!getProfileArgs) {
 				return null;
 			}
+			const itemsPerPage = getProfileArgs.itemsPerPage || USERS_PER_PAGE;
 			return UserService.getProfiles(
-				getProfileArgs.page,
+				getProfileArgs.page * itemsPerPage,
+				itemsPerPage,
 				getProfileArgs.sortColumn,
 				getProfileArgs.sortOrder,
 				getProfileArgs.tableColumnDataType,
-				getProfileArgs.where || {},
-				getProfileArgs.itemsPerPage || USERS_PER_PAGE
+				getProfileArgs.where || {}
 			);
 		},
 		{

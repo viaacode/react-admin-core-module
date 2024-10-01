@@ -13,7 +13,6 @@ import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { CustomError } from '~shared/helpers/custom-error';
 
 import type { DeleteContentCounts, Idp, UserOverviewTableCol } from './user.types';
-import { USERS_PER_PAGE } from './user.types';
 
 export class UserService {
 	private static getBaseUrl(): string {
@@ -37,19 +36,19 @@ export class UserService {
 	}
 
 	static async getProfiles(
-		page: number,
+		offset: number,
+		limit: number,
 		sortColumn: UserOverviewTableCol,
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
-		where: any = {},
-		itemsPerPage: number = USERS_PER_PAGE
+		where: any = {}
 	): Promise<[Avo.User.CommonUser[], number]> {
 		try {
 			return fetchWithLogoutJson(this.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
-					offset: page * itemsPerPage,
-					limit: itemsPerPage,
+					offset,
+					limit,
 					sortColumn,
 					sortOrder,
 					tableColumnDataType,
@@ -58,12 +57,12 @@ export class UserService {
 			});
 		} catch (err) {
 			throw new CustomError('Failed to get profiles from the server', err, {
-				page,
+				offset,
+				limit,
 				sortColumn,
 				sortOrder,
 				tableColumnDataType,
 				where,
-				itemsPerPage,
 			});
 		}
 	}
