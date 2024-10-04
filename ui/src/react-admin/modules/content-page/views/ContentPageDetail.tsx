@@ -191,12 +191,13 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
-			if (isAvo()) {
-				// Do not add the locale to the path for AVO
+			if (contentPageInfo.language === Locale.Nl) {
+				// Do not add the locale to the path, since the default is dutch
 				navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
 			} else {
+				// For english pages, add the locale to the path
 				navigateToAbsoluteOrRelativeUrl(
-					`/${AdminConfigManager.getConfig().locale}${contentPageInfo.path}`,
+					`/${contentPageInfo.language}${contentPageInfo.path}`,
 					history,
 					LinkTarget.Blank
 				);
