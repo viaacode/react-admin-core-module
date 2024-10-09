@@ -16,7 +16,12 @@
 	}
 
 	.c-video-player {
-		background-color: #18242a;
+		background-color: transparent;
+
+		// Avoid ugly black stripes on the /leerlingen page
+		.c-video-player-inner {
+			background-color: transparent;
+		}
 	}
 }
 
