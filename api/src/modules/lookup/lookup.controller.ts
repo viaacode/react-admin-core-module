@@ -14,7 +14,7 @@ export class LookupController {
 		return this.lookupService.fetchSubjects();
 	}
 
-	@Get('education-levels')
+	@Get('education-levels-and-degrees')
 	public async fetchEducationLevels(): Promise<Avo.Lom.LomField[]> {
 		return this.lookupService.fetchEducationLevels();
 	}
