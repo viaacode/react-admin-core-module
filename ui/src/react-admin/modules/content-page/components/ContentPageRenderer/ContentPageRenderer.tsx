@@ -21,7 +21,6 @@ type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
 	activeBlockPosition?: number | null;
 	onBlockClicked?: BlockClickHandler;
-	onLoaded?: (contentPageInfo: ContentPageInfo) => void;
 	commonUser?: Avo.User.CommonUser;
 	renderFakeTitle?: boolean;
 };
