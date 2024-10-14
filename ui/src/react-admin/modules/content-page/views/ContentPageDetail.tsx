@@ -59,6 +59,7 @@ const {
 export type ContentPageDetailProps = DefaultComponentProps & {
 	id: string;
 	loaded?: (item: ContentPageInfo) => void;
+	onGoBack: () => void;
 	commonUser: Avo.User.CommonUser;
 };
 
@@ -66,6 +67,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	id,
 	loaded = noop,
 	className,
+	onGoBack,
 	commonUser,
 }) => {
 	// Hooks
@@ -511,7 +513,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	return (
 		<AdminLayout className={className} pageTitle={pageTitle}>
 			<AdminLayout.Back>
-				<Button type="borderless" onClick={() => window.history.back()}>
+				<Button type="borderless" onClick={onGoBack}>
 					<Icon name="chevronLeft"></Icon>
 				</Button>
 			</AdminLayout.Back>

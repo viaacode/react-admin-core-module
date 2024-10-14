@@ -20,7 +20,6 @@ import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-lang
 import { Locale } from '~modules/translations/translations.core.types';
 import { Icon } from '~shared/components';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { Link } from '~shared/components/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
@@ -39,10 +38,14 @@ import type {
 	ContentPageLabelEditFormErrorState,
 } from '../content-page-label.types';
 
-type ContentPageLabelEditProps = { contentPageLabelId: string | undefined } & DefaultComponentProps;
+type ContentPageLabelEditProps = {
+	contentPageLabelId: string | undefined;
+	onGoBack: () => void;
+} & DefaultComponentProps;
 
 export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> = ({
 	contentPageLabelId,
+	onGoBack,
 	className,
 }) => {
 	// Hooks
@@ -342,11 +345,9 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			className={className}
 		>
 			<AdminLayout.Back>
-				<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}>
-					<Button type="borderless">
-						<Icon name="chevronLeft"></Icon>
-					</Button>
-				</Link>
+				<Button type="borderless" onClick={onGoBack}>
+					<Icon name="chevronLeft"></Icon>
+				</Button>
 			</AdminLayout.Back>
 			<AdminLayout.Actions>
 				<ButtonToolbar>

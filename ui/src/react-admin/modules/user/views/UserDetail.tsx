@@ -16,7 +16,6 @@ import { compact } from 'lodash-es';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
-import { Link } from '~modules/shared/components/Link';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
 import { Icon } from '~shared/components';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
@@ -38,7 +37,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
-import { AdminLayout } from '../../shared/layouts';
+import { AdminLayout } from '~shared/layouts';
 import TempAccessModal from '../components/TempAccessModal';
 import UserDeleteModal from '../components/UserDeleteModal';
 import { UserService } from '../user.service';
@@ -52,10 +51,17 @@ export interface UserDetailProps {
 		profileId: string
 	) => Promise<void>;
 	onLoaded?: (user: Avo.User.CommonUser) => void;
+	onGoBack: () => void;
 	commonUser: Avo.User.CommonUser;
 }
 
-export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded, commonUser }) => {
+export const UserDetail: FC<UserDetailProps> = ({
+	id,
+	onSetTempAccess,
+	onLoaded,
+	commonUser,
+	onGoBack,
+}) => {
 	// Hooks
 	const {
 		data: storedProfile,
@@ -432,11 +438,9 @@ export const UserDetail: FC<UserDetailProps> = ({ id, onSetTempAccess, onLoaded,
 			<>
 				<AdminLayout pageTitle={tText('admin/users/views/user-detail___gebruiker-details')}>
 					<AdminLayout.Back>
-						<Link to={AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW')}>
-							<Button type="borderless">
-								<Icon name="chevronLeft"></Icon>
-							</Button>
-						</Link>
+						<Button type="borderless" onClick={onGoBack}>
+							<Icon name="chevronLeft"></Icon>
+						</Button>
 					</AdminLayout.Back>
 					<AdminLayout.Actions>
 						<ButtonToolbar>
