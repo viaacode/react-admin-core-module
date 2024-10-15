@@ -16,7 +16,7 @@ import type {
 	MultiLanguageTranslationEntry,
 	TranslationsOverviewProps,
 } from '~modules/translations/translations.types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import Html from '~shared/components/Html/Html';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { sortingIcons } from '~shared/components/Table/Table.const';

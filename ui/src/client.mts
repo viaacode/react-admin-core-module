@@ -24,6 +24,7 @@ export { goToLoginBecauseOfUnauthorizedError } from '~shared/helpers/fetch-with-
 // Admin Core Config
 export { AdminConfigManager, ToastType } from '~core/config';
 export type { AdminConfig } from './react-admin/core/config/config.types';
+export { UserBulkAction } from '~modules/user/user.types';
 
 // Misc
 export { type LinkInfo, type ToastInfo } from '~core/config/config.types';

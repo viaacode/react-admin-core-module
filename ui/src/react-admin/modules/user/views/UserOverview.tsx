@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { Icon } from '~modules/shared/components';
+import { Icon } from '~shared/components/Icon';
 import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {

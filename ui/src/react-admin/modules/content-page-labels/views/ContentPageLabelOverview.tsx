@@ -15,7 +15,7 @@ import type { DefaultComponentProps } from '~modules/shared/types';
 import './ContentPageLabelOverview.scss';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import type { LanguageInfo } from '~modules/translations/translations.types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,

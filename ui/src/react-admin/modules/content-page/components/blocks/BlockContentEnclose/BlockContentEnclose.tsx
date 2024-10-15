@@ -13,7 +13,7 @@ import type { GetContentBlockEncloseContentReturnType } from '~content-blocks/Bl
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { AdminConfigManager } from '~core/config';
 import { Link } from '~modules/shared/components/Link';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import Html from '~shared/components/Html/Html';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { tText } from '~shared/helpers/translation-functions';

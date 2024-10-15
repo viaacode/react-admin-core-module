@@ -9,8 +9,8 @@ import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-componen
 import clsx from 'clsx';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { Icon } from '~shared/components';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { Icon } from '~shared/components/Icon';
 
 import './BlockRichText.scss';
 

@@ -7,7 +7,11 @@ import { mockCommonUser } from '../../mock-common-user';
 const ContentPageDetailPage: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
 	return (
 		<>
-			<ContentPageDetail id={match.params.id} commonUser={mockCommonUser} />
+			<ContentPageDetail
+				id={match.params.id}
+				commonUser={mockCommonUser}
+				onGoBack={() => window.history.back()}
+			/>
 		</>
 	);
 };

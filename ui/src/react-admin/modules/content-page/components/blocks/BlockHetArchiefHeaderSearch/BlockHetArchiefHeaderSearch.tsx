@@ -5,7 +5,7 @@ import type { FunctionComponent, KeyboardEvent, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import { KeyCode } from '~shared/consts/keycode';
 import { tText } from '~shared/helpers/translation-functions';
 import { BlockHeading } from '../BlockHeading';

@@ -11,7 +11,11 @@ const NavigationEditPage: FC<
 	const { navigationBarId, navigationItemId } = match.params;
 
 	return (
-		<NavigationItemEdit navigationBarId={navigationBarId} navigationItemId={navigationItemId} />
+		<NavigationItemEdit
+			navigationBarId={navigationBarId}
+			navigationItemId={navigationItemId}
+			onGoBack={() => window.history.back()}
+		/>
 	);
 };
 

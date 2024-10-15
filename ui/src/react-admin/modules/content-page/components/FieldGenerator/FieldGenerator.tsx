@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
 import { generateFieldAttributes } from '~modules/content-page/helpers';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import type {
 	ContentBlockComponentState,
 	ContentBlockField,

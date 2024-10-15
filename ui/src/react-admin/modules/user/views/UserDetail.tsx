@@ -17,7 +17,7 @@ import type { FC, ReactText } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager, ToastType } from '~core/config';
 import { useGetProfileById } from '~modules/user/hooks/use-get-profile-by-id';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';

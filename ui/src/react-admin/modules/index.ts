@@ -1,6 +1,7 @@
 // Admin Core
 export type { AdminConfig } from '../core/config/config.types';
 export { AdminConfigManager } from '../core/config/config.class';
+export { type FlowPlayerWrapperProps } from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 export {
 	fetchWithLogoutJson,
 	fetchWithLogout,

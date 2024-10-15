@@ -14,7 +14,8 @@ import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navi
 import { showToast } from '~modules/shared/helpers/show-toast';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import type { LanguageInfo } from '~modules/translations/translations.types';
-import { Icon, Loader } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
+import { Loader } from '~shared/components/Loader';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,

@@ -11,7 +11,7 @@ import type {
 import { BlockHeading } from '~content-blocks/BlockHeading';
 import { Button } from '@viaa/avo2-components';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import { TextInput } from '@meemoo/react-components';
 import { tText } from '~shared/helpers/translation-functions';
 

@@ -11,7 +11,7 @@ import { BlockHeading } from '../BlockHeading';
 import type { ButtonAction, ButtonType, IconName } from '@viaa/avo2-components';
 import { Button, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~modules/shared/components';
+import { Icon } from '~shared/components/Icon';
 
 export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;

@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
 import type { DefaultComponentProps } from '~modules/shared/types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';

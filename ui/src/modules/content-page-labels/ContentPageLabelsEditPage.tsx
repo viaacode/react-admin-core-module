@@ -5,6 +5,11 @@ import { ContentPageLabelEdit } from '~modules/content-page-labels/views/Content
 
 const ContentPageLabelsEditPage: FC<RouteComponentProps<{ id: string | undefined }>> = ({
 	match,
-}) => <ContentPageLabelEdit contentPageLabelId={match.params.id} />;
+}) => (
+	<ContentPageLabelEdit
+		contentPageLabelId={match.params.id}
+		onGoBack={() => window.history.back()}
+	/>
+);
 
 export default withRouter(ContentPageLabelsEditPage);

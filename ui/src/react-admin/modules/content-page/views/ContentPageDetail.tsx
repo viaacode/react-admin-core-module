@@ -28,7 +28,7 @@ import type { ContentPageInfo } from '~modules/content-page/types/content-pages.
 import { ContentPageAction } from '~modules/content-page/types/content-pages.types';
 import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
 import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';

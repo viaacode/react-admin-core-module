@@ -10,8 +10,7 @@ import type {
 import type { App, Locale } from '~modules/translations/translations.core.types';
 
 import type { UserBulkAction } from '~modules/user/user.types';
-
-import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
+import type { FlowPlayerWrapperProps } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
 export enum ToastType {
 	ERROR = 'error',

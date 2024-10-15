@@ -5,7 +5,7 @@ import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { isNil } from 'lodash-es';
 import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~modules/shared/components';
+import { Icon } from '~shared/components/Icon';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
 import { BlockHeading } from '../BlockHeading';
 

@@ -11,7 +11,7 @@ import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navi
 import { Locale } from '~modules/translations/translations.core.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { navigate } from '~shared/helpers/link';

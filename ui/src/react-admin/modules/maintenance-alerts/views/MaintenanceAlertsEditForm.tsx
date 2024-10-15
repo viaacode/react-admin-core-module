@@ -20,7 +20,7 @@ import type {
 	MaintenanceAlertDto,
 	MaintenanceAlertsEditFormProps,
 } from '~modules/maintenance-alerts/maintenance-alerts.types';
-import { Icon } from '~modules/shared/components';
+import { Icon } from '~shared/components/Icon';
 import { IconPicker } from '~modules/shared/components/IconPicker/IconPicker';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import { Locale } from '~modules/translations/translations.core.types';

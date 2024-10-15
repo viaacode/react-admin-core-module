@@ -12,7 +12,7 @@ import clsx from 'clsx';
 import { compact, noop, uniq } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
-import { Loader } from '~shared/components';
+import { Loader } from '~shared/components/Loader';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
 
 import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';

@@ -22,7 +22,13 @@ const UserOverviewPage: FC<{ commonUser: Avo.User.CommonUser }> = ({ commonUser 
 const UserDetailPage: FC = () => {
 	const params = useParams<{ id: string }>();
 
-	return <UserDetail id={params.id} commonUser={mockCommonUser} />;
+	return (
+		<UserDetail
+			id={params.id}
+			commonUser={mockCommonUser}
+			onGoBack={() => window.history.back()}
+		/>
+	);
 };
 
 export const renderAdminUserRoutes = (): ReactNode[] => {

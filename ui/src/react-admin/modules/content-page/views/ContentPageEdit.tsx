@@ -46,7 +46,7 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components';
+import { Icon } from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
 
