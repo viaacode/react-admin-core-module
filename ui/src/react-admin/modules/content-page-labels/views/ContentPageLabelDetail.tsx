@@ -3,7 +3,6 @@ import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AdminConfigManager } from '~core/config';
 import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import { Link } from '~modules/shared/components/Link';
 import type { DefaultComponentProps } from '~modules/shared/types';
 import { Icon } from '~shared/components';
 
@@ -22,10 +21,14 @@ import { tText } from '~shared/helpers/translation-functions';
 import { AdminLayout } from '~shared/layouts';
 import type { ContentPageLabel } from '../content-page-label.types';
 
-type ContentPageLabelDetailProps = { contentPageLabelId: string } & DefaultComponentProps;
+type ContentPageLabelDetailProps = {
+	contentPageLabelId: string;
+	onGoBack: () => void;
+} & DefaultComponentProps;
 
 export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailProps> = ({
 	contentPageLabelId,
+	onGoBack,
 	className,
 }) => {
 	// Hooks
@@ -174,13 +177,9 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				className={className}
 			>
 				<AdminLayout.Back>
-					<Link
-						to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_LABEL_OVERVIEW')}
-					>
-						<Button type="borderless">
-							<Icon name="chevronLeft"></Icon>
-						</Button>
-					</Link>
+					<Button type="borderless" onClick={onGoBack}>
+						<Icon name="chevronLeft"></Icon>
+					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>

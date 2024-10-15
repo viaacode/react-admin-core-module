@@ -72,10 +72,16 @@ const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
+	onGoBack: () => void;
 	commonUser: Avo.User.CommonUser;
 };
 
-export const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commonUser }) => {
+export const ContentPageEdit: FC<ContentPageEditProps> = ({
+	id,
+	className,
+	onGoBack,
+	commonUser,
+}) => {
 	// Hooks
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
@@ -746,7 +752,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({ id, className, commo
 		return (
 			<AdminLayout className={className} pageTitle={pageTitle}>
 				<AdminLayout.Back>
-					<Button type="borderless" onClick={() => window.history.back()}>
+					<Button type="borderless" onClick={onGoBack}>
 						<Icon name="chevronLeft"></Icon>
 					</Button>
 				</AdminLayout.Back>

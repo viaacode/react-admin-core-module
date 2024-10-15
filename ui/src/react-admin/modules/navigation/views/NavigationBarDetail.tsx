@@ -11,8 +11,6 @@ import { ToastType } from '~core/config/config.types';
 import { invalidateNavigationQueries } from '~modules/navigation/helpers/invalidate-navigation-queries';
 import { reindexNavigationItems } from '~modules/navigation/helpers/reorder-navigation-items';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-
-import { Link } from '~modules/shared/components/Link';
 import { showToast } from '~modules/shared/helpers/show-toast';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
 import type { LanguageInfo } from '~modules/translations/translations.types';
@@ -41,9 +39,10 @@ import type {
 
 export interface NavigationDetailProps {
 	navigationBarId: string;
+	onGoBack: () => void;
 }
 
-export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId }) => {
+export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId, onGoBack }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const [activeItemId, setActiveItemId] = useState<string | null>(null);
@@ -381,11 +380,9 @@ export const NavigationBarDetail: FC<NavigationDetailProps> = ({ navigationBarId
 				}
 			>
 				<AdminLayout.Back>
-					<Link to={AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')}>
-						<Button type="borderless">
-							<Icon name="chevronLeft"></Icon>
-						</Button>
-					</Link>
+					<Button type="borderless" onClick={onGoBack}>
+						<Icon name="chevronLeft"></Icon>
+					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>

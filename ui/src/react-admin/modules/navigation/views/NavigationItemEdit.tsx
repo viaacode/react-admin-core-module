@@ -8,7 +8,6 @@ import { ToastType } from '~core/config/config.types';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { useGetNavigationBarItems } from '~modules/navigation/hooks/use-get-navigation-bar-items';
-import { Link } from '~modules/shared/components/Link';
 import { Locale } from '~modules/translations/translations.core.types';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
@@ -32,11 +31,13 @@ import { NavigationEditPageType } from '../navigation.types';
 interface NavigationEditProps {
 	navigationBarId: string;
 	navigationItemId: string | undefined;
+	onGoBack: () => void;
 }
 
 export const NavigationItemEdit: FC<NavigationEditProps> = ({
 	navigationBarId,
 	navigationItemId,
+	onGoBack,
 }) => {
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
@@ -408,11 +409,9 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 		return (
 			<AdminLayout pageTitle={pageTitle}>
 				<AdminLayout.Back>
-					<Link to={AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')}>
-						<Button type="borderless">
-							<Icon name="chevronLeft"></Icon>
-						</Button>
-					</Link>
+					<Button type="borderless" onClick={onGoBack}>
+						<Icon name="chevronLeft"></Icon>
+					</Button>
 				</AdminLayout.Back>
 				<AdminLayout.Actions>
 					<ButtonToolbar>
