@@ -131,84 +131,63 @@ export function getMultiOptionsFilters<T>(
 				return null;
 			}
 
-			// Generate filter object
-			let filterObject: any;
-
-			if (filterValues.includes(NULL_FILTER) && filterValues.length === 1) {
-				// only empty filter
-				filterObject = {
-					_not: {
-						[referenceTable]: {}, // empty value => no reference table entries exist
-					},
-				};
-			} else if (filterValues.includes(NULL_FILTER)) {
-				// empty filter with other values
-				filterObject = {
-					_or: [
-						{
-							_not: {
-								[referenceTable]: {}, // empty value => no reference table entries exist
-							},
+			let nullFilters: any[] = [];
+			let otherValuesFilters: any[] = [];
+			if (filterValues.includes(NULL_FILTER)) {
+				// Empty value is selected
+				nullFilters = [
+					{
+						_not: {
+							[nestedPathParts[0]]: {}, // empty value => no reference table entries exist
 						},
+					},
+				];
+			}
 
-						// selected values => referenceTable.props in selected values array
-						...without(filterValues, NULL_FILTER).map((value: string) => {
-							if (keyIn) {
-								if (labelPath) {
-									return {
-										[referenceTable]: {
-											[labelPath]: { _in: value },
-										},
-									};
-								}
-								return {
-									[referenceTable]: { _in: value },
-								};
-							}
-							if (labelPath) {
-								return {
-									[referenceTable]: {
-										[labelPath]: { _has_keys_any: value },
-									},
-								};
-							}
+			if (!filterValues.includes(NULL_FILTER) || filterValues.length > 1) {
+				// other values are selected
+				// selected values => referenceTable.props in selected values array
+				otherValuesFilters = without(filterValues, NULL_FILTER).map((value: string) => {
+					if (keyIn) {
+						if (labelPath) {
 							return {
-								[referenceTable]: { _has_keys_any: value },
+								[referenceTable]: {
+									[labelPath]: { _in: value },
+								},
 							};
-						}),
-					],
-				};
-			} else {
-				// only selected values without an empty filter
-				filterObject = {};
-
-				if (keyIn) {
-					if (labelPath) {
-						filterObject[referenceTable] = {
-							[labelPath]: { _in: filterValues },
-						};
-					} else {
-						filterObject[referenceTable] = { _in: filterValues };
-					}
-				} else {
-					if (labelPath) {
-						filterObject[referenceTable] = {
-							[labelPath]: { _has_keys_any: filterValues },
+						}
+						return {
+							[referenceTable]: { _in: value },
 						};
 					}
+					if (labelPath) {
+						return {
+							[referenceTable]: {
+								[labelPath]: { _has_keys_any: value },
+							},
+						};
+					}
+					return {
+						[referenceTable]: { _has_keys_any: value },
+					};
+				});
+			}
 
-					filterObject[referenceTable] = { _has_keys_any: filterValues };
-				}
+			if (nullFilters.length === 1 && otherValuesFilters.length === 0) {
+				// Only empty value is selected
+				return nullFilters[0];
 			}
 
 			// Set filter query on main query object
 			if (nestedPath) {
-				const response = {};
-				set(response, nestedPath, filterObject);
-				return response;
+				if (otherValuesFilters.length) {
+					const otherValuesFiltersWrapper = {};
+					set(otherValuesFiltersWrapper, nestedPath, { _or: otherValuesFilters });
+					return { _or: [...nullFilters, otherValuesFiltersWrapper] };
+				}
 			}
 
-			return filterObject;
+			return [...nullFilters, ...otherValuesFilters];
 		})
 	);
 }

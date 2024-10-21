@@ -12,6 +12,6 @@ export class SettingsService {
 	}
 
 	public static async fetchEducationLevels(): Promise<string[]> {
-		return fetchWithLogoutJson(this.getBaseUrl() + '/education-levels');
+		return fetchWithLogoutJson(this.getBaseUrl() + '/education-levels-and-degrees');
 	}
 }
