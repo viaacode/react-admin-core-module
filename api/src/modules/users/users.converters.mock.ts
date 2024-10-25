@@ -1,6 +1,5 @@
 import type { Avo } from '@viaa/avo2-types';
-
-import { Idp } from './users.types';
+import { Idp } from '@viaa/avo2-types';
 
 export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
 	id: '31051baa-94ab-4fc2-a859-750a52774d3a',

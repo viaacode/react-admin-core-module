@@ -1,7 +1,6 @@
 import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { Idp, PermissionName } from '@viaa/avo2-types';
 
-import { Idp } from '../../shared/auth/auth.types';
 import {
 	type FindMaintenanceAlertByIdQuery,
 	type FindMaintenanceAlertsQuery,

@@ -4,14 +4,6 @@ import { type GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo'
 
 import type { UserQueryTypes } from './queries/users.queries';
 
-export enum Idp {
-	HETARCHIEF = 'HETARCHIEF',
-	MEEMOO = 'MEEMOO',
-	SMARTSCHOOL = 'SMARTSCHOOL',
-	KLASCEMENT = 'KLASCEMENT',
-	VLAAMSEOVERHEID = 'VLAAMSEOVERHEID',
-}
-
 export interface QueryProfilesBody {
 	offset: string;
 	limit: string;

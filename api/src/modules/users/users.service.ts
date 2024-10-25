@@ -1,5 +1,6 @@
 import { forwardRef, Inject } from '@nestjs/common';
 import type { Avo } from '@viaa/avo2-types';
+import { Idp } from '@viaa/avo2-types';
 import { compact, flatten } from 'lodash';
 
 import { DataService } from '../data';
@@ -32,7 +33,6 @@ import { GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT } from './users.consts';
 import { convertUserInfoToCommonUser } from './users.converters';
 import {
 	DeleteContentCounts,
-	Idp,
 	UserInfoOverviewAvo,
 	UserInfoOverviewHetArchief,
 	UserInfoType,

@@ -1,8 +1,3 @@
-export enum Idp {
-	HETARCHIEF = 'HETARCHIEF',
-	MEEMOO = 'MEEMOO',
-}
-
 interface LdapAttributes {
 	mail: string[];
 	displayName?: string[]; // username or nickname

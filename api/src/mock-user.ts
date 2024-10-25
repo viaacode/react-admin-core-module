@@ -1,8 +1,9 @@
 import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
+import { Idp, PermissionName } from '@viaa/avo2-types';
 
-import { type Idp, type Locale } from './modules';
+import { type Locale } from './modules';
 
+console.log('idp enum: ', Idp);
 export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
 	last_name: 'Verhelst',
@@ -167,24 +168,23 @@ export const mockUserAvo: Avo.User.User = {
 	created_at: '2019-10-23T16:21:17.984884+00:00',
 	expires_at: null,
 	last_access_at: '2022-11-28T14:14:44.713+00:00',
-	external_uid: null,
 	role: { label: 'Beheerder', name: 'admin' } as any,
 	role_id: 1,
 	uid: '517aec71-cf0e-4e08-99d1-8e7e042923f7',
 	updated_at: '2022-11-28T08:23:35.658+00:00',
 	mail: 'bert.verhelst@studiohyperdrive.be',
-	idpmaps: ['HETARCHIEF', 'KLASCEMENT', 'VLAAMSEOVERHEID__SUB_ID'],
+	idpmaps: [Idp.HETARCHIEF, Idp.HETARCHIEF, Idp.VLAAMSEOVERHEID__SUB_ID],
 	idpmapObjects: [
 		{
-			idp: 'HETARCHIEF',
+			idp: Idp.HETARCHIEF,
 			idp_user_id: '5eb99992-74a9-1039-9277-2bea2ee8ec01',
 		},
 		{
-			idp: 'KLASCEMENT',
+			idp: Idp.KLASCEMENT,
 			idp_user_id: '5e7c68a6543c5',
 		},
 		{
-			idp: 'VLAAMSEOVERHEID__SUB_ID',
+			idp: Idp.VLAAMSEOVERHEID__SUB_ID,
 			idp_user_id: '4d2b556cd6bffa86869507455afb0ee7329f41f2',
 		},
 	],
@@ -239,7 +239,7 @@ export const mockUserHetArchief: Avo.User.HetArchiefUser = {
 		PermissionName.VIEW_USERS,
 		PermissionName.CAN_EDIT_PROFILE_INFO,
 	],
-	idp: 'HETARCHIEF' as Idp,
+	idp: Idp.HETARCHIEF,
 	isKeyUser: false,
 	lastAccessAt: '2023-04-04T18:51:03.032+02:00',
 	createdAt: '2023-01-30T16:26:38.875447',

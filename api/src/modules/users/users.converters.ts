@@ -1,6 +1,4 @@
-import { type Avo, type PermissionName } from '@viaa/avo2-types';
-
-import { type Idp } from '../shared/auth/auth.types';
+import { type Avo, type Idp, type PermissionName } from '@viaa/avo2-types';
 
 import {
 	type UserInfoOverviewAvo,
