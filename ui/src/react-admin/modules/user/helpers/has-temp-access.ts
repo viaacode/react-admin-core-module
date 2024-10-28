@@ -1,7 +1,7 @@
-import type { UserTempAccess } from '@viaa/avo2-types/types/user';
 import { endOfDay, isAfter, isBefore, isWithinInterval, parseISO } from 'date-fns';
+import type { Avo } from '@viaa/avo2-types';
 
-export function hasTempAccess(tempAccess?: UserTempAccess): boolean | null {
+export function hasTempAccess(tempAccess?: Avo.User.TempAccess): boolean | null {
 	if (!tempAccess?.from && !tempAccess?.until) {
 		return null;
 	}

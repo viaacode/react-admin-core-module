@@ -3,7 +3,6 @@ import { Idp, PermissionName } from '@viaa/avo2-types';
 
 import { type Locale } from './modules';
 
-console.log('idp enum: ', Idp);
 export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
 	last_name: 'Verhelst',

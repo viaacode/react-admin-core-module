@@ -8,7 +8,7 @@ import {
 	ModalFooterRight,
 	Spacer,
 } from '@viaa/avo2-components';
-import type { UserTempAccess } from '@viaa/avo2-types/types/user';
+import type { Avo } from '@viaa/avo2-types';
 import { noop } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
@@ -21,10 +21,10 @@ import { ToastType } from '~core/config';
 import { getTempAccessValidationErrors } from '../user.consts';
 
 interface TempAccessModalProps {
-	tempAccess: UserTempAccess | null;
+	tempAccess: Avo.User.TempAccess | null;
 	isOpen: boolean;
 	onClose?: () => void;
-	setTempAccessCallback: (tempAccess: UserTempAccess) => void;
+	setTempAccessCallback: (tempAccess: Avo.User.TempAccess) => void;
 }
 
 const TempAccessModal: FunctionComponent<TempAccessModalProps> = ({
