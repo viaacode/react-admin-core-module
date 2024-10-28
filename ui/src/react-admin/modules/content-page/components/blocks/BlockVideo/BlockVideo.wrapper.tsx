@@ -14,7 +14,6 @@ import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { SourcePage } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;
@@ -176,7 +175,6 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					controls={controls}
 					speed={speed}
 					onEnded={onEnded}
-					sourcePage={SourcePage.contentPage}
 				/>
 				{/* Modal for displaying copyright info about the tile's image https://meemoo.atlassian.net/browse/AVO-3015 */}
 				<Modal
