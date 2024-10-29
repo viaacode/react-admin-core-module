@@ -20,12 +20,8 @@ query getItemTileById($id: bpchar!) {
 			description
 			external_id
 		}
-		view_counts_aggregate {
-			aggregate {
-				sum {
-					count
-				}
-			}
+		view_count {
+			count
 		}
 	}
 }

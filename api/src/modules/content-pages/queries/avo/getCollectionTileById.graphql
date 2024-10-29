@@ -12,12 +12,8 @@ query getCollectionTileById($id: uuid!) {
 				count
 			}
 		}
-		view_counts_aggregate {
-			aggregate {
-				sum {
-					count
-				}
-			}
+		view_count {
+			count
 		}
 	}
 }

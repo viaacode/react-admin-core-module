@@ -23,8 +23,6 @@ import {
 	without,
 } from 'lodash';
 
-import { getOrderObject } from '../../../modules/shared/helpers/generate-order-gql-query';
-import { isAvo } from '../../../modules/shared/helpers/is-avo';
 import { AssetsService } from '../../assets';
 import { DataService } from '../../data';
 import { PlayerTicketService } from '../../player-ticket';
@@ -46,7 +44,9 @@ import {
 } from '../../shared/generated/graphql-db-types-avo';
 import { type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
 import { CustomError } from '../../shared/helpers/custom-error';
+import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
+import { isAvo } from '../../shared/helpers/is-avo';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { Locale } from '../../translations';
 import { type ContentBlockType, type DbContentBlock } from '../content-block.types';
@@ -484,7 +484,7 @@ export class ContentPagesService {
 
 		return {
 			...itemOrCollection,
-			count: itemOrCollection?.view_counts_aggregate?.aggregate?.sum?.count || 0,
+			count: itemOrCollection?.view_count?.count || 0,
 		};
 	}
 
