@@ -16,7 +16,6 @@
   },
   "scripts": {
     "prepare": "cd .. && husky install",
-    "install-local": "npm i ../../react-components ../../avo2-components",
     "dev": "cross-env PORT=3400 dotenv -e .env/.env.local vite",
     "prebuild": "rimraf dist",
     "build": "vite build",
@@ -38,8 +37,6 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.mts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.ts -- AVO",
-    "translations:migrate:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/migrate-to-sql-translations.ts -- HET_ARCHIEF",
-    "translations:migrate:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/migrate-to-sql-translations.ts -- AVO",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json",
     "list-of-changed-translations-hetarchief": "git diff 7c16b0d2bae655ee1ecb41515a2f8acf308b9c39 2f00a16a91aa17b69c6e0cccacf9aef951251372 --no-ext-diff --unified=0 --exit-code -a --no-prefix all-translations-het-archief.sql > translation-changes.txt",
     "list-of-changed-translations-avo": "git diff 296b12bc26a4d5c83b8bb35be5f05115ac6356fe b56c8382a7622a13a7f983c682c1094daa514c94 --no-ext-diff --unified=0 --exit-code -a --no-prefix all-translations-avo.sql > translation-changes.txt",
