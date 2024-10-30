@@ -632,13 +632,15 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						renderTableCell(value as any, columnId as UserOverviewTableCol)
 					}
 					columns={compact(
-						columns.map((column) => {
-							const label = column.label || column.tooltip;
-							if (!label) {
-								return null;
-							}
-							return { label, id: column.id };
-						})
+						columns
+							.filter((column) => column.id !== 'actions')
+							.map((column) => {
+								const label = column.label || column.tooltip;
+								if (!label) {
+									return null;
+								}
+								return { label, id: column.id };
+							})
 					)}
 					exportFileName={tText('modules/user/views/user-overview___gebruikers-csv')}
 				/>
