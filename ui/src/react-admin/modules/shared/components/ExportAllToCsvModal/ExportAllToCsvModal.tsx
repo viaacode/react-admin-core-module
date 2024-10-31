@@ -7,10 +7,10 @@ import { ProgressBar } from '@meemoo/react-components';
 import './ExportAllToCsvModal.scss';
 import FileSaver from 'file-saver';
 import { reactNodeToString } from '~shared/helpers/react-node-to-string';
-import { delay } from 'blend-promise-utils';
 import { noop } from 'lodash-es';
 import { showToast } from '~shared/helpers/show-toast';
 import { ToastType } from '~core/config';
+import { delay } from 'blend-promise-utils';
 
 interface ExportAllToCsvModalProps {
 	title: string;
@@ -62,18 +62,26 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 				break;
 			}
 			const item = downloadedItems[index];
-			const csvConvertPercentage = Math.round((index / downloadedItems.length) * 100);
+			// Round to multiple of 10 to have less overhead of UI rerendering
+			const csvConvertPercentage = Math.round((index / downloadedItems.length) * 10) * 10;
 			if (csvConvertPercentage !== lastCsvConvertPercentage) {
 				setPercentageConvertedToCsv(csvConvertPercentage);
 				lastCsvConvertPercentage = csvConvertPercentage;
-				await delay(10); // Give react time to update the ui
+				await delay(0); // Give react time to update the ui
 			}
 			const csvCellValues: string[] = [];
 			columns.forEach(({ id: columnId }) => {
 				// We're using the same render function as the admin dashboard table to render the values
 				// This way we can be sure the values are formatted the same way in the csv as in the table
-				const csvCellValue = reactNodeToString(renderValue(item, columnId));
-				csvCellValues.push(`"${csvCellValue.replace(/"/g, '""')}"`);
+				const csvCellValue = reactNodeToString(renderValue(item, columnId)).replace(
+					/"/g,
+					'""'
+				);
+				if (!csvCellValue || csvCellValue === '-') {
+					csvCellValues.push('');
+				} else {
+					csvCellValues.push(`"${csvCellValue}"`);
+				}
 			});
 			csvRowValues.push(csvCellValues.join(';') + '\n');
 		}
