@@ -219,8 +219,9 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					showBackToTop={true}
 					showFirstAndLastButtons={true}
 					onScrollToTop={() => {
-						const filterTable = document.querySelector('.c-filter-table');
-						const scrollable = filterTable?.closest('.c-scrollable');
+						const scrollable = document.querySelector(
+							'.o-app--admin__main.c-scrollable'
+						);
 						scrollable?.scrollTo(0, 0);
 					}}
 				/>

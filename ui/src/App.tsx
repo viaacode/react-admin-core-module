@@ -49,7 +49,7 @@ function App() {
 							/>
 
 							<Flex
-								className="o-app--admin__main u-flex-auto u-scroll"
+								className="o-app--admin__main u-flex-auto u-scroll c-scrollable"
 								orientation="vertical"
 							>
 								{renderAdminRoutes()}
