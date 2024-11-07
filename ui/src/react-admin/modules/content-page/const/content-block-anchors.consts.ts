@@ -1,0 +1,1 @@
+export const GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX = 'block___';

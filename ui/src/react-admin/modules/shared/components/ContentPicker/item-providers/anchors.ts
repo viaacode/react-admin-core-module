@@ -1,14 +1,15 @@
 import { LinkTarget } from '@viaa/avo2-components';
 
-import { CustomError } from '../../../helpers/custom-error';
-import type { PickerItem } from '../../../types/content-picker';
+import { CustomError } from '~shared/helpers/custom-error';
+import type { PickerItem } from '~shared/types/content-picker';
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 
 export const retrieveAnchors = async (name: string | null, limit = 5): Promise<PickerItem[]> => {
 	try {
 		const anchorIds: string[] = [];
 		document.querySelectorAll('[data-anchor]').forEach((block) => {
 			const anchorId = block.getAttribute('data-anchor');
-			if (anchorId) {
+			if (anchorId && !anchorId.startsWith(GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX)) {
 				anchorIds.push(anchorId);
 			}
 		});

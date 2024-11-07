@@ -23,6 +23,7 @@ import './ContentBlockRenderer.scss';
 import { AdminConfigManager } from '~core/config';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -135,7 +136,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
-			data-anchor={blockState.anchor || 'block__' + contentBlockConfig.id}
+			data-anchor={
+				blockState.anchor || GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id
+			}
 			ref={blockRef}
 			onClick={onClick}
 		>
@@ -146,7 +149,10 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			 */}
 			<div
 				className="c-content-block__anchor"
-				id={blockState.anchor || 'block__' + contentBlockConfig.id}
+				id={
+					blockState.anchor ||
+					GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id
+				}
 			></div>
 			<Spacer
 				className={clsx('c-content-block-preview', {
