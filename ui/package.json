@@ -78,7 +78,6 @@
     "react-router-dom": "5.3.4",
     "react-select": "5.7.4",
     "react-table": "7.7.0",
-    "react-to-string": "0.1.1",
     "use-query-params": "1.2.3",
     "yup": "1.4.0"
   },
