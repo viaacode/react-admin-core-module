@@ -815,7 +815,7 @@
   "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___download-csv": "Download csv",
   "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___exporteren-geannuleerd": "Exporteren geannuleerd",
   "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___het-genereren-van-de-csv-is-mislukt": "Het genereren van de csv is mislukt",
-  "modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar": "van",
+  "modules/shared/components/filter-table/filter-table___label-between-end-page-and-total-in-pagination-bar": " van ",
   "modules/shared/components/filter-table/filter-table___label-between-start-and-end-page-in-pagination-bar": "-",
   "modules/shared/components/filter-table/filter-table___zoekveld-checkbox-filter-aria-label": "zoekveld checkbox filter aria label",
   "modules/shared/consts/language-names___engels": "Engels",

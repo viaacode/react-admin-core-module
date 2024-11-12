@@ -14,6 +14,7 @@ import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
 import { TextInput } from '@meemoo/react-components';
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps> = ({
 	title,
@@ -65,7 +66,9 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 				onKeyUp={onSearch}
 				value={searchInput}
 				placeholder={tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-op-titel'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/block-overview-newspaper-titles___zoek-op-titel',
+					undefined,
+					[HET_ARCHIEF]
 				)}
 				iconEnd={
 					<div>

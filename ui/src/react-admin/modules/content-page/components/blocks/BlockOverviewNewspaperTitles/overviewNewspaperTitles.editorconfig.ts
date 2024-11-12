@@ -11,6 +11,7 @@ import { AdminConfigManager } from '~core/config';
 import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import { tText } from '~shared/helpers/translation-functions';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_OVERVIEW_NEWSPAPER_TITLES_COMPONENTS_STATE = () => ({
 	title: '',
@@ -30,7 +31,9 @@ export const INITIAL_OVERVIEW_NEWSPAPER_TITLES_BLOCK_STATE = (): DefaultContentB
 export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___krantentitels'
+		'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___krantentitels',
+		undefined,
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.OverviewNewspaperTitles,
 	components: {
@@ -38,18 +41,24 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 		fields: {
 			title: TEXT_FIELD(
 				tText(
-					'modules/content-page/components/blocks/overview-newspaper-titles___is-verplicht'
+					'modules/content-page/components/blocks/overview-newspaper-titles___is-verplicht',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				{
 					label: tText(
-						'modules/content-page/components/blocks/overview-newspaper-titles___titel'
+						'modules/content-page/components/blocks/overview-newspaper-titles___titel',
+						undefined,
+						[HET_ARCHIEF]
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			titleType: {
 				label: tText(
-					'modules/content-page/components/blocks/overview-newspaper-titles___titel-grootte'
+					'modules/content-page/components/blocks/overview-newspaper-titles___titel-grootte',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
@@ -58,7 +67,9 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 			},
 			buttonType: {
 				label: tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-type-kleur'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-type-kleur',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
@@ -67,24 +78,32 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 			},
 			buttonLabel: TEXT_FIELD(
 				tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knoptekst-is-verplicht'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knoptekst-is-verplicht',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				{
 					label: tText(
-						'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-tekst'
+						'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-tekst',
+						undefined,
+						[HET_ARCHIEF]
 					),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
 			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___alternative'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___alternative',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
 				label: tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-icoon'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-icoon',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
@@ -93,7 +112,9 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 			},
 			buttonAction: {
 				label: tText(
-					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-link'
+					'modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles___knop-link',
+					undefined,
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
