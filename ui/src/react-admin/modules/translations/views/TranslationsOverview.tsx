@@ -25,7 +25,7 @@ import { CustomError } from '~shared/helpers/custom-error';
 import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { OrderDirection } from '~shared/types';
-import { Loader } from '../../shared/components/Loader/Loader';
+import { Loader } from '~shared/components/Loader';
 import { getFullKey } from '../helpers/get-full-key';
 import { useGetAllLanguages } from '../hooks/use-get-all-languages';
 import { TranslationsService } from '../translations.service';
@@ -63,7 +63,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	);
 
 	const [search, setSearch] = useState<string>('');
-	const [page, setPage] = useState<number>(1);
+	const [page, setPage] = useState<number>(0);
 	const [orderProp, setOrderProp] = useState<OrderProp | undefined>(undefined);
 	const [orderDirection, setOrderDirection] = useState<OrderDirection>(OrderDirection.asc);
 
@@ -101,8 +101,8 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			sortedTranslations = reverse(sortedTranslations);
 		}
 		const paginatedTranslations: MultiLanguageTranslationEntry[] = sortedTranslations.slice(
-			(page - 1) * TRANSLATIONS_PER_PAGE,
-			Math.min(sortedTranslations?.length || 0, page * TRANSLATIONS_PER_PAGE)
+			page * TRANSLATIONS_PER_PAGE,
+			Math.min(sortedTranslations?.length || 0, (page + 1) * TRANSLATIONS_PER_PAGE)
 		);
 		setFilteredAndPaginatedTranslations(paginatedTranslations);
 	}, [allTranslationEntries, orderProp, orderDirection, page, search]);
@@ -157,7 +157,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 	};
 
 	const handlePageChange = (newPageZeroBased: number) => {
-		setPage(newPageZeroBased + 1);
+		setPage(newPageZeroBased);
 	};
 
 	const sortFilters = useMemo(() => {
@@ -174,7 +174,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 			if (newOrderProp !== orderProp || newOrderDirection !== orderDirection) {
 				setOrderProp(newOrderProp as OrderProp | undefined);
 				setOrderDirection(newOrderDirection || OrderDirection.asc);
-				setPage(1);
+				setPage(0);
 			}
 		},
 		// Fix ARC-964: If filters.page is included, the pagination breaks (on pagechange the pagenumber resets to 1 again)
@@ -380,7 +380,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				value={search}
 				onChange={(e) => {
 					setSearch(e.target.value);
-					setPage(1);
+					setPage(0);
 				}}
 				placeholder={tText(
 					'modules/translations/views/translations-overview-v-2___zoek-op-id-of-waarde'
