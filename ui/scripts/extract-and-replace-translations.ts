@@ -31,12 +31,12 @@ import * as glob from 'glob';
 import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
 import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
+import type { TranslationEntry } from '../src/react-admin/modules/translations/translations.core.types';
 import {
 	App,
 	Component,
 	Locale,
 	TRANSLATION_SEPARATOR,
-	TranslationEntry,
 	ValueType,
 } from '../src/react-admin/modules/translations/translations.core.types';
 

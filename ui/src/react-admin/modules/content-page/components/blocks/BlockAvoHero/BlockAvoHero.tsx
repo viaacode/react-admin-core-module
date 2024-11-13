@@ -33,7 +33,7 @@ export interface BlockHeroProps extends DefaultProps {
 	renderLink?: RenderLinkFunction;
 }
 
-export const BlockHero: FunctionComponent<BlockHeroProps> = ({
+export const BlockAvoHero: FunctionComponent<BlockHeroProps> = ({
 	title,
 	titleColor,
 	content,

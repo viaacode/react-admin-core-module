@@ -1,6 +1,7 @@
 import type { SelectOption } from '@viaa/avo2-components';
 import { tText } from '~shared/helpers/translation-functions';
 import { Color, CustomBackground, GradientColor } from '../types/content-block.types';
+import { AVO } from '~shared/types';
 
 const transparentOption = () => ({
 	label: tText('admin/content-block/content-block___geen'),
@@ -15,23 +16,23 @@ const gray50Option = () => ({
 	value: Color.Gray50,
 });
 const softBlueOption = () => ({
-	label: tText('admin/content-block/content-block___zachtblauw'),
+	label: tText('admin/content-block/content-block___zachtblauw', {}, [AVO]),
 	value: Color.SoftBlue,
 });
 const nightBlueOption = () => ({
-	label: tText('admin/content-block/content-block___nachtblauw'),
+	label: tText('admin/content-block/content-block___nachtblauw', {}, [AVO]),
 	value: Color.NightBlue,
 });
 const tealOption = () => ({
-	label: tText('admin/content-block/content-block___appelblauwzeegroen'),
+	label: tText('admin/content-block/content-block___appelblauwzeegroen', {}, [AVO]),
 	value: Color.Teal,
 });
 const tealBrightOption = () => ({
-	label: tText('admin/content-block/content-block___appelblauwzeegroen-helder'),
+	label: tText('admin/content-block/content-block___appelblauwzeegroen-helder', {}, [AVO]),
 	value: Color.TealBright,
 });
 const oceanGreenOption = () => ({
-	label: tText('admin/content-block/content-block___oceaangroen'),
+	label: tText('admin/content-block/content-block___oceaangroen', {}, [AVO]),
 	value: Color.OceanGreen,
 });
 const seaGreenOption = () => ({
@@ -39,7 +40,7 @@ const seaGreenOption = () => ({
 	value: Color.SeaGreen,
 });
 const yellowOption = () => ({
-	label: tText('admin/content-block/content-block___leerlingen-geel'),
+	label: tText('admin/content-block/content-block___leerlingen-geel', {}, [AVO]),
 	value: Color.Yellow,
 });
 const platinumOption = () => ({
@@ -98,7 +99,7 @@ export const GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<
 	blackWhiteGradientOption(),
 ];
 
-export const GET_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
+export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] = () => [
 	softBlueOption(),
 	nightBlueOption(),
 	tealOption(),

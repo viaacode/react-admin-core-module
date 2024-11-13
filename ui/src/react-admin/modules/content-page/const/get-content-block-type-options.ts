@@ -2,6 +2,7 @@ import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { tText } from '~shared/helpers/translation-functions';
 import { ContentBlockType } from '../types/content-block.types';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
@@ -89,7 +90,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 		},
 		{
 			label: tText('admin/content-block/content-block___hero'),
-			value: ContentBlockType.Hero,
+			value: ContentBlockType.AvoHero,
 		},
 		{
 			label: tText('admin/content-block/content-block___zoek'),
@@ -124,35 +125,49 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.CardsWithoutDescription,
 		},
 		{
-			label: tText('admin/content-block/content-block___image-text-background'),
+			label: tText('admin/content-block/content-block___image-text-background', {}, [
+				HET_ARCHIEF,
+			]),
 			value: ContentBlockType.ImageTextBackground,
 		},
 		{
 			label: tText(
-				'react-admin/modules/content-page/const/get-content-block-type-options___aanbieders-grid'
+				'react-admin/modules/content-page/const/get-content-block-type-options___aanbieders-grid',
+				{},
+				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.MaintainersGrid,
 		},
 		{
 			label: tText(
-				'react-admin/modules/content-page/const/get-content-block-type-options___header-met-zoekveld'
+				'react-admin/modules/content-page/const/get-content-block-type-options___header-met-zoekveld',
+				{},
+				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.HetArchiefHeaderSearch,
 		},
 		{
 			label: tText(
-				'modules/content-page/const/get-content-block-type-options___overzicht-krantentitels'
+				'modules/content-page/const/get-content-block-type-options___overzicht-krantentitels',
+				{},
+				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.OverviewNewspaperTitles,
 		},
 		{
 			label: tText(
-				'modules/content-page/const/get-content-block-type-options___content-enclose-grid'
+				'modules/content-page/const/get-content-block-type-options___content-enclose-grid',
+				{},
+				[HET_ARCHIEF]
 			),
 			value: ContentBlockType.ContentEncloseGrid,
 		},
 		{
-			label: tText('modules/content-page/const/get-content-block-type-options___breadcrumbs'),
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___breadcrumbs',
+				{},
+				[HET_ARCHIEF]
+			),
 			value: ContentBlockType.Breadcrumbs,
 		},
 	];

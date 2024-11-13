@@ -11,6 +11,7 @@ import {
 	DEFAULT_BUTTON_PROPS,
 } from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_BREADCRUMBS_COMPONENTS_STATE = () => ({
 	foregroundColor: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0].value,
@@ -36,7 +37,9 @@ export const INITIAL_BREADCRUMBS_BLOCK_STATE = (): DefaultContentBlockState => (
 export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
-		'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___breadcrumbs'
+		'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___breadcrumbs',
+		{},
+		[HET_ARCHIEF]
 	),
 	type: ContentBlockType.Breadcrumbs,
 	components: {
@@ -44,7 +47,9 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 		fields: {
 			foregroundColor: {
 				label: tText(
-					'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___tekstkleur'
+					'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___tekstkleur',
+					{},
+					[HET_ARCHIEF]
 				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
@@ -57,13 +62,17 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 				fields: {
 					label: {
 						label: tText(
-							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label'
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___label',
+							{},
+							[HET_ARCHIEF]
 						),
 						editorType: ContentBlockEditor.TextInput,
 					},
 					link: {
 						label: tText(
-							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link'
+							'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___link',
+							{},
+							[HET_ARCHIEF]
 						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
@@ -79,10 +88,14 @@ export const CONTENT_BREADCRUMBS_CONFIG = (position = 0): ContentBlockConfig => 
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
 					addButtonLabel: tText(
-						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___voeg-object-toe'
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___voeg-object-toe',
+						{},
+						[HET_ARCHIEF]
 					),
 					deleteButtonLabel: tText(
-						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___verwijder-object'
+						'modules/content-page/components/blocks/block-breadcrumbs/block-breadcrumbs___verwijder-object',
+						{},
+						[HET_ARCHIEF]
 					),
 				},
 			},

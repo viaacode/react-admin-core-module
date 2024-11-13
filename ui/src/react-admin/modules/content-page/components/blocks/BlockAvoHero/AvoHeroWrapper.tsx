@@ -1,12 +1,12 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
-import { BlockHero } from '~content-blocks/BlockHero/BlockHero';
+import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import { BlockAvoHero } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import { AdminConfigManager } from '~core/config';
 
-export const HeroWrapper: FunctionComponent<BlockHeroProps> = (props) => {
+export const AvoHeroWrapper: FunctionComponent<BlockHeroProps> = (props) => {
 	return (
-		<BlockHero
+		<BlockAvoHero
 			{...props}
 			dataPlayerId={AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_ID}
 			token={AdminConfigManager.getConfig().flowplayer.FLOW_PLAYER_TOKEN}

@@ -1,5 +1,5 @@
 import type { FC, FunctionComponent } from 'react';
-import { HeroWrapper } from '~content-blocks/BlockHero/HeroWrapper';
+import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';
 import {
@@ -61,7 +61,7 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.RichTextTwoColumns]: BlockRichTextWrapper,
 		[ContentBlockType.RichText]: BlockRichTextWrapper,
 		[ContentBlockType.Spotlight]: BlockSpotlight,
-		[ContentBlockType.Hero]: HeroWrapper,
+		[ContentBlockType.AvoHero]: AvoHeroWrapper,
 		[ContentBlockType.ContentPageMeta]: BlockContentPageMeta,
 		[ContentBlockType.LogoGrid]: BlockLogoGridWrapper,
 		[ContentBlockType.UspGrid]: BlockUspGridWrapper,
@@ -117,7 +117,7 @@ export const NAVIGABLE_CONTENT_BLOCKS = [
 	ContentBlockType.RichText,
 	ContentBlockType.RichTextTwoColumns,
 	ContentBlockType.Spotlight,
-	ContentBlockType.Hero,
+	ContentBlockType.AvoHero,
 	ContentBlockType.PageOverview,
 	ContentBlockType.MediaGrid,
 	ContentBlockType.LogoGrid,

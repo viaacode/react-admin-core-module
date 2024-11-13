@@ -1,7 +1,7 @@
 import type { TextInputProps } from '@viaa/avo2-components';
 import { noop } from 'lodash-es';
-import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
-import { GET_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
+import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import { GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
@@ -31,8 +31,9 @@ import {
 } from '../defaults';
 
 import { AdminConfigManager } from '~core/config';
+import { AVO } from '~shared/types';
 
-export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
+export const INITIAL_AVO_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	title: '',
 	titleColor: Color.White,
 	content: '',
@@ -41,7 +42,7 @@ export const INITIAL_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
 	buttons: [],
 });
 
-export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
+export const INITIAL_AVO_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 	...BLOCK_STATE_DEFAULTS({
 		padding: {
 			top: 'none',
@@ -51,35 +52,39 @@ export const INITIAL_HERO_BLOCK_STATE = (): DefaultContentBlockState => ({
 	backgroundColor: Color.NightBlue,
 });
 
-export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
+export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
-	name: tText('admin/content-block/helpers/generators/hero___hero'),
-	type: ContentBlockType.Hero,
+	name: tText('admin/content-block/helpers/generators/hero___hero', {}, [AVO]),
+	type: ContentBlockType.AvoHero,
 	components: {
-		state: INITIAL_HERO_COMPONENTS_STATE(),
+		state: INITIAL_AVO_HERO_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/hero___titel'),
+				label: tText('admin/content-block/helpers/generators/hero___titel', {}, [AVO]),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
 			titleColor: FOREGROUND_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hero___titel-kleur')
+				tText('admin/content-block/helpers/generators/hero___titel-kleur', {}, [AVO])
 			),
 			content: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/hero___beschrijving'),
+				label: tText('admin/content-block/helpers/generators/hero___beschrijving', {}, [
+					AVO,
+				]),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
 			contentColor: FOREGROUND_COLOR_FIELD(
-				tText('admin/content-block/helpers/generators/hero___beschrijving-kleur')
+				tText('admin/content-block/helpers/generators/hero___beschrijving-kleur', {}, [AVO])
 			),
 
 			buttons: {
-				label: tText('admin/content-block/helpers/generators/hero___knop'),
+				label: tText('admin/content-block/helpers/generators/hero___knop', {}, [AVO]),
 				fields: {
 					type: {
-						label: tText('admin/content-block/helpers/generators/buttons___type'),
+						label: tText('admin/content-block/helpers/generators/buttons___type', {}, [
+							AVO,
+						]),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
@@ -87,10 +92,16 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					},
 					label: TEXT_FIELD(
 						tText(
-							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
+							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht',
+							{},
+							[AVO]
 						),
 						{
-							label: tText('admin/content-block/helpers/generators/buttons___tekst'),
+							label: tText(
+								'admin/content-block/helpers/generators/buttons___tekst',
+								{},
+								[AVO]
+							),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
@@ -102,14 +113,20 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						validator: undefined,
 					}),
 					icon: {
-						label: tText('admin/content-block/helpers/generators/buttons___icoon'),
+						label: tText('admin/content-block/helpers/generators/buttons___icoon', {}, [
+							AVO,
+						]),
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
 					buttonAction: {
-						label: tText('admin/content-block/helpers/generators/buttons___knop-actie'),
+						label: tText(
+							'admin/content-block/helpers/generators/buttons___knop-actie',
+							{},
+							[AVO]
+						),
 						editorType: ContentBlockEditor.ContentPicker,
 					},
 				},
@@ -117,16 +134,24 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
 					addButtonLabel: tText(
-						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe'
+						'admin/content-block/helpers/generators/rich-text-two-columns___voeg-knop-toe',
+						{},
+						[AVO]
 					),
 					deleteButtonLabel: tText(
-						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop'
+						'admin/content-block/helpers/generators/rich-text-two-columns___verwijder-knop',
+						{},
+						[AVO]
 					),
 				},
 			} as ContentBlockFieldGroup,
 
 			textBelowButtons: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/hero___text-onder-knoppen'),
+				label: tText(
+					'admin/content-block/helpers/generators/hero___text-onder-knoppen',
+					{},
+					[AVO]
+				),
 				editorProps: {
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
@@ -134,18 +159,26 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			}),
 			src: TEXT_FIELD(undefined, {
 				label: tText(
-					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com'
+					'admin/content-block/helpers/generators/hero___eigen-video-url-van-flowplayer-com',
+					{},
+					[AVO]
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: validateFlowplayerVideoUrl,
 				editorProps: {
 					placeholder: tText(
-						'admin/content-block/helpers/generators/hero___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8'
+						'admin/content-block/helpers/generators/hero___bv-https-cdn-flowplayer-com-hls-playlist-m-3-u-8',
+						{},
+						[AVO]
 					),
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/hero___eigen-poster-uploaden'),
+				label: tText(
+					'admin/content-block/helpers/generators/hero___eigen-poster-uploaden',
+					{},
+					[AVO]
+				),
 				validator: undefined,
 				editorProps: {
 					allowMulti: false,
@@ -157,7 +190,9 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			}),
 			altText: TEXT_FIELD(undefined, {
 				label: tText(
-					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding'
+					'admin/content-block/helpers/generators/hero___alt-tekst-voor-video-afbeelding',
+					{},
+					[AVO]
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
@@ -165,15 +200,19 @@ export const HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		},
 	},
 	block: {
-		state: INITIAL_HERO_BLOCK_STATE(),
+		state: INITIAL_AVO_HERO_BLOCK_STATE(),
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: tText('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
+				label: tText(
+					'admin/content-block/helpers/generators/defaults___achtergrondkleur',
+					{},
+					[AVO]
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: GET_HERO_BACKGROUND_COLOR_OPTIONS(),
-					defaultValue: GET_HERO_BACKGROUND_COLOR_OPTIONS()[0],
+					options: GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS(),
+					defaultValue: GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS()[0],
 				},
 			},
 		},

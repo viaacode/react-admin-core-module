@@ -13,6 +13,7 @@ import {
 } from '~modules/content-page/types/content-block.types';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 
 export const INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE = () => ({
 	title: '',
@@ -49,44 +50,76 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 		state: INITIAL_CONTENT_ENCLOSE_COMPONENTS_STATE(),
 		fields: {
 			title: TEXT_FIELD('title', {
-				label: 'title',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___title',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			titleType: {
-				label: 'titletype',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___titletype',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_TYPE_OPTIONS(),
 				},
 			},
 			description: {
-				label: 'beschrijving',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___beschrijving',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.TextInput,
 			},
 			buttonType: {
-				label: 'buttonType',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-type',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
 			},
 			buttonLabel: TEXT_FIELD(undefined, {
-				label: 'buttonLabel',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-label',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonAltTitle: TEXT_FIELD(undefined, {
-				label: 'buttonAltTitle',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-alt-title',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.TextInput,
 			}),
 			buttonIcon: {
-				label: 'buttonIcon',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-icon',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.IconPicker,
 				editorProps: {
 					options: GET_ADMIN_ICON_OPTIONS(),
 				},
 			},
 			buttonAction: {
-				label: 'buttonAction',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___button-action',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
 					allowedTypes: [
@@ -100,10 +133,18 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				},
 			},
 			elements: {
-				label: 'label',
+				label: tText(
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___label',
+					undefined,
+					[HET_ARCHIEF]
+				),
 				fields: {
 					mediaItem: {
-						label: 'content enclose',
+						label: tText(
+							'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-enclose',
+							undefined,
+							[HET_ARCHIEF]
+						),
 						editorType: ContentBlockEditor.ContentPicker,
 						editorProps: {
 							allowedTypes: ['CONTENT_PAGE', 'IE_OBJECT'] as ContentPickerType[],
@@ -113,8 +154,16 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 				type: 'fieldGroup',
 				repeat: {
 					defaultState: DEFAULT_BUTTON_PROPS,
-					addButtonLabel: 'voeg object toe',
-					deleteButtonLabel: 'verwijder object',
+					addButtonLabel: tText(
+						'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___voeg-object-toe',
+						undefined,
+						[HET_ARCHIEF]
+					),
+					deleteButtonLabel: tText(
+						'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___verwijder-object',
+						undefined,
+						[HET_ARCHIEF]
+					),
 				},
 			},
 		},

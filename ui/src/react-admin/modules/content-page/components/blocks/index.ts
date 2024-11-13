@@ -3,7 +3,7 @@ export * from './BlockButtons';
 export * from './BlockCTAs';
 export * from './BlockEventbrite';
 export * from './BlockHeading';
-export * from './BlockHero';
+export * from './BlockAvoHero';
 export * from './BlockIFrame';
 export * from './BlockImage';
 export * from './BlockImageGrid';

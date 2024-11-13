@@ -9,7 +9,7 @@ import type {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
-import type { BlockHeroProps } from '~content-blocks/BlockHero/BlockHero';
+import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
@@ -128,7 +128,7 @@ export enum ContentBlockType {
 	CTAs = 'CTAS',
 	Eventbrite = 'EVENTBRITE',
 	Heading = 'HEADING',
-	Hero = 'HERO',
+	AvoHero = 'HERO',
 	IFrame = 'IFRAME',
 	Image = 'IMAGE',
 	ImageGrid = 'IMAGE_GRID',

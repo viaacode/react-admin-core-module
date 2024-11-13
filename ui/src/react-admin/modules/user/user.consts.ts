@@ -18,6 +18,7 @@ import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 import type { UserOverviewTableCol } from './user.types';
 import { UserBulkAction } from './user.types';
+import { AVO, HET_ARCHIEF } from '~shared/types';
 
 type UserBulkActionOption = SelectOption<UserBulkAction> & {
 	confirm?: boolean;
@@ -67,27 +68,27 @@ const getAvoColumns = (
 ): FilterableColumn<UserOverviewTableCol>[] => [
 	{
 		id: 'profileId',
-		label: tText('admin/users/user___id'),
+		label: tText('admin/users/user___id', {}, [AVO]),
 		sortable: false,
 		visibleByDefault: false,
 	},
 	{
 		id: 'fullName',
-		label: tText('admin/users/user___naam'),
+		label: tText('admin/users/user___naam', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'email',
-		label: tText('admin/users/user___email'),
+		label: tText('admin/users/user___email', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'userGroup',
-		label: tText('admin/users/user___gebruikersgroep'),
+		label: tText('admin/users/user___gebruikersgroep', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -95,7 +96,7 @@ const getAvoColumns = (
 			options: [
 				...userGroupOptions,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -104,7 +105,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'businessCategory',
-		label: tText('admin/users/user___oormerk'),
+		label: tText('admin/users/user___oormerk', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -112,7 +113,7 @@ const getAvoColumns = (
 			options: [
 				...businessCategoryOptions,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -121,7 +122,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'isException',
-		label: tText('admin/users/user___uitzonderingsaccount'),
+		label: tText('admin/users/user___uitzonderingsaccount', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.BooleanCheckboxDropdown,
@@ -129,7 +130,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'isBlocked',
-		label: tText('admin/users/user___geblokkeerd'),
+		label: tText('admin/users/user___geblokkeerd', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.BooleanCheckboxDropdown,
@@ -137,7 +138,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'blockedAt',
-		label: tText('admin/users/user___geblokkeerd-op'),
+		label: tText('admin/users/user___geblokkeerd-op', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.DateRangeDropdown,
@@ -145,7 +146,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'unblockedAt',
-		label: tText('admin/users/user___ongeblokkeerd-op'),
+		label: tText('admin/users/user___ongeblokkeerd-op', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.DateRangeDropdown,
@@ -155,18 +156,20 @@ const getAvoColumns = (
 		? [
 				{
 					id: 'tempAccess',
-					label: tText('admin/users/user___tijdelijke-toegang'),
+					label: tText('admin/users/user___tijdelijke-toegang', {}, [AVO]),
 					sortable: true,
 					visibleByDefault: false,
 					filterType: TableFilterType.CheckboxDropdownModal,
 					filterProps: {
 						options: [
 							{
-								label: tText('admin/users/user___tijdelijke-toegang-ja'),
+								label: tText('admin/users/user___tijdelijke-toegang-ja', {}, [AVO]),
 								id: '1',
 							},
 							{
-								label: tText('admin/users/user___tijdelijke-toegang-nee'),
+								label: tText('admin/users/user___tijdelijke-toegang-nee', {}, [
+									AVO,
+								]),
 								id: '0',
 							},
 						],
@@ -175,14 +178,14 @@ const getAvoColumns = (
 				},
 				{
 					id: 'tempAccessFrom',
-					label: tText('admin/users/user___te-deblokkeren-op'),
+					label: tText('admin/users/user___te-deblokkeren-op', {}, [AVO]),
 					sortable: true,
 					visibleByDefault: false,
 					dataType: TableColumnDataType.dateTime,
 				},
 				{
 					id: 'tempAccessUntil',
-					label: tText('admin/users/user___te-blokkeren-op'),
+					label: tText('admin/users/user___te-blokkeren-op', {}, [AVO]),
 					sortable: true,
 					visibleByDefault: false,
 					dataType: TableColumnDataType.dateTime,
@@ -191,7 +194,7 @@ const getAvoColumns = (
 		: []) as FilterableColumn<UserOverviewTableCol>[]),
 	{
 		id: 'stamboek',
-		label: tText('admin/users/user___stamboek'),
+		label: tText('admin/users/user___stamboek', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.BooleanCheckboxDropdown,
@@ -199,7 +202,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'organisation',
-		label: tText('admin/users/user___organisatie'),
+		label: tText('admin/users/user___organisatie', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -207,7 +210,7 @@ const getAvoColumns = (
 			options: [
 				...companyOptions,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -216,7 +219,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'createdAt',
-		label: tText('admin/users/user___gebruiker-sinds'),
+		label: tText('admin/users/user___gebruiker-sinds', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.DateRangeDropdown,
@@ -224,7 +227,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'lastAccessAt',
-		label: tText('admin/users/user___laatste-toegang'),
+		label: tText('admin/users/user___laatste-toegang', {}, [AVO]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.DateRangeDropdown,
@@ -232,7 +235,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'educationLevels',
-		label: tText('admin/users/user___onderwijs-niveaus'),
+		label: tText('admin/users/user___onderwijs-niveaus', {}, [AVO]),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -240,7 +243,7 @@ const getAvoColumns = (
 			options: [
 				...educationLevels,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -248,7 +251,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'subjects',
-		label: tText('admin/users/user___vakken'),
+		label: tText('admin/users/user___vakken', {}, [AVO]),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -256,7 +259,7 @@ const getAvoColumns = (
 			options: [
 				...subjects,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -264,7 +267,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'idps',
-		label: tText('admin/users/user___toegang-via'),
+		label: tText('admin/users/user___toegang-via', {}, [AVO]),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -272,7 +275,7 @@ const getAvoColumns = (
 			options: [
 				...idps,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [AVO]),
 					id: NULL_FILTER,
 				},
 			],
@@ -280,7 +283,7 @@ const getAvoColumns = (
 	},
 	{
 		id: 'educationalOrganisations',
-		label: tText('admin/users/user___educatieve-organisaties'),
+		label: tText('admin/users/user___educatieve-organisaties', {}, [AVO]),
 		sortable: false,
 		visibleByDefault: false,
 		filterType: TableFilterType.MultiEducationalOrganisationSelectModal,
@@ -293,27 +296,27 @@ const getHetArchiefColumns = (
 ): FilterableColumn<UserOverviewTableCol>[] => [
 	{
 		id: 'profileId',
-		label: tText('admin/users/user___id'),
+		label: tText('admin/users/user___id', {}, [HET_ARCHIEF]),
 		sortable: false,
 		visibleByDefault: false,
 	},
 	{
 		id: 'fullName',
-		label: tText('admin/users/user___naam'),
+		label: tText('admin/users/user___naam', {}, [HET_ARCHIEF]),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'email',
-		label: tText('admin/users/user___email'),
+		label: tText('admin/users/user___email', {}, [HET_ARCHIEF]),
 		sortable: true,
 		visibleByDefault: true,
 		dataType: TableColumnDataType.string,
 	},
 	{
 		id: 'userGroup',
-		label: tText('admin/users/user___gebruikersgroep'),
+		label: tText('admin/users/user___gebruikersgroep', {}, [HET_ARCHIEF]),
 		sortable: true,
 		visibleByDefault: true,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -321,7 +324,7 @@ const getHetArchiefColumns = (
 			options: [
 				...userGroupOptions,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [HET_ARCHIEF]),
 					id: NULL_FILTER,
 				},
 			],
@@ -330,7 +333,7 @@ const getHetArchiefColumns = (
 	},
 	{
 		id: 'organisation',
-		label: tText('admin/users/user___organisatie'),
+		label: tText('admin/users/user___organisatie', {}, [HET_ARCHIEF]),
 		sortable: false,
 		visibleByDefault: true,
 		filterType: TableFilterType.CheckboxDropdownModal,
@@ -338,7 +341,7 @@ const getHetArchiefColumns = (
 			options: [
 				...companyOptions,
 				{
-					label: tText('admin/users/user___leeg'),
+					label: tText('admin/users/user___leeg', {}, [HET_ARCHIEF]),
 					id: NULL_FILTER,
 				},
 			],
@@ -347,7 +350,7 @@ const getHetArchiefColumns = (
 	},
 	{
 		id: 'isKeyUser',
-		label: tText('admin/users/user___sleutelgebruiker'),
+		label: tText('admin/users/user___sleutelgebruiker', {}, [HET_ARCHIEF]),
 		sortable: true,
 		visibleByDefault: false,
 		filterType: TableFilterType.BooleanCheckboxDropdown,
@@ -355,7 +358,7 @@ const getHetArchiefColumns = (
 	},
 	{
 		id: 'lastAccessAt',
-		label: tText('admin/users/user___laatste-toegang'),
+		label: tText('admin/users/user___laatste-toegang', {}, [HET_ARCHIEF]),
 		sortable: true,
 		visibleByDefault: true,
 		// Ward: hide lastAccessAt filter (ARC-1428)
@@ -364,7 +367,7 @@ const getHetArchiefColumns = (
 	},
 	{
 		id: 'actions',
-		tooltip: tText('admin/users/user___acties'),
+		tooltip: tText('admin/users/user___acties', {}, [HET_ARCHIEF]),
 		visibleByDefault: true,
 	},
 ];

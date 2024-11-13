@@ -2,14 +2,14 @@ import { mount, shallow } from 'enzyme';
 import { loremIpsum } from 'lorem-ipsum';
 import React from 'react';
 
-import { BlockHero } from './BlockHero';
+import { BlockAvoHero } from './BlockAvoHero';
 
 const customClass = 'c-block-custom';
 const title = 'Page title';
 const text = loremIpsum({ count: 3 });
 
 export const BlockHeroExample = (
-	<BlockHero
+	<BlockAvoHero
 		className={customClass}
 		title={title}
 		content={text}
