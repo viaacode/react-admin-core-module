@@ -71,10 +71,12 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			buttonLabel: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-tooltip'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			buttonType: {
 				label: tText('admin/content-block/helpers/generators/image-grid___knop-type-kleur'),
@@ -82,10 +84,12 @@ export const USP_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
+				validator: undefined,
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/usp-grid___alt-title-text'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
 			action: {
 				label: tText('admin/content-block/helpers/generators/image-grid___link'),

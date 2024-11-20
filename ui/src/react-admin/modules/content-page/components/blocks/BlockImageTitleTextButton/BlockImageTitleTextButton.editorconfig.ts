@@ -91,6 +91,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 			buttonLabel: {
 				label: tText('admin/content-block/helpers/generators/ctas___knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			},
 			buttonAltTitle: TEXT_FIELD(undefined, {
 				label: tText(

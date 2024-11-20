@@ -97,6 +97,7 @@ export const IMAGE_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					options: AdminConfigManager.getConfig().components.buttonTypes(),
 				},
+				validator: undefined,
 			},
 			action: {
 				label: tText('admin/content-block/helpers/generators/image-grid___link'),
