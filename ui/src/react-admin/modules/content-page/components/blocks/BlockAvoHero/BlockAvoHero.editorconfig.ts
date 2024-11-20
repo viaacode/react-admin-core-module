@@ -1,6 +1,6 @@
 import type { TextInputProps } from '@viaa/avo2-components';
 import { noop } from 'lodash-es';
-import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import { GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS } from '~modules/content-page/const/get-color-options';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -33,7 +33,7 @@ import {
 import { AdminConfigManager } from '~core/config';
 import { AVO } from '~shared/types';
 
-export const INITIAL_AVO_HERO_COMPONENTS_STATE = (): Partial<BlockHeroProps> => ({
+export const INITIAL_AVO_HERO_COMPONENTS_STATE = (): Partial<BlockAvoHeroProps> => ({
 	title: '',
 	titleColor: Color.White,
 	content: '',

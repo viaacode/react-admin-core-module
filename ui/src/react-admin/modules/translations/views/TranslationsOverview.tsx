@@ -220,7 +220,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 					showFirstAndLastButtons={true}
 					onScrollToTop={() => {
 						const scrollable = document.querySelector(
-							'.o-app--admin__main.c-scrollable'
+							'.m-admin-layout-content.c-scrollable'
 						);
 						scrollable?.scrollTo(0, 0);
 					}}

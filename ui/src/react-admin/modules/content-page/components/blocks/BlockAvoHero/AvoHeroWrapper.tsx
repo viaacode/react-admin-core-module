@@ -1,10 +1,10 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import { BlockAvoHero } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import { AdminConfigManager } from '~core/config';
 
-export const AvoHeroWrapper: FunctionComponent<BlockHeroProps> = (props) => {
+export const AvoHeroWrapper: FunctionComponent<BlockAvoHeroProps> = (props) => {
 	return (
 		<BlockAvoHero
 			{...props}

@@ -16,9 +16,9 @@ import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
 import { BlockHeading } from '../BlockHeading/BlockHeading';
 
-import './BlockHero.scss';
+import './BlockAvoHero.scss';
 
-export interface BlockHeroProps extends DefaultProps {
+export interface BlockAvoHeroProps extends DefaultProps {
 	title: string;
 	titleColor?: string;
 	content: string;
@@ -33,7 +33,7 @@ export interface BlockHeroProps extends DefaultProps {
 	renderLink?: RenderLinkFunction;
 }
 
-export const BlockAvoHero: FunctionComponent<BlockHeroProps> = ({
+export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 	title,
 	titleColor,
 	content,

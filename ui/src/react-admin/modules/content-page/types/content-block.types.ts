@@ -9,7 +9,7 @@ import type {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { ReactNode } from 'react';
-import type { BlockHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
@@ -404,7 +404,7 @@ export type RepeatedContentBlockComponentState =
 
 export type SingleContentBlockComponentState =
 	| HeadingBlockComponentState
-	| Partial<BlockHeroProps>
+	| Partial<BlockAvoHeroProps>
 	| IFrameBlockComponentState
 	| ImageBlockComponentState
 	| IntroBlockComponentState

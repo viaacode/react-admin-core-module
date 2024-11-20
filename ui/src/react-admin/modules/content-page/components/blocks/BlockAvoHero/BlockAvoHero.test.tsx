@@ -8,7 +8,7 @@ const customClass = 'c-block-custom';
 const title = 'Page title';
 const text = loremIpsum({ count: 3 });
 
-export const BlockHeroExample = (
+export const BlockAvoHeroExample = (
 	<BlockAvoHero
 		className={customClass}
 		title={title}
@@ -18,13 +18,13 @@ export const BlockHeroExample = (
 	/>
 );
 
-describe('<BlockHero />', () => {
+describe('<BlockAvoHero />', () => {
 	it('Should be able to render', () => {
-		shallow(BlockHeroExample);
+		shallow(BlockAvoHeroExample);
 	});
 
 	it('Should set the correct className', () => {
-		const component = mount(BlockHeroExample);
+		const component = mount(BlockAvoHeroExample);
 		expect(component.hasClass(customClass)).toEqual(true);
 	});
 });
