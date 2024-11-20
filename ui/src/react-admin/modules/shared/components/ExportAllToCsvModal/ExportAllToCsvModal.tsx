@@ -7,10 +7,13 @@ import { ProgressBar } from '@meemoo/react-components';
 import './ExportAllToCsvModal.scss';
 import FileSaver from 'file-saver';
 import { reactNodeToString } from '~shared/helpers/react-node-to-string';
-import { noop } from 'lodash-es';
+import { noop, times } from 'lodash-es';
 import { showToast } from '~shared/helpers/show-toast';
 import { ToastType } from '~core/config';
-import { delay } from 'blend-promise-utils';
+import { delay, mapLimit } from 'blend-promise-utils';
+
+const ITEMS_PER_REQUEST = 500;
+const PARALLEL_REQUESTS = 10;
 
 interface ExportAllToCsvModalProps {
 	title: string;
@@ -96,21 +99,15 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		const totalItems = await fetchTotalItems();
 		setTotal(totalItems);
 		const downloadedItems: any[] = [];
-		const limit = 100;
-		for (let offset = 0; offset < totalItems; offset += limit) {
-			if (abortRef.current) {
-				showToast({
-					title: tText(
-						'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___exporteren-geannuleerd'
-					),
-					type: ToastType.INFO,
-				});
-				break;
+		await mapLimit(
+			times(Math.ceil(totalItems / ITEMS_PER_REQUEST)),
+			PARALLEL_REQUESTS,
+			async (offset) => {
+				const newItems = await fetchMoreItems(offset, ITEMS_PER_REQUEST);
+				downloadedItems.push(...newItems);
+				setCurrentOffset(offset);
 			}
-			const newItems = await fetchMoreItems(offset, limit);
-			downloadedItems.push(...newItems);
-			setCurrentOffset(offset);
-		}
+		);
 		setCurrentOffset(totalItems);
 		setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
 	};
@@ -158,6 +155,8 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		abortRef.current = true;
 		resetModal();
 		onClose();
+		// Reload window to force promise cancellation of blend.mapLimit
+		window.location.reload();
 	};
 
 	const renderProgressLabel = (
