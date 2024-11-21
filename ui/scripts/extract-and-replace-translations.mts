@@ -30,19 +30,29 @@ import * as fs from 'fs/promises';
 import * as glob from 'glob';
 import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
-import { getFullKey } from '../src/react-admin/modules/translations/helpers/get-full-key';
-import type { TranslationEntry } from '../src/react-admin/modules/translations/translations.core.types';
+
+import { executeDatabaseQuery } from './execute-database-query.mts';
+import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
 import {
 	App,
 	Component,
+	Key,
 	Locale,
+	Location,
 	TRANSLATION_SEPARATOR,
+	TranslationEntry,
 	ValueType,
-} from '../src/react-admin/modules/translations/translations.core.types';
+} from './translation.types.mjs';
 
-import { executeDatabaseQuery } from './execute-database-query';
+export function getFullKey(
+	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
+): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+	return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
+}
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
+
+const __dirname = path.dirname(import.meta.url.replace('file:///', ''));
 
 interface CaptureGroups {
 	prefix: string;

@@ -1,12 +1,14 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
-		"module": "CommonJS",
+		"module": "ES2022",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true
 	},
 	"files": [
-    "whitelist-gql-queries.ts",
-    "extract-and-replace-translations.ts"
+    "backup-translations.mts",
+    "execute-database-query.mts",
+    "extract-and-replace-translations.mts"
   ]
 }
