@@ -12,7 +12,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { ToastType } from '~core/config';
 import { delay, mapLimit } from 'blend-promise-utils';
 
-const ITEMS_PER_REQUEST = 500;
+const ITEMS_PER_REQUEST = 1000;
 const PARALLEL_REQUESTS = 10;
 
 interface ExportAllToCsvModalProps {
@@ -42,10 +42,14 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 }) => {
 	const abortRef = React.useRef(false);
 
-	const [currentOffset, setCurrentOffset] = useState(0);
+	const [processedItems, setProcessedItems] = useState(0);
 	const [total, setTotal] = useState<number | null>(null);
 	const [csvBlob, setCsvBlob] = useState<Blob | null>(null);
 	const [percentageConvertedToCsv, setPercentageConvertedToCsv] = useState(0);
+
+	const currentItems = Math.min(processedItems, total || Infinity);
+	const percentageDownloaded = total ? (currentItems / total) * 100 : 0;
+	const totalPercentage = Math.round((percentageDownloaded + percentageConvertedToCsv) / 2);
 
 	/**
 	 * Convert the downloaded items to a csv blob, which can be downloaded instantly
@@ -103,17 +107,20 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 			times(Math.ceil(totalItems / ITEMS_PER_REQUEST)),
 			PARALLEL_REQUESTS,
 			async (offset) => {
-				const newItems = await fetchMoreItems(offset, ITEMS_PER_REQUEST);
+				const newItems = await fetchMoreItems(
+					offset * ITEMS_PER_REQUEST,
+					ITEMS_PER_REQUEST
+				);
 				downloadedItems.push(...newItems);
-				setCurrentOffset(offset);
+				setProcessedItems(() => downloadedItems.length);
 			}
 		);
-		setCurrentOffset(totalItems);
+		setProcessedItems(totalItems);
 		setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
 	};
 
 	const resetModal = () => {
-		setCurrentOffset(0);
+		setProcessedItems(0);
 		setTotal(null);
 		setPercentageConvertedToCsv(0);
 		setCsvBlob(null);
@@ -155,8 +162,10 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		abortRef.current = true;
 		resetModal();
 		onClose();
-		// Reload window to force promise cancellation of blend.mapLimit
-		window.location.reload();
+		if (totalPercentage !== 100) {
+			// Reload window to force promise cancellation of blend.mapLimit
+			window.location.reload();
+		}
 	};
 
 	const renderProgressLabel = (
@@ -183,9 +192,6 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		}
 	};
 
-	const currentItems = Math.min(currentOffset, total || Infinity);
-	const percentageDownloaded = total ? (currentItems / total) * 100 : 0;
-	const totalPercentage = Math.round((percentageDownloaded + percentageConvertedToCsv) / 2);
 	return (
 		<Modal
 			isOpen={isOpen}
