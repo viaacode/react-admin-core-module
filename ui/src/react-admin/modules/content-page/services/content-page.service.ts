@@ -247,8 +247,8 @@ export class ContentPageService {
 		}
 	}
 
-	public static getPathOrDefault(contentPage: Partial<ContentPageInfo>): string {
-		return contentPage.path || `/${kebabCase(contentPage.title)}`;
+	public static getPathOrDefault(contentPage: Partial<ContentPageInfo> | null): string {
+		return contentPage?.path || `/${kebabCase(contentPage?.title)}` || '';
 	}
 
 	// TODO: Make function generic so we can combine this getTitle and the one from collections.

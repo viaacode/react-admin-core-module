@@ -83,8 +83,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const [contentPageState, changeContentPageState] = useReducer<
 		Reducer<ContentPageEditState, ContentEditAction>
 	>(contentEditReducer, {
-		currentContentPageInfo: CONTENT_PAGE_INITIAL_STATE(commonUser),
-		initialContentPageInfo: CONTENT_PAGE_INITIAL_STATE(commonUser),
+		currentContentPageInfo: null,
+		initialContentPageInfo: null,
 	});
 
 	const [formErrors, setFormErrors] = useState<ContentEditFormErrors>({});
@@ -118,6 +118,13 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				id ===
 					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
 			) {
+				changeContentPageState({
+					type: ContentEditActionType.SET_CONTENT_PAGE,
+					payload: {
+						contentPageInfo: CONTENT_PAGE_INITIAL_STATE(commonUser),
+						replaceInitial: true,
+					},
+				});
 				return;
 			}
 			if (
@@ -225,7 +232,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			});
 
 			// Replace pasted content page id with existing content page id
-			if (contentPageState.currentContentPageInfo.id) {
+			if (contentPageState.currentContentPageInfo?.id) {
 				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as
 					| string
 					| number;
@@ -266,7 +273,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					contentPageInfo: {
 						...contentPageWithDuplicatedAssets,
 						content_blocks: [
-							...contentPageState.currentContentPageInfo.content_blocks,
+							...(contentPageState.currentContentPageInfo?.content_blocks || []),
 							...contentPageWithDuplicatedAssets.content_blocks,
 						].map((block, blockIndex) => {
 							// Reorder the combined array of content block positions
@@ -296,9 +303,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			commonUser.profileId,
 			commonUser.userGroup?.id,
 			commonUser.userGroup?.name,
-			contentPageState.currentContentPageInfo.content_blocks,
-			contentPageState.currentContentPageInfo.createdAt,
-			contentPageState.currentContentPageInfo.id,
+			contentPageState.currentContentPageInfo?.content_blocks,
+			contentPageState.currentContentPageInfo?.createdAt,
+			contentPageState.currentContentPageInfo?.id,
 		]
 	);
 
@@ -363,9 +370,17 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	};
 
 	const handleSave = async () => {
-		const { content_blocks } = contentPageState.currentContentPageInfo;
+		const content_blocks = contentPageState.currentContentPageInfo?.content_blocks || [];
 
 		try {
+			if (
+				!contentPageState.currentContentPageInfo ||
+				!contentPageState.initialContentPageInfo
+			) {
+				console.error('Cannot save content page because content page is not set');
+				return;
+			}
+
 			setIsSaving(true);
 			setHasSubmitted(true);
 
@@ -539,6 +554,10 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const handleValidation = async (): Promise<boolean> => {
 		const errors: ContentEditFormErrors = {};
 
+		if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
+			return false;
+		}
+
 		if (!contentPageState.currentContentPageInfo.title) {
 			errors.title = tText('admin/content/views/content-edit___titel-is-verplicht');
 		}
@@ -678,6 +697,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	// Render
 	const renderTabContent = () => {
+		if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
+			return;
+		}
 		switch (currentTab) {
 			case 'inhoud':
 				return (
@@ -708,6 +730,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	};
 
 	const renderEditContentPage = () => {
+		if (!contentPageState.initialContentPageInfo) {
+			return null;
+		}
 		const contentPageOwnerId = contentPageState.initialContentPageInfo.userProfileId;
 		const isOwner =
 			commonUser?.profileId &&

@@ -23,7 +23,7 @@ import { ContentEditActionType, ContentWidth } from '../types/content-pages.type
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;
 	payload: {
-		contentPageInfo: ContentPageInfo;
+		contentPageInfo: ContentPageInfoEditOrCreate;
 		replaceInitial: boolean;
 	};
 }
@@ -32,7 +32,7 @@ interface SetContentPageProp {
 	type: ContentEditActionType.SET_CONTENT_PAGE_PROP;
 	payload: {
 		propName: keyof ContentPageInfo | 'description_state';
-		propValue: ValueOf<ContentPageInfo> | RichEditorState | string;
+		propValue: ValueOf<ContentPageInfoEditOrCreate> | RichEditorState | string;
 	};
 }
 
@@ -104,14 +104,16 @@ export type ContentEditAction =
 	| SetBlockState
 	| SetContentBlockError;
 
+type ContentPageInfoEditOrCreate = Omit<ContentPageInfo, 'id'> & { id?: string | number };
+
 export interface ContentPageEditState {
-	currentContentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
-	initialContentPageInfo: Omit<ContentPageInfo, 'id'> & { id?: string | number };
+	currentContentPageInfo: ContentPageInfoEditOrCreate | null;
+	initialContentPageInfo: ContentPageInfoEditOrCreate | null;
 }
 
 export const CONTENT_PAGE_INITIAL_STATE = (
 	user: Avo.User.CommonUser
-): Omit<ContentPageInfo, 'id'> & { id?: string | number } => {
+): ContentPageInfoEditOrCreate => {
 	return {
 		thumbnailPath: null,
 		title: '',
@@ -178,7 +180,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 				return;
 			}
 			case ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo.content_blocks?.push(
+				draft.currentContentPageInfo?.content_blocks?.push(
 					action.payload as ContentBlockConfig
 				);
 				return;
@@ -188,7 +190,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 					action.payload as number,
 					1
 				);
-				repositionConfigs(draft.currentContentPageInfo.content_blocks || []);
+				repositionConfigs(draft.currentContentPageInfo?.content_blocks || []);
 				return;
 			}
 			case ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG: {
@@ -197,8 +199,8 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 					reorderContentBlockConfig.payload.configIndex +
 					reorderContentBlockConfig.payload.indexUpdate;
 				// Get updated item and remove it from copy
-				if (draft.currentContentPageInfo.content_blocks) {
-					const reorderedConfig = draft.currentContentPageInfo.content_blocks.splice(
+				if (draft.currentContentPageInfo?.content_blocks) {
+					const reorderedConfig = draft.currentContentPageInfo?.content_blocks.splice(
 						reorderContentBlockConfig.payload.configIndex,
 						1
 					)[0];
@@ -216,7 +218,9 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.ADD_COMPONENTS_STATE: {
 				const addComponentsState = action as AddComponentsState;
 				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo.content_blocks?.[addComponentsState.payload.index];
+					draft.currentContentPageInfo?.content_blocks?.[
+						addComponentsState.payload.index
+					];
 				if (config) {
 					componentsState = config.components.state;
 					(componentsState as RepeatedContentBlockComponentState[]).push(
@@ -229,7 +233,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.REMOVE_COMPONENTS_STATE: {
 				const removeComponentsState = action as RemoveComponentsState;
 				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo.content_blocks?.[
+					draft.currentContentPageInfo?.content_blocks?.[
 						removeComponentsState.payload.index
 					];
 				if (config) {
@@ -244,7 +248,9 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_COMPONENTS_STATE: {
 				const setComponentsState = action as SetComponentsState;
 				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo.content_blocks?.[setComponentsState.payload.index];
+					draft.currentContentPageInfo?.content_blocks?.[
+						setComponentsState.payload.index
+					];
 				if (!config) {
 					return;
 				}
@@ -270,7 +276,7 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_BLOCK_STATE: {
 				const setBlockState = action as SetBlockState;
 				const blockInfo =
-					draft.currentContentPageInfo.content_blocks?.[setBlockState.payload.index];
+					draft.currentContentPageInfo?.content_blocks?.[setBlockState.payload.index];
 				if (!blockInfo) {
 					return;
 				}
@@ -283,12 +289,13 @@ export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction
 			case ContentEditActionType.SET_CONTENT_BLOCK_ERROR: {
 				const setContentBlockError = action as SetContentBlockError;
 				if (
+					draft.currentContentPageInfo &&
 					JSON.stringify(action.payload.errors) !==
-					JSON.stringify(
-						draft.currentContentPageInfo.content_blocks?.[
-							setContentBlockError.payload.configIndex
-						].errors
-					)
+						JSON.stringify(
+							draft.currentContentPageInfo?.content_blocks?.[
+								setContentBlockError.payload.configIndex
+							].errors
+						)
 				) {
 					draft.currentContentPageInfo.content_blocks =
 						draft.currentContentPageInfo.content_blocks || [];
