@@ -11,7 +11,11 @@ import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
 import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
 import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
-import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
+import {
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
+	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
+	GET_CONTENT_PAGE_DETAIL_TABS,
+} from '~modules/content-page/const/content-page.consts';
 import type {
 	ContentEditAction,
 	ContentPageEditState,
@@ -556,16 +560,16 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		// 		{ maxLength: CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING }
 		// 	);
 		// }
-		//
-		// if (
-		// 	(contentPageState.currentContentPageInfo.seoDescription?.length || 0) >
-		// 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
-		// ) {
-		// 	errors.seoDescription = tText(
-		// 		'modules/content-page/views/content-page-edit___de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten',
-		// 		{ maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING }
-		// 	);
-		// }
+
+		if (
+			(contentPageState.currentContentPageInfo.seoDescription?.length || 0) >
+			CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
+		) {
+			errors.seoDescription = tText(
+				'modules/content-page/views/content-page-edit___de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten',
+				{ maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING }
+			);
+		}
 
 		// check if the path is unique
 		const path = ContentPageService.getPathOrDefault(contentPageState.currentContentPageInfo);
