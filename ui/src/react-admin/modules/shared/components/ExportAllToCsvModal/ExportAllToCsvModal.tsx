@@ -1,19 +1,19 @@
 import { Button, ButtonToolbar, Modal, ModalBody } from '@viaa/avo2-components';
-import type { FunctionComponent, ReactNode } from 'react';
+import type { FunctionComponent } from 'react';
 import React, { useEffect, useState } from 'react';
+import { retry as retryPromise } from 'ts-retry-promise';
 
 import { tText } from '~shared/helpers/translation-functions';
 import { ProgressBar } from '@meemoo/react-components';
 import './ExportAllToCsvModal.scss';
 import FileSaver from 'file-saver';
-import { reactNodeToString } from '~shared/helpers/react-node-to-string';
 import { noop, times } from 'lodash-es';
 import { showToast } from '~shared/helpers/show-toast';
 import { ToastType } from '~core/config';
 import { delay, mapLimit } from 'blend-promise-utils';
 
-const ITEMS_PER_REQUEST = 1000;
-const PARALLEL_REQUESTS = 10;
+const ITEMS_PER_REQUEST = 100;
+const PARALLEL_REQUESTS = 6;
 
 interface ExportAllToCsvModalProps {
 	title: string;
@@ -23,7 +23,7 @@ interface ExportAllToCsvModalProps {
 	generatingCsvLabel: string;
 	fetchTotalItems: () => Promise<number>;
 	fetchMoreItems: (offset: number, limit: number) => Promise<any>;
-	renderValue: (item: any, columnId: string) => string | ReactNode;
+	renderValue: (item: any, columnId: string) => string;
 	columns: { label: string; id: string }[];
 	exportFileName: string;
 }
@@ -56,6 +56,7 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 	 * @param downloadedItems
 	 */
 	const convertDownloadedItemsToCsvBlob = async (downloadedItems: any[]) => {
+		await delay(10); // Give react time to update the ui
 		const csvRowValues: string[] = [columns.map((c) => c.label).join(';') + '\n'];
 		let lastCsvConvertPercentage = 0;
 		for (let index = 0; index < downloadedItems.length; index++) {
@@ -74,16 +75,13 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 			if (csvConvertPercentage !== lastCsvConvertPercentage) {
 				setPercentageConvertedToCsv(csvConvertPercentage);
 				lastCsvConvertPercentage = csvConvertPercentage;
-				await delay(0); // Give react time to update the ui
+				await delay(10); // Give react time to update the ui
 			}
 			const csvCellValues: string[] = [];
 			columns.forEach(({ id: columnId }) => {
 				// We're using the same render function as the admin dashboard table to render the values
 				// This way we can be sure the values are formatted the same way in the csv as in the table
-				const csvCellValue = reactNodeToString(renderValue(item, columnId)).replace(
-					/"/g,
-					'""'
-				);
+				const csvCellValue = renderValue(item, columnId).replace(/"/g, '""');
 				if (!csvCellValue || csvCellValue === '-') {
 					csvCellValues.push('');
 				} else {
@@ -102,17 +100,19 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 	const fetchItems = async () => {
 		const totalItems = await fetchTotalItems();
 		setTotal(totalItems);
-		const downloadedItems: any[] = [];
+		const downloadedItems: any[] = Array(totalItems).fill(null);
+		let downloadedItemsCount = 0;
 		await mapLimit(
 			times(Math.ceil(totalItems / ITEMS_PER_REQUEST)),
 			PARALLEL_REQUESTS,
 			async (offset) => {
-				const newItems = await fetchMoreItems(
-					offset * ITEMS_PER_REQUEST,
-					ITEMS_PER_REQUEST
+				// Retry the fetchMoreItems call until it succeeds
+				const newItems = await retryPromise(() =>
+					fetchMoreItems(offset * ITEMS_PER_REQUEST, ITEMS_PER_REQUEST)
 				);
-				downloadedItems.push(...newItems);
-				setProcessedItems(() => downloadedItems.length);
+				downloadedItems.splice(offset * ITEMS_PER_REQUEST, newItems.length, ...newItems);
+				downloadedItemsCount += newItems.length;
+				setProcessedItems(downloadedItemsCount);
 			}
 		);
 		setProcessedItems(totalItems);

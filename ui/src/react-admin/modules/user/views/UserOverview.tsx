@@ -1,22 +1,16 @@
-import type { IconName, TagInfo, TagOption } from '@viaa/avo2-components';
-import { TagList } from '@viaa/avo2-components';
+import type { IconName, TagInfo } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
-import { LomSchemeType } from '@viaa/avo2-types';
-import { compact, isNil } from 'lodash-es';
+import { compact } from 'lodash-es';
 import type { FC, ReactText } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { Icon } from '~shared/components/Icon';
-import ActionsDropdown from '~modules/shared/components/ActionsDropdown/ActionsDropdown';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
 } from '~modules/user/helpers/generate-filter-where-object-users';
-import { hasTempAccess } from '~modules/user/helpers/has-temp-access';
 import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 import { UserService } from '~modules/user/user.service';
@@ -26,17 +20,11 @@ import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/Ch
 import { ErrorView } from '~shared/components/error';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
-import { formatDateString } from '~shared/helpers/formatters/date';
-import { idpMapsToTagList } from '~shared/helpers/idps-to-taglist';
-import { isAvo } from '~shared/helpers/is-avo';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
-import { buildLink, navigate } from '~shared/helpers/link';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { showToast } from '~shared/helpers/show-toast';
-import { stringsToTagList } from '~shared/helpers/strings-to-taglist';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { truncateTableValue } from '~shared/helpers/truncate';
 import { useGetIdps } from '~shared/hooks/use-get-idps';
 import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
 import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
@@ -48,11 +36,16 @@ import { SettingsService } from '~shared/services/settings-service/settings.serv
 import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
-import type { Idp, UserOverviewTableCol, UserTableState } from '../user.types';
+import type { UserOverviewTableCol, UserTableState } from '../user.types';
 import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
 import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 
 import './UserOverview.scss';
+import {
+	renderUserOverviewTableCellReact,
+	renderUserOverviewTableCellText,
+} from '~modules/user/helpers/user-overview-render-table-cells';
+import { navigate } from '~shared/helpers/link';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
@@ -359,153 +352,6 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 		}
 	};
 
-	const handleOptionClicked = (profileId: string) => {
-		navigator.clipboard.writeText(profileId);
-		showToast({
-			title: tText('modules/user/views/user-overview___success'),
-			description: tText('admin/users/views/user-overview___uuid-gekopieerd'),
-			type: ToastType.SUCCESS,
-		});
-	};
-
-	const renderTableCell = (
-		tableRowCommonUser: Avo.User.CommonUser,
-		columnId: UserOverviewTableCol
-	) => {
-		const isBlocked = tableRowCommonUser?.isBlocked;
-		const isKeyUser = (tableRowCommonUser as any)?.isKeyUser ?? false;
-
-		switch (columnId) {
-			case 'fullName':
-				// no user detail for archief yet
-				return isAvo() ? (
-					<Link
-						to={buildLink(AdminConfigManager.getAdminRoute('ADMIN_USER_DETAIL'), {
-							id: tableRowCommonUser.profileId,
-						})}
-					>
-						{truncateTableValue(tableRowCommonUser?.fullName)}
-					</Link>
-				) : (
-					truncateTableValue(tableRowCommonUser?.fullName)
-				);
-
-			case 'email':
-				return truncateTableValue(tableRowCommonUser?.email);
-
-			case 'isBlocked':
-				return isBlocked ? 'Ja' : 'Nee';
-
-			case 'isKeyUser':
-				return isKeyUser ? 'Ja' : 'Nee';
-
-			case 'blockedAt':
-				return formatDateString(tableRowCommonUser?.blockedAt) || '-';
-
-			case 'unblockedAt':
-				return formatDateString(tableRowCommonUser?.unblockedAt) || '-';
-
-			case 'isException':
-				return tableRowCommonUser?.isException ? 'Ja' : 'Nee';
-
-			case 'organisation':
-				return tableRowCommonUser?.organisation?.name || '-';
-
-			case 'createdAt':
-				return formatDateString(tableRowCommonUser.createdAt) || '-';
-
-			case 'lastAccessAt': {
-				const lastAccessDate = tableRowCommonUser?.lastAccessAt;
-				return !isNil(lastAccessDate)
-					? customFormatDate
-						? customFormatDate(lastAccessDate)
-						: formatDateString(lastAccessDate)
-					: '-';
-			}
-			case 'tempAccess': {
-				if (hasTempAccess(tableRowCommonUser?.tempAccess)) {
-					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-ja');
-				} else {
-					return tHtml('admin/users/views/user-overview___tijdelijke-toegang-nee');
-				}
-			}
-			case 'tempAccessFrom':
-				return formatDateString(tableRowCommonUser?.tempAccess?.from) || '-';
-
-			case 'tempAccessUntil':
-				return formatDateString(tableRowCommonUser?.tempAccess?.until) || '-';
-
-			case 'idps':
-				return (
-					idpMapsToTagList(
-						Object.keys(tableRowCommonUser?.idps || {}) as Idp[],
-						`user_${tableRowCommonUser?.profileId}`,
-						navigateFilterToOption(columnId)
-					) || '-'
-				);
-
-			case 'educationLevels': {
-				const labels = compact(
-					(tableRowCommonUser?.loms ?? [])
-						.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
-						.map((lom) => lom.lom?.label)
-				);
-				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
-			}
-
-			case 'subjects': {
-				const labels = compact(
-					(tableRowCommonUser?.loms ?? [])
-						.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
-						.map((lom) => lom.lom?.label)
-				);
-				return stringsToTagList(labels, null, navigateFilterToOption(columnId)) || '-';
-			}
-
-			case 'educationalOrganisations': {
-				const orgs: Avo.EducationOrganization.Organization[] =
-					tableRowCommonUser.educationalOrganisations ?? [];
-				const tags = orgs.map(
-					(org): TagOption => ({
-						id: `${org.organisationId}:${org.unitId || ''}`,
-						label: org.organisationLabel || org.unitId || org.organisationId,
-					})
-				);
-				return (
-					<TagList
-						tags={tags}
-						swatches={false}
-						onTagClicked={navigateFilterToOption(columnId)}
-					/>
-				);
-			}
-
-			case 'userGroup':
-				return truncateTableValue(
-					tableRowCommonUser.userGroup?.label || tableRowCommonUser.userGroup?.name || '-'
-				);
-
-			case 'actions':
-				return (
-					<ActionsDropdown
-						menuItems={[
-							{
-								id: tableRowCommonUser.profileId || '',
-								label:
-									tableRowCommonUser.profileId ||
-									tText('admin/users/views/user-overview___geen-uuid'),
-								iconEnd: <Icon name="copy" />,
-							},
-						]}
-						onOptionClicked={() => handleOptionClicked(tableRowCommonUser.profileId)}
-					/>
-				);
-
-			default:
-				return truncateTableValue(tableRowCommonUser[columnId] || '-');
-		}
-	};
-
 	const renderNoResults = () => {
 		return (
 			<ErrorView
@@ -529,7 +375,15 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					data={profiles || []}
 					dataCount={profileCount || 0}
 					renderCell={(rowData: Avo.User.CommonUser, columnId: string) =>
-						renderTableCell(rowData, columnId as UserOverviewTableCol)
+						renderUserOverviewTableCellReact(
+							rowData,
+							columnId as UserOverviewTableCol,
+							{
+								navigateFilterToOption,
+								history,
+								tableState: tableState as UserTableState,
+							}
+						)
 					}
 					searchTextPlaceholder={tText(
 						'admin/users/views/user-overview___zoek-op-naam-email-alias'
@@ -629,7 +483,14 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 						return response[0];
 					}}
 					renderValue={(value: any, columnId: string) =>
-						renderTableCell(value as any, columnId as UserOverviewTableCol)
+						renderUserOverviewTableCellText(
+							value as any,
+							columnId as UserOverviewTableCol,
+							{
+								tableState: tableState as UserTableState,
+								customFormatDate,
+							}
+						)
 					}
 					columns={compact(
 						columns
