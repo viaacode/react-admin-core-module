@@ -20,7 +20,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types';
 import {
-	CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	DEFAULT_PAGES_WIDTH,
 	GET_CONTENT_PAGE_WIDTH_OPTIONS,
@@ -38,11 +37,8 @@ import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-lang
 import type { LanguageInfo } from '~modules/translations/translations.types';
 import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
 import FileUpload from '~shared/components/FileUpload/FileUpload';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~shared/consts/rich-text-editor.consts';
-import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
@@ -50,6 +46,7 @@ import type { ValueOf } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
+import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -229,33 +226,13 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								</FormGroup>
 							</Column>
 							<Column size="12">
-								<FormGroup
-									error={formErrors.description}
-									label={
-										tText(
-											'modules/content-page/components/content-edit-form/content-edit-form___beschrijving',
-											{
-												maxLength:
-													CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
-											}
-										) +
-										` (${
-											stripHtml(contentPageInfo.description)?.length || 0
-										} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
-									}
-								>
-									<RichTextEditorWithInternalStateWrapper
-										value={(contentPageInfo as any).description || ''}
-										onChange={(html: string) => {
-											if ((contentPageInfo as any).description !== html) {
-												changeContentPageProp('description', html);
-											}
-										}}
-										controls={RICH_TEXT_EDITOR_OPTIONS_FULL}
-										fileType="CONTENT_PAGE_DESCRIPTION_IMAGE"
-										id="description"
-									/>
-								</FormGroup>
+								<ContentPageEditFormDescription
+									value={contentPageInfo.description || ''}
+									onChange={(html: string) => {
+										changeContentPageProp('description', html);
+									}}
+									formError={formErrors.description}
+								></ContentPageEditFormDescription>
 							</Column>
 							<Column size="12">
 								<FormGroup
