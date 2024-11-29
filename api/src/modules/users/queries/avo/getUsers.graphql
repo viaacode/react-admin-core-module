@@ -31,13 +31,16 @@ query getUsers(
 			idp
 			idp_user_id
 		}
-		organisations {
+		educational_organizations {
 			organization_id
 			unit_id
 			organization {
-				organization_id
-				ldap_content
+				ldap_description
 			}
+		}
+		organization {
+			or_id
+			name
 		}
 		loms {
 			lom {
