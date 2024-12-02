@@ -1,20 +1,29 @@
-import { InternalServerErrorException } from '@nestjs/common';
 import * as util from 'util';
 
-export function CustomError(
+import { InternalServerErrorException } from '@nestjs/common';
+
+export function customError(
 	message: string,
 	innerException?: any,
 	additionalInfo?: Record<string, unknown>
 ) {
-	const error = {
-		message,
-		innerException,
-		additionalInfo,
-	};
-	const json = util.inspect(error, {
-		showHidden: true,
-		compact: process.env.SINGLE_LINE_LOGGING !== 'false',
-		depth: 10,
-	});
+	const stack = innerException.stack || new Error().stack || '';
+
+	const singleLineLogging = process.env.SINGLE_LINE_LOGGING === 'true';
+	const json = util.inspect(
+		{
+			message,
+			innerException: innerException,
+			additionalInfo: additionalInfo,
+			stack: stack,
+		},
+		{
+			showHidden: false,
+			depth: 20,
+			colors: !singleLineLogging,
+			compact: singleLineLogging,
+		}
+	);
+
 	return new InternalServerErrorException(json);
 }

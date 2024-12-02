@@ -22,7 +22,7 @@ import {
 	GetUserByIdQuery,
 	GetUserByIdQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
-import { CustomError } from '../shared/helpers/custom-error';
+import { customError } from '../shared/helpers/custom-error';
 import { getOrderObject } from '../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../shared/helpers/get-database-type';
 import { isAvo } from '../shared/helpers/is-avo';
@@ -48,7 +48,7 @@ export class UsersService {
 	async getById(id: string): Promise<Avo.User.CommonUser> {
 		try {
 			if (!isAvo()) {
-				throw CustomError('Not supported');
+				throw customError('Not supported');
 			}
 
 			const response = await this.dataService.execute<
@@ -57,7 +57,7 @@ export class UsersService {
 			>(GetUserByIdDocument, { id });
 
 			if (!response || !response.users_summary_view[0]) {
-				throw CustomError('Could not fetch user', null, {
+				throw customError('Could not fetch user', null, {
 					response,
 				});
 			}
@@ -67,7 +67,7 @@ export class UsersService {
 				UserInfoType.UserInfoOverviewAvo
 			);
 		} catch (err: any) {
-			throw CustomError('Failed to get profiles from the database', err, {
+			throw customError('Failed to get profiles from the database', err, {
 				variables: { id },
 				query: 'GetUserById',
 			});
@@ -135,14 +135,14 @@ export class UsersService {
 				0;
 
 			if (!profiles) {
-				throw CustomError('Response does not contain any profiles', null, {
+				throw customError('Response does not contain any profiles', null, {
 					response,
 				});
 			}
 
 			return [profiles as any[], profileCount];
 		} catch (err: any) {
-			throw CustomError('Failed to get profiles from the database', err, {
+			throw customError('Failed to get profiles from the database', err, {
 				variables,
 				query: 'GET_USERS',
 			});
@@ -187,7 +187,7 @@ export class UsersService {
 				);
 			}
 		} catch (err: any) {
-			throw CustomError('Failed to get profile names from the database', err, {
+			throw customError('Failed to get profile names from the database', err, {
 				profileIds,
 				query: 'GET_PROFILE_NAMES',
 			});
@@ -223,7 +223,7 @@ export class UsersService {
 				).map((user) => user?.id)
 			);
 		} catch (err: any) {
-			throw CustomError('Failed to get profile ids from the database', err, {
+			throw customError('Failed to get profile ids from the database', err, {
 				variables,
 				query: 'GET_PROFILE_IDS',
 			});
@@ -245,7 +245,7 @@ export class UsersService {
 				(response.users_profiles || []).map((profile) => profile.business_category)
 			);
 		} catch (err: any) {
-			throw CustomError('Failed to get distinct business categories from profiles', err, {
+			throw customError('Failed to get distinct business categories from profiles', err, {
 				query: 'GET_DISTINCT_BUSINESS_CATEGORIES',
 			});
 		}
@@ -270,7 +270,7 @@ export class UsersService {
 				(idp) => idp.value as Idp
 			);
 		} catch (err: any) {
-			throw CustomError('Failed to get idps from the database', err, {
+			throw customError('Failed to get idps from the database', err, {
 				query: 'GET_IDPS',
 			});
 		}
@@ -322,7 +322,7 @@ export class UsersService {
 				quickLanes: response.quickLanes?.aggregate?.count || 0,
 			};
 		} catch (err: any) {
-			throw CustomError('Failed to get content counts for users from the database', err, {
+			throw customError('Failed to get content counts for users from the database', err, {
 				profileIds,
 				query: 'GetContentCountsForUsers',
 			});
@@ -354,7 +354,7 @@ export class UsersService {
 				),
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to bulk add loms to profiles', err, {
+			throw customError('Failed to bulk add loms to profiles', err, {
 				lomIds,
 				profileIds,
 				query: 'BulkAddLomsToProfiles',
@@ -377,7 +377,7 @@ export class UsersService {
 				profileIds,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to bulk delete loms from profiles', err, {
+			throw customError('Failed to bulk delete loms from profiles', err, {
 				lomIds,
 				profileIds,
 				query: 'BulkDeleteLomsFromProfiles',

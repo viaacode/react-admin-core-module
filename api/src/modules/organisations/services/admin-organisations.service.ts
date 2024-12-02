@@ -2,7 +2,7 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { sortBy } from 'lodash';
 
 import { DataService } from '../../data';
-import { CustomError } from '../../shared/helpers/custom-error';
+import { customError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import {
@@ -68,7 +68,7 @@ export class AdminOrganisationsService {
 				).shared_organisations_with_users;
 
 				if (!organisations) {
-					throw CustomError('Response does not contain any organisations', null, {
+					throw customError('Response does not contain any organisations', null, {
 						response,
 					});
 				}
@@ -83,7 +83,7 @@ export class AdminOrganisationsService {
 
 			return sortBy(organisations, 'name');
 		} catch (err: any) {
-			throw CustomError('Failed to get organisations from the database', err, {
+			throw customError('Failed to get organisations from the database', err, {
 				query: 'GetOrganisationsWithUsers',
 			});
 		}

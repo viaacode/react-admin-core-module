@@ -4,7 +4,7 @@ import { isNil } from 'lodash';
 
 import { ContentPageLabel, ContentPageType, LabelObj } from '../../content-pages';
 import { DataService } from '../../data';
-import { CustomError } from '../../shared/helpers/custom-error';
+import { customError } from '../../shared/helpers/custom-error';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
 import { ContentPageLabelOverviewTableCols } from '../content-page-labels.types';
@@ -71,14 +71,14 @@ export class ContentPageLabelsService {
 				0;
 
 			if (!contentPageLabels) {
-				throw CustomError('Response does not contain any content page labels', null, {
+				throw customError('Response does not contain any content page labels', null, {
 					response,
 				});
 			}
 
 			return [contentPageLabels, contentPageLabelCount];
 		} catch (err: any) {
-			throw CustomError('Failed to get content page labels from the database', err, {
+			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
 			});
@@ -109,7 +109,7 @@ export class ContentPageLabelsService {
 				null;
 
 			if (!contentPageLabelRaw) {
-				throw CustomError('Response does not contain any content page labels', null, {
+				throw customError('Response does not contain any content page labels', null, {
 					response,
 				});
 			}
@@ -123,7 +123,7 @@ export class ContentPageLabelsService {
 				updated_at: contentPageLabelRaw.updated_at,
 			};
 		} catch (err: any) {
-			throw CustomError('Failed to get content page labels from the database', err, {
+			throw customError('Failed to get content page labels from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGE_LABELS',
 			});
@@ -153,7 +153,7 @@ export class ContentPageLabelsService {
 				(response as ContentPageLabelQueryTypes['InsertContentPageLabelMutationHetArchief'])
 					.insert_app_content_label?.returning;
 			if (isNil(contentPageLabelsResponse)) {
-				throw CustomError(
+				throw customError(
 					'Response from database does not contain the inserted content page labels',
 					null,
 					{ response }
@@ -161,7 +161,7 @@ export class ContentPageLabelsService {
 			}
 			return contentPageLabelsResponse as ContentPageLabelDto[];
 		} catch (err: any) {
-			throw CustomError('Failed to insert content page labels in the database', err, {
+			throw customError('Failed to insert content page labels in the database', err, {
 				contentPageLabels,
 				query: 'InsertContentPageLabel',
 			});
@@ -191,7 +191,7 @@ export class ContentPageLabelsService {
 				(response as ContentPageLabelQueryTypes['UpdateContentPageLabelMutationHetArchief'])
 					.update_app_content_label?.returning?.[0];
 			if (isNil(contentPageLabelResponse)) {
-				throw CustomError(
+				throw customError(
 					'Response from database does not contain the id of the inserted content page label',
 					null,
 					{ response }
@@ -199,7 +199,7 @@ export class ContentPageLabelsService {
 			}
 			return contentPageLabelResponse as ContentPageLabelDto;
 		} catch (err: any) {
-			throw CustomError('Failed to update content page label in the database', err, {
+			throw customError('Failed to update content page label in the database', err, {
 				contentPageLabel: contentPageLabelInfo,
 				query: 'UPDATE_CONTENT_PAGE_LABEL',
 			});
@@ -215,7 +215,7 @@ export class ContentPageLabelsService {
 				id: isAvo() ? parseInt(id) : id,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to delete content page label from the database', err, {
+			throw customError('Failed to delete content page label from the database', err, {
 				query: 'DeleteContentPageLabelByIdMutation',
 				id,
 			});

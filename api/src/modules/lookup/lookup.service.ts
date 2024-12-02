@@ -11,7 +11,7 @@ import {
 	GetThemesDocument,
 	type GetThemesQuery,
 } from '../shared/generated/graphql-db-types-avo';
-import { CustomError } from '../shared/helpers/custom-error';
+import { customError } from '../shared/helpers/custom-error';
 import { isHetArchief } from '../shared/helpers/is-hetarchief';
 
 @Injectable()
@@ -37,7 +37,7 @@ export class LookupService {
 
 			return sortBy(subjects, (subject) => subject.label.toLowerCase());
 		} catch (err: any) {
-			throw CustomError('Failed to get subjects from the database', err, {
+			throw customError('Failed to get subjects from the database', err, {
 				query: 'getSubjects',
 			});
 		}
@@ -61,7 +61,7 @@ export class LookupService {
 
 			return sortBy(themes, (theme) => theme.label.toLowerCase());
 		} catch (err: any) {
-			throw CustomError('Failed to get themes from the database', err, {
+			throw customError('Failed to get themes from the database', err, {
 				query: 'getThemes',
 			});
 		}
@@ -87,7 +87,7 @@ export class LookupService {
 
 			return LookupService.blacklistLoms(educationLevels);
 		} catch (err: any) {
-			throw CustomError('Failed to get education levels from the database', err, {
+			throw customError('Failed to get education levels from the database', err, {
 				query: 'getEducationLevels',
 			});
 		}

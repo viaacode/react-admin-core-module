@@ -25,7 +25,7 @@ import {
 	GetPublicItemsQuery,
 	GetPublicItemsQueryVariables,
 } from '../shared/generated/graphql-db-types-avo';
-import { CustomError } from '../shared/helpers/custom-error';
+import { customError } from '../shared/helpers/custom-error';
 import { isUuid } from '../shared/helpers/uuid';
 
 export class ItemsService {
@@ -61,14 +61,14 @@ export class ItemsService {
 			const rawItem = response.app_item_meta?.[0];
 
 			if (!rawItem) {
-				throw CustomError('Response does not contain an item', null, {
+				throw customError('Response does not contain an item', null, {
 					response,
 				});
 			}
 
 			return rawItem as unknown as Partial<Avo.Item.Item>;
 		} catch (err: any) {
-			throw CustomError('Failed to get the item by id from the database', err, {
+			throw customError('Failed to get the item by id from the database', err, {
 				uuidOrExternalId,
 			});
 		}
@@ -99,7 +99,7 @@ export class ItemsService {
 				| (Avo.Item.Item & { replacement_for?: string })
 				| null;
 		} catch (err: any) {
-			throw CustomError('Failed to get item or replacement or depublish reason', err, {
+			throw customError('Failed to get item or replacement or depublish reason', err, {
 				uuidOrExternalId,
 			});
 		}
@@ -136,7 +136,7 @@ export class ItemsService {
 					[]) as Avo.Collection.RelationEntry<Avo.Item.Item>[];
 			}
 		} catch (err: any) {
-			throw CustomError('Failed to get relation from the database', err, {
+			throw customError('Failed to get relation from the database', err, {
 				variables,
 				query: isCollection
 					? 'FETCH_COLLECTION_RELATIONS_BY_OBJECTS or FETCH_COLLECTION_RELATIONS_BY_SUBJECTS'
@@ -175,7 +175,7 @@ export class ItemsService {
 
 			return items as Avo.Item.Item[];
 		} catch (err: any) {
-			throw CustomError('Failed to fetch items by title or external id', err, {
+			throw customError('Failed to fetch items by title or external id', err, {
 				titleOrExternalId,
 				limit,
 				query: 'GET_PUBLIC_ITEMS_BY_TITLE_OR_EXTERNAL_ID',

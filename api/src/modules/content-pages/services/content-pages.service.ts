@@ -43,7 +43,7 @@ import {
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
 import { type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
-import { CustomError } from '../../shared/helpers/custom-error';
+import { customError } from '../../shared/helpers/custom-error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { isAvo } from '../../shared/helpers/is-avo';
@@ -773,7 +773,7 @@ export class ContentPagesService {
 			[])?.[0];
 
 		if (!dbContentPage) {
-			throw CustomError('No content page found with provided id', null, {
+			throw customError('No content page found with provided id', null, {
 				id,
 				code: 'NOT_FOUND',
 			});
@@ -799,7 +799,7 @@ export class ContentPagesService {
 				label: obj.description || (obj as any).comment,
 			})) as { value: Avo.ContentPage.Type; label: string }[] | null;
 		} catch (err: any) {
-			throw CustomError('Failed to retrieve content types.', err, {
+			throw customError('Failed to retrieve content types.', err, {
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentTypesDocument,
 			});
 		}
@@ -818,14 +818,14 @@ export class ContentPagesService {
 				(response as any).app_content_labels || (response as any).app_content_label;
 
 			if (!labels) {
-				throw CustomError('The response does not contain any labels', null, {
+				throw customError('The response does not contain any labels', null, {
 					response,
 				});
 			}
 
 			return labels;
 		} catch (err: any) {
-			throw CustomError('Failed to get content labels by content type from database', err, {
+			throw customError('Failed to get content labels by content type from database', err, {
 				variables: {
 					contentType,
 				},
@@ -852,7 +852,7 @@ export class ContentPagesService {
 				ContentPageQueryTypes['InsertContentLabelLinksMutationVariables']
 			>(CONTENT_PAGE_QUERIES[getDatabaseType()].InsertContentLabelLinksDocument, variables);
 		} catch (err: any) {
-			throw CustomError('Failed to insert content label links in the database', err, {
+			throw customError('Failed to insert content label links in the database', err, {
 				variables,
 				query: 'INSERT_CONTENT_LABEL_LINKS',
 			});
@@ -872,7 +872,7 @@ export class ContentPagesService {
 				contentPageId,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to insert content label links in the database', err, {
+			throw customError('Failed to insert content label links in the database', err, {
 				variables: {
 					labelIds,
 					contentPageId,
@@ -923,7 +923,7 @@ export class ContentPagesService {
 				0;
 
 			if (!dbContentPages) {
-				throw CustomError('Response did not contain any content pages', null, {
+				throw customError('Response did not contain any content pages', null, {
 					response,
 				});
 			}
@@ -933,7 +933,7 @@ export class ContentPagesService {
 			);
 			return [contentPages, dbContentPageCount];
 		} catch (err: any) {
-			throw CustomError('Failed to get content pages from the database', err, {
+			throw customError('Failed to get content pages from the database', err, {
 				variables,
 				query: 'GET_CONTENT_PAGES',
 			});
@@ -960,7 +960,7 @@ export class ContentPagesService {
 
 			if (!id) {
 				throw new InternalServerErrorException(
-					CustomError(
+					customError(
 						'Failed to insert content page, received no id from the database',
 						null,
 						{ response }
@@ -985,7 +985,7 @@ export class ContentPagesService {
 			return this.getContentPageById(String(id));
 		} catch (err: any) {
 			throw new InternalServerErrorException(
-				CustomError('Failed to insert content page into the database', err, {
+				customError('Failed to insert content page into the database', err, {
 					contentPage,
 				})
 			);
@@ -1013,7 +1013,7 @@ export class ContentPagesService {
 					.update_app_content_page?.affected_rows ||
 				null;
 			if (!updatedContent) {
-				throw CustomError('Content page update returned empty response', null, response);
+				throw customError('Content page update returned empty response', null, response);
 			}
 
 			if (contentPage.content_blocks && initialContentPage) {
@@ -1035,7 +1035,7 @@ export class ContentPagesService {
 
 			return contentPage;
 		} catch (err: any) {
-			const error = CustomError('Failed to update content page', err, {
+			const error = customError('Failed to update content page', err, {
 				contentPage,
 			});
 			console.error(error);
@@ -1055,7 +1055,7 @@ export class ContentPagesService {
 				path: `${contentPage.path}-${id}`,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to delete content page from the database', err, {
+			throw customError('Failed to delete content page from the database', err, {
 				id,
 				query: CONTENT_PAGE_QUERIES[getDatabaseType()].SoftDeleteContentDocument,
 			});
@@ -1081,7 +1081,7 @@ export class ContentPagesService {
 				id: contentBlockConfig.id as number,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to update content block', err, {
+			throw customError('Failed to update content block', err, {
 				contentBlockConfig,
 			});
 		}
@@ -1101,7 +1101,7 @@ export class ContentPagesService {
 				id,
 			});
 		} catch (err: any) {
-			throw CustomError('Failed to delete content block', err, { id });
+			throw customError('Failed to delete content block', err, { id });
 		}
 	}
 
@@ -1167,7 +1167,7 @@ export class ContentPagesService {
 				id: ids[index],
 			}));
 		} catch (err: any) {
-			throw CustomError('Failed to insert content blocks', err, {
+			throw customError('Failed to insert content blocks', err, {
 				contentId,
 				contentBlockConfigs,
 			});
@@ -1239,7 +1239,7 @@ export class ContentPagesService {
 				Promise.all(deletePromises),
 			]);
 		} catch (err: any) {
-			throw CustomError('Failed to update content blocks', err, {
+			throw customError('Failed to update content blocks', err, {
 				contentId,
 				initialContentBlocks,
 				contentBlockConfigs,

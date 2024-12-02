@@ -6,9 +6,9 @@ import got, { Got, Options } from 'got';
 import { ASTNode } from 'graphql/language/ast';
 import { print } from 'graphql/language/printer';
 import { isString } from 'lodash';
-import { CustomError } from '../../shared/helpers/custom-error';
 
 import { DuplicateKeyException } from '../../shared/exceptions/duplicate-key.exception';
+import { customError } from '../../shared/helpers/custom-error';
 import { GraphQlResponse } from '../types';
 
 @Injectable()
@@ -64,7 +64,7 @@ export class DataService {
 			}
 			if (data.errors) {
 				this.logger.error(
-					CustomError(`GraphQl query failed`, null, {
+					customError(`GraphQl query failed`, null, {
 						query: isString(query)
 							? query
 							: ((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)
@@ -87,7 +87,16 @@ export class DataService {
 				throw err;
 			}
 
-			this.logger.error('Failed to get data from database', err);
+			this.logger.error(
+				customError('Failed to get data from database', err, {
+					requestUrl: err?.request?.requestUrl,
+					query: isString(query)
+						? query
+						: ((query as TypedDocumentNode<any, any>)?.definitions?.[0] as any)?.name
+								?.value,
+					variables,
+				})
+			);
 
 			throw new InternalServerErrorException(
 				null,
