@@ -2,7 +2,7 @@ import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { isNil, without } from 'lodash-es';
+import { cloneDeep, isNil, isString, without } from 'lodash-es';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -15,6 +15,7 @@ import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	GET_CONTENT_PAGE_DETAIL_TABS,
+	TEMP_BLOCK_ID_PREFIX,
 } from '~modules/content-page/const/content-page.consts';
 import type {
 	ContentEditAction,
@@ -196,7 +197,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				),
 				type: ToastType.SPINNER,
 			});
-			delete newBlockConfig.id;
+			// Temp id until this block is saved into the database
+			newBlockConfig.id = TEMP_BLOCK_ID_PREFIX + Date.now();
 			// Ensure block is added at the bottom of the page
 			newBlockConfig.position = (
 				contentPageState?.currentContentPageInfo?.content_blocks || []
@@ -370,7 +372,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	};
 
 	const handleSave = async () => {
-		const content_blocks = contentPageState.currentContentPageInfo?.content_blocks || [];
+		const content_blocks = cloneDeep(
+			contentPageState.currentContentPageInfo?.content_blocks || []
+		);
 
 		try {
 			if (
@@ -420,6 +424,13 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					});
 
 					areConfigsValid = false;
+				}
+				if (
+					isString(config.id) &&
+					(config.id as string)?.startsWith(TEMP_BLOCK_ID_PREFIX)
+				) {
+					// Remove temporary id's before inserting the blocks into the database
+					delete config.id;
 				}
 			});
 

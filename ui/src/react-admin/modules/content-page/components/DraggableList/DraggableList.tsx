@@ -10,7 +10,7 @@ import { Icon } from '@viaa/avo2-components';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
 
 // TODO replace this with a generic T type
-export type DraggableItemData = any;
+export type DraggableItemData = any & { id: string };
 
 export interface DraggableListProps {
 	items: DraggableItemData[];

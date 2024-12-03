@@ -25,6 +25,8 @@ export const CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING = String(
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
 );
 
+export const TEMP_BLOCK_ID_PREFIX = '__CONTENT_BLOCK_TEMP_ID__';
+
 export const GET_OVERVIEW_COLUMNS: (
 	contentTypeOptions: CheckboxOption[],
 	userGroupOptions: CheckboxOption[],
