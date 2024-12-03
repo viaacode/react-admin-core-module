@@ -110,8 +110,8 @@ export class UsersService {
 				variables
 			);
 
-			const avoResponse = response as UserQueryTypes['GetProfileNamesQueryAvo'];
-			const hetArchiefResponse = response as UserQueryTypes['GetProfileNamesQueryHetArchief'];
+			const avoResponse = response as UserQueryTypes['GetUsersQueryAvo'];
+			const hetArchiefResponse = response as UserQueryTypes['GetUsersQueryHetArchief'];
 
 			// Convert user format to profile format since we initially wrote the ui to deal with profiles
 			const userProfileObjects = (avoResponse?.users_summary_view ||

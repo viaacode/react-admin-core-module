@@ -44,7 +44,7 @@ import './UserOverview.scss';
 import {
 	renderUserOverviewTableCellReact,
 	renderUserOverviewTableCellText,
-} from '~modules/user/helpers/user-overview-render-table-cells';
+} from '~modules/user/helpers/render-user-overview-table-cells';
 import { navigate } from '~shared/helpers/link';
 
 export interface UserOverviewProps {

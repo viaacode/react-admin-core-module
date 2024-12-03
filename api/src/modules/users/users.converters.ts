@@ -152,14 +152,14 @@ export function convertUserInfoToCommonUser(
 				profileId: user.profile_id,
 				avatar: user?.profile?.avatar,
 				stamboek: user.stamboek ?? undefined,
-				organisation: user.profile?.organisation?.name
+				organisation: user.organization?.name
 					? ({
-							name: user.profile.organisation.name,
-							or_id: user.profile.organisation.or_id,
-							logo_url: user.profile.organisation.logo_url,
+							name: user.organization.name,
+							or_id: user.organization.or_id,
+							logo_url: user.organization.logo_url,
 						} as Avo.Organization.Organization)
 					: undefined,
-				educationalOrganisations: (user.organisations ?? []).map(
+				educationalOrganisations: (user.educational_organizations ?? []).map(
 					(org): Avo.EducationOrganization.Organization => ({
 						organisationId: org.organization_id,
 						organisationLabel:

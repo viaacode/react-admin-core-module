@@ -5688,7 +5688,6 @@ export type App_Collection_Fragments = {
   position: Scalars['Int'];
   start_oc?: Maybe<Scalars['Int']>;
   thumbnail_path?: Maybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   use_custom_fields: Scalars['Boolean'];
@@ -5842,7 +5841,6 @@ export type App_Collection_Fragments_Insert_Input = {
   position?: InputMaybe<Scalars['Int']>;
   start_oc?: InputMaybe<Scalars['Int']>;
   thumbnail_path?: InputMaybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   use_custom_fields?: InputMaybe<Scalars['Boolean']>;
@@ -5863,7 +5861,6 @@ export type App_Collection_Fragments_Max_Fields = {
   position?: Maybe<Scalars['Int']>;
   start_oc?: Maybe<Scalars['Int']>;
   thumbnail_path?: Maybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -5882,7 +5879,6 @@ export type App_Collection_Fragments_Max_Order_By = {
   position?: InputMaybe<Order_By>;
   start_oc?: InputMaybe<Order_By>;
   thumbnail_path?: InputMaybe<Order_By>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -5902,7 +5898,6 @@ export type App_Collection_Fragments_Min_Fields = {
   position?: Maybe<Scalars['Int']>;
   start_oc?: Maybe<Scalars['Int']>;
   thumbnail_path?: Maybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -5921,7 +5916,6 @@ export type App_Collection_Fragments_Min_Order_By = {
   position?: InputMaybe<Order_By>;
   start_oc?: InputMaybe<Order_By>;
   thumbnail_path?: InputMaybe<Order_By>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -6034,7 +6028,6 @@ export type App_Collection_Fragments_Set_Input = {
   position?: InputMaybe<Scalars['Int']>;
   start_oc?: InputMaybe<Scalars['Int']>;
   thumbnail_path?: InputMaybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   use_custom_fields?: InputMaybe<Scalars['Boolean']>;
@@ -6114,7 +6107,6 @@ export type App_Collection_Fragments_Stream_Cursor_Value_Input = {
   position?: InputMaybe<Scalars['Int']>;
   start_oc?: InputMaybe<Scalars['Int']>;
   thumbnail_path?: InputMaybe<Scalars['String']>;
-  /** Soort fragment: tekst, media-item of andere collectie */
   type?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   use_custom_fields?: InputMaybe<Scalars['Boolean']>;
@@ -9038,7 +9030,7 @@ export type App_Collection_Qc_Overview_Variance_Fields = {
   type_id?: Maybe<Scalars['Float']>;
 };
 
-/** This table holds relationships between collections as a triple, e.g.: collection A is a copy of collection B. */
+/** columns and relationships of "app.collection_relations" */
 export type App_Collection_Relations = {
   __typename?: 'app_collection_relations';
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -9759,7 +9751,6 @@ export type App_Collections = {
   organisation_id?: Maybe<Scalars['String']>;
   /** An object relationship */
   owner?: Maybe<Users_Summary_View>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: Maybe<Scalars['uuid']>;
   /** An object relationship */
   play_count?: Maybe<App_Collection_Plays>;
@@ -10651,7 +10642,6 @@ export type App_Collections_Insert_Input = {
   organisation?: InputMaybe<Shared_Organisations_Obj_Rel_Insert_Input>;
   organisation_id?: InputMaybe<Scalars['String']>;
   owner?: InputMaybe<Users_Summary_View_Obj_Rel_Insert_Input>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: InputMaybe<Scalars['uuid']>;
   play_count?: InputMaybe<App_Collection_Plays_Obj_Rel_Insert_Input>;
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
@@ -10882,7 +10872,6 @@ export type App_Collections_Max_Fields = {
   last_user_edit_profile_id?: Maybe<Scalars['uuid']>;
   note?: Maybe<Scalars['String']>;
   organisation_id?: Maybe<Scalars['String']>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: Maybe<Scalars['uuid']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -10910,7 +10899,6 @@ export type App_Collections_Max_Order_By = {
   last_user_edit_profile_id?: InputMaybe<Order_By>;
   note?: InputMaybe<Order_By>;
   organisation_id?: InputMaybe<Order_By>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: InputMaybe<Order_By>;
   publish_at?: InputMaybe<Order_By>;
   published_at?: InputMaybe<Order_By>;
@@ -10939,7 +10927,6 @@ export type App_Collections_Min_Fields = {
   last_user_edit_profile_id?: Maybe<Scalars['uuid']>;
   note?: Maybe<Scalars['String']>;
   organisation_id?: Maybe<Scalars['String']>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: Maybe<Scalars['uuid']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -10967,7 +10954,6 @@ export type App_Collections_Min_Order_By = {
   last_user_edit_profile_id?: InputMaybe<Order_By>;
   note?: InputMaybe<Order_By>;
   organisation_id?: InputMaybe<Order_By>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: InputMaybe<Order_By>;
   publish_at?: InputMaybe<Order_By>;
   published_at?: InputMaybe<Order_By>;
@@ -11882,7 +11868,6 @@ export type App_Collections_Set_Input = {
   lom_typicalagerange?: InputMaybe<Scalars['jsonb']>;
   note?: InputMaybe<Scalars['String']>;
   organisation_id?: InputMaybe<Scalars['String']>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: InputMaybe<Scalars['uuid']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -11967,7 +11952,6 @@ export type App_Collections_Stream_Cursor_Value_Input = {
   lom_typicalagerange?: InputMaybe<Scalars['jsonb']>;
   note?: InputMaybe<Scalars['String']>;
   organisation_id?: InputMaybe<Scalars['String']>;
-  /** Het profiel van de eigenaar van de collectie. */
   owner_profile_id?: InputMaybe<Scalars['uuid']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -12151,7 +12135,6 @@ export type App_Content = {
   nl_parent_page_id?: Maybe<Scalars['Int']>;
   /** An object relationship */
   owner?: Maybe<Users_Summary_View>;
-  /** slug van de pagina */
   path?: Maybe<Scalars['String']>;
   /** An object relationship */
   profile?: Maybe<Users_Profiles>;
@@ -13461,7 +13444,6 @@ export type App_Content_Insert_Input = {
   meta_description?: InputMaybe<Scalars['String']>;
   nl_parent_page_id?: InputMaybe<Scalars['Int']>;
   owner?: InputMaybe<Users_Summary_View_Obj_Rel_Insert_Input>;
-  /** slug van de pagina */
   path?: InputMaybe<Scalars['String']>;
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14002,7 +13984,6 @@ export type App_Content_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   meta_description?: Maybe<Scalars['String']>;
   nl_parent_page_id?: Maybe<Scalars['Int']>;
-  /** slug van de pagina */
   path?: Maybe<Scalars['String']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -14027,7 +14008,6 @@ export type App_Content_Max_Order_By = {
   id?: InputMaybe<Order_By>;
   meta_description?: InputMaybe<Order_By>;
   nl_parent_page_id?: InputMaybe<Order_By>;
-  /** slug van de pagina */
   path?: InputMaybe<Order_By>;
   publish_at?: InputMaybe<Order_By>;
   published_at?: InputMaybe<Order_By>;
@@ -14053,7 +14033,6 @@ export type App_Content_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   meta_description?: Maybe<Scalars['String']>;
   nl_parent_page_id?: Maybe<Scalars['Int']>;
-  /** slug van de pagina */
   path?: Maybe<Scalars['String']>;
   publish_at?: Maybe<Scalars['timestamptz']>;
   published_at?: Maybe<Scalars['timestamptz']>;
@@ -14078,7 +14057,6 @@ export type App_Content_Min_Order_By = {
   id?: InputMaybe<Order_By>;
   meta_description?: InputMaybe<Order_By>;
   nl_parent_page_id?: InputMaybe<Order_By>;
-  /** slug van de pagina */
   path?: InputMaybe<Order_By>;
   publish_at?: InputMaybe<Order_By>;
   published_at?: InputMaybe<Order_By>;
@@ -14102,27 +14080,22 @@ export type App_Content_Mutation_Response = {
   returning: Array<App_Content>;
 };
 
-/** Beheer van de navigatiemenu-elementen. */
+/** columns and relationships of "app.content_nav_elements" */
 export type App_Content_Nav_Elements = {
   __typename?: 'app_content_nav_elements';
   /** An object relationship */
   content?: Maybe<App_Content>;
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Int']>;
   content_path: Scalars['String'];
   content_type: Scalars['String'];
   created_at: Scalars['timestamptz'];
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: Maybe<Scalars['String']>;
   icon_name: Scalars['String'];
   id: Scalars['Int'];
   label?: Maybe<Scalars['String']>;
   language: Lookup_Languages_Enum;
-  /** open in new tab of in zelfde tab */
   link_target?: Maybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement: Scalars['String'];
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position: Scalars['Int'];
   tooltip?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
@@ -14130,7 +14103,7 @@ export type App_Content_Nav_Elements = {
 };
 
 
-/** Beheer van de navigatiemenu-elementen. */
+/** columns and relationships of "app.content_nav_elements" */
 export type App_Content_Nav_ElementsUser_Group_IdsArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -14206,19 +14179,15 @@ export type App_Content_Nav_Elements_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type App_Content_Nav_Elements_Avg_Fields = {
   __typename?: 'app_content_nav_elements_avg_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Avg_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
@@ -14268,32 +14237,25 @@ export type App_Content_Nav_Elements_Delete_Key_Input = {
 
 /** input type for incrementing numeric columns in table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Inc_Input = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['Int']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Insert_Input = {
   content?: InputMaybe<App_Content_Obj_Rel_Insert_Input>;
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Scalars['Int']>;
   content_path?: InputMaybe<Scalars['String']>;
   content_type?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: InputMaybe<Scalars['String']>;
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Lookup_Languages_Enum>;
-  /** open in new tab of in zelfde tab */
   link_target?: InputMaybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: InputMaybe<Scalars['String']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Scalars['Int']>;
   tooltip?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14303,21 +14265,16 @@ export type App_Content_Nav_Elements_Insert_Input = {
 /** aggregate max on columns */
 export type App_Content_Nav_Elements_Max_Fields = {
   __typename?: 'app_content_nav_elements_max_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Int']>;
   content_path?: Maybe<Scalars['String']>;
   content_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: Maybe<Scalars['String']>;
   icon_name?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   label?: Maybe<Scalars['String']>;
-  /** open in new tab of in zelfde tab */
   link_target?: Maybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: Maybe<Scalars['String']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Int']>;
   tooltip?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -14325,21 +14282,16 @@ export type App_Content_Nav_Elements_Max_Fields = {
 
 /** order by max() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Max_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   content_path?: InputMaybe<Order_By>;
   content_type?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: InputMaybe<Order_By>;
   icon_name?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
-  /** open in new tab of in zelfde tab */
   link_target?: InputMaybe<Order_By>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
   tooltip?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -14348,21 +14300,16 @@ export type App_Content_Nav_Elements_Max_Order_By = {
 /** aggregate min on columns */
 export type App_Content_Nav_Elements_Min_Fields = {
   __typename?: 'app_content_nav_elements_min_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Int']>;
   content_path?: Maybe<Scalars['String']>;
   content_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: Maybe<Scalars['String']>;
   icon_name?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   label?: Maybe<Scalars['String']>;
-  /** open in new tab of in zelfde tab */
   link_target?: Maybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: Maybe<Scalars['String']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Int']>;
   tooltip?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -14370,21 +14317,16 @@ export type App_Content_Nav_Elements_Min_Fields = {
 
 /** order by min() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Min_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   content_path?: InputMaybe<Order_By>;
   content_type?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: InputMaybe<Order_By>;
   icon_name?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   label?: InputMaybe<Order_By>;
-  /** open in new tab of in zelfde tab */
   link_target?: InputMaybe<Order_By>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
   tooltip?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -14472,22 +14414,17 @@ export enum App_Content_Nav_Elements_Select_Column {
 
 /** input type for updating data in table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Set_Input = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Scalars['Int']>;
   content_path?: InputMaybe<Scalars['String']>;
   content_type?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: InputMaybe<Scalars['String']>;
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Lookup_Languages_Enum>;
-  /** open in new tab of in zelfde tab */
   link_target?: InputMaybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: InputMaybe<Scalars['String']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Scalars['Int']>;
   tooltip?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14497,57 +14434,45 @@ export type App_Content_Nav_Elements_Set_Input = {
 /** aggregate stddev on columns */
 export type App_Content_Nav_Elements_Stddev_Fields = {
   __typename?: 'app_content_nav_elements_stddev_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Stddev_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type App_Content_Nav_Elements_Stddev_Pop_Fields = {
   __typename?: 'app_content_nav_elements_stddev_pop_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Stddev_Pop_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type App_Content_Nav_Elements_Stddev_Samp_Fields = {
   __typename?: 'app_content_nav_elements_stddev_samp_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Stddev_Samp_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
@@ -14561,22 +14486,17 @@ export type App_Content_Nav_Elements_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type App_Content_Nav_Elements_Stream_Cursor_Value_Input = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Scalars['Int']>;
   content_path?: InputMaybe<Scalars['String']>;
   content_type?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
-  /** beschijving van het navigatie item. enkel zichtbaar voor beheerers */
   description?: InputMaybe<Scalars['String']>;
   icon_name?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   label?: InputMaybe<Scalars['String']>;
   language?: InputMaybe<Lookup_Languages_Enum>;
-  /** open in new tab of in zelfde tab */
   link_target?: InputMaybe<Scalars['String']>;
-  /** In welk navigatiemenu verschijnt dit, vb. navigatiemenu linksboven, of footermenu. */
   placement?: InputMaybe<Scalars['String']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Scalars['Int']>;
   tooltip?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14586,19 +14506,15 @@ export type App_Content_Nav_Elements_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type App_Content_Nav_Elements_Sum_Fields = {
   __typename?: 'app_content_nav_elements_sum_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Sum_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
@@ -14657,57 +14573,45 @@ export type App_Content_Nav_Elements_Updates = {
 /** aggregate var_pop on columns */
 export type App_Content_Nav_Elements_Var_Pop_Fields = {
   __typename?: 'app_content_nav_elements_var_pop_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Var_Pop_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type App_Content_Nav_Elements_Var_Samp_Fields = {
   __typename?: 'app_content_nav_elements_var_samp_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Var_Samp_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type App_Content_Nav_Elements_Variance_Fields = {
   __typename?: 'app_content_nav_elements_variance_fields';
-  /** id van de gelinkte content block pagina */
   content_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "app.content_nav_elements" */
 export type App_Content_Nav_Elements_Variance_Order_By = {
-  /** id van de gelinkte content block pagina */
   content_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** volgorde van de links in de navigatie balk 0, 1, 2, 3 */
   position?: InputMaybe<Order_By>;
 };
 
@@ -14865,7 +14769,6 @@ export type App_Content_Set_Input = {
   language?: InputMaybe<Lookup_Languages_Enum>;
   meta_description?: InputMaybe<Scalars['String']>;
   nl_parent_page_id?: InputMaybe<Scalars['Int']>;
-  /** slug van de pagina */
   path?: InputMaybe<Scalars['String']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -14943,7 +14846,6 @@ export type App_Content_Stream_Cursor_Value_Input = {
   language?: InputMaybe<Lookup_Languages_Enum>;
   meta_description?: InputMaybe<Scalars['String']>;
   nl_parent_page_id?: InputMaybe<Scalars['Int']>;
-  /** slug van de pagina */
   path?: InputMaybe<Scalars['String']>;
   publish_at?: InputMaybe<Scalars['timestamptz']>;
   published_at?: InputMaybe<Scalars['timestamptz']>;
@@ -15705,7 +15607,7 @@ export type App_Item_Bookmarks_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
 };
 
-/** Tabel voor collateral bij items zoals ondertiteling. Brondata uit shared.collateral. */
+/** columns and relationships of "app.item_collateral" */
 export type App_Item_Collateral = {
   __typename?: 'app_item_collateral';
   created_at: Scalars['timestamptz'];
@@ -17222,7 +17124,7 @@ export type App_Item_Plays_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-/** This table holds relationships between items as a triple, e.g.: item A is replaced by item B. */
+/** columns and relationships of "app.item_relations" */
 export type App_Item_Relations = {
   __typename?: 'app_item_relations';
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -17625,7 +17527,7 @@ export type App_Item_Relations_View_Stream_Cursor_Value_Input = {
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
-/** keep track of item popularity */
+/** columns and relationships of "app.item_score" */
 export type App_Item_Score = {
   __typename?: 'app_item_score';
   created_at: Scalars['timestamptz'];
@@ -19114,7 +19016,7 @@ export type App_Quick_Lanes_Variance_Fields = {
   start_oc?: Maybe<Scalars['Float']>;
 };
 
-/** Table for users' bookmarked (saved) searches. */
+/** columns and relationships of "app.search_bookmarks" */
 export type App_Search_Bookmarks = {
   __typename?: 'app_search_bookmarks';
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -19126,7 +19028,7 @@ export type App_Search_Bookmarks = {
 };
 
 
-/** Table for users' bookmarked (saved) searches. */
+/** columns and relationships of "app.search_bookmarks" */
 export type App_Search_BookmarksSearch_ParamsArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -19379,7 +19281,7 @@ export type App_Search_Bookmarks_Updates = {
   where: App_Search_Bookmarks_Bool_Exp;
 };
 
-/** Aanpasbare variabelen die niet systeemvariabelen zijn, zoals translations, tooltips. */
+/** columns and relationships of "app.site_variables" */
 export type App_Site_Variables = {
   __typename?: 'app_site_variables';
   created_at?: Maybe<Scalars['timestamptz']>;
@@ -19389,7 +19291,7 @@ export type App_Site_Variables = {
 };
 
 
-/** Aanpasbare variabelen die niet systeemvariabelen zijn, zoals translations, tooltips. */
+/** columns and relationships of "app.site_variables" */
 export type App_Site_VariablesValueArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -19878,7 +19780,7 @@ export type Jsonb_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['jsonb']>>;
 };
 
-/** Table for indicating type of content used in assignment. */
+/** columns and relationships of "lookup.enum_assignment_content_labels" */
 export type Lookup_Enum_Assignment_Content_Labels = {
   __typename?: 'lookup_enum_assignment_content_labels';
   label: Scalars['String'];
@@ -20011,7 +19913,7 @@ export type Lookup_Enum_Assignment_Content_Labels_Updates = {
   where: Lookup_Enum_Assignment_Content_Labels_Bool_Exp;
 };
 
-/** Enum table for assignment types. */
+/** columns and relationships of "lookup.enum_assignment_types" */
 export type Lookup_Enum_Assignment_Types = {
   __typename?: 'lookup_enum_assignment_types';
   label: Scalars['String'];
@@ -20619,7 +20521,7 @@ export type Lookup_Enum_Collection_Management_Status_Updates = {
   where: Lookup_Enum_Collection_Management_Status_Bool_Exp;
 };
 
-/** Secondary UI colors. */
+/** columns and relationships of "lookup.enum_colors" */
 export type Lookup_Enum_Colors = {
   __typename?: 'lookup_enum_colors';
   label: Scalars['String'];
@@ -20793,7 +20695,7 @@ export type Lookup_Enum_Colors_Updates = {
   where: Lookup_Enum_Colors_Bool_Exp;
 };
 
-/** Graphql enum types for content block types */
+/** columns and relationships of "lookup.enum_content_block_types" */
 export type Lookup_Enum_Content_Block_Types = {
   __typename?: 'lookup_enum_content_block_types';
   description?: Maybe<Scalars['String']>;
@@ -20979,7 +20881,7 @@ export type Lookup_Enum_Content_Block_Types_Updates = {
   where: Lookup_Enum_Content_Block_Types_Bool_Exp;
 };
 
-/** GraphQL enum type for content types, e.g. pages, news, projects. */
+/** columns and relationships of "lookup.enum_content_types" */
 export type Lookup_Enum_Content_Types = {
   __typename?: 'lookup_enum_content_types';
   description?: Maybe<Scalars['String']>;
@@ -21147,7 +21049,7 @@ export type Lookup_Enum_Content_Types_Updates = {
   where: Lookup_Enum_Content_Types_Bool_Exp;
 };
 
-/** GraphQL enum type for input types used in content */
+/** columns and relationships of "lookup.enum_input_types" */
 export type Lookup_Enum_Input_Types = {
   __typename?: 'lookup_enum_input_types';
   description?: Maybe<Scalars['String']>;
@@ -21856,7 +21758,7 @@ export type Lookup_Enum_Profile_Preferences_Keys_Updates = {
   where: Lookup_Enum_Profile_Preferences_Keys_Bool_Exp;
 };
 
-/** Enum values for item and collection relations. */
+/** columns and relationships of "lookup.enum_relation_types" */
 export type Lookup_Enum_Relation_Types = {
   __typename?: 'lookup_enum_relation_types';
   description: Scalars['String'];
@@ -22172,7 +22074,7 @@ export type Lookup_Enum_Right_Types_Updates = {
   where: Lookup_Enum_Right_Types_Bool_Exp;
 };
 
-/** Enum table for bookmarked searches types. */
+/** columns and relationships of "lookup.enum_search_bookmark_types" */
 export type Lookup_Enum_Search_Bookmark_Types = {
   __typename?: 'lookup_enum_search_bookmark_types';
   label: Scalars['String'];
@@ -23611,14 +23513,14 @@ export type Mutation_Root = {
   delete_users_profile_contexts?: Maybe<Users_Profile_Contexts_Mutation_Response>;
   /** delete single row from the table: "users.profile_contexts" */
   delete_users_profile_contexts_by_pk?: Maybe<Users_Profile_Contexts>;
+  /** delete data from the table: "users.profile_educational_organizations" */
+  delete_users_profile_educational_organizations?: Maybe<Users_Profile_Educational_Organizations_Mutation_Response>;
+  /** delete single row from the table: "users.profile_educational_organizations" */
+  delete_users_profile_educational_organizations_by_pk?: Maybe<Users_Profile_Educational_Organizations>;
   /** delete data from the table: "users.profile_flags" */
   delete_users_profile_flags?: Maybe<Users_Profile_Flags_Mutation_Response>;
   /** delete single row from the table: "users.profile_flags" */
   delete_users_profile_flags_by_pk?: Maybe<Users_Profile_Flags>;
-  /** delete data from the table: "users.profile_organizations" */
-  delete_users_profile_organizations?: Maybe<Users_Profile_Organizations_Mutation_Response>;
-  /** delete single row from the table: "users.profile_organizations" */
-  delete_users_profile_organizations_by_pk?: Maybe<Users_Profile_Organizations>;
   /** delete data from the table: "users.profile_preferences" */
   delete_users_profile_preferences?: Maybe<Users_Profile_Preferences_Mutation_Response>;
   /** delete single row from the table: "users.profile_preferences" */
@@ -23975,14 +23877,14 @@ export type Mutation_Root = {
   insert_users_profile_contexts?: Maybe<Users_Profile_Contexts_Mutation_Response>;
   /** insert a single row into the table: "users.profile_contexts" */
   insert_users_profile_contexts_one?: Maybe<Users_Profile_Contexts>;
+  /** insert data into the table: "users.profile_educational_organizations" */
+  insert_users_profile_educational_organizations?: Maybe<Users_Profile_Educational_Organizations_Mutation_Response>;
+  /** insert a single row into the table: "users.profile_educational_organizations" */
+  insert_users_profile_educational_organizations_one?: Maybe<Users_Profile_Educational_Organizations>;
   /** insert data into the table: "users.profile_flags" */
   insert_users_profile_flags?: Maybe<Users_Profile_Flags_Mutation_Response>;
   /** insert a single row into the table: "users.profile_flags" */
   insert_users_profile_flags_one?: Maybe<Users_Profile_Flags>;
-  /** insert data into the table: "users.profile_organizations" */
-  insert_users_profile_organizations?: Maybe<Users_Profile_Organizations_Mutation_Response>;
-  /** insert a single row into the table: "users.profile_organizations" */
-  insert_users_profile_organizations_one?: Maybe<Users_Profile_Organizations>;
   /** insert data into the table: "users.profile_preferences" */
   insert_users_profile_preferences?: Maybe<Users_Profile_Preferences_Mutation_Response>;
   /** insert a single row into the table: "users.profile_preferences" */
@@ -24503,18 +24405,18 @@ export type Mutation_Root = {
   update_users_profile_contexts_by_pk?: Maybe<Users_Profile_Contexts>;
   /** update multiples rows of table: "users.profile_contexts" */
   update_users_profile_contexts_many?: Maybe<Array<Maybe<Users_Profile_Contexts_Mutation_Response>>>;
+  /** update data of the table: "users.profile_educational_organizations" */
+  update_users_profile_educational_organizations?: Maybe<Users_Profile_Educational_Organizations_Mutation_Response>;
+  /** update single row of the table: "users.profile_educational_organizations" */
+  update_users_profile_educational_organizations_by_pk?: Maybe<Users_Profile_Educational_Organizations>;
+  /** update multiples rows of table: "users.profile_educational_organizations" */
+  update_users_profile_educational_organizations_many?: Maybe<Array<Maybe<Users_Profile_Educational_Organizations_Mutation_Response>>>;
   /** update data of the table: "users.profile_flags" */
   update_users_profile_flags?: Maybe<Users_Profile_Flags_Mutation_Response>;
   /** update single row of the table: "users.profile_flags" */
   update_users_profile_flags_by_pk?: Maybe<Users_Profile_Flags>;
   /** update multiples rows of table: "users.profile_flags" */
   update_users_profile_flags_many?: Maybe<Array<Maybe<Users_Profile_Flags_Mutation_Response>>>;
-  /** update data of the table: "users.profile_organizations" */
-  update_users_profile_organizations?: Maybe<Users_Profile_Organizations_Mutation_Response>;
-  /** update single row of the table: "users.profile_organizations" */
-  update_users_profile_organizations_by_pk?: Maybe<Users_Profile_Organizations>;
-  /** update multiples rows of table: "users.profile_organizations" */
-  update_users_profile_organizations_many?: Maybe<Array<Maybe<Users_Profile_Organizations_Mutation_Response>>>;
   /** update data of the table: "users.profile_preferences" */
   update_users_profile_preferences?: Maybe<Users_Profile_Preferences_Mutation_Response>;
   /** update single row of the table: "users.profile_preferences" */
@@ -25551,6 +25453,18 @@ export type Mutation_RootDelete_Users_Profile_Contexts_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Users_Profile_Educational_OrganizationsArgs = {
+  where: Users_Profile_Educational_Organizations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Users_Profile_Educational_Organizations_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Users_Profile_FlagsArgs = {
   where: Users_Profile_Flags_Bool_Exp;
 };
@@ -25559,18 +25473,6 @@ export type Mutation_RootDelete_Users_Profile_FlagsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_Profile_Flags_By_PkArgs = {
   id: Scalars['Int'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Users_Profile_OrganizationsArgs = {
-  where: Users_Profile_Organizations_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Users_Profile_Organizations_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 
@@ -26807,6 +26709,20 @@ export type Mutation_RootInsert_Users_Profile_Contexts_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Users_Profile_Educational_OrganizationsArgs = {
+  objects: Array<Users_Profile_Educational_Organizations_Insert_Input>;
+  on_conflict?: InputMaybe<Users_Profile_Educational_Organizations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Users_Profile_Educational_Organizations_OneArgs = {
+  object: Users_Profile_Educational_Organizations_Insert_Input;
+  on_conflict?: InputMaybe<Users_Profile_Educational_Organizations_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Users_Profile_FlagsArgs = {
   objects: Array<Users_Profile_Flags_Insert_Input>;
   on_conflict?: InputMaybe<Users_Profile_Flags_On_Conflict>;
@@ -26817,20 +26733,6 @@ export type Mutation_RootInsert_Users_Profile_FlagsArgs = {
 export type Mutation_RootInsert_Users_Profile_Flags_OneArgs = {
   object: Users_Profile_Flags_Insert_Input;
   on_conflict?: InputMaybe<Users_Profile_Flags_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Users_Profile_OrganizationsArgs = {
-  objects: Array<Users_Profile_Organizations_Insert_Input>;
-  on_conflict?: InputMaybe<Users_Profile_Organizations_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Users_Profile_Organizations_OneArgs = {
-  object: Users_Profile_Organizations_Insert_Input;
-  on_conflict?: InputMaybe<Users_Profile_Organizations_On_Conflict>;
 };
 
 
@@ -28810,6 +28712,26 @@ export type Mutation_RootUpdate_Users_Profile_Contexts_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Users_Profile_Educational_OrganizationsArgs = {
+  _set?: InputMaybe<Users_Profile_Educational_Organizations_Set_Input>;
+  where: Users_Profile_Educational_Organizations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_Profile_Educational_Organizations_By_PkArgs = {
+  _set?: InputMaybe<Users_Profile_Educational_Organizations_Set_Input>;
+  pk_columns: Users_Profile_Educational_Organizations_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_Profile_Educational_Organizations_ManyArgs = {
+  updates: Array<Users_Profile_Educational_Organizations_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Users_Profile_FlagsArgs = {
   _inc?: InputMaybe<Users_Profile_Flags_Inc_Input>;
   _set?: InputMaybe<Users_Profile_Flags_Set_Input>;
@@ -28828,26 +28750,6 @@ export type Mutation_RootUpdate_Users_Profile_Flags_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Users_Profile_Flags_ManyArgs = {
   updates: Array<Users_Profile_Flags_Updates>;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_Profile_OrganizationsArgs = {
-  _set?: InputMaybe<Users_Profile_Organizations_Set_Input>;
-  where: Users_Profile_Organizations_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_Profile_Organizations_By_PkArgs = {
-  _set?: InputMaybe<Users_Profile_Organizations_Set_Input>;
-  pk_columns: Users_Profile_Organizations_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_Profile_Organizations_ManyArgs = {
-  updates: Array<Users_Profile_Organizations_Updates>;
 };
 
 
@@ -29586,18 +29488,18 @@ export type Query_Root = {
   users_profile_contexts_aggregate: Users_Profile_Contexts_Aggregate;
   /** fetch data from the table: "users.profile_contexts" using primary key columns */
   users_profile_contexts_by_pk?: Maybe<Users_Profile_Contexts>;
+  /** fetch data from the table: "users.profile_educational_organizations" */
+  users_profile_educational_organizations: Array<Users_Profile_Educational_Organizations>;
+  /** fetch aggregated fields from the table: "users.profile_educational_organizations" */
+  users_profile_educational_organizations_aggregate: Users_Profile_Educational_Organizations_Aggregate;
+  /** fetch data from the table: "users.profile_educational_organizations" using primary key columns */
+  users_profile_educational_organizations_by_pk?: Maybe<Users_Profile_Educational_Organizations>;
   /** fetch data from the table: "users.profile_flags" */
   users_profile_flags: Array<Users_Profile_Flags>;
   /** fetch aggregated fields from the table: "users.profile_flags" */
   users_profile_flags_aggregate: Users_Profile_Flags_Aggregate;
   /** fetch data from the table: "users.profile_flags" using primary key columns */
   users_profile_flags_by_pk?: Maybe<Users_Profile_Flags>;
-  /** fetch data from the table: "users.profile_organizations" */
-  users_profile_organizations: Array<Users_Profile_Organizations>;
-  /** fetch aggregated fields from the table: "users.profile_organizations" */
-  users_profile_organizations_aggregate: Users_Profile_Organizations_Aggregate;
-  /** fetch data from the table: "users.profile_organizations" using primary key columns */
-  users_profile_organizations_by_pk?: Maybe<Users_Profile_Organizations>;
   /** fetch data from the table: "users.profile_preferences" */
   users_profile_preferences: Array<Users_Profile_Preferences>;
   /** fetch aggregated fields from the table: "users.profile_preferences" */
@@ -31977,6 +31879,29 @@ export type Query_RootUsers_Profile_Contexts_By_PkArgs = {
 };
 
 
+export type Query_RootUsers_Profile_Educational_OrganizationsArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_Profile_Educational_Organizations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_Profile_Educational_Organizations_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
 export type Query_RootUsers_Profile_FlagsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Flags_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -31997,29 +31922,6 @@ export type Query_RootUsers_Profile_Flags_AggregateArgs = {
 
 export type Query_RootUsers_Profile_Flags_By_PkArgs = {
   id: Scalars['Int'];
-};
-
-
-export type Query_RootUsers_Profile_OrganizationsArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-
-export type Query_RootUsers_Profile_Organizations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-
-export type Query_RootUsers_Profile_Organizations_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 
@@ -32868,12 +32770,10 @@ export type Shared_Ldap_Organizations_Bool_Exp = {
 
 /** unique or primary key constraints on table "shared.ldap_organizations" */
 export enum Shared_Ldap_Organizations_Constraint {
-  /** unique or primary key constraint on columns "ldap_entryuuid" */
-  LdapOrganizationsLdapEntryuuidKey = 'ldap_organizations_ldap_entryuuid_key',
-  /** unique or primary key constraint on columns "organization_id" */
-  LdapOrganizationsOrganizationIdKey = 'ldap_organizations_organization_id_key',
   /** unique or primary key constraint on columns "id" */
-  LdapOrganizationsPkey = 'ldap_organizations_pkey'
+  LdapOrganizationsPkey = 'ldap_organizations_pkey',
+  /** unique or primary key constraint on columns "ldap_entryuuid" */
+  SharedLdapOrganizationsConstraintKey = 'shared_ldap_organizations_constraint_key'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -33587,7 +33487,7 @@ export type Shared_Ldap_Organizations_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-/** Sync table for organisations API. */
+/** columns and relationships of "shared.organisations" */
 export type Shared_Organisations = {
   __typename?: 'shared_organisations';
   data: Scalars['jsonb'];
@@ -33600,7 +33500,7 @@ export type Shared_Organisations = {
 };
 
 
-/** Sync table for organisations API. */
+/** columns and relationships of "shared.organisations" */
 export type Shared_OrganisationsDataArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -35046,7 +34946,6 @@ export type Shared_Users = {
   last_name?: Maybe<Scalars['String']>;
   /** An object relationship */
   last_unblock?: Maybe<Shared_User_Last_Unblocked>;
-  /** as stored in ldap and used for login */
   mail?: Maybe<Scalars['String']>;
   /** An object relationship */
   profile?: Maybe<Users_Profiles>;
@@ -35277,7 +35176,6 @@ export type Shared_Users_Insert_Input = {
   last_block?: InputMaybe<Shared_User_Last_Blocked_Obj_Rel_Insert_Input>;
   last_name?: InputMaybe<Scalars['String']>;
   last_unblock?: InputMaybe<Shared_User_Last_Unblocked_Obj_Rel_Insert_Input>;
-  /** as stored in ldap and used for login */
   mail?: InputMaybe<Scalars['String']>;
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
   profiles?: InputMaybe<Users_Profiles_Arr_Rel_Insert_Input>;
@@ -35299,7 +35197,6 @@ export type Shared_Users_Max_Fields = {
   id?: Maybe<Scalars['Int']>;
   last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
-  /** as stored in ldap and used for login */
   mail?: Maybe<Scalars['String']>;
   role_id?: Maybe<Scalars['Int']>;
   type_label?: Maybe<Scalars['String']>;
@@ -35316,7 +35213,6 @@ export type Shared_Users_Max_Order_By = {
   id?: InputMaybe<Order_By>;
   last_access_at?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
-  /** as stored in ldap and used for login */
   mail?: InputMaybe<Order_By>;
   role_id?: InputMaybe<Order_By>;
   type_label?: InputMaybe<Order_By>;
@@ -35334,7 +35230,6 @@ export type Shared_Users_Min_Fields = {
   id?: Maybe<Scalars['Int']>;
   last_access_at?: Maybe<Scalars['timestamptz']>;
   last_name?: Maybe<Scalars['String']>;
-  /** as stored in ldap and used for login */
   mail?: Maybe<Scalars['String']>;
   role_id?: Maybe<Scalars['Int']>;
   type_label?: Maybe<Scalars['String']>;
@@ -35351,7 +35246,6 @@ export type Shared_Users_Min_Order_By = {
   id?: InputMaybe<Order_By>;
   last_access_at?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
-  /** as stored in ldap and used for login */
   mail?: InputMaybe<Order_By>;
   role_id?: InputMaybe<Order_By>;
   type_label?: InputMaybe<Order_By>;
@@ -35465,7 +35359,6 @@ export type Shared_Users_Set_Input = {
   is_blocked?: InputMaybe<Scalars['Boolean']>;
   last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
-  /** as stored in ldap and used for login */
   mail?: InputMaybe<Scalars['String']>;
   role_id?: InputMaybe<Scalars['Int']>;
   type_label?: InputMaybe<Scalars['String']>;
@@ -35536,7 +35429,6 @@ export type Shared_Users_Stream_Cursor_Value_Input = {
   is_blocked?: InputMaybe<Scalars['Boolean']>;
   last_access_at?: InputMaybe<Scalars['timestamptz']>;
   last_name?: InputMaybe<Scalars['String']>;
-  /** as stored in ldap and used for login */
   mail?: InputMaybe<Scalars['String']>;
   role_id?: InputMaybe<Scalars['Int']>;
   type_label?: InputMaybe<Scalars['String']>;
@@ -36450,6 +36342,14 @@ export type Subscription_Root = {
   users_profile_contexts_by_pk?: Maybe<Users_Profile_Contexts>;
   /** fetch data from the table in a streaming manner: "users.profile_contexts" */
   users_profile_contexts_stream: Array<Users_Profile_Contexts>;
+  /** fetch data from the table: "users.profile_educational_organizations" */
+  users_profile_educational_organizations: Array<Users_Profile_Educational_Organizations>;
+  /** fetch aggregated fields from the table: "users.profile_educational_organizations" */
+  users_profile_educational_organizations_aggregate: Users_Profile_Educational_Organizations_Aggregate;
+  /** fetch data from the table: "users.profile_educational_organizations" using primary key columns */
+  users_profile_educational_organizations_by_pk?: Maybe<Users_Profile_Educational_Organizations>;
+  /** fetch data from the table in a streaming manner: "users.profile_educational_organizations" */
+  users_profile_educational_organizations_stream: Array<Users_Profile_Educational_Organizations>;
   /** fetch data from the table: "users.profile_flags" */
   users_profile_flags: Array<Users_Profile_Flags>;
   /** fetch aggregated fields from the table: "users.profile_flags" */
@@ -36458,14 +36358,6 @@ export type Subscription_Root = {
   users_profile_flags_by_pk?: Maybe<Users_Profile_Flags>;
   /** fetch data from the table in a streaming manner: "users.profile_flags" */
   users_profile_flags_stream: Array<Users_Profile_Flags>;
-  /** fetch data from the table: "users.profile_organizations" */
-  users_profile_organizations: Array<Users_Profile_Organizations>;
-  /** fetch aggregated fields from the table: "users.profile_organizations" */
-  users_profile_organizations_aggregate: Users_Profile_Organizations_Aggregate;
-  /** fetch data from the table: "users.profile_organizations" using primary key columns */
-  users_profile_organizations_by_pk?: Maybe<Users_Profile_Organizations>;
-  /** fetch data from the table in a streaming manner: "users.profile_organizations" */
-  users_profile_organizations_stream: Array<Users_Profile_Organizations>;
   /** fetch data from the table: "users.profile_preferences" */
   users_profile_preferences: Array<Users_Profile_Preferences>;
   /** fetch aggregated fields from the table: "users.profile_preferences" */
@@ -39606,6 +39498,36 @@ export type Subscription_RootUsers_Profile_Contexts_StreamArgs = {
 };
 
 
+export type Subscription_RootUsers_Profile_Educational_OrganizationsArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_Profile_Educational_Organizations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_Profile_Educational_Organizations_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootUsers_Profile_Educational_Organizations_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Users_Profile_Educational_Organizations_Stream_Cursor_Input>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
 export type Subscription_RootUsers_Profile_FlagsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Flags_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -39633,36 +39555,6 @@ export type Subscription_RootUsers_Profile_Flags_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Users_Profile_Flags_Stream_Cursor_Input>>;
   where?: InputMaybe<Users_Profile_Flags_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_Profile_OrganizationsArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_Profile_Organizations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_Profile_Organizations_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootUsers_Profile_Organizations_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Users_Profile_Organizations_Stream_Cursor_Input>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
 };
 
 
@@ -41195,7 +41087,7 @@ export type Users_Groups_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
 };
 
-/** Mapping voor externe idp ID naar lokale user ID. */
+/** columns and relationships of "users.idp_map" */
 export type Users_Idp_Map = {
   __typename?: 'users_idp_map';
   id: Scalars['Int'];
@@ -42726,6 +42618,216 @@ export type Users_Profile_Contexts_Updates = {
   where: Users_Profile_Contexts_Bool_Exp;
 };
 
+/** columns and relationships of "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations = {
+  __typename?: 'users_profile_educational_organizations';
+  id: Scalars['uuid'];
+  /** An object relationship */
+  organization?: Maybe<Shared_Ldap_Organizations>;
+  organization_id: Scalars['String'];
+  /** An object relationship */
+  profile: Users_Profiles;
+  profile_id: Scalars['uuid'];
+  unit_id?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Aggregate = {
+  __typename?: 'users_profile_educational_organizations_aggregate';
+  aggregate?: Maybe<Users_Profile_Educational_Organizations_Aggregate_Fields>;
+  nodes: Array<Users_Profile_Educational_Organizations>;
+};
+
+export type Users_Profile_Educational_Organizations_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Users_Profile_Educational_Organizations_Aggregate_Bool_Exp_Count>;
+};
+
+export type Users_Profile_Educational_Organizations_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Aggregate_Fields = {
+  __typename?: 'users_profile_educational_organizations_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Users_Profile_Educational_Organizations_Max_Fields>;
+  min?: Maybe<Users_Profile_Educational_Organizations_Min_Fields>;
+};
+
+
+/** aggregate fields of "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Users_Profile_Educational_Organizations_Max_Order_By>;
+  min?: InputMaybe<Users_Profile_Educational_Organizations_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Arr_Rel_Insert_Input = {
+  data: Array<Users_Profile_Educational_Organizations_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_Profile_Educational_Organizations_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "users.profile_educational_organizations". All fields are combined with a logical 'AND'. */
+export type Users_Profile_Educational_Organizations_Bool_Exp = {
+  _and?: InputMaybe<Array<Users_Profile_Educational_Organizations_Bool_Exp>>;
+  _not?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+  _or?: InputMaybe<Array<Users_Profile_Educational_Organizations_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  organization?: InputMaybe<Shared_Ldap_Organizations_Bool_Exp>;
+  organization_id?: InputMaybe<String_Comparison_Exp>;
+  profile?: InputMaybe<Users_Profiles_Bool_Exp>;
+  profile_id?: InputMaybe<Uuid_Comparison_Exp>;
+  unit_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "users.profile_educational_organizations" */
+export enum Users_Profile_Educational_Organizations_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ProfileOrganizationsPkey = 'profile_organizations_pkey',
+  /** unique or primary key constraint on columns "unit_id", "organization_id", "profile_id" */
+  ProfileOrganizationsProfileIdOrganizationIdUnitIdKey = 'profile_organizations_profile_id_organization_id_unit_id_key'
+}
+
+/** input type for inserting data into table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  organization?: InputMaybe<Shared_Ldap_Organizations_Obj_Rel_Insert_Input>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
+  profile_id?: InputMaybe<Scalars['uuid']>;
+  unit_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Users_Profile_Educational_Organizations_Max_Fields = {
+  __typename?: 'users_profile_educational_organizations_max_fields';
+  id?: Maybe<Scalars['uuid']>;
+  organization_id?: Maybe<Scalars['String']>;
+  profile_id?: Maybe<Scalars['uuid']>;
+  unit_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  organization_id?: InputMaybe<Order_By>;
+  profile_id?: InputMaybe<Order_By>;
+  unit_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Users_Profile_Educational_Organizations_Min_Fields = {
+  __typename?: 'users_profile_educational_organizations_min_fields';
+  id?: Maybe<Scalars['uuid']>;
+  organization_id?: Maybe<Scalars['String']>;
+  profile_id?: Maybe<Scalars['uuid']>;
+  unit_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  organization_id?: InputMaybe<Order_By>;
+  profile_id?: InputMaybe<Order_By>;
+  unit_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Mutation_Response = {
+  __typename?: 'users_profile_educational_organizations_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users_Profile_Educational_Organizations>;
+};
+
+/** on_conflict condition type for table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_On_Conflict = {
+  constraint: Users_Profile_Educational_Organizations_Constraint;
+  update_columns?: Array<Users_Profile_Educational_Organizations_Update_Column>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "users.profile_educational_organizations". */
+export type Users_Profile_Educational_Organizations_Order_By = {
+  id?: InputMaybe<Order_By>;
+  organization?: InputMaybe<Shared_Ldap_Organizations_Order_By>;
+  organization_id?: InputMaybe<Order_By>;
+  profile?: InputMaybe<Users_Profiles_Order_By>;
+  profile_id?: InputMaybe<Order_By>;
+  unit_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: users.profile_educational_organizations */
+export type Users_Profile_Educational_Organizations_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "users.profile_educational_organizations" */
+export enum Users_Profile_Educational_Organizations_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationId = 'organization_id',
+  /** column name */
+  ProfileId = 'profile_id',
+  /** column name */
+  UnitId = 'unit_id'
+}
+
+/** input type for updating data in table "users.profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  profile_id?: InputMaybe<Scalars['uuid']>;
+  unit_id?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "users_profile_educational_organizations" */
+export type Users_Profile_Educational_Organizations_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Users_Profile_Educational_Organizations_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Users_Profile_Educational_Organizations_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']>;
+  organization_id?: InputMaybe<Scalars['String']>;
+  profile_id?: InputMaybe<Scalars['uuid']>;
+  unit_id?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "users.profile_educational_organizations" */
+export enum Users_Profile_Educational_Organizations_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationId = 'organization_id',
+  /** column name */
+  ProfileId = 'profile_id',
+  /** column name */
+  UnitId = 'unit_id'
+}
+
+export type Users_Profile_Educational_Organizations_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Users_Profile_Educational_Organizations_Set_Input>;
+  where: Users_Profile_Educational_Organizations_Bool_Exp;
+};
+
 /** Tabel voor optionele flags en attributen van een gebruikersprofiel. */
 export type Users_Profile_Flags = {
   __typename?: 'users_profile_flags';
@@ -43050,216 +43152,6 @@ export type Users_Profile_Flags_Variance_Fields = {
 /** order by variance() on columns of table "users.profile_flags" */
 export type Users_Profile_Flags_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
-};
-
-/** columns and relationships of "users.profile_organizations" */
-export type Users_Profile_Organizations = {
-  __typename?: 'users_profile_organizations';
-  id: Scalars['uuid'];
-  /** An object relationship */
-  organization?: Maybe<Shared_Ldap_Organizations>;
-  organization_id: Scalars['String'];
-  /** An object relationship */
-  profile: Users_Profiles;
-  profile_id: Scalars['uuid'];
-  unit_id?: Maybe<Scalars['String']>;
-};
-
-/** aggregated selection of "users.profile_organizations" */
-export type Users_Profile_Organizations_Aggregate = {
-  __typename?: 'users_profile_organizations_aggregate';
-  aggregate?: Maybe<Users_Profile_Organizations_Aggregate_Fields>;
-  nodes: Array<Users_Profile_Organizations>;
-};
-
-export type Users_Profile_Organizations_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp_Count>;
-};
-
-export type Users_Profile_Organizations_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-  filter?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
-/** aggregate fields of "users.profile_organizations" */
-export type Users_Profile_Organizations_Aggregate_Fields = {
-  __typename?: 'users_profile_organizations_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Users_Profile_Organizations_Max_Fields>;
-  min?: Maybe<Users_Profile_Organizations_Min_Fields>;
-};
-
-
-/** aggregate fields of "users.profile_organizations" */
-export type Users_Profile_Organizations_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "users.profile_organizations" */
-export type Users_Profile_Organizations_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Users_Profile_Organizations_Max_Order_By>;
-  min?: InputMaybe<Users_Profile_Organizations_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "users.profile_organizations" */
-export type Users_Profile_Organizations_Arr_Rel_Insert_Input = {
-  data: Array<Users_Profile_Organizations_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Users_Profile_Organizations_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "users.profile_organizations". All fields are combined with a logical 'AND'. */
-export type Users_Profile_Organizations_Bool_Exp = {
-  _and?: InputMaybe<Array<Users_Profile_Organizations_Bool_Exp>>;
-  _not?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-  _or?: InputMaybe<Array<Users_Profile_Organizations_Bool_Exp>>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  organization?: InputMaybe<Shared_Ldap_Organizations_Bool_Exp>;
-  organization_id?: InputMaybe<String_Comparison_Exp>;
-  profile?: InputMaybe<Users_Profiles_Bool_Exp>;
-  profile_id?: InputMaybe<Uuid_Comparison_Exp>;
-  unit_id?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "users.profile_organizations" */
-export enum Users_Profile_Organizations_Constraint {
-  /** unique or primary key constraint on columns "id" */
-  ProfileOrganizationsPkey = 'profile_organizations_pkey',
-  /** unique or primary key constraint on columns "unit_id", "organization_id", "profile_id" */
-  ProfileOrganizationsProfileIdOrganizationIdUnitIdKey = 'profile_organizations_profile_id_organization_id_unit_id_key'
-}
-
-/** input type for inserting data into table "users.profile_organizations" */
-export type Users_Profile_Organizations_Insert_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  organization?: InputMaybe<Shared_Ldap_Organizations_Obj_Rel_Insert_Input>;
-  organization_id?: InputMaybe<Scalars['String']>;
-  profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
-  profile_id?: InputMaybe<Scalars['uuid']>;
-  unit_id?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Users_Profile_Organizations_Max_Fields = {
-  __typename?: 'users_profile_organizations_max_fields';
-  id?: Maybe<Scalars['uuid']>;
-  organization_id?: Maybe<Scalars['String']>;
-  profile_id?: Maybe<Scalars['uuid']>;
-  unit_id?: Maybe<Scalars['String']>;
-};
-
-/** order by max() on columns of table "users.profile_organizations" */
-export type Users_Profile_Organizations_Max_Order_By = {
-  id?: InputMaybe<Order_By>;
-  organization_id?: InputMaybe<Order_By>;
-  profile_id?: InputMaybe<Order_By>;
-  unit_id?: InputMaybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Users_Profile_Organizations_Min_Fields = {
-  __typename?: 'users_profile_organizations_min_fields';
-  id?: Maybe<Scalars['uuid']>;
-  organization_id?: Maybe<Scalars['String']>;
-  profile_id?: Maybe<Scalars['uuid']>;
-  unit_id?: Maybe<Scalars['String']>;
-};
-
-/** order by min() on columns of table "users.profile_organizations" */
-export type Users_Profile_Organizations_Min_Order_By = {
-  id?: InputMaybe<Order_By>;
-  organization_id?: InputMaybe<Order_By>;
-  profile_id?: InputMaybe<Order_By>;
-  unit_id?: InputMaybe<Order_By>;
-};
-
-/** response of any mutation on the table "users.profile_organizations" */
-export type Users_Profile_Organizations_Mutation_Response = {
-  __typename?: 'users_profile_organizations_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Users_Profile_Organizations>;
-};
-
-/** on_conflict condition type for table "users.profile_organizations" */
-export type Users_Profile_Organizations_On_Conflict = {
-  constraint: Users_Profile_Organizations_Constraint;
-  update_columns?: Array<Users_Profile_Organizations_Update_Column>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "users.profile_organizations". */
-export type Users_Profile_Organizations_Order_By = {
-  id?: InputMaybe<Order_By>;
-  organization?: InputMaybe<Shared_Ldap_Organizations_Order_By>;
-  organization_id?: InputMaybe<Order_By>;
-  profile?: InputMaybe<Users_Profiles_Order_By>;
-  profile_id?: InputMaybe<Order_By>;
-  unit_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: users.profile_organizations */
-export type Users_Profile_Organizations_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "users.profile_organizations" */
-export enum Users_Profile_Organizations_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  OrganizationId = 'organization_id',
-  /** column name */
-  ProfileId = 'profile_id',
-  /** column name */
-  UnitId = 'unit_id'
-}
-
-/** input type for updating data in table "users.profile_organizations" */
-export type Users_Profile_Organizations_Set_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  organization_id?: InputMaybe<Scalars['String']>;
-  profile_id?: InputMaybe<Scalars['uuid']>;
-  unit_id?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "users_profile_organizations" */
-export type Users_Profile_Organizations_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Users_Profile_Organizations_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Users_Profile_Organizations_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  organization_id?: InputMaybe<Scalars['String']>;
-  profile_id?: InputMaybe<Scalars['uuid']>;
-  unit_id?: InputMaybe<Scalars['String']>;
-};
-
-/** update columns of table "users.profile_organizations" */
-export enum Users_Profile_Organizations_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  OrganizationId = 'organization_id',
-  /** column name */
-  ProfileId = 'profile_id',
-  /** column name */
-  UnitId = 'unit_id'
-}
-
-export type Users_Profile_Organizations_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Users_Profile_Organizations_Set_Input>;
-  where: Users_Profile_Organizations_Bool_Exp;
 };
 
 /** Tabel voor optionele voorkeuren of instellingskeuzes gekoppeld aan een gebruikersprofiel. */
@@ -43639,7 +43531,7 @@ export type Users_Profile_Preferences_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
 };
 
-/** Reference table to link user by profile to one or more user groups */
+/** columns and relationships of "users.profile_user_groups" */
 export type Users_Profile_User_Groups = {
   __typename?: 'users_profile_user_groups';
   /** An object relationship */
@@ -43656,7 +43548,7 @@ export type Users_Profile_User_Groups = {
 };
 
 
-/** Reference table to link user by profile to one or more user groups */
+/** columns and relationships of "users.profile_user_groups" */
 export type Users_Profile_User_GroupsGroupsArgs = {
   distinct_on?: InputMaybe<Array<Users_Groups_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -43666,7 +43558,7 @@ export type Users_Profile_User_GroupsGroupsArgs = {
 };
 
 
-/** Reference table to link user by profile to one or more user groups */
+/** columns and relationships of "users.profile_user_groups" */
 export type Users_Profile_User_GroupsGroups_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Groups_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44000,11 +43892,10 @@ export type Users_Profile_User_Groups_Variance_Order_By = {
   user_group_id?: InputMaybe<Order_By>;
 };
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_Profiles = {
   __typename?: 'users_profiles';
   alias?: Maybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: Maybe<Scalars['String']>;
   /** An array relationship */
   assignment_labels: Array<App_Assignment_Labels_V2>;
@@ -44020,7 +43911,6 @@ export type Users_Profiles = {
   bookmark_searches: Array<App_Search_Bookmarks>;
   /** An aggregate relationship */
   bookmark_searches_aggregate: App_Search_Bookmarks_Aggregate;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: Maybe<Scalars['String']>;
   /** An array relationship */
   collection_bookmarks: Array<App_Collection_Bookmarks>;
@@ -44037,7 +43927,6 @@ export type Users_Profiles = {
   /** An aggregate relationship */
   email_preferences_aggregate: Users_Email_Preferences_Aggregate;
   email_preferences_center_access_key: Scalars['uuid'];
-  /** Een gebruiker kan een of meer profielen hebben */
   id: Scalars['uuid'];
   is_deleted: Scalars['Boolean'];
   is_exception: Scalars['Boolean'];
@@ -44069,9 +43958,9 @@ export type Users_Profiles = {
   /** An aggregate relationship */
   profile_flags_aggregate: Users_Profile_Flags_Aggregate;
   /** An array relationship */
-  profile_organizations: Array<Users_Profile_Organizations>;
+  profile_organizations: Array<Users_Profile_Educational_Organizations>;
   /** An aggregate relationship */
-  profile_organizations_aggregate: Users_Profile_Organizations_Aggregate;
+  profile_organizations_aggregate: Users_Profile_Educational_Organizations_Aggregate;
   /** An array relationship */
   profile_preferences: Array<Users_Profile_Preferences>;
   /** An aggregate relationship */
@@ -44091,7 +43980,7 @@ export type Users_Profiles = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesAssignment_LabelsArgs = {
   distinct_on?: InputMaybe<Array<App_Assignment_Labels_V2_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44101,7 +43990,7 @@ export type Users_ProfilesAssignment_LabelsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesAssignment_Labels_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Assignment_Labels_V2_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44111,7 +44000,7 @@ export type Users_ProfilesAssignment_Labels_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesAssignments_V2Args = {
   distinct_on?: InputMaybe<Array<App_Assignments_V2_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44121,7 +44010,7 @@ export type Users_ProfilesAssignments_V2Args = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesAssignments_V2_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Assignments_V2_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44131,7 +44020,7 @@ export type Users_ProfilesAssignments_V2_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesBookmark_SearchesArgs = {
   distinct_on?: InputMaybe<Array<App_Search_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44141,7 +44030,7 @@ export type Users_ProfilesBookmark_SearchesArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesBookmark_Searches_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Search_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44151,7 +44040,7 @@ export type Users_ProfilesBookmark_Searches_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesCollection_BookmarksArgs = {
   distinct_on?: InputMaybe<Array<App_Collection_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44161,7 +44050,7 @@ export type Users_ProfilesCollection_BookmarksArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesCollection_Bookmarks_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Collection_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44171,7 +44060,7 @@ export type Users_ProfilesCollection_Bookmarks_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesCollectionsArgs = {
   distinct_on?: InputMaybe<Array<App_Collections_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44181,7 +44070,7 @@ export type Users_ProfilesCollectionsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesCollections_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Collections_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44191,7 +44080,7 @@ export type Users_ProfilesCollections_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesEmail_PreferencesArgs = {
   distinct_on?: InputMaybe<Array<Users_Email_Preferences_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44201,7 +44090,7 @@ export type Users_ProfilesEmail_PreferencesArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesEmail_Preferences_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Email_Preferences_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44211,7 +44100,7 @@ export type Users_ProfilesEmail_Preferences_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesItem_BookmarksArgs = {
   distinct_on?: InputMaybe<Array<App_Item_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44221,7 +44110,7 @@ export type Users_ProfilesItem_BookmarksArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesItem_Bookmarks_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Item_Bookmarks_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44231,7 +44120,7 @@ export type Users_ProfilesItem_Bookmarks_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesLomsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profiles_Lom_Links_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44241,7 +44130,7 @@ export type Users_ProfilesLomsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesLoms_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profiles_Lom_Links_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44251,7 +44140,7 @@ export type Users_ProfilesLoms_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesNotificationsArgs = {
   distinct_on?: InputMaybe<Array<Users_Notifications_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44261,7 +44150,7 @@ export type Users_ProfilesNotificationsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesNotifications_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Notifications_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44271,7 +44160,7 @@ export type Users_ProfilesNotifications_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_ClassificationsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Classifications_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44281,7 +44170,7 @@ export type Users_ProfilesProfile_ClassificationsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_Classifications_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Classifications_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44291,7 +44180,7 @@ export type Users_ProfilesProfile_Classifications_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_ContextsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Contexts_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44301,7 +44190,7 @@ export type Users_ProfilesProfile_ContextsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_Contexts_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Contexts_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44311,7 +44200,7 @@ export type Users_ProfilesProfile_Contexts_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_FlagsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Flags_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44321,7 +44210,7 @@ export type Users_ProfilesProfile_FlagsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_Flags_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Flags_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44331,27 +44220,27 @@ export type Users_ProfilesProfile_Flags_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_OrganizationsArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_Organizations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_PreferencesArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Preferences_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44361,7 +44250,7 @@ export type Users_ProfilesProfile_PreferencesArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_Preferences_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_Preferences_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44371,7 +44260,7 @@ export type Users_ProfilesProfile_Preferences_AggregateArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_User_GroupsArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_User_Groups_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44381,7 +44270,7 @@ export type Users_ProfilesProfile_User_GroupsArgs = {
 };
 
 
-/** Een gebruiker kan een of meer profielen hebben. Een profiel bevat de profielgebonden informatie zoals displayName,  LOM, etc. */
+/** columns and relationships of "users.profiles" */
 export type Users_ProfilesProfile_User_Groups_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Profile_User_Groups_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -44495,8 +44384,8 @@ export type Users_Profiles_Bool_Exp = {
   profile_contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Bool_Exp>;
   profile_flags?: InputMaybe<Users_Profile_Flags_Bool_Exp>;
   profile_flags_aggregate?: InputMaybe<Users_Profile_Flags_Aggregate_Bool_Exp>;
-  profile_organizations?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-  profile_organizations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp>;
+  profile_organizations?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+  profile_organizations_aggregate?: InputMaybe<Users_Profile_Educational_Organizations_Aggregate_Bool_Exp>;
   profile_preferences?: InputMaybe<Users_Profile_Preferences_Bool_Exp>;
   profile_preferences_aggregate?: InputMaybe<Users_Profile_Preferences_Aggregate_Bool_Exp>;
   profile_user_group?: InputMaybe<Users_Profile_User_Groups_Bool_Exp>;
@@ -44524,14 +44413,12 @@ export enum Users_Profiles_Constraint {
 /** input type for inserting data into table "users.profiles" */
 export type Users_Profiles_Insert_Input = {
   alias?: InputMaybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: InputMaybe<Scalars['String']>;
   assignment_labels?: InputMaybe<App_Assignment_Labels_V2_Arr_Rel_Insert_Input>;
   assignments_v2?: InputMaybe<App_Assignments_V2_Arr_Rel_Insert_Input>;
   avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
   bookmark_searches?: InputMaybe<App_Search_Bookmarks_Arr_Rel_Insert_Input>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: InputMaybe<Scalars['String']>;
   collection_bookmarks?: InputMaybe<App_Collection_Bookmarks_Arr_Rel_Insert_Input>;
   collections?: InputMaybe<App_Collections_Arr_Rel_Insert_Input>;
@@ -44539,7 +44426,6 @@ export type Users_Profiles_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   email_preferences?: InputMaybe<Users_Email_Preferences_Arr_Rel_Insert_Input>;
   email_preferences_center_access_key?: InputMaybe<Scalars['uuid']>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: InputMaybe<Scalars['uuid']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
@@ -44551,7 +44437,7 @@ export type Users_Profiles_Insert_Input = {
   profile_classifications?: InputMaybe<Users_Profile_Classifications_Arr_Rel_Insert_Input>;
   profile_contexts?: InputMaybe<Users_Profile_Contexts_Arr_Rel_Insert_Input>;
   profile_flags?: InputMaybe<Users_Profile_Flags_Arr_Rel_Insert_Input>;
-  profile_organizations?: InputMaybe<Users_Profile_Organizations_Arr_Rel_Insert_Input>;
+  profile_organizations?: InputMaybe<Users_Profile_Educational_Organizations_Arr_Rel_Insert_Input>;
   profile_preferences?: InputMaybe<Users_Profile_Preferences_Arr_Rel_Insert_Input>;
   profile_user_group?: InputMaybe<Users_Profile_User_Groups_Obj_Rel_Insert_Input>;
   profile_user_groups?: InputMaybe<Users_Profile_User_Groups_Arr_Rel_Insert_Input>;
@@ -44762,16 +44648,13 @@ export type Users_Profiles_Lom_Links_Updates = {
 export type Users_Profiles_Max_Fields = {
   __typename?: 'users_profiles_max_fields';
   alias?: Maybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: Maybe<Scalars['String']>;
   company_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   email_preferences_center_access_key?: Maybe<Scalars['uuid']>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: Maybe<Scalars['uuid']>;
   stamboek?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -44782,16 +44665,13 @@ export type Users_Profiles_Max_Fields = {
 /** order by max() on columns of table "users.profiles" */
 export type Users_Profiles_Max_Order_By = {
   alias?: InputMaybe<Order_By>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: InputMaybe<Order_By>;
   avatar?: InputMaybe<Order_By>;
   bio?: InputMaybe<Order_By>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: InputMaybe<Order_By>;
   company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   email_preferences_center_access_key?: InputMaybe<Order_By>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: InputMaybe<Order_By>;
   stamboek?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -44803,16 +44683,13 @@ export type Users_Profiles_Max_Order_By = {
 export type Users_Profiles_Min_Fields = {
   __typename?: 'users_profiles_min_fields';
   alias?: Maybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: Maybe<Scalars['String']>;
   company_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   email_preferences_center_access_key?: Maybe<Scalars['uuid']>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: Maybe<Scalars['uuid']>;
   stamboek?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -44823,16 +44700,13 @@ export type Users_Profiles_Min_Fields = {
 /** order by min() on columns of table "users.profiles" */
 export type Users_Profiles_Min_Order_By = {
   alias?: InputMaybe<Order_By>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: InputMaybe<Order_By>;
   avatar?: InputMaybe<Order_By>;
   bio?: InputMaybe<Order_By>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: InputMaybe<Order_By>;
   company_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   email_preferences_center_access_key?: InputMaybe<Order_By>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: InputMaybe<Order_By>;
   stamboek?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -44890,7 +44764,7 @@ export type Users_Profiles_Order_By = {
   profile_classifications_aggregate?: InputMaybe<Users_Profile_Classifications_Aggregate_Order_By>;
   profile_contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Order_By>;
   profile_flags_aggregate?: InputMaybe<Users_Profile_Flags_Aggregate_Order_By>;
-  profile_organizations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Order_By>;
+  profile_organizations_aggregate?: InputMaybe<Users_Profile_Educational_Organizations_Aggregate_Order_By>;
   profile_preferences_aggregate?: InputMaybe<Users_Profile_Preferences_Aggregate_Order_By>;
   profile_user_group?: InputMaybe<Users_Profile_User_Groups_Order_By>;
   profile_user_groups_aggregate?: InputMaybe<Users_Profile_User_Groups_Aggregate_Order_By>;
@@ -44903,7 +44777,6 @@ export type Users_Profiles_Order_By = {
 
 /** primary key columns input for table: users.profiles */
 export type Users_Profiles_Pk_Columns_Input = {
-  /** Een gebruiker kan een of meer profielen hebben */
   id: Scalars['uuid'];
 };
 
@@ -44962,16 +44835,13 @@ export enum Users_Profiles_Select_Column_Users_Profiles_Aggregate_Bool_Exp_Bool_
 /** input type for updating data in table "users.profiles" */
 export type Users_Profiles_Set_Input = {
   alias?: InputMaybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: InputMaybe<Scalars['String']>;
   company_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   email_preferences_center_access_key?: InputMaybe<Scalars['uuid']>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: InputMaybe<Scalars['uuid']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
@@ -44993,16 +44863,13 @@ export type Users_Profiles_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Users_Profiles_Stream_Cursor_Value_Input = {
   alias?: InputMaybe<Scalars['String']>;
-  /** secundair e-mailadres voor communicatie */
   alternative_email?: InputMaybe<Scalars['String']>;
   avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
-  /** categorie gebruiker, in hoofdzaak voor uitzonderingen */
   business_category?: InputMaybe<Scalars['String']>;
   company_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   email_preferences_center_access_key?: InputMaybe<Scalars['uuid']>;
-  /** Een gebruiker kan een of meer profielen hebben */
   id?: InputMaybe<Scalars['uuid']>;
   is_deleted?: InputMaybe<Scalars['Boolean']>;
   is_exception?: InputMaybe<Scalars['Boolean']>;
@@ -45085,6 +44952,10 @@ export type Users_Summary_View = {
   contexts: Array<Users_Profile_Contexts>;
   /** An aggregate relationship */
   contexts_aggregate: Users_Profile_Contexts_Aggregate;
+  /** An array relationship */
+  educational_organizations: Array<Users_Profile_Educational_Organizations>;
+  /** An aggregate relationship */
+  educational_organizations_aggregate: Users_Profile_Educational_Organizations_Aggregate;
   first_name?: Maybe<Scalars['String']>;
   first_name_lower?: Maybe<Scalars['String']>;
   full_name?: Maybe<Scalars['String']>;
@@ -45105,10 +44976,8 @@ export type Users_Summary_View = {
   /** An aggregate relationship */
   loms_aggregate: Users_Profiles_Lom_Links_Aggregate;
   mail?: Maybe<Scalars['String']>;
-  /** An array relationship */
-  organisations: Array<Users_Profile_Organizations>;
-  /** An aggregate relationship */
-  organisations_aggregate: Users_Profile_Organizations_Aggregate;
+  /** An object relationship */
+  organization?: Maybe<Shared_Organisations>;
   pro_created_at?: Maybe<Scalars['timestamptz']>;
   pro_updated_at?: Maybe<Scalars['timestamptz']>;
   /** An object relationship */
@@ -45226,6 +45095,26 @@ export type Users_Summary_ViewContexts_AggregateArgs = {
 
 
 /** columns and relationships of "users.summary_view" */
+export type Users_Summary_ViewEducational_OrganizationsArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users.summary_view" */
+export type Users_Summary_ViewEducational_Organizations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Profile_Educational_Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Profile_Educational_Organizations_Order_By>>;
+  where?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users.summary_view" */
 export type Users_Summary_ViewIdpsArgs = {
   distinct_on?: InputMaybe<Array<Users_Idp_Map_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -45262,26 +45151,6 @@ export type Users_Summary_ViewLoms_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Users_Profiles_Lom_Links_Order_By>>;
   where?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
-};
-
-
-/** columns and relationships of "users.summary_view" */
-export type Users_Summary_ViewOrganisationsArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-};
-
-
-/** columns and relationships of "users.summary_view" */
-export type Users_Summary_ViewOrganisations_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Profile_Organizations_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Users_Profile_Organizations_Order_By>>;
-  where?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
 };
 
 /** aggregated selection of "users.summary_view" */
@@ -45342,6 +45211,8 @@ export type Users_Summary_View_Bool_Exp = {
   company_name?: InputMaybe<String_Comparison_Exp>;
   contexts?: InputMaybe<Users_Profile_Contexts_Bool_Exp>;
   contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Bool_Exp>;
+  educational_organizations?: InputMaybe<Users_Profile_Educational_Organizations_Bool_Exp>;
+  educational_organizations_aggregate?: InputMaybe<Users_Profile_Educational_Organizations_Aggregate_Bool_Exp>;
   first_name?: InputMaybe<String_Comparison_Exp>;
   first_name_lower?: InputMaybe<String_Comparison_Exp>;
   full_name?: InputMaybe<String_Comparison_Exp>;
@@ -45358,8 +45229,7 @@ export type Users_Summary_View_Bool_Exp = {
   loms?: InputMaybe<Users_Profiles_Lom_Links_Bool_Exp>;
   loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Bool_Exp>;
   mail?: InputMaybe<String_Comparison_Exp>;
-  organisations?: InputMaybe<Users_Profile_Organizations_Bool_Exp>;
-  organisations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Bool_Exp>;
+  organization?: InputMaybe<Shared_Organisations_Bool_Exp>;
   pro_created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   pro_updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   profile?: InputMaybe<Users_Profiles_Bool_Exp>;
@@ -45385,6 +45255,7 @@ export type Users_Summary_View_Insert_Input = {
   company_id?: InputMaybe<Scalars['String']>;
   company_name?: InputMaybe<Scalars['String']>;
   contexts?: InputMaybe<Users_Profile_Contexts_Arr_Rel_Insert_Input>;
+  educational_organizations?: InputMaybe<Users_Profile_Educational_Organizations_Arr_Rel_Insert_Input>;
   first_name?: InputMaybe<Scalars['String']>;
   first_name_lower?: InputMaybe<Scalars['String']>;
   full_name?: InputMaybe<Scalars['String']>;
@@ -45399,7 +45270,7 @@ export type Users_Summary_View_Insert_Input = {
   last_name_lower?: InputMaybe<Scalars['String']>;
   loms?: InputMaybe<Users_Profiles_Lom_Links_Arr_Rel_Insert_Input>;
   mail?: InputMaybe<Scalars['String']>;
-  organisations?: InputMaybe<Users_Profile_Organizations_Arr_Rel_Insert_Input>;
+  organization?: InputMaybe<Shared_Organisations_Obj_Rel_Insert_Input>;
   pro_created_at?: InputMaybe<Scalars['timestamptz']>;
   pro_updated_at?: InputMaybe<Scalars['timestamptz']>;
   profile?: InputMaybe<Users_Profiles_Obj_Rel_Insert_Input>;
@@ -45482,6 +45353,7 @@ export type Users_Summary_View_Order_By = {
   company_id?: InputMaybe<Order_By>;
   company_name?: InputMaybe<Order_By>;
   contexts_aggregate?: InputMaybe<Users_Profile_Contexts_Aggregate_Order_By>;
+  educational_organizations_aggregate?: InputMaybe<Users_Profile_Educational_Organizations_Aggregate_Order_By>;
   first_name?: InputMaybe<Order_By>;
   first_name_lower?: InputMaybe<Order_By>;
   full_name?: InputMaybe<Order_By>;
@@ -45496,7 +45368,7 @@ export type Users_Summary_View_Order_By = {
   last_name_lower?: InputMaybe<Order_By>;
   loms_aggregate?: InputMaybe<Users_Profiles_Lom_Links_Aggregate_Order_By>;
   mail?: InputMaybe<Order_By>;
-  organisations_aggregate?: InputMaybe<Users_Profile_Organizations_Aggregate_Order_By>;
+  organization?: InputMaybe<Shared_Organisations_Order_By>;
   pro_created_at?: InputMaybe<Order_By>;
   pro_updated_at?: InputMaybe<Order_By>;
   profile?: InputMaybe<Users_Profiles_Order_By>;
@@ -46557,7 +46429,7 @@ export type GetUserByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_organizations: Array<{ __typename?: 'users_profile_organizations', unit_id?: string | null, organization_id: string, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, organisation?: { __typename?: 'shared_organisations', logo_url?: string | null, name: string, or_id: string } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_permissions: Array<{ __typename?: 'users_group_permissions', permission: { __typename?: 'users_permissions', id: number, label: string } }> } } | null } | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
+export type GetUserByIdQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', profile_id?: any | null, user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, business_category?: string | null, last_access_at?: any | null, mail?: string | null, is_blocked?: boolean | null, is_deleted?: boolean | null, is_exception?: boolean | null, stamboek?: string | null, acc_updated_at?: any | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, company_id?: string | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, profile?: { __typename?: 'users_profiles', avatar?: string | null, alias?: string | null, title?: string | null, business_category?: string | null, updated_at: any, created_at: any, bio?: string | null, alternative_email?: string | null, user_id?: any | null, usersByuserId?: { __typename?: 'shared_users', full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null } | null, profile_user_group?: { __typename?: 'users_profile_user_groups', group: { __typename?: 'users_groups', created_at: any, description?: string | null, id: number, label: string, ldap_role?: string | null, updated_at: any, group_permissions: Array<{ __typename?: 'users_group_permissions', permission: { __typename?: 'users_permissions', id: number, label: string } }> } } | null } | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, organization?: { __typename?: 'shared_organisations', or_id: string, name: string, logo_url?: string | null } | null, educational_organizations: Array<{ __typename?: 'users_profile_educational_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', from?: any | null, until: any, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }> };
 
 export type GetUsersQueryVariables = Exact<{
   offset: Scalars['Int'];
@@ -46567,7 +46439,7 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, organisations: Array<{ __typename?: 'users_profile_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', organization_id: string, ldap_content: any } | null }>, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
+export type GetUsersQuery = { __typename?: 'query_root', users_summary_view: Array<{ __typename?: 'users_summary_view', user_id?: any | null, full_name?: string | null, first_name?: string | null, last_name?: string | null, mail?: string | null, last_access_at?: any | null, is_blocked?: boolean | null, profile_id?: any | null, stamboek?: string | null, acc_created_at?: any | null, group_id?: number | null, group_name?: string | null, company_name?: string | null, is_exception?: boolean | null, business_category?: string | null, blocked_at?: { __typename?: 'shared_user_last_blocked', date?: any | null } | null, unblocked_at?: { __typename?: 'shared_user_last_unblocked', date?: any | null } | null, idps: Array<{ __typename?: 'users_idp_map', id: number, idp: Users_Idps_Enum, idp_user_id: string }>, educational_organizations: Array<{ __typename?: 'users_profile_educational_organizations', organization_id: string, unit_id?: string | null, organization?: { __typename?: 'shared_ldap_organizations', ldap_description?: string | null } | null }>, organization?: { __typename?: 'shared_organisations', or_id: string, name: string } | null, loms: Array<{ __typename?: 'users_profiles_lom_links', lom?: { __typename?: 'lookup_thesaurus', id?: string | null, label?: string | null, scheme?: string | null, broader?: string | null } | null }>, user?: { __typename?: 'shared_users', temp_access?: { __typename?: 'shared_user_temp_access', until: any, from?: any | null, current?: { __typename?: 'shared_user_temp_access_status', status?: number | null } | null } | null } | null }>, users_summary_view_aggregate: { __typename?: 'users_summary_view_aggregate', aggregate?: { __typename?: 'users_summary_view_aggregate_fields', count: number } | null } };
 
 
 export const GetPublicAssignmentsByTitleOrIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPublicAssignmentsByTitleOrId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_assignments_v2"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_ilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<GetPublicAssignmentsByTitleOrIdQuery, GetPublicAssignmentsByTitleOrIdQueryVariables>;
@@ -46643,5 +46515,5 @@ export const GetDistinctBusinessCategoriesDocument = {"kind":"Document","definit
 export const GetIdpsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getIdps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetIdpsQuery, GetIdpsQueryVariables>;
 export const GetProfileIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetProfileIdsQuery, GetProfileIdsQueryVariables>;
 export const GetProfileNamesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProfileNames"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetProfileNamesQuery, GetProfileNamesQueryVariables>;
-export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logo_url"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"or_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organisations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_content"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+export const GetUserByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"IntValue","value":"0"}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"is_deleted"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"alias"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"alternative_email"}},{"kind":"Field","name":{"kind":"Name","value":"usersByuserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_user_group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"ldap_role"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_id"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"or_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo_url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"educational_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserByIdQuery, GetUserByIdQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_order_by"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_summary_view_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_summary_view"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"last_access_at"}},{"kind":"Field","name":{"kind":"Name","value":"is_blocked"}},{"kind":"Field","name":{"kind":"Name","value":"blocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"unblocked_at"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"date"},"name":{"kind":"Name","value":"max"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"stamboek"}},{"kind":"Field","name":{"kind":"Name","value":"acc_created_at"}},{"kind":"Field","name":{"kind":"Name","value":"group_id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"company_name"}},{"kind":"Field","name":{"kind":"Name","value":"is_exception"}},{"kind":"Field","name":{"kind":"Name","value":"business_category"}},{"kind":"Field","name":{"kind":"Name","value":"idps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"idp"}},{"kind":"Field","name":{"kind":"Name","value":"idp_user_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"educational_organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"organization_id"}},{"kind":"Field","name":{"kind":"Name","value":"unit_id"}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ldap_description"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"organization"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"or_id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"loms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"scheme"}},{"kind":"Field","name":{"kind":"Name","value":"broader"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"temp_access"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"until"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"current"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"users_summary_view_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
