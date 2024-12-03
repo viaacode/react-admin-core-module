@@ -153,7 +153,13 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	const formatDateString = (dateString: string, page: ContentPageInfo): string => {
 		return dateString
 			.replace('%label%', renderLabels(page))
-			.replace('%date%', format(parseISO(page.createdAt), 'd MMMM yyyy'));
+			.replace(
+				'%date%',
+				format(
+					parseISO(page.publishedAt || page.publishAt || page.createdAt),
+					'd MMMM yyyy'
+				)
+			);
 	};
 
 	const getDescription = (page: ContentPageInfo) => {

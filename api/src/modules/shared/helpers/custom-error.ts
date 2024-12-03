@@ -7,7 +7,7 @@ export function customError(
 	innerException?: any,
 	additionalInfo?: Record<string, unknown>
 ) {
-	const stack = innerException.stack || new Error().stack || '';
+	const stack = innerException?.stack || new Error().stack || '';
 
 	const singleLineLogging = process.env.SINGLE_LINE_LOGGING === 'true';
 	const json = util.inspect(
