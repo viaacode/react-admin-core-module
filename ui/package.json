@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.3.5",
+  "version": "4.3.6",
   "private": false,
   "exports": {
     "./dist/admin.mjs": {
