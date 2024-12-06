@@ -108,9 +108,9 @@ export type GqlContentBlockHetArchief =
 	GetContentPageByPathQueryHetArchief['app_content_page'][0]['content_blocks'][0];
 export type GqlContentBlock = GqlContentBlockAvo | GqlContentBlockHetArchief;
 
-export type GqlInsertOrUpdateContentBlock =
+export type GqlInsertOrUpdateContentPage =
 	| ContentPageQueryTypes['InsertContentMutationVariables']['contentPage']
-	| ContentPageQueryTypes['UpdateContentByIdMutationVariables']['contentPage'];
+	| ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutationVariables']['contentPage'];
 
 export type GqlAvoUser =
 	| GetContentPageByPathQueryAvo['app_content'][0]['profile']

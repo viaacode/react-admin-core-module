@@ -2,7 +2,7 @@ import type { IconName, TabProps } from '@viaa/avo2-components';
 import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { cloneDeep, isNil, isString, without } from 'lodash-es';
+import { cloneDeep, isNil, isString } from 'lodash-es';
 import type { FC, Reducer } from 'react';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -508,26 +508,6 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					}
 				);
 			}
-
-			// Save content labels
-			const initialLabelIds = (contentPageState.initialContentPageInfo.labels || []).map(
-				(label: any) => label.id as number
-			);
-			const labelIds = (contentPageState.currentContentPageInfo.labels || []).map(
-				(label: any) => label.id as number
-			);
-			const addedLabelIds = without(labelIds, ...initialLabelIds);
-			const removedLabelIds = without(initialLabelIds, ...labelIds);
-			await Promise.all([
-				ContentPageService.insertContentLabelsLinks(
-					insertedOrUpdatedContent.id,
-					addedLabelIds
-				),
-				ContentPageService.deleteContentLabelsLinks(
-					insertedOrUpdatedContent.id,
-					removedLabelIds
-				),
-			]);
 
 			AdminConfigManager.getConfig()?.contentPage?.onSaveContentPage(
 				insertedOrUpdatedContent as ContentPageInfo

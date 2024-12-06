@@ -28,9 +28,11 @@ import { RequireAnyPermissions } from '../../shared/decorators/require-any-permi
 import { SessionUser } from '../../shared/decorators/user.decorator';
 import { ApiKeyGuard } from '../../shared/guards/api-key.guard';
 import { addPrefix } from '../../shared/helpers/add-route-prefix';
+import { CustomError } from '../../shared/helpers/error';
 import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import { Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
+import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
 import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
@@ -313,8 +315,7 @@ export class ContentPagesController {
 		PermissionName.EDIT_OWN_CONTENT_PAGES
 	)
 	public async insertContentPage(
-		@Body()
-		contentPage: DbContentPage,
+		@Body() contentPage: DbContentPage,
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage | null> {
 		if (
@@ -374,25 +375,22 @@ export class ContentPagesController {
 	/**
 	 * This function will accept an id of an existing content page
 	 * fetch the content page
-	 * duplicate all of the assets
-	 * and return the resulting content page json
-	 *
-	 * It doesn't save the content page in the database
+	 * duplicate the content page including all its assets
+	 * and return the resulting content page
 	 * @param id
+	 * @param overrideValues
 	 * @param user
 	 */
-	@Post('/duplicate/:id')
+	@Post('/:id/duplicate')
 	@RequireAnyPermissions(
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
 		PermissionName.EDIT_OWN_CONTENT_PAGES
 	)
-	// TODO: move the duplicate logic from the client to this route, so we don't have the duplicate logic partly in the client and partly in the proxy.
 	async duplicateContentPageImages(
 		@Param('id') id: string,
+		@Body() overrideValues: Partial<DbContentPage>,
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage> {
-		console.log('duplicating content page for user profile: ' + user.getProfileId());
-		const contentPageJson: string | null = null;
 		try {
 			const dbContentPage: DbContentPage | null =
 				await this.contentPagesService.getContentPageById(id);
@@ -406,20 +404,61 @@ export class ContentPagesController {
 				});
 			}
 
-			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
-			return await this.assetsService.duplicateAssetsInJsonBlob(
+			let contentToInsert = await this.assetsService.duplicateAssetsInJsonBlob(
 				dbContentPage,
 				user.getProfileId(),
 				AssetType.CONTENT_PAGE_IMAGE
 			);
+
+			contentToInsert = {
+				...contentToInsert,
+				...overrideValues,
+			};
+
+			// update attributes specific to duplicate
+			contentToInsert.isPublic = false;
+			contentToInsert.publishedAt = null;
+			contentToInsert.depublishAt = null;
+			contentToInsert.publishAt = null;
+			contentToInsert.path = null;
+			contentToInsert.createdAt = new Date().toISOString();
+			contentToInsert.updatedAt = contentToInsert.createdAt;
+			contentToInsert.userProfileId = user.getProfileId();
+
+			try {
+				contentToInsert.title = await this.contentPagesService.getCopyTitleForContentPage(
+					CONTENT_PAGE_COPY,
+					CONTENT_PAGE_COPY_REGEX,
+					contentToInsert.title
+				);
+			} catch (err) {
+				const customError = new CustomError(
+					'Failed to retrieve title for duplicate content page',
+					err,
+					{
+						contentToInsert,
+					}
+				);
+
+				console.error(customError);
+
+				// fallback to simple copy title
+				contentToInsert.title = `${CONTENT_PAGE_COPY.replace(' %index%', '')}${
+					contentToInsert.title
+				}`;
+			}
+
+			// insert duplicated collection
+			return await this.contentPagesService.insertContentPage(contentToInsert);
 		} catch (err) {
 			logAndThrow(
 				new InternalServerErrorException({
-					message: 'Failed to duplicate assets of content page',
+					message: 'Failed to duplicate content page',
 					innerException: err,
 					additionalInfo: {
 						id,
-						contentPageJson,
+						overrideValues,
+						profileId: user?.getProfileId(),
 					},
 				})
 			);

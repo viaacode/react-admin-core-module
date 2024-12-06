@@ -11,17 +11,7 @@ import { Pagination } from '@studiohyperdrive/pagination';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
-import {
-	compact,
-	escapeRegExp,
-	fromPairs,
-	has,
-	intersection,
-	keys,
-	set,
-	uniq,
-	without,
-} from 'lodash';
+import { compact, escapeRegExp, fromPairs, intersection, keys, set, uniq, without } from 'lodash';
 
 import { AssetsService } from '../../assets';
 import { DataService } from '../../data';
@@ -42,7 +32,10 @@ import {
 	type Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
 } from '../../shared/generated/graphql-db-types-avo';
-import { type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief } from '../../shared/generated/graphql-db-types-hetarchief';
+import {
+	App_Content_Block_Insert_Input,
+	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
+} from '../../shared/generated/graphql-db-types-hetarchief';
 import { customError } from '../../shared/helpers/custom-error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
 import { getDatabaseType } from '../../shared/helpers/get-database-type';
@@ -66,7 +59,7 @@ import {
 	type GqlContentBlock,
 	type GqlContentPage,
 	type GqlHetArchiefUser,
-	type GqlInsertOrUpdateContentBlock,
+	type GqlInsertOrUpdateContentPage,
 	type GqlUser,
 	type MediaItemResponse,
 } from '../content-pages.types';
@@ -107,6 +100,8 @@ export class ContentPagesService {
 				),
 			},
 			components: contentBlock?.variables?.componentState,
+			createdAt: contentBlock?.created_at,
+			updatedAt: contentBlock?.updated_at,
 		};
 	}
 
@@ -203,7 +198,7 @@ export class ContentPagesService {
 
 	private convertToDatabaseContentPage(
 		contentPageInfo: Partial<DbContentPage>
-	): GqlInsertOrUpdateContentBlock {
+	): GqlInsertOrUpdateContentPage {
 		return {
 			id: contentPageInfo.id,
 			thumbnail_path: contentPageInfo.thumbnailPath || null,
@@ -995,33 +990,60 @@ export class ContentPagesService {
 	public async updateContentPage(contentPage: DbContentPage): Promise<DbContentPage | null> {
 		try {
 			const dbContentPage = this.convertToDatabaseContentPage(contentPage);
+			const contentBlocks:
+				| App_Content_Blocks_Insert_Input[]
+				| App_Content_Block_Insert_Input[] = contentPage.content_blocks.map(
+				(contentBlock) => {
+					return {
+						id: contentBlock.id,
+						content_id: contentPage.id as
+							| App_Content_Blocks_Insert_Input['content_id']
+							| App_Content_Block_Insert_Input['content_id'],
+						content_block_type:
+							contentBlock.type as unknown as Lookup_Enum_Content_Block_Types_Enum,
+						position: contentBlock.position,
+						created_at: contentBlock.createdAt || new Date().toISOString(),
+						updated_at: new Date().toISOString(),
+						variables: {
+							blockState: contentBlock.block,
+							componentState: contentBlock.components,
+						},
+					};
+				}
+			);
+			const contentPageLabelLinks = contentPage.labels.map((label) => {
+				return {
+					content_id: contentPage.id,
+					label_id: label.id,
+				};
+			});
 			const initialContentPage: DbContentPage = await this.getContentPageById(
 				String(contentPage.id)
 			);
 			const response = await this.dataService.execute<
-				ContentPageQueryTypes['UpdateContentByIdMutation'],
-				ContentPageQueryTypes['UpdateContentByIdMutationVariables']
-			>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentByIdDocument, {
-				contentPage: dbContentPage,
-				id: contentPage.id,
-			});
+				ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutation'],
+				ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutationVariables']
+			>(
+				CONTENT_PAGE_QUERIES[getDatabaseType()]
+					.UpdateContentPageWithBlocksAndLabelsDocument,
+				{
+					id: contentPage.id,
+					contentPage: dbContentPage,
+					contentBlocks: contentBlocks as any[], // Mismatch between block types for avo and hetarchief
+					contentLabelLinks: contentPageLabelLinks,
+				}
+			);
 
 			const updatedContent =
-				(response as ContentPageQueryTypes['UpdateContentByIdMutationAvo'])
-					.update_app_content?.affected_rows ||
-				(response as ContentPageQueryTypes['UpdateContentByIdMutationHetArchief'])
-					.update_app_content_page?.affected_rows ||
+				(
+					response as ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutationAvo']
+				).update_app_content?.affected_rows ||
+				(
+					response as ContentPageQueryTypes['UpdateContentPageWithBlocksAndLabelsMutationHetArchief']
+				).update_app_content_page?.affected_rows ||
 				null;
 			if (!updatedContent) {
 				throw customError('Content page update returned empty response', null, response);
-			}
-
-			if (contentPage.content_blocks && initialContentPage) {
-				await this.updateContentBlocks(
-					contentPage.id as number,
-					initialContentPage.content_blocks || [],
-					contentPage.content_blocks
-				);
 			}
 
 			// Delete images from s3 that are present in the initialContentPage and no longer present in the updated contentPage
@@ -1175,79 +1197,6 @@ export class ContentPagesService {
 	}
 
 	/**
-	 * Update content blocks.
-	 *
-	 * @param contentId content page identifier
-	 * @param initialContentBlocks initial state of content blocks
-	 * @param contentBlockConfigs configs of content blocks to update
-	 */
-	public async updateContentBlocks(
-		contentId: number,
-		initialContentBlocks: DbContentBlock[],
-		contentBlockConfigs: DbContentBlock[]
-	) {
-		try {
-			const initialContentBlockIds: number[] = compact(
-				initialContentBlocks.map((contentBlock) => contentBlock.id)
-			);
-			const currentContentBlockIds = contentBlockConfigs
-				.filter((block) => has(block, 'id'))
-				.map((block) => block.id);
-
-			// Inserted content-blocks
-			const insertPromises: Promise<any>[] = [];
-			const insertedConfigs: DbContentBlock[] = contentBlockConfigs.filter(
-				(config) => !has(config, 'id')
-			);
-
-			if (insertedConfigs.length) {
-				insertPromises.push(this.insertContentBlocks(contentId, insertedConfigs));
-			}
-
-			// Updated content-blocks
-			const updatePromises: Promise<any>[] = [];
-			const updatedConfigs = contentBlockConfigs.filter(
-				(config) =>
-					has(config, 'id') && initialContentBlockIds.includes(config.id as number)
-			);
-
-			updatedConfigs.forEach((config: DbContentBlock) => {
-				return updatePromises.push(
-					this.updateContentBlock({
-						content_block_type: config.type as any,
-						id: config.id,
-						position: config.position,
-						variables: {
-							blockState: config.block,
-							componentState: config.components,
-						},
-						updated_at: new Date().toISOString(),
-					})
-				);
-			});
-
-			// Deleted content-blocks
-			const deletePromises: Promise<any>[] = [];
-			const deletedIds = without(initialContentBlockIds, ...currentContentBlockIds);
-
-			deletedIds.forEach((id) => deletePromises.push(this.deleteContentBlock(id)));
-
-			// Run requests in parallel
-			await Promise.all([
-				Promise.all(insertPromises),
-				Promise.all(updatePromises),
-				Promise.all(deletePromises),
-			]);
-		} catch (err: any) {
-			throw customError('Failed to update content blocks', err, {
-				contentId,
-				initialContentBlocks,
-				contentBlockConfigs,
-			});
-		}
-	}
-
-	/**
 	 * Returns the user group ids that have access to this content page
 	 * @param path
 	 */
@@ -1283,4 +1232,38 @@ export class ContentPagesService {
 		);
 		return jsonString.match(assetUrlsRegex) || [];
 	}
+
+	/**
+	 * Find name that isn't a duplicate of an existing name of a content page of this user
+	 * eg: if these content pages exist:
+	 * copy 1: test
+	 * copy 2: test
+	 * copy 4: test
+	 *
+	 * Then the algorithm will propose: copy 3: test
+	 * @param copyPrefix
+	 * @param copyRegex
+	 * @param existingTitle
+	 *
+	 * @returns Potential title for duplicate content page.
+	 */
+	public getCopyTitleForContentPage = async (
+		copyPrefix: string,
+		copyRegex: RegExp,
+		existingTitle: string
+	): Promise<string> => {
+		const titleWithoutCopy = existingTitle.replace(copyRegex, '');
+		const contentPages = await this.getPublicContentItemsByTitle(`%${titleWithoutCopy}`);
+		const titles = (contentPages || []).map((contentPage) => contentPage.title);
+
+		let index = 0;
+		let candidateTitle: string;
+
+		do {
+			index += 1;
+			candidateTitle = copyPrefix.replace('%index%', String(index)) + titleWithoutCopy;
+		} while (titles.includes(candidateTitle));
+
+		return candidateTitle;
+	};
 }
