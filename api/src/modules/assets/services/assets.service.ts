@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 import {
 	forwardRef,
 	Inject,
@@ -9,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { AssetType } from '@viaa/avo2-types';
-import AWS, { AWSError, S3 } from 'aws-sdk';
 import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { ExtendOptions, Got } from 'got';
@@ -108,11 +108,17 @@ export class AssetsService {
 						resolveBodyOnly: true, // this is duplicate but fixes a typing error
 					});
 
-					this.s3 = new AWS.S3({
-						accessKeyId: this.token.token,
-						secretAccessKey: this.token.secret,
+					this.s3 = new S3({
+						credentials: {
+							accessKeyId: this.token.token,
+							secretAccessKey: this.token.secret,
+						},
+
 						endpoint: `${process.env.ASSET_SERVER_ENDPOINT}/${process.env.ASSET_SERVER_BUCKET_NAME}`,
-						s3BucketEndpoint: true,
+
+						// The key s3BucketEndpoint is renamed to bucketEndpoint.
+						bucketEndpoint: true,
+						region: 'eu-west-1',
 					});
 				} catch (err) {
 					console.error('asset service token response error: ' + JSON.stringify(err));
@@ -136,44 +142,35 @@ export class AssetsService {
 	/**
 	 * Checks if the specified file exists on the s3 bucket
 	 */
-	public metadata(key: string): Promise<S3.Types.HeadObjectOutput | null> {
-		// eslint-disable-next-line no-async-promise-executor
-		return new Promise<S3.Types.HeadObjectOutput | null>(async (resolve, reject) => {
-			try {
-				const s3Client: S3 = await this.getS3Client();
-				s3Client.headObject(
-					{
-						Key: key,
-						Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
-					},
-					(err: AWSError, metadata: S3.Types.HeadObjectOutput) => {
-						if (err && ['NotFound', 'Forbidden'].includes(err.code)) {
-							return resolve(null);
-						} else if (err) {
-							const error = new InternalServerErrorException({
-								message: 'Failed to get metadata of object on the asset service',
-								innerException: err,
-								additionalInfo: { s3Key: key },
-							});
-							console.error(error);
-							reject(error);
-						} else {
-							resolve(metadata);
-						}
-					}
-				);
-			} catch (err) {
+	public async metadata(key: string): Promise<HeadObjectCommandOutput | null> {
+		try {
+			const s3Client: S3 = await this.getS3Client();
+			return await s3Client.headObject({
+				Key: key,
+				Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
+			});
+		} catch (err: any) {
+			if (err && ['NotFound', 'Forbidden'].includes(err.name)) {
+				return null;
+			} else if (err) {
 				const error = new InternalServerErrorException({
 					message: 'Failed to get metadata of object on the asset service',
 					innerException: err,
-					additionalInfo: {
-						key,
-					},
+					additionalInfo: { s3Key: key },
 				});
 				console.error(error);
-				reject(error);
+				throw error;
 			}
-		});
+			const error = new InternalServerErrorException({
+				message: 'Failed to get metadata of object on the asset service',
+				innerException: err,
+				additionalInfo: {
+					key,
+				},
+			});
+			console.error(error);
+			throw error;
+		}
 	}
 
 	public async uploadAndTrack(
@@ -206,49 +203,25 @@ export class AssetsService {
 	}
 
 	public async uploadToObjectStore(key: string, file: any): Promise<string> {
-		const s3Client = await this.getS3Client();
+		try {
+			const s3Client = await this.getS3Client();
 
-		let fileBody: Buffer;
-		if (file.buffer) {
-			fileBody = file.buffer;
-		} else {
-			fileBody = await fse.readFile(file.path);
-		}
-
-		// eslint-disable-next-line no-async-promise-executor
-		return new Promise<string>(async (resolve, reject) => {
-			try {
-				s3Client.putObject(
-					{
-						Key: key,
-						Body: fileBody,
-						ACL: 'public-read',
-						ContentType: file.mimetype,
-						Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
-					},
-					(err: AWSError) => {
-						if (err) {
-							const error = new InternalServerErrorException({
-								message: 'Failed to upload asset to the s3 asset service',
-								error: err,
-							});
-							this.logger.error(error);
-							reject(error);
-						} else {
-							const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
-							url.pathname = `${process.env.ASSET_SERVER_BUCKET_NAME}/${key}`;
-							resolve(url.href);
-						}
-					}
-				);
-			} catch (err) {
-				const error = new InternalServerErrorException({
-					message: 'Failed to upload asset to the s3 asset service',
-					error: err,
-				});
-				this.logger.error(error);
-				reject(error);
+			let fileBody: Buffer;
+			if (file.buffer) {
+				fileBody = file.buffer;
+			} else {
+				fileBody = await fse.readFile(file.path);
 			}
+			await s3Client.putObject({
+				Key: key,
+				Body: fileBody,
+				ACL: 'public-read',
+				ContentType: file.mimetype,
+				Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
+			});
+			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
+			url.pathname = `${process.env.ASSET_SERVER_BUCKET_NAME}/${key}`;
+
 			if (!file.buffer) {
 				fse.unlink(file.path)?.catch((err) =>
 					this.logger.error({
@@ -257,7 +230,16 @@ export class AssetsService {
 					})
 				);
 			}
-		});
+
+			return url.href;
+		} catch (err) {
+			const error = new InternalServerErrorException({
+				message: 'Failed to upload asset to the s3 asset service',
+				error: err,
+			});
+			this.logger.error(error);
+			throw error;
+		}
 	}
 
 	/**
@@ -286,38 +268,22 @@ export class AssetsService {
 		}/${key}`;
 	}
 
-	public async delete(url: string) {
-		const s3Client: S3 = await this.getS3Client();
-		return new Promise<boolean>((resolve, reject) => {
-			try {
-				s3Client.deleteObject(
-					{
-						Key: url.split(`/${process.env.ASSET_SERVER_BUCKET_NAME}/`).pop(),
-						Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
-					},
-					(err: AWSError) => {
-						if (err) {
-							const error = new InternalServerErrorException({
-								message: 'Failed to delete asset from S3',
-								error: err,
-								url,
-							});
-							this.logger.error(error);
-							reject(error);
-						} else {
-							resolve(true);
-						}
-					}
-				);
-			} catch (err) {
-				const error = new InternalServerErrorException({
-					message: 'Failed to delete asset from S3',
-					error: err,
-				});
-				this.logger.error(error);
-				reject(error);
-			}
-		});
+	public async delete(url: string): Promise<boolean> {
+		try {
+			const s3Client: S3 = await this.getS3Client();
+			await s3Client.deleteObject({
+				Key: url.split(`/${process.env.ASSET_SERVER_BUCKET_NAME}/`).pop(),
+				Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
+			});
+			return true;
+		} catch (err) {
+			const error = new InternalServerErrorException({
+				message: 'Failed to delete asset from S3',
+				error: err,
+			});
+			this.logger.error(error);
+			throw error;
+		}
 	}
 
 	public async copyAndTrack(
@@ -336,98 +302,60 @@ export class AssetsService {
 	 * @param url url of the file you want to make a copy of. This can be an url on a different asset server than the one from the current environment
 	 * @param copyKey the name of the copied file, if not passed, an uuid will be appended to the original file name
 	 */
-	private copy(url: string, copyKey?: string | undefined): Promise<string> {
-		// eslint-disable-next-line no-async-promise-executor
-		return new Promise<string>(async (resolve, reject) => {
-			const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
-			let newKey: string | null = null;
-			let key: string | null = null;
-			try {
-				const s3Client: S3 = await this.getS3Client();
-				key = this.getKeyFromUrl(url);
-				if (!key) {
-					throw new InternalServerErrorException({
-						message:
-							'Failed to copy file at url, because we failed to extract the file path from the url after the bucket location',
-						innerException: null,
-						additionalInfo: { bucketName: bucket, url },
-					});
-				}
-				const newId = uuidv4();
-				const parts = path.parse(key);
-				newKey =
-					copyKey ||
-					parts.dir +
-						'/' +
-						parts.name.substring(0, parts.name.length - UUID_LENGTH) +
-						newId +
-						parts.ext;
-
-				if (url.includes(process.env.ASSET_SERVER_ENDPOINT)) {
-					// Asset is located on the same asset server as the current environment (eg: copy content block from QAS content page to content page on QAS)
-					// Use the s3 copy object since it is more efficient
-					s3Client.copyObject(
-						{
-							Key: newKey,
-							Bucket: bucket,
-							CopySource: `${bucket}/${key}`,
-						},
-						(err: AWSError) => {
-							if (err) {
-								const error = new InternalServerErrorException({
-									message: 'Failed to copy asset from the s3 asset service',
-									innerException: err,
-									additionalInfo: {
-										url,
-										newKey,
-										bucket,
-										copySource: `${bucket}/${key}`,
-									},
-								});
-								console.error(error);
-								reject(error);
-							} else {
-								resolve(this.getUrlFromKey(newKey as string));
-							}
-						}
-					);
-				} else {
-					// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
-					// Download the asset and upload it again to the asset service of this environment
-					const response = await got.get(url).buffer();
-					s3Client.putObject({ Key: newKey, Bucket: bucket, Body: response }, (err) => {
-						if (err) {
-							const error = new InternalServerErrorException({
-								message: 'Failed to upload asset to the s3 asset service',
-								innerException: err,
-								additionalInfo: {
-									url,
-									newKey,
-									bucket,
-								},
-							});
-							console.error(error);
-							reject(error);
-						} else {
-							resolve(this.getUrlFromKey(newKey as string));
-						}
-					});
-				}
-			} catch (err) {
-				const error = {
-					message: 'Failed to copy file on s3',
-					innerException: err,
-					additionalInfo: {
-						url,
-						key: newKey,
-						bucket,
-						copySource: `${bucket}/${key}`,
-					},
-				};
-				console.error(JSON.stringify(error));
-				reject(new InternalServerErrorException(error));
+	private async copy(url: string, copyKey?: string | undefined): Promise<string> {
+		const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
+		let newKey: string | null = null;
+		let key: string | null = null;
+		try {
+			const s3Client: S3 = await this.getS3Client();
+			key = this.getKeyFromUrl(url);
+			if (!key) {
+				throw new InternalServerErrorException({
+					message:
+						'Failed to copy file at url, because we failed to extract the file path from the url after the bucket location',
+					innerException: null,
+					additionalInfo: { bucketName: bucket, url },
+				});
 			}
-		});
+			const newId = uuidv4();
+			const parts = path.parse(key);
+			newKey =
+				copyKey ||
+				parts.dir +
+					'/' +
+					parts.name.substring(0, parts.name.length - UUID_LENGTH) +
+					newId +
+					parts.ext;
+
+			if (url.includes(process.env.ASSET_SERVER_ENDPOINT)) {
+				// Asset is located on the same asset server as the current environment (eg: copy content block from QAS content page to content page on QAS)
+				// Use the s3 copy object since it is more efficient
+				await s3Client.copyObject({
+					Key: newKey,
+					Bucket: bucket,
+					CopySource: `${bucket}/${key}`,
+				});
+			} else {
+				// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
+				// Download the asset and upload it again to the asset service of this environment
+				const response = await got.get(url).buffer();
+				await s3Client.putObject({ Key: newKey, Bucket: bucket, Body: response });
+			}
+			return this.getUrlFromKey(newKey as string);
+		} catch (err) {
+			const error = {
+				message: 'Failed to copy file on s3',
+				innerException: err,
+				additionalInfo: {
+					url,
+					key: newKey,
+					bucket,
+					copySource: `${bucket}/${key}`,
+				},
+			};
+			console.error(JSON.stringify(error));
+			throw new InternalServerErrorException(error);
+		}
 	}
 
 	public async duplicateAssetsInJsonBlob(
