@@ -66,11 +66,6 @@ query getUserById($id: uuid!) {
 		unblocked_at {
 			date: max
 		}
-		organization {
-			or_id
-			name
-			logo_url
-		}
 		educational_organizations {
 			organization_id
 			unit_id
