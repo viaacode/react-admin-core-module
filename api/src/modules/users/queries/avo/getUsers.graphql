@@ -38,10 +38,6 @@ query getUsers(
 				ldap_description
 			}
 		}
-		organization {
-			or_id
-			name
-		}
 		loms {
 			lom {
 				id
