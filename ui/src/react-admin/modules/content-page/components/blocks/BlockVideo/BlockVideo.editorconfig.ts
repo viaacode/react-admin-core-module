@@ -74,13 +74,15 @@ export const MEDIA_PLAYER_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 				} as CheckboxProps,
 			},
 			annotationTitle: {
-				label: tText('admin/content-block/helpers/generators/image___bijschift-titel'),
+				label: tText(
+					'modules/content-page/components/blocks/block-video/block-video___bijschift-titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			annotationText: {
 				label: tText(
-					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
+					'modules/content-page/components/blocks/block-video/block-video___bijschrift-beschrijving'
 				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
