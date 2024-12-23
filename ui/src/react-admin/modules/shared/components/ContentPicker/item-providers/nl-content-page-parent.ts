@@ -4,6 +4,8 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import memoize from 'memoizee';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
 
 /**
  * All content pages can be translated into multiple languages
@@ -12,23 +14,27 @@ import type { ContentPageInfo } from '~modules/content-page/types/content-pages.
  * @param title
  * @param limit
  */
-export const retrieveNlParentContentPages = async (
-	title: string | null,
-	limit = 5
-): Promise<PickerItem[]> => {
-	try {
-		const contentItems: ContentPageInfo[] | null = title
-			? await ContentPageService.getNlParentContentPagesByTitle(`%${title}%`, limit)
-			: await ContentPageService.getNlParentContentPagesByTitle(undefined, limit);
+export const retrieveNlParentContentPages = memoize(
+	async (title: string | null, limit = 5): Promise<PickerItem[]> => {
+		try {
+			const contentItems: ContentPageInfo[] | null = title
+				? await ContentPageService.getNlParentContentPagesByTitle(`%${title}%`, limit)
+				: await ContentPageService.getNlParentContentPagesByTitle(undefined, limit);
 
-		return parseContentPages(contentItems || []);
-	} catch (err) {
-		throw new CustomError('Failed to fetch nl parent content pages for content picker', err, {
-			title,
-			limit,
-		});
-	}
-};
+			return parseContentPages(contentItems || []);
+		} catch (err) {
+			throw new CustomError(
+				'Failed to fetch nl parent content pages for content picker',
+				err,
+				{
+					title,
+					limit,
+				}
+			);
+		}
+	},
+	MEMOIZEE_OPTIONS
+);
 
 // Parse raw content items to react-select options
 const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {

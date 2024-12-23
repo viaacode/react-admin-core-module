@@ -17,7 +17,10 @@ import { MaintainerSelect } from '~shared/components/MaintainerSelect/Maintainer
 import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { AlignSelect, ColorSelect, PaddingSelect } from '../components/fields';
+import { PaddingSelectSingleValue } from '~modules/content-page/components/fields/PaddingSelectSingleValue/PaddingSelectSingleValue';
+import { AlignSelect } from '~modules/content-page/components/fields/AlignSelect/AlignSelect';
+import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
+import { PaddingSelectTopBottom } from '~modules/content-page/components/fields/PaddingSelectTopBottom/PaddingSelectTopBottom';
 
 export const GET_EDITOR_TYPES_MAP = (): Record<ContentBlockEditor, FunctionComponent<any>> => ({
 	AlignSelect,
@@ -29,7 +32,8 @@ export const GET_EDITOR_TYPES_MAP = (): Record<ContentBlockEditor, FunctionCompo
 	FileUpload,
 	IconPicker,
 	MultiRange,
-	PaddingSelect,
+	PaddingSelect: PaddingSelectTopBottom, // We cannot rename this to PaddingSelectTopBottom because the "PaddingSelect" value is already stored in various blocks in the database
+	PaddingSelectSingleValue,
 	Select,
 	TextArea,
 	TextInput,

@@ -4,25 +4,27 @@ import { parsePickerItem } from '../helpers/parse-picker';
 
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
+import memoize from 'memoizee';
 
 // Fetch content items from GQL
-export const retrieveContentPages = async (
-	title: string | null,
-	limit = 5
-): Promise<PickerItem[]> => {
-	try {
-		const contentItems: ContentPageInfo[] | null = title
-			? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
-			: await ContentPageService.getPublicContentItemsByTitle(undefined, limit);
+export const retrieveContentPages = memoize(
+	async (title: string | null, limit = 5): Promise<PickerItem[]> => {
+		try {
+			const contentItems: ContentPageInfo[] | null = title
+				? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
+				: await ContentPageService.getPublicContentItemsByTitle(undefined, limit);
 
-		return parseContentPages(contentItems || []);
-	} catch (err) {
-		throw new CustomError('Failed to fetch content pages for content picker', err, {
-			title,
-			limit,
-		});
-	}
-};
+			return parseContentPages(contentItems || []);
+		} catch (err) {
+			throw new CustomError('Failed to fetch content pages for content picker', err, {
+				title,
+				limit,
+			});
+		}
+	},
+	MEMOIZEE_OPTIONS
+);
 
 // Fetch content items of type PROJECT from GQL
 export const retrieveProjectContentPages = async (

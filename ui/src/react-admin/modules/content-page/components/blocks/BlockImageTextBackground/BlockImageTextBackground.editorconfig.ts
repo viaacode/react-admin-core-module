@@ -1,10 +1,18 @@
 import { AdminConfigManager } from '~core/config';
 import {
+	GET_ALIGN_OPTIONS,
 	GET_BACKGROUND_ALIGN_OPTIONS,
 	GET_SIMPLE_ALIGN_OPTIONS,
 } from '~modules/content-page/const/get-align-options';
-import { GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF } from '~modules/content-page/const/get-color-options';
-import { GET_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import {
+	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
+	GET_COLOR_OPTIONS_EXTENDED_AVO,
+	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
+} from '~modules/content-page/const/get-color-options';
+import {
+	GET_FULL_HEADING_TYPE_OPTIONS,
+	GET_HEADING_SIZE_OPTIONS,
+} from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
@@ -16,18 +24,20 @@ import type {
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
 import {
-	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
-	FOREGROUND_COLOR_FIELD,
+	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
+import { isAvo } from '~shared/helpers/is-avo';
 
 export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): ImageTextBackgroundBlockComponentState => ({
 		heading: '',
-		headingType: 'h3',
+		headingType: isAvo() ? 'h1' : 'h3',
+		headingSize: 'medium',
 		content: '',
+		textPadding: 'small',
 		foregroundColor: Color.Black,
 		backgroundColor: Color.White,
 		backgroundAlignment: 'left-inside-page',
@@ -35,8 +45,16 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		buttonIconAlignment: 'left',
 	});
 
-export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlockState =>
-	BLOCK_STATE_DEFAULTS();
+export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlockState => {
+	return {
+		...BLOCK_STATE_DEFAULTS(),
+		padding: {
+			top: 'none',
+			bottom: 'none',
+		},
+		fullWidth: true,
+	};
+};
 
 export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
@@ -56,6 +74,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						'admin/content-block/helpers/image-text-background/image-text-background___titel-tekst'
 					),
 					editorType: ContentBlockEditor.TextInput,
+					validator: undefined,
 				}
 			),
 			headingType: {
@@ -64,12 +83,52 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_HEADING_TYPE_OPTIONS(),
+					options: GET_FULL_HEADING_TYPE_OPTIONS(),
+				},
+			},
+			headingSize: {
+				label: tText('Titel grootte'),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_HEADING_SIZE_OPTIONS(),
 				},
 			},
 			content: TEXT_FIELD(undefined, {
 				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			}),
+			textAlign: {
+				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_ALIGN_OPTIONS(),
+				},
+			},
+			foregroundColor: {
+				label: tText('Tekst kleur'),
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()
+						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
+						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+				},
+			},
+			backgroundColor: {
+				label: tText('Achtergrond kleur tekst'),
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()
+						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
+						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+				},
+			},
+			textPadding: PADDING_SINGLE_VALUE_FIELD(tText('Tekst padding achtergrondkleur')),
 			image: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
@@ -80,6 +139,15 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
 				} as FileUploadProps,
+			},
+			imageAlignment: {
+				label: tText(
+					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
+				),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_BACKGROUND_ALIGN_OPTIONS(),
+				},
 			},
 			buttonType: {
 				label: tText(
@@ -130,30 +198,24 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					options: GET_SIMPLE_ALIGN_OPTIONS(),
 				},
 			},
-			imageAlignment: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
-				),
-				editorType: ContentBlockEditor.Select,
-				editorProps: {
-					options: GET_BACKGROUND_ALIGN_OPTIONS(),
-				},
-			},
-			foregroundColor: FOREGROUND_COLOR_FIELD(
-				tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___voorgrond-kleur'
-				)
-			),
-			backgroundColor: BACKGROUND_COLOR_FIELD(
-				tText(
-					'admin/content-block/helpers/image-text-background/image-text-background___achtergrond-kleur'
-				),
-				GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
-			),
 		},
 	},
 	block: {
 		state: INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE(),
-		fields: BLOCK_FIELD_DEFAULTS(),
+		fields: {
+			...BLOCK_FIELD_DEFAULTS(),
+			backgroundColor: {
+				label: tText('Achtergrond kleur blok'),
+				editorType: ContentBlockEditor.ColorSelect,
+				editorProps: {
+					options: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()
+						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: isAvo()
+						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
+						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+				},
+			},
+		},
 	},
 });

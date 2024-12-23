@@ -1,12 +1,12 @@
-import { PermissionName } from '@viaa/avo2-types';
 import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
 import { Locale } from '~modules/translations/translations.core.types';
 
 export const mockCommonUser: Avo.User.CommonUser = {
 	// QAS
 	// profileId: '31051baa-94ab-4fc2-a859-750a52774d3a',
 	// LOCAL
-	profileId: '8cd21983-92ff-4e67-8f6d-9640cac67073',
+	profileId: 'dd787a19-03f7-41b4-9b7e-c1c24b475294',
 	email: 'hetarchief2.0+bztmeemooadmin@meemoo.be',
 	firstName: 'meemoo',
 	lastName: 'Admin',

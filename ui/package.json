@@ -94,6 +94,7 @@
     "@types/glob": "8.1.0",
     "@types/jest": "29.5.5",
     "@types/lodash-es": "4.17.6",
+    "@types/memoizee": "^0.4.11",
     "@types/node": "20.4.0",
     "@types/node-fetch": "2.6.5",
     "@types/react": "18.2.22",
@@ -175,5 +176,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "memoizee": "^0.4.17"
   }
 }

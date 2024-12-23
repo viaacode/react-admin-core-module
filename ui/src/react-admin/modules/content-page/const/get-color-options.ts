@@ -142,6 +142,65 @@ export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 	},
 ];
 
+export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () => [
+	{
+		label: tText('admin/content-block/content-block___zwart'),
+		value: Color.Black,
+	},
+	{
+		label: tText('admin/content-block/content-block___donker-grijs'),
+		value: Color.Gray700,
+	},
+	{
+		label: tText('admin/content-block/content-block___wit'),
+		value: Color.White,
+	},
+	{
+		label: tText('Teal bright'),
+		value: Color.TealBright,
+	},
+	{
+		label: tText('Oceaan groen'),
+		value: Color.OceanGreen,
+	},
+	{
+		label: tText('Jeneverbes'),
+		value: Color.Juniper,
+	},
+	{
+		label: tText('Zilver'),
+		value: Color.Silver,
+	},
+	{
+		label: tText('Paars roze'),
+		value: Color.Tapestry,
+	},
+	{
+		label: tText('Wijn rood'),
+		value: Color.WineRed,
+	},
+	{
+		label: tText('Geel'),
+		value: Color.Yellow,
+	},
+	{
+		label: tText('Groen'),
+		value: Color.Green,
+	},
+	{
+		label: tText('Donker oranje'),
+		value: Color.DarkOrange,
+	},
+	{
+		label: tText('Zacht blauw'),
+		value: Color.SoftBlue,
+	},
+	{
+		label: tText('Frans roze'),
+		value: Color.FrenchRose,
+	},
+];
+
 export const GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF: () => SelectOption<Color>[] = () => [
 	blackOption(),
 	whiteOption(),

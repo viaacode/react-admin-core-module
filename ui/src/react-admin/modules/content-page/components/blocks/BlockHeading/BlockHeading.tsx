@@ -20,13 +20,14 @@ export const BlockHeading: FunctionComponent<BlockHeadingProps> = ({
 	align = 'left',
 	onClick,
 	className,
+	style = {},
 }) => (
 	<Type
 		className={clsx(className, `c-heading c-${Type}`, {
 			[`u-text-${align}`]: align !== 'left',
 		})}
 		onClick={onClick}
-		style={color ? { color } : {}}
+		style={color ? { ...style, color } : style}
 	>
 		{children}
 	</Type>
