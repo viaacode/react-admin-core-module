@@ -43,7 +43,7 @@
     "@nestjs/schedule": "^3.0.1",
     "@nestjs/swagger": "^7.1.1",
     "@studiohyperdrive/pagination": "1.0.0",
-    "@viaa/avo2-types": "3.0.11",
+    "@viaa/avo2-types": "3.0.13",
     "app-root-path": "3.0.0",
     "blend-promise-utils": "^1.28.0",
     "cache-manager": "5.2.3",

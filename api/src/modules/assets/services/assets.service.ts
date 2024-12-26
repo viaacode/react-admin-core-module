@@ -13,7 +13,7 @@ import { AssetType } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
 import got, { ExtendOptions, Got } from 'got';
-import _, { escapeRegExp, isNil } from 'lodash';
+import { escapeRegExp, isNil, kebabCase } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -56,10 +56,6 @@ export class AssetsService {
 		this.gotInstance = got.extend(gotOptions);
 	}
 
-	public setToken(assetToken: AssetToken) {
-		this.token = assetToken;
-	}
-
 	@Cron('0 4 * * *')
 	public async emptyUploadFolder(): Promise<boolean> {
 		try {
@@ -98,7 +94,7 @@ export class AssetsService {
 	 */
 	private async getS3Client(): Promise<S3> {
 		try {
-			const tokenExpiry = new Date(_.get(this.token, 'expiration')).getTime();
+			const tokenExpiry = new Date(this.token?.expiration).getTime();
 			const now = new Date().getTime();
 			const fiveMinutes = 5 * 60 * 1000;
 			if (!this.token || tokenExpiry - fiveMinutes < now) {
@@ -114,10 +110,9 @@ export class AssetsService {
 							secretAccessKey: this.token.secret,
 						},
 
-						endpoint: `${process.env.ASSET_SERVER_ENDPOINT}/${process.env.ASSET_SERVER_BUCKET_NAME}`,
+						endpoint: process.env.ASSET_SERVER_ENDPOINT as string,
 
-						// The key s3BucketEndpoint is renamed to bucketEndpoint.
-						bucketEndpoint: true,
+						bucketEndpoint: false, // Pass the bucket as a bucket name, not a full url
 						region: 'eu-west-1',
 					});
 				} catch (err) {
@@ -196,7 +191,7 @@ export class AssetsService {
 	): Promise<string> {
 		const parsedFilename = path.parse(file.originalname);
 		const key = `${assetFiletype}/${
-			preferredKey ?? `${_.kebabCase(parsedFilename.name)}-${uuidv4()}${parsedFilename.ext}`
+			preferredKey ?? `${kebabCase(parsedFilename.name)}-${uuidv4()}${parsedFilename.ext}`
 		}`;
 
 		return this.uploadToObjectStore(key, file);
@@ -212,15 +207,16 @@ export class AssetsService {
 			} else {
 				fileBody = await fse.readFile(file.path);
 			}
+
 			await s3Client.putObject({
 				Key: key,
 				Body: fileBody,
 				ACL: 'public-read',
 				ContentType: file.mimetype,
-				Bucket: process.env.ASSET_SERVER_BUCKET_NAME,
+				Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
 			});
 			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
-			url.pathname = `${process.env.ASSET_SERVER_BUCKET_NAME}/${key}`;
+			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
 
 			if (!file.buffer) {
 				fse.unlink(file.path)?.catch((err) =>
