@@ -261,4 +261,6 @@ export interface DbContentBlock {
 	type: ContentBlockType;
 	anchor?: string;
 	position: number;
+	createdAt: string;
+	updatedAt: string;
 }

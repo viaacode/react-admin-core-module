@@ -50,8 +50,12 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 		tText('admin/content-block/helpers/generators/defaults___achtergrondkleur'),
 		isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 	),
-	padding: PADDING_FIELD(tText('admin/content-block/helpers/generators/defaults___padding')),
-	margin: PADDING_FIELD(tText('admin/content-block/helpers/generators/defaults___marge')),
+	padding: PADDING_TOP_BOTTOM_FIELD(
+		tText('admin/content-block/helpers/generators/defaults___padding')
+	),
+	margin: PADDING_TOP_BOTTOM_FIELD(
+		tText('admin/content-block/helpers/generators/defaults___marge')
+	),
 	userGroupIds: USER_GROUP_SELECT(
 		tText('admin/content-block/helpers/generators/defaults___zichtbaar-voor'),
 		tText(
@@ -100,9 +104,14 @@ export const BACKGROUND_COLOR_FIELD = (
 	},
 });
 
-export const PADDING_FIELD = (label: string): ContentBlockField => ({
+export const PADDING_TOP_BOTTOM_FIELD = (label: string): ContentBlockField => ({
 	label,
 	editorType: ContentBlockEditor.PaddingSelect,
+});
+
+export const PADDING_SINGLE_VALUE_FIELD = (label: string): ContentBlockField => ({
+	label,
+	editorType: ContentBlockEditor.PaddingSelectSingleValue,
 });
 
 export const USER_GROUP_SELECT = (label: string, placeholder: string): ContentBlockField => ({
@@ -130,7 +139,7 @@ export const TEXT_FIELD = (
 	validator: (value: string) => {
 		const errorArray: string[] = [];
 
-		if (!value) {
+		if (!value && emptyFieldValidatorMessage) {
 			errorArray.push(
 				emptyFieldValidatorMessage ||
 					tText('admin/content-block/helpers/generators/defaults___tekst-is-verplicht')

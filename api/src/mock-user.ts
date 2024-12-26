@@ -10,7 +10,8 @@ export const mockUserAvo: Avo.User.User = {
 	temp_access: null,
 	is_blocked: false,
 	profile: {
-		id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
+		// id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
+		id: 'dd787a19-03f7-41b4-9b7e-c1c24b475294',
 		language: 'nl' as Locale,
 		alias: 'bert_verhelst',
 		title: 'Developer1',
@@ -193,7 +194,7 @@ export const mockUserHetArchief: Avo.User.HetArchiefUser = {
 	// QAS
 	// id: 'd285a546-b42b-4fb3-bfa7-ef8be9208bc0',
 	// LOCAL DB
-	id: '8cd21983-92ff-4e67-8f6d-9640cac67073',
+	id: '04e902a8-86e1-4dfa-b9d4-d2db1d772fa1',
 	fullName: 'meemoo Admin',
 	firstName: 'meemoo',
 	lastName: 'Admin',

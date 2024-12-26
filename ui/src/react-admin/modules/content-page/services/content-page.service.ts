@@ -251,107 +251,34 @@ export class ContentPageService {
 		return contentPage?.path || `/${kebabCase(contentPage?.title)}` || '';
 	}
 
-	// TODO: Make function generic so we can combine this getTitle and the one from collections.
-	/**
-	 * Find name that isn't a duplicate of an existing name of a content page of this user
-	 * eg: if these content pages exist:
-	 * copy 1: test
-	 * copy 2: test
-	 * copy 4: test
-	 *
-	 * Then the algorithm will propose: copy 3: test
-	 * @param copyPrefix
-	 * @param copyRegex
-	 * @param existingTitle
-	 *
-	 * @returns Potential title for duplicate content page.
-	 */
-	public static getCopyTitleForContentPage = async (
-		copyPrefix: string,
-		copyRegex: RegExp,
-		existingTitle: string
-	): Promise<string> => {
-		const titleWithoutCopy = existingTitle.replace(copyRegex, '');
-		const contentPages = await ContentPageService.getPublicContentItemsByTitle(
-			`%${titleWithoutCopy}`
-		);
-		const titles = (contentPages || []).map((contentPage) => contentPage.title);
-
-		let index = 0;
-		let candidateTitle: string;
-
-		do {
-			index += 1;
-			candidateTitle = copyPrefix.replace('%index%', String(index)) + titleWithoutCopy;
-		} while (titles.includes(candidateTitle));
-
-		return candidateTitle;
-	};
-
 	/**
 	 * Add duplicate of content page
 	 *
-	 * @param contentPageInfo
+	 * @param contentPageId
 	 * @param overrideValues
-	 * @param copyPrefix
-	 * @param copyRegex
-	 * @param profileId user who will be the owner of the copy
 	 *
 	 * @returns Duplicate content page.
 	 */
 	public static async duplicateContentPage(
-		contentPageInfo: ContentPageInfo,
-		overrideValues: Partial<ContentPageInfo>,
-		copyPrefix: string,
-		copyRegex: RegExp,
-		profileId: string
+		contentPageId: string | number,
+		overrideValues: Partial<ContentPageInfo>
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const contentToInsert = {
-				...(await this.duplicateContentPageImages(contentPageInfo.id)),
-				...overrideValues,
-			};
-
-			// update attributes specific to duplicate
-			contentToInsert.isPublic = false;
-			contentToInsert.publishedAt = null;
-			contentToInsert.depublishAt = null;
-			contentToInsert.publishAt = null;
-			contentToInsert.path = null;
-			contentToInsert.createdAt = new Date().toISOString();
-			contentToInsert.updatedAt = contentToInsert.createdAt;
-			contentToInsert.userProfileId = profileId;
-
-			try {
-				contentToInsert.title = await this.getCopyTitleForContentPage(
-					copyPrefix,
-					copyRegex,
-					contentToInsert.title
-				);
-			} catch (err) {
-				const customError = new CustomError(
-					'Failed to retrieve title for duplicate content page',
-					err,
-					{
-						contentToInsert,
-					}
-				);
-
-				console.error(customError);
-
-				// fallback to simple copy title
-				contentToInsert.title = `${copyPrefix.replace(' %index%', '')}${
-					contentToInsert.title
-				}`;
+			const duplicatedContentPage = await fetchWithLogoutJson<DbContentPage | null>(
+				`${this.getBaseUrl()}/${contentPageId}/duplicate`,
+				{
+					method: 'POST',
+					body: JSON.stringify(overrideValues),
+				}
+			);
+			if (!duplicatedContentPage) {
+				return null;
 			}
-
-			// insert duplicated collection
-			return await ContentPageService.insertContentPage(contentToInsert);
+			return convertDbContentPageToContentPageInfo(duplicatedContentPage);
 		} catch (err) {
-			throw new CustomError('Failed to duplicate collection', err, {
-				copyPrefix,
-				copyRegex,
-				contentPage: contentPageInfo,
+			throw new CustomError('Failed to duplicate content page', err, {
+				contentPageId,
+				overrideValues,
 			});
 		}
 	}

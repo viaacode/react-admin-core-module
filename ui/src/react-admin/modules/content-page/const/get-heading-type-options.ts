@@ -1,5 +1,8 @@
 import type { SelectOption } from '@viaa/avo2-components';
-import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
+import type {
+	HeadingSizeOption,
+	HeadingTypeOption,
+} from '~modules/content-page/types/content-block.types';
 import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption>[] = () => [
@@ -23,4 +26,19 @@ export const GET_FULL_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption
 		value: 'h1',
 	},
 	...GET_HEADING_TYPE_OPTIONS(),
+];
+
+export const GET_HEADING_SIZE_OPTIONS: () => SelectOption<HeadingSizeOption>[] = () => [
+	{
+		label: tText('Klein'),
+		value: 'small',
+	},
+	{
+		label: tText('Medium'),
+		value: 'medium',
+	},
+	{
+		label: tText('Groot'),
+		value: 'large',
+	},
 ];

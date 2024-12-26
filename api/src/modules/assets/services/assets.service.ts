@@ -371,11 +371,6 @@ export class AssetsService {
 			'g'
 		);
 		const urls = jsonBlobString.match(assetUrlsRegex);
-		console.info('Find asset urls in json: ', {
-			jsonBlobString,
-			assetUrlsRegex,
-			foundUrls: urls,
-		});
 
 		let newUrls: string[] = [];
 		const failedUrls: string[] = [];

@@ -7,7 +7,7 @@ import type { PaddingFieldState } from '../../../types/content-block.types';
 
 import { tHtml } from '~shared/helpers/translation-functions';
 
-import './PaddingSelect.scss';
+import './PaddingSelectTopBottom.scss';
 
 export interface PaddingSelectProps {
 	onChange: (value: PaddingFieldState) => void;
@@ -16,7 +16,10 @@ export interface PaddingSelectProps {
 
 type PaddingDirection = 'top' | 'bottom';
 
-export const PaddingSelect: FunctionComponent<PaddingSelectProps> = ({ onChange, value }) => {
+export const PaddingSelectTopBottom: FunctionComponent<PaddingSelectProps> = ({
+	onChange,
+	value,
+}) => {
 	const generateOptions = (direction: PaddingDirection) =>
 		[
 			{

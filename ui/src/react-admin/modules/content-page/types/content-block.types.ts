@@ -22,6 +22,7 @@ export type AlignOption = 'left' | 'right' | 'center';
 export type SimpleAlignOption = 'left' | 'right';
 
 export type BackgroundAlignOption =
+	| 'fill-screen'
 	| 'left-screen'
 	| 'left-inside-page'
 	| 'right-inside-page'
@@ -42,6 +43,7 @@ export type BlockGridFormatOption =
 export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
 
 export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
+export type HeadingSizeOption = 'small' | 'medium' | 'large';
 
 export type CardWithoutDescriptionStyleOption = 'round' | 'square';
 
@@ -91,6 +93,7 @@ export enum Color {
 	Neutral = '#727272',
 	Zinc = '#ADADAD',
 	SkyBlue = '#C3DDE6',
+	Juniper = '#678588',
 }
 
 export enum GradientColor {
@@ -170,6 +173,7 @@ export enum ContentBlockEditor {
 	DatePicker = 'DatePicker',
 	MultiRange = 'MultiRange',
 	PaddingSelect = 'PaddingSelect',
+	PaddingSelectSingleValue = 'PaddingSelectSingleValue',
 	Select = 'Select',
 	TextArea = 'TextArea',
 	TextInput = 'TextInput',
@@ -494,7 +498,9 @@ export interface CardWithoutDescriptionBlockComponentState {
 export interface ImageTextBackgroundBlockComponentState {
 	heading: string;
 	headingType: HeadingTypeOption;
+	headingSize: HeadingSizeOption;
 	content: string;
+	textPadding: SpacerOption;
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;

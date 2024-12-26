@@ -44,7 +44,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 }) => {
 	const blockState = contentBlockConfig?.block?.state;
 	const componentState = contentBlockConfig?.components?.state;
-	const containerSize =
+	const pageWidth =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentWidth.EXTRA_LARGE;
@@ -173,14 +173,18 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					}}
 				/>
 				{blockState.fullWidth ? (
-					<PreviewComponent {...componentStateProps} {...blockStateProps} />
+					<PreviewComponent
+						{...componentStateProps}
+						{...blockStateProps}
+						pageWidth={pageWidth}
+					/>
 				) : (
 					<Container
 						mode="horizontal"
 						size={
-							containerSize?.toUpperCase() === ContentWidth.EXTRA_LARGE
+							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
 								? undefined
-								: (containerSize?.toLowerCase() as 'medium' | 'large')
+								: (pageWidth?.toLowerCase() as 'medium' | 'large')
 						}
 					>
 						<PreviewComponent {...componentStateProps} {...blockStateProps} />

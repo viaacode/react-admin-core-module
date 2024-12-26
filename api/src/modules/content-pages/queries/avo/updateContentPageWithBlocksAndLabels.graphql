@@ -1,0 +1,25 @@
+mutation updateContentPageWithBlocksAndLabels(
+	$id: Int!
+	$contentPage: app_content_set_input!
+	$contentBlocks: [app_content_blocks_insert_input!]!
+	$contentLabelLinks: [app_content_content_labels_insert_input!]!
+) {
+	update_app_content(
+		where: { id: { _eq: $id }, is_deleted: { _eq: false } }
+		_set: $contentPage
+	) {
+		affected_rows
+	}
+	delete_app_content_blocks(where: { content_id: { _eq: $id } }) {
+		affected_rows
+	}
+	insert_app_content_blocks(objects: $contentBlocks) {
+		affected_rows
+	}
+	delete_app_content_content_labels(where: { content_id: { _eq: $id } }) {
+		affected_rows
+	}
+	insert_app_content_content_labels(objects: $contentLabelLinks) {
+		affected_rows
+	}
+}

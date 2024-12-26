@@ -4,6 +4,9 @@ import { isHetArchief } from '../shared/helpers/is-hetarchief';
 
 import { type ContentOverviewTableCols, type MediaPlayerPathInfo } from './content-pages.types';
 
+export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
+export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
+
 export const MEDIA_PLAYER_BLOCKS: { [blockType: string]: MediaPlayerPathInfo } = {
 	MEDIA_PLAYER: {
 		getItemExternalIdPath: 'variables.componentState.item.value',

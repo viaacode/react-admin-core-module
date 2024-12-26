@@ -320,11 +320,8 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			}
 
 			const duplicateContentPage = await ContentPageService.duplicateContentPage(
-				contentPageInfo,
-				overrideValues,
-				CONTENT_PAGE_COPY,
-				CONTENT_PAGE_COPY_REGEX,
-				commonUser?.profileId
+				contentPageInfo.id,
+				overrideValues
 			);
 
 			if (!duplicateContentPage) {

@@ -65,12 +65,12 @@ import {
 	UpdateContentBlockDocument as UpdateContentBlockDocumentAvo,
 	type UpdateContentBlockMutation as UpdateContentBlockMutationAvo,
 	type UpdateContentBlockMutationVariables as UpdateContentBlockMutationVariablesAvo,
-	UpdateContentByIdDocument as UpdateContentByIdDocumentAvo,
-	type UpdateContentByIdMutation as UpdateContentByIdMutationAvo,
-	type UpdateContentByIdMutationVariables as UpdateContentByIdMutationVariablesAvo,
 	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentAvo,
 	type UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationAvo,
 	type UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesAvo,
+	UpdateContentPageWithBlocksAndLabelsDocument as UpdateContentPageWithBlocksAndLabelsDocumentAvo,
+	type UpdateContentPageWithBlocksAndLabelsMutation as UpdateContentPageWithBlocksAndLabelsMutationAvo,
+	type UpdateContentPageWithBlocksAndLabelsMutationVariables as UpdateContentPageWithBlocksAndLabelsMutationVariablesAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	DeleteContentBlockDocument as DeleteContentBlockDocumentHetArchief,
@@ -136,12 +136,12 @@ import {
 	UpdateContentBlockDocument as UpdateContentBlockDocumentHetArchief,
 	type UpdateContentBlockMutation as UpdateContentBlockMutationHetArchief,
 	type UpdateContentBlockMutationVariables as UpdateContentBlockMutationVariablesHetArchief,
-	UpdateContentByIdDocument as UpdateContentByIdDocumentHetArchief,
-	type UpdateContentByIdMutation as UpdateContentByIdMutationHetArchief,
-	type UpdateContentByIdMutationVariables as UpdateContentByIdMutationVariablesHetArchief,
 	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentHetArchief,
 	type UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationHetArchief,
 	type UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesHetArchief,
+	UpdateContentPageWithBlocksAndLabelsDocument as UpdateContentPageWithBlocksAndLabelsDocumentHetArchief,
+	type UpdateContentPageWithBlocksAndLabelsMutation as UpdateContentPageWithBlocksAndLabelsMutationHetArchief,
+	type UpdateContentPageWithBlocksAndLabelsMutationVariables as UpdateContentPageWithBlocksAndLabelsMutationVariablesHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 
 export type ContentPageQueryTypes = {
@@ -250,9 +250,11 @@ export type ContentPageQueryTypes = {
 	UpdateContentBlockMutation:
 		| UpdateContentBlockMutationAvo
 		| UpdateContentBlockMutationHetArchief;
-	UpdateContentByIdMutationAvo: UpdateContentByIdMutationAvo;
-	UpdateContentByIdMutationHetArchief: UpdateContentByIdMutationHetArchief;
-	UpdateContentByIdMutation: UpdateContentByIdMutationAvo | UpdateContentByIdMutationHetArchief;
+	UpdateContentPageWithBlocksAndLabelsMutationAvo: UpdateContentPageWithBlocksAndLabelsMutationAvo;
+	UpdateContentPageWithBlocksAndLabelsMutationHetArchief: UpdateContentPageWithBlocksAndLabelsMutationHetArchief;
+	UpdateContentPageWithBlocksAndLabelsMutation:
+		| UpdateContentPageWithBlocksAndLabelsMutationAvo
+		| UpdateContentPageWithBlocksAndLabelsMutationHetArchief;
 	DeleteContentBlockMutationVariablesAvo: DeleteContentBlockMutationVariablesAvo;
 	DeleteContentBlockMutationVariablesHetArchief: DeleteContentBlockMutationVariablesHetArchief;
 	DeleteContentBlockMutationVariables:
@@ -288,11 +290,11 @@ export type ContentPageQueryTypes = {
 	UpdateContentBlockMutationVariables:
 		| UpdateContentBlockMutationVariablesAvo
 		| UpdateContentBlockMutationVariablesHetArchief;
-	UpdateContentByIdMutationVariablesAvo: UpdateContentByIdMutationVariablesAvo;
-	UpdateContentByIdMutationVariablesHetArchief: UpdateContentByIdMutationVariablesHetArchief;
-	UpdateContentByIdMutationVariables:
-		| UpdateContentByIdMutationVariablesAvo
-		| UpdateContentByIdMutationVariablesHetArchief;
+	UpdateContentPageWithBlocksAndLabelsMutationVariablesAvo: UpdateContentPageWithBlocksAndLabelsMutationVariablesAvo;
+	UpdateContentPageWithBlocksAndLabelsMutationVariablesHetArchief: UpdateContentPageWithBlocksAndLabelsMutationVariablesHetArchief;
+	UpdateContentPageWithBlocksAndLabelsMutationVariables:
+		| UpdateContentPageWithBlocksAndLabelsMutationVariablesAvo
+		| UpdateContentPageWithBlocksAndLabelsMutationVariablesHetArchief;
 	GetContentByIdsQueryAvo: GetContentByIdsQueryAvo;
 	GetContentByIdsQueryHetArchief: GetContentByIdsQueryHetArchief;
 	GetContentByIdsQuery: GetContentByIdsQueryAvo | GetContentByIdsQueryHetArchief;
@@ -378,7 +380,7 @@ type ContentPageQueries = {
 	InsertContentLabelLinksDocument: TypedDocumentNode<any, any>;
 	SoftDeleteContentDocument: TypedDocumentNode<any, any>;
 	UpdateContentBlockDocument: TypedDocumentNode<any, any>;
-	UpdateContentByIdDocument: TypedDocumentNode<any, any>;
+	UpdateContentPageWithBlocksAndLabelsDocument: TypedDocumentNode<any, any>;
 	GetContentByIdsDocument: TypedDocumentNode<any, any>;
 	GetContentPageByPathDocument: TypedDocumentNode<any, any>;
 	GetContentPagesWithBlocksDocument: TypedDocumentNode<any, any>;
@@ -405,7 +407,8 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentAvo,
 		SoftDeleteContentDocument: SoftDeleteContentDocumentAvo,
 		UpdateContentBlockDocument: UpdateContentBlockDocumentAvo,
-		UpdateContentByIdDocument: UpdateContentByIdDocumentAvo,
+		UpdateContentPageWithBlocksAndLabelsDocument:
+			UpdateContentPageWithBlocksAndLabelsDocumentAvo,
 		GetContentByIdsDocument: GetContentByIdsDocumentAvo,
 		GetContentPageByPathDocument: GetContentPageByPathDocumentAvo,
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
@@ -432,7 +435,8 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		InsertContentLabelLinksDocument: InsertContentLabelLinksDocumentHetArchief,
 		SoftDeleteContentDocument: SoftDeleteContentDocumentHetArchief,
 		UpdateContentBlockDocument: UpdateContentBlockDocumentHetArchief,
-		UpdateContentByIdDocument: UpdateContentByIdDocumentHetArchief,
+		UpdateContentPageWithBlocksAndLabelsDocument:
+			UpdateContentPageWithBlocksAndLabelsDocumentHetArchief,
 		GetContentByIdsDocument: GetContentByIdsDocumentHetArchief,
 		GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentHetArchief,

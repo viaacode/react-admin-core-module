@@ -2,9 +2,9 @@ overwrite: true
 verbose: true
 debug: true
 schema:
-  - ${GRAPHQL_URL}:
+  - ${GRAPHQL_URL_AVO}:
       headers:
-        x-hasura-admin-secret: ${GRAPHQL_SECRET}
+        x-hasura-admin-secret: ${GRAPHQL_SECRET_AVO}
 documents:
   - "src/modules/**/queries/avo/*.graphql"
 generates:

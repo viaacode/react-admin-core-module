@@ -50,14 +50,13 @@ query getContentPagesWithBlocks(
 			}
 		}
 		content_blocks(order_by: { position: asc }) {
-			content_block_type
-			content_id
-			created_at
 			id
-			position
-			updated_at
-			variables
+			content_id
 			content_block_type
+			position
+			variables
+			created_at
+			updated_at
 		}
 	}
 	app_content_page_aggregate(where: $where) {

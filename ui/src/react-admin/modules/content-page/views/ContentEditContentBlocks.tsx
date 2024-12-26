@@ -59,7 +59,6 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 	commonUser,
 }) => {
 	const contentBlockIds = (contentPageInfo.content_blocks || []).map((item) => item.id);
-	console.log('contentBlockIds', contentBlockIds);
 
 	// Hooks
 	// This is the block that is being edited with the form sidebar accordion opened up
