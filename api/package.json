@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-api",
-  "version": "4.3.16",
+  "version": "4.3.17",
   "description": "The backend routes to support the screens in the Admin Core dashboard",
   "author": "Bert Verhelst <bert.verhelst@studiohyperdrive.be>",
   "main": "./dist/src/index.js",
@@ -71,7 +71,7 @@
     "rxjs": "^7.4.0",
     "saml2-js": "^3.0.1",
     "session-file-store": "^1.5.0",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.5",
     "swagger-ui-express": "^4.3.0",
     "uuid": "^8.3.2",
     "xml-js": "^1.6.11"
