@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { Sha256 } from '@aws-crypto/sha256-js';
 import { HeadObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 import {
 	forwardRef,
@@ -9,6 +10,8 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { HttpRequest } from '@smithy/protocol-http';
+import { SignatureV4 } from '@smithy/signature-v4';
 import { AssetType } from '@viaa/avo2-types';
 import { mapLimit } from 'blend-promise-utils';
 import fse from 'fs-extra';
@@ -27,6 +30,7 @@ import {
 	UpdateContentAssetMutation,
 	UpdateContentAssetMutationVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
+import { EXTENSION_TO_MIME_TYPE } from '../assets.consts';
 import { AssetToken } from '../assets.types';
 
 import { DataService } from 'src/modules/data/services/data.service';
@@ -72,6 +76,29 @@ export class AssetsService {
 		return true;
 	}
 
+	private async getValidToken(): Promise<{ accessKeyId: string; secretAccessKey: string }> {
+		const tokenExpiry = new Date(this.token?.expiration).getTime();
+		const now = new Date().getTime();
+		const fiveMinutes = 5 * 60 * 1000;
+		if (!this.token || tokenExpiry - fiveMinutes < now) {
+			// Take 5 minutes margin, to ensure we get a new token well before it expires
+			try {
+				this.token = await this.gotInstance.post<AssetToken>('', {
+					resolveBodyOnly: true, // this is duplicate but fixes a typing error
+				});
+			} catch (err) {
+				throw new InternalServerErrorException({
+					message: 'Failed to get s3 token for the asset service',
+					innerException: err,
+				});
+			}
+		}
+		return {
+			accessKeyId: this.token.token,
+			secretAccessKey: this.token.secret,
+		};
+	}
+
 	/**
 	 * Returns an s3 client object which contains an up-to-date token to communicate with the s3 server
 	 *
@@ -94,35 +121,18 @@ export class AssetsService {
 	 */
 	private async getS3Client(): Promise<S3> {
 		try {
-			const tokenExpiry = new Date(this.token?.expiration).getTime();
-			const now = new Date().getTime();
-			const fiveMinutes = 5 * 60 * 1000;
-			if (!this.token || tokenExpiry - fiveMinutes < now) {
-				// Take 5 minutes margin, to ensure we get a new token well before it expires
-				try {
-					this.token = await this.gotInstance.post<AssetToken>('', {
-						resolveBodyOnly: true, // this is duplicate but fixes a typing error
-					});
+			this.token = await this.gotInstance.post<AssetToken>('', {
+				resolveBodyOnly: true, // this is duplicate but fixes a typing error
+			});
 
-					this.s3 = new S3({
-						credentials: {
-							accessKeyId: this.token.token,
-							secretAccessKey: this.token.secret,
-						},
+			this.s3 = new S3({
+				credentials: await this.getValidToken(),
 
-						endpoint: process.env.ASSET_SERVER_ENDPOINT as string,
+				endpoint: process.env.ASSET_SERVER_ENDPOINT as string,
 
-						bucketEndpoint: false, // Pass the bucket as a bucket name, not a full url
-						region: 'eu-west-1',
-					});
-				} catch (err) {
-					console.error('asset service token response error: ' + JSON.stringify(err));
-					throw new InternalServerErrorException({
-						message: 'Failed to get new s3 token for the asset service',
-						error: err,
-					});
-				}
-			}
+				bucketEndpoint: false, // Pass the bucket as a bucket name, not a full url
+				region: 'eu-west-1',
+			});
 
 			return this.s3;
 		} catch (err) {
@@ -199,8 +209,6 @@ export class AssetsService {
 
 	public async uploadToObjectStore(key: string, file: any): Promise<string> {
 		try {
-			const s3Client = await this.getS3Client();
-
 			let fileBody: Buffer;
 			if (file.buffer) {
 				fileBody = file.buffer;
@@ -208,15 +216,54 @@ export class AssetsService {
 				fileBody = await fse.readFile(file.path);
 			}
 
-			await s3Client.putObject({
-				Key: key,
-				Body: fileBody,
-				ACL: 'public-read',
-				ContentType: file.mimetype,
-				Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
+			const region = 'eu-west-1';
+			const endpoint = process.env.ASSET_SERVER_ENDPOINT as string;
+			const bucket = process.env.ASSET_SERVER_BUCKET_NAME as string;
+			const { accessKeyId, secretAccessKey } = await this.getValidToken();
+
+			/**
+			 * Something causes the putObject to hang when using the assets service from the proxy
+			 * So we're using the GOT library to make the put request instead
+			 */
+			// await s3Client.putObject({
+			// 	Key: key,
+			// 	Body: fileBody,
+			// 	ACL: 'public-read',
+			// 	ContentType: file.mimetype,
+			// 	Bucket: process.env.ASSET_SERVER_BUCKET_NAME as string,
+			// });
+
+			const httpRequest = new HttpRequest({
+				method: 'PUT',
+				hostname: endpoint,
+				path: `/${bucket}/${key}`,
+				headers: {
+					'content-type': EXTENSION_TO_MIME_TYPE[key.split('.').pop() as string],
+					'content-length': fileBody.length.toString(),
+					// No authorization headers yet, we'll add them by signing
+				},
+				body: fileBody,
 			});
-			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
-			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
+
+			const signer = new SignatureV4({
+				credentials: { accessKeyId, secretAccessKey },
+				region,
+				service: 's3', // "s3" is important here
+				sha256: Sha256,
+			});
+
+			const signed = await signer.sign(httpRequest);
+
+			const uploadUrl = `${signed.hostname}${signed.path}`;
+
+			await got.put(uploadUrl, {
+				body: signed.body,
+				// If your S3 requires `x-amz-acl: public-read` or something similar, add it:
+				headers: {
+					...signed.headers,
+					'x-amz-acl': 'public-read',
+				},
+			});
 
 			if (!file.buffer) {
 				fse.unlink(file.path)?.catch((err) =>
@@ -227,6 +274,8 @@ export class AssetsService {
 				);
 			}
 
+			const url = new URL(process.env.ASSET_SERVER_ENDPOINT);
+			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
 			return url.href;
 		} catch (err) {
 			const error = new InternalServerErrorException({

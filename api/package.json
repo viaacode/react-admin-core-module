@@ -34,7 +34,9 @@
     "find-circular-dependencies": "npx madge --circular --extensions ts ./"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.705.0",
+    "@aws-sdk/client-s3": "3.717.0",
+    "@smithy/signature-v4": "4.2.4",
+    "@smithy/protocol-http": "4.1.8",
     "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^9.4.3",
     "@nestjs/config": "^3.0.0",
