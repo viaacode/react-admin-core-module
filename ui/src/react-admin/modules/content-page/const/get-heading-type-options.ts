@@ -30,15 +30,15 @@ export const GET_FULL_HEADING_TYPE_OPTIONS: () => SelectOption<HeadingTypeOption
 
 export const GET_HEADING_SIZE_OPTIONS: () => SelectOption<HeadingSizeOption>[] = () => [
 	{
-		label: tText('Klein'),
+		label: tText('modules/content-page/const/get-heading-type-options___klein'),
 		value: 'small',
 	},
 	{
-		label: tText('Medium'),
+		label: tText('modules/content-page/const/get-heading-type-options___medium'),
 		value: 'medium',
 	},
 	{
-		label: tText('Groot'),
+		label: tText('modules/content-page/const/get-heading-type-options___groot'),
 		value: 'large',
 	},
 ];

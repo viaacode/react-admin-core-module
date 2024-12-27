@@ -87,7 +87,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			headingSize: {
-				label: tText('Titel grootte'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___titel-grootte'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_SIZE_OPTIONS(),
@@ -105,7 +107,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			foregroundColor: {
-				label: tText('Tekst kleur'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-kleur'
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: isAvo()
@@ -117,7 +121,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			backgroundColor: {
-				label: tText('Achtergrond kleur tekst'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___achtergrond-kleur-tekst'
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: isAvo()
@@ -128,7 +134,11 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 				},
 			},
-			textPadding: PADDING_SINGLE_VALUE_FIELD(tText('Tekst padding achtergrondkleur')),
+			textPadding: PADDING_SINGLE_VALUE_FIELD(
+				tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-padding-achtergrondkleur'
+				)
+			),
 			image: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
@@ -205,7 +215,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: tText('Achtergrond kleur blok'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___achtergrond-kleur-blok'
+				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: isAvo()

@@ -35,7 +35,7 @@ export const GET_BACKGROUND_ALIGN_OPTIONS: () => {
 	value: BackgroundAlignOption;
 }[] = () => [
 	{
-		label: tText('Schermbreed'),
+		label: tText('modules/content-page/const/get-align-options___schermbreed'),
 		value: 'fill-screen',
 	},
 	{

@@ -156,47 +156,47 @@ export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () =>
 		value: Color.White,
 	},
 	{
-		label: tText('Teal bright'),
+		label: tText('modules/content-page/const/get-color-options___teal-bright'),
 		value: Color.TealBright,
 	},
 	{
-		label: tText('Oceaan groen'),
+		label: tText('modules/content-page/const/get-color-options___oceaan-groen'),
 		value: Color.OceanGreen,
 	},
 	{
-		label: tText('Jeneverbes'),
+		label: tText('modules/content-page/const/get-color-options___jeneverbes'),
 		value: Color.Juniper,
 	},
 	{
-		label: tText('Zilver'),
+		label: tText('modules/content-page/const/get-color-options___zilver'),
 		value: Color.Silver,
 	},
 	{
-		label: tText('Paars roze'),
+		label: tText('modules/content-page/const/get-color-options___paars-roze'),
 		value: Color.Tapestry,
 	},
 	{
-		label: tText('Wijn rood'),
+		label: tText('modules/content-page/const/get-color-options___wijn-rood'),
 		value: Color.WineRed,
 	},
 	{
-		label: tText('Geel'),
+		label: tText('modules/content-page/const/get-color-options___geel'),
 		value: Color.Yellow,
 	},
 	{
-		label: tText('Groen'),
+		label: tText('modules/content-page/const/get-color-options___groen'),
 		value: Color.Green,
 	},
 	{
-		label: tText('Donker oranje'),
+		label: tText('modules/content-page/const/get-color-options___donker-oranje'),
 		value: Color.DarkOrange,
 	},
 	{
-		label: tText('Zacht blauw'),
+		label: tText('modules/content-page/const/get-color-options___zacht-blauw'),
 		value: Color.SoftBlue,
 	},
 	{
-		label: tText('Frans roze'),
+		label: tText('modules/content-page/const/get-color-options___frans-roze'),
 		value: Color.FrenchRose,
 	},
 ];
