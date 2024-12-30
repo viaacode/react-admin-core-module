@@ -284,7 +284,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				(page) => !page.labels || !page.labels.length
 			);
 			const showAllLabels = !selectedTabs.length || selectedTabs[0].id === allLabelObj.id;
-			const labelsToShow: LabelObj[] = showAllLabels ? [...tabs, noLabelObj] : selectedTabs;
+			const labelsToShow: LabelObj[] = showAllLabels
+				? [...uniqueLabels, noLabelObj]
+				: selectedTabs;
 
 			return labelsToShow.map((labelObj) => {
 				if (!(pagesByLabel[labelObj.id] || []).length) {
@@ -303,7 +305,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									title: showTitle ? page.title : undefined,
 									text: getDescription(page),
 									source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-									action: { type: 'CONTENT_PAGE', value: page.id },
+									action: { type: 'CONTENT_PAGE', value: page.path },
 								})
 							)}
 							itemWidth="30.7rem"
