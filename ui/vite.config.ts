@@ -30,7 +30,7 @@ export default defineConfig({
 		},
 		rollupOptions: {
 			output: {
-				entryFileNames: `[name].mjs`,
+				entryFileNames: '[name].mjs',
 			},
 		},
 		sourcemap: true,
@@ -40,6 +40,9 @@ export default defineConfig({
 		// necessary for rich text editor to work
 		// https://github.com/vitejs/vite/discussions/5912#discussioncomment-5569850
 		global: 'globalThis',
+		'import.meta.env.DATABASE_APPLICATION_TYPE': JSON.stringify(
+			process.env.DATABASE_APPLICATION_TYPE
+		),
 	},
 	resolve: {
 		alias: {

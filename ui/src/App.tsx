@@ -56,11 +56,6 @@ function App() {
 							</Flex>
 						</HorizontalPageSplit>
 					</div>
-					{/*<Sidebar />*/}
-					{/*/!*<Switch>*!/*/}
-					{/*/!*{routes?.length > 0 && AdminCore.routes.render(routes)}*!/*/}
-					{/*<ContentPageOverview user={mockUser} />*/}
-					{/*</Switch>*/}
 				</QueryParamProvider>
 			</BrowserRouter>
 		</QueryClientProvider>

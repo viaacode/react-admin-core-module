@@ -105,7 +105,6 @@ export interface AdminConfig {
 		bulkActions?: UserBulkAction[];
 	};
 	database: {
-		databaseApplicationType: DatabaseType;
 		proxyUrl: string;
 		// Value is empty for clients that use this config, but it is set for running the admin-core demo app
 		// So we can make a distinction between the admin-core-api endpoint and the proxy endpoint
@@ -152,6 +151,7 @@ export interface AdminConfig {
 	env: {
 		LDAP_DASHBOARD_PEOPLE_URL?: string;
 		CLIENT_URL: string;
+		DATABASE_APPLICATION_TYPE: DatabaseType;
 	};
 }
 

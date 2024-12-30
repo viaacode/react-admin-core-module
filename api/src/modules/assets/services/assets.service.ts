@@ -224,6 +224,7 @@ export class AssetsService {
 			/**
 			 * Something causes the putObject to hang when using the assets service from the proxy
 			 * So we're using the GOT library to make the put request instead
+			 * I suspect this is because the S3 storage isn't actually AWS S3, but only S3 compatible storage
 			 */
 			// await s3Client.putObject({
 			// 	Key: key,

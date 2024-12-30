@@ -1,8 +1,7 @@
 // noinspection ES6PreferShortImport
 
 import { IconName } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { DatabaseType } from '@viaa/avo2-types';
+import type { Avo, DatabaseType } from '@viaa/avo2-types';
 import nlBE from 'date-fns/locale/nl-BE/index.js';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 import type { TOptions } from 'i18next';
@@ -313,7 +312,6 @@ function setConfig() {
 			},
 		},
 		database: {
-			databaseApplicationType: DatabaseType.avo,
 			proxyUrl,
 			adminCoreApiUrl,
 		},
@@ -375,6 +373,8 @@ function setConfig() {
 		env: {
 			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
 			CLIENT_URL: 'http://localhost:3400',
+			// https://vite.dev/config/shared-options#envprefix
+			DATABASE_APPLICATION_TYPE: import.meta.env.DATABASE_APPLICATION_TYPE as DatabaseType,
 		},
 	});
 }

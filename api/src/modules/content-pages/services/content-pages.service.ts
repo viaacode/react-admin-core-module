@@ -20,6 +20,7 @@ import { SessionHelper } from '../../shared/auth/session-helper';
 import {
 	type App_Content_Blocks_Insert_Input,
 	type App_Content_Blocks_Set_Input as App_Content_Blocks_Set_Input_Avo,
+	App_Content_Bool_Exp,
 	GetCollectionTileByIdDocument,
 	type GetCollectionTileByIdQuery,
 	type GetCollectionTileByIdQueryVariables,
@@ -35,6 +36,7 @@ import {
 import {
 	App_Content_Block_Insert_Input,
 	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
+	App_Content_Page_Bool_Exp,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { customError } from '../../shared/helpers/custom-error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
@@ -238,87 +240,89 @@ export class ContentPagesService {
 			limit,
 		} = inputQuery;
 		const now = new Date().toISOString();
+		const where: App_Content_Bool_Exp | App_Content_Page_Bool_Exp = {
+			_and: [
+				{
+					// Get content pages with the selected content type
+					content_type: { _eq: contentType },
+				},
+				{
+					// Get pages that are visible to the current user
+					_or: userGroupIds.flatMap((userGroupId) => {
+						if (isAvo()) {
+							// Avo can contain both strings and numbers as user groups // TODO convert all usergroups in the avo database to strings [1, -2] => ["1", "-2"]
+							return [
+								{
+									user_group_ids: {
+										_contains: parseInt(userGroupId),
+									},
+								},
+								{
+									user_group_ids: {
+										_contains: String(userGroupId),
+									},
+								},
+							];
+						} else {
+							// Hetarchief can only contain uuid strings as user groups
+							return {
+								user_group_ids: {
+									_contains: userGroupId,
+								},
+							};
+						}
+					}),
+				},
+				...this.getLabelFilter(selectedLabelIds || []),
+				// publish state
+				{
+					_or: [
+						{ is_public: { _eq: true } },
+						{ publish_at: { _is_null: true }, depublish_at: { _gte: now } },
+						{ publish_at: { _lte: now }, depublish_at: { _is_null: true } },
+						{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
+					],
+				},
+				{ is_deleted: { _eq: false } },
+			],
+		};
+		const orUserGroupIds = userGroupIds.flatMap((userGroupId) => {
+			if (isAvo()) {
+				// Avo can contain both strings and numbers as user group ids
+				return [
+					{
+						content: {
+							user_group_ids: {
+								_contains: parseInt(userGroupId),
+							},
+						},
+					},
+					{
+						content: {
+							user_group_ids: {
+								_contains: String(userGroupId),
+							},
+						},
+					},
+				];
+			} else {
+				// Hetarchief can only contain uuid strings as user groups
+				return {
+					content: {
+						user_group_ids: {
+							_contains: userGroupId,
+						},
+					},
+				};
+			}
+		});
 		const variables = {
 			limit: limit || 10,
 			labelIds: compact(labelIds || []),
 			offset: offset || 0,
-			where: {
-				_and: [
-					{
-						// Get content pages with the selected content type
-						content_type: { _eq: contentType },
-					},
-					{
-						// Get pages that are visible to the current user
-						_or: userGroupIds.flatMap((userGroupId) => {
-							if (isAvo()) {
-								// Avo can contain both strings and numbers as user groups // TODO convert all usergroups in the avo database to strings [1, -2] => ["1", "-2"]
-								return [
-									{
-										user_group_ids: {
-											_contains: parseInt(userGroupId),
-										},
-									},
-									{
-										user_group_ids: {
-											_contains: String(userGroupId),
-										},
-									},
-								];
-							} else {
-								// Hetarchief can only contain uuid strings as user groups
-								return {
-									user_group_ids: {
-										_contains: userGroupId,
-									},
-								};
-							}
-						}),
-					},
-					...this.getLabelFilter(selectedLabelIds || []),
-					// publish state
-					{
-						_or: [
-							{ is_public: { _eq: true } },
-							{ publish_at: { _is_null: true }, depublish_at: { _gte: now } },
-							{ publish_at: { _lte: now }, depublish_at: { _is_null: true } },
-							{ publish_at: { _lte: now }, depublish_at: { _gte: now } },
-						],
-					},
-					{ is_deleted: { _eq: false } },
-				],
-			},
+			where,
 			orderBy: { [orderProp]: orderDirection },
-			orUserGroupIds: userGroupIds.flatMap((userGroupId) => {
-				if (isAvo()) {
-					// Avo can contain both strings and numbers as user group ids
-					return [
-						{
-							content: {
-								user_group_ids: {
-									_contains: parseInt(userGroupId),
-								},
-							},
-						},
-						{
-							content: {
-								user_group_ids: {
-									_contains: String(userGroupId),
-								},
-							},
-						},
-					];
-				} else {
-					// Hetarchief can only contain uuid strings as user groups
-					return {
-						content: {
-							user_group_ids: {
-								_contains: userGroupId,
-							},
-						},
-					};
-				}
-			}),
+			orUserGroupIds,
 		};
 		const response = await this.dataService.execute<
 			| ContentPageQueryTypes['GetContentPagesWithBlocksQuery']
@@ -329,7 +333,7 @@ export class ContentPagesService {
 			withBlocks
 				? CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesWithBlocksDocument
 				: CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesDocument,
-			variables
+			variables as any
 		);
 
 		const responseAvo = response as
@@ -883,12 +887,12 @@ export class ContentPagesService {
 		sortColumn: ContentOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
-		where: any
+		where: App_Content_Bool_Exp | App_Content_Page_Bool_Exp
 	): Promise<[DbContentPage[], number]> {
 		let variables: ContentPageQueryTypes['GetContentPagesQueryVariables'] | null = null;
 		try {
 			variables = {
-				where,
+				where: where as any,
 				offset,
 				limit,
 				orderBy: getOrderObject(
