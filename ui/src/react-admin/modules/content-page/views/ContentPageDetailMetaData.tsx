@@ -245,7 +245,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							contentPageInfo.translatedPages.length
 								? contentPageInfo.translatedPages?.map((translatedPage) => {
 										return (
-											<p>
+											<p key={'page-link-' + translatedPage.id}>
 												<Link
 													className="c-table_detail-page__translated-pages__link"
 													to={buildLink(
