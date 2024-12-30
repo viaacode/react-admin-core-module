@@ -305,7 +305,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 									title: showTitle ? page.title : undefined,
 									text: getDescription(page),
 									source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-									action: { type: 'CONTENT_PAGE', value: page.path },
+									action: { type: 'CONTENT_PAGE', value: page.path as string },
 								})
 							)}
 							itemWidth="30.7rem"
