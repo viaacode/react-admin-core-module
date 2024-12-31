@@ -1,5 +1,7 @@
 import { type Avo, type Idp, type PermissionName } from '@viaa/avo2-types';
 
+import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief';
+
 import {
 	type UserInfoOverviewAvo,
 	type UserInfoOverviewHetArchief,
@@ -197,7 +199,7 @@ export function convertUserInfoToCommonUser(
 				blockedAt: user.blocked_at?.date,
 				unblockedAt: user.unblocked_at?.date,
 				lastAccessAt: user.last_access_at,
-				language: null,
+				language: Lookup_Languages_Enum.Nl,
 				tempAccess: user.user.temp_access
 					? {
 							from: user.user.temp_access.from ?? null,
@@ -259,6 +261,7 @@ export function convertUserInfoToCommonUser(
 				firstName: user.firstName ?? undefined,
 				lastName: user.lastName ?? undefined,
 				fullName: user.fullName ?? undefined,
+				language: user.language,
 				userGroup: {
 					id: user.groupId,
 					name: user.groupName,

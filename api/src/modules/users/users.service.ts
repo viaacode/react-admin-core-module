@@ -45,16 +45,16 @@ export class UsersService {
 		protected adminOrganisationsService: AdminOrganisationsService
 	) {}
 
-	async getById(id: string): Promise<Avo.User.CommonUser> {
+	async getById(profileId: string): Promise<Avo.User.CommonUser> {
 		try {
 			if (!isAvo()) {
-				throw customError('Not supported');
+				throw customError('Not supported for hetarchief only for avo');
 			}
 
 			const response = await this.dataService.execute<
 				GetUserByIdQuery,
 				GetUserByIdQueryVariables
-			>(GetUserByIdDocument, { id });
+			>(GetUserByIdDocument, { id: profileId });
 
 			if (!response || !response.users_summary_view[0]) {
 				throw customError('Could not fetch user', null, {
@@ -68,7 +68,7 @@ export class UsersService {
 			);
 		} catch (err: any) {
 			throw customError('Failed to get profiles from the database', err, {
-				variables: { id },
+				variables: { id: profileId },
 				query: 'GetUserById',
 			});
 		}

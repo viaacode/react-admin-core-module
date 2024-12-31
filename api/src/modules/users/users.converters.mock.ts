@@ -7,6 +7,7 @@ export const MOCK_HETARCHIEF_USER: Avo.User.HetArchiefUser = {
 	firstName: 'meemoo',
 	lastName: 'Admin',
 	email: 'hetarchief2.0+bztmeemooadmin@meemoo.be',
+	language: 'nl',
 	acceptedTosAt: '2023-03-31T14:30:25.086+02:00',
 	groupId: '0b281484-76cd-45a9-b6ce-68a0ea7f4b26',
 	groupName: 'MEEMOO_ADMIN',

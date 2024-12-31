@@ -115,6 +115,7 @@ export const mockUser: Avo.User.HetArchiefUser = {
 	lastName: 'Testers',
 	fullName: 'Test Testers',
 	email: 'test.testers@meemoo.be',
+	language: 'nl',
 	idp: Idp.HETARCHIEF,
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
