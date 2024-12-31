@@ -44,7 +44,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 	const navigateToSearchPage = () => {
 		const url = stringifyUrl({
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
-			query: { zoekterm: searchTerm },
+			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});
 		history.push(url);
 	};
