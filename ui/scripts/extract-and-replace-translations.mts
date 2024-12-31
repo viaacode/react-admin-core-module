@@ -23,24 +23,15 @@ and add them to the json file without overwriting the existing strings.
 
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
-import { Project, SyntaxKind } from 'ts-morph';
-import { execSync } from 'child_process';
+import {Project, SyntaxKind} from 'ts-morph';
+import {execSync} from 'child_process';
 import * as fs from 'fs/promises';
-import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
+import {compact, intersection, kebabCase, lowerCase, trim, upperFirst, without} from 'lodash-es';
 import * as path from 'path';
 
-import { executeDatabaseQuery } from './execute-database-query.mts';
-import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
-import {
-	App,
-	Component,
-	Key,
-	Locale,
-	Location,
-	TRANSLATION_SEPARATOR,
-	TranslationEntry,
-	ValueType,
-} from './translation.types.mjs';
+import {executeDatabaseQuery} from './execute-database-query.mts';
+import type {MultiLanguageTranslationEntry} from '~modules/translations/translations.types.ts';
+import {App, Component, Key, Locale, Location, TRANSLATION_SEPARATOR, TranslationEntry, ValueType,} from './translation.types.mjs';
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
 
@@ -119,7 +110,7 @@ function getTranslationEntryFromCallExpression(
 	if (apps.includes(app)) {
 		if (hasKeyAlready && !oldTranslations[formattedKey]) {
 			console.error(
-				`Failed to find old translation in ${app} ${oldTranslationsPath} for key: `,
+				`Failed to find old translation in ${oldTranslationsPath} for key: `,
 				formattedKey
 			);
 		}
@@ -434,7 +425,7 @@ async function updateTranslations(
 			app,
 			component,
 			nlJsonTranslations,
-			outputJsonFile,
+			resolvePath(rootFolderPath, outputJsonFile),
 			tsConfigPath
 		);
 
@@ -461,8 +452,8 @@ async function updateTranslations(
 	}
 }
 
-function resolvePath(filePath: string): string {
-	return path.resolve(__dirname, filePath).replace(/\\/g, '/');
+function resolvePath(...filePaths: string[]): string {
+	return path.resolve(__dirname, ...filePaths).replace(/\\/g, '/');
 }
 
 async function extractTranslations() {
