@@ -1,22 +1,14 @@
 import type { RichTextEditorControl } from '@meemoo/react-components';
-import { NumberParam, StringParam, withDefault } from 'use-query-params';
 import type { Schema } from 'yup';
 import { array, mixed, object, string } from 'yup';
 import { AdminConfigManager } from '~core/config';
 import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';
 import { ROUTE_PARTS } from '~modules/shared';
-import { SortDirectionParam } from '~modules/shared/helpers/query-params';
 import { Locale } from '~modules/translations/translations.core.types';
 import { tText } from '~shared/helpers/translation-functions';
 
 export const ALERTS_PATH = {
 	ALERTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
-};
-
-export const ALERTS_QUERY_PARAM_CONFIG = {
-	orderProp: withDefault(StringParam, 'fromDate'),
-	orderDirection: withDefault(SortDirectionParam, 'desc'),
-	page: withDefault(NumberParam, 1),
 };
 
 // Yup

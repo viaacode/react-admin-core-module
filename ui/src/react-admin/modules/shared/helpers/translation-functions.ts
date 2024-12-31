@@ -7,7 +7,12 @@ export function tText(
 	variables?: Record<string, string>,
 	apps?: App[]
 ): string {
-	return AdminConfigManager.getConfig().services.i18n.tText(translationKey, variables, apps);
+	return AdminConfigManager.getConfig().services.i18n.tText(
+		/* IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION */
+		translationKey,
+		variables,
+		apps
+	);
 }
 
 export function tHtml(
@@ -15,5 +20,10 @@ export function tHtml(
 	variables?: Record<string, string>,
 	apps?: App[]
 ): ReactNode | string {
-	return AdminConfigManager.getConfig().services.i18n.tHtml(translationKey, variables, apps);
+	return AdminConfigManager.getConfig().services.i18n.tHtml(
+		/* IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION */
+		translationKey,
+		variables,
+		apps
+	);
 }

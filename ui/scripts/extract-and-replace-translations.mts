@@ -23,12 +23,10 @@ and add them to the json file without overwriting the existing strings.
 
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
-
-import { mapLimit } from 'blend-promise-utils';
+import { Project, SyntaxKind } from 'ts-morph';
 import { execSync } from 'child_process';
 import * as fs from 'fs/promises';
-import * as glob from 'glob';
-import { compact, intersection, kebabCase, lowerCase, upperFirst, without } from 'lodash-es';
+import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
 
 import { executeDatabaseQuery } from './execute-database-query.mts';
@@ -44,46 +42,37 @@ import {
 	ValueType,
 } from './translation.types.mjs';
 
+const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
+
 export function getFullKey(
 	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
 ): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
 	return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 }
 
+export function getKeyWithoutComponent(
+	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
+): `${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
+	return `${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
+}
+
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
 const __dirname = path.dirname(import.meta.url.replace('file:///', ''));
 
-interface CaptureGroups {
-	prefix: string;
-	tFunction: string;
-	translationWithQuotes: string;
-	translationBetweenSingleQuotes?: string;
-	translationBetweenDoubleQuotes?: string;
-	translationBetweenBackTicks?: string;
-	translationParamsWithComma?: string;
-	translationParams?: string;
-	appsParamWithComma?: string;
-	appsParam?: string;
-}
+function getFormattedKey(filePath: string, key: string): string {
+	const fileKey = filePath
+		.replace(/[\\/]+/g, '/')
+		.split('.')[0]
+		.split(/[\\/]/g)
+		.map((part) => kebabCase(part))
+		.join('/')
+		.toLowerCase()
+		.replace(/(^\/+|\/+$)/g, '')
+		.trim();
+	const formattedKey = kebabCase(key);
 
-function getFormattedKey(filePath: string, key: string) {
-	try {
-		const fileKey = filePath
-			.replace(/[\\/]+/g, '/')
-			.split('.')[0]
-			.split(/[\\/]/g)
-			.map((part) => kebabCase(part))
-			.join('/')
-			.toLowerCase()
-			.replace(/(^\/+|\/+$)/g, '')
-			.trim();
-		const formattedKey = kebabCase(key);
-
-		return `${fileKey}${TRANSLATION_SEPARATOR}${formattedKey}`;
-	} catch (err) {
-		console.error('Failed to format key', filePath, key);
-	}
+	return `${fileKey}${TRANSLATION_SEPARATOR}${formattedKey}`;
 }
 
 function getFormattedTranslation(translation: string) {
@@ -93,168 +82,162 @@ function getFormattedTranslation(translation: string) {
 	return translation.trim().replace(/\t\t(\t)+/g, ' ');
 }
 
-async function getFilesByGlob(rootFolderPath: string): Promise<string[]> {
-	const options = {
-		ignore: ['**/*.d.ts', '**/*.test.ts', '**/*.spec.ts'],
-		cwd: rootFolderPath,
-	};
-	return glob.glob('**/*.@(ts|tsx)', options);
-}
-
 function getFallbackTranslation(key: string): string {
 	return `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop()))}`;
 }
 
-async function extractTranslationsFromCodeFiles(
-	rootFolderPath: string,
-	codeFiles: string[],
+function getTranslationEntryFromCallExpression(
+	tFunction: 'tText' | 'tHtml',
+	translationTextOrKey: string,
+	appsParam: string | undefined,
 	app: App,
 	component: Component,
-	oldTranslations: Record<string, string>
+	relativeFilePath: string,
+	oldTranslations: Record<string, string>,
+	oldTranslationsPath: string
+): TranslationEntry | null {
+	let formattedKey: string | undefined;
+	if (appsParam && !appsParam.includes(App.AVO) && !appsParam.includes(App.HET_ARCHIEF)) {
+		// hetarchief proxy uses the third parameter to specify the language of the app
+		appsParam = app;
+	}
+	const apps: AppsList = compact(
+		(appsParam || ALL_APPS)
+			.replace(/[[\]]/g, '')
+			.split(',')
+			.map((app: string) => app.trim())
+	) as AppsList;
+	const formattedTranslation: string = getFormattedTranslation(translationTextOrKey);
+	if (formattedTranslation.includes(TRANSLATION_SEPARATOR)) {
+		formattedKey = formattedTranslation;
+	} else {
+		formattedKey = getFormattedKey(relativeFilePath, formattedTranslation);
+	}
+
+	// If translation contains '___', use original translation, otherwise use translation found by the regexp
+	const hasKeyAlready = formattedTranslation.includes(TRANSLATION_SEPARATOR);
+	if (apps.includes(app)) {
+		if (hasKeyAlready && !oldTranslations[formattedKey]) {
+			console.error(
+				`Failed to find old translation in ${app} ${oldTranslationsPath} for key: `,
+				formattedKey
+			);
+		}
+		const location = formattedKey.split(TRANSLATION_SEPARATOR)[0];
+		const key = formattedKey.split(TRANSLATION_SEPARATOR)[1];
+
+		return {
+			app,
+			component,
+			location,
+			key,
+			language: Locale.Nl,
+			value:
+				(hasKeyAlready
+					? getFormattedTranslation(
+							oldTranslations[formattedKey] || getFallbackTranslation(formattedKey)
+					  )
+					: formattedTranslation) || '',
+			value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
+		};
+	}
+	return null;
+}
+
+async function extractTranslationsFromCodeFiles(
+	rootFolderPath: string,
+	app: App,
+	component: Component,
+	oldTranslations: Record<string, string>,
+	oldTranslationsJsonPath: string,
+	tsConfigFilePath?: string
 ): Promise<TranslationEntry[]> {
+	const tsProject = new Project({
+		tsConfigFilePath,
+	});
+
 	const sourceCodeTranslations: TranslationEntry[] = [];
-	// Find and extract translations, replace strings with translation keys
-	await mapLimit(codeFiles, 20, async (relativeFilePath: string) => {
-		try {
-			const absoluteFilePath = path.resolve(rootFolderPath, relativeFilePath);
-			const content: string = (await fs.readFile(absoluteFilePath)).toString();
+	const sourceFiles = tsProject.getSourceFiles();
+	for (const sourceFile of sourceFiles) {
+		if (
+			!(sourceFile.getBaseName().endsWith('.ts') || sourceFile.getBaseName().endsWith('.tsx'))
+		) {
+			continue; // Skip non-typescript files
+		}
+		if (
+			sourceFile.getBaseNameWithoutExtension().includes('.test') ||
+			sourceFile.getBaseNameWithoutExtension().includes('.spec') ||
+			sourceFile.isDeclarationFile()
+		) {
+			continue; // Skip test and declaration files
+		}
 
-			// Replace tHtml() and tText() functions
-			const prefix = '(?<prefix>[^a-zA-Z])'; // eg: .
-			const tFunction = '(?<tFunction>tHtml|tText)\\('; // eg: tHtml
-			const whitespace = '\\s*';
-			const singleQuote = "[']"; // eg: "
-			const doubleQuote = '["]'; // eg: "
-			const backTick = '[`]'; // eg: "
-			const translationBetweenSingleQuotes =
-				singleQuote + "(?<translationBetweenSingleQuotes>[^']+?)" + singleQuote; // eg: 'admin/content-block/helpers/generators/klaar___voeg-titel-toe'
-			const translationBetweenDoubleQuotes =
-				doubleQuote + '(?<translationBetweenDoubleQuotes>[^"]+?)' + doubleQuote; // eg: "admin/content-block/helpers/generators/klaar___voeg-titel-toe"
-			const translationBetweenBackTicks =
-				backTick + '(?<translationBetweenBackTicks>[^`]+?)' + backTick; // eg: `admin/content-block/helpers/generators/klaar___voeg-titel-toe`
-			const translationWithQuotes =
-				'(?<translationWithQuotes>' +
-				translationBetweenSingleQuotes +
-				'|' +
-				translationBetweenDoubleQuotes +
-				'|' +
-				translationBetweenBackTicks +
-				')';
-			const translationParamsWithComma =
-				'(?<translationParamsWithComma>[\\s]*,[\\s]*(?<translationParams>[^)]*?|undefined))?'; // eg: , {numberOfPeople: 5} or , undefined
-			const appsParamWithComma =
-				'(?<appsParamWithComma>[\\s]*,[\\s]*(?<appsParam>\\[[^\\]]*\\]))?'; // eg: , [AVO]
-			const tFuncEnd = '[\\s]*\\)'; // eg: )
-			const combinedRegex = [
-				prefix,
-				tFunction,
-				whitespace,
-				translationWithQuotes,
-				whitespace,
-				translationParamsWithComma,
-				appsParamWithComma,
-				whitespace,
-				tFuncEnd,
-			].join('');
-			const regex = new RegExp(combinedRegex, 'gim');
-			const newContent = content.replace(
-				// Match char before t function to make sure it isn't part of a bigger function name, eg: sent()
-				regex,
-				(match: string, ...groups) => {
-					const captureGroups = groups.pop() as CaptureGroups;
-					const {
-						prefix,
-						tFunction,
-						translationBetweenSingleQuotes,
-						translationBetweenDoubleQuotes,
-						translationBetweenBackTicks,
-						translationParams,
-						appsParam,
-					} = captureGroups;
-					const translation = (translationBetweenSingleQuotes ||
-						translationBetweenDoubleQuotes ||
-						translationBetweenBackTicks) as string;
+		if (!sourceFile.getFilePath().startsWith(rootFolderPath)) {
+			continue; // Skip files outside the root folder
+		}
 
-					let formattedKey: string | undefined;
-					const apps: AppsList = compact(
-						(appsParam || `, [${App.AVO}, ${App.HET_ARCHIEF}]`)
-							.replace(/[[\]]/g, '')
-							.split(',')
-							.map((app: string) => app.trim())
-					) as AppsList;
-					const formattedTranslation: string = getFormattedTranslation(translation);
-					if (formattedTranslation.includes(TRANSLATION_SEPARATOR)) {
-						formattedKey = formattedTranslation;
-					} else {
-						formattedKey = getFormattedKey(relativeFilePath, formattedTranslation);
-					}
+		// Find and extract translations, replace strings with translation keys
 
-					if (!formattedKey) {
-						return match; // Do not modify the translations, since we cannot generate a key
-					}
+		// Find all tHtml() and tText() function calls
+		const translationFunctionCalls = sourceFile
+			.getDescendantsOfKind(SyntaxKind.CallExpression)
+			.filter((callExpression) => {
+				const functionCallText = callExpression.getText();
+				const functionName = callExpression.getFirstChild()?.getText();
+				return (
+					!functionCallText.includes('IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION') &&
+					(functionName?.endsWith('tHtml') || functionName?.endsWith('tText'))
+				);
+			});
 
-					if ((translationParams || '').includes('(')) {
-						console.warn(
-							'WARNING: Translation params should not contain any function calls, ' +
-								'since the regex replacement cannot deal with brackets inside the t() function. ' +
-								'Store the translation params in a variable before calling the t() function.',
-							{
-								match,
-								prefix,
-								tFunction,
-								translation,
-								translationParams,
-								appsParam,
-								absoluteFilePath,
-							}
-						);
-					}
-					// If translation contains '___', use original translation, otherwise use translation found by the regexp
-					const hasKeyAlready = formattedTranslation.includes(TRANSLATION_SEPARATOR);
-					if (apps.includes(app)) {
-						if (hasKeyAlready && !oldTranslations[formattedKey]) {
-							console.error(
-								`Failed to find old translation in ${app}/nl.json for key: `,
-								formattedKey
-							);
-						}
-						const location = formattedKey.split(TRANSLATION_SEPARATOR)[0];
-						const key = formattedKey.split(TRANSLATION_SEPARATOR)[1];
+		translationFunctionCalls.forEach((callExpression) => {
+			const functionCallExpressionName = callExpression.getFirstChild()?.getText() as string;
+			const functionCallName = (
+				functionCallExpressionName.endsWith('tText') ? 'tText' : 'tHtml'
+			) as 'tText' | 'tHtml';
+			const functionParametersNode = callExpression.getChildrenOfKind(SyntaxKind.SyntaxList);
+			const functionParameters = functionParametersNode[0]
+				.getChildren()
+				.filter((child) => child.getKind() !== SyntaxKind.CommaToken);
+			const firstParameter = functionParameters[0];
+			if (firstParameter.getKind() !== SyntaxKind.StringLiteral) {
+				console.error(
+					JSON.stringify({
+						message:
+							'First parameter of tText and tHtml must be a literal string and not a variable or function call return.',
+						additionalInfo: {
+							file: sourceFile.getBaseName(),
+							callExpression: callExpression.getText(),
+							line: callExpression.getStartLineNumber(),
+							character: callExpression.getStartLinePos(),
+						},
+					})
+				);
+				return;
+			}
+			const params = functionParameters.map((param) => param.getText());
 
-						sourceCodeTranslations.push({
-							app,
-							component,
-							location,
-							key,
-							language: Locale.Nl,
-							value:
-								(hasKeyAlready
-									? getFormattedTranslation(
-											oldTranslations[formattedKey] ||
-												getFallbackTranslation(formattedKey)
-									  )
-									: formattedTranslation) || '',
-							value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
-						});
-					}
-
-					if (hasKeyAlready) {
-						return match;
-					} else {
-						return `${prefix}${tFunction}('${formattedKey}'${
-							translationParams ? ', ' + translationParams : ''
-						}${appsParam ? ', ' + appsParam : ''})`;
-					}
-				}
+			const translationEntry = getTranslationEntryFromCallExpression(
+				functionCallName,
+				trim(firstParameter.getText(), '\'"``'),
+				params[2],
+				app,
+				component,
+				sourceFile.getFilePath().substring(rootFolderPath.length + 1),
+				oldTranslations,
+				oldTranslationsJsonPath
 			);
 
-			if (content !== newContent) {
-				await fs.writeFile(absoluteFilePath, newContent);
+			if (translationEntry) {
+				firstParameter.replaceWithText(
+					"'" + getKeyWithoutComponent(translationEntry) + "'"
+				);
+				sourceCodeTranslations.push(translationEntry);
 			}
-		} catch (err) {
-			console.error(`Failed to find translations in file: ${relativeFilePath}`, err);
-		}
-	});
+		});
+	}
+	await tsProject.save();
+
 	return sourceCodeTranslations;
 }
 
@@ -420,7 +403,8 @@ async function updateTranslations(
 	rootFolderPath: string,
 	app: App,
 	component: Component,
-	outputJsonFile: string
+	outputJsonFile: string,
+	tsConfigPath?: string
 ): Promise<TranslationEntry[]> {
 	try {
 		const onlineTranslations = (await getOnlineTranslations(app)).filter(
@@ -445,13 +429,13 @@ async function updateTranslations(
 		);
 
 		// Extract translations from code and replace code by reference to translation key
-		const codeFiles = await getFilesByGlob(rootFolderPath);
 		const sourceCodeTranslations = await extractTranslationsFromCodeFiles(
 			rootFolderPath,
-			codeFiles,
 			app,
 			component,
-			nlJsonTranslations
+			nlJsonTranslations,
+			outputJsonFile,
+			tsConfigPath
 		);
 
 		return await combineTranslations(
@@ -477,6 +461,10 @@ async function updateTranslations(
 	}
 }
 
+function resolvePath(filePath: string): string {
+	return path.resolve(__dirname, filePath).replace(/\\/g, '/');
+}
+
 async function extractTranslations() {
 	const app = process.argv[2] as App;
 	if (app !== App.AVO && app !== App.HET_ARCHIEF) {
@@ -490,35 +478,38 @@ async function extractTranslations() {
 		// AVO admin-core
 		console.info('Extracting AVO admin-core translations...');
 		const avoAdminCoreTranslations = await updateTranslations(
-			path.resolve(__dirname, '../src/react-admin'),
+			resolvePath('../src/react-admin'),
 			App.AVO,
 			Component.ADMIN_CORE,
-			'../shared/translations/avo/nl.json'
+			'../shared/translations/avo/nl.json',
+			resolvePath('../tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '..')} && npm run format`);
+		execSync(`cd ${resolvePath('..')} && npm run format`);
 
 		// AVO client
 		console.info('Extracting AVO client translations...');
 		const avoClientTranslations = await updateTranslations(
-			path.resolve(__dirname, '../../../avo2-client/src'),
+			resolvePath('../../../avo2-client/src'),
 			App.AVO,
 			Component.FRONTEND,
-			'shared/translations/nl.json'
+			'shared/translations/nl.json',
+			resolvePath('../../../avo2-client/tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '../../../avo2-client')} && npm run format`);
+		execSync(`cd ${resolvePath('../../../avo2-client')} && npm run format`);
 
 		// AVO proxy
 		console.info('Extracting AVO admin-core translations...');
 		const avoProxyTranslations = await updateTranslations(
-			path.resolve(__dirname, '../../../avo2-proxy/server/src'),
+			resolvePath('../../../avo2-proxy/server/src'),
 			App.AVO,
 			Component.BACKEND,
-			'shared/translations/nl.json'
+			'shared/translations/nl.json',
+			resolvePath('../../../avo2-proxy/tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '../../../avo2-proxy/server')} && npm run format`);
+		execSync(`cd ${resolvePath('../../../avo2-proxy/server')} && npm run format`);
 
 		allTranslations = [
 			...avoAdminCoreTranslations,
@@ -529,35 +520,38 @@ async function extractTranslations() {
 		// HetArchief admin-core
 		console.info('Extracting HET_ARCHIEF admin-core translations...');
 		const hetArchiefAdminCoreTranslations = await updateTranslations(
-			path.resolve(__dirname, '../src/react-admin'),
+			resolvePath('../src/react-admin'),
 			App.HET_ARCHIEF,
 			Component.ADMIN_CORE,
-			'../shared/translations/hetArchief/nl.json'
+			'../shared/translations/hetArchief/nl.json',
+			resolvePath('../tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '..')} && npm run format`);
+		execSync(`cd ${resolvePath('..')} && npm run format`);
 
 		// HetArchief client
 		console.info('Extracting HET_ARCHIEF client translations...');
 		const hetArchiefClientTranslations = await updateTranslations(
-			path.resolve(__dirname, '../../../hetarchief-client/src'),
+			resolvePath('../../../hetarchief-client/src'),
 			App.HET_ARCHIEF,
 			Component.FRONTEND,
-			'../public/locales/nl/common.json'
+			'../public/locales/nl/common.json',
+			resolvePath('../../../hetarchief-client/tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '../../../hetarchief-client')} && npm run format`);
+		execSync(`cd ${resolvePath('../../../hetarchief-client')} && npm run format`);
 
 		// HetArchief proxy
 		console.info('Extracting HET_ARCHIEF proxy translations...');
 		const hetArchiefProxyTranslations = await updateTranslations(
-			path.resolve(__dirname, '../../../hetarchief-proxy/src'),
+			resolvePath('../../../hetarchief-proxy/src'),
 			App.HET_ARCHIEF,
 			Component.BACKEND,
-			'shared/i18n/locales/nl.json'
+			'shared/i18n/locales/nl.json',
+			resolvePath('../../../hetarchief-proxy/tsconfig.json')
 		);
 		console.info('Formatting code\n');
-		execSync(`cd ${path.resolve(__dirname, '../../../hetarchief-proxy')} && npm run format`);
+		execSync(`cd ${resolvePath('../../../hetarchief-proxy')} && npm run format`);
 
 		allTranslations = [
 			...hetArchiefAdminCoreTranslations,
