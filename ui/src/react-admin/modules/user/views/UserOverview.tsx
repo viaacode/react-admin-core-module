@@ -273,11 +273,13 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 			await refetchProfiles();
 			showToast({
 				title: tText('modules/user/views/user-overview___success'),
-				description: tText(
-					blockOrUnblock
-						? 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
-						: 'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
-				),
+				description: blockOrUnblock
+					? tText(
+							'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd'
+					  )
+					: tText(
+							'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
+					  ),
 				type: ToastType.SUCCESS,
 			});
 		} catch (err) {
