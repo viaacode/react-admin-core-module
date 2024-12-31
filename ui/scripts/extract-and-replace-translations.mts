@@ -23,15 +23,24 @@ and add them to the json file without overwriting the existing strings.
 
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
-import {Project, SyntaxKind} from 'ts-morph';
-import {execSync} from 'child_process';
+import { Project, SyntaxKind } from 'ts-morph';
+import { execSync } from 'child_process';
 import * as fs from 'fs/promises';
-import {compact, intersection, kebabCase, lowerCase, trim, upperFirst, without} from 'lodash-es';
+import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
 
-import {executeDatabaseQuery} from './execute-database-query.mts';
-import type {MultiLanguageTranslationEntry} from '~modules/translations/translations.types.ts';
-import {App, Component, Key, Locale, Location, TRANSLATION_SEPARATOR, TranslationEntry, ValueType,} from './translation.types.mjs';
+import { executeDatabaseQuery } from './execute-database-query.mts';
+import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
+import {
+	App,
+	Component,
+	Key,
+	Locale,
+	Location,
+	TRANSLATION_SEPARATOR,
+	TranslationEntry,
+	ValueType,
+} from './translation.types.mjs';
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
 
@@ -497,7 +506,7 @@ async function extractTranslations() {
 			App.AVO,
 			Component.BACKEND,
 			'shared/translations/nl.json',
-			resolvePath('../../../avo2-proxy/tsconfig.json')
+			resolvePath('../../../avo2-proxy/server/tsconfig.json')
 		);
 		console.info('Formatting code\n');
 		execSync(`cd ${resolvePath('../../../avo2-proxy/server')} && npm run format`);
