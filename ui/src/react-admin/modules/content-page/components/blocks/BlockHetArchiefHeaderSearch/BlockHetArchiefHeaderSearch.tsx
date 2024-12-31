@@ -26,7 +26,6 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 }): ReactElement => {
 	const [activeIndex, setActiveIndex] = useState<number>(subtitles.length - 1);
 	const [searchTerm, setSearchTerm] = useState<string>('');
-	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	useEffect(() => {
 		const timerId = setInterval(() => {
@@ -46,7 +45,7 @@ export const BlockHetArchiefHeaderSearch: FunctionComponent<BlockHetArchiefHeade
 			url: AdminConfigManager.getConfig().routes.SEARCH || '/zoeken',
 			query: searchTerm ? { zoekterm: searchTerm } : {},
 		});
-		history.push(url);
+		AdminConfigManager.getConfig().services.router.useHistory().push(url);
 	};
 
 	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
