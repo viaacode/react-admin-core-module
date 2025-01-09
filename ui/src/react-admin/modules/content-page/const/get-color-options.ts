@@ -125,78 +125,78 @@ export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{
-		label: tText('admin/content-block/content-block___zwart'),
+		label: tText('admin/content-block/content-block___zwart', {}, [AVO]),
 		value: Color.Black,
 	},
 	{
-		label: tText('admin/content-block/content-block___donker-grijs'),
+		label: tText('admin/content-block/content-block___donker-grijs', {}, [AVO]),
 		value: Color.Gray700,
 	},
 	{
-		label: tText('admin/content-block/content-block___grijs'),
+		label: tText('admin/content-block/content-block___grijs', {}, [AVO]),
 		value: Color.Gray50,
 	},
 	{
-		label: tText('admin/content-block/content-block___wit'),
+		label: tText('admin/content-block/content-block___wit', {}, [AVO]),
 		value: Color.White,
 	},
 ];
 
 export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () => [
 	{
-		label: tText('admin/content-block/content-block___zwart'),
+		label: tText('admin/content-block/content-block___zwart', {}, [AVO]),
 		value: Color.Black,
 	},
 	{
-		label: tText('admin/content-block/content-block___donker-grijs'),
+		label: tText('admin/content-block/content-block___donker-grijs', {}, [AVO]),
 		value: Color.Gray700,
 	},
 	{
-		label: tText('admin/content-block/content-block___wit'),
+		label: tText('admin/content-block/content-block___wit', {}, [AVO]),
 		value: Color.White,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___teal-bright'),
+		label: tText('modules/content-page/const/get-color-options___teal-bright', {}, [AVO]),
 		value: Color.TealBright,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___oceaan-groen'),
+		label: tText('modules/content-page/const/get-color-options___oceaan-groen', {}, [AVO]),
 		value: Color.OceanGreen,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___jeneverbes'),
+		label: tText('modules/content-page/const/get-color-options___jeneverbes', {}, [AVO]),
 		value: Color.Juniper,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___zilver'),
+		label: tText('modules/content-page/const/get-color-options___zilver', {}, [AVO]),
 		value: Color.Silver,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___paars-roze'),
+		label: tText('modules/content-page/const/get-color-options___paars-roze', {}, [AVO]),
 		value: Color.Tapestry,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___wijn-rood'),
+		label: tText('modules/content-page/const/get-color-options___wijn-rood', {}, [AVO]),
 		value: Color.WineRed,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___geel'),
+		label: tText('modules/content-page/const/get-color-options___geel', {}, [AVO]),
 		value: Color.Yellow,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___groen'),
+		label: tText('modules/content-page/const/get-color-options___groen', {}, [AVO]),
 		value: Color.Green,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___donker-oranje'),
+		label: tText('modules/content-page/const/get-color-options___donker-oranje', {}, [AVO]),
 		value: Color.DarkOrange,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___zacht-blauw'),
+		label: tText('modules/content-page/const/get-color-options___zacht-blauw', {}, [AVO]),
 		value: Color.SoftBlue,
 	},
 	{
-		label: tText('modules/content-page/const/get-color-options___frans-roze'),
+		label: tText('modules/content-page/const/get-color-options___frans-roze', {}, [AVO]),
 		value: Color.FrenchRose,
 	},
 ];
