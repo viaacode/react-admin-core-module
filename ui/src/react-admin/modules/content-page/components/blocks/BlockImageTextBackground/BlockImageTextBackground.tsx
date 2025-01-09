@@ -90,28 +90,32 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	const renderHeadingTextAndButton = () => {
 		return (
 			<>
-				<BlockHeading
-					className="c-block-image-text-background__heading"
-					type={headingType}
-					style={{
-						fontSize: FONT_SIZE_TO_REM[headingSize],
-						padding: TEXT_PADDING_TO_REM[textPadding],
-						backgroundColor: backgroundColor,
-						textAlign: computedTextAlign,
-					}}
-				>
-					{heading}
-				</BlockHeading>
-				<p
-					className="c-block-image-text-background__content"
-					style={{
-						padding: TEXT_PADDING_TO_REM[textPadding],
-						backgroundColor: backgroundColor,
-						textAlign: computedTextAlign,
-					}}
-				>
-					{content}
-				</p>
+				{!!heading && (
+					<BlockHeading
+						className="c-block-image-text-background__heading"
+						type={headingType}
+						style={{
+							fontSize: FONT_SIZE_TO_REM[headingSize],
+							padding: TEXT_PADDING_TO_REM[textPadding],
+							backgroundColor: backgroundColor,
+							textAlign: computedTextAlign,
+						}}
+					>
+						{heading}
+					</BlockHeading>
+				)}
+				{!!content && (
+					<p
+						className="c-block-image-text-background__content"
+						style={{
+							padding: TEXT_PADDING_TO_REM[textPadding],
+							backgroundColor: backgroundColor,
+							textAlign: computedTextAlign,
+						}}
+					>
+						{content}
+					</p>
+				)}
 
 				{buttonAction &&
 					generateSmartLink(

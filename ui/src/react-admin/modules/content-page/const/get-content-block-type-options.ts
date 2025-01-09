@@ -125,9 +125,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.CardsWithoutDescription,
 		},
 		{
-			label: tText('admin/content-block/content-block___image-text-background', {}, [
-				HET_ARCHIEF,
-			]),
+			label: tText('admin/content-block/content-block___image-text-background'),
 			value: ContentBlockType.ImageTextBackground,
 		},
 		{
