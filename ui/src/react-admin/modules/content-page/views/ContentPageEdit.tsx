@@ -197,8 +197,10 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				),
 				type: ToastType.SPINNER,
 			});
-			// Temp id until this block is saved into the database
-			newBlockConfig.id = TEMP_BLOCK_ID_PREFIX + Date.now();
+
+			// Remove id before duplicating
+			delete newBlockConfig.id;
+
 			// Ensure block is added at the bottom of the page
 			newBlockConfig.position = (
 				contentPageState?.currentContentPageInfo?.content_blocks || []
@@ -207,6 +209,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			// Duplicate the assets used in this content block, so it is no longer linked to the original content block
 			const newBlockConfigWithDuplicatedAssets =
 				await ContentPageService.duplicateContentImages(newBlockConfig);
+
+			// Temp id until this block is saved into the database
+			newBlockConfigWithDuplicatedAssets.id = TEMP_BLOCK_ID_PREFIX + Date.now();
 
 			changeContentPageState({
 				type: ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG,

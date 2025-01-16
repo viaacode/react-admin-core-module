@@ -372,7 +372,40 @@ export class ContentPagesController {
 		return this.contentPagesService.getUserGroupsFromContentPage(path);
 	}
 
+	@Post('/blocks/duplicate')
+	@RequireAnyPermissions(
+		PermissionName.EDIT_ANY_CONTENT_PAGES,
+		PermissionName.EDIT_OWN_CONTENT_PAGES
+	)
+	async duplicateContentBlockImages(
+		@Body() contentBlockJson: any,
+		@SessionUser() user: SessionUserEntity
+	): Promise<DbContentPage> {
+		try {
+			console.log(
+				'duplicating assets in content block for user profile: ' + user.getProfileId()
+			);
+			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
+			return await this.assetsService.duplicateAssetsInJsonBlob(
+				contentBlockJson,
+				user.getProfileId(),
+				AssetType.CONTENT_PAGE_IMAGE
+			);
+		} catch (err) {
+			logAndThrow(
+				new InternalServerErrorException({
+					message: 'Failed to duplicate assets in content block json',
+					innerException: err,
+					additionalInfo: {
+						contentBlockJson,
+					},
+				})
+			);
+		}
+	}
+
 	/**
+	 * !!!!! must be below @Post('/blocks/duplicate') otherwise :id will match with the "blocks" part of the route
 	 * This function will accept an id of an existing content page
 	 * fetch the content page
 	 * duplicate the content page including all its assets
@@ -459,38 +492,6 @@ export class ContentPagesController {
 						id,
 						overrideValues,
 						profileId: user?.getProfileId(),
-					},
-				})
-			);
-		}
-	}
-
-	@Post('/blocks/duplicate')
-	@RequireAnyPermissions(
-		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_OWN_CONTENT_PAGES
-	)
-	async duplicateContentBlockImages(
-		@Body() contentBlockJson: any,
-		@SessionUser() user: SessionUserEntity
-	): Promise<DbContentPage> {
-		try {
-			console.log(
-				'duplicating assets in content block for user profile: ' + user.getProfileId()
-			);
-			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
-			return await this.assetsService.duplicateAssetsInJsonBlob(
-				contentBlockJson,
-				user.getProfileId(),
-				AssetType.CONTENT_PAGE_IMAGE
-			);
-		} catch (err) {
-			logAndThrow(
-				new InternalServerErrorException({
-					message: 'Failed to duplicate assets in content block json',
-					innerException: err,
-					additionalInfo: {
-						contentBlockJson,
 					},
 				})
 			);
