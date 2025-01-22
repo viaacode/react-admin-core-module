@@ -79,18 +79,20 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 					this is to target the admin role. This role will always have access.
 					TODO: this should be refactored, the database needs a migration that gives these usersGroups a named string for ARC as AVO.
 					we then could whitelist these groups here and check for this name instead of the index.
-					Ticket: https://meemoo.atlassian.net/jira/software/c/projects/ARC/issues/ARC-2578?jql=labels%20%3D%20%22SHD_hulp%22
+					Ticket: https://meemoo.atlassian.net/browse/ARC-2578
 					 */
+
+					const isAdminCheckbox = index === userGroupOptions.length - 1;
+
 					return (
 						<Checkbox
 							key={userGroupOption.value}
 							label={userGroupOption.label}
 							value={userGroupOption.value}
 							checked={
-								index === userGroupOptions.length - 1 ||
-								values.includes(String(userGroupOption.value))
+								isAdminCheckbox || values.includes(String(userGroupOption.value))
 							}
-							disabled={index === userGroupOptions.length - 1}
+							disabled={isAdminCheckbox}
 							onChange={handleCheckboxChanged}
 						></Checkbox>
 					);
