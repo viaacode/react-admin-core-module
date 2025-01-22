@@ -18,6 +18,7 @@ import { NULL_FILTER } from '../../helpers/filters';
 import { EducationalOrganisationsSelect } from '../EducationalOrganisationsSelect/EducationalOrganisationsSelect';
 
 import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AVO } from '~shared/types';
 
 import './MultiEducationalOrganisationSelectModal.scss';
 
@@ -85,10 +86,14 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 											label: `${selected} ${
 												selected > 1
 													? tText(
-															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___items-geselecteerd'
+															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___items-geselecteerd',
+															{},
+															[AVO]
 													  )
 													: tText(
-															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___item-geselecteerd'
+															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___item-geselecteerd',
+															{},
+															[AVO]
 													  )
 											}`,
 										},
@@ -111,14 +116,16 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 					isOpen={isOpen}
 					onClose={closeModal}
 					title={tText(
-						'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___educatieve-organisaties'
+						'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___educatieve-organisaties',
+						{},
+						[AVO]
 					)}
 					size={'medium'}
 				>
 					<ModalBody>
 						<Spacer margin="bottom-small">
 							<Checkbox
-								label={tHtml('admin/users/user___leeg')}
+								label={tHtml('admin/users/user___leeg', {}, [AVO])}
 								checked={includeEmpty}
 								onChange={setIncludeEmpty}
 							/>
@@ -131,7 +138,9 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 					<ModalFooterRight>
 						<Button
 							label={tText(
-								'shared/components/checkbox-dropdown-modal/checkbox-dropdown-modal___toepassen'
+								'shared/components/checkbox-dropdown-modal/checkbox-dropdown-modal___toepassen',
+								{},
+								[AVO]
 							)}
 							type="primary"
 							className="c-apply-filter-button"

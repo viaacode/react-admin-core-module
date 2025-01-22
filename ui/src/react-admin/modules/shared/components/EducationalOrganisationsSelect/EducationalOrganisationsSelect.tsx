@@ -10,6 +10,7 @@ import { showToast } from '~shared/helpers/show-toast';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 
 import { stringsToTagList } from '../../helpers/strings-to-taglist';
+import { AVO } from '~modules/shared/types';
 
 export interface Tag {
 	label: string;
@@ -49,10 +50,14 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				console.error(new Error('Failed to get cities'));
 				showToast({
 					title: tText(
-						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt'
+						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt',
+						{},
+						[AVO]
 					),
 					description: tText(
-						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt'
+						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt',
+						{},
+						[AVO]
 					),
 					type: ToastType.ERROR,
 				});
@@ -94,10 +99,14 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				});
 				showToast({
 					title: tText(
-						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
+						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt',
+						{},
+						[AVO]
 					),
 					description: tText(
-						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt'
+						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt',
+						{},
+						[AVO]
 					),
 					type: ToastType.ERROR,
 				});
@@ -123,10 +132,14 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		if (!selectedOrg) {
 			showToast({
 				title: tText(
-					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt'
+					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt',
+					{},
+					[AVO]
 				),
 				description: tText(
-					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden'
+					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden',
+					{},
+					[AVO]
 				),
 				type: ToastType.ERROR,
 			});
@@ -150,7 +163,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 			return [
 				{
 					label: tText(
-						'settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente'
+						'settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente',
+						{},
+						[AVO]
 					),
 					value: '',
 					disabled: true,
@@ -159,7 +174,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		}
 		return [
 			{
-				label: tText('settings/components/organisation___selecteer-een-instelling'),
+				label: tText('settings/components/organisation___selecteer-een-instelling', {}, [
+					AVO,
+				]),
 				value: '',
 				disabled: true,
 			},
@@ -179,7 +196,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 						options={[
 							{
 								label: tText(
-									'settings/components/profile___voeg-een-organisatie-toe'
+									'settings/components/profile___voeg-een-organisatie-toe',
+									{},
+									[AVO]
 								),
 								value: '',
 							},
@@ -194,7 +213,9 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 						<Alert
 							type="spinner"
 							message={tHtml(
-								'settings/components/profile___bezig-met-ophalen-van-organisaties'
+								'settings/components/profile___bezig-met-ophalen-van-organisaties',
+								{},
+								[AVO]
 							)}
 						/>
 					)}
