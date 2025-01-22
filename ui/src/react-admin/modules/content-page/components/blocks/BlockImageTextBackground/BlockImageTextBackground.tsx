@@ -18,17 +18,17 @@ import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 import './image-text-background.scss';
 
-const FONT_SIZE_TO_REM: Record<HeadingSizeOption, string> = {
-	small: '3.2rem',
-	medium: '3.6rem',
-	large: '4rem',
+const FONT_SIZE_TO_REM: Record<HeadingSizeOption, number> = {
+	small: 3.2,
+	medium: 3.6,
+	large: 4,
 };
 
-const TEXT_PADDING_TO_REM: Partial<Record<SpacerOption, string>> = {
-	small: '0.5rem',
-	medium: '1.5rem',
-	large: '2rem',
-	'extra-large': '3rem',
+const TEXT_PADDING_TO_REM: Partial<Record<SpacerOption, number>> = {
+	small: 0.5,
+	medium: 1.5,
+	large: 2,
+	'extra-large': 3,
 };
 
 const IMAGE_ALIGN_TO_TEXT_ALIGN: Record<BackgroundAlignOption, AlignOption> = {
@@ -55,7 +55,7 @@ export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	foregroundColor: Color;
 	backgroundColor: Color;
 	image?: string;
-	imageAlignment?: BackgroundAlignOption;
+	backgroundAlignment?: BackgroundAlignOption;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
@@ -76,7 +76,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	foregroundColor,
 	backgroundColor,
 	image,
-	imageAlignment = 'left-screen',
+	backgroundAlignment = 'fill-screen',
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,
@@ -85,9 +85,14 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	buttonIconAlignment = 'left',
 	pageWidth,
 }): ReactElement => {
-	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[imageAlignment];
+	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
 
 	const renderHeadingTextAndButton = () => {
+		const fontSize = FONT_SIZE_TO_REM[headingSize];
+		const padding = TEXT_PADDING_TO_REM[textPadding] || 0;
+		const lineHeightTitle = (fontSize + padding * 2) * 1.5;
+		const lineHeightText = (1.5 + padding * 2) * 1.3;
+
 		return (
 			<>
 				{!!heading && (
@@ -95,25 +100,43 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 						className="c-block-image-text-background__heading"
 						type={headingType}
 						style={{
-							fontSize: FONT_SIZE_TO_REM[headingSize],
-							padding: TEXT_PADDING_TO_REM[textPadding],
-							backgroundColor: backgroundColor,
 							textAlign: computedTextAlign,
 						}}
 					>
-						{heading}
+						<mark
+							style={{
+								fontSize: fontSize + 'rem',
+								padding: padding + 'rem',
+								backgroundColor: backgroundColor,
+								lineHeight: lineHeightTitle + 'rem',
+								boxDecorationBreak: 'clone',
+								whiteSpace: 'normal',
+								color: foregroundColor,
+							}}
+						>
+							{heading}
+						</mark>
 					</BlockHeading>
 				)}
 				{!!content && (
 					<p
 						className="c-block-image-text-background__content"
 						style={{
-							padding: TEXT_PADDING_TO_REM[textPadding],
-							backgroundColor: backgroundColor,
 							textAlign: computedTextAlign,
 						}}
 					>
-						{content}
+						<mark
+							style={{
+								padding: padding + 'rem',
+								backgroundColor: backgroundColor,
+								lineHeight: lineHeightText + 'rem',
+								boxDecorationBreak: 'clone',
+								whiteSpace: 'normal',
+								color: foregroundColor,
+							}}
+						>
+							{content}
+						</mark>
 					</p>
 				)}
 
@@ -121,7 +144,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					generateSmartLink(
 						buttonAction,
 						<Button
-							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment}`}
+							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment} u-m-t-m`}
 							label={buttonLabel}
 							type={buttonType}
 							icon={buttonIcon}
@@ -143,14 +166,14 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 				src={image}
 				className={clsx(
 					'c-block-image-text-background__image-wrapper',
-					'c-block-image-text-background__image-wrapper--' + imageAlignment
+					'c-block-image-text-background__image-wrapper--' + backgroundAlignment
 				)}
 			/>
 		);
 	};
 
 	const renderBlockContent = () => {
-		if (imageAlignment === 'fill-screen') {
+		if (backgroundAlignment === 'fill-screen') {
 			return (
 				<>
 					<Container
@@ -175,7 +198,10 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					{renderImage()}
 				</>
 			);
-		} else if (imageAlignment === 'left-screen' || imageAlignment === 'right-screen') {
+		} else if (
+			backgroundAlignment === 'left-screen' ||
+			backgroundAlignment === 'right-screen'
+		) {
 			return (
 				<>
 					<Container
@@ -202,8 +228,8 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 				</>
 			);
 		} else if (
-			imageAlignment === 'left-inside-page' ||
-			imageAlignment === 'right-inside-page'
+			backgroundAlignment === 'left-inside-page' ||
+			backgroundAlignment === 'right-inside-page'
 		) {
 			return (
 				<>
@@ -239,7 +265,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	return (
 		<article
 			className={clsx(
-				`c-block-image-text-background c-block-image-text-background--${imageAlignment}`,
+				`c-block-image-text-background c-block-image-text-background--${backgroundAlignment}`,
 				className
 			)}
 		>
