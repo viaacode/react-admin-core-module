@@ -228,4 +228,8 @@
 			display: inline-block;
 		}
 	}
+
+	.c-block-image-text-background__heading {
+		font-weight: 600; // semibold: https://meemoo.atlassian.net/browse/AVO-3390
+	}
 }
