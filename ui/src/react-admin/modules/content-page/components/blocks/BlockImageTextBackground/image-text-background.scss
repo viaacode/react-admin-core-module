@@ -2,8 +2,15 @@
 @import "../../../../shared/styles/settings/variables";
 
 .c-block-image-text-background {
+	.a-block-image__annotation {
+		padding: 10px 20px 0;
+	}
+}
+
+.c-block-image-text-background-wrapper {
 	width: 100%;
 	height: auto;
+	position: relative;
 
 	&.c-block-image-text-background--fill-screen {
 		.c-block-image-text-background__page-wrapper {

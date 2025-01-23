@@ -162,6 +162,16 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					options: GET_BACKGROUND_ALIGN_OPTIONS(),
 				},
 			},
+			imageAttribution: {
+				label: tText('Bijschrift: bronvermelding ©'),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
+			},
+			imageAttributionText: {
+				label: tText('Bijschrift: beschrijving'),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
+			},
 			buttonType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-type'

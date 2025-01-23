@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
+import React from 'react';
 import type {
 	AlignOption,
 	BackgroundAlignOption,
@@ -17,6 +18,7 @@ import { Icon } from '~shared/components/Icon';
 import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 
 import './image-text-background.scss';
+import { isMobileWidth } from '~shared/helpers/media-query';
 
 const FONT_SIZE_TO_REM: Record<HeadingSizeOption, number> = {
 	small: 3.2,
@@ -56,6 +58,8 @@ export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	backgroundColor: Color;
 	image?: string;
 	backgroundAlignment?: BackgroundAlignOption;
+	imageAttribution?: string;
+	imageAttributionText?: string;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
@@ -77,6 +81,8 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	backgroundColor,
 	image,
 	backgroundAlignment = 'fill-screen',
+	imageAttribution,
+	imageAttributionText,
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,
@@ -88,10 +94,17 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
 
 	const renderHeadingTextAndButton = () => {
-		const fontSize = FONT_SIZE_TO_REM[headingSize];
-		const padding = TEXT_PADDING_TO_REM[textPadding] || 0;
-		const lineHeightTitle = (fontSize + padding * 2) * 1.5;
-		const lineHeightText = (1.5 + padding * 2) * 1.3;
+		let fontSize = FONT_SIZE_TO_REM[headingSize];
+		let padding = TEXT_PADDING_TO_REM[textPadding] || 0;
+		let lineHeightTitle = (fontSize + padding * 2) * 1.5;
+		let lineHeightText = (1.5 + padding * 2) * 1.3;
+
+		if (isMobileWidth()) {
+			fontSize = fontSize / 3;
+			padding = padding / 3;
+			lineHeightTitle = fontSize + padding * 2 * 1.5;
+			lineHeightText = (1.5 + padding * 2) * 1.3;
+		}
 
 		return (
 			<>
@@ -101,6 +114,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 						type={headingType}
 						style={{
 							textAlign: computedTextAlign,
+							lineHeight: lineHeightTitle + 'rem',
 						}}
 					>
 						<mark
@@ -108,7 +122,6 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 								fontSize: fontSize + 'rem',
 								padding: padding + 'rem',
 								backgroundColor: backgroundColor,
-								lineHeight: lineHeightTitle + 'rem',
 								boxDecorationBreak: 'clone',
 								whiteSpace: 'normal',
 								color: foregroundColor,
@@ -263,13 +276,22 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	};
 
 	return (
-		<article
-			className={clsx(
-				`c-block-image-text-background c-block-image-text-background--${backgroundAlignment}`,
-				className
+		<article className={clsx('c-block-image-text-background', className)}>
+			<div
+				className={`c-block-image-text-background-wrapper c-block-image-text-background--${backgroundAlignment}`}
+			>
+				{renderBlockContent()}
+			</div>
+
+			{/* image author attribution */}
+			{(!!imageAttribution || !!imageAttributionText) && (
+				<div className="a-block-image__annotation">
+					{imageAttribution && <h3>&#169; {imageAttribution}</h3>}
+					{imageAttributionText && (
+						<p className="a-block-image__text">{imageAttributionText}</p>
+					)}
+				</div>
 			)}
-		>
-			{renderBlockContent()}
 		</article>
 	);
 };
