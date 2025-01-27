@@ -163,12 +163,16 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				},
 			},
 			imageAttribution: {
-				label: tText('Bijschrift: bronvermelding ©'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-bronvermelding'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
 			imageAttributionText: {
-				label: tText('Bijschrift: beschrijving'),
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-beschrijving'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},
