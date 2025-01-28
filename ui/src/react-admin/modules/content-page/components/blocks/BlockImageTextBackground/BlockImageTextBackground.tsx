@@ -16,9 +16,9 @@ import { Button, Container, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
 import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { isMobileWidth } from '~shared/helpers/media-query';
 
 import './image-text-background.scss';
-import { isMobileWidth } from '~shared/helpers/media-query';
 
 const FONT_SIZE_TO_REM: Record<HeadingSizeOption, number> = {
 	small: 3.2,
