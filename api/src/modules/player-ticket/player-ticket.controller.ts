@@ -124,10 +124,11 @@ export class PlayerTicketController {
 	 * @param referrer
 	 * @param ip
 	 */
+	@Get('token')
 	public async getTicketServiceTokenForFilePath(
-		filePath: string,
-		referrer: string,
-		ip: string
+		@Query('filePath') filePath: string,
+		@Query('referrer') referrer: string,
+		@Ip() ip: string
 	): Promise<string> {
 		try {
 			return await this.playerTicketService.getPlayerToken(filePath, referrer, ip);

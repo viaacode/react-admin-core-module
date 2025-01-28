@@ -1,5 +1,3 @@
-import https from 'node:https';
-
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import {
 	forwardRef,
@@ -10,6 +8,7 @@ import {
 	NotFoundException,
 } from '@nestjs/common';
 import type { Cache } from 'cache-manager';
+import got from 'got';
 import { trimEnd } from 'lodash';
 import publicIp from 'public-ip';
 
@@ -40,20 +39,12 @@ export class PlayerTicketService {
 	private readonly ticketServiceMaxAge: number;
 	private readonly mediaServiceUrl: string;
 	private readonly host: string;
-	private readonly httpsAgent: https.Agent;
 
 	constructor(
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {
 		// Create an HTTPS agent to handle custom TLS configuration:
-		this.httpsAgent = new https.Agent({
-			rejectUnauthorized: false,
-			cert: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
-			key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
-			passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
-		});
-
 		this.ticketServiceMaxAge = parseInt(
 			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY)
 		);
@@ -69,12 +60,13 @@ export class PlayerTicketService {
 	 */
 	protected async getToken(path: string, referer: string, ip: string): Promise<PlayerTicket> {
 		const data = {
-			app: 'OR-*',
+			app: 'hetarchief.be',
 			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
 				? await publicIp.v4()
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
+			name: path,
 		};
 
 		/**
@@ -83,30 +75,21 @@ export class PlayerTicketService {
 		 */
 		try {
 			const baseUrl = process.env.TICKET_SERVICE_URL as string;
-			const url = new URL(baseUrl + '/' + path);
-			Object.entries(data).forEach(([key, value]) => {
-				url.searchParams.append(key, value.toString());
-			});
+			const response = await got
+				.get(baseUrl, {
+					https: {
+						certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
+						key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
+						passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
+					},
+					searchParams: data,
+					headers: {
+						Accept: '*/*',
+					},
+				})
+				.json();
 
-			console.log('getToken admin-core-api', {
-				url: url.toString(),
-				baseUrl,
-				path,
-				...data,
-			});
-
-			const response = await fetch(url.toString(), {
-				method: 'GET',
-				agent: this.httpsAgent,
-				headers: { Accept: 'application/json' },
-				maxRedirects: 20,
-			} as RequestInit);
-
-			if (!response.ok) {
-				throw new Error(`Request failed with status ${response.status}`);
-			}
-
-			return (await response.json()) as PlayerTicket;
+			return response as PlayerTicket;
 		} catch (err) {
 			console.error(err);
 			throw err;
@@ -115,7 +98,6 @@ export class PlayerTicketService {
 
 	public async getPlayerToken(embedUrl: string, referer: string, ip: string): Promise<string> {
 		// no caching
-		console.log('getPlayerToken', { embedUrl, referer, ip });
 		const token = await this.getToken(embedUrl, referer, ip);
 		return token.jwt;
 	}
