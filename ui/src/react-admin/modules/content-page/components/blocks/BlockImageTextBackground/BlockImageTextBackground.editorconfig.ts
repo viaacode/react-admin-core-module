@@ -11,6 +11,7 @@ import {
 } from '~modules/content-page/const/get-color-options';
 import {
 	GET_FULL_HEADING_TYPE_OPTIONS,
+	GET_FULL_HEADING_TYPE_OPTIONS_AVO,
 	GET_HEADING_SIZE_OPTIONS,
 } from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
@@ -39,8 +40,8 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		content: '',
 		textPadding: 'small',
 		foregroundColor: Color.Black,
-		backgroundColor: Color.White,
-		backgroundAlignment: 'left-inside-page',
+		backgroundColor: Color.TealBright,
+		backgroundAlignment: isAvo() ? 'fill-screen' : 'left-inside-page',
 		buttonLabel: '',
 		buttonIconAlignment: 'left',
 	});
@@ -83,7 +84,9 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_FULL_HEADING_TYPE_OPTIONS(),
+					options: isAvo()
+						? GET_FULL_HEADING_TYPE_OPTIONS_AVO()
+						: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
 			headingSize: {
@@ -150,7 +153,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					allowMulti: false,
 				} as FileUploadProps,
 			},
-			imageAlignment: {
+			backgroundAlignment: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
 				),
@@ -158,6 +161,20 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				editorProps: {
 					options: GET_BACKGROUND_ALIGN_OPTIONS(),
 				},
+			},
+			imageAttribution: {
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-bronvermelding'
+				),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
+			},
+			imageAttributionText: {
+				label: tText(
+					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-beschrijving'
+				),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
 			},
 			buttonType: {
 				label: tText(

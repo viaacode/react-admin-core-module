@@ -143,26 +143,15 @@ export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () 
 ];
 
 export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () => [
-	{
-		label: tText('admin/content-block/content-block___zwart', {}, [AVO]),
-		value: Color.Black,
-	},
+	transparentOption(),
+	blackOption(),
 	{
 		label: tText('admin/content-block/content-block___donker-grijs', {}, [AVO]),
 		value: Color.Gray700,
 	},
-	{
-		label: tText('admin/content-block/content-block___wit', {}, [AVO]),
-		value: Color.White,
-	},
-	{
-		label: tText('modules/content-page/const/get-color-options___teal-bright', {}, [AVO]),
-		value: Color.TealBright,
-	},
-	{
-		label: tText('modules/content-page/const/get-color-options___oceaan-groen', {}, [AVO]),
-		value: Color.OceanGreen,
-	},
+	whiteOption(),
+	tealBrightOption(),
+	oceanGreenOption(),
 	{
 		label: tText('modules/content-page/const/get-color-options___jeneverbes', {}, [AVO]),
 		value: Color.Juniper,
@@ -179,10 +168,7 @@ export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () =>
 		label: tText('modules/content-page/const/get-color-options___wijn-rood', {}, [AVO]),
 		value: Color.WineRed,
 	},
-	{
-		label: tText('modules/content-page/const/get-color-options___geel', {}, [AVO]),
-		value: Color.Yellow,
-	},
+	yellowOption(),
 	{
 		label: tText('modules/content-page/const/get-color-options___groen', {}, [AVO]),
 		value: Color.Green,
@@ -191,10 +177,7 @@ export const GET_COLOR_OPTIONS_EXTENDED_AVO: () => SelectOption<Color>[] = () =>
 		label: tText('modules/content-page/const/get-color-options___donker-oranje', {}, [AVO]),
 		value: Color.DarkOrange,
 	},
-	{
-		label: tText('modules/content-page/const/get-color-options___zacht-blauw', {}, [AVO]),
-		value: Color.SoftBlue,
-	},
+	softBlueOption(),
 	{
 		label: tText('modules/content-page/const/get-color-options___frans-roze', {}, [AVO]),
 		value: Color.FrenchRose,

@@ -464,9 +464,6 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
 									)}
 									error={formErrors.userGroupIds}
-									placeholder={tText(
-										'admin/menu/components/menu-edit-form/menu-edit-form___niemand'
-									)}
 									values={contentPageInfo.userGroupIds || []}
 									required={false}
 									onChange={(userGroupIds: string[]) =>
