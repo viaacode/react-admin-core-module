@@ -4,11 +4,11 @@ import React from 'react';
 import type {
 	AlignOption,
 	BackgroundAlignOption,
-	Color,
 	HeadingSizeOption,
 	HeadingTypeOption,
 	SimpleAlignOption,
 } from '~modules/content-page/types/content-block.types';
+import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
 import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo2-components';
@@ -136,6 +136,8 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 						className="c-block-image-text-background__content"
 						style={{
 							textAlign: computedTextAlign,
+							marginTop: (heading ? 1 : 0) + 'rem',
+							marginLeft: padding + 'rem',
 						}}
 					>
 						<mark
@@ -157,12 +159,17 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					generateSmartLink(
 						buttonAction,
 						<Button
-							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment} u-m-t-m`}
+							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment}`}
 							label={buttonLabel}
 							type={buttonType}
 							icon={buttonIcon}
 							iconPosition={buttonIconAlignment}
 							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
+							style={{
+								marginTop: (heading ? 1.6 : 2.2) + 'rem',
+								marginLeft:
+									(backgroundColor === Color.Transparent ? padding : 0) + 'rem',
+							}}
 						/>,
 						buttonAltTitle || buttonLabel
 					)}
