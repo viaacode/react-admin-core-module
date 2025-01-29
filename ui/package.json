@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.3.34",
+  "version": "4.3.36",
   "private": false,
   "exports": {
     "./dist/admin.mjs": {
@@ -50,7 +50,7 @@
     "@meemoo/react-components": "4.0.32",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.36.1",
-    "@viaa/avo2-components": "5.0.20",
+    "@viaa/avo2-components": "5.0.21",
     "@viaa/avo2-types": "3.0.14",
     "autosize": "6.0.1",
     "capture-stack-trace": "1.0.1",
