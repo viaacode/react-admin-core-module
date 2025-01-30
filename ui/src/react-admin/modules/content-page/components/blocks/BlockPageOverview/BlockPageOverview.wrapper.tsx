@@ -255,19 +255,18 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				buttonAltTitle={buttonAltTitle}
 				focusedPage={focusedPage ?? null}
 				onFocusedPageChanged={handleFocusedPageChanged}
-				getLabelLink={
-					AdminConfigManager.hasAdminRoute('NEWS')
-						? (label: string) => {
-								// AVO specific link to the news page
-								// This doesn't exist in hetarchief
-								let newsLink = AdminConfigManager.getAdminRoute('NEWS');
-								if (!newsLink.startsWith('/') && !newsLink.includes('//')) {
-									newsLink = '/' + newsLink;
-								}
-								return `${newsLink}?label=${encodeURIComponent(label)}`;
-						  }
-						: undefined
-				}
+				getLabelLink={(label: string) => {
+					// AVO specific link to the news page
+					// This doesn't exist in hetarchief
+					if (!AdminConfigManager.hasAdminRoute('NEWS')) {
+						return null;
+					}
+					let newsLink = AdminConfigManager.getAdminRoute('NEWS');
+					if (!newsLink.startsWith('/') && !newsLink.includes('//')) {
+						newsLink = '/' + newsLink;
+					}
+					return `${newsLink}?label=${encodeURIComponent(label)}`;
+				}}
 				renderLink={renderLink}
 				commonUser={commonUser}
 				isLoadingLabelObjs={isLoadingLabelObjs}
