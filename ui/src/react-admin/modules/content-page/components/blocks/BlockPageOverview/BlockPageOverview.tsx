@@ -56,7 +56,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	pages: ContentPageInfo[];
 	focusedPage: ContentPageInfo | null; // Shown at the top with an expanded accordion
 	onFocusedPageChanged: (newFocusedPage: ContentPageInfo | null) => void;
-	getLabelLink?: (label: string) => string;
+	getLabelLink?: (label: string) => string | null;
 	renderLink?: RenderLinkFunction;
 	commonUser?: Avo.User.CommonUser;
 	isLoadingLabelObjs: boolean;
