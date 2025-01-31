@@ -939,7 +939,7 @@
   "react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen": "Bezig met dupliceren van de afbeeldingen",
   "react-admin/modules/content-page/views/content-page-edit___de-content-pagina-info-is-overgenomen": "De info van de contentpagina is overgenomen.",
   "react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina": "De contentpagina is gekopieerd. Druk ctrl-v om hem te plakken in een contentpagina die je aan het bewerken bent.",
-  "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "<p>Deze pagina kon niet worden gevonden.</p>",
+  "react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden": "Deze pagina kon niet worden gevonden.",
   "react-admin/modules/content-page/views/content-page-edit___gekopieerd": "Gekopieerd",
   "react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel": "Je hebt geen rechten om deze contentpagina aan te passen.",
   "react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina": "Kopieer contentpagina van QAS &gt; PRD of omgekeerd",

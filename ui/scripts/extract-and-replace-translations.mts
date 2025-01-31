@@ -86,6 +86,17 @@ function getFallbackTranslation(key: string): string {
 	return `${upperFirst(lowerCase(key.split(TRANSLATION_SEPARATOR).pop()))}`;
 }
 
+function simplifyHtmlValue(value: string): string {
+	if (value.startsWith('<p>') && value.endsWith('</p>')) {
+		const innerValue = value.substring('<p>'.length, value.length - '</p>'.length);
+		if (!innerValue.includes('<')) {
+			// Html value doesn't contain any html or new lines => only save inner text
+			return innerValue;
+		}
+	}
+	return value;
+}
+
 function getTranslationEntryFromCallExpression(
 	tFunction: 'tText' | 'tHtml',
 	translationTextOrKey: string,
@@ -366,10 +377,11 @@ async function combineTranslations(
 					nlJsonTranslation?.location,
 				key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
 				language: languageCode, // All source code translations are dutch, online translation can exist in 'en'' and 'nl'
-				value:
+				value: simplifyHtmlValue(
 					onlineTranslation?.value ||
-					nlJsonTranslation?.value ||
-					sourceCodeTranslation?.value, // Online translations always have priority. Code translations are lowest priority
+						nlJsonTranslation?.value ||
+						sourceCodeTranslation?.value
+				), // Online translations always have priority. Code translations are lowest priority
 				value_type:
 					sourceCodeTranslation?.value_type ||
 					onlineTranslation?.value_type ||
@@ -465,6 +477,96 @@ function resolvePath(...filePaths: string[]): string {
 	return path.resolve(__dirname, ...filePaths).replace(/\\/g, '/');
 }
 
+async function extractAvoAdminCoreTranslations() {
+	// AVO admin-core
+	console.info('Extracting AVO admin-core translations...');
+	const avoAdminCoreTranslations = await updateTranslations(
+		resolvePath('../src/react-admin'),
+		App.AVO,
+		Component.ADMIN_CORE,
+		'../shared/translations/avo/nl.json',
+		resolvePath('../tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('..')} && npm run format`);
+	return avoAdminCoreTranslations;
+}
+
+async function extractAvoClientTranslations() {
+	// AVO client
+	console.info('Extracting AVO client translations...');
+	const avoClientTranslations = await updateTranslations(
+		resolvePath('../../../avo2-client/src'),
+		App.AVO,
+		Component.FRONTEND,
+		'shared/translations/nl.json',
+		resolvePath('../../../avo2-client/tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('../../../avo2-client')} && npm run format`);
+	return avoClientTranslations;
+}
+
+async function extractAvoProxyTranslations() {
+	// AVO proxy
+	console.info('Extracting AVO admin-core translations...');
+	const avoProxyTranslations = await updateTranslations(
+		resolvePath('../../../avo2-proxy/server/src'),
+		App.AVO,
+		Component.BACKEND,
+		'shared/translations/nl.json',
+		resolvePath('../../../avo2-proxy/server/tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('../../../avo2-proxy/server')} && npm run format`);
+	return avoProxyTranslations;
+}
+
+async function extractHetArchiefAdminCoreTranslations() {
+	// HetArchief admin-core
+	console.info('Extracting HET_ARCHIEF admin-core translations...');
+	const hetArchiefAdminCoreTranslations = await updateTranslations(
+		resolvePath('../src/react-admin'),
+		App.HET_ARCHIEF,
+		Component.ADMIN_CORE,
+		'../shared/translations/hetArchief/nl.json',
+		resolvePath('../tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('..')} && npm run format`);
+	return hetArchiefAdminCoreTranslations;
+}
+
+async function extractHetArchiefClientTranslations() {
+	// HetArchief client
+	console.info('Extracting HET_ARCHIEF client translations...');
+	const hetArchiefClientTranslations = await updateTranslations(
+		resolvePath('../../../hetarchief-client/src'),
+		App.HET_ARCHIEF,
+		Component.FRONTEND,
+		'../public/locales/nl/common.json',
+		resolvePath('../../../hetarchief-client/tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('../../../hetarchief-client')} && npm run format`);
+	return hetArchiefClientTranslations;
+}
+
+async function extractHetArchiefProxyTranslations() {
+	// HetArchief proxy
+	console.info('Extracting HET_ARCHIEF proxy translations...');
+	const hetArchiefProxyTranslations = await updateTranslations(
+		resolvePath('../../../hetarchief-proxy/src'),
+		App.HET_ARCHIEF,
+		Component.BACKEND,
+		'shared/i18n/locales/nl.json',
+		resolvePath('../../../hetarchief-proxy/tsconfig.json')
+	);
+	console.info('Formatting code\n');
+	execSync(`cd ${resolvePath('../../../hetarchief-proxy')} && npm run format`);
+	return hetArchiefProxyTranslations;
+}
+
 async function extractTranslations() {
 	const app = process.argv[2] as App;
 	if (app !== App.AVO && app !== App.HET_ARCHIEF) {
@@ -475,41 +577,9 @@ async function extractTranslations() {
 
 	let allTranslations: TranslationEntry[];
 	if (app === App.AVO) {
-		// AVO admin-core
-		console.info('Extracting AVO admin-core translations...');
-		const avoAdminCoreTranslations = await updateTranslations(
-			resolvePath('../src/react-admin'),
-			App.AVO,
-			Component.ADMIN_CORE,
-			'../shared/translations/avo/nl.json',
-			resolvePath('../tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('..')} && npm run format`);
-
-		// AVO client
-		console.info('Extracting AVO client translations...');
-		const avoClientTranslations = await updateTranslations(
-			resolvePath('../../../avo2-client/src'),
-			App.AVO,
-			Component.FRONTEND,
-			'shared/translations/nl.json',
-			resolvePath('../../../avo2-client/tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('../../../avo2-client')} && npm run format`);
-
-		// AVO proxy
-		console.info('Extracting AVO admin-core translations...');
-		const avoProxyTranslations = await updateTranslations(
-			resolvePath('../../../avo2-proxy/server/src'),
-			App.AVO,
-			Component.BACKEND,
-			'shared/translations/nl.json',
-			resolvePath('../../../avo2-proxy/server/tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('../../../avo2-proxy/server')} && npm run format`);
+		const avoAdminCoreTranslations = await extractAvoAdminCoreTranslations();
+		const avoClientTranslations = await extractAvoClientTranslations();
+		const avoProxyTranslations = await extractAvoProxyTranslations();
 
 		allTranslations = [
 			...avoAdminCoreTranslations,
@@ -517,41 +587,10 @@ async function extractTranslations() {
 			...avoProxyTranslations,
 		];
 	} else {
-		// HetArchief admin-core
-		console.info('Extracting HET_ARCHIEF admin-core translations...');
-		const hetArchiefAdminCoreTranslations = await updateTranslations(
-			resolvePath('../src/react-admin'),
-			App.HET_ARCHIEF,
-			Component.ADMIN_CORE,
-			'../shared/translations/hetArchief/nl.json',
-			resolvePath('../tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('..')} && npm run format`);
-
-		// HetArchief client
-		console.info('Extracting HET_ARCHIEF client translations...');
-		const hetArchiefClientTranslations = await updateTranslations(
-			resolvePath('../../../hetarchief-client/src'),
-			App.HET_ARCHIEF,
-			Component.FRONTEND,
-			'../public/locales/nl/common.json',
-			resolvePath('../../../hetarchief-client/tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('../../../hetarchief-client')} && npm run format`);
-
-		// HetArchief proxy
-		console.info('Extracting HET_ARCHIEF proxy translations...');
-		const hetArchiefProxyTranslations = await updateTranslations(
-			resolvePath('../../../hetarchief-proxy/src'),
-			App.HET_ARCHIEF,
-			Component.BACKEND,
-			'shared/i18n/locales/nl.json',
-			resolvePath('../../../hetarchief-proxy/tsconfig.json')
-		);
-		console.info('Formatting code\n');
-		execSync(`cd ${resolvePath('../../../hetarchief-proxy')} && npm run format`);
+		// HET_ARCHIEF
+		const hetArchiefAdminCoreTranslations = await extractHetArchiefAdminCoreTranslations();
+		const hetArchiefClientTranslations = await extractHetArchiefClientTranslations();
+		const hetArchiefProxyTranslations = await extractHetArchiefProxyTranslations();
 
 		allTranslations = [
 			...hetArchiefAdminCoreTranslations,
@@ -571,12 +610,21 @@ async function extractTranslations() {
 			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
 			const language = `'${translationEntry.language}'`;
-			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language") VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
+			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
+                VALUES (${component}, ${location}, ${key}, ${value}, ${value_type},
+                        ${language}) ON CONFLICT (component, location, key, language) DO
+        UPDATE
+            SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
 		.join('\n');
 	sql = 'TRUNCATE app.translations;\n' + sql;
 	await fs.writeFile(sqlFilePath, sql);
+	console.info('Writing json file: ' + sqlFilePath.replace('.sql', '.json'));
+	await fs.writeFile(
+		sqlFilePath.replace('.sql', '.json'),
+		JSON.stringify(allTranslations, null, 2)
+	);
 	console.info('Finished writing ' + allTranslations.length + ' translations');
 }
 

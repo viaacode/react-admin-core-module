@@ -121,14 +121,30 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 				throw new Error('Active translation is not defined, failed to save translation');
 			}
 
+			let value =
+				activeTranslationEntry.value_type === ValueType.TEXT
+					? activeTranslationTextValue || ''
+					: activeTranslationEditorState?.toHTML() || '';
+
+			// Simplify value if only wrapped with <p></p> tag and otherwise no html
+			if (
+				activeTranslationEntry.value_type === ValueType.HTML &&
+				value.startsWith('<p>') &&
+				value.endsWith('</p>')
+			) {
+				const innerValue = value.substring('<p>'.length, value.length - '</p>'.length);
+				if (!innerValue.includes('<')) {
+					// Html value doesn't contain any html or new lines => only save inner text
+					value = innerValue;
+				}
+			}
+
 			await TranslationsService.updateTranslation(
 				activeTranslationEntry.component,
 				activeTranslationEntry.location,
 				activeTranslationEntry.key,
 				activeTranslationLanguage,
-				activeTranslationEntry.value_type === ValueType.TEXT
-					? activeTranslationTextValue || ''
-					: activeTranslationEditorState?.toHTML() || ''
+				value
 			);
 
 			await refetchTranslations();
