@@ -22,7 +22,7 @@ export interface SmartLinkProps {
 	children: ReactNode;
 }
 
-const SmartLink: FunctionComponent<SmartLinkProps> = ({
+export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	action,
 	removeStyles = true,
 	title,
@@ -232,8 +232,6 @@ const SmartLink: FunctionComponent<SmartLinkProps> = ({
 
 	return renderSmartLink();
 };
-
-export default SmartLink;
 
 export const generateSmartLink = (
 	action: ButtonAction | null | undefined,

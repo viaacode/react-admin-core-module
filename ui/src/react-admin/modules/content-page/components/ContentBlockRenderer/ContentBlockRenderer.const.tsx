@@ -6,7 +6,6 @@ import {
 	BlockBreadcrumbs,
 	BlockButtonsWrapper,
 	BlockCardsWithoutDescription,
-	BlockContentEnclose,
 	BlockContentPageMeta,
 	BlockCTAsWrapper,
 	BlockEventbrite,
@@ -77,7 +76,9 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		// Het archief specific blocks
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		[ContentBlockType.OverviewNewspaperTitles]: BlockOverviewNewspaperTitles,
-		[ContentBlockType.ContentEncloseGrid]: BlockContentEnclose,
+		[ContentBlockType.ContentEncloseGrid]: loadComponentFromConfig(
+			ContentBlockType.ContentEncloseGrid
+		),
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
 
 		// Avo specific blocks

@@ -4,7 +4,7 @@ import type { HeadingTypeOption } from '~modules/content-page/types/content-bloc
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
 import type { ButtonAction } from '@viaa/avo2-components';
-import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { useGetMaintainerGrid } from '~content-blocks/BlockMaintainersGrid/hooks/useGetMaintainerGrid';
 
 export interface BlockMaintainerGridProps extends DefaultComponentProps {

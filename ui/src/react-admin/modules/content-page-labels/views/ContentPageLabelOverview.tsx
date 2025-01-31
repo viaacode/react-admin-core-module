@@ -25,7 +25,7 @@ import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { GET_CONTENT_TYPE_LABELS } from '~shared/components/ContentPicker/ContentPicker.const';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import SmartLink from '~shared/components/SmartLink/SmartLink';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import {
 	getDateRangeFilters,
@@ -42,8 +42,8 @@ import { TableColumnDataType } from '~shared/types/table-column-data-type';
 import { TableFilterType } from '~shared/types/table-filter-types';
 
 import { useContentTypes } from '../../content-page/hooks/useContentTypes';
-import type { FilterableColumn } from '../../shared/components/FilterTable/FilterTable';
-import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import FilterTable, { getFilters } from '~shared/components/FilterTable/FilterTable';
 import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,

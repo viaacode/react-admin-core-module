@@ -2,7 +2,7 @@ import type { ButtonAction } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isEmpty, isNil } from 'lodash-es';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import SmartLink from '~modules/shared/components/SmartLink/SmartLink';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 
 export interface BlockTagWithLinkProps {

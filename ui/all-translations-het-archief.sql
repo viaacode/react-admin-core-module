@@ -6950,35 +6950,25 @@ INSERT INTO app.translations ("component", "location", "key", "value", "value_ty
         UPDATE
             SET value = 'content enclose', value_type = 'TEXT';
 INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'content-insluiten', 'Add content', 'TEXT',
-                        'en') ON CONFLICT (component, location, key, language) DO
-        UPDATE
-            SET value = 'Add content', value_type = 'TEXT';
-INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
                 VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'content-insluiten', 'Content insluiten', 'TEXT',
                         'nl') ON CONFLICT (component, location, key, language) DO
         UPDATE
             SET value = 'Content insluiten', value_type = 'TEXT';
 INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'geen-toegang', 'Geen toegang', 'TEXT',
-                        'nl') ON CONFLICT (component, location, key, language) DO
-        UPDATE
-            SET value = 'Geen toegang', value_type = 'TEXT';
-INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'geen-toegang', 'No access', 'TEXT',
+                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'content-insluiten', 'Enclose content', 'TEXT',
                         'en') ON CONFLICT (component, location, key, language) DO
         UPDATE
-            SET value = 'No access', value_type = 'TEXT';
+            SET value = 'Enclose content', value_type = 'TEXT';
 INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'label', 'label', 'TEXT',
+                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'content-item', 'Content item', 'TEXT',
                         'en') ON CONFLICT (component, location, key, language) DO
         UPDATE
-            SET value = 'label', value_type = 'TEXT';
+            SET value = 'Content item', value_type = 'TEXT';
 INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'label', 'label', 'TEXT',
+                VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'content-item', 'Content item', 'TEXT',
                         'nl') ON CONFLICT (component, location, key, language) DO
         UPDATE
-            SET value = 'label', value_type = 'TEXT';
+            SET value = 'Content item', value_type = 'TEXT';
 INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
                 VALUES ('ADMIN_CORE', 'modules/content-page/components/blocks/block-content-enclose/block-content-enclose', 'title', 'title', 'TEXT',
                         'en') ON CONFLICT (component, location, key, language) DO

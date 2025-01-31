@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import type { CardWithoutDescriptionStyleOption } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
-import SmartLink from '~shared/components/SmartLink/SmartLink';
+import { SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockCardWithoutDescriptionProps {
 	title: string;

@@ -1,5 +1,4 @@
 // Content page rendering
-
 export { ContentPageRenderer } from './react-admin/modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 export {
 	convertDbContentPageToContentPageInfo,
@@ -16,6 +15,7 @@ export { BlockHeading } from '~content-blocks/BlockHeading';
 export { BlockIntro } from '~content-blocks/BlockIntro';
 export { BlockRichText } from '~content-blocks/BlockRichText';
 export { BlockVideoWrapper } from '~content-blocks/BlockVideo/BlockVideo.wrapper';
+export { SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 // Auth and data fetching with logout
 export { fetchWithLogout, fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';

@@ -13154,7 +13154,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-insluiten",
     "language": "en",
-    "value": "Add content",
+    "value": "Enclose content",
     "value_type": "TEXT"
   },
   {
@@ -13305,24 +13305,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "label",
-    "language": "nl",
-    "value": "label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "label",
-    "language": "en",
-    "value": "label",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-enclose",
     "language": "nl",
     "value": "content enclose",
@@ -13371,24 +13353,6 @@
     "key": "verwijder-object",
     "language": "en",
     "value": "verwijder object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "geen-toegang",
-    "language": "nl",
-    "value": "Geen toegang",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "geen-toegang",
-    "language": "en",
-    "value": "No access",
     "value_type": "TEXT"
   },
   {
@@ -17943,6 +17907,24 @@
     "key": "error",
     "language": "en",
     "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "content-item",
+    "language": "nl",
+    "value": "Content item",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "content-item",
+    "language": "en",
+    "value": "Content item",
     "value_type": "TEXT"
   },
   {

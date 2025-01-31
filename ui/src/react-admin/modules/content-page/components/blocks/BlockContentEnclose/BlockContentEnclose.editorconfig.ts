@@ -134,7 +134,7 @@ export const CONTENT_ENCLOSE_BLOCK_CONFIG = (position = 0): ContentBlockConfig =
 			},
 			elements: {
 				label: tText(
-					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___label',
+					'modules/content-page/components/blocks/block-content-enclose/block-content-enclose___content-item',
 					undefined,
 					[HET_ARCHIEF]
 				),

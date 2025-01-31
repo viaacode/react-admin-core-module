@@ -6,7 +6,7 @@ import React from 'react';
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
 
 import './BlockImage.scss';
-import SmartLink, { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockImageProps extends DefaultProps {
 	imageSource: string;
