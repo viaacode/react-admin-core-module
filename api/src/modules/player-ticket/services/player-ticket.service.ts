@@ -8,7 +8,7 @@ import {
 	NotFoundException,
 } from '@nestjs/common';
 import type { Cache } from 'cache-manager';
-import got, { Got } from 'got';
+import got from 'got';
 import { trimEnd } from 'lodash';
 import publicIp from 'public-ip';
 
@@ -36,7 +36,6 @@ export class PlayerTicketService {
 	private logger: Logger = new Logger(PlayerTicketService.name, {
 		timestamp: true,
 	});
-	private playerTicketsGotInstance: Got;
 	private readonly ticketServiceMaxAge: number;
 	private readonly mediaServiceUrl: string;
 	private readonly host: string;
@@ -45,17 +44,7 @@ export class PlayerTicketService {
 		@Inject(forwardRef(() => DataService)) protected dataService: DataService,
 		@Inject(CACHE_MANAGER) private cacheManager: Cache
 	) {
-		this.playerTicketsGotInstance = got.extend({
-			prefixUrl: process.env.TICKET_SERVICE_URL,
-			resolveBodyOnly: true,
-			responseType: 'json',
-			https: {
-				rejectUnauthorized: false,
-				certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
-				key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
-				passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
-			},
-		});
+		// Create an HTTPS agent to handle custom TLS configuration:
 		this.ticketServiceMaxAge = parseInt(
 			process.env.TICKET_SERVICE_MAXAGE || String(PLAYER_TICKET_EXPIRY)
 		);
@@ -63,20 +52,48 @@ export class PlayerTicketService {
 		this.host = process.env.HOST;
 	}
 
+	/**
+	 * @param path
+	 * @param referer
+	 * @param ip
+	 * @protected
+	 */
 	protected async getToken(path: string, referer: string, ip: string): Promise<PlayerTicket> {
 		const data = {
-			app: 'OR-*',
+			app: 'hetarchief.be',
 			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
 				? await publicIp.v4()
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
+			name: path,
 		};
 
-		return this.playerTicketsGotInstance.get<PlayerTicket>(path, {
-			searchParams: data,
-			resolveBodyOnly: true,
-		});
+		/**
+		 * Build the full URL from the base TICKET_SERVICE_URL and the path;
+		 * then append the query params from `data`.
+		 */
+		try {
+			const baseUrl = process.env.TICKET_SERVICE_URL as string;
+			const response = await got
+				.get(baseUrl, {
+					https: {
+						certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
+						key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
+						passphrase: process.env.TICKET_SERVICE_PASSPHRASE,
+					},
+					searchParams: data,
+					headers: {
+						Accept: '*/*',
+					},
+				})
+				.json();
+
+			return response as PlayerTicket;
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
 	}
 
 	public async getPlayerToken(embedUrl: string, referer: string, ip: string): Promise<string> {
