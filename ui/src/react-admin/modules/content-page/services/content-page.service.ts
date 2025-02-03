@@ -216,7 +216,7 @@ export class ContentPageService {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
-					url: `${getAdminCoreApiUrl()}/admin/content-pages/duplicate/` + id,
+					url: `${getAdminCoreApiUrl()}/admin/content-pages/` + id + '/duplicate',
 				}),
 				{
 					method: 'POST',
