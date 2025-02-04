@@ -11,7 +11,6 @@ import {
 } from '~modules/content-page/const/get-color-options';
 import {
 	GET_FULL_HEADING_TYPE_OPTIONS,
-	GET_FULL_HEADING_TYPE_OPTIONS_AVO,
 	GET_HEADING_SIZE_OPTIONS,
 } from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
@@ -85,7 +84,12 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: isAvo()
-						? GET_FULL_HEADING_TYPE_OPTIONS_AVO()
+						? [
+								{
+									label: tText('admin/content-block/content-block___h-1'),
+									value: 'h1',
+								},
+						  ]
 						: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
