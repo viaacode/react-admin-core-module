@@ -165,8 +165,9 @@ export function convertUserInfoToCommonUser(
 					(org): Avo.EducationOrganization.Organization => ({
 						organisationId: org.organization_id,
 						organisationLabel:
+							(org.organization as any)?.ldap_description ??
 							(org.organization as any)?.ldap_content?.attributes?.description?.[0] ??
-							'',
+							(org.unit_id || 'Onbekend label'),
 						unitId: org.unit_id ?? null,
 						unitStreet: (org.organization as any)?.ldap_content?.units?.[0]?.attributes
 							?.street?.[0],
