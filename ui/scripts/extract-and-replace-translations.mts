@@ -610,11 +610,7 @@ async function extractTranslations() {
 			const value = `'${translationEntry.value.replace(/'/g, "''")}'`;
 			const value_type = `'${translationEntry.value_type}'`;
 			const language = `'${translationEntry.language}'`;
-			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language")
-                VALUES (${component}, ${location}, ${key}, ${value}, ${value_type},
-                        ${language}) ON CONFLICT (component, location, key, language) DO
-        UPDATE
-            SET value = ${value}, value_type = ${value_type};`;
+			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language") VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
 		.join('\n');

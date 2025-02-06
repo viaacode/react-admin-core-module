@@ -7166,15 +7166,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "geen-toegang",
-    "language": "nl",
-    "value": "Geen toegang",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/content-page-meta",
     "key": "pagina-meta-data",
     "language": "nl",
@@ -13367,33 +13358,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit",
-    "key": "over-deze-opdracht",
-    "language": "nl",
-    "value": "Over deze opdracht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "extra-informatie",
-    "language": "nl",
-    "value": "Extra informatie",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-detail",
-    "key": "deze-opdracht-is-een-kopie-van",
-    "language": "nl",
-    "value": "Deze opdracht is een kopie van",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "assignment/views/assignment-detail",
     "key": "deze-opdracht-zit-in-bundel",
     "language": "nl",
@@ -13408,6 +13372,33 @@
     "language": "nl",
     "value": "Deze opdracht zit in bundels:",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
+    "key": "deze-opdracht-is-een-kopie-van",
+    "language": "nl",
+    "value": "Deze opdracht is een kopie van",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit",
+    "key": "over-deze-opdracht",
+    "language": "nl",
+    "value": "Over deze opdracht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-detail",
+    "key": "extra-informatie",
+    "language": "nl",
+    "value": "Extra informatie",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -15429,6 +15420,24 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-edit",
+    "key": "de-opdracht-is-toegevoegd-aan-de-bundel",
+    "language": "nl",
+    "value": "De opdracht is toegevoegd aan de bundel",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
+    "key": "er-ging-iets-mis-bij-het-toevoegen-van-de-opdracht",
+    "language": "nl",
+    "value": "Er ging iets mis bij het toevoegen van de opdracht",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
     "key": "je-was-meer-dan-15-minuten-inactief-je-aanpassingen-zijn-opgeslagen",
     "language": "nl",
     "value": "Je was meer dan 15 minuten inactief. Je aanpassingen zijn opgeslagen.",
@@ -15477,6 +15486,15 @@
     "key": "voeg-collectie-toe",
     "language": "nl",
     "value": "Voeg collectie toe",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
+    "key": "voeg-opdracht-toe",
+    "language": "nl",
+    "value": "Voeg opdracht toe",
     "value_type": "TEXT"
   },
   {
@@ -15666,6 +15684,33 @@
     "key": "bijvoorbeeld-c-8-a-48-b-7-e-d-27-d-4-b-9-a-a-793-9-ba-79-fff-41-df",
     "language": "nl",
     "value": "Bijvoorbeeld: c8a48b7e-d27d-4b9a-a793-9ba79fff41df",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
+    "key": "voeg-opdracht-toe-via-id",
+    "language": "nl",
+    "value": "Voeg opdracht toe via id",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
+    "key": "opdracht-id",
+    "language": "nl",
+    "value": "Opdracht id",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit",
+    "key": "bijvoorbeeld-39057-b-95-92-c-9-446-f-944-b-6459-a-6194-d-8-e",
+    "language": "nl",
+    "value": "bijvoorbeeld: 39057b95-92c9-446f-944b-6459a6194d8e",
     "value_type": "TEXT"
   },
   {
@@ -25943,7 +25988,7 @@
     "location": "shared/components/footer/footer",
     "key": "kolom-3",
     "language": "nl",
-    "value": "Blijf op de hoogte als lesgever",
+    "value": "Blijf op de hoogte",
     "value_type": "TEXT"
   },
   {
