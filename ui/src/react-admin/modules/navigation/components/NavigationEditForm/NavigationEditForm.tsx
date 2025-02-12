@@ -21,6 +21,8 @@ import type { PickerItem } from '~shared/types/content-picker';
 import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
 
 import './NavigationEditForm.scss';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 
 interface NavigationEditFormProps {
 	formErrors: NavigationEditFormErrorState;
@@ -45,6 +47,10 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 	enableIcons,
 }) => {
 	const { data: allLanguages } = useGetAllLanguages();
+	const { data: allUserGroupOptions } = useGetUserGroups({
+		withPermissions: false,
+	});
+
 	const languageOptions = (allLanguages || []).map((languageInfo): SelectOption => {
 		return {
 			label: GET_LANGUAGE_NAMES()[languageInfo.languageCode],
@@ -59,6 +65,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 		};
 	};
 
+	const lastUserGroupOption = allUserGroupOptions?.at(-1);
 	return (
 		<Form className="m-menu-edit-form">
 			<FormGroup
@@ -172,16 +179,24 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 					/>
 				</FormGroup>
 			)}
-			<UserGroupSelect
-				label={tText(
-					'admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor'
-				)}
-				error={formErrors.userGroupIds}
-				placeholder={tText('admin/menu/components/menu-edit-form/menu-edit-form___niemand')}
-				values={formState.userGroupIds || []}
-				required={false}
-				onChange={(userGroupIds: string[]) => onChange('userGroupIds', userGroupIds)}
-			/>
+			{allUserGroupOptions?.length && (
+				<UserGroupSelect
+					label={tText(
+						'admin/menu/components/menu-edit-form/menu-edit-form___zichtbaar-voor'
+					)}
+					error={formErrors.userGroupIds}
+					placeholder={tText(
+						'admin/menu/components/menu-edit-form/menu-edit-form___niemand'
+					)}
+					values={formState.userGroupIds || []}
+					required={false}
+					onChange={(userGroupIds: string[]) => onChange('userGroupIds', userGroupIds)}
+					defaultCheckedOptions={[
+						SpecialPermissionGroups.loggedOutUsers,
+						SpecialPermissionGroups.loggedInUsers,
+					]}
+				/>
+			)}
 			{permissionWarning && <Alert message={permissionWarning} type="danger" />}
 		</Form>
 	);

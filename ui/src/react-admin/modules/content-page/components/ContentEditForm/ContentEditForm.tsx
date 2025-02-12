@@ -47,6 +47,8 @@ import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -72,6 +74,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 			value: languageInfo.languageCode,
 		})
 	);
+	const { data: allUserGroups } = useGetUserGroups({
+		withPermissions: false,
+	});
 	const getParentPagePickerItem = (): PickerItem | null => {
 		if (contentPageInfo.nlParentPageId) {
 			const parentPageInfo = contentPageInfo.translatedPages.find(
@@ -181,6 +186,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		type: 'PROFILE',
 		value: contentPageInfo.owner?.id,
 	};
+	const lastUserGroup = allUserGroups?.at(-1);
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
@@ -469,6 +475,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									onChange={(userGroupIds: string[]) =>
 										changeContentPageProp('userGroupIds', userGroupIds)
 									}
+									defaultCheckedOptions={[
+										SpecialPermissionGroups.loggedOutUsers,
+										SpecialPermissionGroups.loggedInUsers,
+									]}
+									lockedCheckedOptions={lastUserGroup ? [lastUserGroup.id] : []}
 								/>
 							</Column>
 						</Grid>
