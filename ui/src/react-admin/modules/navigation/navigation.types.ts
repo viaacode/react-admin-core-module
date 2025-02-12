@@ -1,6 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 import type { Locale } from '~modules/translations/translations.core.types';
 import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
+import type { LinkTarget } from '~shared/components/SmartLink/SmartLink.types';
 
 export type NavigationOverviewTableCols = 'placement' | 'description' | 'actions';
 
@@ -37,7 +38,7 @@ export interface NavigationItem extends NavigationBar {
 	userGroupIds: string[] | null;
 	contentType: Avo.Core.ContentPickerType | null;
 	contentPath: string | null;
-	linkTarget: '_blank' | '_self' | null;
+	linkTarget: LinkTarget | null;
 	position: number;
 	language: Locale;
 	createdAt: string;

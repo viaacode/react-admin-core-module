@@ -144,6 +144,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 									type: formState.contentType as Avo.Core.ContentPickerType,
 									label: formState.contentPath.toString(),
 									value: formState.contentPath.toString(),
+									target: formState.linkTarget || undefined,
 							  }
 							: undefined
 					}

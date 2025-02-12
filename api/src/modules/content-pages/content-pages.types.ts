@@ -1,6 +1,7 @@
 import type { Avo } from '@viaa/avo2-types';
 
 import { type Media } from '../media/media.types';
+import { type LinkTarget } from '../navigations';
 import {
 	type GetContentByIdQuery as GetContentByIdQueryAvo,
 	type GetContentPageByPathQuery as GetContentPageByPathQueryAvo,
@@ -38,8 +39,6 @@ export type ContentPickerType =
 	| 'EXTERNAL_LINK'
 	| 'ANCHOR_LINK'
 	| 'PROFILE';
-
-export type LinkTarget = '_self' | '_blank';
 
 export interface PickerItem {
 	label?: string;

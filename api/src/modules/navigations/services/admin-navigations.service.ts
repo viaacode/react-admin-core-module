@@ -6,7 +6,7 @@ import { getDatabaseType } from '../../shared/helpers/get-database-type';
 import { DeleteResponse } from '../../shared/types/types';
 import { Locale } from '../../translations';
 import { CreateNavigationDto } from '../dto/navigations.dto';
-import { NavigationItem } from '../navigations.types';
+import { LinkTarget, NavigationItem } from '../navigations.types';
 import {
 	NAVIGATION_QUERIES,
 	NavigationEntry,
@@ -24,7 +24,7 @@ export class AdminNavigationsService {
 			label: navigationEntry?.label,
 			placement: navigationEntry?.placement,
 			description: navigationEntry?.description,
-			linkTarget: navigationEntry?.link_target,
+			linkTarget: navigationEntry?.link_target as LinkTarget | null,
 			iconName: navigationEntry?.icon_name,
 			position: navigationEntry?.position,
 			contentType: navigationEntry?.content_type,

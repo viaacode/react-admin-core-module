@@ -3,7 +3,7 @@ import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { Locale } from '../../translations';
-import { ContentPickerTypesEnum, NavigationItem } from '../navigations.types';
+import { ContentPickerTypesEnum, LinkTarget, NavigationItem } from '../navigations.types';
 
 export class CreateNavigationDto implements Partial<NavigationItem> {
 	@IsString()
@@ -64,9 +64,11 @@ export class CreateNavigationDto implements Partial<NavigationItem> {
 	@IsOptional()
 	@ApiPropertyOptional({
 		type: String,
-		description: 'The link target property for this item, e.g. _blank or _self',
+		description: 'The link target property for this item',
+		enum: Object.values(LinkTarget),
+		default: '_self',
 	})
-	linkTarget?: string;
+	linkTarget?: LinkTarget;
 
 	@IsNumber()
 	@Type(() => Number)
@@ -161,8 +163,10 @@ export class UpdateNavigationDto implements Partial<NavigationItem> {
 	@ApiPropertyOptional({
 		type: String,
 		description: 'The link target property for this item, e.g. _blank or _self',
+		default: '_self',
+		enum: Object.values(LinkTarget),
 	})
-	linkTarget?: string;
+	linkTarget?: LinkTarget;
 
 	@IsNumber()
 	@Type(() => Number)

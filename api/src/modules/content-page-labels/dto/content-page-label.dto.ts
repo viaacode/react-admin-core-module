@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
-import { ContentPageType, ContentPickerType, LinkTarget } from '../../content-pages';
+import { ContentPageType, ContentPickerType } from '../../content-pages';
+import { LinkTarget } from '../../navigations';
 import { Locale } from '../../translations';
 
 export class PickerItemDto {
@@ -27,6 +28,8 @@ export class PickerItemDto {
 	@IsString()
 	@ApiProperty({
 		type: String,
+		enum: Object.values(LinkTarget),
+		default: LinkTarget.SELF,
 	})
 	target?: LinkTarget;
 }
