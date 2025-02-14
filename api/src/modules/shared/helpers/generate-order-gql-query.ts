@@ -48,11 +48,11 @@ export const getOrderObject = (
 	sortColumn: string,
 	sortOrder: Avo.Search.OrderDirection,
 	tableColumnDataType: string,
-	columns: Partial<{
-		[columnName: string]: (order: Avo.Search.OrderDirection) => any;
-	}>
+	columns: {
+		[columnName: string]: ((order: Avo.Search.OrderDirection) => any) | null;
+	}
 ): Record<string, GraphQlSortDirections>[] => {
-	const getOrderFunc = columns[sortColumn] as ((order: GraphQlSortDirections) => any) | undefined;
+	const getOrderFunc = columns[sortColumn] as ((order: GraphQlSortDirections) => any) | null;
 
 	if (getOrderFunc) {
 		return [getOrderFunc(getGqlSortDirection(sortOrder, tableColumnDataType))];

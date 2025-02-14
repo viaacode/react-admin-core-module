@@ -13,9 +13,9 @@ export const GET_TABLE_COLUMN_TO_DATABASE_ORDER_OBJECT = (): Partial<{
 	return tableColumnToDatabaseOrderObjectHetArchief;
 };
 
-const tableColumnToDatabaseOrderObjectAvo: Partial<{
-	[columnId in UserOverviewTableCol]: (order: Avo.Search.OrderDirection) => any;
-}> = {
+const tableColumnToDatabaseOrderObjectAvo: {
+	[columnId in UserOverviewTableCol]: ((order: Avo.Search.OrderDirection) => any) | null;
+} = {
 	firstName: (order: Avo.Search.OrderDirection) => ({
 		first_name_lower: order,
 	}),
@@ -36,6 +36,9 @@ const tableColumnToDatabaseOrderObjectAvo: Partial<{
 	}),
 	isBlocked: (order: Avo.Search.OrderDirection) => ({
 		is_blocked: order,
+	}),
+	isException: (order: Avo.Search.OrderDirection) => ({
+		is_exception: order,
 	}),
 	blockedAt: (order: Avo.Search.OrderDirection) => ({
 		blocked_at: {
@@ -68,6 +71,13 @@ const tableColumnToDatabaseOrderObjectAvo: Partial<{
 	tempAccessUntil: (order: Avo.Search.OrderDirection) => ({
 		user: { temp_access: { until: order } },
 	}),
+	profileId: (order: Avo.Search.OrderDirection) => ({
+		profile_id: order,
+	}),
+	educationLevels: null,
+	subjects: null,
+	idps: null,
+	educationalOrganisations: null,
 };
 
 const tableColumnToDatabaseOrderObjectHetArchief: Partial<{
