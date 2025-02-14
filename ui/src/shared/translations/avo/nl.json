@@ -796,6 +796,7 @@
   "modules/maintenance-alerts/views/maintenance-alerts-overview___taal": "Taal",
   "modules/maintenance-alerts/views/maintenance-alerts-overview___zoek-input-aria-label": "Zoek input aria label",
   "modules/maintenance-alerts/views/maintenance-alerts-overview___zoeken-op-titel-of-bericht": "Zoeken op titel of bericht",
+  "modules/navigation/components/navigation-edit-form/navigation-edit-form___opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina": "Opgelet, voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina.",
   "modules/navigation/components/navigation-edit-form/navigation-edit-form___taal": "Taal",
   "modules/navigation/views/navigation-bar-detail___er-zijn-geen-navigatie-items-in-de-huidige-navigatie-balk-die-voldoen-aan-je-filters": "Er zijn geen navigatie-items in de huidige navigatiebalk die voldoen aan je filters.",
   "modules/navigation/views/navigation-bar-detail___taal": "Taal",

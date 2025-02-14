@@ -9235,6 +9235,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/navigation/components/navigation-edit-form/navigation-edit-form",
+    "key": "opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina",
+    "language": "nl",
+    "value": "Opgelet, voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",

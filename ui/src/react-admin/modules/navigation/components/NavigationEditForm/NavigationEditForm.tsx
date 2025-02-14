@@ -15,7 +15,7 @@ import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSel
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
 import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { tText } from '~shared/helpers/translation-functions';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
 import type { ReactSelectOption, ValueOf } from '~shared/types';
 import type { PickerItem } from '~shared/types/content-picker';
 import type { NavigationEditFormErrorState, NavigationItem } from '../../navigation.types';
@@ -195,6 +195,14 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 						SpecialPermissionGroups.loggedOutUsers,
 						SpecialPermissionGroups.loggedInUsers,
 					]}
+				/>
+			)}
+			{formState.contentType === 'INTERNAL_LINK' && (
+				<Alert
+					message={tHtml(
+						'modules/navigation/components/navigation-edit-form/navigation-edit-form___opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina'
+					)}
+					type="warn"
 				/>
 			)}
 			{permissionWarning && <Alert message={permissionWarning} type="danger" />}
