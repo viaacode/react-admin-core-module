@@ -175,6 +175,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					controls={controls}
 					speed={speed}
 					onEnded={onEnded}
+					trackPlayEvent={true}
 				/>
 				{/* Modal for displaying copyright info about the tile's image https://meemoo.atlassian.net/browse/AVO-3015 */}
 				<Modal

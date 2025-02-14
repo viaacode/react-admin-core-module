@@ -1,7 +1,6 @@
 // Admin Core
 export type { AdminConfig } from '../core/config/config.types';
 export { AdminConfigManager } from '../core/config/config.class';
-export { type FlowPlayerWrapperProps } from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 export {
 	fetchWithLogoutJson,
 	fetchWithLogout,
@@ -45,6 +44,12 @@ export {
 } from './content-page/services/content-page.converters';
 export { GET_ALIGN_OPTIONS } from './content-page/const/get-align-options';
 export { GET_HEADING_TYPE_OPTIONS } from './content-page/const/get-heading-type-options';
+
+// Flowplayer wrapper
+export type {
+	FlowPlayerWrapperProps,
+	CuePoints,
+} from './shared/components/FlowPlayerWrapper/FlowPlayerWrapper.types';
 
 // Content page labels
 export { ContentPageLabelService } from './content-page-labels/content-page-label.service';

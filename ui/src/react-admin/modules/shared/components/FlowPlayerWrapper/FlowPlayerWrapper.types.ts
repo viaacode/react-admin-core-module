@@ -2,19 +2,29 @@ import type { FlowplayerSourceList } from '@meemoo/react-components/dist/compone
 import type { ReactNode } from 'react';
 import type { Avo } from '@viaa/avo2-types';
 
+/**
+ * Keep in sync with avo2 client src/shared/components/FlowPlayerWrapper/FlowPlayerWrapper.tsx
+ */
+export interface CuePoints {
+	end: number | null;
+	start: number | null;
+}
+
+/**
+ * Keep in sync with avo2 client src/shared/components/FlowPlayerWrapper/FlowPlayerWrapper.tsx
+ */
 export type FlowPlayerWrapperProps = {
 	annotationText?: string;
 	annotationTitle?: string;
 	autoplay?: boolean;
 	canPlay?: boolean;
-	cuePoints?: {
-		start: number | null;
-		end: number | null;
-	};
+	cuePoints?: CuePoints;
 	duration?: string;
 	external_id?: string;
 	issuedDate?: string;
 	item?: Avo.Item.Item;
+	cuePointsVideo?: CuePoints;
+	cuePointsLabel?: CuePoints;
 	onEnded?: () => void;
 	onPlay?: (playingSrc?: string) => void;
 	organisationLogo?: string;
@@ -28,4 +38,5 @@ export type FlowPlayerWrapperProps = {
 	ui?: number;
 	controls?: boolean;
 	speed?: unknown | null;
+	trackPlayEvent: boolean;
 };
