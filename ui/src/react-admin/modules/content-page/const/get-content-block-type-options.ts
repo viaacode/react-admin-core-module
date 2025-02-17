@@ -2,7 +2,7 @@ import type { SelectOption } from '@viaa/avo2-components';
 import { AdminConfigManager } from '~core/config';
 import { tText } from '~shared/helpers/translation-functions';
 import { ContentBlockType } from '../types/content-block.types';
-import { HET_ARCHIEF } from '~shared/types';
+import { AVO, HET_ARCHIEF } from '~shared/types';
 
 export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () => {
 	const allContentBlocks: { label: string; value: ContentBlockType }[] = [
@@ -125,8 +125,14 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.CardsWithoutDescription,
 		},
 		{
-			label: tText('admin/content-block/content-block___image-text-background'),
-			value: ContentBlockType.ImageTextBackground,
+			label: tText('admin/content-block/content-block___image-text-background', {}, [
+				HET_ARCHIEF,
+			]),
+			value: ContentBlockType.HetArchiefImageTextBackground,
+		},
+		{
+			label: tText('Afbeelding met H1 (avo)', {}, [AVO]),
+			value: ContentBlockType.AvoImageTextBackground,
 		},
 		{
 			label: tText(

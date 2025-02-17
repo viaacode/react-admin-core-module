@@ -17,6 +17,7 @@ import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { Loader } from '../Loader/Loader';
 
 import './FileUpload.scss';
+import { getFileImageDimensions } from '~shared/helpers/get-file-image-dimensions';
 
 export interface FileUploadProps {
 	icon?: IconName;
@@ -30,6 +31,7 @@ export interface FileUploadProps {
 	disabled?: boolean;
 	onChange: (urls: string[]) => void;
 	onDeleteFile?: (url: string) => void;
+	imageDimensions?: { width: number; height: number };
 
 	/**
 	 * Choose the preview the uploaded file or not
@@ -51,6 +53,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 	assetType,
 	ownerId,
 	urls,
+	imageDimensions,
 	showDeleteButton = true,
 	showFilePreview = true,
 	disabled = false,
@@ -72,7 +75,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 		setIsDeleteModalOpen(false);
 	};
 
-	const uploadSelectedFile = async (files: File[] | null) => {
+	const uploadSelectedFile = async (files: File[] | null): Promise<boolean> => {
 		try {
 			if (files && files.length) {
 				// If allowedTypes array is empty, all filetypes are allowed
@@ -89,7 +92,31 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 						),
 						type: ToastType.ERROR,
 					});
-					return;
+					setIsProcessing(false);
+					return false;
+				}
+
+				if (imageDimensions?.width && imageDimensions?.height) {
+					// Image must have fixed dimensions
+					const dimensions = await Promise.all(
+						files.map((file) => getFileImageDimensions(file))
+					);
+					const notAllowedDimensions = dimensions.filter(
+						(dim) =>
+							dim.width !== imageDimensions.width ||
+							dim.height !== imageDimensions.height
+					);
+					if (notAllowedDimensions.length) {
+						showToast({
+							title: tText('Foutieve afmetingen'),
+							description: tText(
+								'Afbeelding moet exact 1920 x 385)pixels groot zijn'
+							),
+							type: ToastType.ERROR,
+						});
+						setIsProcessing(false);
+						return false;
+					}
 				}
 
 				// Upload all files in series
@@ -99,6 +126,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					uploadedUrls.push(await AssetsService.uploadFile(files[i], assetType, ownerId));
 				}
 				onChange(allowMulti ? [...(urls || []), ...uploadedUrls] : uploadedUrls);
+				setIsProcessing(false);
+				return true;
 			}
 		} catch (err) {
 			console.error(
@@ -123,6 +152,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			}
 		}
 		setIsProcessing(false);
+		return false;
 	};
 
 	const deleteUploadedFile = async (url: string) => {
@@ -277,10 +307,16 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 										'shared/components/file-upload/file-upload___kies-een-bestand'
 									)}
 									multiple={allowMulti}
-									onChange={(evt) =>
+									onChange={(evt) => {
 										!!evt.target.files &&
-										uploadSelectedFile(Array.from(evt.target.files))
-									}
+											uploadSelectedFile(Array.from(evt.target.files)).then(
+												(uploadSucceeded) => {
+													if (!uploadSucceeded) {
+														evt.target.value = '';
+													}
+												}
+											);
+									}}
 								/>
 							)}
 						</FlexItem>

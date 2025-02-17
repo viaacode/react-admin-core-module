@@ -3,6 +3,7 @@ import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
 import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
 import { AdminConfigManager } from '~core/config';
 import {
+	BlockAvoImageTextBackground,
 	BlockBreadcrumbs,
 	BlockButtonsWrapper,
 	BlockCardsWithoutDescription,
@@ -10,10 +11,10 @@ import {
 	BlockCTAsWrapper,
 	BlockEventbrite,
 	BlockHeading,
+	BlockHetArchiefImageTextBackground,
 	BlockIFrame,
 	BlockImage,
 	BlockImageGridWrapper,
-	BlockImageTextBackground,
 	BlockImageTitleTextButtonWrapper,
 	BlockIntro,
 	BlockKlaar,
@@ -70,7 +71,6 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.ThreeClickableTiles]: BlockThreeClickableTiles,
 		[ContentBlockType.TagsWithLink]: BlockTagsWithLink,
 		[ContentBlockType.CardsWithoutDescription]: BlockCardsWithoutDescription,
-		[ContentBlockType.ImageTextBackground]: BlockImageTextBackground,
 		[ContentBlockType.MaintainersGrid]: BlockMaintainersGrid,
 
 		// Het archief specific blocks
@@ -80,10 +80,12 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 			ContentBlockType.ContentEncloseGrid
 		),
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
+		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
 
 		// Avo specific blocks
 		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
+		[ContentBlockType.AvoImageTextBackground]: BlockAvoImageTextBackground,
 	};
 	return blocks[type];
 }

@@ -154,12 +154,13 @@ export enum ContentBlockType {
 	UspGrid = 'USP_GRID',
 	TagsWithLink = 'TAGS_WITH_LINKS',
 	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
-	ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
+	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
 	MaintainersGrid = 'MAINTAINERS_GRID',
 	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
 	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
 	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
 	Breadcrumbs = 'BREADCRUMBS',
+	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 }
 
 export enum ContentBlockEditor {
@@ -500,6 +501,8 @@ export interface ImageTextBackgroundBlockComponentState {
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
 	content: string;
+	contentWidth: number;
+	contentPosition: number;
 	textPadding: SpacerOption;
 	foregroundColor: Color;
 	backgroundColor: Color;

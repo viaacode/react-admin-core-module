@@ -1,7 +1,6 @@
 import { AdminConfigManager } from '~core/config';
 import {
 	GET_ALIGN_OPTIONS,
-	GET_BACKGROUND_ALIGN_OPTIONS,
 	GET_SIMPLE_ALIGN_OPTIONS,
 } from '~modules/content-page/const/get-align-options';
 import {
@@ -30,14 +29,18 @@ import {
 	TEXT_FIELD,
 } from '../defaults';
 import { isAvo } from '~shared/helpers/is-avo';
+import type { MultiRangeProps } from '@viaa/avo2-components';
+import { PHOTO_TYPES } from '~shared/helpers/files';
 
-export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
+export const INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 	(): ImageTextBackgroundBlockComponentState => ({
 		heading: '',
 		headingType: isAvo() ? 'h1' : 'h3',
 		headingSize: 'medium',
 		content: '',
 		textPadding: 'small',
+		contentWidth: 60,
+		contentPosition: 0,
 		foregroundColor: Color.Black,
 		backgroundColor: Color.TealBright,
 		backgroundAlignment: isAvo() ? 'fill-screen' : 'left-inside-page',
@@ -45,7 +48,7 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
 		buttonIconAlignment: 'left',
 	});
 
-export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlockState => {
+export const INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlockState => {
 	return {
 		...BLOCK_STATE_DEFAULTS(),
 		padding: {
@@ -56,14 +59,14 @@ export const INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE = (): DefaultContentBlock
 	};
 };
 
-export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
+export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
 	name: tText(
 		'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___admin-content-block-helpers-image-text-background-image-text-background'
 	),
-	type: ContentBlockType.ImageTextBackground,
+	type: ContentBlockType.AvoImageTextBackground,
 	components: {
-		state: INITIAL_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
+		state: INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE(),
 		fields: {
 			heading: TEXT_FIELD(
 				tText(
@@ -113,6 +116,28 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					options: GET_ALIGN_OPTIONS(),
 				},
 			},
+			contentWidth: {
+				label: tText('Tekst breedte'),
+				editorType: ContentBlockEditor.MultiRange,
+				editorProps: {
+					showNumber: true,
+					min: 0,
+					max: 100,
+					step: 5,
+					values: [0],
+				} as MultiRangeProps,
+			},
+			contentPosition: {
+				label: tText('Tekst positie'),
+				editorType: ContentBlockEditor.MultiRange,
+				editorProps: {
+					showNumber: true,
+					min: 0,
+					max: 100,
+					step: 5,
+					values: [0],
+				} as MultiRangeProps,
+			},
 			foregroundColor: {
 				label: tText(
 					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-kleur'
@@ -155,16 +180,10 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 				editorProps: {
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
+					allowedTypes: PHOTO_TYPES,
+					label: tText('Afbeelding (1920 x 385)'),
+					imageDimensions: { width: 1920, height: 385 },
 				} as FileUploadProps,
-			},
-			backgroundAlignment: {
-				label: tText(
-					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
-				),
-				editorType: ContentBlockEditor.Select,
-				editorProps: {
-					options: GET_BACKGROUND_ALIGN_OPTIONS(),
-				},
 			},
 			imageAttribution: {
 				label: tText(
@@ -232,7 +251,7 @@ export const IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlockCo
 		},
 	},
 	block: {
-		state: INITIAL_IMAGE_TEXT_BACKGROUND_BLOCK_STATE(),
+		state: INITIAL_AVO_IMAGE_TEXT_BACKGROUND_BLOCK_STATE(),
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {

@@ -1,0 +1,48 @@
+@use "sass:math";
+@import "../../../../shared/styles/settings/variables";
+
+.c-block-avo-image-text-background {
+	.a-block-image__annotation {
+		padding: 10px 20px 0;
+	}
+}
+
+.c-block-avo-image-text-background-wrapper {
+	width: 100%;
+	height: auto;
+	position: relative;
+	aspect-ratio: 1920 / 385;
+
+	&.c-block-avo-image-text-background--fill-screen {
+		.c-block-avo-image-text-background__page-wrapper {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
+
+		.c-block-avo-image-text-background__image-wrapper {
+			width: 100%;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+
+	.c-block-avo-image-text-background__column-text {
+		flex-direction: column;
+
+		p {
+			display: inline-block;
+		}
+	}
+
+	.c-block-avo-image-text-background__heading {
+		font-weight: 600; // semibold: https://meemoo.atlassian.net/browse/AVO-3390
+	}
+}

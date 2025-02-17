@@ -133,6 +133,7 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString(),
 		publishedAt: null,
+		publishedAtDisplay: null,
 		userProfileId: null,
 		userGroupIds: [],
 		labels: [],

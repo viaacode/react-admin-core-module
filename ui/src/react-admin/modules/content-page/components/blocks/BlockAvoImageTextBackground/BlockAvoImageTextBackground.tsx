@@ -18,19 +18,19 @@ import { Icon } from '~shared/components/Icon';
 import { ContentWidth } from '~modules/content-page/types/content-pages.types';
 import { isMobileWidth } from '~shared/helpers/media-query';
 
-import './image-text-background.scss';
+import './BlockAvoImageTextBackground.scss';
 
-const FONT_SIZE_TO_REM: Record<HeadingSizeOption, number> = {
-	small: 3.2,
-	medium: 3.6,
-	large: 4,
-};
-
-const TEXT_PADDING_TO_REM: Partial<Record<SpacerOption, number>> = {
-	small: 0.5,
+const FONT_SIZE_TO_VW: Record<HeadingSizeOption, number> = {
+	small: 1,
 	medium: 1.5,
 	large: 2,
-	'extra-large': 3,
+};
+
+const TEXT_PADDING_TO_VW: Partial<Record<SpacerOption, number>> = {
+	small: 0.2,
+	medium: 0.3,
+	large: 0.4,
+	'extra-large': 0.5,
 };
 
 const IMAGE_ALIGN_TO_TEXT_ALIGN: Record<BackgroundAlignOption, AlignOption> = {
@@ -47,11 +47,13 @@ const TEXT_ALIGN_TO_FLEX: Record<AlignOption, string> = {
 	right: 'flex-end',
 };
 
-export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
+export interface BlockAvoImageTextBackgroundProps extends DefaultComponentProps {
 	heading: string;
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
 	content: string;
+	contentWidth: number;
+	contentPosition: number;
 	textAlign: AlignOption;
 	textPadding: SpacerOption;
 	foregroundColor: Color;
@@ -69,12 +71,14 @@ export interface BlockImageTextBackgroundProps extends DefaultComponentProps {
 	pageWidth?: ContentWidth;
 }
 
-export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroundProps> = ({
+export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBackgroundProps> = ({
 	className,
 	heading,
 	headingType,
 	headingSize,
 	content,
+	contentWidth,
+	contentPosition,
 	textAlign,
 	textPadding,
 	foregroundColor,
@@ -94,10 +98,10 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
 
 	const renderHeadingTextAndButton = () => {
-		let fontSize = FONT_SIZE_TO_REM[headingSize];
-		let padding = TEXT_PADDING_TO_REM[textPadding] || 0;
-		let lineHeightTitle = (fontSize + padding * 2) * 1.5;
-		let lineHeightText = (1.5 + padding * 2) * 1.3;
+		let fontSize = FONT_SIZE_TO_VW[headingSize];
+		let padding = TEXT_PADDING_TO_VW[textPadding] || 0;
+		let lineHeightTitle = (fontSize + padding * 2) * 1.2;
+		let lineHeightText = padding * 2 * 1.3;
 
 		if (isMobileWidth()) {
 			fontSize = fontSize / 3;
@@ -110,17 +114,17 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 			<>
 				{!!heading && (
 					<BlockHeading
-						className="c-block-image-text-background__heading"
+						className="c-block-avo-image-text-background__heading"
 						type={headingType}
 						style={{
 							textAlign: computedTextAlign,
-							lineHeight: lineHeightTitle + 'rem',
+							lineHeight: lineHeightTitle + 'vw',
 						}}
 					>
 						<mark
 							style={{
-								fontSize: fontSize + 'rem',
-								padding: padding + 'rem',
+								fontSize: fontSize + 'vw',
+								padding: padding + 'vw',
 								backgroundColor: backgroundColor,
 								boxDecorationBreak: 'clone',
 								whiteSpace: 'normal',
@@ -133,7 +137,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 				)}
 				{!!content && (
 					<p
-						className="c-block-image-text-background__content"
+						className="c-block-avo-image-text-background__content"
 						style={{
 							textAlign: computedTextAlign,
 							marginTop: (heading ? 1 : 0) + 'rem',
@@ -159,7 +163,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 					generateSmartLink(
 						buttonAction,
 						<Button
-							className={`c-block-image-text-background__button c-block-image-text-background__button-icon--${buttonIconAlignment}`}
+							className={`c-block-avo-image-text-background__button c-block-avo-image-text-background__button-icon--${buttonIconAlignment}`}
 							label={buttonLabel}
 							type={buttonType}
 							icon={buttonIcon}
@@ -185,8 +189,8 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 			<Image
 				src={image}
 				className={clsx(
-					'c-block-image-text-background__image-wrapper',
-					'c-block-image-text-background__image-wrapper--' + backgroundAlignment
+					'c-block-avo-image-text-background__image-wrapper',
+					'c-block-avo-image-text-background__image-wrapper--' + backgroundAlignment
 				)}
 			/>
 		);
@@ -198,12 +202,14 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 				<>
 					<Container
 						className={clsx(
-							'c-block-image-text-background__page-wrapper',
-							'c-block-image-text-background__page-wrapper--' + computedTextAlign
+							'c-block-avo-image-text-background__page-wrapper',
+							'c-block-avo-image-text-background__page-wrapper--' + computedTextAlign
 						)}
 						style={{
 							color: foregroundColor,
 							alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
+							left: contentPosition + '%',
+							width: contentWidth + '%',
 						}}
 						mode="horizontal"
 						size={
@@ -225,7 +231,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 			return (
 				<>
 					<Container
-						className="c-block-image-text-background__page-wrapper"
+						className="c-block-avo-image-text-background__page-wrapper"
 						style={{ color: foregroundColor }}
 						mode="horizontal"
 						size={
@@ -235,7 +241,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 						}
 					>
 						<div
-							className="c-block-image-text-background__column-text"
+							className="c-block-avo-image-text-background__column-text"
 							style={{
 								alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
 							}}
@@ -254,7 +260,7 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 			return (
 				<>
 					<Container
-						className="c-block-image-text-background__page-wrapper"
+						className="c-block-avo-image-text-background__page-wrapper"
 						style={{ color: foregroundColor }}
 						mode="horizontal"
 						size={
@@ -264,14 +270,14 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 						}
 					>
 						<div
-							className="c-block-image-text-background__column-text"
+							className="c-block-avo-image-text-background__column-text"
 							style={{
 								alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
 							}}
 						>
 							{renderHeadingTextAndButton()}
 						</div>
-						<div className="c-block-image-text-background__column-image">
+						<div className="c-block-avo-image-text-background__column-image">
 							{renderImage()}
 						</div>
 					</Container>
@@ -283,9 +289,9 @@ export const BlockImageTextBackground: FunctionComponent<BlockImageTextBackgroun
 	};
 
 	return (
-		<article className={clsx('c-block-image-text-background', className)}>
+		<article className={clsx('c-block-avo-image-text-background', className)}>
 			<div
-				className={`c-block-image-text-background-wrapper c-block-image-text-background--${backgroundAlignment}`}
+				className={`c-block-avo-image-text-background-wrapper c-block-avo-image-text-background--${backgroundAlignment}`}
 			>
 				{renderBlockContent()}
 			</div>
