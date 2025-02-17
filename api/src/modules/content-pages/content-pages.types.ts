@@ -71,6 +71,7 @@ interface ContentPageBase {
 	path: string | null;
 	isPublic: boolean;
 	publishedAt: string | null;
+	publishedAtDisplay: string | null;
 	publishAt: string | null;
 	depublishAt: string | null;
 	createdAt: string;
@@ -182,3 +183,18 @@ export type ContentOverviewTableCols =
 	| 'depublishAt'
 	| 'labels'
 	| 'userGroupIds';
+
+export interface ContentPagePublishInfo {
+	id: number | string;
+	publish_at: string | null;
+	depublish_at: string | null;
+	published_at: string | null;
+	published_at_display: string | null;
+}
+
+export interface ContentPagesPublishAndUnpublishResults {
+	publishedCount: number;
+	publishedIds: (number | string)[];
+	unpublishedCount: number;
+	unpublishedIds: (number | string)[];
+}

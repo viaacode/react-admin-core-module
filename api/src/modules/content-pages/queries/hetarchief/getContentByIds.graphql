@@ -14,6 +14,7 @@ query getContentByIds($ids: [uuid!]!) {
 		path
 		publish_at
 		published_at
+		published_at_display
 		title
 		language
 		nl_parent_page_id

@@ -1,0 +1,8 @@
+mutation publishContentPage($id: uuid, $publishedAt: timestamp) {
+	update_app_content_page(
+		where: { id: { _eq: $id } }
+		_set: { published_at: $publishedAt, is_public: true }
+	) {
+		affected_rows
+	}
+}

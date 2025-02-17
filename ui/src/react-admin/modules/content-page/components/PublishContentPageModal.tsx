@@ -17,7 +17,7 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from '@viaa/avo2-components';
-import { parseISO } from 'date-fns';
+import { parseISO, setHours, setMinutes, setSeconds } from 'date-fns';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
@@ -47,24 +47,37 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 	const [selectedOption, setSelectedOption] = useState<PublishOption>(
 		getPublishedState(contentPage)
 	);
-	const [publishedAt, setPublishedAt] = useState<string | null>(contentPage.publishedAt);
+	const [publishedAtDisplay, setPublishedAtDisplay] = useState<string | null>(
+		contentPage.publishedAtDisplay || contentPage.publishedAt
+	);
 	const [publishAt, setPublishAt] = useState<string | null>(contentPage.publishAt);
 	const [depublishAt, setDepublishAt] = useState<string | null>(contentPage.depublishAt);
 
 	const onSave = async () => {
 		try {
 			const now = new Date();
+			let isPublic = false;
+			if (selectedOption === 'public') {
+				isPublic = true;
+			} else if (selectedOption === 'timebound') {
+				if (publishAt) {
+					if (new Date(publishAt) < now) {
+						// publishAt is in the past
+						if ((depublishAt && new Date(depublishAt) > now) || !depublishAt) {
+							isPublic = true;
+						}
+					} // else: publishAt is in the future => isPublic = false
+				} else {
+					// publishAt is empty
+					if ((depublishAt && new Date(depublishAt) > now) || !depublishAt) {
+						isPublic = true;
+					} // else: depublishAt is in the past => isPublic = false
+				}
+			}
 			const newContent: ContentPageInfo = {
-				isPublic:
-					selectedOption === 'public' ||
-					(selectedOption === 'timebound' &&
-						((publishAt &&
-							new Date(publishAt) < now &&
-							((depublishAt && new Date(depublishAt) > now) || !depublishAt)) ||
-							(!publishAt &&
-								(!depublishAt || (depublishAt && new Date(depublishAt) > now))))),
-				publishedAt:
-					publishedAt || (selectedOption === 'public' ? now.toISOString() : null),
+				isPublic,
+				publishedAt: isPublic ? publishedAtDisplay || now.toISOString() : null,
+				publishedAtDisplay: publishedAtDisplay || null,
 				publishAt: selectedOption === 'timebound' ? publishAt : null,
 				depublishAt: selectedOption === 'timebound' ? depublishAt : null,
 			} as ContentPageInfo;
@@ -96,6 +109,16 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 			setValidationError(undefined);
 		}
 		onClose(newContent);
+	};
+
+	const getPublishedAtDisplayDate = (): Date | undefined => {
+		if (publishedAtDisplay) {
+			return parseISO(publishedAtDisplay);
+		} else if (contentPage.publishedAt) {
+			return parseISO(contentPage.publishedAt);
+		} else {
+			return undefined;
+		}
 	};
 
 	return (
@@ -190,8 +213,17 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 					<Spacer margin={['left-large', 'top']}>
 						<DatePicker
 							{...getDatePickerDefaultProps}
-							value={publishedAt ? parseISO(publishedAt) : undefined}
-							onChange={(date) => setPublishedAt(date ? date.toISOString() : null)}
+							value={getPublishedAtDisplayDate()}
+							onChange={(date) =>
+								setPublishedAtDisplay(
+									date
+										? setSeconds(
+												setMinutes(setHours(date, 7), 0),
+												0
+										  ).toISOString()
+										: null
+								)
+							}
 						/>
 						<Tooltip position="right">
 							<TooltipTrigger>

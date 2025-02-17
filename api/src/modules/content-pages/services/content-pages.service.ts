@@ -24,6 +24,7 @@ import {
 	GetCollectionTileByIdDocument,
 	type GetCollectionTileByIdQuery,
 	type GetCollectionTileByIdQueryVariables,
+	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryAvo,
 	GetItemByExternalIdDocument,
 	type GetItemByExternalIdQuery,
 	type GetItemByExternalIdQueryVariables,
@@ -32,11 +33,16 @@ import {
 	type GetItemTileByIdQueryVariables,
 	type Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
+	PublishContentPageMutation as PublishContentPageMutationAvo,
+	UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	App_Content_Block_Insert_Input,
 	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
 	App_Content_Page_Bool_Exp,
+	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
+	PublishContentPageMutationHetArchief,
+	UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { customError } from '../../shared/helpers/custom-error';
 import { getOrderObject } from '../../shared/helpers/generate-order-gql-query';
@@ -53,6 +59,8 @@ import {
 import {
 	type ContentOverviewTableCols,
 	type ContentPageLabel,
+	ContentPagePublishInfo,
+	ContentPagesPublishAndUnpublishResults,
 	type ContentPageType,
 	type ContentPageUser,
 	type ContentWidth,
@@ -146,6 +154,7 @@ export class ContentPagesService {
 			path: gqlContentPage?.path,
 			isPublic: gqlContentPage?.is_public,
 			publishedAt: gqlContentPage?.published_at,
+			publishedAtDisplay: gqlContentPage?.published_at_display,
 			publishAt: gqlContentPage?.publish_at,
 			depublishAt: gqlContentPage?.depublish_at,
 			createdAt: gqlContentPage?.created_at,
@@ -216,6 +225,7 @@ export class ContentPagesService {
 			publish_at: contentPageInfo.publishAt || null,
 			depublish_at: contentPageInfo.depublishAt || null,
 			published_at: contentPageInfo.publishedAt || null,
+			published_at_display: contentPageInfo.publishedAtDisplay || null,
 			created_at: contentPageInfo.createdAt || null,
 			updated_at: contentPageInfo.updatedAt || null,
 			user_group_ids: contentPageInfo.userGroupIds.map((groupId) => String(groupId)),
@@ -508,12 +518,7 @@ export class ContentPagesService {
 		return (response.app_item_meta?.[0] || null) as Partial<Avo.Item.Item> | null;
 	}
 
-	public async updatePublishDates(): Promise<{
-		publishedCount: number;
-		publishedIds: string[];
-		unpublishedCount: number;
-		unpublishedIds: string[];
-	}> {
+	public async updatePublishDates(): Promise<ContentPagesPublishAndUnpublishResults> {
 		const now = new Date();
 		const publishedAt = new Date(
 			now.getFullYear(),
@@ -523,19 +528,63 @@ export class ContentPagesService {
 			0,
 			0
 		).toISOString();
-		const response = await this.dataService.execute<
-			ContentPageQueryTypes['UpdateContentPagePublishDatesMutation'],
-			ContentPageQueryTypes['UpdateContentPagePublishDatesMutationVariables']
-		>(CONTENT_PAGE_QUERIES[getDatabaseType()].UpdateContentPagePublishDatesDocument, {
-			now: now.toISOString(),
-			publishedAt,
-		});
-		return {
-			publishedCount: response.publish_content_pages?.affected_rows || 0,
-			publishedIds: response.publish_content_pages?.returning.map((page) => page.id),
-			unpublishedCount: response.unpublish_content_pages?.affected_rows || 0,
-			unpublishedIds: response.unpublish_content_pages?.returning.map((page) => page.id),
+		const results: ContentPagesPublishAndUnpublishResults = {
+			publishedCount: 0,
+			publishedIds: [],
+			unpublishedCount: 0,
+			unpublishedIds: [],
 		};
+
+		// Publish content pages that should be published according to their publishAt and depublishAt dates
+		const response = await this.dataService.execute<
+			ContentPageQueryTypes['GetContentPagesToPublishQuery'],
+			ContentPageQueryTypes['GetContentPagesToPublishQueryVariables']
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPagesToPublishDocument, {
+			now: now.toISOString(),
+		});
+		const contentPages = ((response as GetContentPagesToPublishQueryAvo)?.app_content ||
+			(response as GetContentPagesToPublishQueryHetArchief)
+				?.app_content_page) as ContentPagePublishInfo[];
+		await mapLimit(contentPages, 10, async (contentPage) => {
+			const publishResult = await this.dataService.execute<
+				ContentPageQueryTypes['PublishContentPageMutation'],
+				ContentPageQueryTypes['PublishContentPageMutationVariables']
+			>(CONTENT_PAGE_QUERIES[getDatabaseType()].PublishContentPageDocument, {
+				id: contentPage.id,
+				publishedAt: contentPage.published_at_display || publishedAt,
+			});
+			results.publishedCount +=
+				(publishResult as PublishContentPageMutationAvo).update_app_content
+					?.affected_rows ||
+				(publishResult as PublishContentPageMutationHetArchief).update_app_content_page
+					?.affected_rows ||
+				0;
+			results.publishedIds.push(contentPage.id);
+		});
+
+		// Unpublish content pages that should be unpublished according to their publishAt and depublishAt dates
+		const unpublishResult = await this.dataService.execute<
+			ContentPageQueryTypes['UnpublishContentPageMutation'],
+			ContentPageQueryTypes['UnpublishContentPageMutationVariables']
+		>(CONTENT_PAGE_QUERIES[getDatabaseType()].UnpublishContentPageDocument, {
+			now: now.toISOString(),
+		});
+		results.unpublishedCount =
+			(unpublishResult as UnpublishContentPageMutationAvo).update_app_content
+				?.affected_rows ||
+			(unpublishResult as UnpublishContentPageMutationHetArchief).update_app_content_page
+				?.affected_rows ||
+			0;
+		results.unpublishedIds =
+			(unpublishResult as UnpublishContentPageMutationAvo).update_app_content?.returning?.map(
+				(page) => page.id
+			) ||
+			(
+				unpublishResult as UnpublishContentPageMutationHetArchief
+			).update_app_content_page?.returning?.map((page) => page.id) ||
+			[];
+
+		return results;
 	}
 
 	public async getContentPagesByIds(contentPageIds: number[]): Promise<DbContentPage[]> {

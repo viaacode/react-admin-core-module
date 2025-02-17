@@ -82,6 +82,7 @@ interface ContentPageBase {
 	path: string | null;
 	isPublic: boolean;
 	publishedAt: string | null;
+	publishedAtDisplay: string | null; // Contains an override date for when this page is published, this date should be displayed as the publish date instead of the actual publish date
 	publishAt: string | null;
 	depublishAt: string | null;
 	createdAt: string;

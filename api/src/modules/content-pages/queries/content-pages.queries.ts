@@ -23,6 +23,9 @@ import {
 	GetContentPagesDocument as GetContentPagesDocumentAvo,
 	type GetContentPagesQuery as GetContentPagesQueryAvo,
 	type GetContentPagesQueryVariables as GetContentPagesQueryVariablesAvo,
+	GetContentPagesToPublishDocument as GetContentPagesToPublishDocumentAvo,
+	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryAvo,
+	type GetContentPagesToPublishQueryVariables as GetContentPagesToPublishQueryVariablesAvo,
 	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentAvo,
 	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryAvo,
 	type GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesAvo,
@@ -59,15 +62,18 @@ import {
 	type InsertContentLabelLinksMutationVariables as InsertContentLabelLinksMutationVariablesAvo,
 	type InsertContentMutation as InsertContentMutationAvo,
 	type InsertContentMutationVariables as InsertContentMutationVariablesAvo,
+	PublishContentPageDocument as PublishContentPageDocumentAvo,
+	type PublishContentPageMutation as PublishContentPageMutationAvo,
+	type PublishContentPageMutationVariables as PublishContentPageMutationVariablesAvo,
 	SoftDeleteContentDocument as SoftDeleteContentDocumentAvo,
 	type SoftDeleteContentMutation as SoftDeleteContentMutationAvo,
 	type SoftDeleteContentMutationVariables as SoftDeleteContentMutationVariablesAvo,
+	UnpublishContentPageDocument as UnpublishContentPageDocumentAvo,
+	type UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
+	type UnpublishContentPageMutationVariables as UnpublishContentPageMutationVariablesAvo,
 	UpdateContentBlockDocument as UpdateContentBlockDocumentAvo,
 	type UpdateContentBlockMutation as UpdateContentBlockMutationAvo,
 	type UpdateContentBlockMutationVariables as UpdateContentBlockMutationVariablesAvo,
-	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentAvo,
-	type UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationAvo,
-	type UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesAvo,
 	UpdateContentPageWithBlocksAndLabelsDocument as UpdateContentPageWithBlocksAndLabelsDocumentAvo,
 	type UpdateContentPageWithBlocksAndLabelsMutation as UpdateContentPageWithBlocksAndLabelsMutationAvo,
 	type UpdateContentPageWithBlocksAndLabelsMutationVariables as UpdateContentPageWithBlocksAndLabelsMutationVariablesAvo,
@@ -94,6 +100,9 @@ import {
 	GetContentPagesDocument as GetContentPagesDocumentHetArchief,
 	type GetContentPagesQuery as GetContentPagesQueryHetArchief,
 	type GetContentPagesQueryVariables as GetContentPagesQueryVariablesHetArchief,
+	GetContentPagesToPublishDocument as GetContentPagesToPublishDocumentHetArchief,
+	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
+	type GetContentPagesToPublishQueryVariables as GetContentPagesToPublishQueryVariablesHetArchief,
 	GetContentPagesWithBlocksDocument as GetContentPagesWithBlocksDocumentHetArchief,
 	type GetContentPagesWithBlocksQuery as GetContentPagesWithBlocksQueryHetArchief,
 	type GetContentPagesWithBlocksQueryVariables as GetContentPagesWithBlocksQueryVariablesHetArchief,
@@ -130,15 +139,18 @@ import {
 	type InsertContentLabelLinksMutationVariables as InsertContentLabelLinksMutationVariablesHetArchief,
 	type InsertContentMutation as InsertContentMutationHetArchief,
 	type InsertContentMutationVariables as InsertContentMutationVariablesHetArchief,
+	PublishContentPageDocument as PublishContentPageDocumentHetArchief,
+	type PublishContentPageMutationHetArchief as PublishContentPageMutationHetArchief,
+	type PublishContentPageMutationVariables as PublishContentPageMutationVariablesHetArchief,
 	SoftDeleteContentDocument as SoftDeleteContentDocumentHetArchief,
 	type SoftDeleteContentMutation as SoftDeleteContentMutationHetArchief,
 	type SoftDeleteContentMutationVariables as SoftDeleteContentMutationVariablesHetArchief,
+	UnpublishContentPageDocument as UnpublishContentPageDocumentHetArchief,
+	type UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
+	type UnpublishContentPageMutationVariables as UnpublishContentPageMutationVariablesHetArchief,
 	UpdateContentBlockDocument as UpdateContentBlockDocumentHetArchief,
 	type UpdateContentBlockMutation as UpdateContentBlockMutationHetArchief,
 	type UpdateContentBlockMutationVariables as UpdateContentBlockMutationVariablesHetArchief,
-	UpdateContentPagePublishDatesDocument as UpdateContentPagePublishDatesDocumentHetArchief,
-	type UpdateContentPagePublishDatesMutation as UpdateContentPagePublishDatesMutationHetArchief,
-	type UpdateContentPagePublishDatesMutationVariables as UpdateContentPagePublishDatesMutationVariablesHetArchief,
 	UpdateContentPageWithBlocksAndLabelsDocument as UpdateContentPageWithBlocksAndLabelsDocumentHetArchief,
 	type UpdateContentPageWithBlocksAndLabelsMutation as UpdateContentPageWithBlocksAndLabelsMutationHetArchief,
 	type UpdateContentPageWithBlocksAndLabelsMutationVariables as UpdateContentPageWithBlocksAndLabelsMutationVariablesHetArchief,
@@ -311,11 +323,6 @@ export type ContentPageQueryTypes = {
 	GetPublicContentPagesQuery:
 		| GetPublicContentPagesQueryAvo
 		| GetPublicContentPagesQueryHetArchief;
-	UpdateContentPagePublishDatesMutationAvo: UpdateContentPagePublishDatesMutationAvo;
-	UpdateContentPagePublishDatesMutationHetArchief: UpdateContentPagePublishDatesMutationHetArchief;
-	UpdateContentPagePublishDatesMutation:
-		| UpdateContentPagePublishDatesMutationAvo
-		| UpdateContentPagePublishDatesMutationHetArchief;
 
 	GetContentByIdsQueryVariablesAvo: GetContentByIdsQueryVariablesAvo;
 	GetContentByIdsQueryVariablesHetArchief: GetContentByIdsQueryVariablesHetArchief;
@@ -337,11 +344,16 @@ export type ContentPageQueryTypes = {
 	GetPublicContentPagesQueryVariables:
 		| GetPublicContentPagesQueryVariablesAvo
 		| GetPublicContentPagesQueryVariablesHetArchief;
-	UpdateContentPagePublishDatesMutationVariablesAvo: UpdateContentPagePublishDatesMutationVariablesAvo;
-	UpdateContentPagePublishDatesMutationVariablesHetArchief: UpdateContentPagePublishDatesMutationVariablesHetArchief;
-	UpdateContentPagePublishDatesMutationVariables:
-		| UpdateContentPagePublishDatesMutationVariablesAvo
-		| UpdateContentPagePublishDatesMutationVariablesHetArchief;
+	PublishContentPageMutationVariablesAvo: PublishContentPageMutationVariablesAvo;
+	PublishContentPageMutationVariablesHetArchief: PublishContentPageMutationVariablesHetArchief;
+	PublishContentPageMutationVariables:
+		| PublishContentPageMutationVariablesAvo
+		| PublishContentPageMutationVariablesHetArchief;
+	UnpublishContentPageMutationVariablesAvo: UnpublishContentPageMutationVariablesAvo;
+	UnpublishContentPageMutationVariablesHetArchief: UnpublishContentPageMutationVariablesHetArchief;
+	UnpublishContentPageMutationVariables:
+		| UnpublishContentPageMutationVariablesAvo
+		| UnpublishContentPageMutationVariablesHetArchief;
 	GetNlParentContentPagesQuery:
 		| GetNlParentContentPagesQueryAvo
 		| GetNlParentContentPagesQueryHetArchief;
@@ -362,6 +374,26 @@ export type ContentPageQueryTypes = {
 	GetNlParentContentPagesByTitleQueryVariables:
 		| GetNlParentContentPagesByTitleQueryVariablesAvo
 		| GetNlParentContentPagesByTitleQueryVariablesHetArchief;
+	PublishContentPageMutationAvo: PublishContentPageMutationAvo;
+	PublishContentPageMutationHetArchief: PublishContentPageMutationHetArchief;
+	PublishContentPageMutation:
+		| PublishContentPageMutationAvo
+		| PublishContentPageMutationHetArchief;
+	UnpublishContentPageMutationAvo: UnpublishContentPageMutationAvo;
+	UnpublishContentPageMutationHetArchief: UnpublishContentPageMutationHetArchief;
+	UnpublishContentPageMutation:
+		| UnpublishContentPageMutationAvo
+		| UnpublishContentPageMutationHetArchief;
+	GetContentPagesToPublishQueryAvo: GetContentPagesToPublishQueryAvo;
+	GetContentPagesToPublishQueryHetArchief: GetContentPagesToPublishQueryHetArchief;
+	GetContentPagesToPublishQuery:
+		| GetContentPagesToPublishQueryAvo
+		| GetContentPagesToPublishQueryHetArchief;
+	GetContentPagesToPublishQueryVariablesAvo: GetContentPagesToPublishQueryVariablesAvo;
+	GetContentPagesToPublishQueryVariablesHetArchief: GetContentPagesToPublishQueryVariablesHetArchief;
+	GetContentPagesToPublishQueryVariables:
+		| GetContentPagesToPublishQueryVariablesAvo
+		| GetContentPagesToPublishQueryVariablesHetArchief;
 };
 
 type ContentPageQueries = {
@@ -385,7 +417,9 @@ type ContentPageQueries = {
 	GetContentPageByPathDocument: TypedDocumentNode<any, any>;
 	GetContentPagesWithBlocksDocument: TypedDocumentNode<any, any>;
 	GetPublicContentPagesDocument: TypedDocumentNode<any, any>;
-	UpdateContentPagePublishDatesDocument: TypedDocumentNode<any, any>;
+	GetContentPagesToPublishDocument: TypedDocumentNode<any, any>;
+	PublishContentPageDocument: TypedDocumentNode<any, any>;
+	UnpublishContentPageDocument: TypedDocumentNode<any, any>;
 	GetNlParentContentPagesDocument: TypedDocumentNode<any, any>;
 	GetNlParentContentPagesByTitleDocument: TypedDocumentNode<any, any>;
 };
@@ -413,7 +447,9 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPageByPathDocument: GetContentPageByPathDocumentAvo,
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentAvo,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentAvo,
-		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentAvo,
+		GetContentPagesToPublishDocument: GetContentPagesToPublishDocumentAvo,
+		PublishContentPageDocument: PublishContentPageDocumentAvo,
+		UnpublishContentPageDocument: UnpublishContentPageDocumentAvo,
 		GetNlParentContentPagesDocument: GetNlParentContentPagesDocumentAvo,
 		GetNlParentContentPagesByTitleDocument: GetNlParentContentPagesByTitleDocumentAvo,
 	},
@@ -441,7 +477,9 @@ export const CONTENT_PAGE_QUERIES: Record<DatabaseType, ContentPageQueries> = {
 		GetContentPageByPathDocument: GetContentPageByPathDocumentHetArchief,
 		GetContentPagesWithBlocksDocument: GetContentPagesWithBlocksDocumentHetArchief,
 		GetPublicContentPagesDocument: GetPublicContentPagesDocumentHetArchief,
-		UpdateContentPagePublishDatesDocument: UpdateContentPagePublishDatesDocumentHetArchief,
+		GetContentPagesToPublishDocument: GetContentPagesToPublishDocumentHetArchief,
+		PublishContentPageDocument: PublishContentPageDocumentHetArchief,
+		UnpublishContentPageDocument: UnpublishContentPageDocumentHetArchief,
 		GetNlParentContentPagesDocument: GetNlParentContentPagesDocumentHetArchief,
 		GetNlParentContentPagesByTitleDocument: GetNlParentContentPagesByTitleDocumentHetArchief,
 	},

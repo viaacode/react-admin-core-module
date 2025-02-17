@@ -29,7 +29,11 @@ export function getPublishedDate(
 		return null;
 	}
 
-	const { isPublic, publishedAt, publishAt, depublishAt } = contentPage;
+	const { isPublic, publishedAt, publishedAtDisplay, publishAt, depublishAt } = contentPage;
+
+	if (isPublic && publishedAtDisplay) {
+		return publishedAtDisplay;
+	}
 
 	if (isPublic && publishedAt) {
 		return publishedAt;

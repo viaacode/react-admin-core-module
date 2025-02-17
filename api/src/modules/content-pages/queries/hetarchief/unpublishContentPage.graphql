@@ -1,0 +1,15 @@
+mutation unpublishContentPage($now: timestamp) {
+	update_app_content_page(
+		where: {
+			depublish_at: { _lt: $now, _is_null: false }
+			is_public: { _eq: true }
+			is_deleted: { _eq: false }
+		}
+		_set: { is_public: false, published_at: null }
+	) {
+		affected_rows
+		returning {
+			id
+		}
+	}
+}

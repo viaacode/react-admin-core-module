@@ -19,7 +19,7 @@ module.exports = {
 		'plugin:prettier/recommended',
 	],
 
-	ignorePatterns: ['.eslintrc.js', 'jest*.config.js'],
+	ignorePatterns: ['.eslintrc.js', 'jest*.config.js', './src/modules/shared/generated/'],
 	rules: {
 		'no-async-promise-executor': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',

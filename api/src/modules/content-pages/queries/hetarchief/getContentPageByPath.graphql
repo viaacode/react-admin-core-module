@@ -33,6 +33,7 @@ query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
 		}
 		publish_at
 		published_at
+		published_at_display
 		title
 		language
 		nl_parent_page_id

@@ -36,6 +36,7 @@ query getContentById($id: Int!) {
 		}
 		publish_at
 		published_at
+		published_at_display
 		title
 		language
 		nl_parent_page_id

@@ -33,7 +33,12 @@ import { logAndThrow } from '../../shared/helpers/logAndThrow';
 import { Locale } from '../../translations';
 import { SessionUserEntity } from '../../users/classes/session-user';
 import { CONTENT_PAGE_COPY, CONTENT_PAGE_COPY_REGEX } from '../content-pages.consts';
-import { ContentOverviewTableCols, ContentPageLabel, DbContentPage } from '../content-pages.types';
+import {
+	ContentOverviewTableCols,
+	ContentPageLabel,
+	ContentPagesPublishAndUnpublishResults,
+	DbContentPage,
+} from '../content-pages.types';
 import { ContentPageOverviewParams } from '../dto/content-pages.dto';
 import { ContentPageQueryTypes } from '../queries/content-pages.queries';
 import { ContentPagesService } from '../services/content-pages.service';
@@ -143,7 +148,8 @@ export class ContentPagesController {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		@Headers('apikey') apikey: string
 	): Promise<{ message: string }> {
-		const response = await this.contentPagesService.updatePublishDates();
+		const response: ContentPagesPublishAndUnpublishResults =
+			await this.contentPagesService.updatePublishDates();
 
 		const message = `content page publish dates have been updated, ${
 			response.publishedCount

@@ -27,8 +27,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "i18n:extract": "ts-node --transpile-only --require dotenv/config scripts/extract-and-replace-translations.ts dotenv_config_path=.env/.env.local && npm run format:fix",
-    "generate-hetarchief-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-hetarchief.yml",
-    "generate-avo-database-types": "dotenv -e .env/.env.local graphql-codegen -- --config codegen-avo.yml",
+    "generate-hetarchief-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-hetarchief.ts",
+    "generate-avo-database-types": "dotenv -e ./.env/.env.local graphql-codegen -- --config codegen-avo.ts",
     "generate-database-types": "npm run generate-hetarchief-database-types && npm run generate-avo-database-types",
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ../ui/package.json ./package.json",
     "find-circular-dependencies": "npx madge --circular --extensions ts ./"
@@ -79,10 +79,10 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.16.4",
-    "@graphql-codegen/typed-document-node": "^2.3.12",
-    "@graphql-codegen/typescript-operations": "^2.5.12",
-    "@graphql-typed-document-node/core": "^3.1.1",
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/typed-document-node": "^5.0.13",
+    "@graphql-codegen/typescript-operations": "^4.4.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@nestjs/cli": "^9.5.0",
     "@nestjs/schematics": "^9.2.0",
     "@nestjs/swagger": "^7.1.1",
