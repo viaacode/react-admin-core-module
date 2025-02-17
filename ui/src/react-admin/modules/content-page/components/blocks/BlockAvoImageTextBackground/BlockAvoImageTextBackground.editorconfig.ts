@@ -111,7 +111,7 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 			}),
 			textAlign: {
 				label: tText('admin/content-block/helpers/generators/image-grid___text-alignatie'),
-				editorType: ContentBlockEditor.Select,
+				editorType: ContentBlockEditor.AlignSelect,
 				editorProps: {
 					options: GET_ALIGN_OPTIONS(),
 				},
