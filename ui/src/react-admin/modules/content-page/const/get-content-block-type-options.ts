@@ -131,7 +131,11 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.HetArchiefImageTextBackground,
 		},
 		{
-			label: tText('Afbeelding met H1 (avo)', {}, [AVO]),
+			label: tText(
+				'modules/content-page/const/get-content-block-type-options___afbeelding-met-h-1-avo',
+				{},
+				[AVO]
+			),
 			value: ContentBlockType.AvoImageTextBackground,
 		},
 		{

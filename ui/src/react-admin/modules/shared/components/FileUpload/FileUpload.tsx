@@ -108,9 +108,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					);
 					if (notAllowedDimensions.length) {
 						showToast({
-							title: tText('Foutieve afmetingen'),
+							title: tText(
+								'modules/shared/components/file-upload/file-upload___foutieve-afmetingen'
+							),
 							description: tText(
-								'Afbeelding moet exact 1920 x 385)pixels groot zijn'
+								'modules/shared/components/file-upload/file-upload___afbeelding-moet-exact-1920-x-385-pixels-groot-zijn'
 							),
 							type: ToastType.ERROR,
 						});

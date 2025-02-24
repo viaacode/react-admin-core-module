@@ -1263,15 +1263,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
-    "key": "image-text-background",
-    "language": "nl",
-    "value": "Header met H1 titel, tekst en achtergrond",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
     "key": "voeg-een-content-blok-toe",
     "language": "nl",
     "value": "Voeg een contentblock toe",
@@ -5924,6 +5915,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/navigation/components/navigation-edit-form/navigation-edit-form",
+    "key": "opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina",
+    "language": "nl",
+    "value": "Opgelet, voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "modules/shared/components/actions-dropdown/actions-dropdown",
     "key": "hover-opties",
     "language": "nl",
@@ -7040,6 +7040,177 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "admin-content-block-helpers-image-text-background-image-text-background",
+    "language": "nl",
+    "value": "Header met H1 titel, tekst en achtergrond",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-tekst",
+    "language": "nl",
+    "value": "Titel tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-stijl",
+    "language": "nl",
+    "value": "Titel stijl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "titel-grootte",
+    "language": "nl",
+    "value": "Titelgrootte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/image-grid",
+    "key": "text-alignatie",
+    "language": "nl",
+    "value": "Uitlijning tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-kleur",
+    "language": "nl",
+    "value": "Tekstkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "nl",
+    "value": "Achtergrondkleur tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "nl",
+    "value": "Tekst padding achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "image",
+    "language": "nl",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-bronvermelding",
+    "language": "nl",
+    "value": "Bijschrift: bronvermelding ©",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-beschrijving",
+    "language": "nl",
+    "value": "Bijschrift: beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-type",
+    "language": "nl",
+    "value": "Knop type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-tekst",
+    "language": "nl",
+    "value": "Knop tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "alt-title-text",
+    "language": "nl",
+    "value": "Alt title text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-actie",
+    "language": "nl",
+    "value": "Knop actie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-icoon",
+    "language": "nl",
+    "value": "Knop icoon",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "button-icon-alignment",
+    "language": "nl",
+    "value": "Positie icoon op knop",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "nl",
+    "value": "Achtergrondkleur blok",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/buttons",
     "key": "knoppen",
     "language": "nl",
@@ -7400,6 +7571,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "afbeelding-uitlijning",
+    "language": "nl",
+    "value": "Afbeelding uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
     "key": "i-frame",
     "language": "nl",
@@ -7697,15 +7877,6 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/image-grid",
-    "key": "text-alignatie",
-    "language": "nl",
-    "value": "Uitlijning tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/logo-grid",
     "key": "logos-sign-off",
     "language": "nl",
@@ -7746,177 +7917,6 @@
     "key": "alt-title-text",
     "language": "nl",
     "value": "Alt. titel tekst (verplicht)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "admin-content-block-helpers-image-text-background-image-text-background",
-    "language": "nl",
-    "value": "Header met H1 titel, tekst en achtergrond",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-tekst",
-    "language": "nl",
-    "value": "Titel tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-stijl",
-    "language": "nl",
-    "value": "Titel stijl",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "titel-grootte",
-    "language": "nl",
-    "value": "Titelgrootte",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-kleur",
-    "language": "nl",
-    "value": "Tekstkleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-tekst",
-    "language": "nl",
-    "value": "Achtergrondkleur tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-padding-achtergrondkleur",
-    "language": "nl",
-    "value": "Tekst padding achtergrondkleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "image",
-    "language": "nl",
-    "value": "Afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "afbeelding-uitlijning",
-    "language": "nl",
-    "value": "Afbeelding uitlijning",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-bronvermelding",
-    "language": "nl",
-    "value": "Bijschrift: bronvermelding ©",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-beschrijving",
-    "language": "nl",
-    "value": "Bijschrift: beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-type",
-    "language": "nl",
-    "value": "Knop type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-tekst",
-    "language": "nl",
-    "value": "Knop tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "alt-title-text",
-    "language": "nl",
-    "value": "Alt title text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-actie",
-    "language": "nl",
-    "value": "Knop actie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-icoon",
-    "language": "nl",
-    "value": "Knop icoon",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "button-icon-alignment",
-    "language": "nl",
-    "value": "Positie icoon op knop",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-blok",
-    "language": "nl",
-    "value": "Achtergrondkleur blok",
     "value_type": "TEXT"
   },
   {
@@ -9236,11 +9236,56 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/navigation/components/navigation-edit-form/navigation-edit-form",
-    "key": "opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina",
+    "location": "modules/content-page/const/get-content-block-type-options",
+    "key": "afbeelding-met-h-1-avo",
     "language": "nl",
-    "value": "Opgelet, voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina.",
-    "value_type": "HTML"
+    "value": "Afbeelding met H1 (avo)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "foutieve-afmetingen",
+    "language": "nl",
+    "value": "Foutieve afmetingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
+    "language": "nl",
+    "value": "Afbeelding moet exact 1920 x 385)pixels groot zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-breedte",
+    "language": "nl",
+    "value": "Tekst breedte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-positie",
+    "language": "nl",
+    "value": "Tekst positie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "afbeelding-1920-x-385",
+    "language": "nl",
+    "value": "Afbeelding (1920 x 385)",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",

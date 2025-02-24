@@ -117,7 +117,9 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				},
 			},
 			contentWidth: {
-				label: tText('Tekst breedte'),
+				label: tText(
+					'modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background___tekst-breedte'
+				),
 				editorType: ContentBlockEditor.MultiRange,
 				editorProps: {
 					showNumber: true,
@@ -128,7 +130,9 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				} as MultiRangeProps,
 			},
 			contentPosition: {
-				label: tText('Tekst positie'),
+				label: tText(
+					'modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background___tekst-positie'
+				),
 				editorType: ContentBlockEditor.MultiRange,
 				editorProps: {
 					showNumber: true,
@@ -181,7 +185,9 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 					assetType: 'CONTENT_BLOCK_IMAGE',
 					allowMulti: false,
 					allowedTypes: PHOTO_TYPES,
-					label: tText('Afbeelding (1920 x 385)'),
+					label: tText(
+						'modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background___afbeelding-1920-x-385'
+					),
 					imageDimensions: { width: 1920, height: 385 },
 				} as FileUploadProps,
 			},
