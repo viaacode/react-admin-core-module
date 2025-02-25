@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type {
 	AlignOption,
 	BackgroundAlignOption,
@@ -21,9 +21,9 @@ import { isMobileWidth } from '~shared/helpers/media-query';
 import './BlockAvoImageTextBackground.scss';
 
 const FONT_SIZE_TO_VW: Record<HeadingSizeOption, number> = {
-	small: 1,
-	medium: 1.5,
-	large: 2,
+	small: 2.1,
+	medium: 2.4,
+	large: 2.7,
 };
 
 const TEXT_PADDING_TO_VW: Partial<Record<SpacerOption, number>> = {
@@ -95,10 +95,21 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 	buttonIconAlignment = 'left',
 	pageWidth,
 }): ReactElement => {
+	const ref = React.createRef<HTMLDivElement>();
 	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
 
+	const [blockWidth, setBlockWidth] = useState<number | null>(null); // pixels
+
+	useEffect(() => {
+		if (ref.current) {
+			setBlockWidth(ref.current.clientWidth);
+		}
+	}, [ref.current]);
+
 	const renderHeadingTextAndButton = () => {
-		let fontSize = FONT_SIZE_TO_VW[headingSize];
+		// During editing the block width isn't 100% of the page, so the visual font size seems too big
+		let fontSize =
+			(FONT_SIZE_TO_VW[headingSize] * (blockWidth || window.innerWidth)) / window.innerWidth;
 		let padding = TEXT_PADDING_TO_VW[textPadding] || 0;
 		let lineHeightTitle = (fontSize + padding * 2) * 1.2;
 		let lineHeightText = padding * 2 * 1.3;
@@ -289,7 +300,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 	};
 
 	return (
-		<article className={clsx('c-block-avo-image-text-background', className)}>
+		<article className={clsx('c-block-avo-image-text-background', className)} ref={ref}>
 			<div
 				className={`c-block-avo-image-text-background-wrapper c-block-avo-image-text-background--${backgroundAlignment}`}
 			>
