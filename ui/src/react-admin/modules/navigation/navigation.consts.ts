@@ -2,6 +2,7 @@ import type { NavigationItem } from '~modules/navigation/navigation.types';
 import type { TableColumn } from '@viaa/avo2-components';
 import type { ReactNode } from 'react';
 import { tText } from '~shared/helpers/translation-functions';
+import { LinkTarget } from '~shared/components/SmartLink/SmartLink.types';
 
 export const GET_NAVIGATION_OVERVIEW_TABLE_COLS: () => TableColumn[] = () => [
 	{
@@ -25,7 +26,7 @@ export const INITIAL_NAVIGATION_FORM = (placement = ''): Partial<NavigationItem>
 	label: '',
 	contentType: null,
 	contentPath: null,
-	linkTarget: '_self',
+	linkTarget: LinkTarget.Self,
 	userGroupIds: [],
 	tooltip: '',
 	position: 0,
