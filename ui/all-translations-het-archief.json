@@ -356,7 +356,7 @@
     "location": "modules/user/user",
     "key": "selectie-blokkeren",
     "language": "en",
-    "value": "Selectie blokkeren",
+    "value": "Block selection",
     "value_type": "TEXT"
   },
   {
@@ -374,7 +374,7 @@
     "location": "modules/user/user",
     "key": "selectie-deblokkeren",
     "language": "en",
-    "value": "Selectie deblokkeren",
+    "value": "Unblock selection",
     "value_type": "TEXT"
   },
   {
@@ -392,7 +392,7 @@
     "location": "modules/user/user",
     "key": "selectie-verwijderen",
     "language": "en",
-    "value": "Selectie verwijderen",
+    "value": "Delete selection",
     "value_type": "TEXT"
   },
   {
@@ -428,7 +428,7 @@
     "location": "modules/user/user",
     "key": "selectie-exporteren",
     "language": "en",
-    "value": "Selectie exporteren",
+    "value": "Export selection",
     "value_type": "TEXT"
   },
   {
@@ -446,7 +446,7 @@
     "location": "modules/user/user",
     "key": "alles-exporteren",
     "language": "en",
-    "value": "Alles exporteren",
+    "value": "Export all",
     "value_type": "TEXT"
   },
   {
@@ -1166,7 +1166,7 @@
     "location": "modules/content-page/const/get-align-options",
     "key": "schermbreed",
     "language": "en",
-    "value": "Schermbreed",
+    "value": "Full screen width",
     "value_type": "TEXT"
   },
   {
@@ -2075,7 +2075,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "content-enclose-grid",
     "language": "nl",
-    "value": "Content enclose grid",
+    "value": "Content insluiten grid",
     "value_type": "TEXT"
   },
   {
@@ -2264,7 +2264,7 @@
     "location": "modules/content-page/const/get-heading-type-options",
     "key": "klein",
     "language": "en",
-    "value": "Klein",
+    "value": "Small",
     "value_type": "TEXT"
   },
   {
@@ -2300,7 +2300,7 @@
     "location": "modules/content-page/const/get-heading-type-options",
     "key": "groot",
     "language": "en",
-    "value": "Groot",
+    "value": "Large",
     "value_type": "TEXT"
   },
   {
@@ -3137,7 +3137,7 @@
     "location": "modules/content-page/views/content-page-detail",
     "key": "ga-naar-engelse-pagina",
     "language": "nl",
-    "value": "Ga naar engelse pagina",
+    "value": "Ga naar Engelse pagina",
     "value_type": "TEXT"
   },
   {
@@ -3155,7 +3155,7 @@
     "location": "modules/content-page/views/content-page-detail",
     "key": "dupliceer-voor-engelse-pagina",
     "language": "nl",
-    "value": "Dupliceer voor engelse pagina",
+    "value": "Dupliceer voor Engelse pagina",
     "value_type": "TEXT"
   },
   {
@@ -3164,7 +3164,7 @@
     "location": "modules/content-page/views/content-page-detail",
     "key": "dupliceer-voor-engelse-pagina",
     "language": "en",
-    "value": "Duplicate to English",
+    "value": "Duplicate for English page",
     "value_type": "TEXT"
   },
   {
@@ -3794,7 +3794,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "taal",
     "language": "en",
-    "value": "Taal",
+    "value": "Language",
     "value_type": "TEXT"
   },
   {
@@ -3803,7 +3803,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "bekijk-de-nederlandse-hoofd-pagina",
     "language": "nl",
-    "value": "Bekijk de nederlandse hoofd pagina",
+    "value": "Bekijk de Nederlandse hoofdpagina",
     "value_type": "TEXT"
   },
   {
@@ -3866,7 +3866,7 @@
     "location": "modules/content-page/views/content-page-detail-meta-data",
     "key": "vertaalde-versies",
     "language": "en",
-    "value": "Translated version",
+    "value": "Translated versions",
     "value_type": "TEXT"
   },
   {
@@ -4244,7 +4244,7 @@
     "location": "modules/content-page/views/content-page-edit",
     "key": "de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten",
     "language": "en",
-    "value": "The SEO-description can be max  {{maxLength}} symbols",
+    "value": "The SEO-description is restricted to {{maxLength}} characters",
     "value_type": "TEXT"
   },
   {
@@ -4613,7 +4613,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "hover-opties",
     "language": "nl",
-    "value": "hover opties",
+    "value": "hover-opties",
     "value_type": "TEXT"
   },
   {
@@ -4757,7 +4757,7 @@
     "location": "modules/content-page/views/content-page-overview",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Doorzoek content pagina's",
+    "value": "Doorzoek contentpagina's",
     "value_type": "TEXT"
   },
   {
@@ -5108,7 +5108,7 @@
     "location": "modules/content-page-labels/views/content-page-label-edit",
     "key": "een-taal-keuze-is-verplicht",
     "language": "en",
-    "value": "A language choice is required",
+    "value": "Choosing a language is required",
     "value_type": "TEXT"
   },
   {
@@ -5765,7 +5765,7 @@
     "location": "modules/maintenance-alerts/views/maintenance-alerts-edit-form",
     "key": "error",
     "language": "nl",
-    "value": "Error",
+    "value": "Fout",
     "value_type": "TEXT"
   },
   {
@@ -6629,7 +6629,7 @@
     "location": "modules/navigation/views/navigation-bar-detail",
     "key": "zoek-op-navigatie-item-label",
     "language": "nl",
-    "value": "Zoek op navigatie item label",
+    "value": "Zoek op navigatie-item label",
     "value_type": "TEXT"
   },
   {
@@ -6647,7 +6647,7 @@
     "location": "modules/navigation/views/navigation-bar-detail",
     "key": "er-zijn-geen-navigatie-items-in-de-huidige-navigatie-balk-die-voldoen-aan-je-filters",
     "language": "nl",
-    "value": "Er zijn geen navigatie items in de huidige navigatie balk die voldoen aan je filters",
+    "value": "Er zijn geen navigatie-items in de huidige navigatie balk die voldoen aan je filters",
     "value_type": "TEXT"
   },
   {
@@ -6719,7 +6719,7 @@
     "location": "modules/navigation/views/navigation-bar-detail",
     "key": "zoek-input-aria-label",
     "language": "nl",
-    "value": "Zoek naar een menu item",
+    "value": "Zoek naar een menu-item",
     "value_type": "TEXT"
   },
   {
@@ -6963,60 +6963,6 @@
     "key": "er-werden-geen-navigatie-items-gevonden-voor-menu-name",
     "language": "en",
     "value": "No navigation items were found for {{menuName}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
-    "language": "nl",
-    "value": "Het navigatie item zal zichtbaar zijn voor gebruikers die geen toegang hebben tot de geselecteerde pagina",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
-    "language": "en",
-    "value": "The navigation item will be visible for users who do not have access to the selected page",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "de-geselecteerde-pagina-is-niet-toegankelijk-voor",
-    "language": "nl",
-    "value": "De geselecteerde pagina is niet toegankelijk voor",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "de-geselecteerde-pagina-is-niet-toegankelijk-voor",
-    "language": "en",
-    "value": "The selected page is not accessible for",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt",
-    "language": "nl",
-    "value": "Het controleren of de permissies van de pagina overeenkomen met de zichtbaarheid van dit navigatie item is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/menu/views/menu-edit",
-    "key": "het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt",
-    "language": "en",
-    "value": "Checking whether the page permissions match the visibility of this navigation item has failed",
     "value_type": "TEXT"
   },
   {
@@ -7682,7 +7628,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "eerste",
     "language": "en",
-    "value": "Eerste",
+    "value": "First",
     "value_type": "TEXT"
   },
   {
@@ -7736,7 +7682,7 @@
     "location": "modules/translations/views/translations-overview",
     "key": "laatste",
     "language": "en",
-    "value": "Laatste",
+    "value": "last",
     "value_type": "TEXT"
   },
   {
@@ -9464,7 +9410,7 @@
     "location": "admin/users/views/user-overview",
     "key": "de-geselecteerde-gebruikers-zijn-geblokkeerd",
     "language": "en",
-    "value": "De geselecteerde gebruikers zijn geblokkeerd",
+    "value": "The selected users have been blocked",
     "value_type": "TEXT"
   },
   {
@@ -9482,7 +9428,7 @@
     "location": "admin/users/views/user-overview",
     "key": "de-geselecteerde-gebruikers-zijn-gedeblokkeerd",
     "language": "en",
-    "value": "De geselecteerde gebruikers zijn gedeblokkeerd",
+    "value": "The selected users have been unblocked",
     "value_type": "TEXT"
   },
   {
@@ -9590,7 +9536,7 @@
     "location": "modules/user/views/user-overview",
     "key": "zoek-input-aria-label",
     "language": "en",
-    "value": "Search a user",
+    "value": "Find a user",
     "value_type": "TEXT"
   },
   {
@@ -9662,7 +9608,7 @@
     "location": "modules/user/views/user-overview",
     "key": "exporteren-van-alle-gebruikers-naar-csv",
     "language": "en",
-    "value": "Exporteren van alle gebruikers naar csv",
+    "value": "Export all users to csv",
     "value_type": "TEXT"
   },
   {
@@ -9680,7 +9626,7 @@
     "location": "modules/user/views/user-overview",
     "key": "bezig-met-ophalen-van-gebruikers",
     "language": "en",
-    "value": "Bezig met ophalen van gebruikers",
+    "value": "Retrieving users",
     "value_type": "TEXT"
   },
   {
@@ -9716,7 +9662,7 @@
     "location": "modules/user/views/user-overview",
     "key": "gebruikers-csv",
     "language": "en",
-    "value": "Gebruikers csv",
+    "value": "Users csv",
     "value_type": "TEXT"
   },
   {
@@ -10778,7 +10724,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "selecteer-de-taal-van-de-pagina",
     "language": "en",
-    "value": "Select the language of the page",
+    "value": "Select the language of this page",
     "value_type": "TEXT"
   },
   {
@@ -10796,7 +10742,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "nederlandse-hoofd-pagina",
     "language": "en",
-    "value": "Dutch main page",
+    "value": "Main page in Dutch",
     "value_type": "TEXT"
   },
   {
@@ -10814,7 +10760,7 @@
     "location": "modules/content-page/components/content-edit-form/content-edit-form",
     "key": "leeg-indien-dit-de-hoofd-pagina-is",
     "language": "en",
-    "value": "Leave empty to make this page a mainpage",
+    "value": "Leave empty if this page is a main page",
     "value_type": "TEXT"
   },
   {
@@ -10851,6 +10797,60 @@
     "key": "beschrijving",
     "language": "en",
     "value": "Description",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
+    "language": "nl",
+    "value": "Het navigatie item zal zichtbaar zijn voor gebruikers die geen toegang hebben tot de geselecteerde pagina",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
+    "language": "en",
+    "value": "The navigation item will be visible for users who do not have access to the selected page",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "de-geselecteerde-pagina-is-niet-toegankelijk-voor",
+    "language": "nl",
+    "value": "De geselecteerde pagina is niet toegankelijk voor",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "de-geselecteerde-pagina-is-niet-toegankelijk-voor",
+    "language": "en",
+    "value": "The selected page is not accessible for",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt",
+    "language": "nl",
+    "value": "Het controleren of de permissies van de pagina overeenkomen met de zichtbaarheid van dit navigatie item is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/menu/views/menu-edit",
+    "key": "het-controleren-of-de-permissies-van-de-pagina-overeenkomen-met-de-zichtbaarheid-van-dit-navigatie-item-is-mislukt",
+    "language": "en",
+    "value": "Checking whether the page permissions match the visibility of this navigation item has failed",
     "value_type": "TEXT"
   },
   {
@@ -11018,10 +11018,28 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "modules/navigation/components/navigation-edit-form/navigation-edit-form",
+    "key": "opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina",
+    "language": "nl",
+    "value": "Opgelet voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/navigation/components/navigation-edit-form/navigation-edit-form",
+    "key": "opgelet-voor-statische-links-moet-je-zelf-zorgen-dat-de-geselecteerde-gebruikersgroepen-overeen-komen-met-wie-toegang-heeft-tot-die-statische-pagina",
+    "language": "en",
+    "value": "Opgelet voor statische links moet je zelf zorgen dat de geselecteerde gebruikersgroepen overeen komen met wie toegang heeft tot die statische pagina",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "modules/shared/components/actions-dropdown/actions-dropdown",
     "key": "hover-opties",
     "language": "nl",
-    "value": "hover opties",
+    "value": "hover-opties",
     "value_type": "TEXT"
   },
   {
@@ -11219,7 +11237,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "nederlandse-hoofd-pagina",
     "language": "nl",
-    "value": "Nederlandse hoofd pagina",
+    "value": "Nederlandse hoofdpagina",
     "value_type": "TEXT"
   },
   {
@@ -12020,7 +12038,7 @@
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "exporteren-geannuleerd",
     "language": "en",
-    "value": "Exporteren geannuleerd",
+    "value": "Export cancelled",
     "value_type": "TEXT"
   },
   {
@@ -12038,7 +12056,7 @@
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "het-genereren-van-de-csv-is-mislukt",
     "language": "en",
-    "value": "Het genereren van de csv is mislukt",
+    "value": "Csv creation has failed",
     "value_type": "TEXT"
   },
   {
@@ -12056,7 +12074,7 @@
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "de-csv-is-klaar-om-te-downloaden",
     "language": "en",
-    "value": "De csv is klaar om te downloaden",
+    "value": "The csv is ready for downloading",
     "value_type": "TEXT"
   },
   {
@@ -12074,7 +12092,7 @@
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "annuleren",
     "language": "en",
-    "value": "Annuleren",
+    "value": "Cancel",
     "value_type": "TEXT"
   },
   {
@@ -12129,6 +12147,42 @@
     "key": "een-geselecteerde-bestand-is-niet-toegelaten",
     "language": "en",
     "value": "Some or multiple selected files are not allowed.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "foutieve-afmetingen",
+    "language": "nl",
+    "value": "Foutieve afmetingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "foutieve-afmetingen",
+    "language": "en",
+    "value": "Foutieve afmetingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
+    "language": "nl",
+    "value": "Afbeelding moet exact 1920 x 385 pixels groot zijn",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/file-upload/file-upload",
+    "key": "afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
+    "language": "en",
+    "value": "Afbeelding moet exact 1920 x 385 pixels groot zijn",
     "value_type": "TEXT"
   },
   {
@@ -12326,7 +12380,7 @@
     "location": "modules/shared/components/filter-table/filter-table",
     "key": "zoekveld-checkbox-filter-aria-label",
     "language": "en",
-    "value": "zoekveld checkbox filter aria label",
+    "value": "Search bar checkbox filter aria label",
     "value_type": "TEXT"
   },
   {
@@ -12542,7 +12596,7 @@
     "location": "admin/shared/components/filter-table/filter-table",
     "key": "eerste",
     "language": "en",
-    "value": "Eerste",
+    "value": "First",
     "value_type": "TEXT"
   },
   {
@@ -12560,7 +12614,7 @@
     "location": "admin/shared/components/filter-table/filter-table",
     "key": "laatste",
     "language": "en",
-    "value": "Laatste",
+    "value": "Last",
     "value_type": "TEXT"
   },
   {
@@ -12741,6 +12795,402 @@
     "key": "alt-title-text",
     "language": "en",
     "value": "Alt. title text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "admin-content-block-helpers-image-text-background-image-text-background",
+    "language": "nl",
+    "value": "Afbeelding met tekst en achtergrond",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "admin-content-block-helpers-image-text-background-image-text-background",
+    "language": "en",
+    "value": "Image with text and background",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-is-verplicht",
+    "language": "nl",
+    "value": "Titel is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-is-verplicht",
+    "language": "en",
+    "value": "Title is required",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-tekst",
+    "language": "nl",
+    "value": "Titel tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-tekst",
+    "language": "en",
+    "value": "Title text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-stijl",
+    "language": "nl",
+    "value": "Titel stijl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "titel-stijl",
+    "language": "en",
+    "value": "Title style",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "titel-grootte",
+    "language": "nl",
+    "value": "Titelgrootte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "titel-grootte",
+    "language": "en",
+    "value": "Title size",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/image-grid",
+    "key": "text-alignatie",
+    "language": "nl",
+    "value": "Uitlijning tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/generators/image-grid",
+    "key": "text-alignatie",
+    "language": "en",
+    "value": "Text allignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-breedte",
+    "language": "nl",
+    "value": "Tekst breedte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-breedte",
+    "language": "en",
+    "value": "Tekst breedte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-positie",
+    "language": "nl",
+    "value": "Tekst positie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "tekst-positie",
+    "language": "en",
+    "value": "Tekst positie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-kleur",
+    "language": "nl",
+    "value": "Tekstkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-kleur",
+    "language": "en",
+    "value": "Text colour",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "nl",
+    "value": "Achtergrondkleur tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "en",
+    "value": "Text background colour",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "nl",
+    "value": "Tekst padding achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "en",
+    "value": "Text padding background colour",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "image",
+    "language": "nl",
+    "value": "Afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "image",
+    "language": "en",
+    "value": "Image",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "afbeelding-1920-x-385",
+    "language": "nl",
+    "value": "Afbeelding 1920 x 385",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-avo-image-text-background/block-avo-image-text-background",
+    "key": "afbeelding-1920-x-385",
+    "language": "en",
+    "value": "Afbeelding 1920 x 385",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-bronvermelding",
+    "language": "nl",
+    "value": "Bijschrift bronvermelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-bronvermelding",
+    "language": "en",
+    "value": "Caption source",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-beschrijving",
+    "language": "nl",
+    "value": "Bijschrift beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "bijschrift-beschrijving",
+    "language": "en",
+    "value": "Caption description",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-type",
+    "language": "nl",
+    "value": "Knop type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-type",
+    "language": "en",
+    "value": "Type of button",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-tekst",
+    "language": "nl",
+    "value": "Knop tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-tekst",
+    "language": "en",
+    "value": "Button text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "alt-title-text",
+    "language": "nl",
+    "value": "Alt title text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "alt-title-text",
+    "language": "en",
+    "value": "Alternative Title Text",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-actie",
+    "language": "nl",
+    "value": "Knop actie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-actie",
+    "language": "en",
+    "value": "Button action",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-icoon",
+    "language": "nl",
+    "value": "Knop icoon",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/helpers/image-text-background/image-text-background",
+    "key": "knop-icoon",
+    "language": "en",
+    "value": "Button icon",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "button-icon-alignment",
+    "language": "nl",
+    "value": "Positie icoon op knop",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
+    "key": "button-icon-alignment",
+    "language": "en",
+    "value": "Icon position on button",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "nl",
+    "value": "Achtergrondkleur blok",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "en",
+    "value": "Block background colour",
     "value_type": "TEXT"
   },
   {
@@ -13163,7 +13613,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "title",
     "language": "nl",
-    "value": "title",
+    "value": "titel",
     "value_type": "TEXT"
   },
   {
@@ -13181,7 +13631,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "titletype",
     "language": "nl",
-    "value": "titletype",
+    "value": "titeltype",
     "value_type": "TEXT"
   },
   {
@@ -13208,7 +13658,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "beschrijving",
     "language": "en",
-    "value": "beschrijving",
+    "value": "description",
     "value_type": "TEXT"
   },
   {
@@ -13305,9 +13755,27 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "content-item",
+    "language": "nl",
+    "value": "Content item",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
+    "key": "content-item",
+    "language": "en",
+    "value": "Content item",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-enclose",
     "language": "nl",
-    "value": "content enclose",
+    "value": "content insluiten",
     "value_type": "TEXT"
   },
   {
@@ -13334,7 +13802,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "voeg-object-toe",
     "language": "en",
-    "value": "voeg object toe",
+    "value": "add object",
     "value_type": "TEXT"
   },
   {
@@ -13352,7 +13820,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "verwijder-object",
     "language": "en",
-    "value": "verwijder object",
+    "value": "delete object",
     "value_type": "TEXT"
   },
   {
@@ -14006,6 +14474,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "afbeelding-uitlijning",
+    "language": "nl",
+    "value": "Afbeelding uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
+    "key": "afbeelding-uitlijning",
+    "language": "en",
+    "value": "Image alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/iframe",
     "key": "i-frame",
     "language": "nl",
@@ -14600,24 +15086,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/image-grid",
-    "key": "text-alignatie",
-    "language": "nl",
-    "value": "Uitlijning tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/image-grid",
-    "key": "text-alignatie",
-    "language": "en",
-    "value": "Text allignment",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/logo-grid",
     "key": "logos-sign-off",
     "language": "nl",
@@ -14703,348 +15171,6 @@
     "key": "alt-title-text",
     "language": "en",
     "value": "Alt. title text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "admin-content-block-helpers-image-text-background-image-text-background",
-    "language": "nl",
-    "value": "Afbeelding met tekst en achtergrond",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "admin-content-block-helpers-image-text-background-image-text-background",
-    "language": "en",
-    "value": "Image with text and background",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
-    "language": "nl",
-    "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-is-verplicht",
-    "language": "en",
-    "value": "Title is required",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-tekst",
-    "language": "nl",
-    "value": "Titel tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-tekst",
-    "language": "en",
-    "value": "Title text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-stijl",
-    "language": "nl",
-    "value": "Titel stijl",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "titel-stijl",
-    "language": "en",
-    "value": "Title style",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "titel-grootte",
-    "language": "nl",
-    "value": "Titel grootte",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "titel-grootte",
-    "language": "en",
-    "value": "Titel grootte",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-kleur",
-    "language": "nl",
-    "value": "Tekst kleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-kleur",
-    "language": "en",
-    "value": "Tekst kleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-tekst",
-    "language": "nl",
-    "value": "Achtergrond kleur tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-tekst",
-    "language": "en",
-    "value": "Achtergrond kleur tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-padding-achtergrondkleur",
-    "language": "nl",
-    "value": "Tekst padding achtergrondkleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "tekst-padding-achtergrondkleur",
-    "language": "en",
-    "value": "Tekst padding achtergrondkleur",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "image",
-    "language": "nl",
-    "value": "Afbeelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "image",
-    "language": "en",
-    "value": "Image",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "afbeelding-uitlijning",
-    "language": "nl",
-    "value": "Afbeelding uitlijning",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "afbeelding-uitlijning",
-    "language": "en",
-    "value": "Image alignment",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-bronvermelding",
-    "language": "nl",
-    "value": "Bijschrift bronvermelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-bronvermelding",
-    "language": "en",
-    "value": "Bijschrift bronvermelding",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-beschrijving",
-    "language": "nl",
-    "value": "Bijschrift beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "bijschrift-beschrijving",
-    "language": "en",
-    "value": "Bijschrift beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-type",
-    "language": "nl",
-    "value": "Knop type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-type",
-    "language": "en",
-    "value": "Type of button",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-tekst",
-    "language": "nl",
-    "value": "Knop tekst",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-tekst",
-    "language": "en",
-    "value": "Button text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "alt-title-text",
-    "language": "nl",
-    "value": "Alt title text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "alt-title-text",
-    "language": "en",
-    "value": "Alternative Title Text",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-actie",
-    "language": "nl",
-    "value": "Knop actie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-actie",
-    "language": "en",
-    "value": "Button action",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-icoon",
-    "language": "nl",
-    "value": "Knop icoon",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/image-text-background/image-text-background",
-    "key": "knop-icoon",
-    "language": "en",
-    "value": "Button icon",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "button-icon-alignment",
-    "language": "nl",
-    "value": "Positie icoon op knop",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/components/blocks/image-text-background/image-text-background",
-    "key": "button-icon-alignment",
-    "language": "en",
-    "value": "Icon position on button",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-blok",
-    "language": "nl",
-    "value": "Achtergrond kleur blok",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-image-text-background/block-image-text-background",
-    "key": "achtergrond-kleur-blok",
-    "language": "en",
-    "value": "Achtergrond kleur blok",
     "value_type": "TEXT"
   },
   {
@@ -15971,7 +16097,7 @@
     "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
     "key": "krantentitels",
     "language": "nl",
-    "value": "krantentitels",
+    "value": "Krantentitels",
     "value_type": "TEXT"
   },
   {
@@ -15989,7 +16115,7 @@
     "location": "modules/content-page/components/blocks/overview-newspaper-titles",
     "key": "is-verplicht",
     "language": "nl",
-    "value": "Is verplicht",
+    "value": "Verplicht",
     "value_type": "TEXT"
   },
   {
@@ -16097,7 +16223,7 @@
     "location": "modules/content-page/components/blocks/block-overview-newspaper-titles/overview-newspaper-titles",
     "key": "alternative",
     "language": "nl",
-    "value": "Alternative",
+    "value": "Alternatief",
     "value_type": "TEXT"
   },
   {
@@ -17510,7 +17636,7 @@
     "location": "modules/content-page/components/blocks/block-video/block-video",
     "key": "bijschift-titel",
     "language": "en",
-    "value": "Bijschift titel",
+    "value": "Caption title",
     "value_type": "TEXT"
   },
   {
@@ -17528,7 +17654,7 @@
     "location": "modules/content-page/components/blocks/block-video/block-video",
     "key": "bijschrift-beschrijving",
     "language": "en",
-    "value": "Bijschrift beschrijving",
+    "value": "Caption description",
     "value_type": "TEXT"
   },
   {
@@ -17907,24 +18033,6 @@
     "key": "error",
     "language": "en",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "content-item",
-    "language": "nl",
-    "value": "Content item",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
-    "key": "content-item",
-    "language": "en",
-    "value": "Content item",
     "value_type": "TEXT"
   },
   {
@@ -18419,7 +18527,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "error",
     "language": "nl",
-    "value": "Error",
+    "value": "Fout",
     "value_type": "TEXT"
   },
   {
@@ -18887,7 +18995,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "expand-knop",
     "language": "nl",
-    "value": "expand",
+    "value": "Klap uit",
     "value_type": "TEXT"
   },
   {
@@ -18896,7 +19004,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "expand-knop",
     "language": "en",
-    "value": "expand",
+    "value": "Expand",
     "value_type": "TEXT"
   },
   {
@@ -18941,7 +19049,7 @@
     "location": "pages/openseadragon/index",
     "key": "alle-paginas-in-een-grid-bekijken",
     "language": "nl",
-    "value": "Alle paginas in een grid bekijken",
+    "value": "Alle pagina's in een grid bekijken",
     "value_type": "TEXT"
   },
   {
@@ -19103,7 +19211,7 @@
     "location": "pages/nieuwsbrief-bevestiging/index",
     "key": "nieuwsbrief-bevestiging-bevestiging",
     "language": "nl",
-    "value": "Je zal nu de nieuwsbrief ontvangen",
+    "value": "Je bent ingeschreven voor de nieuwsbrief",
     "value_type": "HTML"
   },
   {
@@ -19112,7 +19220,7 @@
     "location": "pages/nieuwsbrief-bevestiging/index",
     "key": "nieuwsbrief-bevestiging-bevestiging",
     "language": "en",
-    "value": "You will now receive the newsletter",
+    "value": "You have signed up for the newsletter",
     "value_type": "HTML"
   },
   {
@@ -19202,7 +19310,7 @@
     "location": "pages/nieuwsbrief-mislukt/index",
     "key": "nieuwsbrief-mislukt-inschrijving-op-de-nieuwsbrief-is-mislukt",
     "language": "en",
-    "value": "Registration for the newsletter has failed",
+    "value": "Signing up for the newsletter has failed",
     "value_type": "HTML"
   },
   {
@@ -19292,7 +19400,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-formulier-error",
     "language": "en",
-    "value": "An error occured",
+    "value": "Something went wrong",
     "value_type": "TEXT"
   },
   {
@@ -19310,7 +19418,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-formulier-versturen-is-mislukt",
     "language": "en",
-    "value": "There was an error while submitting this form",
+    "value": "Sending the form has failed",
     "value_type": "TEXT"
   },
   {
@@ -19427,7 +19535,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-schrijf-je-in-voor-onze-nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\r\n\r\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het <a href=\"/privacy\">privacybeleid</a>.",
+    "value": "<p>Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.  Ik stem in met de verwerking van mijn persoonsgegevens overeenkomstig het <a href=\"/privacy\">privacybeleid</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -19499,7 +19607,7 @@
     "location": "pages/slug/ie/index",
     "key": "breadcrumbs-home",
     "language": "nl",
-    "value": "Home",
+    "value": "Start",
     "value_type": "TEXT"
   },
   {
@@ -19598,7 +19706,7 @@
     "location": "pages/bezoekersruimte/visitor-space-slug/index",
     "key": "breadcrumbs-search",
     "language": "en",
-    "value": "Local access",
+    "value": "On-site access",
     "value_type": "TEXT"
   },
   {
@@ -22406,7 +22514,7 @@
     "location": "modules/admin/views/admin-active-visitors",
     "key": "zoekveld-aria-label",
     "language": "en",
-    "value": "Search visitors based on name or email address",
+    "value": "Find visitors based on name or email address",
     "value_type": "TEXT"
   },
   {
@@ -23522,7 +23630,7 @@
     "location": "modules/cp/views/cp-admin-material-requests",
     "key": "beheer",
     "language": "en",
-    "value": "Management",
+    "value": "Admin",
     "value_type": "TEXT"
   },
   {
@@ -23612,7 +23720,7 @@
     "location": "modules/cp/views/cp-admin-settings-page",
     "key": "beheer",
     "language": "en",
-    "value": "Management",
+    "value": "Admin",
     "value_type": "TEXT"
   },
   {
@@ -23738,7 +23846,7 @@
     "location": "modules/cp/views/cp-admin-visitors",
     "key": "beheer",
     "language": "en",
-    "value": "Management",
+    "value": "Admin",
     "value_type": "TEXT"
   },
   {
@@ -23792,7 +23900,7 @@
     "location": "modules/cp/views/cp-admin-visit-requests-page",
     "key": "beheer",
     "language": "en",
-    "value": "Management",
+    "value": "Admin",
     "value_type": "TEXT"
   },
   {
@@ -23837,7 +23945,7 @@
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "public-domein",
     "language": "nl",
-    "value": "Public domein",
+    "value": "Publiek domein",
     "value_type": "TEXT"
   },
   {
@@ -24242,7 +24350,7 @@
     "location": "modules/shared/const/language-names",
     "key": "nederlands",
     "language": "en",
-    "value": "Nederlands",
+    "value": "Dutch",
     "value_type": "TEXT"
   },
   {
@@ -24260,7 +24368,7 @@
     "location": "modules/shared/const/language-names",
     "key": "engels",
     "language": "en",
-    "value": "Engels",
+    "value": "English",
     "value_type": "TEXT"
   },
   {
@@ -24890,7 +24998,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "publiek-domain",
     "language": "en",
-    "value": "Publiek domain",
+    "value": "Public domain",
     "value_type": "TEXT"
   },
   {
@@ -24944,7 +25052,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "uitgavedatum",
     "language": "en",
-    "value": "Publication date",
+    "value": "Date of publication",
     "value_type": "TEXT"
   },
   {
@@ -25106,7 +25214,7 @@
     "location": "modules/visitor-space/views/visitor-spaces-home-page",
     "key": "bezoek-pagina-titel",
     "language": "en",
-    "value": "Access on-site",
+    "value": "On-site access",
     "value_type": "TEXT"
   },
   {
@@ -25322,7 +25430,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "je-moet-je-map-een-naam-geven",
     "language": "en",
-    "value": "Je moet je map een naam geven.",
+    "value": "You have to name your folder.",
     "value_type": "TEXT"
   },
   {
@@ -25340,7 +25448,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "je-mapnaam-is-te-lang-de-naam-mag-niet-langer-dan-90-tekens-zijn",
     "language": "en",
-    "value": "Je mapnaam is te lang. De naam mag niet langer dan 90 tekens zijn.",
+    "value": "The name of your folder is too long. Folder names cannot exceed 90 characters.",
     "value_type": "TEXT"
   },
   {
@@ -25349,7 +25457,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "success",
     "language": "nl",
-    "value": "Success",
+    "value": "Succes",
     "value_type": "HTML"
   },
   {
@@ -25367,7 +25475,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "deze-map-is-successvol-aangepast",
     "language": "nl",
-    "value": "deze map is successvol aangepast",
+    "value": "Deze map is successvol aangepast",
     "value_type": "HTML"
   },
   {
@@ -25394,7 +25502,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "er-is-een-fout-opgetreden",
     "language": "en",
-    "value": "An error occured",
+    "value": "An error has occured",
     "value_type": "HTML"
   },
   {
@@ -25448,7 +25556,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "sluit",
     "language": "en",
-    "value": "Sluit",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -25466,7 +25574,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "map-aanpassen",
     "language": "en",
-    "value": "Edit Folder",
+    "value": "Edit folder",
     "value_type": "TEXT"
   },
   {
@@ -25484,7 +25592,7 @@
     "location": "modules/account/components/edit-folder-blade/edit-folder-blade",
     "key": "naam",
     "language": "en",
-    "value": "Naam",
+    "value": "Name",
     "value_type": "TEXT"
   },
   {
@@ -25925,7 +26033,7 @@
     "location": "pages/admin/content/id/bewerk/index",
     "key": "content-pagina-bewerkenx",
     "language": "nl",
-    "value": "Content pagina bewerken",
+    "value": "Contentpagina bewerken",
     "value_type": "TEXT"
   },
   {
@@ -26978,7 +27086,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "bekijk-de-errors-in-het-formulier",
     "language": "en",
-    "value": "Bekijk de errors in het formulier",
+    "value": "View the errors in the form",
     "value_type": "HTML"
   },
   {
@@ -27050,7 +27158,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "het-aanmaken-van-de-bezoekersruimte-is-mislukt",
     "language": "en",
-    "value": "Creating the visitor space failed",
+    "value": "Creating the visitor space has failed",
     "value_type": "HTML"
   },
   {
@@ -27104,7 +27212,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "het-updaten-van-de-bezoekersruimte-is-mislukt",
     "language": "en",
-    "value": "Updating the visitor space failed",
+    "value": "Updating the visitor space has failed",
     "value_type": "HTML"
   },
   {
@@ -27518,7 +27626,7 @@
     "location": "modules/cp/components/visitor-space-settings/visitor-space-settings",
     "key": "bestandstype-is-niet-toegestaan-jpg-png",
     "language": "en",
-    "value": "File type is forbidden (only jpg-png)",
+    "value": "File type is not supported (only jpg-png)",
     "value_type": "TEXT"
   },
   {
@@ -28175,7 +28283,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "schrijf-je-in-voor-de-nieuwsbrief",
     "language": "nl",
-    "value": "schrijf je in voor de nieuwsbrief",
+    "value": "Schrijf je in voor de nieuwsbrief",
     "value_type": "HTML"
   },
   {
@@ -28418,7 +28526,7 @@
     "location": "modules/ie-objects/components/copyright-confirmation-modal/copyright-confirmation-modal",
     "key": "opgelet-je-gaat-deze-krant-downloaden-ga-zelf-grondig-na-of-er-nog-auteursrechten-rusten-op-dit-object-als-gebruiker-ben-je-zelf-verantwoordelijk",
     "language": "en",
-    "value": "<p>Attention! You are about to download this newspaper. Please check for yourself if there are still copyrights active on this object. </p><p></p><p class=\"tw-data-text tw-text-large tw-ta\" data-placeholder=\"Vertaling\" id=\"tw-target-text\" data-ved=\"2ahUKEwjdu4aExdmJAxVcTKQEHUzAEc4Q3ewLegQICRAU\" aria-label=\"Vertaalde tekst: If you reuse you are responsible for the result and further distribution of the newspaper.\" dir=\"ltr\"><em>In case of reuse, you are responsible for the result and further distribution of the newspaper.</em></p>",
+    "value": "<p>Attention! You are about to download this newspaper. Please check if there are still copyrights active on this object. </p><p></p><p class=\"tw-data-text tw-text-large tw-ta\" data-placeholder=\"Vertaling\" id=\"tw-target-text\" data-ved=\"2ahUKEwjdu4aExdmJAxVcTKQEHUzAEc4Q3ewLegQICRAU\" aria-label=\"Vertaalde tekst: If you reuse you are responsible for the result and further distribution of the newspaper.\" dir=\"ltr\"><em>In case of reuse, you are responsible for the result and further distribution of the newspaper.</em></p>",
     "value_type": "HTML"
   },
   {
@@ -28778,7 +28886,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "vorige",
     "language": "en",
-    "value": "Vorige",
+    "value": "Previous",
     "value_type": "TEXT"
   },
   {
@@ -28796,7 +28904,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "volgende",
     "language": "en",
-    "value": "Volgende",
+    "value": "Next",
     "value_type": "TEXT"
   },
   {
@@ -28886,7 +28994,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "editie-newspaper-series-title",
     "language": "en",
-    "value": "Editie: {{newspaperSeriesTitle}}",
+    "value": "Edition: {{newspaperSeriesTitle}}",
     "value_type": "TEXT"
   },
   {
@@ -28895,7 +29003,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "media-type",
     "language": "nl",
-    "value": "Media type",
+    "value": "Mediatype",
     "value_type": "TEXT"
   },
   {
@@ -29057,7 +29165,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "editie-nummer",
     "language": "nl",
-    "value": "Editie nummer",
+    "value": "Editienummer",
     "value_type": "TEXT"
   },
   {
@@ -29282,7 +29390,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "alternatieve-titels",
     "language": "en",
-    "value": "Alternative titels",
+    "value": "Alternative titles",
     "value_type": "TEXT"
   },
   {
@@ -29453,7 +29561,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "ocr-software-version",
     "language": "nl",
-    "value": "OCR Software version",
+    "value": "OCR Software versie",
     "value_type": "TEXT"
   },
   {
@@ -29913,42 +30021,6 @@
     "key": "cast",
     "language": "en",
     "value": "Role",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "iiif-manifest",
-    "language": "nl",
-    "value": "IIIF manifest",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "iiif-manifest",
-    "language": "en",
-    "value": "IIIF manifest",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "manifest-link",
-    "language": "nl",
-    "value": "Download het IIIF manifest",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "manifest-link",
-    "language": "en",
-    "value": "Download the IIIF manifest",
     "value_type": "TEXT"
   },
   {
@@ -30965,7 +31037,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "de-hoedanigheid-is-verplicht",
     "language": "nl",
-    "value": "De hoedanigheid is verplicht",
+    "value": "De rol is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -30974,7 +31046,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "de-hoedanigheid-is-verplicht",
     "language": "en",
-    "value": "De hoedanigheid is verplicht",
+    "value": "Role is required",
     "value_type": "TEXT"
   },
   {
@@ -31235,7 +31307,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "selecteer-een-of-meerdere-mappen",
     "language": "nl",
-    "value": "Selecteer een of meerdere mappen",
+    "value": "Selecteer één of meerdere mappen",
     "value_type": "HTML"
   },
   {
@@ -31809,6 +31881,24 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
+    "key": "plan-een-bezoek-bij",
+    "language": "nl",
+    "value": "Plan een bezoek bij",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
+    "key": "plan-een-bezoek-bij",
+    "language": "en",
+    "value": "Make a visit to",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
     "key": "verken-de-publieke-catalogus",
     "language": "nl",
     "value": "Verken de publieke catalogus",
@@ -31827,19 +31917,19 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
-    "key": "plan-een-bezoek-bij",
+    "key": "zoek-verder-in-het-archief-van-organisation-name",
     "language": "nl",
-    "value": "Plan een bezoek bij",
-    "value_type": "TEXT"
+    "value": "Zoek verder in het archief van {{organisationName}}",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/shared/components/error-no-access-to-object/error-no-access-to-object",
-    "key": "plan-een-bezoek-bij",
+    "key": "zoek-verder-in-het-archief-van-organisation-name",
     "language": "en",
-    "value": "Make a visit to",
-    "value_type": "TEXT"
+    "value": "Zoek verder in het archief van {{organisationName}}",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -32000,7 +32090,7 @@
     "location": "modules/shared/components/icon/icon",
     "key": "vraagteken",
     "language": "en",
-    "value": "Question",
+    "value": "Question mark",
     "value_type": "TEXT"
   },
   {
@@ -32756,7 +32846,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "eerste",
     "language": "en",
-    "value": "Eerste",
+    "value": "First",
     "value_type": "TEXT"
   },
   {
@@ -32774,7 +32864,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "laatste",
     "language": "en",
-    "value": "Laatste",
+    "value": "Last",
     "value_type": "TEXT"
   },
   {
@@ -33350,7 +33440,7 @@
     "location": "modules/shared/components/tag-search-bar/tag-search-bar",
     "key": "zoekbalk-aria-label",
     "language": "en",
-    "value": "zoekbalk aria label",
+    "value": "Search bar aria label",
     "value_type": "TEXT"
   },
   {
@@ -33800,7 +33890,7 @@
     "location": "modules/visit-requests/components/visit-requests-overview/visit-requests-overview",
     "key": "zoekbalk-aria-label",
     "language": "en",
-    "value": "zoekbalk aria label",
+    "value": "Search bar aria label",
     "value_type": "TEXT"
   },
   {
@@ -34304,7 +34394,7 @@
     "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
     "key": "stel-je-eigen-geavanceerde-filter-samen-aan-de-hand-van-deze-advanced-filters-velden-en-waarden",
     "language": "en",
-    "value": "Stel je eigen geavanceerde filter samen aan de hand van deze advanced filters velden en waarden",
+    "value": "Compose your custom advanced filter using the advanced filter fields and values",
     "value_type": "HTML"
   },
   {
@@ -34502,7 +34592,7 @@
     "location": "modules/visitor-space/components/duration-input/duration-input",
     "key": "uu-mm-ss",
     "language": "en",
-    "value": "uu:mm:ss",
+    "value": "hh:mm:ss",
     "value_type": "TEXT"
   },
   {
@@ -34664,7 +34754,7 @@
     "location": "modules/visitor-space/components/language-select/language-select",
     "key": "geen-talen-gevonden",
     "language": "en",
-    "value": "Geen talen gevonden",
+    "value": "No languages found",
     "value_type": "TEXT"
   },
   {
@@ -34682,7 +34772,7 @@
     "location": "modules/visitor-space/components/language-select/language-select",
     "key": "kies-een-taal",
     "language": "en",
-    "value": "Kies een taal",
+    "value": "Select a language",
     "value_type": "TEXT"
   },
   {
@@ -35024,7 +35114,7 @@
     "location": "modules/visitor-space/components/material-request-blade/material-request-blade",
     "key": "selecteer-een-type",
     "language": "en",
-    "value": "Selecteer een type",
+    "value": "Select a type",
     "value_type": "TEXT"
   },
   {
@@ -35285,7 +35375,7 @@
     "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
     "key": "krant-serie",
     "language": "nl",
-    "value": "Krant serie",
+    "value": "Krantenreeks",
     "value_type": "TEXT"
   },
   {
@@ -35303,7 +35393,7 @@
     "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
     "key": "naam-van-de-krant-serie",
     "language": "nl",
-    "value": "Naam van de krant serie",
+    "value": "Naam van de krantenreeks",
     "value_type": "TEXT"
   },
   {
@@ -35834,7 +35924,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "creatiedatum",
     "language": "en",
-    "value": "Creatiedatum",
+    "value": "Date of creation",
     "value_type": "TEXT"
   },
   {
@@ -35888,7 +35978,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "reeks",
     "language": "en",
-    "value": "Reeks",
+    "value": "Series",
     "value_type": "TEXT"
   },
   {
@@ -35924,7 +36014,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "namenlijst-gesneuvelden",
     "language": "en",
-    "value": "Namenlijst gesneuvelden",
+    "value": "List of Names of WW1-victims",
     "value_type": "TEXT"
   },
   {
@@ -35942,7 +36032,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "beschrijving",
     "language": "en",
-    "value": "Beschrijving",
+    "value": "Description",
     "value_type": "TEXT"
   },
   {
@@ -35960,7 +36050,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "duurtijd",
     "language": "en",
-    "value": "Duurtijd",
+    "value": "Duration",
     "value_type": "TEXT"
   },
   {
@@ -35996,7 +36086,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "taal",
     "language": "en",
-    "value": "Taal",
+    "value": "Language",
     "value_type": "TEXT"
   },
   {
@@ -36014,7 +36104,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "bestandstype",
     "language": "en",
-    "value": "Bestandstype",
+    "value": "File type",
     "value_type": "TEXT"
   },
   {
@@ -36032,7 +36122,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "analoge-drager",
     "language": "en",
-    "value": "Analoge drager",
+    "value": "Analog carrier",
     "value_type": "TEXT"
   },
   {
@@ -36050,7 +36140,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "publicatiedatum",
     "language": "en",
-    "value": "Publicatiedatum",
+    "value": "Date of publication",
     "value_type": "TEXT"
   },
   {
@@ -36059,7 +36149,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "publisher",
     "language": "nl",
-    "value": "Publisher",
+    "value": "Uitgever",
     "value_type": "TEXT"
   },
   {
@@ -36140,7 +36230,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "locatie-van-de-inhoud",
     "language": "en",
-    "value": "Locatie van de inhoud",
+    "value": "Content location",
     "value_type": "TEXT"
   },
   {
@@ -36167,7 +36257,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "object-type",
     "language": "nl",
-    "value": "Object type",
+    "value": "Objecttype",
     "value_type": "TEXT"
   },
   {
@@ -37229,7 +37319,7 @@
     "location": "modules/spaces/controllers/spaces",
     "key": "space-with-slug-slug-is-inactive",
     "language": "nl",
-    "value": "Space with slug '{{slug}}' is inactive",
+    "value": "De ruimte met de slug '{{slug}}' is niet actief",
     "value_type": "TEXT"
   },
   {
