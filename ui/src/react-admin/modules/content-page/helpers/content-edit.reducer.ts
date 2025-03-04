@@ -18,7 +18,7 @@ import type {
 	SingleContentBlockComponentState,
 } from '../types/content-block.types';
 import type { ContentPageInfo } from '../types/content-pages.types';
-import { ContentEditActionType, ContentWidth } from '../types/content-pages.types';
+import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types';
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;
@@ -126,7 +126,7 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		contentType: 'PAGINA',
 		contentWidth:
 			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth ||
-			ContentWidth.EXTRA_LARGE,
+			ContentPageWidth.EXTRA_LARGE,
 		publishAt: '',
 		depublishAt: '',
 		isPublic: false,

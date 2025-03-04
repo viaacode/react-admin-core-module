@@ -30,7 +30,7 @@ import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageLabel,
-	ContentWidth,
+	ContentPageWidth,
 } from '~modules/content-page/types/content-pages.types';
 import { ContentEditActionType } from '~modules/content-page/types/content-pages.types';
 import { useGetAllLanguages } from '~modules/translations/hooks/use-get-all-languages';
@@ -112,7 +112,9 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		Object.keys(DEFAULT_PAGES_WIDTH).forEach((key) => {
 			if (
 				contentPageInfo.contentType &&
-				DEFAULT_PAGES_WIDTH[key as ContentWidth].includes(contentPageInfo.contentType) &&
+				DEFAULT_PAGES_WIDTH[key as ContentPageWidth].includes(
+					contentPageInfo.contentType
+				) &&
 				contentPageInfo.contentWidth !== key
 			) {
 				changeContentPageProp('contentWidth', key);

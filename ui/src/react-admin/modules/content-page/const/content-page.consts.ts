@@ -3,7 +3,7 @@ import type { Avo } from '@viaa/avo2-types';
 
 import { AdminConfigManager } from '~core/config';
 import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
-import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import type {
 	CheckboxDropdownModalProps,
 	CheckboxOption,
@@ -192,20 +192,20 @@ export const GET_CONTENT_PAGE_WIDTH_OPTIONS = () => [
 	},
 	{
 		label: tText('admin/content/content___max-1300-px'),
-		value: ContentWidth.EXTRA_LARGE,
+		value: ContentPageWidth.EXTRA_LARGE,
 	},
 	{
 		label: tText('admin/content/content___breed-940-px'),
-		value: ContentWidth.LARGE,
+		value: ContentPageWidth.LARGE,
 	},
 	{
 		label: tText('admin/content/content___medium-720-px'),
-		value: ContentWidth.MEDIUM,
+		value: ContentPageWidth.MEDIUM,
 	},
 ];
 
-export const DEFAULT_PAGES_WIDTH: { [key in ContentWidth]: Avo.ContentPage.Type[] } = {
-	[ContentWidth.EXTRA_LARGE]: ['PROJECT'],
-	[ContentWidth.LARGE]: [],
-	[ContentWidth.MEDIUM]: ['NIEUWS_ITEM'],
+export const DEFAULT_PAGES_WIDTH: { [key in ContentPageWidth]: Avo.ContentPage.Type[] } = {
+	[ContentPageWidth.EXTRA_LARGE]: ['PROJECT'],
+	[ContentPageWidth.LARGE]: [],
+	[ContentPageWidth.MEDIUM]: ['NIEUWS_ITEM'],
 };

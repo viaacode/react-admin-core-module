@@ -19,7 +19,7 @@ export enum PublishOption {
 	timebound = 'timebound',
 }
 
-export enum ContentWidth {
+export enum ContentPageWidth {
 	MEDIUM = 'MEDIUM', // 720
 	LARGE = 'LARGE', // 940
 	EXTRA_LARGE = 'EXTRA_LARGE', // 1300
@@ -89,7 +89,7 @@ interface ContentPageBase {
 	updatedAt: string | null;
 	isProtected: boolean;
 	contentType: Avo.ContentPage.Type;
-	contentWidth: ContentWidth;
+	contentWidth: ContentPageWidth;
 	owner: ContentPageUser;
 	userProfileId: string | null;
 	userGroupIds: string[] | null;

@@ -5,7 +5,7 @@ import type { ComponentType, FC, FunctionComponent, MouseEvent, ReactNode } from
 import type { ContentBlockType } from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
-	ContentWidth,
+	ContentPageWidth,
 } from '~modules/content-page/types/content-pages.types';
 import type { App, Locale } from '~modules/translations/translations.core.types';
 
@@ -59,7 +59,7 @@ export interface AdminConfig {
 	staticPages: Partial<Record<Locale, string[]>>;
 	contentPage?: {
 		availableContentBlocks: ContentBlockType[];
-		defaultPageWidth: ContentWidth;
+		defaultPageWidth: ContentPageWidth;
 		onSaveContentPage: (contentPageInfo: ContentPageInfo) => Promise<void>;
 	};
 	navigationBars?: {

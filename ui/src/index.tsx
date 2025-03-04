@@ -14,7 +14,7 @@ import { AdminConfigManager } from '../src/react-admin/core/config';
 import type { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
 import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
 import type { ContentPageInfo } from '../src/react-admin/modules/content-page/types/content-pages.types';
-import { ContentWidth } from '../src/react-admin/modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '../src/react-admin/modules/content-page/types/content-pages.types';
 import Html from '../src/react-admin/modules/shared/components/Html/Html';
 import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
 import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
@@ -97,7 +97,7 @@ function setConfig() {
 				// ContentBlockType.ContentEncloseGrid,
 				// ContentBlockType.Breadcrumbs,
 			],
-			defaultPageWidth: ContentWidth.LARGE,
+			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
 				console.info('event handler: onSaveContentPage', { contentPageInfo });
 			},

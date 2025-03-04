@@ -15,7 +15,7 @@ import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo
 import { Button, Container, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
-import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { isMobileWidth } from '~shared/helpers/media-query';
 
 import './BlockHetArchiefImageTextBackground.scss';
@@ -66,7 +66,7 @@ export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponen
 	buttonType?: ButtonType;
 	buttonIcon?: IconName;
 	buttonIconAlignment?: SimpleAlignOption;
-	pageWidth?: ContentWidth;
+	pageWidth?: ContentPageWidth;
 }
 
 export const BlockHetArchiefImageTextBackground: FunctionComponent<
@@ -211,7 +211,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						}}
 						mode="horizontal"
 						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
+							pageWidth?.toUpperCase() === ContentPageWidth.EXTRA_LARGE
 								? undefined
 								: (pageWidth?.toLowerCase() as 'medium' | 'large')
 						}
@@ -233,7 +233,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						style={{ color: foregroundColor }}
 						mode="horizontal"
 						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
+							pageWidth?.toUpperCase() === ContentPageWidth.EXTRA_LARGE
 								? undefined
 								: (pageWidth?.toLowerCase() as 'medium' | 'large')
 						}
@@ -262,7 +262,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						style={{ color: foregroundColor }}
 						mode="horizontal"
 						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
+							pageWidth?.toUpperCase() === ContentPageWidth.EXTRA_LARGE
 								? undefined
 								: (pageWidth?.toLowerCase() as 'medium' | 'large')
 						}

@@ -22,7 +22,7 @@ import {
 import './ContentBlockRenderer.scss';
 import { AdminConfigManager } from '~core/config';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 
 interface ContentBlockPreviewProps {
@@ -47,7 +47,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	const pageWidth =
 		contentPageInfo.contentWidth?.toUpperCase() ||
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
-		ContentWidth.EXTRA_LARGE;
+		ContentPageWidth.EXTRA_LARGE;
 	const PreviewComponent = GET_BLOCK_COMPONENT(contentBlockConfig.type);
 	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
 	const componentStateProps: any = needsElements ? { elements: componentState } : componentState;
@@ -182,7 +182,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 					<Container
 						mode="horizontal"
 						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
+							pageWidth?.toUpperCase() === ContentPageWidth.EXTRA_LARGE
 								? undefined
 								: (pageWidth?.toLowerCase() as 'medium' | 'large')
 						}

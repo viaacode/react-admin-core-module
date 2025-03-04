@@ -6,7 +6,7 @@ export {
 } from './react-admin/modules/content-page/services/content-page.converters';
 export { ContentBlockType } from '~modules/content-page/types/content-block.types';
 export {
-	ContentWidth,
+	ContentPageWidth,
 	type ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
 export { type DbContentPage } from '~modules/content-page/types/content-pages.types';

@@ -12,10 +12,10 @@ import { Color } from '~modules/content-page/types/content-block.types';
 import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { BlockHeading } from '../BlockHeading';
 import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo2-components';
-import { Button, Container, Image } from '@viaa/avo2-components';
+import { Button, Image } from '@viaa/avo2-components';
 import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
 import { Icon } from '~shared/components/Icon';
-import { ContentWidth } from '~modules/content-page/types/content-pages.types';
+import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
 import { isMobileWidth } from '~shared/helpers/media-query';
 
 import './BlockAvoImageTextBackground.scss';
@@ -68,7 +68,7 @@ export interface BlockAvoImageTextBackgroundProps extends DefaultComponentProps 
 	buttonType?: ButtonType;
 	buttonIcon?: IconName;
 	buttonIconAlignment?: SimpleAlignOption;
-	pageWidth?: ContentWidth;
+	pageWidth?: ContentPageWidth;
 }
 
 export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBackgroundProps> = ({
@@ -93,7 +93,6 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 	buttonType,
 	buttonIcon,
 	buttonIconAlignment = 'left',
-	pageWidth,
 }): ReactElement => {
 	const ref = React.createRef<HTMLDivElement>();
 	const computedTextAlign = textAlign || IMAGE_ALIGN_TO_TEXT_ALIGN[backgroundAlignment];
@@ -104,7 +103,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 		if (ref.current) {
 			setBlockWidth(ref.current.clientWidth);
 		}
-	}, [ref.current]);
+	}, [ref]);
 
 	const renderHeadingTextAndButton = () => {
 		// During editing the block width isn't 100% of the page, so the visual font size seems too big
@@ -208,95 +207,37 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 	};
 
 	const renderBlockContent = () => {
-		if (backgroundAlignment === 'fill-screen') {
-			return (
-				<>
-					<Container
-						className={clsx(
-							'c-block-avo-image-text-background__page-wrapper',
-							'c-block-avo-image-text-background__page-wrapper--' + computedTextAlign
-						)}
-						style={{
-							color: foregroundColor,
-							alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
-							left: contentPosition + '%',
-							width: contentWidth + '%',
-						}}
-						mode="horizontal"
-						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
-								? undefined
-								: (pageWidth?.toLowerCase() as 'medium' | 'large')
-						}
-					>
-						{renderHeadingTextAndButton()}
-					</Container>
-
-					{renderImage()}
-				</>
-			);
-		} else if (
-			backgroundAlignment === 'left-screen' ||
-			backgroundAlignment === 'right-screen'
-		) {
-			return (
-				<>
-					<Container
-						className="c-block-avo-image-text-background__page-wrapper"
-						style={{ color: foregroundColor }}
-						mode="horizontal"
-						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
-								? undefined
-								: (pageWidth?.toLowerCase() as 'medium' | 'large')
-						}
-					>
-						<div
-							className="c-block-avo-image-text-background__column-text"
-							style={{
-								alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
-							}}
-						>
-							{renderHeadingTextAndButton()}
-						</div>
-					</Container>
-
-					{renderImage()}
-				</>
-			);
-		} else if (
-			backgroundAlignment === 'left-inside-page' ||
-			backgroundAlignment === 'right-inside-page'
-		) {
-			return (
-				<>
-					<Container
-						className="c-block-avo-image-text-background__page-wrapper"
-						style={{ color: foregroundColor }}
-						mode="horizontal"
-						size={
-							pageWidth?.toUpperCase() === ContentWidth.EXTRA_LARGE
-								? undefined
-								: (pageWidth?.toLowerCase() as 'medium' | 'large')
-						}
-					>
-						<div
-							className="c-block-avo-image-text-background__column-text"
-							style={{
-								alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
-							}}
-						>
-							{renderHeadingTextAndButton()}
-						</div>
-						<div className="c-block-avo-image-text-background__column-image">
-							{renderImage()}
-						</div>
-					</Container>
-				</>
-			);
-		} else {
+		if (!blockWidth) {
 			return null;
 		}
+		const isInEditMode = Math.abs(blockWidth - window.innerWidth) > 50;
+		const unit = isInEditMode ? '%' : 'vw';
+		let left = contentPosition;
+		if (computedTextAlign === 'center') {
+			left = contentPosition - contentWidth / 2;
+		} else if (computedTextAlign === 'right') {
+			left = contentPosition - contentWidth;
+		}
+		return (
+			<>
+				<div
+					className={clsx(
+						'c-block-avo-image-text-background__page-wrapper',
+						'c-block-avo-image-text-background__page-wrapper--' + computedTextAlign
+					)}
+					style={{
+						color: foregroundColor,
+						alignItems: TEXT_ALIGN_TO_FLEX[computedTextAlign],
+						left: left + unit,
+						width: contentWidth + unit,
+					}}
+				>
+					{renderHeadingTextAndButton()}
+				</div>
+
+				{renderImage()}
+			</>
+		);
 	};
 
 	return (
