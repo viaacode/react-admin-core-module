@@ -1265,7 +1265,7 @@
     "location": "modules/content-page/const/get-content-block-type-options",
     "key": "afbeelding-met-h-1-avo",
     "language": "nl",
-    "value": "Afbeelding met H1 (avo)",
+    "value": "Header met H1 titel, tekst en achtergrond",
     "value_type": "TEXT"
   },
   {
@@ -6584,7 +6584,7 @@
     "location": "modules/shared/components/file-upload/file-upload",
     "key": "afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
     "language": "nl",
-    "value": "Afbeelding moet exact 1920 x 385)pixels groot zijn",
+    "value": "Afbeelding moet exact 1920 x 385 pixels groot zijn",
     "value_type": "TEXT"
   },
   {
@@ -15476,7 +15476,7 @@
     "location": "collection/components/collection-or-bundle-edit",
     "key": "de-opdracht-is-toegevoegd-aan-de-bundel",
     "language": "nl",
-    "value": "De opdracht is toegevoegd aan de bundel",
+    "value": "De opdracht is toegevoegd aan de bundel.",
     "value_type": "HTML"
   },
   {
@@ -15485,7 +15485,7 @@
     "location": "collection/components/collection-or-bundle-edit",
     "key": "er-ging-iets-mis-bij-het-toevoegen-van-de-opdracht",
     "language": "nl",
-    "value": "Er ging iets mis bij het toevoegen van de opdracht",
+    "value": "Er ging iets mis bij het toevoegen van de opdracht.",
     "value_type": "HTML"
   },
   {
@@ -15764,7 +15764,7 @@
     "location": "collection/components/collection-or-bundle-edit",
     "key": "bijvoorbeeld-39057-b-95-92-c-9-446-f-944-b-6459-a-6194-d-8-e",
     "language": "nl",
-    "value": "bijvoorbeeld: 39057b95-92c9-446f-944b-6459a6194d8e",
+    "value": "Bijvoorbeeld: 39057b95-92c9-446f-944b-6459a6194d8e",
     "value_type": "TEXT"
   },
   {

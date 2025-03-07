@@ -23,7 +23,8 @@ export class ContentPageLabelsController {
 	@Get('')
 	@RequireAnyPermissions(
 		PermissionName.EDIT_ANY_CONTENT_PAGES,
-		PermissionName.EDIT_OWN_CONTENT_PAGES
+		PermissionName.EDIT_OWN_CONTENT_PAGES,
+		PermissionName.EDIT_CONTENT_PAGE_LABELS
 	)
 	public async fetchContentPageLabels(
 		@Query('offset') offset: string,
