@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.3.54",
+  "version": "4.3.55",
   "private": false,
   "exports": {
     "./dist/admin.mjs": {
@@ -47,11 +47,11 @@
   },
   "peerDependencies": {
     "@hookform/resolvers": "2.9.11",
-    "@meemoo/react-components": "4.0.34",
+    "@meemoo/react-components": "4.0.35",
     "@studiohyperdrive/pagination": "1.0.0",
     "@tanstack/react-query": "4.36.1",
-    "@viaa/avo2-components": "5.0.24",
-    "@viaa/avo2-types": "3.0.15",
+    "@viaa/avo2-components": "5.0.25",
+    "@viaa/avo2-types": "3.0.16",
     "autosize": "6.0.1",
     "capture-stack-trace": "1.0.1",
     "clsx": "2.0.0",
