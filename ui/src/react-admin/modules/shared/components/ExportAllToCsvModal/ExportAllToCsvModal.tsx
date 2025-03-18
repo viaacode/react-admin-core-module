@@ -81,7 +81,7 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 			columns.forEach(({ id: columnId }) => {
 				// We're using the same render function as the admin dashboard table to render the values
 				// This way we can be sure the values are formatted the same way in the csv as in the table
-				const csvCellValue = renderValue(item, columnId).replace(/"/g, '""');
+				const csvCellValue = (renderValue(item, columnId) || '').replace(/"/g, '""');
 				if (!csvCellValue || csvCellValue === '-') {
 					csvCellValues.push('');
 				} else {

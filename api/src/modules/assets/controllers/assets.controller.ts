@@ -261,6 +261,15 @@ export class AssetsController {
 		) {
 			return true;
 		}
+		if (
+			[AssetType.KLASCEMENT_VIDEO_IMAGE].includes(
+				assetInfo.content_asset_type_id as AssetType
+			) &&
+			(userPermissions.includes(PermissionName.PUBLISH_COLLECTION_TO_KLASCEMENT) ||
+				userPermissions.includes(PermissionName.PUBLISH_ASSIGNMENT_TO_KLASCEMENT))
+		) {
+			return true;
+		}
 		return false;
 	}
 }

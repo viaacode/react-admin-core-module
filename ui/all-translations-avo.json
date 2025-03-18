@@ -10595,15 +10595,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "admin/users/user",
-    "key": "leeg",
-    "language": "nl",
-    "value": "Leeg",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "admin/assignments/assignments",
     "key": "title",
     "language": "nl",
@@ -10689,6 +10680,15 @@
     "key": "afgelopen",
     "language": "nl",
     "value": "Verlopen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/users/user",
+    "key": "leeg",
+    "language": "nl",
+    "value": "Leeg",
     "value_type": "TEXT"
   },
   {
@@ -19929,6 +19929,42 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/assignments/views/assignments-overview-admin",
+    "key": "bekijk-deze-opdracht",
+    "language": "nl",
+    "value": "Bekijk deze opdracht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-overview-admin",
+    "key": "deze-opdracht-wordt-reeds-bewerkt-door-iemand-anders",
+    "language": "nl",
+    "value": "Deze opdracht wordt reeds bewerkt door iemand anders. Probeer het later opnieuw.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-overview-admin",
+    "key": "bewerk-deze-opdracht",
+    "language": "nl",
+    "value": "Bewerk deze opdracht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
+    "key": "bewerk-de-collectie",
+    "language": "nl",
+    "value": "Bewerk de collectie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-overview-admin",
     "key": "afgelopen",
     "language": "nl",
     "value": "Verlopen",
@@ -19968,33 +20004,6 @@
     "key": "nvt",
     "language": "nl",
     "value": "nvt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignments-overview-admin",
-    "key": "bekijk-deze-opdracht",
-    "language": "nl",
-    "value": "Bekijk deze opdracht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignments-overview-admin",
-    "key": "deze-opdracht-wordt-reeds-bewerkt-door-iemand-anders",
-    "language": "nl",
-    "value": "Deze opdracht wordt reeds bewerkt door iemand anders. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/assignments/views/assignments-overview-admin",
-    "key": "bewerk-deze-opdracht",
-    "language": "nl",
-    "value": "Bewerk deze opdracht",
     "value_type": "TEXT"
   },
   {
@@ -20256,15 +20265,6 @@
     "key": "deze-collectie-wordt-reeds-bewerkt-door-iemand-anders",
     "language": "nl",
     "value": "Deze collectie wordt reeds bewerkt door iemand anders. Probeer het later opnieuw.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/collections-or-bundles/views/collections-or-bundles-overview",
-    "key": "bewerk-de-collectie",
-    "language": "nl",
-    "value": "Bewerk de collectie",
     "value_type": "TEXT"
   },
   {
@@ -28141,6 +28141,348 @@
     "language": "nl",
     "value": "De bron van deze videostill is <a href=\"{{organisationWebsite}}\" target=\"_blank\">{{organisationName}}</a>.",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "laatste-communicatie-kanaal-type",
+    "language": "nl",
+    "value": "Laatste communicatie kanaal type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "communicatietype",
+    "language": "nl",
+    "value": "Communicatietype",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "laatste-communicatie-kanaal-naam",
+    "language": "nl",
+    "value": "Laatste communicatie kanaal naam",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "communicatiekanaal",
+    "language": "nl",
+    "value": "Communicatiekanaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "laatste-communicatiedatum",
+    "language": "nl",
+    "value": "Laatste communicatiedatum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "klas-cement",
+    "language": "nl",
+    "value": "Klas cement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "laatste-bewerkt-door",
+    "language": "nl",
+    "value": "Laatste bewerkt door",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/assignments",
+    "key": "organisatie",
+    "language": "nl",
+    "value": "Organisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "gelieve-een-afbeelding-te-uploaden",
+    "language": "nl",
+    "value": "Gelieve een afbeelding te uploaden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "gelieve-een-alternatieve-tekst-in-te-vullen-voor-de-afbeelding",
+    "language": "nl",
+    "value": "gelieve een alternatieve tekst in te vullen voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "gelieve-de-bron-van-de-afbeelding-in-te-vullen",
+    "language": "nl",
+    "value": "gelieve de bron van de afbeelding in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "publiceren-naar-klascement-gelukt",
+    "language": "nl",
+    "value": "Publiceren naar klascement gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "publiceren-naar-klascement-mislukt",
+    "language": "nl",
+    "value": "Publiceren naar klascement mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "publiceren-naar-klascement",
+    "language": "nl",
+    "value": "Publiceren naar Klascement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "afbeelding-voor-de-embed-code",
+    "language": "nl",
+    "value": "Afbeelding voor de embed code",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "upload-een-afbeelding",
+    "language": "nl",
+    "value": "Upload een afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "alternatieve-tekst-voor-de-afbeelding",
+    "language": "nl",
+    "value": "Alternatieve tekst voor de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "bron-van-de-afbeelding",
+    "language": "nl",
+    "value": "Bron van de afbeelding",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "publiceer-naar-klascement",
+    "language": "nl",
+    "value": "Publiceer naar klascement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "geen-rol",
+    "language": "nl",
+    "value": "Geen rol",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "geen-label",
+    "language": "nl",
+    "value": "Geen label",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignment-or-bundle-actualisation-overview",
+    "key": "geen-organisatie",
+    "language": "nl",
+    "value": "Geen organisatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "geen-kanaal",
+    "language": "nl",
+    "value": "Geen kanaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "het-ophalen-van-de-opdracht-actualisaties-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de opdracht actualisaties is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "je-hebt-num-of-selected-assignments-geselecteerd",
+    "language": "nl",
+    "value": "Je hebt {{numOfSelectedAssignments}} geselecteerd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "het-ophalen-van-de-opdracht-ids-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de opdracht ids is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "er-bestaan-nog-geen-opdrachten",
+    "language": "nl",
+    "value": "Er bestaan nog geen opdrachten",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "beschrijving-wanneer-er-nog-geen-opdrachten-zijn",
+    "language": "nl",
+    "value": "Beschrijving wanneer er nog geen opdrachten zijn",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "zoek-op-titel-beschrijving-auteur",
+    "language": "nl",
+    "value": "Zoek op titel beschrijving auteur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "er-zijn-geen-opdracht-marcom-items-die-voldoen-aan-de-opgegeven-filters",
+    "language": "nl",
+    "value": "Er zijn geen opdracht marcom items die voldoen aan de opgegeven filters",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "exporteer-alles",
+    "language": "nl",
+    "value": "Exporteer alles",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "exporteren-van-alle-opdrachten-naar-csv",
+    "language": "nl",
+    "value": "Exporteren van alle opdrachten naar csv",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "bezig-met-ophalen-van-media-items",
+    "language": "nl",
+    "value": "Bezig met ophalen van media items",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "bezig-met-genereren-van-de-csv",
+    "language": "nl",
+    "value": "Bezig met genereren van de csv",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "opdrachten-marcom-csv",
+    "language": "nl",
+    "value": "Opdrachten-marcom.csv",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "opdrachten-marcom",
+    "language": "nl",
+    "value": "Opdrachten marcom",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "collectie-marcom-beheer-overview-pagina-titel",
+    "language": "nl",
+    "value": "Collectie marcom beheer overview pagina titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/assignments/views/assignments-marcom-overview",
+    "key": "collectie-marcom-beheer-overview-pagina-beschrijving",
+    "language": "nl",
+    "value": "Collectie marcom beheer overview pagina beschrijving",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
