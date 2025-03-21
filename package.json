@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/react-admin",
-  "version": "4.3.57",
+  "version": "4.3.58",
   "description": "React admin app for meemoo projects",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
