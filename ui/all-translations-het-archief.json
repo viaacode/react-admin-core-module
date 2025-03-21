@@ -20201,7 +20201,7 @@
     "location": "modules/account/const/account",
     "key": "groep-bezoeker--omschrijving",
     "language": "nl",
-    "value": "Dit is een tekstje dat iets meer uitleg geeft over de cp admin lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
+    "value": "Dit is een tekstje dat iets meer uitleg geeft over de bezoeker lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
     "value_type": "HTML"
   },
   {
@@ -20273,7 +20273,7 @@
     "location": "modules/account/const/account",
     "key": "groep-admin--omschrijving",
     "language": "nl",
-    "value": "Dit is een tekstje dat iets meer uitleg geeft over de cp admin lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
+    "value": "Dit is een tekstje dat iets meer uitleg geeft over de meemoo admin lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
     "value_type": "HTML"
   },
   {
@@ -20282,7 +20282,7 @@
     "location": "modules/account/const/account",
     "key": "groep-admin--omschrijving",
     "language": "en",
-    "value": "This is a little text that gives more explanation about CP Admin Lorem Ipsum. Want to read more about this? Go to Frequently Asked Questions.",
+    "value": "This is a little text that gives more explanation about meemoo Admin Lorem Ipsum. Want to read more about this? Go to Frequently Asked Questions.",
     "value_type": "HTML"
   },
   {
@@ -24917,7 +24917,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "nl",
-    "value": "Ter plaatste kijken & luisteren",
+    "value": "Ter plaatse raadplegen",
     "value_type": "TEXT"
   },
   {
@@ -24971,7 +24971,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "ter-plaatse-lezen",
     "language": "nl",
-    "value": "Ter plaatse lezen",
+    "value": "Bij de aanbieder lezen",
     "value_type": "TEXT"
   },
   {
@@ -28715,7 +28715,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "export-metadata-desktop",
     "language": "nl",
-    "value": "Exporteer beschrijving",
+    "value": "Exporteer metadata",
     "value_type": "TEXT"
   },
   {
@@ -28913,7 +28913,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
     "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/bronvermelding\">Meer info</a></p>",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/bronvermelding\" target=\"\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -28922,7 +28922,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
     "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/citation\">read more</a></p>",
+    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/citation\" target=\"\">Read more</a></p>",
     "value_type": "HTML"
   },
   {
@@ -36329,7 +36329,7 @@
     "location": "modules/visitor-space/utils/map-filters/map-filters",
     "key": "raadpleegbaar-ter-plaatse",
     "language": "nl",
-    "value": "Ter plaatste raadplegen",
+    "value": "Ter plaatse raadplegen",
     "value_type": "TEXT"
   },
   {

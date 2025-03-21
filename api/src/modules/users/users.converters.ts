@@ -271,7 +271,7 @@ export function convertUserInfoToCommonUser(
 				idps: { [user.idp]: null },
 				organisation: {
 					or_id: user.maintainerId || user.organisationId,
-					name: user.visitorSpaceSlug || user.organisationName,
+					name: user.organisationName || user.visitorSpaceSlug,
 					data: null,
 				},
 				loms: [],
