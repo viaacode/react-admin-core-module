@@ -14,7 +14,7 @@ export interface UserGroupSelectProps {
 	placeholder?: string;
 	values: string[];
 	defaultCheckedOptions?: string[];
-	lockedCheckedOptions?: string[];
+	lockedOptions?: string[];
 	required: boolean;
 	onChange: (selectedUserGroupIds: string[]) => void;
 }
@@ -25,7 +25,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	placeholder,
 	values,
 	defaultCheckedOptions = [],
-	lockedCheckedOptions = [],
+	lockedOptions = [],
 	onChange,
 	required,
 }) => {
@@ -39,9 +39,6 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		const checkedOptions = [];
 		if (values.length === 0 && defaultCheckedOptions.length > 0) {
 			checkedOptions.push(...defaultCheckedOptions);
-		}
-		if (lockedCheckedOptions.length > 0) {
-			checkedOptions.push(...lockedCheckedOptions);
 		}
 		onChange(uniq([...values, ...checkedOptions]));
 		// Only execute this effect once
@@ -85,11 +82,8 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 							key={userGroupOption.value}
 							label={userGroupOption.label}
 							value={userGroupOption.value}
-							checked={
-								lockedCheckedOptions.includes(String(userGroupOption.value)) ||
-								values.includes(String(userGroupOption.value))
-							}
-							disabled={lockedCheckedOptions.includes(String(userGroupOption.value))}
+							checked={values.includes(String(userGroupOption.value))}
+							disabled={lockedOptions.includes(String(userGroupOption.value))}
 							onChange={handleCheckboxChanged}
 						></Checkbox>
 					);

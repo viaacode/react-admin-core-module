@@ -481,7 +481,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										SpecialPermissionGroups.loggedOutUsers,
 										SpecialPermissionGroups.loggedInUsers,
 									]}
-									lockedCheckedOptions={lastUserGroup ? [lastUserGroup.id] : []}
+									lockedOptions={lastUserGroup ? [lastUserGroup.id] : []}
 								/>
 							</Column>
 						</Grid>
