@@ -14,7 +14,7 @@ import {
 } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
-import { compact, noop } from 'lodash-es';
+import { compact, isNil, noop } from 'lodash-es';
 import type { FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -74,7 +74,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 			value: languageInfo.languageCode,
 		})
 	);
-	const { data: allUserGroups } = useGetUserGroups({
+	const { data: allUserGroups, isLoading: isLoadingAllUserGroups } = useGetUserGroups({
 		withPermissions: false,
 	});
 	const getParentPagePickerItem = (): PickerItem | null => {
@@ -466,24 +466,33 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									</FormGroup>
 								</Column>
 							)}
-							<Column size="12">
-								<UserGroupSelect
-									label={tText(
-										'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
-									)}
-									error={formErrors.userGroupIds}
-									values={contentPageInfo.userGroupIds || []}
-									required={false}
-									onChange={(userGroupIds: string[]) =>
-										changeContentPageProp('userGroupIds', userGroupIds)
-									}
-									defaultCheckedOptions={[
-										SpecialPermissionGroups.loggedOutUsers,
-										SpecialPermissionGroups.loggedInUsers,
-									]}
-									lockedOptions={lastUserGroup ? [lastUserGroup.id] : []}
-								/>
-							</Column>
+							{!isLoadingAllUserGroups && !isNil(lastUserGroup?.id) && (
+								<Column size="12">
+									<UserGroupSelect
+										label={tText(
+											'admin/content/components/content-edit-form/content-edit-form___zichtbaar-voor'
+										)}
+										error={formErrors.userGroupIds}
+										values={contentPageInfo.userGroupIds || []}
+										required={false}
+										onChange={(userGroupIds: string[]) =>
+											changeContentPageProp('userGroupIds', userGroupIds)
+										}
+										checkedOptions={
+											// Only set defaults if it's a new content page that is being created
+											// Otherwise we show the values without any default checked user groups
+											contentPageInfo.id
+												? [lastUserGroup.id]
+												: [
+														SpecialPermissionGroups.loggedOutUsers,
+														SpecialPermissionGroups.loggedInUsers,
+														lastUserGroup.id,
+												  ]
+										}
+										disabledOptions={[lastUserGroup.id]}
+									/>
+								</Column>
+							)}
 						</Grid>
 					</Form>
 				</Container>

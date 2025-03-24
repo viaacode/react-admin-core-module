@@ -13,8 +13,8 @@ export interface UserGroupSelectProps {
 	error: string | undefined;
 	placeholder?: string;
 	values: string[];
-	defaultCheckedOptions?: string[];
-	lockedOptions?: string[];
+	checkedOptions?: string[];
+	disabledOptions?: string[];
 	required: boolean;
 	onChange: (selectedUserGroupIds: string[]) => void;
 }
@@ -24,8 +24,8 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	error,
 	placeholder,
 	values,
-	defaultCheckedOptions = [],
-	lockedOptions = [],
+	checkedOptions = [],
+	disabledOptions = [],
 	onChange,
 	required,
 }) => {
@@ -36,10 +36,6 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	];
 
 	useEffect(() => {
-		const checkedOptions = [];
-		if (values.length === 0 && defaultCheckedOptions.length > 0) {
-			checkedOptions.push(...defaultCheckedOptions);
-		}
 		onChange(uniq([...values, ...checkedOptions]));
 		// Only execute this effect once
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,7 +79,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 							label={userGroupOption.label}
 							value={userGroupOption.value}
 							checked={values.includes(String(userGroupOption.value))}
-							disabled={lockedOptions.includes(String(userGroupOption.value))}
+							disabled={disabledOptions.includes(String(userGroupOption.value))}
 							onChange={handleCheckboxChanged}
 						></Checkbox>
 					);

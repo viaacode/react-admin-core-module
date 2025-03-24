@@ -20,7 +20,16 @@ type UseUserGroupsTriple = [
 
 export const useUserGroupOptions = (
 	type: 'CheckboxOption' | 'MultiSelectOption' | 'TagInfo',
+	/**
+	 * Whether to include special user groups:
+	 * - All logged in users
+	 * - All logged out users
+	 */
 	includeSpecialGroups: boolean,
+	/**
+	 * Also fetch the permissions of every user group
+	 * Omitting this info when you don't need it makes the query faster
+	 */
 	includePermissions: boolean
 ): UseUserGroupsTriple => {
 	const { data: userGroups, isLoading } = useGetUserGroups({
@@ -28,6 +37,9 @@ export const useUserGroupOptions = (
 	});
 
 	const userGroupOptions = useMemo(() => {
+		if (isLoading) {
+			return [];
+		}
 		const allOptions = [
 			...(includeSpecialGroups ? GET_SPECIAL_USER_GROUPS() : []),
 			...sortBy(

@@ -348,10 +348,14 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 							onChange={(userGroupIds: string[]) =>
 								onChange({ ...currentNavigationItem, userGroupIds: userGroupIds })
 							}
-							defaultCheckedOptions={[
-								SpecialPermissionGroups.loggedOutUsers,
-								SpecialPermissionGroups.loggedInUsers,
-							]}
+							checkedOptions={
+								currentNavigationItem?.id
+									? []
+									: [
+											SpecialPermissionGroups.loggedOutUsers,
+											SpecialPermissionGroups.loggedInUsers,
+									  ]
+							}
 						/>
 					)}
 				</Column>
