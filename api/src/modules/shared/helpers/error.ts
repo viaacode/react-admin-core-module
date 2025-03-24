@@ -1,6 +1,6 @@
 import util from 'util';
 
-import { default as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import { omitByDeep } from './omit-by-deep';
 
@@ -8,7 +8,7 @@ export class CustomError {
 	public message: string;
 	public innerException: any | null;
 	public additionalInfo: any | null;
-	public identifier: string = uuid();
+	public identifier: string = uuidv4();
 	public name = 'Error';
 	public stack: string;
 	public statusCode = 500;

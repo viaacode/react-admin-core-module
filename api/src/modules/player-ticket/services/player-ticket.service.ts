@@ -31,6 +31,8 @@ import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 import { PlayerTicket } from '../player-ticket.types';
 
+import { CustomError } from 'src/modules/shared/helpers/error';
+
 @Injectable()
 export class PlayerTicketService {
 	private logger: Logger = new Logger(PlayerTicketService.name, {
@@ -180,14 +182,10 @@ export class PlayerTicketService {
 			return `${this.mediaServiceUrl}/${path}?token=${token}`;
 		} catch (err) {
 			console.error(
-				JSON.stringify({
-					message: 'Failed to resolveThumbnailUrl',
-					innerException: err,
-					additionalInfo: {
-						path,
-						referer,
-						ip,
-					},
+				new CustomError('Failed to resolveThumbnailUrl', err, {
+					path,
+					referer,
+					ip,
 				})
 			);
 			return path;
@@ -210,7 +208,14 @@ export class PlayerTicketService {
 			throw new NotFoundException(`Object IE with id '${id}' not found`);
 		}
 
-		console.log({ thumbnailPath: response.graph__intellectual_entity[0].schema_thumbnail_url });
-		return response.graph__intellectual_entity[0].schema_thumbnail_url;
+		const thumbnailPath = response.graph__intellectual_entity[0].schema_thumbnail_url;
+		if (typeof thumbnailPath === 'string') {
+			return thumbnailPath;
+		} else {
+			if (!thumbnailPath || !thumbnailPath[0]) {
+				return null;
+			}
+			return thumbnailPath[0];
+		}
 	}
 }
