@@ -36721,6 +36721,78 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "nl",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "en",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "nl",
+    "value": "Je moet zowel een start als eind datum opgeven",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "en",
+    "value": "Je moet zowel een start als eind datum opgeven",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "nl",
+    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "en",
+    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "nl",
+    "value": "Gelieve een geldige datum in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "en",
+    "value": "Gelieve een geldige datum in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "BACKEND",
     "location": "modules/folders/controllers",
     "key": "default-collection-name",
