@@ -91,14 +91,8 @@ export class PlayerTicketController {
 		ip: string
 	): Promise<string> {
 		try {
-			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
-				// Deprecated unprotected url
-				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
-				.pop()
-				// New protected url
-				.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
-				// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
-				.pop();
+			const fileRepresentationSchemaIdentifier: string | undefined =
+				this.playerTicketService.urlToFilePath(browsePath);
 
 			if (!fileRepresentationSchemaIdentifier) {
 				throw new InternalServerErrorException({
@@ -140,7 +134,11 @@ export class PlayerTicketController {
 		@Ip() ip: string
 	): Promise<string> {
 		try {
-			return await this.playerTicketService.getPlayerToken(filePath, referrer, ip);
+			return await this.playerTicketService.getPlayerToken(
+				this.playerTicketService.urlToFilePath(filePath),
+				referrer,
+				ip
+			);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',

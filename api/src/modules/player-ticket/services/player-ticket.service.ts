@@ -218,4 +218,20 @@ export class PlayerTicketService {
 			return thumbnailPath[0];
 		}
 	}
+
+	public urlToFilePath(url: string): string {
+		return (
+			url
+				// Deprecated unprotected url
+				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
+				.pop()
+				// New protected url
+				.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
+				// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
+				.pop()
+				// IIIF urls
+				.split(/iiif(-qas|-tst|-int|-prd)?\.meemoo\.be\//)
+				.pop()
+		);
+	}
 }
