@@ -23,7 +23,11 @@ export class PlayerTicketController {
 
 	@Get('')
 	@UseGuards(LoggedInGuard)
-	public async getPlayableUrl(@Query() queryParams: GetPlayableUrlDto, @Req() request, @Ip() ip) {
+	public async getPlayableUrl(
+		@Query() queryParams: GetPlayableUrlDto,
+		@Req() request,
+		@Ip() ip
+	): Promise<string | string[]> {
 		if (!queryParams.externalId && !queryParams.externalIds && !queryParams.browsePath) {
 			throw new BadRequestException(
 				'Either query param externalId or browsePath is required to fetch a playable url'
@@ -88,7 +92,12 @@ export class PlayerTicketController {
 	): Promise<string> {
 		try {
 			const fileRepresentationSchemaIdentifier: string | undefined = browsePath
+				// Deprecated unprotected url
 				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
+				.pop()
+				// New protected url
+				.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
+				// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
 				.pop();
 
 			if (!fileRepresentationSchemaIdentifier) {

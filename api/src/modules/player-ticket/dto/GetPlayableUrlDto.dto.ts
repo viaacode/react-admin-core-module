@@ -20,6 +20,7 @@ export class GetPlayableUrlDto {
 		description:
 			'Comma separated list of external ids (avo) or SchemaIdentifiers (hetarchief) of the media items you want to view. externalId, externalIds or browsePath is required.',
 		example: '8k74t8bn2s,rx9380v41s,3n20c62616',
+		required: false,
 	})
 	externalIds: string | undefined;
 
