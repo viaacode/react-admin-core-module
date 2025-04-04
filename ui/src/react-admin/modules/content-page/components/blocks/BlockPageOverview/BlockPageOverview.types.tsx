@@ -37,6 +37,7 @@ export interface PageOverviewWrapperProps {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
+	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;

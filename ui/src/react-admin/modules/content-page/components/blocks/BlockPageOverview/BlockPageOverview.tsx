@@ -40,6 +40,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
+	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
 	showDate?: boolean;
@@ -72,6 +73,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	allowMultiple = false,
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
+	showSectionTitle = false,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
@@ -283,7 +285,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			pagesByLabel[noLabelObj.id] = pages.filter(
 				(page) => !page.labels || !page.labels.length
 			);
-			const showAllLabels = !selectedTabs.length || selectedTabs[0].id === allLabelObj.id;
+			const showAllLabels =
+				selectedTabs.length === 0 || selectedTabs[0].id === allLabelObj.id;
 			const labelsToShow: LabelObj[] = showAllLabels
 				? [...uniqueLabels, noLabelObj]
 				: selectedTabs;
@@ -294,11 +297,13 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				}
 				return (
 					<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
-						{(showAllLabels || allowMultiple) && !!(tabs || []).length && (
-							<Spacer margin="left-small">
-								<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
-							</Spacer>
-						)}
+						{showSectionTitle &&
+							(showAllLabels || allowMultiple) &&
+							!!(tabs || []).length && (
+								<Spacer margin="left-small">
+									<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
+								</Spacer>
+							)}
 						<BlockImageGrid
 							elements={(pagesByLabel[labelObj.id] || []).map(
 								(page: ContentPageInfo): GridItem => ({

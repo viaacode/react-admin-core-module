@@ -273,9 +273,10 @@ export interface PageOverviewBlockComponentStateFields {
 	headerBackgroundColor?: Color;
 	contentType: Avo.ContentPage.Type;
 	itemStyle?: ContentItemStyle;
-	showTitle?: boolean;
-	showDescription?: boolean;
-	showDate?: boolean;
+	showSectionTitle?: boolean; // Title of the label that groups multiple pages
+	showTitle?: boolean; // Title of one of the pages
+	showDescription?: boolean; // Description of one of the pages
+	showDate?: boolean; // Date of one of the pages
 	buttonLabel?: string;
 	itemsPerPage?: number;
 	navigate?: (buttonAction: ButtonAction) => void;

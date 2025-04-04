@@ -29,6 +29,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		headerBackgroundColor: Color.Transparent,
 		contentType: 'FAQ_ITEM',
 		itemStyle: ContentItemStyle.NEWS_LIST,
+		showSectionTitle: false,
 		showTitle: true,
 		showDescription: true,
 		showDate: false,
@@ -94,28 +95,28 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						options: GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS(),
 					},
 				},
+				showSectionTitle: {
+					editorType: ContentBlockEditor.Checkbox,
+					editorProps: {
+						label: tText('Toon de label tussen titels'),
+					} as CheckboxProps,
+				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText(
-							'admin/content-block/helpers/generators/page-overview___toon-de-titel'
-						),
+						label: tText('Toon de pagina titels'),
 					} as CheckboxProps,
 				},
 				showDescription: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText(
-							'admin/content-block/helpers/generators/page-overview___toon-de-beschrijving'
-						),
+						label: tText('Toon de pagina beschrijvingen'),
 					} as CheckboxProps,
 				},
 				showDate: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText(
-							'admin/content-block/helpers/generators/page-overview___toon-de-datum-en-categorie'
-						),
+						label: tText('Toon de pagina datum en categorie'),
 					} as CheckboxProps,
 				},
 				buttonLabel: {
