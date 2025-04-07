@@ -16401,60 +16401,6 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-titel",
-    "language": "nl",
-    "value": "Toon de titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-titel",
-    "language": "en",
-    "value": "Show the title",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-beschrijving",
-    "language": "nl",
-    "value": "Toon de beschrijving",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-beschrijving",
-    "language": "en",
-    "value": "Show the description",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-datum-en-categorie",
-    "language": "nl",
-    "value": "Toon de datum en categorie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
-    "key": "toon-de-datum-en-categorie",
-    "language": "en",
-    "value": "Show the date and category",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/helpers/generators/page-overview",
     "key": "label-voor-de-button-lijst-item",
     "language": "nl",
     "value": "Label voor button (lijstweergave)",
@@ -18033,6 +17979,78 @@
     "key": "error",
     "language": "en",
     "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-label-tussen-titels",
+    "language": "nl",
+    "value": "Toon de label tussen titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-label-tussen-titels",
+    "language": "en",
+    "value": "Toon de label tussen titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-titels",
+    "language": "nl",
+    "value": "Toon de pagina titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-titels",
+    "language": "en",
+    "value": "Toon de pagina titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-beschrijvingen",
+    "language": "nl",
+    "value": "Toon de pagina beschrijvingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-beschrijvingen",
+    "language": "en",
+    "value": "Toon de pagina beschrijvingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-datum-en-categorie",
+    "language": "nl",
+    "value": "Toon de pagina datum en categorie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-datum-en-categorie",
+    "language": "en",
+    "value": "Toon de pagina datum en categorie",
     "value_type": "TEXT"
   },
   {
@@ -35444,6 +35462,78 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "nl",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "language": "en",
+    "value": "De startdatum moet kleiner zijn dan de einddatum",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "nl",
+    "value": "Je moet zowel een start als eind datum opgeven",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "language": "en",
+    "value": "Je moet zowel een start als eind datum opgeven",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "nl",
+    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
+    "language": "en",
+    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "nl",
+    "value": "Gelieve een geldige datum in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
+    "key": "gelieve-een-geldige-datum-in-te-vullen",
+    "language": "en",
+    "value": "Gelieve een geldige datum in te vullen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/visitor-space/components/releaseDate-filter-form/releaseDate-filter-form",
     "key": "operator",
     "language": "nl",
@@ -36722,74 +36812,38 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "location": "modules/account/views/my-folders",
+    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
     "language": "nl",
-    "value": "De startdatum moet kleiner zijn dan de einddatum",
-    "value_type": "TEXT"
+    "value": "Het laden van de objecten in deze folder is mislukt",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "de-startdatum-moet-kleiner-zijn-dan-de-einddatum",
+    "location": "modules/account/views/my-folders",
+    "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
     "language": "en",
-    "value": "De startdatum moet kleiner zijn dan de einddatum",
-    "value_type": "TEXT"
+    "value": "Het laden van de objecten in deze folder is mislukt",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "location": "modules/account/views/my-folders",
+    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
     "language": "nl",
-    "value": "Je moet zowel een start als eind datum opgeven",
-    "value_type": "TEXT"
+    "value": "Er zitten nog geen objecten in deze folder.<br/>Voeg er toe via het bookmark icoon op de zoek of detail paginas",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
+    "location": "modules/account/views/my-folders",
+    "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
     "language": "en",
-    "value": "Je moet zowel een start als eind datum opgeven",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
-    "language": "nl",
-    "value": "Een geldig jaar moet 4 cijfers bevatten",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
-    "language": "en",
-    "value": "Een geldig jaar moet 4 cijfers bevatten",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "gelieve-een-geldige-datum-in-te-vullen",
-    "language": "nl",
-    "value": "Gelieve een geldige datum in te vullen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
-    "key": "gelieve-een-geldige-datum-in-te-vullen",
-    "language": "en",
-    "value": "Gelieve een geldige datum in te vullen",
-    "value_type": "TEXT"
+    "value": "Er zitten nog geen objecten in deze folder.<br/>Voeg er toe via het bookmark icoon op de zoek of detail paginas",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",

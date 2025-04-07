@@ -98,25 +98,33 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 				showSectionTitle: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText('Toon de label tussen titels'),
+						label: tText(
+							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-label-tussen-titels'
+						),
 					} as CheckboxProps,
 				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText('Toon de pagina titels'),
+						label: tText(
+							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-titels'
+						),
 					} as CheckboxProps,
 				},
 				showDescription: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText('Toon de pagina beschrijvingen'),
+						label: tText(
+							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-beschrijvingen'
+						),
 					} as CheckboxProps,
 				},
 				showDate: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
-						label: tText('Toon de pagina datum en categorie'),
+						label: tText(
+							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-datum-en-categorie'
+						),
 					} as CheckboxProps,
 				},
 				buttonLabel: {
