@@ -104,18 +104,27 @@ export class PlayerTicketService {
 		return token.jwt;
 	}
 
-	public async getThumbnailToken(referer: string, ip: string): Promise<string> {
-		const thumbnailPath = 'TESTBEELD/keyframes_all';
-
+	public async getThumbnailTokenCached(
+		browsePath: string,
+		referer: string,
+		ip: string
+	): Promise<string> {
 		try {
 			const token = await this.cacheManager.wrap(
-				`thumbnailToken-${referer}`,
-				() => this.getToken(thumbnailPath, referer, ip),
-				600_000 // 10 minutes
+				`thumbnailToken-${browsePath}-${referer}-${ip}`,
+				() => this.getToken(browsePath, referer, ip),
+				60 * 60 * 1000 // 1 hour
 			);
 			return token.jwt;
 		} catch (err: any) {
-			this.logger.error(`Error getting token: ${err.message}`);
+			this.logger.error(
+				new CustomError('Error getting token', err, {
+					browsePath,
+					referer,
+					ip,
+					errorMessage: err.message,
+				})
+			);
 			throw new InternalServerErrorException('Could not get a thumbnail token');
 		}
 	}
@@ -169,26 +178,37 @@ export class PlayerTicketService {
 		return browsePath;
 	}
 
-	public async resolveThumbnailUrl(path: string, referer: string, ip: string): Promise<string> {
+	public async resolveThumbnailUrl(
+		urlOrPath: string | null | undefined,
+		referer: string,
+		ip: string
+	): Promise<string> {
 		try {
-			if (!path || !referer) {
-				return path;
+			if (!urlOrPath) {
+				return null;
 			}
-			if (path.startsWith('https://') || path.startsWith('http://')) {
-				// Already an absolute path => return path
-				return path;
+			if (!referer) {
+				console.error(
+					new CustomError(
+						'Failed to generate token for thumbnailUrl, since referer is empty',
+						null,
+						{ urlOrPath, referer }
+					)
+				);
+				return urlOrPath;
 			}
-			const token = await this.getThumbnailToken(referer, ip);
-			return `${this.mediaServiceUrl}/${path}?token=${token}`;
+			const browsePath = this.urlToFilePath(urlOrPath);
+			const token = await this.getThumbnailTokenCached(browsePath, referer, ip);
+			return `${this.mediaServiceUrl}/${browsePath}?token=${token}`;
 		} catch (err) {
 			console.error(
 				new CustomError('Failed to resolveThumbnailUrl', err, {
-					path,
+					urlOrPath,
 					referer,
 					ip,
 				})
 			);
-			return path;
+			return urlOrPath;
 		}
 	}
 
@@ -220,18 +240,17 @@ export class PlayerTicketService {
 	}
 
 	public urlToFilePath(url: string): string {
-		return (
-			url
-				// Deprecated unprotected url
-				.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
-				.pop()
-				// New protected url
-				.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
-				// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
-				.pop()
-				// IIIF urls
-				.split(/iiif(-qas|-tst|-int|-prd)?\.meemoo\.be\//)
-				.pop()
-		);
+		const filePath = url
+			// Deprecated unprotected url
+			.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
+			.pop()
+			// New protected url
+			.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
+			// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
+			.pop()
+			// IIIF urls
+			.split(/iiif(-qas|-tst|-int|-prd)?\.meemoo\.be\//)
+			.pop();
+		return filePath;
 	}
 }

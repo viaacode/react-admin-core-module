@@ -389,9 +389,6 @@ export class ContentPagesController {
 		@SessionUser() user: SessionUserEntity
 	): Promise<DbContentPage> {
 		try {
-			console.log(
-				'duplicating assets in content block for user profile: ' + user.getProfileId()
-			);
 			// TODO switch owner to the content page id. But to do this for new content pages that do not have an id yes, we need to create a temp content page (is_temp=true) that we delete again if the page is never saved
 			return await this.assetsService.duplicateAssetsInJsonBlob(
 				contentBlockJson,

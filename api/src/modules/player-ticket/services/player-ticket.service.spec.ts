@@ -173,7 +173,7 @@ describe('PlayerTicketService', () => {
 				await options.ttl(ticket);
 				return ticket;
 			});
-			const token = await playerTicketService.getThumbnailToken('referer', '');
+			const token = await playerTicketService.getThumbnailTokenCached('referer', '');
 			expect(token).toEqual('secret-jwt-token');
 		});
 
@@ -181,7 +181,7 @@ describe('PlayerTicketService', () => {
 			mockCacheManager.wrap.mockRejectedValueOnce('error');
 			let error;
 			try {
-				await playerTicketService.getThumbnailToken('referer', '');
+				await playerTicketService.getThumbnailTokenCached('referer', '');
 			} catch (e) {
 				error = e;
 			}
@@ -197,7 +197,7 @@ describe('PlayerTicketService', () => {
 			};
 			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
 			const getThumbnailTokenSpy = jest
-				.spyOn(playerTicketService, 'getThumbnailToken')
+				.spyOn(playerTicketService, 'getThumbnailTokenCached')
 				.mockResolvedValueOnce('secret-jwt-token');
 
 			const url = await playerTicketService.getThumbnailUrl('vrt-id', 'referer', '');
@@ -209,7 +209,7 @@ describe('PlayerTicketService', () => {
 
 	describe('resolveThumbnailUrl', () => {
 		it('does not get a token for an invalid path', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailToken');
+			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
 			const url = await playerTicketService.resolveThumbnailUrl('', 'referer', '');
 			expect(url).toEqual('');
@@ -219,7 +219,7 @@ describe('PlayerTicketService', () => {
 		});
 
 		it('does not get a token for an invalid referer', async () => {
-			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailToken');
+			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
 			const url = await playerTicketService.resolveThumbnailUrl(
 				'http://thumbnail.jpg',
