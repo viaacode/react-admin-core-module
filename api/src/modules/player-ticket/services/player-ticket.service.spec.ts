@@ -173,7 +173,11 @@ describe('PlayerTicketService', () => {
 				await options.ttl(ticket);
 				return ticket;
 			});
-			const token = await playerTicketService.getThumbnailTokenCached('referer', '');
+			const token = await playerTicketService.getThumbnailTokenCached(
+				'/TESTBEELD/keyframes_all',
+				'referer',
+				'127.0.0.1'
+			);
 			expect(token).toEqual('secret-jwt-token');
 		});
 
@@ -181,7 +185,11 @@ describe('PlayerTicketService', () => {
 			mockCacheManager.wrap.mockRejectedValueOnce('error');
 			let error;
 			try {
-				await playerTicketService.getThumbnailTokenCached('referer', '');
+				await playerTicketService.getThumbnailTokenCached(
+					'/TESTBEELD/keyframes_all',
+					'referer',
+					'127.0.0.1'
+				);
 			} catch (e) {
 				error = e;
 			}

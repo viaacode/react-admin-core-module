@@ -123,28 +123,24 @@ export class PlayerTicketController {
 
 	/**
 	 * Generates a ticket for a file path
-	 * @param filePath eg: image/3/public%252FOR-1c1tf48%252F13%252F13cdb1aa21704313a6ded7da5fabf53f0a9571a68c6540e18725440376c089c2813e3eec887041e1ab908a4c20a46d15.jp2
+	 * @param urlOrPath eg: image/3/public%252FOR-1c1tf48%252F13%252F13cdb1aa21704313a6ded7da5fabf53f0a9571a68c6540e18725440376c089c2813e3eec887041e1ab908a4c20a46d15.jp2
 	 * @param referrer
 	 * @param ip
 	 */
 	@Get('token')
 	public async getTicketServiceTokenForFilePath(
-		@Query('filePath') filePath: string,
+		@Query('filePath') urlOrPath: string,
 		@Query('referrer') referrer: string,
 		@Ip() ip: string
 	): Promise<string> {
 		try {
-			return await this.playerTicketService.getPlayerToken(
-				this.playerTicketService.urlToFilePath(filePath),
-				referrer,
-				ip
-			);
+			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',
 				innerException: err,
 				additionalInfo: {
-					filePath,
+					filePath: urlOrPath,
 					referrer,
 					ip,
 				},

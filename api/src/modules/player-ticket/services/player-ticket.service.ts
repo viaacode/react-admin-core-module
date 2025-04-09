@@ -98,9 +98,9 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getPlayerToken(embedUrl: string, referer: string, ip: string): Promise<string> {
+	public async getPlayerToken(urlOrPath: string, referer: string, ip: string): Promise<string> {
 		// no caching
-		const token = await this.getToken(embedUrl, referer, ip);
+		const token = await this.getToken(this.urlToFilePath(urlOrPath), referer, ip);
 		return token.jwt;
 	}
 
@@ -129,13 +129,9 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getPlayableUrl(
-		fileRepresentationSchemaIdentifier: string,
-		referer: string,
-		ip: string
-	): Promise<string> {
-		const token = await this.getPlayerToken(fileRepresentationSchemaIdentifier, referer, ip);
-		return `${this.mediaServiceUrl}/${fileRepresentationSchemaIdentifier}?token=${token}`;
+	public async getPlayableUrl(urlOrPath: string, referer: string, ip: string): Promise<string> {
+		const token = await this.getPlayerToken(urlOrPath, referer, ip);
+		return `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}?token=${token}`;
 	}
 
 	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
