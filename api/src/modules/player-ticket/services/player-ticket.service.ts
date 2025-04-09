@@ -68,7 +68,6 @@ export class PlayerTicketService {
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
-			name: path,
 		};
 
 		/**
@@ -77,8 +76,10 @@ export class PlayerTicketService {
 		 */
 		try {
 			const baseUrl = process.env.TICKET_SERVICE_URL as string;
+			// Use baseUrl + / + path instead of query param name to pass the browsePath
+			// Since it seems like the query param is being truncated: https://meemoo.atlassian.net/browse/ARC-2817
 			const response = await got
-				.get(baseUrl, {
+				.get(baseUrl + '/' + path, {
 					https: {
 						certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
 						key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
