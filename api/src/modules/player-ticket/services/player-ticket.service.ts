@@ -69,9 +69,6 @@ export class PlayerTicketService {
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
 			maxage: this.ticketServiceMaxAge,
-			// For iiif viewer images, we want the path to be truncated, so any suffix can be added by the ifff viewer
-			// For all the other cases, we want the full path, by concatinating it to the base url
-			...(isIiifImage ? { name: path } : {}),
 		};
 
 		/**
@@ -83,7 +80,7 @@ export class PlayerTicketService {
 			// Use baseUrl + / + path instead of query param name to pass the browsePath
 			// Since it seems like the query param is being truncated: https://meemoo.atlassian.net/browse/ARC-2817
 			const response = await got
-				.get(isIiifImage ? baseUrl : baseUrl + '/' + path, {
+				.get(baseUrl + '/' + path, {
 					https: {
 						certificate: cleanMultilineEnv(process.env.TICKET_SERVICE_CERT),
 						key: cleanMultilineEnv(process.env.TICKET_SERVICE_KEY),
