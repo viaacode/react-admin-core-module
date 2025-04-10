@@ -61,7 +61,6 @@ export class PlayerTicketService {
 	 * @protected
 	 */
 	protected async getToken(path: string, referer: string, ip: string): Promise<PlayerTicket> {
-		const isIiifImage = path.includes('.jp2/');
 		const data = {
 			app: 'hetarchief.be',
 			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
