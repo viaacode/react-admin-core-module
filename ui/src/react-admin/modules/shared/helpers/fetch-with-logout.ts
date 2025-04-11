@@ -29,11 +29,22 @@ export async function fetchWithLogout(
 		goToLoginBecauseOfUnauthorizedError();
 	}
 	if (response.status < 200 || response.status >= 400) {
+		let responseBody: any;
+		try {
+			responseBody = await response.json();
+		} catch (err) {
+			try {
+				responseBody = await response.text();
+			} catch (err) {
+				responseBody = '';
+			}
+		}
 		throw new CustomError('invalid status code', null, {
 			url,
 			fetchOptions: options,
 			response,
 			statusCode: response.status,
+			responseBody,
 		});
 	}
 	return response;
