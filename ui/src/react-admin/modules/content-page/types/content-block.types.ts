@@ -190,6 +190,7 @@ export interface ContentBlockField {
 	editorProps?: any;
 	note?: ReactNode;
 	validator?: (value: any) => string[];
+	isVisible?: (config: ContentBlockConfig) => boolean;
 	repeat?: {
 		defaultState: any;
 		addButtonLabel?: string;
@@ -438,7 +439,7 @@ export interface ContentBlockComponentsConfig {
 	limits?: ContentBlockComponentsLimits;
 	state: ContentBlockComponentState;
 	fields: {
-		[key: string]: any;
+		[key: string]: ContentBlockField;
 	};
 }
 

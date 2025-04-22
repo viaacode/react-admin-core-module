@@ -50,6 +50,10 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 				error = formErrorsForBlock as string[];
 			}
 
+			if (formGroup.fields[key].isVisible && !formGroup.fields[key].isVisible?.(config)) {
+				return null;
+			}
+
 			return (
 				<Spacer
 					key={createKey('form-group', blockIndex, formGroupIndex, stateIndex)}

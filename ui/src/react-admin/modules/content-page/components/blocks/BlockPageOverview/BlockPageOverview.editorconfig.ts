@@ -1,5 +1,6 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 
+import type { BlockPageOverviewProps } from '~modules/content-page/components/blocks';
 import { ContentItemStyle } from '~modules/content-page/components/blocks';
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
 import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
@@ -102,6 +103,9 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-label-tussen-titels'
 						),
 					} as CheckboxProps,
+					isVisible: (config: ContentBlockConfig) =>
+						(config.components.state as BlockPageOverviewProps).itemStyle ===
+						ContentItemStyle.GRID,
 				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,
@@ -126,6 +130,14 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-datum-en-categorie'
 						),
 					} as CheckboxProps,
+					isVisible: (config: ContentBlockConfig) => {
+						const itemStyle = (config.components.state as BlockPageOverviewProps)
+							?.itemStyle;
+						return (
+							itemStyle === ContentItemStyle.NEWS_LIST ||
+							itemStyle === ContentItemStyle.PROJECT_LIST
+						);
+					},
 				},
 				buttonLabel: {
 					label: tText(
