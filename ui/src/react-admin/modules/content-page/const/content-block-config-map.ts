@@ -11,6 +11,7 @@ import {
 	CTAS_BLOCK_CONFIG,
 	EVENTBRITE_BLOCK_CONFIG,
 	HEADING_BLOCK_CONFIG,
+	HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG,
 	IFRAME_BLOCK_CONFIG,
 	IMAGE_BLOCK_CONFIG,
 	IMAGE_GRID_BLOCK_CONFIG,
@@ -72,7 +73,8 @@ export const CONTENT_BLOCK_CONFIG_MAP: Record<
 	[ContentBlockType.TagsWithLink]: TAGS_WITH_LINK_BLOCK_CONFIG,
 	[ContentBlockType.CardsWithoutDescription]: CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG,
 	[ContentBlockType.AvoImageTextBackground]: AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG, // Avo
-	[ContentBlockType.HetArchiefImageTextBackground]: AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG, // Hetarchief
+	[ContentBlockType.HetArchiefImageTextBackground]:
+		HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG, // Hetarchief
 	[ContentBlockType.MaintainersGrid]: MAINTAINERS_GRID_BLOCK_CONFIG,
 	[ContentBlockType.HetArchiefHeaderSearch]: HET_ARCHIEF_HEADER_SEARCH_BLOCK_CONFIG,
 	[ContentBlockType.OverviewNewspaperTitles]: OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG,

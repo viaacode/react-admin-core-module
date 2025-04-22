@@ -502,8 +502,6 @@ export interface ImageTextBackgroundBlockComponentState {
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
 	content: string;
-	contentWidth: number;
-	contentPosition: number;
 	textPadding: SpacerOption;
 	foregroundColor: Color;
 	backgroundColor: Color;
