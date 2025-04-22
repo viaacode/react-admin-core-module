@@ -32,7 +32,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	allowMultiple = false,
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
-	showSectionTitle = false,
+	showSectionTitle = true,
 	showTitle = true,
 	showDescription = true,
 	showDate = false,

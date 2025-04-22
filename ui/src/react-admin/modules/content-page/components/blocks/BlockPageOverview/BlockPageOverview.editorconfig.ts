@@ -29,7 +29,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		headerBackgroundColor: Color.Transparent,
 		contentType: 'FAQ_ITEM',
 		itemStyle: ContentItemStyle.NEWS_LIST,
-		showSectionTitle: false,
+		showSectionTitle: true,
 		showTitle: true,
 		showDescription: true,
 		showDate: false,
