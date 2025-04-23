@@ -40,7 +40,7 @@
     "bump": "bump-package-versions --part=patch --strategy=highest ../package.json ./package.json ../api/package.json",
     "list-of-changed-translations-hetarchief": "git diff v4.3.66..v4.3.73 --no-ext-diff --unified=0 --exit-code -a --no-prefix all-translations-het-archief.sql > translation-changes.txt",
     "list-of-changed-translations-avo": "git diff v4.3.36..v4.3.49 --no-ext-diff --unified=0 --exit-code -a --no-prefix all-translations-avo.sql > translation-changes.txt",
-    "list-commit-messages-between-tags": "git log v4.3.66..v4.3.73 --pretty=format:\"%B\" > commit_messages.txt",
+    "list-commit-messages-between-tags": "git log v4.3.73..v4.3.76 --pretty=format:\"%B\" > commit_messages.txt",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
     "list-bundled-files": "npx depcruise src/react-admin --include-only \"^src\" --output-type text",
     "analyse": "source-map-explorer 'dist/index.mjs' --no-border-checks"
