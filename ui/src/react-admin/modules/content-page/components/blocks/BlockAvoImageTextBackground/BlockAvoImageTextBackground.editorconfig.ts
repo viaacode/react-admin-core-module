@@ -3,22 +3,15 @@ import {
 	GET_ALIGN_OPTIONS,
 	GET_SIMPLE_ALIGN_OPTIONS,
 } from '~modules/content-page/const/get-align-options';
-import {
-	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_COLOR_OPTIONS_EXTENDED_AVO,
-	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
-} from '~modules/content-page/const/get-color-options';
-import {
-	GET_FULL_HEADING_TYPE_OPTIONS,
-	GET_HEADING_SIZE_OPTIONS,
-} from '~modules/content-page/const/get-heading-type-options';
+import { GET_COLOR_OPTIONS_EXTENDED_AVO } from '~modules/content-page/const/get-color-options';
+import { GET_HEADING_SIZE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
 import type { FileUploadProps } from '~modules/shared/components/FileUpload/FileUpload';
 import { GET_ADMIN_ICON_OPTIONS } from '~modules/shared/consts/icons.consts';
 import { tText } from '~shared/helpers/translation-functions';
 import type {
+	AvoImageTextBackgroundBlockComponentState,
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	ImageTextBackgroundBlockComponentState,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
@@ -28,22 +21,21 @@ import {
 	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-import { isAvo } from '~shared/helpers/is-avo';
 import type { MultiRangeProps } from '@viaa/avo2-components';
 import { PHOTO_TYPES } from '~shared/helpers/files';
 
 export const INITIAL_AVO_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
-	(): ImageTextBackgroundBlockComponentState => ({
+	(): AvoImageTextBackgroundBlockComponentState => ({
 		heading: '',
-		headingType: isAvo() ? 'h1' : 'h3',
+		headingType: 'h1',
 		headingSize: 'medium',
 		content: '',
+		textAlign: 'center',
 		textPadding: 'small',
 		contentWidth: 60,
 		contentPosition: 0,
 		foregroundColor: Color.Black,
 		backgroundColor: Color.TealBright,
-		backgroundAlignment: isAvo() ? 'fill-screen' : 'left-inside-page',
 		buttonLabel: '',
 		buttonIconAlignment: 'left',
 	});
@@ -86,14 +78,12 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: isAvo()
-						? [
-								{
-									label: tText('admin/content-block/content-block___h-1'),
-									value: 'h1',
-								},
-						  ]
-						: GET_FULL_HEADING_TYPE_OPTIONS(),
+					options: [
+						{
+							label: tText('admin/content-block/content-block___h-1'),
+							value: 'h1',
+						},
+					],
 				},
 			},
 			headingSize: {
@@ -148,12 +138,8 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_COLOR_OPTIONS_EXTENDED_AVO(),
+					defaultValue: GET_COLOR_OPTIONS_EXTENDED_AVO()[0],
 				},
 			},
 			backgroundColor: {
@@ -162,12 +148,8 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_COLOR_OPTIONS_EXTENDED_AVO(),
+					defaultValue: GET_COLOR_OPTIONS_EXTENDED_AVO()[0],
 				},
 			},
 			textPadding: PADDING_SINGLE_VALUE_FIELD(
@@ -266,12 +248,8 @@ export const AVO_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_COLOR_OPTIONS_EXTENDED_AVO(),
+					defaultValue: GET_COLOR_OPTIONS_EXTENDED_AVO()[0],
 				},
 			},
 		},

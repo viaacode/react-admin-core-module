@@ -35,10 +35,6 @@ export const GET_BACKGROUND_ALIGN_OPTIONS: () => {
 	value: BackgroundAlignOption;
 }[] = () => [
 	{
-		label: tText('modules/content-page/const/get-align-options___schermbreed'),
-		value: 'fill-screen',
-	},
-	{
 		label: tText(
 			'react-admin/modules/content-page/const/get-align-options___linker-scherm-rand'
 		),

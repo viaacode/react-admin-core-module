@@ -25,6 +25,12 @@ export enum ContentPageWidth {
 	EXTRA_LARGE = 'EXTRA_LARGE', // 1300
 }
 
+export const CONTENT_PAGE_WIDTH_TO_REM: Record<ContentPageWidth, string> = {
+	MEDIUM: '72rem',
+	LARGE: '94rem',
+	EXTRA_LARGE: '130rem',
+} as const;
+
 // Content Overview
 export type ContentOverviewTableCols =
 	| 'title'

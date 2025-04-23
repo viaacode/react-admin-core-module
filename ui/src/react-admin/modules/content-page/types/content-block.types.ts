@@ -498,16 +498,39 @@ export interface CardWithoutDescriptionBlockComponentState {
 	backgroundColor: string;
 }
 
-export interface ImageTextBackgroundBlockComponentState {
+export interface AvoImageTextBackgroundBlockComponentState {
 	heading: string;
 	headingType: HeadingTypeOption;
 	headingSize: HeadingSizeOption;
 	content: string;
-	textPadding: SpacerOption;
+	textAlign: AlignOption;
+	contentWidth: number;
+	contentPosition: number;
 	foregroundColor: Color;
 	backgroundColor: Color;
+	textPadding: SpacerOption;
 	image?: string;
-	backgroundAlignment?: BackgroundAlignOption;
+	imageAttribution?: string;
+	imageAttributionText?: string;
+	buttonAction?: ButtonAction;
+	buttonAltTitle?: string;
+	buttonLabel: string;
+	buttonType?: ButtonType;
+	buttonIcon?: IconName;
+	buttonIconAlignment?: SimpleAlignOption;
+}
+
+export interface HetArchiefImageTextBackgroundBlockComponentState {
+	heading: string;
+	headingType: HeadingTypeOption;
+	headingSize: HeadingSizeOption;
+	content: string;
+	textAlign: AlignOption;
+	foregroundColor: Color;
+	backgroundColor: Color;
+	textPadding: SpacerOption;
+	image?: string;
+	imageAlignment?: BackgroundAlignOption;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;

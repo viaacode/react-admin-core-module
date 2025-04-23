@@ -6,7 +6,6 @@ import {
 } from '~modules/content-page/const/get-align-options';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_COLOR_OPTIONS_EXTENDED_AVO,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 } from '~modules/content-page/const/get-color-options';
 import {
@@ -19,7 +18,7 @@ import { tText } from '~shared/helpers/translation-functions';
 import type {
 	ContentBlockConfig,
 	DefaultContentBlockState,
-	ImageTextBackgroundBlockComponentState,
+	HetArchiefImageTextBackgroundBlockComponentState,
 } from '../../../types/content-block.types';
 import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 
@@ -29,18 +28,18 @@ import {
 	PADDING_SINGLE_VALUE_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-import { isAvo } from '~shared/helpers/is-avo';
 
 export const INITIAL_HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_COMPONENTS_STATE =
-	(): ImageTextBackgroundBlockComponentState => ({
+	(): HetArchiefImageTextBackgroundBlockComponentState => ({
 		heading: '',
-		headingType: isAvo() ? 'h1' : 'h3',
+		headingType: 'h3',
 		headingSize: 'medium',
 		content: '',
+		textAlign: 'left',
 		textPadding: 'small',
 		foregroundColor: Color.Black,
-		backgroundColor: Color.TealBright,
-		backgroundAlignment: isAvo() ? 'fill-screen' : 'left-inside-page',
+		backgroundColor: Color.White,
+		imageAlignment: 'left-inside-page',
 		buttonLabel: '',
 		buttonIconAlignment: 'left',
 	});
@@ -86,20 +85,11 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: isAvo()
-						? [
-								{
-									label: tText('admin/content-block/content-block___h-1'),
-									value: 'h1',
-								},
-						  ]
-						: GET_FULL_HEADING_TYPE_OPTIONS(),
+					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
 			headingSize: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___titel-grootte'
-				),
+				label: tText('Titel grootte'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_SIZE_OPTIONS(),
@@ -117,38 +107,22 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				},
 			},
 			foregroundColor: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-kleur'
-				),
+				label: tText('Tekst kleur'),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 				},
 			},
 			backgroundColor: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___achtergrond-kleur-tekst'
-				),
+				label: tText('Achtergrond kleur tekst'),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 				},
 			},
-			textPadding: PADDING_SINGLE_VALUE_FIELD(
-				tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-padding-achtergrondkleur'
-				)
-			),
+			textPadding: PADDING_SINGLE_VALUE_FIELD(tText('Tekst padding achtergrondkleur')),
 			image: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/image-text-background/image-text-background___image'
@@ -160,7 +134,7 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 					allowMulti: false,
 				} as FileUploadProps,
 			},
-			backgroundAlignment: {
+			imageAlignment: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-image-text-background/block-image-text-background___afbeelding-uitlijning'
 				),
@@ -168,20 +142,6 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 				editorProps: {
 					options: GET_BACKGROUND_ALIGN_OPTIONS(),
 				},
-			},
-			imageAttribution: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-bronvermelding'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
-			},
-			imageAttributionText: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___bijschrift-beschrijving'
-				),
-				editorType: ContentBlockEditor.TextInput,
-				validator: undefined,
 			},
 			buttonType: {
 				label: tText(
@@ -239,17 +199,11 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: tText(
-					'modules/content-page/components/blocks/block-image-text-background/block-image-text-background___achtergrond-kleur-blok'
-				),
+				label: tText('Achtergrond kleur blok'),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
-					options: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
-					defaultValue: isAvo()
-						? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
-						: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+					options: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+					defaultValue: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 				},
 			},
 		},
