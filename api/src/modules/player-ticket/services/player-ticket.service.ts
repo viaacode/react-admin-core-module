@@ -239,14 +239,17 @@ export class PlayerTicketService {
 	public urlToFilePath(url: string): string {
 		const filePath = url
 			// Deprecated unprotected url
-			.split(/archief-media(-qas|-tst|-int|-prd)?\.viaa\.be\/viaa\//g)
+			.split(/archief-media(-int|-tst|-qas|-prd)?\.viaa\.be\/viaa\//g)
 			.pop()
 			// New protected url
-			.split(/media(-qas|-tst|-int|-prd)?\.viaa\.be[/.]play\/v2\//)
-			// .split(/media(-qas|-tst|-int|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
+			.split(/media(-int|-tst|-qas|-prd)?\.viaa\.be[/.]play\/v2\//)
+			// .split(/media(-int|-tst|-qas|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
 			.pop()
 			// IIIF urls
-			.split(/iiif(-qas|-tst|-int|-prd)?\.meemoo\.be\//)
+			.split(/iiif(-int|-tst|-qas|-prd)?\.meemoo\.be\//)
+			.pop()
+			// Alto urls
+			.split(/s3(-int|-tst|-qas|-prd)?\.do\.viaa\.be\//)
 			.pop();
 		return filePath;
 	}
