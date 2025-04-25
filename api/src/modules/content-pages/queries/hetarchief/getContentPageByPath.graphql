@@ -1,7 +1,5 @@
-query getContentPageByPath($path: String!, $language: lookup_languages_enum!) {
-	app_content_page(
-		where: { path: { _eq: $path }, language: { _eq: $language }, is_deleted: { _eq: false } }
-	) {
+query getContentPageByPath($path: String!) {
+	app_content_page(where: { path: { _eq: $path }, is_deleted: { _eq: false } }) {
 		content_type
 		content_width
 		created_at

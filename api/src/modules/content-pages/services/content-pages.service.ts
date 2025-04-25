@@ -33,15 +33,15 @@ import {
 	type GetItemTileByIdQueryVariables,
 	type Lookup_Enum_Content_Block_Types_Enum,
 	Order_By,
-	PublishContentPageMutation as PublishContentPageMutationAvo,
-	UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
+	type PublishContentPageMutation as PublishContentPageMutationAvo,
+	type UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
 } from '../../shared/generated/graphql-db-types-avo';
 import {
 	App_Content_Block_Insert_Input,
 	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
 	App_Content_Page_Bool_Exp,
 	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
-	PublishContentPageMutationHetArchief,
+	type PublishContentPageMutation as PublishContentPageMutationHetArchief,
 	UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { customError } from '../../shared/helpers/custom-error';
@@ -384,23 +384,58 @@ export class ContentPagesService {
 		};
 	}
 
-	public async getContentPageByLanguageAndPath(
-		language: Locale,
-		path: string
-	): Promise<DbContentPage | null> {
+	private async getContentPagesByPath(path: string): Promise<GqlContentPage[]> {
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetContentPageByPathQuery'],
 			ContentPageQueryTypes['GetContentPageByPathQueryVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetContentPageByPathDocument, {
-			language,
 			path,
 		});
-		const contentPage: GqlContentPage | undefined =
+		const contentPages: GqlContentPage[] =
 			(response as ContentPageQueryTypes['GetContentPageByPathQueryHetArchief'])
-				?.app_content_page?.[0] ||
-			(response as ContentPageQueryTypes['GetContentPageByPathQueryAvo'])?.app_content?.[0];
+				?.app_content_page ||
+			(response as ContentPageQueryTypes['GetContentPageByPathQueryAvo'])?.app_content ||
+			[];
 
-		return this.adaptContentPage(contentPage);
+		return contentPages;
+	}
+
+	/**
+	 * Tries to find the correct content page by language and path. (eg: /en/vragen)
+	 * If it finds a content page with the correct path but not the correct language, (eg: /nl/vragen)
+	 * then it searches the matching content page in the other language (eg: /en/questions)
+	 * If this also fails, then it returns null
+	 * @param language nl or en
+	 * @param path path including leading slash but without language. eg: /vragen
+	 */
+	public async getContentPageByLanguageAndPath(
+		language: Locale,
+		path: string
+	): Promise<DbContentPage | null> {
+		let contentPages: GqlContentPage[] = await this.getContentPagesByPath(path);
+
+		// Try to find the content page with the correct language
+		let contentPage = contentPages?.find((page) => page.language === language) || null;
+
+		if (contentPage) {
+			return this.adaptContentPage(contentPage);
+		}
+
+		const translatedPage = contentPages?.[0]?.translated_content_pages?.find(
+			(page) => page.language === language
+		);
+		if (translatedPage) {
+			// Found a page in the correct language, but the path doesn't match, client will have to redirect
+			contentPages = await this.getContentPagesByPath(path);
+		}
+
+		contentPage = contentPages?.find((page) => page.language === language) || null;
+
+		if (contentPage) {
+			return this.adaptContentPage(contentPage);
+		}
+
+		return null; // Not found
 	}
 
 	public async getContentPageByLanguageAndPathForUser(
@@ -411,7 +446,7 @@ export class ContentPagesService {
 		ip = '',
 		onlyInfo = false
 	): Promise<DbContentPage | null> {
-		const contentPage: DbContentPage | undefined = await this.getContentPageByLanguageAndPath(
+		const contentPage: DbContentPage | null = await this.getContentPageByLanguageAndPath(
 			language,
 			path
 		);

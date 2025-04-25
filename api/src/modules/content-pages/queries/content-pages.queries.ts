@@ -140,7 +140,7 @@ import {
 	type InsertContentMutation as InsertContentMutationHetArchief,
 	type InsertContentMutationVariables as InsertContentMutationVariablesHetArchief,
 	PublishContentPageDocument as PublishContentPageDocumentHetArchief,
-	type PublishContentPageMutationHetArchief as PublishContentPageMutationHetArchief,
+	type PublishContentPageMutation as PublishContentPageMutationHetArchief,
 	type PublishContentPageMutationVariables as PublishContentPageMutationVariablesHetArchief,
 	SoftDeleteContentDocument as SoftDeleteContentDocumentHetArchief,
 	type SoftDeleteContentMutation as SoftDeleteContentMutationHetArchief,
