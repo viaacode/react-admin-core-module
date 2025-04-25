@@ -201,6 +201,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___cover-afbeelding'
 									)}
+									className="field-thumbnail-path"
 								>
 									<FileUpload
 										ownerId={commonUser.profileId}
@@ -224,6 +225,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___titel'
 									)}
 									required
+									className="field-title"
 								>
 									<TextInput
 										onChange={(value) => {
@@ -240,6 +242,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										changeContentPageProp('description', html);
 									}}
 									formError={formErrors.description}
+									className="field-description"
 								></ContentPageEditFormDescription>
 							</Column>
 							<Column size="12">
@@ -257,6 +260,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 											contentPageInfo.seoDescription?.length || 0
 										} / ${CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING})`
 									}
+									className="field-seo-description"
 								>
 									<TextArea
 										value={contentPageInfo.seoDescription || ''}
@@ -276,6 +280,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___beschrijving-voor-export-bv-klaar-nieuwsbrief'
 									)}
+									className="field-meta-description"
 								>
 									<TextArea
 										value={contentPageInfo.metaDescription || ''}
@@ -293,7 +298,10 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 								PermissionName.EDIT_PROTECTED_PAGE_STATUS
 							) && (
 								<Column size="12">
-									<FormGroup error={formErrors.isProtected}>
+									<FormGroup
+										error={formErrors.isProtected}
+										className="field-is-protected"
+									>
 										<Checkbox
 											checked={contentPageInfo.isProtected}
 											label={tText(
@@ -313,6 +321,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___url'
 									)}
 									required
+									className="field-path"
 								>
 									<TextInput
 										onChange={(value) => changeContentPageProp('path', value)}
@@ -331,6 +340,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												'admin/content/views/content-detail___auteur'
 											)}
 											required
+											className="field-user-profile-id"
 										>
 											<ContentPicker
 												hideTargetSwitch
@@ -360,6 +370,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										'admin/content/components/content-edit-form/content-edit-form___content-type'
 									)}
 									required
+									className="field-content-type"
 								>
 									<Select
 										onChange={handleContentTypeChange}
@@ -374,6 +385,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___content-breedte'
 									)}
+									className="field-contentWidth"
 								>
 									<Select
 										onChange={(value) =>
@@ -389,6 +401,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									label={tText(
 										'admin/content/components/content-edit-form/content-edit-form___labels'
 									)}
+									className="field-labels"
 								>
 									<TagsInput
 										value={mapLabelsToTags(contentPageInfo.labels || [])}
@@ -422,6 +435,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										label={tText(
 											'modules/content-page/components/content-edit-form/content-edit-form___taal'
 										)}
+										className="field-language"
 									>
 										<Select
 											options={allLanguageOptions}
@@ -446,6 +460,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										label={tText(
 											'modules/content-page/components/content-edit-form/content-edit-form___nederlandse-hoofd-pagina'
 										)}
+										className="field-nl-parent-page"
 									>
 										<ContentPicker
 											value={getParentPagePickerItem()}
@@ -490,6 +505,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 												  ]
 										}
 										disabledOptions={[lastUserGroup.id]}
+										className="field-user-group-ids"
 									/>
 								</Column>
 							)}

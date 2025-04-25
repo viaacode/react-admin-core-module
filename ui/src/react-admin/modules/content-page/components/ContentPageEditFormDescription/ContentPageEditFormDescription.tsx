@@ -12,11 +12,12 @@ interface ContentPageEditFormDescriptionProps {
 	value: string;
 	onChange: (value: string) => void;
 	formError: string | undefined;
+	className?: string;
 }
 
 export const ContentPageEditFormDescription: FunctionComponent<
 	ContentPageEditFormDescriptionProps
-> = ({ value, onChange, formError }) => {
+> = ({ value, onChange, formError, className }) => {
 	const [description, setDescription] = useState(value || '');
 
 	return (
@@ -33,6 +34,7 @@ export const ContentPageEditFormDescription: FunctionComponent<
 					stripHtml(description)?.length || 0
 				} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
 			}
+			className={className}
 		>
 			<RichTextEditorWithInternalStateWrapper
 				value={description}

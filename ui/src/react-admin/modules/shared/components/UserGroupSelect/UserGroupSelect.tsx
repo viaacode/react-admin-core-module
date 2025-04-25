@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import { Checkbox } from '@meemoo/react-components';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
+import clsx from 'clsx';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;
@@ -17,6 +18,7 @@ export interface UserGroupSelectProps {
 	disabledOptions?: string[];
 	required: boolean;
 	onChange: (selectedUserGroupIds: string[]) => void;
+	className?: string;
 }
 
 export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
@@ -28,6 +30,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	disabledOptions = [],
 	onChange,
 	required,
+	className,
 }) => {
 	const [userGroupOptions] = useUserGroupOptions('TagInfo', true, false) as [
 		TagInfo[],
@@ -69,7 +72,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 			error={error}
 			label={getLabel()}
 			required={required}
-			className="c-user-group-select"
+			className={clsx('c-user-group-select', className)}
 		>
 			<CheckboxGroup>
 				{userGroupOptions.map((userGroupOption) => {
