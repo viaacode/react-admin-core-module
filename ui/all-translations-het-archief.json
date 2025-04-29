@@ -1154,24 +1154,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-align-options",
-    "key": "schermbreed",
-    "language": "nl",
-    "value": "Schermbreed",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/const/get-align-options",
-    "key": "schermbreed",
-    "language": "en",
-    "value": "Full screen width",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/const/get-align-options",
     "key": "linker-scherm-rand",
     "language": "nl",
@@ -18055,6 +18037,96 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "titel-grootte",
+    "language": "nl",
+    "value": "Titel grootte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "titel-grootte",
+    "language": "en",
+    "value": "Titel grootte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-kleur",
+    "language": "nl",
+    "value": "Tekst kleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-kleur",
+    "language": "en",
+    "value": "Tekst kleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "nl",
+    "value": "Achtergrond kleur tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "en",
+    "value": "Achtergrond kleur tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "nl",
+    "value": "Tekst padding achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "en",
+    "value": "Tekst padding achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "nl",
+    "value": "Achtergrond kleur blok",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "en",
+    "value": "Achtergrond kleur blok",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -28677,42 +28749,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "zoek-op-naam-locatie-jaar",
-    "language": "nl",
-    "value": "Zoek op naam, locatie, jaar",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "zoek-op-naam-locatie-jaar",
-    "language": "en",
-    "value": "Search by name, location, year",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
-    "language": "nl",
-    "value": "We konden geen resultaten vinden. Gelieve een andere zoekterm in te geven.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
-    "language": "en",
-    "value": "No results were found. Please retry with a different search term.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
     "key": "spring-naar-de-locatie-van-deze-naam",
     "language": "nl",
     "value": "Spring naar de locatie van deze naam",
@@ -28743,6 +28779,42 @@
     "key": "meer-info-over-deze-persoon",
     "language": "en",
     "value": "More info about this person",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-op-naam-locatie-jaar",
+    "language": "nl",
+    "value": "Zoek op naam, locatie, jaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-op-naam-locatie-jaar",
+    "language": "en",
+    "value": "Search by name, location, year",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
+    "language": "nl",
+    "value": "We konden geen resultaten vinden. Gelieve een andere zoekterm in te geven.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
+    "language": "en",
+    "value": "No results were found. Please retry with a different search term.",
     "value_type": "TEXT"
   },
   {
@@ -35546,7 +35618,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
     "language": "en",
-    "value": "Een geldig jaar moet 4 cijfers bevatten",
+    "value": "A valid year must contain 4 digits",
     "value_type": "TEXT"
   },
   {
@@ -35564,7 +35636,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "gelieve-een-geldige-datum-in-te-vullen",
     "language": "en",
-    "value": "Gelieve een geldige datum in te vullen",
+    "value": "Please enter a valid date",
     "value_type": "TEXT"
   },
   {
@@ -36843,6 +36915,60 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "geboorte-jaar-en-plaats",
+    "language": "nl",
+    "value": "Geboorte jaar en plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "geboorte-jaar-en-plaats",
+    "language": "en",
+    "value": "Geboorte jaar en plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "sterfte-jaar-en-plaats",
+    "language": "nl",
+    "value": "Sterfte jaar en plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "sterfte-jaar-en-plaats",
+    "language": "en",
+    "value": "Sterfte jaar en plaats",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/components/search-input-with-results/search-input-with-results-pagination",
+    "key": "0-resultaten",
+    "language": "nl",
+    "value": "0 resultaten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/iiif-viewer/components/search-input-with-results/search-input-with-results-pagination",
+    "key": "0-resultaten",
+    "language": "en",
+    "value": "0 resultaten",
     "value_type": "TEXT"
   },
   {
