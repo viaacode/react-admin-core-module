@@ -1,12 +1,5 @@
-query getNavigationItemsByPlacement(
-	$placement: String!
-	$searchTerm: String!
-	$orderBy: [app_navigation_order_by!]!
-) {
-	app_navigation(
-		order_by: $orderBy
-		where: { placement: { _eq: $placement }, label: { _ilike: $searchTerm } }
-	) {
+query getNavigationItemsByPlacement($placement: String!, $orderBy: [app_navigation_order_by!]!) {
+	app_navigation(order_by: $orderBy, where: { placement: { _eq: $placement } }) {
 		id
 		created_at
 		description

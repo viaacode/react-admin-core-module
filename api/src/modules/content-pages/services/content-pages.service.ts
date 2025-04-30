@@ -41,7 +41,7 @@ import {
 	type App_Content_Block_Set_Input as App_Content_Block_Set_Input_HetArchief,
 	App_Content_Page_Bool_Exp,
 	type GetContentPagesToPublishQuery as GetContentPagesToPublishQueryHetArchief,
-	PublishContentPageMutationHetArchief,
+	PublishContentPageMutation as PublishContentPageMutationHetArchief,
 	UnpublishContentPageMutation as UnpublishContentPageMutationHetArchief,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { customError } from '../../shared/helpers/custom-error';

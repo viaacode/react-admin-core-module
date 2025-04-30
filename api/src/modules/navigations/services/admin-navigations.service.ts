@@ -135,7 +135,6 @@ export class AdminNavigationsService {
 		let navigationsResponse:
 			| NavigationQueryTypes['GetNavigationItemsByPlacementAndLanguageQuery']
 			| NavigationQueryTypes['GetNavigationItemsByPlacementQuery'];
-		const searchTermDb = '%' + (searchTerm || '') + '%';
 
 		if (languages?.length) {
 			navigationsResponse = await this.dataService.execute<
@@ -147,7 +146,6 @@ export class AdminNavigationsService {
 				{
 					placement,
 					languages,
-					searchTerm: searchTermDb,
 					orderBy: { [orderProperty]: orderDirection },
 				}
 			);
@@ -157,12 +155,11 @@ export class AdminNavigationsService {
 				NavigationQueryTypes['GetNavigationItemsByPlacementQueryVariables']
 			>(NAVIGATION_QUERIES[getDatabaseType()].GetNavigationItemsByPlacementDocument, {
 				placement,
-				searchTerm: searchTermDb,
 				orderBy: { [orderProperty]: orderDirection },
 			});
 		}
 
-		return (
+		const navItems = (
 			(navigationsResponse as NavigationQueryTypes['GetNavigationItemsByPlacementQueryAvo'])
 				.app_content_nav_elements ||
 			(
@@ -170,6 +167,15 @@ export class AdminNavigationsService {
 			).app_navigation ||
 			[]
 		).map(this.adapt);
+
+		if (!searchTerm) {
+			return navItems;
+		}
+
+		return navItems.filter((item) => {
+			const searchTermLower = searchTerm.toLowerCase();
+			return item.label?.toLowerCase().includes(searchTermLower);
+		});
 	}
 
 	public async findAllNavigationBarItems(language?: Locale): Promise<NavigationItem[]> {
