@@ -14468,7 +14468,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "titel-grootte",
     "language": "en",
-    "value": "Titel grootte",
+    "value": "Title size",
     "value_type": "TEXT"
   },
   {
@@ -14486,7 +14486,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "tekst-kleur",
     "language": "en",
-    "value": "Tekst kleur",
+    "value": "Text colour",
     "value_type": "TEXT"
   },
   {
@@ -14495,7 +14495,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-tekst",
     "language": "nl",
-    "value": "Achtergrond kleur tekst",
+    "value": "Achtergrondkleur tekst",
     "value_type": "TEXT"
   },
   {
@@ -14504,7 +14504,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-tekst",
     "language": "en",
-    "value": "Achtergrond kleur tekst",
+    "value": "Text background colour",
     "value_type": "TEXT"
   },
   {
@@ -14522,7 +14522,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "tekst-padding-achtergrondkleur",
     "language": "en",
-    "value": "Tekst padding achtergrondkleur",
+    "value": "Text padding background colour",
     "value_type": "TEXT"
   },
   {
@@ -14549,7 +14549,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-blok",
     "language": "nl",
-    "value": "Achtergrond kleur blok",
+    "value": "Achtergrondkleur blok",
     "value_type": "TEXT"
   },
   {
@@ -14558,7 +14558,7 @@
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-blok",
     "language": "en",
-    "value": "Achtergrond kleur blok",
+    "value": "Block background colour",
     "value_type": "TEXT"
   },
   {
@@ -28211,7 +28211,7 @@
     "location": "pages/index",
     "key": "logged-out-home-title",
     "language": "nl",
-    "value": "Ter plaatse kijken &amp; luisteren",
+    "value": "Ter plaatse kijken, lezen &amp; luisteren",
     "value_type": "HTML"
   },
   {
@@ -28220,7 +28220,7 @@
     "location": "pages/index",
     "key": "logged-out-home-title",
     "language": "en",
-    "value": "Search and find digital heritage",
+    "value": "Watch, read &amp; listen on-site",
     "value_type": "HTML"
   },
   {
@@ -28229,7 +28229,7 @@
     "location": "pages/index",
     "key": "logged-out-home-description",
     "language": "nl",
-    "value": "Zoek een aanbieder en krijg ter plaatse toegang tot een deel van hun audiovisueel archiefmateriaal via deze bezoekertool. Benieuwd hoe het werkt?",
+    "value": "Kies een aanbieder uit het lijstje en krijg ter plaatse toegang tot (een deel van) hun digitaal erfgoed. Benieuwd hoe het werkt?",
     "value_type": "HTML"
   },
   {
@@ -28238,7 +28238,7 @@
     "location": "pages/index",
     "key": "logged-out-home-description",
     "language": "en",
-    "value": "Find an organisation and get on-site access to part of their audiovisual archive material through this visitor tool. Curious how it works?",
+    "value": "Choose a provider from the list and get on-site access to (part of) their digital heritage. Curious how it works?",
     "value_type": "HTML"
   },
   {
@@ -28751,7 +28751,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "geboorte-jaar-en-plaats",
     "language": "nl",
-    "value": "Geboorte jaar en plaats",
+    "value": "Geboortejaar en -plaats",
     "value_type": "TEXT"
   },
   {
@@ -28760,7 +28760,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "geboorte-jaar-en-plaats",
     "language": "en",
-    "value": "Geboorte jaar en plaats",
+    "value": "Year and location of birth",
     "value_type": "TEXT"
   },
   {
@@ -28769,7 +28769,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "sterfte-jaar-en-plaats",
     "language": "nl",
-    "value": "Sterfte jaar en plaats",
+    "value": "Sterftejaar en -plaats",
     "value_type": "TEXT"
   },
   {
@@ -28778,7 +28778,7 @@
     "location": "modules/ie-objects/components/names-list/names-list",
     "key": "sterfte-jaar-en-plaats",
     "language": "en",
-    "value": "Sterfte jaar en plaats",
+    "value": "Year and location of death",
     "value_type": "TEXT"
   },
   {
@@ -28821,24 +28821,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "zoek-op-naam-locatie-jaar",
-    "language": "nl",
-    "value": "Zoek op naam, locatie, jaar",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
-    "key": "zoek-op-naam-locatie-jaar",
-    "language": "en",
-    "value": "Search by name, location, year",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/names-list/names-list",
     "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
     "language": "nl",
     "value": "We konden geen resultaten vinden. Gelieve een andere zoekterm in te geven.",
@@ -28851,6 +28833,24 @@
     "key": "we-konden-geen-resultaten-vinden-gelieve-een-andere-zoekterm-in-te-geven",
     "language": "en",
     "value": "No results were found. Please retry with a different search term.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-op-naam-locatie-jaar",
+    "language": "nl",
+    "value": "Zoek op naam, locatie, jaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/names-list/names-list",
+    "key": "zoek-op-naam-locatie-jaar",
+    "language": "en",
+    "value": "Search by name, location, year",
     "value_type": "TEXT"
   },
   {
@@ -29068,6 +29068,24 @@
     "language": "en",
     "value": "Next",
     "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
+    "language": "nl",
+    "value": "<p><a href=\"/namenlijst-gesneuvelden\">Wat is dit?</a></p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
+    "language": "en",
+    "value": "<p><a href=\"/en/the-list-of-names\">What is this?</a></p>",
+    "value_type": "HTML"
   },
   {
     "app": "HET_ARCHIEF",
@@ -30206,24 +30224,6 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
-    "language": "nl",
-    "value": "<p><a href=\"/namenlijst-gesneuvelden\">Wat is dit?</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
-    "language": "en",
-    "value": "<p><a href=\"/en/the-list-of-names\">What is this?</a></p>",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
     "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
     "key": "trefwoorden",
     "language": "nl",
@@ -30308,7 +30308,7 @@
     "location": "modules/iiif-viewer/components/search-input-with-results/search-input-with-results-pagination",
     "key": "0-resultaten",
     "language": "en",
-    "value": "0 resultaten",
+    "value": "0 results",
     "value_type": "TEXT"
   },
   {
@@ -35816,7 +35816,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "een-geldig-jaar-moet-4-cijfers-bevatten",
     "language": "en",
-    "value": "A valid year must contain 4 digits",
+    "value": "A valid year must consist of 4 digits",
     "value_type": "TEXT"
   },
   {
@@ -37113,6 +37113,60 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De naam van de krant serie is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
+    "language": "en",
+    "value": "De naam van de krant serie is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De locatie waar het object is gemaakt is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
+    "language": "en",
+    "value": "De locatie waar het object is gemaakt is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De naam van de persoon is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
+    "language": "en",
+    "value": "De naam van de persoon is een verplicht veld",
     "value_type": "TEXT"
   },
   {
