@@ -34646,7 +34646,61 @@
     "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
     "key": "de-naam-van-de-maker-is-een-verplicht-veld",
     "language": "en",
-    "value": "De naam van de maker is een verplicht veld",
+    "value": "The name of the creator is a required field",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De naam van de krant serie is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
+    "language": "en",
+    "value": "The name of the newspaper series is a required field",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De locatie waar het object is gemaakt is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
+    "language": "en",
+    "value": "The location where the object was created is a required field",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
+    "language": "nl",
+    "value": "De naam van de persoon is een verplicht veld",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
+    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
+    "language": "en",
+    "value": "The name of the person is a required field",
     "value_type": "TEXT"
   },
   {
@@ -37113,60 +37167,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De naam van de krant serie is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
-    "language": "en",
-    "value": "De naam van de krant serie is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De locatie waar het object is gemaakt is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-locatie-waar-het-object-is-gemaakt-is-een-verplicht-veld",
-    "language": "en",
-    "value": "De locatie waar het object is gemaakt is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
-    "language": "nl",
-    "value": "De naam van de persoon is een verplicht veld",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
-    "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
-    "language": "en",
-    "value": "De naam van de persoon is een verplicht veld",
     "value_type": "TEXT"
   },
   {
