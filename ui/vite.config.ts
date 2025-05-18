@@ -22,15 +22,18 @@ export default defineConfig({
 				client: resolve(__dirname, 'src/client.mts'),
 			},
 			name: '@meemoo/admin-core-ui',
-			fileName: (_, entryName) => {
-				console.log('entryName', entryName);
-				return `${entryName}.mjs`;
+			fileName: (format, entryName) => {
+				if (entryName === 'src/index') {
+					return `index.${format === 'es' ? 'js' : 'cjs'}`;
+				}
+				return `${entryName}.${format === 'es' ? 'js' : 'cjs'}`;
 			},
 			formats: ['es'],
 		},
 		rollupOptions: {
 			output: {
 				entryFileNames: '[name].mjs',
+				preserveModules: true,
 			},
 		},
 		sourcemap: true,
