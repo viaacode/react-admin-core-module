@@ -17,6 +17,7 @@ import { sanitizeHtml } from '~shared/helpers/sanitize';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 import { showToast } from '~shared/helpers/show-toast';
 import { tText } from '~shared/helpers/translation-functions';
+import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,
@@ -117,7 +118,7 @@ export function convertDbContentBlockToContentBlockConfig(
 
 			return {
 				...cleanConfig,
-				id,
+				id: id || TEMP_BLOCK_ID_PREFIX + Date.now(),
 				components: {
 					...cleanConfig.components,
 					state: componentState,

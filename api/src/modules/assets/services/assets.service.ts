@@ -1,3 +1,4 @@
+import { Agent as HttpsAgent } from 'https';
 import path from 'path';
 
 import { Sha256 } from '@aws-crypto/sha256-js';
@@ -10,6 +11,7 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { NodeHttpHandler } from '@smithy/node-http-handler';
 import { HttpRequest } from '@smithy/protocol-http';
 import { SignatureV4 } from '@smithy/signature-v4';
 import { AssetType } from '@viaa/avo2-types';
@@ -125,6 +127,11 @@ export class AssetsService {
 				resolveBodyOnly: true, // this is duplicate but fixes a typing error
 			});
 
+			const agent = new HttpsAgent({
+				keepAlive: true,
+				maxSockets: 50,
+				timeout: 30000, // socket timeout
+			});
 			this.s3 = new S3({
 				credentials: await this.getValidToken(),
 
@@ -132,6 +139,12 @@ export class AssetsService {
 
 				bucketEndpoint: false, // Pass the bucket as a bucket name, not a full url
 				region: 'eu-west-1',
+
+				requestHandler: new NodeHttpHandler({
+					httpsAgent: agent,
+					connectionTimeout: 5000, // time to establish TCP connection (ms)
+					requestTimeout: 10000, // time to wait for data once connected (ms)
+				}),
 			});
 
 			return this.s3;
@@ -385,7 +398,13 @@ export class AssetsService {
 				// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
 				// Download the asset and upload it again to the asset service of this environment
 				const response = await got.get(url).buffer();
-				await s3Client.putObject({ Key: newKey, Bucket: bucket, Body: response });
+				console.log('received buffer from url: ', url);
+				const s3Response = await s3Client.putObject({
+					Key: newKey,
+					Bucket: bucket,
+					Body: response,
+				});
+				console.log('uploaded buffer to s3: ', newKey, s3Response);
 			}
 			return this.getUrlFromKey(newKey as string);
 		} catch (err) {

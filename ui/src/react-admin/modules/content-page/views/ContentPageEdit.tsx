@@ -254,6 +254,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				delete contentBlock.id;
 			});
 
+			// Remove parent dutch page
+			newContentPageConfig.nlParentPageId = null;
+
 			// Set author to current user
 			newContentPageConfig.userProfileId = commonUser.profileId;
 			newContentPageConfig.owner = {
@@ -286,6 +289,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 							// Reorder the combined array of content block positions
 							return {
 								...block,
+								id: TEMP_BLOCK_ID_PREFIX + Date.now(),
 								position: blockIndex,
 							};
 						}),
