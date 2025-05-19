@@ -58,7 +58,7 @@ export function getKeyWithoutComponent(
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
-const __dirname = path.dirname(import.meta.url.replace('file:///', ''));
+const __dirname = path.dirname(import.meta.url.replace('file://', ''));
 
 function getFormattedKey(filePath: string, key: string): string {
 	const fileKey = filePath
