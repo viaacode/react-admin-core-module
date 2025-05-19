@@ -9334,6 +9334,87 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "titel-grootte",
+    "language": "nl",
+    "value": "Titel grootte",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-kleur",
+    "language": "nl",
+    "value": "Tekst kleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-tekst",
+    "language": "nl",
+    "value": "Achtergrond kleur tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "tekst-padding-achtergrondkleur",
+    "language": "nl",
+    "value": "Tekst padding achtergrondkleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "achtergrond-kleur-blok",
+    "language": "nl",
+    "value": "Achtergrond kleur blok",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-label-tussen-titels",
+    "language": "nl",
+    "value": "Toon de label tussen titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-titels",
+    "language": "nl",
+    "value": "Toon de pagina titels",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-beschrijvingen",
+    "language": "nl",
+    "value": "Toon de pagina beschrijvingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "toon-de-pagina-datum-en-categorie",
+    "language": "nl",
+    "value": "Toon de pagina datum en categorie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -29292,6 +29373,87 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/controller",
+    "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
+    "language": "nl",
+    "value": "Het logout pad voor idp {{idpType}} is niet gedefinieerd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/controller",
+    "key": "het-login-pad-voor-idp-idp-type-is-niet-gedefinieerd",
+    "language": "nl",
+    "value": "Het login pad voor idp {{idpType}} is niet gedefinieerd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/controller",
+    "key": "cannot-create-idp-map-for-idp-type-idp-type-because-the-idp-user-id-could-not-be-found",
+    "language": "nl",
+    "value": "Cannot create idp map for idp type {{idpType}} because the idp user id could not be found",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "er-ging-iets-mis-bij-het-inloggen-voor-de-embed-code",
+    "language": "nl",
+    "value": "Er ging iets mis bij het inloggen voor de embed code",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "er-ging-iets-mis-na-het-inloggen-voor-de-embed-code-de-state-parameter-is-niet-geldig",
+    "language": "nl",
+    "value": "Er ging iets mis na het inloggen voor de embed code: De state parameter is niet geldig",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "er-ging-iets-mis-na-het-inloggen-voor-de-embed-code-de-id-token-ontbreekt",
+    "language": "nl",
+    "value": "Er ging iets mis na het inloggen voor de embed code: De id token ontbreekt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-id-token-geen-sleutel-id-bevat",
+    "language": "nl",
+    "value": "De login voor deze embed is mislukt omdat de id token geen sleutel id bevat",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-embed-code-is-niet-gevonden-deze-bestaat-niet-of-is-verwijderd",
+    "language": "nl",
+    "value": "De embed code is niet gevonden. Deze bestaat niet of is verwijderd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "er-ging-iets-mis-na-het-inloggen-voor-de-embed-code",
+    "language": "nl",
+    "value": "Er ging iets mis na het inloggen voor de embed code",
     "value_type": "TEXT"
   }
 ]
