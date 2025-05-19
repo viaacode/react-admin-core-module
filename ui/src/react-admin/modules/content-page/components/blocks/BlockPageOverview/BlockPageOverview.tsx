@@ -185,6 +185,27 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		return null;
 	};
 
+	const renderGrid = (pages: ContentPageInfo[]): ReactNode => {
+		return (
+			<BlockImageGrid
+				elements={pages.map(
+					(page: ContentPageInfo): GridItem => ({
+						title: showTitle ? page.title : undefined,
+						text: getDescription(page),
+						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
+						action: { type: 'CONTENT_PAGE', value: page.path as string },
+					})
+				)}
+				itemWidth="30.7rem"
+				imageHeight="17.2rem"
+				imageWidth="30.7rem"
+				renderLink={renderLink}
+				fill="cover"
+				textAlign="left"
+			/>
+		);
+	};
+
 	const renderPages = () => {
 		if (
 			itemStyle === ContentItemStyle.NEWS_LIST ||
@@ -291,38 +312,36 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				? [...uniqueLabels, noLabelObj]
 				: selectedTabs;
 
-			return labelsToShow.map((labelObj) => {
-				if (!(pagesByLabel[labelObj.id] || []).length) {
-					return null;
-				}
-				return (
-					<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
-						{showSectionTitle &&
-							(showAllLabels || allowMultiple) &&
-							!!(tabs || []).length && (
-								<Spacer margin="left-small">
-									<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
-								</Spacer>
-							)}
-						<BlockImageGrid
-							elements={(pagesByLabel[labelObj.id] || []).map(
-								(page: ContentPageInfo): GridItem => ({
-									title: showTitle ? page.title : undefined,
-									text: getDescription(page),
-									source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-									action: { type: 'CONTENT_PAGE', value: page.path as string },
-								})
-							)}
-							itemWidth="30.7rem"
-							imageHeight="17.2rem"
-							imageWidth="30.7rem"
-							renderLink={renderLink}
-							fill="cover"
-							textAlign="left"
-						/>
-					</Spacer>
-				);
-			});
+			if (showSectionTitle) {
+				// Render each page under their label section (can have duplicates)
+				return labelsToShow.map((labelObj) => {
+					if (!(pagesByLabel[labelObj.id] || []).length) {
+						return null;
+					}
+					return (
+						<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
+							{showSectionTitle &&
+								(showAllLabels || allowMultiple) &&
+								!!(tabs || []).length && (
+									<Spacer margin="left-small">
+										<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
+									</Spacer>
+								)}
+							{renderGrid(pagesByLabel[labelObj.id])}
+						</Spacer>
+					);
+				});
+			} else {
+				// Render all pages in a grid without section titles (unique pages only)
+				let pagesToShow = labelsToShow.flatMap((labelObj) => {
+					if (!(pagesByLabel[labelObj.id] || []).length) {
+						return [];
+					}
+					return pagesByLabel[labelObj.id];
+				});
+				pagesToShow = uniqBy(pagesToShow, (page) => page.id);
+				return renderGrid(pagesToShow);
+			}
 		}
 		if (itemStyle === ContentItemStyle.ACCORDION) {
 			// Ensure the focused page is not loaded twice on the same pagination page (ACCORDION)
