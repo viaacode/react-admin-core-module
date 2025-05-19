@@ -76,7 +76,7 @@ export function convertUserInfoToCommonUser(
 						}
 					: null,
 				idps: Object.fromEntries(
-					user.idpmapObjects.map((idpMapObject) => [
+					(user.idpmapObjects || []).map((idpMapObject) => [
 						idpMapObject.idp as Idp,
 						idpMapObject.idp_user_id as string,
 					])
