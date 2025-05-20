@@ -252,3 +252,5 @@ bundle-stats.html
 schema.graphql
 
 ui/vite.config.js
+ui/translation-changes.txt
+ui/commit_messages.txt
