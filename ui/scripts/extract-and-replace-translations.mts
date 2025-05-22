@@ -28,6 +28,7 @@ import { execSync } from 'child_process';
 import * as fs from 'fs/promises';
 import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
 import * as path from 'path';
+import { green, grey, red, yellow } from 'console-log-colors';
 
 import { executeDatabaseQuery } from './execute-database-query.mts';
 import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
@@ -58,7 +59,13 @@ export function getKeyWithoutComponent(
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
-const __dirname = path.dirname(import.meta.url.replace('file://', ''));
+const metaUrl = import.meta.url;
+const __dirname = path.dirname(
+	metaUrl
+		.replace('file://', '')
+		// Replace /C:/ with C:/ on Windows
+		.replace(new RegExp('/([A-Z]):/', 'g'), '$1:/')
+);
 
 function getFormattedKey(filePath: string, key: string): string {
 	const fileKey = filePath
@@ -130,7 +137,7 @@ function getTranslationEntryFromCallExpression(
 	if (apps.includes(app)) {
 		if (hasKeyAlready && !oldTranslations[formattedKey]) {
 			console.error(
-				`Failed to find old translation in ${oldTranslationsPath} for key: `,
+				red(`Failed to find old translation in ${oldTranslationsPath} for key: `),
 				formattedKey
 			);
 		}
@@ -197,10 +204,12 @@ async function extractTranslationsFromCodeFiles(
 				const functionName = callExpression.getFirstChild()?.getText();
 				return (
 					!functionCallText.includes('IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION') &&
-					(functionName?.endsWith('tHtml') || functionName?.endsWith('tText'))
+					// Only accept functions where the name is tHtml or tHtml or ends with tText or tHtml
+					(['tText', 'tHtml'].includes(functionName?.split('.').pop() || '')
 				);
 			});
 
+		// For each tText and tHtml function call, extract the translation value and replace it with a translation key
 		translationFunctionCalls.forEach((callExpression) => {
 			const functionCallExpressionName = callExpression.getFirstChild()?.getText() as string;
 			const functionCallName = (
@@ -213,16 +222,18 @@ async function extractTranslationsFromCodeFiles(
 			const firstParameter = functionParameters[0];
 			if (firstParameter.getKind() !== SyntaxKind.StringLiteral) {
 				console.error(
-					JSON.stringify({
-						message:
-							'First parameter of tText and tHtml must be a literal string and not a variable or function call return.',
-						additionalInfo: {
-							file: sourceFile.getBaseName(),
-							callExpression: callExpression.getText(),
-							line: callExpression.getStartLineNumber(),
-							character: callExpression.getStartLinePos(),
-						},
-					})
+					red(
+						JSON.stringify({
+							message:
+								'First parameter of tText and tHtml must be a literal string and not a variable or function call return.',
+							additionalInfo: {
+								file: sourceFile.getBaseName(),
+								callExpression: callExpression.getText(),
+								line: callExpression.getStartLineNumber(),
+								character: callExpression.getStartLinePos(),
+							},
+						})
+					)
 				);
 				return;
 			}
@@ -347,14 +358,16 @@ async function combineTranslations(
 
 		if (!nlOnlineTranslation && !nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
-				'Failed to find translation in online, nl.json and in code: ' + translationKey
+				red('Failed to find translation in online, nl.json and in code: ' + translationKey)
 			);
 		}
 
 		if (!nlOnlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
 			console.error(
-				'Only found translation in nl.json, not in online translations not in code: ' +
-					translationKey
+				red(
+					'Only found translation in nl.json, not in online translations not in code: ' +
+						translationKey
+				)
 			);
 		}
 
@@ -404,9 +417,11 @@ async function combineTranslations(
 
 	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
 
-	console.info(`Wrote ${totalTranslations} to ${outputJsonFile}`);
-	console.info(`\t${addedTranslationKeys.length} translations added`);
-	console.info(`\t${removedTranslationKeys.length} translations deleted`);
+	console.info(grey(`Wrote ${totalTranslations} to ${outputJsonFile}`));
+	const added = `\t${addedTranslationKeys.length} translations added`;
+	console.info(addedTranslationKeys.length === 0 ? grey(added) : green(added));
+	const deleted = `\t${removedTranslationKeys.length} translations deleted`;
+	console.info(removedTranslationKeys.length === 0 ? grey(deleted) : yellow(deleted));
 
 	return combinedTranslationEntries;
 }
@@ -477,6 +492,12 @@ function resolvePath(...filePaths: string[]): string {
 	return path.resolve(__dirname, ...filePaths).replace(/\\/g, '/');
 }
 
+function formatCode(path: string) {
+	process.stdout.write(grey('Formatting code...'));
+	execSync(`cd ${path} && npm run format`);
+	console.info(green('done\n'));
+}
+
 async function extractAvoAdminCoreTranslations() {
 	// AVO admin-core
 	console.info('Extracting AVO admin-core translations...');
@@ -487,8 +508,7 @@ async function extractAvoAdminCoreTranslations() {
 		'../shared/translations/avo/nl.json',
 		resolvePath('../tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('..')} && npm run format`);
+	formatCode(resolvePath('../'));
 	return avoAdminCoreTranslations;
 }
 
@@ -502,8 +522,7 @@ async function extractAvoClientTranslations() {
 		'shared/translations/nl.json',
 		resolvePath('../../../avo2-client/tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('../../../avo2-client')} && npm run format`);
+	formatCode(resolvePath('../../../avo2-client'));
 	return avoClientTranslations;
 }
 
@@ -517,8 +536,7 @@ async function extractAvoProxyTranslations() {
 		'shared/translations/nl.json',
 		resolvePath('../../../avo2-proxy/server/tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('../../../avo2-proxy/server')} && npm run format`);
+	formatCode(resolvePath('../../../avo2-proxy/server'));
 	return avoProxyTranslations;
 }
 
@@ -532,8 +550,7 @@ async function extractHetArchiefAdminCoreTranslations() {
 		'../shared/translations/hetArchief/nl.json',
 		resolvePath('../tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('..')} && npm run format`);
+	formatCode(resolvePath('../'));
 	return hetArchiefAdminCoreTranslations;
 }
 
@@ -547,8 +564,7 @@ async function extractHetArchiefClientTranslations() {
 		'../public/locales/nl/common.json',
 		resolvePath('../../../hetarchief-client/tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('../../../hetarchief-client')} && npm run format`);
+	formatCode(resolvePath('../../../hetarchief-client'));
 	return hetArchiefClientTranslations;
 }
 
@@ -562,8 +578,7 @@ async function extractHetArchiefProxyTranslations() {
 		'shared/i18n/locales/nl.json',
 		resolvePath('../../../hetarchief-proxy/tsconfig.json')
 	);
-	console.info('Formatting code\n');
-	execSync(`cd ${resolvePath('../../../hetarchief-proxy')} && npm run format`);
+	formatCode(resolvePath('../../../hetarchief-proxy'));
 	return hetArchiefProxyTranslations;
 }
 
@@ -621,9 +636,9 @@ async function extractTranslations() {
 		sqlFilePath.replace('.sql', '.json'),
 		JSON.stringify(allTranslations, null, 2)
 	);
-	console.info('Finished writing ' + allTranslations.length + ' translations');
+	console.info(green('Finished writing ' + allTranslations.length + ' translations'));
 }
 
 extractTranslations().catch((err) => {
-	console.error('Extracting translations failed: ', err);
+	console.error(red('Extracting translations failed: '), err);
 });
