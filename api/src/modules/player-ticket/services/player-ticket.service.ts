@@ -70,10 +70,6 @@ export class PlayerTicketService {
 			maxage: this.ticketServiceMaxAge,
 		};
 
-		console.log('requesting ticket with ', data, {
-			url: process.env.TICKET_SERVICE_URL + '/' + path,
-		});
-
 		/**
 		 * Build the full URL from the base TICKET_SERVICE_URL and the path;
 		 * then append the query params from `data`.
