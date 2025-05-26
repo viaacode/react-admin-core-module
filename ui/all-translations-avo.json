@@ -11738,6 +11738,33 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "admin/items/items",
+    "key": "aangemaakt-door",
+    "language": "nl",
+    "value": "Aangemaakt door",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/items",
+    "key": "aangemaakt-op",
+    "language": "nl",
+    "value": "Aangemaakt op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/items",
+    "key": "gedeeld-op",
+    "language": "nl",
+    "value": "Gedeeld op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "admin/pupil-collection/pupil-collection",
     "key": "a-selectie-verwijderen",
     "language": "nl",
@@ -12422,6 +12449,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "assignment/components/assignment-teacher-tabs",
+    "key": "communicatie",
+    "language": "nl",
+    "value": "Communicatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "assignment/views/assignment-create",
     "key": "placeholder",
     "language": "nl",
@@ -12741,6 +12777,24 @@
     "key": "mijn-collectie",
     "language": "nl",
     "value": "Mijn collectie",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/hooks/use-get-assignment-marcom-entries",
+    "key": "het-ophalen-van-de-marcom-entries-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de marcom entries is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/hooks/use-get-klascement-assignment-publish-info",
+    "key": "het-ophalen-van-de-klascement-informatie-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de klascement informatie is mislukt",
     "value_type": "HTML"
   },
   {
@@ -14091,6 +14145,159 @@
     "key": "deel-deze-opdracht-met-collegas",
     "language": "nl",
     "value": "Deel deze opdracht met collega's",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "publiceren-naar-klascement-gelukt",
+    "language": "nl",
+    "value": "Publiceren naar klascement gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "publiceren-naar-klascement-mislukt",
+    "language": "nl",
+    "value": "Publiceren naar klascement mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "het-verwijderen-van-de-marcom-entry-is-gelukt",
+    "language": "nl",
+    "value": "Het verwijderen van de marcom entry is gelukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "verwijder-de-marcom-entry",
+    "language": "nl",
+    "value": "Verwijder de marcom entry",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "het-toevoegen-van-de-marcom-entry-is-gelukt",
+    "language": "nl",
+    "value": "Het toevoegen van de marcom entry is gelukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "er-zijn-nog-geen-marcom-entries-voor-deze-opdracht",
+    "language": "nl",
+    "value": "Er zijn nog geen marcom entries voor deze opdracht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "eerdere-communicatie",
+    "language": "nl",
+    "value": "Eerdere communicatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "meest-recente-communicatie",
+    "language": "nl",
+    "value": "Meest recente communicatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "datum-communicatie",
+    "language": "nl",
+    "value": "Datum communicatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "kanaal-type",
+    "language": "nl",
+    "value": "Kanaal type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "kanaal-naam",
+    "language": "nl",
+    "value": "Kanaal naam",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "link",
+    "language": "nl",
+    "value": "Link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "toevoegen",
+    "language": "nl",
+    "value": "Toevoegen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "opmerkingen",
+    "language": "nl",
+    "value": "Opmerkingen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "publiceren-naar-klascement",
+    "language": "nl",
+    "value": "Publiceren naar klascement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-opdracht-publiek-staat",
+    "language": "nl",
+    "value": "Je kan enkel publiceren naar klascement als deze opdracht publiek staat",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "publiceer-naar-klascement",
+    "language": "nl",
+    "value": "Publiceer naar klascement",
     "value_type": "TEXT"
   },
   {
@@ -16410,6 +16617,42 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-collectie-publiek-staat",
+    "language": "nl",
+    "value": "Je kan enkel publiceren naar klascement als deze collectie publiek staat",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "de-collectie-moet-eerst-gepubliceerd-worden-op-avo",
+    "language": "nl",
+    "value": "De collectie moet eerst gepubliceerd worden op AVO",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "de-collectie-is-reeds-gepubliceerd-naar-klascement-bewerk-het-leermiddel-daar",
+    "language": "nl",
+    "value": "De collectie is reeds gepubliceerd naar klascement. Bewerk het leermiddel daar.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "bezig-met-publiceren-naar-klascement",
+    "language": "nl",
+    "value": "Bezig met publiceren naar Klascement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "afbeelding-voor-de-embed-code",
     "language": "nl",
     "value": "Afbeelding voor de embed code",
@@ -17025,6 +17268,15 @@
     "key": "het-loskoppelen-van-je-profiel-van-de-collectie-is-mislukt",
     "language": "nl",
     "value": "Het loskoppelen van je profiel en de collectie is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/hooks/use-get-klascement-publish-info",
+    "key": "het-ophalen-van-de-klascement-informatie-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de klascement informatie is mislukt",
     "value_type": "HTML"
   },
   {
@@ -23001,6 +23253,15 @@
     "key": "dit-fragment-is-nog-niet-gedeeld",
     "language": "nl",
     "value": "Dit fragment is nog niet gedeeld.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/items/views/item-detail",
+    "key": "dit-fragment-werd-nog-niets-gedeeld-op-smartschool-of-bookwidgets",
+    "language": "nl",
+    "value": "Dit fragment werd nog niets gedeeld op Smartschool of Bookwidgets",
     "value_type": "TEXT"
   },
   {
@@ -29180,271 +29441,10 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "admin/items/items",
-    "key": "aangemaakt-door",
+    "location": "embed/embed-app",
+    "key": "deze-embedcode-heeft-geen-jwt-query-param-en-kan-dus-niet-geladen-worden",
     "language": "nl",
-    "value": "Aangemaakt door",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/items",
-    "key": "aangemaakt-op",
-    "language": "nl",
-    "value": "Aangemaakt op",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/items",
-    "key": "gedeeld-op",
-    "language": "nl",
-    "value": "Gedeeld op",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/components/assignment-teacher-tabs",
-    "key": "communicatie",
-    "language": "nl",
-    "value": "Communicatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/hooks/use-get-assignment-marcom-entries",
-    "key": "het-ophalen-van-de-marcom-entries-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de marcom entries is mislukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/hooks/use-get-klascement-assignment-publish-info",
-    "key": "het-ophalen-van-de-klascement-informatie-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de klascement informatie is mislukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "publiceren-naar-klascement-gelukt",
-    "language": "nl",
-    "value": "Publiceren naar klascement gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "publiceren-naar-klascement-mislukt",
-    "language": "nl",
-    "value": "Publiceren naar klascement mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "het-verwijderen-van-de-marcom-entry-is-gelukt",
-    "language": "nl",
-    "value": "Het verwijderen van de marcom entry is gelukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "verwijder-de-marcom-entry",
-    "language": "nl",
-    "value": "Verwijder de marcom entry",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "verwijder-de-marcom-entry",
-    "language": "nl",
-    "value": "Verwijder de marcom entry",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "het-toevoegen-van-de-marcom-entry-is-gelukt",
-    "language": "nl",
-    "value": "Het toevoegen van de marcom entry is gelukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "er-zijn-nog-geen-marcom-entries-voor-deze-opdracht",
-    "language": "nl",
-    "value": "Er zijn nog geen marcom entries voor deze opdracht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "eerdere-communicatie",
-    "language": "nl",
-    "value": "Eerdere communicatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "meest-recente-communicatie",
-    "language": "nl",
-    "value": "Meest recente communicatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "datum-communicatie",
-    "language": "nl",
-    "value": "Datum communicatie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "kanaal-type",
-    "language": "nl",
-    "value": "Kanaal type",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "kanaal-naam",
-    "language": "nl",
-    "value": "Kanaal naam",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "link",
-    "language": "nl",
-    "value": "Link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "toevoegen",
-    "language": "nl",
-    "value": "Toevoegen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "opmerkingen",
-    "language": "nl",
-    "value": "Opmerkingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "publiceren-naar-klascement",
-    "language": "nl",
-    "value": "Publiceren naar klascement",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-opdracht-publiek-staat",
-    "language": "nl",
-    "value": "Je kan enkel publiceren naar klascement als deze opdracht publiek staat",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit-marcom",
-    "key": "publiceer-naar-klascement",
-    "language": "nl",
-    "value": "Publiceer naar klascement",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-marcom",
-    "key": "je-kan-enkel-publiceren-naar-klascement-als-deze-collectie-publiek-staat",
-    "language": "nl",
-    "value": "Je kan enkel publiceren naar klascement als deze collectie publiek staat",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-marcom",
-    "key": "de-collectie-moet-eerst-gepubliceerd-worden-op-avo",
-    "language": "nl",
-    "value": "De collectie moet eerst gepubliceerd worden op AVO",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-marcom",
-    "key": "de-collectie-is-reeds-gepubliceerd-naar-klascement-bewerk-het-leermiddel-daar",
-    "language": "nl",
-    "value": "De collectie is reeds gepubliceerd naar klascement. Bewerk het leermiddel daar.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-marcom",
-    "key": "bezig-met-publiceren-naar-klascement",
-    "language": "nl",
-    "value": "Bezig met publiceren naar Klascement",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/hooks/use-get-klascement-publish-info",
-    "key": "het-ophalen-van-de-klascement-informatie-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de klascement informatie is mislukt",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/item-detail",
-    "key": "dit-fragment-werd-nog-niets-gedeeld-op-smartschool-of-bookwidgets",
-    "language": "nl",
-    "value": "Dit fragment werd nog niets gedeeld op Smartschool of Bookwidgets",
+    "value": "Deze embedcode heeft geen jwt query param en kan dus niet geladen worden",
     "value_type": "TEXT"
   },
   {
