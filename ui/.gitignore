@@ -31,3 +31,4 @@ data/*
 # Translation changes files
 /translation-changes-avo.txt
 /translation-changes-het-archief.txt
+/commit_messages.txt
