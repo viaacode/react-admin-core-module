@@ -10433,6 +10433,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "embed/embed-app",
+    "key": "deze-embedcode-heeft-geen-jwt-query-param-en-kan-dus-niet-geladen-worden",
+    "language": "nl",
+    "value": "Deze embedcode heeft geen jwt query param en kan dus niet geladen worden",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "embed-code/embed-code",
     "key": "titel",
     "language": "nl",
@@ -11958,6 +11967,33 @@
     "key": "eigenaar",
     "language": "nl",
     "value": "Eigenaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-admin",
+    "key": "redactie",
+    "language": "nl",
+    "value": "Redactie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-admin",
+    "key": "ja",
+    "language": "nl",
+    "value": "Ja",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-admin",
+    "key": "nee",
+    "language": "nl",
+    "value": "Nee",
     "value_type": "TEXT"
   },
   {
@@ -14295,6 +14331,24 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-edit-marcom",
+    "key": "de-opdracht-is-reeds-gepubliceerd-naar-klascement-bewerk-het-leermiddel-daar",
+    "language": "nl",
+    "value": "De opdracht is reeds gepubliceerd naar klascement. Bewerk het leermiddel daar.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
+    "key": "bezig-met-publiceren-naar-klascement",
+    "language": "nl",
+    "value": "Bezig met publiceren naar klascement",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit-marcom",
     "key": "publiceer-naar-klascement",
     "language": "nl",
     "value": "Publiceer naar klascement",
@@ -16338,33 +16392,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "collection/components/collection-or-bundle-edit-admin",
-    "key": "redactie",
-    "language": "nl",
-    "value": "Redactie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-admin",
-    "key": "ja",
-    "language": "nl",
-    "value": "Ja",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-admin",
-    "key": "nee",
-    "language": "nl",
-    "value": "Nee",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "collection/components/collection-or-bundle-edit-admin",
     "key": "bundels-die-deze-collectie-bevatten",
     "language": "nl",
     "value": "Bundels die deze collectie bevatten",
@@ -16655,7 +16682,16 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "afbeelding-voor-de-embed-code",
     "language": "nl",
-    "value": "Afbeelding voor de embed code",
+    "value": "Afbeelding voor de embed code. 630x380 groot",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "collection/components/collection-or-bundle-edit-marcom",
+    "key": "afbeelding-die-gepubliceerd-is-naar-klascement-voor-deze-collectie",
+    "language": "nl",
+    "value": "Afbeelding die gepubliceerd is naar klascement voor deze collectie",
     "value_type": "TEXT"
   },
   {
@@ -17841,6 +17877,24 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed/components/embed",
+    "key": "deze-video-is-niet-meer-beschikbaar",
+    "language": "nl",
+    "value": "Deze video is niet meer beschikbaar",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/error-view",
+    "key": "oeps-er-liep-iets-mis-probeer-het-opnieuw-br-lukt-het-nog-steeds-niet-dan-is-dit-fragment-mogelijks-verwijderd",
+    "language": "nl",
+    "value": "Oeps, er liep iets mis. Probeer het opnieuw.<br/> Lukt het nog steeds niet? Dan is dit fragment mogelijks verwijderd.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
     "key": "aanbieder",
     "language": "nl",
     "value": "Aanbieder:",
@@ -17867,10 +17921,10 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "embed/components/error-view",
-    "key": "oeps-er-liep-iets-mis-probeer-het-opnieuw-br-lukt-het-nog-steeds-niet-dan-is-dit-fragment-mogelijks-verwijderd",
+    "location": "embed/components/embed-error-view",
+    "key": "deze-video-is-niet-meer-beschikbaar",
     "language": "nl",
-    "value": "Oeps, er liep iets mis. Probeer het opnieuw.<br/> Lukt het nog steeds niet? Dan is dit fragment mogelijks verwijderd.",
+    "value": "Deze video is niet meer beschikbaar",
     "value_type": "HTML"
   },
   {
@@ -18177,6 +18231,15 @@
     "key": "code-kopieren",
     "language": "nl",
     "value": "Code kopiëren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
+    "key": "gebruiken-in-smartschool",
+    "language": "nl",
+    "value": "Gebruiken in smartschool",
     "value_type": "TEXT"
   },
   {
@@ -18551,6 +18614,24 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "item/views/item-detail",
+    "key": "gebruiken-in-smartschool",
+    "language": "nl",
+    "value": "Gebruiken in smartschool",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "item/views/item-detail",
+    "key": "fragment-delen",
+    "language": "nl",
+    "value": "Fragment delen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "item/views/item",
     "key": "voeg-fragment-toe-aan-collectie",
     "language": "nl",
@@ -18591,15 +18672,6 @@
     "key": "bestaande-opdracht",
     "language": "nl",
     "value": "Bestaande opdracht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "item/views/item-detail",
-    "key": "fragment-delen",
-    "language": "nl",
-    "value": "Fragment delen",
     "value_type": "TEXT"
   },
   {
@@ -20518,6 +20590,15 @@
     "language": "nl",
     "value": "De bladwijzer is verwijderd.",
     "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "workspace/views/bookmarks-overview",
+    "key": "gebruiken-in-smartschool",
+    "language": "nl",
+    "value": "Gebruiken in smartschool",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -29440,15 +29521,6 @@
   },
   {
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/embed-app",
-    "key": "deze-embedcode-heeft-geen-jwt-query-param-en-kan-dus-niet-geladen-worden",
-    "language": "nl",
-    "value": "Deze embedcode heeft geen jwt query param en kan dus niet geladen worden",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -29805,6 +29877,15 @@
     "key": "de-embed-code-kan-niet-worden-geladen-omdat-de-embed-url-ontbreekt-in-de-id-token",
     "language": "nl",
     "value": "De embed code kan niet worden geladen omdat de embed url ontbreekt in de id token",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-embed-code-kan-niet-worden-geladen-omdat-de-embed-code-id-ontbreekt-of-ongeldig-is",
+    "language": "nl",
+    "value": "De embed code kan niet worden geladen omdat de embed code id ontbreekt of ongeldig is",
     "value_type": "TEXT"
   },
   {
