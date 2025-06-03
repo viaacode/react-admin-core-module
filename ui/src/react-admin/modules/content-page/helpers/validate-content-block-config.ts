@@ -8,9 +8,7 @@ import { validateContentBlockField } from '~modules/shared/helpers/validation';
 
 export function validateContentBlockConfig(
 	errors: ContentBlockErrors,
-	fields: {
-		[key: string]: { validator?: ContentBlockField['validator'] };
-	},
+	fields: Record<string, ContentBlockField>,
 	state: ContentBlockComponentState
 ) {
 	let newErrors = { ...errors };

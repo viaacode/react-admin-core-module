@@ -14,7 +14,7 @@ export const mockUser: Avo.User.HetArchiefUser = {
 	lastName: 'Testers',
 	fullName: 'Test Testers',
 	email: 'test.testers@meemoo.be',
-	idp: Idp.HETARCHIEF,
+	idp: Idp.HETARCHIEF as any, // Definitions of Idp enum in different repos cause typescript to be confused and not recognize them as the same type
 	acceptedTosAt: '1997-01-01T00:00:00.000Z',
 	groupId: 'c56d95aa-e918-47ca-b102-486c9449fc4a',
 	groupName: 'CP_ADMIN',
@@ -27,6 +27,7 @@ export const mockUser: Avo.User.HetArchiefUser = {
 	organisationId: 'OR-rf5kf25',
 	organisationName: 'VRT',
 	sector: 'Publieke Omroep',
+	language: 'nl',
 };
 
 const mockContentPagesService: Partial<Record<keyof ContentPagesService, jest.SpyInstance>> = {

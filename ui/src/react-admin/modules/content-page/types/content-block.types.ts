@@ -188,6 +188,7 @@ export interface ContentBlockField {
 	label?: string; // Optional for checkboxes, who have their own label
 	editorType: ContentBlockEditor;
 	editorProps?: any;
+	fields?: Record<string, ContentBlockField>; // Used for fieldGroups
 	note?: ReactNode;
 	validator?: (value: any) => string[];
 	isVisible?: (config: ContentBlockConfig) => boolean;
@@ -439,7 +440,7 @@ export interface ContentBlockComponentsConfig {
 	limits?: ContentBlockComponentsLimits;
 	state: ContentBlockComponentState;
 	fields: {
-		[key: string]: ContentBlockField;
+		[key: string]: ContentBlockField | ContentBlockFieldGroup;
 	};
 }
 

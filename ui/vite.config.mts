@@ -22,11 +22,11 @@ export default defineConfig({
 				client: resolve(__dirname, 'src/client.mts'),
 			},
 			name: '@meemoo/admin-core-ui',
-			fileName: (format, entryName) => {
+			fileName: (_, entryName) => {
 				if (entryName === 'src/index') {
-					return `index.${format === 'es' ? 'js' : 'cjs'}`;
+					return 'index.mjs';
 				}
-				return `${entryName}.${format === 'es' ? 'js' : 'cjs'}`;
+				return `${entryName}.mjs`;
 			},
 			formats: ['es'],
 		},

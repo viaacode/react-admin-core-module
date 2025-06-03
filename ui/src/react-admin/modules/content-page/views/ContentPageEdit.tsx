@@ -32,6 +32,7 @@ import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
+	ContentBlockField,
 	ContentBlockStateOption,
 	ContentBlockStateType,
 	ContentBlockType,
@@ -417,7 +418,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 				newErrors = validateContentBlockConfig(
 					newErrors,
-					config.components.fields,
+					config.components.fields as Record<string, ContentBlockField>, // TODO fix this type to Record<string, ContentBlockField | ContentBlockFieldGroup>
 					config.components.state
 				);
 				newErrors = validateContentBlockConfig(

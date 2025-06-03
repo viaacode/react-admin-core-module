@@ -30,6 +30,7 @@ import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
 	ContentBlockErrors,
+	ContentBlockField,
 	ContentBlockState,
 	ContentBlockStateType,
 	RepeatedContentBlockComponentState,
@@ -101,7 +102,7 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		updatedFormValue: any,
 		stateIndex?: number
 	) => {
-		const field = config[formGroupType].fields[fieldKey];
+		const field = config[formGroupType].fields[fieldKey] as ContentBlockField; // TODO fix type to ContentBlockField | ContentBlockFieldGroup
 		const validator = field?.validator;
 
 		const errors = validateContentBlockField(

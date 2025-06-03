@@ -8,6 +8,7 @@ import type {
 	ContentBlockComponentsConfig,
 	ContentBlockComponentState,
 	ContentBlockConfig,
+	ContentBlockField,
 	ContentBlockState,
 	ContentBlockStateType,
 } from '../../types/content-block.types';
@@ -50,7 +51,8 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 				error = formErrorsForBlock as string[];
 			}
 
-			if (formGroup.fields[key].isVisible && !formGroup.fields[key].isVisible?.(config)) {
+			const field = formGroup.fields[key] as ContentBlockField; // TODO fix type to ContentBlockField | ContentBlockFieldGroup
+			if (field.isVisible && !field.isVisible?.(config)) {
 				return null;
 			}
 
@@ -59,16 +61,11 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 					key={createKey('form-group', blockIndex, formGroupIndex, stateIndex)}
 					margin="bottom"
 				>
-					<FormGroup
-						label={
-							formGroup.fields[key].repeat ? undefined : formGroup.fields[key].label
-						}
-						error={error}
-					>
+					<FormGroup label={field.repeat ? undefined : field.label} error={error}>
 						<ContentBlockFields
 							block={{ config, index: blockIndex }}
 							fieldKey={stateKey}
-							fieldOrFieldGroup={formGroup.fields[key]}
+							fieldOrFieldGroup={field}
 							state={formGroupState}
 							type={formGroupType}
 							formGroupIndex={formGroupIndex}

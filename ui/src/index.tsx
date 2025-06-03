@@ -85,7 +85,7 @@ function setConfig() {
 				ContentBlockType.MediaGrid,
 				ContentBlockType.Uitgeklaard,
 				ContentBlockType.ImageTitleTextButton,
-				ContentBlockType.ImageTextBackground,
+				ContentBlockType.AvoImageTextBackground,
 				// HET_ARCHIEF
 				// ContentBlockType.ThreeClickableTiles,
 				// ContentBlockType.TagsWithLink,
