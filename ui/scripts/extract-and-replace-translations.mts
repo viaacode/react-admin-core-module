@@ -42,6 +42,7 @@ import {
 	TranslationEntry,
 	ValueType,
 } from './translation.types.mjs';
+import { getDirName } from './get-dir-name.mts';
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
 
@@ -58,14 +59,6 @@ export function getKeyWithoutComponent(
 }
 
 type AppsList = (App.AVO | App.HET_ARCHIEF)[];
-
-const metaUrl = import.meta.url;
-const __dirname = path.dirname(
-	metaUrl
-		.replace('file://', '')
-		// Replace /C:/ with C:/ on Windows
-		.replace(new RegExp('/([A-Z]):/', 'g'), '$1:/')
-);
 
 function getFormattedKey(filePath: string, key: string): string {
 	const fileKey = filePath
@@ -205,7 +198,7 @@ async function extractTranslationsFromCodeFiles(
 				return (
 					!functionCallText.includes('IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION') &&
 					// Only accept functions where the name is tHtml or tHtml or ends with tText or tHtml
-					(['tText', 'tHtml'].includes(functionName?.split('.').pop() || '')
+					['tText', 'tHtml'].includes(functionName?.split('.').pop() || '')
 				);
 			});
 
@@ -489,7 +482,7 @@ async function updateTranslations(
 }
 
 function resolvePath(...filePaths: string[]): string {
-	return path.resolve(__dirname, ...filePaths).replace(/\\/g, '/');
+	return path.resolve(getDirName(), ...filePaths).replace(/\\/g, '/');
 }
 
 function formatCode(path: string) {
