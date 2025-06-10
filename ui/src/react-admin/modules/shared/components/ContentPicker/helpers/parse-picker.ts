@@ -1,4 +1,4 @@
-import { LinkTarget } from '@viaa/avo2-components';
+import type { LinkTarget } from '@viaa/avo2-components';
 import { parse } from 'query-string';
 import type { Avo } from '@viaa/avo2-types';
 import { showToast } from '~shared/helpers/show-toast';
@@ -47,7 +47,7 @@ export const parseSearchQuery = (input: string, toast = false) => {
 export const parsePickerItem = (
 	type: Avo.Core.ContentPickerType,
 	value: string,
-	target: LinkTarget = LinkTarget.Blank
+	target: LinkTarget = '_blank' as LinkTarget
 ): PickerItem => ({
 	type,
 	target,
