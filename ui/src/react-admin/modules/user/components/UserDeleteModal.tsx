@@ -30,9 +30,9 @@ import { CustomError } from '~shared/helpers/custom-error';
 import type { PickerItem } from '~shared/types/content-picker';
 import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
 import { UserService } from '../user.service';
+import { Link } from '~modules/shared/components/Link';
 
 import './UserDeleteModal.scss';
-import { Link } from '~modules/shared/components/Link';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];
