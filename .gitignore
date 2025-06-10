@@ -251,6 +251,3 @@ bundle-stats.html
 .graphqlconfig
 schema.graphql
 
-ui/vite.config.js
-ui/translation-changes.txt
-ui/commit_messages.txt

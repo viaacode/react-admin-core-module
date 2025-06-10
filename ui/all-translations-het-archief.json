@@ -16484,7 +16484,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-label-tussen-titels",
     "language": "en",
-    "value": "Toon de label tussen titels",
+    "value": "Show the label between titles",
     "value_type": "TEXT"
   },
   {
@@ -16493,7 +16493,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-titels",
     "language": "nl",
-    "value": "Toon de pagina titels",
+    "value": "Toon de paginatitels",
     "value_type": "TEXT"
   },
   {
@@ -16502,7 +16502,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-titels",
     "language": "en",
-    "value": "Toon de pagina titels",
+    "value": "Show page titles",
     "value_type": "TEXT"
   },
   {
@@ -16511,7 +16511,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-beschrijvingen",
     "language": "nl",
-    "value": "Toon de pagina beschrijvingen",
+    "value": "Toon de paginabeschrijvingen",
     "value_type": "TEXT"
   },
   {
@@ -16520,7 +16520,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-beschrijvingen",
     "language": "en",
-    "value": "Toon de pagina beschrijvingen",
+    "value": "Show the page descriptions",
     "value_type": "TEXT"
   },
   {
@@ -16529,7 +16529,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-datum-en-categorie",
     "language": "nl",
-    "value": "Toon de pagina datum en categorie",
+    "value": "Toon de paginadatum en categorie",
     "value_type": "TEXT"
   },
   {
@@ -16538,7 +16538,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-datum-en-categorie",
     "language": "en",
-    "value": "Toon de pagina datum en categorie",
+    "value": "Show page date and category",
     "value_type": "TEXT"
   },
   {
@@ -18275,7 +18275,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "nl",
-    "value": "Je kan dit object enkel bekijken tijdens een fysiek bezoek aan de bezoekersruimte.",
+    "value": "Je kan dit object digitaal bekijken tijdens een fysiek bezoek aan de bezoekersruimte.",
     "value_type": "TEXT"
   },
   {
@@ -18284,7 +18284,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "en",
-    "value": "Je kan dit object enkel bekijken tijdens een fysiek bezoek aan de bezoekersruimte.",
+    "value": "This item can be consulted digitally during an on-site visit to the organisation that holds it.",
     "value_type": "TEXT"
   },
   {
@@ -19868,7 +19868,7 @@
     "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
     "key": "pages-bezoekersruimte-zoeken-zoek-info",
     "language": "en",
-    "value": "Your search results meet the combination of all entered keywords and set filters.<br/>Search for an exact word combination by using double quotation marks.<br/>You can combine keywords according to AND, OR, and NOT<br/>More search tips you'll find here >",
+    "value": "<p>Your search results meet the combination of all entered keywords and set filters.</p><p>Search for an exact word combination by using double quotation marks.</p><p>You can combine keywords according to AND, OR, and NOT</p><p><a href=\"https://hetarchief.be/en/searching-on-thearchives-be\" target=\"_blank\">Find more search tips here &gt;</a></p>",
     "value_type": "HTML"
   },
   {
@@ -20408,7 +20408,7 @@
     "location": "modules/account/const/account",
     "key": "groep-cp--omschrijving",
     "language": "en",
-    "value": "As administrator, you can process access requests for your organisation, have an overview of active visitors and material requests, and manage the settings of the visitor space for your organisation.",
+    "value": "<p>As administrator, you can process access requests for your organisation, have an overview of active visitors and material requests, and manage the settings of the visitor space for your organisation.</p><p><a href=\"https://support.meemoo.be/hc/nl/articles/7060114803473-Wat-houdt-mijn-rol-als-beheerder-van-de-bezoekertool-in\" target=\"_blank\">More on managing the visitor space (Dutch) &gt;</a></p>",
     "value_type": "HTML"
   },
   {
@@ -20643,6 +20643,114 @@
     "key": "type",
     "language": "en",
     "value": "Type",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "gelukt",
+    "language": "nl",
+    "value": "Gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "gelukt",
+    "language": "en",
+    "value": "Success",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "gelukt-beschrijving",
+    "language": "nl",
+    "value": "Map delen is gelukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "gelukt-beschrijving",
+    "language": "en",
+    "value": "Sharing the folder was successful",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "map-bestaat-al",
+    "language": "nl",
+    "value": "Map bestaat al",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "map-bestaat-al",
+    "language": "en",
+    "value": "The folder already exists",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "deze-map-is-reeds-deel-van-je-mappen",
+    "language": "nl",
+    "value": "Deze map is reeds deel van je mappen.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "deze-map-is-reeds-deel-van-je-mappen",
+    "language": "en",
+    "value": "This folder is already part of your folders.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "error-er-is-iets-misgelopen",
+    "language": "nl",
+    "value": "Er is iets misgelopen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "pages/account/map-delen/folder-id/index",
+    "key": "error-er-is-iets-misgelopen",
+    "language": "en",
+    "value": "Something has gone wrong",
     "value_type": "TEXT"
   },
   {
@@ -21020,7 +21128,7 @@
     "location": "modules/account/views/my-folders",
     "key": "het-laden-van-de-objecten-in-deze-folder-is-mislukt",
     "language": "en",
-    "value": "Het laden van de objecten in deze folder is mislukt",
+    "value": "Loading the items in this folder has failed",
     "value_type": "HTML"
   },
   {
@@ -21038,7 +21146,7 @@
     "location": "modules/account/views/my-folders",
     "key": "er-zitten-nog-geen-objecten-in-deze-folder-br-voeg-er-toe-via-het-bookmark-icoon-op-de-zoek-of-detail-paginas",
     "language": "en",
-    "value": "Er zitten nog geen objecten in deze folder.<br/>Voeg er toe via het bookmark icoon op de zoek of detail paginas",
+    "value": "There are no items in this folder. You can add some using the bookmark icon in the search interface or an item detail page.",
     "value_type": "HTML"
   },
   {
@@ -21651,114 +21759,6 @@
     "key": "mijn-profiel-meta-omschrijving",
     "language": "en",
     "value": "My profile",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "gelukt",
-    "language": "nl",
-    "value": "Gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "gelukt",
-    "language": "en",
-    "value": "Success",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "gelukt-beschrijving",
-    "language": "nl",
-    "value": "Map delen is gelukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "gelukt-beschrijving",
-    "language": "en",
-    "value": "Sharing the folder was successful",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "map-bestaat-al",
-    "language": "nl",
-    "value": "Map bestaat al",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "map-bestaat-al",
-    "language": "en",
-    "value": "The folder already exists",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "deze-map-is-reeds-deel-van-je-mappen",
-    "language": "nl",
-    "value": "Deze map is reeds deel van je mappen.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "deze-map-is-reeds-deel-van-je-mappen",
-    "language": "en",
-    "value": "This folder is already part of your folders.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "error",
-    "language": "en",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "error-er-is-iets-misgelopen",
-    "language": "nl",
-    "value": "Er is iets misgelopen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "pages/account/map-delen/folder-id/index",
-    "key": "error-er-is-iets-misgelopen",
-    "language": "en",
-    "value": "Something has gone wrong",
     "value_type": "TEXT"
   },
   {
@@ -24971,7 +24971,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "alles-wat-raadpleegbaar-is",
     "language": "nl",
-    "value": "Direct kijken & luisteren",
+    "value": "Direct raadpleegbaar",
     "value_type": "TEXT"
   },
   {
@@ -24980,7 +24980,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "alles-wat-raadpleegbaar-is",
     "language": "en",
-    "value": "Watch directly & listen",
+    "value": "Directly accessible",
     "value_type": "TEXT"
   },
   {
@@ -25043,7 +25043,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "nl",
-    "value": "Ter plaatse raadplegen",
+    "value": "Raadpleegbaar bij aanbieder",
     "value_type": "TEXT"
   },
   {
@@ -25052,7 +25052,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "en",
-    "value": "To take a look & listen",
+    "value": "Accessible on-site",
     "value_type": "TEXT"
   },
   {
@@ -25070,7 +25070,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "ter-plaatse-kijken",
     "language": "en",
-    "value": "View on-site",
+    "value": "Watch on-site",
     "value_type": "TEXT"
   },
   {
@@ -30596,7 +30596,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "meerdere-aanbieders",
     "language": "en",
-    "value": "Ask for this material directly from the organisation(s). More information about requests &gt;",
+    "value": "<p>Ask for this material directly from the organisation(s). <a href=\"https://hetarchief.be/en/request-material-on-thearchives-be\" target=\"\">More information about requests &gt;</a></p>",
     "value_type": "HTML"
   },
   {
@@ -32549,7 +32549,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "nl",
-    "value": "Raadpleegbaar via bezoekertool",
+    "value": "Raadpleegbaar bij aanbieder",
     "value_type": "TEXT"
   },
   {
@@ -32558,7 +32558,7 @@
     "location": "modules/shared/components/media-card/media-card",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "en",
-    "value": "Accessible through visitor tool",
+    "value": "Accessible on-site",
     "value_type": "TEXT"
   },
   {
@@ -37167,6 +37167,42 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de autocomplete suggesties is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
+    "language": "en",
+    "value": "Het ophalen van de autocomplete suggesties is mislukt",
     "value_type": "TEXT"
   },
   {

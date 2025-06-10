@@ -11,6 +11,7 @@ coverage/
 # production
 build/
 dist/
+vite.config.js
 
 # misc
 .DS_Store
@@ -29,6 +30,6 @@ data/*
 !data/.gitkeep
 
 # Translation changes files
-/translation-changes-avo.txt
-/translation-changes-het-archief.txt
-/commit_messages.txt
+translation-changes-avo.txt
+translation-changes-het-archief.txt
+commit-messages.txt
