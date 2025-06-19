@@ -108,15 +108,36 @@ export class ContentPagesController {
 		@Ip() ip,
 		@SessionUser() sessionUser: SessionUserEntity
 	): Promise<DbContentPage> {
-		const user = sessionUser?.getUser();
-		return this.contentPagesService.getContentPageByLanguageAndPathForUser(
-			language || (user.language as Locale),
-			path,
-			user,
-			request?.headers?.['Referrer'] as string,
-			ip,
-			onlyInfo === 'true'
-		);
+		try {
+			const user = sessionUser?.getUser();
+			const dbContentPage =
+				await this.contentPagesService.getContentPageByLanguageAndPathForUser(
+					language || (user.language as Locale),
+					path,
+					user,
+					request?.headers?.['Referrer'] as string,
+					ip,
+					onlyInfo === 'true'
+				);
+			return dbContentPage;
+		} catch (err: any) {
+			if (err?.response?.additionalInfo?.code === 'NOT_FOUND') {
+				throw new NotFoundException('The content page with path was not found');
+			}
+			logAndThrow(
+				new InternalServerErrorException({
+					message: 'Failed to get content page by language and path',
+					innerException: err,
+					additionalInfo: {
+						language,
+						path,
+						onlyInfo,
+						profileId: sessionUser?.getProfileId(),
+						ip,
+					},
+				})
+			);
+		}
 	}
 
 	@Get('path-exists')
