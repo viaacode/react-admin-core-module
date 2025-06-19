@@ -4,7 +4,9 @@
 .c-block-het-archief-image-text-background {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+  	// Add margin right by adding an extra column
+  	// Also make the middle column a bit smaller so the image is a bit smaller than 66% width
+	grid-template-columns: 1fr 0.6fr 1fr 20px;
 	gap: $g-spacer-unit * 3;
 	min-height: 34rem;
 	margin: 0 auto;
