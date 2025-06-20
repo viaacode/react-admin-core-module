@@ -275,8 +275,9 @@ export function convertUserInfoToCommonUser(
 					data: null,
 				},
 				loms: [],
-				lastAccessAt: undefined,
+				lastAccessAt: user.lastAccessAt,
 				permissions: user.permissions,
+				createdAt: user.createdAt,
 			} as Avo.User.CommonUser;
 		}
 
