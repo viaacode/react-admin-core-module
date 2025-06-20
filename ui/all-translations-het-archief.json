@@ -25835,7 +25835,7 @@
     "location": "modules/account/components/material-request-detail-blade/material-requests",
     "key": "hoedanigheid",
     "language": "nl",
-    "value": "Hoedanigheid",
+    "value": "Rol",
     "value_type": "TEXT"
   },
   {
@@ -31127,7 +31127,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "hoedanigheid",
     "language": "nl",
-    "value": "Hoedanigheid: duid aan wat past",
+    "value": "Rol: duid aan wat past",
     "value_type": "TEXT"
   },
   {
@@ -31136,7 +31136,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "hoedanigheid",
     "language": "en",
-    "value": "Status: indicate what fits",
+    "value": "Function: indicate what fits",
     "value_type": "TEXT"
   },
   {
@@ -31226,7 +31226,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "de-hoedanigheid-is-verplicht",
     "language": "en",
-    "value": "Role is required",
+    "value": "Function is required",
     "value_type": "TEXT"
   },
   {
@@ -31316,7 +31316,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "de-map-id-is-een-verplicht-veld",
     "language": "en",
-    "value": "De map id is een verplicht veld",
+    "value": "The folder id is a required field",
     "value_type": "TEXT"
   },
   {
@@ -31334,7 +31334,7 @@
     "location": "modules/shared/components/approve-request-blade/approve-request-blade",
     "key": "het-type-toegang-is-een-verplicht-veld",
     "language": "en",
-    "value": "Het type toegang is een verplicht veld",
+    "value": "Type of access is a required field",
     "value_type": "TEXT"
   },
   {
@@ -34655,7 +34655,7 @@
     "location": "modules/visitor-space/components/autocomplete-field-filter-form/autocomplete-field-filter-form",
     "key": "de-naam-van-de-krant-serie-is-een-verplicht-veld",
     "language": "nl",
-    "value": "De naam van de krant serie is een verplicht veld",
+    "value": "De naam van de krantenreeks is een verplicht veld",
     "value_type": "TEXT"
   },
   {
@@ -34701,6 +34701,42 @@
     "key": "de-naam-van-de-persoon-is-een-verplicht-veld",
     "language": "en",
     "value": "The name of the person is a required field",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "error",
+    "language": "nl",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "error",
+    "language": "en",
+    "value": "Error",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de autocomplete suggesties is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
+    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
+    "language": "en",
+    "value": "Het ophalen van de autocomplete suggesties is mislukt",
     "value_type": "TEXT"
   },
   {
@@ -34916,7 +34952,7 @@
     "location": "modules/visitor-space/components/genre-filter-form/genre-filter-form",
     "key": "genre-is-een-verplicht-veld",
     "language": "en",
-    "value": "Genre is een verplicht veld",
+    "value": "Genre is a required field",
     "value_type": "TEXT"
   },
   {
@@ -35006,7 +35042,7 @@
     "location": "modules/visitor-space/components/keywords-filter-form/keywords-filter-form",
     "key": "trefwoord-is-een-verplicht-veld",
     "language": "en",
-    "value": "Trefwoord is een verplicht veld",
+    "value": "Keyword is a required field",
     "value_type": "TEXT"
   },
   {
@@ -35042,7 +35078,7 @@
     "location": "modules/visitor-space/components/language-filter-form/language-filter-form",
     "key": "taal-is-een-verplicht-veld",
     "language": "en",
-    "value": "Taal is een verplicht veld",
+    "value": "Language is a required field",
     "value_type": "TEXT"
   },
   {
@@ -35168,7 +35204,7 @@
     "location": "modules/visitor-space/components/maintainer-filter-form/maintainer-filter-form",
     "key": "aanbieder-is-een-verplicht-veld",
     "language": "en",
-    "value": "Aanbieder is een verplicht veld",
+    "value": "Organisation is a required field",
     "value_type": "TEXT"
   },
   {
@@ -35636,7 +35672,7 @@
     "location": "modules/visitor-space/components/medium-filter-form/medium-filter-form",
     "key": "fysieke-drager-is-een-verplicht-veld",
     "language": "en",
-    "value": "Fysieke drager is een verplicht veld",
+    "value": "Physical carrier is a required field",
     "value_type": "TEXT"
   },
   {
@@ -37167,42 +37203,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
-    "key": "error",
-    "language": "nl",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
-    "key": "error",
-    "language": "en",
-    "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
-    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de autocomplete suggesties is mislukt",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
-    "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
-    "language": "en",
-    "value": "Het ophalen van de autocomplete suggesties is mislukt",
     "value_type": "TEXT"
   },
   {
