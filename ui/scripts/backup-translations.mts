@@ -2,7 +2,7 @@ import { kebabCase } from 'lodash-es';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { executeDatabaseQuery } from './execute-database-query.mts';
-import { App, TranslationEntry } from './translation.types.mts';
+import { App, type TranslationEntry } from './translation.types.mts';
 
 async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	const response = await executeDatabaseQuery(

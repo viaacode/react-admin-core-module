@@ -8,10 +8,10 @@ export class SettingsService {
 	}
 
 	public static async fetchSubjects(): Promise<string[]> {
-		return fetchWithLogoutJson(this.getBaseUrl() + '/subjects');
+		return fetchWithLogoutJson(SettingsService.getBaseUrl() + '/subjects');
 	}
 
 	public static async fetchEducationLevels(): Promise<string[]> {
-		return fetchWithLogoutJson(this.getBaseUrl() + '/education-levels-and-degrees');
+		return fetchWithLogoutJson(SettingsService.getBaseUrl() + '/education-levels-and-degrees');
 	}
 }

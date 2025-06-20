@@ -18,7 +18,7 @@ export class TranslationsService {
 
 	static async fetchTranslations(): Promise<TranslationEntry[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl());
+			return fetchWithLogoutJson(TranslationsService.getBaseUrl());
 		} catch (err) {
 			throw new CustomError('Failed to fetch translations', err);
 		}
@@ -26,7 +26,7 @@ export class TranslationsService {
 
 	static async fetchLanguages(): Promise<LanguageInfo[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/languages');
+			return fetchWithLogoutJson(TranslationsService.getBaseUrl() + '/languages');
 		} catch (err) {
 			throw new CustomError('Failed to fetch translations', err);
 		}
@@ -48,7 +48,7 @@ export class TranslationsService {
 		value: string
 	) {
 		try {
-			await fetchWithLogoutJson<void>(this.getBaseUrl(), {
+			await fetchWithLogoutJson<void>(TranslationsService.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
 					component,

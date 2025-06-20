@@ -1,7 +1,7 @@
-import type { FunctionComponent } from 'react';
-import React, { memo } from 'react';
+import type { FunctionComponent } from "react";
+import React, { memo } from "react";
 
-import { createKey } from '../../../shared/helpers/create-key';
+import { createKey } from "../../../shared/helpers/create-key";
 import type {
 	ContentBlockComponentState,
 	ContentBlockField,
@@ -9,8 +9,8 @@ import type {
 	ContentBlockMeta,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types';
-import { FieldGenerator } from '../FieldGenerator/FieldGenerator';
+} from "../../types/content-block.types";
+import { FieldGenerator } from "../FieldGenerator/FieldGenerator";
 
 interface ContentBlockFieldProps {
 	block: ContentBlockMeta; // Block metadata
@@ -23,8 +23,9 @@ interface ContentBlockFieldProps {
 	handleChange: (
 		formGroupType: ContentBlockStateType,
 		fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		value: any,
-		stateIndex?: number
+		stateIndex?: number,
 	) => void;
 }
 
@@ -40,7 +41,7 @@ const ContentBlockFields: FunctionComponent<ContentBlockFieldProps> = ({
 }) => {
 	// Generate field id
 	const { index } = block;
-	const fieldId = createKey('editor', index, formGroupIndex, stateIndex);
+	const fieldId = createKey("editor", index, formGroupIndex, stateIndex);
 
 	// Generate fields
 	return (

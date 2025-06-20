@@ -15,7 +15,7 @@ export class ItemsService {
 		try {
 			const rawItem: Avo.Item.Item | null = await fetchWithLogoutJson<Avo.Item.Item>(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/' + uuidOrExternalId,
+					url: ItemsService.getBaseUrl() + '/' + uuidOrExternalId,
 				})
 			);
 
@@ -36,7 +36,7 @@ export class ItemsService {
 	public static async fetchPublicItems(limit: number): Promise<Avo.Item.Item[] | null> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: ItemsService.getBaseUrl(),
 				query: {
 					limit,
 				},
@@ -51,7 +51,7 @@ export class ItemsService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl(),
+					url: ItemsService.getBaseUrl(),
 					query: {
 						titleOrExternalId,
 						limit,

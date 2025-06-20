@@ -43,7 +43,7 @@ describe('map-deep', () => {
 						0,
 						String(key).length - RichEditorStateKey.length
 					);
-					let htmlFromRichTextEditor = undefined;
+					let htmlFromRichTextEditor ;
 					if (value && value.toHTML && isFunction(value.toHTML)) {
 						htmlFromRichTextEditor = value.toHTML();
 					}

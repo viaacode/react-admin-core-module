@@ -16,7 +16,7 @@ export class NavigationService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/items/' + id,
+					url: NavigationService.getBaseUrl() + '/items/' + id,
 				})
 			);
 		} catch (err) {
@@ -36,7 +36,7 @@ export class NavigationService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + (placement ? '/' + placement : ''),
+					url: NavigationService.getBaseUrl() + (placement ? '/' + placement : ''),
 					query: {
 						languages: languages?.length ? languages.join(',') : undefined,
 						searchTerm,
@@ -56,7 +56,7 @@ export class NavigationService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl(),
+					url: NavigationService.getBaseUrl(),
 				})
 			);
 		} catch (err) {
@@ -68,7 +68,7 @@ export class NavigationService {
 		navigationItem: Partial<NavigationItem>
 	): Promise<number> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/items', {
+			return fetchWithLogoutJson(NavigationService.getBaseUrl() + '/items', {
 				method: 'PUT',
 				body: JSON.stringify(navigationItem),
 			});
@@ -98,7 +98,7 @@ export class NavigationService {
 
 				return fetchWithLogoutJson(
 					stringifyUrl({
-						url: this.getBaseUrl() + '/items/' + navigationItem.id,
+						url: NavigationService.getBaseUrl() + '/items/' + navigationItem.id,
 					}),
 					{
 						method: 'PATCH',
@@ -120,7 +120,7 @@ export class NavigationService {
 		try {
 			await fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/items/' + id,
+					url: NavigationService.getBaseUrl() + '/items/' + id,
 				}),
 				{
 					method: 'DELETE',

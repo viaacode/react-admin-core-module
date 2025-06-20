@@ -6,6 +6,6 @@ export function getDirName(): string {
 		metaUrl
 			.replace('file://', '')
 			// Replace /C:/ with C:/ on Windows
-			.replace(new RegExp('/([A-Z]):/', 'g'), '$1:/')
+			.replace(/\/([A-Z]):\//g, '$1:/')
 	);
 }

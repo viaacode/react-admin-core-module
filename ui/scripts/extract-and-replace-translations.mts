@@ -35,11 +35,11 @@ import type { MultiLanguageTranslationEntry } from '~modules/translations/transl
 import {
 	App,
 	Component,
-	Key,
+	type Key,
 	Locale,
-	Location,
+	type Location,
 	TRANSLATION_SEPARATOR,
-	TranslationEntry,
+	type TranslationEntry,
 	ValueType,
 } from './translation.types.mjs';
 import { getDirName } from './get-dir-name.mts';

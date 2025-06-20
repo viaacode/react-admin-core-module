@@ -25,7 +25,7 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		return await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/public`,
+				url: `${CollectionService.getBaseUrl()}/public`,
 				query: {
 					limit,
 					typeId,
@@ -42,7 +42,7 @@ export class CollectionService {
 	): Promise<Avo.Collection.Collection[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: CollectionService.getBaseUrl(),
 				query: {
 					isCollection,
 					titleOrId,
@@ -103,7 +103,7 @@ export class CollectionService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/fetch-with-items-by-id`,
+					url: `${CollectionService.getBaseUrl()}/fetch-with-items-by-id`,
 					query: {
 						type,
 						assignmentUuid,

@@ -1,25 +1,28 @@
-import { FormGroup, Spacer } from '@viaa/avo2-components';
-import type { FunctionComponent } from 'react';
-import React from 'react';
-import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
+import { FormGroup, Spacer } from "@viaa/avo2-components";
+import type { FunctionComponent } from "react";
+import React from "react";
+import { GET_EDITOR_TYPES_MAP } from "~modules/content-page/const/editor-types.consts";
 
-import { generateFieldAttributes } from '../../helpers/field-attributes';
+import { generateFieldAttributes } from "../../helpers/field-attributes";
 import type {
 	ContentBlockComponentState,
 	ContentBlockEditor,
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
-} from '../../types/content-block.types';
+} from "../../types/content-block.types";
 
 interface FieldGroupProps {
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	globalState: any;
 	globalStateIndex: number;
 	fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState;
 	fieldGroup: ContentBlockFieldGroup;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	fieldGroupState: any;
 	fieldGroupStateIndex: number;
 	type: ContentBlockStateType; // State type
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	handleChange: any;
 }
 
@@ -35,7 +38,12 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 }) => {
 	const { fields } = fieldGroup;
 
-	const handleFieldGroupStateChange = (stateCopy: any, key: string, index: any, value: any) => {
+	const handleFieldGroupStateChange = (
+		stateCopy: any,
+		key: string,
+		index: any,
+		value: any,
+	) => {
 		const newState = [...stateCopy];
 
 		newState[index] = {
@@ -58,20 +66,25 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 								globalState,
 								key || fieldState[0],
 								fieldGroupStateIndex,
-								value
+								value,
 							),
 						fieldGroupState[fieldState[0]] as any,
 						`${fieldKey}-${fieldState[0]}-${fieldIndex}`,
 						fieldState[0],
-						fieldGroupState
+						fieldGroupState,
 					),
 				};
 
 				const EditorComponents =
-					GET_EDITOR_TYPES_MAP()[fieldState[1].editorType as ContentBlockEditor];
+					GET_EDITOR_TYPES_MAP()[
+						fieldState[1].editorType as ContentBlockEditor
+					];
 
 				return (
-					<Spacer margin="top" key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}>
+					<Spacer
+						margin="top"
+						key={`${fieldKey}-${fieldState[0]}-${fieldIndex}`}
+					>
 						<FormGroup label={`${fieldState[1].label}`}>
 							<Spacer margin="top-small">
 								<EditorComponents {...editorProps} />

@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 import { kebabCase } from 'lodash-es';
 import * as path from 'path';
 import { red } from 'console-log-colors';
-import { App } from './translation.types.mjs';
+import type { App } from './translation.types.mjs';
 import { getDirName } from './get-dir-name.mjs';
 import * as fs from 'fs/promises';
 

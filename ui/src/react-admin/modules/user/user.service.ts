@@ -23,7 +23,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson<Avo.User.CommonUser>(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/${id}`,
+					url: `${UserService.getBaseUrl()}/${id}`,
 				}),
 				{ throwOnNullResponse: true }
 			);
@@ -44,7 +44,7 @@ export class UserService {
 		where: any = {}
 	): Promise<[Avo.User.CommonUser[], number]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl(), {
+			return fetchWithLogoutJson(UserService.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
 					offset,
@@ -73,7 +73,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/names',
+					url: UserService.getBaseUrl() + '/names',
 					query: {
 						profileIds,
 					},
@@ -90,7 +90,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/ids',
+					url: UserService.getBaseUrl() + '/ids',
 					query: {
 						where: JSON.stringify(where),
 					},
@@ -144,7 +144,7 @@ export class UserService {
 		}
 
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/business-categories');
+			return fetchWithLogoutJson(UserService.getBaseUrl() + '/business-categories');
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get distinct business categories from the server',
@@ -155,7 +155,7 @@ export class UserService {
 
 	static async fetchIdps(): Promise<Idp[]> {
 		try {
-			return fetchWithLogoutJson<Idp[]>(this.getBaseUrl() + '/idps', {
+			return fetchWithLogoutJson<Idp[]>(UserService.getBaseUrl() + '/idps', {
 				throwOnNullResponse: true,
 			});
 		} catch (err) {
@@ -215,7 +215,7 @@ export class UserService {
 		try {
 			return fetchWithLogoutJson<DeleteContentCounts>(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/counts',
+					url: UserService.getBaseUrl() + '/counts',
 					query: {
 						profileIds,
 					},
@@ -238,7 +238,7 @@ export class UserService {
 		}
 
 		try {
-			await fetchWithLogoutJson(this.getBaseUrl() + '/subjects', {
+			await fetchWithLogoutJson(UserService.getBaseUrl() + '/subjects', {
 				method: 'PATCH',
 				body: JSON.stringify({
 					subjects,
@@ -264,7 +264,7 @@ export class UserService {
 		}
 
 		try {
-			await fetchWithLogoutJson(this.getBaseUrl() + '/subjects', {
+			await fetchWithLogoutJson(UserService.getBaseUrl() + '/subjects', {
 				method: 'DELETE',
 				body: JSON.stringify({
 					subjects,

@@ -16,7 +16,7 @@ export class UserGroupService {
 	public static async fetchUserGroupsWithPermissions(): Promise<UserGroupWithPermissions[]> {
 		const userGroups = await fetchWithLogoutJson<UserGroupWithPermissions[]>(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: UserGroupService.getBaseUrl(),
 				query: {
 					withPermissions: 'true',
 				},
@@ -30,7 +30,7 @@ export class UserGroupService {
 	public static async fetchUserGroups(): Promise<UserGroup[]> {
 		const userGroups = await fetchWithLogoutJson<UserGroup[]>(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: UserGroupService.getBaseUrl(),
 				query: {
 					withPermissions: 'false',
 				},
@@ -44,7 +44,7 @@ export class UserGroupService {
 	public static async updateUserGroups(
 		userGroupUpdates: UserGroupUpdates
 	): Promise<{ deleted: number; updated: number }> {
-		return fetchWithLogoutJson(this.getBaseUrl(), {
+		return fetchWithLogoutJson(UserGroupService.getBaseUrl(), {
 			method: 'PATCH',
 			body: JSON.stringify(userGroupUpdates),
 		});

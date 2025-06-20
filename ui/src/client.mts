@@ -9,7 +9,7 @@ export {
 	ContentPageWidth,
 	type ContentPageInfo,
 } from '~modules/content-page/types/content-pages.types';
-export { type DbContentPage } from '~modules/content-page/types/content-pages.types';
+export type { DbContentPage } from '~modules/content-page/types/content-pages.types';
 export { ContentPageService } from '~modules/content-page/services/content-page.service';
 export { BlockHeading } from '~content-blocks/BlockHeading';
 export { BlockIntro } from '~content-blocks/BlockIntro';
@@ -27,6 +27,6 @@ export type { AdminConfig } from './react-admin/core/config/config.types';
 export { UserBulkAction } from '~modules/user/user.types';
 
 // Misc
-export { type LinkInfo, type ToastInfo } from '~core/config/config.types';
+export type { LinkInfo, ToastInfo } from '~core/config/config.types';
 export { sanitizeHtml } from '~shared/helpers/sanitize';
 export { SanitizePreset } from '~shared/helpers/sanitize/presets';

@@ -34,7 +34,7 @@ export class ContentPageService {
 	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
 		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
 			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
-		>(this.getBaseUrl() + '/page-overview-block', {
+		>(ContentPageService.getBaseUrl() + '/page-overview-block', {
 			method: 'POST',
 			body: JSON.stringify(options),
 			throwOnNullResponse: true,
@@ -51,7 +51,7 @@ export class ContentPageService {
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/nl-parent-pages`,
+				url: `${ContentPageService.getBaseUrl()}/nl-parent-pages`,
 				query: {
 					limit: limit ?? 20,
 					title,
@@ -68,7 +68,7 @@ export class ContentPageService {
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/public`,
+				url: `${ContentPageService.getBaseUrl()}/public`,
 				query: {
 					limit: limit ?? 20,
 					title,
@@ -85,7 +85,7 @@ export class ContentPageService {
 	): Promise<Partial<ContentPageInfo>[]> {
 		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/projects/public`,
+				url: `${ContentPageService.getBaseUrl()}/projects/public`,
 				query: {
 					limit,
 					title,
@@ -98,7 +98,7 @@ export class ContentPageService {
 
 	public static async getContentPageById(id: number | string): Promise<ContentPageInfo | null> {
 		const dbContentPage: DbContentPage | null = await fetchWithLogoutJson(
-			`${this.getBaseUrl()}/${id}`,
+			`${ContentPageService.getBaseUrl()}/${id}`,
 			{ throwOnNullResponse: true }
 		);
 		return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
@@ -107,14 +107,14 @@ export class ContentPageService {
 	public static async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
-		return fetchWithLogoutJson(`${this.getBaseUrl()}/types`, { throwOnNullResponse: true });
+		return fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/types`, { throwOnNullResponse: true });
 	}
 
 	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
 		return (
 			(await fetchWithLogoutJson(
 				stringifyUrl({
-					url: `${this.getBaseUrl()}/labels`,
+					url: `${ContentPageService.getBaseUrl()}/labels`,
 					query: {
 						contentType,
 					},
@@ -131,7 +131,7 @@ export class ContentPageService {
 		if (!labelIds?.length) {
 			return;
 		}
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
+		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/labels`, {
 			method: 'PUT',
 			body: JSON.stringify({
 				contentPageId,
@@ -147,7 +147,7 @@ export class ContentPageService {
 		if (!labelIds?.length) {
 			return;
 		}
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/labels`, {
+		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/labels`, {
 			method: 'DELETE',
 			body: JSON.stringify({
 				contentPageId,
@@ -173,7 +173,7 @@ export class ContentPageService {
 	): Promise<[ContentPageInfo[], number]> {
 		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
 			stringifyUrl({
-				url: this.getBaseUrl(),
+				url: ContentPageService.getBaseUrl(),
 				query: {
 					offset: page * PAGES_PER_PAGE,
 					limit: PAGES_PER_PAGE,
@@ -191,7 +191,7 @@ export class ContentPageService {
 	public static async insertContentPage(
 		contentPage: Omit<ContentPageInfo, 'id'> & { id?: string | number }
 	): Promise<ContentPageInfo | null> {
-		const dbContentPage: DbContentPage = await fetchWithLogoutJson(this.getBaseUrl(), {
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(ContentPageService.getBaseUrl(), {
 			method: 'PUT',
 			body: JSON.stringify(convertContentPageInfoToDbContentPage(contentPage)),
 		});
@@ -200,7 +200,7 @@ export class ContentPageService {
 
 	public static async updateContentPage(contentPage: ContentPageInfo): Promise<ContentPageInfo> {
 		const dbContentPage: DbContentPage = await fetchWithLogoutJson<DbContentPage>(
-			this.getBaseUrl(),
+			ContentPageService.getBaseUrl(),
 			{
 				method: 'PATCH',
 				body: JSON.stringify({
@@ -265,7 +265,7 @@ export class ContentPageService {
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
 			const duplicatedContentPage = await fetchWithLogoutJson<DbContentPage | null>(
-				`${this.getBaseUrl()}/${contentPageId}/duplicate`,
+				`${ContentPageService.getBaseUrl()}/${contentPageId}/duplicate`,
 				{
 					method: 'POST',
 					body: JSON.stringify(overrideValues),
@@ -284,7 +284,7 @@ export class ContentPageService {
 	}
 
 	public static async deleteContentPage(id: number | string): Promise<void> {
-		await fetchWithLogoutJson(`${this.getBaseUrl()}/${id}`, {
+		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/${id}`, {
 			method: 'DELETE',
 		});
 	}
@@ -301,7 +301,7 @@ export class ContentPageService {
 		onlyInfo = false
 	): Promise<DbContentPage | null> {
 		try {
-			let url = this.getBaseUrl() + '/by-language-and-path';
+			let url = ContentPageService.getBaseUrl() + '/by-language-and-path';
 			if (
 				AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint &&
 				!onlyInfo
@@ -348,7 +348,7 @@ export class ContentPageService {
 				id: number;
 			}>(
 				stringifyUrl({
-					url: this.getBaseUrl() + '/path-exists',
+					url: ContentPageService.getBaseUrl() + '/path-exists',
 					query: {
 						language,
 						path,
@@ -373,7 +373,7 @@ export class ContentPageService {
 	): Promise<(string | number)[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
-				url: `${this.getBaseUrl()}/access`,
+				url: `${ContentPageService.getBaseUrl()}/access`,
 				query: {
 					path,
 				},

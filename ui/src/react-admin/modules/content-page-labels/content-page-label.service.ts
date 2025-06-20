@@ -27,7 +27,7 @@ export class ContentPageLabelService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl(),
+					url: ContentPageLabelService.getBaseUrl(),
 					query: {
 						offset: page * itemsPerPage,
 						limit: itemsPerPage,
@@ -51,7 +51,7 @@ export class ContentPageLabelService {
 
 	public static async fetchContentPageLabel(id: string | number): Promise<ContentPageLabel> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/' + String(id), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl() + '/' + String(id), {
 				throwOnNullResponse: true,
 			});
 		} catch (err) {
@@ -65,7 +65,7 @@ export class ContentPageLabelService {
 		contentPageLabels: Omit<ContentPageLabel, 'id'>[]
 	): Promise<ContentPageLabel[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl(), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
 				method: 'PUT',
 				body: JSON.stringify(
 					contentPageLabels.map((labelObj) => ({
@@ -87,7 +87,7 @@ export class ContentPageLabelService {
 		contentPageLabelInfo: ContentPageLabel
 	): Promise<ContentPageLabel> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl(), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
 				method: 'PATCH',
 				body: JSON.stringify({
 					id: contentPageLabelInfo.id,
@@ -107,12 +107,12 @@ export class ContentPageLabelService {
 
 	static async deleteContentPageLabel(id: string | number) {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl() + '/' + String(id), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl() + '/' + String(id), {
 				method: 'DELETE',
 			});
 		} catch (err) {
 			throw new CustomError('Failed to delete content page label from the database', err, {
-				route: this.getBaseUrl() + '/' + String(id),
+				route: ContentPageLabelService.getBaseUrl() + '/' + String(id),
 				id,
 			});
 		}
@@ -123,7 +123,7 @@ export class ContentPageLabelService {
 		labels: string[]
 	): Promise<LabelObj[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl(), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
 					contentType,
@@ -147,7 +147,7 @@ export class ContentPageLabelService {
 		labelIds: number[] | string[]
 	): Promise<LabelObj[]> {
 		try {
-			return fetchWithLogoutJson(this.getBaseUrl(), {
+			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
 				method: 'POST',
 				body: JSON.stringify({
 					contentType,

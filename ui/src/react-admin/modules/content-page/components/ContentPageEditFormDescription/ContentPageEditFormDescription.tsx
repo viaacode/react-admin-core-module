@@ -1,12 +1,12 @@
-import { FormGroup } from '@viaa/avo2-components';
-import type { FunctionComponent } from 'react';
-import React, { useState } from 'react';
-import { tText } from '~shared/helpers/translation-functions';
+import { FormGroup } from "@viaa/avo2-components";
+import type { FunctionComponent } from "react";
+import React, { useState } from "react";
+import { tText } from "~shared/helpers/translation-functions";
 
-import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
-import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts';
-import { stripHtml } from '~shared/helpers/formatters/strip-html';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import { RICH_TEXT_EDITOR_OPTIONS_FULL } from "~modules/shared/consts/rich-text-editor.consts";
+import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from "~modules/content-page/const/content-page.consts";
+import { stripHtml } from "~shared/helpers/formatters/strip-html";
+import RichTextEditorWithInternalStateWrapper from "~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper";
 
 interface ContentPageEditFormDescriptionProps {
 	value: string;
@@ -18,17 +18,17 @@ interface ContentPageEditFormDescriptionProps {
 export const ContentPageEditFormDescription: FunctionComponent<
 	ContentPageEditFormDescriptionProps
 > = ({ value, onChange, formError, className }) => {
-	const [description, setDescription] = useState(value || '');
+	const [description, setDescription] = useState(value || "");
 
 	return (
 		<FormGroup
 			error={formError}
 			label={
 				tText(
-					'modules/content-page/components/content-edit-form/content-edit-form___beschrijving',
+					"modules/content-page/components/content-edit-form/content-edit-form___beschrijving",
 					{
 						maxLength: CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING,
-					}
+					},
 				) +
 				` (${
 					stripHtml(description)?.length || 0
@@ -36,6 +36,7 @@ export const ContentPageEditFormDescription: FunctionComponent<
 			}
 			className={className}
 		>
+			{/** biome-ignore lint/nursery/useUniqueElementIds: there will only be one of these on the page at any time */}
 			<RichTextEditorWithInternalStateWrapper
 				value={description}
 				onChange={setDescription}

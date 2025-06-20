@@ -1,68 +1,73 @@
 // noinspection ES6PreferShortImport
 
-import { IconName } from '@viaa/avo2-components';
-import type { Avo, DatabaseType } from '@viaa/avo2-types';
-import nlBE from 'date-fns/locale/nl-BE/index.js';
-import setDefaultOptions from 'date-fns/setDefaultOptions';
-import type { TOptions } from 'i18next';
-import { capitalize, lowerCase } from 'lodash-es';
-import type { FunctionComponent, ReactNode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Link, useHistory } from 'react-router-dom';
-import type { AdminConfig } from '../src/react-admin/core/config';
-import { AdminConfigManager } from '../src/react-admin/core/config';
-import type { LinkInfo, ToastInfo } from '../src/react-admin/core/config/config.types';
-import { ContentBlockType } from '../src/react-admin/modules/content-page/types/content-block.types';
-import type { ContentPageInfo } from '../src/react-admin/modules/content-page/types/content-pages.types';
-import { ContentPageWidth } from '../src/react-admin/modules/content-page/types/content-pages.types';
-import Html from '../src/react-admin/modules/shared/components/Html/Html';
-import { ROUTE_PARTS } from '../src/react-admin/modules/shared/consts/routes';
-import { tText } from '../src/react-admin/modules/shared/helpers/translation-functions';
+import { IconName } from "@viaa/avo2-components";
+import type { Avo, DatabaseType } from "@viaa/avo2-types";
+import nlBE from "date-fns/locale/nl-BE/index.js";
+import setDefaultOptions from "date-fns/setDefaultOptions";
+import type { TOptions } from "i18next";
+import { capitalize, lowerCase } from "lodash-es";
+import type { FunctionComponent, ReactNode } from "react";
+import { createRoot } from "react-dom/client";
+import { Link, useHistory } from "react-router-dom";
+import type { AdminConfig } from "../src/react-admin/core/config";
+import { AdminConfigManager } from "../src/react-admin/core/config";
+import type {
+	LinkInfo,
+	ToastInfo,
+} from "../src/react-admin/core/config/config.types";
+import { ContentBlockType } from "../src/react-admin/modules/content-page/types/content-block.types";
+import type { ContentPageInfo } from "../src/react-admin/modules/content-page/types/content-pages.types";
+import { ContentPageWidth } from "../src/react-admin/modules/content-page/types/content-pages.types";
+import Html from "../src/react-admin/modules/shared/components/Html/Html";
+import { ROUTE_PARTS } from "../src/react-admin/modules/shared/consts/routes";
+import { tText } from "../src/react-admin/modules/shared/helpers/translation-functions";
 
-import App from './App';
-import i18n, { initI18n } from './shared/translations/i18n';
-import { Locale } from '~modules/translations/translations.core.types';
-import { UserBulkAction } from '~modules/user/user.types';
+import App from "./App";
+import i18n, { initI18n } from "./shared/translations/i18n";
+import { Locale } from "~modules/translations/translations.core.types";
+import { UserBulkAction } from "~modules/user/user.types";
 
-const proxyUrl = 'http://localhost:3100';
-const adminCoreApiUrl = 'http://localhost:3300';
+const proxyUrl = "http://localhost:3100";
+const adminCoreApiUrl = "http://localhost:3300";
 
+// biome-ignore lint/suspicious/noExplicitAny: todo
 declare const document: any;
 
 // Set global locale for date-fns functions:
 setDefaultOptions({ locale: nlBE });
 
-const routerConfig: AdminConfig['services']['router'] = {
+const routerConfig: AdminConfig["services"]["router"] = {
 	Link: Link as FunctionComponent<LinkInfo>,
 	useHistory: useHistory,
 };
 
-const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] = [
-	{
-		organisationId: '50674',
-		organisationLabel: 'Academie de Kunstbrug Gent',
-		unitId: '50674-5-316',
-		unitStreet: 'Bargiekaai 1',
-	},
-	{
-		organisationId: '50674',
-		organisationLabel: 'Academie de Kunstbrug Gent',
-		unitId: '50674-24-316',
-		unitStreet: 'Cataloniëstraat 1',
-	},
-	{
-		organisationId: '50674',
-		organisationLabel: 'Academie de Kunstbrug Gent',
-		unitId: '50674-2-316',
-		unitStreet: 'Coupure Rechts 52',
-	},
-	{
-		organisationId: '50674',
-		organisationLabel: 'Academie de Kunstbrug Gent',
-		unitId: '50674-4-316',
-		unitStreet: 'Ottogracht Kunstencampus 4',
-	},
-];
+const DUMMY_EDUCATIONAL_ORGANISATIONS: Avo.EducationOrganization.Organization[] =
+	[
+		{
+			organisationId: "50674",
+			organisationLabel: "Academie de Kunstbrug Gent",
+			unitId: "50674-5-316",
+			unitStreet: "Bargiekaai 1",
+		},
+		{
+			organisationId: "50674",
+			organisationLabel: "Academie de Kunstbrug Gent",
+			unitId: "50674-24-316",
+			unitStreet: "Cataloniëstraat 1",
+		},
+		{
+			organisationId: "50674",
+			organisationLabel: "Academie de Kunstbrug Gent",
+			unitId: "50674-2-316",
+			unitStreet: "Coupure Rechts 52",
+		},
+		{
+			organisationId: "50674",
+			organisationLabel: "Academie de Kunstbrug Gent",
+			unitId: "50674-4-316",
+			unitStreet: "Ottogracht Kunstencampus 4",
+		},
+	];
 
 function setConfig() {
 	// only used for starting admin-core separately
@@ -99,12 +104,15 @@ function setConfig() {
 			],
 			defaultPageWidth: ContentPageWidth.LARGE,
 			onSaveContentPage: async (contentPageInfo: ContentPageInfo) => {
-				console.info('event handler: onSaveContentPage', { contentPageInfo });
+				console.info("event handler: onSaveContentPage", { contentPageInfo });
 			},
 		},
 		navigationBars: {
 			enableIcons: true,
-			customNavigationElements: ['<PROFILE_DROPDOWN>', '<VISITOR_SPACES_DROPDOWN>'],
+			customNavigationElements: [
+				"<PROFILE_DROPDOWN>",
+				"<VISITOR_SPACES_DROPDOWN>",
+			],
 		},
 		staticPages: {
 			nl: [
@@ -121,38 +129,38 @@ function setConfig() {
 			],
 		},
 		icon: {
-			component: ({ name }: any) => <span>{name}</span>,
+			component: ({ name }: { name: string }) => <span>{name}</span>,
 			componentProps: {
-				add: { name: 'add' },
-				view: { name: 'view' },
-				angleDown: { name: 'down' },
-				angleUp: { name: 'up' },
-				angleLeft: { name: 'left' },
-				angleRight: { name: 'right' },
-				anglesLeft: { name: 'anglesLeft' },
-				anglesRight: { name: 'anglesRight' },
-				delete: { name: 'delete' },
-				edit: { name: 'edit' },
-				extraOptions: { name: 'dots-vertical' },
-				copy: { name: 'copy' },
-				filter: { name: 'filter' },
-				arrowUp: { name: 'arrow-up' },
-				sortTable: { name: 'sort-table' },
-				arrowDown: { name: 'arrow-down' },
-				arrowRight: { name: 'arrow-right' },
-				chevronLeft: { name: 'chevron-left' },
-				check: { name: 'check' },
-				calendar: { name: 'calendar' },
-				clock: { name: 'clock' },
-				export: { name: 'export' },
-				info: { name: 'info' },
-				warning: { name: 'exclamation' },
-				eyeOff: { name: 'eye-off' },
-				video: { name: 'video' },
-				audio: { name: 'audio' },
-				newspaper: { name: 'newspaper' },
-				noAudio: { name: 'no-audio' },
-				noVideo: { name: 'no-video' },
+				add: { name: "add" },
+				view: { name: "view" },
+				angleDown: { name: "down" },
+				angleUp: { name: "up" },
+				angleLeft: { name: "left" },
+				angleRight: { name: "right" },
+				anglesLeft: { name: "anglesLeft" },
+				anglesRight: { name: "anglesRight" },
+				delete: { name: "delete" },
+				edit: { name: "edit" },
+				extraOptions: { name: "dots-vertical" },
+				copy: { name: "copy" },
+				filter: { name: "filter" },
+				arrowUp: { name: "arrow-up" },
+				sortTable: { name: "sort-table" },
+				arrowDown: { name: "arrow-down" },
+				arrowRight: { name: "arrow-right" },
+				chevronLeft: { name: "chevron-left" },
+				check: { name: "check" },
+				calendar: { name: "calendar" },
+				clock: { name: "clock" },
+				export: { name: "export" },
+				info: { name: "info" },
+				warning: { name: "exclamation" },
+				eyeOff: { name: "eye-off" },
+				video: { name: "video" },
+				audio: { name: "audio" },
+				newspaper: { name: "newspaper" },
+				noAudio: { name: "no-audio" },
+				noVideo: { name: "no-video" },
 			},
 			list: (): { value: IconName; label: string }[] => {
 				return Object.values(IconName).map((iconName: IconName) => ({
@@ -172,7 +180,7 @@ function setConfig() {
 			loader: {
 				component: null,
 			},
-			defaultAudioStill: 'FAKE_DEFAULT_AUDIO_STILL',
+			defaultAudioStill: "FAKE_DEFAULT_AUDIO_STILL",
 			enableMultiLanguage: true,
 			buttonTypes: () => [
 				// Het archief buttons
@@ -213,56 +221,62 @@ function setConfig() {
 
 				// Avo buttons
 				{
-					label: tText('admin/content-block/content-block___primair'),
-					value: 'primary',
+					label: tText("admin/content-block/content-block___primair"),
+					value: "primary",
 				},
 				{
-					label: tText('admin/content-block/content-block___secundair'),
-					value: 'secondary',
+					label: tText("admin/content-block/content-block___secundair"),
+					value: "secondary",
 				},
 				{
-					label: tText('admin/content-block/content-block___secundair-invers'),
-					value: 'secondary-i',
+					label: tText("admin/content-block/content-block___secundair-invers"),
+					value: "secondary-i",
 				},
 				{
-					label: tText('admin/content-block/content-block___tertiair'),
-					value: 'tertiary',
+					label: tText("admin/content-block/content-block___tertiair"),
+					value: "tertiary",
 				},
 				{
-					label: tText('admin/content-block/content-block___randloos'),
-					value: 'borderless',
+					label: tText("admin/content-block/content-block___randloos"),
+					value: "borderless",
 				},
 				{
-					label: tText('admin/content-block/content-block___randloos-invers'),
-					value: 'borderless-i',
+					label: tText("admin/content-block/content-block___randloos-invers"),
+					value: "borderless-i",
 				},
 				{
-					label: tText('admin/content-block/content-block___gevaar'),
-					value: 'danger',
+					label: tText("admin/content-block/content-block___gevaar"),
+					value: "danger",
 				},
 				{
-					label: tText('admin/content-block/content-block___gevaar-hover'),
-					value: 'danger-hover',
+					label: tText("admin/content-block/content-block___gevaar-hover"),
+					value: "danger-hover",
 				},
 				{
-					label: tText('admin/content-block/content-block___link'),
-					value: 'link',
+					label: tText("admin/content-block/content-block___link"),
+					value: "link",
 				},
 				{
-					label: tText('admin/content-block/content-block___link-inline'),
-					value: 'inline-link',
+					label: tText("admin/content-block/content-block___link-inline"),
+					value: "inline-link",
 				},
 				{
-					label: tText('admin/content-block/content-block___leerling-primair-geel'),
-					value: 'pupil-primary',
+					label: tText(
+						"admin/content-block/content-block___leerling-primair-geel",
+					),
+					value: "pupil-primary",
 				},
 				{
-					label: tText('admin/content-block/content-block___leerling-link-tekst-in-geel'),
-					value: 'pupil-link',
+					label: tText(
+						"admin/content-block/content-block___leerling-link-tekst-in-geel",
+					),
+					value: "pupil-link",
 				},
 				{
-					label: tText('admin/content-block/content-block___leerling-link-geel-inline'),
-					value: 'pupil-inline-link',
+					label: tText(
+						"admin/content-block/content-block___leerling-link-geel-inline",
+					),
+					value: "pupil-inline-link",
 				},
 			],
 		},
@@ -274,12 +288,12 @@ function setConfig() {
 			toastService: {
 				showToast: (toastInfo: ToastInfo): string => {
 					// Client decides how the toast messages are shown
-					console.info('show toast: ', toastInfo);
-					return 'fake-toast-id';
+					console.info("show toast: ", toastInfo);
+					return "fake-toast-id";
 				},
 				hideToast: (toastId: string) => {
 					// Client decides how the toast messages are hidden
-					console.info('hide toasts with id: ', toastId);
+					console.info("hide toasts with id: ", toastId);
 				},
 			},
 			// Use the default endpoint of the admin-core-api: ${proxyUrl}/admin/content-pages
@@ -289,22 +303,32 @@ function setConfig() {
 			// HET_ARCHIEF
 			getContentPageByLanguageAndPathEndpoint: null,
 			i18n: {
-				tHtml: (key: string, params: TOptions | string | undefined): ReactNode => (
-					<Html content={i18n.t(key, params as any) as unknown as string} type="span" />
+				tHtml: (
+					key: string,
+					params: TOptions | string | undefined,
+				): ReactNode => (
+					// biome-ignore lint/suspicious/noExplicitAny: todo
+					<Html
+						content={i18n.t(key, params as any) as unknown as string}
+						type="span"
+					/>
 				),
 				tText: (key: string, params: TOptions | string | undefined): string =>
+					// biome-ignore lint/suspicious/noExplicitAny: todo
 					i18n.t(key, params as any) as unknown as string,
 			},
 			educationOrganisationService: {
 				fetchEducationOrganisationName: (orgId: string, unitId: string) =>
 					Promise.resolve(
 						DUMMY_EDUCATIONAL_ORGANISATIONS.find(
-							(org) => org.organisationId === orgId && org.unitId === unitId
-						)?.organisationLabel || orgId
+							(org) => org.organisationId === orgId && org.unitId === unitId,
+						)?.organisationLabel || orgId,
 					),
-				fetchCities: () => Promise.resolve(['GENT (9000)']),
-				fetchEducationOrganisations: () => Promise.resolve(DUMMY_EDUCATIONAL_ORGANISATIONS),
+				fetchCities: () => Promise.resolve(["GENT (9000)"]),
+				fetchEducationOrganisations: () =>
+					Promise.resolve(DUMMY_EDUCATIONAL_ORGANISATIONS),
 			},
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			router: routerConfig as any,
 			queryCache: {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -316,8 +340,8 @@ function setConfig() {
 			adminCoreApiUrl,
 		},
 		flowplayer: {
-			FLOW_PLAYER_ID: '',
-			FLOW_PLAYER_TOKEN: '',
+			FLOW_PLAYER_ID: "",
+			FLOW_PLAYER_TOKEN: "",
 		},
 		handlers: {
 			onExternalLink: () => {
@@ -371,21 +395,22 @@ function setConfig() {
 		},
 		locale: Locale.En,
 		env: {
-			LDAP_DASHBOARD_PEOPLE_URL: 'https://google.com?q=people',
-			CLIENT_URL: 'http://localhost:3400',
+			LDAP_DASHBOARD_PEOPLE_URL: "https://google.com?q=people",
+			CLIENT_URL: "http://localhost:3400",
 			// https://vite.dev/config/shared-options#envprefix
-			DATABASE_APPLICATION_TYPE: import.meta.env.DATABASE_APPLICATION_TYPE as DatabaseType,
+			DATABASE_APPLICATION_TYPE: import.meta.env
+				.DATABASE_APPLICATION_TYPE as DatabaseType,
 		},
 	});
 }
 
 function renderApp() {
-	const root = createRoot(document.getElementById('root'));
+	const root = createRoot(document.getElementById("root"));
 	root.render(
 		// Disabled strict mode because of issues with react router v5
 		// https://stackoverflow.com/questions/72107964/url-change-successfully-but-components-not-rendered-in-react-v18
 		// <React.StrictMode>
-		<App />
+		<App />,
 		// </React.StrictMode>
 	);
 }
@@ -404,5 +429,5 @@ This is the demo app of the admin-core.
 This code should never execute inside the clients that use the admin-core.
 If you see this message in the client, the index.tsx file in the admin-core is getting bundled inside the admin-core-ui bundle.
 Figure out why and make sure that doesn't happen
-`
+`,
 );

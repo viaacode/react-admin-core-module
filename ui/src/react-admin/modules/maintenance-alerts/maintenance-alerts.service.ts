@@ -27,7 +27,7 @@ export class MaintenanceAlertsService {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url: this.getBaseUrl(),
+					url: MaintenanceAlertsService.getBaseUrl(),
 					query: {
 						orderProp,
 						orderDirection,
@@ -49,7 +49,7 @@ export class MaintenanceAlertsService {
 		}
 		const data = maintenanceAlert as Partial<MaintenanceAlert>;
 		delete data.id;
-		return fetchWithLogoutJson(this.getBaseUrl(), {
+		return fetchWithLogoutJson(MaintenanceAlertsService.getBaseUrl(), {
 			method: 'POST',
 			body: JSON.stringify(data),
 		});
@@ -64,7 +64,7 @@ export class MaintenanceAlertsService {
 		}
 		const dataTemp: Partial<MaintenanceAlert> = { ...data } as any;
 		delete dataTemp.id;
-		return fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+		return fetchWithLogoutJson(`${MaintenanceAlertsService.getBaseUrl()}/${alertId}`, {
 			method: 'PATCH',
 			body: JSON.stringify({
 				...dataTemp,
@@ -76,7 +76,7 @@ export class MaintenanceAlertsService {
 		if (!alertId) {
 			return;
 		}
-		return fetchWithLogoutJson(`${this.getBaseUrl()}/${alertId}`, {
+		return fetchWithLogoutJson(`${MaintenanceAlertsService.getBaseUrl()}/${alertId}`, {
 			method: 'DELETE',
 		});
 	}
