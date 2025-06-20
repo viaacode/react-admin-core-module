@@ -1,13 +1,13 @@
-import type { ButtonAction } from '@viaa/avo2-components';
-import { Image } from '@viaa/avo2-components';
-import clsx from 'clsx';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { isNil } from 'lodash-es';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components/Icon';
-import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import { BlockHeading } from '../BlockHeading';
+import type { ButtonAction } from "@viaa/avo2-components";
+import { Image } from "@viaa/avo2-components";
+import clsx from "clsx";
+import type { FunctionComponent, ReactElement, ReactNode } from "react";
+import type { DefaultComponentProps } from "~modules/shared/types/components";
+import { isNil } from "lodash-es";
+import { SmartLink } from "~modules/shared/components/SmartLink/SmartLink";
+import { Icon } from "~shared/components/Icon";
+import type { HeadingTypeOption } from "~modules/content-page/types/content-block.types";
+import { BlockHeading } from "../BlockHeading";
 
 export interface BlockClickableTilesProps {
 	title: string;
@@ -20,16 +20,22 @@ export interface BlockThreeClickableTilesProps extends DefaultComponentProps {
 	elements: BlockClickableTilesProps[];
 }
 
-export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTilesProps> = ({
-	className,
-	elements,
-}): ReactElement => {
-	const renderTile = ({ image, title, titleType }: BlockClickableTilesProps, i: number) => (
+export const BlockThreeClickableTiles: FunctionComponent<
+	BlockThreeClickableTilesProps
+> = ({ className, elements }): ReactElement => {
+	const renderTile = (
+		{ image, title, titleType }: BlockClickableTilesProps,
+		i: number,
+	) => (
 		<article
 			key={`c-block-three-clickable-tiles-${i}`}
 			className="c-block-three-clickable-tiles__tile"
 		>
-			<Image src={image} alt={title} className="c-block-three-clickable-tiles__image" />
+			<Image
+				src={image}
+				alt={title}
+				className="c-block-three-clickable-tiles__image"
+			/>
 			<div className="c-block-three-clickable-tiles__content">
 				{title && titleType && (
 					<BlockHeading
@@ -47,20 +53,21 @@ export const BlockThreeClickableTiles: FunctionComponent<BlockThreeClickableTile
 	);
 
 	return (
-		<div className={clsx('c-block-three-clickable-tiles', className)}>
+		<div className={clsx("c-block-three-clickable-tiles", className)}>
 			{elements.map(
 				(tile: BlockClickableTilesProps, i: number): ReactNode =>
 					isNil(tile?.link) ? (
 						renderTile(tile, i)
 					) : (
 						<SmartLink
+							// biome-ignore lint/suspicious/noArrayIndexKey: We don't have a better key at this time
 							key={`c-block-three-clickable-tiles-${i}`}
 							className="c-block-three-clickable-tiles__link"
 							action={tile.link}
 						>
 							{renderTile(tile, i)}
 						</SmartLink>
-					)
+					),
 			)}
 		</div>
 	);

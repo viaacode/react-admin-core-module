@@ -20,7 +20,7 @@ export class OrganisationService {
 
 	public static async fetchOrganisationsWithUsers(): Promise<BasicOrganisation[]> {
 		try {
-			return fetchWithLogoutJson(OrganisationService.getBaseUrl() + '/with-users');
+			return fetchWithLogoutJson(`${OrganisationService.getBaseUrl()}/with-users`);
 		} catch (err) {
 			throw new CustomError(
 				'Failed to get organisations that have users from the database',

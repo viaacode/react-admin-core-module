@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { ContentPickerType } from '@viaa/avo2-types';
-import { OrganisationService } from '~shared/services/organization-service/organisation-service';
-import { QUERY_KEYS } from '~shared/types';
+import { useQuery } from "@tanstack/react-query";
+import { ContentPickerType } from "@viaa/avo2-types";
+import { OrganisationService } from "~shared/services/organization-service/organisation-service";
+import { QUERY_KEYS } from "~shared/types";
 
 export const useGetMaintainersByContent = (
 	contentItemType:
@@ -11,9 +11,14 @@ export const useGetMaintainersByContent = (
 		| ContentPickerType.ASSIGNMENT
 		| undefined,
 	contentItemId: string | undefined,
-	options: { enabled?: boolean } = {}
+	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+		enabled: true,
+		keepPreviousData: true,
+	},
 ) => {
-	return useQuery<{ id: string; name: string; logo: string | null; website: string | null }[]>(
+	return useQuery<
+		{ id: string; name: string; logo: string | null; website: string | null }[]
+	>(
 		[QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemId],
 		() => {
 			if (
@@ -23,8 +28,15 @@ export const useGetMaintainersByContent = (
 			) {
 				return [];
 			}
-			return OrganisationService.getMaintainersByContentItem(contentItemType, contentItemId);
+			return OrganisationService.getMaintainersByContentItem(
+				contentItemType,
+				contentItemId,
+			);
 		},
-		{ enabled: true, ...options }
+		{
+			enabled: true,
+			keepPreviousData: true,
+			...options,
+		},
 	);
 };

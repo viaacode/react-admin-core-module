@@ -19,7 +19,7 @@ export const AdminLayout: AdminLayoutComponent = ({ children, pageTitle, classNa
 	const filtersRight = useSlot(AdminFiltersRight, children);
 
 	return (
-		<div className={`c-admin${' ' + className}`}>
+		<div className={`c-admin${` ${className}`}`}>
 			<header className="c-admin__header">
 				<div className="c-admin__back">{back}</div>
 				<h2 className="c-admin__page-title">{pageTitle}</h2>

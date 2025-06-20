@@ -76,7 +76,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				),
 			});
 		}
-	}, [setLoadingInfo, setContentPageLabelInfo, contentPageLabelId]);
+	}, [contentPageLabelId]);
 
 	useEffect(() => {
 		initOrFetchContentPageLabel();
@@ -86,7 +86,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 		if (contentPageLabelInfo) {
 			setLoadingInfo({ state: 'loaded' });
 		}
-	}, [contentPageLabelInfo, setLoadingInfo]);
+	}, [contentPageLabelInfo]);
 
 	const handleEditClick = () => {
 		history.push(

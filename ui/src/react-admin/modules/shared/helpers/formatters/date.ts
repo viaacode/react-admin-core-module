@@ -76,7 +76,7 @@ export function toDateObject(timestamp: DateLikeNullable): Date | null {
  */
 export function parseAsIsoWithoutTimezone(timestamp: string): Date {
 	if (!timestamp.endsWith('Z')) {
-		return parseISO(timestamp + 'Z');
+		return parseISO(`${timestamp}Z`);
 	} else {
 		return parseISO(timestamp);
 	}

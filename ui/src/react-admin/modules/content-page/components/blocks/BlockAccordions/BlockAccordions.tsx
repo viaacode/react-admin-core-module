@@ -1,10 +1,10 @@
-import type { DefaultProps } from '@viaa/avo2-components';
-import { Accordion } from '@viaa/avo2-components';
-import clsx from 'clsx';
-import type { FunctionComponent } from 'react';
-import React, { useState } from 'react';
+import type { DefaultProps } from "@viaa/avo2-components";
+import { Accordion } from "@viaa/avo2-components";
+import clsx from "clsx";
+import type { FunctionComponent } from "react";
+import React, { useState } from "react";
 
-import { BlockRichText } from '../BlockRichText/BlockRichText';
+import { BlockRichText } from "../BlockRichText/BlockRichText";
 
 export interface BlockAccordionsProps extends DefaultProps {
 	elements: { title: string; content: string }[];
@@ -18,13 +18,20 @@ export const BlockAccordions: FunctionComponent<BlockAccordionsProps> = ({
 	const generateKey = (i: number) => `block-accordion-${i}`;
 
 	// Hooks
-	const [accordionsOpen, setAccordionsOpen] = useState<{ [key: string]: boolean }>(
-		elements.reduce((acc, _curr, i) => ({ ...acc, [generateKey(i)]: false }), {})
-	);
+	const initialAccordionsState = () => {
+		const state: { [key: string]: boolean } = {};
+		elements.forEach((_curr, i) => {
+			state[generateKey(i)] = false;
+		});
+		return state;
+	};
+	const [accordionsOpen, setAccordionsOpen] = useState<{
+		[key: string]: boolean;
+	}>(initialAccordionsState);
 
 	// Render
 	return (
-		<div className={clsx(className, 'c-block-accordions')}>
+		<div className={clsx(className, "c-block-accordions")}>
 			{elements.map(({ content, title }, index) => {
 				const key = generateKey(index);
 
@@ -34,7 +41,10 @@ export const BlockAccordions: FunctionComponent<BlockAccordionsProps> = ({
 						isOpen={accordionsOpen[key]}
 						title={title}
 						onToggle={() =>
-							setAccordionsOpen({ ...accordionsOpen, [key]: !accordionsOpen[key] })
+							setAccordionsOpen({
+								...accordionsOpen,
+								[key]: !accordionsOpen[key],
+							})
 						}
 					>
 						<BlockRichText elements={{ content }} />

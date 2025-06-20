@@ -144,7 +144,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				icon: notFound ? ('search' as IconName) : ('alertTriangle' as IconName),
 			});
 		}
-	}, [id, setContentPageInfo, setLoadingInfo, commonUser]);
+	}, [id, commonUser]);
 
 	useEffect(() => {
 		fetchContentPageById();
@@ -157,7 +157,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 				state: 'loaded',
 			});
 		}
-	}, [contentPageInfo, setLoadingInfo, loaded]);
+	}, [contentPageInfo, loaded]);
 
 	const handleDelete = async () => {
 		try {
@@ -184,7 +184,7 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	};
 
 	function handlePreviewClicked() {
-		if (contentPageInfo && contentPageInfo.path) {
+		if (contentPageInfo?.path) {
 			if (contentPageInfo.language === Locale.Nl) {
 				// Do not add the locale to the path, since the default is Dutch
 				const path = stringifyUrl({

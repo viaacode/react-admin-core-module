@@ -1,13 +1,13 @@
-import type { RichEditorState } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
-import type { Draft } from 'immer';
-import { produce } from 'immer';
-import { cloneDeep, isNil } from 'lodash-es';
-import type { Reducer } from 'react';
-import { AdminConfigManager } from '~core/config';
-import { Locale } from '~modules/translations/translations.core.types';
+import type { RichEditorState } from "@meemoo/react-components";
+import type { Avo } from "@viaa/avo2-types";
+import type { Draft } from "immer";
+import { produce } from "immer";
+import { cloneDeep, isNil } from "lodash-es";
+import type { Reducer } from "react";
+import { AdminConfigManager } from "~core/config";
+import { Locale } from "~modules/translations/translations.core.types";
 
-import type { ValueOf } from '~shared/types';
+import type { ValueOf } from "~shared/types";
 
 import type {
 	ContentBlockComponentsConfig,
@@ -16,9 +16,12 @@ import type {
 	ContentBlockErrors,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
-} from '../types/content-block.types';
-import type { ContentPageInfo } from '../types/content-pages.types';
-import { ContentEditActionType, ContentPageWidth } from '../types/content-pages.types';
+} from "../types/content-block.types";
+import type { ContentPageInfo } from "../types/content-pages.types";
+import {
+	ContentEditActionType,
+	ContentPageWidth,
+} from "../types/content-pages.types";
 
 interface SetContentPage {
 	type: ContentEditActionType.SET_CONTENT_PAGE;
@@ -31,7 +34,7 @@ interface SetContentPage {
 interface SetContentPageProp {
 	type: ContentEditActionType.SET_CONTENT_PAGE_PROP;
 	payload: {
-		propName: keyof ContentPageInfo | 'description_state';
+		propName: keyof ContentPageInfo | "description_state";
 		propValue: ValueOf<ContentPageInfoEditOrCreate> | RichEditorState | string;
 	};
 }
@@ -63,7 +66,9 @@ interface SetComponentsState {
 	type: ContentEditActionType.SET_COMPONENTS_STATE;
 	payload: {
 		index: number;
-		formGroupState: SingleContentBlockComponentState | RepeatedContentBlockComponentState;
+		formGroupState:
+			| SingleContentBlockComponentState
+			| RepeatedContentBlockComponentState;
 		stateIndex?: number;
 	};
 }
@@ -104,7 +109,9 @@ export type ContentEditAction =
 	| SetBlockState
 	| SetContentBlockError;
 
-type ContentPageInfoEditOrCreate = Omit<ContentPageInfo, 'id'> & { id?: string | number };
+type ContentPageInfoEditOrCreate = Omit<ContentPageInfo, "id"> & {
+	id?: string | number;
+};
 
 export interface ContentPageEditState {
 	currentContentPageInfo: ContentPageInfoEditOrCreate | null;
@@ -112,23 +119,23 @@ export interface ContentPageEditState {
 }
 
 export const CONTENT_PAGE_INITIAL_STATE = (
-	user: Avo.User.CommonUser
+	user: Avo.User.CommonUser,
 ): ContentPageInfoEditOrCreate => {
 	return {
 		thumbnailPath: null,
-		title: '',
-		description: '',
+		title: "",
+		description: "",
 		description_state: undefined,
-		seoDescription: '',
-		metaDescription: '',
+		seoDescription: "",
+		metaDescription: "",
 		isProtected: false,
-		path: '',
-		contentType: 'PAGINA',
+		path: "",
+		contentType: "PAGINA",
 		contentWidth:
 			AdminConfigManager.getConfig()?.contentPage?.defaultPageWidth ||
 			ContentPageWidth.EXTRA_LARGE,
-		publishAt: '',
-		depublishAt: '',
+		publishAt: "",
+		depublishAt: "",
 		isPublic: false,
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString(),
@@ -142,9 +149,9 @@ export const CONTENT_PAGE_INITIAL_STATE = (
 		nlParentPageId: null,
 		translatedPages: [],
 		owner: {
-			firstName: user.firstName || '-',
-			lastName: user.lastName || '-',
-			fullName: user.fullName || '-',
+			firstName: user.firstName || "-",
+			lastName: user.lastName || "-",
+			fullName: user.fullName || "-",
 			groupId: user.userGroup?.id as string,
 			id: user.profileId,
 			groupName: user.userGroup?.label as string,
@@ -160,156 +167,165 @@ const repositionConfigs = (updatedConfigs: ContentBlockConfig[]) => {
 };
 
 // Reducer
-export const contentEditReducer: Reducer<ContentPageEditState, ContentEditAction> = produce(
-	(draft: Draft<ContentPageEditState>, action: ContentEditAction) => {
-		// Because we use immer, we have to mutate the draft state in place for it to work properly
-		// We don't have to return anything because our produce() will automagically do that for us
+export const contentEditReducer: Reducer<
+	ContentPageEditState,
+	ContentEditAction
+> = produce((draft: Draft<ContentPageEditState>, action: ContentEditAction) => {
+	// Because we use immer, we have to mutate the draft state in place for it to work properly
+	// We don't have to return anything because our produce() will automagically do that for us
 
-		let components: ContentBlockComponentsConfig;
-		let componentsState: ContentBlockComponentState;
-		switch (action.type) {
-			case ContentEditActionType.SET_CONTENT_PAGE: {
-				draft.currentContentPageInfo = action.payload.contentPageInfo;
-				if (action.payload.replaceInitial) {
-					draft.initialContentPageInfo = cloneDeep(action.payload.contentPageInfo);
-				}
-				return;
-			}
-			case ContentEditActionType.SET_CONTENT_PAGE_PROP: {
-				(draft.currentContentPageInfo as any)[action.payload.propName] =
-					action.payload.propValue;
-				return;
-			}
-			case ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG: {
-				draft.currentContentPageInfo?.content_blocks?.push(
-					action.payload as ContentBlockConfig
+	let components: ContentBlockComponentsConfig;
+	let componentsState: ContentBlockComponentState;
+	switch (action.type) {
+		case ContentEditActionType.SET_CONTENT_PAGE: {
+			draft.currentContentPageInfo = action.payload.contentPageInfo;
+			if (action.payload.replaceInitial) {
+				draft.initialContentPageInfo = cloneDeep(
+					action.payload.contentPageInfo,
 				);
-				return;
 			}
-			case ContentEditActionType.REMOVE_CONTENT_BLOCK_CONFIG: {
-				(draft.currentContentPageInfo as ContentPageInfo).content_blocks.splice(
-					action.payload as number,
-					1
-				);
-				repositionConfigs(draft.currentContentPageInfo?.content_blocks || []);
-				return;
-			}
-			case ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG: {
-				const reorderContentBlockConfig = action as ReorderContentBlockConfig;
-				const newIndex =
-					reorderContentBlockConfig.payload.configIndex +
-					reorderContentBlockConfig.payload.indexUpdate;
-				// Get updated item and remove it from copy
-				if (draft.currentContentPageInfo?.content_blocks) {
-					const reorderedConfig = draft.currentContentPageInfo?.content_blocks.splice(
-						reorderContentBlockConfig.payload.configIndex,
-						1
-					)[0];
-					// Apply update object to config
-					draft.currentContentPageInfo.content_blocks?.splice(
-						newIndex,
-						0,
-						reorderedConfig
-					);
-					// Reposition
-					repositionConfigs(draft.currentContentPageInfo.content_blocks || []);
-				}
-				return;
-			}
-			case ContentEditActionType.ADD_COMPONENTS_STATE: {
-				const addComponentsState = action as AddComponentsState;
-				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo?.content_blocks?.[
-						addComponentsState.payload.index
-					];
-				if (config) {
-					componentsState = config.components.state;
-					(componentsState as RepeatedContentBlockComponentState[]).push(
-						...(addComponentsState.payload
-							.formGroupState as RepeatedContentBlockComponentState[])
-					);
-				}
-				return;
-			}
-			case ContentEditActionType.REMOVE_COMPONENTS_STATE: {
-				const removeComponentsState = action as RemoveComponentsState;
-				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo?.content_blocks?.[
-						removeComponentsState.payload.index
-					];
-				if (config) {
-					componentsState = config.components.state;
-					(componentsState as RepeatedContentBlockComponentState[]).splice(
-						removeComponentsState.payload.stateIndex,
-						1
-					);
-				}
-				return;
-			}
-			case ContentEditActionType.SET_COMPONENTS_STATE: {
-				const setComponentsState = action as SetComponentsState;
-				const config: ContentBlockConfig | undefined =
-					draft.currentContentPageInfo?.content_blocks?.[
-						setComponentsState.payload.index
-					];
-				if (!config) {
-					return;
-				}
-				components = config.components as ContentBlockComponentsConfig;
-
-				if (!isNil(action.payload.stateIndex)) {
-					// Config component state is an array (repeatable)
-					const repeatableState =
-						components.state as RepeatedContentBlockComponentState[];
-					repeatableState[action.payload.stateIndex] = {
-						...repeatableState[action.payload.stateIndex],
-						...(action.payload.formGroupState as RepeatedContentBlockComponentState),
-					};
-				} else {
-					// Config component state is a single object (single)
-					components.state = {
-						...components.state,
-						...(action.payload.formGroupState as SingleContentBlockComponentState),
-					};
-				}
-				return;
-			}
-			case ContentEditActionType.SET_BLOCK_STATE: {
-				const setBlockState = action as SetBlockState;
-				const blockInfo =
-					draft.currentContentPageInfo?.content_blocks?.[setBlockState.payload.index];
-				if (!blockInfo) {
-					return;
-				}
-				blockInfo.block.state = {
-					...blockInfo.block.state,
-					...setBlockState.payload.formGroupState,
-				};
-				return;
-			}
-			case ContentEditActionType.SET_CONTENT_BLOCK_ERROR: {
-				const setContentBlockError = action as SetContentBlockError;
-				if (
-					draft.currentContentPageInfo &&
-					JSON.stringify(action.payload.errors) !==
-						JSON.stringify(
-							draft.currentContentPageInfo?.content_blocks?.[
-								setContentBlockError.payload.configIndex
-							].errors
-						)
-				) {
-					draft.currentContentPageInfo.content_blocks =
-						draft.currentContentPageInfo.content_blocks || [];
-					draft.currentContentPageInfo.content_blocks[
-						setContentBlockError.payload.configIndex
-					].errors = setContentBlockError.payload.errors;
-				}
-				return;
-			}
-			default:
-				// We don't actually need the default case, produce() will simply return the
-				// original state if nothing has changed in the draft
-				return;
+			return;
 		}
+		case ContentEditActionType.SET_CONTENT_PAGE_PROP: {
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			(draft.currentContentPageInfo as any)[action.payload.propName] =
+				action.payload.propValue;
+			return;
+		}
+		case ContentEditActionType.ADD_CONTENT_BLOCK_CONFIG: {
+			draft.currentContentPageInfo?.content_blocks?.push(
+				action.payload as ContentBlockConfig,
+			);
+			return;
+		}
+		case ContentEditActionType.REMOVE_CONTENT_BLOCK_CONFIG: {
+			(draft.currentContentPageInfo as ContentPageInfo).content_blocks.splice(
+				action.payload as number,
+				1,
+			);
+			repositionConfigs(draft.currentContentPageInfo?.content_blocks || []);
+			return;
+		}
+		case ContentEditActionType.REORDER_CONTENT_BLOCK_CONFIG: {
+			const reorderContentBlockConfig = action as ReorderContentBlockConfig;
+			const newIndex =
+				reorderContentBlockConfig.payload.configIndex +
+				reorderContentBlockConfig.payload.indexUpdate;
+			// Get updated item and remove it from copy
+			if (draft.currentContentPageInfo?.content_blocks) {
+				const reorderedConfig =
+					draft.currentContentPageInfo?.content_blocks.splice(
+						reorderContentBlockConfig.payload.configIndex,
+						1,
+					)[0];
+				// Apply update object to config
+				draft.currentContentPageInfo.content_blocks?.splice(
+					newIndex,
+					0,
+					reorderedConfig,
+				);
+				// Reposition
+				repositionConfigs(draft.currentContentPageInfo.content_blocks || []);
+			}
+			return;
+		}
+		case ContentEditActionType.ADD_COMPONENTS_STATE: {
+			const addComponentsState = action as AddComponentsState;
+			const config: ContentBlockConfig | undefined =
+				draft.currentContentPageInfo?.content_blocks?.[
+					addComponentsState.payload.index
+				];
+			if (config) {
+				componentsState = config.components.state;
+				(componentsState as RepeatedContentBlockComponentState[]).push(
+					...(addComponentsState.payload
+						.formGroupState as RepeatedContentBlockComponentState[]),
+				);
+			}
+			return;
+		}
+		case ContentEditActionType.REMOVE_COMPONENTS_STATE: {
+			const removeComponentsState = action as RemoveComponentsState;
+			const config: ContentBlockConfig | undefined =
+				draft.currentContentPageInfo?.content_blocks?.[
+					removeComponentsState.payload.index
+				];
+			if (config) {
+				componentsState = config.components.state;
+				(componentsState as RepeatedContentBlockComponentState[]).splice(
+					removeComponentsState.payload.stateIndex,
+					1,
+				);
+			}
+			return;
+		}
+		case ContentEditActionType.SET_COMPONENTS_STATE: {
+			const setComponentsState = action as SetComponentsState;
+			const config: ContentBlockConfig | undefined =
+				draft.currentContentPageInfo?.content_blocks?.[
+					setComponentsState.payload.index
+				];
+			if (!config) {
+				return;
+			}
+			components = config.components as ContentBlockComponentsConfig;
+
+			if (!isNil(action.payload.stateIndex)) {
+				// Config component state is an array (repeatable)
+				const repeatableState =
+					components.state as RepeatedContentBlockComponentState[];
+				repeatableState[action.payload.stateIndex] = {
+					...repeatableState[action.payload.stateIndex],
+					...(action.payload
+						.formGroupState as RepeatedContentBlockComponentState),
+				};
+			} else {
+				// Config component state is a single object (single)
+				components.state = {
+					...components.state,
+					...(action.payload
+						.formGroupState as SingleContentBlockComponentState),
+				};
+			}
+			return;
+		}
+		case ContentEditActionType.SET_BLOCK_STATE: {
+			const setBlockState = action as SetBlockState;
+			const blockInfo =
+				draft.currentContentPageInfo?.content_blocks?.[
+					setBlockState.payload.index
+				];
+			if (!blockInfo) {
+				return;
+			}
+			blockInfo.block.state = {
+				...blockInfo.block.state,
+				...setBlockState.payload.formGroupState,
+			};
+			return;
+		}
+		case ContentEditActionType.SET_CONTENT_BLOCK_ERROR: {
+			const setContentBlockError = action as SetContentBlockError;
+			if (
+				draft.currentContentPageInfo &&
+				JSON.stringify(action.payload.errors) !==
+					JSON.stringify(
+						draft.currentContentPageInfo?.content_blocks?.[
+							setContentBlockError.payload.configIndex
+						].errors,
+					)
+			) {
+				draft.currentContentPageInfo.content_blocks =
+					draft.currentContentPageInfo.content_blocks || [];
+				draft.currentContentPageInfo.content_blocks[
+					setContentBlockError.payload.configIndex
+				].errors = setContentBlockError.payload.errors;
+			}
+			return;
+		}
+		default:
+			// We don't actually need the default case, produce() will simply return the
+			// original state if nothing has changed in the draft
+			return;
 	}
-);
+});

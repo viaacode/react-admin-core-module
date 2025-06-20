@@ -102,7 +102,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				});
 			}
 		}
-	}, [isCreatePage, contentPageLabelId, setLoadingInfo, setContentPageLabelInfo]);
+	}, [isCreatePage, contentPageLabelId]);
 
 	useEffect(() => {
 		initOrFetchContentPageLabel();
@@ -112,7 +112,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 		if (contentPageLabelInfo) {
 			setLoadingInfo({ state: 'loaded' });
 		}
-	}, [contentPageLabelInfo, setLoadingInfo]);
+	}, [contentPageLabelInfo]);
 
 	const navigateBack = () => {
 		if (isCreatePage) {

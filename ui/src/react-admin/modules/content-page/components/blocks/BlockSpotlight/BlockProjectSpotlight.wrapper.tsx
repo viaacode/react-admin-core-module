@@ -53,7 +53,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 							return dbContentPage
 								? convertDbContentPageToContentPageInfo(dbContentPage)
 								: null;
-						} catch (err) {
+						} catch (_err) {
 							// Failed to fetch one of the content pages
 							// Continue rendering the block with one of the tiles missing
 							return null;

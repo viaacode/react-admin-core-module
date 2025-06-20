@@ -1,19 +1,21 @@
-import type { UseQueryResult } from '@tanstack/react-query';
-import { useQuery } from '@tanstack/react-query';
-import { UserGroupService } from '~modules/user-group/services/user-group.service';
+import type { UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { UserGroupService } from "~modules/user-group/services/user-group.service";
 import type {
 	UserGroup,
 	UserGroupWithPermissions,
-} from '~modules/user-group/types/user-group.types';
-import { QUERY_KEYS } from '~shared/types';
+} from "~modules/user-group/types/user-group.types";
+import { QUERY_KEYS } from "~shared/types";
 
 interface GetUserGroupsParams {
 	withPermissions: boolean;
 }
 
-export const useGetUserGroups = <TData = UserGroup[] | UserGroupWithPermissions[]>(
-	props: GetUserGroupsParams
-): UseQueryResult<TData, any> => {
+export const useGetUserGroups = <
+	TData = UserGroup[] | UserGroupWithPermissions[],
+>(
+	props: GetUserGroupsParams,
+): UseQueryResult<TData> => {
 	return useQuery(
 		[QUERY_KEYS.GET_USER_GROUPS, props],
 		(props) => {
@@ -31,6 +33,6 @@ export const useGetUserGroups = <TData = UserGroup[] | UserGroupWithPermissions[
 			cacheTime: Infinity,
 			staleTime: Infinity,
 			keepPreviousData: true,
-		}
+		},
 	);
 };

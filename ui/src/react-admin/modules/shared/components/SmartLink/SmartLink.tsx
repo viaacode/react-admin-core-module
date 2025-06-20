@@ -1,18 +1,18 @@
-import type { ButtonAction } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import { fromPairs, map } from 'lodash-es';
-import { stringify } from 'query-string';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import React from 'react';
+import type { ButtonAction } from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import clsx from "clsx";
+import { fromPairs, map } from "lodash-es";
+import { stringify } from "query-string";
+import type { FunctionComponent, ReactElement, ReactNode } from "react";
+import React from "react";
 
-import { AdminConfigManager } from '~core/config';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
-import { isServerSideRendering } from '~shared/helpers/is-server-side-rendering';
-import { buildLink } from '~shared/helpers/link';
-import { insideIframe } from '../../helpers/inside-iframe';
-import { Link } from '../Link';
-import { LinkTarget } from './SmartLink.types';
+import { AdminConfigManager } from "~core/config";
+import { getAdminCoreApiUrl } from "~shared/helpers/get-proxy-url-from-admin-core-config";
+import { isServerSideRendering } from "~shared/helpers/is-server-side-rendering";
+import { buildLink } from "~shared/helpers/link";
+import { insideIframe } from "../../helpers/inside-iframe";
+import { Link } from "../Link";
+import { LinkTarget } from "./SmartLink.types";
 
 export interface SmartLinkProps {
 	action?: ButtonAction | null;
@@ -32,35 +32,34 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 	const renderLink = (
 		url: string,
 		target: LinkTarget = LinkTarget.Self,
-		anchor?: boolean
+		anchor?: boolean,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 	): ReactElement<any, any> | null => {
 		let fullUrl = url;
-		if (url.startsWith('www.')) {
+		if (url.startsWith("www.")) {
 			fullUrl = `//${url}`;
 		}
 		const clientUrl = AdminConfigManager.getConfig().env.CLIENT_URL;
-		const clientUrlWithoutProtocol = AdminConfigManager.getConfig().env.CLIENT_URL.replace(
-			/https?:\/\//,
-			''
-		);
+		const clientUrlWithoutProtocol =
+			AdminConfigManager.getConfig().env.CLIENT_URL.replace(/https?:\/\//, "");
 		if (fullUrl.startsWith(clientUrl)) {
-			fullUrl = fullUrl.replace(clientUrl, '');
+			fullUrl = fullUrl.replace(clientUrl, "");
 		}
 		if (fullUrl.startsWith(clientUrlWithoutProtocol)) {
-			fullUrl = fullUrl.replace(clientUrlWithoutProtocol, '');
+			fullUrl = fullUrl.replace(clientUrlWithoutProtocol, "");
 		}
 
 		switch (target) {
 			case LinkTarget.Self:
 				// Open inside same tab
-				if (fullUrl.includes('//')) {
+				if (fullUrl.includes("//")) {
 					// absolute url
 					return (
 						<a
 							href={fullUrl}
 							target={LinkTarget.Self}
 							title={title}
-							className={clsx(className, { 'a-link__no-styles': removeStyles })}
+							className={clsx(className, { "a-link__no-styles": removeStyles })}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 							}
@@ -75,14 +74,14 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						to={fullUrl}
 						target={LinkTarget.Self}
 						title={title}
-						className={clsx(className, { 'a-link__no-styles': removeStyles })}
-						onClick={(evt) => {
+						className={clsx(className, { "a-link__no-styles": removeStyles })}
+						onClick={(_evt) => {
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl);
 							if (anchor) {
-								const anchorId = fullUrl.split('#')[1];
+								const anchorId = fullUrl.split("#")[1];
 								document
 									.getElementById(anchorId)
-									?.scrollIntoView({ behavior: 'instant' });
+									?.scrollIntoView({ behavior: "instant" });
 							} else {
 								scrollTo({ top: 0 });
 							}
@@ -91,11 +90,9 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						{children}
 					</Link>
 				);
-
-			case LinkTarget.Blank:
 			default:
 				// Open in a new tab
-				if (fullUrl.includes('//')) {
+				if (fullUrl.includes("//")) {
 					// absolute fullUrl
 					return (
 						<a
@@ -103,7 +100,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 							target={LinkTarget.Blank}
 							rel="noopener noreferrer"
 							title={title}
-							className={clsx(className, { 'a-link__no-styles': removeStyles })}
+							className={clsx(className, { "a-link__no-styles": removeStyles })}
 							onClick={() =>
 								AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 							}
@@ -119,7 +116,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 						target={LinkTarget.Blank}
 						rel="noopener noreferrer"
 						title={title}
-						className={clsx(className, { 'a-link__no-styles': removeStyles })}
+						className={clsx(className, { "a-link__no-styles": removeStyles })}
 						onClick={() =>
 							AdminConfigManager.getConfig().handlers.onExternalLink(fullUrl)
 						}
@@ -130,6 +127,7 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 		}
 	};
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const renderSmartLink = (): ReactElement<any, any> | null => {
 		if (action) {
 			const { type, value, target } = action;
@@ -145,81 +143,91 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			}
 
 			switch (type as Avo.Core.ContentPickerType) {
-				case 'INTERNAL_LINK':
-				case 'CONTENT_PAGE':
-				case 'PROJECTS': {
+				case "INTERNAL_LINK":
+				case "CONTENT_PAGE":
+				case "PROJECTS": {
 					return renderLink(String(value), resolvedTarget);
 				}
 
-				case 'COLLECTION': {
+				case "COLLECTION": {
 					const collectionUrl = buildLink(
-						AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
+						AdminConfigManager.getAdminRoute("COLLECTION_DETAIL"),
 						{
 							id: value as string,
-						}
+						},
 					);
 					return renderLink(collectionUrl, resolvedTarget);
 				}
 
-				case 'ITEM': {
-					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
-						id: value,
-					});
+				case "ITEM": {
+					const itemUrl = buildLink(
+						AdminConfigManager.getAdminRoute("ITEM_DETAIL"),
+						{
+							id: value,
+						},
+					);
 					return renderLink(itemUrl, resolvedTarget);
 				}
 
-				case 'BUNDLE': {
-					const bundleUrl = buildLink(AdminConfigManager.getAdminRoute('BUNDLE_DETAIL'), {
-						id: value,
-					});
+				case "BUNDLE": {
+					const bundleUrl = buildLink(
+						AdminConfigManager.getAdminRoute("BUNDLE_DETAIL"),
+						{
+							id: value,
+						},
+					);
 					return renderLink(bundleUrl, resolvedTarget);
 				}
 
-				case 'ASSIGNMENT': {
+				case "ASSIGNMENT": {
 					const assignmentUrl = buildLink(
-						AdminConfigManager.getAdminRoute('ASSIGNMENT_DETAIL'),
+						AdminConfigManager.getAdminRoute("ASSIGNMENT_DETAIL"),
 						{
 							id: value,
-						}
+						},
 					);
 					return renderLink(assignmentUrl, resolvedTarget);
 				}
 
-				case 'EXTERNAL_LINK': {
-					const externalUrl = ((value as string) || '').replace(
-						'{{PROXY_URL}}',
-						getAdminCoreApiUrl() || ''
+				case "EXTERNAL_LINK": {
+					const externalUrl = ((value as string) || "").replace(
+						"{{PROXY_URL}}",
+						getAdminCoreApiUrl() || "",
 					);
 					return renderLink(externalUrl, resolvedTarget);
 				}
 
-				case 'ANCHOR_LINK': {
+				case "ANCHOR_LINK": {
 					const urlWithoutQueryOrAnchor = window.location.href
-						.split('?')[0]
-						.split('#')[0];
-					return renderLink(`${urlWithoutQueryOrAnchor}#${value}`, resolvedTarget, true);
+						.split("?")[0]
+						.split("#")[0];
+					return renderLink(
+						`${urlWithoutQueryOrAnchor}#${value}`,
+						resolvedTarget,
+						true,
+					);
 				}
 
-				case 'FILE': {
+				case "FILE": {
 					return renderLink(value as string, LinkTarget.Blank);
 				}
 
-				case 'SEARCH_QUERY': {
+				case "SEARCH_QUERY": {
 					const queryParams = JSON.parse(value as string);
 					return renderLink(
 						buildLink(
-							AdminConfigManager.getAdminRoute('SEARCH'),
+							AdminConfigManager.getAdminRoute("SEARCH"),
 							{},
 							stringify(
 								fromPairs(
 									map(queryParams, (queryParamValue, queryParam) => [
 										queryParam,
 										JSON.stringify(queryParamValue),
-									])
-								)
-							)
+									]),
+								),
+							),
 						),
-						resolvedTarget
+						resolvedTarget,
 					);
 				}
 
@@ -237,14 +245,15 @@ export const generateSmartLink = (
 	action: ButtonAction | null | undefined,
 	children: ReactNode,
 	title?: string,
-	className?: string
+	className?: string,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): ReactElement<any, any> | null => {
 	return (
 		<SmartLink
 			action={action}
 			title={title}
 			className={className}
-			key={'smart-link-' + action?.value + '-' + title + '-' + className}
+			key={`smart-link-${action?.value}-${title}-${className}`}
 		>
 			{children}
 		</SmartLink>

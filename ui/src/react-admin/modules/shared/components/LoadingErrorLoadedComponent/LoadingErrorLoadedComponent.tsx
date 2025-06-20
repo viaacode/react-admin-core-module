@@ -1,12 +1,12 @@
-import type { IconName } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import React from 'react';
+import type { IconName } from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import type { FunctionComponent, ReactElement, ReactNode } from "react";
+import React from "react";
 
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { tHtml } from '~shared/helpers/translation-functions';
+import { CenteredSpinner } from "~shared/components/Spinner/CenteredSpinner";
+import { tHtml } from "~shared/helpers/translation-functions";
 
-export type LoadingState = 'loading' | 'loaded' | 'error';
+export type LoadingState = "loading" | "loaded" | "error";
 
 export interface ErrorViewQueryParams {
 	message?: ReactNode | string;
@@ -22,6 +22,7 @@ export interface LoadingErrorLoadedComponentProps {
 	loadingInfo: LoadingInfo;
 	notFoundError?: string | null;
 	showSpinner?: boolean;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	dataObject: any | undefined | null;
 	render: () => ReactElement | null;
 }
@@ -35,8 +36,10 @@ export interface LoadingErrorLoadedComponentProps {
  * @param render
  * @constructor
  */
-export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedComponentProps> = ({
-	loadingInfo = { state: 'loading' },
+export const LoadingErrorLoadedComponent: FunctionComponent<
+	LoadingErrorLoadedComponentProps
+> = ({
+	loadingInfo = { state: "loading" },
 	notFoundError,
 	showSpinner = true,
 	dataObject,
@@ -56,17 +59,17 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 		<>
 			{loadingInfo.message ||
 				tHtml(
-					'shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
+					"shared/components/loading-error-loaded-component/loading-error-loaded-component___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens",
 				)}
 		</>
 	);
 
 	// Render
 	switch (loadingInfo.state) {
-		case 'error':
+		case "error":
 			return renderError();
 
-		case 'loaded':
+		case "loaded":
 			if (dataObject) {
 				return render();
 			}
@@ -74,13 +77,11 @@ export const LoadingErrorLoadedComponent: FunctionComponent<LoadingErrorLoadedCo
 				<>
 					{notFoundError ||
 						tHtml(
-							'shared/components/loading-error-loaded-component/loading-error-loaded-component___het-gevraagde-object-is-niet-gevonden'
+							"shared/components/loading-error-loaded-component/loading-error-loaded-component___het-gevraagde-object-is-niet-gevonden",
 						)}
 				</>
 			);
-
-		case 'loading':
 		default:
-			return showSpinner ? <CenteredSpinner /> : <></>;
+			return showSpinner ? <CenteredSpinner /> : null;
 	}
 };

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 export function getDirName(): string {
 	const metaUrl = import.meta.url;

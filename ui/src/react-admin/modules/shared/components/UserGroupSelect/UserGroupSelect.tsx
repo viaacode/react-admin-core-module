@@ -42,7 +42,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		onChange(uniq([...values, ...checkedOptions]));
 		// Only execute this effect once
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [checkedOptions, onChange, values]);
 
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
 		const userGroup = evt.target.value;

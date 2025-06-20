@@ -19,7 +19,7 @@ export const retrieveInternalLinks = async (
 		.filter((route) => !route[1].includes(':'));
 	const routeOptions: (PickerItem | null)[] = staticRoutes.map(
 		(staticRoute): PickerItem | null => {
-			const label = staticRoute[0] + ' - ' + staticRoute[1];
+			const label = `${staticRoute[0]} - ${staticRoute[1]}`;
 			if (!keyword || label.toLowerCase().includes(keyword.toLowerCase())) {
 				return {
 					label,

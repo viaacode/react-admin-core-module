@@ -1,9 +1,9 @@
-import { CustomError } from './custom-error';
+import { CustomError } from "./custom-error";
 
-const AVO_LAST_RELOAD_BECAUSE_UNAUTH = 'AVO_LAST_RELOAD_BECAUSE_UNAUTH';
+const AVO_LAST_RELOAD_BECAUSE_UNAUTH = "AVO_LAST_RELOAD_BECAUSE_UNAUTH";
 
-type FetchOptions = Omit<RequestInit, 'method'> & {
-	method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
+type FetchOptions = Omit<RequestInit, "method"> & {
+	method: "GET" | "POST" | "DELETE" | "PUT" | "PATCH";
 };
 
 /**
@@ -13,15 +13,15 @@ type FetchOptions = Omit<RequestInit, 'method'> & {
  */
 export async function fetchWithLogout(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean }>
+	options?: Partial<FetchOptions & { forceLogout: boolean }>,
 ): Promise<Response> {
 	const { forceLogout, ...fetchOptions } = options || { forceLogout: true };
 	const response = await fetch(url, {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			'Content-Type': 'application/json',
+			"Content-Type": "application/json",
 		},
-		credentials: 'include',
+		credentials: "include",
 		...fetchOptions,
 	});
 	if (response.status === 401 && (forceLogout ?? true)) {
@@ -29,17 +29,18 @@ export async function fetchWithLogout(
 		goToLoginBecauseOfUnauthorizedError();
 	}
 	if (response.status < 200 || response.status >= 400) {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let responseBody: any;
 		try {
 			responseBody = await response.json();
-		} catch (err) {
+		} catch (_err) {
 			try {
 				responseBody = await response.text();
-			} catch (err) {
-				responseBody = '';
+			} catch (_err) {
+				responseBody = "";
 			}
 		}
-		throw new CustomError('invalid status code', null, {
+		throw new CustomError("invalid status code", null, {
 			url,
 			fetchOptions: options,
 			response,
@@ -58,21 +59,29 @@ export async function fetchWithLogout(
  */
 export async function fetchWithLogoutJson<ResponseType>(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: true }>
+	options?: Partial<
+		FetchOptions & { forceLogout: boolean; throwOnNullResponse: true }
+	>,
 ): Promise<ResponseType>;
 export async function fetchWithLogoutJson<ResponseType>(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: false }>
+	options?: Partial<
+		FetchOptions & { forceLogout: boolean; throwOnNullResponse: false }
+	>,
 ): Promise<ResponseType | null>;
 export async function fetchWithLogoutJson<ResponseType>(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean }>
+	options?: Partial<FetchOptions & { forceLogout: boolean }>,
 ): Promise<ResponseType | null>;
 export async function fetchWithLogoutJson<ResponseType>(
 	url: RequestInfo,
-	options?: Partial<FetchOptions & { forceLogout: boolean; throwOnNullResponse: boolean }>
+	options?: Partial<
+		FetchOptions & { forceLogout: boolean; throwOnNullResponse: boolean }
+	>,
 ): Promise<ResponseType | null> {
-	const { throwOnNullResponse, ...fetchOptions } = options || { throwOnNullResponse: false };
+	const { throwOnNullResponse, ...fetchOptions } = options || {
+		throwOnNullResponse: false,
+	};
 	const response = await fetchWithLogout(url, fetchOptions);
 
 	const text = await response.text();
@@ -80,8 +89,8 @@ export async function fetchWithLogoutJson<ResponseType>(
 		return JSON.parse(text);
 	} else {
 		if (throwOnNullResponse) {
-			throw new CustomError('Response from the server was null', null, {
-				code: 'RESPONSE_IS_NULL',
+			throw new CustomError("Response from the server was null", null, {
+				code: "RESPONSE_IS_NULL",
 				text,
 				url,
 				options,
@@ -93,13 +102,16 @@ export async function fetchWithLogoutJson<ResponseType>(
 }
 
 export function goToLoginBecauseOfUnauthorizedError() {
-	const lastReloadDate = localStorage && localStorage.getItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH);
+	const lastReloadDate = localStorage?.getItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH);
 	if (
 		!lastReloadDate ||
-		new Date(lastReloadDate).getTime() < new Date().getTime() - 5 * 60 * 1000
+		new Date(lastReloadDate).getTime() < Date.now() - 5 * 60 * 1000
 	) {
 		if (localStorage) {
-			localStorage.setItem(AVO_LAST_RELOAD_BECAUSE_UNAUTH, new Date().toISOString());
+			localStorage.setItem(
+				AVO_LAST_RELOAD_BECAUSE_UNAUTH,
+				new Date().toISOString(),
+			);
 		}
 		window.location.reload();
 	}

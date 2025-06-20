@@ -1,16 +1,15 @@
-import type { Avo } from '@viaa/avo2-types';
-import { compact } from 'lodash-es';
-import { stringifyUrl } from 'query-string';
-
-import { LABELS_PER_PAGE } from '~modules/content-page-labels/content-page-label.const';
+import type { Avo } from "@viaa/avo2-types";
+import { compact } from "lodash-es";
+import { stringifyUrl } from "query-string";
+import type { LabelObj } from "~content-blocks/BlockPageOverview/BlockPageOverview.types";
+import { LABELS_PER_PAGE } from "~modules/content-page-labels/content-page-label.const";
 import type {
 	ContentPageLabel,
 	ContentPageLabelOverviewTableCols,
-} from '~modules/content-page-labels/content-page-label.types';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import { CustomError } from '~shared/helpers/custom-error';
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+} from "~modules/content-page-labels/content-page-label.types";
+import { CustomError } from "~shared/helpers/custom-error";
+import { fetchWithLogoutJson } from "~shared/helpers/fetch-with-logout";
+import { getAdminCoreApiUrl } from "~shared/helpers/get-proxy-url-from-admin-core-config";
 
 export class ContentPageLabelService {
 	private static getBaseUrl(): string {
@@ -21,8 +20,9 @@ export class ContentPageLabelService {
 		page: number,
 		sortColumn: ContentPageLabelOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		where: any,
-		itemsPerPage: number = LABELS_PER_PAGE
+		itemsPerPage: number = LABELS_PER_PAGE,
 	): Promise<[ContentPageLabel[], number]> {
 		try {
 			return fetchWithLogoutJson(
@@ -36,59 +36,76 @@ export class ContentPageLabelService {
 						where: JSON.stringify(where),
 					},
 				}),
-				{ throwOnNullResponse: true }
+				{ throwOnNullResponse: true },
 			);
 		} catch (err) {
-			throw new CustomError('Failed to get content page labels from the database', err, {
-				page,
-				sortColumn,
-				sortOrder,
-				where,
-				itemsPerPage,
-			});
+			throw new CustomError(
+				"Failed to get content page labels from the database",
+				err,
+				{
+					page,
+					sortColumn,
+					sortOrder,
+					where,
+					itemsPerPage,
+				},
+			);
 		}
 	}
 
-	public static async fetchContentPageLabel(id: string | number): Promise<ContentPageLabel> {
+	public static async fetchContentPageLabel(
+		id: string | number,
+	): Promise<ContentPageLabel> {
 		try {
-			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl() + '/' + String(id), {
-				throwOnNullResponse: true,
-			});
+			return fetchWithLogoutJson(
+				`${ContentPageLabelService.getBaseUrl()}/${String(id)}`,
+				{
+					throwOnNullResponse: true,
+				},
+			);
 		} catch (err) {
-			throw new CustomError('Failed to get content page label from the database', err, {
-				id,
-			});
+			throw new CustomError(
+				"Failed to get content page label from the database",
+				err,
+				{
+					id,
+				},
+			);
 		}
 	}
 
 	public static async insertContentPageLabels(
-		contentPageLabels: Omit<ContentPageLabel, 'id'>[]
+		contentPageLabels: Omit<ContentPageLabel, "id">[],
 	): Promise<ContentPageLabel[]> {
 		try {
 			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
-				method: 'PUT',
+				method: "PUT",
 				body: JSON.stringify(
 					contentPageLabels.map((labelObj) => ({
 						label: labelObj.label,
 						content_type: labelObj.content_type,
 						language: labelObj.language,
 						link_to: labelObj.link_to,
-					}))
+					})),
 				),
 			});
 		} catch (err) {
-			throw new CustomError('Failed to insert content page labels in the database', err, {
-				contentPageLabels,
-			});
+			throw new CustomError(
+				"Failed to insert content page labels in the database",
+				err,
+				{
+					contentPageLabels,
+				},
+			);
 		}
 	}
 
 	static async updateContentPageLabel(
-		contentPageLabelInfo: ContentPageLabel
+		contentPageLabelInfo: ContentPageLabel,
 	): Promise<ContentPageLabel> {
 		try {
 			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
-				method: 'PATCH',
+				method: "PATCH",
 				body: JSON.stringify({
 					id: contentPageLabelInfo.id,
 					label: contentPageLabelInfo.label,
@@ -98,33 +115,44 @@ export class ContentPageLabelService {
 				}),
 			});
 		} catch (err) {
-			throw new CustomError('Failed to update content page label in the database', err, {
-				contentPageLabel: contentPageLabelInfo,
-				query: 'UPDATE_CONTENT_PAGE_LABEL',
-			});
+			throw new CustomError(
+				"Failed to update content page label in the database",
+				err,
+				{
+					contentPageLabel: contentPageLabelInfo,
+					query: "UPDATE_CONTENT_PAGE_LABEL",
+				},
+			);
 		}
 	}
 
 	static async deleteContentPageLabel(id: string | number) {
 		try {
-			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl() + '/' + String(id), {
-				method: 'DELETE',
-			});
+			return fetchWithLogoutJson(
+				`${ContentPageLabelService.getBaseUrl()}/${String(id)}`,
+				{
+					method: "DELETE",
+				},
+			);
 		} catch (err) {
-			throw new CustomError('Failed to delete content page label from the database', err, {
-				route: ContentPageLabelService.getBaseUrl() + '/' + String(id),
-				id,
-			});
+			throw new CustomError(
+				"Failed to delete content page label from the database",
+				err,
+				{
+					route: `${ContentPageLabelService.getBaseUrl()}/${String(id)}`,
+					id,
+				},
+			);
 		}
 	}
 
 	static async getContentPageLabelsByTypeAndLabels(
 		contentType: Avo.ContentPage.Type,
-		labels: string[]
+		labels: string[],
 	): Promise<LabelObj[]> {
 		try {
 			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
-				method: 'POST',
+				method: "POST",
 				body: JSON.stringify({
 					contentType,
 					labels,
@@ -132,36 +160,38 @@ export class ContentPageLabelService {
 			});
 		} catch (err) {
 			throw new CustomError(
-				'Failed to get content page label objects by content type and labels',
+				"Failed to get content page label objects by content type and labels",
 				err,
 				{
 					contentType,
 					labels,
-				}
+				},
 			);
 		}
 	}
 
 	static async getContentPageLabelsByTypeAndIds(
 		contentType: Avo.ContentPage.Type,
-		labelIds: number[] | string[]
+		labelIds: number[] | string[],
 	): Promise<LabelObj[]> {
 		try {
 			return fetchWithLogoutJson(ContentPageLabelService.getBaseUrl(), {
-				method: 'POST',
+				method: "POST",
 				body: JSON.stringify({
 					contentType,
+					// biome-ignore lint/suspicious/noExplicitAny: todo
 					labelIds: compact(labelIds as any[]),
 				}),
 			});
 		} catch (err) {
 			throw new CustomError(
-				'Failed to get content page labels by content type and label ids',
+				"Failed to get content page labels by content type and label ids",
 				err,
 				{
 					contentType,
+					// biome-ignore lint/suspicious/noExplicitAny: todo
 					labelIds: compact(labelIds as any[]),
-				}
+				},
 			);
 		}
 	}

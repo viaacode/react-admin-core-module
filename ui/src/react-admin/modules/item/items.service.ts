@@ -15,7 +15,7 @@ export class ItemsService {
 		try {
 			const rawItem: Avo.Item.Item | null = await fetchWithLogoutJson<Avo.Item.Item>(
 				stringifyUrl({
-					url: ItemsService.getBaseUrl() + '/' + uuidOrExternalId,
+					url: `${ItemsService.getBaseUrl()}/${uuidOrExternalId}`,
 				})
 			);
 

@@ -23,15 +23,23 @@ and add them to the json file without overwriting the existing strings.
 
 We can now input the src/modules/shared/translations/.../nl.json files into their respective database so the translations can be updated by meemoo through the admin dashboard.
  */
-import { Project, SyntaxKind } from 'ts-morph';
-import { execSync } from 'child_process';
-import * as fs from 'fs/promises';
-import { compact, intersection, kebabCase, lowerCase, trim, upperFirst, without } from 'lodash-es';
-import * as path from 'path';
-import { green, grey, red, yellow } from 'console-log-colors';
+import { Project, SyntaxKind } from "ts-morph";
+import { execSync } from "node:child_process";
+import * as fs from "node:fs/promises";
+import {
+	compact,
+	intersection,
+	kebabCase,
+	lowerCase,
+	trim,
+	upperFirst,
+	without,
+} from "lodash-es";
+import * as path from "node:path";
+import { green, grey, red, yellow } from "console-log-colors";
 
-import { executeDatabaseQuery } from './execute-database-query.mts';
-import type { MultiLanguageTranslationEntry } from '~modules/translations/translations.types.ts';
+import { executeDatabaseQuery } from "./execute-database-query.mts";
+import type { MultiLanguageTranslationEntry } from "~modules/translations/translations.types.ts";
 import {
 	App,
 	Component,
@@ -41,19 +49,19 @@ import {
 	TRANSLATION_SEPARATOR,
 	type TranslationEntry,
 	ValueType,
-} from './translation.types.mjs';
-import { getDirName } from './get-dir-name.mts';
+} from "./translation.types.mjs";
+import { getDirName } from "./get-dir-name.mts";
 
 const ALL_APPS = `[${App.AVO}, ${App.HET_ARCHIEF}]`;
 
 export function getFullKey(
-	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
+	translationEntry: TranslationEntry | MultiLanguageTranslationEntry,
 ): `${Component}${typeof TRANSLATION_SEPARATOR}${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
 	return `${translationEntry.component}${TRANSLATION_SEPARATOR}${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 }
 
 export function getKeyWithoutComponent(
-	translationEntry: TranslationEntry | MultiLanguageTranslationEntry
+	translationEntry: TranslationEntry | MultiLanguageTranslationEntry,
 ): `${Location}${typeof TRANSLATION_SEPARATOR}${Key}` {
 	return `${translationEntry.location}${TRANSLATION_SEPARATOR}${translationEntry.key}`;
 }
@@ -62,13 +70,13 @@ type AppsList = (App.AVO | App.HET_ARCHIEF)[];
 
 function getFormattedKey(filePath: string, key: string): string {
 	const fileKey = filePath
-		.replace(/[\\/]+/g, '/')
-		.split('.')[0]
+		.replace(/[\\/]+/g, "/")
+		.split(".")[0]
 		.split(/[\\/]/g)
 		.map((part) => kebabCase(part))
-		.join('/')
+		.join("/")
 		.toLowerCase()
-		.replace(/(^\/+|\/+$)/g, '')
+		.replace(/(^\/+|\/+$)/g, "")
 		.trim();
 	const formattedKey = kebabCase(key);
 
@@ -79,7 +87,7 @@ function getFormattedTranslation(translation: string) {
 	if (!translation) {
 		return translation;
 	}
-	return translation.trim().replace(/\t\t(\t)+/g, ' ');
+	return translation.trim().replace(/\t\t(\t)+/g, " ");
 }
 
 function getFallbackTranslation(key: string): string {
@@ -87,9 +95,12 @@ function getFallbackTranslation(key: string): string {
 }
 
 function simplifyHtmlValue(value: string): string {
-	if (value.startsWith('<p>') && value.endsWith('</p>')) {
-		const innerValue = value.substring('<p>'.length, value.length - '</p>'.length);
-		if (!innerValue.includes('<')) {
+	if (value.startsWith("<p>") && value.endsWith("</p>")) {
+		const innerValue = value.substring(
+			"<p>".length,
+			value.length - "</p>".length,
+		);
+		if (!innerValue.includes("<")) {
 			// Html value doesn't contain any html or new lines => only save inner text
 			return innerValue;
 		}
@@ -98,27 +109,32 @@ function simplifyHtmlValue(value: string): string {
 }
 
 function getTranslationEntryFromCallExpression(
-	tFunction: 'tText' | 'tHtml',
+	tFunction: "tText" | "tHtml",
 	translationTextOrKey: string,
 	appsParam: string | undefined,
 	app: App,
 	component: Component,
 	relativeFilePath: string,
 	oldTranslations: Record<string, string>,
-	oldTranslationsPath: string
+	oldTranslationsPath: string,
 ): TranslationEntry | null {
 	let formattedKey: string | undefined;
-	if (appsParam && !appsParam.includes(App.AVO) && !appsParam.includes(App.HET_ARCHIEF)) {
+	if (
+		appsParam &&
+		!appsParam.includes(App.AVO) &&
+		!appsParam.includes(App.HET_ARCHIEF)
+	) {
 		// hetarchief proxy uses the third parameter to specify the language of the app
 		appsParam = app;
 	}
 	const apps: AppsList = compact(
 		(appsParam || ALL_APPS)
-			.replace(/[[\]]/g, '')
-			.split(',')
-			.map((app: string) => app.trim())
+			.replace(/[[\]]/g, "")
+			.split(",")
+			.map((app: string) => app.trim()),
 	) as AppsList;
-	const formattedTranslation: string = getFormattedTranslation(translationTextOrKey);
+	const formattedTranslation: string =
+		getFormattedTranslation(translationTextOrKey);
 	if (formattedTranslation.includes(TRANSLATION_SEPARATOR)) {
 		formattedKey = formattedTranslation;
 	} else {
@@ -130,8 +146,10 @@ function getTranslationEntryFromCallExpression(
 	if (apps.includes(app)) {
 		if (hasKeyAlready && !oldTranslations[formattedKey]) {
 			console.error(
-				red(`Failed to find old translation in ${oldTranslationsPath} for key: `),
-				formattedKey
+				red(
+					`Failed to find old translation in ${oldTranslationsPath} for key: `,
+				),
+				formattedKey,
 			);
 		}
 		const location = formattedKey.split(TRANSLATION_SEPARATOR)[0];
@@ -146,10 +164,11 @@ function getTranslationEntryFromCallExpression(
 			value:
 				(hasKeyAlready
 					? getFormattedTranslation(
-							oldTranslations[formattedKey] || getFallbackTranslation(formattedKey)
+							oldTranslations[formattedKey] ||
+								getFallbackTranslation(formattedKey),
 					  )
-					: formattedTranslation) || '',
-			value_type: tFunction === 'tHtml' ? ValueType.HTML : ValueType.TEXT,
+					: formattedTranslation) || "",
+			value_type: tFunction === "tHtml" ? ValueType.HTML : ValueType.TEXT,
 		};
 	}
 	return null;
@@ -161,7 +180,7 @@ async function extractTranslationsFromCodeFiles(
 	component: Component,
 	oldTranslations: Record<string, string>,
 	oldTranslationsJsonPath: string,
-	tsConfigFilePath?: string
+	tsConfigFilePath?: string,
 ): Promise<TranslationEntry[]> {
 	const tsProject = new Project({
 		tsConfigFilePath,
@@ -171,13 +190,16 @@ async function extractTranslationsFromCodeFiles(
 	const sourceFiles = tsProject.getSourceFiles();
 	for (const sourceFile of sourceFiles) {
 		if (
-			!(sourceFile.getBaseName().endsWith('.ts') || sourceFile.getBaseName().endsWith('.tsx'))
+			!(
+				sourceFile.getBaseName().endsWith(".ts") ||
+				sourceFile.getBaseName().endsWith(".tsx")
+			)
 		) {
 			continue; // Skip non-typescript files
 		}
 		if (
-			sourceFile.getBaseNameWithoutExtension().includes('.test') ||
-			sourceFile.getBaseNameWithoutExtension().includes('.spec') ||
+			sourceFile.getBaseNameWithoutExtension().includes(".test") ||
+			sourceFile.getBaseNameWithoutExtension().includes(".spec") ||
 			sourceFile.isDeclarationFile()
 		) {
 			continue; // Skip test and declaration files
@@ -196,19 +218,25 @@ async function extractTranslationsFromCodeFiles(
 				const functionCallText = callExpression.getText();
 				const functionName = callExpression.getFirstChild()?.getText();
 				return (
-					!functionCallText.includes('IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION') &&
+					!functionCallText.includes(
+						"IGNORE_ADMIN_CORE_TRANSLATIONS_EXTRACTION",
+					) &&
 					// Only accept functions where the name is tHtml or tHtml or ends with tText or tHtml
-					['tText', 'tHtml'].includes(functionName?.split('.').pop() || '')
+					["tText", "tHtml"].includes(functionName?.split(".").pop() || "")
 				);
 			});
 
 		// For each tText and tHtml function call, extract the translation value and replace it with a translation key
 		translationFunctionCalls.forEach((callExpression) => {
-			const functionCallExpressionName = callExpression.getFirstChild()?.getText() as string;
+			const functionCallExpressionName = callExpression
+				.getFirstChild()
+				?.getText() as string;
 			const functionCallName = (
-				functionCallExpressionName.endsWith('tText') ? 'tText' : 'tHtml'
-			) as 'tText' | 'tHtml';
-			const functionParametersNode = callExpression.getChildrenOfKind(SyntaxKind.SyntaxList);
+				functionCallExpressionName.endsWith("tText") ? "tText" : "tHtml"
+			) as "tText" | "tHtml";
+			const functionParametersNode = callExpression.getChildrenOfKind(
+				SyntaxKind.SyntaxList,
+			);
 			const functionParameters = functionParametersNode[0]
 				.getChildren()
 				.filter((child) => child.getKind() !== SyntaxKind.CommaToken);
@@ -218,15 +246,15 @@ async function extractTranslationsFromCodeFiles(
 					red(
 						JSON.stringify({
 							message:
-								'First parameter of tText and tHtml must be a literal string and not a variable or function call return.',
+								"First parameter of tText and tHtml must be a literal string and not a variable or function call return.",
 							additionalInfo: {
 								file: sourceFile.getBaseName(),
 								callExpression: callExpression.getText(),
 								line: callExpression.getStartLineNumber(),
 								character: callExpression.getStartLinePos(),
 							},
-						})
-					)
+						}),
+					),
 				);
 				return;
 			}
@@ -234,18 +262,18 @@ async function extractTranslationsFromCodeFiles(
 
 			const translationEntry = getTranslationEntryFromCallExpression(
 				functionCallName,
-				trim(firstParameter.getText(), '\'"``'),
+				trim(firstParameter.getText(), "'\"``"),
 				params[2],
 				app,
 				component,
 				sourceFile.getFilePath().substring(rootFolderPath.length + 1),
 				oldTranslations,
-				oldTranslationsJsonPath
+				oldTranslationsJsonPath,
 			);
 
 			if (translationEntry) {
 				firstParameter.replaceWithText(
-					"'" + getKeyWithoutComponent(translationEntry) + "'"
+					`'${getKeyWithoutComponent(translationEntry)}'`,
 				);
 				sourceCodeTranslations.push(translationEntry);
 			}
@@ -272,9 +300,12 @@ async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	}
 		`,
 		{},
-		'QAS' // Get translations from QAS v3
+		"QAS", // Get translations from QAS v3
 	);
-	return response.data.app_translations.map((t: TranslationEntry) => ({ ...t, app }));
+	return response.data.app_translations.map((t: TranslationEntry) => ({
+		...t,
+		app,
+	}));
 }
 
 function checkTranslationsForKeysAsValue(translationJson: string) {
@@ -292,11 +323,12 @@ function checkTranslationsForKeysAsValue(translationJson: string) {
 	if (faultyTranslations.length) {
 		throw new Error(`
 			Failed to extract translations, the following translations would be overridden by their key:
-				\t${faultyTranslations.join('\n\t')}
+				\t${faultyTranslations.join("\n\t")}
 		`);
 	}
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: todo
 function sortObjectKeys(objToSort: Record<string, any>): Record<string, any> {
 	return Object.keys(objToSort)
 		.sort()
@@ -311,110 +343,138 @@ async function combineTranslations(
 	nlSourceCodeTranslations: TranslationEntry[],
 	allOnlineTranslations: TranslationEntry[],
 	outputJsonFile: string,
-	app: App
+	app: App,
 ): Promise<TranslationEntry[]> {
 	// Compare existing translations to the new translations
 	const nlJsonTranslationKeys: string[] = nlJsonTranslations.map(getFullKey);
-	const sourceCodeTranslationKeys: string[] = nlSourceCodeTranslations.map(getFullKey);
+	const sourceCodeTranslationKeys: string[] =
+		nlSourceCodeTranslations.map(getFullKey);
 	const addedTranslationKeys: string[] = without(
 		sourceCodeTranslationKeys,
-		...nlJsonTranslationKeys
+		...nlJsonTranslationKeys,
 	);
 	const removedTranslationKeys: string[] = without(
 		nlJsonTranslationKeys,
-		...sourceCodeTranslationKeys
+		...sourceCodeTranslationKeys,
 	);
 	const existingTranslationKeys: string[] = intersection(
 		sourceCodeTranslationKeys,
-		nlJsonTranslationKeys
+		nlJsonTranslationKeys,
 	);
 
 	// Console log translations that were found in the json file but not in the code
 	if (removedTranslationKeys.length > 0) {
-		console.warn('The following translation keys were removed:');
-		console.log(`\t${removedTranslationKeys.map((key) => key.trim()).join('\n\t')}`);
+		console.warn("The following translation keys were removed:");
+		console.log(
+			`\t${removedTranslationKeys.map((key) => key.trim()).join("\n\t")}`,
+		);
 	}
 
 	// Combine the translations in the json with the freshly extracted translations from the code
 	const combinedTranslationEntries: TranslationEntry[] = [];
-	[...existingTranslationKeys, ...addedTranslationKeys].forEach((translationKey: string) => {
-		const onlineTranslations = allOnlineTranslations.filter(
-			(t) => getFullKey(t) === translationKey
-		);
-		const nlOnlineTranslation = onlineTranslations.find((t) => t.language === Locale.Nl);
-		const nlJsonTranslation = nlJsonTranslations.find(
-			(t) => getFullKey(t) === translationKey
-		) as TranslationEntry;
-		const sourceCodeTranslation = nlSourceCodeTranslations.find(
-			(t) => getFullKey(t) === translationKey
-		) as TranslationEntry;
-
-		if (!nlOnlineTranslation && !nlJsonTranslation && !sourceCodeTranslation) {
-			console.error(
-				red('Failed to find translation in online, nl.json and in code: ' + translationKey)
+	[...existingTranslationKeys, ...addedTranslationKeys].forEach(
+		(translationKey: string) => {
+			const onlineTranslations = allOnlineTranslations.filter(
+				(t) => getFullKey(t) === translationKey,
 			);
-		}
-
-		if (!nlOnlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
-			console.error(
-				red(
-					'Only found translation in nl.json, not in online translations not in code: ' +
-						translationKey
-				)
+			const nlOnlineTranslation = onlineTranslations.find(
+				(t) => t.language === Locale.Nl,
 			);
-		}
+			const nlJsonTranslation = nlJsonTranslations.find(
+				(t) => getFullKey(t) === translationKey,
+			) as TranslationEntry;
+			const sourceCodeTranslation = nlSourceCodeTranslations.find(
+				(t) => getFullKey(t) === translationKey,
+			) as TranslationEntry;
 
-		// Output translations for both 'nl' and 'en'
-		const languages = app === App.AVO ? [Locale.Nl] : [Locale.Nl, Locale.En];
-		languages.forEach((languageCode) => {
-			const onlineTranslation = onlineTranslations.find((t) => t.language === languageCode);
-			const entry: TranslationEntry = {
-				app:
-					sourceCodeTranslation?.app ||
-					nlOnlineTranslation?.app ||
-					nlJsonTranslation?.app,
-				component:
-					sourceCodeTranslation?.component ||
-					onlineTranslation?.component ||
-					nlJsonTranslation?.component,
-				location:
-					sourceCodeTranslation?.location ||
-					onlineTranslation?.location ||
-					nlJsonTranslation?.location,
-				key: sourceCodeTranslation?.key || onlineTranslation?.key || nlJsonTranslation?.key,
-				language: languageCode, // All source code translations are dutch, online translation can exist in 'en'' and 'nl'
-				value: simplifyHtmlValue(
-					onlineTranslation?.value ||
-						nlJsonTranslation?.value ||
-						sourceCodeTranslation?.value
-				), // Online translations always have priority. Code translations are lowest priority
-				value_type:
-					sourceCodeTranslation?.value_type ||
-					onlineTranslation?.value_type ||
-					ValueType.TEXT, // translations in json file do not store the value type
-			};
+			if (
+				!nlOnlineTranslation &&
+				!nlJsonTranslation &&
+				!sourceCodeTranslation
+			) {
+				console.error(
+					red(
+						`Failed to find translation in online, nl.json and in code: ${translationKey}`,
+					),
+				);
+			}
 
-			combinedTranslationEntries.push(entry);
-		});
-	});
+			if (!nlOnlineTranslation && nlJsonTranslation && !sourceCodeTranslation) {
+				console.error(
+					red(
+						"Only found translation in nl.json, not in online translations not in code: " +
+							translationKey,
+					),
+				);
+			}
+
+			// Output translations for both 'nl' and 'en'
+			const languages = app === App.AVO ? [Locale.Nl] : [Locale.Nl, Locale.En];
+			languages.forEach((languageCode) => {
+				const onlineTranslation = onlineTranslations.find(
+					(t) => t.language === languageCode,
+				);
+				const entry: TranslationEntry = {
+					app:
+						sourceCodeTranslation?.app ||
+						nlOnlineTranslation?.app ||
+						nlJsonTranslation?.app,
+					component:
+						sourceCodeTranslation?.component ||
+						onlineTranslation?.component ||
+						nlJsonTranslation?.component,
+					location:
+						sourceCodeTranslation?.location ||
+						onlineTranslation?.location ||
+						nlJsonTranslation?.location,
+					key:
+						sourceCodeTranslation?.key ||
+						onlineTranslation?.key ||
+						nlJsonTranslation?.key,
+					language: languageCode, // All source code translations are dutch, online translation can exist in 'en'' and 'nl'
+					value: simplifyHtmlValue(
+						onlineTranslation?.value ||
+							nlJsonTranslation?.value ||
+							sourceCodeTranslation?.value,
+					), // Online translations always have priority. Code translations are lowest priority
+					value_type:
+						sourceCodeTranslation?.value_type ||
+						onlineTranslation?.value_type ||
+						ValueType.TEXT, // translations in json file do not store the value type
+				};
+
+				combinedTranslationEntries.push(entry);
+			});
+		},
+	);
 
 	const combinedTranslations = Object.fromEntries(
 		combinedTranslationEntries
 			.filter((entry) => entry.language === Locale.Nl)
-			.map((entry) => [entry.location + TRANSLATION_SEPARATOR + entry.key, entry.value])
+			.map((entry) => [
+				entry.location + TRANSLATION_SEPARATOR + entry.key,
+				entry.value,
+			]),
 	);
-	const nlJsonContent = JSON.stringify(sortObjectKeys(combinedTranslations), null, 2);
+	const nlJsonContent = JSON.stringify(
+		sortObjectKeys(combinedTranslations),
+		null,
+		2,
+	);
 	checkTranslationsForKeysAsValue(nlJsonContent); // Throws error if any key is found as a value
 
-	await fs.writeFile(outputJsonFile, nlJsonContent + '\n');
+	await fs.writeFile(outputJsonFile, `${nlJsonContent}\n`);
 
-	const totalTranslations = existingTranslationKeys.length + addedTranslationKeys.length;
+	const totalTranslations =
+		existingTranslationKeys.length + addedTranslationKeys.length;
 
 	console.info(grey(`Wrote ${totalTranslations} to ${outputJsonFile}`));
 	const added = `\t${addedTranslationKeys.length} translations added`;
 	console.info(addedTranslationKeys.length === 0 ? grey(added) : green(added));
 	const deleted = `\t${removedTranslationKeys.length} translations deleted`;
-	console.info(removedTranslationKeys.length === 0 ? grey(deleted) : yellow(deleted));
+	console.info(
+		removedTranslationKeys.length === 0 ? grey(deleted) : yellow(deleted),
+	);
 
 	return combinedTranslationEntries;
 }
@@ -424,15 +484,17 @@ async function updateTranslations(
 	app: App,
 	component: Component,
 	outputJsonFile: string,
-	tsConfigPath?: string
+	tsConfigPath?: string,
 ): Promise<TranslationEntry[]> {
 	try {
 		const onlineTranslations = (await getOnlineTranslations(app)).filter(
-			(t) => t.component === component
+			(t) => t.component === component,
 		);
 
 		const nlJsonTranslations: Record<string, string> = JSON.parse(
-			(await fs.readFile(path.resolve(rootFolderPath, outputJsonFile))).toString()
+			(
+				await fs.readFile(path.resolve(rootFolderPath, outputJsonFile))
+			).toString(),
 		);
 		const nlJsonTranslationEntries = Object.entries(nlJsonTranslations).map(
 			(entry): TranslationEntry => {
@@ -445,7 +507,7 @@ async function updateTranslations(
 					value: entry[1],
 					value_type: null,
 				};
-			}
+			},
 		);
 
 		// Extract translations from code and replace code by reference to translation key
@@ -455,7 +517,7 @@ async function updateTranslations(
 			component,
 			nlJsonTranslations,
 			resolvePath(rootFolderPath, outputJsonFile),
-			tsConfigPath
+			tsConfigPath,
 		);
 
 		return await combineTranslations(
@@ -463,12 +525,12 @@ async function updateTranslations(
 			sourceCodeTranslations,
 			onlineTranslations,
 			path.join(rootFolderPath, outputJsonFile),
-			app
+			app,
 		);
 	} catch (err) {
 		throw new Error(
 			JSON.stringify({
-				message: 'Failed to update translations',
+				message: "Failed to update translations",
 				innerException: JSON.stringify(err, Object.getOwnPropertyNames(err)),
 				additionalInfo: {
 					rootFolderPath,
@@ -476,102 +538,102 @@ async function updateTranslations(
 					component,
 					outputJsonFile,
 				},
-			})
+			}),
 		);
 	}
 }
 
 function resolvePath(...filePaths: string[]): string {
-	return path.resolve(getDirName(), ...filePaths).replace(/\\/g, '/');
+	return path.resolve(getDirName(), ...filePaths).replace(/\\/g, "/");
 }
 
 function formatCode(path: string) {
-	process.stdout.write(grey('Formatting code...'));
+	process.stdout.write(grey("Formatting code..."));
 	execSync(`cd ${path} && npm run format`);
-	console.info(green('done\n'));
+	console.info(green("done\n"));
 }
 
 async function extractAvoAdminCoreTranslations() {
 	// AVO admin-core
-	console.info('Extracting AVO admin-core translations...');
+	console.info("Extracting AVO admin-core translations...");
 	const avoAdminCoreTranslations = await updateTranslations(
-		resolvePath('../src/react-admin'),
+		resolvePath("../src/react-admin"),
 		App.AVO,
 		Component.ADMIN_CORE,
-		'../shared/translations/avo/nl.json',
-		resolvePath('../tsconfig.json')
+		"../shared/translations/avo/nl.json",
+		resolvePath("../tsconfig.json"),
 	);
-	formatCode(resolvePath('../'));
+	formatCode(resolvePath("../"));
 	return avoAdminCoreTranslations;
 }
 
 async function extractAvoClientTranslations() {
 	// AVO client
-	console.info('Extracting AVO client translations...');
+	console.info("Extracting AVO client translations...");
 	const avoClientTranslations = await updateTranslations(
-		resolvePath('../../../avo2-client/src'),
+		resolvePath("../../../avo2-client/src"),
 		App.AVO,
 		Component.FRONTEND,
-		'shared/translations/nl.json',
-		resolvePath('../../../avo2-client/tsconfig.json')
+		"shared/translations/nl.json",
+		resolvePath("../../../avo2-client/tsconfig.json"),
 	);
-	formatCode(resolvePath('../../../avo2-client'));
+	formatCode(resolvePath("../../../avo2-client"));
 	return avoClientTranslations;
 }
 
 async function extractAvoProxyTranslations() {
 	// AVO proxy
-	console.info('Extracting AVO admin-core translations...');
+	console.info("Extracting AVO admin-core translations...");
 	const avoProxyTranslations = await updateTranslations(
-		resolvePath('../../../avo2-proxy/server/src'),
+		resolvePath("../../../avo2-proxy/server/src"),
 		App.AVO,
 		Component.BACKEND,
-		'shared/translations/nl.json',
-		resolvePath('../../../avo2-proxy/server/tsconfig.json')
+		"shared/translations/nl.json",
+		resolvePath("../../../avo2-proxy/server/tsconfig.json"),
 	);
-	formatCode(resolvePath('../../../avo2-proxy/server'));
+	formatCode(resolvePath("../../../avo2-proxy/server"));
 	return avoProxyTranslations;
 }
 
 async function extractHetArchiefAdminCoreTranslations() {
 	// HetArchief admin-core
-	console.info('Extracting HET_ARCHIEF admin-core translations...');
+	console.info("Extracting HET_ARCHIEF admin-core translations...");
 	const hetArchiefAdminCoreTranslations = await updateTranslations(
-		resolvePath('../src/react-admin'),
+		resolvePath("../src/react-admin"),
 		App.HET_ARCHIEF,
 		Component.ADMIN_CORE,
-		'../shared/translations/hetArchief/nl.json',
-		resolvePath('../tsconfig.json')
+		"../shared/translations/hetArchief/nl.json",
+		resolvePath("../tsconfig.json"),
 	);
-	formatCode(resolvePath('../'));
+	formatCode(resolvePath("../"));
 	return hetArchiefAdminCoreTranslations;
 }
 
 async function extractHetArchiefClientTranslations() {
 	// HetArchief client
-	console.info('Extracting HET_ARCHIEF client translations...');
+	console.info("Extracting HET_ARCHIEF client translations...");
 	const hetArchiefClientTranslations = await updateTranslations(
-		resolvePath('../../../hetarchief-client/src'),
+		resolvePath("../../../hetarchief-client/src"),
 		App.HET_ARCHIEF,
 		Component.FRONTEND,
-		'../public/locales/nl/common.json',
-		resolvePath('../../../hetarchief-client/tsconfig.json')
+		"../public/locales/nl/common.json",
+		resolvePath("../../../hetarchief-client/tsconfig.json"),
 	);
-	formatCode(resolvePath('../../../hetarchief-client'));
+	formatCode(resolvePath("../../../hetarchief-client"));
 	return hetArchiefClientTranslations;
 }
 
 async function extractHetArchiefProxyTranslations() {
 	// HetArchief proxy
-	console.info('Extracting HET_ARCHIEF proxy translations...');
+	console.info("Extracting HET_ARCHIEF proxy translations...");
 	const hetArchiefProxyTranslations = await updateTranslations(
-		resolvePath('../../../hetarchief-proxy/src'),
+		resolvePath("../../../hetarchief-proxy/src"),
 		App.HET_ARCHIEF,
 		Component.BACKEND,
-		'shared/i18n/locales/nl.json',
-		resolvePath('../../../hetarchief-proxy/tsconfig.json')
+		"shared/i18n/locales/nl.json",
+		resolvePath("../../../hetarchief-proxy/tsconfig.json"),
 	);
-	formatCode(resolvePath('../../../hetarchief-proxy'));
+	formatCode(resolvePath("../../../hetarchief-proxy"));
 	return hetArchiefProxyTranslations;
 }
 
@@ -579,7 +641,7 @@ async function extractTranslations() {
 	const app = process.argv[2] as App;
 	if (app !== App.AVO && app !== App.HET_ARCHIEF) {
 		throw new Error(
-			'Translation script started with wrong "APP" parameter. Only valid values are: ["AVO", "HET_ARCHIEF"]'
+			'Translation script started with wrong "APP" parameter. Only valid values are: ["AVO", "HET_ARCHIEF"]',
 		);
 	}
 
@@ -596,9 +658,12 @@ async function extractTranslations() {
 		];
 	} else {
 		// HET_ARCHIEF
-		const hetArchiefAdminCoreTranslations = await extractHetArchiefAdminCoreTranslations();
-		const hetArchiefClientTranslations = await extractHetArchiefClientTranslations();
-		const hetArchiefProxyTranslations = await extractHetArchiefProxyTranslations();
+		const hetArchiefAdminCoreTranslations =
+			await extractHetArchiefAdminCoreTranslations();
+		const hetArchiefClientTranslations =
+			await extractHetArchiefClientTranslations();
+		const hetArchiefProxyTranslations =
+			await extractHetArchiefProxyTranslations();
 
 		allTranslations = [
 			...hetArchiefAdminCoreTranslations,
@@ -608,8 +673,8 @@ async function extractTranslations() {
 	}
 
 	// Output all translations as sql file
-	const sqlFilePath = path.resolve('./all-translations-' + kebabCase(app) + '.sql');
-	console.info('Writing SQL file: ' + sqlFilePath);
+	const sqlFilePath = path.resolve(`./all-translations-${kebabCase(app)}.sql`);
+	console.info(`Writing SQL file: ${sqlFilePath}`);
 	let sql: string = allTranslations
 		.map((translationEntry) => {
 			const component = `'${translationEntry.component}'`;
@@ -621,17 +686,19 @@ async function extractTranslations() {
 			return `INSERT INTO app.translations ("component", "location", "key", "value", "value_type", "language") VALUES (${component}, ${location}, ${key}, ${value}, ${value_type}, ${language}) ON CONFLICT (component, location, key, language) DO UPDATE SET value = ${value}, value_type = ${value_type};`;
 		})
 		.sort()
-		.join('\n');
-	sql = 'TRUNCATE app.translations;\n' + sql;
+		.join("\n");
+	sql = `TRUNCATE app.translations;\n${sql}`;
 	await fs.writeFile(sqlFilePath, sql);
-	console.info('Writing json file: ' + sqlFilePath.replace('.sql', '.json'));
+	console.info(`Writing json file: ${sqlFilePath.replace(".sql", ".json")}`);
 	await fs.writeFile(
-		sqlFilePath.replace('.sql', '.json'),
-		JSON.stringify(allTranslations, null, 2)
+		sqlFilePath.replace(".sql", ".json"),
+		JSON.stringify(allTranslations, null, 2),
 	);
-	console.info(green('Finished writing ' + allTranslations.length + ' translations'));
+	console.info(
+		green(`Finished writing ${allTranslations.length} translations`),
+	);
 }
 
 extractTranslations().catch((err) => {
-	console.error(red('Extracting translations failed: '), err);
+	console.error(red("Extracting translations failed: "), err);
 });

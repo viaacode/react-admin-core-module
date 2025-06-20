@@ -1,19 +1,23 @@
-import type { SelectOption, TagInfo } from '@viaa/avo2-components';
-import { Column, FormGroup, Grid, Select, TagsInput } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { compact, get, isNumber, isString } from 'lodash-es';
-import type { FunctionComponent } from 'react';
-import React, { useEffect, useState } from 'react';
-import type { LabelObj } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
-import type { ContentPageLabel } from '~modules/content-page/types/content-pages.types';
-import { showToast } from '~shared/helpers/show-toast';
-
-import { useContentTypes } from '../../../content-page/hooks/useContentTypes';
-import { ContentPageService } from '../../../content-page/services/content-page.service';
-import { CustomError } from '../../helpers/custom-error';
-
-import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
+import type { SelectOption, TagInfo } from "@viaa/avo2-components";
+import {
+	Column,
+	FormGroup,
+	Grid,
+	Select,
+	TagsInput,
+} from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import { compact, get, isNumber, isString } from "lodash-es";
+import type { FunctionComponent } from "react";
+import React, { useEffect, useState } from "react";
+import type { LabelObj } from "~content-blocks/BlockPageOverview/BlockPageOverview.types";
+import { ToastType } from "~core/config/config.types";
+import type { ContentPageLabel } from "~modules/content-page/types/content-pages.types";
+import { showToast } from "~shared/helpers/show-toast";
+import { tText } from "~shared/helpers/translation-functions";
+import { useContentTypes } from "../../../content-page/hooks/useContentTypes";
+import { ContentPageService } from "../../../content-page/services/content-page.service";
+import { CustomError } from "../../helpers/custom-error";
 
 export interface ContentTypeAndLabelsValue {
 	selectedContentType: Avo.ContentPage.Type;
@@ -26,9 +30,11 @@ export interface ContentTypeAndLabelsProps {
 	errors: string[];
 }
 
-export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsProps> = ({
+export const ContentTypeAndLabelsPicker: FunctionComponent<
+	ContentTypeAndLabelsProps
+> = ({
 	value = {
-		selectedContentType: 'FAQ_ITEM',
+		selectedContentType: "FAQ_ITEM",
 		selectedLabels: null,
 	},
 	onChange,
@@ -42,28 +48,29 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 		setIsLoading(true);
 		ContentPageService.fetchLabelsByContentType(value.selectedContentType)
 			.then(setLabels)
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			.catch((err: any) => {
 				console.error(
 					new CustomError(
-						'Failed to get content labels in ContentTypeAndLabelsPicker',
+						"Failed to get content labels in ContentTypeAndLabelsPicker",
 						err,
 						{
 							selectedContentType: value.selectedContentType,
-						}
-					)
+						},
+					),
 				);
 				showToast({
 					title: tText(
-						'modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error'
+						"modules/admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___error",
 					),
 					description: tText(
-						'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt'
+						"admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___het-ophalen-van-de-content-pagina-labels-is-mislukt",
 					),
 					type: ToastType.ERROR,
 				});
 			})
 			.finally(() => setIsLoading(false));
-	}, [value.selectedContentType, setLabels]);
+	}, [value.selectedContentType]);
 
 	const handleContentTypeChanged = (selectedValue: string) => {
 		onChange({
@@ -74,10 +81,13 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 
 	const handleLabelsChanged = (newSelectedLabels: TagInfo[]) => {
 		const newState = {
-			selectedContentType: get(value, 'selectedContentType') as Avo.ContentPage.Type,
-			selectedLabels: (newSelectedLabels || []).map((labelOption) => labelOption.value) as
-				| string[]
-				| number[],
+			selectedContentType: get(
+				value,
+				"selectedContentType",
+			) as Avo.ContentPage.Type,
+			selectedLabels: (newSelectedLabels || []).map(
+				(labelOption) => labelOption.value,
+			) as string[] | number[],
 		};
 		onChange(newState);
 	};
@@ -89,9 +99,9 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 		if (!isNumber(selectedLabelIds[0]) && !isString(selectedLabelIds[0])) {
 			// Old format where we save the whole label object
 			// TODO deprecated remove when all content pages with type overview have been resaved
-			selectedLabelIds = ((value.selectedLabels || []) as unknown as LabelObj[]).map(
-				(labelObj) => labelObj.id
-			);
+			selectedLabelIds = (
+				(value.selectedLabels || []) as unknown as LabelObj[]
+			).map((labelObj) => labelObj.id);
 		}
 		return compact(
 			selectedLabelIds.map(
@@ -104,8 +114,8 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						label: labelObj.label,
 						value: labelObj.id,
 					};
-				}
-			)
+				},
+			),
 		);
 	};
 
@@ -115,10 +125,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 				<Select
 					id="content-type-and-label-picker-type"
 					placeholder={tText(
-						'admin/content/components/content-picker/content-picker___type'
+						"admin/content/components/content-picker/content-picker___type",
 					)}
 					options={contentTypes}
-					value={get(value, 'selectedContentType')}
+					value={get(value, "selectedContentType")}
 					loading={isLoadingContentTypes}
 					onChange={handleContentTypeChanged}
 				/>
@@ -131,7 +141,7 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 							(labelObj): SelectOption<number> => ({
 								label: labelObj.label,
 								value: labelObj.id,
-							})
+							}),
 						)}
 						allowMulti
 						allowCreate={false}
@@ -142,10 +152,10 @@ export const ContentTypeAndLabelsPicker: FunctionComponent<ContentTypeAndLabelsP
 						placeholder={
 							!value || !value.selectedContentType
 								? tText(
-										'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___kies-eerst-een-content-type'
+										"admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___kies-eerst-een-content-type",
 								  )
 								: tText(
-										'admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___labels'
+										"admin/shared/components/content-type-and-labels-picker/content-type-and-labels-picker___labels",
 								  )
 						}
 					/>

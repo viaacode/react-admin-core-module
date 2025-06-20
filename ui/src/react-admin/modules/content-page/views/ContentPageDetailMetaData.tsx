@@ -58,7 +58,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 			})
 		);
 
-		if (tagOptions && tagOptions.length) {
+		if (tagOptions?.length) {
 			return tagOptions;
 		}
 
@@ -245,7 +245,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 							contentPageInfo.translatedPages.length
 								? contentPageInfo.translatedPages?.map((translatedPage) => {
 										return (
-											<p key={'page-link-' + translatedPage.id}>
+											<p key={`page-link-${translatedPage.id}`}>
 												<Link
 													className="c-table_detail-page__translated-pages__link"
 													to={buildLink(
@@ -263,7 +263,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 													}
 												>
 													<span className="c-table_detail-page__translated-pages__language">
-														{translatedPage.language + ': '}
+														{`${translatedPage.language}: `}
 													</span>
 													<span className="c-table_detail-page__translated-pages__title">
 														{translatedPage.title}

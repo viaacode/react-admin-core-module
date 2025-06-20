@@ -118,7 +118,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 	}, [dateControls]);
 
 	const resetInternalRangeState = async (_tagId?: ReactText, evt?: MouseEvent): Promise<void> => {
-		evt && evt.stopPropagation();
+		evt?.stopPropagation();
 		applyDefaultRangeState();
 	};
 
@@ -177,7 +177,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 			} else {
 				await handleDateChange(null, rangeId);
 			}
-		} catch (err) {
+		} catch (_err) {
 			showToast({
 				title: tText(
 					'modules/admin/shared/components/date-range-dropdown/date-range-dropdown___ongeldige-input'

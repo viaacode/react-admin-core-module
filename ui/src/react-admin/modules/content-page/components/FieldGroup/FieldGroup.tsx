@@ -3,7 +3,7 @@ import type { FunctionComponent } from "react";
 import React from "react";
 import { GET_EDITOR_TYPES_MAP } from "~modules/content-page/const/editor-types.consts";
 
-import { generateFieldAttributes } from "../../helpers/field-attributes";
+import { generateFieldAttributes } from "~modules/content-page/helpers/field-attributes";
 import type {
 	ContentBlockComponentState,
 	ContentBlockEditor,
@@ -39,9 +39,12 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 	const { fields } = fieldGroup;
 
 	const handleFieldGroupStateChange = (
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		stateCopy: any,
 		key: string,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		index: any,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		value: any,
 	) => {
 		const newState = [...stateCopy];
@@ -56,11 +59,14 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 
 	return (
 		<>
+			{/* biome-ignore lint/suspicious/noExplicitAny: todo */}
 			{Object.entries(fields).map((fieldState: any, fieldIndex: number) => {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				const editorProps: any = {
 					...fieldState[1].editorProps,
 					...generateFieldAttributes(
 						fieldState[1],
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						(value: any, key?: string) =>
 							handleFieldGroupStateChange(
 								globalState,
@@ -68,6 +74,7 @@ export const FieldGroup: FunctionComponent<FieldGroupProps> = ({
 								fieldGroupStateIndex,
 								value,
 							),
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						fieldGroupState[fieldState[0]] as any,
 						`${fieldKey}-${fieldState[0]}-${fieldIndex}`,
 						fieldState[0],

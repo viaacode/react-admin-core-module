@@ -109,8 +109,6 @@ export function navigateToAbsoluteOrRelativeUrl(
 				history.push(fullUrl);
 			}
 			break;
-
-		case LinkTarget.Blank:
 		default:
 			if (fullUrl.includes('//')) {
 				// absolute fullUrl

@@ -1,7 +1,7 @@
 export function insideIframe(): boolean {
 	try {
 		return window.self !== window.top;
-	} catch (e) {
+	} catch (_e) {
 		return true;
 	}
 }

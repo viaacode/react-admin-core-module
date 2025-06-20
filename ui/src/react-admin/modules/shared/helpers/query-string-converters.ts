@@ -21,7 +21,7 @@ export const DateRangeParam = {
 				return;
 			}
 			return JSON.parse(value);
-		} catch (err) {
+		} catch (_err) {
 			return;
 		}
 	},
@@ -44,7 +44,7 @@ export const CheckboxListParam = {
 			}
 			const newValues = value.split('~');
 			return newValues?.length ? newValues : undefined;
-		} catch (err) {
+		} catch (_err) {
 			return;
 		}
 	},

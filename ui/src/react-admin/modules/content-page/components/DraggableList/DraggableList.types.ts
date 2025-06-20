@@ -1,5 +1,6 @@
 export interface DraggableItem {
 	// Info needed to render the item from json data to a ReactNode
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	data: any;
 
 	// Index in the list of items

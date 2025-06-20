@@ -58,7 +58,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 		if (selectedProfile) {
 			setSelectedProfile(undefined);
 		}
-	}, [selectedProfile, setSelectedProfile]);
+	}, [selectedProfile]);
 
 	useEffect(() => {
 		if (values.length) {
@@ -95,7 +95,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 					});
 				});
 		}
-	}, [values, setSelectedProfiles]);
+	}, [values]);
 
 	const closeDropdown = () => {
 		setSelectedProfiles([]);

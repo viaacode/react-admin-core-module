@@ -1,14 +1,14 @@
-import { Container, Spacer } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import { kebabCase, noop, omit } from 'lodash-es';
-import type { FunctionComponent, RefObject } from 'react';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { Container, Spacer } from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import clsx from "clsx";
+import { kebabCase, noop, omit } from "lodash-es";
+import type { FunctionComponent, KeyboardEvent, RefObject } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import { generateSmartLink } from "~shared/components/SmartLink/SmartLink";
 
-import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from '../../const/get-color-options';
-import type { ContentBlockConfig } from '../../types/content-block.types';
-import { Color, CustomBackground } from '../../types/content-block.types';
+import { GET_DARK_BACKGROUND_COLOR_OPTIONS } from "../../const/get-color-options";
+import type { ContentBlockConfig } from "../../types/content-block.types";
+import { Color, CustomBackground } from "../../types/content-block.types";
 
 import {
 	CONTENT_PAGE_ACCESS_BLOCKS,
@@ -17,13 +17,13 @@ import {
 	NAVIGABLE_CONTENT_BLOCKS,
 	REPEATABLE_CONTENT_BLOCKS,
 	USER_CONTENT_BLOCKS,
-} from './ContentBlockRenderer.const';
+} from "./ContentBlockRenderer.const";
 
-import './ContentBlockRenderer.scss';
-import { AdminConfigManager } from '~core/config';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
-import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
+import "./ContentBlockRenderer.scss";
+import { AdminConfigManager } from "~core/config";
+import type { ContentPageInfo } from "~modules/content-page/types/content-pages.types";
+import { ContentPageWidth } from "~modules/content-page/types/content-pages.types";
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from "~modules/content-page/const/content-block-anchors.consts";
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -49,44 +49,53 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		AdminConfigManager.getConfig().contentPage?.defaultPageWidth ||
 		ContentPageWidth.EXTRA_LARGE;
 	const PreviewComponent = GET_BLOCK_COMPONENT(contentBlockConfig.type);
-	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type);
-	const componentStateProps: any = needsElements ? { elements: componentState } : componentState;
+	const needsElements = REPEATABLE_CONTENT_BLOCKS.includes(
+		contentBlockConfig.type,
+	);
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+	const componentStateProps: any = needsElements
+		? { elements: componentState }
+		: componentState;
 
 	const blockRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 	const headerBgRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-	const blockStateProps: { [key: string]: any } = omit(blockState, IGNORE_BLOCK_LEVEL_PROPS);
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+	const blockStateProps: { [key: string]: any } = omit(
+		blockState,
+		IGNORE_BLOCK_LEVEL_PROPS,
+	);
 
 	const getHeaderHeight = useCallback((): string | null => {
 		if (!blockRef.current) {
 			return null;
 		}
 		const header: HTMLElement | null = blockRef.current.querySelector(
-			'.c-content-page-overview-block__header'
+			".c-content-page-overview-block__header",
 		);
 		if (!header) {
 			return null;
 		}
-		header.style.opacity = '1';
+		header.style.opacity = "1";
 		const height = header.getBoundingClientRect().height || 0;
 		if (height) {
 			return `${height + 16}px`;
 		}
-		return '0';
-	}, [blockRef]);
+		return "0";
+	}, []);
 
 	useEffect(() => {
 		const timerId = setInterval(() => {
-			if (headerBgRef && headerBgRef.current) {
+			if (headerBgRef?.current) {
 				const height = getHeaderHeight();
-				headerBgRef.current.style.height = height || '0';
+				headerBgRef.current.style.height = height || "0";
 			}
 		}, 300);
 
 		return () => {
 			clearInterval(timerId);
 		};
-	}, [blockState.headerBackgroundColor, getHeaderHeight, headerBgRef]);
+	}, [getHeaderHeight]);
 
 	if (NAVIGABLE_CONTENT_BLOCKS.includes(contentBlockConfig.type)) {
 		// Pass a function to the block, so it can render links without needing to know anything about the app routes
@@ -116,31 +125,41 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 		};
 	}
 
-	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(blockState.backgroundColor);
+	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(
+		blockState.backgroundColor,
+	);
 
 	return (
 		<div
 			className={clsx(
-				'c-content-block',
+				"c-content-block",
 				className,
-				'c-content-block__' + kebabCase(contentBlockConfig.type),
+				`c-content-block__${kebabCase(contentBlockConfig.type)}`,
 				{
-					'c-content-block__meemoo-custom-background':
+					"c-content-block__meemoo-custom-background":
 						blockState.backgroundColor === CustomBackground.MeemooLogo, // https://meemoo.atlassian.net/browse/ARC-1237
-				}
+				},
 			)}
 			style={{
 				background:
 					blockState.backgroundColor === CustomBackground.MeemooLogo
 						? Color.Transparent
 						: blockState.backgroundColor,
-				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
+				...(blockState.headerBackgroundColor !== Color.Transparent
+					? { zIndex: 1 }
+					: {}),
 			}}
 			data-anchor={
-				blockState.anchor || GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id
+				blockState.anchor ||
+				GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id
 			}
 			ref={blockRef}
 			onClick={onClick}
+			onKeyUp={(evt: KeyboardEvent) => {
+				if (evt.key === "Enter") {
+					onClick();
+				}
+			}}
 		>
 			{/*
 			 * Separate div where we add the anchor id, so we can move this element higher,
@@ -155,14 +174,17 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 				}
 			></div>
 			<Spacer
-				className={clsx('c-content-block-preview', {
-					'c-content-block-preview--dark': hasDarkBg,
-					'u-color-white': hasDarkBg,
+				className={clsx("c-content-block-preview", {
+					"c-content-block-preview--dark": hasDarkBg,
+					"u-color-white": hasDarkBg,
 				})}
-				margin={[blockState?.margin?.top ?? 'none', blockState?.margin?.bottom ?? 'none']}
+				margin={[
+					blockState?.margin?.top ?? "none",
+					blockState?.margin?.bottom ?? "none",
+				]}
 				padding={[
-					blockState?.padding?.top ?? 'none',
-					blockState?.padding?.bottom ?? 'none',
+					blockState?.padding?.top ?? "none",
+					blockState?.padding?.bottom ?? "none",
 				]}
 			>
 				<div
@@ -184,7 +206,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						size={
 							pageWidth?.toUpperCase() === ContentPageWidth.EXTRA_LARGE
 								? undefined
-								: (pageWidth?.toLowerCase() as 'medium' | 'large')
+								: (pageWidth?.toLowerCase() as "medium" | "large")
 						}
 					>
 						<PreviewComponent {...componentStateProps} {...blockStateProps} />

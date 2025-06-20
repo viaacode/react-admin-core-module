@@ -1,5 +1,10 @@
-import { PaginationBar } from '@meemoo/react-components';
-import type { ButtonType, IconName, SelectOption, TableColumn } from '@viaa/avo2-components';
+import { PaginationBar } from "@meemoo/react-components";
+import type {
+	ButtonType,
+	IconName,
+	SelectOption,
+	TableColumn,
+} from "@viaa/avo2-components";
 import {
 	Button,
 	Flex,
@@ -12,9 +17,9 @@ import {
 	Toolbar,
 	ToolbarLeft,
 	ToolbarRight,
-} from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import clsx from 'clsx';
+} from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import clsx from "clsx";
 import {
 	cloneDeep,
 	compact,
@@ -27,29 +32,37 @@ import {
 	isString,
 	omitBy,
 	sortBy,
-} from 'lodash-es';
-import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
-import React, { useEffect, useState } from 'react';
-import type { QueryParamConfig } from 'use-query-params';
-import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
-import { isAvo } from '~modules/shared/helpers/is-avo';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+} from "lodash-es";
+import type {
+	FunctionComponent,
+	KeyboardEvent,
+	ReactElement,
+	ReactNode,
+} from "react";
+import React, { useEffect, useState } from "react";
+import type { QueryParamConfig } from "use-query-params";
+import { NumberParam, StringParam, useQueryParams } from "use-query-params";
+import { isAvo } from "~modules/shared/helpers/is-avo";
+import { CenteredSpinner } from "~shared/components/Spinner/CenteredSpinner";
 
-import { tText } from '~shared/helpers/translation-functions';
-import type { TableFilterType } from '~shared/types/table-filter-types';
+import { tText } from "~shared/helpers/translation-functions";
+import type { TableFilterType } from "~shared/types/table-filter-types";
 
-import { KeyCode } from '../../consts/keycode';
-import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
-import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
-import './FilterTable.scss';
-import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
-import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
-import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
-import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
-import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
-import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
+import { KeyCode } from "../../consts/keycode";
+import { eduOrgToClientOrg } from "../../helpers/edu-org-string-to-client-org";
+import {
+	CheckboxListParam,
+	DateRangeParam,
+} from "../../helpers/query-string-converters";
+import "./FilterTable.scss";
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from "~shared/components/PaginationBar/PaginationBar.consts";
+import BooleanCheckboxDropdown from "../BooleanCheckboxDropdown/BooleanCheckboxDropdown";
+import type { CheckboxOption } from "../CheckboxDropdownModal/CheckboxDropdownModal";
+import { CheckboxDropdownModal } from "../CheckboxDropdownModal/CheckboxDropdownModal";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import DateRangeDropdown from "../DateRangeDropdown/DateRangeDropdown";
+import { MultiEducationalOrganisationSelectModal } from "../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal";
+import { MultiUserSelectDropdown } from "../MultiUserSelectDropdown/MultiUserSelectDropdown";
 
 export interface FilterableTableState {
 	query?: string;
@@ -58,8 +71,9 @@ export interface FilterableTableState {
 	page: number;
 }
 
-export interface FilterableColumn<T = string> extends Omit<TableColumn, 'id'> {
+export interface FilterableColumn<T = string> extends Omit<TableColumn, "id"> {
 	filterType?: TableFilterType;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	filterProps?: any;
 	visibleByDefault: boolean;
 	id: T;
@@ -74,6 +88,7 @@ const FILTER_TYPE_TO_QUERY_PARAM_CONVERTER = {
 };
 
 interface FilterTableProps {
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	data: any[];
 	dataCount: number;
 	itemsPerPage: number;
@@ -82,22 +97,29 @@ interface FilterTableProps {
 	noContentMatchingFiltersMessage: string;
 	renderNoResults: () => ReactElement;
 	renderCell: (
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		rowData: any,
 		columnId: string,
 		rowIndex: number,
-		columnIndex: number
+		columnIndex: number,
 	) => ReactNode;
 	className?: string;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	onTableStateChanged: (tableState: { [id: string]: any }) => void;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	onRowClick?: (rowData: any) => void;
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	rowKey?: string | ((row: any) => string);
-	variant?: 'bordered' | 'invisible' | 'styled';
+	variant?: "bordered" | "invisible" | "styled";
 	isLoading?: boolean;
 	showPagination?: boolean;
 	showColumnsVisibility?: boolean;
 
 	// Used for automatic dropdown with bulk actions
-	bulkActions?: (SelectOption<string> & { confirm?: boolean; confirmButtonType?: ButtonType })[];
+	bulkActions?: (SelectOption<string> & {
+		confirm?: boolean;
+		confirmButtonType?: ButtonType;
+	})[];
 	onSelectBulkAction?: (action: string) => void;
 
 	// Used for manual handling of selected rows
@@ -120,8 +142,8 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 	className,
 	onTableStateChanged,
 	onRowClick,
-	rowKey = 'id',
-	variant = 'bordered',
+	rowKey = "id",
+	variant = "bordered",
 	isLoading = false,
 	showPagination = true,
 	bulkActions,
@@ -135,27 +157,35 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 }) => {
 	// Holds the text while the user is typing, once they press the search button or enter it will be copied to the tableState.query
 	// This avoids doing a database query on every key press
-	const [searchTerm, setSearchTerm] = useState<string>('');
-	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
-	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(
+		null,
+	);
+	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] =
+		useState<boolean>(false);
 
 	// Build an object containing the filterable columns, so they can be converted to and from the query params
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const queryParamConfig: { [queryParamId: string]: QueryParamConfig<any> } = {
 		page: NumberParam,
 		...cleanupObject(
 			fromPairs(
 				compact(
+					// biome-ignore lint/suspicious/noExplicitAny: todo
 					columns.map((col): [string, QueryParamConfig<any>] | null => {
 						if (
 							col.filterType &&
 							FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType]
 						) {
-							return [col.id, FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType]];
+							return [
+								col.id,
+								FILTER_TYPE_TO_QUERY_PARAM_CONVERTER[col.filterType],
+							];
 						}
 						return null;
-					})
-				)
-			)
+					}),
+				),
+			),
 		),
 		query: StringParam,
 		sort_column: StringParam,
@@ -169,40 +199,43 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 		setSearchTerm(tableState.query);
 	}, [onTableStateChanged, tableState]);
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleTableStateChanged = (value: any, id: string) => {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let newTableState: any = cloneDeep(tableState);
 
 		newTableState = cleanupObject({
 			...newTableState,
 			[id]: value,
-			...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
+			...(id !== "page" ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 		});
 
-		setTableState(newTableState, 'replace');
+		setTableState(newTableState, "replace");
 	};
 
 	const handleSortOrderChanged = (columnId: string) => {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		let newTableState: any = cloneDeep(tableState);
 
 		newTableState = cleanupObject({
 			...newTableState,
 			page: 0,
 			sort_column: columnId,
-			sort_order: tableState.sort_order === 'asc' ? 'desc' : 'asc',
+			sort_order: tableState.sort_order === "asc" ? "desc" : "asc",
 		});
 
-		setTableState(newTableState, 'replace');
+		setTableState(newTableState, "replace");
 	};
 
 	const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.keyCode === KeyCode.Enter) {
-			handleTableStateChanged(searchTerm, 'query');
+			handleTableStateChanged(searchTerm, "query");
 		}
 	};
 
 	const handleSelectBulkAction = (selectedAction: string) => {
 		const bulkActionInfo = (bulkActions || []).find(
-			(action) => action.value === selectedAction
+			(action) => action.value === selectedAction,
 		);
 
 		if (bulkActionInfo && onSelectBulkAction) {
@@ -228,13 +261,12 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 		return sortBy(
 			columns.map((column) => ({
 				id: column.id,
-				label: column.label || column.tooltip || '',
-				checked:
-					tableState.columns && tableState.columns.length
-						? tableState.columns.includes(column.id)
-						: column.visibleByDefault,
+				label: column.label || column.tooltip || "",
+				checked: tableState.columns?.length
+					? tableState.columns.includes(column.id)
+					: column.visibleByDefault,
 			})),
-			(option) => option.label
+			(option) => option.label,
 		);
 	};
 
@@ -244,7 +276,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 			return compact(
 				tableState.columns.map((columnId: string) => {
 					return columns.find((column) => column.id === columnId);
-				})
+				}),
 			);
 		}
 
@@ -259,7 +291,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 			columns
 				.filter((column) => selectedColumns.includes(column.id))
 				.map((column) => column.id),
-			'columns'
+			"columns",
 		);
 	};
 
@@ -267,7 +299,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 		const page = tableState.page | 0;
 		const from = page * itemsPerPage + 1;
 		const to = Math.min(page * itemsPerPage + itemsPerPage, dataCount);
-		const columnsWithAFilter = columns.filter((col) => col.filterType && col.id);
+		const columnsWithAFilter = columns.filter(
+			(col) => col.filterType && col.id,
+		);
 		const showFiltersAndColumnSelection =
 			(isAvo() && showColumnsVisibility) || columnsWithAFilter.length > 0;
 
@@ -278,8 +312,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						<FormGroup className="c-content-filters__search" inlineMode="grow">
 							<TextInput
 								placeholder={searchTextPlaceholder}
-								icon={'search' as IconName} // TODO investigate why enum is undefined
+								icon={"search" as IconName} // TODO investigate why enum is undefined
 								onChange={setSearchTerm}
+								// biome-ignore lint/suspicious/noExplicitAny: todo
 								onKeyUp={handleKeyUp as any}
 								value={searchTerm}
 								ariaLabel={searchInputAriaLabel}
@@ -288,10 +323,10 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 						<FormGroup inlineMode="shrink">
 							<Button
 								label={tText(
-									'admin/shared/components/filter-table/filter-table___zoeken'
+									"admin/shared/components/filter-table/filter-table___zoeken",
 								)}
 								type="primary"
-								onClick={() => handleTableStateChanged(searchTerm, 'query')}
+								onClick={() => handleTableStateChanged(searchTerm, "query")}
 							/>
 						</FormGroup>
 						<Spacer margin="left-small">
@@ -309,7 +344,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								<Flex spaced="regular" wrap>
 									{columnsWithAFilter.map((col) => {
 										switch (col.filterType) {
-											case 'CheckboxDropdownModal':
+											case "CheckboxDropdownModal":
 												return (
 													<CheckboxDropdownModal
 														{...(col.filterProps || {})}
@@ -318,21 +353,21 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 														onChange={(value) =>
 															handleTableStateChanged(value, col.id)
 														}
-														options={get(
-															col,
-															'filterProps.options',
-															[]
-														).map((option: CheckboxOption) => ({
-															...option,
-															checked: (
-																(tableState as any)[col.id] || []
-															).includes(option.id),
-														}))}
+														options={get(col, "filterProps.options", []).map(
+															(option: CheckboxOption) => ({
+																...option,
+																checked:
+																	// biome-ignore lint/suspicious/noExplicitAny: todo
+																	((tableState as any)[col.id] || []).includes(
+																		option.id,
+																	),
+															}),
+														)}
 														key={`filter-${col.id}`}
 													/>
 												);
 
-											case 'DateRangeDropdown':
+											case "DateRangeDropdown":
 												return (
 													<DateRangeDropdown
 														{...(col.filterProps || {})}
@@ -341,47 +376,42 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 														onChange={(value) =>
 															handleTableStateChanged(value, col.id)
 														}
+														// biome-ignore lint/suspicious/noExplicitAny: todo
 														range={(tableState as any)[col.id]}
 														key={`filter-${col.id}`}
 													/>
 												);
 
-											case 'BooleanCheckboxDropdown':
+											case "BooleanCheckboxDropdown":
 												return (
 													<BooleanCheckboxDropdown
 														{...(col.filterProps || {})}
 														id={col.id}
 														label={col.label}
+														// biome-ignore lint/suspicious/noExplicitAny: todo
 														value={(tableState as any)[col.id]}
 														onChange={(value) =>
 															handleTableStateChanged(value, col.id)
 														}
-														trueLabel={get(
-															col,
-															'filterProps.trueLabel'
-														)}
-														falseLabel={get(
-															col,
-															'filterProps.falseLabel'
-														)}
-														includeEmpty={get(
-															col,
-															'filterProps.includeEmpty'
-														)}
+														trueLabel={get(col, "filterProps.trueLabel")}
+														falseLabel={get(col, "filterProps.falseLabel")}
+														includeEmpty={get(col, "filterProps.includeEmpty")}
 														key={`filter-${col.id}`}
 														searchInputAriaLabel={tText(
-															'modules/shared/components/filter-table/filter-table___zoekveld-checkbox-filter-aria-label'
+															"modules/shared/components/filter-table/filter-table___zoekveld-checkbox-filter-aria-label",
 														)}
 													/>
 												);
 
-											case 'MultiUserSelectDropdown':
+											case "MultiUserSelectDropdown":
 												return (
 													<MultiUserSelectDropdown
 														{...(col.filterProps || {})}
 														id={col.id}
 														label={col.label}
+														// biome-ignore lint/suspicious/noExplicitAny: todo
 														values={(tableState as any)[col.id]}
+														// biome-ignore lint/suspicious/noExplicitAny: todo
 														onChange={(value: any) =>
 															handleTableStateChanged(value, col.id)
 														}
@@ -389,14 +419,15 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 													/>
 												);
 
-											case 'MultiEducationalOrganisationSelectModal':
+											case "MultiEducationalOrganisationSelectModal":
 												return (
 													<MultiEducationalOrganisationSelectModal
 														{...(col.filterProps || {})}
 														id={col.id}
-														label={col.label || ''}
+														label={col.label || ""}
 														values={eduOrgToClientOrg(
-															(tableState as any)[col.id]
+															// biome-ignore lint/suspicious/noExplicitAny: todo
+															(tableState as any)[col.id],
 														)}
 														onChange={(value) =>
 															handleTableStateChanged(value, col.id)
@@ -414,11 +445,9 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 											options={bulkActions || []}
 											onChange={handleSelectBulkAction}
 											placeholder={tText(
-												'admin/shared/components/filter-table/filter-table___bulkactie'
+												"admin/shared/components/filter-table/filter-table___bulkactie",
 											)}
-											disabled={
-												!bulkActions.find((action) => !action.disabled)
-											}
+											disabled={!bulkActions.find((action) => !action.disabled)}
 											className="c-bulk-action-select"
 										/>
 									)}
@@ -428,7 +457,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 								<ToolbarRight>
 									<CheckboxDropdownModal
 										label={tText(
-											'admin/shared/components/filter-table/filter-table___kolommen'
+											"admin/shared/components/filter-table/filter-table___kolommen",
 										)}
 										id="table_columns"
 										options={getColumnOptions()}
@@ -447,7 +476,7 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	const filters = getFilters(tableState);
 	return (
-		<div className={clsx('c-filter-table', className)}>
+		<div className={clsx("c-filter-table", className)}>
 			{!data?.length && (isEmpty(filters) || !filters) ? (
 				renderNoResults()
 			) : (
@@ -483,13 +512,12 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 										itemsPerPage={itemsPerPage}
 										totalItems={dataCount}
 										onPageChange={(newPage: number) =>
-											handleTableStateChanged(newPage, 'page')
+											handleTableStateChanged(newPage, "page")
 										}
 										onScrollToTop={() => {
 											const filterTable =
-												document.querySelector('.c-filter-table');
-											const scrollable =
-												filterTable?.closest('.c-scrollable');
+												document.querySelector(".c-filter-table");
+											const scrollable = filterTable?.closest(".c-scrollable");
 											scrollable?.scrollTo(0, 0);
 										}}
 									/>
@@ -507,12 +535,14 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 					onClose={() => setConfirmBulkActionModalOpen(false)}
 					confirmLabel={get(
 						bulkActions.find((action) => action.value === selectedBulkAction),
-						'label',
-						tText('admin/shared/components/filter-table/filter-table___bevestig')
+						"label",
+						tText(
+							"admin/shared/components/filter-table/filter-table___bevestig",
+						),
 					)}
 					confirmButtonType={get(
 						bulkActions.find((action) => action.value === selectedBulkAction),
-						'confirmButtonType'
+						"confirmButtonType",
 					)}
 				/>
 			)}
@@ -522,25 +552,29 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 export default FilterTable;
 
+// biome-ignore lint/suspicious/noExplicitAny: todo
 export function getFilters(tableState: any | undefined | null): any {
 	if (!tableState) {
 		return tableState;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// biome-ignore lint/correctness/noUnusedVariables: unused only because we want to remove these from the filters by destructuring
 	const { page, sort_column, sort_order, ...filters } = tableState;
 
 	return cleanupObject(filters);
 }
 
 // Removes all props where the value is undefined, null, [], {}, ''
+// biome-ignore lint/suspicious/noExplicitAny: todo
 export function cleanupObject(obj: any): any {
 	return omitBy(
 		obj,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		(value: any) =>
 			isNil(value) ||
 			(isString(value) && !value.length) ||
 			((isPlainObject(value) || isArray(value)) && isEmpty(value)) ||
-			(isPlainObject(value) && value.gte === '' && value.lte === '')
+			(isPlainObject(value) && value.gte === "" && value.lte === ""),
 	);
 }

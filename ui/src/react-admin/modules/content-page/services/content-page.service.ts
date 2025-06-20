@@ -1,28 +1,28 @@
-import type { IPagination } from '@studiohyperdrive/pagination';
-import type { Avo } from '@viaa/avo2-types';
-import { kebabCase } from 'lodash-es';
-import { stringifyUrl } from 'query-string';
-import type { ContentPageOverviewParams } from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { IPagination } from "@studiohyperdrive/pagination";
+import type { Avo } from "@viaa/avo2-types";
+import { kebabCase } from "lodash-es";
+import { stringifyUrl } from "query-string";
+import type { ContentPageOverviewParams } from "~content-blocks/BlockPageOverview/BlockPageOverview.types";
 
-import { AdminConfigManager } from '~core/config';
-import { PAGES_PER_PAGE } from '~modules/content-page/const/content-page.consts';
-import { CONTENT_PAGE_SERVICE_BASE_URL } from '~modules/content-page/services/content-page.const';
+import { AdminConfigManager } from "~core/config";
+import { PAGES_PER_PAGE } from "~modules/content-page/const/content-page.consts";
+import { CONTENT_PAGE_SERVICE_BASE_URL } from "~modules/content-page/services/content-page.const";
 import {
 	convertContentPageInfoToDbContentPage,
 	convertDbContentPagesToContentPageInfos,
 	convertDbContentPageToContentPageInfo,
-} from '~modules/content-page/services/content-page.converters';
-import type { Locale } from '~modules/translations/translations.core.types';
-import { CustomError } from '~shared/helpers/custom-error';
+} from "~modules/content-page/services/content-page.converters";
+import type { Locale } from "~modules/translations/translations.core.types";
+import { CustomError } from "~shared/helpers/custom-error";
 
-import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
-import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import { fetchWithLogoutJson } from "~shared/helpers/fetch-with-logout";
+import { getAdminCoreApiUrl } from "~shared/helpers/get-proxy-url-from-admin-core-config";
 import type {
 	ContentOverviewTableCols,
 	ContentPageInfo,
 	ContentPageLabel,
 	DbContentPage,
-} from '../types/content-pages.types';
+} from "../types/content-pages.types";
 
 export class ContentPageService {
 	private static getBaseUrl(): string {
@@ -30,12 +30,14 @@ export class ContentPageService {
 	}
 
 	public static async getContentPagesForPageOverviewBlock(
-		options: ContentPageOverviewParams
-	): Promise<IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }> {
+		options: ContentPageOverviewParams,
+	): Promise<
+		IPagination<ContentPageInfo> & { labelCounts: Record<string, number> }
+	> {
 		const { items: dbContentPages, ...rest } = await fetchWithLogoutJson<
 			IPagination<DbContentPage> & { labelCounts: Record<string, number> }
-		>(ContentPageService.getBaseUrl() + '/page-overview-block', {
-			method: 'POST',
+		>(`${ContentPageService.getBaseUrl()}/page-overview-block`, {
+			method: "POST",
 			body: JSON.stringify(options),
 			throwOnNullResponse: true,
 		});
@@ -47,7 +49,7 @@ export class ContentPageService {
 
 	public static async getNlParentContentPagesByTitle(
 		title: string | undefined,
-		limit?: number
+		limit?: number,
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
@@ -57,14 +59,14 @@ export class ContentPageService {
 					title,
 				},
 			}),
-			{ throwOnNullResponse: true }
+			{ throwOnNullResponse: true },
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicContentItemsByTitle(
 		title: string | undefined,
-		limit?: number
+		limit?: number,
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
 			stringifyUrl({
@@ -74,14 +76,14 @@ export class ContentPageService {
 					title,
 				},
 			}),
-			{ throwOnNullResponse: true }
+			{ throwOnNullResponse: true },
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
 	public static async getPublicProjectContentItemsByTitle(
 		title: string | undefined,
-		limit: number
+		limit: number,
 	): Promise<Partial<ContentPageInfo>[]> {
 		const dbContentPages: DbContentPage[] | null = await fetchWithLogoutJson(
 			stringifyUrl({
@@ -91,26 +93,34 @@ export class ContentPageService {
 					title,
 				},
 			}),
-			{ throwOnNullResponse: true }
+			{ throwOnNullResponse: true },
 		);
 		return convertDbContentPagesToContentPageInfos(dbContentPages) || [];
 	}
 
-	public static async getContentPageById(id: number | string): Promise<ContentPageInfo | null> {
+	public static async getContentPageById(
+		id: number | string,
+	): Promise<ContentPageInfo | null> {
 		const dbContentPage: DbContentPage | null = await fetchWithLogoutJson(
 			`${ContentPageService.getBaseUrl()}/${id}`,
-			{ throwOnNullResponse: true }
+			{ throwOnNullResponse: true },
 		);
-		return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
+		return dbContentPage
+			? convertDbContentPageToContentPageInfo(dbContentPage)
+			: null;
 	}
 
 	public static async getContentTypes(): Promise<
 		{ value: Avo.ContentPage.Type; label: string }[] | null
 	> {
-		return fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/types`, { throwOnNullResponse: true });
+		return fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/types`, {
+			throwOnNullResponse: true,
+		});
 	}
 
-	public static async fetchLabelsByContentType(contentType: string): Promise<ContentPageLabel[]> {
+	public static async fetchLabelsByContentType(
+		contentType: string,
+	): Promise<ContentPageLabel[]> {
 		return (
 			(await fetchWithLogoutJson(
 				stringifyUrl({
@@ -119,20 +129,20 @@ export class ContentPageService {
 						contentType,
 					},
 				}),
-				{ throwOnNullResponse: true }
+				{ throwOnNullResponse: true },
 			)) || []
 		);
 	}
 
 	public static async insertContentLabelsLinks(
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-		labelIds: (number | string)[]
+		labelIds: (number | string)[],
 	): Promise<void> {
 		if (!labelIds?.length) {
 			return;
 		}
 		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/labels`, {
-			method: 'PUT',
+			method: "PUT",
 			body: JSON.stringify({
 				contentPageId,
 				labelIds,
@@ -142,13 +152,13 @@ export class ContentPageService {
 
 	public static async deleteContentLabelsLinks(
 		contentPageId: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
-		labelIds: (number | string)[]
+		labelIds: (number | string)[],
 	): Promise<void> {
 		if (!labelIds?.length) {
 			return;
 		}
 		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/labels`, {
-			method: 'DELETE',
+			method: "DELETE",
 			body: JSON.stringify({
 				contentPageId,
 				labelIds,
@@ -169,9 +179,12 @@ export class ContentPageService {
 		sortColumn: ContentOverviewTableCols,
 		sortOrder: Avo.Search.OrderDirection,
 		tableColumnDataType: string,
-		where: any
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		where: any,
 	): Promise<[ContentPageInfo[], number]> {
-		const [dbContentPages, count] = await fetchWithLogoutJson<[DbContentPage[], number]>(
+		const [dbContentPages, count] = await fetchWithLogoutJson<
+			[DbContentPage[], number]
+		>(
 			stringifyUrl({
 				url: ContentPageService.getBaseUrl(),
 				query: {
@@ -183,72 +196,100 @@ export class ContentPageService {
 					where: JSON.stringify(where),
 				},
 			}),
-			{ throwOnNullResponse: true }
+			{ throwOnNullResponse: true },
 		);
-		return [convertDbContentPagesToContentPageInfos(dbContentPages) || [], count];
+		return [
+			convertDbContentPagesToContentPageInfos(dbContentPages) || [],
+			count,
+		];
 	}
 
 	public static async insertContentPage(
-		contentPage: Omit<ContentPageInfo, 'id'> & { id?: string | number }
+		contentPage: Omit<ContentPageInfo, "id"> & { id?: string | number },
 	): Promise<ContentPageInfo | null> {
-		const dbContentPage: DbContentPage = await fetchWithLogoutJson(ContentPageService.getBaseUrl(), {
-			method: 'PUT',
-			body: JSON.stringify(convertContentPageInfoToDbContentPage(contentPage)),
-		});
-		return convertDbContentPageToContentPageInfo(dbContentPage);
-	}
-
-	public static async updateContentPage(contentPage: ContentPageInfo): Promise<ContentPageInfo> {
-		const dbContentPage: DbContentPage = await fetchWithLogoutJson<DbContentPage>(
+		const dbContentPage: DbContentPage = await fetchWithLogoutJson(
 			ContentPageService.getBaseUrl(),
 			{
-				method: 'PATCH',
-				body: JSON.stringify({
-					contentPage: convertContentPageInfoToDbContentPage(contentPage),
-				}),
-			}
+				method: "PUT",
+				body: JSON.stringify(
+					convertContentPageInfoToDbContentPage(contentPage),
+				),
+			},
 		);
 		return convertDbContentPageToContentPageInfo(dbContentPage);
 	}
 
-	public static async duplicateContentPageImages(id: number | string): Promise<ContentPageInfo> {
+	public static async updateContentPage(
+		contentPage: ContentPageInfo,
+	): Promise<ContentPageInfo> {
+		const dbContentPage: DbContentPage =
+			await fetchWithLogoutJson<DbContentPage>(
+				ContentPageService.getBaseUrl(),
+				{
+					method: "PATCH",
+					body: JSON.stringify({
+						contentPage: convertContentPageInfoToDbContentPage(contentPage),
+					}),
+				},
+			);
+		return convertDbContentPageToContentPageInfo(dbContentPage);
+	}
+
+	public static async duplicateContentPageImages(
+		id: number | string,
+	): Promise<ContentPageInfo> {
 		try {
 			const responseContent = await fetchWithLogoutJson<DbContentPage>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
-					url: `${getAdminCoreApiUrl()}/admin/content-pages/` + id + '/duplicate',
+					url: `${getAdminCoreApiUrl()}/admin/content-pages/${id}/duplicate`,
 				}),
 				{
-					method: 'POST',
-				}
+					method: "POST",
+				},
 			);
 			return convertDbContentPageToContentPageInfo(responseContent);
 		} catch (err) {
-			throw new CustomError('Failed to duplicate assets for content page', err, { id });
+			throw new CustomError(
+				"Failed to duplicate assets for content page",
+				err,
+				{ id },
+			);
 		}
 	}
 
-	public static async duplicateContentImages(contentBlockInfo: any): Promise<any> {
+	public static async duplicateContentImages(
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		contentBlockInfo: any,
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+	): Promise<any> {
 		try {
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			return await fetchWithLogoutJson<any>(
 				stringifyUrl({
 					// This route lives in the proxy and not in the admin-core-api, so we use content-pages/duplicate instead of admin/content-pages/duplicate
 					url: `${getAdminCoreApiUrl()}/admin/content-pages/blocks/duplicate`,
 				}),
 				{
-					method: 'POST',
+					method: "POST",
 					body: JSON.stringify(contentBlockInfo),
-				}
+				},
 			);
 		} catch (err) {
-			throw new CustomError('Failed to duplicate assets for content block json', err, {
-				contentBlockInfo,
-			});
+			throw new CustomError(
+				"Failed to duplicate assets for content block json",
+				err,
+				{
+					contentBlockInfo,
+				},
+			);
 		}
 	}
 
-	public static getPathOrDefault(contentPage: Partial<ContentPageInfo> | null): string {
-		return contentPage?.path || `/${kebabCase(contentPage?.title)}` || '';
+	public static getPathOrDefault(
+		contentPage: Partial<ContentPageInfo> | null,
+	): string {
+		return contentPage?.path || `/${kebabCase(contentPage?.title)}` || "";
 	}
 
 	/**
@@ -261,22 +302,23 @@ export class ContentPageService {
 	 */
 	public static async duplicateContentPage(
 		contentPageId: string | number,
-		overrideValues: Partial<ContentPageInfo>
+		overrideValues: Partial<ContentPageInfo>,
 	): Promise<Partial<ContentPageInfo> | null> {
 		try {
-			const duplicatedContentPage = await fetchWithLogoutJson<DbContentPage | null>(
-				`${ContentPageService.getBaseUrl()}/${contentPageId}/duplicate`,
-				{
-					method: 'POST',
-					body: JSON.stringify(overrideValues),
-				}
-			);
+			const duplicatedContentPage =
+				await fetchWithLogoutJson<DbContentPage | null>(
+					`${ContentPageService.getBaseUrl()}/${contentPageId}/duplicate`,
+					{
+						method: "POST",
+						body: JSON.stringify(overrideValues),
+					},
+				);
 			if (!duplicatedContentPage) {
 				return null;
 			}
 			return convertDbContentPageToContentPageInfo(duplicatedContentPage);
 		} catch (err) {
-			throw new CustomError('Failed to duplicate content page', err, {
+			throw new CustomError("Failed to duplicate content page", err, {
 				contentPageId,
 				overrideValues,
 			});
@@ -285,7 +327,7 @@ export class ContentPageService {
 
 	public static async deleteContentPage(id: number | string): Promise<void> {
 		await fetchWithLogoutJson(`${ContentPageService.getBaseUrl()}/${id}`, {
-			method: 'DELETE',
+			method: "DELETE",
 		});
 	}
 
@@ -298,12 +340,13 @@ export class ContentPageService {
 	public static async getContentPageByLanguageAndPath(
 		language: Locale,
 		path: string,
-		onlyInfo = false
+		onlyInfo = false,
 	): Promise<DbContentPage | null> {
 		try {
-			let url = ContentPageService.getBaseUrl() + '/by-language-and-path';
+			let url = `${ContentPageService.getBaseUrl()}/by-language-and-path`;
 			if (
-				AdminConfigManager.getConfig().services.getContentPageByLanguageAndPathEndpoint &&
+				AdminConfigManager.getConfig().services
+					.getContentPageByLanguageAndPathEndpoint &&
 				!onlyInfo
 			) {
 				url =
@@ -316,16 +359,19 @@ export class ContentPageService {
 					query: {
 						language,
 						path,
-						onlyInfo: onlyInfo ? 'true' : 'false',
+						onlyInfo: onlyInfo ? "true" : "false",
 					},
-				})
+				}),
 			);
 			if (!dbContentPage) {
 				return null;
 			}
 			return dbContentPage;
 		} catch (err) {
-			throw new CustomError('Failed to get content page by language and path', err);
+			throw new CustomError(
+				"Failed to get content page by language and path",
+				err,
+			);
 		}
 	}
 
@@ -339,7 +385,7 @@ export class ContentPageService {
 	public static async doesContentPageLanguageAndPathExist(
 		language: Locale,
 		path: string,
-		id?: number | string // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
+		id?: number | string, // Numeric ids in avo, uuid's in hetarchief. We would like to switch to uuids for avo as well at some point
 	): Promise<string | null> {
 		try {
 			const responseContent = await fetchWithLogoutJson<{
@@ -348,13 +394,13 @@ export class ContentPageService {
 				id: number;
 			}>(
 				stringifyUrl({
-					url: ContentPageService.getBaseUrl() + '/path-exists',
+					url: `${ContentPageService.getBaseUrl()}/path-exists`,
 					query: {
 						language,
 						path,
 					},
 				}),
-				{ throwOnNullResponse: true }
+				{ throwOnNullResponse: true },
 			);
 			if (id === responseContent.id) {
 				return null;
@@ -362,14 +408,14 @@ export class ContentPageService {
 			return responseContent.title;
 		} catch (err) {
 			throw new CustomError(
-				'Failed to check if content page exists by language and path',
-				err
+				"Failed to check if content page exists by language and path",
+				err,
 			);
 		}
 	}
 
 	public static async getUserGroupsWithAccessToContentPage(
-		path: string
+		path: string,
 	): Promise<(string | number)[]> {
 		return fetchWithLogoutJson(
 			stringifyUrl({
@@ -377,7 +423,7 @@ export class ContentPageService {
 				query: {
 					path,
 				},
-			})
+			}),
 		);
 	}
 }

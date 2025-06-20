@@ -1,8 +1,8 @@
-import { execSync } from 'child_process';
-import * as path from 'path';
+import { execSync } from 'node:child_process';
+import * as path from 'node:path';
 import { red } from 'console-log-colors';
 import { getDirName } from './get-dir-name.mjs';
-import * as fs from 'fs/promises';
+import * as fs from 'node:fs/promises';
 
 /**
  * fetch the list of commit messages between two git tags using the command:

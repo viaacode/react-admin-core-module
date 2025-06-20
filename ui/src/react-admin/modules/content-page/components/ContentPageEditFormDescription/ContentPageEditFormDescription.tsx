@@ -36,7 +36,6 @@ export const ContentPageEditFormDescription: FunctionComponent<
 			}
 			className={className}
 		>
-			{/** biome-ignore lint/nursery/useUniqueElementIds: there will only be one of these on the page at any time */}
 			<RichTextEditorWithInternalStateWrapper
 				value={description}
 				onChange={setDescription}

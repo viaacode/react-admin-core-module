@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions } from '@tanstack/react-query/src/types';
-import type { Avo } from '@viaa/avo2-types';
-import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
-import { QUERY_KEYS } from '~shared/types';
+import { useQuery } from "@tanstack/react-query";
+import type { Avo } from "@viaa/avo2-types";
+import { ContentPageLabelService } from "~modules/content-page-labels/content-page-label.service";
+import { QUERY_KEYS } from "~shared/types";
 
 interface ContentPageLabelsRequestArgs {
 	selectedContentType: Avo.ContentPage.Type;
@@ -11,7 +10,10 @@ interface ContentPageLabelsRequestArgs {
 
 export const useGetContentPageLabelsByTypeAndLabels = (
 	requestArgs: ContentPageLabelsRequestArgs,
-	options?: UseQueryOptions<any>
+	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+		enabled: true,
+		keepPreviousData: true,
+	},
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, requestArgs],
@@ -22,9 +24,13 @@ export const useGetContentPageLabelsByTypeAndLabels = (
 			}
 			return ContentPageLabelService.getContentPageLabelsByTypeAndLabels(
 				requestArgs.selectedContentType,
-				requestArgs.queryLabels
+				requestArgs.queryLabels,
 			);
 		},
-		options as any
+		{
+			enabled: true,
+			keepPreviousData: true,
+			...options,
+		},
 	);
 };

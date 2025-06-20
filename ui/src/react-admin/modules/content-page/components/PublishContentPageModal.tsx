@@ -83,7 +83,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 			} as ContentPageInfo;
 			setValidationError(undefined);
 			closeModal(newContent);
-		} catch (err) {
+		} catch (_err) {
 			showToast({
 				title: tText(
 					'modules/admin/content-page/components/publish-content-page-modal___error'

@@ -6,20 +6,20 @@ import {
 	Modal,
 	ModalBody,
 	ModalFooterRight,
-} from '@viaa/avo2-components';
-import type { ContentPickerType } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import { compact, noop, uniq } from 'lodash-es';
-import type { FunctionComponent } from 'react';
-import React, { useEffect, useState } from 'react';
-import { Loader } from '~shared/components/Loader';
-import FileUpload from '~shared/components/FileUpload/FileUpload';
+} from "@viaa/avo2-components";
+import type { ContentPickerType } from "@viaa/avo2-types";
+import clsx from "clsx";
+import { compact, noop, uniq } from "lodash-es";
+import type { FunctionComponent, KeyboardEvent } from "react";
+import React, { useEffect, useState } from "react";
+import FileUpload from "~shared/components/FileUpload/FileUpload";
+import { Loader } from "~shared/components/Loader";
 
-import { useGetStillsFromContentItem } from '~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem';
-import { PHOTO_TYPES } from '~shared/helpers/files';
-import { tText } from '~shared/helpers/translation-functions';
+import { useGetStillsFromContentItem } from "~shared/components/UploadOrSelectVideoStill/hooks/useGetStillsFromContentItem";
+import { PHOTO_TYPES } from "~shared/helpers/files";
+import { tText } from "~shared/helpers/translation-functions";
 
-import './UploadOrSelectVideoStill.scss';
+import "./UploadOrSelectVideoStill.scss";
 
 export interface UploadOrSelectVideoStillProps {
 	label: string | undefined;
@@ -35,7 +35,9 @@ export interface UploadOrSelectVideoStillProps {
 	contentItemId: string | null; // Limit maintainer options based on the selected item, collection or assignment
 }
 
-export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStillProps> = ({
+export const UploadOrSelectVideoStill: FunctionComponent<
+	UploadOrSelectVideoStillProps
+> = ({
 	label,
 	error,
 	value,
@@ -84,16 +86,18 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 				assetType="CONTENT_BLOCK_IMAGE"
 				ownerId=""
 				urls={compact([selectedStill])}
-				onChange={(newValue: string[] | null) => onChange(newValue?.[0] || null)}
+				onChange={(newValue: string[] | null) =>
+					onChange(newValue?.[0] || null)
+				}
 				onButtonClicked={() => setIsModalOpen(true)}
 				onDeleteFile={() => setSelectedStill(null)}
 				label={tText(
-					'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-kies-een-still'
+					"react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-kies-een-still",
 				)}
 			/>
 			<Modal
 				title={tText(
-					'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-selecteer-een-still-modal-titel'
+					"react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___upload-of-selecteer-een-still-modal-titel",
 				)}
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
@@ -110,7 +114,7 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 						allowMulti={false}
 						allowedTypes={PHOTO_TYPES}
 						label={tText(
-							'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___eigen-still-uploaden'
+							"react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___eigen-still-uploaden",
 						)}
 						icon={IconName.upload}
 					/>
@@ -122,17 +126,22 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 								originalStillValue,
 								selectedStill,
 								...(stills || []),
-							].sort()
-						)
+							].sort(),
+						),
 					).map((still) => (
 						<div
-							className={clsx('c-upload-or-select-video-still__image', {
-								['c-upload-or-select-video-still__image--selected']:
+							className={clsx("c-upload-or-select-video-still__image", {
+								"c-upload-or-select-video-still__image--selected":
 									selectedStill === still,
 							})}
 							style={{ backgroundImage: `url(${still})` }}
 							key={still}
 							onClick={() => setSelectedStill(still)}
+							onKeyUp={(evt: KeyboardEvent) => {
+								if (evt.key === "Enter") {
+									setSelectedStill(still);
+								}
+							}}
 						/>
 					))}
 					{isFetching && (
@@ -145,14 +154,14 @@ export const UploadOrSelectVideoStill: FunctionComponent<UploadOrSelectVideoStil
 					<ButtonToolbar>
 						<Button
 							label={tText(
-								'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___annuleer'
+								"react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___annuleer",
 							)}
 							type="secondary"
 							onClick={() => setIsModalOpen(false)}
 						/>
 						<Button
 							label={tText(
-								'react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___opslaan'
+								"react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still___opslaan",
 							)}
 							onClick={handleSaveClick}
 						/>

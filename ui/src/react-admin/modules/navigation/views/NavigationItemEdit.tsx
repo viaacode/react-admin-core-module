@@ -105,12 +105,10 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 			setCurrentCurrentNavigationItem(newNavigationItem);
 		}
 	}, [
-		navigationBarId,
-		navigationItemId,
-		isLoadingNavigationItems,
-		navigationItems,
-		originalNavigationItem,
-		setCurrentCurrentNavigationItem,
+		navigationBarId, 
+		navigationItemId, 
+		isLoadingNavigationItems, 
+		originalNavigationItem
 	]);
 
 	useEffect(() => {

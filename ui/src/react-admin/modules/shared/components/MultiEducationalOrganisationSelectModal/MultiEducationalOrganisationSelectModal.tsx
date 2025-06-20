@@ -42,7 +42,7 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 	useEffect(() => {
 		setSelectedOrganisations(values.filter((org) => org.organisationLabel !== NULL_FILTER));
 		setIncludeEmpty(!!values.find((org) => org.organisationLabel === NULL_FILTER));
-	}, [isOpen, values]);
+	}, [values]);
 
 	const closeModal = () => {
 		setIsOpen(false);

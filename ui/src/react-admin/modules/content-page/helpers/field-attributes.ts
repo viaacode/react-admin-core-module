@@ -1,31 +1,35 @@
-import type { DatePickerProps, SelectOption } from '@viaa/avo2-components';
-import { compact, debounce, get, isArray, isNil } from 'lodash-es';
-import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
-import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import type { DatePickerProps, SelectOption } from "@viaa/avo2-components";
+import { compact, debounce, get, isArray, isNil } from "lodash-es";
+import type { ContentPickerProps } from "~shared/components/ContentPicker/ContentPicker";
+import type { RichTextEditorWithInternalStateWrapperProps } from "~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper";
 
-import type { ContentBlockField } from '../types/content-block.types';
-import { ContentBlockEditor } from '../types/content-block.types';
+import type { ContentBlockField } from "../types/content-block.types";
+import { ContentBlockEditor } from "../types/content-block.types";
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,
 	// Optional key, so we can store rich text editor state side by side of the html string
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	onChange: (newValue: any, key?: string) => void,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	value: any,
 	id: string,
 	// key and state are required, so we can store rich text editor state side by side of the html string
 	key: string,
-	state: any
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+	state: any,
 ) => {
 	switch (field.editorType) {
 		case ContentBlockEditor.TextInput:
 			return {
 				value,
 				onChange: debounce(
+					// biome-ignore lint/suspicious/noExplicitAny: todo
 					(value: any) => {
 						onChange(value);
 					},
 					150,
-					{ leading: true }
+					{ leading: true },
 				),
 			};
 
@@ -37,6 +41,7 @@ export const generateFieldAttributes = (
 
 		case ContentBlockEditor.DatePicker:
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (date: any) => onChange(date.toISOString()),
 				value: value ? new Date(value) : null,
 			} as DatePickerProps;
@@ -45,18 +50,20 @@ export const generateFieldAttributes = (
 		case ContentBlockEditor.ColorSelect:
 			return {
 				onChange: (option: SelectOption<string>) => {
-					onChange(get(option, 'value', ''));
+					onChange(get(option, "value", ""));
 				},
 				value: field.editorProps.options.find(
-					(opt: SelectOption<string>) => opt.value === value
+					(opt: SelectOption<string>) => opt.value === value,
 				),
 			};
 
 		case ContentBlockEditor.RICH_TEXT_EDITOR: {
-			const html = (state as any)[key] || '';
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			const html = (state as any)[key] || "";
 			return {
 				id,
 				initialHtml: html, // Only use the html the first time, then use the editor state
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				value: (state as any)[key],
 				onChange: (newValue: string) => {
 					onChange(newValue, key);
@@ -72,13 +79,18 @@ export const generateFieldAttributes = (
 					onChange(field.editorProps.allowMulti || !value ? value : value[0]);
 				},
 				urls: compact(
-					Array.isArray(urlOrUrls) ? urlOrUrls : isNil(urlOrUrls) ? [] : [urlOrUrls]
+					Array.isArray(urlOrUrls)
+						? urlOrUrls
+						: isNil(urlOrUrls)
+						? []
+						: [urlOrUrls],
 				),
 			};
 		}
 
 		case ContentBlockEditor.MultiRange:
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (value: any) => {
 					onChange(isArray(value) ? value[0] || 0 : value);
 				},
@@ -87,12 +99,14 @@ export const generateFieldAttributes = (
 
 		case ContentBlockEditor.Checkbox:
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (value: any) => onChange(value),
 				checked: value,
 			};
 
 		case ContentBlockEditor.UserGroupSelect:
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (value: any) => {
 					onChange(value);
 				},
@@ -101,6 +115,7 @@ export const generateFieldAttributes = (
 
 		case ContentBlockEditor.MaintainerSelect:
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (newValue: any) => {
 					onChange(newValue);
 				},
@@ -114,6 +129,7 @@ export const generateFieldAttributes = (
 		case ContentBlockEditor.UploadOrSelectVideoStill: {
 			const item = state.item || state.mediaItem;
 			return {
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange: (value: any) => {
 					onChange(value);
 				},

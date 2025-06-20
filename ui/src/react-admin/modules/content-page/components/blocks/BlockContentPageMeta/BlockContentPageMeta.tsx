@@ -1,17 +1,17 @@
-import { Button } from '@viaa/avo2-components';
-import { format } from 'date-fns';
-import type { FunctionComponent, ReactNode } from 'react';
-import React from 'react';
-import { getPublishedDate } from '~modules/content-page/helpers';
+import { Button } from "@viaa/avo2-components";
+import { format } from "date-fns";
+import type { FunctionComponent, ReactNode } from "react";
+import React from "react";
+import { getPublishedDate } from "~modules/content-page/helpers";
 
 import type {
 	ContentPageInfo,
 	ContentPageLabel,
-} from '~modules/content-page/types/content-pages.types';
-import { normalizeTimestamp } from '~shared/helpers/formatters/date';
-import { navigateToContentType } from '~shared/helpers/link';
-import { tHtml } from '~shared/helpers/translation-functions';
-import { AdminConfigManager } from '~core/config';
+} from "~modules/content-page/types/content-pages.types";
+import { normalizeTimestamp } from "~shared/helpers/formatters/date";
+import { navigateToContentType } from "~shared/helpers/link";
+import { tHtml } from "~shared/helpers/translation-functions";
+import { AdminConfigManager } from "~core/config";
 
 export interface ContentPageMetaProps {
 	contentPageInfo: ContentPageInfo;
@@ -23,10 +23,14 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
 	const renderLabel = (labelObj: ContentPageLabel): string | ReactNode => {
+		// biome-ignore lint/suspicious/noExplicitAny: todo
 		return (labelObj as any).link_to ? (
 			<Button
 				type="inline-link"
-				onClick={() => navigateToContentType((labelObj as any).link_to, history)}
+				onClick={() =>
+					// biome-ignore lint/suspicious/noExplicitAny: todo
+					navigateToContentType((labelObj as any).link_to, history)
+				}
 				key={`label-link-${labelObj.label}`}
 			>
 				{labelObj.label}
@@ -44,24 +48,26 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 		return (
 			<>
 				{tHtml(
-					'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in'
-				)}{' '}
-				{contentPageInfo.labels.map((labelObj: ContentPageLabel, index: number) => {
-					if (index === contentPageInfo.labels.length - 1) {
-						return renderLabel(labelObj);
-					}
-					if (index === contentPageInfo.labels.length - 2) {
-						return (
-							<>
-								{renderLabel(labelObj)}{' '}
-								{tHtml(
-									'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en'
-								)}{' '}
-							</>
-						);
-					}
-					return <>{renderLabel(labelObj)}, </>;
-				})}{' '}
+					"admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___in",
+				)}{" "}
+				{contentPageInfo.labels.map(
+					(labelObj: ContentPageLabel, index: number) => {
+						if (index === contentPageInfo.labels.length - 1) {
+							return renderLabel(labelObj);
+						}
+						if (index === contentPageInfo.labels.length - 2) {
+							return (
+								<>
+									{renderLabel(labelObj)}{" "}
+									{tHtml(
+										"admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___en",
+									)}{" "}
+								</>
+							);
+						}
+						return <>{renderLabel(labelObj)}, </>;
+					},
+				)}{" "}
 			</>
 		);
 	};
@@ -70,14 +76,16 @@ export const BlockContentPageMeta: FunctionComponent<ContentPageMetaProps> = ({
 	return (
 		<span>
 			{tHtml(
-				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___gepubliceerd-op'
-			)}{' '}
-			{publishedDate ? format(normalizeTimestamp(publishedDate), 'd MMMM yyyy') : '-'}{' '}
+				"admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___gepubliceerd-op",
+			)}{" "}
+			{publishedDate
+				? format(normalizeTimestamp(publishedDate), "d MMMM yyyy")
+				: "-"}{" "}
 			{renderLabels()}
 			{tHtml(
-				'admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door'
-			)}{' '}
-			{contentPageInfo.owner?.fullName || '-'}
+				"admin/content-block/components/wrappers/block-content-page-meta/block-content-page-meta___door",
+			)}{" "}
+			{contentPageInfo.owner?.fullName || "-"}
 		</span>
 	);
 };

@@ -307,8 +307,8 @@ function setConfig() {
 					key: string,
 					params: TOptions | string | undefined,
 				): ReactNode => (
-					// biome-ignore lint/suspicious/noExplicitAny: todo
 					<Html
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						content={i18n.t(key, params as any) as unknown as string}
 						type="span"
 					/>

@@ -64,7 +64,7 @@ export const useUserGroupOptions = (
 				})
 			);
 		}
-	}, [userGroups, includeSpecialGroups, type]);
+	}, [userGroups, includeSpecialGroups, type, isLoading]);
 
 	return [userGroupOptions, userGroups || [], isLoading];
 };

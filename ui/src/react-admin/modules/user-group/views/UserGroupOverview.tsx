@@ -247,7 +247,7 @@ export const UserGroupOverview = forwardRef<
 				type: ToastType.ERROR,
 			});
 		}
-	}, [isErrorPermissions, isErrorUserGroups, permissionsError, userGroupError]);
+	}, [isErrorPermissions, permissionsError]);
 
 	/**
 	 * Render

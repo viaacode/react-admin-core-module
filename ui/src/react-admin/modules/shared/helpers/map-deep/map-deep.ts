@@ -1,4 +1,4 @@
-import { isArray, isPlainObject } from 'lodash-es';
+import { isArray, isPlainObject } from "lodash-es";
 
 /**
  * Recursively runs over every property, and replaces it with the return value of the mapping function
@@ -7,19 +7,27 @@ import { isArray, isPlainObject } from 'lodash-es';
  * @param ignoreKey function that identifies keys that should not be recursively followed
  */
 export function mapDeep(
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	obj: any,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	mappingFunction: (obj: any, key: string, value: any) => void,
-	ignoreKey: (key: string) => boolean
+	ignoreKey: (key: string) => boolean,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any {
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const returnObj: any = isPlainObject(obj) ? {} : [];
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const propertiesToRunOver: [any, any, string | number][] = []; // [source object, destination object, key]
 
 	propertiesToRunOver.push(
-		...Object.keys(obj).map((key: string | number): [any, any, string | number] => [
-			obj,
-			returnObj,
-			key,
-		])
+		...Object.keys(obj).map(
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			(key: string | number): [any, any, string | number] => [
+				obj,
+				returnObj,
+				key,
+			],
+		),
 	);
 
 	let propToRunOver = propertiesToRunOver.shift();
@@ -34,12 +42,13 @@ export function mapDeep(
 			if (isPlainObject(value) || isArray(value)) {
 				propertiesToRunOver.push(
 					...Object.keys(value).map(
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						(subObjKey: string | number): [any, any, string | number] => [
 							value,
 							responseSubObj[key],
 							subObjKey,
-						]
-					)
+						],
+					),
 				);
 			}
 		}

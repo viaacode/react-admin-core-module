@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
+// biome-ignore lint/suspicious/noExplicitAny: todo
 export function useDebounce(value: any, delay: number): any {
 	const [debouncedValue, setDebouncedValue] = useState(value);
 

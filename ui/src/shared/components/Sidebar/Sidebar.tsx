@@ -57,7 +57,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 				<NavLink
 					className={clsx('o-sidebar__nav-item')}
 					activeClassName="o-sidebar__nav-item--active"
-					isActive={(match, location) => isActiveClass(navItem, location)}
+					isActive={(_match, location) => isActiveClass(navItem, location)}
 					to={navItem.location || '/'}
 				>
 					{navItem.label}

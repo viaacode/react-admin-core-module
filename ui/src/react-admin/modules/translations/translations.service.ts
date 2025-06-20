@@ -26,7 +26,7 @@ export class TranslationsService {
 
 	static async fetchLanguages(): Promise<LanguageInfo[]> {
 		try {
-			return fetchWithLogoutJson(TranslationsService.getBaseUrl() + '/languages');
+			return fetchWithLogoutJson(`${TranslationsService.getBaseUrl()}/languages`);
 		} catch (err) {
 			throw new CustomError('Failed to fetch translations', err);
 		}

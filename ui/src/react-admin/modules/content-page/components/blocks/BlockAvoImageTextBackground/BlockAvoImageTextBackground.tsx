@@ -128,13 +128,13 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 						type={headingType}
 						style={{
 							textAlign: computedTextAlign,
-							lineHeight: lineHeightTitle + 'vw',
+							lineHeight: `${lineHeightTitle}vw`,
 						}}
 					>
 						<mark
 							style={{
-								fontSize: fontSize + 'vw',
-								padding: padding + 'vw',
+								fontSize: `${fontSize}vw`,
+								padding: `${padding}vw`,
 								backgroundColor: backgroundColor,
 								boxDecorationBreak: 'clone',
 								whiteSpace: 'normal',
@@ -150,15 +150,15 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 						className="c-block-avo-image-text-background__content"
 						style={{
 							textAlign: computedTextAlign,
-							marginTop: (heading ? 1 : 0) + 'rem',
-							marginLeft: padding + 'rem',
+							marginTop: `${heading ? 1 : 0}rem`,
+							marginLeft: `${padding}rem`,
 						}}
 					>
 						<mark
 							style={{
-								padding: padding + 'rem',
+								padding: `${padding}rem`,
 								backgroundColor: backgroundColor,
-								lineHeight: lineHeightText + 'rem',
+								lineHeight: `${lineHeightText}rem`,
 								boxDecorationBreak: 'clone',
 								whiteSpace: 'normal',
 								color: foregroundColor,
@@ -180,9 +180,9 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 							iconPosition={buttonIconAlignment}
 							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
 							style={{
-								marginTop: (heading ? 1.6 : 2.2) + 'rem',
+								marginTop: `${heading ? 1.6 : 2.2}rem`,
 								marginLeft:
-									(backgroundColor === Color.Transparent ? padding : 0) + 'rem',
+									`${backgroundColor === Color.Transparent ? padding : 0}rem`,
 							}}
 						/>,
 						buttonAltTitle || buttonLabel
@@ -200,7 +200,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 				src={image}
 				className={clsx(
 					'c-block-avo-image-text-background__image-wrapper',
-					'c-block-avo-image-text-background__image-wrapper--' + backgroundAlignment
+					`c-block-avo-image-text-background__image-wrapper--${backgroundAlignment}`
 				)}
 			/>
 		);
@@ -223,7 +223,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 				<div
 					className={clsx(
 						'c-block-avo-image-text-background__page-wrapper',
-						'c-block-avo-image-text-background__page-wrapper--' + computedTextAlign
+						`c-block-avo-image-text-background__page-wrapper--${computedTextAlign}`
 					)}
 					style={{
 						color: foregroundColor,

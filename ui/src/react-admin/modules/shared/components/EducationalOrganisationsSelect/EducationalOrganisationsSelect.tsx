@@ -1,16 +1,15 @@
-import { Alert, Select, Spacer } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import { pullAllBy, remove, uniq } from 'lodash-es';
-import type { FunctionComponent, ReactText } from 'react';
-import React, { useEffect, useState } from 'react';
+import { Alert, Select, Spacer } from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import clsx from "clsx";
+import { pullAllBy, remove, uniq } from "lodash-es";
+import type { FunctionComponent, ReactText } from "react";
+import React, { useEffect, useState } from "react";
 
-import { AdminConfigManager, ToastType } from '~core/config';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-
-import { stringsToTagList } from '../../helpers/strings-to-taglist';
-import { AVO } from '~modules/shared/types';
+import { AdminConfigManager, ToastType } from "~core/config";
+import { AVO } from "~modules/shared/types";
+import { showToast } from "~shared/helpers/show-toast";
+import { tHtml, tText } from "~shared/helpers/translation-functions";
+import { stringsToTagList } from "../../helpers/strings-to-taglist";
 
 export interface Tag {
 	label: string;
@@ -31,10 +30,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	const [organisationsInCity, setOrganisationsInCity] = useState<
 		Avo.EducationOrganization.Organization[]
 	>([]);
-	const [selectedCity, setSelectedCity] = useState<string>('');
+	const [selectedCity, setSelectedCity] = useState<string>("");
 	const [organizationsLoadingState, setOrganizationsLoadingState] = useState<
-		'loading' | 'loaded' | 'error'
-	>('loaded');
+		"loading" | "loaded" | "error"
+	>("loaded");
 
 	// Cache organizations since the user will probably select multiple schools in the same city
 	const [organisationsCache, setOrganisationsCache] = useState<{
@@ -45,24 +44,25 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 		AdminConfigManager.getConfig()
 			.services.educationOrganisationService.fetchCities()
 			.then(setCities)
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			.catch((err: any) => {
 				console.error(err);
-				console.error(new Error('Failed to get cities'));
+				console.error(new Error("Failed to get cities"));
 				showToast({
 					title: tText(
-						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt',
+						"modules/admin/shared/components/educational-organisations-select/educational-organisations-select___ophalen-mislukt",
 						{},
-						[AVO]
+						[AVO],
 					),
 					description: tText(
-						'settings/components/organisation___het-ophalen-van-de-steden-is-mislukt',
+						"settings/components/organisation___het-ophalen-van-de-steden-is-mislukt",
 						{},
-						[AVO]
+						[AVO],
 					),
 					type: ToastType.ERROR,
 				});
 			});
-	}, [setCities]);
+	}, []);
 
 	useEffect(() => {
 		(async () => {
@@ -70,8 +70,10 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 				if (!selectedCity) {
 					return;
 				}
-				setOrganizationsLoadingState('loading');
-				const [city, zipCode] = selectedCity.split(/[()]/g).map((s) => s.trim());
+				setOrganizationsLoadingState("loading");
+				const [city, zipCode] = selectedCity
+					.split(/[()]/g)
+					.map((s) => s.trim());
 				let orgs: Avo.EducationOrganization.Organization[];
 				if (organisationsCache[selectedCity]) {
 					// get from cache
@@ -81,45 +83,38 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 					orgs =
 						await AdminConfigManager.getConfig().services.educationOrganisationService.fetchEducationOrganisations(
 							city,
-							zipCode
+							zipCode,
 						);
 					setOrganisationsCache({
 						...organisationsCache,
 						...{ [selectedCity]: orgs },
 					});
 				}
-				pullAllBy(orgs, organisations, 'label');
+				pullAllBy(orgs, organisations, "label");
 				setOrganisationsInCity(orgs);
-				setOrganizationsLoadingState('loaded');
+				setOrganizationsLoadingState("loaded");
 			} catch (err) {
 				setOrganisationsInCity([]);
-				setOrganizationsLoadingState('loaded');
-				console.error('Failed to get educational organizations', err, {
+				setOrganizationsLoadingState("loaded");
+				console.error("Failed to get educational organizations", err, {
 					selectedCity,
 				});
 				showToast({
 					title: tText(
-						'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt',
+						"modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt",
 						{},
-						[AVO]
+						[AVO],
 					),
 					description: tText(
-						'settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt',
+						"settings/components/organisation___het-ophalen-van-de-onderwijsinstellingen-is-mislukt",
 						{},
-						[AVO]
+						[AVO],
 					),
 					type: ToastType.ERROR,
 				});
 			}
 		})();
-	}, [
-		organisationsCache,
-		organisations,
-		selectedCity,
-		setOrganisationsInCity,
-		setOrganizationsLoadingState,
-		onChange,
-	]);
+	}, [organisationsCache, organisations, selectedCity]);
 
 	const onSelectedCityChanged = async (cityAndZipCode: string) => {
 		setSelectedCity(cityAndZipCode);
@@ -127,19 +122,20 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	const onSelectedOrganisationChanged = (orgLabel: string) => {
 		const selectedOrg = organisationsInCity.find(
-			(org: Avo.EducationOrganization.Organization) => org.organisationLabel === orgLabel
+			(org: Avo.EducationOrganization.Organization) =>
+				org.organisationLabel === orgLabel,
 		);
 		if (!selectedOrg) {
 			showToast({
 				title: tText(
-					'modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt',
+					"modules/admin/shared/components/educational-organisations-select/educational-organisations-select___mislukt",
 					{},
-					[AVO]
+					[AVO],
 				),
 				description: tText(
-					'settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden',
+					"settings/components/organisation___de-geselecteerde-instelling-kon-niet-worden-gevonden",
 					{},
-					[AVO]
+					[AVO],
 				),
 				type: ToastType.ERROR,
 			});
@@ -159,70 +155,82 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 	};
 
 	const getOrganisationOptions = () => {
-		if (organisationsInCity.length === 0 && organizationsLoadingState === 'loaded') {
+		if (
+			organisationsInCity.length === 0 &&
+			organizationsLoadingState === "loaded"
+		) {
 			return [
 				{
 					label: tText(
-						'settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente',
+						"settings/components/organisation___er-zijn-geen-andere-organisaties-gekend-in-deze-gemeente",
 						{},
-						[AVO]
+						[AVO],
 					),
-					value: '',
+					value: "",
 					disabled: true,
 				},
 			];
 		}
 		return [
 			{
-				label: tText('settings/components/organisation___selecteer-een-instelling', {}, [
-					AVO,
-				]),
-				value: '',
+				label: tText(
+					"settings/components/organisation___selecteer-een-instelling",
+					{},
+					[AVO],
+				),
+				value: "",
 				disabled: true,
 			},
-			...organisationsInCity.map((org: Avo.EducationOrganization.Organization) => ({
-				label: org.organisationLabel,
-				value: org.organisationLabel,
-			})),
+			...organisationsInCity.map(
+				(org: Avo.EducationOrganization.Organization) => ({
+					label: org.organisationLabel,
+					value: org.organisationLabel,
+				}),
+			),
 		];
 	};
 
 	const renderOrganisationTagsAndSelects = () => {
 		return (
 			<>
-				{stringsToTagList(organisations, 'label', undefined, removeOrganisation)}
+				{stringsToTagList(
+					organisations,
+					"label",
+					undefined,
+					removeOrganisation,
+				)}
 				<Spacer margin="top-small">
 					<Select
 						options={[
 							{
 								label: tText(
-									'settings/components/profile___voeg-een-organisatie-toe',
+									"settings/components/profile___voeg-een-organisatie-toe",
 									{},
-									[AVO]
+									[AVO],
 								),
-								value: '',
+								value: "",
 							},
 							...(cities || []).map((c) => ({ label: c, value: c })),
 						]}
-						value={selectedCity || ''}
+						value={selectedCity || ""}
 						onChange={onSelectedCityChanged}
 					/>
 				</Spacer>
-				<Spacer margin={['top-small', 'bottom-small']}>
-					{organizationsLoadingState === 'loading' && (
+				<Spacer margin={["top-small", "bottom-small"]}>
+					{organizationsLoadingState === "loading" && (
 						<Alert
 							type="spinner"
 							message={tHtml(
-								'settings/components/profile___bezig-met-ophalen-van-organisaties',
+								"settings/components/profile___bezig-met-ophalen-van-organisaties",
 								{},
-								[AVO]
+								[AVO],
 							)}
 						/>
 					)}
-					{!!selectedCity && organizationsLoadingState === 'loaded' && (
+					{!!selectedCity && organizationsLoadingState === "loaded" && (
 						<Select
 							options={getOrganisationOptions()}
-							value={''}
+							value={""}
 							onChange={onSelectedOrganisationChanged}
 						/>
 					)}
@@ -233,7 +241,7 @@ export const EducationalOrganisationsSelect: FunctionComponent<
 
 	if (disabled) {
 		return (
-			<div className={clsx({ 'u-opacity-50 u-disable-click': disabled })}>
+			<div className={clsx({ "u-opacity-50 u-disable-click": disabled })}>
 				{renderOrganisationTagsAndSelects()}
 			</div>
 		);

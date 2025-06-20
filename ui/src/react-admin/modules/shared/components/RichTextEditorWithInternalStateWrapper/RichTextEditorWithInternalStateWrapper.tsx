@@ -1,26 +1,27 @@
 import type {
 	RichTextEditorUploadInfo,
 	RichTextEditorWithInternalStateProps,
-} from '@meemoo/react-components';
-import { RichTextEditorWithInternalState } from '@meemoo/react-components';
-import type { Avo } from '@viaa/avo2-types';
-import type { FunctionComponent } from 'react';
-import React from 'react';
+} from "@meemoo/react-components";
+import { RichTextEditorWithInternalState } from "@meemoo/react-components";
+import type { Avo } from "@viaa/avo2-types";
+import type { FunctionComponent } from "react";
+import React from "react";
 
-import { ToastType } from '~core/config/config.types';
-import { showToast } from '~shared/helpers/show-toast';
-import { tText } from '~shared/helpers/translation-functions';
-import { AssetsService } from '~shared/services/assets-service/assets.service';
+import { ToastType } from "~core/config/config.types";
+import { showToast } from "~shared/helpers/show-toast";
+import { tText } from "~shared/helpers/translation-functions";
+import { AssetsService } from "~shared/services/assets-service/assets.service";
 
-import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from '../../consts/rich-text-editor.consts';
-import { CustomError } from '../../helpers/custom-error';
+import { RICH_TEXT_EDITOR_OPTIONS_DEFAULT } from "../../consts/rich-text-editor.consts";
+import { CustomError } from "../../helpers/custom-error";
 
-import './RichTextEditorWithInternalStateWrapper.scss';
+import "./RichTextEditorWithInternalStateWrapper.scss";
 
-export type RichTextEditorWithInternalStateWrapperProps = RichTextEditorWithInternalStateProps & {
-	fileType?: Avo.FileUpload.AssetType; // Required to enable file upload
-	ownerId?: string;
-};
+export type RichTextEditorWithInternalStateWrapperProps =
+	RichTextEditorWithInternalStateProps & {
+		fileType?: Avo.FileUpload.AssetType; // Required to enable file upload
+		ownerId?: string;
+	};
 
 /**
  * Handle RichTextEditor default controls and upload function
@@ -32,13 +33,13 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 > = (props) => {
 	const { controls, fileType, ownerId, value, onChange, ...rest } = props;
 
-	if ((controls || []).includes('media') && !fileType) {
+	if ((controls || []).includes("media") && !fileType) {
 		console.error(
 			new CustomError(
-				'Trying to initialize RichTextEditorWithInternalStateWrapper component with media without fileType',
+				"Trying to initialize RichTextEditorWithInternalStateWrapper component with media without fileType",
 				null,
-				props
-			)
+				props,
+			),
 		);
 	}
 
@@ -49,7 +50,7 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 						const url = await AssetsService.uploadFile(
 							param.file,
 							fileType,
-							ownerId || ''
+							ownerId || "",
 						);
 						param.success({
 							url,
@@ -57,10 +58,10 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 					} catch (err) {
 						const error = new CustomError(
 							tText(
-								'shared/components/wysiwyg-wrapper/wysiwyg-wrapper___het-opladen-van-de-afbeelding-is-mislukt'
+								"shared/components/wysiwyg-wrapper/wysiwyg-wrapper___het-opladen-van-de-afbeelding-is-mislukt",
 							),
 							err,
-							{ param }
+							{ param },
 						);
 						console.error(error);
 						param.error(error);
@@ -74,10 +75,10 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 
 					showToast({
 						title: tText(
-							'modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error'
+							"modules/admin/shared/components/wysiwyg-wrapper/wysiwyg-wrapper___error",
 						),
 						description: tText(
-							'shared/components/wysiwyg-wrapper/wysiwyg-wrapper___dit-bestand-is-te-groot-max-10-mb'
+							"shared/components/wysiwyg-wrapper/wysiwyg-wrapper___dit-bestand-is-te-groot-max-10-mb",
 						),
 						type: ToastType.ERROR,
 					});
@@ -90,6 +91,7 @@ const RichTextEditorWithInternalStateWrapper: FunctionComponent<
 		<RichTextEditorWithInternalState
 			{...rest}
 			controls={controls || RICH_TEXT_EDITOR_OPTIONS_DEFAULT}
+			// biome-ignore lint/suspicious/noExplicitAny: todo
 			media={media as any}
 			value={value}
 			onChange={(newHtml: string) => {

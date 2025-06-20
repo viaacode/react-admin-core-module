@@ -5,24 +5,28 @@ import {
 	Select,
 	TextArea,
 	TextInput,
-} from '@viaa/avo2-components';
-import type { FunctionComponent } from 'react';
-import type { ContentBlockEditor } from '~modules/content-page/types/content-block.types';
+} from "@viaa/avo2-components";
+import type { FunctionComponent } from "react";
+import type { ContentBlockEditor } from "~modules/content-page/types/content-block.types";
 
-import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
-import { ContentTypeAndLabelsPicker } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
-import FileUpload from '~shared/components/FileUpload/FileUpload';
-import { IconPicker } from '~shared/components/IconPicker/IconPicker';
-import { MaintainerSelect } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
-import { UploadOrSelectVideoStill } from '~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { PaddingSelectSingleValue } from '~modules/content-page/components/fields/PaddingSelectSingleValue/PaddingSelectSingleValue';
-import { AlignSelect } from '~modules/content-page/components/fields/AlignSelect/AlignSelect';
-import { ColorSelect } from '~modules/content-page/components/fields/ColorSelect/ColorSelect';
-import { PaddingSelectTopBottom } from '~modules/content-page/components/fields/PaddingSelectTopBottom/PaddingSelectTopBottom';
+import { ContentPicker } from "~shared/components/ContentPicker/ContentPicker";
+import { ContentTypeAndLabelsPicker } from "~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker";
+import FileUpload from "~shared/components/FileUpload/FileUpload";
+import { IconPicker } from "~shared/components/IconPicker/IconPicker";
+import { MaintainerSelect } from "~shared/components/MaintainerSelect/MaintainerSelect";
+import RichTextEditorWithInternalStateWrapper from "~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper";
+import { UploadOrSelectVideoStill } from "~shared/components/UploadOrSelectVideoStill/UploadOrSelectVideoStill";
+import { UserGroupSelect } from "~shared/components/UserGroupSelect/UserGroupSelect";
+import { PaddingSelectSingleValue } from "~modules/content-page/components/fields/PaddingSelectSingleValue/PaddingSelectSingleValue";
+import { AlignSelect } from "~modules/content-page/components/fields/AlignSelect/AlignSelect";
+import { ColorSelect } from "~modules/content-page/components/fields/ColorSelect/ColorSelect";
+import { PaddingSelectTopBottom } from "~modules/content-page/components/fields/PaddingSelectTopBottom/PaddingSelectTopBottom";
 
-export const GET_EDITOR_TYPES_MAP = (): Record<ContentBlockEditor, FunctionComponent<any>> => ({
+export const GET_EDITOR_TYPES_MAP = (): Record<
+	ContentBlockEditor,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+	FunctionComponent<any>
+> => ({
 	AlignSelect,
 	Checkbox,
 	ColorSelect,

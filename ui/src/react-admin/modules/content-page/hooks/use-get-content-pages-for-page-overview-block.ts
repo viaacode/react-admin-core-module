@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import type { UseQueryOptions } from '@tanstack/react-query/src/types';
-import type { Avo } from '@viaa/avo2-types';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import { QUERY_KEYS } from '~shared/types';
+import { useQuery } from "@tanstack/react-query";
+import type { Avo } from "@viaa/avo2-types";
+import { ContentPageService } from "~modules/content-page/services/content-page.service";
+import { QUERY_KEYS } from "~shared/types";
 
 interface ContentPagesOverviewArgs {
 	withBlocks: boolean;
@@ -17,15 +16,22 @@ interface ContentPagesOverviewArgs {
 
 export const useGetContentPagesForPageOverviewBlock = (
 	requestArgs: ContentPagesOverviewArgs,
-	options?: UseQueryOptions<any>
+	options: { enabled?: boolean; keepPreviousData?: boolean } = {
+		enabled: true,
+		keepPreviousData: true,
+	},
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, requestArgs],
 		(props) => {
 			return ContentPageService.getContentPagesForPageOverviewBlock(
-				props.queryKey[1] as ContentPagesOverviewArgs
+				props.queryKey[1] as ContentPagesOverviewArgs,
 			);
 		},
-		options as any
+		{
+			enabled: true,
+			keepPreviousData: true,
+			...options,
+		},
 	);
 };

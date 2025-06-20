@@ -1,16 +1,18 @@
-import { isNumber } from 'lodash-es';
+import { isNumber } from "lodash-es";
 
-import { tText } from '~shared/helpers/translation-functions';
+import { tText } from "~shared/helpers/translation-functions";
 
-import type { ContentBlockErrors } from '../../content-page/types/content-block.types';
+import type { ContentBlockErrors } from "../../content-page/types/content-block.types";
 
 // Handle content-block config components/block state validation
 export const validateContentBlockField = (
 	fieldKey: string,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	validator: ((value: any) => string[]) | undefined,
 	oldErrors: ContentBlockErrors = {},
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	value: any,
-	stateIndex?: number
+	stateIndex?: number,
 ): ContentBlockErrors => {
 	if (!validator) {
 		return oldErrors;
@@ -56,12 +58,18 @@ export function validateFlowplayerVideoUrl(url: string | null | undefined) {
 	if (!url) {
 		return [];
 	}
-	if (!url.startsWith('https://')) {
-		return [tText('admin/shared/helpers/validation___video-url-moet-beginnen-met-http')];
-	}
-	if (!url.endsWith('.m3u8') && !url.endsWith('.mp4')) {
+	if (!url.startsWith("https://")) {
 		return [
-			tText('admin/shared/helpers/validation___video-url-moet-eindigen-met-m-3-u-8-of-mp-4'),
+			tText(
+				"admin/shared/helpers/validation___video-url-moet-beginnen-met-http",
+			),
+		];
+	}
+	if (!url.endsWith(".m3u8") && !url.endsWith(".mp4")) {
+		return [
+			tText(
+				"admin/shared/helpers/validation___video-url-moet-eindigen-met-m-3-u-8-of-mp-4",
+			),
 		];
 	}
 	return [];

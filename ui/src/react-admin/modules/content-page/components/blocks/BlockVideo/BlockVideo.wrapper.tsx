@@ -1,20 +1,23 @@
-import type { ButtonAction } from '@viaa/avo2-components';
-import { Button, Modal, ModalBody } from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import clsx from 'clsx';
-import type { FunctionComponent } from 'react';
-import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import type { ButtonAction } from "@viaa/avo2-components";
+import { Button, Modal, ModalBody } from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import clsx from "clsx";
+import React, {
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useState,
+} from "react";
 
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { ItemsService } from '~modules/item/items.service';
-import { showToast } from '~modules/shared/helpers/show-toast';
-import { FlowPlayerWrapper } from '~shared/components/FlowPlayerWrapper/FlowPlayerWrapper';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { CustomError } from '~shared/helpers/custom-error';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminConfigManager } from "~core/config";
+import { ToastType } from "~core/config/config.types";
+import { ItemsService } from "~modules/item/items.service";
+import { showToast } from "~modules/shared/helpers/show-toast";
+import { FlowPlayerWrapper } from "~shared/components/FlowPlayerWrapper/FlowPlayerWrapper";
+import type { LoadingInfo } from "~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent";
+import { LoadingErrorLoadedComponent } from "~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent";
+import { CustomError } from "~shared/helpers/custom-error";
+import { tHtml, tText } from "~shared/helpers/translation-functions";
 
 interface MediaPlayerWrapperProps {
 	item?: ButtonAction;
@@ -38,7 +41,9 @@ interface MediaPlayerWrapperProps {
 	onEnded?: () => void;
 }
 
-export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (props) => {
+export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (
+	props,
+) => {
 	const {
 		item,
 		src,
@@ -61,12 +66,13 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		onEnded,
 	} = props;
 
-	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
+	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({
+		state: "loading",
+	});
 	const [videoStill, setVideoStill] = useState<string>();
 	const [mediaItem, setMediaItem] = useState<Avo.Item.Item | null>(null);
-	const [activeCopyright, setActiveCopyright] = useState<Avo.Organization.Organization | null>(
-		null
-	);
+	const [activeCopyright, setActiveCopyright] =
+		useState<Avo.Organization.Organization | null>(null);
 
 	const org = organisation || mediaItem?.organisation;
 
@@ -76,7 +82,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 		showCopyright &&
 		(!commonUser ||
 			location.pathname.startsWith(
-				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW
+				AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_OVERVIEW,
 			));
 
 	const retrieveMediaItem = useCallback(async () => {
@@ -84,7 +90,9 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 			if (item && !src) {
 				// !src since the proxy can resolve the src already for users without an account
 				// Video from MAM
-				const mediaItemTemp = await ItemsService.fetchItemById(item.value.toString());
+				const mediaItemTemp = await ItemsService.fetchItemById(
+					item.value.toString(),
+				);
 				setMediaItem(mediaItemTemp);
 				setVideoStill(poster || mediaItemTemp?.thumbnail_path);
 			} else {
@@ -93,14 +101,16 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 			}
 		} catch (err) {
 			console.error(
-				new CustomError('Failed to fetch item info from the database', err, { item })
+				new CustomError("Failed to fetch item info from the database", err, {
+					item,
+				}),
 			);
 			showToast({
 				title: tText(
-					'modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error'
+					"modules/admin/content-page/components/wrappers/media-player-wrapper/media-player-wrapper___error",
 				),
 				description: tText(
-					'admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper___het-ophalen-van-het-fragment-is-mislukt'
+					"admin/content-block/components/wrappers/media-player-wrapper/media-player-wrapper___het-ophalen-van-het-fragment-is-mislukt",
 				),
 				type: ToastType.ERROR,
 			});
@@ -114,14 +124,14 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	useEffect(() => {
 		if (src || mediaItem) {
 			setLoadingInfo({
-				state: 'loaded',
+				state: "loaded",
 			});
 		}
-	}, [src, mediaItem, setLoadingInfo]);
+	}, [src, mediaItem]);
 
 	const handleCopyrightClicked = (
 		evt: React.MouseEvent<HTMLElement, MouseEvent>,
-		orgInfo: Avo.Organization.Organization
+		orgInfo: Avo.Organization.Organization,
 	) => {
 		evt.stopPropagation();
 		evt.preventDefault();
@@ -131,7 +141,7 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 	const renderVideoPlayer = () => {
 		return (
 			<div
-				className={clsx('c-video-player t-player-skin--dark', 'u-center-m')}
+				className={clsx("c-video-player t-player-skin--dark", "u-center-m")}
 				style={{ width }}
 			>
 				<FlowPlayerWrapper
@@ -139,10 +149,10 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 						mediaItem
 							? ({
 									...(mediaItem || {}),
-									title: title || mediaItem?.title || '',
-									issued: issued || mediaItem?.issued || '',
-									organisation: organisation || mediaItem?.organisation || '',
-							  } as any)
+									title: title || mediaItem?.title || "",
+									issued: issued || mediaItem?.issued || "",
+									organisation: organisation || mediaItem?.organisation || "",
+							  } as Avo.Item.Item)
 							: undefined
 					}
 					src={src}
@@ -154,10 +164,10 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 								type="inline-link"
 								onClick={(evt) => handleCopyrightClicked(evt, org)}
 								label={tText(
-									'react-admin/modules/content-page/components/blocks/block-video/block-video___bron'
+									"react-admin/modules/content-page/components/blocks/block-video/block-video___bron",
 								)}
 								title={tText(
-									'react-admin/modules/content-page/components/blocks/block-video/block-video___bekijk-de-copyright-info-van-deze-afbeelding'
+									"react-admin/modules/content-page/components/blocks/block-video/block-video___bekijk-de-copyright-info-van-deze-afbeelding",
 								)}
 							/>
 						)
@@ -186,16 +196,16 @@ export const BlockVideoWrapper: FunctionComponent<MediaPlayerWrapperProps> = (pr
 					}}
 					size="small"
 					title={tText(
-						'admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___copyright-info'
+						"admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___copyright-info",
 					)}
 				>
 					<ModalBody>
 						{tHtml(
-							'admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___deze-afbeelding-valt-onder-copyright-van-organisation-name',
+							"admin/content-page/components/blocks/media-grid-wrapper/media-grid-wrapper___deze-afbeelding-valt-onder-copyright-van-organisation-name",
 							{
-								organisationName: activeCopyright?.name || '',
-								organisationWebsite: activeCopyright?.website || '',
-							}
+								organisationName: activeCopyright?.name || "",
+								organisationWebsite: activeCopyright?.website || "",
+							},
 						)}
 					</ModalBody>
 				</Modal>

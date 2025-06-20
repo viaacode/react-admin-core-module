@@ -1,7 +1,7 @@
-import type { FC, FunctionComponent } from 'react';
-import { AvoHeroWrapper } from '~content-blocks/BlockAvoHero/AvoHeroWrapper';
-import { BlockHetArchiefHeaderSearch } from '~content-blocks/BlockHetArchiefHeaderSearch';
-import { AdminConfigManager } from '~core/config';
+import type { FC, FunctionComponent } from "react";
+import { AvoHeroWrapper } from "~content-blocks/BlockAvoHero/AvoHeroWrapper";
+import { BlockHetArchiefHeaderSearch } from "~content-blocks/BlockHetArchiefHeaderSearch";
+import { AdminConfigManager } from "~core/config";
 import {
 	BlockAvoImageTextBackground,
 	BlockBreadcrumbs,
@@ -32,8 +32,8 @@ import {
 	BlockUspGridWrapper,
 	BlockVideoTitleTextButtonWrapper,
 	BlockVideoWrapper,
-} from '~modules/content-page/components/blocks';
-import { ContentBlockType } from '~modules/content-page/types/content-block.types';
+} from "~modules/content-page/components/blocks";
+import { ContentBlockType } from "~modules/content-page/types/content-block.types";
 
 function loadComponentFromConfig(key: ContentBlockType): FC {
 	return (
@@ -42,7 +42,10 @@ function loadComponentFromConfig(key: ContentBlockType): FC {
 	);
 }
 
-export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<any> {
+export function GET_BLOCK_COMPONENT(
+	type: ContentBlockType,
+	// biome-ignore lint/suspicious/noExplicitAny: todo
+): FunctionComponent<any> {
 	const blocks = {
 		[ContentBlockType.AnchorLinks]: BlockButtonsWrapper,
 		[ContentBlockType.Buttons]: BlockButtonsWrapper,
@@ -53,7 +56,8 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.Image]: BlockImage,
 		[ContentBlockType.Intro]: BlockIntro,
 		[ContentBlockType.Klaar]: BlockKlaar,
-		[ContentBlockType.MediaPlayerTitleTextButton]: BlockVideoTitleTextButtonWrapper,
+		[ContentBlockType.MediaPlayerTitleTextButton]:
+			BlockVideoTitleTextButtonWrapper,
 		[ContentBlockType.MediaPlayer]: BlockVideoWrapper,
 		[ContentBlockType.PageOverview]: BlockPageOverviewWrapper,
 		[ContentBlockType.ProjectsSpotlight]: BlockProjectSpotlightWrapper,
@@ -77,13 +81,16 @@ export function GET_BLOCK_COMPONENT(type: ContentBlockType): FunctionComponent<a
 		[ContentBlockType.HetArchiefHeaderSearch]: BlockHetArchiefHeaderSearch,
 		[ContentBlockType.OverviewNewspaperTitles]: BlockOverviewNewspaperTitles,
 		[ContentBlockType.ContentEncloseGrid]: loadComponentFromConfig(
-			ContentBlockType.ContentEncloseGrid
+			ContentBlockType.ContentEncloseGrid,
 		),
 		[ContentBlockType.Breadcrumbs]: BlockBreadcrumbs,
-		[ContentBlockType.HetArchiefImageTextBackground]: BlockHetArchiefImageTextBackground,
+		[ContentBlockType.HetArchiefImageTextBackground]:
+			BlockHetArchiefImageTextBackground,
 
 		// Avo specific blocks
-		[ContentBlockType.MediaGrid]: loadComponentFromConfig(ContentBlockType.MediaGrid),
+		[ContentBlockType.MediaGrid]: loadComponentFromConfig(
+			ContentBlockType.MediaGrid,
+		),
 		[ContentBlockType.Search]: loadComponentFromConfig(ContentBlockType.Search),
 		[ContentBlockType.AvoImageTextBackground]: BlockAvoImageTextBackground,
 	};
@@ -150,9 +157,9 @@ export const USER_CONTENT_BLOCKS = [
 export const CONTENT_PAGE_ACCESS_BLOCKS = [ContentBlockType.ContentPageMeta];
 
 export const IGNORE_BLOCK_LEVEL_PROPS = [
-	'backgroundColor',
-	'blockType',
-	'elements',
-	'padding',
-	'position',
+	"backgroundColor",
+	"blockType",
+	"elements",
+	"padding",
+	"position",
 ];

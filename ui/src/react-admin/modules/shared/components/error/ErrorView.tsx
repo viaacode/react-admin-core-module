@@ -1,4 +1,4 @@
-import type { IconName } from '@viaa/avo2-components';
+import type { IconName } from "@viaa/avo2-components";
 import {
 	Blankslate,
 	Button,
@@ -6,17 +6,17 @@ import {
 	Container,
 	Toolbar,
 	ToolbarCenter,
-} from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { isNull } from 'lodash-es';
-import type { FunctionComponent, ReactNode } from 'react';
-import React from 'react';
-import { CustomError } from '~shared/helpers/custom-error';
-import { isMobileWidth } from '~shared/helpers/media-query';
-import { tText } from '~shared/helpers/translation-functions';
-import { Link } from '../Link';
+} from "@viaa/avo2-components";
+import type { Avo } from "@viaa/avo2-types";
+import { isNull } from "lodash-es";
+import type { FunctionComponent, ReactNode } from "react";
+import React from "react";
+import { CustomError } from "~shared/helpers/custom-error";
+import { isMobileWidth } from "~shared/helpers/media-query";
+import { tText } from "~shared/helpers/translation-functions";
+import { Link } from "../Link";
 
-import './ErrorView.scss';
+import "./ErrorView.scss";
 
 interface ErrorViewProps {
 	message?: string | ReactNode;
@@ -31,36 +31,41 @@ export const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	children = null,
 	actionButtons,
 }) => {
-	const messageText: string | ReactNode = message || '';
+	const messageText: string | ReactNode = message || "";
 	const errorMessage: string | ReactNode = messageText;
-	const errorIcon = (icon || 'search') as IconName;
-	const actionButtonsResolved = isNull(actionButtons) ? [] : actionButtons || [];
+	const errorIcon = (icon || "search") as IconName;
+	const actionButtonsResolved = isNull(actionButtons)
+		? []
+		: actionButtons || [];
 
 	if (!message) {
 		console.error(
-			new CustomError('Error view without error message', null, {
+			new CustomError("Error view without error message", null, {
 				message,
 				icon,
 				actionButtonsResolved,
-			})
+			}),
 		);
 	}
 
 	const renderButtons = () => {
 		const buttons = (
 			<>
-				{actionButtonsResolved?.includes('home') && (
+				{actionButtonsResolved?.includes("home") && (
 					<Link to="/">
 						<Button
-							label={tText('error/views/error-view___ga-terug-naar-de-homepagina')}
+							label={tText(
+								"error/views/error-view___ga-terug-naar-de-homepagina",
+							)}
 						/>
 					</Link>
 				)}
-				{actionButtonsResolved?.includes('helpdesk') && (
+				{actionButtonsResolved?.includes("helpdesk") && (
 					<Button
 						type="danger"
-						onClick={() => (window as any).zE('webWidget', 'toggle')}
-						label={tText('error/views/error-view___contacteer-de-helpdesk')}
+						// biome-ignore lint/suspicious/noExplicitAny: todo
+						onClick={() => (window as any).zE("webWidget", "toggle")}
+						label={tText("error/views/error-view___contacteer-de-helpdesk")}
 					/>
 				)}
 			</>
@@ -81,7 +86,12 @@ export const ErrorView: FunctionComponent<ErrorViewProps> = ({
 	return (
 		<Container mode="vertical" background="alt" className="m-error-view">
 			<Container size="medium" mode="horizontal">
-				<Blankslate body="" icon={errorIcon} title={errorMessage} className="c-content">
+				<Blankslate
+					body=""
+					icon={errorIcon}
+					title={errorMessage}
+					className="c-content"
+				>
 					{children}
 					{renderButtons()}
 				</Blankslate>

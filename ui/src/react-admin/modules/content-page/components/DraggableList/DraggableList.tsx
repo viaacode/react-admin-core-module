@@ -1,15 +1,16 @@
-import clsx from 'clsx';
-import { findIndex } from 'lodash-es';
-import type { FunctionComponent, ReactNode } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
-import type { DraggableItem } from './DraggableList.types';
+import clsx from "clsx";
+import { findIndex } from "lodash-es";
+import type { FunctionComponent, ReactNode } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import type { DraggableItem } from "./DraggableList.types";
 
-import './DraggableList.scss';
-import type { IconName } from '@viaa/avo2-components';
-import { Icon } from '@viaa/avo2-components';
-import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
+import "./DraggableList.scss";
+import type { IconName } from "@viaa/avo2-components";
+import { Icon } from "@viaa/avo2-components";
+import { blockHasErrors } from "~modules/content-page/helpers/block-has-errors";
 
 // TODO replace this with a generic T type
+// biome-ignore lint/suspicious/noExplicitAny: todo
 export type DraggableItemData = any & { id: string };
 
 export interface DraggableListProps {
@@ -31,7 +32,10 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 	highlightedItemIndex,
 	setHighlightedItemIndex,
 }) => {
-	const [currentlyBeingDragged, setCurrentlyBeingDragged] = useState<any | null>(null);
+	const [currentlyBeingDragged, setCurrentlyBeingDragged] = useState<
+		// biome-ignore lint/suspicious/noExplicitAny: todo
+		any | null
+	>(null);
 
 	// Used to keep track of items during a drag operation
 	const [draggableItems, setDraggableItems] = useState<DraggableItem[]>([]);
@@ -44,7 +48,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 				isTargetGhost: false,
 				isBeingDragged: false,
 				isEndGhost: false,
-			}))
+			})),
 		);
 	}, [items]);
 
@@ -57,6 +61,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 		resetDraggableItems();
 	};
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const onDragStart = (e: any, index: number) => {
 		onDragStarting();
 		setCurrentlyBeingDragged(draggableItems[index]);
@@ -76,17 +81,21 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 
 		// Drag animation/metadata
 		if (e.dataTransfer && e.target) {
-			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('text/html', e.target);
+			e.dataTransfer.effectAllowed = "move";
+			e.dataTransfer.setData("text/html", e.target);
 			e.dataTransfer.setDragImage(e.target, -0, -0);
 		}
 	};
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const onDragOver = (evt: any, draggedOverIndex: number) => {
 		evt.preventDefault();
-		evt.dataTransfer.dropEffect = 'move';
+		evt.dataTransfer.dropEffect = "move";
 
-		const ghostIndex = findIndex(draggableItems, (item) => item.isTargetGhost || false);
+		const ghostIndex = findIndex(
+			draggableItems,
+			(item) => item.isTargetGhost || false,
+		);
 		if (
 			currentlyBeingDragged &&
 			draggableItems &&
@@ -94,7 +103,9 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			ghostIndex + 1 !== draggedOverIndex
 		) {
 			// Update list of items
-			const updatedList = [...draggableItems.filter((item) => !item.isTargetGhost)];
+			const updatedList = [
+				...draggableItems.filter((item) => !item.isTargetGhost),
+			];
 			updatedList.splice(draggedOverIndex, 0, {
 				isBeingDragged: false,
 				data: null,
@@ -114,8 +125,14 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			return;
 		}
 
-		const ghostIndex = findIndex(draggableItems, (item) => item.isTargetGhost || false);
-		const startIndex = findIndex(draggableItems, (item) => item.isBeingDragged || false);
+		const ghostIndex = findIndex(
+			draggableItems,
+			(item) => item.isTargetGhost || false,
+		);
+		const startIndex = findIndex(
+			draggableItems,
+			(item) => item.isBeingDragged || false,
+		);
 
 		const updatedList = draggableItems.filter((item) => !item.isEndGhost);
 
@@ -126,7 +143,10 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			// Remove the dragged item from its original location
 			updatedList.splice(startIndex, 1);
 
-			const movedItemIndex = findIndex(updatedList, (item) => item.isBeingDragged);
+			const movedItemIndex = findIndex(
+				updatedList,
+				(item) => item.isBeingDragged,
+			);
 
 			onListChange(updatedList.map((item) => item.data));
 			setHighlightedItemIndex(movedItemIndex);
@@ -139,24 +159,25 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 			return (
 				<div
 					className="c-draggable-list__item--target-ghost"
-					key={'draggable-list__item--target-ghost'}
+					key={"draggable-list__item--target-ghost"}
 				></div>
 			);
 		} else if (item.isEndGhost) {
 			return (
 				<div
 					className="c-draggable-list__item--end-ghost"
-					key={'draggable-list__item--end-ghost'}
+					key={"draggable-list__item--end-ghost"}
 					onDragOver={(evt) => onDragOver(evt, index)}
 				></div>
 			);
 		} else {
 			return (
 				<div
-					className={clsx('c-draggable-list__item', {
-						'c-draggable-list__item--is-being-dragged': item.isBeingDragged,
-						'c-draggable-list__item--highlighted': index === highlightedItemIndex,
-						'c-draggable-list__item--error': blockHasErrors(item.data.errors),
+					className={clsx("c-draggable-list__item", {
+						"c-draggable-list__item--is-being-dragged": item.isBeingDragged,
+						"c-draggable-list__item--highlighted":
+							index === highlightedItemIndex,
+						"c-draggable-list__item--error": blockHasErrors(item.data.errors),
 					})}
 					onDragOver={(evt) => onDragOver(evt, index)}
 					onDragEnd={onDragEnd}
@@ -167,7 +188,7 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 					<div className="c-draggable-list__item__content">
 						<div className="o-flex u-flex-align--center">
 							<div className="c-draggable-list__item__drag-handle">
-								<Icon name={'menu' as IconName} />
+								<Icon name={"menu" as IconName} />
 							</div>
 							{renderItem(item.data, item.index)}
 						</div>
@@ -177,14 +198,20 @@ const DraggableList: FunctionComponent<DraggableListProps> = ({
 		}
 	};
 
+	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleDragOverContainer = (evt: any) => {
 		evt.preventDefault();
-		evt.dataTransfer.dropEffect = 'move';
+		evt.dataTransfer.dropEffect = "move";
 	};
 
 	return (
-		<div className={clsx('c-draggable-list')} onDragOver={handleDragOverContainer}>
-			{(draggableItems || []).map((item, index) => handleRenderItem(item, index))}
+		<div
+			className={clsx("c-draggable-list")}
+			onDragOver={handleDragOverContainer}
+		>
+			{(draggableItems || []).map((item, index) =>
+				handleRenderItem(item, index),
+			)}
 		</div>
 	);
 };

@@ -26,7 +26,7 @@ export const BlockIFrame: FunctionComponent<BlockIFrameProps> = ({
 		aspectRatio =
 			ratio ||
 			parseInt(String(iframeProps.width), 10) / parseInt(String(iframeProps.height), 10);
-	} catch (err) {
+	} catch (_err) {
 		aspectRatio = ratio;
 	}
 
