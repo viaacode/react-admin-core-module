@@ -1,49 +1,41 @@
-import type { IconName, MenuItemInfo, TabProps } from '@viaa/avo2-components';
-import {
-	Blankslate,
-	Button,
-	ButtonToolbar,
-	Container,
-	LinkTarget,
-	Navbar,
-	Tabs,
-} from '@viaa/avo2-components';
-import type { Avo } from '@viaa/avo2-types';
-import { PermissionName } from '@viaa/avo2-types';
-import { get, noop } from 'lodash-es';
-import { stringifyUrl } from 'query-string';
-import type { FC, ReactElement, ReactText } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
-import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import type {IconName, MenuItemInfo, TabProps} from '@viaa/avo2-components';
+import {Blankslate, Button, ButtonToolbar, Container, LinkTarget, Navbar, Tabs,} from '@viaa/avo2-components';
+import type {Avo} from '@viaa/avo2-types';
+import {PermissionName} from '@viaa/avo2-types';
+import {get, noop} from 'lodash-es';
+import {stringifyUrl} from 'query-string';
+import type {FC, ReactElement, ReactText} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+import {StringParam, useQueryParam, withDefault} from 'use-query-params';
 
-import { AdminConfigManager } from '~core/config';
-import { ToastType } from '~core/config/config.types';
-import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import {AdminConfigManager} from '~core/config';
+import {ToastType} from '~core/config/config.types';
+import {ContentPageRenderer} from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import PublishContentPageModal from '~modules/content-page/components/PublishContentPageModal';
-import { GET_CONTENT_PAGE_DETAIL_TABS } from '~modules/content-page/const/content-page.consts';
-import { isPublic } from '~modules/content-page/helpers/get-published-state';
-import { useSoftDeleteContentPage } from '~modules/content-page/hooks/useSoftDeleteContentPage';
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { ContentPageAction } from '~modules/content-page/types/content-pages.types';
-import { ContentPageDetailMetaData } from '~modules/content-page/views/ContentPageDetailMetaData';
-import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components/Icon';
+import {GET_CONTENT_PAGE_DETAIL_TABS} from '~modules/content-page/const/content-page.consts';
+import {isPublic} from '~modules/content-page/helpers/get-published-state';
+import {useSoftDeleteContentPage} from '~modules/content-page/hooks/useSoftDeleteContentPage';
+import {ContentPageService} from '~modules/content-page/services/content-page.service';
+import type {ContentPageInfo} from '~modules/content-page/types/content-pages.types';
+import {ContentPageAction} from '~modules/content-page/types/content-pages.types';
+import {ContentPageDetailMetaData} from '~modules/content-page/views/ContentPageDetailMetaData';
+import {Locale} from '~modules/translations/translations.core.types';
+import {Icon} from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
-import { Link } from '~shared/components/Link/Link';
-import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
-import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import {Link} from '~shared/components/Link/Link';
+import type {LoadingInfo} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import {LoadingErrorLoadedComponent} from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import MoreOptionsDropdown from '~shared/components/MoreOptionsDropdown/MoreOptionsDropdown';
-import { CustomError } from '~shared/helpers/custom-error';
-import { createDropdownMenuItem } from '~shared/helpers/dropdown';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink, navigate, navigateToAbsoluteOrRelativeUrl } from '~shared/helpers/link';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { AdminLayout } from '~shared/layouts';
-import { PermissionService } from '~shared/services/permission-service';
-import type { DefaultComponentProps } from '~shared/types/components';
-import { isAvo } from '~shared/helpers/is-avo';
+import {CustomError} from '~shared/helpers/custom-error';
+import {createDropdownMenuItem} from '~shared/helpers/dropdown';
+import {isMultiLanguageEnabled} from '~shared/helpers/is-multi-language-enabled';
+import {buildLink, navigate, navigateToAbsoluteOrRelativeUrl} from '~shared/helpers/link';
+import {showToast} from '~shared/helpers/show-toast';
+import {tHtml, tText} from '~shared/helpers/translation-functions';
+import {AdminLayout} from '~shared/layouts';
+import {PermissionService} from '~shared/services/permission-service';
+import type {DefaultComponentProps} from '~shared/types/components';
+import {isAvo} from '~shared/helpers/is-avo';
 
 export const CONTENT_PAGE_COPY = 'Kopie %index%: ';
 export const CONTENT_PAGE_COPY_REGEX = /^Kopie [0-9]+: /gi;
@@ -194,12 +186,24 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 	function handlePreviewClicked() {
 		if (contentPageInfo && contentPageInfo.path) {
 			if (contentPageInfo.language === Locale.Nl) {
-				// Do not add the locale to the path, since the default is dutch
-				navigateToAbsoluteOrRelativeUrl(contentPageInfo.path, history, LinkTarget.Blank);
+				// Do not add the locale to the path, since the default is Dutch
+				const path = stringifyUrl({
+					url: contentPageInfo.path,
+					query: {
+						preview: true,
+					},
+				})
+				navigateToAbsoluteOrRelativeUrl(path, history, LinkTarget.Blank);
 			} else {
 				// For english pages, add the locale to the path
+				const path = stringifyUrl({
+					url: `/${contentPageInfo.language}${contentPageInfo.path}`,
+					query: {
+						preview: true,
+					},
+				})
 				navigateToAbsoluteOrRelativeUrl(
-					`/${contentPageInfo.language}${contentPageInfo.path}`,
+					path,
 					history,
 					LinkTarget.Blank
 				);
