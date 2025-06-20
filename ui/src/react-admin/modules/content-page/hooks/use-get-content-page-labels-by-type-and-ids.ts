@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import type { Avo } from "@viaa/avo2-types";
-import { ContentPageLabelService } from "~modules/content-page-labels/content-page-label.service";
-import { QUERY_KEYS } from "~shared/types";
+import { useQuery } from '@tanstack/react-query';
+import type { Avo } from '@viaa/avo2-types';
+import { ContentPageLabelService } from '~modules/content-page-labels/content-page-label.service';
+import { QUERY_KEYS } from '~shared/types';
 
 interface ContentPageLabelsRequestArgs {
 	selectedContentType: Avo.ContentPage.Type;
@@ -13,7 +13,7 @@ export const useGetContentPageLabelsByTypeAndIds = (
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
 		keepPreviousData: true,
-	},
+	}
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, requestArgs],
@@ -21,13 +21,13 @@ export const useGetContentPageLabelsByTypeAndIds = (
 			const requestArgs = props.queryKey[1] as ContentPageLabelsRequestArgs;
 			return ContentPageLabelService.getContentPageLabelsByTypeAndIds(
 				requestArgs.selectedContentType,
-				requestArgs.getSelectedLabelIds,
+				requestArgs.getSelectedLabelIds
 			);
 		},
 		{
 			enabled: true,
 			keepPreviousData: true,
 			...options,
-		},
+		}
 	);
 };

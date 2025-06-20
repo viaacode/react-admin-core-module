@@ -159,7 +159,7 @@ export const GET_OVERVIEW_COLUMNS: (
 							options: languageOptions,
 						} as CheckboxDropdownModalProps,
 					},
-			  ]
+				]
 			: []),
 		{
 			id: 'actions',

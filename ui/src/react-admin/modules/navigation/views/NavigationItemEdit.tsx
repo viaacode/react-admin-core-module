@@ -40,8 +40,9 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 	const navigationBarName = startCase(navigationBarId);
 
 	// Hooks
-	const [currentNavigationItem, setCurrentCurrentNavigationItem] =
-		useState<NavigationItem | null>(null);
+	const [currentNavigationItem, setCurrentCurrentNavigationItem] = useState<NavigationItem | null>(
+		null
+	);
 	const [formErrors, setFormErrors] = useState<NavigationEditFormErrorState>({});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [allUserGroups] = useUserGroupOptions('TagInfo', true, false) as [
@@ -104,12 +105,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 			};
 			setCurrentCurrentNavigationItem(newNavigationItem);
 		}
-	}, [
-		navigationBarId, 
-		navigationItemId, 
-		isLoadingNavigationItems, 
-		originalNavigationItem
-	]);
+	}, [navigationBarId, navigationItemId, isLoadingNavigationItems, originalNavigationItem]);
 
 	useEffect(() => {
 		if (
@@ -280,7 +276,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 		const pageTitle = navigationBarId
 			? `${navigationBarName}: ${tText('modules/navigation/views/navigation-edit___item')} ${
 					GET_PAGE_TYPES_LANG()[pageType]
-			  }`
+				}`
 			: tText('admin/menu/views/menu-edit___navigatie-toevoegen');
 		return (
 			<AdminLayout pageTitle={pageTitle}>
@@ -294,9 +290,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 						<Button
 							label={tText('admin/menu/views/menu-detail___annuleer')}
 							onClick={() =>
-								history.push(
-									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW')
-								)
+								history.push(AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_OVERVIEW'))
 							}
 							type="tertiary"
 						/>
@@ -317,10 +311,7 @@ export const NavigationItemEdit: FC<NavigationEditProps> = ({
 								navigationParentOptions={navigationParentOptions}
 								onChange={setCurrentCurrentNavigationItem}
 								allUserGroups={allUserGroups}
-								enableIcons={
-									AdminConfigManager.getConfig().navigationBars?.enableIcons ??
-									true
-								}
+								enableIcons={AdminConfigManager.getConfig().navigationBars?.enableIcons ?? true}
 							/>
 						)}
 					</div>

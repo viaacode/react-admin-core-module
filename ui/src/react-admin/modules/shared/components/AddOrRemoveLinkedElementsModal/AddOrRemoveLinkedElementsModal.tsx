@@ -73,11 +73,7 @@ const AddOrRemoveLinkedElementsModal: FunctionComponent<AddOrRemoveLinkedElement
 						/>
 					</FormGroup>
 					<FormGroup label={contentLabel}>
-						<TagsInput
-							options={labels}
-							value={selectedLabels}
-							onChange={setSelectedLabels || []}
-						/>
+						<TagsInput options={labels} value={selectedLabels} onChange={setSelectedLabels || []} />
 					</FormGroup>
 				</Form>
 			</ModalBody>
@@ -99,10 +95,10 @@ const AddOrRemoveLinkedElementsModal: FunctionComponent<AddOrRemoveLinkedElement
 										addOrRemove === 'add'
 											? tText(
 													'admin/shared/components/change-labels-modal/change-labels-modal___toevoegen'
-											  )
+												)
 											: tText(
 													'admin/shared/components/change-labels-modal/change-labels-modal___verwijderen'
-											  )
+												)
 									}
 									onClick={() => {
 										callback(addOrRemove, selectedLabels || []);

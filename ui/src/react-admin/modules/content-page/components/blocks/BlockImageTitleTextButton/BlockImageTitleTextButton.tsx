@@ -1,4 +1,4 @@
-import type { DefaultProps } from "@viaa/avo2-components";
+import type { DefaultProps } from '@viaa/avo2-components';
 import {
 	Button,
 	Column,
@@ -7,12 +7,12 @@ import {
 	Grid,
 	Image,
 	Spacer,
-} from "@viaa/avo2-components";
-import clsx from "clsx";
-import type { FunctionComponent, ReactNode } from "react";
+} from '@viaa/avo2-components';
+import clsx from 'clsx';
+import type { FunctionComponent, ReactNode } from 'react';
 
-import "./BlockImageTitleTextButton.scss";
-import Html from "~shared/components/Html/Html";
+import './BlockImageTitleTextButton.scss';
+import Html from '~shared/components/Html/Html';
 
 export interface BlockImageTitleTextButtonProps extends DefaultProps {
 	imageSource: string;
@@ -24,27 +24,20 @@ export interface BlockImageTitleTextButtonProps extends DefaultProps {
 	onClick?: () => void;
 }
 
-export const BlockImageTitleTextButton: FunctionComponent<
-	BlockImageTitleTextButtonProps
-> = ({
+export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextButtonProps> = ({
 	className,
 	imageSource,
 	imageDescription,
-	title = "",
-	subtitle = "",
-	text = "",
+	title = '',
+	subtitle = '',
+	text = '',
 	buttonLabel,
 	onClick,
 }) => {
 	const renderText = (text: string | ReactNode, className?: string) => {
 		if (text) {
-			if (typeof text === "string") {
-				return (
-					<Html
-						content={convertToHtml(text as string)}
-						className={className}
-					></Html>
-				);
+			if (typeof text === 'string') {
+				return <Html content={convertToHtml(text as string)} className={className}></Html>;
 			}
 			return text;
 		}
@@ -52,10 +45,7 @@ export const BlockImageTitleTextButton: FunctionComponent<
 	};
 
 	return (
-		<Container
-			className={clsx("c-block-image-title-text-button", className)}
-			mode="vertical"
-		>
+		<Container className={clsx('c-block-image-title-text-button', className)} mode="vertical">
 			<Container mode="horizontal">
 				<Grid>
 					<Column size="2-4">
@@ -64,15 +54,11 @@ export const BlockImageTitleTextButton: FunctionComponent<
 					<Column size="2-8">
 						<div className="c-content">
 							{title && <h2>{title}</h2>}
-							{renderText(subtitle, "a-subtitle")}
+							{renderText(subtitle, 'a-subtitle')}
 							{renderText(text)}
 							{buttonLabel && (
 								<Spacer margin="top">
-									<Button
-										label={buttonLabel}
-										type="secondary"
-										onClick={() => onClick?.()}
-									/>
+									<Button label={buttonLabel} type="secondary" onClick={() => onClick?.()} />
 								</Spacer>
 							)}
 						</div>

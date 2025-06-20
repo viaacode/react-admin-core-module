@@ -85,9 +85,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 			closeModal(newContent);
 		} catch (_err) {
 			showToast({
-				title: tText(
-					'modules/admin/content-page/components/publish-content-page-modal___error'
-				),
+				title: tText('modules/admin/content-page/components/publish-content-page-modal___error'),
 				description: tText(
 					'admin/content/components/share-content-page-modal___de-aanpassingen-kunnen-niet-worden-opgeslagen'
 				),
@@ -141,29 +139,21 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 				<FormGroup error={validationError}>
 					<Spacer margin="top-large">
 						<BlockHeading className="u-m-0" type="h4">
-							{tHtml(
-								'admin/content/components/share-content-page-modal___zichtbaarheid'
-							)}
+							{tHtml('admin/content/components/share-content-page-modal___zichtbaarheid')}
 						</BlockHeading>
 					</Spacer>
 					<RadioButtonGroup
 						options={[
 							{
-								label: tText(
-									'admin/content/components/share-content-page-modal___prive'
-								),
+								label: tText('admin/content/components/share-content-page-modal___prive'),
 								value: 'private',
 							},
 							{
-								label: tText(
-									'admin/content/components/share-content-page-modal___openbaar'
-								),
+								label: tText('admin/content/components/share-content-page-modal___openbaar'),
 								value: 'public',
 							},
 							{
-								label: tText(
-									'admin/content/components/share-content-page-modal___tijdsgebonden'
-								),
+								label: tText('admin/content/components/share-content-page-modal___tijdsgebonden'),
 								value: 'timebound',
 							},
 						]}
@@ -174,9 +164,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 				<Spacer margin="left-large">
 					<Form>
 						<FormGroup
-							label={tText(
-								'admin/content/components/share-content-page-modal___publiceren-op'
-							)}
+							label={tText('admin/content/components/share-content-page-modal___publiceren-op')}
 						>
 							<DatePicker
 								{...getDatePickerDefaultProps}
@@ -187,16 +175,12 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							/>
 						</FormGroup>
 						<FormGroup
-							label={tText(
-								'admin/content/components/share-content-page-modal___depubliceren-op'
-							)}
+							label={tText('admin/content/components/share-content-page-modal___depubliceren-op')}
 						>
 							<DatePicker
 								{...getDatePickerDefaultProps}
 								value={depublishAt ? parseISO(depublishAt) : undefined}
-								onChange={(date) =>
-									setDepublishAt(date ? date.toISOString() : null)
-								}
+								onChange={(date) => setDepublishAt(date ? date.toISOString() : null)}
 								showTimeInput={true}
 								disabled={selectedOption !== 'timebound'}
 							/>
@@ -216,22 +200,13 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							value={getPublishedAtDisplayDate()}
 							onChange={(date) =>
 								setPublishedAtDisplay(
-									date
-										? setSeconds(
-												setMinutes(setHours(date, 7), 0),
-												0
-										  ).toISOString()
-										: null
+									date ? setSeconds(setMinutes(setHours(date, 7), 0), 0).toISOString() : null
 								)
 							}
 						/>
 						<Tooltip position="right">
 							<TooltipTrigger>
-								<Icon
-									className="a-info-icon"
-									name={'info' as IconName}
-									size="small"
-								/>
+								<Icon className="a-info-icon" name={'info' as IconName} size="small" />
 							</TooltipTrigger>
 							<TooltipContent>
 								{tHtml(
@@ -248,16 +223,12 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 							<ButtonToolbar>
 								<Button
 									type="secondary"
-									label={tText(
-										'admin/content/components/share-content-page-modal___annuleren'
-									)}
+									label={tText('admin/content/components/share-content-page-modal___annuleren')}
 									onClick={() => closeModal()}
 								/>
 								<Button
 									type="primary"
-									label={tText(
-										'admin/content/components/share-content-page-modal___opslaan'
-									)}
+									label={tText('admin/content/components/share-content-page-modal___opslaan')}
 									onClick={onSave}
 								/>
 							</ButtonToolbar>

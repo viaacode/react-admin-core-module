@@ -108,20 +108,17 @@ export const GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS: () => SelectOption<Color>[] 
 	yellowOption(),
 ];
 
-export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (
-	| Color
-	| GradientColor
-	| CustomBackground
-)[] = () => [
-	Color.SoftBlue,
-	Color.NightBlue,
-	Color.Teal,
-	Color.TealBright,
-	Color.OceanGreen,
-	Color.SeaGreen,
-	Color.Yellow,
-	Color.Black,
-];
+export const GET_DARK_BACKGROUND_COLOR_OPTIONS: () => (Color | GradientColor | CustomBackground)[] =
+	() => [
+		Color.SoftBlue,
+		Color.NightBlue,
+		Color.Teal,
+		Color.TealBright,
+		Color.OceanGreen,
+		Color.SeaGreen,
+		Color.Yellow,
+		Color.Black,
+	];
 
 export const GET_FOREGROUND_COLOR_OPTIONS_AVO: () => SelectOption<Color>[] = () => [
 	{

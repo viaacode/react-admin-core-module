@@ -23,11 +23,7 @@ const UserDetailPage: FC = () => {
 	const params = useParams<{ id: string }>();
 
 	return (
-		<UserDetail
-			id={params.id}
-			commonUser={mockCommonUser}
-			onGoBack={() => window.history.back()}
-		/>
+		<UserDetail id={params.id} commonUser={mockCommonUser} onGoBack={() => window.history.back()} />
 	);
 };
 

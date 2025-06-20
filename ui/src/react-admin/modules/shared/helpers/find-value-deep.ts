@@ -2,7 +2,7 @@ export function findValueDeep(
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	obj: any,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	predicate: (key: string | number, value: any) => boolean,
+	predicate: (key: string | number, value: any) => boolean
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any | null {
 	// biome-ignore lint/suspicious/noExplicitAny: todo

@@ -118,13 +118,7 @@ export const OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG = (position = 0): ContentBlo
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 				editorProps: {
-					allowedTypes: [
-						'CONTENT_PAGE',
-						'INTERNAL_LINK',
-						'EXTERNAL_LINK',
-						'ANCHOR_LINK',
-						'FILE',
-					],
+					allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK', 'FILE'],
 				},
 			},
 		},

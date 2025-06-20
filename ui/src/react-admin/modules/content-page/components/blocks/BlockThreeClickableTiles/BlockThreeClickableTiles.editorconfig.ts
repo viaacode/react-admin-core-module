@@ -30,9 +30,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 	),
 	type: ContentBlockType.ThreeClickableTiles,
 	components: {
-		name: tText(
-			'admin/content-block/helpers/generators/three-clickable-tiles___clickable-tile'
-		),
+		name: tText('admin/content-block/helpers/generators/three-clickable-tiles___clickable-tile'),
 		limits: {
 			min: 1,
 			max: 3,
@@ -44,9 +42,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'admin/content-block/helpers/generators/three-clickable-tiles___afbeelding-is-verplicht'
 				),
 				{
-					label: tText(
-						'admin/content-block/helpers/generators/three-clickable-tiles___afbeelding'
-					),
+					label: tText('admin/content-block/helpers/generators/three-clickable-tiles___afbeelding'),
 					editorProps: { assetType: 'CONTENT_BLOCK_IMAGE' } as FileUploadProps,
 				}
 			),
@@ -55,9 +51,7 @@ export const THREE_CLICKABLE_TILES_BLOCK_CONFIG = (position = 0): ContentBlockCo
 					'admin/content-block/helpers/generators/three-clickable-tiles___subtitel-is-verplicht'
 				),
 				{
-					label: tText(
-						'admin/content-block/helpers/generators/three-clickable-tiles___subtitel'
-					),
+					label: tText('admin/content-block/helpers/generators/three-clickable-tiles___subtitel'),
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),

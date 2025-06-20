@@ -43,9 +43,7 @@ export const IMAGE_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			},
 			text: {
-				label: tText(
-					'admin/content-block/helpers/generators/image___bijschrift-beschrijving'
-				),
+				label: tText('admin/content-block/helpers/generators/image___bijschrift-beschrijving'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			},

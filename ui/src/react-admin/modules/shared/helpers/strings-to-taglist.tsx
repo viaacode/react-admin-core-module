@@ -1,15 +1,15 @@
-import type { TagOption } from "@viaa/avo2-components";
-import { TagList } from "@viaa/avo2-components";
-import { noop } from "lodash-es";
-import type { MouseEvent, ReactNode } from "react";
-import React from "react";
+import type { TagOption } from '@viaa/avo2-components';
+import { TagList } from '@viaa/avo2-components';
+import { noop } from 'lodash-es';
+import type { MouseEvent, ReactNode } from 'react';
+import React from 'react';
 
 export function stringsToTagList(
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	labelsOrObjs: string[] | any[],
 	prop: string | null = null,
 	onTagClicked: (tagId: string | number, clickEvent: MouseEvent) => void = noop,
-	onTagClosed?: (tagId: string | number, clickEvent: MouseEvent) => void,
+	onTagClosed?: (tagId: string | number, clickEvent: MouseEvent) => void
 ): ReactNode {
 	if (!labelsOrObjs || !labelsOrObjs.length) {
 		return null;
@@ -25,7 +25,7 @@ export function stringsToTagList(
 						label,
 						id: label,
 					};
-				},
+				}
 			)}
 			closable={!!onTagClosed}
 			onTagClicked={onTagClicked}

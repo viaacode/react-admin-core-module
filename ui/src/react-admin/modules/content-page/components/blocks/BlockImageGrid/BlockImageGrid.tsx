@@ -92,12 +92,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 
 	return (
 		<div
-			className={clsx(
-				'c-block-grid',
-				`text-align-${textAlign}`,
-				`item-align-${align}`,
-				className
-			)}
+			className={clsx('c-block-grid', `text-align-${textAlign}`, `item-align-${align}`, className)}
 		>
 			{elements.map((element, index) => (
 				<div
@@ -105,9 +100,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 					className={clsx('c-block-grid__item')}
 					style={{
 						width: itemWidth,
-						margin: `${Math.round(verticalMargin / 2)}px ${Math.round(
-							horizontalMargin / 2
-						)}px`,
+						margin: `${Math.round(verticalMargin / 2)}px ${Math.round(horizontalMargin / 2)}px`,
 					}}
 				>
 					{renderLink(

@@ -1,26 +1,19 @@
-import {
-	Button,
-	Flex,
-	FlexItem,
-	FormGroup,
-	IconName,
-	Spacer,
-} from "@viaa/avo2-components";
-import type { FunctionComponent, ReactNode } from "react";
-import React, { Fragment } from "react";
-import { GET_EDITOR_TYPES_MAP } from "~modules/content-page/const/editor-types.consts";
+import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
+import type { FunctionComponent, ReactNode } from 'react';
+import React, { Fragment } from 'react';
+import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
 
-import { generateFieldAttributes } from "~modules/content-page/helpers";
-import { Icon } from "~shared/components/Icon";
+import { generateFieldAttributes } from '~modules/content-page/helpers';
+import { Icon } from '~shared/components/Icon';
 import type {
 	ContentBlockComponentState,
 	ContentBlockField,
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
-} from "../../types/content-block.types";
-import { FieldGroup } from "../FieldGroup/FieldGroup";
-import { Alert } from "@meemoo/react-components";
+} from '../../types/content-block.types';
+import { FieldGroup } from '../FieldGroup/FieldGroup';
+import { Alert } from '@meemoo/react-components';
 
 interface FieldGeneratorProps {
 	fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState;
@@ -46,7 +39,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 	const handleFieldGroup = (
 		fieldGroup: ContentBlockFieldGroup,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
-		currentState: any,
+		currentState: any
 	) => {
 		if (!fieldGroup) {
 			return null;
@@ -55,19 +48,15 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		// REPEATED FIELDGROUP
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const renderFieldGroups = (singleState: any, singleStateIndex = 0) => (
-			<Spacer
-				key={`${fieldGroup.label}-${singleStateIndex}`}
-				margin="top-large"
-			>
+			<Spacer key={`${fieldGroup.label}-${singleStateIndex}`} margin="top-large">
 				<Flex>
 					<FlexItem>{`${fieldGroup.label} ${singleStateIndex + 1}`}</FlexItem>
 					<FlexItem shrink>
-						{currentState.length >
-							(fieldGroup.min !== undefined ? fieldGroup.min : 1) &&
+						{currentState.length > (fieldGroup.min !== undefined ? fieldGroup.min : 1) &&
 							renderDeleteButton(
 								currentState,
 								fieldGroup?.repeat?.deleteButtonLabel,
-								singleStateIndex,
+								singleStateIndex
 							)}
 					</FlexItem>
 				</Flex>
@@ -90,7 +79,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 					{currentState.map(
 						// biome-ignore lint/suspicious/noExplicitAny: todo
 						(fieldGroupState: any, fieldGroupStateIndex: number) =>
-							renderFieldGroups(fieldGroupState, fieldGroupStateIndex),
+							renderFieldGroups(fieldGroupState, fieldGroupStateIndex)
 					)}
 					{(!fieldGroup.max || currentState.length < fieldGroup.max) && (
 						<Spacer margin="top">
@@ -98,7 +87,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 								{renderAddButton(
 									currentState,
 									fieldGroup?.repeat?.defaultState,
-									fieldGroup?.repeat?.addButtonLabel,
+									fieldGroup?.repeat?.addButtonLabel
 								)}
 							</Flex>
 						</Spacer>
@@ -108,11 +97,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		}
 
 		// FIELDGROUP
-		return (
-			<Fragment key={stateIndex}>
-				{renderFieldGroups(currentState, stateIndex)}
-			</Fragment>
-		);
+		return <Fragment key={stateIndex}>{renderFieldGroups(currentState, stateIndex)}</Fragment>;
 	};
 
 	const renderNote = (field: ContentBlockField): ReactNode | null => {
@@ -121,19 +106,14 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		}
 		return (
 			<Spacer margin="top">
-				<Alert
-					content={field.note}
-					icon={<Icon name={IconName.alertTriangle} />}
-					variants="info"
-				/>
+				<Alert content={field.note} icon={<Icon name={IconName.alertTriangle} />} variants="info" />
 			</Spacer>
 		);
 	};
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleField = (field: ContentBlockField, currentState: any) => {
-		const EditorComponent =
-			GET_EDITOR_TYPES_MAP()[(field as ContentBlockField).editorType];
+		const EditorComponent = GET_EDITOR_TYPES_MAP()[(field as ContentBlockField).editorType];
 
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const handleStateChange = (index: any, value: any, key?: string) => {
@@ -161,7 +141,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 							innerState as any,
 							`${fieldKey}-${index}`,
 							fieldKey,
-							currentState,
+							currentState
 						);
 
 						return (
@@ -178,11 +158,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 									</FlexItem>
 									{currentState.length > 1 && (
 										<Spacer margin="left">
-											{renderDeleteButton(
-												currentState,
-												field?.repeat?.deleteButtonLabel,
-												index,
-											)}
+											{renderDeleteButton(currentState, field?.repeat?.deleteButtonLabel, index)}
 										</Spacer>
 									)}
 								</Flex>
@@ -194,7 +170,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 							{renderAddButton(
 								currentState,
 								field?.repeat?.defaultState,
-								field?.repeat?.addButtonLabel,
+								field?.repeat?.addButtonLabel
 							)}
 						</Flex>
 					</Spacer>
@@ -213,13 +189,12 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		const editorProps: any = generateFieldAttributes(
 			field,
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			(value: any, key?: string) =>
-				handleChange(type, key || fieldKey, value, stateIndex),
+			(value: any, key?: string) => handleChange(type, key || fieldKey, value, stateIndex),
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			(state as any)[fieldKey],
 			fieldId,
 			fieldKey,
-			state,
+			state
 		);
 
 		return (
@@ -235,7 +210,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		stateCopy: any[],
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		defaultState: any,
-		label?: string,
+		label?: string
 	) => {
 		const handleFieldAdd = () => {
 			const newState = [...stateCopy];
@@ -247,7 +222,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon={"add" as IconName}
+				icon={'add' as IconName}
 				onClick={handleFieldAdd}
 				size="small"
 				title={label}
@@ -262,7 +237,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		stateCopy: any,
 		label?: string,
-		index?: number,
+		index?: number
 	) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const handleFieldDelete = (index: any) => {
@@ -275,7 +250,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 
 		return (
 			<Button
-				icon={"delete" as IconName}
+				icon={'delete' as IconName}
 				onClick={() => handleFieldDelete(index)}
 				size="small"
 				title={label}
@@ -288,19 +263,13 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 	const generateFields = (
 		fieldOrFieldGroupInstance: ContentBlockField | ContentBlockFieldGroup,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
-		currentState: any = [],
+		currentState: any = []
 	) => {
 		switch ((fieldOrFieldGroupInstance as ContentBlockFieldGroup).type) {
-			case "fieldGroup":
-				return handleFieldGroup(
-					fieldOrFieldGroupInstance as ContentBlockFieldGroup,
-					currentState,
-				);
+			case 'fieldGroup':
+				return handleFieldGroup(fieldOrFieldGroupInstance as ContentBlockFieldGroup, currentState);
 			default:
-				return handleField(
-					fieldOrFieldGroupInstance as ContentBlockField,
-					currentState,
-				);
+				return handleField(fieldOrFieldGroupInstance as ContentBlockField, currentState);
 		}
 	};
 

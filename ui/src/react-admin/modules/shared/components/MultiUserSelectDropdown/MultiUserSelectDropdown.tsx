@@ -131,11 +131,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 				onClose={closeDropdown}
 			>
 				<DropdownButton>
-					<Button
-						autoHeight
-						className="c-checkbox-dropdown-modal__trigger"
-						type="secondary"
-					>
+					<Button autoHeight className="c-checkbox-dropdown-modal__trigger" type="secondary">
 						<div className="c-button__content">
 							<div className="c-button__label">{label}</div>
 							{!!selectedProfiles.length && showSelectedValuesOnCollapsed && (
@@ -147,10 +143,10 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 												selectedProfiles.length > 1
 													? tText(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruikers'
-													  )
+														)
 													: tText(
 															'shared/components/multi-user-select-dropdown/multi-user-select-dropdown___gebruiker'
-													  )
+														)
 											}`,
 										},
 									]}
@@ -189,10 +185,7 @@ export const MultiUserSelectDropdown: FunctionComponent<MultiUserSelectDropdownP
 										onChange={(selectedProfile) => {
 											if (selectedProfile) {
 												setSelectedProfiles((selectedProfiles) =>
-													uniqBy(
-														[...selectedProfiles, selectedProfile],
-														'value'
-													)
+													uniqBy([...selectedProfiles, selectedProfile], 'value')
 												);
 												setSelectedProfile(selectedProfile);
 											}

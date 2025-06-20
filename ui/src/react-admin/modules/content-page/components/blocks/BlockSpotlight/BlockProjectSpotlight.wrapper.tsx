@@ -33,9 +33,9 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 	renderLink,
 }) => {
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({ state: 'loading' });
-	const [projectContentPages, setProjectContentPages] = useState<
-		(ContentPageInfo | null)[] | null
-	>(null);
+	const [projectContentPages, setProjectContentPages] = useState<(ContentPageInfo | null)[] | null>(
+		null
+	);
 
 	const fetchContentPages = useCallback(async () => {
 		try {
@@ -44,15 +44,12 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 					const projectPath = projectInfo?.project?.value;
 					if (projectPath?.toString()) {
 						try {
-							const dbContentPage =
-								await ContentPageService.getContentPageByLanguageAndPath(
-									(AdminConfigManager.getConfig().locale || Locale.Nl) as Locale,
-									projectPath.toString(),
-									true
-								);
-							return dbContentPage
-								? convertDbContentPageToContentPageInfo(dbContentPage)
-								: null;
+							const dbContentPage = await ContentPageService.getContentPageByLanguageAndPath(
+								(AdminConfigManager.getConfig().locale || Locale.Nl) as Locale,
+								projectPath.toString(),
+								true
+							);
+							return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
 						} catch (_err) {
 							// Failed to fetch one of the content pages
 							// Continue rendering the block with one of the tiles missing
@@ -97,8 +94,7 @@ export const BlockProjectSpotlightWrapper: FunctionComponent<ProjectSpotlightWra
 						if (projectContentPage) {
 							return {
 								title: element?.customTitle || projectContentPage?.title || '',
-								image:
-									element?.customImage || projectContentPage?.thumbnailPath || '',
+								image: element?.customImage || projectContentPage?.thumbnailPath || '',
 								buttonAction: element?.project,
 							};
 						} else {

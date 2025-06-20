@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { convertDbContentPageToContentPageInfo } from "~modules/content-page/services/content-page.converters";
-import { ContentPageService } from "~modules/content-page/services/content-page.service";
-import type { Locale } from "~modules/translations/translations.core.types";
-import { QUERY_KEYS } from "~shared/types";
+import { useQuery } from '@tanstack/react-query';
+import { convertDbContentPageToContentPageInfo } from '~modules/content-page/services/content-page.converters';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type { Locale } from '~modules/translations/translations.core.types';
+import { QUERY_KEYS } from '~shared/types';
 
 export const useGetContentPageByLanguageAndPath = (
 	language: Locale,
@@ -10,7 +10,7 @@ export const useGetContentPageByLanguageAndPath = (
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
 		keepPreviousData: true,
-	},
+	}
 ) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, language, path],
@@ -20,20 +20,17 @@ export const useGetContentPageByLanguageAndPath = (
 			if (!language || !path) {
 				return null;
 			}
-			const dbContentPage =
-				await ContentPageService.getContentPageByLanguageAndPath(
-					language,
-					path,
-					false,
-				);
-			return dbContentPage
-				? convertDbContentPageToContentPageInfo(dbContentPage)
-				: null;
+			const dbContentPage = await ContentPageService.getContentPageByLanguageAndPath(
+				language,
+				path,
+				false
+			);
+			return dbContentPage ? convertDbContentPageToContentPageInfo(dbContentPage) : null;
 		},
 		{
 			enabled: true,
 			keepPreviousData: true,
 			...options,
-		},
+		}
 	);
 };

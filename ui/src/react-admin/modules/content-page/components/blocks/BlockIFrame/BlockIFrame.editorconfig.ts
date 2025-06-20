@@ -35,13 +35,10 @@ export const IFRAME_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					editorType: ContentBlockEditor.TextInput,
 				}
 			),
-			src: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/iframe___url-is-verplicht'),
-				{
-					label: tText('admin/content-block/helpers/generators/iframe___url'),
-					editorType: ContentBlockEditor.TextInput,
-				}
-			),
+			src: TEXT_FIELD(tText('admin/content-block/helpers/generators/iframe___url-is-verplicht'), {
+				label: tText('admin/content-block/helpers/generators/iframe___url'),
+				editorType: ContentBlockEditor.TextInput,
+			}),
 		},
 	},
 	block: {

@@ -29,9 +29,7 @@ export const ALERTS_FORM_SCHEMA = (): Schema<Partial<MaintenanceAlert>> => {
 			.of(string().required('is required'))
 			.min(
 				1,
-				tText(
-					'react-admin/modules/alerts/views/alerts-const___selecteer-een-gebruikersgroep'
-				)
+				tText('react-admin/modules/alerts/views/alerts-const___selecteer-een-gebruikersgroep')
 			),
 		type: string().required(
 			tText('react-admin/modules/alerts/views/alerts-const___icoon-is-verplicht')

@@ -63,9 +63,7 @@ export const IMAGE_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): ContentBlock
 				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
-					options: GET_ALIGN_OPTIONS().filter((option) =>
-						['left', 'right'].includes(option.value)
-					),
+					options: GET_ALIGN_OPTIONS().filter((option) => ['left', 'right'].includes(option.value)),
 				},
 			},
 			headingTitle: TEXT_FIELD(undefined, {

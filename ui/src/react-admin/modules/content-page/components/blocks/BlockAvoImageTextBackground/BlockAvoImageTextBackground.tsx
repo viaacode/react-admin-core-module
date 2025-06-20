@@ -181,8 +181,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 							renderIcon={() => (buttonIcon ? <Icon name={buttonIcon} /> : null)}
 							style={{
 								marginTop: `${heading ? 1.6 : 2.2}rem`,
-								marginLeft:
-									`${backgroundColor === Color.Transparent ? padding : 0}rem`,
+								marginLeft: `${backgroundColor === Color.Transparent ? padding : 0}rem`,
 							}}
 						/>,
 						buttonAltTitle || buttonLabel
@@ -252,9 +251,7 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 			{(!!imageAttribution || !!imageAttributionText) && (
 				<div className="a-block-image__annotation">
 					{imageAttribution && <h3>&#169; {imageAttribution}</h3>}
-					{imageAttributionText && (
-						<p className="a-block-image__text">{imageAttributionText}</p>
-					)}
+					{imageAttributionText && <p className="a-block-image__text">{imageAttributionText}</p>}
 				</div>
 			)}
 		</article>

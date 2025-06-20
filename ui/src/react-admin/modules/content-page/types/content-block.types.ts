@@ -1,4 +1,4 @@
-import type { RichEditorState } from "@meemoo/react-components";
+import type { RichEditorState } from '@meemoo/react-components';
 import type {
 	ButtonAction,
 	ButtonType,
@@ -6,107 +6,106 @@ import type {
 	HeadingType,
 	IconName,
 	SpacerOption,
-} from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import type { ReactNode } from "react";
-import type { BlockAvoHeroProps } from "~content-blocks/BlockAvoHero/BlockAvoHero";
+} from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import type { ReactNode } from 'react';
+import type { BlockAvoHeroProps } from '~content-blocks/BlockAvoHero/BlockAvoHero';
 import type {
 	ContentItemStyle,
 	ContentTabStyle,
-} from "~content-blocks/BlockPageOverview/BlockPageOverview.types";
-import type { ImageInfo } from "~content-blocks/BlockSpotlight/BlockSpotlight";
+} from '~content-blocks/BlockPageOverview/BlockPageOverview.types';
+import type { ImageInfo } from '~content-blocks/BlockSpotlight/BlockSpotlight';
 
 // OPTIONS
-export type AlignOption = "left" | "right" | "center";
+export type AlignOption = 'left' | 'right' | 'center';
 
-export type SimpleAlignOption = "left" | "right";
+export type SimpleAlignOption = 'left' | 'right';
 
 export type BackgroundAlignOption =
-	| "fill-screen"
-	| "left-screen"
-	| "left-inside-page"
-	| "right-inside-page"
-	| "right-screen";
+	| 'fill-screen'
+	| 'left-screen'
+	| 'left-inside-page'
+	| 'right-inside-page'
+	| 'right-screen';
 
-export type FillOption = "cover" | "contain" | "auto";
+export type FillOption = 'cover' | 'contain' | 'auto';
 
 export type BlockGridFormatOption =
-	| "flex3"
-	| "squareSmall"
-	| "squareLarge"
-	| "4:3"
-	| "2:1"
-	| "6:9"
-	| "400x150"
-	| "384x220";
+	| 'flex3'
+	| 'squareSmall'
+	| 'squareLarge'
+	| '4:3'
+	| '2:1'
+	| '6:9'
+	| '400x150'
+	| '384x220';
 
-export type WidthOption = "full-width" | "page-header" | string; // CSS width string: eg: 100%; 400px, 500px
+export type WidthOption = 'full-width' | 'page-header' | string; // CSS width string: eg: 100%; 400px, 500px
 
-export type HeadingTypeOption = "h1" | "h2" | "h3" | "h4";
-export type HeadingSizeOption = "small" | "medium" | "large";
+export type HeadingTypeOption = 'h1' | 'h2' | 'h3' | 'h4';
+export type HeadingSizeOption = 'small' | 'medium' | 'large';
 
-export type CardWithoutDescriptionStyleOption = "round" | "square";
+export type CardWithoutDescriptionStyleOption = 'round' | 'square';
 
 export enum Color {
-	White = "#FFF",
-	Black = "#000",
-	Gray1000 = "#000000",
-	Gray900 = "#0F171D",
-	Gray800 = "#1D2B35",
-	Gray700 = "#2B414F",
-	Gray600 = "#385265",
-	Gray500 = "#45647B",
-	Gray400 = "#557891",
-	Gray300 = "#7894A7",
-	Gray200 = "#9CAFBD",
-	Gray150 = "#BAC7D1",
-	Gray100 = "#D6DEE3",
-	Gray50 = "#EDEFF2",
-	GrayShadow = "#222",
-	NightBlue = "#3A586F",
-	DarkNightBlue = "#182F42",
-	TealBright = "#25A4CF",
-	Teal = "#1D637A",
-	TealDark = "#124455",
-	Error200 = "#EE8176",
-	Green = "#46D46E",
-	Blue = "#4D76F3",
-	SoftBlue = "#8AC1CE",
-	OceanGreen = "#00C8AA",
-	SeaGreen = "#009690",
-	Silver = "#DBDBDB",
-	Tapestry = "#B75B99",
-	WineRed = "#98485C",
-	Yellow = "#F3AA2E",
-	DarkOrange = "#D03F06",
-	FrenchRose = "#F33F67",
-	Primary = "#25A4CF",
-	Success = "#00C8AA",
-	Error = "#DA3F34",
-	AlertBackground = "#FFFFCC",
-	AlertAccent = "#E9E994",
-	TealBright200 = "#CFE3E9",
-	BorderColor = "#3FB1D6",
-	InputBoxShadow = "#69C2DF",
-	Transparent = "TRANSPARENT",
-	Platinum = "#F8F8F8",
-	Neutral = "#727272",
-	Zinc = "#ADADAD",
-	SkyBlue = "#C3DDE6",
-	Juniper = "#678588",
+	White = '#FFF',
+	Black = '#000',
+	Gray1000 = '#000000',
+	Gray900 = '#0F171D',
+	Gray800 = '#1D2B35',
+	Gray700 = '#2B414F',
+	Gray600 = '#385265',
+	Gray500 = '#45647B',
+	Gray400 = '#557891',
+	Gray300 = '#7894A7',
+	Gray200 = '#9CAFBD',
+	Gray150 = '#BAC7D1',
+	Gray100 = '#D6DEE3',
+	Gray50 = '#EDEFF2',
+	GrayShadow = '#222',
+	NightBlue = '#3A586F',
+	DarkNightBlue = '#182F42',
+	TealBright = '#25A4CF',
+	Teal = '#1D637A',
+	TealDark = '#124455',
+	Error200 = '#EE8176',
+	Green = '#46D46E',
+	Blue = '#4D76F3',
+	SoftBlue = '#8AC1CE',
+	OceanGreen = '#00C8AA',
+	SeaGreen = '#009690',
+	Silver = '#DBDBDB',
+	Tapestry = '#B75B99',
+	WineRed = '#98485C',
+	Yellow = '#F3AA2E',
+	DarkOrange = '#D03F06',
+	FrenchRose = '#F33F67',
+	Primary = '#25A4CF',
+	Success = '#00C8AA',
+	Error = '#DA3F34',
+	AlertBackground = '#FFFFCC',
+	AlertAccent = '#E9E994',
+	TealBright200 = '#CFE3E9',
+	BorderColor = '#3FB1D6',
+	InputBoxShadow = '#69C2DF',
+	Transparent = 'TRANSPARENT',
+	Platinum = '#F8F8F8',
+	Neutral = '#727272',
+	Zinc = '#ADADAD',
+	SkyBlue = '#C3DDE6',
+	Juniper = '#678588',
 }
 
 export enum GradientColor {
-	BlackWhite = "linear-gradient(to top, #fff 0%, #fff calc(100% - 16rem), #000 calc(100% - 16rem), #000 100%)",
+	BlackWhite = 'linear-gradient(to top, #fff 0%, #fff calc(100% - 16rem), #000 calc(100% - 16rem), #000 100%)',
 }
 
 export enum CustomBackground {
-	MeemooLogo = "<MEEMOO_LOGO>",
+	MeemooLogo = '<MEEMOO_LOGO>',
 }
 
 export const ColorSelectGradientColors: Record<GradientColor, string> = {
-	[GradientColor.BlackWhite]:
-		"linear-gradient(to top, #fff 0%, #fff 50%, #000 50%, #000 100%)",
+	[GradientColor.BlackWhite]: 'linear-gradient(to top, #fff 0%, #fff 50%, #000 50%, #000 100%)',
 };
 
 export interface PaddingFieldState {
@@ -126,63 +125,63 @@ export interface ContentBlockComponentsLimits {
 
 // must match the lookup enumeration `content_block_types` on GraphQL.
 export enum ContentBlockType {
-	AnchorLinks = "ANCHOR_LINKS",
-	Buttons = "BUTTONS",
-	ContentPageMeta = "CONTENT_PAGE_META",
-	CTAs = "CTAS",
-	Eventbrite = "EVENTBRITE",
-	Heading = "HEADING",
-	AvoHero = "HERO",
-	IFrame = "IFRAME",
-	Image = "IMAGE",
-	ImageGrid = "IMAGE_GRID",
-	ImageTitleTextButton = "IMAGE_TITLE_TEXT_BUTTON",
-	Intro = "INTRO",
-	Klaar = "KLAAR",
-	LogoGrid = "LOGO_GRID",
-	MediaGrid = "MEDIA_GRID",
-	MediaPlayer = "MEDIA_PLAYER",
-	MediaPlayerTitleTextButton = "MEDIA_PLAYER_TITLE_TEXT_BUTTON",
-	PageOverview = "PAGE_OVERVIEW",
-	ProjectsSpotlight = "PROJECTS_SPOTLIGHT",
-	Quote = "QUOTE",
-	RichText = "RICH_TEXT",
-	RichTextTwoColumns = "RICH_TEXT_TWO_COLUMNS",
-	Search = "SEARCH",
-	Spotlight = "SPOTLIGHT",
-	ThreeClickableTiles = "THREE_CLICKABLE_TILES",
-	Uitgeklaard = "UITGEKLAARD",
-	UspGrid = "USP_GRID",
-	TagsWithLink = "TAGS_WITH_LINKS",
-	CardsWithoutDescription = "CARDS_NO_DESCRIPTION",
-	HetArchiefImageTextBackground = "IMAGE_TEXT_BACKGROUND", // Hetarchief
-	MaintainersGrid = "MAINTAINERS_GRID",
-	HetArchiefHeaderSearch = "HETARCHIEF__HEADER_SEARCH",
-	OverviewNewspaperTitles = "OVERVIEW_NEWSPAPER_TITLES",
-	ContentEncloseGrid = "CONTENT_ENCLOSE_GRID",
-	Breadcrumbs = "BREADCRUMBS",
-	AvoImageTextBackground = "AVO_IMAGE_TEXT_BACKGROUND", // Avo
+	AnchorLinks = 'ANCHOR_LINKS',
+	Buttons = 'BUTTONS',
+	ContentPageMeta = 'CONTENT_PAGE_META',
+	CTAs = 'CTAS',
+	Eventbrite = 'EVENTBRITE',
+	Heading = 'HEADING',
+	AvoHero = 'HERO',
+	IFrame = 'IFRAME',
+	Image = 'IMAGE',
+	ImageGrid = 'IMAGE_GRID',
+	ImageTitleTextButton = 'IMAGE_TITLE_TEXT_BUTTON',
+	Intro = 'INTRO',
+	Klaar = 'KLAAR',
+	LogoGrid = 'LOGO_GRID',
+	MediaGrid = 'MEDIA_GRID',
+	MediaPlayer = 'MEDIA_PLAYER',
+	MediaPlayerTitleTextButton = 'MEDIA_PLAYER_TITLE_TEXT_BUTTON',
+	PageOverview = 'PAGE_OVERVIEW',
+	ProjectsSpotlight = 'PROJECTS_SPOTLIGHT',
+	Quote = 'QUOTE',
+	RichText = 'RICH_TEXT',
+	RichTextTwoColumns = 'RICH_TEXT_TWO_COLUMNS',
+	Search = 'SEARCH',
+	Spotlight = 'SPOTLIGHT',
+	ThreeClickableTiles = 'THREE_CLICKABLE_TILES',
+	Uitgeklaard = 'UITGEKLAARD',
+	UspGrid = 'USP_GRID',
+	TagsWithLink = 'TAGS_WITH_LINKS',
+	CardsWithoutDescription = 'CARDS_NO_DESCRIPTION',
+	HetArchiefImageTextBackground = 'IMAGE_TEXT_BACKGROUND', // Hetarchief
+	MaintainersGrid = 'MAINTAINERS_GRID',
+	HetArchiefHeaderSearch = 'HETARCHIEF__HEADER_SEARCH',
+	OverviewNewspaperTitles = 'OVERVIEW_NEWSPAPER_TITLES',
+	ContentEncloseGrid = 'CONTENT_ENCLOSE_GRID',
+	Breadcrumbs = 'BREADCRUMBS',
+	AvoImageTextBackground = 'AVO_IMAGE_TEXT_BACKGROUND', // Avo
 }
 
 export enum ContentBlockEditor {
-	AlignSelect = "AlignSelect",
-	Checkbox = "Checkbox",
-	ColorSelect = "ColorSelect",
-	ContentPicker = "ContentPicker",
-	ContentTypeAndLabelsPicker = "ContentTypeAndLabelsPicker",
-	FileUpload = "FileUpload",
-	IconPicker = "IconPicker",
-	DatePicker = "DatePicker",
-	MultiRange = "MultiRange",
-	PaddingSelect = "PaddingSelect",
-	PaddingSelectSingleValue = "PaddingSelectSingleValue",
-	Select = "Select",
-	TextArea = "TextArea",
-	TextInput = "TextInput",
-	RICH_TEXT_EDITOR = "RICH_TEXT_EDITOR",
-	UserGroupSelect = "UserGroupSelect",
-	MaintainerSelect = "MaintainerSelect", // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
-	UploadOrSelectVideoStill = "UploadOrSelectVideoStill", // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
+	AlignSelect = 'AlignSelect',
+	Checkbox = 'Checkbox',
+	ColorSelect = 'ColorSelect',
+	ContentPicker = 'ContentPicker',
+	ContentTypeAndLabelsPicker = 'ContentTypeAndLabelsPicker',
+	FileUpload = 'FileUpload',
+	IconPicker = 'IconPicker',
+	DatePicker = 'DatePicker',
+	MultiRange = 'MultiRange',
+	PaddingSelect = 'PaddingSelect',
+	PaddingSelectSingleValue = 'PaddingSelectSingleValue',
+	Select = 'Select',
+	TextArea = 'TextArea',
+	TextInput = 'TextInput',
+	RICH_TEXT_EDITOR = 'RICH_TEXT_EDITOR',
+	UserGroupSelect = 'UserGroupSelect',
+	MaintainerSelect = 'MaintainerSelect', // Used for selecting which maintainers copy right notice should be on the video still https://meemoo.atlassian.net/browse/AVO-3015
+	UploadOrSelectVideoStill = 'UploadOrSelectVideoStill', // Used for selecting or uploading a video still for a video player https://meemoo.atlassian.net/browse/AVO-3015
 }
 
 export interface ContentBlockField {
@@ -203,7 +202,7 @@ export interface ContentBlockField {
 	};
 }
 
-export type ContentBlockEditorType = "field" | "fieldGroup";
+export type ContentBlockEditorType = 'field' | 'fieldGroup';
 
 export interface ContentBlockFieldGroup {
 	label?: string; // Optional for checkboxes, who have their own label
@@ -235,7 +234,7 @@ export interface DefaultContentBlockState {
 
 export type ContentBlockState = DefaultContentBlockState;
 
-export type ContentBlockStateType = "components" | "block";
+export type ContentBlockStateType = 'components' | 'block';
 
 export interface ContentBlockBlockConfig {
 	state: ContentBlockState;
@@ -359,11 +358,11 @@ export interface MediaPlayerTitleTextButtonBlockComponentState {
 
 export type ImageTitleTextButtonBlockComponentState = Omit<
 	MediaPlayerTitleTextButtonBlockComponentState,
-	"mediaTitle" | "mediaAutoplay" | "align"
+	'mediaTitle' | 'mediaAutoplay' | 'align'
 > & {
 	imageAction?: ButtonAction;
 	imageAlt?: string;
-	imagePosition?: Omit<AlignOption, "center">;
+	imagePosition?: Omit<AlignOption, 'center'>;
 	imageSource?: string;
 };
 
@@ -430,7 +429,7 @@ export type SingleContentBlockComponentState =
 	// biome-ignore lint/complexity/noBannedTypes: todo
 	| {
 			// Search block & content page meta
-	  };
+	  }// Search block & content page meta;
 
 export type ContentBlockComponentState =
 	| RepeatedContentBlockComponentState[]
@@ -479,8 +478,8 @@ export interface ContentBlockMeta {
 }
 
 export const DEFAULT_BUTTON_PROPS = {
-	type: "primary",
-	label: "",
+	type: 'primary',
+	label: '',
 	icon: undefined,
 	buttonAction: undefined,
 };

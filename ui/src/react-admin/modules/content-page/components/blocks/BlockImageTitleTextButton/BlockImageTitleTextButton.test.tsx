@@ -1,12 +1,12 @@
-import { mount, shallow } from "enzyme";
-import { loremIpsum } from "lorem-ipsum";
-import React, { cloneElement } from "react";
+import { mount, shallow } from 'enzyme';
+import { loremIpsum } from 'lorem-ipsum';
+import React, { cloneElement } from 'react';
 
-import imageSource from "../../../static/images/1280x720.jpg";
+import imageSource from '../../../static/images/1280x720.jpg';
 
-import { BlockImageTitleTextButton } from "./BlockImageTitleTextButton";
+import { BlockImageTitleTextButton } from './BlockImageTitleTextButton';
 
-const customClass = "c-block-custom";
+const customClass = 'c-block-custom';
 
 const loremIpsumText = loremIpsum({ count: 10 });
 
@@ -21,41 +21,41 @@ const blockImageTitleTextButtonExample = (
 	/>
 );
 
-describe("<BlockImageTitleTextButton />", () => {
-	it("Should be able to render", () => {
+describe('<BlockImageTitleTextButton />', () => {
+	it('Should be able to render', () => {
 		shallow(blockImageTitleTextButtonExample);
 	});
 
-	it("Should render the image correctly", () => {
+	it('Should render the image correctly', () => {
 		const component = mount(blockImageTitleTextButtonExample);
 
-		const imgElement = component.find("img");
+		const imgElement = component.find('img');
 
-		expect(imgElement.prop("src")).toEqual(imageSource);
+		expect(imgElement.prop('src')).toEqual(imageSource);
 	});
 
-	it("Should render the title correctly", () => {
+	it('Should render the title correctly', () => {
 		const component = mount(blockImageTitleTextButtonExample);
 
-		const h2Element = component.find("h2");
+		const h2Element = component.find('h2');
 
-		expect(h2Element.html()).toContain(">Title<");
+		expect(h2Element.html()).toContain('>Title<');
 	});
 
-	it("Should render the text correctly", () => {
+	it('Should render the text correctly', () => {
 		const component = mount(blockImageTitleTextButtonExample);
 
-		const pElement = component.find("p");
+		const pElement = component.find('p');
 
 		expect(pElement.html()).toContain(`>${loremIpsumText}<`);
 	});
 
-	it("Should set the correct className", () => {
+	it('Should set the correct className', () => {
 		const component = mount(blockImageTitleTextButtonExample);
 
-		const divs = component.find("div");
+		const divs = component.find('div');
 
-		const containerVertical = component.find("div").at(0);
+		const containerVertical = component.find('div').at(0);
 		const containerElement = divs.at(1);
 		const gridElement = divs.at(2);
 		const leftColumnElement = divs.at(3);
@@ -63,26 +63,26 @@ describe("<BlockImageTitleTextButton />", () => {
 		const contentElement = divs.at(6);
 
 		expect(component.hasClass(customClass)).toEqual(true);
-		expect(containerVertical.hasClass("o-container-vertical")).toEqual(true);
-		expect(containerElement.hasClass("o-container")).toEqual(true);
-		expect(gridElement.hasClass("o-grid")).toEqual(true);
-		expect(leftColumnElement.hasClass("o-grid-col-bp2-4")).toEqual(true);
-		expect(rightColumnElement.hasClass("o-grid-col-bp2-8")).toEqual(true);
-		expect(contentElement.hasClass("c-content")).toEqual(true);
+		expect(containerVertical.hasClass('o-container-vertical')).toEqual(true);
+		expect(containerElement.hasClass('o-container')).toEqual(true);
+		expect(gridElement.hasClass('o-grid')).toEqual(true);
+		expect(leftColumnElement.hasClass('o-grid-col-bp2-4')).toEqual(true);
+		expect(rightColumnElement.hasClass('o-grid-col-bp2-8')).toEqual(true);
+		expect(contentElement.hasClass('c-content')).toEqual(true);
 	});
 
-	it("Should trigger handler when button is clicked", () => {
+	it('Should trigger handler when button is clicked', () => {
 		const onButtonClick = jest.fn();
 
 		const component = mount(
 			cloneElement(blockImageTitleTextButtonExample, {
 				onClick: onButtonClick,
-			}),
+			})
 		);
 
-		const buttonElement = component.find("button");
+		const buttonElement = component.find('button');
 
-		buttonElement.simulate("click");
+		buttonElement.simulate('click');
 
 		expect(onButtonClick).toHaveBeenCalled();
 		expect(onButtonClick).toHaveBeenCalledTimes(1);

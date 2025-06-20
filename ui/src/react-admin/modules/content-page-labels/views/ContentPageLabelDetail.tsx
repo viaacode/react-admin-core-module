@@ -109,24 +109,15 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				<Table horizontal variant="invisible" className="c-table_detail-page">
 					<tbody>
 						{renderSimpleDetailRows(contentPageLabelInfo, [
-							[
-								'label',
-								tText(
-									'admin/content-page-labels/views/content-page-label-detail___label'
-								),
-							],
+							['label', tText('admin/content-page-labels/views/content-page-label-detail___label')],
 							[
 								'content_type',
-								tText(
-									'admin/content-page-labels/views/content-page-label-detail___type'
-								),
+								tText('admin/content-page-labels/views/content-page-label-detail___type'),
 							],
 						])}
 						{renderDetailRow(
 							contentPageLabelInfo.language,
-							tText(
-								'modules/content-page-labels/views/content-page-label-detail___taal'
-							),
+							tText('modules/content-page-labels/views/content-page-label-detail___taal'),
 							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(
@@ -140,22 +131,16 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 							) : (
 								'-'
 							),
-							tText(
-								'admin/content-page-labels/views/content-page-label-detail___link'
-							)
+							tText('admin/content-page-labels/views/content-page-label-detail___link')
 						)}
 						{renderDateDetailRows(contentPageLabelInfo, [
 							[
 								'created_at',
-								tText(
-									'admin/content-page-labels/views/content-page-label-detail___aangemaakt-op'
-								),
+								tText('admin/content-page-labels/views/content-page-label-detail___aangemaakt-op'),
 							],
 							[
 								'updated_at',
-								tText(
-									'admin/content-page-labels/views/content-page-label-detail___aangepast-op'
-								),
+								tText('admin/content-page-labels/views/content-page-label-detail___aangepast-op'),
 							],
 						])}
 					</tbody>
@@ -184,9 +169,7 @@ export const ContentPageLabelDetail: FunctionComponent<ContentPageLabelDetailPro
 				<AdminLayout.Actions>
 					<ButtonToolbar>
 						<Button
-							label={tText(
-								'admin/content-page-labels/views/content-page-label-detail___bewerken'
-							)}
+							label={tText('admin/content-page-labels/views/content-page-label-detail___bewerken')}
 							title={tText(
 								'admin/content-page-labels/views/content-page-label-detail___bewerk-deze-content-pagina-label'
 							)}

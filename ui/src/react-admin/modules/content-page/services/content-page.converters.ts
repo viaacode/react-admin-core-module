@@ -1,27 +1,27 @@
-import { compact, isArray, isFunction, isPlainObject, sortBy } from "lodash-es";
-import { ToastType } from "~core/config";
-import { CONTENT_BLOCK_CONFIG_MAP } from "~modules/content-page/const/content-block-config-map";
-import { RichEditorStateKey } from "~modules/content-page/const/rich-text-editor.consts";
+import { compact, isArray, isFunction, isPlainObject, sortBy } from 'lodash-es';
+import { ToastType } from '~core/config';
+import { CONTENT_BLOCK_CONFIG_MAP } from '~modules/content-page/const/content-block-config-map';
+import { RichEditorStateKey } from '~modules/content-page/const/rich-text-editor.consts';
 import type {
 	ContentBlockConfig,
 	ContentBlockType,
 	DbContentBlock,
-} from "~modules/content-page/types/content-block.types";
+} from '~modules/content-page/types/content-block.types';
 import type {
 	ContentPageInfo,
 	DbContentPage,
-} from "~modules/content-page/types/content-pages.types";
-import { CustomError } from "~shared/helpers/custom-error";
-import { mapDeep } from "~shared/helpers/map-deep/map-deep";
-import { sanitizeHtml } from "~shared/helpers/sanitize";
-import { SanitizePreset } from "~shared/helpers/sanitize/presets";
-import { showToast } from "~shared/helpers/show-toast";
-import { tText } from "~shared/helpers/translation-functions";
-import { TEMP_BLOCK_ID_PREFIX } from "~modules/content-page/const/content-page.consts";
+} from '~modules/content-page/types/content-pages.types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { mapDeep } from '~shared/helpers/map-deep/map-deep';
+import { sanitizeHtml } from '~shared/helpers/sanitize';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { TEMP_BLOCK_ID_PREFIX } from '~modules/content-page/const/content-page.consts';
 
 export function getContentPageDescriptionHtml(
 	contentPageInfo: Partial<ContentPageInfo> | undefined,
-	sanitizePreset: SanitizePreset = SanitizePreset.link,
+	sanitizePreset: SanitizePreset = SanitizePreset.link
 ): string | null {
 	const descriptionHtml = contentPageInfo?.description_state
 		? contentPageInfo?.description_state.toHTML()
@@ -35,7 +35,7 @@ export function getContentPageDescriptionHtml(
  * @param blockConfigs
  */
 export function convertRichTextEditorStatesToHtml(
-	blockConfigs: ContentBlockConfig[],
+	blockConfigs: ContentBlockConfig[]
 ): ContentBlockConfig[] {
 	return mapDeep(
 		blockConfigs,
@@ -44,15 +44,15 @@ export function convertRichTextEditorStatesToHtml(
 			if (String(key).endsWith(RichEditorStateKey)) {
 				const htmlKey: string = String(key).substring(
 					0,
-					String(key).length - RichEditorStateKey.length,
+					String(key).length - RichEditorStateKey.length
 				);
 				let htmlFromRichTextEditor: string | null = null;
 				if (value?.toHTML && isFunction(value.toHTML)) {
 					htmlFromRichTextEditor = value.toHTML();
 				}
 				obj[htmlKey] = sanitizeHtml(
-					htmlFromRichTextEditor || obj[htmlKey] || "",
-					SanitizePreset.full,
+					htmlFromRichTextEditor || obj[htmlKey] || '',
+					SanitizePreset.full
 				);
 			} else if (!isPlainObject(value) && !isArray(value)) {
 				obj[key] = value;
@@ -62,12 +62,12 @@ export function convertRichTextEditorStatesToHtml(
 				obj[key] = [];
 			}
 		},
-		(key: string | number) => String(key).endsWith(RichEditorStateKey),
+		(key: string | number) => String(key).endsWith(RichEditorStateKey)
 	);
 }
 
 export function convertDbContentPagesToContentPageInfos(
-	dbContentPages: DbContentPage[] | null,
+	dbContentPages: DbContentPage[] | null
 ): ContentPageInfo[] | null {
 	if (!dbContentPages) {
 		return dbContentPages;
@@ -76,18 +76,16 @@ export function convertDbContentPagesToContentPageInfos(
 }
 
 export function convertDbContentPageToContentPageInfo(
-	dbContentPage: DbContentPage,
+	dbContentPage: DbContentPage
 ): ContentPageInfo {
 	return {
 		...dbContentPage,
-		content_blocks: convertDbContentBlockToContentBlockConfig(
-			dbContentPage.content_blocks,
-		),
+		content_blocks: convertDbContentBlockToContentBlockConfig(dbContentPage.content_blocks),
 	};
 }
 
 export function convertDbContentBlockToContentBlockConfig(
-	contentBlocks: DbContentBlock[],
+	contentBlocks: DbContentBlock[]
 ): ContentBlockConfig[] {
 	const sortedContentBlocks = sortBy(contentBlocks, (c) => c.position);
 
@@ -97,22 +95,16 @@ export function convertDbContentBlockToContentBlockConfig(
 			const configForType = CONTENT_BLOCK_CONFIG_MAP[type as ContentBlockType];
 			if (!configForType) {
 				console.error(
-					new CustomError(
-						"Failed to find content block config for type",
-						null,
-						{
-							type,
-							contentBlock,
-							CONTENT_BLOCK_CONFIG_MAP,
-						},
-					),
+					new CustomError('Failed to find content block config for type', null, {
+						type,
+						contentBlock,
+						CONTENT_BLOCK_CONFIG_MAP,
+					})
 				);
 				showToast({
-					title: tText(
-						"modules/admin/content-page/helpers/get-published-state___error",
-					),
+					title: tText('modules/admin/content-page/helpers/get-published-state___error'),
 					description: tText(
-						"modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina",
+						'modules/admin/content-page/helpers/get-published-state___er-ging-iets-mis-bij-het-laden-van-de-pagina'
 					),
 					type: ToastType.ERROR,
 				});
@@ -140,12 +132,12 @@ export function convertDbContentBlockToContentBlockConfig(
 					},
 				},
 			} as ContentBlockConfig;
-		}),
+		})
 	);
 }
 
 export function convertContentPageInfoToDbContentPage(
-	contentPageInfo: Partial<ContentPageInfo> | undefined,
+	contentPageInfo: Partial<ContentPageInfo> | undefined
 ): DbContentPage | undefined {
 	if (!contentPageInfo) {
 		return undefined;
@@ -153,20 +145,20 @@ export function convertContentPageInfoToDbContentPage(
 	const dbContentPage = {
 		...contentPageInfo,
 		description: getContentPageDescriptionHtml(contentPageInfo),
-		content_blocks: convertRichTextEditorStatesToHtml(
-			contentPageInfo.content_blocks || [],
-		).map((contentBlock): DbContentBlock => {
-			return {
-				name: contentBlock.name,
-				id: contentBlock.unsaved ? undefined : contentBlock.id,
-				anchor: contentBlock.anchor,
-				type: contentBlock.type,
-				errors: contentBlock.errors,
-				position: contentBlock.position,
-				block: contentBlock.block.state,
-				components: contentBlock.components.state,
-			};
-		}),
+		content_blocks: convertRichTextEditorStatesToHtml(contentPageInfo.content_blocks || []).map(
+			(contentBlock): DbContentBlock => {
+				return {
+					name: contentBlock.name,
+					id: contentBlock.unsaved ? undefined : contentBlock.id,
+					anchor: contentBlock.anchor,
+					type: contentBlock.type,
+					errors: contentBlock.errors,
+					position: contentBlock.position,
+					block: contentBlock.block.state,
+					components: contentBlock.components.state,
+				};
+			}
+		),
 	} as DbContentPage;
 	delete dbContentPage.description_state;
 	return dbContentPage;

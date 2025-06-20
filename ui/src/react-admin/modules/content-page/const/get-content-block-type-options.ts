@@ -51,9 +51,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.MediaPlayer,
 		},
 		{
-			label: tText(
-				'admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'
-			),
+			label: tText('admin/content-block/content-block___media-speler-met-titel-tekst-en-knop'),
 			value: ContentBlockType.MediaPlayerTitleTextButton,
 		},
 		{
@@ -125,9 +123,7 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.CardsWithoutDescription,
 		},
 		{
-			label: tText('admin/content-block/content-block___image-text-background', {}, [
-				HET_ARCHIEF,
-			]),
+			label: tText('admin/content-block/content-block___image-text-background', {}, [HET_ARCHIEF]),
 			value: ContentBlockType.HetArchiefImageTextBackground,
 		},
 		{
@@ -171,11 +167,9 @@ export const GET_CONTENT_BLOCK_TYPE_OPTIONS: () => SelectOption<string>[] = () =
 			value: ContentBlockType.ContentEncloseGrid,
 		},
 		{
-			label: tText(
-				'modules/content-page/const/get-content-block-type-options___breadcrumbs',
-				{},
-				[HET_ARCHIEF]
-			),
+			label: tText('modules/content-page/const/get-content-block-type-options___breadcrumbs', {}, [
+				HET_ARCHIEF,
+			]),
 			value: ContentBlockType.Breadcrumbs,
 		},
 	];

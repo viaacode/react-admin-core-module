@@ -132,9 +132,7 @@ export const MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG = (position = 0): Conte
 				),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			align: ALIGN_FIELD(
-				tText('admin/content-block/helpers/generators/defaults___uitlijning')
-			),
+			align: ALIGN_FIELD(tText('admin/content-block/helpers/generators/defaults___uitlijning')),
 		},
 	},
 	block: {

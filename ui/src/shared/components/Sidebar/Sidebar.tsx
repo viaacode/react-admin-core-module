@@ -27,9 +27,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
 			(!!item.location && item.location === location.pathname && !item.exact) ||
-			(!!item.location &&
-				item.location === location.pathname + location.search &&
-				!!item.exact)
+			(!!item.location && item.location === location.pathname + location.search && !!item.exact)
 		);
 	};
 
@@ -41,8 +39,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 		if (!navItem.location) {
 			console.error(
 				JSON.stringify({
-					message:
-						'Failed to correctly render navigation item because location is undefined',
+					message: 'Failed to correctly render navigation item because location is undefined',
 					additionalInfo: { navItem, index, isSubLink },
 				})
 			);
@@ -70,15 +67,9 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 		const renderedNavItems: ReactElement[] = flatten(
 			(navItems || []).map((navItem, itemIndex): ReactElement[] => [
 				renderNavigationItem(navItem, itemIndex, false),
-				...(navItem.subLinks || []).map(
-					(subLinkItem: NavigationItemInfo, subItemIndex: number) => {
-						return renderNavigationItem(
-							subLinkItem,
-							`${itemIndex}-${subItemIndex}`,
-							true
-						);
-					}
-				),
+				...(navItem.subLinks || []).map((subLinkItem: NavigationItemInfo, subItemIndex: number) => {
+					return renderNavigationItem(subLinkItem, `${itemIndex}-${subItemIndex}`, true);
+				}),
 			])
 		);
 		return <>{renderedNavItems}</>;

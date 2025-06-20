@@ -106,9 +106,7 @@ export const CTAS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			},
 			backgroundColor: BACKGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/ctas___achtergrond-kleur'),
-				isAvo()
-					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
-					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 		},
 	},

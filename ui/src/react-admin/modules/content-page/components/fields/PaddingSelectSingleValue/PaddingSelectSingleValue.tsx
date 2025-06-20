@@ -17,15 +17,11 @@ export const PaddingSelectSingleValue: FunctionComponent<PaddingSelectSingleValu
 	const generateOptions = () =>
 		[
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___geen'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___geen'),
 				value: 'none',
 			},
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___klein'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___klein'),
 				value: 'small',
 			},
 			{
@@ -35,9 +31,7 @@ export const PaddingSelectSingleValue: FunctionComponent<PaddingSelectSingleValu
 				value: 'medium',
 			},
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___groot'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___groot'),
 				value: 'large',
 			},
 			{

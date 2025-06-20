@@ -1,12 +1,12 @@
-import { FormGroup } from "@viaa/avo2-components";
-import type { ContentPickerType } from "@viaa/avo2-types";
-import { noop } from "lodash-es";
-import type { FunctionComponent } from "react";
-import React, { useEffect } from "react";
-import type { ActionMeta } from "react-select";
-import ReactSelect from "react-select";
+import { FormGroup } from '@viaa/avo2-components';
+import type { ContentPickerType } from '@viaa/avo2-types';
+import { noop } from 'lodash-es';
+import type { FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
+import type { ActionMeta } from 'react-select';
+import ReactSelect from 'react-select';
 
-import { useGetMaintainersByContent } from "~shared/components/MaintainerSelect/hooks/useGetMaintainersByContent";
+import { useGetMaintainersByContent } from '~shared/components/MaintainerSelect/hooks/useGetMaintainersByContent';
 
 export interface MaintainerSelectProps {
 	label: string | undefined;
@@ -46,7 +46,7 @@ export const MaintainerSelect: FunctionComponent<MaintainerSelectProps> = ({
 			| ContentPickerType.COLLECTION
 			| ContentPickerType.BUNDLE
 			| ContentPickerType.ASSIGNMENT,
-		contentItemId as string,
+		contentItemId as string
 	);
 	const maintainerOptions = [
 		...(extraSelectOptions || []),
@@ -66,37 +66,30 @@ export const MaintainerSelect: FunctionComponent<MaintainerSelectProps> = ({
 
 	const handleSelectionChanged = (
 		newValue: { label: string; value: string },
-		actionMeta: ActionMeta<{ label: string; value: string }>,
+		actionMeta: ActionMeta<{ label: string; value: string }>
 	) => {
-		if (actionMeta.action === "deselect-option") {
+		if (actionMeta.action === 'deselect-option') {
 			onChange(null);
-		} else if (actionMeta.action === "select-option") {
+		} else if (actionMeta.action === 'select-option') {
 			onChange(newValue.value);
-		} else if (actionMeta.action === "clear") {
+		} else if (actionMeta.action === 'clear') {
 			onChange(null);
 		}
 	};
 
 	return (
-		<FormGroup
-			error={error}
-			label={label}
-			required={required}
-			className="c-maintainer-select"
-		>
+		<FormGroup error={error} label={label} required={required} className="c-maintainer-select">
 			<ReactSelect<{ label: string; value: string }, true>
 				classNamePrefix="c-select"
 				options={maintainerOptions}
-				value={
-					maintainerOptions.find((option) => value === option.value) || null
-				}
+				value={maintainerOptions.find((option) => value === option.value) || null}
 				isLoading={isFetching}
 				isClearable
 				placeholder={placeholder}
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				onChange={handleSelectionChanged as any}
-				noOptionsMessage={() => "Geen opties"}
-				loadingMessage={() => "Bezig met laden"}
+				noOptionsMessage={() => 'Geen opties'}
+				loadingMessage={() => 'Bezig met laden'}
 			/>
 		</FormGroup>
 	);

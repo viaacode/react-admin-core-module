@@ -87,9 +87,7 @@ export const CARDS_WITHOUT_DESCRIPTION_BLOCK_CONFIG = (position = 0): ContentBlo
 				tText(
 					'react-admin/modules/content-page/components/blocks/block-cards-without-description/block-cards-without-description___achtergrondkleur-van-de-card'
 				),
-				isAvo()
-					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
-					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			linkAction: {
 				label: tText(

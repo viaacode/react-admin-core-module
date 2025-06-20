@@ -1,12 +1,12 @@
-import { compact, isArray, isNil, set, without } from "lodash-es";
-import type { LomScheme } from "~shared/consts/lom-scheme.enum";
+import { compact, isArray, isNil, set, without } from 'lodash-es';
+import type { LomScheme } from '~shared/consts/lom-scheme.enum';
 
-export const NULL_FILTER = "null";
+export const NULL_FILTER = 'null';
 
 export function getQueryFilter(
 	query: string | undefined,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	getQueryFilterObj: (queryWildcard: string, query: string) => any[],
+	getQueryFilterObj: (queryWildcard: string, query: string) => any[]
 ) {
 	if (query) {
 		return [
@@ -21,7 +21,7 @@ export function getQueryFilter(
 export function getDateRangeFilters<T>(
 	filters: T,
 	props: (keyof T)[],
-	nestedProps?: string[],
+	nestedProps?: string[]
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	return setNestedValues<T>(
@@ -36,14 +36,14 @@ export function getDateRangeFilters<T>(
 					...(value?.lte ? { _lte: value.lte } : null),
 				},
 			};
-		},
+		}
 	);
 }
 
 export function getBooleanFilters<T>(
 	filters: T,
 	props: (keyof T)[],
-	nestedProps?: string[],
+	nestedProps?: string[]
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	return setNestedValues<T>(
@@ -63,13 +63,13 @@ export function getBooleanFilters<T>(
 			}
 			orFilters.push(
 				...without(value, NULL_FILTER).map((val) => ({
-					[prop]: { _eq: val === "true" },
-				})),
+					[prop]: { _eq: val === 'true' },
+				}))
 			);
 			return {
 				_or: orFilters,
 			};
-		},
+		}
 	);
 }
 
@@ -83,7 +83,7 @@ export function getBooleanFilters<T>(
 export function getMultiOptionFilters<T>(
 	filters: T,
 	props: (keyof T)[],
-	nestedProps?: string[],
+	nestedProps?: string[]
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	return setNestedValues(
@@ -101,7 +101,7 @@ export function getMultiOptionFilters<T>(
 				};
 			}
 			return { [prop]: { _in: value } };
-		},
+		}
 	);
 }
 
@@ -119,16 +119,16 @@ export function getMultiOptionsFilters<T>(
 	props: (keyof T)[],
 	nestedReferenceTables: string[],
 	labelPaths?: string[],
-	keyIn?: boolean,
+	keyIn?: boolean
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	return compact(
 		props.map((prop: keyof T, index: number) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const filterValues = (filters as any)[prop];
-			const nestedPathParts: string[] = nestedReferenceTables[index].split(".");
+			const nestedPathParts: string[] = nestedReferenceTables[index].split('.');
 			const referenceTable: string | null = nestedPathParts.pop() || null;
-			const nestedPath: string = nestedPathParts.join(".");
+			const nestedPath: string = nestedPathParts.join('.');
 			const labelPath: string | null = labelPaths ? labelPaths[index] : null;
 
 			if (
@@ -158,32 +158,30 @@ export function getMultiOptionsFilters<T>(
 			if (!filterValues.includes(NULL_FILTER) || filterValues.length > 1) {
 				// other values are selected
 				// selected values => referenceTable.props in selected values array
-				otherValuesFilters = without(filterValues, NULL_FILTER).map(
-					(value: string) => {
-						if (keyIn) {
-							if (labelPath) {
-								return {
-									[referenceTable]: {
-										[labelPath]: { _in: value },
-									},
-								};
-							}
-							return {
-								[referenceTable]: { _in: value },
-							};
-						}
+				otherValuesFilters = without(filterValues, NULL_FILTER).map((value: string) => {
+					if (keyIn) {
 						if (labelPath) {
 							return {
 								[referenceTable]: {
-									[labelPath]: { _has_keys_any: value },
+									[labelPath]: { _in: value },
 								},
 							};
 						}
 						return {
-							[referenceTable]: { _has_keys_any: value },
+							[referenceTable]: { _in: value },
 						};
-					},
-				);
+					}
+					if (labelPath) {
+						return {
+							[referenceTable]: {
+								[labelPath]: { _has_keys_any: value },
+							},
+						};
+					}
+					return {
+						[referenceTable]: { _has_keys_any: value },
+					};
+				});
 			}
 
 			if (nullFilters.length === 1 && otherValuesFilters.length === 0) {
@@ -203,7 +201,7 @@ export function getMultiOptionsFilters<T>(
 			}
 
 			return [...nullFilters, ...otherValuesFilters];
-		}),
+		})
 	);
 }
 
@@ -219,7 +217,7 @@ function setNestedValues<T>(
 	props: (keyof T)[],
 	nestedProps: string[],
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	getValue: (prop: string, value: any) => any,
+	getValue: (prop: string, value: any) => any
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	return compact(
@@ -230,11 +228,8 @@ function setNestedValues<T>(
 			if (!isNil(value) && (!isArray(value) || value.length)) {
 				const nestedProp = nestedProps ? nestedProps[index] : String(prop);
 
-				const lastProp = nestedProp.split(".").pop() as string;
-				const path = nestedProp.substring(
-					0,
-					nestedProp.length - lastProp.length - 1,
-				);
+				const lastProp = nestedProp.split('.').pop() as string;
+				const path = nestedProp.substring(0, nestedProp.length - lastProp.length - 1);
 
 				if (path) {
 					const response = {};
@@ -244,23 +239,20 @@ function setNestedValues<T>(
 				return getValue(lastProp, value);
 			}
 			return null;
-		}),
+		})
 	);
 }
 
 export function getLomFilter(
 	selectedFilterOptions: string[] | undefined,
-	scheme: LomScheme,
+	scheme: LomScheme
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any[] {
 	if (!selectedFilterOptions || selectedFilterOptions.length === 0) {
 		return [];
 	}
-	const nonNullFilterOptions = selectedFilterOptions.filter(
-		(level) => level !== NULL_FILTER,
-	);
-	const hasNullFilter =
-		nonNullFilterOptions.length !== selectedFilterOptions.length;
+	const nonNullFilterOptions = selectedFilterOptions.filter((level) => level !== NULL_FILTER);
+	const hasNullFilter = nonNullFilterOptions.length !== selectedFilterOptions.length;
 
 	const nonNullFilter = {
 		loms: {

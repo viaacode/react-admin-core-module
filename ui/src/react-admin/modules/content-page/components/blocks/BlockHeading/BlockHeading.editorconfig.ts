@@ -53,9 +53,7 @@ export const HEADING_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
-			align: ALIGN_FIELD(
-				tText('admin/content-block/helpers/generators/defaults___uitlijning')
-			),
+			align: ALIGN_FIELD(tText('admin/content-block/helpers/generators/defaults___uitlijning')),
 		},
 	},
 	block: {

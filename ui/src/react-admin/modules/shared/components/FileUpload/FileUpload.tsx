@@ -1,28 +1,21 @@
-import type { IconName } from "@viaa/avo2-components";
-import {
-	Blankslate,
-	Button,
-	Flex,
-	FlexItem,
-	Icon,
-	Spacer,
-} from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import { compact, isString } from "lodash-es";
-import { parse } from "query-string";
-import type { FunctionComponent } from "react";
-import React, { useState } from "react";
-import { ToastType } from "~core/config/config.types";
-import { showToast } from "~shared/helpers/show-toast";
-import { tHtml, tText } from "~shared/helpers/translation-functions";
-import { AssetsService } from "~shared/services/assets-service/assets.service";
-import { CustomError } from "../../helpers/custom-error";
-import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from "../../helpers/files";
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import { Loader } from "../Loader/Loader";
+import type { IconName } from '@viaa/avo2-components';
+import { Blankslate, Button, Flex, FlexItem, Icon, Spacer } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { compact, isString } from 'lodash-es';
+import { parse } from 'query-string';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
+import { ToastType } from '~core/config/config.types';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AssetsService } from '~shared/services/assets-service/assets.service';
+import { CustomError } from '../../helpers/custom-error';
+import { getUrlInfo, isPhoto, isVideo, PHOTO_TYPES } from '../../helpers/files';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import { Loader } from '../Loader/Loader';
 
-import "./FileUpload.scss";
-import { getFileImageDimensions } from "~shared/helpers/get-file-image-dimensions";
+import './FileUpload.scss';
+import { getFileImageDimensions } from '~shared/helpers/get-file-image-dimensions';
 
 export interface FileUploadProps {
 	icon?: IconName;
@@ -89,11 +82,9 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 					: [];
 				if (notAllowedFiles.length) {
 					showToast({
-						title: tText(
-							"modules/admin/shared/components/file-upload/file-upload___error",
-						),
+						title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 						description: tText(
-							"shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten",
+							'shared/components/file-upload/file-upload___een-geselecteerde-bestand-is-niet-toegelaten'
 						),
 						type: ToastType.ERROR,
 					});
@@ -103,21 +94,17 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 
 				if (imageDimensions?.width && imageDimensions?.height) {
 					// Image must have fixed dimensions
-					const dimensions = await Promise.all(
-						files.map((file) => getFileImageDimensions(file)),
-					);
+					const dimensions = await Promise.all(files.map((file) => getFileImageDimensions(file)));
 					const notAllowedDimensions = dimensions.filter(
-						(dim) =>
-							dim.width !== imageDimensions.width ||
-							dim.height !== imageDimensions.height,
+						(dim) => dim.width !== imageDimensions.width || dim.height !== imageDimensions.height
 					);
 					if (notAllowedDimensions.length) {
 						showToast({
 							title: tText(
-								"modules/shared/components/file-upload/file-upload___foutieve-afmetingen",
+								'modules/shared/components/file-upload/file-upload___foutieve-afmetingen'
 							),
 							description: tText(
-								"modules/shared/components/file-upload/file-upload___afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
+								'modules/shared/components/file-upload/file-upload___afbeelding-moet-exact-1920-x-385-pixels-groot-zijn'
 							),
 							type: ToastType.ERROR,
 						});
@@ -130,39 +117,31 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				setIsProcessing(true);
 				const uploadedUrls: string[] = [];
 				for (let i = 0; i < (allowMulti ? files.length : 1); i += 1) {
-					uploadedUrls.push(
-						await AssetsService.uploadFile(files[i], assetType, ownerId),
-					);
+					uploadedUrls.push(await AssetsService.uploadFile(files[i], assetType, ownerId));
 				}
-				onChange(
-					allowMulti ? [...(urls || []), ...uploadedUrls] : uploadedUrls,
-				);
+				onChange(allowMulti ? [...(urls || []), ...uploadedUrls] : uploadedUrls);
 				setIsProcessing(false);
 				return true;
 			}
 		} catch (err) {
 			console.error(
-				new CustomError("Failed to upload files in FileUpload component", err, {
+				new CustomError('Failed to upload files in FileUpload component', err, {
 					files,
-				}),
+				})
 			);
 			if (files && files.length > 1 && allowMulti) {
 				showToast({
-					title: tText(
-						"modules/admin/shared/components/file-upload/file-upload___error",
-					),
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 					description: tText(
-						"shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt",
+						'shared/components/file-upload/file-upload___het-uploaden-van-de-bestanden-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			} else {
 				showToast({
-					title: tText(
-						"modules/admin/shared/components/file-upload/file-upload___error",
-					),
+					title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 					description: tText(
-						"shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt",
+						'shared/components/file-upload/file-upload___het-uploaden-van-het-bestand-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
@@ -179,7 +158,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 		}
 
 		try {
-			if (assetType === "ZENDESK_ATTACHMENT") {
+			if (assetType === 'ZENDESK_ATTACHMENT') {
 				// We don't manage zendesk attachments
 				onChange([]);
 				return;
@@ -198,13 +177,11 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				onChange([]);
 			}
 		} catch (err) {
-			console.error(new CustomError("Failed to delete asset", err, { urls }));
+			console.error(new CustomError('Failed to delete asset', err, { urls }));
 			showToast({
-				title: tText(
-					"modules/admin/shared/components/file-upload/file-upload___error",
-				),
+				title: tText('modules/admin/shared/components/file-upload/file-upload___error'),
 				description: tText(
-					"shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt",
+					'shared/components/file-upload/file-upload___het-verwijderen-van-het-bestand-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -223,13 +200,9 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			<Button
 				className="a-delete-button"
 				type="danger-hover"
-				icon={"trash2" as IconName}
-				ariaLabel={tText(
-					"shared/components/file-upload/file-upload___verwijder-bestand",
-				)}
-				title={tText(
-					"shared/components/file-upload/file-upload___verwijder-bestand",
-				)}
+				icon={'trash2' as IconName}
+				ariaLabel={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
+				title={tText('shared/components/file-upload/file-upload___verwijder-bestand')}
 				autoHeight
 				disabled={isProcessing}
 				onClick={() => openDeleteModal(url)}
@@ -246,10 +219,7 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 			if (isPhoto(url)) {
 				return (
 					<Spacer margin="bottom-small" key={url}>
-						<div
-							className="a-upload-media-preview"
-							style={{ backgroundImage: `url(${url})` }}
-						>
+						<div className="a-upload-media-preview" style={{ backgroundImage: `url(${url})` }}>
 							{renderDeleteButton(url)}
 						</div>
 					</Spacer>
@@ -267,26 +237,25 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				);
 			}
 			let fileName: string | undefined;
-			if (url.includes("?")) {
-				const queryParams = parse(url.split("?").pop() || "");
+			if (url.includes('?')) {
+				const queryParams = parse(url.split('?').pop() || '');
 				if (queryParams?.name && isString(queryParams.name)) {
 					fileName = queryParams.name as string;
 				}
 			}
 			if (!fileName && url) {
-				const urlInfo = getUrlInfo(url.split("?")[0]);
+				const urlInfo = getUrlInfo(url.split('?')[0]);
 				fileName = `${urlInfo.fileName.substring(
 					0,
-					urlInfo.fileName.length -
-						"-00000000-0000-0000-0000-000000000000".length,
+					urlInfo.fileName.length - '-00000000-0000-0000-0000-000000000000'.length
 				)}.${urlInfo.extension}`;
 			}
 
 			return (
 				<Spacer margin="bottom-small" key={url}>
 					<Blankslate
-						title={fileName || ""}
-						icon={"file" as IconName}
+						title={fileName || ''}
+						icon={'file' as IconName}
 						className="a-upload-file-preview"
 					>
 						{renderDeleteButton(url)}
@@ -313,12 +282,8 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 								label={
 									label ||
 									(allowMulti
-										? tText(
-												"shared/components/file-upload/file-upload___selecteer-bestanden",
-										  )
-										: tText(
-												"shared/components/file-upload/file-upload___selecteer-een-bestand",
-										  ))
+										? tText('shared/components/file-upload/file-upload___selecteer-bestanden')
+										: tText('shared/components/file-upload/file-upload___selecteer-een-bestand'))
 								}
 								ariaLabel={label}
 								type="secondary"
@@ -328,19 +293,15 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 							{!onButtonClicked && (
 								<input
 									type="file"
-									title={tText(
-										"shared/components/file-upload/file-upload___kies-een-bestand",
-									)}
+									title={tText('shared/components/file-upload/file-upload___kies-een-bestand')}
 									multiple={allowMulti}
 									onChange={(evt) => {
 										!!evt.target.files &&
-											uploadSelectedFile(Array.from(evt.target.files)).then(
-												(uploadSucceeded) => {
-													if (!uploadSucceeded) {
-														evt.target.value = "";
-													}
-												},
-											);
+											uploadSelectedFile(Array.from(evt.target.files)).then((uploadSucceeded) => {
+												if (!uploadSucceeded) {
+													evt.target.value = '';
+												}
+											});
 									}}
 								/>
 							)}
@@ -351,15 +312,15 @@ const FileUpload: FunctionComponent<FileUploadProps> = ({
 				))}
 			<ConfirmModal
 				title={tText(
-					"shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen",
+					'shared/components/file-upload/file-upload___ben-je-zeker-dat-je-dit-bestand-wil-verwijderen'
 				)}
 				body={tHtml(
-					"shared/components/file-upload/file-upload___opgelet-deze-actie-kan-niet-ongedaan-gemaakt-worden",
+					'shared/components/file-upload/file-upload___opgelet-deze-actie-kan-niet-ongedaan-gemaakt-worden'
 				)}
 				isOpen={isDeleteModalOpen}
 				onClose={closeDeleteModal}
 				deleteObjectCallback={async () => {
-					await deleteUploadedFile(urlToDelete || "");
+					await deleteUploadedFile(urlToDelete || '');
 				}}
 			/>
 		</div>

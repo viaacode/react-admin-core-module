@@ -89,12 +89,12 @@ export const MultiEducationalOrganisationSelectModal: FunctionComponent<
 															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___items-geselecteerd',
 															{},
 															[AVO]
-													  )
+														)
 													: tText(
 															'shared/components/multi-educational-organisation-select-modal/multi-educational-organisation-select-modal___item-geselecteerd',
 															{},
 															[AVO]
-													  )
+														)
 											}`,
 										},
 									]}

@@ -145,9 +145,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			}),
 			buttonLabel: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___algemene-knop-tekst'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___algemene-knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
@@ -157,9 +155,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			}),
 			buttonAction: {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___algemene-knop-actie'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___algemene-knop-actie'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
 			searchQuery: {
@@ -194,9 +190,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 			},
 			searchQueryLimit: {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___zoekresultaten-limiet'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___zoekresultaten-limiet'),
 				editorType: ContentBlockEditor.MultiRange,
 				editorProps: {
 					min: 0,
@@ -222,18 +216,14 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				tText('admin/content-block/helpers/generators/media-grid___cta-titel-kleur')
 			),
 			ctaTitleSize: {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___cta-titel-grootte'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel-grootte'),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_FULL_HEADING_TYPE_OPTIONS(),
 				},
 			},
 			ctaContent: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___cta-omschrijving'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___cta-omschrijving'),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
@@ -246,9 +236,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			}),
 			ctaButtonAltTitle: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/media-grid___alt-button-title-text'
-				),
+				label: tText('admin/content-block/helpers/generators/media-grid___alt-button-title-text'),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
@@ -272,9 +260,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			},
 			ctaBackgroundColor: BACKGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'),
-				isAvo()
-					? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1]
-					: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			ctaBackgroundImage: {
 				label: tText(

@@ -1,28 +1,26 @@
-import { stringifyUrl } from "query-string";
-import { AdminConfigManager } from "~core/config";
-import type { Locale } from "~modules/translations/translations.core.types";
+import { stringifyUrl } from 'query-string';
+import { AdminConfigManager } from '~core/config';
+import type { Locale } from '~modules/translations/translations.core.types';
 
-import { CustomError } from "~shared/helpers/custom-error";
-import { fetchWithLogoutJson } from "~shared/helpers/fetch-with-logout";
-import { getAdminCoreApiUrl } from "~shared/helpers/get-proxy-url-from-admin-core-config";
-import type { NavigationItem, NavigationItemUpdate } from "./navigation.types";
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
+import type { NavigationItem, NavigationItemUpdate } from './navigation.types';
 
 export class NavigationService {
 	private static getBaseUrl(): string {
 		return `${getAdminCoreApiUrl()}/admin/navigations`;
 	}
 
-	public static async fetchNavigationItemById(
-		id: string,
-	): Promise<NavigationItem | null> {
+	public static async fetchNavigationItemById(id: string): Promise<NavigationItem | null> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: `${NavigationService.getBaseUrl()}/items/${id}`,
-				}),
+				})
 			);
 		} catch (err) {
-			throw new CustomError("Failed to fetch navigation item by id", err, {
+			throw new CustomError('Failed to fetch navigation item by id', err, {
 				id,
 			});
 		}
@@ -33,23 +31,22 @@ export class NavigationService {
 		languages?: Locale[],
 		searchTerm?: string,
 		orderProperty?: string,
-		orderDirection?: string,
+		orderDirection?: string
 	): Promise<NavigationItem[]> {
 		try {
 			return fetchWithLogoutJson(
 				stringifyUrl({
-					url:
-						NavigationService.getBaseUrl() + (placement ? `/${placement}` : ""),
+					url: NavigationService.getBaseUrl() + (placement ? `/${placement}` : ''),
 					query: {
-						languages: languages?.length ? languages.join(",") : undefined,
+						languages: languages?.length ? languages.join(',') : undefined,
 						searchTerm,
 						orderProperty,
 						orderDirection,
 					},
-				}),
+				})
 			);
 		} catch (err) {
-			throw new CustomError("Failed to fetch navigation bar items", err, {
+			throw new CustomError('Failed to fetch navigation bar items', err, {
 				placement,
 			});
 		}
@@ -60,31 +57,29 @@ export class NavigationService {
 			return fetchWithLogoutJson(
 				stringifyUrl({
 					url: NavigationService.getBaseUrl(),
-				}),
+				})
 			);
 		} catch (err) {
-			throw new CustomError("Failed to fetch navigation bars", err);
+			throw new CustomError('Failed to fetch navigation bars', err);
 		}
 	}
 
 	public static async insertNavigationItem(
-		navigationItem: Partial<NavigationItem>,
+		navigationItem: Partial<NavigationItem>
 	): Promise<number> {
 		try {
 			return fetchWithLogoutJson(`${NavigationService.getBaseUrl()}/items`, {
-				method: "PUT",
+				method: 'PUT',
 				body: JSON.stringify(navigationItem),
 			});
 		} catch (err) {
-			throw new CustomError("Failed to insert navigation item", err, {
+			throw new CustomError('Failed to insert navigation item', err, {
 				navigationItem,
 			});
 		}
 	}
 
-	public static async updateNavigationItems(
-		navigationItems: NavigationItem[],
-	): Promise<void> {
+	public static async updateNavigationItems(navigationItems: NavigationItem[]): Promise<void> {
 		try {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const promises: Promise<any>[] = navigationItems.map((navigationItem) => {
@@ -107,18 +102,16 @@ export class NavigationService {
 						url: `${NavigationService.getBaseUrl()}/items/${navigationItem.id}`,
 					}),
 					{
-						method: "PATCH",
+						method: 'PATCH',
 						body: JSON.stringify(navigationItemUpdate),
-					},
+					}
 				);
 			});
 
 			await Promise.all(promises);
-			await AdminConfigManager.getConfig().services.queryCache.clear(
-				"clearNavElementsCache",
-			);
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 		} catch (err) {
-			throw new CustomError("Failed to update navigation items", err, {
+			throw new CustomError('Failed to update navigation items', err, {
 				navigationItems,
 			});
 		}
@@ -131,14 +124,12 @@ export class NavigationService {
 					url: `${NavigationService.getBaseUrl()}/items/${id}`,
 				}),
 				{
-					method: "DELETE",
-				},
+					method: 'DELETE',
+				}
 			);
-			await AdminConfigManager.getConfig().services.queryCache.clear(
-				"clearNavElementsCache",
-			);
+			await AdminConfigManager.getConfig().services.queryCache.clear('clearNavElementsCache');
 		} catch (err) {
-			throw new CustomError("Failed to delete navigation item by id", err, {
+			throw new CustomError('Failed to delete navigation item by id', err, {
 				id,
 			});
 		}

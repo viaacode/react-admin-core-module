@@ -1,10 +1,10 @@
-import type { DefaultProps } from "@viaa/avo2-components";
-import { Accordion } from "@viaa/avo2-components";
-import clsx from "clsx";
-import type { FunctionComponent } from "react";
-import React, { useState } from "react";
+import type { DefaultProps } from '@viaa/avo2-components';
+import { Accordion } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import type { FunctionComponent } from 'react';
+import React, { useState } from 'react';
 
-import { BlockRichText } from "../BlockRichText/BlockRichText";
+import { BlockRichText } from '../BlockRichText/BlockRichText';
 
 export interface BlockAccordionsProps extends DefaultProps {
 	elements: { title: string; content: string }[];
@@ -31,7 +31,7 @@ export const BlockAccordions: FunctionComponent<BlockAccordionsProps> = ({
 
 	// Render
 	return (
-		<div className={clsx(className, "c-block-accordions")}>
+		<div className={clsx(className, 'c-block-accordions')}>
 			{elements.map(({ content, title }, index) => {
 				const key = generateKey(index);
 

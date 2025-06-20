@@ -59,9 +59,7 @@ export const UITGEKLAARD_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (!value) {
 						errorArray.push(
-							tText(
-								'admin/content-block/helpers/generators/uitgeklaard___datum-is-verplicht'
-							)
+							tText('admin/content-block/helpers/generators/uitgeklaard___datum-is-verplicht')
 						);
 					}
 

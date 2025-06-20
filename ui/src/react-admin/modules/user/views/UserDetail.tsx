@@ -158,7 +158,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 						tText('admin/users/views/user-detail___tijdelijke-toegang'),
 						'clock'
 					),
-			  ]
+				]
 			: []),
 		createDropdownMenuItem('edit', tText('admin/users/views/user-detail___bewerken')),
 		createDropdownMenuItem('delete', tText('admin/users/views/user-detail___verwijderen')),
@@ -240,7 +240,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 		return from
 			? `${tText('admin/users/views/user-detail___van')} ${formatDateString(from)} ${tText(
 					'admin/users/views/user-detail___tot'
-			  )} ${formatDateString(until)}`
+				)} ${formatDateString(until)}`
 			: `${tText('admin/users/views/user-detail___tot')} ${formatDateString(until)}`;
 	};
 
@@ -272,11 +272,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 		return (
 			<Container mode="vertical" size="small">
 				<Container mode="horizontal">
-					<Table
-						horizontal
-						variant="invisible"
-						className="c-table_detail-page c-user_detail-page"
-					>
+					<Table horizontal variant="invisible" className="c-table_detail-page c-user_detail-page">
 						<tbody>
 							{renderDetailRow(
 								renderAvatar(storedProfile, { small: false }),
@@ -288,14 +284,8 @@ export const UserDetail: FC<UserDetailProps> = ({
 								['alias', tText('admin/users/views/user-detail___gebruikersnaam')],
 								['title', tText('admin/users/views/user-detail___functie')],
 								['bio', tText('admin/users/views/user-detail___bio')],
-								[
-									'stamboek',
-									tText('admin/users/views/user-detail___stamboek-nummer'),
-								],
-								[
-									'email',
-									tText('admin/users/views/user-detail___primair-email-adres'),
-								],
+								['stamboek', tText('admin/users/views/user-detail___stamboek-nummer')],
+								['email', tText('admin/users/views/user-detail___primair-email-adres')],
 								[
 									'alternativeEmail',
 									tText('admin/users/views/user-detail___secundair-email-adres'),
@@ -306,41 +296,18 @@ export const UserDetail: FC<UserDetailProps> = ({
 								tText('admin/users/views/user-detail___gebruikersgroep')
 							)}
 							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
-								[
-									'createdAt',
-									tText('admin/users/views/user-detail___aangemaakt-op'),
-								],
-								[
-									'updatedAt',
-									tText('admin/users/views/user-detail___aangepast-op'),
-								],
-								[
-									'lastAccessAt',
-									tText('admin/users/views/user-detail___laatste-toegang'),
-								],
+								['createdAt', tText('admin/users/views/user-detail___aangemaakt-op')],
+								['updatedAt', tText('admin/users/views/user-detail___aangepast-op')],
+								['lastAccessAt', tText('admin/users/views/user-detail___laatste-toegang')],
 							])}
 							{renderSimpleDetailRows<Avo.User.CommonUser>(storedProfile, [
-								[
-									'businessCategory',
-									tText('admin/users/views/user-detail___oormerk'),
-								],
-								[
-									'isException',
-									tText('admin/users/views/user-detail___uitzonderingsaccount'),
-								],
+								['businessCategory', tText('admin/users/views/user-detail___oormerk')],
+								['isException', tText('admin/users/views/user-detail___uitzonderingsaccount')],
 								['isBlocked', tText('admin/users/views/user-detail___geblokkeerd')],
 							])}
 							{renderDateDetailRows<Avo.User.CommonUser>(storedProfile, [
-								[
-									'blockedAt',
-									tText('admin/users/views/user-detail___laatst-geblokeerd-op'),
-								],
-								[
-									'unblockedAt',
-									tText(
-										'admin/users/views/user-detail___laatst-gedeblokkeerd-op'
-									),
-								],
+								['blockedAt', tText('admin/users/views/user-detail___laatst-geblokeerd-op')],
+								['unblockedAt', tText('admin/users/views/user-detail___laatst-gedeblokkeerd-op')],
 							])}
 							{renderDetailRow(
 								renderTempAccess(),
@@ -353,19 +320,14 @@ export const UserDetail: FC<UserDetailProps> = ({
 								hasPerm(PermissionName.EDIT_USER_TEMP_ACCESS)
 							)}
 							{renderDetailRow(
-								idpMapsToTagList(
-									Object.keys(storedProfile.idps || {}) as Idp[],
-									'idps'
-								) || '-',
+								idpMapsToTagList(Object.keys(storedProfile.idps || {}) as Idp[], 'idps') || '-',
 								tText('admin/users/views/user-detail___gelinked-aan')
 							)}
 							{renderDetailRow(
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter(
-												(lom) => lom.lom?.scheme === LomSchemeType.structure
-											)
+											.filter((lom) => lom.lom?.scheme === LomSchemeType.structure)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -375,9 +337,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter(
-												(lom) => lom.lom?.scheme === LomSchemeType.theme
-											)
+											.filter((lom) => lom.lom?.scheme === LomSchemeType.theme)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -387,9 +347,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 								stringsToTagList(
 									compact(
 										(storedProfile?.loms || [])
-											.filter(
-												(lom) => lom.lom?.scheme === LomSchemeType.subject
-											)
+											.filter((lom) => lom.lom?.scheme === LomSchemeType.subject)
 											.map((lom) => lom.lom?.label)
 									)
 								) || '-',
@@ -430,9 +388,7 @@ export const UserDetail: FC<UserDetailProps> = ({
 	const renderUserDetailPage = () => {
 		const isBlocked = storedProfile?.isBlocked;
 		const blockButtonTooltip = isBlocked
-			? tText(
-					'admin/users/views/user-detail___laat-deze-gebruiker-terug-toe-op-het-av-o-platform'
-			  )
+			? tText('admin/users/views/user-detail___laat-deze-gebruiker-terug-toe-op-het-av-o-platform')
 			: tText('admin/users/views/user-detail___ban-deze-gebruiker-van-het-av-o-platform');
 		return (
 			<>
@@ -463,15 +419,9 @@ export const UserDetail: FC<UserDetailProps> = ({
 									}}
 								/>
 							)}
-							<a
-								href={getLdapDashboardUrl() || ''}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<a href={getLdapDashboardUrl() || ''} target="_blank" rel="noopener noreferrer">
 								<Button
-									label={tText(
-										'admin/users/views/user-detail___beheer-in-account-manager'
-									)}
+									label={tText('admin/users/views/user-detail___beheer-in-account-manager')}
 									ariaLabel={tText(
 										'admin/users/views/user-detail___open-deze-gebruiker-in-het-account-beheer-dashboard-van-meemoo'
 									)}
@@ -480,10 +430,10 @@ export const UserDetail: FC<UserDetailProps> = ({
 										getLdapDashboardUrl()
 											? tText(
 													'admin/users/views/user-detail___open-deze-gebruiker-in-het-account-beheer-dashboard-van-meemoo'
-											  )
+												)
 											: tText(
 													'admin/users/views/user-detail___deze-gebruiker-is-niet-gelinked-aan-een-archief-account'
-											  )
+												)
 									}
 								/>
 							</a>

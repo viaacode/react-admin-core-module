@@ -1,28 +1,28 @@
-import type { Avo } from "@viaa/avo2-types";
-import { CustomError } from "~shared/helpers/custom-error";
-import { fetchWithLogoutJson } from "~shared/helpers/fetch-with-logout";
-import { getAdminCoreApiUrl } from "~shared/helpers/get-proxy-url-from-admin-core-config";
+import type { Avo } from '@viaa/avo2-types';
+import { CustomError } from '~shared/helpers/custom-error';
+import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
+import { getAdminCoreApiUrl } from '~shared/helpers/get-proxy-url-from-admin-core-config';
 
 export class AssetsService {
 	public static async uploadFile(
 		file: File,
 		assetType: Avo.FileUpload.AssetType,
-		ownerId: string,
+		ownerId: string
 	): Promise<string> {
 		let url: string | undefined;
 		try {
 			url = `${getAdminCoreApiUrl()}/admin/assets/upload`;
 
 			const formData = new FormData();
-			formData.append("ownerId", ownerId);
-			formData.append("filename", file.name);
-			formData.append("mimeType", file.type);
+			formData.append('ownerId', ownerId);
+			formData.append('filename', file.name);
+			formData.append('mimeType', file.type);
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			formData.append("type", assetType as any);
-			formData.append("content", file, file.name);
+			formData.append('type', assetType as any);
+			formData.append('content', file, file.name);
 
 			const data = await fetchWithLogoutJson<Avo.FileUpload.AssetInfo>(url, {
-				method: "POST",
+				method: 'POST',
 				headers: {
 					// 'content-type': 'multipart/form-data',
 				},
@@ -31,7 +31,7 @@ export class AssetsService {
 
 			return data?.url as string;
 		} catch (err) {
-			throw new CustomError("Failed to upload file", err, { file, url });
+			throw new CustomError('Failed to upload file', err, { file, url });
 		}
 	}
 
@@ -46,24 +46,21 @@ export class AssetsService {
 				url: fileUrl,
 			};
 
-			const reply = await fetchWithLogoutJson<{ status: "deleted" } | null>(
-				url,
-				{
-					method: "DELETE",
-					body: JSON.stringify(body),
-				},
-			);
+			const reply = await fetchWithLogoutJson<{ status: 'deleted' } | null>(url, {
+				method: 'DELETE',
+				body: JSON.stringify(body),
+			});
 
-			if (!reply || reply.status !== "deleted") {
+			if (!reply || reply.status !== 'deleted') {
 				throw new CustomError(
-					"Unexpected response from admin/assets/delete endpoint. Expected {status: deleted}",
+					'Unexpected response from admin/assets/delete endpoint. Expected {status: deleted}',
 					null,
-					{ reply, fileUrl },
+					{ reply, fileUrl }
 				);
 			}
 			return;
 		} catch (err) {
-			throw new CustomError("Failed to upload file", err, {
+			throw new CustomError('Failed to upload file', err, {
 				fileUrl,
 				url,
 				body,

@@ -68,9 +68,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				tText('admin/content-block/helpers/generators/hero___titel-kleur', {}, [AVO])
 			),
 			content: TEXT_FIELD(undefined, {
-				label: tText('admin/content-block/helpers/generators/hero___beschrijving', {}, [
-					AVO,
-				]),
+				label: tText('admin/content-block/helpers/generators/hero___beschrijving', {}, [AVO]),
 				editorType: ContentBlockEditor.TextArea,
 				validator: undefined,
 			}),
@@ -82,51 +80,35 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				label: tText('admin/content-block/helpers/generators/hero___knop', {}, [AVO]),
 				fields: {
 					type: {
-						label: tText('admin/content-block/helpers/generators/buttons___type', {}, [
-							AVO,
-						]),
+						label: tText('admin/content-block/helpers/generators/buttons___type', {}, [AVO]),
 						editorType: ContentBlockEditor.Select,
 						editorProps: {
 							options: AdminConfigManager.getConfig().components.buttonTypes(),
 						},
 					},
 					label: TEXT_FIELD(
-						tText(
-							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht',
-							{},
-							[AVO]
-						),
+						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht', {}, [
+							AVO,
+						]),
 						{
-							label: tText(
-								'admin/content-block/helpers/generators/buttons___tekst',
-								{},
-								[AVO]
-							),
+							label: tText('admin/content-block/helpers/generators/buttons___tekst', {}, [AVO]),
 							editorType: ContentBlockEditor.TextInput,
 						}
 					),
 					altTitle: TEXT_FIELD(undefined, {
-						label: tText(
-							'admin/content-block/helpers/generators/hero___alt-title-text'
-						),
+						label: tText('admin/content-block/helpers/generators/hero___alt-title-text'),
 						editorType: ContentBlockEditor.TextInput,
 						validator: undefined,
 					}),
 					icon: {
-						label: tText('admin/content-block/helpers/generators/buttons___icoon', {}, [
-							AVO,
-						]),
+						label: tText('admin/content-block/helpers/generators/buttons___icoon', {}, [AVO]),
 						editorType: ContentBlockEditor.IconPicker,
 						editorProps: {
 							options: GET_ADMIN_ICON_OPTIONS(),
 						},
 					},
 					buttonAction: {
-						label: tText(
-							'admin/content-block/helpers/generators/buttons___knop-actie',
-							{},
-							[AVO]
-						),
+						label: tText('admin/content-block/helpers/generators/buttons___knop-actie', {}, [AVO]),
 						editorType: ContentBlockEditor.ContentPicker,
 					},
 				},
@@ -147,11 +129,7 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			} as ContentBlockFieldGroup,
 
 			textBelowButtons: TEXT_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/hero___text-onder-knoppen',
-					{},
-					[AVO]
-				),
+				label: tText('admin/content-block/helpers/generators/hero___text-onder-knoppen', {}, [AVO]),
 				editorProps: {
 					controls: RICH_TEXT_EDITOR_OPTIONS_FULL,
 				},
@@ -174,11 +152,9 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				} as TextInputProps,
 			}),
 			poster: FILE_FIELD(undefined, {
-				label: tText(
-					'admin/content-block/helpers/generators/hero___eigen-poster-uploaden',
-					{},
-					[AVO]
-				),
+				label: tText('admin/content-block/helpers/generators/hero___eigen-poster-uploaden', {}, [
+					AVO,
+				]),
 				validator: undefined,
 				editorProps: {
 					allowMulti: false,
@@ -204,11 +180,9 @@ export const AVO_HERO_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		fields: {
 			...BLOCK_FIELD_DEFAULTS(),
 			backgroundColor: {
-				label: tText(
-					'admin/content-block/helpers/generators/defaults___achtergrondkleur',
-					{},
-					[AVO]
-				),
+				label: tText('admin/content-block/helpers/generators/defaults___achtergrondkleur', {}, [
+					AVO,
+				]),
 				editorType: ContentBlockEditor.ColorSelect,
 				editorProps: {
 					options: GET_AVO_HERO_BACKGROUND_COLOR_OPTIONS(),

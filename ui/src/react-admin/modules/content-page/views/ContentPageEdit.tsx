@@ -1,40 +1,33 @@
-import type { IconName, TabProps } from "@viaa/avo2-components";
-import {
-	Button,
-	ButtonToolbar,
-	Container,
-	Navbar,
-	Spacer,
-	Tabs,
-} from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import { PermissionName } from "@viaa/avo2-types";
-import { cloneDeep, isNil, isString } from "lodash-es";
-import type { FC, Reducer } from "react";
-import React, { useCallback, useEffect, useReducer, useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
-import { StringParam, useQueryParam, withDefault } from "use-query-params";
-import { AdminConfigManager } from "~core/config";
-import { ToastType } from "~core/config/config.types";
-import { ContentEditForm } from "~modules/content-page/components/ContentEditForm/ContentEditForm";
-import { CONTENT_BLOCK_INITIAL_STATE_MAP } from "~modules/content-page/const/content-block-initial-state-map";
+import type { IconName, TabProps } from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, Navbar, Spacer, Tabs } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { PermissionName } from '@viaa/avo2-types';
+import { cloneDeep, isNil, isString } from 'lodash-es';
+import type { FC, Reducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import { ContentEditForm } from '~modules/content-page/components/ContentEditForm/ContentEditForm';
+import { CONTENT_BLOCK_INITIAL_STATE_MAP } from '~modules/content-page/const/content-block-initial-state-map';
 import {
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH,
 	CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING,
 	GET_CONTENT_PAGE_DETAIL_TABS,
 	TEMP_BLOCK_ID_PREFIX,
-} from "~modules/content-page/const/content-page.consts";
+} from '~modules/content-page/const/content-page.consts';
 import type {
 	ContentEditAction,
 	ContentPageEditState,
-} from "~modules/content-page/helpers/content-edit.reducer";
+} from '~modules/content-page/helpers/content-edit.reducer';
 import {
 	CONTENT_PAGE_INITIAL_STATE,
 	contentEditReducer,
-} from "~modules/content-page/helpers/content-edit.reducer";
-import { useContentTypes } from "~modules/content-page/hooks/useContentTypes";
-import { convertRichTextEditorStatesToHtml } from "~modules/content-page/services/content-page.converters";
-import { ContentPageService } from "~modules/content-page/services/content-page.service";
+} from '~modules/content-page/helpers/content-edit.reducer';
+import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
+import { convertRichTextEditorStatesToHtml } from '~modules/content-page/services/content-page.converters';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import type {
 	ContentBlockComponentState,
 	ContentBlockConfig,
@@ -45,37 +38,34 @@ import type {
 	ContentBlockType,
 	RepeatedContentBlockComponentState,
 	SingleContentBlockComponentState,
-} from "~modules/content-page/types/content-block.types";
+} from '~modules/content-page/types/content-block.types';
 import type {
 	ContentEditFormErrors,
 	ContentPageInfo,
 	ContentPageUser,
-} from "~modules/content-page/types/content-pages.types";
-import {
-	ContentEditActionType,
-	PageType,
-} from "~modules/content-page/types/content-pages.types";
-import { Locale } from "~modules/translations/translations.core.types";
-import { Icon } from "~shared/components/Icon";
-import ConfirmModal from "~shared/components/ConfirmModal/ConfirmModal";
-import { ErrorView } from "~shared/components/error";
+} from '~modules/content-page/types/content-pages.types';
+import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
+import { Locale } from '~modules/translations/translations.core.types';
+import { Icon } from '~shared/components/Icon';
+import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
+import { ErrorView } from '~shared/components/error';
 
-import { Link } from "~shared/components/Link/Link";
-import type { LoadingInfo } from "~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent";
-import { LoadingErrorLoadedComponent } from "~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent";
-import { CustomError } from "~shared/helpers/custom-error";
-import { getProfileId } from "~shared/helpers/get-profile-id";
-import { navigate } from "~shared/helpers/link";
-import { showToast } from "~shared/helpers/show-toast";
-import { tHtml, tText } from "~shared/helpers/translation-functions";
-import { AdminLayout } from "~shared/layouts";
-import { PermissionService } from "~shared/services/permission-service";
-import type { DefaultComponentProps } from "~shared/types/components";
-import { blockHasErrors } from "../helpers/block-has-errors";
-import { validateContentBlockConfig } from "../helpers/validate-content-block-config";
-import ContentEditContentBlocks from "./ContentEditContentBlocks";
+import { Link } from '~shared/components/Link/Link';
+import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
+import { CustomError } from '~shared/helpers/custom-error';
+import { getProfileId } from '~shared/helpers/get-profile-id';
+import { navigate } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AdminLayout } from '~shared/layouts';
+import { PermissionService } from '~shared/services/permission-service';
+import type { DefaultComponentProps } from '~shared/types/components';
+import { blockHasErrors } from '../helpers/block-has-errors';
+import { validateContentBlockConfig } from '../helpers/validate-content-block-config';
+import ContentEditContentBlocks from './ContentEditContentBlocks';
 
-import "./ContentPageEdit.scss";
+import './ContentPageEdit.scss';
 
 const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 
@@ -103,7 +93,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const [configToDelete, setConfigToDelete] = useState<number>();
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 	const [loadingInfo, setLoadingInfo] = useState<LoadingInfo>({
-		state: "loading",
+		state: 'loading',
 	});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
 	const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
@@ -112,8 +102,8 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const [contentTypes, isLoadingContentTypes] = useContentTypes();
 	const [currentTab, setCurrentTab] = useQueryParam(
-		"tab",
-		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string),
+		'tab',
+		withDefault(StringParam, GET_CONTENT_PAGE_DETAIL_TABS()[0].id as string)
 	);
 	const tabs = GET_CONTENT_PAGE_DETAIL_TABS().map((tab: TabProps) => ({
 		...tab,
@@ -121,19 +111,15 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	}));
 
 	const hasPerm = useCallback(
-		(permission: PermissionName) =>
-			PermissionService.hasPerm(commonUser, permission),
-		[commonUser],
+		(permission: PermissionName) => PermissionService.hasPerm(commonUser, permission),
+		[commonUser]
 	);
 
 	const fetchContentPage = useCallback(async () => {
 		try {
 			if (
 				isNil(id) ||
-				id ===
-					AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_CREATE")
-						.split("/")
-						.pop()
+				id === AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE').split('/').pop()
 			) {
 				changeContentPageState({
 					type: ContentEditActionType.SET_CONTENT_PAGE,
@@ -149,22 +135,22 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				!hasPerm(PermissionName.EDIT_OWN_CONTENT_PAGES)
 			) {
 				setLoadingInfo({
-					state: "error",
+					state: 'error',
 					message: tHtml(
-						"admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken",
+						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: "lock" as IconName,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
 			const contentPageObj = await ContentPageService.getContentPageById(id);
 			if (!contentPageObj) {
 				setLoadingInfo({
-					state: "error",
+					state: 'error',
 					message: tHtml(
-						"react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden",
+						'react-admin/modules/content-page/views/content-page-edit___deze-pagina-kon-niet-worden-gevonden'
 					),
-					icon: "search" as IconName,
+					icon: 'search' as IconName,
 				});
 				return;
 			}
@@ -173,11 +159,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				contentPageObj.userProfileId !== getProfileId(commonUser)
 			) {
 				setLoadingInfo({
-					state: "error",
+					state: 'error',
 					message: tHtml(
-						"admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken",
+						'admin/content/views/content-edit___je-hebt-geen-rechten-om-deze-content-pagina-te-bekijken'
 					),
-					icon: "lock" as IconName,
+					icon: 'lock' as IconName,
 				});
 				return;
 			}
@@ -190,14 +176,14 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			});
 		} catch (err) {
 			console.error(
-				new CustomError("Failed to load content page", err, {
+				new CustomError('Failed to load content page', err, {
 					id,
-				}),
+				})
 			);
 			showToast({
-				title: tText("modules/content-page/views/content-page-edit___error"),
+				title: tText('modules/content-page/views/content-page-edit___error'),
 				description: tText(
-					"admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt",
+					'admin/content/views/content-edit___het-laden-van-deze-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -207,11 +193,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const handlePasteBlock = useCallback(
 		async (newBlockConfig: Partial<Avo.ContentPage.Block>) => {
 			const spinnerToastId = showToast({
-				title: tText(
-					"react-admin/modules/content-page/views/content-page-edit___bezig",
-				),
+				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
 				description: tText(
-					"react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen",
+					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
 				),
 				type: ToastType.SPINNER,
 			});
@@ -236,39 +220,30 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				payload: newBlockConfigWithDuplicatedAssets,
 			});
 
-			AdminConfigManager.getConfig().services.toastService.hideToast(
-				spinnerToastId,
-			);
+			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
 			showToast({
-				title: tText("modules/content-page/views/content-page-edit___success"),
-				description: tText(
-					"admin/content/views/content-edit___de-blok-is-toegevoegd",
-				),
+				title: tText('modules/content-page/views/content-page-edit___success'),
+				description: tText('admin/content/views/content-edit___de-blok-is-toegevoegd'),
 				type: ToastType.SUCCESS,
 			});
 		},
-		[contentPageState?.currentContentPageInfo?.content_blocks],
+		[contentPageState?.currentContentPageInfo?.content_blocks]
 	);
 
 	const handlePasteContentPage = useCallback(
 		async (newContentPageConfig: ContentPageInfo) => {
 			const spinnerToastId = showToast({
-				title: tText(
-					"react-admin/modules/content-page/views/content-page-edit___bezig",
-				),
+				title: tText('react-admin/modules/content-page/views/content-page-edit___bezig'),
 				description: tText(
-					"react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen",
+					'react-admin/modules/content-page/views/content-page-edit___bezig-met-dupliceren-van-de-afbeeldingen'
 				),
 				type: ToastType.SPINNER,
 			});
 
 			// Replace pasted content page id with existing content page id
 			if (contentPageState.currentContentPageInfo?.id) {
-				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as
-					| string
-					| number;
-				newContentPageConfig.createdAt =
-					contentPageState.currentContentPageInfo.createdAt;
+				newContentPageConfig.id = contentPageState.currentContentPageInfo.id as string | number;
+				newContentPageConfig.createdAt = contentPageState.currentContentPageInfo.createdAt;
 			} else {
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				delete (newContentPageConfig as any).id;
@@ -309,8 +284,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					contentPageInfo: {
 						...contentPageWithDuplicatedAssets,
 						content_blocks: [
-							...(contentPageState.currentContentPageInfo?.content_blocks ||
-								[]),
+							...(contentPageState.currentContentPageInfo?.content_blocks || []),
 							...contentPageWithDuplicatedAssets.content_blocks,
 						].map((block, blockIndex) => {
 							// Reorder the combined array of content block positions
@@ -325,13 +299,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				},
 			});
 
-			AdminConfigManager.getConfig().services.toastService.hideToast(
-				spinnerToastId,
-			);
+			AdminConfigManager.getConfig().services.toastService.hideToast(spinnerToastId);
 			showToast({
-				title: tText("modules/content-page/views/content-page-edit___success"),
+				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText(
-					"react-admin/modules/content-page/views/content-page-edit___de-content-pagina-info-is-overgenomen",
+					'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-info-is-overgenomen'
 				),
 				type: ToastType.SUCCESS,
 			});
@@ -346,14 +318,14 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			contentPageState.currentContentPageInfo?.content_blocks,
 			contentPageState.currentContentPageInfo?.createdAt,
 			contentPageState.currentContentPageInfo?.id,
-		],
+		]
 	);
 
 	const onPasteContent = useCallback(
 		async (evt: ClipboardEvent) => {
 			try {
 				if (evt.clipboardData?.getData) {
-					const pastedText = evt.clipboardData.getData("text/plain");
+					const pastedText = evt.clipboardData.getData('text/plain');
 
 					if (pastedText.startsWith('{"block":')) {
 						await handlePasteBlock(JSON.parse(pastedText).block);
@@ -363,17 +335,17 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					}
 				}
 			} catch (err) {
-				console.error(new CustomError("Failed to paste content block", err));
+				console.error(new CustomError('Failed to paste content block', err));
 				showToast({
-					title: tText("modules/content-page/views/content-page-edit___error"),
+					title: tText('modules/content-page/views/content-page-edit___error'),
 					description: tText(
-						"admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt",
+						'admin/content/views/content-edit___het-plakken-van-het-content-blok-is-mislukt'
 					),
 					type: ToastType.ERROR,
 				});
 			}
 		},
-		[handlePasteBlock, handlePasteContentPage],
+		[handlePasteBlock, handlePasteContentPage]
 	);
 
 	useEffect(() => {
@@ -382,25 +354,25 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	useEffect(() => {
 		if (contentPageState.currentContentPageInfo && !isLoadingContentTypes) {
-			setLoadingInfo({ state: "loaded" });
+			setLoadingInfo({ state: 'loaded' });
 		}
 	}, [contentPageState.currentContentPageInfo, isLoadingContentTypes]);
 
 	useEffect(() => {
-		document.body.addEventListener("paste", onPasteContent);
+		document.body.addEventListener('paste', onPasteContent);
 
 		return () => {
-			document.body.removeEventListener("paste", onPasteContent);
+			document.body.removeEventListener('paste', onPasteContent);
 		};
 	}, [onPasteContent]);
 
 	// Computed
 	const pageType = id ? PageType.Edit : PageType.Create;
-	let pageTitle = tText("admin/content/views/content-edit___content-toevoegen");
+	let pageTitle = tText('admin/content/views/content-edit___content-toevoegen');
 	if (pageType !== PageType.Create) {
 		pageTitle = `${tText(
-			"admin/content/views/content-edit___content-aanpassen",
-		)}: ${contentPageState.currentContentPageInfo?.title || ""}`;
+			'admin/content/views/content-edit___content-aanpassen'
+		)}: ${contentPageState.currentContentPageInfo?.title || ''}`;
 	}
 
 	// Methods
@@ -410,18 +382,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	};
 
 	const handleSave = async () => {
-		const content_blocks = cloneDeep(
-			contentPageState.currentContentPageInfo?.content_blocks || [],
-		);
+		const content_blocks = cloneDeep(contentPageState.currentContentPageInfo?.content_blocks || []);
 
 		try {
-			if (
-				!contentPageState.currentContentPageInfo ||
-				!contentPageState.initialContentPageInfo
-			) {
-				console.error(
-					"Cannot save content page because content page is not set",
-				);
+			if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
+				console.error('Cannot save content page because content page is not set');
 				return;
 			}
 
@@ -449,13 +414,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				newErrors = validateContentBlockConfig(
 					newErrors,
 					config.components.fields as Record<string, ContentBlockField>, // TODO fix this type to Record<string, ContentBlockField | ContentBlockFieldGroup>
-					config.components.state,
+					config.components.state
 				);
-				newErrors = validateContentBlockConfig(
-					newErrors,
-					config.block.fields,
-					config.block.state,
-				);
+				newErrors = validateContentBlockConfig(newErrors, config.block.fields, config.block.state);
 
 				if (blockHasErrors(newErrors)) {
 					changeContentPageState({
@@ -465,10 +426,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 					areConfigsValid = false;
 				}
-				if (
-					isString(config.id) &&
-					(config.id as string)?.startsWith(TEMP_BLOCK_ID_PREFIX)
-				) {
+				if (isString(config.id) && (config.id as string)?.startsWith(TEMP_BLOCK_ID_PREFIX)) {
 					// Remove temporary id's before inserting the blocks into the database
 					delete config.id;
 				}
@@ -478,22 +436,18 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				setIsSaving(false);
 				if (!isFormValid) {
 					showToast({
-						title: tText(
-							"modules/content-page/views/content-page-edit___error",
-						),
+						title: tText('modules/content-page/views/content-page-edit___error'),
 						description: tText(
-							"admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier",
+							'admin/content/views/content-edit___er-zijn-nog-fouten-in-het-metadata-formulier'
 						),
 						type: ToastType.ERROR,
 					});
 				}
 				if (!areConfigsValid) {
 					showToast({
-						title: tText(
-							"modules/content-page/views/content-page-edit___error",
-						),
+						title: tText('modules/content-page/views/content-page-edit___error'),
 						description: tText(
-							"admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks",
+							'admin/content/views/content-edit___er-zijn-nog-fouten-in-de-content-blocks'
 						),
 						type: ToastType.ERROR,
 					});
@@ -508,77 +462,67 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					...contentPageState.currentContentPageInfo,
 					userProfileId: getProfileId(commonUser),
 					content_blocks: blockConfigs,
-					path: ContentPageService.getPathOrDefault(
-						contentPageState.currentContentPageInfo,
-					),
+					path: ContentPageService.getPathOrDefault(contentPageState.currentContentPageInfo),
 				};
-				insertedOrUpdatedContent =
-					await ContentPageService.insertContentPage(contentBody);
+				insertedOrUpdatedContent = await ContentPageService.insertContentPage(contentBody);
 			} else {
 				if (!isNil(id)) {
 					const contentBody: ContentPageInfo = {
 						...contentPageState.currentContentPageInfo,
 						updatedAt: new Date().toISOString(),
 						id:
-							typeof (id as string | number) === "string" && id.includes("-")
+							typeof (id as string | number) === 'string' && id.includes('-')
 								? id
 								: parseInt(id, 10), // Numeric ids in avo, uuid's in hetarchief
 						content_blocks: blockConfigs,
-						path: ContentPageService.getPathOrDefault(
-							contentPageState.currentContentPageInfo,
-						),
+						path: ContentPageService.getPathOrDefault(contentPageState.currentContentPageInfo),
 					};
-					insertedOrUpdatedContent =
-						await ContentPageService.updateContentPage(contentBody);
+					insertedOrUpdatedContent = await ContentPageService.updateContentPage(contentBody);
 				} else {
-					throw new CustomError(
-						"failed to update content page because the id is undefined",
-						null,
-						{
-							id,
-							contentPageInfo: contentPageState.currentContentPageInfo,
-						},
-					);
+					throw new CustomError('failed to update content page because the id is undefined', null, {
+						id,
+						contentPageInfo: contentPageState.currentContentPageInfo,
+					});
 				}
 			}
 
 			if (!insertedOrUpdatedContent || isNil(insertedOrUpdatedContent.id)) {
 				throw new CustomError(
-					"Failed to save labels because no response or response does not contain a valid id",
+					'Failed to save labels because no response or response does not contain a valid id',
 					null,
 					{
 						insertedOrUpdatedContent,
 						contentPageInfo: contentPageState.currentContentPageInfo,
 						isCreatePage: pageType === PageType.Create,
-					},
+					}
 				);
 			}
 
 			AdminConfigManager.getConfig()?.contentPage?.onSaveContentPage(
-				insertedOrUpdatedContent as ContentPageInfo,
+				insertedOrUpdatedContent as ContentPageInfo
 			);
 
 			showToast({
-				title: tText("modules/content-page/views/content-page-edit___success"),
+				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText(
-					"admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen",
+					'admin/content/views/content-edit___het-content-item-is-succesvol-opgeslagen'
 				),
 				type: ToastType.SUCCESS,
 			});
 			navigate(
 				history,
-				AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_DETAIL"),
+				AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
 				{
 					id: insertedOrUpdatedContent.id,
 				},
-				{ tab: currentTab },
+				{ tab: currentTab }
 			);
 		} catch (err) {
-			console.error(new CustomError("Failed to save content page", err));
+			console.error(new CustomError('Failed to save content page', err));
 			showToast({
-				title: tText("modules/content-page/views/content-page-edit___error"),
+				title: tText('modules/content-page/views/content-page-edit___error'),
 				description: tText(
-					"admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt",
+					'admin/content/views/content-edit___het-opslaan-van-de-content-pagina-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -590,23 +534,16 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	const handleValidation = async (): Promise<boolean> => {
 		const errors: ContentEditFormErrors = {};
 
-		if (
-			!contentPageState.currentContentPageInfo ||
-			!contentPageState.initialContentPageInfo
-		) {
+		if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
 			return false;
 		}
 
 		if (!contentPageState.currentContentPageInfo.title) {
-			errors.title = tText(
-				"admin/content/views/content-edit___titel-is-verplicht",
-			);
+			errors.title = tText('admin/content/views/content-edit___titel-is-verplicht');
 		}
 
 		if (!contentPageState.currentContentPageInfo.contentType) {
-			errors.contentType = tText(
-				"admin/content/views/content-edit___content-type-is-verplicht",
-			);
+			errors.contentType = tText('admin/content/views/content-edit___content-type-is-verplicht');
 		}
 
 		// Disable this validation, since meemoo only wants to see the indicator, but not be prevented from saving the page
@@ -626,36 +563,34 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH
 		) {
 			errors.seoDescription = tText(
-				"modules/content-page/views/content-page-edit___de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten",
-				{ maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING },
+				'modules/content-page/views/content-page-edit___de-seo-beschrijving-mag-maximaal-max-length-tekens-bevatten',
+				{ maxLength: CONTENT_PAGE_SEO_DESCRIPTION_MAX_LENGTH_STRING }
 			);
 		}
 
 		// check if the path is unique
-		const path = ContentPageService.getPathOrDefault(
-			contentPageState.currentContentPageInfo,
-		);
+		const path = ContentPageService.getPathOrDefault(contentPageState.currentContentPageInfo);
 
 		try {
 			const existingContentPageTitle: string | null =
 				await ContentPageService.doesContentPageLanguageAndPathExist(
 					contentPageState.currentContentPageInfo.language || Locale.Nl,
 					path,
-					contentPageState.currentContentPageInfo.id,
+					contentPageState.currentContentPageInfo.id
 				);
 			if (existingContentPageTitle) {
 				errors.path = tText(
-					"admin/content/views/content-edit___dit-path-is-reeds-gebruikt-door-pagina-page-title",
+					'admin/content/views/content-edit___dit-path-is-reeds-gebruikt-door-pagina-page-title',
 					{
 						pageTitle: existingContentPageTitle,
-					},
+					}
 				);
 			} else {
 				delete errors.path;
 			}
 		} catch (err) {
 			// ignore error if content page does not exist yet, since we're trying to save it
-			if (!JSON.stringify(err).includes("NotFound")) {
+			if (!JSON.stringify(err).includes('NotFound')) {
 				throw err;
 			}
 		}
@@ -667,7 +602,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				new Date(contentPageState.currentContentPageInfo.publishAt)
 		) {
 			errors.depublishAt = tText(
-				"admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum",
+				'admin/content/views/content-edit___depublicatie-moet-na-publicatie-datum'
 			);
 		}
 
@@ -678,17 +613,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	const navigateBack = () => {
 		if (pageType === PageType.Create) {
-			history.push(
-				AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_OVERVIEW"),
-			);
+			history.push(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'));
 		} else {
-			navigate(
-				history,
-				AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_DETAIL"),
-				{
-					id,
-				},
-			);
+			navigate(history, AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+				id,
+			});
 		}
 	};
 
@@ -716,16 +645,14 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		index: number,
 		formGroupType: ContentBlockStateType,
 		formGroupState: ContentBlockStateOption,
-		stateIndex?: number,
+		stateIndex?: number
 	) => {
-		if (formGroupType === "block") {
+		if (formGroupType === 'block') {
 			changeContentPageState({
 				type: ContentEditActionType.SET_BLOCK_STATE,
 				payload: {
 					index,
-					formGroupState: (Array.isArray(formGroupState)
-						? formGroupState[0]
-						: formGroupState) as
+					formGroupState: (Array.isArray(formGroupState) ? formGroupState[0] : formGroupState) as
 						| SingleContentBlockComponentState
 						| RepeatedContentBlockComponentState,
 				},
@@ -746,14 +673,11 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 	// Render
 	const renderTabContent = () => {
-		if (
-			!contentPageState.currentContentPageInfo ||
-			!contentPageState.initialContentPageInfo
-		) {
+		if (!contentPageState.currentContentPageInfo || !contentPageState.initialContentPageInfo) {
 			return;
 		}
 		switch (currentTab) {
-			case "inhoud":
+			case 'inhoud':
 				return (
 					<ContentEditContentBlocks
 						contentPageInfo={contentPageState.currentContentPageInfo}
@@ -766,7 +690,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						commonUser={commonUser}
 					/>
 				);
-			case "metadata":
+			case 'metadata':
 				return (
 					<ContentEditForm
 						contentTypes={contentTypes}
@@ -785,42 +709,30 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 		if (!contentPageState.initialContentPageInfo) {
 			return null;
 		}
-		const contentPageOwnerId =
-			contentPageState.initialContentPageInfo.userProfileId;
+		const contentPageOwnerId = contentPageState.initialContentPageInfo.userProfileId;
 		const isOwner =
-			commonUser?.profileId &&
-			contentPageOwnerId &&
-			commonUser?.profileId === contentPageOwnerId;
+			commonUser?.profileId && contentPageOwnerId && commonUser?.profileId === contentPageOwnerId;
 		const canEditContentPage =
-			hasPerm(EDIT_ANY_CONTENT_PAGES) ||
-			(hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
+			hasPerm(EDIT_ANY_CONTENT_PAGES) || (hasPerm(EDIT_OWN_CONTENT_PAGES) && isOwner);
 		if (!canEditContentPage) {
 			return (
 				<ErrorView
 					message={tText(
-						"react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel",
+						'react-admin/modules/content-page/views/content-page-edit___je-hebt-geen-rechten-om-deze-content-pagina-aan-te-passen-titel'
 					)}
 					actionButtons={undefined}
 				>
 					<p>
-						{tHtml(
-							"admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen",
-						)}
+						{tHtml('admin/content/views/content-overview___beschrijving-hoe-content-toe-te-voegen')}
 					</p>
 					{hasPerm(PermissionName.CREATE_CONTENT_PAGES) && (
 						<Spacer margin="top">
-							<Link
-								to={AdminConfigManager.getAdminRoute(
-									"ADMIN_CONTENT_PAGE_CREATE",
-								)}
-							>
+							<Link to={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}>
 								<Button
-									icon={"plus" as IconName}
-									label={tText(
-										"admin/content/views/content-overview___content-toevoegen",
-									)}
+									icon={'plus' as IconName}
+									label={tText('admin/content/views/content-overview___content-toevoegen')}
 									title={tText(
-										"admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan",
+										'admin/content/views/content-overview___maak-een-nieuwe-content-pagina-aan'
 									)}
 								/>
 							</Link>
@@ -840,13 +752,13 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 					{canEditContentPage && (
 						<ButtonToolbar>
 							<Button
-								label={tText("admin/content/views/content-edit___annuleer")}
+								label={tText('admin/content/views/content-edit___annuleer')}
 								onClick={navigateBack}
 								type="tertiary"
 							/>
 							<Button
 								disabled={isSaving}
-								label={tText("admin/content/views/content-edit___opslaan")}
+								label={tText('admin/content/views/content-edit___opslaan')}
 								onClick={handleSave}
 							/>
 						</ButtonToolbar>
@@ -862,9 +774,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 						<Container mode="horizontal">
 							<Tabs
 								tabs={tabs}
-								onClick={(newCurrentTab: string | number) =>
-									setCurrentTab(newCurrentTab as string)
-								}
+								onClick={(newCurrentTab: string | number) => setCurrentTab(newCurrentTab as string)}
 							/>
 							<CopyToClipboard
 								text={JSON.stringify({
@@ -873,23 +783,23 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 								onCopy={() =>
 									showToast({
 										title: tText(
-											"react-admin/modules/content-page/views/content-page-edit___gekopieerd",
+											'react-admin/modules/content-page/views/content-page-edit___gekopieerd'
 										),
 										description: tText(
-											"react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina",
+											'react-admin/modules/content-page/views/content-page-edit___de-content-pagina-is-naar-je-klembord-gekopieerd-druk-ctrl-v-om-hem-te-plakken-op-een-bewerk-pagina'
 										),
 										type: ToastType.SUCCESS,
 									})
 								}
 							>
 								<Button
-									icon={"copy" as IconName}
+									icon={'copy' as IconName}
 									size="small"
 									title={tText(
-										"react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina",
+										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
 									)}
 									ariaLabel={tText(
-										"react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina",
+										'react-admin/modules/content-page/views/content-page-edit___kopieer-content-pagina'
 									)}
 									type="secondary"
 									className="c-content-page-edit__copy-page-button u-spacer-s"
@@ -909,7 +819,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 							}
 						}}
 						body={tHtml(
-							"modules/content-page/views/content-page-edit___het-verwijderen-van-een-blok-kan-niet-ongedaan-gemaakt-worden",
+							'modules/content-page/views/content-page-edit___het-verwijderen-van-een-blok-kan-niet-ongedaan-gemaakt-worden'
 						)}
 						isOpen={isDeleteModalOpen}
 						onClose={() => setIsDeleteModalOpen(false)}

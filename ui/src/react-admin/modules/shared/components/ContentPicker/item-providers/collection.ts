@@ -15,10 +15,7 @@ export const retrieveCollections = memoize(
 	async (titleOrId: string | null, limit = 5): Promise<PickerItem[]> => {
 		const collections: Avo.Collection.Collection[] | null = titleOrId
 			? await CollectionService.fetchCollectionsByTitleOrId(titleOrId, limit)
-			: await CollectionService.fetchCollectionsOrBundles(
-					limit,
-					ContentTypeNumber.collection
-			  );
+			: await CollectionService.fetchCollectionsOrBundles(limit, ContentTypeNumber.collection);
 
 		return parseCollections('COLLECTION', collections || []);
 	},

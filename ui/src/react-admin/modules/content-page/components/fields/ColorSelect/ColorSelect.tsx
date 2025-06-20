@@ -29,20 +29,17 @@ export const ColorSelect: FunctionComponent<ColorSelectProps> = ({
 }) => {
 	const renderLabel = ({ label, value }: ReactSelectOption<string>): ReactNode => {
 		const option: ColorOption | undefined = options.find((option) => option.value === value);
-		const isGradient =
-			option?.color?.includes('gradient') || option?.value?.includes('gradient');
+		const isGradient = option?.color?.includes('gradient') || option?.value?.includes('gradient');
 		const background = isGradient
 			? ColorSelectGradientColors[
 					(option?.color as GradientColor) || (option?.value as GradientColor)
-			  ]
+				]
 			: option?.color || option?.value;
 
 		return (
 			<div key={`color-select-${label}-${value}`}>
 				<Flex>
-					{!!background && (
-						<div className={'c-color-select__preview'} style={{ background }} />
-					)}
+					{!!background && <div className={'c-color-select__preview'} style={{ background }} />}
 					{!!label && <Spacer margin="left-small">{label}</Spacer>}
 				</Flex>
 			</div>

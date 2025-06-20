@@ -63,9 +63,7 @@ export const ANCHOR_LINKS_BLOCK_CONFIG = (position = 0): ContentBlockConfig => (
 	block: {
 		state: INITIAL_ANCHOR_LINKS_BLOCK_STATE(),
 		fields: {
-			align: ALIGN_FIELD(
-				tText('admin/content-block/helpers/generators/defaults___uitlijning')
-			),
+			align: ALIGN_FIELD(tText('admin/content-block/helpers/generators/defaults___uitlijning')),
 			...BLOCK_FIELD_DEFAULTS(),
 		},
 	},

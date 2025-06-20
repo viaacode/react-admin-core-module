@@ -1,8 +1,4 @@
-import type {
-	ButtonAction,
-	DefaultProps,
-	RenderLinkFunction,
-} from "@viaa/avo2-components";
+import type { ButtonAction, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import {
 	Accordion,
 	AspectRatioWrapper,
@@ -15,28 +11,28 @@ import {
 	Spacer,
 	Tabs,
 	TagList,
-} from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import clsx from "clsx";
-import { format, parseISO } from "date-fns";
-import { findIndex, flatten, uniqBy } from "lodash-es";
-import type { FunctionComponent, ReactNode } from "react";
-import React from "react";
-import type { GridItem } from "~content-blocks/BlockImageGrid/BlockImageGrid.types";
-import { ContentPageRenderer } from "~modules/content-page/components/ContentPageRenderer/ContentPageRenderer";
-import type { ContentPageInfo } from "~modules/content-page/types/content-pages.types";
-import { CenteredSpinner } from "~shared/components/Spinner/CenteredSpinner";
-import { defaultRenderLinkFunction } from "~shared/helpers/link";
-import { BlockHeading } from "../BlockHeading/BlockHeading";
-import { BlockImageGrid } from "~content-blocks/BlockImageGrid";
-import type { ContentTabStyle, LabelObj } from "./BlockPageOverview.types";
-import { ContentItemStyle } from "./BlockPageOverview.types";
+} from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import clsx from 'clsx';
+import { format, parseISO } from 'date-fns';
+import { findIndex, flatten, uniqBy } from 'lodash-es';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
+import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
+import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { BlockHeading } from '../BlockHeading/BlockHeading';
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
+import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
+import { ContentItemStyle } from './BlockPageOverview.types';
 
-import "./BlockPageOverview.scss";
-import { PaginationBar } from "@meemoo/react-components";
-import { ITEMS_PER_PAGE } from "~modules/item/items.consts";
-import { GET_DEFAULT_PAGINATION_BAR_PROPS } from "~shared/components/PaginationBar/PaginationBar.consts";
-import Html from "~shared/components/Html/Html";
+import './BlockPageOverview.scss';
+import { PaginationBar } from '@meemoo/react-components';
+import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
+import Html from '~shared/components/Html/Html';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -74,7 +70,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	tabs = [],
 	darkTabs = false,
-	tabStyle = "MENU_BAR",
+	tabStyle = 'MENU_BAR',
 	allowMultiple = false,
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
@@ -82,11 +78,11 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	showTitle = true,
 	showDescription = true,
 	showDate = false,
-	dateString = "Geplaatst %label% op %date%",
-	buttonLabel = "Lees meer",
-	buttonAltTitle = "",
-	allLabel = "alle",
-	noLabel = "Overige",
+	dateString = 'Geplaatst %label% op %date%',
+	buttonLabel = 'Lees meer',
+	buttonAltTitle = '',
+	allLabel = 'alle',
+	noLabel = 'Overige',
 	selectedTabs,
 	onSelectedTabsChanged,
 	currentPage = 0,
@@ -129,9 +125,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		}
 
 		// Empty selected tabs signifies to the outsides: show all items / do not apply any label filters
-		onSelectedTabsChanged(
-			newSelectedTabs.filter((tab) => tab.id !== allLabelObj.id),
-		);
+		onSelectedTabsChanged(newSelectedTabs.filter((tab) => tab.id !== allLabelObj.id));
 	};
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -145,7 +139,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 
 	const renderLabels = (page: ContentPageInfo) => {
 		if (!page.labels || !page.labels.length) {
-			return "";
+			return '';
 		}
 		return ` in ${page.labels
 			.map((labelObj, index) => {
@@ -157,21 +151,15 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				}
 				return `${renderLabel(labelObj)}, `;
 			})
-			.join("")}`;
+			.join('')}`;
 	};
 
-	const formatDateString = (
-		dateString: string,
-		page: ContentPageInfo,
-	): string => {
+	const formatDateString = (dateString: string, page: ContentPageInfo): string => {
 		return dateString
-			.replace("%label%", renderLabels(page))
+			.replace('%label%', renderLabels(page))
 			.replace(
-				"%date%",
-				format(
-					parseISO(page.publishedAt || page.publishAt || page.createdAt),
-					"d MMMM yyyy",
-				),
+				'%date%',
+				format(parseISO(page.publishedAt || page.publishAt || page.createdAt), 'd MMMM yyyy')
 			);
 	};
 
@@ -183,10 +171,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 
 	const renderText = (text: string | ReactNode, className?: string) => {
 		if (text) {
-			if (typeof text === "string") {
-				return (
-					<Html content={convertToHtml(text as string)} className={className} />
-				);
+			if (typeof text === 'string') {
+				return <Html content={convertToHtml(text as string)} className={className} />;
 			}
 			return text;
 		}
@@ -201,8 +187,8 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						title: showTitle ? page.title : undefined,
 						text: getDescription(page),
 						source: page.thumbnailPath as string, // TODO handle undefined thumbnails
-						action: { type: "CONTENT_PAGE", value: page.path as string },
-					}),
+						action: { type: 'CONTENT_PAGE', value: page.path as string },
+					})
 				)}
 				itemWidth="30.7rem"
 				imageHeight="17.2rem"
@@ -215,38 +201,27 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	};
 
 	const renderPages = () => {
-		if (
-			itemStyle === ContentItemStyle.NEWS_LIST ||
-			itemStyle === ContentItemStyle.PROJECT_LIST
-		) {
+		if (itemStyle === ContentItemStyle.NEWS_LIST || itemStyle === ContentItemStyle.PROJECT_LIST) {
 			return pages.map((page) => {
 				return (
 					<Container
 						className={clsx(
-							"c-block-image-title-text-button",
-							itemStyle === ContentItemStyle.NEWS_LIST &&
-								"c-page-overview-news-list",
-							itemStyle === ContentItemStyle.PROJECT_LIST &&
-								"c-page-overview-project-list",
+							'c-block-image-title-text-button',
+							itemStyle === ContentItemStyle.NEWS_LIST && 'c-page-overview-news-list',
+							itemStyle === ContentItemStyle.PROJECT_LIST && 'c-page-overview-project-list'
 						)}
 						mode="vertical"
 						key={`content-block-page-${page.id}`}
 					>
 						<Container mode="horizontal">
 							<Grid>
-								<Column
-									size={
-										itemStyle === ContentItemStyle.NEWS_LIST ? "2-5" : "2-4"
-									}
-								>
+								<Column size={itemStyle === ContentItemStyle.NEWS_LIST ? '2-5' : '2-4'}>
 									<Spacer margin="bottom-large">
 										<AspectRatioWrapper
 											style={{
 												backgroundImage: `url(${page.thumbnailPath})`,
 											}}
-											aspect={
-												itemStyle === ContentItemStyle.NEWS_LIST ? 1.78 : 2.5
-											} // 500 x 280 or 528 x 211
+											aspect={itemStyle === ContentItemStyle.NEWS_LIST ? 1.78 : 2.5} // 500 x 280 or 528 x 211
 										/>
 									</Spacer>
 								</Column>
@@ -255,7 +230,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 										{showTitle &&
 											renderLink(
 												{
-													type: "CONTENT_PAGE",
+													type: 'CONTENT_PAGE',
 													value: page.path,
 												} as ButtonAction,
 												itemStyle === ContentItemStyle.NEWS_LIST ? (
@@ -263,13 +238,9 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 												) : (
 													<h2>{page.title}</h2>
 												),
-												page.title,
+												page.title
 											)}
-										{showDate &&
-											renderText(
-												formatDateString(dateString, page),
-												"a-subtitle",
-											)}
+										{showDate && renderText(formatDateString(dateString, page), 'a-subtitle')}
 										{
 											<div className="a-content-page__description">
 												{renderText(getDescription(page))}
@@ -279,12 +250,12 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 											<Spacer margin="top">
 												{renderLink(
 													{
-														type: "CONTENT_PAGE",
+														type: 'CONTENT_PAGE',
 														value: page.path,
 													} as ButtonAction,
 													<Button label={buttonLabel} type="tertiary" />,
 													buttonLabel,
-													buttonAltTitle || buttonLabel,
+													buttonAltTitle || buttonLabel
 												)}
 											</Spacer>
 										)}
@@ -299,32 +270,22 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 		if (itemStyle === ContentItemStyle.GRID) {
 			const uniqueLabels: LabelObj[] = uniqBy(
 				flatten(pages.map((page): LabelObj[] => page.labels)),
-				"id",
+				'id'
 			);
-			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } =
-				Object.fromEntries(
-					uniqueLabels.map(
-						(labelObj: LabelObj): [number, ContentPageInfo[]] => {
-							return [
-								labelObj.id,
-								pages.filter((page) =>
-									page.labels
-										.map((pageLabelObj) => pageLabelObj.id)
-										.includes(labelObj.id),
-								),
-							];
-						},
-					),
-				);
+			const pagesByLabel: { [labelId: number]: ContentPageInfo[] } = Object.fromEntries(
+				uniqueLabels.map((labelObj: LabelObj): [number, ContentPageInfo[]] => {
+					return [
+						labelObj.id,
+						pages.filter((page) =>
+							page.labels.map((pageLabelObj) => pageLabelObj.id).includes(labelObj.id)
+						),
+					];
+				})
+			);
 			// Put the pages that do not have a label under their own category
-			pagesByLabel[noLabelObj.id] = pages.filter(
-				(page) => !page.labels || !page.labels.length,
-			);
-			const showAllLabels =
-				selectedTabs.length === 0 || selectedTabs[0].id === allLabelObj.id;
-			const labelsToShow: LabelObj[] = showAllLabels
-				? [...uniqueLabels, noLabelObj]
-				: selectedTabs;
+			pagesByLabel[noLabelObj.id] = pages.filter((page) => !page.labels || !page.labels.length);
+			const showAllLabels = selectedTabs.length === 0 || selectedTabs[0].id === allLabelObj.id;
+			const labelsToShow: LabelObj[] = showAllLabels ? [...uniqueLabels, noLabelObj] : selectedTabs;
 
 			if (showSectionTitle) {
 				// Render each page under their label section (can have duplicates)
@@ -333,17 +294,12 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 						return null;
 					}
 					return (
-						<Spacer
-							margin="top-extra-large"
-							key={`block-page-label-${labelObj.id}`}
-						>
-							{showSectionTitle &&
-								(showAllLabels || allowMultiple) &&
-								!!(tabs || []).length && (
-									<Spacer margin="left-small">
-										<BlockHeading type={"h2"}>{labelObj.label}</BlockHeading>
-									</Spacer>
-								)}
+						<Spacer margin="top-extra-large" key={`block-page-label-${labelObj.id}`}>
+							{showSectionTitle && (showAllLabels || allowMultiple) && !!(tabs || []).length && (
+								<Spacer margin="left-small">
+									<BlockHeading type={'h2'}>{labelObj.label}</BlockHeading>
+								</Spacer>
+							)}
 							{renderGrid(pagesByLabel[labelObj.id])}
 						</Spacer>
 					);
@@ -374,10 +330,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								isOpen={page.id === focusedPage?.id}
 								key={`block-page-${page.id}`}
 							>
-								<ContentPageRenderer
-									contentPageInfo={page}
-									commonUser={commonUser}
-								/>
+								<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
 							</Accordion>
 						);
 					})}
@@ -426,10 +379,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 												key={`page-overview--page-${page.id}`}
 												className="c-content-page-overview-block__accordion--second-level"
 											>
-												<ContentPageRenderer
-													contentPageInfo={page}
-													commonUser={commonUser}
-												/>
+												<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
 											</Accordion>
 										);
 									})
@@ -455,20 +405,15 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 			if (itemStyle === ContentItemStyle.ACCORDION_TWO_LEVELS) {
 				return null;
 			}
-			if (tabStyle === "ROUNDED_BADGES") {
+			if (tabStyle === 'ROUNDED_BADGES') {
 				return (
-					<Flex
-						center={centerHeader}
-						className="c-content-page-overview-block__header"
-					>
-						<Spacer margin={["left", "bottom", "right"]}>
+					<Flex center={centerHeader} className="c-content-page-overview-block__header">
+						<Spacer margin={['left', 'bottom', 'right']}>
 							<TagList
 								tags={extendedTabs.map((tab) => ({
 									id: tab.id,
 									label: tab.label,
-									active: !!extendedSelectedTabs.find(
-										(extendedTab) => extendedTab.id === tab.id,
-									),
+									active: !!extendedSelectedTabs.find((extendedTab) => extendedTab.id === tab.id),
 								}))}
 								swatches={false}
 								selectable
@@ -480,25 +425,18 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 					</Flex>
 				);
 			}
-			if (tabStyle === "MENU_BAR") {
+			if (tabStyle === 'MENU_BAR') {
 				return (
-					<Flex
-						center={centerHeader}
-						className="c-content-page-overview-block__header"
-					>
-						<Spacer margin={["left", "bottom", "right"]}>
+					<Flex center={centerHeader} className="c-content-page-overview-block__header">
+						<Spacer margin={['left', 'bottom', 'right']}>
 							<Tabs
 								tabs={extendedTabs.map((tab) => ({
 									id: tab.id,
 									label: tab.label,
-									active: !!extendedSelectedTabs.find(
-										(extendedTab) => extendedTab.id === tab.id,
-									),
+									active: !!extendedSelectedTabs.find((extendedTab) => extendedTab.id === tab.id),
 								}))}
 								dark={darkTabs}
-								onClick={(tabId) =>
-									handleTabClick(tabs.find((tab) => tab.id === tabId))
-								}
+								onClick={(tabId) => handleTabClick(tabs.find((tab) => tab.id === tabId))}
 							/>
 						</Spacer>
 					</Flex>

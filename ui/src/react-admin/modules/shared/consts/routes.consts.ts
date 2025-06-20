@@ -1,8 +1,8 @@
-import type { Avo } from "@viaa/avo2-types";
-import { compact } from "lodash-es";
-import { tHtml } from "~shared/helpers/translation-functions";
+import type { Avo } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
+import { tHtml } from '~shared/helpers/translation-functions';
 
-import { ROUTE_PARTS } from "./routes";
+import { ROUTE_PARTS } from './routes';
 
 export interface RouteInfo {
 	route: string;
@@ -11,47 +11,47 @@ export interface RouteInfo {
 }
 
 export type RouteId =
-	| "LOGIN"
-	| "LOGOUT"
-	| "REGISTER_OR_LOGIN"
-	| "MANUAL_ACCESS_REQUEST"
-	| "STUDENT_TEACHER"
-	| "STAMBOEK"
-	| "COLLECTION_DETAIL"
-	| "COLLECTION_EDIT"
-	| "COLLECTION_EDIT_TAB"
-	| "BUNDLE_DETAIL"
-	| "BUNDLE_EDIT"
-	| "BUNDLE_EDIT_TAB"
-	| "LOGGED_OUT_HOME"
-	| "LOGGED_IN_HOME"
-	| "ITEM_DETAIL"
-	| "SEARCH"
-	| "USER_ITEM_REQUEST_FORM"
-	| "USER_ITEM_REQUEST_FORM_CONFIRM"
-	| "WORKSPACE"
-	| "WORKSPACE_TAB"
-	| "WORKSPACE_COLLECTIONS"
-	| "WORKSPACE_BUNDLES"
-	| "WORKSPACE_ASSIGNMENTS"
-	| "WORKSPACE_BOOKMARKS"
-	| "ASSIGNMENT_CREATE"
-	| "ASSIGNMENT_DETAIL"
-	| "ASSIGNMENT_EDIT"
-	| "ASSIGNMENT_RESPONSES"
-	| "LINK_YOUR_ACCOUNT"
-	| "SETTINGS"
-	| "SETTINGS_TAB"
-	| "SETTINGS_PROFILE"
-	| "SETTINGS_ACCOUNT"
-	| "SETTINGS_EMAIL"
-	| "SETTINGS_NOTIFICATIONS"
-	| "SETTINGS_LINKS"
-	| "COMPLETE_PROFILE"
-	| "ACCEPT_CONDITIONS"
-	| "COOKIE_POLICY"
-	| "ERROR"
-	| "QUICK_LANE";
+	| 'LOGIN'
+	| 'LOGOUT'
+	| 'REGISTER_OR_LOGIN'
+	| 'MANUAL_ACCESS_REQUEST'
+	| 'STUDENT_TEACHER'
+	| 'STAMBOEK'
+	| 'COLLECTION_DETAIL'
+	| 'COLLECTION_EDIT'
+	| 'COLLECTION_EDIT_TAB'
+	| 'BUNDLE_DETAIL'
+	| 'BUNDLE_EDIT'
+	| 'BUNDLE_EDIT_TAB'
+	| 'LOGGED_OUT_HOME'
+	| 'LOGGED_IN_HOME'
+	| 'ITEM_DETAIL'
+	| 'SEARCH'
+	| 'USER_ITEM_REQUEST_FORM'
+	| 'USER_ITEM_REQUEST_FORM_CONFIRM'
+	| 'WORKSPACE'
+	| 'WORKSPACE_TAB'
+	| 'WORKSPACE_COLLECTIONS'
+	| 'WORKSPACE_BUNDLES'
+	| 'WORKSPACE_ASSIGNMENTS'
+	| 'WORKSPACE_BOOKMARKS'
+	| 'ASSIGNMENT_CREATE'
+	| 'ASSIGNMENT_DETAIL'
+	| 'ASSIGNMENT_EDIT'
+	| 'ASSIGNMENT_RESPONSES'
+	| 'LINK_YOUR_ACCOUNT'
+	| 'SETTINGS'
+	| 'SETTINGS_TAB'
+	| 'SETTINGS_PROFILE'
+	| 'SETTINGS_ACCOUNT'
+	| 'SETTINGS_EMAIL'
+	| 'SETTINGS_NOTIFICATIONS'
+	| 'SETTINGS_LINKS'
+	| 'COMPLETE_PROFILE'
+	| 'ACCEPT_CONDITIONS'
+	| 'COOKIE_POLICY'
+	| 'ERROR'
+	| 'QUICK_LANE';
 
 // Routes should be ordered from least specific, to most specific
 // So we can use this order to search for interactive tours in the correct order
@@ -124,7 +124,7 @@ export const APP_PATH: { [routeId in RouteId]: RouteInfo } = {
 		showForInteractiveTour: true,
 	},
 	LOGGED_OUT_HOME: {
-		route: "/",
+		route: '/',
 		showInContentPicker: false,
 		showForInteractiveTour: false,
 	},
@@ -144,12 +144,12 @@ export const APP_PATH: { [routeId in RouteId]: RouteInfo } = {
 		showForInteractiveTour: true,
 	},
 	USER_ITEM_REQUEST_FORM: {
-		route: "/gebruiker-item-aanvraag",
+		route: '/gebruiker-item-aanvraag',
 		showInContentPicker: true,
 		showForInteractiveTour: false,
 	},
 	USER_ITEM_REQUEST_FORM_CONFIRM: {
-		route: "/gebruiker-item-aanvraag-bevestiging",
+		route: '/gebruiker-item-aanvraag-bevestiging',
 		showInContentPicker: true,
 		showForInteractiveTour: false,
 	},
@@ -278,10 +278,5 @@ export const CONTENT_TYPE_TO_ROUTE: {
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 } as any; // TODO remove cast once this task is complete: https://meemoo.atlassian.net/browse/DEV-729
 
-export const GENERATE_SITE_TITLE = (
-	...pageTitleParts: (string | null | undefined)[]
-) =>
-	compact([
-		...pageTitleParts,
-		tHtml("constants___het-archief-voor-onderwijs"),
-	]).join(" | ");
+export const GENERATE_SITE_TITLE = (...pageTitleParts: (string | null | undefined)[]) =>
+	compact([...pageTitleParts, tHtml('constants___het-archief-voor-onderwijs')]).join(' | ');

@@ -1,9 +1,9 @@
-import { first, isNil, without } from "lodash-es";
-import { ToastType } from "~core/config";
-import type { UserTableState } from "~modules/user/user.types";
-import { LomScheme } from "~shared/consts/lom-scheme.enum";
-import { CustomError } from "~shared/helpers/custom-error";
-import { eduOrgToClientOrg } from "~shared/helpers/edu-org-string-to-client-org";
+import { first, isNil, without } from 'lodash-es';
+import { ToastType } from '~core/config';
+import type { UserTableState } from '~modules/user/user.types';
+import { LomScheme } from '~shared/consts/lom-scheme.enum';
+import { CustomError } from '~shared/helpers/custom-error';
+import { eduOrgToClientOrg } from '~shared/helpers/edu-org-string-to-client-org';
 import {
 	getBooleanFilters,
 	getDateRangeFilters,
@@ -11,13 +11,13 @@ import {
 	getMultiOptionFilters,
 	getMultiOptionsFilters,
 	NULL_FILTER,
-} from "~shared/helpers/filters";
-import { showToast } from "~shared/helpers/show-toast";
+} from '~shared/helpers/filters';
+import { showToast } from '~shared/helpers/show-toast';
 
 export const generateWhereObjectAvo = (
 	filters: Partial<UserTableState>,
 	onlySelectedProfiles: boolean,
-	theSelectedProfileIds: string[],
+	theSelectedProfileIds: string[]
 ) => {
 	try {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -41,65 +41,61 @@ export const generateWhereObjectAvo = (
 		andFilters.push(
 			...getBooleanFilters<Partial<UserTableState>>(
 				filters,
-				["isBlocked", "isException"],
-				["is_blocked", "is_exception"],
-			),
+				['isBlocked', 'isException'],
+				['is_blocked', 'is_exception']
+			)
 		);
 
 		andFilters.push(
 			...getDateRangeFilters<Partial<UserTableState>>(
 				filters,
-				["blockedAt", "unblockedAt"],
-				["blocked_at.max", "unblocked_at.max"],
-			),
+				['blockedAt', 'unblockedAt'],
+				['blocked_at.max', 'unblocked_at.max']
+			)
 		);
 
 		andFilters.push(
 			...getMultiOptionFilters<Partial<UserTableState>>(
 				filters,
-				["userGroup", "organisation", "businessCategory"],
-				["group_id", "company_id", "business_category"],
-			),
+				['userGroup', 'organisation', 'businessCategory'],
+				['group_id', 'company_id', 'business_category']
+			)
 		);
 
-		andFilters.push(
-			...getLomFilter(filters.educationLevels, LomScheme.education),
-		);
+		andFilters.push(...getLomFilter(filters.educationLevels, LomScheme.education));
 		andFilters.push(...getLomFilter(filters.subjects, LomScheme.subject));
 
 		andFilters.push(
 			...getMultiOptionsFilters<Partial<UserTableState>>(
 				filters,
-				["idps"],
-				["idps.idp"],
+				['idps'],
+				['idps.idp'],
 				undefined,
-				true,
-			),
+				true
+			)
 		);
 
 		andFilters.push(
 			...getMultiOptionFilters<Partial<UserTableState>>(
 				filters,
-				["tempAccess"],
-				["user.temp_access.current.status"],
-			),
+				['tempAccess'],
+				['user.temp_access.current.status']
+			)
 		);
 
 		andFilters.push(
 			...getDateRangeFilters<Partial<UserTableState>>(
 				filters,
-				["createdAt", "lastAccessAt"],
-				["acc_created_at", "last_access_at"],
-			),
+				['createdAt', 'lastAccessAt'],
+				['acc_created_at', 'last_access_at']
+			)
 		);
 
 		if (filters.educationalOrganisations?.length) {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			const orFilters: any[] = [];
 
-			eduOrgToClientOrg(
-				without(filters.educationalOrganisations, NULL_FILTER),
-			).forEach((org) => {
+			eduOrgToClientOrg(without(filters.educationalOrganisations, NULL_FILTER)).forEach((org) => {
 				orFilters.push({
 					organisations: {
 						organization_id: { _eq: org.organisationId },
@@ -127,7 +123,7 @@ export const generateWhereObjectAvo = (
 
 		// Filter users by whether the user has a Stamboeknummer or not.
 		if (!isNil(filters.stamboek)) {
-			const hasStamboek = first(filters.stamboek) === "true";
+			const hasStamboek = first(filters.stamboek) === 'true';
 			const isStamboekNull = !hasStamboek;
 
 			andFilters.push({ stamboek: { _is_null: isStamboekNull } });
@@ -137,13 +133,13 @@ export const generateWhereObjectAvo = (
 	} catch (err) {
 		console.error(
 			new CustomError(
-				"An error occurred while generating the where object for filtering users",
+				'An error occurred while generating the where object for filtering users',
 				err,
-				{ filters },
-			),
+				{ filters }
+			)
 		);
 		showToast({
-			title: "Het opbouwen van de filters voor de gebruikers is mislukt",
+			title: 'Het opbouwen van de filters voor de gebruikers is mislukt',
 			type: ToastType.ERROR,
 		});
 	}
@@ -152,7 +148,7 @@ export const generateWhereObjectAvo = (
 export const generateWhereObjectArchief = (
 	filters: Partial<UserTableState>,
 	onlySelectedProfiles: boolean,
-	theSelectedProfileIds: string[],
+	theSelectedProfileIds: string[]
 ) => {
 	try {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -185,31 +181,23 @@ export const generateWhereObjectArchief = (
 
 		if (!isNil(filters.isKeyUser)) {
 			andFilters.push(
-				...getBooleanFilters<Partial<UserTableState>>(
-					filters,
-					["isKeyUser"],
-					["is_key_user"],
-				),
+				...getBooleanFilters<Partial<UserTableState>>(filters, ['isKeyUser'], ['is_key_user'])
 			);
 		}
 
-		andFilters.push(
-			...getMultiOptionFilters(filters, ["userGroup"], ["group_id"]),
-		);
+		andFilters.push(...getMultiOptionFilters(filters, ['userGroup'], ['group_id']));
 
 		andFilters.push(
 			...getMultiOptionsFilters(
 				filters,
-				["idps", "organisation"],
-				["identities", "organisation"],
-				["identity_provider_name", "org_identifier"],
-				true,
-			),
+				['idps', 'organisation'],
+				['identities', 'organisation'],
+				['identity_provider_name', 'org_identifier'],
+				true
+			)
 		);
 
-		andFilters.push(
-			...getDateRangeFilters(filters, ["lastAccessAt"], ["last_access_at"]),
-		);
+		andFilters.push(...getDateRangeFilters(filters, ['lastAccessAt'], ['last_access_at']));
 
 		if (onlySelectedProfiles) {
 			andFilters.push({ profile_id: { _in: theSelectedProfileIds } });
@@ -219,13 +207,13 @@ export const generateWhereObjectArchief = (
 	} catch (err) {
 		console.error(
 			new CustomError(
-				"An error occurred while generating the where object for filtering users",
+				'An error occurred while generating the where object for filtering users',
 				err,
-				{ filters },
-			),
+				{ filters }
+			)
 		);
 		showToast({
-			title: "Het opbouwen van de filters voor de gebruikers is mislukt",
+			title: 'Het opbouwen van de filters voor de gebruikers is mislukt',
 			type: ToastType.ERROR,
 		});
 	}

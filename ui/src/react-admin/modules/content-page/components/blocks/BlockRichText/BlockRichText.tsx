@@ -5,23 +5,17 @@ import type {
 	GridSize,
 	IconName,
 	RenderLinkFunction,
-} from "@viaa/avo2-components";
-import {
-	Button,
-	Column,
-	convertToHtml,
-	Grid,
-	Spacer,
-} from "@viaa/avo2-components";
-import clsx from "clsx";
-import type { FunctionComponent } from "react";
-import React from "react";
-import { defaultRenderLinkFunction } from "~shared/helpers/link";
-import { Icon } from "~shared/components/Icon";
-import Html from "~shared/components/Html/Html";
-import type { RichTextButton } from "~content-blocks/BlockRichText/BlockRichText.types";
+} from '@viaa/avo2-components';
+import { Button, Column, convertToHtml, Grid, Spacer } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
+import { Icon } from '~shared/components/Icon';
+import Html from '~shared/components/Html/Html';
+import type { RichTextButton } from '~content-blocks/BlockRichText/BlockRichText.types';
 
-import "./BlockRichText.scss";
+import './BlockRichText.scss';
 
 interface BlockRichTextElement {
 	content: string;
@@ -39,7 +33,7 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	className,
 	elements = [
 		{
-			content: "",
+			content: '',
 		},
 	],
 	maxTextWidth,
@@ -58,9 +52,7 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 						<Button
 							{...buttonProps}
 							renderIcon={
-								buttonProps.icon
-									? () => <Icon name={buttonProps.icon as IconName} />
-									: undefined
+								buttonProps.icon ? () => <Icon name={buttonProps.icon as IconName} /> : undefined
 							}
 							iconPosition={buttonProps.buttonIconAlignment}
 						/>,
@@ -68,17 +60,14 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 						buttonProps.altTitle ||
 							buttonProps.label ||
 							buttonProps.ariaLabel ||
-							buttonProps.tooltip,
+							buttonProps.tooltip
 					)}
 				</Spacer>
 			);
 		});
 	};
 
-	const renderContent = (
-		contentElem: BlockRichTextElement,
-		columnIndex = 0,
-	) => {
+	const renderContent = (contentElem: BlockRichTextElement, columnIndex = 0) => {
 		const { content, color, buttons } = contentElem;
 
 		return (
@@ -112,10 +101,8 @@ export const BlockRichText: FunctionComponent<BlockRichTextProps> = ({
 	);
 
 	return (
-		<div className={clsx("c-rich-text-block", className)}>
-			{Array.isArray(elements)
-				? renderElements(elements)
-				: renderContent(elements)}
+		<div className={clsx('c-rich-text-block', className)}>
+			{Array.isArray(elements) ? renderElements(elements) : renderContent(elements)}
 		</div>
 	);
 };

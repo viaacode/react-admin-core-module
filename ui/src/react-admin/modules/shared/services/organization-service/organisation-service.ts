@@ -22,10 +22,7 @@ export class OrganisationService {
 		try {
 			return fetchWithLogoutJson(`${OrganisationService.getBaseUrl()}/with-users`);
 		} catch (err) {
-			throw new CustomError(
-				'Failed to get organisations that have users from the database',
-				err
-			);
+			throw new CustomError('Failed to get organisations that have users from the database', err);
 		}
 	}
 

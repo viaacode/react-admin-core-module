@@ -1,16 +1,11 @@
-import type {
-	AlignOptions,
-	ButtonProps,
-	DefaultProps,
-	IconName,
-} from "@viaa/avo2-components";
-import { Button } from "@viaa/avo2-components";
-import clsx from "clsx";
-import type { FunctionComponent } from "react";
-import React, { useEffect } from "react";
-import { Icon } from "~shared/components/Icon/Icon";
+import type { AlignOptions, ButtonProps, DefaultProps, IconName } from '@viaa/avo2-components';
+import { Button } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import type { FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
+import { Icon } from '~shared/components/Icon/Icon';
 
-import "./BlockEventbrite.scss";
+import './BlockEventbrite.scss';
 
 export interface BlockEventbriteProps extends DefaultProps, ButtonProps {
 	eventId: string;
@@ -18,11 +13,11 @@ export interface BlockEventbriteProps extends DefaultProps, ButtonProps {
 	className?: string;
 }
 
-const EVENTBRITE_SCRIPT_ID = "eventbriteWidgetsScript";
+const EVENTBRITE_SCRIPT_ID = 'eventbriteWidgetsScript';
 
 export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 	eventId,
-	align = "center",
+	align = 'center',
 	className,
 	...rest
 }) => {
@@ -30,12 +25,12 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 
 	useEffect(() => {
 		let script: HTMLScriptElement | null = document.getElementById(
-			EVENTBRITE_SCRIPT_ID,
+			EVENTBRITE_SCRIPT_ID
 		) as HTMLScriptElement | null;
 
 		if (!script) {
-			script = document.createElement("script");
-			script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
+			script = document.createElement('script');
+			script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
 			script.id = EVENTBRITE_SCRIPT_ID;
 			document.body.appendChild(script);
 
@@ -43,7 +38,7 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 				// biome-ignore lint/suspicious/noExplicitAny: todo
 				(window as any).EBWidgets.createWidget({
 					eventId,
-					widgetType: "checkout",
+					widgetType: 'checkout',
 					modal: true,
 					modalTriggerElementId: elementId,
 				});
@@ -54,19 +49,11 @@ export const BlockEventbrite: FunctionComponent<BlockEventbriteProps> = ({
 	}, [elementId, eventId]);
 
 	return (
-		<div
-			className={clsx(
-				className,
-				"c-block-eventbrite",
-				`c-block-eventbrite__align-${align}`,
-			)}
-		>
+		<div className={clsx(className, 'c-block-eventbrite', `c-block-eventbrite__align-${align}`)}>
 			<Button
 				{...rest}
 				id={elementId}
-				renderIcon={
-					rest.icon ? () => <Icon name={rest.icon as IconName} /> : undefined
-				}
+				renderIcon={rest.icon ? () => <Icon name={rest.icon as IconName} /> : undefined}
 			/>
 		</div>
 	);

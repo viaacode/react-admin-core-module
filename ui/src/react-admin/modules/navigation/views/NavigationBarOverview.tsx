@@ -46,13 +46,9 @@ export const NavigationBarOverview: FunctionComponent = () => {
 						<Button
 							icon={'eye' as IconName}
 							onClick={() =>
-								navigate(
-									history,
-									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'),
-									{
-										navigationBarId: placement,
-									}
-								)
+								navigate(history, AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_DETAIL'), {
+									navigationBarId: placement,
+								})
 							}
 							size="small"
 							title={tText(
@@ -68,9 +64,7 @@ export const NavigationBarOverview: FunctionComponent = () => {
 							onClick={() =>
 								navigate(
 									history,
-									AdminConfigManager.getAdminRoute(
-										'ADMIN_NAVIGATION_ITEM_CREATE'
-									),
+									AdminConfigManager.getAdminRoute('ADMIN_NAVIGATION_ITEM_CREATE'),
 									{
 										navigationBarId: placement,
 									}
@@ -97,9 +91,7 @@ export const NavigationBarOverview: FunctionComponent = () => {
 			return (
 				<>
 					<div>
-						{tHtml(
-							'admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt'
-						)}
+						{tHtml('admin/menu/views/menu-overview___er-zijn-nog-geen-navigaties-aangemaakt')}
 					</div>
 					<div>
 						{tHtml(

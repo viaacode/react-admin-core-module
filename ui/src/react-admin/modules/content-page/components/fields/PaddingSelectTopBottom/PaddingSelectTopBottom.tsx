@@ -23,15 +23,11 @@ export const PaddingSelectTopBottom: FunctionComponent<PaddingSelectProps> = ({
 	const generateOptions = (direction: PaddingDirection) =>
 		[
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___geen'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___geen'),
 				value: 'none',
 			},
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___klein'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___klein'),
 				value: `${direction}-small`,
 			},
 			{
@@ -41,9 +37,7 @@ export const PaddingSelectTopBottom: FunctionComponent<PaddingSelectProps> = ({
 				value: `${direction}`,
 			},
 			{
-				label: tHtml(
-					'admin/content-block/components/fields/padding-select/padding-select___groot'
-				),
+				label: tHtml('admin/content-block/components/fields/padding-select/padding-select___groot'),
 				value: `${direction}-large`,
 			},
 			{

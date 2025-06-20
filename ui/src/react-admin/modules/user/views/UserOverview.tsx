@@ -1,72 +1,62 @@
-import type { IconName, TagInfo } from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import { compact } from "lodash-es";
-import type { FC, ReactText } from "react";
-import React, { useCallback, useMemo, useState } from "react";
+import type { IconName, TagInfo } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { compact } from 'lodash-es';
+import type { FC, ReactText } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
-import { AdminConfigManager } from "~core/config";
-import { ToastType } from "~core/config/config.types";
-import { useUserGroupOptions } from "~modules/user-group/hooks/useUserGroupOptions";
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
-} from "~modules/user/helpers/generate-filter-where-object-users";
-import { useGetProfiles } from "~modules/user/hooks/use-get-profiles";
-import {
-	GET_USER_BULK_ACTIONS,
-	GET_USER_OVERVIEW_TABLE_COLS,
-} from "~modules/user/user.consts";
-import { UserService } from "~modules/user/user.service";
-import type { AddOrRemove } from "~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal";
-import AddOrRemoveLinkedElementsModal from "~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal";
-import type { CheckboxOption } from "~shared/components/CheckboxDropdownModal/CheckboxDropdownModal";
-import { ErrorView } from "~shared/components/error";
-import { CenteredSpinner } from "~shared/components/Spinner/CenteredSpinner";
-import { CustomError } from "~shared/helpers/custom-error";
-import { isHetArchief } from "~shared/helpers/is-hetarchief";
-import { setSelectedCheckboxes } from "~shared/helpers/set-selected-checkboxes";
-import { showToast } from "~shared/helpers/show-toast";
+} from '~modules/user/helpers/generate-filter-where-object-users';
+import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
+import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
+import { UserService } from '~modules/user/user.service';
+import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
+import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { ErrorView } from '~shared/components/error';
+import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
+import { CustomError } from '~shared/helpers/custom-error';
+import { isHetArchief } from '~shared/helpers/is-hetarchief';
+import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
+import { showToast } from '~shared/helpers/show-toast';
 
-import { tHtml, tText } from "~shared/helpers/translation-functions";
-import { useGetIdps } from "~shared/hooks/use-get-idps";
-import { useBusinessCategories } from "~shared/hooks/useBusinessCategory";
-import { useCompaniesWithUsers } from "~shared/hooks/useCompanies";
-import { useEducationLevels } from "~shared/hooks/useEducationLevels";
-import { useSubjects } from "~shared/hooks/useSubjects";
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { useGetIdps } from '~shared/hooks/use-get-idps';
+import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
+import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
+import { useEducationLevels } from '~shared/hooks/useEducationLevels';
+import { useSubjects } from '~shared/hooks/useSubjects';
 
-import { SettingsService } from "~shared/services/settings-service/settings.service";
+import { SettingsService } from '~shared/services/settings-service/settings.service';
 
-import type { FilterableColumn } from "~shared/components/FilterTable/FilterTable";
-import FilterTable, {
-	getFilters,
-} from "../../shared/components/FilterTable/FilterTable";
-import UserDeleteModal from "../components/UserDeleteModal";
-import type { UserOverviewTableCol, UserTableState } from "../user.types";
-import { UserBulkAction, USERS_PER_PAGE } from "../user.types";
-import { ExportAllToCsvModal } from "~shared/components/ExportAllToCsvModal/ExportAllToCsvModal";
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
+import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
+import UserDeleteModal from '../components/UserDeleteModal';
+import type { UserOverviewTableCol, UserTableState } from '../user.types';
+import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
+import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 
-import "./UserOverview.scss";
+import './UserOverview.scss';
 import {
 	renderUserOverviewTableCellReact,
 	renderUserOverviewTableCellText,
-} from "~modules/user/helpers/render-user-overview-table-cells";
-import { navigate } from "~shared/helpers/link";
+} from '~modules/user/helpers/render-user-overview-table-cells';
+import { navigate } from '~shared/helpers/link';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
 	commonUser: Avo.User.CommonUser;
 }
 
-export const UserOverview: FC<UserOverviewProps> = ({
-	customFormatDate,
-	commonUser,
-}) => {
+export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUser }) => {
 	// Hooks
 	const history = AdminConfigManager.getConfig().services.router.useHistory();
 
-	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(
-		null,
-	);
+	const [tableState, setTableState] = useState<Partial<UserTableState> | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [selectedProfileIds, setSelectedProfileIds] = useState<string[]>([]);
 	const [companies] = useCompaniesWithUsers();
@@ -74,15 +64,9 @@ export const UserOverview: FC<UserOverviewProps> = ({
 	const [educationLevels] = useEducationLevels();
 	const [subjects] = useSubjects();
 	const { data: idps } = useGetIdps();
-	const [userGroupOptions] = useUserGroupOptions(
-		"CheckboxOption",
-		false,
-		false,
-	);
-	const [usersDeleteModalOpen, setUsersDeleteModalOpen] =
-		useState<boolean>(false);
-	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] =
-		useState<boolean>(false);
+	const [userGroupOptions] = useUserGroupOptions('CheckboxOption', false, false);
+	const [usersDeleteModalOpen, setUsersDeleteModalOpen] = useState<boolean>(false);
+	const [changeSubjectsModalOpen, setChangeSubjectsModalOpen] = useState<boolean>(false);
 	const [allSubjects, setAllSubjects] = useState<string[]>([]);
 	const [exportType, setExportType] = useState<
 		UserBulkAction.EXPORT_SELECTION | UserBulkAction.EXPORT_ALL | null
@@ -96,38 +80,28 @@ export const UserOverview: FC<UserOverviewProps> = ({
 				commonUser,
 				userGroupOptions: setSelectedCheckboxes(
 					userGroupOptions as CheckboxOption[],
-					(tableState?.userGroup ?? []) as string[],
+					(tableState?.userGroup ?? []) as string[]
 				),
 				companyOptions: companies.map(
 					(option: Partial<Avo.Organization.Organization>): CheckboxOption => ({
 						id: option.or_id as string,
 						label: option.name as string,
-						checked: ((tableState?.organisation ?? []) as string[]).includes(
-							String(option.or_id),
-						),
-					}),
+						checked: ((tableState?.organisation ?? []) as string[]).includes(String(option.or_id)),
+					})
 				),
 				businessCategoryOptions: businessCategories.map(
 					(option: string): CheckboxOption => ({
 						id: option,
 						label: option,
-						checked: (
-							(tableState?.businessCategory ?? []) as string[]
-						).includes(option),
-					}),
+						checked: ((tableState?.businessCategory ?? []) as string[]).includes(option),
+					})
 				),
 				educationLevels: setSelectedCheckboxes(
 					educationLevels,
-					(tableState?.educationLevels ?? []) as string[],
+					(tableState?.educationLevels ?? []) as string[]
 				),
-				subjects: setSelectedCheckboxes(
-					subjects,
-					(tableState?.subjects ?? []) as string[],
-				),
-				idps: setSelectedCheckboxes(
-					idps || [],
-					(tableState?.idps ?? []) as string[],
-				),
+				subjects: setSelectedCheckboxes(subjects, (tableState?.subjects ?? []) as string[]),
+				idps: setSelectedCheckboxes(idps || [], (tableState?.idps ?? []) as string[]),
 			}),
 		[
 			businessCategories,
@@ -138,13 +112,13 @@ export const UserOverview: FC<UserOverviewProps> = ({
 			tableState,
 			userGroupOptions,
 			commonUser,
-		],
+		]
 	);
 
 	const generateWhereObject = useCallback(
 		(
 			filters: Partial<UserTableState> | null,
-			onlySelectedProfiles: boolean,
+			onlySelectedProfiles: boolean
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 		): any | null => {
 			if (!filters) {
@@ -153,24 +127,16 @@ export const UserOverview: FC<UserOverviewProps> = ({
 			// biome-ignore lint/suspicious/noExplicitAny: todo
 			let whereObj: any;
 			if (isHetArchief()) {
-				whereObj = generateWhereObjectArchief(
-					filters,
-					onlySelectedProfiles,
-					selectedProfileIds,
-				);
+				whereObj = generateWhereObjectArchief(filters, onlySelectedProfiles, selectedProfileIds);
 			} else {
-				whereObj = generateWhereObjectAvo(
-					filters,
-					onlySelectedProfiles,
-					selectedProfileIds,
-				); // TODO avo and split
+				whereObj = generateWhereObjectAvo(filters, onlySelectedProfiles, selectedProfileIds); // TODO avo and split
 			}
 			if (JSON.stringify(whereObj) === '{"_and":[]}') {
 				return null;
 			}
 			return whereObj;
 		},
-		[selectedProfileIds],
+		[selectedProfileIds]
 	);
 
 	const getColumnType = useCallback((): string => {
@@ -181,7 +147,7 @@ export const UserOverview: FC<UserOverviewProps> = ({
 				tableColumn?.id === tableState?.sort_column
 			);
 		});
-		return column?.dataType || "";
+		return column?.dataType || '';
 	}, [tableState, columns]);
 
 	const {
@@ -191,9 +157,8 @@ export const UserOverview: FC<UserOverviewProps> = ({
 		refetch: refetchProfiles,
 	} = useGetProfiles({
 		page: tableState?.page || 0,
-		sortColumn: (tableState?.sort_column ||
-			"last_access_at") as UserOverviewTableCol,
-		sortOrder: tableState?.sort_order || "desc",
+		sortColumn: (tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+		sortOrder: tableState?.sort_order || 'desc',
 		tableColumnDataType: getColumnType(),
 		where: generateWhereObject(getFilters(tableState), false),
 		itemsPerPage: USERS_PER_PAGE,
@@ -201,56 +166,43 @@ export const UserOverview: FC<UserOverviewProps> = ({
 	const profiles = profilesResponse?.[0] || null;
 	const profileCount = profilesResponse?.[1] || null;
 
-	const bulkChangeSubjects = async (
-		addOrRemove: AddOrRemove,
-		subjects: string[],
-	) => {
+	const bulkChangeSubjects = async (addOrRemove: AddOrRemove, subjects: string[]) => {
 		try {
 			if (!selectedProfileIds || !selectedProfileIds.length) {
 				return;
 			}
 
-			if (addOrRemove === "add") {
-				await UserService.bulkAddSubjectsToProfiles(
-					subjects,
-					compact(selectedProfileIds),
-				);
+			if (addOrRemove === 'add') {
+				await UserService.bulkAddSubjectsToProfiles(subjects, compact(selectedProfileIds));
 				showToast({
-					title: tText("modules/user/views/user-overview___success"),
+					title: tText('modules/user/views/user-overview___success'),
 					description: tText(
-						"admin/users/views/user-overview___de-vakken-zijn-toegevoegd-aan-de-geselecteerde-gebruikers",
+						'admin/users/views/user-overview___de-vakken-zijn-toegevoegd-aan-de-geselecteerde-gebruikers'
 					),
 					type: ToastType.SUCCESS,
 				});
 			} else {
 				// remove
-				await UserService.bulkRemoveSubjectsFromProfiles(
-					subjects,
-					compact(selectedProfileIds),
-				);
+				await UserService.bulkRemoveSubjectsFromProfiles(subjects, compact(selectedProfileIds));
 				showToast({
-					title: tText("modules/user/views/user-overview___success"),
+					title: tText('modules/user/views/user-overview___success'),
 					description: tText(
-						"admin/users/views/user-overview___de-vakken-zijn-verwijderd-van-de-geselecteerde-gebruikers",
+						'admin/users/views/user-overview___de-vakken-zijn-verwijderd-van-de-geselecteerde-gebruikers'
 					),
 					type: ToastType.SUCCESS,
 				});
 			}
 		} catch (err) {
 			console.error(
-				new CustomError(
-					"Failed to bulk update subjects of user profiles",
-					err,
-					{
-						addOrRemove,
-						subjects,
-					},
-				),
+				new CustomError('Failed to bulk update subjects of user profiles', err, {
+					addOrRemove,
+					subjects,
+				})
 			);
 			showToast({
-				title: tText("modules/user/views/user-overview___error"),
+				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
-					"admin/users/views/user-overview___het-aanpassen-van-de-vakken-is-mislukt",
+					'admin/users/views/user-overview___het-aanpassen-van-de-vakken-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -261,16 +213,16 @@ export const UserOverview: FC<UserOverviewProps> = ({
 		setIsLoading(true);
 		try {
 			const profileIds = await UserService.getProfileIds(
-				generateWhereObject(getFilters(tableState), false),
+				generateWhereObject(getFilters(tableState), false)
 			);
 			const numOfSelectedProfiles = String(profileIds.length);
 			showToast({
-				title: tText("modules/user/views/user-overview___success"),
+				title: tText('modules/user/views/user-overview___success'),
 				description: tText(
-					"admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd",
+					'admin/users/views/user-overview___je-hebt-num-of-selected-profiles-gebruikers-geselecteerd',
 					{
 						numOfSelectedProfiles,
-					},
+					}
 				),
 				type: ToastType.SUCCESS,
 			});
@@ -278,16 +230,16 @@ export const UserOverview: FC<UserOverviewProps> = ({
 		} catch (err) {
 			console.error(
 				new CustomError(
-					"Failed to fetch all profile ids that adhere to the selected filters",
+					'Failed to fetch all profile ids that adhere to the selected filters',
 					err,
-					{ tableState },
-				),
+					{ tableState }
+				)
 			);
 
 			showToast({
-				title: tText("modules/user/views/user-overview___error"),
+				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
-					"admin/users/views/user-overview___het-ophalen-van-alle-geselecteerde-gebruiker-ids-is-mislukt",
+					'admin/users/views/user-overview___het-ophalen-van-alle-geselecteerde-gebruiker-ids-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -306,25 +258,23 @@ export const UserOverview: FC<UserOverviewProps> = ({
 			await UserService.updateBlockStatusByProfileIds(
 				selectedProfileIds,
 				blockOrUnblock,
-				false, // TODO sync sendEmail feature
+				false // TODO sync sendEmail feature
 			);
 			await refetchProfiles();
 			showToast({
-				title: tText("modules/user/views/user-overview___success"),
+				title: tText('modules/user/views/user-overview___success'),
 				description: blockOrUnblock
-					? tText(
-							"admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd",
-					  )
+					? tText('admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-geblokkeerd')
 					: tText(
-							"admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd",
-					  ),
+							'admin/users/views/user-overview___de-geselecteerde-gebruikers-zijn-gedeblokkeerd'
+						),
 				type: ToastType.SUCCESS,
 			});
 		} catch (_err) {
 			showToast({
-				title: tText("modules/user/views/user-overview___error"),
+				title: tText('modules/user/views/user-overview___error'),
 				description: tText(
-					"admin/users/views/user-overview___het-blokkeren-van-de-geselecteerde-gebruikers-is-mislukt",
+					'admin/users/views/user-overview___het-blokkeren-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -335,12 +285,12 @@ export const UserOverview: FC<UserOverviewProps> = ({
 	const navigateFilterToOption = (columnId: string) => (tagId: ReactText) => {
 		navigate(
 			history,
-			AdminConfigManager.getAdminRoute("ADMIN_USER_OVERVIEW"),
+			AdminConfigManager.getAdminRoute('ADMIN_USER_OVERVIEW'),
 			{},
 			{
 				[columnId]: tagId.toString(),
-				columns: (tableState?.columns || []).join("~"),
-			},
+				columns: (tableState?.columns || []).join('~'),
+			}
 		);
 	};
 
@@ -381,13 +331,11 @@ export const UserOverview: FC<UserOverviewProps> = ({
 					})
 					// biome-ignore lint/suspicious/noExplicitAny: todo
 					.catch((err: any) => {
-						console.error(
-							new CustomError("Failed to get subjects from the database", err),
-						);
+						console.error(new CustomError('Failed to get subjects from the database', err));
 						showToast({
-							title: tText("modules/user/views/user-overview___error"),
+							title: tText('modules/user/views/user-overview___error'),
 							description: tText(
-								"settings/components/profile___het-ophalen-van-de-vakken-is-mislukt",
+								'settings/components/profile___het-ophalen-van-de-vakken-is-mislukt'
 							),
 							type: ToastType.ERROR,
 						});
@@ -399,13 +347,11 @@ export const UserOverview: FC<UserOverviewProps> = ({
 	const renderNoResults = () => {
 		return (
 			<ErrorView
-				message={tHtml(
-					"admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers",
-				)}
+				message={tHtml('admin/users/views/user-overview___er-bestaan-nog-geen-gebruikers')}
 			>
 				<p>
 					{tHtml(
-						"admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn",
+						'admin/users/views/user-overview___beschrijving-wanneer-er-nog-geen-gebruikers-zijn'
 					)}
 				</p>
 			</ErrorView>
@@ -420,21 +366,17 @@ export const UserOverview: FC<UserOverviewProps> = ({
 					data={profiles || []}
 					dataCount={profileCount || 0}
 					renderCell={(rowData: Avo.User.CommonUser, columnId: string) =>
-						renderUserOverviewTableCellReact(
-							rowData,
-							columnId as UserOverviewTableCol,
-							{
-								navigateFilterToOption,
-								history,
-								tableState: tableState as UserTableState,
-							},
-						)
+						renderUserOverviewTableCellReact(rowData, columnId as UserOverviewTableCol, {
+							navigateFilterToOption,
+							history,
+							tableState: tableState as UserTableState,
+						})
 					}
 					searchTextPlaceholder={tText(
-						"admin/users/views/user-overview___zoek-op-naam-email-alias",
+						'admin/users/views/user-overview___zoek-op-naam-email-alias'
 					)}
 					noContentMatchingFiltersMessage={tText(
-						"admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters",
+						'admin/users/views/user-overview___er-zijn-geen-gebruikers-doe-voldoen-aan-de-opgegeven-filters'
 					)}
 					itemsPerPage={USERS_PER_PAGE}
 					onTableStateChanged={(newState) => {
@@ -444,24 +386,18 @@ export const UserOverview: FC<UserOverviewProps> = ({
 					isLoading={isLoading}
 					showCheckboxes={!!bulkActions.length}
 					selectedItemIds={selectedProfileIds}
-					onSelectionChanged={
-						setSelectedProfileIds as (ids: ReactText[]) => void
-					}
+					onSelectionChanged={setSelectedProfileIds as (ids: ReactText[]) => void}
 					onSelectAll={setAllProfilesAsSelected}
 					// biome-ignore lint/suspicious/noExplicitAny: todo
 					onSelectBulkAction={handleBulkAction as any}
 					bulkActions={GET_USER_BULK_ACTIONS(
 						commonUser,
 						bulkActions,
-						selectedProfileIds?.length > 0,
+						selectedProfileIds?.length > 0
 					)}
-					rowKey={(row: Avo.User.CommonUser) =>
-						row?.profileId || row?.userId || row?.email || ""
-					}
+					rowKey={(row: Avo.User.CommonUser) => row?.profileId || row?.userId || row?.email || ''}
 					className="u-spacer-bottom-l u-useroverview-table"
-					searchInputAriaLabel={tText(
-						"modules/user/views/user-overview___zoek-input-aria-label",
-					)}
+					searchInputAriaLabel={tText('modules/user/views/user-overview___zoek-input-aria-label')}
 				/>
 				<UserDeleteModal
 					selectedProfileIds={selectedProfileIds}
@@ -470,11 +406,11 @@ export const UserOverview: FC<UserOverviewProps> = ({
 					deleteCallback={refetchProfiles}
 				/>
 				<AddOrRemoveLinkedElementsModal
-					title={tText("admin/users/views/user-overview___vakken-aanpassen")}
+					title={tText('admin/users/views/user-overview___vakken-aanpassen')}
 					addOrRemoveLabel={tText(
-						"admin/users/views/user-overview___vakken-toevoegen-of-verwijderen",
+						'admin/users/views/user-overview___vakken-toevoegen-of-verwijderen'
 					)}
-					contentLabel={tText("admin/users/views/user-overview___vakken")}
+					contentLabel={tText('admin/users/views/user-overview___vakken')}
 					isOpen={changeSubjectsModalOpen}
 					onClose={() => setChangeSubjectsModalOpen(false)}
 					labels={allSubjects.map((subject) => ({
@@ -484,21 +420,21 @@ export const UserOverview: FC<UserOverviewProps> = ({
 					callback={(addOrRemove: AddOrRemove, tags: TagInfo[]) =>
 						bulkChangeSubjects(
 							addOrRemove,
-							tags.map((tag) => tag.value.toString()),
+							tags.map((tag) => tag.value.toString())
 						)
 					}
 				/>
 				<ExportAllToCsvModal
 					title={tText(
-						"modules/user/views/user-overview___exporteren-van-alle-gebruikers-naar-csv",
+						'modules/user/views/user-overview___exporteren-van-alle-gebruikers-naar-csv'
 					)}
 					isOpen={exportType !== null}
 					onClose={() => setExportType(null)}
 					fetchingItemsLabel={tText(
-						"modules/user/views/user-overview___bezig-met-ophalen-van-gebruikers",
+						'modules/user/views/user-overview___bezig-met-ophalen-van-gebruikers'
 					)}
 					generatingCsvLabel={tText(
-						"modules/user/views/user-overview___bezig-met-genereren-van-de-csv",
+						'modules/user/views/user-overview___bezig-met-genereren-van-de-csv'
 					)}
 					fetchTotalItems={async () => {
 						const where =
@@ -508,11 +444,10 @@ export const UserOverview: FC<UserOverviewProps> = ({
 						const response = await UserService.getProfiles(
 							0,
 							0,
-							(tableState?.sort_column ||
-								"last_access_at") as UserOverviewTableCol,
-							tableState?.sort_order || "desc",
+							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+							tableState?.sort_order || 'desc',
 							getColumnType(),
-							where,
+							where
 						);
 						return response[1];
 					}}
@@ -524,11 +459,10 @@ export const UserOverview: FC<UserOverviewProps> = ({
 						const response = await UserService.getProfiles(
 							offset,
 							limit,
-							(tableState?.sort_column ||
-								"last_access_at") as UserOverviewTableCol,
-							tableState?.sort_order || "desc",
+							(tableState?.sort_column || 'last_access_at') as UserOverviewTableCol,
+							tableState?.sort_order || 'desc',
 							getColumnType(),
-							where,
+							where
 						);
 						return response[0];
 					}}
@@ -541,23 +475,21 @@ export const UserOverview: FC<UserOverviewProps> = ({
 							{
 								tableState: tableState as UserTableState,
 								customFormatDate,
-							},
+							}
 						)
 					}
 					columns={compact(
 						columns
-							.filter((column) => column.id !== "actions")
+							.filter((column) => column.id !== 'actions')
 							.map((column) => {
 								const label = column.label || column.tooltip;
 								if (!label) {
 									return null;
 								}
 								return { label, id: column.id };
-							}),
+							})
 					)}
-					exportFileName={tText(
-						"modules/user/views/user-overview___gebruikers-csv",
-					)}
+					exportFileName={tText('modules/user/views/user-overview___gebruikers-csv')}
 				/>
 			</>
 		);
@@ -570,10 +502,10 @@ export const UserOverview: FC<UserOverviewProps> = ({
 		return (
 			<ErrorView
 				message={tHtml(
-					"admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt",
+					'admin/users/views/user-overview___het-ophalen-van-de-gebruikers-is-mislukt'
 				)}
-				icon={"alertTriangle" as IconName}
-				actionButtons={["home", "helpdesk"]}
+				icon={'alertTriangle' as IconName}
+				actionButtons={['home', 'helpdesk']}
 			/>
 		);
 	}

@@ -45,9 +45,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 	const getUserGroups = (contentPageInfo: ContentPageInfo): TagOption[] => {
 		const tagInfos: TagInfo[] = compact(
 			(contentPageInfo.userGroupIds || []).map((userGroupId: string): TagInfo | undefined => {
-				return allUserGroupOptions.find(
-					(userGroup: TagInfo) => userGroup.value === userGroupId
-				);
+				return allUserGroupOptions.find((userGroup: TagInfo) => userGroup.value === userGroupId);
 			})
 		);
 
@@ -123,10 +121,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 					<tbody>
 						{renderDetailRow(
 							<div style={{ width: '400px' }}>
-								<Thumbnail
-									category="item"
-									src={contentPageInfo.thumbnailPath || undefined}
-								/>
+								<Thumbnail category="item" src={contentPageInfo.thumbnailPath || undefined} />
 							</div>,
 							tText('admin/content/views/content-detail___cover-afbeelding')
 						)}
@@ -140,9 +135,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						{renderSimpleDetailRows<ContentPageInfo>(contentPageInfo, [
 							[
 								'seoDescription',
-								tText(
-									'admin/content/views/content-detail-meta-data___seo-beschrijving'
-								),
+								tText('admin/content/views/content-detail-meta-data___seo-beschrijving'),
 							],
 							[
 								'metaDescription',
@@ -151,16 +144,11 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								),
 							],
 							['path', tText('admin/content/views/content-detail___pad')],
-							[
-								'isProtected',
-								tText('admin/content/views/content-detail___beschermde-pagina'),
-							],
+							['isProtected', tText('admin/content/views/content-detail___beschermde-pagina')],
 						])}
 						{renderDetailRow(
 							get(
-								contentTypes.find(
-									(type) => type.value === contentPageInfo.contentType
-								),
+								contentTypes.find((type) => type.value === contentPageInfo.contentType),
 								'label'
 							) || '-',
 							tText('admin/content/views/content-detail___content-type')
@@ -179,10 +167,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 						)}
 						{renderDateDetailRows<ContentPageInfo>(contentPageInfo, [
 							['createdAt', tText('admin/content/views/content-detail___aangemaakt')],
-							[
-								'updatedAt',
-								tText('admin/content/views/content-detail___laatst-bewerkt'),
-							],
+							['updatedAt', tText('admin/content/views/content-detail___laatst-bewerkt')],
 						])}
 						{renderDetailRow(
 							<p>{definePublishedAt(contentPageInfo)}</p>,
@@ -193,43 +178,33 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 								{formatDateString(contentPageInfo.publishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
-							tText(
-								'admin/content/views/content-detail-meta-data___wordt-gepubliceerd-op'
-							)
+							tText('admin/content/views/content-detail-meta-data___wordt-gepubliceerd-op')
 						)}
 						{renderDetailRow(
 							<p>
 								{formatDateString(contentPageInfo.depublishAt) ||
 									tText('admin/content/views/content-detail-meta-data___n-v-t')}
 							</p>,
-							tText(
-								'admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op'
-							)
+							tText('admin/content/views/content-detail-meta-data___wordt-gedepubliceerd-op')
 						)}
 						{renderDetailRow(
 							<p>{GET_LANGUAGE_NAMES()[contentPageInfo.language]}</p>,
-							tText(
-								'modules/content-page/views/content-page-detail-meta-data___taal'
-							),
+							tText('modules/content-page/views/content-page-detail-meta-data___taal'),
 							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(
 							contentPageInfo.nlParentPageId ? (
 								<p>
 									<Link
-										to={buildLink(
-											AdminConfigManager.getAdminRoute(
-												'ADMIN_CONTENT_PAGE_DETAIL'
-											),
-											{ id: contentPageInfo.nlParentPageId }
-										)}
+										to={buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+											id: contentPageInfo.nlParentPageId,
+										})}
 										title={tText(
 											'modules/content-page/views/content-page-detail-meta-data___bekijk-de-nederlandse-hoofd-pagina'
 										)}
 									>
 										{contentPageInfo.translatedPages?.find(
-											(translatedPage) =>
-												translatedPage.id === contentPageInfo.nlParentPageId
+											(translatedPage) => translatedPage.id === contentPageInfo.nlParentPageId
 										)?.title || '-'}
 									</Link>
 								</p>
@@ -249,9 +224,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 												<Link
 													className="c-table_detail-page__translated-pages__link"
 													to={buildLink(
-														AdminConfigManager.getAdminRoute(
-															'ADMIN_CONTENT_PAGE_DETAIL'
-														),
+														AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
 														{ id: translatedPage.id }
 													)}
 													title={
@@ -269,18 +242,14 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 														{translatedPage.title}
 													</span>
 													<span className="c-table_detail-page__translations__path">
-														{'/' +
-															translatedPage.language.toLowerCase() +
-															translatedPage.path}
+														{'/' + translatedPage.language.toLowerCase() + translatedPage.path}
 													</span>
 												</Link>
 											</p>
 										);
-								  })
+									})
 								: '-',
-							tText(
-								'modules/content-page/views/content-page-detail-meta-data___vertaalde-versies'
-							),
+							tText('modules/content-page/views/content-page-detail-meta-data___vertaalde-versies'),
 							isMultiLanguageEnabled()
 						)}
 						{renderDetailRow(

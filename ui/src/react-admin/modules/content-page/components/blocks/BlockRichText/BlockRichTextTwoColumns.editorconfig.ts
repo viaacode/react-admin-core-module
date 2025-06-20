@@ -76,9 +76,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						},
 					},
 					label: TEXT_FIELD(
-						tText(
-							'admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'
-						),
+						tText('admin/content-block/helpers/generators/buttons___knoptekst-is-verplicht'),
 						{
 							label: tText('admin/content-block/helpers/generators/buttons___tekst'),
 							editorType: ContentBlockEditor.TextInput,
@@ -112,12 +110,7 @@ export const RICH_TEXT_TWO_COLUMNS_BLOCK_CONFIG = (position = 0): ContentBlockCo
 						editorType: ContentBlockEditor.ContentPicker,
 						...(!isAvo() && {
 							editorProps: {
-								allowedTypes: [
-									'CONTENT_PAGE',
-									'INTERNAL_LINK',
-									'EXTERNAL_LINK',
-									'ANCHOR_LINK',
-								],
+								allowedTypes: ['CONTENT_PAGE', 'INTERNAL_LINK', 'EXTERNAL_LINK', 'ANCHOR_LINK'],
 							},
 						}),
 					},

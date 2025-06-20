@@ -74,8 +74,7 @@ export const UserGroupOverview = forwardRef<
 
 			const newUpdates = cloneDeep(userGroupUpdates);
 			const currentUpdate = newUpdates?.find(
-				(update) =>
-					update.permissionId === permissionId && update.userGroupId === userGroupId
+				(update) => update.permissionId === permissionId && update.userGroupId === userGroupId
 			);
 			if (currentUpdate) {
 				newUpdates.splice(newUpdates.indexOf(currentUpdate), 1);
@@ -96,28 +95,21 @@ export const UserGroupOverview = forwardRef<
 			}
 
 			const updatedUserGroups = cloneDeep(currentUserGroups);
-			const userGroup = updatedUserGroups.find(
-				(group) => String(group.id) === String(userGroupId)
-			);
+			const userGroup = updatedUserGroups.find((group) => String(group.id) === String(userGroupId));
 
 			if (!userGroup) {
 				return;
 			}
 
 			// Filter out permission (if present)
-			const removed = remove(
-				userGroup.permissions,
-				(permission) => permission.id === permissionId
-			);
+			const removed = remove(userGroup.permissions, (permission) => permission.id === permissionId);
 
 			if (removed.length) {
 				// Permission was removed
 				setCurrentUserGroups(updatedUserGroups);
 			} else {
 				// Permission was not present
-				const newPermission = permissions.find(
-					(permission) => permission.id === permissionId
-				);
+				const newPermission = permissions.find((permission) => permission.id === permissionId);
 				if (newPermission) {
 					userGroup.permissions = userGroup.permissions || [];
 					userGroup.permissions.push(newPermission);
@@ -207,9 +199,7 @@ export const UserGroupOverview = forwardRef<
 	 */
 	useEffect(() => {
 		setCurrentUserGroups(
-			(
-				currentUserGroups: UserGroupWithPermissions[] | undefined
-			): UserGroupWithPermissions[] => {
+			(currentUserGroups: UserGroupWithPermissions[] | undefined): UserGroupWithPermissions[] => {
 				if (!currentUserGroups) {
 					return cloneDeep(userGroups) as UserGroupWithPermissions[];
 				} else {
@@ -270,9 +260,7 @@ export const UserGroupOverview = forwardRef<
 			<div className={className}>
 				<TextInput
 					placeholder={tText('modules/user-group/views/user-group-overview___zoek')}
-					aria-label={tText(
-						'modules/user-group/views/user-group-overview___zoekveld-aria-label'
-					)}
+					aria-label={tText('modules/user-group/views/user-group-overview___zoekveld-aria-label')}
 					value={search}
 					onChange={onSearchChange}
 					onKeyDown={(e) => onKey(e, [...keysEnter], () => onSearchSubmit(search))}

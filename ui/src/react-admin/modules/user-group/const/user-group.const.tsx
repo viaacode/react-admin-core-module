@@ -63,9 +63,7 @@ export const getUserGroupTableColumns = (
 							<Checkbox
 								checked={isChecked}
 								value={`${group?.name}-${row.original.name}`}
-								onChange={() =>
-									updateUserGroup(String(group?.id), row.original.id, !isChecked)
-								}
+								onChange={() => updateUserGroup(String(group?.id), row.original.id, !isChecked)}
 							/>
 						);
 					},
@@ -77,9 +75,7 @@ export const getUserGroupTableColumns = (
 
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
-		label: tText(
-			'admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'
-		),
+		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
 		id: SpecialPermissionGroups.loggedOutUsers,
 	},
 	{

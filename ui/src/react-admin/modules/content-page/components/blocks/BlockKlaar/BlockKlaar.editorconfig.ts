@@ -36,9 +36,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 		state: INITIAL_KLAAR_COMPONENTS_STATE(),
 		fields: {
 			titles: TEXT_FIELD(
-				tText('admin/content-block/helpers/generators/klaar___titel-is-verplicht', {}, [
-					AVO,
-				]),
+				tText('admin/content-block/helpers/generators/klaar___titel-is-verplicht', {}, [AVO]),
 				{
 					label: tText('admin/content-block/helpers/generators/klaar___titel', {}, [AVO]),
 					editorType: ContentBlockEditor.TextInput,
@@ -65,11 +63,7 @@ export const KLAAR_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 
 					if (!value) {
 						errorArray.push(
-							tText(
-								'admin/content-block/helpers/generators/klaar___datum-is-verplicht',
-								{},
-								[AVO]
-							)
+							tText('admin/content-block/helpers/generators/klaar___datum-is-verplicht', {}, [AVO])
 						);
 					}
 

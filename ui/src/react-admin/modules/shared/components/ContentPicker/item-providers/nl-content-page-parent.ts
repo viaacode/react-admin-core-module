@@ -23,14 +23,10 @@ export const retrieveNlParentContentPages = memoize(
 
 			return parseContentPages(contentItems || []);
 		} catch (err) {
-			throw new CustomError(
-				'Failed to fetch nl parent content pages for content picker',
-				err,
-				{
-					title,
-					limit,
-				}
-			);
+			throw new CustomError('Failed to fetch nl parent content pages for content picker', err, {
+				title,
+				limit,
+			});
 		}
 	},
 	MEMOIZEE_OPTIONS

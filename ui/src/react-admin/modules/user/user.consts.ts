@@ -167,9 +167,7 @@ const getAvoColumns = (
 								id: '1',
 							},
 							{
-								label: tText('admin/users/user___tijdelijke-toegang-nee', {}, [
-									AVO,
-								]),
+								label: tText('admin/users/user___tijdelijke-toegang-nee', {}, [AVO]),
 								id: '0',
 							},
 						],
@@ -190,7 +188,7 @@ const getAvoColumns = (
 					visibleByDefault: false,
 					dataType: TableColumnDataType.dateTime,
 				},
-		  ]
+			]
 		: []) as FilterableColumn<UserOverviewTableCol>[]),
 	{
 		id: 'stamboek',
@@ -453,9 +451,7 @@ function GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(): ValidationRule<
 	return [
 		{
 			// until cannot be null and must be in the future
-			error: tText(
-				'admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'
-			),
+			error: tText('admin/users/user___de-einddatum-is-verplicht-en-moet-in-de-toekomst-liggen'),
 			isValid: (tempAccess: Partial<Avo.User.TempAccess>) =>
 				!!tempAccess.until && isAfter(normalizeTimestamp(tempAccess.until), new Date()),
 		},
@@ -465,10 +461,7 @@ function GET_TEMP_ACCESS_VALIDATION_RULES_FOR_SAVE(): ValidationRule<
 			isValid: (tempAccess: Partial<Avo.User.TempAccess>) => {
 				return tempAccess.from
 					? !!tempAccess.until &&
-							isBefore(
-								normalizeTimestamp(tempAccess.from),
-								normalizeTimestamp(tempAccess.until)
-							)
+							isBefore(normalizeTimestamp(tempAccess.from), normalizeTimestamp(tempAccess.until))
 					: true;
 			},
 		},

@@ -1,6 +1,6 @@
-import type { FlowPlayerProps } from "@meemoo/react-components";
-import { FlowPlayer } from "@meemoo/react-components";
-import type { DefaultProps } from "@viaa/avo2-components";
+import type { FlowPlayerProps } from '@meemoo/react-components';
+import { FlowPlayer } from '@meemoo/react-components';
+import type { DefaultProps } from '@viaa/avo2-components';
 import {
 	Column,
 	Container,
@@ -8,10 +8,10 @@ import {
 	ExpandableContainer,
 	Grid,
 	Spacer,
-} from "@viaa/avo2-components";
-import type { FunctionComponent } from "react";
-import React from "react";
-import Html from "~shared/components/Html/Html";
+} from '@viaa/avo2-components';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import Html from '~shared/components/Html/Html';
 
 export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	flowPlayerProps: FlowPlayerProps;
@@ -22,14 +22,12 @@ export interface BlockVideoTitleTextButtonProps extends DefaultProps {
 	showCopyright?: boolean;
 }
 
-export const BlockVideoTitleTextButton: FunctionComponent<
-	BlockVideoTitleTextButtonProps
-> = ({
+export const BlockVideoTitleTextButton: FunctionComponent<BlockVideoTitleTextButtonProps> = ({
 	className,
 	flowPlayerProps,
 	title,
 	titleLink,
-	text = "",
+	text = '',
 	collapsedHeight = 220,
 }) => {
 	return (
@@ -46,10 +44,7 @@ export const BlockVideoTitleTextButton: FunctionComponent<
 							<ExpandableContainer collapsedHeight={collapsedHeight}>
 								{title && (
 									<h2>
-										<a
-											href={titleLink}
-											style={{ color: "black", textDecoration: "none" }}
-										>
+										<a href={titleLink} style={{ color: 'black', textDecoration: 'none' }}>
 											{title}
 										</a>
 									</h2>

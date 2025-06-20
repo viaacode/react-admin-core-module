@@ -223,9 +223,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 						<Box backgroundColor="gray">
 							<Form>
 								<FormGroup
-									label={tText(
-										'admin/content-page-labels/views/content-page-label-edit___label'
-									)}
+									label={tText('admin/content-page-labels/views/content-page-label-edit___label')}
 									error={formErrors.label}
 									required
 								>
@@ -251,8 +249,7 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 										onChange={(newContentType) =>
 											setContentPageLabelInfo({
 												...contentPageLabelInfo,
-												content_type:
-													newContentType as Avo.ContentPage.Type,
+												content_type: newContentType as Avo.ContentPage.Type,
 											})
 										}
 									/>
@@ -301,23 +298,13 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 										value={
 											contentPageLabelInfo?.link_to?.value
 												? {
-														label: isNil(
-															contentPageLabelInfo.link_to?.value
-														)
+														label: isNil(contentPageLabelInfo.link_to?.value)
 															? undefined
-															: String(
-																	contentPageLabelInfo.link_to
-																		?.value
-															  ),
-														type:
-															contentPageLabelInfo.link_to?.type ||
-															'CONTENT_PAGE',
-														value: String(
-															contentPageLabelInfo?.link_to?.value
-														),
-														target: contentPageLabelInfo?.link_to
-															?.target,
-												  }
+															: String(contentPageLabelInfo.link_to?.value),
+														type: contentPageLabelInfo.link_to?.type || 'CONTENT_PAGE',
+														value: String(contentPageLabelInfo?.link_to?.value),
+														target: contentPageLabelInfo?.link_to?.target,
+													}
 												: undefined
 										}
 									/>
@@ -337,10 +324,10 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 				isCreatePage
 					? tText(
 							'admin/content-page-labels/views/content-page-label-edit___content-pagina-label-aanmaken'
-					  )
+						)
 					: tText(
 							'admin/content-page-labels/views/content-page-label-edit___content-pagina-label-aanpassen'
-					  )
+						)
 			}
 			className={className}
 		>
@@ -352,17 +339,13 @@ export const ContentPageLabelEdit: FunctionComponent<ContentPageLabelEditProps> 
 			<AdminLayout.Actions>
 				<ButtonToolbar>
 					<Button
-						label={tText(
-							'admin/content-page-labels/views/content-page-label-edit___annuleer'
-						)}
+						label={tText('admin/content-page-labels/views/content-page-label-edit___annuleer')}
 						onClick={navigateBack}
 						type="secondary"
 					/>
 					<Button
 						disabled={isSaving}
-						label={tText(
-							'admin/content-page-labels/views/content-page-label-edit___opslaan'
-						)}
+						label={tText('admin/content-page-labels/views/content-page-label-edit___opslaan')}
 						onClick={handleSave}
 						type="primary"
 					/>

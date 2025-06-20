@@ -1,8 +1,8 @@
-import type { Avo } from "@viaa/avo2-types";
-import { useQuery } from "@tanstack/react-query";
-import { ContentPageService } from "~modules/content-page/services/content-page.service";
-import type { ContentOverviewTableCols } from "~modules/content-page/types/content-pages.types";
-import { QUERY_KEYS } from "~shared/types";
+import type { Avo } from '@viaa/avo2-types';
+import { useQuery } from '@tanstack/react-query';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type { ContentOverviewTableCols } from '~modules/content-page/types/content-pages.types';
+import { QUERY_KEYS } from '~shared/types';
 
 interface ContentPageOverviewParams {
 	page: number;
@@ -13,14 +13,11 @@ interface ContentPageOverviewParams {
 	where: any;
 }
 
-export const useGetContentPages = (
-	contentPageOverviewParams?: ContentPageOverviewParams,
-) => {
+export const useGetContentPages = (contentPageOverviewParams?: ContentPageOverviewParams) => {
 	return useQuery(
 		[QUERY_KEYS.GET_PROFILES, contentPageOverviewParams],
 		(props) => {
-			const contentPageOverviewParams = props
-				.queryKey[1] as ContentPageOverviewParams;
+			const contentPageOverviewParams = props.queryKey[1] as ContentPageOverviewParams;
 			if (!contentPageOverviewParams) {
 				return null;
 			}
@@ -29,11 +26,11 @@ export const useGetContentPages = (
 				contentPageOverviewParams.sortColumn,
 				contentPageOverviewParams.sortOrder,
 				contentPageOverviewParams.tableColumnDataType,
-				contentPageOverviewParams.where || {},
+				contentPageOverviewParams.where || {}
 			);
 		},
 		{
 			keepPreviousData: true,
-		},
+		}
 	);
 };

@@ -1,19 +1,14 @@
-import { ProgressBar } from "@meemoo/react-components";
-import { Button, ButtonToolbar, Modal, ModalBody } from "@viaa/avo2-components";
-import React, {
-	type FunctionComponent,
-	useCallback,
-	useEffect,
-	useState,
-} from "react";
-import { retry as retryPromise } from "ts-retry-promise";
-import { tText } from "~shared/helpers/translation-functions";
-import "./ExportAllToCsvModal.scss";
-import { delay, mapLimit } from "blend-promise-utils";
-import FileSaver from "file-saver";
-import { noop, times } from "lodash-es";
-import { ToastType } from "~core/config";
-import { showToast } from "~shared/helpers/show-toast";
+import { ProgressBar } from '@meemoo/react-components';
+import { Button, ButtonToolbar, Modal, ModalBody } from '@viaa/avo2-components';
+import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { retry as retryPromise } from 'ts-retry-promise';
+import { tText } from '~shared/helpers/translation-functions';
+import './ExportAllToCsvModal.scss';
+import { delay, mapLimit } from 'blend-promise-utils';
+import FileSaver from 'file-saver';
+import { noop, times } from 'lodash-es';
+import { ToastType } from '~core/config';
+import { showToast } from '~shared/helpers/show-toast';
 
 const ITEMS_PER_REQUEST = 100;
 const PARALLEL_REQUESTS = 6;
@@ -33,9 +28,7 @@ interface ExportAllToCsvModalProps {
 	exportFileName: string;
 }
 
-export const ExportAllToCsvModal: FunctionComponent<
-	ExportAllToCsvModalProps
-> = ({
+export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = ({
 	title,
 	isOpen,
 	onClose,
@@ -56,9 +49,7 @@ export const ExportAllToCsvModal: FunctionComponent<
 
 	const currentItems = Math.min(processedItems, total || Infinity);
 	const percentageDownloaded = total ? (currentItems / total) * 100 : 0;
-	const totalPercentage = Math.round(
-		(percentageDownloaded + percentageConvertedToCsv) / 2,
-	);
+	const totalPercentage = Math.round((percentageDownloaded + percentageConvertedToCsv) / 2);
 
 	/**
 	 * Convert the downloaded items to a csv blob, which can be downloaded instantly
@@ -68,15 +59,13 @@ export const ExportAllToCsvModal: FunctionComponent<
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		async (downloadedItems: any[]) => {
 			await delay(10); // Give react time to update the ui
-			const csvRowValues: string[] = [
-				`${columns.map((c) => c.label).join(";")}\n`,
-			];
+			const csvRowValues: string[] = [`${columns.map((c) => c.label).join(';')}\n`];
 			let lastCsvConvertPercentage = 0;
 			for (let index = 0; index < downloadedItems.length; index++) {
 				if (abortRef.current) {
 					showToast({
 						title: tText(
-							"modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___exporteren-geannuleerd",
+							'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___exporteren-geannuleerd'
 						),
 						type: ToastType.INFO,
 					});
@@ -84,8 +73,7 @@ export const ExportAllToCsvModal: FunctionComponent<
 				}
 				const item = downloadedItems[index];
 				// Round to multiple of 10 to have less overhead of UI rerendering
-				const csvConvertPercentage =
-					Math.round((index / downloadedItems.length) * 10) * 10;
+				const csvConvertPercentage = Math.round((index / downloadedItems.length) * 10) * 10;
 				if (csvConvertPercentage !== lastCsvConvertPercentage) {
 					setPercentageConvertedToCsv(csvConvertPercentage);
 					lastCsvConvertPercentage = csvConvertPercentage;
@@ -95,22 +83,19 @@ export const ExportAllToCsvModal: FunctionComponent<
 				for (const { id: columnId } of columns) {
 					// We're using the same render function as the admin dashboard table to render the values
 					// This way we can be sure the values are formatted the same way in the csv as in the table
-					const csvCellValue = (renderValue(item, columnId) || "").replace(
-						/"/g,
-						'""',
-					);
-					if (!csvCellValue || csvCellValue === "-") {
-						csvCellValues.push("");
+					const csvCellValue = (renderValue(item, columnId) || '').replace(/"/g, '""');
+					if (!csvCellValue || csvCellValue === '-') {
+						csvCellValues.push('');
 					} else {
 						csvCellValues.push(`"${csvCellValue}"`);
 					}
 				}
-				csvRowValues.push(`${csvCellValues.join(";")}\n`);
+				csvRowValues.push(`${csvCellValues.join(';')}\n`);
 			}
 			setPercentageConvertedToCsv(100);
-			return new Blob(csvRowValues, { type: "text/csv;charset=utf-8" });
+			return new Blob(csvRowValues, { type: 'text/csv;charset=utf-8' });
 		},
-		[columns, renderValue],
+		[columns, renderValue]
 	);
 
 	/**
@@ -128,16 +113,12 @@ export const ExportAllToCsvModal: FunctionComponent<
 			async (offset) => {
 				// Retry the fetchMoreItems call until it succeeds
 				const newItems = await retryPromise(() =>
-					fetchMoreItems(offset * ITEMS_PER_REQUEST, ITEMS_PER_REQUEST),
+					fetchMoreItems(offset * ITEMS_PER_REQUEST, ITEMS_PER_REQUEST)
 				);
-				downloadedItems.splice(
-					offset * ITEMS_PER_REQUEST,
-					newItems.length,
-					...newItems,
-				);
+				downloadedItems.splice(offset * ITEMS_PER_REQUEST, newItems.length, ...newItems);
 				downloadedItemsCount += newItems.length;
 				setProcessedItems(downloadedItemsCount);
-			},
+			}
 		);
 		setProcessedItems(totalItems);
 		setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
@@ -170,13 +151,13 @@ export const ExportAllToCsvModal: FunctionComponent<
 		if (!csvBlob) {
 			showToast({
 				title: tText(
-					"modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___het-genereren-van-de-csv-is-mislukt",
+					'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___het-genereren-van-de-csv-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
 			return;
 		}
-		FileSaver.saveAs(csvBlob, exportFileName.replace(/[*\s]+/, ""));
+		FileSaver.saveAs(csvBlob, exportFileName.replace(/[*\s]+/, ''));
 	};
 
 	/**
@@ -195,24 +176,21 @@ export const ExportAllToCsvModal: FunctionComponent<
 	const renderProgressLabel = (
 		total: number | null,
 		currentItems: number,
-		fetchingItemsLabel: string,
+		fetchingItemsLabel: string
 	) => {
 		if (percentageDownloaded < 100) {
 			return (
 				<span>
-					{fetchingItemsLabel}: {currentItems} / {total || "???"}
+					{fetchingItemsLabel}: {currentItems} / {total || '???'}
 				</span>
 			);
-		} else if (
-			percentageDownloaded === 100 &&
-			percentageConvertedToCsv !== 100
-		) {
+		} else if (percentageDownloaded === 100 && percentageConvertedToCsv !== 100) {
 			return <span>{generatingCsvLabel}</span>;
 		} else if (totalPercentage === 100) {
 			return (
 				<span>
 					{tText(
-						"modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___de-csv-is-klaar-om-te-downloaden",
+						'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___de-csv-is-klaar-om-te-downloaden'
 					)}
 				</span>
 			);
@@ -237,14 +215,14 @@ export const ExportAllToCsvModal: FunctionComponent<
 					<Button
 						type="secondary"
 						label={tText(
-							"modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___annuleren",
+							'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___annuleren'
 						)}
 						onClick={handleAbort}
 					/>
 					<Button
 						type="primary"
 						label={tText(
-							"modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___download-csv",
+							'modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal___download-csv'
 						)}
 						onClick={handleDownloadCsv}
 						disabled={totalPercentage !== 100}

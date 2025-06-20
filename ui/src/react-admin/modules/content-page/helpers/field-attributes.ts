@@ -1,10 +1,10 @@
-import type { DatePickerProps, SelectOption } from "@viaa/avo2-components";
-import { compact, debounce, get, isArray, isNil } from "lodash-es";
-import type { ContentPickerProps } from "~shared/components/ContentPicker/ContentPicker";
-import type { RichTextEditorWithInternalStateWrapperProps } from "~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper";
+import type { DatePickerProps, SelectOption } from '@viaa/avo2-components';
+import { compact, debounce, get, isArray, isNil } from 'lodash-es';
+import type { ContentPickerProps } from '~shared/components/ContentPicker/ContentPicker';
+import type { RichTextEditorWithInternalStateWrapperProps } from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
 
-import type { ContentBlockField } from "../types/content-block.types";
-import { ContentBlockEditor } from "../types/content-block.types";
+import type { ContentBlockField } from '../types/content-block.types';
+import { ContentBlockEditor } from '../types/content-block.types';
 
 export const generateFieldAttributes = (
 	field: ContentBlockField,
@@ -17,7 +17,7 @@ export const generateFieldAttributes = (
 	// key and state are required, so we can store rich text editor state side by side of the html string
 	key: string,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	state: any,
+	state: any
 ) => {
 	switch (field.editorType) {
 		case ContentBlockEditor.TextInput:
@@ -29,7 +29,7 @@ export const generateFieldAttributes = (
 						onChange(value);
 					},
 					150,
-					{ leading: true },
+					{ leading: true }
 				),
 			};
 
@@ -50,16 +50,14 @@ export const generateFieldAttributes = (
 		case ContentBlockEditor.ColorSelect:
 			return {
 				onChange: (option: SelectOption<string>) => {
-					onChange(get(option, "value", ""));
+					onChange(get(option, 'value', ''));
 				},
-				value: field.editorProps.options.find(
-					(opt: SelectOption<string>) => opt.value === value,
-				),
+				value: field.editorProps.options.find((opt: SelectOption<string>) => opt.value === value),
 			};
 
 		case ContentBlockEditor.RICH_TEXT_EDITOR: {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			const html = (state as any)[key] || "";
+			const html = (state as any)[key] || '';
 			return {
 				id,
 				initialHtml: html, // Only use the html the first time, then use the editor state
@@ -78,13 +76,7 @@ export const generateFieldAttributes = (
 				onChange: (value: null | undefined | string[]) => {
 					onChange(field.editorProps.allowMulti || !value ? value : value[0]);
 				},
-				urls: compact(
-					Array.isArray(urlOrUrls)
-						? urlOrUrls
-						: isNil(urlOrUrls)
-						? []
-						: [urlOrUrls],
-				),
+				urls: compact(Array.isArray(urlOrUrls) ? urlOrUrls : isNil(urlOrUrls) ? [] : [urlOrUrls]),
 			};
 		}
 

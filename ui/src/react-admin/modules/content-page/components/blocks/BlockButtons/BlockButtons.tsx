@@ -5,16 +5,16 @@ import type {
 	DefaultProps,
 	IconName,
 	RenderLinkFunction,
-} from "@viaa/avo2-components";
-import { Button, ButtonToolbar } from "@viaa/avo2-components";
-import clsx from "clsx";
-import { flatten } from "lodash-es";
-import type { FunctionComponent } from "react";
-import React from "react";
-import { Icon } from "~shared/components/Icon/Icon";
-import { defaultRenderLinkFunction } from "~shared/helpers/link";
+} from '@viaa/avo2-components';
+import { Button, ButtonToolbar } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import { flatten } from 'lodash-es';
+import type { FunctionComponent } from 'react';
+import React from 'react';
+import { Icon } from '~shared/components/Icon/Icon';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
-import "./BlockButtons.scss";
+import './BlockButtons.scss';
 
 export interface ButtonProps extends DefaultProps {
 	active?: boolean;
@@ -26,7 +26,7 @@ export interface ButtonProps extends DefaultProps {
 	icon?: IconName;
 	label?: string;
 	altTitle?: string;
-	size?: "small";
+	size?: 'small';
 	title?: string;
 	tooltip?: string;
 	type?: ButtonType;
@@ -43,13 +43,13 @@ export interface BlockButtonsProps extends DefaultProps {
 export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 	className,
 	elements,
-	align = "left",
+	align = 'left',
 	hasDividers = false,
 	renderLink = defaultRenderLinkFunction,
 }) => (
 	<ButtonToolbar
-		className={clsx(className, "c-block-buttons", `u-content-flex--${align}`, {
-			"c-block-buttons__dividers": hasDividers,
+		className={clsx(className, 'c-block-buttons', `u-content-flex--${align}`, {
+			'c-block-buttons__dividers': hasDividers,
 		})}
 	>
 		{flatten(
@@ -63,17 +63,10 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 								key={`button-${index}`}
 								type="secondary"
 								{...button}
-								renderIcon={
-									button.icon
-										? () => <Icon name={button.icon as IconName} />
-										: undefined
-								}
+								renderIcon={button.icon ? () => <Icon name={button.icon as IconName} /> : undefined}
 							/>,
 							button.label || button.ariaLabel || button.tooltip,
-							button.altTitle ||
-								button.label ||
-								button.ariaLabel ||
-								button.tooltip,
+							button.altTitle || button.label || button.ariaLabel || button.tooltip
 						)}
 					</div>,
 				];
@@ -82,11 +75,11 @@ export const BlockButtons: FunctionComponent<BlockButtonsProps> = ({
 						<span
 							className="c-block-buttons__divider"
 							key={`buttons_block_${button.label}_divider`}
-						/>,
+						/>
 					);
 				}
 				return nodes;
-			}),
+			})
 		)}
 	</ButtonToolbar>
 );

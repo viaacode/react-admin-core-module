@@ -19,11 +19,8 @@ export const retrieveProfiles = memoize(
 				'dateTime',
 				name
 					? {
-							_or: [
-								{ full_name: { _ilike: `%${name}%` } },
-								{ mail: { _ilike: `%${name}%` } },
-							],
-					  }
+							_or: [{ full_name: { _ilike: `%${name}%` } }, { mail: { _ilike: `%${name}%` } }],
+						}
 					: undefined
 			);
 			return parseProfiles(response[0]);

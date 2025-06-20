@@ -64,11 +64,7 @@ const ConfirmModal: FunctionComponent<ConfirmModalProps> = ({
 						<ToolbarItem>
 							<ButtonToolbar>
 								<Button type="secondary" label={cancelLabel} onClick={onClose} />
-								<Button
-									type={confirmButtonType}
-									label={confirmLabel}
-									onClick={handleDelete}
-								/>
+								<Button type={confirmButtonType} label={confirmLabel} onClick={handleDelete} />
 							</ButtonToolbar>
 						</ToolbarItem>
 					</ToolbarRight>

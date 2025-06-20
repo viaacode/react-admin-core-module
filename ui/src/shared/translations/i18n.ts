@@ -1,7 +1,7 @@
-import I18n from "i18next";
-import XHR from "i18next-http-backend";
-import { lowerCase, upperFirst } from "lodash-es";
-import { initReactI18next } from "react-i18next";
+import I18n from 'i18next';
+import XHR from 'i18next-http-backend';
+import { lowerCase, upperFirst } from 'lodash-es';
+import { initReactI18next } from 'react-i18next';
 
 export async function initI18n(adminProxyUrl: string): Promise<void> {
 	return new Promise<void>((resolve) => {
@@ -18,10 +18,10 @@ export async function initI18n(adminProxyUrl: string): Promise<void> {
 					},
 				},
 				debug: false,
-				keySeparator: "^",
-				nsSeparator: "^",
-				lng: "nl",
-				fallbackLng: "nl",
+				keySeparator: '^',
+				nsSeparator: '^',
+				lng: 'nl',
+				fallbackLng: 'nl',
 				interpolation: {
 					escapeValue: false,
 				},
@@ -30,8 +30,8 @@ export async function initI18n(adminProxyUrl: string): Promise<void> {
 					useSuspense: false,
 				},
 				parseMissingKeyHandler: (key: string) => {
-					if (key.includes("___")) {
-						return `${upperFirst(lowerCase(key.split("___").pop()))} ***`;
+					if (key.includes('___')) {
+						return `${upperFirst(lowerCase(key.split('___').pop()))} ***`;
 					}
 					return `${key} ***`;
 				},

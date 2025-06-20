@@ -19,11 +19,7 @@ export const TranslationsOverviewPage: FC = () => {
 		const renderFooter = () => {
 			return (
 				<div>
-					<Button
-						variants={['block', 'black']}
-						onClick={onSave}
-						label="Bewaar wijzigingen"
-					/>
+					<Button variants={['block', 'black']} onClick={onSave} label="Bewaar wijzigingen" />
 
 					<Button variants={['block', 'text']} onClick={onClose} label="Annuleer" />
 				</div>

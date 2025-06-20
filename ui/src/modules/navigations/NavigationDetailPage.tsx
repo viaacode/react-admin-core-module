@@ -9,10 +9,7 @@ const NavigationDetailPage: FC<RouteComponentProps<{ navigationBarId: string }>>
 	const navigationBarId = match.params.navigationBarId;
 
 	return (
-		<NavigationBarDetail
-			navigationBarId={navigationBarId}
-			onGoBack={() => window.history.back()}
-		/>
+		<NavigationBarDetail navigationBarId={navigationBarId} onGoBack={() => window.history.back()} />
 	);
 };
 

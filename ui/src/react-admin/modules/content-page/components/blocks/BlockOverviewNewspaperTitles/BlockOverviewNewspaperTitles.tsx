@@ -75,9 +75,7 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 						<Icon name="filter" />
 					</div>
 				}
-				onChange={(value: ChangeEvent<HTMLInputElement>) =>
-					setSearchInput(value.target.value)
-				}
+				onChange={(value: ChangeEvent<HTMLInputElement>) => setSearchInput(value.target.value)}
 			/>
 			<ul className="c-newspaper-titles__list">
 				{newspaperData?.map((item: NewspaperTitle) => (

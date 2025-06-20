@@ -31,9 +31,7 @@ export const MaintenanceAlertsOverviewPage: FC = () => {
 					<Button
 						variants={['block', 'text']}
 						onClick={onClose}
-						label={tText(
-							'react-admin/modules/alerts/views/alerts-overview-page___annuleer'
-						)}
+						label={tText('react-admin/modules/alerts/views/alerts-overview-page___annuleer')}
 					/>
 				</div>
 			);

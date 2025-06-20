@@ -39,18 +39,14 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 			{
 				label:
 					trueLabel ||
-					tText(
-						'shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___ja'
-					),
+					tText('shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___ja'),
 				id: trueValue,
 				checked: value.includes(trueValue),
 			},
 			{
 				label:
 					falseLabel ||
-					tText(
-						'shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___nee'
-					),
+					tText('shared/components/boolean-checkbox-dropdown/boolean-checkbox-dropdown___nee'),
 				id: falseValue,
 				checked: value.includes(falseValue),
 			},
@@ -61,17 +57,14 @@ const BooleanCheckboxDropdown: FunctionComponent<BooleanCheckboxDropdownProps> =
 							id: NULL_FILTER,
 							checked: value.includes(NULL_FILTER),
 						},
-				  ]
+					]
 				: []),
 		];
 	};
 
 	// Methods
 	const handleCheckboxChange = (selectedCheckboxes: string[]) => {
-		if (
-			selectedCheckboxes.length === 0 ||
-			selectedCheckboxes.length === (includeEmpty ? 3 : 2)
-		) {
+		if (selectedCheckboxes.length === 0 || selectedCheckboxes.length === (includeEmpty ? 3 : 2)) {
 			onChange([], id);
 		} else {
 			onChange(selectedCheckboxes, id);

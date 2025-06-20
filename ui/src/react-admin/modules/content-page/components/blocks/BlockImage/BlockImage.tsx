@@ -1,20 +1,12 @@
-import type {
-	AlignOptions,
-	ButtonAction,
-	ButtonType,
-	DefaultProps,
-} from "@viaa/avo2-components";
-import { Button, Container, Image } from "@viaa/avo2-components";
-import clsx from "clsx";
-import type { CSSProperties, FunctionComponent } from "react";
-import React from "react";
-import type { AlignOption } from "~modules/content-page/types/content-block.types";
+import type { AlignOptions, ButtonAction, ButtonType, DefaultProps } from '@viaa/avo2-components';
+import { Button, Container, Image } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import type { CSSProperties, FunctionComponent } from 'react';
+import React from 'react';
+import type { AlignOption } from '~modules/content-page/types/content-block.types';
 
-import "./BlockImage.scss";
-import {
-	generateSmartLink,
-	SmartLink,
-} from "~shared/components/SmartLink/SmartLink";
+import './BlockImage.scss';
+import { generateSmartLink, SmartLink } from '~shared/components/SmartLink/SmartLink';
 
 export interface BlockImageProps extends DefaultProps {
 	imageSource: string;
@@ -23,7 +15,7 @@ export interface BlockImageProps extends DefaultProps {
 	imageAlt?: string;
 	title?: string;
 	text?: string;
-	width?: "page-header" | "full-width" | string;
+	width?: 'page-header' | 'full-width' | string;
 	align?: AlignOptions;
 	buttonAction?: ButtonAction;
 	buttonAlt?: string;
@@ -35,13 +27,13 @@ export interface BlockImageProps extends DefaultProps {
 export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	className,
 	imageSource,
-	imageDescription = "",
+	imageDescription = '',
 	imageAction,
 	imageAlt,
-	title = "",
-	text = "",
-	width = "100%",
-	align = "center",
+	title = '',
+	text = '',
+	width = '100%',
+	align = 'center',
 	buttonAlign,
 	buttonAction,
 	buttonAlt,
@@ -49,12 +41,12 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	buttonType,
 }) => {
 	const style: CSSProperties = {};
-	if (width === "page-header") {
+	if (width === 'page-header') {
 		style.paddingTop = `${100 * (521 / 1920)}%`;
-		style.width = "100%";
+		style.width = '100%';
 		style.backgroundImage = `url('${imageSource}')`;
-	} else if (width === "full-width") {
-		style.width = "100%";
+	} else if (width === 'full-width') {
+		style.width = '100%';
 	} else {
 		style.width = width;
 	}
@@ -62,12 +54,8 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 	const renderImageContent = () => {
 		return (
 			<>
-				{width !== "page-header" && (
-					<Image
-						src={imageSource}
-						alt={imageAlt || imageDescription || title || text}
-						wide
-					/>
+				{width !== 'page-header' && (
+					<Image src={imageSource} alt={imageAlt || imageDescription || title || text} wide />
 				)}
 			</>
 		);
@@ -77,12 +65,12 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 		<Container
 			className={clsx(
 				className,
-				"o-block-image",
+				'o-block-image',
 				`o-block-image__${align}`,
 				`o-block-image__${width}`,
 				{
-					"o-block-image__page-header-image": width === "page-header",
-				},
+					'o-block-image__page-header-image': width === 'page-header',
+				}
 			)}
 			style={style as CSSProperties}
 		>
@@ -100,9 +88,9 @@ export const BlockImage: FunctionComponent<BlockImageProps> = ({
 						buttonAction,
 						<Button label={buttonLabel} type={buttonType} />,
 						buttonAlt || buttonLabel,
-						clsx("o-block-image__button", {
+						clsx('o-block-image__button', {
 							[`o-block-image__button--${buttonAlign}`]: !!buttonAlign,
-						}),
+						})
 					)}
 			</div>
 

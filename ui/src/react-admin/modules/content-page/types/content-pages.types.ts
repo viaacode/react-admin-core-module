@@ -1,59 +1,57 @@
-import type { Avo } from "@viaa/avo2-types";
-import type { Locale } from "~modules/translations/translations.core.types";
-import type { PickerItem } from "~shared/types/content-picker";
+import type { Avo } from '@viaa/avo2-types';
+import type { Locale } from '~modules/translations/translations.core.types';
+import type { PickerItem } from '~shared/types/content-picker';
 
-import type { DateRange } from "~shared/components/DateRangeDropdown/DateRangeDropdown";
-import type { FilterableTableState } from "~shared/components/FilterTable/FilterTable";
+import type { DateRange } from '~shared/components/DateRangeDropdown/DateRangeDropdown';
+import type { FilterableTableState } from '~shared/components/FilterTable/FilterTable';
 
-import type { ContentBlockConfig, DbContentBlock } from "./content-block.types";
+import type { ContentBlockConfig, DbContentBlock } from './content-block.types';
 
 // Pages
 export enum PageType {
-	Create = "create",
-	Edit = "edit",
+	Create = 'create',
+	Edit = 'edit',
 }
 
 export enum PublishOption {
-	private = "private",
-	public = "public",
-	timebound = "timebound",
+	private = 'private',
+	public = 'public',
+	timebound = 'timebound',
 }
 
 export enum ContentPageWidth {
-	MEDIUM = "MEDIUM", // 720
-	LARGE = "LARGE", // 940
-	EXTRA_LARGE = "EXTRA_LARGE", // 1300
+	MEDIUM = 'MEDIUM', // 720
+	LARGE = 'LARGE', // 940
+	EXTRA_LARGE = 'EXTRA_LARGE', // 1300
 }
 
 export const CONTENT_PAGE_WIDTH_TO_REM: Record<ContentPageWidth, string> = {
-	MEDIUM: "72rem",
-	LARGE: "94rem",
-	EXTRA_LARGE: "130rem",
+	MEDIUM: '72rem',
+	LARGE: '94rem',
+	EXTRA_LARGE: '130rem',
 } as const;
 
 // Content Overview
 export type ContentOverviewTableCols =
-	| "title"
-	| "contentType"
-	| "userProfileId"
-	| "authorUserGroup"
-	| "createdAt"
-	| "updatedAt"
-	| "isPublic"
-	| "translations"
-	| "publishedAt"
-	| "publishAt"
-	| "depublishAt"
-	| "labels"
-	| "userGroupIds"
-	| "actions";
+	| 'title'
+	| 'contentType'
+	| 'userProfileId'
+	| 'authorUserGroup'
+	| 'createdAt'
+	| 'updatedAt'
+	| 'isPublic'
+	| 'translations'
+	| 'publishedAt'
+	| 'publishAt'
+	| 'depublishAt'
+	| 'labels'
+	| 'userGroupIds'
+	| 'actions';
 
-export const NOT_TRANSLATION_PREFIX = "NOT_";
+export const NOT_TRANSLATION_PREFIX = 'NOT_';
 
 // NL, EN, NOT_NL, NOT_EN
-export type TranslationFilterValue =
-	| Locale
-	| `${typeof NOT_TRANSLATION_PREFIX}${Locale}`;
+export type TranslationFilterValue = Locale | `${typeof NOT_TRANSLATION_PREFIX}${Locale}`;
 
 export interface ContentTableState extends FilterableTableState {
 	contentType: string[];
@@ -103,10 +101,7 @@ interface ContentPageBase {
 	userProfileId: string | null;
 	userGroupIds: string[] | null;
 	labels: ContentPageLabel[];
-	translatedPages: Pick<
-		ContentPageBase,
-		"id" | "title" | "path" | "language" | "isPublic"
-	>[]; // Other pages that are translated versions of this page
+	translatedPages: Pick<ContentPageBase, 'id' | 'title' | 'path' | 'language' | 'isPublic'>[]; // Other pages that are translated versions of this page
 }
 
 /**
@@ -141,26 +136,23 @@ export type ContentEditFormErrors = Partial<{
 };
 
 export enum ContentEditActionType {
-	SET_CONTENT_PAGE = "@@admin-content-page/SET_CONTENT_PAGE",
-	SET_CONTENT_PAGE_PROP = "@@admin-content-page/SET_CONTENT_PAGE_PROP",
-	ADD_CONTENT_BLOCK_CONFIG = "@@admin-content-edit/ADD_CONTENT_BLOCK_CONFIG",
-	REMOVE_CONTENT_BLOCK_CONFIG = "@@admin-content-edit/REMOVE_CONTENT_BLOCK_CONFIG",
-	REORDER_CONTENT_BLOCK_CONFIG = "@@admin-content-edit/REORDER_CONTENT_BLOCK_CONFIG",
-	ADD_COMPONENTS_STATE = "@@admin-content-edit/ADD_COMPONENTS_STATE",
-	SET_COMPONENTS_STATE = "@@admin-content-edit/SET_COMPONENTS_STATE",
-	REMOVE_COMPONENTS_STATE = "@@admin-content-edit/REMOVE_COMPONENTS_STATE",
-	SET_BLOCK_STATE = "@@admin-content-edit/SET_BLOCK_STATE",
-	SET_CONTENT_BLOCK_ERROR = "@@admin-content-edit/SET_CONTENT_BLOCK_ERROR",
+	SET_CONTENT_PAGE = '@@admin-content-page/SET_CONTENT_PAGE',
+	SET_CONTENT_PAGE_PROP = '@@admin-content-page/SET_CONTENT_PAGE_PROP',
+	ADD_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/ADD_CONTENT_BLOCK_CONFIG',
+	REMOVE_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/REMOVE_CONTENT_BLOCK_CONFIG',
+	REORDER_CONTENT_BLOCK_CONFIG = '@@admin-content-edit/REORDER_CONTENT_BLOCK_CONFIG',
+	ADD_COMPONENTS_STATE = '@@admin-content-edit/ADD_COMPONENTS_STATE',
+	SET_COMPONENTS_STATE = '@@admin-content-edit/SET_COMPONENTS_STATE',
+	REMOVE_COMPONENTS_STATE = '@@admin-content-edit/REMOVE_COMPONENTS_STATE',
+	SET_BLOCK_STATE = '@@admin-content-edit/SET_BLOCK_STATE',
+	SET_CONTENT_BLOCK_ERROR = '@@admin-content-edit/SET_CONTENT_BLOCK_ERROR',
 }
 
-export type BlockClickHandler = (
-	position: number,
-	type: "preview" | "sidebar",
-) => void;
+export type BlockClickHandler = (position: number, type: 'preview' | 'sidebar') => void;
 
 export enum ContentPageAction {
-	duplicate = "duplicate",
-	gotoEnglishPage = "gotoEnglishPage",
-	duplicateForEnglish = "duplicateForEnglish",
-	delete = "delete",
+	duplicate = 'duplicate',
+	gotoEnglishPage = 'gotoEnglishPage',
+	duplicateForEnglish = 'duplicateForEnglish',
+	delete = 'delete',
 }

@@ -65,8 +65,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 	} = props;
 
 	const shouldTitleLink =
-		PermissionService.hasPerm(commonUser, PermissionName.VIEW_ANY_PUBLISHED_ITEMS) &&
-		!!mediaItem;
+		PermissionService.hasPerm(commonUser, PermissionName.VIEW_ANY_PUBLISHED_ITEMS) && !!mediaItem;
 
 	// Show copy right notice when the block requires it and the user is not logged in, or when they are editing the content page (preview)
 	// https://meemoo.atlassian.net/browse/AVO-3015
@@ -96,10 +95,7 @@ export const BlockVideoTitleTextButtonWrapper: FC<MediaPlayerTitleTextButtonWrap
 			<Column size="2-5" className={`u-text-${align}`}>
 				{generateSmartLink(
 					mediaItem,
-					<BlockHeading
-						type={headingType}
-						className={shouldTitleLink ? 'u-clickable' : ''}
-					>
+					<BlockHeading type={headingType} className={shouldTitleLink ? 'u-clickable' : ''}>
 						{headingTitle}
 					</BlockHeading>
 				)}

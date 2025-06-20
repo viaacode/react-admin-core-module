@@ -35,9 +35,7 @@ export const GET_BACKGROUND_ALIGN_OPTIONS: () => {
 	value: BackgroundAlignOption;
 }[] = () => [
 	{
-		label: tText(
-			'react-admin/modules/content-page/const/get-align-options___linker-scherm-rand'
-		),
+		label: tText('react-admin/modules/content-page/const/get-align-options___linker-scherm-rand'),
 		value: 'left-screen',
 	},
 	{
@@ -53,9 +51,7 @@ export const GET_BACKGROUND_ALIGN_OPTIONS: () => {
 		value: 'right-inside-page',
 	},
 	{
-		label: tText(
-			'react-admin/modules/content-page/const/get-align-options___rechter-scherm-rand'
-		),
+		label: tText('react-admin/modules/content-page/const/get-align-options___rechter-scherm-rand'),
 		value: 'right-screen',
 	},
 ];

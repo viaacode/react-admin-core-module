@@ -63,9 +63,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					),
 				}),
 				tabStyle: {
-					label: tText(
-						'admin/content-block/helpers/generators/page-overview___menu-type'
-					),
+					label: tText('admin/content-block/helpers/generators/page-overview___menu-type'),
 					editorType: ContentBlockEditor.Select,
 					editorProps: {
 						options: GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS(),
@@ -88,9 +86,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					} as CheckboxProps,
 				},
 				itemStyle: {
-					label: tText(
-						'admin/content-block/helpers/generators/page-overview___item-type'
-					),
+					label: tText('admin/content-block/helpers/generators/page-overview___item-type'),
 					editorType: ContentBlockEditor.Select,
 					editorProps: {
 						options: GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS(),
@@ -104,8 +100,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						),
 					} as CheckboxProps,
 					isVisible: (config: ContentBlockConfig) =>
-						(config.components.state as BlockPageOverviewProps).itemStyle ===
-						ContentItemStyle.GRID,
+						(config.components.state as BlockPageOverviewProps).itemStyle === ContentItemStyle.GRID,
 				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,
@@ -131,8 +126,7 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						),
 					} as CheckboxProps,
 					isVisible: (config: ContentBlockConfig) => {
-						const itemStyle = (config.components.state as BlockPageOverviewProps)
-							?.itemStyle;
+						const itemStyle = (config.components.state as BlockPageOverviewProps)?.itemStyle;
 						return (
 							itemStyle === ContentItemStyle.NEWS_LIST ||
 							itemStyle === ContentItemStyle.PROJECT_LIST
@@ -146,15 +140,11 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 					editorType: ContentBlockEditor.TextInput,
 				},
 				buttonAltTitle: {
-					label: tText(
-						'admin/content-block/helpers/generators/page-overview___alt-title-text'
-					),
+					label: tText('admin/content-block/helpers/generators/page-overview___alt-title-text'),
 					editorType: ContentBlockEditor.TextInput,
 				},
 				itemsPerPage: {
-					label: tText(
-						'admin/content-block/helpers/generators/page-overview___items-per-pagina'
-					),
+					label: tText('admin/content-block/helpers/generators/page-overview___items-per-pagina'),
 					editorType: ContentBlockEditor.MultiRange,
 					editorProps: {
 						min: 0,
@@ -169,22 +159,16 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 			state: INITIAL_PAGE_OVERVIEW_BLOCK_STATE(),
 			fields: {
 				sortOrder: {
-					label: tText(
-						'admin/content-block/helpers/generators/page-overview___sorteer-volgorde'
-					),
+					label: tText('admin/content-block/helpers/generators/page-overview___sorteer-volgorde'),
 					editorType: ContentBlockEditor.Select,
 					editorProps: {
 						options: GET_PAGE_OVERVIEW_ORDER_OPTIONS(),
 					},
 				},
 				headerBackgroundColor: BACKGROUND_COLOR_FIELD(
-					tText(
-						'admin/content-block/helpers/generators/defaults___titelbalk-achtergrondkleur'
-					),
+					tText('admin/content-block/helpers/generators/defaults___titelbalk-achtergrondkleur'),
 					{
-						label: tText(
-							'admin/content-block/helpers/generators/defaults___transparant'
-						),
+						label: tText('admin/content-block/helpers/generators/defaults___transparant'),
 						value: Color.Transparent,
 					}
 				),

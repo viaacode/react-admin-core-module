@@ -58,9 +58,7 @@ export const BLOCK_FIELD_DEFAULTS = () => ({
 	),
 	userGroupIds: USER_GROUP_SELECT(
 		tText('admin/content-block/helpers/generators/defaults___zichtbaar-voor'),
-		tText(
-			'admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina'
-		)
+		tText('admin/content-block/helpers/generators/defaults___iedereen-met-toegang-tot-de-pagina')
 	),
 
 	// Used to link to this block from inside the same page using the anchors-block
@@ -77,9 +75,7 @@ export const FOREGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: isAvo()
-			? GET_FOREGROUND_COLOR_OPTIONS_AVO()
-			: GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
+		options: isAvo() ? GET_FOREGROUND_COLOR_OPTIONS_AVO() : GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
 			defaultValue || isAvo()
 				? GET_FOREGROUND_COLOR_OPTIONS_AVO()[0]
@@ -94,9 +90,7 @@ export const BACKGROUND_COLOR_FIELD = (
 	label,
 	editorType: ContentBlockEditor.ColorSelect,
 	editorProps: {
-		options: isAvo()
-			? GET_BACKGROUND_COLOR_OPTIONS_AVO()
-			: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+		options: isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
 		defaultValue:
 			defaultValue || isAvo()
 				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]

@@ -40,9 +40,7 @@ export function getPublishedDate(
 	}
 
 	if (publishAt && depublishAt) {
-		if (
-			isWithinInterval(new Date(), { start: parseISO(publishAt), end: parseISO(depublishAt) })
-		) {
+		if (isWithinInterval(new Date(), { start: parseISO(publishAt), end: parseISO(depublishAt) })) {
 			return publishAt;
 		}
 		return null;

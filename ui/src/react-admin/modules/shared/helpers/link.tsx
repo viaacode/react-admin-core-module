@@ -139,12 +139,9 @@ export const navigateToContentType = (action: ButtonAction, history: History) =>
 				break;
 
 			case 'COLLECTION': {
-				const collectionUrl = buildLink(
-					AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'),
-					{
-						id: value as string,
-					}
-				);
+				const collectionUrl = buildLink(AdminConfigManager.getAdminRoute('COLLECTION_DETAIL'), {
+					id: value as string,
+				});
 				navigateToAbsoluteOrRelativeUrl(collectionUrl, history, resolvedTarget);
 				break;
 			}

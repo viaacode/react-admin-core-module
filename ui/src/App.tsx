@@ -43,10 +43,7 @@ function App() {
 				<QueryParamProvider ReactRouterRoute={Route}>
 					<div className="App">
 						<HorizontalPageSplit widths={['15%', '85%']}>
-							<Sidebar
-								navItems={navigationItems || undefined}
-								className="o-app--admin__sidebar"
-							/>
+							<Sidebar navItems={navigationItems || undefined} className="o-app--admin__sidebar" />
 
 							<Flex
 								className="o-app--admin__main u-flex-auto u-scroll c-scrollable"

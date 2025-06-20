@@ -79,8 +79,7 @@ export const BlockCardsWithoutDescription: FunctionComponent<BlockCardsWithoutDe
 		<div className={clsx('c-block-cards-without-description', className)}>
 			<div className="c-block-cards-without-description__elements-wrapper">
 				{elements.map(
-					(card: BlockCardWithoutDescriptionProps, i: number): ReactNode =>
-						renderCard(card, i)
+					(card: BlockCardWithoutDescriptionProps, i: number): ReactNode => renderCard(card, i)
 				)}
 			</div>
 		</div>

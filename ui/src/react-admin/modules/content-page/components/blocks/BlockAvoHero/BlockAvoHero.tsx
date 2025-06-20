@@ -1,28 +1,23 @@
-import { FlowPlayer } from "@meemoo/react-components";
+import { FlowPlayer } from '@meemoo/react-components';
 import type {
 	ButtonAction,
 	ButtonProps,
 	DefaultProps,
 	IconName,
 	RenderLinkFunction,
-} from "@viaa/avo2-components";
-import {
-	Button,
-	ButtonToolbar,
-	Container,
-	Spacer,
-} from "@viaa/avo2-components";
-import clsx from "clsx";
-import { isString } from "lodash-es";
-import type { FunctionComponent, ReactNode } from "react";
-import React from "react";
-import { Icon } from "~shared/components/Icon/Icon";
-import { defaultRenderLinkFunction } from "~shared/helpers/link";
+} from '@viaa/avo2-components';
+import { Button, ButtonToolbar, Container, Spacer } from '@viaa/avo2-components';
+import clsx from 'clsx';
+import { isString } from 'lodash-es';
+import type { FunctionComponent, ReactNode } from 'react';
+import React from 'react';
+import { Icon } from '~shared/components/Icon/Icon';
+import { defaultRenderLinkFunction } from '~shared/helpers/link';
 
-import { BlockHeading } from "../BlockHeading/BlockHeading";
+import { BlockHeading } from '../BlockHeading/BlockHeading';
 
-import "./BlockAvoHero.scss";
-import Html from "~modules/shared/components/Html/Html";
+import './BlockAvoHero.scss';
+import Html from '~modules/shared/components/Html/Html';
 
 export interface BlockAvoHeroProps extends DefaultProps {
 	title: string;
@@ -60,11 +55,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 
 		<div className="c-home-hero">
 			<div className="c-home-hero__content">
-				<BlockHeading
-					type="h2"
-					color={titleColor}
-					className="c-home-hero__title"
-				>
+				<BlockHeading type="h2" color={titleColor} className="c-home-hero__title">
 					{title}
 				</BlockHeading>
 				<div className="c-content c-content--inverse">
@@ -76,7 +67,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 					<Spacer margin="top-large">
 						<ButtonToolbar
 							className={clsx({
-								"c-button-toolbar--tri-button": buttons.length > 2,
+								'c-button-toolbar--tri-button': buttons.length > 2,
 							})}
 						>
 							{buttons.map(({ buttonAction, ...rest }, index: number) => {
@@ -86,14 +77,10 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 										{...rest}
 										// biome-ignore lint/suspicious/noArrayIndexKey: We don't have any better id at this time
 										key={`hero-button-${index}`}
-										renderIcon={
-											rest.icon
-												? () => <Icon name={rest.icon as IconName} />
-												: undefined
-										}
+										renderIcon={rest.icon ? () => <Icon name={rest.icon as IconName} /> : undefined}
 									/>,
 									rest.label || rest.ariaLabel || rest.tooltip,
-									rest.altTitle || rest.label || rest.ariaLabel || rest.tooltip,
+									rest.altTitle || rest.label || rest.ariaLabel || rest.tooltip
 								);
 							})}
 						</ButtonToolbar>
@@ -101,9 +88,7 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 				)}
 				{!!textBelowButtons && (
 					<Spacer margin="top-large" style={{ color: contentColor }}>
-						{isString(textBelowButtons) && (
-							<Html content={textBelowButtons} type="p"></Html>
-						)}
+						{isString(textBelowButtons) && <Html content={textBelowButtons} type="p"></Html>}
 						{!isString(textBelowButtons) && textBelowButtons}
 					</Spacer>
 				)}
@@ -114,14 +99,12 @@ export const BlockAvoHero: FunctionComponent<BlockAvoHeroProps> = ({
 						src={src}
 						poster={poster}
 						type="video"
-						title={altText || "Hero video"}
+						title={altText || 'Hero video'}
 						token={token}
 						dataPlayerId={dataPlayerId}
 					/>
 				)}
-				{!src && poster && (
-					<img src={poster} alt={altText || "Hero afbeelding"} />
-				)}
+				{!src && poster && <img src={poster} alt={altText || 'Hero afbeelding'} />}
 			</div>
 		</div>
 	</Container>

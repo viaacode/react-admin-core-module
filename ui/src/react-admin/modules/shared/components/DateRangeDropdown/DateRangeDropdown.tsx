@@ -79,14 +79,8 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 			const lteDate =
 				parseDateFromString(rangeState?.lte || new Date().toISOString()) || new Date();
 			setRangeState({
-				gte: format(
-					set(gteDate, { hours: 0, minutes: 0, seconds: 0 }),
-					'yyyy-MM-dd HH:mm:ss'
-				),
-				lte: format(
-					set(lteDate, { hours: 23, minutes: 59, seconds: 59 }),
-					'yyyy-MM-dd HH:mm:ss'
-				),
+				gte: format(set(gteDate, { hours: 0, minutes: 0, seconds: 0 }), 'yyyy-MM-dd HH:mm:ss'),
+				lte: format(set(lteDate, { hours: 23, minutes: 59, seconds: 59 }), 'yyyy-MM-dd HH:mm:ss'),
 			});
 		}
 	};
@@ -167,11 +161,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 			rangeId === 'gte' ? setYearInputGte(value) : setYearInputLte(value);
 			if (value.match(/^[0-9]{4}$/g)) {
 				await handleDateChange(
-					new Date(
-						parseInt(value, 10),
-						rangeId === 'gte' ? 0 : 11,
-						rangeId === 'gte' ? 1 : 31
-					),
+					new Date(parseInt(value, 10), rangeId === 'gte' ? 0 : 11, rangeId === 'gte' ? 1 : 31),
 					rangeId
 				);
 			} else {
@@ -322,13 +312,11 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 													),
 													value: 'future',
 												},
-										  ]
+											]
 										: []),
 								]}
 								value={dateControls}
-								onChange={(value) =>
-									setDateControlsAndSimplifyDates(value as DateRangeControls)
-								}
+								onChange={(value) => setDateControlsAndSimplifyDates(value as DateRangeControls)}
 							/>
 							{dateControls === 'year' && (
 								<Grid>
@@ -344,9 +332,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 													'shared/components/date-range-dropdown/date-range-dropdown___jjjj'
 												)}
 												value={fromYear}
-												onChange={(value: string) =>
-													handleYearInputChange(value, 'gte')
-												}
+												onChange={(value: string) => handleYearInputChange(value, 'gte')}
 											/>
 										</FormGroup>
 									</Column>
@@ -362,9 +348,7 @@ const DateRangeDropdown: FC<DateRangeDropdownProps> = ({
 													'shared/components/date-range-dropdown/date-range-dropdown___jjjj'
 												)}
 												value={tillYear}
-												onChange={(value: string) =>
-													handleYearInputChange(value, 'lte')
-												}
+												onChange={(value: string) => handleYearInputChange(value, 'lte')}
 											/>
 										</FormGroup>
 									</Column>

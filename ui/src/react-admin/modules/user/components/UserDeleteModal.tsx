@@ -12,25 +12,25 @@ import {
 	Toolbar,
 	ToolbarItem,
 	ToolbarRight,
-} from "@viaa/avo2-components";
-import type { Avo } from "@viaa/avo2-types";
-import type { FunctionComponent, ReactNode } from "react";
-import React, { useState } from "react";
-import { AdminConfigManager } from "~core/config";
-import { ToastType } from "~core/config/config.types";
-import { Link } from "~modules/shared/components/Link";
-import { ContentPicker } from "~shared/components/ContentPicker/ContentPicker";
-import { GET_DELETE_RADIO_OPTIONS } from "~shared/consts/user.const";
-import { CustomError } from "~shared/helpers/custom-error";
-import { buildLink } from "~shared/helpers/link";
-import { showToast } from "~shared/helpers/show-toast";
-import { tHtml, tText } from "~shared/helpers/translation-functions";
-import { AVO } from "~shared/types";
-import type { PickerItem } from "~shared/types/content-picker";
-import { UserService } from "../user.service";
-import type { DeleteContentCounts } from "../user.types";
+} from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import type { FunctionComponent, ReactNode } from 'react';
+import React, { useState } from 'react';
+import { AdminConfigManager } from '~core/config';
+import { ToastType } from '~core/config/config.types';
+import { Link } from '~modules/shared/components/Link';
+import { ContentPicker } from '~shared/components/ContentPicker/ContentPicker';
+import { GET_DELETE_RADIO_OPTIONS } from '~shared/consts/user.const';
+import { CustomError } from '~shared/helpers/custom-error';
+import { buildLink } from '~shared/helpers/link';
+import { showToast } from '~shared/helpers/show-toast';
+import { tHtml, tText } from '~shared/helpers/translation-functions';
+import { AVO } from '~shared/types';
+import type { PickerItem } from '~shared/types/content-picker';
+import { UserService } from '../user.service';
+import type { DeleteContentCounts } from '../user.types';
 
-import "./UserDeleteModal.scss";
+import './UserDeleteModal.scss';
 
 interface UserDeleteModalProps {
 	selectedProfileIds: string[];
@@ -51,71 +51,63 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	deleteCallback,
 }) => {
 	const [transferToUser, setTransferToUser] = useState<PickerItem | null>(null);
-	const [transferToUserError, setTransferToUserError] = useState<
-		string | undefined
-	>();
+	const [transferToUserError, setTransferToUserError] = useState<string | undefined>();
 	const [selectedDeleteOption, setSelectedDeleteOption] =
-		useState<Avo.User.UserDeleteOption>("DELETE_ALL");
-	const [deleteConfirmModalOpen, setDeleteConfirmModalOpen] =
-		useState<boolean>(false);
-	const [deleteContentCounts, setDeleteContentCounts] =
-		useState<DeleteContentCounts | null>(null);
+		useState<Avo.User.UserDeleteOption>('DELETE_ALL');
+	const [deleteConfirmModalOpen, setDeleteConfirmModalOpen] = useState<boolean>(false);
+	const [deleteContentCounts, setDeleteContentCounts] = useState<DeleteContentCounts | null>(null);
 	const [shouldSendEmail, setShouldSendEmail] = useState<boolean>(false);
 
 	const validateOptionModalAndOpenConfirm = async () => {
 		try {
 			if (
-				(selectedDeleteOption === "TRANSFER_PUBLIC" ||
-					selectedDeleteOption === "TRANSFER_ALL") &&
+				(selectedDeleteOption === 'TRANSFER_PUBLIC' || selectedDeleteOption === 'TRANSFER_ALL') &&
 				!transferToUser
 			) {
 				// transfer user was not selected, or transfer user is the same user as one of the user that will be deleted
 				setTransferToUserError(
 					tText(
-						"admin/users/views/user-overview___kies-een-gebruiker-om-de-content-naar-over-te-dragen",
+						'admin/users/views/user-overview___kies-een-gebruiker-om-de-content-naar-over-te-dragen',
 						undefined,
-						[AVO],
-					),
+						[AVO]
+					)
 				);
 				return;
 			}
 			if (
-				(selectedDeleteOption === "TRANSFER_PUBLIC" ||
-					selectedDeleteOption === "TRANSFER_ALL") &&
+				(selectedDeleteOption === 'TRANSFER_PUBLIC' || selectedDeleteOption === 'TRANSFER_ALL') &&
 				transferToUser &&
 				selectedProfileIds.includes(transferToUser.value)
 			) {
 				// transfer user was not selected, or transfer user is the same user as one of the user that will be deleted
 				setTransferToUserError(
 					tText(
-						"admin/users/views/user-overview___je-kan-geen-content-overdragen-naar-een-gebruiker-die-verwijdert-zal-worden",
+						'admin/users/views/user-overview___je-kan-geen-content-overdragen-naar-een-gebruiker-die-verwijdert-zal-worden',
 						undefined,
-						[AVO],
-					),
+						[AVO]
+					)
 				);
 				return;
 			}
 
 			// Fetch counts to inform the user of what objects they are about to delete
-			setDeleteContentCounts(
-				await UserService.fetchPublicAndPrivateCounts(selectedProfileIds),
-			);
+			setDeleteContentCounts(await UserService.fetchPublicAndPrivateCounts(selectedProfileIds));
 			onClose();
 			setDeleteConfirmModalOpen(true);
 		} catch (err) {
 			console.error(
-				new CustomError("Error during validateOptionModalAndOpenConfirm", err, {
+				new CustomError('Error during validateOptionModalAndOpenConfirm', err, {
 					transferToUser,
 					selectedDeleteOption,
 					// selectedUsers: selectedProfileIds,
-				}),
+				})
 			);
 			showToast({
-				title: tText("modules/user/components/user-delete-modal___error"),
+				title: tText('modules/user/components/user-delete-modal___error'),
 				description: tText(
-					"admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt",
+					'admin/users/views/user-overview___het-ophalen-van-de-content-items-voor-de-geselecteerde-gebruikers-is-mislukt',
 					undefined,
-					[AVO],
+					[AVO]
 				),
 				type: ToastType.ERROR,
 			});
@@ -125,7 +117,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	const handleConfirmModalClose = () => {
 		setDeleteConfirmModalOpen(false);
 		setDeleteContentCounts(null);
-		setSelectedDeleteOption("DELETE_ALL");
+		setSelectedDeleteOption('DELETE_ALL');
 		setTransferToUser(null);
 	};
 
@@ -134,143 +126,143 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			return <Spinner></Spinner>;
 		}
 
-		const isDeleteAll = selectedDeleteOption === "DELETE_ALL";
-		const isTransferAll = selectedDeleteOption === "TRANSFER_ALL";
+		const isDeleteAll = selectedDeleteOption === 'DELETE_ALL';
+		const isTransferAll = selectedDeleteOption === 'TRANSFER_ALL';
 
 		const countOutputs: ReactNode[] = [];
 		if (isDeleteAll && deleteContentCounts.publicCollections) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_COLLECTIONS_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_COLLECTIONS_OVERVIEW'),
 						{},
 						{
-							is_public: "1",
-							owner_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '1',
+							owner_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.publicCollections}{" "}
+					{deleteContentCounts.publicCollections}{' '}
 					{deleteContentCounts.publicCollections === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-collectie",
+								'react-admin/modules/user/components/user-delete-modal___publieke-collectie',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-collecties",
+								'react-admin/modules/user/components/user-delete-modal___publieke-collecties',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.privateCollections) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_COLLECTIONS_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_COLLECTIONS_OVERVIEW'),
 						{},
 						{
-							is_public: "0",
-							owner_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '0',
+							owner_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.privateCollections}{" "}
+					{deleteContentCounts.privateCollections}{' '}
 					{deleteContentCounts.privateCollections === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-collectie",
+								'react-admin/modules/user/components/user-delete-modal___prive-collectie',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-collecties",
+								'react-admin/modules/user/components/user-delete-modal___prive-collecties',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (isDeleteAll && deleteContentCounts.publicBundles) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_BUNDLES_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_BUNDLES_OVERVIEW'),
 						{},
 						{
-							is_public: "1",
-							owner_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '1',
+							owner_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.publicBundles}{" "}
+					{deleteContentCounts.publicBundles}{' '}
 					{deleteContentCounts.publicBundles === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-bundel",
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundel',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-bundels",
+								'react-admin/modules/user/components/user-delete-modal___publieke-bundels',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.privateBundles) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_BUNDLES_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_BUNDLES_OVERVIEW'),
 						{},
 						{
-							is_public: "0",
-							owner_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '0',
+							owner_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.privateBundles}{" "}
+					{deleteContentCounts.privateBundles}{' '}
 					{deleteContentCounts.privateBundles === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-bundel",
+								'react-admin/modules/user/components/user-delete-modal___prive-bundel',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-bundels",
+								'react-admin/modules/user/components/user-delete-modal___prive-bundels',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (isDeleteAll && deleteContentCounts.publicAssignments) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_ASSIGNMENTS_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENTS_OVERVIEW'),
 						{},
 						{
-							is_public: "1",
-							author: selectedProfileIds.join("~"),
-						},
+							is_public: '1',
+							author: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.publicAssignments}{" "}
+					{deleteContentCounts.publicAssignments}{' '}
 					{deleteContentCounts.publicAssignments === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-opdracht",
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdracht',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-opdrachten",
+								'react-admin/modules/user/components/user-delete-modal___publieke-opdrachten',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (
@@ -278,62 +270,58 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.publicAssignments &&
 			deleteContentCounts.publicAssignmentPupilCollections
 		) {
-			const numberOfCollections = String(
-				deleteContentCounts.publicAssignmentPupilCollections,
-			);
+			const numberOfCollections = String(deleteContentCounts.publicAssignmentPupilCollections);
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute(
-							"ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW",
-						),
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW'),
 						{},
 						{
-							teacher: selectedProfileIds.join("~"),
-						},
+							teacher: selectedProfileIds.join('~'),
+						}
 					)}
 				>
 					{deleteContentCounts.publicAssignmentPupilCollections === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie",
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties",
+								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
 									numberOfCollections,
 								},
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.privateAssignments) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_ASSIGNMENTS_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENTS_OVERVIEW'),
 						{},
 						{
-							is_public: "0",
-							author: selectedProfileIds.join("~"),
-						},
+							is_public: '0',
+							author: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.privateAssignments}{" "}
+					{deleteContentCounts.privateAssignments}{' '}
 					{deleteContentCounts.privateAssignments === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-opdracht",
+								'react-admin/modules/user/components/user-delete-modal___prive-opdracht',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-opdrachten",
+								'react-admin/modules/user/components/user-delete-modal___prive-opdrachten',
 								undefined,
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (
@@ -341,124 +329,114 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			deleteContentCounts.privateAssignments &&
 			deleteContentCounts.privateAssignmentPupilCollections
 		) {
-			const numberOfCollections = String(
-				deleteContentCounts.privateAssignmentPupilCollections,
-			);
+			const numberOfCollections = String(deleteContentCounts.privateAssignmentPupilCollections);
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute(
-							"ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW",
-						),
+						AdminConfigManager.getAdminRoute('ADMIN_ASSIGNMENT_PUPIL_COLLECTIONS_OVERVIEW'),
 						{},
 						{
-							teacher: selectedProfileIds.join("~"),
-						},
+							teacher: selectedProfileIds.join('~'),
+						}
 					)}
 				>
 					{deleteContentCounts.privateAssignmentPupilCollections === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie",
+								'react-admin/modules/user/components/user-delete-modal___met-1-leerlingen-collectie',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties",
+								'react-admin/modules/user/components/user-delete-modal___met-number-of-collections-leerlingen-collecties',
 								{
 									numberOfCollections,
 								},
-								[AVO],
-						  )}
-				</Link>,
+								[AVO]
+							)}
+				</Link>
 			);
 		}
 		if (isDeleteAll && deleteContentCounts.quickLanes) {
 			countOutputs.push(
 				<>
-					{deleteContentCounts.quickLanes}{" "}
+					{deleteContentCounts.quickLanes}{' '}
 					{deleteContentCounts.quickLanes === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___sneldeel-link",
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-link',
 								undefined,
-								[AVO],
-						  )
+								[AVO]
+							)
 						: tHtml(
-								"react-admin/modules/user/components/user-delete-modal___sneldeel-links",
+								'react-admin/modules/user/components/user-delete-modal___sneldeel-links',
 								undefined,
-								[AVO],
-						  )}
-				</>,
+								[AVO]
+							)}
+				</>
 			);
 		}
 		if (isDeleteAll && deleteContentCounts.publicContentPages) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
-							is_public: "1",
-							user_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '1',
+							user_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.publicContentPages}{" "}
+					{deleteContentCounts.publicContentPages}{' '}
 					{deleteContentCounts.publicContentPages === 1
 						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___publieke-content-pagina",
-						  )
-						: tHtml(
-								"admin/users/views/user-overview___publieke-content-paginas",
-						  )}
-				</Link>,
+								'react-admin/modules/user/components/user-delete-modal___publieke-content-pagina'
+							)
+						: tHtml('admin/users/views/user-overview___publieke-content-paginas')}
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.privateContentPages) {
 			countOutputs.push(
 				<Link
 					to={buildLink(
-						AdminConfigManager.getAdminRoute("ADMIN_CONTENT_PAGE_OVERVIEW"),
+						AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW'),
 						{},
 						{
-							is_public: "0",
-							user_profile_id: selectedProfileIds.join("~"),
-						},
+							is_public: '0',
+							user_profile_id: selectedProfileIds.join('~'),
+						}
 					)}
 				>
-					{deleteContentCounts.privateContentPages}{" "}
+					{deleteContentCounts.privateContentPages}{' '}
 					{deleteContentCounts.privateContentPages === 1
-						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___prive-content-pagina",
-						  )
-						: tHtml("admin/users/views/user-overview___prive-content-paginas")}
-				</Link>,
+						? tHtml('react-admin/modules/user/components/user-delete-modal___prive-content-pagina')
+						: tHtml('admin/users/views/user-overview___prive-content-paginas')}
+				</Link>
 			);
 		}
 		if (!isTransferAll && deleteContentCounts.bookmarks) {
 			countOutputs.push(
 				<>
-					{deleteContentCounts.bookmarks}{" "}
+					{deleteContentCounts.bookmarks}{' '}
 					{deleteContentCounts.bookmarks === 1
-						? tHtml(
-								"react-admin/modules/user/components/user-delete-modal___bladwijzer",
-						  )
-						: tHtml("admin/users/views/user-overview___bladwijzers")}
-				</>,
+						? tHtml('react-admin/modules/user/components/user-delete-modal___bladwijzer')
+						: tHtml('admin/users/views/user-overview___bladwijzers')}
+				</>
 			);
 		}
 		return (
 			<>
 				{tHtml(
-					"admin/users/views/user-overview___weet-je-zeker-dat-je-deze-gebruikers-wil-verwijderen",
+					'admin/users/views/user-overview___weet-je-zeker-dat-je-deze-gebruikers-wil-verwijderen'
 				)}
 
 				{!!countOutputs.length && (
 					<Spacer margin="top" className="c-content">
 						<strong>
 							{tText(
-								"react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden",
+								'react-admin/modules/user/components/user-delete-modal___deze-inhoud-zal-verwijderd-worden',
 								undefined,
-								[AVO],
+								[AVO]
 							)}
 						</strong>
 						<ul>
@@ -472,7 +450,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 
 				<Checkbox
 					label={tText(
-						"admin/users/components/user-delete-modal___breng-de-gebruiker-s-op-de-hoogte-van-deze-actie",
+						'admin/users/components/user-delete-modal___breng-de-gebruiker-s-op-de-hoogte-van-deze-actie'
 					)}
 					checked={shouldSendEmail}
 					onChange={setShouldSendEmail}
@@ -480,7 +458,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				<Spacer margin="top">
 					<Alert
 						message={tHtml(
-							"admin/users/views/user-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden",
+							'admin/users/views/user-overview___deze-actie-kan-niet-ongedaan-gemaakt-worden'
 						)}
 						type="danger"
 					/>
@@ -497,23 +475,21 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 				selectedProfileIds,
 				selectedDeleteOption,
 				shouldSendEmail,
-				transferToUser?.value,
+				transferToUser?.value
 			);
 
 			showToast({
-				title: tText("modules/user/components/user-delete-modal___success"),
-				description: tText(
-					"admin/users/views/user-edit___de-gebruiker-is-aangepast",
-				),
+				title: tText('modules/user/components/user-delete-modal___success'),
+				description: tText('admin/users/views/user-edit___de-gebruiker-is-aangepast'),
 				type: ToastType.SUCCESS,
 			});
 			deleteCallback();
 		} catch (err) {
-			console.error(new CustomError("Failed to remove users", err));
+			console.error(new CustomError('Failed to remove users', err));
 			showToast({
-				title: tText("modules/user/components/user-delete-modal___error"),
+				title: tText('modules/user/components/user-delete-modal___error'),
 				description: tText(
-					"admin/users/views/user-overview___het-verwijderen-van-de-geselecteerde-gebruikers-is-mislukt",
+					'admin/users/views/user-overview___het-verwijderen-van-de-geselecteerde-gebruikers-is-mislukt'
 				),
 				type: ToastType.ERROR,
 			});
@@ -523,11 +499,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 	return (
 		<>
 			<Modal
-				title={tText(
-					"admin/users/views/user-overview___verwijder-opties",
-					undefined,
-					[AVO],
-				)}
+				title={tText('admin/users/views/user-overview___verwijder-opties', undefined, [AVO])}
 				isOpen={isOpen}
 				onClose={onClose}
 				size="medium"
@@ -540,16 +512,16 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 						// biome-ignore lint/suspicious/noExplicitAny: todo
 						onChange={setSelectedDeleteOption as any}
 					/>
-					{(selectedDeleteOption === "TRANSFER_PUBLIC" ||
-						selectedDeleteOption === "TRANSFER_ALL") && (
+					{(selectedDeleteOption === 'TRANSFER_PUBLIC' ||
+						selectedDeleteOption === 'TRANSFER_ALL') && (
 						<ContentPicker
-							allowedTypes={["PROFILE"]}
+							allowedTypes={['PROFILE']}
 							value={transferToUser}
 							onChange={setTransferToUser}
 							placeholder={tText(
-								"admin/users/views/user-overview___overdragen-naar-gebruiker",
+								'admin/users/views/user-overview___overdragen-naar-gebruiker',
 								undefined,
-								[AVO],
+								[AVO]
 							)}
 							hideTargetSwitch
 							hideTypeDropdown
@@ -565,15 +537,13 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 									<Button
 										type="secondary"
 										label={tText(
-											"admin/shared/components/change-labels-modal/change-labels-modal___annuleren",
+											'admin/shared/components/change-labels-modal/change-labels-modal___annuleren'
 										)}
 										onClick={onClose}
 									/>
 									<Button
 										type="danger"
-										label={tText(
-											"admin/users/views/user-overview___verwijder-gebruikers",
-										)}
+										label={tText('admin/users/views/user-overview___verwijder-gebruikers')}
 										onClick={validateOptionModalAndOpenConfirm}
 									/>
 								</ButtonToolbar>
@@ -584,7 +554,7 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 			</Modal>
 			<Modal
 				isOpen={deleteConfirmModalOpen}
-				title={tText("admin/users/views/user-overview___bevestiging")}
+				title={tText('admin/users/views/user-overview___bevestiging')}
 				size="medium"
 				onClose={handleConfirmModalClose}
 				scrollable
@@ -598,14 +568,12 @@ const UserDeleteModal: FunctionComponent<UserDeleteModalProps> = ({
 								<ButtonToolbar>
 									<Button
 										type="secondary"
-										label={tText("admin/users/views/user-overview___annuleren")}
+										label={tText('admin/users/views/user-overview___annuleren')}
 										onClick={handleConfirmModalClose}
 									/>
 									<Button
 										type="danger"
-										label={tText(
-											"admin/users/views/user-overview___verwijder-gebruikers",
-										)}
+										label={tText('admin/users/views/user-overview___verwijder-gebruikers')}
 										onClick={handleDeleteUsers}
 									/>
 								</ButtonToolbar>

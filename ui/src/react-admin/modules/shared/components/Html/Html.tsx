@@ -1,13 +1,13 @@
-import type { CSSProperties, FunctionComponent } from "react";
-import React from "react";
+import type { CSSProperties, FunctionComponent } from 'react';
+import React from 'react';
 
-import { sanitizeHtml } from "../../helpers/sanitize";
-import { SanitizePreset } from "../../helpers/sanitize/presets";
+import { sanitizeHtml } from '../../helpers/sanitize';
+import { SanitizePreset } from '../../helpers/sanitize/presets';
 
 export interface HtmlProps {
 	content: string;
 	sanitizePreset?: SanitizePreset;
-	type?: "p" | "div" | "span" | "td";
+	type?: 'p' | 'div' | 'span' | 'td';
 	className?: string;
 	style?: CSSProperties;
 }
@@ -15,7 +15,7 @@ export interface HtmlProps {
 const Html: FunctionComponent<HtmlProps> = ({
 	content,
 	sanitizePreset = SanitizePreset.link,
-	type = "p",
+	type = 'p',
 	className,
 	style,
 }) => {

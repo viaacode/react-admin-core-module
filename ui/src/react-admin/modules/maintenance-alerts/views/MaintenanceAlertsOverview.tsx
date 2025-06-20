@@ -145,18 +145,12 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				return (
 					<Badge
 						text={
-							checkIsAlertActive(
-								maintenanceAlert.fromDate,
-								maintenanceAlert.untilDate
-							)
+							checkIsAlertActive(maintenanceAlert.fromDate, maintenanceAlert.untilDate)
 								? tText('modules/alerts/views/alerts-overview___actief')
 								: tText('modules/alerts/views/alerts-overview___inactief')
 						}
 						variants={
-							checkIsAlertActive(
-								maintenanceAlert.fromDate,
-								maintenanceAlert.untilDate
-							)
+							checkIsAlertActive(maintenanceAlert.fromDate, maintenanceAlert.untilDate)
 								? ['success']
 								: ['grey']
 						}
@@ -230,9 +224,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 				? [
 						{
 							id: 'language' as const,
-							label: tText(
-								'modules/maintenance-alerts/views/maintenance-alerts-overview___taal'
-							),
+							label: tText('modules/maintenance-alerts/views/maintenance-alerts-overview___taal'),
 							sortable: true,
 							visibleByDefault: true,
 							filterType: TableFilterType.CheckboxDropdownModal,
@@ -241,13 +233,11 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 							} as CheckboxDropdownModalProps,
 							dataType: TableColumnDataType.string,
 						},
-				  ]
+					]
 				: []),
 			{
 				id: 'actions',
-				tooltip: tText(
-					'admin/content-page-labels/views/content-page-label-overview___acties'
-				),
+				tooltip: tText('admin/content-page-labels/views/content-page-label-overview___acties'),
 				visibleByDefault: true,
 			},
 		];
@@ -323,9 +313,7 @@ export const MaintenanceAlertsOverview: FunctionComponent<MaintenanceAlertsOverv
 			</AdminLayout.Actions>
 
 			<AdminLayout.Content>
-				<div className={className}>
-					{maintenanceAlerts && renderAlertsTable(maintenanceAlerts)}
-				</div>
+				<div className={className}>{maintenanceAlerts && renderAlertsTable(maintenanceAlerts)}</div>
 
 				<MaintenanceAlertsEditForm
 					renderPopup={renderPopup}

@@ -1,4 +1,4 @@
-import { isArray, isPlainObject } from "lodash-es";
+import { isArray, isPlainObject } from 'lodash-es';
 
 /**
  * Recursively runs over every property, and replaces it with the return value of the mapping function
@@ -11,7 +11,7 @@ export function mapDeep(
 	obj: any,
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	mappingFunction: (obj: any, key: string, value: any) => void,
-	ignoreKey: (key: string) => boolean,
+	ignoreKey: (key: string) => boolean
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 ): any {
 	// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -22,12 +22,8 @@ export function mapDeep(
 	propertiesToRunOver.push(
 		...Object.keys(obj).map(
 			// biome-ignore lint/suspicious/noExplicitAny: todo
-			(key: string | number): [any, any, string | number] => [
-				obj,
-				returnObj,
-				key,
-			],
-		),
+			(key: string | number): [any, any, string | number] => [obj, returnObj, key]
+		)
 	);
 
 	let propToRunOver = propertiesToRunOver.shift();
@@ -47,8 +43,8 @@ export function mapDeep(
 							value,
 							responseSubObj[key],
 							subObjKey,
-						],
-					),
+						]
+					)
 				);
 			}
 		}

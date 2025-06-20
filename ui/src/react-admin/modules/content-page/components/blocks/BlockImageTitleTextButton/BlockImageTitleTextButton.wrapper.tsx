@@ -35,9 +35,7 @@ export const BlockImageTitleTextButtonWrapper: FC<ImageTitleTextButtonBlockCompo
 				`c-image-title-text-button-wrapper--image-${imagePosition}`
 			)}
 		>
-			<Column size="2-7">
-				{imageAction ? generateSmartLink(imageAction, image) : image}
-			</Column>
+			<Column size="2-7">{imageAction ? generateSmartLink(imageAction, image) : image}</Column>
 			<Column size="2-5">
 				{headingType && headingTitle && (
 					<BlockHeading type={headingType}>{headingTitle}</BlockHeading>
