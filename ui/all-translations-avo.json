@@ -17876,19 +17876,19 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "embed/components/embed",
-    "key": "deze-video-is-niet-meer-beschikbaar",
+    "location": "embed/components/error-view",
+    "key": "oeps-er-liep-iets-mis-probeer-het-opnieuw-br-lukt-het-nog-steeds-niet-dan-is-dit-fragment-mogelijks-verwijderd",
     "language": "nl",
-    "value": "Deze video is niet meer beschikbaar",
+    "value": "Oeps, er liep iets mis. Probeer het opnieuw.<br/> Lukt het nog steeds niet? Dan is dit fragment mogelijks verwijderd.",
     "value_type": "HTML"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "embed/components/error-view",
-    "key": "oeps-er-liep-iets-mis-probeer-het-opnieuw-br-lukt-het-nog-steeds-niet-dan-is-dit-fragment-mogelijks-verwijderd",
+    "location": "embed/components/embed",
+    "key": "deze-video-is-niet-meer-beschikbaar",
     "language": "nl",
-    "value": "Oeps, er liep iets mis. Probeer het opnieuw.<br/> Lukt het nog steeds niet? Dan is dit fragment mogelijks verwijderd.",
+    "value": "Deze video is niet meer beschikbaar",
     "value_type": "HTML"
   },
   {
@@ -17916,15 +17916,6 @@
     "key": "reeks",
     "language": "nl",
     "value": "Reeks:",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/components/embed-error-view",
-    "key": "deze-video-is-niet-meer-beschikbaar",
-    "language": "nl",
-    "value": "Deze video is niet meer beschikbaar",
     "value_type": "HTML"
   },
   {
@@ -17978,7 +17969,7 @@
     "location": "embed-code/components/embed-code-filter-table-cell",
     "key": "bookwidgets-logo",
     "language": "nl",
-    "value": "Bookwidgets logo",
+    "value": "BookWidgets logo",
     "value_type": "TEXT"
   },
   {
@@ -17987,7 +17978,7 @@
     "location": "embed-code/components/embed-code-filter-table-cell",
     "key": "bookwidgets",
     "language": "nl",
-    "value": "Bookwidgets",
+    "value": "BookWidgets",
     "value_type": "TEXT"
   },
   {
@@ -18041,7 +18032,7 @@
     "location": "embed-code/components/embed-code-overview",
     "key": "het-ingesloten-fragment-is-verwijderd",
     "language": "nl",
-    "value": "het ingesloten fragment is verwijderd",
+    "value": "Het ingesloten fragment is verwijderd.",
     "value_type": "HTML"
   },
   {
@@ -18050,7 +18041,7 @@
     "location": "embed-code/components/embed-code-overview",
     "key": "er-ging-iets-mis-bij-het-verwijderen-van-het-ingesloten-fragment",
     "language": "nl",
-    "value": "er ging iets mis bij het verwijderen van het ingesloten fragment",
+    "value": "Er ging iets mis bij het verwijderen van het ingesloten fragment.",
     "value_type": "HTML"
   },
   {
@@ -18156,6 +18147,24 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed-code/components/embed-content",
+    "key": "sluit",
+    "language": "nl",
+    "value": "Sluit",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
     "key": "je-code-werd-succesvol-aangemaakt-en-opgeslagen-in-je-werkruimte",
     "language": "nl",
     "value": "Je code werd succesvol aangemaakt en opgeslagen in je werkruimte.",
@@ -18185,7 +18194,7 @@
     "location": "embed-code/components/embed-content",
     "key": "bij-het-insluiten-op-bookwidgets-wordt-er-geen-beschrijving-bij-het-fragment-weergegeven",
     "language": "nl",
-    "value": "Bij het insluiten op Bookwidgets wordt er geen beschrijving bij het fragment weergegeven.",
+    "value": "Bij het insluiten op BookWidgets wordt er geen beschrijving bij het fragment weergegeven.",
     "value_type": "HTML"
   },
   {
@@ -18267,24 +18276,6 @@
     "key": "inhoud",
     "language": "nl",
     "value": "Inhoud",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-content",
-    "key": "annuleer",
-    "language": "nl",
-    "value": "Annuleer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-content",
-    "key": "sluit",
-    "language": "nl",
-    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -18428,7 +18419,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -26147,51 +26138,6 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "embed-code/components/modals/bookmark-embed-modal",
-    "key": "smartschool-logo",
-    "language": "nl",
-    "value": "Smartschool logo",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/modals/bookmark-embed-modal",
-    "key": "smartschool",
-    "language": "nl",
-    "value": "Smartschool",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/modals/bookmark-embed-modal",
-    "key": "bookwidgets-logo",
-    "language": "nl",
-    "value": "Bookwidgets logo",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/modals/bookmark-embed-modal",
-    "key": "bookwidgets",
-    "language": "nl",
-    "value": "Bookwidgets",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/modals/bookmark-embed-modal",
-    "key": "deel-dit-fragment",
-    "language": "nl",
-    "value": "Deel dit fragment",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
     "location": "embed-code/components/modals/edit-embed-code-modal",
     "key": "let-op-de-aanpassingen-komen-meteen-door-overal-waar-je-dit-fragment-insloot-in-smartschool",
     "language": "nl",
@@ -26204,7 +26150,7 @@
     "location": "embed-code/components/modals/edit-embed-code-modal",
     "key": "let-op-de-aanpassingen-komen-meteen-door-overal-waar-je-dit-fragment-insloot-in-bookwidgets",
     "language": "nl",
-    "value": "Let op! De aanpassingen komen meteen door overal waar je dit fragment insloot in Bookwidgets",
+    "value": "Let op! De aanpassingen komen meteen door overal waar je dit fragment insloot in BookWidgets",
     "value_type": "HTML"
   },
   {
@@ -27419,7 +27365,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "bookwidgets-logo",
     "language": "nl",
-    "value": "Bookwidgets logo",
+    "value": "BookWidgets logo",
     "value_type": "TEXT"
   },
   {
@@ -27437,7 +27383,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "bookwidgets",
     "language": "nl",
-    "value": "Bookwidgets",
+    "value": "BookWidgets",
     "value_type": "TEXT"
   },
   {
@@ -27464,7 +27410,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "bewerk-het-fragment-kopieer-de-link-en-plak-hem-in-een-widget-in-bookwidgets",
     "language": "nl",
-    "value": "Bewerk het fragment, kopieer de link en plak hem in een widget in Bookwidgets.",
+    "value": "Bewerk het fragment, kopieer de link en plak hem in een widget in BookWidgets.",
     "value_type": "HTML"
   },
   {
@@ -29521,6 +29467,105 @@
   },
   {
     "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit",
+    "key": "hulp-nodig-bij-het-maken-van-opdrachten-titel",
+    "language": "nl",
+    "value": "Hulp nodig bij het maken van opdrachten titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit",
+    "key": "hulp-nodig-bij-het-maken-van-opdrachten-beschrijving",
+    "language": "nl",
+    "value": "Hulp nodig bij het maken van opdrachten beschrijving",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/components/login-options-for-teacher",
+    "key": "is-jouw-account-al-gekoppeld",
+    "language": "nl",
+    "value": "Is jouw account al gekoppeld?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/components/login-options-for-teacher",
+    "key": "account-tooltip-content",
+    "language": "nl",
+    "value": "Account tooltip content",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "deze-video-werd-verwijderd",
+    "language": "nl",
+    "value": "Deze video werd verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "deze-video-werd-gedepubliceerd-met-volgende-reden",
+    "language": "nl",
+    "value": "Deze video werd gedepubliceerd met volgende reden",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "deze-video-werd-gedepubliceerd",
+    "language": "nl",
+    "value": "Deze video werd gedepubliceerd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
+    "language": "nl",
+    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-code-overview",
+    "key": "er-ging-iets-mis-bij-het-kopieren-van-de-code",
+    "language": "nl",
+    "value": "Er ging iets mis bij het kopieren van de code",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
+    "key": "het-kopieren-van-de-embed-code-naar-je-klembord-is-mislukt",
+    "language": "nl",
+    "value": "Het kopieren van de embed code naar je klembord is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/views/embed-code-detail",
+    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
+    "language": "nl",
+    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -29615,7 +29660,7 @@
     "location": "modules/klascement/klascement",
     "key": "audiovisueel-lesmateriaal-collectie",
     "language": "nl",
-    "value": "Audiovisueel lesmateriaal collectie",
+    "value": ": Audiovisueel lesmateriaal",
     "value_type": "TEXT"
   },
   {
@@ -29859,6 +29904,33 @@
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-public-key-niet-gevonden-kon-worden-issuer-issuer-key-id-key-id",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de public key niet gevonden kon worden (issuer: {{issuer}}, keyId: {{keyId}})",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-audience-parameter-komt-niet-overeen-met-client-id-probeer-de-pagina-te-herladen",
+    "language": "nl",
+    "value": "De audience parameter komt niet overeen met client id. Probeer de pagina te herladen.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-issuer-iss-in-de-token-van-de-externe-lti-provider-komt-niet-overeen-probeer-de-pagina-te-herladen",
+    "language": "nl",
+    "value": "De issuer (iss) in de token van de externe LTI provider komt niet overeen. Probeer de pagina te herladen.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "de-nonce-in-de-token-van-de-externe-lti-provider-komt-niet-overeen-probeer-de-pagina-te-herladen",
+    "language": "nl",
+    "value": "De nonce in de token van de externe LTI provider komt niet overeen. Probeer de pagina te herladen.",
     "value_type": "TEXT"
   },
   {

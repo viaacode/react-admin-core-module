@@ -427,9 +427,7 @@ export type SingleContentBlockComponentState =
 	| QuoteBlockComponentState
 	| RichTextBlockComponentState
 	// biome-ignore lint/complexity/noBannedTypes: todo
-	| {
-			// Search block & content page meta
-	  }// Search block & content page meta;
+	| {}; // Search block & content page meta
 
 export type ContentBlockComponentState =
 	| RepeatedContentBlockComponentState[]
