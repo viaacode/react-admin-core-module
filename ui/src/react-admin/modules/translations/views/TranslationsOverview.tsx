@@ -1,38 +1,32 @@
 /** biome-ignore-all lint/nursery/noNestedComponentDefinitions: Cell isn't a component but a property with capital letter */
-import type { RichEditorState } from '@meemoo/react-components';
-import { Button, PaginationBar, RichTextEditor, Table, TextInput } from '@meemoo/react-components';
-import { reverse, sortBy } from 'lodash-es';
-import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import type {RichEditorState} from '@meemoo/react-components';
+import {Button, PaginationBar, RichTextEditor, Table, TextInput} from '@meemoo/react-components';
+import {reverse, sortBy} from 'lodash-es';
+import type {FunctionComponent, KeyboardEvent, ReactElement, ReactNode} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import type { Row, TableOptions } from 'react-table';
-import { ToastType } from '~core/config/config.types';
-import { useGetAllTranslations } from '~modules/translations/hooks/use-get-all-translations';
-import {
-	RICH_TEXT_EDITOR_OPTIONS,
-	TRANSLATIONS_PER_PAGE,
-} from '~modules/translations/translations.const';
-import { Locale, ValueType } from '~modules/translations/translations.core.types';
-import type {
-	MultiLanguageTranslationEntry,
-	TranslationsOverviewProps,
-} from '~modules/translations/translations.types';
+import type {Row, TableOptions} from 'react-table';
+import {ToastType} from '~core/config/config.types';
+import {useGetAllTranslations} from '~modules/translations/hooks/use-get-all-translations';
+import {RICH_TEXT_EDITOR_OPTIONS, TRANSLATIONS_PER_PAGE,} from '~modules/translations/translations.const';
+import {Locale, ValueType} from '~modules/translations/translations.core.types';
+import type {MultiLanguageTranslationEntry, TranslationsOverviewProps,} from '~modules/translations/translations.types';
 import Html from '~shared/components/Html/Html';
-import { Icon } from '~shared/components/Icon';
-import { Loader } from '~shared/components/Loader';
-import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
-import { sortingIcons } from '~shared/components/Table/Table.const';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { CustomError } from '~shared/helpers/custom-error';
-import { showToast } from '~shared/helpers/show-toast';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
-import { OrderDirection } from '~shared/types';
-import { getFullKey } from '../helpers/get-full-key';
-import { useGetAllLanguages } from '../hooks/use-get-all-languages';
-import { TranslationsService } from '../translations.service';
+import {Icon} from '~shared/components/Icon';
+import {Loader} from '~shared/components/Loader';
+import {CenteredSpinner} from '~shared/components/Spinner/CenteredSpinner';
+import {sortingIcons} from '~shared/components/Table/Table.const';
+import {GET_LANGUAGE_NAMES} from '~shared/consts/language-names';
+import {CustomError} from '~shared/helpers/custom-error';
+import {showToast} from '~shared/helpers/show-toast';
+import {tHtml, tText} from '~shared/helpers/translation-functions';
+import {OrderDirection} from '~shared/types';
+import {getFullKey} from '../helpers/get-full-key';
+import {useGetAllLanguages} from '../hooks/use-get-all-languages';
+import {TranslationsService} from '../translations.service';
 
 import './TranslationsOverview.scss';
-import { Spacer } from '@viaa/avo2-components';
+import {Spacer} from '@viaa/avo2-components';
 
 type OrderProp = `value_${Locale}` | 'id';
 
@@ -353,7 +347,7 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 							<strong>{activeTranslationEntry.key}</strong>
 						</div>
 						<div className="u-text-muted">
-							{activeTranslationEntry.component + '/' + activeTranslationEntry.location}
+							{`${activeTranslationEntry.component}/${activeTranslationEntry.location}`}
 						</div>
 					</Button>
 				</CopyToClipboard>

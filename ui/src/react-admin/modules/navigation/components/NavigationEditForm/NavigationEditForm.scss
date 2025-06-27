@@ -1,15 +1,15 @@
 @import "../../../shared/styles/settings/variables";
 
 .m-menu-edit-form {
-	.c-button-toolbar {
-		display: inline-flex;
+  .c-button-toolbar {
+    display: inline-flex;
 
-		> .c-badge + .c-badge {
-			margin-left: $g-spacer-unit;
-		}
-	}
+    > .c-badge + .c-badge {
+      margin-left: $g-spacer-unit;
+    }
+  }
 
-	.c-navigation-edit-form__warnings {
-		padding-top: $g-spacer-unit * 4.5;
-	}
+  .c-navigation-edit-form__warnings {
+    padding-top: $g-spacer-unit * 4.5;
+  }
 }

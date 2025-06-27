@@ -1,31 +1,27 @@
-import type { TagInfo, TagOption } from '@viaa/avo2-components';
-import { Container, Spacer, Table, TagList, Thumbnail } from '@viaa/avo2-components';
-import { isAfter, isBefore, parseISO } from 'date-fns';
-import { compact, get } from 'lodash-es';
-import type { FunctionComponent } from 'react';
+import type {TagInfo, TagOption} from '@viaa/avo2-components';
+import {Container, Spacer, Table, TagList, Thumbnail} from '@viaa/avo2-components';
+import {isAfter, isBefore, parseISO} from 'date-fns';
+import {compact, get} from 'lodash-es';
+import type {FunctionComponent} from 'react';
 import React from 'react';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { AdminConfigManager } from '~core/config';
+import {BlockHeading} from '~content-blocks/BlockHeading/BlockHeading';
+import {AdminConfigManager} from '~core/config';
 
-import { GET_CONTENT_PAGE_WIDTH_OPTIONS } from '~modules/content-page/const/content-page.consts';
-import { useContentTypes } from '~modules/content-page/hooks/useContentTypes';
-import { getContentPageDescriptionHtml } from '~modules/content-page/services/content-page.converters';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
-import type { UserGroup } from '~modules/user-group/types/user-group.types';
+import {GET_CONTENT_PAGE_WIDTH_OPTIONS} from '~modules/content-page/const/content-page.consts';
+import {useContentTypes} from '~modules/content-page/hooks/useContentTypes';
+import {getContentPageDescriptionHtml} from '~modules/content-page/services/content-page.converters';
+import type {ContentPageInfo} from '~modules/content-page/types/content-pages.types';
+import {useUserGroupOptions} from '~modules/user-group/hooks/useUserGroupOptions';
+import type {UserGroup} from '~modules/user-group/types/user-group.types';
 import Html from '~shared/components/Html/Html';
-import { Link } from '~shared/components/Link';
-import { GET_LANGUAGE_NAMES } from '~shared/consts/language-names';
-import { formatDate, formatDateString } from '~shared/helpers/formatters/date';
-import { isMultiLanguageEnabled } from '~shared/helpers/is-multi-language-enabled';
-import { buildLink } from '~shared/helpers/link';
-import {
-	renderDateDetailRows,
-	renderDetailRow,
-	renderSimpleDetailRows,
-} from '~shared/helpers/render-detail-fields';
-import { SanitizePreset } from '~shared/helpers/sanitize/presets';
-import { tHtml, tText } from '~shared/helpers/translation-functions';
+import {Link} from '~shared/components/Link';
+import {GET_LANGUAGE_NAMES} from '~shared/consts/language-names';
+import {formatDate, formatDateString} from '~shared/helpers/formatters/date';
+import {isMultiLanguageEnabled} from '~shared/helpers/is-multi-language-enabled';
+import {buildLink} from '~shared/helpers/link';
+import {renderDateDetailRows, renderDetailRow, renderSimpleDetailRows,} from '~shared/helpers/render-detail-fields';
+import {SanitizePreset} from '~shared/helpers/sanitize/presets';
+import {tHtml, tText} from '~shared/helpers/translation-functions';
 
 interface ContentDetailMetaDataProps {
 	contentPageInfo: ContentPageInfo;
@@ -242,7 +238,7 @@ export const ContentPageDetailMetaData: FunctionComponent<ContentDetailMetaDataP
 														{translatedPage.title}
 													</span>
 													<span className="c-table_detail-page__translations__path">
-														{'/' + translatedPage.language.toLowerCase() + translatedPage.path}
+														{`/${translatedPage.language.toLowerCase()}${translatedPage.path}`}
 													</span>
 												</Link>
 											</p>

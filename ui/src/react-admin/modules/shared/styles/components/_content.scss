@@ -12,269 +12,269 @@
 
 .c-h1-display,
 .c-content .c-h1-display {
-	font-size: 4.8rem;
-	margin: 2.4rem 0;
-	line-height: 1.25;
-	font-family: $g-headings-font-family;
-	font-weight: $g-headings-font-weight;
+  font-size: 4.8rem;
+  margin: 2.4rem 0;
+  line-height: 1.25;
+  font-family: $g-headings-font-family;
+  font-weight: $g-headings-font-weight;
 }
 
 .c-h1,
 .c-content h1 {
-	font-family: $g-headings-font-family;
-	font-weight: $g-headings-font-weight;
-	font-size: 3.2rem;
-	margin: 3.2rem 0;
-	line-height: 1.25;
+  font-family: $g-headings-font-family;
+  font-weight: $g-headings-font-weight;
+  font-size: 3.2rem;
+  margin: 3.2rem 0;
+  line-height: 1.25;
 }
 
 .c-h2,
 .c-content h2 {
-	font-family: $g-headings-font-family;
-	font-weight: $g-headings-font-weight;
-	font-size: 2.4rem;
-	margin: 2.4rem 0;
-	line-height: 1.25;
+  font-family: $g-headings-font-family;
+  font-weight: $g-headings-font-weight;
+  font-size: 2.4rem;
+  margin: 2.4rem 0;
+  line-height: 1.25;
 }
 
 .c-h3,
 .c-content h3 {
-	font-family: $g-headings-font-family;
-	font-weight: $g-headings-font-weight;
-	font-size: 2.1rem;
-	margin: 2.1rem 0 1.2rem;
-	line-height: 1.25;
+  font-family: $g-headings-font-family;
+  font-weight: $g-headings-font-weight;
+  font-size: 2.1rem;
+  margin: 2.1rem 0 1.2rem;
+  line-height: 1.25;
 }
 
 .c-h4,
 .c-content h4 {
-	font-family: $g-base-font-family;
-	font-size: $g-base-font-size;
-	font-weight: $g-headings-font-weight;
-	margin: 1.5rem 0;
+  font-family: $g-base-font-family;
+  font-size: $g-base-font-size;
+  font-weight: $g-headings-font-weight;
+  margin: 1.5rem 0;
 }
 
 .c-h1.u-clickable,
 .c-h2.u-clickable,
 .c-h3.u-clickable,
 .c-h4.u-clickable {
-	color: $color-teal-bright;
+  color: $color-teal-bright;
 
-	&:hover {
-		text-decoration: underline;
-	}
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .c-body-1 {
-	font-size: $g-base-font-size;
-	margin: 1.5rem 0;
+  font-size: $g-base-font-size;
+  margin: 1.5rem 0;
 }
 
 .c-body-1--spaced {
-	line-height: 1.75;
+  line-height: 1.75;
 }
 
 .c-body-2 {
-	font-size: 1.3rem;
-	margin: 1.3rem 0;
+  font-size: 1.3rem;
+  margin: 1.3rem 0;
 }
 
 .c-intro {
-	font-size: 1.7rem;
+  font-size: 1.7rem;
 }
 
 .c-overline {
-	font-weight: $g-headings-font-weight;
-	font-size: 1.4rem;
-	line-height: 1;
-	text-transform: uppercase;
-	letter-spacing: 0.05rem;
-	margin: 1.5rem 0;
+  font-weight: $g-headings-font-weight;
+  font-size: 1.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  margin: 1.5rem 0;
 }
 
 // Provide a generic method to remove the margin top on the first item in .c-content
 .c-content--no-mt {
-	> *:first-child {
-		margin-top: 0;
-	}
+  > *:first-child {
+    margin-top: 0;
+  }
 }
 
 // Provide a generic method to remove the margin on any single item in .c-content
 .c-content--no-m {
-	> *:first-child,
-	> *:only-child {
-		margin: 0;
-	}
+  > *:first-child,
+  > *:only-child {
+    margin: 0;
+  }
 }
 
 .c-content {
-	white-space: normal;
-	overflow: auto; // Otherwise margins on c-content div collapse on https://onderwijs-qas.hetarchief.be/leerlingen
+  white-space: normal;
+  overflow: auto; // Otherwise margins on c-content div collapse on https://onderwijs-qas.hetarchief.be/leerlingen
 
-	p {
-		margin: 1.5rem 0;
-		min-height: 1em; // Braft editor output css
-	}
+  p {
+    margin: 1.5rem 0;
+    min-height: 1em; // Braft editor output css
+  }
 
-	a {
-		text-decoration: underline;
-	}
+  a {
+    text-decoration: underline;
+  }
 
-	dl {
-		border: 1px solid $color-gray-100;
-		border-radius: 0.3rem;
-		overflow: hidden;
-		padding: 1.2rem;
-		margin: 1.5rem 0;
+  dl {
+    border: 1px solid $color-gray-100;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
 
-		dt {
-			float: left;
-			width: 30%;
-			clear: left;
-			font-weight: $g-headings-font-weight;
-		}
+    dt {
+      float: left;
+      width: 30%;
+      clear: left;
+      font-weight: $g-headings-font-weight;
+    }
 
-		dd {
-			float: left;
-			width: 70%;
-		}
-	}
+    dd {
+      float: left;
+      width: 70%;
+    }
+  }
 
-	ul {
-		list-style: disc;
-	}
+  ul {
+    list-style: disc;
+  }
 
-	li {
-		padding-left: 0.5rem;
-	}
+  li {
+    padding-left: 0.5rem;
+  }
 
-	ol {
-		list-style: decimal;
-	}
+  ol {
+    list-style: decimal;
+  }
 
-	ul,
-	ol {
-		padding: 0;
-		margin: 1.5rem 0 1.5rem 1.75rem;
+  ul,
+  ol {
+    padding: 0;
+    margin: 1.5rem 0 1.5rem 1.75rem;
 
-		ul,
-		ol {
-			margin: 0;
-			padding-left: 2.25rem;
-		}
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 2.25rem;
+    }
 
-		ul {
-			li {
-				list-style: circle;
-			}
-		}
-	}
+    ul {
+      li {
+        list-style: circle;
+      }
+    }
+  }
 
-	blockquote {
-		margin: 0 0 10px;
-		padding: 15px 20px;
-		background-color: #f1f2f3;
-		border-left: solid 5px #ccc;
-		color: #666;
-		font-style: italic;
-	}
+  blockquote {
+    margin: 0 0 10px;
+    padding: 15px 20px;
+    background-color: #f1f2f3;
+    border-left: solid 5px #ccc;
+    color: #666;
+    font-style: italic;
+  }
 
-	table {
-		width: 100%;
-		margin: 1.5rem 0;
-	}
+  table {
+    width: 100%;
+    margin: 1.5rem 0;
+  }
 
-	table td,
-	table th {
-		padding: 0.8rem;
-	}
+  table td,
+  table th {
+    padding: 0.8rem;
+  }
 
-	table th {
-		border-bottom: 0.2rem solid $color-gray-200;
-		font-weight: $g-headings-font-weight;
-		text-align: left;
-	}
+  table th {
+    border-bottom: 0.2rem solid $color-gray-200;
+    font-weight: $g-headings-font-weight;
+    text-align: left;
+  }
 
-	table td {
-		border-bottom: 1px solid $color-gray-100;
-	}
+  table td {
+    border-bottom: 1px solid $color-gray-100;
+  }
 
-	strong {
-		font-weight: bold;
-	}
+  strong {
+    font-weight: bold;
+  }
 
-	em {
-		font-style: italic;
-	}
+  em {
+    font-style: italic;
+  }
 
-	.c-button {
-		text-decoration: none;
-	}
+  .c-button {
+    text-decoration: none;
+  }
 
-	pre {
-		background-color: $color-gray-50;
-		max-width: 100%;
-		max-height: 100%;
-		margin: 10px 0;
-		padding: 15px;
-		overflow: auto;
-		border-radius: 3px;
-		color: #666;
-		font-family: monospace;
-		font-size: 14px;
-		font-weight: normal;
-		line-height: 16px;
-		word-wrap: break-word;
-		white-space: pre-wrap;
-	}
+  pre {
+    background-color: $color-gray-50;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    overflow: auto;
+    border-radius: 3px;
+    color: #666;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 16px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
 
-	pre,
-	code {
-		font-family: $g-code-font-family;
-	}
+  pre,
+  code {
+    font-family: $g-code-font-family;
+  }
 
-	pre pre {
-		margin: 0;
-		padding: 0;
-	}
+  pre pre {
+    margin: 0;
+    padding: 0;
+  }
 
-	code {
-		font-size: 85%;
-		background-color: $color-gray-50;
-		padding: 0.2rem;
-		border-radius: 0.2rem;
-		color: $color-error;
-	}
+  code {
+    font-size: 85%;
+    background-color: $color-gray-50;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    color: $color-error;
+  }
 
-	.image-wrap {
-		img {
-			max-width: 100%;
-			height: auto;
-		}
+  .image-wrap {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
-		&.float-left {
-			margin: 0 10px 0 0;
-		}
+    &.float-left {
+      margin: 0 10px 0 0;
+    }
 
-		&.float-right {
-			margin: 0 0 0 10px;
-		}
-	}
+    &.float-right {
+      margin: 0 0 0 10px;
+    }
+  }
 }
 
 .c-content--inverse {
-	color: $color-gray-100;
+  color: $color-gray-100;
 }
 
 // Overline plus paragraph
 .c-overline-plus-p {
-	margin: 1.5rem 0;
+  margin: 1.5rem 0;
 
-	.c-overline {
-		margin: 0 0 0.4rem;
-	}
+  .c-overline {
+    margin: 0 0 0.4rem;
+  }
 
-	p:last-child {
-		margin: 0;
-	}
+  p:last-child {
+    margin: 0;
+  }
 }

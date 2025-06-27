@@ -3,12 +3,12 @@
 @import "../../../../shared/styles/settings/variables";
 
 .uitgeklaard-header {
-	@include klaar-block(#f3aa2e, #fff, #b75b99, #b75b99);
+  @include klaar-block(#f3aa2e, #fff, #b75b99, #b75b99);
 
-	&__logo,
-	&__date,
-	&__h1,
-	&__titles {
-		font-family: $g-headings-font-family;
-	}
+  &__logo,
+  &__date,
+  &__h1,
+  &__titles {
+    font-family: $g-headings-font-family;
+  }
 }

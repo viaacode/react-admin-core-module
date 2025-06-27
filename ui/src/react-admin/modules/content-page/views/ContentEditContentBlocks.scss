@@ -2,32 +2,32 @@
 @import "../../shared/styles/settings/colors";
 
 @keyframes flash {
-	from,
-	50%,
-	to {
-		background-color: color.adjust($color-teal-bright, $lightness: -30%);
-	}
+  from,
+  50%,
+  to {
+    background-color: color.adjust($color-teal-bright, $lightness: -30%);
+  }
 
-	25%,
-	75% {
-		background-color: white;
-	}
+  25%,
+  75% {
+    background-color: white;
+  }
 }
 
 .c-content-block__active {
-	animation: flash 1s ease-in-out 2;
-	background-color: inherit;
+  animation: flash 1s ease-in-out 2;
+  background-color: inherit;
 }
 
 .content-block-sidebar-item--highlighted {
-	border-color: $color-teal-bright;
+  border-color: $color-teal-bright;
 }
 
 .content-block-sidebar__items-non-draggable {
-	> .content-block-sidebar-item {
-		margin: 1rem;
-		background-color: #fff;
-		display: block;
-		position: relative;
-	}
+  > .content-block-sidebar-item {
+    margin: 1rem;
+    background-color: #fff;
+    display: block;
+    position: relative;
+  }
 }

@@ -6,9 +6,9 @@
 // * We tried display flex => which causes issues on safari with blocks: https://meemoo.atlassian.net/browse/ARC-1737
 // * Latest solution: try negative margins of 0.05px
 .c-content-page-preview {
-	overflow-y: auto;
-	padding-top: -0.05px;
-	padding-bottom: -0.05px;
-	margin-top: -0.05px;
-	margin-bottom: -0.05px;
+  overflow-y: auto;
+  padding-top: -0.05px;
+  padding-bottom: -0.05px;
+  margin-top: -0.05px;
+  margin-bottom: -0.05px;
 }
