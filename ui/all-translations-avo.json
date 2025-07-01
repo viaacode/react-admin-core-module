@@ -14052,6 +14052,24 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/views/assignment-edit",
+    "key": "hulp-nodig-bij-het-maken-van-opdrachten-titel",
+    "language": "nl",
+    "value": "Hulp nodig bij het maken van opdrachten titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit",
+    "key": "hulp-nodig-bij-het-maken-van-opdrachten-beschrijving",
+    "language": "nl",
+    "value": "Hulp nodig bij het maken van opdrachten beschrijving",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/views/assignment-edit",
     "key": "maak-deze-opdracht-prive",
     "language": "nl",
     "value": "Maak deze opdracht privé",
@@ -14947,6 +14965,24 @@
     "language": "nl",
     "value": "E-mailadres",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/components/login-options-for-teacher",
+    "key": "is-jouw-account-al-gekoppeld",
+    "language": "nl",
+    "value": "Is jouw account al gekoppeld?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "authentication/components/login-options-for-teacher",
+    "key": "account-tooltip-content",
+    "language": "nl",
+    "value": "Account tooltip content",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -17895,6 +17931,42 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed/components/embed",
+    "key": "deze-video-werd-verwijderd",
+    "language": "nl",
+    "value": "Deze video werd verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "deze-video-werd-gedepubliceerd-met-volgende-reden",
+    "language": "nl",
+    "value": "<p>Deze video werd gedepubliceerd met volgende reden</p><p>Reden:</p><p>{{depublishReason}}</p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "deze-video-werd-gedepubliceerd",
+    "language": "nl",
+    "value": "Deze video werd gedepubliceerd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
+    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
+    "language": "nl",
+    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed/components/embed",
     "key": "aanbieder",
     "language": "nl",
     "value": "Aanbieder:",
@@ -18012,6 +18084,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed-code/components/embed-code-overview",
+    "key": "fragment-dupliceren-mislukt",
+    "language": "nl",
+    "value": "fragment dupliceren mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-code-overview",
     "key": "fragment-succesvol-gewijzigd",
     "language": "nl",
     "value": "Fragment succesvol gewijzigd.",
@@ -18102,6 +18183,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed-code/components/embed-code-overview",
+    "key": "er-ging-iets-mis-bij-het-kopieren-van-de-code",
+    "language": "nl",
+    "value": "Er ging iets mis bij het kopieren van de code",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-code-overview",
     "key": "de-code-werd-succesvol-gekopieerd",
     "language": "nl",
     "value": "De code werd succesvol gekopieerd.",
@@ -18183,9 +18273,27 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "embed-code/components/embed-content",
+    "key": "het-kopieren-van-de-embed-code-naar-je-klembord-is-mislukt",
+    "language": "nl",
+    "value": "Het kopieren van de embed code naar je klembord is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
     "key": "de-code-is-naar-je-klembord-gekopieerd",
     "language": "nl",
     "value": "De code is naar je klembord gekopieerd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/components/embed-content",
+    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen",
+    "language": "nl",
+    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen.",
     "value_type": "HTML"
   },
   {
@@ -18281,6 +18389,51 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "embed-code/helpers/validation-rules",
+    "key": "het-fragment-heeft-geen-titel",
+    "language": "nl",
+    "value": "Het fragment heeft geen titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/helpers/validation-rules",
+    "key": "het-fragment-heeft-geen-inhoud",
+    "language": "nl",
+    "value": "Het fragment heeft geen inhoud",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/helpers/validation-rules",
+    "key": "de-starttijd-heeft-geen-geldig-formaat-uu-mm-ss",
+    "language": "nl",
+    "value": "de starttijd heeft geen geldig formaat uu mm ss",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/helpers/validation-rules",
+    "key": "de-eindtijd-heeft-geen-geldig-formaat-uu-mm-ss",
+    "language": "nl",
+    "value": "de eindtijd heeft geen geldig formaat uu mm ss",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/helpers/validation-rules",
+    "key": "de-starttijd-moet-voor-de-eindtijd-vallen",
+    "language": "nl",
+    "value": "de starttijd moet voor de eindtijd vallen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "embed-code/views/embed-code-detail",
     "key": "onverwacht-inhoudstype",
     "language": "nl",
@@ -18295,6 +18448,15 @@
     "language": "nl",
     "value": "Bekijk als leerkracht",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "embed-code/views/embed-code-detail",
+    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
+    "language": "nl",
+    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -18419,7 +18581,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -29467,105 +29629,6 @@
   },
   {
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit",
-    "key": "hulp-nodig-bij-het-maken-van-opdrachten-titel",
-    "language": "nl",
-    "value": "Hulp nodig bij het maken van opdrachten titel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/views/assignment-edit",
-    "key": "hulp-nodig-bij-het-maken-van-opdrachten-beschrijving",
-    "language": "nl",
-    "value": "Hulp nodig bij het maken van opdrachten beschrijving",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/components/login-options-for-teacher",
-    "key": "is-jouw-account-al-gekoppeld",
-    "language": "nl",
-    "value": "Is jouw account al gekoppeld?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/components/login-options-for-teacher",
-    "key": "account-tooltip-content",
-    "language": "nl",
-    "value": "Account tooltip content",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/components/embed",
-    "key": "deze-video-werd-verwijderd",
-    "language": "nl",
-    "value": "Deze video werd verwijderd",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/components/embed",
-    "key": "deze-video-werd-gedepubliceerd-met-volgende-reden",
-    "language": "nl",
-    "value": "Deze video werd gedepubliceerd met volgende reden",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/components/embed",
-    "key": "deze-video-werd-gedepubliceerd",
-    "language": "nl",
-    "value": "Deze video werd gedepubliceerd",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed/components/embed",
-    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
-    "language": "nl",
-    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-code-overview",
-    "key": "er-ging-iets-mis-bij-het-kopieren-van-de-code",
-    "language": "nl",
-    "value": "Er ging iets mis bij het kopieren van de code",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/components/embed-content",
-    "key": "het-kopieren-van-de-embed-code-naar-je-klembord-is-mislukt",
-    "language": "nl",
-    "value": "Het kopieren van de embed code naar je klembord is mislukt.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "embed-code/views/embed-code-detail",
-    "key": "dit-fragment-werd-uitzonderlijk-vervangen-door-het-archief-voor-onderwijs-het-zou-kunnen-dat-de-tijdscodes-of-de-beschrijving-niet-meer-goed-passen-meld-dit-aan-de-lesgever-die-het-fragment-aanmaakte",
-    "language": "nl",
-    "value": "Dit fragment werd uitzonderlijk vervangen door Het Archief voor Onderwijs. Het zou kunnen dat de tijdscodes of de beschrijving niet meer goed passen. Meld dit aan de lesgever die het fragment aanmaakte.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -29967,6 +30030,15 @@
     "key": "de-embed-code-is-niet-gevonden-deze-bestaat-niet-of-is-verwijderd",
     "language": "nl",
     "value": "De embed code is niet gevonden. Deze bestaat niet of is verwijderd",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "deze-embed-is-gemaakt-voor-embed-code-external-website-en-kan-dus-niet-geladen-worden-op-issuer-external-website",
+    "language": "nl",
+    "value": "Deze embed is gemaakt voor {{embedCodeExternalWebsite}}, en kan dus niet geladen worden op {{issuerExternalWebsite}}",
     "value_type": "TEXT"
   },
   {
