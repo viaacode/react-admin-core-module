@@ -20,6 +20,8 @@ import {
 	StatusModule,
 	UsersModule,
 } from './modules';
+import { isAvo } from './modules/shared/helpers/is-avo';
+import { isHetArchief } from './modules/shared/helpers/is-hetarchief';
 
 @Module({
 	imports: [
@@ -29,18 +31,18 @@ import {
 		AdminTranslationsModule,
 		AdminUserGroupsModule,
 		AssetsModule,
-		AssignmentsModule,
-		CollectionsModule,
 		ContentPageLabelsModule,
 		ContentPagesModule,
 		DataModule,
-		ItemsModule,
 		LookupModule,
-		MaintenanceAlertsModule,
 		PlayerTicketModule,
 		SiteVariablesModule,
 		StatusModule,
 		UsersModule,
+		...(isAvo() ? [AssignmentsModule] : []),
+		...(isAvo() ? [CollectionsModule] : []),
+		...(isAvo() ? [ItemsModule] : []),
+		...(isHetArchief() ? [MaintenanceAlertsModule] : []),
 	],
 })
 export class AdminCoreModule {}
