@@ -33,6 +33,7 @@ import { TranslationsService } from '../translations.service';
 
 import './TranslationsOverview.scss';
 import { Spacer } from '@viaa/avo2-components';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 type OrderProp = `value_${Locale}` | 'id';
 
@@ -285,7 +286,11 @@ export const TranslationsOverview: FunctionComponent<TranslationsOverviewProps> 
 							}}
 						>
 							{translationEntry.value_type === ValueType.HTML && (
-								<Html content={value} className="c-content"></Html>
+								<Html
+									content={value}
+									sanitizePreset={SanitizePreset.link}
+									className="c-content"
+								></Html>
 							)}
 							{translationEntry.value_type === ValueType.TEXT && <span>{value}</span>}
 						</button>

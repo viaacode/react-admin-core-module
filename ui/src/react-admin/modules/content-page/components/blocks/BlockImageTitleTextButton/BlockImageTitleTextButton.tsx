@@ -13,6 +13,7 @@ import type { FunctionComponent, ReactNode } from 'react';
 
 import './BlockImageTitleTextButton.scss';
 import Html from '~shared/components/Html/Html';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockImageTitleTextButtonProps extends DefaultProps {
 	imageSource: string;
@@ -37,7 +38,13 @@ export const BlockImageTitleTextButton: FunctionComponent<BlockImageTitleTextBut
 	const renderText = (text: string | ReactNode, className?: string) => {
 		if (text) {
 			if (typeof text === 'string') {
-				return <Html content={convertToHtml(text as string)} className={className}></Html>;
+				return (
+					<Html
+						content={convertToHtml(text as string)}
+						sanitizePreset={SanitizePreset.full}
+						className={className}
+					></Html>
+				);
 			}
 			return text;
 		}

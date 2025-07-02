@@ -18,21 +18,22 @@ import { format, parseISO } from 'date-fns';
 import { findIndex, flatten, uniqBy } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
+import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 import type { GridItem } from '~content-blocks/BlockImageGrid/BlockImageGrid.types';
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { defaultRenderLinkFunction } from '~shared/helpers/link';
 import { BlockHeading } from '../BlockHeading/BlockHeading';
-import { BlockImageGrid } from '~content-blocks/BlockImageGrid';
 import type { ContentTabStyle, LabelObj } from './BlockPageOverview.types';
 import { ContentItemStyle } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
 import { PaginationBar } from '@meemoo/react-components';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
-import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import Html from '~shared/components/Html/Html';
+import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockPageOverviewProps extends DefaultProps {
 	tabs?: { label: string; id: number }[];
@@ -165,14 +166,20 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 
 	const getDescription = (page: ContentPageInfo) => {
 		return showDescription && page.description ? (
-			<Html content={page.description} type="div" />
+			<Html content={page.description} sanitizePreset={SanitizePreset.full} type="div" />
 		) : undefined;
 	};
 
 	const renderText = (text: string | ReactNode, className?: string) => {
 		if (text) {
 			if (typeof text === 'string') {
-				return <Html content={convertToHtml(text as string)} className={className} />;
+				return (
+					<Html
+						content={convertToHtml(text as string)}
+						sanitizePreset={SanitizePreset.full}
+						className={className}
+					/>
+				);
 			}
 			return text;
 		}

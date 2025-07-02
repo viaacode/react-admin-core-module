@@ -3,6 +3,7 @@ import { Container, convertToHtml, Image, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import Html from '~shared/components/Html/Html';
+import { SanitizePreset } from '~shared/helpers/sanitize/presets';
 
 export interface BlockTitleImageTextProps extends DefaultProps {
 	title?: string;
@@ -25,7 +26,7 @@ export const BlockTitleImageText: FunctionComponent<BlockTitleImageTextProps> = 
 				{imageSource && <Image src={imageSource} alt={imageDescription} wide={true} />}
 				{text && (
 					<Spacer margin="top">
-						<Html content={convertToHtml(text)} />
+						<Html content={convertToHtml(text)} sanitizePreset={SanitizePreset.full} />
 					</Spacer>
 				)}
 			</Container>
