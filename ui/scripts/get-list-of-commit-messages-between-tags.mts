@@ -14,7 +14,7 @@ import * as fs from 'node:fs/promises';
  * @param newTag the new git tag to compare. eg: v3.2.28
  */
 async function getListOfCommitMessagesBetweenTags(oldTag?: string, newTag?: string): Promise<void> {
-	const command = `git log ${oldTag}..${newTag} --pretty=format:"%B`;
+	const command = `git log ${oldTag}..${newTag} --pretty=format:%B`;
 	let result: string;
 
 	try {
