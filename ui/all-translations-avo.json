@@ -8528,7 +8528,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-label-tussen-titels",
     "language": "nl",
-    "value": "Toon de label tussen titels",
+    "value": "Toon de labels tussen titels.",
     "value_type": "TEXT"
   },
   {
@@ -8537,7 +8537,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-titels",
     "language": "nl",
-    "value": "Toon de pagina titels",
+    "value": "Toon de paginatitels.",
     "value_type": "TEXT"
   },
   {
@@ -8546,7 +8546,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-beschrijvingen",
     "language": "nl",
-    "value": "Toon de pagina beschrijvingen",
+    "value": "Toon de paginabeschrijvingen.",
     "value_type": "TEXT"
   },
   {
@@ -8555,7 +8555,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-pagina-datum-en-categorie",
     "language": "nl",
-    "value": "Toon de pagina datum en categorie",
+    "value": "Toon de paginadatum en -categorie.",
     "value_type": "TEXT"
   },
   {
@@ -18356,7 +18356,7 @@
     "location": "embed-code/components/embed-content",
     "key": "gebruiken-in-smartschool",
     "language": "nl",
-    "value": "Gebruiken in smartschool",
+    "value": "Gebruiken in Smartschool",
     "value_type": "TEXT"
   },
   {
@@ -18770,7 +18770,7 @@
     "location": "item/views/item-detail",
     "key": "gebruiken-in-smartschool",
     "language": "nl",
-    "value": "Gebruiken in smartschool",
+    "value": "Gebruiken in Smartschool",
     "value_type": "TEXT"
   },
   {
@@ -20750,7 +20750,7 @@
     "location": "workspace/views/bookmarks-overview",
     "key": "gebruiken-in-smartschool",
     "language": "nl",
-    "value": "Gebruiken in smartschool",
+    "value": "Gebruiken in Smartschool",
     "value_type": "TEXT"
   },
   {
@@ -23495,7 +23495,7 @@
     "location": "admin/items/views/item-detail",
     "key": "dit-fragment-werd-nog-niets-gedeeld-op-smartschool-of-bookwidgets",
     "language": "nl",
-    "value": "Dit fragment werd nog niets gedeeld op Smartschool of Bookwidgets",
+    "value": "Dit fragment werd nog niet gedeeld op Smartschool of Bookwidgets",
     "value_type": "TEXT"
   },
   {
@@ -27563,7 +27563,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "bewerk-het-fragment-kopieer-de-link-en-plak-hem-bij-extra-inhoud-in-een-smartschoolfiche",
     "language": "nl",
-    "value": "Bewerk het fragment, kopieer de link en plak hem bij Extra Inhoud in een Smartschoolfiche.",
+    "value": "Bewerk het fragment, kopieer de link en plak deze in je lesfiche op Smartschool, onder de knop &#x27;meer inhoud&#x27;.",
     "value_type": "HTML"
   },
   {
@@ -29633,7 +29633,7 @@
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
     "language": "nl",
-    "value": "Het logout pad voor idp {{idpType}} is niet gedefinieerd",
+    "value": "Het logoutpad voor idp {{idpType}} is niet gedefinieerd.",
     "value_type": "TEXT"
   },
   {
@@ -29651,7 +29651,7 @@
     "location": "modules/auth/controller",
     "key": "het-login-pad-voor-idp-idp-type-is-niet-gedefinieerd",
     "language": "nl",
-    "value": "Het login pad voor idp {{idpType}} is niet gedefinieerd",
+    "value": "Het loginpad voor idp {{idpType}} is niet gedefinieerd.",
     "value_type": "TEXT"
   },
   {
@@ -29669,7 +29669,7 @@
     "location": "modules/auth/controller",
     "key": "cannot-create-idp-map-for-idp-type-idp-type-because-the-idp-user-id-could-not-be-found",
     "language": "nl",
-    "value": "Cannot create idp map for idp type {{idpType}} because the idp user id could not be found",
+    "value": "Het is niet mogelijk om een idp-map voor het idp-type {{idpType}} aan te maken omdat de idp-user id niet gevonden kon worden.",
     "value_type": "TEXT"
   },
   {
@@ -29921,7 +29921,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-parameters-voor-de-login-request-zijn-niet-geldig-issuer-issuer-is-not-in-allow-list",
     "language": "nl",
-    "value": "De parameters voor de login request zijn niet geldig (Issuer \"{{issuer}}\" is not in allow list)",
+    "value": "De parameters voor de loginrequest zijn niet geldig (Issuer \"{{issuer}}\" is not in allow list).",
     "value_type": "TEXT"
   },
   {
@@ -29957,7 +29957,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-id-token-geen-sleutel-id-bevat",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de id token geen sleutel id bevat",
+    "value": "De login voor deze embed is mislukt omdat de id-token geen sleutel-id bevat.",
     "value_type": "TEXT"
   },
   {
@@ -29966,7 +29966,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-public-key-niet-gevonden-kon-worden-issuer-issuer-key-id-key-id",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de public key niet gevonden kon worden (issuer: {{issuer}}, keyId: {{keyId}})",
+    "value": "De login voor deze embed is mislukt omdat de public key niet gevonden kon worden (issuer: {{issuer}}, keyId: {{keyId}}).",
     "value_type": "TEXT"
   },
   {
@@ -29975,7 +29975,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-audience-parameter-komt-niet-overeen-met-client-id-probeer-de-pagina-te-herladen",
     "language": "nl",
-    "value": "De audience parameter komt niet overeen met client id. Probeer de pagina te herladen.",
+    "value": "De audience-parameter komt niet overeen met client-id. Probeer de pagina te herladen.",
     "value_type": "TEXT"
   },
   {
@@ -29984,7 +29984,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-issuer-iss-in-de-token-van-de-externe-lti-provider-komt-niet-overeen-probeer-de-pagina-te-herladen",
     "language": "nl",
-    "value": "De issuer (iss) in de token van de externe LTI provider komt niet overeen. Probeer de pagina te herladen.",
+    "value": "De issuer (iss) in de token van de externe LTI-provider komt niet overeen. Probeer de pagina te herladen.",
     "value_type": "TEXT"
   },
   {
@@ -29993,7 +29993,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-nonce-in-de-token-van-de-externe-lti-provider-komt-niet-overeen-probeer-de-pagina-te-herladen",
     "language": "nl",
-    "value": "De nonce in de token van de externe LTI provider komt niet overeen. Probeer de pagina te herladen.",
+    "value": "De nonce in de token van de externe LTI-provider komt niet overeen. Probeer de pagina te herladen.",
     "value_type": "TEXT"
   },
   {
@@ -30002,7 +30002,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-niet-gevonden-kon-worden-in-avo-user-id-avo-user-id",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinked is aan deze gebruiker van {{idpType}} niet gevonden kon worden in avo (user id: {{avoUserId}}})",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinkt is aan deze gebruiker van {{idpType}} niet gevonden kon worden in de database van Het Archief voor Onderwijs (user id: {{avoUserId}}}).",
     "value_type": "TEXT"
   },
   {
@@ -30011,7 +30011,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-embed-code-kan-niet-worden-geladen-omdat-de-embed-url-ontbreekt-in-de-id-token",
     "language": "nl",
-    "value": "De embed code kan niet worden geladen omdat de embed url ontbreekt in de id token",
+    "value": "De embedcode / insluitlink kan niet worden geladen, omdat de embed-url ontbreekt in de id-token.",
     "value_type": "TEXT"
   },
   {
@@ -30020,7 +30020,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-embed-code-kan-niet-worden-geladen-omdat-de-embed-code-id-ontbreekt-of-ongeldig-is",
     "language": "nl",
-    "value": "De embed code kan niet worden geladen omdat de embed code id ontbreekt of ongeldig is",
+    "value": "De embedcode / insluitlink kan niet worden geladen omdat de embedcode-id ontbreekt of ongeldig is.",
     "value_type": "TEXT"
   },
   {
@@ -30029,7 +30029,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-embed-code-is-niet-gevonden-deze-bestaat-niet-of-is-verwijderd",
     "language": "nl",
-    "value": "De embed code is niet gevonden. Deze bestaat niet of is verwijderd",
+    "value": "De embedcode / insluitlink is niet gevonden. Deze bestaat niet of is verwijderd.",
     "value_type": "TEXT"
   },
   {
@@ -30038,7 +30038,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "deze-embed-is-gemaakt-voor-embed-code-external-website-en-kan-dus-niet-geladen-worden-op-issuer-external-website",
     "language": "nl",
-    "value": "Deze embed is gemaakt voor {{embedCodeExternalWebsite}}, en kan dus niet geladen worden op {{issuerExternalWebsite}}",
+    "value": "Deze embed is gemaakt voor {{embedCodeExternalWebsite}}, en kan dus niet geladen worden op {{issuerExternalWebsite}}.",
     "value_type": "TEXT"
   },
   {
