@@ -1,13 +1,12 @@
+import { Checkbox } from '@meemoo/react-components';
 import type { TagInfo } from '@viaa/avo2-components';
 import { CheckboxGroup, FormGroup } from '@viaa/avo2-components';
+import clsx from 'clsx';
 import { isEmpty, uniq } from 'lodash-es';
 import type { ChangeEvent, FunctionComponent } from 'react';
 import React, { useEffect } from 'react';
-
-import { Checkbox } from '@meemoo/react-components';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
-import clsx from 'clsx';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;
@@ -38,11 +37,10 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		boolean,
 	];
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: should only execute one time
 	useEffect(() => {
 		onChange(uniq([...values, ...checkedOptions]));
-		// Only execute this effect once
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [checkedOptions, onChange, values]);
+	}, []);
 
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
 		const userGroup = evt.target.value;
