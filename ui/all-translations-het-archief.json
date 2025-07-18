@@ -410,7 +410,7 @@
     "location": "modules/user/user",
     "key": "selectie-vakken-aanpassen",
     "language": "en",
-    "value": "Selectie vakken aanpassen",
+    "value": "Customise selection",
     "value_type": "TEXT"
   },
   {
@@ -3992,7 +3992,7 @@
     "location": "react-admin/modules/content-page/views/content-page-edit",
     "key": "bezig-met-dupliceren-van-de-afbeeldingen",
     "language": "en",
-    "value": "Busy with duplicating images",
+    "value": "Duplicating images is in progress",
     "value_type": "TEXT"
   },
   {
@@ -7097,7 +7097,7 @@
     "location": "modules/navigation/views/navigation-edit",
     "key": "item",
     "language": "nl",
-    "value": "item",
+    "value": "Item",
     "value_type": "TEXT"
   },
   {
@@ -7106,7 +7106,7 @@
     "location": "modules/navigation/views/navigation-edit",
     "key": "item",
     "language": "en",
-    "value": "item",
+    "value": "Item",
     "value_type": "TEXT"
   },
   {
@@ -8654,7 +8654,7 @@
     "location": "admin/users/views/user-detail",
     "key": "stamboek-nummer",
     "language": "en",
-    "value": "Stamboeknummer",
+    "value": "License number",
     "value_type": "TEXT"
   },
   {
@@ -9482,7 +9482,7 @@
     "location": "admin/users/views/user-overview",
     "key": "zoek-op-naam-email-alias",
     "language": "en",
-    "value": "Search by name, e-mail, organisation, group, family register number",
+    "value": "Search by name, e-mail, organisation, group, license number",
     "value_type": "TEXT"
   },
   {
@@ -9626,7 +9626,7 @@
     "location": "modules/user/views/user-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "en",
-    "value": "Bezig met genereren van de csv",
+    "value": "Csv generation in progress",
     "value_type": "TEXT"
   },
   {
@@ -11948,7 +11948,7 @@
     "location": "shared/components/date-range-dropdown/date-range-dropdown",
     "key": "tot",
     "language": "en",
-    "value": "Until",
+    "value": "Up to and including",
     "value_type": "TEXT"
   },
   {
@@ -12146,7 +12146,7 @@
     "location": "modules/shared/components/file-upload/file-upload",
     "key": "foutieve-afmetingen",
     "language": "en",
-    "value": "Foutieve afmetingen",
+    "value": "Incorrect dimensions",
     "value_type": "TEXT"
   },
   {
@@ -12164,7 +12164,7 @@
     "location": "modules/shared/components/file-upload/file-upload",
     "key": "afbeelding-moet-exact-1920-x-385-pixels-groot-zijn",
     "language": "en",
-    "value": "Afbeelding moet exact 1920 x 385 pixels groot zijn",
+    "value": "Image must be exactly 1920 x 385 pixels in size",
     "value_type": "TEXT"
   },
   {
@@ -15611,7 +15611,7 @@
     "location": "admin/content-block/helpers/generators/media-grid",
     "key": "media-item",
     "language": "nl",
-    "value": "Item",
+    "value": "Media-item",
     "value_type": "TEXT"
   },
   {
@@ -18302,7 +18302,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "waarom-kan-ik-dit-object-niet-bekijken",
     "language": "en",
-    "value": "Waarom kan ik dit object niet bekijken?",
+    "value": "Why can I not view this object?",
     "value_type": "TEXT"
   },
   {
@@ -18374,7 +18374,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "waarom-kan-ik-dit-object-niet-bekijken",
     "language": "en",
-    "value": "Why can I not play this object?",
+    "value": "Why can I not view this object?",
     "value_type": "TEXT"
   },
   {
@@ -18554,7 +18554,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "exporteer-metadata",
     "language": "en",
-    "value": "Exporteer metadata",
+    "value": "Export metadata",
     "value_type": "TEXT"
   },
   {
@@ -18599,7 +18599,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "rapporteer",
     "language": "nl",
-    "value": "Rapporteer",
+    "value": "Meld een probleem",
     "value_type": "TEXT"
   },
   {
@@ -18608,7 +18608,7 @@
     "location": "modules/ie-objects/const/index",
     "key": "rapporteer",
     "language": "en",
-    "value": "Report",
+    "value": "Report an issue",
     "value_type": "TEXT"
   },
   {
@@ -18860,7 +18860,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "dit-object-heeft-1-fragment",
     "language": "en",
-    "value": "Dit object heeft 1 fragment",
+    "value": "This object has 1 fragment",
     "value_type": "HTML"
   },
   {
@@ -18905,7 +18905,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
     "language": "nl",
-    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/ocr-betrouwbaarheid-info\">Meer info vind je hier</a>.</p>",
+    "value": "<p>Deze OCR kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-betrouwbaar-is-tekstherkenning-ocr-op-hetarchief-be&amp;label=Zoeken&amp;page=0\" target=\"\">Meer info vind je hier</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -18914,7 +18914,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-ocr-kan-fouten-bevatten-a-href-ocr-betrouwbaarheid-info-meer-info-vind-je-hier-a",
     "language": "en",
-    "value": "<p>This OCR may contain mistakes. <a href=\"/en/ocr-reliability-information\">Read more about OCR</a>.</p>",
+    "value": "<p>This OCR may contain mistakes. <a href=\"/en/questions?item=%2Fhow-reliable-is-the-text-recognition-ocr-on-thearchives-be&amp;label=Search&amp;page=0\" target=\"\">Read more about OCR</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -19022,7 +19022,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "je-hebt-enkel-toegang-tot-de-metadata-van-dit-object-omdat-dit-object-niet-publiek-beschikbaar-is-volgens-de-licenties-van-de-auteur",
     "language": "en",
-    "value": "Je hebt enkel toegang tot de metadata van dit object omdat dit object niet publiek beschikbaar is volgens de licenties van de auteur",
+    "value": "You can only access the metadata of this object because this object is not publicly available according to the author's licences",
     "value_type": "TEXT"
   },
   {
@@ -19607,7 +19607,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-schrijf-je-in-voor-onze-nieuwsbrief-titel",
     "language": "nl",
-    "value": "Schrijf je in voor onze nieuwsbrief.",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen",
     "value_type": "TEXT"
   },
   {
@@ -19616,7 +19616,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-schrijf-je-in-voor-onze-nieuwsbrief-titel",
     "language": "en",
-    "value": "Subscribe to our newsletter",
+    "value": "I would like to receive a newsletter from archive.be at most 3 times a year",
     "value_type": "TEXT"
   },
   {
@@ -19625,7 +19625,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-schrijf-je-in-voor-onze-nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "<p>Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.  Ik stem in met de verwerking van mijn persoonsgegevens overeenkomstig het <a href=\"/privacy\">privacybeleid</a>.</p>",
+    "value": "<p>Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.</p><p></p><p>Ik stem in met de verwerking van mijn persoonsgegevens overeenkomstig het <a href=\"https://meemoo.be/nl/privacybeleid\" target=\"_blank\">privacybeleid</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -19634,7 +19634,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-schrijf-je-in-voor-onze-nieuwsbrief-omschrijving",
     "language": "en",
-    "value": "I would like to receive a newsletter from hetarchief.be no more than 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material.\r\n\r\nI consent to the processing of my personal data in accordance with the <a href=\"/en/privacy\">privacy policy</a>.",
+    "value": "<p>I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. </p><p></p><p>I agree with the processing of my personal data in accordance with the <a href=\"https://meemoo.be/en/privacy-policy\" target=\"_blank\">privacy policy</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -19661,7 +19661,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "nl",
-    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen van hetarchief.be met informatie over nieuwe mogelijkheden op het platform en inspiratie voor mijn zoektocht naar digitaal archiefmateriaal.\n\nIk stem in met de verwerking van mijn persoonsgegevens overeenkomstig het privacybeleid.",
     "value_type": "TEXT"
   },
   {
@@ -19670,7 +19670,7 @@
     "location": "pages/nieuwsbrief/index",
     "key": "nieuwsbrief-omschrijving",
     "language": "en",
-    "value": "I would like to receive a newsletter from hetarchief.be no more than 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material.",
+    "value": "I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. \n\nI agree with the processing of my personal data in accordance with the privacy policy.",
     "value_type": "TEXT"
   },
   {
@@ -19859,7 +19859,7 @@
     "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
     "key": "pages-bezoekersruimte-zoeken-zoek-info",
     "language": "nl",
-    "value": "<p>Je zoekresultaten voldoen aan de combinatie van alle ingegeven trefwoorden en ingestelde filters.<br/></p><p>Zoeken op een exacte woordcombinatie kan door dubbele aanhalingstekens te gebruiken.<br/></p><p>Je kan trefwoorden combineren aan de hand van AND, OR en NOT<br/></p><p><a href=\"https://hetarchief.be/zoeken-op-hetarchief-be\">Meer zoektips vind je hier &gt;</a></p>",
+    "value": "<p>Je zoekresultaten zijn afhankelijk van alle ingegeven trefwoorden en ingestelde filters.<br/></p><p>Zoeken op een exacte woordcombinatie kan door dubbele aanhalingstekens te gebruiken.<br/></p><p>Je kan trefwoorden combineren aan de hand van AND, OR en NOT<br/></p><p><a href=\"https://hetarchief.be/zoeken-op-hetarchief-be\" target=\"_blank\">Meer zoektips vind je hier &gt;</a></p>",
     "value_type": "HTML"
   },
   {
@@ -19868,7 +19868,7 @@
     "location": "modules/visitor-space/components/visitor-space-search-page/visitor-space-search-page",
     "key": "pages-bezoekersruimte-zoeken-zoek-info",
     "language": "en",
-    "value": "<p>Your search results meet the combination of all entered keywords and set filters.</p><p>Search for an exact word combination by using double quotation marks.</p><p>You can combine keywords according to AND, OR, and NOT</p><p><a href=\"https://hetarchief.be/en/searching-on-thearchives-be\" target=\"_blank\">Find more search tips here &gt;</a></p>",
+    "value": "<p>Your search results are attained through a combination of all entered keywords and set filters.</p><p>Search for an exact word combination by using double quotation marks.</p><p>You can combine keywords according to AND, OR, and NOT</p><p><a href=\"https://hetarchief.be/en/searching-on-thearchives-be\" target=\"_blank\">Find more search tips here &gt;</a></p>",
     "value_type": "HTML"
   },
   {
@@ -20120,7 +20120,7 @@
     "location": "pages/gebruiksvoorwaarden/index",
     "key": "aanvaarden",
     "language": "en",
-    "value": "To accept",
+    "value": "Accept",
     "value_type": "HTML"
   },
   {
@@ -20291,7 +20291,7 @@
     "location": "modules/account/const/account",
     "key": "groep-bezoeker--omschrijving",
     "language": "nl",
-    "value": "Dit is een tekstje dat iets meer uitleg geeft over de bezoeker lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
+    "value": "Dit is een tekstje dat iets meer uitleg geeft over de bezoeker. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
     "value_type": "HTML"
   },
   {
@@ -20300,7 +20300,7 @@
     "location": "modules/account/const/account",
     "key": "groep-bezoeker--omschrijving",
     "language": "en",
-    "value": "Read more about this? Go to Frequently Asked Questions.",
+    "value": "This is a little text that gives more explanation about meemoo users. Want to read more about this? Go to Frequently Asked Questions.",
     "value_type": "HTML"
   },
   {
@@ -20363,7 +20363,7 @@
     "location": "modules/account/const/account",
     "key": "groep-admin--omschrijving",
     "language": "nl",
-    "value": "Dit is een tekstje dat iets meer uitleg geeft over de meemoo admin lorem ipsum. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
+    "value": "Dit is een tekstje dat iets meer uitleg geeft over de meemoo admin. Nog meer hierover lezen? Ga naar de Vaak gestelde vragen.",
     "value_type": "HTML"
   },
   {
@@ -20372,7 +20372,7 @@
     "location": "modules/account/const/account",
     "key": "groep-admin--omschrijving",
     "language": "en",
-    "value": "This is a little text that gives more explanation about meemoo Admin Lorem Ipsum. Want to read more about this? Go to Frequently Asked Questions.",
+    "value": "This is a little text that gives more explanation about meemoo Admin. Want to read more about this? Go to Frequently Asked Questions.",
     "value_type": "HTML"
   },
   {
@@ -21650,7 +21650,7 @@
     "location": "pages/account/mijn-profiel/index",
     "key": "ik-ontvang-graag-de-nieuwsbrief",
     "language": "en",
-    "value": "<p>I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material.&quot; &quot;I agree with the processing of my personal data in accordance with the <a href=\"https://meemoo.be/en/privacy-policy\" target=\"_blank\">privacy policy</a>.</p>",
+    "value": "<p>I would like to receive a newsletter from archive.be at most 3 times a year with information about new possibilities on the platform and inspiration for my search for digital archival material. </p><p></p><p>I agree with the processing of my personal data in accordance with the <a href=\"https://meemoo.be/en/privacy-policy\" target=\"_blank\">privacy policy</a>.</p>",
     "value_type": "HTML"
   },
   {
@@ -24107,7 +24107,7 @@
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "rechten-status-publiek-domain-meer-info-link",
     "language": "nl",
-    "value": "/rechten-status-publiek-domain-meer-info-link",
+    "value": "/vragen?item=%2Fwaarom-kan-ik-sommige-kranten-inkijken-en-andere-niet&label=Rechten%20en%20gebruik&page=0",
     "value_type": "TEXT"
   },
   {
@@ -24116,7 +24116,7 @@
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "rechten-status-publiek-domain-meer-info-link",
     "language": "en",
-    "value": "/rechten-status-publiek-domain-meer-info-link",
+    "value": "/en/questions?item=%2Fwhy-can-i-view-some-newspapers-and-not-others&label=Rights%20and%20usage&page=0",
     "value_type": "TEXT"
   },
   {
@@ -24161,7 +24161,7 @@
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "rechten-status-copyright-undetermined-meer-info-link",
     "language": "nl",
-    "value": "/rechten-status-copyright-undetermined-meer-info-link",
+    "value": "/vragen?item=%2Fwaarom-kan-ik-sommige-kranten-inkijken-en-andere-niet&label=Rechten%20en%20gebruik&page=0",
     "value_type": "TEXT"
   },
   {
@@ -24170,7 +24170,7 @@
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "rechten-status-copyright-undetermined-meer-info-link",
     "language": "en",
-    "value": "/rechten-status-copyright-undetermined-meer-info-link",
+    "value": "/en/questions?item=%2Fwhy-can-i-view-some-newspapers-and-not-others&label=Rights%20and%20usage&page=0",
     "value_type": "TEXT"
   },
   {
@@ -24602,7 +24602,7 @@
     "location": "modules/visitor-space/components/advanced-filter-fields/advanced-filter-fields",
     "key": "tot-en-met",
     "language": "en",
-    "value": "To and with",
+    "value": "Up to and including",
     "value_type": "TEXT"
   },
   {
@@ -28409,7 +28409,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "schrijf-je-in-voor-de-nieuwsbrief",
     "language": "nl",
-    "value": "Schrijf je in voor de nieuwsbrief",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen",
     "value_type": "HTML"
   },
   {
@@ -28418,7 +28418,7 @@
     "location": "modules/home/components/request-access-blade/request-access-blade",
     "key": "schrijf-je-in-voor-de-nieuwsbrief",
     "language": "en",
-    "value": "Sign up for the newsletter",
+    "value": "I would like to receive a newsletter from archive.be at most 3 times a year",
     "value_type": "HTML"
   },
   {
@@ -28643,7 +28643,7 @@
     "location": "modules/ie-objects/components/copyright-confirmation-modal/copyright-confirmation-modal",
     "key": "opgelet-je-gaat-deze-krant-downloaden-ga-zelf-grondig-na-of-er-nog-auteursrechten-rusten-op-dit-object-als-gebruiker-ben-je-zelf-verantwoordelijk",
     "language": "nl",
-    "value": "<p>Je staat op het punt deze krant te downloaden. Je kan controleren of er nog <u>auteursrechten</u> rusten op dit object. </p><p></p><p><em>Bij hergebruik ben je verantwoordelijk voor het resultaat en verdere verspreiding van de krant.</em></p>",
+    "value": "<p>Je staat op het punt deze krant te downloaden. Je kan controleren of er nog auteursrechten rusten op dit object. </p><p></p><p><em>Bij hergebruik ben je verantwoordelijk voor het resultaat en verdere verspreiding van de krant.</em></p>",
     "value_type": "HTML"
   },
   {
@@ -29075,7 +29075,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
     "language": "nl",
-    "value": "<p><a href=\"/namenlijst-gesneuvelden\">Wat is dit?</a></p>",
+    "value": "<p><a href=\"/vragen?item=%2Fwat-is-de-namenlijst-en-hoe-kan-ik-die-gebruiken&amp;label=Zoeken&amp;page=0\" target=\"\">Wat is dit?</a></p>",
     "value_type": "HTML"
   },
   {
@@ -29084,7 +29084,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "a-href-namenlijst-gesneuvelden-wat-is-dit-a",
     "language": "en",
-    "value": "<p><a href=\"/en/the-list-of-names\">What is this?</a></p>",
+    "value": "<p><a href=\"/en/questions?item=%2Fwhat-is-the-names-list-and-how-can-i-use-it&amp;label=Search&amp;page=0\" target=\"\">What is this?</a></p>",
     "value_type": "HTML"
   },
   {
@@ -29093,7 +29093,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
     "language": "nl",
-    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/bronvermelding\" target=\"\">Meer info</a></p>",
+    "value": "<p>Deze bronvermelding is automatisch gegenereerd en kan fouten bevatten. <a href=\"/vragen?item=%2Fhoe-vermeld-ik-de-bronnen-die-ik-vind-via-hetarchief-be&amp;label=Rechten%20en%20gebruik&amp;page=0\" target=\"\">Meer info</a></p>",
     "value_type": "HTML"
   },
   {
@@ -29102,7 +29102,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "deze-bronvermelding-is-automatisch-gegenereerd-en-kan-fouten-bevatten-a-href-bronvermelding-fouten-meer-info-a",
     "language": "en",
-    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/citation\" target=\"\">Read more</a></p>",
+    "value": "<p>This source citation is automatically generated and can contain mistakes. <a href=\"/en/questions?item=%2Fhow-do-i-cite-sources-i-found-on-thearchives-be&amp;label=Rights%20and%20usage&amp;page=0\" target=\"\">Read more</a></p>",
     "value_type": "HTML"
   },
   {
@@ -30929,7 +30929,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "schrijf-je-in-voor-de-nieuwsbrief",
     "language": "nl",
-    "value": "schrijf je in voor de nieuwsbrief",
+    "value": "Ik wil graag maximaal 3 keer per jaar een nieuwsbrief ontvangen",
     "value_type": "HTML"
   },
   {
@@ -30938,7 +30938,7 @@
     "location": "modules/navigation/components/personal-info-blade/personal-info-blade",
     "key": "schrijf-je-in-voor-de-nieuwsbrief",
     "language": "en",
-    "value": "subscribe to the newsletter",
+    "value": "I would like to receive a newsletter from archive.be at most 3 times a year",
     "value_type": "HTML"
   },
   {
@@ -31910,7 +31910,7 @@
     "location": "modules/cp/components/decline-request-blade/decline-request-blade",
     "key": "keur-af",
     "language": "en",
-    "value": "To refuse",
+    "value": "Refuse",
     "value_type": "HTML"
   },
   {
@@ -33260,7 +33260,7 @@
     "location": "modules/cp/components/process-request-blade/process-request-blade",
     "key": "weigeren",
     "language": "en",
-    "value": "To refuse",
+    "value": "Refuse",
     "value_type": "HTML"
   },
   {
@@ -34601,7 +34601,7 @@
     "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
     "key": "stel-je-eigen-geavanceerde-filter-samen-aan-de-hand-van-deze-advanced-filters-velden-en-waarden",
     "language": "nl",
-    "value": "Stel je eigen geavanceerde filter samen aan de hand van deze advanced filters velden en waarden",
+    "value": "Verfijn je zoekopdracht door filters samen te stellen met deze extra velden en voorwaarden.",
     "value_type": "HTML"
   },
   {
@@ -34610,7 +34610,7 @@
     "location": "modules/visitor-space/components/forms/advanced-filter-form/advanced-filter-form",
     "key": "stel-je-eigen-geavanceerde-filter-samen-aan-de-hand-van-deze-advanced-filters-velden-en-waarden",
     "language": "en",
-    "value": "Compose your custom advanced filter using the advanced filter fields and values",
+    "value": "Refine your search by filtering with these extra fields and options.",
     "value_type": "HTML"
   },
   {
@@ -34736,7 +34736,7 @@
     "location": "modules/visitor-space/components/autocomplete-field-input/autocomplete-field-input",
     "key": "het-ophalen-van-de-autocomplete-suggesties-is-mislukt",
     "language": "en",
-    "value": "Het ophalen van de autocomplete suggesties is mislukt",
+    "value": "Retrieval of autocomplete suggestions has failed",
     "value_type": "TEXT"
   },
   {
@@ -35888,7 +35888,7 @@
     "location": "modules/visitor-space/components/release-date-filter-form/release-date-filter-form",
     "key": "je-moet-zowel-een-start-als-eind-datum-opgeven",
     "language": "en",
-    "value": "Je moet zowel een start als eind datum opgeven",
+    "value": "You need to enter both a start and end date",
     "value_type": "TEXT"
   },
   {
@@ -36059,7 +36059,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "gerapporteerd",
     "language": "nl",
-    "value": "Gerapporteerd",
+    "value": "Probleem gemeld",
     "value_type": "HTML"
   },
   {
@@ -36068,7 +36068,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "gerapporteerd",
     "language": "en",
-    "value": "Reported",
+    "value": "Issue reported",
     "value_type": "HTML"
   },
   {
@@ -36167,7 +36167,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "rapporteer",
     "language": "nl",
-    "value": "Rapporteer",
+    "value": "Meld een probleem",
     "value_type": "HTML"
   },
   {
@@ -36176,7 +36176,7 @@
     "location": "modules/visitor-space/components/report-blade/report-blade",
     "key": "rapporteer",
     "language": "en",
-    "value": "Report",
+    "value": "Report an issue",
     "value_type": "HTML"
   },
   {
@@ -36446,7 +36446,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "maker",
     "language": "en",
-    "value": "Maker",
+    "value": "Creator",
     "value_type": "TEXT"
   },
   {
@@ -36482,7 +36482,7 @@
     "location": "modules/visitor-space/utils/advanced-filters/metadata",
     "key": "plaats-van-uitgave",
     "language": "en",
-    "value": "Plaats van uitgave",
+    "value": "Location of publication",
     "value_type": "TEXT"
   },
   {
