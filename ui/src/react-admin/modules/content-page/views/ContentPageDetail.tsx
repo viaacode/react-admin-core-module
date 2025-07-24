@@ -141,13 +141,17 @@ export const ContentPageDetail: FC<ContentPageDetailProps> = ({
 			const notFound = JSON.stringify(err).includes('NOT_FOUND');
 			setLoadingInfo({
 				state: 'error',
-				message: notFound
-					? tHtml(
-							'admin/content/views/content-detail___een-content-pagina-met-dit-id-kon-niet-worden-gevonden'
-						)
-					: tHtml(
-							'admin/content/views/content-detail___het-ophalen-van-de-content-pagina-is-mislukt'
-						),
+				message: (
+					<Container mode="horizontal" className="u-padding-top-xl u-padding-bottom-xl">
+						{notFound
+							? tHtml(
+									'admin/content/views/content-detail___een-content-pagina-met-dit-id-kon-niet-worden-gevonden'
+								)
+							: tHtml(
+									'admin/content/views/content-detail___het-ophalen-van-de-content-pagina-is-mislukt'
+								)}
+					</Container>
+				),
 				icon: notFound ? ('search' as IconName) : ('alertTriangle' as IconName),
 			});
 		}
