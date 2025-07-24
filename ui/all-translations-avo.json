@@ -9345,6 +9345,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
+    "key": "je-hebt-geen-toegang-tot-de-embed-functionaliteit",
+    "language": "nl",
+    "value": "Je hebt geen toegang tot de embed functionaliteit",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "app",
     "key": "blijven",
     "language": "nl",
     "value": "Blijven",
@@ -29629,15 +29638,6 @@
   },
   {
     "app": "AVO",
-    "component": "FRONTEND",
-    "location": "app",
-    "key": "je-hebt-geen-toegang-tot-de-embed-functionaliteit",
-    "language": "nl",
-    "value": "Je hebt geen toegang tot de embed functionaliteit",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/controller",
     "key": "het-logout-pad-voor-idp-idp-type-is-niet-gedefinieerd",
@@ -29733,6 +29733,15 @@
     "key": "audiovisueel-lesmateriaal-collectie",
     "language": "nl",
     "value": ": Audiovisueel lesmateriaal",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/klascement/klascement",
+    "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
+    "language": "nl",
+    "value": "Je klascement profiel id is niet ingesteld in de database waardoor het publiceren mislukt is. Zie AVO-3737",
     "value_type": "TEXT"
   },
   {
@@ -30009,6 +30018,15 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
+    "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
+    "language": "nl",
+    "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-niet-gevonden-kon-worden-in-avo-user-id-avo-user-id",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (user id: {{avoUserId}}}).",
@@ -30147,33 +30165,6 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/klascement/klascement",
-    "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
-    "language": "nl",
-    "value": "Je klascement profiel id is niet ingesteld in de database waardoor het publiceren mislukt is. Zie AVO-3737",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/klascement/klascement",
-    "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
-    "language": "nl",
-    "value": "Je klascement profiel id is niet ingesteld in de database waardoor het publiceren mislukt is. Zie AVO-3737",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/idps/lti/lti",
-    "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
-    "language": "nl",
-    "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
     "value_type": "TEXT"
   }
 ]
