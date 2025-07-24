@@ -58,16 +58,28 @@ export class PlayerTicketService {
 	 * @param path
 	 * @param referer
 	 * @param ip
+	 * @param validDuration number of seconds that the token is valid for.
 	 * @protected
 	 */
-	protected async getToken(path: string, referer: string, ip: string): Promise<PlayerTicket> {
+	protected async getToken(
+		path: string,
+		referer: string,
+		ip: string,
+		validDuration?: number
+	): Promise<PlayerTicket> {
+		console.log('get token', {
+			path,
+			referer,
+			ip,
+			validDuration,
+		});
 		const data = {
 			app: 'hetarchief.be',
 			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
 				? await publicIp.v4()
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
-			maxage: this.ticketServiceMaxAge,
+			maxage: validDuration || this.ticketServiceMaxAge,
 		};
 
 		/**
@@ -108,13 +120,14 @@ export class PlayerTicketService {
 	public async getThumbnailTokenCached(
 		browsePath: string,
 		referer: string,
-		ip: string
+		ip: string,
+		validDuration?: number
 	): Promise<string> {
 		try {
 			const token = await this.cacheManager.wrap(
 				`thumbnailToken-${browsePath}-${referer}-${ip}`,
-				() => this.getToken(browsePath, referer, ip),
-				60 * 60 * 1000 // 1 hour
+				() => this.getToken(browsePath, referer, ip, validDuration),
+				60 * 60 * 1000 // Cache for 1 hour
 			);
 			return token.jwt;
 		} catch (err: any) {
@@ -178,7 +191,8 @@ export class PlayerTicketService {
 	public async resolveThumbnailUrl(
 		urlOrPath: string | null | undefined,
 		referer: string,
-		ip: string
+		ip: string,
+		validDuration?: number
 	): Promise<string> {
 		try {
 			if (!urlOrPath) {
@@ -195,7 +209,12 @@ export class PlayerTicketService {
 				return urlOrPath;
 			}
 			const browsePath = this.urlToFilePath(urlOrPath);
-			const token = await this.getThumbnailTokenCached(browsePath, referer, ip);
+			const token = await this.getThumbnailTokenCached(
+				browsePath,
+				referer,
+				ip,
+				validDuration
+			);
 			return `${this.mediaServiceUrl}/${browsePath}?token=${token}`;
 		} catch (err) {
 			console.error(
