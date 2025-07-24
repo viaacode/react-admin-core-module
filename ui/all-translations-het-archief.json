@@ -14547,6 +14547,24 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "afbeelding-alt-tekst",
+    "language": "nl",
+    "value": "Afbeelding alt tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "afbeelding-alt-tekst",
+    "language": "en",
+    "value": "Afbeelding alt tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-blok",
     "language": "nl",
     "value": "Achtergrondkleur blok",
@@ -19113,6 +19131,60 @@
     "key": "ook-interessant",
     "language": "en",
     "value": "Also interesting",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "selectie-is-klaar",
+    "language": "nl",
+    "value": "Selectie is klaar",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "selectie-is-klaar",
+    "language": "en",
+    "value": "Selectie is klaar",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "download-selection",
+    "language": "nl",
+    "value": "Download selection",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "download-selection",
+    "language": "en",
+    "value": "Download selection",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "je-selectie-kan-worden-gedownload-als-afbeelding",
+    "language": "nl",
+    "value": "Je selectie kan worden gedownload als afbeelding.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/object-detail-page",
+    "key": "je-selectie-kan-worden-gedownload-als-afbeelding",
+    "language": "en",
+    "value": "Je selectie kan worden gedownload als afbeelding.",
     "value_type": "HTML"
   },
   {
@@ -29126,6 +29198,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-bronvermelding-naar-je-klembord",
+    "language": "nl",
+    "value": "Kopieer de bronvermelding naar je klembord",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-bronvermelding-naar-je-klembord",
+    "language": "en",
+    "value": "Kopieer de bronvermelding naar je klembord",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/visitor-space/utils/metadata/metadata",
     "key": "beschrijving",
     "language": "nl",
@@ -29284,6 +29374,42 @@
     "language": "en",
     "value": "Rights",
     "value_type": "HTML"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-rechten-naar-je-klembord",
+    "language": "nl",
+    "value": "Kopieer de rechten naar je klembord.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "kopieer-de-rechten-naar-je-klembord",
+    "language": "en",
+    "value": "Kopieer de rechten naar je klembord.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "meer-info-over-de-rechten-van-dit-object",
+    "language": "nl",
+    "value": "Meer info over de rechten van dit object",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "meer-info-over-de-rechten-van-dit-object",
+    "language": "en",
+    "value": "Meer info over de rechten van dit object",
+    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -30098,6 +30224,24 @@
   {
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "seizoen",
+    "language": "nl",
+    "value": "Seizoen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
+    "key": "seizoen",
+    "language": "en",
+    "value": "Seizoen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
     "location": "modules/ie-objects/const/index",
     "key": "episode",
     "language": "nl",
@@ -30111,24 +30255,6 @@
     "key": "episode",
     "language": "en",
     "value": "Episode",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "bestanddeel",
-    "language": "nl",
-    "value": "Bestanddeel",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/const/index",
-    "key": "bestanddeel",
-    "language": "en",
-    "value": "Component part",
     "value_type": "TEXT"
   },
   {
@@ -37203,132 +37329,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "selectie-is-klaar",
-    "language": "nl",
-    "value": "Selectie is klaar",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "selectie-is-klaar",
-    "language": "en",
-    "value": "Selectie is klaar",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "download-selection",
-    "language": "nl",
-    "value": "Download selection",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "download-selection",
-    "language": "en",
-    "value": "Download selection",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "je-selectie-kan-worden-gedownload-als-afbeelding",
-    "language": "nl",
-    "value": "Je selectie kan worden gedownload als afbeelding.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/object-detail-page",
-    "key": "je-selectie-kan-worden-gedownload-als-afbeelding",
-    "language": "en",
-    "value": "Je selectie kan worden gedownload als afbeelding.",
-    "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-bronvermelding-naar-je-klembord",
-    "language": "nl",
-    "value": "Kopieer de bronvermelding naar je klembord",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-bronvermelding-naar-je-klembord",
-    "language": "en",
-    "value": "Kopieer de bronvermelding naar je klembord",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-rechten-naar-je-klembord",
-    "language": "nl",
-    "value": "Kopieer de rechten naar je klembord.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-rechten-naar-je-klembord",
-    "language": "en",
-    "value": "Kopieer de rechten naar je klembord.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "nl",
-    "value": "Meer info over de rechten van dit object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "en",
-    "value": "Meer info over de rechten van dit object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "nl",
-    "value": "Meer info over de rechten van dit object",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "meer-info-over-de-rechten-van-dit-object",
-    "language": "en",
-    "value": "Meer info over de rechten van dit object",
     "value_type": "TEXT"
   },
   {
