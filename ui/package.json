@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.5.9",
+  "version": "4.5.10",
   "private": false,
   "type": "module",
   "exports": {
