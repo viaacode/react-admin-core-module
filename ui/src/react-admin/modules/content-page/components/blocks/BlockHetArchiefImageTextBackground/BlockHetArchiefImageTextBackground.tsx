@@ -24,6 +24,7 @@ export interface BlockHetArchiefImageTextBackgroundProps extends DefaultComponen
 	backgroundColor: Color;
 	image?: string;
 	imageAlignment?: BackgroundAlignOption;
+	imageAltText?: string;
 	buttonAction?: ButtonAction;
 	buttonAltTitle?: string;
 	buttonLabel: string;
@@ -44,6 +45,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 	backgroundColor,
 	image,
 	imageAlignment = 'left-screen',
+	imageAltText,
 	buttonAction,
 	buttonAltTitle,
 	buttonLabel,
@@ -100,6 +102,7 @@ export const BlockHetArchiefImageTextBackground: FunctionComponent<
 						'c-block-het-archief-image-text-background__image-wrapper--screen-right':
 							imageAlignment === 'right-screen',
 					})}
+					alt={imageAltText}
 				/>
 			)}
 		</article>

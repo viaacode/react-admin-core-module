@@ -153,6 +153,15 @@ export const HET_ARCHIEF_IMAGE_TEXT_BACKGROUND_BLOCK_CONFIG = (
 					options: GET_BACKGROUND_ALIGN_OPTIONS(),
 				},
 			},
+			imageAltText: {
+				label: tText(
+					'modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background___afbeelding-alt-tekst'
+				),
+				editorType: ContentBlockEditor.TextInput,
+				editorProps: {
+					validator: undefined,
+				},
+			},
 			buttonType: {
 				label: tText(
 					'admin/content-block/helpers/image-text-background/image-text-background___knop-type'
