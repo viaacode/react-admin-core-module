@@ -1,20 +1,19 @@
-import { Link } from '~modules/shared/components/Link';
+import { TextInput } from '@meemoo/react-components';
+import { Button } from '@viaa/avo2-components';
+import { stringifyUrl } from 'query-string';
 import type { ChangeEvent, FC, KeyboardEvent } from 'react';
 import React, { useEffect, useState } from 'react';
-import { stringifyUrl } from 'query-string';
-
-import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
+import { BlockHeading } from '~content-blocks/BlockHeading';
+import { Link } from '~modules/shared/components/Link';
+import { Icon } from '~shared/components/Icon';
+import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
+import { tText } from '~shared/helpers/translation-functions';
+import { HET_ARCHIEF } from '~shared/types';
 import type {
 	BlockOverviewNewspaperTitlesProps,
 	NewspaperTitle,
 } from './BlockOverviewNewspaperTitles.types';
-import { BlockHeading } from '~content-blocks/BlockHeading';
-import { Button } from '@viaa/avo2-components';
-import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components/Icon';
-import { TextInput } from '@meemoo/react-components';
-import { tText } from '~shared/helpers/translation-functions';
-import { HET_ARCHIEF } from '~shared/types';
+import { useGetNewspaperTitles } from './hooks/useIeObjectsNewspaperTitles';
 
 export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps> = ({
 	title,
@@ -79,7 +78,10 @@ export const BlockOverviewNewspaperTitles: FC<BlockOverviewNewspaperTitlesProps>
 			/>
 			<ul className="c-newspaper-titles__list">
 				{newspaperData?.map((item: NewspaperTitle) => (
-					<li className="c-newspaper-titles__list__item" key={item.title}>
+					<li
+						className="c-newspaper-titles__list__item"
+						key={`newspaper-title-item__${item.title}`}
+					>
 						<Link
 							to={stringifyUrl({
 								url: '/zoeken',

@@ -14,6 +14,10 @@ import { type PlayerTicket } from '../player-ticket.types';
 
 import { PlayerTicketService } from './player-ticket.service';
 
+const FAKE_TICKET_SERVICE_URL = 'http://ticketservice';
+const FAKE_MEDIA_SERVICE_URL = 'http://mediaservice';
+const FAKE_HOST = 'http://localhost';
+
 const mockDataService = {
 	execute: jest.fn(),
 };
@@ -25,7 +29,7 @@ const mockCacheManager: Partial<Record<keyof Cache, jest.SpyInstance>> = {
 const mockPlayerTicket: PlayerTicket = {
 	jwt: 'secret-jwt-token',
 	context: {
-		app: 'OR-*',
+		app: 'hetarchief.be',
 		name: 'TESTBEELD/keyframes_all',
 		referer: 'http://localhost:3200',
 		ip: '',
@@ -41,6 +45,10 @@ describe('PlayerTicketService', () => {
 	let playerTicketService: PlayerTicketService;
 
 	beforeEach(async () => {
+		process.env.TICKET_SERVICE_URL = FAKE_TICKET_SERVICE_URL;
+		process.env.MEDIA_SERVICE_URL = FAKE_MEDIA_SERVICE_URL;
+		process.env.HOST = FAKE_HOST;
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				PlayerTicketService,
@@ -70,26 +78,30 @@ describe('PlayerTicketService', () => {
 
 	describe('getPlayableUrl', () => {
 		it('returns a playable url', async () => {
-			nock('http://ticketservice/')
+			nock(FAKE_TICKET_SERVICE_URL)
 				.get('/vrt/item-1')
 				.query(true)
-				.reply(200, { jwt: 'secret-jwt-token' });
+				.reply(200, mockPlayerTicket);
 			const url = await playerTicketService.getPlayableUrl('vrt/item-1', 'referer', '');
-			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
+			expect(url).toEqual(
+				`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`
+			);
 		});
 
 		it('uses the fallback referer if none was set', async () => {
-			nock('http://ticketservice/')
+			nock(FAKE_TICKET_SERVICE_URL)
 				.get('/vrt/item-1')
 				.query({
-					app: 'OR-*',
+					app: 'hetarchief.be',
 					client: '',
-					referer: 'host',
-					maxage: 'ticketServiceMaxAge',
+					referer: FAKE_HOST,
+					maxage: 14401,
 				})
-				.reply(200, { jwt: 'secret-jwt-token' });
+				.reply(200, mockPlayerTicket);
 			const url = await playerTicketService.getPlayableUrl('vrt/item-1', undefined, '');
-			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
+			expect(url).toEqual(
+				`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`
+			);
 		});
 	});
 
@@ -100,7 +112,7 @@ describe('PlayerTicketService', () => {
 					{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] },
 				],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
 			expect(url).toEqual('vrt/item-1');
 		});
@@ -111,7 +123,7 @@ describe('PlayerTicketService', () => {
 					{ includes: [{ file: { premis_stored_at: 'vrt/item-1' } }] },
 				],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getEmbedUrl('vrt-id');
 			expect(url).toEqual('vrt/item-1');
 		});
@@ -120,7 +132,7 @@ describe('PlayerTicketService', () => {
 			const mockData: GetFileByRepresentationSchemaIdentifierQuery = {
 				graph_representation: [{ includes: [] }],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			let error;
 			try {
 				await playerTicketService.getEmbedUrl('unknown-id');
@@ -128,57 +140,90 @@ describe('PlayerTicketService', () => {
 				error = e;
 			}
 			expect(error.response).toEqual({
-				error: 'Not Found',
-				message: "Object file with representation_id 'unknown-id' not found",
-				statusCode: 404,
+				additionalInfo: {
+					id: 'unknown-id',
+				},
+				innerException: null,
+				message: 'Object embed url not found',
 			});
 		});
 	});
 
 	describe('getPlayerToken', () => {
 		it('returns a token for a playable item', async () => {
-			nock('http://ticketservice/')
+			nock(FAKE_TICKET_SERVICE_URL)
 				.get('/vrt/browse.mp4')
 				.query(true)
 				.reply(200, mockPlayerTicket);
 
-			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', 'referer', '');
-			expect(token).toEqual('secret-jwt-token');
+			const token = await playerTicketService.getPlayerToken(
+				'vrt/browse.mp4',
+				'referer',
+				'',
+				false
+			);
+			expect(token).toEqual(mockPlayerTicket.jwt);
 		});
 
 		it('uses the fallback referer if none was set', async () => {
-			nock('http://ticketservice/')
+			nock(FAKE_TICKET_SERVICE_URL)
 				.get('/vrt/browse.mp4')
 				.query({
-					app: 'OR-*',
+					app: 'hetarchief.be',
 					client: '',
-					referer: 'host',
-					maxage: 'ticketServiceMaxAge',
+					referer: FAKE_HOST,
+					maxage: 14401,
 				})
 				.reply(200, mockPlayerTicket);
-			const token = await playerTicketService.getPlayerToken('vrt/browse.mp4', undefined, '');
-			expect(token).toEqual('secret-jwt-token');
+			const token = await playerTicketService.getPlayerToken(
+				'vrt/browse.mp4',
+				undefined,
+				'',
+				false
+			);
+			expect(token).toEqual(mockPlayerTicket.jwt);
+		});
+
+		it('return a 15 year token for public domain images', async () => {
+			nock(FAKE_TICKET_SERVICE_URL)
+				.get('/vrt/browse.mp4')
+				.query({
+					app: 'hetarchief.be',
+					client: '',
+					referer: '',
+					maxage: 15 * 365 * 24 * 60 * 60, // 15 years
+				})
+				.reply(200, {
+					...mockPlayerTicket,
+					jwt: mockPlayerTicket.jwt + '15j', // Simulate a 15 year token
+				});
+			const token = await playerTicketService.getPlayerToken(
+				'vrt/browse.mp4',
+				undefined,
+				'',
+				true
+			);
+			expect(token).toEqual(mockPlayerTicket.jwt + '15j');
 		});
 	});
 
 	describe('getThumbnailToken', () => {
 		it('returns a thumbnail token', async () => {
-			nock('http://ticketservice/')
+			// http://ticketservice//TESTBEELD/keyframes_all?app=hetarchief.be&client=78.21.19.187&referer=referer&maxage=14401
+			nock(FAKE_TICKET_SERVICE_URL)
 				.get('/TESTBEELD/keyframes_all')
 				.query(true)
 				.reply(200, mockPlayerTicket);
 
-			mockCacheManager.wrap.mockImplementationOnce(async (key, fn, options) => {
-				const ticket = await fn();
-				await options.ttl(ticket);
-				return ticket;
+			mockCacheManager.wrap.mockImplementationOnce(async (key, fn) => {
+				return await fn();
 			});
 			const token = await playerTicketService.getThumbnailTokenCached(
-				'/TESTBEELD/keyframes_all',
+				'TESTBEELD/keyframes_all',
 				'referer',
 				'127.0.0.1'
 			);
-			expect(token).toEqual('secret-jwt-token');
+			expect(token).toEqual(mockPlayerTicket);
 		});
 
 		it('throws an InternalServerErrorException on error', async () => {
@@ -203,13 +248,15 @@ describe('PlayerTicketService', () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
 				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const getThumbnailTokenSpy = jest
 				.spyOn(playerTicketService, 'getThumbnailTokenCached')
-				.mockResolvedValueOnce('secret-jwt-token');
+				.mockResolvedValueOnce(mockPlayerTicket.jwt);
 
 			const url = await playerTicketService.getThumbnailUrl('vrt-id', 'referer', '');
-			expect(url).toEqual('http://mediaservice/vrt/item-1?token=secret-jwt-token');
+			expect(url).toEqual(
+				`${FAKE_MEDIA_SERVICE_URL}/vrt/item-1?token=${mockPlayerTicket.jwt}`
+			);
 
 			getThumbnailTokenSpy.mockRestore();
 		});
@@ -220,7 +267,7 @@ describe('PlayerTicketService', () => {
 			const getThumbnailTokenSpy = jest.spyOn(playerTicketService, 'getThumbnailTokenCached');
 
 			const url = await playerTicketService.resolveThumbnailUrl('', 'referer', '');
-			expect(url).toEqual('');
+			expect(url).toBeNull();
 			expect(getThumbnailTokenSpy).not.toBeCalled();
 
 			getThumbnailTokenSpy.mockRestore();
@@ -246,7 +293,7 @@ describe('PlayerTicketService', () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
 				graph__intellectual_entity: [{ schema_thumbnail_url: 'vrt/item-1' }],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const url = await playerTicketService.getThumbnailPath('vrt-id');
 			expect(url).toEqual('vrt/item-1');
 		});
@@ -255,7 +302,7 @@ describe('PlayerTicketService', () => {
 			const mockData: GetThumbnailUrlByIdQuery = {
 				graph__intellectual_entity: [],
 			};
-			mockDataService.execute.mockResolvedValueOnce({ data: mockData });
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			let error;
 			try {
 				await playerTicketService.getThumbnailPath('unknown-id');

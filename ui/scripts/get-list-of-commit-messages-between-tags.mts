@@ -1,7 +1,7 @@
-import { execSync } from 'node:child_process';
+import {execSync} from 'node:child_process';
 import * as path from 'node:path';
-import { red } from 'console-log-colors';
-import { getDirName } from './get-dir-name.mjs';
+import {red} from 'console-log-colors';
+import {getDirName} from './get-dir-name.mjs';
 import * as fs from 'node:fs/promises';
 
 /**

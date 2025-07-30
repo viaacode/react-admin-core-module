@@ -398,13 +398,11 @@ export class AssetsService {
 				// Asset is located on a different asset server than the current environment (eg: copy content block from PRD content page to content page on QAS)
 				// Download the asset and upload it again to the asset service of this environment
 				const response = await got.get(url).buffer();
-				console.log('received buffer from url: ', url);
 				const s3Response = await s3Client.putObject({
 					Key: newKey,
 					Bucket: bucket,
 					Body: response,
 				});
-				console.log('uploaded buffer to s3: ', newKey, s3Response);
 			}
 			return this.getUrlFromKey(newKey as string);
 		} catch (err) {

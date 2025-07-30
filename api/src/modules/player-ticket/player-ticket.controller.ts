@@ -134,7 +134,7 @@ export class PlayerTicketController {
 		@Ip() ip: string
 	): Promise<string> {
 		try {
-			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip);
+			return await this.playerTicketService.getPlayerToken(urlOrPath, referrer, ip, false);
 		} catch (err: any) {
 			throw new InternalServerErrorException({
 				message: 'Failed to get ticket for file path',

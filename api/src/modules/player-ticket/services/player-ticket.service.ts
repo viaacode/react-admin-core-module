@@ -27,11 +27,10 @@ import {
 	GetThumbnailUrlByIdQueryVariables,
 } from '../../shared/generated/graphql-db-types-hetarchief';
 import { cleanMultilineEnv } from '../../shared/helpers/env-vars';
+import { CustomError } from '../../shared/helpers/error';
 import { isHetArchief } from '../../shared/helpers/is-hetarchief';
 import { PLAYER_TICKET_EXPIRY } from '../player-ticket.consts';
 import { PlayerTicket } from '../player-ticket.types';
-
-import { CustomError } from 'src/modules/shared/helpers/error';
 
 @Injectable()
 export class PlayerTicketService {
@@ -56,31 +55,33 @@ export class PlayerTicketService {
 
 	/**
 	 * @param path
-	 * @param referer
-	 * @param ip
-	 * @param validDuration number of seconds that the token is valid for.
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
 	 * @protected
 	 */
 	protected async getToken(
 		path: string,
 		referer: string,
 		ip: string,
-		validDuration?: number
+		isPublicDomain: boolean
 	): Promise<PlayerTicket> {
-		console.log('get token', {
-			path,
-			referer,
-			ip,
-			validDuration,
-		});
 		const data = {
 			app: 'hetarchief.be',
 			client: ['::1', '::ffff:127.0.0.1', '127.0.0.1'].includes(ip)
 				? await publicIp.v4()
 				: ip,
 			referer: trimEnd(referer || this.host, '/'),
-			maxage: validDuration || this.ticketServiceMaxAge,
+			maxage: this.ticketServiceMaxAge,
 		};
+		if (isPublicDomain) {
+			// If the domain is public, we allow any client and referer and set the maxage to 15 years
+			// This is needed so social media and chat apps can come fetch a thumbnail for the detail page of an ie object
+			// https://meemoo.atlassian.net/browse/ARC-2891
+			data.client = '';
+			data.referer = '';
+			data.maxage = 15 * 365 * 24 * 60 * 60; // 15 years in seconds
+		}
 
 		/**
 		 * Build the full URL from the base TICKET_SERVICE_URL and the path;
@@ -111,22 +112,48 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getPlayerToken(urlOrPath: string, referer: string, ip: string): Promise<string> {
+	/**
+	 * Generates a player token for the given url or path
+	 * @param urlOrPath
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
+	 */
+	public async getPlayerToken(
+		urlOrPath: string,
+		referer: string,
+		ip: string,
+		isPublicDomain: boolean
+	): Promise<string> {
 		// no caching
-		const token = await this.getToken(this.urlToFilePath(urlOrPath), referer, ip);
+		const token = await this.getToken(
+			this.urlToFilePath(urlOrPath),
+			referer,
+			ip,
+			isPublicDomain
+		);
 		return token.jwt;
 	}
 
+	/**
+	 * Returns a token for the given browsePath, tokens are cached for identical requests for 1 hour
+	 * @param browsePath
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
+	 */
 	public async getThumbnailTokenCached(
 		browsePath: string,
 		referer: string,
 		ip: string,
-		validDuration?: number
+		isPublicDomain: boolean = false
 	): Promise<string> {
 		try {
 			const token = await this.cacheManager.wrap(
-				`thumbnailToken-${browsePath}-${referer}-${ip}`,
-				() => this.getToken(browsePath, referer, ip, validDuration),
+				isPublicDomain
+					? `thumbnailToken-${browsePath}`
+					: `thumbnailToken-${browsePath}-${referer}-${ip}`,
+				() => this.getToken(browsePath, referer, ip, isPublicDomain),
 				60 * 60 * 1000 // Cache for 1 hour
 			);
 			return token.jwt;
@@ -143,11 +170,27 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getPlayableUrl(urlOrPath: string, referer: string, ip: string): Promise<string> {
-		const token = await this.getPlayerToken(urlOrPath, referer, ip);
+	/**
+	 * Returns a playable URL for the given urlOrPath with a token attached for authentication on the media service
+	 * @param urlOrPath
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
+	 */
+	public async getPlayableUrl(
+		urlOrPath: string,
+		referer: string,
+		ip: string,
+		isPublicDomain: boolean = false
+	): Promise<string> {
+		const token = await this.getPlayerToken(urlOrPath, referer, ip, isPublicDomain);
 		return `${this.mediaServiceUrl}/${this.urlToFilePath(urlOrPath)}?token=${token}`;
 	}
 
+	/**
+	 * Get the url of the media file for the current representation or external id of an ie object
+	 * @param representationOrExternalId
+	 */
 	public async getEmbedUrl(representationOrExternalId: string): Promise<string> {
 		let response:
 			| GetFileByRepresentationSchemaIdentifierQuery
@@ -188,11 +231,18 @@ export class PlayerTicketService {
 		return browsePath;
 	}
 
+	/**
+	 * Returns a thumbnail URL for the given urlOrPath with a token attached for authentication on the media service
+	 * @param urlOrPath
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
+	 */
 	public async resolveThumbnailUrl(
 		urlOrPath: string | null | undefined,
 		referer: string,
 		ip: string,
-		validDuration?: number
+		isPublicDomain: boolean = false
 	): Promise<string> {
 		try {
 			if (!urlOrPath) {
@@ -213,7 +263,7 @@ export class PlayerTicketService {
 				browsePath,
 				referer,
 				ip,
-				validDuration
+				isPublicDomain
 			);
 			return `${this.mediaServiceUrl}/${browsePath}?token=${token}`;
 		} catch (err) {
@@ -228,11 +278,27 @@ export class PlayerTicketService {
 		}
 	}
 
-	public async getThumbnailUrl(id: string, referer: string, ip: string): Promise<string> {
+	/**
+	 * Get a thumbnail URL for the given id
+	 * @param id the schema identifier of the intellectual entity
+	 * @param referer domain of the website that is allowed to play the media
+	 * @param ip the ip address of the client that is allowed to play the media
+	 * @param isPublicDomain will generate a ticket that is valid for 15 years for any ip and any referer
+	 */
+	public async getThumbnailUrl(
+		id: string,
+		referer: string,
+		ip: string,
+		isPublicDomain: boolean = false
+	): Promise<string> {
 		const thumbnailPath = await this.getThumbnailPath(id);
-		return this.resolveThumbnailUrl(thumbnailPath, referer, ip);
+		return this.resolveThumbnailUrl(thumbnailPath, referer, ip, isPublicDomain);
 	}
 
+	/**
+	 * Get the thumbnail path for the given schema identifier of an ie object
+	 * @param id
+	 */
 	public async getThumbnailPath(id: string): Promise<string> {
 		const response = await this.dataService.execute<
 			GetThumbnailUrlByIdQuery,
@@ -256,20 +322,21 @@ export class PlayerTicketService {
 	}
 
 	public urlToFilePath(url: string): string {
-		const filePath = url
-			// Deprecated unprotected url
-			.split(/archief-media(-int|-tst|-qas|-prd)?\.viaa\.be\/viaa\//g)
-			.pop()
-			// New protected url
-			.split(/media(-int|-tst|-qas|-prd)?\.viaa\.be[/.]play\/v2\//)
-			// .split(/media(-int|-tst|-qas|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
-			.pop()
-			// IIIF urls
-			.split(/iiif(-int|-tst|-qas|-prd)?\.meemoo\.be\//)
-			.pop()
-			// Alto urls
-			.split(/s3(-int|-tst|-qas|-prd)?\.do\.viaa\.be\//)
-			.pop();
-		return filePath;
+		return (
+			url
+				// Deprecated unprotected url
+				.split(/archief-media(-int|-tst|-qas|-prd)?\.viaa\.be\/viaa\//g)
+				.pop()
+				// New protected url
+				.split(/media(-int|-tst|-qas|-prd)?\.viaa\.be[/.]play\/v2\//)
+				// .split(/media(-int|-tst|-qas|-prd)?\.viaa\.be\/play\/v2\//) // TODO enable once https://meemoo.atlassian.net/browse/ARC-2816 is fixed
+				.pop()
+				// IIIF urls
+				.split(/iiif(-int|-tst|-qas|-prd)?\.meemoo\.be\//)
+				.pop()
+				// Alto urls
+				.split(/s3(-int|-tst|-qas|-prd)?\.do\.viaa\.be\//)
+				.pop()
+		);
 	}
 }
