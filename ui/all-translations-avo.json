@@ -7662,6 +7662,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
+    "key": "afbeelding-alt-tekst",
+    "language": "nl",
+    "value": "Afbeelding alt tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
     "key": "achtergrond-kleur-blok",
     "language": "nl",
     "value": "Achtergrond kleur blok",
@@ -9330,15 +9339,6 @@
     "key": "error",
     "language": "nl",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-het-archief-image-text-background/block-het-archief-image-text-background",
-    "key": "afbeelding-alt-tekst",
-    "language": "nl",
-    "value": "Afbeelding alt tekst",
     "value_type": "TEXT"
   },
   {
