@@ -107,7 +107,11 @@ export class AssetsController {
 			if (OPTIMIZE_INTO_WEBP_FORMATS.includes(file.mimetype)) {
 				optimizedFile = {
 					...file,
-					buffer: await sharp(file.buffer, { animated: file.mimetype === 'image/gif' })
+					buffer: await sharp(file.buffer, {
+						animated: file.mimetype === 'image/gif',
+						// settings limit to false so larger gifs don't throw an error
+						limitInputPixels: false,
+					})
 						.webp({})
 						.toBuffer(),
 					originalname: path.parse(file.originalname).name + '.webp',
