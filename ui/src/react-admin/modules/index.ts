@@ -86,5 +86,8 @@ export { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/Expo
 export { sanitizeHtml } from './shared/helpers/sanitize/index';
 export { SanitizePreset } from './shared/helpers/sanitize/presets';
 
+// FilterTable
+export {FilterTable} from './shared/components/FilterTable/FilterTable'
+
 // STOPGAP
 export type { DefaultComponentProps, ValueOf } from './shared';

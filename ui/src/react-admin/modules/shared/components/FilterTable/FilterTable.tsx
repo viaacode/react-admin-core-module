@@ -42,6 +42,10 @@ import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import { CheckboxListParam, DateRangeParam } from '../../helpers/query-string-converters';
 import './FilterTable.scss';
+import {
+	getPreferredColumns,
+	setPreferredColumns,
+} from '~shared/components/FilterTable/FilterTable.utils';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
 import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -117,7 +121,7 @@ interface FilterTableProps {
 	searchInputAriaLabel?: string;
 }
 
-const FilterTable: FunctionComponent<FilterTableProps> = ({
+export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	data,
 	dataCount,
 	itemsPerPage,
@@ -187,6 +191,10 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 			[id]: value,
 			...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
 		});
+
+		if (id === 'columns') {
+			setPreferredColumns(location.pathname, value);
+		}
 
 		setTableState(newTableState, 'replace');
 	};
@@ -268,6 +276,10 @@ const FilterTable: FunctionComponent<FilterTableProps> = ({
 			'columns'
 		);
 	};
+
+	useEffect(() => {
+		handleTableStateChanged(getPreferredColumns(location.pathname), 'columns');
+	});
 
 	const renderFilters = () => {
 		const page = tableState.page | 0;
