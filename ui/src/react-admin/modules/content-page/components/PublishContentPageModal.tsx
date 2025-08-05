@@ -170,7 +170,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								{...getDatePickerDefaultProps}
 								value={publishAt ? parseISO(publishAt) : undefined}
 								onChange={(date) => setPublishAt(date ? date.toISOString() : null)}
-								showTimeInput={true}
+								showTimeInput={false}
 								disabled={selectedOption !== 'timebound'}
 							/>
 						</FormGroup>
@@ -181,7 +181,7 @@ const PublishContentPageModal: FC<PublishContentPageModalProps> = ({
 								{...getDatePickerDefaultProps}
 								value={depublishAt ? parseISO(depublishAt) : undefined}
 								onChange={(date) => setDepublishAt(date ? date.toISOString() : null)}
-								showTimeInput={true}
+								showTimeInput={false}
 								disabled={selectedOption !== 'timebound'}
 							/>
 						</FormGroup>
