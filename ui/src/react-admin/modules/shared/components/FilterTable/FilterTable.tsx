@@ -1,4 +1,5 @@
 import { type OrderDirection, PaginationBar } from '@meemoo/react-components';
+import { useLocalStorage } from '@uidotdev/usehooks';
 import {
 	Button,
 	type ButtonType,
@@ -31,7 +32,6 @@ import type { TableFilterType } from '~shared/types/table-filter-types';
 import { KeyCode } from '../../consts/keycode';
 import { eduOrgToClientOrg } from '../../helpers/edu-org-string-to-client-org';
 import './FilterTable.scss';
-import { type RouteComponentProps, withRouter } from 'react-router';
 import { ErrorView } from '~shared/components/error';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
@@ -43,7 +43,7 @@ import DateRangeDropdown from '../DateRangeDropdown/DateRangeDropdown';
 import { MultiEducationalOrganisationSelectModal } from '../MultiEducationalOrganisationSelectModal/MultiEducationalOrganisationSelectModal';
 import { MultiUserSelectDropdown } from '../MultiUserSelectDropdown/MultiUserSelectDropdown';
 import { FILTER_TABLE_QUERY_PARAM_CONFIG } from './FilterTable.const';
-import { cleanupFilterTableState, getPreferredColumns, setPreferredColumns } from './FilterTable.utils';
+import { cleanupFilterTableState } from './FilterTable.utils';
 
 export interface FilterableTableState {
 	query?: string;
@@ -143,6 +143,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
 	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
 	const [tableState, setTableState] = useQueryParams(FILTER_TABLE_QUERY_PARAM_CONFIG(columns));
+	const [getPreferredColumns, setPreferredColumns] = useLocalStorage(
+		`AVO.admin_preferred_columns.${location.pathname.replaceAll('/', '_')}`,
+		null
+	);
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleTableStateChanged = (value: any, id: string) => {
@@ -156,7 +160,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		});
 
 		if (id === 'columns') {
-			setPreferredColumns(location.pathname, value);
+			setPreferredColumns(value);
 		}
 
 		setTableState(newTableState, 'replace');
@@ -241,9 +245,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		);
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: only run once
 	useEffect(() => {
-		handleTableStateChanged(getPreferredColumns(location.pathname), 'columns');
-	});
+		handleTableStateChanged(getPreferredColumns, 'columns');
+	}, []);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
