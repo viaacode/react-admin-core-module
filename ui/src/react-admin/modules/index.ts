@@ -85,9 +85,13 @@ export { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/Expo
 // Helpers
 export { sanitizeHtml } from './shared/helpers/sanitize/index';
 export { SanitizePreset } from './shared/helpers/sanitize/presets';
+export { toggleSortOrder } from './shared/helpers/toggle-sort-order';
 
 // FilterTable
-export {FilterTable} from './shared/components/FilterTable/FilterTable'
+export { FilterTable, type FilterableTableState, getFilters, type FilterableColumn } from './shared/components/FilterTable/FilterTable'
+export { FILTER_TABLE_QUERY_PARAM_CONFIG } from './shared/components/FilterTable/FilterTable.const'
+export { TableFilterType } from './shared/types/table-filter-types'
+export { cleanupFilterTableState } from './shared/components/FilterTable/FilterTable.utils'
 
 // STOPGAP
 export type { DefaultComponentProps, ValueOf } from './shared';
