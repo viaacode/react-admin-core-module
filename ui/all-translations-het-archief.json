@@ -13757,7 +13757,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-enclose",
     "language": "nl",
-    "value": "content insluiten",
+    "value": "Content insluiten",
     "value_type": "TEXT"
   },
   {
@@ -13766,7 +13766,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-enclose",
     "language": "en",
-    "value": "content enclose",
+    "value": "Enclose content",
     "value_type": "TEXT"
   },
   {
@@ -16718,7 +16718,7 @@
     "location": "admin/content-block/components/page-overview-wrapper/page-overview-wrapper",
     "key": "alle",
     "language": "en",
-    "value": "all",
+    "value": "All",
     "value_type": "TEXT"
   },
   {
@@ -18145,6 +18145,24 @@
   },
   {
     "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "nl",
+    "value": "item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "en",
+    "value": "item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "pages/404",
     "key": "niet-gevonden",
@@ -18293,7 +18311,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "nl",
-    "value": "Je kan dit object digitaal bekijken tijdens een fysiek bezoek aan de bezoekersruimte.",
+    "value": "Van dit object is enkel de metadata beschikbaar voor inzage. Je kan het wel altijd aanvragen bij de aanbieder.",
     "value_type": "TEXT"
   },
   {
@@ -18302,7 +18320,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "en",
-    "value": "This item can be consulted digitally during an on-site visit to the organisation that holds it.",
+    "value": "Only the metadata of this item is accessible. You can always submit a request to view or listen to the item.",
     "value_type": "TEXT"
   },
   {
@@ -18437,7 +18455,7 @@
     "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
     "key": "sluit",
     "language": "nl",
-    "value": "sluit",
+    "value": "Sluit",
     "value_type": "TEXT"
   },
   {
@@ -18446,7 +18464,7 @@
     "location": "pages/bezoekersruimte/visitor-space-slug/object-id/index",
     "key": "sluit",
     "language": "en",
-    "value": "close",
+    "value": "Close",
     "value_type": "TEXT"
   },
   {
@@ -23855,7 +23873,7 @@
     "location": "pages/beheer/instellingen/index",
     "key": "geen-maintainer-id-gevonden",
     "language": "nl",
-    "value": "Geen maintainer id gevonden",
+    "value": "Geen organisatie id gevonden",
     "value_type": "HTML"
   },
   {
@@ -23864,7 +23882,7 @@
     "location": "pages/beheer/instellingen/index",
     "key": "geen-maintainer-id-gevonden",
     "language": "en",
-    "value": "No maintenance ID found",
+    "value": "No organization id found",
     "value_type": "HTML"
   },
   {
@@ -26573,7 +26591,7 @@
     "location": "pages/admin/gebruikersbeheer/permissies/index",
     "key": "annuleren",
     "language": "nl",
-    "value": "annuleren",
+    "value": "Annuleren",
     "value_type": "HTML"
   },
   {
@@ -26582,7 +26600,7 @@
     "location": "pages/admin/gebruikersbeheer/permissies/index",
     "key": "annuleren",
     "language": "en",
-    "value": "cancel",
+    "value": "Cancel",
     "value_type": "HTML"
   },
   {
@@ -27455,7 +27473,7 @@
     "location": "pages/admin/bezoekersruimtes-beheer/bezoekersruimtes/maak/index",
     "key": "annuleren",
     "language": "nl",
-    "value": "annuleren",
+    "value": "Annuleren",
     "value_type": "HTML"
   },
   {
@@ -27464,7 +27482,7 @@
     "location": "pages/admin/bezoekersruimtes-beheer/bezoekersruimtes/maak/index",
     "key": "annuleren",
     "language": "en",
-    "value": "cancel",
+    "value": "Cancel",
     "value_type": "HTML"
   },
   {
@@ -30020,25 +30038,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "datum-toegevoegd-aan-platform",
     "language": "en",
-    "value": "Date added",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "nl",
-    "value": "Permanente URL",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/ie-objects",
-    "key": "permanente-url",
-    "language": "en",
-    "value": "Permanent URL",
+    "value": "Online since",
     "value_type": "TEXT"
   },
   {
@@ -30839,7 +30839,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "vul-gegevens-aan",
     "language": "nl",
-    "value": "Bevestig je gegevens",
+    "value": "Werk je aanvraag af",
     "value_type": "TEXT"
   },
   {
@@ -30848,7 +30848,7 @@
     "location": "modules/navigation/components/material-request-center-blade/material-request-center-blade",
     "key": "vul-gegevens-aan",
     "language": "en",
-    "value": "Confirm your details",
+    "value": "Finish your request",
     "value_type": "TEXT"
   },
   {
@@ -33143,7 +33143,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "volgende",
     "language": "nl",
-    "value": "volgende",
+    "value": "Volgende",
     "value_type": "TEXT"
   },
   {
@@ -33152,7 +33152,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "volgende",
     "language": "en",
-    "value": "next",
+    "value": "Next",
     "value_type": "TEXT"
   },
   {
@@ -33161,7 +33161,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "vorige",
     "language": "nl",
-    "value": "vorige",
+    "value": "Vorige",
     "value_type": "TEXT"
   },
   {
@@ -33170,7 +33170,7 @@
     "location": "modules/shared/components/pagination-bar/pagination-bar",
     "key": "vorige",
     "language": "en",
-    "value": "previous",
+    "value": "Previous",
     "value_type": "TEXT"
   },
   {
@@ -34925,7 +34925,7 @@
     "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
     "key": "naam-van-de-maker",
     "language": "nl",
-    "value": "Naam van de maker",
+    "value": "Typ de naam van de maker",
     "value_type": "TEXT"
   },
   {
@@ -34934,7 +34934,7 @@
     "location": "modules/visitor-space/components/creator-filter-form/creator-filter-form",
     "key": "naam-van-de-maker",
     "language": "en",
-    "value": "Creator's name",
+    "value": "Type the creator's name",
     "value_type": "TEXT"
   },
   {
@@ -35933,7 +35933,7 @@
     "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
     "key": "naam-van-de-krant-serie",
     "language": "nl",
-    "value": "Naam van de krantenreeks",
+    "value": "Typ de naam van de krant, bv. \"De Vooruit\"",
     "value_type": "TEXT"
   },
   {
@@ -35942,7 +35942,7 @@
     "location": "modules/visitor-space/components/newspaper-series-name-filter-form/newspaper-series-name-filter-form",
     "key": "naam-van-de-krant-serie",
     "language": "en",
-    "value": "Name of newspaper series",
+    "value": "Type the name of the newspaper, e.g. \"De Vooruit\"",
     "value_type": "TEXT"
   },
   {
@@ -36509,7 +36509,7 @@
     "location": "pages/slug/toegang-aangevraagd/index",
     "key": "je-kan-de-status-van-je-aanvraag-volgen-op-de-bezoekersruimtes-pagina-je-ontvangt-ook-meteen-een-e-mailmelding-als-je-aanvraag-behandeld-werd",
     "language": "nl",
-    "value": "Je kan de status van je aanvraag volgen op de 'Start je bezoek'-pagina. Je ontvangt een e-mailmelding als je aanvraag behandeld werd.",
+    "value": "<p>Je kan de status van je aanvraag volgen op <a href=\"https://hetarchief.be/bezoek\" target=\"\">https://hetarchief.be/bezoek</a>. Je ontvangt een e-mailmelding als je aanvraag behandeld werd.</p>",
     "value_type": "HTML"
   },
   {
@@ -36518,7 +36518,7 @@
     "location": "pages/slug/toegang-aangevraagd/index",
     "key": "je-kan-de-status-van-je-aanvraag-volgen-op-de-bezoekersruimtes-pagina-je-ontvangt-ook-meteen-een-e-mailmelding-als-je-aanvraag-behandeld-werd",
     "language": "en",
-    "value": "You can follow the status of your request on the 'Start your visit'-page. You will receive an email notification when your request has been processed.",
+    "value": "<p>You can follow the status of your request at <a href=\"https://hetarchief.be/en/visit\" target=\"\">https://hetarchief.be/en/visit</a>. You will receive an email notification when your request has been processed.</p>",
     "value_type": "HTML"
   },
   {
