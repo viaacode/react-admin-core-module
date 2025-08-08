@@ -279,6 +279,7 @@ export interface PageOverviewBlockComponentStateFields {
 	headerBackgroundColor?: Color;
 	contentType: Avo.ContentPage.Type;
 	itemStyle?: ContentItemStyle;
+	itemAlignment?: AlignOption;
 	showSectionTitle?: boolean; // Title of the label that groups multiple pages
 	showTitle?: boolean; // Title of one of the pages
 	showDescription?: boolean; // Description of one of the pages

@@ -1,7 +1,7 @@
 import type { RenderLinkFunction } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { PageOverviewOrderOptions } from '~modules/content-page/const/get-page-overview-order-options';
-import type { Color } from '~modules/content-page/types/content-block.types';
+import type { AlignOption, Color } from '~modules/content-page/types/content-block.types';
 import type { ContentTypeAndLabelsValue } from '~shared/components/ContentTypeAndLabelsPicker/ContentTypeAndLabelsPicker';
 
 export type ContentTabStyle = 'ROUNDED_BADGES' | 'MENU_BAR';
@@ -37,6 +37,7 @@ export interface PageOverviewWrapperProps {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
+	itemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;

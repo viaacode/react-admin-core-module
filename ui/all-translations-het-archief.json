@@ -25115,7 +25115,7 @@
     "location": "modules/visitor-space/const/index",
     "key": "enkel-ter-plaatse-beschikbaar",
     "language": "nl",
-    "value": "Raadpleegbaar bij aanbieder",
+    "value": "Bij aanbieder raadpleegbaar",
     "value_type": "TEXT"
   },
   {
@@ -25520,7 +25520,7 @@
     "location": "modules/account/components/create-folder-button/create-folder-button",
     "key": "name-is-aangemaakt",
     "language": "en",
-    "value": "{{name}}' has been created.",
+    "value": "&#x27;{{name}}&#x27; has been created.",
     "value_type": "HTML"
   },
   {
@@ -29381,7 +29381,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "kopieer-de-rechten-naar-je-klembord",
     "language": "nl",
-    "value": "Kopieer de rechten naar je klembord.",
+    "value": "Meer info over de rechten van dit object.",
     "value_type": "TEXT"
   },
   {
@@ -29390,7 +29390,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "kopieer-de-rechten-naar-je-klembord",
     "language": "en",
-    "value": "Kopieer de rechten naar je klembord.",
+    "value": "More information about the rights on this object.",
     "value_type": "TEXT"
   },
   {
@@ -29408,7 +29408,7 @@
     "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
     "key": "meer-info-over-de-rechten-van-dit-object",
     "language": "en",
-    "value": "Meer info over de rechten van dit object",
+    "value": "More information about the rights on this object.",
     "value_type": "TEXT"
   },
   {
@@ -36941,7 +36941,7 @@
     "location": "modules/visitor-space/utils/map-filters/map-filters",
     "key": "raadpleegbaar-ter-plaatse",
     "language": "nl",
-    "value": "Ter plaatse raadplegen",
+    "value": "Bij aanbieder raadpleegbaar",
     "value_type": "TEXT"
   },
   {
@@ -36950,7 +36950,7 @@
     "location": "modules/visitor-space/utils/map-filters/map-filters",
     "key": "raadpleegbaar-ter-plaatse",
     "language": "en",
-    "value": "Consult on-site",
+    "value": "Accessible on-site",
     "value_type": "TEXT"
   },
   {

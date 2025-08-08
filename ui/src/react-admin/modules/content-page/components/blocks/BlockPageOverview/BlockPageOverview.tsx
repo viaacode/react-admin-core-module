@@ -30,6 +30,7 @@ import { ContentItemStyle } from './BlockPageOverview.types';
 
 import './BlockPageOverview.scss';
 import { PaginationBar } from '@meemoo/react-components';
+import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
 import Html from '~shared/components/Html/Html';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
@@ -42,6 +43,7 @@ export interface BlockPageOverviewProps extends DefaultProps {
 	allowMultiple?: boolean;
 	centerHeader?: boolean;
 	itemStyle?: ContentItemStyle;
+	itemAlignment?: AlignOption;
 	showSectionTitle?: boolean;
 	showTitle?: boolean;
 	showDescription?: boolean;
@@ -75,6 +77,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 	allowMultiple = false,
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
+	itemAlignment = 'left',
 	showSectionTitle = true,
 	showTitle = true,
 	showDescription = true,
@@ -203,6 +206,7 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 				renderLink={renderLink}
 				fill="cover"
 				textAlign="left"
+				align={itemAlignment}
 			/>
 		);
 	};

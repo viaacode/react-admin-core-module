@@ -32,6 +32,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 	allowMultiple = false,
 	centerHeader = false,
 	itemStyle = ContentItemStyle.NEWS_LIST,
+	itemAlignment = 'left',
 	showSectionTitle = true,
 	showTitle = true,
 	showDescription = true,
@@ -235,6 +236,7 @@ export const BlockPageOverviewWrapper: FunctionComponent<PageOverviewWrapperProp
 				pages={pages ?? []}
 				tabStyle={tabStyle}
 				itemStyle={itemStyle}
+				itemAlignment={itemAlignment || 'left'}
 				allowMultiple={allowMultiple}
 				centerHeader={centerHeader}
 				showSectionTitle={showSectionTitle}

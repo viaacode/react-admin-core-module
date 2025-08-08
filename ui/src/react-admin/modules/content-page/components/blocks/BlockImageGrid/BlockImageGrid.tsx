@@ -44,6 +44,7 @@ export const BlockImageGrid: FunctionComponent<BlockImageGridProps> = ({
 						height: imageHeight,
 						backgroundImage: `url(${element.source})`,
 						backgroundSize: fill,
+						backgroundPosition: align || 'left',
 					}}
 				/>
 				<div
