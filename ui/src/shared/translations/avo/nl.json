@@ -742,6 +742,7 @@
   "modules/content-page/components/blocks/block-image-text-background/block-image-text-background___tekst-padding-achtergrondkleur": "Tekst padding achtergrondkleur",
   "modules/content-page/components/blocks/block-image-text-background/block-image-text-background___titel-grootte": "Titelgrootte",
   "modules/content-page/components/blocks/block-media-grid/block-media-grid___opgelet-mediategels-met-een-zoekfilter-mogen-niet-op-een-publieke-pagina-worden-gebruikt-wegens-geen-bronvermeldingen": "Opgelet! Mediategels obv een zoekfilter mogen niet op een publieke pagina getoond worden wegens geen bronvermelding.",
+  "modules/content-page/components/blocks/block-page-overview/block-page-overview___item-alignment": "Item alignment",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-label-tussen-titels": "Toon de labels tussen titels.",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-beschrijvingen": "Toon de paginabeschrijvingen.",
   "modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-pagina-datum-en-categorie": "Toon de paginadatum en -categorie.",

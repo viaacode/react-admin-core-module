@@ -9343,6 +9343,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "nl",
+    "value": "Item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -30036,6 +30045,15 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-avo",
+    "language": "nl",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinked is aan deze gebruiker van idp type geen toegang meer heeft tot AVO",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
     "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
     "language": "nl",
     "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
@@ -30174,15 +30192,6 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/idps/lti/lti",
-    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-avo",
-    "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinked is aan deze gebruiker van idp type geen toegang meer heeft tot AVO",
     "value_type": "TEXT"
   }
 ]
