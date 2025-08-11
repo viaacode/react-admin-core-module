@@ -5,15 +5,14 @@ import { PermissionName } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import React from 'react';
 import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
-import { BlockRichTextWrapper } from '~content-blocks/BlockRichText';
-import { BlockVideoWrapper } from '~content-blocks/BlockVideo';
+import { BlockRichTextWrapper } from '~content-blocks/BlockRichText/BlockRichText.wrapper';
 import type { IconConfig } from '~core/config';
 import { AdminConfigManager } from '~core/config';
 import { Icon } from '~shared/components/Icon/Icon';
 import { generateSmartLink } from '~shared/components/SmartLink/SmartLink';
 import { PermissionService } from '~shared/services/permission-service';
-
 import type { AlignOption, HeadingTypeOption } from '../../../types/content-block.types';
+import { BlockVideoWrapper } from '../BlockVideo/BlockVideo.wrapper';
 
 interface MediaPlayerTitleTextButtonWrapperProps {
 	mediaItem: ButtonAction;

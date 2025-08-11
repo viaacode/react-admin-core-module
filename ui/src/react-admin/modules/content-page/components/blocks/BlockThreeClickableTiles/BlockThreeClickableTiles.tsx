@@ -1,13 +1,12 @@
 import type { ButtonAction } from '@viaa/avo2-components';
 import { Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
 import { isNil } from 'lodash-es';
-import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components/Icon';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import type { HeadingTypeOption } from '~modules/content-page/types/content-block.types';
-import { BlockHeading } from '../BlockHeading';
+import { SmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Icon } from '~shared/components/Icon';
 
 export interface BlockClickableTilesProps {
 	title: string;
