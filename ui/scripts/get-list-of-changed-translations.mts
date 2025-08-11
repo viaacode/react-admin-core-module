@@ -1,9 +1,9 @@
-import { execSync } from 'node:child_process';
-import { kebabCase } from 'lodash-es';
+import {execSync} from 'node:child_process';
+import {kebabCase} from 'lodash-es';
 import * as path from 'node:path';
-import { red } from 'console-log-colors';
-import type { App } from './translation.types.mjs';
-import { getDirName } from './get-dir-name.mjs';
+import {red} from 'console-log-colors';
+import type {App} from './translation.types.mjs';
+import {getDirName} from './get-dir-name.mjs';
 import * as fs from 'node:fs/promises';
 
 /**
@@ -57,9 +57,10 @@ async function getListOfChangedTranslations(
 	);
 
 	// Unique lines
-	const uniqueTranslations = Array.from(
+	let uniqueTranslations = Array.from(
 		new Set(simplifiedTranslations.split('\n').filter(Boolean))
 	).join('\n');
+	uniqueTranslations = uniqueTranslations.replace('\\ No newline at end of file', '');
 
 	// Write the simplified translations to a file
 	const outputFilePath = path.join(getDirName(), `../translation-changes-${kebabCase(app)}.txt`);

@@ -1,6 +1,6 @@
 {
   "name": "@meemoo/admin-core-ui",
-  "version": "4.5.22",
+  "version": "4.5.23",
   "private": false,
   "type": "module",
   "exports": {
@@ -35,8 +35,8 @@
     "backup-translations-avo-qas": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/backup-translations.mts -- AVO",
     "translations:extract:hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- HET_ARCHIEF",
     "translations:extract:avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/extract-and-replace-translations.mts -- AVO",
-    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- HET_ARCHIEF v4.5.14 v4.5.15",
-    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.14 v4.5.15",
+    "list-of-changed-translations-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- HET_ARCHIEF v4.5.20 v4.5.22",
+    "list-commit-messages-between-tags-hetarchief": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.20 v4.5.22",
     "list-of-changed-translations-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-changed-translations.mts -- AVO v4.5.17 v4.5.18",
     "list-commit-messages-between-tags-avo": "dotenv -e .env/.env.local tsx --project ./scripts/tsconfig.json scripts/get-list-of-commit-messages-between-tags.mts -- v4.5.17 v4.5.18",
     "check-bundled-files": "npx depcruise src/react-admin --config bundle-import-rules.json --include-only \"^src\" --exclude \"(.spec.tsx?|.test.tsx?|node_modules)\"",
