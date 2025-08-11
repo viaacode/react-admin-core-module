@@ -16491,6 +16491,24 @@
     "app": "HET_ARCHIEF",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "nl",
+    "value": "item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "en",
+    "value": "item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-label-tussen-titels",
     "language": "nl",
     "value": "Toon de label tussen titels",
@@ -18141,24 +18159,6 @@
     "key": "error",
     "language": "en",
     "value": "Error",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
-    "key": "item-alignment",
-    "language": "nl",
-    "value": "item alignment",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
-    "key": "item-alignment",
-    "language": "en",
-    "value": "item alignment",
     "value_type": "TEXT"
   },
   {
@@ -24177,42 +24177,6 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "https-creativecommons-org-public-domain",
-    "language": "nl",
-    "value": "https://creativecommons.org/public-domain",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "https-creativecommons-org-public-domain",
-    "language": "en",
-    "value": "https://creativecommons.org/public-domain",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "rechten-status-publiek-domain-meer-info-link",
-    "language": "nl",
-    "value": "/vragen?item=%2Fwaarom-kan-ik-sommige-kranten-inkijken-en-andere-niet&label=Rechten%20en%20gebruik&page=0",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "rechten-status-publiek-domain-meer-info-link",
-    "language": "en",
-    "value": "/en/questions?item=%2Fwhy-can-i-view-some-newspapers-and-not-others&label=Rights%20and%20usage&page=0",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "copyright-undetermined",
     "language": "nl",
     "value": "Auteursrechtelijke bescherming niet bepaald",
@@ -24225,42 +24189,6 @@
     "key": "copyright-undetermined",
     "language": "en",
     "value": "Copyright undetermined",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "https-rightsstatements-org-page-und-1-0-language-language-code",
-    "language": "nl",
-    "value": "https://rightsstatements.org/page/UND/1.0/?language={{languageCode}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "https-rightsstatements-org-page-und-1-0-language-language-code",
-    "language": "en",
-    "value": "https://rightsstatements.org/page/UND/1.0/?language={{languageCode}}",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "rechten-status-copyright-undetermined-meer-info-link",
-    "language": "nl",
-    "value": "/vragen?item=%2Fwaarom-kan-ik-sommige-kranten-inkijken-en-andere-niet&label=Rechten%20en%20gebruik&page=0",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "rechten-status-copyright-undetermined-meer-info-link",
-    "language": "en",
-    "value": "/en/questions?item=%2Fwhy-can-i-view-some-newspapers-and-not-others&label=Rights%20and%20usage&page=0",
     "value_type": "TEXT"
   },
   {
@@ -25151,7 +25079,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "ter-plaatse-kijken",
     "language": "nl",
-    "value": "Ter plaatse kijken",
+    "value": "Bij aanbieder bekijkbaar",
     "value_type": "TEXT"
   },
   {
@@ -25169,7 +25097,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "ter-plaatse-luisteren",
     "language": "nl",
-    "value": "Ter plaatse luisteren",
+    "value": "Bij aanbieder beluisterbaar",
     "value_type": "TEXT"
   },
   {
@@ -25187,7 +25115,7 @@
     "location": "modules/visitor-space/const/visitor-space-filters",
     "key": "ter-plaatse-lezen",
     "language": "nl",
-    "value": "Bij de aanbieder lezen",
+    "value": "Bij aanbieder te lezen",
     "value_type": "TEXT"
   },
   {
@@ -37329,6 +37257,78 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-external-link",
+    "language": "nl",
+    "value": "public-domain-external-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-external-link",
+    "language": "en",
+    "value": "public-domain-external-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-internal-link",
+    "language": "nl",
+    "value": "public-domain-internal-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-internal-link",
+    "language": "en",
+    "value": "public-domain-internal-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-external-link",
+    "language": "nl",
+    "value": "copyright-undetermined-external-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-external-link",
+    "language": "en",
+    "value": "copyright-undetermined-external-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-internal-link",
+    "language": "nl",
+    "value": "copyright-undetermined-internal-link",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-internal-link",
+    "language": "en",
+    "value": "copyright-undetermined-internal-link",
     "value_type": "TEXT"
   },
   {
