@@ -171,6 +171,7 @@
     ]
   },
   "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
     "memoizee": "^0.4.17"
   }
 }
