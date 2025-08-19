@@ -1,8 +1,11 @@
 import { type Avo, type Idp, type PermissionName } from '@viaa/avo2-types';
+import { type EducationOrganizationSchema } from '@viaa/avo2-types/types/education-organizations';
+import { type LomSchema } from '@viaa/avo2-types/types/lom';
 
 import { Lookup_Languages_Enum } from '../shared/generated/graphql-db-types-hetarchief';
 
 import {
+	type UserInfoCommonUserAvo,
 	type UserInfoOverviewAvo,
 	type UserInfoOverviewHetArchief,
 	UserInfoType,
@@ -28,6 +31,7 @@ export function convertUserInfoToCommonUser(
 		| UserInfoOverviewAvo
 		| UserInfoOverviewHetArchief
 		| Avo.User.HetArchiefUser
+		| Partial<UserInfoCommonUserAvo>
 		| undefined,
 	userInfoType: UserInfoType
 ): Avo.User.CommonUser | undefined {
@@ -59,9 +63,8 @@ export function convertUserInfoToCommonUser(
 				uid: user.uid,
 				email: user.mail ?? undefined,
 				fullName:
-					user.full_name ?? user.first_name
-						? [user.first_name, user.last_name].join(' ')
-						: undefined,
+					user.full_name ??
+					(user.first_name ? [user.first_name, user.last_name].join(' ') : undefined),
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				isBlocked: user.is_blocked ?? undefined,
@@ -114,9 +117,10 @@ export function convertUserInfoToCommonUser(
 				uid: profile.user_id,
 				email: profile.user.mail ?? undefined,
 				fullName:
-					profile.user.full_name ?? profile.user.first_name
+					profile.user.full_name ??
+					(profile.user.first_name
 						? [profile.user.first_name, profile.user.last_name].join(' ')
-						: undefined,
+						: undefined),
 				firstName: profile.user.first_name ?? undefined,
 				lastName: profile.user.last_name ?? undefined,
 				isBlocked: profile.user.is_blocked ?? undefined,
@@ -187,9 +191,8 @@ export function convertUserInfoToCommonUser(
 				uid: user.user_id,
 				email: user.mail ?? undefined,
 				fullName:
-					user.full_name ?? user.first_name
-						? [user.first_name, user.last_name].join(' ')
-						: undefined,
+					user.full_name ??
+					(user.first_name ? [user.first_name, user.last_name].join(' ') : undefined),
 				firstName: user.first_name ?? undefined,
 				lastName: user.last_name ?? undefined,
 				title: user.profile?.title ?? undefined,
@@ -226,9 +229,10 @@ export function convertUserInfoToCommonUser(
 				firstName: profile.first_name ?? undefined,
 				lastName: profile.last_name ?? undefined,
 				fullName:
-					profile.full_name ?? profile.first_name
+					profile.full_name ??
+					(profile.first_name
 						? [profile.first_name, profile.last_name].join(' ')
-						: undefined,
+						: undefined),
 				language: profile.language,
 				userGroup: {
 					id: profile.group?.id,
@@ -278,6 +282,64 @@ export function convertUserInfoToCommonUser(
 				lastAccessAt: user.lastAccessAt,
 				permissions: user.permissions,
 				createdAt: user.createdAt,
+			} as Avo.User.CommonUser;
+		}
+
+		case UserInfoType.UserInfoCommonUserAvo: {
+			// UserInfoCommonUserAvo: user info coming from the common_users tables in AVO
+			const user = userInfo as UserInfoCommonUserAvo;
+
+			return {
+				profileId: user.profile_id,
+				uid: user.user_id,
+				userId: user.user_id,
+				email: user.mail ?? undefined,
+				firstName: user.first_name ?? undefined,
+				lastName: user.last_name ?? undefined,
+				fullName:
+					user.full_name ??
+					(user.first_name ? [user.first_name, user.last_name].join(' ') : undefined),
+				userGroup: user.user_group?.group,
+				organisation: user.organisation,
+				lastAccessAt: user.last_access_at,
+				createdAt: user.created_at,
+				avatar: user?.avatar,
+				stamboek: user.stamboek ?? undefined,
+				educationalOrganisations: (user.profile_educational_organizations ?? []).map(
+					(item) => ({
+						organisationId: item.organization_id,
+						unitId: item.unit_id,
+					})
+				) as EducationOrganizationSchema[],
+				loms: user.loms as LomSchema[],
+				isException: user.is_exception ?? false,
+				businessCategory: user.business_category ?? undefined,
+				isBlocked: user.is_blocked ?? undefined,
+				blockedAt: undefined,
+				unblockedAt: undefined,
+				tempAccess: user.temp_access
+					? {
+							from: user.temp_access.from ?? null,
+							until: user.temp_access.until ?? null,
+							current: user.temp_access.current,
+						}
+					: null,
+				idps: Object.fromEntries(
+					(user.idpmaps || []).map((idpMapObject) => [
+						idpMapObject.idp,
+						idpMapObject.idp_user_id as string,
+					])
+				),
+				alias: user.alias || undefined,
+				title: user.title || undefined,
+				bio: user.bio || undefined,
+				alternativeEmail: user.alternative_email,
+				updatedAt: user.updated_at || undefined,
+				companyId: user.company_id,
+				permissions: (user.user_group?.group?.group_permissions || []).map(
+					(item) => item.permission
+				),
+				language: user.language,
 			} as Avo.User.CommonUser;
 		}
 
