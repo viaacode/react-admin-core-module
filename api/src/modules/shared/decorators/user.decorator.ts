@@ -6,7 +6,7 @@ import { SessionHelper } from '../auth/session-helper';
 export const SessionUser = createParamDecorator(
 	(data: unknown, ctx: ExecutionContext): SessionUserEntity | null => {
 		const request = ctx.switchToHttp().getRequest();
-		const userInfoOnSession = SessionHelper.getUserInfo(request.session);
+		const userInfoOnSession = SessionHelper.getUserInfo(request);
 		return new SessionUserEntity(userInfoOnSession);
 	}
 );
