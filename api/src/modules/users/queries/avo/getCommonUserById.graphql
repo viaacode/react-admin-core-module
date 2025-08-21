@@ -1,5 +1,9 @@
 query getCommonUserById($id: uuid!) {
-	users_common_users(offset: 0, limit: 1, where: {profile_id: {_eq: $id}, is_deleted: {_eq: false}}) {
+	users_common_users(
+		offset: 0
+		limit: 1
+		where: { profile_id: { _eq: $id }, is_deleted: { _eq: false } }
+	) {
 		profile_id
 		user_id
 		full_name
@@ -48,10 +52,9 @@ query getCommonUserById($id: uuid!) {
 		user_id
 		company_id
 		organisation {
-			or_id
 			name
 			logo_url
-			data
+			or_id
 		}
 		profile_educational_organizations {
 			organization_id

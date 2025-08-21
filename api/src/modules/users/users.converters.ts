@@ -300,7 +300,14 @@ export function convertUserInfoToCommonUser(
 					user.full_name ??
 					(user.first_name ? [user.first_name, user.last_name].join(' ') : undefined),
 				userGroup: user.user_group?.group,
-				organisation: user.organisation,
+				organisation: user.organisation
+					? {
+							name: user.organisation?.name,
+							or_id: user.organisation?.or_id,
+							logo_url: user.organisation?.logo_url,
+							data: null,
+						}
+					: null,
 				lastAccessAt: user.last_access_at,
 				createdAt: user.created_at,
 				avatar: user?.avatar,
