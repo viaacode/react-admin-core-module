@@ -16493,7 +16493,7 @@
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "item-alignment",
     "language": "nl",
-    "value": "item alignment",
+    "value": "item aligneren",
     "value_type": "TEXT"
   },
   {
@@ -18311,7 +18311,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "nl",
-    "value": "Van dit object is enkel de metadata beschikbaar voor inzage. Je kan het wel altijd aanvragen bij de aanbieder.",
+    "value": "Van dit object zijn enkel de metadata beschikbaar voor inzage. Je kan het wel altijd aanvragen bij de aanbieder.",
     "value_type": "TEXT"
   },
   {
@@ -18320,7 +18320,7 @@
     "location": "modules/ie-objects/ie-objects",
     "key": "je-kan-dit-object-enkel-bekijken-tijdens-een-fysiek-bezoek-aan-de-bezoekersruimte",
     "language": "en",
-    "value": "Only the metadata of this item is accessible. You can always submit a request to view or listen to the item.",
+    "value": "Only the metadata of this item are accessible. You can always submit a request to view or listen to the item.",
     "value_type": "TEXT"
   },
   {
@@ -19175,7 +19175,7 @@
     "location": "modules/ie-objects/object-detail-page",
     "key": "download-selection",
     "language": "nl",
-    "value": "Download selection",
+    "value": "Selectie downloaden",
     "value_type": "TEXT"
   },
   {
@@ -23873,7 +23873,7 @@
     "location": "pages/beheer/instellingen/index",
     "key": "geen-maintainer-id-gevonden",
     "language": "nl",
-    "value": "Geen organisatie id gevonden",
+    "value": "Geen organisatie-ID gevonden",
     "value_type": "HTML"
   },
   {
@@ -23882,7 +23882,7 @@
     "location": "pages/beheer/instellingen/index",
     "key": "geen-maintainer-id-gevonden",
     "language": "en",
-    "value": "No organization id found",
+    "value": "No organisation-ID found",
     "value_type": "HTML"
   },
   {
@@ -24177,6 +24177,42 @@
     "app": "HET_ARCHIEF",
     "component": "FRONTEND",
     "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-external-link",
+    "language": "nl",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/deed.nl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-external-link",
+    "language": "en",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-internal-link",
+    "language": "nl",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/deed.nl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "public-domain-internal-link",
+    "language": "en",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
     "key": "copyright-undetermined",
     "language": "nl",
     "value": "Auteursrechtelijke bescherming niet bepaald",
@@ -24189,6 +24225,42 @@
     "key": "copyright-undetermined",
     "language": "en",
     "value": "Copyright undetermined",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-external-link",
+    "language": "nl",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/deed.nl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-external-link",
+    "language": "en",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-internal-link",
+    "language": "nl",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0/deed.nl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "HET_ARCHIEF",
+    "component": "FRONTEND",
+    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
+    "key": "copyright-undetermined-internal-link",
+    "language": "en",
+    "value": "https://creativecommons.org/publicdomain/mark/1.0",
     "value_type": "TEXT"
   },
   {
@@ -29320,24 +29392,6 @@
     "language": "en",
     "value": "Rights",
     "value_type": "HTML"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-rechten-naar-je-klembord",
-    "language": "nl",
-    "value": "Meer info over de rechten van dit object.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/components/object-detail-page-metadata/object-detail-page-metadata",
-    "key": "kopieer-de-rechten-naar-je-klembord",
-    "language": "en",
-    "value": "More information about the rights on this object.",
-    "value_type": "TEXT"
   },
   {
     "app": "HET_ARCHIEF",
@@ -37257,78 +37311,6 @@
     "key": "sluiten",
     "language": "en",
     "value": "Close",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "public-domain-external-link",
-    "language": "nl",
-    "value": "public-domain-external-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "public-domain-external-link",
-    "language": "en",
-    "value": "public-domain-external-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "public-domain-internal-link",
-    "language": "nl",
-    "value": "public-domain-internal-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "public-domain-internal-link",
-    "language": "en",
-    "value": "public-domain-internal-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "copyright-undetermined-external-link",
-    "language": "nl",
-    "value": "copyright-undetermined-external-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "copyright-undetermined-external-link",
-    "language": "en",
-    "value": "copyright-undetermined-external-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "copyright-undetermined-internal-link",
-    "language": "nl",
-    "value": "copyright-undetermined-internal-link",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "HET_ARCHIEF",
-    "component": "FRONTEND",
-    "location": "modules/ie-objects/utils/get-ie-object-rights-status",
-    "key": "copyright-undetermined-internal-link",
-    "language": "en",
-    "value": "copyright-undetermined-internal-link",
     "value_type": "TEXT"
   },
   {
