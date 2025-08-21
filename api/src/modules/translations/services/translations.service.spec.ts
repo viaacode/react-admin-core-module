@@ -1,13 +1,14 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Test, type TestingModule } from '@nestjs/testing';
 
+import { DataService } from '../../data';
 import { type UpdateResponse } from '../../shared/types/types';
-import { SiteVariablesService } from '../../site-variables';
 import { Component, Locale } from '../translations.types';
 
 import { TranslationsService } from './translations.service';
 
-const mockSiteVariablesService: Partial<Record<keyof SiteVariablesService, jest.SpyInstance>> = {
-	getSiteVariable: jest.fn(),
+const mockDataService = {
+	execute: jest.fn(),
 };
 
 const mockCacheManager: Partial<Record<'wrap', jest.SpyInstance>> = {
@@ -22,10 +23,13 @@ describe('TranslationsService', () => {
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
-				TranslationsService,
 				{
-					provide: SiteVariablesService,
-					useValue: mockSiteVariablesService,
+					provide: DataService,
+					useValue: mockDataService,
+				},
+				{
+					provide: CACHE_MANAGER,
+					useValue: mockCacheManager,
 				},
 			],
 		}).compile();
@@ -39,7 +43,6 @@ describe('TranslationsService', () => {
 
 	describe('getFrontendTranslations', () => {
 		it('throws an exception if no translations were set', async () => {
-			mockSiteVariablesService.getSiteVariable.mockResolvedValueOnce(undefined);
 			mockCacheManager.wrap.mockResolvedValueOnce(undefined);
 			let error;
 			try {
@@ -63,7 +66,7 @@ describe('TranslationsService', () => {
 			const mockData3 = {
 				key: 'BE-translation',
 			};
-			mockSiteVariablesService.getSiteVariable
+			mockDataService.execute
 				.mockResolvedValueOnce(mockData1)
 				.mockResolvedValueOnce(mockData2)
 				.mockResolvedValueOnce(mockData3);
@@ -80,7 +83,7 @@ describe('TranslationsService', () => {
 		});
 
 		it('returns nothing on empty translations', async () => {
-			mockSiteVariablesService.getSiteVariable.mockResolvedValue(undefined);
+			mockDataService.execute.mockResolvedValue(undefined);
 			const response = await translationsService.getTranslations();
 			expect(response).toEqual({});
 		});
@@ -91,7 +94,7 @@ describe('TranslationsService', () => {
 			const mockData: UpdateResponse = {
 				affectedRows: 1,
 			};
-			mockSiteVariablesService.updateSiteVariable.mockResolvedValueOnce(mockData);
+			mockDataService.execute.mockResolvedValueOnce(mockData);
 			const response = await translationsService.updateTranslation(
 				Component.FRONTEND,
 				'modules/admin/const/requests',
