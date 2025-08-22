@@ -30,6 +30,8 @@
   "homepage": "https://github.com/viaacode/react-admin-core-module#readme",
   "scripts": {
     "build-and-copy-to-client": "cd ui && npm run build-and-copy-to-client-hetarchief",
+    "build-and-copy-to-avo": "cd ui && npm run build && npm run copy-to-client-avo",
+    "build-and-copy-to-avo-proxy": "cd api && npm run build && npm run copy-to-proxy-avo",
     "bump": "bump-package-versions --part=patch --strategy=highest ./package.json ./ui/package.json ./api/package.json"
   },
   "devDependencies": {
