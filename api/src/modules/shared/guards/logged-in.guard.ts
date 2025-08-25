@@ -8,7 +8,7 @@ import { SessionHelper } from '../auth/session-helper';
 export class LoggedInGuard implements CanActivate {
 	canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
 		const request = context.switchToHttp().getRequest();
-		const user = SessionHelper.getUserInfo(request.session);
+		const user = SessionHelper.getUserInfo(request);
 		if (!(user as Avo.User.HetArchiefUser)?.id && !(user as Avo.User.User)?.uid) {
 			throw new UnauthorizedException('You must be logged in to use this endpoint');
 		}

@@ -2,18 +2,19 @@ import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
 
 import type { BlockPageOverviewProps } from '~modules/content-page/components/blocks';
 import { ContentItemStyle } from '~modules/content-page/components/blocks';
+import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options';
 import { GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-item-style-options';
 import { GET_PAGE_OVERVIEW_ORDER_OPTIONS } from '~modules/content-page/const/get-page-overview-order-options';
 import { GET_PAGE_OVERVIEW_TAB_STYLE_OPTIONS } from '~modules/content-page/const/get-page-overview-tab-style-options';
 import { tText } from '~shared/helpers/translation-functions';
-
-import type {
-	ContentBlockConfig,
-	DefaultContentBlockState,
-	PageOverviewBlockComponentStateFields,
+import {
+	Color,
+	type ContentBlockConfig,
+	ContentBlockEditor,
+	ContentBlockType,
+	type DefaultContentBlockState,
+	type PageOverviewBlockComponentStateFields,
 } from '../../../types/content-block.types';
-import { Color, ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-
 import {
 	BACKGROUND_COLOR_FIELD,
 	BLOCK_FIELD_DEFAULTS,
@@ -30,6 +31,7 @@ export const INITIAL_PAGE_OVERVIEW_COMPONENTS_STATE =
 		headerBackgroundColor: Color.Transparent,
 		contentType: 'FAQ_ITEM',
 		itemStyle: ContentItemStyle.NEWS_LIST,
+		itemAlignment: 'center',
 		showSectionTitle: true,
 		showTitle: true,
 		showDescription: true,
@@ -92,6 +94,21 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 						options: GET_PAGE_OVERVIEW_ITEM_STYLE_OPTIONS(),
 					},
 				},
+				itemAlignment: {
+					label: tText(
+						'modules/content-page/components/blocks/block-page-overview/block-page-overview___item-alignment'
+					),
+					editorType: ContentBlockEditor.Select,
+					editorProps: {
+						options: GET_ALIGN_OPTIONS(),
+					},
+					isVisible: (config: ContentBlockConfig) => {
+						return (
+							(config.components.state as BlockPageOverviewProps).itemStyle ===
+							ContentItemStyle.GRID
+						);
+					},
+				},
 				showSectionTitle: {
 					editorType: ContentBlockEditor.Checkbox,
 					editorProps: {
@@ -99,8 +116,12 @@ export const PAGE_OVERVIEW_BLOCK_CONFIG = (position = 0): ContentBlockConfig => 
 							'modules/content-page/components/blocks/block-page-overview/block-page-overview___toon-de-label-tussen-titels'
 						),
 					} as CheckboxProps,
-					isVisible: (config: ContentBlockConfig) =>
-						(config.components.state as BlockPageOverviewProps).itemStyle === ContentItemStyle.GRID,
+					isVisible: (config: ContentBlockConfig) => {
+						return (
+							(config.components.state as BlockPageOverviewProps).itemStyle ===
+							ContentItemStyle.GRID
+						);
+					},
 				},
 				showTitle: {
 					editorType: ContentBlockEditor.Checkbox,

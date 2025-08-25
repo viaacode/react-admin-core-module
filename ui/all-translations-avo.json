@@ -9343,6 +9343,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "nl",
+    "value": "Item alignment",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -16736,7 +16745,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "afbeelding-voor-de-embed-code",
     "language": "nl",
-    "value": "Afbeelding voor de embedlink - 630x380 groot",
+    "value": "Afbeelding voor de embedlink - 680x380 groot",
     "value_type": "TEXT"
   },
   {
@@ -30027,18 +30036,27 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
-    "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-niet-gevonden-kon-worden-in-avo-user-id-avo-user-id",
     "language": "nl",
-    "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (user id: {{avoUserId}}}).",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
-    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-niet-gevonden-kon-worden-in-avo-user-id-avo-user-id",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-avo",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (user id: {{avoUserId}}}).",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinked is aan deze gebruiker van idp type geen toegang meer heeft tot AVO",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
+    "language": "nl",
+    "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
     "value_type": "TEXT"
   },
   {

@@ -24,7 +24,6 @@ import {
 	MEDIA_PLAYER_BLOCK_CONFIG,
 	MEDIA_PLAYER_TITLE_TEXT_BUTTON_BLOCK_CONFIG,
 	OVERVIEW_NEWSPAPER_TITLES_BLOCK_CONFIG,
-	PAGE_OVERVIEW_BLOCK_CONFIG,
 	PROJECTS_SPOTLIGHT_BLOCK_CONFIG,
 	QUOTE_BLOCK_CONFIG,
 	RICH_TEXT_BLOCK_CONFIG,
@@ -36,6 +35,7 @@ import {
 	UITGEKLAARD_BLOCK_CONFIG,
 	USP_GRID_BLOCK_CONFIG,
 } from '~modules/content-page/components/blocks';
+import { PAGE_OVERVIEW_BLOCK_CONFIG } from '~modules/content-page/components/blocks/BlockPageOverview/BlockPageOverview.editorconfig';
 import type { ContentBlockConfig } from '../types/content-block.types';
 import { ContentBlockType } from '../types/content-block.types';
 
