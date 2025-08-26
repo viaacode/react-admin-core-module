@@ -26,6 +26,7 @@ interface ExportAllToCsvModalProps {
 	renderValue: (item: any, columnId: string) => string;
 	columns: { label: string; id: string }[];
 	exportFileName: string;
+	itemsPerRequest?: number;
 }
 
 export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = ({
@@ -39,6 +40,7 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 	renderValue,
 	columns,
 	exportFileName,
+	itemsPerRequest = ITEMS_PER_REQUEST,
 }) => {
 	const abortRef = React.useRef(false);
 
@@ -98,38 +100,55 @@ export const ExportAllToCsvModal: FunctionComponent<ExportAllToCsvModalProps> = 
 		[columns, renderValue]
 	);
 
-	/**
-	 * Fetch all items in a loop page by page and update the progress in between fetch calls
-	 */
-	const fetchItems = useCallback(async () => {
-		const totalItems = await fetchTotalItems();
-		setTotal(totalItems);
-		// biome-ignore lint/suspicious/noExplicitAny: todo
-		const downloadedItems: any[] = Array(totalItems).fill(null);
-		let downloadedItemsCount = 0;
-		await mapLimit(
-			times(Math.ceil(totalItems / ITEMS_PER_REQUEST)),
-			PARALLEL_REQUESTS,
-			async (offset) => {
-				// Retry the fetchMoreItems call until it succeeds
-				const newItems = await retryPromise(() =>
-					fetchMoreItems(offset * ITEMS_PER_REQUEST, ITEMS_PER_REQUEST)
-				);
-				downloadedItems.splice(offset * ITEMS_PER_REQUEST, newItems.length, ...newItems);
-				downloadedItemsCount += newItems.length;
-				setProcessedItems(downloadedItemsCount);
-			}
-		);
-		setProcessedItems(totalItems);
-		setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
-	}, [fetchMoreItems, fetchTotalItems, convertDownloadedItemsToCsvBlob]);
-
 	const resetModal = useCallback(() => {
 		setProcessedItems(0);
 		setTotal(null);
 		setPercentageConvertedToCsv(0);
 		setCsvBlob(null);
 	}, []);
+
+	/**
+	 * Fetch all items in a loop page by page and update the progress in between fetch calls
+	 */
+	const fetchItems = useCallback(async () => {
+		try {
+			const totalItems = await fetchTotalItems();
+			setTotal(totalItems);
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			const downloadedItems: any[] = Array(totalItems).fill(null);
+			let downloadedItemsCount = 0;
+			await mapLimit(
+				times(Math.ceil(totalItems / itemsPerRequest)),
+				PARALLEL_REQUESTS,
+				async (offset) => {
+					// Retry the fetchMoreItems call until it succeeds
+					const newItems = await retryPromise(
+						() => fetchMoreItems(offset * itemsPerRequest, itemsPerRequest),
+						{ retries: 3 }
+					);
+					downloadedItems.splice(offset * itemsPerRequest, newItems.length, ...newItems);
+					downloadedItemsCount += newItems.length;
+					setProcessedItems(downloadedItemsCount);
+				}
+			);
+			setProcessedItems(totalItems);
+			setCsvBlob(await convertDownloadedItemsToCsvBlob(downloadedItems));
+		} catch (_error) {
+			showToast({
+				title: tText('Het ophalen van de data voor de csv is mislukt'),
+				type: ToastType.ERROR,
+			});
+			resetModal();
+			onClose();
+		}
+	}, [
+		fetchTotalItems,
+		itemsPerRequest,
+		convertDownloadedItemsToCsvBlob,
+		fetchMoreItems,
+		resetModal,
+		onClose,
+	]);
 
 	/**
 	 * When the modal opens, start fetching all the items and convert them to csv format

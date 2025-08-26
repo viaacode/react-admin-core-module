@@ -6,7 +6,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import { AdminConfigManager } from '~core/config';
 import { ToastType } from '~core/config/config.types';
-import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import {
 	generateWhereObjectArchief,
 	generateWhereObjectAvo,
@@ -14,31 +13,29 @@ import {
 import { useGetProfiles } from '~modules/user/hooks/use-get-profiles';
 import { GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS } from '~modules/user/user.consts';
 import { UserService } from '~modules/user/user.service';
+import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { AddOrRemove } from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import AddOrRemoveLinkedElementsModal from '~shared/components/AddOrRemoveLinkedElementsModal/AddOrRemoveLinkedElementsModal';
 import type { CheckboxOption } from '~shared/components/CheckboxDropdownModal/CheckboxDropdownModal';
+import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 import { ErrorView } from '~shared/components/error';
+import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
 import { CustomError } from '~shared/helpers/custom-error';
 import { isHetArchief } from '~shared/helpers/is-hetarchief';
 import { setSelectedCheckboxes } from '~shared/helpers/set-selected-checkboxes';
 import { showToast } from '~shared/helpers/show-toast';
-
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { useGetIdps } from '~shared/hooks/use-get-idps';
 import { useBusinessCategories } from '~shared/hooks/useBusinessCategory';
 import { useCompaniesWithUsers } from '~shared/hooks/useCompanies';
 import { useEducationLevels } from '~shared/hooks/useEducationLevels';
 import { useSubjects } from '~shared/hooks/useSubjects';
-
 import { SettingsService } from '~shared/services/settings-service/settings.service';
-
-import type { FilterableColumn } from '~shared/components/FilterTable/FilterTable';
 import FilterTable, { getFilters } from '../../shared/components/FilterTable/FilterTable';
 import UserDeleteModal from '../components/UserDeleteModal';
 import type { UserOverviewTableCol, UserTableState } from '../user.types';
 import { UserBulkAction, USERS_PER_PAGE } from '../user.types';
-import { ExportAllToCsvModal } from '~shared/components/ExportAllToCsvModal/ExportAllToCsvModal';
 
 import './UserOverview.scss';
 import {
@@ -430,6 +427,7 @@ export const UserOverview: FC<UserOverviewProps> = ({ customFormatDate, commonUs
 					)}
 					isOpen={exportType !== null}
 					onClose={() => setExportType(null)}
+					itemsPerRequest={2000}
 					fetchingItemsLabel={tText(
 						'modules/user/views/user-overview___bezig-met-ophalen-van-gebruikers'
 					)}
