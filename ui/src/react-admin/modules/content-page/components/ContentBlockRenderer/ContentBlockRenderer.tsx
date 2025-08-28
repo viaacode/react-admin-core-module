@@ -21,9 +21,9 @@ import {
 
 import './ContentBlockRenderer.scss';
 import { AdminConfigManager } from '~core/config';
+import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
 import { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
-import { GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX } from '~modules/content-page/const/content-block-anchors.consts';
 
 interface ContentBlockPreviewProps {
 	contentBlockConfig: ContentBlockConfig;
@@ -119,6 +119,9 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 	}
 
 	const hasDarkBg = GET_DARK_BACKGROUND_COLOR_OPTIONS().includes(blockState.backgroundColor);
+	const anchor =
+		blockState?.anchor?.replaceAll(' ', '-') ||
+		GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id;
 
 	return (
 		<div
@@ -138,9 +141,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 						: blockState.backgroundColor,
 				...(blockState.headerBackgroundColor !== Color.Transparent ? { zIndex: 1 } : {}),
 			}}
-			data-anchor={
-				blockState.anchor || GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id
-			}
+			data-anchor={anchor}
 			ref={blockRef}
 			onClick={onClick}
 			onKeyUp={(evt: KeyboardEvent) => {
@@ -154,10 +155,7 @@ const ContentBlockRenderer: FunctionComponent<ContentBlockPreviewProps> = ({
 			 * to avoid overlapping a fixed header when we jump to this anchor
 			 * https://meemoo.atlassian.net/browse/AVO-3351
 			 */}
-			<div
-				className="c-content-block__anchor"
-				id={blockState.anchor || GENERATED_CONTENT_BLOCK_ANCHOR_PREFIX + contentBlockConfig.id}
-			></div>
+			<div className="c-content-block__anchor" id={anchor}></div>
 			<Spacer
 				className={clsx('c-content-block-preview', {
 					'c-content-block-preview--dark': hasDarkBg,
