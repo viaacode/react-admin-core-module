@@ -3,10 +3,22 @@ import type { TagInfo } from '@viaa/avo2-components';
 import { CheckboxGroup, FormGroup } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isEmpty, uniq } from 'lodash-es';
-import type { ChangeEvent, FunctionComponent } from 'react';
-import React, { useEffect } from 'react';
+import React, {
+	type ChangeEvent,
+	type FunctionComponent,
+	type MouseEvent,
+	useEffect,
+	useMemo,
+} from 'react';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
+
+import './UserGroupSelect.scss';
+import { ToastType } from '~core/config';
+import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const';
+import { showToast } from '~shared/helpers/show-toast';
+import { tText } from '~shared/helpers/translation-functions';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 export interface UserGroupSelectProps {
 	label: string | undefined;
@@ -37,17 +49,87 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		boolean,
 	];
 
+	const canDisabledLoggedInGroup = !disabledOptions.some(isSubUserGroup);
+	const allSubgroupIds = useMemo(() => getAllSubgroupIds(userGroupOptions), [userGroupOptions]);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: should only execute one time
 	useEffect(() => {
-		onChange(uniq([...values, ...checkedOptions]));
-	}, []);
+		const newValues = [...values, ...checkedOptions];
+
+		if (
+			newValues.some(isSubUserGroup) &&
+			!newValues.includes(SpecialPermissionGroups.loggedInUsers)
+		) {
+			// If there are subgroups selected but not the loggedInUsers, then we need to add this
+			newValues.push(SpecialPermissionGroups.loggedInUsers);
+		} else if (
+			!newValues.some(isSubUserGroup) &&
+			newValues.includes(SpecialPermissionGroups.loggedInUsers)
+		) {
+			// If the loggedInUsers are selected but no subgroups
+			newValues.push(...allSubgroupIds);
+		}
+
+		onChange(uniq(newValues));
+	}, [allSubgroupIds]);
 
 	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
 		const userGroup = evt.target.value;
-		if (values.includes(userGroup)) {
-			onChange(values.filter((value) => value !== userGroup));
+		const wasChecked = values.includes(userGroup);
+
+		// So we are adding this value
+		if (!wasChecked) {
+			const newValues = [...values, userGroup];
+
+			// We are adding the loggedInUsers, so adding all subgroups as well
+			if (userGroup === SpecialPermissionGroups.loggedInUsers) {
+				newValues.push(...allSubgroupIds);
+			} else if (isSubUserGroup(userGroup)) {
+				// We are adding a subgroup, so making sure we have the loggedInUsers as well
+				newValues.push(SpecialPermissionGroups.loggedInUsers);
+			}
+			onChange(uniq(newValues));
 		} else {
-			onChange([...values, userGroup]);
+			// We are removing the loggedInUsers
+			if (userGroup === SpecialPermissionGroups.loggedInUsers) {
+				// remove all subgroups as well when no subgroup is disabled
+				if (canDisabledLoggedInGroup) {
+					onChange(values.filter((value) => ![userGroup, ...allSubgroupIds].includes(value)));
+				}
+			} else if (isSubUserGroup(userGroup)) {
+				// So we are trying to remove a subgroup
+				const newValues = values.filter((value) => value !== userGroup);
+
+				// We still have other subgroups, so we can only remove this specific one
+				if (newValues.some((value) => isSubUserGroup(value))) {
+					onChange(newValues);
+				} else {
+					// No other subgroups are selected anymore, so we are remove the loggedInUsers as well
+					onChange(newValues.filter((value) => value !== SpecialPermissionGroups.loggedInUsers));
+				}
+			} else {
+				// removing the option
+				onChange(values.filter((value) => value !== userGroup));
+			}
+		}
+	};
+
+	const handleCheckboxClick = (evt: MouseEvent<HTMLInputElement>) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const userGroup = evt.target.value;
+		const wasChecked = values.includes(userGroup);
+
+		// In some cases we try to remove the loggedInUsers, but there is an option that is preventing the deselection of this
+		if (
+			userGroup === SpecialPermissionGroups.loggedInUsers &&
+			!canDisabledLoggedInGroup &&
+			wasChecked
+		) {
+			showToast({
+				description: tText('Je kan dit niet uitvinken daar een rol niet uitgevinkt kan worden'),
+				type: ToastType.INFO,
+			});
 		}
 	};
 
@@ -65,6 +147,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	if (isEmpty(userGroupOptions)) {
 		return null;
 	}
+
 	return (
 		<FormGroup
 			error={error}
@@ -82,6 +165,10 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 							checked={values.includes(String(userGroupOption.value))}
 							disabled={disabledOptions.includes(String(userGroupOption.value))}
 							onChange={handleCheckboxChanged}
+							onClick={handleCheckboxClick}
+							className={clsx('', {
+								'u-spacer-left-l': isSubUserGroup(userGroupOption.value),
+							})}
 						></Checkbox>
 					);
 				})}
