@@ -47,8 +47,8 @@ import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 interface ContentEditFormProps {
 	contentTypes: SelectOption<Avo.ContentPage.Type>[];
@@ -107,23 +107,23 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		[changeContentPageState]
 	);
 
-	useEffect(() => {
+	const changeContentPageType = useCallback(() => {
 		// Set fixed content width for specific page types
 		Object.keys(DEFAULT_PAGES_WIDTH).forEach((key) => {
 			if (
 				contentPageInfo.contentType &&
-				DEFAULT_PAGES_WIDTH[key as ContentPageWidth].includes(contentPageInfo.contentType) &&
-				contentPageInfo.contentWidth !== key
+				DEFAULT_PAGES_WIDTH[key as ContentPageWidth].includes(contentPageInfo.contentType)
 			) {
 				changeContentPageProp('contentWidth', key);
 			}
 		});
-	}, [contentPageInfo.contentType, contentPageInfo.contentWidth, changeContentPageProp]);
+	}, [changeContentPageProp, contentPageInfo.contentType]);
 
 	useEffect(() => {
 		if (!contentPageInfo.contentType) {
 			return;
 		}
+		changeContentPageType();
 		ContentPageService.fetchLabelsByContentType(contentPageInfo.contentType)
 			.then(setContentTypeLabels)
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -141,7 +141,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 					type: ToastType.ERROR,
 				});
 			});
-	}, [contentPageInfo.contentType]);
+	}, [contentPageInfo.contentType, changeContentPageType]);
 
 	// Computed
 	const contentTypeOptions = [
