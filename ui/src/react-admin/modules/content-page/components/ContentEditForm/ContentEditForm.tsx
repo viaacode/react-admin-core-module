@@ -15,8 +15,7 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import { PermissionName } from '@viaa/avo2-types';
 import { compact, isNil, noop } from 'lodash-es';
-import type { FunctionComponent } from 'react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { type FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { ToastType } from '~core/config/config.types';
 import {
@@ -47,6 +46,7 @@ import type { PickerItem } from '~shared/types/content-picker';
 
 import './ContentEditForm.scss';
 import { ContentPageEditFormDescription } from '~modules/content-page/components/ContentPageEditFormDescription/ContentPageEditFormDescription';
+import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
@@ -77,6 +77,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const { data: allUserGroups, isLoading: isLoadingAllUserGroups } = useGetUserGroups({
 		withPermissions: false,
 	});
+
 	const getParentPagePickerItem = (): PickerItem | null => {
 		if (contentPageInfo.nlParentPageId) {
 			const parentPageInfo = contentPageInfo.translatedPages.find(
@@ -188,6 +189,12 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 		value: contentPageInfo.owner?.id,
 	};
 	const lastUserGroup = allUserGroups?.at(-1);
+	const defaultOptionSelection = lastUserGroup
+		? contentPageInfo.id
+			? [lastUserGroup.id]
+			: [SpecialPermissionGroups.loggedInUsers, lastUserGroup.id]
+		: [];
+
 	return (
 		<Container mode="vertical" size="small">
 			<Container mode="horizontal">
@@ -463,17 +470,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 										onChange={(userGroupIds: string[]) =>
 											changeContentPageProp('userGroupIds', userGroupIds)
 										}
-										checkedOptions={
-											// Only set defaults if it's a new content page that is being created
-											// Otherwise we show the values without any default checked user groups
-											contentPageInfo.id
-												? [lastUserGroup.id]
-												: [
-														SpecialPermissionGroups.loggedOutUsers,
-														SpecialPermissionGroups.loggedInUsers,
-														lastUserGroup.id,
-													]
-										}
+										checkedOptions={defaultOptionSelection}
 										disabledOptions={[lastUserGroup.id]}
 										className="field-user-group-ids"
 									/>

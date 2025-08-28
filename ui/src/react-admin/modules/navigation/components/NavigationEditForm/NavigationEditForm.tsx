@@ -36,6 +36,7 @@ import { ToastType } from '~core/config';
 import { ContentPageService } from '~modules/content-page/services/content-page.service';
 import { CustomError } from '~modules/shared/helpers/custom-error';
 import { showToast } from '~modules/shared/helpers/show-toast';
+import { getAllSubgroupIds } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
@@ -164,6 +165,10 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 			setPermissionWarning(null);
 		}
 	}, [currentNavigationItem, checkMenuItemContentPagePermissionsMismatch]);
+
+	const defaultOptionSelection = currentNavigationItem?.id
+		? []
+		: [SpecialPermissionGroups.loggedInUsers];
 
 	return (
 		<Form className="m-menu-edit-form">
@@ -335,11 +340,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 									userGroupIds: userGroupIds,
 								})
 							}
-							checkedOptions={
-								currentNavigationItem?.id
-									? []
-									: [SpecialPermissionGroups.loggedOutUsers, SpecialPermissionGroups.loggedInUsers]
-							}
+							checkedOptions={defaultOptionSelection}
 						/>
 					)}
 				</Column>
