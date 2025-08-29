@@ -192,7 +192,11 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 	const defaultOptionSelection = lastUserGroup
 		? contentPageInfo.id
 			? [lastUserGroup.id]
-			: [SpecialPermissionGroups.loggedInUsers, lastUserGroup.id]
+			: [
+					SpecialPermissionGroups.loggedInUsers,
+					...getAllSubgroupIds(allUserGroups || []),
+					lastUserGroup.id,
+				]
 		: [];
 
 	return (

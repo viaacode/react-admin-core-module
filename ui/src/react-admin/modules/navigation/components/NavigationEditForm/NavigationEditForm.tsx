@@ -168,7 +168,7 @@ export const NavigationEditForm: FunctionComponent<NavigationEditFormProps> = ({
 
 	const defaultOptionSelection = currentNavigationItem?.id
 		? []
-		: [SpecialPermissionGroups.loggedInUsers];
+		: [SpecialPermissionGroups.loggedInUsers, ...getAllSubgroupIds(allUserGroups || [])];
 
 	return (
 		<Form className="m-menu-edit-form">
