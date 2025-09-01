@@ -23,11 +23,11 @@ export class SessionUserEntity {
 	}
 
 	public getId(): string {
-		return this.user.userId;
+		return this.user?.userId;
 	}
 
 	public getProfileId(): string {
-		return this.user.profileId;
+		return this.user?.profileId;
 	}
 
 	public getLanguage(): Locale | undefined {
@@ -35,19 +35,19 @@ export class SessionUserEntity {
 	}
 
 	public getFirstName(): string {
-		return this.user.firstName;
+		return this.user?.firstName;
 	}
 
 	public getLastName(): string {
-		return this.user.lastName;
+		return this.user?.lastName;
 	}
 
 	public getFullName(): string {
-		return this.user.fullName;
+		return this.user?.fullName;
 	}
 
 	public getMail(): string {
-		return this.user.email;
+		return this.user?.email;
 	}
 
 	/**
