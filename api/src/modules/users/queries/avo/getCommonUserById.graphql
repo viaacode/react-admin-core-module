@@ -75,7 +75,7 @@ query getCommonUserById($id: uuid!) {
 		temp_access {
 			from
 			until
-			current {
+			has_currently_access {
 				status
 			}
 		}

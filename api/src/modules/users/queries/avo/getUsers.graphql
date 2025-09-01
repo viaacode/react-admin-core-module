@@ -19,6 +19,15 @@ query getUsers(
 			date: max
 		}
 		profile_id
+		profile {
+			temp_access {
+				until
+				from
+				has_currently_access {
+					status
+				}
+			}
+		}
 		stamboek
 		acc_created_at
 		group_id
@@ -48,15 +57,6 @@ query getUsers(
 				label
 				scheme
 				broader
-			}
-		}
-		user {
-			temp_access {
-				until
-				from
-				current {
-					status
-				}
 			}
 		}
 	}

@@ -7,7 +7,6 @@ export const mockUserAvo: Avo.User.User = {
 	first_name: 'Bert',
 	last_name: 'Verhelst',
 	full_name: 'Bert Verhelst',
-	temp_access: null,
 	is_blocked: false,
 	profile: {
 		// id: '69ccef3b-751a-4be4-95bc-5ef365fbd504',
@@ -33,6 +32,7 @@ export const mockUserAvo: Avo.User.User = {
 		loms: [],
 		user: undefined,
 		userGroupIds: ['1'] as any,
+		temp_access: null,
 		permissions: [
 			PermissionName.SEARCH,
 			PermissionName.EDIT_ANY_CONTENT_PAGES,
