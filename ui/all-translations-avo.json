@@ -9365,7 +9365,7 @@
     "location": "app",
     "key": "je-hebt-geen-toegang-tot-de-embed-functionaliteit",
     "language": "nl",
-    "value": "Je hebt geen toegang tot de functionaliteit om audio of video te embedded in externe websites. Deze wordt (nog) niet uitgerold naar onze gebruikers.",
+    "value": "Je hebt geen toegang tot de functionaliteit om audio of video te embedden in externe websites. Deze wordt (nog) niet uitgerold naar onze gebruikers.",
     "value_type": "HTML"
   },
   {
@@ -9699,24 +9699,6 @@
     "key": "titel-is-verplicht",
     "language": "nl",
     "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/assignment",
-    "key": "de-titel-mag-maximum-110-karakters-lang-zijn",
-    "language": "nl",
-    "value": "De titel mag maximum 110 karakters lang zijn.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/assignment",
-    "key": "de-korte-beschrijving-mag-maximaal-300-karakters-lang-zijn",
-    "language": "nl",
-    "value": "De korte beschrijving mag maximaal 300 karakters bevatten.",
     "value_type": "TEXT"
   },
   {
