@@ -458,7 +458,13 @@ export class ContentPagesService {
 			const pageUserGroups = contentPage.userGroupIds.map((id) => String(id));
 			const userUserGroups = SessionHelper.getUserGroupIds(user?.userGroup?.id);
 			if (!intersection(pageUserGroups, userUserGroups).length) {
-				return null;
+				throw new BadRequestException({
+					message: 'The user has not the correct user group to see the content page',
+					additionalInfo: {
+						code: 'CONTENT_PAGE_WRONG_USER_GROUP',
+						contentPageUserGroups: pageUserGroups,
+					},
+				});
 			}
 		}
 
