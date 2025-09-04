@@ -79,7 +79,7 @@ export const generateWhereObjectAvo = (
 			...getMultiOptionFilters<Partial<UserTableState>>(
 				filters,
 				['tempAccess'],
-				['user.temp_access.current.status']
+				['profile.temp_access.has_currently_access.status']
 			)
 		);
 

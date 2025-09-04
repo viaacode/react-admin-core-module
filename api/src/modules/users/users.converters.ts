@@ -71,11 +71,11 @@ export function convertUserInfoToCommonUser(
 				blockedAt: undefined,
 				unblockedAt: undefined,
 				lastAccessAt: user.last_access_at,
-				tempAccess: user.temp_access
+				tempAccess: user.profile.temp_access
 					? {
-							from: user.temp_access.from ?? null,
-							until: user.temp_access.until ?? null,
-							current: user.temp_access.current,
+							from: user.profile.temp_access.from ?? null,
+							until: user.profile.temp_access.until ?? null,
+							has_currently_access: user.profile.temp_access.has_currently_access,
 						}
 					: null,
 				idps: Object.fromEntries(
@@ -127,11 +127,11 @@ export function convertUserInfoToCommonUser(
 				blockedAt: undefined,
 				unblockedAt: undefined,
 				lastAccessAt: profile.user.last_access_at,
-				tempAccess: profile.user.temp_access
+				tempAccess: profile.temp_access
 					? {
-							from: profile.user.temp_access.from ?? null,
-							until: profile.user.temp_access.until ?? null,
-							current: profile.user.temp_access.current,
+							from: profile.temp_access.from ?? null,
+							until: profile.temp_access.until ?? null,
+							has_currently_access: profile.temp_access.has_currently_access,
 						}
 					: null,
 				idps: Object.fromEntries(
@@ -204,11 +204,11 @@ export function convertUserInfoToCommonUser(
 				unblockedAt: user.unblocked_at?.date,
 				lastAccessAt: user.last_access_at,
 				language: Lookup_Languages_Enum.Nl,
-				tempAccess: user.user.temp_access
+				tempAccess: user.profile.temp_access
 					? {
-							from: user.user.temp_access.from ?? null,
-							until: user.user.temp_access.until ?? null,
-							current: user.user.temp_access.current,
+							from: user.profile.temp_access.from ?? null,
+							until: user.profile.temp_access.until ?? null,
+							has_currently_access: user.profile.temp_access.has_currently_access,
 						}
 					: null,
 				idps: Object.fromEntries(
@@ -328,7 +328,7 @@ export function convertUserInfoToCommonUser(
 					? {
 							from: user.temp_access.from ?? null,
 							until: user.temp_access.until ?? null,
-							current: user.temp_access.current,
+							has_currently_access: user.temp_access.has_currently_access,
 						}
 					: null,
 				idps: Object.fromEntries(

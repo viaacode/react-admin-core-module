@@ -1,4 +1,5 @@
 import { Checkbox } from '@meemoo/react-components';
+import { sortBy } from 'lodash-es';
 import React from 'react';
 import type { Column, UseSortByColumnOptions } from 'react-table';
 import type { PermissionData } from '~modules/permissions/permissions.types';
@@ -7,9 +8,8 @@ import type {
 	UserGroupWithPermissions,
 } from '~modules/user-group/types/user-group.types';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PermissionRow } from '../types/user-group.types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { sortBy } from 'lodash-es';
+import type { PermissionRow } from '../types/user-group.types';
 
 export const preferredUserGroupOrder: Record<string, number> = {
 	// Avo
@@ -46,6 +46,9 @@ export const getUserGroupTableColumns = (
 			Header: '',
 			accessor: 'label',
 			disableSortBy: true,
+			Cell: ({ row }: PermissionRow) => {
+				return <span title={row.original.description}>{row.original.label}</span>;
+			},
 		},
 		...sortBy(userGroups, (userGroup) => preferredUserGroupOrder[userGroup.label] || 0).map(
 			(group) => {
