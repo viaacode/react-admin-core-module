@@ -1,12 +1,19 @@
 import type { TagInfo } from '@viaa/avo2-components';
-import { Checkbox, CheckboxGroup, FormGroup } from '@viaa/avo2-components';
+import { CheckboxGroup, FormGroup } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import { isEmpty, uniq } from 'lodash-es';
-import React, { type FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import React, {
+	type ChangeEvent,
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+	useMemo,
+} from 'react';
 import { useUserGroupOptions } from '~modules/user-group/hooks/useUserGroupOptions';
 import type { UserGroup } from '~modules/user-group/types/user-group.types';
 
 import './UserGroupSelect.scss';
+import { Checkbox } from '@meemoo/react-components';
 import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
@@ -82,7 +89,8 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 		[allSubgroupsSelected, atLeastOneSubgroupSelected, values]
 	);
 
-	const handleCheckboxChanged = (userGroup: string) => {
+	const handleCheckboxChanged = (evt: ChangeEvent<HTMLInputElement>) => {
+		const userGroup = evt.target.value;
 		const wasChecked = values.includes(userGroup);
 
 		// So we are adding this value
@@ -150,13 +158,14 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 						<Checkbox
 							key={userGroupOption.value}
 							label={userGroupOption.label}
+							value={userGroupOption.value}
 							checked={
 								values.includes(String(userGroupOption.value)) ||
 								visuallyCheckLoggedInUsers(userGroupOption)
 							}
 							disabled={disabledOptions.includes(String(userGroupOption.value))}
-							onChange={() => handleCheckboxChanged(String(userGroupOption.value))}
-							indeterminate={visuallyCheckLoggedInUsers(userGroupOption)}
+							onChange={handleCheckboxChanged}
+							data-indeterminate={visuallyCheckLoggedInUsers(userGroupOption) || undefined}
 							className={clsx('', {
 								'u-spacer-left-l': isSubUserGroup(userGroupOption.value),
 							})}
