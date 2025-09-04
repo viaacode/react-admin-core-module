@@ -1,4 +1,6 @@
 import { Checkbox } from '@meemoo/react-components';
+import type { TagInfo } from '@viaa/avo2-components';
+import { compact, sortBy } from 'lodash-es';
 import React from 'react';
 import type { Column, UseSortByColumnOptions } from 'react-table';
 import type { PermissionData } from '~modules/permissions/permissions.types';
@@ -7,9 +9,8 @@ import type {
 	UserGroupWithPermissions,
 } from '~modules/user-group/types/user-group.types';
 import { tText } from '~shared/helpers/translation-functions';
-import type { PermissionRow } from '../types/user-group.types';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-import { sortBy } from 'lodash-es';
+import type { PermissionRow } from '../types/user-group.types';
 
 export const preferredUserGroupOrder: Record<string, number> = {
 	// Avo
@@ -73,6 +74,17 @@ export const getUserGroupTableColumns = (
 	];
 };
 
+export const isSubUserGroup = (userGroupOptionValue: string | number) =>
+	!GET_SPECIAL_USER_GROUPS_IDS().includes(String(userGroupOptionValue));
+
+export const getAllSubgroupIds = (userGroupOptions: (Partial<UserGroup> | TagInfo)[]) => {
+	return compact(
+		userGroupOptions.map((item) => {
+			return (item as UserGroup).id || (item as TagInfo).value?.toString();
+		})
+	).filter((item) => isSubUserGroup(item));
+};
+
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
 		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
@@ -83,3 +95,6 @@ export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 		id: SpecialPermissionGroups.loggedInUsers,
 	},
 ];
+
+export const GET_SPECIAL_USER_GROUPS_IDS: () => string[] = () =>
+	compact(GET_SPECIAL_USER_GROUPS().map((item) => item?.id));
