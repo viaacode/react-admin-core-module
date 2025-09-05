@@ -1,3 +1,5 @@
+import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo2-components';
+import { Button, Image } from '@viaa/avo2-components';
 import clsx from 'clsx';
 import type { FunctionComponent, ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -9,14 +11,11 @@ import type {
 	SimpleAlignOption,
 } from '~modules/content-page/types/content-block.types';
 import { Color } from '~modules/content-page/types/content-block.types';
-import type { DefaultComponentProps } from '~modules/shared/types/components';
-import { BlockHeading } from '../BlockHeading';
-import type { ButtonAction, ButtonType, IconName, SpacerOption } from '@viaa/avo2-components';
-import { Button, Image } from '@viaa/avo2-components';
-import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
-import { Icon } from '~shared/components/Icon';
 import type { ContentPageWidth } from '~modules/content-page/types/content-pages.types';
-import { isMobileWidth } from '~shared/helpers/media-query';
+import { generateSmartLink } from '~modules/shared/components/SmartLink/SmartLink';
+import type { DefaultComponentProps } from '~modules/shared/types/components';
+import { Icon } from '~shared/components/Icon';
+import { BlockHeading } from '../BlockHeading';
 
 import './BlockAvoImageTextBackground.scss';
 
@@ -107,18 +106,11 @@ export const BlockAvoImageTextBackground: FunctionComponent<BlockAvoImageTextBac
 
 	const renderHeadingTextAndButton = () => {
 		// During editing the block width isn't 100% of the page, so the visual font size seems too big
-		let fontSize =
+		const fontSize =
 			(FONT_SIZE_TO_VW[headingSize] * (blockWidth || window.innerWidth)) / window.innerWidth;
-		let padding = TEXT_PADDING_TO_VW[textPadding] || 0;
-		let lineHeightTitle = (fontSize + padding * 2) * 1.2;
-		let lineHeightText = padding * 2 * 1.3;
-
-		if (isMobileWidth()) {
-			fontSize = fontSize / 3;
-			padding = padding / 3;
-			lineHeightTitle = fontSize + padding * 2 * 1.5;
-			lineHeightText = (1.5 + padding * 2) * 1.3;
-		}
+		const padding = TEXT_PADDING_TO_VW[textPadding] || 0;
+		const lineHeightTitle = (fontSize + padding * 2) * 1.2;
+		const lineHeightText = padding * 2 * 1.3;
 
 		return (
 			<>
