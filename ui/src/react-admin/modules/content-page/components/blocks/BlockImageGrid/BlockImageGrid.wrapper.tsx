@@ -34,13 +34,14 @@ export const formatLookup: {
 	squareLarge: { imageWidth: '27.5rem', imageHeight: '27.5rem', itemWidth: '27.5rem' },
 	'4:3': { imageWidth: '40rem', imageHeight: '30rem', itemWidth: '40rem' },
 	'2:1': { imageWidth: '20rem', imageHeight: '10rem', itemWidth: '20rem' },
+	'16:9Small': { imageWidth: '30.7rem', imageHeight: '17.2rem', itemWidth: '30.7rem' },
 	'6:9': { imageWidth: '40rem', imageHeight: '22.5rem', itemWidth: '40rem' },
 	'400x150': { imageWidth: '40rem', imageHeight: '15rem', itemWidth: '40rem' },
 	'384x220': { imageWidth: '38.4rem', imageHeight: '22rem', itemWidth: '38.4rem' },
 };
 
 export const BlockImageGridWrapper: FunctionComponent<BlockImageGridWrapperProps> = ({
-	format = 'squareLarge',
+	format = '16:9Small',
 	...rest
 }) => {
 	return (

@@ -37,6 +37,7 @@ export type BlockGridFormatOption =
 	| '4:3'
 	| '2:1'
 	| '6:9'
+	| '16:9Small'
 	| '400x150'
 	| '384x220';
 
