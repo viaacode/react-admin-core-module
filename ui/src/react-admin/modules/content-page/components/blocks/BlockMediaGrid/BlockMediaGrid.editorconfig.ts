@@ -1,15 +1,17 @@
 import type { CheckboxProps, MultiRangeProps } from '@viaa/avo2-components';
+import type { Avo } from '@viaa/avo2-types';
+import { AdminConfigManager } from '~core/config';
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
-	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+	GET_COLOR_OPTIONS_EXTENDED_AVO,
 } from '~modules/content-page/const/get-color-options';
 import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
-import type { Avo } from '@viaa/avo2-types';
-import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
-import { isAvo } from '~shared/helpers/is-avo';
+import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
+import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
+import { isAvo } from '~shared/helpers/is-avo';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
 import type {
@@ -18,17 +20,13 @@ import type {
 	MediaGridBlockState,
 } from '../../../types/content-block.types';
 import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
-
 import {
-	BACKGROUND_COLOR_FIELD,
+	BACKGROUND_COLOR_EXTENDED_FIELD,
 	BLOCK_FIELD_DEFAULTS,
 	BLOCK_STATE_DEFAULTS,
 	FOREGROUND_COLOR_FIELD,
 	TEXT_FIELD,
 } from '../defaults';
-
-import { AdminConfigManager } from '~core/config';
-import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
 
 export const INITIAL_MEDIA_GRID_COMPONENTS_STATE = (): MediaGridBlockComponentState[] => [{}];
 
@@ -215,6 +213,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 			ctaTitleColor: FOREGROUND_COLOR_FIELD(
 				tText('admin/content-block/helpers/generators/media-grid___cta-titel-kleur')
 			),
+			ctaTitleBackgroundColor: BACKGROUND_COLOR_EXTENDED_FIELD(
+				tText('CTA title: Achtergrondkleur')
+			),
 			ctaTitleSize: {
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel-grootte'),
 				editorType: ContentBlockEditor.Select,
@@ -258,9 +259,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-knop-actie'),
 				editorType: ContentBlockEditor.ContentPicker,
 			},
-			ctaBackgroundColor: BACKGROUND_COLOR_FIELD(
+			ctaBackgroundColor: BACKGROUND_COLOR_EXTENDED_FIELD(
 				tText('admin/content-block/helpers/generators/media-grid___cta-achtergrond-kleur'),
-				isAvo() ? GET_BACKGROUND_COLOR_OPTIONS_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
+				isAvo() ? GET_COLOR_OPTIONS_EXTENDED_AVO()[1] : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[1]
 			),
 			ctaBackgroundImage: {
 				label: tText(

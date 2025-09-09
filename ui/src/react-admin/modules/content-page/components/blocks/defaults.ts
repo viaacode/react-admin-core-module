@@ -3,6 +3,7 @@ import { GET_ALIGN_OPTIONS } from '~modules/content-page/const/get-align-options
 import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_BACKGROUND_COLOR_OPTIONS_AVO,
+	GET_COLOR_OPTIONS_EXTENDED_AVO,
 	GET_FOREGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_FOREGROUND_COLOR_OPTIONS_AVO,
 } from '~modules/content-page/const/get-color-options';
@@ -95,6 +96,21 @@ export const BACKGROUND_COLOR_FIELD = (
 		defaultValue:
 			defaultValue || isAvo()
 				? GET_BACKGROUND_COLOR_OPTIONS_AVO()[0]
+				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
+	},
+});
+
+export const BACKGROUND_COLOR_EXTENDED_FIELD = (
+	label: string,
+	defaultValue?: SelectOption<Color | GradientColor | CustomBackground>
+): ContentBlockField => ({
+	label,
+	editorType: ContentBlockEditor.ColorSelect,
+	editorProps: {
+		options: isAvo() ? GET_COLOR_OPTIONS_EXTENDED_AVO() : GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF(),
+		defaultValue:
+			defaultValue || isAvo()
+				? GET_COLOR_OPTIONS_EXTENDED_AVO()[0]
 				: GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF()[0],
 	},
 });

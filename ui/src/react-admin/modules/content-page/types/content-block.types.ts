@@ -386,6 +386,7 @@ export interface MediaGridBlockState extends DefaultContentBlockState {
 	ctaTitle?: string;
 	ctaTitleColor?: string;
 	ctaTitleSize?: HeadingType;
+	ctaTitleBackgroundColor?: string;
 	ctaContent?: string;
 	ctaContentColor?: string;
 	ctaButtonLabel?: string;
