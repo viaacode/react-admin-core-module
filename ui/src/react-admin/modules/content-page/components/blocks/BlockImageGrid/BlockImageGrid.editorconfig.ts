@@ -39,7 +39,7 @@ export const INITIAL_IMAGE_GRID_BLOCK_STATE = (): BlockImageGridWrapperProps &
 			},
 		}),
 		elements: [] as GridItem[],
-		format: 'squareLarge',
+		format: '16:9Small',
 		fill: 'cover',
 		textAlign: 'center',
 	};

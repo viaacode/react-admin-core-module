@@ -9,6 +9,18 @@
     display: block;
   }
 
+	&.c-block-grid--16-9-small{
+		$block-margin: 1.2rem;
+
+		margin-left: -$block-margin;
+		margin-right: -$block-margin;
+
+		.c-block-grid__item {
+			// Because we need to overwrite the default settings for all other grids
+			margin: $block-margin !important;
+		}
+	}
+
   .c-block-grid__item {
     display: flex;
     flex-direction: column;
