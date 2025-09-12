@@ -4,12 +4,7 @@ import { OrganisationService } from '~shared/services/organization-service/organ
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetMaintainersByContent = (
-	contentItemType:
-		| ContentPickerType.ITEM
-		| ContentPickerType.COLLECTION
-		| ContentPickerType.BUNDLE
-		| ContentPickerType.ASSIGNMENT
-		| undefined,
+	contentItemType: ContentPickerType | undefined | null,
 	contentItemId: string | undefined,
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
@@ -19,9 +14,18 @@ export const useGetMaintainersByContent = (
 	return useQuery<{ id: string; name: string; logo: string | null; website: string | null }[]>(
 		[QUERY_KEYS.GET_MAINTAINERS_BY_CONTENT, contentItemType, contentItemId],
 		() => {
-			if (!contentItemType || !contentItemId || contentItemType === ContentPickerType.BUNDLE) {
+			if (!contentItemType || !contentItemId) {
 				return [];
 			}
+
+			if (
+				contentItemType !== ContentPickerType.ITEM &&
+				contentItemType !== ContentPickerType.COLLECTION &&
+				contentItemType !== ContentPickerType.ASSIGNMENT
+			) {
+				return [];
+			}
+
 			return OrganisationService.getMaintainersByContentItem(contentItemType, contentItemId);
 		},
 		{

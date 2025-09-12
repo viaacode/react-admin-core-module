@@ -15,12 +15,7 @@ export interface MaintainerSelectProps {
 	value: string;
 	required: boolean;
 	onChange: (selectedMaintainerId: string | null) => void;
-	contentItemType:
-		| ContentPickerType.ITEM
-		| ContentPickerType.COLLECTION
-		| ContentPickerType.BUNDLE
-		| ContentPickerType.ASSIGNMENT
-		| null; // Limit maintainer options based on the selected item, collection or assignment
+	contentItemType: ContentPickerType | null; // Limit maintainer options based on the selected item, collection or assignment
 	contentItemId: string | null; // Limit maintainer options based on the selected item, collection or assignment
 	extraSelectOptions: { label: string; value: string }[];
 }
@@ -40,14 +35,7 @@ export const MaintainerSelect: FunctionComponent<MaintainerSelectProps> = ({
 		data: maintainers,
 		isFetching,
 		refetch,
-	} = useGetMaintainersByContent(
-		contentItemType as
-			| ContentPickerType.ITEM
-			| ContentPickerType.COLLECTION
-			| ContentPickerType.BUNDLE
-			| ContentPickerType.ASSIGNMENT,
-		contentItemId as string
-	);
+	} = useGetMaintainersByContent(contentItemType, contentItemId as string);
 	const maintainerOptions = [
 		...(extraSelectOptions || []),
 		...(maintainers || []).map((maintainer) => ({
