@@ -65,6 +65,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					allowedTypes: [
 						'ITEM',
+						'ITEM_WITH_CUE_POINTS',
 						'COLLECTION',
 						'BUNDLE',
 						'ASSIGNMENT',
@@ -227,6 +228,13 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'admin/content-block/helpers/generators/media-grid___media-items-openen-in-een-popup'
 					),
 				} as CheckboxProps,
+				note: tHtml(
+					'Let op! Je hebt geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.'
+				),
+				isNoteVisible: (entireConfig) =>
+					(entireConfig.components.state as MediaGridBlockComponentState[]).some(
+						(component) => component.mediaItem?.type === 'ITEM_WITH_CUE_POINTS'
+					),
 			},
 			ctaTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel'),

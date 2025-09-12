@@ -34,6 +34,7 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, s
 	[ContentPickerType.INTERNAL_LINK]: tText('admin/content/content___statisch'),
 	[ContentPickerType.COLLECTION]: tText('admin/content/content___collecties'),
 	[ContentPickerType.ITEM]: tText('admin/content/content___items'),
+	[ContentPickerType.ITEM_WITH_CUE_POINTS]: tText('Geknipte fragmenten'),
 	[ContentPickerType.BUNDLE]: tText('admin/content/content___bundels'),
 	[ContentPickerType.ASSIGNMENT]: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___opdrachten'
@@ -120,6 +121,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: ContentPickerType.ITEM,
 			label: labels[ContentPickerType.ITEM],
+			disabled: false,
+			fetch: retrieveItems,
+			picker: 'SELECT',
+		},
+		{
+			value: ContentPickerType.ITEM_WITH_CUE_POINTS,
+			label: labels[ContentPickerType.ITEM_WITH_CUE_POINTS],
 			disabled: false,
 			fetch: retrieveItems,
 			picker: 'SELECT',

@@ -157,7 +157,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return renderLink(collectionUrl, resolvedTarget);
 				}
 
-				case 'ITEM': {
+				case 'ITEM':
+				case 'ITEM_WITH_CUE_POINTS': {
 					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 						id: value,
 					});

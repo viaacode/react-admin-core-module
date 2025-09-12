@@ -192,6 +192,7 @@ export interface ContentBlockField {
 	editorProps?: any;
 	fields?: Record<string, ContentBlockField>; // Used for fieldGroups
 	note?: ReactNode;
+	isNoteVisible?: (config: ContentBlockConfig) => boolean;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	validator?: (value: any) => string[];
 	isVisible?: (config: ContentBlockConfig) => boolean;

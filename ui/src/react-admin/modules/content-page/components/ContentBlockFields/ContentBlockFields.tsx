@@ -40,7 +40,7 @@ const ContentBlockFields: FunctionComponent<ContentBlockFieldProps> = ({
 	handleChange,
 }) => {
 	// Generate field id
-	const { index } = block;
+	const { index, config } = block;
 	const fieldId = createKey('editor', index, formGroupIndex, stateIndex);
 
 	// Generate fields
@@ -53,6 +53,7 @@ const ContentBlockFields: FunctionComponent<ContentBlockFieldProps> = ({
 			state={state}
 			type={type}
 			handleChange={handleChange}
+			config={config}
 		/>
 	);
 };
