@@ -381,6 +381,7 @@ export interface MediaGridBlockComponentState {
 
 export interface MediaGridBlockState extends DefaultContentBlockState {
 	title?: string;
+	titleType?: HeadingTypeOption;
 	buttonLabel?: string;
 	buttonAction?: ButtonAction;
 	ctaTitle?: string;

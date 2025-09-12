@@ -5,7 +5,10 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_COLOR_OPTIONS_EXTENDED_AVO,
 } from '~modules/content-page/const/get-color-options';
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import {
+	GET_FULL_HEADING_TYPE_OPTIONS,
+	GET_HEADING_TYPE_OPTIONS,
+} from '~modules/content-page/const/get-heading-type-options';
 import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
 
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
@@ -37,6 +40,7 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 			bottom: 'bottom-small',
 		},
 	}),
+	titleType: 'h2',
 	ctaTitle: '',
 	ctaContent: '',
 	ctaButtonLabel: '',
@@ -154,6 +158,13 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
+			titleType: {
+				label: tText('Stijl'),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_HEADING_TYPE_OPTIONS(),
+				},
+			},
 			buttonLabel: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/media-grid___algemene-knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
