@@ -64,9 +64,21 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'COLLECTION',
 						'BUNDLE',
 						'ASSIGNMENT',
+						'CONTENT_PAGE_NEWS_ITEM',
+						'CONTENT_PAGE_PAGE',
+						'CONTENT_PAGE_PROJECT',
+						'CONTENT_PAGE_OVERVIEW',
+						'CONTENT_PAGE_DOMAIN_DETAIL',
+						'CONTENT_PAGE_EVENT_DETAIL',
+						'CONTENT_PAGE_SCREENCAST',
 					] as Avo.Core.ContentPickerType[],
 				},
 			},
+			mediaItemLabel: TEXT_FIELD(undefined, {
+				label: tText('Alternatieve titel'),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
+			}),
 			copyrightImage: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___afbeelding'

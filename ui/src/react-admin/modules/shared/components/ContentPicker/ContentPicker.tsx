@@ -76,7 +76,11 @@ export const ContentPicker: FunctionComponent<ContentPickerProps> = ({
 				if (!selectedType || !selectedType.fetch) {
 					return []; // Search query and external link don't have a fetch function
 				}
-				let items: PickerItem[] = await selectedType.fetch(keyword, 20);
+				let items: PickerItem[] = await selectedType.fetch(
+					keyword,
+					20,
+					selectedType.value as Avo.Core.ContentPickerType
+				);
 
 				if (!hasAppliedInitialItem && value) {
 					items = [
