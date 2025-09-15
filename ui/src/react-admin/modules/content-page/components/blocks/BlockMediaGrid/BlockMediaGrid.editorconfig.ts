@@ -10,19 +10,20 @@ import {
 	GET_HEADING_TYPE_OPTIONS,
 } from '~modules/content-page/const/get-heading-type-options';
 import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
-
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
-import type {
-	ContentBlockConfig,
-	MediaGridBlockComponentState,
-	MediaGridBlockState,
+import {
+	type ContentBlockConfig,
+	ContentBlockEditor,
+	type ContentBlockField,
+	ContentBlockType,
+	type MediaGridBlockComponentState,
+	type MediaGridBlockState,
 } from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import {
 	BACKGROUND_COLOR_EXTENDED_FIELD,
 	BLOCK_FIELD_DEFAULTS,
@@ -48,6 +49,12 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 	searchQuery: { type: 'SEARCH_QUERY', value: '' },
 	searchQueryLimit: '8',
 });
+
+const cuePointsIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (
+		(formGroupState as MediaGridBlockComponentState).mediaItem?.type === 'ITEM_WITH_CUE_POINTS'
+	);
+};
 
 export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
@@ -79,6 +86,22 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					] as Avo.Core.ContentPickerType[],
 				},
 			},
+			startCuePoint: TEXT_FIELD(tText('Startknippunt is verplicht'), {
+				label: tText('Startknippunt (seconden)'),
+				editorType: ContentBlockEditor.TextInput,
+				editorProps: {
+					type: 'number',
+				},
+				isVisible: cuePointsIsVisible,
+			}),
+			endCuePoint: TEXT_FIELD(tText('Eindknippunt is verplicht'), {
+				label: tText('Eindknippunt (seconden)'),
+				editorType: ContentBlockEditor.TextInput,
+				editorProps: {
+					type: 'number',
+				},
+				isVisible: cuePointsIsVisible,
+			}),
 			mediaItemLabel: TEXT_FIELD(undefined, {
 				label: tText('Alternatieve titel'),
 				editorType: ContentBlockEditor.TextInput,

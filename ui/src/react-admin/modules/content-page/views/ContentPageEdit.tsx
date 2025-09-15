@@ -46,9 +46,9 @@ import type {
 } from '~modules/content-page/types/content-pages.types';
 import { ContentEditActionType, PageType } from '~modules/content-page/types/content-pages.types';
 import { Locale } from '~modules/translations/translations.core.types';
-import { Icon } from '~shared/components/Icon';
 import ConfirmModal from '~shared/components/ConfirmModal/ConfirmModal';
 import { ErrorView } from '~shared/components/error';
+import { Icon } from '~shared/components/Icon';
 
 import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
@@ -413,10 +413,16 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 
 				newErrors = validateContentBlockConfig(
 					newErrors,
+					config,
 					config.components.fields as Record<string, ContentBlockField>, // TODO fix this type to Record<string, ContentBlockField | ContentBlockFieldGroup>
 					config.components.state
 				);
-				newErrors = validateContentBlockConfig(newErrors, config.block.fields, config.block.state);
+				newErrors = validateContentBlockConfig(
+					newErrors,
+					config,
+					config.block.fields,
+					config.block.state
+				);
 
 				if (blockHasErrors(newErrors)) {
 					changeContentPageState({

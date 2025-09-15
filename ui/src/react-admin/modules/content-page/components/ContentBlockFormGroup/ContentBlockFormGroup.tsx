@@ -53,7 +53,8 @@ const ContentBlockFormGroup: FunctionComponent<ContentBlockFormGroupProps> = ({
 			}
 
 			const field = formGroup.fields[key] as ContentBlockField; // TODO fix type to ContentBlockField | ContentBlockFieldGroup
-			if (field.isVisible && !field.isVisible?.(config)) {
+
+			if (field.isVisible && !field.isVisible(config, formGroupState)) {
 				return null;
 			}
 

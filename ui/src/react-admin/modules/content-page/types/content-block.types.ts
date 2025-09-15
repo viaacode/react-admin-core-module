@@ -195,7 +195,10 @@ export interface ContentBlockField {
 	isNoteVisible?: (config: ContentBlockConfig) => boolean;
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	validator?: (value: any) => string[];
-	isVisible?: (config: ContentBlockConfig) => boolean;
+	isVisible?: (
+		config: ContentBlockConfig,
+		formGroupState: ContentBlockComponentState | ContentBlockState
+	) => boolean;
 	repeat?: {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		defaultState: any;
