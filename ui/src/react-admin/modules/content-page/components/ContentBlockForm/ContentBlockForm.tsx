@@ -90,9 +90,12 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		value: any,
 		stateIndex?: number
 	) => {
+		const field = config[formGroupType].fields[key] as ContentBlockField;
 		const updateObject = {
+			...Object.fromEntries((field.fieldsToResetOnChange || []).map((key) => [key, null])),
 			[key]: value,
 		};
+
 		const state = formGroupType === 'block' ? block.state : components.state;
 		const stateUpdate = isArray(state)
 			? state.map((currentState, index) => {
@@ -105,8 +108,6 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 
 		const stateToCheckVisibility =
 			isArray(stateUpdate) && isNumber(stateIndex) ? stateUpdate[stateIndex] : stateUpdate;
-
-		const field = config[formGroupType].fields[key] as ContentBlockField;
 		if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
 			handleValidation(field, key, value, stateIndex);
 		}

@@ -23,6 +23,7 @@ export const useGetStillsFromContentItem = (
 
 			if (
 				contentItemType !== ContentPickerType.ITEM &&
+				contentItemType !== ContentPickerType.ITEM_WITH_CUE_POINTS &&
 				contentItemType !== ContentPickerType.COLLECTION &&
 				contentItemType !== ContentPickerType.ASSIGNMENT
 			) {

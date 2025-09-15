@@ -85,6 +85,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'CONTENT_PAGE_SCREENCAST',
 					] as Avo.Core.ContentPickerType[],
 				},
+				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
 			startCuePoint: TEXT_FIELD(tText('Startknippunt is verplicht'), {
 				label: tText('Startknippunt (seconden)'),

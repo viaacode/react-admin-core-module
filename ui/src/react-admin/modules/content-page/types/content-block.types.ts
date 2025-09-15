@@ -199,6 +199,7 @@ export interface ContentBlockField {
 		config: ContentBlockConfig,
 		formGroupState: ContentBlockComponentState | ContentBlockState
 	) => boolean;
+	fieldsToResetOnChange?: string[];
 	repeat?: {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		defaultState: any;
