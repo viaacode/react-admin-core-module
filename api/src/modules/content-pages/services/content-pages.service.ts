@@ -459,7 +459,8 @@ export class ContentPagesService {
 			const userUserGroups = SessionHelper.getUserGroupIds(user?.userGroup?.id);
 			if (!intersection(pageUserGroups, userUserGroups).length) {
 				throw new BadRequestException({
-					message: 'The user does not have the correct user group to see this content page',
+					message:
+						'The user does not have the correct user group to see this content page',
 					additionalInfo: {
 						code: 'CONTENT_PAGE_WRONG_USER_GROUP',
 						contentPageUserGroups: pageUserGroups,
@@ -759,24 +760,34 @@ export class ContentPagesService {
 		);
 	}
 
-	public async getPublicContentItemsByTitle(
-		title: string,
+	public async getPublicContentItemsByTitleOrContentType(
+		title?: string,
+		contentType?: string,
 		limit?: number
 	): Promise<
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
 	> {
+		const whereClause = {
+			is_public: { _eq: true },
+			is_deleted: { _eq: false },
+		};
+
+		if (title) {
+			whereClause['title'] = { _ilike: `%${title}%` };
+		}
+
+		if (contentType) {
+			whereClause['content_type'] = { _eq: contentType };
+		}
+
 		const response = await this.dataService.execute<
 			ContentPageQueryTypes['GetPublicContentPagesByTitleQuery'],
 			ContentPageQueryTypes['GetPublicContentPagesByTitleQueryVariables']
 		>(CONTENT_PAGE_QUERIES[getDatabaseType()].GetPublicContentPagesByTitleDocument, {
 			limit: limit || null,
 			orderBy: { title: Order_By.Asc },
-			where: {
-				title: { _ilike: `%${title}%` },
-				is_public: { _eq: true },
-				is_deleted: { _eq: false },
-			},
+			where: whereClause,
 		});
 
 		return (
@@ -1312,7 +1323,9 @@ export class ContentPagesService {
 		existingTitle: string
 	): Promise<string> => {
 		const titleWithoutCopy = existingTitle.replace(copyRegex, '');
-		const contentPages = await this.getPublicContentItemsByTitle(`%${titleWithoutCopy}`);
+		const contentPages = await this.getPublicContentItemsByTitleOrContentType(
+			`%${titleWithoutCopy}`
+		);
 		const titles = (contentPages || []).map((contentPage) => contentPage.title);
 
 		let index = 0;

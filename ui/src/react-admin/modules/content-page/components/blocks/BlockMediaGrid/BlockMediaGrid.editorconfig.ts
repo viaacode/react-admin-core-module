@@ -5,21 +5,25 @@ import {
 	GET_BACKGROUND_COLOR_OPTIONS_ARCHIEF,
 	GET_COLOR_OPTIONS_EXTENDED_AVO,
 } from '~modules/content-page/const/get-color-options';
-import { GET_FULL_HEADING_TYPE_OPTIONS } from '~modules/content-page/const/get-heading-type-options';
+import {
+	GET_FULL_HEADING_TYPE_OPTIONS,
+	GET_HEADING_TYPE_OPTIONS,
+} from '~modules/content-page/const/get-heading-type-options';
 import { parseSearchQuery } from '~modules/shared/components/ContentPicker/helpers/parse-picker';
-
 import type { FileUploadProps } from '~shared/components/FileUpload/FileUpload';
 import type { MaintainerSelectProps } from '~shared/components/MaintainerSelect/MaintainerSelect';
 import { GET_ADMIN_ICON_OPTIONS } from '~shared/consts/icons.consts';
 import { isAvo } from '~shared/helpers/is-avo';
 import { tHtml, tText } from '~shared/helpers/translation-functions';
 import { AVO } from '~shared/types';
-import type {
-	ContentBlockConfig,
-	MediaGridBlockComponentState,
-	MediaGridBlockState,
+import {
+	type ContentBlockConfig,
+	ContentBlockEditor,
+	type ContentBlockField,
+	ContentBlockType,
+	type MediaGridBlockComponentState,
+	type MediaGridBlockState,
 } from '../../../types/content-block.types';
-import { ContentBlockEditor, ContentBlockType } from '../../../types/content-block.types';
 import {
 	BACKGROUND_COLOR_EXTENDED_FIELD,
 	BLOCK_FIELD_DEFAULTS,
@@ -37,6 +41,7 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 			bottom: 'bottom-small',
 		},
 	}),
+	titleType: 'h2',
 	ctaTitle: '',
 	ctaContent: '',
 	ctaButtonLabel: '',
@@ -44,6 +49,12 @@ export const INITIAL_MEDIA_GRID_BLOCK_STATE = (): MediaGridBlockState => ({
 	searchQuery: { type: 'SEARCH_QUERY', value: '' },
 	searchQueryLimit: '8',
 });
+
+const cuePointsIsVisible: ContentBlockField['isVisible'] = (_config, formGroupState) => {
+	return (
+		(formGroupState as MediaGridBlockComponentState).mediaItem?.type === 'ITEM_WITH_CUE_POINTS'
+	);
+};
 
 export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 	position,
@@ -61,12 +72,42 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorProps: {
 					allowedTypes: [
 						'ITEM',
+						'ITEM_WITH_CUE_POINTS',
 						'COLLECTION',
 						'BUNDLE',
 						'ASSIGNMENT',
+						'CONTENT_PAGE_NEWS_ITEM',
+						'CONTENT_PAGE_PAGE',
+						'CONTENT_PAGE_PROJECT',
+						'CONTENT_PAGE_OVERVIEW',
+						'CONTENT_PAGE_DOMAIN_DETAIL',
+						'CONTENT_PAGE_EVENT_DETAIL',
+						'CONTENT_PAGE_SCREENCAST',
 					] as Avo.Core.ContentPickerType[],
 				},
+				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
+			startCuePoint: TEXT_FIELD(tText('Startknippunt is verplicht'), {
+				label: tText('Startknippunt (seconden)'),
+				editorType: ContentBlockEditor.TextInput,
+				editorProps: {
+					type: 'number',
+				},
+				isVisible: cuePointsIsVisible,
+			}),
+			endCuePoint: TEXT_FIELD(tText('Eindknippunt is verplicht'), {
+				label: tText('Eindknippunt (seconden)'),
+				editorType: ContentBlockEditor.TextInput,
+				editorProps: {
+					type: 'number',
+				},
+				isVisible: cuePointsIsVisible,
+			}),
+			mediaItemLabel: TEXT_FIELD(undefined, {
+				label: tText('Alternatieve titel'),
+				editorType: ContentBlockEditor.TextInput,
+				validator: undefined,
+			}),
 			copyrightImage: {
 				label: tText(
 					'react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid___afbeelding'
@@ -142,6 +183,13 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
+			titleType: {
+				label: tText('Stijl'),
+				editorType: ContentBlockEditor.Select,
+				editorProps: {
+					options: GET_HEADING_TYPE_OPTIONS(),
+				},
+			},
 			buttonLabel: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/media-grid___algemene-knop-tekst'),
 				editorType: ContentBlockEditor.TextInput,
@@ -204,6 +252,13 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 						'admin/content-block/helpers/generators/media-grid___media-items-openen-in-een-popup'
 					),
 				} as CheckboxProps,
+				note: tHtml(
+					'Let op! Je hebt geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.'
+				),
+				isNoteVisible: (entireConfig) =>
+					(entireConfig.components.state as MediaGridBlockComponentState[]).some(
+						(component) => component.mediaItem?.type === 'ITEM_WITH_CUE_POINTS'
+					),
 			},
 			ctaTitle: TEXT_FIELD(undefined, {
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel'),

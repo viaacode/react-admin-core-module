@@ -139,6 +139,13 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 			switch (type as Avo.Core.ContentPickerType) {
 				case 'INTERNAL_LINK':
 				case 'CONTENT_PAGE':
+				case 'CONTENT_PAGE_NEWS_ITEM':
+				case 'CONTENT_PAGE_PAGE':
+				case 'CONTENT_PAGE_PROJECT':
+				case 'CONTENT_PAGE_OVERVIEW':
+				case 'CONTENT_PAGE_DOMAIN_DETAIL':
+				case 'CONTENT_PAGE_EVENT_DETAIL':
+				case 'CONTENT_PAGE_SCREENCAST':
 				case 'PROJECTS': {
 					return renderLink(String(value), resolvedTarget);
 				}
@@ -150,7 +157,8 @@ export const SmartLink: FunctionComponent<SmartLinkProps> = ({
 					return renderLink(collectionUrl, resolvedTarget);
 				}
 
-				case 'ITEM': {
+				case 'ITEM':
+				case 'ITEM_WITH_CUE_POINTS': {
 					const itemUrl = buildLink(AdminConfigManager.getAdminRoute('ITEM_DETAIL'), {
 						id: value,
 					});

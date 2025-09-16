@@ -1,19 +1,20 @@
+import { type Avo, ContentPickerType } from '@viaa/avo2-types';
+import memoize from 'memoizee';
+import { ContentPageService } from '~modules/content-page/services/content-page.service';
+import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
+import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
 import { CustomError } from '~shared/helpers/custom-error';
 import type { PickerItem } from '~shared/types/content-picker';
 import { parsePickerItem } from '../helpers/parse-picker';
 
-import { ContentPageService } from '~modules/content-page/services/content-page.service';
-import type { ContentPageInfo } from '~modules/content-page/types/content-pages.types';
-import { MEMOIZEE_OPTIONS } from '~shared/consts/memoizee-options';
-import memoize from 'memoizee';
-
 // Fetch content items from GQL
 export const retrieveContentPages = memoize(
-	async (title: string | null, limit = 5): Promise<PickerItem[]> => {
+	async (title: string | null, limit = 5, type: ContentPickerType): Promise<PickerItem[]> => {
+		const pageType = mapContentPickerTypeToPageType(type);
 		try {
 			const contentItems: ContentPageInfo[] | null = title
-				? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, limit)
-				: await ContentPageService.getPublicContentItemsByTitle(undefined, limit);
+				? await ContentPageService.getPublicContentItemsByTitle(`%${title}%`, pageType, limit)
+				: await ContentPageService.getPublicContentItemsByTitle(undefined, pageType, limit);
 
 			return parseContentPages(contentItems || []);
 		} catch (err) {
@@ -46,4 +47,28 @@ const parseContentPages = (raw: Partial<ContentPageInfo>[]): PickerItem[] => {
 			...parsePickerItem('CONTENT_PAGE', item.path as string), // TODO enforce path in database
 		})
 	);
+};
+
+const mapContentPickerTypeToPageType = (
+	pickerType: Avo.Core.ContentPickerType
+): string | undefined => {
+	switch (pickerType) {
+		case ContentPickerType.CONTENT_PAGE_NEWS_ITEM:
+			return 'NIEUWS_ITEM';
+		case ContentPickerType.CONTENT_PAGE_PAGE:
+			return 'PAGINA';
+		case ContentPickerType.CONTENT_PAGE_PROJECT:
+			return 'PROJECT';
+		case ContentPickerType.CONTENT_PAGE_OVERVIEW:
+			return 'OVERZICHT';
+		case ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL:
+			return 'DOMEIN_DETAIL';
+		case ContentPickerType.CONTENT_PAGE_EVENT_DETAIL:
+			return 'EVENT_DETAIL';
+		case ContentPickerType.CONTENT_PAGE_SCREENCAST:
+			return 'SCREENCAST';
+
+		default:
+			return undefined;
+	}
 };

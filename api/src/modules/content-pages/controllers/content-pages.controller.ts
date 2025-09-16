@@ -214,7 +214,8 @@ export class ContentPagesController {
 	)
 	public async getPublicContentItems(
 		@Query('limit', ParseIntPipe) limit: number,
-		@Query('title') title: string | undefined
+		@Query('title') title: string | undefined,
+		@Query('contentType') contentType: string | undefined
 	): Promise<
 		| ContentPageQueryTypes['GetContentPagesQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetContentPagesQueryHetArchief']['app_content_page']
@@ -222,8 +223,12 @@ export class ContentPagesController {
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
 		| null
 	> {
-		if (title) {
-			return this.contentPagesService.getPublicContentItemsByTitle(title, limit);
+		if (title || contentType) {
+			return this.contentPagesService.getPublicContentItemsByTitleOrContentType(
+				title,
+				contentType,
+				limit
+			);
 		} else {
 			return this.contentPagesService.getPublicContentItems(limit);
 		}

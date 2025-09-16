@@ -16,13 +16,15 @@ import {
 	ToolbarRight,
 } from '@viaa/avo2-components';
 import clsx from 'clsx';
-import { isNil } from 'lodash-es';
+import { isNil, isNumber } from 'lodash-es';
 import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
+import { ToastType } from '~core/config/config.types';
 import { findImageInJson } from '~shared/helpers/find-image-in-json';
 import { showToast } from '~shared/helpers/show-toast';
-
+import { tText } from '~shared/helpers/translation-functions';
 import { validateContentBlockField } from '~shared/helpers/validation';
 import type {
 	ContentBlockBlockConfig,
@@ -37,10 +39,6 @@ import type {
 } from '../../types/content-block.types';
 import ContentBlockFormGroup from '../ContentBlockFormGroup/ContentBlockFormGroup';
 import { REPEATABLE_CONTENT_BLOCKS } from '.././ContentBlockRenderer/ContentBlockRenderer.const';
-
-import { ToastType } from '~core/config/config.types';
-import { tText } from '~shared/helpers/translation-functions';
-import { BlockHeading } from '~content-blocks/BlockHeading/BlockHeading';
 
 import './ContentBlockForm.scss';
 import { blockHasErrors } from '~modules/content-page/helpers/block-has-errors';
@@ -92,24 +90,37 @@ const ContentBlockForm: FunctionComponent<ContentBlockFormProps> = ({
 		value: any,
 		stateIndex?: number
 	) => {
+		const field = config[formGroupType].fields[key] as ContentBlockField;
 		const updateObject = {
+			...Object.fromEntries((field.fieldsToResetOnChange || []).map((key) => [key, null])),
 			[key]: value,
 		};
-		const state = formGroupType === 'block' ? block.state : components.state;
-		const stateUpdate = isArray(state) ? [updateObject] : { ...state, ...updateObject };
 
-		handleValidation(key, formGroupType, value, stateIndex);
+		const state = formGroupType === 'block' ? block.state : components.state;
+		const stateUpdate = isArray(state)
+			? state.map((currentState, index) => {
+					if (index === stateIndex) {
+						return { ...currentState, ...updateObject };
+					}
+					return currentState;
+				})
+			: { ...state, ...updateObject };
+
+		const stateToCheckVisibility =
+			isArray(stateUpdate) && isNumber(stateIndex) ? stateUpdate[stateIndex] : stateUpdate;
+		if (!(field.isVisible && !field.isVisible(config, stateToCheckVisibility))) {
+			handleValidation(field, key, value, stateIndex);
+		}
 		onChange(formGroupType, stateUpdate, isArray(components.state) ? stateIndex : undefined);
 	};
 
 	const handleValidation = (
+		field: ContentBlockField,
 		fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState,
-		formGroupType: ContentBlockStateType,
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		updatedFormValue: any,
 		stateIndex?: number
 	) => {
-		const field = config[formGroupType].fields[fieldKey] as ContentBlockField; // TODO fix type to ContentBlockField | ContentBlockFieldGroup
 		const validator = field?.validator;
 
 		const errors = validateContentBlockField(

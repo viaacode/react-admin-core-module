@@ -1,13 +1,10 @@
-import type { Avo } from '@viaa/avo2-types';
-import { ContentPickerType } from '@viaa/avo2-types';
+import { type Avo, ContentPickerType } from '@viaa/avo2-types';
 import { retrieveAssignments } from '~shared/components/ContentPicker/item-providers/assignment';
 import { retrieveCustomNavigationElements } from '~shared/components/ContentPicker/item-providers/custom-navigation-elements';
 import { retrieveIeObjects } from '~shared/components/ContentPicker/item-providers/ie-objects';
 import { retrieveNlParentContentPages } from '~shared/components/ContentPicker/item-providers/nl-content-page-parent';
 import { tText } from '~shared/helpers/translation-functions';
-
 import type { PickerTypeOption } from '../../types/content-picker';
-
 import { retrieveAnchors } from './item-providers/anchors';
 import { retrieveBundles, retrieveCollections } from './item-providers/collection';
 import { retrieveContentPages, retrieveProjectContentPages } from './item-providers/content-page';
@@ -24,12 +21,20 @@ export interface PickerItem {
 
 export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, string> = () => ({
 	[ContentPickerType.CONTENT_PAGE]: tText('admin/content/content___content'),
+	[ContentPickerType.CONTENT_PAGE_NEWS_ITEM]: tText('Nieuws item'),
+	[ContentPickerType.CONTENT_PAGE_PAGE]: tText('Pagina'),
+	[ContentPickerType.CONTENT_PAGE_PROJECT]: tText('Project'),
+	[ContentPickerType.CONTENT_PAGE_OVERVIEW]: tText('Overzicht'),
+	[ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL]: tText('Domein detail'),
+	[ContentPickerType.CONTENT_PAGE_EVENT_DETAIL]: tText('Event detail'),
+	[ContentPickerType.CONTENT_PAGE_SCREENCAST]: tText('Hulpfilmpje'),
 	[ContentPickerType.NL_CONTENT_PAGE_PARENT_ID]: tText(
 		'modules/shared/components/content-picker/content-picker___nederlandse-hoofd-pagina'
 	),
 	[ContentPickerType.INTERNAL_LINK]: tText('admin/content/content___statisch'),
 	[ContentPickerType.COLLECTION]: tText('admin/content/content___collecties'),
 	[ContentPickerType.ITEM]: tText('admin/content/content___items'),
+	[ContentPickerType.ITEM_WITH_CUE_POINTS]: tText('Geknipte fragmenten'),
 	[ContentPickerType.BUNDLE]: tText('admin/content/content___bundels'),
 	[ContentPickerType.ASSIGNMENT]: tText(
 		'react-admin/modules/shared/components/content-picker/content-picker___opdrachten'
@@ -66,16 +71,32 @@ export const GET_CONTENT_TYPE_LABELS: () => Record<Avo.Core.ContentPickerType, s
 	),
 });
 
+const getContentTypeForContentPage = (
+	contentType:
+		| ContentPickerType.CONTENT_PAGE
+		| ContentPickerType.CONTENT_PAGE_NEWS_ITEM
+		| ContentPickerType.CONTENT_PAGE_PAGE
+		| ContentPickerType.CONTENT_PAGE_PROJECT
+		| ContentPickerType.CONTENT_PAGE_OVERVIEW
+		| ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL
+		| ContentPickerType.CONTENT_PAGE_EVENT_DETAIL
+		| ContentPickerType.CONTENT_PAGE_SCREENCAST
+) => {
+	const labels = GET_CONTENT_TYPE_LABELS();
+
+	return {
+		value: contentType as ContentPickerType,
+		label: labels[contentType],
+		disabled: false,
+		fetch: retrieveContentPages,
+		picker: 'SELECT',
+	} as PickerTypeOption;
+};
+
 export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 	const labels = GET_CONTENT_TYPE_LABELS();
 	return [
-		{
-			value: ContentPickerType.CONTENT_PAGE,
-			label: labels[ContentPickerType.CONTENT_PAGE],
-			disabled: false,
-			fetch: retrieveContentPages,
-			picker: 'SELECT',
-		},
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE),
 		{
 			value: ContentPickerType.NL_CONTENT_PAGE_PARENT_ID,
 			label: labels[ContentPickerType.NL_CONTENT_PAGE_PARENT_ID],
@@ -100,6 +121,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 		{
 			value: ContentPickerType.ITEM,
 			label: labels[ContentPickerType.ITEM],
+			disabled: false,
+			fetch: retrieveItems,
+			picker: 'SELECT',
+		},
+		{
+			value: ContentPickerType.ITEM_WITH_CUE_POINTS,
+			label: labels[ContentPickerType.ITEM_WITH_CUE_POINTS],
 			disabled: false,
 			fetch: retrieveItems,
 			picker: 'SELECT',
@@ -175,6 +203,13 @@ export const GET_CONTENT_TYPES: () => PickerTypeOption[] = () => {
 			fetch: retrieveIeObjects,
 			picker: 'SELECT',
 		},
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_NEWS_ITEM),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_PAGE),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_PROJECT),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_OVERVIEW),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_DOMAIN_DETAIL),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_EVENT_DETAIL),
+		getContentTypeForContentPage(ContentPickerType.CONTENT_PAGE_SCREENCAST),
 	];
 };
 

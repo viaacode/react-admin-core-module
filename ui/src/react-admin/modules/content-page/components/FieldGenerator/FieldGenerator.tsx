@@ -1,19 +1,19 @@
+import { Alert } from '@meemoo/react-components';
 import { Button, Flex, FlexItem, FormGroup, IconName, Spacer } from '@viaa/avo2-components';
 import type { FunctionComponent, ReactNode } from 'react';
 import React, { Fragment } from 'react';
 import { GET_EDITOR_TYPES_MAP } from '~modules/content-page/const/editor-types.consts';
-
 import { generateFieldAttributes } from '~modules/content-page/helpers';
 import { Icon } from '~shared/components/Icon';
 import type {
 	ContentBlockComponentState,
+	ContentBlockConfig,
 	ContentBlockField,
 	ContentBlockFieldGroup,
 	ContentBlockState,
 	ContentBlockStateType,
 } from '../../types/content-block.types';
 import { FieldGroup } from '../FieldGroup/FieldGroup';
-import { Alert } from '@meemoo/react-components';
 
 interface FieldGeneratorProps {
 	fieldKey: keyof ContentBlockComponentState | keyof ContentBlockState;
@@ -25,6 +25,7 @@ interface FieldGeneratorProps {
 	type: ContentBlockStateType; // State type
 	// biome-ignore lint/suspicious/noExplicitAny: todo
 	handleChange: any;
+	config: ContentBlockConfig;
 }
 
 export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
@@ -35,6 +36,7 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 	state,
 	type,
 	handleChange,
+	config,
 }) => {
 	const handleFieldGroup = (
 		fieldGroup: ContentBlockFieldGroup,
@@ -104,6 +106,11 @@ export const FieldGenerator: FunctionComponent<FieldGeneratorProps> = ({
 		if (!field.note) {
 			return null;
 		}
+
+		if (field.isNoteVisible && !field.isNoteVisible?.(config)) {
+			return null;
+		}
+
 		return (
 			<Spacer margin="top">
 				<Alert content={field.note} icon={<Icon name={IconName.alertTriangle} />} variants="info" />

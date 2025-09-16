@@ -15,6 +15,10 @@ export interface PickerTypeOption<T = Avo.Core.ContentPickerType> {
 	label: string;
 	disabled?: boolean;
 	picker: PickerItemControls;
-	fetch?: (keyword: string | null, limit: number) => Promise<PickerItem[]>;
+	fetch?: (
+		keyword: string | null,
+		limit: number,
+		pickerType?: Avo.Core.ContentPickerType
+	) => Promise<PickerItem[]>;
 	placeholder?: string;
 }

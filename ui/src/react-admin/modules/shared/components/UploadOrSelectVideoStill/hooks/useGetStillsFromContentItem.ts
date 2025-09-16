@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { ContentPickerType } from '@viaa/avo2-types';
+import { ContentPickerType } from '@viaa/avo2-types';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
 import { fetchWithLogoutJson } from '~shared/helpers/fetch-with-logout';
@@ -7,11 +7,7 @@ import { getProxyUrl } from '~shared/helpers/get-proxy-url-from-admin-core-confi
 import { QUERY_KEYS } from '~shared/types';
 
 export const useGetStillsFromContentItem = (
-	contentItemType:
-		| ContentPickerType.ITEM
-		| ContentPickerType.COLLECTION
-		| ContentPickerType.ASSIGNMENT
-		| null,
+	contentItemType: ContentPickerType | null,
 	contentItemId: string | null,
 	options: { enabled?: boolean; keepPreviousData?: boolean } = {
 		enabled: true,
@@ -22,6 +18,15 @@ export const useGetStillsFromContentItem = (
 		[QUERY_KEYS.GET_VIDEO_STILLS_FOR_CONTENT_ITEM, contentItemType, contentItemId],
 		async () => {
 			if (!contentItemType || !contentItemId) {
+				return [];
+			}
+
+			if (
+				contentItemType !== ContentPickerType.ITEM &&
+				contentItemType !== ContentPickerType.ITEM_WITH_CUE_POINTS &&
+				contentItemType !== ContentPickerType.COLLECTION &&
+				contentItemType !== ContentPickerType.ASSIGNMENT
+			) {
 				return [];
 			}
 			const stills: string[] = await fetchWithLogoutJson(

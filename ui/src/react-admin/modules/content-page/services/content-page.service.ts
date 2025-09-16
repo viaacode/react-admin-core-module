@@ -64,6 +64,7 @@ export class ContentPageService {
 
 	public static async getPublicContentItemsByTitle(
 		title: string | undefined,
+		contentType: string | undefined,
 		limit?: number
 	): Promise<ContentPageInfo[]> {
 		const dbContentPages: DbContentPage[] = await fetchWithLogoutJson(
@@ -72,6 +73,7 @@ export class ContentPageService {
 				query: {
 					limit: limit ?? 20,
 					title,
+					contentType,
 				},
 			}),
 			{ throwOnNullResponse: true }

@@ -219,7 +219,7 @@ const ContentEditContentBlocks: FunctionComponent<ContentEditContentBlocksProps>
 
 	const generateKeyForBlock = useCallback((itemData: DraggableItemData): string => {
 		if (!itemData.id) {
-			throw new Error('Block has no id: ', itemData);
+			throw new Error(`Block has no id: ${itemData}`);
 		}
 		return itemData.id;
 	}, []);
