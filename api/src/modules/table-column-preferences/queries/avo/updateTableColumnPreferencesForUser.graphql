@@ -1,0 +1,11 @@
+mutation updateTableColumnPreferencesForUser($profileId: uuid!, $columnKey: String!, $columns: jsonb!) {
+	update_users_table_column_preferences(where: {profile_id: {_eq: $profileId}, url_key: {_eq: $columnKey}}, _set: {visible_columns: $columns}) {
+		affected_rows
+		returning {
+			id
+			url_key
+			visible_columns
+			profile_id
+		}
+	}
+}

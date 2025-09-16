@@ -17,3 +17,4 @@ export * from './status';
 export * from './translations';
 export * from './user-groups';
 export * from './users';
+export * from './table-column-preferences';
