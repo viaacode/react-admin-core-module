@@ -1,0 +1,8 @@
+query getTableColumnPreferencesForUser($profileId: uuid!, $columnKey: String!) {
+	users_table_column_preferences(where: {profile_id: {_eq: $profileId}, key: {_eq: $columnKey}}) {
+		id
+		values
+		key
+		profile_id
+	}
+}

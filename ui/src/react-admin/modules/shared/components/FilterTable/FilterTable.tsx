@@ -20,8 +20,15 @@ import {
 import type { Avo } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, get, sortBy } from 'lodash-es';
-import type { FunctionComponent, KeyboardEvent, ReactElement, ReactNode } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, {
+	type FunctionComponent,
+	type KeyboardEvent,
+	type ReactElement,
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { useQueryParams } from 'use-query-params';
 import { isAvo } from '~modules/shared/helpers/is-avo';
 import { CenteredSpinner } from '~shared/components/Spinner/CenteredSpinner';
@@ -35,6 +42,8 @@ import './FilterTable.scss';
 import { ErrorView } from '~shared/components/error';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { toggleSortOrder } from '~shared/helpers/toggle-sort-order';
+import { useGetTableColumnPreference } from '~shared/hooks/useGetTableColumnPreference';
+import { useUpdateTableColumnPreference } from '~shared/hooks/useUpdateTableColumnPreference';
 import BooleanCheckboxDropdown from '../BooleanCheckboxDropdown/BooleanCheckboxDropdown';
 import type { CheckboxOption } from '../CheckboxDropdownModal/CheckboxDropdownModal';
 import { CheckboxDropdownModal } from '../CheckboxDropdownModal/CheckboxDropdownModal';
@@ -143,28 +152,30 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	const [selectedBulkAction, setSelectedBulkAction] = useState<string | null>(null);
 	const [confirmBulkActionModalOpen, setConfirmBulkActionModalOpen] = useState<boolean>(false);
 	const [tableState, setTableState] = useQueryParams(FILTER_TABLE_QUERY_PARAM_CONFIG(columns));
-	const [getPreferredColumns, setPreferredColumns] = useLocalStorage(
-		`AVO.admin_preferred_columns.${location.pathname.replaceAll('/', '_')}`,
-		null
-	);
+
+	const {
+		data: preferredColumns,
+		isLoading: isLoadingColumnPreferences,
+		refetch: reloadPreferredColumns,
+	} = useGetTableColumnPreference(location.pathname);
+	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
 
 	// biome-ignore lint/suspicious/noExplicitAny: todo
-	const handleTableStateChanged = (value: any, id: string) => {
-		// biome-ignore lint/suspicious/noExplicitAny: todo
-		let newTableState: any = cloneDeep(tableState);
+	const handleTableStateChanged = useCallback(
+		(value: any, id: string) => {
+			// biome-ignore lint/suspicious/noExplicitAny: todo
+			let newTableState: any = cloneDeep(tableState);
 
-		newTableState = cleanupFilterTableState({
-			...newTableState,
-			[id]: value,
-			...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
-		});
+			newTableState = cleanupFilterTableState({
+				...newTableState,
+				[id]: value,
+				...(id !== 'page' ? { page: 0 } : {}), // Reset the page to 0, when any filter or sort order change is made
+			});
 
-		if (id === 'columns') {
-			setPreferredColumns(value);
-		}
-
-		setTableState(newTableState, 'replace');
-	};
+			setTableState(newTableState, 'replace');
+		},
+		[setTableState, tableState]
+	);
 
 	const handleSortOrderChanged = (columnId: string) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -239,16 +250,14 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		// Order the selected columns from the modal according to the default order in the column const array
 		// This way, when a user selects columns, they will be in the default order
 		// But if an array is set by modifying the query params, then the order from the query params will be kept
-		handleTableStateChanged(
-			columns.filter((column) => selectedColumns.includes(column.id)).map((column) => column.id),
-			'columns'
-		);
+		setPreferredColumns(
+			columns.filter((column) => selectedColumns.includes(column.id)).map((column) => column.id)
+		).then(() => reloadPreferredColumns());
 	};
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: only run once
 	useEffect(() => {
-		handleTableStateChanged(getPreferredColumns, 'columns');
-	}, []);
+		handleTableStateChanged(preferredColumns, 'columns');
+	}, [handleTableStateChanged, preferredColumns]);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
@@ -438,7 +447,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 				<>
 					{renderFilters()}
 					<div className="c-filter-table__loading-wrapper">
-						<div style={{ opacity: isLoading ? 0.2 : 1 }}>
+						<div style={{ opacity: isLoading || isLoadingColumnPreferences ? 0.2 : 1 }}>
 							<Table
 								columns={getSelectedColumns()}
 								data={data}
@@ -480,7 +489,7 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 								</Spacer>
 							)}
 						</div>
-						{isLoading && <CenteredSpinner />}
+						{(isLoading || isLoadingColumnPreferences) && <CenteredSpinner />}
 					</div>
 				</>
 			)}

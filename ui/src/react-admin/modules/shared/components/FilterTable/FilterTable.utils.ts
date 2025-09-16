@@ -11,3 +11,8 @@ export function cleanupFilterTableState(obj: any) {
 			(isPlainObject(value) && value.gte === '' && value.lte === '')
 	);
 }
+
+export function getColumnKey(key: string) {
+	const parsed = key.replaceAll('/', '_').toUpperCase();
+	return parsed.startsWith('_') ? parsed.substring(1) : parsed;
+}
