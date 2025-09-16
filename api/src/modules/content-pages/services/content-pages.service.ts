@@ -31,7 +31,9 @@ import {
 	GetItemTileByIdDocument,
 	type GetItemTileByIdQuery,
 	type GetItemTileByIdQueryVariables,
+	InputMaybe,
 	type Lookup_Enum_Content_Block_Types_Enum,
+	Lookup_Enum_Content_Types_Enum,
 	Order_By,
 	PublishContentPageMutation as PublishContentPageMutationAvo,
 	UnpublishContentPageMutation as UnpublishContentPageMutationAvo,
@@ -768,7 +770,7 @@ export class ContentPagesService {
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryAvo']['app_content']
 		| ContentPageQueryTypes['GetPublicContentPagesByTitleQueryHetArchief']['app_content_page']
 	> {
-		const whereClause = {
+		const whereClause: InputMaybe<App_Content_Bool_Exp> = {
 			is_public: { _eq: true },
 			is_deleted: { _eq: false },
 		};
@@ -778,7 +780,7 @@ export class ContentPagesService {
 		}
 
 		if (contentType) {
-			whereClause['content_type'] = { _eq: contentType };
+			whereClause['content_type'] = { _eq: contentType as Lookup_Enum_Content_Types_Enum };
 		}
 
 		const response = await this.dataService.execute<
