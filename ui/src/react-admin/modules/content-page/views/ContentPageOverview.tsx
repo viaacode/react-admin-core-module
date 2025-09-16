@@ -166,14 +166,23 @@ export const ContentPageOverview: FunctionComponent<ContentPageOverviewProps> = 
 		];
 	};
 
+	const generateSplitTextFilterForProperty = (queryWildcard: string, property: string) => {
+		return {
+			_and: queryWildcard
+				.trim()
+				.split(' ')
+				.map((queryPart) => ({ [property]: { _ilike: `%${queryPart}%` } })),
+		};
+	};
+
 	const generateWhereObject = (filters: Partial<ContentTableState>) => {
 		// biome-ignore lint/suspicious/noExplicitAny: todo
 		const andFilters: any[] = [];
 		andFilters.push(
 			...getQueryFilter(filters.query, (queryWildcard: string) => [
-				{ title: { _ilike: queryWildcard } },
-				{ title: { _ilike: queryWildcard } },
-				{ path: { _ilike: queryWildcard } },
+				generateSplitTextFilterForProperty(queryWildcard, 'title'),
+				generateSplitTextFilterForProperty(queryWildcard, 'description'),
+				generateSplitTextFilterForProperty(queryWildcard, 'path'),
 				...ownerFilter(queryWildcard),
 				{
 					content_content_labels: {

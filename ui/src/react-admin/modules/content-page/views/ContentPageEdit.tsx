@@ -54,6 +54,7 @@ import { Link } from '~shared/components/Link/Link';
 import type { LoadingInfo } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { LoadingErrorLoadedComponent } from '~shared/components/LoadingErrorLoadedComponent/LoadingErrorLoadedComponent';
 import { CustomError } from '~shared/helpers/custom-error';
+import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import { getProfileId } from '~shared/helpers/get-profile-id';
 import { navigate } from '~shared/helpers/link';
 import { showToast } from '~shared/helpers/show-toast';
@@ -552,11 +553,17 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			errors.contentType = tText('admin/content/views/content-edit___content-type-is-verplicht');
 		}
 
+		// Make description required
+		// https://meemoo.atlassian.net/browse/AVO-3565
+		const description: string | null = stripHtml(
+			contentPageState.currentContentPageInfo.description
+		);
+		if (!description) {
+			errors.description = tText('Beschrijving is verplicht');
+		}
+
 		// Disable this validation, since meemoo only wants to see the indicator, but not be prevented from saving the page
 		// https://meemoo.atlassian.net/browse/ARC-2393
-		// const description: string | null = stripHtml(
-		// 	contentPageState.currentContentPageInfo.description
-		// );
 		// if ((description?.length || 0) > CONTENT_PAGE_DESCRIPTION_MAX_LENGTH) {
 		// 	errors.description = tText(
 		// 		'modules/content-page/views/content-page-edit___de-beschrijving-mag-maximaal-max-length-tekens-bevatten',

@@ -249,6 +249,7 @@ export const ContentEditForm: FunctionComponent<ContentEditFormProps> = ({
 									onChange={(html: string) => {
 										changeContentPageProp('description', html);
 									}}
+									required
 									formError={formErrors.description}
 									className="field-description"
 								></ContentPageEditFormDescription>

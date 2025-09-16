@@ -1,23 +1,24 @@
 import { FormGroup } from '@viaa/avo2-components';
 import type { FunctionComponent } from 'react';
 import React, { useState } from 'react';
-import { tText } from '~shared/helpers/translation-functions';
+import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts';
 
 import { RICH_TEXT_EDITOR_OPTIONS_FULL } from '~modules/shared/consts/rich-text-editor.consts';
-import { CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING } from '~modules/content-page/const/content-page.consts';
-import { stripHtml } from '~shared/helpers/formatters/strip-html';
 import RichTextEditorWithInternalStateWrapper from '~shared/components/RichTextEditorWithInternalStateWrapper/RichTextEditorWithInternalStateWrapper';
+import { stripHtml } from '~shared/helpers/formatters/strip-html';
+import { tText } from '~shared/helpers/translation-functions';
 
 interface ContentPageEditFormDescriptionProps {
 	value: string;
 	onChange: (value: string) => void;
 	formError: string | undefined;
+	required?: boolean;
 	className?: string;
 }
 
 export const ContentPageEditFormDescription: FunctionComponent<
 	ContentPageEditFormDescriptionProps
-> = ({ value, onChange, formError, className }) => {
+> = ({ value, onChange, formError, required, className }) => {
 	const [description, setDescription] = useState(value || '');
 
 	return (
@@ -32,6 +33,7 @@ export const ContentPageEditFormDescription: FunctionComponent<
 				) +
 				` (${stripHtml(description)?.length || 0} / ${CONTENT_PAGE_DESCRIPTION_MAX_LENGTH_STRING})`
 			}
+			required={required}
 			className={className}
 		>
 			<RichTextEditorWithInternalStateWrapper
