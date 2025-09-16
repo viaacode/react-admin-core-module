@@ -1,10 +1,10 @@
 mutation insertTableColumnPreferencesForUser($profileId: uuid!, $columnKey: String!, $columns: jsonb!) {
-	insert_users_table_column_preferences(objects: {profile_id: $profileId, key: $columnKey, values: $columns}) {
+	insert_users_table_column_preferences(objects: {profile_id: $profileId, url_key: $columnKey, visible_columns: $columns}) {
 		affected_rows
 		returning {
 			id
-			values
-			key
+			url_key
+			visible_columns
 			profile_id
 		}
 	}

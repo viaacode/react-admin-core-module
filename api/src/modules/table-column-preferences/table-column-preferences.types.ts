@@ -2,8 +2,8 @@ import { type GetTableColumnPreferencesForUserQuery } from '../shared/generated/
 
 export interface TableColumnPreference {
 	id: number;
-	values: string;
-	key: string;
+	visibleColumns: string[];
+	urlKey: string;
 }
 
 export type GqlTableColumnPreference =

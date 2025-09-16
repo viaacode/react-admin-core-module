@@ -22954,7 +22954,6 @@ export enum Lookup_Enum_Content_Block_Types_Enum {
   Iframe = 'IFRAME',
   Image = 'IMAGE',
   ImageGrid = 'IMAGE_GRID',
-  ImageTextBackground = 'IMAGE_TEXT_BACKGROUND',
   ImageTitleTextButton = 'IMAGE_TITLE_TEXT_BUTTON',
   Intro = 'INTRO',
   Klaar = 'KLAAR',
@@ -28655,7 +28654,7 @@ export type Mutation_RootDelete_Users_Table_Column_PreferencesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Users_Table_Column_Preferences_By_PkArgs = {
-  id: Scalars['Int']['input'];
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -32620,7 +32619,6 @@ export type Mutation_RootUpdate_Users_Table_Column_PreferencesArgs = {
   _delete_at_path?: InputMaybe<Users_Table_Column_Preferences_Delete_At_Path_Input>;
   _delete_elem?: InputMaybe<Users_Table_Column_Preferences_Delete_Elem_Input>;
   _delete_key?: InputMaybe<Users_Table_Column_Preferences_Delete_Key_Input>;
-  _inc?: InputMaybe<Users_Table_Column_Preferences_Inc_Input>;
   _prepend?: InputMaybe<Users_Table_Column_Preferences_Prepend_Input>;
   _set?: InputMaybe<Users_Table_Column_Preferences_Set_Input>;
   where: Users_Table_Column_Preferences_Bool_Exp;
@@ -32633,7 +32631,6 @@ export type Mutation_RootUpdate_Users_Table_Column_Preferences_By_PkArgs = {
   _delete_at_path?: InputMaybe<Users_Table_Column_Preferences_Delete_At_Path_Input>;
   _delete_elem?: InputMaybe<Users_Table_Column_Preferences_Delete_Elem_Input>;
   _delete_key?: InputMaybe<Users_Table_Column_Preferences_Delete_Key_Input>;
-  _inc?: InputMaybe<Users_Table_Column_Preferences_Inc_Input>;
   _prepend?: InputMaybe<Users_Table_Column_Preferences_Prepend_Input>;
   _set?: InputMaybe<Users_Table_Column_Preferences_Set_Input>;
   pk_columns: Users_Table_Column_Preferences_Pk_Columns_Input;
@@ -37029,7 +37026,7 @@ export type Query_RootUsers_Table_Column_Preferences_AggregateArgs = {
 
 
 export type Query_RootUsers_Table_Column_Preferences_By_PkArgs = {
-  id: Scalars['Int']['input'];
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -50955,7 +50952,7 @@ export type Subscription_RootUsers_Table_Column_Preferences_AggregateArgs = {
 
 
 export type Subscription_RootUsers_Table_Column_Preferences_By_PkArgs = {
-  id: Scalars['Int']['input'];
+  id: Scalars['uuid']['input'];
 };
 
 
@@ -53360,6 +53357,12 @@ export enum Users_Idps_Enum {
   Hetarchief = 'HETARCHIEF',
   /** OAuth service van Klascement op oauth.klascement.be */
   Klascement = 'KLASCEMENT',
+  /** lti idp for embedding videos on external platforms without a user being logged in on the external platform */
+  LtiAnonymous = 'LTI_ANONYMOUS',
+  /** bookwidgets lti idp flow for embedding videos in their platform */
+  LtiBookwidgets = 'LTI_BOOKWIDGETS',
+  /** smartschoollti idp flow for embedding videos in their platform */
+  LtiSmartschool = 'LTI_SMARTSCHOOL',
   /** OAuth service van Smartschool op oauth.smartschool.be. */
   Smartschool = 'SMARTSCHOOL',
   /** OAuth service van de Vlaamse Overheid: ACM-IDM using the ov_account_uuid id of the user */
@@ -57707,15 +57710,17 @@ export type Users_Summary_View_Variance_Fields = {
 /** columns and relationships of "users.table_column_preferences" */
 export type Users_Table_Column_Preferences = {
   __typename?: 'users_table_column_preferences';
-  id: Scalars['Int']['output'];
-  key: Scalars['String']['output'];
+  created_at?: Maybe<Scalars['timestamp']['output']>;
+  id: Scalars['uuid']['output'];
   profile_id: Scalars['uuid']['output'];
-  values: Scalars['jsonb']['output'];
+  updated_at?: Maybe<Scalars['timestamp']['output']>;
+  url_key: Scalars['String']['output'];
+  visible_columns: Scalars['jsonb']['output'];
 };
 
 
 /** columns and relationships of "users.table_column_preferences" */
-export type Users_Table_Column_PreferencesValuesArgs = {
+export type Users_Table_Column_PreferencesVisible_ColumnsArgs = {
   path?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -57729,17 +57734,9 @@ export type Users_Table_Column_Preferences_Aggregate = {
 /** aggregate fields of "users.table_column_preferences" */
 export type Users_Table_Column_Preferences_Aggregate_Fields = {
   __typename?: 'users_table_column_preferences_aggregate_fields';
-  avg?: Maybe<Users_Table_Column_Preferences_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Users_Table_Column_Preferences_Max_Fields>;
   min?: Maybe<Users_Table_Column_Preferences_Min_Fields>;
-  stddev?: Maybe<Users_Table_Column_Preferences_Stddev_Fields>;
-  stddev_pop?: Maybe<Users_Table_Column_Preferences_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Users_Table_Column_Preferences_Stddev_Samp_Fields>;
-  sum?: Maybe<Users_Table_Column_Preferences_Sum_Fields>;
-  var_pop?: Maybe<Users_Table_Column_Preferences_Var_Pop_Fields>;
-  var_samp?: Maybe<Users_Table_Column_Preferences_Var_Samp_Fields>;
-  variance?: Maybe<Users_Table_Column_Preferences_Variance_Fields>;
 };
 
 
@@ -57751,13 +57748,7 @@ export type Users_Table_Column_Preferences_Aggregate_FieldsCountArgs = {
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Users_Table_Column_Preferences_Append_Input = {
-  values?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
-/** aggregate avg on columns */
-export type Users_Table_Column_Preferences_Avg_Fields = {
-  __typename?: 'users_table_column_preferences_avg_fields';
-  id?: Maybe<Scalars['Float']['output']>;
+  visible_columns?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
 /** Boolean expression to filter rows from the table "users.table_column_preferences". All fields are combined with a logical 'AND'. */
@@ -57765,62 +57756,65 @@ export type Users_Table_Column_Preferences_Bool_Exp = {
   _and?: InputMaybe<Array<Users_Table_Column_Preferences_Bool_Exp>>;
   _not?: InputMaybe<Users_Table_Column_Preferences_Bool_Exp>;
   _or?: InputMaybe<Array<Users_Table_Column_Preferences_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  key?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
   profile_id?: InputMaybe<Uuid_Comparison_Exp>;
-  values?: InputMaybe<Jsonb_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  url_key?: InputMaybe<String_Comparison_Exp>;
+  visible_columns?: InputMaybe<Jsonb_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users.table_column_preferences" */
 export enum Users_Table_Column_Preferences_Constraint {
   /** unique or primary key constraint on columns "id" */
   TableColumnPreferencesPkey = 'table_column_preferences_pkey',
-  /** unique or primary key constraint on columns "key", "profile_id" */
-  TableColumnPreferencesProfileIdKeyKey = 'table_column_preferences_profile_id_key_key'
+  /** unique or primary key constraint on columns "url_key", "profile_id" */
+  TableColumnPreferencesProfileIdUrlKeyKey = 'table_column_preferences_profile_id_url_key_key'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Users_Table_Column_Preferences_Delete_At_Path_Input = {
-  values?: InputMaybe<Array<Scalars['String']['input']>>;
+  visible_columns?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Users_Table_Column_Preferences_Delete_Elem_Input = {
-  values?: InputMaybe<Scalars['Int']['input']>;
+  visible_columns?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Users_Table_Column_Preferences_Delete_Key_Input = {
-  values?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** input type for incrementing numeric columns in table "users.table_column_preferences" */
-export type Users_Table_Column_Preferences_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
+  visible_columns?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** input type for inserting data into table "users.table_column_preferences" */
 export type Users_Table_Column_Preferences_Insert_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  key?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
-  values?: InputMaybe<Scalars['jsonb']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamp']['input']>;
+  url_key?: InputMaybe<Scalars['String']['input']>;
+  visible_columns?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
 /** aggregate max on columns */
 export type Users_Table_Column_Preferences_Max_Fields = {
   __typename?: 'users_table_column_preferences_max_fields';
-  id?: Maybe<Scalars['Int']['output']>;
-  key?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamp']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
   profile_id?: Maybe<Scalars['uuid']['output']>;
+  updated_at?: Maybe<Scalars['timestamp']['output']>;
+  url_key?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
 export type Users_Table_Column_Preferences_Min_Fields = {
   __typename?: 'users_table_column_preferences_min_fields';
-  id?: Maybe<Scalars['Int']['output']>;
-  key?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamp']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
   profile_id?: Maybe<Scalars['uuid']['output']>;
+  updated_at?: Maybe<Scalars['timestamp']['output']>;
+  url_key?: Maybe<Scalars['String']['output']>;
 };
 
 /** response of any mutation on the table "users.table_column_preferences" */
@@ -57841,58 +57835,48 @@ export type Users_Table_Column_Preferences_On_Conflict = {
 
 /** Ordering options when selecting data from "users.table_column_preferences". */
 export type Users_Table_Column_Preferences_Order_By = {
+  created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  key?: InputMaybe<Order_By>;
   profile_id?: InputMaybe<Order_By>;
-  values?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  url_key?: InputMaybe<Order_By>;
+  visible_columns?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: users.table_column_preferences */
 export type Users_Table_Column_Preferences_Pk_Columns_Input = {
-  id: Scalars['Int']['input'];
+  id: Scalars['uuid']['input'];
 };
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Users_Table_Column_Preferences_Prepend_Input = {
-  values?: InputMaybe<Scalars['jsonb']['input']>;
+  visible_columns?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
 /** select columns of table "users.table_column_preferences" */
 export enum Users_Table_Column_Preferences_Select_Column {
   /** column name */
-  Id = 'id',
+  CreatedAt = 'created_at',
   /** column name */
-  Key = 'key',
+  Id = 'id',
   /** column name */
   ProfileId = 'profile_id',
   /** column name */
-  Values = 'values'
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UrlKey = 'url_key',
+  /** column name */
+  VisibleColumns = 'visible_columns'
 }
 
 /** input type for updating data in table "users.table_column_preferences" */
 export type Users_Table_Column_Preferences_Set_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  key?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
-  values?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
-/** aggregate stddev on columns */
-export type Users_Table_Column_Preferences_Stddev_Fields = {
-  __typename?: 'users_table_column_preferences_stddev_fields';
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Users_Table_Column_Preferences_Stddev_Pop_Fields = {
-  __typename?: 'users_table_column_preferences_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Users_Table_Column_Preferences_Stddev_Samp_Fields = {
-  __typename?: 'users_table_column_preferences_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']['output']>;
+  updated_at?: InputMaybe<Scalars['timestamp']['input']>;
+  url_key?: InputMaybe<Scalars['String']['input']>;
+  visible_columns?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
 /** Streaming cursor of the table "users_table_column_preferences" */
@@ -57905,28 +57889,28 @@ export type Users_Table_Column_Preferences_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Users_Table_Column_Preferences_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  key?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
   profile_id?: InputMaybe<Scalars['uuid']['input']>;
-  values?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
-/** aggregate sum on columns */
-export type Users_Table_Column_Preferences_Sum_Fields = {
-  __typename?: 'users_table_column_preferences_sum_fields';
-  id?: Maybe<Scalars['Int']['output']>;
+  updated_at?: InputMaybe<Scalars['timestamp']['input']>;
+  url_key?: InputMaybe<Scalars['String']['input']>;
+  visible_columns?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
 /** update columns of table "users.table_column_preferences" */
 export enum Users_Table_Column_Preferences_Update_Column {
   /** column name */
-  Id = 'id',
+  CreatedAt = 'created_at',
   /** column name */
-  Key = 'key',
+  Id = 'id',
   /** column name */
   ProfileId = 'profile_id',
   /** column name */
-  Values = 'values'
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UrlKey = 'url_key',
+  /** column name */
+  VisibleColumns = 'visible_columns'
 }
 
 export type Users_Table_Column_Preferences_Updates = {
@@ -57938,31 +57922,11 @@ export type Users_Table_Column_Preferences_Updates = {
   _delete_elem?: InputMaybe<Users_Table_Column_Preferences_Delete_Elem_Input>;
   /** delete key/value pair or string element. key/value pairs are matched based on their key value */
   _delete_key?: InputMaybe<Users_Table_Column_Preferences_Delete_Key_Input>;
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Users_Table_Column_Preferences_Inc_Input>;
   /** prepend existing jsonb value of filtered columns with new jsonb value */
   _prepend?: InputMaybe<Users_Table_Column_Preferences_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Users_Table_Column_Preferences_Set_Input>;
   where: Users_Table_Column_Preferences_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Users_Table_Column_Preferences_Var_Pop_Fields = {
-  __typename?: 'users_table_column_preferences_var_pop_fields';
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Users_Table_Column_Preferences_Var_Samp_Fields = {
-  __typename?: 'users_table_column_preferences_var_samp_fields';
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Users_Table_Column_Preferences_Variance_Fields = {
-  __typename?: 'users_table_column_preferences_variance_fields';
-  id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "users.users_sync_cm" */
@@ -58835,7 +58799,7 @@ export type GetTableColumnPreferencesForUserQueryVariables = Exact<{
 }>;
 
 
-export type GetTableColumnPreferencesForUserQuery = { __typename?: 'query_root', users_table_column_preferences: Array<{ __typename?: 'users_table_column_preferences', id: number, values: any, key: string, profile_id: any }> };
+export type GetTableColumnPreferencesForUserQuery = { __typename?: 'query_root', users_table_column_preferences: Array<{ __typename?: 'users_table_column_preferences', id: any, url_key: string, visible_columns: any, profile_id: any }> };
 
 export type InsertTableColumnPreferencesForUserMutationVariables = Exact<{
   profileId: Scalars['uuid']['input'];
@@ -58844,7 +58808,7 @@ export type InsertTableColumnPreferencesForUserMutationVariables = Exact<{
 }>;
 
 
-export type InsertTableColumnPreferencesForUserMutation = { __typename?: 'mutation_root', insert_users_table_column_preferences?: { __typename?: 'users_table_column_preferences_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'users_table_column_preferences', id: number, values: any, key: string, profile_id: any }> } | null };
+export type InsertTableColumnPreferencesForUserMutation = { __typename?: 'mutation_root', insert_users_table_column_preferences?: { __typename?: 'users_table_column_preferences_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'users_table_column_preferences', id: any, url_key: string, visible_columns: any, profile_id: any }> } | null };
 
 export type UpdateTableColumnPreferencesForUserMutationVariables = Exact<{
   profileId: Scalars['uuid']['input'];
@@ -58853,7 +58817,7 @@ export type UpdateTableColumnPreferencesForUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTableColumnPreferencesForUserMutation = { __typename?: 'mutation_root', update_users_table_column_preferences?: { __typename?: 'users_table_column_preferences_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'users_table_column_preferences', id: number, values: any, key: string, profile_id: any }> } | null };
+export type UpdateTableColumnPreferencesForUserMutation = { __typename?: 'mutation_root', update_users_table_column_preferences?: { __typename?: 'users_table_column_preferences_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'users_table_column_preferences', id: any, url_key: string, visible_columns: any, profile_id: any }> } | null };
 
 export type GetUserGroupsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -59003,9 +58967,9 @@ export const GetItemBrowsePathByExternalIdDocument = {"kind":"Document","definit
 export const GetSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_site_variables_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetSiteVariableByNameQuery, GetSiteVariableByNameQueryVariables>;
 export const UpdateSiteVariableByNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateSiteVariableByName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_site_variables_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_site_variables"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateSiteVariableByNameMutation, UpdateSiteVariableByNameMutationVariables>;
 export const GetFirstObjectIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFirstObjectId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_item_meta"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"external_id"}}]}}]}}]} as unknown as DocumentNode<GetFirstObjectIdQuery, GetFirstObjectIdQueryVariables>;
-export const GetTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetTableColumnPreferencesForUserQuery, GetTableColumnPreferencesForUserQueryVariables>;
-export const InsertTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columns"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"jsonb"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"values"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columns"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertTableColumnPreferencesForUserMutation, InsertTableColumnPreferencesForUserMutationVariables>;
-export const UpdateTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columns"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"jsonb"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"values"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columns"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"values"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateTableColumnPreferencesForUserMutation, UpdateTableColumnPreferencesForUserMutationVariables>;
+export const GetTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"url_key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url_key"}},{"kind":"Field","name":{"kind":"Name","value":"visible_columns"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]} as unknown as DocumentNode<GetTableColumnPreferencesForUserQuery, GetTableColumnPreferencesForUserQueryVariables>;
+export const InsertTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columns"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"jsonb"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"url_key"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"visible_columns"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columns"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url_key"}},{"kind":"Field","name":{"kind":"Name","value":"visible_columns"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertTableColumnPreferencesForUserMutation, InsertTableColumnPreferencesForUserMutationVariables>;
+export const UpdateTableColumnPreferencesForUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateTableColumnPreferencesForUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"columns"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"jsonb"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_users_table_column_preferences"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"profile_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"profileId"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"url_key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columnKey"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"visible_columns"},"value":{"kind":"Variable","name":{"kind":"Name","value":"columns"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url_key"}},{"kind":"Field","name":{"kind":"Name","value":"visible_columns"}},{"kind":"Field","name":{"kind":"Name","value":"profile_id"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateTableColumnPreferencesForUserMutation, UpdateTableColumnPreferencesForUserMutationVariables>;
 export const GetUserGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_groups"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsQuery, GetUserGroupsQueryVariables>;
 export const GetUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserGroupsPermissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"group_permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permission"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserGroupsPermissionsQuery, GetUserGroupsPermissionsQueryVariables>;
 export const UpdateUserGroupsPermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateUserGroupsPermissions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permissions_insert_input"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"users_group_permissions_bool_exp"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_users_group_permissions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"deletions"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"insert_users_group_permissions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"insertions"}}},{"kind":"Argument","name":{"kind":"Name","value":"on_conflict"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"constraint"},"value":{"kind":"EnumValue","value":"group_permissions_user_group_id_permission_id_key"}},{"kind":"ObjectField","name":{"kind":"Name","value":"update_columns"},"value":{"kind":"ListValue","values":[]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateUserGroupsPermissionsMutation, UpdateUserGroupsPermissionsMutationVariables>;

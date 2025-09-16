@@ -20,7 +20,7 @@ export class TableColumnPreferencesService {
 	constructor(@Inject(forwardRef(() => DataService)) protected dataService: DataService) {}
 
 	public getColumnsFromPreference(dbTableColumnPreference?: GqlTableColumnPreference): string[] {
-		return JSON.parse(dbTableColumnPreference?.values || '[]');
+		return JSON.parse(dbTableColumnPreference?.visible_columns || '[]');
 	}
 
 	public async fetchTableColumnPreference(
