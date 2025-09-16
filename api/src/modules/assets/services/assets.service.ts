@@ -292,12 +292,14 @@ export class AssetsService {
 			url.pathname = (process.env.ASSET_SERVER_BUCKET_NAME as string) + '/' + key;
 			return url.href;
 		} catch (err) {
-			const error = new InternalServerErrorException({
+			const error = {
 				message: 'Failed to upload asset to the s3 asset service',
 				error: err,
-			});
+			};
 			this.logger.error(error);
-			throw error;
+			throw new InternalServerErrorException(
+				JSON.stringify(error, null, process.env.SINGLE_LINE_LOGGING === 'true' ? 0 : 2)
+			);
 		}
 	}
 
