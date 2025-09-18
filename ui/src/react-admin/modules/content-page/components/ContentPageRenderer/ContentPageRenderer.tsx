@@ -17,8 +17,6 @@ import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 import './ContentPageRenderer.scss';
 import { StringParam, useQueryParams } from 'use-query-params';
-import { ContentPagePreviewUserRoleSelector } from '~modules/content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
-import { ROUTE_PARTS } from '~shared/consts';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -132,17 +130,11 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		return contentBlockBlockConfigs;
 	};
 
-	const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
-	const pageInPreview = window.location.href.includes('preview');
-
 	const renderContentPage = () => {
 		// TODO render <InteractiveTour showButton={false} /> manually in AVO above the content page
 		return (
 			<div className="c-content-page-preview">
 				<QueryClientProvider client={queryClient}>
-					{!isAdminRoute && pageInPreview && (
-						<ContentPagePreviewUserRoleSelector commonUser={props.commonUser} />
-					)}
 					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 						(contentBlockConfig: ContentBlockConfig) => {
 							return (

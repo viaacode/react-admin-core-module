@@ -1,23 +1,21 @@
-import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
-import { StringParam, useQueryParams } from 'use-query-params';
-import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
-import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
-import { SpecialPermissionGroups } from '~shared/types/authentication.types';
-
-import './ContentPagePreviewUserRoleSelector.scss';
 import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
-import { Button, IconName } from '@viaa/avo2-components';
+import { Button, type DefaultProps, IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
+import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { StringParam, useQueryParams } from 'use-query-params';
 import { GET_SPECIAL_USER_GROUPS } from '~modules/user-group/const/user-group.const';
+import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
+import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
 import { tText } from '~shared/helpers/translation-functions';
+import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 type ContentPagePreviewUserRoleSelectorProps = {
 	commonUser?: Avo.User.CommonUser;
 };
 
 export const ContentPagePreviewUserRoleSelector: FunctionComponent<
-	ContentPagePreviewUserRoleSelectorProps
+	ContentPagePreviewUserRoleSelectorProps & DefaultProps
 > = (props) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -84,7 +82,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 				<DropdownButton>
 					<Button
 						icon={IconName.eye}
-						type="inline-link"
+						type="borderless"
 						label={buttonLabel}
 						ariaLabel={buttonLabel}
 						onClick={() => setIsMenuOpen(!isMenuOpen)}

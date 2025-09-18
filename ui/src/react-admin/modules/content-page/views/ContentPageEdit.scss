@@ -46,9 +46,10 @@
 .c-content-page-edit__nav-bar > .o-container {
   position: relative;
 
-  .c-content-page-edit__copy-page-button {
+  .right-side-content-page-nav {
     position: absolute;
     top: 0;
     right: 0;
+    vertical-align: middle;
   }
 }
