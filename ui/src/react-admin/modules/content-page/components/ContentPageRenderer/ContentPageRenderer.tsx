@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import type { Avo } from '@viaa/avo2-types';
+import { type Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, noop, set } from 'lodash-es';
 import type { FunctionComponent } from 'react';
@@ -16,6 +16,13 @@ import type { ContentBlockConfig } from '../../types/content-block.types';
 import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 import './ContentPageRenderer.scss';
+import { Button, IconName, Toolbar, ToolbarRight } from '@viaa/avo2-components';
+import { stringifyUrl } from 'query-string';
+import { AdminConfigManager } from '~core/config';
+import { ROUTE_PARTS } from '~shared/consts';
+import { buildLink } from '~shared/helpers/link';
+import { tText } from '~shared/helpers/translation-functions';
+import { PermissionService } from '~shared/services/permission-service';
 
 type ContentPageDetailProps = {
 	contentPageInfo: Partial<ContentPageInfo>;
@@ -124,10 +131,34 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	};
 
 	const renderContentPage = () => {
-		// TODO render <InteractiveTour showButton={false} /> manually in AVO above the content page
 		return (
 			<div className="c-content-page-preview">
 				<QueryClientProvider client={queryClient}>
+					{!window.location.href.includes(ROUTE_PARTS.admin) &&
+						PermissionService.hasPerm(props.commonUser, PermissionName.EDIT_ANY_CONTENT_PAGES) && (
+							<Toolbar size="no-height">
+								<ToolbarRight>
+									<a
+										href={stringifyUrl({
+											url: buildLink(
+												AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+												{
+													id: props.contentPageInfo.id,
+												}
+											),
+										})}
+										target="_blank"
+									>
+										<Button
+											type={'link'}
+											icon={IconName.edit}
+											title={tText('Bewerk pagina')}
+											label={tText('Bewerk pagina')}
+										/>
+									</a>
+								</ToolbarRight>
+							</Toolbar>
+						)}
 					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 						(contentBlockConfig: ContentBlockConfig) => {
 							return (
