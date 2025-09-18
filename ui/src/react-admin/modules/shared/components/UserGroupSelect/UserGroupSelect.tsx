@@ -14,7 +14,11 @@ import type { UserGroup } from '~modules/user-group/types/user-group.types';
 
 import './UserGroupSelect.scss';
 import { Checkbox } from '@meemoo/react-components';
-import { getAllSubgroupIds, isSubUserGroup } from '~modules/user-group/const/user-group.const';
+import {
+	GET_ALL_CONTENT_USER_GROUP,
+	getAllSubgroupIds,
+	isSubUserGroup,
+} from '~modules/user-group/const/user-group.const';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 export interface UserGroupSelectProps {
@@ -24,6 +28,7 @@ export interface UserGroupSelectProps {
 	values: string[];
 	checkedOptions?: string[];
 	disabledOptions?: string[];
+	enableAllContentOption?: boolean;
 	required: boolean;
 	onChange: (selectedUserGroupIds: string[]) => void;
 	className?: string;
@@ -36,6 +41,7 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 	values,
 	checkedOptions = [],
 	disabledOptions = [],
+	enableAllContentOption,
 	onChange,
 	required,
 	className,
@@ -114,7 +120,10 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 						if (item === SpecialPermissionGroups.loggedInUsers) {
 							return false;
 						}
-						return disabledOptions.includes(item);
+						if (disabledOptions.includes(item)) {
+							return true;
+						}
+						return !isSubUserGroup(item);
 					})
 				);
 			} else {
@@ -153,6 +162,16 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 			className={clsx('c-user-group-select', className)}
 		>
 			<CheckboxGroup>
+				{enableAllContentOption && (
+					<Checkbox
+						key={SpecialPermissionGroups.allContent}
+						label={GET_ALL_CONTENT_USER_GROUP().label}
+						value={SpecialPermissionGroups.allContent}
+						checked={values.includes(String(SpecialPermissionGroups.allContent))}
+						onChange={handleCheckboxChanged}
+					></Checkbox>
+				)}
+
 				{userGroupOptions.map((userGroupOption) => {
 					return (
 						<Checkbox
