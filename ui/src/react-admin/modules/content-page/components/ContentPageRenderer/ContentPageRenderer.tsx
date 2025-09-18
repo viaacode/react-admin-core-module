@@ -130,35 +130,38 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		return contentBlockBlockConfigs;
 	};
 
+	const isAdminROute = window.location.href.includes(ROUTE_PARTS.admin);
+	const pageInPreview = window.location.href.includes('preview');
+	const userCanEditPage = PermissionService.hasPerm(
+		props.commonUser,
+		PermissionName.EDIT_ANY_CONTENT_PAGES
+	);
+
 	const renderContentPage = () => {
 		return (
 			<div className="c-content-page-preview">
 				<QueryClientProvider client={queryClient}>
-					{!window.location.href.includes(ROUTE_PARTS.admin) &&
-						PermissionService.hasPerm(props.commonUser, PermissionName.EDIT_ANY_CONTENT_PAGES) && (
-							<Toolbar size="no-height">
-								<ToolbarRight>
-									<a
-										href={stringifyUrl({
-											url: buildLink(
-												AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
-												{
-													id: props.contentPageInfo.id,
-												}
-											),
-										})}
-										target="_blank"
-									>
-										<Button
-											type={'link'}
-											icon={IconName.edit}
-											title={tText('Bewerk pagina')}
-											label={tText('Bewerk pagina')}
-										/>
-									</a>
-								</ToolbarRight>
-							</Toolbar>
-						)}
+					{!isAdminROute && !pageInPreview && userCanEditPage && (
+						<Toolbar size="no-height">
+							<ToolbarRight>
+								<a
+									href={stringifyUrl({
+										url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+											id: props.contentPageInfo.id,
+										}),
+									})}
+									target="_blank"
+								>
+									<Button
+										type={'link'}
+										icon={IconName.edit}
+										title={tText('Bewerk pagina')}
+										label={tText('Bewerk pagina')}
+									/>
+								</a>
+							</ToolbarRight>
+						</Toolbar>
+					)}
 					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 						(contentBlockConfig: ContentBlockConfig) => {
 							return (
