@@ -73,6 +73,7 @@ const { EDIT_ANY_CONTENT_PAGES, EDIT_OWN_CONTENT_PAGES } = PermissionName;
 export type ContentPageEditProps = DefaultComponentProps & {
 	id: string | undefined;
 	onGoBack: () => void;
+	onHasUnsavedChangesChanged?: (hasUnsavedChanges: boolean) => void;
 	commonUser: Avo.User.CommonUser;
 };
 
@@ -80,6 +81,7 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	id,
 	className,
 	onGoBack,
+	onHasUnsavedChangesChanged,
 	commonUser,
 }) => {
 	// Hooks
@@ -354,6 +356,13 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 	}, [fetchContentPage]);
 
 	useEffect(() => {
+		onHasUnsavedChangesChanged?.(
+			JSON.stringify(contentPageState.initialContentPageInfo) !==
+				JSON.stringify(contentPageState.currentContentPageInfo)
+		);
+	}, [contentPageState, onHasUnsavedChangesChanged]);
+
+	useEffect(() => {
 		if (contentPageState.currentContentPageInfo && !isLoadingContentTypes) {
 			setLoadingInfo({ state: 'loaded' });
 		}
@@ -509,6 +518,14 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				insertedOrUpdatedContent as ContentPageInfo
 			);
 
+			changeContentPageState({
+				type: ContentEditActionType.SET_CONTENT_PAGE,
+				payload: {
+					contentPageInfo: insertedOrUpdatedContent,
+					replaceInitial: true,
+				},
+			});
+
 			showToast({
 				title: tText('modules/content-page/views/content-page-edit___success'),
 				description: tText(
@@ -516,14 +533,17 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 				),
 				type: ToastType.SUCCESS,
 			});
-			navigate(
-				history,
-				AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
-				{
-					id: insertedOrUpdatedContent.id,
-				},
-				{ tab: currentTab }
-			);
+			setTimeout(() => {
+				// Delay navigation a split second so we know the onHasUnsavedChanges has run
+				navigate(
+					history,
+					AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'),
+					{
+						id: insertedOrUpdatedContent.id,
+					},
+					{ tab: currentTab }
+				);
+			}, 10);
 		} catch (err) {
 			console.error(new CustomError('Failed to save content page', err));
 			showToast({
