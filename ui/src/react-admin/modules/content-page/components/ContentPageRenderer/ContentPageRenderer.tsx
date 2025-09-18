@@ -115,10 +115,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 						contentBlockConfig.block.state.userGroupIds || []
 					).map(String);
 
-					if (
-						blockUserGroupIds.length &&
-						!currentUserGroupIds.includes(SpecialPermissionGroups.allContent)
-					) {
+					if (blockUserGroupIds.length) {
 						// Block has special restrictions set
 						if (intersection(blockUserGroupIds, currentUserGroupIds).length === 0) {
 							// The user doesn't have the right permissions to see this block

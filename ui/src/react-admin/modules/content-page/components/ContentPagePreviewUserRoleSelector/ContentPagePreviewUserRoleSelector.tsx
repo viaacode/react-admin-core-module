@@ -6,14 +6,10 @@ import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
 import './ContentPagePreviewUserRoleSelector.scss';
 import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
-import { Button, Container, IconName, Navbar, Toolbar, ToolbarLeft } from '@viaa/avo2-components';
+import { Button, IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
-import {
-	GET_ALL_CONTENT_USER_GROUP,
-	GET_SPECIAL_USER_GROUPS,
-} from '~modules/user-group/const/user-group.const';
-import { Icon } from '~shared/components/Icon';
+import { GET_SPECIAL_USER_GROUPS } from '~modules/user-group/const/user-group.const';
 import { tText } from '~shared/helpers/translation-functions';
 
 type ContentPagePreviewUserRoleSelectorProps = {
@@ -39,8 +35,6 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 		[queryParams]
 	);
 	const buttonLabel = useMemo(() => {
-		console.log(selectedUserGroups);
-
 		if (!selectedUserGroups?.length) {
 			return tText('Preview voor niemand');
 		}
@@ -51,19 +45,17 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			});
 		}
 
-		const selection = [
-			GET_ALL_CONTENT_USER_GROUP(),
-			...(allUserGroupOptions || []),
-			...GET_SPECIAL_USER_GROUPS(),
-		].find((item) => item.id === selectedUserGroups[0])?.label as string;
-		console.log(allUserGroupOptions, selection);
+		const selection = [...(allUserGroupOptions || []), ...GET_SPECIAL_USER_GROUPS()].find(
+			(item) => item.id === selectedUserGroups[0]
+		)?.label as string;
 
 		return tText('Preview voor {{selectedUserGroup}}', { selectedUserGroup: selection });
 	}, [allUserGroupOptions, selectedUserGroups]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this the first time and we have no queryParams
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once
 	useEffect(() => {
-		if (!isNil(queryParams?.userGroupIds)) {
+		// if the queryParams are missing userGroupIds, use the userGroup of the current user
+		if (isNil(queryParams?.userGroupIds)) {
 			let currentUserGroupIds: string[];
 			if (props.commonUser?.userGroup?.id) {
 				currentUserGroupIds = [
@@ -78,11 +70,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 				userGroupIds: currentUserGroupIds.join(','),
 			});
 		}
-	}, [props.commonUser?.userGroup?.id, setQueryParams]);
-
-	if (!allUserGroupOptions?.length) {
-		return <></>;
-	}
+	}, [props.commonUser, setQueryParams]);
 
 	return (
 		<>
@@ -95,7 +83,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			>
 				<DropdownButton>
 					<Button
-						icon={IconName.userGroup}
+						icon={IconName.eye}
 						type="inline-link"
 						label={buttonLabel}
 						ariaLabel={buttonLabel}
@@ -108,7 +96,6 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 						error={undefined}
 						values={queryParams?.userGroupIds?.split(',') || []}
 						required={false}
-						enableAllContentOption={true}
 						onChange={(userGroupIds: string[]) => {
 							setQueryParams({
 								userGroupIds: userGroupIds.join(','),

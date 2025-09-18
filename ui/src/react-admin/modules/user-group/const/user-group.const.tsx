@@ -85,11 +85,6 @@ export const getAllSubgroupIds = (userGroupOptions: (Partial<UserGroup> | TagInf
 	).filter((item) => isSubUserGroup(item));
 };
 
-export const GET_ALL_CONTENT_USER_GROUP: () => Partial<UserGroup> = () => ({
-	label: tText('Alle content'),
-	id: SpecialPermissionGroups.allContent,
-});
-
 export const GET_SPECIAL_USER_GROUPS: () => Partial<UserGroup>[] = () => [
 	{
 		label: tText('admin/menu/components/menu-edit-form/menu-edit-form___niet-ingelogde-gebruikers'),
