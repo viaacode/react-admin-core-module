@@ -34,10 +34,21 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	);
 	const buttonLabel = useMemo(() => {
 		if (!selectedUserGroups?.length) {
-			return tText('Preview voor niemand');
+			return tText('Preview voor (geen selectie)');
 		}
 
 		if (selectedUserGroups?.length > 1) {
+			if (
+				selectedUserGroups.includes(SpecialPermissionGroups.loggedInUsers) &&
+				!selectedUserGroups.includes(SpecialPermissionGroups.loggedOutUsers)
+			) {
+				const selection = GET_SPECIAL_USER_GROUPS().find(
+					(item) => item.id === SpecialPermissionGroups.loggedInUsers
+				)?.label as string;
+
+				return tText('Preview voor {{selectedUserGroup}}', { selectedUserGroup: selection });
+			}
+
 			return tText('Preview voor meerdere gebruikersgroepen ({{count}})', {
 				count: selectedUserGroups.length.toString(),
 			});
@@ -75,6 +86,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			<Dropdown
 				menuWidth="fit-content"
 				placement="bottom-end"
+				className={props.className}
 				isOpen={isMenuOpen}
 				onOpen={() => setIsMenuOpen(true)}
 				onClose={() => setIsMenuOpen(false)}
