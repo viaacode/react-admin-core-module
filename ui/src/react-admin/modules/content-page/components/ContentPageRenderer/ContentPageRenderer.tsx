@@ -16,10 +16,19 @@ import type { ContentBlockConfig } from '../../types/content-block.types';
 import { ContentBlockType } from '../../types/content-block.types';
 import ContentBlockRenderer from '.././ContentBlockRenderer/ContentBlockRenderer';
 import './ContentPageRenderer.scss';
-import { Button, IconName, Toolbar, ToolbarRight } from '@viaa/avo2-components';
+import { Button } from '@meemoo/react-components';
+import {
+	Button as AvoButton,
+	Container,
+	IconName,
+	Toolbar,
+	ToolbarRight,
+} from '@viaa/avo2-components';
 import { stringifyUrl } from 'query-string';
 import { AdminConfigManager } from '~core/config';
+import { Icon } from '~shared/components/Icon';
 import { ROUTE_PARTS } from '~shared/consts';
+import { isAvo } from '~shared/helpers/is-avo';
 import { buildLink } from '~shared/helpers/link';
 import { tText } from '~shared/helpers/translation-functions';
 import { PermissionService } from '~shared/services/permission-service';
@@ -137,31 +146,61 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		PermissionName.EDIT_ANY_CONTENT_PAGES
 	);
 
+	const renderEditButton = () => {
+		const renderHyperlink = (button: React.ReactNode) => {
+			return (
+				<a
+					href={stringifyUrl({
+						url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
+							id: props.contentPageInfo.id,
+						}),
+					})}
+					target="_blank"
+					style={{ marginLeft: 'auto' }}
+				>
+					{button}
+				</a>
+			);
+		};
+
+		if (isAvo()) {
+			return (
+				<Container background="white">
+					<Container mode="horizontal" className="u-d-flex">
+						{renderHyperlink(
+							<AvoButton
+								type={'link'}
+								icon={IconName.edit}
+								title={tText('Bewerk pagina')}
+								label={tText('Bewerk pagina')}
+							/>
+						)}
+					</Container>
+				</Container>
+			);
+		}
+
+		return (
+			<Toolbar size="no-height">
+				<ToolbarRight>
+					{renderHyperlink(
+						<Button
+							iconStart={<Icon name="edit" />}
+							title={tText('Bewerk pagina - title')}
+							label={tText('Bewerk pagina')}
+							variants="text"
+						/>
+					)}
+				</ToolbarRight>
+			</Toolbar>
+		);
+	};
+
 	const renderContentPage = () => {
 		return (
 			<div className="c-content-page-preview">
 				<QueryClientProvider client={queryClient}>
-					{!isAdminROute && !pageInPreview && userCanEditPage && (
-						<Toolbar size="no-height">
-							<ToolbarRight>
-								<a
-									href={stringifyUrl({
-										url: buildLink(AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL'), {
-											id: props.contentPageInfo.id,
-										}),
-									})}
-									target="_blank"
-								>
-									<Button
-										type={'link'}
-										icon={IconName.edit}
-										title={tText('Bewerk pagina')}
-										label={tText('Bewerk pagina')}
-									/>
-								</a>
-							</ToolbarRight>
-						</Toolbar>
-					)}
+					{!isAdminROute && !pageInPreview && userCanEditPage && renderEditButton()}
 					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 						(contentBlockConfig: ContentBlockConfig) => {
 							return (
