@@ -181,6 +181,8 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		}
 
 		return (
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore: no-height is possible
 			<Toolbar size="no-height">
 				<ToolbarRight>
 					{renderHyperlink(
