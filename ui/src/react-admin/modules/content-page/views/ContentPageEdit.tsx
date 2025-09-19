@@ -810,7 +810,10 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 							/>
 
 							<div className="right-side-content-page-nav">
-								<ContentPagePreviewUserRoleSelector className="mr-3" commonUser={commonUser} />
+								<ContentPagePreviewUserRoleSelector
+									className="mr-3 content-page-usergroup-selector"
+									commonUser={commonUser}
+								/>
 								<CopyToClipboard
 									text={JSON.stringify({
 										contentPage: contentPageState.currentContentPageInfo,

@@ -50,6 +50,11 @@
     position: absolute;
     top: 0;
     right: 0;
-    vertical-align: middle;
+    display: flex;
+
+    .content-page-usergroup-selector{
+      display: flex;
+	  align-self: center;
+    }
   }
 }

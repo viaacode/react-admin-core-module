@@ -1,5 +1,5 @@
-import { Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
-import { Button, type DefaultProps, IconName } from '@viaa/avo2-components';
+import { Button, Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
+import { Button as AvoButton, type DefaultProps, Icon, IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil } from 'lodash-es';
 import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
@@ -7,6 +7,7 @@ import { StringParam, useQueryParams } from 'use-query-params';
 import { GET_SPECIAL_USER_GROUPS } from '~modules/user-group/const/user-group.const';
 import { useGetUserGroups } from '~modules/user-group/hooks/get-user-groups';
 import { UserGroupSelect } from '~shared/components/UserGroupSelect/UserGroupSelect';
+import { isAvo } from '~shared/helpers/is-avo';
 import { tText } from '~shared/helpers/translation-functions';
 import { SpecialPermissionGroups } from '~shared/types/authentication.types';
 
@@ -34,7 +35,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	);
 	const buttonLabel = useMemo(() => {
 		if (!selectedUserGroups?.length) {
-			return tText('Preview voor (geen selectie)');
+			return tText('Preview als (geen selectie)');
 		}
 
 		if (selectedUserGroups?.length > 1) {
@@ -46,10 +47,10 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 					(item) => item.id === SpecialPermissionGroups.loggedInUsers
 				)?.label as string;
 
-				return tText('Preview voor {{selectedUserGroup}}', { selectedUserGroup: selection });
+				return tText('Preview als {{selectedUserGroup}}', { selectedUserGroup: selection });
 			}
 
-			return tText('Preview voor meerdere gebruikersgroepen ({{count}})', {
+			return tText('Preview als meerdere gebruikersgroepen ({{count}})', {
 				count: selectedUserGroups.length.toString(),
 			});
 		}
@@ -58,7 +59,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			(item) => item.id === selectedUserGroups[0]
 		)?.label as string;
 
-		return tText('Preview voor {{selectedUserGroup}}', { selectedUserGroup: selection });
+		return tText('Preview als {{selectedUserGroup}}', { selectedUserGroup: selection });
 	}, [allUserGroupOptions, selectedUserGroups]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once
@@ -92,13 +93,21 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 				onClose={() => setIsMenuOpen(false)}
 			>
 				<DropdownButton>
-					<Button
-						icon={IconName.eye}
-						type="borderless"
-						label={buttonLabel}
-						ariaLabel={buttonLabel}
-						onClick={() => setIsMenuOpen(!isMenuOpen)}
-					/>
+					{isAvo() ? (
+						<AvoButton
+							icon={IconName.eye}
+							type="borderless"
+							label={buttonLabel}
+							onClick={() => setIsMenuOpen(!isMenuOpen)}
+						/>
+					) : (
+						<Button
+							iconStart={<Icon name={IconName.eye} />}
+							label={buttonLabel}
+							variants="text"
+							onClick={() => setIsMenuOpen(!isMenuOpen)}
+						/>
+					)}
 				</DropdownButton>
 				<DropdownContent>
 					<UserGroupSelect
@@ -112,7 +121,6 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 							});
 						}}
 					/>
-					,
 				</DropdownContent>
 			</Dropdown>
 		</>
