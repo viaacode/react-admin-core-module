@@ -1,12 +1,10 @@
-import type { FunctionComponent } from 'react';
+import type {FunctionComponent} from 'react';
 import React from 'react';
+import {NavigationBarOverview} from '~modules/navigation/views';
+import {tText} from '~shared/helpers/translation-functions';
+import {AdminLayout} from '~shared/layouts';
 
-import { tText } from '~shared/helpers/translation-functions';
-
-import { AdminLayout } from '~shared/layouts';
-import { NavigationBarOverview } from '~modules/navigation/views';
-
-const NavigationOverviewPage: FunctionComponent = () => {
+export const NavigationOverviewPage: FunctionComponent = () => {
 	const renderPageContent = () => {
 		return (
 			<AdminLayout pageTitle={tText('admin/menu/views/menu-overview___navigatie-overzicht')}>
@@ -19,5 +17,3 @@ const NavigationOverviewPage: FunctionComponent = () => {
 
 	return renderPageContent();
 };
-
-export default NavigationOverviewPage;

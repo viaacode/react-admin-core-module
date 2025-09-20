@@ -1,15 +1,10 @@
-import type { RichTextEditorControl } from '@meemoo/react-components';
-import type { Schema } from 'yup';
-import { array, mixed, object, string } from 'yup';
-import { AdminConfigManager } from '~core/config';
-import type { MaintenanceAlert } from '~modules/maintenance-alerts/maintenance-alerts.types';
-import { ROUTE_PARTS } from '~modules/shared';
-import { Locale } from '~modules/translations/translations.core.types';
-import { tText } from '~shared/helpers/translation-functions';
-
-export const ALERTS_PATH = {
-	ALERTS: `/${ROUTE_PARTS.admin}/${ROUTE_PARTS.alerts}`,
-};
+import type {RichTextEditorControl} from '@meemoo/react-components';
+import type {Schema} from 'yup';
+import {array, mixed, object, string} from 'yup';
+import {AdminConfigManager} from '~core/config';
+import type {MaintenanceAlert} from '~modules/maintenance-alerts/maintenance-alerts.types';
+import {Locale} from '~modules/translations/translations.core.types';
+import {tText} from '~shared/helpers/translation-functions';
 
 // Yup
 

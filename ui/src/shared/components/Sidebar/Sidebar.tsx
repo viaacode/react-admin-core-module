@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import type { Location } from 'history';
-import { flatten } from 'lodash-es';
-import type { FunctionComponent, ReactElement, ReactNode } from 'react';
+import {flatten} from 'lodash-es';
+import type {FunctionComponent, ReactElement, ReactNode} from 'react';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import type { NavigationItemInfo } from '../../types';
+import {Link, type Location, NavLink} from 'react-router-dom';
+import type {NavigationItemInfo} from '../../types';
 
 import './Sidebar.scss';
-import { tHtml } from '~shared/helpers/translation-functions';
+import {useLocation} from 'react-router';
+import {tHtml} from '~shared/helpers/translation-functions';
 
 interface SidebarProps {
 	children?: ReactNode;
@@ -24,6 +24,8 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 	light = false,
 	navItems,
 }) => {
+	const location = useLocation();
+
 	const isActiveClass = (item: NavigationItemInfo, location: Location): boolean => {
 		return (
 			(!!item.location && item.location === location.pathname && !item.exact) ||
@@ -52,9 +54,10 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 				})}
 			>
 				<NavLink
-					className={clsx('o-sidebar__nav-item')}
-					activeClassName="o-sidebar__nav-item--active"
-					isActive={(_match, location) => isActiveClass(navItem, location)}
+					className={clsx(
+						'o-sidebar__nav-item',
+						isActiveClass(navItem, location) ? 'o-sidebar__nav-item--active' : undefined
+					)}
 					to={navItem.location || '/'}
 				>
 					{navItem.label}
@@ -72,7 +75,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({
 				}),
 			])
 		);
-		return <>{renderedNavItems}</>;
+		return renderedNavItems;
 	};
 
 	return (

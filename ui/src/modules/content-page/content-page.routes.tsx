@@ -1,36 +1,32 @@
-import type { ReactNode } from 'react';
+import type {ReactNode} from 'react';
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { AdminConfigManager } from '~core/config';
-import { ContentPageOverviewPage } from './ContentPageOverviewPage';
-import ContentPageEditPage from './ContentPageEditPage';
-import ContentPageDetailPage from './ContentPageDetailPage';
+import {Route} from 'react-router-dom';
+import {AdminConfigManager} from '~core/config';
+import {ContentPageDetailPage} from './ContentPageDetailPage';
+import {ContentPageEditPage} from './ContentPageEditPage';
+import {ContentPageOverviewPage} from './ContentPageOverviewPage';
 
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
 		<Route
-			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW')}
-			render={() => <ContentPageOverviewPage />}
-			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW')}
+			Component={ContentPageOverviewPage}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_OVERVIEW')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
-			render={() => <ContentPageEditPage />}
-			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
+			Component={ContentPageEditPage}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_CREATE')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')}
-			render={() => <ContentPageDetailPage />}
-			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')}
+			Component={ContentPageDetailPage}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')}
 		/>,
 		<Route
-			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
-			render={() => <ContentPageEditPage />}
-			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
+			Component={ContentPageEditPage}
+			key={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
 		/>,
 	];
 };

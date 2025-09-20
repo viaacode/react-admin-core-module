@@ -1,4 +1,4 @@
-import type { AdminConfig } from './config.types';
+import type {AdminConfig} from './config.types';
 
 export class AdminConfigManager {
 	private static config: AdminConfig;

@@ -1,19 +1,25 @@
-import type { FC } from 'react';
-import type { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router';
-import { ContentPageDetail } from '~modules/content-page/views/ContentPageDetail';
-import { mockCommonUser } from '../../mock-common-user';
+import type {FC} from 'react';
+import {useMatch} from 'react-router';
+import {AdminConfigManager} from '~core/config';
+import {ContentPageDetail} from '~modules/content-page/views/ContentPageDetail';
+import {mockCommonUser} from '../../mock-common-user';
 
-const ContentPageDetailPage: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
+export const ContentPageDetailPage: FC = () => {
+	const match = useMatch<'id', string>(
+		AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_DETAIL')
+	);
+	const contentPageId = match?.params.id;
+
+	if (!contentPageId) {
+		return null;
+	}
 	return (
 		<>
 			<ContentPageDetail
-				id={match.params.id}
+				id={contentPageId}
 				commonUser={mockCommonUser}
 				onGoBack={() => window.history.back()}
 			/>
 		</>
 	);
 };
-
-export default withRouter(ContentPageDetailPage);

@@ -1,15 +1,19 @@
-import type { FC } from 'react';
-import type { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router';
-import { ContentPageLabelEdit } from '~modules/content-page-labels/views/ContentPageLabelEdit';
+import type {FC} from 'react';
+import {useMatch} from 'react-router';
+import {ContentPageLabelEdit} from '~modules/content-page-labels/views/ContentPageLabelEdit';
+import {AdminConfigManager} from '../../client.mjs';
 
-const ContentPageLabelsEditPage: FC<RouteComponentProps<{ id: string | undefined }>> = ({
-	match,
-}) => (
-	<ContentPageLabelEdit
-		contentPageLabelId={match.params.id}
-		onGoBack={() => window.history.back()}
-	/>
-);
+const ContentPageLabelsEditPage: FC = () => {
+	const match = useMatch<'id', string>(
+		AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_LABEL_EDIT
+	);
 
-export default withRouter(ContentPageLabelsEditPage);
+	return (
+		<ContentPageLabelEdit
+			contentPageLabelId={match?.params.id}
+			onGoBack={() => window.history.back()}
+		/>
+	);
+};
+
+export default ContentPageLabelsEditPage;

@@ -1,27 +1,22 @@
-import type { Avo } from '@viaa/avo2-types';
-import type { FC } from 'react';
 import React from 'react';
-import type { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router';
-import { AdminConfigManager } from '~core/config';
+import {useMatch} from 'react-router';
+import {AdminConfigManager} from '~core/config';
+import {getCommonUser} from '~core/config/config.selectors';
+import {ContentPageRenderer} from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import {tHtml} from '~shared/helpers/translation-functions';
+import {useGetContentPageByPath} from '../hooks/get-content-page-by-path';
 
-import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
-import { tHtml } from '~shared/helpers/translation-functions';
-import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
+export const ContentPageWrapper = () => {
+	const match = useMatch<'path', string>('/:path');
+	const contentPagePath = `/${match?.params.path || ''}`;
 
-interface ContentPageWrapperProps {
-	commonUser: Avo.User.CommonUser;
-}
+	const commonUser = getCommonUser();
 
-const ContentPageWrapper = ({
-	match,
-	commonUser,
-}: ContentPageWrapperProps & RouteComponentProps<{ path: string }>) => {
 	const {
 		data: contentPageInfo,
 		isLoading,
 		isError,
-	} = useGetContentPageByPath(AdminConfigManager.getConfig().locale, `/${match.params.path}`);
+	} = useGetContentPageByPath(AdminConfigManager.getConfig().locale, contentPagePath);
 
 	if (isLoading) {
 		return null;
@@ -36,10 +31,8 @@ const ContentPageWrapper = ({
 		);
 	}
 	if (contentPageInfo) {
-		return <ContentPageRenderer contentPageInfo={contentPageInfo} commonUser={commonUser} />;
+		return (
+			<ContentPageRenderer contentPageInfo={contentPageInfo} commonUser={commonUser || undefined} />
+		);
 	}
 };
-
-export default withRouter(
-	ContentPageWrapper as FC<ContentPageWrapperProps & RouteComponentProps<{ path: string }>>
-) as unknown as FC<ContentPageWrapperProps>;
