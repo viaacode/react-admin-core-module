@@ -24,6 +24,7 @@
     "copy-to-client-hetarchief": "rimraf ../../hetarchief-client/node_modules/@meemoo/admin-core-ui/dist ../../hetarchief-client/node_modules/.cache ../../hetarchief-client/.swc ../../hetarchief-client/.next && rimraf ../../hetarchief-client/.next && cp -r dist package.json ../../hetarchief-client/node_modules/@meemoo/admin-core-ui",
     "copy-to-client-avo": "rimraf ../../avo2-client/node_modules/@meemoo/admin-core-ui/dist ../../avo2-client/node_modules/.cache  ../../avo2-client/node_modules/.vite && cp -r dist package.json ../../avo2-client/node_modules/@meemoo/admin-core-ui",
     "copy": "vite build && npm run copy-to-client-avo && npm run copy-to-client-hetarchief",
+    "copy:avo": "vite build && npm run copy-to-client-avo",
     "build:analyze": "npx vite-bundle-visualizer",
     "format": "biome format --write src",
     "lint": "npm run lint:ts && npm run lint:scss",
