@@ -148,6 +148,17 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 	};
 
 	const renderEditButton = () => {
+		const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
+		const pageInPreview = window.location.href.includes('preview');
+		const userCanEditPage = PermissionService.hasPerm(
+			props.commonUser,
+			PermissionName.EDIT_ANY_CONTENT_PAGES
+		);
+
+		if (isAdminRoute || pageInPreview || !userCanEditPage) {
+			return <></>;
+		}
+
 		const renderHyperlink = (button: React.ReactNode) => {
 			return (
 				<a
@@ -199,18 +210,11 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		);
 	};
 
-	const isAdminRoute = window.location.href.includes(ROUTE_PARTS.admin);
-	const pageInPreview = window.location.href.includes('preview');
-	const userCanEditPage = PermissionService.hasPerm(
-		props.commonUser,
-		PermissionName.EDIT_ANY_CONTENT_PAGES
-	);
-
 	const renderContentPage = () => {
 		return (
 			<div className="c-content-page-preview">
 				<QueryClientProvider client={queryClient}>
-					{!isAdminRoute && !pageInPreview && userCanEditPage && renderEditButton()}
+					{renderEditButton()}
 					{getContentBlocks(props.contentPageInfo as ContentPageInfo).map(
 						(contentBlockConfig: ContentBlockConfig) => {
 							return (
