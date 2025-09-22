@@ -87,24 +87,40 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				},
 				fieldsToResetOnChange: ['startCuePoint', 'endCuePoint'],
 			},
-			startCuePoint: TEXT_FIELD(tText('Startknippunt is verplicht'), {
-				label: tText('Startknippunt (seconden)'),
-				editorType: ContentBlockEditor.TextInput,
-				editorProps: {
-					type: 'number',
-				},
-				isVisible: cuePointsIsVisible,
-			}),
-			endCuePoint: TEXT_FIELD(tText('Eindknippunt is verplicht'), {
-				label: tText('Eindknippunt (seconden)'),
-				editorType: ContentBlockEditor.TextInput,
-				editorProps: {
-					type: 'number',
-				},
-				isVisible: cuePointsIsVisible,
-			}),
+			startCuePoint: TEXT_FIELD(
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-is-verplicht'
+				),
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-media-grid/block-media-grid___startknippunt-seconden'
+					),
+					editorType: ContentBlockEditor.TextInput,
+					editorProps: {
+						type: 'number',
+					},
+					isVisible: cuePointsIsVisible,
+				}
+			),
+			endCuePoint: TEXT_FIELD(
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-is-verplicht'
+				),
+				{
+					label: tText(
+						'modules/content-page/components/blocks/block-media-grid/block-media-grid___eindknippunt-seconden'
+					),
+					editorType: ContentBlockEditor.TextInput,
+					editorProps: {
+						type: 'number',
+					},
+					isVisible: cuePointsIsVisible,
+				}
+			),
 			mediaItemLabel: TEXT_FIELD(undefined, {
-				label: tText('Alternatieve titel'),
+				label: tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___alternatieve-titel'
+				),
 				editorType: ContentBlockEditor.TextInput,
 				validator: undefined,
 			}),
@@ -184,7 +200,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				validator: undefined,
 			}),
 			titleType: {
-				label: tText('Stijl'),
+				label: tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___stijl'
+				),
 				editorType: ContentBlockEditor.Select,
 				editorProps: {
 					options: GET_HEADING_TYPE_OPTIONS(),
@@ -253,7 +271,7 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 					),
 				} as CheckboxProps,
 				note: tHtml(
-					'Let op! Je hebt geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.'
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___let-op-je-hebt-geknipt-fragment-gekozen-vergeet-niet-om-deze-optie-aan-te-vinken'
 				),
 				isNoteVisible: (entireConfig) =>
 					(entireConfig.components.state as MediaGridBlockComponentState[]).some(
@@ -269,7 +287,9 @@ export const MEDIA_GRID_BLOCK_CONFIG = (position = 0): ContentBlockConfig => ({
 				tText('admin/content-block/helpers/generators/media-grid___cta-titel-kleur')
 			),
 			ctaTitleBackgroundColor: BACKGROUND_COLOR_EXTENDED_FIELD(
-				tText('CTA title: Achtergrondkleur')
+				tText(
+					'modules/content-page/components/blocks/block-media-grid/block-media-grid___cta-title-achtergrondkleur'
+				)
 			),
 			ctaTitleSize: {
 				label: tText('admin/content-block/helpers/generators/media-grid___cta-titel-grootte'),

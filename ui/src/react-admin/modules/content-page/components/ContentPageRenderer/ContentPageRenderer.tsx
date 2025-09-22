@@ -183,8 +183,12 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 							<AvoButton
 								type="link"
 								icon={IconName.edit}
-								title={tText('Bewerk pagina')}
-								label={tText('Bewerk pagina')}
+								title={tText(
+									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
+								)}
+								label={tText(
+									'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
+								)}
 							/>
 						)}
 					</Container>
@@ -200,8 +204,12 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 					{renderHyperlink(
 						<Button
 							iconStart={<Icon name="edit" />}
-							title={tText('Bewerk pagina - tooltip')}
-							label={tText('Bewerk pagina')}
+							title={tText(
+								'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina-tooltip'
+							)}
+							label={tText(
+								'modules/content-page/components/content-page-renderer/content-page-renderer___bewerk-pagina'
+							)}
 							variants="text"
 						/>
 					)}

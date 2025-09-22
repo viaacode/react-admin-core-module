@@ -35,7 +35,9 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 	);
 	const buttonLabel = useMemo(() => {
 		if (!selectedUserGroups?.length) {
-			return tText('Preview als (geen selectie)');
+			return tText(
+				'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-geen-selectie'
+			);
 		}
 
 		if (selectedUserGroups?.length > 1) {
@@ -47,19 +49,28 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 					(item) => item.id === SpecialPermissionGroups.loggedInUsers
 				)?.label as string;
 
-				return tText('Preview als {{selectedUserGroup}}', { selectedUserGroup: selection });
+				return tText(
+					'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
+					{ selectedUserGroup: selection }
+				);
 			}
 
-			return tText('Preview als meerdere gebruikersgroepen ({{count}})', {
-				count: selectedUserGroups.length.toString(),
-			});
+			return tText(
+				'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-meerdere-gebruikersgroepen-count',
+				{
+					count: selectedUserGroups.length.toString(),
+				}
+			);
 		}
 
 		const selection = [...(allUserGroupOptions || []), ...GET_SPECIAL_USER_GROUPS()].find(
 			(item) => item.id === selectedUserGroups[0]
 		)?.label as string;
 
-		return tText('Preview als {{selectedUserGroup}}', { selectedUserGroup: selection });
+		return tText(
+			'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
+			{ selectedUserGroup: selection }
+		);
 	}, [allUserGroupOptions, selectedUserGroups]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only run this once

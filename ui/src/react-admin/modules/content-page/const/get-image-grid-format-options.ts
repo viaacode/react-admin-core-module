@@ -4,7 +4,7 @@ import { tText } from '~shared/helpers/translation-functions';
 
 export const GET_IMAGE_GRID_FORMAT_OPTIONS: () => SelectOption<BlockGridFormatOption>[] = () => [
 	{
-		label: tText('16 x 9 small'),
+		label: tText('modules/content-page/const/get-image-grid-format-options___16-x-9-small'),
 		value: '16:9Small',
 	},
 	{

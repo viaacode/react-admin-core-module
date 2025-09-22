@@ -433,7 +433,12 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 
 	const renderError = () => (
 		<ErrorView
-			message={errorMessage || tHtml('Er is iets mis gegaan bij het laden van de gegevens')}
+			message={
+				errorMessage ||
+				tHtml(
+					'modules/shared/components/filter-table/filter-table___er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens'
+				)
+			}
 			icon={IconName.alertTriangle}
 			actionButtons={['home']}
 		/>

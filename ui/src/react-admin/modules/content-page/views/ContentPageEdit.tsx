@@ -578,7 +578,9 @@ export const ContentPageEdit: FC<ContentPageEditProps> = ({
 			contentPageState.currentContentPageInfo.description
 		);
 		if (!description) {
-			errors.description = tText('Beschrijving is verplicht');
+			errors.description = tText(
+				'modules/content-page/views/content-page-edit___beschrijving-is-verplicht'
+			);
 		}
 
 		// Disable this validation, since meemoo only wants to see the indicator, but not be prevented from saving the page

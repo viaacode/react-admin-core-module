@@ -1361,10 +1361,19 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "react-admin/modules/content-page/const/get-image-grid-format-options",
-    "key": "30-x-220",
+    "location": "modules/content-page/const/get-image-grid-format-options",
+    "key": "16-x-9-small",
     "language": "nl",
-    "value": "30% x 220",
+    "value": "16 x 9 small",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/content-block/content-block",
+    "key": "6-x-9-400-x-225",
+    "language": "nl",
+    "value": "16x9 (400 x 225)",
     "value_type": "TEXT"
   },
   {
@@ -1407,15 +1416,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "admin/content-block/content-block",
-    "key": "6-x-9-400-x-225",
-    "language": "nl",
-    "value": "16x9 (400 x 225)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "admin/content-block/content-block",
     "key": "400-x-150",
     "language": "nl",
     "value": "400x150",
@@ -1428,6 +1428,15 @@
     "key": "384-x-220",
     "language": "nl",
     "value": "384 x 220",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "react-admin/modules/content-page/const/get-image-grid-format-options",
+    "key": "30-x-220",
+    "language": "nl",
+    "value": "30% x 220",
     "value_type": "TEXT"
   },
   {
@@ -2319,6 +2328,15 @@
     "key": "content-type-is-verplicht",
     "language": "nl",
     "value": "Contenttype is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/views/content-page-edit",
+    "key": "beschrijving-is-verplicht",
+    "language": "nl",
+    "value": "Beschrijving is verplicht",
     "value_type": "TEXT"
   },
   {
@@ -5807,6 +5825,51 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
+    "key": "preview-als-geen-selectie",
+    "language": "nl",
+    "value": "Preview als (geen selectie)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
+    "key": "preview-als-selected-user-group",
+    "language": "nl",
+    "value": "Preview als {{selectedUserGroup}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
+    "key": "preview-als-meerdere-gebruikersgroepen-count",
+    "language": "nl",
+    "value": "Preview als meerdere gebruikersgroepen ({{count}})",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
+    "key": "bewerk-pagina",
+    "language": "nl",
+    "value": "Bewerk pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
+    "key": "bewerk-pagina-tooltip",
+    "language": "nl",
+    "value": "Bewerk pagina - tooltip",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/menu/views/menu-edit",
     "key": "het-navigatie-item-zal-zichtbaar-zijn-voor-gebruikers-die-geen-toegang-hebben-tot-de-geselecteerde-pagina",
     "language": "nl",
@@ -6024,6 +6087,69 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/shared/components/content-picker/content-picker",
+    "key": "nieuws-item",
+    "language": "nl",
+    "value": "Nieuws item",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "pagina",
+    "language": "nl",
+    "value": "Pagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "project",
+    "language": "nl",
+    "value": "Project",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "overzicht",
+    "language": "nl",
+    "value": "Overzicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "domein-detail",
+    "language": "nl",
+    "value": "Domein detail",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "event-detail",
+    "language": "nl",
+    "value": "Event detail",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "hulpfilmpje",
+    "language": "nl",
+    "value": "Hulpfilmpje",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
     "key": "nederlandse-hoofd-pagina",
     "language": "nl",
     "value": "Nederlandstalige hoofdpagina",
@@ -6054,6 +6180,15 @@
     "key": "items",
     "language": "nl",
     "value": "Fragmenten",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/content-picker/content-picker",
+    "key": "geknipte-fragmenten",
+    "language": "nl",
+    "value": "Geknipte fragmenten",
     "value_type": "TEXT"
   },
   {
@@ -6510,6 +6645,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
+    "key": "het-ophalen-van-de-data-voor-de-csv-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de data voor de csv is mislukt",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/export-all-to-csv-modal/export-all-to-csv-modal",
     "key": "het-genereren-van-de-csv-is-mislukt",
     "language": "nl",
     "value": "Het genereren van de csv is mislukt.",
@@ -6694,6 +6838,33 @@
     "language": "nl",
     "value": "Kolommen",
     "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/shared/components/filter-table/filter-table",
+    "key": "er-is-iets-mis-gegaan-bij-het-laden-van-de-gegevens",
+    "language": "nl",
+    "value": "Er is iets mis gegaan bij het laden van de gegevens",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/shared/components/filter-table/filter-table",
+    "key": "ben-je-zeker-dat-je-deze-actie-wil-uitvoeren",
+    "language": "nl",
+    "value": "Ben je zeker dat je deze actie wil uitvoeren",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "admin/shared/components/filter-table/filter-table",
+    "key": "opgelet-deze-actie-kan-niet-meer-ongedaan-worden",
+    "language": "nl",
+    "value": "Opgelet deze actie kan niet meer ongedaan worden",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -8210,6 +8381,51 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "startknippunt-is-verplicht",
+    "language": "nl",
+    "value": "Startknippunt is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "startknippunt-seconden",
+    "language": "nl",
+    "value": "Startknippunt (seconden)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "eindknippunt-is-verplicht",
+    "language": "nl",
+    "value": "Eindknippunt is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "eindknippunt-seconden",
+    "language": "nl",
+    "value": "Eindknippunt (seconden)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "alternatieve-titel",
+    "language": "nl",
+    "value": "Alternatieve titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "react-admin/modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "afbeelding",
     "language": "nl",
@@ -8300,6 +8516,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "stijl",
+    "language": "nl",
+    "value": "Stijl",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/media-grid",
     "key": "algemene-knop-tekst",
     "language": "nl",
@@ -8363,6 +8588,15 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "let-op-je-hebt-geknipt-fragment-gekozen-vergeet-niet-om-deze-optie-aan-te-vinken",
+    "language": "nl",
+    "value": "Let op! Je hebt geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
     "location": "admin/content-block/helpers/generators/media-grid",
     "key": "cta-titel",
     "language": "nl",
@@ -8376,6 +8610,15 @@
     "key": "cta-titel-kleur",
     "language": "nl",
     "value": "CTA titel: kleur",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
+    "key": "cta-title-achtergrondkleur",
+    "language": "nl",
+    "value": "CTA title: Achtergrondkleur",
     "value_type": "TEXT"
   },
   {
@@ -9588,6 +9831,15 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/admin",
+    "key": "redirects",
+    "language": "nl",
+    "value": "Redirects",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/admin",
     "key": "vertaling",
     "language": "nl",
     "value": "Vertalingen",
@@ -10428,6 +10680,33 @@
     "key": "deze-pagina-is-niet-meer-beschikbaar",
     "language": "nl",
     "value": "<p>Oeps. Deze pagina is niet meer toegankelijk.</p><p>Vermoed je een fout? Contacteer onze helpdesk.</p>",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "dynamic-route-resolver/dynamic-route-resolver",
+    "key": "deze-pagina-is-enkel-voor-leerlingen",
+    "language": "nl",
+    "value": "Deze pagina is enkel voor leerlingen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "dynamic-route-resolver/dynamic-route-resolver",
+    "key": "deze-pagina-is-niet-voor-leerlingen",
+    "language": "nl",
+    "value": "Deze pagina is niet voor leerlingen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "dynamic-route-resolver/dynamic-route-resolver",
+    "key": "deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten",
+    "language": "nl",
+    "value": "Deze pagina is enkel voor gebruikers met andere rechten",
     "value_type": "HTML"
   },
   {
@@ -11850,6 +12129,78 @@
     "key": "acties",
     "language": "nl",
     "value": "Acties",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "oude-url-patroon",
+    "language": "nl",
+    "value": "Oude url patroon",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "oude-url",
+    "language": "nl",
+    "value": "Oude url",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "nieuwe-url",
+    "language": "nl",
+    "value": "Nieuwe url",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "aangemaakt-op",
+    "language": "nl",
+    "value": "Aangemaakt op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "aangepast-op",
+    "language": "nl",
+    "value": "Aangepast op",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "acties",
+    "language": "nl",
+    "value": "Acties",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "tekst",
+    "language": "nl",
+    "value": "Tekst",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/url-redirects",
+    "key": "reguliere-expressie",
+    "language": "nl",
+    "value": "Reguliere expressie",
     "value_type": "TEXT"
   },
   {
@@ -14996,19 +15347,10 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "authentication/components/login-options",
-    "key": "itsme",
+    "location": "authentication/components/login-options-for-teacher",
+    "key": "itsme-of-e-id",
     "language": "nl",
-    "value": "itsme",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "authentication/components/login-options",
-    "key": "e-id-of-een-digitale-sleutel",
-    "language": "nl",
-    "value": "eID of een digitale sleutel",
+    "value": "itsme of eID",
     "value_type": "TEXT"
   },
   {
@@ -15581,19 +15923,19 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "bundle/views/bundle-detail",
-    "key": "pas-de-bundel-aan",
+    "location": "collection/views/collection-detail",
+    "key": "bladwijzer",
     "language": "nl",
-    "value": "Pas de bundel aan",
+    "value": "Maak bladwijzer",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "collection/views/collection-detail",
-    "key": "bladwijzer",
+    "location": "bundle/views/bundle-detail",
+    "key": "pas-de-bundel-aan",
     "language": "nl",
-    "value": "Maak bladwijzer",
+    "value": "Pas de bundel aan",
     "value_type": "TEXT"
   },
   {
@@ -18537,6 +18879,24 @@
     "key": "ga-terug-naar-de-homepagina",
     "language": "nl",
     "value": "Ga terug naar de startpagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-hulppagina",
+    "language": "nl",
+    "value": "Ga naar de hulppagina",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "error/views/error-view",
+    "key": "ga-naar-de-startpagina",
+    "language": "nl",
+    "value": "Ga naar de startpagina",
     "value_type": "TEXT"
   },
   {
@@ -23258,6 +23618,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "admin/items/views/items-overview",
+    "key": "het-ophalen-van-de-items-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de items is mislukt.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "admin/items/views/item-detail",
     "key": "het-item-is-gepubliceerd",
     "language": "nl",
@@ -23587,15 +23956,6 @@
     "language": "nl",
     "value": "Fragmenten - beheer details",
     "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/items/views/items-overview",
-    "key": "het-ophalen-van-de-items-is-mislukt",
-    "language": "nl",
-    "value": "Het ophalen van de items is mislukt.",
-    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -24603,6 +24963,321 @@
     "key": "vertalingen-beheer-pagina-beschrijving",
     "language": "nl",
     "value": "Overzichtspagina vertalingen (beheer)",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "een-oude-url-is-verplicht",
+    "language": "nl",
+    "value": "Een oude url is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "de-url-moet-starten-met",
+    "language": "nl",
+    "value": "De url moet starten met /",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "een-nieuwe-url-is-verplicht",
+    "language": "nl",
+    "value": "Een nieuwe url is verplicht",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "de-url-moet-starten-met-of-proxy-url",
+    "language": "nl",
+    "value": "De url moet starten met / of {{PROXY_URL}}",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "de-invoer-is-ongeldig",
+    "language": "nl",
+    "value": "De invoer is ongeldig",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "de-url-redirect-is-opgeslagen",
+    "language": "nl",
+    "value": "De url redirect is opgeslagen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "het-opslaan-van-de-url-redirect-is-mislukt",
+    "language": "nl",
+    "value": "Het opslaan van de url redirect is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "het-ophalen-van-de-url-redirect-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de url redirect is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "oude-url",
+    "language": "nl",
+    "value": "Oude url",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "oude-url-patroon",
+    "language": "nl",
+    "value": "Oude url patroon",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "nieuwe-url",
+    "language": "nl",
+    "value": "Nieuwe url",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-aanmaken",
+    "language": "nl",
+    "value": "Url redirect aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-aanpassen",
+    "language": "nl",
+    "value": "Url redirect aanpassen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "annuleer",
+    "language": "nl",
+    "value": "Annuleer",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "opslaan",
+    "language": "nl",
+    "value": "Opslaan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-beheer-aanmaak-pagina-titel",
+    "language": "nl",
+    "value": "url redirect beheer aanmaak pagina titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-beheer-bewerk-pagina-titel",
+    "language": "nl",
+    "value": "url redirect beheer bewerk pagina titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-beheer-aanmaak-pagina-beschrijving",
+    "language": "nl",
+    "value": "url redirect beheer aanmaak pagina beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-edit",
+    "key": "url-redirect-beheer-bewerk-pagina-beschrijving",
+    "language": "nl",
+    "value": "url redirect beheer bewerk pagina beschrijving",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "het-verwijderen-van-de-url-redirect-is-mislukt-probeer-te-herladen",
+    "language": "nl",
+    "value": "Het verwijderen van de url redirect is mislukt, probeer te herladen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "de-url-redirect-is-verwijderd",
+    "language": "nl",
+    "value": "De url redirect is verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "het-verwijderen-van-de-url-redirect-is-mislukt",
+    "language": "nl",
+    "value": "Het verwijderen van de url redirect is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "de-url-redirect-kon-niet-worden-verwijderd",
+    "language": "nl",
+    "value": "De url redirect kon niet worden verwijderd",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "bewerk-de-url-redirect",
+    "language": "nl",
+    "value": "Bewerk de url redirect",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "verwijder-de-url-redirect",
+    "language": "nl",
+    "value": "Verwijder de url redirect",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "er-zijn-nog-geen-url-redirects-aangemaakt",
+    "language": "nl",
+    "value": "Er zijn nog geen url redirects aangemaakt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "beschrijving-hoe-een-url-redirect-toe-te-voegen",
+    "language": "nl",
+    "value": "Beschrijving hoe een url redirect toe te voegen",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "url-redirect-aanmaken",
+    "language": "nl",
+    "value": "Url redirect aanmaken",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "het-ophalen-van-de-url-redirects-is-mislukt",
+    "language": "nl",
+    "value": "Het ophalen van de url redirects is mislukt",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "zoek-op-nieuwe-of-oude-url",
+    "language": "nl",
+    "value": "Zoek op nieuwe of oude url",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "er-zijn-geen-url-redirects-die-voldoen-aan-de-filters",
+    "language": "nl",
+    "value": "Er zijn geen url redirects die voldoen aan de filters",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "url-redirects-overview",
+    "language": "nl",
+    "value": "Url redirects overview",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "url-redirect-toevoegen",
+    "language": "nl",
+    "value": "Url redirect toevoegen",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "url-redirect-beheer-overview-pagina-titel",
+    "language": "nl",
+    "value": "url redirect beheer overview pagina titel",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/url-redirects/views/url-redirect-overview",
+    "key": "url-redirect-beheer-overview-pagina-beschrijving",
+    "language": "nl",
+    "value": "url redirect beheer overview pagina beschrijving",
     "value_type": "TEXT"
   },
   {
@@ -28073,6 +28748,15 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
+    "location": "shared/components/search-result/search-result",
+    "key": "toggle-bookmark",
+    "language": "nl",
+    "value": "toggle bookmark",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
     "location": "shared/components/select-education-level-modal/select-education-level-modal",
     "key": "kies-je-onderwijsniveau",
     "language": "nl",
@@ -28424,20 +29108,11 @@
   {
     "app": "AVO",
     "component": "FRONTEND",
-    "location": "assignment/components/share-assignment-with-pupil",
-    "key": "kopieer",
+    "location": "shared/components/share-with-pupils/share-with-pupils",
+    "key": "je-kan-de-link-enkel-delen-met-leerlingen-die-smartschool-of-leer-id-hebben",
     "language": "nl",
-    "value": "Kopieer",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/components/share-assignment-with-pupil",
-    "key": "link-nog-niet-deelbaar",
-    "language": "nl",
-    "value": "Link nog niet deelbaar",
-    "value_type": "TEXT"
+    "value": "Je kan de link enkel delen met leerlingen die Smartschool of LeerID hebben.",
+    "value_type": "HTML"
   },
   {
     "app": "AVO",
@@ -28446,6 +29121,24 @@
     "key": "opdracht-is-verlopen--titel",
     "language": "nl",
     "value": "Link niet meer deelbaar",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/components/share-assignment-with-pupil",
+    "key": "opdracht-is-verlopen--beschrijving",
+    "language": "nl",
+    "value": "Deze opdracht is verlopen en kan niet langer gedeeld worden. Dupliceer de opdracht via de '...' om opnieuw te delen met leerlingen.",
+    "value_type": "HTML"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "assignment/components/share-assignment-with-pupil",
+    "key": "link-nog-niet-deelbaar",
+    "language": "nl",
+    "value": "Link nog niet deelbaar",
     "value_type": "TEXT"
   },
   {
@@ -28497,10 +29190,10 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "assignment/components/share-assignment-with-pupil",
-    "key": "opdracht-is-verlopen--beschrijving",
+    "key": "kopieer",
     "language": "nl",
-    "value": "Deze opdracht is verlopen en kan niet langer gedeeld worden. Dupliceer de opdracht via de '...' om opnieuw te delen met leerlingen.",
-    "value_type": "HTML"
+    "value": "Kopieer",
+    "value_type": "TEXT"
   },
   {
     "app": "AVO",
@@ -29013,60 +29706,6 @@
     "key": "open-de-link-in-een-nieuw-tabblad",
     "language": "nl",
     "value": "Open de link in een nieuw tabblad",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "zoeken",
-    "language": "nl",
-    "value": "Zoeken",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "bulkactie",
-    "language": "nl",
-    "value": "Bulkactie",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "kolommen",
-    "language": "nl",
-    "value": "Kolommen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "ben-je-zeker-dat-je-deze-actie-wil-uitvoeren",
-    "language": "nl",
-    "value": "Ben je zeker dat je deze actie wil uitvoeren?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "opgelet-deze-actie-kan-niet-meer-ongedaan-worden",
-    "language": "nl",
-    "value": "Opgelet, deze actie kan niet meer ongedaan worden!",
-    "value_type": "HTML"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/shared/components/filter-table/filter-table",
-    "key": "bevestig",
-    "language": "nl",
-    "value": "Bevestig",
     "value_type": "TEXT"
   },
   {
@@ -30174,6 +30813,24 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
+    "language": "nl",
+    "value": "Redirects naar andere redirects zijn niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-je-past-het-beste-de-oude-url-old-path-aan",
+    "language": "nl",
+    "value": "Redirects naar andere redirects zijn niet toegestaan. Je past het beste de oude url \"{{oldPath}}\" aan",
     "value_type": "TEXT"
   }
 ]
