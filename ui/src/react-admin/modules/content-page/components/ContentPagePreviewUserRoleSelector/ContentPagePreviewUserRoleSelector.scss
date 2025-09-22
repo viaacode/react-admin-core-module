@@ -1,0 +1,17 @@
+@import "../../../shared/styles/settings/variables";
+
+.c-menu-content {
+	background-color: $g-base-background;
+	color: $g-text-color;
+	padding: $g-spacer-unit;
+	box-shadow: 0 0 10px 0 rgba($color-gray-shadow, 0.7);
+
+
+	.c-radio-group .c-radio {
+		padding: $g-spacer-unit 0;
+	}
+
+	.c-radio input[type="radio"] {
+		margin: 0 $g-spacer-unit 0 0;
+	}
+}
