@@ -3,7 +3,7 @@ import {useMatch} from 'react-router';
 import {ContentPageLabelEdit} from '~modules/content-page-labels/views/ContentPageLabelEdit';
 import {AdminConfigManager} from '../../client.mjs';
 
-const ContentPageLabelsEditPage: FC = () => {
+export const ContentPageLabelsEditPage: FC = () => {
 	const match = useMatch<'id', string>(
 		AdminConfigManager.getConfig().routes.ADMIN_CONTENT_PAGE_LABEL_EDIT
 	);
@@ -15,5 +15,3 @@ const ContentPageLabelsEditPage: FC = () => {
 		/>
 	);
 };
-
-export default ContentPageLabelsEditPage;

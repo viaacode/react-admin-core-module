@@ -3,7 +3,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import {AdminConfigManager} from '~core/config';
 import {ContentPageLabelsDetailPage} from './ContentPageLabelsDetailPage';
-import ContentPageLabelsEditPage from './ContentPageLabelsEditPage';
+import {ContentPageLabelsEditPage} from './ContentPageLabelsEditPage';
 import {ContentPageLabelsOverviewPage} from './ContentPageLabelsOverviewPage';
 
 export const renderAdminContentPageLabelRoutes = (): ReactNode[] => {

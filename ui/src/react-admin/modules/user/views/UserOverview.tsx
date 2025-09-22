@@ -5,8 +5,10 @@ import type {FC, ReactText} from 'react';
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {AdminConfigManager} from '~core/config';
+import {getCommonUser} from '~core/config/config.selectors';
 import {ToastType} from '~core/config/config.types';
 import {generateWhereObjectArchief, generateWhereObjectAvo,} from '~modules/user/helpers/generate-filter-where-object-users';
+import {renderUserOverviewTableCellReact, renderUserOverviewTableCellText,} from '~modules/user/helpers/render-user-overview-table-cells';
 import {useGetProfiles} from '~modules/user/hooks/use-get-profiles';
 import {GET_USER_BULK_ACTIONS, GET_USER_OVERVIEW_TABLE_COLS} from '~modules/user/user.consts';
 import {UserService} from '~modules/user/user.service';
@@ -20,6 +22,7 @@ import type {FilterableColumn} from '~shared/components/FilterTable/FilterTable'
 import {CenteredSpinner} from '~shared/components/Spinner/CenteredSpinner';
 import {CustomError} from '~shared/helpers/custom-error';
 import {isHetArchief} from '~shared/helpers/is-hetarchief';
+import {navigate} from '~shared/helpers/link';
 import {setSelectedCheckboxes} from '~shared/helpers/set-selected-checkboxes';
 import {showToast} from '~shared/helpers/show-toast';
 import {tHtml, tText} from '~shared/helpers/translation-functions';
@@ -33,11 +36,7 @@ import FilterTable, {getFilters} from '../../shared/components/FilterTable/Filte
 import UserDeleteModal from '../components/UserDeleteModal';
 import type {UserOverviewTableCol, UserTableState} from '../user.types';
 import {UserBulkAction, USERS_PER_PAGE} from '../user.types';
-
 import './UserOverview.scss';
-import {getCommonUser} from '~core/config/config.selectors';
-import {renderUserOverviewTableCellReact, renderUserOverviewTableCellText,} from '~modules/user/helpers/render-user-overview-table-cells';
-import {navigate} from '~shared/helpers/link';
 
 export interface UserOverviewProps {
 	customFormatDate?: (date: Date | string) => string;
