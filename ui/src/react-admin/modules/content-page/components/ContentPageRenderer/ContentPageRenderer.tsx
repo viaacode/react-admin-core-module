@@ -169,7 +169,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 					<Container mode="horizontal" className="u-d-flex">
 						{renderHyperlink(
 							<AvoButton
-								type={'link'}
+								type="link"
 								icon={IconName.edit}
 								title={tText('Bewerk pagina')}
 								label={tText('Bewerk pagina')}
