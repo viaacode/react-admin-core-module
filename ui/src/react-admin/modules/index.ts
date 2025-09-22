@@ -9,6 +9,7 @@ export {
 	fetchWithLogoutJson,
 	goToLoginBecauseOfUnauthorizedError,
 } from '../modules/shared/helpers/fetch-with-logout';
+export * from './content-page/components/ContentPagePreviewUserRoleSelector/ContentPagePreviewUserRoleSelector';
 export { ContentPageRenderer } from './content-page/components/ContentPageRenderer/ContentPageRenderer';
 export type { ColorOption } from './content-page/components/fields/ColorSelect/ColorSelect';
 export { CONTENT_BLOCK_CONFIG_MAP } from './content-page/const/content-block-config-map';
