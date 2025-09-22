@@ -340,7 +340,7 @@ export function convertUserInfoToCommonUser(
 				alias: user.alias || undefined,
 				title: user.title || undefined,
 				bio: user.bio || undefined,
-				alternativeEmail: user.alternative_email,
+				alternativeEmail: user.mail || undefined,
 				updatedAt: user.updated_at || undefined,
 				companyId: user.company_id,
 				permissions: (user.user_group?.group?.group_permissions || []).map(

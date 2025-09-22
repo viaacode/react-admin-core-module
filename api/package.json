@@ -13,6 +13,7 @@
     "copy-to-proxy-hetarchief": "rimraf ../../hetarchief-proxy/node_modules/@meemoo/admin-core-api/dist ../../hetarchief-proxy/node_modules/.cache && cp -r dist package.json ../../hetarchief-proxy/node_modules/@meemoo/admin-core-api",
     "copy-to-proxy-avo": "rimraf ../../avo2-proxy/server/node_modules/@meemoo/admin-core-api/dist ../../avo2-proxy/server/node_modules/.cache && cp -r dist package.json ../../avo2-proxy/server/node_modules/@meemoo/admin-core-api",
     "copy": "npm run build && npm run copy-to-proxy-hetarchief && npm run copy-to-proxy-avo",
+    "copy:avo": "npm run build && npm run copy-to-proxy-avo",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "dotenv -e .env/.env.local nest start",
     "dev": "dotenv -e .env/.env.local nest start --swc",
