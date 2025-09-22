@@ -111,12 +111,15 @@ export const UserGroupSelect: FunctionComponent<UserGroupSelectProps> = ({
 				// remove all subgroups except the disabled ones
 				onChange(
 					values.filter((item) => {
+						// Do not include the loggedInUsers
 						if (item === SpecialPermissionGroups.loggedInUsers) {
 							return false;
 						}
+						// But always include the disabled option since they can't be deselected
 						if (disabledOptions.includes(item)) {
 							return true;
 						}
+						// Only keep those that are not a user subgroup
 						return !isSubUserGroup(item);
 					})
 				);
