@@ -54,6 +54,13 @@ query getUserById($id: uuid!) {
 					}
 				}
 			}
+			temp_access {
+				from
+				until
+				has_currently_access {
+					status
+				}
+			}
 			user_id
 		}
 		group_id
@@ -84,15 +91,6 @@ query getUserById($id: uuid!) {
 				label
 				scheme
 				broader
-			}
-		}
-		user {
-			temp_access {
-				from
-				until
-				current {
-					status
-				}
 			}
 		}
 	}

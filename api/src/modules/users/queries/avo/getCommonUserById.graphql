@@ -1,0 +1,76 @@
+query getCommonUserById($id: uuid!) {
+	users_common_users(
+		offset: 0
+		limit: 1
+		where: { profile_id: { _eq: $id }, is_deleted: { _eq: false } }
+	) {
+		profile_id
+		user_id
+		first_name
+		last_name
+		full_name
+		business_category
+		last_access_at
+		mail
+		is_blocked
+		is_deleted
+		is_exception
+		stamboek
+		avatar
+		alias
+		title
+		updated_at
+		created_at
+		bio
+		company_id
+		language
+		idpmaps {
+			id
+			idp
+			idp_user_id
+		}
+		user_group {
+			group {
+				created_at
+				description
+				id
+				label
+				ldap_role
+				updated_at
+				group_permissions {
+					permission {
+						id
+						label
+					}
+				}
+			}
+		}
+		organisation {
+			name
+			logo_url
+			or_id
+		}
+		profile_educational_organizations {
+			organization_id
+			unit_id
+			organization {
+				ldap_description
+			}
+		}
+		loms {
+			lom {
+				id
+				label
+				scheme
+				broader
+			}
+		}
+		temp_access {
+			from
+			until
+			has_currently_access {
+				status
+			}
+		}
+	}
+}

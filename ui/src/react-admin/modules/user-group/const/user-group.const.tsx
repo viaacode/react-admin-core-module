@@ -1,4 +1,5 @@
 import { Checkbox } from '@meemoo/react-components';
+import { sortBy } from 'lodash-es';
 import type { TagInfo } from '@viaa/avo2-components';
 import { compact, sortBy } from 'lodash-es';
 import React from 'react';
@@ -47,6 +48,9 @@ export const getUserGroupTableColumns = (
 			Header: '',
 			accessor: 'label',
 			disableSortBy: true,
+			Cell: ({ row }: PermissionRow) => {
+				return <span title={row.original.description}>{row.original.label}</span>;
+			},
 		},
 		...sortBy(userGroups, (userGroup) => preferredUserGroupOrder[userGroup.label] || 0).map(
 			(group) => {

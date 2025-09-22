@@ -6890,7 +6890,7 @@
     "location": "react-admin/modules/shared/components/upload-or-select-video-still/upload-or-select-video-still",
     "key": "annuleer",
     "language": "nl",
-    "value": "Annuleer",
+    "value": "Annuleren",
     "value_type": "TEXT"
   },
   {
@@ -7376,7 +7376,7 @@
     "location": "modules/content-page/components/blocks/block-content-enclose/block-content-enclose",
     "key": "content-insluiten",
     "language": "nl",
-    "value": "Content insluiten",
+    "value": "Content embedden",
     "value_type": "TEXT"
   },
   {
@@ -8535,6 +8535,15 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
+    "key": "item-alignment",
+    "language": "nl",
+    "value": "Uitlijning",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
     "key": "toon-de-label-tussen-titels",
     "language": "nl",
     "value": "Toon de labels tussen titels.",
@@ -9343,15 +9352,6 @@
   },
   {
     "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/blocks/block-page-overview/block-page-overview",
-    "key": "item-alignment",
-    "language": "nl",
-    "value": "Item alignment",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -9365,7 +9365,7 @@
     "location": "app",
     "key": "je-hebt-geen-toegang-tot-de-embed-functionaliteit",
     "language": "nl",
-    "value": "Je hebt geen toegang tot de embed functionaliteit",
+    "value": "Je hebt geen toegang tot de functionaliteit om audio of video te embedden in externe websites. Deze wordt (nog) niet uitgerold naar onze gebruikers.",
     "value_type": "HTML"
   },
   {
@@ -9699,24 +9699,6 @@
     "key": "titel-is-verplicht",
     "language": "nl",
     "value": "Titel is verplicht",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/assignment",
-    "key": "de-titel-mag-maximum-110-karakters-lang-zijn",
-    "language": "nl",
-    "value": "De titel mag maximum 110 karakters lang zijn.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "assignment/assignment",
-    "key": "de-korte-beschrijving-mag-maximaal-300-karakters-lang-zijn",
-    "language": "nl",
-    "value": "De korte beschrijving mag maximaal 300 karakters bevatten.",
     "value_type": "TEXT"
   },
   {
@@ -14378,7 +14360,7 @@
     "location": "assignment/views/assignment-edit-marcom",
     "key": "de-opdracht-is-reeds-gepubliceerd-naar-klascement-bewerk-het-leermiddel-daar",
     "language": "nl",
-    "value": "De opdracht is reeds gepubliceerd naar KlasCement. Bewerk het leermiddel daar.",
+    "value": "Deze opdracht is reeds gepubliceerd naar KlasCement. Bewerk het leermiddel daar.",
     "value_type": "TEXT"
   },
   {
@@ -16547,7 +16529,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "publiceren-naar-klascement-gelukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement gelukt.",
+    "value": "Publiceren naar KlasCement is gelukt.",
     "value_type": "TEXT"
   },
   {
@@ -16556,7 +16538,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "publiceren-naar-klascement-mislukt",
     "language": "nl",
-    "value": "Publiceren naar KlasCement mislukt.",
+    "value": "Publiceren naar KlasCement is mislukt.",
     "value_type": "TEXT"
   },
   {
@@ -16727,7 +16709,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "de-collectie-is-reeds-gepubliceerd-naar-klascement-bewerk-het-leermiddel-daar",
     "language": "nl",
-    "value": "De collectie is reeds gepubliceerd naar KlasCement. Bewerk het leermiddel daar.",
+    "value": "Deze collectie is reeds gepubliceerd naar KlasCement. Bewerk het leermiddel daar.",
     "value_type": "TEXT"
   },
   {
@@ -16736,7 +16718,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "bezig-met-publiceren-naar-klascement",
     "language": "nl",
-    "value": "Bezig met publiceren naar Klascement",
+    "value": "Bezig met publiceren naar Klascement.",
     "value_type": "TEXT"
   },
   {
@@ -16745,7 +16727,7 @@
     "location": "collection/components/collection-or-bundle-edit-marcom",
     "key": "afbeelding-voor-de-embed-code",
     "language": "nl",
-    "value": "Afbeelding voor de embedlink - 680x380 groot",
+    "value": "Afbeelding voor KlasCement - 680x380 groot",
     "value_type": "TEXT"
   },
   {
@@ -18050,7 +18032,7 @@
     "location": "embed-code/components/embed-code-filter-table-cell",
     "key": "smartschool-logo",
     "language": "nl",
-    "value": "Smartschool logo",
+    "value": "Smartschool-logo",
     "value_type": "TEXT"
   },
   {
@@ -18068,7 +18050,7 @@
     "location": "embed-code/components/embed-code-filter-table-cell",
     "key": "bookwidgets-logo",
     "language": "nl",
-    "value": "BookWidgets logo",
+    "value": "BookWidgets-logo",
     "value_type": "TEXT"
   },
   {
@@ -18806,7 +18788,7 @@
     "location": "item/views/item-detail",
     "key": "fragment-delen",
     "language": "nl",
-    "value": "Deel of embed",
+    "value": "Deel",
     "value_type": "TEXT"
   },
   {
@@ -21362,7 +21344,7 @@
     "location": "admin/assignments/views/assignments-marcom-overview",
     "key": "bezig-met-ophalen-van-media-items",
     "language": "nl",
-    "value": "Bezig met ophalen van media items",
+    "value": "Bezig met ophalen van media items.",
     "value_type": "TEXT"
   },
   {
@@ -21371,7 +21353,7 @@
     "location": "admin/assignments/views/assignments-marcom-overview",
     "key": "bezig-met-genereren-van-de-csv",
     "language": "nl",
-    "value": "Bezig met genereren van de csv",
+    "value": "Bezig met genereren van de csv.",
     "value_type": "TEXT"
   },
   {
@@ -21461,7 +21443,7 @@
     "location": "admin/assignments/views/assignments-overview-admin",
     "key": "je-hebt-num-of-selected-assignments-verwijderd",
     "language": "nl",
-    "value": "Je hebt {{numOfSelectedAssignments}} verwijderd",
+    "value": "Je hebt {{numOfSelectedAssignments}} verwijderd.",
     "value_type": "HTML"
   },
   {
@@ -21479,7 +21461,7 @@
     "location": "admin/assignments/views/assignments-overview-admin",
     "key": "je-hebt-de-auteur-van-num-of-selected-assignments-aangepast",
     "language": "nl",
-    "value": "Je hebt de eigenaar van {{numOfSelectedAssignments}} aangepast",
+    "value": "Je hebt de eigenaar van {{numOfSelectedAssignments}} aangepast.",
     "value_type": "HTML"
   },
   {
@@ -23135,7 +23117,7 @@
     "location": "admin/interactive-tour/views/interactive-tour-overview",
     "key": "verwijder-de-rondleiding",
     "language": "nl",
-    "value": "Verwijder rondleiding",
+    "value": "Verwijder deze rondleiding",
     "value_type": "TEXT"
   },
   {
@@ -23999,7 +23981,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "je-hebt-num-of-selected-pupil-collections-geselecteerd",
     "language": "nl",
-    "value": "Je hebt {{numOfSelectedPupilCollections}} geselecteerd",
+    "value": "Je hebt {{numOfSelectedPupilCollections}} geselecteerd.",
     "value_type": "HTML"
   },
   {
@@ -24017,7 +23999,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "je-hebt-num-of-selected-pupil-collections-leerlingencollecties-verwijderd",
     "language": "nl",
-    "value": "Je hebt {{numOfSelectedPupilCollections}} leerlingencollecties verwijderd",
+    "value": "Je hebt {{numOfSelectedPupilCollections}} leerlingencollecties verwijderd.",
     "value_type": "HTML"
   },
   {
@@ -24035,7 +24017,7 @@
     "location": "admin/pupil-collection/views/pupil-collections-overview",
     "key": "je-hebt-de-auteur-van-num-of-selected-pupil-collections-leerlingencollecties-aangepast",
     "language": "nl",
-    "value": "Je hebt de auteur van {{numOfSelectedPupilCollections}} leerlingencollecties aangepast",
+    "value": "Je hebt de auteur van {{numOfSelectedPupilCollections}} leerlingencollecties aangepast.",
     "value_type": "HTML"
   },
   {
@@ -27374,7 +27356,7 @@
     "location": "shared/components/flow-player-wrapper/flow-player-wrapper",
     "key": "bepaalde-videos-in-de-playlist-kunnen-niet-worden-afgespeeld-probeer-een-andere-browser",
     "language": "nl",
-    "value": "Bepaalde videos in de playlist kunnen niet worden afgespeeld. Probeer een andere browser.",
+    "value": "Bepaalde videos in de playlist kunnen niet worden afgespeeld. Probeer een andere browser of contacteer ons via de Feedback-knop mocht dit probleem zich blijven voordoen.",
     "value_type": "HTML"
   },
   {
@@ -27617,7 +27599,7 @@
     "location": "shared/components/fragment-share-modal/fragment-share-modal",
     "key": "deel-dit-fragment",
     "language": "nl",
-    "value": "Fragment delen of embedden",
+    "value": "Fragment delen",
     "value_type": "HTML"
   },
   {
@@ -28202,7 +28184,7 @@
     "location": "shared/components/share-through-email-modal/share-through-email-modal",
     "key": "uw-e-mailadres",
     "language": "nl",
-    "value": "collega1@school.be, collega2@school.be, ...",
+    "value": "naam1@school1.be, naam2@school2.be, ...",
     "value_type": "TEXT"
   },
   {
@@ -29747,6 +29729,15 @@
   {
     "app": "AVO",
     "component": "BACKEND",
+    "location": "modules/auth/idps/lti/lti",
+    "key": "deze-embed-is-gemaakt-voor-embed-code-external-website-en-kan-dus-niet-geladen-worden-op-issuer-external-website",
+    "language": "nl",
+    "value": "Deze embedlink is gemaakt voor {{embedCodeExternalWebsite}}, en kan dus niet geladen worden op {{issuerExternalWebsite}}.",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
     "location": "modules/klascement/klascement",
     "key": "audiovisueel-lesmateriaal-collectie",
     "language": "nl",
@@ -29759,7 +29750,7 @@
     "location": "modules/klascement/klascement",
     "key": "je-klascement-profiel-id-is-niet-ingesteld-in-de-database-waardoor-het-publiceren-mislukt-is-zie-avo-3737",
     "language": "nl",
-    "value": "Je klascement profiel id is niet ingesteld in de database waardoor het publiceren mislukt is. Zie AVO-3737",
+    "value": "Je KlasCement profiel-id is niet ingesteld in de database waardoor het publiceren mislukt is. (zie AVO-3737)",
     "value_type": "TEXT"
   },
   {
@@ -30011,7 +30002,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-audience-parameter-komt-niet-overeen-met-client-id-probeer-de-pagina-te-herladen",
     "language": "nl",
-    "value": "De audience-parameter komt niet overeen met clientID. Probeer de pagina te herladen.",
+    "value": "De audience-parameter komt niet overeen met de client ID. Probeer de pagina te herladen.",
     "value_type": "TEXT"
   },
   {
@@ -30047,7 +30038,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-avo",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinked is aan deze gebruiker van idp type geen toegang meer heeft tot AVO",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinkt is aan deze gebruiker van idp type geen toegang meer heeft tot Het Archief voor Onderwijs.",
     "value_type": "TEXT"
   },
   {
@@ -30056,7 +30047,7 @@
     "location": "modules/auth/idps/lti/lti",
     "key": "wegens-auteursrecht-kan-deze-video-enkel-bekeken-worden-door-leerlingen-en-hun-leerkrachten",
     "language": "nl",
-    "value": "Wegens auteursrecht kan deze video enkel bekeken worden door leerlingen en hun leerkrachten",
+    "value": "Omwille van auteursrechten is dit fragment uitsluitend beschikbaar voor leerlingen en leerkrachten uit het lager en secundair onderwijs met een account op Het Archief voor Onderwijs. Als ouder of voogd heb je geen toegang tot het platform.",
     "value_type": "TEXT"
   },
   {
@@ -30090,15 +30081,6 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
-    "key": "deze-embed-is-gemaakt-voor-embed-code-external-website-en-kan-dus-niet-geladen-worden-op-issuer-external-website",
-    "language": "nl",
-    "value": "Deze embedlink is gemaakt voor {{embedCodeExternalWebsite}}, en kan dus niet geladen worden op {{issuerExternalWebsite}}.",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/auth/idps/lti/lti",
     "key": "er-ging-iets-mis-na-het-inloggen-voor-de-embed-code",
     "language": "nl",
     "value": "Er ging iets mis na het inloggen voor de embedlink.",
@@ -30110,7 +30092,7 @@
     "location": "modules/auth/idps/smartschool/route",
     "key": "link-eerst-je-accounts",
     "language": "nl",
-    "value": "Je Smartschool-account is nog niet gekoppeld aan je account op Het Archief voor Onderwijs. Log eerst in en koppel je account met je Smartschool-account. Deze vind je onder je profiel rechtsboven in de navigatiebalk.",
+    "value": "Je Smartschool-account is nog niet gekoppeld aan je account op Het Archief voor Onderwijs. Log eerst in met je e-mailadres en koppel daarna je Smartschool-account. Je vindt deze optie onder je profielnaam rechtsboven in de navigatiebalk.",
     "value_type": "TEXT"
   },
   {

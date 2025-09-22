@@ -1,6 +1,9 @@
 import type { Avo } from '@viaa/avo2-types';
 
-import { type GetUserByIdQuery } from '../shared/generated/graphql-db-types-avo';
+import {
+	type GetCommonUserByIdQuery,
+	type GetUserByIdQuery,
+} from '../shared/generated/graphql-db-types-avo';
 
 import type { UserQueryTypes } from './queries/users.queries';
 
@@ -57,10 +60,13 @@ export type UserInfoOverviewAvo = GetUserByIdQuery['users_summary_view'][0] &
 export type UserInfoOverviewHetArchief =
 	UserQueryTypes['GetUsersQueryHetArchief']['users_profile'][0];
 
+export type UserInfoCommonUserAvo = GetCommonUserByIdQuery['users_common_users'][0];
+
 export enum UserInfoType {
 	AvoUserUser = 'AvoUserUser',
 	AvoUserProfile = 'AvoUserProfile',
 	UserInfoOverviewAvo = 'UserInfoOverviewAvo',
 	UserInfoOverviewHetArchief = 'UserInfoOverviewHetArchief',
 	HetArchiefUser = 'HetArchiefUser',
+	UserInfoCommonUserAvo = 'UserInfoCommonUserAvo',
 }
