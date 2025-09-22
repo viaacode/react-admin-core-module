@@ -188,7 +188,7 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 					{renderHyperlink(
 						<Button
 							iconStart={<Icon name="edit" />}
-							title={tText('Bewerk pagina - title')}
+							title={tText('Bewerk pagina - tooltip')}
 							label={tText('Bewerk pagina')}
 							variants="text"
 						/>
