@@ -1,8 +1,8 @@
-import { kebabCase } from 'lodash-es';
+import {kebabCase} from 'lodash-es';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { executeDatabaseQuery } from './execute-database-query.mts';
-import { App, type TranslationEntry } from './translation.types.mts';
+import {executeDatabaseQuery} from './execute-database-query.mts';
+import {App, type TranslationEntry} from './translation.types.mts';
 
 async function getOnlineTranslations(app: App): Promise<TranslationEntry[]> {
 	const response = await executeDatabaseQuery(
@@ -58,7 +58,7 @@ async function backupTranslations(): Promise<void> {
 	const translations = await getOnlineTranslations(app);
 
 	const sqlFilePath = path.resolve(
-		`./data/${new Date().toISOString().split('T')[0]}-translations-${kebabCase(app)}-QAS-v3.sql`
+		`./data/${new Date().toISOString().split('T')[0]}-translations-${kebabCase(app)}-QAS.sql`
 	);
 	await writeTranslationsToFile(sqlFilePath, translations);
 }
