@@ -8,7 +8,7 @@
 
 
 	.c-radio-group .c-radio {
-		padding: $g-spacer-unit 0;
+		padding: $g-spacer-unit $g-spacer-unit * 4 $g-spacer-unit $g-spacer-unit;
 	}
 
 	.c-radio input[type="radio"] {
