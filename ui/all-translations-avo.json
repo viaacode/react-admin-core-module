@@ -30395,6 +30395,24 @@
   {
     "app": "AVO",
     "component": "BACKEND",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
+    "language": "nl",
+    "value": "Redirects naar andere redirects zijn niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
+    "location": "modules/url-redirects/url-redirects",
+    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-je-past-het-beste-de-oude-url-old-path-aan",
+    "language": "nl",
+    "value": "Redirects naar andere redirects zijn niet toegestaan. Je past het beste de oude url \"{{oldPath}}\" aan",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "BACKEND",
     "location": "modules/user/user",
     "key": "anonieme",
     "language": "nl",
@@ -30666,16 +30684,16 @@
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
-    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-niet-gevonden-kon-worden-in-avo-user-id-avo-user-id",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-met-idp-type-die-gelinkt-is-aan-deze-embed-niet-gevonden-kon-worden-in-de-database-van-het-archief-voor-onderwijs-profile-id-avo-profile-id",
     "language": "nl",
-    "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (user id: {{avoUserId}}}).",
+    "value": "De login voor deze embed is mislukt omdat de gebruiker met {{idpType}} die gelinkt is aan deze embed niet gevonden kon worden in de database van Het Archief voor Onderwijs (profile id: {{avoProfileId}}}).",
     "value_type": "TEXT"
   },
   {
     "app": "AVO",
     "component": "BACKEND",
     "location": "modules/auth/idps/lti/lti",
-    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinked-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-avo",
+    "key": "de-login-voor-deze-embed-is-mislukt-omdat-de-gebruiker-die-gelinkt-is-aan-deze-gebruiker-van-idp-type-geen-toegang-meer-heeft-tot-het-archief-voor-onderwijs",
     "language": "nl",
     "value": "De login voor deze embed is mislukt omdat de gebruiker die gelinkt is aan deze gebruiker van idp type geen toegang meer heeft tot Het Archief voor Onderwijs.",
     "value_type": "TEXT"
@@ -30813,24 +30831,6 @@
     "key": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
     "language": "nl",
     "value": "fout-bij-inloggen-via-vlaamse-overheid-acm-idm",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/url-redirects/url-redirects",
-    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-bedoelde-je-from-path-to-path",
-    "language": "nl",
-    "value": "Redirects naar andere redirects zijn niet toegestaan. Bedoelde je \"{{fromPath}}\" => \"{{toPath}}\"?",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "BACKEND",
-    "location": "modules/url-redirects/url-redirects",
-    "key": "redirects-naar-andere-redirects-zijn-niet-toegestaan-je-past-het-beste-de-oude-url-old-path-aan",
-    "language": "nl",
-    "value": "Redirects naar andere redirects zijn niet toegestaan. Je past het beste de oude url \"{{oldPath}}\" aan",
     "value_type": "TEXT"
   }
 ]
