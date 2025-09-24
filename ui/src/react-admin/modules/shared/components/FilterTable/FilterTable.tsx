@@ -1,5 +1,4 @@
 import { type OrderDirection, PaginationBar } from '@meemoo/react-components';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import {
 	Button,
 	type ButtonType,
@@ -160,7 +159,6 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 	} = useGetTableColumnPreference(location.pathname);
 	const { mutateAsync: setPreferredColumns } = useUpdateTableColumnPreference(location.pathname);
 
-	// biome-ignore lint/suspicious/noExplicitAny: todo
 	const handleTableStateChanged = useCallback(
 		(value: any, id: string) => {
 			// biome-ignore lint/suspicious/noExplicitAny: todo
@@ -255,9 +253,10 @@ export const FilterTable: FunctionComponent<FilterTableProps> = ({
 		).then(() => reloadPreferredColumns());
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: only trigger this once at the initial page load
 	useEffect(() => {
 		handleTableStateChanged(preferredColumns, 'columns');
-	}, [handleTableStateChanged, preferredColumns]);
+	}, []);
 
 	useEffect(() => {
 		onTableStateChanged(tableState);
