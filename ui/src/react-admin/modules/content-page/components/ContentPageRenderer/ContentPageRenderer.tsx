@@ -55,7 +55,7 @@ const queryClient = new QueryClient({
 
 export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (props) => {
 	const [queryParams] = useQueryParams({
-		userGroupIds: StringParam,
+		userGroupId: StringParam,
 	});
 
 	const getContentBlocks = (contentPageInfo: ContentPageInfo) => {
@@ -112,8 +112,8 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 
 		// Only accept content blocks for which the user is authorized
 		let currentUserGroupIds: string[];
-		if (!isNil(queryParams?.userGroupIds)) {
-			currentUserGroupIds = queryParams.userGroupIds.split(',');
+		if (!isNil(queryParams?.userGroupId)) {
+			currentUserGroupIds = [queryParams.userGroupId];
 		} else if (props.commonUser?.userGroup?.id) {
 			currentUserGroupIds = [
 				String(props.commonUser?.userGroup?.id),
@@ -126,6 +126,10 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		contentBlockBlockConfigs = compact(
 			contentBlockBlockConfigs.map(
 				(contentBlockConfig: ContentBlockConfig): ContentBlockConfig | null => {
+					if (currentUserGroupIds.includes(SpecialPermissionGroups.allContent)) {
+						return contentBlockConfig;
+					}
+
 					const blockUserGroupIds: (string | number)[] = (
 						contentBlockConfig.block.state.userGroupIds || []
 					).map(String);
