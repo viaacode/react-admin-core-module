@@ -1,11 +1,12 @@
+import { IconName } from '@viaa/avo2-components';
 import type { Avo } from '@viaa/avo2-types';
 import type { FC } from 'react';
 import React from 'react';
 import type { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router';
 import { AdminConfigManager } from '~core/config';
-
 import { ContentPageRenderer } from '~modules/content-page/components/ContentPageRenderer/ContentPageRenderer';
+import { ErrorView } from '~shared/components/error';
 import { tHtml } from '~shared/helpers/translation-functions';
 import { useGetContentPageByPath } from '../hooks/get-content-page-by-path';
 
@@ -36,7 +37,19 @@ const ContentPageWrapper = ({
 		);
 	}
 	if (contentPageInfo) {
-		return <ContentPageRenderer contentPageInfo={contentPageInfo} commonUser={commonUser} />;
+		return (
+			<ContentPageRenderer
+				contentPageInfo={contentPageInfo}
+				commonUser={commonUser}
+				renderNoAccessError={() => (
+					<ErrorView
+						icon={IconName.clock}
+						actionButtons={['helpdesk']}
+						message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+					/>
+				)}
+			/>
+		);
 	}
 };
 

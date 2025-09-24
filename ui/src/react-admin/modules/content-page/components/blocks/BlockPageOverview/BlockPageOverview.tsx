@@ -1,13 +1,16 @@
-import type { ButtonAction, DefaultProps, RenderLinkFunction } from '@viaa/avo2-components';
 import {
 	Accordion,
 	AspectRatioWrapper,
 	Button,
+	type ButtonAction,
 	Column,
 	Container,
 	convertToHtml,
+	type DefaultProps,
 	Flex,
 	Grid,
+	IconName,
+	type RenderLinkFunction,
 	Spacer,
 	Tabs,
 	TagList,
@@ -32,6 +35,7 @@ import './BlockPageOverview.scss';
 import { PaginationBar } from '@meemoo/react-components';
 import type { AlignOption } from '~modules/content-page/types/content-block.types';
 import { ITEMS_PER_PAGE } from '~modules/item/items.consts';
+import { ErrorView } from '~shared/components/error';
 import Html from '~shared/components/Html/Html';
 import { GET_DEFAULT_PAGINATION_BAR_PROPS } from '~shared/components/PaginationBar/PaginationBar.consts';
 import { SanitizePreset } from '~shared/helpers/sanitize/presets';
@@ -341,7 +345,17 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 								isOpen={page.id === focusedPage?.id}
 								key={`block-page-${page.id}`}
 							>
-								<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
+								<ContentPageRenderer
+									contentPageInfo={page}
+									commonUser={commonUser}
+									renderNoAccessError={() => (
+										<ErrorView
+											icon={IconName.clock}
+											actionButtons={['helpdesk']}
+											message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+										/>
+									)}
+								/>
 							</Accordion>
 						);
 					})}
@@ -390,7 +404,17 @@ export const BlockPageOverview: FunctionComponent<BlockPageOverviewProps> = ({
 												key={`page-overview--page-${page.id}`}
 												className="c-content-page-overview-block__accordion--second-level"
 											>
-												<ContentPageRenderer contentPageInfo={page} commonUser={commonUser} />
+												<ContentPageRenderer
+													contentPageInfo={page}
+													commonUser={commonUser}
+													renderNoAccessError={() => (
+														<ErrorView
+															icon={IconName.clock}
+															actionButtons={['helpdesk']}
+															message={'deze-pagina-is-enkel-voor-gebruikers-met-andere-rechten'}
+														/>
+													)}
+												/>
 											</Accordion>
 										);
 									})

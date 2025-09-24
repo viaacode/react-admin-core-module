@@ -11,7 +11,7 @@ import { type Avo, PermissionName } from '@viaa/avo2-types';
 import clsx from 'clsx';
 import { cloneDeep, compact, intersection, isNil, noop, set } from 'lodash-es';
 import { stringifyUrl } from 'query-string';
-import type { FunctionComponent } from 'react';
+import type { FunctionComponent, ReactNode } from 'react';
 import React from 'react';
 import { StringParam, useQueryParams } from 'use-query-params';
 import type { BlockImageProps } from '~content-blocks/BlockImage/BlockImage';
@@ -41,6 +41,7 @@ type ContentPageDetailProps = {
 	onBlockClicked?: BlockClickHandler;
 	commonUser?: Avo.User.CommonUser;
 	renderFakeTitle?: boolean;
+	renderNoAccessError: () => ReactNode;
 };
 
 const queryClient = new QueryClient({
@@ -259,8 +260,25 @@ export const ContentPageRenderer: FunctionComponent<ContentPageDetailProps> = (p
 		);
 	};
 
-	if (!props.contentPageInfo) {
-		return <CenteredSpinner />;
-	}
-	return renderContentPage();
+	const renderPage = () => {
+		if (!props.contentPageInfo) {
+			return <CenteredSpinner />;
+		}
+		if (isNil(props.contentPageInfo.id)) {
+			return <div>Page with path {location.pathname} was not found</div>;
+		}
+		const queryParams = new URLSearchParams(window.location.search);
+		if (queryParams.get('preview') === 'true') {
+			const userGroupId = queryParams.get('userGroupId')?.split(',')[0] || '1'; // Default to meemoo admin
+
+			if (
+				!props.contentPageInfo.userGroupIds?.includes(userGroupId) &&
+				userGroupId !== SpecialPermissionGroups.allContent
+			) {
+				return props.renderNoAccessError();
+			}
+		}
+		return renderContentPage();
+	};
+	return renderPage();
 };

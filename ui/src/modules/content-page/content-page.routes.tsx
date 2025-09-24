@@ -2,9 +2,10 @@ import type { ReactNode } from 'react';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { AdminConfigManager } from '~core/config';
-import { ContentPageOverviewPage } from './ContentPageOverviewPage';
-import ContentPageEditPage from './ContentPageEditPage';
 import ContentPageDetailPage from './ContentPageDetailPage';
+import ContentPageEditPage from './ContentPageEditPage';
+import { ContentPageOverviewPage } from './ContentPageOverviewPage';
+import ContentPagePreviewPage from './ContentPagePreviewPage';
 
 export const renderAdminContentPageRoutes = (): ReactNode[] => {
 	return [
@@ -32,5 +33,11 @@ export const renderAdminContentPageRoutes = (): ReactNode[] => {
 			exact
 			path={AdminConfigManager.getAdminRoute('ADMIN_CONTENT_PAGE_EDIT')}
 		/>,
+	];
+};
+
+export const renderAdminContentPagePreviewRoute = (): ReactNode[] => {
+	return [
+		<Route key="content-page-preview" render={() => <ContentPagePreviewPage />} exact path="*" />,
 	];
 };
