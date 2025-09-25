@@ -16,6 +16,7 @@ query getContentPagesToPublish($now: timestamp, $publishedAt: timestamp) {
 		id
 		publish_at
 		depublish_at
+		depublished_at
 		published_at
 		published_at_display
 	}

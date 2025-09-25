@@ -1188,6 +1188,7 @@ export type App_Content_Page = {
   content_width: Scalars['String']['output'];
   created_at: Scalars['timestamp']['output'];
   depublish_at?: Maybe<Scalars['timestamp']['output']>;
+  depublished_at?: Maybe<Scalars['timestamp']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   header_path?: Maybe<Scalars['String']['output']>;
   id: Scalars['uuid']['output'];
@@ -1369,6 +1370,7 @@ export type App_Content_Page_Bool_Exp = {
   content_width?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamp_Comparison_Exp>;
   depublish_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  depublished_at?: InputMaybe<Timestamp_Comparison_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   header_path?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1654,6 +1656,7 @@ export type App_Content_Page_Insert_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamp']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamp']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   header_path?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
@@ -1690,6 +1693,7 @@ export type App_Content_Page_Max_Fields = {
   content_width?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamp']['output']>;
   depublish_at?: Maybe<Scalars['timestamp']['output']>;
+  depublished_at?: Maybe<Scalars['timestamp']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   header_path?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
@@ -1717,6 +1721,7 @@ export type App_Content_Page_Max_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   header_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1745,6 +1750,7 @@ export type App_Content_Page_Min_Fields = {
   content_width?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamp']['output']>;
   depublish_at?: Maybe<Scalars['timestamp']['output']>;
+  depublished_at?: Maybe<Scalars['timestamp']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   header_path?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
@@ -1772,6 +1778,7 @@ export type App_Content_Page_Min_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   header_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1824,6 +1831,7 @@ export type App_Content_Page_Order_By = {
   content_width?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   depublish_at?: InputMaybe<Order_By>;
+  depublished_at?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   header_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1872,6 +1880,8 @@ export enum App_Content_Page_Select_Column {
   CreatedAt = 'created_at',
   /** column name */
   DepublishAt = 'depublish_at',
+  /** column name */
+  DepublishedAt = 'depublished_at',
   /** column name */
   Description = 'description',
   /** column name */
@@ -1946,6 +1956,7 @@ export type App_Content_Page_Set_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamp']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamp']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   header_path?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
@@ -1986,6 +1997,7 @@ export type App_Content_Page_Stream_Cursor_Value_Input = {
   content_width?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamp']['input']>;
   depublish_at?: InputMaybe<Scalars['timestamp']['input']>;
+  depublished_at?: InputMaybe<Scalars['timestamp']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   header_path?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
@@ -2022,6 +2034,8 @@ export enum App_Content_Page_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   DepublishAt = 'depublish_at',
+  /** column name */
+  DepublishedAt = 'depublished_at',
   /** column name */
   Description = 'description',
   /** column name */
@@ -3944,52 +3958,343 @@ export type Graph__Ha_Des_Primary_Identifier_Stream_Cursor_Value_Input = {
   intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** columns and relationships of "graph._index_intellectual_entity" */
-export type Graph__Index_Intellectual_Entity = {
-  __typename?: 'graph__index_intellectual_entity';
-  document?: Maybe<Scalars['json']['output']>;
+/** columns and relationships of "graph._highlight" */
+export type Graph__Highlight = {
+  __typename?: 'graph__highlight';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-  is_deleted?: Maybe<Scalars['Boolean']['output']>;
+  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  width?: Maybe<Scalars['Int']['output']>;
+  x?: Maybe<Scalars['Int']['output']>;
+  y?: Maybe<Scalars['Int']['output']>;
 };
 
-
-/** columns and relationships of "graph._index_intellectual_entity" */
-export type Graph__Index_Intellectual_EntityDocumentArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
+/** aggregated selection of "graph._highlight" */
+export type Graph__Highlight_Aggregate = {
+  __typename?: 'graph__highlight_aggregate';
+  aggregate?: Maybe<Graph__Highlight_Aggregate_Fields>;
+  nodes: Array<Graph__Highlight>;
 };
 
-/** aggregated selection of "graph._index_intellectual_entity" */
-export type Graph__Index_Intellectual_Entity_Aggregate = {
-  __typename?: 'graph__index_intellectual_entity_aggregate';
-  aggregate?: Maybe<Graph__Index_Intellectual_Entity_Aggregate_Fields>;
-  nodes: Array<Graph__Index_Intellectual_Entity>;
+export type Graph__Highlight_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Graph__Highlight_Aggregate_Bool_Exp_Count>;
 };
 
-/** aggregate fields of "graph._index_intellectual_entity" */
-export type Graph__Index_Intellectual_Entity_Aggregate_Fields = {
-  __typename?: 'graph__index_intellectual_entity_aggregate_fields';
+export type Graph__Highlight_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Graph__Highlight_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "graph._highlight" */
+export type Graph__Highlight_Aggregate_Fields = {
+  __typename?: 'graph__highlight_aggregate_fields';
+  avg?: Maybe<Graph__Highlight_Avg_Fields>;
   count: Scalars['Int']['output'];
-  max?: Maybe<Graph__Index_Intellectual_Entity_Max_Fields>;
-  min?: Maybe<Graph__Index_Intellectual_Entity_Min_Fields>;
+  max?: Maybe<Graph__Highlight_Max_Fields>;
+  min?: Maybe<Graph__Highlight_Min_Fields>;
+  stddev?: Maybe<Graph__Highlight_Stddev_Fields>;
+  stddev_pop?: Maybe<Graph__Highlight_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Graph__Highlight_Stddev_Samp_Fields>;
+  sum?: Maybe<Graph__Highlight_Sum_Fields>;
+  var_pop?: Maybe<Graph__Highlight_Var_Pop_Fields>;
+  var_samp?: Maybe<Graph__Highlight_Var_Samp_Fields>;
+  variance?: Maybe<Graph__Highlight_Variance_Fields>;
 };
 
 
-/** aggregate fields of "graph._index_intellectual_entity" */
-export type Graph__Index_Intellectual_Entity_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Select_Column>>;
+/** aggregate fields of "graph._highlight" */
+export type Graph__Highlight_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** Boolean expression to filter rows from the table "graph._index_intellectual_entity". All fields are combined with a logical 'AND'. */
-export type Graph__Index_Intellectual_Entity_Bool_Exp = {
-  _and?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Bool_Exp>>;
-  _not?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
-  _or?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Bool_Exp>>;
-  document?: InputMaybe<Json_Comparison_Exp>;
+/** order by aggregate values of table "graph._highlight" */
+export type Graph__Highlight_Aggregate_Order_By = {
+  avg?: InputMaybe<Graph__Highlight_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Graph__Highlight_Max_Order_By>;
+  min?: InputMaybe<Graph__Highlight_Min_Order_By>;
+  stddev?: InputMaybe<Graph__Highlight_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Graph__Highlight_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Graph__Highlight_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Graph__Highlight_Sum_Order_By>;
+  var_pop?: InputMaybe<Graph__Highlight_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Graph__Highlight_Var_Samp_Order_By>;
+  variance?: InputMaybe<Graph__Highlight_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "graph._highlight" */
+export type Graph__Highlight_Arr_Rel_Insert_Input = {
+  data: Array<Graph__Highlight_Insert_Input>;
+};
+
+/** aggregate avg on columns */
+export type Graph__Highlight_Avg_Fields = {
+  __typename?: 'graph__highlight_avg_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "graph._highlight" */
+export type Graph__Highlight_Avg_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "graph._highlight". All fields are combined with a logical 'AND'. */
+export type Graph__Highlight_Bool_Exp = {
+  _and?: InputMaybe<Array<Graph__Highlight_Bool_Exp>>;
+  _not?: InputMaybe<Graph__Highlight_Bool_Exp>;
+  _or?: InputMaybe<Array<Graph__Highlight_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  height?: InputMaybe<Int_Comparison_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
-  index?: InputMaybe<String_Comparison_Exp>;
-  is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
+  schema_mentions_id?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  width?: InputMaybe<Int_Comparison_Exp>;
+  x?: InputMaybe<Int_Comparison_Exp>;
+  y?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** input type for inserting data into table "graph._highlight" */
+export type Graph__Highlight_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  height?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  width?: InputMaybe<Scalars['Int']['input']>;
+  x?: InputMaybe<Scalars['Int']['input']>;
+  y?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate max on columns */
+export type Graph__Highlight_Max_Fields = {
+  __typename?: 'graph__highlight_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  width?: Maybe<Scalars['Int']['output']>;
+  x?: Maybe<Scalars['Int']['output']>;
+  y?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by max() on columns of table "graph._highlight" */
+export type Graph__Highlight_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  height?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schema_mentions_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Graph__Highlight_Min_Fields = {
+  __typename?: 'graph__highlight_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  height?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  width?: Maybe<Scalars['Int']['output']>;
+  x?: Maybe<Scalars['Int']['output']>;
+  y?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by min() on columns of table "graph._highlight" */
+export type Graph__Highlight_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  height?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schema_mentions_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** Ordering options when selecting data from "graph._highlight". */
+export type Graph__Highlight_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  height?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  schema_mentions_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "graph._highlight" */
+export enum Graph__Highlight_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Height = 'height',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  SchemaMentionsId = 'schema_mentions_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Width = 'width',
+  /** column name */
+  X = 'x',
+  /** column name */
+  Y = 'y'
+}
+
+/** aggregate stddev on columns */
+export type Graph__Highlight_Stddev_Fields = {
+  __typename?: 'graph__highlight_stddev_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "graph._highlight" */
+export type Graph__Highlight_Stddev_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Graph__Highlight_Stddev_Pop_Fields = {
+  __typename?: 'graph__highlight_stddev_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_pop() on columns of table "graph._highlight" */
+export type Graph__Highlight_Stddev_Pop_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Graph__Highlight_Stddev_Samp_Fields = {
+  __typename?: 'graph__highlight_stddev_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "graph._highlight" */
+export type Graph__Highlight_Stddev_Samp_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "graph__highlight" */
+export type Graph__Highlight_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Graph__Highlight_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Graph__Highlight_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  height?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  width?: InputMaybe<Scalars['Int']['input']>;
+  x?: InputMaybe<Scalars['Int']['input']>;
+  y?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Graph__Highlight_Sum_Fields = {
+  __typename?: 'graph__highlight_sum_fields';
+  height?: Maybe<Scalars['Int']['output']>;
+  width?: Maybe<Scalars['Int']['output']>;
+  x?: Maybe<Scalars['Int']['output']>;
+  y?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by sum() on columns of table "graph._highlight" */
+export type Graph__Highlight_Sum_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_pop on columns */
+export type Graph__Highlight_Var_Pop_Fields = {
+  __typename?: 'graph__highlight_var_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "graph._highlight" */
+export type Graph__Highlight_Var_Pop_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Graph__Highlight_Var_Samp_Fields = {
+  __typename?: 'graph__highlight_var_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "graph._highlight" */
+export type Graph__Highlight_Var_Samp_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Graph__Highlight_Variance_Fields = {
+  __typename?: 'graph__highlight_variance_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  x?: Maybe<Scalars['Float']['output']>;
+  y?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "graph._highlight" */
+export type Graph__Highlight_Variance_Order_By = {
+  height?: InputMaybe<Order_By>;
+  width?: InputMaybe<Order_By>;
+  x?: InputMaybe<Order_By>;
+  y?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "graph._index_intellectual_entity_fields" */
@@ -4508,154 +4813,6 @@ export type Graph__Index_Intellectual_Entity_Fields_Variance_Fields = {
   __typename?: 'graph__index_intellectual_entity_fields_variance_fields';
   children?: Maybe<Scalars['Float']['output']>;
   schema_number_of_pages?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate max on columns */
-export type Graph__Index_Intellectual_Entity_Max_Fields = {
-  __typename?: 'graph__index_intellectual_entity_max_fields';
-  id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-};
-
-/** aggregate min on columns */
-export type Graph__Index_Intellectual_Entity_Min_Fields = {
-  __typename?: 'graph__index_intellectual_entity_min_fields';
-  id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-};
-
-/** Ordering options when selecting data from "graph._index_intellectual_entity". */
-export type Graph__Index_Intellectual_Entity_Order_By = {
-  document?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  index?: InputMaybe<Order_By>;
-  is_deleted?: InputMaybe<Order_By>;
-};
-
-/** columns and relationships of "graph._index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_Pages = {
-  __typename?: 'graph__index_intellectual_entity_pages';
-  document?: Maybe<Scalars['json']['output']>;
-  id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-  is_deleted?: Maybe<Scalars['Boolean']['output']>;
-};
-
-
-/** columns and relationships of "graph._index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_PagesDocumentArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** aggregated selection of "graph._index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_Pages_Aggregate = {
-  __typename?: 'graph__index_intellectual_entity_pages_aggregate';
-  aggregate?: Maybe<Graph__Index_Intellectual_Entity_Pages_Aggregate_Fields>;
-  nodes: Array<Graph__Index_Intellectual_Entity_Pages>;
-};
-
-/** aggregate fields of "graph._index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_Pages_Aggregate_Fields = {
-  __typename?: 'graph__index_intellectual_entity_pages_aggregate_fields';
-  count: Scalars['Int']['output'];
-  max?: Maybe<Graph__Index_Intellectual_Entity_Pages_Max_Fields>;
-  min?: Maybe<Graph__Index_Intellectual_Entity_Pages_Min_Fields>;
-};
-
-
-/** aggregate fields of "graph._index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_Pages_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "graph._index_intellectual_entity_pages". All fields are combined with a logical 'AND'. */
-export type Graph__Index_Intellectual_Entity_Pages_Bool_Exp = {
-  _and?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>>;
-  _not?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
-  _or?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>>;
-  document?: InputMaybe<Json_Comparison_Exp>;
-  id?: InputMaybe<String_Comparison_Exp>;
-  index?: InputMaybe<String_Comparison_Exp>;
-  is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
-};
-
-/** aggregate max on columns */
-export type Graph__Index_Intellectual_Entity_Pages_Max_Fields = {
-  __typename?: 'graph__index_intellectual_entity_pages_max_fields';
-  id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-};
-
-/** aggregate min on columns */
-export type Graph__Index_Intellectual_Entity_Pages_Min_Fields = {
-  __typename?: 'graph__index_intellectual_entity_pages_min_fields';
-  id?: Maybe<Scalars['String']['output']>;
-  index?: Maybe<Scalars['String']['output']>;
-};
-
-/** Ordering options when selecting data from "graph._index_intellectual_entity_pages". */
-export type Graph__Index_Intellectual_Entity_Pages_Order_By = {
-  document?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  index?: InputMaybe<Order_By>;
-  is_deleted?: InputMaybe<Order_By>;
-};
-
-/** select columns of table "graph._index_intellectual_entity_pages" */
-export enum Graph__Index_Intellectual_Entity_Pages_Select_Column {
-  /** column name */
-  Document = 'document',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Index = 'index',
-  /** column name */
-  IsDeleted = 'is_deleted'
-}
-
-/** Streaming cursor of the table "graph__index_intellectual_entity_pages" */
-export type Graph__Index_Intellectual_Entity_Pages_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Graph__Index_Intellectual_Entity_Pages_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Graph__Index_Intellectual_Entity_Pages_Stream_Cursor_Value_Input = {
-  document?: InputMaybe<Scalars['json']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  index?: InputMaybe<Scalars['String']['input']>;
-  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** select columns of table "graph._index_intellectual_entity" */
-export enum Graph__Index_Intellectual_Entity_Select_Column {
-  /** column name */
-  Document = 'document',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Index = 'index',
-  /** column name */
-  IsDeleted = 'is_deleted'
-}
-
-/** Streaming cursor of the table "graph__index_intellectual_entity" */
-export type Graph__Index_Intellectual_Entity_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Graph__Index_Intellectual_Entity_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Graph__Index_Intellectual_Entity_Stream_Cursor_Value_Input = {
-  document?: InputMaybe<Scalars['json']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  index?: InputMaybe<Scalars['String']['input']>;
-  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** columns and relationships of "graph._intellectual_entity" */
@@ -7787,7 +7944,14 @@ export type Graph__Schema_Temporal_Stream_Cursor_Value_Input = {
 export type Graph__Schema_Thumbnail_Url = {
   __typename?: 'graph__schema_thumbnail_url';
   intellectual_entity_id?: Maybe<Scalars['String']['output']>;
+  object_type?: Maybe<Scalars['jsonb']['output']>;
   schema_thumbnail_url?: Maybe<Scalars['jsonb']['output']>;
+};
+
+
+/** columns and relationships of "graph._schema_thumbnail_url" */
+export type Graph__Schema_Thumbnail_UrlObject_TypeArgs = {
+  path?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -7824,12 +7988,14 @@ export type Graph__Schema_Thumbnail_Url_Bool_Exp = {
   _not?: InputMaybe<Graph__Schema_Thumbnail_Url_Bool_Exp>;
   _or?: InputMaybe<Array<Graph__Schema_Thumbnail_Url_Bool_Exp>>;
   intellectual_entity_id?: InputMaybe<String_Comparison_Exp>;
+  object_type?: InputMaybe<Jsonb_Comparison_Exp>;
   schema_thumbnail_url?: InputMaybe<Jsonb_Comparison_Exp>;
 };
 
 /** input type for inserting data into table "graph._schema_thumbnail_url" */
 export type Graph__Schema_Thumbnail_Url_Insert_Input = {
   intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
+  object_type?: InputMaybe<Scalars['jsonb']['input']>;
   schema_thumbnail_url?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
@@ -7853,6 +8019,7 @@ export type Graph__Schema_Thumbnail_Url_Obj_Rel_Insert_Input = {
 /** Ordering options when selecting data from "graph._schema_thumbnail_url". */
 export type Graph__Schema_Thumbnail_Url_Order_By = {
   intellectual_entity_id?: InputMaybe<Order_By>;
+  object_type?: InputMaybe<Order_By>;
   schema_thumbnail_url?: InputMaybe<Order_By>;
 };
 
@@ -7860,6 +8027,8 @@ export type Graph__Schema_Thumbnail_Url_Order_By = {
 export enum Graph__Schema_Thumbnail_Url_Select_Column {
   /** column name */
   IntellectualEntityId = 'intellectual_entity_id',
+  /** column name */
+  ObjectType = 'object_type',
   /** column name */
   SchemaThumbnailUrl = 'schema_thumbnail_url'
 }
@@ -7875,6 +8044,7 @@ export type Graph__Schema_Thumbnail_Url_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Graph__Schema_Thumbnail_Url_Stream_Cursor_Value_Input = {
   intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
+  object_type?: InputMaybe<Scalars['jsonb']['input']>;
   schema_thumbnail_url?: InputMaybe<Scalars['jsonb']['input']>;
 };
 
@@ -9727,7 +9897,7 @@ export type Graph_Highlight = {
   __typename?: 'graph_highlight';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   height: Scalars['Int']['output'];
-  schema_mentions_id: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   width: Scalars['Int']['output'];
   x: Scalars['Int']['output'];
@@ -9739,17 +9909,6 @@ export type Graph_Highlight_Aggregate = {
   __typename?: 'graph_highlight_aggregate';
   aggregate?: Maybe<Graph_Highlight_Aggregate_Fields>;
   nodes: Array<Graph_Highlight>;
-};
-
-export type Graph_Highlight_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Graph_Highlight_Aggregate_Bool_Exp_Count>;
-};
-
-export type Graph_Highlight_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Graph_Highlight_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Graph_Highlight_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "graph.highlight" */
@@ -9775,28 +9934,6 @@ export type Graph_Highlight_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** order by aggregate values of table "graph.highlight" */
-export type Graph_Highlight_Aggregate_Order_By = {
-  avg?: InputMaybe<Graph_Highlight_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Graph_Highlight_Max_Order_By>;
-  min?: InputMaybe<Graph_Highlight_Min_Order_By>;
-  stddev?: InputMaybe<Graph_Highlight_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Graph_Highlight_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Graph_Highlight_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Graph_Highlight_Sum_Order_By>;
-  var_pop?: InputMaybe<Graph_Highlight_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Graph_Highlight_Var_Samp_Order_By>;
-  variance?: InputMaybe<Graph_Highlight_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "graph.highlight" */
-export type Graph_Highlight_Arr_Rel_Insert_Input = {
-  data: Array<Graph_Highlight_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Graph_Highlight_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Graph_Highlight_Avg_Fields = {
   __typename?: 'graph_highlight_avg_fields';
@@ -9806,14 +9943,6 @@ export type Graph_Highlight_Avg_Fields = {
   y?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by avg() on columns of table "graph.highlight" */
-export type Graph_Highlight_Avg_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** Boolean expression to filter rows from the table "graph.highlight". All fields are combined with a logical 'AND'. */
 export type Graph_Highlight_Bool_Exp = {
   _and?: InputMaybe<Array<Graph_Highlight_Bool_Exp>>;
@@ -9821,7 +9950,7 @@ export type Graph_Highlight_Bool_Exp = {
   _or?: InputMaybe<Array<Graph_Highlight_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   height?: InputMaybe<Int_Comparison_Exp>;
-  schema_mentions_id?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   width?: InputMaybe<Int_Comparison_Exp>;
   x?: InputMaybe<Int_Comparison_Exp>;
@@ -9830,7 +9959,7 @@ export type Graph_Highlight_Bool_Exp = {
 
 /** unique or primary key constraints on table "graph.highlight" */
 export enum Graph_Highlight_Constraint {
-  /** unique or primary key constraint on columns "x", "y", "schema_mentions_id" */
+  /** unique or primary key constraint on columns "id" */
   HighlightPkey = 'highlight_pkey'
 }
 
@@ -9846,7 +9975,7 @@ export type Graph_Highlight_Inc_Input = {
 export type Graph_Highlight_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   height?: InputMaybe<Scalars['Int']['input']>;
-  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   width?: InputMaybe<Scalars['Int']['input']>;
   x?: InputMaybe<Scalars['Int']['input']>;
@@ -9858,22 +9987,11 @@ export type Graph_Highlight_Max_Fields = {
   __typename?: 'graph_highlight_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   height?: Maybe<Scalars['Int']['output']>;
-  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   width?: Maybe<Scalars['Int']['output']>;
   x?: Maybe<Scalars['Int']['output']>;
   y?: Maybe<Scalars['Int']['output']>;
-};
-
-/** order by max() on columns of table "graph.highlight" */
-export type Graph_Highlight_Max_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  height?: InputMaybe<Order_By>;
-  schema_mentions_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -9881,22 +9999,11 @@ export type Graph_Highlight_Min_Fields = {
   __typename?: 'graph_highlight_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   height?: Maybe<Scalars['Int']['output']>;
-  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   width?: Maybe<Scalars['Int']['output']>;
   x?: Maybe<Scalars['Int']['output']>;
   y?: Maybe<Scalars['Int']['output']>;
-};
-
-/** order by min() on columns of table "graph.highlight" */
-export type Graph_Highlight_Min_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  height?: InputMaybe<Order_By>;
-  schema_mentions_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "graph.highlight" */
@@ -9919,7 +10026,7 @@ export type Graph_Highlight_On_Conflict = {
 export type Graph_Highlight_Order_By = {
   created_at?: InputMaybe<Order_By>;
   height?: InputMaybe<Order_By>;
-  schema_mentions_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   width?: InputMaybe<Order_By>;
   x?: InputMaybe<Order_By>;
@@ -9928,9 +10035,7 @@ export type Graph_Highlight_Order_By = {
 
 /** primary key columns input for table: graph.highlight */
 export type Graph_Highlight_Pk_Columns_Input = {
-  schema_mentions_id: Scalars['String']['input'];
-  x: Scalars['Int']['input'];
-  y: Scalars['Int']['input'];
+  id: Scalars['String']['input'];
 };
 
 /** select columns of table "graph.highlight" */
@@ -9940,7 +10045,7 @@ export enum Graph_Highlight_Select_Column {
   /** column name */
   Height = 'height',
   /** column name */
-  SchemaMentionsId = 'schema_mentions_id',
+  Id = 'id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -9955,7 +10060,7 @@ export enum Graph_Highlight_Select_Column {
 export type Graph_Highlight_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   height?: InputMaybe<Scalars['Int']['input']>;
-  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   width?: InputMaybe<Scalars['Int']['input']>;
   x?: InputMaybe<Scalars['Int']['input']>;
@@ -9971,14 +10076,6 @@ export type Graph_Highlight_Stddev_Fields = {
   y?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev() on columns of table "graph.highlight" */
-export type Graph_Highlight_Stddev_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Graph_Highlight_Stddev_Pop_Fields = {
   __typename?: 'graph_highlight_stddev_pop_fields';
@@ -9988,14 +10085,6 @@ export type Graph_Highlight_Stddev_Pop_Fields = {
   y?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev_pop() on columns of table "graph.highlight" */
-export type Graph_Highlight_Stddev_Pop_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_samp on columns */
 export type Graph_Highlight_Stddev_Samp_Fields = {
   __typename?: 'graph_highlight_stddev_samp_fields';
@@ -10003,14 +10092,6 @@ export type Graph_Highlight_Stddev_Samp_Fields = {
   width?: Maybe<Scalars['Float']['output']>;
   x?: Maybe<Scalars['Float']['output']>;
   y?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "graph.highlight" */
-export type Graph_Highlight_Stddev_Samp_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "graph_highlight" */
@@ -10025,7 +10106,7 @@ export type Graph_Highlight_Stream_Cursor_Input = {
 export type Graph_Highlight_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   height?: InputMaybe<Scalars['Int']['input']>;
-  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   width?: InputMaybe<Scalars['Int']['input']>;
   x?: InputMaybe<Scalars['Int']['input']>;
@@ -10041,14 +10122,6 @@ export type Graph_Highlight_Sum_Fields = {
   y?: Maybe<Scalars['Int']['output']>;
 };
 
-/** order by sum() on columns of table "graph.highlight" */
-export type Graph_Highlight_Sum_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** update columns of table "graph.highlight" */
 export enum Graph_Highlight_Update_Column {
   /** column name */
@@ -10056,7 +10129,7 @@ export enum Graph_Highlight_Update_Column {
   /** column name */
   Height = 'height',
   /** column name */
-  SchemaMentionsId = 'schema_mentions_id',
+  Id = 'id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -10085,14 +10158,6 @@ export type Graph_Highlight_Var_Pop_Fields = {
   y?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_pop() on columns of table "graph.highlight" */
-export type Graph_Highlight_Var_Pop_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Graph_Highlight_Var_Samp_Fields = {
   __typename?: 'graph_highlight_var_samp_fields';
@@ -10102,14 +10167,6 @@ export type Graph_Highlight_Var_Samp_Fields = {
   y?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_samp() on columns of table "graph.highlight" */
-export type Graph_Highlight_Var_Samp_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Graph_Highlight_Variance_Fields = {
   __typename?: 'graph_highlight_variance_fields';
@@ -10117,14 +10174,6 @@ export type Graph_Highlight_Variance_Fields = {
   width?: Maybe<Scalars['Float']['output']>;
   x?: Maybe<Scalars['Float']['output']>;
   y?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "graph.highlight" */
-export type Graph_Highlight_Variance_Order_By = {
-  height?: InputMaybe<Order_By>;
-  width?: InputMaybe<Order_By>;
-  x?: InputMaybe<Order_By>;
-  y?: InputMaybe<Order_By>;
 };
 
 /** Koppeltabel voor representation en file (includes) */
@@ -10551,10 +10600,8 @@ export type Graph_Intellectual_Entity = {
   isRepresentedBy: Array<Graph_Representation>;
   /** An aggregate relationship */
   isRepresentedBy_aggregate: Graph_Representation_Aggregate;
-  /** An array relationship */
-  mhFragmentIdentifier: Array<Graph_Mh_Fragment_Identifier>;
-  /** An aggregate relationship */
-  mhFragmentIdentifier_aggregate: Graph_Mh_Fragment_Identifier_Aggregate;
+  /** An object relationship */
+  mhFragmentIdentifier?: Maybe<Graph_Mh_Fragment_Identifier>;
   /** An array relationship */
   premisIdentifier: Array<Graph_Premis_Identifier>;
   /** An aggregate relationship */
@@ -10683,26 +10730,6 @@ export type Graph_Intellectual_EntityIsRepresentedBy_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Graph_Representation_Order_By>>;
   where?: InputMaybe<Graph_Representation_Bool_Exp>;
-};
-
-
-/** columns and relationships of "graph.intellectual_entity" */
-export type Graph_Intellectual_EntityMhFragmentIdentifierArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
-};
-
-
-/** columns and relationships of "graph.intellectual_entity" */
-export type Graph_Intellectual_EntityMhFragmentIdentifier_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Order_By>>;
-  where?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
 };
 
 
@@ -11028,7 +11055,6 @@ export type Graph_Intellectual_Entity_Bool_Exp = {
   isRepresentedBy?: InputMaybe<Graph_Representation_Bool_Exp>;
   isRepresentedBy_aggregate?: InputMaybe<Graph_Representation_Aggregate_Bool_Exp>;
   mhFragmentIdentifier?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
-  mhFragmentIdentifier_aggregate?: InputMaybe<Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp>;
   premisIdentifier?: InputMaybe<Graph_Premis_Identifier_Bool_Exp>;
   premisIdentifier_aggregate?: InputMaybe<Graph_Premis_Identifier_Aggregate_Bool_Exp>;
   relation_is_part_of?: InputMaybe<String_Comparison_Exp>;
@@ -11104,7 +11130,7 @@ export type Graph_Intellectual_Entity_Insert_Input = {
   id?: InputMaybe<Scalars['String']['input']>;
   isPartOf?: InputMaybe<Graph_Intellectual_Entity_Obj_Rel_Insert_Input>;
   isRepresentedBy?: InputMaybe<Graph_Representation_Arr_Rel_Insert_Input>;
-  mhFragmentIdentifier?: InputMaybe<Graph_Mh_Fragment_Identifier_Arr_Rel_Insert_Input>;
+  mhFragmentIdentifier?: InputMaybe<Graph_Mh_Fragment_Identifier_Obj_Rel_Insert_Input>;
   premisIdentifier?: InputMaybe<Graph_Premis_Identifier_Arr_Rel_Insert_Input>;
   relation_is_part_of?: InputMaybe<Scalars['String']['input']>;
   schemaAlternateName?: InputMaybe<Graph_Schema_Alternate_Name_Arr_Rel_Insert_Input>;
@@ -11306,7 +11332,7 @@ export type Graph_Intellectual_Entity_Order_By = {
   id?: InputMaybe<Order_By>;
   isPartOf?: InputMaybe<Graph_Intellectual_Entity_Order_By>;
   isRepresentedBy_aggregate?: InputMaybe<Graph_Representation_Aggregate_Order_By>;
-  mhFragmentIdentifier_aggregate?: InputMaybe<Graph_Mh_Fragment_Identifier_Aggregate_Order_By>;
+  mhFragmentIdentifier?: InputMaybe<Graph_Mh_Fragment_Identifier_Order_By>;
   premisIdentifier_aggregate?: InputMaybe<Graph_Premis_Identifier_Aggregate_Order_By>;
   relation_is_part_of?: InputMaybe<Order_By>;
   schemaAlternateName_aggregate?: InputMaybe<Graph_Schema_Alternate_Name_Aggregate_Order_By>;
@@ -11635,7 +11661,7 @@ export type Graph_Mh_Fragment_Identifier = {
   __typename?: 'graph_mh_fragment_identifier';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   /** An object relationship */
-  intellectual_entity: Graph_Intellectual_Entity;
+  intellectual_entity?: Maybe<Graph_Intellectual_Entity>;
   intellectual_entity_id: Scalars['String']['output'];
   is_deleted: Scalars['Boolean']['output'];
   mh_fragment_identifier: Scalars['String']['output'];
@@ -11647,33 +11673,6 @@ export type Graph_Mh_Fragment_Identifier_Aggregate = {
   __typename?: 'graph_mh_fragment_identifier_aggregate';
   aggregate?: Maybe<Graph_Mh_Fragment_Identifier_Aggregate_Fields>;
   nodes: Array<Graph_Mh_Fragment_Identifier>;
-};
-
-export type Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp = {
-  bool_and?: InputMaybe<Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_And>;
-  bool_or?: InputMaybe<Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_Or>;
-  count?: InputMaybe<Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Count>;
-};
-
-export type Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_And = {
-  arguments: Graph_Mh_Fragment_Identifier_Select_Column_Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
-};
-
-export type Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_Or = {
-  arguments: Graph_Mh_Fragment_Identifier_Select_Column_Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
-};
-
-export type Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Graph_Mh_Fragment_Identifier_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "graph.mh_fragment_identifier" */
@@ -11689,20 +11688,6 @@ export type Graph_Mh_Fragment_Identifier_Aggregate_Fields = {
 export type Graph_Mh_Fragment_Identifier_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Graph_Mh_Fragment_Identifier_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** order by aggregate values of table "graph.mh_fragment_identifier" */
-export type Graph_Mh_Fragment_Identifier_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Graph_Mh_Fragment_Identifier_Max_Order_By>;
-  min?: InputMaybe<Graph_Mh_Fragment_Identifier_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "graph.mh_fragment_identifier" */
-export type Graph_Mh_Fragment_Identifier_Arr_Rel_Insert_Input = {
-  data: Array<Graph_Mh_Fragment_Identifier_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Graph_Mh_Fragment_Identifier_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "graph.mh_fragment_identifier". All fields are combined with a logical 'AND'. */
@@ -11743,14 +11728,6 @@ export type Graph_Mh_Fragment_Identifier_Max_Fields = {
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
 };
 
-/** order by max() on columns of table "graph.mh_fragment_identifier" */
-export type Graph_Mh_Fragment_Identifier_Max_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  intellectual_entity_id?: InputMaybe<Order_By>;
-  mh_fragment_identifier?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
 /** aggregate min on columns */
 export type Graph_Mh_Fragment_Identifier_Min_Fields = {
   __typename?: 'graph_mh_fragment_identifier_min_fields';
@@ -11760,14 +11737,6 @@ export type Graph_Mh_Fragment_Identifier_Min_Fields = {
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
 };
 
-/** order by min() on columns of table "graph.mh_fragment_identifier" */
-export type Graph_Mh_Fragment_Identifier_Min_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  intellectual_entity_id?: InputMaybe<Order_By>;
-  mh_fragment_identifier?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
 /** response of any mutation on the table "graph.mh_fragment_identifier" */
 export type Graph_Mh_Fragment_Identifier_Mutation_Response = {
   __typename?: 'graph_mh_fragment_identifier_mutation_response';
@@ -11775,6 +11744,13 @@ export type Graph_Mh_Fragment_Identifier_Mutation_Response = {
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<Graph_Mh_Fragment_Identifier>;
+};
+
+/** input type for inserting object relation for remote table "graph.mh_fragment_identifier" */
+export type Graph_Mh_Fragment_Identifier_Obj_Rel_Insert_Input = {
+  data: Graph_Mh_Fragment_Identifier_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Graph_Mh_Fragment_Identifier_On_Conflict>;
 };
 
 /** on_conflict condition type for table "graph.mh_fragment_identifier" */
@@ -11812,18 +11788,6 @@ export enum Graph_Mh_Fragment_Identifier_Select_Column {
   MhFragmentIdentifier = 'mh_fragment_identifier',
   /** column name */
   UpdatedAt = 'updated_at'
-}
-
-/** select "graph_mh_fragment_identifier_aggregate_bool_exp_bool_and_arguments_columns" columns of table "graph.mh_fragment_identifier" */
-export enum Graph_Mh_Fragment_Identifier_Select_Column_Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
-  /** column name */
-  IsDeleted = 'is_deleted'
-}
-
-/** select "graph_mh_fragment_identifier_aggregate_bool_exp_bool_or_arguments_columns" columns of table "graph.mh_fragment_identifier" */
-export enum Graph_Mh_Fragment_Identifier_Select_Column_Graph_Mh_Fragment_Identifier_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
-  /** column name */
-  IsDeleted = 'is_deleted'
 }
 
 /** input type for updating data in table "graph.mh_fragment_identifier" */
@@ -12401,6 +12365,8 @@ export type Graph_Organisations_With_Objects = {
   skos_alt_label?: Maybe<Scalars['String']['output']>;
   skos_pref_label?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** An object relationship */
+  visitorSpace?: Maybe<Maintainer_Visitor_Space>;
 };
 
 /** aggregated selection of "graph.organisations_with_objects" */
@@ -12441,6 +12407,7 @@ export type Graph_Organisations_With_Objects_Bool_Exp = {
   skos_alt_label?: InputMaybe<String_Comparison_Exp>;
   skos_pref_label?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  visitorSpace?: InputMaybe<Maintainer_Visitor_Space_Bool_Exp>;
 };
 
 /** input type for inserting data into table "graph.organisations_with_objects" */
@@ -12456,6 +12423,7 @@ export type Graph_Organisations_With_Objects_Insert_Input = {
   skos_alt_label?: InputMaybe<Scalars['String']['input']>;
   skos_pref_label?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  visitorSpace?: InputMaybe<Maintainer_Visitor_Space_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -12512,6 +12480,7 @@ export type Graph_Organisations_With_Objects_Order_By = {
   skos_alt_label?: InputMaybe<Order_By>;
   skos_pref_label?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
+  visitorSpace?: InputMaybe<Maintainer_Visitor_Space_Order_By>;
 };
 
 /** select columns of table "graph.organisations_with_objects" */
@@ -15445,15 +15414,99 @@ export type Graph_Schema_License_Updates = {
   where: Graph_Schema_License_Bool_Exp;
 };
 
+/** columns and relationships of "graph.schema_maintainer" */
+export type Graph_Schema_Maintainer = {
+  __typename?: 'graph_schema_maintainer';
+  id?: Maybe<Scalars['String']['output']>;
+  schema_maintainer?: Maybe<Scalars['jsonb']['output']>;
+};
+
+
+/** columns and relationships of "graph.schema_maintainer" */
+export type Graph_Schema_MaintainerSchema_MaintainerArgs = {
+  path?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregated selection of "graph.schema_maintainer" */
+export type Graph_Schema_Maintainer_Aggregate = {
+  __typename?: 'graph_schema_maintainer_aggregate';
+  aggregate?: Maybe<Graph_Schema_Maintainer_Aggregate_Fields>;
+  nodes: Array<Graph_Schema_Maintainer>;
+};
+
+/** aggregate fields of "graph.schema_maintainer" */
+export type Graph_Schema_Maintainer_Aggregate_Fields = {
+  __typename?: 'graph_schema_maintainer_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Graph_Schema_Maintainer_Max_Fields>;
+  min?: Maybe<Graph_Schema_Maintainer_Min_Fields>;
+};
+
+
+/** aggregate fields of "graph.schema_maintainer" */
+export type Graph_Schema_Maintainer_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Graph_Schema_Maintainer_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "graph.schema_maintainer". All fields are combined with a logical 'AND'. */
+export type Graph_Schema_Maintainer_Bool_Exp = {
+  _and?: InputMaybe<Array<Graph_Schema_Maintainer_Bool_Exp>>;
+  _not?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+  _or?: InputMaybe<Array<Graph_Schema_Maintainer_Bool_Exp>>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  schema_maintainer?: InputMaybe<Jsonb_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Graph_Schema_Maintainer_Max_Fields = {
+  __typename?: 'graph_schema_maintainer_max_fields';
+  id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Graph_Schema_Maintainer_Min_Fields = {
+  __typename?: 'graph_schema_maintainer_min_fields';
+  id?: Maybe<Scalars['String']['output']>;
+};
+
+/** Ordering options when selecting data from "graph.schema_maintainer". */
+export type Graph_Schema_Maintainer_Order_By = {
+  id?: InputMaybe<Order_By>;
+  schema_maintainer?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "graph.schema_maintainer" */
+export enum Graph_Schema_Maintainer_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  SchemaMaintainer = 'schema_maintainer'
+}
+
+/** Streaming cursor of the table "graph_schema_maintainer" */
+export type Graph_Schema_Maintainer_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Graph_Schema_Maintainer_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Graph_Schema_Maintainer_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  schema_maintainer?: InputMaybe<Scalars['jsonb']['input']>;
+};
+
 /** columns and relationships of "graph.schema_mentions" */
 export type Graph_Schema_Mentions = {
   __typename?: 'graph_schema_mentions';
   confidence?: Maybe<Scalars['numeric']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   /** An array relationship */
-  highlights: Array<Graph_Highlight>;
+  highlights: Array<Graph__Highlight>;
   /** An aggregate relationship */
-  highlights_aggregate: Graph_Highlight_Aggregate;
+  highlights_aggregate: Graph__Highlight_Aggregate;
   id: Scalars['String']['output'];
   intellectual_entity_id: Scalars['String']['output'];
   /** An object relationship */
@@ -15465,21 +15518,21 @@ export type Graph_Schema_Mentions = {
 
 /** columns and relationships of "graph.schema_mentions" */
 export type Graph_Schema_MentionsHighlightsArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Highlight_Select_Column>>;
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph_Highlight_Order_By>>;
-  where?: InputMaybe<Graph_Highlight_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 
 /** columns and relationships of "graph.schema_mentions" */
 export type Graph_Schema_MentionsHighlights_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph_Highlight_Select_Column>>;
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph_Highlight_Order_By>>;
-  where?: InputMaybe<Graph_Highlight_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 /** aggregated selection of "graph.schema_mentions" */
@@ -15563,8 +15616,8 @@ export type Graph_Schema_Mentions_Bool_Exp = {
   _or?: InputMaybe<Array<Graph_Schema_Mentions_Bool_Exp>>;
   confidence?: InputMaybe<Numeric_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  highlights?: InputMaybe<Graph_Highlight_Bool_Exp>;
-  highlights_aggregate?: InputMaybe<Graph_Highlight_Aggregate_Bool_Exp>;
+  highlights?: InputMaybe<Graph__Highlight_Bool_Exp>;
+  highlights_aggregate?: InputMaybe<Graph__Highlight_Aggregate_Bool_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
   intellectual_entity_id?: InputMaybe<String_Comparison_Exp>;
   thing?: InputMaybe<Graph_Thing_Bool_Exp>;
@@ -15578,6 +15631,141 @@ export enum Graph_Schema_Mentions_Constraint {
   SchemaMentionsPkey = 'schema_mentions_pkey'
 }
 
+/** Crosstable between schema_mentions and highlight */
+export type Graph_Schema_Mentions_Highlight = {
+  __typename?: 'graph_schema_mentions_highlight';
+  highlight_id: Scalars['String']['output'];
+  schema_mentions_id: Scalars['String']['output'];
+};
+
+/** aggregated selection of "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Aggregate = {
+  __typename?: 'graph_schema_mentions_highlight_aggregate';
+  aggregate?: Maybe<Graph_Schema_Mentions_Highlight_Aggregate_Fields>;
+  nodes: Array<Graph_Schema_Mentions_Highlight>;
+};
+
+/** aggregate fields of "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Aggregate_Fields = {
+  __typename?: 'graph_schema_mentions_highlight_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Graph_Schema_Mentions_Highlight_Max_Fields>;
+  min?: Maybe<Graph_Schema_Mentions_Highlight_Min_Fields>;
+};
+
+
+/** aggregate fields of "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "graph.schema_mentions_highlight". All fields are combined with a logical 'AND'. */
+export type Graph_Schema_Mentions_Highlight_Bool_Exp = {
+  _and?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Bool_Exp>>;
+  _not?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+  _or?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Bool_Exp>>;
+  highlight_id?: InputMaybe<String_Comparison_Exp>;
+  schema_mentions_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "graph.schema_mentions_highlight" */
+export enum Graph_Schema_Mentions_Highlight_Constraint {
+  /** unique or primary key constraint on columns "highlight_id", "schema_mentions_id" */
+  SchemaMentionsHighlightPkey = 'schema_mentions_highlight_pkey'
+}
+
+/** input type for inserting data into table "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Insert_Input = {
+  highlight_id?: InputMaybe<Scalars['String']['input']>;
+  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Graph_Schema_Mentions_Highlight_Max_Fields = {
+  __typename?: 'graph_schema_mentions_highlight_max_fields';
+  highlight_id?: Maybe<Scalars['String']['output']>;
+  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Graph_Schema_Mentions_Highlight_Min_Fields = {
+  __typename?: 'graph_schema_mentions_highlight_min_fields';
+  highlight_id?: Maybe<Scalars['String']['output']>;
+  schema_mentions_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Mutation_Response = {
+  __typename?: 'graph_schema_mentions_highlight_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Graph_Schema_Mentions_Highlight>;
+};
+
+/** on_conflict condition type for table "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_On_Conflict = {
+  constraint: Graph_Schema_Mentions_Highlight_Constraint;
+  update_columns?: Array<Graph_Schema_Mentions_Highlight_Update_Column>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "graph.schema_mentions_highlight". */
+export type Graph_Schema_Mentions_Highlight_Order_By = {
+  highlight_id?: InputMaybe<Order_By>;
+  schema_mentions_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: graph.schema_mentions_highlight */
+export type Graph_Schema_Mentions_Highlight_Pk_Columns_Input = {
+  highlight_id: Scalars['String']['input'];
+  schema_mentions_id: Scalars['String']['input'];
+};
+
+/** select columns of table "graph.schema_mentions_highlight" */
+export enum Graph_Schema_Mentions_Highlight_Select_Column {
+  /** column name */
+  HighlightId = 'highlight_id',
+  /** column name */
+  SchemaMentionsId = 'schema_mentions_id'
+}
+
+/** input type for updating data in table "graph.schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Set_Input = {
+  highlight_id?: InputMaybe<Scalars['String']['input']>;
+  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "graph_schema_mentions_highlight" */
+export type Graph_Schema_Mentions_Highlight_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Graph_Schema_Mentions_Highlight_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Graph_Schema_Mentions_Highlight_Stream_Cursor_Value_Input = {
+  highlight_id?: InputMaybe<Scalars['String']['input']>;
+  schema_mentions_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "graph.schema_mentions_highlight" */
+export enum Graph_Schema_Mentions_Highlight_Update_Column {
+  /** column name */
+  HighlightId = 'highlight_id',
+  /** column name */
+  SchemaMentionsId = 'schema_mentions_id'
+}
+
+export type Graph_Schema_Mentions_Highlight_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Graph_Schema_Mentions_Highlight_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Graph_Schema_Mentions_Highlight_Bool_Exp;
+};
+
 /** input type for incrementing numeric columns in table "graph.schema_mentions" */
 export type Graph_Schema_Mentions_Inc_Input = {
   confidence?: InputMaybe<Scalars['numeric']['input']>;
@@ -15587,7 +15775,7 @@ export type Graph_Schema_Mentions_Inc_Input = {
 export type Graph_Schema_Mentions_Insert_Input = {
   confidence?: InputMaybe<Scalars['numeric']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  highlights?: InputMaybe<Graph_Highlight_Arr_Rel_Insert_Input>;
+  highlights?: InputMaybe<Graph__Highlight_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['String']['input']>;
   intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
   thing?: InputMaybe<Graph_Thing_Obj_Rel_Insert_Input>;
@@ -15657,7 +15845,7 @@ export type Graph_Schema_Mentions_On_Conflict = {
 export type Graph_Schema_Mentions_Order_By = {
   confidence?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  highlights_aggregate?: InputMaybe<Graph_Highlight_Aggregate_Order_By>;
+  highlights_aggregate?: InputMaybe<Graph__Highlight_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   intellectual_entity_id?: InputMaybe<Order_By>;
   thing?: InputMaybe<Graph_Thing_Order_By>;
@@ -20431,6 +20619,10 @@ export type Mutation_Root = {
   delete_graph_schema_mentions?: Maybe<Graph_Schema_Mentions_Mutation_Response>;
   /** delete single row from the table: "graph.schema_mentions" */
   delete_graph_schema_mentions_by_pk?: Maybe<Graph_Schema_Mentions>;
+  /** delete data from the table: "graph.schema_mentions_highlight" */
+  delete_graph_schema_mentions_highlight?: Maybe<Graph_Schema_Mentions_Highlight_Mutation_Response>;
+  /** delete single row from the table: "graph.schema_mentions_highlight" */
+  delete_graph_schema_mentions_highlight_by_pk?: Maybe<Graph_Schema_Mentions_Highlight>;
   /** delete data from the table: "graph.schema_role" */
   delete_graph_schema_role?: Maybe<Graph_Schema_Role_Mutation_Response>;
   /** delete single row from the table: "graph.schema_role" */
@@ -20515,6 +20707,10 @@ export type Mutation_Root = {
   delete_maintainer_visitor_space_request_note?: Maybe<Maintainer_Visitor_Space_Request_Note_Mutation_Response>;
   /** delete single row from the table: "maintainer.visitor_space_request_note" */
   delete_maintainer_visitor_space_request_note_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Note>;
+  /** delete data from the table: "nvdgo.mediamosa_assets" */
+  delete_nvdgo_mediamosa_assets?: Maybe<Nvdgo_Mediamosa_Assets_Mutation_Response>;
+  /** delete single row from the table: "nvdgo.mediamosa_assets" */
+  delete_nvdgo_mediamosa_assets_by_pk?: Maybe<Nvdgo_Mediamosa_Assets>;
   /** delete data from the table: "users.folder" */
   delete_users_folder?: Maybe<Users_Folder_Mutation_Response>;
   /** delete single row from the table: "users.folder" */
@@ -20693,6 +20889,10 @@ export type Mutation_Root = {
   insert_graph_schema_license_one?: Maybe<Graph_Schema_License>;
   /** insert data into the table: "graph.schema_mentions" */
   insert_graph_schema_mentions?: Maybe<Graph_Schema_Mentions_Mutation_Response>;
+  /** insert data into the table: "graph.schema_mentions_highlight" */
+  insert_graph_schema_mentions_highlight?: Maybe<Graph_Schema_Mentions_Highlight_Mutation_Response>;
+  /** insert a single row into the table: "graph.schema_mentions_highlight" */
+  insert_graph_schema_mentions_highlight_one?: Maybe<Graph_Schema_Mentions_Highlight>;
   /** insert a single row into the table: "graph.schema_mentions" */
   insert_graph_schema_mentions_one?: Maybe<Graph_Schema_Mentions>;
   /** insert data into the table: "graph.schema_role" */
@@ -20779,6 +20979,10 @@ export type Mutation_Root = {
   insert_maintainer_visitor_space_request_note_one?: Maybe<Maintainer_Visitor_Space_Request_Note>;
   /** insert a single row into the table: "maintainer.visitor_space_request" */
   insert_maintainer_visitor_space_request_one?: Maybe<Maintainer_Visitor_Space_Request>;
+  /** insert data into the table: "nvdgo.mediamosa_assets" */
+  insert_nvdgo_mediamosa_assets?: Maybe<Nvdgo_Mediamosa_Assets_Mutation_Response>;
+  /** insert a single row into the table: "nvdgo.mediamosa_assets" */
+  insert_nvdgo_mediamosa_assets_one?: Maybe<Nvdgo_Mediamosa_Assets>;
   /** insert data into the table: "users.folder" */
   insert_users_folder?: Maybe<Users_Folder_Mutation_Response>;
   /** insert data into the table: "users.folder_ie" */
@@ -21029,6 +21233,12 @@ export type Mutation_Root = {
   update_graph_schema_mentions?: Maybe<Graph_Schema_Mentions_Mutation_Response>;
   /** update single row of the table: "graph.schema_mentions" */
   update_graph_schema_mentions_by_pk?: Maybe<Graph_Schema_Mentions>;
+  /** update data of the table: "graph.schema_mentions_highlight" */
+  update_graph_schema_mentions_highlight?: Maybe<Graph_Schema_Mentions_Highlight_Mutation_Response>;
+  /** update single row of the table: "graph.schema_mentions_highlight" */
+  update_graph_schema_mentions_highlight_by_pk?: Maybe<Graph_Schema_Mentions_Highlight>;
+  /** update multiples rows of table: "graph.schema_mentions_highlight" */
+  update_graph_schema_mentions_highlight_many?: Maybe<Array<Maybe<Graph_Schema_Mentions_Highlight_Mutation_Response>>>;
   /** update multiples rows of table: "graph.schema_mentions" */
   update_graph_schema_mentions_many?: Maybe<Array<Maybe<Graph_Schema_Mentions_Mutation_Response>>>;
   /** update data of the table: "graph.schema_role" */
@@ -21157,6 +21367,12 @@ export type Mutation_Root = {
   update_maintainer_visitor_space_request_note_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Note>;
   /** update multiples rows of table: "maintainer.visitor_space_request_note" */
   update_maintainer_visitor_space_request_note_many?: Maybe<Array<Maybe<Maintainer_Visitor_Space_Request_Note_Mutation_Response>>>;
+  /** update data of the table: "nvdgo.mediamosa_assets" */
+  update_nvdgo_mediamosa_assets?: Maybe<Nvdgo_Mediamosa_Assets_Mutation_Response>;
+  /** update single row of the table: "nvdgo.mediamosa_assets" */
+  update_nvdgo_mediamosa_assets_by_pk?: Maybe<Nvdgo_Mediamosa_Assets>;
+  /** update multiples rows of table: "nvdgo.mediamosa_assets" */
+  update_nvdgo_mediamosa_assets_many?: Maybe<Array<Maybe<Nvdgo_Mediamosa_Assets_Mutation_Response>>>;
   /** update data of the table: "users.folder" */
   update_users_folder?: Maybe<Users_Folder_Mutation_Response>;
   /** update single row of the table: "users.folder" */
@@ -21413,9 +21629,7 @@ export type Mutation_RootDelete_Graph_HighlightArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Graph_Highlight_By_PkArgs = {
-  schema_mentions_id: Scalars['String']['input'];
-  x: Scalars['Int']['input'];
-  y: Scalars['Int']['input'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -21666,6 +21880,19 @@ export type Mutation_RootDelete_Graph_Schema_MentionsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Graph_Schema_Mentions_By_PkArgs = {
   id: Scalars['String']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Graph_Schema_Mentions_HighlightArgs = {
+  where: Graph_Schema_Mentions_Highlight_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Graph_Schema_Mentions_Highlight_By_PkArgs = {
+  highlight_id: Scalars['String']['input'];
+  schema_mentions_id: Scalars['String']['input'];
 };
 
 
@@ -21925,6 +22152,18 @@ export type Mutation_RootDelete_Maintainer_Visitor_Space_Request_NoteArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Maintainer_Visitor_Space_Request_Note_By_PkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Nvdgo_Mediamosa_AssetsArgs = {
+  where: Nvdgo_Mediamosa_Assets_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Nvdgo_Mediamosa_Assets_By_PkArgs = {
+  asset_id: Scalars['String']['input'];
 };
 
 
@@ -22535,6 +22774,20 @@ export type Mutation_RootInsert_Graph_Schema_MentionsArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Graph_Schema_Mentions_HighlightArgs = {
+  objects: Array<Graph_Schema_Mentions_Highlight_Insert_Input>;
+  on_conflict?: InputMaybe<Graph_Schema_Mentions_Highlight_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Graph_Schema_Mentions_Highlight_OneArgs = {
+  object: Graph_Schema_Mentions_Highlight_Insert_Input;
+  on_conflict?: InputMaybe<Graph_Schema_Mentions_Highlight_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Graph_Schema_Mentions_OneArgs = {
   object: Graph_Schema_Mentions_Insert_Input;
   on_conflict?: InputMaybe<Graph_Schema_Mentions_On_Conflict>;
@@ -22832,6 +23085,20 @@ export type Mutation_RootInsert_Maintainer_Visitor_Space_Request_Note_OneArgs = 
 export type Mutation_RootInsert_Maintainer_Visitor_Space_Request_OneArgs = {
   object: Maintainer_Visitor_Space_Request_Insert_Input;
   on_conflict?: InputMaybe<Maintainer_Visitor_Space_Request_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Nvdgo_Mediamosa_AssetsArgs = {
+  objects: Array<Nvdgo_Mediamosa_Assets_Insert_Input>;
+  on_conflict?: InputMaybe<Nvdgo_Mediamosa_Assets_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Nvdgo_Mediamosa_Assets_OneArgs = {
+  object: Nvdgo_Mediamosa_Assets_Insert_Input;
+  on_conflict?: InputMaybe<Nvdgo_Mediamosa_Assets_On_Conflict>;
 };
 
 
@@ -23747,6 +24014,26 @@ export type Mutation_RootUpdate_Graph_Schema_Mentions_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Graph_Schema_Mentions_HighlightArgs = {
+  _set?: InputMaybe<Graph_Schema_Mentions_Highlight_Set_Input>;
+  where: Graph_Schema_Mentions_Highlight_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Graph_Schema_Mentions_Highlight_By_PkArgs = {
+  _set?: InputMaybe<Graph_Schema_Mentions_Highlight_Set_Input>;
+  pk_columns: Graph_Schema_Mentions_Highlight_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Graph_Schema_Mentions_Highlight_ManyArgs = {
+  updates: Array<Graph_Schema_Mentions_Highlight_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Graph_Schema_Mentions_ManyArgs = {
   updates: Array<Graph_Schema_Mentions_Updates>;
 };
@@ -24179,6 +24466,26 @@ export type Mutation_RootUpdate_Maintainer_Visitor_Space_Request_Note_ManyArgs =
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Nvdgo_Mediamosa_AssetsArgs = {
+  _set?: InputMaybe<Nvdgo_Mediamosa_Assets_Set_Input>;
+  where: Nvdgo_Mediamosa_Assets_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Nvdgo_Mediamosa_Assets_By_PkArgs = {
+  _set?: InputMaybe<Nvdgo_Mediamosa_Assets_Set_Input>;
+  pk_columns: Nvdgo_Mediamosa_Assets_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Nvdgo_Mediamosa_Assets_ManyArgs = {
+  updates: Array<Nvdgo_Mediamosa_Assets_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Users_FolderArgs = {
   _set?: InputMaybe<Users_Folder_Set_Input>;
   where: Users_Folder_Bool_Exp;
@@ -24350,6 +24657,239 @@ export type Numeric_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['numeric']['input']>>;
 };
 
+/** columns and relationships of "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets = {
+  __typename?: 'nvdgo_mediamosa_assets';
+  asset_id: Scalars['String']['output'];
+  /** An object relationship */
+  ieObject?: Maybe<Graph_Intellectual_Entity>;
+  intellectual_entity_id?: Maybe<Scalars['String']['output']>;
+  issued?: Maybe<Scalars['date']['output']>;
+  mediafile_filename?: Maybe<Scalars['String']['output']>;
+  original_filename?: Maybe<Scalars['String']['output']>;
+  pid?: Maybe<Scalars['String']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregated selection of "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Aggregate = {
+  __typename?: 'nvdgo_mediamosa_assets_aggregate';
+  aggregate?: Maybe<Nvdgo_Mediamosa_Assets_Aggregate_Fields>;
+  nodes: Array<Nvdgo_Mediamosa_Assets>;
+};
+
+/** aggregate fields of "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Aggregate_Fields = {
+  __typename?: 'nvdgo_mediamosa_assets_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Nvdgo_Mediamosa_Assets_Max_Fields>;
+  min?: Maybe<Nvdgo_Mediamosa_Assets_Min_Fields>;
+};
+
+
+/** aggregate fields of "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "nvdgo.mediamosa_assets". All fields are combined with a logical 'AND'. */
+export type Nvdgo_Mediamosa_Assets_Bool_Exp = {
+  _and?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Bool_Exp>>;
+  _not?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+  _or?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Bool_Exp>>;
+  asset_id?: InputMaybe<String_Comparison_Exp>;
+  ieObject?: InputMaybe<Graph_Intellectual_Entity_Bool_Exp>;
+  intellectual_entity_id?: InputMaybe<String_Comparison_Exp>;
+  issued?: InputMaybe<Date_Comparison_Exp>;
+  mediafile_filename?: InputMaybe<String_Comparison_Exp>;
+  original_filename?: InputMaybe<String_Comparison_Exp>;
+  pid?: InputMaybe<String_Comparison_Exp>;
+  provider?: InputMaybe<String_Comparison_Exp>;
+  published?: InputMaybe<Boolean_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  type?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "nvdgo.mediamosa_assets" */
+export enum Nvdgo_Mediamosa_Assets_Constraint {
+  /** unique or primary key constraint on columns "asset_id" */
+  AssetsPkey = 'assets_pkey'
+}
+
+/** input type for inserting data into table "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Insert_Input = {
+  asset_id?: InputMaybe<Scalars['String']['input']>;
+  ieObject?: InputMaybe<Graph_Intellectual_Entity_Obj_Rel_Insert_Input>;
+  intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
+  issued?: InputMaybe<Scalars['date']['input']>;
+  mediafile_filename?: InputMaybe<Scalars['String']['input']>;
+  original_filename?: InputMaybe<Scalars['String']['input']>;
+  pid?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Nvdgo_Mediamosa_Assets_Max_Fields = {
+  __typename?: 'nvdgo_mediamosa_assets_max_fields';
+  asset_id?: Maybe<Scalars['String']['output']>;
+  intellectual_entity_id?: Maybe<Scalars['String']['output']>;
+  issued?: Maybe<Scalars['date']['output']>;
+  mediafile_filename?: Maybe<Scalars['String']['output']>;
+  original_filename?: Maybe<Scalars['String']['output']>;
+  pid?: Maybe<Scalars['String']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Nvdgo_Mediamosa_Assets_Min_Fields = {
+  __typename?: 'nvdgo_mediamosa_assets_min_fields';
+  asset_id?: Maybe<Scalars['String']['output']>;
+  intellectual_entity_id?: Maybe<Scalars['String']['output']>;
+  issued?: Maybe<Scalars['date']['output']>;
+  mediafile_filename?: Maybe<Scalars['String']['output']>;
+  original_filename?: Maybe<Scalars['String']['output']>;
+  pid?: Maybe<Scalars['String']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Mutation_Response = {
+  __typename?: 'nvdgo_mediamosa_assets_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Nvdgo_Mediamosa_Assets>;
+};
+
+/** on_conflict condition type for table "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_On_Conflict = {
+  constraint: Nvdgo_Mediamosa_Assets_Constraint;
+  update_columns?: Array<Nvdgo_Mediamosa_Assets_Update_Column>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "nvdgo.mediamosa_assets". */
+export type Nvdgo_Mediamosa_Assets_Order_By = {
+  asset_id?: InputMaybe<Order_By>;
+  ieObject?: InputMaybe<Graph_Intellectual_Entity_Order_By>;
+  intellectual_entity_id?: InputMaybe<Order_By>;
+  issued?: InputMaybe<Order_By>;
+  mediafile_filename?: InputMaybe<Order_By>;
+  original_filename?: InputMaybe<Order_By>;
+  pid?: InputMaybe<Order_By>;
+  provider?: InputMaybe<Order_By>;
+  published?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: nvdgo.mediamosa_assets */
+export type Nvdgo_Mediamosa_Assets_Pk_Columns_Input = {
+  asset_id: Scalars['String']['input'];
+};
+
+/** select columns of table "nvdgo.mediamosa_assets" */
+export enum Nvdgo_Mediamosa_Assets_Select_Column {
+  /** column name */
+  AssetId = 'asset_id',
+  /** column name */
+  IntellectualEntityId = 'intellectual_entity_id',
+  /** column name */
+  Issued = 'issued',
+  /** column name */
+  MediafileFilename = 'mediafile_filename',
+  /** column name */
+  OriginalFilename = 'original_filename',
+  /** column name */
+  Pid = 'pid',
+  /** column name */
+  Provider = 'provider',
+  /** column name */
+  Published = 'published',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type'
+}
+
+/** input type for updating data in table "nvdgo.mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Set_Input = {
+  asset_id?: InputMaybe<Scalars['String']['input']>;
+  intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
+  issued?: InputMaybe<Scalars['date']['input']>;
+  mediafile_filename?: InputMaybe<Scalars['String']['input']>;
+  original_filename?: InputMaybe<Scalars['String']['input']>;
+  pid?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "nvdgo_mediamosa_assets" */
+export type Nvdgo_Mediamosa_Assets_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Nvdgo_Mediamosa_Assets_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Nvdgo_Mediamosa_Assets_Stream_Cursor_Value_Input = {
+  asset_id?: InputMaybe<Scalars['String']['input']>;
+  intellectual_entity_id?: InputMaybe<Scalars['String']['input']>;
+  issued?: InputMaybe<Scalars['date']['input']>;
+  mediafile_filename?: InputMaybe<Scalars['String']['input']>;
+  original_filename?: InputMaybe<Scalars['String']['input']>;
+  pid?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "nvdgo.mediamosa_assets" */
+export enum Nvdgo_Mediamosa_Assets_Update_Column {
+  /** column name */
+  AssetId = 'asset_id',
+  /** column name */
+  IntellectualEntityId = 'intellectual_entity_id',
+  /** column name */
+  Issued = 'issued',
+  /** column name */
+  MediafileFilename = 'mediafile_filename',
+  /** column name */
+  OriginalFilename = 'original_filename',
+  /** column name */
+  Pid = 'pid',
+  /** column name */
+  Provider = 'provider',
+  /** column name */
+  Published = 'published',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  Type = 'type'
+}
+
+export type Nvdgo_Mediamosa_Assets_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Nvdgo_Mediamosa_Assets_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Nvdgo_Mediamosa_Assets_Bool_Exp;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -24454,18 +24994,14 @@ export type Query_Root = {
   graph__ha_des_primary_identifier: Array<Graph__Ha_Des_Primary_Identifier>;
   /** fetch aggregated fields from the table: "graph._ha_des_primary_identifier" */
   graph__ha_des_primary_identifier_aggregate: Graph__Ha_Des_Primary_Identifier_Aggregate;
-  /** fetch data from the table: "graph._index_intellectual_entity" */
-  graph__index_intellectual_entity: Array<Graph__Index_Intellectual_Entity>;
-  /** fetch aggregated fields from the table: "graph._index_intellectual_entity" */
-  graph__index_intellectual_entity_aggregate: Graph__Index_Intellectual_Entity_Aggregate;
+  /** fetch data from the table: "graph._highlight" */
+  graph__highlight: Array<Graph__Highlight>;
+  /** fetch aggregated fields from the table: "graph._highlight" */
+  graph__highlight_aggregate: Graph__Highlight_Aggregate;
   /** fetch data from the table: "graph._index_intellectual_entity_fields" */
   graph__index_intellectual_entity_fields: Array<Graph__Index_Intellectual_Entity_Fields>;
   /** fetch aggregated fields from the table: "graph._index_intellectual_entity_fields" */
   graph__index_intellectual_entity_fields_aggregate: Graph__Index_Intellectual_Entity_Fields_Aggregate;
-  /** fetch data from the table: "graph._index_intellectual_entity_pages" */
-  graph__index_intellectual_entity_pages: Array<Graph__Index_Intellectual_Entity_Pages>;
-  /** fetch aggregated fields from the table: "graph._index_intellectual_entity_pages" */
-  graph__index_intellectual_entity_pages_aggregate: Graph__Index_Intellectual_Entity_Pages_Aggregate;
   /** fetch data from the table: "graph._intellectual_entity" */
   graph__intellectual_entity: Array<Graph__Intellectual_Entity>;
   /** fetch aggregated fields from the table: "graph._intellectual_entity" */
@@ -24726,12 +25262,22 @@ export type Query_Root = {
   graph_schema_license_aggregate: Graph_Schema_License_Aggregate;
   /** fetch data from the table: "graph.schema_license" using primary key columns */
   graph_schema_license_by_pk?: Maybe<Graph_Schema_License>;
+  /** fetch data from the table: "graph.schema_maintainer" */
+  graph_schema_maintainer: Array<Graph_Schema_Maintainer>;
+  /** fetch aggregated fields from the table: "graph.schema_maintainer" */
+  graph_schema_maintainer_aggregate: Graph_Schema_Maintainer_Aggregate;
   /** fetch data from the table: "graph.schema_mentions" */
   graph_schema_mentions: Array<Graph_Schema_Mentions>;
   /** fetch aggregated fields from the table: "graph.schema_mentions" */
   graph_schema_mentions_aggregate: Graph_Schema_Mentions_Aggregate;
   /** fetch data from the table: "graph.schema_mentions" using primary key columns */
   graph_schema_mentions_by_pk?: Maybe<Graph_Schema_Mentions>;
+  /** fetch data from the table: "graph.schema_mentions_highlight" */
+  graph_schema_mentions_highlight: Array<Graph_Schema_Mentions_Highlight>;
+  /** fetch aggregated fields from the table: "graph.schema_mentions_highlight" */
+  graph_schema_mentions_highlight_aggregate: Graph_Schema_Mentions_Highlight_Aggregate;
+  /** fetch data from the table: "graph.schema_mentions_highlight" using primary key columns */
+  graph_schema_mentions_highlight_by_pk?: Maybe<Graph_Schema_Mentions_Highlight>;
   /** fetch data from the table: "graph.schema_role" */
   graph_schema_role: Array<Graph_Schema_Role>;
   /** fetch aggregated fields from the table: "graph.schema_role" */
@@ -24858,6 +25404,12 @@ export type Query_Root = {
   maintainer_visitor_space_request_note_aggregate: Maintainer_Visitor_Space_Request_Note_Aggregate;
   /** fetch data from the table: "maintainer.visitor_space_request_note" using primary key columns */
   maintainer_visitor_space_request_note_by_pk?: Maybe<Maintainer_Visitor_Space_Request_Note>;
+  /** fetch data from the table: "nvdgo.mediamosa_assets" */
+  nvdgo_mediamosa_assets: Array<Nvdgo_Mediamosa_Assets>;
+  /** fetch aggregated fields from the table: "nvdgo.mediamosa_assets" */
+  nvdgo_mediamosa_assets_aggregate: Nvdgo_Mediamosa_Assets_Aggregate;
+  /** fetch data from the table: "nvdgo.mediamosa_assets" using primary key columns */
+  nvdgo_mediamosa_assets_by_pk?: Maybe<Nvdgo_Mediamosa_Assets>;
   /** fetch data from the table: "users.folder" */
   users_folder: Array<Users_Folder>;
   /** fetch aggregated fields from the table: "users.folder" */
@@ -25255,21 +25807,21 @@ export type Query_RootGraph__Ha_Des_Primary_Identifier_AggregateArgs = {
 };
 
 
-export type Query_RootGraph__Index_Intellectual_EntityArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Select_Column>>;
+export type Query_RootGraph__HighlightArgs = {
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 
-export type Query_RootGraph__Index_Intellectual_Entity_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Select_Column>>;
+export type Query_RootGraph__Highlight_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 
@@ -25288,24 +25840,6 @@ export type Query_RootGraph__Index_Intellectual_Entity_Fields_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Fields_Order_By>>;
   where?: InputMaybe<Graph__Index_Intellectual_Entity_Fields_Bool_Exp>;
-};
-
-
-export type Query_RootGraph__Index_Intellectual_Entity_PagesArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
-};
-
-
-export type Query_RootGraph__Index_Intellectual_Entity_Pages_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
 };
 
 
@@ -25931,9 +26465,7 @@ export type Query_RootGraph_Highlight_AggregateArgs = {
 
 
 export type Query_RootGraph_Highlight_By_PkArgs = {
-  schema_mentions_id: Scalars['String']['input'];
-  x: Scalars['Int']['input'];
-  y: Scalars['Int']['input'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -26403,6 +26935,24 @@ export type Query_RootGraph_Schema_License_By_PkArgs = {
 };
 
 
+export type Query_RootGraph_Schema_MaintainerArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Maintainer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Maintainer_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+};
+
+
+export type Query_RootGraph_Schema_Maintainer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Maintainer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Maintainer_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+};
+
+
 export type Query_RootGraph_Schema_MentionsArgs = {
   distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -26423,6 +26973,30 @@ export type Query_RootGraph_Schema_Mentions_AggregateArgs = {
 
 export type Query_RootGraph_Schema_Mentions_By_PkArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type Query_RootGraph_Schema_Mentions_HighlightArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+};
+
+
+export type Query_RootGraph_Schema_Mentions_Highlight_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+};
+
+
+export type Query_RootGraph_Schema_Mentions_Highlight_By_PkArgs = {
+  highlight_id: Scalars['String']['input'];
+  schema_mentions_id: Scalars['String']['input'];
 };
 
 
@@ -26916,6 +27490,29 @@ export type Query_RootMaintainer_Visitor_Space_Request_Note_By_PkArgs = {
 };
 
 
+export type Query_RootNvdgo_Mediamosa_AssetsArgs = {
+  distinct_on?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Order_By>>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+};
+
+
+export type Query_RootNvdgo_Mediamosa_Assets_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Order_By>>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+};
+
+
+export type Query_RootNvdgo_Mediamosa_Assets_By_PkArgs = {
+  asset_id: Scalars['String']['input'];
+};
+
+
 export type Query_RootUsers_FolderArgs = {
   distinct_on?: InputMaybe<Array<Users_Folder_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -27233,24 +27830,18 @@ export type Subscription_Root = {
   graph__ha_des_primary_identifier_aggregate: Graph__Ha_Des_Primary_Identifier_Aggregate;
   /** fetch data from the table in a streaming manner: "graph._ha_des_primary_identifier" */
   graph__ha_des_primary_identifier_stream: Array<Graph__Ha_Des_Primary_Identifier>;
-  /** fetch data from the table: "graph._index_intellectual_entity" */
-  graph__index_intellectual_entity: Array<Graph__Index_Intellectual_Entity>;
-  /** fetch aggregated fields from the table: "graph._index_intellectual_entity" */
-  graph__index_intellectual_entity_aggregate: Graph__Index_Intellectual_Entity_Aggregate;
+  /** fetch data from the table: "graph._highlight" */
+  graph__highlight: Array<Graph__Highlight>;
+  /** fetch aggregated fields from the table: "graph._highlight" */
+  graph__highlight_aggregate: Graph__Highlight_Aggregate;
+  /** fetch data from the table in a streaming manner: "graph._highlight" */
+  graph__highlight_stream: Array<Graph__Highlight>;
   /** fetch data from the table: "graph._index_intellectual_entity_fields" */
   graph__index_intellectual_entity_fields: Array<Graph__Index_Intellectual_Entity_Fields>;
   /** fetch aggregated fields from the table: "graph._index_intellectual_entity_fields" */
   graph__index_intellectual_entity_fields_aggregate: Graph__Index_Intellectual_Entity_Fields_Aggregate;
   /** fetch data from the table in a streaming manner: "graph._index_intellectual_entity_fields" */
   graph__index_intellectual_entity_fields_stream: Array<Graph__Index_Intellectual_Entity_Fields>;
-  /** fetch data from the table: "graph._index_intellectual_entity_pages" */
-  graph__index_intellectual_entity_pages: Array<Graph__Index_Intellectual_Entity_Pages>;
-  /** fetch aggregated fields from the table: "graph._index_intellectual_entity_pages" */
-  graph__index_intellectual_entity_pages_aggregate: Graph__Index_Intellectual_Entity_Pages_Aggregate;
-  /** fetch data from the table in a streaming manner: "graph._index_intellectual_entity_pages" */
-  graph__index_intellectual_entity_pages_stream: Array<Graph__Index_Intellectual_Entity_Pages>;
-  /** fetch data from the table in a streaming manner: "graph._index_intellectual_entity" */
-  graph__index_intellectual_entity_stream: Array<Graph__Index_Intellectual_Entity>;
   /** fetch data from the table: "graph._intellectual_entity" */
   graph__intellectual_entity: Array<Graph__Intellectual_Entity>;
   /** fetch aggregated fields from the table: "graph._intellectual_entity" */
@@ -27617,12 +28208,26 @@ export type Subscription_Root = {
   graph_schema_license_by_pk?: Maybe<Graph_Schema_License>;
   /** fetch data from the table in a streaming manner: "graph.schema_license" */
   graph_schema_license_stream: Array<Graph_Schema_License>;
+  /** fetch data from the table: "graph.schema_maintainer" */
+  graph_schema_maintainer: Array<Graph_Schema_Maintainer>;
+  /** fetch aggregated fields from the table: "graph.schema_maintainer" */
+  graph_schema_maintainer_aggregate: Graph_Schema_Maintainer_Aggregate;
+  /** fetch data from the table in a streaming manner: "graph.schema_maintainer" */
+  graph_schema_maintainer_stream: Array<Graph_Schema_Maintainer>;
   /** fetch data from the table: "graph.schema_mentions" */
   graph_schema_mentions: Array<Graph_Schema_Mentions>;
   /** fetch aggregated fields from the table: "graph.schema_mentions" */
   graph_schema_mentions_aggregate: Graph_Schema_Mentions_Aggregate;
   /** fetch data from the table: "graph.schema_mentions" using primary key columns */
   graph_schema_mentions_by_pk?: Maybe<Graph_Schema_Mentions>;
+  /** fetch data from the table: "graph.schema_mentions_highlight" */
+  graph_schema_mentions_highlight: Array<Graph_Schema_Mentions_Highlight>;
+  /** fetch aggregated fields from the table: "graph.schema_mentions_highlight" */
+  graph_schema_mentions_highlight_aggregate: Graph_Schema_Mentions_Highlight_Aggregate;
+  /** fetch data from the table: "graph.schema_mentions_highlight" using primary key columns */
+  graph_schema_mentions_highlight_by_pk?: Maybe<Graph_Schema_Mentions_Highlight>;
+  /** fetch data from the table in a streaming manner: "graph.schema_mentions_highlight" */
+  graph_schema_mentions_highlight_stream: Array<Graph_Schema_Mentions_Highlight>;
   /** fetch data from the table in a streaming manner: "graph.schema_mentions" */
   graph_schema_mentions_stream: Array<Graph_Schema_Mentions>;
   /** fetch data from the table: "graph.schema_role" */
@@ -27793,6 +28398,14 @@ export type Subscription_Root = {
   maintainer_visitor_space_request_stream: Array<Maintainer_Visitor_Space_Request>;
   /** fetch data from the table in a streaming manner: "maintainer.visitor_space" */
   maintainer_visitor_space_stream: Array<Maintainer_Visitor_Space>;
+  /** fetch data from the table: "nvdgo.mediamosa_assets" */
+  nvdgo_mediamosa_assets: Array<Nvdgo_Mediamosa_Assets>;
+  /** fetch aggregated fields from the table: "nvdgo.mediamosa_assets" */
+  nvdgo_mediamosa_assets_aggregate: Nvdgo_Mediamosa_Assets_Aggregate;
+  /** fetch data from the table: "nvdgo.mediamosa_assets" using primary key columns */
+  nvdgo_mediamosa_assets_by_pk?: Maybe<Nvdgo_Mediamosa_Assets>;
+  /** fetch data from the table in a streaming manner: "nvdgo.mediamosa_assets" */
+  nvdgo_mediamosa_assets_stream: Array<Nvdgo_Mediamosa_Assets>;
   /** fetch data from the table: "users.folder" */
   users_folder: Array<Users_Folder>;
   /** fetch aggregated fields from the table: "users.folder" */
@@ -28318,21 +28931,28 @@ export type Subscription_RootGraph__Ha_Des_Primary_Identifier_StreamArgs = {
 };
 
 
-export type Subscription_RootGraph__Index_Intellectual_EntityArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Select_Column>>;
+export type Subscription_RootGraph__HighlightArgs = {
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 
-export type Subscription_RootGraph__Index_Intellectual_Entity_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Select_Column>>;
+export type Subscription_RootGraph__Highlight_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph__Highlight_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
+  order_by?: InputMaybe<Array<Graph__Highlight_Order_By>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
+};
+
+
+export type Subscription_RootGraph__Highlight_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Graph__Highlight_Stream_Cursor_Input>>;
+  where?: InputMaybe<Graph__Highlight_Bool_Exp>;
 };
 
 
@@ -28358,38 +28978,6 @@ export type Subscription_RootGraph__Index_Intellectual_Entity_Fields_StreamArgs 
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Graph__Index_Intellectual_Entity_Fields_Stream_Cursor_Input>>;
   where?: InputMaybe<Graph__Index_Intellectual_Entity_Fields_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph__Index_Intellectual_Entity_PagesArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph__Index_Intellectual_Entity_Pages_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Graph__Index_Intellectual_Entity_Pages_Order_By>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph__Index_Intellectual_Entity_Pages_StreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Graph__Index_Intellectual_Entity_Pages_Stream_Cursor_Input>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Pages_Bool_Exp>;
-};
-
-
-export type Subscription_RootGraph__Index_Intellectual_Entity_StreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Graph__Index_Intellectual_Entity_Stream_Cursor_Input>>;
-  where?: InputMaybe<Graph__Index_Intellectual_Entity_Bool_Exp>;
 };
 
 
@@ -29239,9 +29827,7 @@ export type Subscription_RootGraph_Highlight_AggregateArgs = {
 
 
 export type Subscription_RootGraph_Highlight_By_PkArgs = {
-  schema_mentions_id: Scalars['String']['input'];
-  x: Scalars['Int']['input'];
-  y: Scalars['Int']['input'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -29858,6 +30444,31 @@ export type Subscription_RootGraph_Schema_License_StreamArgs = {
 };
 
 
+export type Subscription_RootGraph_Schema_MaintainerArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Maintainer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Maintainer_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+};
+
+
+export type Subscription_RootGraph_Schema_Maintainer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Maintainer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Maintainer_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+};
+
+
+export type Subscription_RootGraph_Schema_Maintainer_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Graph_Schema_Maintainer_Stream_Cursor_Input>>;
+  where?: InputMaybe<Graph_Schema_Maintainer_Bool_Exp>;
+};
+
+
 export type Subscription_RootGraph_Schema_MentionsArgs = {
   distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -29878,6 +30489,37 @@ export type Subscription_RootGraph_Schema_Mentions_AggregateArgs = {
 
 export type Subscription_RootGraph_Schema_Mentions_By_PkArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootGraph_Schema_Mentions_HighlightArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+};
+
+
+export type Subscription_RootGraph_Schema_Mentions_Highlight_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Graph_Schema_Mentions_Highlight_Order_By>>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
+};
+
+
+export type Subscription_RootGraph_Schema_Mentions_Highlight_By_PkArgs = {
+  highlight_id: Scalars['String']['input'];
+  schema_mentions_id: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootGraph_Schema_Mentions_Highlight_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Graph_Schema_Mentions_Highlight_Stream_Cursor_Input>>;
+  where?: InputMaybe<Graph_Schema_Mentions_Highlight_Bool_Exp>;
 };
 
 
@@ -30522,6 +31164,36 @@ export type Subscription_RootMaintainer_Visitor_Space_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Maintainer_Visitor_Space_Stream_Cursor_Input>>;
   where?: InputMaybe<Maintainer_Visitor_Space_Bool_Exp>;
+};
+
+
+export type Subscription_RootNvdgo_Mediamosa_AssetsArgs = {
+  distinct_on?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Order_By>>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+};
+
+
+export type Subscription_RootNvdgo_Mediamosa_Assets_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Nvdgo_Mediamosa_Assets_Order_By>>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
+};
+
+
+export type Subscription_RootNvdgo_Mediamosa_Assets_By_PkArgs = {
+  asset_id: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootNvdgo_Mediamosa_Assets_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Nvdgo_Mediamosa_Assets_Stream_Cursor_Input>>;
+  where?: InputMaybe<Nvdgo_Mediamosa_Assets_Bool_Exp>;
 };
 
 
@@ -32978,14 +33650,14 @@ export type GetContentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
+export type GetContentByIdQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, depublished_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
 
 export type GetContentByIdsQueryVariables = Exact<{
   ids: Array<Scalars['uuid']['input']> | Scalars['uuid']['input'];
 }>;
 
 
-export type GetContentByIdsQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, user_profile_id?: any | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, owner_profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, mail?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', label: string, id: any } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
+export type GetContentByIdsQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, depublished_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, user_profile_id?: any | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, owner_profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, mail?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', label: string, id: any } | null } | null, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', label: string, id: any, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
 
 export type GetContentLabelsByContentTypeQueryVariables = Exact<{
   contentType: Lookup_App_Content_Type_Enum;
@@ -33000,7 +33672,7 @@ export type GetContentPageByPathQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPageByPathQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
+export type GetContentPageByPathQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, content_width: string, created_at: any, depublish_at?: any | null, depublished_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, profile?: { __typename?: 'users_profile', id: any, full_name?: string | null, organisation?: { __typename?: 'graph_organization', id: string, org_identifier: string, skos_pref_label?: string | null, ha_org_has_logo?: string | null, skos_alt_label?: string | null } | null, group?: { __typename?: 'users_group', id: any, name: string, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }> };
 
 export type GetContentPagesQueryVariables = Exact<{
   where?: InputMaybe<App_Content_Page_Bool_Exp>;
@@ -33012,7 +33684,7 @@ export type GetContentPagesQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, content_width: string, owner_profile?: { __typename?: 'users_profile', first_name?: string | null, last_name?: string | null, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null }, app_content_label: Array<{ __typename?: 'app_content_label', id: any, content_content_labels_aggregate: { __typename?: 'app_content_page_content_label_aggregate', aggregate?: { __typename?: 'app_content_page_content_label_aggregate_fields', count: number } | null } }> };
+export type GetContentPagesQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, content_type: string, created_at: any, depublish_at?: any | null, depublished_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, user_group_ids?: any | null, content_width: string, owner_profile?: { __typename?: 'users_profile', first_name?: string | null, last_name?: string | null, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null }, app_content_label: Array<{ __typename?: 'app_content_label', id: any, content_content_labels_aggregate: { __typename?: 'app_content_page_content_label_aggregate', aggregate?: { __typename?: 'app_content_page_content_label_aggregate_fields', count: number } | null } }> };
 
 export type GetContentPagesByIdsQueryVariables = Exact<{
   ids?: InputMaybe<Array<Scalars['uuid']['input']> | Scalars['uuid']['input']>;
@@ -33027,7 +33699,7 @@ export type GetContentPagesToPublishQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesToPublishQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, publish_at?: any | null, depublish_at?: any | null, published_at?: any | null, published_at_display?: any | null }> };
+export type GetContentPagesToPublishQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', id: any, publish_at?: any | null, depublish_at?: any | null, depublished_at?: any | null, published_at?: any | null, published_at_display?: any | null }> };
 
 export type GetContentPagesWithBlocksQueryVariables = Exact<{
   where?: InputMaybe<App_Content_Page_Bool_Exp>;
@@ -33039,7 +33711,7 @@ export type GetContentPagesWithBlocksQueryVariables = Exact<{
 }>;
 
 
-export type GetContentPagesWithBlocksQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, created_at: any, depublish_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, content_width: string, user_group_ids?: any | null, owner_profile?: { __typename?: 'users_profile', first_name?: string | null, last_name?: string | null, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null }, app_content_label: Array<{ __typename?: 'app_content_label', id: any, content_content_labels_aggregate: { __typename?: 'app_content_page_content_label_aggregate', aggregate?: { __typename?: 'app_content_page_content_label_aggregate_fields', count: number } | null } }> };
+export type GetContentPagesWithBlocksQuery = { __typename?: 'query_root', app_content_page: Array<{ __typename?: 'app_content_page', content_type: string, created_at: any, depublish_at?: any | null, depublished_at?: any | null, description?: string | null, seo_description?: string | null, meta_description?: string | null, id: any, thumbnail_path?: string | null, is_protected: boolean, is_public?: boolean | null, path?: string | null, user_profile_id?: any | null, publish_at?: any | null, published_at?: any | null, published_at_display?: any | null, title: string, language: Lookup_Languages_Enum, nl_parent_page_id?: any | null, updated_at?: any | null, content_width: string, user_group_ids?: any | null, owner_profile?: { __typename?: 'users_profile', first_name?: string | null, last_name?: string | null, group?: { __typename?: 'users_group', id: any, label: string } | null } | null, translated_content_pages: Array<{ __typename?: 'app_content_page', title: string, language: Lookup_Languages_Enum, path?: string | null, id: any, is_public?: boolean | null }>, content_content_labels: Array<{ __typename?: 'app_content_page_content_label', content_label: { __typename?: 'app_content_label', id: any, label: string, link_to?: any | null } }>, content_blocks: Array<{ __typename?: 'app_content_block', id: any, content_id: any, content_block_type: Lookup_App_Content_Block_Type_Enum, position: number, variables?: any | null, created_at: any, updated_at: any }> }>, app_content_page_aggregate: { __typename?: 'app_content_page_aggregate', aggregate?: { __typename?: 'app_content_page_aggregate_fields', count: number } | null }, app_content_label: Array<{ __typename?: 'app_content_label', id: any, content_content_labels_aggregate: { __typename?: 'app_content_page_content_label_aggregate', aggregate?: { __typename?: 'app_content_page_content_label_aggregate_fields', count: number } | null } }> };
 
 export type GetContentTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -33438,14 +34110,14 @@ export const InsertContentPageLabelDocument = {"kind":"Document","definitions":[
 export const UpdateContentPageLabelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentPageLabel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPageLabel"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_label_set_input"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPageLabelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPageLabelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPageLabel"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateContentPageLabelMutation, UpdateContentPageLabelMutationVariables>;
 export const DeleteContentBlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentBlock"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentBlockMutation, DeleteContentBlockMutationVariables>;
 export const DeleteContentLabelLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteContentLabelLinks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPageId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_page_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"label_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"content_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPageId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteContentLabelLinksMutation, DeleteContentLabelLinksMutationVariables>;
-export const GetContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","alias":{"kind":"Name","value":"profile"},"name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdQuery, GetContentByIdQueryVariables>;
-export const GetContentByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdsQuery, GetContentByIdsQueryVariables>;
+export const GetContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","alias":{"kind":"Name","value":"profile"},"name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdQuery, GetContentByIdQueryVariables>;
+export const GetContentByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"mail"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentByIdsQuery, GetContentByIdsQueryVariables>;
 export const GetContentLabelsByContentTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentLabelsByContentType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"lookup_app_content_type_enum"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content_type"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentType"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]} as unknown as DocumentNode<GetContentLabelsByContentTypeQuery, GetContentLabelsByContentTypeQueryVariables>;
-export const GetContentPageByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"language"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"lookup_languages_enum"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"language"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","alias":{"kind":"Name","value":"profile"},"name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPageByPathQuery, GetContentPageByPathQueryVariables>;
-export const GetContentPagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_page_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesQuery, GetContentPagesQueryVariables>;
+export const GetContentPageByPathDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPageByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"language"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"lookup_languages_enum"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"language"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","alias":{"kind":"Name","value":"profile"},"name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"full_name"}},{"kind":"Field","name":{"kind":"Name","value":"organisation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"org_identifier"}},{"kind":"Field","name":{"kind":"Name","value":"skos_pref_label"}},{"kind":"Field","name":{"kind":"Name","value":"ha_org_has_logo"}},{"kind":"Field","name":{"kind":"Name","value":"skos_alt_label"}}]}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPageByPathQuery, GetContentPageByPathQueryVariables>;
+export const GetContentPagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_page_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesQuery, GetContentPagesQueryVariables>;
 export const GetContentPagesByIdsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesByIds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}}]}}]}}]} as unknown as DocumentNode<GetContentPagesByIdsQuery, GetContentPagesByIdsQueryVariables>;
-export const GetContentPagesToPublishDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesToPublish"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}}]}}]}}]} as unknown as DocumentNode<GetContentPagesToPublishQuery, GetContentPagesToPublishQueryVariables>;
-export const GetContentPagesWithBlocksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesWithBlocks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_page_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesWithBlocksQuery, GetContentPagesWithBlocksQueryVariables>;
+export const GetContentPagesToPublishDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesToPublish"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"publish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}}]}}]}}]} as unknown as DocumentNode<GetContentPagesToPublishQuery, GetContentPagesToPublishQueryVariables>;
+export const GetContentPagesWithBlocksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentPagesWithBlocks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_bool_exp"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"0"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"10"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_order_by"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},"defaultValue":{"kind":"ListValue","values":[]}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_bool_exp"}}}},"defaultValue":{"kind":"ObjectValue","fields":[]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orderBy"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_type"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublish_at"}},{"kind":"Field","name":{"kind":"Name","value":"depublished_at"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"seo_description"}},{"kind":"Field","name":{"kind":"Name","value":"meta_description"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail_path"}},{"kind":"Field","name":{"kind":"Name","value":"is_protected"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"user_profile_id"}},{"kind":"Field","name":{"kind":"Name","value":"owner_profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"first_name"}},{"kind":"Field","name":{"kind":"Name","value":"last_name"}},{"kind":"Field","name":{"kind":"Name","value":"group"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"publish_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}},{"kind":"Field","name":{"kind":"Name","value":"published_at_display"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"nl_parent_page_id"}},{"kind":"Field","name":{"kind":"Name","value":"translated_content_pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"is_public"}}]}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"content_width"}},{"kind":"Field","name":{"kind":"Name","value":"user_group_ids"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content_label"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"link_to"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"content_blocks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"position"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_id"}},{"kind":"Field","name":{"kind":"Name","value":"content_block_type"}},{"kind":"Field","name":{"kind":"Name","value":"position"}},{"kind":"Field","name":{"kind":"Name","value":"variables"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_page_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"app_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"labelIds"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content_content_labels_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_or"},"value":{"kind":"Variable","name":{"kind":"Name","value":"orUserGroupIds"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetContentPagesWithBlocksQuery, GetContentPagesWithBlocksQueryVariables>;
 export const GetContentTypesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContentTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lookup_app_content_type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"comment"}}]}}]}}]} as unknown as DocumentNode<GetContentTypesQuery, GetContentTypesQueryVariables>;
 export const GetNlParentContentPagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getNlParentContentPages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"EnumValue","value":"nl"}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]} as unknown as DocumentNode<GetNlParentContentPagesQuery, GetNlParentContentPagesQueryVariables>;
 export const GetNlParentContentPagesByTitleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getNlParentContentPagesByTitle"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_ilike"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"EnumValue","value":"nl"}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]} as unknown as DocumentNode<GetNlParentContentPagesByTitleQuery, GetNlParentContentPagesByTitleQueryVariables>;
@@ -33459,7 +34131,7 @@ export const InsertContentBlocksDocument = {"kind":"Document","definitions":[{"k
 export const InsertContentLabelLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertContentLabelLinks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"objects"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_app_content_page_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"objects"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<InsertContentLabelLinksMutation, InsertContentLabelLinksMutationVariables>;
 export const PublishContentPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"publishContentPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publishedAt"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<PublishContentPageMutation, PublishContentPageMutationVariables>;
 export const SoftDeleteContentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"softDeleteContent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"BooleanValue","value":true}},{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<SoftDeleteContentMutation, SoftDeleteContentMutationVariables>;
-export const UnpublishContentPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"unpublishContentPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"BooleanValue","value":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"NullValue"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<UnpublishContentPageMutation, UnpublishContentPageMutationVariables>;
+export const UnpublishContentPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"unpublishContentPage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"now"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamp"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"depublish_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":true}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"is_public"},"value":{"kind":"BooleanValue","value":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"depublished_at"},"value":{"kind":"Variable","name":{"kind":"Name","value":"now"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"published_at"},"value":{"kind":"NullValue"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<UnpublishContentPageMutation, UnpublishContentPageMutationVariables>;
 export const UpdateContentBlockDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentBlock"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentBlock"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_block_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentBlock"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentBlockMutation, UpdateContentBlockMutationVariables>;
 export const UpdateContentByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_set_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentByIdMutation, UpdateContentByIdMutationVariables>;
 export const UpdateContentPageWithBlocksAndLabelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateContentPageWithBlocksAndLabels"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_set_input"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentBlocks"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_block_insert_input"}}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"contentLabelLinks"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"app_content_page_content_label_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_content_page"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"is_deleted"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"BooleanValue","value":false}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentPage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"insert_app_content_block"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentBlocks"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"delete_app_content_page_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"content_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}},{"kind":"Field","name":{"kind":"Name","value":"insert_app_content_page_content_label"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"contentLabelLinks"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateContentPageWithBlocksAndLabelsMutation, UpdateContentPageWithBlocksAndLabelsMutationVariables>;
