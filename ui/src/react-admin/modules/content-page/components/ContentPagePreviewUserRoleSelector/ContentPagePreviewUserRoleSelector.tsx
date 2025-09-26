@@ -77,7 +77,10 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 			(item) => item.value === queryParams.userGroupId
 		)?.label as string;
 
-		return tText('Preview als {{selectedUserGroup}}', { selectedUserGroup: selection });
+		return tText(
+			'modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector___preview-als-selected-user-group',
+			{ selectedUserGroup: selection }
+		);
 	}, [userGroupOptions, queryParams.userGroupId]);
 
 	return (

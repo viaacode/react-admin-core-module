@@ -89,7 +89,7 @@ export const getAllSubgroupIds = (userGroupOptions: (Partial<UserGroup> | TagInf
 };
 
 export const GET_ALL_CONTENT: () => Partial<UserGroup> = () => ({
-	label: tText('Alle content'),
+	label: tText('modules/user-group/const/user-group___alle-content'),
 	id: SpecialPermissionGroups.allContent,
 });
 

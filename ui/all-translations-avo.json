@@ -1364,7 +1364,7 @@
     "location": "modules/content-page/const/get-image-grid-format-options",
     "key": "16-x-9-small",
     "language": "nl",
-    "value": "16 x 9 small",
+    "value": "16 x 9 klein",
     "value_type": "TEXT"
   },
   {
@@ -2336,7 +2336,7 @@
     "location": "modules/content-page/views/content-page-edit",
     "key": "beschrijving-is-verplicht",
     "language": "nl",
-    "value": "Beschrijving is verplicht",
+    "value": "Beschrijving is verplicht.",
     "value_type": "TEXT"
   },
   {
@@ -5826,15 +5826,6 @@
     "app": "AVO",
     "component": "ADMIN_CORE",
     "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
-    "key": "preview-als-geen-selectie",
-    "language": "nl",
-    "value": "Preview als (geen selectie)",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
     "key": "preview-als-selected-user-group",
     "language": "nl",
     "value": "Preview als {{selectedUserGroup}}",
@@ -5843,19 +5834,10 @@
   {
     "app": "AVO",
     "component": "ADMIN_CORE",
-    "location": "modules/content-page/components/content-page-preview-user-role-selector/content-page-preview-user-role-selector",
-    "key": "preview-als-meerdere-gebruikersgroepen-count",
-    "language": "nl",
-    "value": "Preview als meerdere gebruikersgroepen ({{count}})",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "ADMIN_CORE",
     "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
     "key": "bewerk-pagina",
     "language": "nl",
-    "value": "Bewerk pagina",
+    "value": "Bewerkpagina",
     "value_type": "TEXT"
   },
   {
@@ -5864,7 +5846,7 @@
     "location": "modules/content-page/components/content-page-renderer/content-page-renderer",
     "key": "bewerk-pagina-tooltip",
     "language": "nl",
-    "value": "Bewerk pagina - tooltip",
+    "value": "Bewerkpagina - tooltip",
     "value_type": "TEXT"
   },
   {
@@ -6089,7 +6071,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "nieuws-item",
     "language": "nl",
-    "value": "Nieuws item",
+    "value": "Nieuwsitem",
     "value_type": "TEXT"
   },
   {
@@ -6098,7 +6080,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "pagina",
     "language": "nl",
-    "value": "Pagina",
+    "value": "Contentpagina",
     "value_type": "TEXT"
   },
   {
@@ -6116,7 +6098,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "overzicht",
     "language": "nl",
-    "value": "Overzicht",
+    "value": "Overzichtspagina",
     "value_type": "TEXT"
   },
   {
@@ -6125,7 +6107,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "domein-detail",
     "language": "nl",
-    "value": "Domein detail",
+    "value": "Sleutelcompetentiepagina: detail",
     "value_type": "TEXT"
   },
   {
@@ -6134,7 +6116,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "event-detail",
     "language": "nl",
-    "value": "Event detail",
+    "value": "Event: detail",
     "value_type": "TEXT"
   },
   {
@@ -6233,7 +6215,7 @@
     "location": "admin/shared/components/content-picker/content-picker",
     "key": "projecten",
     "language": "nl",
-    "value": "Projecten",
+    "value": "Project",
     "value_type": "TEXT"
   },
   {
@@ -6269,7 +6251,7 @@
     "location": "react-admin/modules/shared/components/content-picker/content-picker",
     "key": "custom-navigatie-items",
     "language": "nl",
-    "value": "custom navigatie items",
+    "value": "Custom navigatie items",
     "value_type": "TEXT"
   },
   {
@@ -6278,7 +6260,7 @@
     "location": "modules/shared/components/content-picker/content-picker",
     "key": "ie-objects",
     "language": "nl",
-    "value": "Ie objects",
+    "value": "IE objecten",
     "value_type": "TEXT"
   },
   {
@@ -6854,7 +6836,7 @@
     "location": "admin/shared/components/filter-table/filter-table",
     "key": "ben-je-zeker-dat-je-deze-actie-wil-uitvoeren",
     "language": "nl",
-    "value": "Ben je zeker dat je deze actie wil uitvoeren",
+    "value": "Ben je zeker dat je deze actie wil uitvoeren?",
     "value_type": "TEXT"
   },
   {
@@ -6863,7 +6845,7 @@
     "location": "admin/shared/components/filter-table/filter-table",
     "key": "opgelet-deze-actie-kan-niet-meer-ongedaan-worden",
     "language": "nl",
-    "value": "Opgelet deze actie kan niet meer ongedaan worden",
+    "value": "Opgelet! Deze actie kan niet meer ongedaan gemaakt worden.",
     "value_type": "HTML"
   },
   {
@@ -7259,7 +7241,7 @@
     "location": "admin/content-block/helpers/image-text-background/image-text-background",
     "key": "titel-stijl",
     "language": "nl",
-    "value": "Titel stijl",
+    "value": "Titel: stijl",
     "value_type": "TEXT"
   },
   {
@@ -8384,7 +8366,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "startknippunt-is-verplicht",
     "language": "nl",
-    "value": "Startknippunt is verplicht",
+    "value": "Startknip is verplicht!",
     "value_type": "TEXT"
   },
   {
@@ -8393,7 +8375,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "startknippunt-seconden",
     "language": "nl",
-    "value": "Startknippunt (seconden)",
+    "value": "Startknip in seconden",
     "value_type": "TEXT"
   },
   {
@@ -8402,7 +8384,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "eindknippunt-is-verplicht",
     "language": "nl",
-    "value": "Eindknippunt is verplicht",
+    "value": "Eindknip is verplicht!",
     "value_type": "TEXT"
   },
   {
@@ -8411,7 +8393,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "eindknippunt-seconden",
     "language": "nl",
-    "value": "Eindknippunt (seconden)",
+    "value": "Eindknip in seconden",
     "value_type": "TEXT"
   },
   {
@@ -8591,7 +8573,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "let-op-je-hebt-geknipt-fragment-gekozen-vergeet-niet-om-deze-optie-aan-te-vinken",
     "language": "nl",
-    "value": "Let op! Je hebt geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.",
+    "value": "Let op! Je hebt een geknipt fragment gekozen. Vergeet niet om deze optie aan te vinken.",
     "value_type": "HTML"
   },
   {
@@ -8618,7 +8600,7 @@
     "location": "modules/content-page/components/blocks/block-media-grid/block-media-grid",
     "key": "cta-title-achtergrondkleur",
     "language": "nl",
-    "value": "CTA title: Achtergrondkleur",
+    "value": "CTA titel: achtergrondkleur",
     "value_type": "TEXT"
   },
   {
@@ -9595,6 +9577,15 @@
   },
   {
     "app": "AVO",
+    "component": "ADMIN_CORE",
+    "location": "modules/user-group/const/user-group",
+    "key": "alle-content",
+    "language": "nl",
+    "value": "Alle content",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
     "component": "FRONTEND",
     "location": "app",
     "key": "je-account-is-gekoppeld",
@@ -9690,6 +9681,15 @@
     "key": "navigatie",
     "language": "nl",
     "value": "Navigatie",
+    "value_type": "TEXT"
+  },
+  {
+    "app": "AVO",
+    "component": "FRONTEND",
+    "location": "admin/admin",
+    "key": "redirects",
+    "language": "nl",
+    "value": "Redirects",
     "value_type": "TEXT"
   },
   {
@@ -9825,15 +9825,6 @@
     "key": "interactive-tours",
     "language": "nl",
     "value": "Rondleidingen",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/admin",
-    "key": "redirects",
-    "language": "nl",
-    "value": "Redirects",
     "value_type": "TEXT"
   },
   {
@@ -10355,7 +10346,7 @@
     "location": "collection/collection",
     "key": "de-collectie-beschrijving-is-te-lang",
     "language": "nl",
-    "value": "De collectie beschrijving is te lang",
+    "value": "De beschrijving van de collectie is te lang.",
     "value_type": "TEXT"
   },
   {
@@ -12135,15 +12126,6 @@
     "app": "AVO",
     "component": "FRONTEND",
     "location": "admin/url-redirects/url-redirects",
-    "key": "oude-url-patroon",
-    "language": "nl",
-    "value": "Oude url patroon",
-    "value_type": "TEXT"
-  },
-  {
-    "app": "AVO",
-    "component": "FRONTEND",
-    "location": "admin/url-redirects/url-redirects",
     "key": "oude-url",
     "language": "nl",
     "value": "Oude url",
@@ -12758,7 +12740,7 @@
     "location": "assignment/components/assignment-pupil-preview",
     "key": "naam-leerling",
     "language": "nl",
-    "value": "naam leerling",
+    "value": "Naam leerling",
     "value_type": "TEXT"
   },
   {
@@ -14270,7 +14252,7 @@
     "location": "assignment/views/assignment-edit",
     "key": "verbinding-met-bewerk-server-verloren",
     "language": "nl",
-    "value": "Verbinding met bewerk server verloren",
+    "value": "Verbinding met server voor bewerken verloren.",
     "value_type": "HTML"
   },
   {
@@ -18950,7 +18932,7 @@
     "location": "item/views/item",
     "key": "je-hebt-geen-rechten-om-dit-item-te-bekijken-leerling",
     "language": "nl",
-    "value": "Je hebt geen rechten om dit fragment te bekijken.\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
+    "value": "Je hebt geen rechten om dit fragment te bekijken.\r\nVraag aan jouw leerkracht de <u>opdrachtlink</u> om dit video- of audiofragment als leerling te kunnen bekijken.",
     "value_type": "HTML"
   },
   {
@@ -25115,7 +25097,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "url-redirect-beheer-bewerk-pagina-titel",
     "language": "nl",
-    "value": "url redirect beheer bewerk pagina titel",
+    "value": "Url redirect: bewerkpagina",
     "value_type": "TEXT"
   },
   {
@@ -25133,7 +25115,7 @@
     "location": "admin/url-redirects/views/url-redirect-edit",
     "key": "url-redirect-beheer-bewerk-pagina-beschrijving",
     "language": "nl",
-    "value": "url redirect beheer bewerk pagina beschrijving",
+    "value": "Url redirect: bewerkpagina in beheer",
     "value_type": "TEXT"
   },
   {
