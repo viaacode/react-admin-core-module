@@ -1,4 +1,5 @@
 import { Button, Dropdown, DropdownButton, DropdownContent } from '@meemoo/react-components';
+import type { RadioOption } from '@viaa/avo2-components';
 import {
 	Button as AvoButton,
 	type DefaultProps,
@@ -6,7 +7,6 @@ import {
 	IconName,
 	RadioButtonGroup,
 } from '@viaa/avo2-components';
-import type { RadioOptionSchema } from '@viaa/avo2-components/src/components/RadioButtonGroup/RadioButtonGroup';
 import type { Avo } from '@viaa/avo2-types';
 import { isNil, sortBy } from 'lodash-es';
 import React, { type FunctionComponent, useEffect, useMemo, useState } from 'react';
@@ -65,7 +65,7 @@ export const ContentPagePreviewUserRoleSelector: FunctionComponent<
 		];
 
 		return allOptions.map(
-			(opt): RadioOptionSchema => ({
+			(opt): RadioOption => ({
 				label: opt.label as string,
 				value: opt.id as string,
 			})
